@@ -1,0 +1,10 @@
+[Desktop Entry]
+Exec=plasma-mobile --desktop
+X-DBUS-StartupType=wait
+Name=Plasma Mobile
+Comment=Workspace shell for mobile devices.
+Type=Service
+X-KDE-StartupNotify=false
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=0
+
