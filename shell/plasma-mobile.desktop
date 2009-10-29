@@ -2,7 +2,15 @@
 Exec=plasma-mobile --desktop
 X-DBUS-StartupType=wait
 Name=Plasma Mobile
+Name[sv]=Plasma-mobil
+Name[tr]=Plasma Mobile
+Name[uk]=Мобільна Плазма
+Name[x-test]=xxPlasma Mobilexx
 Comment=Workspace shell for mobile devices.
+Comment[sv]=Arbetsytans skal för mobila internetenheter.
+Comment[tr]=Taşınabilir aygıtlar için çalışma uçbirimi.
+Comment[uk]=Оболонка робочого простору для мобільних пристроїв.
+Comment[x-test]=xxWorkspace shell for mobile devices.xx
 Type=Service
 X-KDE-StartupNotify=false
 OnlyShowIn=KDE;

@@ -1,6 +1,13 @@
 [Desktop Entry]
 Name=Application Switcher
+Name[sv]=Programbyte
+Name[tr]=Uygulama Seçici
+Name[uk]=Перемикач програм
+Name[x-test]=xxApplication Switcherxx
 Comment=Launch the app switcher from hildon
+Comment[sv]=Starta programbyte från Hildon
+Comment[uk]=Запуск перемикача програм з Hildon
+Comment[x-test]=xxLaunch the app switcher from hildonxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet

@@ -2,7 +2,9 @@
 Name=Air for netbooks
 Name[hr]=Zrak za netbooke
 Name[sv]=Luft för bärbara nätdatorer
+Name[tr]=Netbooklar için Air
 Name[uk]=«Повітря» для субноутбука
+Name[x-test]=xxAir for netbooksxx
 Comment=A breath of fresh air
 Comment[el]=Μια ριπή φρέσκου αέρα
 Comment[en_GB]=A breath of fresh air
@@ -14,6 +16,7 @@ Comment[ro]=O gură de aer proaspăt
 Comment[sv]=En frisk fläkt
 Comment[tr]=Bir nefes temiz hava
 Comment[uk]=Ковток свіжого повітря
+Comment[x-test]=xxA breath of fresh airxx
 
 
 X-KDE-PluginInfo-Author=The Oxygen Project

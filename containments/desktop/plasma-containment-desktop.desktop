@@ -1,7 +1,15 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=Desktop
+Name[sv]=Skrivbord
+Name[tr]=Masaüstü
+Name[uk]=Стільниця
+Name[x-test]=xxDesktopxx
 Comment=Default desktop containment
+Comment[sv]=Skrivbordets standardomgivning
+Comment[tr]=Öntanımlı masaüstü kapsayıcı
+Comment[uk]=Типовий контейнер стільниці
+Comment[x-test]=xxDefault desktop containmentxx
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
