@@ -1,11 +1,13 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=Desktop
+Name[pt]=Ambiente de Trabalho
 Name[sv]=Skrivbord
 Name[tr]=Masaüstü
 Name[uk]=Стільниця
 Name[x-test]=xxDesktopxx
 Comment=Default desktop containment
+Comment[pt]=Contentor do ecrã por omissão
 Comment[sv]=Skrivbordets standardomgivning
 Comment[tr]=Öntanımlı masaüstü kapsayıcı
 Comment[uk]=Типовий контейнер стільниці
