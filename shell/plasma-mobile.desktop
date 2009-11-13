@@ -2,12 +2,14 @@
 Exec=plasma-mobile --desktop
 X-DBUS-StartupType=wait
 Name=Plasma Mobile
+Name[en_GB]=Plasma Mobile
 Name[pt]=Plasma Móvel
 Name[sv]=Plasma-mobil
 Name[tr]=Plasma Mobile
 Name[uk]=Мобільна Плазма
 Name[x-test]=xxPlasma Mobilexx
 Comment=Workspace shell for mobile devices.
+Comment[en_GB]=Workspace shell for mobile devices.
 Comment[pt]=Área de trabalho para os dispositivos móveis.
 Comment[sv]=Arbetsytans skal för mobila internetenheter.
 Comment[tr]=Taşınabilir aygıtlar için çalışma uçbirimi.

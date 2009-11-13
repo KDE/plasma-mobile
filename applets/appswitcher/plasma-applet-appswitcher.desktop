@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=Application Switcher
+Name[en_GB]=Application Switcher
 Name[pt]=Selector de Aplicações
 Name[sv]=Programbyte
 Name[tr]=Uygulama Seçici
 Name[uk]=Перемикач програм
 Name[x-test]=xxApplication Switcherxx
 Comment=Launch the app switcher from hildon
+Comment[en_GB]=Launch the app switcher from hildon
 Comment[pt]=Lançar o selector de aplicações a partir do 'hildon'
 Comment[sv]=Starta programbyte från Hildon
 Comment[uk]=Запуск перемикача програм з Hildon
