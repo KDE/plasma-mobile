@@ -2,6 +2,7 @@
 # ctxt: plasma containment
 Name=Desktop
 Name[en_GB]=Desktop
+Name[eo]=Labortablo
 Name[pt]=Ambiente de Trabalho
 Name[sv]=Skrivbord
 Name[tr]=Masaüstü
@@ -9,6 +10,7 @@ Name[uk]=Стільниця
 Name[x-test]=xxDesktopxx
 Comment=Default desktop containment
 Comment[en_GB]=Default desktop containment
+Comment[eo]=Apriora labortabla ujo
 Comment[pt]=Contentor do ecrã por omissão
 Comment[sv]=Skrivbordets standardomgivning
 Comment[tr]=Öntanımlı masaüstü kapsayıcı
