@@ -1,5 +1,7 @@
-include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/plasmagenericshell ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kephal ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kworkspace)
-
+include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs 
+                    ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/plasmagenericshell 
+                    ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kephal
+                    ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kworkspace)
 
 set(plasma-mobile_SRCS
     mobcorona.cpp
@@ -7,9 +9,9 @@ set(plasma-mobile_SRCS
     main.cpp
     plasmaapp.cpp
 )
-
 #set(ksmserver_xml ${KDEBASE_WORKSPACE_SOURCE_DIR}/ksmserver/org.kde.KSMServerInterface.xml)
-#qt4_add_dbus_interface(plasma-mobile_SRCS ${ksmserver_xml} ksmserver_interface)
+set(ksmserver_xml ${KDE4_DBUS_INTERFACES_DIR}/org.kde.KSMServerInterface.xml)
+qt4_add_dbus_interface(plasma-mobile_SRCS ${ksmserver_xml} ksmserver_interface)
 
 kde4_add_kdeinit_executable(plasma-mobile ${plasma-mobile_SRCS})
 

@@ -35,7 +35,7 @@
 #include <KStandardAction>
 #include <KWindowSystem>
 
-//#include <ksmserver_interface.h>
+#include <ksmserver_interface.h>
 
 #include <kephal/screens.h>
 
@@ -47,8 +47,8 @@
 #include "mobcorona.h"
 #include "mobview.h"
 
-#include <widgetsExplorer/widgetexplorer.h>
-#include <plasmagenericshell/backgrounddialog.h>
+#include "plasmagenericshell/widgetsExplorer/widgetexplorer.h"
+#include "plasmagenericshell/backgrounddialog.h"
 
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
@@ -652,7 +652,6 @@ void PlasmaApp::configureContainment(Plasma::Containment *containment)
     KWindowSystem::setOnDesktop(configDialog->winId(), KWindowSystem::currentDesktop());
     KWindowSystem::activateWindow(configDialog->winId());
 }
-
 
 bool PlasmaApp::eventFilter(QObject * watched, QEvent *event)
 {
