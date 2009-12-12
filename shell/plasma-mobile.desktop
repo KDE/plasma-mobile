@@ -3,6 +3,7 @@ Exec=plasma-mobile --desktop
 X-DBUS-StartupType=wait
 Name=Plasma Mobile
 Name[en_GB]=Plasma Mobile
+Name[es]=Plasma Mobile
 Name[pt]=Plasma Móvel
 Name[sv]=Plasma-mobil
 Name[tr]=Plasma Mobile
