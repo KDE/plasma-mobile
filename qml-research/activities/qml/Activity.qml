@@ -15,20 +15,20 @@ Item {
     function calculateX()
     {
         switch (handler.currentPosition) {
-           case 0 : x = -activity.handler.x;
-           case 1 : x = - activity.width;
-           case 2 : x = activity.handler.width;
-           case 3 : x = -activity.handler.x;
+           case 0 : return -activity.handler.x;
+           case 1 : return - activity.width;
+           case 2 : return activity.handler.width;
+           case 3 : return -activity.handler.x;
         }
     }
 
     function calculateY()
     {
         switch (handler.currentPosition) {
-           case 0 : y = -activity.height;
-           case 1 : y = -activity.handler.y;
-           case 2 : y = -activity.handler.y;
-           case 3 : y = activity.handler.height;
+           case 0 : return -activity.height;
+           case 1 : return -activity.handler.y;
+           case 2 : return -activity.handler.y;
+           case 3 : return activity.handler.height;
         }
     }
 

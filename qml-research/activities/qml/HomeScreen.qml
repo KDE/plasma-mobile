@@ -55,8 +55,8 @@ Rectangle {
                     dynamicObject2.parent = dynamicObject;
                     dynamicObject2.handler = dynamicObject;
                     dynamicObject2.activityId = i;
-                    dynamicObject2.calculateX();
-                    dynamicObject2.calculateY();
+                    dynamicObject2.x = dynamicObject2.calculateX();
+                    dynamicObject2.y = dynamicObject2.calculateY();
                     activities[index] = dynamicObject2;
                     print("Activity panel created pos (" + dynamicObject2.x + "," + dynamicObject2.y + ")");
 

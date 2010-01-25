@@ -41,7 +41,7 @@ Item {
         Image {
             z : 1
             id : slider
-            x  : parent.x - parent.width / 2 - width /2
+            x  : parent.width / 2 - width /2
             y  : parent.height / 2 + height
             fillMode: Image.PreserveAspectFit ; smooth : true
             source: main.theme.slider
