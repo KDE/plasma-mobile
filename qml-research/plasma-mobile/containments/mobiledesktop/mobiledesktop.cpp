@@ -29,7 +29,7 @@ MobileDesktop::MobileDesktop(QObject *parent, const QVariantList &args)
 {
     resize(800, 480);
  
-    setHasConfigurationInterface(true);
+    setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile desktop";
 
 }

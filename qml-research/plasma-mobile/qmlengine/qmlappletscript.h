@@ -23,8 +23,7 @@
 
 #include <Plasma/AppletScript>
 
-class QGraphicsItem;
-class QEvent;
+class QmlAppletScriptPrivate;
 
 class QmlAppletScript : public Plasma::AppletScript
 {
@@ -34,11 +33,12 @@ class QmlAppletScript : public Plasma::AppletScript
         QmlAppletScript(QObject *parent, const QVariantList &args);
         ~QmlAppletScript();
 
-    signals:
-        void configPressed();
-
     protected:
         bool init();
+
+    private:
+        QmlAppletScriptPrivate *d;
+    Q_PRIVATE_SLOT(d, void finishExecute())
 };
 
 #endif

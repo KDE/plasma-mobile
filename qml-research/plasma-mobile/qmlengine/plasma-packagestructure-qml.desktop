@@ -4,13 +4,13 @@ Type=Service
 
 X-KDE-ServiceTypes=Plasma/PackageStructure
 X-KDE-Library=plasma_package_qml
-X-EngineName=qmlengine
-X-Plasma-API=qmlengine
+X-EngineName=qmlscript
+X-Plasma-API=qmlscript
 X-Plasma-PackageFileFilter=*.qml
 
 X-KDE-PluginInfo-Author=Alexis Menard
 X-KDE-PluginInfo-Email=menard@kde.org
-X-KDE-PluginInfo-Name=plasma_appletscript_qml
+X-KDE-PluginInfo-Name=qmlscript
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Category=Examples
 X-KDE-PluginInfo-Depends=

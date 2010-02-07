@@ -1,19 +1,19 @@
 [Desktop Entry]
-Name=QML Scriptengine
+Name=QML
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/ScriptEngine
 X-KDE-Library=plasma_appletscript_qml
-X-EngineName=qmlengine
-X-Plasma-API=qmlengine
+X-EngineName=qmlscript
+X-Plasma-API=qmlscript
 X-Plasma-ComponentTypes=Applet
+X-Plasma-PackageFormat=qmlscript
 
 X-KDE-PluginInfo-Author=Alexis Menard
 X-KDE-PluginInfo-Email=menard@kde.org
-X-KDE-PluginInfo-Name=qml-engine
+X-KDE-PluginInfo-Name=qmlscript
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Category=Examples
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=true
-

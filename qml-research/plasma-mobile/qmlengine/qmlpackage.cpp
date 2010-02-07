@@ -20,7 +20,7 @@
 
 #include "qmlpackage.h"
 
-K_EXPORT_PLASMA_PACKAGESTRUCTURE(qmlpackage, QmlPackage)
+K_EXPORT_PLASMA_PACKAGESTRUCTURE(qmlscripts, QmlPackage)
 
 QmlPackage::QmlPackage(QObject* parent, const QVariantList &args)
     :Plasma::PackageStructure(parent)

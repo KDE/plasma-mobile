@@ -59,6 +59,7 @@ private Q_SLOTS:
     void mainContainmentActivated();
     void createView(Plasma::Containment *containment);
     void syncConfig();
+    void showWidgetExplorer();
 private:
     MobCorona *m_corona;
     MobView *m_mainView;

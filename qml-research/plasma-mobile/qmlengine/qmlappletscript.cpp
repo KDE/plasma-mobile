@@ -19,12 +19,9 @@
  */
 
 #include "qmlappletscript.h"
-#include "qmlcontext.h"
-#include "qmlengine.h"
-#include "qml.h"
 
-#include <QGraphicsScene>
-#include <QGraphicsItem>
+#include <QmlComponent>
+#include <QmlEngine>
 #include <QGraphicsLinearLayout>
 
 #include <KGlobalSettings>
@@ -33,20 +30,88 @@
 
 #include <Plasma/Applet>
 
-K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlengine, QmlAppletScript)
+K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
+
+class QmlAppletScriptPrivate
+{
+public:
+    QmlAppletScriptPrivate(QmlAppletScript* appletScript) :
+          engine(0), component(0),
+          loaded(false), q(appletScript)
+    {
+    }
+
+    void errorPrint();
+    void execute(const QUrl &fileName);
+    void finishExecute();
+    QmlEngine* engine;
+    QmlComponent* component;
+
+    bool loaded;
+    QmlAppletScript* q;
+};
+
+void QmlAppletScriptPrivate::errorPrint()
+{
+    qDebug() << "Error running";
+    loaded=false;
+    QString errorStr = "Error loading QML file.\n";
+    if(component->isError()){
+        QList<QmlError> errors = component->errors();
+        foreach (const QmlError &error, errors) {
+            errorStr += (error.line()>0?QString::number(error.line()) + ": ":"")
+                + error.description() + '\n';
+        }
+    }
+    kWarning() << errorStr;
+}
+
+void QmlAppletScriptPrivate::execute(const QUrl &fileName)
+{
+    engine = new QmlEngine();
+    component = new QmlComponent(engine, fileName, q);
+
+    if(component->isReady() || component->isError())
+        finishExecute();
+    else
+        QObject::connect(component, SIGNAL(statusChanged(QmlComponent::Status)), q, SLOT(finishExecute()));
+}
+
+void QmlAppletScriptPrivate::finishExecute()
+{
+    if(component->isError()) {
+        errorPrint();
+    }
+    QObject *root = component->create();
+    if (!root) {
+        errorPrint();
+    }
+    QGraphicsLayoutItem *layoutItem = dynamic_cast<QGraphicsLayoutItem*>(root);
+    if (layoutItem) {
+        QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(q->applet());
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(0);
+        layout->addItem(layoutItem);
+        q->applet()->setLayout(layout);
+    } else {
+        //TODO It's a QmlGraphicsItem
+    }
+}
 
 QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
-    : Plasma::AppletScript(parent)
+    : Plasma::AppletScript(parent), d(new QmlAppletScriptPrivate(this))
 {
     Q_UNUSED(args);
 }
 
 QmlAppletScript::~QmlAppletScript()
 {
+    delete d;
 }
 
 bool QmlAppletScript::init()
 {
+    d->execute(mainScript());
     return true;
 }
 

@@ -36,7 +36,9 @@
 #include <KDebug>
 #include <KCmdLineArgs>
 #include <KStandardAction>
+#include <KStandardDirs>
 #include <KWindowSystem>
+#include <KServiceTypeTrader>
 
 #include <ksmserver_interface.h>
 
@@ -45,6 +47,7 @@
 #include <Plasma/Containment>
 #include <Plasma/Theme>
 #include <Plasma/WindowEffects>
+#include <Plasma/Applet>
 
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
@@ -205,7 +208,25 @@ void PlasmaApp::mainContainmentActivated()
 void PlasmaApp::createView(Plasma::Containment *containment)
 {
     m_mainView->setContainment(containment);
+    connect(containment, SIGNAL(showAddWidgetsInterface(QPointF)), this, SLOT(showWidgetExplorer()));
     containment->setScreen(0);
+}
+
+void PlasmaApp::showWidgetExplorer()
+{
+    kDebug()<<"Implement Me : Widget Explorer";
+    foreach (const KPluginInfo &info, Plasma::Applet::listAppletInfo(QString())) {
+        //kDebug() << info.pluginName() << "NoDisplay" << info.property("NoDisplay").toBool();
+        if (info.property("NoDisplay").toBool() || info.category() == i18n("Containments")) {
+            // we don't want to show the hidden category
+            continue;
+        }
+        kDebug() << info.pluginName() << " is the name of the plugin\n";
+
+        //qDebug() << info.name() << info.property("X-Plasma-Thumbnail");
+        //qDebug() << info.entryPath();
+
+    }
 }
 
 #include "plasmaapp.moc"
