@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=QML package structure
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/PackageStructure
+X-KDE-Library=plasma_package_qml
+X-EngineName=qmlengine
+X-Plasma-API=qmlengine
+X-Plasma-PackageFileFilter=*.qml
+
+X-KDE-PluginInfo-Author=Alexis Menard
+X-KDE-PluginInfo-Email=menard@kde.org
+X-KDE-PluginInfo-Name=plasma_appletscript_qml
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Category=Examples
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
