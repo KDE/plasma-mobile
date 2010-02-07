@@ -48,6 +48,7 @@
 #include <Plasma/Theme>
 #include <Plasma/WindowEffects>
 #include <Plasma/Applet>
+#include <Plasma/Package>
 
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
@@ -113,14 +114,6 @@ PlasmaApp::PlasmaApp()
 
     // this line initializes the corona.
     corona();
-    
-    QmlEngine *engine = new QmlEngine(m_mainView);
-    QmlComponent *component = new QmlComponent(engine, ":interface.qml");
-    QGraphicsObject *item = qobject_cast<QGraphicsObject *>(component->create());
-    if (item)
-        m_corona->addItem(item);
-    else
-        qDebug()<< "Error occured" << component->errors();
 
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
 }
@@ -227,6 +220,7 @@ void PlasmaApp::showWidgetExplorer()
         //qDebug() << info.entryPath();
 
     }
+    Plasma::Package::installPackage("/home/darktears/dev/kde/plasma-playground/src/shells/mobile/qml-research/plasma-mobile/examples/widgets", KStandardDirs::locateLocal("data", "plasma/plasmoids/"),"plasma-applet-");
 }
 
 #include "plasmaapp.moc"

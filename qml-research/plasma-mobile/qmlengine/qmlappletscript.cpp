@@ -68,7 +68,14 @@ void QmlAppletScriptPrivate::errorPrint()
 
 void QmlAppletScriptPrivate::execute(const QUrl &fileName)
 {
-    engine = new QmlEngine();
+    if (fileName.isEmpty())
+      return;
+    if (engine)
+      delete engine;
+    if (component)
+      delete component;
+    
+    engine = new QmlEngine(q);
     component = new QmlComponent(engine, fileName, q);
 
     if(component->isReady() || component->isError())

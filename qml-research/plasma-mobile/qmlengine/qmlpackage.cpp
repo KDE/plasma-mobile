@@ -30,6 +30,8 @@ QmlPackage::QmlPackage(QObject* parent, const QVariantList &args)
     //qml doesn't have a mimetype yet?
     addFileDefinition("mainqml", "qml/main.qml", i18n("Main QML File"));
     setRequired("mainqml", true);
+    addFileDefinition("mainscript", "qml/main.qml", i18n("Main QML File"));
+    setRequired("mainscript", true);
 }
 
 QmlPackage::~QmlPackage()

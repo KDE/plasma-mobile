@@ -10,3 +10,8 @@ screen=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 zvalue=0
+
+[Containments][1][Applets][1]
+plugin=qmlwidgets
+immutability=1
+zvalue=1
