@@ -1,17 +1,5 @@
 [Desktop Entry]
-Name=Air for netbooks
-Name[en_GB]=Air for netbooks
-Name[eo]=Air por netbook-oj
-Name[et]=Air väikesülearvutitele
-Name[fr]=Air pour les « netbooks »
-Name[hr]=Air za netbooke
-Name[nl]=Air voor netbooks
-Name[pa]=ਨੈੱਟਬੁੱਕ ਲਈ ਏਅਰ
-Name[pt]=Air para Netbooks
-Name[pt_BR]=Ar para netbooks
-Name[sv]=Luft för bärbara nätdatorer
-Name[tr]=Netbooklar için Air
-Name[uk]=«Повітря» для субноутбука
+Name=Air for Mobile
 Name[x-test]=xxAir for netbooksxx
 Comment=A breath of fresh air
 Comment[el]=Μια ριπή φρέσκου αέρα
@@ -36,7 +24,7 @@ Comment[x-test]=xxA breath of fresh airxx
 
 X-KDE-PluginInfo-Author=The Oxygen Project
 X-KDE-PluginInfo-Email=kde-artists@kde.org
-X-KDE-PluginInfo-Name=air-netbook
+X-KDE-PluginInfo-Name=air-mobile
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org
 X-KDE-PluginInfo-Category=
@@ -46,3 +34,7 @@ X-KDE-PluginInfo-EnabledByDefault=true
 
 [Settings]
 FallbackTheme=default
+
+[Wallpaper]
+defaultWallpaperTheme=Universe
+
