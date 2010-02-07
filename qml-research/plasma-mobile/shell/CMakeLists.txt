@@ -1,5 +1,4 @@
 include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs 
-                    ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/plasmagenericshell 
                     ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kephal
                     ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kworkspace)
 
@@ -19,7 +18,7 @@ qt4_add_dbus_interface(plasma-mobile_SRCS ${ksmserver_xml} ksmserver_interface)
 kde4_add_kdeinit_executable(plasma-mobile-qml ${plasma-mobile_SRCS} ${RCS_SRCS})
 
 target_link_libraries(kdeinit_plasma-mobile-qml ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTDECLARATIVE_LIBRARY} 
-                      kworkspace ${KDE4_KIO_LIBS} ${X11_LIBRARIES} kephal plasmagenericshell)
+                      kworkspace ${KDE4_KIO_LIBS} ${X11_LIBRARIES} kephal)
 if(X11_Xrender_FOUND)
    target_link_libraries(kdeinit_plasma-mobile-qml ${X11_Xrender_LIB})
 endif(X11_Xrender_FOUND)

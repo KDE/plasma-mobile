@@ -220,7 +220,6 @@ void PlasmaApp::showWidgetExplorer()
         //qDebug() << info.entryPath();
 
     }
-    Plasma::Package::installPackage("/home/darktears/dev/kde/plasma-playground/src/shells/mobile/qml-research/plasma-mobile/examples/widgets", KStandardDirs::locateLocal("data", "plasma/plasmoids/"),"plasma-applet-");
 }
 
 #include "plasmaapp.moc"
