@@ -1,6 +1,16 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Widget Example (QML)
+Name[en_GB]=Widget Example (QML)
+Name[es]=Elemento gráfico de ejemplo (QML)
+Name[et]=Vidina näidis (QML)
+Name[fr]=Exemple de gagdet graphique (QML)
+Name[pa]=ਵਿਦਜੈੱਟ ਉਦਾਹਰਨ (QML)
+Name[pt]=Exemplo de Elemento (QML)
+Name[pt_BR]=Exemplo de elemento (QML)
+Name[sv]=Exempel på grafisk komponent (QML)
+Name[uk]=Приклад віджета (QML)
+Name[x-test]=xxWidget Example (QML)xx
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=chronometer

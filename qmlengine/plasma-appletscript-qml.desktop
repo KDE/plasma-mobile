@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=QML
+Name[uk]=QML
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/ScriptEngine

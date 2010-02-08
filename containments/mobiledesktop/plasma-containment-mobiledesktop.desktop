@@ -1,22 +1,12 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=MobileDesktop
-Name[en_GB]=Desktop
-Name[eo]=Labortablo
-Name[es]=Escritorio
-Name[et]=Töölaud
-Name[fr]=Bureau
-Name[nl]=Bureaublad
-Name[pt]=Ambiente de Trabalho
-Name[pt_BR]=Área de trabalho
-Name[sv]=Skrivbord
-Name[tr]=Masaüstü
-Name[uk]=Стільниця
-Name[x-test]=xxDesktopxx
+Name[uk]=Мобільна стільниця
 Comment=Default desktop containment
 Comment[en_GB]=Default desktop containment
 Comment[eo]=Apriora labortabla ujo
 Comment[et]=Vaikimisi töölauakonteiner
+Comment[fi]=Työpöydän oletussisällytys
 Comment[fr]=Contenu du bureau par défaut
 Comment[nl]=Verpakking voor standaard bureaublad
 Comment[pa]=ਡਿਫਾਲਟ ਡੈਸਕਟਾਪ ਕਨਟੇਨਮੈਂਟ

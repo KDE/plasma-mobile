@@ -1,5 +1,17 @@
 [Desktop Entry]
 Name=QML package structure
+Name[en_GB]=QML package structure
+Name[es]=Estructura de paquete QML
+Name[et]=QML paketi struktuur
+Name[fr]=Structure de paquetage QML
+Name[hr]=QML struktura paketa
+Name[km]=រចនាសម្ព័ន្ធ​កញ្ចប់ QML
+Name[pt]=Estrutura de pacotes QML
+Name[pt_BR]=Estrutura de pacotes QML
+Name[sv]=QML-paketstruktur
+Name[tr]=QML paket yapısı
+Name[uk]=Структура пакунків QML
+Name[x-test]=xxQML package structurexx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/PackageStructure
