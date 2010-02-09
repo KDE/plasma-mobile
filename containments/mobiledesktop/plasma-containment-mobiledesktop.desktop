@@ -1,6 +1,8 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=MobileDesktop
+Name[en_GB]=MobileDesktop
+Name[sv]=Mobilt skrivbord
 Name[uk]=Мобільна стільниця
 Comment=Default desktop containment
 Comment[en_GB]=Default desktop containment

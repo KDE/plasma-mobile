@@ -2,9 +2,12 @@
 Exec=plasma-mobile-qml --desktop
 X-DBUS-StartupType=wait
 Name=Plasma Mobile QML
+Name[en_GB]=Plasma Mobile QML
+Name[sv]=Plasma mobil-QML
 Name[uk]=Мобільна Плазма на QML
 Comment=Workspace shell for mobile devices.
 Comment[en_GB]=Workspace shell for mobile devices.
+Comment[es]=Shell del espacio de trabajo para dispositivos móviles.
 Comment[et]=Töötsooni kest mobiilsetele seadmetele.
 Comment[fi]=Työpöytäkuori kannettaville laitteille.
 Comment[fr]=Environnement de travail de Shell pour les périphériques mobiles.
