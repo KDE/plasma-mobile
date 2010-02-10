@@ -4,6 +4,7 @@ Name=MobileDesktop
 Name[en_GB]=MobileDesktop
 Name[sv]=Mobilt skrivbord
 Name[uk]=Мобільна стільниця
+Name[x-test]=xxMobileDesktopxx
 Comment=Default desktop containment
 Comment[en_GB]=Default desktop containment
 Comment[eo]=Apriora labortabla ujo

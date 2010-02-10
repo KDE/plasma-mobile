@@ -3,6 +3,7 @@ Name=QML
 Name[en_GB]=QML
 Name[sv]=QML
 Name[uk]=QML
+Name[x-test]=xxQMLxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/ScriptEngine
