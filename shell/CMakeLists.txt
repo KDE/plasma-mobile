@@ -2,6 +2,8 @@ include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs
                     ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kephal
                     ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kworkspace)
 
+include(KDE4Defaults)
+
 set(plasma-mobile_SRCS
     main.cpp
     mobcorona.cpp
@@ -13,7 +15,7 @@ set(plasma-mobile_SRCS
 set(ksmserver_xml ${KDE4_DBUS_INTERFACES_DIR}/org.kde.KSMServerInterface.xml)
 qt4_add_dbus_interface(plasma-mobile_SRCS ${ksmserver_xml} ksmserver_interface)
 
-kde4_add_kdeinit_executable(plasma-mobile ${plasma-mobile_SRCS} ${RCS_SRCS})
+kde4_add_kdeinit_executable(plasma-mobile ${plasma-mobile_SRCS})
 
 target_link_libraries(kdeinit_plasma-mobile ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTDECLARATIVE_LIBRARY} 
                       kworkspace ${KDE4_KIO_LIBS} ${X11_LIBRARIES} kephal)

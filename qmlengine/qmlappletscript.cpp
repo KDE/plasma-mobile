@@ -53,7 +53,6 @@ public:
 
 void QmlAppletScriptPrivate::errorPrint()
 {
-    qDebug() << "Error running";
     loaded=false;
     QString errorStr = "Error loading QML file.\n";
     if(component->isError()){
@@ -100,6 +99,9 @@ void QmlAppletScriptPrivate::finishExecute()
         layout->setSpacing(0);
         layout->addItem(layoutItem);
         q->applet()->setLayout(layout);
+        QObject *object = dynamic_cast<QObject *>(layoutItem);
+        if (object)
+            object->setParent(q->applet());
     } else {
         //TODO It's a QmlGraphicsItem
     }
