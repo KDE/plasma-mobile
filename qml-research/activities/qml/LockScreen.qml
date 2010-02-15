@@ -41,8 +41,8 @@ Item {
         Image {
             z : 1
             id : slider
-            x  : parent.width / 2 - width /2
-            y  : parent.height / 2 + height
+            x  : slideBar.x
+            y  : slideBar.y - height / 2 + 10
             fillMode: Image.PreserveAspectFit ; smooth : true
             source: main.theme.slider
             state : "Start"
@@ -50,11 +50,11 @@ Item {
             states: [
                   State {
                       name: "Start"
-                      PropertyChanges { target: slider; x : text.x - text.width / 2 }
+                      PropertyChanges { target: slider; x : slideBar.x }
                   },
                   State {
                       name: "Sliding"
-                      PropertyChanges { target: slider; x : slider.x }
+                      PropertyChanges { target: slider; x : slideBar.x }
                   }
               ]
          transitions: Transition {
@@ -66,7 +66,7 @@ Item {
 
         Image {
             id : slideBar
-            x  : parent.x - parent.width / 2
+            x  : parent.width / 2 - width /2
             y  : parent.height + height
             fillMode: Image.PreserveAspectFit ; smooth : true
             source: main.theme.sliderBar
@@ -80,15 +80,15 @@ Item {
              height :slider.height + main.theme.touchScreenOffsetVertical;
              drag.target: slider;
              drag.axis: "XAxis";
-             drag.maximumX : text.x + slideBar.width / 2 - slider.width
-             drag.minimumX : text.x - text.width / 2
+             drag.maximumX : slideBar.width + slider.width
+             drag.minimumX : slideBar.x
              onPositionChanged : doUnlock(mouse.x)
              onReleased: { slider.state = "Start" }
              onPressed: { slider.state = "Sliding" }
 
              function doUnlock(x)
              {
-                if (slider.x == text.x + slideBar.width / 2 - slider.width)
+                if (slider.x == slideBar.width + slider.width)
                     lockScreen.state = "Hidden"
              }
 
