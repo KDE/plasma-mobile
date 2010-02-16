@@ -1,6 +1,9 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Digital Clock (QML)
+Name[pt]=Relógio Digital (QML)
+Name[sv]=Digitalklocka (QML)
+Name[uk]=Цифровий годинник (QML)
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=chronometer
