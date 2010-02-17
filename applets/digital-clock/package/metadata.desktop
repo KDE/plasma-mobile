@@ -2,8 +2,10 @@
 Encoding=UTF-8
 Name=Digital Clock (QML)
 Name[pt]=Relógio Digital (QML)
+Name[pt_BR]=Relógio digital (QML)
 Name[sv]=Digitalklocka (QML)
 Name[uk]=Цифровий годинник (QML)
+Name[x-test]=xxDigital Clock (QML)xx
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=chronometer

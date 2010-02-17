@@ -4,6 +4,7 @@ X-DBUS-StartupType=wait
 Name=Plasma Mobile QML
 Name[en_GB]=Plasma Mobile QML
 Name[pt]=Plasma Móvel QML
+Name[pt_BR]=Plasma móvel QML
 Name[sv]=Plasma mobil-QML
 Name[uk]=Мобільна Плазма на QML
 Name[x-test]=xxPlasma Mobile QMLxx
