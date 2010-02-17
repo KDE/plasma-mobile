@@ -1,3 +1,7 @@
+find_package(KDE4 REQUIRED)
+
+include(KDE4Defaults)
+
 add_subdirectory(applets)
 add_subdirectory(containments)
 add_subdirectory(dataengines)
