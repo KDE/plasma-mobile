@@ -3,23 +3,23 @@
  ListModel {
      id: activitymodel;
      ListElement {
-         name: "Bill Smith"
-         number: "555 3264"
-         portrait: "pics/portrait.png"
+         name: "Games"
+         icon: "pics/games.png"
      }
      ListElement {
-         name: "Jim Williams"
-         number: "555 5673"
-         portrait: "pics/portrait.png"
+         name: "Instant Messaging"
+         icon: "pics/im.png"
      }
      ListElement {
-         name: "John Brown"
-         number: "555 8426"
-         portrait: "pics/portrait.png"
+         name: "Phone"
+         icon: "pics/phone.png"
      }
      ListElement {
-         name: "Sam Wise"
-         number: "555 0473"
-         portrait: "pics/portrait.png"
+         name: "Internet"
+         icon: "pics/internet.png"
+     }
+     ListElement {
+         name: "Social"
+         icon: "pics/social.png"
      }
  }
