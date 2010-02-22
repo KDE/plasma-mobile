@@ -18,6 +18,28 @@ Item {
         y: activityimage.height - stars.height;
     }
 
+    Row {
+        id: shortcuts;
+        anchors.horizontalCenter: parent.horizontalCenter;
+        anchors.bottom: parent.bottom;
+
+        Image {
+            source: "images/internet.png";
+        }
+        Image {
+            source: "images/im.png";
+        }
+        Image {
+            source: "images/phone.png";
+        }
+        Image {
+            source: "images/social.png";
+        }
+        Image {
+            source: "images/games.png";
+        }
+    }
+
     states: [
         State {
             name: "show";
@@ -29,6 +51,10 @@ Item {
                 target: stars;
                 opacity: 1;
             }
+            PropertyChanges {
+                target: shortcuts;
+                opacity: 1;
+            }
         },
         State {
             name: "hidden";
@@ -38,6 +64,10 @@ Item {
             }
             PropertyChanges {
                 target: stars;
+                opacity: 0;
+            }
+            PropertyChanges {
+                target: shortcuts;
                 opacity: 0;
             }
         }
@@ -55,7 +85,7 @@ Item {
                     easing: "InOutCubic";
                 }
                 PropertyAnimation {
-                    matchTargets: stars;
+                    matchTargets: stars, shortcuts;
                     matchProperties: "opacity";
                     duration: 800;
                     easing: "OutCubic";
@@ -73,7 +103,7 @@ Item {
                     easing: "InOutCubic";
                 }
                 PropertyAnimation {
-                    matchTargets: stars;
+                    matchTargets: stars, shortcuts;
                     matchProperties: "opacity";
                     duration: 1200;
                     easing: "InCubic";
