@@ -4,7 +4,7 @@ Item {
     id: activitypanel;
     width: 800;
     height: 160;
-    state: "show";
+    state: "hidden";
 
     Image {
         id: activityimage;
@@ -24,12 +24,47 @@ Item {
         anchors.horizontalCenter: activitypanel.horizontalCenter;
     }
 
+//    Rectangle {
+//        id: debug;
+//        anchors.fill: hintregion;
+//        color: "red";
+//        opacity: 0.5;
+//    }
+
     MouseRegion {
         id: hintregion;
-        anchors.fill: hint;
+
+        x: hint.x - 35 / 2;
+        y: hint.y -  35 / 2;
+        width: hint.width + 35;
+        height: hint.height + 35;
+
+        drag.target: activitypanel;
+        drag.axis: "YAxis"
+        drag.minimumY: activitypanel.parent.height - activitypanel.height;
+        drag.maximumY: activitypanel.parent.height;
 
         onClicked: {
             activitypanel.state = 'show';
+        }
+
+        onPressed: {
+            activitypanel.state = 'dragging';
+        }
+
+        onReleased: {
+            console.log("---> Parent height: " + parent.height);
+            console.log("---> Position: " + activitypanel.y);
+            console.log("");
+            if (activitypanel.y < activitypanel.parent.height / 2) {
+                activitypanel.state = 'show';
+            } else {
+                activitypanel.state = 'hidden';
+            }
+        }
+
+        onPositionChanged: {
+            hint.opacity = (160.0 + hint.y) / 120;
         }
     }
 
@@ -38,12 +73,11 @@ Item {
 
         anchors.left: activitypanel.left;
         anchors.right: activitypanel.right;
-        anchors.bottom: activitypanel.bottom;
+        anchors.bottom: activityimage.bottom;
         height: activitypanel.height;
 
         onClicked: {
             activitypanel.state = 'hidden';
-            console.log("Worked!");
         }
     }
 
@@ -90,6 +124,14 @@ Item {
             PropertyChanges {
                 target: hint;
                 opacity: 1;
+            }
+        },
+        State {
+            name: "dragging"
+            PropertyChanges {
+                target: activitypanel;
+                x: activitypanel.x;
+                y: activitypanel.y;
             }
         }
     ]
@@ -145,6 +187,15 @@ Item {
                         easing: "InCubic";
                     }
                 }
+            }
+        },
+        Transition {
+            from: "dragging";
+            to: "*";
+            NumberAnimation {
+                matchProperties: "x,y";
+                easing: "easeOutQuad";
+                duration: 400;
             }
         }
     ]
