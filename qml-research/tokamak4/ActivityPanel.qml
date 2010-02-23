@@ -31,7 +31,7 @@ Item {
 //        opacity: 0.5;
 //    }
 
-    MouseRegion {
+    MouseArea {
         id: hintregion;
 
         x: hint.x - 35 / 2;
@@ -53,6 +53,8 @@ Item {
         }
 
         onReleased: {
+            if (activitypanel.state != 'dragging')
+                return;
             var target = activitypanel.parent.height - (activitypanel.height / 1.5);
             if (activitypanel.y < target) {
                 activitypanel.state = 'show';
@@ -62,7 +64,7 @@ Item {
         }
     }
 
-    MouseRegion {
+    MouseArea {
         id: panelregion;
 
         anchors.left: activitypanel.left;
@@ -126,6 +128,11 @@ Item {
                 target: activitypanel;
                 x: activitypanel.x;
                 y: activitypanel.y;
+
+            }
+            PropertyChanges {
+                target: hint;
+                opacity: 1;
             }
         }
     ]
@@ -137,23 +144,23 @@ Item {
             SequentialAnimation {
                 ParallelAnimation {
                     NumberAnimation {
-                        matchTargets: activitypanel;
-                        matchProperties: "y";
+                        targets: activitypanel;
+                        properties: "y";
                         duration: 1000;
-                        easing: "InOutCubic";
+                        easing.type: "InOutCubic";
                     }
                     PropertyAnimation {
-                        matchTargets: stars, shortcuts;
-                        matchProperties: "opacity";
+                        targets: stars, shortcuts;
+                        properties: "opacity";
                         duration: 800;
-                        easing: "OutCubic";
+                        easing.type: "OutCubic";
                     }
                 }
                 PropertyAnimation {
-                    matchTargets: hint;
-                    matchProperties: "opacity";
-                    duration: 200;
-                    easing: "InCubic";
+                    target: hint;
+                    property: "opacity";
+                    duration: 600;
+                    easing.type: "InCubic";
                 }
             }
         },
@@ -162,23 +169,23 @@ Item {
             to: "show";
             SequentialAnimation {
                 PropertyAnimation {
-                    matchTargets: hint;
-                    matchProperties: "opacity";
-                    duration: 400;
-                    easing: "OutCubic";
+                    targets: hint;
+                    properties: "opacity";
+                    duration: 600;
+                    easing.type: "OutCubic";
                 }
                 ParallelAnimation {
                     NumberAnimation {
-                        matchTargets: activitypanel;
-                        matchProperties: "y";
+                        targets: activitypanel;
+                        properties: "y";
                         duration: 800;
-                        easing: "InOutCubic";
+                        easing.type: "InOutCubic";
                     }
                     PropertyAnimation {
-                        matchTargets: stars, shortcuts;
-                        matchProperties: "opacity";
+                        targets: stars, shortcuts;
+                        properties: "opacity";
                         duration: 1000;
-                        easing: "InCubic";
+                        easing.type: "InCubic";
                     }
                 }
             }
@@ -187,8 +194,8 @@ Item {
             from: "dragging";
             to: "*";
             NumberAnimation {
-                matchProperties: "x,y";
-                easing: "easeOutQuad";
+                properties: "x,y";
+                easing.type: "OutQuad";
                 duration: 400;
             }
         }

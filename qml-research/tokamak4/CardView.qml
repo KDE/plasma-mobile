@@ -53,11 +53,11 @@ Flipable {
         NumberAnimation {
             matchProperties: "angle";
             duration: 800;
-            easing: "InOutCubic";
+            easing.type: "OutCubic";
         }
     }
 
-    MouseRegion {
+    MouseArea {
         // change between default and 'back' states
         onClicked: cardview.state = (cardview.state == 'back' ? '' : 'back')
         anchors.fill: parent

@@ -18,7 +18,7 @@ Item {
                 id: internet;
                 source: "images/internet.png";
             }
-            MouseRegion {
+            MouseArea {
                 anchors.fill: internet;
                 onClicked: {
                     console.log("Clicked internet :)");
@@ -34,7 +34,7 @@ Item {
                 id: instantmessaging;
                 source: "images/im.png";
             }
-            MouseRegion {
+            MouseArea {
                 anchors.fill: instantmessaging;
                 onClicked: {
                     console.log("Clicked im :)");
@@ -50,7 +50,7 @@ Item {
                 id: phone;
                 source: "images/phone.png";
             }
-            MouseRegion {
+            MouseArea {
                 anchors.fill: phone;
                 onClicked: {
                     console.log("Clicked phone :)");
@@ -66,9 +66,11 @@ Item {
                 id: social;
                 source: "images/social.png";
             }
-            MouseRegion {
+            MouseArea {
                 anchors.fill: social;
                 onClicked: {
+                    defaultBackground.state = "Hidden";
+                    activity1.state = "Visible";
                     console.log("Clicked social :)");
                 }
             }
@@ -82,7 +84,7 @@ Item {
                 id: games;
                 source: "images/games.png";
             }
-            MouseRegion {
+            MouseArea {
                 anchors.fill: games;
                 onClicked: {
                     console.log("Clicked games :)");
