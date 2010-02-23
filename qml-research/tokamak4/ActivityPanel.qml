@@ -4,7 +4,7 @@ Item {
     id: activitypanel;
     width: 800;
     height: 160;
-    state: "hidden";
+    state: "show";
 
     Image {
         id: activityimage;
@@ -53,10 +53,8 @@ Item {
         }
 
         onReleased: {
-            console.log("---> Parent height: " + parent.height);
-            console.log("---> Position: " + activitypanel.y);
-            console.log("");
-            if (activitypanel.y < activitypanel.parent.height / 2) {
+            var target = activitypanel.parent.height - (activitypanel.height / 2);
+            if (activitypanel.y < target) {
                 activitypanel.state = 'show';
             } else {
                 activitypanel.state = 'hidden';
