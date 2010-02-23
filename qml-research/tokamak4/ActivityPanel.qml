@@ -53,16 +53,12 @@ Item {
         }
 
         onReleased: {
-            var target = activitypanel.parent.height - (activitypanel.height / 2);
+            var target = activitypanel.parent.height - (activitypanel.height / 1.5);
             if (activitypanel.y < target) {
                 activitypanel.state = 'show';
             } else {
                 activitypanel.state = 'hidden';
             }
-        }
-
-        onPositionChanged: {
-            hint.opacity = (160.0 + hint.y) / 120;
         }
     }
 
@@ -143,7 +139,7 @@ Item {
                     NumberAnimation {
                         matchTargets: activitypanel;
                         matchProperties: "y";
-                        duration: 1200;
+                        duration: 1000;
                         easing: "InOutCubic";
                     }
                     PropertyAnimation {
@@ -156,7 +152,7 @@ Item {
                 PropertyAnimation {
                     matchTargets: hint;
                     matchProperties: "opacity";
-                    duration: 400;
+                    duration: 200;
                     easing: "InCubic";
                 }
             }
