@@ -53,6 +53,8 @@ Item {
             MouseArea {
                 anchors.fill: phone;
                 onClicked: {
+                    flip.state = "Hidden";
+                    defaultBackground.state = "Visible";
                     console.log("Clicked phone :)");
                 }
             }
@@ -70,7 +72,7 @@ Item {
                 anchors.fill: social;
                 onClicked: {
                     defaultBackground.state = "Hidden";
-                    activity1.state = "Visible";
+                    flip.state = "Visible";
                     console.log("Clicked social :)");
                 }
             }
