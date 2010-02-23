@@ -9,7 +9,6 @@ Item {
     Image {
         id: activityimage;
         source: "images/activitypanel.png";
-        anchors.fill: parent;
     }
 
     Image {
@@ -18,26 +17,40 @@ Item {
         y: activityimage.height - stars.height;
     }
 
-    Row {
-        id: shortcuts;
-        anchors.horizontalCenter: parent.horizontalCenter;
-        anchors.bottom: parent.bottom;
+    Image {
+        id: hint;
+        source: "images/hint.png";
+        y: -40;
+        anchors.horizontalCenter: activitypanel.horizontalCenter;
+    }
 
-        Image {
-            source: "images/internet.png";
+    MouseRegion {
+        id: hintregion;
+        anchors.fill: hint;
+
+        onClicked: {
+            activitypanel.state = 'show';
         }
-        Image {
-            source: "images/im.png";
+    }
+
+    MouseRegion {
+        id: panelregion;
+
+        anchors.left: activitypanel.left;
+        anchors.right: activitypanel.right;
+        anchors.bottom: activitypanel.bottom;
+        height: activitypanel.height;
+
+        onClicked: {
+            activitypanel.state = 'hidden';
+            console.log("Worked!");
         }
-        Image {
-            source: "images/phone.png";
-        }
-        Image {
-            source: "images/social.png";
-        }
-        Image {
-            source: "images/games.png";
-        }
+    }
+
+    ActivityPanelItems {
+        id: shortcuts;
+        anchors.horizontalCenter: activitypanel.horizontalCenter;
+        anchors.bottom: activitypanel.bottom;
     }
 
     states: [
@@ -55,6 +68,10 @@ Item {
                 target: shortcuts;
                 opacity: 1;
             }
+            PropertyChanges {
+                target: hint;
+                opacity: 0;
+            }
         },
         State {
             name: "hidden";
@@ -70,6 +87,10 @@ Item {
                 target: shortcuts;
                 opacity: 0;
             }
+            PropertyChanges {
+                target: hint;
+                opacity: 1;
+            }
         }
     ]
 
@@ -77,36 +98,52 @@ Item {
         Transition {
             from: "show";
             to: "hidden";
-            ParallelAnimation {
-                NumberAnimation {
-                    matchTargets: activitypanel;
-                    matchProperties: "y";
-                    duration: 1200;
-                    easing: "InOutCubic";
+            SequentialAnimation {
+                ParallelAnimation {
+                    NumberAnimation {
+                        matchTargets: activitypanel;
+                        matchProperties: "y";
+                        duration: 1200;
+                        easing: "InOutCubic";
+                    }
+                    PropertyAnimation {
+                        matchTargets: stars, shortcuts;
+                        matchProperties: "opacity";
+                        duration: 800;
+                        easing: "OutCubic";
+                    }
                 }
                 PropertyAnimation {
-                    matchTargets: stars, shortcuts;
+                    matchTargets: hint;
                     matchProperties: "opacity";
-                    duration: 800;
-                    easing: "OutCubic";
+                    duration: 400;
+                    easing: "InCubic";
                 }
             }
         },
         Transition {
             from: "hidden";
             to: "show";
-            ParallelAnimation {
-                NumberAnimation {
-                    matchTargets: activitypanel;
-                    matchProperties: "y";
-                    duration: 800;
-                    easing: "InOutCubic";
-                }
+            SequentialAnimation {
                 PropertyAnimation {
-                    matchTargets: stars, shortcuts;
+                    matchTargets: hint;
                     matchProperties: "opacity";
-                    duration: 1200;
-                    easing: "InCubic";
+                    duration: 400;
+                    easing: "OutCubic";
+                }
+                ParallelAnimation {
+                    NumberAnimation {
+                        matchTargets: activitypanel;
+                        matchProperties: "y";
+                        duration: 800;
+                        easing: "InOutCubic";
+                    }
+                    PropertyAnimation {
+                        matchTargets: stars, shortcuts;
+                        matchProperties: "opacity";
+                        duration: 1000;
+                        easing: "InCubic";
+                    }
                 }
             }
         }

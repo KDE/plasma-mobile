@@ -16,16 +16,4 @@ Item {
         anchors.right: homescreen.right;
         y: homescreen.height - 160;
     }
-
-    MouseRegion {
-        anchors.left: homescreen.left;
-        anchors.right: homescreen.right;
-        anchors.bottom: homescreen.bottom;
-        height: 160;
-
-        onClicked: {
-            activitypanel.state = (activitypanel.state == 'hidden' ? 'show' : 'hidden');
-        }
-    }
-
 }
