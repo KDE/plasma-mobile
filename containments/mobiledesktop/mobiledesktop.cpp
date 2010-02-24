@@ -110,6 +110,7 @@ void MobileDesktop::finishExecute()
         setParentItem(object);
         setParent(object);
         object->setProperty("containment", qVariantFromValue((QGraphicsObject*)this));
+        setPos(0, 0);
         resize(object->width(), object->height());
     }
 }
