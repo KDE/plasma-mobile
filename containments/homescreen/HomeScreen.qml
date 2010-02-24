@@ -108,7 +108,7 @@ Rectangle {
                 NumberAnimation {
                     properties: "y";
                     easing.type: "InQuad";
-                    duration: 500;
+                    duration: 650;
                 }
                 NumberAnimation {
                     properties: "scale";
