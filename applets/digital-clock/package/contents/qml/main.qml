@@ -10,7 +10,6 @@ QGraphicsWidget {
               id: simpleText
               Text {
                   text: modelData + ': ' + dataSource[modelData]
-                  color: page.theme.textColor
               }
           }
       ]

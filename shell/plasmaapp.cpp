@@ -28,8 +28,6 @@
 #include <QApplication>
 #include <QPixmapCache>
 #include <QtDBus/QtDBus>
-#include <QtDeclarative/QmlComponent>
-#include <QtDeclarative/QmlEngine>
 
 #include <KAction>
 #include <KCrash>
@@ -53,6 +51,8 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
 
+extern void setupBindings();
+
 PlasmaApp* PlasmaApp::self()
 {
     if (!kapp) {
@@ -67,6 +67,7 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0)
 {
+    setupBindings();
     KGlobal::locale()->insertCatalog("libplasma");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();

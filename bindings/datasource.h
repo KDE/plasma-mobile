@@ -21,60 +21,64 @@
 #ifndef DATASOURCE_H
 #define DATASOURCE_H
 #include <QObject>
+#include "private/dataengineconsumer_p.h"
 #include <Plasma/DataEngine>
-#include <qml.h>
+#include <qdeclarative.h>
+
+class QDeclarativeOpenMetaObject;
+class QDeclarativeContext;
 
 namespace Plasma
 {
-    class Applet;
-    class DataEngine;
+  class Applet;
+  class DataEngine;
+
+  class DataSource : public QObject, DataEngineConsumer
+  {
+      Q_OBJECT
+  public:
+      DataSource(QObject* parent=0);
+
+      Q_PROPERTY(bool valid READ valid);
+      bool valid() const {return m_applet!=0;}
+
+      Q_PROPERTY(int interval READ interval WRITE setInterval NOTIFY intervalChanged);
+      int interval() const {return m_interval;}
+      void setInterval(int i) {if(i==m_interval) return; m_interval=i; emit intervalChanged();}
+
+      Q_PROPERTY(QString engine READ engine WRITE setEngine NOTIFY engineChanged);
+      QString engine() const {return m_engine;}
+      void setEngine(const QString &e) {if(e==m_engine) return; m_engine=e; emit engineChanged();}
+
+      Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged);
+      QString source() const {return m_source;}
+      void setSource(const QString &s);
+
+      Q_PROPERTY(QStringList keys READ keys NOTIFY keysChanged);
+      QStringList keys() const {return m_keys;}
+
+  public slots:
+      void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
+      void setupData();
+
+  signals:
+      void intervalChanged();
+      void engineChanged();
+      void sourceChanged();
+      void keysChanged();
+
+  private:
+
+      QString m_id;
+      int m_interval;
+      QString m_source;
+      QString m_engine;
+      QStringList m_keys;
+      Plasma::Applet* m_applet;
+      Plasma::DataEngine* m_dataEngine;
+      QString m_connectedSource;
+      QDeclarativeContext* m_context;
+      QDeclarativeOpenMetaObject* m_dmo;
+  };
 }
-
-class DataSource : public QObject
-{
-    Q_OBJECT
-public:
-    DataSource(QObject* parent=0);
-
-    Q_PROPERTY(bool valid READ valid);
-    bool valid() const {return m_applet!=0;}
-
-    Q_PROPERTY(int interval READ interval WRITE setInterval NOTIFY intervalChanged);
-    int interval() const {return m_interval;}
-    void setInterval(int i) {if(i==m_interval) return; m_interval=i; emit intervalChanged();}
-
-    Q_PROPERTY(QString engine READ engine WRITE setEngine NOTIFY engineChanged);
-    QString engine() const {return m_engine;}
-    void setEngine(const QString &e) {if(e==m_engine) return; m_engine=e; emit engineChanged();}
-
-    Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged);
-    QString source() const {return m_source;}
-    void setSource(const QString &s);
-
-    Q_PROPERTY(QStringList keys READ keys NOTIFY keysChanged);
-    QStringList keys() const {return m_keys;}
-
-public slots:
-    void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
-    void setupData();
-
-signals:
-    void intervalChanged();
-    void engineChanged();
-    void sourceChanged();
-    void keysChanged();
-
-private:
-
-    QString m_id;
-    int m_interval;
-    QString m_source;
-    QString m_engine;
-    QStringList m_keys;
-    Plasma::Applet* m_applet;
-    Plasma::DataEngine* m_dataEngine;
-    QString m_connectedSource;
-    QmlContext* m_context;
-};
-QML_DECLARE_TYPE(DataSource);
 #endif

@@ -19,20 +19,21 @@
  */
 
 #include "datasource.h"
-#include "qmlengine.h"
-#include "qmlcontext.h"
+#include "qdeclarativeengine.h"
+#include "qdeclarativecontext.h"
+#include "private/qdeclarativeopenmetaobject_p.h"
 #include <Plasma/Applet>
 #include <QDebug>
 #include <QTimer>
 
-QML_DEFINE_TYPE(Plasma, 0, 1, DataSource, DataSource);
-
+namespace Plasma
+{
 DataSource::DataSource(QObject* parent)
-    :QObject(parent), m_interval(1000), m_applet(0), m_dataEngine(0)
+    : QObject(parent), m_interval(1000), m_applet(0), m_dataEngine(0)
 {
     setObjectName("DataSource");
-
-    m_context = qmlContext(parent);
+    m_dmo = new QDeclarativeOpenMetaObject(this);
+    m_context = QDeclarativeEngine::contextForObject(parent);
     connect(this, SIGNAL(engineChanged()),
             this, SLOT(setupData()));
     connect(this, SIGNAL(sourceChanged()),
@@ -61,27 +62,11 @@ void DataSource::setupData()
         emit keysChanged();
     }
 
-    if(!m_applet){
-        //###Why parent() and not this? only parent() works in tests (@61902afefa)
-        //QmlBinding val("parent", parent(), qmlContext(parent()));
-        //kDebug() << val.expression() << val.value() << QmlContext::activeContext();
-        //m_applet = qobject_cast<Plasma::Applet*>(val.value().value<QObject*>());
-        QObject *parentObject = parent();
-        while (parentObject) {
-            //kDebug()<<"walking to"<<parentObject;
-            m_applet = qobject_cast<Plasma::Applet*>(parentObject);
-            if (!m_applet)
-                parentObject = parentObject->parent();
-        }
+    Plasma::DataEngine* de = dataEngine(m_engine);
+    if (!de) {
+      kWarning()<<"We're fucked we don't have a dataEngine";
+      return;
     }
-
-    if(!m_applet){
-        kWarning() << "Cannot find applet. DataSources will not work";
-        return;
-    }
-    //kDebug() << "Can find applet. QML Datasources should work";
-
-    Plasma::DataEngine* de = m_applet->dataEngine(m_engine);
     de->connectSource(m_source, this, m_interval);
     m_dataEngine = de;
     m_connectedSource = m_source;
@@ -97,7 +82,7 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
         QString ourKey = key.toLower();
         if(ourKey=="interval" || ourKey=="engine" || ourKey=="source")
             continue;
-        //m_dmo->setValue(ourKey.toLatin1(), data.value(key));
+        m_dmo->setValue(ourKey.toLatin1(), data.value(key));
         newKeys<<ourKey;
     }
 
@@ -106,5 +91,5 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
         m_keys = newKeys;
     }
 }
-
+}
 #include "datasource.moc"

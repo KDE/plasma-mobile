@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <QtDeclarative/qml.h>
+#include <QtDeclarative/qdeclarative.h>
 #include <plasma/widgets/lineedit.h>
 #include <plasma/widgets/slider.h>
 #include <plasma/widgets/spinbox.h>
@@ -32,6 +32,9 @@
 #include <plasma/animator.h>
 #include <plasma/svg.h>
 #include <plasma/framesvg.h>
+#include "datasource.h"
+
+void PLASMA_EXPORT setupBindings();
 
 QML_DECLARE_TYPE(Plasma::TextEdit)
 QML_DECLARE_TYPE(Plasma::LineEdit)
@@ -47,4 +50,6 @@ QML_DECLARE_TYPE(Plasma::FrameSvg)
 QML_DECLARE_TYPE(Plasma::ExtenderItem)
 QML_DECLARE_TYPE(Plasma::Extender)
 QML_DECLARE_TYPE(Plasma::Animator)
+
+//QML_DECLARE_TYPE(Plasma::DataSource)
 

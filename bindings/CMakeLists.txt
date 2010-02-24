@@ -4,7 +4,7 @@ include(KDE4Defaults)
 
 set(bindings_SRCS
     plasmabindings.cpp
-    datasource.cpp
+    #datasource.cpp
     )
 
 INCLUDE_DIRECTORIES(

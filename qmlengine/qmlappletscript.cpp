@@ -20,8 +20,8 @@
 
 #include "qmlappletscript.h"
 
-#include <QmlComponent>
-#include <QmlEngine>
+#include <QDeclarativeComponent>
+#include <QDeclarativeEngine>
 #include <QGraphicsLinearLayout>
 
 #include <KGlobalSettings>
@@ -44,8 +44,8 @@ public:
     void errorPrint();
     void execute(const QUrl &fileName);
     void finishExecute();
-    QmlEngine* engine;
-    QmlComponent* component;
+    QDeclarativeEngine* engine;
+    QDeclarativeComponent* component;
 
     bool loaded;
     QmlAppletScript* q;
@@ -56,8 +56,8 @@ void QmlAppletScriptPrivate::errorPrint()
     loaded=false;
     QString errorStr = "Error loading QML file.\n";
     if(component->isError()){
-        QList<QmlError> errors = component->errors();
-        foreach (const QmlError &error, errors) {
+        QList<QDeclarativeError> errors = component->errors();
+        foreach (const QDeclarativeError &error, errors) {
             errorStr += (error.line()>0?QString::number(error.line()) + ": ":"")
                 + error.description() + '\n';
         }
@@ -74,8 +74,8 @@ void QmlAppletScriptPrivate::execute(const QUrl &fileName)
     if (component)
       delete component;
     
-    engine = new QmlEngine(q);
-    component = new QmlComponent(engine, fileName, q);
+    engine = new QDeclarativeEngine(q);
+    component = new QDeclarativeComponent(engine, fileName, q);
 
     if(component->isReady() || component->isError())
         finishExecute();
@@ -103,7 +103,7 @@ void QmlAppletScriptPrivate::finishExecute()
         if (object)
             object->setParent(q->applet());
     } else {
-        //TODO It's a QmlGraphicsItem
+        //TODO It's a QDeclarativeItem
     }
 }
 

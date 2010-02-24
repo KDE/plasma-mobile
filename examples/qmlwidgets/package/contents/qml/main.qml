@@ -2,6 +2,7 @@ import Qt 4.6
 import Plasma 0.1 as Plasma
 Plasma.PushButton {
     id : myButton
-    geometry : Qt.rect(50, 100, 150, 150);
+    width : 150
+    height : 150
     text : "I am a plasma pusbutton"
 }

@@ -20,15 +20,20 @@
 
 #include"plasmabindings.h"
 
-QML_DEFINE_TYPE(Plasma, 0, 1, Label, Plasma::Label)
-QML_DEFINE_TYPE(Plasma, 0, 1, Checkbox, Plasma::CheckBox)
-QML_DEFINE_TYPE(Plasma, 0, 1, TextEdit, Plasma::TextEdit)
-QML_DEFINE_TYPE(Plasma, 0, 1, LineEdit, Plasma::LineEdit)
-QML_DEFINE_TYPE(Plasma, 0, 1, PushButton, Plasma::PushButton)
-QML_DEFINE_TYPE(Plasma, 0, 1, Slider, Plasma::Slider)
-QML_DEFINE_TYPE(Plasma, 0, 1, SpinBox, Plasma::SpinBox)
+void setupBindings() {
 
-QML_DEFINE_TYPE(Plasma, 0, 1, SvgWidget, Plasma::SvgWidget)
-QML_DEFINE_TYPE(Plasma, 0, 1, Svg, Plasma::Svg)
-QML_DEFINE_TYPE(Plasma, 0, 1, FrameSvg, Plasma::FrameSvg)
+QML_REGISTER_TYPE(Plasma, 0, 1, Label, Plasma::Label);
+QML_REGISTER_TYPE(Plasma, 0, 1, Checkbox, Plasma::CheckBox);
+QML_REGISTER_TYPE(Plasma, 0, 1, TextEdit, Plasma::TextEdit);
+QML_REGISTER_TYPE(Plasma, 0, 1, LineEdit, Plasma::LineEdit);
+QML_REGISTER_TYPE(Plasma, 0, 1, PushButton, Plasma::PushButton);
+QML_REGISTER_TYPE(Plasma, 0, 1, Slider, Plasma::Slider);
+QML_REGISTER_TYPE(Plasma, 0, 1, SpinBox, Plasma::SpinBox);
 
+QML_REGISTER_TYPE(Plasma, 0, 1, SvgWidget, Plasma::SvgWidget);
+QML_REGISTER_TYPE(Plasma, 0, 1, Svg, Plasma::Svg);
+QML_REGISTER_TYPE(Plasma, 0, 1, FrameSvg, Plasma::FrameSvg);
+
+//QML_REGISTER_TYPE(Plasma, 0, 1, DataSource, Plasma::DataSource);
+
+}
