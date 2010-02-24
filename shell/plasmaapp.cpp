@@ -26,6 +26,7 @@
 #include <unistd.h>
 
 #include <QApplication>
+#include <QDesktopWidget>
 #include <QPixmapCache>
 #include <QtDBus/QtDBus>
 
@@ -39,8 +40,6 @@
 #include <KServiceTypeTrader>
 
 #include <ksmserver_interface.h>
-
-#include <kephal/screens.h>
 
 #include <Plasma/Containment>
 #include <Plasma/Theme>
@@ -83,7 +82,7 @@ PlasmaApp::PlasmaApp()
     int width = 800;
     int height = 480;
     if (isDesktop) {
-        QRect rect = Kephal::ScreenUtils::screenGeometry(m_mainView->screen());
+        QRect rect = QApplication::desktop()->screenGeometry(m_mainView->screen());
         width = rect.width();
         height = rect.height();
     } else {

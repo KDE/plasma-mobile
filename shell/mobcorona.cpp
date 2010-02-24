@@ -30,8 +30,6 @@
 #include <KGlobalSettings>
 #include <KStandardDirs>
 
-#include <kephal/screens.h>
-
 #include <Plasma/Containment>
 #include <Plasma/DataEngineManager>
 
@@ -49,7 +47,6 @@ void MobCorona::init()
 {
     Plasma::ContainmentActionsPluginsConfig desktopPlugins;
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::Vertical, "switchdesktop");
-    desktopPlugins.addPlugin(Qt::NoModifier, Qt::MidButton, "paste");
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
     Plasma::ContainmentActionsPluginsConfig panelPlugins;
     panelPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
@@ -73,7 +70,7 @@ void MobCorona::loadDefaultLayout()
     // used to force a save into the config file
     KConfigGroup invalidConfig;
 
-    // FIXME: need to load the Netbook-specific containment
+    // FIXME: need to load the Mobile-specific containment
     // passing in an empty string will get us whatever the default
     // containment type is!
     Plasma::Containment* c = addContainmentDelayed(QString());
@@ -129,12 +126,12 @@ Plasma::Containment *MobCorona::findFreeContainment() const
 
 int MobCorona::numScreens() const
 {
-    return Kephal::ScreenUtils::numScreens();
+    return QApplication::desktop()->screenCount();
 }
 
 QRect MobCorona::screenGeometry(int id) const
 {
-    return Kephal::ScreenUtils::screenGeometry(id);
+    return QApplication::desktop()->screenGeometry(id);
 }
 
 QRegion MobCorona::availableScreenRegion(int id) const
