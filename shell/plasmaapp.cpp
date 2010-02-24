@@ -206,8 +206,12 @@ void PlasmaApp::updateMainSlot()
     // resizing the containment will always resize it's parent item
     next->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
     next->resize(800, 480);
-
-
+    if (current->parentItem()) {
+        current->parentItem()->setParentItem(0);
+    } else {
+        current->setParentItem(0);
+    }
+    current->parentItem()->setPos(900, 900);
     current = next;
     next = 0;
 }
