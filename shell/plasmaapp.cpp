@@ -163,15 +163,8 @@ void PlasmaApp::setupHomeScreen()
     m_panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
     m_panel->setZValue(9999);
 
-    m_mainView->setSceneRect(mainItem->x(), mainItem->y(), mainItem->width(), mainItem->height());
-    kDebug() << "<--------------------------------->";
-    kDebug() << "x: " << mainItem->x();
-    kDebug() << "y: " << mainItem->y();
-    kDebug() << "w: " << mainItem->width();
-    kDebug() << "h: " << mainItem->height();
-    kDebug() << "view scene rect: " << m_mainView->sceneRect();
-    kDebug() << "<--------------------------------->";
-    m_mainView->updateGeometry();
+    m_mainView->setSceneRect(mainItem->x(), mainItem->y(),
+                             mainItem->width(), mainItem->height());
 }
 
 Plasma::Corona* PlasmaApp::corona()
@@ -188,6 +181,8 @@ Plasma::Corona* PlasmaApp::corona()
         // setup our QML home screen;
         setupHomeScreen();
         m_corona->initializeLayout();
+
+        m_mainView->setScene(m_corona);
         m_mainView->show();
     }
     return m_corona;
