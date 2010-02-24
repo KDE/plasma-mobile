@@ -57,11 +57,12 @@ public:
 
 protected:
     void setupHomeScreen();
+    void teste(Plasma::Containment *containment);
 
 private Q_SLOTS:
     void cleanup();
     void mainContainmentActivated();
-    void createView(Plasma::Containment *containment);
+    void manageNewContainment(Plasma::Containment *containment);
     void syncConfig();
 
 private:
@@ -75,6 +76,8 @@ private:
     QDeclarativeItem *m_mainSlot;
     QDeclarativeItem *m_spareSlot;
     QDeclarativeItem *m_panel;
+
+    QHash<int, Plasma::Containment*> containments;
 };
 
 #endif // multiple inclusion guard

@@ -119,6 +119,27 @@ PlasmaApp::~PlasmaApp()
 {
 }
 
+void PlasmaApp::cleanup()
+{
+    if (m_corona) {
+        m_corona->saveLayout();
+    }
+
+    delete m_mainView;
+    m_mainView = 0;
+
+    delete m_corona;
+    m_corona = 0;
+
+    //TODO: This manual sync() should not be necessary?
+    syncConfig();
+}
+
+void PlasmaApp::syncConfig()
+{
+    KGlobal::config()->sync();
+}
+
 void PlasmaApp::setupHomeScreen()
 {
     QUrl url(KStandardDirs::locate("appdata", "containments/homescreen/HomeScreen.qml"));
@@ -141,42 +162,31 @@ void PlasmaApp::setupHomeScreen()
 
     m_panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
     m_panel->setZValue(9999);
-}
 
-void PlasmaApp::cleanup()
-{
-    if (m_corona) {
-        m_corona->saveLayout();
-    }
-
-    delete m_mainView;
-    m_mainView = 0;
-
-    delete m_corona;
-    m_corona = 0;
-
-    //TODO: This manual sync() should not be necessary?
-    syncConfig();
-}
-
-void PlasmaApp::syncConfig()
-{
-    KGlobal::config()->sync();
+    m_mainView->setSceneRect(mainItem->x(), mainItem->y(), mainItem->width(), mainItem->height());
+    kDebug() << "<--------------------------------->";
+    kDebug() << "x: " << mainItem->x();
+    kDebug() << "y: " << mainItem->y();
+    kDebug() << "w: " << mainItem->width();
+    kDebug() << "h: " << mainItem->height();
+    kDebug() << "view scene rect: " << m_mainView->sceneRect();
+    kDebug() << "<--------------------------------->";
+    m_mainView->updateGeometry();
 }
 
 Plasma::Corona* PlasmaApp::corona()
 {
     if (!m_corona) {
         m_corona = new MobCorona(this);
+        m_corona->setItemIndexMethod(QGraphicsScene::NoIndex);
+
         connect(m_corona, SIGNAL(containmentAdded(Plasma::Containment*)),
-                this, SLOT(createView(Plasma::Containment*)));
+                this, SLOT(manageNewContainment(Plasma::Containment*)));
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
 
-        m_corona->setItemIndexMethod(QGraphicsScene::NoIndex);
 
         // setup our QML home screen;
         setupHomeScreen();
-
         m_corona->initializeLayout();
         m_mainView->show();
     }
@@ -217,7 +227,7 @@ void PlasmaApp::mainContainmentActivated()
     }
 }
 
-void PlasmaApp::createView(Plasma::Containment *containment)
+void PlasmaApp::teste(Plasma::Containment *containment)
 {
     // we should deal with the layout logic here
     // discover if we setup the home containment, etc..
@@ -229,10 +239,20 @@ void PlasmaApp::createView(Plasma::Containment *containment)
 
     // resizing the containment will always resize it's parent item
     containment->resize(m_mainSlot->width(), m_mainSlot->height());
+}
+
+void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
+{
+    if (containments.size() == 0) {
+        teste(containment);
+    }
+
+    // add the containment and it identifier to a hash to enable us
+    // to retrieve it later.
+    containments.insert(containment->id(), containment);
 
     // set the containment on the mainview to do plasma stuff
-    m_mainView->setContainment(containment);
-    containment->setScreen(0);
+    //    m_mainView->setContainment(containment);
 }
 
 #include "plasmaapp.moc"
