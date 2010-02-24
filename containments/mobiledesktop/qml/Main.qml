@@ -16,11 +16,6 @@ Flipable {
           angle: flip.angle
       }
 
-      /*Image {
-        id : activity1;
-        source: "images/background.png";
-      }*/
-
       front : containment;
       back: Rectangle {
           width: 800;
