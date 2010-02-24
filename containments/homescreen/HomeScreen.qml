@@ -2,6 +2,8 @@ import Qt 4.6
 
 Rectangle {
     id: homescreen;
+    x: 0;
+    y: 0;
     width: 800;
     height: 480;
     color:"black"
@@ -9,6 +11,10 @@ Rectangle {
     Item {
         id: mainSlot;
         objectName: "mainSlot";
+        x: 0;
+        y: 0;
+        width: homescreen.width;
+        height: homescreen.height;
 
         state : "Visible"
         transformOrigin : Item.Center
@@ -48,6 +54,10 @@ Rectangle {
     Item {
         id : spareSlot;
         objectName: "spareSlot";
+        x: 0;
+        y: -homescreen.height;
+        width: homescreen.width;
+        height: homescreen.height;
 
         state : "Hidden"
         width : homescreen.width;

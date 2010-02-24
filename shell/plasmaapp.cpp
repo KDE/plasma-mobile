@@ -253,12 +253,11 @@ void PlasmaApp::setupContainment(Plasma::Containment *containment)
         }
 
         containment->resize(800, 480);
-        containment->parentItem()->setPos(m_spareSlot->x(), m_spareSlot->y());
+        containment->parentItem()->setPos(0, 0);
 
         // change state
         m_mainSlot->setProperty("state", "Hidden");
-        current = containment;
-        //        m_spareSlot->setProperty("state", "Visible");
+        m_spareSlot->setProperty("state", "Visible");
     }
 }
 
