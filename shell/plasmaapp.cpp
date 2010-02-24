@@ -64,7 +64,8 @@ PlasmaApp* PlasmaApp::self()
 PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
       m_corona(0),
-      m_mainView(0)
+      m_mainView(0),
+      current(0)
 {
     setupBindings();
     KGlobal::locale()->insertCatalog("libplasma");
@@ -178,6 +179,8 @@ void PlasmaApp::changeActivity()
     QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(sender());
     Plasma::Containment *containment = containments.value(item->objectName().toInt());
 
+    kDebug() << "---------> CHANGED ACTIVITY";
+
     // found it!
     if (containment) {
         setupContainment(containment);
@@ -242,16 +245,21 @@ void PlasmaApp::mainContainmentActivated()
 
 void PlasmaApp::setupContainment(Plasma::Containment *containment)
 {
-    // we should deal with the layout logic here
-    // discover if we setup the home containment, etc..
-    if (containment->parentItem()) {
-        containment->parentItem()->setParentItem(m_mainSlot);
-    } else {
-        containment->setParentItem(m_mainSlot);
-    }
+    if (current) {
+        if (containment->parentItem()) {
+            containment->parentItem()->setParentItem(m_spareSlot);
+        } else {
+            containment->setParentItem(m_spareSlot);
+        }
 
-    // resizing the containment will always resize it's parent item
-    containment->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
+        containment->resize(800, 480);
+        containment->parentItem()->setPos(m_spareSlot->x(), m_spareSlot->y());
+
+        // change state
+        m_mainSlot->setProperty("state", "Hidden");
+        current = containment;
+        //        m_spareSlot->setProperty("state", "Visible");
+    }
 }
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
@@ -260,23 +268,25 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     // to retrieve it later.
     containments.insert(containment->id(), containment);
 
-
+    // we need our homescreen to show something!
     if (containment->id() == 1) {
-        setupContainment(containment);
+        // we should deal with the layout logic here
+        // discover if we setup the home containment, etc..
+        if (containment->parentItem()) {
+            containment->parentItem()->setParentItem(m_mainSlot);
+        } else {
+            containment->setParentItem(m_mainSlot);
+        }
+
+        // resizing the containment will always resize it's parent item
+        containment->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
+        containment->resize(800, 480);
+        current = containment;
         return;
     }
 
     // XXX: FIX ME with beautiful values :)
     containment->parentItem()->setPos(900, 900);
-
-    kDebug() << "--------------------------------------------------";
-    QDeclarativeItem *obj = dynamic_cast<QDeclarativeItem*>(containment->parentItem());
-    kDebug() << "---> x: " << containment->x();
-    kDebug() << "---> y: " << containment->y();
-    kDebug() << "---> s: " << containment->size();
-    kDebug() << "---> pw: " << obj->width();
-    kDebug() << "---> ph: " << obj->height();
-    kDebug() << "--------------------------------------------------";
 }
 
 #include "plasmaapp.moc"

@@ -78,6 +78,7 @@ private:
     QDeclarativeItem *m_spareSlot;
     QDeclarativeItem *m_panel;
 
+    Plasma::Containment *current;
     QHash<int, Plasma::Containment*> containments;
 };
 
