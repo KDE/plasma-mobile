@@ -19,34 +19,61 @@ Rectangle {
         state : "Visible"
         transformOrigin : Item.Center
         //source: "images/background.png";
-        //anchors.fill: parent;
 
         states: [
             State {
                 name: "Visible"
-                PropertyChanges { target: mainSlot; scale: 1 }
-                     PropertyChanges { target: mainSlot; y: 0 }
+                PropertyChanges {
+                    target: mainSlot;
+                    scale: 1;
+                }
+                PropertyChanges {
+                    target: mainSlot;
+                    y: 0;
+                }
             },
             State {
                 name: "Hidden"
-                PropertyChanges { target: mainSlot; scale: 0.9 }
-                PropertyChanges { target: mainSlot; y: homescreen.height }
+                PropertyChanges {
+                    target: mainSlot;
+                    scale: 0.9;
+                }
+                PropertyChanges {
+                    target: mainSlot;
+                    y: homescreen.height;
+                }
             }
         ]
         transitions: Transition {
             from: "Visible"
             to: "Hidden"
             SequentialAnimation {
-                NumberAnimation { properties: "scale"; easing.type: "InQuad"; duration: 150 }
-                NumberAnimation { properties: "y"; easing.type: "InQuad"; duration: 400 }
+                NumberAnimation {
+                    properties: "scale";
+                    easing.type: "InQuad";
+                    duration: 150;
+                }
+                NumberAnimation {
+                    properties: "y";
+                    easing.type: "InQuad";
+                    duration: 400;
+                }
             }
         }
         transitions: Transition {
             from: "Hidden"
             to: "Visible"
             SequentialAnimation {
-                NumberAnimation { properties: "y"; easing.type: "InQuad"; duration: 500 }
-                NumberAnimation { properties: "scale"; easing.type: "InQuad"; duration: 150 }
+                NumberAnimation {
+                    properties: "y";
+                    easing.type: "InQuad";
+                    duration: 500;
+                }
+                NumberAnimation {
+                    properties: "scale";
+                    easing.type: "InQuad";
+                    duration: 150;
+                }
             }
         }
     }
