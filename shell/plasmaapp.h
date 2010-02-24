@@ -22,9 +22,9 @@
 #define PLASMA_APP_H
 
 #include <QList>
+#include <QtDeclarative>
 
 #include <KUniqueApplication>
-
 #include <plasma/plasma.h>
 
 #ifdef Q_WS_X11
@@ -49,20 +49,32 @@ public:
 
     static PlasmaApp* self();
     static bool hasComposite();
-    
+
     void notifyStartup(bool completed);
     Plasma::Corona* corona();
 
     PlasmaApp();
+
+protected:
+    void setupHomeScreen();
+
 private Q_SLOTS:
     void cleanup();
     void mainContainmentActivated();
     void createView(Plasma::Containment *containment);
     void syncConfig();
-    void showWidgetExplorer();
+
 private:
     MobCorona *m_corona;
     MobView *m_mainView;
+
+    QDeclarativeEngine *m_engine;
+    QDeclarativeContext *m_context;
+    QDeclarativeComponent *m_homescreen;
+
+    QDeclarativeItem *m_mainSlot;
+    QDeclarativeItem *m_spareSlot;
+    QDeclarativeItem *m_panel;
 };
 
 #endif // multiple inclusion guard

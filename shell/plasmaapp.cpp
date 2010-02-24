@@ -101,23 +101,46 @@ PlasmaApp::PlasmaApp()
     //setIsDesktop(isDesktop);
     m_mainView->setFixedSize(width, height);
     m_mainView->move(0,0);
-    
+
     KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
     const QString themeName = cg.readEntry("name", "air-mobile");
     Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
     Plasma::Theme::defaultTheme()->setThemeName(themeName);
-    
+
     cg = KConfigGroup(KGlobal::config(), "General");
     Plasma::Theme::defaultTheme()->setFont(cg.readEntry("desktopFont", font()));
 
-    // this line initializes the corona.
+    // this line initializes the corona and setups the main qml homescreen
     corona();
-
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
 }
 
 PlasmaApp::~PlasmaApp()
 {
+}
+
+void PlasmaApp::setupHomeScreen()
+{
+    QUrl url(KStandardDirs::locate("appdata", "containments/homescreen/HomeScreen.qml"));
+
+    m_engine = new QDeclarativeEngine(this);
+    m_homescreen = new QDeclarativeComponent(m_engine, url, this);
+
+    QObject *obj = m_homescreen->create();
+    QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(obj);
+
+    // adds the homescreen to corona
+    m_corona->addItem(mainItem);
+
+    // get references for the main objects that we'll need to deal with
+    m_mainSlot = mainItem->findChild<QDeclarativeItem*>("mainSlot");
+    m_mainSlot->setZValue(9997);
+
+    m_spareSlot = mainItem->findChild<QDeclarativeItem*>("spareSlot");
+    m_mainSlot->setZValue(9998);
+
+    m_panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
+    m_panel->setZValue(9999);
 }
 
 void PlasmaApp::cleanup()
@@ -150,9 +173,12 @@ Plasma::Corona* PlasmaApp::corona()
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
 
         m_corona->setItemIndexMethod(QGraphicsScene::NoIndex);
+
+        // setup our QML home screen;
+        setupHomeScreen();
+
         m_corona->initializeLayout();
         m_mainView->show();
-
     }
     return m_corona;
 }
@@ -177,11 +203,6 @@ void PlasmaApp::notifyStartup(bool completed)
 void PlasmaApp::mainContainmentActivated()
 {
     m_mainView->setWindowTitle(m_mainView->containment()->activity());
-
-    /*if (!m_isDesktop) {
-        return;
-    }*/
-
     const WId id = m_mainView->effectiveWinId();
 
     QWidget * activeWindow = QApplication::activeWindow();
@@ -198,26 +219,20 @@ void PlasmaApp::mainContainmentActivated()
 
 void PlasmaApp::createView(Plasma::Containment *containment)
 {
-    m_mainView->setContainment(containment);
-    connect(containment, SIGNAL(showAddWidgetsInterface(QPointF)), this, SLOT(showWidgetExplorer()));
-    containment->setScreen(0);
-}
-
-void PlasmaApp::showWidgetExplorer()
-{
-    kDebug()<<"Implement Me : Widget Explorer";
-    foreach (const KPluginInfo &info, Plasma::Applet::listAppletInfo(QString())) {
-        //kDebug() << info.pluginName() << "NoDisplay" << info.property("NoDisplay").toBool();
-        if (info.property("NoDisplay").toBool() || info.category() == i18n("Containments")) {
-            // we don't want to show the hidden category
-            continue;
-        }
-        kDebug() << info.pluginName() << " is the name of the plugin\n";
-
-        //qDebug() << info.name() << info.property("X-Plasma-Thumbnail");
-        //qDebug() << info.entryPath();
-
+    // we should deal with the layout logic here
+    // discover if we setup the home containment, etc..
+    if (containment->parentItem()) {
+        containment->parentItem()->setParentItem(m_mainSlot);
+    } else {
+        containment->setParentItem(m_mainSlot);
     }
+
+    // resizing the containment will always resize it's parent item
+    containment->resize(m_mainSlot->width(), m_mainSlot->height());
+
+    // set the containment on the mainview to do plasma stuff
+    m_mainView->setContainment(containment);
+    containment->setScreen(0);
 }
 
 #include "plasmaapp.moc"
