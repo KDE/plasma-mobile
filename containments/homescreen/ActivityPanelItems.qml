@@ -1,92 +1,113 @@
 import Qt 4.6
 
-Item {
-    id: activitypanelitems;
+Row {
+    id: shortcuts;
+    spacing: 45;
 
-    Row {
-        id: shortcuts;
-        spacing: 45;
+    anchors.horizontalCenter: parent.horizontalCenter;
+    anchors.bottom: parent.bottom;
 
-        anchors.horizontalCenter: parent.horizontalCenter;
-        anchors.bottom: parent.bottom;
+    Item {
+        objectName: "2";
+        signal clicked;
 
-        Item {
-            width: internet.width;
-            height: internet.height;
+        width: internet.width;
+        height: internet.height;
 
-            Image {
-                id: internet;
-                source: "images/internet.png";
-            }
-            MouseArea {
-                anchors.fill: internet;
-                onClicked: {
-                    console.log("Clicked internet :)");
-                }
+        Image {
+            id: internet;
+            source: "images/internet.png";
+        }
+        MouseArea {
+            objectName: "mousearea";
+            anchors.fill: internet;
+            onClicked: {
+                parent.clicked();
+                console.log("Clicked internet :)");
             }
         }
+    }
 
-        Item {
-            width: instantmessaging.width;
-            height: instantmessaging.height;
+    Item {
+        objectName: "3";
+        signal clicked;
 
-            Image {
-                id: instantmessaging;
-                source: "images/im.png";
-            }
-            MouseArea {
-                anchors.fill: instantmessaging;
-                onClicked: {
-                    console.log("Clicked im :)");
-                }
+        width: instantmessaging.width;
+        height: instantmessaging.height;
+
+        Image {
+            id: instantmessaging;
+            source: "images/im.png";
+        }
+        MouseArea {
+            objectName: "mousearea";
+            anchors.fill: instantmessaging;
+            onClicked: {
+                parent.clicked();
+                console.log("Clicked im :)");
             }
         }
+    }
 
-        Item {
-            width: phone.width;
-            height: phone.height;
+    Item {
+        objectName: "4";
+        signal clicked;
 
-            Image {
-                id: phone;
-                source: "images/phone.png";
-            }
-            MouseArea {
-                anchors.fill: phone;
-                onClicked: {
-                    console.log("Clicked phone :)");
-                }
+        width: phone.width;
+        height: phone.height;
+
+        Image {
+            id: phone;
+            source: "images/phone.png";
+        }
+        MouseArea {
+            objectName: "mousearea";
+            anchors.fill: phone;
+            onClicked: {
+                parent.clicked();
+                console.log("Clicked phone :)");
             }
         }
+    }
 
-        Item {
-            width: social.width;
-            height: social.height;
+    Item {
+        objectName: "5";
+        signal clicked;
 
-            Image {
-                id: social;
-                source: "images/social.png";
-            }
-            MouseArea {
-                anchors.fill: social;
-                onClicked: {
-                    console.log("Clicked social :)");
-                }
+        width: social.width;
+        height: social.height;
+
+        Image {
+            id: social;
+            source: "images/social.png";
+        }
+        MouseArea {
+            objectName: "mousearea";
+            anchors.fill: social;
+            onClicked: {
+                parent.clicked();
+                console.log("Clicked social :)");
             }
         }
+    }
 
-        Item {
-            width: games.width;
-            height: games.height;
+    Item {
+        objectName: "6";
+        signal clicked;
 
-            Image {
-                id: games;
-                source: "images/games.png";
-            }
-            MouseArea {
-                anchors.fill: games;
-                onClicked: {
-                    console.log("Clicked games :)");
-                }
+        width: games.width;
+        height: games.height;
+
+        Image {
+            id: games;
+            source: "images/games.png";
+        }
+        MouseArea {
+            objectName: "mousearea";
+            anchors.fill: games;
+            onClicked: {
+                parent.clicked();
+                console.log("Clicked games :)");
             }
         }
     }

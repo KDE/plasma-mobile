@@ -64,6 +64,7 @@ private Q_SLOTS:
     void mainContainmentActivated();
     void manageNewContainment(Plasma::Containment *containment);
     void syncConfig();
+    void changeActivity();
 
 private:
     MobCorona *m_corona;

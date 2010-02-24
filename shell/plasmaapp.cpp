@@ -165,6 +165,18 @@ void PlasmaApp::setupHomeScreen()
 
     m_mainView->setSceneRect(mainItem->x(), mainItem->y(),
                              mainItem->width(), mainItem->height());
+
+    QDeclarativeItem *panelItems = m_panel->findChild<QDeclarativeItem*>("panelitems");
+
+    foreach(QObject *item, panelItems->children()) {
+        connect(item, SIGNAL(clicked()), this, SLOT(changeActivity()));
+    }
+}
+
+void PlasmaApp::changeActivity()
+{
+    QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(sender());
+    kDebug() << "----> Name: " << item->objectName();
 }
 
 Plasma::Corona* PlasmaApp::corona()
@@ -195,7 +207,8 @@ bool PlasmaApp::hasComposite()
 
 void PlasmaApp::notifyStartup(bool completed)
 {
-    org::kde::KSMServerInterface ksmserver("org.kde.ksmserver", "/KSMServer", QDBusConnection::sessionBus());
+    org::kde::KSMServerInterface ksmserver("org.kde.ksmserver",
+                                           "/KSMServer", QDBusConnection::sessionBus());
 
     const QString startupID("workspace desktop");
     if (completed) {
@@ -233,7 +246,6 @@ void PlasmaApp::teste(Plasma::Containment *containment)
     }
 
     // resizing the containment will always resize it's parent item
-    //containment->resize(m_mainSlot->width(), m_mainSlot->height());
     containment->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
 }
 
@@ -251,12 +263,6 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     // XXX: FIX ME with beautiful values :)
     containment->parentItem()->setPos(900, 900);
-
-
-    //containment->resize(m_mainSlot->width(), m_mainSlot->height());
-    //     containment->parentItem()->setSize(800, 480);
-    //     containment->resize(800, 480);
-    //     containment->setPos(0, 0);
 
     kDebug() << "--------------------------------------------------";
     QDeclarativeItem *obj = dynamic_cast<QDeclarativeItem*>(containment->parentItem());

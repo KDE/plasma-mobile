@@ -71,6 +71,7 @@ Item {
     }
 
     ActivityPanelItems {
+        objectName: "panelitems";
         id: shortcuts;
         anchors.horizontalCenter: activitypanel.horizontalCenter;
         anchors.bottom: activitypanel.bottom;
