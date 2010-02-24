@@ -94,9 +94,25 @@ void MobCorona::loadDefaultLayout()
     c->flushPendingConstraintsEvents();
     c->save(invalidConfig);
 
-    emit containmentAdded(c);
+    // stacks all the containments at the same place
+    c->setPos(0, 0);
 
+    emit containmentAdded(c);
     requestConfigSync();
+}
+
+void MobCorona::layoutContainments()
+{
+    // we dont need any layout for this as we are going to bind the position
+    // of the containments to QML items to animate them. As soon as we don't
+    // need the containment anymore we can just let it stay wherever it is as
+    // long as it's offscreen (the view is not 'looking' at it).
+
+    // As this method is called from containments resize event and itemChange
+    // if we let the default implementation work here we could have bad surprises
+    // of containments appearing in the view when putting them in the default
+    // grid-like layout.
+    return;
 }
 
 Plasma::Applet *MobCorona::loadDefaultApplet(const QString &pluginName, Plasma::Containment *c)
@@ -107,7 +123,6 @@ Plasma::Applet *MobCorona::loadDefaultApplet(const QString &pluginName, Plasma::
     if (applet) {
         c->addApplet(applet);
     }
-
     return applet;
 }
 
@@ -115,12 +130,11 @@ Plasma::Containment *MobCorona::findFreeContainment() const
 {
     foreach (Plasma::Containment *cont, containments()) {
         if ((cont->containmentType() == Plasma::Containment::DesktopContainment ||
-            cont->containmentType() == Plasma::Containment::CustomContainment) &&
+             cont->containmentType() == Plasma::Containment::CustomContainment) &&
             cont->screen() == -1 && !offscreenWidgets().contains(cont)) {
             return cont;
         }
     }
-
     return 0;
 }
 

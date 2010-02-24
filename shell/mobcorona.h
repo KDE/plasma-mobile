@@ -43,12 +43,14 @@ public:
      * Loads the default (system wide) layout for this user
      **/
     void loadDefaultLayout();
-
     Plasma::Containment *findFreeContainment() const;
 
     virtual int numScreens() const;
     virtual QRect screenGeometry(int id) const;
     virtual QRegion availableScreenRegion(int id) const;
+
+public slots:
+    void layoutContainments();
 
 private:
     void init();
