@@ -70,6 +70,12 @@ Item {
         }
     }
 
+    Timer {
+        id : timer
+        interval: 4000; running: false;
+        onTriggered:  { activitypanel.state = 'hidden' }
+    }
+
     ActivityPanelItems {
         objectName: "panelitems";
         id: shortcuts;
@@ -95,6 +101,10 @@ Item {
             PropertyChanges {
                 target: hint;
                 opacity: 0;
+            }
+            PropertyChanges {
+                target: timer;
+                running: true
             }
         },
         State {
