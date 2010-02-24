@@ -226,28 +226,37 @@ void PlasmaApp::teste(Plasma::Containment *containment)
 {
     // we should deal with the layout logic here
     // discover if we setup the home containment, etc..
-    if (containment->parentItem()) {
-        containment->parentItem()->setParentItem(m_mainSlot);
-    } else {
-        containment->setParentItem(m_mainSlot);
-    }
+//     if (containment->parentItem()) {
+    containment->parentItem()->setParentItem(m_mainSlot);
+//     } else {
+    //containment->setParentItem(m_mainSlot);
+        //    }
 
     // resizing the containment will always resize it's parent item
     containment->resize(m_mainSlot->width(), m_mainSlot->height());
+    containment->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
 }
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
-    if (containments.size() == 0) {
-        teste(containment);
-    }
-
     // add the containment and it identifier to a hash to enable us
     // to retrieve it later.
     containments.insert(containment->id(), containment);
 
-    // set the containment on the mainview to do plasma stuff
-    //    m_mainView->setContainment(containment);
+    kDebug() << "<-------------------------------------------------->";
+    kDebug() << "Containment: " << containment->id();
+
+    if (containment->id() == 2) {
+        kDebug() << "--> INSIDER";
+        teste(containment);
+        kDebug() << "<-------------------------------------------------->";
+        return;
+    }
+
+    kDebug() << "<-------------------------------------------------->";
+
+    // XXX: FIX ME with beautiful values :)
+    containment->parentItem()->setPos(900, 900);
 }
 
 #include "plasmaapp.moc"
