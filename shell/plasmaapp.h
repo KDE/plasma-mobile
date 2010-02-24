@@ -57,7 +57,7 @@ public:
 
 protected:
     void setupHomeScreen();
-    void teste(Plasma::Containment *containment);
+    void setupContainment(Plasma::Containment *containment);
 
 private Q_SLOTS:
     void cleanup();

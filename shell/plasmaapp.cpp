@@ -176,7 +176,12 @@ void PlasmaApp::setupHomeScreen()
 void PlasmaApp::changeActivity()
 {
     QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(sender());
-    kDebug() << "----> Name: " << item->objectName();
+    Plasma::Containment *containment = containments.value(item->objectName().toInt());
+
+    // found it!
+    if (containment) {
+        setupContainment(containment);
+    }
 }
 
 Plasma::Corona* PlasmaApp::corona()
@@ -235,7 +240,7 @@ void PlasmaApp::mainContainmentActivated()
     }
 }
 
-void PlasmaApp::teste(Plasma::Containment *containment)
+void PlasmaApp::setupContainment(Plasma::Containment *containment)
 {
     // we should deal with the layout logic here
     // discover if we setup the home containment, etc..
@@ -257,7 +262,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
 
     if (containment->id() == 1) {
-        teste(containment);
+        setupContainment(containment);
         return;
     }
 
