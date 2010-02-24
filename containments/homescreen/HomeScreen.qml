@@ -60,22 +60,6 @@ Rectangle {
                 }
             }
         }
-        transitions: Transition {
-            from: "Hidden"
-            to: "Visible"
-            SequentialAnimation {
-                NumberAnimation {
-                    properties: "y";
-                    easing.type: "InQuad";
-                    duration: 500;
-                }
-                NumberAnimation {
-                    properties: "scale";
-                    easing.type: "InQuad";
-                    duration: 150;
-                }
-            }
-        }
     }
 
     Item {
@@ -89,6 +73,8 @@ Rectangle {
         state : "Hidden"
         width : homescreen.width;
         height : homescreen.height;
+
+        signal transitionFinished();
 
         states: [
             State {
@@ -116,22 +102,6 @@ Rectangle {
         ]
 
         transitions: Transition {
-            from: "Visible"
-            to: "Hidden"
-            SequentialAnimation {
-                NumberAnimation {
-                    properties: "scale";
-                    easing.type: "InQuad";
-                    duration: 150;
-                }
-                NumberAnimation {
-                    properties: "y";
-                    easing.type: "InQuad";
-                    duration: 400;
-                }
-            }
-        }
-        transitions: Transition {
             from: "Hidden"
             to: "Visible"
             SequentialAnimation {
@@ -144,6 +114,9 @@ Rectangle {
                     properties: "scale";
                     easing.type: "InQuad";
                     duration: 150;
+                }
+                ScriptAction {
+                    script: spareSlot.transitionFinished();
                 }
             }
         }

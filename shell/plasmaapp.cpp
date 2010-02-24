@@ -65,7 +65,7 @@ PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
       m_corona(0),
       m_mainView(0),
-      current(0)
+      current(0), next(0)
 {
     setupBindings();
     KGlobal::locale()->insertCatalog("libplasma");
@@ -159,7 +159,9 @@ void PlasmaApp::setupHomeScreen()
     m_mainSlot->setZValue(9997);
 
     m_spareSlot = mainItem->findChild<QDeclarativeItem*>("spareSlot");
-    m_mainSlot->setZValue(9998);
+    m_spareSlot->setZValue(9998);
+    connect(m_spareSlot, SIGNAL(transitionFinished()),
+            this, SLOT(updateMainSlot()));
 
     m_panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
     m_panel->setZValue(9999);
@@ -179,12 +181,35 @@ void PlasmaApp::changeActivity()
     QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(sender());
     Plasma::Containment *containment = containments.value(item->objectName().toInt());
 
-    kDebug() << "---------> CHANGED ACTIVITY";
+    if (containment == current) {
+        return;
+    }
 
     // found it!
     if (containment) {
+        next = containment;
         setupContainment(containment);
     }
+}
+
+void PlasmaApp::updateMainSlot()
+{
+    m_mainSlot->setProperty("state", "Visible");
+    m_spareSlot->setProperty("state", "Hidden");
+
+    if (next->parentItem()) {
+        next->parentItem()->setParentItem(m_mainSlot);
+    } else {
+        next->setParentItem(m_mainSlot);
+    }
+
+    // resizing the containment will always resize it's parent item
+    next->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
+    next->resize(800, 480);
+
+
+    current = next;
+    next = 0;
 }
 
 Plasma::Corona* PlasmaApp::corona()

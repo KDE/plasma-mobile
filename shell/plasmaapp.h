@@ -65,6 +65,7 @@ private Q_SLOTS:
     void manageNewContainment(Plasma::Containment *containment);
     void syncConfig();
     void changeActivity();
+    void updateMainSlot();
 
 private:
     MobCorona *m_corona;
@@ -79,6 +80,7 @@ private:
     QDeclarativeItem *m_panel;
 
     Plasma::Containment *current;
+    Plasma::Containment *next;
     QHash<int, Plasma::Containment*> containments;
 };
 
