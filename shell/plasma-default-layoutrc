@@ -24,7 +24,7 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][2][Applets][2]
+[Containments][2][Applets][1]
 plugin=digital-clock
 immutability=1
 zvalue=1
@@ -42,7 +42,7 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][3][Applets][2]
+[Containments][3][Applets][1]
 plugin=clock
 immutability=1
 zvalue=1
@@ -60,8 +60,8 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][4][Applets][2]
-plugin=fifteenPuzzle
+[Containments][4][Applets][1]
+plugin=frame
 immutability=1
 zvalue=1
 
@@ -78,7 +78,7 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][4][Applets][2]
+[Containments][4][Applets][1]
 plugin=plasma_applet_notes
 immutability=1
 zvalue=1
@@ -96,7 +96,7 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][6][Applets][2]
+[Containments][6][Applets][1]
 plugin=battery
 immutability=1
 zvalue=1
