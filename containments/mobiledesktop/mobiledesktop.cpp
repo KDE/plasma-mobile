@@ -18,25 +18,100 @@
 *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+//own
 #include "mobiledesktop.h"
 
+//Qt
+#include <QtDeclarative/QDeclarativeComponent>
+#include <QtDeclarative/QDeclarativeItem>
+#include <QtDeclarative/QDeclarativeEngine>
+#include <QtGui/QGraphicsLinearLayout>
+
+//KDE
 #include <KDebug>
+#include <KStandardDirs>
+#include <Plasma/Corona>
 
 using namespace Plasma;
 
 MobileDesktop::MobileDesktop(QObject *parent, const QVariantList &args)
-    : Containment(parent, args)
+    : Containment(parent, args), engine(0), component(0)
 {
-    resize(800, 480);
- 
     setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile desktop";
-    setContainmentType(Plasma::Containment::CustomContainment);
-
 }
 
 MobileDesktop::~MobileDesktop()
 {
+}
+
+void MobileDesktop::init()
+{
+    Containment::init();
+    execute(KStandardDirs::locate("appdata", "containments/mobile-desktop/Main.qml"));
+}
+
+void MobileDesktop::errorPrint()
+{
+    loaded=false;
+    QString errorStr = "Error loading QML file.\n";
+    if(component->isError()){
+        QList<QDeclarativeError> errors = component->errors();
+        foreach (const QDeclarativeError &error, errors) {
+            errorStr += (error.line()>0?QString::number(error.line()) + ": ":"")
+                + error.description() + '\n';
+        }
+    }
+    kWarning() << errorStr;
+}
+
+void MobileDesktop::execute(const QString &fileName)
+{
+    if (fileName.isEmpty())
+      return;
+    if (engine)
+      delete engine;
+    if (component)
+      delete component;
+    
+    engine = new QDeclarativeEngine(this);
+    component = new QDeclarativeComponent(engine, fileName, this);
+
+    if(component->isReady() || component->isError())
+        finishExecute();
+    else
+        QObject::connect(component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), this, SLOT(finishExecute()));
+}
+
+void MobileDesktop::finishExecute()
+{
+    if(component->isError()) {
+        errorPrint();
+    }
+    QObject *root = component->create();
+    if (!root) {
+        errorPrint();
+    }
+    kDebug()<<"Execution of QML done!";
+    QGraphicsWidget *widget = dynamic_cast<QGraphicsWidget*>(root);
+    if (widget) {
+        QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(this);
+        layout->setContentsMargins(0, 0, 0, 0);
+        layout->setSpacing(0);
+        layout->addItem(this);
+        widget->setLayout(layout);
+        QGraphicsObject *object = dynamic_cast<QGraphicsObject *>(root);
+        corona()->addItem(object);
+        setParentItem(object);
+        setParent(object);
+    } else {
+        QDeclarativeItem *object = dynamic_cast<QDeclarativeItem *>(root);
+        corona()->addItem(object);
+        setParentItem(object);
+        setParent(object);
+        object->setProperty("containment", qVariantFromValue((QGraphicsObject*)this));
+        resize(object->width(), object->height());
+    }
 }
 
 K_EXPORT_PLASMA_APPLET(mobiledesktop, MobileDesktop)

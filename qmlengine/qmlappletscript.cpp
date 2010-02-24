@@ -80,7 +80,7 @@ void QmlAppletScriptPrivate::execute(const QUrl &fileName)
     if(component->isReady() || component->isError())
         finishExecute();
     else
-        QObject::connect(component, SIGNAL(statusChanged(QmlComponent::Status)), q, SLOT(finishExecute()));
+        QObject::connect(component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), q, SLOT(finishExecute()));
 }
 
 void QmlAppletScriptPrivate::finishExecute()

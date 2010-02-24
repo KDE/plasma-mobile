@@ -27,6 +27,9 @@ namespace Plasma
 {
 }
 
+class QDeclarativeEngine;
+class QDeclarativeComponent;
+
 class MobileDesktop : public Plasma::Containment
 {
     Q_OBJECT
@@ -34,6 +37,16 @@ class MobileDesktop : public Plasma::Containment
 public:
     MobileDesktop(QObject *parent, const QVariantList &args);
     ~MobileDesktop();
+    void init();
+private:
+    void errorPrint();
+    void execute(const QString &fileName);
+    void finishExecute();
+    
+    QDeclarativeEngine* engine;
+    QDeclarativeComponent* component;
+
+    bool loaded;
 
 };
 
