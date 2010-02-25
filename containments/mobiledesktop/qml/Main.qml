@@ -20,7 +20,11 @@ Flipable {
       back: Rectangle {
           width: 800;
           height: 480;
-          color: "blue";
+          gradient: Gradient {
+              GradientStop { position: 0.0; color: "white" }
+              GradientStop { position: 0.5; color: "black" }
+              GradientStop { position: 1.0; color: "white" }
+          }
       }
       states: [
               State {
