@@ -39,10 +39,12 @@ Item {
 
         onClicked: {
             activitypanel.state = 'show';
+            timer.restart();
         }
 
         onPressed: {
             activitypanel.state = 'dragging';
+            timer.restart();
         }
 
         onReleased: {

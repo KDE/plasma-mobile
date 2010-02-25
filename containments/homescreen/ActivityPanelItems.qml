@@ -23,7 +23,7 @@ Row {
             anchors.fill: internet;
             onClicked: {
                 parent.clicked();
-                console.log("Clicked internet :)");
+                timer.restart();
             }
         }
     }
@@ -44,7 +44,7 @@ Row {
             anchors.fill: instantmessaging;
             onClicked: {
                 parent.clicked();
-                console.log("Clicked im :)");
+                timer.restart();
             }
         }
     }
@@ -65,7 +65,7 @@ Row {
             anchors.fill: phone;
             onClicked: {
                 parent.clicked();
-                console.log("Clicked phone :)");
+                timer.restart();
             }
         }
     }
@@ -86,7 +86,7 @@ Row {
             anchors.fill: social;
             onClicked: {
                 parent.clicked();
-                console.log("Clicked social :)");
+                timer.restart();
             }
         }
     }
@@ -107,7 +107,7 @@ Row {
             anchors.fill: games;
             onClicked: {
                 parent.clicked();
-                console.log("Clicked games :)");
+                timer.restart();
             }
         }
     }
