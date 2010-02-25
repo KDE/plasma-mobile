@@ -247,7 +247,7 @@ void PlasmaApp::notifyStartup(bool completed)
     org::kde::KSMServerInterface ksmserver("org.kde.ksmserver",
                                            "/KSMServer", QDBusConnection::sessionBus());
 
-    const QString startupID("workspace desktop");
+    const QString startupID("mobile desktop");
     if (completed) {
         ksmserver.resumeStartup(startupID);
     } else {
