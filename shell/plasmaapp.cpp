@@ -71,13 +71,17 @@ PlasmaApp::PlasmaApp()
     KGlobal::locale()->insertCatalog("libplasma");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+    m_mainView = new MobView(0, MobView::mainViewId(), 0);
+
     bool isDesktop = args->isSet("desktop");
     if (isDesktop) {
         notifyStartup(false);
         KCrash::setFlags(KCrash::AutoRestart);
+        //FIXME: unvomment on everyhting that is not Maemo
+        //m_mainView->setWindowFlags(Qt::FramelessWindowHint);
     }
 
-    m_mainView = new MobView(0, MobView::mainViewId(), 0);
     connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
 
     int width = 800;

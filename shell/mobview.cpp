@@ -34,7 +34,7 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
 {
     setFocusPolicy(Qt::NoFocus);
     connectContainment(containment);
- 
+
     const int w = 25;
     QPixmap tile(w * 2, w * 2);
     tile.fill(palette().base().color());
