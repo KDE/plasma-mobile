@@ -2,7 +2,6 @@ import Qt 4.6
 
 Item {
     id: activitypanel;
-    width: 800;
     height: 160;
     state: "show";
 

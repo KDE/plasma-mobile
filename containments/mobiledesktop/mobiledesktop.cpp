@@ -35,7 +35,10 @@
 using namespace Plasma;
 
 MobileDesktop::MobileDesktop(QObject *parent, const QVariantList &args)
-    : Containment(parent, args), engine(0), component(0)
+    : Containment(parent, args),
+      engine(0),
+      component(0),
+      m_root(0)
 {
     setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile desktop";
@@ -67,20 +70,30 @@ void MobileDesktop::errorPrint()
 
 void MobileDesktop::execute(const QString &fileName)
 {
-    if (fileName.isEmpty())
+    if (fileName.isEmpty()) {
       return;
-    if (engine)
+    } if (engine) {
       delete engine;
-    if (component)
+    } if (component) {
       delete component;
-    
+    }
+
     engine = new QDeclarativeEngine(this);
     component = new QDeclarativeComponent(engine, fileName, this);
 
-    if(component->isReady() || component->isError())
+    if(component->isReady() || component->isError()) {
         finishExecute();
-    else
+    } else {
         QObject::connect(component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), this, SLOT(finishExecute()));
+    }
+}
+
+void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (m_root && (constraints & Plasma::SizeConstraint)) {
+        m_root->setProperty("width", size().width());
+        m_root->setProperty("height", size().height());
+    }
 }
 
 void MobileDesktop::finishExecute()
@@ -88,24 +101,25 @@ void MobileDesktop::finishExecute()
     if(component->isError()) {
         errorPrint();
     }
-    QObject *root = component->create();
-    if (!root) {
+    m_root = component->create();
+    if (!m_root) {
         errorPrint();
     }
+
     kDebug()<<"Execution of QML done!";
-    QGraphicsWidget *widget = dynamic_cast<QGraphicsWidget*>(root);
+    QGraphicsWidget *widget = dynamic_cast<QGraphicsWidget*>(m_root);
     if (widget) {
         QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(this);
         layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(0);
         layout->addItem(this);
         widget->setLayout(layout);
-        QGraphicsObject *object = dynamic_cast<QGraphicsObject *>(root);
+        QGraphicsObject *object = dynamic_cast<QGraphicsObject *>(m_root);
         corona()->addItem(object);
         setParentItem(object);
         setParent(object);
     } else {
-        QDeclarativeItem *object = dynamic_cast<QDeclarativeItem *>(root);
+        QDeclarativeItem *object = dynamic_cast<QDeclarativeItem *>(m_root);
         corona()->addItem(object);
         setParentItem(object);
         setParent(object);

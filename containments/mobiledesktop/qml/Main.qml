@@ -18,8 +18,8 @@ Flipable {
 
     front : containment;
     back: Rectangle {
-        width: 800;
-        height: 480;
+        width: flip.width;
+        height: flip.height;
         gradient: Gradient {
             GradientStop { position: 0.0; color: "white" }
             GradientStop { position: 0.5; color: "black" }

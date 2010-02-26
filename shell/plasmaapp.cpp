@@ -151,6 +151,9 @@ void PlasmaApp::setupHomeScreen()
     QObject *obj = m_homescreen->create();
     QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(obj);
 
+    mainItem->setProperty("width", m_mainView->size().width());
+    mainItem->setProperty("height", m_mainView->size().height());
+
     // adds the homescreen to corona
     m_corona->addItem(mainItem);
 
@@ -205,13 +208,13 @@ void PlasmaApp::updateMainSlot()
 
     // resizing the containment will always resize it's parent item
     next->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
-    next->resize(800, 480);
+    next->resize(m_mainView->size());
     if (current->parentItem()) {
         current->parentItem()->setParentItem(0);
     } else {
         current->setParentItem(0);
     }
-    current->parentItem()->setPos(900, 900);
+    current->parentItem()->setPos(m_mainView->width(), m_mainView->height());
     current = next;
     next = 0;
 }
@@ -281,7 +284,7 @@ void PlasmaApp::setupContainment(Plasma::Containment *containment)
             containment->setParentItem(m_spareSlot);
         }
 
-        containment->resize(800, 480);
+        containment->resize(m_mainView->size());
         containment->parentItem()->setPos(0, 0);
 
         // change state
@@ -308,13 +311,13 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
         // resizing the containment will always resize it's parent item
         containment->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
-        containment->resize(800, 480);
+        containment->resize(m_mainView->size());
         current = containment;
         return;
     }
 
     // XXX: FIX ME with beautiful values :)
-    containment->parentItem()->setPos(900, 900);
+    containment->parentItem()->setPos(m_mainView->width(), m_mainView->height());
 }
 
 #include "plasmaapp.moc"

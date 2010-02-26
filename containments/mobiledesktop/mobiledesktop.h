@@ -38,6 +38,9 @@ public:
     MobileDesktop(QObject *parent, const QVariantList &args);
     ~MobileDesktop();
     void init();
+
+    void constraintsEvent(Plasma::Constraints constraints);
+
 private:
     void errorPrint();
     void execute(const QString &fileName);
@@ -45,6 +48,7 @@ private:
     
     QDeclarativeEngine* engine;
     QDeclarativeComponent* component;
+    QObject *m_root;
 
     bool loaded;
 
