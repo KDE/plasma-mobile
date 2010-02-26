@@ -78,7 +78,7 @@ PlasmaApp::PlasmaApp()
     if (isDesktop) {
         notifyStartup(false);
         KCrash::setFlags(KCrash::AutoRestart);
-        //FIXME: unvomment on everyhting that is not Maemo
+        //FIXME: uncomment on everyhting that is not Maemo
         //m_mainView->setWindowFlags(Qt::FramelessWindowHint);
     }
 
