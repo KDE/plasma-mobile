@@ -46,8 +46,8 @@ private:
     void execute(const QString &fileName);
     void finishExecute();
     
-    QDeclarativeEngine* engine;
-    QDeclarativeComponent* component;
+    QDeclarativeEngine* m_engine;
+    QDeclarativeComponent* m_component;
     QObject *m_root;
 
     bool loaded;

@@ -36,8 +36,8 @@ using namespace Plasma;
 
 MobileDesktop::MobileDesktop(QObject *parent, const QVariantList &args)
     : Containment(parent, args),
-      engine(0),
-      component(0),
+      m_engine(0),
+      m_component(0),
       m_root(0)
 {
     setHasConfigurationInterface(false);
@@ -58,8 +58,8 @@ void MobileDesktop::errorPrint()
 {
     loaded=false;
     QString errorStr = "Error loading QML file.\n";
-    if(component->isError()){
-        QList<QDeclarativeError> errors = component->errors();
+    if(m_component->isError()){
+        QList<QDeclarativeError> errors = m_component->errors();
         foreach (const QDeclarativeError &error, errors) {
             errorStr += (error.line()>0?QString::number(error.line()) + ": ":"")
                 + error.description() + '\n';
@@ -72,19 +72,19 @@ void MobileDesktop::execute(const QString &fileName)
 {
     if (fileName.isEmpty()) {
       return;
-    } if (engine) {
-      delete engine;
-    } if (component) {
-      delete component;
+    } if (m_engine) {
+      delete m_engine;
+    } if (m_component) {
+      delete m_component;
     }
 
-    engine = new QDeclarativeEngine(this);
-    component = new QDeclarativeComponent(engine, fileName, this);
+    m_engine = new QDeclarativeEngine(this);
+    m_component = new QDeclarativeComponent(m_engine, fileName, this);
 
-    if(component->isReady() || component->isError()) {
+    if(m_component->isReady() || m_component->isError()) {
         finishExecute();
     } else {
-        QObject::connect(component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), this, SLOT(finishExecute()));
+        QObject::connect(m_component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), this, SLOT(finishExecute()));
     }
 }
 
@@ -98,10 +98,10 @@ void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)
 
 void MobileDesktop::finishExecute()
 {
-    if(component->isError()) {
+    if(m_component->isError()) {
         errorPrint();
     }
-    m_root = component->create();
+    m_root = m_component->create();
     if (!m_root) {
         errorPrint();
     }
