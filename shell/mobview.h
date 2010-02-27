@@ -39,6 +39,9 @@ public:
     MobView(Plasma::Containment *containment, int uid, QWidget *parent = 0);
     ~MobView();
 
+    void setUseGL(bool on);
+    bool useGL();
+
     void connectContainment(Plasma::Containment *containment);
 
     Plasma::Location location() const;
@@ -59,6 +62,9 @@ Q_SIGNALS:
 protected:
     void drawBackground(QPainter *painter, const QRectF &rect);
     void resizeEvent(QResizeEvent *event);
+
+private:
+    bool mUseGL;
 };
 
 #endif // multiple inclusion guard

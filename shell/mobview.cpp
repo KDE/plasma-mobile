@@ -33,8 +33,12 @@
 #include <Plasma/Corona>
 #include <Plasma/Containment>
 
+#ifndef QT_NO_OPENGL
+    #include <QtOpenGL/QtOpenGL>
+#endif
+
 MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
-    : Plasma::View(containment, uid, parent)
+    : Plasma::View(containment, uid, parent), mUseGL(false)
 {
     setFocusPolicy(Qt::NoFocus);
     connectContainment(containment);
@@ -50,10 +54,37 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     pt.end();
     QBrush b(tile);
     setBackgroundBrush(tile);
+
+    setOptimizationFlags(QGraphicsView::DontSavePainterState);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setFrameStyle(0);
+    setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 }
 
 MobView::~MobView()
 {
+}
+
+void MobView::setUseGL(bool on)
+{
+#ifndef QT_NO_OPENGL
+    if (on) {
+      //### FIXME This make the window translucent...
+      //QGLFormat format = QGLFormat::defaultFormat();
+      //format.setSampleBuffers(false);
+
+      QGLWidget *glWidget = new QGLWidget(QGLFormat(QGL::SampleBuffers));
+      glWidget->setAutoFillBackground(false);
+      setViewport(glWidget);
+    }
+#endif
+    mUseGL = on;
+}
+
+bool MobView::useGL()
+{
+    return mUseGL;
 }
 
 void MobView::connectContainment(Plasma::Containment *containment)

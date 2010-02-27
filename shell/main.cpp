@@ -46,6 +46,9 @@ KDE_EXPORT int kdemain(int argc, char **argv)
     KCmdLineOptions options;
     options.add("nodesktop", ki18n("Starts as a normal application instead of as the primary user interface"));
     options.add("screen <geometry>", ki18n("The geometry of the screen"), "800x480");
+#ifndef QT_NO_OPENGL
+    options.add("opengl", ki18n("use a QGLWidget for the viewport"));
+#endif
     KCmdLineArgs::addCmdLineOptions(options);
 
     PlasmaApp *app = PlasmaApp::self();

@@ -59,6 +59,9 @@ void MobCorona::init()
     setContainmentActionsDefaults(Plasma::Containment::CustomPanelContainment, panelPlugins);
 
     enableAction("lock widgets", false);
+
+    setItemIndexMethod(QGraphicsScene::NoIndex);
+
 }
 
 void MobCorona::loadDefaultLayout()

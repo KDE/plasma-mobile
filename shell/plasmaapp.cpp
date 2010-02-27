@@ -84,6 +84,10 @@ PlasmaApp::PlasmaApp()
         //m_mainView->setWindowFlags(Qt::FramelessWindowHint);
     }
 
+    bool useGL = args->isSet("opengl");
+    m_mainView = new MobView(0, MobView::mainViewId(), 0);
+    m_mainView->setUseGL(useGL);
+
     connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
 
     int width = 800;
@@ -221,6 +225,7 @@ void PlasmaApp::updateMainSlot()
         current->setParentItem(0);
     }
     current->parentItem()->setPos(m_mainView->width(), m_mainView->height());
+    current->parentItem()->setVisible(false);
     current = next;
     next = 0;
 }
@@ -295,6 +300,7 @@ void PlasmaApp::setupContainment(Plasma::Containment *containment)
 
         // change state
         m_mainSlot->setProperty("state", "Hidden");
+        containment->parentItem()->setVisible(true);
         m_spareSlot->setProperty("state", "Visible");
     }
 }
@@ -324,6 +330,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     // XXX: FIX ME with beautiful values :)
     containment->parentItem()->setPos(m_mainView->width(), m_mainView->height());
+    containment->parentItem()->setVisible(false);
 }
 
 #include "plasmaapp.moc"
