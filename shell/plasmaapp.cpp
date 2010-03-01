@@ -76,6 +76,10 @@ PlasmaApp::PlasmaApp()
 
     m_mainView = new MobView(0, MobView::mainViewId(), 0);
 
+    bool useGL = args->isSet("opengl");
+    m_mainView = new MobView(0, MobView::mainViewId(), 0);
+    m_mainView->setUseGL(useGL);
+
     bool isDesktop = args->isSet("desktop");
     if (isDesktop) {
         notifyStartup(false);
@@ -83,10 +87,6 @@ PlasmaApp::PlasmaApp()
         //FIXME: uncomment on everyhting that is not Maemo
         //m_mainView->setWindowFlags(Qt::FramelessWindowHint);
     }
-
-    bool useGL = args->isSet("opengl");
-    m_mainView = new MobView(0, MobView::mainViewId(), 0);
-    m_mainView->setUseGL(useGL);
 
     connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
 
