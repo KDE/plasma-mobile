@@ -38,6 +38,7 @@
 #include <KCmdLineArgs>
 #include <KStandardAction>
 #include <KStandardDirs>
+#include <KGlobalAccel>
 #include <KWindowSystem>
 #include <KServiceTypeTrader>
 
@@ -124,6 +125,15 @@ PlasmaApp::PlasmaApp()
     // this line initializes the corona and setups the main qml homescreen
     corona();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
+
+    KAction *lockAction = new KAction(this);
+    lockAction->setText(i18n("Lock Plasma Mobile screen"));
+    lockAction->setObjectName(QString("lock screen")); // NO I18
+
+    KGlobalAccel::cleanComponent("plasma-mobile");
+    lockAction->setGlobalShortcut(KShortcut(Qt::CTRL + Qt::Key_L));
+    m_mainView->addAction(lockAction);
+    connect(lockAction, SIGNAL(triggered()), this, SLOT(lockScreen()));
 }
 
 PlasmaApp::~PlasmaApp()
@@ -192,8 +202,13 @@ void PlasmaApp::setupHomeScreen()
 void PlasmaApp::changeActivity()
 {
     QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(sender());
-    Plasma::Containment *containment = containments.value(item->objectName().toInt());
+    Plasma::Containment *containment = m_containments.value(item->objectName().toInt());
 
+    changeActivity(containment);
+}
+
+void PlasmaApp::changeActivity(Plasma::Containment *containment)
+{
     if (containment == current) {
         return;
     }
@@ -203,6 +218,11 @@ void PlasmaApp::changeActivity()
         next = containment;
         setupContainment(containment);
     }
+}
+
+void PlasmaApp::lockScreen()
+{
+    changeActivity(m_containments.value(1));
 }
 
 void PlasmaApp::updateMainSlot()
@@ -309,7 +329,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
     // add the containment and it identifier to a hash to enable us
     // to retrieve it later.
-    containments.insert(containment->id(), containment);
+    m_containments.insert(containment->id(), containment);
 
     // we need our homescreen to show something!
     if (containment->id() == 1) {

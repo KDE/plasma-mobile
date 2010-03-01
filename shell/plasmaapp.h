@@ -60,6 +60,7 @@ public:
 protected:
     void setupHomeScreen();
     void setupContainment(Plasma::Containment *containment);
+    void changeActivity(Plasma::Containment *containment);
 
 private Q_SLOTS:
     void cleanup();
@@ -68,6 +69,7 @@ private Q_SLOTS:
     void syncConfig();
     void changeActivity();
     void updateMainSlot();
+    void lockScreen();
 
 private:
     MobCorona *m_corona;
@@ -83,7 +85,7 @@ private:
 
     Plasma::Containment *current;
     Plasma::Containment *next;
-    QHash<int, Plasma::Containment*> containments;
+    QHash<int, Plasma::Containment*> m_containments;
 };
 
 #endif // multiple inclusion guard
