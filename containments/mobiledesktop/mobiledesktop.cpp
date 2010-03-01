@@ -129,6 +129,9 @@ void MobileDesktop::finishExecute()
         object->setProperty("containment", qVariantFromValue((QGraphicsObject*)this));
         setPos(0, 0);
         resize(object->width(), object->height());
+        if (id() == 1) {
+            object->setProperty("flipable", false);
+        }
     }
 }
 

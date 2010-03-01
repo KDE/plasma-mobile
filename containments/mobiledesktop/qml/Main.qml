@@ -26,6 +26,7 @@ Flipable {
     width : 800;
     height : 480;
     state : "Front";
+    property var flipable : true;
     property var containment;
     transform: Rotation {
         id: rotation
@@ -89,7 +90,11 @@ Flipable {
 
     MouseArea {
         // change between default and 'back' states
-        onClicked: flip.state = (flip.state == 'Back' ? 'Front' : 'Back')
+        onClicked : {
+            if (flipable) {
+                flip.state = (flip.state == 'Back' ? 'Front' : 'Back');
+            }
+        }
         anchors.fill: parent
     }
 
