@@ -24,6 +24,11 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
+[Containments][2][Applets][1]
+plugin=digital-clock
+immutability=1
+zvalue=1
+
 [Containments][3]
 activity=
 desktop=-1
@@ -38,7 +43,7 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][3][Applets][1]
-plugin=digital-clock
+plugin=clock
 immutability=1
 zvalue=1
 
@@ -56,7 +61,7 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][4][Applets][1]
-plugin=clock
+plugin=frame
 immutability=1
 zvalue=1
 
@@ -74,7 +79,7 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][5][Applets][1]
-plugin=frame
+plugin=plasma_applet_notes
 immutability=1
 zvalue=1
 
@@ -92,29 +97,11 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][6][Applets][1]
-plugin=plasma_applet_notes
-immutability=1
-zvalue=1
-
-[Containments][7]
-activity=
-desktop=-1
-formfactor=0
-geometry=0,0,800,480
-immutability=1
-location=0
-plugin=mobiledesktop
-screen=0
-zvalue=0
-wallpaperplugin=image
-wallpaperpluginmode=SingleImage
-
-[Containments][7][Applets][1]
 plugin=battery
 immutability=1
 zvalue=1
 
-[Containments][8]
+[Containments][7]
 activity=
 desktop=-1
 formfactor=0
