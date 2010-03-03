@@ -20,14 +20,14 @@
 
 //own
 #include "mobilelauncher.h"
-#include <QStandardItemModel>
+#include "qmlwidget.h"
+
 
 //Qt
-#include <QtDeclarative/QDeclarativeComponent>
-#include <QtDeclarative/QDeclarativeItem>
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeContext>
 #include <QtGui/QGraphicsLinearLayout>
+#include <QStandardItemModel>
 
 //KDE
 #include <KDebug>
@@ -37,14 +37,11 @@
 #include <Plasma/Corona>
 #include <Plasma/RunnerManager>
 
+
 using namespace Plasma;
 
 MobileLauncher::MobileLauncher(QObject *parent, const QVariantList &args)
-    : Containment(parent, args),
-      m_engine(0),
-      m_component(0),
-      m_root(0),
-      m_loaded(false)
+    : Containment(parent, args)
 {
     setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile launcher";
@@ -68,22 +65,20 @@ void MobileLauncher::init()
     connect(m_runnermg, SIGNAL(matchesChanged(const QList<Plasma::QueryMatch>&)),
             this, SLOT(setQueryMatches(const QList<Plasma::QueryMatch>&)));
 
-    execute(KStandardDirs::locate("appdata", "containments/mobilelauncher/view.qml"));
+    m_qmlWidget = new Plasma::QmlWidget(this);
+    QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
+    lay->addItem(m_qmlWidget);
+
+    m_qmlWidget->setQmlPath(KStandardDirs::locate("appdata", "containments/mobilelauncher/view.qml"));
+
+    m_qmlWidget->setQmlPath("/opt/kde4/share/apps/plasma-mobile/containments/mobilelauncher/view.qml");
+
+    m_runnermg->launchQuery("Network");
+
+    QDeclarativeContext *ctxt = m_qmlWidget->engine()->rootContext();
+    ctxt->setContextProperty("myModel", m_runnerModel);
 }
 
-void MobileLauncher::errorPrint()
-{
-    m_loaded=false;
-    QString errorStr = "Error loading QML file.\n";
-    if(m_component->isError()){
-        QList<QDeclarativeError> errors = m_component->errors();
-        foreach (const QDeclarativeError &error, errors) {
-            errorStr += (error.line()>0?QString::number(error.line()) + ": ":"")
-                + error.description() + '\n';
-        }
-    }
-    kWarning() << errorStr;
-}
 
 void MobileLauncher::setQueryMatches(const QList<Plasma::QueryMatch> &matches)
 {
@@ -91,62 +86,6 @@ void MobileLauncher::setQueryMatches(const QList<Plasma::QueryMatch> &matches)
         m_runnerModel->appendRow(new QStandardItem(match.text()));
     }
 
-}
-
-void MobileLauncher::execute(const QString &fileName)
-{
-    if (fileName.isEmpty()) {
-        return;
-    }
-
-    if (m_engine) {
-        delete m_engine;
-    }
-
-    if (m_component) {
-        delete m_component;
-    }
-
-    m_engine = new QDeclarativeEngine(this);
-    m_component = new QDeclarativeComponent(m_engine, fileName, this);
-
-
-    m_runnermg->launchQuery("Network");
-
-    QDeclarativeContext *ctxt = m_engine->rootContext();
-    ctxt->setContextProperty("myModel", m_runnerModel);
-
-    if (m_component->isReady() || m_component->isError()) {
-        finishExecute();
-    } else {
-        QObject::connect(m_component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), this, SLOT(finishExecute()));
-    }
-}
-
-void MobileLauncher::constraintsEvent(Plasma::Constraints constraints)
-{
-    if (m_root && (constraints & Plasma::SizeConstraint)) {
-        m_root->setProperty("width", size().width());
-        m_root->setProperty("height", size().height());
-    }
-}
-
-void MobileLauncher::finishExecute()
-{
-    if (m_component->isError()) {
-        errorPrint();
-    }
-
-    m_root = m_component->create();
-
-    if (!m_root) {
-        errorPrint();
-    }
-
-    kDebug() << "Execution of QML done!";
-    QGraphicsWidget *widget = dynamic_cast<QGraphicsWidget*>(m_root);
-    QGraphicsObject *object = dynamic_cast<QGraphicsObject *>(m_root);
-    corona()->addItem(object);
 }
 
 K_EXPORT_PLASMA_APPLET(mobilelauncher, MobileLauncher)

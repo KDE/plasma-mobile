@@ -34,7 +34,10 @@ class QmlWidgetPrivate
 {
 public:
     QmlWidgetPrivate(QmlWidget *parent)
-        : q(parent)
+        : q(parent),
+          engine(0),
+          component(0),
+          root(0)
     {
     }
 
@@ -140,6 +143,16 @@ void QmlWidget::setQmlPath(const QString &path)
 QString QmlWidget::qmlPath() const
 {
     return d->qmlPath;
+}
+
+QDeclarativeEngine* QmlWidget::engine()
+{
+    return d->engine;
+}
+
+QObject *QmlWidget::rootObject() const
+{
+    return d->root;
 }
 
 void QmlWidget::resizeEvent(QGraphicsSceneResizeEvent *event)

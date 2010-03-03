@@ -18,20 +18,19 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef PLASMA_DESKTOP_H
-#define PLASMA_DESKTOP_H
+#ifndef PLASMA_MOBILELAUNCHER_H
+#define PLASMA_MOBILELAUNCHER_H
 
 #include <Plasma/Containment>
 #include <Plasma/QueryMatch>
 
+class QStandardItemModel;
+
 namespace Plasma
 {
     class RunnerManager;
+    class QmlWidget;
 }
-
-class QDeclarativeEngine;
-class QDeclarativeComponent;
-class QStandardItemModel;
 
 class MobileLauncher : public Plasma::Containment
 {
@@ -42,25 +41,14 @@ public:
     ~MobileLauncher();
     void init();
 
-    void constraintsEvent(Plasma::Constraints constraints);
-
 public Q_SLOTS:
     void setQueryMatches(const QList<Plasma::QueryMatch> &m);
-    void finishExecute();
 
 private:
-    void errorPrint();
-    void execute(const QString &fileName);
-
+    Plasma::QmlWidget *m_qmlWidget;
     Plasma::RunnerManager *m_runnermg;
 
-    QDeclarativeEngine* m_engine;
-    QDeclarativeComponent* m_component;
-    QObject *m_root;
     QStandardItemModel *m_runnerModel;
-
-    bool m_loaded;
-
 };
 
-#endif // PLASMA_DESKTOP_H
+#endif //PLASMA_MOBILELAUNCHER_H
