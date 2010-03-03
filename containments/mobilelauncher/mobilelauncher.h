@@ -46,11 +46,11 @@ public:
 
 public Q_SLOTS:
     void setQueryMatches(const QList<Plasma::QueryMatch> &m);
+    void finishExecute();
 
 private:
     void errorPrint();
     void execute(const QString &fileName);
-    void finishExecute();
 
     Plasma::RunnerManager *m_runnermg;
 
