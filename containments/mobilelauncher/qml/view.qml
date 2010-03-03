@@ -7,9 +7,13 @@ ListView {
     model: myModel
     delegate: Component {
         Rectangle {
-            height: 25
+            height: 50
             width: 100
-            Text { text: display }
+            Column {
+                Text { text: display }
+                Text { text: description}
+            }
+            //Image { image: decoration}
         }
     }
 }

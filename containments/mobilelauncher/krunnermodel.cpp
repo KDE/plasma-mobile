@@ -134,6 +134,13 @@ KRunnerModel::KRunnerModel(QObject *parent)
             SIGNAL(matchesChanged (const QList< Plasma::QueryMatch > & )),
             this,
             SLOT(matchesChanged (const QList< Plasma::QueryMatch > & )));
+
+    QHash<int, QByteArray> newRoleNames = roleNames();
+    newRoleNames[Qt::UserRole + 1] = "description";
+    newRoleNames[Qt::UserRole + 2] = "url";
+
+
+    setRoleNames(newRoleNames);
 }
 
 KRunnerModel::~KRunnerModel()
