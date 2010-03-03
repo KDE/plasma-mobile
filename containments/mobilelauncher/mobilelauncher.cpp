@@ -69,14 +69,16 @@ void MobileLauncher::init()
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
     lay->addItem(m_qmlWidget);
 
-    m_qmlWidget->setQmlPath(KStandardDirs::locate("appdata", "containments/mobilelauncher/view.qml"));
-
-    m_qmlWidget->setQmlPath("/opt/kde4/share/apps/plasma-mobile/containments/mobilelauncher/view.qml");
+    m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/containments/mobilelauncher/view.qml"));
 
     m_runnermg->launchQuery("Network");
 
-    QDeclarativeContext *ctxt = m_qmlWidget->engine()->rootContext();
-    ctxt->setContextProperty("myModel", m_runnerModel);
+    if (m_qmlWidget->engine()) {
+        QDeclarativeContext *ctxt = m_qmlWidget->engine()->rootContext();
+        if (ctxt) {
+            ctxt->setContextProperty("myModel", m_runnerModel);
+        }
+    }
 }
 
 
