@@ -26,9 +26,10 @@
 
 class QStandardItemModel;
 
+class KRunnerModel;
+
 namespace Plasma
 {
-    class RunnerManager;
     class QmlWidget;
 }
 
@@ -41,14 +42,10 @@ public:
     ~MobileLauncher();
     void init();
 
-public Q_SLOTS:
-    void setQueryMatches(const QList<Plasma::QueryMatch> &m);
-
 private:
     Plasma::QmlWidget *m_qmlWidget;
-    Plasma::RunnerManager *m_runnermg;
 
-    QStandardItemModel *m_runnerModel;
+    KRunnerModel *m_runnerModel;
 };
 
 #endif //PLASMA_MOBILELAUNCHER_H

@@ -1,6 +1,7 @@
 set(mobile_launcher_SRCS
     mobilelauncher.cpp
     qmlwidget.cpp
+    krunnermodel.cpp
     )
 
 kde4_add_plugin(plasma_containment_mobilelauncher ${mobile_launcher_SRCS})

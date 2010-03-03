@@ -21,6 +21,7 @@
 //own
 #include "mobilelauncher.h"
 #include "qmlwidget.h"
+#include "krunnermodel.h"
 
 
 //Qt
@@ -58,20 +59,15 @@ void MobileLauncher::init()
 {
     Containment::init();
 
-    m_runnerModel = new QStandardItemModel(this);
+    m_runnerModel = new KRunnerModel(this);
+    m_runnerModel->setQuery("Network");
 
-    m_runnermg = new Plasma::RunnerManager(this);
-    m_runnermg->reloadConfiguration();
-    connect(m_runnermg, SIGNAL(matchesChanged(const QList<Plasma::QueryMatch>&)),
-            this, SLOT(setQueryMatches(const QList<Plasma::QueryMatch>&)));
 
     m_qmlWidget = new Plasma::QmlWidget(this);
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
     lay->addItem(m_qmlWidget);
 
     m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/containments/mobilelauncher/view.qml"));
-
-    m_runnermg->launchQuery("Network");
 
     if (m_qmlWidget->engine()) {
         QDeclarativeContext *ctxt = m_qmlWidget->engine()->rootContext();
@@ -81,14 +77,6 @@ void MobileLauncher::init()
     }
 }
 
-
-void MobileLauncher::setQueryMatches(const QList<Plasma::QueryMatch> &matches)
-{
-    foreach (Plasma::QueryMatch match, matches) {
-        m_runnerModel->appendRow(new QStandardItem(match.text()));
-    }
-
-}
 
 K_EXPORT_PLASMA_APPLET(mobilelauncher, MobileLauncher)
 
