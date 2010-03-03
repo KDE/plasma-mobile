@@ -20,7 +20,7 @@
 
 //own
 #include "mobilelauncher.h"
-#include "querymatchproxy.h"
+#include <QStandardItemModel>
 
 //Qt
 #include <QtDeclarative/QDeclarativeComponent>
@@ -32,7 +32,10 @@
 //KDE
 #include <KDebug>
 #include <KStandardDirs>
+
+//Plasma
 #include <Plasma/Corona>
+#include <Plasma/RunnerManager>
 
 using namespace Plasma;
 
@@ -57,6 +60,14 @@ MobileLauncher::~MobileLauncher()
 void MobileLauncher::init()
 {
     Containment::init();
+
+    m_runnerModel = new QStandardItemModel(this);
+
+    m_runnermg = new Plasma::RunnerManager(this);
+    m_runnermg->reloadConfiguration();
+    connect(m_runnermg, SIGNAL(matchesChanged(const QList<Plasma::QueryMatch>&)),
+            this, SLOT(setQueryMatches(const QList<Plasma::QueryMatch>&)));
+
     execute(KStandardDirs::locate("appdata", "containments/mobilelauncher/view.qml"));
 }
 
@@ -72,6 +83,14 @@ void MobileLauncher::errorPrint()
         }
     }
     kWarning() << errorStr;
+}
+
+void MobileLauncher::setQueryMatches(const QList<Plasma::QueryMatch> &matches)
+{
+    foreach (Plasma::QueryMatch match, matches) {
+        m_runnerModel->appendRow(new QStandardItem(match.text()));
+    }
+
 }
 
 void MobileLauncher::execute(const QString &fileName)
@@ -92,16 +111,10 @@ void MobileLauncher::execute(const QString &fileName)
     m_component = new QDeclarativeComponent(m_engine, fileName, this);
 
 
-    QList<QObject*> dataList;
-
-    dataList.append(new QueryMatchProxy("Item 1"));
-    dataList.append(new QueryMatchProxy("Item 2"));
-    dataList.append(new QueryMatchProxy("Item 3"));
-    dataList.append(new QueryMatchProxy("Item 4"));
+    m_runnermg->launchQuery("Network");
 
     QDeclarativeContext *ctxt = m_engine->rootContext();
-    ctxt->setContextProperty("myModel", QVariant::fromValue(dataList));
-
+    ctxt->setContextProperty("myModel", m_runnerModel);
 
     if (m_component->isReady() || m_component->isError()) {
         finishExecute();

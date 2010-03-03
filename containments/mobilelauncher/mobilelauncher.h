@@ -22,13 +22,16 @@
 #define PLASMA_DESKTOP_H
 
 #include <Plasma/Containment>
+#include <Plasma/QueryMatch>
 
 namespace Plasma
 {
+    class RunnerManager;
 }
 
 class QDeclarativeEngine;
 class QDeclarativeComponent;
+class QStandardItemModel;
 
 class MobileLauncher : public Plasma::Containment
 {
@@ -41,14 +44,20 @@ public:
 
     void constraintsEvent(Plasma::Constraints constraints);
 
+public Q_SLOTS:
+    void setQueryMatches(const QList<Plasma::QueryMatch> &m);
+
 private:
     void errorPrint();
     void execute(const QString &fileName);
     void finishExecute();
 
+    Plasma::RunnerManager *m_runnermg;
+
     QDeclarativeEngine* m_engine;
     QDeclarativeComponent* m_component;
     QObject *m_root;
+    QStandardItemModel *m_runnerModel;
 
     bool m_loaded;
 

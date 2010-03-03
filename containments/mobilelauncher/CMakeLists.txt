@@ -1,6 +1,5 @@
 set(mobile_launcher_SRCS
     mobilelauncher.cpp
-    querymatchproxy.cpp
     )
 
 kde4_add_plugin(plasma_containment_mobilelauncher ${mobile_launcher_SRCS})
