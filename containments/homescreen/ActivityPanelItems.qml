@@ -39,7 +39,6 @@ Row {
             source: "images/internet.png";
         }
         MouseArea {
-            objectName: "mousearea";
             anchors.fill: internet;
             onClicked: {
                 parent.clicked();
@@ -60,7 +59,6 @@ Row {
             source: "images/im.png";
         }
         MouseArea {
-            objectName: "mousearea";
             anchors.fill: instantmessaging;
             onClicked: {
                 parent.clicked();
@@ -81,7 +79,6 @@ Row {
             source: "images/phone.png";
         }
         MouseArea {
-            objectName: "mousearea";
             anchors.fill: phone;
             onClicked: {
                 parent.clicked();
@@ -102,7 +99,6 @@ Row {
             source: "images/social.png";
         }
         MouseArea {
-            objectName: "mousearea";
             anchors.fill: social;
             onClicked: {
                 parent.clicked();

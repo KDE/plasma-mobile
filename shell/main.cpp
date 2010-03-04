@@ -49,6 +49,7 @@ KDE_EXPORT int kdemain(int argc, char **argv)
 #ifndef QT_NO_OPENGL
     options.add("opengl", ki18n("use a QGLWidget for the viewport"));
 #endif
+    options.add("fullscreen", ki18n("Starts the application in fullscreen"));
     KCmdLineArgs::addCmdLineOptions(options);
 
     PlasmaApp *app = PlasmaApp::self();

@@ -68,6 +68,7 @@ private Q_SLOTS:
     void manageNewContainment(Plasma::Containment *containment);
     void syncConfig();
     void changeActivity();
+    void slideActivities();
     void updateMainSlot();
     void lockScreen();
 
@@ -81,6 +82,7 @@ private:
 
     QDeclarativeItem *m_mainSlot;
     QDeclarativeItem *m_spareSlot;
+    QDeclarativeItem *m_homeScreen;
     QDeclarativeItem *m_panel;
 
     Plasma::Containment *current;

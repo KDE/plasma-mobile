@@ -20,13 +20,15 @@
 
 import Qt 4.6
 
-Rectangle {
+Item {
     id: homescreen;
+    objectName: "homeScreen";
     x: 0;
     y: 0;
     width: 800;
     height: 480;
-    color:"black"
+    signal transitionFinished();
+    state : "Normal";
 
     Item {
         id: mainSlot;
@@ -35,51 +37,7 @@ Rectangle {
         y: 0;
         width: homescreen.width;
         height: homescreen.height;
-
-        state : "Visible"
-        transformOrigin : Item.Center
-        //source: "images/background.png";
-
-        states: [
-            State {
-                name: "Visible"
-                PropertyChanges {
-                    target: mainSlot;
-                    scale: 1;
-                }
-                PropertyChanges {
-                    target: mainSlot;
-                    y: 0;
-                }
-            },
-            State {
-                name: "Hidden"
-                PropertyChanges {
-                    target: mainSlot;
-                    scale: 0.9;
-                }
-                PropertyChanges {
-                    target: mainSlot;
-                    y: homescreen.height;
-                }
-            }
-        ]
-        transitions: Transition {
-            from: "Visible"
-            to: "Hidden"
-            SequentialAnimation {
-                NumberAnimation {
-                    properties: "scale";
-                    easing.type: "InQuad";
-                    duration: 150;
-                }
-                NumberAnimation {
-                    properties: "y";
-                    easing.type: "InQuad";
-                    duration: 400;
-                }
-            }
-        }
+        transformOrigin : Item.Center;
     }
 
     Item {
@@ -89,16 +47,19 @@ Rectangle {
         y: -homescreen.height;
         width: homescreen.width;
         height: homescreen.height;
+    }
 
-        state : "Hidden"
-        width : homescreen.width;
-        height : homescreen.height;
-
-        signal transitionFinished();
-
-        states: [
+    states: [
             State {
-                name: "Hidden"
+                name: "Normal"
+                PropertyChanges {
+                    target: mainSlot;
+                    scale: 1;
+                }
+                PropertyChanges {
+                    target: mainSlot;
+                    y: 0;
+                }
                 PropertyChanges {
                     target: spareSlot;
                     scale: 0.9;
@@ -107,9 +68,10 @@ Rectangle {
                     target: spareSlot;
                     y: -homescreen.height;
                 }
+
             },
             State {
-                name: "Visible"
+                name: "Slide"
                 PropertyChanges {
                     target: spareSlot;
                     scale: 1;
@@ -118,29 +80,52 @@ Rectangle {
                     target: spareSlot;
                     y: 0;
                 }
+                PropertyChanges {
+                    target: mainSlot;
+                    scale: 0.9;
+                }
+                PropertyChanges {
+                    target: mainSlot;
+                    y: homescreen.height;
+                }
             }
-        ]
+    ]
 
-        transitions: Transition {
-            from: "Hidden"
-            to: "Visible"
+    transitions: Transition {
+            from: "Normal"
+            to: "Slide"
             SequentialAnimation {
                 NumberAnimation {
-                    properties: "y";
-                    easing.type: "InQuad";
-                    duration: 650;
+                    target: mainSlot;
+                    property: "scale";
+                    easing.type: "OutQuint";
+                    duration: 250;
+                }
+                ParallelAnimation {
+                    NumberAnimation {
+                        target: spareSlot;
+                        property: "y";
+                        easing.type: "InQuad";
+                        duration: 300;
+                    }
+                    NumberAnimation {
+                        target: mainSlot;
+                        property: "y";
+                        easing.type: "InQuad";
+                        duration: 300;
+                    }
                 }
                 NumberAnimation {
-                    properties: "scale";
-                    easing.type: "InQuad";
-                    duration: 150;
+                    target: spareSlot;
+                    property: "scale";
+                    easing.type: "OutQuint";
+                    duration: 250;
                 }
                 ScriptAction {
-                    script: spareSlot.transitionFinished();
+                    script: transitionFinished();
                 }
             }
         }
-    }
 
     ActivityPanel {
         id: activitypanel;

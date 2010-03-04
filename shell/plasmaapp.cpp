@@ -29,6 +29,7 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QGraphicsEffect>
 #include <QPixmapCache>
 #include <QtDBus/QtDBus>
 
@@ -49,11 +50,29 @@
 #include <Plasma/WindowEffects>
 #include <Plasma/Applet>
 #include <Plasma/Package>
+#include <Plasma/Wallpaper>
 
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
 
 extern void setupBindings();
+
+class CachingEffect : public QGraphicsEffect
+{
+  public :
+    CachingEffect(QObject *parent = 0) : QGraphicsEffect(parent)
+    {}
+
+    void draw (QPainter *p)
+    {
+        p->save();
+        QPoint point;
+        QPixmap pixmap = sourcePixmap(Qt::LogicalCoordinates, &point);
+        p->setCompositionMode(QPainter::CompositionMode_Source);
+        p->drawPixmap(point, pixmap);
+        p->restore();
+    }
+};
 
 PlasmaApp* PlasmaApp::self()
 {
@@ -74,8 +93,6 @@ PlasmaApp::PlasmaApp()
     KGlobal::locale()->insertCatalog("libplasma");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-
-    m_mainView = new MobView(0, MobView::mainViewId(), 0);
 
     bool useGL = args->isSet("opengl");
     m_mainView = new MobView(0, MobView::mainViewId(), 0);
@@ -108,6 +125,11 @@ PlasmaApp::PlasmaApp()
             width = qMax(width, geom.left(x).toInt());
             height = qMax(height, geom.right(geom.length() - x - 1).toInt());
         }
+    }
+
+    bool isFullScreen = args->isSet("fullscreen");
+    if (isFullScreen) {
+	m_mainView->showFullScreen();
     }
 
     //setIsDesktop(isDesktop);
@@ -169,6 +191,15 @@ void PlasmaApp::setupHomeScreen()
     m_homescreen = new QDeclarativeComponent(m_engine, url, this);
 
     QObject *obj = m_homescreen->create();
+    if(m_homescreen->isError()){
+        QString errorStr;
+        QList<QDeclarativeError> errors = m_homescreen->errors();
+        foreach (const QDeclarativeError &error, errors) {
+            errorStr += (error.line()>0?QString::number(error.line()) + ": ":"")
+                + error.description() + '\n';
+        }
+        kWarning() << errorStr;
+    }
     QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(obj);
 
     mainItem->setProperty("width", m_mainView->size().width());
@@ -179,15 +210,13 @@ void PlasmaApp::setupHomeScreen()
 
     // get references for the main objects that we'll need to deal with
     m_mainSlot = mainItem->findChild<QDeclarativeItem*>("mainSlot");
-    m_mainSlot->setZValue(9997);
-
     m_spareSlot = mainItem->findChild<QDeclarativeItem*>("spareSlot");
-    m_spareSlot->setZValue(9998);
-    connect(m_spareSlot, SIGNAL(transitionFinished()),
+    m_homeScreen = mainItem;
+
+    connect(m_homeScreen, SIGNAL(transitionFinished()),
             this, SLOT(updateMainSlot()));
 
     m_panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
-    m_panel->setZValue(9999);
 
     m_mainView->setSceneRect(mainItem->x(), mainItem->y(),
                              mainItem->width(), mainItem->height());
@@ -203,7 +232,6 @@ void PlasmaApp::changeActivity()
 {
     QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(sender());
     Plasma::Containment *containment = m_containments.value(item->objectName().toInt());
-
     changeActivity(containment);
 }
 
@@ -227,15 +255,13 @@ void PlasmaApp::lockScreen()
 
 void PlasmaApp::updateMainSlot()
 {
-    m_mainSlot->setProperty("state", "Visible");
-    m_spareSlot->setProperty("state", "Hidden");
-
+    m_homeScreen->setProperty("state", "Normal");
     if (next->parentItem()) {
         next->parentItem()->setParentItem(m_mainSlot);
     } else {
         next->setParentItem(m_mainSlot);
     }
-
+    next->graphicsEffect()->setEnabled(false);
     // resizing the containment will always resize it's parent item
     next->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
     next->resize(m_mainView->size());
@@ -246,6 +272,7 @@ void PlasmaApp::updateMainSlot()
     }
     current->parentItem()->setPos(m_mainView->width(), m_mainView->height());
     current->parentItem()->setVisible(false);
+    current->graphicsEffect()->setEnabled(false);
     current = next;
     next = 0;
 }
@@ -314,15 +341,22 @@ void PlasmaApp::setupContainment(Plasma::Containment *containment)
         } else {
             containment->setParentItem(m_spareSlot);
         }
-
-        containment->resize(m_mainView->size());
-        containment->parentItem()->setPos(0, 0);
-
-        // change state
-        m_mainSlot->setProperty("state", "Hidden");
         containment->parentItem()->setVisible(true);
-        m_spareSlot->setProperty("state", "Visible");
+        containment->parentItem()->setPos(0, 0);
+        containment->resize(m_mainView->size());
+        containment->graphicsEffect()->setEnabled(true);
+        current->graphicsEffect()->setEnabled(true);
+        //###The reparenting need a repaint so this ensure that we
+        //have actually re-render the containment otherwise it
+        //makes animations slugglish. We need a better solution.
+        QTimer::singleShot(0, this, SLOT(slideActivities()));
     }
+}
+
+void PlasmaApp::slideActivities()
+{
+    // change state
+    m_homeScreen->setProperty("state", "Slide");
 }
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
@@ -330,6 +364,24 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     // add the containment and it identifier to a hash to enable us
     // to retrieve it later.
     m_containments.insert(containment->id(), containment);
+
+    CachingEffect *effect = new CachingEffect(containment);
+    containment->setGraphicsEffect(effect);
+    containment->graphicsEffect()->setEnabled(false);
+
+    //We load the wallpaper now so when animating the containments around the first time it will not be slow
+    Plasma::Wallpaper *w = containment->wallpaper();
+    if (!w->isInitialized()) {
+        // delayed paper initialization
+        KConfigGroup wallpaperConfig = containment->config();
+        wallpaperConfig = KConfigGroup(&wallpaperConfig, "Wallpaper");
+        wallpaperConfig = KConfigGroup(&wallpaperConfig, w->pluginName());
+        w->restore(wallpaperConfig);
+        disconnect(w, SIGNAL(update(const QRectF&)), containment, SLOT(updateRect(const QRectF&)));
+        connect(w, SIGNAL(update(const QRectF&)), containment, SLOT(updateRect(const QRectF&)));
+    }
+
+    containment->parentItem()->setFlag(QGraphicsItem::ItemHasNoContents, false);
 
     // we need our homescreen to show something!
     if (containment->id() == 1) {

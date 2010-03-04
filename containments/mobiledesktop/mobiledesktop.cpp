@@ -42,7 +42,6 @@ MobileDesktop::MobileDesktop(QObject *parent, const QVariantList &args)
 {
     setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile desktop";
-
     // At some point it has to be a custom constainment
     //setContainmentType(Containment::CustomContainment);
 }
@@ -54,6 +53,10 @@ MobileDesktop::~MobileDesktop()
 void MobileDesktop::init()
 {
     Containment::init();
+
+    setAcceptsHoverEvents(false);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+    setFlag(QGraphicsItem::ItemUsesExtendedStyleOption, false);
     execute(KStandardDirs::locate("data", "plasma-mobile/containments/mobile-desktop/Main.qml"));
 }
 
@@ -109,7 +112,6 @@ void MobileDesktop::finishExecute()
         errorPrint();
     }
 
-    kDebug()<<"Execution of QML done!";
     QGraphicsWidget *widget = dynamic_cast<QGraphicsWidget*>(m_root);
     if (widget) {
         QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(this);

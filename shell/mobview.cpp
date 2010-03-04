@@ -42,24 +42,12 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
 {
     setFocusPolicy(Qt::NoFocus);
     connectContainment(containment);
-
-    const int w = 25;
-    QPixmap tile(w * 2, w * 2);
-    tile.fill(palette().base().color());
-    QPainter pt(&tile);
-    QColor color = palette().mid().color();
-    color.setAlphaF(.6);
-    pt.fillRect(0, 0, w, w, color);
-    pt.fillRect(w, w, w, w, color);
-    pt.end();
-    QBrush b(tile);
-    setBackgroundBrush(tile);
-
     setOptimizationFlags(QGraphicsView::DontSavePainterState);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFrameStyle(0);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    setAttribute(Qt::WA_TranslucentBackground, false);
 }
 
 MobView::~MobView()
