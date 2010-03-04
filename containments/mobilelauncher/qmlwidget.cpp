@@ -19,6 +19,7 @@
 
 #include "qmlwidget.h"
 
+
 #include <QtDeclarative/QDeclarativeComponent>
 #include <QtDeclarative/QDeclarativeItem>
 #include <QtDeclarative/QDeclarativeEngine>
@@ -29,6 +30,8 @@
 
 namespace Plasma
 {
+
+
 
 class QmlWidgetPrivate
 {
@@ -126,7 +129,6 @@ QmlWidget::QmlWidget(QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
       d(new QmlWidgetPrivate(this))
 {
-    
 }
 
 QmlWidget::~QmlWidget()
@@ -159,8 +161,10 @@ void QmlWidget::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     QGraphicsWidget::resizeEvent(event);
 
-    d->root->setProperty("width", size().width());
-    d->root->setProperty("height", size().height());
+    if (d->root) {
+        d->root->setProperty("width", size().width());
+        d->root->setProperty("height", size().height());
+    }
 }
 
 

@@ -22,9 +22,11 @@
 #include "mobilelauncher.h"
 #include "qmlwidget.h"
 #include "krunnermodel.h"
+#include "resultwidget.h"
 
 
 //Qt
+#include <QtDeclarative/qdeclarative.h>
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeContext>
 #include <QtGui/QGraphicsLinearLayout>
@@ -39,7 +41,9 @@
 #include <Plasma/RunnerManager>
 
 
-using namespace Plasma;
+
+QML_DECLARE_TYPE(ResultWidget)
+
 
 MobileLauncher::MobileLauncher(QObject *parent, const QVariantList &args)
     : Containment(parent, args)
@@ -47,6 +51,7 @@ MobileLauncher::MobileLauncher(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile launcher";
 
+    qmlRegisterType<ResultWidget>("MobileLauncher", 1, 0, "ResultWidget", "ResultWidget");
     // At some point it has to be a custom constainment
     //setContainmentType(Containment::CustomContainment);
 }
@@ -61,7 +66,6 @@ void MobileLauncher::init()
 
     m_runnerModel = new KRunnerModel(this);
     m_runnerModel->setQuery("Network");
-
 
     m_qmlWidget = new Plasma::QmlWidget(this);
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);

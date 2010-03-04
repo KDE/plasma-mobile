@@ -1,19 +1,19 @@
+import MobileLauncher 1.0
 import Qt 4.6
 
-ListView {
-    width: 100
-    height: 100
+GridView {
+    cellWidth: 100;
+    cellHeight: 100
     anchors.fill: parent
     model: myModel
     delegate: Component {
         Rectangle {
-            height: 50
-            width: 100
-            Column {
-                Text { text: display }
-                Text { text: description}
+            height: 128
+            width: 128
+            ResultWidget {
+                icon: decoration
+                text: display
             }
-            //Image { image: decoration}
         }
     }
 }
