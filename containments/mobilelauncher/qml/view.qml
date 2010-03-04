@@ -2,17 +2,31 @@ import MobileLauncher 1.0
 import Qt 4.6
 
 GridView {
-    cellWidth: 100;
-    cellHeight: 100
     anchors.fill: parent
     model: myModel
     delegate: Component {
-        Rectangle {
-            height: 128
-            width: 128
-            ResultWidget {
-                icon: decoration
-                text: display
+        Item {
+            id: wrapper
+            //anchors.centerIn: resultwidget
+            width: wrapper.GridView.view.cellWidth-1
+            height: wrapper.GridView.view.cellWidth-1
+
+            GraphicsObjectContainer {
+                id: iconcontainer
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: resultwidget.width
+                height: resultwidget.height
+                ResultWidget {
+                    width: 64
+                    height: 64
+                    id: resultwidget
+                    icon: decoration
+                    text: display
+                }
+            }
+            MouseArea {
+                id: mousearea
+                anchors.fill: parent
             }
         }
     }
