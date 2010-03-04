@@ -1,7 +1,9 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=Mobile icon grid
+Name[uk]=Гратка для піктограм мобільної версії
 Comment=Main menu for mobile devices
+Comment[uk]=Головне меню для мобільних пристроїв
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
