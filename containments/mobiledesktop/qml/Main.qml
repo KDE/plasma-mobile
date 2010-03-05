@@ -25,7 +25,7 @@ Flipable {
     property int angle: 0;
     width : 800;
     height : 480;
-    state : "Front";
+    state : "Front360";
     property var flipable : true;
     property var containment;
     transform: Rotation {
@@ -50,23 +50,70 @@ Flipable {
     }
     states: [
         State {
-            name: "Back"
+            name: "Back540"
             PropertyChanges {
                 target: flip;
-                angle: 180;
+                angle: 540;
             }
         },
         State {
-            name: "Front"
+            name: "Front0"
             PropertyChanges {
                 target: flip;
                 angle: 0;
             }
+        },
+        State {
+            name: "Front360"
+            PropertyChanges {
+                target: flip;
+                angle: 360;
+            }
+        },
+        State {
+            name: "Back180"
+            PropertyChanges {
+                target: flip;
+                angle: 180;
+            }
         }
     ]
     transitions: Transition {
-        from: "Front"
-        to:"Back"
+        from: "Front360"
+        to:"Back180, Back540"
+        ParallelAnimation {
+            NumberAnimation {
+                properties: "angle";
+                duration: 800;
+                easing.type: "Linear";
+            }
+        }
+    }
+    transitions: Transition {
+        from: "Front360"
+        to:"Back540"
+        ParallelAnimation {
+            NumberAnimation {
+                properties: "angle";
+                duration: 800;
+                easing.type: "Linear";
+            }
+        }
+    }
+    transitions: Transition {
+        from: "Back180"
+        to:"Front360"
+        ParallelAnimation {
+            NumberAnimation {
+                properties: "angle";
+                duration: 800;
+                easing.type: "Linear";
+            }
+        }
+    }
+    transitions: Transition {
+        from: "Back180"
+        to:"Front0"
         ParallelAnimation {
             NumberAnimation {
                 properties: "angle";
@@ -76,27 +123,27 @@ Flipable {
         }
     }
 
-    transitions: Transition {
-        from: "Back"
-        to:"Front"
-        ParallelAnimation {
-            NumberAnimation {
-                properties: "angle";
-                duration: 800;
-                  easing.type: "Linear";
-            }
-          }
-    }
-
     MouseArea {
+        id : mouseArea;
         // change between default and 'back' states
         onClicked : {
             if (flipable) {
-                flip.state = (flip.state == 'Back' ? 'Front' : 'Back');
+                if (flip.state == "Front0") flip.state = "Front360";
+                if (flip.state == "Back540") flip.state = "Back180";
+                if (mouseX <= (flip.x + flip.width / 2))
+                    if (flip.state == "Front360")
+                        flip.state = "Back180";
+                    else
+                        flip.state = "Front360";
+                else {
+                    if (flip.state == "Front360")
+                        flip.state = "Back540";
+                    else
+                        flip.state = "Front0";
+                }
             }
         }
         anchors.fill: parent
     }
 
 }
-

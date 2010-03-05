@@ -58,11 +58,7 @@ void MobView::setUseGL(bool on)
 {
 #ifndef QT_NO_OPENGL
     if (on) {
-      //### FIXME This make the window translucent...
-      //QGLFormat format = QGLFormat::defaultFormat();
-      //format.setSampleBuffers(false);
-
-      QGLWidget *glWidget = new QGLWidget(QGLFormat(QGL::SampleBuffers));
+      QGLWidget *glWidget = new QGLWidget;
       glWidget->setAutoFillBackground(false);
       setViewport(glWidget);
     }
