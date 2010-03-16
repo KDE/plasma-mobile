@@ -77,6 +77,7 @@ void QmlWidgetPrivate::errorPrint()
 void QmlWidgetPrivate::execute(const QString &fileName)
 {
     if (fileName.isEmpty()) {
+        kDebug() << "File name empty!";
         return;
     }
 
@@ -121,6 +122,7 @@ void QmlWidgetPrivate::finishExecute()
     if (widget) {
         //TODO: add to a layout
     }
+    emit q->finished();
 }
 
 

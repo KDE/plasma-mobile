@@ -54,7 +54,11 @@ public:
 protected:
     void resizeEvent(QGraphicsSceneResizeEvent *event);
 
+Q_SIGNALS:
+    void finished();
+
 private:
+    friend class QmlWidgetPrivate;
     QmlWidgetPrivate * const d;
 
     Q_PRIVATE_SLOT(d, void finishExecute())

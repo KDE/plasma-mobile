@@ -381,7 +381,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         connect(w, SIGNAL(update(const QRectF&)), containment, SLOT(updateRect(const QRectF&)));
     }
 
-    containment->parentItem()->setFlag(QGraphicsItem::ItemHasNoContents, false);
+    //containment->parentItem()->setFlag(QGraphicsItem::ItemHasNoContents, false);
 
     // we need our homescreen to show something!
     if (containment->id() == 1) {
@@ -401,8 +401,8 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     }
 
     // XXX: FIX ME with beautiful values :)
-    containment->parentItem()->setPos(m_mainView->width(), m_mainView->height());
-    containment->parentItem()->setVisible(false);
+    /*containment->parentItem()->setPos(m_mainView->width(), m_mainView->height());
+    containment->parentItem()->setVisible(false);*/
 }
 
 #include "plasmaapp.moc"
