@@ -27,7 +27,6 @@ if(X11_Xrender_FOUND)
    target_link_libraries(kdeinit_plasma-mobile ${X11_Xrender_LIB})
 endif(X11_Xrender_FOUND)
 
-install(DIRECTORY qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma-mobile/shell PATTERN .svn EXCLUDE)
 install(TARGETS kdeinit_plasma-mobile DESTINATION ${LIB_INSTALL_DIR})
 install(TARGETS plasma-mobile ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install(FILES plasma-default-layoutrc DESTINATION ${DATA_INSTALL_DIR}/plasma-mobile/)
