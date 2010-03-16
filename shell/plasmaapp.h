@@ -87,8 +87,8 @@ private:
     QDeclarativeItem *m_homeScreen;
     QDeclarativeItem *m_panel;
 
-    Plasma::Containment *current;
-    Plasma::Containment *next;
+    Plasma::Containment *m_currentContainment;
+    Plasma::Containment *m_nextContainment;
     QHash<int, Plasma::Containment*> m_containments;
     QHash<int, Plasma::QmlWidget*> m_containmentHosts;
 };

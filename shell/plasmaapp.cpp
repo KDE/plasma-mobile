@@ -88,7 +88,7 @@ PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
       m_corona(0),
       m_mainView(0),
-      current(0), next(0)
+      m_currentContainment(0), m_nextContainment(0)
 {
     setupBindings();
     KGlobal::locale()->insertCatalog("libplasma");
@@ -238,13 +238,13 @@ void PlasmaApp::changeActivity()
 
 void PlasmaApp::changeActivity(Plasma::Containment *containment)
 {
-    if (containment == current) {
+    if (containment == m_currentContainment) {
         return;
     }
 
     // found it!
     if (containment) {
-        next = containment;
+        m_nextContainment = containment;
         setupContainment(containment);
     }
 }
@@ -256,26 +256,26 @@ void PlasmaApp::lockScreen()
 
 void PlasmaApp::updateMainSlot()
 {
-    m_homeScreen->setProperty("state", "Normal");
-    if (next->parentItem()) {
-        next->parentItem()->setParentItem(m_mainSlot);
-    } else {
-        next->setParentItem(m_mainSlot);
+    Plasma::QmlWidget *currentContainmentHost = m_containmentHosts.value(m_currentContainment->id());
+    Plasma::QmlWidget *nextContainmentHost = m_containmentHosts.value(m_nextContainment->id());
+
+    if (currentContainmentHost && nextContainmentHost) {
+        m_homeScreen->setProperty("state", "Normal");
+        nextContainmentHost->setParentItem(m_mainSlot);
+
+        m_nextContainment->graphicsEffect()->setEnabled(false);
+        // resizing the containment will always resize it's parent item
+        nextContainmentHost->setPos(0,0);
+        m_nextContainment->resize(m_mainView->size());
+
+        currentContainmentHost->setParentItem(0);
+
+        currentContainmentHost->setPos(m_mainView->width(), m_mainView->height());
+        currentContainmentHost->setVisible(false);
+        m_currentContainment->graphicsEffect()->setEnabled(false);
+        m_currentContainment = m_nextContainment;
+        m_nextContainment = 0;
     }
-    next->graphicsEffect()->setEnabled(false);
-    // resizing the containment will always resize it's parent item
-    next->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
-    next->resize(m_mainView->size());
-    if (current->parentItem()) {
-        current->parentItem()->setParentItem(0);
-    } else {
-        current->setParentItem(0);
-    }
-    current->parentItem()->setPos(m_mainView->width(), m_mainView->height());
-    current->parentItem()->setVisible(false);
-    current->graphicsEffect()->setEnabled(false);
-    current = next;
-    next = 0;
 }
 
 Plasma::Corona* PlasmaApp::corona()
@@ -336,21 +336,22 @@ void PlasmaApp::mainContainmentActivated()
 
 void PlasmaApp::setupContainment(Plasma::Containment *containment)
 {
-    if (current) {
-        if (containment->parentItem()) {
-            containment->parentItem()->setParentItem(m_spareSlot);
-        } else {
-            containment->setParentItem(m_spareSlot);
+    if (m_currentContainment) {
+        Plasma::QmlWidget *containmentHost = m_containmentHosts.value(containment->id());
+
+        if (containmentHost) {
+            containmentHost->setParentItem(m_spareSlot);
+
+            containmentHost->setVisible(true);
+            containmentHost->setPos(0, 0);
+            containment->resize(m_mainView->size());
+            containment->graphicsEffect()->setEnabled(true);
+            m_currentContainment->graphicsEffect()->setEnabled(true);
+            //###The reparenting need a repaint so this ensure that we
+            //have actually re-render the containment otherwise it
+            //makes animations slugglish. We need a better solution.
+            QTimer::singleShot(0, this, SLOT(slideActivities()));
         }
-        containment->parentItem()->setVisible(true);
-        containment->parentItem()->setPos(0, 0);
-        containment->resize(m_mainView->size());
-        containment->graphicsEffect()->setEnabled(true);
-        current->graphicsEffect()->setEnabled(true);
-        //###The reparenting need a repaint so this ensure that we
-        //have actually re-render the containment otherwise it
-        //makes animations slugglish. We need a better solution.
-        QTimer::singleShot(0, this, SLOT(slideActivities()));
     }
 }
 
@@ -409,7 +410,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         // resizing the containment will always resize it's parent item
         containment->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
         containment->resize(m_mainView->size());
-        current = containment;
+        m_currentContainment = containment;
         return;
     }
 
