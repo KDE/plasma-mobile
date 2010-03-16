@@ -24,6 +24,7 @@
 
 #include "mobview.h"
 #include "mobcorona.h"
+#include "../common/qmlwidget.h"
 
 #include <unistd.h>
 
@@ -365,6 +366,18 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     // to retrieve it later.
     m_containments.insert(containment->id(), containment);
 
+    connect(containment, SIGNAL(destroyed(QObject *)), this, SLOT(containmentDestroyed(QObject *)));
+
+    Plasma::QmlWidget *qmlWidget = new Plasma::QmlWidget;
+    qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/containments/mobile-desktop/Main.qml"));
+    m_containmentHosts.insert(containment->id(), qmlWidget);
+
+    QDeclarativeItem *object = dynamic_cast<QDeclarativeItem *>(qmlWidget->rootObject());
+    containment->setParentItem(object);
+    containment->setParent(object);
+    object->setProperty("containment", qVariantFromValue((QGraphicsObject*)containment));
+    containment->setPos(0, 0);
+
     CachingEffect *effect = new CachingEffect(containment);
     containment->setGraphicsEffect(effect);
     containment->graphicsEffect()->setEnabled(false);
@@ -403,6 +416,20 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     // XXX: FIX ME with beautiful values :)
     containment->parentItem()->setPos(m_mainView->width(), m_mainView->height());
     containment->parentItem()->setVisible(false);
+}
+
+void PlasmaApp::containmentDestroyed(QObject *object)
+{
+    Plasma::Containment *cont = qobject_cast<Plasma::Containment *>(object);
+
+    if (cont) {
+        m_containments.remove(cont->id());
+        Plasma::QmlWidget *qw = m_containmentHosts.value(cont->id());
+        if (qw) {
+            qw->deleteLater();
+            m_containmentHosts.remove(cont->id());
+        }
+    }
 }
 
 #include "plasmaapp.moc"

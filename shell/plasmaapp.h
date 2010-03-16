@@ -41,6 +41,7 @@ namespace Plasma
 {
     class Containment;
     class Corona;
+    class QmlWidget;
 } // namespace Plasma
 
 class PlasmaApp : public KUniqueApplication
@@ -66,6 +67,7 @@ private Q_SLOTS:
     void cleanup();
     void mainContainmentActivated();
     void manageNewContainment(Plasma::Containment *containment);
+    void containmentDestroyed(QObject *);
     void syncConfig();
     void changeActivity();
     void slideActivities();
@@ -88,6 +90,7 @@ private:
     Plasma::Containment *current;
     Plasma::Containment *next;
     QHash<int, Plasma::Containment*> m_containments;
+    QHash<int, Plasma::QmlWidget*> m_containmentHosts;
 };
 
 #endif // multiple inclusion guard
