@@ -261,6 +261,7 @@ void PlasmaApp::updateMainSlot()
 
     if (currentContainmentHost && nextContainmentHost) {
         m_homeScreen->setProperty("state", "Normal");
+        
         nextContainmentHost->setParentItem(m_mainSlot);
 
         m_nextContainment->graphicsEffect()->setEnabled(false);
@@ -269,12 +270,15 @@ void PlasmaApp::updateMainSlot()
         m_nextContainment->resize(m_mainView->size());
 
         currentContainmentHost->setParentItem(0);
+        currentContainmentHost->setPos(0, currentContainmentHost->size().height());
 
         currentContainmentHost->setPos(m_mainView->width(), m_mainView->height());
+
         currentContainmentHost->setVisible(false);
         m_currentContainment->graphicsEffect()->setEnabled(false);
         m_currentContainment = m_nextContainment;
         m_nextContainment = 0;
+
     }
 }
 
@@ -341,9 +345,11 @@ void PlasmaApp::setupContainment(Plasma::Containment *containment)
 
         if (containmentHost) {
             containmentHost->setParentItem(m_spareSlot);
+            containment->setPos(0,0);
+            containmentHost->setPos(0, 0);
 
             containmentHost->setVisible(true);
-            containmentHost->setPos(0, 0);
+            
             containment->resize(m_mainView->size());
             containment->graphicsEffect()->setEnabled(true);
             m_currentContainment->graphicsEffect()->setEnabled(true);
@@ -395,28 +401,22 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         connect(w, SIGNAL(update(const QRectF&)), containment, SLOT(updateRect(const QRectF&)));
     }
 
-    containment->parentItem()->setFlag(QGraphicsItem::ItemHasNoContents, false);
+    object->setFlag(QGraphicsItem::ItemHasNoContents, false);
 
     // we need our homescreen to show something!
     if (containment->id() == 1) {
-        // we should deal with the layout logic here
-        // discover if we setup the home containment, etc..
-        if (containment->parentItem()) {
-            containment->parentItem()->setParentItem(m_mainSlot);
-        } else {
-            containment->setParentItem(m_mainSlot);
-        }
+        qmlWidget->setParentItem(m_mainSlot);
 
         // resizing the containment will always resize it's parent item
-        containment->parentItem()->setPos(m_mainSlot->x(), m_mainSlot->y());
+        qmlWidget->setPos(m_mainSlot->x(), m_mainSlot->y());
         containment->resize(m_mainView->size());
         m_currentContainment = containment;
         return;
     }
 
     // XXX: FIX ME with beautiful values :)
-    containment->parentItem()->setPos(m_mainView->width(), m_mainView->height());
-    containment->parentItem()->setVisible(false);
+    qmlWidget->setPos(m_mainView->width(), m_mainView->height());
+    qmlWidget->setVisible(false);
 }
 
 void PlasmaApp::containmentDestroyed(QObject *object)

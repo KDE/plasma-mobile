@@ -115,8 +115,12 @@ void QmlWidgetPrivate::finishExecute()
     QGraphicsWidget *widget = dynamic_cast<QGraphicsWidget*>(root);
     QGraphicsObject *object = dynamic_cast<QGraphicsObject *>(root);
 
-    if (object && q->scene()) {
-        q->scene()->addItem(object);
+
+    if (object) {
+        static_cast<QGraphicsItem *>(object)->setParentItem(q);
+        if (q->scene()) {
+            q->scene()->addItem(object);
+        }
     }
 
     if (widget) {
