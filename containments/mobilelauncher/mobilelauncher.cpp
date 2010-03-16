@@ -20,7 +20,7 @@
 
 //own
 #include "mobilelauncher.h"
-#include "qmlwidget.h"
+#include "../../common/qmlwidget.h"
 #include "krunnermodel.h"
 #include "resultwidget.h"
 
