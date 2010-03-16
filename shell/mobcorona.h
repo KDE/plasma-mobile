@@ -30,6 +30,7 @@
 namespace Plasma
 {
     class Applet;
+    class QmlWidget;
 } // namespace Plasma
 
 /**
@@ -41,6 +42,7 @@ class MobCorona : public Plasma::Corona
 
 public:
     MobCorona(QObject * parent);
+    ~MobCorona();
 
     /**
      * Loads the default (system wide) layout for this user
@@ -52,12 +54,17 @@ public:
     virtual QRect screenGeometry(int id) const;
     virtual QRegion availableScreenRegion(int id) const;
 
-public slots:
+public Q_SLOTS:
     void layoutContainments();
+
+protected Q_SLOTS:
+    void switchContainment(int wasScreen, int isScreen, Plasma::Containment *containment);
 
 private:
     void init();
     Plasma::Applet *loadDefaultApplet(const QString &pluginName, Plasma::Containment *c);
+
+    Plasma::QmlWidget *m_qmlWidget;
 };
 
 #endif

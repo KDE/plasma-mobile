@@ -45,11 +45,24 @@
 MobCorona::MobCorona(QObject *parent)
     : Plasma::Corona(parent)
 {
+    m_qmlWidget = new Plasma::QmlWidget;
+
     init();
+}
+
+MobCorona::~MobCorona()
+{
+    delete m_qmlWidget;
 }
 
 void MobCorona::init()
 {
+    addItem(m_qmlWidget);
+    m_qmlWidget->show();
+    //TODO: sync on screen geometry change
+    m_qmlWidget->setGeometry(screenGeometry(0));
+    m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/containments/mobiledesktop/Main.qml"));
+
     Plasma::ContainmentActionsPluginsConfig desktopPlugins;
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::Vertical, "switchdesktop");
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
@@ -64,6 +77,23 @@ void MobCorona::init()
 
     setItemIndexMethod(QGraphicsScene::NoIndex);
 
+    connect(this, SIGNAL(screenOwnerChanged(int, int, Plasma::Containment *)), this, SLOT(switchContainment(int, int, Plasma::Containment *)));
+}
+
+void MobCorona::switchContainment(int wasScreen, int isScreen, Plasma::Containment *containment)
+{
+    QObject *root = m_qmlWidget->rootObject();
+    if (!root) {
+        return;
+    }
+    QDeclarativeItem *object = dynamic_cast<QDeclarativeItem *>(root);
+    if (!object) {
+        return;
+    }
+
+    if (isScreen == 0) {
+        root->setProperty("containment", qVariantFromValue((QGraphicsObject*)containment));
+    }
 }
 
 void MobCorona::loadDefaultLayout()
