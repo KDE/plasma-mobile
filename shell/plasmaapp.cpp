@@ -410,13 +410,14 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
         // resizing the containment will always resize it's parent item
         qmlWidget->setPos(m_mainSlot->x(), m_mainSlot->y());
-        containment->resize(m_mainView->size());
+        qmlWidget->resize(m_mainView->size());
         m_currentContainment = containment;
         return;
     }
 
     // XXX: FIX ME with beautiful values :)
     qmlWidget->setPos(m_mainView->width(), m_mainView->height());
+    qmlWidget->resize(m_mainView->width(), m_mainView->height());
     qmlWidget->setVisible(false);
 }
 
