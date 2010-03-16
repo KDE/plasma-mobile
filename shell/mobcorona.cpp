@@ -92,7 +92,8 @@ void MobCorona::switchContainment(int wasScreen, int isScreen, Plasma::Containme
     }
 
     if (isScreen == 0) {
-        root->setProperty("containment", qVariantFromValue((QGraphicsObject*)containment));
+        containment->setParentItem(object);
+        object->setProperty("containment", qVariantFromValue((QGraphicsObject*)containment));
     }
 }
 

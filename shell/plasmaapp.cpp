@@ -204,6 +204,7 @@ void PlasmaApp::setupHomeScreen()
 
     mainItem->setProperty("width", m_mainView->size().width());
     mainItem->setProperty("height", m_mainView->size().height());
+    mainItem->setZValue(999);
 
     // adds the homescreen to corona
     m_corona->addItem(mainItem);
