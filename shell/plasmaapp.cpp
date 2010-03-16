@@ -349,9 +349,10 @@ void PlasmaApp::setupContainment(Plasma::Containment *containment)
             containmentHost->setPos(0, 0);
 
             containmentHost->setVisible(true);
-            
+
             containment->resize(m_mainView->size());
-            containment->graphicsEffect()->setEnabled(true);
+            //FIXME: this makes the containment to not paint until the animation finishes
+            //containment->graphicsEffect()->setEnabled(true);
             m_currentContainment->graphicsEffect()->setEnabled(true);
             //###The reparenting need a repaint so this ensure that we
             //have actually re-render the containment otherwise it
