@@ -61,7 +61,7 @@ void MobCorona::init()
     m_qmlWidget->show();
     //TODO: sync on screen geometry change
     m_qmlWidget->setGeometry(screenGeometry(0));
-    m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/containments/mobile-desktop/Main.qml"));
+    m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/shell/Corona.qml"));
 
     Plasma::ContainmentActionsPluginsConfig desktopPlugins;
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::Vertical, "switchdesktop");
