@@ -28,7 +28,7 @@ Row {
     anchors.bottom: parent.bottom;
 
     Item {
-        objectName: "2";
+        objectName: "3";
         signal clicked;
 
         width: internet.width;
@@ -48,7 +48,7 @@ Row {
     }
 
     Item {
-        objectName: "3";
+        objectName: "4";
         signal clicked;
 
         width: instantmessaging.width;
@@ -68,7 +68,7 @@ Row {
     }
 
     Item {
-        objectName: "4";
+        objectName: "5";
         signal clicked;
 
         width: phone.width;
@@ -88,7 +88,7 @@ Row {
     }
 
     Item {
-        objectName: "5";
+        objectName: "6";
         signal clicked;
 
         width: social.width;
@@ -108,7 +108,7 @@ Row {
     }
 
     Item {
-        objectName: "6";
+        objectName: "7";
         signal clicked;
 
         width: games.width;

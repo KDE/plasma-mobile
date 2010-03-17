@@ -68,14 +68,9 @@ Item {
                 height: homescreen.height;
             }
         }
-        back: Rectangle {
-            width: flipable.width;
-            height: flipable.height;
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "white" }
-                GradientStop { position: 0.5; color: "black" }
-                GradientStop { position: 1.0; color: "white" }
-            }
+        back: Item {
+            id: alternateSlot;
+            objectName: "alternateSlot";
         }
         states: [
             State {
