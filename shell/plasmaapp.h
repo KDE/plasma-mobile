@@ -90,7 +90,6 @@ private:
     Plasma::Containment *m_currentContainment;
     Plasma::Containment *m_nextContainment;
     QHash<int, Plasma::Containment*> m_containments;
-    QHash<int, Plasma::QmlWidget*> m_containmentHosts;
 };
 
 #endif // multiple inclusion guard

@@ -30,23 +30,150 @@ Item {
     signal transitionFinished();
     state : "Normal";
 
-    Item {
-        id: mainSlot;
-        objectName: "mainSlot";
-        x: 0;
-        y: 0;
-        width: homescreen.width;
-        height: homescreen.height;
-        transformOrigin : Item.Center;
-    }
+    Flipable {
+        id : flipable;
+        property int angle: 0;
+        width : 800;
+        height : 480;
+        state : "Front360";
+        property var flipable : true;
+        property var containment;
+        transform: Rotation {
+            id: rotation
+            origin.x: flipable.width / 2;
+            origin.y: flipable.height / 2;
+            axis.x: 0;
+            axis.y: 1;
+            axis.z: 0;
+            angle: flipable.angle
+        }
 
-    Item {
-        id : spareSlot;
-        objectName: "spareSlot";
-        x: 0;
-        y: -homescreen.height;
-        width: homescreen.width;
-        height: homescreen.height;
+        front : Item {
+            Item {
+                id: mainSlot;
+                objectName: "mainSlot";
+                x: 0;
+                y: 0;
+                width: homescreen.width;
+                height: homescreen.height;
+                transformOrigin : Item.Center;
+            }
+
+            Item {
+                id : spareSlot;
+                objectName: "spareSlot";
+                x: 0;
+                y: -homescreen.height;
+                width: homescreen.width;
+                height: homescreen.height;
+            }
+        }
+        back: Rectangle {
+            width: flipable.width;
+            height: flipable.height;
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "white" }
+                GradientStop { position: 0.5; color: "black" }
+                GradientStop { position: 1.0; color: "white" }
+            }
+        }
+        states: [
+            State {
+                name: "Back540"
+                PropertyChanges {
+                    target: flipable;
+                    angle: 540;
+                }
+            },
+            State {
+                name: "Front0"
+                PropertyChanges {
+                    target: flipable;
+                    angle: 0;
+                }
+            },
+            State {
+                name: "Front360"
+                PropertyChanges {
+                    target: flipable;
+                    angle: 360;
+                }
+            },
+            State {
+                name: "Back180"
+                PropertyChanges {
+                    target: flipable;
+                    angle: 180;
+                }
+            }
+        ]
+        transitions: Transition {
+            from: "Front360"
+            to:"Back180, Back540"
+            ParallelAnimation {
+                NumberAnimation {
+                    properties: "angle";
+                    duration: 800;
+                    easing.type: "Linear";
+                }
+            }
+        }
+        transitions: Transition {
+            from: "Front360"
+            to:"Back540"
+            ParallelAnimation {
+                NumberAnimation {
+                    properties: "angle";
+                    duration: 800;
+                    easing.type: "Linear";
+                }
+            }
+        }
+        transitions: Transition {
+            from: "Back180"
+            to:"Front360"
+            ParallelAnimation {
+                NumberAnimation {
+                    properties: "angle";
+                    duration: 800;
+                    easing.type: "Linear";
+                }
+            }
+        }
+        transitions: Transition {
+            from: "Back180"
+            to:"Front0"
+            ParallelAnimation {
+                NumberAnimation {
+                    properties: "angle";
+                    duration: 800;
+                    easing.type: "Linear";
+                }
+            }
+        }
+
+        MouseArea {
+            id : mouseArea;
+            // change between default and 'back' states
+            onClicked : {
+                if (flipable) {
+                    if (flipable.state == "Front0") flipable.state = "Front360";
+                    if (flipable.state == "Back540") flipable.state = "Back180";
+                    if (mouseX <= (flipable.x + flipable.width / 2))
+                        if (flipable.state == "Front360")
+                            flipable.state = "Back180";
+                        else
+                            flipable.state = "Front360";
+                    else {
+                        if (flipable.state == "Front360")
+                            flipable.state = "Back540";
+                        else
+                            flipable.state = "Front0";
+                    }
+                }
+            }
+            anchors.fill: parent
+        }
     }
 
     states: [

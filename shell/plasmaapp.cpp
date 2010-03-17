@@ -256,25 +256,22 @@ void PlasmaApp::lockScreen()
 
 void PlasmaApp::updateMainSlot()
 {
-    Plasma::QmlWidget *currentContainmentHost = m_containmentHosts.value(m_currentContainment->id());
-    Plasma::QmlWidget *nextContainmentHost = m_containmentHosts.value(m_nextContainment->id());
-
-    if (currentContainmentHost && nextContainmentHost) {
+    if (m_currentContainment && m_nextContainment) {
         m_homeScreen->setProperty("state", "Normal");
-        
-        nextContainmentHost->setParentItem(m_mainSlot);
+
+        m_nextContainment->setParentItem(m_mainSlot);
 
         m_nextContainment->graphicsEffect()->setEnabled(false);
         // resizing the containment will always resize it's parent item
-        nextContainmentHost->setPos(0,0);
+        m_nextContainment->setPos(0,0);
         m_nextContainment->resize(m_mainView->size());
 
-        currentContainmentHost->setParentItem(0);
-        currentContainmentHost->setPos(0, currentContainmentHost->size().height());
+        m_currentContainment->setParentItem(0);
+        m_currentContainment->setPos(0, m_currentContainment->size().height());
 
-        currentContainmentHost->setPos(m_mainView->width(), m_mainView->height());
+        m_currentContainment->setPos(m_mainView->width(), m_mainView->height());
 
-        currentContainmentHost->setVisible(false);
+        m_currentContainment->setVisible(false);
         m_currentContainment->graphicsEffect()->setEnabled(false);
         m_currentContainment = m_nextContainment;
         m_nextContainment = 0;
@@ -341,24 +338,20 @@ void PlasmaApp::mainContainmentActivated()
 void PlasmaApp::setupContainment(Plasma::Containment *containment)
 {
     if (m_currentContainment) {
-        Plasma::QmlWidget *containmentHost = m_containmentHosts.value(containment->id());
+        containment->setParentItem(m_spareSlot);
+        containment->setPos(0,0);
+        containment->setPos(0, 0);
 
-        if (containmentHost) {
-            containmentHost->setParentItem(m_spareSlot);
-            containment->setPos(0,0);
-            containmentHost->setPos(0, 0);
+        containment->setVisible(true);
 
-            containmentHost->setVisible(true);
-
-            containment->resize(m_mainView->size());
-            //FIXME: this makes the containment to not paint until the animation finishes
-            //containment->graphicsEffect()->setEnabled(true);
-            m_currentContainment->graphicsEffect()->setEnabled(true);
-            //###The reparenting need a repaint so this ensure that we
-            //have actually re-render the containment otherwise it
-            //makes animations slugglish. We need a better solution.
-            QTimer::singleShot(0, this, SLOT(slideActivities()));
-        }
+        containment->resize(m_mainView->size());
+        //FIXME: this makes the containment to not paint until the animation finishes
+        //containment->graphicsEffect()->setEnabled(true);
+        m_currentContainment->graphicsEffect()->setEnabled(true);
+        //###The reparenting need a repaint so this ensure that we
+        //have actually re-render the containment otherwise it
+        //makes animations slugglish. We need a better solution.
+        QTimer::singleShot(0, this, SLOT(slideActivities()));
     }
 }
 
@@ -376,14 +369,9 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     connect(containment, SIGNAL(destroyed(QObject *)), this, SLOT(containmentDestroyed(QObject *)));
 
-    Plasma::QmlWidget *qmlWidget = new Plasma::QmlWidget;
-    qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/containments/mobile-desktop/Main.qml"));
-    m_containmentHosts.insert(containment->id(), qmlWidget);
 
-    QDeclarativeItem *object = dynamic_cast<QDeclarativeItem *>(qmlWidget->rootObject());
-    containment->setParentItem(object);
-    containment->setParent(object);
-    object->setProperty("containment", qVariantFromValue((QGraphicsObject*)containment));
+    containment->setParentItem(m_mainSlot);
+    containment->setParent(m_mainSlot);
     containment->setPos(0, 0);
 
     CachingEffect *effect = new CachingEffect(containment);
@@ -402,23 +390,20 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         connect(w, SIGNAL(update(const QRectF&)), containment, SLOT(updateRect(const QRectF&)));
     }
 
-    object->setFlag(QGraphicsItem::ItemHasNoContents, false);
+    m_mainSlot->setFlag(QGraphicsItem::ItemHasNoContents, false);
 
     // we need our homescreen to show something!
     if (containment->id() == 1) {
-        qmlWidget->setParentItem(m_mainSlot);
-
-        // resizing the containment will always resize it's parent item
-        qmlWidget->setPos(m_mainSlot->x(), m_mainSlot->y());
-        qmlWidget->resize(m_mainView->size());
+        containment->setPos(0,0);
+        containment->resize(m_mainView->size());
         m_currentContainment = containment;
         return;
     }
 
     // XXX: FIX ME with beautiful values :)
-    qmlWidget->setPos(m_mainView->width(), m_mainView->height());
-    qmlWidget->resize(m_mainView->width(), m_mainView->height());
-    qmlWidget->setVisible(false);
+    containment->setPos(m_mainView->width(), m_mainView->height());
+    containment->resize(m_mainView->width(), m_mainView->height());
+    containment->setVisible(false);
 }
 
 void PlasmaApp::containmentDestroyed(QObject *object)
@@ -427,11 +412,6 @@ void PlasmaApp::containmentDestroyed(QObject *object)
 
     if (cont) {
         m_containments.remove(cont->id());
-        Plasma::QmlWidget *qw = m_containmentHosts.value(cont->id());
-        if (qw) {
-            qw->deleteLater();
-            m_containmentHosts.remove(cont->id());
-        }
     }
 }
 
