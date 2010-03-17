@@ -391,18 +391,24 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     }
 
     m_mainSlot->setFlag(QGraphicsItem::ItemHasNoContents, false);
+    containment->resize(m_mainView->size());
 
     // we need our homescreen to show something!
     if (containment->id() == 1) {
         containment->setPos(0,0);
-        containment->resize(m_mainView->size());
         m_currentContainment = containment;
+        return;
+    } else if (containment->id() == 2) {
+        QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>("alternateSlot");
+
+        containment->setParentItem(alternateSlot);
+        containment->setParent(alternateSlot);
+        containment->setPos(0, 0);
         return;
     }
 
     // XXX: FIX ME with beautiful values :)
     containment->setPos(m_mainView->width(), m_mainView->height());
-    containment->resize(m_mainView->width(), m_mainView->height());
     containment->setVisible(false);
 }
 
