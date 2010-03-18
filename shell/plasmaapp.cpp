@@ -200,6 +200,7 @@ void PlasmaApp::setupHomeScreen()
                 + error.description() + '\n';
         }
         kWarning() << errorStr;
+        return;
     }
     QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(obj);
 
@@ -369,6 +370,10 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     connect(containment, SIGNAL(destroyed(QObject *)), this, SLOT(containmentDestroyed(QObject *)));
 
+
+    if (!m_mainSlot) {
+        return;
+    }
 
     containment->setParentItem(m_mainSlot);
     containment->setParent(m_mainSlot);
