@@ -18,7 +18,7 @@ GridView {
                 width: resultwidget.width
                 height: resultwidget.height
                 ResultWidget {
-                    size: Size(64, 64)
+                    /*size: QSizeF{width: 64; height: 64}*/
                     id: resultwidget
                     icon: decoration
                     text: display
