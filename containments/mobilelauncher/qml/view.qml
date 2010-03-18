@@ -4,6 +4,7 @@ import Qt 4.6
 GridView {
     anchors.fill: parent
     model: myModel
+    flow: TopToBottom
     delegate: Component {
         Item {
             id: wrapper
@@ -17,8 +18,7 @@ GridView {
                 width: resultwidget.width
                 height: resultwidget.height
                 ResultWidget {
-                    width: 64
-                    height: 64
+                    size: Size(64, 64)
                     id: resultwidget
                     icon: decoration
                     text: display
