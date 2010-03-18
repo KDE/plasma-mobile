@@ -102,7 +102,8 @@ Item {
                 }
             }
         ]
-        transitions: Transition {
+        transitions: [
+        Transition {
             from: "Front360"
             to:"Back180, Back540"
             ParallelAnimation {
@@ -112,8 +113,8 @@ Item {
                     easing.type: "Linear";
                 }
             }
-        }
-        transitions: Transition {
+        },
+        Transition {
             from: "Front360"
             to:"Back540"
             ParallelAnimation {
@@ -123,8 +124,8 @@ Item {
                     easing.type: "Linear";
                 }
             }
-        }
-        transitions: Transition {
+        },
+        Transition {
             from: "Back180"
             to:"Front360"
             ParallelAnimation {
@@ -134,8 +135,8 @@ Item {
                     easing.type: "Linear";
                 }
             }
-        }
-        transitions: Transition {
+        },
+        Transition {
             from: "Back180"
             to:"Front0"
             ParallelAnimation {
@@ -146,6 +147,7 @@ Item {
                 }
             }
         }
+        ]
 
         MouseArea {
             id : mouseArea;
