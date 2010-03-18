@@ -37,7 +37,7 @@ Item {
         height : 480;
         state : "Front360";
         property var flipable : true;
-        property var containment;
+
         transform: Rotation {
             id: rotation
             origin.x: flipable.width / 2;
@@ -71,7 +71,16 @@ Item {
         back: Item {
             id: alternateSlot;
             objectName: "alternateSlot";
+            transform: Rotation {
+                origin.x: flipable.width / 2;
+                origin.y: flipable.height / 2;
+                axis.x: 0;
+                axis.y: 1;
+                axis.z: 0;
+                angle: 180;
+            }
         }
+
         states: [
             State {
                 name: "Back540"
@@ -148,6 +157,7 @@ Item {
             }
         }
         ]
+
 
         MouseArea {
             id : mouseArea;
