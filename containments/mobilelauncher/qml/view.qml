@@ -4,7 +4,6 @@ import Qt 4.6
 GridView {
     anchors.fill: parent
     model: myModel
-    flow: TopToBottom
     delegate: Component {
         Item {
             id: wrapper
