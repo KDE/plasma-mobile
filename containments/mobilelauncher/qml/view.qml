@@ -4,14 +4,15 @@ import Qt 4.6
 GridView {
     anchors.fill: parent
     model: myModel
-    flow: TopToBottom
-    cellWidth: 130
+    flow: GridView.TopToBottom
+    snapMode: GridView.SnapToRow
+    cellWidth: width/6
     cellHeight: 130
     delegate: Component {
         Item {
             id: wrapper
-            width: wrapper.GridView.view.cellWidth-20
-            height: wrapper.GridView.view.cellWidth-20
+            width: wrapper.GridView.view.cellWidth-30
+            height: wrapper.GridView.view.cellWidth-30
 
             GraphicsObjectContainer {
                 id: iconcontainer
