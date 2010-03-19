@@ -44,7 +44,7 @@ QML_DECLARE_TYPE(Plasma::CheckBox)
 QML_DECLARE_TYPE(Plasma::Slider)
 QML_DECLARE_TYPE(Plasma::SpinBox)
 QML_DECLARE_TYPE(Plasma::SvgWidget)
-QML_DECLARE_TYPE(Plasma::Svg)
+//QML_DECLARE_TYPE(Plasma::Svg)
 QML_DECLARE_TYPE(Plasma::FrameSvg)
 
 QML_DECLARE_TYPE(Plasma::ExtenderItem)
