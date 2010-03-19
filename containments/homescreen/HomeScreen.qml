@@ -103,7 +103,7 @@ Item {
                     if (flipable) {
                         if (flipable.state == "Front0") flipable.state = "Front360";
                         if (flipable.state == "Back540") flipable.state = "Back180";
-                        if (mouseX <= (flipable.x + flipable.width / 2)) {
+                        if (mouseX > (flipable.x + flipable.width / 2)) {
                             if (flipable.state == "Front360")
                                 flipable.state = "Back180";
                             else
