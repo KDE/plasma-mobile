@@ -128,7 +128,7 @@ void MobileDesktop::finishExecute()
         corona()->addItem(object);
         setParentItem(object);
         setParent(object);
-        object->setProperty("containment", qVariantFromValue((QGraphicsObject*)this));
+        //object->setProperty("containment", qVariantFromValue((QGraphicsObject*)this));
         setPos(0, 0);
         resize(object->width(), object->height());
         if (id() == 1) {

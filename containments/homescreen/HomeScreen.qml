@@ -180,6 +180,8 @@ Item {
                 }
             }
             anchors.fill: parent
+            //FIXME: this is evil and totally un-mobile, just for testing
+            acceptedButtons: Qt.RightButton;
         }
     }
 

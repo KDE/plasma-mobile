@@ -1,3 +1,6 @@
+
+include(KDE4Defaults)
+
 set(mobile_launcher_SRCS
     mobilelauncher.cpp
     krunnermodel.cpp

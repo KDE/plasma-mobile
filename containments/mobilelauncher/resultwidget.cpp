@@ -113,3 +113,5 @@ void ResultWidget::setGeometry(const QRectF &rect)
 
     m_animation->start();
 }
+
+#include "resultwidget.moc"

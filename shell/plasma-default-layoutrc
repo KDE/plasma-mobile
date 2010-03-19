@@ -25,7 +25,7 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][3]
-activity=
+activity=network
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -44,7 +44,7 @@ immutability=1
 zvalue=1
 
 [Containments][4]
-activity=
+activity=client
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -63,7 +63,7 @@ immutability=1
 zvalue=1
 
 [Containments][5]
-activity=
+activity=audiovideo
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -82,7 +82,7 @@ immutability=1
 zvalue=1
 
 [Containments][6]
-activity=
+activity=service
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -101,7 +101,7 @@ immutability=1
 zvalue=1
 
 [Containments][7]
-activity=
+activity=game
 desktop=-1
 formfactor=0
 geometry=0,0,800,480

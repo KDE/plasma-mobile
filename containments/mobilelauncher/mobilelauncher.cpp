@@ -79,6 +79,18 @@ void MobileLauncher::init()
             ctxt->setContextProperty("myModel", m_runnerModel);
         }
     }
+    Plasma::Corona *c = corona();
+    if (c) {
+        connect(c, SIGNAL(screenOwnerChanged(int, int, Plasma::Containment *)), this, SLOT(updateActivity(int, int, Plasma::Containment *)));
+    }
+}
+
+void MobileLauncher::updateActivity(int wasScreen, int isScreen, Plasma::Containment *containment)
+{
+    Q_UNUSED(wasScreen)
+    Q_UNUSED(wasScreen)
+
+    m_runnerModel->setQuery(containment->activity());
 }
 
 

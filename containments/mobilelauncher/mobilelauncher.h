@@ -42,6 +42,9 @@ public:
     ~MobileLauncher();
     void init();
 
+protected Q_SLOTS:
+    void updateActivity(int wasScreen, int isScreen, Plasma::Containment *containment);
+
 private:
     Plasma::QmlWidget *m_qmlWidget;
 

@@ -276,6 +276,7 @@ void PlasmaApp::updateMainSlot()
         m_currentContainment->graphicsEffect()->setEnabled(false);
         m_currentContainment = m_nextContainment;
         m_nextContainment = 0;
+        m_currentContainment->setScreen(0);
 
     }
 }
