@@ -57,6 +57,29 @@ Item {
                 width: homescreen.width;
                 height: homescreen.height;
                 transformOrigin : Item.Center;
+
+                MouseArea {
+                    id : mouseAreaMainSlot;
+                    // change between default and 'back' states
+                    onClicked : {
+                        if (flipable) {
+                            if (flipable.state == "Front0") flipable.state = "Front360";
+                            if (flipable.state == "Back540") flipable.state = "Back180";
+                            if (mouseX <= (flipable.x + flipable.width / 2)) {
+                                if (flipable.state == "Front360")
+                                    flipable.state = "Back180";
+                                else
+                                    flipable.state = "Front360";
+                            } else {
+                                if (flipable.state == "Front360")
+                                    flipable.state = "Back540";
+                                else
+                                    flipable.state = "Front0";
+                            }
+                        }
+                    }
+                    anchors.fill: parent
+                }
             }
 
             Item {
@@ -68,16 +91,32 @@ Item {
                 height: homescreen.height;
             }
         }
-        back: Item {
+        back: Rectangle {
             id: alternateSlot;
             objectName: "alternateSlot";
-            transform: Rotation {
-                origin.x: flipable.width / 2;
-                origin.y: flipable.height / 2;
-                axis.x: 0;
-                axis.y: 1;
-                axis.z: 0;
-                angle: 180;
+
+            //FXME: evil duplication, but this place seems the only one where both works and doesn't steal every click
+            MouseArea {
+                id : mouseAreaAlternate;
+                // change between default and 'back' states
+                onClicked : {
+                    if (flipable) {
+                        if (flipable.state == "Front0") flipable.state = "Front360";
+                        if (flipable.state == "Back540") flipable.state = "Back180";
+                        if (mouseX <= (flipable.x + flipable.width / 2)) {
+                            if (flipable.state == "Front360")
+                                flipable.state = "Back180";
+                            else
+                                flipable.state = "Front360";
+                        } else {
+                            if (flipable.state == "Front360")
+                                flipable.state = "Back540";
+                            else
+                                flipable.state = "Front0";
+                        }
+                    }
+                }
+                anchors.fill: parent
             }
         }
 
@@ -159,30 +198,7 @@ Item {
         ]
 
 
-        MouseArea {
-            id : mouseArea;
-            // change between default and 'back' states
-            onClicked : {
-                if (flipable) {
-                    if (flipable.state == "Front0") flipable.state = "Front360";
-                    if (flipable.state == "Back540") flipable.state = "Back180";
-                    if (mouseX <= (flipable.x + flipable.width / 2))
-                        if (flipable.state == "Front360")
-                            flipable.state = "Back180";
-                        else
-                            flipable.state = "Front360";
-                    else {
-                        if (flipable.state == "Front360")
-                            flipable.state = "Back540";
-                        else
-                            flipable.state = "Front0";
-                    }
-                }
-            }
-            anchors.fill: parent
-            //FIXME: this is evil and totally un-mobile, just for testing
-            acceptedButtons: Qt.RightButton;
-        }
+        
     }
 
     states: [

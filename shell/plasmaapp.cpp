@@ -407,10 +407,14 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     } else if (containment->id() == 2) {
         QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>("alternateSlot");
 
-        containment->setParentItem(alternateSlot);
-        containment->setParent(alternateSlot);
-        containment->setPos(0, 0);
-        return;
+        if (alternateSlot) {
+            alternateSlot->setProperty("width", m_mainView->size().width());
+            alternateSlot->setProperty("height", m_mainView->size().height());
+            containment->setParentItem(alternateSlot);
+            containment->setParent(alternateSlot);
+            containment->setPos(0, 0);
+            return;
+        }
     }
 
     // XXX: FIX ME with beautiful values :)

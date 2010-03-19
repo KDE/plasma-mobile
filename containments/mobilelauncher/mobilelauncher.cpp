@@ -67,6 +67,8 @@ void MobileLauncher::init()
     m_runnerModel = new KRunnerModel(this);
     m_runnerModel->setQuery("Network");
 
+    setContentsMargins(0, 16, 0, 32);
+
     m_qmlWidget = new Plasma::QmlWidget(this);
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
     lay->addItem(m_qmlWidget);

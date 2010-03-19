@@ -7,12 +7,12 @@ GridView {
     flow: GridView.TopToBottom
     snapMode: GridView.SnapToRow
     cellWidth: width/6
-    cellHeight: 130
+    cellHeight: width/6
     delegate: Component {
         Item {
             id: wrapper
-            width: wrapper.GridView.view.cellWidth-30
-            height: wrapper.GridView.view.cellWidth-30
+            width: wrapper.GridView.view.cellWidth-40
+            height: wrapper.GridView.view.cellWidth-40
 
             GraphicsObjectContainer {
                 id: iconcontainer
