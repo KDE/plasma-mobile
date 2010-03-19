@@ -295,7 +295,7 @@ Plasma::Corona* PlasmaApp::corona()
         // setup our QML home screen;
         setupHomeScreen();
         m_corona->initializeLayout();
-
+        m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->size()));
         m_mainView->setScene(m_corona);
         m_mainView->show();
     }

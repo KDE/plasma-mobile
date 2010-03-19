@@ -49,6 +49,7 @@ public:
     Plasma::Containment *findFreeContainment() const;
 
     virtual int numScreens() const;
+    void setScreenGeometry(const QRect &geometry);
     virtual QRect screenGeometry(int id) const;
     virtual QRegion availableScreenRegion(int id) const;
 
@@ -58,6 +59,7 @@ public slots:
 private:
     void init();
     Plasma::Applet *loadDefaultApplet(const QString &pluginName, Plasma::Containment *c);
+    QRect m_screenGeometry;
 };
 
 #endif

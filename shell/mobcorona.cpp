@@ -151,9 +151,14 @@ int MobCorona::numScreens() const
     return QApplication::desktop()->screenCount();
 }
 
+void MobCorona::setScreenGeometry(const QRect &geometry)
+{
+    m_screenGeometry = geometry;
+}
+
 QRect MobCorona::screenGeometry(int id) const
 {
-    return QApplication::desktop()->screenGeometry(id);
+    return m_screenGeometry;
 }
 
 QRegion MobCorona::availableScreenRegion(int id) const
