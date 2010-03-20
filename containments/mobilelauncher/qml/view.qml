@@ -2,12 +2,16 @@ import MobileLauncher 1.0
 import Qt 4.6
 
 GridView {
+    id: gridView
     anchors.fill: parent
     model: myModel
     flow: GridView.TopToBottom
     snapMode: GridView.SnapToRow
     cellWidth: width/6
     cellHeight: width/6
+    clip: true
+    signal clicked
+
     delegate: Component {
         Item {
             id: wrapper
@@ -28,6 +32,11 @@ GridView {
             MouseArea {
                 id: mousearea
                 anchors.fill: parent
+
+                onClicked : {
+                    gridView.currentIndex = index
+                    gridView.clicked()
+                }
             }
         }
     }
