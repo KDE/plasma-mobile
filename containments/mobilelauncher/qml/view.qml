@@ -17,6 +17,7 @@ GridView {
             id: wrapper
             width: wrapper.GridView.view.cellWidth-40
             height: wrapper.GridView.view.cellWidth-40
+            property var urlText: url
 
             GraphicsObjectContainer {
                 id: iconcontainer

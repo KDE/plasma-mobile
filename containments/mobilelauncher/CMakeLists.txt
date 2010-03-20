@@ -3,7 +3,8 @@ include(KDE4Defaults)
 
 set(mobile_launcher_SRCS
     mobilelauncher.cpp
-    krunnermodel.cpp
+    models/krunnermodel.cpp
+    models/standarditemfactory.cpp
     resultwidget.cpp
     ../../common/qmlwidget.cpp
     )

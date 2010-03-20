@@ -44,6 +44,7 @@ public:
 
 protected Q_SLOTS:
     void updateActivity(int wasScreen, int isScreen, Plasma::Containment *containment);
+    void itemActivated();
 
 private:
     Plasma::QmlWidget *m_qmlWidget;

@@ -20,6 +20,7 @@
 
 // Own
 #include "krunnermodel.h"
+#include "models/commonmodel.h"
 
 // Qt
 #include <QBasicTimer>
@@ -32,6 +33,7 @@
 // KDE
 #include <KService>
 #include <KStandardDirs>
+#include <KDebug>
 #include <Plasma/AbstractRunner>
 #include <Plasma/RunnerManager>
 
@@ -49,7 +51,7 @@ Plasma::RunnerManager * runnerManager() {
 KService::Ptr serviceForUrl(const KUrl & url)
 {
     QString runner = url.host();
-    QString id = url.path();
+    QString id = url.fragment();
 
     if (id.startsWith(QLatin1String("/"))) {
         id = id.remove(0, 1);
@@ -66,44 +68,11 @@ KService::Ptr serviceForUrl(const KUrl & url)
     return KService::serviceByStorageId(id);
 }
 
-QStandardItem *StandardItemFactory::createItem(const QIcon & icon, const QString & title,
-        const QString & description, const QString & url)
-{
-    QStandardItem *appItem = new QStandardItem;
-
-    appItem->setText(title);
-    appItem->setIcon(icon);
-    appItem->setData(description, Qt::UserRole + 1);
-    appItem->setData(url, Qt::UserRole + 2);
-
-    return appItem;
-}
-
-
-
-class ResultItem {
-public:
-    ResultItem()
-    {
-    }
-
-    ResultItem(QIcon _icon, QString _name, QString _description, QVariant _data)
-        : icon(_icon),
-          name(_name),
-          description(_description),
-          data(_data)
-    {
-    }
-
-    QIcon icon;
-    QString name, description;
-    QVariant data;
-};
 
 bool KRunnerItemHandler::openUrl(const KUrl& url)
 {
     QString runner = url.host();
-    QString id = url.path();
+    QString id = url.fragment();
     if (id.startsWith(QLatin1String("/"))) {
         id = id.remove(0, 1);
     }
@@ -124,6 +93,7 @@ public:
 
     QBasicTimer searchDelay;
     QString searchQuery;
+    QString currentRunner;
 };
 
 KRunnerModel::KRunnerModel(QObject *parent)
@@ -136,11 +106,14 @@ KRunnerModel::KRunnerModel(QObject *parent)
             SLOT(matchesChanged (const QList< Plasma::QueryMatch > & )));
 
     QHash<int, QByteArray> newRoleNames = roleNames();
-    newRoleNames[Qt::UserRole + 1] = "description";
-    newRoleNames[Qt::UserRole + 2] = "url";
-
+    newRoleNames[CommonModel::Description] = "description";
+    newRoleNames[CommonModel::Url] = "url";
+    newRoleNames[CommonModel::Weight] = "weight";
+    newRoleNames[CommonModel::ActionTypeRole] = "action";
 
     setRoleNames(newRoleNames);
+
+    setSortRole(CommonModel::Weight);
 }
 
 KRunnerModel::~KRunnerModel()
@@ -148,12 +121,13 @@ KRunnerModel::~KRunnerModel()
     delete d;
 }
 
-void KRunnerModel::setQuery(const QString& query)
+void KRunnerModel::setQuery(const QString& query, const QString& runner)
 {
     runnerManager()->reset();
     clear();
 
     d->searchQuery = query.trimmed();
+    d->currentRunner = runner;
 
     if (d->searchQuery.isEmpty()) {
         return;
@@ -168,7 +142,7 @@ void KRunnerModel::timerEvent(QTimerEvent * event)
 
     if (event->timerId() == d->searchDelay.timerId()) {
         d->searchDelay.stop();
-        runnerManager()->launchQuery(d->searchQuery);
+        runnerManager()->launchQuery(d->searchQuery, d->currentRunner);
     };
 }
 
@@ -189,10 +163,14 @@ void KRunnerModel::matchesChanged(const QList< Plasma::QueryMatch > & m)
                 match.icon(),
                 match.text(),
                 match.subtext(),
-                QString("krunner://") + match.runner()->id() + "/" + match.id()
+                QString("krunner://") + match.runner()->id() + "/" + ::runnerManager()->query() + "#" + match.id(),
+                match.relevance(),
+                CommonModel::AddAction
                 )
             );
     }
+
+    sort(0, Qt::DescendingOrder);
 }
 
 Qt::ItemFlags KRunnerModel::flags(const QModelIndex &index) const
@@ -200,7 +178,7 @@ Qt::ItemFlags KRunnerModel::flags(const QModelIndex &index) const
     Qt::ItemFlags flags = QStandardItemModel::flags(index);
 
     if (index.isValid()) {
-        KUrl url = data(index, Qt::UserRole+2).toString();
+        KUrl url = data(index, CommonModel::Url).toString();
         QString host = url.host();
         if (host != "services") {
             flags &= ~ ( Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled );
@@ -217,7 +195,7 @@ QMimeData * KRunnerModel::mimeData(const QModelIndexList &indexes) const
     KUrl::List urls;
 
     foreach (const QModelIndex & index, indexes) {
-        KUrl url = data(index, Qt::UserRole+2).toString();
+        KUrl url = data(index, CommonModel::Url).toString();
 
         KService::Ptr service = serviceForUrl(url);
 
@@ -230,10 +208,23 @@ QMimeData * KRunnerModel::mimeData(const QModelIndexList &indexes) const
 
     if (!urls.isEmpty()) {
         urls.populateMimeData(mimeData);
+    } else {
+        QList<QUrl> urls;
+        foreach (const QModelIndex & index, indexes) {
+            urls << QUrl(data(index, CommonModel::Url).toString());
+        }
+
+        mimeData = new QMimeData;
+        mimeData->setUrls(urls);
     }
 
     return mimeData;
 
+}
+
+Plasma::RunnerManager *KRunnerModel::runnerManager()
+{
+    return ::runnerManager();
 }
 
 #include "krunnermodel.moc"

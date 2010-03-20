@@ -29,6 +29,7 @@
 #include <QtDeclarative/qdeclarative.h>
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeContext>
+#include <QtDeclarative/QDeclarativeItem>
 #include <QtGui/QGraphicsLinearLayout>
 #include <QStandardItemModel>
 
@@ -80,6 +81,10 @@ void MobileLauncher::init()
         if (ctxt) {
             ctxt->setContextProperty("myModel", m_runnerModel);
         }
+        QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_qmlWidget->rootObject());
+        if (item) {
+            connect(item, SIGNAL(clicked()), this, SLOT(itemActivated()));
+        }
     }
     Plasma::Corona *c = corona();
     if (c) {
@@ -95,6 +100,19 @@ void MobileLauncher::updateActivity(int wasScreen, int isScreen, Plasma::Contain
     m_runnerModel->setQuery(containment->activity());
 }
 
+void MobileLauncher::itemActivated()
+{
+    QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_qmlWidget->rootObject());
+    if (item) {
+        item = item->property("currentItem").value<QDeclarativeItem *>();
+        if (item) {
+            QString url = item->property("urlText").toString();
+            kWarning() << "URL clicked" << url;
+
+            KRunnerItemHandler::openUrl(url);
+        }
+    }
+}
 
 K_EXPORT_PLASMA_APPLET(mobilelauncher, MobileLauncher)
 

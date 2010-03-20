@@ -27,26 +27,18 @@
 
 #include <Plasma/QueryMatch>
 
-/**
- * Factory for creating QStandardItems with appropriate text, icons, URL
- * and other Kickoff-specific information for a given URL or Service.
- */
-class StandardItemFactory
+#include "standarditemfactory.h"
+
+namespace Plasma
 {
-public:
-    static QStandardItem *createItem(const QIcon & icon, const QString & title,
-        const QString & description, const QString & url);
+    class RunnerManager;
+}
 
-private:
-    static void setSpecialUrlProperties(const KUrl& url, QStandardItem *item);
-};
-
-class KRunnerItemHandler {
-public:
+namespace KRunnerItemHandler {
     bool openUrl(const KUrl& url);
-};
+}
 
-class  KRunnerModel : public QStandardItemModel
+class KRunnerModel : public QStandardItemModel
 {
     Q_OBJECT
 
@@ -57,11 +49,13 @@ public:
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual QMimeData *mimeData(const QModelIndexList &indexes) const;
 
+    static Plasma::RunnerManager *runnerManager();
+
 private:
     void timerEvent(QTimerEvent * event);
 
 public Q_SLOTS:
-    void setQuery(const QString& query);
+    void setQuery(const QString& query, const QString& runner = QString());
 
 private Q_SLOTS:
     void matchesChanged(const QList< Plasma::QueryMatch > & matches);
