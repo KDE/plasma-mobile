@@ -21,7 +21,7 @@
 //own
 #include "mobilelauncher.h"
 #include "../../common/qmlwidget.h"
-#include "krunnermodel.h"
+#include "models/krunnermodel.h"
 #include "resultwidget.h"
 
 
