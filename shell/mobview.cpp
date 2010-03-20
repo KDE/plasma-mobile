@@ -34,11 +34,11 @@
 #include <Plasma/Containment>
 
 #ifndef QT_NO_OPENGL
-    #include <QtOpenGL/QtOpenGL>
+#include <QtOpenGL/QtOpenGL>
 #endif
 
 MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
-    : Plasma::View(containment, uid, parent), mUseGL(false)
+    : Plasma::View(containment, uid, parent), m_useGL(false)
 {
     setFocusPolicy(Qt::NoFocus);
     connectContainment(containment);
@@ -54,7 +54,7 @@ MobView::~MobView()
 {
 }
 
-void MobView::setUseGL(bool on)
+void MobView::setUseGL(const bool on)
 {
 #ifndef QT_NO_OPENGL
     if (on) {
@@ -63,12 +63,12 @@ void MobView::setUseGL(bool on)
       setViewport(glWidget);
     }
 #endif
-    mUseGL = on;
+    m_useGL = on;
 }
 
-bool MobView::useGL()
+bool MobView::useGL() const
 {
-    return mUseGL;
+    return m_useGL;
 }
 
 void MobView::connectContainment(Plasma::Containment *containment)

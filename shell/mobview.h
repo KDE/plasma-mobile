@@ -39,8 +39,8 @@ public:
     MobView(Plasma::Containment *containment, int uid, QWidget *parent = 0);
     ~MobView();
 
-    void setUseGL(bool on);
-    bool useGL();
+    void setUseGL(const bool on);
+    bool useGL() const;
 
     void connectContainment(Plasma::Containment *containment);
 
@@ -64,7 +64,7 @@ protected:
     void resizeEvent(QResizeEvent *event);
 
 private:
-    bool mUseGL;
+    bool m_useGL;
 };
 
 #endif // multiple inclusion guard
