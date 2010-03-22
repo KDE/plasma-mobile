@@ -25,15 +25,16 @@ Rectangle {
                      PropertyChanges { target: defaultBackground; y: 0 }
                  }
              ]
-        transitions: Transition {
+        transitions: [
+            Transition {
                  from: "Visible"
                  to: "Hidden"
                  SequentialAnimation {
                      NumberAnimation { properties: "scale"; easing.type: "InQuad"; duration: 150 }
                      NumberAnimation { properties: "y"; easing.type: "InQuad"; duration: 400 }
                  }
-             }
-        transitions: Transition {
+             },
+            Transition {
                   from: "Hidden"
                   to: "Visible"
                   SequentialAnimation {
@@ -41,6 +42,7 @@ Rectangle {
                       NumberAnimation { properties: "scale"; easing.type: "InQuad"; duration: 150 }
                   }
               }
+          ]
     }
 
     Flipable {
@@ -87,46 +89,48 @@ Rectangle {
                      }
                  }
              ]
-        transitions: Transition {
+        transitions: [
+            Transition {
                  from: "Visible"
                  to: "Hidden"
                  SequentialAnimation {
                      NumberAnimation { properties: "scale"; easing.type: "InQuad"; duration: 150 }
                      NumberAnimation { properties: "y"; easing.type: "InQuad"; duration: 400 }
                  }
-             }
-        transitions: Transition {
+             },
+             Transition {
                   from: "Hidden"
                   to: "Visible"
                   SequentialAnimation {
                       NumberAnimation { properties: "y"; easing.type: "InQuad"; duration: 500 }
                       NumberAnimation { properties: "scale"; easing.type: "InQuad"; duration: 150 }
                   }
-              }
+              },
 
-        transitions: Transition {
-            from: "Visible"
-            to:"Back"
-            ParallelAnimation {
-                NumberAnimation {
-                    properties: "angle";
-                    duration: 800;
-                    easing.type: "Linear";
+            Transition {
+                from: "Visible"
+                to:"Back"
+                ParallelAnimation {
+                    NumberAnimation {
+                        properties: "angle";
+                        duration: 800;
+                        easing.type: "Linear";
+                    }
+                }
+            },
+
+            Transition {
+                from: "Back"
+                to:"Visible"
+                ParallelAnimation {
+                    NumberAnimation {
+                        properties: "angle";
+                        duration: 800;
+                        easing.type: "Linear";
+                    }
                 }
             }
-        }
-
-        transitions: Transition {
-            from: "Back"
-            to:"Visible"
-            ParallelAnimation {
-                NumberAnimation {
-                    properties: "angle";
-                    duration: 800;
-                    easing.type: "Linear";
-                }
-            }
-        }
+        ]
 
         MouseArea {
             // change between default and 'back' states
