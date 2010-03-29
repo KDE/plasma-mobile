@@ -1,11 +1,13 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=Mobile icon grid
+Name[en_GB]=Mobile icon grid
 Name[pt]=Grelha de ícones móvel
 Name[sv]=Ikonrutnät för mobiler
 Name[uk]=Гратка для піктограм мобільної версії
 Name[x-test]=xxMobile icon gridxx
 Comment=Main menu for mobile devices
+Comment[en_GB]=Main menu for mobile devices
 Comment[es]=Menú principal para dispositivos móviles
 Comment[pt]=Menu principal para dispositivos móveis
 Comment[sv]=Huvudmeny för mobilenheter
