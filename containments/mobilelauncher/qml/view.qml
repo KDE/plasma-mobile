@@ -5,7 +5,7 @@ GridView {
     id: gridView
     anchors.fill: parent
     model: myModel
-    flow: GridView.TopToBottom
+    flow: GridView.LeftToRight
     snapMode: GridView.SnapToRow
     cellWidth: width/6
     cellHeight: width/6
