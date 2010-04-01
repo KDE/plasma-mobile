@@ -52,9 +52,9 @@ MobileLauncher::MobileLauncher(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile launcher";
 
-    QML_REGISTER_TYPE(MobileLauncher, 1,0, ResultWidget, ResultWidget);
+    qmlRegisterType<ResultWidget>("ResultWidget", 1, 0, "ResultWidget");
     // At some point it has to be a custom constainment
-    //setContainmentType(Containment::CustomContainment);
+    setContainmentType(Containment::CustomContainment);
 }
 
 MobileLauncher::~MobileLauncher()
