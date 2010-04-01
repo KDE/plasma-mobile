@@ -64,14 +64,14 @@ class CachingEffect : public QGraphicsEffect
     CachingEffect(QObject *parent = 0) : QGraphicsEffect(parent)
     {}
 
-    void draw (QPainter *p)
+    void draw(QPainter *p)
     {
-        p->save();
         QPoint point;
         QPixmap pixmap = sourcePixmap(Qt::LogicalCoordinates, &point);
+        //maybe we are in a view with save and restore disabled..
         p->setCompositionMode(QPainter::CompositionMode_Source);
-        p->drawPixmap(point, pixmap);
-        p->restore();
+        p->drawPixmap(QRect(0, 0, 800, 480), pixmap, QRect(-point, QSize(800, 480)));
+        p->setCompositionMode(QPainter::CompositionMode_SourceOver);
     }
 };
 
@@ -130,7 +130,7 @@ PlasmaApp::PlasmaApp()
 
     bool isFullScreen = args->isSet("fullscreen");
     if (isFullScreen) {
-	m_mainView->showFullScreen();
+        m_mainView->showFullScreen();
     }
 
     //setIsDesktop(isDesktop);
@@ -348,8 +348,9 @@ void PlasmaApp::setupContainment(Plasma::Containment *containment)
 
         containment->resize(m_mainView->size());
         //FIXME: this makes the containment to not paint until the animation finishes
-        //containment->graphicsEffect()->setEnabled(true);
-        //m_currentContainment->graphicsEffect()->setEnabled(true);
+        containment->graphicsEffect()->setEnabled(true);
+        m_currentContainment->graphicsEffect()->update();
+        m_currentContainment->graphicsEffect()->setEnabled(true);
         //###The reparenting need a repaint so this ensure that we
         //have actually re-render the containment otherwise it
         //makes animations slugglish. We need a better solution.
