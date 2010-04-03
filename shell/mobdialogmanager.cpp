@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "netdialogmanager.h"
+#include "mobdialogmanager.h"
 
 #include <QtGui/QWidget>
 #include <QtGui/QStyleOptionGraphicsItem>
@@ -89,7 +89,7 @@ public:
 
 
 MobDialogManager::MobDialogManager(Plasma::Corona *parent)
-    : Plasma::DialogManager(parent),
+    : Plasma::AbstractDialogManager(parent),
       m_corona(parent)
 {
 }
@@ -135,4 +135,4 @@ void MobDialogManager::dialogDestroyed(QObject *object)
     managedDialogs.remove(widget);
 }
 
-#include "netdialogmanager.moc"
+#include "mobdialogmanager.moc"

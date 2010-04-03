@@ -8,6 +8,7 @@ set(plasma-mobile_SRCS
     mobcorona.cpp
     mobview.cpp
     plasmaapp.cpp
+    mobdialogmanager.cpp
     ../common/qmlwidget.cpp
 )
 

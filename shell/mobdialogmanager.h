@@ -20,7 +20,7 @@
 #ifndef NET_DIALOGMANAGER_H
 #define NET_DIALOGMANAGER_H
 
-#include <plasma/dialogmanager.h>
+#include <plasma/abstractdialogmanager.h>
 
 #include <QtCore/QHash>
 
@@ -33,7 +33,7 @@ namespace Plasma
     class ScrollWidget;
 }
 
-class MobDialogManager : public Plasma::DialogManager
+class MobDialogManager : public Plasma::AbstractDialogManager
 {
     Q_OBJECT
 

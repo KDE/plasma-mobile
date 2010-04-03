@@ -21,6 +21,7 @@
  ***************************************************************************/
 
 #include "mobcorona.h"
+#include "mobdialogmanager.h"
 
 #include <QApplication>
 #include <QDesktopWidget>
@@ -63,7 +64,7 @@ void MobCorona::init()
     enableAction("lock widgets", false);
 
     setItemIndexMethod(QGraphicsScene::NoIndex);
-
+    setDialogManager(new MobDialogManager(this));
 }
 
 void MobCorona::loadDefaultLayout()
