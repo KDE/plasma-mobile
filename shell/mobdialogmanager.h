@@ -41,7 +41,8 @@ public:
     explicit MobDialogManager(Plasma::Corona *parent=0);
     ~MobDialogManager();
 
-    virtual void showDialog(QWidget *widget, Plasma::Applet *applet);
+public Q_SLOTS:
+    void showDialog(QWidget *widget, Plasma::Applet *applet);
 
 private Q_SLOTS:
     void dialogDestroyed(QObject *object);
