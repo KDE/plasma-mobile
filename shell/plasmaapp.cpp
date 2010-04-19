@@ -186,23 +186,17 @@ void PlasmaApp::syncConfig()
 
 void PlasmaApp::setupHomeScreen()
 {
-    QUrl url(KStandardDirs::locate("appdata", "containments/homescreen/HomeScreen.qml"));
+    m_qmlWidget = new Plasma::QmlWidget();
 
-    m_engine = new QDeclarativeEngine(this);
-    m_homescreen = new QDeclarativeComponent(m_engine, url, this);
+    m_qmlWidget->setQmlPath(KStandardDirs::locate("appdata", "containments/homescreen/HomeScreen.qml"));
 
-    QObject *obj = m_homescreen->create();
-    if(m_homescreen->isError()){
-        QString errorStr;
-        QList<QDeclarativeError> errors = m_homescreen->errors();
-        foreach (const QDeclarativeError &error, errors) {
-            errorStr += (error.line()>0?QString::number(error.line()) + ": ":"")
-                + error.description() + '\n';
-        }
-        kWarning() << errorStr;
-        return;
+    if (!m_qmlWidget->engine()) {
+        QCoreApplication::quit();
     }
-    QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(obj);
+
+    m_homescreen = m_qmlWidget->mainComponent();
+
+    QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(m_qmlWidget->rootObject());
 
     mainItem->setProperty("width", m_mainView->size().width());
     mainItem->setProperty("height", m_mainView->size().height());

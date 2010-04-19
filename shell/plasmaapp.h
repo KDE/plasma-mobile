@@ -78,9 +78,9 @@ private:
     MobCorona *m_corona;
     MobView *m_mainView;
 
-    QDeclarativeEngine *m_engine;
-    QDeclarativeContext *m_context;
     QDeclarativeComponent *m_homescreen;
+
+    Plasma::QmlWidget *m_qmlWidget;
 
     QDeclarativeItem *m_mainSlot;
     QDeclarativeItem *m_spareSlot;
