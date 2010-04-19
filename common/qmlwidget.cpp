@@ -163,6 +163,11 @@ QObject *QmlWidget::rootObject() const
     return d->root;
 }
 
+QDeclarativeComponent *QmlWidget::mainComponent() const
+{
+    return d->component;
+}
+
 void QmlWidget::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     QGraphicsWidget::resizeEvent(event);

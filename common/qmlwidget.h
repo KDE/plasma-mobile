@@ -24,6 +24,7 @@
 
 
 class QDeclarativeEngine;
+class QDeclarativeComponent;
 
 namespace Plasma
 {
@@ -50,6 +51,7 @@ public:
 
     QDeclarativeEngine* engine();
     QObject *rootObject() const;
+    QDeclarativeComponent *mainComponent() const;
 
 protected:
     void resizeEvent(QGraphicsSceneResizeEvent *event);
