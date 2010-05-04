@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import Qt 4.6
+import Qt 4.7
 
 Item {
     id: homescreen;
@@ -36,7 +36,7 @@ Item {
         width : 800;
         height : 480;
         state : "Front360";
-        property var flipable : true;
+        property bool flipable : true;
 
         transform: Rotation {
             id: rotation

@@ -1,4 +1,4 @@
-import Qt 4.6
+import Qt 4.7
 import "qml"
 Item {
     width : 800 ; height : 480
