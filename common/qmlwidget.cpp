@@ -71,7 +71,7 @@ void QmlWidgetPrivate::errorPrint()
                 + error.description() + '\n';
         }
     }
-    kWarning() << errorStr;
+    kWarning() << component->url().toString() + '\n' + errorStr;
 }
 
 void QmlWidgetPrivate::execute(const QString &fileName)
