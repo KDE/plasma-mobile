@@ -17,19 +17,16 @@ GridView {
             id: wrapper
             width: wrapper.GridView.view.cellWidth-40
             height: wrapper.GridView.view.cellWidth-40
-            property var urlText: url
+            property string urlText: url
 
-            GraphicsObjectContainer {
-                id: iconcontainer
-                anchors.fill: parent
-                ResultWidget {
-                    minimumSize.width: iconcontainer.width
-                    minimumSize.height: iconcontainer.height
-                    id: resultwidget
-                    icon: decoration
-                    text: display
-                }
+            ResultWidget {
+                minimumSize.width: wrapper.width
+                minimumSize.height: wrapper.height
+                id: resultwidget
+                icon: decoration
+                text: display
             }
+
             MouseArea {
                 id: mousearea
                 anchors.fill: parent
