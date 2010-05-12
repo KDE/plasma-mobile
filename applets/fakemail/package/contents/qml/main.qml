@@ -6,26 +6,31 @@ QGraphicsWidget {
     id: page;
     layout: QGraphicsLinearLayout {
         orientation: "Vertical"
-
-        QGraphicsWidget {
+        Plasma.Frame {
             layout: QGraphicsLinearLayout {
-                Plasma.PushButton {
-                    text: "From:"
+                orientation: "Vertical"
+
+                QGraphicsWidget {
+                    layout: QGraphicsLinearLayout {
+                        Plasma.PushButton {
+                            text: "From:"
+                        }
+                        Plasma.LineEdit {
+                            text: "john@example.com"
+                        }
+                    }
                 }
-                Plasma.LineEdit {
-                    text: "john@example.com"
-                }
-            }
-        }
 
 
-        QGraphicsWidget {
-            layout: QGraphicsLinearLayout {
-                Plasma.PushButton {
-                    text: "To:"
-                }
-                Plasma.LineEdit {
-                    text: "foo@example.com"
+                QGraphicsWidget {
+                    layout: QGraphicsLinearLayout {
+                        Plasma.PushButton {
+                            text: "To:"
+                        }
+                        Plasma.LineEdit {
+                            text: "foo@example.com"
+                        }
+                    }
                 }
             }
         }
