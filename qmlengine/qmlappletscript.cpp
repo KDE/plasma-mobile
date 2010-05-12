@@ -19,6 +19,7 @@
  */
 
 #include "qmlappletscript.h"
+#include "../bindings/plasmabindings.h"
 
 #include <QDeclarativeComponent>
 #include <QDeclarativeEngine>
@@ -31,6 +32,8 @@
 #include <Plasma/Applet>
 
 K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
+
+extern void setupBindings();
 
 class QmlAppletScriptPrivate
 {
@@ -110,6 +113,7 @@ void QmlAppletScriptPrivate::finishExecute()
 QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
     : Plasma::AppletScript(parent), d(new QmlAppletScriptPrivate(this))
 {
+    setupBindings();
     Q_UNUSED(args);
 }
 
