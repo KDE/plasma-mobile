@@ -27,6 +27,7 @@
 #include <plasma/widgets/checkbox.h>
 #include <plasma/widgets/pushbutton.h>
 #include <plasma/widgets/svgwidget.h>
+#include <plasma/widgets/frame.h>
 #include <plasma/extender.h>
 #include <plasma/extenderitem.h>
 #include <plasma/animator.h>
@@ -40,6 +41,7 @@ QML_DECLARE_TYPE(Plasma::TextEdit)
 QML_DECLARE_TYPE(Plasma::LineEdit)
 QML_DECLARE_TYPE(Plasma::PushButton)
 QML_DECLARE_TYPE(Plasma::Label)
+QML_DECLARE_TYPE(Plasma::Frame)
 QML_DECLARE_TYPE(Plasma::CheckBox)
 QML_DECLARE_TYPE(Plasma::Slider)
 QML_DECLARE_TYPE(Plasma::SpinBox)
