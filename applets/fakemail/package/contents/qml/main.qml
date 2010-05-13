@@ -20,26 +20,31 @@ QGraphicsWidget {
                }
 
                 Plasma.PushButton {
+                    id: fromButton
                     QGraphicsGridLayout.row : 0
                     QGraphicsGridLayout.column : 1
                     text: "From:"
                 }
 
                 Plasma.LineEdit {
+                    minimumSize.height : fromButton.size.height-10
                     QGraphicsGridLayout.row : 0
                     QGraphicsGridLayout.column : 2
                     QGraphicsGridLayout.columnSpan : 2
+                    QGraphicsGridLayout.alignment : Center
                     text: "john@example.com"
                 }
 
 
 
                 Plasma.PushButton {
+                    id: toButton
                     QGraphicsGridLayout.row : 1
                     QGraphicsGridLayout.column : 1
                     text: "To:"
                 }
                 Plasma.LineEdit {
+                    minimumSize.height : toButton.size.height-10
                     QGraphicsGridLayout.row : 1
                     QGraphicsGridLayout.column : 2
                     QGraphicsGridLayout.columnStretchFactor : 3
