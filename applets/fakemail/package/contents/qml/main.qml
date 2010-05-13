@@ -28,6 +28,7 @@ QGraphicsWidget {
                 Plasma.LineEdit {
                     QGraphicsGridLayout.row : 0
                     QGraphicsGridLayout.column : 2
+                    QGraphicsGridLayout.columnSpan : 2
                     text: "john@example.com"
                 }
 
@@ -41,7 +42,13 @@ QGraphicsWidget {
                 Plasma.LineEdit {
                     QGraphicsGridLayout.row : 1
                     QGraphicsGridLayout.column : 2
+                    QGraphicsGridLayout.columnStretchFactor : 3
                     text: "foo@example.com"
+                }
+                Plasma.PushButton {
+                    QGraphicsGridLayout.row : 1
+                    QGraphicsGridLayout.column : 3
+                    text: "Send"
                 }
             }
         }
