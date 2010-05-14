@@ -27,7 +27,7 @@ QGraphicsWidget {
                 }
 
                 Plasma.LineEdit {
-                    minimumSize.height : fromButton.size.height-10
+                    minimumSize.height : fromButton.size.height
                     QGraphicsGridLayout.row : 0
                     QGraphicsGridLayout.column : 2
                     QGraphicsGridLayout.columnSpan : 2
@@ -44,7 +44,7 @@ QGraphicsWidget {
                     text: "To:"
                 }
                 Plasma.LineEdit {
-                    minimumSize.height : toButton.size.height-10
+                    minimumSize.height : toButton.size.height
                     QGraphicsGridLayout.row : 1
                     QGraphicsGridLayout.column : 2
                     QGraphicsGridLayout.columnStretchFactor : 3
