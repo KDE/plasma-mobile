@@ -7,31 +7,36 @@ import "components"
 QGraphicsWidget {
     id : main
 
+    
 
-    Flickable {
-        id : mainFlickable
+    ListView {
+        id : mainView
         anchors.fill : main
         contentWidth: content.width
         contentHeight: content.height
         clip : true
+        orientation: ListView.Horizontal
+        snapMode: ListView.SnapOneItem
 
-        Row {
+        model : VisualItemModel {
             id : content
 
             MessageList {
                 id : messageList
-                height : mainFlickable.height
-                width : mainFlickable.width
+                height : mainView.height
+                width : mainView.width
             }
 
             Composer {
                 id : composer
-                height : mainFlickable.height
-                width : mainFlickable.width
+                height : mainView.height
+                width : mainView.width
             }
-
-
         }
 
+        Connections {
+            target: messageList
+            onClicked: mainView.currentIndex = 1
+        }
     }
 }

@@ -1,7 +1,9 @@
 import Qt 4.7
 
 Item {
-    
+    id: main
+    signal clicked
+
     ListModel {
         id: messagesModel
         ListElement {
@@ -114,6 +116,14 @@ Item {
                 gradient: Gradient {
                     GradientStop { position: 0.0; color: "transparent" }
                     GradientStop { position: 1.0; color: Qt.rgba(0, 0, 0, 0.15)  }
+                }
+            }
+            MouseArea {
+                id: itemMouse
+                anchors.fill: parent
+                onClicked: {
+                    list.currentIndex = index
+                    main.clicked()
                 }
             }
         }
