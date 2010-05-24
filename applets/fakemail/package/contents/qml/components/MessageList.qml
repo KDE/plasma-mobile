@@ -3,12 +3,15 @@ import Qt.widgets 4.7
 import Plasma 0.1 as Plasma
 
 QGraphicsWidget {
+    id: mainWidget
+
+    signal itemClicked
+    signal newClicked
+
     Item {
         id: main
-        anchors.fill: parent
-        signal itemClicked
-        signal newClicked
-
+        width: mainWidget.width
+        height: mainWidget.height
 
         Component {
             id : messageDelegate
@@ -41,7 +44,7 @@ QGraphicsWidget {
                     anchors.fill: parent
                     onClicked: {
                         list.currentIndex = index
-                        main.itemClicked()
+                        mainWidget.itemClicked()
                     }
                 }
             }
@@ -59,7 +62,7 @@ QGraphicsWidget {
                     //FIXME: either icons should be accessible by name or bindings for KIcon would be neede
                     //icon: "mail-message-new"
                     text: "Write"
-                    onClicked : main.newClicked()
+                    onClicked : mainWidget.newClicked()
                 }
                 Plasma.PushButton {
                     //icon: "mail-receive"
@@ -91,4 +94,5 @@ QGraphicsWidget {
         }
         
     }
+
 }
