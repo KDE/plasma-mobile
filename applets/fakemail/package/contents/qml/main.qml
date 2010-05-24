@@ -7,37 +7,21 @@ import "components"
 QGraphicsWidget {
     id : main
 
-    
-
-    ListView {
+    Plasma.TabBar {
         id : mainView
         anchors.fill : main
-        contentWidth: content.width
-        contentHeight: content.height
-        clip : true
-        orientation: ListView.Horizontal
-        snapMode: ListView.SnapOneItem
 
-        model : VisualItemModel {
-            id : content
-
-            MessageList {
-                id : messageList
-                height : mainView.height
-                width : mainView.width
-            }
-
-            Composer {
-                id : composer
-                height : mainView.height
-                width : mainView.width
-            }
+       MessageList {
+            id : messageList
+            Plasma.TabBar.tabText : "Page"
+        }
+        MessageDetails {
+            id : messageDetails
         }
 
-        Connections {
-            target: messageList
-            onItemClicked: mainView.currentIndex = 1
-            onNewClicked: mainView.currentIndex = 1
+        Composer {
+            id : composer
         }
+
     }
 }
