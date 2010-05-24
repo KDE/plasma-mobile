@@ -29,12 +29,12 @@
 #include <plasma/widgets/svgwidget.h>
 #include <plasma/widgets/frame.h>
 #include <plasma/widgets/webview.h>
-#include <plasma/widgets/tabbar.h>
 #include <plasma/extender.h>
 #include <plasma/extenderitem.h>
 #include <plasma/animator.h>
 #include <plasma/svg.h>
 #include <plasma/framesvg.h>
+#include "private/declarativetabbar_p.h"
 #include "datasource.h"
 
 void PLASMA_EXPORT setupBindings();
@@ -51,7 +51,7 @@ QML_DECLARE_TYPE(Plasma::SvgWidget)
 //QML_DECLARE_TYPE(Plasma::Svg)
 QML_DECLARE_TYPE(Plasma::FrameSvg)
 QML_DECLARE_TYPE(Plasma::WebView)
-QML_DECLARE_TYPE(Plasma::TabBar)
+QML_DECLARE_TYPE(DeclarativeTabBar)
 
 QML_DECLARE_TYPE(Plasma::ExtenderItem)
 QML_DECLARE_TYPE(Plasma::Extender)

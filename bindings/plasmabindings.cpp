@@ -31,7 +31,7 @@ qmlRegisterType<Plasma::Frame>("Plasma", 0, 1, "Frame");
 qmlRegisterType<Plasma::Slider>("Plasma", 0, 1, "Slider");
 qmlRegisterType<Plasma::SpinBox>("Plasma", 0, 1, "SpinBox");
 qmlRegisterType<Plasma::WebView>("Plasma", 0, 1, "WebView");
-qmlRegisterType<Plasma::TabBar>("Plasma", 0, 1, "TabBar");
+qmlRegisterType<DeclarativeTabBar>("Plasma", 0, 1, "TabBar");
 
 qmlRegisterType<Plasma::SvgWidget>("Plasma", 0, 1, "SvgWidget");
 qmlRegisterType<Plasma::Svg>("Plasma", 0, 1, "Svg");

@@ -4,6 +4,7 @@ include(KDE4Defaults)
 
 set(bindings_SRCS
     plasmabindings.cpp
+    private/declarativetabbar.cpp
     #datasource.cpp
     )
 
