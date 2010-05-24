@@ -3,6 +3,7 @@
 #ifndef DECLARATIVETABBAR_P
 #define DECLARATIVETABBAR_P
 
+#include <QtDeclarative/qdeclarative.h>
 #include <QDeclarativeListProperty>
 
 #include "plasma/widgets/tabbar.h"
@@ -79,5 +80,8 @@ private:
         return static_cast<DeclarativeTabBar*>(prop->object)->tabAt(index);
     }
 };
+
+QML_DECLARE_TYPE(DeclarativeTabBar)
+QML_DECLARE_TYPEINFO(DeclarativeTabBar, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif
