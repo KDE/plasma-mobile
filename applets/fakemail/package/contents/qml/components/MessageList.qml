@@ -1,8 +1,11 @@
 import Qt 4.7
+import Qt.widgets 4.7
+import Plasma 0.1 as Plasma
 
 Item {
     id: main
-    signal clicked
+    signal itemClicked
+    signal newClicked
 
     ListModel {
         id: messagesModel
@@ -123,18 +126,49 @@ Item {
                 anchors.fill: parent
                 onClicked: {
                     list.currentIndex = index
-                    main.clicked()
+                    main.itemClicked()
                 }
             }
         }
     }
 
-    // The actual list
+
+    Plasma.Frame {
+        id: frame
+        anchors.left: parent.left
+        anchors.right: parent.right
+        frameShadow : "Raised"
+
+        layout : QGraphicsLinearLayout {
+            Plasma.PushButton {
+                //FIXME: either icons should be accessible by name or bindings for KIcon would be neede
+                //icon: "mail-message-new"
+                text: "Write"
+                onClicked : main.newClicked()
+            }
+            Plasma.PushButton {
+                //icon: "mail-receive"
+                text: "Check"
+            }
+ 
+            QGraphicsWidget{}
+
+            Plasma.LineEdit {
+                clickMessage: "Search..."
+                clearButtonShown: true
+            }
+        }
+    }
+
     ListView {
         id: list
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.top: frame.bottom
         clip: true
         model: messagesModel
         delegate: messageDelegate
     }
+    
 }

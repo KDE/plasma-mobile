@@ -36,7 +36,8 @@ QGraphicsWidget {
 
         Connections {
             target: messageList
-            onClicked: mainView.currentIndex = 1
+            onItemClicked: mainView.currentIndex = 1
+            onNewClicked: mainView.currentIndex = 1
         }
     }
 }
