@@ -7,21 +7,34 @@ import "components"
 QGraphicsWidget {
     id : main
 
-    Plasma.TabBar {
-        id : mainView
-        anchors.fill : main
+    Item {
+        id: mainItem
+        anchors.fill: main
+        Plasma.TabBar {
+            id : mainView
+            anchors.fill : mainItem
 
-       MessageList {
-            id : messageList
-            Plasma.TabBar.tabText : "Page"
-        }
-        MessageDetails {
-            id : messageDetails
+            MessageList {
+                id : messageList
+                Plasma.TabBar.tabText : "Page"
+            }
+            MessageDetails {
+                id : messageDetails
+            }
+            Composer {
+                id : composer
+            }
         }
 
-        Composer {
-            id : composer
-        }
 
+        Connections {
+            target: messageList
+            onItemClicked: {
+                mainView.currentIndex = 1
+                messageDetails.currentIndex = messageList.currentIndex
+            }
+            onNewClicked: mainView.currentIndex = 2
+        }
     }
+
 }

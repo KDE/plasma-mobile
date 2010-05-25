@@ -5,6 +5,8 @@ import Plasma 0.1 as Plasma
 QGraphicsWidget {
     id: mainWidget
 
+    property int currentIndex: list.currentIndex
+
     signal itemClicked
     signal newClicked
 
