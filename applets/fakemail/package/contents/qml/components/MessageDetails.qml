@@ -32,7 +32,7 @@ QGraphicsWidget {
                         width : content.width
                         height: content.height
                         dragToScroll : true
-                        html: "<div style=\"border:1px solid #aaa\">Subject:"+subject+"</div>"+body
+                        html: "<div style=\"border:1px solid #aaa; background: rgba(0,0,0,0.15)\">Subject:"+subject+"<br/>From:"+from+"</div>"+body
                     }
                 }
             }
@@ -81,6 +81,7 @@ QGraphicsWidget {
 
             /*contentWidth: content.width
             contentHeight: content.height*/
+            highlightRangeMode: ListView.StrictlyEnforceRange
             clip : true
             orientation: ListView.Horizontal
             snapMode: ListView.SnapOneItem

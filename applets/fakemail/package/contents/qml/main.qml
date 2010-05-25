@@ -63,6 +63,7 @@ QGraphicsWidget {
         Connections {
             target: composer
             onBackClicked: mainView.currentIndex = 0
+            onSendClicked: mainView.currentIndex = 0
         }
     }
 

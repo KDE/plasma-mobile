@@ -6,6 +6,7 @@ QGraphicsWidget {
     id: root;
 
     signal backClicked
+    signal sendClicked
 
     property string subjectText: ""
     property string bodyText: ""
@@ -66,6 +67,9 @@ QGraphicsWidget {
                 QGraphicsGridLayout.row : 1
                 QGraphicsGridLayout.column : 3
                 text: "Send"
+                onClicked: {
+                    root.sendClicked()
+                }
             }
         }
     }
@@ -80,7 +84,7 @@ QGraphicsWidget {
         anchors.bottom : parent.bottom
         width : parent.width - 60
         dragToScroll : true
-        html: root.bodyText
+        html: "<div contenteditable=\"true\">"+root.bodyText+"</div>"
     }
 
 
