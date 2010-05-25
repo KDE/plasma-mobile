@@ -6,6 +6,14 @@ QGraphicsWidget {
     id: mainWidget
     property int currentIndex: 0
 
+    signal replyClicked
+    signal forwardClicked
+    signal backClicked
+
+    property string subjectText: ""
+    property string bodyText: ""
+    property string fromText: ""
+
     Item {
         id : main
         anchors.fill : mainWidget
@@ -40,10 +48,25 @@ QGraphicsWidget {
 
             layout: QGraphicsLinearLayout {
                 Plasma.PushButton {
+                    text: "Back"
+                    onClicked: {
+                        mainWidget.backClicked()
+                    }
+                }
+                Plasma.PushButton {
                     text: "Reply"
+                    onClicked: {
+                        mainWidget.subjectText = model.get(mainView.currentIndex).subject
+                        mainWidget.bodyText = model.get(mainView.currentIndex).body
+                        mainWidget.fromText = model.get(mainView.currentIndex).from
+                        mainWidget.replyClicked()
+                    }
                 }
                 Plasma.PushButton {
                     text: "Forward"
+                    onClicked: {
+                        mainWidget.forwardClicked()
+                    }
                 }
                 QGraphicsWidget{}
             }

@@ -13,6 +13,7 @@ QGraphicsWidget {
         Plasma.TabBar {
             id : mainView
             anchors.fill : mainItem
+            tabBarShown: false
 
             MessageList {
                 id : messageList
@@ -33,7 +34,35 @@ QGraphicsWidget {
                 mainView.currentIndex = 1
                 messageDetails.currentIndex = messageList.currentIndex
             }
-            onNewClicked: mainView.currentIndex = 2
+            onNewClicked: {
+                composer.subjectText = ""
+                composer.bodyText = ""
+                composer.toText = ""
+                mainView.currentIndex = 2
+            }
+        }
+
+        Connections {
+            target: messageDetails
+            onBackClicked: mainView.currentIndex = 0
+
+            onReplyClicked: {
+                composer.subjectText = messageDetails.subjectText
+                composer.bodyText = messageDetails.bodyText
+                composer.toText = messageDetails.fromText
+                mainView.currentIndex = 2
+            }
+            onForwardClicked: {
+                composer.subjectText = messageDetails.subjectText
+                composer.bodyText = messageDetails.bodyText
+                composer.toText = messageDetails.fromText
+                mainView.currentIndex = 2
+            }
+        }
+
+        Connections {
+            target: composer
+            onBackClicked: mainView.currentIndex = 0
         }
     }
 
