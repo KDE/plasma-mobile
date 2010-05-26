@@ -35,6 +35,7 @@
 #include <plasma/svg.h>
 #include <plasma/framesvg.h>
 #include "private/declarativetabbar_p.h"
+#include "private/graphicslayouts_p.h"
 #include "datasource.h"
 
 void PLASMA_EXPORT setupBindings();
