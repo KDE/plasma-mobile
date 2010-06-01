@@ -1,12 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Fake mail client (QML)
+Name[en_GB]=Fake mail client (QML)
 Name[pt]=Cliente de e-mail falso (QML)
 Name[pt_BR]=Cliente de e-mail falso (QML)
 Name[sv]=E-postprogram för test (QML)
 Name[uk]=Тестова клієнтська поштова програма (QML)
 Name[x-test]=xxFake mail client (QML)xx
 Comment=A proof of concept of a mail app ui written in qml
+Comment[en_GB]=A proof of concept of a mail app ui written in qml
 Comment[pt]=Uma prova de conceito de uma interface de e-mail feita em QML
 Comment[pt_BR]=Uma prova de conceito de uma interface de e-mail feita em QML
 Comment[sv]=Ett koncept för ett e-postprograms användargränssnitt skrivet i QML
