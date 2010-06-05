@@ -83,6 +83,12 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
         if(ourKey=="interval" || ourKey=="engine" || ourKey=="source")
             continue;
         m_dmo->setValue(ourKey.toLatin1(), data.value(key));
+        QVariant data = m_dmo->value(key.toLower().toLatin1());
+        if (data.type() == QVariant::List) {
+            QVariantList list = data.toList();
+
+            m_dmo->setValue(QString(ourKey+".count").toLatin1(), list.count());
+        }
         newKeys<<ourKey;
     }
 
