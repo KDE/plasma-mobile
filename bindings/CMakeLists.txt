@@ -7,7 +7,8 @@ set(bindings_SRCS
     private/declarativetabbar.cpp
     private/gridlayout.cpp
     private/linearlayout.cpp
-    #datasource.cpp
+    private/dataengineconsumer.cpp
+    datasource.cpp
     )
 
 INCLUDE_DIRECTORIES(

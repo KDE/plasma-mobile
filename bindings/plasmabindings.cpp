@@ -43,6 +43,6 @@ qmlRegisterType<GraphicsLinearLayoutStretchItemObject>("GraphicsLayouts",4,7,"QG
 qmlRegisterType<GraphicsLinearLayoutObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayout");
 qmlRegisterType<GraphicsGridLayoutObject>("GraphicsLayouts",4,7,"QGraphicsGridLayout");
 
-//qmlRegisterType<Plasma::DataSource>("Plasma", 0, 1, "DataSource");
+qmlRegisterType<Plasma::DataSource>("Plasma", 0, 1, "DataSource");
 
 }

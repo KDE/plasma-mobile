@@ -27,7 +27,7 @@
 #include <kdebug.h>
 
 #include "plasma/dataenginemanager.h"
-#include <Plasma/ServiceJob>
+#include <plasma/servicejob.h>
 
 namespace Plasma
 {

@@ -62,7 +62,7 @@ QML_DECLARE_TYPE(Plasma::ExtenderItem)
 QML_DECLARE_TYPE(Plasma::Extender)
 QML_DECLARE_TYPE(Plasma::Animator)
 
-//QML_DECLARE_TYPE(Plasma::DataSource)
+QML_DECLARE_TYPE(Plasma::DataSource)
 
 QML_DECLARE_INTERFACE(QGraphicsLayoutItem)
 QML_DECLARE_INTERFACE(QGraphicsLayout)
