@@ -4,20 +4,28 @@ import Plasma 0.1 as Plasma
 QGraphicsWidget {
     id: page;
     Item {
+      id:main
       Plasma.DataSource { id: dataSource; engine: "rss"; source: "http://www.kde.org/dotkdeorg.rdf "; interval: 50000; }
       resources: [
           Component {
               id: simpleText
               Text {
-                  //text: modelData
+                  width: list.width
                   text: dataSource['items'][modelData].title
               }
           }
       ]
       Column {
         Text { text: 'Time Is ' + dataSource['title']; }
-        Text { text: "Available Data:"; }
-        Repeater { model: dataSource['items.count']; delegate: simpleText; }
+
+        ListView {
+            id: list
+            width: page.width
+            height:page.height
+            clip: true
+            model: dataSource['items.count']
+            delegate: simpleText
+        }
       }
     }
 }
