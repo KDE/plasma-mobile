@@ -39,9 +39,9 @@ qmlRegisterType<Plasma::FrameSvg>("Plasma", 0, 1, "FrameSvg");
 
 qmlRegisterInterface<QGraphicsLayoutItem>("QGraphicsLayoutItem");
 qmlRegisterInterface<QGraphicsLayout>("QGraphicsLayout");
-qmlRegisterType<QGraphicsLinearLayoutStretchItemObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayoutStretchItem");
-qmlRegisterType<QGraphicsLinearLayoutObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayout");
-qmlRegisterType<QGraphicsGridLayoutObject>("GraphicsLayouts",4,7,"QGraphicsGridLayout");
+qmlRegisterType<GraphicsLinearLayoutStretchItemObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayoutStretchItem");
+qmlRegisterType<GraphicsLinearLayoutObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayout");
+qmlRegisterType<GraphicsGridLayoutObject>("GraphicsLayouts",4,7,"QGraphicsGridLayout");
 
 //qmlRegisterType<Plasma::DataSource>("Plasma", 0, 1, "DataSource");
 

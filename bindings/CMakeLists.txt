@@ -5,7 +5,8 @@ include(KDE4Defaults)
 set(bindings_SRCS
     plasmabindings.cpp
     private/declarativetabbar.cpp
-    private/graphicslayouts.cpp
+    private/gridlayout.cpp
+    private/linearlayout.cpp
     #datasource.cpp
     )
 

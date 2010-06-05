@@ -18,6 +18,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#ifndef PLASMA_BINDINGS_H
+#define PLASMA_BINDINGS_H
+
 #include <QtDeclarative/qdeclarative.h>
 #include <plasma/widgets/lineedit.h>
 #include <plasma/widgets/slider.h>
@@ -35,7 +38,8 @@
 #include <plasma/svg.h>
 #include <plasma/framesvg.h>
 #include "private/declarativetabbar_p.h"
-#include "private/graphicslayouts_p.h"
+#include "private/gridlayout.h"
+#include "private/linearlayout.h"
 #include "datasource.h"
 
 void PLASMA_EXPORT setupBindings();
@@ -60,4 +64,7 @@ QML_DECLARE_TYPE(Plasma::Animator)
 
 //QML_DECLARE_TYPE(Plasma::DataSource)
 
+QML_DECLARE_INTERFACE(QGraphicsLayoutItem)
+QML_DECLARE_INTERFACE(QGraphicsLayout)
 
+#endif
