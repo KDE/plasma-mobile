@@ -1,3 +1,4 @@
 add_subdirectory(appswitcher)
 add_subdirectory(digital-clock)
 add_subdirectory(fakemail)
+add_subdirectory(news)

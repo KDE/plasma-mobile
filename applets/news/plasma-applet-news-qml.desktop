@@ -1,0 +1,18 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=News reader (QML)
+Comment=A proof of concept RSS reader written in qml
+Type=Service
+ServiceTypes=Plasma/Applet
+Icon=akregator
+X-Plasma-API=qmlscript
+X-Plasma-MainScript=qml/main.qml
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=notmart@gmail.com
+X-KDE-PluginInfo-Name=org.kde.news-qml
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Examples
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
