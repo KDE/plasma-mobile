@@ -2,11 +2,13 @@
 Encoding=UTF-8
 Name=News reader (QML)
 Name[pt]=Leitor de notícias (QML)
+Name[pt_BR]=Leitor de notícias (QML)
 Name[sv]=Nyhetsläsare (QML)
 Name[uk]=Програма для читання новин (QML)
 Name[x-test]=xxNews reader (QML)xx
 Comment=A proof of concept RSS reader written in qml
 Comment[pt]=Uma prova de conceito de um leitor de RSS feito em QML
+Comment[pt_BR]=Uma prova de conceito de um leitor RSS escrito em QML
 Comment[sv]=Ett koncept för en RSS-läsare skrivet i QML
 Comment[uk]=Тестова програма для читання RSS, написана мовою qml
 Comment[x-test]=xxA proof of concept RSS reader written in qmlxx
