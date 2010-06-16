@@ -2,6 +2,7 @@
 # ctxt: plasma containment
 Name=Mobile icon grid
 Name[en_GB]=Mobile icon grid
+Name[km]=ក្រឡាចត្រង្គរបស់​​រូបតំណាង​ចល័ត
 Name[pt]=Grelha de ícones móvel
 Name[pt_BR]=Grade de ícones móveis
 Name[sv]=Ikonrutnät för mobiler
@@ -11,6 +12,7 @@ Comment=Main menu for mobile devices
 Comment[en_GB]=Main menu for mobile devices
 Comment[es]=Menú principal para dispositivos móviles
 Comment[et]=Peamenüü mobiilsetele seadmetele
+Comment[km]=ម៉ឺនុយ​មេ​សម្រាប់​ឧបករណ៍​ចល័ត
 Comment[pt]=Menu principal para dispositivos móveis
 Comment[pt_BR]=Menu principal para dispositivos móveis
 Comment[sv]=Huvudmeny för mobilenheter
