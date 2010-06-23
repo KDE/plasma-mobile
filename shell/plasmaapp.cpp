@@ -379,18 +379,6 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     containment->setGraphicsEffect(effect);
     containment->graphicsEffect()->setEnabled(false);
 
-    //We load the wallpaper now so when animating the containments around the first time it will not be slow
-    Plasma::Wallpaper *w = containment->wallpaper();
-    if (!w->isInitialized()) {
-        // delayed paper initialization
-        KConfigGroup wallpaperConfig = containment->config();
-        wallpaperConfig = KConfigGroup(&wallpaperConfig, "Wallpaper");
-        wallpaperConfig = KConfigGroup(&wallpaperConfig, w->pluginName());
-        w->restore(wallpaperConfig);
-        disconnect(w, SIGNAL(update(const QRectF&)), containment, SLOT(updateRect(const QRectF&)));
-        connect(w, SIGNAL(update(const QRectF&)), containment, SLOT(updateRect(const QRectF&)));
-    }
-
     m_mainSlot->setFlag(QGraphicsItem::ItemHasNoContents, false);
     containment->resize(m_mainView->size());
 
