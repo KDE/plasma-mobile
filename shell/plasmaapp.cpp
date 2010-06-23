@@ -343,8 +343,6 @@ void PlasmaApp::setupContainment(Plasma::Containment *containment)
         containment->resize(m_mainView->size());
         //FIXME: this makes the containment to not paint until the animation finishes
         containment->graphicsEffect()->setEnabled(true);
-        m_currentContainment->graphicsEffect()->update();
-        m_currentContainment->graphicsEffect()->setEnabled(true);
         //###The reparenting need a repaint so this ensure that we
         //have actually re-render the containment otherwise it
         //makes animations slugglish. We need a better solution.
