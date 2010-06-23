@@ -57,7 +57,7 @@ void MobileDesktop::init()
     setAcceptsHoverEvents(false);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     setFlag(QGraphicsItem::ItemUsesExtendedStyleOption, false);
-    execute(KStandardDirs::locate("data", "plasma-mobile/containments/mobile-desktop/Main.qml"));
+    //execute(KStandardDirs::locate("data", "plasma-mobile/containments/mobile-desktop/Main.qml"));
 }
 
 void MobileDesktop::errorPrint()
