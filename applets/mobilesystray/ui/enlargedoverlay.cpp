@@ -26,7 +26,7 @@
 #include <Plasma/IconWidget>
 #include <KDebug>
 #include <KIcon>
-#include <iostream>
+
 using namespace Plasma;
 
 namespace SystemTray
@@ -39,7 +39,7 @@ EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QGraphicsWidget *parent)
     foreach(Task *task, tasks) {
       layout->addItem(new Plasma::IconWidget(task->icon(), "", this));
     }
-}
+} 
 
 EnlargedOverlay::~EnlargedOverlay()
 {

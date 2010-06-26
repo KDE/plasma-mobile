@@ -24,6 +24,7 @@
 #include <QGraphicsLinearLayout>
 #include <QGraphicsScene>
 #include <QDesktopWidget>
+#include <QRect>
 
 #include <plasma/widgets/iconwidget.h>
 #include <plasma/dataenginemanager.h>
@@ -39,8 +40,11 @@ EnlargedWidget::EnlargedWidget(QGraphicsScene *sc)
     : QGraphicsView(sc)
 {
     const QDesktopWidget desktop;
-    resize(desktop.availableGeometry(this).width(), 100);
+    QRect size = desktop.availableGeometry(this);
+    resize(size.width(), size.height());
     setWindowFlags(Qt::Popup);
+    setAttribute(Qt::WA_TranslucentBackground, true);
+    setStyleSheet("background: transparent; border: none");
     move(0,0);
 }
 
