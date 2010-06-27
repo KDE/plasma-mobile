@@ -39,6 +39,8 @@ EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QGraphicsWidget *parent)
     foreach(Task *task, tasks) {
       layout->addItem(new Plasma::IconWidget(task->icon(), "", this));
     }
+    setPos(0,0);
+    resize(1000,100);
 } 
 
 EnlargedOverlay::~EnlargedOverlay()

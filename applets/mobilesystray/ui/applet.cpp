@@ -45,6 +45,7 @@ EnlargedWidget::EnlargedWidget(QGraphicsScene *sc)
     setWindowFlags(Qt::Popup);
     setAttribute(Qt::WA_TranslucentBackground, true);
     setStyleSheet("background: transparent; border: none");
+    setAlignment(Qt::AlignTop);
     move(0,0);
 }
 
