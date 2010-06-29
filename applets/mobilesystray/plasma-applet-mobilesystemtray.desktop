@@ -2,10 +2,12 @@
 Encoding=UTF-8
 Name=Mobile System Tray
 Name[pt]=Bandeja do Sistema Móvel
+Name[pt_BR]=Área de notificação móvel
 Name[uk]=Мобільний у системному лотку
 Name[x-test]=xxMobile System Trayxx
 Comment=A system tray applet for mobile shell
 Comment[pt]=Uma 'applet' da bandeja para a consola móvel
+Comment[pt_BR]=Um miniaplicativo da área de notificação para o console móvel
 Comment[uk]=Аплет системного лотка для командної оболонки керування мобільним телефоном
 Comment[x-test]=xxA system tray applet for mobile shellxx
 Icon=preferences-desktop-notification
