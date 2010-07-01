@@ -27,19 +27,32 @@
 
 #include <Plasma/Label>
 #include <Plasma/FrameSvg>
+#include <Plasma/Applet>
 
 #include "../core/task.h"
+
+namespace Plasma
+{
+  class Applet;
+}
 
 namespace SystemTray
 {
 
-class EnlargedOverlay : public QGraphicsWidget
+class EnlargedOverlay : public Plasma::Applet
 {
     Q_OBJECT
 
 public:
-    EnlargedOverlay(QList<Task*> tasks, QGraphicsWidget *parent = 0);
+    EnlargedOverlay(QList<Task*> tasks, QSize containerSize, QGraphicsWidget *parent = 0);
     ~EnlargedOverlay();
+
+protected:
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+               QWidget *widget = 0);
+    void resizeEvent(QGraphicsSceneResizeEvent *event);
+private:
+    Plasma::FrameSvg m_background;
 };
 
 }

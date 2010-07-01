@@ -49,9 +49,10 @@ EnlargedWidget::EnlargedWidget(QGraphicsScene *sc)
     move(0,0);
 }
 
-void EnlargedWidget::mousePressEvent( QMouseEvent* )
+void EnlargedWidget::mousePressEvent(QMouseEvent* e)
 {
-    hide();
+    if (e->y() > 100)
+        hide();
 }
 
 Manager *MobileTray::m_manager = 0;
@@ -147,9 +148,9 @@ void MobileTray::updateTask(SystemTray::Task* task)
 void MobileTray::enlarge()
 {
     QGraphicsScene *sc = new QGraphicsScene();
-    EnlargedOverlay *a = new EnlargedOverlay(m_manager->tasks());
-    sc->addItem(a);
     EnlargedWidget *view = new EnlargedWidget(sc);
+    EnlargedOverlay *a = new EnlargedOverlay(m_manager->tasks(), view->size(), this);
+    sc->addItem(a);
     view->show();
 }
 

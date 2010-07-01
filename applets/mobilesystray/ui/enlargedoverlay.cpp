@@ -22,6 +22,7 @@
 
 #include <QPainter>
 #include <QGraphicsLinearLayout>
+#include <QDesktopWidget>
 
 #include <Plasma/IconWidget>
 #include <KDebug>
@@ -32,19 +33,38 @@ using namespace Plasma;
 namespace SystemTray
 {
 
-EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QGraphicsWidget *parent)
-        : QGraphicsWidget(parent)
+EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QSize containerSize, QGraphicsWidget *parent)
+        : Applet(parent)
 {
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Horizontal, this);
     foreach(Task *task, tasks) {
-      layout->addItem(new Plasma::IconWidget(task->icon(), "", this));
+      Plasma::IconWidget *w = dynamic_cast<Plasma::IconWidget*>(task->widget(this, true));
+      layout->addItem(w);
+      w->setIcon(task->icon());
     }
+    m_background.setImagePath("widgets/translucentbackground");
+    m_background.setEnabledBorders(FrameSvg::AllBorders);
+
     setPos(0,0);
-    resize(1000,100);
+    resize(containerSize.width() - 100,100);
 } 
 
 EnlargedOverlay::~EnlargedOverlay()
 {
+}
+
+void EnlargedOverlay::resizeEvent(QGraphicsSceneResizeEvent *event)
+{
+    m_background.resizeFrame(event->newSize());
+}
+
+void EnlargedOverlay::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                           QWidget *widget)
+{
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+
+    m_background.paintFrame(painter);
 }
 
 }
