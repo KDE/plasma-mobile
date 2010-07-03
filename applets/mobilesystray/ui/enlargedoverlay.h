@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef OVERLAYTOOLBOX_H
-#define OVERLAYTOOLBOX_H
+#ifndef ENLARGEDOVERLAY_H
+#define ENLARGEDOVERLAY_H
 
 #include <KAction>
 #include <QGraphicsWidget>
@@ -36,6 +36,8 @@ namespace Plasma
   class Applet;
 }
 
+class QGraphicsLinearLayout;
+
 namespace SystemTray
 {
 
@@ -47,10 +49,17 @@ public:
     EnlargedOverlay(QList<Task*> tasks, QSize containerSize, QGraphicsWidget *parent = 0);
     ~EnlargedOverlay();
 
+signals:
+    void showMenu(QMenu* m);
+
+protected slots:
+    void relayMenu(QMenu* m);
+
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget = 0);
     void resizeEvent(QGraphicsSceneResizeEvent *event);
+
 private:
     Plasma::FrameSvg m_background;
 };

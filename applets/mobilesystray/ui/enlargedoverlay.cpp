@@ -18,7 +18,7 @@
  */
 
 #include "enlargedoverlay.h"
-
+#include "../protocols/dbussystemtray/dbussystemtraywidget.h"
 
 #include <QPainter>
 #include <QGraphicsLinearLayout>
@@ -38,19 +38,34 @@ EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QSize containerSize, QGraph
 {
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Horizontal, this);
     foreach(Task *task, tasks) {
-      Plasma::IconWidget *w = dynamic_cast<Plasma::IconWidget*>(task->widget(this, true));
+      /*Plasma::IconWidget *w = qobject_cast<Plasma::IconWidget*>(task->widget(this, true));
       layout->addItem(w);
-      w->setIcon(task->icon());
+      w->setIcon(task->icon());*/
+      Plasma::IconWidget *w = new Plasma::IconWidget(task->icon(), "", this);
+      layout->addItem(w);
+      DBusSystemTrayWidget *d = qobject_cast<DBusSystemTrayWidget*>(task->widget(this, true));
+      if (d != 0) {
+          QAction *q = new QAction(task->icon(), "", this);
+          connect(q, SIGNAL(triggered()), d, SLOT(emitMenu()));
+          w->setAction(q);
+          //connect(d, SIGNAL(clicked()), d, SLOT(emitMenu()));
+          connect(d, SIGNAL(menuEmitted(QMenu*)), this, SLOT(relayMenu(QMenu*)));
+      }
     }
+
     m_background.setImagePath("widgets/translucentbackground");
     m_background.setEnabledBorders(FrameSvg::AllBorders);
 
-    setPos(0,0);
-    resize(containerSize.width() - 100,100);
+    resize(containerSize.width() - 100, 100);
 } 
 
 EnlargedOverlay::~EnlargedOverlay()
 {
+}
+
+void EnlargedOverlay::relayMenu(QMenu* m)
+{
+    emit showMenu(m);
 }
 
 void EnlargedOverlay::resizeEvent(QGraphicsSceneResizeEvent *event)

@@ -100,6 +100,27 @@ void DBusSystemTrayWidget::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
     connect(job, SIGNAL(result(KJob*)), this, SLOT(showContextMenu(KJob*)));
 }
 
+void DBusSystemTrayWidget::emitMenu()
+{
+    KConfigGroup params = m_service->operationDescription("ContextMenu");
+    params.writeEntry("x", 0);
+    params.writeEntry("y", 0);
+    KJob *job = m_service->startOperationCall(params);
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(emitMenu(KJob*)));
+}
+
+void DBusSystemTrayWidget::emitMenu(KJob *job)
+{
+    Plasma::ServiceJob *sjob = qobject_cast<Plasma::ServiceJob *>(job);
+    if (!sjob) {
+        return;
+    }
+
+    QMenu *menu = qobject_cast<QMenu *>(sjob->result().value<QObject *>());
+    emit menuEmitted(menu);
+    job->kill();
+}
+
 void DBusSystemTrayWidget::showContextMenu(KJob *job)
 {
     Plasma::ServiceJob *sjob = qobject_cast<Plasma::ServiceJob *>(job);

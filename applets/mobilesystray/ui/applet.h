@@ -27,6 +27,9 @@
 #include <QGraphicsView>
 #include <QHash>
 
+#include "enlargedoverlay.h"
+#include "overlaytoolbox.h"
+
 namespace Plasma
 {
 class IconWidget;
@@ -46,9 +49,13 @@ class EnlargedWidget : public QGraphicsView
     Q_OBJECT
 public:
     EnlargedWidget(QGraphicsScene *sc);
+    void setToolBoxActivated(bool b) { m_toolBoxActivated = b; }
 
 protected:
     virtual void mousePressEvent( QMouseEvent* );
+
+private:
+    bool m_toolBoxActivated;
 };
 
 // Define our plasma Applet
@@ -66,15 +73,21 @@ public slots:
     void removeTask(SystemTray::Task* task);
     void updateTask(SystemTray::Task* task);
     void enlarge();
+    void showOverlayToolBox(QMenu *m);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private:
+    void removeToolBox();
     static Manager *m_manager;
     QGraphicsLinearLayout *layout;
     KIcon m_icon;
     QHash<QString, Plasma::IconWidget*> m_iconList;
+    EnlargedWidget *m_view;
+    QGraphicsScene *m_scene;
+    EnlargedOverlay *m_overlay;
+    OverlayToolBox *m_toolbox;
 };
 
 }

@@ -43,8 +43,12 @@ public:
     void setItemIsMenu(bool itemIsMenu);
     bool itemIsMenu() const;
 
+public slots:
+    void emitMenu();
+
 Q_SIGNALS:
     void clicked(const QPoint &pos);
+    void menuEmitted(QMenu* menu);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
@@ -55,6 +59,7 @@ protected:
 private Q_SLOTS:
     void calculateShowPosition();
     void showContextMenu(KJob *job);
+    void emitMenu(KJob *job);
 
 private:
     Plasma::Service *m_service;

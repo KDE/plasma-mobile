@@ -38,6 +38,7 @@ set(mobilesystemtray_SRCS
 
     ui/applet.cpp
     ui/enlargedoverlay.cpp
+    ui/overlaytoolbox.cpp
     )
 
 # Now make sure all files get to the right place

@@ -26,18 +26,19 @@
 #include <QDesktopWidget>
 #include <QRect>
 
+#include <KIcon>
+
 #include <plasma/widgets/iconwidget.h>
 #include <plasma/dataenginemanager.h>
 
 #include "../core/manager.h"
 #include "../core/task.h"
-#include "enlargedoverlay.h"
 
 namespace SystemTray
 {
 
 EnlargedWidget::EnlargedWidget(QGraphicsScene *sc)
-    : QGraphicsView(sc)
+    : QGraphicsView(sc), m_toolBoxActivated(false)
 {
     const QDesktopWidget desktop;
     QRect size = desktop.availableGeometry(this);
@@ -51,15 +52,17 @@ EnlargedWidget::EnlargedWidget(QGraphicsScene *sc)
 
 void EnlargedWidget::mousePressEvent(QMouseEvent* e)
 {
-    if (e->y() > 100)
+    if (e->y() > 100 && !m_toolBoxActivated) {
         hide();
+    }
+    QGraphicsView::mousePressEvent(e);
 }
 
 Manager *MobileTray::m_manager = 0;
 
 MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
-    m_icon("document")
+    m_icon("document"), m_view(0), m_scene(0), m_overlay(0), m_toolbox(0)
 {
     if (!m_manager) {
         m_manager = new SystemTray::Manager();
@@ -147,11 +150,41 @@ void MobileTray::updateTask(SystemTray::Task* task)
 
 void MobileTray::enlarge()
 {
-    QGraphicsScene *sc = new QGraphicsScene();
-    EnlargedWidget *view = new EnlargedWidget(sc);
-    EnlargedOverlay *a = new EnlargedOverlay(m_manager->tasks(), view->size(), this);
-    sc->addItem(a);
-    view->show();
+    removeToolBox();
+    delete m_view;
+    m_scene = new QGraphicsScene();
+    m_view = new EnlargedWidget(m_scene);
+    m_overlay = new EnlargedOverlay(m_manager->tasks(), m_view->size(), this);
+    connect (m_overlay, SIGNAL(showMenu(QMenu*)), this, SLOT(showOverlayToolBox(QMenu*)));
+    m_scene->addItem(m_overlay);
+
+    m_view->show();
+}
+
+void MobileTray::removeToolBox()
+{
+    if (m_toolbox) {
+        m_scene->removeItem(m_toolbox);
+        m_toolbox->hide();
+        delete m_toolbox;
+        m_toolbox = 0;
+    }
+}
+
+void MobileTray::showOverlayToolBox(QMenu *m)
+{
+    removeToolBox();
+    m_view->setToolBoxActivated(true);
+
+    QAction *cancel = new QAction(KIcon("dialog-cancel"), i18n("Cancel"), this);
+    connect(cancel, SIGNAL(triggered()), m_view, SLOT(hide()));
+    m->addAction(cancel);
+
+    m_toolbox = new OverlayToolBox("", this);
+    m_scene->addItem(m_toolbox);
+    m_toolbox->setPos(0,100);
+    m_toolbox->resize(m_view->size().width() - 100, m_view->size().height() - 100);
+    m_toolbox->setMainMenu(m);
 }
 
 void MobileTray::mousePressEvent(QGraphicsSceneMouseEvent*)
