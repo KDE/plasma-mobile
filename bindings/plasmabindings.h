@@ -41,6 +41,7 @@
 #include "private/gridlayout.h"
 #include "private/linearlayout.h"
 #include "datasource.h"
+#include "phone/phone.h"
 
 void PLASMA_EXPORT setupBindings();
 
@@ -57,6 +58,7 @@ QML_DECLARE_TYPE(Plasma::SvgWidget)
 QML_DECLARE_TYPE(Plasma::FrameSvg)
 QML_DECLARE_TYPE(Plasma::WebView)
 //QML_DECLARE_TYPE(DeclarativeTabBar)
+QML_DECLARE_TYPE(Phone)
 
 QML_DECLARE_TYPE(Plasma::ExtenderItem)
 QML_DECLARE_TYPE(Plasma::Extender)

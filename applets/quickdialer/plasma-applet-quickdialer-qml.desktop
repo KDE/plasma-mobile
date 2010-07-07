@@ -1,0 +1,18 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=A Quick Dialer (QML)
+Comment=A quick dialer to call a number
+Type=Service
+ServiceTypes=Plasma/Applet
+Icon=
+X-Plasma-API=qmlscript
+X-Plasma-MainScript=qml/main.qml
+X-KDE-PluginInfo-Author=Alexis Menard
+X-KDE-PluginInfo-Email=menard@kde.org
+X-KDE-PluginInfo-Name=quickdialer-qml
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Phone
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

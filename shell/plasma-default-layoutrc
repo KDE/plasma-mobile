@@ -76,8 +76,8 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][5][Applets][1]
-geometry=90,49,256,256
-plugin=plasma_applet_notes
+geometry=200,0,400,420
+plugin=quickdialer-qml
 immutability=1
 zvalue=1
 
@@ -95,8 +95,8 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][6][Applets][1]
-geometry=220,69,182,182
-plugin=battery
+geometry=10,10,500,400
+plugin=twitter
 immutability=1
 zvalue=1
 

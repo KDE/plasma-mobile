@@ -4,6 +4,7 @@ include(KDE4Defaults)
 
 set(bindings_SRCS
     plasmabindings.cpp
+    phone/phone.cpp
     private/declarativetabbar.cpp
     private/gridlayout.cpp
     private/linearlayout.cpp
