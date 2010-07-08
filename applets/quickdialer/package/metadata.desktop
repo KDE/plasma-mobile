@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Quick Dialer (QML)
+Name[x-test]=xxQuick Dialer (QML)xx
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=akregator

@@ -1,7 +1,9 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=A Quick Dialer (QML)
+Name[x-test]=xxA Quick Dialer (QML)xx
 Comment=A quick dialer to call a number
+Comment[x-test]=xxA quick dialer to call a numberxx
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=
