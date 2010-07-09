@@ -19,6 +19,7 @@
 
 import Qt 4.7
 import Plasma 0.1 as Plasma
+import GraphicsLayouts 4.7
 
 QGraphicsWidget {
     id: main
@@ -45,43 +46,45 @@ QGraphicsWidget {
           number.text = "Please type a number"
     }
        
-    Column {
+    layout: QGraphicsLinearLayout {
             id: box;
             spacing : 10
-            anchors { fill: parent; topMargin: 6; bottomMargin: 6; leftMargin: 6; rightMargin: 6 }
-            Item {
-                width : grid.width
-                height : grid.height
-                Grid {
-                      property real w: (box.width / columns) - ((spacing * (columns - 1)) / columns)
-                      id: grid; rows: 5; columns: 3; spacing: 6
-                      Plasma.PushButton { width: grid.w; height: 60; text: "7"; onClicked: enterDigit("7");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "8"; onClicked: enterDigit("8");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "9"; onClicked: enterDigit("9");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "4"; onClicked: enterDigit("5");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "5"; onClicked: enterDigit("5");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "6"; onClicked: enterDigit("6");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "1"; onClicked: enterDigit("1");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "2"; onClicked: enterDigit("2");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "3"; onClicked: enterDigit("3");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "*"; onClicked: enterDigit("*");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "0"; onClicked: enterDigit("0");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "#"; onClicked: enterDigit("#");}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "Del"; onClicked: deleteLastDigit();}
-                      Item { width: grid.w; height:60}
-                      Plasma.PushButton { width: grid.w; height: 60; text: "Call"; onClicked: call();}
-                  }
-              }
-              Rectangle {
-                id : display
-                width : main.width;
-                height : 35
-                color : "white"
-                Text {
-                    id : number;
-                    anchors.fill : parent;
-                    text : "Please type a number"
+            orientation: Qt.Vertical
+            QGraphicsGridLayout{
+                property int r: 0
+                property int c: 0
+                id: grid;  spacing: 6
+                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "7"; onClicked: enterDigit("7");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2;  text: "8"; onClicked: enterDigit("8");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "9"; onClicked: enterDigit("9");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 1; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "4"; onClicked: enterDigit("4");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 1; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2; text: "5"; onClicked: enterDigit("5");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 1; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "6"; onClicked: enterDigit("6");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "1"; onClicked: enterDigit("1");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2; text: "2"; onClicked: enterDigit("2");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "3"; onClicked: enterDigit("3");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 3; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "*"; onClicked: enterDigit("*");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 3; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2; text: "0"; onClicked: enterDigit("0");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 3; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "#"; onClicked: enterDigit("#");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 4; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 3; text: "Del"; onClicked: deleteLastDigit();}
+                Plasma.PushButton { QGraphicsGridLayout.row: 4; QGraphicsGridLayout.column: 3; QGraphicsGridLayout.columnSpan: 3; text: "Call"; onClicked: call();}
+            }
+            LayoutItem{
+                minimumSize: "100x35"
+                preferredSize: number.width+"x35"
+                maximumSize: "1000x35"
+                Rectangle {
+                    id : display
+                    width : main.width;
+                    height : 35
+                    color : "white"
+                    clip: true
+                    Text {
+                        id : number;
+                        anchors.fill : parent;
+                        text : "Please type a number"
+                    }
                 }
-              }
+            }
     }
 }
