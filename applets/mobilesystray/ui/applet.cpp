@@ -30,6 +30,7 @@
 
 #include <plasma/widgets/iconwidget.h>
 #include <plasma/dataenginemanager.h>
+#include <plasma/containment.h>
 
 #include "../core/manager.h"
 #include "../core/task.h"
@@ -92,7 +93,7 @@ void MobileTray::init()
             this, SLOT(updateTask(SystemTray::Task*)));
     connect(m_manager, SIGNAL(taskRemoved(SystemTray::Task*)),
             this, SLOT(removeTask(SystemTray::Task*)));
-/*
+
     QStringList applets = m_manager->applets(0);
     if (!applets.contains("org.kde.networkmanagement")) {
         m_manager->addApplet("org.kde.networkmanagement", this);
@@ -117,13 +118,15 @@ void MobileTray::init()
         }
         engines->unloadEngine("powermanagement");
     }
-*/
+
 
     foreach(Task *task, m_manager->tasks()) {
-      Plasma::IconWidget *ic = new Plasma::IconWidget(task->icon(), "", this);
-      m_iconList.insert(task->typeId(), ic);
-      connect(ic, SIGNAL(clicked()), this, SLOT(enlarge()));
-      layout->addItem(ic);
+        if (task->isEmbeddable(this)) {
+            Plasma::IconWidget *ic = new Plasma::IconWidget(task->icon(), "", this);
+            m_iconList.insert(task->typeId(), ic);
+            connect(ic, SIGNAL(clicked()), this, SLOT(enlarge()));
+            layout->addItem(ic);
+        }
     }
 }
 
@@ -150,15 +153,24 @@ void MobileTray::updateTask(SystemTray::Task* task)
 
 void MobileTray::enlarge()
 {
-    removeToolBox();
-    delete m_view;
-    m_scene = new QGraphicsScene();
-    m_view = new EnlargedWidget(m_scene);
-    m_overlay = new EnlargedOverlay(m_manager->tasks(), m_view->size(), this);
-    connect (m_overlay, SIGNAL(showMenu(QMenu*)), this, SLOT(showOverlayToolBox(QMenu*)));
-    m_scene->addItem(m_overlay);
+    //removeToolBox();
+    if (m_overlay) {
+        m_overlay->show();
+        return;
+    }
+    //m_scene = new QGraphicsScene();
+    //m_view = new EnlargedWidget(m_scene);
 
-    m_view->show();
+    m_overlay = new EnlargedOverlay(m_manager->tasks(),
+                                    containment()->boundingRect().size().toSize(), this);
+    m_overlay->show();
+    m_overlay->setPos(0 - scenePos().x() + containment()->scenePos().x() + 50, 
+                      0 - scenePos().y() + containment()->scenePos().y());
+    //connect (m_overlay, SIGNAL(showMenu(QMenu*)), this, SLOT(showOverlayToolBox(QMenu*)));
+
+//    m_scene->addItem(m_overlay);
+
+//    m_view->show();
 }
 
 void MobileTray::removeToolBox()

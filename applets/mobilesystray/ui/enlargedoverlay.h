@@ -54,6 +54,7 @@ signals:
 
 protected slots:
     void relayMenu(QMenu* m);
+    void hideOverlay();
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,

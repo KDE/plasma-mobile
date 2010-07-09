@@ -37,19 +37,26 @@ EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QSize containerSize, QGraph
         : Applet(parent)
 {
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Horizontal, this);
+    Plasma::IconWidget *cancel = new Plasma::IconWidget(KIcon("dialog-cancel"), "", this);
+    connect(cancel, SIGNAL(clicked()), this, SLOT(hideOverlay()));
+    layout->addItem(cancel);
     foreach(Task *task, tasks) {
-      /*Plasma::IconWidget *w = qobject_cast<Plasma::IconWidget*>(task->widget(this, true));
+      QGraphicsWidget *w = task->widget(qobject_cast<Plasma::Applet*>(parent), true);
       layout->addItem(w);
-      w->setIcon(task->icon());*/
-      Plasma::IconWidget *w = new Plasma::IconWidget(task->icon(), "", this);
-      layout->addItem(w);
-      DBusSystemTrayWidget *d = qobject_cast<DBusSystemTrayWidget*>(task->widget(this, true));
+      w->show();
+      //Plasma::IconWidget *w = qobject_cast<Plasma::IconWidget*>(task->widget(this, true));
+      //layout->addItem(w);
+      //w->setIcon(task->icon());
+      //Plasma::IconWidget *w = new Plasma::IconWidget(task->icon(), "", this);
+      //layout->addItem(w);
+      Plasma::IconWidget *d = qobject_cast<Plasma::IconWidget*>(w);
       if (d != 0) {
-          QAction *q = new QAction(task->icon(), "", this);
+          d->setIcon(task->icon());
+          /*QAction *q = new QAction(task->icon(), "", this);
           connect(q, SIGNAL(triggered()), d, SLOT(emitMenu()));
           w->setAction(q);
           //connect(d, SIGNAL(clicked()), d, SLOT(emitMenu()));
-          connect(d, SIGNAL(menuEmitted(QMenu*)), this, SLOT(relayMenu(QMenu*)));
+          connect(d, SIGNAL(menuEmitted(QMenu*)), this, SLOT(relayMenu(QMenu*)));*/
       }
     }
 
@@ -57,10 +64,15 @@ EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QSize containerSize, QGraph
     m_background.setEnabledBorders(FrameSvg::AllBorders);
 
     resize(containerSize.width() - 100, 100);
-} 
+}
 
 EnlargedOverlay::~EnlargedOverlay()
 {
+}
+
+void EnlargedOverlay::hideOverlay()
+{
+    hide();
 }
 
 void EnlargedOverlay::relayMenu(QMenu* m)
