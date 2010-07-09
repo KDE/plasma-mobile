@@ -1,6 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Quick Dialer (QML)
+Name[pt]=Marcação Rápida (QML)
+Name[sv]=Snabbuppringning (QML)
 Name[x-test]=xxQuick Dialer (QML)xx
 Type=Service
 ServiceTypes=Plasma/Applet
