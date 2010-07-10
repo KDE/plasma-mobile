@@ -55,11 +55,9 @@ public:
     virtual QIcon icon() const;
 
 private:
-    void syncToolTip();
-
-    //callbacks
     void syncToolTip(const QString &title, const QString &subTitle, const QIcon &toolTipIcon);
     void syncMovie(const QString &);
+    void syncIcons(const Plasma::DataEngine::Data &properties);
 
 private Q_SLOTS:
     void syncStatus(QString status);

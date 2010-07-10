@@ -24,6 +24,7 @@
 
 #include <Plasma/DataEngineManager>
 
+
 namespace SystemTray
 {
 

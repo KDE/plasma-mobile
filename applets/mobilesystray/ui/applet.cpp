@@ -68,6 +68,9 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     if (!m_manager) {
         m_manager = new SystemTray::Manager();
     }
+
+    m_fixedList << "notifications" << "org.kde.networkmanagement" << "battery";
+
     setBackgroundHints(DefaultBackground);
     layout = new QGraphicsLinearLayout(Qt::Horizontal, this);
     resize(50,50);
@@ -87,7 +90,7 @@ void MobileTray::init()
 {
     m_manager->loadApplets(this);
 
-    QStringList applets = m_manager->applets(0);
+    QStringList applets = m_manager->applets(this);
     if (!applets.contains("org.kde.networkmanagement")) {
         m_manager->addApplet("org.kde.networkmanagement", this);
     }
@@ -112,15 +115,21 @@ void MobileTray::init()
         engines->unloadEngine("powermanagement");
     }
 
-
     foreach(Task *task, m_manager->tasks()) {
-        if (task->isEmbeddable(this)) {
+        bool isFixed = m_fixedList.contains(task->typeId());
+        if (task->isEmbeddable(this) && (isFixed || m_cyclicIcons.size() < MAXCYCLIC)) {
             Plasma::IconWidget *ic = new Plasma::IconWidget(task->icon(), "", this);
-            m_iconList.insert(task->typeId(), ic);
             connect(ic, SIGNAL(clicked()), this, SLOT(enlarge()));
-            layout->addItem(ic);
+            if (isFixed) {
+                layout->insertItem(0, ic);
+                m_fixedIcons.insert(task->typeId(), ic);
+            } else {
+                layout->addItem(ic);
+                m_cyclicIcons.insert(task->typeId(), ic);
+            }
         }
     }
+    adjustSize();
     m_overlay = new EnlargedOverlay(m_manager->tasks(),
                                     containment()->boundingRect().size().toSize(), this);
     m_overlay->hide();
@@ -136,19 +145,38 @@ void MobileTray::init()
 
 void MobileTray::addTask(SystemTray::Task* task)
 {
-    Plasma::IconWidget *ic = new Plasma::IconWidget(task->icon(), "", this);
-    m_iconList.insert(task->typeId(), ic);
-    connect(ic, SIGNAL(clicked()), this, SLOT(enlarge()));
-    layout->addItem(ic);
     m_overlay->addTask(task);
+    bool isFixed = m_fixedList.contains(task->typeId());
+    if (!isFixed && m_cyclicIcons.size() >= MAXCYCLIC) {
+        Plasma::IconWidget *ic = m_cyclicIcons.take(m_cyclicIcons.keys().at(0));
+        layout->removeItem(ic);
+        delete ic;
+    }
+    Plasma::IconWidget *ic = new Plasma::IconWidget(task->icon(), "", this);
+    connect(ic, SIGNAL(clicked()), this, SLOT(enlarge()));
+    if (isFixed) {
+        layout->insertItem(0,ic);
+        m_fixedIcons.insert(task->typeId(), ic);
+    } else {
+        layout->addItem(ic);
+        m_cyclicIcons.insert(task->typeId(), ic);
+    }
+    adjustSize();
 }
 
 void MobileTray::removeTask(SystemTray::Task* task)
 {
-    Plasma::IconWidget *ic = m_iconList.take(task->typeId());
-    layout->removeItem(ic);
     m_overlay->removeTask(task);
-    delete ic;
+    Plasma::IconWidget *ic = 0;
+    if (m_cyclicIcons.contains(task->typeId())) {
+        ic = m_cyclicIcons.take(task->typeId());
+    } else if (m_fixedIcons.contains(task->typeId())) {
+        ic = m_fixedIcons.take(task->typeId());
+    }
+    if (ic) {
+        layout->removeItem(ic);
+        delete ic;
+    }
 }
 
 void MobileTray::updateTask(SystemTray::Task* task)

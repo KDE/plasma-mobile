@@ -44,16 +44,21 @@ EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QSize containerSize, Plasma
     foreach(Task *task, tasks) {
         if (task->isEmbeddable(parent)) {
             QGraphicsWidget *w = task->widget(parent, true);
+            if (!w) {
+              continue;
+            }
             m_layout->addItem(w);
             m_widgetList.insert(task->typeId(), w);
+            w->setParent(this);
             //Plasma::IconWidget *w = qobject_cast<Plasma::IconWidget*>(task->widget(this, true));
             //layout->addItem(w);
             //w->setIcon(task->icon());
             //Plasma::IconWidget *w = new Plasma::IconWidget(task->icon(), "", this);
             //layout->addItem(w);
-            Plasma::IconWidget *d = qobject_cast<Plasma::IconWidget*>(w);
+            DBusSystemTrayWidget *d = qobject_cast<DBusSystemTrayWidget*>(w);
             if (d != 0) {
-                d->setIcon(task->icon());
+                d->setIcon("", task->icon());
+                d->setItemIsMenu(false);
                 /*QAction *q = new QAction(task->icon(), "", this);
                 connect(q, SIGNAL(triggered()), d, SLOT(emitMenu()));
                 w->setAction(q);
@@ -67,6 +72,7 @@ EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QSize containerSize, Plasma
     m_background.setEnabledBorders(FrameSvg::AllBorders);
 
     resize(containerSize.width() - 100, 100);
+    setZValue(9999);
 }
 
 EnlargedOverlay::~EnlargedOverlay()
@@ -79,17 +85,20 @@ void EnlargedOverlay::addTask(SystemTray::Task* task)
     if (!w) return;
     m_layout->addItem(w);
     m_widgetList.insert(task->typeId(), w);
-    Plasma::IconWidget *d = qobject_cast<Plasma::IconWidget*>(w);
+    DBusSystemTrayWidget *d = qobject_cast<DBusSystemTrayWidget*>(w);
     if (d != 0) {
-        d->setIcon(task->icon());
+        d->setIcon("", task->icon());
+        d->setItemIsMenu(false);
     }
 }
 
 void EnlargedOverlay::removeTask(SystemTray::Task* task)
 {
     QGraphicsWidget *ic = m_widgetList.take(task->typeId());
-    m_layout->removeItem(ic);
-    delete ic;
+    if (ic) {
+        m_layout->removeItem(ic);
+        delete ic;
+    }
 }
 
 void EnlargedOverlay::updateTask(SystemTray::Task* task)

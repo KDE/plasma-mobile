@@ -123,7 +123,7 @@ void DBusSystemTrayTask::dataUpdated(const QString &taskName, const Plasma::Data
 {
     Q_UNUSED(taskName);
 
-    QString oldTypeId = m_typeId;
+    const QString oldTypeId = m_typeId;
 
     QString cat = properties["Category"].toString();
     if (!cat.isEmpty()) {
@@ -135,54 +135,41 @@ void DBusSystemTrayTask::dataUpdated(const QString &taskName, const Plasma::Data
         }
     }
 
-    QString m_title = properties["Title"].toString();
-    if (!m_title.isEmpty()) {
-        m_name = m_title;
+    if (properties["TitleChanged"].toBool()) {
+        QString m_title = properties["Title"].toString();
+        if (!m_title.isEmpty()) {
+            m_name = m_title;
 
-        if (m_typeId.isEmpty()) {
-            m_typeId = m_title;
+            if (m_typeId.isEmpty()) {
+                m_typeId = m_title;
+            }
         }
     }
+
+    /*
+    kDebug() << m_name
+    << "status:" << properties["StatusChanged"].toBool() << "title:" <<  properties["TitleChanged"].toBool()
+    << "icons:" << properties["IconsChanged"].toBool() << "tooltip:" << properties["ToolTipChanged"].toBool();
+    */
 
     QString id = properties["Id"].toString();
     if (!id.isEmpty()) {
         m_typeId = id;
     }
 
-    m_icon = properties["Icon"].value<QIcon>();
-    m_iconName = properties["IconName"].toString();
-
-    if (status() != Task::NeedsAttention) {
-        foreach (QGraphicsWidget *widget, widgetsByHost()) {
-            DBusSystemTrayWidget *iconWidget = qobject_cast<DBusSystemTrayWidget *>(widget);
-            if (!iconWidget) {
-                continue;
-            }
-
-            iconWidget->setIcon(m_iconName, m_icon);
-
-            //This hardcoded number is needed to support pixel perfection of m_icons coming from other environments, in kde actualsize will jusrt return our usual 22x22
-            if (iconWidget->svg().isEmpty()) {
-                QSize size = m_icon.actualSize(QSize(24, 24));
-                iconWidget->setPreferredSize(iconWidget->sizeFromIconSize(qMax(size.width(), size.height())));
-            } else {
-                iconWidget->setPreferredSize(24, 24);
-            }
-        }
+    if (properties["IconsChanged"].toBool()) {
+        syncIcons(properties);
     }
 
-    m_attentionIcon = properties["AttentionIcon"].value<QIcon>();
-    m_attentionIconName = properties["AttentionIconName"].toString();
+    if (properties["StatusChanged"].toBool()) {
+        syncStatus(properties["Status"].toString());
+    }
 
-    QString m_movieName = properties["AttentionMovieName"].toString();
-    syncMovie(m_movieName);
-
-    syncStatus(properties["Status"].toString());
-
-    syncToolTip(properties["ToolTipTitle"].toString(),
-                properties["ToolTipSubTitle"].toString(),
-                properties["ToolTipIcon"].value<QIcon>());
-
+    if (properties["ToolTipChanged"].toBool()) {
+        syncToolTip(properties["ToolTipTitle"].toString(),
+                    properties["ToolTipSubTitle"].toString(),
+                    properties["ToolTipIcon"].value<QIcon>());
+    }
 
     foreach (QGraphicsWidget *widget, widgetsByHost()) {
         DBusSystemTrayWidget *iconWidget = qobject_cast<DBusSystemTrayWidget *>(widget);
@@ -213,7 +200,56 @@ void DBusSystemTrayTask::dataUpdated(const QString &taskName, const Plasma::Data
 
     m_embeddable = true;
 
-    emit changed(this);
+    if (oldTypeId != m_typeId || properties["StatusChanged"].toBool() || properties["TitleChanged"].toBool()) {
+        //kDebug() << "signaling a change";
+        emit changed(this);
+    }
+}
+
+void DBusSystemTrayTask::syncIcons(const Plasma::DataEngine::Data &properties)
+{
+    m_icon = properties["Icon"].value<QIcon>();
+    m_iconName = properties["IconName"].toString();
+
+    if (status() != Task::NeedsAttention) {
+        foreach (QGraphicsWidget *widget, widgetsByHost()) {
+            DBusSystemTrayWidget *iconWidget = qobject_cast<DBusSystemTrayWidget *>(widget);
+            if (!iconWidget) {
+                continue;
+            }
+
+            iconWidget->setIcon(m_iconName, m_icon);
+
+            //This hardcoded number is needed to support pixel perfection of m_icons coming from other environments, in kde actualsize will jusrt return our usual 22x22
+            if (iconWidget->svg().isEmpty()) {
+                QSize size = m_icon.actualSize(QSize(24, 24));
+                iconWidget->setPreferredSize(iconWidget->sizeFromIconSize(qMax(size.width(), size.height())));
+            } else {
+                iconWidget->setPreferredSize(24, 24);
+            }
+        }
+    }
+
+    m_attentionIcon = properties["AttentionIcon"].value<QIcon>();
+    m_attentionIconName = properties["AttentionIconName"].toString();
+
+    QString m_movieName = properties["AttentionMovieName"].toString();
+    syncMovie(m_movieName);
+
+    //FIXME: this is used only on the monochrome ones, the third place where the overlay painting is implemented
+    QIcon overlayIcon = properties["OverlayIcon"].value<QIcon>();
+    if (overlayIcon.isNull() && !properties["OverlayIconName"].value<QString>().isEmpty()) {
+        overlayIcon = KIcon(properties["OverlayIconName"].value<QString>());
+    }
+
+    if (!overlayIcon.isNull()) {
+        foreach (QGraphicsWidget *widget, widgetsByHost()) {
+            DBusSystemTrayWidget *iconWidget = qobject_cast<DBusSystemTrayWidget *>(widget);
+            if (iconWidget) {
+                iconWidget->setOverlayIcon(overlayIcon);
+            }
+        }
+    }
 }
 
 void DBusSystemTrayTask::blinkAttention()

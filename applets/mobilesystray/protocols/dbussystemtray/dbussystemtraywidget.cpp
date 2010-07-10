@@ -38,7 +38,8 @@ namespace SystemTray
 DBusSystemTrayWidget::DBusSystemTrayWidget(Plasma::Applet *parent, Plasma::Service *service)
     : Plasma::IconWidget(parent),
       m_service(service),
-      m_host(parent)
+      m_host(parent),
+      m_waitingOnContextMenu(false)
 {
     KAction *action = new KAction(this);
     setAction(action);
@@ -71,7 +72,8 @@ void DBusSystemTrayWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         params.writeEntry("x", event->screenPos().x());
         params.writeEntry("y", event->screenPos().y());
         m_service->startOperationCall(params);
-    } else if (m_itemIsMenu) {
+    } else if (m_itemIsMenu && !m_waitingOnContextMenu) {
+        m_waitingOnContextMenu = true;
         KConfigGroup params = m_service->operationDescription("ContextMenu");
         params.writeEntry("x", event->screenPos().x());
         params.writeEntry("y", event->screenPos().y());
@@ -93,6 +95,11 @@ void DBusSystemTrayWidget::wheelEvent(QGraphicsSceneWheelEvent *event)
 
 void DBusSystemTrayWidget::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
+    if (m_waitingOnContextMenu) {
+        return;
+    }
+
+    m_waitingOnContextMenu = true;
     KConfigGroup params = m_service->operationDescription("ContextMenu");
     params.writeEntry("x", event->screenPos().x());
     params.writeEntry("y", event->screenPos().y());
@@ -100,29 +107,9 @@ void DBusSystemTrayWidget::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
     connect(job, SIGNAL(result(KJob*)), this, SLOT(showContextMenu(KJob*)));
 }
 
-void DBusSystemTrayWidget::emitMenu()
-{
-    KConfigGroup params = m_service->operationDescription("ContextMenu");
-    params.writeEntry("x", 0);
-    params.writeEntry("y", 0);
-    KJob *job = m_service->startOperationCall(params);
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(emitMenu(KJob*)));
-}
-
-void DBusSystemTrayWidget::emitMenu(KJob *job)
-{
-    Plasma::ServiceJob *sjob = qobject_cast<Plasma::ServiceJob *>(job);
-    if (!sjob) {
-        return;
-    }
-
-    QMenu *menu = qobject_cast<QMenu *>(sjob->result().value<QObject *>());
-    emit menuEmitted(menu);
-    job->kill();
-}
-
 void DBusSystemTrayWidget::showContextMenu(KJob *job)
 {
+    m_waitingOnContextMenu = false;
     Plasma::ServiceJob *sjob = qobject_cast<Plasma::ServiceJob *>(job);
     if (!sjob) {
         return;
@@ -184,6 +171,31 @@ void DBusSystemTrayWidget::setIcon(const QString &iconName, const QIcon &icon)
     }
 }
 
+void DBusSystemTrayWidget::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    Plasma::IconWidget::paint(painter, option, widget);
+    if (!svg().isEmpty()) {
+        int size = 0;
+        if (iconSize().width() <= KIconLoader::SizeSmallMedium) {
+            size = KIconLoader::SizeSmall/2;
+        } else if (iconSize().width() <= KIconLoader::SizeMedium) {
+            size = KIconLoader::SizeSmall/2;
+        } else {
+            size = KIconLoader::SizeSmall;
+        }
+        m_overlayIcon.paint(painter, QRect(option->rect.bottomRight() - QPoint(size, size), QSize(size, size)));
+    }
+}
+
+void DBusSystemTrayWidget::setOverlayIcon(const QIcon &icon)
+{
+    m_overlayIcon = icon;
+}
+
+QIcon DBusSystemTrayWidget::overlayIcon() const
+{
+    return m_overlayIcon;
+}
 
 }
 

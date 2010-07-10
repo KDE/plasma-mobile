@@ -81,9 +81,12 @@ protected:
 private:
     void removeToolBox();
     static Manager *m_manager;
+    static const int MAXCYCLIC = 3;
     QGraphicsLinearLayout *layout;
     KIcon m_icon;
-    QHash<QString, Plasma::IconWidget*> m_iconList;
+    QList<QString> m_fixedList;
+    QHash<QString, Plasma::IconWidget*> m_cyclicIcons;
+    QHash<QString, Plasma::IconWidget*> m_fixedIcons;
     EnlargedWidget *m_view;
     QGraphicsScene *m_scene;
     EnlargedOverlay *m_overlay;
