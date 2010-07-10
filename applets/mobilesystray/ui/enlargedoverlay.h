@@ -24,6 +24,7 @@
 #include <QGraphicsWidget>
 #include <QGraphicsSceneResizeEvent>
 #include <QGraphicsSceneMouseEvent>
+#include <QHash>
 
 #include <Plasma/Label>
 #include <Plasma/FrameSvg>
@@ -46,8 +47,13 @@ class EnlargedOverlay : public Plasma::Applet
     Q_OBJECT
 
 public:
-    EnlargedOverlay(QList<Task*> tasks, QSize containerSize, QGraphicsWidget *parent = 0);
+    EnlargedOverlay(QList<Task*> tasks, QSize containerSize, Plasma::Applet *par = 0);
     ~EnlargedOverlay();
+
+public slots:
+    void addTask(SystemTray::Task* task);
+    void removeTask(SystemTray::Task* task);
+    void updateTask(SystemTray::Task* task);
 
 signals:
     void showMenu(QMenu* m);
@@ -62,6 +68,9 @@ protected:
     void resizeEvent(QGraphicsSceneResizeEvent *event);
 
 private:
+    QHash<QString, QGraphicsWidget*> m_widgetList;
+    QGraphicsLinearLayout *m_layout;
+    Plasma::Applet* parent;
     Plasma::FrameSvg m_background;
 };
 

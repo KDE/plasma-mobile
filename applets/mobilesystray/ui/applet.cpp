@@ -87,13 +87,6 @@ void MobileTray::init()
 {
     m_manager->loadApplets(this);
 
-    connect(m_manager, SIGNAL(taskAdded(SystemTray::Task*)),
-            this, SLOT(addTask(SystemTray::Task*)));
-    connect(m_manager, SIGNAL(taskChanged(SystemTray::Task*)),
-            this, SLOT(updateTask(SystemTray::Task*)));
-    connect(m_manager, SIGNAL(taskRemoved(SystemTray::Task*)),
-            this, SLOT(removeTask(SystemTray::Task*)));
-
     QStringList applets = m_manager->applets(0);
     if (!applets.contains("org.kde.networkmanagement")) {
         m_manager->addApplet("org.kde.networkmanagement", this);
@@ -128,6 +121,17 @@ void MobileTray::init()
             layout->addItem(ic);
         }
     }
+    m_overlay = new EnlargedOverlay(m_manager->tasks(),
+                                    containment()->boundingRect().size().toSize(), this);
+    m_overlay->hide();
+
+    connect(m_manager, SIGNAL(taskAdded(SystemTray::Task*)),
+            this, SLOT(addTask(SystemTray::Task*)));
+    connect(m_manager, SIGNAL(taskChanged(SystemTray::Task*)),
+            this, SLOT(updateTask(SystemTray::Task*)));
+    connect(m_manager, SIGNAL(taskRemoved(SystemTray::Task*)),
+            this, SLOT(removeTask(SystemTray::Task*)));
+
 }
 
 void MobileTray::addTask(SystemTray::Task* task)
@@ -136,12 +140,14 @@ void MobileTray::addTask(SystemTray::Task* task)
     m_iconList.insert(task->typeId(), ic);
     connect(ic, SIGNAL(clicked()), this, SLOT(enlarge()));
     layout->addItem(ic);
+    m_overlay->addTask(task);
 }
 
 void MobileTray::removeTask(SystemTray::Task* task)
 {
     Plasma::IconWidget *ic = m_iconList.take(task->typeId());
     layout->removeItem(ic);
+    m_overlay->removeTask(task);
     delete ic;
 }
 
@@ -149,6 +155,7 @@ void MobileTray::updateTask(SystemTray::Task* task)
 {
     removeTask(task);
     addTask(task);
+    //m_overlay->updateTask(task);
 }
 
 void MobileTray::enlarge()
@@ -156,6 +163,8 @@ void MobileTray::enlarge()
     //removeToolBox();
     if (m_overlay) {
         m_overlay->show();
+        m_overlay->setPos(0 - scenePos().x() + containment()->scenePos().x() + 50, 
+                          0 - scenePos().y() + containment()->scenePos().y());
         return;
     }
     //m_scene = new QGraphicsScene();

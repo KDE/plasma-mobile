@@ -33,31 +33,34 @@ using namespace Plasma;
 namespace SystemTray
 {
 
-EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QSize containerSize, QGraphicsWidget *parent)
-        : Applet(parent)
+EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QSize containerSize, Plasma::Applet *par)
+        : Applet(par)
 {
-    QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Horizontal, this);
+    parent = par;
+    m_layout = new QGraphicsLinearLayout(Qt::Horizontal, this);
     Plasma::IconWidget *cancel = new Plasma::IconWidget(KIcon("dialog-cancel"), "", this);
     connect(cancel, SIGNAL(clicked()), this, SLOT(hideOverlay()));
-    layout->addItem(cancel);
+    m_layout->addItem(cancel);
     foreach(Task *task, tasks) {
-      QGraphicsWidget *w = task->widget(qobject_cast<Plasma::Applet*>(parent), true);
-      layout->addItem(w);
-      w->show();
-      //Plasma::IconWidget *w = qobject_cast<Plasma::IconWidget*>(task->widget(this, true));
-      //layout->addItem(w);
-      //w->setIcon(task->icon());
-      //Plasma::IconWidget *w = new Plasma::IconWidget(task->icon(), "", this);
-      //layout->addItem(w);
-      Plasma::IconWidget *d = qobject_cast<Plasma::IconWidget*>(w);
-      if (d != 0) {
-          d->setIcon(task->icon());
-          /*QAction *q = new QAction(task->icon(), "", this);
-          connect(q, SIGNAL(triggered()), d, SLOT(emitMenu()));
-          w->setAction(q);
-          //connect(d, SIGNAL(clicked()), d, SLOT(emitMenu()));
-          connect(d, SIGNAL(menuEmitted(QMenu*)), this, SLOT(relayMenu(QMenu*)));*/
-      }
+        if (task->isEmbeddable(parent)) {
+            QGraphicsWidget *w = task->widget(parent, true);
+            m_layout->addItem(w);
+            m_widgetList.insert(task->typeId(), w);
+            //Plasma::IconWidget *w = qobject_cast<Plasma::IconWidget*>(task->widget(this, true));
+            //layout->addItem(w);
+            //w->setIcon(task->icon());
+            //Plasma::IconWidget *w = new Plasma::IconWidget(task->icon(), "", this);
+            //layout->addItem(w);
+            Plasma::IconWidget *d = qobject_cast<Plasma::IconWidget*>(w);
+            if (d != 0) {
+                d->setIcon(task->icon());
+                /*QAction *q = new QAction(task->icon(), "", this);
+                connect(q, SIGNAL(triggered()), d, SLOT(emitMenu()));
+                w->setAction(q);
+                //connect(d, SIGNAL(clicked()), d, SLOT(emitMenu()));
+                connect(d, SIGNAL(menuEmitted(QMenu*)), this, SLOT(relayMenu(QMenu*)));*/
+            }
+        }
     }
 
     m_background.setImagePath("widgets/translucentbackground");
@@ -68,6 +71,31 @@ EnlargedOverlay::EnlargedOverlay(QList<Task*> tasks, QSize containerSize, QGraph
 
 EnlargedOverlay::~EnlargedOverlay()
 {
+}
+
+void EnlargedOverlay::addTask(SystemTray::Task* task)
+{
+    QGraphicsWidget *w = task->widget(parent, true);
+    if (!w) return;
+    m_layout->addItem(w);
+    m_widgetList.insert(task->typeId(), w);
+    Plasma::IconWidget *d = qobject_cast<Plasma::IconWidget*>(w);
+    if (d != 0) {
+        d->setIcon(task->icon());
+    }
+}
+
+void EnlargedOverlay::removeTask(SystemTray::Task* task)
+{
+    QGraphicsWidget *ic = m_widgetList.take(task->typeId());
+    m_layout->removeItem(ic);
+    delete ic;
+}
+
+void EnlargedOverlay::updateTask(SystemTray::Task* task)
+{
+    removeTask(task);
+    addTask(task);
 }
 
 void EnlargedOverlay::hideOverlay()
