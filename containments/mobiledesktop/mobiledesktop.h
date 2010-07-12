@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright 2010 Alexis Menard <menard@kde.org>                         *
  *   Copyright 2010 Artur Duque de Souza <asouza@kde.org>                  *
+ *   Copyright 2010 Marco Martin <mart@kde.org>                            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,8 +19,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef PLASMA_DESKTOP_H
-#define PLASMA_DESKTOP_H
+#ifndef PLASMA_MOBILEDESKTOP_H
+#define PLASMA_MOBILEDESKTOP_H
 
 #include <Plasma/Containment>
 
@@ -27,8 +28,6 @@ namespace Plasma
 {
 }
 
-class QDeclarativeEngine;
-class QDeclarativeComponent;
 
 class MobileDesktop : public Plasma::Containment
 {
@@ -40,18 +39,6 @@ public:
     void init();
 
     void constraintsEvent(Plasma::Constraints constraints);
-
-private:
-    void errorPrint();
-    void execute(const QString &fileName);
-    void finishExecute();
-
-    QDeclarativeEngine* m_engine;
-    QDeclarativeComponent* m_component;
-    QObject *m_root;
-
-    bool loaded;
-
 };
 
 #endif // PLASMA_DESKTOP_H
