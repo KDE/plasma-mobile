@@ -28,6 +28,8 @@ namespace Plasma
     class Containment;
 }
 
+class QGraphicsLinearLayout;
+
 class AppletsContainer : public QGraphicsWidget
 {
     Q_OBJECT
@@ -39,6 +41,8 @@ public:
 public Q_SLOTS:
     void layoutApplet(Plasma::Applet *applet, const QPointF &post);
 
+private:
+    QGraphicsLinearLayout *m_layout;
 };
 
 #endif

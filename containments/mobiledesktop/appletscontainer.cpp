@@ -32,7 +32,8 @@ using namespace Plasma;
 AppletsContainer::AppletsContainer(QGraphicsItem *parent)
  : QGraphicsWidget(parent)
 {
-
+    m_layout = new QGraphicsLinearLayout(this);
+    m_layout->addStretch();
 }
 
 AppletsContainer::~AppletsContainer()
@@ -42,7 +43,9 @@ AppletsContainer::~AppletsContainer()
 
 void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
 {
+    kDebug()<<"Applet added:"<<applet->name();
     applet->setParentItem(this);
+    m_layout->insertItem(m_layout->count(), applet);
 }
 
 

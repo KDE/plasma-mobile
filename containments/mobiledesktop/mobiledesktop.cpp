@@ -49,6 +49,13 @@ void MobileDesktop::init()
 {
     Containment::init();
 
+    QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
+    m_container = new AppletsContainer(this);
+    lay->addItem(m_container);
+
+    connect(this, SIGNAL(appletAdded(Plasma::Applet*,QPointF)),
+            m_container, SLOT(layoutApplet(Plasma::Applet*,QPointF)));
+    
     setAcceptsHoverEvents(false);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     setFlag(QGraphicsItem::ItemUsesExtendedStyleOption, false);
@@ -57,12 +64,7 @@ void MobileDesktop::init()
 void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::StartupCompletedConstraint) {
-        QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
-        m_container = new AppletsContainer(this);
-        lay->addItem(m_container);
-
-        connect(this, SIGNAL(appletAdded(Plasma::Applet*,QPointF)),
-                m_container, SLOT(layoutApplet(Plasma::Applet*,QPointF)));
+        
     }
 }
 
