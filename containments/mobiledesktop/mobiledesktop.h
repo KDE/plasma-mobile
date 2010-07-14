@@ -28,6 +28,7 @@ namespace Plasma
 {
 }
 
+class AppletsContainer;
 
 class MobileDesktop : public Plasma::Containment
 {
@@ -39,6 +40,9 @@ public:
     void init();
 
     void constraintsEvent(Plasma::Constraints constraints);
+
+private:
+    AppletsContainer *m_container;
 };
 
 #endif // PLASMA_DESKTOP_H

@@ -21,6 +21,7 @@
 
 //own
 #include "mobiledesktop.h"
+#include "appletscontainer.h"
 
 //Qt
 #include <QtGui/QGraphicsLinearLayout>
@@ -55,7 +56,14 @@ void MobileDesktop::init()
 
 void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)
 {
-    
+    if (constraints & Plasma::StartupCompletedConstraint) {
+        QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
+        m_container = new AppletsContainer(this);
+        lay->addItem(m_container);
+
+        connect(this, SIGNAL(appletAdded(Plasma::Applet*,QPointF)),
+                m_container, SLOT(layoutApplet(Plasma::Applet*,QPointF)));
+    }
 }
 
 K_EXPORT_PLASMA_APPLET(mobiledesktop, MobileDesktop)
