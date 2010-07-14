@@ -45,7 +45,11 @@ void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
 {
     kDebug()<<"Applet added:"<<applet->name();
     applet->setParentItem(this);
-    m_layout->insertItem(m_layout->count(), applet);
+    QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(Qt::Vertical);
+    lay->addStretch();
+    lay->addItem(applet);
+    lay->addStretch();
+    m_layout->insertItem(m_layout->count(), lay);
 }
 
 
