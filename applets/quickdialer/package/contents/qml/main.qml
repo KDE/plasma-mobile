@@ -54,20 +54,20 @@ QGraphicsWidget {
                 property int r: 0
                 property int c: 0
                 id: grid;  spacing: 6
-                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "7"; onClicked: enterDigit("7");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2;  text: "8"; onClicked: enterDigit("8");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "9"; onClicked: enterDigit("9");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "1"; onClicked: enterDigit("1");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2;  text: "2"; onClicked: enterDigit("2");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "3"; onClicked: enterDigit("3");}
                 Plasma.PushButton { QGraphicsGridLayout.row: 1; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "4"; onClicked: enterDigit("4");}
                 Plasma.PushButton { QGraphicsGridLayout.row: 1; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2; text: "5"; onClicked: enterDigit("5");}
                 Plasma.PushButton { QGraphicsGridLayout.row: 1; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "6"; onClicked: enterDigit("6");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "1"; onClicked: enterDigit("1");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2; text: "2"; onClicked: enterDigit("2");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "3"; onClicked: enterDigit("3");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "7"; onClicked: enterDigit("7");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2; text: "8"; onClicked: enterDigit("8");}
+                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "9"; onClicked: enterDigit("9");}
                 Plasma.PushButton { QGraphicsGridLayout.row: 3; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "*"; onClicked: enterDigit("*");}
                 Plasma.PushButton { QGraphicsGridLayout.row: 3; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2; text: "0"; onClicked: enterDigit("0");}
                 Plasma.PushButton { QGraphicsGridLayout.row: 3; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "#"; onClicked: enterDigit("#");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 4; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 3; text: "Del"; onClicked: deleteLastDigit();}
-                Plasma.PushButton { QGraphicsGridLayout.row: 4; QGraphicsGridLayout.column: 3; QGraphicsGridLayout.columnSpan: 3; text: "Call"; onClicked: call();}
+                Plasma.PushButton { QGraphicsGridLayout.row: 4; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 3; text: "Call"; onClicked: call();}
+                Plasma.PushButton { QGraphicsGridLayout.row: 4; QGraphicsGridLayout.column: 3; QGraphicsGridLayout.columnSpan: 3; text: "Del"; onClicked: deleteLastDigit();}
             }
             LayoutItem{
                 minimumSize: "100x35"
@@ -75,12 +75,14 @@ QGraphicsWidget {
                 maximumSize: "1000x35"
                 Rectangle {
                     id : display
-                    width : main.width;
+                    width : main.width - 45;
                     height : 35
                     color : "white"
                     clip: true
                     Text {
                         id : number;
+                        font.bold : true;
+                        font.pixelSize : 20;
                         anchors.fill : parent;
                         text : "Please type a number"
                     }
