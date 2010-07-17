@@ -37,8 +37,6 @@ set(mobilesystemtray_SRCS
     protocols/dbussystemtray/dbussystemtraywidget.cpp
 
     ui/applet.cpp
-    ui/enlargedoverlay.cpp
-    ui/overlaytoolbox.cpp
     )
 
 # Now make sure all files get to the right place

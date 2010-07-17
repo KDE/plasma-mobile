@@ -23,20 +23,16 @@
 #define APPLET_H
 
 #include <Plasma/Applet>
-#include <KIcon>
-#include <QGraphicsView>
+#include <Plasma/Containment>
 #include <QHash>
-
-#include "enlargedoverlay.h"
-#include "overlaytoolbox.h"
 
 namespace Plasma
 {
 class IconWidget;
+class ScrollWidget;
 }
 
 class QGraphicsLinearLayout;
-class QGraphicsScene;
 
 namespace SystemTray
 {
@@ -44,22 +40,7 @@ namespace SystemTray
 class Manager;
 class Task;
 
-class EnlargedWidget : public QGraphicsView
-{
-    Q_OBJECT
-public:
-    EnlargedWidget(QGraphicsScene *sc);
-    void setToolBoxActivated(bool b) { m_toolBoxActivated = b; }
-
-protected:
-    virtual void mousePressEvent( QMouseEvent* );
-
-private:
-    bool m_toolBoxActivated;
-};
-
-// Define our plasma Applet
-class MobileTray : public Plasma::Applet
+class MobileTray : public Plasma::Containment
 {
     Q_OBJECT
 public:
@@ -68,29 +49,36 @@ public:
     ~MobileTray();
 
     void init();
+    void resize ( const QSizeF & size );
+
+signals:
+    void shrinkRequested();
+
 public slots:
     void addTask(SystemTray::Task* task);
     void removeTask(SystemTray::Task* task);
     void updateTask(SystemTray::Task* task);
+    void shrink();
     void enlarge();
-    void showOverlayToolBox(QMenu *m);
 
 protected:
+    enum Mode { PASSIVE, ACTIVE};
+    Mode m_mode;
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void resizeEvent (QGraphicsSceneResizeEvent * event);
 
 private:
-    void removeToolBox();
+    void showWidget(QGraphicsWidget *w, int index = -1);
+    void hideWidget(QGraphicsWidget *w);
     static Manager *m_manager;
     static const int MAXCYCLIC = 3;
-    QGraphicsLinearLayout *layout;
-    KIcon m_icon;
+    QGraphicsLinearLayout *m_layout;
     QList<QString> m_fixedList;
-    QHash<QString, Plasma::IconWidget*> m_cyclicIcons;
-    QHash<QString, Plasma::IconWidget*> m_fixedIcons;
-    EnlargedWidget *m_view;
-    QGraphicsScene *m_scene;
-    EnlargedOverlay *m_overlay;
-    OverlayToolBox *m_toolbox;
+    QHash<QString, QGraphicsWidget*> m_cyclicIcons;
+    QHash<QString, QGraphicsWidget*> m_fixedIcons;
+    QHash<QString, QGraphicsWidget*> m_hiddenIcons;
+    Plasma::IconWidget *m_cancel;
+    Plasma::ScrollWidget *m_scrollWidget;
 };
 
 }

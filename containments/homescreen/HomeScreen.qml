@@ -279,6 +279,13 @@ Item {
             }
         }
 
+    SystrayPanel {
+        id: systraypanel;
+        objectName: "systraypanel";
+
+        anchors.horizontalCenter: homescreen.horizontalCenter;
+        y: 0;
+    }
     ActivityPanel {
         id: activitypanel;
         objectName: "activitypanel";

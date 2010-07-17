@@ -39,6 +39,7 @@ class MobCorona;
 
 namespace Plasma
 {
+    class Applet;
     class Containment;
     class Corona;
     class QmlWidget;
@@ -73,6 +74,9 @@ private Q_SLOTS:
     void slideActivities();
     void updateMainSlot();
     void lockScreen();
+    void beginTrayTransition();
+    void finishTrayTransition();
+    void shrinkTray();
 
 private:
     MobCorona *m_corona;
@@ -86,9 +90,12 @@ private:
     QDeclarativeItem *m_spareSlot;
     QDeclarativeItem *m_homeScreen;
     QDeclarativeItem *m_panel;
+    QDeclarativeItem *m_trayPanel;
 
     Plasma::Containment *m_currentContainment;
     Plasma::Containment *m_nextContainment;
+    Plasma::Containment *m_trayContainment;
+    Plasma::Applet *m_trayApplet;
     QHash<int, Plasma::Containment*> m_containments;
 };
 

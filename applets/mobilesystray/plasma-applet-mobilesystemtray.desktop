@@ -14,7 +14,7 @@ Comment[uk]=Аплет системного лотка для командної
 Comment[x-test]=xxA system tray applet for mobile shellxx
 Icon=preferences-desktop-notification
 Type=Service
-X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
 
 X-KDE-Library=plasma_applet_mobilesystemtray
 X-KDE-PluginInfo-Author=Lim Yuen Hoe

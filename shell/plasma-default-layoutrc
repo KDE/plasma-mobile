@@ -118,3 +118,15 @@ geometry=8,1,342,342
 plugin=fifteenPuzzle
 immutability=1
 zvalue=1
+
+[Containments][8]
+activity=
+desktop=-1
+formfactor=2
+geometry=0,0,800,100
+immutability=1
+location=3
+plugin=mobilesystemtraypanel
+screen=0
+zvalue=10
+
