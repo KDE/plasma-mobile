@@ -1,6 +1,7 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=MobileSystemTrayPanel
+Name[x-test]=xxMobileSystemTrayPanelxx
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
