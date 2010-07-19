@@ -42,7 +42,7 @@ Manager *MobileTray::m_manager = 0;
 
 MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args),
-    m_mode(PASSIVE)
+    m_mode(PASSIVE), m_notificationsApplet(0)
 {
     if (!m_manager) {
         m_manager = new SystemTray::Manager();
@@ -152,6 +152,9 @@ void MobileTray::addTask(SystemTray::Task* task)
     if (task->isEmbeddable(this)) {
         bool isFixed = m_fixedList.contains(task->typeId());
         QGraphicsWidget *ic = task->widget(this, true);
+        if (task->typeId() == "notifications") {
+            m_notificationsApplet = qobject_cast<Plasma::PopupApplet*>(ic);
+        }
 
         if (!ic) {
             return;
@@ -220,6 +223,9 @@ void MobileTray::updateTask(SystemTray::Task* task)
 void MobileTray::shrink()
 {
     if (m_mode == ACTIVE) {
+        if (m_notificationsApplet) {
+            m_notificationsApplet->hidePopup();
+        }
         foreach (QGraphicsWidget * w, m_hiddenIcons) {
             w->setPreferredSize(40,40);
             hideWidget(w);
@@ -254,6 +260,9 @@ void MobileTray::enlarge()
         m_mode = ACTIVE;
         m_scrollWidget->widget()->resize(size());
         m_scrollWidget->resize(size());
+        if (m_notificationsApplet) {
+            m_notificationsApplet->showPopup();
+        }
     }
 }
 

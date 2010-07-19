@@ -365,8 +365,8 @@ void PlasmaApp::beginTrayTransition()
 
 void PlasmaApp::finishTrayTransition()
 {
-    m_trayContainment->resize(m_trayPanel->property("width").toReal(),
-                              m_trayPanel->property("height").toReal());
+  m_trayContainment->resize(m_homeScreen->property("width").toReal(),
+                            m_homeScreen->property("height").toReal());
     m_trayApplet->resize(m_trayPanel->property("width").toReal(),
                          m_trayPanel->property("height").toReal());
     m_trayContainment->setPos(0, 0);
@@ -399,8 +399,8 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
         m_trayApplet->resize(m_trayPanel->property("width").toReal(),
                              m_trayPanel->property("height").toReal());
-        m_trayContainment->resize(m_trayPanel->property("width").toReal(),
-                                  m_trayPanel->property("height").toReal());
+        m_trayContainment->resize(m_homeScreen->property("width").toReal(),
+                                  m_homeScreen->property("height").toReal());
         m_trayContainment->setPos(0, 0);
 
         connect(m_trayPanel, SIGNAL(activated()), this, SLOT(beginTrayTransition()));

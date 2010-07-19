@@ -23,6 +23,7 @@
 #define APPLET_H
 
 #include <Plasma/Applet>
+#include <Plasma/PopupApplet>
 #include <Plasma/Containment>
 #include <QHash>
 
@@ -79,6 +80,7 @@ private:
     QHash<QString, QGraphicsWidget*> m_hiddenIcons;
     Plasma::IconWidget *m_cancel;
     Plasma::ScrollWidget *m_scrollWidget;
+    Plasma::PopupApplet *m_notificationsApplet;
 };
 
 }
