@@ -1,6 +1,10 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=MobileSystemTrayPanel
+Name[pt]=MobileSystemTrayPanel
+Name[pt_BR]=MobileSystemTrayPanel
+Name[sv]=Systembricka för mobil
+Name[uk]=Мобільна панель системного лотка
 Name[x-test]=xxMobileSystemTrayPanelxx
 Icon=user-desktop
 Type=Service
