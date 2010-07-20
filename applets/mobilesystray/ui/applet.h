@@ -75,9 +75,9 @@ private:
     static const int MAXCYCLIC = 3;
     QGraphicsLinearLayout *m_layout;
     QList<QString> m_fixedList;
-    QHash<QString, QGraphicsWidget*> m_cyclicIcons;
-    QHash<QString, QGraphicsWidget*> m_fixedIcons;
-    QHash<QString, QGraphicsWidget*> m_hiddenIcons;
+    QHash<SystemTray::Task*, QGraphicsWidget*> m_cyclicIcons;
+    QHash<SystemTray::Task*, QGraphicsWidget*> m_fixedIcons;
+    QHash<SystemTray::Task*, QGraphicsWidget*> m_hiddenIcons;
     Plasma::IconWidget *m_cancel;
     Plasma::ScrollWidget *m_scrollWidget;
     Plasma::PopupApplet *m_notificationsApplet;

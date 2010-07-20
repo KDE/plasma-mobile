@@ -30,7 +30,6 @@
 #include <plasma/widgets/scrollwidget.h>
 #include <plasma/dataenginemanager.h>
 #include <plasma/containment.h>
-
 #include "../core/manager.h"
 #include "../core/task.h"
 #include "../protocols/dbussystemtray/dbussystemtraywidget.h"
@@ -168,7 +167,8 @@ void MobileTray::addTask(SystemTray::Task* task)
             return;
         } else if (!isFixed && m_cyclicIcons.size() >= MAXCYCLIC) {
             // "Evict" an old item to the hidden list
-            QString key = m_cyclicIcons.keys().at(0);
+            // FIXME: This is no good - doesn't evict the least recent :(
+            Task* key = m_cyclicIcons.keys().at(0);
             QGraphicsWidget *old = m_cyclicIcons.take(key);
             m_hiddenIcons.insert(key, old);
             if (m_mode == PASSIVE) { // no need to hide if we're in ACTIVE mode
@@ -188,10 +188,10 @@ void MobileTray::addTask(SystemTray::Task* task)
 
         if (isFixed) {
             showWidget(ic, 1);
-            m_fixedIcons.insert(task->typeId(), ic);
+            m_fixedIcons.insert(task, ic);
         } else {
             showWidget(ic);
-            m_cyclicIcons.insert(task->typeId(), ic);
+            m_cyclicIcons.insert(task, ic);
         }
     }
 }
@@ -199,12 +199,12 @@ void MobileTray::addTask(SystemTray::Task* task)
 void MobileTray::removeTask(SystemTray::Task* task)
 {
     QGraphicsWidget *ic = 0;
-    if (m_cyclicIcons.contains(task->typeId())) {
-        ic = m_cyclicIcons.take(task->typeId());
-    } else if (m_fixedIcons.contains(task->typeId())) {
-        ic = m_fixedIcons.take(task->typeId());
-    } else if (m_hiddenIcons.contains(task->typeId())) {
-        ic = m_hiddenIcons.take(task->typeId());
+    if (m_cyclicIcons.contains(task)) {
+        ic = m_cyclicIcons.take(task);
+    } else if (m_fixedIcons.contains(task)) {
+        ic = m_fixedIcons.take(task);
+    } else if (m_hiddenIcons.contains(task)) {
+        ic = m_hiddenIcons.take(task);
     }
     if (ic) {
         m_layout->removeItem(ic);
@@ -214,34 +214,33 @@ void MobileTray::removeTask(SystemTray::Task* task)
 
 void MobileTray::updateTask(SystemTray::Task* task)
 {
-    // FIXME: This is broken because updateTask can also change typeId..
-    //        Probably need to change the qhashs to <Task*,QGraphicsWidget*>
+    // FIXME: Icon changes don't seem to go through here :(
     if (!task->isEmbeddable(this)) {
         return;
     }
     QGraphicsWidget *ic = 0;
-    if (m_hiddenIcons.contains(task->typeId())) { // unhide!
+    if (m_hiddenIcons.contains(task)) { // unhide!
         if (m_cyclicIcons.size() >= MAXCYCLIC) {
             // evict something
-            QString key = m_cyclicIcons.keys().at(0);
+            Task* key = m_cyclicIcons.keys().at(0);
             QGraphicsWidget *old = m_cyclicIcons.take(key);
             m_hiddenIcons.insert(key, old);
             if (m_mode == PASSIVE) { // no need to hide if we're in ACTIVE mode
                 hideWidget(old);
             }
         }
-        ic = m_hiddenIcons.take(task->typeId());
-        m_cyclicIcons.insert(task->typeId(), ic);
+        ic = m_hiddenIcons.take(task);
+        m_cyclicIcons.insert(task, ic);
         resizeWidget(ic);
         if (m_mode == PASSIVE) { // if mode is ACTIVE, it's already being shown
             showWidget(ic);
         }
     } else { // not hidden, probably just need to resize
-        if (m_cyclicIcons.contains(task->typeId())) {
-            ic = m_cyclicIcons.value(task->typeId());
+        if (m_cyclicIcons.contains(task)) {
+            ic = m_cyclicIcons.value(task);
         }
-        if (m_fixedIcons.contains(task->typeId())) {
-            ic = m_fixedIcons.value(task->typeId());
+        if (m_fixedIcons.contains(task)) {
+            ic = m_fixedIcons.value(task);
         }
         if (ic) {
             resizeWidget(ic);
