@@ -21,6 +21,8 @@
 
 #include "appletscontainer.h"
 
+#include <cmath>
+
 #include <QGraphicsLinearLayout>
 #include <QGraphicsSceneResizeEvent>
 #include <QTimer>
@@ -53,23 +55,27 @@ void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
 
 void AppletsContainer::relayout()
 {
-    const int squareSize = 400;
-    int columns = qMax(1, (int)size().width() / squareSize);
+    const int squareSize = 350;
+    int columns = qMax(1, (int)m_containment->size().width() / squareSize);
+    int rows = qMax(1, (int)m_containment->size().height() / squareSize);
+    const QSizeF maximumAppletSize(m_containment->size().width()/columns, m_containment->size().height()/rows);
 
     int i = 0;
     foreach (Plasma::Applet *applet, m_containment->applets()) {
         QSizeF appletSize = applet->effectiveSizeHint(Qt::PreferredSize);
-        appletSize = appletSize.boundedTo(QSizeF(squareSize, squareSize));
-        QSizeF offset(QSizeF(QSizeF(squareSize, squareSize) - appletSize)/2);
-        applet->setGeometry((i%columns)*squareSize + offset.width(), (i/columns)*squareSize + offset.height(), appletSize.width(), appletSize.height());
+        appletSize = appletSize.boundedTo(maximumAppletSize - QSize(0, 70));
+        appletSize = appletSize.expandedTo(QSize(250, 250));
+        QSizeF offset(QSizeF(maximumAppletSize - appletSize)/2);
+
+        applet->setGeometry((i%columns)*maximumAppletSize.width() + offset.width(), (i/columns)*maximumAppletSize.height() + offset.height(), appletSize.width(), appletSize.height());
         i++;
     }
-    resize(size().width(), (m_containment->applets().count()/columns)*squareSize);
+    resize(size().width(), (ceil((qreal)m_containment->applets().count()/columns))*maximumAppletSize.height());
 }
 
 void AppletsContainer::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
-    if (!m_relayoutTimer->isActive()) {
+    if (!qFuzzyCompare(event->oldSize().width(), event->newSize().width()) && !m_relayoutTimer->isActive()) {
         m_relayoutTimer->start(300);
     }
 }
