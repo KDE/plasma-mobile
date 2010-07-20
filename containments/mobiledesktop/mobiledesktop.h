@@ -26,6 +26,7 @@
 
 namespace Plasma
 {
+    class ScrollWidget;
 }
 
 class AppletsContainer;
@@ -43,6 +44,7 @@ public:
 
 private:
     AppletsContainer *m_container;
+    Plasma::ScrollWidget *m_scrollWidget;
 };
 
 #endif // PLASMA_DESKTOP_H

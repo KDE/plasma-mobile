@@ -29,6 +29,7 @@
 //KDE
 #include <KDebug>
 #include <Plasma/Corona>
+#include <Plasma/ScrollWidget>
 
 using namespace Plasma;
 
@@ -49,9 +50,11 @@ void MobileDesktop::init()
 {
     Containment::init();
 
+    m_scrollWidget = new Plasma::ScrollWidget(this);
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
     m_container = new AppletsContainer(this);
-    lay->addItem(m_container);
+    m_scrollWidget->setWidget(m_container);
+    lay->addItem(m_scrollWidget);
 
     connect(this, SIGNAL(appletAdded(Plasma::Applet*,QPointF)),
             m_container, SLOT(layoutApplet(Plasma::Applet*,QPointF)));
