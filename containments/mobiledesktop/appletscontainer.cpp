@@ -67,6 +67,10 @@ void AppletsContainer::relayout()
         appletSize = appletSize.expandedTo(QSize(250, 250));
         QSizeF offset(QSizeF(maximumAppletSize - appletSize)/2);
 
+        if (applet == m_containment->applets().last() && ((i+1)%columns != 0)) {
+            offset.rwidth() += ((i+1)%columns * maximumAppletSize.width())/2;
+        }
+
         applet->setGeometry((i%columns)*maximumAppletSize.width() + offset.width(), (i/columns)*maximumAppletSize.height() + offset.height(), appletSize.width(), appletSize.height());
         i++;
     }
