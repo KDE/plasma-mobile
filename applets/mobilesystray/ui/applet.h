@@ -50,7 +50,6 @@ public:
     ~MobileTray();
 
     void init();
-    void resize ( const QSizeF & size );
 
 signals:
     void shrinkRequested();
@@ -63,12 +62,13 @@ public slots:
     void enlarge();
 
 protected:
-    enum Mode { PASSIVE, ACTIVE};
+    enum Mode { PASSIVE, ACTIVE };
     Mode m_mode;
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void resizeEvent (QGraphicsSceneResizeEvent * event);
 
 private:
+    void resizeWidget(QGraphicsWidget* w);
     void showWidget(QGraphicsWidget *w, int index = -1);
     void hideWidget(QGraphicsWidget *w);
     static Manager *m_manager;

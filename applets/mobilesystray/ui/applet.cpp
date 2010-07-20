@@ -123,6 +123,15 @@ void MobileTray::init()
 
 }
 
+void MobileTray::resizeWidget(QGraphicsWidget* w)
+{
+    if (m_mode == PASSIVE) {
+        w->setPreferredSize(40, 40);
+    } else {
+        w->setPreferredSize(100, 100);
+    }
+}
+
 void MobileTray::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
     m_scrollWidget->widget()->resize(event->newSize());
@@ -148,7 +157,6 @@ void MobileTray::showWidget(QGraphicsWidget *w, int index)
 
 void MobileTray::addTask(SystemTray::Task* task)
 {
-    // FIXME: this assumes the tray is in "passive" mode.
     if (task->isEmbeddable(this)) {
         bool isFixed = m_fixedList.contains(task->typeId());
         QGraphicsWidget *ic = task->widget(this, true);
@@ -159,15 +167,17 @@ void MobileTray::addTask(SystemTray::Task* task)
         if (!ic) {
             return;
         } else if (!isFixed && m_cyclicIcons.size() >= MAXCYCLIC) {
-            // "Evict" an old item
+            // "Evict" an old item to the hidden list
             QString key = m_cyclicIcons.keys().at(0);
             QGraphicsWidget *old = m_cyclicIcons.take(key);
-            hideWidget(old);
             m_hiddenIcons.insert(key, old);
+            if (m_mode == PASSIVE) { // no need to hide if we're in ACTIVE mode
+                hideWidget(old);
+            }
         }
 
-        ic->setPreferredSize(40,40);
         ic->setSizePolicy (QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+        resizeWidget(ic);
         ic->setParent(this);
 
         DBusSystemTrayWidget *d = qobject_cast<DBusSystemTrayWidget*>(ic);
@@ -177,11 +187,11 @@ void MobileTray::addTask(SystemTray::Task* task)
         }
 
         if (isFixed) {
-          showWidget(ic, 1);
-          m_fixedIcons.insert(task->typeId(), ic);
+            showWidget(ic, 1);
+            m_fixedIcons.insert(task->typeId(), ic);
         } else {
-          showWidget(ic);
-          m_cyclicIcons.insert(task->typeId(), ic);
+            showWidget(ic);
+            m_cyclicIcons.insert(task->typeId(), ic);
         }
     }
 }
@@ -204,40 +214,61 @@ void MobileTray::removeTask(SystemTray::Task* task)
 
 void MobileTray::updateTask(SystemTray::Task* task)
 {
-    // FIXME: assumes we're in "passive" mode
-    // TODO: Does this handle "need attention" cases?
-    if (m_hiddenIcons.contains(task->typeId())) {
+    // FIXME: This is broken because updateTask can also change typeId..
+    //        Probably need to change the qhashs to <Task*,QGraphicsWidget*>
+    if (!task->isEmbeddable(this)) {
+        return;
+    }
+    QGraphicsWidget *ic = 0;
+    if (m_hiddenIcons.contains(task->typeId())) { // unhide!
         if (m_cyclicIcons.size() >= MAXCYCLIC) {
             // evict something
             QString key = m_cyclicIcons.keys().at(0);
-            QGraphicsWidget *ic = m_cyclicIcons.take(key);
-            hideWidget(ic);
-            m_hiddenIcons.insert(key, ic);
+            QGraphicsWidget *old = m_cyclicIcons.take(key);
+            m_hiddenIcons.insert(key, old);
+            if (m_mode == PASSIVE) { // no need to hide if we're in ACTIVE mode
+                hideWidget(old);
+            }
         }
-        QGraphicsWidget *ic = m_hiddenIcons.take(task->typeId());
+        ic = m_hiddenIcons.take(task->typeId());
         m_cyclicIcons.insert(task->typeId(), ic);
-        showWidget(ic);
+        resizeWidget(ic);
+        if (m_mode == PASSIVE) { // if mode is ACTIVE, it's already being shown
+            showWidget(ic);
+        }
+    } else { // not hidden, probably just need to resize
+        if (m_cyclicIcons.contains(task->typeId())) {
+            ic = m_cyclicIcons.value(task->typeId());
+        }
+        if (m_fixedIcons.contains(task->typeId())) {
+            ic = m_fixedIcons.value(task->typeId());
+        }
+        if (ic) {
+            resizeWidget(ic);
+        } else { // maybe something became embeddable?
+            addTask(task);
+        }
     }
 }
 
 void MobileTray::shrink()
 {
     if (m_mode == ACTIVE) {
+        m_mode = PASSIVE;
         if (m_notificationsApplet) {
             m_notificationsApplet->hidePopup();
         }
         foreach (QGraphicsWidget * w, m_hiddenIcons) {
-            w->setPreferredSize(40,40);
+            resizeWidget(w);
             hideWidget(w);
         }
         foreach (QGraphicsWidget * w, m_fixedIcons) {
-            w->setPreferredSize(40,40);
+            resizeWidget(w);
         }
         foreach (QGraphicsWidget * w, m_cyclicIcons) {
-            w->setPreferredSize(40,40);
+            resizeWidget(w);
         }
         hideWidget(m_cancel);
-        m_mode = PASSIVE;
         m_scrollWidget->widget()->resize(size());
         m_scrollWidget->resize(size());
     }
@@ -246,18 +277,18 @@ void MobileTray::shrink()
 void MobileTray::enlarge()
 {
     if (m_mode == PASSIVE) {
+        m_mode = ACTIVE;
         foreach (QGraphicsWidget * w, m_fixedIcons) {
-            w->setPreferredSize(100,100);
+            resizeWidget(w);
         }
         foreach (QGraphicsWidget * w, m_cyclicIcons) {
-            w->setPreferredSize(100,100);
+            resizeWidget(w);
         }
         foreach (QGraphicsWidget * w, m_hiddenIcons) {
-            w->setPreferredSize(100,100);
+            resizeWidget(w);
             showWidget(w);
         }
         showWidget(m_cancel, 0);
-        m_mode = ACTIVE;
         m_scrollWidget->widget()->resize(size());
         m_scrollWidget->resize(size());
         if (m_notificationsApplet) {
