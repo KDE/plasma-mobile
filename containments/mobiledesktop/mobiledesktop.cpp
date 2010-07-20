@@ -25,6 +25,7 @@
 
 //Qt
 #include <QtGui/QGraphicsLinearLayout>
+#include <QtGui/QGraphicsSceneDragDropEvent>
 
 //KDE
 #include <KDebug>
@@ -52,7 +53,7 @@ void MobileDesktop::init()
 
     m_scrollWidget = new Plasma::ScrollWidget(this);
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
-    m_container = new AppletsContainer(this);
+    m_container = new AppletsContainer(m_scrollWidget, this);
     m_scrollWidget->setWidget(m_container);
     lay->addItem(m_scrollWidget);
 
@@ -70,6 +71,30 @@ void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)
         
     }
 }
+
+//They all have to be reimplemented in order to accept them
+void MobileDesktop::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
+{
+    Containment::dragEnterEvent(event);
+}
+
+void MobileDesktop::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
+{
+    Containment::dragLeaveEvent(event);
+}
+
+void MobileDesktop::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
+{
+    Containment::dragMoveEvent(event);
+    event->accept();
+}
+
+void MobileDesktop::dropEvent(QGraphicsSceneDragDropEvent *event)
+{
+    Containment::dropEvent(event);
+    event->accept();
+}
+
 
 K_EXPORT_PLASMA_APPLET(mobiledesktop, MobileDesktop)
 

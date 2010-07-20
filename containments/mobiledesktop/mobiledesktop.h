@@ -42,6 +42,12 @@ public:
 
     void constraintsEvent(Plasma::Constraints constraints);
 
+protected:
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event);
+    void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+    void dropEvent(QGraphicsSceneDragDropEvent *event);
+
 private:
     AppletsContainer *m_container;
     Plasma::ScrollWidget *m_scrollWidget;

@@ -29,20 +29,29 @@ namespace Plasma
 }
 
 class QGraphicsLinearLayout;
+class QTimer;
 
 class AppletsContainer : public QGraphicsWidget
 {
     Q_OBJECT
 
 public:
-    AppletsContainer(QGraphicsItem *parent);
+    AppletsContainer(QGraphicsItem *parent, Plasma::Containment *containment);
     ~AppletsContainer();
 
 public Q_SLOTS:
     void layoutApplet(Plasma::Applet *applet, const QPointF &post);
 
+protected:
+    void resizeEvent(QGraphicsSceneResizeEvent *event);
+
+protected Q_SLOTS:
+    void relayout();
+
 private:
     QGraphicsLinearLayout *m_layout;
+    Plasma::Containment *m_containment;
+    QTimer *m_relayoutTimer;
 };
 
 #endif

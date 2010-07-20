@@ -22,6 +22,8 @@
 #include "appletscontainer.h"
 
 #include <QGraphicsLinearLayout>
+#include <QGraphicsSceneResizeEvent>
+#include <QTimer>
 
 
 #include <Plasma/Applet>
@@ -29,11 +31,13 @@
 
 using namespace Plasma;
 
-AppletsContainer::AppletsContainer(QGraphicsItem *parent)
- : QGraphicsWidget(parent)
+AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *containment)
+ : QGraphicsWidget(parent),
+   m_containment(containment)
 {
-    m_layout = new QGraphicsLinearLayout(this);
-    m_layout->addStretch();
+    m_relayoutTimer = new QTimer(this);
+    m_relayoutTimer->setSingleShot(true);
+    connect(m_relayoutTimer, SIGNAL(timeout()), this, SLOT(relayout()));
 }
 
 AppletsContainer::~AppletsContainer()
@@ -43,15 +47,29 @@ AppletsContainer::~AppletsContainer()
 
 void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
 {
-    kDebug()<<"Applet added:"<<applet->name();
-    applet->setParentItem(this);
-    QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(Qt::Vertical);
-    lay->addStretch();
-    lay->addItem(applet);
-    lay->addStretch();
-    m_layout->insertItem(m_layout->count(), lay);
+    relayout();
 }
 
+void AppletsContainer::relayout()
+{
+    const int squareSize = 400;
+    int columns = qMax(1, (int)size().width() / squareSize);
+
+    int i = 0;
+    foreach (Plasma::Applet *applet, m_containment->applets()) {
+        QSizeF appletSize = applet->effectiveSizeHint(Qt::PreferredSize);
+        appletSize = appletSize.boundedTo(QSizeF(squareSize, squareSize));
+        applet->setGeometry((i%columns)*squareSize, (i/columns)*squareSize, appletSize.width(), appletSize.height());
+        i++;
+    }
+}
+
+void AppletsContainer::resizeEvent(QGraphicsSceneResizeEvent *event)
+{
+    if (!m_relayoutTimer->isActive()) {
+        m_relayoutTimer->start(300);
+    }
+}
 
 #include "appletscontainer.moc"
 
