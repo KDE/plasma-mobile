@@ -60,7 +60,8 @@ void AppletsContainer::relayout()
     foreach (Plasma::Applet *applet, m_containment->applets()) {
         QSizeF appletSize = applet->effectiveSizeHint(Qt::PreferredSize);
         appletSize = appletSize.boundedTo(QSizeF(squareSize, squareSize));
-        applet->setGeometry((i%columns)*squareSize, (i/columns)*squareSize, appletSize.width(), appletSize.height());
+        QSizeF offset(QSizeF(QSizeF(squareSize, squareSize) - appletSize)/2);
+        applet->setGeometry((i%columns)*squareSize + offset.width(), (i/columns)*squareSize + offset.height(), appletSize.width(), appletSize.height());
         i++;
     }
     resize(size().width(), (m_containment->applets().count()/columns)*squareSize);

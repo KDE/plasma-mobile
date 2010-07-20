@@ -39,8 +39,7 @@ MobileDesktop::MobileDesktop(QObject *parent, const QVariantList &args)
 {
     setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile desktop";
-    // At some point it has to be a custom constainment
-    //setContainmentType(Containment::CustomContainment);
+    setContainmentType(Containment::CustomContainment);
 }
 
 MobileDesktop::~MobileDesktop()
