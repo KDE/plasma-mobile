@@ -47,6 +47,7 @@ AppletsContainer::~AppletsContainer()
 
 void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
 {
+    applet->setParentItem(this);
     relayout();
 }
 
@@ -62,6 +63,7 @@ void AppletsContainer::relayout()
         applet->setGeometry((i%columns)*squareSize, (i/columns)*squareSize, appletSize.width(), appletSize.height());
         i++;
     }
+    resize(size().width(), (m_containment->applets().count()/columns)*squareSize);
 }
 
 void AppletsContainer::resizeEvent(QGraphicsSceneResizeEvent *event)
