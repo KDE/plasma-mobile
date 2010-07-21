@@ -57,29 +57,6 @@ Item {
                 width: homescreen.width;
                 height: homescreen.height;
                 transformOrigin : Item.Center;
-
-                MouseArea {
-                    id : mouseAreaMainSlot;
-                    // change between default and 'back' states
-                    onClicked : {
-                        if (flipable) {
-                            if (flipable.state == "Front0") flipable.state = "Front360";
-                            if (flipable.state == "Back540") flipable.state = "Back180";
-                            if (mouseX <= (flipable.x + flipable.width / 2)) {
-                                if (flipable.state == "Front360")
-                                    flipable.state = "Back180";
-                                else
-                                    flipable.state = "Front360";
-                            } else {
-                                if (flipable.state == "Front360")
-                                    flipable.state = "Back540";
-                                else
-                                    flipable.state = "Front0";
-                            }
-                        }
-                    }
-                    anchors.fill: parent
-                }
             }
 
             Item {
@@ -95,29 +72,6 @@ Item {
             id: alternateSlot;
             objectName: "alternateSlot";
 
-            //FXME: evil duplication, but this place seems the only one where both works and doesn't steal every click
-            MouseArea {
-                id : mouseAreaAlternate;
-                // change between default and 'back' states
-                onClicked : {
-                    if (flipable) {
-                        if (flipable.state == "Front0") flipable.state = "Front360";
-                        if (flipable.state == "Back540") flipable.state = "Back180";
-                        if (mouseX > (flipable.x + flipable.width / 2)) {
-                            if (flipable.state == "Front360")
-                                flipable.state = "Back180";
-                            else
-                                flipable.state = "Front360";
-                        } else {
-                            if (flipable.state == "Front360")
-                                flipable.state = "Back540";
-                            else
-                                flipable.state = "Front0";
-                        }
-                    }
-                }
-                anchors.fill: parent
-            }
         }
 
         states: [
