@@ -25,6 +25,7 @@ Item {
     id: activitypanel;
     height: 160;
     state: "show";
+    property bool passClicks;
     signal flipRequested;
     signal dragOverflow(int degrees)
 
@@ -53,13 +54,20 @@ Item {
         activitypanel.dragOverflow(degrees);
     }
 
+    ActivityPanelItems {
+        objectName: "panelitems";
+        id: shortcuts;
+        anchors.horizontalCenter: activitypanel.horizontalCenter;
+        anchors.bottom: activitypanel.bottom;
+    }
+
     MouseArea {
         id: hintregion;
 
-        x: hint.x - 35 / 2;
+        x: 0;
         y: hint.y -  35 / 2;
-        width: hint.width + 35;
-        height: hint.height + 35;
+        width: parent.width;
+        height: hint.height + 350;
 
         drag.target: activitypanel;
         drag.axis: "YAxis"
@@ -74,11 +82,24 @@ Item {
         onPressed: {
             activitypanel.state = 'dragging';
             timer.stop();
+            activitypanel.passClicks = true;
+        }
+
+        onPositionChanged : {
+            if (activitypanel.y  + activitypanel.height + 30 < activitypanel.parent.height) {
+                activitypanel.passClicks = false;
+            }
         }
 
         onReleased: {
-            if (activitypanel.state != 'dragging')
+            var child = shortcuts.childAt(mouse.x, mouse.y + hintregion.y);
+            if (activitypanel.passClicks && child) {
+                child.clicked();
+            }
+
+            if (activitypanel.state != 'dragging') {
                 return;
+            }
             var target = activitypanel.parent.height - (activitypanel.height / 1.5);
             if (activitypanel.y < target) {
                 activitypanel.state = 'show';
@@ -94,31 +115,12 @@ Item {
 
     }
 
-    MouseArea {
-        id: panelregion;
-
-        anchors.left: activitypanel.left;
-        anchors.right: activitypanel.right;
-        anchors.bottom: activityimage.bottom;
-        height: activitypanel.height;
-
-        onClicked: {
-            activitypanel.state = 'hidden';
-        }
-    }
-
     Timer {
         id : timer
         interval: 4000; running: false;
         onTriggered:  { activitypanel.state = 'hidden' }
     }
 
-    ActivityPanelItems {
-        objectName: "panelitems";
-        id: shortcuts;
-        anchors.horizontalCenter: activitypanel.horizontalCenter;
-        anchors.bottom: activitypanel.bottom;
-    }
 
     states: [
         State {

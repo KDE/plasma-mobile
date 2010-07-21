@@ -38,13 +38,6 @@ Row {
             id: internet;
             source: "images/internet.png";
         }
-        MouseArea {
-            anchors.fill: internet;
-            onClicked: {
-                parent.clicked();
-                timer.restart();
-            }
-        }
     }
 
     Item {
@@ -58,13 +51,7 @@ Row {
             id: instantmessaging;
             source: "images/im.png";
         }
-        MouseArea {
-            anchors.fill: instantmessaging;
-            onClicked: {
-                parent.clicked();
-                timer.restart();
-            }
-        }
+
     }
 
     Item {
@@ -78,13 +65,7 @@ Row {
             id: phone;
             source: "images/phone.png";
         }
-        MouseArea {
-            anchors.fill: phone;
-            onClicked: {
-                parent.clicked();
-                timer.restart();
-            }
-        }
+
     }
 
     Item {
@@ -98,13 +79,7 @@ Row {
             id: social;
             source: "images/social.png";
         }
-        MouseArea {
-            anchors.fill: social;
-            onClicked: {
-                parent.clicked();
-                timer.restart();
-            }
-        }
+
     }
 
     Item {
@@ -118,13 +93,6 @@ Row {
             id: games;
             source: "images/games.png";
         }
-        MouseArea {
-            objectName: "mousearea";
-            anchors.fill: games;
-            onClicked: {
-                parent.clicked();
-                timer.restart();
-            }
-        }
+
     }
 }
