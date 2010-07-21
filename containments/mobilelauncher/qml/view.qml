@@ -8,7 +8,7 @@ GridView {
     flow: GridView.LeftToRight
     snapMode: GridView.SnapToRow
     cellWidth: width/6
-    cellHeight: width/6
+    cellHeight: height/4
     clip: true
     signal clicked
 
@@ -20,6 +20,9 @@ GridView {
             property string urlText: url
 
             ResultWidget {
+                minimumIconSize : "64x64"
+                maximumIconSize : "64x64"
+                preferredIconSize : "64x64"
                 minimumSize.width: wrapper.width
                 minimumSize.height: wrapper.height
                 id: resultwidget
@@ -29,8 +32,8 @@ GridView {
 
             MouseArea {
                 id: mousearea
+                
                 anchors.fill: parent
-
                 onClicked : {
                     gridView.currentIndex = index
                     gridView.clicked()
