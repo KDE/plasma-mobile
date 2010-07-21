@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright 2010 Alexis Menard <menard@kde.org>                         *
  *   Copyright 2010 Artur Duque de Souza <asouza@kde.org>                  *
+ *   Copyright 2010 Marco Martin <mart@kde.org>                            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -73,7 +74,7 @@ Item {
 
         onPressed: {
             activitypanel.state = 'dragging';
-            timer.restart();
+            timer.stop();
         }
 
         onReleased: {
@@ -89,6 +90,7 @@ Item {
             } else {
                 activitypanel.state = 'hidden';
             }
+            timer.restart();
         }
 
     }
