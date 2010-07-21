@@ -24,6 +24,8 @@ Item {
     id: activitypanel;
     height: 160;
     state: "show";
+    signal flipRequested;
+    signal dragOverflow(int degrees)
 
     Image {
         id: activityimage;
@@ -53,7 +55,7 @@ Item {
 
         drag.target: activitypanel;
         drag.axis: "YAxis"
-        drag.minimumY: activitypanel.parent.height - activitypanel.height;
+        drag.minimumY: activitypanel.parent.height - activitypanel.height-200;
         drag.maximumY: activitypanel.parent.height;
 
         onClicked: {
@@ -72,8 +74,20 @@ Item {
             var target = activitypanel.parent.height - (activitypanel.height / 1.5);
             if (activitypanel.y < target) {
                 activitypanel.state = 'show';
+                if (activitypanel.y < target / 2) {
+                    activitypanel.state = 'hidden';
+                    activitypanel.flipRequested();
+                }
             } else {
                 activitypanel.state = 'hidden';
+            }
+        }
+
+        onPositionChanged: {
+            var overflow = activitypanel.parent.height - (activitypanel.y + activitypanel.height);
+            if (overflow > 0) {
+                var degrees = 90 / ((activitypanel.parent.height/2)/overflow);
+                activitypanel.dragOverflow(degrees);
             }
         }
     }

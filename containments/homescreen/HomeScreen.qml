@@ -42,8 +42,8 @@ Item {
             id: rotation
             origin.x: flipable.width / 2;
             origin.y: flipable.height / 2;
-            axis.x: 0;
-            axis.y: 1;
+            axis.x: 1;
+            axis.y: 0;
             axis.z: 0;
             angle: flipable.angle
         }
@@ -153,7 +153,7 @@ Item {
         transitions: [
         Transition {
             from: "Front360"
-            to:"Back180, Back540"
+            to:"Back180"
             ParallelAnimation {
                 NumberAnimation {
                     properties: "angle";
@@ -164,6 +164,28 @@ Item {
         },
         Transition {
             from: "Front360"
+            to:"Back540"
+            ParallelAnimation {
+                NumberAnimation {
+                    properties: "angle";
+                    duration: 800;
+                    easing.type: "Linear";
+                }
+            }
+        },
+        Transition {
+            from: "Front0"
+            to:"Back180"
+            ParallelAnimation {
+                NumberAnimation {
+                    properties: "angle";
+                    duration: 800;
+                    easing.type: "Linear";
+                }
+            }
+        },
+        Transition {
+            from: "Front0"
             to:"Back540"
             ParallelAnimation {
                 NumberAnimation {
@@ -187,6 +209,28 @@ Item {
         Transition {
             from: "Back180"
             to:"Front0"
+            ParallelAnimation {
+                NumberAnimation {
+                    properties: "angle";
+                    duration: 800;
+                    easing.type: "Linear";
+                }
+            }
+        },
+        Transition {
+            from: "Back540"
+            to:"Front0"
+            ParallelAnimation {
+                NumberAnimation {
+                    properties: "angle";
+                    duration: 800;
+                    easing.type: "Linear";
+                }
+            }
+        },
+        Transition {
+            from: "Back540"
+            to: "Front360"
             ParallelAnimation {
                 NumberAnimation {
                     properties: "angle";
@@ -293,5 +337,35 @@ Item {
         anchors.left: homescreen.left;
         anchors.right: homescreen.right;
         y: homescreen.height - 160;
+    }
+
+    Connections {
+        target: activitypanel;
+        onFlipRequested : {
+            if (flipable.state == "Front0") {
+                flipable.state = "Front360";
+            } else if (flipable.state == "Back540") {
+                flipable.state = "Back180";
+            }
+
+            if (flipable.state == "Front360") {
+                flipable.state = "Back540";
+            } else {
+                flipable.state = "Front360";
+            }
+        }
+
+        onDragOverflow : {
+            if (flipable.state == "Front0") {
+                flipable.angle = degrees;
+            } else if (flipable.state == "Back180") {
+                flipable.angle = 180+degrees;
+            } else if (flipable.state == "Front360") {
+                flipable.angle = 360+degrees;
+            //back540
+            } else {
+                flipable.angle = 540+degrees;
+            }
+        }
     }
 }
