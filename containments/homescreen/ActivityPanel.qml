@@ -25,7 +25,6 @@ Item {
     id: activitypanel;
     height: 160;
     state: "show";
-    property bool passClicks;
     signal flipRequested;
     signal dragOverflow(int degrees)
 
@@ -64,10 +63,11 @@ Item {
     MouseArea {
         id: hintregion;
 
+        property bool passClicks;
         x: 0;
         y: hint.y -  35 / 2;
         width: parent.width;
-        height: hint.height + 350;
+        height: hint.height + activitypanel.height;
 
         drag.target: activitypanel;
         drag.axis: "YAxis"
@@ -80,20 +80,29 @@ Item {
         }
 
         onPressed: {
+            //ignore the unwanted areas: since mousearea can't have fancy shapes find it there
+            print(mouse.y)
+            print(activitypanel.y)
+            print(mouse.x)
+            print(hint.x+hint.width)
+            if (mouse.y < hint.height + 35 && (mouse.x < hint.x - 35 / 2 || mouse.x > hint.x+hint.width + 35 / 2)) {
+                mouse.accepted = false;
+                return;
+            }
             activitypanel.state = 'dragging';
             timer.stop();
-            activitypanel.passClicks = true;
+            passClicks = true;
         }
 
         onPositionChanged : {
-            if (activitypanel.y  + activitypanel.height + 30 < activitypanel.parent.height) {
-                activitypanel.passClicks = false;
+            if (Math.abs((activitypanel.y  + activitypanel.height) - activitypanel.parent.height) > 40) {
+                passClicks = false;
             }
         }
 
         onReleased: {
             var child = shortcuts.childAt(mouse.x, mouse.y + hintregion.y);
-            if (activitypanel.passClicks && child) {
+            if (passClicks && child) {
                 child.clicked();
             }
 
