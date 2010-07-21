@@ -47,11 +47,10 @@ Item {
     }
 
     onYChanged : {
-        var overflow = activitypanel.parent.height - (activitypanel.y + activitypanel.height);
-        if (overflow > 0) {
-            var degrees = 90 / ((activitypanel.parent.height/2)/overflow);
-            activitypanel.dragOverflow(degrees);
-        }
+        var overflow = Math.max(0, activitypanel.parent.height - (activitypanel.y + activitypanel.height));
+
+        var degrees = 90 / ((activitypanel.parent.height/2)/overflow);
+        activitypanel.dragOverflow(degrees);
     }
 
     MouseArea {
