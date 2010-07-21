@@ -45,6 +45,14 @@ Item {
         anchors.horizontalCenter: activitypanel.horizontalCenter;
     }
 
+    onYChanged : {
+        var overflow = activitypanel.parent.height - (activitypanel.y + activitypanel.height);
+        if (overflow > 0) {
+            var degrees = 90 / ((activitypanel.parent.height/2)/overflow);
+            activitypanel.dragOverflow(degrees);
+        }
+    }
+
     MouseArea {
         id: hintregion;
 
@@ -83,13 +91,6 @@ Item {
             }
         }
 
-        onPositionChanged: {
-            var overflow = activitypanel.parent.height - (activitypanel.y + activitypanel.height);
-            if (overflow > 0) {
-                var degrees = 90 / ((activitypanel.parent.height/2)/overflow);
-                activitypanel.dragOverflow(degrees);
-            }
-        }
     }
 
     MouseArea {
