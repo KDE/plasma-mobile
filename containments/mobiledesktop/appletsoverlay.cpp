@@ -19,14 +19,29 @@
 
 #include "appletsoverlay.h"
 
+#include <QGraphicsAnchorLayout>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 
+#include <KIconLoader>
+
+#include <Plasma/IconWidget>
 
 AppletsOverlay::AppletsOverlay(QGraphicsItem *parent)
     : QGraphicsWidget(parent)
 {
+    QGraphicsAnchorLayout *lay = new QGraphicsAnchorLayout(this);
+
+    Plasma::IconWidget *backButton = new Plasma::IconWidget(this);
+    backButton->setSvg("widgets/arrows", "left-arrow");
+    backButton->setPreferredIconSize(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
+    connect(backButton, SIGNAL(clicked()), this, SIGNAL(closeRequested()));
+
+    lay->addAnchor(backButton, Qt::AnchorVerticalCenter, lay, Qt::AnchorVerticalCenter);
+    lay->addAnchor(backButton, Qt::AnchorLeft, lay, Qt::AnchorLeft);
+
+    
 }
 
 AppletsOverlay::~AppletsOverlay()
