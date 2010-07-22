@@ -100,6 +100,7 @@ void AppletsContainer::setAppletsOverlayVisible(const bool visible)
         if (!m_appletsOverlay) {
             m_appletsOverlay = new AppletsOverlay(this);
             connect(m_appletsOverlay, SIGNAL(closeRequested()), this, SLOT(hideAppletsOverlay()));
+            connect(m_appletsOverlay, SIGNAL(configureRequested()), this, SLOT(configureCurrentApplet()));
         }
 
         syncOverlayGeometry();
@@ -118,6 +119,13 @@ void AppletsContainer::hideAppletsOverlay()
 {
     setAppletsOverlayVisible(false);
     setCurrentApplet(0);
+}
+
+void AppletsContainer::configureCurrentApplet()
+{
+    if (m_currentApplet) {
+        m_currentApplet.data()->showConfigurationInterface();
+    }
 }
 
 void AppletsContainer::setCurrentApplet(Plasma::Applet *applet)
