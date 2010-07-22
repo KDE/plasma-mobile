@@ -50,6 +50,7 @@ public:
 
 public Q_SLOTS:
     void layoutApplet(Plasma::Applet *applet, const QPointF &post);
+    void appletRemoved(Plasma::Applet*);
     void hideAppletsOverlay();
 
 protected:

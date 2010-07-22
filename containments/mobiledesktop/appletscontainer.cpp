@@ -57,6 +57,12 @@ void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
     relayout();
 }
 
+void AppletsContainer::appletRemoved(Plasma::Applet *applet)
+{
+    Q_UNUSED(applet)
+    relayout();
+}
+
 void AppletsContainer::relayout()
 {
     const int squareSize = 350;
