@@ -22,6 +22,10 @@
 
 #include <QGraphicsWidget>
 
+namespace Plasma
+{
+    class Applet;
+}
 
 class AppletsOverlay : public QGraphicsWidget
 {
@@ -31,6 +35,9 @@ public:
     AppletsOverlay(QGraphicsItem *parent = 0);
     ~AppletsOverlay();
 
+    void setApplet(Plasma::Applet *applet);
+    Plasma::Applet *applet();
+
 protected:
     void paint(QPainter *painter,
                const QStyleOptionGraphicsItem *option,
@@ -38,10 +45,15 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
+protected Q_SLOTS:
+    void configureApplet();
+
 Q_SIGNALS:
     void closeRequested();
     void configureRequested();
 
+private:
+    QWeakPointer<Plasma::Applet> m_applet;
 };
 
 #endif

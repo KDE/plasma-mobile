@@ -26,6 +26,7 @@
 
 #include <KIconLoader>
 
+#include <Plasma/Applet>
 #include <Plasma/IconWidget>
 
 AppletsOverlay::AppletsOverlay(QGraphicsItem *parent)
@@ -44,13 +45,34 @@ AppletsOverlay::AppletsOverlay(QGraphicsItem *parent)
     Plasma::IconWidget *configureButton = new Plasma::IconWidget(this);
     configureButton->setSvg("widgets/configuration-icons", "configure");
     configureButton->setPreferredIconSize(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
-    connect(configureButton, SIGNAL(clicked()), this, SIGNAL(configureRequested()));
+    connect(configureButton, SIGNAL(clicked()), this, SLOT(configureApplet()));
 
     lay->addCornerAnchors(configureButton, Qt::TopLeftCorner, lay, Qt::TopLeftCorner);
 }
 
 AppletsOverlay::~AppletsOverlay()
 {
+}
+
+void AppletsOverlay::setApplet(Plasma::Applet *applet)
+{
+    if (applet) {
+        m_applet = applet;
+    } else {
+        m_applet.clear();
+    }
+}
+
+Plasma::Applet *AppletsOverlay::applet()
+{
+    return m_applet.data();
+}
+
+void AppletsOverlay::configureApplet()
+{
+    if (m_applet) {
+        m_applet.data()->showConfigurationInterface();
+    }
 }
 
 void AppletsOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)

@@ -51,7 +51,6 @@ public:
 public Q_SLOTS:
     void layoutApplet(Plasma::Applet *applet, const QPointF &post);
     void hideAppletsOverlay();
-    void configureCurrentApplet();
 
 protected:
     void syncOverlayGeometry();
