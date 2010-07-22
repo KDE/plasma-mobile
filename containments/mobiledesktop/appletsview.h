@@ -24,6 +24,13 @@
 
 #include "appletscontainer.h"
 
+class QTimer;
+
+namespace Plasma
+{
+    class Applet;
+}
+
 class AppletsView : public Plasma::ScrollWidget
 {
     Q_OBJECT
@@ -36,11 +43,20 @@ public:
     void setAppletsContainer(AppletsContainer *appletsContainer);
     AppletsContainer *appletsContainer() const;
 
+protected Q_SLOTS:
+    void moveTimerTimeout();
+
 protected:
     bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
+    void paint(QPainter *painter,
+               const QStyleOptionGraphicsItem *option,
+               QWidget *widget);
 
 private:
     AppletsContainer *m_appletsContainer;
+    QTimer *m_moveTimer;
+    bool m_movingApplets;
+    QWeakPointer<Plasma::Applet> m_draggingApplet;
 };
 
 #endif

@@ -21,14 +21,20 @@
 
 #include <QTimer>
 #include <QGraphicsSceneMouseEvent>
+#include <QPainter>
 
 #include <KGlobalSettings>
 
+#include <Plasma/Applet>
 #include <Plasma/Containment>
 
 AppletsView::AppletsView(QGraphicsItem *parent)
-    : Plasma::ScrollWidget(parent)
+    : Plasma::ScrollWidget(parent),
+      m_movingApplets(false)
 {
+    m_moveTimer = new QTimer(this);
+    m_moveTimer->setSingleShot(true);
+    connect(m_moveTimer, SIGNAL(timeout()), this, SLOT(moveTimerTimeout()));
 }
 
 AppletsView::~AppletsView()
@@ -46,6 +52,12 @@ AppletsContainer *AppletsView::appletsContainer() const
     return m_appletsContainer;
 }
 
+void AppletsView::moveTimerTimeout()
+{
+    m_movingApplets = true;
+    update();
+}
+
 bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 {
     if (m_appletsContainer->isAppletsOverlayVisible()) {
@@ -53,8 +65,36 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
     }
 
     if (event->type() == QEvent::GraphicsSceneMousePress) {
-        
+        m_moveTimer->start(3000);
+    } else if (event->type() == QEvent::GraphicsSceneMouseMove) {
+        QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
+
+        if (m_movingApplets) {
+            if (!m_draggingApplet) {
+                foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
+                    if (applet == watched || applet->isAncestorOf(watched)) {
+                        m_draggingApplet = applet;
+                        break;
+                    }
+                }
+            }
+            if (m_draggingApplet) {
+                const QPointF difference(me->scenePos() - me->lastScenePos());
+                m_draggingApplet.data()->moveBy(difference.x(), difference.y());
+                return true;
+            }
+        } else {
+            if (QPointF(me->buttonDownScenePos(me->button()) - me->scenePos()).manhattanLength() > KGlobalSettings::dndEventDelay()*2) {
+                m_movingApplets = false;
+                update();
+                m_moveTimer->stop();
+            }
+        }
     } else if (event->type() == QEvent::GraphicsSceneMouseRelease) {
+        m_movingApplets = false;
+        m_draggingApplet.clear();
+        m_moveTimer->stop();
+        update();
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
         if (QPointF(me->buttonDownScenePos(me->button()) - me->scenePos()).manhattanLength() < KGlobalSettings::dndEventDelay()*2) {
             foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
@@ -73,6 +113,19 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
     return Plasma::ScrollWidget::sceneEventFilter(watched, event);
 }
 
+void AppletsView::paint(QPainter *painter,
+                       const QStyleOptionGraphicsItem *option,
+                       QWidget *widget)
+{
+    if (!m_movingApplets) {
+        return;
+    }
+
+    Q_UNUSED(widget)
+
+    QColor color(0, 0, 0, 120);
+    painter->fillRect(option->rect, color);
+}
 
 #include "appletsview.moc"
 
