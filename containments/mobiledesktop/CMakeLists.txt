@@ -2,6 +2,7 @@ set(mobiledesktop_SRCS
     mobiledesktop.cpp
     appletscontainer.cpp
     appletsview.cpp
+    appletsoverlay.cpp
     )
 
 kde4_add_plugin(plasma_containment_mobiledesktop ${mobiledesktop_SRCS})
