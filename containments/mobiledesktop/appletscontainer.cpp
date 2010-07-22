@@ -27,7 +27,6 @@
 #include <QGraphicsSceneResizeEvent>
 #include <QTimer>
 
-
 #include <Plasma/Applet>
 #include <Plasma/Containment>
 
@@ -67,7 +66,7 @@ void AppletsContainer::relayout()
         appletSize = appletSize.expandedTo(QSize(250, 250));
         QSizeF offset(QSizeF(maximumAppletSize - appletSize)/2);
 
-        if (applet == m_containment->applets().last() && ((i+1)%columns != 0)) {
+        if ((m_containment->applets().count() - i < columns)  && ((i+1)%columns != 0)) {
             offset.rwidth() += ((i+1)%columns * maximumAppletSize.width())/2;
         }
 
@@ -83,6 +82,7 @@ void AppletsContainer::resizeEvent(QGraphicsSceneResizeEvent *event)
         m_relayoutTimer->start(300);
     }
 }
+
 
 #include "appletscontainer.moc"
 

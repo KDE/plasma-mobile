@@ -22,6 +22,7 @@
 //own
 #include "mobiledesktop.h"
 #include "appletscontainer.h"
+#include "appletsview.h"
 
 //Qt
 #include <QtGui/QGraphicsLinearLayout>
@@ -50,15 +51,15 @@ void MobileDesktop::init()
 {
     Containment::init();
 
-    m_scrollWidget = new Plasma::ScrollWidget(this);
-    m_scrollWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_appletsView = new AppletsView(this);
+    m_appletsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_appletsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
     lay->setContentsMargins(0,0,0,0);
     setContentsMargins(0,0,0,0);
-    m_container = new AppletsContainer(m_scrollWidget, this);
-    m_scrollWidget->setWidget(m_container);
-    lay->addItem(m_scrollWidget);
+    m_container = new AppletsContainer(m_appletsView, this);
+    m_appletsView->setAppletsContainer(m_container);
+    lay->addItem(m_appletsView);
 
     connect(this, SIGNAL(appletAdded(Plasma::Applet*,QPointF)),
             m_container, SLOT(layoutApplet(Plasma::Applet*,QPointF)));
@@ -71,7 +72,7 @@ void MobileDesktop::init()
 void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::SizeConstraint) {
-        m_scrollWidget->setSnapSize(m_scrollWidget->size());
+        m_appletsView->setSnapSize(m_appletsView->size());
     }
 }
 

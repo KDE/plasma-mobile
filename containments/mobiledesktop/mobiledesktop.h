@@ -30,6 +30,7 @@ namespace Plasma
 }
 
 class AppletsContainer;
+class AppletsView;
 
 class MobileDesktop : public Plasma::Containment
 {
@@ -50,7 +51,7 @@ protected:
 
 private:
     AppletsContainer *m_container;
-    Plasma::ScrollWidget *m_scrollWidget;
+    AppletsView *m_appletsView;
 };
 
 #endif // PLASMA_DESKTOP_H

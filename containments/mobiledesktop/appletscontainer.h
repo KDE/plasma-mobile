@@ -34,6 +34,7 @@ class QTimer;
 class AppletsContainer : public QGraphicsWidget
 {
     Q_OBJECT
+    friend class AppletsView;
 
 public:
     AppletsContainer(QGraphicsItem *parent, Plasma::Containment *containment);
@@ -52,6 +53,7 @@ private:
     QGraphicsLinearLayout *m_layout;
     Plasma::Containment *m_containment;
     QTimer *m_relayoutTimer;
+    QWeakPointer<Plasma::Applet> m_currentApplet;
 };
 
 #endif
