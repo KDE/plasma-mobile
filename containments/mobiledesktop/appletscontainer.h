@@ -31,6 +31,8 @@ namespace Plasma
 class QGraphicsLinearLayout;
 class QTimer;
 
+class AppletsOverlay;
+
 class AppletsContainer : public QGraphicsWidget
 {
     Q_OBJECT
@@ -40,10 +42,19 @@ public:
     AppletsContainer(QGraphicsItem *parent, Plasma::Containment *containment);
     ~AppletsContainer();
 
+    void setCurrentApplet(Plasma::Applet *applet);
+    Plasma::Applet *currentApplet() const;
+
+    void setAppletsOverlayVisible(const bool visible);
+    bool isAppletsOverlayVisible() const;
+
 public Q_SLOTS:
     void layoutApplet(Plasma::Applet *applet, const QPointF &post);
 
 protected:
+    void syncCurrentAppletGeometry();
+
+    //reimp
     void resizeEvent(QGraphicsSceneResizeEvent *event);
 
 protected Q_SLOTS:
@@ -54,6 +65,7 @@ private:
     Plasma::Containment *m_containment;
     QTimer *m_relayoutTimer;
     QWeakPointer<Plasma::Applet> m_currentApplet;
+    AppletsOverlay *m_appletsOverlay;
 };
 
 #endif

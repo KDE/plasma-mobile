@@ -33,13 +33,24 @@ AppletsOverlay::~AppletsOverlay()
 {
 }
 
+void AppletsOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    event->accept();
+}
+
+void AppletsOverlay::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    event->accept();
+    emit closeRequested();
+}
+
 void AppletsOverlay::paint(QPainter *painter,
                        const QStyleOptionGraphicsItem *option,
                        QWidget *widget)
 {
     Q_UNUSED(widget)
 
-    QColor color(0, 0, 0, 0.6);
+    QColor color(0, 0, 0, 150);
     painter->fillRect(option->rect, color);
 }
 

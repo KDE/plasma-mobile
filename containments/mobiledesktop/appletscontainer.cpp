@@ -20,12 +20,15 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "appletscontainer.h"
+#include "appletsoverlay.h"
 
 #include <cmath>
 
 #include <QGraphicsLinearLayout>
 #include <QGraphicsSceneResizeEvent>
 #include <QTimer>
+
+#include <KIconLoader>
 
 #include <Plasma/Applet>
 #include <Plasma/Containment>
@@ -34,7 +37,8 @@ using namespace Plasma;
 
 AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *containment)
  : QGraphicsWidget(parent),
-   m_containment(containment)
+   m_containment(containment),
+   m_appletsOverlay(0)
 {
     m_relayoutTimer = new QTimer(this);
     m_relayoutTimer->setSingleShot(true);
@@ -49,6 +53,7 @@ AppletsContainer::~AppletsContainer()
 void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
 {
     applet->setParentItem(this);
+    applet->lower();
     relayout();
 }
 
@@ -61,6 +66,10 @@ void AppletsContainer::relayout()
 
     int i = 0;
     foreach (Plasma::Applet *applet, m_containment->applets()) {
+        if (applet == m_currentApplet.data()) {
+            i++;
+            continue;
+        }
         QSizeF appletSize = applet->effectiveSizeHint(Qt::PreferredSize);
         appletSize = appletSize.boundedTo(maximumAppletSize - QSize(0, 70));
         appletSize = appletSize.expandedTo(QSize(250, 250));
@@ -81,8 +90,74 @@ void AppletsContainer::resizeEvent(QGraphicsSceneResizeEvent *event)
     if (!qFuzzyCompare(event->oldSize().width(), event->newSize().width()) && !m_relayoutTimer->isActive()) {
         m_relayoutTimer->start(300);
     }
+
+    if (m_appletsOverlay) {
+        m_appletsOverlay->setGeometry(boundingRect());
+    }
+    syncCurrentAppletGeometry();
 }
 
+void AppletsContainer::setAppletsOverlayVisible(const bool visible)
+{
+    if (visible) {
+        if (!m_appletsOverlay) {
+            m_appletsOverlay = new AppletsOverlay(this);
+        }
+
+        m_appletsOverlay->setGeometry(boundingRect());
+        m_appletsOverlay->setZValue(2000);
+    }
+
+    m_appletsOverlay->setVisible(visible);
+}
+
+bool AppletsContainer::isAppletsOverlayVisible() const
+{
+    return m_appletsOverlay && m_appletsOverlay->isVisible();
+}
+
+void AppletsContainer::setCurrentApplet(Plasma::Applet *applet)
+{
+    if (m_currentApplet.data() == applet) {
+        return;
+    }
+
+
+    if (m_currentApplet) {
+        m_currentApplet.data()->lower();
+    }
+
+    m_currentApplet = applet;
+
+    //FIXME: can be done more efficiently
+    relayout();
+
+    if (applet) {
+        setAppletsOverlayVisible(true);
+        m_currentApplet.data()->raise();
+        m_currentApplet.data()->setZValue(qMax(applet->zValue(), (qreal)2100));
+        m_appletsOverlay->setZValue(qMax(applet->zValue()-1, (qreal)2000));
+        syncCurrentAppletGeometry();
+    }
+
+}
+
+Plasma::Applet *AppletsContainer::currentApplet() const
+{
+    return m_currentApplet.data();
+}
+
+void AppletsContainer::syncCurrentAppletGeometry()
+{
+    if (!m_currentApplet) {
+        return;
+    }
+
+    const int margin = KIconLoader::SizeHuge;
+    setAppletsOverlayVisible(true);
+
+    m_currentApplet.data()->setGeometry(mapFromItem(m_containment, m_containment->boundingRect()).boundingRect().adjusted(margin, margin/2, -margin, -margin/2));
+}
 
 #include "appletscontainer.moc"
 

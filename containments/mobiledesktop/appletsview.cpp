@@ -23,7 +23,6 @@
 #include <QGraphicsSceneMouseEvent>
 
 #include <KGlobalSettings>
-#include <KIconLoader>
 
 #include <Plasma/Containment>
 
@@ -49,7 +48,7 @@ AppletsContainer *AppletsView::appletsContainer() const
 
 bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 {
-    if (m_appletsContainer->m_currentApplet.data()  && m_appletsContainer->m_currentApplet.data()->isAncestorOf(watched)) {
+    if (m_appletsContainer->isAppletsOverlayVisible()) {
         return false;
     }
 
@@ -58,14 +57,9 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
     } else if (event->type() == QEvent::GraphicsSceneMouseRelease) {
         foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
             if (applet == watched || applet->isAncestorOf(watched)) {
-                m_appletsContainer->m_currentApplet = applet;
+                m_appletsContainer->setCurrentApplet(applet);
                 break;
             }
-        }
-        if (m_appletsContainer->m_currentApplet) {
-            const int margin = KIconLoader::SizeHuge;
-            m_appletsContainer->m_currentApplet.data()->setZValue(999);
-            m_appletsContainer->m_currentApplet.data()->setGeometry(boundingRect().adjusted(margin, margin/2, -margin, -margin/2));
         }
     }
     if (!m_appletsContainer->m_currentApplet.data()  || !m_appletsContainer->m_currentApplet.data()->isAncestorOf(watched)) {
@@ -75,6 +69,7 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
     return Plasma::ScrollWidget::sceneEventFilter(watched, event);
 }
+
 
 #include "appletsview.moc"
 
