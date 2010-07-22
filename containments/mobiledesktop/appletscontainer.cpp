@@ -102,6 +102,7 @@ void AppletsContainer::setAppletsOverlayVisible(const bool visible)
     if (visible) {
         if (!m_appletsOverlay) {
             m_appletsOverlay = new AppletsOverlay(this);
+            connect(m_appletsOverlay, SIGNAL(closeRequested()), this, SLOT(hideAppletsOverlay()));
         }
 
         m_appletsOverlay->setGeometry(boundingRect());
@@ -114,6 +115,12 @@ void AppletsContainer::setAppletsOverlayVisible(const bool visible)
 bool AppletsContainer::isAppletsOverlayVisible() const
 {
     return m_appletsOverlay && m_appletsOverlay->isVisible();
+}
+
+void AppletsContainer::hideAppletsOverlay()
+{
+    setAppletsOverlayVisible(false);
+    setCurrentApplet(0);
 }
 
 void AppletsContainer::setCurrentApplet(Plasma::Applet *applet)
