@@ -54,12 +54,28 @@ void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
 {
     applet->setParentItem(this);
     applet->lower();
+    relayoutApplet(applet, pos);
+}
+
+void AppletsContainer::relayoutApplet(Plasma::Applet *applet, const QPointF &pos)
+{
+    //FIXME: duplication and magic numbers --
+    const int squareSize = 350;
+    int columns = qMax(1, (int)m_containment->size().width() / squareSize);
+    int rows = qMax(1, (int)m_containment->size().height() / squareSize);
+    const QSizeF maximumAppletSize(m_containment->size().width()/columns, m_containment->size().height()/rows);
+
+    const int newIndex = rows * round(pos.y() / maximumAppletSize.height()) + round(pos.x() / maximumAppletSize.width()) - 1;
+
+    m_applets.removeAll(applet);
+    m_applets.insert(newIndex, applet);
+
     relayout();
 }
 
 void AppletsContainer::appletRemoved(Plasma::Applet *applet)
 {
-    Q_UNUSED(applet)
+    m_applets.removeAll(applet);
     relayout();
 }
 
@@ -71,7 +87,7 @@ void AppletsContainer::relayout()
     const QSizeF maximumAppletSize(m_containment->size().width()/columns, m_containment->size().height()/rows);
 
     int i = 0;
-    foreach (Plasma::Applet *applet, m_containment->applets()) {
+    foreach (Plasma::Applet *applet, m_applets) {
         if (applet == m_currentApplet.data()) {
             i++;
             continue;

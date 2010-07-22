@@ -73,6 +73,7 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
             if (!m_draggingApplet) {
                 foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
                     if (applet == watched || applet->isAncestorOf(watched)) {
+                        applet->raise();
                         m_draggingApplet = applet;
                         break;
                     }
@@ -91,10 +92,13 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
             }
         }
     } else if (event->type() == QEvent::GraphicsSceneMouseRelease) {
-        m_movingApplets = false;
-        m_draggingApplet.clear();
-        m_moveTimer->stop();
-        update();
+        if (m_movingApplets) {
+            m_appletsContainer->relayoutApplet(m_draggingApplet.data(), m_draggingApplet.data()->geometry().center());
+            m_movingApplets = false;
+            m_draggingApplet.clear();
+            m_moveTimer->stop();
+            update();
+        }
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
         if (QPointF(me->buttonDownScenePos(me->button()) - me->scenePos()).manhattanLength() < KGlobalSettings::dndEventDelay()*2) {
             foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {

@@ -21,6 +21,7 @@
 #define APPLETSCONTAINER_H
 
 #include <QGraphicsWidget>
+#include <QList>
 
 namespace Plasma
 {
@@ -48,6 +49,8 @@ public:
     void setAppletsOverlayVisible(const bool visible);
     bool isAppletsOverlayVisible() const;
 
+    void relayoutApplet(Plasma::Applet *, const QPointF &post);
+
 public Q_SLOTS:
     void layoutApplet(Plasma::Applet *applet, const QPointF &post);
     void appletRemoved(Plasma::Applet*);
@@ -68,6 +71,7 @@ private:
     QTimer *m_relayoutTimer;
     QWeakPointer<Plasma::Applet> m_currentApplet;
     AppletsOverlay *m_appletsOverlay;
+    QList<Plasma::Applet *> m_applets;
 };
 
 #endif
