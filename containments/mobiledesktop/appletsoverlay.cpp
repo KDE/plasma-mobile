@@ -42,12 +42,21 @@ AppletsOverlay::AppletsOverlay(QGraphicsItem *parent)
     lay->addAnchor(backButton, Qt::AnchorVerticalCenter, lay, Qt::AnchorVerticalCenter);
     lay->addAnchor(backButton, Qt::AnchorLeft, lay, Qt::AnchorLeft);
 
+
     Plasma::IconWidget *configureButton = new Plasma::IconWidget(this);
     configureButton->setSvg("widgets/configuration-icons", "configure");
     configureButton->setPreferredIconSize(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
     connect(configureButton, SIGNAL(clicked()), this, SLOT(configureApplet()));
 
     lay->addCornerAnchors(configureButton, Qt::TopLeftCorner, lay, Qt::TopLeftCorner);
+
+
+    Plasma::IconWidget *closeButton = new Plasma::IconWidget(this);
+    closeButton->setSvg("widgets/configuration-icons", "close");
+    closeButton->setPreferredIconSize(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
+    connect(closeButton, SIGNAL(clicked()), this, SLOT(closeApplet()));
+
+    lay->addCornerAnchors(closeButton, Qt::TopRightCorner, lay, Qt::TopRightCorner);
 }
 
 AppletsOverlay::~AppletsOverlay()
@@ -73,6 +82,14 @@ void AppletsOverlay::configureApplet()
     if (m_applet) {
         m_applet.data()->showConfigurationInterface();
     }
+}
+
+void AppletsOverlay::closeApplet()
+{
+    if (m_applet) {
+        m_applet.data()->destroy();
+    }
+    emit closeRequested();
 }
 
 void AppletsOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)

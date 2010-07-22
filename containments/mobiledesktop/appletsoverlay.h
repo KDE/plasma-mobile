@@ -47,6 +47,7 @@ protected:
 
 protected Q_SLOTS:
     void configureApplet();
+    void closeApplet();
 
 Q_SIGNALS:
     void closeRequested();
