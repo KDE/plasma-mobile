@@ -55,10 +55,13 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
     if (event->type() == QEvent::GraphicsSceneMousePress) {
         
     } else if (event->type() == QEvent::GraphicsSceneMouseRelease) {
-        foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
-            if (applet == watched || applet->isAncestorOf(watched)) {
-                m_appletsContainer->setCurrentApplet(applet);
-                break;
+        QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
+        if (QPointF(me->buttonDownScenePos(me->button()) - me->scenePos()).manhattanLength() < KGlobalSettings::dndEventDelay()*2) {
+            foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
+                if (applet == watched || applet->isAncestorOf(watched)) {
+                    m_appletsContainer->setCurrentApplet(applet);
+                    break;
+                }
             }
         }
     }

@@ -41,7 +41,12 @@ AppletsOverlay::AppletsOverlay(QGraphicsItem *parent)
     lay->addAnchor(backButton, Qt::AnchorVerticalCenter, lay, Qt::AnchorVerticalCenter);
     lay->addAnchor(backButton, Qt::AnchorLeft, lay, Qt::AnchorLeft);
 
-    
+    Plasma::IconWidget *configureButton = new Plasma::IconWidget(this);
+    configureButton->setSvg("widgets/configuration-icons", "configure");
+    configureButton->setPreferredIconSize(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
+    connect(configureButton, SIGNAL(clicked()), this, SIGNAL(configureRequested()));
+
+    lay->addCornerAnchors(configureButton, Qt::TopLeftCorner, lay, Qt::TopLeftCorner);
 }
 
 AppletsOverlay::~AppletsOverlay()

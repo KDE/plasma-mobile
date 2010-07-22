@@ -53,7 +53,7 @@ public Q_SLOTS:
     void hideAppletsOverlay();
 
 protected:
-    void syncCurrentAppletGeometry();
+    void syncOverlayGeometry();
 
     //reimp
     void resizeEvent(QGraphicsSceneResizeEvent *event);

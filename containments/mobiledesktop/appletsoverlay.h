@@ -40,6 +40,7 @@ protected:
 
 Q_SIGNALS:
     void closeRequested();
+    void configureRequested();
 
 };
 

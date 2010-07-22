@@ -91,10 +91,7 @@ void AppletsContainer::resizeEvent(QGraphicsSceneResizeEvent *event)
         m_relayoutTimer->start(300);
     }
 
-    if (m_appletsOverlay) {
-        m_appletsOverlay->setGeometry(boundingRect());
-    }
-    syncCurrentAppletGeometry();
+    syncOverlayGeometry();
 }
 
 void AppletsContainer::setAppletsOverlayVisible(const bool visible)
@@ -105,7 +102,7 @@ void AppletsContainer::setAppletsOverlayVisible(const bool visible)
             connect(m_appletsOverlay, SIGNAL(closeRequested()), this, SLOT(hideAppletsOverlay()));
         }
 
-        m_appletsOverlay->setGeometry(boundingRect());
+        syncOverlayGeometry();
         m_appletsOverlay->setZValue(2000);
     }
 
@@ -144,7 +141,9 @@ void AppletsContainer::setCurrentApplet(Plasma::Applet *applet)
         m_currentApplet.data()->raise();
         m_currentApplet.data()->setZValue(qMax(applet->zValue(), (qreal)2100));
         m_appletsOverlay->setZValue(qMax(applet->zValue()-1, (qreal)2000));
-        syncCurrentAppletGeometry();
+        syncOverlayGeometry();
+    } else {
+        setAppletsOverlayVisible(false);
     }
 
 }
@@ -154,16 +153,17 @@ Plasma::Applet *AppletsContainer::currentApplet() const
     return m_currentApplet.data();
 }
 
-void AppletsContainer::syncCurrentAppletGeometry()
+void AppletsContainer::syncOverlayGeometry()
 {
-    if (!m_currentApplet) {
-        return;
+    if (m_currentApplet) {
+        const int margin = KIconLoader::SizeHuge;
+
+        m_currentApplet.data()->setGeometry(mapFromItem(m_containment, m_containment->boundingRect()).boundingRect().adjusted(margin, margin/2, -margin, -margin/2));
     }
 
-    const int margin = KIconLoader::SizeHuge;
-    setAppletsOverlayVisible(true);
-
-    m_currentApplet.data()->setGeometry(mapFromItem(m_containment, m_containment->boundingRect()).boundingRect().adjusted(margin, margin/2, -margin, -margin/2));
+    if (m_appletsOverlay) {
+        m_appletsOverlay->setGeometry(mapFromItem(m_containment, m_containment->boundingRect()).boundingRect());
+    }
 }
 
 #include "appletscontainer.moc"
