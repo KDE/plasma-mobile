@@ -81,11 +81,7 @@ Item {
 
         onPressed: {
             //ignore the unwanted areas: since mousearea can't have fancy shapes find it there
-            print(mouse.y)
-            print(activitypanel.y)
-            print(mouse.x)
-            print(hint.x+hint.width)
-            if (mouse.y < hint.height + 35 && (mouse.x < hint.x - 35 / 2 || mouse.x > hint.x+hint.width + 35 / 2)) {
+            if ((mouse.y < hint.height + 35 && parent.state == "show") || (mouse.y < hint.height + 35 && (mouse.x < hint.x - 35 / 2 || mouse.x > hint.x+hint.width + 35 / 2))) {
                 mouse.accepted = false;
                 return;
             }
