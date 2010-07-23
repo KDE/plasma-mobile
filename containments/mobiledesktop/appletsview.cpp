@@ -92,7 +92,7 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
             }
         }
     } else if (event->type() == QEvent::GraphicsSceneMouseRelease) {
-        if (m_movingApplets) {
+        if (m_movingApplets && m_draggingApplet) {
             m_appletsContainer->relayoutApplet(m_draggingApplet.data(), m_draggingApplet.data()->geometry().center());
             m_movingApplets = false;
             m_draggingApplet.clear();
