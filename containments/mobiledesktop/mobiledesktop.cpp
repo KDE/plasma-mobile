@@ -76,6 +76,10 @@ void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)
     if (constraints & Plasma::SizeConstraint) {
         m_appletsView->setSnapSize(m_appletsView->size());
     }
+
+    if (constraints & Plasma::StartupCompletedConstraint) {
+        m_container->completeStartup();
+    }
 }
 
 //They all have to be reimplemented in order to accept them

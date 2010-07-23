@@ -38,7 +38,8 @@ using namespace Plasma;
 AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *containment)
  : QGraphicsWidget(parent),
    m_containment(containment),
-   m_appletsOverlay(0)
+   m_appletsOverlay(0),
+   m_startupCompleted(false)
 {
     m_relayoutTimer = new QTimer(this);
     m_relayoutTimer->setSingleShot(true);
@@ -49,6 +50,17 @@ AppletsContainer::~AppletsContainer()
 {
 }
 
+void AppletsContainer::completeStartup()
+{
+    m_startupCompleted = true;
+
+    foreach (Plasma::Applet *applet, m_startingApplets) {
+        m_applets.append(applet);
+    }
+    m_startingApplets.clear();
+
+    relayout();
+}
 
 void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
 {
@@ -65,12 +77,20 @@ void AppletsContainer::relayoutApplet(Plasma::Applet *applet, const QPointF &pos
     int rows = qMax(1, (int)m_containment->size().height() / squareSize);
     const QSizeF maximumAppletSize(m_containment->size().width()/columns, m_containment->size().height()/rows);
 
-    const int newIndex = rows * round(pos.y() / maximumAppletSize.height()) + round(pos.x() / maximumAppletSize.width()) - 1;
+    int newIndex = rows * round(pos.y() / maximumAppletSize.height()) + round(pos.x() / maximumAppletSize.width()) - 1;
 
-    m_applets.removeAll(applet);
-    m_applets.insert(newIndex, applet);
+    if (m_startupCompleted) {
+        m_applets.removeAll(applet);
+        m_applets.insert(newIndex, applet);
 
-    relayout();
+        relayout();
+    } else {
+        while (m_startingApplets.contains(newIndex)) {
+            ++newIndex;
+        }
+
+        m_startingApplets[newIndex] = applet;
+    }
 }
 
 void AppletsContainer::appletRemoved(Plasma::Applet *applet)

@@ -22,6 +22,7 @@
 
 #include <QGraphicsWidget>
 #include <QList>
+#include <QMap>
 
 namespace Plasma
 {
@@ -51,6 +52,8 @@ public:
 
     void relayoutApplet(Plasma::Applet *, const QPointF &post);
 
+    void completeStartup();
+
 public Q_SLOTS:
     void layoutApplet(Plasma::Applet *applet, const QPointF &post);
     void appletRemoved(Plasma::Applet*);
@@ -72,6 +75,9 @@ private:
     QWeakPointer<Plasma::Applet> m_currentApplet;
     AppletsOverlay *m_appletsOverlay;
     QList<Plasma::Applet *> m_applets;
+    //used only at restore, then thrown away
+    QMap<int, Plasma::Applet *>m_startingApplets;
+    bool m_startupCompleted;
 };
 
 #endif
