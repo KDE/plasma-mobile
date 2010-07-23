@@ -85,6 +85,7 @@ Item {
                 mouse.accepted = false;
                 return;
             }
+
             activitypanel.state = 'dragging';
             timer.stop();
             passClicks = true;
@@ -180,7 +181,7 @@ Item {
             }
             PropertyChanges {
                 target: hint;
-                opacity: 1;
+                opacity: hint.opacity;
             }
         }
     ]
