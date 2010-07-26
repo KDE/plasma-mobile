@@ -38,6 +38,8 @@ Item {
         height : 480;
         state : "Front360";
         property bool flipable : true;
+        property bool transforming : false;
+        signal transformingChanged(bool transforming);
 
         transform: Rotation {
             id: rotation
@@ -307,6 +309,7 @@ Item {
 
     Connections {
         target: activitypanel;
+
         onFlipRequested : {
             if (flipable.state == "Front0") {
                 flipable.state = "Front360";
@@ -322,6 +325,10 @@ Item {
         }
 
         onDragOverflow : {
+            if (flipable.transforming != (degrees != 0)) {
+                flipable.transforming = (degrees != 0);
+                flipable.transformingChanged(flipable.transforming);
+            }
             if (flipable.state == "Front0") {
                 flipable.angle = degrees;
             } else if (flipable.state == "Back180") {
