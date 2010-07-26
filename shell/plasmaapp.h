@@ -77,6 +77,7 @@ private Q_SLOTS:
     void beginTrayTransition();
     void finishTrayTransition();
     void shrinkTray();
+    void containmentsTransformingChanged(bool transforming);
 
 private:
     MobCorona *m_corona;
@@ -93,6 +94,7 @@ private:
     QDeclarativeItem *m_trayPanel;
 
     Plasma::Containment *m_currentContainment;
+    Plasma::Containment *m_alternateContainment;
     Plasma::Containment *m_nextContainment;
     Plasma::Containment *m_trayContainment;
     Plasma::Applet *m_trayApplet;

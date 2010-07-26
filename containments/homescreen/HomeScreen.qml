@@ -33,6 +33,7 @@ Item {
 
     Flipable {
         id : flipable;
+        objectName: "containments";
         property int angle: 0;
         width : 800;
         height : 480;

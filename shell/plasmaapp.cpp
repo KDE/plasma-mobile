@@ -208,6 +208,12 @@ void PlasmaApp::setupHomeScreen()
     // get references for the main objects that we'll need to deal with
     m_mainSlot = mainItem->findChild<QDeclarativeItem*>("mainSlot");
     m_spareSlot = mainItem->findChild<QDeclarativeItem*>("spareSlot");
+    connect(m_mainSlot, SIGNAL(transformingChanged(bool)), this, SLOT(mainSlotTransformingChanged(bool)));
+    
+    QDeclarativeItem *containments = mainItem->findChild<QDeclarativeItem*>("containments");
+    connect(containments, SIGNAL(transformingChanged(bool)), this, SLOT(containmentsTransformingChanged(bool)));
+
+
     m_trayPanel = mainItem->findChild<QDeclarativeItem*>("systraypanel");
     m_homeScreen = mainItem;
 
@@ -225,6 +231,13 @@ void PlasmaApp::setupHomeScreen()
         connect(item, SIGNAL(clicked()), this, SLOT(changeActivity()));
     }
 }
+
+void PlasmaApp::containmentsTransformingChanged(bool transforming)
+{
+    m_currentContainment->graphicsEffect()->setEnabled(transforming);
+    m_alternateContainment->graphicsEffect()->setEnabled(transforming);
+}
+
 
 void PlasmaApp::changeActivity()
 {
@@ -446,6 +459,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>("alternateSlot");
 
         if (alternateSlot) {
+            m_alternateContainment = containment;
             alternateSlot->setProperty("width", m_mainView->size().width());
             alternateSlot->setProperty("height", m_mainView->size().height());
             containment->setParentItem(alternateSlot);
