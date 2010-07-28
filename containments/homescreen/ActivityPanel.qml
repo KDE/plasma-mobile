@@ -70,7 +70,7 @@ Item {
 
     Image {
         id: flipButton;
-        source: "images/phone-quick.png";
+        source: "images/flip.png";
         y: -64;
         anchors.right : parent.right;
     }
