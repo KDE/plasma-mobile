@@ -46,6 +46,24 @@ Item {
         anchors.horizontalCenter: activitypanel.horizontalCenter;
     }
 
+    Image {
+        id: phoneQuick;
+        source: "images/phone-quick.png";
+        y: -64;
+        x: 0;
+    }
+
+    MouseArea {
+        x: phoneQuick.x-16;
+        y: phoneQuick.y-16;
+        width: phoneQuick.width+32;
+        height: phoneQuick.height+32;
+
+        onClicked: {
+            shortcuts.children[2].clicked();
+        }
+    }
+
     onYChanged : {
         var overflow = Math.max(0, activitypanel.parent.height - (activitypanel.y + activitypanel.height));
 
@@ -148,6 +166,10 @@ Item {
                 opacity: 0;
             }
             PropertyChanges {
+                target: phoneQuick;
+                opacity: 0;
+            }
+            PropertyChanges {
                 target: timer;
                 running: true
             }
@@ -170,6 +192,10 @@ Item {
                 target: hint;
                 opacity: 1;
             }
+            PropertyChanges {
+                target: phoneQuick;
+                opacity: 1;
+            }
         },
         State {
             name: "dragging"
@@ -182,6 +208,10 @@ Item {
             PropertyChanges {
                 target: hint;
                 opacity: hint.opacity;
+            }
+            PropertyChanges {
+                target: phoneQuick;
+                opacity: phoneQuick.opacity;
             }
         }
     ]
@@ -205,11 +235,19 @@ Item {
                         easing.type: "OutCubic";
                     }
                 }
-                PropertyAnimation {
-                    target: hint;
-                    property: "opacity";
-                    duration: 600;
-                    easing.type: "InCubic";
+                ParallelAnimation {
+                    PropertyAnimation {
+                        target: hint;
+                        property: "opacity";
+                        duration: 600;
+                        easing.type: "InCubic";
+                    }
+                    PropertyAnimation {
+                        target: phoneQuick;
+                        property: "opacity";
+                        duration: 600;
+                        easing.type: "InCubic";
+                    }
                 }
             }
         },
@@ -217,11 +255,19 @@ Item {
             from: "hidden";
             to: "show";
             SequentialAnimation {
-                PropertyAnimation {
-                    targets: hint;
-                    properties: "opacity";
-                    duration: 600;
-                    easing.type: "OutCubic";
+                ParallelAnimation {
+                    PropertyAnimation {
+                        targets: hint;
+                        properties: "opacity";
+                        duration: 600;
+                        easing.type: "OutCubic";
+                    }
+                    PropertyAnimation {
+                        targets: phoneQuick;
+                        properties: "opacity";
+                        duration: 600;
+                        easing.type: "OutCubic";
+                    }
                 }
                 ParallelAnimation {
                     NumberAnimation {
