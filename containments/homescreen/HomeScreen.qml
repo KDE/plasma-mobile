@@ -112,88 +112,136 @@ Item {
         Transition {
             from: "Front360"
             to:"Back180"
-            ParallelAnimation {
+            SequentialAnimation {
+                ScriptAction {
+                    script: flipable.transformingChanged(true);
+                }
                 NumberAnimation {
                     properties: "angle";
                     duration: 800;
                     easing.type: "Linear";
+                }
+                ScriptAction {
+                    script: flipable.transformingChanged(false);
                 }
             }
         },
         Transition {
             from: "Front360"
             to:"Back540"
-            ParallelAnimation {
+            SequentialAnimation {
+                ScriptAction {
+                    script: flipable.transformingChanged(true);
+                }
                 NumberAnimation {
                     properties: "angle";
                     duration: 800;
                     easing.type: "Linear";
+                }
+                ScriptAction {
+                    script: flipable.transformingChanged(false);
                 }
             }
         },
         Transition {
             from: "Front0"
             to:"Back180"
-            ParallelAnimation {
+            SequentialAnimation {
+                ScriptAction {
+                    script: flipable.transformingChanged(true);
+                }
                 NumberAnimation {
                     properties: "angle";
                     duration: 800;
                     easing.type: "Linear";
+                }
+                ScriptAction {
+                    script: flipable.transformingChanged(false);
                 }
             }
         },
         Transition {
             from: "Front0"
             to:"Back540"
-            ParallelAnimation {
+            SequentialAnimation {
+                ScriptAction {
+                    script: flipable.transformingChanged(true);
+                }
                 NumberAnimation {
                     properties: "angle";
                     duration: 800;
                     easing.type: "Linear";
+                }
+                ScriptAction {
+                    script: flipable.transformingChanged(false);
                 }
             }
         },
         Transition {
             from: "Back180"
             to:"Front360"
-            ParallelAnimation {
+            SequentialAnimation {
+                ScriptAction {
+                    script: flipable.transformingChanged(true);
+                }
                 NumberAnimation {
                     properties: "angle";
                     duration: 800;
                     easing.type: "Linear";
+                }
+                ScriptAction {
+                    script: flipable.transformingChanged(false);
                 }
             }
         },
         Transition {
             from: "Back180"
             to:"Front0"
-            ParallelAnimation {
+            SequentialAnimation {
+                ScriptAction {
+                    script: flipable.transformingChanged(true);
+                }
                 NumberAnimation {
                     properties: "angle";
                     duration: 800;
                     easing.type: "Linear";
+                }
+                ScriptAction {
+                    script: flipable.transformingChanged(false);
                 }
             }
         },
         Transition {
             from: "Back540"
             to:"Front0"
-            ParallelAnimation {
+            SequentialAnimation {
+                ScriptAction {
+                    script: flipable.transformingChanged(true);
+                }
                 NumberAnimation {
                     properties: "angle";
                     duration: 800;
                     easing.type: "Linear";
+                }
+                ScriptAction {
+                    script: flipable.transformingChanged(false);
                 }
             }
         },
         Transition {
             from: "Back540"
             to: "Front360"
-            ParallelAnimation {
+            SequentialAnimation {
+                ScriptAction {
+                    script: flipable.transformingChanged(true);
+                }
                 NumberAnimation {
                     properties: "angle";
                     duration: 800;
                     easing.type: "Linear";
+                }
+                ScriptAction {
+                    script: flipable.transformingChanged(false);
                 }
             }
         }
