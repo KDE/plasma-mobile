@@ -59,6 +59,10 @@ Item {
         width: phoneQuick.width+32;
         height: phoneQuick.height+32;
 
+        onPressed: {
+            mouse.accepted = (activitypanel.state == 'hidden');
+        }
+
         onClicked: {
             shortcuts.children[2].clicked();
         }
