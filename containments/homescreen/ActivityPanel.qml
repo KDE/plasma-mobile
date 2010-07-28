@@ -68,6 +68,28 @@ Item {
         }
     }
 
+    Image {
+        id: flipButton;
+        source: "images/phone-quick.png";
+        y: -64;
+        anchors.right : parent.right;
+    }
+
+    MouseArea {
+        x: flipButton.x-16;
+        y: flipButton.y-16;
+        width: flipButton.width+32;
+        height: flipButton.height+32;
+
+        onPressed: {
+            mouse.accepted = (activitypanel.state == 'hidden');
+        }
+
+        onClicked: {
+            activitypanel.flipRequested();
+        }
+    }
+
     onYChanged : {
         var overflow = Math.max(0, activitypanel.parent.height - (activitypanel.y + activitypanel.height));
 
@@ -174,6 +196,10 @@ Item {
                 opacity: 0;
             }
             PropertyChanges {
+                target: flipButton;
+                opacity: 0;
+            }
+            PropertyChanges {
                 target: timer;
                 running: true
             }
@@ -200,6 +226,10 @@ Item {
                 target: phoneQuick;
                 opacity: 1;
             }
+            PropertyChanges {
+                target: flipButton;
+                opacity: 1;
+            }
         },
         State {
             name: "dragging"
@@ -215,6 +245,10 @@ Item {
             }
             PropertyChanges {
                 target: phoneQuick;
+                opacity: phoneQuick.opacity;
+            }
+            PropertyChanges {
+                target: flipButton;
                 opacity: phoneQuick.opacity;
             }
         }
@@ -252,6 +286,12 @@ Item {
                         duration: 600;
                         easing.type: "InCubic";
                     }
+                    PropertyAnimation {
+                        target: flipButton;
+                        property: "opacity";
+                        duration: 600;
+                        easing.type: "InCubic";
+                    }
                 }
             }
         },
@@ -268,6 +308,12 @@ Item {
                     }
                     PropertyAnimation {
                         targets: phoneQuick;
+                        properties: "opacity";
+                        duration: 600;
+                        easing.type: "OutCubic";
+                    }
+                    PropertyAnimation {
+                        targets: flipButton;
                         properties: "opacity";
                         duration: 600;
                         easing.type: "OutCubic";
