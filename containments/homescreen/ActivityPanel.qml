@@ -245,7 +245,7 @@ Item {
             }
             PropertyChanges {
                 target: phoneQuick;
-                opacity: phoneQuick.opacity;
+                opacity: 0;
             }
             PropertyChanges {
                 target: flipButton;
@@ -343,6 +343,30 @@ Item {
                 easing.type: "OutQuad";
                 duration: 400;
             }
+        },
+        Transition {
+            from: "*";
+            to: "dragging";
+            ParallelAnimation {
+                    PropertyAnimation {
+                        targets: hint;
+                        properties: "opacity";
+                        duration: 600;
+                        easing.type: "OutCubic";
+                    }
+                    PropertyAnimation {
+                        targets: phoneQuick;
+                        properties: "opacity";
+                        duration: 600;
+                        easing.type: "OutCubic";
+                    }
+                    PropertyAnimation {
+                        targets: flipButton;
+                        properties: "opacity";
+                        duration: 600;
+                        easing.type: "OutCubic";
+                    }
+                }
         }
     ]
 
