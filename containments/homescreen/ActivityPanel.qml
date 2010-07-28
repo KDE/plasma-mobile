@@ -25,7 +25,7 @@ Item {
     id: activitypanel;
     height: 160;
     state: "show";
-    signal flipRequested;
+    signal flipRequested(bool reverse);
     signal dragOverflow(int degrees)
 
     Image {
@@ -86,7 +86,7 @@ Item {
         }
 
         onClicked: {
-            activitypanel.flipRequested();
+            activitypanel.flipRequested(true);
         }
     }
 
@@ -155,7 +155,7 @@ Item {
                 activitypanel.state = 'show';
                 if (activitypanel.y < target / 2) {
                     activitypanel.state = 'hidden';
-                    activitypanel.flipRequested();
+                    activitypanel.flipRequested(false);
                 }
             } else {
                 activitypanel.state = 'hidden';

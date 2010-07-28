@@ -360,16 +360,31 @@ Item {
         target: activitypanel;
 
         onFlipRequested : {
-            if (flipable.state == "Front0") {
-                flipable.state = "Front360";
-            } else if (flipable.state == "Back540") {
-                flipable.state = "Back180";
-            }
+            
+            if (reverse) {
+                if (flipable.state == "Front0") {
+                    flipable.state = "Front360";
+                } else if (flipable.state == "Back180") {
+                    flipable.state = "Back540";
+                }
 
-            if (flipable.state == "Front360") {
-                flipable.state = "Back540";
+                if (flipable.state == "Front360") {
+                    flipable.state = "Back180";
+                } else {
+                    flipable.state = "Front360";
+                }
             } else {
-                flipable.state = "Front360";
+                if (flipable.state == "Front0") {
+                    flipable.state = "Front360";
+                } else if (flipable.state == "Back540") {
+                    flipable.state = "Back180";
+                }
+
+                if (flipable.state == "Front360") {
+                    flipable.state = "Back540";
+                } else {
+                    flipable.state = "Front360";
+                }
             }
         }
 
