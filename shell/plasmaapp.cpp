@@ -89,7 +89,7 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0), m_nextContainment(0),
-      m_trayContainment(0), m_trayApplet(0)
+      m_trayContainment(0)
 {
     setupBindings();
     KGlobal::locale()->insertCatalog("libplasma");
@@ -209,7 +209,7 @@ void PlasmaApp::setupHomeScreen()
     m_mainSlot = mainItem->findChild<QDeclarativeItem*>("mainSlot");
     m_spareSlot = mainItem->findChild<QDeclarativeItem*>("spareSlot");
     connect(m_mainSlot, SIGNAL(transformingChanged(bool)), this, SLOT(mainSlotTransformingChanged(bool)));
-    
+
     QDeclarativeItem *containments = mainItem->findChild<QDeclarativeItem*>("containments");
     connect(containments, SIGNAL(transformingChanged(bool)), this, SLOT(containmentsTransformingChanged(bool)));
 
@@ -371,30 +371,20 @@ void PlasmaApp::slideActivities()
     m_homeScreen->setProperty("state", "Slide");
 }
 
-void PlasmaApp::beginTrayTransition()
+void PlasmaApp::resizeTray()
 {
-    m_trayContainment->hide();
-}
-
-void PlasmaApp::finishTrayTransition()
-{
-  m_trayContainment->resize(m_homeScreen->property("width").toReal(),
-                            m_homeScreen->property("height").toReal());
-    m_trayApplet->resize(m_trayPanel->property("width").toReal(),
-                         m_trayPanel->property("height").toReal());
-    m_trayContainment->setPos(0, 0);
-    m_trayContainment->show();
+    m_trayContainment->resize(m_trayPanel->property("width").toReal(),
+                              m_trayPanel->property("height").toReal());
 }
 
 void PlasmaApp::shrinkTray()
 {
     m_trayPanel->setProperty("state", "passive");
-    beginTrayTransition();
 }
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
-    if (containment->id() == 8) { // systray's containment!
+    if (containment->location() == Plasma::TopEdge) { // systray's containment!
         if (m_trayContainment) {
             delete containment;
             return;
@@ -403,27 +393,14 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         m_trayContainment->setParentItem(m_trayPanel);
         m_trayContainment->setParent(m_trayPanel);
 
-        Plasma::Applet::List apps = m_trayContainment->applets();
-        if (apps.size() > 0) {
-            m_trayApplet = apps.at(0);
-        } else {
-            m_trayApplet = m_trayContainment->addApplet("mobilesystemtray");
-        }
-
-        m_trayApplet->resize(m_trayPanel->property("width").toReal(),
-                             m_trayPanel->property("height").toReal());
-        m_trayContainment->resize(m_homeScreen->property("width").toReal(),
-                                  m_homeScreen->property("height").toReal());
+        m_trayContainment->resize(m_trayPanel->property("width").toReal(),
+                                  m_trayPanel->property("height").toReal());
         m_trayContainment->setPos(0, 0);
 
-        connect(m_trayPanel, SIGNAL(activated()), this, SLOT(beginTrayTransition()));
-        connect(m_trayPanel, SIGNAL(shrinkFinished()), this, SLOT(finishTrayTransition()));
-        connect(m_trayPanel, SIGNAL(shrinkFinished()), m_trayApplet, SLOT(shrink()));
-        connect(m_trayPanel, SIGNAL(enlargeFinished()), this, SLOT(finishTrayTransition()));
-        connect(m_trayPanel, SIGNAL(enlargeFinished()), m_trayApplet, SLOT(enlarge()));
+        connect(m_trayPanel, SIGNAL(xChanged()), this, SLOT(resizeTray()));
         // "enlarge" is initiated by a QML mousearea, but "shrink" needs to be initiated by
         // the applet itself..
-        connect(m_trayApplet, SIGNAL(shrinkRequested()), this, SLOT(shrinkTray()));
+        connect(m_trayContainment, SIGNAL(shrinkRequested()), this, SLOT(shrinkTray()));
 
         return;
     }

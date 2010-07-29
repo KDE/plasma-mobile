@@ -74,8 +74,7 @@ private Q_SLOTS:
     void slideActivities();
     void updateMainSlot();
     void lockScreen();
-    void beginTrayTransition();
-    void finishTrayTransition();
+    void resizeTray();
     void shrinkTray();
     void containmentsTransformingChanged(bool transforming);
 
@@ -97,7 +96,6 @@ private:
     Plasma::Containment *m_alternateContainment;
     Plasma::Containment *m_nextContainment;
     Plasma::Containment *m_trayContainment;
-    Plasma::Applet *m_trayApplet;
     QHash<int, Plasma::Containment*> m_containments;
 };
 

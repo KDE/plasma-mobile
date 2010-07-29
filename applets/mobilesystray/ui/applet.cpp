@@ -23,6 +23,7 @@
 
 #include <QGraphicsLinearLayout>
 #include <QGraphicsSceneResizeEvent>
+#include <QSignalMapper>
 
 #include <KIcon>
 
@@ -30,6 +31,7 @@
 #include <plasma/widgets/scrollwidget.h>
 #include <plasma/dataenginemanager.h>
 #include <plasma/containment.h>
+#include <plasma/framesvg.h>
 #include "../core/manager.h"
 #include "../core/task.h"
 #include "../protocols/dbussystemtray/dbussystemtraywidget.h"
@@ -47,10 +49,13 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
         m_manager = new SystemTray::Manager();
     }
 
+    m_background.setImagePath("widgets/translucentbackground");
+    m_background.setEnabledBorders(Plasma::FrameSvg::AllBorders);
+
+    m_mapper = new QSignalMapper();
+
     // list of applets to "always show"
     m_fixedList << "notifications" << "org.kde.networkmanagement" << "battery" << "notifier";
-
-    setBackgroundHints(DefaultBackground);
 
     m_scrollWidget = new Plasma::ScrollWidget(this);
     m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -107,10 +112,11 @@ void MobileTray::init()
 
     // TODO: a better cancel button at a better location...
     m_cancel = new Plasma::IconWidget(KIcon("dialog-cancel"), "", this);
+    m_cancel->setSvg("widgets/arrows", "left-arrow");
     // request the mobile shell to do a shrink when clicked
     connect(m_cancel, SIGNAL(clicked()), this, SIGNAL(shrinkRequested()));
-    m_cancel->setPreferredSize(100, 100);
-    m_cancel->setSizePolicy (QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    m_cancel->setPreferredSize(m_cancel->size().width(), 100);
+    //m_cancel->setSizePolicy (QSizePolicy(QSizePolicy::Fixed, QSizePolicy::MinimumFixed));
     m_cancel->hide();
 
     connect(m_manager, SIGNAL(taskAdded(SystemTray::Task*)),
@@ -122,19 +128,28 @@ void MobileTray::init()
 
 }
 
+void MobileTray::resizeWidget(QObject* w)
+{
+    resizeWidget(qobject_cast<QGraphicsWidget*>(w));
+}
+
 void MobileTray::resizeWidget(QGraphicsWidget* w)
 {
-    if (m_mode == PASSIVE) {
-        w->setPreferredSize(40, 40);
-    } else {
-        w->setPreferredSize(100, 100);
-    }
+    int size = m_mode == PASSIVE ? 40 : 100;
+    w->setPreferredSize(size, size);
 }
 
 void MobileTray::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
+    m_background.resizeFrame(event->newSize());
     m_scrollWidget->widget()->resize(event->newSize());
     m_scrollWidget->resize(event->newSize());
+    if (event->newSize().width() > WIDTH_THRESHOLD && m_mode == PASSIVE) {
+        enlarge();
+    }
+    if (event->newSize().width() < WIDTH_THRESHOLD && m_mode == ACTIVE) {
+        shrink();
+    }
 }
 
 void MobileTray::hideWidget(QGraphicsWidget *w)
@@ -176,7 +191,7 @@ void MobileTray::addTask(SystemTray::Task* task)
             }
         }
 
-        ic->setSizePolicy (QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+        //ic->setSizePolicy (QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
         resizeWidget(ic);
         ic->setParent(this);
 
@@ -193,6 +208,9 @@ void MobileTray::addTask(SystemTray::Task* task)
             showWidget(ic);
             m_cyclicIcons.insert(task, ic);
         }
+        m_mapper->setMapping(ic, ic);
+        connect(m_mapper, SIGNAL(mapped(QObject*)), this, SLOT(resizeWidget(QObject*)));
+        connect(ic, SIGNAL(changed()), m_mapper, SLOT(map()));
     }
 }
 
@@ -249,7 +267,6 @@ void MobileTray::updateTask(SystemTray::Task* task)
         }
     }
 }
-
 void MobileTray::shrink()
 {
     if (m_mode == ACTIVE) {
@@ -294,6 +311,15 @@ void MobileTray::enlarge()
             m_notificationsApplet->showPopup();
         }
     }
+}
+
+void MobileTray::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                           QWidget *widget)
+{
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+
+    m_background.paintFrame(painter);
 }
 
 void MobileTray::mousePressEvent(QGraphicsSceneMouseEvent*)

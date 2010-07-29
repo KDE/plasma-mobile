@@ -22,15 +22,6 @@ import Qt 4.7
 Item {
     id: systraypanel;
     state: "passive";
-    signal activated();
-    signal shrinkFinished();
-    signal enlargeFinished();
-
-    Image {
-        id: activityimage;
-        anchors.fill: parent;
-        source: "images/activitypanel.png";
-    }
 
     states: [
         State {
@@ -62,28 +53,12 @@ Item {
 
     transitions: [
         Transition {
-            from: "passive"; to: "active";
+            from: "passive"; to: "active"; reversible: true;
             SequentialAnimation {
                 NumberAnimation {
                     properties: "x, width, height";
                     duration: 500;
                     easing.type: Easing.InOutQuad;
-                }
-                ScriptAction {
-                    script: enlargeFinished();
-                }
-            }
-        },
-        Transition {
-            from: "active"; to: "passive";
-            SequentialAnimation {
-                NumberAnimation {
-                    properties: "x, width, height";
-                    duration: 500;
-                    easing.type: Easing.InOutQuad;
-                }
-                ScriptAction {
-                    script: shrinkFinished();
                 }
             }
         }
@@ -93,7 +68,6 @@ Item {
         anchors.fill: parent;
         onClicked: {
             systraypanel.state = (systraypanel.state == "active") ? "passive" : "active";
-            systraypanel.activated();
         }
         z: 500;
     }
