@@ -16,10 +16,11 @@ Icon=preferences-desktop-notification
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
 
+X-KDE-ParentAppp=plasma-mobile
 X-KDE-Library=plasma_applet_mobilesystemtray
 X-KDE-PluginInfo-Author=Lim Yuen Hoe
 X-KDE-PluginInfo-Email=yuenhoe@hotmail.com
-X-KDE-PluginInfo-Name=mobilesystemtray
+X-KDE-PluginInfo-Name=org.kde.mobilesystemtray
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Windows and Tasks

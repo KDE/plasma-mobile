@@ -30,10 +30,11 @@ X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
 X-Plasma-ContainmentCategories=desktop
 NoDisplay=true
 
+X-KDE-ParentAppp=plasma-mobile
 X-KDE-Library=plasma_containment_mobiledesktop
 X-KDE-PluginInfo-Author=The Plasma Team
 X-KDE-PluginInfo-Email=panel-devel@kde.org
-X-KDE-PluginInfo-Name=mobiledesktop
+X-KDE-PluginInfo-Name=org.kde.mobiledesktop
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Containments
