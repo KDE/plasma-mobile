@@ -26,6 +26,7 @@
 #include <Plasma/PopupApplet>
 #include <Plasma/Containment>
 #include <QHash>
+#include <QQueue>
 
 namespace Plasma
 {
@@ -83,6 +84,7 @@ private:
     QHash<SystemTray::Task*, QGraphicsWidget*> m_cyclicIcons;
     QHash<SystemTray::Task*, QGraphicsWidget*> m_fixedIcons;
     QHash<SystemTray::Task*, QGraphicsWidget*> m_hiddenIcons;
+    QQueue<SystemTray::Task*> m_recentQueue;
     Plasma::IconWidget *m_cancel;
     Plasma::ScrollWidget *m_scrollWidget;
     Plasma::PopupApplet *m_notificationsApplet;

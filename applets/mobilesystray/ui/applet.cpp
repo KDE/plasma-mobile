@@ -192,8 +192,8 @@ void MobileTray::addTask(SystemTray::Task* task)
             return;
         } else if (!isFixed && m_cyclicIcons.size() >= MAXCYCLIC) {
             // "Evict" an old item to the hidden list
-            // FIXME: This is no good - doesn't evict the least recent :(
-            Task* key = m_cyclicIcons.keys().at(0);
+            // FIXME: still not too pretty..
+            Task* key = m_recentQueue.dequeue();
             QGraphicsWidget *old = m_cyclicIcons.take(key);
             m_hiddenIcons.insert(key, old);
             if (m_mode == PASSIVE) { // no need to hide if we're in ACTIVE mode
@@ -216,6 +216,7 @@ void MobileTray::addTask(SystemTray::Task* task)
         } else {
             showWidget(ic);
             m_cyclicIcons.insert(task, ic);
+            m_recentQueue.enqueue(task);
         }
         resizeContents();
     }
@@ -225,7 +226,9 @@ void MobileTray::removeTask(SystemTray::Task* task)
 {
     QGraphicsWidget *ic = 0;
     if (m_cyclicIcons.contains(task)) {
+        // TODO: might want to replace with something from m_hiddenIcons
         ic = m_cyclicIcons.take(task);
+        m_recentQueue.removeOne(task);
     } else if (m_fixedIcons.contains(task)) {
         ic = m_fixedIcons.take(task);
     } else if (m_hiddenIcons.contains(task)) {
@@ -247,7 +250,7 @@ void MobileTray::updateTask(SystemTray::Task* task)
     if (m_hiddenIcons.contains(task)) { // unhide!
         if (m_cyclicIcons.size() >= MAXCYCLIC) {
             // evict something
-            Task* key = m_cyclicIcons.keys().at(0);
+            Task* key = m_recentQueue.dequeue();
             QGraphicsWidget *old = m_cyclicIcons.take(key);
             m_hiddenIcons.insert(key, old);
             if (m_mode == PASSIVE) { // no need to hide if we're in ACTIVE mode
@@ -256,6 +259,7 @@ void MobileTray::updateTask(SystemTray::Task* task)
         }
         ic = m_hiddenIcons.take(task);
         m_cyclicIcons.insert(task, ic);
+        m_recentQueue.enqueue(task);
         if (m_mode == PASSIVE) { // if mode is ACTIVE, it's already being shown
             showWidget(ic);
         }
