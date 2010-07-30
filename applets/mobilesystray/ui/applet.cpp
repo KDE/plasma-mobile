@@ -43,7 +43,7 @@ Manager *MobileTray::m_manager = 0;
 
 MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args),
-    m_mode(PASSIVE), m_notificationsApplet(0)
+    m_mode(PASSIVE), m_notificationsApplet(0), initDone(false)
 {
     if (!m_manager) {
         m_manager = new SystemTray::Manager();
@@ -52,19 +52,25 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     m_background.setImagePath("widgets/translucentbackground");
     m_background.setEnabledBorders(Plasma::FrameSvg::AllBorders);
 
-    m_mapper = new QSignalMapper();
-
     // list of applets to "always show"
     m_fixedList << "notifications" << "org.kde.networkmanagement" << "battery" << "notifier";
 
     m_scrollWidget = new Plasma::ScrollWidget(this);
     m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    QGraphicsWidget *m = new QGraphicsWidget(m_scrollWidget);
-    m_scrollWidget->setWidget(m);
+    QGraphicsWidget *outsideWidget = new QGraphicsWidget(m_scrollWidget);
+    QGraphicsLinearLayout* outsidelayout = new QGraphicsLinearLayout(Qt::Horizontal, outsideWidget);
+    m_scrollWidget->setWidget(outsideWidget);
+    outsideWidget->setLayout(outsidelayout);
 
-    m_layout = new QGraphicsLinearLayout(Qt::Horizontal, m);
-    m->setLayout(m_layout);
+    // put a widget inside the scrollwidget's widget
+    // - so it can be resized independantly of the scrollwidget
+    m_mainWidget = new QGraphicsWidget(this);
+    m_mainWidget->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    outsidelayout->addItem(m_mainWidget);
+
+    m_layout = new QGraphicsLinearLayout(Qt::Horizontal, m_mainWidget);
+    m_mainWidget->setLayout(m_layout);
 
     // FIXME: attempt to center applets - but doesn't seem to quite work
     m_layout->insertStretch(0);
@@ -116,7 +122,6 @@ void MobileTray::init()
     // request the mobile shell to do a shrink when clicked
     connect(m_cancel, SIGNAL(clicked()), this, SIGNAL(shrinkRequested()));
     m_cancel->setPreferredSize(m_cancel->size().width(), 100);
-    //m_cancel->setSizePolicy (QSizePolicy(QSizePolicy::Fixed, QSizePolicy::MinimumFixed));
     m_cancel->hide();
 
     connect(m_manager, SIGNAL(taskAdded(SystemTray::Task*)),
@@ -126,29 +131,34 @@ void MobileTray::init()
     connect(m_manager, SIGNAL(taskRemoved(SystemTray::Task*)),
             this, SLOT(removeTask(SystemTray::Task*)));
 
+    if (size().width() > WIDTH_THRESHOLD) {
+        toActive();
+    }
+    initDone = true;
 }
 
-void MobileTray::resizeWidget(QObject* w)
-{
-    resizeWidget(qobject_cast<QGraphicsWidget*>(w));
-}
-
-void MobileTray::resizeWidget(QGraphicsWidget* w)
-{
-    int size = m_mode == PASSIVE ? 40 : 100;
-    w->setPreferredSize(size, size);
+void MobileTray::resizeContents() {
+    int totalItems = m_fixedIcons.size() + m_cyclicIcons.size();
+    if (m_mode == ACTIVE) {
+        totalItems += m_hiddenIcons.size() + 1;
+    }
+    int contentsHeight = size().height() - 10;
+    int totalWidth = contentsHeight * totalItems;
+    m_mainWidget->setPreferredSize(totalWidth, contentsHeight);
 }
 
 void MobileTray::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
     m_background.resizeFrame(event->newSize());
-    m_scrollWidget->widget()->resize(event->newSize());
     m_scrollWidget->resize(event->newSize());
-    if (event->newSize().width() > WIDTH_THRESHOLD && m_mode == PASSIVE) {
-        enlarge();
-    }
-    if (event->newSize().width() < WIDTH_THRESHOLD && m_mode == ACTIVE) {
-        shrink();
+    resizeContents();
+    if (initDone) { // only do the following if init() is done - else will crash!
+        if (event->newSize().width() > WIDTH_THRESHOLD && m_mode == PASSIVE) {
+            toActive();
+        }
+        if (event->newSize().width() < WIDTH_THRESHOLD && m_mode == ACTIVE) {
+            toPassive();
+        }
     }
 }
 
@@ -191,8 +201,7 @@ void MobileTray::addTask(SystemTray::Task* task)
             }
         }
 
-        //ic->setSizePolicy (QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-        resizeWidget(ic);
+        ic->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
         ic->setParent(this);
 
         DBusSystemTrayWidget *d = qobject_cast<DBusSystemTrayWidget*>(ic);
@@ -208,9 +217,7 @@ void MobileTray::addTask(SystemTray::Task* task)
             showWidget(ic);
             m_cyclicIcons.insert(task, ic);
         }
-        m_mapper->setMapping(ic, ic);
-        connect(m_mapper, SIGNAL(mapped(QObject*)), this, SLOT(resizeWidget(QObject*)));
-        connect(ic, SIGNAL(changed()), m_mapper, SLOT(map()));
+        resizeContents();
     }
 }
 
@@ -228,11 +235,11 @@ void MobileTray::removeTask(SystemTray::Task* task)
         m_layout->removeItem(ic);
         delete ic;
     }
+    resizeContents();
 }
 
 void MobileTray::updateTask(SystemTray::Task* task)
 {
-    // FIXME: Icon changes don't seem to go through here :(
     if (!task->isEmbeddable(this)) {
         return;
     }
@@ -249,25 +256,16 @@ void MobileTray::updateTask(SystemTray::Task* task)
         }
         ic = m_hiddenIcons.take(task);
         m_cyclicIcons.insert(task, ic);
-        resizeWidget(ic);
         if (m_mode == PASSIVE) { // if mode is ACTIVE, it's already being shown
             showWidget(ic);
         }
-    } else { // not hidden, probably just need to resize
-        if (m_cyclicIcons.contains(task)) {
-            ic = m_cyclicIcons.value(task);
-        }
-        if (m_fixedIcons.contains(task)) {
-            ic = m_fixedIcons.value(task);
-        }
-        if (ic) {
-            resizeWidget(ic);
-        } else { // maybe something became embeddable?
-            addTask(task);
+    } else {
+        if (!m_cyclicIcons.contains(task) && !m_fixedIcons.contains(task)) {
+            addTask(task); // maybe something became embeddable?
         }
     }
 }
-void MobileTray::shrink()
+void MobileTray::toPassive()
 {
     if (m_mode == ACTIVE) {
         m_mode = PASSIVE;
@@ -275,38 +273,20 @@ void MobileTray::shrink()
             m_notificationsApplet->hidePopup();
         }
         foreach (QGraphicsWidget * w, m_hiddenIcons) {
-            resizeWidget(w);
             hideWidget(w);
         }
-        foreach (QGraphicsWidget * w, m_fixedIcons) {
-            resizeWidget(w);
-        }
-        foreach (QGraphicsWidget * w, m_cyclicIcons) {
-            resizeWidget(w);
-        }
         hideWidget(m_cancel);
-        m_scrollWidget->widget()->resize(size());
-        m_scrollWidget->resize(size());
     }
 }
 
-void MobileTray::enlarge()
+void MobileTray::toActive()
 {
     if (m_mode == PASSIVE) {
         m_mode = ACTIVE;
-        foreach (QGraphicsWidget * w, m_fixedIcons) {
-            resizeWidget(w);
-        }
-        foreach (QGraphicsWidget * w, m_cyclicIcons) {
-            resizeWidget(w);
-        }
         foreach (QGraphicsWidget * w, m_hiddenIcons) {
-            resizeWidget(w);
             showWidget(w);
         }
         showWidget(m_cancel, 0);
-        m_scrollWidget->widget()->resize(size());
-        m_scrollWidget->resize(size());
         if (m_notificationsApplet) {
             m_notificationsApplet->showPopup();
         }
@@ -321,12 +301,6 @@ void MobileTray::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     m_background.paintFrame(painter);
 }
-
-void MobileTray::mousePressEvent(QGraphicsSceneMouseEvent*)
-{
-    enlarge();
-}
-
 
 // This is the command that links your applet to the .desktop file
 K_EXPORT_PLASMA_APPLET(mobilesystemtray, MobileTray)

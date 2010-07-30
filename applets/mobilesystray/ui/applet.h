@@ -60,30 +60,25 @@ public slots:
     void addTask(SystemTray::Task* task);
     void removeTask(SystemTray::Task* task);
     void updateTask(SystemTray::Task* task);
-    void shrink();
-    void enlarge();
+    void toActive();
+    void toPassive();
 
 protected:
     enum Mode { PASSIVE, ACTIVE };
     Mode m_mode;
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget = 0);
     void resizeEvent (QGraphicsSceneResizeEvent * event);
-
-private slots:
-    void resizeWidget(QObject* w);
+    void resizeContents();
 
 private:
     static const int WIDTH_THRESHOLD = 500; // beyond which the tray is considered expanded/shrunken
-    void resizeWidget(QGraphicsWidget* w);
     void showWidget(QGraphicsWidget *w, int index = -1);
     void hideWidget(QGraphicsWidget *w);
     static Manager *m_manager;
     static const int MAXCYCLIC = 3;
     Plasma::FrameSvg m_background;
     QGraphicsLinearLayout *m_layout;
-    QSignalMapper *m_mapper;
     QList<QString> m_fixedList;
     QHash<SystemTray::Task*, QGraphicsWidget*> m_cyclicIcons;
     QHash<SystemTray::Task*, QGraphicsWidget*> m_fixedIcons;
@@ -91,6 +86,8 @@ private:
     Plasma::IconWidget *m_cancel;
     Plasma::ScrollWidget *m_scrollWidget;
     Plasma::PopupApplet *m_notificationsApplet;
+    QGraphicsWidget *m_mainWidget;
+    bool initDone;
 };
 
 }
