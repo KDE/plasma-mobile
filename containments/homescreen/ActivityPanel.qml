@@ -184,14 +184,6 @@ Item {
                 target: hint;
                 opacity: 1;
             }
-            PropertyChanges {
-                target: phoneQuick;
-                opacity: 1;
-            }
-            PropertyChanges {
-                target: flipButton;
-                opacity: 1;
-            }
         },
         State {
             name: "dragging"
@@ -204,14 +196,6 @@ Item {
             PropertyChanges {
                 target: hint;
                 opacity: hint.opacity;
-            }
-            PropertyChanges {
-                target: phoneQuick;
-                opacity: 0;
-            }
-            PropertyChanges {
-                target: flipButton;
-                opacity: phoneQuick.opacity;
             }
         }
     ]
@@ -242,18 +226,6 @@ Item {
                         duration: 600;
                         easing.type: "InCubic";
                     }
-                    PropertyAnimation {
-                        target: phoneQuick;
-                        property: "opacity";
-                        duration: 600;
-                        easing.type: "InCubic";
-                    }
-                    PropertyAnimation {
-                        target: flipButton;
-                        property: "opacity";
-                        duration: 600;
-                        easing.type: "InCubic";
-                    }
                 }
             }
         },
@@ -264,18 +236,6 @@ Item {
                 ParallelAnimation {
                     PropertyAnimation {
                         targets: hint;
-                        properties: "opacity";
-                        duration: 600;
-                        easing.type: "OutCubic";
-                    }
-                    PropertyAnimation {
-                        targets: phoneQuick;
-                        properties: "opacity";
-                        duration: 600;
-                        easing.type: "OutCubic";
-                    }
-                    PropertyAnimation {
-                        targets: flipButton;
                         properties: "opacity";
                         duration: 600;
                         easing.type: "OutCubic";
@@ -312,18 +272,6 @@ Item {
             ParallelAnimation {
                     PropertyAnimation {
                         targets: hint;
-                        properties: "opacity";
-                        duration: 600;
-                        easing.type: "OutCubic";
-                    }
-                    PropertyAnimation {
-                        targets: phoneQuick;
-                        properties: "opacity";
-                        duration: 600;
-                        easing.type: "OutCubic";
-                    }
-                    PropertyAnimation {
-                        targets: flipButton;
                         properties: "opacity";
                         duration: 600;
                         easing.type: "OutCubic";
