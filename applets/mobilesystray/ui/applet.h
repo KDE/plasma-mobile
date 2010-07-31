@@ -54,6 +54,8 @@ public:
 
     void init();
 
+    void constraintsEvent(Plasma::Constraints constraints);
+
 signals:
     void shrinkRequested();
 
@@ -81,7 +83,7 @@ private:
     void hideWidget(QGraphicsWidget *w);
     static Manager *m_manager;
     static const int MAXCYCLIC = 3;
-    Plasma::FrameSvg m_background;
+    Plasma::FrameSvg *m_background;
     QGraphicsLinearLayout *m_layout;
     QList<QString> m_fixedList;
     QHash<SystemTray::Task*, QGraphicsWidget*> m_cyclicIcons;

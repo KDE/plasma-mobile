@@ -49,8 +49,9 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
         m_manager = new SystemTray::Manager();
     }
 
-    m_background.setImagePath("widgets/translucentbackground");
-    m_background.setEnabledBorders(Plasma::FrameSvg::AllBorders);
+    m_background = new Plasma::FrameSvg(this);
+    m_background->setImagePath("widgets/translucentbackground");
+    m_background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
 
     // list of applets to "always show"
     m_fixedList << "notifications" << "org.kde.networkmanagement" << "battery" << "notifier";
@@ -141,6 +142,35 @@ void MobileTray::init()
     initDone = true;
 }
 
+void MobileTray::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::LocationConstraint) {
+        Plasma::FrameSvg::EnabledBorders borders = Plasma::FrameSvg::AllBorders;
+
+        switch (location()) {
+        case Plasma::LeftEdge:
+            borders ^= Plasma::FrameSvg::LeftBorder;
+            break;
+        case Plasma::RightEdge:
+            borders ^= Plasma::FrameSvg::RightBorder;
+            break;
+        case Plasma::TopEdge:
+            borders ^= Plasma::FrameSvg::TopBorder;
+            break;
+        case Plasma::BottomEdge:
+            borders ^= Plasma::FrameSvg::BottomBorder;
+            break;
+        default:
+            break;
+        }
+
+        m_background->setEnabledBorders(borders);
+        qreal left, top, right, bottom;
+        m_background->getMargins(left, top, right, bottom);
+        setContentsMargins(left, top, right, bottom);
+    }
+}
+
 void MobileTray::saveContents(KConfigGroup &group) const
 {
     Q_UNUSED(group)
@@ -167,7 +197,7 @@ void MobileTray::resizeContents() {
 
 void MobileTray::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
-    m_background.resizeFrame(event->newSize());
+    m_background->resizeFrame(event->newSize());
     m_scrollWidget->resize(event->newSize());
     resizeContents();
     if (initDone) { // only do the following if init() is done - else will crash!
@@ -321,7 +351,7 @@ void MobileTray::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    m_background.paintFrame(painter);
+    m_background->paintFrame(painter);
 }
 
 // This is the command that links your applet to the .desktop file
