@@ -69,17 +69,11 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=0
-plugin=org.kde.mobiledesktop
+plugin=org.kde.quickdialer-qml
 screen=0
 zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
-
-[Containments][5][Applets][1]
-geometry=200,0,400,420
-plugin=org.kde.quickdialer-qml
-immutability=1
-zvalue=1
 
 [Containments][6]
 activity=service
