@@ -85,6 +85,10 @@ MobileTray::~MobileTray()
 
 void MobileTray::init()
 {
+    if (formFactor() != Plasma::Horizontal && formFactor() != Plasma::Vertical) {
+        setFormFactor(Plasma::Horizontal);
+    }
+
     m_manager->loadApplets(this);
 
     QStringList applets = m_manager->applets(this);
@@ -135,6 +139,20 @@ void MobileTray::init()
         toActive();
     }
     initDone = true;
+}
+
+void MobileTray::saveContents(KConfigGroup &group) const
+{
+    Q_UNUSED(group)
+
+    //we skip the default Contaiment save, we don't want to directly save applets
+    //another option by the way is to get rid of the plasmoid protocol and just load plasmoids as standard applets
+}
+
+void MobileTray::restoreContents(KConfigGroup &group)
+{
+    Q_UNUSED(group)
+    //purposefully broken as saveContents
 }
 
 void MobileTray::resizeContents() {
