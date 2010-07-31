@@ -28,6 +28,7 @@ namespace Plasma
 {
     class Applet;
     class Containment;
+    class IconWidget;
 }
 
 class QGraphicsLinearLayout;
@@ -71,6 +72,7 @@ protected Q_SLOTS:
 private:
     QGraphicsLinearLayout *m_layout;
     Plasma::Containment *m_containment;
+    Plasma::IconWidget *m_addWidgetsButton;
     QTimer *m_relayoutTimer;
     QWeakPointer<Plasma::Applet> m_currentApplet;
     AppletsOverlay *m_appletsOverlay;
