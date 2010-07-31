@@ -49,11 +49,39 @@ QGraphicsWidget {
     layout: QGraphicsLinearLayout {
             id: box;
             spacing : 10
-            orientation: Qt.Vertical
+            orientation: Qt.Horizontal
+            contentsMargin: 42
+
+            LayoutItem{
+                minimumSize: "300x35"
+                preferredSize: number.width+"x35"
+                //maximumSize: "1000x35"
+                Rectangle {
+                    id : display
+                    width : parent.width
+                    height : parent.height
+                    color : Qt.rgba(0,0,0,0.4);
+                    clip: true
+                    Text {
+                        id : number;
+                        font.bold : true;
+                        font.pixelSize : 40;
+                        anchors.left : parent.left;
+                        anchors.right : parent.right;
+                        anchors.verticalCenter : parent.verticalCenter
+                        color : "white";
+                        wrapMode : Text.Wrap
+                        horizontalAlignment : TextInput.AlignHCenter
+                        text : "Please type a number"
+                    }
+                }
+            }
+
             QGraphicsGridLayout{
                 property int r: 0
                 property int c: 0
-                id: grid;  spacing: 6
+                id: grid;  spacing: 10
+                
                 Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "1"; onClicked: enterDigit("1");}
                 Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 2;  text: "2"; onClicked: enterDigit("2");}
                 Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 4; QGraphicsGridLayout.columnSpan: 2; text: "3"; onClicked: enterDigit("3");}
@@ -69,24 +97,6 @@ QGraphicsWidget {
                 Plasma.PushButton { QGraphicsGridLayout.row: 4; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 3; text: "Call"; onClicked: call();}
                 Plasma.PushButton { QGraphicsGridLayout.row: 4; QGraphicsGridLayout.column: 3; QGraphicsGridLayout.columnSpan: 3; text: "Del"; onClicked: deleteLastDigit();}
             }
-            LayoutItem{
-                minimumSize: "100x35"
-                preferredSize: number.width+"x35"
-                maximumSize: "1000x35"
-                Rectangle {
-                    id : display
-                    width : main.width - 45;
-                    height : 35
-                    color : "white"
-                    clip: true
-                    Text {
-                        id : number;
-                        font.bold : true;
-                        font.pixelSize : 20;
-                        anchors.fill : parent;
-                        text : "Please type a number"
-                    }
-                }
-            }
+            
     }
 }
