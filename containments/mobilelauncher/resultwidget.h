@@ -30,6 +30,10 @@ class ResultWidget : public Plasma::IconWidget
 {
     Q_OBJECT
     Q_PROPERTY(QPointF animationPos READ animationPos WRITE setAnimationPos)
+    Q_PROPERTY(QSizeF preferredIconSize READ preferredIconSize WRITE setPreferredIconSize)
+    Q_PROPERTY(QSizeF minimumIconSize READ minimumIconSize WRITE setMinimumIconSize)
+    Q_PROPERTY(QSizeF maximumIconSize READ maximumIconSize WRITE setMaximumIconSize)
+
 public:
     ResultWidget(QGraphicsItem *parent = 0);
     ~ResultWidget();
