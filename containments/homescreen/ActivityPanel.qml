@@ -46,50 +46,6 @@ Item {
         anchors.horizontalCenter: activitypanel.horizontalCenter;
     }
 
-    Image {
-        id: phoneQuick;
-        source: "images/phone-quick.png";
-        y: -64;
-        x: 0;
-    }
-
-    MouseArea {
-        x: phoneQuick.x-16;
-        y: phoneQuick.y-16;
-        width: phoneQuick.width+32;
-        height: phoneQuick.height+32;
-
-        onPressed: {
-            mouse.accepted = (activitypanel.state == 'hidden');
-        }
-
-        onClicked: {
-            shortcuts.children[2].clicked();
-        }
-    }
-
-    Image {
-        id: flipButton;
-        source: "images/flip.png";
-        y: -64;
-        anchors.right : parent.right;
-    }
-
-    MouseArea {
-        x: flipButton.x-16;
-        y: flipButton.y-16;
-        width: flipButton.width+32;
-        height: flipButton.height+32;
-
-        onPressed: {
-            mouse.accepted = (activitypanel.state == 'hidden');
-        }
-
-        onClicked: {
-            activitypanel.flipRequested(true);
-        }
-    }
-
     onYChanged : {
         var overflow = Math.max(0, activitypanel.parent.height - (activitypanel.y + activitypanel.height));
 
@@ -108,6 +64,7 @@ Item {
         id: hintregion;
 
         property bool passClicks;
+        property Item activeChild;
         x: 0;
         y: hint.y -  35 / 2;
         width: parent.width;
@@ -144,7 +101,12 @@ Item {
         onReleased: {
             var child = shortcuts.childAt(mouse.x, mouse.y + hintregion.y);
             if (passClicks && child) {
-                child.clicked();
+                if (activeChild == child) {
+                    activitypanel.flipRequested(true);
+                } else {
+                    child.clicked();
+                    activeChild = child;
+                }
             }
 
             if (activitypanel.state != 'dragging') {
