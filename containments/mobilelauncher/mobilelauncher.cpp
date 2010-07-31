@@ -68,10 +68,11 @@ void MobileLauncher::init()
     m_runnerModel = new KRunnerModel(this);
     m_runnerModel->setQuery("Network");
 
-    setContentsMargins(0, 16, 0, 32);
+    setContentsMargins(0, 0, 0, 0);
 
     m_qmlWidget = new Plasma::QmlWidget(this);
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
+    lay->setContentsMargins(0, 0, 0, 0);
     lay->addItem(m_qmlWidget);
 
     m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/containments/mobilelauncher/view.qml"));
