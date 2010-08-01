@@ -11,6 +11,10 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
+[Containments][1][Applets][1]
+plugin=clock
+zvalue=1
+
 [Containments][2]
 activity=
 desktop=-1
