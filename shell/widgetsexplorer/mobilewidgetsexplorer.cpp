@@ -47,7 +47,7 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
     lay->setContentsMargins(0, 0, 0, 0);
     lay->addItem(m_qmlWidget);
 
-    m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/containments/mobilewidgetsexplorer/view.qml"));
+    m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/mobilewidgetsexplorer/view.qml"));
 
     m_appletsModel = new PlasmaAppletItemModel(this);
 
