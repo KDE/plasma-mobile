@@ -47,11 +47,13 @@ AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *c
     QAction *a = containment->action("add widgets");
     if (a) {
         m_addWidgetsButton = new Plasma::IconWidget(this);
+        m_addWidgetsButton->setObjectName("addWidgetsButton");
         m_addWidgetsButton->setAction(a);
         m_addWidgetsButton->setText(QString());
         m_addWidgetsButton->setSvg("widgets/action-overlays", "add-normal");
-        m_addWidgetsButton->resize(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
+        m_addWidgetsButton->resize(KIconLoader::SizeLarge, KIconLoader::SizeLarge);
     }
+
 
     m_relayoutTimer = new QTimer(this);
     m_relayoutTimer->setSingleShot(true);
@@ -114,7 +116,6 @@ void AppletsContainer::appletRemoved(Plasma::Applet *applet)
 void AppletsContainer::relayout()
 {
     if (m_applets.isEmpty()) {
-        resize(KIconLoader::SizeMedium, KIconLoader::SizeMedium);
         m_addWidgetsButton->setPos(0,0);
         return;
     }

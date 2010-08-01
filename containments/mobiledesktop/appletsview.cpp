@@ -35,6 +35,7 @@ AppletsView::AppletsView(QGraphicsItem *parent)
     m_moveTimer = new QTimer(this);
     m_moveTimer->setSingleShot(true);
     connect(m_moveTimer, SIGNAL(timeout()), this, SLOT(moveTimerTimeout()));
+    setAlignment(Qt::AlignCenter);
 }
 
 AppletsView::~AppletsView()
@@ -60,7 +61,9 @@ void AppletsView::moveTimerTimeout()
 
 bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 {
-    if (m_appletsContainer->isAppletsOverlayVisible()) {
+    if (m_appletsContainer->isAppletsOverlayVisible() ||
+        //FIXME: using the object name is not so pretty
+        (watched->isWidget() && static_cast<QGraphicsWidget *>(watched)->objectName() == "addWidgetsButton")) {
         return false;
     }
 
