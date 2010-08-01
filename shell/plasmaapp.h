@@ -36,6 +36,7 @@
 
 class MobView;
 class MobCorona;
+class MobileWidgetsExplorer;
 
 namespace Plasma
 {
@@ -77,6 +78,7 @@ private Q_SLOTS:
     void resizeTray();
     void shrinkTray();
     void containmentsTransformingChanged(bool transforming);
+    void showWidgetsExplorer();
 
 private:
     MobCorona *m_corona;
@@ -97,6 +99,8 @@ private:
     Plasma::Containment *m_nextContainment;
     Plasma::Containment *m_trayContainment;
     QHash<int, Plasma::Containment*> m_containments;
+
+    MobileWidgetsExplorer *m_widgetsExplorer;
 };
 
 #endif // multiple inclusion guard

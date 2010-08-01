@@ -25,6 +25,7 @@
 #include "mobview.h"
 #include "mobcorona.h"
 #include "../common/qmlwidget.h"
+#include "widgetsexplorer/mobilewidgetsexplorer.h"
 
 #include <unistd.h>
 
@@ -89,7 +90,8 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0), m_nextContainment(0),
-      m_trayContainment(0)
+      m_trayContainment(0),
+      m_widgetsExplorer(0)
 {
     setupBindings();
     KGlobal::locale()->insertCatalog("libplasma");
@@ -384,6 +386,11 @@ void PlasmaApp::shrinkTray()
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
+    QAction *addAction = containment->action("add widgets");
+    if (addAction) {
+        connect(addAction, SIGNAL(triggered()), this, SLOT(showWidgetsExplorer()));
+    }
+
     if (containment->location() == Plasma::TopEdge) { // systray's containment!
         if (m_trayContainment) {
             delete containment;
@@ -449,6 +456,16 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     // XXX: FIX ME with beautiful values :)
     containment->setPos(m_mainView->width(), m_mainView->height());
     containment->setVisible(false);
+}
+
+void PlasmaApp::showWidgetsExplorer()
+{
+    if (!m_widgetsExplorer) {
+        m_widgetsExplorer = new MobileWidgetsExplorer(0);
+        m_corona->addItem(m_widgetsExplorer);
+    }
+    m_widgetsExplorer->setGeometry(m_corona->containmentForScreen(0)->geometry());
+    m_widgetsExplorer->show();
 }
 
 void PlasmaApp::containmentDestroyed(QObject *object)
