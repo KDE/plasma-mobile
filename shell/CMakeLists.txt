@@ -10,6 +10,10 @@ set(plasma-mobile_SRCS
     plasmaapp.cpp
     mobdialogmanager.cpp
     ../common/qmlwidget.cpp
+    
+    widgetsexplorer/mobilewidgetsexplorer.cpp
+    widgetsexplorer/kcategorizeditemsviewmodels.cpp
+    widgetsexplorer/plasmaappletitemmodel.cpp
 )
 
 set(PLASMA_BINDINGS
@@ -33,3 +37,4 @@ install(TARGETS plasma-mobile ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install(FILES plasma-default-layoutrc DESTINATION ${DATA_INSTALL_DIR}/plasma-mobile/)
 #install(FILES plasma-mobile.desktop DESTINATION ${AUTOSTART_INSTALL_DIR})
 
+install(DIRECTORY widgetsexplorer/qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma-mobile/mobilewidgetsexplorer PATTERN .svn EXCLUDE)
