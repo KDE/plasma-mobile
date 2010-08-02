@@ -161,8 +161,9 @@ void AppletsContainer::relayout()
 
             buttonGeom.moveCenter(geom.center());
         } else {
-           QRectF geom(QPointF(0, maximumAppletSize.height() * rows), 
+           QRectF geom(QPointF(0, maximumAppletSize.height() * (m_applets.count() / columns)), 
                        QSizeF(size().width(), maximumAppletSize.height()));
+
            buttonGeom.moveCenter(geom.center());
            extraHeight = maximumAppletSize.height();
         }
