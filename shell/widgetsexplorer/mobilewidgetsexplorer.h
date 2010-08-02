@@ -22,10 +22,13 @@
 
 #include <QGraphicsWidget>
 
+class QDeclarativeItem;
+
 class PlasmaAppletItemModel;
 
 namespace Plasma
 {
+    class Containment;
     class QmlWidget;
 }
 
@@ -37,7 +40,15 @@ public:
     MobileWidgetsExplorer(QGraphicsItem *parent);
     ~MobileWidgetsExplorer();
 
+    void setContainment(Plasma::Containment *cont);
+    Plasma::Containment *containment() const;
+
+protected Q_SLOTS:
+    void addApplet();
+
 private:
+    Plasma::Containment *m_containment;
+    QDeclarativeItem *m_view;
     Plasma::QmlWidget *m_qmlWidget;
 
     PlasmaAppletItemModel *m_appletsModel;

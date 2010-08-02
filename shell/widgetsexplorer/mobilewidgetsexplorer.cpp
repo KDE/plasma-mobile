@@ -35,10 +35,13 @@
 #include <KDebug>
 #include <KStandardDirs>
 
-
+//Plasma
+#include <Plasma/Containment>
 
 MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
-    : QGraphicsWidget(parent)
+    : QGraphicsWidget(parent),
+      m_containment(0),
+      m_view(0)
 {
     setContentsMargins(0, 0, 0, 0);
 
@@ -47,9 +50,9 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
     lay->setContentsMargins(0, 0, 0, 0);
     lay->addItem(m_qmlWidget);
 
-    m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/mobilewidgetsexplorer/view.qml"));
-
     m_appletsModel = new PlasmaAppletItemModel(this);
+
+    m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/mobilewidgetsexplorer/view.qml"));
 
     if (m_qmlWidget->engine()) {
         QDeclarativeContext *ctxt = m_qmlWidget->engine()->rootContext();
@@ -58,7 +61,12 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
         }
         QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_qmlWidget->rootObject());
         if (item) {
-            connect(item, SIGNAL(clicked()), this, SLOT(itemActivated()));
+            m_view = item->findChild<QDeclarativeItem*>("appletsView");
+
+            if (m_view) {
+                connect(m_view, SIGNAL(addAppletRequested()), this, SLOT(addApplet()));
+                connect(m_view, SIGNAL(closeRequested()), this, SLOT(deleteLater()));
+            }
         }
     }
 }
@@ -67,6 +75,32 @@ MobileWidgetsExplorer::~MobileWidgetsExplorer()
 {
 }
 
+void MobileWidgetsExplorer::setContainment(Plasma::Containment *cont)
+{
+    m_containment = cont;
+}
 
+Plasma::Containment *MobileWidgetsExplorer::containment() const
+{
+    return m_containment;
+}
+
+void MobileWidgetsExplorer::addApplet()
+{
+    if (m_view) {
+        QDeclarativeItem *item = m_view->property("currentItem").value<QDeclarativeItem *>();
+        if (item) {
+            QString plugin = item->property("appletPlugin").toString();
+            kWarning() << "Applet added" << plugin;
+
+            if (m_containment) {
+                m_containment->addApplet(plugin);
+            }
+
+            //close in a quite brutal way
+            deleteLater();
+        }
+    }
+}
 
 #include "mobilewidgetsexplorer.moc"

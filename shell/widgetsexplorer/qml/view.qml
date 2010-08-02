@@ -6,7 +6,8 @@ Rectangle {
     color: Qt.rgba(0,0,0,0.4)
 
     GridView {
-        id: gridView
+        id: appletsView
+        objectName: "appletsView"
 
         anchors.fill: parent
         anchors.topMargin: 32
@@ -20,13 +21,15 @@ Rectangle {
         cellWidth: width/6
         cellHeight: height/4
         clip: true
-        signal clicked
+        signal addAppletRequested
+        signal closeRequested
 
         delegate: Component {
             Item {
                 id: wrapper
                 width: wrapper.GridView.view.cellWidth-40
                 height: wrapper.GridView.view.cellWidth-40
+                property string appletPlugin : pluginName
 
                 Plasma.IconWidget {
                     minimumIconSize : "64x64"
@@ -44,8 +47,8 @@ Rectangle {
                     
                     anchors.fill: parent
                     onClicked : {
-                        gridView.currentIndex = index
-                        gridView.clicked()
+                        appletsView.currentIndex = index
+                        appletsView.addAppletRequested()
                     }
                 }
             }

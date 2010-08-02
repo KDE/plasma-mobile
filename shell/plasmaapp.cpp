@@ -90,8 +90,7 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0), m_nextContainment(0),
-      m_trayContainment(0),
-      m_widgetsExplorer(0)
+      m_trayContainment(0)
 {
     setupBindings();
     KGlobal::locale()->insertCatalog("libplasma");
@@ -462,11 +461,13 @@ void PlasmaApp::showWidgetsExplorer()
 {
     if (!m_widgetsExplorer) {
         m_widgetsExplorer = new MobileWidgetsExplorer(0);
-        m_widgetsExplorer->setZValue(1000);
-        m_corona->addItem(m_widgetsExplorer);
+        m_widgetsExplorer.data()->setZValue(1000);
+        m_corona->addItem(m_widgetsExplorer.data());
     }
-    m_widgetsExplorer->setGeometry(m_mainView->sceneRect());
-    m_widgetsExplorer->show();
+
+    m_widgetsExplorer.data()->setContainment(m_currentContainment);
+    m_widgetsExplorer.data()->setGeometry(m_mainView->sceneRect());
+    m_widgetsExplorer.data()->show();
 }
 
 void PlasmaApp::containmentDestroyed(QObject *object)

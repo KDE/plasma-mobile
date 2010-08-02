@@ -55,6 +55,8 @@ PlasmaAppletItem::PlasmaAppletItem(PlasmaAppletItemModel *model,
     attrs.insert("icon", static_cast<QIcon>(icon));
     setIcon(icon);
     setData(attrs);
+
+    setData(info.pluginName(), PlasmaAppletItemModel::PluginNameRole);
 }
 
 QString PlasmaAppletItem::pluginName() const
@@ -170,6 +172,13 @@ PlasmaAppletItemModel::PlasmaAppletItemModel(QObject * parent)
     m_configGroup = KConfigGroup(&config, "Applet Browser");
     m_favorites = m_configGroup.readEntry("favorites").split(',');
     connect(KSycoca::self(), SIGNAL(databaseChanged(QStringList)), this, SLOT(populateModel(QStringList)));
+
+    //This is to make QML that is understand it
+    QHash<int, QByteArray> newRoleNames = roleNames();
+    newRoleNames[PluginNameRole] = "pluginName";
+    setRoleNames(newRoleNames);
+
+    setSortRole(Qt::DisplayRole);
 }
 
 void PlasmaAppletItemModel::populateModel(const QStringList &whatChanged)

@@ -100,7 +100,7 @@ private:
     Plasma::Containment *m_trayContainment;
     QHash<int, Plasma::Containment*> m_containments;
 
-    MobileWidgetsExplorer *m_widgetsExplorer;
+    QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
 };
 
 #endif // multiple inclusion guard

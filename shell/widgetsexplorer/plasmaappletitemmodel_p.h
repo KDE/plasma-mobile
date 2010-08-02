@@ -74,6 +74,10 @@ class PlasmaAppletItemModel : public QStandardItemModel
     Q_OBJECT
 
 public:
+    enum Roles {
+        PluginNameRole = Qt::UserRole+1
+    };
+
     explicit PlasmaAppletItemModel(QObject * parent = 0);
 
     QStringList mimeTypes() const;
