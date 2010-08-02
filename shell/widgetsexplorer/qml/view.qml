@@ -10,7 +10,7 @@ Rectangle {
         id: appletsView
         objectName: "appletsView"
 
-        width: (parent.width/4)*3
+        width: parent.width
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -57,17 +57,25 @@ Rectangle {
                         detailsAuthor.text = "<b>Author:</b> "+author
                         detailsEmail.text = "<b>Email:</b> "+email
                         detailsLicense.text = "<b>License:</b> "+license
+
+                        appletsView.width = (appletsView.parent.width/4)*3;
+                        infoPanel.state = "shown"
                     }
                 }
             }
         }
     }
     Rectangle {
+        id: infoPanel
+
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.topMargin: 4
-        anchors.bottomMargin: closeButton.height
         anchors.rightMargin: 4
+
+        state: "hidden"
+
+        x: parent.width
 
         width: parent.width/4;
         
@@ -77,15 +85,16 @@ Rectangle {
             id: detailsIcon
             y: 32
             anchors.horizontalCenter: parent.horizontalCenter
-            minimumIconSize : "64x64"
-            maximumIconSize : "64x64"
-            preferredIconSize : "64x64"
+            minimumIconSize : "128x128"
+            maximumIconSize : "128x128"
+            preferredIconSize : "128x128"
         }
 
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: detailsIcon.bottom
+            anchors.leftMargin: 8
             spacing: 8
 
             Text {
@@ -152,12 +161,38 @@ Rectangle {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.bottomMargin: 32
+            anchors.leftMargin: 4
+            anchors.rightMargin: 4
+            anchors.bottomMargin: closeButton.height + 32
 
             text: "Add widget"
             onClicked : appletsView.addAppletRequested()
         }
+        
+        states: [
+            State {
+                name: "shown"
+                PropertyChanges {
+                    target: infoPanel;
+                    x: infoPanel.parent.width - infoPanel.width
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                from: "hidden"
+                to:"shown"
+
+                NumberAnimation {
+                    properties: "x";
+                    duration: 300;
+                    easing.type: "OutQuad";
+                }
+            }
+        ]
     }
+
 
     Plasma.PushButton {
         id: closeButton

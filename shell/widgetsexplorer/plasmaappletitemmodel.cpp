@@ -56,7 +56,15 @@ PlasmaAppletItem::PlasmaAppletItem(PlasmaAppletItemModel *model,
     setIcon(icon);
     setData(attrs);
 
+    //QML can't disassemble attrs :/
     setData(info.pluginName(), PlasmaAppletItemModel::PluginNameRole);
+    setData(info.comment(), PlasmaAppletItemModel::DescriptionRole);
+    setData(info.category().toLower(), PlasmaAppletItemModel::CategoryRole);
+    setData(info.fullLicense().name(KAboutData::FullName), PlasmaAppletItemModel::LicenseRole);
+    setData(info.website(), PlasmaAppletItemModel::WebsiteRole);
+    setData(info.version(), PlasmaAppletItemModel::VersionRole);
+    setData(info.author(), PlasmaAppletItemModel::AuthorRole);
+    setData(info.email(), PlasmaAppletItemModel::EmailRole);
 }
 
 QString PlasmaAppletItem::pluginName() const
@@ -176,6 +184,14 @@ PlasmaAppletItemModel::PlasmaAppletItemModel(QObject * parent)
     //This is to make QML that is understand it
     QHash<int, QByteArray> newRoleNames = roleNames();
     newRoleNames[PluginNameRole] = "pluginName";
+    newRoleNames[DescriptionRole] = "description";
+    newRoleNames[CategoryRole] = "category";
+    newRoleNames[LicenseRole] = "license";
+    newRoleNames[WebsiteRole] = "website";
+    newRoleNames[VersionRole] = "version";
+    newRoleNames[AuthorRole] = "author";
+    newRoleNames[EmailRole] = "email";
+
     setRoleNames(newRoleNames);
 
     setSortRole(Qt::DisplayRole);

@@ -75,7 +75,14 @@ class PlasmaAppletItemModel : public QStandardItemModel
 
 public:
     enum Roles {
-        PluginNameRole = Qt::UserRole+1
+        PluginNameRole = Qt::UserRole+1,
+        DescriptionRole = Qt::UserRole+2,
+        CategoryRole = Qt::UserRole+3,
+        LicenseRole = Qt::UserRole+4,
+        WebsiteRole = Qt::UserRole+5,
+        VersionRole = Qt::UserRole+6,
+        AuthorRole = Qt::UserRole+7,
+        EmailRole = Qt::UserRole+8,
     };
 
     explicit PlasmaAppletItemModel(QObject * parent = 0);
