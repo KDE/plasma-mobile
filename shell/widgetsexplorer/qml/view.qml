@@ -14,7 +14,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.topMargin: 32
+        anchors.topMargin: 4
         anchors.bottomMargin: closeButton.height
 
         model: myModel
@@ -51,22 +51,28 @@ Rectangle {
                     onClicked : {
                         appletsView.currentIndex = index
                         detailsIcon.icon = decoration
-                        detailsNameText.text = display
+                        detailsName.text = display
+                        detailsVersion.text = "Version "+version
+                        detailsDescription.text = description
+                        detailsAuthor.text = "<b>Author:</b> "+author
+                        detailsEmail.text = "<b>Email:</b> "+email
+                        detailsLicense.text = "<b>License:</b> "+license
                     }
                 }
             }
         }
     }
-    Item {
+    Rectangle {
         anchors.top: parent.top
-        anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.topMargin: 32
+        anchors.topMargin: 4
         anchors.bottomMargin: closeButton.height
         anchors.rightMargin: 4
 
         width: parent.width/4;
         
+        color: Qt.rgba(0,0,0,0.4)
+
         Plasma.IconWidget {
             id: detailsIcon
             y: 32
@@ -76,34 +82,93 @@ Rectangle {
             preferredIconSize : "64x64"
         }
 
-        Text {
-            id: detailsNameText
-
-            width: parent.width
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
             anchors.top: detailsIcon.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize : 20;
-            wrapMode : Text.Wrap
+            spacing: 8
 
-            color: "white"
+            Text {
+                id: detailsName
+
+                width: parent.width
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pixelSize : 20;
+                wrapMode : Text.Wrap
+
+                color: "white"
+            }
+            
+            Text {
+                id: detailsVersion
+
+                width: parent.width
+                anchors.horizontalCenter: parent.horizontalCenter
+                wrapMode : Text.Wrap
+
+                color: "white"
+            }
+
+            Text {
+                id: detailsDescription
+
+                width: parent.width
+                wrapMode : Text.Wrap
+
+                color: "white"
+            }
+
+
+            Text {
+                id: detailsAuthor
+
+                width: parent.width
+                wrapMode : Text.Wrap
+
+                color: "white"
+            }
+
+            Text {
+                id: detailsEmail
+
+                width: parent.width
+                wrapMode : Text.Wrap
+
+                color: "white"
+            }
+
+            Text {
+                id: detailsLicense
+
+                width: parent.width
+                wrapMode : Text.Wrap
+
+                color: "white"
+            }
+        }
+        
+        Plasma.PushButton {
+            id: addButton
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottomMargin: 32
+
+            text: "Add widget"
+            onClicked : appletsView.addAppletRequested()
         }
     }
 
     Plasma.PushButton {
         id: closeButton
+        width: addButton.width
         anchors.bottom: parent.bottom
         anchors.right: parent.right
+        anchors.rightMargin: 4
+        anchors.bottomMargin: 4
 
         text: "Close"
         onClicked : appletsView.closeRequested()
     }
 
-    Plasma.PushButton {
-        id: addButton
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-
-        text: "Add widget"
-        onClicked : appletsView.addAppletRequested()
-    }
 }
