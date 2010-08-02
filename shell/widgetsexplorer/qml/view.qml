@@ -11,7 +11,7 @@ Rectangle {
 
         anchors.fill: parent
         anchors.topMargin: 32
-        anchors.bottomMargin: 32
+        anchors.bottomMargin: closeButton.height
         anchors.leftMargin: 4
         anchors.rightMargin: 4
 
@@ -53,5 +53,13 @@ Rectangle {
                 }
             }
         }
+    }
+    Plasma.PushButton {
+        id: closeButton
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+
+        text: "Close"
+        onClicked : appletsView.closeRequested()
     }
 }
