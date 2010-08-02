@@ -83,76 +83,81 @@ Rectangle {
 
         Plasma.IconWidget {
             id: detailsIcon
-            y: 32
+            y: 8
             anchors.horizontalCenter: parent.horizontalCenter
             minimumIconSize : "128x128"
             maximumIconSize : "128x128"
             preferredIconSize : "128x128"
         }
 
-        Column {
+        Flickable {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: detailsIcon.bottom
-            anchors.leftMargin: 8
-            spacing: 8
 
-            Text {
-                id: detailsName
+            Column {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 8
+                spacing: 8
 
-                width: parent.width
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize : 20;
-                wrapMode : Text.Wrap
+                Text {
+                    id: detailsName
 
-                color: "white"
-            }
-            
-            Text {
-                id: detailsVersion
+                    width: parent.width
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.pixelSize : 20;
+                    wrapMode : Text.Wrap
 
-                width: parent.width
-                anchors.horizontalCenter: parent.horizontalCenter
-                wrapMode : Text.Wrap
+                    color: "white"
+                }
+                
+                Text {
+                    id: detailsVersion
 
-                color: "white"
-            }
+                    width: parent.width
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    wrapMode : Text.Wrap
 
-            Text {
-                id: detailsDescription
+                    color: "white"
+                }
 
-                width: parent.width
-                wrapMode : Text.Wrap
+                Text {
+                    id: detailsDescription
 
-                color: "white"
-            }
+                    width: parent.width
+                    wrapMode : Text.Wrap
+
+                    color: "white"
+                }
 
 
-            Text {
-                id: detailsAuthor
+                Text {
+                    id: detailsAuthor
 
-                width: parent.width
-                wrapMode : Text.Wrap
+                    width: parent.width
+                    wrapMode : Text.Wrap
 
-                color: "white"
-            }
+                    color: "white"
+                }
 
-            Text {
-                id: detailsEmail
+                Text {
+                    id: detailsEmail
 
-                width: parent.width
-                wrapMode : Text.Wrap
+                    width: parent.width
+                    wrapMode : Text.Wrap
 
-                color: "white"
-            }
+                    color: "white"
+                }
 
-            Text {
-                id: detailsLicense
+                Text {
+                    id: detailsLicense
 
-                width: parent.width
-                wrapMode : Text.Wrap
+                    width: parent.width
+                    wrapMode : Text.Wrap
 
-                color: "white"
+                    color: "white"
+                }
             }
         }
         
