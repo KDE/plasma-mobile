@@ -28,6 +28,7 @@ qmlRegisterType<Plasma::TextEdit>("Plasma", 0, 1, "TextEdit");
 qmlRegisterType<Plasma::LineEdit>("Plasma", 0, 1, "LineEdit");
 qmlRegisterType<Plasma::PushButton>("Plasma", 0, 1, "PushButton");
 qmlRegisterType<Plasma::Frame>("Plasma", 0, 1, "Frame");
+qmlRegisterType<Plasma::IconWidget>("Plasma", 0, 1, "IconWidget");
 qmlRegisterType<Plasma::Slider>("Plasma", 0, 1, "Slider");
 qmlRegisterType<Plasma::SpinBox>("Plasma", 0, 1, "SpinBox");
 qmlRegisterType<Plasma::WebView>("Plasma", 0, 1, "WebView");

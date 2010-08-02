@@ -31,6 +31,7 @@
 #include <plasma/widgets/pushbutton.h>
 #include <plasma/widgets/svgwidget.h>
 #include <plasma/widgets/frame.h>
+#include <plasma/widgets/iconwidget.h>
 #include <plasma/widgets/webview.h>
 #include <plasma/extender.h>
 #include <plasma/extenderitem.h>
@@ -53,6 +54,7 @@ QML_DECLARE_TYPE(Plasma::Frame)
 QML_DECLARE_TYPE(Plasma::CheckBox)
 QML_DECLARE_TYPE(Plasma::Slider)
 QML_DECLARE_TYPE(Plasma::SpinBox)
+QML_DECLARE_TYPE(Plasma::IconWidget)
 QML_DECLARE_TYPE(Plasma::SvgWidget)
 //QML_DECLARE_TYPE(Plasma::Svg)
 QML_DECLARE_TYPE(Plasma::FrameSvg)
