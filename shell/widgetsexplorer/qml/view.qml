@@ -94,12 +94,19 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: detailsIcon.bottom
-            anchors.bottom: addButton.top
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: addButton.height + 40
+            contentWidth: column.width;
+            contentHeight: column.height
+            interactive : true
+            clip:true
 
             Column {
+                id:column;
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 8
+                
                 spacing: 8
 
                 Text {
@@ -107,7 +114,7 @@ Rectangle {
 
                     width: parent.width
                     anchors.horizontalCenter: parent.horizontalCenter
-                    font.pixelSize : 20;
+                    font.pixelSize : 30;
                     wrapMode : Text.Wrap
 
                     color: "white"
