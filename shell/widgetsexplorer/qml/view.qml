@@ -94,6 +94,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: detailsIcon.bottom
+            anchors.bottom: addButton.top
 
             Column {
                 anchors.left: parent.left
