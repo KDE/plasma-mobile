@@ -462,9 +462,10 @@ void PlasmaApp::showWidgetsExplorer()
 {
     if (!m_widgetsExplorer) {
         m_widgetsExplorer = new MobileWidgetsExplorer(0);
+        m_widgetsExplorer->setZValue(1000);
         m_corona->addItem(m_widgetsExplorer);
     }
-    m_widgetsExplorer->setGeometry(m_corona->containmentForScreen(0)->geometry());
+    m_widgetsExplorer->setGeometry(m_mainView->sceneRect());
     m_widgetsExplorer->show();
 }
 

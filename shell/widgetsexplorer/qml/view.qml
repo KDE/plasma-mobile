@@ -1,5 +1,6 @@
-import MobileLauncher 1.0
+
 import Qt 4.7
+import Plasma 0.1 as Plasma
 
 Rectangle {
     color: Qt.rgba(0,0,0,0.4)
@@ -26,9 +27,8 @@ Rectangle {
                 id: wrapper
                 width: wrapper.GridView.view.cellWidth-40
                 height: wrapper.GridView.view.cellWidth-40
-                property string urlText: url
 
-                ResultWidget {
+                Plasma.IconWidget {
                     minimumIconSize : "64x64"
                     maximumIconSize : "64x64"
                     preferredIconSize : "64x64"
