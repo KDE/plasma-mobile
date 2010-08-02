@@ -91,7 +91,12 @@ void AppletsContainer::relayoutApplet(Plasma::Applet *applet, const QPointF &pos
     int rows = qMax(1, (int)m_containment->size().height() / squareSize);
     const QSizeF maximumAppletSize(m_containment->size().width()/columns, m_containment->size().height()/rows);
 
-    int newIndex = rows * round(pos.y() / maximumAppletSize.height()) + round(pos.x() / maximumAppletSize.width()) - 1;
+    int newIndex;
+    if (pos == QPointF(-1, -1)) {
+        newIndex = m_applets.count();
+    } else {
+        newIndex = rows * round(pos.y() / maximumAppletSize.height()) + round(pos.x() / maximumAppletSize.width()) - 1;
+    }
 
     if (m_startupCompleted) {
         m_applets.removeAll(applet);
