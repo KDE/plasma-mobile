@@ -20,7 +20,7 @@ Rectangle {
         model: myModel
         flow: GridView.LeftToRight
         snapMode: GridView.SnapToRow
-        cellWidth: width/6
+        cellWidth: width/5
         cellHeight: height/4
         clip: true
         signal addAppletRequested

@@ -59,7 +59,6 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
         QDeclarativeContext *ctxt = m_qmlWidget->engine()->rootContext();
         if (ctxt) {
             ctxt->setContextProperty("myModel", m_appletsModel);
-            m_appletsModel->sort(0);
         }
         QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_qmlWidget->rootObject());
         if (item) {

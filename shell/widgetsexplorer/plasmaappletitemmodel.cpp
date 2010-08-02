@@ -226,6 +226,7 @@ void PlasmaAppletItemModel::populateModel(const QStringList &whatChanged)
 
         appendRow(new PlasmaAppletItem(this, info, flags));
     }
+    sort(0);
 }
 
 void PlasmaAppletItemModel::setRunningApplets(const QHash<QString, int> &apps)
