@@ -5,7 +5,8 @@ Rectangle {
     color: Qt.rgba(0,0,0,0.4)
 
     GridView {
-        id: gridView
+        id: appsView
+        objectName: "appsView"
 
         anchors.fill: parent
         anchors.topMargin: 32
@@ -44,8 +45,8 @@ Rectangle {
                     
                     anchors.fill: parent
                     onClicked : {
-                        gridView.currentIndex = index
-                        gridView.clicked()
+                        appsView.currentIndex = index
+                        appsView.clicked()
                     }
                 }
             }

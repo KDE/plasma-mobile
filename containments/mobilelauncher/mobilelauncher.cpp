@@ -47,7 +47,8 @@ QML_DECLARE_TYPE(ResultWidget)
 
 
 MobileLauncher::MobileLauncher(QObject *parent, const QVariantList &args)
-    : Containment(parent, args)
+    : Containment(parent, args),
+      m_view(0)
 {
     setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile launcher";
@@ -83,8 +84,13 @@ void MobileLauncher::init()
             ctxt->setContextProperty("myModel", m_runnerModel);
         }
         QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_qmlWidget->rootObject());
+
         if (item) {
-            connect(item, SIGNAL(clicked()), this, SLOT(itemActivated()));
+            m_view = item->findChild<QDeclarativeItem*>("appsView");
+
+            if (m_view) {
+                connect(m_view, SIGNAL(clicked()), this, SLOT(itemActivated()));
+            }
         }
     }
     Plasma::Corona *c = corona();
@@ -103,9 +109,8 @@ void MobileLauncher::updateActivity(int wasScreen, int isScreen, Plasma::Contain
 
 void MobileLauncher::itemActivated()
 {
-    QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_qmlWidget->rootObject());
-    if (item) {
-        item = item->property("currentItem").value<QDeclarativeItem *>();
+    if (m_view) {
+        QDeclarativeItem *item = m_view->property("currentItem").value<QDeclarativeItem *>();
         if (item) {
             QString url = item->property("urlText").toString();
             kWarning() << "URL clicked" << url;

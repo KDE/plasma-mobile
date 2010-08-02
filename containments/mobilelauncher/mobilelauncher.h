@@ -24,6 +24,7 @@
 #include <Plasma/Containment>
 #include <Plasma/QueryMatch>
 
+class QDeclarativeItem;
 class QStandardItemModel;
 
 class KRunnerModel;
@@ -48,6 +49,7 @@ protected Q_SLOTS:
 
 private:
     Plasma::QmlWidget *m_qmlWidget;
+    QDeclarativeItem *m_view;
 
     KRunnerModel *m_runnerModel;
 };
