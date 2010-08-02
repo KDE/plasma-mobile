@@ -51,6 +51,7 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
     lay->addItem(m_qmlWidget);
 
     m_appletsModel = new PlasmaAppletItemModel(this);
+    m_appletsModel->setApplication(QString());
 
     m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/mobilewidgetsexplorer/view.qml"));
 
@@ -58,6 +59,7 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
         QDeclarativeContext *ctxt = m_qmlWidget->engine()->rootContext();
         if (ctxt) {
             ctxt->setContextProperty("myModel", m_appletsModel);
+            m_appletsModel->sort(0);
         }
         QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_qmlWidget->rootObject());
         if (item) {
