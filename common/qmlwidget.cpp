@@ -135,6 +135,7 @@ QmlWidget::QmlWidget(QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
       d(new QmlWidgetPrivate(this))
 {
+    setFlag(QGraphicsItem::ItemHasNoContents);
 }
 
 QmlWidget::~QmlWidget()
