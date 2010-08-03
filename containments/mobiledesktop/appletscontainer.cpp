@@ -43,7 +43,7 @@ AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *c
    m_appletsOverlay(0),
    m_startupCompleted(false)
 {
-
+    setFlag(QGraphicsItem::ItemHasNoContents);
     QAction *a = containment->action("add widgets");
     if (a) {
         m_addWidgetsButton = new Plasma::IconWidget(this);
