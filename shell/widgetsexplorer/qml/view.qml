@@ -20,8 +20,8 @@ Rectangle {
         model: myModel
         flow: GridView.LeftToRight
         snapMode: GridView.SnapToRow
-        cellWidth: width/5
-        cellHeight: height/4
+        cellWidth: width/4
+        cellHeight: height/3
         clip: true
         signal addAppletRequested
         signal closeRequested
@@ -38,7 +38,6 @@ Rectangle {
                     maximumIconSize : "64x64"
                     preferredIconSize : "64x64"
                     minimumSize.width: wrapper.width
-                    minimumSize.height: wrapper.height
                     id: resultwidget
                     icon: decoration
                     text: display
@@ -59,6 +58,7 @@ Rectangle {
                         detailsLicense.text = "<b>License:</b> "+license
 
                         appletsView.width = (appletsView.parent.width/4)*3;
+                        appletsView.cellWidth = appletsView.width/3
                         infoPanel.state = "shown"
                     }
                 }
@@ -95,8 +95,8 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: detailsIcon.bottom
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: addButton.height + 40
-            contentWidth: column.width;
+            anchors.bottomMargin: addButton.height + closeButton.height + 16
+            contentWidth: parent.width;
             contentHeight: column.height
             interactive : true
             clip:true
@@ -176,7 +176,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.leftMargin: 4
             anchors.rightMargin: 4
-            anchors.bottomMargin: closeButton.height + 32
+            anchors.bottomMargin: closeButton.height + 16
 
             text: "Add widget"
             onClicked : appletsView.addAppletRequested()
