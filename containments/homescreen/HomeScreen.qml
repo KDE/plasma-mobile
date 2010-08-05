@@ -35,8 +35,7 @@ Item {
         id : flipable;
         objectName: "containments";
         property int angle: 0;
-        width : 800;
-        height : 480;
+        anchors.fill: parent
         state : "Front360";
         property bool flipable : true;
         property bool transforming : false;
