@@ -128,3 +128,26 @@ plugin=org.kde.mobilesystemtray
 screen=0
 zvalue=10
 
+[Containments][8][Applets][10]
+geometry=16.8571428571429,4,28.2857142857143,24
+immutability=1
+plugin=notifications
+zvalue=0
+
+[Containments][8][Applets][10][Configuration][ExtenderItems][1]
+extenderIconName=dialog-information
+extenderItemName=jobGroup
+extenderItemPosition=0
+isGroup=true
+sourceAppletId=10
+sourceAppletPluginName=notifications
+
+[Containments][8][Applets][10][PopupApplet]
+DialogHeight=95
+DialogWidth=394
+
+[Containments][8][Applets][9]
+geometry=49.1428571428571,4,24,24
+immutability=1
+plugin=notifier
+zvalue=0

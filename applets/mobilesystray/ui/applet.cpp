@@ -90,7 +90,7 @@ void MobileTray::init()
         setFormFactor(Plasma::Horizontal);
     }
 
-    m_manager->loadApplets(this);
+/*    m_manager->loadApplets(this);
 
     QStringList applets = m_manager->applets(this);
     if (!applets.contains("org.kde.networkmanagement")) {
@@ -116,7 +116,7 @@ void MobileTray::init()
         }
         engines->unloadEngine("powermanagement");
     }
-
+*/
     foreach(Task *task, m_manager->tasks()) {
         addTask(task);
     }
@@ -171,18 +171,29 @@ void MobileTray::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void MobileTray::saveContents(KConfigGroup &group) const
+/*void MobileTray::saveContents(KConfigGroup &group) const
 {
     Q_UNUSED(group)
 
     //we skip the default Contaiment save, we don't want to directly save applets
     //another option by the way is to get rid of the plasmoid protocol and just load plasmoids as standard applets
 }
-
+*/
 void MobileTray::restoreContents(KConfigGroup &group)
 {
-    Q_UNUSED(group)
-    //purposefully broken as saveContents
+    KConfigGroup applets(&group, "Applets");
+
+    QList<KConfigGroup> appletConfigs;
+    foreach (const QString &appletGroup, applets.groupList()) {
+        KConfigGroup appletConfig(&applets, appletGroup);
+        QString plugin = appletConfig.readEntry("plugin", QString());
+
+        if (plugin.isEmpty()) {
+            continue;
+        }
+
+        m_manager->addApplet(plugin, this);
+    }
 }
 
 void MobileTray::resizeContents() {

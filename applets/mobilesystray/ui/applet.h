@@ -68,7 +68,7 @@ public slots:
 
 protected:
     //reimp from Contaiment
-    void saveContents(KConfigGroup &group) const;
+    //void saveContents(KConfigGroup &group) const;
     void restoreContents(KConfigGroup &group);
     enum Mode { PASSIVE, ACTIVE };
     Mode m_mode;
