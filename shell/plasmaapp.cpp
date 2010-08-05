@@ -90,7 +90,8 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0), m_nextContainment(0),
-      m_trayContainment(0)
+      m_trayContainment(0),
+      m_isDesktop(false)
 {
     setupBindings();
     KGlobal::locale()->insertCatalog("libplasma");
@@ -135,7 +136,7 @@ PlasmaApp::PlasmaApp()
         m_mainView->showFullScreen();
     }
 
-    //setIsDesktop(isDesktop);
+    setIsDesktop(isDesktop);
     m_mainView->setFixedSize(width, height);
     m_mainView->move(0,0);
 
@@ -179,6 +180,22 @@ void PlasmaApp::cleanup()
 
     //TODO: This manual sync() should not be necessary?
     syncConfig();
+}
+
+void PlasmaApp::setIsDesktop(bool isDesktop)
+{
+    m_isDesktop = isDesktop;
+
+    if (isDesktop) {
+        KWindowSystem::setType(m_mainView->winId(), NET::Normal);
+        m_mainView->setWindowFlags(m_mainView->windowFlags() | Qt::FramelessWindowHint);
+        KWindowSystem::setOnAllDesktops(m_mainView->winId(), true);
+        m_mainView->show();
+    } else {
+        m_mainView->setWindowFlags(m_mainView->windowFlags() & ~Qt::FramelessWindowHint);
+        KWindowSystem::setOnAllDesktops(m_mainView->winId(), false);
+        KWindowSystem::setType(m_mainView->winId(), NET::Normal);
+    }
 }
 
 void PlasmaApp::syncConfig()

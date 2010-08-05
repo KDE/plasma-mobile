@@ -61,6 +61,7 @@ public:
     PlasmaApp();
 
 protected:
+    void setIsDesktop(bool isDesktop);
     void setupHomeScreen();
     void setupContainment(Plasma::Containment *containment);
     void changeActivity(Plasma::Containment *containment);
@@ -101,6 +102,7 @@ private:
     QHash<int, Plasma::Containment*> m_containments;
 
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
+    bool m_isDesktop;
 };
 
 #endif // multiple inclusion guard
