@@ -38,6 +38,8 @@ public:
        : Plasma::ScrollWidget(parent)
     {
         setFlag(QGraphicsItem::ItemHasNoContents, false);
+        setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     }
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget=0)
