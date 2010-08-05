@@ -71,7 +71,8 @@ class CachingEffect : public QGraphicsEffect
         QPixmap pixmap = sourcePixmap(Qt::LogicalCoordinates, &point);
         //maybe we are in a view with save and restore disabled..
         p->setCompositionMode(QPainter::CompositionMode_Source);
-        p->drawPixmap(QRect(0, 0, 800, 480), pixmap, QRect(-point, QSize(800, 480)));
+
+        p->drawPixmap(point, pixmap);
         p->setCompositionMode(QPainter::CompositionMode_SourceOver);
     }
 };
