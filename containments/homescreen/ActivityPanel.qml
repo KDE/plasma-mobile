@@ -30,12 +30,18 @@ Item {
 
     Image {
         id: activityimage;
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        fillMode: Image.Tile
         source: "images/activitypanel.png";
     }
 
     Image {
         id: stars;
+        anchors.left: parent.left;
+        anchors.right: parent.right;
         source: "images/stars.png";
+        fillMode: Image.Tile
         y: activityimage.height - stars.height;
     }
 
@@ -99,7 +105,7 @@ Item {
         }
 
         onReleased: {
-            var child = shortcuts.childAt(mouse.x, mouse.y + hintregion.y);
+            var child = shortcuts.childAt(mouse.x-shortcuts.x, mouse.y + hintregion.y-shortcuts.y);
             if (passClicks && child) {
                 if (activeChild == child) {
                     activitypanel.flipRequested(true);

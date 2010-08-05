@@ -340,9 +340,9 @@ Item {
         id: activitypanel;
         objectName: "activitypanel";
 
-        anchors.left: homescreen.left;
-        anchors.right: homescreen.right;
-        y: homescreen.height - 160;
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        y: parent.height - height;
     }
 
     Rectangle {
