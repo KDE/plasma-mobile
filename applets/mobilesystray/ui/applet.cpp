@@ -199,6 +199,7 @@ void MobileTray::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
     m_background->resizeFrame(event->newSize());
     m_scrollWidget->resize(event->newSize());
+    m_scrollWidget->setPreferredSize(event->newSize());
     resizeContents();
     if (initDone) { // only do the following if init() is done - else will crash!
         if (event->newSize().width() > WIDTH_THRESHOLD && m_mode == PASSIVE) {
