@@ -68,14 +68,11 @@ Item {
         height: homescreen.height;
     }
 
-
-    Rectangle {
+    SystrayPanel {
         id: systraypanel;
         objectName: "systraypanel";
-        color: "black"
+
         anchors.horizontalCenter: homescreen.horizontalCenter;
-        width: 200
-        height: 24
         y: 0;
     }
 
