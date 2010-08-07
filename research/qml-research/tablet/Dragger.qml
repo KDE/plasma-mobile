@@ -115,7 +115,7 @@ Image {
                     dragger.state = dragger.oldState
                 }
             } else if (dragger.location == "TopEdge") {
-                if (dragger.y > 2*(homescreen.height/3)) {
+                if (dragger.y > (homescreen.height/3)) {
                     if (dragger.oldState == "hidden") {
                         dragger.state = "show"
                     } else {
@@ -125,7 +125,7 @@ Image {
                     dragger.state = dragger.oldState
                 }
             } else if (dragger.location == "LeftEdge") {
-                if (dragger.x < 2*(homescreen.width/3)) {
+                if (dragger.x > (homescreen.width/3)) {
                     if (dragger.oldState == "hidden") {
                         dragger.state = "show"
                     } else {
@@ -136,7 +136,7 @@ Image {
                 }
             //RightEdge
             } else {
-                if (dragger.x > 2*(homescreen.width/3)) {
+                if (dragger.x < 2*(homescreen.width/3)) {
                     if (dragger.oldState == "hidden") {
                         dragger.state = "show"
                     } else {
@@ -173,21 +173,17 @@ Image {
             }
             PropertyChanges {
                 target: targetItem;
-                y: if (dragger.location == "BottomEdge") {
-                       dragger.y + dragger.height - targetItem.height;
-                   } else if (dragger.location == "TopEdge") {
-                       dragger.y - targetItem.height;
+                y: if (dragger.location == "BottomEdge" || dragger.location == "TopEdge") {
+                       0
                    //Left,RightEdge
                    } else {
                        targetItem.y;
                    }
                 x: if (dragger.location == "BottomEdge" || dragger.location == "TopEdge") {
                        targetItem.x;
-                   } else if (dragger.location == "LeftEdge") {
-                       dragger.x - targetItem.width;
-                   //RightEdge
+                   //Left, RightEdge
                    } else {
-                       dragger.x + dragger.width;
+                       0;
                    }
             }
         },
@@ -253,13 +249,42 @@ Image {
             PropertyChanges {
                 target: dragger;
                 y: dragger.y;
+                x: dragger.x;
             }
             PropertyChanges {
                 target: targetItem;
-                y: if (dragger.oldState == "show")
-                       dragger.y + dragger.height - targetItem.height
-                   else
-                       dragger.y + dragger.height
+                y: if (dragger.location == "BottomEdge") {
+                       if (dragger.oldState == "show") {
+                           dragger.y + dragger.height - targetItem.height
+                       } else {
+                           dragger.y + dragger.height
+                       }
+                   } else if (dragger.location == "TopEdge") {
+                       if (dragger.oldState == "show") {
+                           dragger.y
+                       } else {
+                           dragger.y - targetItem.height
+                       }
+                   //Left/RightEdge
+                   } else {
+                       targetItem.y
+                   }
+                x: if (dragger.location == "BottomEdge" || dragger.location == "TopEdge") {
+                       targetItem.x
+                   } else if (dragger.location == "LeftEdge") {
+                       if (dragger.oldState == "show") {
+                           dragger.x
+                       } else {
+                           dragger.x - targetItem.width
+                       }
+                   //RightEdge
+                   } else {
+                       if (dragger.oldState == "show") {
+                           dragger.x + dragger.width - targetItem.width
+                       } else {
+                           dragger.x + dragger.width
+                       }
+                   }
             }
         }
     ]
