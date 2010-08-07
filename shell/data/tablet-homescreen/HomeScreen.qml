@@ -31,10 +31,9 @@ Item {
     signal transitionFinished();
     state : "Normal";
 
-    Image {
+    Item {
         id: mainSlot;
         objectName: "mainSlot";
-        source: "images/activity1.png"
         x: 0;
         y: 0;
         width: homescreen.width;
@@ -42,29 +41,26 @@ Item {
         transformOrigin : Item.Center;
     }
 
-    Image {
+    Item {
         id : spareSlotPrev;
         objectName: "spareSlotPrev";
-        source: "images/activity2.jpg"
         x: -homescreen.width;
         y: 0;
         width: homescreen.width;
         height: homescreen.height;
     }
 
-    Image {
+    Item {
         id : spareSlotNext;
         objectName: "spareSlotNext";
-        source: "images/activity3.jpg"
         x: homescreen.width;
         y: 0;
         width: homescreen.width;
         height: homescreen.height;
     }
 
-    Image {
+    Item {
         id: alternateSlot;
-        source: "images/activity0.png"
         objectName: "alternateSlot";
         x: 0;
         y: alternateDrag.y + alternateDrag.height;

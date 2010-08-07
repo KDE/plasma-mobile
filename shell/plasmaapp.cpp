@@ -247,8 +247,10 @@ void PlasmaApp::setupHomeScreen()
 
     QDeclarativeItem *panelItems = m_panel->findChild<QDeclarativeItem*>("panelitems");
 
-    foreach(QObject *item, panelItems->children()) {
-        connect(item, SIGNAL(clicked()), this, SLOT(changeActivity()));
+    if (panelItems) {
+        foreach(QObject *item, panelItems->children()) {
+            connect(item, SIGNAL(clicked()), this, SLOT(changeActivity()));
+        }
     }
 }
 
