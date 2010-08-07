@@ -41,19 +41,24 @@ Item {
         transformOrigin : Item.Center;
     }
 
-    Item {
-        id : spareSlotPrev;
-        objectName: "spareSlotPrev";
-        x: -homescreen.width;
-        y: 0;
-        width: homescreen.width;
-        height: homescreen.height;
+    Dragger {
+        id: prevDrag
+
+        location: "LeftEdge"
+        targetItem: spareSlot
+    }
+
+    Dragger {
+        id: nextDrag
+
+        location: "RightEdge"
+        targetItem: spareSlot
     }
 
     Item {
-        id : spareSlotNext;
-        objectName: "spareSlotNext";
-        x: homescreen.width;
+        id : spareSlot;
+        objectName: "spareSlot";
+        x: -homescreen.width;
         y: 0;
         width: homescreen.width;
         height: homescreen.height;
@@ -81,20 +86,6 @@ Item {
 
         location: "BottomEdge"
         targetItem: alternateSlot
-    }
-
-    Dragger {
-        id: prevDrag
-
-        location: "LeftEdge"
-        targetItem: spareSlotPrev
-    }
-
-    Dragger {
-        id: nextDrag
-
-        location: "RightEdge"
-        targetItem: spareSlotNext
     }
 
 
