@@ -42,20 +42,20 @@ Item {
         transformOrigin : Item.Center;
     }
 
-    Rectangle {
+    Image {
         id : spareSlotPrev;
         objectName: "spareSlotPrev";
-        color: "green"
+        source: "images/activity2.jpg"
         x: -homescreen.width;
         y: 0;
         width: homescreen.width;
         height: homescreen.height;
     }
 
-    Rectangle {
+    Image {
         id : spareSlotNext;
         objectName: "spareSlotNext";
-        color: "blue"
+        source: "images/activity3.jpg"
         x: homescreen.width;
         y: 0;
         width: homescreen.width;
