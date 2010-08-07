@@ -85,6 +85,23 @@ Item {
 
     Dragger {
         id: alternateDrag
+
+        location: "BottomEdge"
+        targetItem: alternateSlot
+    }
+
+    Dragger {
+        id: prevDrag
+
+        location: "LeftEdge"
+        targetItem: spareSlotPrev
+    }
+
+    Dragger {
+        id: nextDrag
+
+        location: "RightEdge"
+        targetItem: spareSlotNext
     }
 
 

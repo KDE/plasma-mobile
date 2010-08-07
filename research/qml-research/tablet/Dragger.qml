@@ -21,20 +21,56 @@ import Qt 4.7
 
 
 Image {
-    id: alternateDrag;
-    objectName: "alternateDrag";
+    id: dragger;
+    objectName: "dragger";
     source: "images/hint.png"
     state: "hidden"
 
     height: 35
     width: 103
-    anchors.horizontalCenter: parent.horizontalCenter;
+    
     y: parent.height - height;
 
     property string oldState
+    property string location
+    property Item targetItem
+
+    onLocationChanged: {
+        //dragger.anchors.horizontalCenter = ''
+        if (location == "BottomEdge") {
+            dragger.source= "images/hint.png"
+            dragger.height= 35
+            dragger.width= 103
+            dragger.anchors.horizontalCenter = homescreen.horizontalCenter;
+
+            dragger.y = homescreen.height - dragger.height;
+        } else if (location == "TopEdge") {
+            dragger.source= "images/hint.png"
+            dragger.height= 35
+            dragger.width= 103
+            dragger.anchors.horizontalCenter = homescreen.horizontalCenter;
+
+            dragger.y = 0;
+        } else if (location == "LeftEdge") {
+            dragger.source= "images/hint-vertical.png"
+            dragger.height= 103
+            dragger.width= 35
+            dragger.anchors.verticalCenter = homescreen.verticalCenter;
+
+            dragger.x = 0;
+        //RightEdge
+        } else {
+            dragger.source= "images/hint-vertical.png"
+            dragger.height= 103
+            dragger.width= 35
+            dragger.anchors.verticalCenter = homescreen.verticalCenter;
+
+            dragger.x = homescreen.width - dragger.width;
+        } 
+    }
 
     MouseArea {
-        id: alternateDragRegion;
+        id: draggerRegion;
 
         x: - 32 / 2;
         y: - 32 / 2;
@@ -47,19 +83,19 @@ Image {
         drag.maximumY: homescreen.height-parent.height;
 
         onPressed: {
-            alternateDrag.oldState = alternateDrag.state
-            alternateDrag.state = "dragging"
+            dragger.oldState = dragger.state
+            dragger.state = "dragging"
         }
 
         onReleased: {
-            if (alternateDrag.y < 2*(homescreen.height/3)) {
-                if (alternateDrag.oldState == "hidden") {
-                    alternateDrag.state = "show"
+            if (dragger.y < 2*(homescreen.height/3)) {
+                if (dragger.oldState == "hidden") {
+                    dragger.state = "show"
                 } else {
-                    alternateDrag.state = "hidden"
+                    dragger.state = "hidden"
                 }
             } else {
-                alternateDrag.state = alternateDrag.oldState
+                dragger.state = dragger.oldState
             }
         }
     }
@@ -68,37 +104,37 @@ Image {
         State {
             name: "show";
             PropertyChanges {
-                target: alternateDrag;
-                y: parent.height - alternateDrag.height;
+                target: dragger;
+                y: parent.height - dragger.height;
             }
             PropertyChanges {
-                target: alternateSlot;
-                y: alternateDrag.y + alternateDrag.height - alternateSlot.height;
+                target: targetItem;
+                y: dragger.y + dragger.height - targetItem.height;
             }
         },
         State {
             name: "hidden";
             PropertyChanges {
-                target: alternateDrag;
-                y: parent.height - alternateDrag.height;
+                target: dragger;
+                y: parent.height - dragger.height;
             }
             PropertyChanges {
-                target: alternateSlot;
-                y: -alternateSlot.height
+                target: targetItem;
+                y: -targetItem.height
             }
         },
         State {
             name: "dragging";
             PropertyChanges {
-                target: alternateDrag;
-                y: alternateDrag.y;
+                target: dragger;
+                y: dragger.y;
             }
             PropertyChanges {
-                target: alternateSlot;
-                y: if (alternateDrag.oldState == "show")
-                        alternateDrag.y + alternateDrag.height - alternateSlot.height
+                target: targetItem;
+                y: if (dragger.oldState == "show")
+                        dragger.y + dragger.height - targetItem.height
                     else
-                        alternateDrag.y + alternateDrag.height
+                        dragger.y + dragger.height
             }
         }
     ]
@@ -109,13 +145,13 @@ Image {
             to: "hidden";
             ParallelAnimation {
                 PropertyAnimation {
-                    targets: alternateDrag;
+                    targets: dragger;
                     properties: "y";
                     duration: 400;
                     easing.type: "InOutCubic";
                 }
                 PropertyAnimation {
-                    targets: alternateSlot;
+                    targets: targetItem;
                     properties: "y";
                     duration: 400;
                     easing.type: "InOutCubic";
@@ -127,13 +163,13 @@ Image {
             to: "show";
             ParallelAnimation {
                 PropertyAnimation {
-                    targets: alternateDrag;
+                    targets: dragger;
                     properties: "y";
                     duration: 400;
                     easing.type: "InOutCubic";
                 }
                 PropertyAnimation {
-                    targets: alternateSlot;
+                    targets: targetItem;
                     properties: "y";
                     duration: 400;
                     easing.type: "InOutCubic";
