@@ -71,7 +71,7 @@ Item {
                 height: homescreen.height;
             }
         }
-        back: Rectangle {
+        back: Item {
             id: alternateSlot;
             objectName: "alternateSlot";
 
