@@ -104,14 +104,47 @@ Image {
         }
 
         onReleased: {
-            if (dragger.y < 2*(homescreen.height/3)) {
-                if (dragger.oldState == "hidden") {
-                    dragger.state = "show"
+            if (dragger.location == "BottomEdge") {
+                if (dragger.y < 2*(homescreen.height/3)) {
+                    if (dragger.oldState == "hidden") {
+                        dragger.state = "show"
+                    } else {
+                        dragger.state = "hidden"
+                    }
                 } else {
-                    dragger.state = "hidden"
+                    dragger.state = dragger.oldState
                 }
+            } else if (dragger.location == "TopEdge") {
+                if (dragger.y > 2*(homescreen.height/3)) {
+                    if (dragger.oldState == "hidden") {
+                        dragger.state = "show"
+                    } else {
+                        dragger.state = "hidden"
+                    }
+                } else {
+                    dragger.state = dragger.oldState
+                }
+            } else if (dragger.location == "LeftEdge") {
+                if (dragger.x < 2*(homescreen.width/3)) {
+                    if (dragger.oldState == "hidden") {
+                        dragger.state = "show"
+                    } else {
+                        dragger.state = "hidden"
+                    }
+                } else {
+                    dragger.state = dragger.oldState
+                }
+            //RightEdge
             } else {
-                dragger.state = dragger.oldState
+                if (dragger.x > 2*(homescreen.width/3)) {
+                    if (dragger.oldState == "hidden") {
+                        dragger.state = "show"
+                    } else {
+                        dragger.state = "hidden"
+                    }
+                } else {
+                    dragger.state = dragger.oldState
+                }
             }
         }
     }
@@ -121,11 +154,41 @@ Image {
             name: "show";
             PropertyChanges {
                 target: dragger;
-                y: parent.height - dragger.height;
+                y: if (dragger.location == "BottomEdge") {
+                       parent.height - dragger.height;
+                   } else if (dragger.location == "TopEdge") {
+                       0;
+                   //Right, LeftEdge
+                   } else {
+                       dragger.y;
+                   }
+                x: if (dragger.location == "BottomEdge" || dragger.location == "TopEdge") {
+                       dragger.x;
+                   } else if (dragger.location == "LeftEdge") {
+                       0;
+                   //RightEdge
+                   } else {
+                       parent.width - dragger.width;
+                   }
             }
             PropertyChanges {
                 target: targetItem;
-                y: dragger.y + dragger.height - targetItem.height;
+                y: if (dragger.location == "BottomEdge") {
+                       dragger.y + dragger.height - targetItem.height;
+                   } else if (dragger.location == "TopEdge") {
+                       dragger.y - targetItem.height;
+                   //Left,RightEdge
+                   } else {
+                       targetItem.y;
+                   }
+                x: if (dragger.location == "BottomEdge" || dragger.location == "TopEdge") {
+                       targetItem.x;
+                   } else if (dragger.location == "LeftEdge") {
+                       dragger.x - targetItem.width;
+                   //RightEdge
+                   } else {
+                       dragger.x + dragger.width;
+                   }
             }
         },
         State {
@@ -136,7 +199,10 @@ Image {
             }
             PropertyChanges {
                 target: targetItem;
-                y: -targetItem.height
+                y: if (dragger.oldState == "show")
+                       -targetItem.height
+                   else
+                       targetItem.height
             }
         },
         State {
@@ -148,9 +214,9 @@ Image {
             PropertyChanges {
                 target: targetItem;
                 y: if (dragger.oldState == "show")
-                        dragger.y + dragger.height - targetItem.height
-                    else
-                        dragger.y + dragger.height
+                       dragger.y + dragger.height - targetItem.height
+                   else
+                       dragger.y + dragger.height
             }
         }
     ]
@@ -162,13 +228,13 @@ Image {
             ParallelAnimation {
                 PropertyAnimation {
                     targets: dragger;
-                    properties: "y";
+                    properties: "x", "y";
                     duration: 400;
                     easing.type: "InOutCubic";
                 }
                 PropertyAnimation {
                     targets: targetItem;
-                    properties: "y";
+                    properties: "x", "y";
                     duration: 400;
                     easing.type: "InOutCubic";
                 }
@@ -180,13 +246,13 @@ Image {
             ParallelAnimation {
                 PropertyAnimation {
                     targets: dragger;
-                    properties: "y";
+                    properties: "x", "y";
                     duration: 400;
                     easing.type: "InOutCubic";
                 }
                 PropertyAnimation {
                     targets: targetItem;
-                    properties: "y";
+                    properties: "x", "y";
                     duration: 400;
                     easing.type: "InOutCubic";
                 }
