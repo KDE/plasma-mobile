@@ -29,6 +29,8 @@ Item {
     width: 800;
     height: 480;
     signal transitionFinished();
+    signal nextActivityRequested();
+    signal previousActivityRequested();
     state : "Normal";
 
     Item {
@@ -48,11 +50,27 @@ Item {
         targetItem: spareSlot
     }
 
+    Connections {
+        target : prevDrag
+
+        onTransitionFinished : homescreen.transitionFinished()
+        onActivated: homescreen.previousActivityRequested();
+        onDisactiavated: homescreen.nextActivityRequested();
+    }
+
     Dragger {
         id: nextDrag
 
         location: "RightEdge"
         targetItem: spareSlot
+    }
+    
+    Connections {
+        target : nextDrag
+
+        onTransitionFinished : homescreen.transitionFinished()
+        onActivated: homescreen.nextActivityRequested();
+        onDisactiavated: homescreen.previousActivityRequested();
     }
 
     Item {

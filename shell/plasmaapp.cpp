@@ -240,6 +240,12 @@ void PlasmaApp::setupHomeScreen()
     connect(m_homeScreen, SIGNAL(transitionFinished()),
             this, SLOT(updateMainSlot()));
 
+    connect(m_homeScreen, SIGNAL(nextActivityRequested()),
+            this, SLOT(nextActivity()));
+
+    connect(m_homeScreen, SIGNAL(previousActivityRequested()),
+            this, SLOT(previousActivity()));
+
     m_panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
 
     m_mainView->setSceneRect(mainItem->x(), mainItem->y(),
@@ -264,13 +270,67 @@ void PlasmaApp::containmentsTransformingChanged(bool transforming)
 void PlasmaApp::changeActivity()
 {
     QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(sender());
-    Plasma::Containment *containment = m_containments.value(item->objectName().toInt());
-    changeActivity(containment);
+
+    if (item) {
+        Plasma::Containment *containment = m_containments.value(item->objectName().toInt());
+        changeActivity(containment);
+    }
+}
+
+void PlasmaApp::nextActivity()
+{
+    QMap<int, Plasma::Containment*>::const_iterator it = m_containments.constFind(m_currentContainment->id());
+
+    if (it == m_containments.constEnd()) {
+        return;
+    }
+
+    bool loop = false;
+    while (it.value() != m_currentContainment && it.value() != m_alternateContainment &&
+           it.value()->location() == Plasma::Desktop) {
+        ++it;
+        if (it == m_containments.constEnd()) {
+            it = m_containments.constBegin();
+            if (loop) {
+                return;
+            } else {
+                loop = true;
+            }
+        }
+    }
+
+    changeActivity(it.value());
+}
+
+void PlasmaApp::previousActivity()
+{
+    QMap<int, Plasma::Containment*>::const_iterator it = m_containments.constFind(m_currentContainment->id());
+
+    if (it == m_containments.constEnd()) {
+        return;
+    }
+
+    bool loop = false;
+    while (it.value() != m_currentContainment && it.value() != m_alternateContainment &&
+           it.value()->location() == Plasma::Desktop) {
+        if (it == m_containments.constBegin()) {
+            it = m_containments.constEnd();
+            --it;
+            if (loop) {
+                return;
+            } else {
+                loop = true;
+            }
+        }
+        --it;
+    }
+
+    changeActivity(it.value());
 }
 
 void PlasmaApp::changeActivity(Plasma::Containment *containment)
 {
-    if (containment == m_currentContainment) {
+    if (!containment || containment == m_currentContainment) {
         return;
     }
 

@@ -72,6 +72,8 @@ private Q_SLOTS:
     void manageNewContainment(Plasma::Containment *containment);
     void containmentDestroyed(QObject *);
     void syncConfig();
+    void nextActivity();
+    void previousActivity();
     void changeActivity();
     void slideActivities();
     void updateMainSlot();
@@ -99,7 +101,7 @@ private:
     Plasma::Containment *m_alternateContainment;
     Plasma::Containment *m_nextContainment;
     Plasma::Containment *m_trayContainment;
-    QHash<int, Plasma::Containment*> m_containments;
+    QMap<int, Plasma::Containment*> m_containments;
 
     QString m_homeScreenPath;
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;

@@ -35,6 +35,10 @@ Image {
     property string location
     property Item targetItem
 
+    signal transitionFinished();
+    signal activated();
+    signal disactivated();
+
     onLocationChanged: {
         //dragger.anchors.horizontalCenter = ''
         if (location == "BottomEdge") {
@@ -99,6 +103,7 @@ Image {
         drag.maximumY: homescreen.height-parent.height;
 
         onPressed: {
+            dragger.activated();
             dragger.oldState = dragger.state
             dragger.state = "dragging"
         }
@@ -145,6 +150,9 @@ Image {
                 } else {
                     dragger.state = dragger.oldState
                 }
+            }
+            if (dragger.state == "show") {
+                dragger.disactivated();
             }
         }
     }
@@ -293,36 +301,46 @@ Image {
         Transition {
             from: "dragging";
             to: "hidden";
-            ParallelAnimation {
-                PropertyAnimation {
-                    targets: dragger;
-                    properties: "x,y";
-                    duration: 400;
-                    easing.type: "InOutCubic";
-                }
-                PropertyAnimation {
-                    targets: targetItem;
-                    properties: "x,y";
-                    duration: 400;
-                    easing.type: "InOutCubic";
+            SequentialAnimation {
+                ParallelAnimation {
+                    PropertyAnimation {
+                        targets: dragger;
+                        properties: "x,y";
+                        duration: 400;
+                        easing.type: "InOutCubic";
+                    }
+                    PropertyAnimation {
+                        targets: targetItem;
+                        properties: "x,y";
+                        duration: 400;
+                        easing.type: "InOutCubic";
+                    }
+                    ScriptAction {
+                        script: transitionFinished();
+                    }
                 }
             }
         },
         Transition {
             from: "dragging";
             to: "show";
-            ParallelAnimation {
-                PropertyAnimation {
-                    targets: dragger;
-                    properties: "x,y";
-                    duration: 400;
-                    easing.type: "InOutCubic";
+            SequentialAnimation {
+                ParallelAnimation {
+                    PropertyAnimation {
+                        targets: dragger;
+                        properties: "x,y";
+                        duration: 400;
+                        easing.type: "InOutCubic";
+                    }
+                    PropertyAnimation {
+                        targets: targetItem;
+                        properties: "x,y";
+                        duration: 400;
+                        easing.type: "InOutCubic";
+                    }
                 }
-                PropertyAnimation {
-                    targets: targetItem;
-                    properties: "x,y";
-                    duration: 400;
-                    easing.type: "InOutCubic";
+                ScriptAction {
+                    script: transitionFinished();
                 }
             }
         }
