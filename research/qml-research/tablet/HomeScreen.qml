@@ -31,10 +31,10 @@ Item {
     signal transitionFinished();
     state : "Normal";
 
-    Rectangle {
+    Image {
         id: mainSlot;
         objectName: "mainSlot";
-        color: "red"
+        source: "images/activity1.png"
         x: 0;
         y: 0;
         width: homescreen.width;
@@ -62,9 +62,9 @@ Item {
         height: homescreen.height;
     }
 
-    Rectangle {
+    Image {
         id: alternateSlot;
-        color: "yellow"
+        source: "images/activity0.png"
         objectName: "alternateSlot";
         x: 0;
         y: alternateDrag.y + alternateDrag.height;
@@ -83,14 +83,14 @@ Item {
         y: 0;
     }
 
-    Rectangle {
+    Image {
         id: alternateDrag;
         objectName: "alternateDrag";
-        color: "black"
+        source: "images/hint.png"
         state: "hidden"
 
-        height: 32
-        width: 128
+        height: 35
+        width: 103
         anchors.horizontalCenter: parent.horizontalCenter;
         y: parent.height - height;
 
@@ -112,8 +112,6 @@ Item {
             onPressed: {
                 alternateDrag.oldState = alternateDrag.state
                 alternateDrag.state = "dragging"
-                print(alternateDrag.oldState)
-                print(alternateDrag.state)
             }
 
             onReleased: {
