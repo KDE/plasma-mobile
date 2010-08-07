@@ -195,14 +195,57 @@ Image {
             name: "hidden";
             PropertyChanges {
                 target: dragger;
-                y: parent.height - dragger.height;
+                y: if (dragger.location == "BottomEdge") {
+                       parent.height - dragger.height;
+                   } else if (dragger.location == "TopEdge") {
+                       0
+                   //Left, RightEdge
+                   } else {
+                       dragger.y
+                   }
+                x : if (dragger.location == "BottomEdge" || dragger.location == "TopEdge") {
+                        dragger.x
+                    } else if (dragger.location == "LeftEdge") {
+                        0
+                    //RightEdge
+                    } else {
+                        parent.width - dragger.width
+                    }
             }
             PropertyChanges {
                 target: targetItem;
-                y: if (dragger.oldState == "show")
-                       -targetItem.height
-                   else
-                       targetItem.height
+                y: if (dragger.location == "BottomEdge") {
+                       if (dragger.oldState == "show") {
+                           -targetItem.height
+                       } else {
+                           targetItem.height
+                       }
+                   } else if (dragger.location == "TopEdge") {
+                       if (dragger.oldState == "show") {
+                           targetItem.height
+                       } else {
+                           -targetItem.height
+                       }
+                   //Left, RightEdge
+                   } else {
+                       targetItem.y
+                   }
+                x: if (dragger.location == "BottomEdge" || dragger.location == "TopEdge") {
+                       targetItem.x
+                   } else if (dragger.location == "LeftEdge") {
+                       if (dragger.oldState == "show") {
+                           -targetItem.width
+                       } else {
+                           targetItem.width
+                       }
+                   //RightEdge
+                   } else {
+                       if (dragger.oldState == "show") {
+                           targetItem.width
+                       } else {
+                           -targetItem.width
+                       }
+                   }
             }
         },
         State {
