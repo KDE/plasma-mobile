@@ -101,6 +101,7 @@ private:
     Plasma::Containment *m_trayContainment;
     QHash<int, Plasma::Containment*> m_containments;
 
+    QString m_homeScreenPath;
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
     bool m_isDesktop;
 };

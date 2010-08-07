@@ -148,6 +148,7 @@ PlasmaApp::PlasmaApp()
 
     cg = KConfigGroup(KGlobal::config(), "General");
     Plasma::Theme::defaultTheme()->setFont(cg.readEntry("desktopFont", font()));
+    m_homeScreenPath = cg.readEntry("homeScreenPath", "mobile-homescreen");
 
     // this line initializes the corona and setups the main qml homescreen
     corona();
@@ -208,7 +209,7 @@ void PlasmaApp::setupHomeScreen()
 {
     m_qmlWidget = new Plasma::QmlWidget();
 
-    m_qmlWidget->setQmlPath(KStandardDirs::locate("appdata", "containments/homescreen/HomeScreen.qml"));
+    m_qmlWidget->setQmlPath(KStandardDirs::locate("appdata", QString(m_homeScreenPath).append("/HomeScreen.qml")));
 
     if (!m_qmlWidget->engine()) {
         QCoreApplication::quit();
