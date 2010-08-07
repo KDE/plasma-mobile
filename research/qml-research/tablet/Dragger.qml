@@ -296,13 +296,13 @@ Image {
             ParallelAnimation {
                 PropertyAnimation {
                     targets: dragger;
-                    properties: "x", "y";
+                    properties: "x,y";
                     duration: 400;
                     easing.type: "InOutCubic";
                 }
                 PropertyAnimation {
                     targets: targetItem;
-                    properties: "x", "y";
+                    properties: "x,y";
                     duration: 400;
                     easing.type: "InOutCubic";
                 }
@@ -314,13 +314,13 @@ Image {
             ParallelAnimation {
                 PropertyAnimation {
                     targets: dragger;
-                    properties: "x", "y";
+                    properties: "x,y";
                     duration: 400;
                     easing.type: "InOutCubic";
                 }
                 PropertyAnimation {
                     targets: targetItem;
-                    properties: "x", "y";
+                    properties: "x,y";
                     duration: 400;
                     easing.type: "InOutCubic";
                 }
