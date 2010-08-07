@@ -230,16 +230,16 @@ Image {
                        targetItem.x
                    } else if (dragger.location == "LeftEdge") {
                        if (dragger.oldState == "show") {
-                           -targetItem.width
-                       } else {
                            targetItem.width
+                       } else {
+                           -targetItem.width
                        }
                    //RightEdge
                    } else {
                        if (dragger.oldState == "show") {
-                           targetItem.width
-                       } else {
                            -targetItem.width
+                       } else {
+                           targetItem.width
                        }
                    }
             }
