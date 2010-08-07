@@ -48,29 +48,22 @@ Item {
 
         location: "LeftEdge"
         targetItem: spareSlot
-    }
 
-    Connections {
-        target : prevDrag
-
-        onTransitionFinished : homescreen.transitionFinished()
+        onTransitionFinished : {homescreen.transitionFinished()}
         onActivated: homescreen.previousActivityRequested();
-        onDisactiavated: homescreen.nextActivityRequested();
+        onDeactivated: homescreen.nextActivityRequested();
     }
 
     Dragger {
         id: nextDrag
+        objectName: "nextDrag"
 
         location: "RightEdge"
         targetItem: spareSlot
-    }
-    
-    Connections {
-        target : nextDrag
 
         onTransitionFinished : homescreen.transitionFinished()
         onActivated: homescreen.nextActivityRequested();
-        onDisactiavated: homescreen.previousActivityRequested();
+        onDeactivated: homescreen.previousActivityRequested();
     }
 
     Item {

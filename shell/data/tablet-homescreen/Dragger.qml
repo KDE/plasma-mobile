@@ -23,13 +23,17 @@ import Qt 4.7
 Image {
     id: dragger;
     objectName: "dragger";
-    source: "images/hint.png"
+    //source: "images/hint.png"
     state: "hidden"
 
     height: 35
     width: 103
     
     y: parent.height - height;
+
+    signal transitionFinished;
+    signal activated;
+    signal deactivated;
 
     property string oldState
     property string location
@@ -99,6 +103,7 @@ Image {
         drag.maximumY: homescreen.height-parent.height;
 
         onPressed: {
+            dragger.activated();
             dragger.oldState = dragger.state
             dragger.state = "dragging"
         }
@@ -145,6 +150,9 @@ Image {
                 } else {
                     dragger.state = dragger.oldState
                 }
+            }
+            if (dragger.state == "show") {
+                dragger.deactivated();
             }
         }
     }
@@ -293,36 +301,46 @@ Image {
         Transition {
             from: "dragging";
             to: "hidden";
-            ParallelAnimation {
-                PropertyAnimation {
-                    targets: dragger;
-                    properties: "x,y";
-                    duration: 400;
-                    easing.type: "InOutCubic";
-                }
-                PropertyAnimation {
-                    targets: targetItem;
-                    properties: "x,y";
-                    duration: 400;
-                    easing.type: "InOutCubic";
+            SequentialAnimation {
+                ParallelAnimation {
+                    PropertyAnimation {
+                        targets: dragger;
+                        properties: "x,y";
+                        duration: 400;
+                        easing.type: "InOutCubic";
+                    }
+                    PropertyAnimation {
+                        targets: targetItem;
+                        properties: "x,y";
+                        duration: 400;
+                        easing.type: "InOutCubic";
+                    }
+                    ScriptAction {
+                        script: transitionFinished();
+                    }
                 }
             }
         },
         Transition {
             from: "dragging";
             to: "show";
-            ParallelAnimation {
-                PropertyAnimation {
-                    targets: dragger;
-                    properties: "x,y";
-                    duration: 400;
-                    easing.type: "InOutCubic";
+            SequentialAnimation {
+                ParallelAnimation {
+                    PropertyAnimation {
+                        targets: dragger;
+                        properties: "x,y";
+                        duration: 400;
+                        easing.type: "InOutCubic";
+                    }
+                    PropertyAnimation {
+                        targets: targetItem;
+                        properties: "x,y";
+                        duration: 400;
+                        easing.type: "InOutCubic";
+                    }
                 }
-                PropertyAnimation {
-                    targets: targetItem;
-                    properties: "x,y";
-                    duration: 400;
-                    easing.type: "InOutCubic";
+                ScriptAction {
+                    script: transitionFinished();
                 }
             }
         }
