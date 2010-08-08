@@ -56,7 +56,8 @@ Item {
         id: spareSlotShadowRight
         source: "images/shadow-right.png"
         anchors.left: spareSlot.right
-        width: 12
+        anchors.leftMargin: -1
+        width: 11
         height: spareSlot.height
         
     }
@@ -64,7 +65,8 @@ Item {
         id: spareSlotShadowLeft
         source: "images/shadow-left.png"
         anchors.right: spareSlot.left
-        width: 12
+        anchors.rightMargin: -1
+        width: 11
         height: spareSlot.height
     }
 
@@ -119,15 +121,17 @@ Item {
         id: alternateSlotShadowTop
         source: "images/shadow-top.png"
         anchors.bottom: alternateSlot.top
+        anchors.topMargin: -1
         width: alternateSlot.width
-        height: 12
+        height: 11
     }
     Shadow {
         id: alternateSlotShadowBottom
         source: "images/shadow-bottom.png"
         anchors.top: alternateSlot.bottom
+        anchors.topMargin: -1
         width: alternateSlot.width
-        height: 12
+        height: 11
     }
 
     SystrayPanel {
