@@ -91,6 +91,19 @@ Item {
         height: homescreen.height;
     }
 
+    Image {
+        source: "images/shadow-right.png"
+        anchors.left: spareSlot.right
+        width: 12
+        height: spareSlot.height
+    }
+    Image {
+        source: "images/shadow-left.png"
+        anchors.right: spareSlot.left
+        width: 12
+        height: spareSlot.height
+    }
+
     Item {
         id: alternateSlot;
         objectName: "alternateSlot";
@@ -98,6 +111,18 @@ Item {
         y: alternateDrag.y + alternateDrag.height;
         width: homescreen.width;
         height: homescreen.height;
+    }
+    Image {
+        source: "images/shadow-top.png"
+        anchors.bottom: alternateSlot.top
+        width: alternateSlot.width
+        height: 12
+    }
+    Image {
+        source: "images/shadow-bottom.png"
+        anchors.top: alternateSlot.bottom
+        width: alternateSlot.width
+        height: 12
     }
 
     SystrayPanel {
