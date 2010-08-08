@@ -43,45 +43,6 @@ Item {
         transformOrigin : Item.Center;
     }
 
-    Dragger {
-        id: prevDrag
-
-        location: "LeftEdge"
-        targetItem: spareSlot
-
-        onTransitionFinished : {
-            if (state == "show") {
-                homescreen.transitionFinished()
-                state = "hidden"
-            }
-            spareSlotShadowRight.state = "invisible"
-        }
-        onActivated: {
-            homescreen.previousActivityRequested();
-            spareSlotShadowRight.state = "visible"
-        }
-    }
-
-    Dragger {
-        id: nextDrag
-        objectName: "nextDrag"
-
-        location: "RightEdge"
-        targetItem: spareSlot
-
-        onTransitionFinished : {
-            if (state == "show") {
-                homescreen.transitionFinished()
-                state = "hidden"
-            }
-            spareSlotShadowLeft.state = "invisible"
-        }
-        onActivated: {
-            homescreen.nextActivityRequested();
-            spareSlotShadowLeft.state = "visible"
-        }
-    }
-
     Item {
         id : spareSlot;
         objectName: "spareSlot";
@@ -186,6 +147,45 @@ Item {
                 }
             }
         ]
+    }
+
+        Dragger {
+        id: prevDrag
+
+        location: "LeftEdge"
+        targetItem: spareSlot
+
+        onTransitionFinished : {
+            if (state == "show") {
+                homescreen.transitionFinished()
+                state = "hidden"
+            }
+            spareSlotShadowRight.state = "invisible"
+        }
+        onActivated: {
+            homescreen.previousActivityRequested();
+            spareSlotShadowRight.state = "visible"
+        }
+    }
+
+    Dragger {
+        id: nextDrag
+        objectName: "nextDrag"
+
+        location: "RightEdge"
+        targetItem: spareSlot
+
+        onTransitionFinished : {
+            if (state == "show") {
+                homescreen.transitionFinished()
+                state = "hidden"
+            }
+            spareSlotShadowLeft.state = "invisible"
+        }
+        onActivated: {
+            homescreen.nextActivityRequested();
+            spareSlotShadowLeft.state = "visible"
+        }
     }
 
     Item {
