@@ -286,8 +286,9 @@ void PlasmaApp::nextActivity()
     }
 
     bool loop = false;
-    while (it.value() != m_currentContainment && it.value() != m_alternateContainment &&
-           it.value()->location() == Plasma::Desktop) {
+    while (it.value() == m_currentContainment || it.value() == m_alternateContainment ||
+           it.value()->location() != Plasma::Desktop) {
+
         ++it;
         if (it == m_containments.constEnd()) {
             it = m_containments.constBegin();
@@ -311,8 +312,8 @@ void PlasmaApp::previousActivity()
     }
 
     bool loop = false;
-    while (it.value() != m_currentContainment && it.value() != m_alternateContainment &&
-           it.value()->location() == Plasma::Desktop) {
+    while (it.value() == m_currentContainment || it.value() == m_alternateContainment ||
+           it.value()->location() != Plasma::Desktop) {
         if (it == m_containments.constBegin()) {
             it = m_containments.constEnd();
             --it;
