@@ -49,9 +49,16 @@ Item {
         location: "LeftEdge"
         targetItem: spareSlot
 
-        onTransitionFinished : {homescreen.transitionFinished()}
+        onTransitionFinished : {
+            homescreen.transitionFinished();
+            state = "hidden"
+        }
         onActivated: homescreen.previousActivityRequested();
-        onDeactivated: homescreen.nextActivityRequested();
+        onDeactivated: {
+            if (state == "hidden") {
+                homescreen.nextActivityRequested();
+            }
+        }
     }
 
     Dragger {
@@ -61,9 +68,16 @@ Item {
         location: "RightEdge"
         targetItem: spareSlot
 
-        onTransitionFinished : homescreen.transitionFinished()
+        onTransitionFinished : {
+            homescreen.transitionFinished()
+            state = "hidden"
+        }
         onActivated: homescreen.nextActivityRequested();
-        onDeactivated: homescreen.previousActivityRequested();
+        onDeactivated: {
+            if (state == "hidden") {
+                homescreen.previousActivityRequested();
+            }
+        }
     }
 
     Item {

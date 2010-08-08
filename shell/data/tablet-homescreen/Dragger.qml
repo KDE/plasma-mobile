@@ -151,9 +151,7 @@ Image {
                     dragger.state = dragger.oldState
                 }
             }
-            if (dragger.state == "show") {
-                dragger.deactivated();
-            }
+            dragger.deactivated();
         }
     }
     
