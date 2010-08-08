@@ -57,6 +57,7 @@ Item {
         onDeactivated: {
             if (state == "hidden") {
                 homescreen.nextActivityRequested();
+                homescreen.transitionFinished();
             }
         }
     }
@@ -76,6 +77,7 @@ Item {
         onDeactivated: {
             if (state == "hidden") {
                 homescreen.previousActivityRequested();
+                homescreen.transitionFinished();
             }
         }
     }
