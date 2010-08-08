@@ -313,9 +313,9 @@ Image {
                         duration: 400;
                         easing.type: "InOutCubic";
                     }
-                    ScriptAction {
-                        script: transitionFinished();
-                    }
+                }
+                ScriptAction {
+                    script: transitionFinished();
                 }
             }
         },

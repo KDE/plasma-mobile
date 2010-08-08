@@ -50,16 +50,12 @@ Item {
         targetItem: spareSlot
 
         onTransitionFinished : {
-            homescreen.transitionFinished();
-            state = "hidden"
-        }
-        onActivated: homescreen.previousActivityRequested();
-        onDeactivated: {
-            if (state == "hidden") {
-                homescreen.nextActivityRequested();
-                homescreen.transitionFinished();
+            if (state == "show") {
+                homescreen.transitionFinished()
+                state = "hidden"
             }
         }
+        onActivated: homescreen.previousActivityRequested();
     }
 
     Dragger {
@@ -70,16 +66,12 @@ Item {
         targetItem: spareSlot
 
         onTransitionFinished : {
-            homescreen.transitionFinished()
-            state = "hidden"
-        }
-        onActivated: homescreen.nextActivityRequested();
-        onDeactivated: {
-            if (state == "hidden") {
-                homescreen.previousActivityRequested();
-                homescreen.transitionFinished();
+            if (state == "show") {
+                homescreen.transitionFinished()
+                state = "hidden"
             }
         }
+        onActivated: homescreen.nextActivityRequested();
     }
 
     Item {
