@@ -33,7 +33,6 @@ Image {
 
     signal transitionFinished;
     signal activated;
-    signal deactivated;
 
     property string oldState
     property string location
@@ -151,7 +150,6 @@ Image {
                     dragger.state = dragger.oldState
                 }
             }
-            dragger.deactivated();
         }
     }
     
