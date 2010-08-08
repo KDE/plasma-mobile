@@ -6,6 +6,7 @@ geometry=0,0,800,480
 immutability=1
 location=1
 plugin=newspaper
+orientation=1
 screen=0
 zvalue=0
 wallpaperplugin=image
@@ -23,6 +24,7 @@ geometry=0,0,800,480
 immutability=1
 location=1
 plugin=sal
+Orientation=1
 screen=0
 zvalue=0
 wallpaperplugin=image
@@ -36,6 +38,7 @@ geometry=0,0,800,480
 immutability=1
 location=1
 plugin=newspaper
+orientation=1
 screen=0
 zvalue=0
 wallpaperplugin=image
@@ -55,6 +58,7 @@ geometry=0,0,800,480
 immutability=1
 location=1
 plugin=newspaper
+orientation=1
 screen=0
 zvalue=0
 wallpaperplugin=image
@@ -66,20 +70,8 @@ geometry=28,66.8,266.4,133.2
 immutability=1
 zvalue=1
 
-[Containments][5]
-activity=audiovideo
-desktop=-1
-formfactor=0
-geometry=0,0,800,480
-immutability=1
-location=1
-plugin=org.kde.quickdialer-qml
-screen=0
-zvalue=0
-wallpaperplugin=image
-wallpaperpluginmode=SingleImage
 
-[Containments][6]
+[Containments][5]
 activity=service
 desktop=-1
 formfactor=0
@@ -87,18 +79,19 @@ geometry=0,0,800,480
 immutability=1
 location=1
 plugin=newspaper
+orientation=1
 screen=0
 zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][6][Applets][1]
+[Containments][5][Applets][1]
 geometry=10,10,500,400
 plugin=twitter
 immutability=1
 zvalue=1
 
-[Containments][7]
+[Containments][6]
 activity=game
 desktop=-1
 formfactor=0
@@ -106,18 +99,19 @@ geometry=0,0,800,480
 immutability=1
 location=1
 plugin=newspaper
+orientation=1
 screen=0
 zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][7][Applets][1]
+[Containments][6][Applets][1]
 geometry=8,1,342,342
 plugin=fifteenPuzzle
 immutability=1
 zvalue=1
 
-[Containments][8]
+[Containments][7]
 activity=
 desktop=-1
 formfactor=2
@@ -128,13 +122,13 @@ plugin=org.kde.mobilesystemtray
 screen=0
 zvalue=10
 
-[Containments][8][Applets][10]
+[Containments][7][Applets][10]
 geometry=16.8571428571429,4,28.2857142857143,24
 immutability=1
 plugin=notifications
 zvalue=0
 
-[Containments][8][Applets][10][Configuration][ExtenderItems][1]
+[Containments][7][Applets][10][Configuration][ExtenderItems][1]
 extenderIconName=dialog-information
 extenderItemName=jobGroup
 extenderItemPosition=0
@@ -142,11 +136,11 @@ isGroup=true
 sourceAppletId=10
 sourceAppletPluginName=notifications
 
-[Containments][8][Applets][10][PopupApplet]
+[Containments][7][Applets][10][PopupApplet]
 DialogHeight=95
 DialogWidth=394
 
-[Containments][8][Applets][9]
+[Containments][7][Applets][9]
 geometry=49.1428571428571,4,24,24
 immutability=1
 plugin=notifier

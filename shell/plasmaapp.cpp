@@ -433,7 +433,6 @@ void PlasmaApp::setupContainment(Plasma::Containment *containment)
 {
     if (m_currentContainment) {
         containment->setParentItem(m_spareSlot);
-        containment->setPos(0,0);
         containment->setPos(0, 0);
 
         containment->setVisible(true);
