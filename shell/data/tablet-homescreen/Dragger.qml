@@ -341,4 +341,54 @@ Image {
             }
         }
     ]
+/*
+    Image {
+        id: targetShadow
+        source: "images/shadow-top.png"
+        anchors.left: dragger.target.right
+        width: dragger.target.width
+        height: 12
+        state: "invisible"
+        states: [
+            State {
+                name: "visible";
+                PropertyChanges {
+                    target: targetShadow;
+                    opacity: 1
+                }
+            },
+            State {
+                name: "invisible";
+                PropertyChanges {
+                    target: targetShadow;
+                    opacity: 0
+                }
+            }
+        ]
+        transitions: [
+            Transition {
+                from: "visible";
+                to: "invisible";
+
+                PropertyAnimation {
+                    targets: targetShadow;
+                    properties: "opacity";
+                    duration: 300;
+                    easing.type: "InOutCubic";
+                }
+            },
+            Transition {
+                from: "invisible";
+                to: "visible";
+
+                PropertyAnimation {
+                    targets: targetShadow;
+                    properties: "opacity";
+                    duration: 300;
+                    easing.type: "InOutCubic";
+                }
+            }
+        ]
+    }
+    */
 }

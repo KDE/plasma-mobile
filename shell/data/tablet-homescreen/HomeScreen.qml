@@ -52,101 +52,20 @@ Item {
         height: homescreen.height;
     }
 
-    Image {
+    Shadow {
         id: spareSlotShadowRight
         source: "images/shadow-right.png"
         anchors.left: spareSlot.right
         width: 12
         height: spareSlot.height
-        state: "invisible"
-        states: [
-            State {
-                name: "visible";
-                PropertyChanges {
-                    target: spareSlotShadowRight;
-                    opacity: 1
-                }
-            },
-            State {
-                name: "invisible";
-                PropertyChanges {
-                    target: spareSlotShadowRight;
-                    opacity: 0
-                }
-            }
-        ]
-        transitions: [
-            Transition {
-                from: "visible";
-                to: "invisible";
-
-                PropertyAnimation {
-                    targets: spareSlotShadowRight;
-                    properties: "opacity";
-                    duration: 300;
-                    easing.type: "InOutCubic";
-                }
-            },
-            Transition {
-                from: "invisible";
-                to: "visible";
-
-                PropertyAnimation {
-                    targets: spareSlotShadowRight;
-                    properties: "opacity";
-                    duration: 300;
-                    easing.type: "InOutCubic";
-                }
-            }
-        ]
+        
     }
-    Image {
+    Shadow {
         id: spareSlotShadowLeft
         source: "images/shadow-left.png"
         anchors.right: spareSlot.left
         width: 12
         height: spareSlot.height
-        state: "invisible"
-        states: [
-            State {
-                name: "visible";
-                PropertyChanges {
-                    target: spareSlotShadowLeft;
-                    opacity: 1
-                }
-            },
-            State {
-                name: "invisible";
-                PropertyChanges {
-                    target: spareSlotShadowLeft;
-                    opacity: 0
-                }
-            }
-        ]
-        transitions: [
-            Transition {
-                from: "visible";
-                to: "invisible";
-
-                PropertyAnimation {
-                    targets: spareSlotShadowLeft;
-                    properties: "opacity";
-                    duration: 300;
-                    easing.type: "InOutCubic";
-                }
-            },
-            Transition {
-                from: "invisible";
-                to: "visible";
-
-                PropertyAnimation {
-                    targets: spareSlotShadowLeft;
-                    properties: "opacity";
-                    duration: 300;
-                    easing.type: "InOutCubic";
-                }
-            }
-        ]
     }
 
         Dragger {
@@ -196,101 +115,19 @@ Item {
         width: homescreen.width;
         height: homescreen.height;
     }
-    Image {
+    Shadow {
         id: alternateSlotShadowTop
         source: "images/shadow-top.png"
         anchors.bottom: alternateSlot.top
         width: alternateSlot.width
         height: 12
-        state: "invisible"
-        states: [
-            State {
-                name: "visible";
-                PropertyChanges {
-                    target: alternateSlotShadowTop;
-                    opacity: 1
-                }
-            },
-            State {
-                name: "invisible";
-                PropertyChanges {
-                    target: alternateSlotShadowTop;
-                    opacity: 0
-                }
-            }
-        ]
-        transitions: [
-            Transition {
-                from: "visible";
-                to: "invisible";
-
-                PropertyAnimation {
-                    targets: alternateSlotShadowTop;
-                    properties: "opacity";
-                    duration: 300;
-                    easing.type: "InOutCubic";
-                }
-            },
-            Transition {
-                from: "invisible";
-                to: "visible";
-
-                PropertyAnimation {
-                    targets: alternateSlotShadowTop;
-                    properties: "opacity";
-                    duration: 300;
-                    easing.type: "InOutCubic";
-                }
-            }
-        ]
     }
-    Image {
+    Shadow {
         id: alternateSlotShadowBottom
         source: "images/shadow-bottom.png"
         anchors.top: alternateSlot.bottom
         width: alternateSlot.width
         height: 12
-        state: "invisible"
-        states: [
-            State {
-                name: "visible";
-                PropertyChanges {
-                    target: alternateSlotShadowBottom;
-                    opacity: 1
-                }
-            },
-            State {
-                name: "invisible";
-                PropertyChanges {
-                    target: alternateSlotShadowBottom;
-                    opacity: 0
-                }
-            }
-        ]
-        transitions: [
-            Transition {
-                from: "visible";
-                to: "invisible";
-
-                PropertyAnimation {
-                    targets: alternateSlotShadowBottom;
-                    properties: "opacity";
-                    duration: 300;
-                    easing.type: "InOutCubic";
-                }
-            },
-            Transition {
-                from: "invisible";
-                to: "visible";
-
-                PropertyAnimation {
-                    targets: alternateSlotShadowBottom;
-                    properties: "opacity";
-                    duration: 300;
-                    easing.type: "InOutCubic";
-                }
-            }
-        ]
     }
 
     SystrayPanel {
