@@ -23,7 +23,7 @@ import Qt 4.7
 Image {
     id: dragger;
     objectName: "dragger";
-    source: "images/hint.png"
+    //source: "images/hint.png"
     state: "hidden"
 
     height: 35
@@ -31,13 +31,13 @@ Image {
     
     y: parent.height - height;
 
+    signal transitionFinished;
+    signal activated;
+    signal disactivated;
+
     property string oldState
     property string location
     property Item targetItem
-
-    signal transitionFinished();
-    signal activated();
-    signal disactivated();
 
     onLocationChanged: {
         //dragger.anchors.horizontalCenter = ''
