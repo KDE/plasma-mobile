@@ -49,7 +49,7 @@ Image {
             dragger.y = homescreen.height - dragger.height;
 
             draggerRegion.drag.axis = Drag.YAxis
-            draggerRegion.drag.minimumY = homescreen.height/2;
+            draggerRegion.drag.minimumY = 0;
             draggerRegion.drag.maximumY = homescreen.height-dragger.height;
         } else if (location == "TopEdge") {
             dragger.source= "images/hint.png"
@@ -61,7 +61,7 @@ Image {
 
             draggerRegion.drag.axis = Drag.YAxis
             draggerRegion.drag.minimumY = 0;
-            draggerRegion.drag.maximumY = homescreen.height/2;
+            draggerRegion.drag.maximumY = homescreen.height;
         } else if (location == "LeftEdge") {
             dragger.source= "images/hint-vertical.png"
             dragger.height= 103
@@ -72,7 +72,7 @@ Image {
 
             draggerRegion.drag.axis = Drag.XAxis
             draggerRegion.drag.minimumX = 0;
-            draggerRegion.drag.maximumX = homescreen.width/2;
+            draggerRegion.drag.maximumX = homescreen.width;
         //RightEdge
         } else {
             dragger.source= "images/hint-vertical.png"
@@ -83,7 +83,7 @@ Image {
             dragger.x = homescreen.width - dragger.width;
 
             draggerRegion.drag.axis = Drag.XAxis
-            draggerRegion.drag.minimumX = homescreen.width/2;
+            draggerRegion.drag.minimumX = 0;
             draggerRegion.drag.maximumX = homescreen.width-dragger.width;
         } 
     }
