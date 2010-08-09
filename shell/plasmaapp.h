@@ -50,6 +50,7 @@ class PlasmaApp : public KUniqueApplication
 {
     Q_OBJECT
 public:
+    PlasmaApp();
     ~PlasmaApp();
 
     static PlasmaApp* self();
@@ -58,7 +59,8 @@ public:
     void notifyStartup(bool completed);
     Plasma::Corona* corona();
 
-    PlasmaApp();
+    QList<Plasma::Containment *> containments() const;
+    QList<Plasma::Containment *> panelContainments() const;
 
 protected:
     void setIsDesktop(bool isDesktop);
@@ -103,6 +105,7 @@ private:
     Plasma::Containment *m_nextContainment;
     Plasma::Containment *m_trayContainment;
     QMap<int, Plasma::Containment*> m_containments;
+    QList<Plasma::Containment *> m_panelContainments;
 
     QString m_homeScreenPath;
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;

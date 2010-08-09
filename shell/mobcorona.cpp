@@ -168,6 +168,14 @@ QRect MobCorona::screenGeometry(int id) const
 QRegion MobCorona::availableScreenRegion(int id) const
 {
     QRegion r(screenGeometry(id));
+    foreach (Plasma::Containment *cont, PlasmaApp::self()->panelContainments()) {
+        if (cont->location() == Plasma::TopEdge ||
+            cont->location() == Plasma::BottomEdge ||
+            cont->location() == Plasma::LeftEdge ||
+            cont->location() == Plasma::RightEdge) {
+            r = r.subtracted(cont->mapToScene(cont->boundingRect()).toPolygon());
+        }
+    }
     return r;
 }
 

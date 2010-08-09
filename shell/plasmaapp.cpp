@@ -169,6 +169,16 @@ PlasmaApp::~PlasmaApp()
 {
 }
 
+QList<Plasma::Containment *> PlasmaApp::containments() const
+{
+    return m_containments.values();
+}
+
+QList<Plasma::Containment *> PlasmaApp::panelContainments() const
+{
+    return m_panelContainments;
+}
+
 void PlasmaApp::cleanup()
 {
     if (m_corona) {
@@ -486,6 +496,8 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         // "enlarge" is initiated by a QML mousearea, but "shrink" needs to be initiated by
         // the applet itself..
         connect(m_trayContainment, SIGNAL(shrinkRequested()), this, SLOT(shrinkTray()));
+
+        m_panelContainments.append(containment);
 
         return;
     }
