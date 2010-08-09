@@ -24,6 +24,7 @@
 #include <QtDeclarative/QDeclarativeItem>
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeContext>
+#include <QGraphicsLinearLayout>
 #include <QGraphicsScene>
 
 #include <KDebug>
@@ -124,7 +125,14 @@ void QmlWidgetPrivate::finishExecute()
     }
 
     if (widget) {
-        //TODO: add to a layout
+        QGraphicsLinearLayout *lay = static_cast<QGraphicsLinearLayout *>(q->layout());
+        if (!lay) {
+            lay = new QGraphicsLinearLayout(q);
+            lay->setContentsMargins(0, 0, 0, 0);
+        }
+        lay->addItem(widget);
+    } else {
+        q->setLayout(0);
     }
     emit q->finished();
 }
