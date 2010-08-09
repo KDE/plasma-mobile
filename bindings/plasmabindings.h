@@ -38,8 +38,10 @@
 #include <plasma/animator.h>
 #include <plasma/svg.h>
 #include <plasma/framesvg.h>
+
 #include "private/declarativetabbar_p.h"
 #include "private/gridlayout.h"
+#include "private/theme_p.h"
 #include "private/linearlayout.h"
 #include "datasource.h"
 #include "phone/phone.h"
@@ -67,6 +69,8 @@ QML_DECLARE_TYPE(Plasma::Extender)
 QML_DECLARE_TYPE(Plasma::Animator)
 
 QML_DECLARE_TYPE(Plasma::DataSource)
+
+QML_DECLARE_TYPE(ThemeProxy)
 
 QML_DECLARE_INTERFACE(QGraphicsLayoutItem)
 QML_DECLARE_INTERFACE(QGraphicsLayout)

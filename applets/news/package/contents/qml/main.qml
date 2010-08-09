@@ -26,6 +26,11 @@ QGraphicsWidget {
     Item {
       id:main
       Plasma.DataSource { id: dataSource; engine: "rss"; source: "http://planetkde.org/rss20.xml"; interval: 50000; }
+
+      Plasma.Theme {
+          id: theme
+      }
+
       resources: [
           Component {
               id: simpleText
@@ -38,9 +43,11 @@ QGraphicsWidget {
                       id : delegateLayout
 
                       Text {
+                          color: theme.textColor
                           text: dataSource['items'][modelData].title
                       }
                       Text {
+                          color: theme.textColor
                           text: dataSource['items'][modelData].time
                       }
                   }

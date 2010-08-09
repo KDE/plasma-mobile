@@ -39,6 +39,8 @@ qmlRegisterType<Plasma::SvgWidget>("Plasma", 0, 1, "SvgWidget");
 qmlRegisterType<Plasma::Svg>("Plasma", 0, 1, "Svg");
 qmlRegisterType<Plasma::FrameSvg>("Plasma", 0, 1, "FrameSvg");
 
+qmlRegisterType<ThemeProxy>("Plasma", 0, 1, "Theme");
+
 qmlRegisterInterface<QGraphicsLayoutItem>("QGraphicsLayoutItem");
 qmlRegisterInterface<QGraphicsLayout>("QGraphicsLayout");
 qmlRegisterType<GraphicsLinearLayoutStretchItemObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayoutStretchItem");
