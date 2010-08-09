@@ -9,6 +9,7 @@ set(bindings_SRCS
     private/gridlayout.cpp
     private/linearlayout.cpp
     private/dataengineconsumer.cpp
+    private/theme.cpp
     datasource.cpp
     )
 
