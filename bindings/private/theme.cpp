@@ -24,9 +24,7 @@
 ThemeProxy::ThemeProxy(QObject *parent)
     : QObject(parent)
 {
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SIGNAL(textColorChanged()));
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SIGNAL(highlightColorChanged()));
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SIGNAL(backgroundColorChanged()));
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SIGNAL(themeChanged()));
 }
 
 ThemeProxy::~ThemeProxy()
@@ -46,6 +44,26 @@ QColor ThemeProxy::highlightColor() const
 QColor ThemeProxy::backgroundColor() const
 {
     return Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor);
+}
+
+QColor ThemeProxy::buttonTextColor() const
+{
+    return Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonTextColor);
+}
+
+QColor ThemeProxy::buttonBackgroundColor() const
+{
+    return Plasma::Theme::defaultTheme()->color(Plasma::Theme::ButtonBackgroundColor);
+}
+
+QColor ThemeProxy::linkColor() const
+{
+    return Plasma::Theme::defaultTheme()->color(Plasma::Theme::LinkColor);
+}
+
+QColor ThemeProxy::visitedLinkColor() const
+{
+    return Plasma::Theme::defaultTheme()->color(Plasma::Theme::VisitedLinkColor);
 }
 
 #include "theme_p.moc"
