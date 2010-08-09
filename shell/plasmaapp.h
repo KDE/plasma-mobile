@@ -82,6 +82,7 @@ private Q_SLOTS:
     void shrinkTray();
     void containmentsTransformingChanged(bool transforming);
     void showWidgetsExplorer();
+    void mainViewGeometryChanged();
 
 private:
     MobCorona *m_corona;

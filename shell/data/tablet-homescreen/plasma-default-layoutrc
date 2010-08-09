@@ -30,6 +30,11 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
+[Containments][2][Wallpaper][image]
+wallpaper=/opt/kde4/share/wallpapers/Grass
+wallpaperposition=2
+
+
 [Containments][3]
 activity=network
 desktop=-1

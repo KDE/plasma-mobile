@@ -112,6 +112,7 @@ PlasmaApp::PlasmaApp()
     }
 
     connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
+    connect(m_mainView, SIGNAL(geometryChanged()), this, SLOT(mainViewGeometryChanged()));
 
     int width = 800;
     int height = 480;
@@ -208,6 +209,7 @@ void PlasmaApp::syncConfig()
 void PlasmaApp::setupHomeScreen()
 {
     m_qmlWidget = new Plasma::QmlWidget();
+    m_corona->addItem(m_qmlWidget);
 
     m_qmlWidget->setQmlPath(KStandardDirs::locate("appdata", QString(m_homeScreenPath).append("/HomeScreen.qml")));
 
@@ -219,11 +221,7 @@ void PlasmaApp::setupHomeScreen()
 
     QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(m_qmlWidget->rootObject());
 
-    mainItem->setProperty("width", m_mainView->size().width());
-    mainItem->setProperty("height", m_mainView->size().height());
-
-    // adds the homescreen to corona
-    m_corona->addItem(mainItem);
+    mainViewGeometryChanged();
 
     // get references for the main objects that we'll need to deal with
     m_mainSlot = mainItem->findChild<QDeclarativeItem*>("mainSlot");
@@ -533,9 +531,15 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         }
     }
 
-    // XXX: FIX ME with beautiful values :)
     containment->setPos(m_mainView->width(), m_mainView->height());
     containment->setVisible(false);
+}
+
+void PlasmaApp::mainViewGeometryChanged()
+{
+    if (m_qmlWidget) {
+        m_qmlWidget->resize(m_mainView->size());
+    }
 }
 
 void PlasmaApp::showWidgetsExplorer()
