@@ -62,7 +62,7 @@ QGraphicsWidget {
                       anchors.fill: parent
                       onClicked: {
                           list.currentIndex = index
-                          bodyView.html = dataSource['items'][modelData].description
+                          bodyView.html = "<body style=\"background:#fff;\">"+dataSource['items'][modelData].description+"</body>"
                           list.itemClicked()
                       }
                   }
