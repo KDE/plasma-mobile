@@ -34,6 +34,10 @@ QGraphicsWidget {
         width: mainWidget.width
         height: mainWidget.height
 
+        Plasma.Theme {
+            id: theme
+        }
+
         Component {
             id : messageDelegate
             Item {
@@ -48,9 +52,11 @@ QGraphicsWidget {
                         id : layout
 
                         Text {
+                            color: theme.textColor
                             text: subject
                         }
                         Text {
+                            color: theme.textColor
                             text: from
                         }
                     }

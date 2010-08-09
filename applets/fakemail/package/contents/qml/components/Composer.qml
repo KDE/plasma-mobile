@@ -31,6 +31,7 @@ QGraphicsWidget {
     property string bodyText: ""
     property string toText: ""
 
+
     Plasma.Frame {
         id: frame
         anchors.left: parent.left
@@ -93,9 +94,15 @@ QGraphicsWidget {
         }
     }
 
+    Item {
+        Plasma.Theme {
+            id: theme
+        }
+    }
 
     Plasma.WebView {
         id : text
+        
         anchors.left: parent.left
         anchors.leftMargin: 60
         anchors.right: parent.right
@@ -103,7 +110,7 @@ QGraphicsWidget {
         anchors.bottom : parent.bottom
         width : parent.width - 60
         dragToScroll : true
-        html: "<div contenteditable=\"true\">"+root.bodyText+"</div>"
+        html: "<div contenteditable=\"true\" style=\"color:"+theme.textColor+"\">"+root.bodyText+"</div>"
     }
 
 

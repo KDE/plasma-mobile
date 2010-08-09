@@ -37,6 +37,10 @@ QGraphicsWidget {
         id : main
         anchors.fill : mainWidget
 
+        Plasma.Theme {
+            id: theme
+        }
+
         Component {
                 id : messageDelegate
 
@@ -51,7 +55,7 @@ QGraphicsWidget {
                         width : content.width
                         height: content.height
                         dragToScroll : true
-                        html: "<div style=\"border:1px solid #aaa; background: rgba(0,0,0,0.15)\">Subject:"+subject+"<br/>From:"+from+"</div>"+body
+                        html: "<body style=\"color:"+theme.textColor+"\"><div style=\"border:1px solid #aaa; background: rgba(0,0,0,0.15)\">Subject:"+subject+"<br/>From:"+from+"</div>"+body+"</body>"
                     }
                 }
             }
