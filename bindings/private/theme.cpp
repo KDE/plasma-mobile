@@ -24,6 +24,9 @@
 ThemeProxy::ThemeProxy(QObject *parent)
     : QObject(parent)
 {
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SIGNAL(textColorChanged()));
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SIGNAL(highlightColorChanged()));
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SIGNAL(backgroundColorChanged()));
 }
 
 ThemeProxy::~ThemeProxy()
