@@ -13,7 +13,13 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][1][Applets][1]
+geometry=0,0,310,310
 plugin=clock
+zvalue=1
+
+[Containments][1][Applets][1]
+geometry=400,0,310,310
+plugin=plasma_applet_notes
 zvalue=1
 
 [Containments][2]
@@ -31,7 +37,7 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][2][Wallpaper][image]
-wallpaper=/opt/kde4/share/wallpapers/Grass
+wallpaper=Grass
 wallpaperposition=2
 
 
@@ -50,10 +56,18 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][3][Applets][1]
-geometry=-0.999985,-4.49997,310.5,310.5
-plugin=news
+geometry=0,0,310,310
+plugin=org.kde.news-qml
 immutability=1
 zvalue=1
+
+[Containments][3][Applets][2]
+geometry=400,0,310,310
+plugin=twitter
+immutability=1
+zvalue=1
+
+
 
 [Containments][4]
 activity=client
@@ -70,49 +84,32 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][4][Applets][1]
-plugin=digital-clock
-geometry=28,66.8,266.4,133.2
+plugin=weather
+geometry=0,0,300,300
 immutability=1
 zvalue=1
 
-
-[Containments][5]
-activity=service
-desktop=-1
-formfactor=0
-geometry=0,0,800,480
-immutability=1
-location=1
-plugin=newspaper
-orientation=1
-screen=0
-zvalue=0
-wallpaperplugin=image
-wallpaperpluginmode=SingleImage
-
-[Containments][5][Applets][1]
-geometry=10,10,500,400
-plugin=twitter
+[Containments][4][Applets][2]
+plugin=opendesktop
+geometry=0,0,300,300
 immutability=1
 zvalue=1
 
-[Containments][6]
-activity=game
-desktop=-1
-formfactor=0
-geometry=0,0,800,480
+[Containments][4][Applets][3]
+plugin=opendesktop
+geometry=400,0,300,300
 immutability=1
-location=1
-plugin=newspaper
-orientation=1
-screen=0
-zvalue=0
-wallpaperplugin=image
-wallpaperpluginmode=SingleImage
+zvalue=1
 
-[Containments][6][Applets][1]
-geometry=8,1,342,342
-plugin=fifteenPuzzle
+[Containments][4][Applets][4]
+plugin=plasma_applet_rtm
+geometry=800,0,300,300
+immutability=1
+zvalue=1
+
+[Containments][4][Applets][5]
+plugin=blackboard
+geometry=1200,0,300,300
 immutability=1
 zvalue=1
 
@@ -127,26 +124,20 @@ plugin=org.kde.mobilesystemtray
 screen=0
 zvalue=10
 
-[Containments][7][Applets][10]
-geometry=16.8571428571429,4,28.2857142857143,24
+[Containments][7][Applets][9]
+geometry=16,4,28.2857142857143,24
 immutability=1
 plugin=notifications
 zvalue=0
 
-[Containments][7][Applets][10][Configuration][ExtenderItems][1]
-extenderIconName=dialog-information
-extenderItemName=jobGroup
-extenderItemPosition=0
-isGroup=true
-sourceAppletId=10
-sourceAppletPluginName=notifications
-
-[Containments][7][Applets][10][PopupApplet]
-DialogHeight=95
-DialogWidth=394
-
-[Containments][7][Applets][9]
-geometry=49.1428571428571,4,24,24
+[Containments][7][Applets][10]
+geometry=49,4,24,24
 immutability=1
 plugin=notifier
+zvalue=0
+
+[Containments][7][Applets][11]
+geometry=60,4,24,24
+immutability=1
+plugin=battery
 zvalue=0
