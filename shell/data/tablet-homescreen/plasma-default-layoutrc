@@ -67,7 +67,11 @@ plugin=twitter
 immutability=1
 zvalue=1
 
-
+[Containments][3][Applets][3]
+geometry=800,0,310,310
+plugin=opendesktop_activities
+immutability=1
+zvalue=1
 
 [Containments][4]
 activity=client
@@ -96,7 +100,7 @@ immutability=1
 zvalue=1
 
 [Containments][4][Applets][3]
-plugin=opendesktop
+plugin=webbrowser
 geometry=400,0,300,300
 immutability=1
 zvalue=1
