@@ -17,7 +17,7 @@ geometry=0,0,310,310
 plugin=clock
 zvalue=1
 
-[Containments][1][Applets][1]
+[Containments][1][Applets][2]
 geometry=400,0,310,310
 plugin=plasma_applet_notes
 zvalue=1
