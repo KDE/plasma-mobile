@@ -324,7 +324,6 @@ void PlasmaApp::previousActivity()
            it.value()->location() != Plasma::Desktop) {
         if (it == m_containments.constBegin()) {
             it = m_containments.constEnd();
-            --it;
             if (loop) {
                 return;
             } else {
