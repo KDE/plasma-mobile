@@ -34,38 +34,39 @@ QGraphicsWidget {
       resources: [
           Component {
               id: simpleText
-              Rectangle {
-                  id : background
-                  width: list.width
-                  height: delegateLayout.height
+              Item {
+                id : background
+                width: list.width
+                height: delegateLayout.height+5
 
-                  Column {
-                      id : delegateLayout
+                Plasma.Frame {
+                    id:frame
+                    minimumSize: list.width+"x"+delegateLayout.height
 
-                      Text {
-                          color: theme.textColor
-                          text: dataSource['items'][modelData].title
-                      }
-                      Text {
-                          color: theme.textColor
-                          text: dataSource['items'][modelData].time
-                      }
-                  }
+                    Column {
+                        id : delegateLayout
+                        spacing: 5
 
-                  gradient: Gradient {
-                      GradientStop { position: 0.0; color: "transparent" }
-                      GradientStop { position: 1.0; color: Qt.rgba(0, 0, 0, 0.08)  }
-                  }
+                        Text {
+                            color: theme.textColor
+                            text: dataSource['items'][modelData].title
+                        }
+                        Text {
+                            color: theme.textColor
+                            text: dataSource['items'][modelData].time
+                        }
+                    }
+                }
 
-                  MouseArea {
-                      id: itemMouse
-                      anchors.fill: parent
-                      onClicked: {
-                          list.currentIndex = index
-                          bodyView.html = "<body style=\"background:#fff;\">"+dataSource['items'][modelData].description+"</body>"
-                          list.itemClicked()
-                      }
-                  }
+                MouseArea {
+                    id: itemMouse
+                    anchors.fill: background
+                    onClicked: {
+                        list.currentIndex = index
+                        bodyView.html = "<body style=\"background:#fff;\">"+dataSource['items'][modelData].description+"</body>"
+                        list.itemClicked()
+                    }
+                }
               }
           }
       ]

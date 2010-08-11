@@ -41,15 +41,17 @@ QGraphicsWidget {
         Component {
             id : messageDelegate
             Item {
+                id: delegateItem
                 width: list.width
-                height: layout.height
+                height: layout.height+5
 
-                Rectangle {
-                    id : background
-                    anchors.fill : parent
+                Plasma.Frame {
+                    id:frame
+                    minimumSize: list.width+"x"+layout.height
 
                     Column {
                         id : layout
+                        spacing: 5
 
                         Text {
                             color: theme.textColor
@@ -61,14 +63,10 @@ QGraphicsWidget {
                         }
                     }
 
-                    gradient: Gradient {
-                        GradientStop { position: 0.0; color: "transparent" }
-                        GradientStop { position: 1.0; color: Qt.rgba(0, 0, 0, 0.15)  }
-                    }
                 }
                 MouseArea {
                     id: itemMouse
-                    anchors.fill: parent
+                    anchors.fill: delegateItem
                     onClicked: {
                         list.currentIndex = index
                         mainWidget.itemClicked()
