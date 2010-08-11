@@ -70,7 +70,7 @@ Item {
         height: spareSlot.height
     }
 
-        Dragger {
+    Dragger {
         id: prevDrag
 
         location: "LeftEdge"
@@ -158,5 +158,16 @@ Item {
         }
     }
 
+    //FIXME: this should be automatic
+    onWidthChanged: {
+        prevDrag.updateDrag();
+        nextDrag.updateDrag();
+        alternateDrag.updateDrag();
+    }
+    onHeightChanged: {
+        prevDrag.updateDrag();
+        nextDrag.updateDrag();
+        alternateDrag.updateDrag();
+    }
 
 }

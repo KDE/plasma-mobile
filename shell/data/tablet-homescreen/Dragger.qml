@@ -87,6 +87,28 @@ Image {
             draggerRegion.drag.maximumX = homescreen.width-dragger.width;
         } 
     }
+    
+    //FIXME: the drag property doesn't get auto updated and notified
+    function updateDrag() {print("AAAAAAAAA");print (homescreen.height)
+        if (location == "BottomEdge") {
+            draggerRegion.drag.axis = Drag.YAxis
+            draggerRegion.drag.minimumY = 0;
+            draggerRegion.drag.maximumY = homescreen.height-dragger.height;
+        } else if (location == "TopEdge") {
+            draggerRegion.drag.axis = Drag.YAxis
+            draggerRegion.drag.minimumY = 0;
+            draggerRegion.drag.maximumY = homescreen.height;
+        } else if (location == "LeftEdge") {
+            draggerRegion.drag.axis = Drag.XAxis
+            draggerRegion.drag.minimumX = 0;
+            draggerRegion.drag.maximumX = homescreen.width;
+        //RightEdge
+        } else {
+            draggerRegion.drag.axis = Drag.XAxis
+            draggerRegion.drag.minimumX = 0;
+            draggerRegion.drag.maximumX = homescreen.width-dragger.width;
+        } 
+    }
 
     MouseArea {
         id: draggerRegion;
