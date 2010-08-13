@@ -38,6 +38,7 @@ class PlasmoidTask : public Task
 
 public:
     PlasmoidTask(const QString &appletName, int id, QObject *parent, Plasma::Applet *host);
+    PlasmoidTask(Plasma::Applet* applet, int id, QObject *parent, Plasma::Applet *host);
     virtual ~PlasmoidTask();
 
     bool isValid() const;
@@ -59,7 +60,7 @@ protected:
     virtual QGraphicsWidget* createWidget(Plasma::Applet *applet);
 
 private:
-    void setupApplet(const QString &plugin, int id);
+    void setupApplet(Plasma::Applet *applet, int id);
 
     QString m_name;
     QString m_typeId;

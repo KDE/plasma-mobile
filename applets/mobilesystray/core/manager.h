@@ -65,6 +65,8 @@ public:
 
     void addApplet(const QString appletName, Plasma::Applet *parent);
 
+    void addApplet(Plasma::Applet* applet, Plasma::Applet *parent);
+
     void removeApplet(const QString appletName, Plasma::Applet *parent);
 
     QStringList applets(Plasma::Applet *parent) const;

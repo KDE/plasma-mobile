@@ -100,7 +100,16 @@ void PlasmoidProtocol::addApplet(const QString appletName, const int id, Plasma:
     kDebug() << "Registering task with the manager" << appletName;
 
     PlasmoidTask *task = new PlasmoidTask(appletName, id, this, parent);
+    setupTask(task, appletName, parent);
+}
 
+void PlasmoidProtocol::addApplet(Plasma::Applet* applet, const int id, Plasma::Applet *parent)
+{
+    PlasmoidTask *task = new PlasmoidTask(applet, id, this, parent);
+    setupTask(task, applet->pluginName(), parent);
+}
+
+void PlasmoidProtocol::setupTask(PlasmoidTask *task, const QString appletName, Plasma::Applet *parent) {
     if (!task->isValid()) {
         // we failed to load our applet *sob*
         delete task;

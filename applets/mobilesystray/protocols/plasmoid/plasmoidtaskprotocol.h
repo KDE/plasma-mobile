@@ -49,6 +49,7 @@ public:
     void forwardConstraintsEvent(Plasma::Constraints constraints, Plasma::Applet *host);
     void loadFromConfig(Plasma::Applet *parent);
     void addApplet(const QString appletName, const int id, Plasma::Applet *parent);
+    void addApplet(Plasma::Applet* applet, const int id, Plasma::Applet *parent);
     void removeApplet(const QString appletName, Plasma::Applet *parent);
     QStringList applets(Plasma::Applet *parent) const;
 
@@ -56,6 +57,7 @@ private slots:
     void cleanupTask(Plasma::Applet *host, const QString &typeId);
 
 private:
+    void setupTask(PlasmoidTask* task, const QString appletName, Plasma::Applet *parent);
     QHash<Plasma::Applet *, QHash<QString, PlasmoidTask*> > m_tasks;
 };
 

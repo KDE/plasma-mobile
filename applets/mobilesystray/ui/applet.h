@@ -69,13 +69,16 @@ public slots:
 protected:
     //reimp from Contaiment
     //void saveContents(KConfigGroup &group) const;
-    void restoreContents(KConfigGroup &group);
+    //void restoreContents(KConfigGroup &group);
     enum Mode { PASSIVE, ACTIVE };
     Mode m_mode;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget = 0);
     void resizeEvent (QGraphicsSceneResizeEvent * event);
     void resizeContents();
+
+protected slots:
+    void addTrayApplet(Plasma::Applet* ap);
 
 private:
     static const int WIDTH_THRESHOLD = 500; // beyond which the tray is considered expanded/shrunken

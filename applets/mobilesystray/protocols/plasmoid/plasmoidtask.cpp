@@ -42,9 +42,23 @@ PlasmoidTask::PlasmoidTask(const QString &appletname, int id, QObject *parent, P
       m_host(host),
       m_takenByParent(false)
 {
-    setupApplet(appletname, id);
+    Plasma::Applet *applet = Plasma::Applet::load(appletname, id);
+    if (!applet) {
+        kDebug() << "Could not load applet" << appletname;
+        return;
+    }
+    setupApplet(applet, id);
 }
 
+PlasmoidTask::PlasmoidTask(Plasma::Applet* applet, int id, QObject *parent, Plasma::Applet *host)
+    : Task(parent),
+      m_name(applet->pluginName()),
+      m_typeId(applet->pluginName()),
+      m_host(host),
+      m_takenByParent(false)
+{
+    setupApplet(applet, id);
+}
 
 PlasmoidTask::~PlasmoidTask()
 {
@@ -128,15 +142,9 @@ void PlasmoidTask::forwardConstraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void PlasmoidTask::setupApplet(const QString &plugin, int id)
+void PlasmoidTask::setupApplet(Plasma::Applet *applet, int id)
 {
-    Plasma::Applet *applet = Plasma::Applet::load(plugin, id);
     m_applet = applet;
-
-    if (!m_applet) {
-        kDebug() << "Could not load applet" << plugin;
-        return;
-    }
 
     //FIXME: System Information should be system services, but battery and devicenotifier are both there. we would need multiple categories
     if (applet->category() == "System Information" ||

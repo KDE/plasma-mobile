@@ -109,6 +109,11 @@ void Manager::addApplet(const QString appletName, Plasma::Applet *parent)
     d->plasmoidProtocol->addApplet(appletName, 0, parent);
 }
 
+void Manager::addApplet(Plasma::Applet *applet, Plasma::Applet *parent)
+{
+    d->plasmoidProtocol->addApplet(applet, 0, parent);
+}
+
 void Manager::removeApplet(const QString appletName, Plasma::Applet *parent)
 {
     d->plasmoidProtocol->removeApplet(appletName, parent);

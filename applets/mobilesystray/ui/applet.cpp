@@ -73,6 +73,9 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     m_layout = new QGraphicsLinearLayout(Qt::Horizontal, m_mainWidget);
     m_mainWidget->setLayout(m_layout);
 
+    connect(this, SIGNAL(appletAdded(Plasma::Applet*,const QPointF&)),
+            this, SLOT(addTrayApplet(Plasma::Applet*)));
+
     // FIXME: attempt to center applets - but doesn't seem to quite work
     m_layout->insertStretch(0);
     m_layout->addStretch();
@@ -178,7 +181,7 @@ void MobileTray::constraintsEvent(Plasma::Constraints constraints)
     //we skip the default Contaiment save, we don't want to directly save applets
     //another option by the way is to get rid of the plasmoid protocol and just load plasmoids as standard applets
 }
-*/
+
 void MobileTray::restoreContents(KConfigGroup &group)
 {
     KConfigGroup applets(&group, "Applets");
@@ -195,7 +198,7 @@ void MobileTray::restoreContents(KConfigGroup &group)
         m_manager->addApplet(plugin, this);
     }
 }
-
+*/
 void MobileTray::resizeContents() {
     int totalItems = m_fixedIcons.size() + m_cyclicIcons.size();
     if (m_mode == ACTIVE) {
@@ -238,6 +241,9 @@ void MobileTray::showWidget(QGraphicsWidget *w, int index)
     }
 }
 
+void MobileTray::addTrayApplet(Plasma::Applet* applet) {
+    m_manager->addApplet(applet, this);
+}
 
 void MobileTray::addTask(SystemTray::Task* task)
 {
