@@ -76,9 +76,9 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     connect(this, SIGNAL(appletAdded(Plasma::Applet*,const QPointF&)),
             this, SLOT(addTrayApplet(Plasma::Applet*)));
 
-    // FIXME: attempt to center applets - but doesn't seem to quite work
-    m_layout->insertStretch(0);
-    m_layout->addStretch();
+    // center the applets
+    outsidelayout->insertStretch(0);
+    outsidelayout->addStretch();
 }
 
 
