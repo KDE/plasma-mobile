@@ -149,5 +149,11 @@ DialogWidth=394
 [Containments][8][Applets][9]
 geometry=49.1428571428571,4,24,24
 immutability=1
-plugin=notifier
+plugin=org.kde.fakebattery
+zvalue=0
+
+[Containments][8][Applets][11]
+geometry=0,0,64,32
+immutability=2
+plugin=digital-clock
 zvalue=0

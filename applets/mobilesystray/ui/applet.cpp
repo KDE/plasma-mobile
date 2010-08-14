@@ -67,7 +67,7 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     // put a widget inside the scrollwidget's widget
     // - so it can be resized independantly of the scrollwidget
     m_mainWidget = new QGraphicsWidget(this);
-    m_mainWidget->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    m_mainWidget->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed));
     outsidelayout->addItem(m_mainWidget);
 
     m_layout = new QGraphicsLinearLayout(Qt::Horizontal, m_mainWidget);
@@ -200,21 +200,32 @@ void MobileTray::restoreContents(KConfigGroup &group)
 }
 */
 void MobileTray::resizeContents() {
-    int totalItems = m_fixedIcons.size() + m_cyclicIcons.size();
-    if (m_mode == ACTIVE) {
-        totalItems += m_hiddenIcons.size() + 1;
-    }
     int contentsHeight = size().height() - 10;
-    int totalWidth = contentsHeight * totalItems;
+    int iconHeight = contentsHeight - 5;
+    int totalWidth = 0;
+    foreach (QGraphicsWidget* w, m_fixedIcons) {
+        w->setPreferredHeight(iconHeight);
+        totalWidth += w->preferredSize().width() < iconHeight ? iconHeight : w->preferredSize().width();
+    }
+    foreach (QGraphicsWidget* w, m_cyclicIcons) {
+        w->setPreferredHeight(iconHeight);
+        totalWidth += w->preferredSize().width() < iconHeight ? iconHeight : w->preferredSize().width();
+    }
+    foreach (QGraphicsWidget* w, m_hiddenIcons) {
+        w->setPreferredHeight(iconHeight);
+        if (m_mode == ACTIVE) {
+        totalWidth += w->preferredSize().width() < iconHeight ? iconHeight : w->preferredSize().width();
+        }
+    }
     m_mainWidget->setPreferredSize(totalWidth, contentsHeight);
 }
 
 void MobileTray::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
     m_background->resizeFrame(event->newSize());
-    m_scrollWidget->resize(event->newSize());
-    m_scrollWidget->setPreferredSize(event->newSize());
     resizeContents();
+    m_scrollWidget->setPreferredSize(event->newSize());
+    m_scrollWidget->resize(event->newSize());
     if (initDone) { // only do the following if init() is done - else will crash!
         if (event->newSize().width() > WIDTH_THRESHOLD && m_mode == PASSIVE) {
             toActive();
@@ -346,6 +357,7 @@ void MobileTray::toPassive()
             hideWidget(w);
         }
         hideWidget(m_cancel);
+        resizeContents();
     }
 }
 
@@ -360,6 +372,7 @@ void MobileTray::toActive()
         if (m_notificationsApplet) {
             m_notificationsApplet->showPopup();
         }
+        resizeContents();
     }
 }
 

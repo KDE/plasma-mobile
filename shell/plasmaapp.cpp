@@ -491,6 +491,8 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
                                   m_trayPanel->property("height").toReal());
         m_trayContainment->setPos(0, 0);
 
+        connect(m_trayPanel, SIGNAL(heightChanged()), this, SLOT(resizeTray()));
+        connect(m_trayPanel, SIGNAL(widthChanged()), this, SLOT(resizeTray()));
         connect(m_trayPanel, SIGNAL(xChanged()), this, SLOT(resizeTray()));
         // "enlarge" is initiated by a QML mousearea, but "shrink" needs to be initiated by
         // the applet itself..
