@@ -54,7 +54,7 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     m_background->setEnabledBorders(Plasma::FrameSvg::AllBorders);
 
     // list of applets to "always show"
-    m_fixedList << "notifications" << "org.kde.networkmanagement" << "battery" << "notifier";
+    m_fixedList << "notifications" << "org.kde.fakebattery" << "org.kde.fakesignal" << "digital-clock";
 
     m_scrollWidget = new Plasma::ScrollWidget(this);
     m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

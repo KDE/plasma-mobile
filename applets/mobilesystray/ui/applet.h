@@ -85,7 +85,7 @@ private:
     void showWidget(QGraphicsWidget *w, int index = -1);
     void hideWidget(QGraphicsWidget *w);
     static Manager *m_manager;
-    static const int MAXCYCLIC = 3;
+    static const int MAXCYCLIC = 2;
     Plasma::FrameSvg *m_background;
     QGraphicsLinearLayout *m_layout;
     QList<QString> m_fixedList;

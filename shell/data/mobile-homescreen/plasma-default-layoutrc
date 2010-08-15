@@ -147,9 +147,15 @@ DialogHeight=95
 DialogWidth=394
 
 [Containments][8][Applets][9]
-geometry=49.1428571428571,4,24,24
+geometry=1001,0,24,24
 immutability=1
 plugin=org.kde.fakebattery
+zvalue=0
+
+[Containments][8][Applets][12]
+geometry=1000,0,200,50
+immutability=1
+plugin=org.kde.fakesignal
 zvalue=0
 
 [Containments][8][Applets][11]
