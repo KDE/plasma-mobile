@@ -40,7 +40,8 @@ PlasmoidTask::PlasmoidTask(const QString &appletname, int id, QObject *parent, P
       m_name(appletname),
       m_typeId(appletname),
       m_host(host),
-      m_takenByParent(false)
+      m_takenByParent(false),
+      m_appletHasInit(false)
 {
     Plasma::Applet *applet = Plasma::Applet::load(appletname, id);
     if (!applet) {
@@ -50,12 +51,13 @@ PlasmoidTask::PlasmoidTask(const QString &appletname, int id, QObject *parent, P
     setupApplet(applet, id);
 }
 
-PlasmoidTask::PlasmoidTask(Plasma::Applet* applet, int id, QObject *parent, Plasma::Applet *host)
+PlasmoidTask::PlasmoidTask(Plasma::Applet* applet, int id, QObject *parent, Plasma::Applet *host, bool appletHasInit)
     : Task(parent),
       m_name(applet->pluginName()),
       m_typeId(applet->pluginName()),
       m_host(host),
-      m_takenByParent(false)
+      m_takenByParent(false),
+      m_appletHasInit(appletHasInit)
 {
     setupApplet(applet, id);
 }
@@ -112,11 +114,17 @@ QGraphicsWidget* PlasmoidTask::createWidget(Plasma::Applet *host)
     m_takenByParent = true;
     applet->setParent(host);
     applet->setParentItem(host);
-    applet->init();
-    applet->updateConstraints(Plasma::StartupCompletedConstraint);
-    applet->flushPendingConstraintsEvents();
-    applet->updateConstraints(Plasma::AllConstraints);
-    applet->flushPendingConstraintsEvents();
+    if (!m_appletHasInit) {
+        // The below code segment caused the "double applet" bug with the notifications applet.
+        // Probably because init() was already called once before.
+        // Quick-fixed by defaulting to not running it if applet was passed in by pointer.
+        applet->init();
+        applet->updateConstraints(Plasma::StartupCompletedConstraint);
+        applet->flushPendingConstraintsEvents();
+        applet->updateConstraints(Plasma::AllConstraints);
+        applet->flushPendingConstraintsEvents();
+        m_appletHasInit = true;
+    }
 
     // make sure to record it in the configuration so that if we reload from the config,
     // this applet is remembered

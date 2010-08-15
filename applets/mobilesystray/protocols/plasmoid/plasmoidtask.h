@@ -38,7 +38,7 @@ class PlasmoidTask : public Task
 
 public:
     PlasmoidTask(const QString &appletName, int id, QObject *parent, Plasma::Applet *host);
-    PlasmoidTask(Plasma::Applet* applet, int id, QObject *parent, Plasma::Applet *host);
+    PlasmoidTask(Plasma::Applet* applet, int id, QObject *parent, Plasma::Applet *host, bool appletHasInit = true);
     virtual ~PlasmoidTask();
 
     bool isValid() const;
@@ -68,6 +68,7 @@ private:
     QWeakPointer<Plasma::Applet> m_applet;
     Plasma::Applet *m_host;
     bool m_takenByParent;
+    bool m_appletHasInit;
 };
 
 }
