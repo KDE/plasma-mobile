@@ -199,12 +199,14 @@ void MobileTray::resizeEvent(QGraphicsSceneResizeEvent* event)
     }
 }
 
+// hide a tray icon
 void MobileTray::hideWidget(QGraphicsWidget *w)
 {
     w->hide();
     m_layout->removeItem(w);
 }
 
+// unhide/show a tray icon at a particular index
 void MobileTray::showWidget(QGraphicsWidget *w, int index)
 {
     w->show();
@@ -215,6 +217,7 @@ void MobileTray::showWidget(QGraphicsWidget *w, int index)
     }
 }
 
+// create plasmoidtasks out of applets added to the containment
 void MobileTray::addTrayApplet(Plasma::Applet* applet) {
     m_manager->addApplet(applet, this);
 }
