@@ -129,7 +129,7 @@ screen=0
 zvalue=10
 
 [Containments][8][Applets][10]
-geometry=16.8571428571429,4,28.2857142857143,24
+geometry=0,0,28.2857142857143,24
 immutability=1
 plugin=notifications
 zvalue=0
@@ -147,19 +147,19 @@ DialogHeight=95
 DialogWidth=394
 
 [Containments][8][Applets][9]
-geometry=1001,0,24,24
+geometry=2,0,24,24
 immutability=1
 plugin=org.kde.fakebattery
 zvalue=0
 
 [Containments][8][Applets][12]
-geometry=1000,0,200,50
+geometry=3,0,200,50
 immutability=1
 plugin=org.kde.fakesignal
 zvalue=0
 
 [Containments][8][Applets][11]
-geometry=0,0,64,32
+geometry=1,0,64,32
 immutability=2
 plugin=digital-clock
 zvalue=0

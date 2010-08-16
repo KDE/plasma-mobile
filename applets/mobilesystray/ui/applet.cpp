@@ -254,7 +254,7 @@ void MobileTray::addTask(SystemTray::Task* task)
         }
 
         if (isFixed) {
-            showWidget(ic, 0); // FIXME: this will reverse the order of applets loaded from config
+            showWidget(ic, m_fixedIcons.size()); // FIXME: this will reverse the order of applets loaded from config
             m_fixedIcons.insert(task, ic);
         } else {
             showWidget(ic);
