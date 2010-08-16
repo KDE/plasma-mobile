@@ -42,7 +42,7 @@ FakeSignal::~FakeSignal()
 
 void FakeSignal::resizeEvent (QGraphicsSceneResizeEvent * event)
 {
-    setMinimumWidth(event->newSize().height() + 70);
+    setMinimumWidth(event->newSize().height() + 90);
 }
 
 

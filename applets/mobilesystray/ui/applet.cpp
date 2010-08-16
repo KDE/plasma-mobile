@@ -211,7 +211,7 @@ void MobileTray::showWidget(QGraphicsWidget *w, int index)
 {
     w->show();
     if (index == -1) {
-      m_layout->insertItem(m_layout->count() - 1, w);
+      m_layout->insertItem(m_layout->count(), w);
     } else {
       m_layout->insertItem(index, w);
     }
@@ -254,7 +254,7 @@ void MobileTray::addTask(SystemTray::Task* task)
         }
 
         if (isFixed) {
-            showWidget(ic, 1); // FIXME: this will reverse the order of applets loaded from config
+            showWidget(ic, 0); // FIXME: this will reverse the order of applets loaded from config
             m_fixedIcons.insert(task, ic);
         } else {
             showWidget(ic);
