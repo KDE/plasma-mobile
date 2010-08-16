@@ -84,7 +84,18 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
 
 MobileTray::~MobileTray()
 {
-    // TODO: some cleanup?
+    // stop listening to the manager
+    disconnect(m_manager, 0, this, 0);
+
+    foreach (Task *task, m_manager->tasks()) {
+        // we don't care about the task updates anymore
+        disconnect(task, 0, this, 0);
+
+        // delete our widget (if any); while we're still kicking
+        delete task->widget(this, false);
+    }
+
+    // TODO: delete m_manager when we can?
 }
 
 void MobileTray::init()
@@ -93,40 +104,13 @@ void MobileTray::init()
         setFormFactor(Plasma::Horizontal);
     }
 
-/*    m_manager->loadApplets(this);
-
-    QStringList applets = m_manager->applets(this);
-    if (!applets.contains("org.kde.networkmanagement")) {
-        m_manager->addApplet("org.kde.networkmanagement", this);
-    }
-
-    if (!applets.contains("notifier")) {
-        m_manager->addApplet("notifier", this);
-    }
-
-    if (!applets.contains("notifications")) {
-        m_manager->addApplet("notifications", this);
-    }
-
-    if (!applets.contains("battery")) {
-        Plasma::DataEngineManager *engines = Plasma::DataEngineManager::self();
-        Plasma::DataEngine *power = engines->loadEngine("powermanagement");
-        if (power) {
-            const QStringList &batteries = power->query("Battery")["sources"].toStringList();
-            if (!batteries.isEmpty()) {
-                m_manager->addApplet("battery", this);
-            }
-        }
-        engines->unloadEngine("powermanagement");
-    }
-*/
     foreach(Task *task, m_manager->tasks()) {
         addTask(task);
     }
 
-    // TODO: a better cancel button at a better location...
     m_cancel = new Plasma::IconWidget(KIcon("dialog-cancel"), "", this);
     m_cancel->setSvg("widgets/arrows", "left-arrow");
+
     // request the mobile shell to do a shrink when clicked
     connect(m_cancel, SIGNAL(clicked()), this, SIGNAL(shrinkRequested()));
     m_cancel->setPreferredSize(m_cancel->size().width(), 100);
@@ -174,35 +158,12 @@ void MobileTray::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-/*void MobileTray::saveContents(KConfigGroup &group) const
-{
-    Q_UNUSED(group)
-
-    //we skip the default Contaiment save, we don't want to directly save applets
-    //another option by the way is to get rid of the plasmoid protocol and just load plasmoids as standard applets
-}
-
-void MobileTray::restoreContents(KConfigGroup &group)
-{
-    KConfigGroup applets(&group, "Applets");
-
-    QList<KConfigGroup> appletConfigs;
-    foreach (const QString &appletGroup, applets.groupList()) {
-        KConfigGroup appletConfig(&applets, appletGroup);
-        QString plugin = appletConfig.readEntry("plugin", QString());
-
-        if (plugin.isEmpty()) {
-            continue;
-        }
-
-        m_manager->addApplet(plugin, this);
-    }
-}
-*/
 void MobileTray::resizeContents() {
+    // TODO: this seems to work, but is *really* kind of ugly and inelegant. Think of a better way?
     int contentsHeight = size().height() - 10;
     int iconHeight = contentsHeight - 5;
     int totalWidth = 0;
+    // enlarge each applet
     foreach (QGraphicsWidget* w, m_fixedIcons) {
         w->setPreferredHeight(iconHeight);
         totalWidth += w->preferredSize().width() < iconHeight ? iconHeight : w->preferredSize().width();
@@ -214,9 +175,11 @@ void MobileTray::resizeContents() {
     foreach (QGraphicsWidget* w, m_hiddenIcons) {
         w->setPreferredHeight(iconHeight);
         if (m_mode == ACTIVE) {
-        totalWidth += w->preferredSize().width() < iconHeight ? iconHeight : w->preferredSize().width();
+            totalWidth += w->preferredSize().width() < iconHeight ? iconHeight : w->preferredSize().width();
         }
     }
+    // set an approximate minimal preferred size for the containing widget
+    // to prevent shrinking back when dbus protocol resets an applet's preferredsize to a small value.
     m_mainWidget->setPreferredSize(totalWidth, contentsHeight);
 }
 
@@ -288,7 +251,7 @@ void MobileTray::addTask(SystemTray::Task* task)
         }
 
         if (isFixed) {
-            showWidget(ic, 1);
+            showWidget(ic, 1); // FIXME: this will reverse the order of applets loaded from config
             m_fixedIcons.insert(task, ic);
         } else {
             showWidget(ic);
