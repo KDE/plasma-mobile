@@ -56,53 +56,6 @@ void PlasmoidProtocol::forwardConstraintsEvent(Plasma::Constraints constraints, 
     }
 }
 
-void PlasmoidProtocol::loadFromConfig(Plasma::Applet *parent)
-{
-    KConfigGroup cg = parent->config();
-    QHash<QString, PlasmoidTask*> existingTasks = m_tasks.value(parent);
-
-    if (m_tasks.contains(parent)) {
-        m_tasks[parent].clear();
-    }
-
-    KConfigGroup appletGroup(&cg, "Applets");
-    foreach (const QString &groupName, appletGroup.groupList()) {
-        KConfigGroup childGroup(&appletGroup, groupName);
-        QString appletName = childGroup.readEntry("plugin", QString());
-
-        if (m_tasks.contains(parent) && m_tasks.value(parent).contains(appletName)) {
-            continue;
-        }
-
-        if (existingTasks.contains(appletName)) {
-            m_tasks[parent].insert(appletName, existingTasks.value(appletName));
-            existingTasks.remove(appletName);
-            continue;
-        }
-
-        addApplet(appletName, groupName.toInt(), parent);
-
-        existingTasks.remove(appletName);
-    }
-
-    QHashIterator<QString, PlasmoidTask*> it(existingTasks);
-    while (it.hasNext()) {
-        it.next();
-        Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(it.value()->widget(parent, true));
-        if (applet) {
-            applet->destroy();
-        }
-    }
-}
-
-void PlasmoidProtocol::addApplet(const QString appletName, const int id, Plasma::Applet *parent)
-{
-    kDebug() << "Registering task with the manager" << appletName;
-
-    PlasmoidTask *task = new PlasmoidTask(appletName, id, this, parent);
-    setupTask(task, appletName, parent);
-}
-
 void PlasmoidProtocol::addApplet(Plasma::Applet* applet, const int id, Plasma::Applet *parent)
 {
     PlasmoidTask *task = new PlasmoidTask(applet, id, this, parent);

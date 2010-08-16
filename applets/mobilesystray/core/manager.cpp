@@ -99,16 +99,6 @@ void Manager::forwardConstraintsEvent(Plasma::Constraints constraints, Plasma::A
     d->plasmoidProtocol->forwardConstraintsEvent(constraints, host);
 }
 
-void Manager::loadApplets(Plasma::Applet *parent)
-{
-    d->plasmoidProtocol->loadFromConfig(parent);
-}
-
-void Manager::addApplet(const QString appletName, Plasma::Applet *parent)
-{
-    d->plasmoidProtocol->addApplet(appletName, 0, parent);
-}
-
 void Manager::addApplet(Plasma::Applet *applet, Plasma::Applet *parent)
 {
     d->plasmoidProtocol->addApplet(applet, 0, parent);

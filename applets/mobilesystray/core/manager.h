@@ -61,9 +61,11 @@ public:
 
     void forwardConstraintsEvent(Plasma::Constraints constraints, Plasma::Applet *host);
 
-    void loadApplets(Plasma::Applet *parent);
+// removed as loading applets from config is the containment's job now
+//    void loadApplets(Plasma::Applet *parent);
 
-    void addApplet(const QString appletName, Plasma::Applet *parent);
+// removed as we should not need to add applet by name anymore.
+//    void addApplet(const QString appletName, Plasma::Applet *parent);
 
     void addApplet(Plasma::Applet* applet, Plasma::Applet *parent);
 

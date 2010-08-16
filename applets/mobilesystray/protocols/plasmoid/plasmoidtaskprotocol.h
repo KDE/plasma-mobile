@@ -47,8 +47,10 @@ public:
     void init();
 
     void forwardConstraintsEvent(Plasma::Constraints constraints, Plasma::Applet *host);
-    void loadFromConfig(Plasma::Applet *parent);
-    void addApplet(const QString appletName, const int id, Plasma::Applet *parent);
+// removed as loading applets from config is the containment's job now
+//    void loadFromConfig(Plasma::Applet *parent);
+// removed as we should not need to add applet by name anymore.
+//    void addApplet(const QString appletName, const int id, Plasma::Applet *parent);
     void addApplet(Plasma::Applet* applet, const int id, Plasma::Applet *parent);
     void removeApplet(const QString appletName, Plasma::Applet *parent);
     QStringList applets(Plasma::Applet *parent) const;
