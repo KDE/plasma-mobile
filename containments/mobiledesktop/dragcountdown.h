@@ -17,48 +17,44 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef APPLETSVIEW_H
-#define APPLETSVIEW_H
+#ifndef DRAGCOUNT_H
+#define DRAGCOUNT_H
 
-#include <Plasma/ScrollWidget>
-
-#include "appletscontainer.h"
+#include <QGraphicsWidget>
 
 class QTimer;
 
 namespace Plasma
 {
-    class Applet;
+    class Svg;
 }
 
-class DragCountdown;
-
-class AppletsView : public Plasma::ScrollWidget
+class DragCountdown : public QGraphicsWidget
 {
     Q_OBJECT
-    friend class AppletsContainer;
 
 public:
-    AppletsView(QGraphicsItem *parent = 0);
-    ~AppletsView();
+    DragCountdown(QGraphicsItem *parent=0);
+    ~DragCountdown();
 
-    void setAppletsContainer(AppletsContainer *appletsContainer);
-    AppletsContainer *appletsContainer() const;
-
-protected Q_SLOTS:
-    void appletDragRequested();
+    void start(const int timeout);
+    void stop();
 
 protected:
-    bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
-    void paint(QPainter *painter,
-               const QStyleOptionGraphicsItem *option,
-               QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0);
+
+protected Q_SLOTS:
+    void updateProgress();
+
+Q_SIGNALS:
+    void dragRequested();
 
 private:
-    AppletsContainer *m_appletsContainer;
-    DragCountdown *m_dragCountdown;
-    bool m_movingApplets;
-    QWeakPointer<Plasma::Applet> m_draggingApplet;
+    qreal m_progress;
+    qreal m_increment;
+    QTimer *m_animationTimer;
+    QTimer *m_countdownTimer;
+    Plasma::Svg *m_icons;
 };
 
 #endif

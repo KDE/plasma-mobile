@@ -18,6 +18,7 @@
  */
 
 #include "appletsview.h"
+#include "dragcountdown.h"
 
 #include <QTimer>
 #include <QGraphicsSceneMouseEvent>
@@ -32,9 +33,10 @@ AppletsView::AppletsView(QGraphicsItem *parent)
     : Plasma::ScrollWidget(parent),
       m_movingApplets(false)
 {
-    m_moveTimer = new QTimer(this);
-    m_moveTimer->setSingleShot(true);
-    connect(m_moveTimer, SIGNAL(timeout()), this, SLOT(moveTimerTimeout()));
+    m_dragCountdown = new DragCountdown(this);
+
+    connect(m_dragCountdown, SIGNAL(dragRequested()), this, SLOT(appletDragRequested()));
+
     setAlignment(Qt::AlignCenter);
 }
 
@@ -53,7 +55,7 @@ AppletsContainer *AppletsView::appletsContainer() const
     return m_appletsContainer;
 }
 
-void AppletsView::moveTimerTimeout()
+void AppletsView::appletDragRequested()
 {
     m_movingApplets = true;
     update();
@@ -68,7 +70,22 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
     }
 
     if (event->type() == QEvent::GraphicsSceneMousePress) {
-        m_moveTimer->start(3000);
+        Plasma::Applet *appletUnderMouse = 0;
+        //find an applet to put the indicator over
+        foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
+            if (applet == watched || applet->isAncestorOf(watched)) {
+                appletUnderMouse = applet;
+                break;
+            }
+        }
+
+        if (appletUnderMouse) {
+            //put the move indicator in the center of the VISIBLE area of the applet
+            const QRectF mappedAppleRect(mapFromItem(appletUnderMouse, appletUnderMouse->boundingRect()).boundingRect().intersected(boundingRect()));
+
+            m_dragCountdown->setPos(mappedAppleRect.center() - QPoint(m_dragCountdown->size().width()/2, m_dragCountdown->size().height()/2));
+        }
+        m_dragCountdown->start(1000);
     } else if (event->type() == QEvent::GraphicsSceneMouseMove) {
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
 
@@ -85,24 +102,32 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
             if (m_draggingApplet) {
                 const QPointF difference(me->scenePos() - me->lastScenePos());
                 m_draggingApplet.data()->moveBy(difference.x(), difference.y());
+
+                //put the move indicator in the center of the VISIBLE area of the applet
+                const QRectF mappedAppleRect(mapFromItem(m_draggingApplet.data(), m_draggingApplet.data()->boundingRect()).boundingRect().intersected(boundingRect()));
+
+                m_dragCountdown->setPos(mappedAppleRect.center() - QPoint(m_dragCountdown->size().width()/2, m_dragCountdown->size().height()/2));
+
                 return true;
             }
         } else {
             if (QPointF(me->buttonDownScenePos(me->button()) - me->scenePos()).manhattanLength() > KGlobalSettings::dndEventDelay()*2) {
                 m_movingApplets = false;
                 update();
-                m_moveTimer->stop();
+                m_dragCountdown->stop();
             }
         }
     } else if (event->type() == QEvent::GraphicsSceneMouseRelease) {
-        m_moveTimer->stop();
+        m_dragCountdown->stop();
         if (m_movingApplets && m_draggingApplet) {
             m_appletsContainer->relayoutApplet(m_draggingApplet.data(), m_draggingApplet.data()->geometry().center());
             m_movingApplets = false;
             m_draggingApplet.clear();
             update();
         }
+
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
+
         if (QPointF(me->buttonDownScenePos(me->button()) - me->scenePos()).manhattanLength() < KGlobalSettings::dndEventDelay()*2) {
             foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
                 if (applet == watched || applet->isAncestorOf(watched)) {
