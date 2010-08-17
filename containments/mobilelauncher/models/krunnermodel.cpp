@@ -44,6 +44,16 @@ Plasma::RunnerManager * s_runnerManager = NULL;
 Plasma::RunnerManager * runnerManager() {
     if (s_runnerManager == NULL) {
         s_runnerManager = new Plasma::RunnerManager();
+        QStringList allowed;
+        allowed
+            << "places"
+            << "shell"
+            << "services"
+            << "bookmarks"
+            << "org.kde.windowedwidgets"
+            << "recentdocuments"
+            << "locations";
+        s_runnerManager->setAllowedRunners(allowed);
     }
     return s_runnerManager;
 }
