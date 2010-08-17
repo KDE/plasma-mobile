@@ -30,6 +30,7 @@
 
 #include <KIconLoader>
 
+#include <Plasma/Animation>
 #include <Plasma/Applet>
 #include <Plasma/Containment>
 #include <Plasma/IconWidget>
@@ -147,7 +148,13 @@ void AppletsContainer::relayout()
             offset.rwidth() += ((i+1)%columns * maximumAppletSize.width())/columns;
         }
 
-        applet->setGeometry((i%columns)*maximumAppletSize.width() + offset.width(), (i/columns)*maximumAppletSize.height() + offset.height(), appletSize.width(), appletSize.height());
+
+        const QRectF targetGeom((i%columns)*maximumAppletSize.width() + offset.width(), (i/columns)*maximumAppletSize.height() + offset.height(), appletSize.width(), appletSize.height());
+        Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
+        anim->setTargetWidget(applet);
+        anim->setProperty("startGeometry", applet->geometry());
+        anim->setProperty("targetGeometry", targetGeom);
+        anim->start(QAbstractAnimation::DeleteWhenStopped);
         i++;
     }
 
@@ -255,7 +262,12 @@ void AppletsContainer::syncOverlayGeometry()
     if (m_currentApplet) {
         const int margin = KIconLoader::SizeHuge;
 
-        m_currentApplet.data()->setGeometry(mapFromItem(m_containment, m_containment->boundingRect()).boundingRect().adjusted(margin, margin/2, -margin, -margin/2));
+        QRectF targetGeom(mapFromItem(m_containment, m_containment->boundingRect()).boundingRect().adjusted(margin, margin/2, -margin, -margin/2));
+        Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
+        anim->setTargetWidget(m_currentApplet.data());
+        anim->setProperty("startGeometry", m_currentApplet.data()->geometry());
+        anim->setProperty("targetGeometry", targetGeom);
+        anim->start(QAbstractAnimation::DeleteWhenStopped);
     }
 
     if (m_appletsOverlay) {
