@@ -66,6 +66,20 @@ Item {
         anchors.bottom: activitypanel.bottom;
     }
 
+    Image {
+        id: activityIndicator
+        source: "images/activityIndicator.png";
+        anchors.bottom: parent.bottom
+        x: -width
+        PropertyAnimation {
+            id: animation
+            target: activityIndicator
+            properties: "x"
+            duration: 300
+        }
+
+    }
+
     MouseArea {
         id: hintregion;
 
@@ -112,6 +126,8 @@ Item {
                 } else {
                     child.clicked();
                     activeChild = child;
+                    animation.to = activeChild.x + activeChild.width/2 + activityIndicator.width/4
+                    animation.running = true
                 }
             }
 
