@@ -47,6 +47,7 @@ public:
 
 protected Q_SLOTS:
     void appletDragRequested();
+    void scrollTimeout();
 
 protected:
     bool sceneEventFilter(QGraphicsItem *watched, QEvent *event);
@@ -58,6 +59,8 @@ private:
     AppletsContainer *m_appletsContainer;
     DragCountdown *m_dragCountdown;
     bool m_movingApplets;
+    bool m_scrollDown;
+    QTimer *m_scrollTimer;
     QWeakPointer<Plasma::Applet> m_draggingApplet;
 };
 

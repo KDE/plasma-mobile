@@ -31,11 +31,16 @@
 
 AppletsView::AppletsView(QGraphicsItem *parent)
     : Plasma::ScrollWidget(parent),
-      m_movingApplets(false)
+      m_movingApplets(false),
+      m_scrollDown(false)
 {
     m_dragCountdown = new DragCountdown(this);
 
     connect(m_dragCountdown, SIGNAL(dragRequested()), this, SLOT(appletDragRequested()));
+
+    m_scrollTimer = new QTimer(this);
+    m_scrollTimer->setSingleShot(false);
+    connect(m_scrollTimer, SIGNAL(timeout()), this, SLOT(scrollTimeout()));
 
     setAlignment(Qt::AlignCenter);
 }
@@ -108,6 +113,20 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
                 m_dragCountdown->setPos(mappedAppleRect.center() - QPoint(m_dragCountdown->size().width()/2, m_dragCountdown->size().height()/2));
 
+                if (mapFromScene(me->scenePos()).y() > 3*(viewportGeometry().height()/4)) {
+                    if (!m_scrollTimer->isActive()) {
+                        m_scrollTimer->start(50);
+                    }
+                    m_scrollDown = true;
+                } else if (mapFromScene(me->scenePos()).y() < (viewportGeometry().height()/4)) {
+                    if (!m_scrollTimer->isActive()) {
+                        m_scrollTimer->start(50);
+                    }
+                    m_scrollDown = false;
+                } else {
+                    m_scrollTimer->stop();
+                }
+
                 return true;
             }
         } else {
@@ -119,6 +138,7 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
         }
     } else if (event->type() == QEvent::GraphicsSceneMouseRelease) {
         m_dragCountdown->stop();
+        m_scrollTimer->stop();
         if (m_movingApplets && m_draggingApplet) {
             m_appletsContainer->relayoutApplet(m_draggingApplet.data(), m_draggingApplet.data()->geometry().center());
             m_movingApplets = false;
@@ -143,6 +163,21 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
     }
 
     return Plasma::ScrollWidget::sceneEventFilter(watched, event);
+}
+
+void AppletsView::scrollTimeout()
+{
+    if (!m_draggingApplet) {
+        return;
+    }
+
+    if (m_scrollDown) {
+        m_draggingApplet.data()->moveBy(0, 10);
+        m_appletsContainer->moveBy(0, -10);
+    } else {
+        m_draggingApplet.data()->moveBy(0, -10);
+        m_appletsContainer->moveBy(0, 10);
+    }
 }
 
 void AppletsView::paint(QPainter *painter,
