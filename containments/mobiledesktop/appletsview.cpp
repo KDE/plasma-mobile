@@ -131,7 +131,6 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
             }
         } else {
             if (QPointF(me->buttonDownScenePos(me->button()) - me->scenePos()).manhattanLength() > KGlobalSettings::dndEventDelay()*2) {
-                m_movingApplets = false;
                 update();
                 m_dragCountdown->stop();
             }
@@ -141,10 +140,10 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
         m_scrollTimer->stop();
         if (m_movingApplets && m_draggingApplet) {
             m_appletsContainer->relayoutApplet(m_draggingApplet.data(), m_draggingApplet.data()->geometry().center());
-            m_movingApplets = false;
             m_draggingApplet.clear();
             update();
         }
+        m_movingApplets = false;
 
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
 
