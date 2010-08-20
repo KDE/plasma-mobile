@@ -42,8 +42,14 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][3][Applets][1]
-geometry=-0.999985,-4.49997,310.5,310.5
-plugin=news
+geometry=0,0,310,310
+plugin=org.kde.news-qml
+immutability=1
+zvalue=1
+
+[Containments][3][Applets][2]
+geometry=300,0,310,310
+plugin=weather
 immutability=1
 zvalue=1
 
@@ -61,7 +67,7 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][4][Applets][1]
-plugin=digital-clock
+plugin=org.kde.fakecontactlist-qml
 geometry=28,66.8,266.4,133.2
 immutability=1
 zvalue=1
