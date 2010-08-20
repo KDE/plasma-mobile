@@ -59,6 +59,14 @@ QGraphicsWidget {
                     onClicked: {
                         list.currentIndex = index
                         list.itemClicked()
+                        userStatus.setIcon("user-"+status)
+                        userStatus.text = name
+                        userStatus.infoText = status
+                        if (status == "offline") {
+                            chatButton.visible = false
+                        } else {
+                            chatButton.visible = true
+                        }
                     }
                 }
               }
@@ -90,23 +98,46 @@ QGraphicsWidget {
                 }
             }
             QGraphicsWidget {
-                layout: QGraphicsLinearLayout {
-                    orientation: "Vertical"
-                    Plasma.Frame {
-                        frameShadow: "Raised"
+
+                layout: QGraphicsGridLayout {
+                    QGraphicsWidget {
                         layout: QGraphicsLinearLayout {
                             Plasma.PushButton {
                                 id: showAllButton
                                 text: "Show all"
                                 onClicked: mainView.currentIndex = 0
                             }
-                            Plasma.PushButton {
-                                id: backButton
-                                text: "Chat"
-                                visible:false
+
+                            Plasma.IconWidget {
+                                id: userStatus
+                                orientation: Qt.Horizontal
                             }
-                            QGraphicsWidget {}
                         }
+                        QGraphicsGridLayout.row: 0
+                        QGraphicsGridLayout.column: 0
+                        QGraphicsGridLayout.columnSpan:2
+                    }
+
+                    Plasma.PushButton {
+                        text: "Call"
+                        QGraphicsGridLayout.row: 1
+                        QGraphicsGridLayout.column: 0
+                    }
+                    Plasma.PushButton {
+                        text: "SMS"
+                        QGraphicsGridLayout.row: 1
+                        QGraphicsGridLayout.column: 1
+                    }
+                    Plasma.PushButton {
+                        text: "Mail"
+                        QGraphicsGridLayout.row: 2
+                        QGraphicsGridLayout.column: 0
+                    }
+                    Plasma.PushButton {
+                        id: chatButton
+                        text: "Chat"
+                        QGraphicsGridLayout.row: 2
+                        QGraphicsGridLayout.column: 1
                     }
                 }
             }
@@ -114,7 +145,9 @@ QGraphicsWidget {
 
         Connections {
             target: list
-            onItemClicked: mainView.currentIndex = 1
+            onItemClicked: {
+                mainView.currentIndex = 1
+            }
         }
     }
 }
