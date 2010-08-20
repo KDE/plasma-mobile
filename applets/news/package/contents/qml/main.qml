@@ -92,6 +92,7 @@ QGraphicsWidget {
                     anchors.fill: listContainer
                     signal itemClicked;
                     spacing: 5;
+                    snapMode: ListView.SnapToItem
 
                     clip: true
                     model: dataSource['items.count']
