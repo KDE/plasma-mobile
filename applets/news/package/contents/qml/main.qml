@@ -112,7 +112,10 @@ QGraphicsWidget {
                                 id: backButton
                                 text: "Back"
                                 visible:false
-                                signal clicked
+                                onClicked: {
+                                    bodyView.html = "<body style=\"background:#fff;\">"+dataSource['items'][list.currentIndex].description+"</body>";
+                                    visible = false;
+                                }
                             }
                             QGraphicsWidget {}
                         }
@@ -120,6 +123,11 @@ QGraphicsWidget {
                     Plasma.WebView {
                         id : bodyView
                         dragToScroll : true
+                        onUrlChanged: {
+                            if (url != "about:blank") {
+                                backButton.visible = true
+                            }
+                        }
                     }
                 }
             }
