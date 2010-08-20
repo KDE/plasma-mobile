@@ -37,24 +37,32 @@ QGraphicsWidget {
               Item {
                 id : background
                 width: list.width
-                height: delegateLayout.height+5
+                height: delegateLayout.height + 5
 
                 Plasma.Frame {
                     id:frame
-                    minimumSize: list.width+"x"+delegateLayout.height
+                    width:list.width
+                    minimumSize: "0x"+background.height
+                }
 
-                    Column {
-                        id : delegateLayout
-                        spacing: 5
 
-                        Text {
-                            color: theme.textColor
-                            text: dataSource['items'][modelData].title
-                        }
-                        Text {
-                            color: theme.textColor
-                            text: dataSource['items'][modelData].time
-                        }
+                Column {
+                    id : delegateLayout
+                    width: list.width
+                    spacing: 5
+
+                    Text {
+                        //width: list.width
+                        color: theme.textColor
+                        textFormat: Text.RichText
+                        text: dataSource['items'][modelData].title
+                    }
+                    Text {
+                        id: date
+                        color: theme.textColor
+                        width: list.width
+                        horizontalAlignment: Text.AlignRight
+                        text: '<em><small>'+Date(dataSource['items'][modelData].time)+'</em></small>&nbsp;'
                     }
                 }
 
@@ -83,6 +91,7 @@ QGraphicsWidget {
                     id: list
                     anchors.fill: listContainer
                     signal itemClicked;
+                    spacing: 5;
 
                     clip: true
                     model: dataSource['items.count']
