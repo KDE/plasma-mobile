@@ -20,7 +20,7 @@
 
 import Qt 4.7
 
-Row {
+Flow {
     id: shortcuts;
     spacing: 45;
 
@@ -29,6 +29,7 @@ Row {
 
     Item {
         objectName: "3";
+        id: icon
         signal clicked;
 
         width: internet.width;
@@ -95,4 +96,22 @@ Row {
         }
 
     }
+
+    states: [
+        State {
+            name: "expanded";
+            PropertyChanges {
+                target: shortcuts
+                //FIXME: hardcoded values
+                width: 800
+            }
+        },
+        State {
+            name: "compact";
+            PropertyChanges {
+                target: shortcuts
+                width: 480
+            }
+        }
+    ]
 }

@@ -23,7 +23,7 @@ import Qt 4.7
 
 Item {
     id: activitypanel;
-    height: 160;
+    height: shortcuts.height;
     state: "show";
     signal flipRequested(bool reverse);
     signal dragOverflow(int degrees)
@@ -32,6 +32,7 @@ Item {
         id: activityimage;
         anchors.left: parent.left;
         anchors.right: parent.right;
+        anchors.bottom: parent.bottom;
         fillMode: Image.Tile
         source: "images/activitypanel.png";
     }
@@ -40,6 +41,7 @@ Item {
         id: stars;
         anchors.left: parent.left;
         anchors.right: parent.right;
+        anchors.bottom: parent.bottom;
         source: "images/stars.png";
         fillMode: Image.Tile
         y: activityimage.height - stars.height;
@@ -59,9 +61,18 @@ Item {
         activitypanel.dragOverflow(degrees);
     }
 
+    onWidthChanged : {
+        if (width < 800) {
+            shortcuts.state = "compact"
+        } else {
+            shortcuts.state = "expanded"
+        }
+    }
+
     ActivityPanelItems {
         objectName: "panelitems";
         id: shortcuts;
+        state: "expanded"
         anchors.horizontalCenter: activitypanel.horizontalCenter;
         anchors.bottom: activitypanel.bottom;
     }
@@ -92,7 +103,7 @@ Item {
 
         drag.target: activitypanel;
         drag.axis: "YAxis"
-        drag.minimumY: activitypanel.parent.height - activitypanel.height-200;
+        drag.minimumY: activitypanel.parent.height/2 - activitypanel.height;
         drag.maximumY: activitypanel.parent.height;
 
         onClicked: {
@@ -161,7 +172,7 @@ Item {
             name: "show";
             PropertyChanges {
                 target: activitypanel;
-                y: parent.height - 160;
+                y: parent.height - height;
             }
             PropertyChanges {
                 target: stars;
