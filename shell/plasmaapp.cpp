@@ -364,7 +364,7 @@ void PlasmaApp::updateMainSlot()
         m_nextContainment->graphicsEffect()->setEnabled(false);
         // resizing the containment will always resize it's parent item
         m_nextContainment->setPos(0,0);
-        m_nextContainment->resize(m_mainView->size());
+        m_nextContainment->resize(m_mainView->transformedSize());
 
         m_currentContainment->setParentItem(0);
         m_currentContainment->setPos(0, m_currentContainment->size().height());
@@ -394,7 +394,7 @@ Plasma::Corona* PlasmaApp::corona()
         // setup our QML home screen;
         setupHomeScreen();
         m_corona->initializeLayout();
-        m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->size()));
+        m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->transformedSize()));
         m_mainView->setScene(m_corona);
         m_mainView->show();
     }
@@ -444,7 +444,7 @@ void PlasmaApp::setupContainment(Plasma::Containment *containment)
 
         containment->setVisible(true);
 
-        containment->resize(m_mainView->size());
+        containment->resize(m_mainView->transformedSize());
         //FIXME: this makes the containment to not paint until the animation finishes
         containment->graphicsEffect()->setEnabled(true);
         //###The reparenting need a repaint so this ensure that we
@@ -523,7 +523,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     containment->graphicsEffect()->setEnabled(false);
 
     m_mainSlot->setFlag(QGraphicsItem::ItemHasNoContents, false);
-    containment->resize(m_mainView->size());
+    containment->resize(m_mainView->transformedSize());
 
     // we need our homescreen to show something!
     if (containment->id() == 1) {
@@ -535,8 +535,8 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
         if (alternateSlot) {
             m_alternateContainment = containment;
-            alternateSlot->setProperty("width", m_mainView->size().width());
-            alternateSlot->setProperty("height", m_mainView->size().height());
+            alternateSlot->setProperty("width", m_mainView->transformedSize().width());
+            alternateSlot->setProperty("height", m_mainView->transformedSize().height());
             containment->setParentItem(alternateSlot);
             containment->setParent(alternateSlot);
             containment->setPos(0, 0);
@@ -551,7 +551,19 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 void PlasmaApp::mainViewGeometryChanged()
 {
     if (m_qmlWidget) {
-        m_qmlWidget->resize(m_mainView->size());
+        m_qmlWidget->resize(m_mainView->transformedSize());
+        //m_qmlWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
+        m_qmlWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
+        kWarning()<<"AAAAAA"<<m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect();
+        if (m_currentContainment) {
+            m_currentContainment->resize(m_mainView->transformedSize());
+        }
+        if (m_nextContainment) {
+            m_nextContainment->resize(m_mainView->transformedSize());
+        }
+        if (m_alternateContainment) {
+            m_alternateContainment->resize(m_mainView->transformedSize());
+        }
     }
 }
 

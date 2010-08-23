@@ -34,6 +34,7 @@ namespace Plasma
 class MobView : public Plasma::View
 {
     Q_OBJECT
+    Q_PROPERTY(int rotation READ rotation WRITE setRotation)
 
 public:
     MobView(Plasma::Containment *containment, int uid, QWidget *parent = 0);
@@ -48,11 +49,20 @@ public:
     Plasma::FormFactor formFactor() const;
     KConfigGroup config() const {return Plasma::View::config();}
 
+    void setRotation(const int rotation);
+    int rotation() const;
+
+    void setDirection(const Plasma::Direction direction);
+    Plasma::Direction direction() const;
+    QSize transformedSize() const;
+
     static int mainViewId() { return 1; }
 
 public Q_SLOTS:
     void setContainment(Plasma::Containment *containment);
     void updateGeometry();
+    void rotateCounterClockwise();
+    void rotateClockwise();
 
 Q_SIGNALS:
     void locationChanged(const MobView *view);
@@ -65,6 +75,8 @@ protected:
 
 private:
     bool m_useGL;
+    Plasma::Direction m_direction;
+    int m_rotation;
 };
 
 #endif // multiple inclusion guard
