@@ -76,6 +76,7 @@ Item {
         } else {
             shortcuts.state = "expanded"
         }
+        hintregion.height = hint.height + activitypanel.height;
     }
 
     ActivityPanelItems {
