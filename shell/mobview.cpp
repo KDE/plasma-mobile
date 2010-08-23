@@ -52,6 +52,8 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     setAttribute(Qt::WA_TranslucentBackground, false);
 
+    setTrackContainmentChanges(false);
+
     QAction *a = new QAction(this);
     addAction(a);
     a->setShortcut(QKeySequence("Ctrl+Shift+L"));
