@@ -32,7 +32,6 @@ Item {
         id: activityimage;
         anchors.left: parent.left;
         anchors.right: parent.right;
-        anchors.bottom: parent.bottom;
         fillMode: Image.Tile
         source: "images/activitypanel.png";
     }
@@ -41,10 +40,20 @@ Item {
         id: stars;
         anchors.left: parent.left;
         anchors.right: parent.right;
-        anchors.bottom: parent.bottom;
         source: "images/stars.png";
         fillMode: Image.Tile
         y: activityimage.height - stars.height;
+    }
+
+    Rectangle {
+        id: activitypanelbottom;
+        objectName: "activitypanelbottom";
+
+        color: "black";
+        anchors.left: parent.left;
+        anchors.right: parent.right;
+        anchors.top: activityimage.bottom;
+        height: homescreen.height/2;
     }
 
     Image {

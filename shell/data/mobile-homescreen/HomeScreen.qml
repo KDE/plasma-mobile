@@ -346,17 +346,6 @@ Item {
         y: parent.height - height;
     }
 
-    Rectangle {
-        id: activitypanelbottom;
-        objectName: "activitypanelbottom";
-
-        color: "black";
-        anchors.left: homescreen.left;
-        anchors.right: homescreen.right;
-        anchors.top: activitypanel.bottom;
-        height: homescreen.height/2;
-    }
-
     Connections {
         target: activitypanel;
 
