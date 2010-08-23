@@ -554,7 +554,6 @@ void PlasmaApp::mainViewGeometryChanged()
         m_qmlWidget->resize(m_mainView->transformedSize());
         //m_qmlWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
         m_qmlWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
-        kWarning()<<"AAAAAA"<<m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect();
         if (m_currentContainment) {
             m_currentContainment->resize(m_mainView->transformedSize());
         }
