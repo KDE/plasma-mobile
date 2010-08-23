@@ -28,6 +28,12 @@ Flow {
     anchors.bottom: parent.bottom;
 
     Item {
+        id: spacer1
+        width: internet.width/2;
+        height: internet.height;
+        visible:false
+    }
+    Item {
         objectName: "3";
         id: icon
         signal clicked;
@@ -53,6 +59,13 @@ Flow {
             source: "images/im.png";
         }
 
+    }
+    
+    Item {
+        id: spacer2
+        width: internet.width/2;
+        height: internet.height;
+        visible:false
     }
 
     Item {
@@ -105,12 +118,28 @@ Flow {
                 //FIXME: hardcoded values
                 width: 800
             }
+            PropertyChanges {
+                target: spacer1
+                visible: false
+            }
+            PropertyChanges {
+                target: spacer2
+                visible: false
+            }
         },
         State {
             name: "compact";
             PropertyChanges {
                 target: shortcuts
                 width: 480
+            }
+            PropertyChanges {
+                target: spacer1
+                visible: true
+            }
+            PropertyChanges {
+                target: spacer2
+                visible: true
             }
         }
     ]
