@@ -116,7 +116,7 @@ Flow {
             PropertyChanges {
                 target: shortcuts
                 //FIXME: hardcoded values
-                width: 800
+                width: 750
             }
             PropertyChanges {
                 target: spacer1
@@ -131,7 +131,7 @@ Flow {
             name: "compact";
             PropertyChanges {
                 target: shortcuts
-                width: 480
+                width: 475
             }
             PropertyChanges {
                 target: spacer1

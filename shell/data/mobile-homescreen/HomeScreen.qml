@@ -52,6 +52,7 @@ Item {
         }
 
         front : Item {
+            anchors.fill: flipable
             Item {
                 id: mainSlot;
                 objectName: "mainSlot";
@@ -72,6 +73,7 @@ Item {
             }
         }
         back: Item {
+            anchors.fill: flipable
             id: alternateSlot;
             objectName: "alternateSlot";
 
