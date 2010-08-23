@@ -31,21 +31,28 @@ QGraphicsWidget {
         else
             number.text = number.text + digit
     }
-    
+
     function call()
     {
       if (number.text == "Please type a number")
         return
       phone.call(number.text);
     }
-    
+
     function deleteLastDigit()
     {
         number.text = number.text.slice(0, -1)
         if (number.text.length == 0)
           number.text = "Please type a number"
     }
-       
+    onWidthChanged : {
+        if (width > height) {
+            box.orientation = Qt.Horizontal
+        } else {
+            box.orientation = Qt.Vertical
+        }
+    }
+
     layout: QGraphicsLinearLayout {
             id: box;
             spacing : 10
@@ -53,7 +60,7 @@ QGraphicsWidget {
             contentsMargin: 42
 
             LayoutItem{
-                minimumSize: "300x35"
+                minimumSize: "300x300"
                 preferredSize: number.width+"x35"
                 //maximumSize: "1000x35"
                 Rectangle {

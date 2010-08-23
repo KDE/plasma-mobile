@@ -562,6 +562,7 @@ void PlasmaApp::mainViewGeometryChanged()
         }
         if (m_alternateContainment) {
             m_alternateContainment->resize(m_mainView->transformedSize());
+            m_alternateContainment->setPos(0, 0);
         }
     }
 }
