@@ -564,6 +564,9 @@ void PlasmaApp::mainViewGeometryChanged()
             m_alternateContainment->resize(m_mainView->transformedSize());
             m_alternateContainment->setPos(0, 0);
         }
+        if (m_widgetsExplorer) {
+            m_widgetsExplorer.data()->setGeometry(m_qmlWidget->geometry());
+        }
     }
 }
 
@@ -576,7 +579,9 @@ void PlasmaApp::showWidgetsExplorer()
     }
 
     m_widgetsExplorer.data()->setContainment(m_currentContainment);
-    m_widgetsExplorer.data()->setGeometry(m_mainView->sceneRect());
+    if (m_qmlWidget) {
+        m_widgetsExplorer.data()->setGeometry(m_qmlWidget->geometry());
+    }
     m_widgetsExplorer.data()->show();
 }
 
