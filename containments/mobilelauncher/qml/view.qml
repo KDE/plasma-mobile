@@ -22,6 +22,22 @@ Rectangle {
         clip: true
         signal clicked
 
+        onWidthChanged : {
+            if (width > 600) {
+                cellWidth = width/6
+            } else {
+                cellWidth = width/4
+            }
+        }
+
+        onHeightChanged : {
+            if (height > 600) {
+                cellHeight = height/6
+            } else {
+                cellHeight = height/4
+            }
+        }
+
         delegate: Component {
             Item {
                 id: wrapper
