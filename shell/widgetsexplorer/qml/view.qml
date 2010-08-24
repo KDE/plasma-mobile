@@ -27,6 +27,10 @@ Rectangle {
                 target: panelLayout;
                 orientation: Qt.Vertical
             }
+            PropertyChanges {
+                target: infoContent;
+                anchors.bottomMargin: closeButton.height + 16
+            }
         },
         State {
             name: "vertical"
@@ -46,6 +50,10 @@ Rectangle {
             PropertyChanges {
                 target: panelLayout;
                 orientation: Qt.Horizontal
+            }
+            PropertyChanges {
+                target: infoContent;
+                anchors.bottomMargin: 0
             }
         }
     ]
@@ -167,8 +175,8 @@ Rectangle {
         color: Qt.rgba(0,0,0,0.4)
 
         QGraphicsWidget {
+            id: infoContent
             anchors.fill:parent
-            anchors.bottomMargin: closeButton.height + 16
             layout: QGraphicsLinearLayout {
                 id:panelLayout
                 orientation: Qt.Vertical
