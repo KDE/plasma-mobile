@@ -121,12 +121,17 @@ Rectangle {
         }
 
         onWidthChanged : {
-            if (width > 600) {
-                cellWidth: width/4
-                cellHeight: height/3
+            if (widgetsExplorer.state == "horizontal" && infoPanel.state == "hidden") {
+                cellWidth = width/4
             } else {
-                cellWidth: width/3
-                cellHeight: height/3
+                cellWidth = width/3
+            }
+        }
+        onHeightChanged : {
+            if (widgetsExplorer.state == "horizontal") {
+                cellHeight = widgetsExplorer.height/3
+            } else {
+                cellHeight = widgetsExplorer.height/4
             }
         }
     }
