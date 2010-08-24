@@ -6,6 +6,59 @@ import GraphicsLayouts 4.7
 Rectangle {
     color: Qt.rgba(0,0,0,0.4)
     id: widgetsExplorer
+    state: "horizontal"
+
+    states: [
+        State {
+            name: "horizontal"
+            PropertyChanges {
+                target: infoPanel;
+                anchors.top: widgetsExplorer.top
+                anchors.bottom: widgetsExplorer.bottom
+                anchors.left: undefined
+                anchors.right: undefined
+            }
+            PropertyChanges {
+                target: appletsView;
+                anchors.bottom: widgetsExplorer.bottom
+                anchors.right: infoPanel.left
+            }
+            PropertyChanges {
+                target: panelLayout;
+                orientation: Qt.Vertical
+            }
+        },
+        State {
+            name: "vertical"
+            PropertyChanges {
+                target: infoPanel;
+                anchors.top: undefined
+                anchors.bottom: widgetsExplorer.bottom
+                anchors.left: widgetsExplorer.left
+                anchors.right: widgetsExplorer.right
+                height: 200
+            }
+            PropertyChanges {
+                target: appletsView;
+                anchors.bottom: infoPanel.top
+                anchors.right: widgetsExplorer.right
+            }
+            PropertyChanges {
+                target: panelLayout;
+                orientation: Qt.Horizontal
+            }
+        }
+    ]
+
+    onWidthChanged : {
+
+        if (width > 600) {
+            state = "horizontal"
+        } else {
+            state = "vertical"
+            infoPanel.height = 200
+        }
+    }
 
     GridView {
         id: appletsView
@@ -77,31 +130,6 @@ Rectangle {
         }
     }
 
-    onWidthChanged : {
-
-        if (width > 600) {
-            infoPanel.anchors.top = widgetsExplorer.top
-            infoPanel.anchors.bottom = widgetsExplorer.bottom
-            infoPanel.anchors.left = undefined
-            infoPanel.anchors.right = undefined
-
-            appletsView.anchors.bottom = widgetsExplorer.bottom
-            appletsView.anchors.right = infoPanel.left
-            panelLayout.orientation = Qt.Vertical
-        } else {
-            infoPanel.anchors.top = undefined
-            infoPanel.anchors.bottom = widgetsExplorer.bottom
-            infoPanel.anchors.left = widgetsExplorer.left
-            infoPanel.anchors.right = widgetsExplorer.right
-            infoPanel.height = 200
-
-            appletsView.anchors.bottom = infoPanel.top
-            appletsView.anchors.right = widgetsExplorer.right
-            panelLayout.orientation = Qt.Horizontal
-        }
-    }
-
-
     Rectangle {
         id: infoPanel
 
@@ -147,7 +175,6 @@ Rectangle {
                             anchors.left: parent.left
                             anchors.right: parent.right
                             anchors.leftMargin: 8
-                            
                             spacing: 8
 
                             Text {
@@ -160,7 +187,7 @@ Rectangle {
 
                                 color: "white"
                             }
-                            
+
                             Text {
                                 id: detailsVersion
 
@@ -210,7 +237,7 @@ Rectangle {
                         }
                     }
                 }
-                
+
                 Plasma.PushButton {
                     id: addButton
                     maximumSize: maximumSize.width+"x"+preferredSize.height
@@ -220,7 +247,7 @@ Rectangle {
                 }
             }
         }
-        
+
         states: [
             State {
                 name: "shown"
