@@ -89,7 +89,7 @@ Image {
     }
     
     //FIXME: the drag property doesn't get auto updated and notified
-    function updateDrag() {print("AAAAAAAAA");print (homescreen.height)
+    function updateDrag() {
         if (location == "BottomEdge") {
             draggerRegion.drag.axis = Drag.YAxis
             draggerRegion.drag.minimumY = 0;

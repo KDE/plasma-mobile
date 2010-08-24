@@ -551,6 +551,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 void PlasmaApp::mainViewGeometryChanged()
 {
     if (m_qmlWidget) {
+        m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->transformedSize()));
         m_qmlWidget->resize(m_mainView->transformedSize());
         //m_qmlWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
         m_qmlWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
