@@ -33,7 +33,7 @@ Rectangle {
             PropertyChanges {
                 target: infoPanel;
                 anchors.top: undefined
-                anchors.bottom: widgetsExplorer.bottom
+                anchors.bottom: undefined
                 anchors.left: widgetsExplorer.left
                 anchors.right: widgetsExplorer.right
                 height: 200
@@ -56,6 +56,7 @@ Rectangle {
             state = "horizontal"
         } else {
             state = "vertical"
+            //FIXME: why this is necessary?
             infoPanel.height = 200
         }
     }
@@ -133,17 +134,31 @@ Rectangle {
     Rectangle {
         id: infoPanel
 
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
         anchors.topMargin: 4
         anchors.rightMargin: 4
 
         state: "hidden"
 
-        x: parent.width
+        x: if (widgetsExplorer.state == "horizontal")
+               parent.width
+           else
+               0
 
-        width: parent.width/4;
-        
+        y: if (widgetsExplorer.state == "vertical")
+               parent.height
+           else
+               0
+
+        width: if (widgetsExplorer.state == "horizontal")
+                   parent.width/4
+               else
+                   parent.width
+
+        height: if (widgetsExplorer.state == "horizontal")
+                    parent.height
+                else
+                    parent.height/4
+
         color: Qt.rgba(0,0,0,0.4)
 
         QGraphicsWidget {
@@ -253,7 +268,15 @@ Rectangle {
                 name: "shown"
                 PropertyChanges {
                     target: infoPanel;
-                    x: infoPanel.parent.width - infoPanel.width
+                    x: if (widgetsExplorer.state == "horizontal")
+                           infoPanel.parent.width - infoPanel.width
+                       else
+                           infoPanel.x
+
+                    y: if (widgetsExplorer.state == "vertical")
+                           infoPanel.parent.height - infoPanel.height
+                       else
+                           infoPanel.y
                 }
             }
         ]
@@ -264,7 +287,7 @@ Rectangle {
                 to:"shown"
 
                 NumberAnimation {
-                    properties: "x";
+                    properties: "x,y";
                     duration: 300;
                     easing.type: "OutQuad";
                 }
