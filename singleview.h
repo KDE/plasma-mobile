@@ -47,6 +47,13 @@ public:
     Plasma::Location location() const;
     Plasma::FormFactor formFactor() const;
 
+    void setRotation(const int rotation);
+    int rotation() const;
+
+    void setDirection(const Plasma::Direction direction);
+    Plasma::Direction direction() const;
+    QSize transformedSize() const;
+
 public Q_SLOTS:
     void setContainment(Plasma::Containment *containment);
     void updateGeometry();
@@ -63,6 +70,8 @@ private:
     Plasma::Applet *m_applet;
     Plasma::Containment *m_containment;
     Plasma::Corona *m_corona;
+    Plasma::Direction m_direction;
+    int m_rotation;
 };
 
 #endif // multiple inclusion guard

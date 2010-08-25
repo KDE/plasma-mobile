@@ -19,10 +19,14 @@
 
 #include "singleview.h"
 
+#include <cmath>
+
 #include <QAction>
-#include <QCoreApplication>
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QFileInfo>
 #include <QDir>
+
 
 #include <KWindowSystem>
 #include <KIconLoader>
@@ -37,7 +41,9 @@ SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment,
     : QGraphicsView(parent),
       m_applet(0),
       m_containment(containment),
-      m_corona(corona)
+      m_corona(corona),
+      m_direction(Plasma::Up),
+      m_rotation(0)
 {
     setScene(m_corona);
     m_containment->setFormFactor(Plasma::Planar);
@@ -72,6 +78,13 @@ SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment,
     setFrameStyle(QFrame::NoFrame);
 
     connect(this, SIGNAL(sceneRectAboutToChange()), this, SLOT(updateGeometry()));
+    QDesktopWidget *desktop = QApplication::desktop();
+    QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
+
+    setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
+    setFixedWidth(screenGeom.width());
+    move(screenGeom.left(), screenGeom.height() - height());
+    show();
 }
 
 SingleView::~SingleView()
@@ -95,6 +108,28 @@ void SingleView::resizeEvent(QResizeEvent *event)
     Q_UNUSED(event)
     updateGeometry();
     emit geometryChanged();
+
+    QDesktopWidget *desktop = QApplication::desktop();
+    QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
+
+    NETExtendedStrut strut;
+
+    strut.bottom_width = applet()->effectiveSizeHint(Qt::PreferredSize).height();
+    strut.bottom_start = screenGeom.left();
+    strut.bottom_end = screenGeom.width();
+
+    KWindowSystem::setExtendedStrut(winId(), strut.left_width,
+                                             strut.left_start,
+                                             strut.left_end,
+                                             strut.right_width,
+                                             strut.right_start,
+                                             strut.right_end,
+                                             strut.top_width,
+                                             strut.top_start,
+                                             strut.top_end,
+                                             strut.bottom_width,
+                                             strut.bottom_start,
+                                             strut.bottom_end);
 }
 
 Plasma::Applet *SingleView::applet()
@@ -120,11 +155,93 @@ void SingleView::updateGeometry()
 
     kDebug() << "New applet geometry is" << m_applet->geometry();
 
-    if (m_applet->size().toSize() != size()) {
+    if (m_applet->size().toSize() != transformedSize()) {
         if (m_applet) {
-            m_applet->resize(size());
+            m_applet->resize(transformedSize());
         }
         setSceneRect(m_applet->geometry());
+    }
+}
+
+void SingleView::setRotation(const int degrees)
+{
+    if (degrees == m_rotation) {
+        return;
+    }
+
+    m_rotation = degrees;
+    const double pi = 3.141593;
+
+    const double a    = pi/180 * degrees;
+    const double sina = sin(a);
+    const double cosa = cos(a);
+
+    QTransform rotationTransform(cosa, sina, -sina, cosa, 0, 0);
+    setTransform(rotationTransform);
+}
+
+int SingleView::rotation() const
+{
+    return m_rotation;
+}
+
+void SingleView::setDirection(const Plasma::Direction direction)
+{
+    if (direction == m_direction) {
+        return;
+    }
+
+    m_direction = direction;
+
+    QDesktopWidget *desktop = QApplication::desktop();
+    QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
+
+    switch (direction) {
+    case Plasma::Down:
+        setRotation(180);
+        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
+        setFixedWidth(screenGeom.width());
+        move(screenGeom.left(), screenGeom.top());
+        break;
+    case Plasma::Left:
+        setRotation(270);
+        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
+        setFixedHeight(screenGeom.width());
+        move(screenGeom.right() - width(), screenGeom.top());
+        break;
+    case Plasma::Right:
+        setRotation(90);
+        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
+        setFixedHeight(screenGeom.width());
+        move(screenGeom.left(), screenGeom.top());
+        break;
+    case Plasma::Up:
+    default:
+        setRotation(0);
+        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
+        setFixedWidth(screenGeom.width());
+        move(screenGeom.left(), screenGeom.height() - height());
+        break;
+    }
+}
+
+Plasma::Direction SingleView::direction() const
+{
+    return m_direction;
+}
+
+QSize SingleView::transformedSize() const
+{
+    switch (m_direction) {
+    case Plasma::Left:
+    case Plasma::Right:
+        return QSize(size().height(), size().width());
+        break;
+    case Plasma::Down:
+    case Plasma::Up:
+    default:
+        return size();
+        break;
     }
 }
 

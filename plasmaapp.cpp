@@ -121,34 +121,9 @@ int  PlasmaApp::newInstance()
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(themeChanged()));
     view->applet()->setBackgroundHints(Plasma::Applet::NoBackground);
 
-
-    QDesktopWidget *desktop = QApplication::desktop();
-    QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(view));
-
-    NETExtendedStrut strut;
-
-    strut.bottom_width = view->applet()->effectiveSizeHint(Qt::PreferredSize).height();
-    strut.bottom_start = screenGeom.left();
-    strut.bottom_end = screenGeom.width();
-
-    KWindowSystem::setExtendedStrut(view->winId(), strut.left_width,
-                                             strut.left_start,
-                                             strut.left_end,
-                                             strut.right_width,
-                                             strut.right_start,
-                                             strut.right_end,
-                                             strut.top_width,
-                                             strut.top_start,
-                                             strut.top_end,
-                                             strut.bottom_width,
-                                             strut.bottom_start,
-                                             strut.bottom_end);
+    view->show();
 
     m_views.append(view);
-    view->setFixedHeight(static_cast<Plasma::PopupApplet *>(view->applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
-    view->setFixedWidth(screenGeom.width());
-    view->move(screenGeom.left(), screenGeom.height() - view->height());
-    view->show();
 
     return 0;
 }
@@ -215,6 +190,26 @@ bool PlasmaApp::eventFilter(QObject *watched, QEvent *event)
         }
     }*/
     return false;
+}
+
+void PlasmaApp::setDirection(const QString &direction)
+{
+    Plasma::Direction dir;
+    if (direction == "up") {
+        dir = Plasma::Up;
+    } else if (direction == "down") {
+        dir = Plasma::Down;
+    } else if (direction == "left") {
+        dir = Plasma::Left;
+    } else if (direction == "right") {
+        dir = Plasma::Right;
+    } else {
+        dir = Plasma::Down;
+    }
+
+    foreach(SingleView *view, m_views) {
+        view->setDirection(dir);
+    }
 }
 
 void PlasmaApp::show()
