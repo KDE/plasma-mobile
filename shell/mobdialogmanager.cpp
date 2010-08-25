@@ -84,12 +84,12 @@ MobDialogManager::~MobDialogManager()
 
 void MobDialogManager::showDialog(QWidget *widget, Plasma::Applet *applet)
 {
-    ProxyScroller *scroll = managedDialogs.value(widget);
+    ProxyScroller *scroll = m_managedDialogs.value(widget);
     if (!scroll) {
         scroll = new ProxyScroller;
         WidgetProxy *proxy = new WidgetProxy(widget, scroll);
         scroll->setWidget(proxy);
-        managedDialogs.insert(widget, scroll);
+        m_managedDialogs.insert(widget, scroll);
         connect(widget, SIGNAL(destroyed(QObject *)), this, SLOT(dialogDestroyed(QObject *)));
 
         m_corona->addItem(scroll);
@@ -110,13 +110,13 @@ void MobDialogManager::showDialog(QWidget *widget, Plasma::Applet *applet)
 void MobDialogManager::dialogDestroyed(QObject *object)
 {
     QWidget *widget = static_cast<QWidget *>(object);
-    Plasma::ScrollWidget *scroll = managedDialogs.value(widget);
+    Plasma::ScrollWidget *scroll = m_managedDialogs.value(widget);
 
     if (scroll) {
         scroll->deleteLater();
     }
 
-    managedDialogs.remove(widget);
+    m_managedDialogs.remove(widget);
 }
 
 #include "mobdialogmanager.moc"

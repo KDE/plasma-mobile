@@ -49,7 +49,7 @@ private Q_SLOTS:
 
 private:
     Plasma::Corona *m_corona;
-    QHash<QWidget *, ProxyScroller *> managedDialogs;
+    QHash<QWidget *, ProxyScroller *> m_managedDialogs;
 };
 
 #endif
