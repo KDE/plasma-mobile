@@ -19,6 +19,7 @@
  */
 
 #include "plasmaapp.h"
+#include "plasmakeyboardshelladaptor.h"
 
 #include <unistd.h>
 
@@ -69,6 +70,8 @@ PlasmaApp::PlasmaApp()
     corona();
     m_containment = m_corona->addContainment("null");
 
+    new PlasmaKeyboardAdaptor(this);
+    QDBusConnection::sessionBus().registerObject("/App", this);
 
     KConfigGroup containmentConfig = m_containment->config();
     KConfigGroup applets(&containmentConfig, "Applets");
@@ -202,7 +205,7 @@ bool PlasmaApp::hasComposite()
 
 bool PlasmaApp::eventFilter(QObject *watched, QEvent *event)
 {
-    if (event->type() == QEvent::Hide) {
+    /*if (event->type() == QEvent::Hide) {
         SingleView *view = qobject_cast<SingleView *>(watched);
 
         if (view) {
@@ -210,8 +213,22 @@ bool PlasmaApp::eventFilter(QObject *watched, QEvent *event)
             view->deleteLater();
             m_views.removeAll(view);
         }
-    }
+    }*/
     return false;
+}
+
+void PlasmaApp::show()
+{
+    foreach(SingleView *view, m_views) {
+        view->show();
+    }
+}
+
+void PlasmaApp::hide()
+{
+    foreach(SingleView *view, m_views) {
+        view->hide();
+    }
 }
 
 #include "plasmaapp.moc"

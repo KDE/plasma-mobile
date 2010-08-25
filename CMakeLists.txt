@@ -7,6 +7,8 @@ set(plasma-keyboardcontainer_SRCS
     plasmaapp.cpp
 )
 
+set(keyboard_dbusXML org.kde.PlasmaKeyboardShell.xml)
+qt4_add_dbus_adaptor(plasma-keyboardcontainer_SRCS ${keyboard_dbusXML} plasmaapp.h PlasmaApp)
 
 kde4_add_kdeinit_executable(plasma-keyboardcontainer ${plasma-keyboardcontainer_SRCS})
 

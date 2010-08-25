@@ -61,6 +61,9 @@ public:
 
     Plasma::Corona* corona();
 
+public Q_SLOTS:
+    void show();
+    void hide();
 
 protected:
     bool eventFilter(QObject * watched, QEvent *event);
