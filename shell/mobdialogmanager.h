@@ -46,6 +46,8 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void dialogDestroyed(QObject *object);
+    void availableScreenRegionChanged();
+    void syncScreenGeom();
 
 private:
     Plasma::Corona *m_corona;

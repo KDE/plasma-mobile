@@ -158,6 +158,7 @@ int MobCorona::numScreens() const
 void MobCorona::setScreenGeometry(const QRect &geometry)
 {
     m_screenGeometry = geometry;
+    emit availableScreenRegionChanged();
 }
 
 QRect MobCorona::screenGeometry(int id) const

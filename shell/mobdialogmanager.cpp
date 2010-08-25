@@ -24,6 +24,7 @@
 #include <QtGui/QGraphicsProxyWidget>
 #include <QtGui/QPainter>
 #include <QtGui/QApplication>
+#include <QTimer>
 
 #include <Plasma/Applet>
 #include <Plasma/Animation>
@@ -76,10 +77,29 @@ MobDialogManager::MobDialogManager(Plasma::Corona *parent)
     : Plasma::AbstractDialogManager(parent),
       m_corona(parent)
 {
+    connect(m_corona, SIGNAL(availableScreenRegionChanged()), this, SLOT(availableScreenRegionChanged()));
 }
 
 MobDialogManager::~MobDialogManager()
 {
+}
+
+void MobDialogManager::availableScreenRegionChanged()
+{
+    QTimer::singleShot(0, this, SLOT(syncScreenGeom()));
+}
+
+void MobDialogManager::syncScreenGeom()
+{
+    Plasma::Containment *containment = m_corona->containmentForScreen(0);
+    if (!containment) {
+        return;
+    }
+
+    foreach (ProxyScroller *scroll, m_managedDialogs) {
+        scroll->setGeometry(containment->mapToScene(containment->boundingRect()).boundingRect());
+        scroll->widget()->setGeometry(QRectF(QPointF(4, 4), scroll->size()-QSizeF(18,18)));
+    }
 }
 
 void MobDialogManager::showDialog(QWidget *widget, Plasma::Applet *applet)
