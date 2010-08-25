@@ -68,24 +68,6 @@ public:
         setWidget(widget);
     }
 
-    bool event(QEvent *e)
-    {
-        if (e->type() == QEvent::UngrabMouse) {
-            //FIXME: terribly inefficient, seems the only way to catch those children
-            foreach (QGraphicsItem *i, childItems()) {
-                QGraphicsProxyWidget *w = dynamic_cast<QGraphicsProxyWidget *>(i);
-
-                if (w && (w->windowFlags() & Qt::SubWindow)) {
-                    QRectF r = w->geometry();
-                    r.moveCenter(geometry().center());
-                    w->setPos(r.topLeft());
-                    w->widget()->setPalette(QApplication::palette());
-                    w->widget()->setAttribute(Qt::WA_NoSystemBackground, false);
-                }
-            }
-        }
-        return QGraphicsProxyWidget::event(e);
-    }
 };
 
 
