@@ -70,7 +70,6 @@ public:
 
     bool event(QEvent *e)
     {
-        kWarning()<<e;
         if (e->type() == QEvent::UngrabMouse) {
             //FIXME: terribly inefficient, seems the only way to catch those children
             foreach (QGraphicsItem *i, childItems()) {
