@@ -94,7 +94,7 @@ void MobDialogManager::showDialog(QWidget *widget, Plasma::Applet *applet)
 
         m_corona->addItem(scroll);
         if (applet && applet->containment()) {
-            scroll->setGeometry(applet->containment()->geometry());
+            scroll->setGeometry(scroll->mapFromScene(applet->containment()->mapToScene(applet->containment()->boundingRect())).boundingRect());
             proxy->setGeometry(QRectF(QPointF(4, 4), applet->containment()->size()-QSizeF(18,18)));
         }
     }
