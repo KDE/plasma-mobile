@@ -23,10 +23,10 @@ bool InputContext::filterEvent(const QEvent* event)
 {
     if (event->type() == QEvent::RequestSoftwareInputPanel) {
         kWarning()<<"Show on screen keyboard";
-        m_keyboard->show();
+        m_keyboard->call("show");
         return true;
     } else if (event->type() == QEvent::CloseSoftwareInputPanel) {
-        m_keyboard->hide();
+        m_keyboard->call("hide");
         kWarning()<<"hide on screen keyboard";
         return true;
     }

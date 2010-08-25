@@ -22,9 +22,11 @@
 
 #include "mobview.h"
 #include "mobcorona.h"
+#include "keyboard_interface.h"
 
 #include <QAction>
 #include <QCoreApplication>
+#include <QDBusConnection>
 
 #include <KWindowSystem>
 
@@ -63,6 +65,9 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     addAction(a);
     a->setShortcut(QKeySequence("Ctrl+Shift+R"));
     connect(a, SIGNAL(triggered()), this, SLOT(rotateClockwise()));
+    m_keyboard = new LocalPlasmaKeyboardInterface("org.kde.plasma-keyboardcontainer", "/App",
+                                      QDBusConnection::sessionBus());
+    m_keyboard->call("hide");
 }
 
 MobView::~MobView()
@@ -160,19 +165,23 @@ void MobView::setDirection(const Plasma::Direction direction)
 
     int angle;
     int start = rotation();
+    QString directionName;
 
     switch (direction) {
     case Plasma::Down:
         angle = 180;
+        directionName = "down";
         break;
     case Plasma::Left:
         if (start < 180) {
             start = 360;
         }
         angle = 270;
+        directionName = "left";
         break;
     case Plasma::Right:
         angle = 90;
+        directionName = "right";
         break;
     case Plasma::Up:
     default:
@@ -180,6 +189,7 @@ void MobView::setDirection(const Plasma::Direction direction)
             start = -90;
         }
         angle = 0;
+        directionName = "up";
         break;
     }
 
@@ -194,6 +204,7 @@ void MobView::setDirection(const Plasma::Direction direction)
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 
     connect(animation, SIGNAL(finished()), this, SIGNAL(geometryChanged()));
+    m_keyboard->call("setDirection", directionName);
 }
 
 Plasma::Direction MobView::direction() const

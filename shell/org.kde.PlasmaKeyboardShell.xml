@@ -5,5 +5,8 @@
     </method>
     <method name="hide">
     </method>
+    <method name="setDirection">
+      <arg name="direction" type="s" direction="in"/>
+    </method>
   </interface>
 </node>

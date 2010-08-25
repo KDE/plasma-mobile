@@ -31,6 +31,8 @@ namespace Plasma
     class Containment;
 } // namespace Plasma
 
+class LocalPlasmaKeyboardInterface;
+
 class MobView : public Plasma::View
 {
     Q_OBJECT
@@ -77,6 +79,7 @@ private:
     bool m_useGL;
     Plasma::Direction m_direction;
     int m_rotation;
+    LocalPlasmaKeyboardInterface *m_keyboard;
 };
 
 #endif // multiple inclusion guard
