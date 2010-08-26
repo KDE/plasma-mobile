@@ -59,7 +59,8 @@ PlasmaApp* PlasmaApp::self()
 PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
       m_corona(0),
-      m_maxId(0)
+      m_maxId(0),
+      m_view(0)
 {
     KGlobal::locale()->insertCatalog("plasma-keyboardcontainer");
     KCrash::setFlags(KCrash::AutoRestart);
@@ -97,6 +98,9 @@ PlasmaApp::~PlasmaApp()
 
 int  PlasmaApp::newInstance()
 {
+    if (m_view) {
+        return 0;
+    }
 
     QString pluginName = "plasmaboard";
 
@@ -123,7 +127,7 @@ int  PlasmaApp::newInstance()
 
     view->show();
 
-    m_views.append(view);
+    m_view = view;
 
     return 0;
 }
@@ -135,7 +139,7 @@ void PlasmaApp::cleanup()
         m_corona->saveLayout();
     }
 
-    qDeleteAll(m_views);
+    delete m_view;
 
     delete m_corona;
     m_corona = 0;
@@ -151,10 +155,8 @@ void PlasmaApp::syncConfig()
 
 void PlasmaApp::themeChanged()
 {
-    foreach(SingleView *view, m_views) {
-        if (view->autoFillBackground()) {
-            view->setBackgroundBrush(KColorUtils::mix(Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor), Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor), 0.15));
-        }
+    if (m_view->autoFillBackground()) {
+        m_view->setBackgroundBrush(KColorUtils::mix(Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor), Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor), 0.15));
     }
 }
 
@@ -178,20 +180,6 @@ bool PlasmaApp::hasComposite()
 }
 
 
-bool PlasmaApp::eventFilter(QObject *watched, QEvent *event)
-{
-    /*if (event->type() == QEvent::Hide) {
-        SingleView *view = qobject_cast<SingleView *>(watched);
-
-        if (view) {
-            m_storedApplets.insert(view->applet()->name(), view->applet()->id());
-            view->deleteLater();
-            m_views.removeAll(view);
-        }
-    }*/
-    return false;
-}
-
 void PlasmaApp::setDirection(const QString &direction)
 {
     Plasma::Direction dir;
@@ -207,23 +195,17 @@ void PlasmaApp::setDirection(const QString &direction)
         dir = Plasma::Down;
     }
 
-    foreach(SingleView *view, m_views) {
-        view->setDirection(dir);
-    }
+    m_view->setDirection(dir);
 }
 
 void PlasmaApp::show()
 {
-    foreach(SingleView *view, m_views) {
-        view->show();
-    }
+    m_view->show();
 }
 
 void PlasmaApp::hide()
 {
-    foreach(SingleView *view, m_views) {
-        view->hide();
-    }
+    m_view->hide();
 }
 
 #include "plasmaapp.moc"

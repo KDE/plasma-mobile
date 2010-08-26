@@ -66,8 +66,6 @@ public Q_SLOTS:
     void hide();
     void setDirection(const QString &direction);
 
-protected:
-    bool eventFilter(QObject * watched, QEvent *event);
 
 private:
     PlasmaApp();
@@ -83,8 +81,7 @@ private:
     QMultiHash<QString, int>m_storedApplets;
     int m_maxId;
 
-    //TODO: it will have an arbitrary number of views
-    QList<SingleView *>m_views;
+    SingleView * m_view;
 
 };
 
