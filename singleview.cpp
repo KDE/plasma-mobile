@@ -49,6 +49,7 @@ SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment,
     setScene(m_corona);
     m_containment->setFormFactor(Plasma::Planar);
     m_containment->setLocation(Plasma::Floating);
+    KWindowSystem::setType(winId(), NET::Dock);
     QFileInfo info(pluginName);
     if (!info.isAbsolute()) {
         info = QFileInfo(QDir::currentPath() + "/" + pluginName);
