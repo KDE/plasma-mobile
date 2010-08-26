@@ -114,9 +114,29 @@ void SingleView::resizeEvent(QResizeEvent *event)
 
     NETExtendedStrut strut;
 
-    strut.bottom_width = applet()->effectiveSizeHint(Qt::PreferredSize).height();
-    strut.bottom_start = screenGeom.left();
-    strut.bottom_end = screenGeom.width();
+    switch (m_direction) {
+    case Plasma::Left:
+        strut.right_width = event->size().width();
+        strut.right_start = screenGeom.top();
+        strut.right_end = screenGeom.bottom();
+        break;
+    case Plasma::Right:
+        strut.left_width = event->size().width();
+        strut.left_start = screenGeom.top();
+        strut.left_end = screenGeom.bottom();
+        break;
+    case Plasma::Down:
+        strut.top_width = event->size().height();
+        strut.top_start = screenGeom.left();
+        strut.top_end = screenGeom.width();
+        break;
+    case Plasma::Up:
+    default:
+        strut.bottom_width = event->size().height();
+        strut.bottom_start = screenGeom.left();
+        strut.bottom_end = screenGeom.width();
+        break;
+    }
 
     KWindowSystem::setExtendedStrut(winId(), strut.left_width,
                                              strut.left_start,
