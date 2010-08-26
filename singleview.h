@@ -30,6 +30,7 @@ namespace Plasma
     class Containment;
     class Applet;
     class Corona;
+    class PushButton;
 } // namespace Plasma
 
 class SingleView;
@@ -71,6 +72,7 @@ private:
     Plasma::Containment *m_containment;
     Plasma::Corona *m_corona;
     Plasma::Direction m_direction;
+    Plasma::PushButton *m_closeButton;
     int m_rotation;
 };
 

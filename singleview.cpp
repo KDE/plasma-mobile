@@ -14,7 +14,7 @@
  *   You should have received a copy of the GNU Library General Public
  *   License along with this program; if not, write to the
  *   Free Software Foundation, Inc.,
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1m_closeButton->size().height()1, USA.
  */
 
 #include "singleview.h"
@@ -36,6 +36,7 @@
 #include <Plasma/PopupApplet>
 #include <Plasma/Corona>
 #include <Plasma/Containment>
+#include <Plasma/PushButton>
 
 SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment, const QString &pluginName, int appletId, const QVariantList &appletArgs, QWidget *parent)
     : QGraphicsView(parent),
@@ -81,15 +82,27 @@ SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment,
     QDesktopWidget *desktop = QApplication::desktop();
     QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
 
-    setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
+    m_closeButton = new Plasma::PushButton();
+    m_closeButton->setText(i18n("close"));
+    m_closeButton->setIcon(KIcon("window-close"));
+    m_corona->addItem(m_closeButton);
+    connect(m_closeButton, SIGNAL(clicked()), this, SLOT(hide()));
+
+
+
+    setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height() + m_closeButton->size().height());
     setFixedWidth(screenGeom.width());
     move(screenGeom.left(), screenGeom.height() - height());
+
+    m_closeButton->setPos(size().width() - m_closeButton->size().width(), m_applet->pos().y() - m_closeButton->size().height());
+
     show();
 }
 
 SingleView::~SingleView()
 {
     delete m_applet;
+    delete m_closeButton;
 }
 
 
@@ -177,9 +190,9 @@ void SingleView::updateGeometry()
 
     if (m_applet->size().toSize() != transformedSize()) {
         if (m_applet) {
-            m_applet->resize(transformedSize());
+            m_applet->resize(transformedSize() - QSize(0, m_closeButton->size().height()));
         }
-        setSceneRect(m_applet->geometry());
+        setSceneRect(m_applet->geometry().adjusted(0, -m_closeButton->size().height(), 0 ,0));
     }
 }
 
@@ -219,30 +232,32 @@ void SingleView::setDirection(const Plasma::Direction direction)
     switch (direction) {
     case Plasma::Down:
         setRotation(180);
-        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
+        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+m_closeButton->size().height());
         setFixedWidth(screenGeom.width());
         move(screenGeom.left(), screenGeom.top());
         break;
     case Plasma::Left:
         setRotation(270);
-        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
+        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+m_closeButton->size().height());
         setFixedHeight(screenGeom.width());
         move(screenGeom.right() - width(), screenGeom.top());
         break;
     case Plasma::Right:
         setRotation(90);
-        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
+        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+m_closeButton->size().height());
         setFixedHeight(screenGeom.width());
         move(screenGeom.left(), screenGeom.top());
         break;
     case Plasma::Up:
     default:
         setRotation(0);
-        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+1);
+        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+m_closeButton->size().height());
         setFixedWidth(screenGeom.width());
         move(screenGeom.left(), screenGeom.height() - height());
         break;
     }
+
+    m_closeButton->setPos(size().width() - m_closeButton->size().width(), m_applet->pos().y() - m_closeButton->size().height());
 }
 
 Plasma::Direction SingleView::direction() const
