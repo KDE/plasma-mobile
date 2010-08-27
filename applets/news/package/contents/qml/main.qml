@@ -103,16 +103,19 @@ QGraphicsWidget {
                 layout: QGraphicsLinearLayout {
                     orientation: "Vertical"
                     Plasma.Frame {
+			maximumSize: maximumSize.width+"x"+minimumSize.height
                         frameShadow: "Raised"
                         layout: QGraphicsLinearLayout {
                             Plasma.PushButton {
                                 id: showAllButton
+                                maximumSize: minimumSize
                                 text: "Show all"
                             }
                             Plasma.PushButton {
                                 id: backButton
                                 text: "Back"
                                 visible:false
+                                maximumSize: minimumSize
                                 onClicked: {
                                     bodyView.html = "<body style=\"background:#fff;\">"+dataSource['items'][list.currentIndex].description+"</body>";
                                     visible = false;
