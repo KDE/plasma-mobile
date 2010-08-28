@@ -22,6 +22,7 @@
 
 #include "mobview.h"
 #include "mobcorona.h"
+#include "plasmaapp.h"
 #include "keyboard_interface.h"
 
 #include <QAction>
@@ -195,16 +196,24 @@ void MobView::setDirection(const Plasma::Direction direction)
 
     m_direction = direction;
 
+    PlasmaApp::self()->containmentsTransformingChanged(true);
     QPropertyAnimation *animation = new QPropertyAnimation(this, "rotation", this);
     animation->setEasingCurve(QEasingCurve::InOutQuad);
-    animation->setDuration(250);
+    animation->setDuration(300);
     animation->setStartValue(start);
     animation->setEndValue(angle);
 
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 
-    connect(animation, SIGNAL(finished()), this, SIGNAL(geometryChanged()));
+    connect(animation, SIGNAL(finished()), this, SLOT(animationFinished()));
     m_keyboard->call("setDirection", directionName);
+}
+
+void MobView::animationFinished()
+{
+    PlasmaApp::self()->containmentsTransformingChanged(false);
+
+    emit geometryChanged();
 }
 
 Plasma::Direction MobView::direction() const

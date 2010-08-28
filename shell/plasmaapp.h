@@ -68,6 +68,9 @@ protected:
     void setupContainment(Plasma::Containment *containment);
     void changeActivity(Plasma::Containment *containment);
 
+public Q_SLOTS:
+    void containmentsTransformingChanged(bool transforming);
+
 private Q_SLOTS:
     void cleanup();
     void mainContainmentActivated();
@@ -82,7 +85,6 @@ private Q_SLOTS:
     void lockScreen();
     void resizeTray();
     void shrinkTray();
-    void containmentsTransformingChanged(bool transforming);
     void showWidgetsExplorer();
     void mainViewGeometryChanged();
 

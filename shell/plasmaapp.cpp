@@ -540,6 +540,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
             containment->setParentItem(alternateSlot);
             containment->setParent(alternateSlot);
             containment->setPos(0, 0);
+            containment->setVisible(true);
             return;
         }
     }

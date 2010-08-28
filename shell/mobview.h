@@ -66,6 +66,9 @@ public Q_SLOTS:
     void rotateCounterClockwise();
     void rotateClockwise();
 
+private Q_SLOTS:
+    void animationFinished();
+
 Q_SIGNALS:
     void locationChanged(const MobView *view);
     void geometryChanged();
