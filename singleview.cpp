@@ -191,7 +191,10 @@ void SingleView::updateGeometry()
 
     if (m_applet->size().toSize() != transformedSize()) {
         if (m_applet) {
-            m_applet->resize(transformedSize() - QSize(0, m_closeButton->size().height()));
+            QSize size = transformedSize() - QSize(0, m_closeButton->size().height());
+            m_applet->setMinimumSize(0,0);
+            m_applet->setMaximumSize(size);
+            m_applet->resize(size);
         }
         setSceneRect(m_applet->geometry().adjusted(0, -m_closeButton->size().height(), 0 ,0));
     }
