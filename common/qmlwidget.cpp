@@ -134,7 +134,13 @@ void QmlWidgetPrivate::finishExecute()
         lay->addItem(widget);
     } else {
         q->setLayout(0);
-        q->setPreferredSize(object->property("width").toReal(), object->property("height").toReal());
+        const qreal width = object->property("width").toReal();
+        const qreal height = object->property("height").toReal();
+        if (width > 0 && height > 0) {
+            q->setPreferredSize(width, height);
+        } else {
+            q->setPreferredSize(-1, -1);
+        }
     }
     emit q->finished();
 }
