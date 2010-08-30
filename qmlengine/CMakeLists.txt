@@ -1,5 +1,6 @@
 set(qml_appletscript_SRCS
     qmlappletscript.cpp
+    ../common/qmlwidget.cpp
     )
 
 set(qml_package_SRCS

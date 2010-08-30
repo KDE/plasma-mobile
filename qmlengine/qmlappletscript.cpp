@@ -20,6 +20,7 @@
 
 #include "qmlappletscript.h"
 #include "../bindings/plasmabindings.h"
+#include "../common/qmlwidget.h"
 
 #include <QDeclarativeComponent>
 #include <QDeclarativeEngine>
@@ -35,83 +36,10 @@ K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
 
 extern void setupBindings();
 
-class QmlAppletScriptPrivate
-{
-public:
-    QmlAppletScriptPrivate(QmlAppletScript* appletScript) :
-          engine(0), component(0),
-          loaded(false), q(appletScript)
-    {
-    }
 
-    void errorPrint();
-    void execute(const QUrl &fileName);
-    void finishExecute();
-    QDeclarativeEngine* engine;
-    QDeclarativeComponent* component;
-
-    bool loaded;
-    QmlAppletScript* q;
-};
-
-void QmlAppletScriptPrivate::errorPrint()
-{
-    loaded=false;
-    QString errorStr = "Error loading QML file.\n";
-    if(component->isError()){
-        QList<QDeclarativeError> errors = component->errors();
-        foreach (const QDeclarativeError &error, errors) {
-            errorStr += (error.line()>0?QString::number(error.line()) + ": ":"")
-                + error.description() + '\n';
-        }
-    }
-    kWarning() << errorStr;
-}
-
-void QmlAppletScriptPrivate::execute(const QUrl &fileName)
-{
-    if (fileName.isEmpty())
-      return;
-    if (engine)
-      delete engine;
-    if (component)
-      delete component;
-    
-    engine = new QDeclarativeEngine(q);
-    component = new QDeclarativeComponent(engine, fileName, q);
-
-    if(component->isReady() || component->isError())
-        finishExecute();
-    else
-        QObject::connect(component, SIGNAL(statusChanged(QDeclarativeComponent::Status)), q, SLOT(finishExecute()));
-}
-
-void QmlAppletScriptPrivate::finishExecute()
-{
-    if(component->isError()) {
-        errorPrint();
-    }
-    QObject *root = component->create();
-    if (!root) {
-        errorPrint();
-    }
-    QGraphicsLayoutItem *layoutItem = dynamic_cast<QGraphicsLayoutItem*>(root);
-    if (layoutItem) {
-        QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(q->applet());
-        layout->setContentsMargins(0, 0, 0, 0);
-        layout->setSpacing(0);
-        layout->addItem(layoutItem);
-        q->applet()->setLayout(layout);
-        QObject *object = dynamic_cast<QObject *>(layoutItem);
-        if (object)
-            object->setParent(q->applet());
-    } else {
-        //TODO It's a QDeclarativeItem
-    }
-}
 
 QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
-    : Plasma::AppletScript(parent), d(new QmlAppletScriptPrivate(this))
+    : Plasma::AppletScript(parent)
 {
     setupBindings();
     Q_UNUSED(args);
@@ -119,12 +47,15 @@ QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
 
 QmlAppletScript::~QmlAppletScript()
 {
-    delete d;
 }
 
 bool QmlAppletScript::init()
 {
-    d->execute(mainScript());
+    m_qmlWidget = new Plasma::QmlWidget();
+    QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(applet());
+    lay->setContentsMargins(0, 0, 0, 0);
+    lay->addItem(m_qmlWidget);
+    m_qmlWidget->setQmlPath(mainScript());
     return true;
 }
 

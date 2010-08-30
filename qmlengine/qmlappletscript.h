@@ -25,20 +25,24 @@
 
 class QmlAppletScriptPrivate;
 
+namespace Plasma
+{
+    class QmlWidget;
+}
+
 class QmlAppletScript : public Plasma::AppletScript
 {
-    Q_OBJECT
+Q_OBJECT
 
-    public:
-        QmlAppletScript(QObject *parent, const QVariantList &args);
-        ~QmlAppletScript();
+public:
+    QmlAppletScript(QObject *parent, const QVariantList &args);
+    ~QmlAppletScript();
 
-    protected:
-        bool init();
+protected:
+    bool init();
 
-    private:
-        QmlAppletScriptPrivate *d;
-    Q_PRIVATE_SLOT(d, void finishExecute())
+private:
+    Plasma::QmlWidget *m_qmlWidget;
 };
 
 #endif
