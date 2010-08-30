@@ -33,6 +33,8 @@ public:
 
     virtual ~QmlPackage();
 
+    void pathChanged();
+
 };
 
 #endif

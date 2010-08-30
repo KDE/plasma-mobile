@@ -20,6 +20,9 @@
 
 #include "qmlpackage.h"
 
+#include <KDesktopFile>
+#include <KConfigGroup>
+
 K_EXPORT_PLASMA_PACKAGESTRUCTURE(qmlscripts, QmlPackage)
 
 QmlPackage::QmlPackage(QObject* parent, const QVariantList &args)
@@ -36,4 +39,15 @@ QmlPackage::QmlPackage(QObject* parent, const QVariantList &args)
 
 QmlPackage::~QmlPackage()
 {
+}
+
+void QmlPackage::pathChanged()
+{
+    KDesktopFile config(path() + "/metadata.desktop");
+    KConfigGroup cg = config.desktopGroup();
+    QString mainScript = cg.readEntry("X-Plasma-MainScript", QString());
+    if (!mainScript.isEmpty()) {
+        addFileDefinition("mainscript", mainScript, i18n("Main QML File"));
+        addFileDefinition("mainqml", mainScript, i18n("Main QML File"));
+    }
 }
