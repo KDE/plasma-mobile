@@ -159,3 +159,15 @@ geometry=60,4,24,24
 immutability=1
 plugin=battery
 zvalue=0
+
+[Containments][7][Applets][12]
+geometry=90,4,24,24
+immutability=1
+plugin=networkmanagement
+zvalue=0
+
+[Containments][7][Applets][13]
+geometry=120,4,24,24
+immutability=1
+plugin=digital-clock
+zvalue=0
