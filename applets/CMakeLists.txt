@@ -1,4 +1,5 @@
 add_subdirectory(appswitcher)
+add_subdirectory(samegame)
 add_subdirectory(digital-clock)
 add_subdirectory(fakemail)
 add_subdirectory(quickdialer)

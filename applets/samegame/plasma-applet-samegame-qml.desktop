@@ -1,0 +1,19 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Same game (QML)
+Comment=The Same game QML Qt demo converted as plasmoid
+
+Type=Service
+ServiceTypes=Plasma/Applet
+Icon=applications-games
+X-Plasma-API=qmlscript
+X-Plasma-MainScript=qml/samegame.qml
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=notmart@gmail.com
+X-KDE-PluginInfo-Name=org.kde.samegame-qml
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Examples
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
