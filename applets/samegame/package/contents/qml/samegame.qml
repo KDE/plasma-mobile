@@ -47,18 +47,19 @@ Rectangle {
     id: screen
     width: 490; height: 720
     property bool inAnotherDemo: false //Samegame often is just plonked straight into other demos
+    clip:true
 
     SystemPalette { id: activePalette }
 
     Item {
         width: parent.width
-        anchors { top: parent.top; bottom: toolBar.top }
+        anchors { top: parent.top; left:parent.left; right: parent.right; bottom: toolBar.top }
 
         Image {
             id: background
             anchors.fill: parent
             source: "SamegameCore/pics/background.png"
-            fillMode: Image.PreserveAspectCrop
+            fillMode: Image.Scale
         }
 
         Item {
