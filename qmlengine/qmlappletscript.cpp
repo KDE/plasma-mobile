@@ -31,6 +31,7 @@
 #include <KDebug>
 
 #include <Plasma/Applet>
+#include <Plasma/PopupApplet>
 
 K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
 
@@ -51,11 +52,21 @@ QmlAppletScript::~QmlAppletScript()
 
 bool QmlAppletScript::init()
 {
-    m_qmlWidget = new Plasma::QmlWidget();
-    QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(applet());
-    lay->setContentsMargins(0, 0, 0, 0);
-    lay->addItem(m_qmlWidget);
+    m_qmlWidget = new Plasma::QmlWidget(applet());
     m_qmlWidget->setQmlPath(mainScript());
+
+    Plasma::Applet *a = applet();
+    Plasma::PopupApplet *pa = qobject_cast<Plasma::PopupApplet *>(a);
+
+    if (pa) {
+        pa->setPopupIcon(a->icon());
+        pa->setGraphicsWidget(m_qmlWidget);
+    } else {
+        QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(a);
+        lay->setContentsMargins(0, 0, 0, 0);
+        lay->addItem(m_qmlWidget);
+    }
+
     return true;
 }
 
