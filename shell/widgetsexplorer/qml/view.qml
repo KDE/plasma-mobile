@@ -7,6 +7,8 @@ Rectangle {
     color: Qt.rgba(0,0,0,0.4)
     id: widgetsExplorer
     state: "horizontal"
+    width:800
+    height:480
 
     states: [
         State {
@@ -31,6 +33,10 @@ Rectangle {
                 target: infoContent;
                 anchors.bottomMargin: closeButton.height + 16
             }
+            PropertyChanges {
+                target: detailsIcon
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
         },
         State {
             name: "vertical"
@@ -54,6 +60,10 @@ Rectangle {
             PropertyChanges {
                 target: infoContent;
                 anchors.bottomMargin: 0
+            }
+            PropertyChanges {
+                target: detailsIcon
+                anchors.horizontalCenter: undefined
             }
         }
     ]
