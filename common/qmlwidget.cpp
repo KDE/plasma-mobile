@@ -125,6 +125,7 @@ void QmlWidgetPrivate::finishExecute()
     }
 
     if (widget) {
+        q->setPreferredSize(-1,-1);
         QGraphicsLinearLayout *lay = static_cast<QGraphicsLinearLayout *>(q->layout());
         if (!lay) {
             lay = new QGraphicsLinearLayout(q);
@@ -133,6 +134,7 @@ void QmlWidgetPrivate::finishExecute()
         lay->addItem(widget);
     } else {
         q->setLayout(0);
+        q->setPreferredSize(object->property("width").toReal(), object->property("height").toReal());
     }
     emit q->finished();
 }
