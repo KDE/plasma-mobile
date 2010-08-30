@@ -3,6 +3,8 @@ import Qt 4.7
 
 Rectangle {
     color: Qt.rgba(0,0,0,0.4)
+    width: 800
+    height: 480
 
     GridView {
         id: appsView
