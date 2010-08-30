@@ -27,6 +27,7 @@
 #include <QGraphicsLinearLayout>
 #include <QGraphicsSceneResizeEvent>
 #include <QTimer>
+#include <QParallelAnimationGroup>
 
 #include <KIconLoader>
 
@@ -131,6 +132,8 @@ void AppletsContainer::relayout()
     int rows = qMax(1, (int)m_containment->size().height() / squareSize);
     const QSizeF maximumAppletSize(m_containment->size().width()/columns, m_containment->size().height()/rows);
 
+    QParallelAnimationGroup *group = new QParallelAnimationGroup(this);
+
     int i = 0;
     foreach (Plasma::Applet *applet, m_applets) {
         if (applet == m_currentApplet.data()) {
@@ -154,9 +157,22 @@ void AppletsContainer::relayout()
         anim->setTargetWidget(applet);
         anim->setProperty("startGeometry", applet->geometry());
         anim->setProperty("targetGeometry", targetGeom);
-        anim->start(QAbstractAnimation::DeleteWhenStopped);
+        group->addAnimation(anim);
         i++;
     }
+
+    group->start(QAbstractAnimation::DeleteWhenStopped);
+    connect(group, SIGNAL(finished()), this, SLOT(repositionToolBox()));
+
+    resize(size().width(), (ceil((qreal)m_containment->applets().count()/columns))*maximumAppletSize.height());
+}
+
+void AppletsContainer::repositionToolBox()
+{
+    const int squareSize = 350;
+    const int columns = qMax(1, (int)m_containment->size().width() / squareSize);
+    const int rows = qMax(1, (int)m_containment->size().height() / squareSize);
+    const QSizeF maximumAppletSize(m_containment->size().width()/columns, m_containment->size().height()/rows);
 
     int extraHeight = 0;
 
@@ -178,10 +194,10 @@ void AppletsContainer::relayout()
         }
 
         m_addWidgetsButton->setPos(buttonGeom.topLeft());
-        
     }
 
     resize(size().width(), (ceil((qreal)m_containment->applets().count()/columns))*maximumAppletSize.height() + extraHeight);
+    m_relayoutTimer->stop();
 }
 
 void AppletsContainer::resizeEvent(QGraphicsSceneResizeEvent *event)
