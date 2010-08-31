@@ -46,14 +46,6 @@ MobileToolBox::~MobileToolBox()
 
 void MobileToolBox::init()
 {
-    m_showing = false;
-    m_containment = containment();
-    Q_ASSERT(m_containment);
-
-    setZValue(9000);
-
-    m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
-
    QGraphicsItem *item = m_containment->property("toolBoxContainer").value<QGraphicsItem *>();
 
     if (item) {
@@ -61,6 +53,14 @@ void MobileToolBox::init()
     } else {
         deleteLater();
     }
+
+    m_showing = false;
+    m_containment = containment();
+    Q_ASSERT(m_containment);
+
+    setZValue(9000);
+
+    m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
 }
 
 bool MobileToolBox::isShowing() const
