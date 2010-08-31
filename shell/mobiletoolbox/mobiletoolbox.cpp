@@ -59,7 +59,7 @@ void MobileToolBox::init()
     if (item) {
         setParentItem(item);
     } else {
-        hide();
+        deleteLater();
     }
 }
 
