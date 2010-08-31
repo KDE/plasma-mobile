@@ -4,6 +4,7 @@ include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs
 include(KDE4Defaults)
 
 add_subdirectory(data)
+add_subdirectory(mobiletoolbox)
 
 set(plasma-mobile_SRCS
     main.cpp

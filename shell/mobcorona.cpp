@@ -51,6 +51,9 @@ MobCorona::MobCorona(QObject *parent)
 
 void MobCorona::init()
 {
+    setPreferredToolBoxPlugin(Plasma::Containment::DesktopContainment, "org.kde.mobiletoolbox");
+    setPreferredToolBoxPlugin(Plasma::Containment::CustomContainment, "org.kde.mobiletoolbox");
+
     Plasma::ContainmentActionsPluginsConfig desktopPlugins;
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::Vertical, "switchdesktop");
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
