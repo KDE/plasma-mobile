@@ -85,6 +85,7 @@ AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *c
     setFlag(QGraphicsItem::ItemHasNoContents);
 
     m_toolBox = Plasma::AbstractToolBox::load("org.kde.mobiletoolbox", QVariantList(), containment);
+    m_toolBox->setParentItem(this);
     QAction *a = containment->action("add widgets");
     if (a) {
         m_toolBox->addTool(a);
