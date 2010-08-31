@@ -35,6 +35,7 @@ class QGraphicsLinearLayout;
 class QTimer;
 
 class AppletsOverlay;
+class InputBlocker;
 
 class AppletsContainer : public QGraphicsWidget
 {
@@ -81,6 +82,7 @@ private:
     QTimer *m_relayoutTimer;
     QWeakPointer<Plasma::Applet> m_currentApplet;
     AppletsOverlay *m_appletsOverlay;
+    InputBlocker *m_inputBlocker;
     QList<Plasma::Applet *> m_applets;
     //used only at restore, then thrown away
     QMap<int, Plasma::Applet *>m_startingApplets;

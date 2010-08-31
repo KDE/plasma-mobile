@@ -29,6 +29,7 @@
 #include <QTimer>
 #include <QParallelAnimationGroup>
 
+#include <KGlobalSettings>
 #include <KIconLoader>
 
 #include <Plasma/Animation>
@@ -38,6 +39,41 @@
 
 using namespace Plasma;
 
+class InputBlocker : public QGraphicsWidget
+{
+public:
+    InputBlocker(AppletsContainer *container)
+        : QGraphicsWidget(container),
+          m_container(container)
+    {
+        setFlag(QGraphicsItem::ItemHasNoContents);
+    }
+
+    ~InputBlocker()
+    {}
+
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event)
+    {
+        event->accept();
+    }
+
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+    {
+        if (QPointF(event->buttonDownScenePos(event->button()) - event->scenePos()).manhattanLength() < KGlobalSettings::dndEventDelay()*2) {
+            foreach (Plasma::Applet *applet, m_container->containment()->applets()) {
+                if (applet->boundingRect().contains(applet->mapFromScene(event->scenePos()))) {
+                    m_container->setCurrentApplet(applet);
+                    return;
+                }
+            }
+        }
+    }
+
+private:
+    AppletsContainer *m_container;
+};
+
 AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *containment)
  : QGraphicsWidget(parent),
    m_containment(containment),
@@ -46,11 +82,13 @@ AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *c
    m_startupCompleted(false)
 {
     setFlag(QGraphicsItem::ItemHasNoContents);
-    QAction *a = containment->action("add widgets");
-    if (a) {
-        m_toolBoxContainer = new QGraphicsWidget(this);
-    }
 
+    m_toolBoxContainer = new QGraphicsWidget(this);
+
+    m_inputBlocker = new InputBlocker(this);
+    m_inputBlocker->setZValue(2000);
+    m_toolBoxContainer->setZValue(2001);
+    m_inputBlocker->show();
 
     m_relayoutTimer = new QTimer(this);
     m_relayoutTimer->setSingleShot(true);
@@ -211,6 +249,8 @@ void AppletsContainer::resizeEvent(QGraphicsSceneResizeEvent *event)
         m_relayoutTimer->start(300);
     }
 
+    m_inputBlocker->resize(event->newSize());
+
     syncOverlayGeometry();
 }
 
@@ -223,7 +263,7 @@ void AppletsContainer::setAppletsOverlayVisible(const bool visible)
         }
 
         syncOverlayGeometry();
-        m_appletsOverlay->setZValue(2000);
+        m_appletsOverlay->setZValue(2100);
     }
 
     m_appletsOverlay->setVisible(visible);
@@ -261,8 +301,8 @@ void AppletsContainer::setCurrentApplet(Plasma::Applet *applet)
         setAppletsOverlayVisible(true);
         m_appletsOverlay->setApplet(applet);
         m_currentApplet.data()->raise();
-        m_currentApplet.data()->setZValue(qMax(applet->zValue(), (qreal)2100));
-        m_appletsOverlay->setZValue(qMax(applet->zValue()-1, (qreal)2000));
+        m_currentApplet.data()->setZValue(qMax(applet->zValue(), (qreal)2200));
+        m_appletsOverlay->setZValue(qMax(applet->zValue()-1, (qreal)2100));
         syncOverlayGeometry();
     } else {
         setAppletsOverlayVisible(false);

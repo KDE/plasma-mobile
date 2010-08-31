@@ -69,17 +69,17 @@ void AppletsView::appletDragRequested()
 
 bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 {
-    if (m_appletsContainer->isAppletsOverlayVisible() ||
-        //FIXME: this is really ugly
-        (watched->parentItem() && watched->parentItem()->isWidget() && qobject_cast<Plasma::AbstractToolBox*>(static_cast<QGraphicsWidget *>(watched->parentItem())))) {
+    if (m_appletsContainer->isAppletsOverlayVisible()) {
         return false;
     }
 
+
     if (event->type() == QEvent::GraphicsSceneMousePress) {
+        QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
         Plasma::Applet *appletUnderMouse = 0;
         //find an applet to put the indicator over
         foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
-            if (applet == watched || applet->isAncestorOf(watched)) {
+            if (applet->boundingRect().contains(applet->mapFromScene(me->scenePos()))) {
                 appletUnderMouse = applet;
                 break;
             }
@@ -91,16 +91,17 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
             m_dragCountdown->setPos(mappedAppleRect.center() - QPoint(m_dragCountdown->size().width()/2, m_dragCountdown->size().height()/2));
             m_dragCountdown->start(1000);
-        } else {
-            return Plasma::ScrollWidget::sceneEventFilter(watched, event);
         }
+
+        return Plasma::ScrollWidget::sceneEventFilter(watched, event);
+
     } else if (event->type() == QEvent::GraphicsSceneMouseMove) {
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
 
         if (m_movingApplets) {
             if (!m_draggingApplet) {
                 foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
-                    if (applet == watched || applet->isAncestorOf(watched)) {
+                    if (applet->boundingRect().contains(applet->mapFromScene(me->scenePos()))) {
                         applet->raise();
                         m_draggingApplet = applet;
                         break;
@@ -150,22 +151,8 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
             update();
         }
         m_movingApplets = false;
-
-        QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
-
-        if (QPointF(me->buttonDownScenePos(me->button()) - me->scenePos()).manhattanLength() < KGlobalSettings::dndEventDelay()*2) {
-            foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
-                if (applet == watched || applet->isAncestorOf(watched)) {
-                    m_appletsContainer->setCurrentApplet(applet);
-                    break;
-                }
-            }
-        }
     }
-    if (!m_appletsContainer->m_currentApplet.data()  || !m_appletsContainer->m_currentApplet.data()->isAncestorOf(watched)) {
-        Plasma::ScrollWidget::sceneEventFilter(watched, event);
-        return true;
-    }
+
 
     return Plasma::ScrollWidget::sceneEventFilter(watched, event);
 }
