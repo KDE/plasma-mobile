@@ -70,18 +70,6 @@ void MobileDesktop::init()
     setAcceptsHoverEvents(false);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     setFlag(QGraphicsItem::ItemUsesExtendedStyleOption, false);
-
-    setToolBox(Plasma::AbstractToolBox::load(corona()->preferredToolBoxPlugin(Plasma::Containment::DesktopContainment), QVariantList(), this));
-
-    QAction *a = action("add widgets");
-    if (a) {
-        addToolBoxAction(a);
-    }
-}
-
-QGraphicsItem *MobileDesktop::toolBoxContainer() const
-{
-    return m_container->toolBoxContainer();
 }
 
 void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)

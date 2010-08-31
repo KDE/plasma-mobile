@@ -26,6 +26,7 @@
 
 namespace Plasma
 {
+    class AbstractToolBox;
     class Applet;
     class Containment;
     class IconWidget;
@@ -58,8 +59,6 @@ public:
 
     void completeStartup();
 
-    QGraphicsWidget *toolBoxContainer() const;
-
 public Q_SLOTS:
     void layoutApplet(Plasma::Applet *applet, const QPointF &post);
     void appletRemoved(Plasma::Applet*);
@@ -78,7 +77,7 @@ protected Q_SLOTS:
 private:
     QGraphicsLinearLayout *m_layout;
     Plasma::Containment *m_containment;
-    QGraphicsWidget *m_toolBoxContainer;
+    Plasma::AbstractToolBox *m_toolBox;
     QTimer *m_relayoutTimer;
     QWeakPointer<Plasma::Applet> m_currentApplet;
     AppletsOverlay *m_appletsOverlay;

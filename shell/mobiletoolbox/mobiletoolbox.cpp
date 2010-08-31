@@ -46,14 +46,6 @@ MobileToolBox::~MobileToolBox()
 
 void MobileToolBox::init()
 {
-   QGraphicsItem *item = m_containment->property("toolBoxContainer").value<QGraphicsItem *>();
-
-    if (item) {
-        setParentItem(item);
-    } else {
-        deleteLater();
-    }
-
     m_showing = false;
     m_containment = containment();
     Q_ASSERT(m_containment);

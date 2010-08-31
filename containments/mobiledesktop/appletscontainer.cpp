@@ -32,6 +32,7 @@
 #include <KGlobalSettings>
 #include <KIconLoader>
 
+#include <Plasma/AbstractToolBox>
 #include <Plasma/Animation>
 #include <Plasma/Applet>
 #include <Plasma/Containment>
@@ -77,17 +78,21 @@ private:
 AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *containment)
  : QGraphicsWidget(parent),
    m_containment(containment),
-   m_toolBoxContainer(0),
+   m_toolBox(0),
    m_appletsOverlay(0),
    m_startupCompleted(false)
 {
     setFlag(QGraphicsItem::ItemHasNoContents);
 
-    m_toolBoxContainer = new QGraphicsWidget(this);
+    m_toolBox = Plasma::AbstractToolBox::load("org.kde.mobiletoolbox", QVariantList(), containment);
+    QAction *a = containment->action("add widgets");
+    if (a) {
+        m_toolBox->addTool(a);
+    }
 
     m_inputBlocker = new InputBlocker(this);
     m_inputBlocker->setZValue(2000);
-    m_toolBoxContainer->setZValue(2001);
+    m_toolBox->setZValue(2001);
     m_inputBlocker->show();
 
     m_relayoutTimer = new QTimer(this);
@@ -97,11 +102,6 @@ AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *c
 
 AppletsContainer::~AppletsContainer()
 {
-}
-
-QGraphicsWidget *AppletsContainer::toolBoxContainer() const
-{
-    return m_toolBoxContainer;
 }
 
 Plasma::Containment *AppletsContainer::containment() const
@@ -166,7 +166,7 @@ void AppletsContainer::appletRemoved(Plasma::Applet *applet)
 void AppletsContainer::relayout()
 {
     if (m_applets.isEmpty()) {
-        m_toolBoxContainer->setPos(0,0);
+        m_toolBox->setPos(0,0);
         return;
     }
 
@@ -219,8 +219,8 @@ void AppletsContainer::repositionToolBox()
 
     int extraHeight = 0;
 
-    if (m_toolBoxContainer) {
-        QRectF buttonGeom = m_toolBoxContainer->geometry();
+    if (m_toolBox) {
+        QRectF buttonGeom = m_toolBox->geometry();
 
         if (m_applets.count() % columns != 0) {
             QRectF geom = m_applets.last()->geometry();
@@ -236,7 +236,7 @@ void AppletsContainer::repositionToolBox()
            extraHeight = maximumAppletSize.height();
         }
 
-        m_toolBoxContainer->setPos(buttonGeom.topLeft());
+        m_toolBox->setPos(buttonGeom.topLeft());
     }
 
     resize(size().width(), (ceil((qreal)m_containment->applets().count()/columns))*maximumAppletSize.height() + extraHeight);
