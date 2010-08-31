@@ -41,19 +41,14 @@ using namespace Plasma;
 AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *containment)
  : QGraphicsWidget(parent),
    m_containment(containment),
-   m_addWidgetsButton(0),
+   m_toolBoxContainer(0),
    m_appletsOverlay(0),
    m_startupCompleted(false)
 {
     setFlag(QGraphicsItem::ItemHasNoContents);
     QAction *a = containment->action("add widgets");
     if (a) {
-        m_addWidgetsButton = new Plasma::IconWidget(this);
-        m_addWidgetsButton->setObjectName("addWidgetsButton");
-        m_addWidgetsButton->setAction(a);
-        m_addWidgetsButton->setText(QString());
-        m_addWidgetsButton->setSvg("widgets/action-overlays", "add-normal");
-        m_addWidgetsButton->resize(KIconLoader::SizeLarge, KIconLoader::SizeLarge);
+        m_toolBoxContainer = new QGraphicsWidget(this);
     }
 
 
@@ -64,6 +59,16 @@ AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *c
 
 AppletsContainer::~AppletsContainer()
 {
+}
+
+QGraphicsWidget *AppletsContainer::toolBoxContainer() const
+{
+    return m_toolBoxContainer;
+}
+
+Plasma::Containment *AppletsContainer::containment() const
+{
+    return m_containment;
 }
 
 void AppletsContainer::completeStartup()
@@ -123,7 +128,7 @@ void AppletsContainer::appletRemoved(Plasma::Applet *applet)
 void AppletsContainer::relayout()
 {
     if (m_applets.isEmpty()) {
-        m_addWidgetsButton->setPos(0,0);
+        m_toolBoxContainer->setPos(0,0);
         return;
     }
 
@@ -176,8 +181,8 @@ void AppletsContainer::repositionToolBox()
 
     int extraHeight = 0;
 
-    if (m_addWidgetsButton) {
-        QRectF buttonGeom = m_addWidgetsButton->geometry();
+    if (m_toolBoxContainer) {
+        QRectF buttonGeom = m_toolBoxContainer->geometry();
 
         if (m_applets.count() % columns != 0) {
             QRectF geom = m_applets.last()->geometry();
@@ -193,7 +198,7 @@ void AppletsContainer::repositionToolBox()
            extraHeight = maximumAppletSize.height();
         }
 
-        m_addWidgetsButton->setPos(buttonGeom.topLeft());
+        m_toolBoxContainer->setPos(buttonGeom.topLeft());
     }
 
     resize(size().width(), (ceil((qreal)m_containment->applets().count()/columns))*maximumAppletSize.height() + extraHeight);

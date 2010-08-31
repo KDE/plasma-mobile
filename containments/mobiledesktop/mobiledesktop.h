@@ -35,6 +35,7 @@ class AppletsView;
 class MobileDesktop : public Plasma::Containment
 {
     Q_OBJECT
+    Q_PROPERTY(QGraphicsItem *toolBoxContainer READ toolBoxContainer)
 
 public:
     MobileDesktop(QObject *parent, const QVariantList &args);
@@ -42,6 +43,8 @@ public:
     void init();
 
     void constraintsEvent(Plasma::Constraints constraints);
+
+    QGraphicsItem *toolBoxContainer() const;
 
 protected:
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);

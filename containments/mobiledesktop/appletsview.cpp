@@ -26,6 +26,7 @@
 
 #include <KGlobalSettings>
 
+#include <Plasma/AbstractToolBox>
 #include <Plasma/Applet>
 #include <Plasma/Containment>
 
@@ -69,8 +70,8 @@ void AppletsView::appletDragRequested()
 bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 {
     if (m_appletsContainer->isAppletsOverlayVisible() ||
-        //FIXME: using the object name is not so pretty
-        (watched->isWidget() && static_cast<QGraphicsWidget *>(watched)->objectName() == "addWidgetsButton")) {
+        //FIXME: this is really ugly
+        (watched->parentItem() && watched->parentItem()->isWidget() && qobject_cast<Plasma::AbstractToolBox*>(static_cast<QGraphicsWidget *>(watched->parentItem())))) {
         return false;
     }
 
@@ -89,8 +90,10 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
             const QRectF mappedAppleRect(mapFromItem(appletUnderMouse, appletUnderMouse->boundingRect()).boundingRect().intersected(boundingRect()));
 
             m_dragCountdown->setPos(mappedAppleRect.center() - QPoint(m_dragCountdown->size().width()/2, m_dragCountdown->size().height()/2));
+            m_dragCountdown->start(1000);
+        } else {
+            return Plasma::ScrollWidget::sceneEventFilter(watched, event);
         }
-        m_dragCountdown->start(1000);
     } else if (event->type() == QEvent::GraphicsSceneMouseMove) {
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
 
@@ -128,12 +131,15 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
                 }
 
                 return true;
+            } else {
+                return Plasma::ScrollWidget::sceneEventFilter(watched, event);
             }
         } else {
             if (QPointF(me->buttonDownScenePos(me->button()) - me->scenePos()).manhattanLength() > KGlobalSettings::dndEventDelay()*2) {
                 update();
                 m_dragCountdown->stop();
             }
+            return Plasma::ScrollWidget::sceneEventFilter(watched, event);
         }
     } else if (event->type() == QEvent::GraphicsSceneMouseRelease) {
         m_dragCountdown->stop();

@@ -24,7 +24,7 @@ import GraphicsLayouts 4.7
 QGraphicsWidget {
     id: page;
     preferredSize: "250x600"
-    minimumSize: "200x300"
+    minimumSize: "200x200"
     Item {
       id:main
       Plasma.DataSource { id: dataSource; engine: "rss"; source: "http://planetkde.org/rss20.xml"; interval: 50000; }

@@ -48,12 +48,16 @@ public:
     void setCurrentApplet(Plasma::Applet *applet);
     Plasma::Applet *currentApplet() const;
 
+    Plasma::Containment *containment() const;
+
     void setAppletsOverlayVisible(const bool visible);
     bool isAppletsOverlayVisible() const;
 
     void relayoutApplet(Plasma::Applet *, const QPointF &post);
 
     void completeStartup();
+
+    QGraphicsWidget *toolBoxContainer() const;
 
 public Q_SLOTS:
     void layoutApplet(Plasma::Applet *applet, const QPointF &post);
@@ -73,7 +77,7 @@ protected Q_SLOTS:
 private:
     QGraphicsLinearLayout *m_layout;
     Plasma::Containment *m_containment;
-    Plasma::IconWidget *m_addWidgetsButton;
+    QGraphicsWidget *m_toolBoxContainer;
     QTimer *m_relayoutTimer;
     QWeakPointer<Plasma::Applet> m_currentApplet;
     AppletsOverlay *m_appletsOverlay;

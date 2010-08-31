@@ -30,6 +30,7 @@
 
 //KDE
 #include <KDebug>
+#include <Plasma/AbstractToolBox>
 #include <Plasma/Corona>
 #include <Plasma/ScrollWidget>
 
@@ -65,10 +66,22 @@ void MobileDesktop::init()
             m_container, SLOT(layoutApplet(Plasma::Applet*, QPointF)));
     connect(this, SIGNAL(appletRemoved(Plasma::Applet*)),
             m_container, SLOT(appletRemoved(Plasma::Applet*)));
-    
+
     setAcceptsHoverEvents(false);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     setFlag(QGraphicsItem::ItemUsesExtendedStyleOption, false);
+
+    setToolBox(Plasma::AbstractToolBox::load(corona()->preferredToolBoxPlugin(Plasma::Containment::DesktopContainment), QVariantList(), this));
+
+    QAction *a = action("add widgets");
+    if (a) {
+        addToolBoxAction(a);
+    }
+}
+
+QGraphicsItem *MobileDesktop::toolBoxContainer() const
+{
+    return m_container->toolBoxContainer();
 }
 
 void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)
