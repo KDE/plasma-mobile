@@ -65,6 +65,7 @@ protected:
     void init();
 
 private:
+    bool m_showing;
     Plasma::Containment *m_containment;
     QGraphicsLinearLayout *m_layout;
     QHash<QAction *, Plasma::IconWidget *> m_actionButtons;

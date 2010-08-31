@@ -46,6 +46,7 @@ MobileToolBox::~MobileToolBox()
 
 void MobileToolBox::init()
 {
+    m_showing = false;
     m_containment = containment();
     Q_ASSERT(m_containment);
 
@@ -64,12 +65,12 @@ void MobileToolBox::init()
 
 bool MobileToolBox::isShowing() const
 {
-    return true;
+    return m_showing;
 }
 
 void MobileToolBox::setShowing(const bool show)
 {
-    Q_UNUSED(show);
+    m_showing = show;
 }
 
 
