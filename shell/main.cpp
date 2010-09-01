@@ -55,8 +55,10 @@ KDE_EXPORT int kdemain(int argc, char **argv)
 
     PlasmaApp *app = PlasmaApp::self();
 
+#ifdef CUSTOM_INPUTCONTEXT
     InputContext *ic = new InputContext;
     app->setInputContext(ic);
+#endif
 
     QApplication::setWindowIcon(KIcon("plasma"));
     app->disableSessionManagement(); // autostarted
