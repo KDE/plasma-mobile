@@ -38,6 +38,9 @@
 #include <Plasma/Containment>
 #include <Plasma/IconWidget>
 
+//on some devices it is too much
+#define NO_ANIMATIONS
+
 using namespace Plasma;
 
 class InputBlocker : public QGraphicsWidget
@@ -197,16 +200,24 @@ void AppletsContainer::relayout()
 
 
         const QRectF targetGeom((i%columns)*maximumAppletSize.width() + offset.width(), (i/columns)*maximumAppletSize.height() + offset.height(), appletSize.width(), appletSize.height());
+#ifndef NO_ANIMATIONS
         Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
         anim->setTargetWidget(applet);
         anim->setProperty("startGeometry", applet->geometry());
         anim->setProperty("targetGeometry", targetGeom);
         group->addAnimation(anim);
+#else
+        applet->setGeometry(targetGeom);
+#endif
         i++;
     }
 
+#ifndef NO_ANIMATIONS
     group->start(QAbstractAnimation::DeleteWhenStopped);
     connect(group, SIGNAL(finished()), this, SLOT(repositionToolBox()));
+#else
+    repositionToolBox();
+#endif
 
     resize(size().width(), (ceil((qreal)m_containment->applets().count()/columns))*maximumAppletSize.height());
 }
@@ -325,11 +336,15 @@ void AppletsContainer::syncOverlayGeometry()
         const int margin = KIconLoader::SizeHuge;
 
         QRectF targetGeom(mapFromItem(m_containment, m_containment->boundingRect()).boundingRect().adjusted(margin, margin/2, -margin, -margin/2));
+#ifndef NO_ANIMATIONS
         Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
         anim->setTargetWidget(m_currentApplet.data());
         anim->setProperty("startGeometry", m_currentApplet.data()->geometry());
         anim->setProperty("targetGeometry", targetGeom);
         anim->start(QAbstractAnimation::DeleteWhenStopped);
+#else
+        m_currentApplet.data()->setGeometry(targetGeom);
+#endif
     }
 
     if (m_appletsOverlay) {
