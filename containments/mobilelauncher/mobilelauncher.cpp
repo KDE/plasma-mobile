@@ -32,6 +32,7 @@
 #include <QtDeclarative/QDeclarativeItem>
 #include <QtGui/QGraphicsLinearLayout>
 #include <QStandardItemModel>
+#include <QTimer>
 
 //KDE
 #include <KDebug>
@@ -66,8 +67,12 @@ void MobileLauncher::init()
 {
     Containment::init();
 
+    m_queryTimer = new QTimer(this);
+    m_queryTimer->setSingleShot(true);
+    connect(m_queryTimer, SIGNAL(timeout()), this, SLOT(updateQuery()));
+
     m_runnerModel = new KRunnerModel(this);
-    m_runnerModel->setQuery("Network");
+    //m_runnerModel->setQuery("Network");
 
     setContentsMargins(0, 0, 0, 0);
 
@@ -104,7 +109,17 @@ void MobileLauncher::updateActivity(int wasScreen, int isScreen, Plasma::Contain
     Q_UNUSED(wasScreen)
     Q_UNUSED(wasScreen)
 
-    m_runnerModel->setQuery(containment->activity());
+    m_queryTimer->start(1000);
+    setBusy(true);
+}
+
+void MobileLauncher::updateQuery()
+{
+    Plasma::Containment *containment = corona()->containmentForScreen(0);
+    if (containment) {
+        m_runnerModel->setQuery(containment->activity());
+    }
+    setBusy(false);
 }
 
 void MobileLauncher::itemActivated()

@@ -26,6 +26,7 @@
 
 class QDeclarativeItem;
 class QStandardItemModel;
+class QTimer;
 
 class KRunnerModel;
 
@@ -45,11 +46,13 @@ public:
 
 protected Q_SLOTS:
     void updateActivity(int wasScreen, int isScreen, Plasma::Containment *containment);
+    void updateQuery();
     void itemActivated();
 
 private:
     Plasma::QmlWidget *m_qmlWidget;
     QDeclarativeItem *m_view;
+    QTimer *m_queryTimer;
 
     KRunnerModel *m_runnerModel;
 };
