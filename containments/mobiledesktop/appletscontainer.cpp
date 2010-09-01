@@ -128,7 +128,7 @@ void AppletsContainer::completeStartup()
 void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
 {
     applet->setParentItem(this);
-    applet->lower();
+    applet->setZValue(0);
     relayoutApplet(applet, pos);
 }
 
@@ -187,6 +187,7 @@ void AppletsContainer::relayout()
             i++;
             continue;
         }
+        applet->setZValue(0);
         QSizeF appletSize = applet->effectiveSizeHint(Qt::PreferredSize);
         appletSize = appletSize.boundedTo(maximumAppletSize - QSize(0, 70));
         appletSize = appletSize.expandedTo(QSize(250, 250));
