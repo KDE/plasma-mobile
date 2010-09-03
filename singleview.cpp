@@ -102,7 +102,7 @@ SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment,
 
 SingleView::~SingleView()
 {
-    delete m_applet;
+    emit storeApplet(m_applet);
     delete m_closeButton;
 }
 

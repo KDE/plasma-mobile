@@ -69,11 +69,13 @@ public Q_SLOTS:
 
 private:
     PlasmaApp();
+    KConfigGroup storedConfig(int appletId);
 
 private Q_SLOTS:
     void cleanup();
     void syncConfig();
     void themeChanged();
+    void storeApplet(Plasma::Applet *applet);
 
 private:
     Plasma::Corona *m_corona;

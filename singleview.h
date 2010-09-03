@@ -63,6 +63,7 @@ Q_SIGNALS:
     void locationChanged(const SingleView *view);
     void geometryChanged();
     void containmentActivated();
+    void storeApplet(Plasma::Applet *applet);
 
 protected:
     void resizeEvent(QResizeEvent *event);

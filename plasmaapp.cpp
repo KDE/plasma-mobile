@@ -74,14 +74,14 @@ PlasmaApp::PlasmaApp()
     new PlasmaKeyboardAdaptor(this);
     QDBusConnection::sessionBus().registerObject("/App", this);
 
-    KConfigGroup containmentConfig = m_containment->config();
-    KConfigGroup applets(&containmentConfig, "Applets");
+    KConfigGroup applets = storedConfig(0);
 
     foreach (const QString &group, applets.groupList()) {
         KConfigGroup appletGroup(&applets, group);
 
         int id = appletGroup.name().toInt();
         QString pluginName = appletGroup.readEntry("plugin", QString());
+
         if (id != 0 && !pluginName.isEmpty()) {
             m_storedApplets.insert(pluginName, id);
             m_maxId = qMax(id, m_maxId);
@@ -96,6 +96,17 @@ PlasmaApp::~PlasmaApp()
 {
 }
 
+KConfigGroup PlasmaApp::storedConfig(int appletId)
+{
+    KConfigGroup cg(m_corona->config(), "StoredApplets");
+
+    if (appletId > 0) {
+        cg = KConfigGroup(&cg, QString::number(appletId));
+    }
+
+    return cg;
+}
+
 int  PlasmaApp::newInstance()
 {
     if (m_view) {
@@ -104,16 +115,23 @@ int  PlasmaApp::newInstance()
 
     QString pluginName = "plasmaboard";
 
-    int appletId;
+    int appletId = ++m_maxId;;
     if (m_storedApplets.contains(pluginName)) {
-        appletId = m_storedApplets.values(pluginName).first();
-        m_storedApplets.remove(pluginName, appletId);
-    } else {
-        appletId = ++m_maxId;
+        int storedAppletId = m_storedApplets.values(pluginName).first();
+        KConfigGroup config = storedConfig(storedAppletId);
+
+        KConfigGroup actualConfig(m_containment->config());
+        actualConfig = KConfigGroup(&actualConfig, "Applets");
+        actualConfig = KConfigGroup(&actualConfig, QString::number(appletId));
+
+        config.copyTo(&actualConfig);
+        config.deleteGroup();
+        m_storedApplets.remove(pluginName, storedAppletId);
     }
 
     SingleView *view = new SingleView(m_corona, m_containment, pluginName, appletId, QVariantList());
     view->installEventFilter(this);
+    connect(view, SIGNAL(storeApplet(Plasma::Applet*)), this, SLOT(storeApplet(Plasma::Applet*)));
 
     view->setWindowFlags(Qt::FramelessWindowHint);
     KWindowSystem::setType(view->winId(), NET::Dock);
@@ -148,6 +166,19 @@ void PlasmaApp::cleanup()
     syncConfig();
 }
 
+void PlasmaApp::storeApplet(Plasma::Applet *applet)
+{
+    m_storedApplets.insert(applet->name(), applet->id());
+    KConfigGroup storage = storedConfig(0);
+    KConfigGroup cg(applet->containment()->config());
+    cg = KConfigGroup(&cg, "Applets");
+    cg = KConfigGroup(&cg, QString::number(applet->id()));
+    delete applet;
+//    kDebug() << "storing" << applet->name() << applet->id() << "to" << storage.name() << ", applet config is" << cg.name();
+    cg.reparent(&storage);
+}
+
+
 void PlasmaApp::syncConfig()
 {
     KGlobal::config()->sync();
@@ -165,7 +196,6 @@ Plasma::Corona* PlasmaApp::corona()
     if (!m_corona) {
         m_corona = new Plasma::Corona(this);
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
-
 
         m_corona->setItemIndexMethod(QGraphicsScene::NoIndex);
         //m_corona->initializeLayout();
