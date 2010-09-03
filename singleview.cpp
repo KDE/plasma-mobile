@@ -243,13 +243,13 @@ void SingleView::setDirection(const Plasma::Direction direction)
     case Plasma::Left:
         setRotation(270);
         setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+m_closeButton->size().height());
-        setFixedHeight(screenGeom.width());
+        setFixedHeight(screenGeom.height());
         move(screenGeom.right() - width(), screenGeom.top());
         break;
     case Plasma::Right:
         setRotation(90);
         setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+m_closeButton->size().height());
-        setFixedHeight(screenGeom.width());
+        setFixedHeight(screenGeom.height());
         move(screenGeom.left(), screenGeom.top());
         break;
     case Plasma::Up:
@@ -261,7 +261,7 @@ void SingleView::setDirection(const Plasma::Direction direction)
         break;
     }
 
-    m_closeButton->setPos(size().width() - m_closeButton->size().width(), m_applet->pos().y() - m_closeButton->size().height());
+    m_closeButton->setPos(transformedSize().width() - m_closeButton->size().width(), m_applet->pos().y() - m_closeButton->size().height());
 }
 
 Plasma::Direction SingleView::direction() const
