@@ -90,13 +90,23 @@ Item {
     Image {
         id: activityIndicator
         source: "images/activityIndicator.png";
-        anchors.bottom: parent.bottom
+        //anchors.bottom: parent.bottom
+        y: parent.height
         x: -width
-        PropertyAnimation {
-            id: animation
-            target: activityIndicator
-            properties: "x"
-            duration: 300
+        ParallelAnimation {
+            id: indicatorAnimation
+            NumberAnimation {
+                id: indicatorAnimationX
+                target: activityIndicator
+                property: "x"
+                duration: 300
+            }
+            NumberAnimation {
+                id: indicatorAnimationY
+                target: activityIndicator
+                property: "y"
+                duration: 300
+            }
         }
 
     }
@@ -147,8 +157,9 @@ Item {
                 } else {
                     child.clicked();
                     activeChild = child;
-                    animation.to = activeChild.x + activeChild.width/2 + activityIndicator.width/4
-                    animation.running = true
+                    indicatorAnimationX.to = shortcuts.x + activeChild.x + activeChild.width/2 - activityIndicator.width/2
+                    indicatorAnimationY.to = activeChild.y + activeChild.height - activityIndicator.height
+                    indicatorAnimation.running = true
                 }
             }
 
