@@ -59,26 +59,17 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     m_scrollWidget = new Plasma::ScrollWidget(this);
     m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    QGraphicsWidget *outsideWidget = new QGraphicsWidget(m_scrollWidget);
-    QGraphicsLinearLayout* outsidelayout = new QGraphicsLinearLayout(Qt::Horizontal, outsideWidget);
-    m_scrollWidget->setWidget(outsideWidget);
-    outsideWidget->setLayout(outsidelayout);
-
-    // put a widget inside the scrollwidget's widget
-    // - so it can be resized independantly of the scrollwidget
     m_mainWidget = new QGraphicsWidget(this);
-    m_mainWidget->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed));
-    outsidelayout->addItem(m_mainWidget);
-
     m_layout = new QGraphicsLinearLayout(Qt::Horizontal, m_mainWidget);
+    m_scrollWidget->setWidget(m_mainWidget);
     m_mainWidget->setLayout(m_layout);
 
     connect(this, SIGNAL(appletAdded(Plasma::Applet*,const QPointF&)),
             this, SLOT(addTrayApplet(Plasma::Applet*)));
 
     // center the applets
-    outsidelayout->insertStretch(0);
-    outsidelayout->addStretch();
+//    outsidelayout->insertStretch(0);
+//    outsidelayout->addStretch();
 }
 
 
@@ -114,6 +105,7 @@ void MobileTray::init()
     // request the mobile shell to do a shrink when clicked
     connect(m_cancel, SIGNAL(clicked()), this, SIGNAL(shrinkRequested()));
     m_cancel->setPreferredSize(m_cancel->size().width(), 100);
+    m_cancel->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     m_cancel->hide();
 
     connect(m_manager, SIGNAL(taskAdded(SystemTray::Task*)),
@@ -159,28 +151,20 @@ void MobileTray::constraintsEvent(Plasma::Constraints constraints)
 }
 
 void MobileTray::resizeContents() {
-    // TODO: this seems to work, but is *really* kind of ugly and inelegant. Think of a better way?
-    int contentsHeight = size().height() - 10;
-    int iconHeight = contentsHeight - 5;
-    int totalWidth = 0;
+    // Somewhat less ugly now, but still looks kinda funny..
+    int iconHeight = size().height() - 15;
+
+    m_mainWidget->setPreferredHeight(iconHeight);
     // enlarge each applet
     foreach (QGraphicsWidget* w, m_fixedIcons) {
-        w->setPreferredHeight(iconHeight);
-        totalWidth += w->preferredSize().width() < iconHeight ? iconHeight : w->preferredSize().width();
+        w->setPreferredSize(iconHeight, iconHeight);
     }
     foreach (QGraphicsWidget* w, m_cyclicIcons) {
-        w->setPreferredHeight(iconHeight);
-        totalWidth += w->preferredSize().width() < iconHeight ? iconHeight : w->preferredSize().width();
+        w->setPreferredSize(iconHeight, iconHeight);
     }
     foreach (QGraphicsWidget* w, m_hiddenIcons) {
-        w->setPreferredHeight(iconHeight);
-        if (m_mode == ACTIVE) {
-            totalWidth += w->preferredSize().width() < iconHeight ? iconHeight : w->preferredSize().width();
-        }
+        w->setPreferredSize(iconHeight, iconHeight);
     }
-    // set an approximate minimal preferred size for the containing widget
-    // to prevent shrinking back when dbus protocol resets an applet's preferredsize to a small value.
-    m_mainWidget->setPreferredSize(totalWidth, contentsHeight);
 }
 
 void MobileTray::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -244,7 +228,7 @@ void MobileTray::addTask(SystemTray::Task* task)
             }
         }
 
-        ic->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
+        ic->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
         ic->setParent(this);
 
         DBusSystemTrayWidget *d = qobject_cast<DBusSystemTrayWidget*>(ic);

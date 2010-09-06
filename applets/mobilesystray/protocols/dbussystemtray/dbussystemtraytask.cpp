@@ -84,10 +84,8 @@ QGraphicsWidget* DBusSystemTrayTask::createWidget(Plasma::Applet *host)
     DBusSystemTrayWidget *m_iconWidget = new DBusSystemTrayWidget(host, m_service);
     m_iconWidget->show();
 
-    m_iconWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    m_iconWidget->setMinimumSize(KIconLoader::SizeSmall, KIconLoader::SizeSmall);
-    //standard fdo icon sizes is 24x24, opposed to the 22x22 SizeSmallMedium
-    m_iconWidget->setPreferredSize(24, 24);
+    // we don't deal with xembed in mobile, and unlike the desktop version we want to be able
+    // to resize stuff freely, so we ommit code to fix the icon size here.
 
     //Delay because syncStatus needs that createWidget is done
 //     QTimer::singleShot(0, this, SLOT(connectToData()));
@@ -220,13 +218,9 @@ void DBusSystemTrayTask::syncIcons(const Plasma::DataEngine::Data &properties)
 
             iconWidget->setIcon(m_iconName, m_icon);
 
-            //This hardcoded number is needed to support pixel perfection of m_icons coming from other environments, in kde actualsize will jusrt return our usual 22x22
-            if (iconWidget->svg().isEmpty()) {
-                QSize size = m_icon.actualSize(QSize(24, 24));
-                iconWidget->setPreferredSize(iconWidget->sizeFromIconSize(qMax(size.width(), size.height())));
-            } else {
-                iconWidget->setPreferredSize(24, 24);
-            }
+            // we don't deal with xembed in mobile, and unlike the desktop version we want to be able
+            // to resize stuff freely, so we ommit code to fix the icon size here.
+
         }
     }
 
