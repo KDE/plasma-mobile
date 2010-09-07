@@ -1,8 +1,16 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Same game (QML)
+Name[pt]=Jogo Same (QML)
+Name[pt_BR]=Jogo Same (QML)
+Name[sv]=Same game (QML)
+Name[uk]=Та сама гра (QML)
 Name[x-test]=xxSame game (QML)xx
 Comment=The Same game QML Qt demo converted as plasmoid
+Comment[pt]=O jogo Same do Qt, em QML, convertido para um plasmóide
+Comment[pt_BR]=O jogo Same do Qt em QML, convertido para um plasmoide
+Comment[sv]=Same game QML Qt-demonstrationen konverterad till en Plasmoid
+Comment[uk]=Плазмоїд-демонстрація тієї самої гри на основі QML
 Comment[x-test]=xxThe Same game QML Qt demo converted as plasmoidxx
 
 Type=Service
