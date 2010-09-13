@@ -57,14 +57,14 @@ QGraphicsWidget {
                         //width: list.width
                         color: theme.textColor
                         textFormat: Text.RichText
-                        text: dataSource['items'][modelData].title
+                        text: dataSource.data['items'][modelData].title
                     }
                     Text {
                         id: date
                         color: theme.textColor
                         width: list.width
                         horizontalAlignment: Text.AlignRight
-                        text: '<em><small>'+Date(dataSource['items'][modelData].time)+'</em></small>&nbsp;'
+                        text: '<em><small>'+Date(dataSource.data['items'][modelData].time)+'</em></small>&nbsp;'
                     }
                 }
 
@@ -73,7 +73,7 @@ QGraphicsWidget {
                     anchors.fill: background
                     onClicked: {
                         list.currentIndex = index
-                        bodyView.html = "<body style=\"background:#fff;\">"+dataSource['items'][modelData].description+"</body>"
+                        bodyView.html = "<body style=\"background:#fff;\">"+dataSource.data['items'][modelData].description+"</body>"
                         list.itemClicked()
                     }
                 }
@@ -97,7 +97,7 @@ QGraphicsWidget {
                     snapMode: ListView.SnapToItem
 
                     clip: true
-                    model: dataSource['items.count']
+                    model: dataSource.data['items.count']
                     delegate: simpleText
                 }
             }
@@ -119,7 +119,7 @@ QGraphicsWidget {
                                 visible:false
                                 maximumSize: minimumSize
                                 onClicked: {
-                                    bodyView.html = "<body style=\"background:#fff;\">"+dataSource['items'][list.currentIndex].description+"</body>";
+                                    bodyView.html = "<body style=\"background:#fff;\">"+dataSource.data['items'][list.currentIndex].description+"</body>";
                                     visible = false;
                                 }
                             }

@@ -28,12 +28,12 @@ QGraphicsWidget {
           Component {
               id: simpleText
               Text {
-                  text: modelData + ': ' + dataSource[modelData]
+                  text: modelData + ': ' + dataSource.data[modelData]
               }
           }
       ]
       Column {
-        Text { text: 'Time Is ' + dataSource['time']; }
+        Text { text: 'Time Is ' + dataSource.data['time']; }
         Text { text: "Available Data:"; }
         Repeater { model: dataSource.keys; delegate: simpleText; }
       }
