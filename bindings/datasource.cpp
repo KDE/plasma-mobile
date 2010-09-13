@@ -1,6 +1,7 @@
 /*
  *   Copyright 2009 by Alan Alpert <alan.alpert@nokia.com>
  *   Copyright 2010 by Ménard Alexis <menard@kde.org>
+ *   Copyright 2010 by Marco MArtin <mart@kde.org>
 
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -22,9 +23,12 @@
 #include "qdeclarativeengine.h"
 #include "qdeclarativecontext.h"
 #include "private/qdeclarativeopenmetaobject_p.h"
-#include <Plasma/Applet>
+
 #include <QDebug>
 #include <QTimer>
+
+#include <Plasma/Applet>
+
 
 namespace Plasma
 {
@@ -32,7 +36,9 @@ DataSource::DataSource(QObject* parent)
     : QObject(parent), m_interval(1000), m_applet(0), m_dataEngine(0)
 {
     setObjectName("DataSource");
-    m_dmo = new QDeclarativeOpenMetaObject(this);
+   // m_dmo = new QDeclarativeOpenMetaObject(this);
+    m_data = new QDeclarativePropertyMap(this);
+
     m_context = QDeclarativeEngine::contextForObject(parent);
     connect(this, SIGNAL(engineChanged()),
             this, SLOT(setupData()));
@@ -76,26 +82,33 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
 {
     Q_UNUSED(sourceName);//Only one source
     QStringList newKeys;
+
     foreach(const QString &key, data.keys()){
         /* Note that the data source can't have overlapping properties with
            the DataSource. Also properties in QML must start lowercase.*/
         QString ourKey = key.toLower();
-        if(ourKey=="interval" || ourKey=="engine" || ourKey=="source")
+        if (ourKey=="interval" || ourKey=="engine" || ourKey=="source") {
             continue;
-        m_dmo->setValue(ourKey.toLatin1(), data.value(key));
-        QVariant data = m_dmo->value(key.toLower().toLatin1());
-        if (data.type() == QVariant::List) {
-            QVariantList list = data.toList();
-
-            m_dmo->setValue(QString(ourKey+".count").toLatin1(), list.count());
         }
-        newKeys<<ourKey;
+
+        m_data->insert(ourKey.toLatin1(), data.value(key));
+
+
+        if (data.value(key).type() == QVariant::List) {
+            QVariantList list = data.value(key).toList();
+
+           m_data->insert(QString(ourKey+".count").toLatin1(), list.count());
+        }
+        newKeys << ourKey;
     }
 
     if(newKeys != m_keys){
         emit keysChanged();
         m_keys = newKeys;
     }
+
+    emit dataChanged();
 }
+
 }
 #include "datasource.moc"

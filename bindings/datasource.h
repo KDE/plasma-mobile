@@ -1,6 +1,7 @@
 /*
  *   Copyright 2009 by Alan Alpert <alan.alpert@nokia.com>
  *   Copyright 2010 by Ménard Alexis <menard@kde.org>
+ *   Copyright 2010 by Marco MArtin <mart@kde.org>
 
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -20,13 +21,18 @@
 
 #ifndef DATASOURCE_H
 #define DATASOURCE_H
+
 #include <QObject>
+
+#include <QDeclarativePropertyMap>
+
 #include "private/dataengineconsumer_p.h"
 #include <Plasma/DataEngine>
 #include <qdeclarative.h>
 
-class QDeclarativeOpenMetaObject;
+
 class QDeclarativeContext;
+class QDeclarativePropertyMap;
 
 namespace Plasma
 {
@@ -37,6 +43,7 @@ namespace Plasma
   {
       Q_OBJECT
   public:
+      typedef QHash<QString, QVariant> Data;
       DataSource(QObject* parent=0);
 
       Q_PROPERTY(bool valid READ valid);
@@ -57,6 +64,9 @@ namespace Plasma
       Q_PROPERTY(QStringList keys READ keys NOTIFY keysChanged);
       QStringList keys() const {return m_keys;}
 
+      Q_PROPERTY(QObject *data READ data NOTIFY dataChanged);
+      QObject *data() const {return m_data;}
+
   public slots:
       void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
       void setupData();
@@ -66,6 +76,7 @@ namespace Plasma
       void engineChanged();
       void sourceChanged();
       void keysChanged();
+      void dataChanged();
 
   private:
 
@@ -74,11 +85,11 @@ namespace Plasma
       QString m_source;
       QString m_engine;
       QStringList m_keys;
+      QDeclarativePropertyMap *m_data;
       Plasma::Applet* m_applet;
       Plasma::DataEngine* m_dataEngine;
       QString m_connectedSource;
       QDeclarativeContext* m_context;
-      QDeclarativeOpenMetaObject* m_dmo;
   };
 }
 #endif
