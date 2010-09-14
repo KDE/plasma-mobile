@@ -25,6 +25,14 @@ QGraphicsWidget {
     id: page;
     preferredSize: "250x600"
     minimumSize: "200x200"
+    function init()
+    {
+        print(plasmoid.readConfig("Test"))
+        print(plasmoid.activeConfig);
+        plasmoid.writeConfig("Test", "A different text!");
+        print(plasmoid.readConfig("Test"))
+    }
+
     Item {
       id:main
 

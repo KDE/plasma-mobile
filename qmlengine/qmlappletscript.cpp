@@ -26,6 +26,7 @@
 #include <QDeclarativeComponent>
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
+#include <QDeclarativeExpression>
 #include <QGraphicsLinearLayout>
 
 #include <KGlobalSettings>
@@ -72,6 +73,8 @@ bool QmlAppletScript::init()
     m_interface = pa ? new PopupAppletInterface(this) : new AppletInterface(this);
 
     m_qmlWidget->engine()->rootContext()->setContextProperty("plasmoid", m_interface);
+    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "init()");
+    expr->evaluate();
 
     return true;
 }

@@ -35,6 +35,24 @@ QmlPackage::QmlPackage(QObject* parent, const QVariantList &args)
     setRequired("mainqml", true);
     addFileDefinition("mainscript", "qml/main.qml", i18n("Main QML File"));
     setRequired("mainscript", true);
+
+    addDirectoryDefinition("images", "images/", i18n("Images"));
+    QStringList mimetypes;
+    mimetypes << "image/svg+xml" << "image/png" << "image/jpeg";
+    setMimetypes("images", mimetypes);
+
+    addDirectoryDefinition("config", "config/", i18n("Configuration Definitions"));
+    mimetypes.clear();
+    mimetypes << "text/xml";
+    setMimetypes("config", mimetypes);
+    addFileDefinition("mainconfigxml", "config/main.xml", i18n("Main Script File"));
+
+    addDirectoryDefinition("ui", "ui", i18n("User Interface"));
+    setMimetypes("ui", mimetypes);
+
+    addDirectoryDefinition("data", "data", i18n("Data Files"));
+
+    addDirectoryDefinition("translations", "locale", i18n("Translations"));
 }
 
 QmlPackage::~QmlPackage()
