@@ -99,8 +99,6 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
         emit keysChanged();
         m_keys = newKeys;
     }
-
-    emit dataChanged();
 }
 
 }
