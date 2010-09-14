@@ -64,7 +64,7 @@ namespace Plasma
       Q_PROPERTY(QStringList keys READ keys NOTIFY keysChanged);
       QStringList keys() const {return m_keys;}
 
-      Q_PROPERTY(QObject *data READ data);
+      Q_PROPERTY(QObject *data READ data NOTIFY dataChanged);
       QObject *data() const {return m_data;}
 
   public Q_SLOTS:
@@ -76,6 +76,7 @@ namespace Plasma
       void engineChanged();
       void sourceChanged();
       void keysChanged();
+      void dataChanged();
 
   private:
 
