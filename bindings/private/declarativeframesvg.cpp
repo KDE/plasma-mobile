@@ -27,12 +27,40 @@
 namespace Plasma
 {
 
+DeclarativeFrameSvgMargins::DeclarativeFrameSvgMargins(Plasma::FrameSvg *frameSvg, QObject *parent)
+    : QObject(parent),
+      m_frameSvg(frameSvg)
+{
+    connect(m_frameSvg, SIGNAL(repaintNeeded()), this, SIGNAL(marginsChanged()));
+}
+
+qreal DeclarativeFrameSvgMargins::left() const
+{
+    return m_frameSvg->marginSize(LeftMargin);
+}
+
+qreal DeclarativeFrameSvgMargins::top() const
+{
+    return m_frameSvg->marginSize(TopMargin);
+}
+
+qreal DeclarativeFrameSvgMargins::right() const
+{
+    return m_frameSvg->marginSize(RightMargin);
+}
+
+qreal DeclarativeFrameSvgMargins::bottom() const
+{
+    return m_frameSvg->marginSize(BottomMargin);
+}
+
 DeclarativeFrameSvg::DeclarativeFrameSvg(QDeclarativeItem *parent)
     : QDeclarativeItem(parent)
 {
     m_frameSvg = new Plasma::FrameSvg(this);
+    m_margins = new DeclarativeFrameSvgMargins(m_frameSvg, this);
     setFlag(QGraphicsItem::ItemHasNoContents, false);
-    connect(m_frameSvg, SIGNAL(repaintNeeded()), this, SLOT(update()));
+    connect(m_frameSvg, SIGNAL(repaintNeeded()), this, SLOT(doUpdate()));
 }
 
 
@@ -63,6 +91,11 @@ QString DeclarativeFrameSvg::prefix() const
     return m_frameSvg->prefix();
 }
 
+DeclarativeFrameSvgMargins *DeclarativeFrameSvg::margins() const
+{
+    return m_margins;
+}
+
 void DeclarativeFrameSvg::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option);
@@ -76,6 +109,11 @@ void DeclarativeFrameSvg::geometryChanged(const QRectF &newGeometry,
 {
     m_frameSvg->resizeFrame(newGeometry.size());
     QDeclarativeItem::geometryChanged(newGeometry, oldGeometry);
+}
+
+void DeclarativeFrameSvg::doUpdate()
+{
+    update();
 }
 
 } // Plasma namespace

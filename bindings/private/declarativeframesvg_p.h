@@ -25,12 +25,37 @@ namespace Plasma {
 
     class FrameSvg;
 
+class DeclarativeFrameSvgMargins : public QObject
+{
+    Q_OBJECT
+
+    Q_PROPERTY(qreal left READ left NOTIFY marginsChanged)
+    Q_PROPERTY(qreal top READ top NOTIFY marginsChanged)
+    Q_PROPERTY(qreal right READ right NOTIFY marginsChanged)
+    Q_PROPERTY(qreal bottom READ bottom NOTIFY marginsChanged)
+
+public:
+    DeclarativeFrameSvgMargins(Plasma::FrameSvg *frameSvg, QObject *parent = 0);
+
+    qreal left() const;
+    qreal top() const;
+    qreal right() const;
+    qreal bottom() const;
+
+Q_SIGNALS:
+    void marginsChanged();
+
+private:
+    FrameSvg *m_frameSvg;
+};
+
 class DeclarativeFrameSvg : public QDeclarativeItem
 {
     Q_OBJECT
 
     Q_PROPERTY(QString imagePath READ imagePath WRITE setImagePath)
     Q_PROPERTY(QString prefix READ prefix WRITE setPrefix)
+    Q_PROPERTY(QObject *margins READ margins CONSTANT)
 
 public:
     DeclarativeFrameSvg(QDeclarativeItem *parent=0);
@@ -42,12 +67,19 @@ public:
     void setPrefix(const QString &prefix);
     QString prefix() const;
 
+    DeclarativeFrameSvgMargins *margins() const;
+
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void geometryChanged(const QRectF &newGeometry,
                               const QRectF &oldGeometry);
+
+private Q_SLOTS:
+    void doUpdate();
+
 private:
     Plasma::FrameSvg *m_frameSvg;
+    DeclarativeFrameSvgMargins *m_margins;
 };
 
 }
