@@ -72,10 +72,10 @@ void DeclarativeFrameSvg::paint(QPainter *painter, const QStyleOptionGraphicsIte
 }
 
 void DeclarativeFrameSvg::geometryChanged(const QRectF &newGeometry,
-                              const QRectF &oldGeometry)
+                                          const QRectF &oldGeometry)
 {
-    Q_UNUSED(oldGeometry);
     m_frameSvg->resizeFrame(newGeometry.size());
+    QDeclarativeItem::geometryChanged(newGeometry, oldGeometry);
 }
 
 } // Plasma namespace
