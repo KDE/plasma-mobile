@@ -64,19 +64,18 @@ namespace Plasma
       Q_PROPERTY(QStringList keys READ keys NOTIFY keysChanged);
       QStringList keys() const {return m_keys;}
 
-      Q_PROPERTY(QObject *data READ data NOTIFY dataChanged);
+      Q_PROPERTY(QObject *data READ data);
       QObject *data() const {return m_data;}
 
-  public slots:
+  public Q_SLOTS:
       void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
       void setupData();
 
-  signals:
+  Q_SIGNALS:
       void intervalChanged();
       void engineChanged();
       void sourceChanged();
       void keysChanged();
-      void dataChanged();
 
   private:
 
