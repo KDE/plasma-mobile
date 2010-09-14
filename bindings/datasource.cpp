@@ -32,13 +32,13 @@
 namespace Plasma
 {
 DataSource::DataSource(QObject* parent)
-    : QObject(parent), m_interval(1000), m_applet(0), m_dataEngine(0)
+    : QObject(parent),
+      m_interval(1000),
+      m_dataEngine(0)
 {
     setObjectName("DataSource");
 
     m_data = new QDeclarativePropertyMap(this);
-
-    m_context = QDeclarativeEngine::contextForObject(parent);
 
     connect(this, SIGNAL(engineChanged()),
             this, SLOT(setupData()));

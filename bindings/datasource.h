@@ -47,7 +47,7 @@ namespace Plasma
       DataSource(QObject* parent=0);
 
       Q_PROPERTY(bool valid READ valid);
-      bool valid() const {return m_applet!=0;}
+      bool valid() const {return m_dataEngine != 0;}
 
       Q_PROPERTY(int interval READ interval WRITE setInterval NOTIFY intervalChanged);
       int interval() const {return m_interval;}
@@ -85,10 +85,8 @@ namespace Plasma
       QString m_engine;
       QStringList m_keys;
       QDeclarativePropertyMap *m_data;
-      Plasma::Applet* m_applet;
       Plasma::DataEngine* m_dataEngine;
       QString m_connectedSource;
-      QDeclarativeContext* m_context;
   };
 }
 #endif
