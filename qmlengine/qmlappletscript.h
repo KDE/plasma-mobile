@@ -21,9 +21,11 @@
 #ifndef QML_APPLETSCRIPT_H
 #define QML_APPLETSCRIPT_H
 
+#include <QScriptValue>
+
 #include <Plasma/AppletScript>
 
-class QmlAppletScriptPrivate;
+class AppletInterface;
 
 namespace Plasma
 {
@@ -38,11 +40,14 @@ public:
     QmlAppletScript(QObject *parent, const QVariantList &args);
     ~QmlAppletScript();
 
+    QString filePath(const QString &type, const QString &file) const;
+
 protected:
     bool init();
 
 private:
     Plasma::QmlWidget *m_qmlWidget;
+    AppletInterface *m_interface;
 };
 
 #endif

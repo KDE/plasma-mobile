@@ -19,10 +19,12 @@
  */
 
 #include "qmlappletscript.h"
+#include "appletinterface.h"
 #include "../bindings/plasmabindings.h"
 #include "../common/qmlwidget.h"
 
 #include <QDeclarativeComponent>
+#include <QDeclarativeContext>
 #include <QDeclarativeEngine>
 #include <QGraphicsLinearLayout>
 
@@ -67,7 +69,16 @@ bool QmlAppletScript::init()
         lay->addItem(m_qmlWidget);
     }
 
+    m_interface = pa ? new PopupAppletInterface(this) : new AppletInterface(this);
+
+    m_qmlWidget->engine()->rootContext()->setContextProperty("plasmoid", m_interface);
+
     return true;
+}
+
+QString QmlAppletScript::filePath(const QString &type, const QString &file) const
+{
+    return m_qmlWidget->qmlPath();
 }
 
 #include "qmlappletscript.moc"

@@ -54,7 +54,7 @@ KDE_EXPORT int kdemain(int argc, char **argv)
     KCmdLineArgs::addCmdLineOptions(options);
 
     PlasmaApp *app = PlasmaApp::self();
-
+#define CUSTOM_INPUTCONTEXT
 #ifdef CUSTOM_INPUTCONTEXT
     InputContext *ic = new InputContext;
     app->setInputContext(ic);
