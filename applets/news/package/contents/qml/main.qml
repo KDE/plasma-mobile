@@ -27,10 +27,8 @@ QGraphicsWidget {
     minimumSize: "200x200"
     function init()
     {
-        print(plasmoid.readConfig("Test"))
-        print(plasmoid.activeConfig);
-        plasmoid.writeConfig("Test", "A different text!");
-        print(plasmoid.readConfig("Test"))
+        print(plasmoid.readConfig("feeds"))
+        dataSource.source = plasmoid.readConfig("feeds")
     }
 
     Item {
