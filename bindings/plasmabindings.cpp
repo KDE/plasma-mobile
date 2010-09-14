@@ -20,33 +20,34 @@
 
 #include"plasmabindings.h"
 
-void setupBindings() {
+void setupBindings()
+{
 
-qmlRegisterType<Plasma::Label>("Plasma", 0, 1, "Label");
-qmlRegisterType<Plasma::CheckBox>("Plasma", 0, 1, "Checkbox");
-qmlRegisterType<Plasma::TextEdit>("Plasma", 0, 1, "TextEdit");
-qmlRegisterType<Plasma::LineEdit>("Plasma", 0, 1, "LineEdit");
-qmlRegisterType<Plasma::PushButton>("Plasma", 0, 1, "PushButton");
-qmlRegisterType<Plasma::Frame>("Plasma", 0, 1, "Frame");
-qmlRegisterType<Plasma::IconWidget>("Plasma", 0, 1, "IconWidget");
-qmlRegisterType<Plasma::Slider>("Plasma", 0, 1, "Slider");
-qmlRegisterType<Plasma::SpinBox>("Plasma", 0, 1, "SpinBox");
-qmlRegisterType<Plasma::WebView>("Plasma", 0, 1, "WebView");
-qmlRegisterType<DeclarativeTabBar>("Plasma", 0, 1, "TabBar");
-qmlRegisterType<Phone>("Plasma", 0, 1, "Phone");
+    qmlRegisterType<Plasma::Label>("Plasma", 0, 1, "Label");
+    qmlRegisterType<Plasma::CheckBox>("Plasma", 0, 1, "Checkbox");
+    qmlRegisterType<Plasma::TextEdit>("Plasma", 0, 1, "TextEdit");
+    qmlRegisterType<Plasma::LineEdit>("Plasma", 0, 1, "LineEdit");
+    qmlRegisterType<Plasma::PushButton>("Plasma", 0, 1, "PushButton");
+    qmlRegisterType<Plasma::Frame>("Plasma", 0, 1, "Frame");
+    qmlRegisterType<Plasma::IconWidget>("Plasma", 0, 1, "IconWidget");
+    qmlRegisterType<Plasma::Slider>("Plasma", 0, 1, "Slider");
+    qmlRegisterType<Plasma::SpinBox>("Plasma", 0, 1, "SpinBox");
+    qmlRegisterType<Plasma::WebView>("Plasma", 0, 1, "WebView");
+    qmlRegisterType<DeclarativeTabBar>("Plasma", 0, 1, "TabBar");
+    qmlRegisterType<Phone>("Plasma", 0, 1, "Phone");
 
-qmlRegisterType<Plasma::SvgWidget>("Plasma", 0, 1, "SvgWidget");
-qmlRegisterType<Plasma::DeclarativeSvg>("Plasma", 0, 1, "Svg");
-qmlRegisterType<Plasma::FrameSvg>("Plasma", 0, 1, "FrameSvg");
+    qmlRegisterType<Plasma::SvgWidget>("Plasma", 0, 1, "SvgWidget");
+    qmlRegisterType<Plasma::DeclarativeSvg>("Plasma", 0, 1, "Svg");
+    qmlRegisterType<Plasma::FrameSvg>("Plasma", 0, 1, "FrameSvg");
 
-qmlRegisterType<ThemeProxy>("Plasma", 0, 1, "Theme");
+    qmlRegisterType<ThemeProxy>("Plasma", 0, 1, "Theme");
 
-qmlRegisterInterface<QGraphicsLayoutItem>("QGraphicsLayoutItem");
-qmlRegisterInterface<QGraphicsLayout>("QGraphicsLayout");
-qmlRegisterType<GraphicsLinearLayoutStretchItemObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayoutStretchItem");
-qmlRegisterType<GraphicsLinearLayoutObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayout");
-qmlRegisterType<GraphicsGridLayoutObject>("GraphicsLayouts",4,7,"QGraphicsGridLayout");
+    qmlRegisterInterface<QGraphicsLayoutItem>("QGraphicsLayoutItem");
+    qmlRegisterInterface<QGraphicsLayout>("QGraphicsLayout");
+    qmlRegisterType<GraphicsLinearLayoutStretchItemObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayoutStretchItem");
+    qmlRegisterType<GraphicsLinearLayoutObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayout");
+    qmlRegisterType<GraphicsGridLayoutObject>("GraphicsLayouts",4,7,"QGraphicsGridLayout");
 
-qmlRegisterType<Plasma::DataSource>("Plasma", 0, 1, "DataSource");
+    qmlRegisterType<Plasma::DataSource>("Plasma", 0, 1, "DataSource");
 
 }
