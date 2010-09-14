@@ -24,14 +24,14 @@
 
 #include <QObject>
 
+
 #include <QDeclarativePropertyMap>
 
-#include "private/dataengineconsumer_p.h"
+#include "dataengineconsumer_p.h"
 #include <Plasma/DataEngine>
 #include <qdeclarative.h>
 
 
-class QDeclarativeContext;
 class QDeclarativePropertyMap;
 
 namespace Plasma

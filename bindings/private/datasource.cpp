@@ -19,7 +19,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "datasource.h"
+#include "datasource_p.h"
 #include "qdeclarativeengine.h"
 #include "qdeclarativecontext.h"
 
@@ -102,4 +102,4 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
 }
 
 }
-#include "datasource.moc"
+#include "datasource_p.moc"
