@@ -40,30 +40,27 @@ QGraphicsWidget {
 
         Component {
             id : messageDelegate
-            Item {
+            Plasma.FrameSvg {
                 id: delegateItem
+                imagePath: "widgets/frame"
+                prefix: "plain"
                 width: list.width
-                height: layout.height+5
+                height: delegateLayout.height+5
 
-                Plasma.Frame {
-                    id:frame
-                    minimumSize: list.width+"x"+layout.height
+                Column {
+                    id : delegateLayout
+                    spacing: 5
 
-                    Column {
-                        id : layout
-                        spacing: 5
-
-                        Text {
-                            color: theme.textColor
-                            text: subject
-                        }
-                        Text {
-                            color: theme.textColor
-                            text: from
-                        }
+                    Text {
+                        color: theme.textColor
+                        text: subject
                     }
-
+                    Text {
+                        color: theme.textColor
+                        text: from
+                    }
                 }
+
                 MouseArea {
                     id: itemMouse
                     anchors.fill: delegateItem
@@ -113,6 +110,7 @@ QGraphicsWidget {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.top: frame.bottom
+            spacing: 5;
             clip: true
             model: model
             delegate: messageDelegate

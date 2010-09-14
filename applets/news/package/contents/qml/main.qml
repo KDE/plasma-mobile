@@ -42,17 +42,13 @@ QGraphicsWidget {
       resources: [
           Component {
               id: simpleText
-              Item {
+              Plasma.FrameSvg {
                 id : background
+                imagePath: "widgets/frame"
+                prefix: "plain"
+
                 width: list.width
                 height: delegateLayout.height + 5
-
-                Plasma.Frame {
-                    id:frame
-                    width:list.width
-                    minimumSize: "0x"+background.height
-                }
-
 
                 Column {
                     id : delegateLayout
