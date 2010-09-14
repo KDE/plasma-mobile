@@ -96,6 +96,13 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
     }
 
     if (newKeys != m_keys) {
+        //FIXME: pretty utterly inefficient
+        foreach (const QString &key, m_keys) {
+            if (!newKeys.contains(key)) {
+                m_data->insert(key.toLatin1(), QVariant());
+            }
+        }
+
         emit keysChanged();
         m_keys = newKeys;
     }
