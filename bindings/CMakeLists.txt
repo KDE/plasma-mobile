@@ -10,7 +10,7 @@ set(bindings_SRCS
     private/linearlayout.cpp
     private/dataengineconsumer.cpp
     private/theme.cpp
-    datasource.cpp
+    private/datasource.cpp
     )
 
 INCLUDE_DIRECTORIES(

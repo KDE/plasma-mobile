@@ -43,7 +43,7 @@
 #include "private/gridlayout.h"
 #include "private/theme_p.h"
 #include "private/linearlayout.h"
-#include "datasource.h"
+#include "private/datasource_p.h"
 #include "phone/phone.h"
 
 void PLASMA_EXPORT setupBindings();
