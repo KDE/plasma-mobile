@@ -45,10 +45,11 @@ QmlPackage::QmlPackage(QObject* parent, const QVariantList &args)
     mimetypes.clear();
     mimetypes << "text/xml";
     setMimetypes("config", mimetypes);
-    addFileDefinition("mainconfigxml", "config/main.xml", i18n("Main Script File"));
+    addFileDefinition("mainconfigxml", "config/main.xml", i18n("Main Configuration template"));
 
     addDirectoryDefinition("ui", "ui", i18n("User Interface"));
     setMimetypes("ui", mimetypes);
+    addFileDefinition("mainconfigui", "ui/config.ui", i18n("Main Config dialog"));
 
     addDirectoryDefinition("data", "data", i18n("Data Files"));
 

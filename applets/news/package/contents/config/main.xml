@@ -6,9 +6,9 @@
   <kcfgfile name=""/>
 
   <group name="General">
-    <entry name="Test" type="String">
-      <label>A test label</label>
-      <default>Hello hello!</default>
+    <entry name="feeds" type="StringList">
+      <label>list of feeds</label>
+      <default>http://planetkde.org/rss20.xml</default>
     </entry>
   </group>
 
