@@ -57,14 +57,14 @@ QGraphicsWidget {
                         //width: list.width
                         color: theme.textColor
                         textFormat: Text.RichText
-                        text: dataSource.data['items'][modelData].title
+                        text: model.modelData.title
                     }
                     Text {
                         id: date
                         color: theme.textColor
                         width: list.width
                         horizontalAlignment: Text.AlignRight
-                        text: '<em><small>'+Date(dataSource.data['items'][modelData].time)+'</em></small>&nbsp;'
+                        text: '<em><small>'+Date(model.modelData.time)+'</em></small>&nbsp;'
                     }
                 }
 
@@ -73,7 +73,7 @@ QGraphicsWidget {
                     anchors.fill: background
                     onClicked: {
                         list.currentIndex = index
-                        bodyView.html = "<body style=\"background:#fff;\">"+dataSource.data['items'][modelData].description+"</body>"
+                        bodyView.html = "<body style=\"background:#fff;\">"+model.modelData.description+"</body>"
                         list.itemClicked()
                     }
                 }
@@ -97,7 +97,7 @@ QGraphicsWidget {
                     snapMode: ListView.SnapToItem
 
                     clip: true
-                    model: dataSource.data['items.count']
+                    model: dataSource.data['items']
                     delegate: simpleText
                 }
             }
@@ -105,7 +105,7 @@ QGraphicsWidget {
                 layout: QGraphicsLinearLayout {
                     orientation: "Vertical"
                     Plasma.Frame {
-			maximumSize: maximumSize.width+"x"+minimumSize.height
+                        maximumSize: maximumSize.width+"x"+minimumSize.height
                         frameShadow: "Raised"
                         layout: QGraphicsLinearLayout {
                             Plasma.PushButton {
