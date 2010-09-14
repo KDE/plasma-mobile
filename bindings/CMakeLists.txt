@@ -12,6 +12,7 @@ set(bindings_SRCS
     private/theme.cpp
     private/datasource.cpp
     private/declarativesvg.cpp
+    private/declarativeframesvg.cpp
     )
 
 INCLUDE_DIRECTORIES(
