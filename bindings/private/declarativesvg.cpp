@@ -31,6 +31,7 @@ DeclarativeSvg::DeclarativeSvg(QDeclarativeItem *parent)
     : QDeclarativeItem(parent)
 {
     m_svg = new Plasma::Svg(this);
+    setFlag(QGraphicsItem::ItemHasNoContents, false);
     connect(m_svg, SIGNAL(repaintNeeded()), this, SLOT(update()));
 }
 
@@ -42,6 +43,7 @@ DeclarativeSvg::~DeclarativeSvg()
 void DeclarativeSvg::setImagePath(const QString &path)
 {
     m_svg->setImagePath(path);
+    update();
 }
 
 QString DeclarativeSvg::imagePath() const
@@ -50,7 +52,7 @@ QString DeclarativeSvg::imagePath() const
 }
 
 
-void DeclarativeSvg::setElementID(const QString &elementID)
+void DeclarativeSvg::setElementId(const QString &elementID)
 {
     m_svg->setContainsMultipleImages(!elementID.isNull());
 
@@ -58,7 +60,7 @@ void DeclarativeSvg::setElementID(const QString &elementID)
     update();
 }
 
-QString DeclarativeSvg::elementID() const
+QString DeclarativeSvg::elementId() const
 {
     return m_elementID;
 }

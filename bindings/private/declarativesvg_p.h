@@ -29,7 +29,8 @@ class DeclarativeSvg : public QDeclarativeItem
 {
     Q_OBJECT
 
-
+    Q_PROPERTY(QString imagePath READ imagePath WRITE setImagePath)
+    Q_PROPERTY(QString elementId READ elementId WRITE setElementId)
 
 public:
     DeclarativeSvg(QDeclarativeItem *parent=0);
@@ -38,10 +39,9 @@ public:
     void setImagePath(const QString &path);
     QString imagePath() const;
 
-    void setElementID(const QString &elementID);
-    QString elementID() const;
+    void setElementId(const QString &elementID);
+    QString elementId() const;
 
-protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 private:
