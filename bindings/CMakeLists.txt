@@ -11,6 +11,7 @@ set(bindings_SRCS
     private/dataengineconsumer.cpp
     private/theme.cpp
     private/datasource.cpp
+    private/declarativesvg.cpp
     )
 
 INCLUDE_DIRECTORIES(

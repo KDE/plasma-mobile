@@ -36,7 +36,7 @@ qmlRegisterType<DeclarativeTabBar>("Plasma", 0, 1, "TabBar");
 qmlRegisterType<Phone>("Plasma", 0, 1, "Phone");
 
 qmlRegisterType<Plasma::SvgWidget>("Plasma", 0, 1, "SvgWidget");
-qmlRegisterType<Plasma::Svg>("Plasma", 0, 1, "Svg");
+qmlRegisterType<Plasma::DeclarativeSvg>("Plasma", 0, 1, "Svg");
 qmlRegisterType<Plasma::FrameSvg>("Plasma", 0, 1, "FrameSvg");
 
 qmlRegisterType<ThemeProxy>("Plasma", 0, 1, "Theme");

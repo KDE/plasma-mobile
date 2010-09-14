@@ -36,7 +36,6 @@
 #include <plasma/extender.h>
 #include <plasma/extenderitem.h>
 #include <plasma/animator.h>
-#include <plasma/svg.h>
 #include <plasma/framesvg.h>
 
 #include "private/declarativetabbar_p.h"
@@ -44,6 +43,7 @@
 #include "private/theme_p.h"
 #include "private/linearlayout.h"
 #include "private/datasource_p.h"
+#include "private/declarativesvg_p.h"
 #include "phone/phone.h"
 
 void PLASMA_EXPORT setupBindings();
@@ -58,11 +58,11 @@ QML_DECLARE_TYPE(Plasma::Slider)
 QML_DECLARE_TYPE(Plasma::SpinBox)
 QML_DECLARE_TYPE(Plasma::IconWidget)
 QML_DECLARE_TYPE(Plasma::SvgWidget)
-//QML_DECLARE_TYPE(Plasma::Svg)
 QML_DECLARE_TYPE(Plasma::FrameSvg)
 QML_DECLARE_TYPE(Plasma::WebView)
 //QML_DECLARE_TYPE(DeclarativeTabBar)
 QML_DECLARE_TYPE(Phone)
+QML_DECLARE_TYPE(Plasma::DeclarativeSvg)
 
 QML_DECLARE_TYPE(Plasma::ExtenderItem)
 QML_DECLARE_TYPE(Plasma::Extender)
