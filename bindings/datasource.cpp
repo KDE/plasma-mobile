@@ -22,7 +22,6 @@
 #include "datasource.h"
 #include "qdeclarativeengine.h"
 #include "qdeclarativecontext.h"
-#include "private/qdeclarativeopenmetaobject_p.h"
 
 #include <QDebug>
 #include <QTimer>
