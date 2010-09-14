@@ -27,7 +27,13 @@ QGraphicsWidget {
     minimumSize: "200x200"
     Item {
       id:main
-      Plasma.DataSource { id: dataSource; engine: "rss"; source: "http://planetkde.org/rss20.xml"; interval: 50000; }
+
+      Plasma.DataSource {
+          id: dataSource
+          engine: "rss"
+          source: "http://planetkde.org/rss20.xml"
+          interval: 50000
+      }
 
       Plasma.Theme {
           id: theme
