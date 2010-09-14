@@ -58,9 +58,11 @@ void DataSource::setSource(const QString &s)
 
 void DataSource::setupData()
 {
-    if(m_source.isEmpty() || m_engine.isEmpty())
+    if (m_source.isEmpty() || m_engine.isEmpty()) {
         return;
-    if(m_dataEngine){
+    }
+
+    if (m_dataEngine) {
         m_dataEngine->disconnectSource(m_connectedSource, this);
         m_dataEngine = 0;
         m_keys.clear();
@@ -69,9 +71,10 @@ void DataSource::setupData()
 
     Plasma::DataEngine* de = dataEngine(m_engine);
     if (!de) {
-      kWarning()<<"We're fucked we don't have a dataEngine";
-      return;
+        kWarning() << "DataEngine not found";
+        return;
     }
+
     de->connectSource(m_source, this, m_interval);
     m_dataEngine = de;
     m_connectedSource = m_source;
@@ -83,15 +86,10 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
     QStringList newKeys;
 
     foreach(const QString &key, data.keys()){
-        /* Note that the data source can't have overlapping properties with
-           the DataSource. Also properties in QML must start lowercase.*/
+        // Properties in QML must start lowercase.
         QString ourKey = key.toLower();
-        if (ourKey=="interval" || ourKey=="engine" || ourKey=="source") {
-            continue;
-        }
 
         m_data->insert(ourKey.toLatin1(), data.value(key));
-
 
         if (data.value(key).type() == QVariant::List) {
             QVariantList list = data.value(key).toList();
