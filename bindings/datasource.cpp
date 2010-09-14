@@ -92,11 +92,6 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
 
         m_data->insert(ourKey.toLatin1(), data.value(key));
 
-        if (data.value(key).type() == QVariant::List) {
-            QVariantList list = data.value(key).toList();
-
-            m_data->insert(QString(ourKey+".count").toLatin1(), list.count());
-        }
         newKeys << ourKey;
     }
 
