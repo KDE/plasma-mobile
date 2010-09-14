@@ -35,10 +35,11 @@ DataSource::DataSource(QObject* parent)
     : QObject(parent), m_interval(1000), m_applet(0), m_dataEngine(0)
 {
     setObjectName("DataSource");
-   // m_dmo = new QDeclarativeOpenMetaObject(this);
+
     m_data = new QDeclarativePropertyMap(this);
 
     m_context = QDeclarativeEngine::contextForObject(parent);
+
     connect(this, SIGNAL(engineChanged()),
             this, SLOT(setupData()));
     connect(this, SIGNAL(sourceChanged()),
@@ -85,7 +86,7 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
     Q_UNUSED(sourceName);//Only one source
     QStringList newKeys;
 
-    foreach(const QString &key, data.keys()){
+    foreach (const QString &key, data.keys()) {
         // Properties in QML must start lowercase.
         QString ourKey = key.toLower();
 
@@ -94,12 +95,12 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
         if (data.value(key).type() == QVariant::List) {
             QVariantList list = data.value(key).toList();
 
-           m_data->insert(QString(ourKey+".count").toLatin1(), list.count());
+            m_data->insert(QString(ourKey+".count").toLatin1(), list.count());
         }
         newKeys << ourKey;
     }
 
-    if(newKeys != m_keys){
+    if (newKeys != m_keys) {
         emit keysChanged();
         m_keys = newKeys;
     }
