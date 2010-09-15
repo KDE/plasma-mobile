@@ -50,8 +50,9 @@ DataSource::DataSource(QObject* parent)
 
 void DataSource::setSource(const QString &s)
 {
-    if(s == m_source)
+    if (s == m_source) {
         return;
+    }
 
     m_source = s;
     emit sourceChanged();
