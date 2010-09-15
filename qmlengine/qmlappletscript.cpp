@@ -74,6 +74,8 @@ bool QmlAppletScript::init()
 
     m_qmlWidget->engine()->rootContext()->setContextProperty("plasmoid", m_interface);
 
+    configChanged();
+
     return true;
 }
 
