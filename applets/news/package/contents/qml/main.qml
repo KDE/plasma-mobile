@@ -26,15 +26,12 @@ QGraphicsWidget {
     id: page;
     preferredSize: "250x600"
     minimumSize: "200x200"
-    function init()
-    {
-        print("Restoring feed:" + plasmoid.readConfig("feeds"))
-        dataSource.source = plasmoid.readConfig("feeds")
-    }
+
     function configChanged()
     {
-        print("Configuration changed: " + plasmoid.readConfig("feeds"));
-        dataSource.source = plasmoid.readConfig("feeds")
+        var url = plasmoid.readConfig("feeds")
+        print("Configuration changed: " + url);
+        dataSource.source = url
     }
 
     Item {
@@ -43,7 +40,6 @@ QGraphicsWidget {
       Plasma.DataSource {
           id: dataSource
           engine: "rss"
-          source: "http://planetkde.org/rss20.xml"
           interval: 50000
       }
 
