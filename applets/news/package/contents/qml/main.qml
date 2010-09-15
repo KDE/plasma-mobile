@@ -21,13 +21,19 @@ import Qt 4.7
 import Plasma 0.1 as Plasma
 import GraphicsLayouts 4.7
 
+
 QGraphicsWidget {
     id: page;
     preferredSize: "250x600"
     minimumSize: "200x200"
     function init()
     {
-        print(plasmoid.readConfig("feeds"))
+        print("Restoring feed:" + plasmoid.readConfig("feeds"))
+        dataSource.source = plasmoid.readConfig("feeds")
+    }
+    function configChanged()
+    {
+        print("Configuration changed: " + plasmoid.readConfig("feeds"));
         dataSource.source = plasmoid.readConfig("feeds")
     }
 
