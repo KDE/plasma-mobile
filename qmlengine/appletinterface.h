@@ -63,9 +63,9 @@ class AppletInterface : public QObject
     Q_ENUMS(IntervalAlignment)
     Q_ENUMS(ThemeColors)
     Q_PROPERTY(AspectRatioMode aspectRatioMode READ aspectRatioMode WRITE setAspectRatioMode)
-    Q_PROPERTY(FormFactor formFactor READ formFactor)
-    Q_PROPERTY(Location location READ location)
-    Q_PROPERTY(QString currentActivity READ currentActivity)
+    Q_PROPERTY(FormFactor formFactor READ formFactor NOTIFY formFactorChanged)
+    Q_PROPERTY(Location location READ location NOTIFY locationChanged)
+    Q_PROPERTY(QString currentActivity READ currentActivity NOTIFY contextChanged)
     Q_PROPERTY(bool shouldConserveResources READ shouldConserveResources)
     Q_PROPERTY(QString activeConfig WRITE setActiveConfig READ activeConfig)
     Q_PROPERTY(bool busy WRITE setBusy READ isBusy)
@@ -287,6 +287,10 @@ enum IntervalAlignment {
 Q_SIGNALS:
     void releaseVisualFocus();
     void configNeedsSaving();
+
+    void formFactorChanged();
+    void locationChanged();
+    void contextChanged();
 
 protected:
     QmlAppletScript *m_appletScriptEngine;

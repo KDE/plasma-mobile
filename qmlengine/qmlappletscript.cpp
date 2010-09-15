@@ -95,5 +95,20 @@ void QmlAppletScript::configChanged()
     delete expr;
 }
 
+void QmlAppletScript::constraintsEvent(Plasma::Constraints constraints)
+{
+    if (constraints & Plasma::FormFactorConstraint) {
+        emit formFactorChanged();
+    }
+
+    if (constraints & Plasma::LocationConstraint) {
+        emit locationChanged();
+    }
+
+    if (constraints & Plasma::ContextConstraint) {
+        emit contextChanged();
+    }
+}
+
 #include "qmlappletscript.moc"
 

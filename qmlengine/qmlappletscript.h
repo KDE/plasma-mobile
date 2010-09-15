@@ -43,8 +43,15 @@ public:
     QString filePath(const QString &type, const QString &file) const;
     void configChanged();
 
+    void constraintsEvent(Plasma::Constraints constraints);
+
 protected:
     bool init();
+
+Q_SIGNALS:
+    void formFactorChanged();
+    void locationChanged();
+    void contextChanged();
 
 private:
     Plasma::QmlWidget *m_qmlWidget;
