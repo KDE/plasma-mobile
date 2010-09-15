@@ -41,6 +41,7 @@ public:
     ~QmlAppletScript();
 
     QString filePath(const QString &type, const QString &file) const;
+    void configChanged();
 
 protected:
     bool init();

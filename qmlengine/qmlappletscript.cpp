@@ -75,6 +75,7 @@ bool QmlAppletScript::init()
     m_qmlWidget->engine()->rootContext()->setContextProperty("plasmoid", m_interface);
     QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "init()");
     expr->evaluate();
+    delete expr;
 
     return true;
 }
@@ -82,6 +83,13 @@ bool QmlAppletScript::init()
 QString QmlAppletScript::filePath(const QString &type, const QString &file) const
 {
     return m_qmlWidget->qmlPath();
+}
+
+void QmlAppletScript::configChanged()
+{
+    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "configChanged()");
+    expr->evaluate();
+    delete expr;
 }
 
 #include "qmlappletscript.moc"
