@@ -58,6 +58,10 @@ bool QmlAppletScript::init()
     m_qmlWidget = new Plasma::QmlWidget(applet());
     m_qmlWidget->setQmlPath(mainScript());
 
+    if (!m_qmlWidget->engine()) {
+        return false;
+    }
+
     Plasma::Applet *a = applet();
     Plasma::PopupApplet *pa = qobject_cast<Plasma::PopupApplet *>(a);
 
