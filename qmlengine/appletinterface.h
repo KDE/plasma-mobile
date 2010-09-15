@@ -268,9 +268,6 @@ enum IntervalAlignment {
     Q_INVOKABLE QString file(const QString &fileType);
     Q_INVOKABLE QString file(const QString &fileType, const QString &filePath);
 
-    Q_INVOKABLE bool include(const QString &script);
-
-    Q_INVOKABLE void debug(const QString &msg);
     Q_INVOKABLE QObject *findChild(const QString &name) const;
 
     Q_INVOKABLE Plasma::Extender *extender() const;

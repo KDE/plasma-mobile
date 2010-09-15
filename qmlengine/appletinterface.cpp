@@ -317,7 +317,7 @@ bool AppletInterface::userConfiguring() const
 
 int AppletInterface::apiVersion() const
 {
-    const QString constraint("[X-Plasma-API] == 'javascript' and 'Applet' in [X-Plasma-ComponentTypes]");
+    const QString constraint("[X-Plasma-API] == 'qml' and 'Applet' in [X-Plasma-ComponentTypes]");
     KService::List offers = KServiceTypeTrader::self()->query("Plasma/ScriptEngine", constraint);
     if (offers.isEmpty()) {
         return -1;
@@ -326,21 +326,6 @@ int AppletInterface::apiVersion() const
     return offers.first()->property("X-KDE-PluginInfo-Version", QVariant::Int).toInt();
 }
 
-bool AppletInterface::include(const QString &script)
-{
-    const QString path = m_appletScriptEngine->filePath("scripts", script);
-
-    if (path.isEmpty()) {
-        return false;
-    }
-return false;
-//    return m_appletScriptEngine->include(path);
-}
-
-void AppletInterface::debug(const QString &msg)
-{
-    kDebug() << msg;
-}
 
 QObject *AppletInterface::findChild(const QString &name) const
 {
