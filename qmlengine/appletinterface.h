@@ -76,7 +76,6 @@ class AppletInterface : public QObject
     Q_PROPERTY(int apiVersion READ apiVersion)
     Q_PROPERTY(QRectF rect READ rect)
     Q_PROPERTY(QSizeF size READ size)
-    Q_PROPERTY(QObject *sender READ sender)
 
 public:
     AppletInterface(QmlAppletScript *parent);
