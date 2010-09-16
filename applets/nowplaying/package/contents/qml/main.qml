@@ -35,11 +35,11 @@ QGraphicsWidget {
       Plasma.DataSource {
           id: dataSource
           engine: "nowplaying"
-          source: sources[0]
+          source: allSources[0]
           interval: 500
 
           onDataChanged: {
-              playPause.icon = "media-playback-start"
+              playPause.setIcon("media-playback-start")
           }
       }
 
@@ -52,8 +52,9 @@ QGraphicsWidget {
           anchors.fill: parent
 
           onClicked: {
-              data = dataSource.service.operationDescription("stop");
-              print(dataSource.service.name());
+              var data = dataSource.service.operationDescription("stop");
+              print(dataSource.service.name);
+
               for ( var i in data ) {
                   print(i + ' -> ' + data[i] );
               }
