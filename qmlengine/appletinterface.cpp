@@ -1,5 +1,7 @@
 /*
  *   Copyright 2008 Chani Armitage <chani@kde.org>
+ *   Copyright 2008, 2009 Aaron Seigo <aseigo@kde.org>
+ *   Copyright 2010 Marco Martin <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -294,16 +296,6 @@ void AppletInterface::setMinimumSize(qreal w, qreal h)
 void AppletInterface::setPreferredSize(qreal w, qreal h)
 {
     applet()->setPreferredSize(w,h);
-}
-
-QGraphicsLayout *AppletInterface::layout() const
-{
-    return applet()->layout();
-}
-
-void AppletInterface::setLayout(QGraphicsLayout *layout)
-{
-    applet()->setLayout(layout);
 }
 
 bool AppletInterface::immutable() const

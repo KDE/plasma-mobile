@@ -1,6 +1,7 @@
 /*
  *   Copyright 2008 Chani Armitage <chani@kde.org>
  *   Copyright 2008, 2009 Aaron Seigo <aseigo@kde.org>
+ *   Copyright 2010 Marco Martin <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -70,7 +71,6 @@ class AppletInterface : public QObject
     Q_PROPERTY(QString activeConfig WRITE setActiveConfig READ activeConfig)
     Q_PROPERTY(bool busy WRITE setBusy READ isBusy)
     Q_PROPERTY(BackgroundHints backgroundHints WRITE setBackgroundHints READ backgroundHints)
-    Q_PROPERTY(QGraphicsLayout *layout WRITE setLayout READ layout)
     Q_PROPERTY(bool immutable READ immutable NOTIFY immutableChanged)
     Q_PROPERTY(bool userConfiguring READ userConfiguring) // @since 4.5
     Q_PROPERTY(int apiVersion READ apiVersion)
@@ -275,8 +275,6 @@ enum IntervalAlignment {
     Plasma::DataEngine *dataEngine(const QString &name);
 
     QList<QAction*> contextualActions() const;
-    QGraphicsLayout *layout() const;
-    void setLayout(QGraphicsLayout *);
     bool immutable() const;
     bool userConfiguring() const;
     int apiVersion() const;
