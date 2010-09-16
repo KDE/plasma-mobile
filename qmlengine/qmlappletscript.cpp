@@ -110,5 +110,20 @@ void QmlAppletScript::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
+void QmlAppletScript::popupEvent(bool popped)
+{
+    QString expressionString;
+
+    if (popped) {
+        expressionString = "popupEvent(true)";
+    } else {
+        expressionString = "popupEvent(false)";
+    }
+
+    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), expressionString);
+    expr->evaluate();
+    delete expr;
+}
+
 #include "qmlappletscript.moc"
 

@@ -45,6 +45,9 @@ public:
 
     void constraintsEvent(Plasma::Constraints constraints);
 
+public Q_SLOTS:
+    void popupEvent(bool popped);
+
 protected:
     bool init();
 
