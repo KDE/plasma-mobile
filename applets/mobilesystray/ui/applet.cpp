@@ -67,9 +67,10 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     connect(this, SIGNAL(appletAdded(Plasma::Applet*,const QPointF&)),
             this, SLOT(addTrayApplet(Plasma::Applet*)));
 
-    // center the applets
-//    outsidelayout->insertStretch(0);
-//    outsidelayout->addStretch();
+    // use a timer to avoid repeated resizing
+    m_resizeTimer = new QTimer(this);
+    m_resizeTimer->setSingleShot(true);
+    connect(m_resizeTimer, SIGNAL(timeout()), this, SLOT(resizeContents()));
 }
 
 
@@ -165,14 +166,20 @@ void MobileTray::resizeContents() {
     foreach (QGraphicsWidget* w, m_hiddenIcons) {
         w->setPreferredSize(iconHeight, iconHeight);
     }
+    m_scrollWidget->show();
 }
 
 void MobileTray::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
     m_background->resizeFrame(event->newSize());
-    resizeContents();
+
+    // resizing the contents seems slow, asynchronous, and thus jerky and potentially problematic,
+    // so we avoid resizing them continuously..
+    m_resizeTimer->start(500);
+    m_scrollWidget->hide(); // hide the contents during transition to mask our lazy resizing
     m_scrollWidget->setPreferredSize(event->newSize());
     m_scrollWidget->resize(event->newSize());
+
     if (initDone) { // only do the following if init() is done - else will crash!
         if (event->newSize().width() > WIDTH_THRESHOLD && m_mode == PASSIVE) {
             toActive();
@@ -307,7 +314,7 @@ void MobileTray::toPassive()
             hideWidget(w);
         }
         hideWidget(m_cancel);
-        resizeContents();
+//        resizeContents();
     }
 }
 
@@ -322,7 +329,7 @@ void MobileTray::toActive()
         if (m_notificationsApplet) {
             m_notificationsApplet->showPopup();
         }
-        resizeContents();
+//        resizeContents();
     }
 }
 

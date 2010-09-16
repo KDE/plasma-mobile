@@ -27,6 +27,7 @@
 #include <Plasma/Containment>
 #include <QHash>
 #include <QQueue>
+#include <QTimer>
 
 namespace Plasma
 {
@@ -82,11 +83,11 @@ protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget = 0);
     void resizeEvent (QGraphicsSceneResizeEvent * event);
-    void resizeContents();
 
 protected slots:
     void toActive();
     void toPassive();
+    void resizeContents();
     void addTrayApplet(Plasma::Applet* ap);
 
 private:
@@ -106,6 +107,7 @@ private:
     Plasma::ScrollWidget *m_scrollWidget;
     Plasma::PopupApplet *m_notificationsApplet;
     QGraphicsWidget *m_mainWidget;              // area in the scrollwidget that contains the tray icons
+    QTimer *m_resizeTimer;
     bool initDone;
 };
 
