@@ -47,6 +47,7 @@ public:
 
 public Q_SLOTS:
     void popupEvent(bool popped);
+    void activate();
 
 protected:
     bool init();

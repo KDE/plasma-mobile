@@ -125,5 +125,12 @@ void QmlAppletScript::popupEvent(bool popped)
     delete expr;
 }
 
+void QmlAppletScript::activate()
+{
+    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "activate()");
+    expr->evaluate();
+    delete expr;
+}
+
 #include "qmlappletscript.moc"
 
