@@ -123,11 +123,6 @@ void AppletInterface::setConfigurationRequired(bool needsConfiguring, const QStr
     m_appletScriptEngine->setConfigurationRequired(needsConfiguring, reason);
 }
 
-void AppletInterface::update(const QRectF &rect)
-{
-    applet()->update(rect);
-}
-
 QString AppletInterface::activeConfig() const
 {
     return m_currentConfig.isEmpty() ? "main" : m_currentConfig;
