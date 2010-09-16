@@ -73,7 +73,7 @@ class AppletInterface : public QObject
     Q_PROPERTY(BackgroundHints backgroundHints WRITE setBackgroundHints READ backgroundHints)
     Q_PROPERTY(bool immutable READ immutable NOTIFY immutableChanged)
     Q_PROPERTY(bool userConfiguring READ userConfiguring) // @since 4.5
-    Q_PROPERTY(int apiVersion READ apiVersion)
+    Q_PROPERTY(int apiVersion READ apiVersion CONSTANT)
     Q_PROPERTY(QRectF rect READ rect)
     Q_PROPERTY(QSizeF size READ size)
 
