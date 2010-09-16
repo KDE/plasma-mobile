@@ -64,8 +64,14 @@ namespace Plasma
       Q_PROPERTY(QStringList keys READ keys NOTIFY keysChanged);
       QStringList keys() const {return m_keys;}
 
-      Q_PROPERTY(QObject *data READ data CONSTANT);
+      Q_PROPERTY(QStringList allSources READ allSources NOTIFY sourcesChanged);
+      QStringList allSources() const {if (m_dataEngine) return m_dataEngine->sources(); else return QStringList();}
+
+      Q_PROPERTY(QObject *data READ data NOTIFY dataChanged);
       QObject *data() const {return m_data;}
+
+      Q_PROPERTY(QObject *service READ service CONSTANT);
+      Plasma::Service *service();
 
   public Q_SLOTS:
       void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
@@ -76,6 +82,8 @@ namespace Plasma
       void engineChanged();
       void sourceChanged();
       void keysChanged();
+      void dataChanged();
+      void sourcesChanged();
 
   private:
 
@@ -86,6 +94,7 @@ namespace Plasma
       QStringList m_keys;
       QDeclarativePropertyMap *m_data;
       Plasma::DataEngine* m_dataEngine;
+      Plasma::Service *m_service;
       QString m_connectedSource;
   };
 }

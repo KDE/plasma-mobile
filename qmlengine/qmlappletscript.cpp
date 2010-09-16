@@ -41,7 +41,6 @@ K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
 extern void setupBindings();
 
 
-
 QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
     : Plasma::AppletScript(parent)
 {

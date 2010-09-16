@@ -60,7 +60,7 @@ void DataSource::setSource(const QString &s)
 
 void DataSource::setupData()
 {
-    if (m_source.isEmpty() || m_engine.isEmpty()) {
+    if (/*m_source.isEmpty() ||*/ m_engine.isEmpty()) {
         return;
     }
 
@@ -80,6 +80,9 @@ void DataSource::setupData()
     de->connectSource(m_source, this, m_interval);
     m_dataEngine = de;
     m_connectedSource = m_source;
+
+    connect(de, SIGNAL(sourceAdded(constQString&)), this, SIGNAL(sourcesChanged()));
+    connect(de, SIGNAL(sourceRemoved(constQString&)), this, SIGNAL(sourcesChanged()));
 }
 
 void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data)
@@ -107,6 +110,17 @@ void DataSource::dataUpdated(const QString &sourceName, const Plasma::DataEngine
         emit keysChanged();
         m_keys = newKeys;
     }
+
+    emit dataChanged();
+}
+
+Plasma::Service *DataSource::service()
+{
+    if (!m_service) {
+        m_service = m_dataEngine->serviceForSource(m_source);
+    }
+
+    return m_service;
 }
 
 }

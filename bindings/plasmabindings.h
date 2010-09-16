@@ -76,4 +76,7 @@ QML_DECLARE_TYPE(ThemeProxy)
 QML_DECLARE_INTERFACE(QGraphicsLayoutItem)
 QML_DECLARE_INTERFACE(QGraphicsLayout)
 
+
+Q_DECLARE_METATYPE(KConfigGroup);
+
 #endif
