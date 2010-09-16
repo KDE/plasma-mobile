@@ -43,6 +43,7 @@ AppletInterface::AppletInterface(QmlAppletScript *parent)
 {
     connect(this, SIGNAL(releaseVisualFocus()), applet(), SIGNAL(releaseVisualFocus()));
     connect(this, SIGNAL(configNeedsSaving()), applet(), SIGNAL(configNeedsSaving()));
+    connect(applet(), SIGNAL(immutabilityChanged()), this, SIGNAL(immutableChanged()));
 }
 
 AppletInterface::~AppletInterface()
