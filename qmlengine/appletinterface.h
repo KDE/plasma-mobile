@@ -227,21 +227,21 @@ enum IntervalAlignment {
     QString currentActivity() const;
     bool shouldConserveResources() const;
 
-    Q_INVOKABLE AspectRatioMode aspectRatioMode() const;
-    Q_INVOKABLE void setAspectRatioMode(AspectRatioMode mode);
+    AspectRatioMode aspectRatioMode() const;
+    void setAspectRatioMode(AspectRatioMode mode);
 
     Q_INVOKABLE void setFailedToLaunch(bool failed, const QString &reason = QString());
 
-    Q_INVOKABLE bool isBusy() const;
-    Q_INVOKABLE void setBusy(bool busy);
+    bool isBusy() const;
+    void setBusy(bool busy);
 
-    Q_INVOKABLE BackgroundHints backgroundHints() const;
-    Q_INVOKABLE void setBackgroundHints(BackgroundHints hint);
+    BackgroundHints backgroundHints() const;
+    void setBackgroundHints(BackgroundHints hint);
 
     Q_INVOKABLE void setConfigurationRequired(bool needsConfiguring, const QString &reason = QString());
 
-    Q_INVOKABLE QSizeF size() const;
-    Q_INVOKABLE QRectF rect() const;
+    QSizeF size() const;
+    QRectF rect() const;
 
     Q_INVOKABLE void setAction(const QString &name, const QString &text,
                                const QString &icon = QString(), const QString &shortcut = QString());
@@ -254,9 +254,9 @@ enum IntervalAlignment {
 
     Q_INVOKABLE void setPreferredSize(qreal w, qreal h);
 
-    Q_INVOKABLE QString activeConfig() const;
+    QString activeConfig() const;
 
-    Q_INVOKABLE void setActiveConfig(const QString &name);
+    void setActiveConfig(const QString &name);
 
     Q_INVOKABLE QVariant readConfig(const QString &entry) const;
 
@@ -265,6 +265,7 @@ enum IntervalAlignment {
     Q_INVOKABLE QString file(const QString &fileType);
     Q_INVOKABLE QString file(const QString &fileType, const QString &filePath);
 
+    //TODO: remove?
     Q_INVOKABLE QObject *findChild(const QString &name) const;
 
     Q_INVOKABLE Plasma::Extender *extender() const;
