@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Now playing (QML)
+Comment=A proof of concept media player controller qml
+Encoding=UTF-8
+Icon=applications-multimedia
+ServiceTypes=Plasma/Applet
+Type=Service
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Category=Examples
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-Email=notmart@gmail.com
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.nowplaying-qml
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-Plasma-API=qmlscript
+X-Plasma-MainScript=qml/main.qml
