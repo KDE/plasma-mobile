@@ -52,6 +52,11 @@ AppletInterface::~AppletInterface()
 {
 }
 
+void AppletInterface::setOperationValue(KConfigGroup config, const QString &key, const QVariant &value)
+{
+    config.writeEntry(key, value);
+}
+
 AppletInterface *AppletInterface::extract(QScriptEngine *engine)
 {
     QScriptValue appletValue = engine->globalObject().property("plasmoid");

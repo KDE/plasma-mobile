@@ -25,43 +25,97 @@ import GraphicsLayouts 4.7
 QGraphicsWidget {
     id: page;
     preferredSize: "200x200"
-    minimumSize: "200x200"
-
-
+    minimumSize: "200x20"
 
     Item {
-      id:main
+        id:main
 
-      Plasma.DataSource {
-          id: dataSource
-          engine: "nowplaying"
-          source: allSources[0]
-          interval: 500
+        Plasma.DataSource {
+            id: dataSource
+            engine: "nowplaying"
+            source: allSources[0]
+            interval: 500
 
-          onDataChanged: {
-              playPause.setIcon("media-playback-start")
-          }
-      }
+            onDataChanged: {
+                if (data.state == "playing") {
+                    playPause.setIcon("media-playback-pause")
+                } else {
+                    playPause.setIcon("media-playback-start")
+                }
 
-      Plasma.Theme {
-          id: theme
-      }
+                progress.value = 100*data.position/data.length
+            }
+        }
 
-      Plasma.IconWidget {
-          id: playPause
-          anchors.fill: parent
+        Plasma.Theme {
+                id: theme
+        }
+    }
 
-          onClicked: {
-              var data = dataSource.service.operationDescription("stop");
-              print(dataSource.service.name);
+    layout: QGraphicsLinearLayout {
 
-              for ( var i in data ) {
-                  print(i + ' -> ' + data[i] );
-              }
+        Plasma.IconWidget {
+            id: playPause
+            property string state: "stop"
 
-              dataSource.service.startOperationCall(dataSource.service.operationDescription("stop"));
-              print("stopping");
-          }
-      }
+            onClicked: {
+                var operation;
+                if (dataSource.data.state == "playing") {
+                    operation = "pause"
+                } else {
+                    operation = "play"
+                }
+                var data = dataSource.service.operationDescription(operation);
+                print(dataSource.service.name);
+
+                for ( var i in data ) {
+                    print(i + ' -> ' + data[i] );
+                }
+
+                dataSource.service.startOperationCall(dataSource.service.operationDescription(operation));
+                print("stopping");
+            }
+        }
+
+        Plasma.IconWidget {
+            id: stop
+            Component.onCompleted: {
+                print("AAAA"+stop)
+                //dataSource.service.associateWidget(stop, "stop");
+                setIcon("media-playback-stop");
+            }
+            onClicked: {
+                var data = dataSource.service.operationDescription("stop");
+                print(dataSource.service.name);
+
+                for ( var i in data ) {
+                    print(i + ' -> ' + data[i] );
+                }
+
+                dataSource.service.startOperationCall(dataSource.service.operationDescription("stop"));
+                print("stopping");
+            }
+        }
+
+        Plasma.Slider {
+            id: progress
+            orientation: Qt.Horizontal
+
+            Component.onCompleted: {
+              //  dataSource.service.associateWidget(progress, "progress");
+            }
+            onSliderMoved: {
+                var operation = dataSource.service.operationDescription("seek");
+                //FIXME: the line below can't be used because we can't use kconfiggroup
+                //operation.seconds = dataSource.data.length*(value/100);
+                /*for ( var i in operation ) {
+                    print(i + ' -> ' + operation[i] );
+                }*/
+                plasmoid.setOperationValue(operation, "seconds", Math.round(dataSource.data.length*(value/100)));
+
+                dataSource.service.startOperationCall(operation);
+                print("set progress to " + progress);
+            }
+        }
     }
 }
