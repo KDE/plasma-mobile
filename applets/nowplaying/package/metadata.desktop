@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Now playing (QML)
+Name[x-test]=xxNow playing (QML)xx
 Comment=A proof of concept media player controller qml
+Comment[x-test]=xxA proof of concept media player controller qmlxx
 Encoding=UTF-8
 Icon=applications-multimedia
 ServiceTypes=Plasma/PopupApplet
