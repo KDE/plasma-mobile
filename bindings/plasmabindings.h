@@ -46,6 +46,7 @@
 #include "private/declarativesvg_p.h"
 #include "private/declarativeframesvg_p.h"
 #include "phone/phone.h"
+#include "plasma/service.h"
 
 void PLASMA_EXPORT setupBindings();
 
@@ -77,6 +78,7 @@ QML_DECLARE_INTERFACE(QGraphicsLayoutItem)
 QML_DECLARE_INTERFACE(QGraphicsLayout)
 
 
-Q_DECLARE_METATYPE(KConfigGroup);
+//Q_DECLARE_METATYPE(KConfigGroup);
+Q_DECLARE_METATYPE(Plasma::Service*);
 
 #endif

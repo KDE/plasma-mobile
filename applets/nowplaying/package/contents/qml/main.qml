@@ -83,6 +83,7 @@ QGraphicsWidget {
                 print("AAAA"+stop)
                 //dataSource.service.associateWidget(stop, "stop");
                 setIcon("media-playback-stop");
+                
             }
             onClicked: {
                 var data = dataSource.service.operationDescription("stop");
@@ -107,11 +108,13 @@ QGraphicsWidget {
             onSliderMoved: {
                 var operation = dataSource.service.operationDescription("seek");
                 //FIXME: the line below can't be used because we can't use kconfiggroup
-                //operation.seconds = dataSource.data.length*(value/100);
-                /*for ( var i in operation ) {
+                print(operation.seconds);
+                operation.seconds = dataSource.data.length*(value/100);
+
+                for ( var i in operation ) {
                     print(i + ' -> ' + operation[i] );
-                }*/
-                plasmoid.setOperationValue(operation, "seconds", Math.round(dataSource.data.length*(value/100)));
+                }
+
 
                 dataSource.service.startOperationCall(operation);
                 print("set progress to " + progress);

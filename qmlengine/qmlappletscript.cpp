@@ -77,6 +77,11 @@ bool QmlAppletScript::init()
 
     m_qmlWidget->engine()->rootContext()->setContextProperty("plasmoid", m_interface);
 
+    //Glorious hack:steal the engine
+    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "plasmoid.getEngine(this)");
+    expr->evaluate();
+    delete expr;
+
     configChanged();
 
     return true;

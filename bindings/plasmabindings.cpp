@@ -50,6 +50,6 @@ void setupBindings()
 
     qmlRegisterType<Plasma::DataSource>("Plasma", 0, 1, "DataSource");
 
-    //all non qobject types will have to be registered in this way
-    qRegisterMetaType<KConfigGroup>("KConfigGroup");
+    qmlRegisterInterface<Plasma::Service>("Service");
+    qRegisterMetaType<Plasma::Service*>("Service");
 }

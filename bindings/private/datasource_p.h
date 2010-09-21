@@ -70,7 +70,7 @@ namespace Plasma
       Q_PROPERTY(QObject *data READ data NOTIFY dataChanged);
       QObject *data() const {return m_data;}
 
-      Q_PROPERTY(QObject *service READ service CONSTANT);
+      Q_PROPERTY(Plasma::Service *service READ service CONSTANT);
       Plasma::Service *service();
 
   public Q_SLOTS:
