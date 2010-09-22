@@ -36,7 +36,7 @@
 #include <Plasma/Context>
 #include <Plasma/Package>
 
-#include "simplebindings/qscriptnonguibookkeeping.cpp"
+
 Q_DECLARE_METATYPE(AppletInterface*)
 
 AppletInterface::AppletInterface(QmlAppletScript *parent)
@@ -55,8 +55,7 @@ AppletInterface::~AppletInterface()
 
 void AppletInterface::getEngine(QScriptValue val)
 {
-    QScriptValue global = val.engine()->globalObject();
-    registerNonGuiMetaTypes(val.engine());
+    m_appletScriptEngine->setEngine(val.engine());
 }
 
 void AppletInterface::setOperationValue(KConfigGroup config, const QString &key, const QVariant &value)

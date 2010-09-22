@@ -40,6 +40,8 @@ public:
     QmlAppletScript(QObject *parent, const QVariantList &args);
     ~QmlAppletScript();
 
+    void setEngine(QScriptEngine *engine);
+
     QString filePath(const QString &type, const QString &file) const;
     void configChanged();
 
@@ -60,6 +62,7 @@ Q_SIGNALS:
 private:
     Plasma::QmlWidget *m_qmlWidget;
     AppletInterface *m_interface;
+    QScriptEngine *m_engine;
 };
 
 #endif

@@ -2,6 +2,8 @@ set(qml_appletscript_SRCS
     qmlappletscript.cpp
     appletinterface.cpp
     simplebindings/dataengine.cpp
+    common/scriptenv.cpp
+    common/javascriptaddonpackagestructure.cpp
     ../common/qmlwidget.cpp
     )
 
@@ -14,7 +16,9 @@ set(PLASMA_BINDINGS
    )
 
 kde4_add_plugin(plasma_appletscript_qml ${qml_appletscript_SRCS})
-target_link_libraries(plasma_appletscript_qml ${KDE4_PLASMA_LIBS}
+target_link_libraries(plasma_appletscript_qml
+    ${KDE4_PLASMA_LIBS}
+    ${KDE4_KIO_LIBS}
     ${QT_QTSCRIPT_LIBRARY}
     ${QT_QTDECLARATIVE_LIBRARY}
     ${PLASMA_BINDINGS}

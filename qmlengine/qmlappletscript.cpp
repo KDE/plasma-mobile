@@ -23,11 +23,14 @@
 #include "../bindings/plasmabindings.h"
 #include "../common/qmlwidget.h"
 
+#include "simplebindings/qscriptnonguibookkeeping.cpp"
+
 #include <QDeclarativeComponent>
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
 #include <QDeclarativeExpression>
 #include <QGraphicsLinearLayout>
+#include <QScriptEngine>
 
 #include <KGlobalSettings>
 #include <KConfigGroup>
@@ -42,7 +45,8 @@ extern void setupBindings();
 
 
 QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
-    : Plasma::AppletScript(parent)
+    : Plasma::AppletScript(parent),
+      m_engine(0)
 {
     setupBindings();
     Q_UNUSED(args);
@@ -134,6 +138,13 @@ void QmlAppletScript::activate()
     QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "activate()");
     expr->evaluate();
     delete expr;
+}
+
+void QmlAppletScript::setEngine(QScriptEngine *engine)
+{
+    m_engine = engine;
+    QScriptValue global = engine->globalObject();
+    registerNonGuiMetaTypes(engine);
 }
 
 #include "qmlappletscript.moc"
