@@ -230,8 +230,7 @@ enum IntervalAlignment {
     AspectRatioMode aspectRatioMode() const;
     void setAspectRatioMode(AspectRatioMode mode);
 
-    Q_INVOKABLE void getEngine(QScriptValue val);
-    Q_INVOKABLE void setOperationValue(KConfigGroup config, const QString &key, const QVariant &value);
+    Q_INVOKABLE void setEngine(QScriptValue val);
 
     Q_INVOKABLE void setFailedToLaunch(bool failed, const QString &reason = QString());
 

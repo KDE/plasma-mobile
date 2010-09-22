@@ -53,14 +53,9 @@ AppletInterface::~AppletInterface()
 {
 }
 
-void AppletInterface::getEngine(QScriptValue val)
+void AppletInterface::setEngine(QScriptValue val)
 {
     m_appletScriptEngine->setEngine(val.engine());
-}
-
-void AppletInterface::setOperationValue(KConfigGroup config, const QString &key, const QVariant &value)
-{
-    config.writeEntry(key, value);
 }
 
 AppletInterface *AppletInterface::extract(QScriptEngine *engine)

@@ -32,6 +32,8 @@ namespace Plasma
     class QmlWidget;
 }
 
+class ScriptEnv;
+
 class QmlAppletScript : public Plasma::AppletScript
 {
 Q_OBJECT
@@ -63,6 +65,7 @@ private:
     Plasma::QmlWidget *m_qmlWidget;
     AppletInterface *m_interface;
     QScriptEngine *m_engine;
+    ScriptEnv *m_env;
 };
 
 #endif

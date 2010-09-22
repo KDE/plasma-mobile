@@ -23,6 +23,7 @@
 #include "../bindings/plasmabindings.h"
 #include "../common/qmlwidget.h"
 
+#include "common/scriptenv.h"
 #include "simplebindings/qscriptnonguibookkeeping.cpp"
 
 #include <QDeclarativeComponent>
@@ -46,7 +47,8 @@ extern void setupBindings();
 
 QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
     : Plasma::AppletScript(parent),
-      m_engine(0)
+      m_engine(0),
+      m_env(0)
 {
     setupBindings();
     Q_UNUSED(args);
@@ -82,7 +84,7 @@ bool QmlAppletScript::init()
     m_qmlWidget->engine()->rootContext()->setContextProperty("plasmoid", m_interface);
 
     //Glorious hack:steal the engine
-    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "plasmoid.getEngine(this)");
+    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "plasmoid.setEngine(this)");
     expr->evaluate();
     delete expr;
 
@@ -142,8 +144,16 @@ void QmlAppletScript::activate()
 
 void QmlAppletScript::setEngine(QScriptEngine *engine)
 {
+    if (engine == m_engine) {
+        return;
+    }
+
     m_engine = engine;
     QScriptValue global = engine->globalObject();
+
+    delete m_env;
+    m_env = new ScriptEnv(this, m_engine);
+
     registerNonGuiMetaTypes(engine);
 }
 
