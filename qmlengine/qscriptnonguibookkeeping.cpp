@@ -24,7 +24,6 @@
 #include <KSharedConfig>
 
 #include "dataengine.h"
-#include "variant.h"
 
 Q_DECLARE_METATYPE(KConfigGroup)
 Q_DECLARE_METATYPE(KJob *)
@@ -76,7 +75,7 @@ QScriptValue qScriptValueFromKConfigGroup(QScriptEngine *engine, const KConfigGr
         kDebug() << "setting" << it.key() << "to" << it.value();
         QString prop = it.key();
         prop.replace(' ', '_');
-        obj.setProperty(prop, variantToScriptValue(engine, it.value()));
+        obj.setProperty(prop, it.value());
     }
 
     return obj;

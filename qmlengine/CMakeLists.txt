@@ -1,7 +1,6 @@
 set(qml_appletscript_SRCS
     qmlappletscript.cpp
     appletinterface.cpp
-    variant.cpp
     dataengine.cpp
     ../common/qmlwidget.cpp
     )
