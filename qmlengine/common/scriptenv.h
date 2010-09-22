@@ -60,12 +60,12 @@ public:
 
     bool checkForErrors(bool fatal);
 
-    bool addEventListener(const QString &event, const QScriptValue &func);
-    bool removeEventListener(const QString &event, const QScriptValue &func);
+    Q_INVOKABLE bool addEventListener(const QString &event, const QScriptValue &func);
+    Q_INVOKABLE bool removeEventListener(const QString &event, const QScriptValue &func);
 
     QScriptValue callFunction(QScriptValue &func, const QScriptValueList &args = QScriptValueList(), const QScriptValue &activator = QScriptValue());
     bool callEventListeners(const QString &event, const QScriptValueList &args = QScriptValueList());
-    bool hasEventListeners(const QString &event) const;
+    Q_INVOKABLE bool hasEventListeners(const QString &event) const;
 
     QString filePathFromScriptContext(const char *type, const QString &file) const;
 
@@ -82,12 +82,12 @@ private:
     static QScriptValue runCommand(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue openUrl(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue getUrl(QScriptContext *context, QScriptEngine *engine);
-    static QScriptValue listAddons(QScriptContext *context, QScriptEngine *engine);
-    static QScriptValue loadAddon(QScriptContext *context, QScriptEngine *engine);
+    Q_INVOKABLE static QScriptValue listAddons(QScriptContext *context, QScriptEngine *engine);
+    Q_INVOKABLE static QScriptValue loadAddon(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue registerAddon(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue addEventListener(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue removeEventListener(QScriptContext *context, QScriptEngine *engine);
-    static QScriptValue hasExtension(QScriptContext *context, QScriptEngine *engine);
+    Q_INVOKABLE static QScriptValue hasExtension(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue throwNonFatalError(const QString &msg, QScriptContext *context, QScriptEngine *engine);
 
 private Q_SLOTS:

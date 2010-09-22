@@ -153,6 +153,7 @@ void QmlAppletScript::setEngine(QScriptEngine *engine)
 
     delete m_env;
     m_env = new ScriptEnv(this, m_engine);
+    m_qmlWidget->engine()->rootContext()->setContextProperty("global", m_env);
 
     registerNonGuiMetaTypes(engine);
 }
