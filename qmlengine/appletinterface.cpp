@@ -36,7 +36,7 @@
 #include <Plasma/Context>
 #include <Plasma/Package>
 
-#include "qscriptnonguibookkeeping.cpp"
+#include "simplebindings/qscriptnonguibookkeeping.cpp"
 Q_DECLARE_METATYPE(AppletInterface*)
 
 AppletInterface::AppletInterface(QmlAppletScript *parent)
