@@ -88,8 +88,6 @@ bool QmlAppletScript::init()
     expr->evaluate();
     delete expr;
 
-    configChanged();
-
     return true;
 }
 
@@ -100,9 +98,11 @@ QString QmlAppletScript::filePath(const QString &type, const QString &file) cons
 
 void QmlAppletScript::configChanged()
 {
-    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "configChanged()");
-    expr->evaluate();
-    delete expr;
+    if (!m_env) {
+        return;
+    }
+
+    m_env->callEventListeners("configchanged");
 }
 
 void QmlAppletScript::constraintsEvent(Plasma::Constraints constraints)
@@ -122,40 +122,56 @@ void QmlAppletScript::constraintsEvent(Plasma::Constraints constraints)
 
 void QmlAppletScript::popupEvent(bool popped)
 {
-    QString expressionString;
-
-    if (popped) {
-        expressionString = "popupEvent(true)";
-    } else {
-        expressionString = "popupEvent(false)";
+    if (!m_env) {
+        return;
     }
 
-    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), expressionString);
-    expr->evaluate();
-    delete expr;
+    QScriptValueList args;
+    args << popped;
+
+    m_env->callEventListeners("popupEvent", args);
 }
 
 void QmlAppletScript::activate()
 {
-    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "activate()");
-    expr->evaluate();
-    delete expr;
-}
-
-void QmlAppletScript::setEngine(QScriptEngine *engine)
-{
-    if (engine == m_engine) {
+    if (!m_env) {
         return;
     }
 
-    m_engine = engine;
-    QScriptValue global = engine->globalObject();
+    m_env->callEventListeners("activate");
+}
+
+void QmlAppletScript::executeAction(const QString &name)
+{
+    if (!m_env) {
+        return;
+    }
+
+    const QString func("action_" + name);
+    m_env->callEventListeners(func);
+}
+
+
+void QmlAppletScript::setEngine(const QScriptValue &val)
+{
+    if (val.engine() == m_engine) {
+        return;
+    }
+
+    m_engine = val.engine();
+    QScriptValue global = m_engine->globalObject();
 
     delete m_env;
     m_env = new ScriptEnv(this, m_engine);
     m_qmlWidget->engine()->rootContext()->setContextProperty("global", m_env);
 
-    registerNonGuiMetaTypes(engine);
+    registerNonGuiMetaTypes(m_engine);
+
+    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "init()");
+    expr->evaluate();
+    delete expr;
+
+    configChanged();
 }
 
 #include "qmlappletscript.moc"

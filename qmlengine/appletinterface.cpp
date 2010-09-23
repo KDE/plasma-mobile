@@ -55,7 +55,7 @@ AppletInterface::~AppletInterface()
 
 void AppletInterface::setEngine(QScriptValue val)
 {
-    m_appletScriptEngine->setEngine(val.engine());
+    m_appletScriptEngine->setEngine(val);
 }
 
 AppletInterface *AppletInterface::extract(QScriptEngine *engine)

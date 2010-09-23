@@ -42,10 +42,12 @@ public:
     QmlAppletScript(QObject *parent, const QVariantList &args);
     ~QmlAppletScript();
 
-    void setEngine(QScriptEngine *engine);
+    void setEngine(const QScriptValue &val);
 
     QString filePath(const QString &type, const QString &file) const;
     void configChanged();
+
+    void executeAction(const QString &name);
 
     void constraintsEvent(Plasma::Constraints constraints);
 
