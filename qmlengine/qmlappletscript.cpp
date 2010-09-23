@@ -38,6 +38,7 @@
 #include <KDebug>
 
 #include <Plasma/Applet>
+#include <Plasma/Package>
 #include <Plasma/PopupApplet>
 
 K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
@@ -84,7 +85,7 @@ bool QmlAppletScript::init()
     m_qmlWidget->engine()->rootContext()->setContextProperty("plasmoid", m_interface);
 
     //Glorious hack:steal the engine
-    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "plasmoid.setEngine(this)");
+    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "plasmoid.setEngine(plasmoid)");
     expr->evaluate();
     delete expr;
 
@@ -93,7 +94,13 @@ bool QmlAppletScript::init()
 
 QString QmlAppletScript::filePath(const QString &type, const QString &file) const
 {
-    return m_qmlWidget->qmlPath();
+    const QString path = m_env->filePathFromScriptContext(type.toLocal8Bit().constData(), file);
+
+    if (!path.isEmpty()) {
+        return path;
+    }
+
+    return package()->filePath(type.toLocal8Bit().constData(), file);
 }
 
 void QmlAppletScript::configChanged()
@@ -151,8 +158,12 @@ void QmlAppletScript::executeAction(const QString &name)
     m_env->callEventListeners(func);
 }
 
+bool QmlAppletScript::include(const QString &path)
+{
+    return m_env->include(path);
+}
 
-void QmlAppletScript::setEngine(const QScriptValue &val)
+void QmlAppletScript::setEngine(QScriptValue &val)
 {
     if (val.engine() == m_engine) {
         return;
@@ -163,6 +174,7 @@ void QmlAppletScript::setEngine(const QScriptValue &val)
 
     delete m_env;
     m_env = new ScriptEnv(this, m_engine);
+    m_env->addMainObjectProperties(val);
     m_qmlWidget->engine()->rootContext()->setContextProperty("global", m_env);
 
     registerNonGuiMetaTypes(m_engine);

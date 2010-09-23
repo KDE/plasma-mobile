@@ -320,6 +320,16 @@ int AppletInterface::apiVersion() const
     return offers.first()->property("X-KDE-PluginInfo-Version", QVariant::Int).toInt();
 }
 
+bool AppletInterface::include(const QString &script)
+{
+    const QString path = m_appletScriptEngine->filePath("qml", script);
+
+    if (path.isEmpty()) {
+        return false;
+    }
+
+    return m_appletScriptEngine->include(path);
+}
 
 QObject *AppletInterface::findChild(const QString &name) const
 {

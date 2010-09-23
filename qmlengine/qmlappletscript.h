@@ -42,7 +42,7 @@ public:
     QmlAppletScript(QObject *parent, const QVariantList &args);
     ~QmlAppletScript();
 
-    void setEngine(const QScriptValue &val);
+    void setEngine(QScriptValue &val);
 
     QString filePath(const QString &type, const QString &file) const;
     void configChanged();
@@ -50,6 +50,8 @@ public:
     void executeAction(const QString &name);
 
     void constraintsEvent(Plasma::Constraints constraints);
+
+    bool include(const QString &path);
 
 public Q_SLOTS:
     void popupEvent(bool popped);

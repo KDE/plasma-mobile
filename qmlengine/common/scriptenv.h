@@ -67,6 +67,10 @@ public:
     bool callEventListeners(const QString &event, const QScriptValueList &args = QScriptValueList());
     Q_INVOKABLE bool hasEventListeners(const QString &event) const;
 
+    Q_INVOKABLE QScriptValue listAddons(const QString &type);
+
+    Q_INVOKABLE QScriptValue loadAddon(const QString &type, const QString &plugin);
+
     QString filePathFromScriptContext(const char *type, const QString &file) const;
 
 Q_SIGNALS:
@@ -82,8 +86,8 @@ private:
     static QScriptValue runCommand(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue openUrl(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue getUrl(QScriptContext *context, QScriptEngine *engine);
-    Q_INVOKABLE static QScriptValue listAddons(QScriptContext *context, QScriptEngine *engine);
-    Q_INVOKABLE static QScriptValue loadAddon(QScriptContext *context, QScriptEngine *engine);
+    static QScriptValue listAddons(QScriptContext *context, QScriptEngine *engine);
+    static QScriptValue loadAddon(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue registerAddon(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue addEventListener(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue removeEventListener(QScriptContext *context, QScriptEngine *engine);
