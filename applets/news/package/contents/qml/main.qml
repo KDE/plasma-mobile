@@ -27,6 +27,11 @@ QGraphicsWidget {
     preferredSize: "250x600"
     minimumSize: "200x200"
 
+    function init()
+    {
+        global.addEventListener('ConfigChanged', configChanged);
+    }
+
     function configChanged()
     {
         var url = plasmoid.readConfig("feeds")
