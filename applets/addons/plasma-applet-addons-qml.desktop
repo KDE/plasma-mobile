@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=Addons example (QML)
+Comment=An example on how to use javascript addons in the qml plasmoids
+Encoding=UTF-8
+ServiceTypes=Plasma/Applet
+Type=Service
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Category=Examples
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-Email=notmart@gmail.com
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.addons-example-qml
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-Plasma-API=qmlscript
+X-Plasma-MainScript=qml/main.qml

@@ -115,7 +115,6 @@ QGraphicsWidget {
                     print(i + ' -> ' + operation[i] );
                 }
 
-
                 dataSource.service.startOperationCall(operation);
                 print("set progress to " + progress);
             }
