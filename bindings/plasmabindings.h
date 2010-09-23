@@ -30,6 +30,7 @@
 #include <plasma/widgets/checkbox.h>
 #include <plasma/widgets/pushbutton.h>
 #include <plasma/widgets/svgwidget.h>
+#include <plasma/widgets/signalplotter.h>
 #include <plasma/widgets/frame.h>
 #include <plasma/widgets/iconwidget.h>
 #include <plasma/widgets/webview.h>
@@ -61,6 +62,7 @@ QML_DECLARE_TYPE(Plasma::SpinBox)
 QML_DECLARE_TYPE(Plasma::IconWidget)
 QML_DECLARE_TYPE(Plasma::SvgWidget)
 QML_DECLARE_TYPE(Plasma::DeclarativeFrameSvg)
+QML_DECLARE_TYPE(Plasma::SignalPlotter)
 QML_DECLARE_TYPE(Plasma::WebView)
 //QML_DECLARE_TYPE(DeclarativeTabBar)
 QML_DECLARE_TYPE(Phone)

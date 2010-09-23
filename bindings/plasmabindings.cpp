@@ -32,6 +32,7 @@ void setupBindings()
     qmlRegisterType<Plasma::IconWidget>("Plasma", 0, 1, "IconWidget");
     qmlRegisterType<Plasma::Slider>("Plasma", 0, 1, "Slider");
     qmlRegisterType<Plasma::SpinBox>("Plasma", 0, 1, "SpinBox");
+    qmlRegisterType<Plasma::SignalPlotter>("Plasma", 0, 1, "SignalPlotter");
     qmlRegisterType<Plasma::WebView>("Plasma", 0, 1, "WebView");
     qmlRegisterType<DeclarativeTabBar>("Plasma", 0, 1, "TabBar");
     qmlRegisterType<Phone>("Plasma", 0, 1, "Phone");
