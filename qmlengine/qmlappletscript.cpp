@@ -20,6 +20,7 @@
 
 #include "qmlappletscript.h"
 #include "appletinterface.h"
+#include "plasmoid/appletauthorization.h"
 #include "../bindings/plasmabindings.h"
 #include "../common/qmlwidget.h"
 
@@ -163,6 +164,11 @@ bool QmlAppletScript::include(const QString &path)
     return m_env->include(path);
 }
 
+ScriptEnv *QmlAppletScript::scriptEnv()
+{
+    return m_env;
+}
+
 void QmlAppletScript::setEngine(QScriptValue &val)
 {
     if (val.engine() == m_engine) {
@@ -182,6 +188,11 @@ void QmlAppletScript::setEngine(QScriptValue &val)
     QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "init()");
     expr->evaluate();
     delete expr;
+
+    AppletAuthorization auth(this);
+    if (!m_env->importExtensions(description(), global, auth)) {
+        return;
+    }
 
     configChanged();
 }

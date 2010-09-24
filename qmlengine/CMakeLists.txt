@@ -1,7 +1,9 @@
 set(qml_appletscript_SRCS
     qmlappletscript.cpp
     appletinterface.cpp
+    plasmoid/appletauthorization.cpp
     simplebindings/dataengine.cpp
+    simplebindings/filedialogproxy.cpp
     common/scriptenv.cpp
     common/javascriptaddonpackagestructure.cpp
     ../common/qmlwidget.cpp
@@ -14,6 +16,8 @@ set(qml_package_SRCS
 set(PLASMA_BINDINGS
    plasma_bindings
    )
+
+include_directories(${PHONON_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR}/common)
 
 kde4_add_plugin(plasma_appletscript_qml ${qml_appletscript_SRCS})
 target_link_libraries(plasma_appletscript_qml

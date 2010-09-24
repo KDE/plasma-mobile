@@ -71,6 +71,8 @@ public:
 
     Q_INVOKABLE QScriptValue loadAddon(const QString &type, const QString &plugin);
 
+    bool hasExtension(const QString &ext) const;
+
     QString filePathFromScriptContext(const char *type, const QString &file) const;
 
 Q_SIGNALS:
@@ -91,7 +93,7 @@ private:
     static QScriptValue registerAddon(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue addEventListener(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue removeEventListener(QScriptContext *context, QScriptEngine *engine);
-    Q_INVOKABLE static QScriptValue hasExtension(QScriptContext *context, QScriptEngine *engine);
+    static QScriptValue hasExtension(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue throwNonFatalError(const QString &msg, QScriptContext *context, QScriptEngine *engine);
 
 private Q_SLOTS:

@@ -38,6 +38,8 @@
 
 #include <Plasma/Package>
 
+#define USEGUI
+
 #ifdef USEGUI
 #include "simplebindings/filedialogproxy.h"
 #endif
@@ -618,6 +620,11 @@ QScriptValue ScriptEnv::hasExtension(QScriptContext *context, QScriptEngine *eng
     return env->m_extensions.contains(context->argument(0).toString().toLower());
 }
 
+bool ScriptEnv::hasExtension(const QString &ext) const
+{
+    return m_extensions.contains(ext);
+}
+
 QScriptValue ScriptEnv::callFunction(QScriptValue &func, const QScriptValueList &args, const QScriptValue &activator)
 {
     if (!func.isFunction()) {
@@ -692,6 +699,6 @@ bool ScriptEnv::removeEventListener(const QString &event, const QScriptValue &fu
     return found;
 }
 
-#ifndef USEGUI
+
 #include "scriptenv.moc"
-#endif
+

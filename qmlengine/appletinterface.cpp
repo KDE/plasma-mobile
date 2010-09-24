@@ -20,6 +20,7 @@
  */
 
 #include "appletinterface.h"
+#include "scriptenv.h"
 
 #include <QAction>
 #include <QFile>
@@ -28,6 +29,10 @@
 #include <QTimer>
 
 #include <KIcon>
+#include <KRun>
+#include <KStandardDirs>
+#include <KShell>
+#include <KMimeType>
 #include <KService>
 #include <KServiceTypeTrader>
 
@@ -350,6 +355,40 @@ QObject *AppletInterface::findChild(const QString &name) const
 Plasma::Extender *AppletInterface::extender() const
 {
     return m_appletScriptEngine->extender();
+}
+
+bool AppletInterface::openUrl(QScriptValue v)
+{
+    if (!m_appletScriptEngine->scriptEnv() || !m_appletScriptEngine->scriptEnv()->hasExtension("launchapp")) {
+        return false;
+    }
+
+    KUrl url = v.isString() ? KUrl(v.toString()) : qscriptvalue_cast<KUrl>(v);
+    if (url.isValid()) {
+        return KRun::runUrl(url, KMimeType::findByUrl(url)->name(), 0);
+    }
+
+    return false;
+}
+
+bool AppletInterface::runCommand(QScriptValue cmd, QScriptValue args)
+{
+    if (!m_appletScriptEngine->scriptEnv() || !m_appletScriptEngine->scriptEnv()->hasExtension("launchapp")) {
+        return false;
+    }
+
+    const QString exec = KGlobal::dirs()->findExe(cmd.toString());
+    if (!exec.isEmpty()) {
+        QString args;
+        const QStringList argList = qscriptvalue_cast<QStringList>(args);
+        if (!argList.isEmpty()) {
+            args = ' ' + KShell::joinArgs(argList);
+        }
+
+        return KRun::runCommand(exec + args, 0);
+    }
+
+    return false;
 }
 
 void AppletInterface::gc()

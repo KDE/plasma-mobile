@@ -53,6 +53,8 @@ public:
 
     bool include(const QString &path);
 
+    ScriptEnv *scriptEnv();
+
 public Q_SLOTS:
     void popupEvent(bool popped);
     void activate();
