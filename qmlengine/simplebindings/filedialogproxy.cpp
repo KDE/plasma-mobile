@@ -150,7 +150,6 @@ void FileDialogProxy::registerWithRuntime(QScriptEngine *engine)
     qScriptRegisterMetaType<FileDialogProxy*>(engine, qScriptValueFromFileDialogProxy, fileDialogProxyFromQScriptValue);
     global.setProperty("OpenFileDialog", engine->newFunction(FileDialogProxy::fileDialogOpen));
     global.setProperty("SaveFileDialog", engine->newFunction(FileDialogProxy::fileDialogSave));
-    kWarning()<<"QQQQQQ"<<engine->uncaughtException().toVariant();
 }
 
 QScriptValue FileDialogProxy::fileDialogSave(QScriptContext *context, QScriptEngine *engine)
