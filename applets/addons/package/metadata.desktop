@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Addons example (QML)
+Name[x-test]=xxAddons example (QML)xx
 Comment=An example on how to use javascript addons in the qml plasmoids
+Comment[x-test]=xxAn example on how to use javascript addons in the qml plasmoidsxx
 Encoding=UTF-8
 ServiceTypes=Plasma/Applet
 Type=Service
