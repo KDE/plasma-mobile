@@ -57,13 +57,47 @@ QGraphicsWidget {
         print("Configuration changed listener");
     }
 
+    function openFileDialogAccepted(dialog)
+    {
+        var url = dialog.url
+        print("open this file! " + url.protocol + ' ' + url.host + ' ' + url.path)
+
+        if (plasmoid['openUrl']) {
+            plasmoid.openUrl(url);
+        } else {
+            print("no openUrl method available to us!")
+        }
+    }
+
+    function openFileDialogFinished(dialog)
+    {
+        dialog.accepted.disconnect(openFileDialogAccepted)
+        dialog.finished.disconnect(openFileDialogFinished)
+        plasmoid.gc()
+    }
+
     layout: QGraphicsLinearLayout {
+        orientation: Qt.Vertical
         Plasma.Label {
             text: "Testing Javascript addons"
         }
 
+        Plasma.PushButton {
+            id: openButton
+            text: "Open File"
+            onClicked: {
+                print("opening a file?")
+                var dialog = plasmoid.createOpenFileDialog()
+                print(dialog)
+                dialog.accepted.connect(openFileDialogAccepted)
+                dialog.finished.connect(openFileDialogFinished)
+                dialog.show()
+            }
+        }
+
         Plasma.SvgWidget {
-            
+            id: svgWidget
         }
     }
+
 }
