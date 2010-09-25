@@ -25,7 +25,6 @@
 #include "../common/qmlwidget.h"
 
 #include "common/scriptenv.h"
-#include "simplebindings/qscriptnonguibookkeeping.cpp"
 
 #include <QDeclarativeComponent>
 #include <QDeclarativeContext>
@@ -46,6 +45,10 @@ K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
 
 extern void setupBindings();
 
+QScriptValue constructKUrlClass(QScriptEngine *engine);
+void registerSimpleAppletMetaTypes(QScriptEngine *engine);
+void registerNonGuiMetaTypes(QScriptEngine *engine);
+void registerUrlMetaType(QScriptEngine *engine);
 
 QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
     : Plasma::AppletScript(parent),
@@ -183,16 +186,22 @@ void QmlAppletScript::setEngine(QScriptValue &val)
     m_env->addMainObjectProperties(val);
     m_qmlWidget->engine()->rootContext()->setContextProperty("global", m_env);
 
+
+    AppletAuthorization auth(this);
+    if (!m_env->importExtensions(description(), global, auth)) {
+       // return;
+    }
+
+    qScriptRegisterSequenceMetaType<KUrl::List>(m_engine);
     registerNonGuiMetaTypes(m_engine);
+    registerSimpleAppletMetaTypes(m_engine);
+    qmlRegisterInterface<KUrl>("KUrl");
+    qRegisterMetaType<KUrl>("KUrl");
+    registerUrlMetaType(m_engine);
 
     QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "init()");
     expr->evaluate();
     delete expr;
-
-    AppletAuthorization auth(this);
-    if (!m_env->importExtensions(description(), global, auth)) {
-        return;
-    }
 
     configChanged();
 }

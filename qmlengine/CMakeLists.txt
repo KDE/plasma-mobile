@@ -4,6 +4,8 @@ set(qml_appletscript_SRCS
     plasmoid/appletauthorization.cpp
     simplebindings/dataengine.cpp
     simplebindings/filedialogproxy.cpp
+    simplebindings/qscriptbookkeeping.cpp
+    simplebindings/url.cpp
     common/scriptenv.cpp
     common/javascriptaddonpackagestructure.cpp
     ../common/qmlwidget.cpp
