@@ -60,16 +60,16 @@ public:
 
     bool checkForErrors(bool fatal);
 
-    Q_INVOKABLE bool addEventListener(const QString &event, const QScriptValue &func);
-    Q_INVOKABLE bool removeEventListener(const QString &event, const QScriptValue &func);
+    bool addEventListener(const QString &event, const QScriptValue &func);
+    bool removeEventListener(const QString &event, const QScriptValue &func);
 
     QScriptValue callFunction(QScriptValue &func, const QScriptValueList &args = QScriptValueList(), const QScriptValue &activator = QScriptValue());
     bool callEventListeners(const QString &event, const QScriptValueList &args = QScriptValueList());
-    Q_INVOKABLE bool hasEventListeners(const QString &event) const;
+    bool hasEventListeners(const QString &event) const;
 
-    Q_INVOKABLE QScriptValue listAddons(const QString &type);
+    QScriptValue listAddons(const QString &type);
 
-    Q_INVOKABLE QScriptValue loadAddon(const QString &type, const QString &plugin);
+    QScriptValue loadAddon(const QString &type, const QString &plugin);
 
     bool hasExtension(const QString &ext) const;
 

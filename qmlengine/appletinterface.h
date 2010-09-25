@@ -274,6 +274,15 @@ enum IntervalAlignment {
 
     Q_INVOKABLE Plasma::Extender *extender() const;
 
+    //Event Listeners
+    Q_INVOKABLE bool addEventListener(const QString &event, const QScriptValue &func);
+    Q_INVOKABLE bool removeEventListener(const QString &event, const QScriptValue &func);
+    Q_INVOKABLE bool hasEventListeners(const QString &event) const;
+
+    //Addons
+    Q_INVOKABLE QScriptValue listAddons(const QString &type);
+    Q_INVOKABLE QScriptValue loadAddon(const QString &type, const QString &plugin);
+
     //Built in extensions
     Q_INVOKABLE bool openUrl(QScriptValue v);
     Q_INVOKABLE bool runCommand(QScriptValue cmd, QScriptValue args);

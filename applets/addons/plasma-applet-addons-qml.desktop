@@ -23,3 +23,5 @@ X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-Plasma-API=qmlscript
 X-Plasma-MainScript=qml/main.qml
+X-Plasma-RequiredExtensions=FileDialog
+X-Plasma-OptionalExtensions=LaunchApp

@@ -184,8 +184,6 @@ void QmlAppletScript::setEngine(QScriptValue &val)
     delete m_env;
     m_env = new ScriptEnv(this, m_engine);
     m_env->addMainObjectProperties(val);
-    m_qmlWidget->engine()->rootContext()->setContextProperty("global", m_env);
-
 
     AppletAuthorization auth(this);
     if (!m_env->importExtensions(description(), global, auth)) {

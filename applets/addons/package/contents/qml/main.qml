@@ -28,10 +28,10 @@ QGraphicsWidget {
 
     function init()
     {
-        global.addEventListener('ConfigChanged', configChanged);
-        global.addEventListener("addoncreated", addonCreated)
+        plasmoid.addEventListener('ConfigChanged', configChanged);
+        plasmoid.addEventListener("addoncreated", addonCreated)
 
-        var addons = global.listAddons("org.kde.plasma.javascript-addons-example")
+        var addons = plasmoid.listAddons("org.kde.plasma.javascript-addons-example")
 
         if (addons.length < 1) {
             // uh-oh, something didn't work!
@@ -39,7 +39,7 @@ QGraphicsWidget {
         } else {
             print("number of addons: "+ addons.length)
 
-            print(global.loadAddon("org.kde.plasma.javascript-addons-example", addons[0].id))
+            print(plasmoid.loadAddon("org.kde.plasma.javascript-addons-example", addons[0].id))
         }
     }
 
