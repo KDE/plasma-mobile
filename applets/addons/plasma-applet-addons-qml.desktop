@@ -2,11 +2,13 @@
 Name=Addons example (QML)
 Name[pt]=Exemplo de extensão (QML)
 Name[pt_BR]=Exemplo de extensão (QML)
+Name[sv]=Tilläggsexempel (QML)
 Name[uk]=Приклад додатків (QML)
 Name[x-test]=xxAddons example (QML)xx
 Comment=An example on how to use javascript addons in the qml plasmoids
 Comment[pt]=Um exemplo de utilização de extensões em JavaScript nos plasmóides em QML
 Comment[pt_BR]=Um exemplo de utilização de extensões em JavaScript nos plasmoides em QML
+Comment[sv]=Ett exempel på hur Javascript-tillägg används i QML-plasmoider
 Comment[uk]=Приклад використання додатків javascript у плазмоїдах мовою qml
 Comment[x-test]=xxAn example on how to use javascript addons in the qml plasmoidsxx
 Encoding=UTF-8
