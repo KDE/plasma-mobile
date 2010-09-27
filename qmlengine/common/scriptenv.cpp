@@ -18,11 +18,13 @@
  */
 
 #include "scriptenv.h"
+#include "qmlappletscript.h"
 
 #include <iostream>
 
 #include <QFile>
 #include <QMetaEnum>
+#include <QScriptClass>
 
 #include <KDebug>
 #include <KDesktopFile>
@@ -522,6 +524,7 @@ QScriptValue ScriptEnv::loadAddon(const QString &type, const QString &plugin)
                                                  QScriptValue::Undeletable |
                                                  QScriptValue::SkipInEnumeration);
     //kDebug() << "context is" << innerContext;
+
     m_engine->evaluate(code, file.fileName());
     m_engine->popContext();
 
@@ -550,6 +553,10 @@ QScriptValue ScriptEnv::registerAddon(QScriptContext *context, QScriptEngine *en
                 QScriptValueList args;
                 args << obj;
                 env->callEventListeners("addoncreated", args);
+                if (engine->hasUncaughtException()) {
+                    int line = engine->uncaughtExceptionLineNumber();
+                    kWarning() << "Uncaught exception at line" << line << ":" << engine->uncaughtException().toVariant();
+                }
             }
         }
     }

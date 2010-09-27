@@ -21,6 +21,7 @@
 #include "qmlappletscript.h"
 #include "appletinterface.h"
 #include "plasmoid/appletauthorization.h"
+#include "plasmoid/themedsvg.h"
 #include "../bindings/plasmabindings.h"
 #include "../common/qmlwidget.h"
 
@@ -31,6 +32,7 @@
 #include <QDeclarativeEngine>
 #include <QDeclarativeExpression>
 #include <QGraphicsLinearLayout>
+#include <QScriptValueIterator>
 #include <QScriptEngine>
 
 #include <KGlobalSettings>
@@ -116,6 +118,24 @@ void QmlAppletScript::configChanged()
     m_env->callEventListeners("configchanged");
 }
 
+QScriptValue QmlAppletScript::newPlasmaSvg(QScriptContext *context, QScriptEngine *engine)
+{
+    if (context->argumentCount() == 0) {
+        return context->throwError(i18n("Constructor takes at least 1 argument"));
+    }
+
+    const QString filename = context->argument(0).toString();
+    bool parentedToApplet = false;
+    //QGraphicsWidget *parent = extractParent(context, engine, 1, &parentedToApplet);
+    Plasma::Svg *svg = new ThemedSvg(0);
+    svg->setImagePath(ThemedSvg::findSvg(engine, filename));
+
+    QScriptValue obj = engine->newQObject(svg);
+    ScriptEnv::registerEnums(obj, *svg->metaObject());
+
+    return obj;
+}
+
 void QmlAppletScript::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
@@ -179,14 +199,51 @@ void QmlAppletScript::setEngine(QScriptValue &val)
     }
 
     m_engine = val.engine();
-    QScriptValue global = m_engine->globalObject();
+    connect(m_engine, SIGNAL(signalHandlerException(const QScriptValue &)),
+            this, SLOT(signalHandlerException(const QScriptValue &)));
+    QScriptValue originalGlobalObject = m_engine->globalObject();
+
+    QScriptValue newGlobalObject = m_engine->newObject();
+
+    QString eval = QLatin1String("eval");
+    QString version = QLatin1String("version");
+
+    {
+        QScriptValueIterator iter(originalGlobalObject);
+        QVector<QString> names;
+        QVector<QScriptValue> values;
+        QVector<QScriptValue::PropertyFlags> flags;
+        while (iter.hasNext()) {
+            iter.next();
+
+            QString name = iter.name();
+
+            if (name == version) {
+                continue;
+            }
+
+            if (name != eval) {
+                names.append(name);
+                values.append(iter.value());
+                flags.append(iter.flags() | QScriptValue::Undeletable);
+            }
+            newGlobalObject.setProperty(iter.scriptName(), iter.value());
+
+           // m_illegalNames.insert(name);
+        }
+
+    }
+
+    m_engine->setGlobalObject(newGlobalObject);
 
     delete m_env;
     m_env = new ScriptEnv(this, m_engine);
-    m_env->addMainObjectProperties(val);
+    m_env->addMainObjectProperties(newGlobalObject);
+
+    newGlobalObject.setProperty("Svg", m_engine->newFunction(QmlAppletScript::newPlasmaSvg));
 
     AppletAuthorization auth(this);
-    if (!m_env->importExtensions(description(), global, auth)) {
+    if (!m_env->importExtensions(description(), newGlobalObject, auth)) {
        // return;
     }
 
@@ -202,6 +259,11 @@ void QmlAppletScript::setEngine(QScriptValue &val)
     delete expr;
 
     configChanged();
+}
+
+void QmlAppletScript::signalHandlerException(const QScriptValue &exception)
+{
+    kWarning()<<"Exception caught: "<<exception.toVariant();
 }
 
 #include "qmlappletscript.moc"

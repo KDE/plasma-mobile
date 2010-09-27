@@ -22,6 +22,7 @@
 #define QML_APPLETSCRIPT_H
 
 #include <QScriptValue>
+#include <QScriptContext>
 
 #include <Plasma/AppletScript>
 
@@ -55,7 +56,10 @@ public:
 
     ScriptEnv *scriptEnv();
 
+    static QScriptValue newPlasmaSvg(QScriptContext *context, QScriptEngine *engine);
+
 public Q_SLOTS:
+    void signalHandlerException(const QScriptValue &exception);
     void popupEvent(bool popped);
     void activate();
 

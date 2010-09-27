@@ -2,6 +2,7 @@ set(qml_appletscript_SRCS
     qmlappletscript.cpp
     appletinterface.cpp
     plasmoid/appletauthorization.cpp
+    plasmoid/themedsvg.cpp
     simplebindings/dataengine.cpp
     simplebindings/filedialogproxy.cpp
     simplebindings/qscriptbookkeeping.cpp

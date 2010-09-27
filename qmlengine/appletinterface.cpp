@@ -45,11 +45,16 @@
 
 Q_DECLARE_METATYPE(AppletInterface*)
 
+static AppletInterface *s_appletInterface = 0;
+
 AppletInterface::AppletInterface(QmlAppletScript *parent)
     : QObject(parent),
       m_appletScriptEngine(parent),
       m_actionSignals(0)
 {
+    if (!s_appletInterface) {
+        s_appletInterface = this;
+    }
     connect(this, SIGNAL(releaseVisualFocus()), applet(), SIGNAL(releaseVisualFocus()));
     connect(this, SIGNAL(configNeedsSaving()), applet(), SIGNAL(configNeedsSaving()));
     connect(applet(), SIGNAL(immutabilityChanged()), this, SIGNAL(immutableChanged()));
@@ -66,8 +71,7 @@ void AppletInterface::setEngine(QScriptValue val)
 
 AppletInterface *AppletInterface::extract(QScriptEngine *engine)
 {
-    QScriptValue appletValue = engine->globalObject().property("plasmoid");
-    return qobject_cast<AppletInterface*>(appletValue.toQObject());
+    return s_appletInterface;
 }
 
 Plasma::DataEngine* AppletInterface::dataEngine(const QString &name)
