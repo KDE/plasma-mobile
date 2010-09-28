@@ -40,6 +40,8 @@
 #include <KDebug>
 
 #include <Plasma/Applet>
+#include <Plasma/Svg>
+#include <Plasma/FrameSvg>
 #include <Plasma/Package>
 #include <Plasma/PopupApplet>
 
@@ -126,7 +128,7 @@ QScriptValue QmlAppletScript::newPlasmaSvg(QScriptContext *context, QScriptEngin
 
     const QString filename = context->argument(0).toString();
     bool parentedToApplet = false;
-    //QGraphicsWidget *parent = extractParent(context, engine, 1, &parentedToApplet);
+    QGraphicsWidget *parent = extractParent(context, engine, 1, &parentedToApplet);
     Plasma::Svg *svg = new ThemedSvg(0);
     svg->setImagePath(ThemedSvg::findSvg(engine, filename));
 
@@ -134,6 +136,54 @@ QScriptValue QmlAppletScript::newPlasmaSvg(QScriptContext *context, QScriptEngin
     ScriptEnv::registerEnums(obj, *svg->metaObject());
 
     return obj;
+}
+
+QScriptValue QmlAppletScript::newPlasmaFrameSvg(QScriptContext *context, QScriptEngine *engine)
+{
+    if (context->argumentCount() == 0) {
+        return context->throwError(i18n("Constructor takes at least 1 argument"));
+    }
+
+    QString filename = context->argument(0).toString();
+
+    bool parentedToApplet = false;
+    QGraphicsWidget *parent = extractParent(context, engine, 1, &parentedToApplet);
+    Plasma::FrameSvg *frameSvg = new ThemedFrameSvg(parent);
+    frameSvg->setImagePath(ThemedSvg::findSvg(engine, filename));
+
+    QScriptValue obj = engine->newQObject(frameSvg);
+    ScriptEnv::registerEnums(obj, *frameSvg->metaObject());
+
+    return obj;
+}
+
+QGraphicsWidget *QmlAppletScript::extractParent(QScriptContext *context, QScriptEngine *engine,
+                                                       int argIndex, bool *parentedToApplet)
+{
+    if (parentedToApplet) {
+        *parentedToApplet = false;
+    }
+
+    QGraphicsWidget *parent = 0;
+    if (context->argumentCount() >= argIndex) {
+        parent = qobject_cast<QGraphicsWidget*>(context->argument(argIndex).toQObject());
+    }
+
+    if (!parent) {
+        AppletInterface *interface = AppletInterface::extract(engine);
+        if (!interface) {
+            return 0;
+        }
+
+        //kDebug() << "got the applet!";
+        parent = interface->applet();
+
+        if (parentedToApplet) {
+            *parentedToApplet = true;
+        }
+    }
+
+    return parent;
 }
 
 void QmlAppletScript::constraintsEvent(Plasma::Constraints constraints)
@@ -192,6 +242,22 @@ ScriptEnv *QmlAppletScript::scriptEnv()
     return m_env;
 }
 
+void QmlAppletScript::setupObjects()
+{
+    QScriptValue global = m_engine->globalObject();
+
+    QScriptValue args = m_engine->newArray();
+    int i = 0;
+    foreach (const QVariant &arg, applet()->startupArguments()) {
+        args.setProperty(i, m_engine->newVariant(arg));
+        ++i;
+    }
+    global.setProperty("startupArguments", args);
+
+    global.setProperty("Svg", m_engine->newFunction(QmlAppletScript::newPlasmaSvg));
+    global.setProperty("FrameSvg", m_engine->newFunction(QmlAppletScript::newPlasmaFrameSvg));
+}
+
 void QmlAppletScript::setEngine(QScriptValue &val)
 {
     if (val.engine() == m_engine) {
@@ -240,7 +306,7 @@ void QmlAppletScript::setEngine(QScriptValue &val)
     m_env = new ScriptEnv(this, m_engine);
     m_env->addMainObjectProperties(newGlobalObject);
 
-    newGlobalObject.setProperty("Svg", m_engine->newFunction(QmlAppletScript::newPlasmaSvg));
+    setupObjects();
 
     AppletAuthorization auth(this);
     if (!m_env->importExtensions(description(), newGlobalObject, auth)) {

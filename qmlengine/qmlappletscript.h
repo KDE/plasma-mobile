@@ -57,6 +57,7 @@ public:
     ScriptEnv *scriptEnv();
 
     static QScriptValue newPlasmaSvg(QScriptContext *context, QScriptEngine *engine);
+    static QScriptValue newPlasmaFrameSvg(QScriptContext *context, QScriptEngine *engine);
 
 public Q_SLOTS:
     void signalHandlerException(const QScriptValue &exception);
@@ -65,6 +66,11 @@ public Q_SLOTS:
 
 protected:
     bool init();
+    void setupObjects();
+    static QGraphicsWidget *extractParent(QScriptContext *context,
+                                          QScriptEngine *engine,
+                                          int parentIndex = 0,
+                                          bool *parentedToApplet = 0);
 
 Q_SIGNALS:
     void formFactorChanged();
