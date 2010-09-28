@@ -28,6 +28,7 @@
 
 #include "common/scriptenv.h"
 #include "simplebindings/bytearrayclass.h"
+#include "simplebindings/i18n.h"
 
 #include <QDeclarativeComponent>
 #include <QDeclarativeContext>
@@ -290,6 +291,8 @@ void QmlAppletScript::setupObjects()
         ++i;
     }
     global.setProperty("startupArguments", args);
+
+    bindI18N(m_engine);
 
     //Add stuff from Qt
     ByteArrayClass *baClass = new ByteArrayClass(m_engine);
