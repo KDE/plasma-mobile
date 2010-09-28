@@ -101,6 +101,11 @@ bool QmlAppletScript::init()
     return true;
 }
 
+void QmlAppletScript::collectGarbage()
+{
+    m_engine->collectGarbage();
+}
+
 QString QmlAppletScript::filePath(const QString &type, const QString &file) const
 {
     const QString path = m_env->filePathFromScriptContext(type.toLocal8Bit().constData(), file);

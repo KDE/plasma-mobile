@@ -64,6 +64,7 @@ public Q_SLOTS:
     void signalHandlerException(const QScriptValue &exception);
     void popupEvent(bool popped);
     void activate();
+    void collectGarbage();
 
 protected:
     bool init();
