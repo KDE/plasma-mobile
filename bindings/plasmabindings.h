@@ -67,6 +67,7 @@ QML_DECLARE_TYPE(Plasma::WebView)
 //QML_DECLARE_TYPE(DeclarativeTabBar)
 QML_DECLARE_TYPE(Phone)
 QML_DECLARE_TYPE(Plasma::DeclarativeSvg)
+//QML_DECLARE_TYPE(Plasma::Svg)
 
 QML_DECLARE_TYPE(Plasma::ExtenderItem)
 QML_DECLARE_TYPE(Plasma::Extender)

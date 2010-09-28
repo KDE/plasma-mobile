@@ -81,7 +81,7 @@ QGraphicsWidget {
             id: stop
             Component.onCompleted: {
                 print("AAAA"+stop)
-                //dataSource.service.associateWidget(stop, "stop");
+                dataSource.service.associateWidget(stop, "stop");
                 setIcon("media-playback-stop");
                 
             }

@@ -26,12 +26,19 @@ QGraphicsWidget {
     preferredSize: "250x600"
     minimumSize: "200x200"
 
+    Item {
+        Plasma.Svg {
+            id:svgExample
+            imagePath: "widgets/clock"
+        }
+    }
+
     function init()
     {
         plasmoid.addEventListener('ConfigChanged', configChanged);
         plasmoid.addEventListener("addoncreated", addonCreated)
 
-        var addons = plasmoid.listAddons("org.kde.plasma.javascript-addons-example")
+        var addons = listAddons("org.kde.plasma.javascript-addons-example")
 
         if (addons.length < 1) {
             // uh-oh, something didn't work!
@@ -45,10 +52,9 @@ QGraphicsWidget {
 
     function addonCreated(addon)
     {
-        print("Addon says: "+ addon.toString())
+        print("Addon says: " + addon.toString()+addon.svg.imagePath);
         if (addon.svg) {
-            var svg = new SvgWidget
-            svg.svg = addon.svg
+            svgWidget.svg = addon.svg
         }
     }
 
