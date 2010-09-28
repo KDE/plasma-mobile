@@ -358,26 +358,6 @@ Plasma::Extender *AppletInterface::extender() const
 }
 
 
-bool AppletInterface::runCommand(QScriptValue cmd, QScriptValue args)
-{
-    if (!m_appletScriptEngine->scriptEnv() || !m_appletScriptEngine->scriptEnv()->hasExtension("launchapp")) {
-        return false;
-    }
-
-    const QString exec = KGlobal::dirs()->findExe(cmd.toString());
-    if (!exec.isEmpty()) {
-        QString args;
-        const QStringList argList = qscriptvalue_cast<QStringList>(args);
-        if (!argList.isEmpty()) {
-            args = ' ' + KShell::joinArgs(argList);
-        }
-
-        return KRun::runCommand(exec + args, 0);
-    }
-
-    return false;
-}
-
 void AppletInterface::gc()
 {
     QTimer::singleShot(0, m_appletScriptEngine, SLOT(collectGarbage()));

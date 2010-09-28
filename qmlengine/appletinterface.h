@@ -272,8 +272,6 @@ enum IntervalAlignment {
 
     Q_INVOKABLE Plasma::Extender *extender() const;
 
-    //Built in extensions
-    Q_INVOKABLE bool runCommand(QScriptValue cmd, QScriptValue args);
 
     Plasma::DataEngine *dataEngine(const QString &name);
 
