@@ -378,15 +378,6 @@ bool AppletInterface::runCommand(QScriptValue cmd, QScriptValue args)
     return false;
 }
 
-QScriptValue AppletInterface::createOpenFileDialog() const
-{
-    if (!m_appletScriptEngine->scriptEnv() || !m_appletScriptEngine->scriptEnv()->hasExtension("filedialog")) {
-        return false;
-    }
-
-    return FileDialogProxy::fileDialogOpen(m_appletScriptEngine->scriptEnv()->engine()->currentContext(), m_appletScriptEngine->scriptEnv()->engine());
-}
-
 void AppletInterface::gc()
 {
     QTimer::singleShot(0, m_appletScriptEngine, SLOT(collectGarbage()));

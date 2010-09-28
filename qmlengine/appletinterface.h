@@ -274,7 +274,6 @@ enum IntervalAlignment {
 
     //Built in extensions
     Q_INVOKABLE bool runCommand(QScriptValue cmd, QScriptValue args);
-    Q_INVOKABLE QScriptValue createOpenFileDialog() const;
 
     Plasma::DataEngine *dataEngine(const QString &name);
 
