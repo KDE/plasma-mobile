@@ -39,6 +39,7 @@ void setupBindings()
 
     qmlRegisterType<Plasma::SvgWidget>("Plasma", 0, 1, "SvgWidget");
     qmlRegisterType<Plasma::Svg>("Plasma", 0, 1, "Svg");
+    qmlRegisterType<Plasma::FrameSvg>("Plasma", 0, 1, "FrameSvg");
     qmlRegisterType<Plasma::DeclarativeSvg>("Plasma", 0, 1, "SvgItem");
     qmlRegisterType<Plasma::DeclarativeFrameSvg>("Plasma", 0, 1, "FrameSvgItem");
 
