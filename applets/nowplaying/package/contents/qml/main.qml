@@ -52,6 +52,12 @@ QGraphicsWidget {
         }
     }
 
+    function init()
+    {
+        dataSource.service.associateWidget(stop, "stop");
+        dataSource.service.associateWidget(progress, "progress");
+    }
+
     layout: QGraphicsLinearLayout {
 
         Plasma.IconWidget {
@@ -80,10 +86,7 @@ QGraphicsWidget {
         Plasma.IconWidget {
             id: stop
             Component.onCompleted: {
-                print("AAAA"+stop)
-                dataSource.service.associateWidget(stop, "stop");
                 setIcon("media-playback-stop");
-                
             }
             onClicked: {
                 var data = dataSource.service.operationDescription("stop");
@@ -102,9 +105,6 @@ QGraphicsWidget {
             id: progress
             orientation: Qt.Horizontal
 
-            Component.onCompleted: {
-              //  dataSource.service.associateWidget(progress, "progress");
-            }
             onSliderMoved: {
                 var operation = dataSource.service.operationDescription("seek");
                 //FIXME: the line below can't be used because we can't use kconfiggroup
