@@ -52,7 +52,6 @@ extern void setupBindings();
 QScriptValue constructKUrlClass(QScriptEngine *engine);
 void registerSimpleAppletMetaTypes(QScriptEngine *engine);
 void registerNonGuiMetaTypes(QScriptEngine *engine);
-void registerUrlMetaType(QScriptEngine *engine);
 
 QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
     : Plasma::AppletScript(parent),
@@ -254,6 +253,11 @@ void QmlAppletScript::setupObjects()
     }
     global.setProperty("startupArguments", args);
 
+    // Add stuff from KDE libs
+    qScriptRegisterSequenceMetaType<KUrl::List>(m_engine);
+    global.setProperty("Url", constructKUrlClass(m_engine));
+
+    // Add stuff from Plasma
     global.setProperty("Svg", m_engine->newFunction(QmlAppletScript::newPlasmaSvg));
     global.setProperty("FrameSvg", m_engine->newFunction(QmlAppletScript::newPlasmaFrameSvg));
 }
@@ -318,7 +322,6 @@ void QmlAppletScript::setEngine(QScriptValue &val)
     registerSimpleAppletMetaTypes(m_engine);
     qmlRegisterInterface<KUrl>("KUrl");
     qRegisterMetaType<KUrl>("KUrl");
-    registerUrlMetaType(m_engine);
 
     QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "init()");
     expr->evaluate();

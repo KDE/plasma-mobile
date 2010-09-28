@@ -20,7 +20,6 @@
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptContext>
 #include <KUrl>
-#include <KDebug>
 #include "backportglobal.h"
 
 Q_DECLARE_METATYPE(KUrl*)
@@ -115,32 +114,4 @@ QScriptValue constructKUrlClass(QScriptEngine *eng)
     eng->setDefaultPrototype(qMetaTypeId<KUrl>(), proto);
 
     return eng->newFunction(ctor, proto);
-}
-
-//Those are used only for QML
-
-QScriptValue qScriptValueFromKUrl(QScriptEngine *eng, const KUrl &url)
-{
-    QScriptValue obj = eng->newVariant(url);
-    QScriptValue::PropertyFlags getter = QScriptValue::PropertyGetter;
-    QScriptValue::PropertyFlags setter = QScriptValue::PropertySetter;
-
-    obj.setProperty("toString", eng->newFunction(toString), getter);
-    obj.setProperty("protocol", eng->newFunction(protocol), getter | setter);
-    obj.setProperty("host", eng->newFunction(host), getter | setter);
-    obj.setProperty("path", eng->newFunction(path), getter | setter);
-    obj.setProperty("user", eng->newFunction(user), getter | setter);
-    obj.setProperty("password", eng->newFunction(password), getter | setter);
-
-    return obj;
-}
-
-void kUrlFromScriptValue(const QScriptValue& obj, KUrl &url)
-{
-    url = qscriptvalue_cast<KUrl>(obj);
-}
-
-void registerUrlMetaType(QScriptEngine *engine)
-{
-    qScriptRegisterMetaType<KUrl>(engine, qScriptValueFromKUrl, kUrlFromScriptValue, QScriptValue());
 }

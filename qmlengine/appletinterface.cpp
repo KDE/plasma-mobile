@@ -362,13 +362,12 @@ Plasma::Extender *AppletInterface::extender() const
     return m_appletScriptEngine->extender();
 }
 
-bool AppletInterface::openUrl(QScriptValue v)
+bool AppletInterface::openUrl(const KUrl &url)
 {
     if (!m_appletScriptEngine->scriptEnv() || !m_appletScriptEngine->scriptEnv()->hasExtension("launchapp")) {
         return false;
     }
 
-    KUrl url = v.isString() ? KUrl(v.toString()) : qscriptvalue_cast<KUrl>(v);
     if (url.isValid()) {
         return KRun::runUrl(url, KMimeType::findByUrl(url)->name(), 0);
     }

@@ -284,7 +284,7 @@ enum IntervalAlignment {
     Q_INVOKABLE QScriptValue loadAddon(const QString &type, const QString &plugin);
 
     //Built in extensions
-    Q_INVOKABLE bool openUrl(QScriptValue v);
+    Q_INVOKABLE bool openUrl(const KUrl &url);
     Q_INVOKABLE bool runCommand(QScriptValue cmd, QScriptValue args);
     Q_INVOKABLE QScriptValue createOpenFileDialog() const;
 
