@@ -387,53 +387,6 @@ QScriptValue AppletInterface::createOpenFileDialog() const
     return FileDialogProxy::fileDialogOpen(m_appletScriptEngine->scriptEnv()->engine()->currentContext(), m_appletScriptEngine->scriptEnv()->engine());
 }
 
-bool AppletInterface::addEventListener(const QString &event, const QScriptValue &func)
-{
-    if (!m_appletScriptEngine->scriptEnv()) {
-        return false;
-    }
-
-    return m_appletScriptEngine->scriptEnv()->addEventListener(event, func);
-}
-
-bool AppletInterface::removeEventListener(const QString &event, const QScriptValue &func)
-{
-    if (!m_appletScriptEngine->scriptEnv()) {
-        return false;
-    }
-
-    return m_appletScriptEngine->scriptEnv()->removeEventListener(event, func);
-}
-
-bool AppletInterface::hasEventListeners(const QString &event) const
-{
-    if (!m_appletScriptEngine->scriptEnv()) {
-        return false;
-    }
-
-    return m_appletScriptEngine->scriptEnv()->hasEventListeners(event);
-}
-
-
-QScriptValue AppletInterface::listAddons(const QString &type)
-{
-    if (!m_appletScriptEngine->scriptEnv()) {
-        return false;
-    }
-
-    return m_appletScriptEngine->scriptEnv()->listAddons(type);
-}
-
-QScriptValue AppletInterface::loadAddon(const QString &type, const QString &plugin)
-{
-    if (!m_appletScriptEngine->scriptEnv()) {
-        return false;
-    }
-
-    return m_appletScriptEngine->scriptEnv()->loadAddon(type, plugin);
-}
-
-
 void AppletInterface::gc()
 {
     QTimer::singleShot(0, m_appletScriptEngine, SLOT(collectGarbage()));
