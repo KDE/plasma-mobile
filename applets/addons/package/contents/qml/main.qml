@@ -38,7 +38,7 @@ QGraphicsWidget {
         plasmoid.addEventListener('ConfigChanged', configChanged);
         plasmoid.addEventListener("addoncreated", addonCreated)
 
-        var addons = listAddons("org.kde.plasma.javascript-addons-example")
+        var addons = plasmoid.listAddons("org.kde.plasma.javascript-addons-example")
 
         if (addons.length < 1) {
             // uh-oh, something didn't work!
@@ -52,7 +52,8 @@ QGraphicsWidget {
 
     function addonCreated(addon)
     {
-        print("Addon says: " + addon.toString()+addon.svg.imagePath);
+        print("Addon says: " + addon.toString());
+        label.text = addon.toString()
         if (addon.svg) {
             svgWidget.svg = addon.svg
         }
@@ -85,6 +86,7 @@ QGraphicsWidget {
     layout: QGraphicsLinearLayout {
         orientation: Qt.Vertical
         Plasma.Label {
+            id: label
             text: "Testing Javascript addons"
         }
 

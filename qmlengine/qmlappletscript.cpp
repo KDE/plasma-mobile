@@ -20,6 +20,7 @@
 
 #include "qmlappletscript.h"
 #include "appletinterface.h"
+#include "engineaccess.h"
 #include "plasmoid/appletauthorization.h"
 #include "plasmoid/themedsvg.h"
 #include "../bindings/plasmabindings.h"
@@ -89,10 +90,11 @@ bool QmlAppletScript::init()
 
     m_interface = pa ? new PopupAppletInterface(this) : new AppletInterface(this);
 
-    m_qmlWidget->engine()->rootContext()->setContextProperty("plasmoid", m_interface);
+    m_engineAccess = new EngineAccess(this);
+    m_qmlWidget->engine()->rootContext()->setContextProperty("__engineAccess", m_engineAccess);
 
     //Glorious hack:steal the engine
-    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "plasmoid.setEngine(plasmoid)");
+    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "__engineAccess.setEngine(this)");
     expr->evaluate();
     delete expr;
 
@@ -245,6 +247,14 @@ void QmlAppletScript::setupObjects()
 {
     QScriptValue global = m_engine->globalObject();
 
+    m_qmlWidget->engine()->rootContext()->setContextProperty("__engineAccess", 0);
+    m_engineAccess->deleteLater();
+
+    m_self = m_engine->newQObject(m_interface);
+    m_self.setScope(global);
+    global.setProperty("plasmoid", m_self);
+    m_env->addMainObjectProperties(m_self);
+
     QScriptValue args = m_engine->newArray();
     int i = 0;
     foreach (const QVariant &arg, applet()->startupArguments()) {
@@ -308,20 +318,18 @@ void QmlAppletScript::setEngine(QScriptValue &val)
 
     delete m_env;
     m_env = new ScriptEnv(this, m_engine);
-    m_env->addMainObjectProperties(newGlobalObject);
+    //m_env->addMainObjectProperties(newGlobalObject);
 
     setupObjects();
 
     AppletAuthorization auth(this);
-    if (!m_env->importExtensions(description(), newGlobalObject, auth)) {
-       // return;
+    if (!m_env->importExtensions(description(), m_self, auth)) {
+        return;
     }
 
     qScriptRegisterSequenceMetaType<KUrl::List>(m_engine);
     registerNonGuiMetaTypes(m_engine);
     registerSimpleAppletMetaTypes(m_engine);
-    qmlRegisterInterface<KUrl>("KUrl");
-    qRegisterMetaType<KUrl>("KUrl");
 
     QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "init()");
     expr->evaluate();

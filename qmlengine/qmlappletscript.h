@@ -34,6 +34,7 @@ namespace Plasma
 }
 
 class ScriptEnv;
+class EngineAccess;
 
 class QmlAppletScript : public Plasma::AppletScript
 {
@@ -80,7 +81,9 @@ Q_SIGNALS:
 private:
     Plasma::QmlWidget *m_qmlWidget;
     AppletInterface *m_interface;
+    EngineAccess *m_engineAccess;
     QScriptEngine *m_engine;
+    QScriptValue m_self;
     ScriptEnv *m_env;
 };
 

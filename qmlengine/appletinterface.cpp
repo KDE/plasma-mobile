@@ -64,11 +64,6 @@ AppletInterface::~AppletInterface()
 {
 }
 
-void AppletInterface::setEngine(QScriptValue val)
-{
-    m_appletScriptEngine->setEngine(val);
-}
-
 AppletInterface *AppletInterface::extract(QScriptEngine *engine)
 {
     return s_appletInterface;
@@ -362,18 +357,6 @@ Plasma::Extender *AppletInterface::extender() const
     return m_appletScriptEngine->extender();
 }
 
-bool AppletInterface::openUrl(const KUrl &url)
-{
-    if (!m_appletScriptEngine->scriptEnv() || !m_appletScriptEngine->scriptEnv()->hasExtension("launchapp")) {
-        return false;
-    }
-
-    if (url.isValid()) {
-        return KRun::runUrl(url, KMimeType::findByUrl(url)->name(), 0);
-    }
-
-    return false;
-}
 
 bool AppletInterface::runCommand(QScriptValue cmd, QScriptValue args)
 {

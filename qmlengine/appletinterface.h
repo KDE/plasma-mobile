@@ -230,8 +230,6 @@ enum IntervalAlignment {
     AspectRatioMode aspectRatioMode() const;
     void setAspectRatioMode(AspectRatioMode mode);
 
-    Q_INVOKABLE void setEngine(QScriptValue val);
-
     Q_INVOKABLE void setFailedToLaunch(bool failed, const QString &reason = QString());
 
     bool isBusy() const;
@@ -284,7 +282,7 @@ enum IntervalAlignment {
     Q_INVOKABLE QScriptValue loadAddon(const QString &type, const QString &plugin);
 
     //Built in extensions
-    Q_INVOKABLE bool openUrl(const KUrl &url);
+   // Q_INVOKABLE bool openUrl(const KUrl &url);
     Q_INVOKABLE bool runCommand(QScriptValue cmd, QScriptValue args);
     Q_INVOKABLE QScriptValue createOpenFileDialog() const;
 
