@@ -143,6 +143,10 @@ int  PlasmaApp::newInstance()
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(themeChanged()));
     view->applet()->setBackgroundHints(Plasma::Applet::NoBackground);
 
+    //FIXME: hardcoding to MID for now
+    view->applet()->config().writeEntry("layout", "plasmaboard/mid.xml");
+    view->applet()->configChanged();
+
     view->show();
 
     m_view = view;
