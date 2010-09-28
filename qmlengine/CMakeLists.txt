@@ -4,6 +4,8 @@ set(qml_appletscript_SRCS
     engineaccess.cpp
     plasmoid/appletauthorization.cpp
     plasmoid/themedsvg.cpp
+    simplebindings/bytearrayclass.cpp
+    simplebindings/bytearrayprototype.cpp
     simplebindings/dataengine.cpp
     simplebindings/filedialogproxy.cpp
     simplebindings/qscriptbookkeeping.cpp

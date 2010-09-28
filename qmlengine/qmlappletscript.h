@@ -59,6 +59,7 @@ public:
 
     static QScriptValue newPlasmaSvg(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue newPlasmaFrameSvg(QScriptContext *context, QScriptEngine *engine);
+    static QScriptValue newPlasmaExtenderItem(QScriptContext *context, QScriptEngine *engine);
 
 public Q_SLOTS:
     void signalHandlerException(const QScriptValue &exception);

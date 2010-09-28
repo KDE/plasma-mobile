@@ -27,6 +27,7 @@
 #include "../common/qmlwidget.h"
 
 #include "common/scriptenv.h"
+#include "simplebindings/bytearrayclass.h"
 
 #include <QDeclarativeComponent>
 #include <QDeclarativeContext>
@@ -163,6 +164,28 @@ QScriptValue QmlAppletScript::newPlasmaFrameSvg(QScriptContext *context, QScript
     return obj;
 }
 
+QScriptValue QmlAppletScript::newPlasmaExtenderItem(QScriptContext *context, QScriptEngine *engine)
+{
+    Plasma::Extender *extender = 0;
+    if (context->argumentCount() > 0) {
+        extender = qobject_cast<Plasma::Extender *>(context->argument(0).toQObject());
+    }
+
+    if (!extender) {
+        AppletInterface *interface = AppletInterface::extract(engine);
+        if (!interface) {
+            engine->undefinedValue();
+        }
+
+        extender = interface->extender();
+    }
+
+    Plasma::ExtenderItem *extenderItem = new Plasma::ExtenderItem(extender);
+    QScriptValue fun = engine->newQObject(extenderItem);
+    ScriptEnv::registerEnums(fun, *extenderItem->metaObject());
+    return fun;
+}
+
 QGraphicsWidget *QmlAppletScript::extractParent(QScriptContext *context, QScriptEngine *engine,
                                                        int argIndex, bool *parentedToApplet)
 {
@@ -268,6 +291,10 @@ void QmlAppletScript::setupObjects()
     }
     global.setProperty("startupArguments", args);
 
+    //Add stuff from Qt
+    ByteArrayClass *baClass = new ByteArrayClass(m_engine);
+    global.setProperty("ByteArray", baClass->constructor());
+
     // Add stuff from KDE libs
     qScriptRegisterSequenceMetaType<KUrl::List>(m_engine);
     global.setProperty("Url", constructKUrlClass(m_engine));
@@ -275,6 +302,7 @@ void QmlAppletScript::setupObjects()
     // Add stuff from Plasma
     global.setProperty("Svg", m_engine->newFunction(QmlAppletScript::newPlasmaSvg));
     global.setProperty("FrameSvg", m_engine->newFunction(QmlAppletScript::newPlasmaFrameSvg));
+    global.setProperty("ExtenderItem", m_engine->newFunction(QmlAppletScript::newPlasmaExtenderItem));
 }
 
 void QmlAppletScript::setEngine(QScriptValue &val)
