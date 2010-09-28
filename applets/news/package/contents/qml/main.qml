@@ -81,7 +81,7 @@ QGraphicsWidget {
       resources: [
           Component {
               id: simpleText
-              Plasma.FrameSvg {
+              Plasma.FrameSvgItem {
                 id : background
                 imagePath: "widgets/frame"
                 prefix: "plain"
