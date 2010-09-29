@@ -12,7 +12,7 @@ set(qml_appletscript_SRCS
     simplebindings/icon.cpp
     simplebindings/qscriptbookkeeping.cpp
     simplebindings/url.cpp
-    common/scriptenv.cpp
+    common/scriptenvui.cpp
     common/javascriptaddonpackagestructure.cpp
     ../common/qmlwidget.cpp
     )

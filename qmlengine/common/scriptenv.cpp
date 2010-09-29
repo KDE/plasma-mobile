@@ -18,13 +18,11 @@
  */
 
 #include "scriptenv.h"
-#include "qmlappletscript.h"
 
 #include <iostream>
 
 #include <QFile>
 #include <QMetaEnum>
-#include <QScriptClass>
 
 #include <KDebug>
 #include <KDesktopFile>
@@ -39,8 +37,6 @@
 #include <KRun>
 
 #include <Plasma/Package>
-
-#define USEGUI
 
 #ifdef USEGUI
 #include "simplebindings/filedialogproxy.h"
@@ -462,7 +458,6 @@ QScriptValue ScriptEnv::loadAddon(QScriptContext *context, QScriptEngine *engine
     engine->popContext();
 
     ScriptEnv *env = ScriptEnv::findScriptEnv(engine);
-
     if (env && env->checkForErrors(false)) {
         return false;
     }
@@ -487,10 +482,6 @@ QScriptValue ScriptEnv::registerAddon(QScriptContext *context, QScriptEngine *en
                 QScriptValueList args;
                 args << obj;
                 env->callEventListeners("addoncreated", args);
-                if (engine->hasUncaughtException()) {
-                    int line = engine->uncaughtExceptionLineNumber();
-                    kWarning() << "Uncaught exception at line" << line << ":" << engine->uncaughtException().toVariant();
-                }
             }
         }
     }
@@ -635,6 +626,6 @@ bool ScriptEnv::removeEventListener(const QString &event, const QScriptValue &fu
     return found;
 }
 
-
+#ifndef USEGUI
 #include "scriptenv.moc"
-
+#endif
