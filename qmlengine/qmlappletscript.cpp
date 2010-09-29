@@ -372,10 +372,6 @@ void QmlAppletScript::setEngine(QScriptValue &val)
     registerNonGuiMetaTypes(m_engine);
     registerSimpleAppletMetaTypes(m_engine);
 
-    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "init()");
-    expr->evaluate();
-    delete expr;
-
     QTimer::singleShot(0, this, SLOT(configChanged()));
 }
 
