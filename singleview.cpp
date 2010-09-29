@@ -97,7 +97,7 @@ SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment,
 
     m_closeButton->setPos(size().width() - m_closeButton->size().width(), m_applet->pos().y() - m_closeButton->size().height());
 
-    show();
+    hide();
 }
 
 SingleView::~SingleView()

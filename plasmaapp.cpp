@@ -147,7 +147,7 @@ int  PlasmaApp::newInstance()
     view->applet()->config().writeEntry("layout", "plasmaboard/mid.xml");
     view->applet()->configChanged();
 
-    view->show();
+    view->hide();
 
     m_view = view;
 
