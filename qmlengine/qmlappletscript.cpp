@@ -39,7 +39,7 @@
 
 
 #include "qmlappletscript.h"
-#include "appletinterface.h"
+#include "plasmoid/appletinterface.h"
 #include "engineaccess.h"
 #include "plasmoid/appletauthorization.h"
 #include "plasmoid/themedsvg.h"
