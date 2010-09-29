@@ -9,6 +9,7 @@ set(qml_appletscript_SRCS
     simplebindings/dataengine.cpp
     simplebindings/filedialogproxy.cpp
     simplebindings/i18n.cpp
+    simplebindings/icon.cpp
     simplebindings/qscriptbookkeeping.cpp
     simplebindings/url.cpp
     common/scriptenv.cpp

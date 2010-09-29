@@ -27,35 +27,9 @@ QGraphicsWidget {
     preferredSize: "250x600"
     minimumSize: "200x200"
 
-    function init()
-    {
+    Component.onCompleted: {
+        print(plasmoid['addEventListener'])
         plasmoid.addEventListener('ConfigChanged', configChanged);
-        plasmoid.addEventListener("addoncreated", addonCreated)
-
-        var addons = plasmoid.listAddons("org.kde.plasma.javascript-addons-example")
-
-        if (addons.length < 1) {
-            // uh-oh, something didn't work!
-            print("You probably need to run `plasmapkg -t Plasma/JavascriptAddon -i exampleAddon && kbuildsycoca4`")
-        } else {
-            print("number of addons: "+ addons.length)
-
-            print(plasmoid.loadAddon("org.kde.plasma.javascript-addons-example", addons[0].id))
-            for (i in addons) {
-                // an addon has a user visible name and an id; the id is used to load the addon
-                print("Addon: " + addons[i].name)
-                plasmoid.loadAddon(addonType, addons[i].id)
-            }
-        }
-    }
-
-    function addonCreated(addon)
-    {
-        print("Addon says: "+ addon.toString())
-        if (addon.svg) {
-            var svg = new SvgWidget
-            svg.svg = addon.svg
-        }
     }
 
     function configChanged()

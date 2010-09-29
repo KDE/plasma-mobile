@@ -47,7 +47,6 @@ public:
     void setEngine(QScriptValue &val);
 
     QString filePath(const QString &type, const QString &file) const;
-    void configChanged();
 
     void executeAction(const QString &name);
 
@@ -66,6 +65,7 @@ public Q_SLOTS:
     void popupEvent(bool popped);
     void activate();
     void collectGarbage();
+    void configChanged();
 
 protected:
     bool init();

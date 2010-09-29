@@ -18,18 +18,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "qmlappletscript.h"
-#include "appletinterface.h"
-#include "engineaccess.h"
-#include "plasmoid/appletauthorization.h"
-#include "plasmoid/themedsvg.h"
-#include "../bindings/plasmabindings.h"
-#include "../common/qmlwidget.h"
-
-#include "common/scriptenv.h"
-#include "simplebindings/bytearrayclass.h"
-#include "simplebindings/i18n.h"
-
 #include <QDeclarativeComponent>
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
@@ -48,10 +36,25 @@
 #include <Plasma/Package>
 #include <Plasma/PopupApplet>
 
+
+
+#include "qmlappletscript.h"
+#include "appletinterface.h"
+#include "engineaccess.h"
+#include "plasmoid/appletauthorization.h"
+#include "plasmoid/themedsvg.h"
+#include "../bindings/plasmabindings.h"
+#include "../common/qmlwidget.h"
+
+#include "common/scriptenv.h"
+#include "simplebindings/bytearrayclass.h"
+#include "simplebindings/i18n.h"
+
 K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
 
 extern void setupBindings();
 
+QScriptValue constructIconClass(QScriptEngine *engine);
 QScriptValue constructKUrlClass(QScriptEngine *engine);
 void registerSimpleAppletMetaTypes(QScriptEngine *engine);
 void registerNonGuiMetaTypes(QScriptEngine *engine);
@@ -72,6 +75,7 @@ QmlAppletScript::~QmlAppletScript()
 bool QmlAppletScript::init()
 {
     m_qmlWidget = new Plasma::QmlWidget(applet());
+    m_qmlWidget->setInitializationDelayed(true);
     m_qmlWidget->setQmlPath(mainScript());
 
     if (!m_qmlWidget->engine()) {
@@ -297,6 +301,7 @@ void QmlAppletScript::setupObjects()
     //Add stuff from Qt
     ByteArrayClass *baClass = new ByteArrayClass(m_engine);
     global.setProperty("ByteArray", baClass->constructor());
+    global.setProperty("QIcon", constructIconClass(m_engine));
 
     // Add stuff from KDE libs
     qScriptRegisterSequenceMetaType<KUrl::List>(m_engine);
@@ -371,7 +376,7 @@ void QmlAppletScript::setEngine(QScriptValue &val)
     expr->evaluate();
     delete expr;
 
-    configChanged();
+    QTimer::singleShot(0, this, SLOT(configChanged()));
 }
 
 void QmlAppletScript::signalHandlerException(const QScriptValue &exception)

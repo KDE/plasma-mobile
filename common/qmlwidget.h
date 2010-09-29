@@ -49,6 +49,9 @@ public:
     void setQmlPath(const QString &path);
     QString qmlPath() const;
 
+    void setInitializationDelayed(const bool delay);
+    bool isInitializationDelayed() const;
+
     QDeclarativeEngine* engine();
     QObject *rootObject() const;
     QDeclarativeComponent *mainComponent() const;
@@ -64,6 +67,7 @@ private:
     QmlWidgetPrivate * const d;
 
     Q_PRIVATE_SLOT(d, void finishExecute())
+    Q_PRIVATE_SLOT(d, void scheduleExecutionEnd())
 };
 
 } // namespace Plasma

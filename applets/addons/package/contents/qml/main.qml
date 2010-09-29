@@ -33,10 +33,11 @@ QGraphicsWidget {
         }
     }
 
-    function init()
-    {
+    Component.onCompleted: {
         plasmoid.addEventListener('ConfigChanged', configChanged);
         plasmoid.addEventListener("addoncreated", addonCreated)
+
+        print(i18n("Translated message"));
 
         var addons = plasmoid.listAddons("org.kde.plasma.javascript-addons-example")
 
@@ -93,9 +94,10 @@ QGraphicsWidget {
         Plasma.PushButton {
             id: openButton
             text: "Open File"
+            icon: QIcon("document-open")
             onClicked: {
                 print("opening a file?")
-                var dialog = plasmoid.createOpenFileDialog()
+                var dialog = new OpenFileDialog()
                 print(dialog)
                 dialog.accepted.connect(openFileDialogAccepted)
                 dialog.finished.connect(openFileDialogFinished)

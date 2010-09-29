@@ -52,7 +52,7 @@ QGraphicsWidget {
         }
     }
 
-    function init()
+    Component.onCompleted:
     {
         dataSource.service.associateWidget(stop, "stop");
         dataSource.service.associateWidget(progress, "progress");

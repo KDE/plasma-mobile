@@ -1,5 +1,5 @@
 /*
- *   Copyright 2010 Marco Martin <notmart@gmail.com>
+ *   Copyright 2010 Marco Martin <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -26,6 +26,7 @@
 #include <QtDeclarative/QDeclarativeContext>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsScene>
+#include <QTimer>
 
 #include <KDebug>
 
@@ -41,7 +42,8 @@ public:
         : q(parent),
           engine(0),
           component(0),
-          root(0)
+          root(0),
+          delay(false)
     {
     }
 
@@ -52,6 +54,7 @@ public:
     void errorPrint();
     void execute(const QString &fileName);
     void finishExecute();
+    void scheduleExecutionEnd();
 
 
     QmlWidget *q;
@@ -60,6 +63,7 @@ public:
     QDeclarativeEngine* engine;
     QDeclarativeComponent* component;
     QObject *root;
+    bool delay : 1;
 };
 
 void QmlWidgetPrivate::errorPrint()
@@ -93,6 +97,15 @@ void QmlWidgetPrivate::execute(const QString &fileName)
     engine = new QDeclarativeEngine(q);
     component = new QDeclarativeComponent(engine, fileName, q);
 
+    if (delay) {
+        QTimer::singleShot(0, q, SLOT(scheduleExecutionEnd()));
+    } else {
+        scheduleExecutionEnd();
+    }
+}
+
+void QmlWidgetPrivate::scheduleExecutionEnd()
+{
     if (component->isReady() || component->isError()) {
         finishExecute();
     } else {
@@ -168,6 +181,16 @@ void QmlWidget::setQmlPath(const QString &path)
 QString QmlWidget::qmlPath() const
 {
     return d->qmlPath;
+}
+
+void QmlWidget::setInitializationDelayed(const bool delay)
+{
+    d->delay = delay;
+}
+
+bool QmlWidget::isInitializationDelayed() const
+{
+    return d->delay;
 }
 
 QDeclarativeEngine* QmlWidget::engine()
