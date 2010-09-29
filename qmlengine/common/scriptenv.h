@@ -67,12 +67,6 @@ public:
     bool callEventListeners(const QString &event, const QScriptValueList &args = QScriptValueList());
     bool hasEventListeners(const QString &event) const;
 
-    QScriptValue listAddons(const QString &type);
-
-    QScriptValue loadAddon(const QString &type, const QString &plugin);
-
-    bool hasExtension(const QString &ext) const;
-
     QString filePathFromScriptContext(const char *type, const QString &file) const;
 
 Q_SIGNALS:

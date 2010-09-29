@@ -416,25 +416,6 @@ QScriptValue ScriptEnv::listAddons(QScriptContext *context, QScriptEngine *engin
     return addons;
 }
 
-QScriptValue ScriptEnv::listAddons(const QString &type)
-{
-
-    const QString constraint = QString("[X-KDE-PluginInfo-Category] == '%1'").arg(type);
-    KService::List offers = KServiceTypeTrader::self()->query("Plasma/JavascriptAddon", constraint);
-
-    int i = 0;
-    QScriptValue addons = m_engine->newArray(offers.count());
-    foreach (KService::Ptr offer, offers) {
-        KPluginInfo info(offer);
-        QScriptValue v = m_engine->newObject();
-        v.setProperty("id", info.pluginName(), QScriptValue::ReadOnly);
-        v.setProperty("name", info.name(), QScriptValue::ReadOnly);
-        addons.setProperty(i++, v);
-    }
-
-    return addons;
-}
-
 QScriptValue ScriptEnv::loadAddon(QScriptContext *context, QScriptEngine *engine)
 {
     if (context->argumentCount() < 2)  {
@@ -482,53 +463,6 @@ QScriptValue ScriptEnv::loadAddon(QScriptContext *context, QScriptEngine *engine
 
     ScriptEnv *env = ScriptEnv::findScriptEnv(engine);
 
-    if (env && env->checkForErrors(false)) {
-        return false;
-    }
-
-    return true;
-}
-
-QScriptValue ScriptEnv::loadAddon(const QString &type, const QString &plugin)
-{
-    if (type.isEmpty() || plugin.isEmpty()) { 
-        return throwNonFatalError(i18n("loadAddon takes two arguments: addon type and addon name to load"), m_engine->currentContext(), m_engine);
-    }
-
-    const QString constraint = QString("[X-KDE-PluginInfo-Category] == '%1' and [X-KDE-PluginInfo-Name] == '%2'")
-                                      .arg(type, plugin);
-    KService::List offers = KServiceTypeTrader::self()->query("Plasma/JavascriptAddon", constraint);
-
-    if (offers.isEmpty()) {
-        return throwNonFatalError(i18n("Failed to find Addon %1 of type %2", plugin, type), m_engine->currentContext(), m_engine);
-    }
-
-    Plasma::PackageStructure::Ptr structure(new JavascriptAddonPackageStructure);
-    const QString subPath = structure->defaultPackageRoot() + '/' + plugin + '/';
-    const QString path = KStandardDirs::locate("data", subPath);
-    Plasma::Package package(path, structure);
-
-    QFile file(package.filePath("mainscript"));
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return throwNonFatalError(i18n("Failed to open script file for Addon %1: %2", plugin, package.filePath("mainscript")), m_engine->currentContext(), m_engine);
-    }
-
-    QTextStream buffer(&file);
-    QString code(buffer.readAll());
-
-    QScriptContext *innerContext = m_engine->pushContext();
-    innerContext->activationObject().setProperty("registerAddon", m_engine->newFunction(ScriptEnv::registerAddon));
-    QScriptValue v = m_engine->newVariant(QVariant::fromValue(package));
-    innerContext->activationObject().setProperty("__plasma_package", v,
-                                                 QScriptValue::ReadOnly |
-                                                 QScriptValue::Undeletable |
-                                                 QScriptValue::SkipInEnumeration);
-    //kDebug() << "context is" << innerContext;
-
-    m_engine->evaluate(code, file.fileName());
-    m_engine->popContext();
-
-    ScriptEnv *env = ScriptEnv::findScriptEnv(m_engine);
     if (env && env->checkForErrors(false)) {
         return false;
     }
@@ -625,11 +559,6 @@ QScriptValue ScriptEnv::hasExtension(QScriptContext *context, QScriptEngine *eng
     }
 
     return env->m_extensions.contains(context->argument(0).toString().toLower());
-}
-
-bool ScriptEnv::hasExtension(const QString &ext) const
-{
-    return m_extensions.contains(ext);
 }
 
 QScriptValue ScriptEnv::callFunction(QScriptValue &func, const QScriptValueList &args, const QScriptValue &activator)
