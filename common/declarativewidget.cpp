@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "qmlwidget.h"
+#include "declarativewidget.h"
 
 
 #include <QtDeclarative/QDeclarativeComponent>
@@ -35,10 +35,10 @@ namespace Plasma
 
 
 
-class QmlWidgetPrivate
+class DeclarativeWidgetPrivate
 {
 public:
-    QmlWidgetPrivate(QmlWidget *parent)
+    DeclarativeWidgetPrivate(DeclarativeWidget *parent)
         : q(parent),
           engine(0),
           component(0),
@@ -47,7 +47,7 @@ public:
     {
     }
 
-    ~QmlWidgetPrivate()
+    ~DeclarativeWidgetPrivate()
     {
     }
 
@@ -57,7 +57,7 @@ public:
     void scheduleExecutionEnd();
 
 
-    QmlWidget *q;
+    DeclarativeWidget *q;
 
     QString qmlPath;
     QDeclarativeEngine* engine;
@@ -66,7 +66,7 @@ public:
     bool delay : 1;
 };
 
-void QmlWidgetPrivate::errorPrint()
+void DeclarativeWidgetPrivate::errorPrint()
 {
     QString errorStr = "Error loading QML file.\n";
     if(component->isError()){
@@ -79,7 +79,7 @@ void QmlWidgetPrivate::errorPrint()
     kWarning() << component->url().toString() + '\n' + errorStr;
 }
 
-void QmlWidgetPrivate::execute(const QString &fileName)
+void DeclarativeWidgetPrivate::execute(const QString &fileName)
 {
     if (fileName.isEmpty()) {
         kDebug() << "File name empty!";
@@ -104,7 +104,7 @@ void QmlWidgetPrivate::execute(const QString &fileName)
     }
 }
 
-void QmlWidgetPrivate::scheduleExecutionEnd()
+void DeclarativeWidgetPrivate::scheduleExecutionEnd()
 {
     if (component->isReady() || component->isError()) {
         finishExecute();
@@ -113,7 +113,7 @@ void QmlWidgetPrivate::scheduleExecutionEnd()
     }
 }
 
-void QmlWidgetPrivate::finishExecute()
+void DeclarativeWidgetPrivate::finishExecute()
 {
     if (component->isError()) {
         errorPrint();
@@ -160,55 +160,55 @@ void QmlWidgetPrivate::finishExecute()
 
 
 
-QmlWidget::QmlWidget(QGraphicsWidget *parent)
+DeclarativeWidget::DeclarativeWidget(QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
-      d(new QmlWidgetPrivate(this))
+      d(new DeclarativeWidgetPrivate(this))
 {
     setFlag(QGraphicsItem::ItemHasNoContents);
 }
 
-QmlWidget::~QmlWidget()
+DeclarativeWidget::~DeclarativeWidget()
 {
     delete d;
 }
 
-void QmlWidget::setQmlPath(const QString &path)
+void DeclarativeWidget::setQmlPath(const QString &path)
 {
     d->qmlPath = path;
     d->execute(path);
 }
 
-QString QmlWidget::qmlPath() const
+QString DeclarativeWidget::qmlPath() const
 {
     return d->qmlPath;
 }
 
-void QmlWidget::setInitializationDelayed(const bool delay)
+void DeclarativeWidget::setInitializationDelayed(const bool delay)
 {
     d->delay = delay;
 }
 
-bool QmlWidget::isInitializationDelayed() const
+bool DeclarativeWidget::isInitializationDelayed() const
 {
     return d->delay;
 }
 
-QDeclarativeEngine* QmlWidget::engine()
+QDeclarativeEngine* DeclarativeWidget::engine()
 {
     return d->engine;
 }
 
-QObject *QmlWidget::rootObject() const
+QObject *DeclarativeWidget::rootObject() const
 {
     return d->root;
 }
 
-QDeclarativeComponent *QmlWidget::mainComponent() const
+QDeclarativeComponent *DeclarativeWidget::mainComponent() const
 {
     return d->component;
 }
 
-void QmlWidget::resizeEvent(QGraphicsSceneResizeEvent *event)
+void DeclarativeWidget::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     QGraphicsWidget::resizeEvent(event);
 
@@ -221,5 +221,5 @@ void QmlWidget::resizeEvent(QGraphicsSceneResizeEvent *event)
 
 } // namespace Plasma
 
-#include <qmlwidget.moc>
+#include <declarativewidget.moc>
 

@@ -44,7 +44,7 @@
 #include "plasmoid/appletauthorization.h"
 #include "plasmoid/themedsvg.h"
 #include "../bindings/plasmabindings.h"
-#include "../common/qmlwidget.h"
+#include "../common/declarativewidget.h"
 
 #include "common/scriptenv.h"
 #include "simplebindings/bytearrayclass.h"
@@ -74,11 +74,11 @@ QmlAppletScript::~QmlAppletScript()
 
 bool QmlAppletScript::init()
 {
-    m_qmlWidget = new Plasma::QmlWidget(applet());
-    m_qmlWidget->setInitializationDelayed(true);
-    m_qmlWidget->setQmlPath(mainScript());
+    m_declarativeWidget = new Plasma::DeclarativeWidget(applet());
+    m_declarativeWidget->setInitializationDelayed(true);
+    m_declarativeWidget->setQmlPath(mainScript());
 
-    if (!m_qmlWidget->engine()) {
+    if (!m_declarativeWidget->engine()) {
         return false;
     }
 
@@ -87,20 +87,20 @@ bool QmlAppletScript::init()
 
     if (pa) {
         pa->setPopupIcon(a->icon());
-        pa->setGraphicsWidget(m_qmlWidget);
+        pa->setGraphicsWidget(m_declarativeWidget);
     } else {
         QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(a);
         lay->setContentsMargins(0, 0, 0, 0);
-        lay->addItem(m_qmlWidget);
+        lay->addItem(m_declarativeWidget);
     }
 
     m_interface = pa ? new PopupAppletInterface(this) : new AppletInterface(this);
 
     m_engineAccess = new EngineAccess(this);
-    m_qmlWidget->engine()->rootContext()->setContextProperty("__engineAccess", m_engineAccess);
+    m_declarativeWidget->engine()->rootContext()->setContextProperty("__engineAccess", m_engineAccess);
 
     //Glorious hack:steal the engine
-    QDeclarativeExpression *expr = new QDeclarativeExpression(m_qmlWidget->engine()->rootContext(), m_qmlWidget->rootObject(), "__engineAccess.setEngine(this)");
+    QDeclarativeExpression *expr = new QDeclarativeExpression(m_declarativeWidget->engine()->rootContext(), m_declarativeWidget->rootObject(), "__engineAccess.setEngine(this)");
     expr->evaluate();
     delete expr;
 
@@ -280,7 +280,7 @@ void QmlAppletScript::setupObjects()
 {
     QScriptValue global = m_engine->globalObject();
 
-    m_qmlWidget->engine()->rootContext()->setContextProperty("__engineAccess", 0);
+    m_declarativeWidget->engine()->rootContext()->setContextProperty("__engineAccess", 0);
     m_engineAccess->deleteLater();
 
     m_self = m_engine->newQObject(m_interface);

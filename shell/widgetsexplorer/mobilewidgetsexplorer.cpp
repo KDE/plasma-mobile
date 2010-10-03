@@ -20,7 +20,7 @@
 
 //own
 #include "mobilewidgetsexplorer.h"
-#include "../../common/qmlwidget.h"
+#include "../../common/declarativewidget.h"
 #include "plasmaappletitemmodel_p.h"
 
 //Qt
@@ -45,22 +45,22 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
 {
     setContentsMargins(0, 0, 0, 0);
 
-    m_qmlWidget = new Plasma::QmlWidget(this);
+    m_declarativeWidget = new Plasma::DeclarativeWidget(this);
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
     lay->setContentsMargins(0, 0, 0, 0);
-    lay->addItem(m_qmlWidget);
+    lay->addItem(m_declarativeWidget);
 
     m_appletsModel = new PlasmaAppletItemModel(this);
     m_appletsModel->setApplication(QString());
 
-    m_qmlWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/mobilewidgetsexplorer/view.qml"));
+    m_declarativeWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/mobilewidgetsexplorer/view.qml"));
 
-    if (m_qmlWidget->engine()) {
-        QDeclarativeContext *ctxt = m_qmlWidget->engine()->rootContext();
+    if (m_declarativeWidget->engine()) {
+        QDeclarativeContext *ctxt = m_declarativeWidget->engine()->rootContext();
         if (ctxt) {
             ctxt->setContextProperty("myModel", m_appletsModel);
         }
-        QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_qmlWidget->rootObject());
+        QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_declarativeWidget->rootObject());
         if (item) {
             m_view = item->findChild<QDeclarativeItem*>("appletsView");
 

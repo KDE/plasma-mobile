@@ -32,7 +32,7 @@ class KRunnerModel;
 
 namespace Plasma
 {
-    class QmlWidget;
+    class DeclarativeWidget;
 }
 
 class MobileLauncher : public Plasma::Containment
@@ -50,7 +50,7 @@ protected Q_SLOTS:
     void itemActivated();
 
 private:
-    Plasma::QmlWidget *m_qmlWidget;
+    Plasma::DeclarativeWidget *m_declarativeWidget;
     QDeclarativeItem *m_view;
     QTimer *m_queryTimer;
 

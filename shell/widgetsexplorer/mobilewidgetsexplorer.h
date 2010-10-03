@@ -29,7 +29,7 @@ class PlasmaAppletItemModel;
 namespace Plasma
 {
     class Containment;
-    class QmlWidget;
+    class DeclarativeWidget;
 }
 
 class MobileWidgetsExplorer : public QGraphicsWidget
@@ -49,7 +49,7 @@ protected Q_SLOTS:
 private:
     Plasma::Containment *m_containment;
     QDeclarativeItem *m_view;
-    Plasma::QmlWidget *m_qmlWidget;
+    Plasma::DeclarativeWidget *m_declarativeWidget;
 
     PlasmaAppletItemModel *m_appletsModel;
 };

@@ -14,7 +14,7 @@ set(qml_appletscript_SRCS
     simplebindings/url.cpp
     common/scriptenvui.cpp
     common/javascriptaddonpackagestructure.cpp
-    ../common/qmlwidget.cpp
+    ../common/declarativewidget.cpp
     )
 
 set(qml_package_SRCS

@@ -41,7 +41,7 @@
 #include "mobview.h"
 #include <plasma/containmentactionspluginsconfig.h>
 
-#include "../common/qmlwidget.h"
+#include "../common/declarativewidget.h"
 
 MobCorona::MobCorona(QObject *parent)
     : Plasma::Corona(parent)

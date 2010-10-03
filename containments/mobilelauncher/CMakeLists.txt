@@ -6,7 +6,7 @@ set(mobile_launcher_SRCS
     models/krunnermodel.cpp
     models/standarditemfactory.cpp
     resultwidget.cpp
-    ../../common/qmlwidget.cpp
+    ../../common/declarativewidget.cpp
     )
 
 kde4_add_plugin(plasma_containment_mobilelauncher ${mobile_launcher_SRCS})

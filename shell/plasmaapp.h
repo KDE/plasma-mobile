@@ -43,7 +43,7 @@ namespace Plasma
     class Applet;
     class Containment;
     class Corona;
-    class QmlWidget;
+    class DeclarativeWidget;
 } // namespace Plasma
 
 class PlasmaApp : public KUniqueApplication
@@ -94,7 +94,7 @@ private:
 
     QDeclarativeComponent *m_homescreen;
 
-    Plasma::QmlWidget *m_qmlWidget;
+    Plasma::DeclarativeWidget *m_declarativeWidget;
 
     QDeclarativeItem *m_mainSlot;
     QDeclarativeItem *m_spareSlot;

@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef PLASMA_QmlWIDGET_H
-#define PLASMA_QmlWIDGET_H
+#ifndef PLASMA_DECLARATIVEWIDGET_H
+#define PLASMA_DECLARATIVEWIDGET_H
 
 #include <QtGui/QGraphicsWidget>
 
@@ -29,22 +29,22 @@ class QDeclarativeComponent;
 namespace Plasma
 {
 
-class QmlWidgetPrivate;
+class DeclarativeWidgetPrivate;
 
 
-class QmlWidget : public QGraphicsWidget
+class DeclarativeWidget : public QGraphicsWidget
 {
     Q_OBJECT
 
 public:
 
     /**
-     * Constructs a new QmlWidget
+     * Constructs a new DeclarativeWidget
      *
      * @arg parent the parent of this widget
      */
-    explicit QmlWidget(QGraphicsWidget *parent = 0);
-    ~QmlWidget();
+    explicit DeclarativeWidget(QGraphicsWidget *parent = 0);
+    ~DeclarativeWidget();
 
     void setQmlPath(const QString &path);
     QString qmlPath() const;
@@ -63,8 +63,8 @@ Q_SIGNALS:
     void finished();
 
 private:
-    friend class QmlWidgetPrivate;
-    QmlWidgetPrivate * const d;
+    friend class DeclarativeWidgetPrivate;
+    DeclarativeWidgetPrivate * const d;
 
     Q_PRIVATE_SLOT(d, void finishExecute())
     Q_PRIVATE_SLOT(d, void scheduleExecutionEnd())

@@ -13,7 +13,7 @@ set(plasma-mobile_SRCS
     plasmaapp.cpp
     mobdialogmanager.cpp
     inputcontext.cpp
-    ../common/qmlwidget.cpp
+    ../common/declarativewidget.cpp
     
     widgetsexplorer/mobilewidgetsexplorer.cpp
     widgetsexplorer/kcategorizeditemsviewmodels.cpp

@@ -24,7 +24,7 @@
 
 #include "mobview.h"
 #include "mobcorona.h"
-#include "../common/qmlwidget.h"
+#include "../common/declarativewidget.h"
 #include "widgetsexplorer/mobilewidgetsexplorer.h"
 
 #include <unistd.h>
@@ -218,18 +218,18 @@ void PlasmaApp::syncConfig()
 
 void PlasmaApp::setupHomeScreen()
 {
-    m_qmlWidget = new Plasma::QmlWidget();
-    m_corona->addItem(m_qmlWidget);
+    m_declarativeWidget = new Plasma::DeclarativeWidget();
+    m_corona->addItem(m_declarativeWidget);
 
-    m_qmlWidget->setQmlPath(KStandardDirs::locate("appdata", QString(m_homeScreenPath).append("/HomeScreen.qml")));
+    m_declarativeWidget->setQmlPath(KStandardDirs::locate("appdata", QString(m_homeScreenPath).append("/HomeScreen.qml")));
 
-    if (!m_qmlWidget->engine()) {
+    if (!m_declarativeWidget->engine()) {
         QCoreApplication::quit();
     }
 
-    m_homescreen = m_qmlWidget->mainComponent();
+    m_homescreen = m_declarativeWidget->mainComponent();
 
-    QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(m_qmlWidget->rootObject());
+    QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
 
     mainViewGeometryChanged();
 
@@ -551,11 +551,11 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
 void PlasmaApp::mainViewGeometryChanged()
 {
-    if (m_qmlWidget) {
+    if (m_declarativeWidget) {
         m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->transformedSize()));
-        m_qmlWidget->resize(m_mainView->transformedSize());
-        //m_qmlWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
-        m_qmlWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
+        m_declarativeWidget->resize(m_mainView->transformedSize());
+        //m_declarativeWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
+        m_declarativeWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
         if (m_currentContainment) {
             m_currentContainment->resize(m_mainView->transformedSize());
         }
@@ -567,7 +567,7 @@ void PlasmaApp::mainViewGeometryChanged()
             m_alternateContainment->setPos(0, 0);
         }
         if (m_widgetsExplorer) {
-            m_widgetsExplorer.data()->setGeometry(m_qmlWidget->geometry());
+            m_widgetsExplorer.data()->setGeometry(m_declarativeWidget->geometry());
         }
     }
 }
@@ -581,8 +581,8 @@ void PlasmaApp::showWidgetsExplorer()
     }
 
     m_widgetsExplorer.data()->setContainment(m_currentContainment);
-    if (m_qmlWidget) {
-        m_widgetsExplorer.data()->setGeometry(m_qmlWidget->geometry());
+    if (m_declarativeWidget) {
+        m_widgetsExplorer.data()->setGeometry(m_declarativeWidget->geometry());
     }
     m_widgetsExplorer.data()->show();
 }

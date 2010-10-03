@@ -30,7 +30,7 @@ class AppletInterface;
 
 namespace Plasma
 {
-    class QmlWidget;
+    class DeclarativeWidget;
 }
 
 class ScriptEnv;
@@ -81,7 +81,7 @@ Q_SIGNALS:
     void contextChanged();
 
 private:
-    Plasma::QmlWidget *m_qmlWidget;
+    Plasma::DeclarativeWidget *m_declarativeWidget;
     AppletInterface *m_interface;
     EngineAccess *m_engineAccess;
     QScriptEngine *m_engine;
