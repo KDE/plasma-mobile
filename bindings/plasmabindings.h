@@ -39,13 +39,13 @@
 #include <plasma/animator.h>
 #include <plasma/framesvg.h>
 
-#include "private/declarativetabbar_p.h"
-#include "private/gridlayout.h"
-#include "private/theme_p.h"
-#include "private/linearlayout.h"
-#include "private/datasource_p.h"
-#include "private/declarativesvg_p.h"
-#include "private/declarativeframesvg_p.h"
+#include "private/declarative/declarativetabbar_p.h"
+#include "private/declarative/gridlayout.h"
+#include "private/declarative/theme_p.h"
+#include "private/declarative/linearlayout.h"
+#include "private/declarative/datasource_p.h"
+#include "private/declarative/declarativesvg_p.h"
+#include "private/declarative/declarativeframesvg_p.h"
 #include "phone/phone.h"
 #include "plasma/service.h"
 

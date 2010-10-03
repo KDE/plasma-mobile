@@ -1,6 +1,6 @@
  
 
-#include "private/declarativetabbar_p.h"
+#include "private/declarative/declarativetabbar_p.h"
 
 TabBarAttached::TabBarAttached(QObject *parent)
     : QObject(parent)

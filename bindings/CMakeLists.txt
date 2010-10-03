@@ -5,14 +5,14 @@ include(KDE4Defaults)
 set(bindings_SRCS
     plasmabindings.cpp
     phone/phone.cpp
-    private/declarativetabbar.cpp
-    private/gridlayout.cpp
-    private/linearlayout.cpp
-    private/dataengineconsumer.cpp
-    private/theme.cpp
-    private/datasource.cpp
-    private/declarativesvg.cpp
-    private/declarativeframesvg.cpp
+    private/declarative/declarativetabbar.cpp
+    private/declarative/gridlayout.cpp
+    private/declarative/linearlayout.cpp
+    private/declarative/dataengineconsumer.cpp
+    private/declarative/theme.cpp
+    private/declarative/datasource.cpp
+    private/declarative/declarativesvg.cpp
+    private/declarative/declarativeframesvg.cpp
     )
 
 INCLUDE_DIRECTORIES(
