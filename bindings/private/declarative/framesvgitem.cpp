@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "declarativeframesvg_p.h"
+#include "framesvgitem_p.h"
 
 #include <QtGui/QPainter>
 
@@ -27,76 +27,76 @@
 namespace Plasma
 {
 
-DeclarativeFrameSvgMargins::DeclarativeFrameSvgMargins(Plasma::FrameSvg *frameSvg, QObject *parent)
+FrameSvgItemMargins::FrameSvgItemMargins(Plasma::FrameSvg *frameSvg, QObject *parent)
     : QObject(parent),
       m_frameSvg(frameSvg)
 {
     connect(m_frameSvg, SIGNAL(repaintNeeded()), this, SIGNAL(marginsChanged()));
 }
 
-qreal DeclarativeFrameSvgMargins::left() const
+qreal FrameSvgItemMargins::left() const
 {
     return m_frameSvg->marginSize(LeftMargin);
 }
 
-qreal DeclarativeFrameSvgMargins::top() const
+qreal FrameSvgItemMargins::top() const
 {
     return m_frameSvg->marginSize(TopMargin);
 }
 
-qreal DeclarativeFrameSvgMargins::right() const
+qreal FrameSvgItemMargins::right() const
 {
     return m_frameSvg->marginSize(RightMargin);
 }
 
-qreal DeclarativeFrameSvgMargins::bottom() const
+qreal FrameSvgItemMargins::bottom() const
 {
     return m_frameSvg->marginSize(BottomMargin);
 }
 
-DeclarativeFrameSvg::DeclarativeFrameSvg(QDeclarativeItem *parent)
+FrameSvgItem::FrameSvgItem(QDeclarativeItem *parent)
     : QDeclarativeItem(parent)
 {
     m_frameSvg = new Plasma::FrameSvg(this);
-    m_margins = new DeclarativeFrameSvgMargins(m_frameSvg, this);
+    m_margins = new FrameSvgItemMargins(m_frameSvg, this);
     setFlag(QGraphicsItem::ItemHasNoContents, false);
     connect(m_frameSvg, SIGNAL(repaintNeeded()), this, SLOT(doUpdate()));
 }
 
 
-DeclarativeFrameSvg::~DeclarativeFrameSvg()
+FrameSvgItem::~FrameSvgItem()
 {
 }
 
-void DeclarativeFrameSvg::setImagePath(const QString &path)
+void FrameSvgItem::setImagePath(const QString &path)
 {
     m_frameSvg->setImagePath(path);
     update();
 }
 
-QString DeclarativeFrameSvg::imagePath() const
+QString FrameSvgItem::imagePath() const
 {
     return m_frameSvg->imagePath();
 }
 
 
-void DeclarativeFrameSvg::setPrefix(const QString &prefix)
+void FrameSvgItem::setPrefix(const QString &prefix)
 {
     m_frameSvg->setElementPrefix(prefix);
     update();
 }
 
-QString DeclarativeFrameSvg::prefix() const
+QString FrameSvgItem::prefix() const
 {
     return m_frameSvg->prefix();
 }
 
-DeclarativeFrameSvgMargins *DeclarativeFrameSvg::margins() const
+FrameSvgItemMargins *FrameSvgItem::margins() const
 {
     return m_margins;
 }
 
-void DeclarativeFrameSvg::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void FrameSvgItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);
@@ -104,18 +104,18 @@ void DeclarativeFrameSvg::paint(QPainter *painter, const QStyleOptionGraphicsIte
     m_frameSvg->paintFrame(painter);
 }
 
-void DeclarativeFrameSvg::geometryChanged(const QRectF &newGeometry,
+void FrameSvgItem::geometryChanged(const QRectF &newGeometry,
                                           const QRectF &oldGeometry)
 {
     m_frameSvg->resizeFrame(newGeometry.size());
     QDeclarativeItem::geometryChanged(newGeometry, oldGeometry);
 }
 
-void DeclarativeFrameSvg::doUpdate()
+void FrameSvgItem::doUpdate()
 {
     update();
 }
 
 } // Plasma namespace
 
-#include "declarativeframesvg_p.moc"
+#include "framesvgitem_p.moc"

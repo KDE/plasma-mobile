@@ -16,8 +16,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
-#ifndef DECLARATIVESVG_P
-#define DECLARATIVESVG_P
+#ifndef SVGITEM_P
+#define SVGITEM_P
 
 #include <QDeclarativeItem>
 
@@ -25,7 +25,7 @@ namespace Plasma {
 
     class Svg;
 
-class DeclarativeSvg : public QDeclarativeItem
+class SvgItem : public QDeclarativeItem
 {
     Q_OBJECT
 
@@ -33,8 +33,8 @@ class DeclarativeSvg : public QDeclarativeItem
     Q_PROPERTY(QString elementId READ elementId WRITE setElementId)
 
 public:
-    DeclarativeSvg(QDeclarativeItem *parent=0);
-    ~DeclarativeSvg();
+    SvgItem(QDeclarativeItem *parent=0);
+    ~SvgItem();
 
     void setImagePath(const QString &path);
     QString imagePath() const;

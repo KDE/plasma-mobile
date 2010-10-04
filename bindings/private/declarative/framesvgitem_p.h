@@ -16,8 +16,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
-#ifndef DECLARATIVEFRAMESVG_P
-#define DECLARATIVEFRAMESVG_P
+#ifndef FRAMESVGITEM_P
+#define FRAMESVGITEM_P
 
 #include <QDeclarativeItem>
 
@@ -25,7 +25,7 @@ namespace Plasma {
 
     class FrameSvg;
 
-class DeclarativeFrameSvgMargins : public QObject
+class FrameSvgItemMargins : public QObject
 {
     Q_OBJECT
 
@@ -35,7 +35,7 @@ class DeclarativeFrameSvgMargins : public QObject
     Q_PROPERTY(qreal bottom READ bottom NOTIFY marginsChanged)
 
 public:
-    DeclarativeFrameSvgMargins(Plasma::FrameSvg *frameSvg, QObject *parent = 0);
+    FrameSvgItemMargins(Plasma::FrameSvg *frameSvg, QObject *parent = 0);
 
     qreal left() const;
     qreal top() const;
@@ -49,7 +49,7 @@ private:
     FrameSvg *m_frameSvg;
 };
 
-class DeclarativeFrameSvg : public QDeclarativeItem
+class FrameSvgItem : public QDeclarativeItem
 {
     Q_OBJECT
 
@@ -58,8 +58,8 @@ class DeclarativeFrameSvg : public QDeclarativeItem
     Q_PROPERTY(QObject *margins READ margins CONSTANT)
 
 public:
-    DeclarativeFrameSvg(QDeclarativeItem *parent=0);
-    ~DeclarativeFrameSvg();
+    FrameSvgItem(QDeclarativeItem *parent=0);
+    ~FrameSvgItem();
 
     void setImagePath(const QString &path);
     QString imagePath() const;
@@ -67,7 +67,7 @@ public:
     void setPrefix(const QString &prefix);
     QString prefix() const;
 
-    DeclarativeFrameSvgMargins *margins() const;
+    FrameSvgItemMargins *margins() const;
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
@@ -79,7 +79,7 @@ private Q_SLOTS:
 
 private:
     Plasma::FrameSvg *m_frameSvg;
-    DeclarativeFrameSvgMargins *m_margins;
+    FrameSvgItemMargins *m_margins;
 };
 
 }

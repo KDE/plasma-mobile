@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "declarativesvg_p.h"
+#include "svgitem_p.h"
 
 #include <QtGui/QPainter>
 
@@ -27,7 +27,7 @@
 namespace Plasma
 {
 
-DeclarativeSvg::DeclarativeSvg(QDeclarativeItem *parent)
+SvgItem::SvgItem(QDeclarativeItem *parent)
     : QDeclarativeItem(parent)
 {
     m_svg = new Plasma::Svg(this);
@@ -36,23 +36,23 @@ DeclarativeSvg::DeclarativeSvg(QDeclarativeItem *parent)
 }
 
 
-DeclarativeSvg::~DeclarativeSvg()
+SvgItem::~SvgItem()
 {
 }
 
-void DeclarativeSvg::setImagePath(const QString &path)
+void SvgItem::setImagePath(const QString &path)
 {
     m_svg->setImagePath(path);
     update();
 }
 
-QString DeclarativeSvg::imagePath() const
+QString SvgItem::imagePath() const
 {
     return m_svg->imagePath();
 }
 
 
-void DeclarativeSvg::setElementId(const QString &elementID)
+void SvgItem::setElementId(const QString &elementID)
 {
     m_svg->setContainsMultipleImages(!elementID.isNull());
 
@@ -60,12 +60,12 @@ void DeclarativeSvg::setElementId(const QString &elementID)
     update();
 }
 
-QString DeclarativeSvg::elementId() const
+QString SvgItem::elementId() const
 {
     return m_elementID;
 }
 
-void DeclarativeSvg::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void SvgItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);
@@ -75,4 +75,4 @@ void DeclarativeSvg::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
 } // Plasma namespace
 
-#include "declarativesvg_p.moc"
+#include "svgitem_p.moc"

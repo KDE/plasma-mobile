@@ -11,8 +11,8 @@ set(bindings_SRCS
     private/declarative/dataengineconsumer.cpp
     private/declarative/theme.cpp
     private/declarative/datasource.cpp
-    private/declarative/declarativesvg.cpp
-    private/declarative/declarativeframesvg.cpp
+    private/declarative/svgitem.cpp
+    private/declarative/framesvgitem.cpp
     )
 
 INCLUDE_DIRECTORIES(
