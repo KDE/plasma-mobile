@@ -227,21 +227,21 @@ enum IntervalAlignment {
     QString currentActivity() const;
     bool shouldConserveResources() const;
 
-    AspectRatioMode aspectRatioMode() const;
-    void setAspectRatioMode(AspectRatioMode mode);
+    Q_INVOKABLE AspectRatioMode aspectRatioMode() const;
+    Q_INVOKABLE void setAspectRatioMode(AspectRatioMode mode);
 
     Q_INVOKABLE void setFailedToLaunch(bool failed, const QString &reason = QString());
 
-    bool isBusy() const;
-    void setBusy(bool busy);
+    Q_INVOKABLE bool isBusy() const;
+    Q_INVOKABLE void setBusy(bool busy);
 
-    BackgroundHints backgroundHints() const;
-    void setBackgroundHints(BackgroundHints hint);
+    Q_INVOKABLE BackgroundHints backgroundHints() const;
+    Q_INVOKABLE void setBackgroundHints(BackgroundHints hint);
 
     Q_INVOKABLE void setConfigurationRequired(bool needsConfiguring, const QString &reason = QString());
 
-    QSizeF size() const;
-    QRectF rect() const;
+    Q_INVOKABLE QSizeF size() const;
+    Q_INVOKABLE QRectF rect() const;
 
     Q_INVOKABLE void setAction(const QString &name, const QString &text,
                                const QString &icon = QString(), const QString &shortcut = QString());

@@ -20,8 +20,6 @@
  */
 
 #include "appletinterface.h"
-#include "scriptenv.h"
-#include "simplebindings/filedialogproxy.h"
 
 #include <QAction>
 #include <QFile>
@@ -30,10 +28,6 @@
 #include <QTimer>
 
 #include <KIcon>
-#include <KRun>
-#include <KStandardDirs>
-#include <KShell>
-#include <KMimeType>
 #include <KService>
 #include <KServiceTypeTrader>
 
@@ -41,7 +35,6 @@
 #include <Plasma/Applet>
 #include <Plasma/Context>
 #include <Plasma/Package>
-
 
 Q_DECLARE_METATYPE(AppletInterface*)
 
