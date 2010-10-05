@@ -7,6 +7,7 @@ set(qml_appletscript_SRCS
     simplebindings/bytearrayclass.cpp
     simplebindings/bytearrayprototype.cpp
     simplebindings/dataengine.cpp
+    simplebindings/dataenginereceiver.cpp
     simplebindings/filedialogproxy.cpp
     simplebindings/i18n.cpp
     simplebindings/icon.cpp

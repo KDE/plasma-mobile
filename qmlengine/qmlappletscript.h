@@ -25,6 +25,7 @@
 #include <QScriptContext>
 
 #include <Plasma/AppletScript>
+#include <Plasma/DataEngine>
 
 class AppletInterface;
 
@@ -60,8 +61,11 @@ public:
     static QScriptValue newPlasmaSvg(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue newPlasmaFrameSvg(QScriptContext *context, QScriptEngine *engine);
     static QScriptValue newPlasmaExtenderItem(QScriptContext *context, QScriptEngine *engine);
+    static QScriptValue dataEngine(QScriptContext *context, QScriptEngine *engine);
+    static QScriptValue service(QScriptContext *context, QScriptEngine *engine);
 
 public Q_SLOTS:
+    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
     void signalHandlerException(const QScriptValue &exception);
     void popupEvent(bool popped);
     void activate();

@@ -48,6 +48,7 @@
 
 #include "common/scriptenv.h"
 #include "simplebindings/bytearrayclass.h"
+#include "simplebindings/dataenginereceiver.h"
 #include "simplebindings/i18n.h"
 
 K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
@@ -252,6 +253,14 @@ void QmlAppletScript::popupEvent(bool popped)
     m_env->callEventListeners("popupEvent", args);
 }
 
+void QmlAppletScript::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
+{
+    QScriptValueList args;
+    args << m_engine->toScriptValue(name) << m_engine->toScriptValue(data);
+
+    m_env->callEventListeners("dataUpdated", args);
+}
+
 void QmlAppletScript::extenderItemRestored(Plasma::ExtenderItem* item)
 {
     if (!m_env) {
@@ -314,6 +323,8 @@ void QmlAppletScript::setupObjects()
     global.setProperty("startupArguments", args);
 
     bindI18N(m_engine);
+    global.setProperty("dataEngine", m_engine->newFunction(QmlAppletScript::dataEngine));
+    global.setProperty("service", m_engine->newFunction(QmlAppletScript::service));
 
     //Add stuff from Qt
     ByteArrayClass *baClass = new ByteArrayClass(m_engine);
@@ -328,6 +339,45 @@ void QmlAppletScript::setupObjects()
     global.setProperty("Svg", m_engine->newFunction(QmlAppletScript::newPlasmaSvg));
     global.setProperty("FrameSvg", m_engine->newFunction(QmlAppletScript::newPlasmaFrameSvg));
     global.setProperty("ExtenderItem", m_engine->newFunction(QmlAppletScript::newPlasmaExtenderItem));
+}
+
+QScriptValue QmlAppletScript::dataEngine(QScriptContext *context, QScriptEngine *engine)
+{
+    if (context->argumentCount() != 1) {
+        return context->throwError(i18n("dataEngine() takes one argument"));
+    }
+
+    AppletInterface *interface = AppletInterface::extract(engine);
+    if (!interface) {
+        return context->throwError(i18n("Could not extract the Applet"));
+    }
+
+    const QString dataEngineName = context->argument(0).toString();
+    Plasma::DataEngine *dataEngine = interface->dataEngine(dataEngineName);
+    QScriptValue v = engine->newQObject(dataEngine, QScriptEngine::QtOwnership, QScriptEngine::PreferExistingWrapperObject);
+    v.setProperty("connectSource", engine->newFunction(DataEngineReceiver::connectSource));
+    v.setProperty("disconnectSource", engine->newFunction(DataEngineReceiver::disconnectSource));
+    return v;
+}
+
+QScriptValue QmlAppletScript::service(QScriptContext *context, QScriptEngine *engine)
+{
+    if (context->argumentCount() != 2) {
+        return context->throwError(i18n("service() takes two arguments"));
+    }
+
+    QString dataEngine = context->argument(0).toString();
+
+    AppletInterface *interface = AppletInterface::extract(engine);
+    if (!interface) {
+        return context->throwError(i18n("Could not extract the Applet"));
+    }
+
+    Plasma::DataEngine *data = interface->dataEngine(dataEngine);
+    QString source = context->argument(1).toString();
+    Plasma::Service *service = data->serviceForSource(source);
+    //kDebug( )<< "lets try to get" << source << "from" << dataEngine;
+    return engine->newQObject(service, QScriptEngine::AutoOwnership);
 }
 
 void QmlAppletScript::setEngine(QScriptValue &val)
