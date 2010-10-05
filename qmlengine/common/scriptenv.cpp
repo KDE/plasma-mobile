@@ -579,11 +579,11 @@ bool ScriptEnv::hasEventListeners(const QString &event) const
 
 bool ScriptEnv::callEventListeners(const QString &event, const QScriptValueList &args)
 {
-    if (!m_eventListeners.contains(event)) {
+    if (!m_eventListeners.contains(event.toLower())) {
         return false;
     }
 
-    QScriptValueList funcs = m_eventListeners.value(event);
+    QScriptValueList funcs = m_eventListeners.value(event.toLower());
     QMutableListIterator<QScriptValue> it(funcs);
     while (it.hasNext()) {
         callFunction(it.next(), args);

@@ -26,16 +26,16 @@
 #include <QScriptValueIterator>
 #include <QScriptEngine>
 
-#include <KGlobalSettings>
 #include <KConfigGroup>
 #include <KDebug>
+#include <KGlobalSettings>
 
 #include <Plasma/Applet>
-#include <Plasma/Svg>
+#include <Plasma/ExtenderItem>
 #include <Plasma/FrameSvg>
 #include <Plasma/Package>
 #include <Plasma/PopupApplet>
-
+#include <Plasma/Svg>
 
 
 #include "qmlappletscript.h"
@@ -98,6 +98,11 @@ bool QmlAppletScript::init()
 
     m_engineAccess = new EngineAccess(this);
     m_declarativeWidget->engine()->rootContext()->setContextProperty("__engineAccess", m_engineAccess);
+
+    connect(applet(), SIGNAL(extenderItemRestored(Plasma::ExtenderItem*)),
+            this, SLOT(extenderItemRestored(Plasma::ExtenderItem*)));
+    connect(applet(), SIGNAL(activate()),
+            this, SLOT(activate()));
 
     //Glorious hack:steal the engine
     QDeclarativeExpression *expr = new QDeclarativeExpression(m_declarativeWidget->engine()->rootContext(), m_declarativeWidget->rootObject(), "__engineAccess.setEngine(this)");
@@ -245,6 +250,18 @@ void QmlAppletScript::popupEvent(bool popped)
     args << popped;
 
     m_env->callEventListeners("popupEvent", args);
+}
+
+void QmlAppletScript::extenderItemRestored(Plasma::ExtenderItem* item)
+{
+    if (!m_env) {
+        return;
+    }
+
+    QScriptValueList args;
+    args << m_engine->newQObject(item, QScriptEngine::AutoOwnership, QScriptEngine::PreferExistingWrapperObject);
+
+    m_env->callEventListeners("initExtenderItem", args);
 }
 
 void QmlAppletScript::activate()

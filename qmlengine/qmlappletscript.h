@@ -31,6 +31,7 @@ class AppletInterface;
 namespace Plasma
 {
     class DeclarativeWidget;
+    class ExtenderItem;
 }
 
 class ScriptEnv;
@@ -64,6 +65,7 @@ public Q_SLOTS:
     void signalHandlerException(const QScriptValue &exception);
     void popupEvent(bool popped);
     void activate();
+    void extenderItemRestored(Plasma::ExtenderItem* item);
     void collectGarbage();
     void configChanged();
 
