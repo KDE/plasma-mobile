@@ -23,8 +23,8 @@
 #include <QDeclarativeEngine>
 #include <QDeclarativeExpression>
 #include <QGraphicsLinearLayout>
-#include <QScriptValueIterator>
 #include <QScriptEngine>
+#include <QScriptValueIterator>
 
 #include <KConfigGroup>
 #include <KDebug>
@@ -38,13 +38,13 @@
 #include <Plasma/Svg>
 
 
-#include "plasmoid/qmlappletscript.h"
-#include "plasmoid/appletinterface.h"
-#include "engineaccess.h"
-#include "plasmoid/appletauthorization.h"
-#include "plasmoid/themedsvg.h"
 #include "../bindings/plasmabindings.h"
 #include "../common/declarativewidget.h"
+#include "engineaccess.h"
+#include "plasmoid/appletauthorization.h"
+#include "plasmoid/appletinterface.h"
+#include "plasmoid/qmlappletscript.h"
+#include "plasmoid/themedsvg.h"
 
 #include "common/scriptenv.h"
 #include "simplebindings/bytearrayclass.h"
