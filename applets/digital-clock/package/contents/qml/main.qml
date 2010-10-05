@@ -22,6 +22,17 @@ import Plasma 0.1 as Plasma
 
 QGraphicsWidget {
     id: page;
+
+    Component.onCompleted: {
+        plasmoid.addEventListener("dataUpdated", dataUpdated)
+        dataEngine("time").connectSource("UTC", page, 500)
+    }
+
+    function dataUpdated(source, data)
+    {
+        timeText.text = i18n("Time (fetched without datasource) Is %1 in %2", data.Time.toString(), source)
+    }
+
     Item {
       Plasma.DataSource {
           id: dataSource
@@ -39,6 +50,7 @@ QGraphicsWidget {
           }
       ]
       Column {
+        Text { id: timeText }
         Text { text: 'Time Is ' + dataSource.data['time']; }
         Text { text: "Available Data:"; }
         Repeater { model: dataSource.keys; delegate: simpleText; }
