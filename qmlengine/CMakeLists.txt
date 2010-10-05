@@ -1,8 +1,8 @@
 set(qml_appletscript_SRCS
-    qmlappletscript.cpp
     engineaccess.cpp
     plasmoid/appletinterface.cpp
     plasmoid/appletauthorization.cpp
+    plasmoid/qmlappletscript.cpp
     plasmoid/themedsvg.cpp
     simplebindings/bytearrayclass.cpp
     simplebindings/bytearrayprototype.cpp

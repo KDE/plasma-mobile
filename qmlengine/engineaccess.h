@@ -22,7 +22,7 @@
 
 #include <QObject>
 
-#include "qmlappletscript.h"
+#include "plasmoid/qmlappletscript.h"
 
 
 class EngineAccess : public QObject

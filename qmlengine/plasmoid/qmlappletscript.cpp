@@ -38,7 +38,7 @@
 #include <Plasma/Svg>
 
 
-#include "qmlappletscript.h"
+#include "plasmoid/qmlappletscript.h"
 #include "plasmoid/appletinterface.h"
 #include "engineaccess.h"
 #include "plasmoid/appletauthorization.h"
