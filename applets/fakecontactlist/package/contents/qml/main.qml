@@ -18,15 +18,16 @@
  */
 
 import Qt 4.7
-import Plasma 0.1 as Plasma
-import GraphicsLayouts 4.7
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 QGraphicsWidget {
     id: page;
     Item {
       id:main
 
-      Plasma.Theme {
+      PlasmaCore.Theme {
           id: theme
       }
 
@@ -38,12 +39,12 @@ QGraphicsWidget {
                 width: list.width
                 height: frame.height
 
-                Plasma.Frame {
+                PlasmaWidgets.Frame {
                     id:frame
                     width:list.width
                     //minimumSize: "0x"+background.height
-                    layout: QGraphicsLinearLayout {
-                        Plasma.IconWidget {
+                    layout: GraphicsLayouts.QGraphicsLinearLayout {
+                        PlasmaWidgets.IconWidget {
                             orientation: Qt.Horizontal
                             text: name
                             infoText: status
@@ -77,7 +78,7 @@ QGraphicsWidget {
           id: contactsModel
       }
 
-        Plasma.TabBar {
+        PlasmaWidgets.TabBar {
             id : mainView
             width : page.width
             height: page.height
@@ -99,45 +100,45 @@ QGraphicsWidget {
             }
             QGraphicsWidget {
 
-                layout: QGraphicsGridLayout {
+                layout: GraphicsLayouts.QGraphicsGridLayout {
                     QGraphicsWidget {
-                        layout: QGraphicsLinearLayout {
-                            Plasma.PushButton {
+                        layout: GraphicsLayouts.QGraphicsLinearLayout {
+                            PlasmaWidgets.PushButton {
                                 id: showAllButton
                                 text: "Show all"
                                 onClicked: mainView.currentIndex = 0
                             }
 
-                            Plasma.IconWidget {
+                            PlasmaWidgets.IconWidget {
                                 id: userStatus
                                 orientation: Qt.Horizontal
                             }
                         }
-                        QGraphicsGridLayout.row: 0
-                        QGraphicsGridLayout.column: 0
-                        QGraphicsGridLayout.columnSpan:2
+                        GraphicsLayouts.QGraphicsGridLayout.row: 0
+                        GraphicsLayouts.QGraphicsGridLayout.column: 0
+                        GraphicsLayouts.QGraphicsGridLayout.columnSpan:2
                     }
 
-                    Plasma.PushButton {
+                    PlasmaWidgets.PushButton {
                         text: "Call"
-                        QGraphicsGridLayout.row: 1
-                        QGraphicsGridLayout.column: 0
+                        GraphicsLayouts.QGraphicsGridLayout.row: 1
+                        GraphicsLayouts.QGraphicsGridLayout.column: 0
                     }
-                    Plasma.PushButton {
+                    PlasmaWidgets.PushButton {
                         text: "SMS"
-                        QGraphicsGridLayout.row: 1
-                        QGraphicsGridLayout.column: 1
+                        GraphicsLayouts.QGraphicsGridLayout.row: 1
+                        GraphicsLayouts.QGraphicsGridLayout.column: 1
                     }
-                    Plasma.PushButton {
+                    PlasmaWidgets.PushButton {
                         text: "Mail"
-                        QGraphicsGridLayout.row: 2
-                        QGraphicsGridLayout.column: 0
+                        GraphicsLayouts.QGraphicsGridLayout.row: 2
+                        GraphicsLayouts.QGraphicsGridLayout.column: 0
                     }
-                    Plasma.PushButton {
+                    PlasmaWidgets.PushButton {
                         id: chatButton
                         text: "Chat"
-                        QGraphicsGridLayout.row: 2
-                        QGraphicsGridLayout.column: 1
+                        GraphicsLayouts.QGraphicsGridLayout.row: 2
+                        GraphicsLayouts.QGraphicsGridLayout.column: 1
                     }
                 }
             }
