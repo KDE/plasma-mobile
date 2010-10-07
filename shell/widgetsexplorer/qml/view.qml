@@ -1,7 +1,8 @@
 
 import Qt 4.7
-import Plasma 0.1 as Plasma
-import GraphicsLayouts 4.7
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Rectangle {
     color: Qt.rgba(0,0,0,0.4)
@@ -106,7 +107,7 @@ Rectangle {
                 height: wrapper.GridView.view.cellWidth-40
                 property string appletPlugin : pluginName
 
-                Plasma.IconWidget {
+                PlasmaWidgets.IconWidget {
                     minimumIconSize : "64x64"
                     maximumIconSize : "64x64"
                     preferredIconSize : "64x64"
@@ -187,10 +188,10 @@ Rectangle {
         QGraphicsWidget {
             id: infoContent
             anchors.fill:parent
-            layout: QGraphicsLinearLayout {
+            layout: GraphicsLayouts.QGraphicsLinearLayout {
                 id:panelLayout
                 orientation: Qt.Vertical
-                Plasma.IconWidget {
+                PlasmaWidgets.IconWidget {
                     id: detailsIcon
                     y: 8
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -276,7 +277,7 @@ Rectangle {
                     }
                 }
 
-                Plasma.PushButton {
+                PlasmaWidgets.PushButton {
                     id: addButton
                     maximumSize: maximumSize.width+"x"+preferredSize.height
 
@@ -319,7 +320,7 @@ Rectangle {
     }
 
 
-    Plasma.PushButton {
+    PlasmaWidgets.PushButton {
         id: closeButton
         width: addButton.width
         anchors.bottom: parent.bottom
