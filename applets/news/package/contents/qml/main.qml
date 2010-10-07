@@ -18,8 +18,9 @@
  */
 
 import Qt 4.7
-import Plasma 0.1 as Plasma
-import GraphicsLayouts 4.7
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 
 QGraphicsWidget {
@@ -42,20 +43,20 @@ QGraphicsWidget {
     Item {
       id:main
 
-      Plasma.DataSource {
+      PlasmaCore.DataSource {
           id: dataSource
           engine: "rss"
           interval: 50000
       }
 
-      Plasma.Theme {
+      PlasmaCore.Theme {
           id: theme
       }
 
       resources: [
           Component {
               id: simpleText
-              Plasma.FrameSvgItem {
+              PlasmaCore.FrameSvgItem {
                 id : background
                 imagePath: "widgets/frame"
                 prefix: "plain"
@@ -96,7 +97,7 @@ QGraphicsWidget {
           }
       ]
 
-        Plasma.TabBar {
+        PlasmaWidgets.TabBar {
             id : mainView
             width : page.width
             height: page.height
@@ -117,18 +118,18 @@ QGraphicsWidget {
                 }
             }
             QGraphicsWidget {
-                layout: QGraphicsLinearLayout {
+                layout: GraphicsLayouts.QGraphicsLinearLayout {
                     orientation: "Vertical"
-                    Plasma.Frame {
+                    PlasmaWidgets.Frame {
                         maximumSize: maximumSize.width+"x"+minimumSize.height
                         frameShadow: "Raised"
-                        layout: QGraphicsLinearLayout {
-                            Plasma.PushButton {
+                        layout: GraphicsLayouts.QGraphicsLinearLayout {
+                            PlasmaWidgets.PushButton {
                                 id: showAllButton
                                 maximumSize: minimumSize
                                 text: "Show all"
                             }
-                            Plasma.PushButton {
+                            PlasmaWidgets.PushButton {
                                 id: backButton
                                 text: "Back"
                                 visible:false
@@ -141,7 +142,7 @@ QGraphicsWidget {
                             QGraphicsWidget {}
                         }
                     }
-                    Plasma.WebView {
+                    PlasmaWidgets.WebView {
                         id : bodyView
                         dragToScroll : true
                         onUrlChanged: {
