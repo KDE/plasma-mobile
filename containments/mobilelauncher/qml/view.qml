@@ -1,5 +1,5 @@
-import MobileLauncher 1.0
 import Qt 4.7
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 Rectangle {
     color: Qt.rgba(0,0,0,0.4)
@@ -47,7 +47,7 @@ Rectangle {
                 height: wrapper.GridView.view.cellWidth-40
                 property string urlText: url
 
-                ResultWidget {
+                PlasmaWidgets.IconWidget {
                     minimumIconSize : "64x64"
                     maximumIconSize : "64x64"
                     preferredIconSize : "64x64"

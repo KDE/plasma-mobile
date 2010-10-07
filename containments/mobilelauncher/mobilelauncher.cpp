@@ -22,7 +22,6 @@
 #include "mobilelauncher.h"
 #include "../../common/declarativewidget.h"
 #include "models/krunnermodel.h"
-#include "resultwidget.h"
 
 
 //Qt
@@ -44,9 +43,6 @@
 
 
 
-QML_DECLARE_TYPE(ResultWidget)
-
-
 MobileLauncher::MobileLauncher(QObject *parent, const QVariantList &args)
     : Containment(parent, args),
       m_view(0)
@@ -54,7 +50,6 @@ MobileLauncher::MobileLauncher(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile launcher";
 
-    qmlRegisterType<ResultWidget>("MobileLauncher", 1, 0, "ResultWidget");
     // At some point it has to be a custom constainment
     setContainmentType(Containment::CustomContainment);
 }

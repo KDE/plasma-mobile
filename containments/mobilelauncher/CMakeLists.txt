@@ -5,7 +5,6 @@ set(mobile_launcher_SRCS
     mobilelauncher.cpp
     models/krunnermodel.cpp
     models/standarditemfactory.cpp
-    resultwidget.cpp
     ../../common/declarativewidget.cpp
     )
 
