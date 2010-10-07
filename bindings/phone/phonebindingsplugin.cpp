@@ -29,7 +29,7 @@ void PhoneBindingsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.phone"));
 
-    qmlRegisterType<Phone>(uri,4,7,"Phone");
+    qmlRegisterType<Phone>(uri,0,1,"Phone");
 }
 
 
