@@ -22,18 +22,33 @@
 #include "graphicswidgetsbindingsplugin.h"
 
 #include <QtDeclarative/qdeclarative.h>
-#include <plasma/widgets/lineedit.h>
-#include <plasma/widgets/slider.h>
-#include <plasma/widgets/spinbox.h>
-#include <plasma/widgets/textedit.h>
-#include <plasma/widgets/label.h>
-#include <plasma/widgets/checkbox.h>
-#include <plasma/widgets/pushbutton.h>
-#include <plasma/widgets/svgwidget.h>
-#include <plasma/widgets/signalplotter.h>
-#include <plasma/widgets/frame.h>
-#include <plasma/widgets/iconwidget.h>
-#include <plasma/widgets/webview.h>
+
+#include <Plasma/BusyWidget>
+#include <Plasma/CheckBox>
+#include <Plasma/ComboBox>
+#include <Plasma/FlashingLabel>
+#include <Plasma/Frame>
+#include <Plasma/GroupBox>
+#include <Plasma/IconWidget>
+#include <Plasma/ItemBackground>
+#include <Plasma/Label>
+#include <Plasma/LineEdit>
+#include <Plasma/Meter>
+#include <Plasma/PushButton>
+#include <Plasma/RadioButton>
+#include <Plasma/ScrollBar>
+#include <Plasma/ScrollWidget>
+#include <Plasma/Separator>
+#include <Plasma/SignalPlotter>
+#include <Plasma/Slider>
+#include <Plasma/SpinBox>
+#include <Plasma/SvgWidget>
+#include <Plasma/TextBrowser>
+#include <Plasma/TextEdit>
+#include <Plasma/ToolButton>
+#include <Plasma/TreeView>
+#include <Plasma/VideoWidget>
+#include <Plasma/WebView>
 
 #include "private/declarative/declarativetabbar_p.h"
 
@@ -41,18 +56,34 @@
 void GraphicsWidgetsBindingsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.graphicswidgets"));
-    qmlRegisterType<Plasma::Label>(uri, 0, 1, "Label");
-    qmlRegisterType<Plasma::CheckBox>(uri, 0, 1, "Checkbox");
-    qmlRegisterType<Plasma::TextEdit>(uri, 0, 1, "TextEdit");
-    qmlRegisterType<Plasma::LineEdit>(uri, 0, 1, "LineEdit");
-    qmlRegisterType<Plasma::PushButton>(uri, 0, 1, "PushButton");
+    qmlRegisterType<DeclarativeTabBar>(uri, 0, 1, "TabBar");
+
+    qmlRegisterType<Plasma::BusyWidget>(uri, 0, 1, "BusyWidget");
+    qmlRegisterType<Plasma::CheckBox>(uri, 0, 1, "CheckBox");
+    qmlRegisterType<Plasma::ComboBox>(uri, 0, 1, "ComboBox");
+    qmlRegisterType<Plasma::FlashingLabel>(uri, 0, 1, "FlashingLabel");
     qmlRegisterType<Plasma::Frame>(uri, 0, 1, "Frame");
+    qmlRegisterType<Plasma::GroupBox>(uri, 0, 1, "GroupBox");
     qmlRegisterType<Plasma::IconWidget>(uri, 0, 1, "IconWidget");
+    qmlRegisterType<Plasma::ItemBackground>(uri, 0, 1, "ItemBackground");
+    qmlRegisterType<Plasma::Label>(uri, 0, 1, "Label");
+    qmlRegisterType<Plasma::LineEdit>(uri, 0, 1, "LineEdit");
+    qmlRegisterType<Plasma::Meter>(uri, 0, 1, "Meter");
+    qmlRegisterType<Plasma::PushButton>(uri, 0, 1, "PushButton");
+    qmlRegisterType<Plasma::RadioButton>(uri, 0, 1, "RadioButton");
+    qmlRegisterType<Plasma::ScrollBar>(uri, 0, 1, "ScrollBar");
+    qmlRegisterType<Plasma::ScrollWidget>(uri, 0, 1, "ScrollWidget");
+    qmlRegisterType<Plasma::Separator>(uri, 0, 1, "Separator");
+    qmlRegisterType<Plasma::SignalPlotter>(uri, 0, 1, "SignalPlotter");
     qmlRegisterType<Plasma::Slider>(uri, 0, 1, "Slider");
     qmlRegisterType<Plasma::SpinBox>(uri, 0, 1, "SpinBox");
-    qmlRegisterType<Plasma::SignalPlotter>(uri, 0, 1, "SignalPlotter");
+    qmlRegisterType<Plasma::SvgWidget>(uri, 0, 1, "SvgWidget");
+    qmlRegisterType<Plasma::TextBrowser>(uri, 0, 1, "TextBrowser");
+    qmlRegisterType<Plasma::TextEdit>(uri, 0, 1, "TextEdit");
+    qmlRegisterType<Plasma::ToolButton>(uri, 0, 1, "ToolButton");
+    qmlRegisterType<Plasma::TreeView>(uri, 0, 1, "TreeView");
+    qmlRegisterType<Plasma::VideoWidget>(uri, 0, 1, "VideoWidget");
     qmlRegisterType<Plasma::WebView>(uri, 0, 1, "WebView");
-    qmlRegisterType<DeclarativeTabBar>(uri, 0, 1, "TabBar");
 }
 
 
