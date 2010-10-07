@@ -18,7 +18,7 @@
  */
 
 import Qt 4.7
-import Plasma 0.1 as Plasma
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 QGraphicsWidget {
     id: page;
@@ -34,7 +34,7 @@ QGraphicsWidget {
     }
 
     Item {
-      Plasma.DataSource {
+      PlasmaCore.DataSource {
           id: dataSource
           engine: "time"
           source: "Local"
