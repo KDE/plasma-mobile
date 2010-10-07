@@ -1,6 +1,7 @@
 import Qt 4.7
-import GraphicsLayouts 4.7
-import Plasma 0.1 as Plasma
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 import "components"
 
@@ -10,14 +11,14 @@ QGraphicsWidget {
     Item {
         id: mainItem
         anchors.fill: main
-        Plasma.TabBar {
+        PlasmaWidgets.TabBar {
             id : mainView
             anchors.fill : mainItem
             tabBarShown: false
 
             MessageList {
                 id : messageList
-                Plasma.TabBar.tabText : "Page"
+                PlasmaWidgets.TabBar.tabText : "Page"
             }
             MessageDetails {
                 id : messageDetails

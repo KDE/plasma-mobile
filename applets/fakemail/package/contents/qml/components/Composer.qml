@@ -18,8 +18,9 @@
  */
 
 import Qt 4.7
-import GraphicsLayouts 4.7
-import Plasma 0.1 as Plasma
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 QGraphicsWidget {
     id: root;
@@ -32,19 +33,19 @@ QGraphicsWidget {
     property string toText: ""
 
 
-    Plasma.Frame {
+    PlasmaWidgets.Frame {
         id: frame
         anchors.left: parent.left
         anchors.right: parent.right
         frameShadow : "Raised"
 
-        layout: QGraphicsGridLayout {
+        layout: GraphicsLayouts.QGraphicsGridLayout {
             id : lay
 
-            Plasma.PushButton {
-                QGraphicsGridLayout.row : 0
-                QGraphicsGridLayout.column : 0
-                QGraphicsGridLayout.columnMaximumWidth : 30
+            PlasmaWidgets.PushButton {
+                GraphicsLayouts.QGraphicsGridLayout.row : 0
+                GraphicsLayouts.QGraphicsGridLayout.column : 0
+                GraphicsLayouts.QGraphicsGridLayout.columnMaximumWidth : 30
                 text: "Back"
                 onClicked: {
                     root.backClicked()
@@ -52,40 +53,40 @@ QGraphicsWidget {
             }
 
 
-            Plasma.PushButton {
+            PlasmaWidgets.PushButton {
                 id: fromButton
-                QGraphicsGridLayout.row : 0
-                QGraphicsGridLayout.column : 1
+                GraphicsLayouts.QGraphicsGridLayout.row : 0
+                GraphicsLayouts.QGraphicsGridLayout.column : 1
                 text: "John"
             }
 
-            Plasma.LineEdit {
+            PlasmaWidgets.LineEdit {
                 minimumSize.height : fromButton.size.height
-                QGraphicsGridLayout.row : 0
-                QGraphicsGridLayout.column : 2
-                QGraphicsGridLayout.columnSpan : 2
+                GraphicsLayouts.QGraphicsGridLayout.row : 0
+                GraphicsLayouts.QGraphicsGridLayout.column : 2
+                GraphicsLayouts.QGraphicsGridLayout.columnSpan : 2
                 //QGraphicsGridLayout.alignment : QGraphicsGridLayout.Center
                 text: root.subjectText
             }
 
 
 
-            Plasma.PushButton {
+            PlasmaWidgets.PushButton {
                 id: toButton
-                QGraphicsGridLayout.row : 1
-                QGraphicsGridLayout.column : 1
+                GraphicsLayouts.QGraphicsGridLayout.row : 1
+                GraphicsLayouts.QGraphicsGridLayout.column : 1
                 text: "To:"
             }
-            Plasma.LineEdit {
+            PlasmaWidgets.LineEdit {
                 minimumSize.height : toButton.size.height
-                QGraphicsGridLayout.row : 1
-                QGraphicsGridLayout.column : 2
-                QGraphicsGridLayout.columnStretchFactor : 3
+                GraphicsLayouts.QGraphicsGridLayout.row : 1
+                GraphicsLayouts.QGraphicsGridLayout.column : 2
+                GraphicsLayouts.QGraphicsGridLayout.columnStretchFactor : 3
                 text: root.toText
             }
-            Plasma.PushButton {
-                QGraphicsGridLayout.row : 1
-                QGraphicsGridLayout.column : 3
+            PlasmaWidgets.PushButton {
+                GraphicsLayouts.QGraphicsGridLayout.row : 1
+                GraphicsLayouts.QGraphicsGridLayout.column : 3
                 text: "Send"
                 onClicked: {
                     root.sendClicked()
@@ -95,12 +96,12 @@ QGraphicsWidget {
     }
 
     Item {
-        Plasma.Theme {
+        PlasmaCore.Theme {
             id: theme
         }
     }
 
-    Plasma.WebView {
+    PlasmaWidgets.WebView {
         id : text
         
         anchors.left: parent.left
@@ -114,14 +115,14 @@ QGraphicsWidget {
     }
 
 
-    Plasma.PushButton {
+    PlasmaWidgets.PushButton {
         id : buttonA
         anchors.left: parent.left
         anchors.top: parent.bottom
         text: "A"
         rotation : -90
     }
-    Plasma.PushButton {
+    PlasmaWidgets.PushButton {
         id : buttonActions
         anchors.left: parent.left
         anchors.bottom: buttonA.top

@@ -18,8 +18,9 @@
  */
 
 import Qt 4.7
-import GraphicsLayouts 4.7
-import Plasma 0.1 as Plasma
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 QGraphicsWidget {
     id: mainWidget
@@ -34,13 +35,13 @@ QGraphicsWidget {
         width: mainWidget.width
         height: mainWidget.height
 
-        Plasma.Theme {
+        PlasmaCore.Theme {
             id: theme
         }
 
         Component {
             id : messageDelegate
-            Plasma.FrameSvg {
+            PlasmaCore.FrameSvgItem {
                 id: delegateItem
                 imagePath: "widgets/frame"
                 prefix: "plain"
@@ -73,27 +74,27 @@ QGraphicsWidget {
         }
 
 
-        Plasma.Frame {
+        PlasmaWidgets.Frame {
             id: frame
             anchors.left: parent.left
             anchors.right: parent.right
             frameShadow : "Raised"
 
-            layout : QGraphicsLinearLayout {
-                Plasma.PushButton {
+            layout : GraphicsLayouts.QGraphicsLinearLayout {
+                PlasmaWidgets.PushButton {
                     //FIXME: either icons should be accessible by name or bindings for KIcon would be neede
                     //icon: "mail-message-new"
                     text: "Write"
                     onClicked : mainWidget.newClicked()
                 }
-                Plasma.PushButton {
+                PlasmaWidgets.PushButton {
                     //icon: "mail-receive"
                     text: "Check"
                 }
     
                 QGraphicsWidget{}
 
-                Plasma.LineEdit {
+                PlasmaWidgets.LineEdit {
                     clickMessage: "Search..."
                     clearButtonShown: true
                 }

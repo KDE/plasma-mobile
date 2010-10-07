@@ -18,8 +18,9 @@
  */
 
 import Qt 4.7
-import GraphicsLayouts 4.7
-import Plasma 0.1 as Plasma
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 QGraphicsWidget {
     id: mainWidget
@@ -37,7 +38,7 @@ QGraphicsWidget {
         id : main
         anchors.fill : mainWidget
 
-        Plasma.Theme {
+        PlasmaCore.Theme {
             id: theme
         }
 
@@ -50,7 +51,7 @@ QGraphicsWidget {
                     height: mainView.height
 
 
-                    Plasma.WebView {
+                    PlasmaWidgets.WebView {
                         id : bodyView
                         width : content.width
                         height: content.height
@@ -64,19 +65,19 @@ QGraphicsWidget {
             id: model
         }
 
-        Plasma.Frame {
+        PlasmaWidgets.Frame {
             id: toolBar
             width: main.width
             frameShadow : "Raised"
 
-            layout: QGraphicsLinearLayout {
-                Plasma.PushButton {
+            layout: GraphicsLayouts.QGraphicsLinearLayout {
+                PlasmaWidgets.PushButton {
                     text: "Back"
                     onClicked: {
                         mainWidget.backClicked()
                     }
                 }
-                Plasma.PushButton {
+                PlasmaWidgets.PushButton {
                     text: "Reply"
                     onClicked: {
                         mainWidget.subjectText = model.get(mainView.currentIndex).subject
@@ -85,7 +86,7 @@ QGraphicsWidget {
                         mainWidget.replyClicked()
                     }
                 }
-                Plasma.PushButton {
+                PlasmaWidgets.PushButton {
                     text: "Forward"
                     onClicked: {
                         mainWidget.forwardClicked()
