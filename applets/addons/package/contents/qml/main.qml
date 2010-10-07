@@ -18,8 +18,9 @@
  */
 
 import Qt 4.7
-import Plasma 0.1 as Plasma
-import GraphicsLayouts 4.7
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 QGraphicsWidget {
     id: page;
@@ -27,7 +28,7 @@ QGraphicsWidget {
     minimumSize: "200x200"
 
     Item {
-        Plasma.Svg {
+        PlasmaCore.Svg {
             id:svgExample
             imagePath: "widgets/clock"
         }
@@ -102,18 +103,18 @@ QGraphicsWidget {
         plasmoid.gc()
     }
 
-    Plasma.PushButton {
+    PlasmaWidgets.PushButton {
         id: extenderButton
     }
 
-    layout: QGraphicsLinearLayout {
+    layout: GraphicsLayouts.QGraphicsLinearLayout {
         orientation: Qt.Vertical
-        Plasma.Label {
+        PlasmaWidgets.Label {
             id: label
             text: "Testing Javascript addons"
         }
 
-        Plasma.PushButton {
+        PlasmaWidgets.PushButton {
             id: openButton
             text: "Open File"
             icon: QIcon("document-open")
@@ -127,7 +128,7 @@ QGraphicsWidget {
             }
         }
 
-        Plasma.SvgWidget {
+        PlasmaWidgets.SvgWidget {
             id: svgWidget
         }
     }
