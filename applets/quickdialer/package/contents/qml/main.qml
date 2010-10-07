@@ -18,12 +18,14 @@
  */
 
 import Qt 4.7
-import Plasma 0.1 as Plasma
-import GraphicsLayouts 4.7
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.phone 0.1 as PlasmaPhone
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 QGraphicsWidget {
     id: main
-    Item { Plasma.Phone { id : phone} }
+    Item { PlasmaPhone.Phone { id : phone} }
     function enterDigit(digit)
     {
         if (number.text == "Please type a number")
@@ -54,7 +56,7 @@ QGraphicsWidget {
         }
     }
 
-    layout: QGraphicsLinearLayout {
+    layout: GraphicsLayouts.QGraphicsLinearLayout {
             id: box;
             spacing : 10
             orientation: Qt.Horizontal
@@ -89,26 +91,26 @@ QGraphicsWidget {
                 }
             }
 
-            QGraphicsGridLayout{
+            GraphicsLayouts.QGraphicsGridLayout{
                 property int r: 0
                 property int c: 0
                 id: grid
                 spacing: 10
 
-                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 0; text: "1"; onClicked: enterDigit("1");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 1;  text: "2"; onClicked: enterDigit("2");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 0; QGraphicsGridLayout.column: 2; text: "3"; onClicked: enterDigit("3");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 1; QGraphicsGridLayout.column: 0; text: "4"; onClicked: enterDigit("4");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 1; QGraphicsGridLayout.column: 1; text: "5"; onClicked: enterDigit("5");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 1; QGraphicsGridLayout.column: 2; text: "6"; onClicked: enterDigit("6");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 0; text: "7"; onClicked: enterDigit("7");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 1; text: "8"; onClicked: enterDigit("8");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 2; QGraphicsGridLayout.column: 2; text: "9"; onClicked: enterDigit("9");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 3; QGraphicsGridLayout.column: 0; text: "*"; onClicked: enterDigit("*");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 3; QGraphicsGridLayout.column: 1; text: "0"; onClicked: enterDigit("0");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 3; QGraphicsGridLayout.column: 2; text: "#"; onClicked: enterDigit("#");}
-                Plasma.PushButton { QGraphicsGridLayout.row: 4; QGraphicsGridLayout.column: 0; QGraphicsGridLayout.columnSpan: 2; text: "Call"; onClicked: call();}
-                Plasma.PushButton { QGraphicsGridLayout.row: 4; QGraphicsGridLayout.column: 2; QGraphicsGridLayout.columnSpan: 1; text: "Del"; onClicked: deleteLastDigit();}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 0; GraphicsLayouts.QGraphicsGridLayout.column: 0; text: "1"; onClicked: enterDigit("1");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 0; GraphicsLayouts.QGraphicsGridLayout.column: 1;  text: "2"; onClicked: enterDigit("2");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 0; GraphicsLayouts.QGraphicsGridLayout.column: 2; text: "3"; onClicked: enterDigit("3");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 1; GraphicsLayouts.QGraphicsGridLayout.column: 0; text: "4"; onClicked: enterDigit("4");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 1; GraphicsLayouts.QGraphicsGridLayout.column: 1; text: "5"; onClicked: enterDigit("5");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 1; GraphicsLayouts.QGraphicsGridLayout.column: 2; text: "6"; onClicked: enterDigit("6");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 2; GraphicsLayouts.QGraphicsGridLayout.column: 0; text: "7"; onClicked: enterDigit("7");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 2; GraphicsLayouts.QGraphicsGridLayout.column: 1; text: "8"; onClicked: enterDigit("8");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 2; GraphicsLayouts.QGraphicsGridLayout.column: 2; text: "9"; onClicked: enterDigit("9");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 3; GraphicsLayouts.QGraphicsGridLayout.column: 0; text: "*"; onClicked: enterDigit("*");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 3; GraphicsLayouts.QGraphicsGridLayout.column: 1; text: "0"; onClicked: enterDigit("0");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 3; GraphicsLayouts.QGraphicsGridLayout.column: 2; text: "#"; onClicked: enterDigit("#");}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 4; GraphicsLayouts.QGraphicsGridLayout.column: 0; GraphicsLayouts.QGraphicsGridLayout.columnSpan: 2; text: "Call"; onClicked: call();}
+                PlasmaWidgets.PushButton { GraphicsLayouts.QGraphicsGridLayout.row: 4; GraphicsLayouts.QGraphicsGridLayout.column: 2; GraphicsLayouts.QGraphicsGridLayout.columnSpan: 1; text: "Del"; onClicked: deleteLastDigit();}
             }
     }
 }
