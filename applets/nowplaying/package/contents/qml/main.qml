@@ -18,8 +18,9 @@
  */
 
 import Qt 4.7
-import Plasma 0.1 as Plasma
-import GraphicsLayouts 4.7
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 
 QGraphicsWidget {
@@ -30,7 +31,7 @@ QGraphicsWidget {
     Item {
         id:main
 
-        Plasma.DataSource {
+        PlasmaCore.DataSource {
             id: dataSource
             engine: "nowplaying"
             source: allSources[0]
@@ -47,7 +48,7 @@ QGraphicsWidget {
             }
         }
 
-        Plasma.Theme {
+        PlasmaCore.Theme {
                 id: theme
         }
     }
@@ -58,9 +59,9 @@ QGraphicsWidget {
         dataSource.service.associateWidget(progress, "progress");
     }
 
-    layout: QGraphicsLinearLayout {
+    layout: GraphicsLayouts.QGraphicsLinearLayout {
 
-        Plasma.IconWidget {
+        PlasmaWidgets.IconWidget {
             id: playPause
             property string state: "stop"
 
@@ -83,7 +84,7 @@ QGraphicsWidget {
             }
         }
 
-        Plasma.IconWidget {
+        PlasmaWidgets.IconWidget {
             id: stop
             Component.onCompleted: {
                 setIcon("media-playback-stop");
@@ -101,7 +102,7 @@ QGraphicsWidget {
             }
         }
 
-        Plasma.Slider {
+        PlasmaWidgets.Slider {
             id: progress
             orientation: Qt.Horizontal
 
