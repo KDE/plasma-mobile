@@ -34,7 +34,6 @@ void setupBindings()
     qmlRegisterType<Plasma::SpinBox>("Plasma", 0, 1, "SpinBox");
     qmlRegisterType<Plasma::SignalPlotter>("Plasma", 0, 1, "SignalPlotter");
     qmlRegisterType<Plasma::WebView>("Plasma", 0, 1, "WebView");
-    qmlRegisterType<DeclarativeTabBar>("Plasma", 0, 1, "TabBar");
     qmlRegisterType<Phone>("Plasma", 0, 1, "Phone");
 
     qmlRegisterType<Plasma::SvgWidget>("Plasma", 0, 1, "SvgWidget");
@@ -44,12 +43,6 @@ void setupBindings()
     qmlRegisterType<Plasma::FrameSvgItem>("Plasma", 0, 1, "FrameSvgItem");
 
     qmlRegisterType<ThemeProxy>("Plasma", 0, 1, "Theme");
-
-    qmlRegisterInterface<QGraphicsLayoutItem>("QGraphicsLayoutItem");
-    qmlRegisterInterface<QGraphicsLayout>("QGraphicsLayout");
-    qmlRegisterType<GraphicsLinearLayoutStretchItemObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayoutStretchItem");
-    qmlRegisterType<GraphicsLinearLayoutObject>("GraphicsLayouts",4,7,"QGraphicsLinearLayout");
-    qmlRegisterType<GraphicsGridLayoutObject>("GraphicsLayouts",4,7,"QGraphicsGridLayout");
 
     qmlRegisterType<Plasma::DataSource>("Plasma", 0, 1, "DataSource");
 

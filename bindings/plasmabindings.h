@@ -39,10 +39,7 @@
 #include <plasma/animator.h>
 #include <plasma/framesvg.h>
 
-#include "private/declarative/declarativetabbar_p.h"
-#include "private/declarative/gridlayout.h"
 #include "private/declarative/theme_p.h"
-#include "private/declarative/linearlayout.h"
 #include "private/declarative/datasource_p.h"
 #include "private/declarative/svgitem_p.h"
 #include "private/declarative/framesvgitem_p.h"
