@@ -26,14 +26,14 @@
 #include <Plasma/VideoWidget>
 
 //Q_DECLARE_METATYPE(SimpleJavaScriptApplet*)
-//Q_DECLARE_METATYPE(QGraphicsWidget*)
+Q_DECLARE_METATYPE(QGraphicsWidget*)
 //Q_DECLARE_METATYPE(QGraphicsLayout*)
 
 Q_DECLARE_METATYPE(Plasma::Animation*)
 Q_DECLARE_METATYPE(Plasma::Applet*)
-//Q_DECLARE_METATYPE(Plasma::Extender*)
+Q_DECLARE_METATYPE(Plasma::Extender*)
 Q_DECLARE_METATYPE(Plasma::VideoWidget::Controls)
-//Q_DECLARE_METATYPE(Plasma::Svg*)
+Q_DECLARE_METATYPE(Plasma::Svg*)
 Q_DECLARE_METATYPE(Qt::MouseButton)
 Q_DECLARE_METATYPE(QList<double>)
 

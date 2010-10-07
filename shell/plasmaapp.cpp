@@ -57,8 +57,6 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
 
-extern void setupBindings();
-
 class CachingEffect : public QGraphicsEffect
 {
   public :
@@ -94,7 +92,6 @@ PlasmaApp::PlasmaApp()
       m_trayContainment(0),
       m_isDesktop(false)
 {
-    setupBindings();
     KGlobal::locale()->insertCatalog("libplasma");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();

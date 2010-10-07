@@ -34,8 +34,9 @@ QGraphicsWidget {
     }
 
     Component.onCompleted: {
-        plasmoid.addEventListener('ConfigChanged', configChanged);
+        plasmoid.addEventListener('ConfigChanged', configChanged)
         plasmoid.addEventListener("addoncreated", addonCreated)
+        plasmoid.addEventListener("initExtenderItem", initExtenderItem)
 
         print(i18n("Translated message"));
 
@@ -49,6 +50,23 @@ QGraphicsWidget {
 
             print(plasmoid.loadAddon("org.kde.plasma.javascript-addons-example", addons[0].id))
         }
+
+        var e = plasmoid.extender()
+        if (e.hasItem("yes!")) {
+            print(i18n("We already have our extender, it will be recreated for us. Expect a call to initEtenderItem."));
+        } else {
+            // new ExtenderItems are automatically added to our widget's Extender
+            var ext = new ExtenderItem
+            ext.name = "yes!"
+            initExtenderItem(ext)
+        }
+    }
+
+    function initExtenderItem(item)
+    {
+        extenderButton.text = i18n("Hello")
+        item.widget = extenderButton
+        print(i18n("Widget in Extender '%1' has text '%2'", item.name, extenderButton.text))
     }
 
     function addonCreated(addon)
@@ -82,6 +100,10 @@ QGraphicsWidget {
         dialog.accepted.disconnect(openFileDialogAccepted)
         dialog.finished.disconnect(openFileDialogFinished)
         plasmoid.gc()
+    }
+
+    Plasma.PushButton {
+        id: extenderButton
     }
 
     layout: QGraphicsLinearLayout {

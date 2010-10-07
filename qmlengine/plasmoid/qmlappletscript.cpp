@@ -25,12 +25,14 @@
 #include <QGraphicsLinearLayout>
 #include <QScriptEngine>
 #include <QScriptValueIterator>
+#include <QTimer>
 
 #include <KConfigGroup>
 #include <KDebug>
 #include <KGlobalSettings>
 
 #include <Plasma/Applet>
+#include <Plasma/Extender>
 #include <Plasma/ExtenderItem>
 #include <Plasma/FrameSvg>
 #include <Plasma/Package>
@@ -38,7 +40,6 @@
 #include <Plasma/Svg>
 
 
-#include "../bindings/plasmabindings.h"
 #include "../common/declarativewidget.h"
 #include "engineaccess.h"
 #include "plasmoid/appletauthorization.h"
@@ -53,7 +54,6 @@
 
 K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
 
-extern void setupBindings();
 
 QScriptValue constructIconClass(QScriptEngine *engine);
 QScriptValue constructKUrlClass(QScriptEngine *engine);
@@ -65,7 +65,6 @@ QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
       m_engine(0),
       m_env(0)
 {
-    setupBindings();
     Q_UNUSED(args);
 }
 
