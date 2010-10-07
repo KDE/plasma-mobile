@@ -33,7 +33,7 @@
 
 void CoreBindingsPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.graphics"));
+    Q_ASSERT(uri == QLatin1String("org.kde.plasma.core"));
 
     qmlRegisterType<Plasma::Svg>(uri, 0, 1, "Svg");
     qmlRegisterType<Plasma::FrameSvg>(uri, 0, 1, "FrameSvg");
@@ -44,6 +44,8 @@ void CoreBindingsPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<Plasma::DataSource>(uri, 0, 1, "DataSource");
 
+    qmlRegisterInterface<Plasma::Service>("Service");
+    qRegisterMetaType<Plasma::Service*>("Service");
 }
 
 
