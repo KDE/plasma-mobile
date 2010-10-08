@@ -20,7 +20,6 @@
 
 //own
 #include "mobilelauncher.h"
-#include "../../common/declarativewidget.h"
 #include "models/krunnermodel.h"
 
 
@@ -39,6 +38,7 @@
 
 //Plasma
 #include <Plasma/Corona>
+#include <Plasma/DeclarativeWidget>
 #include <Plasma/RunnerManager>
 
 

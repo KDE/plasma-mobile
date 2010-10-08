@@ -20,7 +20,6 @@
 
 //own
 #include "mobilewidgetsexplorer.h"
-#include "../../common/declarativewidget.h"
 #include "plasmaappletitemmodel_p.h"
 
 //Qt
@@ -37,6 +36,7 @@
 
 //Plasma
 #include <Plasma/Containment>
+#include <Plasma/DeclarativeWidget>
 
 MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
     : QGraphicsWidget(parent),

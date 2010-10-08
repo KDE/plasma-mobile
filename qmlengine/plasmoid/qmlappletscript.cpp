@@ -32,6 +32,7 @@
 #include <KGlobalSettings>
 
 #include <Plasma/Applet>
+#include <Plasma/DeclarativeWidget>
 #include <Plasma/Extender>
 #include <Plasma/ExtenderItem>
 #include <Plasma/FrameSvg>
@@ -40,7 +41,6 @@
 #include <Plasma/Svg>
 
 
-#include "../common/declarativewidget.h"
 #include "engineaccess.h"
 #include "plasmoid/appletauthorization.h"
 #include "plasmoid/appletinterface.h"

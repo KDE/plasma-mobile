@@ -24,7 +24,6 @@
 
 #include "mobview.h"
 #include "mobcorona.h"
-#include "../common/declarativewidget.h"
 #include "widgetsexplorer/mobilewidgetsexplorer.h"
 
 #include <unistd.h>
@@ -48,6 +47,7 @@
 #include <ksmserver_interface.h>
 
 #include <Plasma/Containment>
+#include <Plasma/DeclarativeWidget>
 #include <Plasma/Theme>
 #include <Plasma/WindowEffects>
 #include <Plasma/Applet>
