@@ -72,7 +72,7 @@ QScriptValue qScriptValueFromKConfigGroup(QScriptEngine *engine, const KConfigGr
 
     //setting the key/value pairs
     for (it = begin; it != end; ++it) {
-        kDebug() << "setting" << it.key() << "to" << it.value();
+        //kDebug() << "setting" << it.key() << "to" << it.value();
         QString prop = it.key();
         prop.replace(' ', '_');
         obj.setProperty(prop, it.value());
@@ -89,7 +89,7 @@ void kConfigGroupFromScriptValue(const QScriptValue& obj, KConfigGroup &config)
 
     while (it.hasNext()) {
         it.next();
-        kDebug() << it.name() << "is" << it.value().toString();
+        //kDebug() << it.name() << "is" << it.value().toString();
         if (it.name() != "__name") {
             config.writeEntry(it.name(), it.value().toString());
         }

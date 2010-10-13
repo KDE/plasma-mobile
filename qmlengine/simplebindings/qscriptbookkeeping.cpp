@@ -27,7 +27,7 @@
 
 //Q_DECLARE_METATYPE(SimpleJavaScriptApplet*)
 Q_DECLARE_METATYPE(QGraphicsWidget*)
-//Q_DECLARE_METATYPE(QGraphicsLayout*)
+Q_DECLARE_METATYPE(QGraphicsLayout*)
 
 Q_DECLARE_METATYPE(Plasma::Animation*)
 Q_DECLARE_METATYPE(Plasma::Applet*)

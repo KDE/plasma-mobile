@@ -18,8 +18,6 @@
 
 #include "dataengine.h"
 
-#include <QtDeclarative/qdeclarative.h>
-
 typedef Plasma::Service *ServicePtr;
 QScriptValue qScriptValueFromService(QScriptEngine *engine, const ServicePtr &service)
 {

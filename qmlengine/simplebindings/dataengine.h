@@ -32,7 +32,7 @@ using namespace Plasma;
 
 Q_DECLARE_METATYPE(Service*)
 Q_DECLARE_METATYPE(ServiceJob*)
-//Q_DECLARE_METATYPE(QVariant)
+Q_DECLARE_METATYPE(QVariant)
 Q_DECLARE_METATYPE(DataEngine::Dict)
 Q_DECLARE_METATYPE(DataEngine::Data)
 
