@@ -38,7 +38,7 @@
 
 Q_DECLARE_METATYPE(AppletInterface*)
 
-AppletInterface::AppletInterface(QmlAppletScript *parent)
+AppletInterface::AppletInterface(AbstractJsAppletScript *parent)
     : QObject(parent),
       m_appletScriptEngine(parent),
       m_actionSignals(0)
@@ -353,7 +353,7 @@ void AppletInterface::gc()
 }
 
 
-PopupAppletInterface::PopupAppletInterface(QmlAppletScript *parent)
+PopupAppletInterface::PopupAppletInterface(AbstractJsAppletScript *parent)
     : AppletInterface(parent)
 {
 }

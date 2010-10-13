@@ -61,7 +61,7 @@ void registerSimpleAppletMetaTypes(QScriptEngine *engine);
 void registerNonGuiMetaTypes(QScriptEngine *engine);
 
 QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
-    : Plasma::AppletScript(parent),
+    : AbstractJsAppletScript(parent, args),
       m_engine(0),
       m_env(0)
 {

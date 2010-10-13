@@ -24,7 +24,7 @@
 #include <QScriptValue>
 #include <QScriptContext>
 
-#include <Plasma/AppletScript>
+#include "abstractjsappletscript.h"
 #include <Plasma/DataEngine>
 
 class AppletInterface;
@@ -38,7 +38,7 @@ namespace Plasma
 class ScriptEnv;
 class EngineAccess;
 
-class QmlAppletScript : public Plasma::AppletScript
+class QmlAppletScript : public AbstractJsAppletScript
 {
 Q_OBJECT
 

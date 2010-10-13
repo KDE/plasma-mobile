@@ -78,7 +78,7 @@ class AppletInterface : public QObject
     Q_PROPERTY(QSizeF size READ size)
 
 public:
-    AppletInterface(QmlAppletScript *parent);
+    AppletInterface(AbstractJsAppletScript *parent);
     ~AppletInterface();
 
 //------------------------------------------------------------------
@@ -293,7 +293,7 @@ Q_SIGNALS:
     void immutableChanged();
 
 protected:
-    QmlAppletScript *m_appletScriptEngine;
+    AbstractJsAppletScript *m_appletScriptEngine;
 
 private:
     QSet<QString> m_actions;
@@ -310,7 +310,7 @@ class PopupAppletInterface : public AppletInterface
     Q_PROPERTY(QGraphicsWidget *popupWidget READ popupWidget WRITE setPopupWidget)
 
 public:
-    PopupAppletInterface(QmlAppletScript *parent);
+    PopupAppletInterface(AbstractJsAppletScript *parent);
 
     void setPopupIcon(const QIcon &icon);
     QIcon popupIcon();
