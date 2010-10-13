@@ -173,7 +173,7 @@ void AppletInterface::writeConfig(const QString &entry, const QVariant &value)
     }
 }
 
-QVariant AppletInterface::readConfig(const QString &entry) const
+QScriptValue AppletInterface::readConfig(const QString &entry) const
 {
     Plasma::ConfigLoader *config = 0;
     QVariant result;
@@ -188,7 +188,7 @@ QVariant AppletInterface::readConfig(const QString &entry) const
         result = config->property(entry);
     }
 
-    return result;
+    return m_appletScriptEngine->variantToScriptValue(result);
 }
 
 QString AppletInterface::file(const QString &fileType)

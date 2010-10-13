@@ -155,6 +155,11 @@ QScriptValue QmlAppletScript::newPlasmaSvg(QScriptContext *context, QScriptEngin
     return obj;
 }
 
+QScriptValue QmlAppletScript::variantToScriptValue(QVariant var)
+{
+    return m_engine->newVariant(var);
+}
+
 QScriptValue QmlAppletScript::newPlasmaFrameSvg(QScriptContext *context, QScriptEngine *engine)
 {
     if (context->argumentCount() == 0) {

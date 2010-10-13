@@ -254,11 +254,11 @@ enum IntervalAlignment {
 
     Q_INVOKABLE void setPreferredSize(qreal w, qreal h);
 
-    QString activeConfig() const;
+    Q_INVOKABLE QString activeConfig() const;
 
-    void setActiveConfig(const QString &name);
+    Q_INVOKABLE void setActiveConfig(const QString &name);
 
-    Q_INVOKABLE QVariant readConfig(const QString &entry) const;
+    Q_INVOKABLE QScriptValue readConfig(const QString &entry) const;
 
     Q_INVOKABLE void writeConfig(const QString &entry, const QVariant &value);
 
