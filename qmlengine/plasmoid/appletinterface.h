@@ -76,6 +76,10 @@ class AppletInterface : public QObject
     Q_PROPERTY(int apiVersion READ apiVersion CONSTANT)
     Q_PROPERTY(QRectF rect READ rect)
     Q_PROPERTY(QSizeF size READ size)
+#ifdef USE_JS_SCRIPTENGINE
+    Q_PROPERTY(QGraphicsLayout *layout WRITE setLayout READ layout)
+    Q_PROPERTY(QObject *sender READ sender)
+#endif
 
 public:
     AppletInterface(AbstractJsAppletScript *parent);
@@ -267,11 +271,16 @@ enum IntervalAlignment {
 
     Q_INVOKABLE bool include(const QString &script);
 
-    //TODO: remove?
+    Q_INVOKABLE void debug(const QString &msg);
     Q_INVOKABLE QObject *findChild(const QString &name) const;
 
     Q_INVOKABLE Plasma::Extender *extender() const;
 
+#ifdef USE_JS_SCRIPTENGINE
+    Q_INVOKABLE void update(const QRectF &rect = QRectF());
+    QGraphicsLayout *layout() const;
+    void setLayout(QGraphicsLayout *);
+#endif
 
     Plasma::DataEngine *dataEngine(const QString &name);
 

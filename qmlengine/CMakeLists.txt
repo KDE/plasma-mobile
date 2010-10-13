@@ -1,5 +1,6 @@
 set(qml_appletscript_SRCS
     engineaccess.cpp
+    plasmoid/abstractjsappletscript.cpp
     plasmoid/appletinterface.cpp
     plasmoid/appletauthorization.cpp
     plasmoid/qmlappletscript.cpp

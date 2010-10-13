@@ -123,6 +123,25 @@ void AppletInterface::setConfigurationRequired(bool needsConfiguring, const QStr
     m_appletScriptEngine->setConfigurationRequired(needsConfiguring, reason);
 }
 
+#ifdef USE_JS_SCRIPTENGINE
+
+void AppletInterface::update(const QRectF &rect)
+{
+    applet()->update(rect);
+}
+
+QGraphicsLayout *AppletInterface::layout() const
+{
+    return applet()->layout();
+}
+
+void AppletInterface::setLayout(QGraphicsLayout *layout)
+{
+    applet()->setLayout(layout);
+}
+
+#endif
+
 QString AppletInterface::activeConfig() const
 {
     return m_currentConfig.isEmpty() ? "main" : m_currentConfig;
@@ -323,6 +342,11 @@ bool AppletInterface::include(const QString &script)
     }
 
     return m_appletScriptEngine->include(path);
+}
+
+void AppletInterface::debug(const QString &msg)
+{
+    kDebug() << msg;
 }
 
 QObject *AppletInterface::findChild(const QString &name) const
