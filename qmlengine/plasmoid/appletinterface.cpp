@@ -45,7 +45,7 @@ AppletInterface::AppletInterface(AbstractJsAppletScript *parent)
 {
     connect(this, SIGNAL(releaseVisualFocus()), applet(), SIGNAL(releaseVisualFocus()));
     connect(this, SIGNAL(configNeedsSaving()), applet(), SIGNAL(configNeedsSaving()));
-    connect(applet(), SIGNAL(immutabilityChanged()), this, SIGNAL(immutableChanged()));
+    connect(applet(), SIGNAL(immutabilityChanged(Plasma::ImmutabilityType)), this, SIGNAL(immutableChanged()));
 }
 
 AppletInterface::~AppletInterface()
@@ -324,7 +324,7 @@ bool AppletInterface::userConfiguring() const
 
 int AppletInterface::apiVersion() const
 {
-    const QString constraint("[X-Plasma-API] == 'qml' and 'Applet' in [X-Plasma-ComponentTypes]");
+    const QString constraint("[X-Plasma-API] == 'javascript' and 'Applet' in [X-Plasma-ComponentTypes]");
     KService::List offers = KServiceTypeTrader::self()->query("Plasma/ScriptEngine", constraint);
     if (offers.isEmpty()) {
         return -1;
@@ -335,7 +335,7 @@ int AppletInterface::apiVersion() const
 
 bool AppletInterface::include(const QString &script)
 {
-    const QString path = m_appletScriptEngine->filePath("qml", script);
+    const QString path = m_appletScriptEngine->filePath("scripts", script);
 
     if (path.isEmpty()) {
         return false;
@@ -432,4 +432,6 @@ QGraphicsWidget *PopupAppletInterface::popupWidget()
     return popupApplet()->graphicsWidget();
 }
 
+#ifndef USE_JS_SCRIPTENGINE
 #include "appletinterface.moc"
+#endif

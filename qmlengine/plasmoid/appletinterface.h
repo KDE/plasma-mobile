@@ -32,7 +32,7 @@
 #include <Plasma/DataEngine>
 #include <Plasma/Theme>
 
-#include "qmlappletscript.h"
+#include "abstractjsappletscript.h"
 
 class QAction;
 class QmlAppletScript;

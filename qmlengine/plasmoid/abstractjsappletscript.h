@@ -29,7 +29,7 @@ class AbstractJsAppletScript : public Plasma::AppletScript
 Q_OBJECT
 
 public:
-    AbstractJsAppletScript(QObject *parent, const QVariantList &args);
+    AbstractJsAppletScript(QObject *parent, const QVariantList &args = QVariantList());
     ~AbstractJsAppletScript();
 
     virtual bool include(const QString &path) = 0;
