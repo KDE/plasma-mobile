@@ -144,8 +144,6 @@ QScriptValue QmlAppletScript::newPlasmaSvg(QScriptContext *context, QScriptEngin
     }
 
     const QString filename = context->argument(0).toString();
-    bool parentedToApplet = false;
-    QGraphicsWidget *parent = extractParent(context, engine, 1, &parentedToApplet);
     Plasma::Svg *svg = new ThemedSvg(0);
     svg->setImagePath(ThemedSvg::findSvg(engine, filename));
 

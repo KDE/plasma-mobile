@@ -1,8 +1,10 @@
 set(qml_appletscript_SRCS
-    engineaccess.cpp
+    common/javascriptaddonpackagestructure.cpp
+    common/scriptenvui.cpp
     plasmoid/abstractjsappletscript.cpp
-    plasmoid/appletinterface.cpp
     plasmoid/appletauthorization.cpp
+    plasmoid/appletinterface.cpp
+    plasmoid/engineaccess.cpp
     plasmoid/qmlappletscript.cpp
     plasmoid/themedsvg.cpp
     simplebindings/bytearrayclass.cpp
@@ -14,8 +16,6 @@ set(qml_appletscript_SRCS
     simplebindings/icon.cpp
     simplebindings/qscriptbookkeeping.cpp
     simplebindings/url.cpp
-    common/scriptenvui.cpp
-    common/javascriptaddonpackagestructure.cpp
     )
 
 include_directories(${PHONON_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR}/common)
