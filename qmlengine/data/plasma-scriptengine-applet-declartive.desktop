@@ -1,16 +1,8 @@
 [Desktop Entry]
-Name=QML
-Name[en_GB]=QML
-Name[et]=QML
-Name[ja]=QML
-Name[km]=QML
-Name[nds]=QML
-Name[pt]=QML
-Name[pt_BR]=QML
-Name[sv]=QML
-Name[uk]=QML
-Name[x-test]=xxQMLxx
+Name=Declarative widget
+Comment=Native Plasma widget written in QML and JavaScript
 Type=Service
+Icon=text-x-script
 
 X-KDE-ServiceTypes=Plasma/ScriptEngine
 X-KDE-Library=plasma_appletscript_qml

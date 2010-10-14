@@ -31,4 +31,4 @@ target_link_libraries(plasma_appletscript_qml
 
 
 install(TARGETS plasma_appletscript_qml DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-scriptengine-applet-declartive.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES data/plasma-scriptengine-applet-declartive.desktop DESTINATION ${SERVICES_INSTALL_DIR})
