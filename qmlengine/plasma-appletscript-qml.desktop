@@ -17,7 +17,6 @@ X-KDE-Library=plasma_appletscript_qml
 X-EngineName=qmlscript
 X-Plasma-API=qmlscript
 X-Plasma-ComponentTypes=Applet
-X-Plasma-PackageFormat=qmlscript
 
 X-KDE-PluginInfo-Author=Alexis Menard
 X-KDE-PluginInfo-Email=menard@kde.org
