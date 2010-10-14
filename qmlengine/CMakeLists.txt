@@ -1,11 +1,11 @@
-set(qml_appletscript_SRCS
+set(declarative_appletscript_SRCS
     common/javascriptaddonpackagestructure.cpp
     common/scriptenvui.cpp
     plasmoid/abstractjsappletscript.cpp
     plasmoid/appletauthorization.cpp
     plasmoid/appletinterface.cpp
+    plasmoid/declarativeappletscript.cpp
     plasmoid/engineaccess.cpp
-    plasmoid/qmlappletscript.cpp
     plasmoid/themedsvg.cpp
     simplebindings/bytearrayclass.cpp
     simplebindings/bytearrayprototype.cpp
@@ -20,8 +20,8 @@ set(qml_appletscript_SRCS
 
 include_directories(${PHONON_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR}/common)
 
-kde4_add_plugin(plasma_appletscript_qml ${qml_appletscript_SRCS})
-target_link_libraries(plasma_appletscript_qml
+kde4_add_plugin(plasma_appletscript_declarative ${declarative_appletscript_SRCS})
+target_link_libraries(plasma_appletscript_declarative
     ${KDE4_PLASMA_LIBS}
     ${KDE4_KIO_LIBS}
     ${QT_QTSCRIPT_LIBRARY}
@@ -30,5 +30,5 @@ target_link_libraries(plasma_appletscript_qml
 )
 
 
-install(TARGETS plasma_appletscript_qml DESTINATION ${PLUGIN_INSTALL_DIR})
+install(TARGETS plasma_appletscript_declarative DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES data/plasma-scriptengine-applet-declartive.desktop DESTINATION ${SERVICES_INSTALL_DIR})

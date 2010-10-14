@@ -22,8 +22,9 @@
 
 #include <QObject>
 
-#include "plasmoid/qmlappletscript.h"
+#include <QScriptValue>
 
+class DeclarativeAppletScript;
 
 class EngineAccess : public QObject
 {
@@ -31,13 +32,13 @@ class EngineAccess : public QObject
 
 
 public:
-    EngineAccess(QmlAppletScript *parent);
+    EngineAccess(DeclarativeAppletScript *parent);
     ~EngineAccess();
 
     Q_INVOKABLE void setEngine(QScriptValue val);
 
 private:
-    QmlAppletScript *m_appletScriptEngine;
+    DeclarativeAppletScript *m_appletScriptEngine;
 
 };
 

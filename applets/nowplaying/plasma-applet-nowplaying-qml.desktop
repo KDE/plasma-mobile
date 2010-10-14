@@ -25,5 +25,5 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Name=org.kde.nowplaying-qml
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
-X-Plasma-API=qmlscript
+X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=qml/main.qml

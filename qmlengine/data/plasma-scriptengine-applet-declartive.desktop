@@ -5,9 +5,9 @@ Type=Service
 Icon=text-x-script
 
 X-KDE-ServiceTypes=Plasma/ScriptEngine
-X-KDE-Library=plasma_appletscript_qml
-X-EngineName=qmlscript
-X-Plasma-API=qmlscript
+X-KDE-Library=plasma_appletscript_declarative
+X-EngineName=declarativeappletscript
+X-Plasma-API=declarativeappletscript
 X-Plasma-ComponentTypes=Applet
 
 X-KDE-PluginInfo-Author=Alexis Menard

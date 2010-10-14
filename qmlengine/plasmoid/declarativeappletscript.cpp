@@ -41,10 +41,11 @@
 #include <Plasma/Svg>
 
 
+#include "plasmoid/declarativeappletscript.h"
+
 #include "engineaccess.h"
 #include "plasmoid/appletauthorization.h"
 #include "plasmoid/appletinterface.h"
-#include "plasmoid/qmlappletscript.h"
 #include "plasmoid/themedsvg.h"
 
 #include "common/scriptenv.h"
@@ -52,7 +53,7 @@
 #include "simplebindings/dataenginereceiver.h"
 #include "simplebindings/i18n.h"
 
-K_EXPORT_PLASMA_APPLETSCRIPTENGINE(qmlscripts, QmlAppletScript)
+K_EXPORT_PLASMA_APPLETSCRIPTENGINE(declarativeappletscript, DeclarativeAppletScript)
 
 
 QScriptValue constructIconClass(QScriptEngine *engine);
@@ -60,7 +61,7 @@ QScriptValue constructKUrlClass(QScriptEngine *engine);
 void registerSimpleAppletMetaTypes(QScriptEngine *engine);
 void registerNonGuiMetaTypes(QScriptEngine *engine);
 
-QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
+DeclarativeAppletScript::DeclarativeAppletScript(QObject *parent, const QVariantList &args)
     : AbstractJsAppletScript(parent, args),
       m_engine(0),
       m_env(0)
@@ -68,11 +69,11 @@ QmlAppletScript::QmlAppletScript(QObject *parent, const QVariantList &args)
     Q_UNUSED(args);
 }
 
-QmlAppletScript::~QmlAppletScript()
+DeclarativeAppletScript::~DeclarativeAppletScript()
 {
 }
 
-bool QmlAppletScript::init()
+bool DeclarativeAppletScript::init()
 {
     m_declarativeWidget = new Plasma::DeclarativeWidget(applet());
     m_declarativeWidget->setInitializationDelayed(true);
@@ -112,12 +113,12 @@ bool QmlAppletScript::init()
     return true;
 }
 
-void QmlAppletScript::collectGarbage()
+void DeclarativeAppletScript::collectGarbage()
 {
     m_engine->collectGarbage();
 }
 
-QString QmlAppletScript::filePath(const QString &type, const QString &file) const
+QString DeclarativeAppletScript::filePath(const QString &type, const QString &file) const
 {
     const QString path = m_env->filePathFromScriptContext(type.toLocal8Bit().constData(), file);
 
@@ -128,7 +129,7 @@ QString QmlAppletScript::filePath(const QString &type, const QString &file) cons
     return package()->filePath(type.toLocal8Bit().constData(), file);
 }
 
-void QmlAppletScript::configChanged()
+void DeclarativeAppletScript::configChanged()
 {
     if (!m_env) {
         return;
@@ -137,7 +138,7 @@ void QmlAppletScript::configChanged()
     m_env->callEventListeners("configchanged");
 }
 
-QScriptValue QmlAppletScript::newPlasmaSvg(QScriptContext *context, QScriptEngine *engine)
+QScriptValue DeclarativeAppletScript::newPlasmaSvg(QScriptContext *context, QScriptEngine *engine)
 {
     if (context->argumentCount() == 0) {
         return context->throwError(i18n("Constructor takes at least 1 argument"));
@@ -153,12 +154,12 @@ QScriptValue QmlAppletScript::newPlasmaSvg(QScriptContext *context, QScriptEngin
     return obj;
 }
 
-QScriptValue QmlAppletScript::variantToScriptValue(QVariant var)
+QScriptValue DeclarativeAppletScript::variantToScriptValue(QVariant var)
 {
     return m_engine->newVariant(var);
 }
 
-QScriptValue QmlAppletScript::newPlasmaFrameSvg(QScriptContext *context, QScriptEngine *engine)
+QScriptValue DeclarativeAppletScript::newPlasmaFrameSvg(QScriptContext *context, QScriptEngine *engine)
 {
     if (context->argumentCount() == 0) {
         return context->throwError(i18n("Constructor takes at least 1 argument"));
@@ -177,7 +178,7 @@ QScriptValue QmlAppletScript::newPlasmaFrameSvg(QScriptContext *context, QScript
     return obj;
 }
 
-QScriptValue QmlAppletScript::newPlasmaExtenderItem(QScriptContext *context, QScriptEngine *engine)
+QScriptValue DeclarativeAppletScript::newPlasmaExtenderItem(QScriptContext *context, QScriptEngine *engine)
 {
     Plasma::Extender *extender = 0;
     if (context->argumentCount() > 0) {
@@ -199,7 +200,7 @@ QScriptValue QmlAppletScript::newPlasmaExtenderItem(QScriptContext *context, QSc
     return fun;
 }
 
-QGraphicsWidget *QmlAppletScript::extractParent(QScriptContext *context, QScriptEngine *engine,
+QGraphicsWidget *DeclarativeAppletScript::extractParent(QScriptContext *context, QScriptEngine *engine,
                                                        int argIndex, bool *parentedToApplet)
 {
     if (parentedToApplet) {
@@ -228,7 +229,7 @@ QGraphicsWidget *QmlAppletScript::extractParent(QScriptContext *context, QScript
     return parent;
 }
 
-void QmlAppletScript::constraintsEvent(Plasma::Constraints constraints)
+void DeclarativeAppletScript::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::FormFactorConstraint) {
         emit formFactorChanged();
@@ -243,7 +244,7 @@ void QmlAppletScript::constraintsEvent(Plasma::Constraints constraints)
     }
 }
 
-void QmlAppletScript::popupEvent(bool popped)
+void DeclarativeAppletScript::popupEvent(bool popped)
 {
     if (!m_env) {
         return;
@@ -255,7 +256,7 @@ void QmlAppletScript::popupEvent(bool popped)
     m_env->callEventListeners("popupEvent", args);
 }
 
-void QmlAppletScript::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
+void DeclarativeAppletScript::dataUpdated(const QString &name, const Plasma::DataEngine::Data &data)
 {
     QScriptValueList args;
     args << m_engine->toScriptValue(name) << m_engine->toScriptValue(data);
@@ -263,7 +264,7 @@ void QmlAppletScript::dataUpdated(const QString &name, const Plasma::DataEngine:
     m_env->callEventListeners("dataUpdated", args);
 }
 
-void QmlAppletScript::extenderItemRestored(Plasma::ExtenderItem* item)
+void DeclarativeAppletScript::extenderItemRestored(Plasma::ExtenderItem* item)
 {
     if (!m_env) {
         return;
@@ -275,7 +276,7 @@ void QmlAppletScript::extenderItemRestored(Plasma::ExtenderItem* item)
     m_env->callEventListeners("initExtenderItem", args);
 }
 
-void QmlAppletScript::activate()
+void DeclarativeAppletScript::activate()
 {
     if (!m_env) {
         return;
@@ -284,7 +285,7 @@ void QmlAppletScript::activate()
     m_env->callEventListeners("activate");
 }
 
-void QmlAppletScript::executeAction(const QString &name)
+void DeclarativeAppletScript::executeAction(const QString &name)
 {
     if (!m_env) {
         return;
@@ -294,17 +295,17 @@ void QmlAppletScript::executeAction(const QString &name)
     m_env->callEventListeners(func);
 }
 
-bool QmlAppletScript::include(const QString &path)
+bool DeclarativeAppletScript::include(const QString &path)
 {
     return m_env->include(path);
 }
 
-ScriptEnv *QmlAppletScript::scriptEnv()
+ScriptEnv *DeclarativeAppletScript::scriptEnv()
 {
     return m_env;
 }
 
-void QmlAppletScript::setupObjects()
+void DeclarativeAppletScript::setupObjects()
 {
     QScriptValue global = m_engine->globalObject();
 
@@ -325,8 +326,8 @@ void QmlAppletScript::setupObjects()
     global.setProperty("startupArguments", args);
 
     bindI18N(m_engine);
-    global.setProperty("dataEngine", m_engine->newFunction(QmlAppletScript::dataEngine));
-    global.setProperty("service", m_engine->newFunction(QmlAppletScript::service));
+    global.setProperty("dataEngine", m_engine->newFunction(DeclarativeAppletScript::dataEngine));
+    global.setProperty("service", m_engine->newFunction(DeclarativeAppletScript::service));
 
     //Add stuff from Qt
     ByteArrayClass *baClass = new ByteArrayClass(m_engine);
@@ -338,12 +339,12 @@ void QmlAppletScript::setupObjects()
     global.setProperty("Url", constructKUrlClass(m_engine));
 
     // Add stuff from Plasma
-    global.setProperty("Svg", m_engine->newFunction(QmlAppletScript::newPlasmaSvg));
-    global.setProperty("FrameSvg", m_engine->newFunction(QmlAppletScript::newPlasmaFrameSvg));
-    global.setProperty("ExtenderItem", m_engine->newFunction(QmlAppletScript::newPlasmaExtenderItem));
+    global.setProperty("Svg", m_engine->newFunction(DeclarativeAppletScript::newPlasmaSvg));
+    global.setProperty("FrameSvg", m_engine->newFunction(DeclarativeAppletScript::newPlasmaFrameSvg));
+    global.setProperty("ExtenderItem", m_engine->newFunction(DeclarativeAppletScript::newPlasmaExtenderItem));
 }
 
-QScriptValue QmlAppletScript::dataEngine(QScriptContext *context, QScriptEngine *engine)
+QScriptValue DeclarativeAppletScript::dataEngine(QScriptContext *context, QScriptEngine *engine)
 {
     if (context->argumentCount() != 1) {
         return context->throwError(i18n("dataEngine() takes one argument"));
@@ -362,7 +363,7 @@ QScriptValue QmlAppletScript::dataEngine(QScriptContext *context, QScriptEngine 
     return v;
 }
 
-QScriptValue QmlAppletScript::service(QScriptContext *context, QScriptEngine *engine)
+QScriptValue DeclarativeAppletScript::service(QScriptContext *context, QScriptEngine *engine)
 {
     if (context->argumentCount() != 2) {
         return context->throwError(i18n("service() takes two arguments"));
@@ -382,7 +383,7 @@ QScriptValue QmlAppletScript::service(QScriptContext *context, QScriptEngine *en
     return engine->newQObject(service, QScriptEngine::AutoOwnership);
 }
 
-void QmlAppletScript::setEngine(QScriptValue &val)
+void DeclarativeAppletScript::setEngine(QScriptValue &val)
 {
     if (val.engine() == m_engine) {
         return;
@@ -444,10 +445,10 @@ void QmlAppletScript::setEngine(QScriptValue &val)
     QTimer::singleShot(0, this, SLOT(configChanged()));
 }
 
-void QmlAppletScript::signalHandlerException(const QScriptValue &exception)
+void DeclarativeAppletScript::signalHandlerException(const QScriptValue &exception)
 {
     kWarning()<<"Exception caught: "<<exception.toVariant();
 }
 
-#include "qmlappletscript.moc"
+#include "declarativeappletscript.moc"
 

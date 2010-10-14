@@ -20,8 +20,9 @@
 #include "engineaccess.h"
 #include "scriptenv.h"
 
+#include "plasmoid/declarativeappletscript.h"
 
-EngineAccess::EngineAccess(QmlAppletScript *parent)
+EngineAccess::EngineAccess(DeclarativeAppletScript *parent)
     : QObject(parent),
       m_appletScriptEngine(parent)
 {

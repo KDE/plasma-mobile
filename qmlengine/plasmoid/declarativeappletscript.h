@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef QML_APPLETSCRIPT_H
-#define QML_APPLETSCRIPT_H
+#ifndef DECLARATIVE_APPLETSCRIPT_H
+#define DECLARATIVE_APPLETSCRIPT_H
 
 #include <QScriptValue>
 #include <QScriptContext>
@@ -38,13 +38,13 @@ namespace Plasma
 class ScriptEnv;
 class EngineAccess;
 
-class QmlAppletScript : public AbstractJsAppletScript
+class DeclarativeAppletScript : public AbstractJsAppletScript
 {
 Q_OBJECT
 
 public:
-    QmlAppletScript(QObject *parent, const QVariantList &args);
-    ~QmlAppletScript();
+    DeclarativeAppletScript(QObject *parent, const QVariantList &args);
+    ~DeclarativeAppletScript();
 
     void setEngine(QScriptValue &val);
 
