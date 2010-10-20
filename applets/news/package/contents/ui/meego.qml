@@ -22,6 +22,8 @@ import com.meego 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
+import "utils.js" as Utils
+
 Window {
     id: window
 
@@ -85,20 +87,13 @@ Window {
     property Component secondPage: Page {
         title: dataSource.data['title'];
 
-        function date(timestamp)
-        {
-            var date = new Date(timestamp*1000)
-
-            return date.toDateString()+ ", " + date.getHours()  + ":" + date.getMinutes()+ ":" + date.getSeconds();
-        }
-
         ListView {
             id: postList
             anchors.fill: parent
             model: dataSource.data['items']
             delegate: BasicListItem {
                 title: model.modelData.title
-                subtitle: date(model.modelData.time);
+                subtitle: Utils.date(model.modelData.time);
                 onClicked: {
                     currentBody = "<body style=\"background:#fff;\">"+dataSource.data['items'][postList.currentIndex].description+"</body>";
                     currentTitle = model.modelData.title
