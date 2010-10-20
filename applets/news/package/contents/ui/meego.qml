@@ -123,6 +123,22 @@ Window {
                 backAction.interactive = (url != "about:blank")
                 linkAction.interactive = (url != currentUrl)
             }
+            onLoadProgress: {
+                progressBar.visible = true
+                progressBar.value = percent
+            }
+            onLoadFinished: {
+                progressBar.visible = false
+            }
+
+            ProgressBar {
+                id: progressBar
+                minimum: 0
+                maximum: 100
+                anchors.left: bodyView.left
+                anchors.right: bodyView.right
+                anchors.bottom: bodyView.bottom
+            }
         }
     }
 
