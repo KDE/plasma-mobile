@@ -22,7 +22,7 @@ import com.meego 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
-import "utils.js" as Utils
+import "../code/utils.js" as Utils
 
 Window {
     id: window
