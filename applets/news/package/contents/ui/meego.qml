@@ -54,6 +54,9 @@ Window {
         id: dataSource
         engine: "rss"
         interval: 50000
+        onDataChanged: {
+            spinner.visible = false;
+        }
     }
 
     property Component firstPage: Page{
@@ -68,6 +71,7 @@ Window {
                 onClicked: {
                     //secondPage.title = name
                     dataSource.source = url
+                    spinner.visible = true;
                     window.nextPage(secondPage);
                 }
             }
@@ -144,5 +148,13 @@ Window {
 
     Component.onCompleted: {
         window.nextPage(firstPage)
+    }
+
+    Spinner {
+        id: spinner
+        unknownDuration: true
+        visible: false
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
     }
 }
