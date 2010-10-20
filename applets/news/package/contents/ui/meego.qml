@@ -27,6 +27,7 @@ Window {
 
     property string currentTtile;
     property string currentBody;
+    property string currentUrl;
 
     ListModel {
        id: rssList
@@ -55,74 +56,77 @@ Window {
         interval: 50000
     }
 
-    Component {
+    property Component firstPage: Page{
         id: pageComponent
 
-        Page {
-            title: "News reader"
-            ListView {
-                anchors.fill: parent
-                model: rssList
-                delegate: BasicListItem {
-                    title: name
-                    onClicked: {
-                        //secondPage.title = name
-                        dataSource.source = url
-                        window.nextPage(secondPage);
-                    }
+        title: "News reader"
+        ListView {
+            anchors.fill: parent
+            model: rssList
+            delegate: BasicListItem {
+                title: name
+                onClicked: {
+                    //secondPage.title = name
+                    dataSource.source = url
+                    window.nextPage(secondPage);
                 }
-
-                PositionIndicator { }
             }
+
+            PositionIndicator { }
         }
     }
 
     property Component secondPage: Page {
         title: dataSource.data['title'];
-        Page {
-            ListView {
-                id: postList
-                anchors.fill: parent
-                model: dataSource.data['items']
-                delegate: BasicListItem {
-                    title: model.modelData.title
-                    onClicked: {
-                        currentBody = "<body style=\"background:#fff;\">"+dataSource.data['items'][postList.currentIndex].description+"</body>";
-                        currentTitle = model.modelData.title
-                        window.nextPage(thirdPage);
-                    }
-                }
 
-                PositionIndicator { }
+        ListView {
+            id: postList
+            anchors.fill: parent
+            model: dataSource.data['items']
+            delegate: BasicListItem {
+                title: model.modelData.title
+                onClicked: {
+                    currentBody = "<body style=\"background:#fff;\">"+dataSource.data['items'][postList.currentIndex].description+"</body>";
+                    currentTitle = model.modelData.title
+                    currentUrl = model.modelData.link
+                    window.nextPage(thirdPage);
+                }
             }
+
+            PositionIndicator { }
         }
     }
 
     property Component thirdPage: Page {
         title: currentTitle;
-        Page {
-            actions: [
-                Action {
-                    id: backAction
-                    iconId: "icon-m-toolbar-list"
-                    onTriggered: { bodyView.html = currentBody }
-                    interactive: true
-                }
-            ]
-            PlasmaWidgets.WebView {
-                id : bodyView
-                html: currentBody;
-                anchors.fill: parent
-                dragToScroll : true
+        actions: [
+            Action {
+                id: backAction
+                iconId: "icon-m-toolbar-previous"
+                onTriggered: { bodyView.html = currentBody }
+                interactive: false
+            },
+            Action {
+                id: linkAction
+                iconId: "icon-l-browser"
+                onTriggered: { bodyView.url = Url(currentUrl) }
+                interactive: true
+            }
+        ]
+        PlasmaWidgets.WebView {
+            id : bodyView
+            html: currentBody;
+            anchors.fill: parent
+            dragToScroll : true
 
-                onUrlChanged: {
-                    backAction.interactive = (url != "about:blank")
-                }
+            onUrlChanged: {
+                backAction.interactive = (url != "about:blank")
+                linkAction.interactive = (url != currentUrl)
             }
         }
     }
 
     Component.onCompleted: {
-        window.nextPage(pageComponent)
+        window.nextPage(firstPage)
     }
 }
