@@ -25,7 +25,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 Window {
     id: window
 
-    property string currentTtile;
+    property string currentTitle;
     property string currentBody;
     property string currentUrl;
 
@@ -85,13 +85,20 @@ Window {
     property Component secondPage: Page {
         title: dataSource.data['title'];
 
+        function date(timestamp)
+        {
+            var date = new Date(timestamp*1000)
+
+            return date.toDateString()+ ", " + date.getHours()  + ":" + date.getMinutes()+ ":" + date.getSeconds();
+        }
+
         ListView {
             id: postList
             anchors.fill: parent
             model: dataSource.data['items']
             delegate: BasicListItem {
                 title: model.modelData.title
-                subtitle: model.modelData.time
+                subtitle: date(model.modelData.time);
                 onClicked: {
                     currentBody = "<body style=\"background:#fff;\">"+dataSource.data['items'][postList.currentIndex].description+"</body>";
                     currentTitle = model.modelData.title
