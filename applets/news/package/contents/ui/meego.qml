@@ -69,9 +69,11 @@ Window {
             delegate: BasicListItem {
                 title: name
                 onClicked: {
-                    //secondPage.title = name
-                    dataSource.source = url
-                    spinner.visible = true;
+                    var oldSource = dataSource.source
+                    if (oldSource != url) {
+                        dataSource.source = url
+                        spinner.visible = true;
+                    }
                     window.nextPage(secondPage);
                 }
             }
@@ -89,6 +91,7 @@ Window {
             model: dataSource.data['items']
             delegate: BasicListItem {
                 title: model.modelData.title
+                subtitle: model.modelData.time
                 onClicked: {
                     currentBody = "<body style=\"background:#fff;\">"+dataSource.data['items'][postList.currentIndex].description+"</body>";
                     currentTitle = model.modelData.title
