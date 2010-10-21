@@ -22,7 +22,8 @@ import com.meego 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
-import "../code/utils.js" as Utils
+import "plasmapackage:/code/utils.js" as Utils
+
 
 Window {
     id: window
@@ -95,7 +96,7 @@ Window {
                 title: model.modelData.title
                 subtitle: Utils.date(model.modelData.time);
                 onClicked: {
-                    currentBody = "<body style=\"background:#fff;\">"+dataSource.data['items'][postList.currentIndex].description+"</body>";
+                    currentBody = "<body style=\"background:#fff;\">"+model.modelData.description+"</body>";
                     currentTitle = model.modelData.title
                     currentUrl = model.modelData.link
                     window.nextPage(thirdPage);
