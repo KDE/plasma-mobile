@@ -32,19 +32,16 @@ function setArticleRead(id)
 
 function isArticleRead(id)
 {
-    console.log(readArticles)
     return readArticles.indexOf(id) > -1;
 }
 
 readJobFinished = function(job)
 {
     for (prop in job.result) {
-        console.log(prop)
         if (prop) {
             readArticles.push(prop)
         }
     }
-    console.log(readArticles);
     running = false
 }
 
@@ -59,7 +56,6 @@ function loadReadArticles()
     queryOperation.group = "read"
     var job = storageService.startOperationCall(queryOperation);
     job.finished.connect(readJobFinished)
-    return true
 }
 
 
