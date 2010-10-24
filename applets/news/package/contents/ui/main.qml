@@ -38,14 +38,26 @@ QGraphicsWidget {
 
     function configChanged()
     {
-        var url = plasmoid.readConfig("feeds")
-        print("Configuration changed: " + url);
-        dataSource.source = url
-        print ( dataSource.source);
+        var source = plasmoid.readConfig("feeds")
+        var sourceString = new String(source)
+        print("Configuration changed: " + source);
+        dataSource.source = source
+
+        feedListModel.append({"text": i18n("Show All"), "url": source});
+        var urls = sourceString.split(" ")
+
+        for (var i=0; i < urls.length; ++i) {
+            var url = urls[i]
+            feedListModel.append({"text": url, "url": url});
+        }
     }
 
     Item {
       id:main
+
+      ListModel {
+          id: feedListModel
+      }
 
       PlasmaCore.DataSource {
           id: dataSource
@@ -119,10 +131,62 @@ QGraphicsWidget {
             tabBarShown: false
 
             QGraphicsWidget {
+                id: feedListContainer
+                ListView {
+                    id: feedList
+                    anchors.fill: feedListContainer
+                    signal itemClicked;
+                    spacing: 5;
+                    snapMode: ListView.SnapToItem
+
+                    clip: true
+                    model: feedListModel
+                    delegate: Text {
+                        text: model.text
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                dataSource.source = model.url
+                                mainView.currentIndex = 1
+                            }
+                        }
+                    }
+                }
+            }
+            QGraphicsWidget {
                 id: listContainer
+                Component.onCompleted: {
+                    mainView.currentIndex = 1
+                }
+
+
+                PlasmaWidgets.Frame {
+                    id: listContainerToolbar
+                    anchors.left: listContainer.left
+                    anchors.right: listContainer.right
+                    maximumSize: maximumSize.width+"x"+minimumSize.height
+                    frameShadow: "Raised"
+                    layout: GraphicsLayouts.QGraphicsLinearLayout {
+                        PlasmaWidgets.PushButton {
+                            id: listButton
+                            maximumSize: minimumSize
+                            text: i18n("Feed List")
+
+                            onClicked: {
+                                mainView.currentIndex = 0;
+                            }
+                        }
+
+                        QGraphicsWidget {}
+                    }
+                }
+
                 ListView {
                     id: list
-                    anchors.fill: listContainer
+                    anchors.left: listContainer.left
+                    anchors.right: listContainer.right
+                    anchors.top: listContainerToolbar.bottom
+                    anchors.bottom: listContainer.bottom
                     signal itemClicked;
                     spacing: 5;
                     snapMode: ListView.SnapToItem
@@ -172,11 +236,11 @@ QGraphicsWidget {
 
         Connections {
             target: list
-            onItemClicked: mainView.currentIndex = 1
+            onItemClicked: mainView.currentIndex = 2
         }
         Connections {
             target: showAllButton
-            onClicked: mainView.currentIndex = 0
+            onClicked: mainView.currentIndex = 1
         }
     }
 }
