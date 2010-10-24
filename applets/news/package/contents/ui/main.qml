@@ -31,6 +31,7 @@ QGraphicsWidget {
     minimumSize: "200x200"
 
     Component.onCompleted: {
+        BookKeeping.loadReadArticles();
         print(plasmoid['addEventListener'])
         plasmoid.addEventListener('ConfigChanged', configChanged);
     }
@@ -85,13 +86,22 @@ QGraphicsWidget {
                         horizontalAlignment: Text.AlignRight
                         text: '<em><small>'+Utils.date(model.modelData.time)+'</em></small>&nbsp;'
                     }
+
+                    Component.onCompleted: {
+                        if (BookKeeping.isArticleRead(model.modelData.link)) {
+                            opacity = 0.5
+                        } else {
+                            opacity = 1
+                        }
+                    }
                 }
 
                 MouseArea {
                     id: itemMouse
                     anchors.fill: background
                     onClicked: {
-                        BookKeeping.setArticleRead(dataSource.source, model.modelData.link);
+                        BookKeeping.setArticleRead(model.modelData.link);
+                        delegateLayout.opacity = 0.5;
 
                         list.currentIndex = index
                         bodyView.html = "<body style=\"background:#fff;\">"+model.modelData.description+"</body>"

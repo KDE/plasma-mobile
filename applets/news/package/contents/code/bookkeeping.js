@@ -18,22 +18,49 @@
  */
 
 var storageService = loadService("org.kde.servicestorage")
+var running = false
 
-var markOperation = storageService.operationDescription("save")
+var readArticles = new Array;
 
-var queryOperation = storageService.operationDescription("retrieve")
-
-function setArticleRead(source, id)
+function setArticleRead(id)
 {
-    markOperation.group = source
+    var markOperation = storageService.operationDescription("save")
+    markOperation.group = "read"
     markOperation.key = id
     storageService.startOperationCall(markOperation);
 }
 
-function isArticleRead(source, id)
+function isArticleRead(id)
 {
-    markOperation.group = source
-    markOperation.key = id
-    storageService.startOperationCall(markOperation);
+    console.log(readArticles)
+    return readArticles.indexOf(id) > -1;
 }
+
+readJobFinished = function(job)
+{
+    for (prop in job.result) {
+        console.log(prop)
+        if (prop) {
+            readArticles.push(prop)
+        }
+    }
+    console.log(readArticles);
+    running = false
+}
+
+function loadReadArticles()
+{
+    if (running) {
+        return
+    }
+
+    running = true;
+    var queryOperation = storageService.operationDescription("retrieve")
+    queryOperation.group = "read"
+    var job = storageService.startOperationCall(queryOperation);
+    job.finished.connect(readJobFinished)
+    return true
+}
+
+
 
