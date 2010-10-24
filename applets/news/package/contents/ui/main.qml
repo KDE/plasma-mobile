@@ -69,61 +69,6 @@ QGraphicsWidget {
           id: theme
       }
 
-      resources: [
-          Component {
-              id: simpleText
-              PlasmaCore.FrameSvgItem {
-                id : background
-                imagePath: "widgets/frame"
-                prefix: "plain"
-
-                width: list.width
-                height: delegateLayout.height + 5
-
-                Column {
-                    id : delegateLayout
-                    width: list.width
-                    spacing: 5
-
-                    Text {
-                        //width: list.width
-                        color: theme.textColor
-                        textFormat: Text.RichText
-                        text: model.modelData.title
-                    }
-                    Text {
-                        id: date
-                        color: theme.textColor
-                        width: list.width
-                        horizontalAlignment: Text.AlignRight
-                        text: '<em><small>'+Utils.date(model.modelData.time)+'</em></small>&nbsp;'
-                    }
-
-                    Component.onCompleted: {
-                        if (BookKeeping.isArticleRead(model.modelData.link)) {
-                            opacity = 0.5
-                        } else {
-                            opacity = 1
-                        }
-                    }
-                }
-
-                MouseArea {
-                    id: itemMouse
-                    anchors.fill: background
-                    onClicked: {
-                        BookKeeping.setArticleRead(model.modelData.link);
-                        delegateLayout.opacity = 0.5;
-
-                        list.currentIndex = index
-                        bodyView.html = "<body style=\"background:#fff;\">"+model.modelData.description+"</body>"
-                        list.itemClicked()
-                    }
-                }
-              }
-          }
-      ]
-
         PlasmaWidgets.TabBar {
             id : mainView
             width : page.width
@@ -193,7 +138,27 @@ QGraphicsWidget {
 
                     clip: true
                     model: dataSource.data['items']
-                    delegate: simpleText
+                    delegate: ListItem {
+                        text: model.modelData.title
+                        date: Utils.date(model.modelData.time)
+
+                        Component.onCompleted: {
+                            if (BookKeeping.isArticleRead(model.modelData.link)) {
+                                opacity = 0.5
+                            } else {
+                                opacity = 1
+                            }
+                        }
+
+                        onClicked: {
+                            BookKeeping.setArticleRead(model.modelData.link);
+                            opacity = 0.5;
+
+                            list.currentIndex = index
+                            bodyView.html = "<body style=\"background:#fff;\">"+model.modelData.description+"</body>"
+                            list.itemClicked()
+                        }
+                    }
                 }
             }
             QGraphicsWidget {
