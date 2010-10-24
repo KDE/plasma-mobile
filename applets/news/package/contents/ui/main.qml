@@ -53,22 +53,62 @@ QGraphicsWidget {
     }
 
     Item {
-      id:main
+        ListModel {
+            id: feedListModel
+        }
 
-      ListModel {
-          id: feedListModel
-      }
+        PlasmaCore.DataSource {
+            id: dataSource
+            engine: "rss"
+            interval: 50000
+        }
 
-      PlasmaCore.DataSource {
-          id: dataSource
-          engine: "rss"
-          interval: 50000
-      }
+        PlasmaCore.Theme {
+            id: theme
+        }
+    }
 
-      PlasmaCore.Theme {
-          id: theme
-      }
+    layout: GraphicsLayouts.QGraphicsLinearLayout {
+        orientation: "Vertical"
+        PlasmaWidgets.Frame {
+            maximumSize: maximumSize.width+"x"+minimumSize.height
+            frameShadow: "Raised"
+            layout: GraphicsLayouts.QGraphicsLinearLayout {
+                PlasmaWidgets.PushButton {
+                    id: listButton
+                    maximumSize: minimumSize
+                    text: i18n("Sources")
 
+                    onClicked: {
+                        mainView.currentIndex = 0;
+                        visible=false
+                        showAllButton.visible=false
+                    }
+                }
+                PlasmaWidgets.PushButton {
+                    id: showAllButton
+                    maximumSize: minimumSize
+                    text: i18n("Items")
+
+                    onClicked: {
+                        mainView.currentIndex = 1
+                        visible = false
+                        listButton.visible=true
+                    }
+                }
+                PlasmaWidgets.PushButton {
+                    id: backButton
+                    text: i18n("Back")
+                    visible:false
+                    maximumSize: minimumSize
+                    onClicked: {
+                        bodyView.html = "<body style=\"background:#fff;\">"+dataSource.data['items'][list.currentIndex].description+"</body>";
+                        visible = false;
+                    }
+                }
+                QGraphicsWidget {}
+            }
+        }
         PlasmaWidgets.TabBar {
             id : mainView
             width : page.width
@@ -93,6 +133,8 @@ QGraphicsWidget {
                             onClicked: {
                                 dataSource.source = model.url
                                 mainView.currentIndex = 1
+                                showAllButton.visible=false
+                                listButton.visible=true
                             }
                         }
                     }
@@ -102,37 +144,13 @@ QGraphicsWidget {
                 id: listContainer
                 Component.onCompleted: {
                     mainView.currentIndex = 1
-                }
-
-
-                PlasmaWidgets.Frame {
-                    id: listContainerToolbar
-                    anchors.left: listContainer.left
-                    anchors.right: listContainer.right
-                    maximumSize: maximumSize.width+"x"+minimumSize.height
-                    frameShadow: "Raised"
-                    layout: GraphicsLayouts.QGraphicsLinearLayout {
-                        PlasmaWidgets.PushButton {
-                            id: listButton
-                            maximumSize: minimumSize
-                            text: i18n("Feed List")
-
-                            onClicked: {
-                                mainView.currentIndex = 0;
-                            }
-                        }
-
-                        QGraphicsWidget {}
-                    }
+                    showAllButton.visible=false
+                    listButton.visible=true
                 }
 
                 ListView {
                     id: list
-                    anchors.left: listContainer.left
-                    anchors.right: listContainer.right
-                    anchors.top: listContainerToolbar.bottom
-                    anchors.bottom: listContainer.bottom
-                    signal itemClicked;
+                    anchors.fill: listContainer
                     spacing: 5;
                     snapMode: ListView.SnapToItem
 
@@ -156,56 +174,23 @@ QGraphicsWidget {
 
                             list.currentIndex = index
                             bodyView.html = "<body style=\"background:#fff;\">"+model.modelData.description+"</body>"
-                            list.itemClicked()
+                            mainView.currentIndex = 2
+                            showAllButton.visible=true
+                            listButton.visible=true
                         }
                     }
                 }
             }
-            QGraphicsWidget {
-                layout: GraphicsLayouts.QGraphicsLinearLayout {
-                    orientation: "Vertical"
-                    PlasmaWidgets.Frame {
-                        maximumSize: maximumSize.width+"x"+minimumSize.height
-                        frameShadow: "Raised"
-                        layout: GraphicsLayouts.QGraphicsLinearLayout {
-                            PlasmaWidgets.PushButton {
-                                id: showAllButton
-                                maximumSize: minimumSize
-                                text: "Show all"
-                            }
-                            PlasmaWidgets.PushButton {
-                                id: backButton
-                                text: "Back"
-                                visible:false
-                                maximumSize: minimumSize
-                                onClicked: {
-                                    bodyView.html = "<body style=\"background:#fff;\">"+dataSource.data['items'][list.currentIndex].description+"</body>";
-                                    visible = false;
-                                }
-                            }
-                            QGraphicsWidget {}
-                        }
-                    }
-                    PlasmaWidgets.WebView {
-                        id : bodyView
-                        dragToScroll : true
-                        onUrlChanged: {
-                            if (url != "about:blank") {
-                                backButton.visible = true
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
-        Connections {
-            target: list
-            onItemClicked: mainView.currentIndex = 2
-        }
-        Connections {
-            target: showAllButton
-            onClicked: mainView.currentIndex = 1
+            PlasmaWidgets.WebView {
+                id : bodyView
+                dragToScroll : true
+                onUrlChanged: {
+                    if (url != "about:blank") {
+                        backButton.visible = true
+                    }
+                }
+            }
         }
     }
 }
