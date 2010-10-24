@@ -22,7 +22,8 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
-import "../code/utils.js" as Utils
+import "plasmapackage:/code/utils.js" as Utils
+import "plasmapackage:/code/bookkeeping.js" as BookKeeping
 
 QGraphicsWidget {
     id: page;
@@ -39,6 +40,7 @@ QGraphicsWidget {
         var url = plasmoid.readConfig("feeds")
         print("Configuration changed: " + url);
         dataSource.source = url
+        print ( dataSource.source);
     }
 
     Item {
@@ -89,6 +91,8 @@ QGraphicsWidget {
                     id: itemMouse
                     anchors.fill: background
                     onClicked: {
+                        BookKeeping.setArticleRead(dataSource.source, model.modelData.link);
+
                         list.currentIndex = index
                         bodyView.html = "<body style=\"background:#fff;\">"+model.modelData.description+"</body>"
                         list.itemClicked()
