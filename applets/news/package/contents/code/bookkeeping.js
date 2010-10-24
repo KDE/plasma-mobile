@@ -18,7 +18,6 @@
  */
 
 var storageService = loadService("org.kde.servicestorage")
-var running = false
 
 var readArticles = new Array;
 
@@ -42,16 +41,10 @@ readJobFinished = function(job)
             readArticles.push(prop)
         }
     }
-    running = false
 }
 
 function loadReadArticles()
 {
-    if (running) {
-        return
-    }
-
-    running = true;
     var queryOperation = storageService.operationDescription("retrieve")
     queryOperation.group = "read"
     var job = storageService.startOperationCall(queryOperation);
