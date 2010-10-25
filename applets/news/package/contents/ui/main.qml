@@ -30,6 +30,8 @@ QGraphicsWidget {
     preferredSize: "250x600"
     minimumSize: "200x200"
 
+    property string source
+
     Component.onCompleted: {
         BookKeeping.loadReadArticles();
         print(plasmoid['addEventListener'])
@@ -38,7 +40,7 @@ QGraphicsWidget {
 
     function configChanged()
     {
-        var source = plasmoid.readConfig("feeds")
+        source = plasmoid.readConfig("feeds")
         var sourceString = new String(source)
         print("Configuration changed: " + source);
         dataSource.source = source
@@ -125,17 +127,31 @@ QGraphicsWidget {
                     snapMode: ListView.SnapToItem
 
                     clip: true
-                    model: feedListModel
-                    delegate: Text {
-                        text: model.text
-                        MouseArea {
-                            anchors.fill: parent
+                    model: dataSource.data['sources']
+
+                    header: Column {
+                        ListItemSource {
+                            text: i18n("Show All")
                             onClicked: {
-                                dataSource.source = model.url
+                                dataSource.source = source
                                 mainView.currentIndex = 1
                                 showAllButton.visible=false
                                 listButton.visible=true
                             }
+                        }
+                        Item {
+                            height: 5
+                            width: 5
+                        }
+                    }
+                    delegate: ListItemSource {
+                        text: model.modelData.feed_title
+                        icon: model.modelData.icon
+                        onClicked: {
+                            dataSource.source = model.modelData.feed_url
+                            mainView.currentIndex = 1
+                            showAllButton.visible=false
+                            listButton.visible=true
                         }
                     }
                 }
@@ -156,7 +172,7 @@ QGraphicsWidget {
 
                     clip: true
                     model: dataSource.data['items']
-                    delegate: ListItem {
+                    delegate: ListItemEntry {
                         text: model.modelData.title
                         date: Utils.date(model.modelData.time)
 

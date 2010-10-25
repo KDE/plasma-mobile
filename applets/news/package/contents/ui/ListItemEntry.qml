@@ -21,30 +21,34 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
-PlasmaCore.FrameSvgItem {
-    id : background
-    imagePath: "widgets/frame"
-    prefix: "plain"
+ListItem {
+    id: listItem
+    property string text;
+    property string date;
 
-    width: list.width
-    height: contents.height + margins.top + margins.bottom
+    contents: delegateLayout
 
-    property alias padding: paddingRectangle;
-    property Item contents
-    signal clicked;
+    Column {
+        id : delegateLayout
+        width: list.width
+        spacing: 5
+        anchors.left: listItem.padding.left
+        anchors.right: listItem.padding.right
+        anchors.top: listItem.padding.top
 
-    Item {
-        id: paddingRectangle
-        anchors.fill: parent
-        anchors.leftMargin: background.margins.left
-        anchors.topMargin: background.margins.top
-        anchors.rightMargin: background.margins.right
-        anchors.bottomMargin: background.margins.bottom
-    }
+        Text {
+            //width: list.width
+            color: theme.textColor
+            textFormat: Text.RichText
+            text: listItem.text
+        }
+        Text {
+            id: date
+            color: theme.textColor
+            width: list.width
+            horizontalAlignment: Text.AlignRight
+            text: '<em><small>'+listItem.date+'</em></small>&nbsp;'
+        }
 
-    MouseArea {
-        id: itemMouse
-        anchors.fill: background
-        onClicked: background.clicked()
     }
 }
