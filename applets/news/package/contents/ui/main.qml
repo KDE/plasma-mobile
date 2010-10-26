@@ -145,10 +145,10 @@ QGraphicsWidget {
                         }
                     }
                     delegate: ListItemSource {
-                        text: model.modelData.feed_title
-                        icon: model.modelData.icon
+                        text: feed_title
+                        icon: model.icon
                         onClicked: {
-                            dataSource.source = model.modelData.feed_url
+                            dataSource.source = feed_url
                             mainView.currentIndex = 1
                             showAllButton.visible=false
                             listButton.visible=true
@@ -172,12 +172,26 @@ QGraphicsWidget {
 
                     clip: true
                     model: dataSource.data['items']
+
+                    section.property: "feed_title"
+                    section.criteria: ViewSection.FullString
+                    section.delegate: Rectangle {
+                            width: container.width
+                            height: childrenRect.height
+                            color: "lightsteelblue"
+
+                            Text {
+                                text: section
+                                font.bold: true
+                            }
+                        }
+
                     delegate: ListItemEntry {
-                        text: model.modelData.title
-                        date: Utils.date(model.modelData.time)
+                        text: title
+                        date: Utils.date(time)
 
                         Component.onCompleted: {
-                            if (BookKeeping.isArticleRead(model.modelData.link)) {
+                            if (BookKeeping.isArticleRead(modelData.link)) {
                                 opacity = 0.5
                             } else {
                                 opacity = 1
@@ -185,11 +199,11 @@ QGraphicsWidget {
                         }
 
                         onClicked: {
-                            BookKeeping.setArticleRead(model.modelData.link);
+                            BookKeeping.setArticleRead(link);
                             opacity = 0.5;
 
                             list.currentIndex = index
-                            bodyView.html = "<body style=\"background:#fff;\">"+model.modelData.description+"</body>"
+                            bodyView.html = "<body style=\"background:#fff;\">"+description+"</body>"
                             mainView.currentIndex = 2
                             showAllButton.visible=true
                             listButton.visible=true
