@@ -43,7 +43,7 @@ QGraphicsWidget {
         source = plasmoid.readConfig("feeds")
         var sourceString = new String(source)
         print("Configuration changed: " + source);
-        dataSource.source = source
+        feedSource.source = source
 
         feedListModel.append({"text": i18n("Show All"), "url": source});
         var urls = sourceString.split(" ")
@@ -60,7 +60,7 @@ QGraphicsWidget {
         }
 
         PlasmaCore.DataSource {
-            id: dataSource
+            id: feedSource
             engine: "rss"
             interval: 50000
         }
@@ -104,7 +104,7 @@ QGraphicsWidget {
                     visible:false
                     maximumSize: minimumSize
                     onClicked: {
-                        bodyView.html = "<body style=\"background:#fff;\">"+dataSource.data['items'][list.currentIndex].description+"</body>";
+                        bodyView.html = "<body style=\"background:#fff;\">"+feedSource.data['items'][list.currentIndex].description+"</body>";
                         visible = false;
                     }
                 }
@@ -127,13 +127,16 @@ QGraphicsWidget {
                     snapMode: ListView.SnapToItem
 
                     clip: true
-                    model: dataSource.data['sources']
+                    model: PlasmaCore.DataModel {
+                        dataSource: feedSource
+                        key: "sources"
+                    }
 
                     header: Column {
                         ListItemSource {
                             text: i18n("Show All")
                             onClicked: {
-                                dataSource.source = source
+                                feedSource.source = source
                                 mainView.currentIndex = 1
                                 showAllButton.visible=false
                                 listButton.visible=true
@@ -148,7 +151,7 @@ QGraphicsWidget {
                         text: feed_title
                         icon: model.icon
                         onClicked: {
-                            dataSource.source = feed_url
+                            feedSource.source = feed_url
                             mainView.currentIndex = 1
                             showAllButton.visible=false
                             listButton.visible=true
@@ -171,7 +174,10 @@ QGraphicsWidget {
                     snapMode: ListView.SnapToItem
 
                     clip: true
-                    model: dataSource.data['items']
+                    model: PlasmaCore.DataModel {
+                        dataSource: feedSource
+                        key: "items"
+                    }
 
                     section.property: "feed_title"
                     section.criteria: ViewSection.FullString
