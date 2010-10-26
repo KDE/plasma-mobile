@@ -177,6 +177,8 @@ QGraphicsWidget {
                     model: PlasmaCore.DataModel {
                         dataSource: feedSource
                         key: "items"
+                        //FIXME: just to try sorting, but doesn't seem to work
+                        sortRole: "title"
                     }
 
                     section.property: "feed_title"
@@ -197,7 +199,7 @@ QGraphicsWidget {
                         date: Utils.date(time)
 
                         Component.onCompleted: {
-                            if (BookKeeping.isArticleRead(modelData.link)) {
+                            if (BookKeeping.isArticleRead(link)) {
                                 opacity = 0.5
                             } else {
                                 opacity = 1
