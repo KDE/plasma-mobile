@@ -136,7 +136,7 @@ QGraphicsWidget {
                         ListItemSource {
                             text: i18n("Show All")
                             onClicked: {
-                                feedSource.source = source
+                                feedCategoryFilter.filterRegExp = ""
                                 mainView.currentIndex = 1
                                 showAllButton.visible=false
                                 listButton.visible=true
@@ -151,7 +151,7 @@ QGraphicsWidget {
                         text: feed_title
                         icon: model.icon
                         onClicked: {
-                            feedSource.source = feed_url
+                            feedCategoryFilter.filterRegExp = feed_url
                             mainView.currentIndex = 1
                             showAllButton.visible=false
                             listButton.visible=true
@@ -174,11 +174,13 @@ QGraphicsWidget {
                     snapMode: ListView.SnapToItem
 
                     clip: true
-                    model: PlasmaCore.DataModel {
-                        dataSource: feedSource
-                        key: "items"
-                        //FIXME: just to try sorting, but doesn't seem to work
-                        sortRole: "title"
+                    model: PlasmaCore.SortFilterModel {
+                        id: feedCategoryFilter
+                        filterRole: "feed_url"
+                        sourceModel: PlasmaCore.DataModel {
+                            dataSource: feedSource
+                            key: "items"
+                        }
                     }
 
                     section.property: "feed_title"
