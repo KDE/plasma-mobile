@@ -68,6 +68,20 @@ QGraphicsWidget {
         PlasmaCore.Theme {
             id: theme
         }
+
+        Timer {
+            id: searchTimer
+            interval: 500;
+            running: false
+            repeat: false
+            onTriggered: {
+                if (mainView.currentIndex == 0) {
+                    feedListFilter.filterRegExp = ".*"+searchBox.text+".*";
+                } else {
+                    postTitleFilter.filterRegExp = ".*"+searchBox.text+".*";
+                }
+            }
+        }
     }
 
     layout: GraphicsLayouts.QGraphicsLinearLayout {
@@ -77,45 +91,42 @@ QGraphicsWidget {
             frameShadow: "Raised"
             layout: GraphicsLayouts.QGraphicsLinearLayout {
                 PlasmaWidgets.PushButton {
-                    id: listButton
-                    maximumSize: minimumSize
-                    text: i18n("Sources")
-
-                    onClicked: {
-                        mainView.currentIndex = 0;
-                        visible=false
-                        showAllButton.visible=false
-                    }
-                }
-                PlasmaWidgets.PushButton {
-                    id: showAllButton
-                    maximumSize: minimumSize
-                    text: i18n("Items")
-
-                    onClicked: {
-                        mainView.currentIndex = 1
-                        visible = false
-                        listButton.visible=true
-                    }
-                }
-                PlasmaWidgets.PushButton {
                     id: backButton
                     text: i18n("Back")
-                    visible:false
                     maximumSize: minimumSize
+
                     onClicked: {
-                        bodyView.html = "<body style=\"background:#fff;\">"+feedSource.data['items'][list.currentIndex].description+"</body>";
-                        visible = false;
+                        print(mainView.currentIndex)
+                        if (!bodyView.customUrl) {
+                            mainView.currentIndex = mainView.currentIndex -1
+                        } else {
+                            bodyView.html = "<body style=\"background:#fff;\">"+feedSource.data['items'][list.currentIndex].description+"</body>";
+                        }
                     }
                 }
-                QGraphicsWidget {}
+                QGraphicsWidget {
+                    GraphicsLayouts.QGraphicsLinearLayout.stretchFactor: 2
+                }
+                PlasmaWidgets.LineEdit {
+                    id: searchBox
+                    clearButtonShown: true
+                    onTextEdited: {
+                        searchTimer.running = true
+                    }
+                }
             }
         }
+
         PlasmaWidgets.TabBar {
             id : mainView
             width : page.width
             height: page.height
             tabBarShown: false
+
+            onCurrentChanged: {
+                backButton.visible = currentIndex > 0
+                searchBox.visible = currentIndex < 2
+            }
 
             QGraphicsWidget {
                 id: feedListContainer
@@ -127,9 +138,13 @@ QGraphicsWidget {
                     snapMode: ListView.SnapToItem
 
                     clip: true
-                    model: PlasmaCore.DataModel {
-                        dataSource: feedSource
-                        key: "sources"
+                    model: PlasmaCore.SortFilterModel {
+                        id: feedListFilter
+                        filterRole: "feed_title"
+                        sourceModel: PlasmaCore.DataModel {
+                            dataSource: feedSource
+                            key: "sources"
+                        }
                     }
 
                     header: Column {
@@ -138,8 +153,6 @@ QGraphicsWidget {
                             onClicked: {
                                 feedCategoryFilter.filterRegExp = ""
                                 mainView.currentIndex = 1
-                                showAllButton.visible=false
-                                listButton.visible=true
                             }
                         }
                         Item {
@@ -153,8 +166,6 @@ QGraphicsWidget {
                         onClicked: {
                             feedCategoryFilter.filterRegExp = feed_url
                             mainView.currentIndex = 1
-                            showAllButton.visible=false
-                            listButton.visible=true
                         }
                     }
                 }
@@ -163,8 +174,6 @@ QGraphicsWidget {
                 id: listContainer
                 Component.onCompleted: {
                     mainView.currentIndex = 1
-                    showAllButton.visible=false
-                    listButton.visible=true
                 }
 
                 ListView {
@@ -175,11 +184,15 @@ QGraphicsWidget {
 
                     clip: true
                     model: PlasmaCore.SortFilterModel {
-                        id: feedCategoryFilter
-                        filterRole: "feed_url"
-                        sourceModel: PlasmaCore.DataModel {
-                            dataSource: feedSource
-                            key: "items"
+                        id: postTitleFilter
+                        filterRole: "title"
+                        sourceModel: PlasmaCore.SortFilterModel {
+                            id: feedCategoryFilter
+                            filterRole: "feed_url"
+                            sourceModel: PlasmaCore.DataModel {
+                                dataSource: feedSource
+                                key: "items"
+                            }
                         }
                     }
 
@@ -215,8 +228,6 @@ QGraphicsWidget {
                             list.currentIndex = index
                             bodyView.html = "<body style=\"background:#fff;\">"+description+"</body>"
                             mainView.currentIndex = 2
-                            showAllButton.visible=true
-                            listButton.visible=true
                         }
                     }
                 }
@@ -225,10 +236,9 @@ QGraphicsWidget {
             PlasmaWidgets.WebView {
                 id : bodyView
                 dragToScroll : true
+                property bool customUrl: false
                 onUrlChanged: {
-                    if (url != "about:blank") {
-                        backButton.visible = true
-                    }
+                    customUrl = (url != "about:blank")
                 }
             }
         }
