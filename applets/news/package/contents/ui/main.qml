@@ -54,6 +54,7 @@ QGraphicsWidget {
             interval: 50000
             onDataChanged: {
                 plasmoid.busy = false
+                BookKeeping.updateUnreadCount(data.items)
             }
         }
 
@@ -153,8 +154,11 @@ QGraphicsWidget {
                         }
                     }
                     delegate: ListItemSource {
+                        id: listItemSource
                         text: feed_title
                         icon: model.icon
+                        unread: BookKeeping.unreadForSource(feed_url)
+
                         onClicked: {
                             feedCategoryFilter.filterRegExp = feed_url
                             mainView.currentIndex = 1

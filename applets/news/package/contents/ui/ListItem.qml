@@ -27,10 +27,9 @@ PlasmaCore.FrameSvgItem {
     prefix: "plain"
 
     width: list.width
-    height: contents.height + margins.top + margins.bottom
+    height: childrenRect.height + margins.top + margins.bottom
 
     property alias padding: paddingRectangle;
-    property Item contents
     signal clicked;
 
     Item {

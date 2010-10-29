@@ -26,8 +26,6 @@ ListItem {
     property string text;
     property string date;
 
-    contents: delegateLayout
-
     Column {
         id : delegateLayout
         width: list.width

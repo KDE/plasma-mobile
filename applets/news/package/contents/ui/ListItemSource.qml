@@ -23,10 +23,9 @@ import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 ListItem {
     id: listItem
-    property string text;
-    property string icon;
-
-    contents: delegateLayout
+    property string text
+    property string icon
+    property int unread
 
     Row{
         id: delegateLayout
@@ -40,5 +39,10 @@ ListItem {
         Text {
             text: listItem.text
         }
+    }
+    Text {
+        text: unread
+        anchors.right: listItem.padding.right
+        anchors.verticalCenter: listItem.verticalCenter
     }
 }
