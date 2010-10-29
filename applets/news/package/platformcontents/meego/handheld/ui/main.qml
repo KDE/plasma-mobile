@@ -78,6 +78,33 @@ Window {
     property Component firstPage: Page{
         id: pageComponent
 
+        actions: [
+            Action {
+                item: Item {
+                    height: 60 // ###
+                    width: feedListSearchBox.width
+                    LineEdit {
+                        id: feedListSearchBox
+                        styleType: "toolbar"
+                        anchors.verticalCenter: parent.verticalCenter
+                        onTextChanged: {
+                            feedListSearchTimer.running = true
+                        }
+                    }
+                }
+            }
+        ]
+
+        Timer {
+            id: feedListSearchTimer
+            interval: 500;
+            running: false
+            repeat: false
+            onTriggered: {
+                feedListFilter.filterRegExp = ".*"+feedListSearchBox.text+".*";
+            }
+        }
+
         title: "News reader"
         ListView {
             anchors.fill: parent
@@ -138,6 +165,33 @@ Window {
 
     property Component secondPage: Page {
         title: feedSource.data['title'];
+
+        actions: [
+            Action {
+                item: Item {
+                    height: 60 // ###
+                    width: postListSearchBox.width
+                    LineEdit {
+                        id: postListSearchBox
+                        styleType: "toolbar"
+                        anchors.verticalCenter: parent.verticalCenter
+                        onTextChanged: {
+                            postListSearchTimer.running = true
+                        }
+                    }
+                }
+            }
+        ]
+
+        Timer {
+            id: postListSearchTimer
+            interval: 500;
+            running: false
+            repeat: false
+            onTriggered: {
+                postTitleFilter.filterRegExp = ".*"+postListSearchBox.text+".*";
+            }
+        }
 
         ListView {
             id: postList
