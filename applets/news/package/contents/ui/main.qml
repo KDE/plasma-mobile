@@ -36,6 +36,7 @@ QGraphicsWidget {
         BookKeeping.loadReadArticles();
         print(plasmoid['addEventListener'])
         plasmoid.addEventListener('ConfigChanged', configChanged);
+        plasmoid.busy = true
     }
 
     function configChanged()
@@ -44,25 +45,16 @@ QGraphicsWidget {
         var sourceString = new String(source)
         print("Configuration changed: " + source);
         feedSource.source = source
-
-        feedListModel.append({"text": i18n("Show All"), "url": source});
-        var urls = sourceString.split(" ")
-
-        for (var i=0; i < urls.length; ++i) {
-            var url = urls[i]
-            feedListModel.append({"text": url, "url": url});
-        }
     }
 
     Item {
-        ListModel {
-            id: feedListModel
-        }
-
         PlasmaCore.DataSource {
             id: feedSource
             engine: "rss"
             interval: 50000
+            onDataChanged: {
+                plasmoid.busy = false
+            }
         }
 
         PlasmaCore.Theme {
