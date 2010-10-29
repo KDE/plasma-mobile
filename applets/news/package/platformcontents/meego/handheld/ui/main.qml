@@ -35,6 +35,7 @@ Window {
     signal unreadCountChanged();
 
     Component.onCompleted: {
+        BookKeeping.mainWindow = mainWindow
         BookKeeping.loadReadArticles();
         plasmoid.addEventListener('ConfigChanged', configChanged);
         spinner.visible = true
@@ -75,93 +76,7 @@ Window {
     }
 
 
-    property Component firstPage: Page{
-        id: pageComponent
-
-        actions: [
-            Action {
-                item: Item {
-                    height: 60 // ###
-                    width: feedListSearchBox.width
-                    LineEdit {
-                        id: feedListSearchBox
-                        styleType: "toolbar"
-                        anchors.verticalCenter: parent.verticalCenter
-                        onTextChanged: {
-                            feedListSearchTimer.running = true
-                        }
-                    }
-                }
-            }
-        ]
-
-        Timer {
-            id: feedListSearchTimer
-            interval: 500;
-            running: false
-            repeat: false
-            onTriggered: {
-                feedListFilter.filterRegExp = ".*"+feedListSearchBox.text+".*";
-            }
-        }
-
-        title: "News reader"
-        ListView {
-            anchors.fill: parent
-            model: PlasmaCore.SortFilterModel {
-                        id: feedListFilter
-                        filterRole: "feed_title"
-                        sourceModel: PlasmaCore.DataModel {
-                            dataSource: feedSource
-                            key: "sources"
-                        }
-                    }
-            header: BasicListItem {
-                id: feedListHeader
-                title: i18n("Show All")
-                Label {
-                    id: unreadLabelHeader
-                    anchors.right: feedListHeader.padding.right
-                    anchors.verticalCenter: feedListHeader.verticalCenter
-                    text: BookKeeping.totalUnreadCount
-                }
-                onClicked: {
-                    feedCategoryFilter.filterRegExp = ""
-                    mainWindow.nextPage(secondPage);
-                }
-                Connections {
-                    target: mainWindow
-                    onUnreadCountChanged: {
-                        unreadLabelHeader.text = BookKeeping.totalUnreadCount
-                    }
-                }
-            }
-
-            delegate: BasicListItem {
-                id: feedListItem
-                title: feed_title
-                image: model.icon
-                Label {
-                    id: unreadLabel
-                    anchors.right: feedListItem.padding.right
-                    anchors.verticalCenter: feedListItem.verticalCenter
-                    text: BookKeeping.unreadForSource(feed_url)
-                }
-                onClicked: {
-                    feedCategoryFilter.filterRegExp = feed_url
-                    mainWindow.nextPage(secondPage);
-                }
-                Connections {
-                    target: mainWindow
-                    onUnreadCountChanged: {
-                        unreadLabel.text = BookKeeping.unreadForSource(feed_url)
-                    }
-                }
-            }
-
-            PositionIndicator { }
-        }
-    }
+    property Component firstPage: FeedList {}
 
     property Component secondPage: Page {
         title: feedSource.data['title'];

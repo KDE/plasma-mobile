@@ -34,6 +34,7 @@ QGraphicsWidget {
     signal unreadCountChanged();
 
     Component.onCompleted: {
+        BookKeeping.mainWindow = mainWindow
         BookKeeping.loadReadArticles();
         plasmoid.addEventListener('ConfigChanged', configChanged);
         plasmoid.busy = true

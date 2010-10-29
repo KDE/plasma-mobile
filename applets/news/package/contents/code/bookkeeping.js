@@ -17,11 +17,15 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+.pragma library
+
 var storageService = loadService("org.kde.servicestorage")
 
 var readArticles = new Array;
 var unreadCount = new Array;
 var totalUnreadCount = 0
+
+var mainWindow = 0
 
 function setArticleRead(id, feedUrl)
 {
