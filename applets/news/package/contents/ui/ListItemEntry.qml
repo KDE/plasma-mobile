@@ -35,15 +35,14 @@ ListItem {
         anchors.top: listItem.padding.top
 
         Text {
-            //width: list.width
+            width: delegateLayout.width
             color: theme.textColor
             textFormat: Text.RichText
             text: listItem.text
         }
         Text {
-            id: date
             color: theme.textColor
-            width: list.width
+            width: delegateLayout.width
             horizontalAlignment: Text.AlignRight
             text: '<em><small>'+listItem.date+'</em></small>&nbsp;'
         }

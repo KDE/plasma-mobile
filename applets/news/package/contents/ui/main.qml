@@ -31,10 +31,10 @@ QGraphicsWidget {
     minimumSize: "200x200"
 
     property string source
+    signal unreadCountChanged();
 
     Component.onCompleted: {
         BookKeeping.loadReadArticles();
-        print(plasmoid['addEventListener'])
         plasmoid.addEventListener('ConfigChanged', configChanged);
         plasmoid.busy = true
     }
@@ -89,7 +89,6 @@ QGraphicsWidget {
                     maximumSize: minimumSize
 
                     onClicked: {
-                        print(mainView.currentIndex)
                         if (!bodyView.customUrl) {
                             mainView.currentIndex = mainView.currentIndex -1
                         } else {
@@ -142,10 +141,18 @@ QGraphicsWidget {
 
                     header: Column {
                         ListItemSource {
+                            id: feedListHeader
                             text: i18n("Show All")
+                            unread: BookKeeping.totalUnreadCount
                             onClicked: {
                                 feedCategoryFilter.filterRegExp = ""
                                 mainView.currentIndex = 1
+                            }
+                            Connections {
+                                target: page
+                                onUnreadCountChanged: {
+                                    feedListHeader.unread = BookKeeping.totalUnreadCount
+                                }
                             }
                         }
                         Item {
@@ -162,6 +169,12 @@ QGraphicsWidget {
                         onClicked: {
                             feedCategoryFilter.filterRegExp = feed_url
                             mainView.currentIndex = 1
+                        }
+                        Connections {
+                            target: page
+                            onUnreadCountChanged: {
+                                unread = BookKeeping.unreadForSource(feed_url)
+                            }
                         }
                     }
                 }
@@ -185,6 +198,8 @@ QGraphicsWidget {
                         sourceModel: PlasmaCore.SortFilterModel {
                             id: feedCategoryFilter
                             filterRole: "feed_url"
+                            sortRole: "time"
+                            sortOrder: "DescendingOrder"
                             sourceModel: PlasmaCore.DataModel {
                                 dataSource: feedSource
                                 key: "items"
@@ -194,10 +209,7 @@ QGraphicsWidget {
 
                     section.property: "feed_title"
                     section.criteria: ViewSection.FullString
-                    section.delegate: Rectangle {
-                            width: container.width
-                            height: childrenRect.height
-                            color: "lightsteelblue"
+                    section.delegate: ListItem {
 
                             Text {
                                 text: section
@@ -218,7 +230,7 @@ QGraphicsWidget {
                         }
 
                         onClicked: {
-                            BookKeeping.setArticleRead(link);
+                            BookKeeping.setArticleRead(link, feed_url);
                             opacity = 0.5;
 
                             list.currentIndex = index
