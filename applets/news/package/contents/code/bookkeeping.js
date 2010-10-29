@@ -20,13 +20,24 @@
 var storageService = loadService("org.kde.servicestorage")
 
 var readArticles = new Array;
+var unreadCount = new Array;
+var totalUnreadCount = 0
 
-function setArticleRead(id)
+function setArticleRead(id, feedUrl)
 {
+    var unread = !isArticleRead(id)
     var markOperation = storageService.operationDescription("save")
+
     markOperation.group = "read"
     markOperation.key = id
     storageService.startOperationCall(markOperation);
+    readArticles.push(id)
+
+    if (unread) {
+        --totalUnreadCount
+        --unreadCount[feedUrl]
+        page.unreadCountChanged()
+    }
 }
 
 function isArticleRead(id)
@@ -51,5 +62,27 @@ function loadReadArticles()
     job.finished.connect(readJobFinished)
 }
 
+function unreadForSource(feedUrl)
+{
+    return unreadCount[feedUrl]
+}
+
+function updateUnreadCount(items)
+{
+    unreadCount = new Array
+    totalUnreadCount  = 0
+    for (i in items) {
+        var feedUrl = items[i]['feed_url']
+        if (!isArticleRead(items[i]['link'])) {
+            ++totalUnreadCount
+            if (unreadCount[feedUrl]) {
+                ++unreadCount[feedUrl]
+            } else {
+                unreadCount[feedUrl] = 1
+            }
+        }
+    }
+    page.unreadCountChanged()
+}
 
 

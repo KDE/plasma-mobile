@@ -195,11 +195,11 @@ QGraphicsWidget {
                     model: PlasmaCore.SortFilterModel {
                         id: postTitleFilter
                         filterRole: "title"
+                        sortRole: "time"
+                        sortOrder: "DescendingOrder"
                         sourceModel: PlasmaCore.SortFilterModel {
                             id: feedCategoryFilter
                             filterRole: "feed_url"
-                            sortRole: "time"
-                            sortOrder: "DescendingOrder"
                             sourceModel: PlasmaCore.DataModel {
                                 dataSource: feedSource
                                 key: "items"
