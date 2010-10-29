@@ -36,7 +36,7 @@ function setArticleRead(id, feedUrl)
     if (unread) {
         --totalUnreadCount
         --unreadCount[feedUrl]
-        page.unreadCountChanged()
+        mainWindow.unreadCountChanged()
     }
 }
 
@@ -82,7 +82,7 @@ function updateUnreadCount(items)
             }
         }
     }
-    page.unreadCountChanged()
+    mainWindow.unreadCountChanged()
 }
 
 

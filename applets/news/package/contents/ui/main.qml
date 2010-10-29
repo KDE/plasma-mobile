@@ -26,7 +26,7 @@ import "plasmapackage:/code/utils.js" as Utils
 import "plasmapackage:/code/bookkeeping.js" as BookKeeping
 
 QGraphicsWidget {
-    id: page;
+    id: mainWindow;
     preferredSize: "250x600"
     minimumSize: "200x200"
 
@@ -111,8 +111,8 @@ QGraphicsWidget {
 
         PlasmaWidgets.TabBar {
             id : mainView
-            width : page.width
-            height: page.height
+            width : mainWindow.width
+            height: mainWindow.height
             tabBarShown: false
 
             onCurrentChanged: {
@@ -149,7 +149,7 @@ QGraphicsWidget {
                                 mainView.currentIndex = 1
                             }
                             Connections {
-                                target: page
+                                target: mainWindow
                                 onUnreadCountChanged: {
                                     feedListHeader.unread = BookKeeping.totalUnreadCount
                                 }
@@ -171,7 +171,7 @@ QGraphicsWidget {
                             mainView.currentIndex = 1
                         }
                         Connections {
-                            target: page
+                            target: mainWindow
                             onUnreadCountChanged: {
                                 unread = BookKeeping.unreadForSource(feed_url)
                             }
@@ -210,12 +210,11 @@ QGraphicsWidget {
                     section.property: "feed_title"
                     section.criteria: ViewSection.FullString
                     section.delegate: ListItem {
-
-                            Text {
-                                text: section
-                                font.bold: true
-                            }
+                        Text {
+                            text: section
+                            font.bold: true
                         }
+                    }
 
                     delegate: ListItemEntry {
                         text: title
