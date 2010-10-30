@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Knowledge base (QML)
+Comment=Open Collaboration Service Knowledge base client
+Encoding=UTF-8
+
+Icon=help-contents
+Type=Service
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Category=Examples
+X-KDE-PluginInfo-Email=mart@kde.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.knowledgebase
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-DefaultSize=200,100
+X-Plasma-MainScript=ui/main.qml
