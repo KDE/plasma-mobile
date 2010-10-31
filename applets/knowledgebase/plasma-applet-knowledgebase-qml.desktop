@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Knowledge base (QML)
+Name[x-test]=xxKnowledge base (QML)xx
 Comment=Open Collaboration Service Knowledge base client
+Comment[x-test]=xxOpen Collaboration Service Knowledge base clientxx
 Encoding=UTF-8
 
 Icon=help-contents
