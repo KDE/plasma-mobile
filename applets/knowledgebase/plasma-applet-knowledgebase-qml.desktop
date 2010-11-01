@@ -1,7 +1,11 @@
 [Desktop Entry]
 Name=Knowledge base (QML)
+Name[pt]=Base de Conhecimento (QML)
+Name[uk]=База знань (QML)
 Name[x-test]=xxKnowledge base (QML)xx
 Comment=Open Collaboration Service Knowledge base client
+Comment[pt]=Cliente da base de conhecimento do Open Collaboration Service
+Comment[uk]=Клієнтська частина бази знань служби Open Collaboration
 Comment[x-test]=xxOpen Collaboration Service Knowledge base clientxx
 Encoding=UTF-8
 
