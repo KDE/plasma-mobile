@@ -78,11 +78,9 @@ Window {
     }
 
 
-    property Component firstPage: FeedListPage {}
+    property Component firstPage: PostsListPage {}
 
-    property Component secondPage: PostsListPage {}
-
-    property Component thirdPage: BrowserPage {}
+    property Component secondPage: BrowserPage {}
 
     Spinner {
         id: spinner
