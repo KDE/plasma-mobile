@@ -24,6 +24,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 import "plasmapackage:/code/utils.js" as Utils
 import "plasmapackage:/code/bookkeeping.js" as BookKeeping
+import "../../generic/ui/"
 
 Page {
     id: pageComponent
@@ -56,59 +57,7 @@ Page {
     }
 
     title: "News reader"
-    ListView {
+    FeedList {
         anchors.fill: parent
-        model: PlasmaCore.SortFilterModel {
-                    id: feedListFilter
-                    filterRole: "feed_title"
-                    sourceModel: PlasmaCore.DataModel {
-                        dataSource: feedSource
-                        key: "sources"
-                    }
-                }
-        header: BasicListItem {
-            id: feedListHeader
-            title: i18n("Show All")
-            Label {
-                id: unreadLabelHeader
-                anchors.right: feedListHeader.padding.right
-                anchors.verticalCenter: feedListHeader.verticalCenter
-                text: BookKeeping.totalUnreadCount
-            }
-            onClicked: {
-                feedCategoryFilter.filterRegExp = ""
-                mainWindow.nextPage(secondPage);
-            }
-            Connections {
-                target: mainWindow
-                onUnreadCountChanged: {
-                    unreadLabelHeader.text = BookKeeping.totalUnreadCount
-                }
-            }
-        }
-
-        delegate: BasicListItem {
-            id: feedListItem
-            title: feed_title
-            image: model.icon
-            Label {
-                id: unreadLabel
-                anchors.right: feedListItem.padding.right
-                anchors.verticalCenter: feedListItem.verticalCenter
-                text: BookKeeping.unreadForSource(feed_url)
-            }
-            onClicked: {
-                feedCategoryFilter.filterRegExp = feed_url
-                mainWindow.nextPage(secondPage);
-            }
-            Connections {
-                target: mainWindow
-                onUnreadCountChanged: {
-                    unreadLabel.text = BookKeeping.unreadForSource(feed_url)
-                }
-            }
-        }
-
-        PositionIndicator { }
     }
 }

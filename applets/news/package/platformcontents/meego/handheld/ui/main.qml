@@ -76,9 +76,9 @@ Window {
     }
 
 
-    property Component firstPage: FeedList {}
+    property Component firstPage: FeedListPage {}
 
-    property Component secondPage: PostsList {}
+    property Component secondPage: PostsListPage {}
 
     property Component thirdPage: BrowserPage {}
 

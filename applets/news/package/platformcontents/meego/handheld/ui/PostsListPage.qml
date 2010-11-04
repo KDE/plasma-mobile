@@ -25,6 +25,8 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import "plasmapackage:/code/utils.js" as Utils
 import "plasmapackage:/code/bookkeeping.js" as BookKeeping
 
+import "../../generic/ui/"
+
 Page {
     title: feedSource.data['title'];
 
@@ -55,56 +57,7 @@ Page {
         }
     }
 
-    ListView {
-        id: postList
+    PostsList {
         anchors.fill: parent
-        model: postTitleFilter
-        section.property: "feed_title"
-        section.criteria: ViewSection.FullString
-        section.delegate: Rectangle {
-            width: postList.width
-            height: childrenRect.height
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "white" }
-                GradientStop { position: 1.0; color: Qt.rgba(0.6, 0.6, 0.6, 1) }
-            }
-            Column {
-                Item {
-                    width: 5
-                    height: 5
-                }
-                Label {
-                    x: 5
-                    text: section
-                    font.bold: true
-                }
-                Item {
-                    width: 5
-                    height: 5
-                }
-            }
-        }
-        delegate: BasicListItem {
-            title: model.title
-            subtitle: Utils.date(model.time);
-            onClicked: {
-                BookKeeping.setArticleRead(link, feed_url);
-                opacity = 0.5;
-
-                currentBody = "<body style=\"background:#fff;\">"+model.description+"</body>";
-                currentTitle = model.title
-                currentUrl = model.link
-                mainWindow.nextPage(thirdPage);
-            }
-            Component.onCompleted: {
-                if (BookKeeping.isArticleRead(link)) {
-                    opacity = 0.5
-                } else {
-                    opacity = 1
-                }
-            }
-        }
-
-        PositionIndicator { }
     }
 }
