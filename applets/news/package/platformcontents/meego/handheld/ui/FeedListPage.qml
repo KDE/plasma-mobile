@@ -59,5 +59,9 @@ Page {
     title: "News reader"
     FeedList {
         anchors.fill: parent
+        onClicked: {
+            feedCategoryFilter.filterRegExp = url
+            mainWindow.nextPage(postsListPage);
+        }
     }
 }

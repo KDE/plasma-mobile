@@ -27,6 +27,7 @@ import "plasmapackage:/code/bookkeeping.js" as BookKeeping
 
 ListView {
     id: postList
+
     model: postTitleFilter
     section.property: "feed_title"
     section.criteria: ViewSection.FullString
@@ -63,7 +64,7 @@ ListView {
             currentBody = "<body style=\"background:#fff;\">"+model.description+"</body>";
             currentTitle = model.title
             currentUrl = model.link
-            mainWindow.nextPage(thirdPage);
+            mainWindow.nextPage(browserPage);
         }
         Component.onCompleted: {
             if (BookKeeping.isArticleRead(link)) {

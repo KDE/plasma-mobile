@@ -27,7 +27,9 @@ import "plasmapackage:/code/bookkeeping.js" as BookKeeping
 
 
 ListView {
-    anchors.fill: parent
+    id: feedList
+    signal clicked(string url)
+
     model: PlasmaCore.SortFilterModel {
                 id: feedListFilter
                 filterRole: "feed_title"
@@ -46,8 +48,7 @@ ListView {
             text: BookKeeping.totalUnreadCount
         }
         onClicked: {
-            feedCategoryFilter.filterRegExp = ""
-            mainWindow.nextPage(secondPage);
+            feedList.clicked("")
         }
         Connections {
             target: mainWindow
@@ -68,8 +69,7 @@ ListView {
             text: BookKeeping.unreadForSource(feed_url)
         }
         onClicked: {
-            feedCategoryFilter.filterRegExp = feed_url
-            mainWindow.nextPage(secondPage);
+            feedList.clicked(feed_url)
         }
         Connections {
             target: mainWindow

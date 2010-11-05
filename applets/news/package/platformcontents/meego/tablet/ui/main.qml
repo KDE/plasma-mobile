@@ -41,7 +41,7 @@ Window {
         BookKeeping.loadReadArticles();
         plasmoid.addEventListener('ConfigChanged', configChanged);
         spinner.visible = true
-        mainWindow.nextPage(firstPage)
+        mainWindow.nextPage(postsListPage)
     }
 
     function configChanged()
@@ -78,9 +78,9 @@ Window {
     }
 
 
-    property Component firstPage: PostsListPage {}
+    property Component postsListPage: PostsListPage {}
 
-    property Component secondPage: BrowserPage {}
+    property Component browserPage: BrowserPage {}
 
     Spinner {
         id: spinner

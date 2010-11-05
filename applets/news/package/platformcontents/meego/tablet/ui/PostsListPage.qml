@@ -57,10 +57,17 @@ Page {
         }
     }
 
-    FeedList {
+    Rectangle {
         id:feedList
         anchors.fill: parent
         anchors.rightMargin: 2*(parent.width/3)
+        color: "white"
+        FeedList {
+            anchors.fill: parent
+            onClicked: {
+                feedCategoryFilter.filterRegExp = url
+            }
+        }
     }
     PostsList {
         anchors.fill: parent
