@@ -57,6 +57,7 @@ ListView {
     delegate: BasicListItem {
         title: model.title
         subtitle: Utils.date(model.time);
+
         onClicked: {
             BookKeeping.setArticleRead(link, feed_url);
             opacity = 0.5;
@@ -67,6 +68,7 @@ ListView {
             mainWindow.nextPage(browserPage);
         }
         Component.onCompleted: {
+            padding.anchors.leftMargin = 32
             if (BookKeeping.isArticleRead(link)) {
                 opacity = 0.5
             } else {

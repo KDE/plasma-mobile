@@ -19,6 +19,7 @@
 
 import Qt 4.7
 import com.meego 1.0
+import com.meego.themebridge 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
@@ -72,6 +73,14 @@ Page {
     PostsList {
         anchors.fill: parent
         anchors.leftMargin: parent.width/3
+        PlasmaCore.SvgItem {
+            width: 32
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            imagePath: plasmoid.file("images", "shadow.svgz")
+            elementId: "right"
+        }
     }
 
 }
