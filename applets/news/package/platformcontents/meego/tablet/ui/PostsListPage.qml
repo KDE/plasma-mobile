@@ -78,7 +78,9 @@ Page {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            imagePath: plasmoid.file("images", "shadow.svgz")
+            svg: PlasmaCore.Svg{
+                imagePath: plasmoid.file("images", "shadow.svgz")
+            }
             elementId: "right"
         }
     }
