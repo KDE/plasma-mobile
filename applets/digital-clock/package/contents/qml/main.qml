@@ -37,7 +37,7 @@ QGraphicsWidget {
       PlasmaCore.DataSource {
           id: dataSource
           engine: "time"
-          source: "Local"
+          connectedSources: ["Local"]
           interval: 500
       }
 
@@ -51,9 +51,9 @@ QGraphicsWidget {
       ]
       Column {
         Text { id: timeText }
-        Text { text: 'Time Is ' + dataSource.data['time']; }
+        Text { text: 'Time Is ' + dataSource.data['Local']['Time']; }
         Text { text: "Available Data:"; }
-        Repeater { model: dataSource.keys; delegate: simpleText; }
+        Repeater { model: dataSource['Local'].keys; delegate: simpleText; }
       }
     }
 }
