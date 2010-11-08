@@ -28,6 +28,7 @@ Item {
     height: 300
 
     property string query: ""
+    property string activeSource: "KnowledgeBaseList\\provider:https://api.opendesktop.org/v1/\\query:"+query+"\\sortMode:new\\page:"+page+"\\pageSize:20"
     property int page: 0
 
     Component.onCompleted: {
@@ -61,12 +62,12 @@ Item {
               QGraphicsWidget{}
               PlasmaWidgets.Label {
                   id: statusMessage
-                  text: if (kbSource.data["itemsperpage"]) i18n("Page %1 of %2", page+1, Math.ceil(kbSource.data["totalitems"]/kbSource.data["itemsperpage"]))
+                  text: if (kbSource.data[activeSource]["ItemsPerPage"]) i18n("Page %1 of %2", page+1, Math.ceil(kbSource.data[activeSource]["TotalItems"]/kbSource.data[activeSource]["ItemsPerPage"]))
               }
               QGraphicsWidget{}
               PlasmaWidgets.ToolButton {
                 text: ">"
-                enabled: page+1 < (kbSource.data["totalitems"]/kbSource.data["itemsperpage"])
+                enabled: page+1 < (kbSource.data[activeSource]["TotalItems"]/kbSource.data[activeSource]["ItemsPerPage"])
                 onClicked: {
                       plasmoid.busy = true
                       ++page
@@ -90,7 +91,7 @@ Item {
     PlasmaCore.DataSource {
         id: kbSource
         engine: "ocs"
-        source: "KnowledgeBaseList\\provider:https://api.opendesktop.org/v1/\\query:"+query+"\\sortMode:new\\page:"+page+"\\pageSize:20"
+        connectedSources: [activeSource]
         interval: 120000
         onDataChanged: {
             plasmoid.busy = false
@@ -110,7 +111,7 @@ Item {
 
         model: PlasmaCore.DataModel {
             dataSource: kbSource
-            key: "KnowledgeBase-[\\d]*"
+            keyRoleFilter: "KnowledgeBase-[\\d]*"
         }
 
         delegate: PlasmaCore.FrameSvgItem {
