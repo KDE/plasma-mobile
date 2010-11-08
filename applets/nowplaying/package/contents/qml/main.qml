@@ -27,6 +27,7 @@ QGraphicsWidget {
     id: page;
     preferredSize: "200x200"
     minimumSize: "200x20"
+    property string activeSource: dataSource.sources[0]
 
     Item {
         id:main
@@ -34,17 +35,18 @@ QGraphicsWidget {
         PlasmaCore.DataSource {
             id: dataSource
             engine: "nowplaying"
-            source: allSources[0]
+            connectedSources: activeSource
             interval: 500
 
             onDataChanged: {
-                if (data.state == "playing") {
+
+                if (data[activeSource].State == "playing") {
                     playPause.setIcon("media-playback-pause")
                 } else {
                     playPause.setIcon("media-playback-start")
                 }
 
-                progress.value = 100*data.position/data.length
+                progress.value = 100*data[activeSource].Position/data[activeSource].Length
             }
         }
 
@@ -55,8 +57,8 @@ QGraphicsWidget {
 
     Component.onCompleted:
     {
-        dataSource.service.associateWidget(stop, "stop");
-        dataSource.service.associateWidget(progress, "progress");
+        dataSource.serviceForSource(activeSource).associateWidget(stop, "stop");
+        dataSource.serviceForSource(activeSource).associateWidget(progress, "progress");
     }
 
     layout: GraphicsLayouts.QGraphicsLinearLayout {
@@ -67,19 +69,19 @@ QGraphicsWidget {
 
             onClicked: {
                 var operation;
-                if (dataSource.data.state == "playing") {
+                if (dataSource.data[activeSource].State == "playing") {
                     operation = "pause"
                 } else {
                     operation = "play"
                 }
-                var data = dataSource.service.operationDescription(operation);
-                print(dataSource.service.name);
+                var data = dataSource.serviceForSource(activeSource).operationDescription(operation);
+                print(dataSource.serviceForSource(activeSource).name);
 
                 for ( var i in data ) {
                     print(i + ' -> ' + data[i] );
                 }
 
-                dataSource.service.startOperationCall(dataSource.service.operationDescription(operation));
+                dataSource.serviceForSource(activeSource).startOperationCall(dataSource.serviceForSource(activeSource).operationDescription(operation));
                 print("stopping");
             }
         }
@@ -90,14 +92,14 @@ QGraphicsWidget {
                 setIcon("media-playback-stop");
             }
             onClicked: {
-                var data = dataSource.service.operationDescription("stop");
-                print(dataSource.service.name);
+                var data = dataSource.serviceForSource(activeSource).operationDescription("stop");
+                print(dataSource.serviceForSource(activeSource).name);
 
                 for ( var i in data ) {
                     print(i + ' -> ' + data[i] );
                 }
 
-                dataSource.service.startOperationCall(dataSource.service.operationDescription("stop"));
+                dataSource.serviceForSource(activeSource).startOperationCall(dataSource.serviceForSource(activeSource).operationDescription("stop"));
                 print("stopping");
             }
         }
@@ -107,16 +109,14 @@ QGraphicsWidget {
             orientation: Qt.Horizontal
 
             onSliderMoved: {
-                var operation = dataSource.service.operationDescription("seek");
-                //FIXME: the line below can't be used because we can't use kconfiggroup
-                print(operation.seconds);
-                operation.seconds = Math.round(dataSource.data.length*(value/100));
+                var operation = dataSource.serviceForSource(activeSource).operationDescription("seek");
+                operation.seconds = Math.round(dataSource.data[activeSource].Length*(value/100));
 
                 for ( var i in operation ) {
                     print(i + ' -> ' + operation[i] );
                 }
 
-                dataSource.service.startOperationCall(operation);
+                dataSource.serviceForSource(activeSource).startOperationCall(operation);
                 print("set progress to " + progress);
             }
         }
