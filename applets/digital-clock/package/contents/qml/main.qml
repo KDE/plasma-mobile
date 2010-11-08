@@ -45,7 +45,7 @@ QGraphicsWidget {
           Component {
               id: simpleText
               Text {
-                  text: modelData + ': ' + dataSource.data[modelData]
+                  text: modelData + ': ' + dataSource.data['Local'][modelData]
               }
           }
       ]
@@ -53,7 +53,7 @@ QGraphicsWidget {
         Text { id: timeText }
         Text { text: 'Time Is ' + dataSource.data['Local']['Time']; }
         Text { text: "Available Data:"; }
-        Repeater { model: dataSource['Local'].keys; delegate: simpleText; }
+        Repeater { model: dataSource.keysForSource('Local'); delegate: simpleText; }
       }
     }
 }
