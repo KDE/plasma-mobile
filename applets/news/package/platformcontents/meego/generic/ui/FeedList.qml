@@ -35,7 +35,7 @@ ListView {
                 filterRole: "feed_title"
                 sourceModel: PlasmaCore.DataModel {
                     dataSource: feedSource
-                    key: "sources"
+                    keyRoleFilter: "sources"
                 }
             }
     header: BasicListItem {

@@ -49,7 +49,7 @@ Window {
         source = plasmoid.readConfig("feeds")
         var sourceString = new String(source)
         print("Configuration changed: " + source);
-        feedSource.source = source
+        feedSource.connectedSources = [source]
     }
 
     PlasmaCore.DataSource {
@@ -58,7 +58,7 @@ Window {
         interval: 50000
         onDataChanged: {
             spinner.visible = false;
-            BookKeeping.updateUnreadCount(data.items)
+            BookKeeping.updateUnreadCount(feedSource.data[source].items)
         }
     }
 
@@ -72,7 +72,7 @@ Window {
             filterRole: "feed_url"
             sourceModel: PlasmaCore.DataModel {
                 dataSource: feedSource
-                key: "items"
+                keyRoleFilter: "items"
             }
         }
     }

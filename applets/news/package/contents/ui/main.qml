@@ -45,7 +45,7 @@ QGraphicsWidget {
         source = plasmoid.readConfig("feeds")
         var sourceString = new String(source)
         print("Configuration changed: " + source);
-        feedSource.source = source
+        feedSource.connectedSources = source
     }
 
     Item {
@@ -55,7 +55,7 @@ QGraphicsWidget {
             interval: 50000
             onDataChanged: {
                 plasmoid.busy = false
-                BookKeeping.updateUnreadCount(data.items)
+                BookKeeping.updateUnreadCount(feedSource.data[source].items)
             }
         }
 
@@ -136,7 +136,7 @@ QGraphicsWidget {
                         filterRole: "feed_title"
                         sourceModel: PlasmaCore.DataModel {
                             dataSource: feedSource
-                            key: "sources"
+                            keyRoleFilter: "sources"
                         }
                     }
 
@@ -203,7 +203,7 @@ QGraphicsWidget {
                             filterRole: "feed_url"
                             sourceModel: PlasmaCore.DataModel {
                                 dataSource: feedSource
-                                key: "items"
+                                keyRoleFilter: "items"
                             }
                         }
                     }
