@@ -113,100 +113,120 @@ Item {
         }
     }
 
-    ListView {
-        id: list
+    Item {
         anchors.left: parent.left
         anchors.top: searchBox.bottom
         anchors.right:parent.right
         anchors.bottom: statusBar.top
-        spacing: 5
-        snapMode: ListView.SnapToItem
-        clip:true
+        ListView {
+            id: list
+            anchors.fill:parent
+            anchors.rightMargin: scrollBar.width + 2
+            spacing: 5
+            snapMode: ListView.SnapToItem
+            clip:true
 
-        onMovementEnded: {
-              if (contentY+height > 3*(contentHeight/4)) {
-                  kbSource.addPage()
-              } else if (kbSource.sources.length>1 && contentY+height < 2*(contentHeight/4)) {
-                  kbSource.removePage()
-              }
-          }
+            onMovementEnded: {
+                if (contentY+height > 3*(contentHeight/4)) {
+                    kbSource.addPage()
+                } else if (kbSource.sources.length>1 && contentY+height < 2*(contentHeight/4)) {
+                    kbSource.removePage()
+                }
+            }
 
-        model: PlasmaCore.DataModel {
-            dataSource: kbSource
-            keyRoleFilter: "KnowledgeBase-[\\d]*"
+            onContentHeightChanged: {
+                scrollBar.maximum = (contentHeight - height)/10
+            }
+
+            model: PlasmaCore.DataModel {
+                dataSource: kbSource
+                keyRoleFilter: "KnowledgeBase-[\\d]*"
+            }
+
+            delegate: PlasmaCore.FrameSvgItem {
+            id: delegateItem
+            imagePath: "widgets/frame"
+            prefix: "plain"
+            width: list.width
+            height: childrenRect.height
+
+            Column {
+                id: delegateLayout
+                Text {
+                    id: title
+                    text: Name
+                    width: delegateItem.width
+                }
+                Text {
+                    id: cat
+                    text: "<em>Category: "+category+"</em>"
+                    width: delegateItem.width
+                }
+                Column {
+                    id: detailsLayout
+                    opacity: 0
+                    height: 0
+                    state: "collapsed"
+                    Text {
+                        id: description
+                        width: delegateItem.width
+                        wrapMode: Text.Wrap
+                        text: "<b>Question:</b> "+Description
+                    }
+                    Text {
+                        id: answer
+                        width: delegateItem.width
+                        wrapMode: Text.Wrap
+                        text: "<b>Answer:</b> "+Answer
+                    }
+                    states: [
+                        State {
+                            name: "collapsed"
+                            PropertyChanges {
+                                target: detailsLayout
+                                opacity: 0
+                                height: 0
+                            }
+                        },
+                        State {
+                            name: "expanded"
+                            PropertyChanges {
+                                target: detailsLayout
+                                opacity: 1
+                                height: detailsLayout.childrenRect.height
+                            }
+                        }
+                    ]
+
+                    transitions: Transition {
+                        PropertyAnimation { properties: "opacity, height"; duration: 250 }
+                    }
+                }
+            }
+            MouseArea {
+                anchors.fill: delegateLayout
+                onClicked: {
+                    print(detailsLayout.state)
+                    if (detailsLayout.state == "collapsed") {
+                        detailsLayout.state = "expanded"
+                    } else {
+                        detailsLayout.state = "collapsed"
+                    }
+                }
+            }
+            }
         }
 
-        delegate: PlasmaCore.FrameSvgItem {
-          id: delegateItem
-          imagePath: "widgets/frame"
-          prefix: "plain"
-          width: list.width
-          height: childrenRect.height
+        PlasmaWidgets.ScrollBar {
+            id: scrollBar
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
 
-          Column {
-              id: delegateLayout
-              Text {
-                  id: title
-                  text: Name
-                  width: delegateItem.width
-              }
-              Text {
-                  id: cat
-                  text: "<em>Category: "+category+"</em>"
-                  width: delegateItem.width
-              }
-              Column {
-                  id: detailsLayout
-                  opacity: 0
-                  height: 0
-                  state: "collapsed"
-                  Text {
-                      id: description
-                      width: delegateItem.width
-                      wrapMode: Text.Wrap
-                      text: "<b>Question:</b> "+Description
-                  }
-                  Text {
-                      id: answer
-                      width: delegateItem.width
-                      wrapMode: Text.Wrap
-                      text: "<b>Answer:</b> "+Answer
-                  }
-                  states: [
-                      State {
-                          name: "collapsed"
-                          PropertyChanges {
-                              target: detailsLayout
-                              opacity: 0
-                              height: 0
-                          }
-                      },
-                      State {
-                          name: "expanded"
-                          PropertyChanges {
-                              target: detailsLayout
-                              opacity: 1
-                              height: detailsLayout.childrenRect.height
-                          }
-                      }
-                  ]
-
-                  transitions: Transition {
-                      PropertyAnimation { properties: "opacity, height"; duration: 250 }
-                  }
-              }
-          }
-          MouseArea {
-              anchors.fill: delegateLayout
-              onClicked: {
-                  print(detailsLayout.state)
-                  if (detailsLayout.state == "collapsed") {
-                      detailsLayout.state = "expanded"
-                  } else {
-                      detailsLayout.state = "collapsed"
-                  }
-              }
-          }
+            orientation: "Vertical"
+            onValueChanged: {
+                list.contentY = value*10
+            }
         }
     }
 }
