@@ -96,6 +96,21 @@ Item {
         onDataChanged: {
             plasmoid.busy = false
         }
+
+        property int lastPage: 0
+
+        function addPage()
+        {
+            ++lastPage
+            print("AAAAAAAAAAAEEEEKnowledgeBaseList\\provider:https://api.opendesktop.org/v1/\\query:"+query+"\\sortMode:new\\page:"+lastPage+"\\pageSize:20")
+            connectSource("KnowledgeBaseList\\provider:https://api.opendesktop.org/v1/\\query:"+query+"\\sortMode:new\\page:"+lastPage+"\\pageSize:20")
+        }
+
+        function removePage()
+        {
+            disconnectSource("KnowledgeBaseList\\provider:https://api.opendesktop.org/v1/\\query:"+query+"\\sortMode:new\\page:"+lastPage+"\\pageSize:20")
+            --lastPage
+        }
     }
 
     ListView {
@@ -108,6 +123,13 @@ Item {
         snapMode: ListView.SnapToItem
         clip:true
 
+        onMovementEnded: {
+              if (contentY+height > 3*(contentHeight/4)) {
+                  kbSource.addPage()
+              } else if (kbSource.sources.length>1 && contentY+height < 2*(contentHeight/4)) {
+                  kbSource.removePage()
+              }
+          }
 
         model: PlasmaCore.DataModel {
             dataSource: kbSource
