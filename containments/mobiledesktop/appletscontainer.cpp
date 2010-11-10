@@ -220,7 +220,9 @@ void AppletsContainer::relayout()
     repositionToolBox();
 #endif
 
-    resize(size().width(), (ceil((qreal)m_containment->applets().count()/columns))*maximumAppletSize.height());
+    resize(size().width(),
+           (ceil((qreal)m_containment->applets().count()/columns))
+            * (maximumAppletSize.height() + (m_applets.count()%2==0?maximumAppletSize.height():0)));
 }
 
 void AppletsContainer::repositionToolBox()
