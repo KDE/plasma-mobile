@@ -279,7 +279,10 @@ Rectangle {
 
                 PlasmaWidgets.PushButton {
                     id: addButton
+                    //FIXME
                     maximumSize: maximumSize.width+"x"+preferredSize.height
+                    minimumSize: "0x"+32
+
 
                     text: "Add widget"
                     onClicked : appletsView.addAppletRequested()
@@ -324,7 +327,7 @@ Rectangle {
         id: closeButton
         width: addButton.width
         anchors.bottom: parent.bottom
-        anchors.right: parent.right
+        anchors.right: infoPanel.right
         anchors.rightMargin: 4
         anchors.bottomMargin: 4
 
