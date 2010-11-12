@@ -75,7 +75,9 @@ void MobCorona::loadDefaultLayout()
     QString defaultConfig = KStandardDirs::locate("appdata", homeScreenPath+"/plasma-default-layoutrc");
     if (!defaultConfig.isEmpty()) {
         kDebug() << "attempting to load the default layout from:" << defaultConfig;
+#ifndef KDE_NO_DEPRECATED
         importLayout(KConfig(defaultConfig));
+#endif
         return;
     }
 
