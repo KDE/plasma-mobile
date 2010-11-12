@@ -91,14 +91,52 @@ Rectangle {
         anchors.topMargin: 4
         anchors.bottomMargin: closeButton.height
 
-        model: myModel
+        model: PlasmaCore.SortFilterModel {
+            id: appsFilter
+            filterRole: "display"
+            sourceModel: myModel
+        }
         flow: GridView.LeftToRight
-        snapMode: GridView.SnapToRow
+        //snapMode: GridView.SnapToRow
         cellWidth: width/4
         cellHeight: height/3
         clip: true
         signal addAppletRequested
         signal closeRequested
+
+        header: Item {
+            width: parent.width
+            height:30
+            PlasmaCore.FrameSvgItem {
+                id : background
+                imagePath: "widgets/lineedit"
+                prefix: "base"
+
+                width:300
+                height: parent.height
+                anchors.horizontalCenter: parent.horizontalCenter
+                TextInput {
+                    id: searchField
+                    anchors.fill:parent
+                    anchors.leftMargin: background.margins.left
+                    anchors.rightMargin: background.margins.right
+                    anchors.topMargin: background.margins.top
+                    anchors.bottomMargin: background.margins.bottom
+                    onTextChanged: {
+                        searchTimer.running = true
+                    }
+                }
+                Timer {
+                    id: searchTimer
+                    interval: 500;
+                    running: false
+                    repeat: false
+                    onTriggered: {
+                        appsFilter.filterRegExp = ".*"+searchField.text+".*"
+                    }
+                }
+            }
+        }
 
         delegate: Component {
             Item {
