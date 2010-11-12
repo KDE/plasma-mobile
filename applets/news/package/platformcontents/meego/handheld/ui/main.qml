@@ -34,6 +34,9 @@ Window {
     property string currentBody;
     property string currentUrl;
 
+    property string rotateLeft: "\u2939"
+    property string rotateRight: "\u2935"
+
     signal unreadCountChanged();
 
     Component.onCompleted: {
@@ -77,6 +80,19 @@ Window {
         }
     }
 
+    Button {
+        text: rotateLeft
+        anchors.bottom:parent.bottom
+        onClicked: {
+            if (text == rotateLeft) {
+                text = rotateRight;
+                screen.orientation = Screen.Portrait
+            } else if (text == rotateRight) {
+                text = rotateLeft;
+                screen.orientation = Screen.Landscape
+            }
+        }
+    }
 
     property Component feedListPage: FeedListPage {}
 
