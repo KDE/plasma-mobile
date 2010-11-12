@@ -112,6 +112,7 @@ void MobileLauncher::updateQuery()
 {
     Plasma::Containment *containment = corona()->containmentForScreen(0);
     if (containment) {
+        m_runnerModel->setDefaultQuery(containment->activity());
         m_runnerModel->setQuery(containment->activity());
     }
     setBusy(false);

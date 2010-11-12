@@ -41,10 +41,14 @@ namespace KRunnerItemHandler {
 class KRunnerModel : public QStandardItemModel
 {
     Q_OBJECT
+    Q_PROPERTY(QString defaultQuery READ defaultQuery WRITE setDefaultQuery)
 
 public:
     KRunnerModel(QObject *parent);
     virtual ~KRunnerModel();
+
+    void setDefaultQuery(const QString &query) {m_defaultQuery = query;}
+    QString defaultQuery() const {return m_defaultQuery;}
 
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual QMimeData *mimeData(const QModelIndexList &indexes) const;
@@ -66,6 +70,7 @@ Q_SIGNALS:
 private:
     class Private;
     Private * const d;
+    QString m_defaultQuery;
 };
 
 #endif // KRUNNERMODEL_H

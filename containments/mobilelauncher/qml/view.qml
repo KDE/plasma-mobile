@@ -17,11 +17,7 @@ Rectangle {
         anchors.leftMargin: 4
         anchors.rightMargin: 4
 
-        model: PlasmaCore.SortFilterModel {
-            id: appsFilter
-            filterRole: "display"
-            sourceModel: myModel
-        }
+        model: myModel
         flow: GridView.LeftToRight
         //snapMode: GridView.SnapToRow
         cellWidth: width/6
@@ -73,7 +69,11 @@ Rectangle {
                     running: false
                     repeat: false
                     onTriggered: {
-                        appsFilter.filterRegExp = ".*"+searchField.text+".*"
+                        if (searchField.text == "") {
+                            myModel.setQuery(myModel.defaultQuery)
+                        } else {
+                            myModel.setQuery(searchField.text)
+                        }
                     }
                 }
             }
