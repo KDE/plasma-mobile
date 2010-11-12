@@ -365,7 +365,7 @@ Rectangle {
         id: closeButton
         width: addButton.width
         anchors.bottom: parent.bottom
-        anchors.right: infoPanel.right
+        anchors.right: parent.right
         anchors.rightMargin: 4
         anchors.bottomMargin: 4
 

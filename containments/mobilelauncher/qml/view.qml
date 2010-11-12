@@ -12,8 +12,8 @@ Rectangle {
         objectName: "appsView"
 
         anchors.fill: parent
-        anchors.topMargin: 32
-        anchors.bottomMargin: 32
+        anchors.topMargin: Math.max((height-contentHeight)/2, 32)
+        anchors.bottomMargin: Math.max((height-contentHeight)/2, 32)
         anchors.leftMargin: 4
         anchors.rightMargin: 4
 
