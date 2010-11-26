@@ -212,6 +212,7 @@ QGraphicsWidget {
                     section.criteria: ViewSection.FullString
                     section.delegate: ListItem {
                         Text {
+                            color: theme.textColor
                             text: section
                             font.bold: true
                         }

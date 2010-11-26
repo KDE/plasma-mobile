@@ -37,10 +37,12 @@ ListItem {
             source: icon
         }
         Text {
+            color: theme.textColor
             text: listItem.text
         }
     }
     Text {
+        color: theme.textColor
         text: unread
         anchors.right: listItem.padding.right
         anchors.verticalCenter: listItem.verticalCenter
