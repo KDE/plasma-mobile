@@ -143,6 +143,9 @@ int  PlasmaApp::newInstance()
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(themeChanged()));
     view->applet()->setBackgroundHints(Plasma::Applet::NoBackground);
 
+    // Set window to exist on all desktops
+    KWindowSystem::setOnAllDesktops(view->winId(), true);
+
     //FIXME: hardcoding to MID for now
     view->applet()->config().writeEntry("layout", "plasmaboard/mid.xml");
     view->applet()->configChanged();
