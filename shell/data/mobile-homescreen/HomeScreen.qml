@@ -248,8 +248,6 @@ Item {
         }
         ]
 
-
-        
     }
 
     states: [
@@ -334,7 +332,6 @@ Item {
         target: activitypanel;
 
         onFlipRequested : {
-            
             if (reverse) {
                 if (flipable.state == "Front0") {
                     flipable.state = "Front360";

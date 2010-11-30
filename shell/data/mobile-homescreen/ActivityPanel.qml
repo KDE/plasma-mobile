@@ -28,6 +28,11 @@ Item {
     signal flipRequested(bool reverse);
     signal dragOverflow(int degrees)
 
+    function checkHideTimerRunning()
+    {
+        return !(flipable.state == "Back180" || flipable.state == "Back540");
+    }
+
     Image {
         id: activityimage;
         anchors.left: parent.left;
@@ -183,8 +188,11 @@ Item {
 
     Timer {
         id : timer
-        interval: 4000; running: false;
-        onTriggered:  { activitypanel.state = 'hidden' }
+        interval: 4000;
+        running: false;
+        onTriggered:  {
+            activitypanel.state = 'hidden'
+        }
     }
 
 
@@ -208,16 +216,8 @@ Item {
                 opacity: 0;
             }
             PropertyChanges {
-                target: phoneQuick;
-                opacity: 0;
-            }
-            PropertyChanges {
-                target: flipButton;
-                opacity: 0;
-            }
-            PropertyChanges {
                 target: timer;
-                running: true
+                running: checkHideTimerRunning()
             }
         },
         State {
@@ -324,13 +324,13 @@ Item {
             from: "*";
             to: "dragging";
             ParallelAnimation {
-                    PropertyAnimation {
-                        targets: hint;
-                        properties: "opacity";
-                        duration: 600;
-                        easing.type: "OutCubic";
-                    }
+                PropertyAnimation {
+                    targets: hint;
+                    properties: "opacity";
+                    duration: 600;
+                    easing.type: "OutCubic";
                 }
+            }
         }
     ]
 
