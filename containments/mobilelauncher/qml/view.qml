@@ -8,12 +8,16 @@ Rectangle {
     width: 800
     height: 480
 
+    PlasmaCore.Theme {
+        id:theme
+    }
+
     Flickable {
         id: mainFlickable
         interactive:true
         contentWidth: container.width; contentHeight: container.height
         anchors.fill: parent
-        clip: false
+        clip: true
         anchors.topMargin: 32
         anchors.bottomMargin: 128
         anchors.leftMargin: 4
@@ -76,7 +80,7 @@ Rectangle {
                 flow: GridView.TopToBottom
                 snapMode: GridView.SnapOneRow
                 cellWidth: width/6
-                cellHeight: height/3
+                cellHeight: 64+32
                 clip: true
                 signal clicked
 
@@ -88,30 +92,36 @@ Rectangle {
                     }
                 }
 
-                onHeightChanged : {
+                /*onHeightChanged : {
                     if (height > 600) {
                         cellHeight = height/6
                     } else {
-                        cellHeight = height/4
+                        cellHeight = height/3
                     }
-                }
+                }*/
 
                 delegate: Component {
                     Item {
                         id: wrapper
                         width: wrapper.GridView.view.cellWidth
-                        height: wrapper.GridView.view.cellWidth
+                        height: wrapper.GridView.view.cellHeight
                         property string urlText: url
 
                         PlasmaWidgets.IconWidget {
-                            minimumIconSize : "64x64"
-                            maximumIconSize : "64x64"
-                            preferredIconSize : "64x64"
-                            minimumSize.width: wrapper.width
-                            minimumSize.height: wrapper.height
-                            id: resultwidget
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            size: "64x64"
+                            id: iconWidgt
                             icon: decoration
+                        }
+                        Text {
+                            y: 67
+                            width: parent.width -16
+                            wrapMode:Text.Wrap
+                            horizontalAlignment: Text.AlignHCenter
+                            clip: true
+                            anchors.horizontalCenter: parent.horizontalCenter
                             text: display
+                            color: theme.textColor
                         }
 
                         MouseArea {
