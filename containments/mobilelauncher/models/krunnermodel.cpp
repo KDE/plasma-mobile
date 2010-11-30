@@ -181,6 +181,7 @@ void KRunnerModel::matchesChanged(const QList< Plasma::QueryMatch > & m)
     }
 
     sort(0, Qt::DescendingOrder);
+    emit rowCountChanged();
 }
 
 Qt::ItemFlags KRunnerModel::flags(const QModelIndex &index) const

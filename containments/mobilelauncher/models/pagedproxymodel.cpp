@@ -23,7 +23,7 @@
 
 PagedProxyModel::PagedProxyModel(QObject *parent)
     : QProxyModel(parent),
-      m_pageSize(10),
+      m_pageSize(16),
       m_currentPage(0)
 {
 }
@@ -73,11 +73,11 @@ int PagedProxyModel::pageSize() const
 
 void PagedProxyModel::setSourceModel(QObject *source)
 {
-    kWarning()<<"AAAA"<<source;
     QAbstractItemModel *model = qobject_cast<QAbstractItemModel *>(source);
     if (!model) {
         return;
     }
+    setRoleNames(model->roleNames());
     setModel(model);
 }
 
@@ -89,7 +89,7 @@ QObject *PagedProxyModel::sourceModel() const
 
 int PagedProxyModel::rowCount(const QModelIndex &parent) const
 {
-    return QProxyModel::rowCount(parent)/m_pageSize;
+    return qMin(m_pageSize, (QProxyModel::rowCount(parent)-m_currentPage*m_pageSize));
 }
 
 QVariant PagedProxyModel::data(const QModelIndex &index, int role) const

@@ -42,6 +42,7 @@ class KRunnerModel : public QStandardItemModel
 {
     Q_OBJECT
     Q_PROPERTY(QString defaultQuery READ defaultQuery WRITE setDefaultQuery)
+    Q_PROPERTY(int rowCount READ rowCount NOTIFY rowCountChanged)
 
 public:
     KRunnerModel(QObject *parent);
@@ -54,6 +55,7 @@ public:
     virtual QMimeData *mimeData(const QModelIndexList &indexes) const;
 
     static Plasma::RunnerManager *runnerManager();
+    int rowCount() const {return QStandardItemModel::rowCount();}
 
 private:
     void timerEvent(QTimerEvent * event);
@@ -66,11 +68,13 @@ private Q_SLOTS:
 
 Q_SIGNALS:
     void resultsAvailable();
+    void rowCountChanged();
 
 private:
     class Private;
     Private * const d;
     QString m_defaultQuery;
+    int m_totalItems;
 };
 
 #endif // KRUNNERMODEL_H

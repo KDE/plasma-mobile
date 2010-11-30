@@ -1,6 +1,7 @@
 import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
+import MobileLauncher 1.0
 
 Rectangle {
     id: main
@@ -70,66 +71,65 @@ Rectangle {
                     }
                 }
             }
-            GridView {
+            ListView {
                 id: appsView
                 objectName: "appsView"
                 width: mainFlickable.width
                 height: mainFlickable.height
 
-                model: myModel
-                flow: GridView.TopToBottom
-                snapMode: GridView.SnapOneRow
-                cellWidth: width/6
-                cellHeight: 64+32
+                model: Math.ceil(myModel.rowCount/18.0)
+                orientation: ListView.Horizontal
+                snapMode: ListView.SnapOneItem
+
                 clip: true
                 signal clicked
 
-                onWidthChanged : {
-                    if (width > 600) {
-                        cellWidth = width/6
-                    } else {
-                        cellWidth = width/4
-                    }
-                }
 
-                /*onHeightChanged : {
-                    if (height > 600) {
-                        cellHeight = height/6
-                    } else {
-                        cellHeight = height/3
-                    }
-                }*/
+                delegate: Item {
+                    width: appsView.width
+                    height: appsView.height
+                    Grid {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        rows: 3
+                        Repeater {
+                            model: PagedProxyModel {
+                                sourceModel: myModel
+                                currentPage: index
+                                pageSize: 18
+                            }
+                            delegate: Component {
+                                Item {
+                                    id: wrapper
+                                    width: 100
+                                    height: 100
+                                    property string urlText: url
 
-                delegate: Component {
-                    Item {
-                        id: wrapper
-                        width: wrapper.GridView.view.cellWidth
-                        height: wrapper.GridView.view.cellHeight
-                        property string urlText: url
+                                    PlasmaWidgets.IconWidget {
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        size: "64x64"
+                                        id: iconWidgt
+                                        icon: decoration
+                                    }
+                                    Text {
+                                        y: 67
+                                        width: parent.width -16
+                                        wrapMode:Text.Wrap
+                                        horizontalAlignment: Text.AlignHCenter
+                                        clip: true
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        text: display
+                                        color: theme.textColor
+                                    }
 
-                        PlasmaWidgets.IconWidget {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            size: "64x64"
-                            id: iconWidgt
-                            icon: decoration
-                        }
-                        Text {
-                            y: 67
-                            width: parent.width -16
-                            wrapMode:Text.Wrap
-                            horizontalAlignment: Text.AlignHCenter
-                            clip: true
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: display
-                            color: theme.textColor
-                        }
-
-                        MouseArea {
-                            id: mousearea
-                            anchors.fill: parent
-                            onClicked : {
-                                appsView.currentIndex = index
-                                appsView.clicked()
+                                    MouseArea {
+                                        id: mousearea
+                                        anchors.fill: parent
+                                        onClicked : {
+                                            appsView.currentIndex = index
+                                            appsView.clicked()
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
