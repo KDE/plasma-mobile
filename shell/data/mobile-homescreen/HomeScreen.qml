@@ -257,15 +257,7 @@ Item {
                 name: "Normal"
                 PropertyChanges {
                     target: mainSlot;
-                    scale: 1;
-                }
-                PropertyChanges {
-                    target: mainSlot;
                     y: 0;
-                }
-                PropertyChanges {
-                    target: spareSlot;
-                    scale: 0.9;
                 }
                 PropertyChanges {
                     target: spareSlot;
@@ -277,15 +269,7 @@ Item {
                 name: "Slide"
                 PropertyChanges {
                     target: spareSlot;
-                    scale: 1;
-                }
-                PropertyChanges {
-                    target: spareSlot;
                     y: 0;
-                }
-                PropertyChanges {
-                    target: mainSlot;
-                    scale: 0.9;
                 }
                 PropertyChanges {
                     target: mainSlot;
