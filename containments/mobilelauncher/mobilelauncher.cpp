@@ -21,6 +21,7 @@
 //own
 #include "mobilelauncher.h"
 #include "models/krunnermodel.h"
+#include "models/pagedproxymodel.h"
 
 
 //Qt
@@ -42,6 +43,7 @@
 #include <Plasma/RunnerManager>
 
 
+QML_DECLARE_TYPE(PagedProxyModel)
 
 MobileLauncher::MobileLauncher(QObject *parent, const QVariantList &args)
     : Containment(parent, args),
@@ -52,6 +54,7 @@ MobileLauncher::MobileLauncher(QObject *parent, const QVariantList &args)
 
     // At some point it has to be a custom constainment
     setContainmentType(Containment::CustomContainment);
+    qmlRegisterType<PagedProxyModel>("MobileLauncher", 1, 0, "PagedProxyModel");
 }
 
 MobileLauncher::~MobileLauncher()

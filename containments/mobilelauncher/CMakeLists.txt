@@ -5,6 +5,7 @@ set(mobile_launcher_SRCS
     mobilelauncher.cpp
     models/krunnermodel.cpp
     models/standarditemfactory.cpp
+    models/pagedproxymodel.cpp
     )
 
 kde4_add_plugin(plasma_containment_mobilelauncher ${mobile_launcher_SRCS})
