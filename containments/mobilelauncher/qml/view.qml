@@ -107,7 +107,7 @@ Rectangle {
                 snapMode: ListView.SnapOneItem
 
                 clip: true
-                signal clicked
+                signal clicked(string url)
 
 
                 delegate: Item {
@@ -150,8 +150,8 @@ Rectangle {
                                         id: mousearea
                                         anchors.fill: parent
                                         onClicked : {
-                                            appsView.currentIndex = index
-                                            appsView.clicked()
+                                            //appsView.currentIndex = index
+                                            appsView.clicked(url)
                                         }
                                     }
                                 }

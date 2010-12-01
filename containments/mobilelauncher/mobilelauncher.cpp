@@ -92,7 +92,7 @@ void MobileLauncher::init()
             m_view = item->findChild<QDeclarativeItem*>("appsView");
 
             if (m_view) {
-                connect(m_view, SIGNAL(clicked()), this, SLOT(itemActivated()));
+                connect(m_view, SIGNAL(clicked(const QString &)), this, SLOT(itemActivated(const QString &)));
             }
         }
     }
@@ -121,17 +121,11 @@ void MobileLauncher::updateQuery()
     setBusy(false);
 }
 
-void MobileLauncher::itemActivated()
+void MobileLauncher::itemActivated(const QString &url)
 {
-    if (m_view) {
-        QDeclarativeItem *item = m_view->property("currentItem").value<QDeclarativeItem *>();
-        if (item) {
-            QString url = item->property("urlText").toString();
-            kWarning() << "URL clicked" << url;
+    kWarning() << "URL clicked" << url;
 
-            KRunnerItemHandler::openUrl(url);
-        }
-    }
+    KRunnerItemHandler::openUrl(url);
 }
 
 K_EXPORT_PLASMA_APPLET(mobilelauncher, MobileLauncher)

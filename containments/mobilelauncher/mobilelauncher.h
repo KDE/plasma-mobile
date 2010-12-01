@@ -47,7 +47,7 @@ public:
 protected Q_SLOTS:
     void updateActivity(int wasScreen, int isScreen, Plasma::Containment *containment);
     void updateQuery();
-    void itemActivated();
+    void itemActivated(const QString &url);
 
 private:
     Plasma::DeclarativeWidget *m_declarativeWidget;
