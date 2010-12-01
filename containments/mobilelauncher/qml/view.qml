@@ -56,6 +56,12 @@ Rectangle {
                             searchTimer.running = true
                         }
                     }
+                    PropertyAnimation {
+                        id: hideSearchFieldAnim
+                        target: mainFlickable
+                        properties: "contentY"
+                        duration: 300
+                    }
                     Timer {
                         id: searchTimer
                         interval: 500;
@@ -69,7 +75,8 @@ Rectangle {
                                 clearButton.visible = true
                                 myModel.setQuery(searchField.text)
                             }
-                            mainFlickable.contentY = searchFieldContainer.height
+                            hideSearchFieldAnim.to = searchFieldContainer.height;
+                            hideSearchFieldAnim.running = true;
                         }
                     }
                     PlasmaWidgets.IconWidget {
