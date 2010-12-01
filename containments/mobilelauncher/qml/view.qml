@@ -27,6 +27,7 @@ Rectangle {
 
         Column {
             id: container
+            width: mainFlickable.width
             Component.onCompleted: {
                 mainFlickable.contentY = searchFieldContainer.height
             }
@@ -62,11 +63,27 @@ Rectangle {
                         repeat: false
                         onTriggered: {
                             if (searchField.text == "") {
+                                clearButton.visible = false
                                 myModel.setQuery(myModel.defaultQuery)
                             } else {
+                                clearButton.visible = true
                                 myModel.setQuery(searchField.text)
                             }
                             mainFlickable.contentY = searchFieldContainer.height
+                        }
+                    }
+                    PlasmaWidgets.IconWidget {
+                        id: clearButton
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: -10
+                        visible: false
+                        size: "64x64"
+                        Component.onCompleted: {
+                            setIcon("edit-clear-locationbar-rtl")
+                        }
+                        onClicked: {
+                            searchField.text = ""
                         }
                     }
                 }
@@ -78,6 +95,7 @@ Rectangle {
                 height: mainFlickable.height
 
                 model: Math.ceil(myModel.rowCount/18.0)
+                highlightRangeMode: ListView.StrictlyEnforceRange
                 orientation: ListView.Horizontal
                 snapMode: ListView.SnapOneItem
 
@@ -90,7 +108,7 @@ Rectangle {
                     height: appsView.height
                     Grid {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        rows: 3
+                        rows: appsView.width > 600 ? 3 : 5
                         Repeater {
                             model: PagedProxyModel {
                                 sourceModel: myModel
@@ -132,6 +150,35 @@ Rectangle {
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+    Item {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: mainFlickable.bottom
+        anchors.topMargin: 10
+        Row {
+            anchors.centerIn: parent
+            spacing: 20
+
+            Repeater {
+                model: Math.ceil(myModel.rowCount/18.0)
+
+                Rectangle {
+                    y: appsView.currentIndex == index ? -2 : 0
+                    width: appsView.currentIndex == index ? 10 : 6
+                    height: appsView.currentIndex == index ? 10 : 6
+                    radius: 4
+                    smooth: true
+                    color: appsView.currentIndex == index ? Qt.rgba(1,1,1,1) : Qt.rgba(1,1,1,0.6)
+
+                    MouseArea {
+                        width: 20; height: 20
+                        anchors.centerIn: parent
+                        onClicked: appsView.currentIndex = index
                     }
                 }
             }
