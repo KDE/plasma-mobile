@@ -116,6 +116,13 @@ Item {
 
     }
 
+    PropertyAnimation {
+        id: rotationDragAnim
+        target: activitypanel
+        properties: "y"
+        duration: 300
+    }
+
     MouseArea {
         id: hintregion;
 
@@ -128,13 +135,10 @@ Item {
 
         drag.target: activitypanel;
         drag.axis: "YAxis"
-        drag.minimumY: activitypanel.parent.height/2 - activitypanel.height;
+        drag.minimumY: activitypanel.parent.height - activitypanel.height;
         drag.maximumY: activitypanel.parent.height;
 
-        onClicked: {
-            activitypanel.state = 'show';
-            timer.restart();
-        }
+        property int startY
 
         onPressed: {
             //ignore the unwanted areas: since mousearea can't have fancy shapes find it there
@@ -143,20 +147,33 @@ Item {
                 return;
             }
 
+            drag.target = activitypanel;
             activitypanel.state = 'dragging';
             timer.stop();
+            startY = activitypanel.y
             passClicks = true;
         }
 
-        onPositionChanged : {
-            if (Math.abs((activitypanel.y  + activitypanel.height) - activitypanel.parent.height) > 40) {
+        onPositionChanged: {
+            if (Math.abs(activitypanel.y - startY) > 40) {
                 passClicks = false;
+            }
+
+            if (mouse.y < -100) {
+                drag.target = undefined
+                rotationDragAnim.to = activitypanel.parent.height/2 - activitypanel.height;
+                rotationDragAnim.running = true
             }
         }
 
         onReleased: {
             var child = shortcuts.childAt(mouse.x-shortcuts.x, mouse.y + hintregion.y-shortcuts.y);
-            if (passClicks && child) {
+            if (passClicks && hint.opacity == 1) {
+                activitypanel.state = 'hidden'
+                activitypanel.state = 'show'
+                timer.restart();
+                return
+            } else if (passClicks && child) {
                 if (activeChild == child) {
                     activitypanel.flipRequested(true);
                 } else {
@@ -168,9 +185,6 @@ Item {
                 }
             }
 
-            if (activitypanel.state != 'dragging') {
-                return;
-            }
             var target = activitypanel.parent.height - (activitypanel.height / 1.5);
             if (activitypanel.y < target) {
                 activitypanel.state = 'show';
