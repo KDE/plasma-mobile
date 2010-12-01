@@ -28,9 +28,9 @@ Item {
     signal flipRequested(bool reverse);
     signal dragOverflow(int degrees)
 
-    function checkHideTimerRunning()
+    function isHomeScreenFlipped()
     {
-        return !(flipable.state == "Back180" || flipable.state == "Back540");
+        return (flipable.state == "Back180" || flipable.state == "Back540");
     }
 
     Image {
@@ -148,7 +148,7 @@ Item {
             }
 
             drag.target = activitypanel;
-            activitypanel.state = 'dragging';
+            activitypanel.state = "dragging";
             timer.stop();
             startY = activitypanel.y
             passClicks = true;
@@ -169,8 +169,8 @@ Item {
         onReleased: {
             var child = shortcuts.childAt(mouse.x-shortcuts.x, mouse.y + hintregion.y-shortcuts.y);
             if (passClicks && hint.opacity == 1) {
-                activitypanel.state = 'hidden'
-                activitypanel.state = 'show'
+                activitypanel.state = "hidden"
+                activitypanel.state = "show"
                 timer.restart();
                 return
             } else if (passClicks && child) {
@@ -187,13 +187,18 @@ Item {
 
             var target = activitypanel.parent.height - (activitypanel.height / 1.5);
             if (activitypanel.y < target) {
-                activitypanel.state = 'show';
+                activitypanel.state = "show";
                 if (activitypanel.y < target / 2) {
-                    activitypanel.state = 'hidden';
+                    //here don't hide when isHomeScreenFlipped() because we are before the flip
+                    if (isHomeScreenFlipped()) {
+                        activitypanel.state = "hidden";
+                    }
                     activitypanel.flipRequested(false);
                 }
+            } else if (isHomeScreenFlipped()) {
+                activitypanel.state = "show";
             } else {
-                activitypanel.state = 'hidden';
+                activitypanel.state = "hidden";
             }
             timer.restart();
         }
@@ -205,7 +210,9 @@ Item {
         interval: 4000;
         running: false;
         onTriggered:  {
-            activitypanel.state = 'hidden'
+            if (!isHomeScreenFlipped()) {
+                activitypanel.state = "hidden"
+            }
         }
     }
 
@@ -231,7 +238,7 @@ Item {
             }
             PropertyChanges {
                 target: timer;
-                running: checkHideTimerRunning()
+                running: true
             }
         },
         State {
