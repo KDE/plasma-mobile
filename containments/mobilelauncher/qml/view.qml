@@ -100,8 +100,8 @@ Rectangle {
                             delegate: Component {
                                 Item {
                                     id: wrapper
-                                    width: 100
-                                    height: 100
+                                    width: 120
+                                    height: 120
                                     property string urlText: url
 
                                     PlasmaWidgets.IconWidget {
