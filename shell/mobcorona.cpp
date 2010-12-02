@@ -182,5 +182,42 @@ QRegion MobCorona::availableScreenRegion(int id) const
     return r;
 }
 
+KConfigGroup MobCorona::storedConfig(int containmentId)
+{
+    KConfigGroup cg(config(), "StoredContainments");
+
+    if (containmentId > 0) {
+        cg = KConfigGroup(&cg, QString::number(containmentId));
+    }
+
+    return cg;
+}
+
+void MobCorona::storeContainment(Plasma::Containment *containment)
+{
+    //m_storedApplets.insert(applet->name(), applet->id());
+    KConfigGroup storage = storedConfig(0);
+    KConfigGroup cg(containment->config());
+    /*cg = KConfigGroup(&cg, "Conainments");
+    cg = KConfigGroup(&cg, QString::number(containment->id()));*/
+
+    kDebug() << "storing" << containment->name() << containment->id() << "to" << storage.name() << ", containment config is" << cg.name();
+    delete containment;
+    cg.reparent(&storage);
+}
+
+Plasma::Containment *MobCorona::restoreContainment(const int contaimentId)
+{
+    KConfigGroup cg = storedConfig(contaimentId);
+    KConfigGroup parentCg;
+    cg.reparent(&cg);
+    QList<Plasma::Containment *> conts = Plasma::Corona::importLayout(parentCg);
+    if (!conts.isEmpty()) {
+        return conts.first();
+    } else {
+        return 0;
+    }
+}
+
 #include "mobcorona.moc"
 

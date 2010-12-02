@@ -277,7 +277,12 @@ void PlasmaApp::changeActivity()
     QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(sender());
 
     if (item) {
-        Plasma::Containment *containment = m_containments.value(item->objectName().toInt());
+        Plasma::Containment *containment = 0;
+        containment = m_containments.value(item->objectName().toInt());
+        if (!containment) {
+            containment = m_corona->restoreContainment(item->objectName().toInt());
+            manageNewContainment(containment);
+        }
         changeActivity(containment);
     }
 }
@@ -470,6 +475,9 @@ void PlasmaApp::shrinkTray()
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
+    if (m_containments.contains(containment->id()) || m_panelContainments.contains(containment)) {
+        return;
+    }
     QAction *addAction = containment->action("add widgets");
     if (addAction) {
         connect(addAction, SIGNAL(triggered()), this, SLOT(showWidgetsExplorer()));

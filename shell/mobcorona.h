@@ -53,8 +53,13 @@ public:
     virtual QRect screenGeometry(int id) const;
     virtual QRegion availableScreenRegion(int id) const;
 
-public slots:
+    KConfigGroup storedConfig(int containmentId);
+    void storeContainment(Plasma::Containment *containment);
+    Plasma::Containment *restoreContainment(const int containmentId);
+
+public Q_SLOTS:
     void layoutContainments();
+
 
 private:
     void init();
