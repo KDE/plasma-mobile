@@ -316,27 +316,29 @@ void PlasmaApp::nextActivity()
 
 void PlasmaApp::previousActivity()
 {
-    QMap<int, Plasma::Containment*>::const_iterator it = m_containments.constFind(m_currentContainment->id());
+    const int totalContainments = m_corona->totalContainments();
+    int currentId = m_currentContainment->id();
 
-    if (it == m_containments.constEnd()) {
-        return;
-    }
-
+    Plasma::Containment *nextContainment = m_currentContainment;
     bool loop = false;
-    while (it.value() == m_currentContainment || it.value() == m_alternateContainment ||
-           it.value()->location() != Plasma::Desktop) {
-        if (it == m_containments.constBegin()) {
-            it = m_containments.constEnd();
+    while (!nextContainment || nextContainment->location() != Plasma::Desktop ||
+          nextContainment == m_currentContainment ||
+          nextContainment == m_alternateContainment) {
+        currentId = (m_corona->totalContainments() + currentId - 1) % m_corona->totalContainments();
+        nextContainment = m_corona->restoreContainment(currentId);
+
+        if (currentId == 0) {
             if (loop) {
-                return;
+                break;
             } else {
                 loop = true;
             }
         }
-        --it;
     }
 
-    changeActivity(it.value());
+    if (nextContainment) {
+        changeActivity(nextContainment);
+    }
 }
 
 void PlasmaApp::changeActivity(Plasma::Containment *containment)
