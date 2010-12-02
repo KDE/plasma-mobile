@@ -41,6 +41,7 @@ class MobCorona : public Plasma::Corona
 
 public:
     MobCorona(QObject * parent);
+    ~MobCorona();
 
     /**
      * Loads the default (system wide) layout for this user
@@ -54,7 +55,6 @@ public:
     virtual QRegion availableScreenRegion(int id) const;
 
     KConfigGroup storedConfig(int containmentId);
-    void storeContainment(Plasma::Containment *containment);
     Plasma::Containment *restoreContainment(const int containmentId);
 
 public Q_SLOTS:

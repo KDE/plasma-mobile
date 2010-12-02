@@ -49,6 +49,20 @@ MobCorona::MobCorona(QObject *parent)
     init();
 }
 
+MobCorona::~MobCorona()
+{
+    KConfigGroup cg(config(), "SavedContainments");
+
+    foreach (Plasma::Containment *cont, containments()) {
+        if (cont->formFactor() == Plasma::Planar && cont->id() > 2) {
+            QList<Plasma::Containment *> conts;
+            conts.append(cont);
+            KConfigGroup contCg = KConfigGroup(&cg, QString::number(cont->id()));
+            exportLayout(contCg, conts);
+        }
+    }
+}
+
 void MobCorona::init()
 {
     Plasma::ContainmentActionsPluginsConfig desktopPlugins;
@@ -183,34 +197,17 @@ QRegion MobCorona::availableScreenRegion(int id) const
 
 KConfigGroup MobCorona::storedConfig(int containmentId)
 {
-    KConfigGroup cg(config(), "StoredContainments");
-
-    if (containmentId > 0) {
-        cg = KConfigGroup(&cg, QString::number(containmentId));
-    }
+    KConfigGroup cg(config(), "SavedContainments");
+    cg = KConfigGroup(&cg, QString::number(containmentId));
 
     return cg;
-}
-
-void MobCorona::storeContainment(Plasma::Containment *containment)
-{
-    //m_storedApplets.insert(applet->name(), applet->id());
-    KConfigGroup storage = storedConfig(0);
-    KConfigGroup cg(containment->config());
-    /*cg = KConfigGroup(&cg, "Conainments");
-    cg = KConfigGroup(&cg, QString::number(containment->id()));*/
-
-    kDebug() << "storing" << containment->name() << containment->id() << "to" << storage.name() << ", containment config is" << cg.name();
-    delete containment;
-    cg.reparent(&storage);
 }
 
 Plasma::Containment *MobCorona::restoreContainment(const int contaimentId)
 {
     KConfigGroup cg = storedConfig(contaimentId);
-    KConfigGroup parentCg;
-    cg.reparent(&cg);
-    QList<Plasma::Containment *> conts = Plasma::Corona::importLayout(parentCg);
+
+    QList<Plasma::Containment *> conts = Plasma::Corona::importLayout(cg);
     if (!conts.isEmpty()) {
         return conts.first();
     } else {
