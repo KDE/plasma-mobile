@@ -44,7 +44,8 @@
 #include <Plasma/DeclarativeWidget>
 
 MobCorona::MobCorona(QObject *parent)
-    : Plasma::Corona(parent)
+    : Plasma::Corona(parent),
+      m_containmentsRestoredCount(0)
 {
     init();
 }
@@ -205,14 +206,28 @@ KConfigGroup MobCorona::storedConfig(int containmentId)
 
 Plasma::Containment *MobCorona::restoreContainment(const int contaimentId)
 {
+    //FIXME: put them into an hash
+    foreach (Plasma::Containment *containment, containments()) {
+        if (containment->id() == contaimentId) {
+            return containment;
+        }
+    }
+
     KConfigGroup cg = storedConfig(contaimentId);
 
     QList<Plasma::Containment *> conts = Plasma::Corona::importLayout(cg);
     if (!conts.isEmpty()) {
+        ++ m_containmentsRestoredCount;
         return conts.first();
     } else {
         return 0;
     }
+}
+
+int MobCorona::totalContainments() const
+{
+    KConfigGroup cg(config(), "SavedContainments");
+    return cg.groupList().count() + containments().count()  - m_containmentsRestoredCount;
 }
 
 #include "mobcorona.moc"

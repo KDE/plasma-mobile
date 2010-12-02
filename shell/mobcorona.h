@@ -56,6 +56,7 @@ public:
 
     KConfigGroup storedConfig(int containmentId);
     Plasma::Containment *restoreContainment(const int containmentId);
+    int totalContainments() const;
 
 public Q_SLOTS:
     void layoutContainments();
@@ -65,6 +66,7 @@ private:
     void init();
     Plasma::Applet *loadDefaultApplet(const QString &pluginName, Plasma::Containment *c);
     QRect m_screenGeometry;
+    int m_containmentsRestoredCount;
 };
 
 #endif
