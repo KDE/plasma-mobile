@@ -76,6 +76,11 @@ bool AppletsView::sceneEventFilter(QGraphicsItem *watched, QEvent *event)
 
     if (event->type() == QEvent::GraphicsSceneMousePress) {
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
+
+        if (!(me->buttons() & Qt::LeftButton)) {
+            return Plasma::ScrollWidget::sceneEventFilter(watched, event);
+        }
+
         Plasma::Applet *appletUnderMouse = 0;
         //find an applet to put the indicator over
         foreach (Plasma::Applet *applet, m_appletsContainer->m_containment->applets()) {
