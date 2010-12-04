@@ -3,9 +3,8 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import MobileLauncher 1.0
 
-Rectangle {
+Item {
     id: main
-    color: Qt.rgba(0,0,0,0.4)
     width: 800
     height: 480
 
