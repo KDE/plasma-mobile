@@ -116,27 +116,10 @@ Rectangle {
             }
         }
 
-
-        width: parent.width
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.topMargin: 4
-        anchors.bottomMargin: closeButton.height
-
         onSearchQueryChanged: {
-            if (searchQuery == "") {
-                myModel.setQuery(myModel.defaultQuery)
-            } else {
-                myModel.setQuery(searchQuery)
-            }
+            appsFilter.filterRegExp = ".*"+searchQuery+".*"
         }
-    }
 
-/*
-    GridView {
-        id: appletsView
-        objectName: "appletsView"
 
         width: parent.width
         anchors.left: parent.left
@@ -144,109 +127,9 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.topMargin: 4
         anchors.bottomMargin: closeButton.height
-
-        model: PlasmaCore.SortFilterModel {
-            id: appsFilter
-            filterRole: "display"
-            sourceModel: myModel
-        }
-        flow: GridView.LeftToRight
-        //snapMode: GridView.SnapToRow
-        cellWidth: width/4
-        cellHeight: height/3
-        clip: true
-        signal addAppletRequested
-        signal closeRequested
-
-        header: Item {
-            width: parent.width
-            height:30
-            PlasmaCore.FrameSvgItem {
-                id : background
-                imagePath: "widgets/lineedit"
-                prefix: "base"
-
-                width:300
-                height: parent.height
-                anchors.horizontalCenter: parent.horizontalCenter
-                TextInput {
-                    id: searchField
-                    anchors.fill:parent
-                    anchors.leftMargin: background.margins.left
-                    anchors.rightMargin: background.margins.right
-                    anchors.topMargin: background.margins.top
-                    anchors.bottomMargin: background.margins.bottom
-                    onTextChanged: {
-                        searchTimer.running = true
-                    }
-                }
-                Timer {
-                    id: searchTimer
-                    interval: 500;
-                    running: false
-                    repeat: false
-                    onTriggered: {
-                        appsFilter.filterRegExp = ".*"+searchField.text+".*"
-                    }
-                }
-            }
-        }
-
-        delegate: Component {
-            Item {
-                id: wrapper
-                width: wrapper.GridView.view.cellWidth-40
-                height: wrapper.GridView.view.cellWidth-40
-                property string appletPlugin : pluginName
-
-                PlasmaWidgets.IconWidget {
-                    minimumIconSize : "64x64"
-                    maximumIconSize : "64x64"
-                    preferredIconSize : "64x64"
-                    minimumSize.width: wrapper.width
-                    id: resultwidget
-                    icon: decoration
-                    text: display
-                }
-
-                MouseArea {
-                    id: mousearea
-
-                    anchors.fill: parent
-                    onClicked : {
-                        appletsView.currentIndex = index
-                        detailsIcon.icon = decoration
-                        detailsName.text = display
-                        detailsVersion.text = "Version "+version
-                        detailsDescription.text = description
-                        detailsAuthor.text = "<b>Author:</b> "+author
-                        detailsEmail.text = "<b>Email:</b> "+email
-                        detailsLicense.text = "<b>License:</b> "+license
-
-                        //appletsView.width = (appletsView.parent.width/4)*3;
-                        //appletsView.cellWidth = appletsView.width/3
-                        infoPanel.state = "shown"
-                    }
-                }
-            }
-        }
-
-        onWidthChanged : {
-            if (widgetsExplorer.state == "horizontal" && infoPanel.state == "hidden") {
-                cellWidth = width/4
-            } else {
-                cellWidth = width/3
-            }
-        }
-        onHeightChanged : {
-            if (widgetsExplorer.state == "horizontal") {
-                cellHeight = widgetsExplorer.height/3
-            } else {
-                cellHeight = widgetsExplorer.height/4
-            }
-        }
     }
-*/
+
+
     Rectangle {
         id: infoPanel
 
