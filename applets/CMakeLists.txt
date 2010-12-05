@@ -1,4 +1,3 @@
-add_subdirectory(addons)
 add_subdirectory(appswitcher)
 add_subdirectory(samegame)
 add_subdirectory(digital-clock)
