@@ -20,12 +20,11 @@
 import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import MobileLauncher 1.0
 
 Item {
     id: main
-    width: 800
-    height: 480
+    property QObject model;
 
     PlasmaCore.Theme {
         id:theme
@@ -88,10 +87,10 @@ Item {
                         onTriggered: {
                             if (searchField.text == "") {
                                 clearButton.visible = false
-                                myModel.setQuery(myModel.defaultQuery)
+                                main.model.setQuery(main.model.defaultQuery)
                             } else {
                                 clearButton.visible = true
-                                myModel.setQuery(searchField.text)
+                                main.model.setQuery(searchField.text)
                             }
                             hideSearchFieldAnim.to = searchFieldContainer.height;
                             hideSearchFieldAnim.running = true;
@@ -119,7 +118,7 @@ Item {
                 width: mainFlickable.width
                 height: mainFlickable.height
 
-                model: Math.ceil(myModel.rowCount/18.0)
+                model: Math.ceil(main.model.rowCount/18.0)
                 highlightRangeMode: ListView.StrictlyEnforceRange
                 orientation: ListView.Horizontal
                 snapMode: ListView.SnapOneItem
@@ -135,8 +134,8 @@ Item {
                         anchors.horizontalCenter: parent.horizontalCenter
                         rows: appsView.width > 600 ? 3 : 5
                         Repeater {
-                            model: MobileComponents.PagedProxyModel {
-                                sourceModel: myModel
+                            model: PagedProxyModel {
+                                sourceModel: main.model
                                 currentPage: index
                                 pageSize: 18
                             }
@@ -190,7 +189,7 @@ Item {
             spacing: 20
 
             Repeater {
-                model: Math.ceil(myModel.rowCount/18.0)
+                model: Math.ceil(main.model.rowCount/18.0)
 
                 Rectangle {
                     y: appsView.currentIndex == index ? -2 : 0
