@@ -44,11 +44,11 @@ public:
     Plasma::Containment *containment() const;
 
 protected Q_SLOTS:
-    void addApplet();
+    void addApplet(const QString &plugin);
 
 private:
     Plasma::Containment *m_containment;
-    QDeclarativeItem *m_view;
+    QDeclarativeItem *m_mainWidget;
     Plasma::DeclarativeWidget *m_declarativeWidget;
 
     PlasmaAppletItemModel *m_appletsModel;

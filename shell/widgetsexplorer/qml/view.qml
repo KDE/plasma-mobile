@@ -3,13 +3,18 @@ import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Rectangle {
     color: Qt.rgba(0,0,0,0.4)
     id: widgetsExplorer
+    objectName: "widgetsExplorer"
     state: "horizontal"
     width:800
     height:480
+
+    signal addAppletRequested(string plugin)
+    signal closeRequested
 
     states: [
         State {
@@ -80,6 +85,55 @@ Rectangle {
         }
     }
 
+    MobileComponents.IconGrid {
+        id: appletsView
+        property string currentPlugin
+        model: PlasmaCore.SortFilterModel {
+            id: appsFilter
+            filterRole: "display"
+            sourceModel: myModel
+        }
+
+
+        delegate: Component {
+            MobileComponents.IconDelegate {
+                icon: decoration
+                text: display
+                onClicked: {
+                    currentPlugin = pluginName
+                    detailsIcon.icon = decoration
+                    detailsName.text = display
+                    detailsVersion.text = "Version "+version
+                    detailsDescription.text = description
+                    detailsAuthor.text = "<b>Author:</b> "+author
+                    detailsEmail.text = "<b>Email:</b> "+email
+                    detailsLicense.text = "<b>License:</b> "+license
+
+                    //appletsView.width = (appletsView.parent.width/4)*3;
+                    //appletsView.cellWidth = appletsView.width/3
+                    infoPanel.state = "shown"
+                }
+            }
+        }
+
+
+        width: parent.width
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.topMargin: 4
+        anchors.bottomMargin: closeButton.height
+
+        onSearchQueryChanged: {
+            if (searchQuery == "") {
+                myModel.setQuery(myModel.defaultQuery)
+            } else {
+                myModel.setQuery(searchQuery)
+            }
+        }
+    }
+
+/*
     GridView {
         id: appletsView
         objectName: "appletsView"
@@ -192,7 +246,7 @@ Rectangle {
             }
         }
     }
-
+*/
     Rectangle {
         id: infoPanel
 
@@ -323,7 +377,7 @@ Rectangle {
 
 
                     text: "Add widget"
-                    onClicked : appletsView.addAppletRequested()
+                    onClicked : widgetsExplorer.addAppletRequested(appletsView.currentPlugin)
                 }
             }
         }
@@ -370,7 +424,7 @@ Rectangle {
         anchors.bottomMargin: 4
 
         text: "Close"
-        onClicked : appletsView.closeRequested()
+        onClicked : widgetsExplorer.closeRequested()
     }
 
 }

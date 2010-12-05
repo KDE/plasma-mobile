@@ -25,8 +25,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: main
-    
 
+    property Component delegate
     property QtObject model
     property string searchQuery
 
@@ -117,7 +117,7 @@ Item {
                 width: mainFlickable.width
                 height: mainFlickable.height
 
-                model: main.model?Math.ceil(main.model.rowCount/18.0):0
+                model: main.model?Math.ceil(main.model.count/18.0):0
                 highlightRangeMode: ListView.StrictlyEnforceRange
                 orientation: ListView.Horizontal
                 snapMode: ListView.SnapOneItem
@@ -126,7 +126,22 @@ Item {
                 signal clicked(string url)
 
 
-                delegate: IconDelegate {}
+                delegate: Item {
+                    width: appsView.width
+                    height: appsView.height
+                    Grid {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        rows: appsView.width > 600 ? 3 : 5
+                        Repeater {
+                            model: MobileComponents.PagedProxyModel {
+                                sourceModel: main.model
+                                currentPage: index
+                                pageSize: 18
+                            }
+                            delegate: main.delegate
+                        }
+                    }
+                }
             }
         }
     }
@@ -140,7 +155,7 @@ Item {
             spacing: 20
 
             Repeater {
-                model: main.model?Math.ceil(main.model.rowCount/18.0):0
+                model: main.model?Math.ceil(main.model.count/18.0):0
 
                 Rectangle {
                     y: appsView.currentIndex == index ? -2 : 0

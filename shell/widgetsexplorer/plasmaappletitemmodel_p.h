@@ -72,6 +72,7 @@ private:
 class PlasmaAppletItemModel : public QStandardItemModel
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
     enum Roles {
@@ -98,6 +99,10 @@ public:
     void setRunningApplets(const QString &name, int count);
 
     QString &Application();
+    int count() const {return QStandardItemModel::rowCount();}
+
+Q_SIGNALS:
+    void countChanged();
 
 private:
     QString m_application;

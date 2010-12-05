@@ -28,6 +28,15 @@ Item {
 
     MobileComponents.IconGrid {
         model: myModel
+        delegate: Component {
+            MobileComponents.IconDelegate {
+                icon: decoration
+                text: display
+                onClicked: {
+                    appsView.clicked(url)
+                }
+            }
+        }
 
         anchors.fill: parent
         anchors.topMargin: 32

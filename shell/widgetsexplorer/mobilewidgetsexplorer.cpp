@@ -41,7 +41,7 @@
 MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
     : QGraphicsWidget(parent),
       m_containment(0),
-      m_view(0)
+      m_mainWidget(0)
 {
     setContentsMargins(0, 0, 0, 0);
 
@@ -60,14 +60,11 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
         if (ctxt) {
             ctxt->setContextProperty("myModel", m_appletsModel);
         }
-        QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_declarativeWidget->rootObject());
-        if (item) {
-            m_view = item->findChild<QDeclarativeItem*>("appletsView");
+        m_mainWidget = qobject_cast<QDeclarativeItem *>(m_declarativeWidget->rootObject());
 
-            if (m_view) {
-                connect(m_view, SIGNAL(addAppletRequested()), this, SLOT(addApplet()));
-                connect(m_view, SIGNAL(closeRequested()), this, SLOT(deleteLater()));
-            }
+        if (m_mainWidget) {
+            connect(m_mainWidget, SIGNAL(addAppletRequested(const QString &)), this, SLOT(addApplet(const QString &)));
+            connect(m_mainWidget, SIGNAL(closeRequested()), this, SLOT(deleteLater()));
         }
     }
 }
@@ -86,21 +83,17 @@ Plasma::Containment *MobileWidgetsExplorer::containment() const
     return m_containment;
 }
 
-void MobileWidgetsExplorer::addApplet()
+void MobileWidgetsExplorer::addApplet(const QString &plugin)
 {
-    if (m_view) {
-        QDeclarativeItem *item = m_view->property("currentItem").value<QDeclarativeItem *>();
-        if (item) {
-            QString plugin = item->property("appletPlugin").toString();
-            kWarning() << "Applet added" << plugin;
+    if (m_mainWidget) {
+        kWarning() << "Applet added" << plugin;
 
-            if (m_containment) {
-                m_containment->addApplet(plugin);
-            }
-
-            //close in a quite brutal way
-            deleteLater();
+        if (m_containment) {
+            m_containment->addApplet(plugin);
         }
+
+        //close in a quite brutal way
+        deleteLater();
     }
 }
 

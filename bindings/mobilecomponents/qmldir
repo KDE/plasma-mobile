@@ -1,3 +1,4 @@
 plugin mobilecomponentsplugin
 IconGrid 0.1 IconGrid.qml
+IconDelegate 0.1 IconDelegate.qml
 
