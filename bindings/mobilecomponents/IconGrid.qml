@@ -20,11 +20,15 @@
 import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import MobileLauncher 1.0
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+
 
 Item {
     id: main
-    property QObject model;
+    width: 800
+    height: 480
+
+    property QtObject model
 
     PlasmaCore.Theme {
         id:theme
@@ -118,7 +122,7 @@ Item {
                 width: mainFlickable.width
                 height: mainFlickable.height
 
-                model: Math.ceil(main.model.rowCount/18.0)
+                model: main.model?Math.ceil(main.model.rowCount/18.0):0
                 highlightRangeMode: ListView.StrictlyEnforceRange
                 orientation: ListView.Horizontal
                 snapMode: ListView.SnapOneItem
@@ -134,7 +138,7 @@ Item {
                         anchors.horizontalCenter: parent.horizontalCenter
                         rows: appsView.width > 600 ? 3 : 5
                         Repeater {
-                            model: PagedProxyModel {
+                            model: MobileComponents.PagedProxyModel {
                                 sourceModel: main.model
                                 currentPage: index
                                 pageSize: 18
@@ -189,7 +193,7 @@ Item {
             spacing: 20
 
             Repeater {
-                model: Math.ceil(main.model.rowCount/18.0)
+                model: main.model?Math.ceil(main.model.rowCount/18.0):0
 
                 Rectangle {
                     y: appsView.currentIndex == index ? -2 : 0
