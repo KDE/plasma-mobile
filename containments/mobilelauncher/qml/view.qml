@@ -22,15 +22,27 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
+Item {
+    width: 800
+    height: 480
 
-MobileComponents.IconGrid {
-    model: myModel
-    onSearchQueryChanged: {
-        if (searchQuery == "") {
-            myModel.setQuery(myModel.defaultQuery)
-        } else {
-            myModel.setQuery(searchQuery)
+    MobileComponents.IconGrid {
+        model: myModel
+
+        anchors.fill: parent
+        anchors.topMargin: 32
+        anchors.bottomMargin: 128
+        anchors.leftMargin: 4
+        anchors.rightMargin: 4
+
+        onSearchQueryChanged: {
+            if (searchQuery == "") {
+                myModel.setQuery(myModel.defaultQuery)
+            } else {
+                myModel.setQuery(searchQuery)
+            }
         }
     }
 }
+
 

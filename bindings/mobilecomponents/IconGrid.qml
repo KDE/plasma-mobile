@@ -25,8 +25,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: main
-    width: 800
-    height: 480
+    
 
     property QtObject model
     property string searchQuery
@@ -41,11 +40,7 @@ Item {
         contentWidth: container.width; contentHeight: container.height
         anchors.fill: parent
         clip: true
-        anchors.topMargin: 32
-        anchors.bottomMargin: 128
-        anchors.leftMargin: 4
-        anchors.rightMargin: 4
-
+        
 
         Column {
             id: container
