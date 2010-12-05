@@ -25,5 +25,12 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 MobileComponents.IconGrid {
     model: myModel
+    onSearchQueryChanged: {
+        if (searchQuery == "") {
+            myModel.setQuery(myModel.defaultQuery)
+        } else {
+            myModel.setQuery(searchQuery)
+        }
+    }
 }
 

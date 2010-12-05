@@ -29,6 +29,7 @@ Item {
     height: 480
 
     property QtObject model
+    property string searchQuery
 
     PlasmaCore.Theme {
         id:theme
@@ -91,11 +92,10 @@ Item {
                         onTriggered: {
                             if (searchField.text == "") {
                                 clearButton.visible = false
-                                main.model.setQuery(main.model.defaultQuery)
                             } else {
                                 clearButton.visible = true
-                                main.model.setQuery(searchField.text)
                             }
+                            searchQuery = searchField.text
                             hideSearchFieldAnim.to = searchFieldContainer.height;
                             hideSearchFieldAnim.running = true;
                         }
