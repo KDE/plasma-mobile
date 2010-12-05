@@ -126,55 +126,7 @@ Item {
                 signal clicked(string url)
 
 
-                delegate: Item {
-                    width: appsView.width
-                    height: appsView.height
-                    Grid {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        rows: appsView.width > 600 ? 3 : 5
-                        Repeater {
-                            model: MobileComponents.PagedProxyModel {
-                                sourceModel: main.model
-                                currentPage: index
-                                pageSize: 18
-                            }
-                            delegate: Component {
-                                Item {
-                                    id: wrapper
-                                    width: 120
-                                    height: 120
-                                    property string urlText: url
-
-                                    PlasmaWidgets.IconWidget {
-                                        anchors.horizontalCenter: parent.horizontalCenter
-                                        size: "64x64"
-                                        id: iconWidgt
-                                        icon: decoration
-                                    }
-                                    Text {
-                                        y: 67
-                                        width: parent.width -16
-                                        wrapMode:Text.Wrap
-                                        horizontalAlignment: Text.AlignHCenter
-                                        clip: true
-                                        anchors.horizontalCenter: parent.horizontalCenter
-                                        text: display
-                                        color: theme.textColor
-                                    }
-
-                                    MouseArea {
-                                        id: mousearea
-                                        anchors.fill: parent
-                                        onClicked : {
-                                            //appsView.currentIndex = index
-                                            appsView.clicked(url)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                delegate: IconDelegate {}
             }
         }
     }

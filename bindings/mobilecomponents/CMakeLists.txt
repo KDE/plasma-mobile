@@ -23,3 +23,5 @@ install(TARGETS mobilecomponentsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kd
 
 install(FILES IconGrid.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES IconDelegate.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
