@@ -83,7 +83,8 @@ AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *c
    m_containment(containment),
    m_toolBox(0),
    m_appletsOverlay(0),
-   m_startupCompleted(false)
+   m_startupCompleted(false),
+   m_orientation(Qt::Horizontal)
 {
     setFlag(QGraphicsItem::ItemHasNoContents);
 
@@ -106,6 +107,21 @@ AppletsContainer::AppletsContainer(QGraphicsItem *parent, Plasma::Containment *c
 
 AppletsContainer::~AppletsContainer()
 {
+}
+
+void AppletsContainer::setOrientation(const Qt::Orientation orientation)
+{
+    if (m_orientation == orientation) {
+        return;
+    }
+
+    m_orientation = orientation;
+    relayout();
+}
+
+Qt::Orientation AppletsContainer::orientation() const
+{
+    return m_orientation;
 }
 
 Plasma::Containment *AppletsContainer::containment() const
@@ -179,7 +195,9 @@ void AppletsContainer::relayout()
     int rows = qMax(1, (int)m_containment->size().height() / squareSize);
     const QSizeF maximumAppletSize(m_containment->size().width()/columns, m_containment->size().height()/rows);
 
+#ifndef NO_ANIMATIONS
     QParallelAnimationGroup *group = new QParallelAnimationGroup(this);
+#endif
 
     int i = 0;
     foreach (Plasma::Applet *applet, m_applets) {
@@ -193,14 +211,26 @@ void AppletsContainer::relayout()
         appletSize = appletSize.expandedTo(QSize(250, 250));
         QSizeF offset(QSizeF(maximumAppletSize - appletSize)/2);
 
-        if ((m_containment->applets().count() - i < columns) &&
-            (i/columns == m_containment->applets().count()/columns) &&
-            ((i+1)%columns != 0)) {
-            offset.rwidth() += ((i+1)%columns * maximumAppletSize.width())/columns;
+        QRectF targetGeom;
+        if (m_orientation == Qt::Vertical) {
+            if ((m_containment->applets().count() - i < columns) &&
+                (i/columns == m_containment->applets().count()/columns) &&
+                ((i+1)%columns != 0)) {
+                offset.rwidth() += ((i+1)%columns * maximumAppletSize.width())/columns;
+            }
+
+
+            targetGeom = QRectF((i%columns)*maximumAppletSize.width() + offset.width(), (i/columns)*maximumAppletSize.height() + offset.height(), appletSize.width(), appletSize.height());
+        } else {
+            if ((m_containment->applets().count() - i < rows) &&
+                (i/rows == m_containment->applets().count()/rows) &&
+                ((i+1)%rows != 0)) {
+                offset.rheight() += ((i+1)%rows * maximumAppletSize.height())/rows;
+            }
+
+
+            targetGeom = QRectF((i/rows)*maximumAppletSize.width() + offset.width(), (i%rows)*maximumAppletSize.height() + offset.height(), appletSize.width(), appletSize.height());
         }
-
-
-        const QRectF targetGeom((i%columns)*maximumAppletSize.width() + offset.width(), (i/columns)*maximumAppletSize.height() + offset.height(), appletSize.width(), appletSize.height());
 #ifndef NO_ANIMATIONS
         Animation *anim = Plasma::Animator::create(Plasma::Animator::GeometryAnimation);
         anim->setTargetWidget(applet);
@@ -213,16 +243,23 @@ void AppletsContainer::relayout()
         i++;
     }
 
+    if (m_orientation == Qt::Vertical) {
+        resize(size().width(),
+            (ceil((qreal)m_containment->applets().count()/columns))
+                * (maximumAppletSize.height() + (m_applets.count()%2==0?maximumAppletSize.height():0)));
+    } else {
+        resize((ceil((qreal)m_containment->applets().count()/rows))
+                * (maximumAppletSize.width() + (m_applets.count()%2==0?maximumAppletSize.width():0)),
+                size().height()
+              );
+    }
+
 #ifndef NO_ANIMATIONS
     group->start(QAbstractAnimation::DeleteWhenStopped);
     connect(group, SIGNAL(finished()), this, SLOT(repositionToolBox()));
 #else
     repositionToolBox();
 #endif
-
-    resize(size().width(),
-           (ceil((qreal)m_containment->applets().count()/columns))
-            * (maximumAppletSize.height() + (m_applets.count()%2==0?maximumAppletSize.height():0)));
 }
 
 void AppletsContainer::repositionToolBox()
@@ -232,35 +269,60 @@ void AppletsContainer::repositionToolBox()
     const int rows = qMax(1, (int)m_containment->size().height() / squareSize);
     const QSizeF maximumAppletSize(m_containment->size().width()/columns, m_containment->size().height()/rows);
 
-    int extraHeight = 0;
 
     if (m_toolBox) {
+        int extraHeight = 0;
         QRectF buttonGeom = m_toolBox->geometry();
 
-        if (m_applets.count() % columns != 0) {
-            QRectF geom = m_applets.last()->geometry();
-            geom = QRectF(geom.topRight(),
-                        QSizeF(size().width() - geom.right(), geom.height()));
+        if (m_orientation == Qt::Vertical) {
+            if (m_applets.count() % columns != 0) {
+                QRectF geom = m_applets.last()->geometry();
+                geom = QRectF(geom.topRight(),
+                            QSizeF(size().width() - geom.right(), geom.height()));
 
-            buttonGeom.moveCenter(geom.center());
+                buttonGeom.moveCenter(geom.center());
+            } else {
+                QRectF geom(QPointF(0, maximumAppletSize.height() * (m_applets.count() / columns)), 
+                            QSizeF(size().width(), maximumAppletSize.height()));
+
+                buttonGeom.moveCenter(geom.center());
+                extraHeight = maximumAppletSize.height();
+            }
+
+            m_toolBox->setPos(buttonGeom.topLeft());
+
+            resize(size().width(), (ceil((qreal)m_containment->applets().count()/columns))*maximumAppletSize.height() + extraHeight);
         } else {
-           QRectF geom(QPointF(0, maximumAppletSize.height() * (m_applets.count() / columns)), 
-                       QSizeF(size().width(), maximumAppletSize.height()));
+            int extraWidth = 0;
+            if (m_applets.count() % rows != 0) {
+                QRectF geom = m_applets.last()->geometry();
+                geom = QRectF(geom.bottomLeft(),
+                            QSizeF(geom.width(), size().height() - geom.bottom()));
 
-           buttonGeom.moveCenter(geom.center());
-           extraHeight = maximumAppletSize.height();
+                buttonGeom.moveCenter(geom.center());
+            } else {
+                QRectF geom(QPointF(maximumAppletSize.width() * (m_applets.count() / rows), 0),
+                            QSizeF(maximumAppletSize.width(), size().height()));
+
+                buttonGeom.moveCenter(geom.center());
+                extraWidth = maximumAppletSize.width();
+            }
+
+            m_toolBox->setPos(buttonGeom.topLeft());
+
+            resize((ceil((qreal)m_containment->applets().count()/rows))*maximumAppletSize.width() + extraWidth,
+                   size().height());
         }
-
-        m_toolBox->setPos(buttonGeom.topLeft());
     }
 
-    resize(size().width(), (ceil((qreal)m_containment->applets().count()/columns))*maximumAppletSize.height() + extraHeight);
     m_relayoutTimer->stop();
 }
 
 void AppletsContainer::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
-    if (!qFuzzyCompare(event->oldSize().width(), event->newSize().width()) && !m_relayoutTimer->isActive()) {
+    if (((m_orientation == Qt::Vertical && !qFuzzyCompare(event->oldSize().width(), event->newSize().width())) ||
+         (m_orientation == Qt::Horizontal && !qFuzzyCompare(event->oldSize().height(), event->newSize().height())))
+        && !m_relayoutTimer->isActive()) {
         m_relayoutTimer->start(300);
     }
 

@@ -70,6 +70,13 @@ void MobileDesktop::init()
     setAcceptsHoverEvents(false);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     setFlag(QGraphicsItem::ItemUsesExtendedStyleOption, false);
+    configChanged();
+}
+
+void MobileDesktop::configChanged()
+{
+    KConfigGroup cg = config();
+    m_appletsView->setOrientation((Qt::Orientation)cg.readEntry("Orientation", (int)Qt::Horizontal));
 }
 
 void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)

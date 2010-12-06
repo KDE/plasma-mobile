@@ -59,6 +59,9 @@ public:
 
     void completeStartup();
 
+    void setOrientation(const Qt::Orientation orientation);
+    Qt::Orientation orientation() const;
+
 public Q_SLOTS:
     void layoutApplet(Plasma::Applet *applet, const QPointF &post);
     void appletRemoved(Plasma::Applet*);
@@ -86,6 +89,7 @@ private:
     //used only at restore, then thrown away
     QMap<int, Plasma::Applet *>m_startingApplets;
     bool m_startupCompleted;
+    Qt::Orientation m_orientation;
 };
 
 #endif

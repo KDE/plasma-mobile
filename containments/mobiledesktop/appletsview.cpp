@@ -54,11 +54,31 @@ void AppletsView::setAppletsContainer(AppletsContainer *appletsContainer)
 {
     m_appletsContainer = appletsContainer;
     setWidget(appletsContainer);
+    if (appletsContainer->orientation() == Qt::Vertical) {
+        appletsContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    } else {
+        appletsContainer->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    }
 }
 
 AppletsContainer *AppletsView::appletsContainer() const
 {
     return m_appletsContainer;
+}
+
+void AppletsView::setOrientation(const Qt::Orientation orientation)
+{
+    m_appletsContainer->setOrientation(orientation);
+    if (m_appletsContainer->orientation() == Qt::Vertical) {
+        m_appletsContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    } else {
+        m_appletsContainer->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    }
+}
+
+Qt::Orientation AppletsView::orientation() const
+{
+    return m_appletsContainer->orientation();
 }
 
 void AppletsView::appletDragRequested()

@@ -42,6 +42,7 @@ public:
     void init();
 
     void constraintsEvent(Plasma::Constraints constraints);
+    void configChanged();
 
 protected:
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);

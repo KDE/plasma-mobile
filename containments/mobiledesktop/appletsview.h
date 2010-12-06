@@ -45,6 +45,9 @@ public:
     void setAppletsContainer(AppletsContainer *appletsContainer);
     AppletsContainer *appletsContainer() const;
 
+    void setOrientation(const Qt::Orientation orientation);
+    Qt::Orientation orientation() const;
+
 protected Q_SLOTS:
     void appletDragRequested();
     void scrollTimeout();
