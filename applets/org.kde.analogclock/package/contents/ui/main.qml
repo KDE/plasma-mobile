@@ -1,4 +1,3 @@
-// -*- coding: iso-8859-1 -*-
 /*
  *   Author: Marco Martin <mart@kde.org>
  *   Date: Mon Dec 6 2010, 19:01:32
@@ -48,7 +47,10 @@ Item {
     }
 
     onWidthChanged: {
-        clockSvg.resize(main.width+"x"+main.height)
+        clockSvg.size = face.width+"x"+face.height
+    }
+    onHeightChanged: {
+        clockSvg.size = face.width+"x"+face.height
     }
 
     PlasmaCore.Svg {
@@ -66,16 +68,18 @@ Item {
     }
 
     PlasmaCore.SvgItem {
-        width: clockSvg.elementSize("HourHand").width
-        height: clockSvg.elementSize("HourHand").height
+        id: hourHand
+        width: naturalSize.width
+        height: naturalSize.height
         anchors.top: center.verticalCenter
         anchors.horizontalCenter: center.horizontalCenter
         svg: clockSvg
         elementId: "HourHand"
+        smooth: true
         transform: Rotation {
             id: hourRotation
             angle: 180 + hours * 6
-            origin.x: clockSvg.elementSize("HourHand").width/2; origin.y: 0;
+            origin.x: hourHand.naturalSize.width/2; origin.y: 0;
             Behavior on angle {
                 SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
             }
@@ -83,33 +87,37 @@ Item {
     }
 
     PlasmaCore.SvgItem {
-        width: clockSvg.elementSize("MinuteHand").width
-        height: clockSvg.elementSize("MinuteHand").height
+        id: minuteHand
+        width: naturalSize.width
+        height: naturalSize.height
         anchors.top: center.verticalCenter
         anchors.horizontalCenter: center.horizontalCenter
         svg: clockSvg
         elementId: "MinuteHand"
+        smooth: true
         transform: Rotation {
             id: minuteRotation
             angle: 180 + minutes * 6
-            origin.x: clockSvg.elementSize("MinuteHand").width/2; origin.y: 0;
+            origin.x: minuteHand.naturalSize.width/2; origin.y: 0;
             Behavior on angle {
                 SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
             }
         }
     }
-    /*
+   /* 
     PlasmaCore.SvgItem {
-        width: clockSvg.elementSize("SecondHand").width
-        height: clockSvg.elementSize("SecondHand").height
+        id: secondHand
+        width: naturalSize.width
+        height: naturalSize.height
         anchors.top: center.verticalCenter
         anchors.horizontalCenter: center.horizontalCenter
         svg: clockSvg
         elementId: "SecondHand"
+        smooth: true
         transform: Rotation {
             id: secondRotation
             angle: 180 + seconds * 6
-            origin.x: clockSvg.elementSize("SecondHand").width/2; origin.y: 0;
+            origin.x: secondHand.naturalSize.width/2; origin.y: 0;
             Behavior on angle {
                 SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
             }
@@ -118,8 +126,8 @@ Item {
 
     PlasmaCore.SvgItem {
         id: center
-        width: clockSvg.elementSize("HandCenterScrew").width
-        height: clockSvg.elementSize("HandCenterScrew").height
+        width: naturalSize.width
+        height: naturalSize.height
         anchors.horizontalCenter: face.horizontalCenter
         anchors.verticalCenter: face.verticalCenter
         svg: clockSvg
