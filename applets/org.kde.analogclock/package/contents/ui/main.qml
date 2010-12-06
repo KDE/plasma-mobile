@@ -46,12 +46,7 @@ Item {
         seconds = date.getSeconds()
     }
 
-    onWidthChanged: {
-        clockSvg.size = face.width+"x"+face.height
-    }
-    onHeightChanged: {
-        clockSvg.size = face.width+"x"+face.height
-    }
+    
 
     PlasmaCore.Svg {
         id: clockSvg
@@ -65,6 +60,12 @@ Item {
         height: Math.min(parent.width, parent.height)
         svg: clockSvg
         elementId: "ClockFace"
+        onWidthChanged: {
+            clockSvg.size = face.width+"x"+face.height
+        }
+        onHeightChanged: {
+            clockSvg.size = face.width+"x"+face.height
+        }
     }
 
     PlasmaCore.SvgItem {
