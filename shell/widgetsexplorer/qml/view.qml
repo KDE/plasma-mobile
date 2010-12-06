@@ -89,7 +89,7 @@ Rectangle {
         id: appletsView
         property string currentPlugin
         model: PlasmaCore.SortFilterModel {
-            id: appsFilter
+            id: appletsFilter
             filterRole: "display"
             sourceModel: myModel
         }
@@ -117,7 +117,7 @@ Rectangle {
         }
 
         onSearchQueryChanged: {
-            appsFilter.filterRegExp = ".*"+searchQuery+".*"
+            appletsFilter.filterRegExp = ".*"+searchQuery+".*"
         }
 
 
