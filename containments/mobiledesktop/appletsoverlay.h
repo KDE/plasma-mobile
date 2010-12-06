@@ -22,9 +22,15 @@
 
 #include <QGraphicsWidget>
 
+#include <plasma/plasma.h>
+
+class QGraphicsAnchorLayout;
+
 namespace Plasma
 {
     class Applet;
+    class IconWidget;
+    class PushButton;
 }
 
 class AppletsOverlay : public QGraphicsWidget
@@ -47,6 +53,7 @@ protected:
 
 protected Q_SLOTS:
     void configureApplet();
+    void toggleDeleteButton();
     void closeApplet();
 
 Q_SIGNALS:
@@ -55,6 +62,9 @@ Q_SIGNALS:
 
 private:
     QWeakPointer<Plasma::Applet> m_applet;
+    QWeakPointer<Plasma::PushButton> m_closeButton;
+    QGraphicsAnchorLayout *m_layout;
+    Plasma::IconWidget *m_askCloseButton;
 };
 
 #endif

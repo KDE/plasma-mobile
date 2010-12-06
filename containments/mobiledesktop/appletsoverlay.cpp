@@ -26,21 +26,23 @@
 
 #include <KIconLoader>
 
+#include <Plasma/Animation>
 #include <Plasma/Applet>
 #include <Plasma/IconWidget>
+#include <Plasma/PushButton>
 
 AppletsOverlay::AppletsOverlay(QGraphicsItem *parent)
     : QGraphicsWidget(parent)
 {
-    QGraphicsAnchorLayout *lay = new QGraphicsAnchorLayout(this);
+    m_layout = new QGraphicsAnchorLayout(this);
 
     Plasma::IconWidget *backButton = new Plasma::IconWidget(this);
     backButton->setSvg("widgets/arrows", "left-arrow");
     backButton->setPreferredIconSize(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
     connect(backButton, SIGNAL(clicked()), this, SIGNAL(closeRequested()));
 
-    lay->addAnchor(backButton, Qt::AnchorVerticalCenter, lay, Qt::AnchorVerticalCenter);
-    lay->addAnchor(backButton, Qt::AnchorLeft, lay, Qt::AnchorLeft);
+    m_layout->addAnchor(backButton, Qt::AnchorVerticalCenter, m_layout, Qt::AnchorVerticalCenter);
+    m_layout->addAnchor(backButton, Qt::AnchorLeft, m_layout, Qt::AnchorLeft);
 
 
     Plasma::IconWidget *configureButton = new Plasma::IconWidget(this);
@@ -48,15 +50,15 @@ AppletsOverlay::AppletsOverlay(QGraphicsItem *parent)
     configureButton->setPreferredIconSize(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
     connect(configureButton, SIGNAL(clicked()), this, SLOT(configureApplet()));
 
-    lay->addCornerAnchors(configureButton, Qt::TopLeftCorner, lay, Qt::TopLeftCorner);
+    m_layout->addCornerAnchors(configureButton, Qt::TopLeftCorner, m_layout, Qt::TopLeftCorner);
 
 
-    Plasma::IconWidget *closeButton = new Plasma::IconWidget(this);
-    closeButton->setSvg("widgets/configuration-icons", "close");
-    closeButton->setPreferredIconSize(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
-    connect(closeButton, SIGNAL(clicked()), this, SLOT(closeApplet()));
+    m_askCloseButton = new Plasma::IconWidget(this);
+    m_askCloseButton->setSvg("widgets/configuration-icons", "close");
+    m_askCloseButton->setPreferredIconSize(QSize(KIconLoader::SizeLarge, KIconLoader::SizeLarge));
+    connect(m_askCloseButton, SIGNAL(clicked()), this, SLOT(toggleDeleteButton()));
 
-    lay->addCornerAnchors(closeButton, Qt::TopRightCorner, lay, Qt::TopRightCorner);
+    m_layout->addCornerAnchors(m_askCloseButton, Qt::TopRightCorner, m_layout, Qt::TopRightCorner);
 }
 
 AppletsOverlay::~AppletsOverlay()
@@ -84,6 +86,26 @@ void AppletsOverlay::configureApplet()
     }
 }
 
+void AppletsOverlay::toggleDeleteButton()
+{
+    if (m_closeButton) {
+        Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::ZoomAnimation);
+        anim->setTargetWidget(m_closeButton.data());
+        anim->start(QAbstractAnimation::DeleteWhenStopped);
+        connect(anim, SIGNAL(destroyed()), m_closeButton.data(), SLOT(deleteLater()));
+    } else {
+        m_closeButton = new Plasma::PushButton(this);
+        m_closeButton.data()->setText(i18n("Delete?"));
+        m_layout->addAnchor(m_closeButton.data(), Qt::AnchorVerticalCenter, m_askCloseButton, Qt::AnchorVerticalCenter);
+        m_layout->addAnchor(m_closeButton.data(), Qt::AnchorRight, m_askCloseButton, Qt::AnchorLeft);
+        Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::ZoomAnimation);
+        anim->setTargetWidget(m_closeButton.data());
+        anim->setDirection(QAbstractAnimation::Backward);
+        anim->start(QAbstractAnimation::DeleteWhenStopped);
+        connect(m_closeButton.data(), SIGNAL(clicked()), this, SLOT(closeApplet()));
+    }
+}
+
 void AppletsOverlay::closeApplet()
 {
     if (m_applet) {
@@ -100,6 +122,9 @@ void AppletsOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void AppletsOverlay::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     event->accept();
+    if (m_closeButton) {
+        toggleDeleteButton();
+    }
     emit closeRequested();
 }
 
