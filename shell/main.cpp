@@ -41,7 +41,11 @@ KDE_EXPORT int kdemain(int argc, char **argv)
     aboutData.addAuthor(ki18n("Alexis Menard"),
                         ki18n("Author and maintainer"),
                         "menard@kde.org");
+    aboutData.addAuthor(ki18n("Marco Martin"),
+                        ki18n("Author and maintainer"),
+                        "mart@kde.org");
 
+    QApplication::setGraphicsSystem("raster");
     KCmdLineArgs::init(argc, argv, &aboutData);
 
     KCmdLineOptions options;
