@@ -37,7 +37,7 @@ Item {
         plasmoid.addEventListener("dataUpdated", dataUpdated)
         dataEngine("time").connectSource("Local", main, 30*500)
     }
-    
+
     function dataUpdated(source, data)
     {
         var date = new Date("January 1, 1971 "+data.Time);
@@ -45,8 +45,6 @@ Item {
         minutes = date.getMinutes()
         seconds = date.getSeconds()
     }
-
-    
 
     PlasmaCore.Svg {
         id: clockSvg
@@ -68,62 +66,37 @@ Item {
         }
     }
 
-    PlasmaCore.SvgItem {
-        id: hourHand
-        width: naturalSize.width
-        height: naturalSize.height
-        anchors.top: center.verticalCenter
-        anchors.horizontalCenter: center.horizontalCenter
-        svg: clockSvg
+    Hand {
+        anchors.topMargin: 3
+        elementId: "HourHandShdow"
+        rotation: 180 + hours * 30 + (minutes/2)
+    }
+    Hand {
         elementId: "HourHand"
-        smooth: true
-        transform: Rotation {
-            id: hourRotation
-            angle: 180 + hours * 6
-            origin.x: hourHand.naturalSize.width/2; origin.y: 0;
-            Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-            }
-        }
+        rotation: 180 + hours * 30 + (minutes/2)
     }
 
-    PlasmaCore.SvgItem {
-        id: minuteHand
-        width: naturalSize.width
-        height: naturalSize.height
-        anchors.top: center.verticalCenter
-        anchors.horizontalCenter: center.horizontalCenter
-        svg: clockSvg
-        elementId: "MinuteHand"
-        smooth: true
-        transform: Rotation {
-            id: minuteRotation
-            angle: 180 + minutes * 6
-            origin.x: minuteHand.naturalSize.width/2; origin.y: 0;
-            Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-            }
-        }
+
+    Hand {
+        anchors.topMargin: 3
+        elementId: "MinuteHandShadow"
+        rotation: 180 + minutes * 6
     }
-   /* 
-    PlasmaCore.SvgItem {
-        id: secondHand
-        width: naturalSize.width
-        height: naturalSize.height
-        anchors.top: center.verticalCenter
-        anchors.horizontalCenter: center.horizontalCenter
-        svg: clockSvg
+    Hand {
+        elementId: "MinuteHand"
+        rotation: 180 + minutes * 6
+    }
+/*
+    Hand {
+        anchors.topMargin: 3
+        elementId: "SecondHandShadow"
+        rotation: 180 + seconds * 6
+    }
+    Hand {
         elementId: "SecondHand"
-        smooth: true
-        transform: Rotation {
-            id: secondRotation
-            angle: 180 + seconds * 6
-            origin.x: secondHand.naturalSize.width/2; origin.y: 0;
-            Behavior on angle {
-                SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-            }
-        }
-    }*/
+        rotation: 180 + seconds * 6
+    }
+*/
 
     PlasmaCore.SvgItem {
         id: center
