@@ -26,7 +26,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import "plasmapackage:/code/utils.js" as Utils
 import "plasmapackage:/code/bookkeeping.js" as BookKeeping
 
-import "../../generic/ui/"
+import "plasmapackage:/ui/MeegoComponents"
 
 Page {
     title: feedSource.data['title'];
