@@ -2,12 +2,14 @@
 Encoding=UTF-8
 Name=Mobile System Tray
 Name[ja]=モバイルシステムトレイ
+Name[km]=ថាស​ប្រព័ន្ធ​ចល័ត
 Name[pt]=Bandeja do Sistema Móvel
 Name[pt_BR]=Área de notificação móvel
 Name[sv]=Systembricka för mobil
 Name[uk]=Мобільний у системному лотку
 Name[x-test]=xxMobile System Trayxx
 Comment=A system tray applet for mobile shell
+Comment[km]=អាប់ភ្លេត​ថាស​ប្រព័ន្ធ​សម្រាប់​សែល​ចល័ត
 Comment[pt]=Uma 'applet' da bandeja para a consola móvel
 Comment[pt_BR]=Um miniaplicativo da área de notificação para o console móvel
 Comment[sv]=Ett miniprogram med systembricka för mobil-skal

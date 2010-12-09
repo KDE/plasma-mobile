@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Default toolbox for the mobile shell
 Comment[ja]=モバイルシェルの標準ツールボックス
+Comment[km]=ប្រអប់​ឧបករណ៍​លំនាំដើម​សម្រាប់​សែល​ចល័តី
 Comment[pt]=Área de ferramentas predefinida da consola móvel
 Comment[pt_BR]=A caixa de ferramentas padrão para o shell móvel
 Comment[sv]=Standardverktyg för nätdatorskalet
@@ -9,6 +10,7 @@ Comment[x-test]=xxDefault toolbox for the mobile shellxx
 Icon=plasma
 Name=Mobile toolbox
 Name[ja]=モバイルツールボックス
+Name[km]=ប្រអប់​ឧបករណ៍​ចល័ត
 Name[pt]=Área de ferramentas móvel
 Name[pt_BR]=Caixa de ferramentas móvel
 Name[sv]=Verktygslåda för mobil
