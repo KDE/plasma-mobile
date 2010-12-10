@@ -1,9 +1,17 @@
 [Desktop Entry]
 Comment=A clock with hands
+Comment[pt]=Um relógio com ponteiros
+Comment[sv]=En klocka med visare
+Comment[uk]=Годинник зі стрілками
+Comment[x-test]=xxA clock with handsxx
 Encoding=UTF-8
 Icon=clock
 Keywords=
 Name=Analog Clock
+Name[pt]=Relógio Analógico
+Name[sv]=Analog klocka
+Name[uk]=Аналоговий годинник
+Name[x-test]=xxAnalog Clockxx
 Type=Service
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Marco Martin
