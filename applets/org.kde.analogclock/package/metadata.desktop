@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=A clock with hands
 Comment[pt]=Um relógio com ponteiros
+Comment[pt_BR]=Um relógio com ponteiros
 Comment[sv]=En klocka med visare
 Comment[uk]=Годинник зі стрілками
 Comment[x-test]=xxA clock with handsxx
@@ -9,6 +10,7 @@ Icon=clock
 Keywords=
 Name=Analog Clock
 Name[pt]=Relógio Analógico
+Name[pt_BR]=Relógio analógico
 Name[sv]=Analog klocka
 Name[uk]=Аналоговий годинник
 Name[x-test]=xxAnalog Clockxx
