@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=A clock with hands
+Comment[km]=នាឡិកា​មាន​ទ្រនិច
 Comment[pt]=Um relógio com ponteiros
 Comment[pt_BR]=Um relógio com ponteiros
 Comment[sv]=En klocka med visare
@@ -9,6 +10,7 @@ Encoding=UTF-8
 Icon=clock
 Keywords=
 Name=Analog Clock
+Name[km]=នាឡិកាអាណាឡូក
 Name[pt]=Relógio Analógico
 Name[pt_BR]=Relógio analógico
 Name[sv]=Analog klocka
