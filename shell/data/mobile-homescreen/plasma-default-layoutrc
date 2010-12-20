@@ -12,7 +12,7 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][1][Applets][1]
-plugin=clock
+plugin=org.kde.analogclock
 zvalue=1
 
 [Containments][2]

@@ -135,6 +135,7 @@ Item {
             }
 
             onContentHeightChanged: {
+                scrollBar.minimum = 0
                 scrollBar.maximum = (contentHeight - height)/10
             }
 
