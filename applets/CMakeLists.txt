@@ -1,6 +1,5 @@
 add_subdirectory(appswitcher)
 add_subdirectory(org.kde.analogclock)
-add_subdirectory(knowledgebase)
 add_subdirectory(quickdialer)
 add_subdirectory(news)
 add_subdirectory(mobilesystray)
