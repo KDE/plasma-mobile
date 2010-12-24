@@ -1,8 +1,6 @@
 add_subdirectory(appswitcher)
-add_subdirectory(samegame)
 add_subdirectory(org.kde.analogclock)
 add_subdirectory(digital-clock)
-add_subdirectory(fakemail)
 add_subdirectory(knowledgebase)
 add_subdirectory(quickdialer)
 add_subdirectory(news)
