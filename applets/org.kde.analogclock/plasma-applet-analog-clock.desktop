@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=A clock with hands
 Comment[km]=នាឡិកា​មាន​ទ្រនិច
+Comment[nl]=Een klok met wijzers
 Comment[pt]=Um relógio com ponteiros
 Comment[pt_BR]=Um relógio com ponteiros
 Comment[sv]=En klocka med visare
@@ -12,6 +13,7 @@ Keywords=
 Name=Analog Clock
 Name[km]=នាឡិកាអាណាឡូក
 Name[nds]=Analoogklock
+Name[nl]=Analoge klok
 Name[pt]=Relógio Analógico
 Name[pt_BR]=Relógio analógico
 Name[sv]=Analog klocka
