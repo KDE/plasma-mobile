@@ -82,7 +82,11 @@ void MobileDesktop::configChanged()
 void MobileDesktop::constraintsEvent(Plasma::Constraints constraints)
 {
     if (constraints & Plasma::SizeConstraint) {
-        m_appletsView->setSnapSize(m_appletsView->size());
+        if (m_appletsView->size().width() > m_appletsView->size().height()) {
+            m_appletsView->setSnapSize(QSizeF(m_appletsView->size().width()/2, m_appletsView->size().height()));
+        } else {
+            m_appletsView->setSnapSize(QSizeF(m_appletsView->size().width(), m_appletsView->size().height()/2));
+        }
     }
 
     if (constraints & Plasma::StartupCompletedConstraint) {
