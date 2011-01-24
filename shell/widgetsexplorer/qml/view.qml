@@ -88,11 +88,7 @@ Rectangle {
     MobileComponents.IconGrid {
         id: appletsView
         property string currentPlugin
-        model: PlasmaCore.SortFilterModel {
-            id: appletsFilter
-            filterRole: "display"
-            sourceModel: myModel
-        }
+        model: myModel
 
 
         delegate: Component {
