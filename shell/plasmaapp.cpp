@@ -560,6 +560,8 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 void PlasmaApp::mainViewGeometryChanged()
 {
     if (m_declarativeWidget) {
+        //sometimes a geometry change arives very early in the ctor
+        corona();
         m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->transformedSize()));
         m_declarativeWidget->resize(m_mainView->transformedSize());
         //m_declarativeWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
