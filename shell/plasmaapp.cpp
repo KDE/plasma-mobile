@@ -88,7 +88,9 @@ PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
       m_corona(0),
       m_mainView(0),
-      m_currentContainment(0), m_nextContainment(0),
+      m_currentContainment(0),
+      m_nextContainment(0),
+      m_alternateContainment(0),
       m_trayContainment(0),
       m_isDesktop(false)
 {
