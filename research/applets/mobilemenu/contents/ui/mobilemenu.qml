@@ -1,4 +1,3 @@
-// -*- coding: iso-8859-1 -*-
 /*
  *   Author: Marco Martin <mart@kde.org>
  *   Date: Sun Feb 6 2011, 12:52:47
@@ -176,18 +175,9 @@ Rectangle {
                         elementId: "add"
                     }
                 }
-                Rectangle {
-                      id: connectorRect
-                      width: (delegate.x-64)/Math.cos(connectorAngle) -30
-                      height: 12
-                      color: "white"
-                      smooth:true
-                      x: -width
-                      y: parent.height/2
-                      transform: Rotation {
-                          origin.x: connectorRect.width
-                          angle: (180/Math.PI)*connectorAngle
-                      }
+                Connector {
+                    id: itemConnector
+                    itemB: delegate
                 }
 
                MouseArea {
