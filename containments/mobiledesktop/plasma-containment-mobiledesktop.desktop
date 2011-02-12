@@ -1,32 +1,7 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=MobileDesktop
-Name[en_GB]=MobileDesktop
-Name[es]=MobileDesktop
-Name[ja]=MobileDesktop
-Name[km]=MobileDesktop
-Name[nl]=MobielBureaublad
-Name[pt]=Ambiente de Trabalho Móvel
-Name[pt_BR]=MobileDesktop
-Name[sv]=Mobilt skrivbord
-Name[uk]=Мобільна стільниця
-Name[x-test]=xxMobileDesktopxx
 Comment=Default desktop containment
-Comment[en_GB]=Default desktop containment
-Comment[eo]=Apriora labortabla ujo
-Comment[et]=Vaikimisi töölauakonteiner
-Comment[fi]=Työpöydän oletussisällytys
-Comment[fr]=Contenu du bureau par défaut
-Comment[km]=ការ​ផ្ទុក​ផ្ទៃតុ​លំនាំដើម
-Comment[nl]=Verpakking voor standaard bureaublad
-Comment[pa]=ਡਿਫਾਲਟ ਡੈਸਕਟਾਪ ਕਨਟੇਨਮੈਂਟ
-Comment[pt]=Contentor do ecrã por omissão
-Comment[pt_BR]=Conteúdo padrão da área de trabalho
-Comment[sv]=Skrivbordets standardomgivning
-Comment[th]=การบรรจุพื้นที่ทำงานปริยาย
-Comment[tr]=Öntanımlı masaüstü kapsayıcı
-Comment[uk]=Типовий контейнер стільниці
-Comment[x-test]=xxDefault desktop containmentxx
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

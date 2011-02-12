@@ -1,19 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Fake contact list (QML)
-Name[km]=បញ្ជី​ទំនាក់ទំនង​ក្លែងក្លាយ (QML)
-Name[pt]=Lista de contactos falsa (QML)
-Name[pt_BR]=Lista de contatos falsa (QML)
-Name[sv]=Påhittad kontaktlista (QML)
-Name[uk]=Тестовий список контактів (QML)
-Name[x-test]=xxFake contact list (QML)xx
 Comment=A proof of concept contact list written in qml
-Comment[km]=បញ្ជាក់​ថា​បញ្ជី​ទំនាក់ទំនង​គោល​ត្រូវ​បាន​សរសេរ​ក្នុង qml
-Comment[pt]=Uma prova de conceito de uma lista de contactos feita em QML
-Comment[pt_BR]=Uma prova de conceito de uma lista de contatos feita em QML
-Comment[sv]=Ett koncept för en kontaktlista skrivet i QML
-Comment[uk]=Тестовий список контактів, написаний мовою qml
-Comment[x-test]=xxA proof of concept contact list written in qmlxx
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=kopete

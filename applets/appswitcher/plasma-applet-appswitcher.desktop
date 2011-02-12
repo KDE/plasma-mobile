@@ -1,29 +1,6 @@
 [Desktop Entry]
 Name=Application Switcher
-Name[en_GB]=Application Switcher
-Name[es]=Cambio de aplicación
-Name[et]=Rakenduste lülitaja
-Name[fr]=Changeur d'application
-Name[ja]=アプリケーションスイッチャー
-Name[km]=កម្មវិធី​ប្ដូរ​កម្មវិធី
-Name[mai]=अनुप्रयोग स्विचर
-Name[nl]=Programmaschakelaar
-Name[pt]=Selector de Aplicações
-Name[pt_BR]=Seletor de Aplicativos
-Name[sv]=Programbyte
-Name[tr]=Uygulama Seçici
-Name[uk]=Перемикач програм
-Name[x-test]=xxApplication Switcherxx
 Comment=Launch the app switcher from hildon
-Comment[en_GB]=Launch the app switcher from hildon
-Comment[et]=Hildoni rakenduste lülitaja käivitamine
-Comment[fr]=Lance l'outil de changement d'application depuis « hildon »
-Comment[km]=ចាប់​ផ្តើម​កម្មវិធី​​ប្តូរ​​​កម្មវិធី​ពី​ hildon
-Comment[pt]=Lançar o selector de aplicações a partir do 'hildon'
-Comment[pt_BR]=Lançar o seletor de aplicativos a partir do 'hildon'
-Comment[sv]=Starta programbyte från Hildon
-Comment[uk]=Запуск перемикача програм з Hildon
-Comment[x-test]=xxLaunch the app switcher from hildonxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet

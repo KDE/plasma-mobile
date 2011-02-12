@@ -1,12 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Fake Battery
-Name[km]=ថ្មក្លែងក្លាយ
-Name[pt]=Bateria Falsa
-Name[pt_BR]=Bateria falsa
-Name[sv]=Påhittat batteri
-Name[uk]=Уявний акумулятор
-Name[x-test]=xxFake Batteryxx
 Icon=battery
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
