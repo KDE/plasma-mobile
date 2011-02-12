@@ -26,14 +26,18 @@ Rectangle {
     property Item itemA
     property Item itemB
 
+    property real connectorAngle: Math.atan((itemB.y+height/2-64)/(itemB.x-64))
+
     width: (itemB.x-64)/Math.cos(connectorAngle) -30
     height: 12
+    radius: 7
     color: "white"
     smooth:true
-    x: -width
+    x: -width +6
     y: parent.height/2
     transform: Rotation {
-        origin.x: connectorRectangle.width
+        origin.x: connectorRectangle.width-6
+        origin.y: 6
         angle: (180/Math.PI)*connectorAngle
     }
 }

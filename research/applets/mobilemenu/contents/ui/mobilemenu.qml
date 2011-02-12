@@ -123,14 +123,12 @@ Rectangle {
                 width: itemsRow.childrenRect.width
                 height: itemsRow.childrenRect.height
 
-                property real connectorAngle: Math.atan((y+height/2-64)/(x-64))
-
                 Rectangle {
                     color: "white"
                     width: itemsRow.width -64
                     height: 12
-                    x: -12 * Math.sin(connectorAngle)
-                    y: parent.height/2 + (12 * Math.cos(connectorAngle) -12)
+                    x: 0//-12 * Math.sin(connectorAngle)
+                    y: parent.height/2 // + (12 * Math.cos(connectorAngle) -12)
                 }
 
                 Row {
@@ -177,6 +175,7 @@ Rectangle {
                 }
                 Connector {
                     id: itemConnector
+                    itemA: activityRootSvg
                     itemB: delegate
                 }
 
@@ -196,6 +195,7 @@ Rectangle {
          }
      }
      PlasmaCore.SvgItem {
+        id: activityRootSvg
         width: 128
         height: 128
         svg: iconsSvg
