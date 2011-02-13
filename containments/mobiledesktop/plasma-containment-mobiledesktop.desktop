@@ -1,7 +1,17 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=MobileDesktop
+Name[nl]=MobielBureaublad
+Name[pt]=Ecrã Móvel
+Name[sv]=Mobilt skrivbord
+Name[uk]=Мобільна стільниця
+Name[x-test]=xxMobileDesktopxx
 Comment=Default desktop containment
+Comment[nl]=Standaard bureaubladcontainer
+Comment[pt]=Contentor do ambiente de trabalho predefinido
+Comment[sv]=Skrivbordets standardomgivning
+Comment[uk]=Типовий контейнер стільниці
+Comment[x-test]=xxDefault desktop containmentxx
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

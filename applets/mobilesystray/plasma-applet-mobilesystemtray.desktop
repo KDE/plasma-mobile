@@ -1,7 +1,17 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Mobile System Tray
+Name[nl]=Systeemvak voor mobiel
+Name[pt]=Bandeja do Sistema Móvel
+Name[sv]=Systembricka för mobil
+Name[uk]=Мобільний у системному лотку
+Name[x-test]=xxMobile System Trayxx
 Comment=A system tray applet for mobile shell
+Comment[nl]=Een systeemvak-applet voor de mobiele shell
+Comment[pt]=Uma 'applet' da bandeja para a área de trabalho móvel
+Comment[sv]=Ett miniprogram med systembricka för mobil-skal
+Comment[uk]=Аплет системного лотка для командної оболонки керування мобільним телефоном
+Comment[x-test]=xxA system tray applet for mobile shellxx
 Icon=preferences-desktop-notification
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

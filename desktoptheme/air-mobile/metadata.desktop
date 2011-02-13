@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Air for Mobile
+Name[nl]=Air voor mobiel
+Name[pt]=Air Móvel
+Name[sv]=Luft för mobiler
+Name[uk]=«Air» для субноутбука
+Name[x-test]=xxAir for Mobilexx
 Comment=A breath of fresh air
+Comment[nl]=Een hap frisse lucht
+Comment[pt]=Uma brisa de ar fresco
+Comment[sv]=En frisk fläkt
+Comment[uk]=Ковток свіжого повітря
+Comment[x-test]=xxA breath of fresh airxx
 
 
 X-KDE-PluginInfo-Author=The Oxygen Project

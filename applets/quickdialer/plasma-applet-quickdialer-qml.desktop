@@ -1,7 +1,17 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=A Quick Dialer (QML)
+Name[nl]=Een snelle kiezer (QML)
+Name[pt]=Um Marcador Rápido (QML)
+Name[sv]=En snabbuppringare (QML)
+Name[uk]=Швидкий набір (QML)
+Name[x-test]=xxA Quick Dialer (QML)xx
 Comment=A quick dialer to call a number
+Comment[nl]=Een snelle kiezer om een nummer te bellen
+Comment[pt]=Um marcador rápido para indicar um número
+Comment[sv]=En snabbuppringare för att ringa ett nummer
+Comment[uk]=Програма для пришвидшення набирання телефонного номеру
+Comment[x-test]=xxA quick dialer to call a numberxx
 Type=Service
 ServiceTypes=Plasma/Containment
 Icon=internet-telephony

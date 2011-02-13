@@ -1,7 +1,17 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Widget Example (QML)
+Name[nl]=Voorbeeld van widget (QML)
+Name[pt]=Exemplo de Elemento (QML)
+Name[sv]=Exempel på grafisk komponent (QML)
+Name[uk]=Приклад віджета (QML)
+Name[x-test]=xxWidget Example (QML)xx
 Comment=A kineticqml scriptengine test
+Comment[nl]=Een test voor kineticqml scriptengine
+Comment[pt]=Um teste de programação em kineticqml
+Comment[sv]=Test av skriptgränssnittet kinetisk QML
+Comment[uk]=Тест скриптового рушія kineticqml
+Comment[x-test]=xxA kineticqml scriptengine testxx
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=chronometer
