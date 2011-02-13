@@ -1,6 +1,5 @@
 /*
- *   Author: Marco Martin <mart@kde.org>
- *   Date: Sun Feb 6 2011, 12:52:47
+ *   Copyright 2011 Marco Martin <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -20,6 +19,7 @@
 
 import Qt 4.7
 
+
 Rectangle {
     id: connectorRectangle
 
@@ -34,7 +34,7 @@ Rectangle {
     color: "white"
     smooth:true
     x: -width +6
-    y: parent.height/2
+    y: parent.height/2-height/2
     transform: Rotation {
         origin.x: connectorRectangle.width-6
         origin.y: 6
