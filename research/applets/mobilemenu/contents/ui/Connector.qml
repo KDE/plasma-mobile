@@ -26,9 +26,9 @@ Rectangle {
     property Item itemA
     property Item itemB
 
-    property real connectorAngle: Math.atan((itemB.y+height/2-64)/(itemB.x-64))
+    property real connectorAngle: Math.atan((itemB.y+height/2-itemA.y)/(itemB.x-itemA.x-itemA.width/2))
 
-    width: (itemB.x-64)/Math.cos(connectorAngle) -30
+    width: (itemB.x-itemA.width/2)/Math.cos(connectorAngle)
     height: 12
     radius: 7
     color: "white"

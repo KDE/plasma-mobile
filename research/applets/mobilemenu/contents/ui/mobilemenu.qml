@@ -102,6 +102,54 @@ Rectangle {
                 }
             ]
         }
+        ListElement {
+            elements: [
+                ListElement {
+                    name: "Book 1"
+                    icon: "pics/qtlogo.png"
+                },
+                ListElement {
+                    name: "Receipt.pdf"
+                    icon: "pics/qtlogo.png"
+                },
+                ListElement {
+                    name: "essay.doc"
+                    icon: "pics/qtlogo.png"
+                },
+                ListElement {
+                    name: "Birthday.jpg"
+                    icon: "pics/qtlogo.png"
+                },
+                ListElement {
+                    name: "5th symphony.mp3"
+                    icon: "pics/qtlogo.png"
+                }
+            ]
+        }
+        ListElement {
+            elements: [
+                ListElement {
+                    name: "Book 1"
+                    icon: "pics/qtlogo.png"
+                },
+                ListElement {
+                    name: "Receipt.pdf"
+                    icon: "pics/qtlogo.png"
+                },
+                ListElement {
+                    name: "essay.doc"
+                    icon: "pics/qtlogo.png"
+                },
+                ListElement {
+                    name: "Birthday.jpg"
+                    icon: "pics/qtlogo.png"
+                },
+                ListElement {
+                    name: "5th symphony.mp3"
+                    icon: "pics/qtlogo.png"
+                }
+            ]
+        }
     }
 
     PlasmaCore.Svg{
@@ -122,6 +170,8 @@ Rectangle {
                 id: delegate
                 width: itemsRow.childrenRect.width
                 height: itemsRow.childrenRect.height
+                scale: PathView.delegateScale
+                opacity: PathView.delegateOpacity
 
                 Rectangle {
                     color: "white"
@@ -189,13 +239,35 @@ Rectangle {
          clip:true
          offset: 2
          path: Path {
-             startX: mainView.width/2; startY: -40
-             PathQuad { x: mainView.width/3; y: mainView.height+40; controlX: 300; controlY: mainView.height/2 }
-             //PathQuad { x: 120; y: 100; controlX: -20; controlY: 75 }
+             startX: mainView.width/2; startY: -100
+             /*PathAttribute { name: "delegateScale"; value: 1.0 }
+             PathAttribute { name: "delegateOpacity"; value: 1.0 }*/
+             PathQuad {
+                 x: 0
+                 y: mainView.height+100
+                 controlX: mainView.width
+                 controlY: mainView.height/2
+            }
+         /*   //PathAttribute { name: "delegateScale"; value: 0.3 }
+            //PathAttribute { name: "delegateOpacity"; value: 0.0 }
+            PathQuad {
+                 x: mainView.width/2
+                 y: 0
+                 controlX: mainView.width/2 -30
+                 controlY: 0
+            }
+           // PathAttribute { name: "delegateOpacity"; value: 0.0 }
+            PathQuad {
+                 x: mainView.width/2
+                 y: mainView.height/2
+                 controlX: mainView.width/2 -30
+                 controlY: mainView.height/2-30
+            }*/
          }
      }
      PlasmaCore.SvgItem {
         id: activityRootSvg
+        y:200
         width: 128
         height: 128
         svg: iconsSvg
