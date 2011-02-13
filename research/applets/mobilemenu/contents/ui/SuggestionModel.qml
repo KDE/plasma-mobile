@@ -23,6 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 ListModel {
     id: suggestionModel
     ListElement {
+        name: "Contacts"
         elements: [
             ListElement {
                 name: "Bill Jones"
@@ -39,6 +40,7 @@ ListModel {
         ]
     }
     ListElement {
+        name: "Applications"
         elements: [
             ListElement {
                 name: "konqueror"
@@ -55,50 +57,53 @@ ListModel {
         ]
     }
     ListElement {
+        name: "Files"
         elements: [
             ListElement {
                 name: "Book 1"
-                icon: "pics/qtlogo.png"
+                icon: "application-epub"
             },
             ListElement {
                 name: "Receipt.pdf"
-                icon: "pics/qtlogo.png"
+                icon: "application-pdf"
             },
             ListElement {
                 name: "essay.doc"
-                icon: "pics/qtlogo.png"
+                icon: "application-vnd.oasis.opendocument.text"
             }
         ]
     }
     ListElement {
+        name: "Communication"
         elements: [
             ListElement {
-                name: "Book 1"
-                icon: "pics/qtlogo.png"
+                name: "Hello, how..."
+                icon: "view-pim-mail"
             },
             ListElement {
-                name: "Receipt.pdf"
-                icon: "pics/qtlogo.png"
+                name: "our appointment..."
+                icon: "konversation"
             },
             ListElement {
-                name: "essay.doc"
-                icon: "pics/qtlogo.png"
+                name: "This evening..."
+                icon: "view-pim-mail"
             }
         ]
     }
     ListElement {
+        name: "URLs"
         elements: [
             ListElement {
-                name: "Book 1"
-                icon: "pics/qtlogo.png"
+                name: "Gmail"
+                icon: "kmail"
             },
             ListElement {
-                name: "Receipt.pdf"
-                icon: "pics/qtlogo.png"
+                name: "Facebook"
+                icon: "facebook"
             },
             ListElement {
-                name: "essay.doc"
-                icon: "pics/qtlogo.png"
+                name: "Kde.org"
+                icon: "start-here-kde"
             }
         ]
     }

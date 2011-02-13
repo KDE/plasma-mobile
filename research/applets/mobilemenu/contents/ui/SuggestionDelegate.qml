@@ -28,6 +28,14 @@ Item {
     /*scale: PathView.delegateScale
     opacity: PathView.delegateOpacity*/
 
+    Text {
+        text: name
+        font.pointSize: 14
+        color: "white"
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: 0
+    }
+
     Rectangle {
         color: "white"
         width: itemsRow.width -64
