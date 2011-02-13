@@ -18,97 +18,15 @@
  */
 
 import Qt 4.7
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.qtextracomponents 4.7
 
 Rectangle {
     width: 240; height: 500
     color: "black"
 
-    ListModel {
+    SuggestionModel {
         id: suggestionModel
-        ListElement {
-            elements: [
-                ListElement {
-                    name: "Bill Jones"
-                    icon: "pics/qtlogo.png"
-                },
-                ListElement {
-                    name: "Jane Doe"
-                    icon: "pics/qtlogo.png"
-                },
-                ListElement {
-                    name: "John Smith"
-                    icon: "pics/qtlogo.png"
-                }
-            ]
-        }
-        ListElement {
-            elements: [
-                ListElement {
-                    name: "konqueror"
-                    icon: "konqueror"
-                },
-                ListElement {
-                    name: "konsole"
-                    icon: "konsole"
-                },
-                ListElement {
-                    name: "kmail"
-                    icon: "kmail"
-                }
-            ]
-        }
-        ListElement {
-            elements: [
-                ListElement {
-                    name: "Book 1"
-                    icon: "pics/qtlogo.png"
-                },
-                ListElement {
-                    name: "Receipt.pdf"
-                    icon: "pics/qtlogo.png"
-                },
-                ListElement {
-                    name: "essay.doc"
-                    icon: "pics/qtlogo.png"
-                }
-            ]
-        }
-        ListElement {
-            elements: [
-                ListElement {
-                    name: "Book 1"
-                    icon: "pics/qtlogo.png"
-                },
-                ListElement {
-                    name: "Receipt.pdf"
-                    icon: "pics/qtlogo.png"
-                },
-                ListElement {
-                    name: "essay.doc"
-                    icon: "pics/qtlogo.png"
-                }
-            ]
-        }
-        ListElement {
-            elements: [
-                ListElement {
-                    name: "Book 1"
-                    icon: "pics/qtlogo.png"
-                },
-                ListElement {
-                    name: "Receipt.pdf"
-                    icon: "pics/qtlogo.png"
-                },
-                ListElement {
-                    name: "essay.doc"
-                    icon: "pics/qtlogo.png"
-                }
-            ]
-        }
     }
 
     PlasmaCore.Svg{
