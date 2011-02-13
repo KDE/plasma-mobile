@@ -1,1 +1,6 @@
-http://ivan.fomentgroup.org/blog/2011/02/06/mobile-concepts/
+See the following link for info
+  http://ivan.fomentgroup.org/blog/2011/02/06/mobile-concepts/
+
+Main 'classes' for testing via qmlviewer
+  ContactDashboard
+  MessageWindow
