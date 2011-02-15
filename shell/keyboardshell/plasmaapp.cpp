@@ -36,6 +36,7 @@
 #include <KDebug>
 #include <KStandardAction>
 #include <KWindowSystem>
+#include <KSharedConfig>
 
 #include <Plasma/Containment>
 #include <Plasma/Theme>
@@ -67,6 +68,11 @@ PlasmaApp::PlasmaApp()
 
     KConfigGroup cg(KGlobal::config(), "General");
     Plasma::Theme::defaultTheme()->setFont(cg.readEntry("desktopFont", font()));
+
+    cg = KConfigGroup(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
+    const QString themeName = cg.readEntry("name", "air-mobile");
+    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
+    Plasma::Theme::defaultTheme()->setThemeName(themeName);
 
     corona();
     m_containment = m_corona->addContainment("null");

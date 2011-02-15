@@ -148,7 +148,7 @@ void SingleView::setRotation(const int degrees)
     const double cosa = cos(a);
 
     QTransform rotationTransform(cosa, sina, -sina, cosa, 0, 0);
-//    setTransform(rotationTransform);
+    m_applet->setTransform(rotationTransform);
 }
 
 int SingleView::rotation() const
