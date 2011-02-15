@@ -41,6 +41,7 @@
 #include <KStandardAction>
 #include <KStandardDirs>
 #include <KGlobalAccel>
+#include <KRun>
 #include <KWindowSystem>
 #include <KServiceTypeTrader>
 
@@ -162,6 +163,9 @@ PlasmaApp::PlasmaApp()
     lockAction->setGlobalShortcut(KShortcut(Qt::CTRL + Qt::Key_L));
     m_mainView->addAction(lockAction);
     connect(lockAction, SIGNAL(triggered()), this, SLOT(lockScreen()));
+
+    //FIXMA: hacky
+    KRun::runCommand("plasma-keyboardcontainer", 0);
 }
 
 PlasmaApp::~PlasmaApp()
