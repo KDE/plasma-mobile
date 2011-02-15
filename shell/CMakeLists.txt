@@ -5,6 +5,7 @@ include(KDE4Defaults)
 
 add_subdirectory(data)
 add_subdirectory(mobiletoolbox)
+add_subdirectory(keyboardshell)
 
 set(plasma-mobile_SRCS
     main.cpp
