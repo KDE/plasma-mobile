@@ -74,7 +74,6 @@ private:
 private Q_SLOTS:
     void cleanup();
     void syncConfig();
-    void themeChanged();
     void storeApplet(Plasma::Applet *applet);
 
 private:

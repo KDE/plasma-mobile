@@ -39,14 +39,14 @@
 #include <Plasma/PushButton>
 
 SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment, const QString &pluginName, int appletId, const QVariantList &appletArgs, QWidget *parent)
-    : QGraphicsView(parent),
+    : Plasma::Dialog(parent),
       m_applet(0),
-      m_containment(containment),
+      m_containment(0),
       m_corona(corona),
       m_direction(Plasma::Up),
       m_rotation(0)
 {
-    setScene(m_corona);
+    setContainment(containment);
     m_containment->setFormFactor(Plasma::Planar);
     m_containment->setLocation(Plasma::Floating);
     KWindowSystem::setType(winId(), NET::Dock);
@@ -65,39 +65,30 @@ SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment,
 
     m_containment->addApplet(m_applet, QPointF(-1, -1), false);
 
-    QSizeF containmentSize(m_containment->size());
-    containmentSize.setHeight(qMax(containmentSize.height(), m_applet->size().height()));
-    containmentSize.setWidth(containmentSize.width() + QWIDGETSIZE_MAX);
-    m_containment->resize(containmentSize);
-    m_applet->setPos((m_applet->id()-1)*QWIDGETSIZE_MAX, 0);
+    //m_applet->setPos(0, 0);
+    setGraphicsWidget(m_applet);
 
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
-    setSceneRect(m_applet->geometry());
     setWindowTitle(m_applet->name());
     setWindowIcon(SmallIcon(m_applet->icon()));
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFrameStyle(QFrame::NoFrame);
 
     connect(this, SIGNAL(sceneRectAboutToChange()), this, SLOT(updateGeometry()));
     QDesktopWidget *desktop = QApplication::desktop();
-    QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
+    connect(desktop, SIGNAL(resized(int )), this, SLOT(updateGeometry()));
 
-    m_closeButton = new Plasma::PushButton();
+    m_closeButton = new Plasma::PushButton(m_containment);
     m_closeButton->setText(i18n("close"));
     m_closeButton->setIcon(KIcon("window-close"));
-    m_corona->addItem(m_closeButton);
     connect(m_closeButton, SIGNAL(clicked()), this, SLOT(hide()));
 
 
 
     setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height() + m_closeButton->size().height());
-    setFixedWidth(screenGeom.width());
-    move(screenGeom.left(), screenGeom.height() - height());
 
-    m_closeButton->setPos(size().width() - m_closeButton->size().width(), m_applet->pos().y() - m_closeButton->size().height());
+    m_closeButton->setPos(m_applet->geometry().right() - m_closeButton->size().width(), m_applet->pos().y() /*- m_closeButton->size().height()*/);
 
     hide();
+    updateGeometry();
 }
 
 SingleView::~SingleView()
@@ -113,58 +104,13 @@ void SingleView::setContainment(Plasma::Containment *c)
         disconnect(m_containment, 0, this, 0);
     }
 
+    m_containment = c;
+    m_containment->setScreen(0);
     updateGeometry();
 }
 
 
-void SingleView::resizeEvent(QResizeEvent *event)
-{
-    Q_UNUSED(event)
-    updateGeometry();
-    emit geometryChanged();
 
-    QDesktopWidget *desktop = QApplication::desktop();
-    QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
-
-    NETExtendedStrut strut;
-
-    switch (m_direction) {
-    case Plasma::Left:
-        strut.right_width = event->size().width();
-        strut.right_start = screenGeom.top();
-        strut.right_end = screenGeom.bottom();
-        break;
-    case Plasma::Right:
-        strut.left_width = event->size().width();
-        strut.left_start = screenGeom.top();
-        strut.left_end = screenGeom.bottom();
-        break;
-    case Plasma::Down:
-        strut.top_width = event->size().height();
-        strut.top_start = screenGeom.left();
-        strut.top_end = screenGeom.width();
-        break;
-    case Plasma::Up:
-    default:
-        strut.bottom_width = event->size().height();
-        strut.bottom_start = screenGeom.left();
-        strut.bottom_end = screenGeom.width();
-        break;
-    }
-
-    KWindowSystem::setExtendedStrut(winId(), strut.left_width,
-                                             strut.left_start,
-                                             strut.left_end,
-                                             strut.right_width,
-                                             strut.right_start,
-                                             strut.right_end,
-                                             strut.top_width,
-                                             strut.top_start,
-                                             strut.top_end,
-                                             strut.bottom_width,
-                                             strut.bottom_start,
-                                             strut.bottom_end);
-}
 
 Plasma::Applet *SingleView::applet()
 {
@@ -183,21 +129,9 @@ Plasma::FormFactor SingleView::formFactor() const
 
 void SingleView::updateGeometry()
 {
-    if (!m_containment) {
-        return;
-    }
-
-    kDebug() << "New applet geometry is" << m_applet->geometry();
-
-    if (m_applet->size().toSize() != transformedSize()) {
-        if (m_applet) {
-            QSize size = transformedSize() - QSize(0, m_closeButton->size().height());
-            m_applet->setMinimumSize(0,0);
-            m_applet->setMaximumSize(size);
-            m_applet->resize(size);
-        }
-        setSceneRect(m_applet->geometry().adjusted(0, -m_closeButton->size().height(), 0 ,0));
-    }
+    QDesktopWidget *desktop = QApplication::desktop();
+    m_containment->setGeometry(QRect(QPoint(0,0), desktop->size()));
+    m_corona->setSceneRect(m_containment->geometry());
 }
 
 void SingleView::setRotation(const int degrees)
@@ -214,7 +148,7 @@ void SingleView::setRotation(const int degrees)
     const double cosa = cos(a);
 
     QTransform rotationTransform(cosa, sina, -sina, cosa, 0, 0);
-    setTransform(rotationTransform);
+//    setTransform(rotationTransform);
 }
 
 int SingleView::rotation() const
@@ -232,6 +166,8 @@ void SingleView::setDirection(const Plasma::Direction direction)
 
     QDesktopWidget *desktop = QApplication::desktop();
     QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
+
+    screenGeom.setWidth(qMin(screenGeom.width(), (int)m_applet->effectiveSizeHint(Qt::PreferredSize).width())-300);
 
     switch (direction) {
     case Plasma::Down:
@@ -267,6 +203,24 @@ void SingleView::setDirection(const Plasma::Direction direction)
 Plasma::Direction SingleView::direction() const
 {
     return m_direction;
+}
+
+void SingleView::showEvent(QShowEvent *event)
+{
+    Plasma::Dialog::showEvent(event);
+
+    //FIXME: this is an hack for the applet disabing itself in panic when doesn't immediately find a view
+    Plasma::PopupApplet *pa = qobject_cast<Plasma::PopupApplet *>(m_applet);
+    if (pa) {
+        pa->graphicsWidget()->setEnabled(true);
+    }
+}
+
+void SingleView::resizeEvent(QResizeEvent *event)
+{
+    Plasma::Dialog::resizeEvent(event);
+    QDesktopWidget *desktop = QApplication::desktop();
+    move(desktop->size().width()/2-event->size().width()/2, desktop->size().height()-event->size().height());
 }
 
 QSize SingleView::transformedSize() const

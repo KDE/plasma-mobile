@@ -21,8 +21,8 @@
 #ifndef SINGLEVIEW_H
 #define SINGLEVIEW_H
 
-#include <QGraphicsView>
 
+#include <Plasma/Dialog>
 #include <Plasma/Plasma>
 
 namespace Plasma
@@ -35,7 +35,7 @@ namespace Plasma
 
 class SingleView;
 
-class SingleView : public QGraphicsView
+class SingleView : public Plasma::Dialog
 {
     Q_OBJECT
 
@@ -67,6 +67,7 @@ Q_SIGNALS:
 
 protected:
     void resizeEvent(QResizeEvent *event);
+    void showEvent(QShowEvent *event);
 
 private:
     Plasma::Applet *m_applet;

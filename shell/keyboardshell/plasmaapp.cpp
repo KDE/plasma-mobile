@@ -135,12 +135,7 @@ int  PlasmaApp::newInstance()
 
     view->setWindowFlags(Qt::FramelessWindowHint);
     KWindowSystem::setType(view->winId(), NET::Dock);
-    view->setAutoFillBackground(true);
-    view->setBackgroundBrush(KColorUtils::mix(Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor), Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor), 0.15));
-    view->setAttribute(Qt::WA_NoSystemBackground);
-    view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
     Plasma::WindowEffects::overrideShadow(view->winId(), true);
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(themeChanged()));
     view->applet()->setBackgroundHints(Plasma::Applet::NoBackground);
 
     // Set window to exist on all desktops
@@ -189,13 +184,6 @@ void PlasmaApp::storeApplet(Plasma::Applet *applet)
 void PlasmaApp::syncConfig()
 {
     KGlobal::config()->sync();
-}
-
-void PlasmaApp::themeChanged()
-{
-    if (m_view->autoFillBackground()) {
-        m_view->setBackgroundBrush(KColorUtils::mix(Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor), Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor), 0.15));
-    }
 }
 
 Plasma::Corona* PlasmaApp::corona()
