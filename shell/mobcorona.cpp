@@ -87,13 +87,18 @@ void MobCorona::loadDefaultLayout()
     KConfigGroup cg = KConfigGroup(KGlobal::config(), "General");
     QString homeScreenPath = cg.readEntry("homeScreenPath", "mobile-homescreen");
 
-    QString defaultConfig = KStandardDirs::locate("data", homeScreenPath+"/plasma-default-layoutrc");
+    QString layoutRc = QString("plasma-mobile/%1/plasma-default-layoutrc").arg(homeScreenPath);
+    QString defaultConfig = KStandardDirs::locate("data", layoutRc);
+    //kDebug() << "============================================================================";
+    //kDebug() << "layout HSP:" << homeScreenPath;
+    //kDebug() << "layout RC :" << layoutRc;
+    //kDebug() << "layout CFG:" << defaultConfig;
     if (!defaultConfig.isEmpty()) {
         kDebug() << "attempting to load the default layout from:" << defaultConfig;
         importLayout(KConfigGroup(new KConfig(defaultConfig), QString()));
-
         return;
     }
+    kWarning() << "Invalid layout, could not locate plasma-default-layoutrc";
 
     // used to force a save into the config file
     KConfigGroup invalidConfig;

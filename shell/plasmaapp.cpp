@@ -150,6 +150,7 @@ PlasmaApp::PlasmaApp()
     cg = KConfigGroup(KGlobal::config(), "General");
     Plasma::Theme::defaultTheme()->setFont(cg.readEntry("desktopFont", font()));
     m_homeScreenPath = cg.readEntry("homeScreenPath", "mobile-homescreen");
+    kDebug() << "***** HSP from config" << m_homeScreenPath;
 
     // this line initializes the corona and setups the main qml homescreen
     corona();
@@ -224,7 +225,14 @@ void PlasmaApp::setupHomeScreen()
     m_declarativeWidget = new Plasma::DeclarativeWidget();
     m_corona->addItem(m_declarativeWidget);
 
-    m_declarativeWidget->setQmlPath(KStandardDirs::locate("data", QString(m_homeScreenPath).append("/HomeScreen.qml")));
+    QString qmlPath = KStandardDirs::locate("data", QString("plasma-mobile/%1/HomeScreen.qml").arg(m_homeScreenPath));
+    if (qmlPath.isEmpty()) {
+        kWarning() << "***** QML File not found.";
+        //kDebug() << "HSP:" << QString(m_homeScreenPath).append("/HomeScreen.qml");
+        //kDebug() << "KSD:" << KStandardDirs::locate("data", "plasma-mobile/mobile-homescreen/HomeScreen.qml");
+    }
+    kDebug() << "QML:" << qmlPath;
+    m_declarativeWidget->setQmlPath(qmlPath);
 
     if (!m_declarativeWidget->engine()) {
         QCoreApplication::quit();
