@@ -16,6 +16,7 @@ set(plasma-keyboardcontainer_SRCS
     singleview.cpp
     main.cpp
     plasmaapp.cpp
+    keyboardcorona.cpp
 )
 
 set(keyboard_dbusXML org.kde.PlasmaKeyboardShell.xml)

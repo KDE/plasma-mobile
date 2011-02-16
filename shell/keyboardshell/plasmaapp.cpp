@@ -20,6 +20,7 @@
 
 #include "plasmaapp.h"
 #include "plasmakeyboardshelladaptor.h"
+#include "keyboardcorona.h"
 
 #include <unistd.h>
 
@@ -40,7 +41,6 @@
 
 #include <Plasma/Containment>
 #include <Plasma/Theme>
-#include <Plasma/Corona>
 #include <Plasma/PopupApplet>
 #include <Plasma/Wallpaper>
 #include <Plasma/WindowEffects>
@@ -195,7 +195,7 @@ void PlasmaApp::syncConfig()
 Plasma::Corona* PlasmaApp::corona()
 {
     if (!m_corona) {
-        m_corona = new Plasma::Corona(this);
+        m_corona = new KeyboardCorona(this);
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
 
         m_corona->setItemIndexMethod(QGraphicsScene::NoIndex);
