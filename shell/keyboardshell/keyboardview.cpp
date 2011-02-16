@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "singleview.h"
+#include "keyboardview.h"
 
 #include <cmath>
 
@@ -238,5 +238,5 @@ QSize SingleView::transformedSize() const
     }
 }
 
-#include "singleview.moc"
+#include "keyboardview.moc"
 

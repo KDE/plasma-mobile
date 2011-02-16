@@ -13,10 +13,10 @@ include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs ${KDEBASE_WORKSPACE_SOU
 
 
 set(plasma-keyboardcontainer_SRCS
-    singleview.cpp
     main.cpp
     plasmaapp.cpp
     keyboardcorona.cpp
+    keyboardview.cpp
 )
 
 set(keyboard_dbusXML org.kde.PlasmaKeyboardShell.xml)

@@ -45,7 +45,7 @@
 #include <Plasma/Wallpaper>
 #include <Plasma/WindowEffects>
 
-#include "singleview.h"
+#include "keyboardview.h"
 
 
 PlasmaApp* PlasmaApp::self()
