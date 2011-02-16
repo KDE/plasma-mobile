@@ -224,7 +224,7 @@ void PlasmaApp::setupHomeScreen()
     m_declarativeWidget = new Plasma::DeclarativeWidget();
     m_corona->addItem(m_declarativeWidget);
 
-    m_declarativeWidget->setQmlPath(KStandardDirs::locate("appdata", QString(m_homeScreenPath).append("/HomeScreen.qml")));
+    m_declarativeWidget->setQmlPath(KStandardDirs::locate("data", QString(m_homeScreenPath).append("/HomeScreen.qml")));
 
     if (!m_declarativeWidget->engine()) {
         QCoreApplication::quit();
