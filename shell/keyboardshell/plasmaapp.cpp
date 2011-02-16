@@ -45,7 +45,7 @@
 #include <Plasma/Wallpaper>
 #include <Plasma/WindowEffects>
 
-#include "keyboardview.h"
+#include "keyboarddialog.h"
 
 
 PlasmaApp* PlasmaApp::self()
@@ -61,7 +61,7 @@ PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
       m_corona(0),
       m_maxId(0),
-      m_view(0)
+      m_dialog(0)
 {
     KGlobal::locale()->insertCatalog("plasma-keyboardcontainer");
     KCrash::setFlags(KCrash::AutoRestart);
@@ -115,7 +115,7 @@ KConfigGroup PlasmaApp::storedConfig(int appletId)
 
 int  PlasmaApp::newInstance()
 {
-    if (m_view) {
+    if (m_dialog) {
         return 0;
     }
 
@@ -135,25 +135,25 @@ int  PlasmaApp::newInstance()
         m_storedApplets.remove(pluginName, storedAppletId);
     }
 
-    SingleView *view = new SingleView(m_corona, m_containment, pluginName, appletId, QVariantList());
-    view->installEventFilter(this);
-    connect(view, SIGNAL(storeApplet(Plasma::Applet*)), this, SLOT(storeApplet(Plasma::Applet*)));
+    KeyboardDialog *dialog = new KeyboardDialog(m_corona, m_containment, pluginName, appletId, QVariantList());
+    dialog->installEventFilter(this);
+    connect(dialog, SIGNAL(storeApplet(Plasma::Applet*)), this, SLOT(storeApplet(Plasma::Applet*)));
 
-    view->setWindowFlags(Qt::FramelessWindowHint);
-    KWindowSystem::setType(view->winId(), NET::Dock);
-    Plasma::WindowEffects::overrideShadow(view->winId(), true);
-    view->applet()->setBackgroundHints(Plasma::Applet::NoBackground);
+    dialog->setWindowFlags(Qt::FramelessWindowHint);
+    KWindowSystem::setType(dialog->winId(), NET::Dock);
+    Plasma::WindowEffects::overrideShadow(dialog->winId(), true);
+    dialog->applet()->setBackgroundHints(Plasma::Applet::NoBackground);
 
     // Set window to exist on all desktops
-    KWindowSystem::setOnAllDesktops(view->winId(), true);
+    KWindowSystem::setOnAllDesktops(dialog->winId(), true);
 
     //FIXME: hardcoding to MID for now
-    view->applet()->config().writeEntry("layout", "plasmaboard/mid.xml");
-    view->applet()->configChanged();
+    dialog->applet()->config().writeEntry("layout", "plasmaboard/mid.xml");
+    dialog->applet()->configChanged();
 
-    view->hide();
+    dialog->hide();
 
-    m_view = view;
+    m_dialog = dialog;
 
     return 0;
 }
@@ -165,7 +165,7 @@ void PlasmaApp::cleanup()
         m_corona->saveLayout();
     }
 
-    delete m_view;
+    delete m_dialog;
 
     delete m_corona;
     m_corona = 0;
@@ -226,17 +226,17 @@ void PlasmaApp::setDirection(const QString &direction)
         dir = Plasma::Down;
     }
 
-    m_view->setDirection(dir);
+    m_dialog->setDirection(dir);
 }
 
 void PlasmaApp::show()
 {
-    m_view->show();
+    m_dialog->show();
 }
 
 void PlasmaApp::hide()
 {
-    m_view->hide();
+    m_dialog->hide();
 }
 
 #include "plasmaapp.moc"

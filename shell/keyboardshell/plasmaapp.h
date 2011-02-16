@@ -41,7 +41,7 @@ namespace Plasma
     class Applet;
 } // namespace Plasma
 
-class SingleView;
+class KeyboardDialog;
 
 namespace Kephal
 {
@@ -82,7 +82,7 @@ private:
     QMultiHash<QString, int>m_storedApplets;
     int m_maxId;
 
-    SingleView * m_view;
+    KeyboardDialog * m_dialog;
 
 };
 

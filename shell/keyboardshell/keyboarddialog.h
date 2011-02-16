@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef SINGLEVIEW_H
-#define SINGLEVIEW_H
+#ifndef KEYBOARDDIALOG_H
+#define KEYBOARDDIALOG_H
 
 
 #include <Plasma/Dialog>
@@ -33,15 +33,15 @@ namespace Plasma
     class PushButton;
 } // namespace Plasma
 
-class SingleView;
+class KeyboardDialog;
 
-class SingleView : public Plasma::Dialog
+class KeyboardDialog : public Plasma::Dialog
 {
     Q_OBJECT
 
 public:
-    SingleView(Plasma::Corona *corona, Plasma::Containment *containment, const QString &pluginName, int appletId, const QVariantList &appletArgs, QWidget *parent=0);
-    ~SingleView();
+    KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *containment, const QString &pluginName, int appletId, const QVariantList &appletArgs, QWidget *parent=0);
+    ~KeyboardDialog();
 
 
     Plasma::Applet *applet();
@@ -60,7 +60,7 @@ public Q_SLOTS:
     void updateGeometry();
 
 Q_SIGNALS:
-    void locationChanged(const SingleView *view);
+    void locationChanged(const KeyboardDialog *view);
     void geometryChanged();
     void containmentActivated();
     void storeApplet(Plasma::Applet *applet);

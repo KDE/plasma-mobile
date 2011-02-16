@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "keyboardview.h"
+#include "keyboarddialog.h"
 
 #include <cmath>
 
@@ -38,7 +38,7 @@
 #include <Plasma/Containment>
 #include <Plasma/PushButton>
 
-SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment, const QString &pluginName, int appletId, const QVariantList &appletArgs, QWidget *parent)
+KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *containment, const QString &pluginName, int appletId, const QVariantList &appletArgs, QWidget *parent)
     : Plasma::Dialog(parent),
       m_applet(0),
       m_containment(0),
@@ -91,14 +91,14 @@ SingleView::SingleView(Plasma::Corona *corona, Plasma::Containment *containment,
     updateGeometry();
 }
 
-SingleView::~SingleView()
+KeyboardDialog::~KeyboardDialog()
 {
     emit storeApplet(m_applet);
     delete m_closeButton;
 }
 
 
-void SingleView::setContainment(Plasma::Containment *c)
+void KeyboardDialog::setContainment(Plasma::Containment *c)
 {
     if (m_containment) {
         disconnect(m_containment, 0, this, 0);
@@ -112,29 +112,29 @@ void SingleView::setContainment(Plasma::Containment *c)
 
 
 
-Plasma::Applet *SingleView::applet()
+Plasma::Applet *KeyboardDialog::applet()
 {
     return m_applet;
 }
 
-Plasma::Location SingleView::location() const
+Plasma::Location KeyboardDialog::location() const
 {
     return m_containment->location();
 }
 
-Plasma::FormFactor SingleView::formFactor() const
+Plasma::FormFactor KeyboardDialog::formFactor() const
 {
     return m_containment->formFactor();
 }
 
-void SingleView::updateGeometry()
+void KeyboardDialog::updateGeometry()
 {
     QDesktopWidget *desktop = QApplication::desktop();
     m_containment->setGeometry(QRect(QPoint(0,0), desktop->size()));
     m_corona->setSceneRect(m_containment->geometry());
 }
 
-void SingleView::setRotation(const int degrees)
+void KeyboardDialog::setRotation(const int degrees)
 {
     if (degrees == m_rotation) {
         return;
@@ -151,12 +151,12 @@ void SingleView::setRotation(const int degrees)
     m_applet->setTransform(rotationTransform);
 }
 
-int SingleView::rotation() const
+int KeyboardDialog::rotation() const
 {
     return m_rotation;
 }
 
-void SingleView::setDirection(const Plasma::Direction direction)
+void KeyboardDialog::setDirection(const Plasma::Direction direction)
 {
     if (direction == m_direction) {
         return;
@@ -200,12 +200,12 @@ void SingleView::setDirection(const Plasma::Direction direction)
     m_closeButton->setPos(transformedSize().width() - m_closeButton->size().width(), m_applet->pos().y() - m_closeButton->size().height());
 }
 
-Plasma::Direction SingleView::direction() const
+Plasma::Direction KeyboardDialog::direction() const
 {
     return m_direction;
 }
 
-void SingleView::showEvent(QShowEvent *event)
+void KeyboardDialog::showEvent(QShowEvent *event)
 {
     Plasma::Dialog::showEvent(event);
 
@@ -216,14 +216,14 @@ void SingleView::showEvent(QShowEvent *event)
     }
 }
 
-void SingleView::resizeEvent(QResizeEvent *event)
+void KeyboardDialog::resizeEvent(QResizeEvent *event)
 {
     Plasma::Dialog::resizeEvent(event);
     QDesktopWidget *desktop = QApplication::desktop();
     move(desktop->size().width()/2-event->size().width()/2, desktop->size().height()-event->size().height());
 }
 
-QSize SingleView::transformedSize() const
+QSize KeyboardDialog::transformedSize() const
 {
     switch (m_direction) {
     case Plasma::Left:
@@ -238,5 +238,5 @@ QSize SingleView::transformedSize() const
     }
 }
 
-#include "keyboardview.moc"
+#include "keyboarddialog.moc"
 
