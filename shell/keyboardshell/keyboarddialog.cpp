@@ -36,7 +36,6 @@
 #include <Plasma/PopupApplet>
 #include <Plasma/Corona>
 #include <Plasma/Containment>
-#include <Plasma/PushButton>
 
 KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *containment, const QString &pluginName, int appletId, const QVariantList &appletArgs, QWidget *parent)
     : Plasma::Dialog(parent),
@@ -76,16 +75,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     QDesktopWidget *desktop = QApplication::desktop();
     connect(desktop, SIGNAL(resized(int )), this, SLOT(updateGeometry()));
 
-    m_closeButton = new Plasma::PushButton(m_containment);
-    m_closeButton->setText(i18n("close"));
-    m_closeButton->setIcon(KIcon("window-close"));
-    connect(m_closeButton, SIGNAL(clicked()), this, SLOT(hide()));
-
-
-
-    setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height() + m_closeButton->size().height());
-
-    m_closeButton->setPos(m_applet->geometry().right() - m_closeButton->size().width(), m_applet->pos().y() /*- m_closeButton->size().height()*/);
+    setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
 
     hide();
     updateGeometry();
@@ -94,7 +84,6 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 KeyboardDialog::~KeyboardDialog()
 {
     emit storeApplet(m_applet);
-    delete m_closeButton;
 }
 
 
@@ -172,32 +161,31 @@ void KeyboardDialog::setDirection(const Plasma::Direction direction)
     switch (direction) {
     case Plasma::Down:
         setRotation(180);
-        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+m_closeButton->size().height());
+        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
         setFixedWidth(screenGeom.width());
         move(screenGeom.left(), screenGeom.top());
         break;
     case Plasma::Left:
         setRotation(270);
-        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+m_closeButton->size().height());
+        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
         setFixedHeight(screenGeom.height());
         move(screenGeom.right() - width(), screenGeom.top());
         break;
     case Plasma::Right:
         setRotation(90);
-        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+m_closeButton->size().height());
+        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
         setFixedHeight(screenGeom.height());
         move(screenGeom.left(), screenGeom.top());
         break;
     case Plasma::Up:
     default:
         setRotation(0);
-        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height()+m_closeButton->size().height());
+        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
         setFixedWidth(screenGeom.width());
         move(screenGeom.left(), screenGeom.height() - height());
         break;
     }
 
-    m_closeButton->setPos(transformedSize().width() - m_closeButton->size().width(), m_applet->pos().y() - m_closeButton->size().height());
 }
 
 Plasma::Direction KeyboardDialog::direction() const
