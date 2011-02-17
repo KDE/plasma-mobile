@@ -25,6 +25,8 @@
 #include <QtGui/QPainter>
 #include <QtGui/QApplication>
 #include <QTimer>
+#include <QGraphicsView>
+#include <QGraphicsSceneMouseEvent>
 
 #include <Plasma/Applet>
 #include <Plasma/Animation>
@@ -48,6 +50,11 @@ public:
         Q_UNUSED(widget)
         painter->fillRect(option->rect, QColor(0, 0, 0, 185));
     }
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *event)
+    {
+        event->accept();
+    }
 };
 
 class WidgetProxy : public QGraphicsProxyWidget
@@ -67,6 +74,26 @@ public:
         widget->setPalette(palette);
 
         setWidget(widget);
+    }
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *event)
+    {
+        //hacky way to discover if we clicked on an empty spot
+        QWidget *child = qobject_cast<QWidget *>(widget()->childAt(event->pos().toPoint()));
+
+        if (child && (child->focusPolicy() == Qt::NoFocus)) {
+            QEvent closeEvent(QEvent::CloseSoftwareInputPanel);
+            if (qApp) {
+                QEvent event(QEvent::CloseSoftwareInputPanel);
+                if (QGraphicsView *view = qobject_cast<QGraphicsView*>(qApp->focusWidget())) {
+                    if (view->scene() && view->scene() == scene()) {
+                        QApplication::sendEvent(view, &closeEvent);
+                    }
+                }
+            }
+        }
+
+        QGraphicsProxyWidget::mousePressEvent(event);
     }
 
 };
@@ -118,6 +145,7 @@ void MobDialogManager::showDialog(QWidget *widget, Plasma::Applet *applet)
             proxy->setGeometry(QRectF(QPointF(4, 4), applet->containment()->size()-QSizeF(18,18)));
         }
     }
+
     Plasma::Animation *fade = Plasma::Animator::create(Plasma::Animator::FadeAnimation, this);
     fade->setTargetWidget(scroll);
     fade->setProperty("startOpacity", 0.0);

@@ -37,7 +37,7 @@
 #include <Plasma/DataEngineManager>
 
 #include "plasmaapp.h"
-#include "singleview.h"
+#include "keyboarddialog.h"
 #include <plasma/containmentactionspluginsconfig.h>
 
 #include <Plasma/DeclarativeWidget>
