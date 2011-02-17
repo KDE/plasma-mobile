@@ -3,12 +3,14 @@
 Name=Mobile icon grid
 Name[nl]=Pictogramraster voor mobiel
 Name[pt]=Grelha de ícones móveis
+Name[pt_BR]=Grade de ícones móveis
 Name[sv]=Ikonrutnät för mobiler
 Name[uk]=Гратка для піктограм мобільної версії
 Name[x-test]=xxMobile icon gridxx
 Comment=Main menu for mobile devices
 Comment[nl]=Hoofdmenu voor mobiele apparaten
 Comment[pt]=Menu principal dos dispositivos móveis
+Comment[pt_BR]=Menu principal dos dispositivos móveis
 Comment[sv]=Huvudmeny för mobilenheter
 Comment[uk]=Головне меню для мобільних пристроїв
 Comment[x-test]=xxMain menu for mobile devicesxx
