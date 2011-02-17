@@ -45,6 +45,7 @@
 #include <Plasma/Wallpaper>
 #include <Plasma/WindowEffects>
 
+
 #include "keyboarddialog.h"
 
 
@@ -231,11 +232,13 @@ void PlasmaApp::setDirection(const QString &direction)
 
 void PlasmaApp::show()
 {
+    Plasma::WindowEffects::slideWindow(m_dialog, m_dialog->location());
     m_dialog->show();
 }
 
 void PlasmaApp::hide()
 {
+    Plasma::WindowEffects::slideWindow(m_dialog, m_dialog->location());
     m_dialog->hide();
 }
 

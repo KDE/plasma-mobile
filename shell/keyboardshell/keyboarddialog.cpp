@@ -47,7 +47,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 {
     setContainment(containment);
     m_containment->setFormFactor(Plasma::Planar);
-    m_containment->setLocation(Plasma::Floating);
+    m_containment->setLocation(Plasma::BottomEdge);
     KWindowSystem::setType(winId(), NET::Dock);
     QFileInfo info(pluginName);
     if (!info.isAbsolute()) {
