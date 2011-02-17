@@ -95,7 +95,6 @@ PlasmaApp::PlasmaApp()
         }
     }
 
-    //newInstance();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
 }
 
@@ -200,7 +199,6 @@ Plasma::Corona* PlasmaApp::corona()
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
 
         m_corona->setItemIndexMethod(QGraphicsScene::NoIndex);
-        //m_corona->initializeLayout();
     }
 
     return m_corona;

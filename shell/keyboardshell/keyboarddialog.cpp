@@ -64,7 +64,6 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 
     m_containment->addApplet(m_applet, QPointF(-1, -1), false);
 
-    //m_applet->setPos(0, 0);
     setGraphicsWidget(m_applet);
 
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
