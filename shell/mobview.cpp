@@ -119,6 +119,14 @@ void MobView::drawBackground(QPainter *painter, const QRectF &rect)
 }
 
 
+bool MobView::event(QEvent *event)
+{
+    if (event->type() == QEvent::WindowActivate) {
+        setFocus();
+    }
+    return Plasma::View::event(event);
+}
+
 void MobView::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event)

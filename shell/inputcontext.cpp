@@ -18,6 +18,7 @@
  ***************************************************************************/
 
 #include <QtCore>
+#include <QApplication>
 
 #include "inputcontext.h"
 #include "keyboard_interface.h"
@@ -36,16 +37,15 @@ InputContext::~InputContext()
 {
 }
 
-
 bool InputContext::filterEvent(const QEvent* event)
 {
     if (event->type() == QEvent::RequestSoftwareInputPanel) {
-        kWarning()<<"Show on screen keyboard";
+        kDebug()<<"Show on screen keyboard";
         m_keyboard->call("show");
         return true;
     } else if (event->type() == QEvent::CloseSoftwareInputPanel) {
         m_keyboard->call("hide");
-        kWarning()<<"hide on screen keyboard";
+        kDebug()<<"hide on screen keyboard";
         return true;
     }
     return false;
@@ -63,7 +63,7 @@ void InputContext::reset()
 
 bool InputContext::isComposing() const
 {
-    return false;
+    return true;
 }
 
 QString InputContext::language()

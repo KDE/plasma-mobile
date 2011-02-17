@@ -69,8 +69,22 @@ Item {
                         anchors.rightMargin: background.margins.right
                         anchors.topMargin: background.margins.top
                         anchors.bottomMargin: background.margins.bottom
+                        activeFocusOnPress: false
                         onTextChanged: {
                             searchTimer.running = true
+                        }
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                if (!searchField.activeFocus) {
+                                    searchField.forceActiveFocus()
+                                    searchField.openSoftwareInputPanel();
+                                    print('aaa')
+                                } else {
+                                    searchField.focus = false;
+                                }
+                            }
+                            onPressAndHold: searchField.closeSoftwareInputPanel();
                         }
                     }
                     PropertyAnimation {
