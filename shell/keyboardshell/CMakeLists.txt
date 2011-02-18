@@ -30,3 +30,4 @@ target_link_libraries(kdeinit_plasma-keyboardcontainer ${KDE4_PLASMA_LIBS} kwork
 install(TARGETS kdeinit_plasma-keyboardcontainer DESTINATION ${LIB_INSTALL_DIR})
 install(TARGETS plasma-keyboardcontainer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
+install(FILES plasma-keyboardshell.desktop DESTINATION ${AUTOSTART_INSTALL_DIR})

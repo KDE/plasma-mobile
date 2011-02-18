@@ -1,0 +1,10 @@
+[Desktop Entry]
+Exec=plasma-keyboardcontainer
+X-DBUS-StartupType=wait
+Name=Plasma Desktop Workspace
+
+Type=Service
+X-KDE-StartupNotify=false
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=0
+
