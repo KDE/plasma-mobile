@@ -22,6 +22,7 @@
 #include <QtDBus/QDBusMessage>
 #include <QtDBus/QDBusConnection>
 #include <QGraphicsLinearLayout>
+#include <QGraphicsView>
 
 // KDE
 
@@ -29,8 +30,10 @@
 #include <KIcon>
 #include <KLineEdit>
 #include <KIconLoader>
+#include <KWindowSystem>
 #include <plasma/widgets/iconwidget.h>
 #include <plasma/tooltipmanager.h>
+#include <Plasma/WindowEffects>
 
 AppSwitcher::AppSwitcher(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
@@ -83,6 +86,8 @@ void AppSwitcher::toggleAppSwitcher()
 #ifdef Q_WS_MAEMO_5
     QDBusMessage signal = QDBusMessage::createSignal("/com/nokia/hildon_desktop", "com.nokia.hildon_desktop", "exit_app_view");
     QDBusConnection::sessionBus().send(signal);
+#else
+    Plasma::WindowEffects::presentWindows(view()->winId() , KWindowSystem::currentDesktop());
 #endif
 }
 
