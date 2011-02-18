@@ -225,11 +225,17 @@ void PlasmaApp::setupHomeScreen()
     m_declarativeWidget = new Plasma::DeclarativeWidget();
     m_corona->addItem(m_declarativeWidget);
 
+    if (m_homeScreenPath.isEmpty()) {
+        kWarning() << "***** m_homeScreenPath is empty, this should not happen. Trying to correct it.";
+        m_homeScreenPath = QString("mobile-homescreen");
+    }
+
     QString qmlPath = KStandardDirs::locate("data", QString("plasma-mobile/%1/HomeScreen.qml").arg(m_homeScreenPath));
     if (qmlPath.isEmpty()) {
         kWarning() << "***** QML File not found.";
-        //kDebug() << "HSP:" << QString(m_homeScreenPath).append("/HomeScreen.qml");
-        //kDebug() << "KSD:" << KStandardDirs::locate("data", "plasma-mobile/mobile-homescreen/HomeScreen.qml");
+        kDebug() << "CFG:" << m_homeScreenPath;
+        kDebug() << "HSP:" << QString(m_homeScreenPath).append("/HomeScreen.qml");
+        kDebug() << "KSD:" << KStandardDirs::locate("data", "plasma-mobile/mobile-homescreen/HomeScreen.qml");
     }
     kDebug() << "QML:" << qmlPath;
     m_declarativeWidget->setQmlPath(qmlPath);
