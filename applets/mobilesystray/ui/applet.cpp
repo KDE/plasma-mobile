@@ -26,12 +26,16 @@
 #include <QSignalMapper>
 
 #include <KIcon>
+#include <KIconLoader>
+#include <KWindowSystem>
 
 #include <plasma/widgets/iconwidget.h>
 #include <plasma/widgets/scrollwidget.h>
 #include <plasma/dataenginemanager.h>
 #include <plasma/containment.h>
 #include <plasma/framesvg.h>
+#include <Plasma/Dialog>
+#include <Plasma/Corona>
 #include "../core/manager.h"
 #include "../core/task.h"
 #include "../protocols/dbussystemtray/dbussystemtraywidget.h"
@@ -43,7 +47,10 @@ Manager *MobileTray::m_manager = 0;
 
 MobileTray::MobileTray(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args),
-    m_mode(PASSIVE), m_notificationsApplet(0), initDone(false)
+      m_mode(PASSIVE),
+      m_notificationsApplet(0),
+      m_appSwitcherDialog(0),
+      initDone(false)
 {
     if (!m_manager) {
         m_manager = new SystemTray::Manager();
@@ -76,6 +83,10 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
 
 MobileTray::~MobileTray()
 {
+    if (m_appSwitcherDialog && m_appSwitcherDialog->graphicsWidget()) {
+        delete m_appSwitcherDialog->graphicsWidget();
+    }
+
     // stop listening to the manager
     disconnect(m_manager, 0, this, 0);
 
@@ -209,8 +220,20 @@ void MobileTray::showWidget(QGraphicsWidget *w, int index)
 }
 
 // create plasmoidtasks out of applets added to the containment
-void MobileTray::addTrayApplet(Plasma::Applet* applet) {
-    m_manager->addApplet(applet, this);
+void MobileTray::addTrayApplet(Plasma::Applet* applet)
+{
+    //treat the appswitcher in a different way: it's wise?
+    if (!m_appSwitcherDialog && applet->pluginName() == "org.kde.appswitcher") {
+        applet->setParentItem(0);
+        corona()->addOffscreenWidget(applet);
+        m_appSwitcherDialog = new Plasma::Dialog();
+        m_appSwitcherDialog->setGraphicsWidget(applet);
+        KWindowSystem::setType(m_appSwitcherDialog->winId(), NET::Dock);
+        m_appSwitcherDialog->show();
+        applet->setMaximumSize(KIconLoader::SizeLarge, KIconLoader::SizeMedium);
+    } else {
+        m_manager->addApplet(applet, this);
+    }
 }
 
 void MobileTray::addTask(SystemTray::Task* task)

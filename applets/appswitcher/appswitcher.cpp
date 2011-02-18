@@ -64,8 +64,8 @@ void AppSwitcher::init()
     Plasma::ToolTipManager::self()->setContent(this, toolTipData);*/
     setAspectRatioMode(Plasma::ConstrainedSquare);
 
-    connect(icon, SIGNAL(pressed(bool)),this, SLOT(toggleAppSwitcher(bool)));
-    connect(this, SIGNAL(activate()), this, SLOT(toggleAppSwitcher()));
+    //connect(icon, SIGNAL(pressed(bool)),this, SLOT(toggleAppSwitcher(bool)));
+    connect(icon, SIGNAL(clicked()), this, SLOT(toggleAppSwitcher()));
 }
 
 AppSwitcher::~AppSwitcher()
@@ -87,7 +87,7 @@ void AppSwitcher::toggleAppSwitcher()
     QDBusMessage signal = QDBusMessage::createSignal("/com/nokia/hildon_desktop", "com.nokia.hildon_desktop", "exit_app_view");
     QDBusConnection::sessionBus().send(signal);
 #else
-    Plasma::WindowEffects::presentWindows(view()->winId() , KWindowSystem::currentDesktop());
+    Plasma::WindowEffects::presentWindows(view()->effectiveWinId() , KWindowSystem::currentDesktop());
 #endif
 }
 

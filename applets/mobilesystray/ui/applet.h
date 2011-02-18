@@ -34,6 +34,7 @@ namespace Plasma
 class IconWidget;
 class ScrollWidget;
 class FrameSvg;
+class Dialog;
 }
 
 class QGraphicsLinearLayout;
@@ -108,6 +109,7 @@ private:
     Plasma::PopupApplet *m_notificationsApplet;
     QGraphicsWidget *m_mainWidget;              // area in the scrollwidget that contains the tray icons
     QTimer *m_resizeTimer;
+    Plasma::Dialog *m_appSwitcherDialog;
     bool initDone;
 };
 
