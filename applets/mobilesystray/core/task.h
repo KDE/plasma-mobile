@@ -179,6 +179,8 @@ public:
      */
     void resetHiddenStatus();
 
+    QHash<Plasma::Applet *, QGraphicsWidget *> widgetsByHost() const;
+
 Q_SIGNALS:
     /**
      * Emitted when something about the task has changed
@@ -194,8 +196,6 @@ Q_SIGNALS:
 
 protected:
     Task(QObject *parent = 0);
-
-    QHash<Plasma::Applet *, QGraphicsWidget *> widgetsByHost() const;
 
     /**
      * Called when a new widget is required

@@ -270,7 +270,11 @@ void MobileTray::removeTask(SystemTray::Task* task)
     }
     if (ic) {
         m_layout->removeItem(ic);
-        delete ic;
+        //plasmoids are already deleted
+
+        if (task->widgetsByHost().contains(this)) {
+            delete ic;
+        }
     }
     resizeContents();
 }
