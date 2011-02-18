@@ -66,9 +66,9 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     addAction(a);
     a->setShortcut(QKeySequence("Ctrl+Shift+R"));
     connect(a, SIGNAL(triggered()), this, SLOT(rotateClockwise()));
-    m_keyboard = new LocalPlasmaKeyboardInterface("org.kde.plasma-keyboardcontainer", "/App",
-                                      QDBusConnection::sessionBus());
-    m_keyboard->call("hide");
+//     m_keyboard = new LocalPlasmaKeyboardInterface("org.kde.plasma-keyboardcontainer", "/App",
+//                                       QDBusConnection::sessionBus());
+//     m_keyboard->call("hide");
 }
 
 MobView::~MobView()
@@ -214,7 +214,7 @@ void MobView::setDirection(const Plasma::Direction direction)
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 
     connect(animation, SIGNAL(finished()), this, SLOT(animationFinished()));
-    m_keyboard->call("setDirection", directionName);
+//     m_keyboard->call("setDirection", directionName);
 }
 
 void MobView::animationFinished()

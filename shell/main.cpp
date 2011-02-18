@@ -27,7 +27,6 @@
 #include <KIcon>
 
 #include "plasmaapp.h"
-#include "inputcontext.h"
 
 static const char description[] = I18N_NOOP( "The KDE desktop, panels and widgets workspace application." );
 static const char version[] = "0.1";
@@ -58,11 +57,6 @@ KDE_EXPORT int kdemain(int argc, char **argv)
     KCmdLineArgs::addCmdLineOptions(options);
 
     PlasmaApp *app = PlasmaApp::self();
-#define CUSTOM_INPUTCONTEXT
-#ifdef CUSTOM_INPUTCONTEXT
-    InputContext *ic = new InputContext;
-    app->setInputContext(ic);
-#endif
 
     QApplication::setWindowIcon(KIcon("plasma"));
     app->disableSessionManagement(); // autostarted

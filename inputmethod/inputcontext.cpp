@@ -19,11 +19,11 @@
 
 #include <QtCore>
 #include <QApplication>
+#include <QDebug>
 
 #include "inputcontext.h"
 #include "keyboard_interface.h"
 
-#include <kdebug.h>
 
 
 InputContext::InputContext()
@@ -40,12 +40,12 @@ InputContext::~InputContext()
 bool InputContext::filterEvent(const QEvent* event)
 {
     if (event->type() == QEvent::RequestSoftwareInputPanel) {
-        kDebug()<<"Show on screen keyboard";
+        qDebug()<<"Show on screen keyboard";
         m_keyboard->call("show");
         return true;
     } else if (event->type() == QEvent::CloseSoftwareInputPanel) {
         m_keyboard->call("hide");
-        kDebug()<<"hide on screen keyboard";
+        qDebug()<<"hide on screen keyboard";
         return true;
     }
     return false;

@@ -13,7 +13,6 @@ set(plasma-mobile_SRCS
     mobview.cpp
     plasmaapp.cpp
     mobdialogmanager.cpp
-    inputcontext.cpp
     
     widgetsexplorer/mobilewidgetsexplorer.cpp
     widgetsexplorer/kcategorizeditemsviewmodels.cpp
@@ -24,7 +23,6 @@ set(plasma-mobile_SRCS
 set(ksmserver_xml ${KDE4_DBUS_INTERFACES_DIR}/org.kde.KSMServerInterface.xml)
 qt4_add_dbus_interface(plasma-mobile_SRCS ${ksmserver_xml} ksmserver_interface)
 
-qt4_add_dbus_interface(plasma-mobile_SRCS org.kde.PlasmaKeyboardShell.xml keyboard_interface)
 
 kde4_add_kdeinit_executable(plasma-mobile ${plasma-mobile_SRCS})
 
