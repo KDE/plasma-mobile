@@ -65,6 +65,8 @@ MobileTray::MobileTray(QObject *parent, const QVariantList &args)
 
     m_scrollWidget = new Plasma::ScrollWidget(this);
     m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_scrollWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_scrollWidget->setOverflowBordersVisible(false);
 
     m_mainWidget = new QGraphicsWidget(this);
     m_layout = new QGraphicsLinearLayout(Qt::Horizontal, m_mainWidget);
