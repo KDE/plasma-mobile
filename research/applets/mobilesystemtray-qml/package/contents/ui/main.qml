@@ -36,20 +36,34 @@ Item {
           }
       }
 
-    Flickable {
-        id: tasksFlickable
-        anchors.fill: parent
-        clip: true
-        interactive:true
-        contentWidth: tasksRow.width
-        contentHeight: tasksRow.height
+    PlasmaCore.Theme {
+        id: theme
+    }
 
-        Row {
-            Item {
-                width: Math.max(0, tasksFlickable.width-tasksRow.width)
-                height: 10
-            }
-            height: tasksFlickable.height
+    PlasmaCore.DataSource {
+        id: timeEngine
+        engine: "time"
+        interval: 30000
+        connectedSources: ["Local"]
+    }
+
+    Item {
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: clockText.left
+        Flickable {
+            id: tasksFlickable
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            clip: true
+            interactive:true
+            contentWidth: tasksRow.width
+            contentHeight: tasksRow.height
+
+            width: Math.min(parent.width, tasksRow.width)
+
             Row {
                 id: tasksRow
 
@@ -66,5 +80,19 @@ Item {
                 }
             }
         }
+    }
+    function formatTime( dateString)
+    {
+        var date = new Date(dateString)
+        return date.getHours()+":"+date.getMinutes()
+    }
+    Text {
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        id: clockText
+        text: formatTime("January 1, 1971 "+timeEngine.data["Local"]["Time"])
+        font.pixelSize: height
+        color: theme.textColor
     }
 }
