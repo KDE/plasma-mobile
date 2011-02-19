@@ -22,6 +22,8 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1 as QtExtra
 
 Item {
+    id: main
+    state: height>48?"active":"passive"
     PlasmaCore.DataSource {
           id: statusNotifierSource
           engine: "statusnotifieritem"
@@ -44,8 +46,11 @@ Item {
 
         Flow {
             id: tasksFlow
-            width: ((tasksFlickable.width<tasksFlickable.height)?tasksFlickable.width:tasksFlickable.width*tasksRepeater.count)
-            height: ((tasksFlickable.width>tasksFlickable.height)?tasksFlickable.height:tasksFlickable.height*tasksRepeater.count)
+            property bool horizontal: tasksFlickable.width>tasksFlickable.height
+            property int totalWidth: tasksFlickable.height*tasksRepeater.count
+            property int totalHeight: tasksFlickable.width*tasksRepeater.count
+            width: !horizontal?tasksFlickable.width:totalWidth
+            height: horizontal?tasksFlickable.height:totalHeight
 
             Repeater {
                 id: tasksRepeater

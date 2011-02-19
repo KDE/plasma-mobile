@@ -25,6 +25,7 @@ Item  {
     id: taskIcon
     width: Math.min(parent.width, parent.height)
     height: width
+    visible: main.state == "active" || Status != "Passive"
 
     PlasmaCore.Svg{
         id: iconSvg
