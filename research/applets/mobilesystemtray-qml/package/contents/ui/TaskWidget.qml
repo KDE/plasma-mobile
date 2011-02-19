@@ -26,14 +26,32 @@ Item  {
     width: Math.min(parent.width, parent.height)
     height: width
 
+    PlasmaCore.Svg{
+        id: iconSvg
+        imagePath: "icons/"+String(IconName).split('-')[0]
+        Component.onCompleted: {
+            var hasSvg = iconSvg.hasElement(IconName)
+            normalIcon.visible = !hasSvg
+            svgItemIcon.visible = hasSvg
+        }
+    }
+
     QtExtra.QIconItem {
+        id: normalIcon
         anchors.fill: parent
         icon: Icon
+    }
+    PlasmaCore.SvgItem {
+        id: svgItemIcon
+        anchors.fill: parent
+        svg: iconSvg
+        elementId: IconName
     }
 
     MouseArea {
         anchors.fill: taskIcon
         onClicked: {
+            print(iconSvg.hasElement(IconName))
             var service = statusNotifierSource.serviceForSource(DataEngineSource)
             var operation = service.operationDescription("Activate")
             operation.x = parent.x
