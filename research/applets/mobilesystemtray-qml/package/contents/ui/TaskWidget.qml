@@ -21,28 +21,24 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1 as QtExtra
 
-Item {
-    PlasmaCore.DataSource {
-          id: statusNotifierSource
-          engine: "statusnotifieritem"
-          interval: 0
-          onSourceAdded: {
-             connectSource(source)
-          }
-          Component.onCompleted: {
-              connectedSources = sources
-          }
-      }
+Item  {
+    id: taskIcon
+    width: Math.min(parent.width, parent.height)
+    height: width
 
-    Flow {
+    QtExtra.QIconItem {
         anchors.fill: parent
-        Repeater {
-            model:  PlasmaCore.DataModel {
-                dataSource: statusNotifierSource
-            }
-            delegate: TaskWidget {
-                
-            }
+        icon: Icon
+    }
+
+    MouseArea {
+        anchors.fill: taskIcon
+        onClicked: {
+            var service = statusNotifierSource.serviceForSource(DataEngineSource)
+            var operation = service.operationDescription("Activate")
+            operation.x = parent.x
+            operation.y = parent.y
+            service.startOperationCall(operation)
         }
     }
 }
