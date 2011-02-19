@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=A Quick Dialer (QML)
+Name[es]=Un marcador rápido (QML)
 Name[nl]=Een snelle kiezer (QML)
 Name[pt]=Um Marcador Rápido (QML)
 Name[pt_BR]=Um discador rápido (QML)
@@ -8,6 +9,7 @@ Name[sv]=En snabbuppringare (QML)
 Name[uk]=Швидкий набір (QML)
 Name[x-test]=xxA Quick Dialer (QML)xx
 Comment=A quick dialer to call a number
+Comment[es]=Un marcador rápido para llamar a un número
 Comment[nl]=Een snelle kiezer om een nummer te bellen
 Comment[pt]=Um marcador rápido para indicar um número
 Comment[pt_BR]=Um discador rápido para chamar um número
