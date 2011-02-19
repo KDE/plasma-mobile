@@ -34,14 +34,27 @@ Item {
           }
       }
 
-    Flow {
+    Flickable {
+        id: tasksFlickable
         anchors.fill: parent
-        Repeater {
-            model:  PlasmaCore.DataModel {
-                dataSource: statusNotifierSource
-            }
-            delegate: TaskWidget {
-                
+        clip: true
+        interactive:true
+        contentWidth: tasksFlow.width
+        contentHeight: tasksFlow.height
+
+        Flow {
+            id: tasksFlow
+            width: ((tasksFlickable.width<tasksFlickable.height)?tasksFlickable.width:tasksFlickable.width*tasksRepeater.count)
+            height: ((tasksFlickable.width>tasksFlickable.height)?tasksFlickable.height:tasksFlickable.height*tasksRepeater.count)
+
+            Repeater {
+                id: tasksRepeater
+                model:  PlasmaCore.DataModel {
+                    dataSource: statusNotifierSource
+                }
+                delegate: TaskWidget {
+                    
+                }
             }
         }
     }
