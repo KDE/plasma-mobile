@@ -41,24 +41,28 @@ Item {
         anchors.fill: parent
         clip: true
         interactive:true
-        contentWidth: tasksFlow.width
-        contentHeight: tasksFlow.height
+        contentWidth: tasksRow.width
+        contentHeight: tasksRow.height
 
-        Flow {
-            id: tasksFlow
-            property bool horizontal: tasksFlickable.width>tasksFlickable.height
-            property int totalWidth: tasksFlickable.height*tasksRepeater.count
-            property int totalHeight: tasksFlickable.width*tasksRepeater.count
-            width: !horizontal?tasksFlickable.width:totalWidth
-            height: horizontal?tasksFlickable.height:totalHeight
+        Row {
+            Item {
+                width: Math.max(0, tasksFlickable.width-tasksRow.width)
+                height: 10
+            }
+            height: tasksFlickable.height
+            Row {
+                id: tasksRow
 
-            Repeater {
-                id: tasksRepeater
-                model:  PlasmaCore.DataModel {
-                    dataSource: statusNotifierSource
-                }
-                delegate: TaskWidget {
-                    
+                height: tasksFlickable.height
+
+                Repeater {
+                    id: tasksRepeater
+                    model:  PlasmaCore.DataModel {
+                        dataSource: statusNotifierSource
+                    }
+                    delegate: TaskWidget {
+                        
+                    }
                 }
             }
         }

@@ -23,7 +23,7 @@ import org.kde.qtextracomponents 0.1 as QtExtra
 
 Item  {
     id: taskIcon
-    width: Math.min(parent.width, parent.height)
+    width: Math.min(main.width, main.height)
     height: width
     visible: main.state == "active" || Status != "Passive"
 
