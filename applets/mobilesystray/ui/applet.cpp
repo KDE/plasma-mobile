@@ -166,7 +166,7 @@ void MobileTray::constraintsEvent(Plasma::Constraints constraints)
 
 void MobileTray::resizeContents() {
     // Somewhat less ugly now, but still looks kinda funny..
-    int iconHeight = size().height() - 15;
+    int iconHeight = contentsRect().height();
 
     m_mainWidget->setPreferredHeight(iconHeight);
     // enlarge each applet
