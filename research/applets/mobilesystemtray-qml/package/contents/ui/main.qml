@@ -23,7 +23,30 @@ import org.kde.qtextracomponents 0.1 as QtExtra
 
 Item {
     id: main
+    signal shrinkRequested
     state: height>48?"active":"passive"
+
+    Component.onCompleted: {
+        plasmoid.appletAdded.connect(addApplet)
+
+        for (var i = 0; i<plasmoid.applets.length; ++i) {
+            addApplet(plasmoid.applets[i], 0);
+        }
+    }
+
+
+    function addApplet(applet, pos)
+    {
+        var component = Qt.createComponent("PlasmoidContainer.qml");
+        var plasmoidContainer = component.createObject(tasksRow, {"x": pos.x, "y": pos.y});
+        plasmoidContainer.plasmoid = applet
+        applet.parent = plasmoidContainer
+        applet.x=0
+    }
+
+
+
+
     PlasmaCore.DataSource {
           id: statusNotifierSource
           engine: "statusnotifieritem"
@@ -51,7 +74,7 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: parent.left
-        anchors.right: clockText.left
+        anchors.right: parent.right
         Flickable {
             id: tasksFlickable
             anchors.top: parent.top
@@ -86,13 +109,22 @@ Item {
         var date = new Date(dateString)
         return date.getHours()+":"+date.getMinutes()
     }
-    Text {
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        id: clockText
-        text: formatTime("January 1, 1971 "+timeEngine.data["Local"]["Time"])
-        font.pixelSize: height
-        color: theme.textColor
+
+    PlasmaCore.SvgItem {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.bottom
+        width: 48
+        height: 48
+        visible: main.state == "active"
+        svg: PlasmaCore.Svg {
+            imagePath: "widgets/arrows"
+        }
+        elementId: "up-arrow"
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                main.shrinkRequested()
+            }
+        }
     }
 }
