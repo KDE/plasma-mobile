@@ -83,7 +83,6 @@ private Q_SLOTS:
     void slideActivities();
     void updateMainSlot();
     void lockScreen();
-    void resizeTray();
     void shrinkTray();
     void showWidgetsExplorer();
     void mainViewGeometryChanged();

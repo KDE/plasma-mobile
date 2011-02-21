@@ -23,6 +23,28 @@ Item {
     id: systraypanel;
     state: "passive";
 
+    property QGraphicsWidget containment
+
+    onContainmentChanged: timer.running = true
+    onHeightChanged: resizeTimer.running = true
+    onWidthChanged: resizeTimer.running = true
+
+    Timer {
+        id: resizeTimer
+        interval: 1200
+        running: false
+        repeat: false
+        onTriggered: resizeContainment()
+     }
+
+    function resizeContainment()
+    {
+        containment.x = 0
+        containment.y = 0
+        containment.height = height
+        containment.width = width
+    }
+
     states: [
         State {
             name: "active";
