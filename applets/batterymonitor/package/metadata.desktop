@@ -1,0 +1,20 @@
+[Desktop Entry]
+Comment=Simple battery monitor
+Encoding=UTF-8
+Keywords=Power Management, Battery, System, Energy
+Name=Simple Battery
+Type=Service
+Icon=battery
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Sebastian Kügler
+X-KDE-PluginInfo-Category=System Information
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.batterymonitor
+X-KDE-PluginInfo-Version=
+X-KDE-PluginInfo-Website=http://vizZzion.org
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-DefaultSize=100,100
+X-Plasma-MainScript=code/batterymonitor.qml
+X-Plasma-RemoteLocation=

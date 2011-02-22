@@ -71,7 +71,7 @@ zvalue=0
 [Containments][8][Applets][10]
 geometry=2,0,24,24
 immutability=1
-plugin=org.kde.fakebattery
+plugin=org.kde.batterymonitor
 zvalue=0
 
 [Containments][8][Applets][12]
