@@ -27,7 +27,7 @@ Item {
     PlasmaCore.FrameSvgItem {
         id: hideButtonBackground
         anchors.top: systrayBackground.bottom
-        anchors.topMargin: -12
+        anchors.topMargin: -10
         anchors.horizontalCenter: systrayBackground.horizontalCenter
         width: 128
         height: 58
@@ -62,13 +62,22 @@ Item {
         anchors.fill: systrayPanel
         imagePath: "widgets/background"
         enabledBorders: "LeftBorder|RightBorder|BottomBorder"
+        Item {
+            id: containmentParent
+            anchors.fill: parent
+            anchors.topMargin: systrayBackground.margins.top
+            anchors.bottomMargin: systrayBackground.margins.bottom
+            anchors.leftMargin: systrayBackground.margins.left
+            anchors.rightMargin: systrayBackground.margins.right
+        }
+        z: 10
     }
 
     property QGraphicsWidget containment
 
     onContainmentChanged: {
+        containment.parent = containmentParent
         timer.running = true
-        containment.stateChanged.connect(updateState)
     }
     onHeightChanged: resizeTimer.running = true
     onWidthChanged: resizeTimer.running = true
@@ -87,11 +96,11 @@ Item {
      }
 
     function resizeContainment()
-    {
-        containment.x = systrayBackground.margins.left
-        containment.y = systrayBackground.margins.top
-        containment.height = height - systrayBackground.margins.bottom
-        containment.width = width - systrayBackground.margins.left - systrayBackground.margins.right
+    {print(containmentParent.height)
+        containment.x = 0
+        containment.y = 0
+        containment.height = containmentParent.height
+        containment.width = containmentParent.width
     }
 
     states: [
@@ -103,7 +112,7 @@ Item {
                 width: parent.width;
             }
             PropertyChanges {
-                target: systrayPanelarea;
+                target: systrayPanelArea;
                 z : 0;
             }
         },
@@ -115,7 +124,7 @@ Item {
                 width: 300;
             }
             PropertyChanges {
-                target: systrayPanelarea;
+                target: systrayPanelArea;
                 z : 500;
             }
         }
@@ -127,6 +136,12 @@ Item {
             from: "passive"; to: "active"; reversible: true;
             SequentialAnimation {
                 NumberAnimation {
+                    properties: "opacity";
+                    target: containmentParent
+                    duration: 200;
+                    easing.type: Easing.InOutQuad;
+                }
+                NumberAnimation {
                     properties: "x, width, height";
                     duration: 500;
                     easing.type: Easing.InOutQuad;
@@ -135,11 +150,10 @@ Item {
         }
     ]
     MouseArea {
-        id: systrayPanelarea;
+        id: systrayPanelArea;
         anchors.fill: parent;
         onClicked: {
             systrayPanel.state = (systrayPanel.state == "active") ? "passive" : "active";
-            containment.state = systrayPanel.state
         }
         z: 500;
     }
