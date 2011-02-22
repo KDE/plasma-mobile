@@ -18,10 +18,41 @@
  ***************************************************************************/
 
 import Qt 4.7
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: systraypanel;
     state: "passive";
+
+    property QGraphicsWidget containment
+
+    onContainmentChanged: {
+        timer.running = true
+        containment.stateChanged.connect(updateState)
+    }
+    onHeightChanged: resizeTimer.running = true
+    onWidthChanged: resizeTimer.running = true
+
+    function updateState()
+    {
+        state = containment.state
+    }
+
+    Timer {
+        id: resizeTimer
+        interval: 100
+        running: false
+        repeat: false
+        onTriggered: resizeContainment()
+     }
+
+    function resizeContainment()
+    {
+        containment.x = 0
+        containment.y = 0
+        containment.height = height
+        containment.width = width
+    }
 
     states: [
         State {
@@ -68,7 +99,25 @@ Item {
         anchors.fill: parent;
         onClicked: {
             systraypanel.state = (systraypanel.state == "active") ? "passive" : "active";
+            containment.state = systraypanel.state
         }
         z: 500;
+    }
+    PlasmaCore.SvgItem {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.bottom
+        width: 48
+        height: 48
+        visible: systraypanel.state == "active"
+        svg: PlasmaCore.Svg {
+            imagePath: "widgets/arrows"
+        }
+        elementId: "up-arrow"
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                systraypanel.state = "passive"
+            }
+        }
     }
 }
