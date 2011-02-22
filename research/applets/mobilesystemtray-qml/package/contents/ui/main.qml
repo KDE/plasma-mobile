@@ -27,6 +27,8 @@ Item {
     state: height>48?"active":"passive"
 
     Component.onCompleted: {
+        plasmoid.drawWallpaper = false
+        plasmoid.containmentType = "CustomPanelContainment"
         plasmoid.appletAdded.connect(addApplet)
 
         for (var i = 0; i<plasmoid.applets.length; ++i) {
