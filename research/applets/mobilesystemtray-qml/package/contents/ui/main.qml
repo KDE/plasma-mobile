@@ -104,27 +104,4 @@ Item {
             }
         }
     }
-    function formatTime( dateString)
-    {
-        var date = new Date(dateString)
-        return date.getHours()+":"+date.getMinutes()
-    }
-
-    PlasmaCore.SvgItem {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.bottom
-        width: 48
-        height: 48
-        visible: main.state == "active"
-        svg: PlasmaCore.Svg {
-            imagePath: "widgets/arrows"
-        }
-        elementId: "up-arrow"
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                main.shrinkRequested()
-            }
-        }
-    }
 }
