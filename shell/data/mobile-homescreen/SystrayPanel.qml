@@ -33,7 +33,11 @@ Item {
         height: 58
         imagePath: "widgets/background"
         enabledBorders: "LeftBorder|RightBorder|BottomBorder"
-        visible: systrayPanel.state == "active"
+        opacity: systrayPanel.state == "active"?1:0
+
+        Behavior on opacity {
+            NumberAnimation { duration: 500 }
+        }
 
         PlasmaCore.SvgItem {
             anchors.centerIn: parent
@@ -69,6 +73,10 @@ Item {
             anchors.bottomMargin: systrayBackground.margins.bottom
             anchors.leftMargin: systrayBackground.margins.left
             anchors.rightMargin: systrayBackground.margins.right
+
+            Behavior on opacity {
+                NumberAnimation { duration: 200 }
+            }
         }
         z: 10
     }
@@ -93,10 +101,17 @@ Item {
         running: false
         repeat: false
         onTriggered: resizeContainment()
+        onRunningChanged: {
+            if (running) {
+                containmentParent.opacity = 0
+            } else {
+                containmentParent.opacity = 1
+            }
+        }
      }
 
     function resizeContainment()
-    {print(containmentParent.height)
+    {
         containment.x = 0
         containment.y = 0
         containment.height = containmentParent.height
@@ -133,18 +148,14 @@ Item {
 
     transitions: [
         Transition {
-            from: "passive"; to: "active"; reversible: true;
+            from: "passive"
+            to: "active"
+            reversible: true
             SequentialAnimation {
                 NumberAnimation {
-                    properties: "opacity";
-                    target: containmentParent
-                    duration: 200;
-                    easing.type: Easing.InOutQuad;
-                }
-                NumberAnimation {
-                    properties: "x, width, height";
-                    duration: 500;
-                    easing.type: Easing.InOutQuad;
+                    properties: "x, width, height"
+                    duration: 500
+                    easing.type: Easing.InOutQuad
                 }
             }
         }
