@@ -65,7 +65,7 @@ Item {
         id: systrayBackground
         anchors.fill: systrayPanel
         imagePath: "widgets/background"
-        enabledBorders: "LeftBorder|RightBorder|BottomBorder"
+        enabledBorders: width < systrayPanel.parent.width?"LeftBorder|RightBorder|BottomBorder":"BottomBorder"
         Item {
             id: containmentParent
             anchors.fill: parent
