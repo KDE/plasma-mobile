@@ -2,6 +2,7 @@
 Exec=plasma-keyboardcontainer
 X-DBUS-StartupType=wait
 Name=Plasma Desktop Workspace
+Name[de]=Plasma-Arbeitsflächenbereiche
 Name[nl]=Plasma Bureaubladwerkruimte
 Name[pt]=Espaço do Ecrã do Plasma
 Name[pt_BR]=Espaço de trabalho do Plasma
