@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Preview
+Comment=Shows previews for webpages
+X-KDE-ServiceTypes=Plasma/DataEngine
+Type=Service
+Icon=preview
+X-KDE-Library=plasma_engine_preview
+
+X-KDE-PluginInfo-Author=Sebastian Kügler
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-Name=preview
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://kde.org
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+
