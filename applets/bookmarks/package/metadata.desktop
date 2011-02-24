@@ -1,0 +1,20 @@
+[Desktop Entry]
+Comment=Favorites
+Encoding=UTF-8
+Keywords=Online Services, Web
+Name=Your Bookmarks
+Type=Service
+Icon=bookmarks
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Sebastian Kügler
+X-KDE-PluginInfo-Category=Online Services
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.favorites
+X-KDE-PluginInfo-Version=
+X-KDE-PluginInfo-Website=http://vizZzion.org
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-DefaultSize=100,100
+X-Plasma-MainScript=code/bookmarks.qml
+X-Plasma-RemoteLocation=
