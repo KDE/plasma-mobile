@@ -17,7 +17,6 @@
     02110-1301, USA.
 */
 
-
 #include "previewengine.h"
 #include "kwebthumbnailer.h"
 
@@ -59,15 +58,14 @@ QStringList PreviewEngine::sources() const
 bool PreviewEngine::sourceRequestEvent(const QString &name)
 {
     kDebug() << "Source requested:" << name << sources();
-    setData(name, DataEngine::Data());
+    //setData(name, DataEngine::Data());
 
     if (name.startsWith("http")) { // lame check.
-        KWebThumbnailer* wtn = new KWebThumbnailer(QUrl(name), QSize(320, 320), this);
-        setData(thumbnailerSource(wtn), "status", "working");
+        KWebThumbnailer* wtn = new KWebThumbnailer(QUrl(name), QSize(180, 120), this);
+        //setData(thumbnailerSource(wtn), "status", "working");
         connect(wtn, SIGNAL(done(bool)), SLOT(thumbnailerDone(bool)));
         wtn->start();
-
-        scheduleSourcesUpdated();
+        updateData(wtn);
         return true;
     }
 
@@ -76,7 +74,8 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
 
 QLatin1String PreviewEngine::sizeString(const QSize &s)
 {
-    return QLatin1String("320x320");
+    //return QLatin1String("320x320");
+    return QLatin1String("thumbnail");
     //return QString("%1x%2").arg(s.width(), s.height()).toLatin1();
 }
 
@@ -89,7 +88,7 @@ QString PreviewEngine::thumbnailerSource(KWebThumbnailer* nailer)
 
 void PreviewEngine::thumbnailerDone(bool success)
 {
-    kDebug() << "done...";
+    //kDebug() << "done...";
     KWebThumbnailer* wtn = static_cast<KWebThumbnailer*>(sender());
     if (!wtn) {
         kWarning() << "wrong sender";
@@ -101,11 +100,18 @@ void PreviewEngine::thumbnailerDone(bool success)
     }
     QLatin1String key = sizeString(wtn->size());
     QImage image = wtn->thumbnail();
-    setData(wtn->url().toString(), key, image);
-    kDebug() << "Set Data:" << wtn->url() << key << image.height() << image.width();
-    setData(thumbnailerSource(wtn), "status", "success");
-    scheduleSourcesUpdated();
+    //setData(wtn->url().toString(), key, image);
+    kDebug() << "Thumbnail set:" << wtn->url() << key << image.height() << image.width();
+    updateData(wtn);
 }
 
+void PreviewEngine::updateData(KWebThumbnailer* wtn)
+{
+    //setData(thumbnailerSource(wtn), "status", wtn->status());
+    //setData(thumbnailerSource(wtn), "url", wtn->url().toString());
+    setData(thumbnailerSource(wtn), "fileName", wtn->fileName());
+    //setData(thumbnailerSource(wtn), "thumbnail", wtn->thumbnail());
+    scheduleSourcesUpdated();
+}
 
 #include "previewengine.moc"

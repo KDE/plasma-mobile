@@ -25,6 +25,8 @@ public:
     QUrl url();
     QSize size();
     QImage thumbnail() const;
+    QString fileName();
+    QString status();
 
     bool isValid() const;
 

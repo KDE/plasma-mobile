@@ -5,6 +5,10 @@
 #include <QtWebKit/QWebFrame>
 
 #include "kwebthumbnailer.h"
+#include <KTemporaryFile>
+#include <KLocalizedString>
+
+#include <kdebug.h>
 
 class KWebThumbnailerPrivate
 {
@@ -16,6 +20,8 @@ public:
     QImage thumbnail;
     QSize size;
     QUrl url;
+    QString fileName;
+    QString status;
 };
 
 KWebThumbnailer::KWebThumbnailer( QObject *parent )
@@ -30,6 +36,8 @@ KWebThumbnailer::KWebThumbnailer( const QUrl &url, const QSize &size, QObject *p
 {
     d->url = url;
     d->size = size;
+    d->status = i18nc("status of thumbnail loader", "Idle");
+    //d->fileName = "/tmp/bla.png";
 }
 
 KWebThumbnailer::~KWebThumbnailer()
@@ -57,8 +65,28 @@ void KWebThumbnailer::setSize( const QSize &size )
     d->size = size;
 }
 
+QString KWebThumbnailer::fileName()
+{
+    if (d->fileName.isEmpty()) {
+        KTemporaryFile tmp;
+        tmp.setSuffix(".png");
+        tmp.open();
+        d->fileName = tmp.fileName();
+        tmp.close();
+        kDebug() << "OOO OOO OOO Image saved as " << d->fileName;
+        //d->fileName = "file:///tmp/bla.png";
+    }
+    return d->fileName;
+}
+
+QString KWebThumbnailer::status()
+{
+    return d->status;
+}
+
 void KWebThumbnailer::start()
 {
+    d->status = i18nc("status of thumbnail loader", "Loading...");
     d->page = new QWebPage( this );
     d->page->mainFrame()->setScrollBarPolicy( Qt::Horizontal, Qt::ScrollBarAlwaysOff );
     d->page->mainFrame()->setScrollBarPolicy( Qt::Vertical, Qt::ScrollBarAlwaysOff );
@@ -70,12 +98,13 @@ void KWebThumbnailer::start()
 void KWebThumbnailer::completed( bool success )
 {
     if ( !success ) {
-	delete d->page;
-	d->page = 0;
-	d->thumbnail = QImage();
-	emit done(false);
+        delete d->page;
+        d->page = 0;
+        d->thumbnail = QImage();
+        d->status = i18nc("status of thumbnail loader", "Failed");
+        emit done(false);
 
-	return;
+        return;
     }
 
     // find proper size, we stick to sensible aspect ratio
@@ -96,6 +125,10 @@ void KWebThumbnailer::completed( bool success )
 
     delete d->page;
     d->page = 0;
+
+    d->thumbnail.save(fileName());
+    kDebug() << "SAVED IMAGE TO:" << fileName();
+    d->status = i18nc("status of thumbnail loader", "Loaded");
 
     emit done(success);
 }
