@@ -1,5 +1,6 @@
 add_subdirectory(appswitcher)
 add_subdirectory(batterymonitor)
+add_subdirectory(bookmarks)
 add_subdirectory(quickdialer)
 add_subdirectory(mobilesystray)
 #add_subdirectory(fakebattery)

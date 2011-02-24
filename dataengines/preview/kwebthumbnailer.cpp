@@ -67,15 +67,6 @@ void KWebThumbnailer::setSize( const QSize &size )
 
 QString KWebThumbnailer::fileName()
 {
-    if (d->fileName.isEmpty()) {
-        KTemporaryFile tmp;
-        tmp.setSuffix(".png");
-        tmp.open();
-        d->fileName = tmp.fileName();
-        tmp.close();
-        kDebug() << "OOO OOO OOO Image saved as " << d->fileName;
-        //d->fileName = "file:///tmp/bla.png";
-    }
     return d->fileName;
 }
 
@@ -125,6 +116,17 @@ void KWebThumbnailer::completed( bool success )
 
     delete d->page;
     d->page = 0;
+
+    if (d->fileName.isEmpty()) {
+        KTemporaryFile tmp;
+        tmp.setSuffix(".png");
+        tmp.open();
+        d->fileName = tmp.fileName();
+        tmp.close();
+        kDebug() << "OOO OOO OOO Image saved as " << d->fileName;
+        //d->fileName = "file:///tmp/bla.png";
+    }
+
 
     d->thumbnail.save(fileName());
     kDebug() << "SAVED IMAGE TO:" << fileName();

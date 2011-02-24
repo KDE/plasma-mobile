@@ -39,88 +39,49 @@ Item {
             "http://www.tweakers.net"
         ]
         interval: 0
-        /*
-        onSourceAdded: {
-            connectSource(source)
-        }
-        onDataUpdated: {
-            console.log("=+++++++ DATA UPDATED");
-        }
-        Component.onCompleted: {
-            console.log("sources connected:" + connectedSources);
-            //connectedSources = sources
-        }
-        */
     }
-    /*
-    Image {
-        width: 320
-        height: 320
-        //source: "/tmp/bla.png"
-        anchors.fill: itemFrame
-    }
-    */
+
     ListView {
         anchors.fill: parent
         snapMode: ListView.SnapToItem
         clip: true
         highlightMoveDuration: 300
+        spacing: 8;
 
         model: PlasmaCore.DataModel {
             dataSource: previewSource
         }
-        spacing: 8;
-        //Rectangle {
-        //    anchors.fill: parent
-        //    color: red
-            //opacity: 0.5
-        //}
+
         delegate: Item {
             id: bookmarkItem
-            height: 120
-            //clip: true
-            //property string filename: previewSource.data[DataEngineSource]["fileName"]
-            //property string filename: "/tmp/sebas-kde4/kde-sebas/plasma_engine_previewengineT20455.png"
-            //PlasmaWidgets.Frame {
-            //    anchors.fill: parent
-            //}
+            height: 24
 
             PlasmaWidgets.Frame {
                 id: itemFrame
                 anchors.fill: parent;
                 frameShadow: "Raised"
-                
 
                 Image {
                     id: previewImage
                     //image: previewSource.data[DataEngineSource]["fileName"]
                     source: fileName
-                    //image: "/tmp/sebas-kde4/kde-sebas/plasma_engine_previewenginef21610.png"
-                    //source: "/tmp/bla.png"
-                    height:120
-                    width: 180
-                    //anchors.fill: itemFrame;
-                    //anchors.left: itemFrame.left
-                    //anchors.bottom: itemFrame.bottom
-                    //anchors.top: itemFrame.top
+                    height:32
+                    width: 42
 
                 }
+
                 PlasmaWidgets.Label {
-                    //image: previewSource.data[DataEngineSource]["fileName"]
                     text: {
-                        var s = DataEngineSource;
+                        var s = url;
                         s = s.replace("http://", "");
                         s = s.replace("www.", "");
                         console.log(s + s.length);
 
                         return s;
                     }
-                    font.pixelSize: font.pixelSize * 2.2
+                    font.pixelSize: 14
+                    font.bold: true
 
-                    //image: "/tmp/bla.png"
-                    //text: previewSource.connectedSources[0]
-                    //source: "/tmp/bla.png"
-                    //height:100
                     width: 400
                     id: previewLabel
                     anchors.top: itemFrame.top
@@ -129,25 +90,24 @@ Item {
                     anchors.right: itemFrame.right
 
                 }
-                PlasmaWidgets.Label {
+
+                Text {
                     //image: previewSource.data[DataEngineSource]["fileName"]
                     text: "To specify that an image should be loaded by an image provider, use the \"image:\" scheme for the URL source of the image, followed by the identifiers of the image provider and the requested image. For example:"
                     opacity: 0.6
                     //font.pixelSize: font.pixelSize * 1.8
-
-                    //image: "/tmp/bla.png"
-                    //text: previewSource.connectedSources[0]
-                    //source: "/tmp/bla.png"
-                    //height:100
-                    height: 80
-                    width: 400
+                    font.pixelSize: 11
+                    height: 14
+                    width: 200
                     id: infoLabel
+                    wrapMode: Text.Wrap
                     anchors.right: itemFrame.right
                     anchors.top: previewLabel.bottom
                     anchors.bottom: itemFrame.bottom
                     anchors.left: previewImage.right
 
                 }
+
                 Component.onCompleted: {
                     return;
                     /*
@@ -164,7 +124,6 @@ Item {
                         }
                     }
                     */
-
                 }
             }
         }

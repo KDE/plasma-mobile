@@ -37,8 +37,7 @@ PreviewEngine::PreviewEngine(QObject* parent, const QVariantList& args)
 
     d->i = 0;
     setMaxSourceCount(64); // Guard against loading too many connections
-
-    //init();
+    init();
 }
 
 void PreviewEngine::init()
@@ -58,11 +57,9 @@ QStringList PreviewEngine::sources() const
 bool PreviewEngine::sourceRequestEvent(const QString &name)
 {
     kDebug() << "Source requested:" << name << sources();
-    //setData(name, DataEngine::Data());
 
     if (name.startsWith("http")) { // lame check.
         KWebThumbnailer* wtn = new KWebThumbnailer(QUrl(name), QSize(180, 120), this);
-        //setData(thumbnailerSource(wtn), "status", "working");
         connect(wtn, SIGNAL(done(bool)), SLOT(thumbnailerDone(bool)));
         wtn->start();
         updateData(wtn);
@@ -74,7 +71,7 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
 
 QLatin1String PreviewEngine::sizeString(const QSize &s)
 {
-    //return QLatin1String("320x320");
+    Q_UNUSED(s)
     return QLatin1String("thumbnail");
     //return QString("%1x%2").arg(s.width(), s.height()).toLatin1();
 }
@@ -82,13 +79,10 @@ QLatin1String PreviewEngine::sizeString(const QSize &s)
 QString PreviewEngine::thumbnailerSource(KWebThumbnailer* nailer)
 {
     return nailer->url().toString();
-    //return QLatin1String("320x320");
-    //return QString("%1x%2").arg(s.width(), s.height()).toLatin1();
 }
 
 void PreviewEngine::thumbnailerDone(bool success)
 {
-    //kDebug() << "done...";
     KWebThumbnailer* wtn = static_cast<KWebThumbnailer*>(sender());
     if (!wtn) {
         kWarning() << "wrong sender";
@@ -100,18 +94,17 @@ void PreviewEngine::thumbnailerDone(bool success)
     }
     QLatin1String key = sizeString(wtn->size());
     QImage image = wtn->thumbnail();
-    //setData(wtn->url().toString(), key, image);
     kDebug() << "Thumbnail set:" << wtn->url() << key << image.height() << image.width();
     updateData(wtn);
 }
 
 void PreviewEngine::updateData(KWebThumbnailer* wtn)
 {
-    //setData(thumbnailerSource(wtn), "status", wtn->status());
-    //setData(thumbnailerSource(wtn), "url", wtn->url().toString());
+    setData(thumbnailerSource(wtn), "status", wtn->status());
+    setData(thumbnailerSource(wtn), "url", wtn->url().toString());
     setData(thumbnailerSource(wtn), "fileName", wtn->fileName());
-    //setData(thumbnailerSource(wtn), "thumbnail", wtn->thumbnail());
-    scheduleSourcesUpdated();
+    setData(thumbnailerSource(wtn), "thumbnail", wtn->thumbnail());
+    if (!wtn->fileName().isEmpty()) scheduleSourcesUpdated();
 }
 
 #include "previewengine.moc"
