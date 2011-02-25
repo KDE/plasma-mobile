@@ -28,7 +28,9 @@ Item {
 
     Component.onCompleted: {
         plasmoid.drawWallpaper = false
-        plasmoid.containmentType = "CustomPanelContainment"
+
+        plasmoid.containmentType = "CustomContainment"
+
         plasmoid.appletAdded.connect(addApplet)
 
         for (var i = 0; i < plasmoid.applets.length; ++i) {
@@ -36,6 +38,10 @@ Item {
             if (applet.pluginName == "org.kde.appswitcher") {
                 switcherDialog.mainItem = applet
                 switcherDialog.visible = true
+
+                switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
+                switcherDialog.x = 0
+                switcherDialog.y = 0
                 applet.size = "48x48";
             } else {
                 addApplet(applet, 0);
