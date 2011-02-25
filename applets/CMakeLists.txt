@@ -1,8 +1,10 @@
 add_subdirectory(appswitcher)
 add_subdirectory(batterymonitor)
-add_subdirectory(bookmarks)
-add_subdirectory(quickdialer)
-add_subdirectory(mobilesystray)
 #add_subdirectory(fakebattery)
 add_subdirectory(fakesignal)
 add_subdirectory(fakecontactlist)
+add_subdirectory(favorites)
+add_subdirectory(mobilesystray)
+
+add_subdirectory(qtwebbrowser)
+add_subdirectory(quickdialer)
