@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=Touch Browser
+Comment=Touchscreen friendly simple web browser
+Encoding=UTF-8
+Type=Service
+Icon=internet-web-browser
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Qt at Nokia
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-Name=qtwebbrowser
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://qt.nokia.com/
+X-KDE-PluginInfo-Category=Online Services
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-API=declarativeappletscript
+X-Plasma-DefaultSize=100,100
+X-Plasma-MainScript=code/webbrowser.qml
+X-Plasma-RemoteLocation=
