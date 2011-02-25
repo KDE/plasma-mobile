@@ -36,6 +36,7 @@ Item {
             if (applet.pluginName == "org.kde.appswitcher") {
                 switcherDialog.mainItem = applet
                 switcherDialog.visible = true
+                applet.size = "48x48";
             } else {
                 addApplet(applet, 0);
             }
