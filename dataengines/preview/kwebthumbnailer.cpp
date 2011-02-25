@@ -37,7 +37,7 @@ KWebThumbnailer::KWebThumbnailer( const QUrl &url, const QSize &size, QObject *p
     d->url = url;
     d->size = size;
     d->status = i18nc("status of thumbnail loader", "Idle");
-    //d->fileName = "/tmp/bla.png";
+    // filename is set later.
 }
 
 KWebThumbnailer::~KWebThumbnailer()
