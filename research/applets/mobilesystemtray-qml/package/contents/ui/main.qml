@@ -31,8 +31,14 @@ Item {
         plasmoid.containmentType = "CustomPanelContainment"
         plasmoid.appletAdded.connect(addApplet)
 
-        for (var i = 0; i<plasmoid.applets.length; ++i) {
-            addApplet(plasmoid.applets[i], 0);
+        for (var i = 0; i < plasmoid.applets.length; ++i) {
+            var applet = plasmoid.applets[i]
+            if (applet.pluginName == "org.kde.appswitcher") {
+                switcherDialog.mainItem = applet
+                switcherDialog.visible = true
+            } else {
+                addApplet(applet, 0);
+            }
         }
     }
 
@@ -46,7 +52,14 @@ Item {
         applet.x=0
     }
 
-
+    PlasmaCore.Dialog {
+        id: switcherDialog
+        mainItem: Rectangle {
+                color: "red"
+                width: 200
+                height: 200
+            }
+    }
 
 
     PlasmaCore.DataSource {
