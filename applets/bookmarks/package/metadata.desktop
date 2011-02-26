@@ -1,8 +1,20 @@
 [Desktop Entry]
 Comment=Favorites
+Comment[pt]=Favoritos
+Comment[sv]=Favoriter
+Comment[uk]=Улюблене
+Comment[x-test]=xxFavoritesxx
 Encoding=UTF-8
 Keywords=Online Services, Web
+Keywords[pt]=Serviços 'Online', Web
+Keywords[sv]=Nättjänster, webb
+Keywords[uk]=Служби мережі, інтернет
+Keywords[x-test]=xxOnline Services, Webxx
 Name=Your Bookmarks
+Name[pt]=Os Seus Favoritos
+Name[sv]=Bokmärken
+Name[uk]=Ваші закладки
+Name[x-test]=xxYour Bookmarksxx
 Type=Service
 Icon=bookmarks
 X-KDE-ParentApp=
