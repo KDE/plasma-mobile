@@ -33,6 +33,7 @@
 #include <KWindowSystem>
 #include <plasma/widgets/iconwidget.h>
 #include <plasma/tooltipmanager.h>
+#include <Plasma/Theme>
 #include <Plasma/WindowEffects>
 
 AppSwitcher::AppSwitcher(QObject *parent, const QVariantList &args)
@@ -49,14 +50,18 @@ void AppSwitcher::init()
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
-    Plasma::IconWidget *icon = new Plasma::IconWidget(KIcon("dashboard-show"), QString(), this);
-    registerAsDragHandle(icon);
+    Plasma::IconWidget *icon = new Plasma::IconWidget(this);
+    if (!Plasma::Theme::defaultTheme()->imagePath("icons/dashboard").isEmpty()) {
+        icon->setSvg("icons/dashboard", "dashboard-show");
+    } else {
+        icon->setIcon(KIcon("dashboard-show"));
+    }
     icon->setMinimumSize(16, 16);
     setMinimumSize(16, 16);
     layout->addItem(icon);
-  
+
     setImmutability(Plasma::SystemImmutable);
-    
+
     //### FIXME doesn't work well
     /*Plasma::ToolTipManager::self()->registerWidget(this);
     Plasma::ToolTipContent toolTipData(i18n("Show the hildon application switcher"), QString(),
