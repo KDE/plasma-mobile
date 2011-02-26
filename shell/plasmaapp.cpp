@@ -148,7 +148,8 @@ PlasmaApp::PlasmaApp()
 
     cg = KConfigGroup(KGlobal::config(), "General");
     Plasma::Theme::defaultTheme()->setFont(cg.readEntry("desktopFont", font()));
-    m_homeScreenPath = cg.readEntry("homeScreenPath", "mobile-homescreen");
+
+    m_homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
     kDebug() << "***** HSP from config" << m_homeScreenPath;
 
     // this line initializes the corona and setups the main qml homescreen
