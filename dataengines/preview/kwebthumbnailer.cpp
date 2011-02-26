@@ -1,3 +1,25 @@
+/*
+    Copyright 2011 Sebastian Kügler <sebas@kde.org>
+    Copyright 2010 Richard Moore <rich@kde.org>
+
+    This library is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Library General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or (at your
+    option) any later version.
+
+    This library is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public
+    License for more details.
+
+    You should have received a copy of the GNU Library General Public License
+    along with this library; see the file COPYING.LIB.  If not, write to the
+    Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301, USA.
+*/
+
+
+
 #include <QtCore/QUrl>
 #include <QtCore/QSize>
 #include <QtGui/QPainter>
@@ -22,6 +44,7 @@ public:
     QUrl url;
     QString fileName;
     QString status;
+    QString errorText;
 };
 
 KWebThumbnailer::KWebThumbnailer( QObject *parent )
@@ -36,7 +59,7 @@ KWebThumbnailer::KWebThumbnailer( const QUrl &url, const QSize &size, QObject *p
 {
     d->url = url;
     d->size = size;
-    d->status = i18nc("status of thumbnail loader", "Idle");
+    d->status = "idle";
     // filename is set later.
 }
 
@@ -77,7 +100,7 @@ QString KWebThumbnailer::status()
 
 void KWebThumbnailer::start()
 {
-    d->status = i18nc("status of thumbnail loader", "Loading...");
+    d->status = "loading";
     d->page = new QWebPage( this );
     d->page->mainFrame()->setScrollBarPolicy( Qt::Horizontal, Qt::ScrollBarAlwaysOff );
     d->page->mainFrame()->setScrollBarPolicy( Qt::Vertical, Qt::ScrollBarAlwaysOff );
@@ -92,7 +115,8 @@ void KWebThumbnailer::completed( bool success )
         delete d->page;
         d->page = 0;
         d->thumbnail = QImage();
-        d->status = i18nc("status of thumbnail loader", "Failed");
+        d->status = "failed";
+        d->errorText = i18n("Unknown error");
         emit done(false);
 
         return;
