@@ -54,7 +54,7 @@ Item {
     {
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(tasksRow, {"x": pos.x, "y": pos.y});
-        plasmoidContainer.plasmoid = applet
+        plasmoidContainer.applet = applet
         applet.parent = plasmoidContainer
         applet.x=0
     }
