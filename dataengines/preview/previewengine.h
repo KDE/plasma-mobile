@@ -23,6 +23,12 @@
 
 #include <plasma/dataengine.h>
 
+#include "kio/jobclasses.h" // for KIO::JobFlags
+#include "kio/job.h"
+#include "kio/scheduler.h"
+
+using namespace KIO;
+
 class KWebThumbnailer;
 
 class PreviewEnginePrivate;
@@ -38,8 +44,11 @@ class PreviewEngine : public Plasma::DataEngine
         virtual void init();
 
     private Q_SLOTS:
+        void mimetypeRetrieved(KIO::Job* job, const QString &mimetype);
         void thumbnailerDone(bool success);
-
+        void previewUpdated(const KFileItem &item, const QPixmap &preview);
+        void previewJobFailed(const KFileItem &item);
+        void previewResult(KJob* job);
 
     protected:
         bool sourceRequestEvent(const QString &name);
