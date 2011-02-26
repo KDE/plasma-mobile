@@ -59,6 +59,7 @@ void PreviewEngine::init()
 
 PreviewEngine::~PreviewEngine()
 {
+    delete d;
 }
 
 QStringList PreviewEngine::sources() const

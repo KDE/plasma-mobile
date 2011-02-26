@@ -35,13 +35,7 @@ public:
     FakeSignal(QObject *parent, const QVariantList &args);
     ~FakeSignal();
 
-    /*void paintInterface(QPainter *p,
-                const QStyleOptionGraphicsItem *option,
-                const QRect& contentsRect);*/
     void init();
-
-protected:
-    void resizeEvent (QGraphicsSceneResizeEvent * event);
 
 private:
     Plasma::IconWidget m_icon;

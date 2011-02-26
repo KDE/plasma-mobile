@@ -23,10 +23,12 @@ Item {
     anchors.top: tasksRow.top
     anchors.bottom: tasksRow.bottom
 
-    property QGraphicsWidget plasmoid
+    property QGraphicsWidget applet
 
     onHeightChanged: {
-        plasmoid.height = height
-        width = plasmoid.width
+        applet.height = height
+        var ratio = applet.preferredSize.width/applet.preferredSize.height
+        applet.width = ratio * height
+        width = applet.width
     }
 }

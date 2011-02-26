@@ -28,11 +28,24 @@ Item {
 
     Component.onCompleted: {
         plasmoid.drawWallpaper = false
-        plasmoid.containmentType = "CustomPanelContainment"
+
+        plasmoid.containmentType = "CustomContainment"
+
         plasmoid.appletAdded.connect(addApplet)
 
-        for (var i = 0; i<plasmoid.applets.length; ++i) {
-            addApplet(plasmoid.applets[i], 0);
+        for (var i = 0; i < plasmoid.applets.length; ++i) {
+            var applet = plasmoid.applets[i]
+            if (applet.pluginName == "org.kde.appswitcher") {
+                switcherDialog.mainItem = applet
+                switcherDialog.visible = true
+
+                switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
+                switcherDialog.x = 0
+                switcherDialog.y = 0
+                applet.size = "48x48";
+            } else {
+                addApplet(applet, 0);
+            }
         }
     }
 
@@ -41,12 +54,19 @@ Item {
     {
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(tasksRow, {"x": pos.x, "y": pos.y});
-        plasmoidContainer.plasmoid = applet
+        plasmoidContainer.applet = applet
         applet.parent = plasmoidContainer
         applet.x=0
     }
 
-
+    PlasmaCore.Dialog {
+        id: switcherDialog
+        mainItem: Rectangle {
+                color: "red"
+                width: 200
+                height: 200
+            }
+    }
 
 
     PlasmaCore.DataSource {
