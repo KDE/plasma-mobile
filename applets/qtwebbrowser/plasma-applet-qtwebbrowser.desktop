@@ -1,7 +1,17 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Battery Monitor
+Name[de]=Akkuüberwachung
+Name[pt]=Monitor da Bateria
+Name[sv]=Batteriövervakning
+Name[uk]=Монітор акумулятора
+Name[x-test]=xxBattery Monitorxx
 Comment=Simple battery monitor
+Comment[de]=Einfache Akkuüberwachung
+Comment[pt]=Monitor de bateria simples
+Comment[sv]=Enkel batteriövervakning
+Comment[uk]=Простий засіб спостереження за акумуляторами
+Comment[x-test]=xxSimple battery monitorxx
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=internet-web-browser
