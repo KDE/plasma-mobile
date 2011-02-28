@@ -41,23 +41,13 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    PlasmaCore.SvgItem {
+    ActionButton {
         id: removeButton
-        width: 48
-        height: 48
         svg: iconsSvg
         elementId: "close"
         z: applet.z + 1
 
-        property QtObject action: applet.action("remove")
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                removeButton.action.trigger()
-                //plasmoidContainer.destroy()
-            }
-        }
+        action: applet.action("remove")
     }
 
     onHeightChanged: {
