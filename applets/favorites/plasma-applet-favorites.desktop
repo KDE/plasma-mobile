@@ -2,11 +2,13 @@
 Encoding=UTF-8
 Name=Favorites
 Name[pt]=Favoritos
+Name[pt_BR]=Favoritos
 Name[sv]=Favoriter
 Name[uk]=Улюблене
 Name[x-test]=xxFavoritesxx
 Comment=Your Bookmarks
 Comment[pt]=Os Seus Favoritos
+Comment[pt_BR]=Seus favoritos
 Comment[sv]=Bokmärken
 Comment[uk]=Ваші закладки
 Comment[x-test]=xxYour Bookmarksxx

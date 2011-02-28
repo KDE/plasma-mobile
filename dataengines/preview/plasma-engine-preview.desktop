@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=Preview
 Name[pt]=Antevisão
+Name[pt_BR]=Visualização
 Name[sv]=Förhandsgranskning
 Name[uk]=Перегляд
 Name[x-test]=xxPreviewxx
 Comment=Shows previews for webpages
 Comment[pt]=Mostra antevisões das páginas Web
+Comment[pt_BR]=Mostra uma previsão das páginas Web
 Comment[sv]=Visar förhandsgranskning av webbsidor
 Comment[uk]=Показує мініатюри сторінок інтернету
 Comment[x-test]=xxShows previews for webpagesxx
