@@ -105,8 +105,6 @@ Rectangle {
                     detailsEmail.text = "<b>Email:</b> "+email
                     detailsLicense.text = "<b>License:</b> "+license
 
-                    //appletsView.width = (appletsView.parent.width/4)*3;
-                    //appletsView.cellWidth = appletsView.width/3
                     infoPanel.state = "shown"
                 }
             }
