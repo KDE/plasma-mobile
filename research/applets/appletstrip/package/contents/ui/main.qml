@@ -44,9 +44,15 @@ Item {
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(appletsRow, {"x": pos.x, "y": pos.y});
         plasmoidContainer.applet = applet
-        applet.parent = plasmoidContainer
-        applet.x=0
-        applet.y=0
+
+        /* this will be used for inserting in custom positions
+        var oldChildren = appletsRow.children
+        for (var child in oldChildren) {
+            child.parent = 0
+        }
+        for (var child in oldChildren) {
+            child.parent = appletsRow
+        }*/
     }
 
 
@@ -81,6 +87,13 @@ Item {
                 Row {
                     id: appletsRow
                     height: appletsFlickable.height
+                    add: Transition {
+                        NumberAnimation {
+                            properties: "x"
+                            easing.type: Easing.OutBounce
+                            duration: 250
+                        }
+                    }
                     move: Transition {
                         NumberAnimation {
                             properties: "x"

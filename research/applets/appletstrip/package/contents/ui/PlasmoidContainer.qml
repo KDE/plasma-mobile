@@ -29,6 +29,10 @@ Item {
 
     onAppletChanged: {
         applet.appletDestroyed.connect(appletDestroyed)
+        applet.parent = plasmoidContainer
+        applet.x = 0
+        applet.y = 0
+        height = main.width/2
     }
 
     function appletDestroyed()
@@ -51,9 +55,11 @@ Item {
     }
 
     onHeightChanged: {
-        applet.height = height
-        var ratio = applet.preferredSize.width/applet.preferredSize.height
-        applet.width = main.width/2
-        width = applet.width
+        if (applet) {
+            applet.height = height
+            var ratio = applet.preferredSize.width/applet.preferredSize.height
+            applet.width = main.width/2
+            width = applet.width
+        }
     }
 }
