@@ -32,7 +32,6 @@ Item {
         plasmoid.appletAdded.connect(addApplet)
 
         for (var i = 0; i < plasmoid.applets.length; ++i) {
-            print("aaaa")
             var applet = plasmoid.applets[i]
             print(applet)
             addApplet(applet, 0);
@@ -47,6 +46,7 @@ Item {
         plasmoidContainer.applet = applet
         applet.parent = plasmoidContainer
         applet.x=0
+        applet.y=0
     }
 
 
@@ -74,11 +74,7 @@ Item {
             Row {
                 id: appletsRow
                 height: appletsFlickable.height
-                Rectangle {
-                    color: "green"
-                    width: 100
-                    height: 100
-                }
+
             }
         }
     }

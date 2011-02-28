@@ -28,7 +28,7 @@ Item {
     onHeightChanged: {
         applet.height = height
         var ratio = applet.preferredSize.width/applet.preferredSize.height
-        applet.width = ratio * height
+        applet.width = main.width/2
         width = applet.width
     }
 }
