@@ -74,7 +74,13 @@ Item {
             Row {
                 id: appletsRow
                 height: appletsFlickable.height
-
+                move: Transition {
+                    NumberAnimation {
+                        properties: "x"
+                        easing.type: Easing.OutBounce
+                        duration: 250
+                    }
+                }
             }
         }
     }
