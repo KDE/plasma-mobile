@@ -27,7 +27,7 @@ Item {
 
     Component.onCompleted: {
 
-        //plasmoid.containmentType = "CustomContainment"
+        plasmoid.containmentType = "CustomContainment"
 
         plasmoid.appletAdded.connect(addApplet)
 

@@ -17,13 +17,48 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.0
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
+    id: plasmoidContainer
     anchors.top: appletsRow.top
     anchors.bottom: appletsRow.bottom
 
     property QGraphicsWidget applet
+
+    onAppletChanged: {
+        applet.appletDestroyed.connect(appletDestroyed)
+    }
+
+    function appletDestroyed()
+    {
+        plasmoidContainer.destroy()
+    }
+
+    PlasmaCore.Svg {
+        id: iconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
+
+    PlasmaCore.SvgItem {
+        id: removeButton
+        width: 48
+        height: 48
+        svg: iconsSvg
+        elementId: "close"
+        z: applet.z + 1
+
+        property QtObject action: applet.action("remove")
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                removeButton.action.trigger()
+                //plasmoidContainer.destroy()
+            }
+        }
+    }
 
     onHeightChanged: {
         applet.height = height
