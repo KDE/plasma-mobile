@@ -21,10 +21,8 @@ Rectangle {
             name: "horizontal"
             PropertyChanges {
                 target: infoPanel;
-                anchors.top: widgetsExplorer.top
-                anchors.bottom: widgetsExplorer.bottom
-                anchors.left: undefined
-                anchors.right: undefined
+                x: parent.width
+                y: 0
             }
             PropertyChanges {
                 target: appletsView;
@@ -44,11 +42,9 @@ Rectangle {
             name: "vertical"
             PropertyChanges {
                 target: infoPanel;
-                anchors.top: undefined
-                anchors.bottom: undefined
-                anchors.left: widgetsExplorer.left
-                anchors.right: widgetsExplorer.right
                 height: 200
+                x: 0
+                y: parent.height
             }
             PropertyChanges {
                 target: appletsView;
@@ -131,16 +127,6 @@ Rectangle {
         id: infoPanel
 
         state: "hidden"
-
-        x: if (widgetsExplorer.state == "horizontal")
-               parent.width
-           else
-               0
-
-        y: if (widgetsExplorer.state == "vertical")
-               parent.height
-           else
-               0
 
         width: if (widgetsExplorer.state == "horizontal")
                    parent.width/4
