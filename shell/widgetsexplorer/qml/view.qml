@@ -32,10 +32,6 @@ Rectangle {
                 anchors.right: infoPanel.left
             }
             PropertyChanges {
-                target: panelLayout;
-                orientation: Qt.Vertical
-            }
-            PropertyChanges {
                 target: infoContent;
                 anchors.bottomMargin: closeButton.height + 16
             }
@@ -60,10 +56,6 @@ Rectangle {
                 anchors.right: widgetsExplorer.right
             }
             PropertyChanges {
-                target: panelLayout;
-                orientation: Qt.Horizontal
-            }
-            PropertyChanges {
                 target: infoContent;
                 anchors.bottomMargin: 0
             }
@@ -75,15 +67,24 @@ Rectangle {
     ]
 
     onWidthChanged : {
+        orientationTimer.running = true
+    }
 
-        if (width > 600) {
-            state = "horizontal"
-        } else {
-            state = "vertical"
-            //FIXME: why this is necessary?
-            infoPanel.height = 200
+    Timer {
+        id: orientationTimer
+        running: false
+        repeat: false
+        interval: 200
+        onTriggered: {
+            if (width > height) {
+                state = "horizontal"
+            } else {
+                state = "vertical"
+                infoPanel.height = 200
+            }
         }
     }
+
 
     MobileComponents.IconGrid {
         id: appletsView
@@ -129,9 +130,6 @@ Rectangle {
     Rectangle {
         id: infoPanel
 
-        anchors.topMargin: 4
-        anchors.rightMargin: 4
-
         state: "hidden"
 
         x: if (widgetsExplorer.state == "horizontal")
@@ -156,109 +154,110 @@ Rectangle {
 
         color: Qt.rgba(0,0,0,0.4)
 
-        QGraphicsWidget {
+        Flow {
             id: infoContent
             anchors.fill:parent
-            layout: GraphicsLayouts.QGraphicsLinearLayout {
-                id:panelLayout
-                orientation: Qt.Vertical
-                PlasmaWidgets.IconWidget {
-                    id: detailsIcon
-                    y: 8
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    minimumIconSize : "128x128"
-                    maximumIconSize : "128x128"
-                    preferredIconSize : "128x128"
-                }
 
-                LayoutItem {
-                    preferredSize: "500x500"
-                    Flickable {
-                        anchors.fill: parent
-                        contentWidth: width;
-                        contentHeight: column.height
-                        interactive : true
-                        clip:true
-
-                        Column {
-                            id:column;
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            anchors.leftMargin: 8
-                            spacing: 8
-
-                            Text {
-                                id: detailsName
-
-                                width: parent.width
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                font.pixelSize : 30;
-                                wrapMode : Text.Wrap
-
-                                color: "white"
-                            }
-
-                            Text {
-                                id: detailsVersion
-
-                                width: parent.width
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                wrapMode : Text.Wrap
-
-                                color: "white"
-                            }
-
-                            Text {
-                                id: detailsDescription
-
-                                width: parent.width
-                                wrapMode : Text.Wrap
-
-                                color: "white"
-                            }
+            PlasmaWidgets.IconWidget {
+                id: detailsIcon
+                y: 8
+                anchors.horizontalCenter: parent.horizontalCenter
+                minimumIconSize : "128x128"
+                maximumIconSize : "128x128"
+                preferredIconSize : "128x128"
+            }
 
 
-                            Text {
-                                id: detailsAuthor
+            Flickable {
+                width: (widgetsExplorer.state == "horizontal")?parent.width:parent.width - detailsIcon.width - addButtonParent.width
+                height: (widgetsExplorer.state == "horizontal")?parent.height - detailsIcon.height - addButton.height:parent.height
+                contentWidth: width;
+                contentHeight: column.height
+                interactive : true
+                clip:true
 
-                                width: parent.width
-                                wrapMode : Text.Wrap
+                Column {
+                    id:column;
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.leftMargin: 8
+                    spacing: 8
 
-                                color: "white"
-                            }
+                    Text {
+                        id: detailsName
 
-                            Text {
-                                id: detailsEmail
+                        width: parent.width
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.pixelSize : 30;
+                        wrapMode : Text.Wrap
 
-                                width: parent.width
-                                wrapMode : Text.Wrap
+                        color: "white"
+                    }
 
-                                color: "white"
-                            }
+                    Text {
+                        id: detailsVersion
 
-                            Text {
-                                id: detailsLicense
+                        width: parent.width
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        wrapMode : Text.Wrap
 
-                                width: parent.width
-                                wrapMode : Text.Wrap
+                        color: "white"
+                    }
 
-                                color: "white"
-                            }
-                        }
+                    Text {
+                        id: detailsDescription
+
+                        width: parent.width
+                        wrapMode : Text.Wrap
+
+                        color: "white"
+                    }
+
+
+                    Text {
+                        id: detailsAuthor
+
+                        width: parent.width
+                        wrapMode : Text.Wrap
+
+                        color: "white"
+                    }
+
+                    Text {
+                        id: detailsEmail
+
+                        width: parent.width
+                        wrapMode : Text.Wrap
+
+                        color: "white"
+                    }
+
+                    Text {
+                        id: detailsLicense
+
+                        width: parent.width
+                        wrapMode : Text.Wrap
+
+                        color: "white"
                     }
                 }
+            }
 
+
+            Item {
+                id: addButtonParent
+                width: widgetsExplorer.width/4
+                height: addButton.height
                 PlasmaWidgets.PushButton {
                     id: addButton
-                    //FIXME
-                    maximumSize: maximumSize.width+"x"+preferredSize.height
-                    minimumSize: "0x"+32
-
+                    anchors.right: parent.right
+                    anchors.rightMargin: 4
 
                     text: "Add widget"
                     onClicked : widgetsExplorer.addAppletRequested(appletsView.currentPlugin)
                 }
             }
+
         }
 
         states: [
