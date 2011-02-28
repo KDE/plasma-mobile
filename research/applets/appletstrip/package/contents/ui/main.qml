@@ -54,6 +54,11 @@ Item {
         id: theme
     }
 
+    PlasmaCore.Svg {
+        id: iconsSvg
+        imagePath: "widgets/action-overlays"
+    }
+
     Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -66,19 +71,32 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             clip: true
             interactive:true
-            contentWidth: appletsRow.width
-            contentHeight: appletsRow.height
+            contentWidth: mainRow.width
+            contentHeight: mainRow.height
 
             width: Math.min(parent.width, appletsRow.width)
 
             Row {
-                id: appletsRow
-                height: appletsFlickable.height
-                move: Transition {
-                    NumberAnimation {
-                        properties: "x"
-                        easing.type: Easing.OutBounce
-                        duration: 250
+                id: mainRow
+                Row {
+                    id: appletsRow
+                    height: appletsFlickable.height
+                    move: Transition {
+                        NumberAnimation {
+                            properties: "x"
+                            easing.type: Easing.OutBounce
+                            duration: 250
+                        }
+                    }
+                }
+                Item {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    width: main.width/2
+                    ActionButton {
+                        anchors.centerIn: parent
+                        elementId: "add-normal"
+                        action: plasmoid.action("add widgets")
                     }
                 }
             }
