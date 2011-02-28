@@ -39,6 +39,11 @@ Rectangle {
                 target: detailsIcon
                 anchors.horizontalCenter: parent.horizontalCenter
             }
+            PropertyChanges {
+                target: infoFlickable
+                width: parent.width
+                height: parent.height - detailsIcon.height - addButton.height
+            }
         },
         State {
             name: "vertical"
@@ -61,6 +66,11 @@ Rectangle {
             PropertyChanges {
                 target: detailsIcon
                 anchors.horizontalCenter: undefined
+            }
+            PropertyChanges {
+                target: infoFlickable
+                width: parent.width - detailsIcon.width - addButtonParent.width
+                height: parent.height
             }
         }
     ]
@@ -146,8 +156,8 @@ Rectangle {
 
 
             Flickable {
-                width: (widgetsExplorer.state == "horizontal")?parent.width:parent.width - detailsIcon.width - addButtonParent.width
-                height: (widgetsExplorer.state == "horizontal")?parent.height - detailsIcon.height - addButton.height:parent.height
+                id: infoFlickable
+
                 contentWidth: width;
                 contentHeight: column.height
                 interactive : true
