@@ -23,6 +23,8 @@ Rectangle {
                 target: infoPanel;
                 x: parent.width
                 y: 0
+                width: parent.width/4
+                height: parent.height
             }
             PropertyChanges {
                 target: appletsView;
@@ -42,9 +44,10 @@ Rectangle {
             name: "vertical"
             PropertyChanges {
                 target: infoPanel;
-                height: 200
                 x: 0
                 y: parent.height
+                width: parent.width
+                height: parent.height/4
             }
             PropertyChanges {
                 target: appletsView;
@@ -127,16 +130,6 @@ Rectangle {
         id: infoPanel
 
         state: "hidden"
-
-        width: if (widgetsExplorer.state == "horizontal")
-                   parent.width/4
-               else
-                   parent.width
-
-        height: if (widgetsExplorer.state == "horizontal")
-                    parent.height
-                else
-                    parent.height/4
 
         color: Qt.rgba(0,0,0,0.4)
 
