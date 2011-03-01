@@ -33,6 +33,8 @@ Item {
         applet.x = 0
         applet.y = 0
         height = main.width/appletColumns
+        applet.width = main.width/appletColumns
+        width = applet.width
     }
 
     function appletDestroyed()

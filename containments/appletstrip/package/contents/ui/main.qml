@@ -21,6 +21,8 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1 as QtExtra
 
+import "LayoutManager.js" as LayoutManager
+
 Item {
     id: main
     signal shrinkRequested
@@ -47,6 +49,7 @@ Item {
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(appletsRow, {"x": pos.x, "y": pos.y});
         plasmoidContainer.applet = applet
+        appletsRow.insertAt(plasmoidContainer, -1)
 
         /* this will be used for inserting in custom positions
         var oldChildren = appletsRow.children
@@ -108,35 +111,7 @@ Item {
 
                     function insertAt(item, index)
                     {
-                        if (index < 0 || index > (appletsRow.children.length-1)) {
-                            return
-                        }
-
-                        var itemAtIndex = appletsRow.children[appletsRow.children.length-index-1]
-                        print("AAAA")
-                        print(itemAtIndex)
-                        print(item)
-                        print(index)
-
-                        //reinsert at old position? do nothing
-                        if (item == itemAtIndex) {
-                            return;
-                        }
-
-                        var oldChildren = Array()
-                        for (var i = appletsRow.children.length; i > index; --i) {
-                            oldChildren[oldChildren.length] = appletsRow.children[i]
-                            print(oldChildren[oldChildren.length-1])
-                        }
-    
-                        item.parent = main
-                        for (var child in oldChildren) {
-                            child.parent = main
-                        }
-                        item.parent = appletsRow
-                        for (var child in oldChildren) {
-                            child.parent = appletsRow
-                        }
+                        LayoutManager.insertAt(item, index)
                     }
                 }
                 Item {

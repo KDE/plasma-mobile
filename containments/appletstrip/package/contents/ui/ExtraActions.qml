@@ -86,7 +86,6 @@ Item {
 
             ActionButton {
                 id: runButton
-                anchors.right: parent.right
                 svg: iconsSvg
                 elementId: "close"
 
