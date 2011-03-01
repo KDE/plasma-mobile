@@ -32,7 +32,7 @@ Item {
         applet.parent = plasmoidContainer
         applet.x = 0
         applet.y = 0
-        height = main.width/2
+        height = main.width/appletColumns
     }
 
     function appletDestroyed()
@@ -69,7 +69,7 @@ Item {
         if (applet) {
             applet.height = height
             var ratio = applet.preferredSize.width/applet.preferredSize.height
-            applet.width = main.width/2
+            applet.width = main.width/appletColumns
             width = applet.width
         }
     }

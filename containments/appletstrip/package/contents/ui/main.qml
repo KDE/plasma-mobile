@@ -26,6 +26,7 @@ Item {
     signal shrinkRequested
 
     property int actionSize: 48
+    property int appletColumns: 3
 
     Component.onCompleted: {
 
@@ -86,6 +87,7 @@ Item {
 
             Row {
                 id: mainRow
+
                 Row {
                     id: appletsRow
                     height: appletsFlickable.height
@@ -103,11 +105,44 @@ Item {
                             duration: 250
                         }
                     }
+
+                    function insertAt(item, index)
+                    {
+                        if (index < 0 || index > (appletsRow.children.length-1)) {
+                            return
+                        }
+
+                        var itemAtIndex = appletsRow.children[appletsRow.children.length-index-1]
+                        print("AAAA")
+                        print(itemAtIndex)
+                        print(item)
+                        print(index)
+
+                        //reinsert at old position? do nothing
+                        if (item == itemAtIndex) {
+                            return;
+                        }
+
+                        var oldChildren = Array()
+                        for (var i = appletsRow.children.length; i > index; --i) {
+                            oldChildren[oldChildren.length] = appletsRow.children[i]
+                            print(oldChildren[oldChildren.length-1])
+                        }
+    
+                        item.parent = main
+                        for (var child in oldChildren) {
+                            child.parent = main
+                        }
+                        item.parent = appletsRow
+                        for (var child in oldChildren) {
+                            child.parent = appletsRow
+                        }
+                    }
                 }
                 Item {
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
-                    width: main.width/2
+                    width: main.width/appletColumns
                     ActionButton {
                         anchors.centerIn: parent
                         elementId: "add-normal"

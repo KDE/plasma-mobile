@@ -42,5 +42,18 @@ PlasmaCore.SvgItem {
         drag.minimumY: 0
         drag.maximumY: 0
 
+        onPressed: {
+            plasmoidContainer.z = 2000
+        }
+
+        onReleased: {
+            plasmoidContainer.z = 0
+        }
+
+        onPositionChanged: {
+            var index = Math.round(plasmoidContainer.x/(main.width/appletColumns))
+            appletsRow.insertAt(plasmoidContainer, index)
+        }
+
     }
 }
