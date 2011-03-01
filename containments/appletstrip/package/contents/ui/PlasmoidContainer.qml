@@ -48,10 +48,9 @@ Item {
     ActionButton {
         id: removeButton
         svg: iconsSvg
-        elementId: "close"
+        elementId: "move"
         z: applet.z + 1
 
-        action: applet.action("remove")
     }
 
     ActionButton {
@@ -67,6 +66,7 @@ Item {
     ExtraActions {
         anchors.bottom: parent.bottom
         z: applet.z + 1
+        x: plasmoidContainer.x < actionSize*2?actionSize*2:0
     }
 
     onHeightChanged: {
