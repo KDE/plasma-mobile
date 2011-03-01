@@ -90,10 +90,10 @@ PlasmaCore.SvgItem {
 
             appletsRow.insertAt(spacer, index)
 
-            if (plasmoidContainer.x < columnSize) {
+            if (plasmoidContainer.x < (columnSize/3)) {
                 scrollTimer.reverse = true
                 scrollTimer.running = true
-            } else if (plasmoidContainer.x > columnSize*(appletColumns-1)) {
+            } else if (plasmoidContainer.x > (main.width - columnSize/3)) {
                 scrollTimer.reverse = false
                 scrollTimer.running = true
             } else {
