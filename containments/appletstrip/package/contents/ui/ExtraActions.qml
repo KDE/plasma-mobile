@@ -92,6 +92,7 @@ Item {
         y: 0
         svg: iconsSvg
         elementId: "configure"
+        opacity: (actionSize-Math.abs(x))/actionSize
 
         Behavior on x {
             NumberAnimation { duration: 250 }
