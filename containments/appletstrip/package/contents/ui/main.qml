@@ -29,17 +29,23 @@ Item {
 
     property int actionSize: 48
     property int appletColumns: 3
+    property string appletsOrder
 
     Component.onCompleted: {
 
         plasmoid.containmentType = "CustomContainment"
+/*
+        var order = plasmoid.readConfig("AppletsOrder")
+        if (order) {
+            appletsOrder = order
+        }*/
 
         plasmoid.appletAdded.connect(addApplet)
 
         for (var i = 0; i < plasmoid.applets.length; ++i) {
             var applet = plasmoid.applets[i]
             print(applet)
-            addApplet(applet, 0);
+            addApplet(applet, Qt.point(-1,-1));
         }
     }
 
@@ -48,17 +54,20 @@ Item {
     {
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(appletsRow, {"x": pos.x, "y": pos.y});
-        plasmoidContainer.applet = applet
-        appletsRow.insertAt(plasmoidContainer, -1)
-
-        /* this will be used for inserting in custom positions
-        var oldChildren = appletsRow.children
-        for (var child in oldChildren) {
-            child.parent = 0
+        var index = plasmoid.readConfig("AppletPosition-"+applet.id)
+        if (!(index >= 0)) {
+            if (pos.x >= 0) {
+                index = pos.x/appletColumns
+            } else {
+                index = appletsRow.children.length
+            }
         }
-        for (var child in oldChildren) {
-            child.parent = appletsRow
-        }*/
+        plasmoidContainer.applet = applet
+        appletsRow.insertAt(plasmoidContainer, index)
+
+        appletsOrder += " " + applet.id
+        plasmoid.writeConfig("AppletsOrder", appletsOrder)
+        print("AppletsOrder: "+plasmoid.readConfig("AppletsOrder"))
     }
 
     Item {
