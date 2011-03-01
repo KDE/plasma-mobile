@@ -30,13 +30,24 @@ Item {
         id: theme
     }
 
-    Text {
+    PlasmaCore.FrameSvgItem {
         id: message
-        color: theme.textColor
+        imagePath: "widgets/background"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: extraActionsFrame.top
+        width: messageText.width+margins.left+margins.right
+        height: messageText.height+margins.top+margins.bottom
+        opacity: 0
+
         Behavior on opacity {
             NumberAnimation { duration: 250 }
+        }
+
+        Text {
+            id: messageText
+            color: theme.textColor
+            x: message.margins.left
+            y: message.margins.top
         }
     }
 
@@ -133,7 +144,7 @@ Item {
                 var button = layout.childAt(pos.x, pos.y)
 
                 if (button && button.action) {
-                    message.text = button.action.text
+                    messageText.text = button.action.text
                     message.opacity = 1
                 } else {
                     message.opacity = 0
