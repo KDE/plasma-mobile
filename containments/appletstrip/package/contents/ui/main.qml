@@ -61,6 +61,11 @@ Item {
         }*/
     }
 
+    Item {
+        id: spacer
+        width: main.width/appletColumns
+        height: 1
+    }
 
     PlasmaCore.Theme {
         id: theme
@@ -112,6 +117,11 @@ Item {
                     function insertAt(item, index)
                     {
                         LayoutManager.insertAt(item, index)
+                    }
+
+                    function remove(item)
+                    {
+                        LayoutManager.remove(item)
                     }
                 }
                 Item {

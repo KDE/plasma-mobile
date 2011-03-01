@@ -47,3 +47,16 @@ function insertAt(item, index)
         oldChildren[i].parent = appletsRow
     }
 }
+
+function remove(item)
+{
+    var index = 0
+    for (var i = 0; i < items.length; ++i) {
+        if (items[i] == item) {
+            item.parent = main
+            index = i
+            break
+        }
+    }
+    items.splice(index, 1)
+}
