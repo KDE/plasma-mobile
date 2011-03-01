@@ -63,8 +63,8 @@ Item {
 
     ExtraActions {
         anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
         z: applet.z + 1
-        x: plasmoidContainer.x < actionSize*2?actionSize*2:0
     }
 
     onHeightChanged: {

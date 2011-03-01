@@ -27,7 +27,30 @@ PlasmaCore.SvgItem {
     svg: iconsSvg
     elementId: "move"
     z: applet.z + 1
+    property real columnSize: main.width/appletColumns
 
+    Timer {
+        id: scrollTimer
+        interval: 20
+        repeat: true
+        running: false
+        property bool reverse: true
+        onTriggered: {
+            if (reverse) {
+                if (appletsFlickable.contentX > 0) {
+                    appletsFlickable.contentX -= 10
+                } else {
+                    running = false
+                }
+            } else {
+                if (appletsFlickable.contentX < appletsFlickable.contentWidth-main.width) {
+                    appletsFlickable.contentX += 10
+                } else {
+                    running = false
+                }
+            }
+        }
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -44,7 +67,7 @@ PlasmaCore.SvgItem {
 
         onPressed: {
             plasmoidContainer.z = 2000
-            var index = Math.round(plasmoidContainer.mapToItem(appletsRow, 0, 0).x/(main.width/appletColumns))
+            var index = Math.round(plasmoidContainer.mapToItem(appletsRow, 0, 0).x/(columnSize))
             spacer.visible = true
             appletsRow.remove(plasmoidContainer)
             appletsRow.insertAt(spacer, index)
@@ -52,16 +75,27 @@ PlasmaCore.SvgItem {
 
         onReleased: {
             plasmoidContainer.z = 0
-            var index = Math.round(plasmoidContainer.mapToItem(appletsRow, 0, 0).x/(main.width/appletColumns))
+            var index = Math.round(plasmoidContainer.mapToItem(appletsRow, 0, 0).x/(columnSize))
             appletsRow.insertAt(plasmoidContainer, index)
             appletsRow.remove(spacer)
             spacer.visible = false
+            scrollTimer.running = false
         }
 
         onPositionChanged: {
-            var index = Math.round(plasmoidContainer.mapToItem(appletsRow, 0, 0).x/(main.width/appletColumns))
+            var index = Math.round(plasmoidContainer.mapToItem(appletsRow, 0, 0).x/(columnSize))
 
             appletsRow.insertAt(spacer, index)
+
+            if (plasmoidContainer.x < columnSize) {
+                scrollTimer.reverse = true
+                scrollTimer.running = true
+            } else if (plasmoidContainer.x > columnSize*(appletColumns-1)) {
+                scrollTimer.reverse = false
+                scrollTimer.running = true
+            } else {
+                scrollTimer.running = false
+            }
         }
 
     }
