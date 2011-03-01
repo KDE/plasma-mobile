@@ -45,12 +45,8 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    ActionButton {
-        id: removeButton
-        svg: iconsSvg
-        elementId: "move"
-        z: applet.z + 1
-
+    MoveButton {
+        
     }
 
     ActionButton {

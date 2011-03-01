@@ -82,7 +82,7 @@ Item {
             contentWidth: mainRow.width
             contentHeight: mainRow.height
 
-            width: Math.min(parent.width, appletsRow.width)
+            width: Math.min(parent.width, mainRow.width)
 
             Row {
                 id: mainRow
