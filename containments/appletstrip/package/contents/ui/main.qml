@@ -25,6 +25,8 @@ Item {
     id: main
     signal shrinkRequested
 
+    property int actionSize: 48
+
     Component.onCompleted: {
 
         plasmoid.containmentType = "CustomContainment"

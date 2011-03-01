@@ -64,6 +64,11 @@ Item {
         action: applet.action("run associated application")
     }
 
+    ExtraActions {
+        anchors.bottom: parent.bottom
+        z: applet.z + 1
+    }
+
     onHeightChanged: {
         if (applet) {
             applet.height = height
