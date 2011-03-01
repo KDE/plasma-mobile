@@ -21,6 +21,7 @@ var items = new Array()
 
 function insertAt(item, index)
 {
+    remove(item)
     if (index < 0 || index > (items.length-1)) {
         items.push(item)
         item.parent = appletsRow
@@ -35,7 +36,6 @@ function insertAt(item, index)
     var oldChildren = Array()
     for (var i = index; i < items.length; ++i) {
         oldChildren[oldChildren.length] = items[i]
-        print(oldChildren[oldChildren.length-1])
     }
 
     item.parent = main
@@ -46,11 +46,12 @@ function insertAt(item, index)
     for (var i = 0; i < oldChildren.length; ++i) {
         oldChildren[i].parent = appletsRow
     }
+    items.splice(index, 0, item)
 }
 
 function remove(item)
 {
-    var index = 0
+    var index = -1
     for (var i = 0; i < items.length; ++i) {
         if (items[i] == item) {
             item.parent = main
@@ -58,5 +59,8 @@ function remove(item)
             break
         }
     }
-    items.splice(index, 1)
+
+    if (index >= 0) {
+        items.splice(index, 1)
+    }
 }

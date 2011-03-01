@@ -52,14 +52,15 @@ PlasmaCore.SvgItem {
 
         onReleased: {
             plasmoidContainer.z = 0
-            var index = Math.round(plasmoidContainer.x/(main.width/appletColumns))
+            var index = Math.round(plasmoidContainer.mapToItem(appletsRow, 0, 0).x/(main.width/appletColumns))
             appletsRow.insertAt(plasmoidContainer, index)
             appletsRow.remove(spacer)
             spacer.visible = false
         }
 
         onPositionChanged: {
-            var index = Math.round(plasmoidContainer.x/(main.width/appletColumns))
+            var index = Math.round(plasmoidContainer.mapToItem(appletsRow, 0, 0).x/(main.width/appletColumns))
+
             appletsRow.insertAt(spacer, index)
         }
 
