@@ -26,19 +26,33 @@ Item {
     width: actionSize
     height: actionSize
 
-    PlasmaCore.FrameSvgItem {
-            id: extraActionsFrame
-            x: -placeHolder.x
-            y: -margins.top
-            width: layout.width+margins.left+margins.right
-            height: layout.height+margins.top
-            imagePath: "widgets/background"
-            enabledBorders: "LeftBorder|RightBorder|TopBorder"
-            opacity: 0
+    PlasmaCore.Theme {
+        id: theme
+    }
 
-            Behavior on opacity {
-                NumberAnimation { duration: 250 }
-            }
+    Text {
+        id: message
+        color: theme.textColor
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: extraActionsFrame.top
+        Behavior on opacity {
+            NumberAnimation { duration: 250 }
+        }
+    }
+
+    PlasmaCore.FrameSvgItem {
+        id: extraActionsFrame
+        x: -placeHolder.x-margins.left
+        y: -margins.top
+        width: layout.width+margins.left+margins.right
+        height: layout.height+margins.top
+        imagePath: "widgets/background"
+        enabledBorders: "LeftBorder|RightBorder|TopBorder"
+        opacity: 0
+
+        Behavior on opacity {
+            NumberAnimation { duration: 250 }
+        }
 
 
         Row {
@@ -79,6 +93,10 @@ Item {
         svg: iconsSvg
         elementId: "configure"
 
+        Behavior on x {
+            NumberAnimation { duration: 250 }
+        }
+
         MouseArea {
             anchors.fill: parent
             anchors.leftMargin: -10
@@ -98,8 +116,28 @@ Item {
             }
             onReleased: {
                 extraActionsFrame.opacity = 0
+
+                var pos = extraActionsButton.mapToItem(extraActionsFrame, 0, 10)
+                var button = layout.childAt(pos.x, pos.y)
+
+                if (button && button.action) {
+                    button.action.trigger()
+                }
                 extraActionsButton.x = 0
                 extraActionsButton.y = 0
+                message.opacity = 0
+            }
+            onPositionChanged: {
+                var pos = extraActionsButton.mapToItem(extraActionsFrame, 0, 10)
+                var button = layout.childAt(pos.x, pos.y)
+
+                if (button && button.action) {
+                    message.text = button.action.text
+                    message.opacity = 1
+                } else {
+                    message.opacity = 0
+                }
+                mouse.accepted = false
             }
         }
     }
