@@ -54,6 +54,16 @@ Item {
         action: applet.action("remove")
     }
 
+    ActionButton {
+        id: runButton
+        anchors.right: parent.right
+        svg: iconsSvg
+        elementId: "maximize"
+        z: applet.z + 1
+
+        action: applet.action("run associated application")
+    }
+
     onHeightChanged: {
         if (applet) {
             applet.height = height
