@@ -71,6 +71,9 @@ PlasmaCore.SvgItem {
             spacer.visible = true
             appletsRow.remove(plasmoidContainer)
             appletsRow.insertAt(spacer, index)
+
+            //the parent is changed, the coordinate system as well with it
+            plasmoidContainer.x -= appletsFlickable.contentX
         }
 
         onReleased: {
