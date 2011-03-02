@@ -56,9 +56,8 @@ Item {
         x: -placeHolder.x-margins.left
         y: -margins.top
         width: layout.width+margins.left+margins.right
-        height: layout.height+margins.top
+        height: layout.height+margins.top+margins.bottom
         imagePath: "widgets/background"
-        enabledBorders: "LeftBorder|RightBorder|TopBorder"
         opacity: 0
 
         Behavior on opacity {
