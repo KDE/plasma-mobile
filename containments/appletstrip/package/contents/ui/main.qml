@@ -146,6 +146,11 @@ Item {
                     {
                         LayoutManager.remove(item)
                     }
+
+                    function saveOrder()
+                    {
+                        LayoutManager.saveOrder()
+                    }
                 }
                 Item {
                     anchors.top: parent.top

@@ -83,6 +83,7 @@ PlasmaCore.SvgItem {
             appletsRow.remove(spacer)
             spacer.visible = false
             scrollTimer.running = false
+            appletsRow.saveOrder()
         }
 
         onPositionChanged: {
