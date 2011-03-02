@@ -116,13 +116,13 @@ Item {
 
         Flickable {
             id: appletsFlickable
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            anchors.top: appletsFlickableParent.top
+            anchors.bottom: appletsFlickableParent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             clip: true
             interactive:true
             contentWidth: mainRow.width
-            contentHeight: mainRow.height
+            contentHeight: height
 
             width: Math.min(parent.width, mainRow.width)
 
