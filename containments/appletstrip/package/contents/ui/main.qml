@@ -125,14 +125,14 @@ Item {
                     add: Transition {
                         NumberAnimation {
                             properties: "x"
-                            easing.type: Easing.OutBounce
+                            easing.type: Easing.OutCubic
                             duration: 250
                         }
                     }
                     move: Transition {
                         NumberAnimation {
                             properties: "x"
-                            easing.type: Easing.OutBounce
+                            easing.type: Easing.OutCubic
                             duration: 250
                         }
                     }
