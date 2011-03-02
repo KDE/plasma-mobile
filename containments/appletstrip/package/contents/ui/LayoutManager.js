@@ -64,3 +64,16 @@ function remove(item)
         items.splice(index, 1)
     }
 }
+
+function saveOrder()
+{
+    var order = String()
+    for (var i = 0; i < items.length; ++i) {
+        if (items[i].applet.id >= 0) {
+            order += ":" + items[i].applet.id
+        }
+    }
+    appletsOrder = order
+    plasmoid.writeConfig("AppletsOrder", appletsOrder)
+}
+

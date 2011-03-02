@@ -40,9 +40,6 @@ Item {
         //array with all the applet ids, in order
         var appletIds = appletsOrder.split(":")
 
-        //forget about it, it will be rebuilt
-        appletsOrder = String()
-
         //all applets loaded, indicized by id
         var appletsForId = new Array()
 
@@ -71,6 +68,7 @@ Item {
         }
 
         plasmoid.appletAdded.connect(addApplet)
+        LayoutManager.saveOrder()
     }
 
 
@@ -84,10 +82,6 @@ Item {
         }
         plasmoidContainer.applet = applet
         appletsRow.insertAt(plasmoidContainer, index)
-
-        appletsOrder += ":" + applet.id
-        plasmoid.writeConfig("AppletsOrder", appletsOrder)
-        print("AppletsOrder: "+plasmoid.readConfig("AppletsOrder"))
     }
 
     Item {
