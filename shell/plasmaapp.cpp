@@ -576,8 +576,14 @@ void PlasmaApp::mainViewGeometryChanged()
                               (int)screenGeometryItem->property("y").toReal(),
                               (int)screenGeometryItem->property("width").toReal(),
                               (int)screenGeometryItem->property("height").toReal());
-            //are wew rotated?
+            //are we rotated?
             screenGeometry = m_mainView->transformedRect(screenGeometry);
+
+            const int left = screenGeometryItem->property("leftReserved").toInt();
+            const int top = screenGeometryItem->property("topReserved").toInt();
+            const int right = screenGeometryItem->property("rightReserved").toInt();
+            const int bottom = screenGeometryItem->property("bottomReserved").toInt();
+            reserveStruts(left, top, right, bottom);
         }
 
         //sometimes a geometry change arives very early in the ctor
@@ -600,6 +606,57 @@ void PlasmaApp::mainViewGeometryChanged()
             m_widgetsExplorer.data()->setGeometry(m_declarativeWidget->geometry());
         }
     }
+}
+
+void PlasmaApp::reserveStruts(const int left, const int top, const int right, const int bottom)
+{
+    if (!m_mainView) {
+        return;
+    }
+
+    if (!m_isDesktop) {
+        KWindowSystem::setExtendedStrut(m_mainView->winId(),
+                                    0, 0, 0,
+                                    0, 0, 0,
+                                    0, 0, 0,
+                                    0, 0, 0);
+        return;
+    }
+
+    NETExtendedStrut strut;
+
+    if (left) {
+        strut.left_width = left;
+        strut.left_start = m_mainView->y();
+        strut.left_end = m_mainView->y() + m_mainView->height() - 1;
+    }
+    if (right) {
+        strut.right_width = right;
+        strut.right_start = m_mainView->y();
+        strut.right_end = m_mainView->y() + m_mainView->height() - 1;
+    }
+    if (top) {
+        strut.top_width = top;
+        strut.top_start = m_mainView->x();
+        strut.top_end = m_mainView->x() + m_mainView->width() - 1;
+    }
+    if (bottom) {
+        strut.bottom_width = bottom;
+        strut.bottom_start = m_mainView->x();
+        strut.bottom_end = m_mainView->x() + m_mainView->width() - 1;
+    }
+
+
+    const QPoint oldPos = m_mainView->pos();
+
+    KWindowSystem::setExtendedStrut(m_mainView->winId(),
+                                    strut.left_width, strut.left_start, strut.left_end,
+                                    strut.right_width, strut.right_start, strut.right_end,
+                                    strut.top_width, strut.top_start, strut.top_end,
+                                    strut.bottom_width, strut.bottom_start, strut.bottom_end);
+
+    //ensure the main view is at the proper position too
+    m_mainView->move(oldPos);
 }
 
 void PlasmaApp::showWidgetsExplorer()

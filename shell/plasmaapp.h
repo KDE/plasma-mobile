@@ -67,6 +67,7 @@ protected:
     void setupHomeScreen();
     void setupContainment(Plasma::Containment *containment);
     void changeActivity(Plasma::Containment *containment);
+    void reserveStruts(const int left, const int top, const int right, const int bottom);
 
 public Q_SLOTS:
     void containmentsTransformingChanged(bool transforming);
