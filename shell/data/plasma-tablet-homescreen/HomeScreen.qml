@@ -38,8 +38,8 @@ Item {
         id: screenGeometry
         objectName: "screenGeometry"
         anchors.fill: parent
-        anchors.topMargin: 24
-        anchors.bottomMargin: 24
+        anchors.topMargin: 32
+        anchors.bottomMargin: 28
 
         //this properties will define "structs" for reserved screen of the panels
         property int leftReserved: 0
