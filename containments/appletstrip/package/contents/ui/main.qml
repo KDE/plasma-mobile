@@ -102,6 +102,7 @@ Item {
     }
 
     Item {
+        id: appletsFlickableParent
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: parent.left

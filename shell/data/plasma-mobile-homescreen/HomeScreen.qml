@@ -31,6 +31,21 @@ Item {
     signal transitionFinished();
     state : "Normal";
 
+    //this item will define Corona::screenGeometry() and Corona::availableScreenRegion()
+    Item {
+        id: screenGeometry
+        objectName: "screenGeometry"
+        anchors.fill: parent
+        anchors.topMargin: 32
+        anchors.bottomMargin: 28
+
+        //this properties will define "structs" for reserved screen of the panels
+        property int leftReserved: 0
+        property int topReserved: anchors.topMargin
+        property int rightReserved: 0
+        property int bottomReserved: 0
+    }
+
     Flipable {
         id : flipable;
         objectName: "containments";
