@@ -38,9 +38,9 @@ function insertAt(item, index)
         oldChildren[oldChildren.length] = items[i]
     }
 
-    item.parent = main
+    item.parent = appletsFlickableParent
     for (var i = 0; i < oldChildren.length; ++i) {
-        oldChildren[i].parent = main
+        oldChildren[i].parent = appletsFlickableParent
     }
     item.parent = appletsRow
     for (var i = 0; i < oldChildren.length; ++i) {
@@ -54,7 +54,7 @@ function remove(item)
     var index = -1
     for (var i = 0; i < items.length; ++i) {
         if (items[i] == item) {
-            item.parent = main
+            item.parent = appletsFlickableParent
             index = i
             break
         }
