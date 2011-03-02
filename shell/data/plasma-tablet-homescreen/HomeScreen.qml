@@ -33,6 +33,21 @@ Item {
     signal previousActivityRequested();
     state : "Normal";
 
+    //this item will define Corona::screenGeometry() and Corona::availableScreenRegion()
+    Item {
+        id: screenGeometry
+        objectName: "screenGeometry"
+        anchors.fill: parent
+        anchors.topMargin: 24
+        anchors.bottomMargin: 24
+
+        //this properties will define "structs" for reserved screen of the panels
+        property int leftReserved: 0
+        property int topReserved: anchors.topMargin
+        property int rightReserved: 0
+        property int bottomReserved: 0
+    }
+
     Item {
         id: mainSlot;
         objectName: "mainSlot";
