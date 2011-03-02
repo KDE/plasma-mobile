@@ -89,8 +89,8 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
-      m_nextContainment(0),
       m_alternateContainment(0),
+      m_nextContainment(0),
       m_trayContainment(0),
       m_isDesktop(false)
 {
@@ -311,7 +311,6 @@ void PlasmaApp::changeActivity()
 
 void PlasmaApp::nextActivity()
 {
-    const int totalContainments = m_corona->totalContainments();
     int currentId = m_currentContainment->id();
 
     Plasma::Containment *nextContainment = m_currentContainment;
@@ -338,7 +337,6 @@ void PlasmaApp::nextActivity()
 
 void PlasmaApp::previousActivity()
 {
-    const int totalContainments = m_corona->totalContainments();
     int currentId = m_currentContainment->id();
 
     Plasma::Containment *nextContainment = m_currentContainment;
