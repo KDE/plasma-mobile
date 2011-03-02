@@ -26,6 +26,8 @@ import "LayoutManager.js" as LayoutManager
 Item {
     id: main
     signal shrinkRequested
+    width: 1024
+    height: 600
 
     property int actionSize: 48
     property int appletColumns: 3
@@ -104,6 +106,13 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
+
+
+        anchors.leftMargin: plasmoid.screenGeometry(plasmoid.screen).x
+        anchors.topMargin: plasmoid.screenGeometry(plasmoid.screen).y
+        anchors.rightMargin: parent.width - plasmoid.screenGeometry(plasmoid.screen).width - plasmoid.screenGeometry(plasmoid.screen).x
+        anchors.bottomMargin: parent.height - plasmoid.screenGeometry(plasmoid.screen).height - plasmoid.screenGeometry(plasmoid.screen).y
+
         Flickable {
             id: appletsFlickable
             anchors.top: parent.top
