@@ -142,31 +142,37 @@ plugin=org.kde.mobilesystemtray
 screen=0
 zvalue=10
 
-[Containments][7][Applets][9]
+[Containments][8][Applets][9]
+geometry=2,0,24,24
+immutability=1
+plugin=org.kde.appswitcher
+zvalue=0
+
+[Containments][7][Applets][10]
 geometry=16,4,28.2857142857143,24
 immutability=1
 plugin=notifications
 zvalue=0
 
-[Containments][7][Applets][10]
+[Containments][7][Applets][11]
 geometry=49,4,24,24
 immutability=1
 plugin=notifier
 zvalue=0
 
-[Containments][7][Applets][11]
+[Containments][7][Applets][12]
 geometry=60,4,24,24
 immutability=1
 plugin=battery
 zvalue=0
 
-[Containments][7][Applets][12]
+[Containments][7][Applets][13]
 geometry=90,4,24,24
 immutability=1
 plugin=org.kde.networkmanagement
 zvalue=0
 
-[Containments][7][Applets][13]
+[Containments][7][Applets][14]
 geometry=120,4,24,24
 immutability=1
 plugin=digital-clock
