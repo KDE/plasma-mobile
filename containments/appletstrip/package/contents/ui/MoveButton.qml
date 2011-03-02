@@ -79,6 +79,8 @@ PlasmaCore.SvgItem {
         onReleased: {
             plasmoidContainer.z = 0
             var index = Math.round(plasmoidContainer.mapToItem(appletsRow, 0, 0).x/(columnSize))
+            //remap again plasmoidContainer position to new parent
+            plasmoidContainer.x += appletsFlickable.contentX
             appletsRow.insertAt(plasmoidContainer, index)
             appletsRow.remove(spacer)
             spacer.visible = false
