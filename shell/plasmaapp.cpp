@@ -110,8 +110,6 @@ PlasmaApp::PlasmaApp()
         //m_mainView->setWindowFlags(Qt::FramelessWindowHint);
     }
 
-    connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
-    connect(m_mainView, SIGNAL(geometryChanged()), this, SLOT(mainViewGeometryChanged()));
 
     int width = 800;
     int height = 480;
@@ -219,6 +217,10 @@ void PlasmaApp::syncConfig()
 
 void PlasmaApp::setupHomeScreen()
 {
+    if (m_declarativeWidget) {
+        kWarning() << "The home screen can be set up a single time";
+    }
+
     m_declarativeWidget = new Plasma::DeclarativeWidget();
     m_corona->addItem(m_declarativeWidget);
 
@@ -247,6 +249,8 @@ void PlasmaApp::setupHomeScreen()
 
     m_homeScreen = mainItem;
     mainViewGeometryChanged();
+    connect(m_mainView, SIGNAL(geometryChanged()), this, SLOT(mainViewGeometryChanged()));
+    connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
 
     // get references for the main objects that we'll need to deal with
     m_mainSlot = mainItem->findChild<QDeclarativeItem*>("mainSlot");
@@ -408,6 +412,7 @@ Plasma::Corona* PlasmaApp::corona()
     if (!m_corona) {
         m_corona = new MobCorona(this);
         m_corona->setItemIndexMethod(QGraphicsScene::NoIndex);
+        m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->transformedSize()));
 
         connect(m_corona, SIGNAL(containmentAdded(Plasma::Containment*)),
                 this, SLOT(manageNewContainment(Plasma::Containment*)));
@@ -417,7 +422,7 @@ Plasma::Corona* PlasmaApp::corona()
         // setup our QML home screen;
         setupHomeScreen();
         m_corona->initializeLayout();
-        m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->transformedSize()));
+
         m_mainView->setScene(m_corona);
         m_mainView->show();
     }
@@ -568,6 +573,12 @@ void PlasmaApp::mainViewGeometryChanged()
 {
     if (m_declarativeWidget) {
 
+        //sometimes a geometry change arives very early in the ctor
+        corona();
+        m_declarativeWidget->resize(m_mainView->transformedSize());
+        //m_declarativeWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
+        m_declarativeWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
+
         QRect screenGeometry(QPoint(0,0), m_mainView->size());
         QDeclarativeItem *screenGeometryItem = m_homeScreen->findChild<QDeclarativeItem*>("screenGeometry");
         //is there an item that defines the screen geometry?
@@ -586,12 +597,8 @@ void PlasmaApp::mainViewGeometryChanged()
             reserveStruts(left, top, right, bottom);
         }
 
-        //sometimes a geometry change arives very early in the ctor
-        corona();
         m_corona->setScreenGeometry(screenGeometry);
-        m_declarativeWidget->resize(m_mainView->transformedSize());
-        //m_declarativeWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
-        m_declarativeWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
+
         if (m_currentContainment) {
             m_currentContainment->resize(m_mainView->transformedSize());
         }
