@@ -245,6 +245,7 @@ void PlasmaApp::setupHomeScreen()
 
     QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
 
+    m_homeScreen = mainItem;
     mainViewGeometryChanged();
 
     // get references for the main objects that we'll need to deal with
@@ -257,7 +258,7 @@ void PlasmaApp::setupHomeScreen()
 
 
     m_trayPanel = mainItem->findChild<QDeclarativeItem*>("systraypanel");
-    m_homeScreen = mainItem;
+
 
     connect(m_homeScreen, SIGNAL(transitionFinished()),
             this, SLOT(updateMainSlot()));
@@ -566,9 +567,22 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 void PlasmaApp::mainViewGeometryChanged()
 {
     if (m_declarativeWidget) {
+
+        QRect screenGeometry(QPoint(0,0), m_mainView->size());
+        QDeclarativeItem *screenGeometryItem = m_homeScreen->findChild<QDeclarativeItem*>("screenGeometry");
+        //is there an item that defines the screen geometry?
+        if (screenGeometryItem) {
+            screenGeometry = QRect((int)screenGeometryItem->property("x").toReal(),
+                              (int)screenGeometryItem->property("y").toReal(),
+                              (int)screenGeometryItem->property("width").toReal(),
+                              (int)screenGeometryItem->property("height").toReal());
+            //are wew rotated?
+            screenGeometry = m_mainView->transformedRect(screenGeometry);
+        }
+
         //sometimes a geometry change arives very early in the ctor
         corona();
-        m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->transformedSize()));
+        m_corona->setScreenGeometry(screenGeometry);
         m_declarativeWidget->resize(m_mainView->transformedSize());
         //m_declarativeWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
         m_declarativeWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());

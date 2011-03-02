@@ -244,6 +244,25 @@ QSize MobView::transformedSize() const
     }
 }
 
+QRect MobView::transformedRect(const QRect &rect) const
+{
+    switch (m_direction) {
+    case Plasma::Left:
+        return QRect(QPoint(rect.top(), size().width()-rect.width()), QSize(rect.height(), rect.width()));
+        break;
+    case Plasma::Right:
+        return QRect(QPoint(size().height() - rect.height(), rect.left()), QSize(rect.height(), rect.width()));
+        break;
+    case Plasma::Down:
+        return QRect(QPoint(size().width()-rect.width(), size().height() - rect.height()), rect.size());
+        break;
+    case Plasma::Up:
+    default:
+        return rect;
+        break;
+    }
+}
+
 void MobView::rotateCounterClockwise()
 {
     switch (m_direction) {
@@ -261,6 +280,7 @@ void MobView::rotateCounterClockwise()
         setDirection(Plasma::Left);
         break;
     }
+    emit geometryChanged();
 }
 
 void MobView::rotateClockwise()
@@ -280,6 +300,7 @@ void MobView::rotateClockwise()
         setDirection(Plasma::Right);
         break;
     }
+    emit geometryChanged();
 }
 
 void MobView::updateGeometry()

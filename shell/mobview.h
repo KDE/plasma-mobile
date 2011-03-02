@@ -57,6 +57,7 @@ public:
     void setDirection(const Plasma::Direction direction);
     Plasma::Direction direction() const;
     QSize transformedSize() const;
+    QRect transformedRect(const QRect &rect) const;
 
     static int mainViewId() { return 1; }
 
