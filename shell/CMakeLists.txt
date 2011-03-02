@@ -35,6 +35,10 @@ endif(X11_Xrender_FOUND)
 install(TARGETS kdeinit_plasma-mobile DESTINATION ${LIB_INSTALL_DIR})
 install(TARGETS plasma-mobile ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
+execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
+                   ${BIN_INSTALL_DIR}/plasma-mobile
+                   ${BIN_INSTALL_DIR}/plasma-tablet)
+
 #install(FILES plasma-mobile.desktop DESTINATION ${AUTOSTART_INSTALL_DIR})
 
 install(DIRECTORY widgetsexplorer/qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma-mobile/mobilewidgetsexplorer PATTERN .svn EXCLUDE)
