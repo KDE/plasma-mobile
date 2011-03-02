@@ -34,19 +34,43 @@ Item {
     Component.onCompleted: {
 
         plasmoid.containmentType = "CustomContainment"
-/*
-        var order = plasmoid.readConfig("AppletsOrder")
-        if (order) {
-            appletsOrder = order
-        }*/
 
-        plasmoid.appletAdded.connect(addApplet)
+        appletsOrder = plasmoid.readConfig("AppletsOrder")
 
+        //array with all the applet ids, in order
+        var appletIds = appletsOrder.split(":")
+
+        //forget about it, it will be rebuilt
+        appletsOrder = String()
+
+        //all applets loaded, indicized by id
+        var appletsForId = new Array()
+
+        //fill appletsForId
         for (var i = 0; i < plasmoid.applets.length; ++i) {
             var applet = plasmoid.applets[i]
-            print(applet)
-            addApplet(applet, Qt.point(-1,-1));
+            appletsForId[applet.id] = applet
         }
+
+        //add applets present in AppletsOrder
+        for (var i = 0; i < appletIds.length; ++i) {
+            var id = appletIds[i]
+            var applet = appletsForId[id]
+            if (applet) {
+                addApplet(applet, Qt.point(-1,-1));
+                //discard it, so will be easy to find out who wasn't in the series
+                appletsForId[id] = null
+            }
+        }
+
+        for (var id in appletsForId) {
+            var applet = appletsForId[id]
+            if (applet) {
+                addApplet(applet, Qt.point(-1,-1));
+            }
+        }
+
+        plasmoid.appletAdded.connect(addApplet)
     }
 
 
@@ -54,18 +78,14 @@ Item {
     {
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(appletsRow, {"x": pos.x, "y": pos.y});
-        var index = plasmoid.readConfig("AppletPosition-"+applet.id)
-        if (!(index >= 0)) {
-            if (pos.x >= 0) {
-                index = pos.x/appletColumns
-            } else {
-                index = appletsRow.children.length
-            }
+        var index = appletsRow.children.length
+        if (pos.x >= 0) {
+            index = pos.x/appletColumns
         }
         plasmoidContainer.applet = applet
         appletsRow.insertAt(plasmoidContainer, index)
 
-        appletsOrder += " " + applet.id
+        appletsOrder += ":" + applet.id
         plasmoid.writeConfig("AppletsOrder", appletsOrder)
         print("AppletsOrder: "+plasmoid.readConfig("AppletsOrder"))
     }
