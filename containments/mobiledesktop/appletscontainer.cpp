@@ -144,6 +144,7 @@ void AppletsContainer::completeStartup()
 void AppletsContainer::layoutApplet(Plasma::Applet* applet, const QPointF &pos)
 {
     applet->setParentItem(this);
+    applet->setFlag(ItemIsMovable, false);
     applet->setZValue(0);
     relayoutApplet(applet, pos);
 }
@@ -180,6 +181,7 @@ void AppletsContainer::relayoutApplet(Plasma::Applet *applet, const QPointF &pos
 void AppletsContainer::appletRemoved(Plasma::Applet *applet)
 {
     m_applets.removeAll(applet);
+    applet->setFlag(ItemIsMovable, true);
     relayout();
 }
 
@@ -375,6 +377,7 @@ void AppletsContainer::setCurrentApplet(Plasma::Applet *applet)
     relayout();
 
     if (applet) {
+        applet->setFlag(ItemIsMovable, false);
         setAppletsOverlayVisible(true);
         m_appletsOverlay->setApplet(applet);
         m_currentApplet.data()->raise();

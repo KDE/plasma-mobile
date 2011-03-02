@@ -125,7 +125,9 @@ void AppletsOverlay::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if (m_closeButton) {
         toggleDeleteButton();
     }
-    emit closeRequested();
+    if (!m_applet || !m_applet.data()->geometry().contains(event->pos())) {
+        emit closeRequested();
+    }
 }
 
 void AppletsOverlay::paint(QPainter *painter,
