@@ -42,6 +42,7 @@ class MobileDolphin : public QDeclarativeView
 
     public slots:
         void changeDir(QString name);
+        void showContextualMenu(QString);
 };
 
 #endif

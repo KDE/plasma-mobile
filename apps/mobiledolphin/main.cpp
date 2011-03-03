@@ -24,7 +24,7 @@
 #include <kdeclarative.h>
 
 #include "mobiledolphin.h"
-    
+
 KDeclarativeDirModel::KDeclarativeDirModel()
     : KDirModel(0)
 {
@@ -40,22 +40,23 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     MobileDolphin view;
-    
+
     KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(view.engine());
     kdeclarative.initialize();
     kdeclarative.setupBindings();
-    
+
     view.lister = new KDirLister;
     view.lister->openUrl((app.arguments().count() == 2) ? KUrl(app.arguments().at(1)) : KUrl("file:///"));
     view.files = new KDeclarativeDirModel;
     view.files->setDirLister(view.lister);
-    
+
     view.rootContext()->setContextProperty("myModel", view.files);
     view.rootContext()->setContextProperty("directory", view.lister->url().prettyUrl());
     view.setSource(QUrl::fromLocalFile("mobiledolphin.qml"));
     QObject::connect(view.rootObject(), SIGNAL(fileClicked(QString)), &view, SLOT(changeDir(QString)));
-    
+    QObject::connect(view.rootObject(), SIGNAL(fileShowContextualMenu(QString)), &view, SLOT(showContextualMenu(QString)));
+
     view.show();
 
     return app.exec();

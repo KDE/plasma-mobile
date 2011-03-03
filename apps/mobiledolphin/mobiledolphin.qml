@@ -26,7 +26,8 @@ MainWindow {
     id: mainRect
 
     signal fileClicked(string name);
-
+    signal fileShowContextualMenu(string name);
+    
     PlasmaCore.Theme {
         id: theme
     }
@@ -99,6 +100,10 @@ MainWindow {
                     anchors.fill: frameSvg
                     onClicked: {
                         mainRect.fileClicked(name);
+                    }
+                    
+                    onPressAndHold: {
+                        mainRect.fileShowContextualMenu(name);
                     }
                 }
             }

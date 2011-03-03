@@ -20,11 +20,18 @@
 #include "mobiledolphin.h"
 
 #include <QDeclarativeContext>
+#include <QDeclarativeComponent>
+#include <QDeclarativeItem>
 #include <kdeclarative.h>
 
 #include <kdirmodel.h>
 #include <kdirlister.h>
 #include <kdebug.h>
+
+#include <QApplication>
+#include <KStandardAction>
+#include <QAction>
+#include <KAction>
 
 MobileDolphin::MobileDolphin()
 {
@@ -37,6 +44,22 @@ void MobileDolphin::changeDir(QString name)
     url.cd(name);
     rootContext()->setContextProperty("directory", url.prettyUrl());
     lister->openUrl(url);
+}
+
+void MobileDolphin::showContextualMenu(QString name)
+{
+    QList<QObject *> actions;
+    actions.append(KStandardAction::copy(0, 0, 0));
+    actions.append(KStandardAction::paste(0, 0, 0));
+    actions.append(KStandardAction::cut(QApplication::instance(), SLOT(quit()), 0));
+    
+    QDeclarativeContext *newContext = new QDeclarativeContext(rootContext());
+    QDeclarativeComponent component(engine(), QUrl::fromLocalFile("ActionsMenu.qml"));
+    newContext->setContextProperty("actionsModel", QVariant::fromValue(actions));
+    QObject *myObject = component.create(newContext);
+    QDeclarativeItem *item = static_cast<QDeclarativeItem *>(myObject);
+    scene()->addItem(item);
+    item->setZValue(100);
 }
 
 #include "mobiledolphin.h"
