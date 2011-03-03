@@ -21,11 +21,8 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
-Rectangle {
+MainWindow {
     id: mainRect
-    color: "black"
-    width: 800
-    height: 480
 
     signal fileClicked(string name);
 
@@ -40,10 +37,8 @@ Rectangle {
         y: 0
         color: "#303030"
         
-        Text {
+        Label {
             text: "File Manager"
-            color: "white"
-            font.pointSize: 24;
             x: 290
         }
         
@@ -51,21 +46,16 @@ Rectangle {
             x: 10
             y: 50
             spacing: 10
-            PlasmaWidgets.PushButton {
+            Button {
                 text: "Back"
-                width: 50
-                height: 40
-                font.pointSize: 24;
                 onClicked: {
                     mainRect.fileClicked("..");
                 }
             }
             
-            Text {
+            Label {
                 id: directoryLabel
                 text: directory
-                color: "white"
-                font.pointSize: 24;
             }
         }
     }
@@ -98,10 +88,8 @@ Rectangle {
                         icon: decoration
                     }
 
-                    Text {
-                        color: "white"
+                    Label {
                         text: name
-                        font.pointSize: 24;
                     }
                 }
                 
