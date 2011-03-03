@@ -4,7 +4,7 @@ find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
 
-set(mobiledolphin_SRCS main.cpp mobiledolphin.cpp)
+set(mobiledolphin_SRCS main.cpp mobiledolphin.cpp kdeclarativedirmodel.cpp)
 
 kde4_add_executable(mobiledolphin ${mobiledolphin_SRCS})
 

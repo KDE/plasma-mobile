@@ -22,14 +22,7 @@
 
 #include <QDeclarativeView>
 
-#include <kdirmodel.h>
-#include <kdirlister.h>
-
-class KDeclarativeDirModel : public KDirModel
-{
-    public:
-        KDeclarativeDirModel();
-};
+#include "kdeclarativedirmodel.h"
 
 class MobileDolphin : public QDeclarativeView
 {
