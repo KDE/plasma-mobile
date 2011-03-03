@@ -27,10 +27,6 @@ MainWindow {
 
     signal fileClicked(string name);
     signal fileShowContextualMenu(string name);
-    
-    PlasmaCore.Theme {
-        id: theme
-    }
 
     Rectangle {
         width: mainRect.width

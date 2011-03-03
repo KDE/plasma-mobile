@@ -18,9 +18,15 @@
  ***************************************************************************/
 
 import Qt 4.7
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 Rectangle {
     color: "black"
     width: 800
     height: 480
+    
+    PlasmaCore.Theme {
+        id: theme
+    }
 }

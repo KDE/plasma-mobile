@@ -25,10 +25,6 @@ import "widgets"
 MainWindow {
     id: mainRect
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-    
     ListView {
         id: list
         model: actionsModel
