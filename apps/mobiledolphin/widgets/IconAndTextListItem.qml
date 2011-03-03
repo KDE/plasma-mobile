@@ -20,36 +20,27 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
-import "widgets"
 
-MainWindow {
-    id: mainRect
+PlasmaCore.FrameSvgItem {
+    property string itemText;
+    property variant itemIcon;
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-    
-    ListView {
-        id: list
-        model: actionsModel
-        width: mainRect.width
-        height: mainRect.height - 100
-        x: 0
-        y: 100
-        spacing: 5;
-        clip: true
-        delegate: IconAndTextListItem {
-            id: delegateItem
-            itemText: model.modelData.text
-            itemIcon: model.modelData.icon
+    imagePath: "widgets/frame"
+    prefix: "plain"
+    width: ListView.view.width
+    height: 70
 
-            MouseArea {
-                anchors.fill: delegateItem
-                onClicked: {
-                    console.log(text);
-                    model.modelData.trigger()
-                }
-            }
+    Row {
+        y: 20
+        id : delegateLayout
+        spacing: 5
+
+        PlasmaWidgets.IconWidget {
+            icon: itemIcon
         }
-     }
+
+        Label {
+            text: itemText
+        }
+    }
 }

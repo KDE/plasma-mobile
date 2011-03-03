@@ -71,42 +71,21 @@ MainWindow {
         y: 100
         spacing: 5;
         clip: true
-        delegate: Component {
+        delegate: IconAndTextListItem {
             id: delegateItem  
-                
-            PlasmaCore.FrameSvgItem {
-                id: frameSvg
-                imagePath: "widgets/frame"
-                prefix: "plain"
-                width: list.width
-                height: 70
-                        
-                Row {
-                    y: 20
-                    id : delegateLayout
-                    spacing: 5
-
-                    PlasmaWidgets.IconWidget {
-                        icon: decoration
-                    }
-
-                    Label {
-                        text: name
-                    }
+            itemText: name
+            itemIcon: decoration
+            
+             MouseArea {
+                anchors.fill: delegateItem
+                onClicked: {
+                    mainRect.fileClicked(name);
                 }
-                
-                
-                MouseArea {
-                    anchors.fill: frameSvg
-                    onClicked: {
-                        mainRect.fileClicked(name);
-                    }
                     
-                    onPressAndHold: {
-                        mainRect.fileShowContextualMenu(name);
-                    }
+                onPressAndHold: {
+                    mainRect.fileShowContextualMenu(name);
                 }
-            }
+             }
         }
      }
  }
