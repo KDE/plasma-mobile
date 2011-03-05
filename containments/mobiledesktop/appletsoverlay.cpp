@@ -28,6 +28,7 @@
 
 #include <Plasma/Animation>
 #include <Plasma/Applet>
+#include <Plasma/Corona>
 #include <Plasma/IconWidget>
 #include <Plasma/PushButton>
 
@@ -94,10 +95,10 @@ void AppletsOverlay::toggleDeleteButton()
         anim->start(QAbstractAnimation::DeleteWhenStopped);
         connect(anim, SIGNAL(destroyed()), m_closeButton.data(), SLOT(deleteLater()));
     } else {
-        m_closeButton = new Plasma::PushButton(this);
+        m_closeButton = new Plasma::PushButton(parentWidget());
+        m_closeButton.data()->setZValue(99999);
         m_closeButton.data()->setText(i18n("Delete?"));
-        m_layout->addAnchor(m_closeButton.data(), Qt::AnchorVerticalCenter, m_askCloseButton, Qt::AnchorVerticalCenter);
-        m_layout->addAnchor(m_closeButton.data(), Qt::AnchorRight, m_askCloseButton, Qt::AnchorLeft);
+        m_closeButton.data()->setPos(m_askCloseButton->pos().x()-m_closeButton.data()->size().width(), m_askCloseButton->pos().y());
         Plasma::Animation *anim = Plasma::Animator::create(Plasma::Animator::ZoomAnimation);
         anim->setTargetWidget(m_closeButton.data());
         anim->setDirection(QAbstractAnimation::Backward);
@@ -112,6 +113,16 @@ void AppletsOverlay::closeApplet()
         m_applet.data()->destroy();
     }
     emit closeRequested();
+}
+
+void AppletsOverlay::resizeEvent(QGraphicsSceneResizeEvent *event)
+{
+    Plasma::Corona *corona = qobject_cast<Plasma::Corona *>(scene());
+    if (corona) {
+        QRect screenGeom = corona->screenGeometry(0);
+
+        setContentsMargins(screenGeom.x(), screenGeom.y(), size().width() - screenGeom.right(), size().height() - screenGeom.bottom());
+    }
 }
 
 void AppletsOverlay::mousePressEvent(QGraphicsSceneMouseEvent *event)

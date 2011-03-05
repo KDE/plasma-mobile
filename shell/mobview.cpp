@@ -23,7 +23,6 @@
 #include "mobview.h"
 #include "mobcorona.h"
 #include "plasmaapp.h"
-#include "keyboard_interface.h"
 
 #include <QAction>
 #include <QCoreApplication>

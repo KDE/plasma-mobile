@@ -50,6 +50,7 @@ protected:
                QWidget *widget);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    void resizeEvent(QGraphicsSceneResizeEvent *event);
 
 protected Q_SLOTS:
     void configureApplet();
