@@ -1,0 +1,12 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="local.PlasmaKeyboard">
+    <method name="show">
+    </method>
+    <method name="hide">
+    </method>
+    <method name="setDirection">
+      <arg name="direction" type="s" direction="in"/>
+    </method>
+  </interface>
+</node>
