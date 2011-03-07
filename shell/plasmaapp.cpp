@@ -542,11 +542,8 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     containment->resize(m_mainView->transformedSize());
 
     // we need our homescreen to show something!
+    // FIXME: this has to become way cleaner
     if (containment->id() == 1) {
-        containment->setPos(0,0);
-        m_currentContainment = containment;
-        return;
-    } else if (containment->id() == 2) {
         QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>("alternateSlot");
 
         if (alternateSlot) {
@@ -559,6 +556,10 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
             containment->setVisible(true);
             return;
         }
+    } else if (containment->id() == 2) {
+        containment->setPos(0,0);
+        m_currentContainment = containment;
+        return;
     }
 
     containment->setPos(m_mainView->width(), m_mainView->height());

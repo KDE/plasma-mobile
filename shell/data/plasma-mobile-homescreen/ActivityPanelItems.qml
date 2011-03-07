@@ -34,7 +34,7 @@ Flow {
         visible:false
     }
     Item {
-        objectName: "3";
+        objectName: "2";
         id: icon
         signal clicked;
 
@@ -48,7 +48,7 @@ Flow {
     }
 
     Item {
-        objectName: "4";
+        objectName: "3";
         signal clicked;
 
         width: instantmessaging.width;
@@ -69,7 +69,7 @@ Flow {
     }
 
     Item {
-        objectName: "5";
+        objectName: "4";
         signal clicked;
 
         width: phone.width;
@@ -83,7 +83,7 @@ Flow {
     }
 
     Item {
-        objectName: "6";
+        objectName: "5";
         signal clicked;
 
         width: social.width;
@@ -97,7 +97,7 @@ Flow {
     }
 
     Item {
-        objectName: "7";
+        objectName: "6";
         signal clicked;
 
         width: games.width;

@@ -1,21 +1,5 @@
+
 [Containments][1]
-activity=
-desktop=-1
-formfactor=0
-geometry=0,0,800,480
-immutability=1
-location=1
-plugin=org.kde.mobiledesktop
-screen=0
-zvalue=0
-wallpaperplugin=image
-wallpaperpluginmode=SingleImage
-
-[Containments][1][Applets][1]
-plugin=org.kde.analogclock
-zvalue=1
-
-[Containments][2]
 activity=
 desktop=-1
 formfactor=0
@@ -28,7 +12,7 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][2][Wallpaper][image]
+[Containments][1][Wallpaper][image]
 wallpaper=Fiber
 wallpaperposition=2
 
@@ -87,7 +71,7 @@ plugin=digital-clock
 zvalue=0
 
 
-[Containments][3]
+[Containments][2]
 activity=network
 desktop=-1
 formfactor=0
@@ -100,19 +84,24 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][3][Applets][1]
-geometry=0,0,310,310
-plugin=org.kde.news-qml
-immutability=1
+[Containments][2][Applets][1]
+plugin=org.kde.analogclock
 zvalue=1
 
-[Containments][3][Applets][2]
-geometry=300,0,310,310
+[Containments][2][Applets][2]
+geometry=o,0,310,310
 plugin=weather
 immutability=1
 zvalue=1
 
-[Containments][4]
+[Containments][2][Applets][3]
+geometry=300,0,310,310
+plugin=org.kde.news-qml
+immutability=1
+zvalue=1
+
+
+[Containments][3]
 activity=client
 desktop=-1
 formfactor=0
@@ -125,13 +114,13 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][4][Applets][1]
+[Containments][3][Applets][1]
 plugin=org.kde.fakecontactlist-qml
 geometry=28,66.8,266.4,133.2
 immutability=1
 zvalue=1
 
-[Containments][5]
+[Containments][4]
 activity=audiovideo
 desktop=-1
 formfactor=0
@@ -144,7 +133,7 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][6]
+[Containments][5]
 activity=service
 desktop=-1
 formfactor=0
@@ -157,13 +146,13 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][6][Applets][1]
+[Containments][5][Applets][1]
 geometry=10,10,500,400
 plugin=twitter
 immutability=1
 zvalue=1
 
-[Containments][7]
+[Containments][6]
 activity=game
 desktop=-1
 formfactor=0
@@ -176,7 +165,7 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][7][Applets][1]
+[Containments][6][Applets][1]
 geometry=8,1,342,342
 plugin=fifteenPuzzle
 immutability=1

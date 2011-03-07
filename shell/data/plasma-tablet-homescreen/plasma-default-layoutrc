@@ -5,22 +5,16 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=1
-plugin=org.kde.appletstrip
-orientation=1
+plugin=sal
+Orientation=1
 screen=0
 zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][1][Applets][1]
-geometry=0,0,310,310
-plugin=clock
-zvalue=1
-
-[Containments][1][Applets][2]
-geometry=400,0,310,310
-plugin=plasma_applet_notes
-zvalue=1
+[Containments][1][Wallpaper][image]
+wallpaper=Grass
+wallpaperposition=2
 
 [Containments][2]
 activity=
@@ -29,16 +23,22 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=1
-plugin=sal
-Orientation=1
+plugin=org.kde.appletstrip
+orientation=1
 screen=0
 zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][2][Wallpaper][image]
-wallpaper=Grass
-wallpaperposition=2
+[Containments][2][Applets][1]
+geometry=0,0,310,310
+plugin=clock
+zvalue=1
+
+[Containments][2][Applets][2]
+geometry=400,0,310,310
+plugin=plasma_applet_notes
+zvalue=1
 
 
 [Containments][3]
