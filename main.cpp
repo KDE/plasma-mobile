@@ -25,7 +25,7 @@
 #include <KCmdLineOptions>
 #include <KLocale>
 
-#include "location/locationmanager.h"
+#include "recommendation/recommendationmanager.h"
 
 int main(int argc, char** argv)
 {
@@ -41,6 +41,6 @@ int main(int argc, char** argv)
 
     KCmdLineArgs::init( argc, argv, &aboutData );
     KApplication app;
-    Contour::LocationManager* locationManager = new Contour::LocationManager(&app);
+    (void)new Contour::RecommendationManager(&app);
     return app.exec();
 }
