@@ -4,7 +4,7 @@ add_subdirectory(batterymonitor)
 add_subdirectory(fakesignal)
 add_subdirectory(fakecontactlist)
 add_subdirectory(favorites)
-add_subdirectory(mobilesystray)
+add_subdirectory(mobilesystemtray)
 
 add_subdirectory(qtwebbrowser)
 add_subdirectory(quickdialer)
