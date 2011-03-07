@@ -26,14 +26,16 @@
 #include <QtLocation/QLandmarkProximityFilter>
 #include <QtLocation/QLandmarkFetchRequest>
 
+#include <KDebug>
 
 
 Contour::LocationManager::LocationManager(QObject *parent)
     : QObject(parent),
       m_lastLandmarkRequest(0)
 {
-    // create the landmark manager
-    m_landmarkManager = new QLandmarkManager(QLatin1String("nepomuk-landmarkmanager"), QMap<QString, QString>(), this);
+    // create the landmark manager (once we have a nepomuk backend use that)
+    //m_landmarkManager = new QLandmarkManager(QLatin1String("nepomuk-landmarkmanager"), QMap<QString, QString>(), this);
+    m_landmarkManager = new QLandmarkManager(this);
 
     // subscribe to geo location updates
     QGeoPositionInfoSource *source = QGeoPositionInfoSource::createDefaultSource(this);
@@ -43,6 +45,9 @@ Contour::LocationManager::LocationManager(QObject *parent)
                 this, SLOT(slotGeoPositionChanged(QGeoPositionInfo)));
         slotGeoPositionChanged(source->lastKnownPosition());
         source->startUpdates();
+    }
+    else {
+        kDebug() << "No geo position info source found.";
     }
 }
 
@@ -57,6 +62,8 @@ QList<QLandmark> Contour::LocationManager::currentLocations() const
 
 void Contour::LocationManager::slotGeoPositionChanged(const QGeoPositionInfo &pos)
 {
+    kDebug() << pos;
+
     //
     // Cancel previous searches
     //
@@ -90,6 +97,8 @@ void Contour::LocationManager::slotLandmarkRequestDone()
     //       use the geo coordinate history as input:
     //       if we did not move more than N meters in the past
     //       M minutes it might be of interest.
+    //       Also check if we are at the address of someone in
+    //       the address book.
 }
 
 #include "locationmanager.moc"
