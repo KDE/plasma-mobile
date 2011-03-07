@@ -99,7 +99,6 @@ private:
     QDeclarativeItem *m_mainSlot;
     QDeclarativeItem *m_spareSlot;
     QDeclarativeItem *m_homeScreen;
-    QDeclarativeItem *m_panel;
     QDeclarativeItem *m_trayPanel;
 
     Plasma::Containment *m_currentContainment;

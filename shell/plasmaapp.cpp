@@ -273,12 +273,12 @@ void PlasmaApp::setupHomeScreen()
     connect(m_homeScreen, SIGNAL(previousActivityRequested()),
             this, SLOT(previousActivity()));
 
-    m_panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
+    QDeclarativeItem *panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
 
     m_mainView->setSceneRect(mainItem->x(), mainItem->y(),
                              mainItem->width(), mainItem->height());
 
-    QDeclarativeItem *panelItems = m_panel->findChild<QDeclarativeItem*>("panelitems");
+    QDeclarativeItem *panelItems = panel->findChild<QDeclarativeItem*>("panelitems");
 
     if (panelItems) {
         foreach(QObject *item, panelItems->children()) {
