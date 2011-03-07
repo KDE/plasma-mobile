@@ -36,6 +36,7 @@ Item {
     Component.onCompleted: {
 
         plasmoid.containmentType = "CustomContainment"
+        plasmoid.movableApplets = false
 
         appletsOrder = plasmoid.readConfig("AppletsOrder")
 
