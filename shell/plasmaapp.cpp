@@ -158,7 +158,7 @@ PlasmaApp::PlasmaApp()
     lockAction->setText(i18n("Lock Plasma Mobile screen"));
     lockAction->setObjectName(QString("lock screen")); // NO I18
 
-    KGlobalAccel::cleanComponent("plasma-mobile");
+    KGlobalAccel::cleanComponent(KGlobal::mainComponent().componentName());
     lockAction->setGlobalShortcut(KShortcut(Qt::CTRL + Qt::Key_L));
     m_mainView->addAction(lockAction);
     connect(lockAction, SIGNAL(triggered()), this, SLOT(lockScreen()));
@@ -374,7 +374,7 @@ void PlasmaApp::changeActivity(Plasma::Containment *containment)
 
 void PlasmaApp::lockScreen()
 {
-    changeActivity(m_containments.value(1));
+    m_homeScreen->setProperty("locked", true);
 }
 
 void PlasmaApp::updateMainSlot()

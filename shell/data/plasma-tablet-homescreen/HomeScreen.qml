@@ -31,7 +31,18 @@ Item {
     signal transitionFinished();
     signal nextActivityRequested();
     signal previousActivityRequested();
-    state : "Normal";
+    state : "Normal"
+    property bool locked: true
+
+    onLockedChanged: {
+        if (locked) {
+            lockScreenItem.x = 0
+            lockScreenItem.y = 0
+        } else if (lockScreenItem.x == 0 && lockScreenItem.y == 0) {
+            lockScreenItem.x = 0
+            lockScreenItem.y = homescreen.height
+        }
+    }
 
     //this item will define Corona::screenGeometry() and Corona::availableScreenRegion()
     Item {
@@ -185,4 +196,47 @@ Item {
         alternateDrag.updateDrag();
     }
 
+    Rectangle {
+        id: lockScreenItem
+        width: parent.width
+        height: parent.height
+        color: Qt.rgba(0, 0, 0, 0.8)
+
+        MouseArea {
+            anchors.fill: parent
+            drag.target: lockScreenItem
+            onReleased: {
+                var lockedX = false
+                var lockedY = false
+                if (lockScreenItem.x > homescreen.width/3) {
+                    lockScreenItem.x = homescreen.width
+                } else if (lockScreenItem.x < -homescreen.width/3) {
+                    lockScreenItem.x = -homescreen.width
+                } else {
+                    lockScreenItem.x = 0
+                    lockedX = true
+                }
+
+                if (lockScreenItem.y > homescreen.height/3) {
+                    lockScreenItem.y = homescreen.height
+                } else if (lockScreenItem.y < -homescreen.height/3) {
+                    lockScreenItem.y = -homescreen.height
+                } else {
+                    lockScreenItem.y = 0
+                    lockedY = true
+                }
+                if (lockedX && lockedY) {
+                    homescreen.locked = true
+                } else {
+                    homescreen.locked = false
+                }
+            }
+        }
+        Behavior on x {
+            NumberAnimation { duration: 250 }
+        }
+        Behavior on y {
+            NumberAnimation { duration: 250 }
+        }
+    }
 }
