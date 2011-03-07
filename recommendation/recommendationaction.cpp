@@ -24,6 +24,8 @@
 class Contour::RecommendationAction::Private
 {
 public:
+    QString m_id;
+    qreal m_relevance;
 };
 
 
@@ -40,10 +42,12 @@ Contour::RecommendationAction::~RecommendationAction()
 
 QString Contour::RecommendationAction::id() const
 {
+    return d->m_id;
 }
 
 qreal Contour::RecommendationAction::relevance() const
 {
+    return d->m_relevance;
 }
 
 #include "recommendationaction.moc"

@@ -20,10 +20,18 @@
 */
 
 #include "recommendationmanager.h"
+#include "recommendation.h"
+
+
+// TODO: act on several changes:
+//       * activity change
+//       * location change
+//       * later: triggers from the dms
 
 class Contour::RecommendationManager::Private
 {
 public:
+    QList<Recommendation*> m_recommendations;
 };
 
 
@@ -40,6 +48,7 @@ Contour::RecommendationManager::~RecommendationManager()
 
 QList<Contour::Recommendation *> Contour::RecommendationManager::recommendations() const
 {
+    return d->m_recommendations;
 }
 
-#include "recommentationmanager.moc"
+#include "recommendationmanager.moc"

@@ -31,7 +31,7 @@ class RecommendationAction : public QAction
     Q_OBJECT
 
 public:
-    RecommendationAction();
+    RecommendationAction(QObject* parent = 0);
     ~RecommendationAction();
 
     QString id() const;

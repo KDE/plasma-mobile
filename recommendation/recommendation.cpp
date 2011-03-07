@@ -20,10 +20,16 @@
 */
 
 #include "recommendation.h"
+#include "recommendationaction.h"
+
+#include <Nepomuk/Resource>
+
 
 class Contour::Recommendation::Private
 {
 public:
+    Nepomuk::Resource m_resource;
+    qreal m_relevance;
 };
 
 
@@ -40,14 +46,17 @@ Contour::Recommendation::~Recommendation()
 
 Nepomuk::Resource Contour::Recommendation::resource() const
 {
+    return d->m_resource;
 }
 
 QList<Contour::RecommendationAction *> Contour::Recommendation::actions() const
 {
+    return QList<Contour::RecommendationAction *>();
 }
 
 qreal Contour::Recommendation::relevance() const
 {
+    return d->m_relevance;
 }
 
 #include "recommendation.moc"

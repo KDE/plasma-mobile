@@ -22,7 +22,14 @@
 #ifndef RECOMMENDATION_H
 #define RECOMMENDATION_H
 
+#include <QtCore/QObject>
+
+namespace Nepomuk {
+class Resource;
+}
+
 namespace Contour {
+class RecommendationAction;
 
 class Recommendation : public QObject
 {
