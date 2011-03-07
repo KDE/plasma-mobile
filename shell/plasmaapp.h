@@ -92,8 +92,7 @@ private:
     MobCorona *m_corona;
     MobView *m_mainView;
 
-    QDeclarativeComponent *m_homescreen;
-
+    //the main declarative scene loader
     Plasma::DeclarativeWidget *m_declarativeWidget;
 
     QDeclarativeItem *m_mainSlot;

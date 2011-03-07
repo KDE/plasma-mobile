@@ -243,8 +243,6 @@ void PlasmaApp::setupHomeScreen()
         QCoreApplication::quit();
     }
 
-    m_homescreen = m_declarativeWidget->mainComponent();
-
     QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
 
     m_homeScreen = mainItem;
