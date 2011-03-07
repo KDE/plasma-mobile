@@ -20,20 +20,25 @@
 */
 
 #include "recommendationmanager.h"
+#include "recommendationmanageradaptor.h"
+#include "dbusoperators.h"
 #include "recommendation.h"
 #include "locationmanager.h"
 
 #include <kworkspace/kactivityinfo.h>
 #include <kworkspace/kactivityconsumer.h>
 
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusMetaType>
+
 #include <QtLocation/QLandmark>
 
 QTM_USE_NAMESPACE
 
+Q_DECLARE_METATYPE(Contour::Recommendation*)
+
 
 // TODO: act on several changes:
-//       * activity change
-//       * location change
 //       * later: triggers from the dms
 
 class Contour::RecommendationManager::Private
@@ -51,6 +56,8 @@ public:
 
 void Contour::RecommendationManager::Private::updateRecommendations()
 {
+    // TODO: get some dummy recommendations for now
+    //       for example: all files that were touched in this activity
 }
 
 void Contour::RecommendationManager::Private::_k_locationChanged(const QList<QLandmark>&)
@@ -74,6 +81,11 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
     connect(d->m_locationManager, SIGNAL(locationChanged(QList<QLandmark>)),
             this, SLOT(_k_locationChanged(QList<QLandmark>)));
     d->updateRecommendations();
+
+    // export via DBus
+    qDBusRegisterMetaType<Contour::Recommendation*>();
+    (void)new RecommendationManagerAdaptor(this);
+    QDBusConnection::sessionBus().registerObject(QLatin1String("/recommendationmanager"), this);
 }
 
 Contour::RecommendationManager::~RecommendationManager()
@@ -84,6 +96,10 @@ Contour::RecommendationManager::~RecommendationManager()
 QList<Contour::Recommendation *> Contour::RecommendationManager::recommendations() const
 {
     return d->m_recommendations;
+}
+
+void Contour::RecommendationManager::executeAction(const QString &actionId)
+{
 }
 
 #include "recommendationmanager.moc"

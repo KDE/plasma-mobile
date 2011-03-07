@@ -19,40 +19,35 @@
    License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef RECOMMENDATIONMANAGER_H
-#define RECOMMENDATIONMANAGER_H
+#include "dbusoperators.h"
+#include "recommendationaction.h"
 
-#include <QObject>
+#include <Nepomuk/Resource>
 
+#include <KUrl>
 
-namespace Contour {
-
-class Recommendation;
-
-class RecommendationManager : public QObject
+QDBusArgument& operator<<(QDBusArgument& arg, Contour::Recommendation* r)
 {
-    Q_OBJECT
+    arg.beginStructure();
+    arg << KUrl(r->resource().resourceUri()).url();
+    arg << r->relevance();
+    arg.beginArray();
+    foreach(Contour::RecommendationAction* action, r->actions()) {
+        arg.beginStructure();
+        arg << action->id()
+            << action->text()
+            << action->icon().name()
+            << action->relevance();
+        arg.endStructure();
+    }
 
-public:
-    RecommendationManager(QObject* parent = 0);
-    ~RecommendationManager();
+    arg.endArray();
+    arg.endStructure();
 
-    QList<Recommendation*> recommendations() const;
-
-public Q_SLOTS:
-    void executeAction(const QString& actionId);
-
-Q_SIGNALS:
-    void recommendationsChanged();
-
-private:
-    class Private;
-    Private* const d;
-
-    Q_PRIVATE_SLOT(d, void _k_locationChanged(QList<QLandmark>))
-    Q_PRIVATE_SLOT(d, void _k_currentActivityChanged(QString))
-};
-
+    return arg;
 }
 
-#endif
+const QDBusArgument& operator>>(const QDBusArgument& arg, const Contour::Recommendation* r)
+{
+    return arg;
+}

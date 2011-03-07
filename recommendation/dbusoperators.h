@@ -19,40 +19,14 @@
    License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef RECOMMENDATIONMANAGER_H
-#define RECOMMENDATIONMANAGER_H
 
-#include <QObject>
+#ifndef DBUSOPERATORS_H
+#define DBUSOPERATORS_H
 
+#include <QtDBus/QDBusArgument>
+#include "recommendation.h"
 
-namespace Contour {
-
-class Recommendation;
-
-class RecommendationManager : public QObject
-{
-    Q_OBJECT
-
-public:
-    RecommendationManager(QObject* parent = 0);
-    ~RecommendationManager();
-
-    QList<Recommendation*> recommendations() const;
-
-public Q_SLOTS:
-    void executeAction(const QString& actionId);
-
-Q_SIGNALS:
-    void recommendationsChanged();
-
-private:
-    class Private;
-    Private* const d;
-
-    Q_PRIVATE_SLOT(d, void _k_locationChanged(QList<QLandmark>))
-    Q_PRIVATE_SLOT(d, void _k_currentActivityChanged(QString))
-};
-
-}
+QDBusArgument& operator<<(QDBusArgument& arg, Contour::Recommendation*);
+const QDBusArgument& operator>>(const QDBusArgument& arg, const Contour::Recommendation*);
 
 #endif
