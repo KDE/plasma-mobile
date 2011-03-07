@@ -22,6 +22,10 @@
 #include <plasma/dataengine.h>
 
 
+class OrgKdeContourRecommendationManagerInterface;
+
+class QDBusPendingCallWatcher;
+
 class NepomukMobileTest : public Plasma::DataEngine
 {
     Q_OBJECT
@@ -36,9 +40,11 @@ protected:
 
 protected slots:
     bool updateSourceEvent(const QString &name);
+    void updateRecommendations(QVariantMap recommendations);
+    void recommendationsCallback(QDBusPendingCallWatcher *call);
 
 private:
-
+    OrgKdeContourRecommendationManagerInterface *m_contourIface;
 
 };
 

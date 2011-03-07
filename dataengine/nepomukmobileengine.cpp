@@ -18,6 +18,9 @@
 
 #include "nepomukmobileengine.h"
 #include "testsource.h"
+#include "contour_interface.h"
+
+#include <QDBusPendingCallWatcher>
 
 #include <KDebug>
 
@@ -26,10 +29,52 @@ NepomukMobileTest::NepomukMobileTest(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
 {
     setMinimumPollingInterval(2 * 1000); // 2 seconds minimum
+
+    m_contourIface = new OrgKdeContourRecommendationManagerInterface("org.kde.Contour", "/recommendationmanager",
+                                    QDBusConnection::sessionBus());
+    if (m_contourIface->isValid()) {
+
+        connect(m_contourIface, SIGNAL(recommendationsChanged(QVariant)) ,this, SLOT(updateRecommendations(QVariant)));
+
+
+        QDBusMessage message = QDBusMessage::createMethodCall("org.kde.Contour",
+                                         "/recommendationmanager", "", "recommendations");
+
+        QDBusPendingCall call = QDBusConnection::sessionBus().asyncCall(message);
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+        connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)), this, SLOT(recommendationsCallback(QDBusPendingCallWatcher *)));
+
+    } else {
+        delete m_contourIface;
+        m_contourIface = 0;
+        kDebug()<<"Contour not reachable";
+    }
 }
 
 NepomukMobileTest::~NepomukMobileTest()
 {
+}
+
+void NepomukMobileTest::recommendationsCallback(QDBusPendingCallWatcher *call)
+{
+    QDBusPendingReply<QVariantMap> reply = *call;
+    QVariantMap properties = reply.argumentAt<0>();
+
+    if (reply.isError()) {
+        kWarning()<<"Invalid reply";
+    } else {
+        kWarning()<<"Properties: "<<properties;
+        updateRecommendations(properties);
+    }
+}
+
+void NepomukMobileTest::updateRecommendations(QVariantMap recommendations)
+{
+    kWarning()<<"Map of recommendations: "<<recommendations;
+    /*
+    foreach (const QString &service, registeredItems) {
+        newItem(service);
+    }*/
 }
 
 bool NepomukMobileTest::sourceRequestEvent(const QString &name)

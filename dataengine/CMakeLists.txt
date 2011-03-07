@@ -6,6 +6,9 @@ set(nepomukmobile_engine_SRCS
     testsource.cpp
 )
 
+set(contour_xml org.kde.contour.RecommendationManager.xml)
+QT4_ADD_DBUS_INTERFACE(nepomukmobile_engine_SRCS ${contour_xml} contour_interface)
+
 kde4_add_plugin(plasma_engine_nepomukmobile ${nepomukmobile_engine_SRCS})
 target_link_libraries(plasma_engine_nepomukmobile ${KDE4_KIO_LIBS}
 ${KDE4_PLASMA_LIBS} ${QT_QTXML_LIBS} ${QT_QTNETWORK_LIBS} ${QCA2_LIBRARIES})
