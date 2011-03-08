@@ -1,12 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Favorites
+Name[et]=Lemmikud
 Name[pt]=Favoritos
 Name[pt_BR]=Favoritos
 Name[sv]=Favoriter
 Name[uk]=Улюблене
 Name[x-test]=xxFavoritesxx
 Comment=Your Bookmarks
+Comment[et]=Minu järjehoidjad
 Comment[pt]=Os Seus Favoritos
 Comment[pt_BR]=Seus favoritos
 Comment[sv]=Bokmärken

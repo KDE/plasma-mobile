@@ -1,6 +1,7 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=MobileDesktop
+Name[et]=Mobiilne töölaud
 Name[nl]=MobielBureaublad
 Name[pt]=Ecrã Móvel
 Name[pt_BR]=Área de trabalho móvel
@@ -8,6 +9,7 @@ Name[sv]=Mobilt skrivbord
 Name[uk]=Мобільна стільниця
 Name[x-test]=xxMobileDesktopxx
 Comment=Default desktop containment
+Comment[et]=Vaikimisi töölauakonteiner
 Comment[nl]=Standaard bureaubladcontainer
 Comment[pt]=Contentor do ambiente de trabalho predefinido
 Comment[pt_BR]=Contêiner da área de trabalho padrão

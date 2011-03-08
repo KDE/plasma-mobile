@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Simple battery monitor
 Comment[de]=Einfache Akkuüberwachung
+Comment[et]=Lihtne aku jälgija
 Comment[pt]=Monitor de bateria simples
 Comment[pt_BR]=Monitor de bateria simples
 Comment[sv]=Enkel batteriövervakning
@@ -8,12 +9,14 @@ Comment[uk]=Простий засіб спостереження за акуму
 Comment[x-test]=xxSimple battery monitorxx
 Encoding=UTF-8
 Keywords=Power Management, Battery, System, Energy
+Keywords[et]=Toitehaldus, aku, süsteem, energia
 Keywords[pt]=Gestão de Energia, Bateria, Sistema, Energia
 Keywords[pt_BR]=Gerenciamento de energia, bateria, sistema, energia
 Keywords[sv]=Krafthantering, batteri, system, energi
 Keywords[uk]=Керування живленням, акумулятор, система, енергія
 Keywords[x-test]=xxPower Management, Battery, System, Energyxx
 Name=Simple Battery
+Name[et]=Lihtne aku
 Name[pt]=Bateria Simples
 Name[pt_BR]=Bateria simples
 Name[sv]=Enkelt batteri

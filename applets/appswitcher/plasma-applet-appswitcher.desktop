@@ -2,6 +2,7 @@
 Name=Application Switcher
 Name[cs]=Přepínač aplikací
 Name[de]=Anwendungsumschalter
+Name[et]=Rakenduste lülitaja
 Name[nl]=Programmaschakelaar
 Name[pt]=Selector de Aplicações
 Name[pt_BR]=Seletor de aplicativos
@@ -9,6 +10,7 @@ Name[sv]=Programbyte
 Name[uk]=Перемикач програм
 Name[x-test]=xxApplication Switcherxx
 Comment=Launch the app switcher from hildon
+Comment[et]=Hildoni rakenduste lülitaja käivitamine
 Comment[nl]=Programmaschakelaar van hildon starten
 Comment[pt]=Invoca o selector de aplicações do Hildon
 Comment[pt_BR]=Carrega o seletor de aplicativos do Hildon

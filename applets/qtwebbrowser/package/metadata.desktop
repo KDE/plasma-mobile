@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=Touch Browser
+Name[et]=Puutebrauser
 Name[pt]=Navegador por Toque
 Name[pt_BR]=Navegador por toque
 Name[sv]=Pekwebbläsare
 Name[uk]=Сенсорний переглядач
 Name[x-test]=xxTouch Browserxx
 Comment=Touchscreen friendly simple web browser
+Comment[et]=Puuteekraanisõbralik lihtne veebibrauser
 Comment[pt]=Navegador Web simples e amigável por toque
 Comment[pt_BR]=Navegador Web simples e amigável por toque
 Comment[sv]=Enkel webbläsare bra för pekskärmar

@@ -2,6 +2,7 @@
 Exec=plasma-mobile-qml --desktop
 X-DBUS-StartupType=wait
 Name=Plasma Mobile QML
+Name[et]=Plasma mobiilis QML
 Name[nl]=Plasma-mobiel QML
 Name[pt]=Plasma Móvel QML
 Name[pt_BR]=Plasma móvel QML
@@ -9,6 +10,7 @@ Name[sv]=Plasma mobil-QML
 Name[uk]=Мобільна Плазма на QML
 Name[x-test]=xxPlasma Mobile QMLxx
 Comment=Workspace shell for mobile devices.
+Comment[et]=Töötsooni kest mobiilsetele seadmetele.
 Comment[nl]=Werkruimte-shell voor mobiele apparaten.
 Comment[pt]=Área de trabalho para dispositivos móveis.
 Comment[pt_BR]=Área de trabalho para os dispositivos móveis.
