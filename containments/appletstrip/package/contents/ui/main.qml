@@ -81,7 +81,7 @@ Item {
         var plasmoidContainer = component.createObject(appletsRow, {"x": pos.x, "y": pos.y});
         var index = appletsRow.children.length
         if (pos.x >= 0) {
-            index = pos.x/appletColumns
+            index = pos.x/(main.width/appletColumns)
         }
         plasmoidContainer.applet = applet
         appletsRow.insertAt(plasmoidContainer, index)
