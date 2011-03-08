@@ -38,6 +38,7 @@ Item {
         if (locked) {
             lockScreenItem.x = 0
             lockScreenItem.y = 0
+            unlockTextAnimation.running = true
         } else if (lockScreenItem.x == 0 && lockScreenItem.y == 0) {
             lockScreenItem.x = 0
             lockScreenItem.y = homescreen.height
@@ -201,6 +202,35 @@ Item {
         width: parent.width
         height: parent.height
         color: Qt.rgba(0, 0, 0, 0.8)
+
+        Text {
+            id: unlockText
+            text: "Drag away to unlock"
+            color: "white"
+            anchors.centerIn: parent
+            font.pixelSize: 30
+            opacity: 0
+            Component.onCompleted: {
+                unlockTextAnimation.running = true
+            }
+        }
+        SequentialAnimation {
+            id: unlockTextAnimation
+            running: false
+            NumberAnimation {
+                target: unlockText
+                property: "opacity"
+                to: 1
+                duration: 1000
+            }
+            PauseAnimation { duration: 5000 }
+            NumberAnimation {
+                target: unlockText
+                property: "opacity"
+                to: 0
+                duration: 1000
+            }
+        }
 
         MouseArea {
             anchors.fill: parent
