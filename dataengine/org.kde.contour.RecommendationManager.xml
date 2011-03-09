@@ -1,0 +1,17 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+         "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.kde.contour.RecommendationManager">
+    <method name="recommendations">
+      <arg name="recommendations" type="a(sda(sssd))" direction="out" />
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="QList&lt;Contour::Recommendation*&gt;" />
+    </method>
+    <method name="executeAction">
+      <arg name="id" type="s" direction="in" />
+    </method>
+    <signal name="recommendationsChanged">
+      <arg name="recommendations" type="a(sda(sssd))" />
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QList&lt;Contour::Recommendation*&gt;" />
+    </signal>
+  </interface>
+</node>

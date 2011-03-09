@@ -4,9 +4,19 @@ ${QT_QTNETWORK_INCLUDES} ${QT_QTXML_INCLUDES} ${QCA2_INCLUDE_DIR})
 set(nepomukmobile_engine_SRCS
     nepomukmobileengine.cpp
     testsource.cpp
+    recommendation.cpp
+    recommendationaction.cpp
+    recommendationtype.cpp
 )
 
 set(contour_xml org.kde.contour.RecommendationManager.xml)
+
+set_source_files_properties(${contour_xml} PROPERTIES
+   NO_NAMESPACE false
+   INCLUDE "recommendationtype.h"
+   CLASSNAME OrgKdeContourRecommendationManagerInterface
+)
+
 QT4_ADD_DBUS_INTERFACE(nepomukmobile_engine_SRCS ${contour_xml} contour_interface)
 
 kde4_add_plugin(plasma_engine_nepomukmobile ${nepomukmobile_engine_SRCS})
