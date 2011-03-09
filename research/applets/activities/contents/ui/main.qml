@@ -33,14 +33,14 @@ Rectangle {
          anchors.fill: parent
          model: activitiesModel
          pathItemCount: 6
-         property int delegateWidth: 200
-         property int delegateHeight: 120
+         property int delegateWidth: 400
+         property int delegateHeight: 200
          
          preferredHighlightBegin: 0.25
          preferredHighlightEnd: 0.25
 
 
-         delegate: Rectangle {
+         delegate: Item {
              id: delegate
              scale: PathView.itemScale
              opacity: PathView.itemOpacity
@@ -55,12 +55,21 @@ Rectangle {
              width: mainView.delegateWidth
              height: mainView.delegateHeight
              
-             Text{
-                 text: "opacity"+parent.opacity
-            }
+             Rectangle {
+                 anchors.fill:parent
+                 anchors.leftMargin: 60
+                Text{
+                    text: "opacity"+delegate.opacity
+                }
+             }
+             Rectangle {
+                 anchors.bottom: parent.bottom
+                 anchors.bottomMargin: 24
+                 width: 200
+                 height: 32
+             }
          }
          clip:true
-         //offset: 2
 
          path: Path {
              startX: mainView.width/4+16
@@ -82,7 +91,7 @@ Rectangle {
                  x: mainView.width/4-48
                  y: mainView.height-mainView.delegateHeight-48
             }
-            PathAttribute { name: "itemScale"; value: 0.5 }
+            PathAttribute { name: "itemScale"; value: 0.3 }
             PathAttribute { name: "itemOpacity"; value: 0 }
             PathAttribute { name: "itemRotation"; value: 45 }
             PathAttribute { name: "z"; value: 0 }
