@@ -19,9 +19,12 @@
 
 #include "mobilenetworksource.h"
 
+#include <ofono-qt/ofononetworkregistration.h>
+
 MobileNetworkSource::MobileNetworkSource(QObject* parent)
     : Plasma::DataContainer(parent)
 {
+    m_netRegistration = new OfonoNetworkRegistration(OfonoModem::AutomaticSelect, QString(), this);
 }
 
 MobileNetworkSource::~MobileNetworkSource()
@@ -30,21 +33,26 @@ MobileNetworkSource::~MobileNetworkSource()
 
 void MobileNetworkSource::update(bool forcedUpdate)
 {
+    Q_UNUSED(forcedUpdate)
+    
+    setData("signalStrength", m_netRegistration->strength());
+//ofono-qt: missing CDMA binding
+#if 0
     //Some fake data
-    setData("signalStrength", 100);
     setData("cdmaDataStrength", 100); //CDMA Only
     setData("cdmaSystemIdentifier", "678");  //CDMA Only
     setData("cdmaNetworkIdentifier", "678");  //CDMA Only
     setData("cdmaRoamingPreference", "any");  //CDMA Only
-    setData("technology", "umts");
-    setData("registrationMode", "auto");
-    setData("registrationStatus", "registered");
-    setData("cellId", "45678");
-    setData("locationAreaCode", "12345");
-    setData("mobileCountryCode", "789");
-    setData("mobileNetworkCode", "678");
-    setData("baseStation", "myCity");
-    setData("operatorName", "myOperator");
+#endif
+    setData("technology", m_netRegistration->technology());
+    setData("registrationMode", m_netRegistration->mode());
+    setData("registrationStatus", m_netRegistration->status());
+    setData("cellId", m_netRegistration->cellId());
+    setData("locationAreaCode", m_netRegistration->locationAreaCode());
+    setData("mobileCountryCode", m_netRegistration->mcc());
+    setData("mobileNetworkCode", m_netRegistration->mnc());
+    setData("baseStation", m_netRegistration->baseStation());
+    setData("operatorName", m_netRegistration->name());
 }
 
 #include "mobilenetworksource.moc"

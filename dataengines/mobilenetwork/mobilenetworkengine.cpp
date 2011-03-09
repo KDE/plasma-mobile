@@ -18,6 +18,7 @@
  ***************************************************************************/
 
 #include "mobilenetworkengine.h"
+
 #include "mobilenetworksource.h"
 
 MobileNetworkEngine::MobileNetworkEngine(QObject* parent, const QVariantList& args)

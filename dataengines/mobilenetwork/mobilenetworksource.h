@@ -22,6 +22,8 @@
 
 #include <Plasma/DataContainer>
 
+class OfonoNetworkRegistration;
+
 class MobileNetworkSource : public Plasma::DataContainer
 {
     Q_OBJECT
@@ -31,6 +33,9 @@ class MobileNetworkSource : public Plasma::DataContainer
         ~MobileNetworkSource();
 
         void update(bool forcedUpdate = false);
+
+    private:
+        OfonoNetworkRegistration *m_netRegistration;
 };
 
 #endif
