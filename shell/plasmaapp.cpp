@@ -633,7 +633,7 @@ void PlasmaApp::containmentDestroyed(QObject *object)
 
 void PlasmaApp::containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasma::Containment *cont)
 {
-    if (isScreen >= 0 && cont->location() == Plasma::Planar) {
+    if (isScreen >= 0 && cont->location() == Plasma::Desktop || (cont->location() == Plasma::Floating)) {
         changeContainment(cont);
     }
 }
