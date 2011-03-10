@@ -57,6 +57,7 @@ public:
     virtual QRect screenGeometry(int id) const;
     virtual QRegion availableScreenRegion(int id) const;
 
+    void checkActivities();
 
 public Q_SLOTS:
     void layoutContainments();

@@ -367,6 +367,7 @@ Plasma::Corona* PlasmaApp::corona()
         m_corona->initializeLayout();
 
         m_mainView->setScene(m_corona);
+        m_corona->checkActivities();
         m_mainView->show();
     }
     return m_corona;
@@ -409,20 +410,20 @@ void PlasmaApp::mainContainmentActivated()
 
 void PlasmaApp::setupContainment(Plasma::Containment *containment)
 {
-    if (m_currentContainment) {
-        containment->setParentItem(m_spareSlot);
-        containment->setPos(0, 0);
+    containment->setParentItem(m_spareSlot);
+    containment->setPos(0, 0);
 
-        containment->setVisible(true);
+    containment->setVisible(true);
 
-        containment->resize(m_mainView->transformedSize());
-        //FIXME: this makes the containment to not paint until the animation finishes
+    containment->resize(m_mainView->transformedSize());
+    //FIXME: this makes the containment to not paint until the animation finishes
+    if (containment->graphicsEffect()) {
         containment->graphicsEffect()->setEnabled(true);
-        //###The reparenting need a repaint so this ensure that we
-        //have actually re-render the containment otherwise it
-        //makes animations slugglish. We need a better solution.
-        QTimer::singleShot(0, this, SLOT(slideActivities()));
     }
+    //###The reparenting need a repaint so this ensure that we
+    //have actually re-render the containment otherwise it
+    //makes animations slugglish. We need a better solution.
+    QTimer::singleShot(0, this, SLOT(slideActivities()));
 }
 
 void PlasmaApp::slideActivities()
@@ -503,10 +504,6 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
             containment->setVisible(true);
             return;
         }
-    } else if (containment->id() == 2) {
-        containment->setPos(0,0);
-        m_currentContainment = containment;
-        return;
     }
 
     containment->setPos(m_mainView->width(), m_mainView->height());

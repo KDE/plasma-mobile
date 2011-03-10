@@ -37,6 +37,7 @@
 #include <KStandardDirs>
 
 #include <Plasma/Containment>
+#include <Plasma/Context>
 #include <Plasma/DataEngineManager>
 
 #include "plasmaapp.h"
@@ -276,6 +277,102 @@ void MobCorona::activatePreviousActivity()
 
     m_activityController->setCurrentActivity(list.at(i));
 }
+
+void MobCorona::checkActivities()
+{
+    kDebug() << "containments to start with" << containments().count();
+
+    KActivityConsumer::ServiceStatus status = m_activityController->serviceStatus();
+    //kDebug() << "$%$%$#%$%$%Status:" << status;
+    if (status == KActivityConsumer::NotRunning) {
+        //panic and give up - better than causing a mess
+        kDebug() << "No ActivityManager? Help, I've fallen and I can't get up!";
+        return;
+    }
+
+    QStringList existingActivities = m_activityController->listActivities();
+    foreach (const QString &id, existingActivities) {
+        activityAdded(id);
+    }
+
+    QStringList newActivities;
+    QString newCurrentActivity;
+    //migration checks:
+    //-containments with an invalid id are deleted.
+    //-containments that claim they were on a screen are kept together, and are preferred if we
+    //need to initialize the current activity.
+    //-containments that don't know where they were or who they were with just get made into their
+    //own activity.
+    foreach (Plasma::Containment *cont, containments()) {
+        if ((cont->containmentType() == Plasma::Containment::DesktopContainment ||
+             cont->containmentType() == Plasma::Containment::CustomContainment) &&
+            !offscreenWidgets().contains(cont)) {
+            Plasma::Context *context = cont->context();
+            QString oldId = context->currentActivityId();
+            if (!oldId.isEmpty()) {
+                if (existingActivities.contains(oldId)) {
+                    continue; //it's already claimed
+                }
+                kDebug() << "invalid id" << oldId;
+                //byebye
+                cont->destroy(false);
+                continue;
+            }
+            if (cont->screen() > -1) {
+                //it belongs on the current activity
+                if (!newCurrentActivity.isEmpty()) {
+                    context->setCurrentActivityId(newCurrentActivity);
+                    continue;
+                }
+            }
+            //discourage blank names
+            if (context->currentActivity().isEmpty()) {
+                context->setCurrentActivity(i18nc("Default name for a new activity", "New Activity"));
+            }
+            //create a new activity for the containment
+            QString id = m_activityController->addActivity(context->currentActivity());
+            context->setCurrentActivityId(id);
+            newActivities << id;
+            if (cont->screen() > -1) {
+                newCurrentActivity = id;
+            }
+            kDebug() << "migrated" << context->currentActivityId() << context->currentActivity();
+        }
+    }
+
+    kDebug() << "migrated?" << !newActivities.isEmpty() << containments().count();
+    if (!newActivities.isEmpty()) {
+        requestConfigSync();
+    }
+
+    //init the newbies
+    foreach (const QString &id, newActivities) {
+        activityAdded(id);
+    }
+
+    //ensure the current activity is initialized
+    if (m_activityController->currentActivity().isEmpty()) {
+        kDebug() << "guessing at current activity";
+        if (existingActivities.isEmpty()) {
+            if (newCurrentActivity.isEmpty()) {
+                if (newActivities.isEmpty()) {
+                    kDebug() << "no activities!?! Bad activitymanager, no cookie!";
+                    QString id = m_activityController->addActivity(i18nc("Default name for a new activity", "New Activity"));
+                    activityAdded(id);
+                    m_activityController->setCurrentActivity(id);
+                    kDebug() << "created emergency activity" << id;
+                } else {
+                    m_activityController->setCurrentActivity(newActivities.first());
+                }
+            } else {
+                m_activityController->setCurrentActivity(newCurrentActivity);
+            }
+        } else {
+            m_activityController->setCurrentActivity(existingActivities.first());
+        }
+    }
+}
+
 
 #include "mobcorona.moc"
 
