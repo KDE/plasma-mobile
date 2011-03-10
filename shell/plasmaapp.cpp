@@ -325,15 +325,17 @@ void PlasmaApp::lockScreen()
 
 void PlasmaApp::updateMainSlot()
 {
-    if (m_currentContainment && m_nextContainment) {
-        m_homeScreen->setProperty("state", "Normal");
+    m_homeScreen->setProperty("state", "Normal");
 
+    if (m_nextContainment) {
         m_nextContainment->setParentItem(m_mainSlot);
 
         m_nextContainment->graphicsEffect()->setEnabled(false);
         // resizing the containment will always resize it's parent item
         m_nextContainment->setPos(0,0);
+    }
 
+    if (m_currentContainment) {
         m_currentContainment->setParentItem(0);
         m_currentContainment->setPos(0, m_currentContainment->size().height());
 
@@ -345,7 +347,6 @@ void PlasmaApp::updateMainSlot()
         m_nextContainment = 0;
         m_currentContainment->setScreen(0);
         m_currentContainment->resize(m_mainView->transformedSize());
-
     }
 }
 
