@@ -343,11 +343,12 @@ void PlasmaApp::updateMainSlot()
 
         m_currentContainment->setVisible(false);
         m_currentContainment->graphicsEffect()->setEnabled(false);
-        m_currentContainment = m_nextContainment;
-        m_nextContainment = 0;
-        m_currentContainment->setScreen(0);
-        m_currentContainment->resize(m_mainView->transformedSize());
     }
+
+    m_currentContainment = m_nextContainment;
+    m_nextContainment = 0;
+    m_currentContainment->setScreen(0);
+    m_currentContainment->resize(m_mainView->transformedSize());
 }
 
 Plasma::Corona* PlasmaApp::corona()
