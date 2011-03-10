@@ -89,7 +89,6 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
-      m_alternateContainment(0),
       m_nextContainment(0),
       m_trayContainment(0),
       m_isDesktop(false)
@@ -287,8 +286,12 @@ void PlasmaApp::setupHomeScreen()
 
 void PlasmaApp::containmentsTransformingChanged(bool transforming)
 {
-    m_currentContainment->graphicsEffect()->setEnabled(transforming);
-    m_alternateContainment->graphicsEffect()->setEnabled(transforming);
+    if (m_currentContainment) {
+        m_currentContainment->graphicsEffect()->setEnabled(transforming);
+    }
+    if (m_alternateContainment) {
+        m_alternateContainment.data()->graphicsEffect()->setEnabled(transforming);
+    }
 }
 
 
@@ -486,8 +489,8 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     containment->resize(m_mainView->transformedSize());
 
     // we need our homescreen to show something!
-    // FIXME: this has to become way cleaner
-    if (containment->id() == 1) {
+    // for the alternate screen (such as a launcher) we need a containment setted as excludeFromActivities
+    if (containment->config().readEntry("excludeFromActivities", false) && !m_alternateContainment) {
         QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>("alternateSlot");
 
         if (alternateSlot) {
@@ -547,8 +550,8 @@ void PlasmaApp::mainViewGeometryChanged()
             m_nextContainment->resize(m_mainView->transformedSize());
         }
         if (m_alternateContainment) {
-            m_alternateContainment->resize(m_mainView->transformedSize());
-            m_alternateContainment->setPos(0, 0);
+            m_alternateContainment.data()->resize(m_mainView->transformedSize());
+            m_alternateContainment.data()->setPos(0, 0);
         }
         if (m_widgetsExplorer) {
             m_widgetsExplorer.data()->setGeometry(m_declarativeWidget->geometry());
