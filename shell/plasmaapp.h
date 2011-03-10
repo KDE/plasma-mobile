@@ -66,7 +66,7 @@ protected:
     void setIsDesktop(bool isDesktop);
     void setupHomeScreen();
     void setupContainment(Plasma::Containment *containment);
-    void changeActivity(Plasma::Containment *containment);
+    void changeContainment(Plasma::Containment *containment);
     void reserveStruts(const int left, const int top, const int right, const int bottom);
 
 public Q_SLOTS:
@@ -77,10 +77,10 @@ private Q_SLOTS:
     void mainContainmentActivated();
     void manageNewContainment(Plasma::Containment *containment);
     void containmentDestroyed(QObject *);
+    void containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasma::Containment *cont);
     void syncConfig();
     void nextActivity();
     void previousActivity();
-    void changeActivity();
     void slideActivities();
     void updateMainSlot();
     void lockScreen();

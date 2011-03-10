@@ -47,7 +47,6 @@
 
 MobCorona::MobCorona(QObject *parent)
     : Plasma::Corona(parent),
-      m_containmentsRestoredCount(0),
       m_activityController(new KActivityController(this))
 {
     init();
@@ -83,6 +82,10 @@ void MobCorona::init()
 
     setItemIndexMethod(QGraphicsScene::NoIndex);
     setDialogManager(new MobDialogManager(this));
+    
+    connect(m_activityController, SIGNAL(currentActivityChanged(QString)), this, SLOT(currentActivityChanged(QString)));
+    connect(m_activityController, SIGNAL(activityAdded(const QString &)), this, SLOT(activityAdded(const QString &)));
+    connect(m_activityController, SIGNAL(activityRemoved(const QString &)), this, SLOT(activityRemoved(const QString &)));
 }
 
 void MobCorona::loadDefaultLayout()
@@ -202,41 +205,6 @@ QRegion MobCorona::availableScreenRegion(int id) const
     }
     return r;
 }
-
-KConfigGroup MobCorona::storedConfig(int containmentId)
-{
-    KConfigGroup cg(config(), "SavedContainments");
-    cg = KConfigGroup(&cg, QString::number(containmentId));
-
-    return cg;
-}
-
-Plasma::Containment *MobCorona::restoreContainment(const int contaimentId)
-{
-    //FIXME: put them into an hash
-    foreach (Plasma::Containment *containment, containments()) {
-        if (containment->id() == contaimentId) {
-            return containment;
-        }
-    }
-
-    KConfigGroup cg = storedConfig(contaimentId);
-
-    QList<Plasma::Containment *> conts = Plasma::Corona::importLayout(cg);
-    if (!conts.isEmpty()) {
-        ++ m_containmentsRestoredCount;
-        return conts.first();
-    } else {
-        return 0;
-    }
-}
-
-int MobCorona::totalContainments() const
-{
-    KConfigGroup cg(config(), "SavedContainments");
-    return cg.groupList().count() + containments().count()  - m_containmentsRestoredCount;
-}
-
 
 void MobCorona::currentActivityChanged(const QString &newActivity)
 {

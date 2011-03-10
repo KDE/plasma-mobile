@@ -292,74 +292,17 @@ void PlasmaApp::containmentsTransformingChanged(bool transforming)
 }
 
 
-void PlasmaApp::changeActivity()
-{
-    QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(sender());
-
-    if (item) {
-        Plasma::Containment *containment = 0;
-        containment = m_containments.value(item->objectName().toInt());
-        if (!containment) {
-            containment = m_corona->restoreContainment(item->objectName().toInt());
-            manageNewContainment(containment);
-        }
-        changeActivity(containment);
-    }
-}
-
 void PlasmaApp::nextActivity()
 {
-    int currentId = m_currentContainment->id();
-
-    Plasma::Containment *nextContainment = m_currentContainment;
-    bool loop = false;
-    while (!nextContainment || nextContainment->location() != Plasma::Desktop ||
-          nextContainment == m_currentContainment ||
-          nextContainment == m_alternateContainment) {
-        currentId = (currentId + 1) % m_corona->totalContainments();
-        nextContainment = m_corona->restoreContainment(currentId);
-
-        if (currentId == 0) {
-            if (loop) {
-                break;
-            } else {
-                loop = true;
-            }
-        }
-    }
-
-    if (nextContainment) {
-        changeActivity(nextContainment);
-    }
+    m_corona->activateNextActivity();
 }
 
 void PlasmaApp::previousActivity()
 {
-    int currentId = m_currentContainment->id();
-
-    Plasma::Containment *nextContainment = m_currentContainment;
-    bool loop = false;
-    while (!nextContainment || nextContainment->location() != Plasma::Desktop ||
-          nextContainment == m_currentContainment ||
-          nextContainment == m_alternateContainment) {
-        currentId = (m_corona->totalContainments() + currentId - 1) % m_corona->totalContainments();
-        nextContainment = m_corona->restoreContainment(currentId);
-
-        if (currentId == 0) {
-            if (loop) {
-                break;
-            } else {
-                loop = true;
-            }
-        }
-    }
-
-    if (nextContainment) {
-        changeActivity(nextContainment);
-    }
+    m_corona->activatePreviousActivity();
 }
 
-void PlasmaApp::changeActivity(Plasma::Containment *containment)
+void PlasmaApp::changeContainment(Plasma::Containment *containment)
 {
     if (!containment || containment == m_currentContainment) {
         return;
@@ -413,6 +356,7 @@ Plasma::Corona* PlasmaApp::corona()
         connect(m_corona, SIGNAL(containmentAdded(Plasma::Containment*)),
                 this, SLOT(manageNewContainment(Plasma::Containment*)));
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
+        connect(m_corona, SIGNAL(screenOwnerChanged(int, int, Plasma::Containment *)), this, SLOT(containmentScreenOwnerChanged(int,int,Plasma::Containment*)));
 
 
         // setup our QML home screen;
@@ -684,6 +628,13 @@ void PlasmaApp::containmentDestroyed(QObject *object)
 
     if (cont) {
         m_containments.remove(cont->id());
+    }
+}
+
+void PlasmaApp::containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasma::Containment *cont)
+{
+    if (isScreen >= 0 && cont->location() == Plasma::Planar) {
+        changeContainment(cont);
     }
 }
 
