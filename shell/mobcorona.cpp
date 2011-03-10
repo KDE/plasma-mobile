@@ -304,7 +304,10 @@ void MobCorona::checkActivities()
     //-containments that don't know where they were or who they were with just get made into their
     //own activity.
     foreach (Plasma::Containment *cont, containments()) {
-        if ((cont->containmentType() == Plasma::Containment::DesktopContainment ||
+        bool excludeFromActivities = cont->config().readEntry("excludeFromActivities", false);
+
+
+        if (!excludeFromActivities && (cont->containmentType() == Plasma::Containment::DesktopContainment ||
              cont->containmentType() == Plasma::Containment::CustomContainment) &&
             !offscreenWidgets().contains(cont)) {
             Plasma::Context *context = cont->context();
