@@ -248,10 +248,6 @@ void PlasmaApp::setupHomeScreen()
     connect(m_mainView, SIGNAL(geometryChanged()), this, SLOT(mainViewGeometryChanged()));
     connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
 
-    // get references for the main objects that we'll need to deal with
-    m_mainSlot = mainItem->findChild<QDeclarativeItem*>("mainSlot");
-    m_spareSlot = mainItem->findChild<QDeclarativeItem*>("spareSlot");
-
     connect(m_homeScreen, SIGNAL(transformingChanged(bool)), this, SLOT(containmentsTransformingChanged(bool)));
 
 
@@ -420,19 +416,10 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     connect(containment, SIGNAL(destroyed(QObject *)), this, SLOT(containmentDestroyed(QObject *)));
 
 
-    if (!m_mainSlot) {
-        return;
-    }
-
-    containment->setParentItem(m_mainSlot);
-    containment->setParent(m_mainSlot);
-    containment->setPos(0, 0);
-
     CachingEffect *effect = new CachingEffect(containment);
     containment->setGraphicsEffect(effect);
     containment->graphicsEffect()->setEnabled(false);
 
-    m_mainSlot->setFlag(QGraphicsItem::ItemHasNoContents, false);
     containment->resize(m_mainView->transformedSize());
 
     // we need our homescreen to show something!

@@ -93,8 +93,6 @@ private:
     //the main declarative scene loader
     Plasma::DeclarativeWidget *m_declarativeWidget;
 
-    QDeclarativeItem *m_mainSlot;
-    QDeclarativeItem *m_spareSlot;
     QDeclarativeItem *m_homeScreen;
     QDeclarativeItem *m_trayPanel;
 
