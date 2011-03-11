@@ -30,7 +30,7 @@ QGraphicsWidget {
 
       Column {
         Text {
-            text: "Signal strength: " + dataSource.data["default"]["signalStrength"];
+            text: dataSource.data["default"]["technology"] + i18n(" strength: ") + dataSource.data["default"]["signalStrength"];
         }
       }
     }
