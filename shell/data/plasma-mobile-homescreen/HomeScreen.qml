@@ -101,8 +101,7 @@ Item {
 
         front : Item {
             anchors.fill: flipable
-            Rectangle {
-                color: "red"
+            Item {
                 id: mainSlot;
                 objectName: "mainSlot";
                 x: 0;
@@ -112,8 +111,7 @@ Item {
                 transformOrigin : Item.Center;
             }
 
-            Rectangle {
-                color: "green"
+            Item {
                 id : spareSlot;
                 objectName: "spareSlot";
                 x: 0;
