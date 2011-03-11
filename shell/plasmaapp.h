@@ -101,7 +101,7 @@ private:
 
     Plasma::Containment *m_trayContainment;
     QMap<int, Plasma::Containment*> m_containments;
-    QList<Plasma::Containment *> m_panelContainments;
+    QHash<Plasma::Location, Plasma::Containment *> m_panelContainments;
 
     QString m_homeScreenPath;
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;

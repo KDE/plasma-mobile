@@ -173,7 +173,7 @@ QList<Plasma::Containment *> PlasmaApp::containments() const
 
 QList<Plasma::Containment *> PlasmaApp::panelContainments() const
 {
-    return m_panelContainments;
+    return m_panelContainments.values();
 }
 
 void PlasmaApp::cleanup()
@@ -374,7 +374,7 @@ void PlasmaApp::mainContainmentActivated()
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
-    if (m_containments.contains(containment->id()) || m_panelContainments.contains(containment)) {
+    if (m_containments.contains(containment->id()) || m_panelContainments.contains(containment->location())) {
         return;
     }
     QAction *addAction = containment->action("add widgets");
@@ -382,21 +382,49 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         connect(addAction, SIGNAL(triggered()), this, SLOT(showWidgetsExplorer()));
     }
 
-    if (containment->location() == Plasma::TopEdge) { // systray's containment!
-        if (m_trayContainment) {
-            delete containment;
-            return;
-        }
-        m_trayContainment = containment;
-        m_trayContainment->setParentItem(m_trayPanel);
-        m_trayContainment->setParent(m_trayPanel);
-        QDeclarativeProperty containmentProperty(m_trayPanel, "containment");
-        containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(m_trayContainment)));
+    //Is it a panel?
+    //if it's on an edge find a qml element propely named
+    //otherwise delete it
+    QString containmentPanelName;
 
-        m_panelContainments.append(containment);
-
-        return;
+    switch (containment->location()) {
+    case Plasma::LeftEdge:
+        containmentPanelName = "leftEdgePanel";
+        break;
+    case Plasma::TopEdge:
+        containmentPanelName = "topEdgePanel";
+        break;
+    case Plasma::RightEdge:
+        containmentPanelName = "rightEdgePanel";
+        break;
+    case Plasma::BottomEdge:
+        containmentPanelName = "bottomEdgePanel";
+        break;
+    default:
+        break;
     }
+
+    //is it a panel?
+    if (!containmentPanelName.isEmpty()) {
+        QDeclarativeItem *containmentPanel = m_homeScreen->findChild<QDeclarativeItem*>(containmentPanelName);
+
+        if (containmentPanel) {
+            containment->setParentItem(containmentPanel);
+            containment->setParent(containmentPanel);
+
+            QDeclarativeProperty containmentProperty(containmentPanel, "containment");
+            containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(m_trayContainment)));
+
+            m_panelContainments.insert(containment->location(), containment);
+
+            //done, don't need further management
+            return;
+        } else {
+            //no panel? discard the containment
+            containment->deleteLater();
+        }
+    }
+
 
     // add the containment and it identifier to a hash to enable us
     // to retrieve it later.

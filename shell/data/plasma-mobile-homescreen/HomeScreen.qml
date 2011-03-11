@@ -361,8 +361,8 @@ Item {
         }
 
     SystrayPanel {
-        id: systraypanel;
-        objectName: "systraypanel";
+        id: topEdgePanel;
+        objectName: "topEdgePanel";
 
         anchors.horizontalCenter: homescreen.horizontalCenter;
         y: 0;
