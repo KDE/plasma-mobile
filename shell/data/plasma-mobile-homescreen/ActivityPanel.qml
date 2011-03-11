@@ -56,7 +56,7 @@ Item {
         }
 
         onReleased: {
-            if (activityPanel.x < activityPanel.parent.width - 100) {
+            if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
                 activityPanel.state = "show"
             } else {
                 activityPanel.state = "hidden"
@@ -74,11 +74,53 @@ Item {
         }
     }
 
+    PlasmaCore.DataSource {
+        id: activitySource
+        engine: "org.kde.activities"
+        onSourceAdded: {
+            connectSource(source)
+        }
+        Component.onCompleted: {
+            connectedSources = sources
+        }
+    }
+
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     PlasmaCore.FrameSvgItem {
         id: background
         anchors.fill: parent
         imagePath: "widgets/background"
         enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+
+        ListView {
+            anchors.fill: parent
+            anchors.leftMargin: background.margins.left
+            anchors.topMargin: background.margins.top
+            anchors.rightMargin: background.margins.right
+            anchors.bottomMargin: background.margins.bottom
+            clip: true
+            
+            model: PlasmaCore.DataModel{
+                dataSource: activitySource
+            }
+            
+            delegate: Text {
+                color: theme.textColor
+                text: model["Name"]
+                font.pixelSize: 24
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        var activityId = model["DataEngineSource"]
+                        print(activityId)
+                        activitySource.serviceForSource(activityId).operationDescription("setCurrent")
+                    }
+                }
+            }
+        }
     }
 
     states: [
