@@ -93,13 +93,11 @@ private:
     Plasma::DeclarativeWidget *m_declarativeWidget;
 
     QDeclarativeItem *m_homeScreen;
-    QDeclarativeItem *m_trayPanel;
 
     Plasma::Containment *m_currentContainment;
     QWeakPointer<Plasma::Containment> m_oldContainment;
     QWeakPointer<Plasma::Containment> m_alternateContainment;
 
-    Plasma::Containment *m_trayContainment;
     QMap<int, Plasma::Containment*> m_containments;
     QHash<Plasma::Location, Plasma::Containment *> m_panelContainments;
 

@@ -89,7 +89,6 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
-      m_trayContainment(0),
       m_isDesktop(false)
 {
     KGlobal::locale()->insertCatalog("libplasma");
@@ -249,9 +248,6 @@ void PlasmaApp::setupHomeScreen()
     connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
 
     connect(m_homeScreen, SIGNAL(transformingChanged(bool)), this, SLOT(containmentsTransformingChanged(bool)));
-
-
-    m_trayPanel = mainItem->findChild<QDeclarativeItem*>("systraypanel");
 
 
     connect(m_homeScreen, SIGNAL(nextActivityRequested()),
