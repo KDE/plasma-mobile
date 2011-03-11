@@ -157,7 +157,7 @@ Plasma::Containment* Activity::containmentForScreen(int screen, int desktop)
         // being sucked into this Activity
         foreach (Plasma::Containment *c, PlasmaApp::self()->corona()->containments()) {
             bool excludeFromActivities = c->config().readEntry("excludeFromActivities", false);
-kWarning()<<"AAAA"<<c<<excludeFromActivities;
+
             if (!excludeFromActivities && (c->containmentType() == Plasma::Containment::DesktopContainment ||
                 c->containmentType() == Plasma::Containment::CustomContainment) &&
                 c->context()->currentActivityId().isEmpty() &&

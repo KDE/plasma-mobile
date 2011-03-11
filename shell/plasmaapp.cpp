@@ -413,7 +413,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
             containment->setParent(containmentPanel);
 
             QDeclarativeProperty containmentProperty(containmentPanel, "containment");
-            containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(m_trayContainment)));
+            containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
 
             m_panelContainments.insert(containment->location(), containment);
 
