@@ -82,7 +82,6 @@ private Q_SLOTS:
     void nextActivity();
     void previousActivity();
     void lockScreen();
-    void shrinkTray();
     void showWidgetsExplorer();
     void mainViewGeometryChanged();
 
@@ -99,6 +98,7 @@ private:
     Plasma::Containment *m_currentContainment;
     QWeakPointer<Plasma::Containment> m_oldContainment;
     QWeakPointer<Plasma::Containment> m_alternateContainment;
+
     Plasma::Containment *m_trayContainment;
     QMap<int, Plasma::Containment*> m_containments;
     QList<Plasma::Containment *> m_panelContainments;

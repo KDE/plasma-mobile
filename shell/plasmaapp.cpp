@@ -371,10 +371,6 @@ void PlasmaApp::mainContainmentActivated()
     }
 }
 
-void PlasmaApp::shrinkTray()
-{
-    m_trayPanel->setProperty("state", "passive");
-}
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
@@ -396,10 +392,6 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         m_trayContainment->setParent(m_trayPanel);
         QDeclarativeProperty containmentProperty(m_trayPanel, "containment");
         containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(m_trayContainment)));
-
-        // "enlarge" is initiated by a QML mousearea, but "shrink" needs to be initiated by
-        // the applet itself..
-        connect(m_trayContainment, SIGNAL(shrinkRequested()), this, SLOT(shrinkTray()));
 
         m_panelContainments.append(containment);
 
