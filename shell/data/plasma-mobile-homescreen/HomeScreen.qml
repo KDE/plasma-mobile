@@ -367,9 +367,9 @@ Item {
         anchors.horizontalCenter: homescreen.horizontalCenter;
         y: 0;
     }
-    ActivityPanel {
-        id: activitypanel;
-        objectName: "activitypanel";
+    LauncherPanel {
+        id: launcherpanel;
+        objectName: "launcherpanel";
 
         anchors.left: parent.left;
         anchors.right: parent.right;
@@ -377,7 +377,7 @@ Item {
     }
 
     Connections {
-        target: activitypanel;
+        target: launcherpanel;
 
         onFlipRequested : {
             if (reverse) {

@@ -22,7 +22,7 @@
 import Qt 4.7
 
 Item {
-    id: activitypanel;
+    id: launcherpanel;
     height: shortcuts.height;
     state: "show";
     signal flipRequested(bool reverse);
@@ -38,7 +38,7 @@ Item {
         anchors.left: parent.left;
         anchors.right: parent.right;
         fillMode: Image.Tile
-        source: "images/activitypanel.png";
+        source: "images/launcherpanel.png";
     }
 
     Image {
@@ -51,8 +51,8 @@ Item {
     }
 
     Rectangle {
-        id: activitypanelbottom;
-        objectName: "activitypanelbottom";
+        id: launcherpanelbottom;
+        objectName: "launcherpanelbottom";
 
         color: "black";
         anchors.left: parent.left;
@@ -65,14 +65,14 @@ Item {
         id: hint;
         source: "images/hint.png";
         y: -40;
-        anchors.horizontalCenter: activitypanel.horizontalCenter;
+        anchors.horizontalCenter: launcherpanel.horizontalCenter;
     }
 
     onYChanged : {
-        var overflow = Math.max(0, activitypanel.parent.height - (activitypanel.y + activitypanel.height));
+        var overflow = Math.max(0, launcherpanel.parent.height - (launcherpanel.y + launcherpanel.height));
 
-        var degrees = 90 / ((activitypanel.parent.height/2)/overflow);
-        activitypanel.dragOverflow(degrees);
+        var degrees = 90 / ((launcherpanel.parent.height/2)/overflow);
+        launcherpanel.dragOverflow(degrees);
     }
 
     onWidthChanged : {
@@ -81,15 +81,15 @@ Item {
         } else {
             shortcuts.state = "expanded"
         }
-        hintregion.height = hint.height + activitypanel.height;
+        hintregion.height = hint.height + launcherpanel.height;
     }
 
     ActivityPanelItems {
         objectName: "panelitems";
         id: shortcuts;
         state: "expanded"
-        anchors.horizontalCenter: activitypanel.horizontalCenter;
-        anchors.bottom: activitypanel.bottom;
+        anchors.horizontalCenter: launcherpanel.horizontalCenter;
+        anchors.bottom: launcherpanel.bottom;
     }
 
     Image {
@@ -118,7 +118,7 @@ Item {
 
     PropertyAnimation {
         id: rotationDragAnim
-        target: activitypanel
+        target: launcherpanel
         properties: "y"
         duration: 300
     }
@@ -131,12 +131,12 @@ Item {
         x: 0;
         y: hint.y -  35 / 2;
         width: parent.width;
-        height: hint.height + activitypanel.height;
+        height: hint.height + launcherpanel.height;
 
-        drag.target: activitypanel;
+        drag.target: launcherpanel;
         drag.axis: "YAxis"
-        drag.minimumY: activitypanel.parent.height - activitypanel.height;
-        drag.maximumY: activitypanel.parent.height;
+        drag.minimumY: launcherpanel.parent.height - launcherpanel.height;
+        drag.maximumY: launcherpanel.parent.height;
 
         property int startY
 
@@ -147,21 +147,21 @@ Item {
                 return;
             }
 
-            drag.target = activitypanel;
-            activitypanel.state = "dragging";
+            drag.target = launcherpanel;
+            launcherpanel.state = "dragging";
             timer.stop();
-            startY = activitypanel.y
+            startY = launcherpanel.y
             passClicks = true;
         }
 
         onPositionChanged: {
-            if (Math.abs(activitypanel.y - startY) > 40) {
+            if (Math.abs(launcherpanel.y - startY) > 40) {
                 passClicks = false;
             }
 
             if (mouse.y < -100) {
                 drag.target = undefined
-                rotationDragAnim.to = activitypanel.parent.height/2 - activitypanel.height;
+                rotationDragAnim.to = launcherpanel.parent.height/2 - launcherpanel.height;
                 rotationDragAnim.running = true
             }
         }
@@ -169,13 +169,13 @@ Item {
         onReleased: {
             var child = shortcuts.childAt(mouse.x-shortcuts.x, mouse.y + hintregion.y-shortcuts.y);
             if (passClicks && hint.opacity == 1) {
-                activitypanel.state = "hidden"
-                activitypanel.state = "show"
+                launcherpanel.state = "hidden"
+                launcherpanel.state = "show"
                 timer.restart();
                 return
             } else if (passClicks && child) {
                 if (activeChild == child) {
-                    activitypanel.flipRequested(true);
+                    launcherpanel.flipRequested(true);
                 } else {
                     child.clicked();
                     activeChild = child;
@@ -185,20 +185,20 @@ Item {
                 }
             }
 
-            var target = activitypanel.parent.height - (activitypanel.height / 1.5);
-            if (activitypanel.y < target) {
-                activitypanel.state = "show";
-                if (activitypanel.y < target / 2) {
+            var target = launcherpanel.parent.height - (launcherpanel.height / 1.5);
+            if (launcherpanel.y < target) {
+                launcherpanel.state = "show";
+                if (launcherpanel.y < target / 2) {
                     //here don't hide when isHomeScreenFlipped() because we are before the flip
                     if (isHomeScreenFlipped()) {
-                        activitypanel.state = "hidden";
+                        launcherpanel.state = "hidden";
                     }
-                    activitypanel.flipRequested(false);
+                    launcherpanel.flipRequested(false);
                 }
             } else if (isHomeScreenFlipped()) {
-                activitypanel.state = "show";
+                launcherpanel.state = "show";
             } else {
-                activitypanel.state = "hidden";
+                launcherpanel.state = "hidden";
             }
             timer.restart();
         }
@@ -211,7 +211,7 @@ Item {
         running: false;
         onTriggered:  {
             if (!isHomeScreenFlipped()) {
-                activitypanel.state = "hidden"
+                launcherpanel.state = "hidden"
             }
         }
     }
@@ -221,7 +221,7 @@ Item {
         State {
             name: "show";
             PropertyChanges {
-                target: activitypanel;
+                target: launcherpanel;
                 y: parent.height - height;
             }
             PropertyChanges {
@@ -244,7 +244,7 @@ Item {
         State {
             name: "hidden";
             PropertyChanges {
-                target: activitypanel;
+                target: launcherpanel;
                 y: parent.height;
             }
             PropertyChanges {
@@ -263,9 +263,9 @@ Item {
         State {
             name: "dragging"
             PropertyChanges {
-                target: activitypanel;
-                x: activitypanel.x;
-                y: activitypanel.y;
+                target: launcherpanel;
+                x: launcherpanel.x;
+                y: launcherpanel.y;
 
             }
             PropertyChanges {
@@ -282,7 +282,7 @@ Item {
             SequentialAnimation {
                 ParallelAnimation {
                     NumberAnimation {
-                        targets: activitypanel;
+                        targets: launcherpanel;
                         properties: "y";
                         duration: 1000;
                         easing.type: "InOutCubic";
@@ -318,7 +318,7 @@ Item {
                 }
                 ParallelAnimation {
                     NumberAnimation {
-                        targets: activitypanel;
+                        targets: launcherpanel;
                         properties: "y";
                         duration: 800;
                         easing.type: "InOutCubic";
