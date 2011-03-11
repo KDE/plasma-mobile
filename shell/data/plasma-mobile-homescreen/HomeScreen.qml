@@ -367,6 +367,11 @@ Item {
         anchors.horizontalCenter: homescreen.horizontalCenter;
         y: 0;
     }
+    ActivityPanel {
+        id: activityPanel
+        anchors.verticalCenter: parent.verticalCenter
+        x: parent.width - width
+    }
     LauncherPanel {
         id: launcherpanel;
         objectName: "launcherpanel";
