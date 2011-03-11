@@ -434,10 +434,12 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
             containment->setVisible(true);
             return;
         }
+    } else if (containment->screen() > -1) {
+        changeContainment(containment);
+    } else {
+        containment->setPos(m_mainView->width(), m_mainView->height());
+        containment->setVisible(false);
     }
-
-    containment->setPos(m_mainView->width(), m_mainView->height());
-    containment->setVisible(false);
 }
 
 void PlasmaApp::mainViewGeometryChanged()
