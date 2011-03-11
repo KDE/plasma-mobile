@@ -101,6 +101,7 @@ private:
     QDeclarativeItem *m_trayPanel;
 
     Plasma::Containment *m_currentContainment;
+    QWeakPointer<Plasma::Containment> m_oldContainment;
     QWeakPointer<Plasma::Containment> m_alternateContainment;
     Plasma::Containment *m_nextContainment;
     Plasma::Containment *m_trayContainment;

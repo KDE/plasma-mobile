@@ -31,6 +31,28 @@ Item {
     signal transitionFinished();
     state : "Normal";
     property bool locked: true
+    signal transformingChanged(bool transforming)
+
+    property QGraphicsWidget activeContainment
+    onActiveContainmentChanged: {
+        activeContainment.parent = spareSlot
+        activeContainment.visible = true
+        activeContainment.x = 0
+        activeContainment.y = 0
+        activeContainment.size = width + "x" + height
+        state = "Slide"
+        transformingChanged(true);
+    }
+
+    function finishTransition()
+    {
+        activeContainment.parent = mainSlot
+        activeContainment.x = 0
+        activeContainment.y = 0
+        state = "Normal"
+        //transitionFinished()
+        transformingChanged(false);
+    }
 
     onLockedChanged: {
         if (locked) {
@@ -66,7 +88,7 @@ Item {
         state : "Front360";
         property bool flipable : true;
         property bool transforming : false;
-        signal transformingChanged(bool transforming);
+        
 
         transform: Rotation {
             id: rotation
@@ -80,7 +102,8 @@ Item {
 
         front : Item {
             anchors.fill: flipable
-            Item {
+            Rectangle {
+                color: "red"
                 id: mainSlot;
                 objectName: "mainSlot";
                 x: 0;
@@ -90,7 +113,8 @@ Item {
                 transformOrigin : Item.Center;
             }
 
-            Item {
+            Rectangle {
+                color: "green"
                 id : spareSlot;
                 objectName: "spareSlot";
                 x: 0;
@@ -142,7 +166,7 @@ Item {
             to:"Back180"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homescreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -150,7 +174,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homescreen.transformingChanged(false);
                 }
             }
         },
@@ -159,7 +183,7 @@ Item {
             to:"Back540"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homescreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -167,7 +191,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homescreen.transformingChanged(false);
                 }
             }
         },
@@ -176,7 +200,7 @@ Item {
             to:"Back180"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homescreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -184,7 +208,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homescreen.transformingChanged(false);
                 }
             }
         },
@@ -193,7 +217,7 @@ Item {
             to:"Back540"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homescreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -201,7 +225,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homescreen.transformingChanged(false);
                 }
             }
         },
@@ -210,7 +234,7 @@ Item {
             to:"Front360"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homescreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -218,7 +242,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homescreen.transformingChanged(false);
                 }
             }
         },
@@ -227,7 +251,7 @@ Item {
             to:"Front0"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homescreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -235,7 +259,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homescreen.transformingChanged(false);
                 }
             }
         },
@@ -244,7 +268,7 @@ Item {
             to:"Front0"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homescreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -252,7 +276,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homescreen.transformingChanged(false);
                 }
             }
         },
@@ -261,7 +285,7 @@ Item {
             to: "Front360"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homescreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -269,7 +293,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homescreen.transformingChanged(false);
                 }
             }
         }
@@ -334,7 +358,7 @@ Item {
                     duration: 250;
                 }
                 ScriptAction {
-                    script: transitionFinished();
+                    script: finishTransition();
                 }
             }
         }
@@ -389,7 +413,7 @@ Item {
         onDragOverflow : {
             if (flipable.transforming != (degrees != 0)) {
                 flipable.transforming = (degrees != 0);
-                flipable.transformingChanged(flipable.transforming);
+                homescreen.transformingChanged(flipable.transforming);
             }
             if (flipable.state == "Front0") {
                 flipable.angle = degrees;

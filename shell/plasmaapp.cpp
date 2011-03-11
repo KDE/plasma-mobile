@@ -252,10 +252,8 @@ void PlasmaApp::setupHomeScreen()
     // get references for the main objects that we'll need to deal with
     m_mainSlot = mainItem->findChild<QDeclarativeItem*>("mainSlot");
     m_spareSlot = mainItem->findChild<QDeclarativeItem*>("spareSlot");
-    connect(m_mainSlot, SIGNAL(transformingChanged(bool)), this, SLOT(mainSlotTransformingChanged(bool)));
 
-    QDeclarativeItem *containments = mainItem->findChild<QDeclarativeItem*>("containments");
-    connect(containments, SIGNAL(transformingChanged(bool)), this, SLOT(containmentsTransformingChanged(bool)));
+    connect(m_homeScreen, SIGNAL(transformingChanged(bool)), this, SLOT(containmentsTransformingChanged(bool)));
 
 
     m_trayPanel = mainItem->findChild<QDeclarativeItem*>("systraypanel");
@@ -289,6 +287,9 @@ void PlasmaApp::containmentsTransformingChanged(bool transforming)
     if (m_currentContainment) {
         m_currentContainment->graphicsEffect()->setEnabled(transforming);
     }
+    if (m_oldContainment) {
+        m_oldContainment.data()->graphicsEffect()->setEnabled(transforming);
+    }
     if (m_alternateContainment) {
         m_alternateContainment.data()->graphicsEffect()->setEnabled(transforming);
     }
@@ -307,6 +308,13 @@ void PlasmaApp::previousActivity()
 
 void PlasmaApp::changeContainment(Plasma::Containment *containment)
 {
+    QDeclarativeProperty containmentProperty(m_homeScreen, "activeContainment");
+    containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
+
+    m_oldContainment = m_currentContainment;
+    m_currentContainment = containment;
+
+    return;
     if (!containment || containment == m_currentContainment) {
         return;
     }
