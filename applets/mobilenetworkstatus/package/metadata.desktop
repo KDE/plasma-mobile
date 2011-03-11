@@ -1,0 +1,18 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Mobile Network Status
+
+Type=Service
+ServiceTypes=Plasma/Applet
+Icon=phone
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=qml/main.qml
+X-KDE-PluginInfo-Author=Davide Bettio
+X-KDE-PluginInfo-Email=davide.bettio@kdemail.net
+X-KDE-PluginInfo-Name=org.kde.mobilenetworkstatus
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Mobile Phone
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

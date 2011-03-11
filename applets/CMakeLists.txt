@@ -8,3 +8,5 @@ add_subdirectory(mobilesystemtray)
 
 add_subdirectory(qtwebbrowser)
 add_subdirectory(quickdialer)
+add_subdirectory(mobilenetworkstatus)
+add_subdirectory(mobilenetworkoperator)

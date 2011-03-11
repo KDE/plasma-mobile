@@ -32,6 +32,9 @@ namespace Plasma
     class Applet;
 } // namespace Plasma
 
+class Activity;
+class KActivityController;
+
 /**
  * @short A Corona with mobile considerations
  */
@@ -57,6 +60,14 @@ public:
     KConfigGroup storedConfig(int containmentId);
     Plasma::Containment *restoreContainment(const int containmentId);
     int totalContainments() const;
+    
+    
+    void currentActivityChanged(const QString &newActivity);
+    Activity* activity(const QString &id);
+    void activityAdded(const QString &id);
+    void activityRemoved(const QString &id);
+    void activateNextActivity();
+    void activatePreviousActivity();
 
 public Q_SLOTS:
     void layoutContainments();
@@ -67,6 +78,8 @@ private:
     Plasma::Applet *loadDefaultApplet(const QString &pluginName, Plasma::Containment *c);
     QRect m_screenGeometry;
     int m_containmentsRestoredCount;
+    KActivityController *m_activityController;
+    QHash<QString, Activity*> m_activities;
 };
 
 #endif

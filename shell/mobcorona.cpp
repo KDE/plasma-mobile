@@ -22,6 +22,8 @@
 
 #include "mobcorona.h"
 #include "mobdialogmanager.h"
+#include "activity.h"
+#include "kactivitycontroller.h"
 
 #include <QApplication>
 #include <QDesktopWidget>
@@ -45,7 +47,8 @@
 
 MobCorona::MobCorona(QObject *parent)
     : Plasma::Corona(parent),
-      m_containmentsRestoredCount(0)
+      m_containmentsRestoredCount(0),
+      m_activityController(new KActivityController(this))
 {
     init();
 }
@@ -232,6 +235,78 @@ int MobCorona::totalContainments() const
 {
     KConfigGroup cg(config(), "SavedContainments");
     return cg.groupList().count() + containments().count()  - m_containmentsRestoredCount;
+}
+
+
+void MobCorona::currentActivityChanged(const QString &newActivity)
+{
+    kDebug() << newActivity;
+    Activity *act =activity(newActivity);
+    if (act) {
+        act->ensureActive();
+    }
+}
+
+Activity* MobCorona::activity(const QString &id)
+{
+    if (!m_activities.contains(id)) {
+        //the add signal comes late sometimes
+        activityAdded(id);
+    }
+    return m_activities.value(id);
+}
+
+void MobCorona::activityAdded(const QString &id)
+{
+    //TODO more sanity checks
+    if (m_activities.contains(id)) {
+        kDebug() << "you're late." << id;
+        return;
+    }
+
+    Activity *a = new Activity(id, this);
+    if (a->isCurrent()) {
+        a->ensureActive();
+    }
+    m_activities.insert(id, a);
+}
+
+void MobCorona::activityRemoved(const QString &id)
+{
+    Activity *a = m_activities.take(id);
+    a->deleteLater();
+}
+
+void MobCorona::activateNextActivity()
+{
+    QStringList list = m_activityController->listActivities(KActivityInfo::Running);
+    if (list.isEmpty()) {
+        return;
+    }
+
+    //FIXME: if the current activity is in transition the "next" will be the first
+    int start = list.indexOf(m_activityController->currentActivity());
+    int i = (start + 1) % list.size();
+
+    m_activityController->setCurrentActivity(list.at(i));
+}
+
+void MobCorona::activatePreviousActivity()
+{
+    QStringList list = m_activityController->listActivities(KActivityInfo::Running);
+    if (list.isEmpty()) {
+        return;
+    }
+
+    //FIXME: if the current activity is in transition the "previous" will be the last
+    int start = list.indexOf(m_activityController->currentActivity());
+    //fun fact: in c++, (-1 % foo) == -1
+    int i = start - 1;
+    if (i < 0) {
+        i = list.size() - 1;
+    }
+
+    m_activityController->setCurrentActivity(list.at(i));
 }
 
 #include "mobcorona.moc"
