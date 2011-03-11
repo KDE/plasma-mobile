@@ -20,11 +20,12 @@
  ***************************************************************************/
 
 import Qt 4.7
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: activityPanel;
-    height: 400;
-    width: 300
+    height: 300;
+    width: 200
     state: "show"
 
 
@@ -51,11 +52,15 @@ Item {
 
 
         onPressed: {
-            print("pressed")
+            activityPanel.state = "dragging"
         }
 
         onReleased: {
-            print("unpressed")
+            if (activityPanel.x < activityPanel.parent.width - 100) {
+                activityPanel.state = "show"
+            } else {
+                activityPanel.state = "hidden"
+            }
         }
 
     }
@@ -69,6 +74,12 @@ Item {
         }
     }
 
+    PlasmaCore.FrameSvgItem {
+        id: background
+        anchors.fill: parent
+        imagePath: "widgets/background"
+        enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+    }
 
     states: [
         State {
