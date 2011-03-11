@@ -47,7 +47,7 @@ bool MobileNetworkEngine::updateSourceEvent(const QString &name)
     MobileNetworkSource *source = dynamic_cast<MobileNetworkSource *>(containerForSource(name));
 
     if (!source) {
-        source = new MobileNetworkSource(this);
+        source = new MobileNetworkSource(name, this);
         source->setObjectName(name);
 
         addSource(source);

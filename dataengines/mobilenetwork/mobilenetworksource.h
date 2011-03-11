@@ -29,10 +29,13 @@ class MobileNetworkSource : public Plasma::DataContainer
     Q_OBJECT
 
     public:
-        MobileNetworkSource(QObject* parent);
+        MobileNetworkSource(QString modem, QObject* parent = 0);
         ~MobileNetworkSource();
 
         void update(bool forcedUpdate = false);
+
+    private slots:
+        void updateAll();
 
     private:
         OfonoNetworkRegistration *m_netRegistration;

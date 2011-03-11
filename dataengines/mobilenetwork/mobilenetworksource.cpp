@@ -21,14 +21,33 @@
 
 #include <ofono-qt/ofononetworkregistration.h>
 
-MobileNetworkSource::MobileNetworkSource(QObject* parent)
+MobileNetworkSource::MobileNetworkSource(QString modem, QObject* parent)
     : Plasma::DataContainer(parent)
 {
-    m_netRegistration = new OfonoNetworkRegistration(OfonoModem::AutomaticSelect, QString(), this);
+    if (modem != "default"){
+        m_netRegistration = new OfonoNetworkRegistration(OfonoModem::ManualSelect, modem, this);
+    }else{
+        m_netRegistration = new OfonoNetworkRegistration(OfonoModem::AutomaticSelect, QString(), this);
+    }
+    connect(m_netRegistration, SIGNAL(strengthChanged(uint)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(technologyChanged(const QString &)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(modeChanged(const QString &)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(statusChanged(const QString &)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(cellIdChanged(uint)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(locationAreaCodeChanged(uint)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(mccChanged(const QString &)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(mncChanged(const QString &)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(baseStationChanged(const QString &)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(nameChanged(const QString &)), this, SLOT(updateAll()));
 }
 
 MobileNetworkSource::~MobileNetworkSource()
 {
+}
+
+void MobileNetworkSource::updateAll()
+{
+    update(true);
 }
 
 void MobileNetworkSource::update(bool forcedUpdate)
