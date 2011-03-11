@@ -81,8 +81,6 @@ private Q_SLOTS:
     void syncConfig();
     void nextActivity();
     void previousActivity();
-    void slideActivities();
-    void updateMainSlot();
     void lockScreen();
     void shrinkTray();
     void showWidgetsExplorer();
@@ -103,7 +101,6 @@ private:
     Plasma::Containment *m_currentContainment;
     QWeakPointer<Plasma::Containment> m_oldContainment;
     QWeakPointer<Plasma::Containment> m_alternateContainment;
-    Plasma::Containment *m_nextContainment;
     Plasma::Containment *m_trayContainment;
     QMap<int, Plasma::Containment*> m_containments;
     QList<Plasma::Containment *> m_panelContainments;

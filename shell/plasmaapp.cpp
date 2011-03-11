@@ -89,7 +89,6 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
-      m_nextContainment(0),
       m_trayContainment(0),
       m_isDesktop(false)
 {
@@ -313,50 +312,11 @@ void PlasmaApp::changeContainment(Plasma::Containment *containment)
 
     m_oldContainment = m_currentContainment;
     m_currentContainment = containment;
-
-    return;
-    if (!containment || containment == m_currentContainment) {
-        return;
-    }
-
-    // found it!
-    if (containment) {
-        m_nextContainment = containment;
-        setupContainment(containment);
-    }
 }
 
 void PlasmaApp::lockScreen()
 {
     m_homeScreen->setProperty("locked", true);
-}
-
-void PlasmaApp::updateMainSlot()
-{
-    m_homeScreen->setProperty("state", "Normal");
-
-    if (m_nextContainment) {
-        m_nextContainment->setParentItem(m_mainSlot);
-
-        m_nextContainment->graphicsEffect()->setEnabled(false);
-        // resizing the containment will always resize it's parent item
-        m_nextContainment->setPos(0,0);
-    }
-
-    if (m_currentContainment) {
-        m_currentContainment->setParentItem(0);
-        m_currentContainment->setPos(0, m_currentContainment->size().height());
-
-        m_currentContainment->setPos(m_mainView->width(), m_mainView->height());
-
-        m_currentContainment->setVisible(false);
-        m_currentContainment->graphicsEffect()->setEnabled(false);
-    }
-
-    m_currentContainment = m_nextContainment;
-    m_nextContainment = 0;
-    m_currentContainment->setScreen(0);
-    m_currentContainment->resize(m_mainView->transformedSize());
 }
 
 Plasma::Corona* PlasmaApp::corona()
@@ -416,30 +376,6 @@ void PlasmaApp::mainContainmentActivated()
     } else {
         m_mainView->activateWindow();
     }
-}
-
-void PlasmaApp::setupContainment(Plasma::Containment *containment)
-{
-    containment->setParentItem(m_spareSlot);
-    containment->setPos(0, 0);
-
-    containment->setVisible(true);
-
-    containment->resize(m_mainView->transformedSize());
-    //FIXME: this makes the containment to not paint until the animation finishes
-    if (containment->graphicsEffect()) {
-        containment->graphicsEffect()->setEnabled(true);
-    }
-    //###The reparenting need a repaint so this ensure that we
-    //have actually re-render the containment otherwise it
-    //makes animations slugglish. We need a better solution.
-    QTimer::singleShot(0, this, SLOT(slideActivities()));
-}
-
-void PlasmaApp::slideActivities()
-{
-    // change state
-    m_homeScreen->setProperty("state", "Slide");
 }
 
 void PlasmaApp::shrinkTray()
@@ -552,9 +488,6 @@ void PlasmaApp::mainViewGeometryChanged()
 
         if (m_currentContainment) {
             m_currentContainment->resize(m_mainView->transformedSize());
-        }
-        if (m_nextContainment) {
-            m_nextContainment->resize(m_mainView->transformedSize());
         }
         if (m_alternateContainment) {
             m_alternateContainment.data()->resize(m_mainView->transformedSize());
