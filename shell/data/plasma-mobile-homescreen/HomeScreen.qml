@@ -28,7 +28,7 @@ Item {
     y: 0;
     width: 800;
     height: 480;
-    signal transitionFinished();
+
     state : "Normal";
     property bool locked: true
     signal transformingChanged(bool transforming)
@@ -50,7 +50,6 @@ Item {
         activeContainment.x = 0
         activeContainment.y = 0
         state = "Normal"
-        //transitionFinished()
         transformingChanged(false);
     }
 

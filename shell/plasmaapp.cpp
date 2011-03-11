@@ -254,9 +254,6 @@ void PlasmaApp::setupHomeScreen()
     m_trayPanel = mainItem->findChild<QDeclarativeItem*>("systraypanel");
 
 
-    connect(m_homeScreen, SIGNAL(transitionFinished()),
-            this, SLOT(updateMainSlot()));
-
     connect(m_homeScreen, SIGNAL(nextActivityRequested()),
             this, SLOT(nextActivity()));
 
