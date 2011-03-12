@@ -22,7 +22,7 @@
 import Qt 4.7
 
 Item {
-    id: homescreen;
+    id: homeScreen;
     objectName: "homeScreen";
     x: 0;
     y: 0;
@@ -60,7 +60,7 @@ Item {
             unlockTextAnimation.running = true
         } else if (lockScreenItem.x == 0 && lockScreenItem.y == 0) {
             lockScreenItem.x = 0
-            lockScreenItem.y = homescreen.height
+            lockScreenItem.y = homeScreen.height
         }
     }
 
@@ -106,8 +106,8 @@ Item {
                 objectName: "mainSlot";
                 x: 0;
                 y: 0;
-                width: homescreen.width;
-                height: homescreen.height;
+                width: homeScreen.width;
+                height: homeScreen.height;
                 transformOrigin : Item.Center;
             }
 
@@ -115,9 +115,9 @@ Item {
                 id : spareSlot;
                 objectName: "spareSlot";
                 x: 0;
-                y: -homescreen.height;
-                width: homescreen.width;
-                height: homescreen.height;
+                y: -homeScreen.height;
+                width: homeScreen.width;
+                height: homeScreen.height;
             }
         }
         back: Item {
@@ -163,7 +163,7 @@ Item {
             to:"Back180"
             SequentialAnimation {
                 ScriptAction {
-                    script: homescreen.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -171,7 +171,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: homescreen.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -180,7 +180,7 @@ Item {
             to:"Back540"
             SequentialAnimation {
                 ScriptAction {
-                    script: homescreen.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -188,7 +188,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: homescreen.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -197,7 +197,7 @@ Item {
             to:"Back180"
             SequentialAnimation {
                 ScriptAction {
-                    script: homescreen.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -205,7 +205,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: homescreen.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -214,7 +214,7 @@ Item {
             to:"Back540"
             SequentialAnimation {
                 ScriptAction {
-                    script: homescreen.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -222,7 +222,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: homescreen.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -231,7 +231,7 @@ Item {
             to:"Front360"
             SequentialAnimation {
                 ScriptAction {
-                    script: homescreen.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -239,7 +239,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: homescreen.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -248,7 +248,7 @@ Item {
             to:"Front0"
             SequentialAnimation {
                 ScriptAction {
-                    script: homescreen.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -256,7 +256,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: homescreen.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -265,7 +265,7 @@ Item {
             to:"Front0"
             SequentialAnimation {
                 ScriptAction {
-                    script: homescreen.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -273,7 +273,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: homescreen.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -282,7 +282,7 @@ Item {
             to: "Front360"
             SequentialAnimation {
                 ScriptAction {
-                    script: homescreen.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -290,7 +290,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: homescreen.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         }
@@ -307,7 +307,7 @@ Item {
                 }
                 PropertyChanges {
                     target: spareSlot;
-                    y: -homescreen.height;
+                    y: -homeScreen.height;
                 }
 
             },
@@ -319,7 +319,7 @@ Item {
                 }
                 PropertyChanges {
                     target: mainSlot;
-                    y: homescreen.height;
+                    y: homeScreen.height;
                 }
             }
     ]
@@ -364,7 +364,7 @@ Item {
         id: topEdgePanel;
         objectName: "topEdgePanel";
 
-        anchors.horizontalCenter: homescreen.horizontalCenter;
+        anchors.horizontalCenter: homeScreen.horizontalCenter;
         y: 0;
     }
     ActivityPanel {
@@ -417,7 +417,7 @@ Item {
         onDragOverflow : {
             if (flipable.transforming != (degrees != 0)) {
                 flipable.transforming = (degrees != 0);
-                homescreen.transformingChanged(flipable.transforming);
+                homeScreen.transformingChanged(flipable.transforming);
             }
             if (flipable.state == "Front0") {
                 flipable.angle = degrees;
@@ -473,27 +473,27 @@ Item {
             onReleased: {
                 var lockedX = false
                 var lockedY = false
-                if (lockScreenItem.x > homescreen.width/3) {
-                    lockScreenItem.x = homescreen.width
-                } else if (lockScreenItem.x < -homescreen.width/3) {
-                    lockScreenItem.x = -homescreen.width
+                if (lockScreenItem.x > homeScreen.width/3) {
+                    lockScreenItem.x = homeScreen.width
+                } else if (lockScreenItem.x < -homeScreen.width/3) {
+                    lockScreenItem.x = -homeScreen.width
                 } else {
                     lockScreenItem.x = 0
                     lockedX = true
                 }
 
-                if (lockScreenItem.y > homescreen.height/3) {
-                    lockScreenItem.y = homescreen.height
-                } else if (lockScreenItem.y < -homescreen.height/3) {
-                    lockScreenItem.y = -homescreen.height
+                if (lockScreenItem.y > homeScreen.height/3) {
+                    lockScreenItem.y = homeScreen.height
+                } else if (lockScreenItem.y < -homeScreen.height/3) {
+                    lockScreenItem.y = -homeScreen.height
                 } else {
                     lockScreenItem.y = 0
                     lockedY = true
                 }
                 if (lockedX && lockedY) {
-                    homescreen.locked = true
+                    homeScreen.locked = true
                 } else {
-                    homescreen.locked = false
+                    homeScreen.locked = false
                 }
             }
         }
