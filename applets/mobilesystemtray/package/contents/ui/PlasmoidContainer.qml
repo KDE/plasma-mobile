@@ -20,15 +20,22 @@
 import Qt 4.7
 
 Item {
+    id: plasmoidContainer
+    width: 24
     anchors.top: tasksRow.top
     anchors.bottom: tasksRow.bottom
 
     property QGraphicsWidget applet
+    onAppletChanged: {
+        print(plasmoidContainer.applet)
+        plasmoidContainer.applet.parent = plasmoidContainer
+        plasmoidContainer.applet.x=0
+    }
 
     onHeightChanged: {
-        applet.height = height
-        var ratio = applet.preferredSize.width/applet.preferredSize.height
+        plasmoidContainer.applet.height = plasmoidContainer.height
+        var ratio = plasmoidContainer.applet.preferredSize.width/plasmoidContainer.applet.preferredSize.height
         applet.width = ratio * height
-        width = applet.width
+        width = plasmoidContainer.applet.width
     }
 }
