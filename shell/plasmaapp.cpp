@@ -418,6 +418,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         } else {
             //no panel? discard the containment
             containment->deleteLater();
+            return;
         }
     }
 
@@ -454,7 +455,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         changeContainment(containment);
     } else {
         containment->setPos(m_mainView->width(), m_mainView->height());
-        containment->setVisible(false);
+       // containment->setVisible(false);
     }
 }
 
