@@ -22,7 +22,7 @@
 import Qt 4.7
 
 Item {
-    id: homescreen;
+    id: homeScreen;
     objectName: "homeScreen";
     x: 0;
     y: 0;
@@ -41,7 +41,7 @@ Item {
             unlockTextAnimation.running = true
         } else if (lockScreenItem.x == 0 && lockScreenItem.y == 0) {
             lockScreenItem.x = 0
-            lockScreenItem.y = homescreen.height
+            lockScreenItem.y = homeScreen.height
         }
     }
 
@@ -65,18 +65,18 @@ Item {
         objectName: "mainSlot";
         x: 0;
         y: 0;
-        width: homescreen.width;
-        height: homescreen.height;
+        width: homeScreen.width;
+        height: homeScreen.height;
         transformOrigin : Item.Center;
     }
 
     Item {
         id : spareSlot;
         objectName: "spareSlot";
-        x: -homescreen.width;
+        x: -homeScreen.width;
         y: 0;
-        width: homescreen.width;
-        height: homescreen.height;
+        width: homeScreen.width;
+        height: homeScreen.height;
     }
 
     Shadow {
@@ -105,13 +105,13 @@ Item {
 
         onTransitionFinished : {
             if (state == "show") {
-                homescreen.transitionFinished()
+                homeScreen.transitionFinished()
                 state = "hidden"
             }
             spareSlotShadowRight.state = "invisible"
         }
         onActivated: {
-            homescreen.previousActivityRequested();
+            homeScreen.previousActivityRequested();
             spareSlotShadowRight.state = "visible"
         }
     }
@@ -125,13 +125,13 @@ Item {
 
         onTransitionFinished : {
             if (state == "show") {
-                homescreen.transitionFinished()
+                homeScreen.transitionFinished()
                 state = "hidden"
             }
             spareSlotShadowLeft.state = "invisible"
         }
         onActivated: {
-            homescreen.nextActivityRequested();
+            homeScreen.nextActivityRequested();
             spareSlotShadowLeft.state = "visible"
         }
     }
@@ -141,8 +141,8 @@ Item {
         objectName: "alternateSlot";
         x: 0;
         y: alternateDrag.y + alternateDrag.height;
-        width: homescreen.width;
-        height: homescreen.height;
+        width: homeScreen.width;
+        height: homeScreen.height;
     }
     Shadow {
         id: alternateSlotShadowTop
@@ -165,7 +165,7 @@ Item {
         id: systraypanel;
         objectName: "systraypanel";
 
-        anchors.horizontalCenter: homescreen.horizontalCenter;
+        anchors.horizontalCenter: homeScreen.horizontalCenter;
         y: 0;
     }
 
@@ -238,27 +238,27 @@ Item {
             onReleased: {
                 var lockedX = false
                 var lockedY = false
-                if (lockScreenItem.x > homescreen.width/3) {
-                    lockScreenItem.x = homescreen.width
-                } else if (lockScreenItem.x < -homescreen.width/3) {
-                    lockScreenItem.x = -homescreen.width
+                if (lockScreenItem.x > homeScreen.width/3) {
+                    lockScreenItem.x = homeScreen.width
+                } else if (lockScreenItem.x < -homeScreen.width/3) {
+                    lockScreenItem.x = -homeScreen.width
                 } else {
                     lockScreenItem.x = 0
                     lockedX = true
                 }
 
-                if (lockScreenItem.y > homescreen.height/3) {
-                    lockScreenItem.y = homescreen.height
-                } else if (lockScreenItem.y < -homescreen.height/3) {
-                    lockScreenItem.y = -homescreen.height
+                if (lockScreenItem.y > homeScreen.height/3) {
+                    lockScreenItem.y = homeScreen.height
+                } else if (lockScreenItem.y < -homeScreen.height/3) {
+                    lockScreenItem.y = -homeScreen.height
                 } else {
                     lockScreenItem.y = 0
                     lockedY = true
                 }
                 if (lockedX && lockedY) {
-                    homescreen.locked = true
+                    homeScreen.locked = true
                 } else {
-                    homescreen.locked = false
+                    homeScreen.locked = false
                 }
             }
         }
