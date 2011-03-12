@@ -251,10 +251,10 @@ void PlasmaApp::setupHomeScreen()
 
 
     connect(m_homeScreen, SIGNAL(nextActivityRequested()),
-            this, SLOT(nextActivity()));
+            m_corona, SLOT(activateNextActivity()));
 
     connect(m_homeScreen, SIGNAL(previousActivityRequested()),
-            this, SLOT(previousActivity()));
+            m_corona, SLOT(activatePreviousActivity()));
 
     QDeclarativeItem *panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
 
@@ -283,16 +283,6 @@ void PlasmaApp::containmentsTransformingChanged(bool transforming)
     }
 }
 
-
-void PlasmaApp::nextActivity()
-{
-    m_corona->activateNextActivity();
-}
-
-void PlasmaApp::previousActivity()
-{
-    m_corona->activatePreviousActivity();
-}
 
 void PlasmaApp::changeContainment(Plasma::Containment *containment)
 {

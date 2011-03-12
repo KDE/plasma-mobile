@@ -79,8 +79,6 @@ private Q_SLOTS:
     void containmentDestroyed(QObject *);
     void containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasma::Containment *cont);
     void syncConfig();
-    void nextActivity();
-    void previousActivity();
     void lockScreen();
     void showWidgetsExplorer();
     void mainViewGeometryChanged();
