@@ -37,13 +37,22 @@ Item {
 
     property QGraphicsWidget activeContainment
     onActiveContainmentChanged: {
-        activeContainment.parent = mainSlot
+        activeContainment.parent = spareSlot
         activeContainment.visible = true
         activeContainment.x = 0
         activeContainment.y = 0
         activeContainment.size = width + "x" + height
         state = "Slide"
         transformingChanged(true);
+    }
+
+    function finishTransition()
+    {
+        activeContainment.parent = mainSlot
+        activeContainment.x = 0
+        activeContainment.y = 0
+        state = "Normal"
+        transformingChanged(false);
     }
 
     onLockedChanged: {
@@ -90,63 +99,68 @@ Item {
         width: homeScreen.width;
         height: homeScreen.height;
     }
+    states: [
+            State {
+                name: "Normal"
+                PropertyChanges {
+                    target: mainSlot;
+                    x: 0;
+                }
+                PropertyChanges {
+                    target: spareSlot;
+                    x: -homeScreen.width;
+                }
 
-    Shadow {
-        id: spareSlotShadowRight
-        source: "images/shadow-right.png"
-        anchors.left: spareSlot.right
-        anchors.leftMargin: -1
-        width: 11
-        height: spareSlot.height
-        
-    }
-    Shadow {
-        id: spareSlotShadowLeft
-        source: "images/shadow-left.png"
-        anchors.right: spareSlot.left
-        anchors.rightMargin: -1
-        width: 11
-        height: spareSlot.height
-    }
-
-    Dragger {
-        id: prevDrag
-
-        location: "LeftEdge"
-        targetItem: spareSlot
-
-        onTransitionFinished : {
-            if (state == "show") {
-                thomeScreen.ransformingChanged(false);
-                state = "hidden"
+            },
+            State {
+                name: "Slide"
+                PropertyChanges {
+                    target: spareSlot;
+                    x: 0;
+                }
+                PropertyChanges {
+                    target: mainSlot;
+                    x: homeScreen.width;
+                }
             }
-            spareSlotShadowRight.state = "invisible"
-        }
-        onActivated: {
-            homeScreen.transformingChanged(false);
-            spareSlotShadowRight.state = "visible"
-        }
-    }
+    ]
 
-    Dragger {
-        id: nextDrag
-        objectName: "nextDrag"
-
-        location: "RightEdge"
-        targetItem: spareSlot
-
-        onTransitionFinished : {
-            if (state == "show") {
-                thomeScreen.ransformingChanged(false);
-                state = "hidden"
+    transitions: Transition {
+        from: "Normal"
+        to: "Slide"
+        SequentialAnimation {
+            NumberAnimation {
+                target: mainSlot;
+                property: "scale";
+                easing.type: "OutQuint";
+                duration: 250;
             }
-            spareSlotShadowLeft.state = "invisible"
-        }
-        onActivated: {
-            homeScreen.nextActivityRequested();
-            spareSlotShadowLeft.state = "visible"
+            ParallelAnimation {
+                NumberAnimation {
+                    target: spareSlot;
+                    property: "x";
+                    easing.type: "InQuad";
+                    duration: 300;
+                }
+                NumberAnimation {
+                    target: mainSlot;
+                    property: "x";
+                    easing.type: "InQuad";
+                    duration: 300;
+                }
+            }
+            NumberAnimation {
+                target: spareSlot;
+                property: "scale";
+                easing.type: "OutQuint";
+                duration: 250;
+            }
+            ScriptAction {
+                script: finishTransition();
+            }
         }
     }
+
 
     Item {
         id: alternateSlot;
@@ -179,6 +193,14 @@ Item {
 
         anchors.horizontalCenter: homeScreen.horizontalCenter;
         y: 0;
+    }
+
+    ActivityPanel {
+        id: rightEdgePanel
+        objectName: "rightEdgePanel"
+
+        anchors.verticalCenter: parent.verticalCenter
+        x: parent.width - width
     }
 
     Dragger {
