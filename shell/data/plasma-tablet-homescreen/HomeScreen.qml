@@ -28,10 +28,11 @@ Item {
     y: 0;
     width: 800;
     height: 480;
-    signal transitionFinished();
     signal nextActivityRequested();
     signal previousActivityRequested();
+    
     state : "Normal"
+    signal transformingChanged(bool transforming)
     property bool locked: true
 
     property QGraphicsWidget activeContainment
@@ -116,13 +117,13 @@ Item {
 
         onTransitionFinished : {
             if (state == "show") {
-                homeScreen.transitionFinished()
+                thomeScreen.ransformingChanged(false);
                 state = "hidden"
             }
             spareSlotShadowRight.state = "invisible"
         }
         onActivated: {
-            homeScreen.previousActivityRequested();
+            homeScreen.transformingChanged(false);
             spareSlotShadowRight.state = "visible"
         }
     }
@@ -136,7 +137,7 @@ Item {
 
         onTransitionFinished : {
             if (state == "show") {
-                homeScreen.transitionFinished()
+                thomeScreen.ransformingChanged(false);
                 state = "hidden"
             }
             spareSlotShadowLeft.state = "invisible"
