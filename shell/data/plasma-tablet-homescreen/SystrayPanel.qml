@@ -85,7 +85,7 @@ Item {
 
     onContainmentChanged: {
         containment.parent = containmentParent
-        timer.running = true
+        resizeTimer.running = true
     }
     onHeightChanged: resizeTimer.running = true
     onWidthChanged: resizeTimer.running = true
