@@ -61,7 +61,7 @@ Item {
         
         delegate: Text {
             color: theme.textColor
-            text: model["Name"]
+            text: model["DataEngineSource"]=="Status"?i18n("New"):model["Name"]
             font.pixelSize: 24
             MouseArea {
                 anchors.fill: parent

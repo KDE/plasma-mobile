@@ -272,13 +272,13 @@ void PlasmaApp::setupHomeScreen()
 
 void PlasmaApp::containmentsTransformingChanged(bool transforming)
 {
-    if (m_currentContainment) {
+    if (m_currentContainment && m_currentContainment->graphicsEffect()) {
         m_currentContainment->graphicsEffect()->setEnabled(transforming);
     }
-    if (m_oldContainment) {
+    if (m_oldContainment && m_oldContainment.data()->graphicsEffect()) {
         m_oldContainment.data()->graphicsEffect()->setEnabled(transforming);
     }
-    if (m_alternateContainment) {
+    if (m_alternateContainment && m_alternateContainment.data()->graphicsEffect()) {
         m_alternateContainment.data()->graphicsEffect()->setEnabled(transforming);
     }
 }

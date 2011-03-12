@@ -368,7 +368,9 @@ Item {
         y: 0;
     }
     ActivityPanel {
-        id: activityPanel
+        id: rightEdgePanel
+        objectName: "rightEdgePanel"
+
         anchors.verticalCenter: parent.verticalCenter
         x: parent.width - width
     }

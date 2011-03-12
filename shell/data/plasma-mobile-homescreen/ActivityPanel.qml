@@ -28,7 +28,14 @@ Item {
     width: 200
     state: "show"
 
-
+    property alias containment: background.containment
+    onContainmentChanged: {
+        containment.parent = background
+        containment.x = background.margins.left
+        containment.y = background.margins.top
+        containment.width = background.width - background.margins.left - background.margins.right
+        containment.height = background.height - background.margins.top - background.margins.bottom
+    }
 
     Image {
         id: hint;
@@ -74,53 +81,13 @@ Item {
         }
     }
 
-    PlasmaCore.DataSource {
-        id: activitySource
-        engine: "org.kde.activities"
-        onSourceAdded: {
-            connectSource(source)
-        }
-        Component.onCompleted: {
-            connectedSources = sources
-        }
-    }
-
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     PlasmaCore.FrameSvgItem {
         id: background
         anchors.fill: parent
         imagePath: "widgets/background"
         enabledBorders: "LeftBorder|TopBorder|BottomBorder"
 
-        ListView {
-            anchors.fill: parent
-            anchors.leftMargin: background.margins.left
-            anchors.topMargin: background.margins.top
-            anchors.rightMargin: background.margins.right
-            anchors.bottomMargin: background.margins.bottom
-            clip: true
-            
-            model: PlasmaCore.DataModel{
-                dataSource: activitySource
-            }
-            
-            delegate: Text {
-                color: theme.textColor
-                text: model["Name"]
-                font.pixelSize: 24
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        var activityId = model["DataEngineSource"]
-                        print(activityId)
-                        activitySource.serviceForSource(activityId).operationDescription("setCurrent")
-                    }
-                }
-            }
-        }
+        property QGraphicsWidget containment
     }
 
     states: [

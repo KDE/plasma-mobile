@@ -71,6 +71,17 @@ immutability=2
 plugin=digital-clock
 zvalue=0
 
+[Containments][9]
+activity=
+desktop=-1
+formfactor=3
+geometry=0,0,800,100
+immutability=1
+location=6
+plugin=org.kde.mobileactivityswitcher
+screen=0
+zvalue=10
+
 
 [Containments][2]
 activity=network
