@@ -136,7 +136,7 @@ Item {
             PropertyChanges {
                 target: systrayPanel;
                 height: 40;
-                width: 400;
+                width: parent.width;
             }
             PropertyChanges {
                 target: systrayPanelArea;
