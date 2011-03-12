@@ -20,15 +20,24 @@
 #include "mobilenetworksource.h"
 
 #include <ofono-qt/ofononetworkregistration.h>
+#include <ofono-qt/ofonomodem.h>
+#include <ofono-qt/ofonosimmanager.h>
 
 MobileNetworkSource::MobileNetworkSource(QString modem, QObject* parent)
     : Plasma::DataContainer(parent)
 {
     if (modem != "default"){
         m_netRegistration = new OfonoNetworkRegistration(OfonoModem::ManualSelect, modem, this);
+        m_modem = new OfonoModem(OfonoModem::ManualSelect, modem, this);
+        m_simManager = new OfonoSimManager(OfonoModem::ManualSelect, modem, this);
     }else{
         m_netRegistration = new OfonoNetworkRegistration(OfonoModem::AutomaticSelect, QString(), this);
+        m_modem = new OfonoModem(OfonoModem::AutomaticSelect, QString(), this);
+        m_simManager = new OfonoSimManager(OfonoModem::AutomaticSelect, QString(), this);        
     }
+    connect(m_netRegistration, SIGNAL(poweredChanged(bool)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(onlineChanged(bool)), this, SLOT(updateAll()));
+    connect(m_netRegistration, SIGNAL(presenceChanged(bool)), this, SLOT(updateAll()));
     connect(m_netRegistration, SIGNAL(strengthChanged(uint)), this, SLOT(updateAll()));
     connect(m_netRegistration, SIGNAL(technologyChanged(const QString &)), this, SLOT(updateAll()));
     connect(m_netRegistration, SIGNAL(modeChanged(const QString &)), this, SLOT(updateAll()));
@@ -54,6 +63,14 @@ void MobileNetworkSource::update(bool forcedUpdate)
 {
     Q_UNUSED(forcedUpdate)
     
+    //Modem API
+    setData("isModemPowered", m_modem->powered());
+    setData("isRFEnabled", m_modem->online());
+    
+    //SIM API
+    setData("isSIMPresent", m_simManager->present());
+    
+    //Network API
     setData("signalStrength", m_netRegistration->strength());
 //ofono-qt: missing CDMA binding
 #if 0

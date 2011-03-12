@@ -23,6 +23,8 @@
 #include <Plasma/DataContainer>
 
 class OfonoNetworkRegistration;
+class OfonoModem;
+class OfonoSimManager;
 
 class MobileNetworkSource : public Plasma::DataContainer
 {
@@ -39,6 +41,8 @@ class MobileNetworkSource : public Plasma::DataContainer
 
     private:
         OfonoNetworkRegistration *m_netRegistration;
+        OfonoModem *m_modem;
+        OfonoSimManager *m_simManager;
 };
 
 #endif
