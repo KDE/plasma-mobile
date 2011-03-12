@@ -34,6 +34,17 @@ Item {
     state : "Normal"
     property bool locked: true
 
+    property QGraphicsWidget activeContainment
+    onActiveContainmentChanged: {
+        activeContainment.parent = mainSlot
+        activeContainment.visible = true
+        activeContainment.x = 0
+        activeContainment.y = 0
+        activeContainment.size = width + "x" + height
+        state = "Slide"
+        transformingChanged(true);
+    }
+
     onLockedChanged: {
         if (locked) {
             lockScreenItem.x = 0
