@@ -65,6 +65,7 @@ Item {
         onReleased: {
             if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
                 activityPanel.state = "show"
+                timer.restart()
             } else {
                 activityPanel.state = "hidden"
             }
