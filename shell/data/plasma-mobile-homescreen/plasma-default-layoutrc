@@ -84,6 +84,18 @@ plugin=org.kde.mobileactivityswitcher
 screen=0
 zvalue=10
 
+[Containments][10]
+activity=
+desktop=-1
+formfactor=2
+geometry=0,0,800,100
+immutability=1
+location=4
+excludeFromActivities=true
+plugin=org.kde.mobilelauncherpanel
+screen=0
+zvalue=10
+
 
 [Containments][2]
 activity=network

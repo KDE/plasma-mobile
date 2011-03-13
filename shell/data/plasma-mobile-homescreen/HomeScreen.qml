@@ -375,8 +375,8 @@ Item {
         x: parent.width - width
     }
     LauncherPanel {
-        id: launcherpanel;
-        objectName: "launcherpanel";
+        id: bottomEdgePanel;
+        objectName: "bottomEdgePanel";
 
         anchors.left: parent.left;
         anchors.right: parent.right;
@@ -384,7 +384,7 @@ Item {
     }
 
     Connections {
-        target: launcherpanel;
+        target: bottomEdgePanel;
 
         onFlipRequested : {
             if (reverse) {

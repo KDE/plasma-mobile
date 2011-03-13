@@ -20,85 +20,103 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
-Flow {
-    id: shortcuts;
-    spacing: 45;
-    state: width>400?"expanded":"compact"
-
-    Component.onCompleted: {
-        plasmoid.drawWallpaper = false
-
-        plasmoid.containmentType = "CustomContainment"
+Item {
+    id: main
+    height: 128
+    //FIXME: why bindings don't work there?
+    onWidthChanged: {
+        shortcuts.width = Math.min(width, 113*5+45*4)
+        shortcuts.state = width>500?"expanded":"compact"
     }
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-    
+    Flow {
+        id: shortcuts;
+        anchors.centerIn: parent
+        //FIXME
+        width: 800
+        spacing: 45;
+        state: "expanded"
 
-    Item {
-        id: spacer1
-        width: internet.width/2;
-        height: internet.height;
-        visible:false
-    }
+        Component.onCompleted: {
+            plasmoid.drawWallpaper = false
 
-    Icon {
-        id: internet
-        icon: "internet"
-    }
-    Icon {
-        icon: "im"
-    }
-
-    Item {
-        id: spacer2
-        width: internet.width/2;
-        height: internet.height;
-        visible:false
-    }
-
-    Icon {
-        icon: "phone"
-    }
-    Icon {
-        icon: "social"
-    }
-    Icon {
-        icon: "games"
-    }
-
-    states: [
-        State {
-            name: "expanded";
-            PropertyChanges {
-                target: shortcuts
-                //FIXME: hardcoded values
-                width: 750
-            }
-            PropertyChanges {
-                target: spacer1
-                visible: false
-            }
-            PropertyChanges {
-                target: spacer2
-                visible: false
-            }
-        },
-        State {
-            name: "compact";
-            PropertyChanges {
-                target: shortcuts
-                width: 475
-            }
-            PropertyChanges {
-                target: spacer1
-                visible: true
-            }
-            PropertyChanges {
-                target: spacer2
-                visible: true
-            }
+            plasmoid.containmentType = "CustomContainment"
         }
-    ]
+
+        PlasmaCore.Theme {
+            id: theme
+        }
+        
+
+        Item {
+            id: spacer1
+            width: internet.width/2;
+            height: internet.height;
+            visible:false
+        }
+
+        Icon {
+            id: internet
+            icon: "internet"
+            command: "konqueror"
+        }
+        Icon {
+            icon: "im"
+            command: "kopete"
+        }
+
+        Item {
+            id: spacer2
+            width: internet.width/2;
+            height: internet.height;
+            visible:false
+        }
+
+        Icon {
+            icon: "phone"
+            command: "linphone"
+        }
+        Icon {
+            icon: "social"
+            command: "plasma-windowed twitter"
+        }
+        Icon {
+            icon: "games"
+            command: "kpat"
+        }
+
+        states: [
+            State {
+                name: "expanded";
+                PropertyChanges {
+                    target: shortcuts
+                    //FIXME: hardcoded values
+                    width: 750
+                }
+                PropertyChanges {
+                    target: spacer1
+                    visible: false
+                }
+                PropertyChanges {
+                    target: spacer2
+                    visible: false
+                }
+            },
+            State {
+                name: "compact";
+                PropertyChanges {
+                    target: shortcuts
+                    width: 475
+                }
+                PropertyChanges {
+                    target: spacer1
+                    visible: true
+                }
+                PropertyChanges {
+                    target: spacer2
+                    visible: true
+                }
+            }
+        ]
+    }
 }

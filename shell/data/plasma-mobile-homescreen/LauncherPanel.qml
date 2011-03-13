@@ -22,8 +22,8 @@
 import Qt 4.7
 
 Item {
-    id: launcherpanel;
-    height: shortcuts.height;
+    id: launcherPanel;
+    height: width>500?128:256;
     state: "show";
     signal flipRequested(bool reverse);
     signal dragOverflow(int degrees)
@@ -34,7 +34,7 @@ Item {
     }
 
     Image {
-        id: activityimage;
+        id: launcherPanelImage;
         anchors.left: parent.left;
         anchors.right: parent.right;
         fillMode: Image.Tile
@@ -47,17 +47,17 @@ Item {
         anchors.right: parent.right;
         source: "images/stars.png";
         fillMode: Image.Tile
-        y: activityimage.height - stars.height;
+        y: launcherPanelImage.height - stars.height;
     }
 
     Rectangle {
-        id: launcherpanelbottom;
-        objectName: "launcherpanelbottom";
+        id: launcherPanelbottom;
+        objectName: "launcherPanelbottom";
 
         color: "black";
         anchors.left: parent.left;
         anchors.right: parent.right;
-        anchors.top: activityimage.bottom;
+        anchors.top: launcherPanelImage.bottom;
         height: homescreen.height/2;
     }
 
@@ -65,31 +65,29 @@ Item {
         id: hint;
         source: "images/hint.png";
         y: -40;
-        anchors.horizontalCenter: launcherpanel.horizontalCenter;
+        anchors.horizontalCenter: launcherPanel.horizontalCenter;
     }
 
     onYChanged : {
-        var overflow = Math.max(0, launcherpanel.parent.height - (launcherpanel.y + launcherpanel.height));
+        var overflow = Math.max(0, launcherPanel.parent.height - (launcherPanel.y + launcherPanel.height));
 
-        var degrees = 90 / ((launcherpanel.parent.height/2)/overflow);
-        launcherpanel.dragOverflow(degrees);
+        var degrees = 90 / ((launcherPanel.parent.height/2)/overflow);
+        launcherPanel.dragOverflow(degrees);
     }
 
     onWidthChanged : {
-        if (width < 800) {
-            shortcuts.state = "compact"
-        } else {
-            shortcuts.state = "expanded"
-        }
-        hintregion.height = hint.height + launcherpanel.height;
+        containment.width = width
+        height: containment.height
+        hintregion.height = hint.height + launcherPanel.height;
     }
 
-    ActivityPanelItems {
-        objectName: "panelitems";
-        id: shortcuts;
-        state: "expanded"
-        anchors.horizontalCenter: launcherpanel.horizontalCenter;
-        anchors.bottom: launcherpanel.bottom;
+    property QGraphicsWidget containment
+    onContainmentChanged: {
+        containment.parent = launcherPanel
+        containment.x = 0
+        containment.y = 0
+        containment.width = launcherPanel.width
+        containment.height = launcherPanel.height
     }
 
     Image {
@@ -118,7 +116,7 @@ Item {
 
     PropertyAnimation {
         id: rotationDragAnim
-        target: launcherpanel
+        target: launcherPanel
         properties: "y"
         duration: 300
     }
@@ -131,12 +129,12 @@ Item {
         x: 0;
         y: hint.y -  35 / 2;
         width: parent.width;
-        height: hint.height + launcherpanel.height;
+        height: hint.height + launcherPanel.height;
 
-        drag.target: launcherpanel;
+        drag.target: launcherPanel;
         drag.axis: "YAxis"
-        drag.minimumY: launcherpanel.parent.height - launcherpanel.height;
-        drag.maximumY: launcherpanel.parent.height;
+        drag.minimumY: launcherPanel.parent.height - launcherPanel.height;
+        drag.maximumY: launcherPanel.parent.height;
 
         property int startY
 
@@ -147,58 +145,47 @@ Item {
                 return;
             }
 
-            drag.target = launcherpanel;
-            launcherpanel.state = "dragging";
+            drag.target = launcherPanel;
+            launcherPanel.state = "dragging";
             timer.stop();
-            startY = launcherpanel.y
+            startY = launcherPanel.y
             passClicks = true;
         }
 
         onPositionChanged: {
-            if (Math.abs(launcherpanel.y - startY) > 40) {
+            if (Math.abs(launcherPanel.y - startY) > 40) {
                 passClicks = false;
             }
 
             if (mouse.y < -100) {
                 drag.target = undefined
-                rotationDragAnim.to = launcherpanel.parent.height/2 - launcherpanel.height;
+                rotationDragAnim.to = launcherPanel.parent.height/2 - launcherPanel.height;
                 rotationDragAnim.running = true
             }
         }
 
         onReleased: {
-            var child = shortcuts.childAt(mouse.x-shortcuts.x, mouse.y + hintregion.y-shortcuts.y);
             if (passClicks && hint.opacity == 1) {
-                launcherpanel.state = "hidden"
-                launcherpanel.state = "show"
+                launcherPanel.state = "hidden"
+                launcherPanel.state = "show"
                 timer.restart();
                 return
-            } else if (passClicks && child) {
-                if (activeChild == child) {
-                    launcherpanel.flipRequested(true);
-                } else {
-                    child.clicked();
-                    activeChild = child;
-                    indicatorAnimationX.to = shortcuts.x + activeChild.x + activeChild.width/2 - activityIndicator.width/2
-                    indicatorAnimationY.to = activeChild.y + activeChild.height - activityIndicator.height
-                    indicatorAnimation.running = true
-                }
             }
 
-            var target = launcherpanel.parent.height - (launcherpanel.height / 1.5);
-            if (launcherpanel.y < target) {
-                launcherpanel.state = "show";
-                if (launcherpanel.y < target / 2) {
+            var target = launcherPanel.parent.height - (launcherPanel.height / 1.5);
+            if (launcherPanel.y < target) {
+                launcherPanel.state = "show";
+                if (launcherPanel.y < target / 2) {
                     //here don't hide when isHomeScreenFlipped() because we are before the flip
                     if (isHomeScreenFlipped()) {
-                        launcherpanel.state = "hidden";
+                        launcherPanel.state = "hidden";
                     }
-                    launcherpanel.flipRequested(false);
+                    launcherPanel.flipRequested(false);
                 }
             } else if (isHomeScreenFlipped()) {
-                launcherpanel.state = "show";
+                launcherPanel.state = "show";
             } else {
-                launcherpanel.state = "hidden";
+                launcherPanel.state = "hidden";
             }
             timer.restart();
         }
@@ -211,7 +198,7 @@ Item {
         running: false;
         onTriggered:  {
             if (!isHomeScreenFlipped()) {
-                launcherpanel.state = "hidden"
+                launcherPanel.state = "hidden"
             }
         }
     }
@@ -221,15 +208,11 @@ Item {
         State {
             name: "show";
             PropertyChanges {
-                target: launcherpanel;
+                target: launcherPanel;
                 y: parent.height - height;
             }
             PropertyChanges {
                 target: stars;
-                opacity: 1;
-            }
-            PropertyChanges {
-                target: shortcuts;
                 opacity: 1;
             }
             PropertyChanges {
@@ -244,7 +227,7 @@ Item {
         State {
             name: "hidden";
             PropertyChanges {
-                target: launcherpanel;
+                target: launcherPanel;
                 y: parent.height;
             }
             PropertyChanges {
@@ -252,7 +235,7 @@ Item {
                 opacity: 0;
             }
             PropertyChanges {
-                target: shortcuts;
+                target: containment;
                 opacity: 0;
             }
             PropertyChanges {
@@ -263,9 +246,9 @@ Item {
         State {
             name: "dragging"
             PropertyChanges {
-                target: launcherpanel;
-                x: launcherpanel.x;
-                y: launcherpanel.y;
+                target: launcherPanel;
+                x: launcherPanel.x;
+                y: launcherPanel.y;
 
             }
             PropertyChanges {
@@ -282,13 +265,13 @@ Item {
             SequentialAnimation {
                 ParallelAnimation {
                     NumberAnimation {
-                        targets: launcherpanel;
+                        targets: launcherPanel;
                         properties: "y";
                         duration: 1000;
                         easing.type: "InOutCubic";
                     }
                     PropertyAnimation {
-                        targets: stars, shortcuts;
+                        targets: stars, containment;
                         properties: "opacity";
                         duration: 800;
                         easing.type: "OutCubic";
@@ -318,13 +301,13 @@ Item {
                 }
                 ParallelAnimation {
                     NumberAnimation {
-                        targets: launcherpanel;
+                        targets: launcherPanel;
                         properties: "y";
                         duration: 800;
                         easing.type: "InOutCubic";
                     }
                     PropertyAnimation {
-                        targets: stars, shortcuts;
+                        targets: stars, containment;
                         properties: "opacity";
                         duration: 1000;
                         easing.type: "InCubic";

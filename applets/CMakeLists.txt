@@ -5,6 +5,7 @@ add_subdirectory(fakesignal)
 add_subdirectory(fakecontactlist)
 add_subdirectory(favorites)
 add_subdirectory(mobileactivityswitcher)
+add_subdirectory(mobilelauncherpanel)
 add_subdirectory(mobilesystemtray)
 
 add_subdirectory(qtwebbrowser)

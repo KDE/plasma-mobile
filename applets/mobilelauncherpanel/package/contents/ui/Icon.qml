@@ -21,5 +21,12 @@ import Qt 4.7
 
 Image {
     property string icon
+    property string command
     source: plasmoid.file("images", icon+".png")
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            plasmoid.runCommand(command)
+        }
+    }
 }
