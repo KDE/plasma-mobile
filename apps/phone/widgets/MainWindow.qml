@@ -17,36 +17,16 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef _PHONE_MANAGER_H
-#define _PHONE_MANAGER_H
+import Qt 4.7
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
-#include <QObject>
-
-class OfonoModem;
-class OfonoSimManager;
-
-class PinRequester;
-
-class PhoneManager : public QObject
-{
-    Q_OBJECT
+Rectangle {
+    color: "black"
+    width: 800
+    height: 480
     
-    public:
-        PhoneManager();
-        ~PhoneManager();
-
-    private slots:
-        void pinEntered();
-        void setOnline();
-        void enterPinComplete(bool success);
-        void modemPoweredChanged(bool powered);
-        void modemOnlineChanged(bool online);
-
-    private:
-        void showPinRequester();
-        OfonoModem *m_modem;
-        OfonoSimManager *m_simManager;
-        PinRequester *m_requester;
-};
-
-#endif
+    PlasmaCore.Theme {
+        id: theme
+    }
+}

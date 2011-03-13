@@ -17,36 +17,32 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef _PHONE_MANAGER_H
-#define _PHONE_MANAGER_H
+#include "pinrequester.h"
 
-#include <QObject>
+#include <QDeclarativeContext>
+#include <QDeclarativeComponent>
+#include <QDeclarativeItem>
+#include <kdeclarative.h>
 
-class OfonoModem;
-class OfonoSimManager;
-
-class PinRequester;
-
-class PhoneManager : public QObject
+PinRequester::PinRequester()
 {
-    Q_OBJECT
+    KDeclarative kdeclarative;
+    kdeclarative.setDeclarativeEngine(engine());
+    kdeclarative.initialize();
+    kdeclarative.setupBindings();
     
-    public:
-        PhoneManager();
-        ~PhoneManager();
+    setSource(QUrl::fromLocalFile("PhonePad.qml"));
+    QObject::connect(rootObject(), SIGNAL(okClicked()), this, SIGNAL(pinEntered()));
+}
 
-    private slots:
-        void pinEntered();
-        void setOnline();
-        void enterPinComplete(bool success);
-        void modemPoweredChanged(bool powered);
-        void modemOnlineChanged(bool online);
+PinRequester::~PinRequester()
+{
+}
 
-    private:
-        void showPinRequester();
-        OfonoModem *m_modem;
-        OfonoSimManager *m_simManager;
-        PinRequester *m_requester;
-};
+QString PinRequester::pin()
+{
+   return rootObject()->property("typedNumber").toString(); 
+}
 
-#endif
+
+#include "pinrequester.moc"

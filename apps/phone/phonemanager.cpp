@@ -19,15 +19,23 @@
 
 #include "phonemanager.h"
 
+#include <QDeclarativeContext>
+#include <QDeclarativeItem>
+#include <QDeclarativeView>
 #include <QInputDialog>
 #include <QTimer>
 
+#include <kdeclarative.h>
 #include <KDebug>
 
 #include <ofono-qt/ofonosimmanager.h>
 
+#include "pinrequester.h"
+
 PhoneManager::PhoneManager()
 {
+    m_requester = 0;
+    
     m_modem = new OfonoModem(OfonoModem::AutomaticSelect, QString(), this);
     if (!m_modem->powered()){
         kDebug() << "Modem isn't powered";
@@ -42,9 +50,7 @@ PhoneManager::PhoneManager()
 
     if (m_simManager->pinRequired() == "pin"){
         kDebug() << "PIN is required\n";
-        connect(m_simManager, SIGNAL(enterPinComplete(bool)), this, SLOT(enterPinComplete(bool)));
-        QString pin = QInputDialog::getText(0, "PIN", "Insert PIN");
-        m_simManager->enterPin("pin", pin);
+        showPinRequester();
     }
 
     kDebug() << "Done.";
@@ -59,6 +65,9 @@ void PhoneManager::enterPinComplete(bool success)
 {
     kDebug() << "pin: " << success << "\n";
     kDebug() << m_simManager->errorMessage() << "\n";
+    if (success){
+        delete m_requester;
+    }
 }
 
 void PhoneManager::modemPoweredChanged(bool powered)
@@ -80,6 +89,21 @@ void PhoneManager::setOnline()
 void PhoneManager::modemOnlineChanged(bool online)
 {
     kDebug() << "Online: " << online;
+}
+
+void PhoneManager::pinEntered()
+{
+    kDebug() << "Pin entered: " << m_requester->pin();
+    connect(m_simManager, SIGNAL(enterPinComplete(bool)), this, SLOT(enterPinComplete(bool)));
+    m_simManager->enterPin("pin", m_requester->pin());
+}
+
+void PhoneManager::showPinRequester()
+{
+    m_requester = new PinRequester;
+    connect(m_requester, SIGNAL(pinEntered()), this, SLOT(pinEntered()));
+    m_requester->setWindowModality(Qt::WindowModal);
+    m_requester->show();
 }
 
 #include "phonemanager.moc"

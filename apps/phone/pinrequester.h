@@ -17,36 +17,22 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef _PHONE_MANAGER_H
-#define _PHONE_MANAGER_H
+#ifndef _PIN_REQUESTER_H
+#define _PIN_REQUESTER_H
 
-#include <QObject>
+#include <QDeclarativeView>
 
-class OfonoModem;
-class OfonoSimManager;
-
-class PinRequester;
-
-class PhoneManager : public QObject
+class PinRequester : public QDeclarativeView
 {
     Q_OBJECT
     
     public:
-        PhoneManager();
-        ~PhoneManager();
+        PinRequester();
+        ~PinRequester();
+        QString pin();
 
-    private slots:
+    signals:
         void pinEntered();
-        void setOnline();
-        void enterPinComplete(bool success);
-        void modemPoweredChanged(bool powered);
-        void modemOnlineChanged(bool online);
-
-    private:
-        void showPinRequester();
-        OfonoModem *m_modem;
-        OfonoSimManager *m_simManager;
-        PinRequester *m_requester;
 };
 
 #endif
