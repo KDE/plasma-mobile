@@ -108,6 +108,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
+        //FIXME: assumes a rectangular region
         property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
 
 
