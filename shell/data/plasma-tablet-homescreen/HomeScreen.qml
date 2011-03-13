@@ -221,13 +221,9 @@ Item {
 
     //FIXME: this should be automatic
     onWidthChanged: {
-        prevDrag.updateDrag();
-        nextDrag.updateDrag();
         alternateDrag.updateDrag();
     }
     onHeightChanged: {
-        prevDrag.updateDrag();
-        nextDrag.updateDrag();
         alternateDrag.updateDrag();
     }
 
