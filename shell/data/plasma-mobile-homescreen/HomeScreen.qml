@@ -64,10 +64,10 @@ Item {
         }
     }
 
-    //this item will define Corona::screenGeometry() and Corona::availableScreenRegion()
+    //this item will define Corona::availableScreenRect() and Corona::availableScreenRegion()
     Item {
-        id: screenGeometry
-        objectName: "screenGeometry"
+        id: availableScreenRect
+        objectName: "availableScreenRect"
         anchors.fill: parent
         anchors.topMargin: 32
         anchors.bottomMargin: 28

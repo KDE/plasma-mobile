@@ -459,25 +459,26 @@ void PlasmaApp::mainViewGeometryChanged()
         //m_declarativeWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
         m_declarativeWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
 
-        QRect screenGeometry(QPoint(0,0), m_mainView->size());
-        QDeclarativeItem *screenGeometryItem = m_homeScreen->findChild<QDeclarativeItem*>("screenGeometry");
+        QRect availableScreenRect(QPoint(0,0), m_mainView->size());
+        QDeclarativeItem *availableScreenRectItem = m_homeScreen->findChild<QDeclarativeItem*>("availableScreenRect");
         //is there an item that defines the screen geometry?
-        if (screenGeometryItem) {
-            screenGeometry = QRect((int)screenGeometryItem->property("x").toReal(),
-                              (int)screenGeometryItem->property("y").toReal(),
-                              (int)screenGeometryItem->property("width").toReal(),
-                              (int)screenGeometryItem->property("height").toReal());
+        if (availableScreenRectItem) {
+            availableScreenRect = QRect((int)availableScreenRectItem->property("x").toReal(),
+                              (int)availableScreenRectItem->property("y").toReal(),
+                              (int)availableScreenRectItem->property("width").toReal(),
+                              (int)availableScreenRectItem->property("height").toReal());
             //are we rotated?
-            screenGeometry = m_mainView->transformedRect(screenGeometry);
+            availableScreenRect = m_mainView->transformedRect(availableScreenRect);
 
-            const int left = screenGeometryItem->property("leftReserved").toInt();
-            const int top = screenGeometryItem->property("topReserved").toInt();
-            const int right = screenGeometryItem->property("rightReserved").toInt();
-            const int bottom = screenGeometryItem->property("bottomReserved").toInt();
+            const int left = availableScreenRectItem->property("leftReserved").toInt();
+            const int top = availableScreenRectItem->property("topReserved").toInt();
+            const int right = availableScreenRectItem->property("rightReserved").toInt();
+            const int bottom = availableScreenRectItem->property("bottomReserved").toInt();
             reserveStruts(left, top, right, bottom);
         }
 
-        m_corona->setScreenGeometry(screenGeometry);
+        m_corona->setScreenGeometry(QRect(QPoint(0, 0), m_mainView->transformedSize()));
+        m_corona->setAvailableScreenRegion(availableScreenRect);
 
         if (m_currentContainment) {
             m_currentContainment->resize(m_mainView->transformedSize());

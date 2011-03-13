@@ -55,6 +55,7 @@ public:
     virtual int numScreens() const;
     void setScreenGeometry(const QRect &geometry);
     virtual QRect screenGeometry(int id) const;
+    void setAvailableScreenRegion(const QRegion &r);
     virtual QRegion availableScreenRegion(int id) const;
 
     void checkActivities();
@@ -73,6 +74,7 @@ private:
     void init();
     Plasma::Applet *loadDefaultApplet(const QString &pluginName, Plasma::Containment *c);
     QRect m_screenGeometry;
+    QRegion m_availableScreenRegion;
     KActivityController *m_activityController;
     QHash<QString, Activity*> m_activities;
 };

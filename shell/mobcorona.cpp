@@ -185,7 +185,6 @@ int MobCorona::numScreens() const
 void MobCorona::setScreenGeometry(const QRect &geometry)
 {
     m_screenGeometry = geometry;
-    emit availableScreenRegionChanged();
 }
 
 QRect MobCorona::screenGeometry(int id) const
@@ -193,9 +192,16 @@ QRect MobCorona::screenGeometry(int id) const
     return m_screenGeometry;
 }
 
+void MobCorona::setAvailableScreenRegion(const QRegion &r)
+{
+   m_availableScreenRegion = r;
+   emit availableScreenRegionChanged();
+}
+
 QRegion MobCorona::availableScreenRegion(int id) const
 {
     QRegion r(screenGeometry(id));
+    return m_availableScreenRegion;
     foreach (Plasma::Containment *cont, PlasmaApp::self()->panelContainments()) {
         if (cont->location() == Plasma::TopEdge ||
             cont->location() == Plasma::BottomEdge ||
