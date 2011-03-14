@@ -89,9 +89,6 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
-      m_alternateContainment(0),
-      m_nextContainment(0),
-      m_trayContainment(0),
       m_isDesktop(false)
 {
     KGlobal::locale()->insertCatalog("libplasma");
@@ -175,7 +172,7 @@ QList<Plasma::Containment *> PlasmaApp::containments() const
 
 QList<Plasma::Containment *> PlasmaApp::panelContainments() const
 {
-    return m_panelContainments;
+    return m_panelContainments.values();
 }
 
 void PlasmaApp::cleanup()
@@ -250,26 +247,14 @@ void PlasmaApp::setupHomeScreen()
     connect(m_mainView, SIGNAL(geometryChanged()), this, SLOT(mainViewGeometryChanged()));
     connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
 
-    // get references for the main objects that we'll need to deal with
-    m_mainSlot = mainItem->findChild<QDeclarativeItem*>("mainSlot");
-    m_spareSlot = mainItem->findChild<QDeclarativeItem*>("spareSlot");
-    connect(m_mainSlot, SIGNAL(transformingChanged(bool)), this, SLOT(mainSlotTransformingChanged(bool)));
+    connect(m_homeScreen, SIGNAL(transformingChanged(bool)), this, SLOT(containmentsTransformingChanged(bool)));
 
-    QDeclarativeItem *containments = mainItem->findChild<QDeclarativeItem*>("containments");
-    connect(containments, SIGNAL(transformingChanged(bool)), this, SLOT(containmentsTransformingChanged(bool)));
-
-
-    m_trayPanel = mainItem->findChild<QDeclarativeItem*>("systraypanel");
-
-
-    connect(m_homeScreen, SIGNAL(transitionFinished()),
-            this, SLOT(updateMainSlot()));
 
     connect(m_homeScreen, SIGNAL(nextActivityRequested()),
-            this, SLOT(nextActivity()));
+            m_corona, SLOT(activateNextActivity()));
 
     connect(m_homeScreen, SIGNAL(previousActivityRequested()),
-            this, SLOT(previousActivity()));
+            m_corona, SLOT(activatePreviousActivity()));
 
     QDeclarativeItem *panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
 
@@ -287,120 +272,30 @@ void PlasmaApp::setupHomeScreen()
 
 void PlasmaApp::containmentsTransformingChanged(bool transforming)
 {
-    m_currentContainment->graphicsEffect()->setEnabled(transforming);
-    m_alternateContainment->graphicsEffect()->setEnabled(transforming);
-}
-
-
-void PlasmaApp::changeActivity()
-{
-    QDeclarativeItem *item = qobject_cast<QDeclarativeItem*>(sender());
-
-    if (item) {
-        Plasma::Containment *containment = 0;
-        containment = m_containments.value(item->objectName().toInt());
-        if (!containment) {
-            containment = m_corona->restoreContainment(item->objectName().toInt());
-            manageNewContainment(containment);
-        }
-        changeActivity(containment);
+    if (m_currentContainment && m_currentContainment->graphicsEffect()) {
+        m_currentContainment->graphicsEffect()->setEnabled(transforming);
+    }
+    if (m_oldContainment && m_oldContainment.data()->graphicsEffect()) {
+        m_oldContainment.data()->graphicsEffect()->setEnabled(transforming);
+    }
+    if (m_alternateContainment && m_alternateContainment.data()->graphicsEffect()) {
+        m_alternateContainment.data()->graphicsEffect()->setEnabled(transforming);
     }
 }
 
-void PlasmaApp::nextActivity()
+
+void PlasmaApp::changeContainment(Plasma::Containment *containment)
 {
-    int currentId = m_currentContainment->id();
+    QDeclarativeProperty containmentProperty(m_homeScreen, "activeContainment");
+    containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
 
-    Plasma::Containment *nextContainment = m_currentContainment;
-    bool loop = false;
-    while (!nextContainment || nextContainment->location() != Plasma::Desktop ||
-          nextContainment == m_currentContainment ||
-          nextContainment == m_alternateContainment) {
-        currentId = (currentId + 1) % m_corona->totalContainments();
-        nextContainment = m_corona->restoreContainment(currentId);
-
-        if (currentId == 0) {
-            if (loop) {
-                break;
-            } else {
-                loop = true;
-            }
-        }
-    }
-
-    if (nextContainment) {
-        changeActivity(nextContainment);
-    }
-}
-
-void PlasmaApp::previousActivity()
-{
-    int currentId = m_currentContainment->id();
-
-    Plasma::Containment *nextContainment = m_currentContainment;
-    bool loop = false;
-    while (!nextContainment || nextContainment->location() != Plasma::Desktop ||
-          nextContainment == m_currentContainment ||
-          nextContainment == m_alternateContainment) {
-        currentId = (m_corona->totalContainments() + currentId - 1) % m_corona->totalContainments();
-        nextContainment = m_corona->restoreContainment(currentId);
-
-        if (currentId == 0) {
-            if (loop) {
-                break;
-            } else {
-                loop = true;
-            }
-        }
-    }
-
-    if (nextContainment) {
-        changeActivity(nextContainment);
-    }
-}
-
-void PlasmaApp::changeActivity(Plasma::Containment *containment)
-{
-    if (!containment || containment == m_currentContainment) {
-        return;
-    }
-
-    // found it!
-    if (containment) {
-        m_nextContainment = containment;
-        setupContainment(containment);
-    }
+    m_oldContainment = m_currentContainment;
+    m_currentContainment = containment;
 }
 
 void PlasmaApp::lockScreen()
 {
     m_homeScreen->setProperty("locked", true);
-}
-
-void PlasmaApp::updateMainSlot()
-{
-    if (m_currentContainment && m_nextContainment) {
-        m_homeScreen->setProperty("state", "Normal");
-
-        m_nextContainment->setParentItem(m_mainSlot);
-
-        m_nextContainment->graphicsEffect()->setEnabled(false);
-        // resizing the containment will always resize it's parent item
-        m_nextContainment->setPos(0,0);
-
-        m_currentContainment->setParentItem(0);
-        m_currentContainment->setPos(0, m_currentContainment->size().height());
-
-        m_currentContainment->setPos(m_mainView->width(), m_mainView->height());
-
-        m_currentContainment->setVisible(false);
-        m_currentContainment->graphicsEffect()->setEnabled(false);
-        m_currentContainment = m_nextContainment;
-        m_nextContainment = 0;
-        m_currentContainment->setScreen(0);
-        m_currentContainment->resize(m_mainView->transformedSize());
-
-    }
 }
 
 Plasma::Corona* PlasmaApp::corona()
@@ -413,6 +308,7 @@ Plasma::Corona* PlasmaApp::corona()
         connect(m_corona, SIGNAL(containmentAdded(Plasma::Containment*)),
                 this, SLOT(manageNewContainment(Plasma::Containment*)));
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
+        connect(m_corona, SIGNAL(screenOwnerChanged(int, int, Plasma::Containment *)), this, SLOT(containmentScreenOwnerChanged(int,int,Plasma::Containment*)));
 
 
         // setup our QML home screen;
@@ -420,6 +316,7 @@ Plasma::Corona* PlasmaApp::corona()
         m_corona->initializeLayout();
 
         m_mainView->setScene(m_corona);
+        m_corona->checkActivities();
         m_mainView->show();
     }
     return m_corona;
@@ -460,38 +357,10 @@ void PlasmaApp::mainContainmentActivated()
     }
 }
 
-void PlasmaApp::setupContainment(Plasma::Containment *containment)
-{
-    if (m_currentContainment) {
-        containment->setParentItem(m_spareSlot);
-        containment->setPos(0, 0);
-
-        containment->setVisible(true);
-
-        containment->resize(m_mainView->transformedSize());
-        //FIXME: this makes the containment to not paint until the animation finishes
-        containment->graphicsEffect()->setEnabled(true);
-        //###The reparenting need a repaint so this ensure that we
-        //have actually re-render the containment otherwise it
-        //makes animations slugglish. We need a better solution.
-        QTimer::singleShot(0, this, SLOT(slideActivities()));
-    }
-}
-
-void PlasmaApp::slideActivities()
-{
-    // change state
-    m_homeScreen->setProperty("state", "Slide");
-}
-
-void PlasmaApp::shrinkTray()
-{
-    m_trayPanel->setProperty("state", "passive");
-}
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
-    if (m_containments.contains(containment->id()) || m_panelContainments.contains(containment)) {
+    if (m_containments.contains(containment->id()) || m_panelContainments.contains(containment->location())) {
         return;
     }
     QAction *addAction = containment->action("add widgets");
@@ -499,25 +368,50 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
         connect(addAction, SIGNAL(triggered()), this, SLOT(showWidgetsExplorer()));
     }
 
-    if (containment->location() == Plasma::TopEdge) { // systray's containment!
-        if (m_trayContainment) {
-            delete containment;
+    //Is it a panel?
+    //if it's on an edge find a qml element propely named
+    //otherwise delete it
+    QString containmentPanelName;
+
+    switch (containment->location()) {
+    case Plasma::LeftEdge:
+        containmentPanelName = "leftEdgePanel";
+        break;
+    case Plasma::TopEdge:
+        containmentPanelName = "topEdgePanel";
+        break;
+    case Plasma::RightEdge:
+        containmentPanelName = "rightEdgePanel";
+        break;
+    case Plasma::BottomEdge:
+        containmentPanelName = "bottomEdgePanel";
+        break;
+    default:
+        break;
+    }
+
+    //is it a panel?
+    if (!containmentPanelName.isEmpty()) {
+        QDeclarativeItem *containmentPanel = m_homeScreen->findChild<QDeclarativeItem*>(containmentPanelName);
+
+        if (containmentPanel) {
+            containment->setParentItem(containmentPanel);
+            containment->setParent(containmentPanel);
+
+            QDeclarativeProperty containmentProperty(containmentPanel, "containment");
+            containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
+
+            m_panelContainments.insert(containment->location(), containment);
+
+            //done, don't need further management
+            return;
+        } else {
+            //no panel? discard the containment
+            containment->deleteLater();
             return;
         }
-        m_trayContainment = containment;
-        m_trayContainment->setParentItem(m_trayPanel);
-        m_trayContainment->setParent(m_trayPanel);
-        QDeclarativeProperty containmentProperty(m_trayPanel, "containment");
-        containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(m_trayContainment)));
-
-        // "enlarge" is initiated by a QML mousearea, but "shrink" needs to be initiated by
-        // the applet itself..
-        connect(m_trayContainment, SIGNAL(shrinkRequested()), this, SLOT(shrinkTray()));
-
-        m_panelContainments.append(containment);
-
-        return;
     }
+
 
     // add the containment and it identifier to a hash to enable us
     // to retrieve it later.
@@ -526,24 +420,15 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     connect(containment, SIGNAL(destroyed(QObject *)), this, SLOT(containmentDestroyed(QObject *)));
 
 
-    if (!m_mainSlot) {
-        return;
-    }
-
-    containment->setParentItem(m_mainSlot);
-    containment->setParent(m_mainSlot);
-    containment->setPos(0, 0);
-
     CachingEffect *effect = new CachingEffect(containment);
     containment->setGraphicsEffect(effect);
     containment->graphicsEffect()->setEnabled(false);
 
-    m_mainSlot->setFlag(QGraphicsItem::ItemHasNoContents, false);
     containment->resize(m_mainView->transformedSize());
 
     // we need our homescreen to show something!
-    // FIXME: this has to become way cleaner
-    if (containment->id() == 1) {
+    // for the alternate screen (such as a launcher) we need a containment setted as excludeFromActivities
+    if (containment->config().readEntry("excludeFromActivities", false) && !m_alternateContainment) {
         QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>("alternateSlot");
 
         if (alternateSlot) {
@@ -556,14 +441,12 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
             containment->setVisible(true);
             return;
         }
-    } else if (containment->id() == 2) {
-        containment->setPos(0,0);
-        m_currentContainment = containment;
-        return;
+    } else if (containment->screen() > -1) {
+        changeContainment(containment);
+    } else {
+        containment->setPos(m_mainView->width(), m_mainView->height());
+       // containment->setVisible(false);
     }
-
-    containment->setPos(m_mainView->width(), m_mainView->height());
-    containment->setVisible(false);
 }
 
 void PlasmaApp::mainViewGeometryChanged()
@@ -576,35 +459,33 @@ void PlasmaApp::mainViewGeometryChanged()
         //m_declarativeWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
         m_declarativeWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
 
-        QRect screenGeometry(QPoint(0,0), m_mainView->size());
-        QDeclarativeItem *screenGeometryItem = m_homeScreen->findChild<QDeclarativeItem*>("screenGeometry");
+        QRect availableScreenRect(QPoint(0,0), m_mainView->size());
+        QDeclarativeItem *availableScreenRectItem = m_homeScreen->findChild<QDeclarativeItem*>("availableScreenRect");
         //is there an item that defines the screen geometry?
-        if (screenGeometryItem) {
-            screenGeometry = QRect((int)screenGeometryItem->property("x").toReal(),
-                              (int)screenGeometryItem->property("y").toReal(),
-                              (int)screenGeometryItem->property("width").toReal(),
-                              (int)screenGeometryItem->property("height").toReal());
+        if (availableScreenRectItem) {
+            availableScreenRect = QRect((int)availableScreenRectItem->property("x").toReal(),
+                              (int)availableScreenRectItem->property("y").toReal(),
+                              (int)availableScreenRectItem->property("width").toReal(),
+                              (int)availableScreenRectItem->property("height").toReal());
             //are we rotated?
-            screenGeometry = m_mainView->transformedRect(screenGeometry);
+            availableScreenRect = m_mainView->transformedRect(availableScreenRect);
 
-            const int left = screenGeometryItem->property("leftReserved").toInt();
-            const int top = screenGeometryItem->property("topReserved").toInt();
-            const int right = screenGeometryItem->property("rightReserved").toInt();
-            const int bottom = screenGeometryItem->property("bottomReserved").toInt();
+            const int left = availableScreenRectItem->property("leftReserved").toInt();
+            const int top = availableScreenRectItem->property("topReserved").toInt();
+            const int right = availableScreenRectItem->property("rightReserved").toInt();
+            const int bottom = availableScreenRectItem->property("bottomReserved").toInt();
             reserveStruts(left, top, right, bottom);
         }
 
-        m_corona->setScreenGeometry(screenGeometry);
+        m_corona->setScreenGeometry(QRect(QPoint(0, 0), m_mainView->transformedSize()));
+        m_corona->setAvailableScreenRegion(availableScreenRect);
 
         if (m_currentContainment) {
             m_currentContainment->resize(m_mainView->transformedSize());
         }
-        if (m_nextContainment) {
-            m_nextContainment->resize(m_mainView->transformedSize());
-        }
         if (m_alternateContainment) {
-            m_alternateContainment->resize(m_mainView->transformedSize());
-            m_alternateContainment->setPos(0, 0);
+            m_alternateContainment.data()->resize(m_mainView->transformedSize());
+            m_alternateContainment.data()->setPos(0, 0);
         }
         if (m_widgetsExplorer) {
             m_widgetsExplorer.data()->setGeometry(m_declarativeWidget->geometry());
@@ -684,6 +565,15 @@ void PlasmaApp::containmentDestroyed(QObject *object)
 
     if (cont) {
         m_containments.remove(cont->id());
+    }
+}
+
+void PlasmaApp::containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasma::Containment *cont)
+{
+    bool excludeFromActivities = cont->config().readEntry("excludeFromActivities", false);
+
+    if (!excludeFromActivities && isScreen >= 0 && (cont->location() == Plasma::Desktop || cont->location() == Plasma::Floating)) {
+        changeContainment(cont);
     }
 }
 

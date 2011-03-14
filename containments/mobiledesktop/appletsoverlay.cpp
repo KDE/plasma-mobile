@@ -119,9 +119,10 @@ void AppletsOverlay::resizeEvent(QGraphicsSceneResizeEvent *event)
 {
     Plasma::Corona *corona = qobject_cast<Plasma::Corona *>(scene());
     if (corona) {
-        QRect screenGeom = corona->screenGeometry(0);
+        //FIXME: assumption that the region is rectangular
+        QRect availScreenGeom = corona->availableScreenRegion(0).rects().first();
 
-        setContentsMargins(screenGeom.x(), screenGeom.y(), size().width() - screenGeom.right(), size().height() - screenGeom.bottom());
+        setContentsMargins(availScreenGeom.x(), availScreenGeom.y(), size().width() - availScreenGeom.right(), size().height() - availScreenGeom.bottom());
     }
 }
 

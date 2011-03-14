@@ -22,17 +22,38 @@
 import Qt 4.7
 
 Item {
-    id: homescreen;
+    id: homeScreen;
     objectName: "homeScreen";
     x: 0;
     y: 0;
     width: 800;
     height: 480;
-    signal transitionFinished();
     signal nextActivityRequested();
     signal previousActivityRequested();
+    
     state : "Normal"
+    signal transformingChanged(bool transforming)
     property bool locked: true
+
+    property QGraphicsWidget activeContainment
+    onActiveContainmentChanged: {
+        activeContainment.parent = spareSlot
+        activeContainment.visible = true
+        activeContainment.x = 0
+        activeContainment.y = 0
+        activeContainment.size = width + "x" + height
+        state = "Slide"
+        transformingChanged(true);
+    }
+
+    function finishTransition()
+    {
+        activeContainment.parent = mainSlot
+        activeContainment.x = 0
+        activeContainment.y = 0
+        state = "Normal"
+        transformingChanged(false);
+    }
 
     onLockedChanged: {
         if (locked) {
@@ -41,14 +62,14 @@ Item {
             unlockTextAnimation.running = true
         } else if (lockScreenItem.x == 0 && lockScreenItem.y == 0) {
             lockScreenItem.x = 0
-            lockScreenItem.y = homescreen.height
+            lockScreenItem.y = homeScreen.height
         }
     }
 
-    //this item will define Corona::screenGeometry() and Corona::availableScreenRegion()
+    //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
     Item {
-        id: screenGeometry
-        objectName: "screenGeometry"
+        id: availableScreenRect
+        objectName: "availableScreenRect"
         anchors.fill: parent
         anchors.topMargin: 32
         anchors.bottomMargin: 28
@@ -65,84 +86,89 @@ Item {
         objectName: "mainSlot";
         x: 0;
         y: 0;
-        width: homescreen.width;
-        height: homescreen.height;
+        width: homeScreen.width;
+        height: homeScreen.height;
         transformOrigin : Item.Center;
     }
 
     Item {
         id : spareSlot;
         objectName: "spareSlot";
-        x: -homescreen.width;
+        x: -homeScreen.width;
         y: 0;
-        width: homescreen.width;
-        height: homescreen.height;
+        width: homeScreen.width;
+        height: homeScreen.height;
     }
+    states: [
+            State {
+                name: "Normal"
+                PropertyChanges {
+                    target: mainSlot;
+                    x: 0;
+                }
+                PropertyChanges {
+                    target: spareSlot;
+                    x: -homeScreen.width;
+                }
 
-    Shadow {
-        id: spareSlotShadowRight
-        source: "images/shadow-right.png"
-        anchors.left: spareSlot.right
-        anchors.leftMargin: -1
-        width: 11
-        height: spareSlot.height
-        
-    }
-    Shadow {
-        id: spareSlotShadowLeft
-        source: "images/shadow-left.png"
-        anchors.right: spareSlot.left
-        anchors.rightMargin: -1
-        width: 11
-        height: spareSlot.height
-    }
-
-    Dragger {
-        id: prevDrag
-
-        location: "LeftEdge"
-        targetItem: spareSlot
-
-        onTransitionFinished : {
-            if (state == "show") {
-                homescreen.transitionFinished()
-                state = "hidden"
+            },
+            State {
+                name: "Slide"
+                PropertyChanges {
+                    target: spareSlot;
+                    x: 0;
+                }
+                PropertyChanges {
+                    target: mainSlot;
+                    x: homeScreen.width;
+                }
             }
-            spareSlotShadowRight.state = "invisible"
-        }
-        onActivated: {
-            homescreen.previousActivityRequested();
-            spareSlotShadowRight.state = "visible"
-        }
-    }
+    ]
 
-    Dragger {
-        id: nextDrag
-        objectName: "nextDrag"
-
-        location: "RightEdge"
-        targetItem: spareSlot
-
-        onTransitionFinished : {
-            if (state == "show") {
-                homescreen.transitionFinished()
-                state = "hidden"
+    transitions: Transition {
+        from: "Normal"
+        to: "Slide"
+        SequentialAnimation {
+            NumberAnimation {
+                target: mainSlot;
+                property: "scale";
+                easing.type: "OutQuint";
+                duration: 250;
             }
-            spareSlotShadowLeft.state = "invisible"
-        }
-        onActivated: {
-            homescreen.nextActivityRequested();
-            spareSlotShadowLeft.state = "visible"
+            ParallelAnimation {
+                NumberAnimation {
+                    target: spareSlot;
+                    property: "x";
+                    easing.type: "InQuad";
+                    duration: 300;
+                }
+                NumberAnimation {
+                    target: mainSlot;
+                    property: "x";
+                    easing.type: "InQuad";
+                    duration: 300;
+                }
+            }
+            NumberAnimation {
+                target: spareSlot;
+                property: "scale";
+                easing.type: "OutQuint";
+                duration: 250;
+            }
+            ScriptAction {
+                script: finishTransition();
+            }
         }
     }
+
 
     Item {
         id: alternateSlot;
         objectName: "alternateSlot";
         x: 0;
         y: alternateDrag.y + alternateDrag.height;
-        width: homescreen.width;
-        height: homescreen.height;
+        width: homeScreen.width;
+        height: homeScreen.height;
     }
     Shadow {
         id: alternateSlotShadowTop
@@ -162,11 +188,19 @@ Item {
     }
 
     SystrayPanel {
-        id: systraypanel;
-        objectName: "systraypanel";
+        id: topEdgePanel;
+        objectName: "topEdgePanel";
 
-        anchors.horizontalCenter: homescreen.horizontalCenter;
+        anchors.horizontalCenter: homeScreen.horizontalCenter;
         y: 0;
+    }
+
+    ActivityPanel {
+        id: rightEdgePanel
+        objectName: "rightEdgePanel"
+
+        anchors.verticalCenter: parent.verticalCenter
+        x: parent.width - width
     }
 
     Dragger {
@@ -187,13 +221,9 @@ Item {
 
     //FIXME: this should be automatic
     onWidthChanged: {
-        prevDrag.updateDrag();
-        nextDrag.updateDrag();
         alternateDrag.updateDrag();
     }
     onHeightChanged: {
-        prevDrag.updateDrag();
-        nextDrag.updateDrag();
         alternateDrag.updateDrag();
     }
 
@@ -238,27 +268,27 @@ Item {
             onReleased: {
                 var lockedX = false
                 var lockedY = false
-                if (lockScreenItem.x > homescreen.width/3) {
-                    lockScreenItem.x = homescreen.width
-                } else if (lockScreenItem.x < -homescreen.width/3) {
-                    lockScreenItem.x = -homescreen.width
+                if (lockScreenItem.x > homeScreen.width/3) {
+                    lockScreenItem.x = homeScreen.width
+                } else if (lockScreenItem.x < -homeScreen.width/3) {
+                    lockScreenItem.x = -homeScreen.width
                 } else {
                     lockScreenItem.x = 0
                     lockedX = true
                 }
 
-                if (lockScreenItem.y > homescreen.height/3) {
-                    lockScreenItem.y = homescreen.height
-                } else if (lockScreenItem.y < -homescreen.height/3) {
-                    lockScreenItem.y = -homescreen.height
+                if (lockScreenItem.y > homeScreen.height/3) {
+                    lockScreenItem.y = homeScreen.height
+                } else if (lockScreenItem.y < -homeScreen.height/3) {
+                    lockScreenItem.y = -homeScreen.height
                 } else {
                     lockScreenItem.y = 0
                     lockedY = true
                 }
                 if (lockedX && lockedY) {
-                    homescreen.locked = true
+                    homeScreen.locked = true
                 } else {
-                    homescreen.locked = false
+                    homeScreen.locked = false
                 }
             }
         }

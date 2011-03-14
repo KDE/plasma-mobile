@@ -20,9 +20,9 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
-Rectangle {
+Image {
+    source: "images/activity1.jpg"
     width: 240; height: 500
-    color: "black"
 
     ActivitiesModel {
         id: activitiesModel
@@ -33,54 +33,26 @@ Rectangle {
          anchors.fill: parent
          model: activitiesModel
          pathItemCount: 6
-         property int delegateWidth: 400
-         property int delegateHeight: 200
+         property int delegateWidth: mainView.width/2
+         property int delegateHeight: mainView.height/2
          
          preferredHighlightBegin: 0.25
          preferredHighlightEnd: 0.25
 
 
-         delegate: Item {
-             id: delegate
-             scale: PathView.itemScale
-             opacity: PathView.itemOpacity
-             z: PathView.z
-
-             transform: Rotation {
-                 origin.x: 0
-                 origin.y: delegate.height
-                 angle: -PathView.itemRotation
-             }
-
-             width: mainView.delegateWidth
-             height: mainView.delegateHeight
-             
-             Rectangle {
-                 anchors.fill:parent
-                 anchors.leftMargin: 60
-                Text{
-                    text: "opacity"+delegate.opacity
-                }
-             }
-             Rectangle {
-                 anchors.bottom: parent.bottom
-                 anchors.bottomMargin: 24
-                 width: 200
-                 height: 32
-             }
-         }
+         delegate: ActivityDelegate{}
          clip:true
 
          path: Path {
-             startX: mainView.width/4+16
-             startY: mainView.height-mainView.delegateHeight+16
+             startX: mainView.width/3+16
+             startY: mainView.height-mainView.delegateHeight/1.5+16
              PathAttribute { name: "itemScale"; value: 1.0 }
              PathAttribute { name: "itemOpacity"; value: 0 }
              PathAttribute { name: "itemRotation"; value: 0 }
-             PathAttribute { name: "z"; value: 0 }
+             PathAttribute { name: "z"; value: 99 }
              PathLine {
-                 x: mainView.width/4
-                 y: mainView.height-mainView.delegateHeight
+                 x: mainView.width/3
+                 y: mainView.height-mainView.delegateHeight/1.5
             }
             PathAttribute { name: "itemScale"; value: 1 }
             PathAttribute { name: "itemOpacity"; value: 1 }
@@ -88,8 +60,8 @@ Rectangle {
             PathAttribute { name: "z"; value: 100 }
 
             PathLine {
-                 x: mainView.width/4-48
-                 y: mainView.height-mainView.delegateHeight-48
+                 x: mainView.width/3-48
+                 y: mainView.height-mainView.delegateHeight/1.5-48
             }
             PathAttribute { name: "itemScale"; value: 0.3 }
             PathAttribute { name: "itemOpacity"; value: 0 }

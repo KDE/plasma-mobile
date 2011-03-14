@@ -44,47 +44,47 @@ Image {
             dragger.source= "images/hint.png"
             dragger.height= 35
             dragger.width= 103
-            dragger.anchors.horizontalCenter = homescreen.horizontalCenter;
+            dragger.anchors.horizontalCenter = homeScreen.horizontalCenter;
 
-            dragger.y = homescreen.height - dragger.height;
+            dragger.y = homeScreen.height - dragger.height;
 
             draggerRegion.drag.axis = Drag.YAxis
             draggerRegion.drag.minimumY = 0;
-            draggerRegion.drag.maximumY = homescreen.height-dragger.height;
+            draggerRegion.drag.maximumY = homeScreen.height-dragger.height;
         } else if (location == "TopEdge") {
             dragger.source= "images/hint.png"
             dragger.height= 35
             dragger.width= 103
-            dragger.anchors.horizontalCenter = homescreen.horizontalCenter;
+            dragger.anchors.horizontalCenter = homeScreen.horizontalCenter;
 
             dragger.y = 0;
 
             draggerRegion.drag.axis = Drag.YAxis
             draggerRegion.drag.minimumY = 0;
-            draggerRegion.drag.maximumY = homescreen.height;
+            draggerRegion.drag.maximumY = homeScreen.height;
         } else if (location == "LeftEdge") {
             dragger.source= "images/hint-vertical.png"
             dragger.height= 103
             dragger.width= 35
-            dragger.anchors.verticalCenter = homescreen.verticalCenter;
+            dragger.anchors.verticalCenter = homeScreen.verticalCenter;
 
             dragger.x = 0;
 
             draggerRegion.drag.axis = Drag.XAxis
             draggerRegion.drag.minimumX = 0;
-            draggerRegion.drag.maximumX = homescreen.width;
+            draggerRegion.drag.maximumX = homeScreen.width;
         //RightEdge
         } else {
             dragger.source= "images/hint-vertical.png"
             dragger.height= 103
             dragger.width= 35
-            dragger.anchors.verticalCenter = homescreen.verticalCenter;
+            dragger.anchors.verticalCenter = homeScreen.verticalCenter;
 
-            dragger.x = homescreen.width - dragger.width;
+            dragger.x = homeScreen.width - dragger.width;
 
             draggerRegion.drag.axis = Drag.XAxis
             draggerRegion.drag.minimumX = 0;
-            draggerRegion.drag.maximumX = homescreen.width-dragger.width;
+            draggerRegion.drag.maximumX = homeScreen.width-dragger.width;
         } 
     }
     
@@ -93,20 +93,20 @@ Image {
         if (location == "BottomEdge") {
             draggerRegion.drag.axis = Drag.YAxis
             draggerRegion.drag.minimumY = 0;
-            draggerRegion.drag.maximumY = homescreen.height-dragger.height;
+            draggerRegion.drag.maximumY = homeScreen.height-dragger.height;
         } else if (location == "TopEdge") {
             draggerRegion.drag.axis = Drag.YAxis
             draggerRegion.drag.minimumY = 0;
-            draggerRegion.drag.maximumY = homescreen.height;
+            draggerRegion.drag.maximumY = homeScreen.height;
         } else if (location == "LeftEdge") {
             draggerRegion.drag.axis = Drag.XAxis
             draggerRegion.drag.minimumX = 0;
-            draggerRegion.drag.maximumX = homescreen.width;
+            draggerRegion.drag.maximumX = homeScreen.width;
         //RightEdge
         } else {
             draggerRegion.drag.axis = Drag.XAxis
             draggerRegion.drag.minimumX = 0;
-            draggerRegion.drag.maximumX = homescreen.width-dragger.width;
+            draggerRegion.drag.maximumX = homeScreen.width-dragger.width;
         } 
     }
 
@@ -120,8 +120,8 @@ Image {
 
         drag.target: parent;
         drag.axis: Drag.YAxis
-        drag.minimumY: homescreen.height/2;
-        drag.maximumY: homescreen.height-parent.height;
+        drag.minimumY: homeScreen.height/2;
+        drag.maximumY: homeScreen.height-parent.height;
 
         onPressed: {
             dragger.activated();
@@ -131,7 +131,7 @@ Image {
 
         onReleased: {
             if (dragger.location == "BottomEdge") {
-                if (dragger.y < 2*(homescreen.height/3)) {
+                if (dragger.y < 2*(homeScreen.height/3)) {
                     if (dragger.oldState == "hidden") {
                         dragger.state = "show"
                     } else {
@@ -141,7 +141,7 @@ Image {
                     dragger.state = dragger.oldState
                 }
             } else if (dragger.location == "TopEdge") {
-                if (dragger.y > (homescreen.height/3)) {
+                if (dragger.y > (homeScreen.height/3)) {
                     if (dragger.oldState == "hidden") {
                         dragger.state = "show"
                     } else {
@@ -151,7 +151,7 @@ Image {
                     dragger.state = dragger.oldState
                 }
             } else if (dragger.location == "LeftEdge") {
-                if (dragger.x > (homescreen.width/3)) {
+                if (dragger.x > (homeScreen.width/3)) {
                     if (dragger.oldState == "hidden") {
                         dragger.state = "show"
                     } else {
@@ -162,7 +162,7 @@ Image {
                 }
             //RightEdge
             } else {
-                if (dragger.x < 2*(homescreen.width/3)) {
+                if (dragger.x < 2*(homeScreen.width/3)) {
                     if (dragger.oldState == "hidden") {
                         dragger.state = "show"
                     } else {

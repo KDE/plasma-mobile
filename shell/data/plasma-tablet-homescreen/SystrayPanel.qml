@@ -85,7 +85,7 @@ Item {
 
     onContainmentChanged: {
         containment.parent = containmentParent
-        timer.running = true
+        resizeTimer.running = true
     }
     onHeightChanged: resizeTimer.running = true
     onWidthChanged: resizeTimer.running = true
@@ -136,7 +136,7 @@ Item {
             PropertyChanges {
                 target: systrayPanel;
                 height: 40;
-                width: 400;
+                width: parent.width;
             }
             PropertyChanges {
                 target: systrayPanelArea;

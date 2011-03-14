@@ -54,9 +54,10 @@ Item {
     {
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(tasksRow, {"x": pos.x, "y": pos.y});
+
         plasmoidContainer.applet = applet
-        applet.parent = plasmoidContainer
-        applet.x=0
+        plasmoidContainer.anchors.top = tasksRow.top
+        plasmoidContainer.anchors.bottom = tasksRow.bottom
     }
 
     PlasmaCore.Dialog {
