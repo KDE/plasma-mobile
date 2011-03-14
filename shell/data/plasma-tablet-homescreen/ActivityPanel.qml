@@ -28,15 +28,6 @@ Item {
     width: 200
     state: "show"
 
-    property alias containment: background.containment
-    onContainmentChanged: {
-        containment.parent = background
-        containment.x = background.margins.left
-        containment.y = background.margins.top
-        containment.width = background.width - background.margins.left - background.margins.right
-        containment.height = background.height - background.margins.top - background.margins.bottom
-    }
-
     Image {
         id: hint;
         source: "images/hint-vertical.png";
@@ -87,8 +78,15 @@ Item {
         anchors.fill: parent
         imagePath: "widgets/background"
         enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-
-        property QGraphicsWidget containment
+    }
+    
+    property QGraphicsWidget containment
+    onContainmentChanged: {
+        containment.parent = activityPanel
+        containment.x = background.margins.left
+        containment.y = background.margins.top
+        containment.width = background.width - background.margins.left - background.margins.right
+        containment.height = background.height - background.margins.top - background.margins.bottom
     }
 
     states: [
