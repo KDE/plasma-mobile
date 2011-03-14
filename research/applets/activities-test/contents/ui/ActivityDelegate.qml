@@ -46,16 +46,48 @@ Item {
             anchors.rightMargin: 5
             anchors.bottomMargin: 5
             source: "images/"+model.image
+            Text{
+                color: "white"
+                text: model.name
+                font.pixelSize: 20
+            }
         }
 
-        Text{
-            text: "opacity"+delegate.opacity
-        }
+        
     }
-    Rectangle {
+    Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 24
-        width: 200
+        width: 240
         height: 32
+        Image {
+            id: holeImage
+            y: 4
+            source: plasmoid.file("images", "sliderhole.png")
+            anchors.right: parent.right
+            Text {
+                anchors.centerIn: parent
+                text: "Slide to activate"
+            }
+        }
+        Image {
+            source: plasmoid.file("images", "slider.png")
+            Behavior on x {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            MouseArea {
+                anchors.fill: parent
+                drag.target: parent
+                drag.axis: Drag.XAxis
+                drag.minimumX: 0
+                drag.maximumX: holeImage.x - 4
+                onReleased: {
+                    parent.x = 0
+                }
+            }
+        }
     }
 }
