@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=Mobile Profile Engine
+Name[pt]=Motor de Perfis Móveis
+Name[uk]=Рушій мобільних профілів
+Name[x-test]=xxMobile Profile Enginexx
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
