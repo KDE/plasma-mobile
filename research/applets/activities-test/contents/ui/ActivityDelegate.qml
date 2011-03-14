@@ -18,28 +18,44 @@
  */
 
 import Qt 4.7
-import org.kde.plasma.core 0.1 as PlasmaCore
 
-ListModel {
-    id: suggestionModel
-    ListElement {
-        name: "Activity1"
-        image: "activity1.jpg"
+
+Item {
+    id: delegate
+    scale: PathView.itemScale
+    opacity: PathView.itemOpacity
+    z: PathView.z
+
+    transform: Rotation {
+        origin.x: 0
+        origin.y: delegate.height
+        angle: -PathView.itemRotation
     }
-    ListElement {
-        name: "Activity2"
-        image: "activity2.jpg"
+
+    width: mainView.delegateWidth
+    height: mainView.delegateHeight
+    
+    Rectangle {
+        anchors.fill:parent
+        anchors.leftMargin: 60
+
+        Image {
+            anchors.fill: parent
+            anchors.leftMargin: 5
+            anchors.topMargin: 5
+            anchors.rightMargin: 5
+            anchors.bottomMargin: 5
+            source: "images/"+model.image
+        }
+
+        Text{
+            text: "opacity"+delegate.opacity
+        }
     }
-    ListElement {
-        name: "Activity3"
-        image: "activity3.jpg"
-    }
-    ListElement {
-        name: "Activity4"
-        image: "activity4.jpg"
-    }
-    ListElement {
-        name: "Activity5"
-        image: "activity5.jpg"
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 24
+        width: 200
+        height: 32
     }
 }
