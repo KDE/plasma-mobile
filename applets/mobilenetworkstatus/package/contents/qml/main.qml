@@ -38,7 +38,7 @@ QGraphicsWidget {
       Column {
         PlasmaWidgets.SvgWidget{
             svg: signalSvg
-            elementID: dataSource.data["default"]["technology"] + "-" + dataSource.data["default"]["signalStrength"] / 20 + "-signal"
+            elementID: dataSource.data["default"]["technology"] + "-" + Math.round(dataSource.data["default"]["signalStrength"] / 20) + "-signal"
         }
       }
     }
