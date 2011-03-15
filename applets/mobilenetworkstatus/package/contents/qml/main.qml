@@ -19,6 +19,7 @@
  
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 QGraphicsWidget {
     Item {
@@ -28,9 +29,16 @@ QGraphicsWidget {
           connectedSources: ["default"]
       }
 
+      PlasmaCore.Svg{
+          id: signalSvg
+          imagePath: "icons/mobilesignal"
+          multipleImages: true
+      }
+
       Column {
-        Text {
-            text: dataSource.data["default"]["technology"] + i18n(" strength: ") + dataSource.data["default"]["signalStrength"];
+        PlasmaWidgets.SvgWidget{
+            svg: signalSvg
+            elementID: dataSource.data["default"]["technology"] + "-" + dataSource.data["default"]["signalStrength"] / 20 + "-signal"
         }
       }
     }
