@@ -87,6 +87,19 @@ Item {
         containment.y = background.margins.top
         containment.width = background.width - background.margins.left - background.margins.right
         containment.height = background.height - background.margins.top - background.margins.bottom
+        containment.z = timerResetRegion.z -1
+    }
+    
+    MouseArea {
+        id: timerResetRegion;
+        z: 9000
+
+        anchors.fill: parent
+
+        onPressed: {
+            timer.restart()
+            mouse.accepted = false
+        }
     }
 
     states: [
