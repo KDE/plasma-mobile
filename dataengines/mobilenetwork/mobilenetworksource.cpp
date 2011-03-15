@@ -80,7 +80,8 @@ void MobileNetworkSource::update(bool forcedUpdate)
     setData("cdmaNetworkIdentifier", "678");  //CDMA Only
     setData("cdmaRoamingPreference", "any");  //CDMA Only
 #endif
-    setData("technology", m_netRegistration->technology());
+    //we default to gsm
+    setData("technology", m_netRegistration->technology().isEmpty() ? "gsm" : m_netRegistration->technology());
     setData("registrationMode", m_netRegistration->mode());
     setData("registrationStatus", m_netRegistration->status());
     setData("cellId", m_netRegistration->cellId());
