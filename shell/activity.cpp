@@ -156,7 +156,9 @@ Plasma::Containment* Activity::containmentForScreen(int screen, int desktop)
         // first look to see if there are any unnasigned containments that are candidates for
         // being sucked into this Activity
         foreach (Plasma::Containment *c, PlasmaApp::self()->corona()->containments()) {
-            if ((c->containmentType() == Plasma::Containment::DesktopContainment ||
+            bool excludeFromActivities = c->config().readEntry("excludeFromActivities", false);
+
+            if (!excludeFromActivities && (c->containmentType() == Plasma::Containment::DesktopContainment ||
                 c->containmentType() == Plasma::Containment::CustomContainment) &&
                 c->context()->currentActivityId().isEmpty() &&
                 !PlasmaApp::self()->corona()->offscreenWidgets().contains(c) &&

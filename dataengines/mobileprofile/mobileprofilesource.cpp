@@ -1,7 +1,5 @@
 /***************************************************************************
- *   fakesignal.cpp                                                       *
- *                                                                         *
- *   Copyright (C) 2010 Lim Yuen Hoe <yuenhoe@hotmail.com>                 *
+ *   Copyright 2011 by Davide Bettio <davide.bettio@kdemail.net>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,33 +17,21 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include "fakesignal.h"
+#include "mobileprofilesource.h"
 
-#include <QPainter>
-#include <QGraphicsLinearLayout>
-#include <QGraphicsSceneResizeEvent>
-
-FakeSignal::FakeSignal(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args), m_icon(this)
-{
-   QGraphicsLinearLayout* l = new QGraphicsLinearLayout(Qt::Horizontal, this);
-   m_icon.setSvg("icons/network", "network-wireless-80");
-   m_icon.setOrientation(Qt::Horizontal);
-   m_icon.setText("SGP-M1-3GSM");
-   l->addItem(&m_icon);
-   setLayout(l);
-}
-
-FakeSignal::~FakeSignal()
+MobileProfileSource::MobileProfileSource(QObject* parent)
+    : Plasma::DataContainer(parent)
 {
 }
 
-
-void FakeSignal::init()
+MobileProfileSource::~MobileProfileSource()
 {
 }
 
-// This is the command that links your applet to the .desktop file
-K_EXPORT_PLASMA_APPLET(fakesignal, FakeSignal)
+void MobileProfileSource::update(bool forcedUpdate)
+{
+    //Some fake data
+    setData("profile", "silent"); 
+}
 
-#include "fakesignal.moc"
+#include "mobileprofilesource.moc"

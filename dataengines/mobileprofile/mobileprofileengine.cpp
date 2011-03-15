@@ -16,30 +16,44 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
- 
-import Qt 4.7
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
-QGraphicsWidget {
-    Item {
-      PlasmaCore.DataSource {
-          id: dataSource
-          engine: "org.kde.mobilenetworkengine"
-          connectedSources: ["default"]
-      }
+#include "mobileprofileengine.h"
+#include "mobileprofilesource.h"
 
-      PlasmaCore.Svg{
-          id: signalSvg
-          imagePath: "icons/mobilesignal"
-          multipleImages: true
-      }
-
-      Column {
-        PlasmaWidgets.SvgWidget{
-            svg: signalSvg
-            elementID: dataSource.data["default"]["technology"] + "-" + dataSource.data["default"]["signalStrength"] / 20 + "-signal"
-        }
-      }
-    }
+MobileProfileEngine::MobileProfileEngine(QObject* parent, const QVariantList& args)
+    : Plasma::DataEngine(parent, args)
+{
 }
+
+MobileProfileEngine::~MobileProfileEngine()
+{
+}
+
+
+bool MobileProfileEngine::sourceRequestEvent(const QString &name)
+{
+    if (name != "default") {
+        return false;
+    }
+
+    updateSourceEvent(name);
+    return true;
+}
+
+
+bool MobileProfileEngine::updateSourceEvent(const QString &name)
+{
+    MobileProfileSource *source = dynamic_cast<MobileProfileSource *>(containerForSource(name));
+
+    if (!source) {
+        source = new MobileProfileSource(this);
+        source->setObjectName(name);
+
+        addSource(source);
+    }
+
+    source->update();
+    return false;
+}
+
+#include "mobileprofileengine.moc"

@@ -16,30 +16,28 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
- 
-import Qt 4.7
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
-QGraphicsWidget {
-    Item {
-      PlasmaCore.DataSource {
-          id: dataSource
-          engine: "org.kde.mobilenetworkengine"
-          connectedSources: ["default"]
-      }
+#ifndef MOBILENETWORKENGINE_H
+#define MOBILENETWORKENGINE_H
 
-      PlasmaCore.Svg{
-          id: signalSvg
-          imagePath: "icons/mobilesignal"
-          multipleImages: true
-      }
+#include <Plasma/DataEngine>
 
-      Column {
-        PlasmaWidgets.SvgWidget{
-            svg: signalSvg
-            elementID: dataSource.data["default"]["technology"] + "-" + dataSource.data["default"]["signalStrength"] / 20 + "-signal"
-        }
-      }
-    }
-}
+class MobileProfileEngine : public Plasma::DataEngine
+{
+    Q_OBJECT
+
+public:
+    MobileProfileEngine(QObject* parent, const QVariantList& args);
+    ~MobileProfileEngine();
+
+protected:
+    bool sourceRequestEvent(const QString &name);
+
+protected slots:
+    bool updateSourceEvent(const QString &name);
+
+};
+
+K_EXPORT_PLASMA_DATAENGINE(mobileprofileengine, MobileProfileEngine)
+
+#endif

@@ -1,7 +1,5 @@
 /***************************************************************************
- *   fakesignal.h                                                         *
- *                                                                         *
- *   Copyright (C) 2010 Lim Yuen Hoe <yuenhoe@hotmail.com>                 *
+ *   Copyright 2011 by Davide Bettio <davide.bettio@kdemail.net>           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,26 +17,20 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef FAKESIGNAL_H
-#define FAKESIGNAL_H
+#ifndef MOBILENETWORKSOURCE_H
+#define MOBILENETWORKSOURCE_H
 
-#include <Plasma/Applet>
-#include <Plasma/Svg>
-#include <Plasma/IconWidget>
-#include <Plasma/Label>
+#include <Plasma/DataContainer>
 
-class FakeSignal : public Plasma::Applet
+class MobileProfileSource : public Plasma::DataContainer
 {
     Q_OBJECT
-public:
-    // Basic Create/Destroy
-    FakeSignal(QObject *parent, const QVariantList &args);
-    ~FakeSignal();
 
-    void init();
+    public:
+        MobileProfileSource(QObject* parent);
+        ~MobileProfileSource();
 
-private:
-    Plasma::IconWidget m_icon;
+        void update(bool forcedUpdate = false);
 };
 
 #endif

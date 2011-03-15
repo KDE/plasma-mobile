@@ -66,7 +66,7 @@ protected:
     void setIsDesktop(bool isDesktop);
     void setupHomeScreen();
     void setupContainment(Plasma::Containment *containment);
-    void changeActivity(Plasma::Containment *containment);
+    void changeContainment(Plasma::Containment *containment);
     void reserveStruts(const int left, const int top, const int right, const int bottom);
 
 public Q_SLOTS:
@@ -77,14 +77,9 @@ private Q_SLOTS:
     void mainContainmentActivated();
     void manageNewContainment(Plasma::Containment *containment);
     void containmentDestroyed(QObject *);
+    void containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasma::Containment *cont);
     void syncConfig();
-    void nextActivity();
-    void previousActivity();
-    void changeActivity();
-    void slideActivities();
-    void updateMainSlot();
     void lockScreen();
-    void shrinkTray();
     void showWidgetsExplorer();
     void mainViewGeometryChanged();
 
@@ -95,17 +90,14 @@ private:
     //the main declarative scene loader
     Plasma::DeclarativeWidget *m_declarativeWidget;
 
-    QDeclarativeItem *m_mainSlot;
-    QDeclarativeItem *m_spareSlot;
     QDeclarativeItem *m_homeScreen;
-    QDeclarativeItem *m_trayPanel;
 
     Plasma::Containment *m_currentContainment;
-    Plasma::Containment *m_alternateContainment;
-    Plasma::Containment *m_nextContainment;
-    Plasma::Containment *m_trayContainment;
+    QWeakPointer<Plasma::Containment> m_oldContainment;
+    QWeakPointer<Plasma::Containment> m_alternateContainment;
+
     QMap<int, Plasma::Containment*> m_containments;
-    QList<Plasma::Containment *> m_panelContainments;
+    QHash<Plasma::Location, Plasma::Containment *> m_panelContainments;
 
     QString m_homeScreenPath;
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;

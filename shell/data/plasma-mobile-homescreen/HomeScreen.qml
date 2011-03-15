@@ -22,15 +22,36 @@
 import Qt 4.7
 
 Item {
-    id: homescreen;
+    id: homeScreen;
     objectName: "homeScreen";
     x: 0;
     y: 0;
     width: 800;
     height: 480;
-    signal transitionFinished();
+
     state : "Normal";
     property bool locked: true
+    signal transformingChanged(bool transforming)
+
+    property QGraphicsWidget activeContainment
+    onActiveContainmentChanged: {
+        activeContainment.parent = spareSlot
+        activeContainment.visible = true
+        activeContainment.x = 0
+        activeContainment.y = 0
+        activeContainment.size = width + "x" + height
+        state = "Slide"
+        transformingChanged(true);
+    }
+
+    function finishTransition()
+    {
+        activeContainment.parent = mainSlot
+        activeContainment.x = 0
+        activeContainment.y = 0
+        state = "Normal"
+        transformingChanged(false);
+    }
 
     onLockedChanged: {
         if (locked) {
@@ -39,14 +60,14 @@ Item {
             unlockTextAnimation.running = true
         } else if (lockScreenItem.x == 0 && lockScreenItem.y == 0) {
             lockScreenItem.x = 0
-            lockScreenItem.y = homescreen.height
+            lockScreenItem.y = homeScreen.height
         }
     }
 
-    //this item will define Corona::screenGeometry() and Corona::availableScreenRegion()
+    //this item will define Corona::availableScreenRect() and Corona::availableScreenRegion()
     Item {
-        id: screenGeometry
-        objectName: "screenGeometry"
+        id: availableScreenRect
+        objectName: "availableScreenRect"
         anchors.fill: parent
         anchors.topMargin: 32
         anchors.bottomMargin: 28
@@ -66,7 +87,7 @@ Item {
         state : "Front360";
         property bool flipable : true;
         property bool transforming : false;
-        signal transformingChanged(bool transforming);
+        
 
         transform: Rotation {
             id: rotation
@@ -85,8 +106,8 @@ Item {
                 objectName: "mainSlot";
                 x: 0;
                 y: 0;
-                width: homescreen.width;
-                height: homescreen.height;
+                width: homeScreen.width;
+                height: homeScreen.height;
                 transformOrigin : Item.Center;
             }
 
@@ -94,9 +115,9 @@ Item {
                 id : spareSlot;
                 objectName: "spareSlot";
                 x: 0;
-                y: -homescreen.height;
-                width: homescreen.width;
-                height: homescreen.height;
+                y: -homeScreen.height;
+                width: homeScreen.width;
+                height: homeScreen.height;
             }
         }
         back: Item {
@@ -142,7 +163,7 @@ Item {
             to:"Back180"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -150,7 +171,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -159,7 +180,7 @@ Item {
             to:"Back540"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -167,7 +188,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -176,7 +197,7 @@ Item {
             to:"Back180"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -184,7 +205,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -193,7 +214,7 @@ Item {
             to:"Back540"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -201,7 +222,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -210,7 +231,7 @@ Item {
             to:"Front360"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -218,7 +239,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -227,7 +248,7 @@ Item {
             to:"Front0"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -235,7 +256,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -244,7 +265,7 @@ Item {
             to:"Front0"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -252,7 +273,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         },
@@ -261,7 +282,7 @@ Item {
             to: "Front360"
             SequentialAnimation {
                 ScriptAction {
-                    script: flipable.transformingChanged(true);
+                    script: homeScreen.transformingChanged(true);
                 }
                 NumberAnimation {
                     properties: "angle";
@@ -269,7 +290,7 @@ Item {
                     easing.type: "Linear";
                 }
                 ScriptAction {
-                    script: flipable.transformingChanged(false);
+                    script: homeScreen.transformingChanged(false);
                 }
             }
         }
@@ -286,7 +307,7 @@ Item {
                 }
                 PropertyChanges {
                     target: spareSlot;
-                    y: -homescreen.height;
+                    y: -homeScreen.height;
                 }
 
             },
@@ -298,7 +319,7 @@ Item {
                 }
                 PropertyChanges {
                     target: mainSlot;
-                    y: homescreen.height;
+                    y: homeScreen.height;
                 }
             }
     ]
@@ -334,21 +355,28 @@ Item {
                     duration: 250;
                 }
                 ScriptAction {
-                    script: transitionFinished();
+                    script: finishTransition();
                 }
             }
         }
 
     SystrayPanel {
-        id: systraypanel;
-        objectName: "systraypanel";
+        id: topEdgePanel;
+        objectName: "topEdgePanel";
 
-        anchors.horizontalCenter: homescreen.horizontalCenter;
+        anchors.horizontalCenter: homeScreen.horizontalCenter;
         y: 0;
     }
     ActivityPanel {
-        id: activitypanel;
-        objectName: "activitypanel";
+        id: rightEdgePanel
+        objectName: "rightEdgePanel"
+
+        anchors.verticalCenter: parent.verticalCenter
+        x: parent.width - width
+    }
+    LauncherPanel {
+        id: bottomEdgePanel;
+        objectName: "bottomEdgePanel";
 
         anchors.left: parent.left;
         anchors.right: parent.right;
@@ -356,7 +384,7 @@ Item {
     }
 
     Connections {
-        target: activitypanel;
+        target: bottomEdgePanel;
 
         onFlipRequested : {
             if (reverse) {
@@ -389,7 +417,7 @@ Item {
         onDragOverflow : {
             if (flipable.transforming != (degrees != 0)) {
                 flipable.transforming = (degrees != 0);
-                flipable.transformingChanged(flipable.transforming);
+                homeScreen.transformingChanged(flipable.transforming);
             }
             if (flipable.state == "Front0") {
                 flipable.angle = degrees;
@@ -445,27 +473,27 @@ Item {
             onReleased: {
                 var lockedX = false
                 var lockedY = false
-                if (lockScreenItem.x > homescreen.width/3) {
-                    lockScreenItem.x = homescreen.width
-                } else if (lockScreenItem.x < -homescreen.width/3) {
-                    lockScreenItem.x = -homescreen.width
+                if (lockScreenItem.x > homeScreen.width/3) {
+                    lockScreenItem.x = homeScreen.width
+                } else if (lockScreenItem.x < -homeScreen.width/3) {
+                    lockScreenItem.x = -homeScreen.width
                 } else {
                     lockScreenItem.x = 0
                     lockedX = true
                 }
 
-                if (lockScreenItem.y > homescreen.height/3) {
-                    lockScreenItem.y = homescreen.height
-                } else if (lockScreenItem.y < -homescreen.height/3) {
-                    lockScreenItem.y = -homescreen.height
+                if (lockScreenItem.y > homeScreen.height/3) {
+                    lockScreenItem.y = homeScreen.height
+                } else if (lockScreenItem.y < -homeScreen.height/3) {
+                    lockScreenItem.y = -homeScreen.height
                 } else {
                     lockScreenItem.y = 0
                     lockedY = true
                 }
                 if (lockedX && lockedY) {
-                    homescreen.locked = true
+                    homeScreen.locked = true
                 } else {
-                    homescreen.locked = false
+                    homeScreen.locked = false
                 }
             }
         }

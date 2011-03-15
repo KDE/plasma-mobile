@@ -55,13 +55,13 @@ public:
     virtual int numScreens() const;
     void setScreenGeometry(const QRect &geometry);
     virtual QRect screenGeometry(int id) const;
+    void setAvailableScreenRegion(const QRegion &r);
     virtual QRegion availableScreenRegion(int id) const;
 
-    KConfigGroup storedConfig(int containmentId);
-    Plasma::Containment *restoreContainment(const int containmentId);
-    int totalContainments() const;
-    
-    
+    void checkActivities();
+
+public Q_SLOTS:
+    void layoutContainments();
     void currentActivityChanged(const QString &newActivity);
     Activity* activity(const QString &id);
     void activityAdded(const QString &id);
@@ -69,15 +69,12 @@ public:
     void activateNextActivity();
     void activatePreviousActivity();
 
-public Q_SLOTS:
-    void layoutContainments();
-
 
 private:
     void init();
     Plasma::Applet *loadDefaultApplet(const QString &pluginName, Plasma::Containment *c);
     QRect m_screenGeometry;
-    int m_containmentsRestoredCount;
+    QRegion m_availableScreenRegion;
     KActivityController *m_activityController;
     QHash<QString, Activity*> m_activities;
 };

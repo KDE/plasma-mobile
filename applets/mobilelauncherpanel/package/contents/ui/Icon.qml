@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2 or
+ *   published by the Free Software Foundation; either version 2, or
  *   (at your option) any later version.
  *
  *   This program is distributed in the hope that it will be useful,
@@ -18,23 +18,15 @@
  */
 
 import Qt 4.7
-import org.kde.plasma.core 0.1 as PlasmaCore
 
-ListModel {
-    id: suggestionModel
-    ListElement {
-        name: "Activity1"
-    }
-    ListElement {
-        name: "Activity2"
-    }
-    ListElement {
-        name: "Activity3"
-    }
-    ListElement {
-        name: "Activity4"
-    }
-    ListElement {
-        name: "Activity5"
+Image {
+    property string icon
+    property string command
+    source: plasmoid.file("images", icon+".png")
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            plasmoid.runCommand(command)
+        }
     }
 }
