@@ -63,7 +63,7 @@ zvalue=0
 [Containments][8][Applets][12]
 geometry=3,0,200,50
 immutability=1
-plugin=org.kde.fakesignal
+plugin=org.kde.mobilenetworkstatus
 zvalue=0
 
 [Containments][8][Applets][11]
