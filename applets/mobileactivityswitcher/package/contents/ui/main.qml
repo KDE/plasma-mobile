@@ -46,21 +46,41 @@ Item {
     }
 
     ListView {
+        id: activityList
         anchors.fill: parent
-        anchors.leftMargin: background.margins.left
-        anchors.topMargin: background.margins.top
-        anchors.rightMargin: background.margins.right
-        anchors.bottomMargin: background.margins.bottom
         clip: true
+        highlightFollowsCurrentItem: false
+        spacing: 8
+
         
         model: PlasmaCore.DataModel{
             dataSource: activitySource
         }
         
+        //FIXME: why a timer is needed?
+        Timer {
+            id: highlightTimer
+            interval: 250;
+            running: false;
+            property int pendingIndex: -1
+            onTriggered:  {
+                activityList.currentIndex = pendingIndex
+            }
+        }
+        
         delegate: Text {
+            id: delegate
             color: theme.textColor
-            text: model["DataEngineSource"]=="Status"?i18n("New"):model["Name"]
+            text: model["DataEngineSource"]=="Status"?i18n("New activity"):model["Name"]
             font.pixelSize: 24
+            property string current: model["Current"]
+            onCurrentChanged: {
+                if (current == "true") {
+                    highlightTimer.pendingIndex = index
+                    highlightTimer.running = true
+                }
+            }
+
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -72,6 +92,18 @@ Item {
                 }
             }
         }
+
+        highlight: PlasmaCore.FrameSvgItem {
+                imagePath: "widgets/viewitem"
+                prefix: "normal"
+                width: activityList.width
+                height: activityList.currentItem.height
+                y: activityList.currentItem.y
+                Behavior on y {
+                    SmoothedAnimation { velocity: 250 }
+                }
+        }
+        
     }
 }
 
