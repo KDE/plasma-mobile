@@ -1,1 +1,2 @@
 add_subdirectory(mobiledolphin)
+add_subdirectory(phonebook)
