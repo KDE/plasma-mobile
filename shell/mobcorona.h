@@ -69,6 +69,8 @@ public Q_SLOTS:
     void activateNextActivity();
     void activatePreviousActivity();
 
+protected:
+    KConfigGroup defaultConfig() const;
 
 private:
     void init();

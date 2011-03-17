@@ -1,3 +1,6 @@
+[ContainmentDefaults]
+defaultContainment=org.kde.appletstrip
+
 [Containments][1]
 activity=
 excludeFromActivities=true

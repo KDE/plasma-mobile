@@ -75,6 +75,12 @@ void MobCorona::init()
     Plasma::ContainmentActionsPluginsConfig panelPlugins;
     panelPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
 
+    KConfigGroup cg(defaultConfig());
+    cg = KConfigGroup(&cg, "ContainmentDefaults");
+    QString defaultContainment = cg.readEntry("defaultContainment", "org.kde.mobiledesktop");
+    kDebug() << "Using" << defaultContainment << "as default containment plugin";
+    setDefaultContainmentPlugin(defaultContainment);
+
     setContainmentActionsDefaults(Plasma::Containment::DesktopContainment, desktopPlugins);
     setContainmentActionsDefaults(Plasma::Containment::PanelContainment, panelPlugins);
     setContainmentActionsDefaults(Plasma::Containment::CustomPanelContainment, panelPlugins);
@@ -89,7 +95,7 @@ void MobCorona::init()
     connect(m_activityController, SIGNAL(activityRemoved(const QString &)), this, SLOT(activityRemoved(const QString &)));
 }
 
-void MobCorona::loadDefaultLayout()
+KConfigGroup MobCorona::defaultConfig() const
 {
     QString homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
 
@@ -101,13 +107,22 @@ void MobCorona::loadDefaultLayout()
     //kDebug() << "layout CFG:" << defaultConfig;
     if (!defaultConfig.isEmpty()) {
         kDebug() << "attempting to load the default layout from:" << defaultConfig;
-        importLayout(KConfigGroup(new KConfig(defaultConfig), QString()));
+        return KConfigGroup(new KConfig(defaultConfig), QString());
+    }
+    kWarning() << "Invalid layout, could not locate plasma-default-layoutrc";
+    return KConfigGroup();
+}
+
+void MobCorona::loadDefaultLayout()
+{
+    KConfigGroup cg = defaultConfig();
+
+    if (cg.isValid()) {
+        importLayout(cg);
         return;
     }
     kWarning() << "Invalid layout, could not locate plasma-default-layoutrc";
 
-    // used to force a save into the config file
-    KConfigGroup invalidConfig;
 
     // FIXME: need to load the Mobile-specific containment
     // passing in an empty string will get us whatever the default
@@ -131,7 +146,8 @@ void MobCorona::loadDefaultLayout()
     c->setFormFactor(Plasma::Planar);
     c->updateConstraints(Plasma::StartupCompletedConstraint);
     c->flushPendingConstraintsEvents();
-    c->save(invalidConfig);
+    //cg is invalid here
+    c->save(cg);
 
     // stacks all the containments at the same place
     c->setPos(0, 0);

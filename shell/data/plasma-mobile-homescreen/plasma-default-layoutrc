@@ -1,3 +1,5 @@
+[ContainmentDefaults]
+defaultContainment=org.kde.mobiledesktop
 
 [Containments][1]
 activity=
