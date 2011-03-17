@@ -28,25 +28,56 @@ Item {
 
     Component.onCompleted: {
         plasmoid.drawWallpaper = false
-
         plasmoid.containmentType = "CustomContainment"
+        plasmoid.movableApplets = false
 
         plasmoid.appletAdded.connect(addApplet)
 
+        appletsOrder = plasmoid.readConfig("AppletsOrder")
+
+        //array with all the applet ids, in order
+        var appletIds = appletsOrder.split(":")
+
+        //all applets loaded, indicized by id
+        var appletsForId = new Array()
+
+        //fill appletsForId
         for (var i = 0; i < plasmoid.applets.length; ++i) {
             var applet = plasmoid.applets[i]
-            if (applet.pluginName == "org.kde.appswitcher") {
-                switcherDialog.mainItem = applet
-                switcherDialog.visible = true
+            appletsForId[applet.id] = applet
+        }
 
-                switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
-                switcherDialog.x = 0
-                switcherDialog.y = 0
-                applet.size = "48x48";
-            } else {
-                addApplet(applet, 0);
+        //add applets present in AppletsOrder
+        for (var i = 0; i < appletIds.length; ++i) {
+            var id = appletIds[i]
+            var applet = appletsForId[id]
+            if (applet) {
+                var applet = plasmoid.applets[i]
+                if (applet.pluginName == "org.kde.appswitcher") {
+                    switcherDialog.mainItem = applet
+                    switcherDialog.visible = true
+
+                    switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
+                    switcherDialog.x = 0
+                    switcherDialog.y = 0
+                    applet.size = "48x48";
+                } else {
+                    addApplet(applet, Qt.point(-1,-1));
+                }
+                //discard it, so will be easy to find out who wasn't in the series
+                appletsForId[id] = null
             }
         }
+
+        for (var id in appletsForId) {
+            var applet = appletsForId[id]
+            if (applet) {
+                addApplet(applet, Qt.point(-1,-1));
+            }
+        }
+
+        plasmoid.appletAdded.connect(addApplet)
+        LayoutManager.saveOrder()
     }
 
 
@@ -55,7 +86,13 @@ Item {
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(tasksRow, {"x": pos.x, "y": pos.y});
 
+        var index = tasksRow.children.length
+        if (pos.x >= 0) {
+            //FIXME: this assumes items are square
+            index = pos.x/man.height
+        }
         plasmoidContainer.applet = applet
+        tasksRow.insertAt(plasmoidContainer, index)
         plasmoidContainer.anchors.top = tasksRow.top
         plasmoidContainer.anchors.bottom = tasksRow.bottom
     }
@@ -114,6 +151,21 @@ Item {
                 id: tasksRow
 
                 height: tasksFlickable.height
+
+                function insertAt(item, index)
+                {
+                    LayoutManager.insertAt(item, index)
+                }
+
+                function remove(item)
+                {
+                    LayoutManager.remove(item)
+                }
+
+                function saveOrder()
+                {
+                    LayoutManager.saveOrder()
+                }
 
                 Repeater {
                     id: tasksRepeater
