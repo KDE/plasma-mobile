@@ -148,7 +148,7 @@ screen=0
 zvalue=10
 
 [Containments][8][Applets][9]
-geometry=2,0,24,24
+geometry=2,0,64,48
 immutability=1
 plugin=org.kde.appswitcher
 zvalue=0

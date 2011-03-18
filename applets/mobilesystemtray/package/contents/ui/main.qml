@@ -78,13 +78,14 @@ Item {
     function addApplet(applet, pos)
     {
         if (applet.pluginName == "org.kde.appswitcher") {
+            applet.width = 64
+            applet.height = 48
             switcherDialog.mainItem = applet
-            switcherDialog.visible = true
 
             switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
             switcherDialog.x = 0
             switcherDialog.y = 0
-            applet.size = "48x48"
+            switcherDialog.visible = true
             return
         }
 
@@ -105,11 +106,6 @@ Item {
 
     PlasmaCore.Dialog {
         id: switcherDialog
-        mainItem: Rectangle {
-                color: "red"
-                width: 200
-                height: 200
-            }
     }
 
 
