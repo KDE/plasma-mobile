@@ -56,11 +56,10 @@ Item {
         highlightFollowsCurrentItem: false
         spacing: 8
 
-        
         model: PlasmaCore.DataModel{
             dataSource: activitySource
         }
-        
+
         //FIXME: why a timer is needed?
         Timer {
             id: highlightTimer
@@ -71,7 +70,7 @@ Item {
                 activityList.currentIndex = pendingIndex
             }
         }
-        
+
         delegate: Text {
             id: delegate
             color: theme.textColor
@@ -107,7 +106,6 @@ Item {
                     SmoothedAnimation { velocity: 250 }
                 }
         }
-        
     }
 }
 
