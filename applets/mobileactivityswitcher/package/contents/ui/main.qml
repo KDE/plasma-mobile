@@ -34,10 +34,14 @@ Item {
         id: activitySource
         engine: "org.kde.activities"
         onSourceAdded: {
-            connectSource(source)
+            if (source != "Status") {
+                connectSource(source)
+            }
         }
         Component.onCompleted: {
-            connectedSources = sources
+            connectedSources = sources.filter(function(val) {
+                return val != "Status";
+            })
         }
     }
 
