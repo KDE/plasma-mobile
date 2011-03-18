@@ -21,6 +21,8 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1 as QtExtra
 
+import "plasmapackage:/code/LayoutManager.js" as LayoutManager
+
 Item {
     id: main
     signal shrinkRequested
@@ -36,7 +38,10 @@ Item {
         appletsOrder = plasmoid.readConfig("AppletsOrder")
 
         //array with all the applet ids, in order
-        var appletIds = appletsOrder.split(":")
+        var appletIds = Array()
+        if (appletsOrder.length > 0) {
+            appletIds = appletsOrder.split(":")
+        }
 
         //all applets loaded, indicized by id
         var appletsForId = new Array()
@@ -52,18 +57,7 @@ Item {
             var id = appletIds[i]
             var applet = appletsForId[id]
             if (applet) {
-                var applet = plasmoid.applets[i]
-                if (applet.pluginName == "org.kde.appswitcher") {
-                    switcherDialog.mainItem = applet
-                    switcherDialog.visible = true
-
-                    switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
-                    switcherDialog.x = 0
-                    switcherDialog.y = 0
-                    applet.size = "48x48";
-                } else {
-                    addApplet(applet, Qt.point(-1,-1));
-                }
+                addApplet(applet, Qt.point(-1,-1));
                 //discard it, so will be easy to find out who wasn't in the series
                 appletsForId[id] = null
             }
@@ -83,18 +77,30 @@ Item {
 
     function addApplet(applet, pos)
     {
+        if (applet.pluginName == "org.kde.appswitcher") {
+            switcherDialog.mainItem = applet
+            switcherDialog.visible = true
+
+            switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
+            switcherDialog.x = 0
+            switcherDialog.y = 0
+            applet.size = "48x48"
+            return
+        }
+
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(tasksRow, {"x": pos.x, "y": pos.y});
 
         var index = tasksRow.children.length
         if (pos.x >= 0) {
             //FIXME: this assumes items are square
-            index = pos.x/man.height
+            index = pos.x/main.height
         }
         plasmoidContainer.applet = applet
         tasksRow.insertAt(plasmoidContainer, index)
         plasmoidContainer.anchors.top = tasksRow.top
         plasmoidContainer.anchors.bottom = tasksRow.bottom
+
     }
 
     PlasmaCore.Dialog {
