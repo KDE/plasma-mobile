@@ -41,7 +41,10 @@ Item {
         appletsOrder = plasmoid.readConfig("AppletsOrder")
 
         //array with all the applet ids, in order
-        var appletIds = appletsOrder.split(":")
+        var appletIds = Array()
+        if (appletsOrder.length > 0) {
+            appletIds = appletsOrder.split(":")
+        }
 
         //all applets loaded, indicized by id
         var appletsForId = new Array()
