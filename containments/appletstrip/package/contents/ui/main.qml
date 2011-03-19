@@ -169,8 +169,7 @@ Item {
                     }
                 }
                 Item {
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
+                    height: appletsFlickable.height
                     width: main.width/appletColumns
                     ActionButton {
                         anchors.centerIn: parent
