@@ -278,8 +278,10 @@ void PlasmaApp::containmentsTransformingChanged(bool transforming)
     if (m_oldContainment && m_oldContainment.data()->graphicsEffect()) {
         m_oldContainment.data()->graphicsEffect()->setEnabled(transforming);
     }
-    if (m_alternateContainment && m_alternateContainment.data()->graphicsEffect()) {
-        m_alternateContainment.data()->graphicsEffect()->setEnabled(transforming);
+    foreach (Plasma::Containment *cont, m_alternateContainments) {
+        if (cont->graphicsEffect()) {
+            cont->graphicsEffect()->setEnabled(transforming);
+        }
     }
 }
 
@@ -428,11 +430,13 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     // we need our homescreen to show something!
     // for the alternate screen (such as a launcher) we need a containment setted as excludeFromActivities
-    if (containment->config().readEntry("excludeFromActivities", false) && !m_alternateContainment) {
-        QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>("alternateSlot");
+    if (containment->config().readEntry("excludeFromActivities", false)) {
+        QString declarativeSlot = containment->config().readEntry("declarativeSlot", "alternateSlot");
+
+        QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>(declarativeSlot);
 
         if (alternateSlot) {
-            m_alternateContainment = containment;
+            m_alternateContainments << containment;
             alternateSlot->setProperty("width", m_mainView->transformedSize().width());
             alternateSlot->setProperty("height", m_mainView->transformedSize().height());
             containment->setParentItem(alternateSlot);
@@ -483,9 +487,9 @@ void PlasmaApp::mainViewGeometryChanged()
         if (m_currentContainment) {
             m_currentContainment->resize(m_mainView->transformedSize());
         }
-        if (m_alternateContainment) {
-            m_alternateContainment.data()->resize(m_mainView->transformedSize());
-            m_alternateContainment.data()->setPos(0, 0);
+        foreach (Plasma::Containment *cont, m_alternateContainments) {
+            cont->resize(m_mainView->transformedSize());
+            cont->setPos(0, 0);
         }
         if (m_widgetsExplorer) {
             m_widgetsExplorer.data()->setGeometry(m_declarativeWidget->geometry());
