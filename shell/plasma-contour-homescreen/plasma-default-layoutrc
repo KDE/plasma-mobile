@@ -191,6 +191,6 @@ geometry=0,0,800,100
 immutability=1
 location=6
 excludeFromActivities=true
-plugin=org.kde.mobileactivityswitcher-test
+plugin=org.kde.contouractivityswitcher
 screen=0
 zvalue=10
