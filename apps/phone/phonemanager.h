@@ -41,7 +41,8 @@ class PhoneManager : public QObject
         void enterPinComplete(bool success);
         void modemPoweredChanged(bool powered);
         void modemOnlineChanged(bool online);
-
+        void callAdded(const QString &call);
+        
     private:
         void showPinRequester();
         OfonoModem *m_modem;

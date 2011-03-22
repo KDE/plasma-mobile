@@ -29,6 +29,8 @@
 #include <KDebug>
 
 #include <ofono-qt/ofonosimmanager.h>
+#include <ofono-qt/ofonovoicecallmanager.h>
+#include <ofono-qt/ofonovoicecall.h>
 
 #include "pinrequester.h"
 
@@ -37,6 +39,8 @@ PhoneManager::PhoneManager()
     m_requester = 0;
     
     m_modem = new OfonoModem(OfonoModem::AutomaticSelect, QString(), this);
+    connect(m_modem, SIGNAL(onlineChanged(bool)), this, SLOT(modemOnlineChanged(bool)));
+
     if (!m_modem->powered()){
         kDebug() << "Modem isn't powered";
         connect(m_modem, SIGNAL(poweredChanged(bool)), this, SLOT(modemPoweredChanged(bool)));
@@ -80,7 +84,6 @@ void PhoneManager::setOnline()
 {
     if (!m_modem->online()){
         kDebug() << "RF is not enabled";
-        connect(m_modem, SIGNAL(onlineChanged(bool)), this, SLOT(modemOnlineChanged(bool)));
         m_modem->setOnline(true);
         QTimer::singleShot(1000, this, SLOT(setOnline()));
     }
@@ -89,6 +92,11 @@ void PhoneManager::setOnline()
 void PhoneManager::modemOnlineChanged(bool online)
 {
     kDebug() << "Online: " << online;
+    
+    if (online){
+        OfonoVoiceCallManager *callManager = new OfonoVoiceCallManager(OfonoModem::AutomaticSelect, QString(), this);
+        connect(callManager, SIGNAL(callAdded(const QString &)), this, SLOT(callAdded(const QString &)));
+    }
 }
 
 void PhoneManager::pinEntered()
@@ -104,6 +112,13 @@ void PhoneManager::showPinRequester()
     connect(m_requester, SIGNAL(pinEntered()), this, SLOT(pinEntered()));
     m_requester->setWindowModality(Qt::WindowModal);
     m_requester->show();
+}
+
+void PhoneManager::callAdded(const QString &call)
+{
+    kDebug() << "New call: " << call;
+    OfonoVoiceCall *voiceCall = new OfonoVoiceCall(call, this);
+    kDebug() << "Incoming line: " << voiceCall->incomingLine();
 }
 
 #include "phonemanager.moc"
