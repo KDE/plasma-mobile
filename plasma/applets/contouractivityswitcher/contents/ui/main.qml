@@ -24,7 +24,6 @@ Item {
     width: 240; height: 500
 
     Component.onCompleted: {
-        plasmoid.drawWallpaper = false
         plasmoid.containmentType = "CustomContainment"
         plasmoid.movableApplets = false
     }
