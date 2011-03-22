@@ -94,7 +94,7 @@ private:
 
     Plasma::Containment *m_currentContainment;
     QWeakPointer<Plasma::Containment> m_oldContainment;
-    QWeakPointer<Plasma::Containment> m_alternateContainment;
+    QList<Plasma::Containment*> m_alternateContainments;
 
     QMap<int, Plasma::Containment*> m_containments;
     QHash<Plasma::Location, Plasma::Containment *> m_panelContainments;
