@@ -32,7 +32,6 @@ Item {
     height: 480;
     signal nextActivityRequested();
     signal previousActivityRequested();
-    
     state : "Normal"
     signal transformingChanged(bool transforming)
     property bool locked: true
@@ -44,6 +43,8 @@ Item {
         activeContainment.x = 0
         activeContainment.y = 0
         activeContainment.size = width + "x" + height
+        //view the main containment
+        areasBarDragger.x = areasBarDragger.width
         state = "Slide"
         transformingChanged(true);
     }
