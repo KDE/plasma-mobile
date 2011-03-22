@@ -20,18 +20,47 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
-Image {
-    source: "images/activity1.jpg"
+Item {
     width: 240; height: 500
 
-    ActivitiesModel {
-        id: activitiesModel
+    Component.onCompleted: {
+        plasmoid.drawWallpaper = false
+        plasmoid.containmentType = "CustomContainment"
+        plasmoid.movableApplets = false
+    }
+
+    PlasmaCore.DataSource {
+        id: activitySource
+        engine: "org.kde.activities"
+        onSourceAdded: {
+            if (source != "Status") {
+                connectSource(source)
+            }
+        }
+        Component.onCompleted: {
+            connectedSources = sources.filter(function(val) {
+                return val != "Status";
+            })
+        }
+    }
+
+    //FIXME: why a timer is needed?
+    Timer {
+        id: highlightTimer
+        interval: 250;
+        running: false;
+        property int pendingIndex: -1
+        onTriggered:  {
+            mainView.currentIndex = pendingIndex
+        }
     }
 
      PathView {
          id: mainView
          anchors.fill: parent
-         model: activitiesModel
+         model: PlasmaCore.DataModel{
+                    dataSource: activitySource
+                }
          pathItemCount: 6
          property int delegateWidth: mainView.width/2
          property int delegateHeight: mainView.height/2

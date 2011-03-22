@@ -25,6 +25,13 @@ Item {
     scale: PathView.itemScale
     opacity: PathView.itemOpacity
     z: PathView.z
+    property string current: model["Current"]
+    onCurrentChanged: {
+        if (current == "true") {
+            highlightTimer.pendingIndex = index
+            highlightTimer.running = true
+        }
+    }
 
     transform: Rotation {
         origin.x: 0
@@ -34,7 +41,7 @@ Item {
 
     width: mainView.delegateWidth
     height: mainView.delegateHeight
-    
+
     Rectangle {
         anchors.fill:parent
         anchors.leftMargin: 60
@@ -48,12 +55,10 @@ Item {
             source: "images/"+model.image
             Text{
                 color: "white"
-                text: model.name
+                text: model.Name
                 font.pixelSize: 20
             }
         }
-
-        
     }
     Item {
         anchors.bottom: parent.bottom
@@ -72,6 +77,11 @@ Item {
         }
         Image {
             source: plasmoid.file("images", "slider.png")
+            Text {
+                anchors.centerIn: parent
+                text: model.Name
+                font.pixelSize: 14
+            }
             Behavior on x {
                 NumberAnimation {
                     duration: 250
@@ -86,6 +96,12 @@ Item {
                 drag.maximumX: holeImage.x - 4
                 onReleased: {
                     parent.x = 0
+
+                    var activityId = model["DataEngineSource"]
+                    print(activityId)
+                    var service = activitySource.serviceForSource(activityId)
+                    var operation = service.operationDescription("setCurrent")
+                    service.startOperationCall(operation)
                 }
             }
         }
