@@ -8,7 +8,7 @@ set(phonebook_SRCS main.cpp phonebook.cpp declarativecontactmodel.cpp)
 
 kde4_add_executable(phonebook ${phonebook_SRCS})
 
-target_link_libraries(phonebook kdeclarative akonadi-kabc akonadi-kde akonadi-contact kabc ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KDE4_KDEUI_LIBS})
+target_link_libraries(phonebook kdeclarative akonadi-kabc akonadi-kde akonadi-contact kabc ofono-qt ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KDE4_KDEUI_LIBS})
 
 install(TARGETS phonebook ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
