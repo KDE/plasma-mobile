@@ -134,7 +134,16 @@ Item {
             x: homescreen.width
             y: 0
             width: homeScreen.width;
-            height: homeScreen.height;
+            height: homeScreen.height
+
+            property QGraphicsWidget containment
+            onContainmentChanged: {
+                containment.parent = rightEdgePanel
+                containment.x = 0
+                containment.y = 0
+                containment.width = width
+                containment.height = height
+            }
         }
     }
     PlasmaCore.FrameSvgItem {
