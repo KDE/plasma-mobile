@@ -57,14 +57,15 @@ MobCorona::~MobCorona()
 {
     KConfigGroup cg(config(), "SavedContainments");
 
-    foreach (Plasma::Containment *cont, containments()) {
+    //TODO: it will have an auto-stop activity feature
+    /*foreach (Plasma::Containment *cont, containments()) {
         if (cont->formFactor() == Plasma::Planar && cont->id() > 2) {
             QList<Plasma::Containment *> conts;
             conts.append(cont);
             KConfigGroup contCg = KConfigGroup(&cg, QString::number(cont->id()));
             exportLayout(contCg, conts);
         }
-    }
+    }*/
 }
 
 void MobCorona::init()
