@@ -118,7 +118,7 @@ void PhoneManager::callAdded(const QString &call)
 {
     kDebug() << "New call: " << call;
     OfonoVoiceCall *voiceCall = new OfonoVoiceCall(call, this);
-    kDebug() << "Incoming line: " << voiceCall->incomingLine();
+    kDebug() << "State: " << voiceCall->state();
 }
 
 #include "phonemanager.moc"
