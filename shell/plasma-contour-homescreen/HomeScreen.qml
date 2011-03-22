@@ -128,22 +128,13 @@ Item {
         }
         Item {
             //FIXME: shouldn't be a panel with that design, excludefromactivities containment assignments should be refactored
-            id: rightEdgePanel
-            objectName: "rightEdgePanel"
+            id: activitySlot
+            objectName: "activitySlot"
 
-            x: homescreen.width
+            x: homeScreen.width
             y: 0
             width: homeScreen.width;
             height: homeScreen.height
-
-            property QGraphicsWidget containment
-            onContainmentChanged: {
-                containment.parent = rightEdgePanel
-                containment.x = 0
-                containment.y = 0
-                containment.width = width
-                containment.height = height
-            }
         }
     }
     PlasmaCore.FrameSvgItem {
