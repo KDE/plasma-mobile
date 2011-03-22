@@ -33,6 +33,7 @@
 #include <ofono-qt/ofonovoicecall.h>
 
 #include "pinrequester.h"
+#include "calldialog.h"
 
 PhoneManager::PhoneManager()
 {
@@ -118,7 +119,8 @@ void PhoneManager::callAdded(const QString &call)
 {
     kDebug() << "New call: " << call;
     OfonoVoiceCall *voiceCall = new OfonoVoiceCall(call, this);
-    kDebug() << "State: " << voiceCall->state();
+    CallDialog *callDialog = new CallDialog(voiceCall);
+    callDialog->show();
 }
 
 #include "phonemanager.moc"
