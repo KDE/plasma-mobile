@@ -24,7 +24,8 @@ import "widgets"
 
 MainWindow {
         signal hangup()
-    
+        signal answer()
+        
             Button {
                 x: 100
                 y: 100
@@ -33,4 +34,14 @@ MainWindow {
                     hangup();
                 }
             }
+            
+            Button {
+                x: 100
+                y: 300
+                text: "Answer"
+                visible: callState == "incoming"
+                onClicked: {
+                    answer();
+                }
+            }            
 }

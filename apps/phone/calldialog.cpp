@@ -37,8 +37,10 @@ CallDialog::CallDialog(OfonoVoiceCall *voiceCall)
     kdeclarative.initialize();
     kdeclarative.setupBindings();
     
+    rootContext()->setContextProperty("callState", m_voiceCall->state());
     setSource(QUrl::fromLocalFile("CallDialog.qml"));
     connect(rootObject(), SIGNAL(hangup()), this, SLOT(hangup()));
+    connect(rootObject(), SIGNAL(answer()), this, SLOT(answer()));
 }
 
 CallDialog::~CallDialog()
@@ -51,9 +53,15 @@ void CallDialog::hangup()
     close();
 }
 
+void CallDialog::answer()
+{
+    m_voiceCall->answer();
+}
+
 void CallDialog::stateChanged(const QString &state)
 {
     kDebug() << state;
+    rootContext()->setContextProperty("callState", state);
 }
 
 #include "calldialog.moc"

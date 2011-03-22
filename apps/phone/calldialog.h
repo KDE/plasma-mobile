@@ -34,6 +34,7 @@ class CallDialog : public QDeclarativeView
         
     public slots:
         void hangup();
+        void answer();
         void stateChanged(const QString &state);
         
     private:
