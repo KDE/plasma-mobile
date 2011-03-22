@@ -25,23 +25,29 @@ DeclarativeContactModel::DeclarativeContactModel( Akonadi::ChangeRecorder* monit
 {
   QHash<int, QByteArray> rns = roleNames();
   rns.insert(RealName, "realName");
+  rns.insert(ContactData, "contactData");
   setRoleNames(rns);
 }
 
 QVariant DeclarativeContactModel::data( const QModelIndex& index, int role ) const
 {
-    if (role == RealName){
-        Akonadi::Item AkItem = Akonadi::EntityTreeModel::data(index, ItemRole).value<Akonadi::Item>();
-        
-        if (!AkItem.isValid() || !AkItem.hasPayload<KABC::Addressee>()){
-            return QVariant();
-        }
-        
-        KABC::Addressee addressee = AkItem.payload<KABC::Addressee>();
-        return QVariant::fromValue( addressee.realName());
+    Akonadi::Item AkItem = Akonadi::EntityTreeModel::data(index, ItemRole).value<Akonadi::Item>();
+    
+    KABC::Addressee addressee;
+    if (AkItem.isValid() && AkItem.hasPayload<KABC::Addressee>()){
+        addressee = AkItem.payload<KABC::Addressee>();
     }
     
-    return Akonadi::EntityTreeModel::data(index, role);
+    switch (role){
+        case RealName:
+            return QVariant::fromValue(addressee.realName());
+        
+        case ContactData:
+            return QVariant::fromValue(addressee);
+
+        default:
+            return Akonadi::EntityTreeModel::data(index, role);
+    }
 }
 
 #include "declarativecontactmodel.moc"

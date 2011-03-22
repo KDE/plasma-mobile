@@ -35,7 +35,8 @@ class DeclarativeContactModel : public Akonadi::EntityTreeModel
     public:
         enum Roles
         {
-            RealName = Akonadi::EntityTreeModel::UserRole
+            ContactData = Akonadi::EntityTreeModel::UserRole,
+            RealName = Akonadi::EntityTreeModel::UserRole + 1
         };
 
         DeclarativeContactModel(Akonadi::ChangeRecorder* monitor, QObject* parent = 0);
