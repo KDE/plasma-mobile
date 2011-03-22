@@ -23,6 +23,12 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Item {
     width: 240; height: 500
 
+    Component.onCompleted: {
+        plasmoid.drawWallpaper = false
+        plasmoid.containmentType = "CustomContainment"
+        plasmoid.movableApplets = false
+    }
+
     PlasmaCore.DataSource {
         id: activitySource
         engine: "org.kde.activities"
