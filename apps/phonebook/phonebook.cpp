@@ -27,6 +27,9 @@
 #include <kdirmodel.h>
 #include <kdirlister.h>
 #include <kdebug.h>
+#include <kabc/addressee.h>
+#include <kabc/contactgroup.h>
+#include <kabc/phonenumber.h>
 
 #include <QApplication>
 #include <KStandardAction>
@@ -36,6 +39,14 @@
 PhoneBook::PhoneBook()
 {
 
+}
+
+void PhoneBook::callContact(QVariant contact)
+{
+    KABC::PhoneNumber::List numbersList = contact.value<KABC::Addressee>().phoneNumbers(KABC::PhoneNumber::Home);
+    if (numbersList.count() > 0){
+        kDebug() << numbersList.at(0).number();
+    }
 }
 
 #include "phonebook.moc"

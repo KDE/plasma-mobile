@@ -67,6 +67,8 @@ int main(int argc, char *argv[])
     view.rootContext()->setContextProperty("myModel", proxyModel);
     view.setSource(QUrl::fromLocalFile("phonebook.qml"));
 
+    QObject::connect(view.rootObject(), SIGNAL(contactClicked(QVariant)), &view, SLOT(callContact(QVariant)));
+    
     view.show();
 
     return app.exec();

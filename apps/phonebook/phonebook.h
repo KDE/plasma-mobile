@@ -28,6 +28,9 @@ class PhoneBook : public QDeclarativeView
     
     public:
         PhoneBook();
+
+    public slots:
+        void callContact(QVariant contact);
 };
 
 #endif

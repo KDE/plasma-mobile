@@ -25,8 +25,7 @@ import "widgets"
 MainWindow {
     id: mainRect
 
-    signal fileClicked(string name);
-    signal fileShowContextualMenu(string name);
+    signal contactClicked(variant data);
 
     Rectangle {
         width: mainRect.width
@@ -71,17 +70,17 @@ MainWindow {
             id: delegateItem  
             itemText: realName
             itemIcon: decoration
-            /*
+
              MouseArea {
                 anchors.fill: delegateItem
                 onClicked: {
-                    mainRect.fileClicked(name);
+                    mainRect.contactClicked(contactData);
                 }
-                    
+                /*
                 onPressAndHold: {
-                    mainRect.fileShowContextualMenu(name);
-                }
-             }*/
+                    mainRect.fileShowContextualMenu(contactData);
+                }*/
+             }
         }
      }
  }
