@@ -1,2 +1,2 @@
  
-add_subdirectory(contouractivities)
+add_subdirectory(contouractivityswitcher)
