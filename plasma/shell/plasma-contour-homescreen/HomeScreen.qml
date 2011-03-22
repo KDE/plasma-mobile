@@ -20,6 +20,8 @@
  ***************************************************************************/
 
 import Qt 4.7
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: homeScreen;
@@ -66,6 +68,10 @@ Item {
         }
     }
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
     Item {
         id: availableScreenRect
@@ -82,33 +88,128 @@ Item {
     }
 
     Item {
-        id: mainSlot;
-        objectName: "mainSlot";
-        x: 0;
-        y: 0;
-        width: homeScreen.width;
-        height: homeScreen.height;
-        transformOrigin : Item.Center;
+        id: mainContainments
+        width: homeScreen.width
+        height: homeScreen.height
+        x: 0
+        y: 0
+
+        Behavior on x {
+            NumberAnimation { duration: 250 }
+        }
+
+        Item {
+            id: mainSlot;
+            objectName: "mainSlot";
+            x: 0;
+            y: 0;
+            width: homeScreen.width;
+            height: homeScreen.height;
+            transformOrigin : Item.Center;
+        }
+
+        Item {
+            id : spareSlot;
+            objectName: "spareSlot";
+            x: 0
+            y: -homeScreen.height
+            width: homeScreen.width;
+            height: homeScreen.height;
+        }
+
+        Item {
+            id: alternateSlot;
+            objectName: "alternateSlot";
+            x: -width
+            y: 0
+            width: homeScreen.width;
+            height: homeScreen.height;
+        }
+        Item {
+            //FIXME: shouldn't be a panel with that design, excludefromactivities containment assignments should be refactored
+            id: rightEdgePanel
+            objectName: "rightEdgePanel"
+
+            x: homescreen.width
+            y: 0
+            width: homeScreen.width;
+            height: homeScreen.height;
+        }
+    }
+    PlasmaCore.FrameSvgItem {
+        imagePath: "widgets/background"
+        enabledBorders: "TopBorder"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: 32 + margins.top
+
+        Rectangle {
+            id: areasBarDragger
+            color: Qt.rgba(1,1,1,0.5)
+            x: width
+            y: areasBar.y
+            width: parent.width/3
+            height: areasBar.height
+
+            onXChanged: {
+                mainContainments.x = mainContainments.width - mainContainments.width*2*(x/draggerMouseArea.drag.maximumX)
+            }
+        }
+
+        Row {
+            id: areasBar
+            anchors.fill: parent
+            anchors.topMargin: parent.margins.top
+            Text {
+                text: "Applications"
+                color: theme.textColor
+                horizontalAlignment: Text.AlignHCenter
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width/3
+            }
+            Text {
+                text: "Work"
+                color: theme.textColor
+                horizontalAlignment: Text.AlignHCenter
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width/3
+            }
+            Text {
+                text: "Activities"
+                color: theme.textColor
+                horizontalAlignment: Text.AlignHCenter
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width/3
+            }
+
+            MouseArea {
+                id: draggerMouseArea
+                anchors.fill: areasBar
+                drag.target: areasBarDragger
+                drag.axis: Drag.XAxis
+                drag.minimumX: 0
+                drag.maximumX: areasBar.width - areasBarDragger.width
+                onReleased: {
+                    areasBarDragger.x = areasBarDragger.width * Math.round(areasBarDragger.x/areasBarDragger.width)
+                }
+                onClicked: {
+                    areasBarDragger.x = areasBarDragger.width * Math.floor(mouse.x/areasBarDragger.width)
+                }
+            }
+        }
     }
 
-    Item {
-        id : spareSlot;
-        objectName: "spareSlot";
-        x: -homeScreen.width;
-        y: 0;
-        width: homeScreen.width;
-        height: homeScreen.height;
-    }
     states: [
             State {
                 name: "Normal"
                 PropertyChanges {
                     target: mainSlot;
-                    x: 0;
+                    y: 0;
                 }
                 PropertyChanges {
                     target: spareSlot;
-                    x: -homeScreen.width;
+                    y: -homeScreen.height;
                 }
 
             },
@@ -116,76 +217,51 @@ Item {
                 name: "Slide"
                 PropertyChanges {
                     target: spareSlot;
-                    x: 0;
+                    y: 0;
                 }
                 PropertyChanges {
                     target: mainSlot;
-                    x: homeScreen.width;
+                    y: homeScreen.height;
                 }
             }
     ]
 
     transitions: Transition {
-        from: "Normal"
-        to: "Slide"
-        SequentialAnimation {
-            NumberAnimation {
-                target: mainSlot;
-                property: "scale";
-                easing.type: "OutQuint";
-                duration: 250;
-            }
-            ParallelAnimation {
-                NumberAnimation {
-                    target: spareSlot;
-                    property: "x";
-                    easing.type: "InQuad";
-                    duration: 300;
-                }
+            from: "Normal"
+            to: "Slide"
+            SequentialAnimation {
                 NumberAnimation {
                     target: mainSlot;
-                    property: "x";
-                    easing.type: "InQuad";
-                    duration: 300;
+                    property: "scale";
+                    easing.type: "OutQuint";
+                    duration: 250;
+                }
+                ParallelAnimation {
+                    NumberAnimation {
+                        target: spareSlot;
+                        property: "y";
+                        easing.type: "InQuad";
+                        duration: 300;
+                    }
+                    NumberAnimation {
+                        target: mainSlot;
+                        property: "y";
+                        easing.type: "InQuad";
+                        duration: 300;
+                    }
+                }
+                NumberAnimation {
+                    target: spareSlot;
+                    property: "scale";
+                    easing.type: "OutQuint";
+                    duration: 250;
+                }
+                ScriptAction {
+                    script: finishTransition();
                 }
             }
-            NumberAnimation {
-                target: spareSlot;
-                property: "scale";
-                easing.type: "OutQuint";
-                duration: 250;
-            }
-            ScriptAction {
-                script: finishTransition();
-            }
         }
-    }
 
-
-    Item {
-        id: alternateSlot;
-        objectName: "alternateSlot";
-        x: 0;
-        y: alternateDrag.y + alternateDrag.height;
-        width: homeScreen.width;
-        height: homeScreen.height;
-    }
-    Shadow {
-        id: alternateSlotShadowTop
-        source: "images/shadow-top.png"
-        anchors.bottom: alternateSlot.top
-        anchors.topMargin: -1
-        width: alternateSlot.width
-        height: 11
-    }
-    Shadow {
-        id: alternateSlotShadowBottom
-        source: "images/shadow-bottom.png"
-        anchors.top: alternateSlot.bottom
-        anchors.topMargin: -1
-        width: alternateSlot.width
-        height: 11
-    }
 
     SystrayPanel {
         id: topEdgePanel;
@@ -195,37 +271,7 @@ Item {
         y: 0;
     }
 
-    ActivityPanel {
-        id: rightEdgePanel
-        objectName: "rightEdgePanel"
 
-        anchors.verticalCenter: parent.verticalCenter
-        x: parent.width - width
-    }
-
-    Dragger {
-        id: alternateDrag
-
-        location: "BottomEdge"
-        targetItem: alternateSlot
-        onTransitionFinished : {
-            alternateSlotShadowBottom.state = "invisible"
-            alternateSlotShadowTop.state = "invisible"
-        }
-
-        onActivated: {
-            alternateSlotShadowBottom.state = "visible"
-            alternateSlotShadowTop.state = "visible"        
-        }
-    }
-
-    //FIXME: this should be automatic
-    onWidthChanged: {
-        alternateDrag.updateDrag();
-    }
-    onHeightChanged: {
-        alternateDrag.updateDrag();
-    }
 
     Rectangle {
         id: lockScreenItem
