@@ -64,7 +64,7 @@ Item {
          id: mainView
          anchors.fill: parent
          anchors.bottomMargin: 32
-         anchors.leftMargin: 32
+         anchors.leftMargin: 64
          model: PlasmaCore.DataModel{
                     dataSource: activitySource
                 }
