@@ -52,7 +52,7 @@ Item {
             anchors.topMargin: 5
             anchors.rightMargin: 5
             anchors.bottomMargin: 5
-            source: "images/"+model.image
+            source: "/home/diau/.kde4/share/apps/plasma/activities-screenshots/"+model.DataEngineSource+".png"
             Text{
                 color: "white"
                 text: model.Name
