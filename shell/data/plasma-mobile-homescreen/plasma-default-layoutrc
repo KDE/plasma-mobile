@@ -14,6 +14,7 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 excludeFromActivities=true
+declarativeSlot=alternateSlot
 
 [Containments][1][Wallpaper][image]
 wallpaper=Fiber
