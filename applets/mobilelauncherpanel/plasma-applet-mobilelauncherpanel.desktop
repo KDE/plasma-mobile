@@ -1,11 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Launcher panel
+Name[et]=Käivitamispaneel
 Name[pt]=Painel de lançamento
 Name[pt_BR]=Painel de lançamento
 Name[uk]=Панель запуску
 Name[x-test]=xxLauncher panelxx
 Comment=Panel with some launcher icons
+Comment[et]=Paneel mõningate käivitamisikoonidega
 Comment[pt]=Painel com alguns ícones de lançamento
 Comment[pt_BR]=Painel com alguns ícones de lançamento
 Comment[uk]=Панель з піктограмами для запуску програм
