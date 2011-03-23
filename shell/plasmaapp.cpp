@@ -47,6 +47,7 @@
 #include <ksmserver_interface.h>
 
 #include <Plasma/Containment>
+#include <Plasma/Context>
 #include <Plasma/DeclarativeWidget>
 #include <Plasma/Theme>
 #include <Plasma/WindowEffects>
@@ -72,6 +73,12 @@ class CachingEffect : public QGraphicsEffect
 
         p->drawPixmap(point, pixmap);
         p->setCompositionMode(QPainter::CompositionMode_SourceOver);
+    }
+
+    QPixmap cachedPixmap() const
+    {
+        QPoint point;
+        return sourcePixmap(Qt::LogicalCoordinates, &point);
     }
 };
 
