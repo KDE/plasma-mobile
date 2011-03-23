@@ -1,2 +1,2 @@
- 
+add_subdirectory(contourmobilemenu)
 add_subdirectory(contouractivityswitcher)

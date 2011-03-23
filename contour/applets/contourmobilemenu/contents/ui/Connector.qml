@@ -29,7 +29,7 @@ Rectangle {
     property real connectorAngle: Math.atan((itemB.y+height/2-itemA.y)/(itemB.x-itemA.x-itemA.width/2))
 
     width: (itemB.x-itemA.width/2)/Math.cos(connectorAngle)
-    height: 12
+    height: 14
     radius: 7
     color: "white"
     smooth:true

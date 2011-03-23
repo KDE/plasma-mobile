@@ -21,9 +21,8 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 4.7
 
-Rectangle {
+Item {
     width: 240; height: 500
-    color: "black"
 
     SuggestionModel {
         id: suggestionModel
@@ -61,7 +60,7 @@ Rectangle {
      }
      PlasmaCore.SvgItem {
         id: activityRootSvg
-        anchors.verticalCenter: parent.verticalCenter
+        //anchors.verticalCenter: parent.verticalCenter
         width: 128
         height: 128
         svg: iconsSvg

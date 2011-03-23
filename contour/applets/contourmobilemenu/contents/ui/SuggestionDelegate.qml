@@ -28,13 +28,7 @@ Item {
     /*scale: PathView.delegateScale
     opacity: PathView.delegateOpacity*/
 
-    Text {
-        text: name
-        font.pointSize: 14
-        color: "white"
-        anchors.horizontalCenter: parent.horizontalCenter
-        y: 0
-    }
+    
 
     Rectangle {
         color: "white"
@@ -56,11 +50,12 @@ Item {
                 height: childrenRect.height
 
                 Rectangle {
-                    anchors.verticalCenter: iconBackgroundSvg.verticalCenter
-                    x: 100
+                    anchors.top: iconBackgroundSvg.bottom
+                    anchors.topMargin: -20
+                    anchors.horizontalCenter: iconBackgroundSvg.horizontalCenter
                     color: "black"
                     border.color: "white"
-                    border.width: 8
+                    border.width: 9
                     radius:6
                     width: 100
                     height: nameText.height+border.width*2
@@ -106,6 +101,14 @@ Item {
         id: itemConnector
         itemA: activityRootSvg
         itemB: delegate
+        Text {
+            text: name
+            font.pixelSize: 12
+            font.bold: true
+            color: "black"
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: 0
+        }
     }
 
     MouseArea {
