@@ -63,6 +63,8 @@ Item {
      PathView {
          id: mainView
          anchors.fill: parent
+         anchors.bottomMargin: 32
+         anchors.leftMargin: 32
          model: PlasmaCore.DataModel{
                     dataSource: activitySource
                 }
