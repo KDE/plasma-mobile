@@ -60,7 +60,7 @@ bool MobileActivityThumbnails::updateSourceEvent(const QString &source)
     return true;
 }
 
-K_EXPORT_PLASMA_DATAENGINE(org.kde.examples.mobileactivitythumbnails, MobileActivityThumbnails)
+K_EXPORT_PLASMA_DATAENGINE(org.kde.mobileactivitythumbnails, MobileActivityThumbnails)
 
 
 #include "mobileactivitythumbnails.moc"
