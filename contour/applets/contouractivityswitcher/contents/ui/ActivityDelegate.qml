@@ -44,7 +44,7 @@ Item {
 
     Rectangle {
         anchors.fill:parent
-        anchors.leftMargin: 60
+        anchors.leftMargin: 100
 
         Image {
             anchors.fill: parent
@@ -52,7 +52,8 @@ Item {
             anchors.topMargin: 5
             anchors.rightMargin: 5
             anchors.bottomMargin: 5
-            source: "/home/diau/.kde4/share/apps/plasma/activities-screenshots/"+model.DataEngineSource+".png"
+            property string path: activityThumbnailsSource.data[model.DataEngineSource]["path"]
+            source: path?path:plasmoid.file("images", "emptyactivity.png")
             Text{
                 color: "white"
                 text: model.Name

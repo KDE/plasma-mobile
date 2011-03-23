@@ -38,9 +38,9 @@ bool MobileActivityThumbnails::sourceRequestEvent(const QString &source)
     QString path = KStandardDirs::locateLocal("data", QString("plasma/activities-screenshots/%1.png").arg(source));
 
     if (QFile::exists(path)) {
-        setData(source, path);
+        setData(source, "path", path);
     } else {
-        setData(source, QString());
+        setData(source, "path", QString());
     }
 
     // as we successfully set up the source, return true
@@ -52,9 +52,9 @@ bool MobileActivityThumbnails::updateSourceEvent(const QString &source)
     QString path = KStandardDirs::locateLocal("data", QString("plasma/activities-screenshots/%1.png").arg(source));
 
     if (QFile::exists(path)) {
-        setData(source, path);
+        setData(source, "path", path);
     } else {
-        setData(source, QString());
+        setData(source, "path", QString());
     }
 
     return true;

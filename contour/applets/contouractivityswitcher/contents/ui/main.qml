@@ -29,6 +29,12 @@ Item {
     }
 
     PlasmaCore.DataSource {
+        id: activityThumbnailsSource
+        engine: "org.kde.mobileactivitythumbnails"
+        connectedSources: activitySource.sources
+    }
+
+    PlasmaCore.DataSource {
         id: activitySource
         engine: "org.kde.activities"
         onSourceAdded: {
