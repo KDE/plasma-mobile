@@ -284,6 +284,23 @@ void PlasmaApp::containmentsTransformingChanged(bool transforming)
     }
     if (m_oldContainment && m_oldContainment.data()->graphicsEffect()) {
         m_oldContainment.data()->graphicsEffect()->setEnabled(transforming);
+        //take a snapshot of the old one
+        //TODO: make this async?
+        if (transforming) {
+            QGraphicsEffect *effect = m_oldContainment.data()->graphicsEffect();
+            CachingEffect *cache = dynamic_cast<CachingEffect *>(effect);
+
+            QImage activityImage(m_oldContainment.data()->size().toSize(), QImage::Format_ARGB32);
+            QPainter p(&activityImage);
+            m_oldContainment.data()->wallpaper()->paint(&p, m_oldContainment.data()->wallpaper()->boundingRect());
+            p.setCompositionMode(QPainter::CompositionMode_SourceOver);
+            p.drawPixmap(QPoint(0,0), cache->cachedPixmap());
+            p.end();
+
+            QString path = KStandardDirs::locateLocal("data", QString("plasma/activities-screenshots/%1.png").arg(m_oldContainment.data()->context()->currentActivityId()));
+
+            activityImage.save(path, "PNG");
+        }
     }
     foreach (Plasma::Containment *cont, m_alternateContainments) {
         if (cont->graphicsEffect()) {
