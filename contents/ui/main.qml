@@ -65,19 +65,39 @@ Item {
          anchors.fill: parent
          anchors.bottomMargin: 32
          anchors.leftMargin: 64
+         interactive: false
          model: PlasmaCore.DataModel{
                     dataSource: activitySource
                 }
          pathItemCount: 6
          property int delegateWidth: mainView.width/2
          property int delegateHeight: mainView.height/2
-         
+
          preferredHighlightBegin: 0.25
          preferredHighlightEnd: 0.25
 
 
          delegate: ActivityDelegate{}
          clip:true
+
+         MouseArea {
+             anchors.fill: parent
+             property int downX
+             property int downY
+
+             onPressed: {
+                 downX = mouse.x
+                 downY = mouse.y
+             }
+
+             onReleased: {
+                 if (mouse.x > downX && mouse.y > downY) {
+                    ++mainView.currentIndex
+                 } else if (mouse.x < downX && mouse.y < downY) {
+                    --mainView.currentIndex
+                 }
+            }
+         }
 
          path: Path {
              startX: mainView.width/3+16
