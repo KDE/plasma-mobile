@@ -51,6 +51,7 @@ Rectangle {
 
     width: 800; height: 600
     color: "#343434"
+    clip: true
 
     FlickableWebView {
         id: webView
