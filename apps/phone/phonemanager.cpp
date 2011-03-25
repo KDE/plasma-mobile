@@ -18,22 +18,16 @@
  ***************************************************************************/
 
 #include "phonemanager.h"
+#include "pinrequester.h"
+#include "calldialog.h"
 
-#include <QDeclarativeContext>
-#include <QDeclarativeItem>
-#include <QDeclarativeView>
-#include <QInputDialog>
 #include <QTimer>
-
-#include <kdeclarative.h>
-#include <KDebug>
 
 #include <ofono-qt/ofonosimmanager.h>
 #include <ofono-qt/ofonovoicecallmanager.h>
 #include <ofono-qt/ofonovoicecall.h>
 
-#include "pinrequester.h"
-#include "calldialog.h"
+#include <KDebug>
 
 PhoneManager::PhoneManager()
 {
