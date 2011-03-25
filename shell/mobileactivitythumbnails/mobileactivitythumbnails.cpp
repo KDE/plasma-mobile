@@ -18,7 +18,7 @@
  */
 
 #include "mobileactivitythumbnails.h"
-#include "kactivityconsumer.h"
+#include "../kactivityconsumer.h"
 
 #include <QFile>
 
