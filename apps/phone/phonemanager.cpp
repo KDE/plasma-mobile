@@ -42,6 +42,10 @@ PhoneManager::PhoneManager()
     m_modem = new OfonoModem(OfonoModem::AutomaticSelect, QString(), this);
     connect(m_modem, SIGNAL(onlineChanged(bool)), this, SLOT(modemOnlineChanged(bool)));
 
+    if (m_modem->online()){
+        modemOnlineChanged(true);
+    }
+    
     if (!m_modem->powered()){
         kDebug() << "Modem isn't powered";
         connect(m_modem, SIGNAL(poweredChanged(bool)), this, SLOT(modemPoweredChanged(bool)));
