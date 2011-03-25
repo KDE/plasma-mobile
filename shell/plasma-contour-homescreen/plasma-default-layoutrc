@@ -17,7 +17,7 @@ zvalue=0
 wallpaperplugin=org.kde.mobileimage
 wallpaperpluginmode=SingleImage
 
-[Containments][1][Wallpaper][image]
+[Containments][1][Wallpaper][org.kde.mobileimage]
 wallpaper=Grass
 wallpaperposition=2
 
@@ -35,7 +35,7 @@ zvalue=0
 wallpaperplugin=org.kde.mobileimage
 wallpaperpluginmode=SingleImage
 
-[Containments][2][Wallpaper][image]
+[Containments][2][Wallpaper][org.kde.mobileimage]
 wallpaper=Horos
 wallpaperposition=2
 
@@ -64,7 +64,7 @@ zvalue=0
 wallpaperplugin=org.kde.mobileimage
 wallpaperpluginmode=SingleImage
 
-[Containments][3][Wallpaper][image]
+[Containments][3][Wallpaper][org.kde.mobileimage]
 wallpaper=Blue_Wood
 wallpaperposition=2
 
@@ -106,7 +106,7 @@ zvalue=0
 wallpaperplugin=org.kde.mobileimage
 wallpaperpluginmode=SingleImage
 
-[Containments][4][Wallpaper][image]
+[Containments][4][Wallpaper][org.kde.mobileimage]
 wallpaper=Evening
 wallpaperposition=2
 
