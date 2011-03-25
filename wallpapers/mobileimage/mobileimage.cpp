@@ -37,14 +37,10 @@ K_EXPORT_PLASMA_WALLPAPER(mobileimage, MobileImage)
 
 MobileImage::MobileImage(QObject *parent, const QVariantList &args)
     : Plasma::Wallpaper(parent, args),
-      m_fileWatch(new KDirWatch(this)),
       m_wallpaperPackage(0),
       m_model(0),
       m_openImageAction(0)
 {
-    connect(&m_timer, SIGNAL(timeout()), this, SLOT(nextSlide()));
-    connect(m_fileWatch, SIGNAL(dirty(QString)), this, SLOT(imageFileAltered(QString)));
-    connect(m_fileWatch, SIGNAL(created(QString)), this, SLOT(imageFileAltered(QString)));
 }
 
 MobileImage::~MobileImage()
@@ -58,21 +54,16 @@ void MobileImage::init(const KConfigGroup &config)
     m_resizeMethod = (ResizeMethod)config.readEntry("wallpaperposition", (int)ScaledResize);
     m_wallpaper = config.readEntry("wallpaper", QString());
     if (m_wallpaper.isEmpty()) {
-        useSingleMobileImageDefaults();
+        useSingleImageDefaults();
     }
 
     m_usersWallpapers = config.readEntry("userswallpapers", QStringList());
-    m_dirs = config.readEntry("slidepaths", QStringList());
-
-    if (m_dirs.isEmpty()) {
-        m_dirs << KStandardDirs::installPath("wallpaper");
-    }
 
     setSingleImage();
     setContextualActions(QList<QAction*>());
 }
 
-void MobileImage::useSingleMobileImageDefaults()
+void MobileImage::useSingleImageDefaults()
 {
     m_wallpaper = Plasma::Theme::defaultTheme()->wallpaperPath();
     int index = m_wallpaper.indexOf("/contents/images/");
@@ -105,7 +96,7 @@ void MobileImage::paint(QPainter *painter, const QRectF& exposedRect)
 void MobileImage::setSingleImage()
 {
     if (m_wallpaper.isEmpty()) {
-        useSingleMobileImageDefaults();
+        useSingleImageDefaults();
     }
 
     QString img;
@@ -135,7 +126,7 @@ void MobileImage::setSingleImage()
         // ok, so the package we have failed to work out; let's try the default
         // if we have already
         const QString wallpaper = m_wallpaper;
-        useSingleMobileImageDefaults();
+        useSingleImageDefaults();
         if (wallpaper != m_wallpaper) {
             setSingleImage();
         }
@@ -157,12 +148,12 @@ void MobileImage::addUrl(const KUrl &url, bool setAsCurrent)
     ///kDebug() << "droppage!" << url << url.isLocalFile();
     if (url.isLocalFile()) {
         const QString path = url.toLocalFile();
-        setWallpaperPath(path);
+        setWallpaperName(path);
     } else {
-        QString wallpaperPath = KGlobal::dirs()->locateLocal("wallpaper", url.fileName());
+        QString wallpaperName = KGlobal::dirs()->locateLocal("wallpaper", url.fileName());
 
-        if (!wallpaperPath.isEmpty()) {
-            KIO::FileCopyJob *job = KIO::file_copy(url, KUrl(wallpaperPath));
+        if (!wallpaperName.isEmpty()) {
+            KIO::FileCopyJob *job = KIO::file_copy(url, KUrl(wallpaperName));
             if (setAsCurrent) {
                 connect(job, SIGNAL(result(KJob*)), this, SLOT(setWallpaperRetrieved(KJob*)));
             } else {
@@ -176,7 +167,7 @@ void MobileImage::setWallpaperRetrieved(KJob *job)
 {
     KIO::FileCopyJob *copyJob = qobject_cast<KIO::FileCopyJob *>(job);
     if (copyJob && !copyJob->error()) {
-        setWallpaperPath(copyJob->destUrl().toLocalFile());
+        setWallpaperName(copyJob->destUrl().toLocalFile());
     }
 }
 
@@ -188,7 +179,7 @@ void MobileImage::addWallpaperRetrieved(KJob *job)
     }
 }
 
-void MobileImage::setWallpaperPath(const QString &path)
+void MobileImage::setWallpaperName(const QString &path)
 {
     m_wallpaper = path;
     setSingleImage();
@@ -198,19 +189,11 @@ void MobileImage::setWallpaperPath(const QString &path)
     }
 }
 
-QString MobileImage::wallpaperPath() const
+QString MobileImage::wallpaperName() const
 {
     return m_wallpaper;
 }
 
-
-
-void MobileImage::updateWallpaperActions()
-{
-    if (m_openImageAction) {
-        m_openImageAction->setEnabled(true);
-    }
-}
 
 void MobileImage::getNewWallpaper()
 {
@@ -257,15 +240,6 @@ void MobileImage::positioningChanged(int index)
 
     if (m_model) {
         m_model->setResizeMethod(m_resizeMethod);
-    }
-}
-
-
-void MobileImage::imageFileAltered(const QString &path)
-{
-    if (path != m_img) {
-        // somehow this got added to the dirwatch, but we don't care about it anymore
-        m_fileWatch->removeFile(path);
     }
 }
 

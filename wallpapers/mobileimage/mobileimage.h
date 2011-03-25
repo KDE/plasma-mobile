@@ -36,7 +36,7 @@ class BackgroundListModel;
 class MobileImage : public Plasma::Wallpaper
 {
     Q_OBJECT
-    Q_PROPERTY(QString wallpaperPath READ wallpaperPath WRITE setWallpaperPath)
+    Q_PROPERTY(QString wallpaperName READ wallpaperName WRITE setWallpaperName)
 
     public:
         MobileImage(QObject* parent, const QVariantList& args);
@@ -46,8 +46,8 @@ class MobileImage : public Plasma::Wallpaper
         virtual void paint(QPainter* painter, const QRectF& exposedRect);
 
     public Q_SLOTS:
-        void setWallpaperPath(const QString &path);
-        QString wallpaperPath() const;
+        void setWallpaperName(const QString &path);
+        QString wallpaperName() const;
 
     signals:
         void settingsChanged(bool);
@@ -63,38 +63,26 @@ class MobileImage : public Plasma::Wallpaper
         void setWallpaperRetrieved(KJob *job);
         void addWallpaperRetrieved(KJob *job);
         void newStuffFinished();
-        void imageFileAltered(const QString &path);
 
     protected:
         void init(const KConfigGroup &config);
-        void suspendStartup(bool suspend); // for ksmserver
         void calculateGeometry();
         void setSingleImage();
-        void updateWallpaperActions();
-        void useSingleMobileImageDefaults();
+        void useSingleImageDefaults();
 
     private:
-        static bool s_startupResumed;
-        static bool s_startupSuspended;
 
         Plasma::Wallpaper::ResizeMethod m_resizeMethod;
-        QStringList m_dirs;
         QString m_wallpaper;
         QStringList m_usersWallpapers;
-        KDirWatch *m_fileWatch;
 
         QString m_mode;
         Plasma::Package *m_wallpaperPackage;
-        QTimer m_timer;
-        QPixmap m_pixmap;
-        QPixmap m_oldPixmap;
-        QPixmap m_oldFadedPixmap;
         BackgroundListModel *m_model;
         QSize m_size;
         QString m_img;
         QDateTime m_previousModified;
         QWeakPointer<KNS3::DownloadDialog> m_newStuffDialog;
-        QString m_findToken;
 
         QAction* m_openImageAction;
 };
