@@ -46,6 +46,8 @@ namespace Plasma
     class DeclarativeWidget;
 } // namespace Plasma
 
+//Q_DECLARE_METATYPE(Plasma::Wallpaper*)
+
 class PlasmaApp : public KUniqueApplication
 {
     Q_OBJECT

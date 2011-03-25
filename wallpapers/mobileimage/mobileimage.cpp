@@ -130,7 +130,7 @@ void MobileImage::setSingleImage()
         if (wallpaper != m_wallpaper) {
             setSingleImage();
         }
-    }
+    }kWarning()<<"OOOOOOOOOOOOOOOOOOOOO"<<img<<m_wallpaper;
     m_wallpaperPath = img;
     emit wallpaperPathChanged();
 }
@@ -183,12 +183,16 @@ void MobileImage::addWallpaperRetrieved(KJob *job)
 
 void MobileImage::setWallpaperName(const QString &path)
 {
+    if (m_wallpaper == path) {
+        return;
+    }
     m_wallpaper = path;
     setSingleImage();
 
     if (!m_usersWallpapers.contains(path)) {
         m_usersWallpapers.append(path);
     }
+    emit wallpaperNameChanged();
 }
 
 QString MobileImage::wallpaperName() const

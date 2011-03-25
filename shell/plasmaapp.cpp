@@ -102,6 +102,10 @@ PlasmaApp::PlasmaApp()
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
+    //FIXME: why does not work?
+    //qmlRegisterInterface<Plasma::Wallpaper>("Wallpaper");
+    //qRegisterMetaType<Plasma::Wallpaper*>("Wallpaper");
+
     bool useGL = args->isSet("opengl");
     m_mainView = new MobView(0, MobView::mainViewId(), 0);
     m_mainView->setUseGL(useGL);
@@ -316,8 +320,14 @@ void PlasmaApp::changeContainment(Plasma::Containment *containment)
     containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
 
     m_oldContainment = m_currentContainment;
-if (containment->wallpaper())
-kWarning()<<"AAAAAA"<<containment->wallpaper()->property("path");
+
+    //FIXME: it should be possible to access containment.wallpaper
+    //expose the current wallpaper into the corona QML
+    if (containment->wallpaper()) {
+        QDeclarativeProperty containmentProperty(m_homeScreen, "activeWallpaper");
+        containmentProperty.write(QVariant::fromValue(static_cast<QObject*>(containment->wallpaper())));
+    }
+
     m_currentContainment = containment;
 }
 
