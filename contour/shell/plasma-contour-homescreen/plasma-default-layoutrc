@@ -14,7 +14,7 @@ plugin=org.kde.contourmobilemenu
 Orientation=1
 screen=0
 zvalue=0
-wallpaperplugin=image
+wallpaperplugin=org.kde.mobileimage
 wallpaperpluginmode=SingleImage
 
 [Containments][1][Wallpaper][image]
@@ -32,8 +32,12 @@ plugin=org.kde.appletstrip
 orientation=1
 screen=0
 zvalue=0
-wallpaperplugin=image
+wallpaperplugin=org.kde.mobileimage
 wallpaperpluginmode=SingleImage
+
+[Containments][2][Wallpaper][image]
+wallpaper=Horos
+wallpaperposition=2
 
 [Containments][2][Applets][1]
 geometry=0,0,310,310
@@ -57,7 +61,7 @@ plugin=org.kde.appletstrip
 orientation=1
 screen=0
 zvalue=0
-wallpaperplugin=image
+wallpaperplugin=org.kde.mobileimage
 wallpaperpluginmode=SingleImage
 
 [Containments][3][Wallpaper][image]
@@ -99,7 +103,7 @@ plugin=org.kde.appletstrip
 orientation=1
 screen=0
 zvalue=0
-wallpaperplugin=image
+wallpaperplugin=org.kde.mobileimage
 wallpaperpluginmode=SingleImage
 
 [Containments][4][Wallpaper][image]

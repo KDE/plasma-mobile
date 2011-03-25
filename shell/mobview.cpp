@@ -55,7 +55,6 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     setAttribute(Qt::WA_TranslucentBackground, false);
 
     setTrackContainmentChanges(false);
-    //setWallpaperEnabled(false);
 
     QAction *a = new QAction(this);
     addAction(a);
@@ -66,9 +65,6 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     addAction(a);
     a->setShortcut(QKeySequence("Ctrl+Shift+R"));
     connect(a, SIGNAL(triggered()), this, SLOT(rotateClockwise()));
-//     m_keyboard = new LocalPlasmaKeyboardInterface("org.kde.plasma-keyboardcontainer", "/App",
-//                                       QDBusConnection::sessionBus());
-//     m_keyboard->call("hide");
 }
 
 MobView::~MobView()
