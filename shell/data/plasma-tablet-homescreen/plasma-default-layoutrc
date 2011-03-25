@@ -64,12 +64,6 @@ wallpaperpluginmode=SingleImage
 wallpaper=Blue_Wood
 wallpaperposition=2
 
-[Containments][3][Applets][1]
-geometry=0,0,310,310
-plugin=org.kde.news-qml
-immutability=1
-zvalue=1
-
 [Containments][3][Applets][2]
 geometry=400,0,310,310
 plugin=twitter
@@ -79,12 +73,6 @@ zvalue=1
 [Containments][3][Applets][3]
 geometry=800,0,310,310
 plugin=opendesktop_activities
-immutability=1
-zvalue=1
-
-[Containments][3][Applets][5]
-geometry=1200,0,310,310
-plugin=org.kde.fakemail-qml
 immutability=1
 zvalue=1
 
