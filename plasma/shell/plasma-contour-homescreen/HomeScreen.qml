@@ -83,7 +83,7 @@ Item {
         asynchronous: true
         source: activeWallpaper.wallpaperPath
         width: Math.max(homeScreen.width, sourceSize.width)
-        height: Math.max(homeScreen.width, sourceSize.width)
+        height: Math.max(homeScreen.height, sourceSize.height)
         //Parallax: the background moves for is width
         x: (mainContainments.width-width)*(1-((mainContainments.x+mainContainments.width)/(mainContainments.width*3)))
     }
