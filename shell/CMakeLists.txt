@@ -14,7 +14,10 @@ set(plasma-mobile_SRCS
     mobview.cpp
     plasmaapp.cpp
     mobdialogmanager.cpp
-    
+    mobpluginloader.cpp
+
+    mobileactivitythumbnails/mobileactivitythumbnails.cpp
+
     widgetsexplorer/mobilewidgetsexplorer.cpp
     widgetsexplorer/kcategorizeditemsviewmodels.cpp
     widgetsexplorer/plasmaappletitemmodel.cpp

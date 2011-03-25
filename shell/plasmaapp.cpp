@@ -24,6 +24,7 @@
 
 #include "mobview.h"
 #include "mobcorona.h"
+#include "mobpluginloader.h"
 #include "widgetsexplorer/mobilewidgetsexplorer.h"
 
 #include <unistd.h>
@@ -53,6 +54,7 @@
 #include <Plasma/WindowEffects>
 #include <Plasma/Applet>
 #include <Plasma/Package>
+#include <Plasma/PluginLoader>
 #include <Plasma/Wallpaper>
 
 #include <X11/Xlib.h>
@@ -158,6 +160,7 @@ PlasmaApp::PlasmaApp()
     m_homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
     kDebug() << "***** HSP from config" << m_homeScreenPath;
 
+    Plasma::PluginLoader::setPluginLoader(new MobPluginLoader);
     // this line initializes the corona and setups the main qml homescreen
     corona();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
