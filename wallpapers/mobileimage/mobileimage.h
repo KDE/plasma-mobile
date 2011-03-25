@@ -36,55 +36,61 @@ class BackgroundListModel;
 class MobileImage : public Plasma::Wallpaper
 {
     Q_OBJECT
-    Q_PROPERTY(QString wallpaperName READ wallpaperName WRITE setWallpaperName)
+    Q_PROPERTY(QString wallpaperName READ wallpaperName WRITE setWallpaperName NOTIFY wallpaperNameChanged)
+    Q_PROPERTY(QString wallpaperPath READ wallpaperPath NOTIFY wallpaperPathChanged)
 
-    public:
-        MobileImage(QObject* parent, const QVariantList& args);
-        ~MobileImage();
+public:
+    MobileImage(QObject* parent, const QVariantList& args);
+    ~MobileImage();
 
-        virtual void save(KConfigGroup &config);
-        virtual void paint(QPainter* painter, const QRectF& exposedRect);
+    virtual void save(KConfigGroup &config);
+    virtual void paint(QPainter* painter, const QRectF& exposedRect);
 
-    public Q_SLOTS:
-        void setWallpaperName(const QString &path);
-        QString wallpaperName() const;
+    QString wallpaperName() const;
 
-    signals:
-        void settingsChanged(bool);
+    QString wallpaperPath() const;
 
-    protected slots:
-        void removeWallpaper(QString name);
-        void positioningChanged(int index);
-        void getNewWallpaper();
-        void pictureChanged(const QModelIndex &);
+public Q_SLOTS:
+    void setWallpaperName(const QString &name);
 
-        void addUrl(const KUrl &url, bool setAsCurrent);
-        void addUrls(const KUrl::List &urls);
-        void setWallpaperRetrieved(KJob *job);
-        void addWallpaperRetrieved(KJob *job);
-        void newStuffFinished();
+Q_SIGNALS:
+    void settingsChanged(bool);
+    void wallpaperNameChanged();
+    void wallpaperPathChanged();
 
-    protected:
-        void init(const KConfigGroup &config);
-        void calculateGeometry();
-        void setSingleImage();
-        void useSingleImageDefaults();
+protected Q_SLOTS:
+    void removeWallpaper(QString name);
+    void positioningChanged(int index);
+    void getNewWallpaper();
+    void pictureChanged(const QModelIndex &);
 
-    private:
+    void addUrl(const KUrl &url, bool setAsCurrent);
+    void addUrls(const KUrl::List &urls);
+    void setWallpaperRetrieved(KJob *job);
+    void addWallpaperRetrieved(KJob *job);
+    void newStuffFinished();
 
-        Plasma::Wallpaper::ResizeMethod m_resizeMethod;
-        QString m_wallpaper;
-        QStringList m_usersWallpapers;
+protected:
+    void init(const KConfigGroup &config);
+    void calculateGeometry();
+    void setSingleImage();
+    void useSingleImageDefaults();
 
-        QString m_mode;
-        Plasma::Package *m_wallpaperPackage;
-        BackgroundListModel *m_model;
-        QSize m_size;
-        QString m_img;
-        QDateTime m_previousModified;
-        QWeakPointer<KNS3::DownloadDialog> m_newStuffDialog;
+private:
 
-        QAction* m_openImageAction;
+    Plasma::Wallpaper::ResizeMethod m_resizeMethod;
+    QString m_wallpaper;
+    QStringList m_usersWallpapers;
+
+    QString m_mode;
+    Plasma::Package *m_wallpaperPackage;
+    BackgroundListModel *m_model;
+    QSize m_size;
+    QString m_wallpaperPath;
+    QDateTime m_previousModified;
+    QWeakPointer<KNS3::DownloadDialog> m_newStuffDialog;
+
+    QAction* m_openImageAction;
 };
 
 #endif

@@ -131,6 +131,8 @@ void MobileImage::setSingleImage()
             setSingleImage();
         }
     }
+    m_wallpaperPath = img;
+    emit wallpaperPathChanged();
 }
 
 void MobileImage::addUrls(const KUrl::List &urls)
@@ -192,6 +194,12 @@ void MobileImage::setWallpaperName(const QString &path)
 QString MobileImage::wallpaperName() const
 {
     return m_wallpaper;
+}
+
+
+QString MobileImage::wallpaperPath() const
+{
+    return m_wallpaperPath;
 }
 
 
