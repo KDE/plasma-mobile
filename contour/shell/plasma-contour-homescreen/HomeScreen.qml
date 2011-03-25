@@ -43,6 +43,8 @@ Item {
 
     property QGraphicsWidget activeContainment
     onActiveContainmentChanged: {
+        activeContainment.visible=true
+        spareSlot.containment = activeContainment
         activeContainment.parent = spareSlot
         activeContainment.visible = true
         activeContainment.x = 0
@@ -56,6 +58,11 @@ Item {
 
     function finishTransition()
     {
+        //spareSlot.containment = undefined
+        if (mainSlot.containment) {
+            mainSlot.containment.visible = false
+        }
+        mainSlot.containment = activeContainment
         activeContainment.parent = mainSlot
         activeContainment.x = 0
         activeContainment.y = 0
@@ -116,21 +123,22 @@ Item {
 
         Item {
             id: mainSlot;
-            objectName: "mainSlot";
+            objectName: "mainSlot"
             x: 0;
             y: 0;
-            width: homeScreen.width;
-            height: homeScreen.height;
-            transformOrigin : Item.Center;
+            width: homeScreen.width
+            height: homeScreen.height
+            property QGraphicsWidget containment
         }
 
         Item {
-            id : spareSlot;
-            objectName: "spareSlot";
+            id : spareSlot
+            objectName: "spareSlot"
             x: 0
             y: -homeScreen.height
-            width: homeScreen.width;
-            height: homeScreen.height;
+            width: homeScreen.width
+            height: homeScreen.height
+            property QGraphicsWidget containment
         }
 
         Item {
