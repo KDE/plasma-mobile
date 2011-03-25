@@ -26,6 +26,7 @@
 
 #include <ofono-qt/ofonovoicecall.h>
 #include <kdebug.h>
+#include <klocalizedstring.h>
 
 CallDialog::CallDialog(OfonoVoiceCall *voiceCall)
 {
@@ -38,6 +39,14 @@ CallDialog::CallDialog(OfonoVoiceCall *voiceCall)
     kdeclarative.setupBindings();
     
     rootContext()->setContextProperty("callState", m_voiceCall->state());
+#ifdef FAKE_CONTACT
+    rootContext()->setContextProperty("caller", "Foo Bar");
+    rootContext()->setContextProperty("callerDettails",  i18nc("is calling you from %1 (%2)", "is calling you from home (001235)").arg("home", m_voiceCall->lineIdentification()));
+#else
+    rootContext()->setContextProperty("caller", m_voiceCall->lineIdentification());
+#endif
+    rootContext()->setContextProperty("phoneNumberType", "home");
+    rootContext()->setContextProperty("phoneNumber", m_voiceCall->lineIdentification());
     setSource(QUrl::fromLocalFile("CallDialog.qml"));
     connect(rootObject(), SIGNAL(hangup()), this, SLOT(hangup()));
     connect(rootObject(), SIGNAL(answer()), this, SLOT(answer()));
@@ -50,7 +59,7 @@ CallDialog::~CallDialog()
 void CallDialog::hangup()
 {
     m_voiceCall->hangup();
-    close();
+    hide();
 }
 
 void CallDialog::answer()

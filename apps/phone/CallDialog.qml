@@ -26,22 +26,62 @@ MainWindow {
         signal hangup()
         signal answer()
         
+        states: [
+            State {
+                name: "incomingCall"
+                when: callState == "incoming"
+                PropertyChanges {
+                    target: hangupButton
+                    text: i18n("Decline")
+                }
+            }
+            State {
+                name: "activeCall"
+                when: callState == "active"
+            }
+        ]
+        
+        Row {
+            x: 50
+            y: 160
+            spacing: 20
+            PlasmaWidgets.IconWidget {
+                icon: new QIcon("user")
+            }
+            
+            Column {
+                Label {
+                    text: caller
+                }
+                
+                Label {
+                    visible: (caller != "") && (callState == "incoming")
+                    text: callerDettails;
+                }
+            }
+        }
+        
+        Row {
+            id: blahRow
+            x: 10
+            y: 400
+            spacing: 10
+
             Button {
-                x: 100
-                y: 100
-                text: "Hangup"
+                id: hangupButton
+                text: i18n("End Call")
                 onClicked: {
                     hangup();
                 }
             }
             
             Button {
-                x: 100
-                y: 300
-                text: "Answer"
+                id: answerButton
+                text: i18n("Answer")
                 visible: callState == "incoming"
                 onClicked: {
                     answer();
                 }
-            }            
+            }
+        }
 }
