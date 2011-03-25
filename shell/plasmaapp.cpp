@@ -316,6 +316,8 @@ void PlasmaApp::changeContainment(Plasma::Containment *containment)
     containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
 
     m_oldContainment = m_currentContainment;
+if (containment->wallpaper())
+kWarning()<<"AAAAAA"<<containment->wallpaper()->property("path");
     m_currentContainment = containment;
 }
 

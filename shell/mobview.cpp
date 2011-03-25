@@ -55,6 +55,7 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     setAttribute(Qt::WA_TranslucentBackground, false);
 
     setTrackContainmentChanges(false);
+    setWallpaperEnabled(false);
 
     QAction *a = new QAction(this);
     addAction(a);
