@@ -36,6 +36,11 @@ Item {
     signal transformingChanged(bool transforming)
     property bool locked: true
 
+    property QtObject activeWallpaper
+    onActiveWallpaperChanged: {
+        print("Current wallpaper path"+activeWallpaper.wallpaperPath);
+    }
+
     property QGraphicsWidget activeContainment
     onActiveContainmentChanged: {
         activeContainment.parent = spareSlot
@@ -74,7 +79,11 @@ Item {
     }
 
     Image {
-        source: "/opt/kde4/share/wallpapers/Grass/contents/images/1280x1024.jpg"
+        //TODO: take scale mode from Wallpaper config
+        asynchronous: true
+        source: activeWallpaper.wallpaperPath
+        width: Math.max(homeScreen.width, sourceSize.width)
+        height: Math.max(homeScreen.width, sourceSize.width)
         //Parallax: the background moves for is width
         x: (mainContainments.width-width)*(1-((mainContainments.x+mainContainments.width)/(mainContainments.width*3)))
     }
