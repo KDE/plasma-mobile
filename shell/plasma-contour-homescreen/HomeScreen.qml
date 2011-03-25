@@ -73,6 +73,12 @@ Item {
         id: theme
     }
 
+    Image {
+        source: "/opt/kde4/share/wallpapers/Grass/contents/images/1280x1024.jpg"
+        //Parallax: the background moves for is width
+        x: (mainContainments.width-width)*(1-((mainContainments.x+mainContainments.width)/(mainContainments.width*3)))
+    }
+
     //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
     Item {
         id: availableScreenRect
