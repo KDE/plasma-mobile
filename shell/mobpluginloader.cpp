@@ -23,7 +23,8 @@
 #include <Plasma/DataEngine>
 
 MobPluginLoader::MobPluginLoader()
-    : Plasma::PluginLoader()
+    : Plasma::PluginLoader(),
+      m_activityThumbnails(0)
 {
 }
 
@@ -31,12 +32,18 @@ MobPluginLoader::~MobPluginLoader()
 {
 }
 
-
+MobileActivityThumbnails *MobPluginLoader::activityThumbnails() const
+{
+    return m_activityThumbnails;
+}
 
 Plasma::DataEngine* MobPluginLoader::internalLoadDataEngine(const QString &name)
 {
     if (name == "org.kde.mobileactivitythumbnails") {
-        return new MobileActivityThumbnails(0, QVariantList());
+        if (!m_activityThumbnails) {
+            m_activityThumbnails = new MobileActivityThumbnails(0, QVariantList());
+        }
+        return m_activityThumbnails;
     } else {
         return 0;
     }

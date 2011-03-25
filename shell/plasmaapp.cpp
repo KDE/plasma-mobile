@@ -160,7 +160,8 @@ PlasmaApp::PlasmaApp()
     m_homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
     kDebug() << "***** HSP from config" << m_homeScreenPath;
 
-    Plasma::PluginLoader::setPluginLoader(new MobPluginLoader);
+    m_pluginLoader = new MobPluginLoader;
+    Plasma::PluginLoader::setPluginLoader(m_pluginLoader);
     // this line initializes the corona and setups the main qml homescreen
     corona();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
@@ -293,7 +294,7 @@ void PlasmaApp::containmentsTransformingChanged(bool transforming)
         m_oldContainment.data()->graphicsEffect()->setEnabled(transforming);
         //take a snapshot of the old one
         //TODO: make this async?
-        if (transforming) {
+        if (transforming && m_pluginLoader->activityThumbnails()) {
             QGraphicsEffect *effect = m_oldContainment.data()->graphicsEffect();
             CachingEffect *cache = dynamic_cast<CachingEffect *>(effect);
 

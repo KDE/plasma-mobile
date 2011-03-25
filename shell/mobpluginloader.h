@@ -23,6 +23,8 @@
 #include <Plasma/PluginLoader>
 #include <kplugininfo.h>
 
+class MobileActivityThumbnails;
+
 namespace Plasma {
     class DataEngine;
 }
@@ -31,14 +33,15 @@ class MobPluginLoader: public Plasma::PluginLoader
 {
 public: 
     MobPluginLoader();
+    ~MobPluginLoader();
 
-    virtual ~MobPluginLoader();
+    MobileActivityThumbnails *activityThumbnails() const;
 
 protected:
     Plasma::DataEngine *internalLoadDataEngine(const QString &name);
 
 private:
-    
+    MobileActivityThumbnails *m_activityThumbnails;
 };
 
 #endif
