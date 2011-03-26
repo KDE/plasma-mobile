@@ -22,7 +22,12 @@
 
 #include <Plasma/DataEngine>
 
+class QTimer;
 class KActivityConsumer;
+
+namespace Plasma {
+    class Containment;
+}
 
 class MobileActivityThumbnails : public Plasma::DataEngine
 {
@@ -30,13 +35,19 @@ class MobileActivityThumbnails : public Plasma::DataEngine
 
 public:
     MobileActivityThumbnails(QObject *parent, const QVariantList &args);
+    void snapshotContainment(Plasma::Containment *cont);
 
 protected:
     bool sourceRequestEvent(const QString &source);
     bool updateSourceEvent(const QString &source);
 
+protected Q_SLOTS:
+    void delayedSnapshotContainment();
+
 private:
     KActivityConsumer *m_consumer;
+    QTimer *m_saveTimer;
+    QWeakPointer<Plasma::Containment>m_containmentToSave;
 };
 
 #endif

@@ -18,16 +18,26 @@
  */
 
 #include "mobileactivitythumbnails.h"
+#include "../cachingeffect.h"
 #include "../kactivityconsumer.h"
 
 #include <QFile>
+#include <QPainter>
+#include <QTimer>
 
 #include <KStandardDirs>
+
+#include <Plasma/Containment>
+#include <Plasma/Context>
+#include <Plasma/Wallpaper>
 
 MobileActivityThumbnails::MobileActivityThumbnails(QObject *parent, const QVariantList &args)
     : Plasma::DataEngine(parent, args)
 {
     m_consumer = new KActivityConsumer(this);
+    m_saveTimer = new QTimer(this);
+    m_saveTimer->setSingleShot(true);
+    connect(m_saveTimer, SIGNAL(timeout()), this, SLOT(delayedSnapshotContainment()));
 }
 
 bool MobileActivityThumbnails::sourceRequestEvent(const QString &source)
@@ -58,6 +68,39 @@ bool MobileActivityThumbnails::updateSourceEvent(const QString &source)
     }
 
     return true;
+}
+
+void MobileActivityThumbnails::snapshotContainment(Plasma::Containment *cont)
+{
+    m_containmentToSave = cont;
+    m_containmentToSave.data()->graphicsEffect()->update();
+    m_saveTimer->start(1000);
+}
+
+void MobileActivityThumbnails::delayedSnapshotContainment()
+{
+    QGraphicsEffect *effect = m_containmentToSave.data()->graphicsEffect();
+    //FIXME: is this REALLY sure?
+    CachingEffect *cache = static_cast<CachingEffect *>(effect);
+
+    QImage activityImage = QImage(m_containmentToSave.data()->size().toSize(), QImage::Format_ARGB32);
+
+    QString wallpaperPath = m_containmentToSave.data()->wallpaper()->property("wallpaperPath").toString();
+    QPainter p(&activityImage);
+    //The wallpaper has paths or paints by itself?
+    if (wallpaperPath.isEmpty()) {
+        m_containmentToSave.data()->wallpaper()->paint(&p, m_containmentToSave.data()->wallpaper()->boundingRect());
+    } else {
+        //TODO: load a smaller image for this if available
+        p.drawImage(QPoint(0,0), QImage(wallpaperPath));
+    }
+    p.setCompositionMode(QPainter::CompositionMode_SourceOver);
+    p.drawPixmap(QPoint(0,0), cache->cachedPixmap());
+    p.end();
+
+    QString path = KStandardDirs::locateLocal("data", QString("plasma/activities-screenshots/%1.png").arg(m_containmentToSave.data()->context()->currentActivityId()));
+
+    activityImage.save(path, "PNG");
 }
 
 K_EXPORT_PLASMA_DATAENGINE(org.kde.mobileactivitythumbnails, MobileActivityThumbnails)

@@ -9,6 +9,7 @@ add_subdirectory(mobiletoolbox)
 
 set(plasma-mobile_SRCS
     activity.cpp
+    cachingeffect.cpp
     main.cpp
     mobcorona.cpp
     mobview.cpp

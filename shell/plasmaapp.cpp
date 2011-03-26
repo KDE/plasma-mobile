@@ -22,9 +22,11 @@
 
 #include "plasmaapp.h"
 
+#include "cachingeffect.h"
 #include "mobview.h"
 #include "mobcorona.h"
 #include "mobpluginloader.h"
+#include "mobileactivitythumbnails/mobileactivitythumbnails.h"
 #include "widgetsexplorer/mobilewidgetsexplorer.h"
 
 #include <unistd.h>
@@ -60,29 +62,6 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
 
-class CachingEffect : public QGraphicsEffect
-{
-  public :
-    CachingEffect(QObject *parent = 0) : QGraphicsEffect(parent)
-    {}
-
-    void draw(QPainter *p)
-    {
-        QPoint point;
-        QPixmap pixmap = sourcePixmap(Qt::LogicalCoordinates, &point);
-        //maybe we are in a view with save and restore disabled..
-        p->setCompositionMode(QPainter::CompositionMode_Source);
-
-        p->drawPixmap(point, pixmap);
-        p->setCompositionMode(QPainter::CompositionMode_SourceOver);
-    }
-
-    QPixmap cachedPixmap() const
-    {
-        QPoint point;
-        return sourcePixmap(Qt::LogicalCoordinates, &point);
-    }
-};
 
 PlasmaApp* PlasmaApp::self()
 {
@@ -290,25 +269,14 @@ void PlasmaApp::containmentsTransformingChanged(bool transforming)
     if (m_currentContainment && m_currentContainment->graphicsEffect()) {
         m_currentContainment->graphicsEffect()->setEnabled(transforming);
     }
+
     if (m_oldContainment && m_oldContainment.data()->graphicsEffect()) {
         m_oldContainment.data()->graphicsEffect()->setEnabled(transforming);
         //take a snapshot of the old one
-        //TODO: make this async?
         if (transforming && m_pluginLoader->activityThumbnails()) {
-            QGraphicsEffect *effect = m_oldContainment.data()->graphicsEffect();
-            CachingEffect *cache = dynamic_cast<CachingEffect *>(effect);
-
-            QImage activityImage(m_oldContainment.data()->size().toSize(), QImage::Format_ARGB32);
-            QPainter p(&activityImage);
-            m_oldContainment.data()->wallpaper()->paint(&p, m_oldContainment.data()->wallpaper()->boundingRect());
-            p.setCompositionMode(QPainter::CompositionMode_SourceOver);
-            p.drawPixmap(QPoint(0,0), cache->cachedPixmap());
-            p.end();
-
-            QString path = KStandardDirs::locateLocal("data", QString("plasma/activities-screenshots/%1.png").arg(m_oldContainment.data()->context()->currentActivityId()));
-
-            activityImage.save(path, "PNG");
+            m_pluginLoader->activityThumbnails()->snapshotContainment(m_oldContainment.data());
         }
+
     }
     foreach (Plasma::Containment *cont, m_alternateContainments) {
         if (cont->graphicsEffect()) {
