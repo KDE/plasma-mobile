@@ -23,18 +23,11 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import "widgets"
 
 MainWindow {
-    property bool displaySpecialKeys: false
+    property bool displaySpecialKeys: true
     property string typedNumber: ""
     signal okClicked()
     
     Column {
-        PlasmaWidgets.LineEdit {
-            id: line
-            height: 40
-            font.pointSize: 24;
-            text: typedNumber
-        }
-        
         Row {
             PhoneButton {
                 text: "1"

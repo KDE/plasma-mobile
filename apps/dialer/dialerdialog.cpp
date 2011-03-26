@@ -34,7 +34,7 @@ DialerDialog::DialerDialog()
     kdeclarative.initialize();
     kdeclarative.setupBindings();
 
-    setSource(QUrl::fromLocalFile("PhonePad.qml"));
+    setSource(QUrl::fromLocalFile("Dialer.qml"));
     connect(rootObject(), SIGNAL(okClicked()), this, SLOT(call()));
 }
 
