@@ -26,6 +26,16 @@ MainWindow {
         signal hangup()
         signal answer()
         
+        property int callRunningSeconds: 0
+        
+        Timer {
+            id: callTimer;
+            interval: 1000
+            running: callState == "active"
+            repeat: true
+            onTriggered: callRunningSeconds += 1
+        }
+        
         states: [
             State {
                 name: "incomingCall"
@@ -59,6 +69,11 @@ MainWindow {
                 Label {
                     visible: (caller != "") && (callState == "incoming")
                     text: callerDettails;
+                }
+                
+                Label {
+                    text: Math.floor((callRunningSeconds / 60)) + ":" + (callRunningSeconds % 60)
+                    visible: callState == "active"
                 }
             }
         }
