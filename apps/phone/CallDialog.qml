@@ -34,7 +34,7 @@ MainWindow {
                     target: hangupButton
                     text: i18n("Decline")
                 }
-            }
+            },
             State {
                 name: "activeCall"
                 when: callState == "active"
