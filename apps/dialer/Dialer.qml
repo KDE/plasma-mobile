@@ -73,6 +73,8 @@ MainWindow {
 
         PhonePad {
             id: pad
+            width: 354
+            height: 380
         }
     }
 }

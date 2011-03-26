@@ -23,6 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import "widgets"
 
 MainWindow {
+    id: phonePad
     property bool displaySpecialKeys: true
     property string typedNumber: ""
     signal okClicked()

@@ -1,6 +1,6 @@
 Button {
-    width: 118
-    height: 95
+    width: phonePad.width / 3
+    height: phonePad.height / 4
     property bool defaultAction: true
     onClicked: {
         if (defaultAction){
