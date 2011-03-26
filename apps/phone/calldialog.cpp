@@ -44,6 +44,7 @@ CallDialog::CallDialog(OfonoVoiceCall *voiceCall)
     rootContext()->setContextProperty("callerDettails",  i18nc("is calling you from %1 (%2)", "is calling you from home (001235)").arg("home", m_voiceCall->lineIdentification()));
 #else
     rootContext()->setContextProperty("caller", m_voiceCall->lineIdentification());
+    rootContext()->setContextProperty("callerDettails", "");
 #endif
     rootContext()->setContextProperty("phoneNumberType", "home");
     rootContext()->setContextProperty("phoneNumber", m_voiceCall->lineIdentification());
