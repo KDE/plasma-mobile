@@ -46,7 +46,9 @@ MainWindow {
             y: 160
             spacing: 20
             PlasmaWidgets.IconWidget {
-                icon: new QIcon("user")
+                height: 128
+                width: 128
+                icon: new QIcon("im-user")
             }
             
             Column {
