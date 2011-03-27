@@ -12,16 +12,18 @@ MainWindow {
         height: 64
         x: 0
         y: 0
-        color: "#303030"
+        color: "#B0000000"
         
         Label {
             text: "Telephone"
-            x: 290
+            color: "#B0FFFFFF"
+            x: (parent.width - width) / 2
+            y: (parent.height - height) / 2
         }
     }
     
     Row {
-        y: 65
+        y: 90
         spacing: 10
         Column {
             spacing: 90
@@ -50,7 +52,7 @@ MainWindow {
                         PlasmaWidgets.LineEdit {
                             text: pad.number
                             width: 350
-                            height: 280
+                            height: 285
                             font.pointSize: 24;
                         }
                         
