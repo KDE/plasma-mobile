@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Favorites
 Comment[et]=Lemmikud
+Comment[nds]=Leestekens
 Comment[nl]=Favorieten
 Comment[pt]=Favoritos
 Comment[pt_BR]=Favoritos
@@ -17,6 +18,7 @@ Keywords[uk]=Служби мережі, інтернет
 Keywords[x-test]=xxOnline Services, Webxx
 Name=Your Bookmarks
 Name[et]=Minu järjehoidjad
+Name[nds]=Dien Leestekens
 Name[pt]=Os Seus Favoritos
 Name[pt_BR]=Seus favoritos
 Name[sv]=Bokmärken
