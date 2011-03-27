@@ -25,7 +25,7 @@ import "widgets"
 MainWindow {
     id: phonePad
     property bool displaySpecialKeys: true
-    property string typedNumber: ""
+    property string number: ""
     signal okClicked()
     
     Column {
@@ -99,7 +99,7 @@ MainWindow {
                 defaultAction: false
                 visible: !displaySpecialKeys
                 onClicked: {
-                    typedNumber = typedNumber.slice(0, -1)
+                    number = number.slice(0, -1)
                 }
             }
         }

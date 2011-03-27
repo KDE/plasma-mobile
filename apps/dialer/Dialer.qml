@@ -44,37 +44,42 @@ MainWindow {
             }
         }
         
-        Column {
-            PlasmaWidgets.LineEdit {
-                text: pad.typedNumber
-                width: 350
-                height: 280
-                font.pointSize: 24;
-            }
-            
-            Row {
-                Button {
-                   width: 250
-                   height: 95
-                   text: i18n("Call")
-                   onClicked: okClicked()
-                }
-                
-                Button {
-                   text: "<"                    
-                   width: 100
-                   height: 95
-                   onClicked: {
-                        pad.typedNumber = pad.typedNumber.slice(0, -1)
+            QGraphicsWidget {
+                Row {
+                    Column {
+                        PlasmaWidgets.LineEdit {
+                            text: pad.number
+                            width: 350
+                            height: 280
+                            font.pointSize: 24;
+                        }
+                        
+                        Row {
+                            Button {
+                            width: 250
+                            height: 95
+                            text: i18n("Call")
+                            onClicked: okClicked()
+                            }
+                            
+                            Button {
+                            text: "<"                    
+                            width: 100
+                            height: 95
+                            onClicked: {
+                                    pad.number = pad.number.slice(0, -1)
+                                }
+                            }
+                        }
+                    }
+                    
+                    PhonePad {
+                        id: pad
+                        width: 354
+                        height: 380
                     }
                 }
             }
-        }
 
-        PhonePad {
-            id: pad
-            width: 354
-            height: 380
-        }
     }
 }
