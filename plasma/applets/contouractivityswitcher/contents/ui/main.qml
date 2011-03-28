@@ -92,9 +92,17 @@ Item {
 
              onReleased: {
                  if (mouse.x > downX && mouse.y > downY) {
-                    ++mainView.currentIndex
+                     if (mainView.currentIndex < mainView.count) {
+                         ++mainView.currentIndex
+                     } else {
+                         mainView.currentIndex = 0
+                     }
                  } else if (mouse.x < downX && mouse.y < downY) {
-                    --mainView.currentIndex
+                     if (mainView.currentIndex > 0) {
+                         --mainView.currentIndex
+                     } else {
+                         mainView.currentIndex = mainView.count-1
+                     }
                  }
             }
          }
