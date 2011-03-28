@@ -24,6 +24,7 @@ Item {
     id: main
 
     Component.onCompleted: {
+        plasmoid.drawWallpaper = false
         plasmoid.containmentType = "CustomContainment"
     }
 
