@@ -23,7 +23,7 @@
 #define RECOMMENDATIONMANAGER_H
 
 #include <QObject>
-
+#include <QtCore/QList>
 
 namespace Contour {
 
@@ -51,6 +51,8 @@ private:
 
     Q_PRIVATE_SLOT(d, void _k_locationChanged(QList<QLandmark>))
     Q_PRIVATE_SLOT(d, void _k_currentActivityChanged(QString))
+    Q_PRIVATE_SLOT(d, void _k_newResults(QList<Nepomuk::Query::Result>))
+    Q_PRIVATE_SLOT(d, void _k_queryFinished())
 };
 
 }

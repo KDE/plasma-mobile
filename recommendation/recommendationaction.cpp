@@ -50,4 +50,14 @@ qreal Contour::RecommendationAction::relevance() const
     return d->m_relevance;
 }
 
+void Contour::RecommendationAction::setId(const QString &id)
+{
+    d->m_id = id;
+}
+
+void Contour::RecommendationAction::setRelevance(qreal relevance)
+{
+    d->m_relevance = relevance;
+}
+
 #include "recommendationaction.moc"

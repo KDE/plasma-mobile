@@ -30,13 +30,16 @@ class Contour::Recommendation::Private
 public:
     Nepomuk::Resource m_resource;
     qreal m_relevance;
+    QList<RecommendationAction*> m_actions;
 };
 
 
-Contour::Recommendation::Recommendation()
+Contour::Recommendation::Recommendation(const Nepomuk::Resource& res, qreal relevance)
     : QObject(),
       d(new Private())
 {
+    d->m_resource = res;
+    d->m_relevance = relevance;
 }
 
 Contour::Recommendation::~Recommendation()
@@ -51,12 +54,17 @@ Nepomuk::Resource Contour::Recommendation::resource() const
 
 QList<Contour::RecommendationAction *> Contour::Recommendation::actions() const
 {
-    return QList<Contour::RecommendationAction *>();
+    return d->m_actions;
 }
 
 qreal Contour::Recommendation::relevance() const
 {
     return d->m_relevance;
+}
+
+void Contour::Recommendation::addAction(Contour::RecommendationAction *action)
+{
+    d->m_actions << action;
 }
 
 #include "recommendation.moc"

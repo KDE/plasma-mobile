@@ -37,6 +37,9 @@ public:
     QString id() const;
     qreal relevance() const;
 
+    void setId(const QString& id);
+    void setRelevance(qreal relevance);
+
 private:
     class Private;
     Private* const d;

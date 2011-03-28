@@ -36,12 +36,14 @@ class Recommendation : public QObject
     Q_OBJECT
 
 public:
-    Recommendation();
+    Recommendation(const Nepomuk::Resource& res, qreal relevance = 1.0);
     ~Recommendation();
 
     Nepomuk::Resource resource() const;
     QList<RecommendationAction*> actions() const;
     qreal relevance() const;
+
+    void addAction(RecommendationAction* action);
 
 private:
     class Private;
