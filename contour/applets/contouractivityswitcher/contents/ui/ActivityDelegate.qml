@@ -34,9 +34,9 @@ Item {
     }
 
     transform: Rotation {
-        origin.x: 0
+        origin.x: delegate.width
         origin.y: delegate.height
-        angle: -PathView.itemRotation
+        angle: PathView.itemRotation
     }
 
     width: mainView.delegateWidth
@@ -44,7 +44,7 @@ Item {
 
     Rectangle {
         anchors.fill:parent
-        anchors.leftMargin: 100
+        anchors.rightMargin: 100
 
         Image {
             anchors.fill: parent
@@ -64,19 +64,21 @@ Item {
     Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 24
+        anchors.right: parent.right
         width: 240
         height: 32
         Image {
             id: holeImage
             y: 4
             source: plasmoid.file("images", "sliderhole.png")
-            anchors.right: parent.right
+            anchors.left: parent.left
             Text {
                 anchors.centerIn: parent
                 text: "Slide to activate"
             }
         }
         Image {
+            x: parent.width - width
             source: plasmoid.file("images", "slider.png")
             Text {
                 anchors.centerIn: parent
@@ -93,8 +95,8 @@ Item {
                 anchors.fill: parent
                 drag.target: parent
                 drag.axis: Drag.XAxis
-                drag.minimumX: 0
-                drag.maximumX: holeImage.x - 4
+                drag.minimumX: holeImage.x - 4
+                drag.maximumX: parent.parent.width - width
                 onReleased: {
                     parent.x = 0
 
