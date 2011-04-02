@@ -164,6 +164,14 @@ Item {
         id: switcher
     }
 
+    RecommendationsPanel {
+        id: rightEdgePanel
+        objectName: "leftEdgePanel"
+
+        anchors.verticalCenter: parent.verticalCenter
+        x: - width
+    }
+
     states: [
             State {
                 name: "Normal"
