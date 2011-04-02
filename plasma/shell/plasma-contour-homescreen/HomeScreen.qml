@@ -51,7 +51,7 @@ Item {
         activeContainment.y = 0
         activeContainment.size = width + "x" + height
         //view the main containment
-        areasBarDragger.x = areasBarDragger.width
+        switcher.current=1
         state = "Slide"
         transformingChanged(true);
     }
@@ -160,68 +160,9 @@ Item {
             height: homeScreen.height
         }
     }
-    PlasmaCore.FrameSvgItem {
-        imagePath: "widgets/background"
-        enabledBorders: "TopBorder"
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        height: 32 + margins.top
 
-        Rectangle {
-            id: areasBarDragger
-            color: Qt.rgba(1,1,1,0.5)
-            x: width
-            y: areasBar.y
-            width: parent.width/3
-            height: areasBar.height
-
-            onXChanged: {
-                mainContainments.x = mainContainments.width - mainContainments.width*2*(x/draggerMouseArea.drag.maximumX)
-            }
-        }
-
-        Row {
-            id: areasBar
-            anchors.fill: parent
-            anchors.topMargin: parent.margins.top
-            Text {
-                text: "Applications"
-                color: theme.textColor
-                horizontalAlignment: Text.AlignHCenter
-                anchors.verticalCenter: parent.verticalCenter
-                width: parent.width/3
-            }
-            Text {
-                text: "Work"
-                color: theme.textColor
-                horizontalAlignment: Text.AlignHCenter
-                anchors.verticalCenter: parent.verticalCenter
-                width: parent.width/3
-            }
-            Text {
-                text: "Activities"
-                color: theme.textColor
-                horizontalAlignment: Text.AlignHCenter
-                anchors.verticalCenter: parent.verticalCenter
-                width: parent.width/3
-            }
-
-            MouseArea {
-                id: draggerMouseArea
-                anchors.fill: areasBar
-                drag.target: areasBarDragger
-                drag.axis: Drag.XAxis
-                drag.minimumX: 0
-                drag.maximumX: areasBar.width - areasBarDragger.width
-                onReleased: {
-                    areasBarDragger.x = areasBarDragger.width * Math.round(areasBarDragger.x/areasBarDragger.width)
-                }
-                onClicked: {
-                    areasBarDragger.x = areasBarDragger.width * Math.floor(mouse.x/areasBarDragger.width)
-                }
-            }
-        }
+    Switcher {
+        id: switcher
     }
 
     states: [
