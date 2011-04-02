@@ -70,11 +70,11 @@ Item {
                     dataSource: activitySource
                 }
          pathItemCount: 6
-         property int delegateWidth: mainView.width/2
-         property int delegateHeight: mainView.height/2
+         property int delegateWidth: mainView.width/1.5
+         property int delegateHeight: mainView.height/1.5
 
-         preferredHighlightBegin: 0.25
-         preferredHighlightEnd: 0.25
+         preferredHighlightBegin: 0.2
+         preferredHighlightEnd: 0.2
 
 
          delegate: ActivityDelegate{}
@@ -91,13 +91,13 @@ Item {
              }
 
              onReleased: {
-                 if (mouse.x > downX && mouse.y > downY) {
+                 if (mouse.x < downX && mouse.y > downY) {
                      if (mainView.currentIndex < mainView.count) {
                          ++mainView.currentIndex
                      } else {
                          mainView.currentIndex = 0
                      }
-                 } else if (mouse.x < downX && mouse.y < downY) {
+                 } else if (mouse.x > downX && mouse.y < downY) {
                      if (mainView.currentIndex > 0) {
                          --mainView.currentIndex
                      } else {
@@ -108,15 +108,15 @@ Item {
          }
 
          path: Path {
-             startX: mainView.width/3+16
-             startY: mainView.height-mainView.delegateHeight/1.5+16
+             startX: mainView.width/2.3
+             startY: mainView.height-mainView.delegateHeight/1.5+32
              PathAttribute { name: "itemScale"; value: 1.0 }
              PathAttribute { name: "itemOpacity"; value: 0 }
              PathAttribute { name: "itemRotation"; value: 0 }
              PathAttribute { name: "z"; value: 99 }
              PathLine {
-                 x: mainView.width/3
-                 y: mainView.height-mainView.delegateHeight/1.5
+                 x: mainView.width/2
+                 y: mainView.height-mainView.delegateHeight/1.5-16
             }
             PathAttribute { name: "itemScale"; value: 1 }
             PathAttribute { name: "itemOpacity"; value: 1 }
@@ -124,8 +124,8 @@ Item {
             PathAttribute { name: "z"; value: 100 }
 
             PathLine {
-                 x: mainView.width/3-48
-                 y: mainView.height-mainView.delegateHeight/1.5-48
+                 x: mainView.width/1.8
+                 y: mainView.height-mainView.delegateHeight/1.5
             }
             PathAttribute { name: "itemScale"; value: 0.3 }
             PathAttribute { name: "itemOpacity"; value: 0 }
