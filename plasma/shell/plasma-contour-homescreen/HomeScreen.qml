@@ -51,7 +51,6 @@ Item {
         activeContainment.y = 0
         activeContainment.size = width + "x" + height
         //view the main containment
-        switcher.current=1
         state = "Slide"
         transformingChanged(true);
     }
@@ -68,6 +67,7 @@ Item {
         activeContainment.y = 0
         state = "Normal"
         transformingChanged(false);
+        switcher.current=0
     }
 
     onLockedChanged: {
@@ -111,15 +111,20 @@ Item {
     }
 
     Item {
+        id: alternateSlot;
+        objectName: "alternateSlot";
+        x: -width
+        y: 0
+        width: homeScreen.width;
+        height: homeScreen.height;
+    }
+
+    Item {
         id: mainContainments
         width: homeScreen.width
         height: homeScreen.height
         x: 0
         y: 0
-
-        Behavior on x {
-            NumberAnimation { duration: 250 }
-        }
 
         Item {
             id: mainSlot;
@@ -134,21 +139,15 @@ Item {
         Item {
             id : spareSlot
             objectName: "spareSlot"
-            x: 0
-            y: -homeScreen.height
+            x: homeScreen.width
+            y: 0
+            z: 9999
             width: homeScreen.width
             height: homeScreen.height
             property QGraphicsWidget containment
         }
 
-        Item {
-            id: alternateSlot;
-            objectName: "alternateSlot";
-            x: -width
-            y: 0
-            width: homeScreen.width;
-            height: homeScreen.height;
-        }
+        
         Item {
             //FIXME: shouldn't be a panel with that design, excludefromactivities containment assignments should be refactored
             id: activitySlot
@@ -168,13 +167,21 @@ Item {
     states: [
             State {
                 name: "Normal"
-                PropertyChanges {
+                /*PropertyChanges {
                     target: mainSlot;
                     y: 0;
                 }
                 PropertyChanges {
                     target: spareSlot;
                     y: -homeScreen.height;
+                }*/
+                PropertyChanges {
+                    target: spareSlot;
+                    scale: 0.3;
+                }
+                PropertyChanges {
+                    target: spareSlot;
+                    opacity: 0;
                 }
 
             },
@@ -185,9 +192,17 @@ Item {
                     y: 0;
                 }
                 PropertyChanges {
+                    target: spareSlot;
+                    scale: 1;
+                }
+                PropertyChanges {
+                    target: spareSlot;
+                    opacity: 1;
+                }
+                /*PropertyChanges {
                     target: mainSlot;
                     y: homeScreen.height;
-                }
+                }*/
             }
     ]
 
@@ -195,31 +210,20 @@ Item {
             from: "Normal"
             to: "Slide"
             SequentialAnimation {
-                NumberAnimation {
-                    target: mainSlot;
-                    property: "scale";
-                    easing.type: "OutQuint";
-                    duration: 250;
-                }
+
                 ParallelAnimation {
                     NumberAnimation {
                         target: spareSlot;
-                        property: "y";
-                        easing.type: "InQuad";
+                        property: "opacity";
+                        easing.type: "OutQuad";
                         duration: 300;
                     }
                     NumberAnimation {
-                        target: mainSlot;
-                        property: "y";
-                        easing.type: "InQuad";
+                        target: spareSlot;
+                        property: "scale";
+                        easing.type: "OutQuad";
                         duration: 300;
                     }
-                }
-                NumberAnimation {
-                    target: spareSlot;
-                    property: "scale";
-                    easing.type: "OutQuint";
-                    duration: 250;
                 }
                 ScriptAction {
                     script: finishTransition();
