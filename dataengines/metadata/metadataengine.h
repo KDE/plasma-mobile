@@ -23,13 +23,10 @@
 
 #include <plasma/dataengine.h>
 
-#include "kio/jobclasses.h" // for KIO::JobFlags
-#include "kio/job.h"
-#include "kio/scheduler.h"
-
-using namespace KIO;
-
-//class KWebThumbnailer;
+namespace Nepomuk
+{
+    class Resource;
+}
 
 class MetadataEngineprivate;
 
@@ -44,7 +41,7 @@ class MetadataEngine : public Plasma::DataEngine
         virtual void init();
 
     private Q_SLOTS:
-        void mimetypeRetrieved(KIO::Job* job, const QString &mimetype);
+        void newEntries(const QList< Nepomuk::Query::Result > &entries);
 
     protected:
         bool sourceRequestEvent(const QString &name);
