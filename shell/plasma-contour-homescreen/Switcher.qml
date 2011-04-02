@@ -23,6 +23,7 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
 PlasmaCore.FrameSvgItem {
+    id: main
     imagePath: "widgets/background"
     enabledBorders: "TopBorder"
     anchors.left: parent.left
@@ -30,18 +31,24 @@ PlasmaCore.FrameSvgItem {
     anchors.bottom: parent.bottom
     height: 32 + margins.top
 
-    property int current: 1
+    property int current: 0
+    onCurrentChanged: {
+        print("UUUU"+current+"EEE"+current*parent.width)
+        if (current >= 0) {
+            areasBarDragger.x = current*parent.width
+        }
+    }
 
     Rectangle {
         id: areasBarDragger
         color: Qt.rgba(1,1,1,0.5)
-        x: width
+        x: 0
         y: areasBar.y
-        width: parent.width/3
+        width: parent.width/2
         height: areasBar.height
 
         onXChanged: {
-            mainContainments.x = mainContainments.width - mainContainments.width*2*(x/draggerMouseArea.drag.maximumX)
+            mainContainments.x = -parent.width*(x/draggerMouseArea.drag.maximumX)
         }
     }
 
@@ -49,26 +56,20 @@ PlasmaCore.FrameSvgItem {
         id: areasBar
         anchors.fill: parent
         anchors.topMargin: parent.margins.top
+
         Text {
-            text: "Applications"
+            text: "Activity browser"
             color: theme.textColor
             horizontalAlignment: Text.AlignHCenter
             anchors.verticalCenter: parent.verticalCenter
-            width: parent.width/3
+            width: parent.width/2
         }
         Text {
-            text: "Work"
+            text: "Activity selector"
             color: theme.textColor
             horizontalAlignment: Text.AlignHCenter
             anchors.verticalCenter: parent.verticalCenter
-            width: parent.width/3
-        }
-        Text {
-            text: "Activities"
-            color: theme.textColor
-            horizontalAlignment: Text.AlignHCenter
-            anchors.verticalCenter: parent.verticalCenter
-            width: parent.width/3
+            width: parent.width/2
         }
 
         MouseArea {
@@ -78,6 +79,9 @@ PlasmaCore.FrameSvgItem {
             drag.axis: Drag.XAxis
             drag.minimumX: 0
             drag.maximumX: areasBar.width - areasBarDragger.width
+            onPressed: {
+                current = -1
+            }
             onReleased: {
                 areasBarDragger.x = areasBarDragger.width * Math.round(areasBarDragger.x/areasBarDragger.width)
             }
