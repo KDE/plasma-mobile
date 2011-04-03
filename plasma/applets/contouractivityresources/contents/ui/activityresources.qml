@@ -29,52 +29,15 @@ Item {
 
     Flow {
         anchors.fill: parent
+        anchors.leftMargin: 24
+        anchors.topMargin: 24
+        anchors.rightMargin: 24
+        anchors.bottomMargin: 24
         spacing: 10
         Repeater {
             model: ResourcesModel {}
-            Rectangle {
-                width: delegateSize*2
-                height: delegateSize
-                color: Qt.rgba(1,1,1,0.3)
-                radius: 5
-                border.color: "white"
-                border.width: 5
-                Rectangle {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    height: childrenRect.height
-                    radius: 5
-                    Text {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: name
-                    }
-                }
-
-                ListView {
-                    model: elements
-                    orientation: ListView.Horizontal
-                    clip: true
-                    anchors.fill: parent
-
-                    delegate: Item {
-                        width: delegateSize
-                        height: delegateSize
-
-                        QIconItem {
-                            id: elementIcon
-                            anchors.centerIn: parent
-                            width: 64
-                            height: 64
-                            icon: QIcon(model.icon)
-                        }
-                        Text {
-                            id: nameText
-                            text: name
-                            anchors.top: elementIcon.bottom
-                            anchors.horizontalCenter: parent.horizontalCenter
-                        }
-                    }
-                }
+            CategoryDelegate {
+                
             }
         }
     }
