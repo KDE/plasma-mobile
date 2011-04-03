@@ -41,6 +41,9 @@
 
 import QtQuick 1.0
 
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
+
 Image {
     id: header
 
@@ -99,33 +102,9 @@ Image {
 
             Button {
                 id: reloadButton
-                anchors { right: quitButton.left; rightMargin: 10 }
+                anchors { right: parent.right; rightMargin: 10 }
                 action: webView.reload; image: "pics/view-refresh.png"
                 visible: webView.progress == 1.0 && !header.urlChanged
-            }
-            Text {
-                id: quitButton
-                color: "white"
-                style: Text.Sunken
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 18
-                width: 60
-                text: "Quit"
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: Qt.quit()
-                }
-                Rectangle {
-                    width: 1
-                    y: 5
-                    height: parent.height-10
-                    anchors.right: parent.left
-                    color: "darkgray"
-                }
             }
 
             Button {
