@@ -36,6 +36,26 @@ ListModel {
             ListElement {
                 name: "John Smith"
                 icon: "pics/qtlogo.png"
+            },
+            ListElement {
+                name: "John Smith"
+                icon: "pics/qtlogo.png"
+            },
+            ListElement {
+                name: "Bill Jones"
+                icon: "pics/qtlogo.png"
+            },
+            ListElement {
+                name: "Jane Doe"
+                icon: "pics/qtlogo.png"
+            },
+            ListElement {
+                name: "John Smith"
+                icon: "pics/qtlogo.png"
+            },
+            ListElement {
+                name: "John Smith"
+                icon: "pics/qtlogo.png"
             }
         ]
     }
@@ -45,10 +65,6 @@ ListModel {
             ListElement {
                 name: "konqueror"
                 icon: "konqueror"
-            },
-            ListElement {
-                name: "konsole"
-                icon: "konsole"
             },
             ListElement {
                 name: "kmail"
@@ -66,10 +82,6 @@ ListModel {
             ListElement {
                 name: "Receipt.pdf"
                 icon: "application-pdf"
-            },
-            ListElement {
-                name: "essay.doc"
-                icon: "application-vnd.oasis.opendocument.text"
             }
         ]
     }
@@ -78,14 +90,6 @@ ListModel {
         elements: [
             ListElement {
                 name: "Hello, how..."
-                icon: "view-pim-mail"
-            },
-            ListElement {
-                name: "our appointment..."
-                icon: "konversation"
-            },
-            ListElement {
-                name: "This evening..."
                 icon: "view-pim-mail"
             }
         ]
