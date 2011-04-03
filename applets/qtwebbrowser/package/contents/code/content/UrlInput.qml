@@ -71,7 +71,10 @@ Item {
         horizontalAlignment: TextEdit.AlignLeft
         font.pixelSize: 14;
 
-        onTextChanged: container.urlChanged()
+        onTextChanged: {
+            print("url changed to" + text);
+            container.urlChanged();
+        }
 
         Keys.onEscapePressed: {
             urlText.text = webView.url

@@ -65,6 +65,7 @@ Image {
         width: parent.width
 
         Item {
+            id: title
             width: parent.width; height: 20
             Text {
                 anchors.centerIn: parent
@@ -76,21 +77,26 @@ Image {
         Item {
             width: parent.width; height: 40
 
-            Button {
+            PlasmaWidgets.IconWidget {
                 id: backButton
-                action: webView.back; image: "pics/go-previous-view.png"
+                action: webView.back;
                 anchors { left: parent.left; bottom: parent.bottom }
+                Component.onCompleted: {setIcon("go-previous"); setText("");}
+                numDisplayLines: 0
             }
 
-            Button {
+            PlasmaWidgets.IconWidget {
                 id: nextButton
-                anchors.left: backButton.right
-                action: webView.forward; image: "pics/go-next-view.png"
+                anchors.left: backButton.right; anchors.bottom: parent.bottom
+                action: webView.forward;
+                //image: "pics/go-next-view.png"
+                Component.onCompleted: setIcon("go-next")
+                numDisplayLines: 0
             }
 
             UrlInput {
                 id: urlInput
-                anchors { left: nextButton.right; right: reloadButton.left }
+                anchors { left: nextButton.right; right: reloadButton.left; bottom: parent.bottom }
                 image: "pics/display.png"
                 onUrlEntered: {
                     webBrowser.urlString = url
@@ -100,29 +106,35 @@ Image {
                 onUrlChanged: header.urlChanged = true
             }
 
-            Button {
+            PlasmaWidgets.IconWidget {
                 id: reloadButton
-                anchors { right: parent.right; rightMargin: 10 }
-                action: webView.reload; image: "pics/view-refresh.png"
+                anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
+                action: webView.reload;
+                //image: "pics/view-refresh.png"
                 visible: webView.progress == 1.0 && !header.urlChanged
+                Component.onCompleted: { setIcon("view-refresh"); }
             }
 
-            Button {
+            PlasmaWidgets.IconWidget {
                 id: stopButton
-                anchors { right: quitButton.left; rightMargin: 10 }
-                action: webView.stop; image: "pics/edit-delete.png"
+                anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
+                action: webView.stop;
+                //image: "pics/edit-delete.png"
                 visible: webView.progress < 1.0 && !header.urlChanged
+                Component.onCompleted: { setIcon("process-stop"); }
             }
 
-            Button {
+            PlasmaWidgets.IconWidget {
                 id: goButton
-                anchors { right: parent.right; rightMargin: 4 }
+                anchors { right: parent.right; bottom: parent.bottom; rightMargin: 4 }
                 onClicked: {
                     webBrowser.urlString = urlInput.url
                     webBrowser.focus = true
                     header.urlChanged = false
                 }
-                image: "pics/go-jump-locationbar.png"; visible: header.urlChanged
+                //image: "pics/go-jump-locationbar.png";
+                visible: header.urlChanged
+                Component.onCompleted: { setIcon("go-jump-locationbar"); }
             }
         }
     }
