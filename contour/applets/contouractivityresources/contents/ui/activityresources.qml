@@ -27,6 +27,24 @@ Item {
     height: 200
     property int delegateSize: 128
 
+    ResourcesModel {
+       id: resourceModels
+    }
+
+    Rectangle {
+        x: 32
+        y: 48
+        height: childrenRect.height
+        width: childrenRect.width + 20
+        color: Qt.rgba(1,1,1,0.5)
+        radius: 10
+        Text {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: plasmoid.activityName
+            font.pixelSize: 20
+        }
+    }
+
     Flow {
         anchors.centerIn: parent
         width: parent.width - 128
@@ -34,7 +52,7 @@ Item {
 
         spacing: 10
         Repeater {
-            model: ResourcesModel {}
+            model: resourceModels.model(plasmoid.activityName)
             CategoryDelegate {
                 
             }
