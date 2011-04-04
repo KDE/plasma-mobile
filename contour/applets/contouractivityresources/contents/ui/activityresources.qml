@@ -28,11 +28,10 @@ Item {
     property int delegateSize: 128
 
     Flow {
-        anchors.fill: parent
-        anchors.leftMargin: 24
-        anchors.topMargin: 24
-        anchors.rightMargin: 24
-        anchors.bottomMargin: 24
+        anchors.centerIn: parent
+        width: parent.width - 128
+        height: childrenRect.height
+
         spacing: 10
         Repeater {
             model: ResourcesModel {}
