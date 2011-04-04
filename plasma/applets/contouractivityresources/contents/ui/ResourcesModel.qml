@@ -34,6 +34,9 @@ QtObject {
         case "Managing Photos":
             return photosModel;
             break;
+        case "Diploma thesis":
+            return thesisModel;
+            break;
         default:
         }
     }
@@ -338,6 +341,44 @@ QtObject {
                 ListElement {
                     name: "KDE conference"
                     icon: "view-pim-contacts"
+                }
+            ]
+        }
+    }
+
+    property ListModel thesis: ListModel {
+        id: thesisModel
+        ListElement {
+            name: "Applications"
+            elements: [
+                ListElement {
+                    name: "Task Juggler"
+                    icon: "taskbar"
+                },
+                ListElement {
+                    name: "Words"
+                    icon: "kword"
+                },
+                ListElement {
+                    name: "Stage"
+                    icon: "kpresenter"
+                },
+                ListElement {
+                    name: "ChemSketch"
+                    icon: "kalzium"
+                }
+            ]
+        }
+        ListElement {
+            name: "Media"
+            elements: [
+                ListElement {
+                    name: "Playlist_aggressive_1"
+                    icon: "audio-ac3"
+                },
+                ListElement {
+                    name: "Playlist_calmdown_4"
+                    icon: "audio-ac3"
                 }
             ]
         }
