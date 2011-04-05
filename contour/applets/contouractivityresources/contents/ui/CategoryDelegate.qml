@@ -22,7 +22,8 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 4.7
 
 Rectangle {
-    width: Math.min(delegateSize*elementsView.count, delegateSize*3)+10*(Math.min(elementsView.count, 3)-1)
+    property int count: countHint?countHint:Math.min(elementsView.count, 3)
+    width: delegateSize*count+10*(count-1)
     height: delegateSize
     color: Qt.rgba(1,1,1,0.3)
     radius: 5
@@ -64,6 +65,9 @@ Rectangle {
             Text {
                 id: nameText
                 text: name
+                wrapMode: Text.WordWrap
+                width: Math.min(paintedWidth, 100)
+                horizontalAlignment: Text.AlignHCenter
                 anchors.top: elementIcon.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
             }
