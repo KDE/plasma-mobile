@@ -26,6 +26,24 @@ Item {
     width: 200
     height: 200
 
+    Component.onCompleted: {
+        plasmoid.drawWallpaper = false
+        plasmoid.containmentType = "CustomContainment"
+    }
+
+    PlasmaCore.DataSource {
+        id: activitySource
+        engine: "org.kde.activities"
+        onSourceAdded: {
+            if (source != "Status") {
+                connectSource(source)
+            }
+        }
+        Component.onCompleted: {
+            connectedSources = sources
+        }
+    }
+
     RecommendationsModel {
        id: recommendationsModels
     }
@@ -37,11 +55,12 @@ Item {
     ListView {
         anchors.fill: parent
 
-        model: recommendationsModels.model("Grandma's birthday")
+        model: recommendationsModels.model(activitySource.data[activitySource.data["Status"]["Current"]]["Name"])
 
         delegate: RecommendationDelegate {
                 text: model.text
                 description: model.description
+                icon: model.icon
             }
     }
 }
