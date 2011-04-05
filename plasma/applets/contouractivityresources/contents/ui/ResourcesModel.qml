@@ -45,43 +45,45 @@ QtObject {
         id: networkModel
         ListElement {
             name: "Contacts"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Bill Jones"
-                    icon: "pics/qtlogo.png"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "Jane Doe"
-                    icon: "pics/qtlogo.png"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "John Smith"
-                    icon: "pics/qtlogo.png"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "John Smith"
-                    icon: "pics/qtlogo.png"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "Bill Jones"
-                    icon: "pics/qtlogo.png"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "Jane Doe"
-                    icon: "pics/qtlogo.png"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "John Smith"
-                    icon: "pics/qtlogo.png"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "John Smith"
-                    icon: "pics/qtlogo.png"
+                    icon: "view-pim-contacts"
                 }
             ]
         }
         ListElement {
             name: "Applications"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "konqueror"
@@ -95,6 +97,7 @@ QtObject {
         }
         ListElement {
             name: "Files"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Book 1"
@@ -108,6 +111,7 @@ QtObject {
         }
         ListElement {
             name: "Communication"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Hello, how..."
@@ -117,6 +121,7 @@ QtObject {
         }
         ListElement {
             name: "URLs"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Gmail"
@@ -138,6 +143,7 @@ QtObject {
         id: birthdayModel
         ListElement {
             name: "Applications"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "KAddressbook"
@@ -159,6 +165,7 @@ QtObject {
         }
         ListElement {
             name: "Contacts"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Grandma"
@@ -192,6 +199,7 @@ QtObject {
         }
         ListElement {
             name: "Locations"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Ristorante Gino"
@@ -209,6 +217,7 @@ QtObject {
         }
         ListElement {
             name: "Media"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "The Blue Danube"
@@ -226,6 +235,7 @@ QtObject {
         }
         ListElement {
             name: "Tasks"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Call the restaurant"
@@ -247,6 +257,7 @@ QtObject {
         }
         ListElement {
             name: "Urls"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Ristorante Gino"
@@ -277,6 +288,7 @@ QtObject {
         id: photosModel
         ListElement {
             name: "Applications"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Digikam"
@@ -290,6 +302,7 @@ QtObject {
         }
         ListElement {
             name: "Files"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Last holidays (10)"
@@ -307,6 +320,7 @@ QtObject {
         }
         ListElement {
             name: "Locations"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Barcelona"
@@ -324,6 +338,7 @@ QtObject {
         }
         ListElement {
             name: "Urls"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Flickr.com"
@@ -333,6 +348,7 @@ QtObject {
         }
         ListElement {
             name: "Events"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Holiday in Barcelona"
@@ -350,6 +366,7 @@ QtObject {
         id: thesisModel
         ListElement {
             name: "Applications"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Task Juggler"
@@ -371,6 +388,7 @@ QtObject {
         }
         ListElement {
             name: "Media"
+            countHint: 1
             elements: [
                 ListElement {
                     name: "Playlist_aggressive_1"
@@ -384,6 +402,7 @@ QtObject {
         }
         ListElement {
             name: "Locations"
+            countHint: 2
             elements: [
                 ListElement {
                     name: "University TU Darmstadt"
@@ -417,6 +436,7 @@ QtObject {
         }
         ListElement {
             name: "Events"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Meeting with professor"
@@ -442,6 +462,7 @@ QtObject {
         }
         ListElement {
             name: "Urls"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Wikipedia - Oopaga..."
@@ -456,7 +477,7 @@ QtObject {
                     icon: "text-html"
                 },
                 ListElement {
-                    name: "www.natgeoeducationvideo.com"
+                    name: "www.natgeo education video.com"
                     icon: "text-html"
                 },
                 ListElement {
@@ -467,31 +488,33 @@ QtObject {
         }
         ListElement {
             name: "Contacts"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "Kiki Summers"
-                    icon: "view-pim-contact"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "Horst Töpfert"
-                    icon: "view-pim-contact"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "Mum"
-                    icon: "view-pim-contact"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "Cindy"
-                    icon: "view-pim-contact"
+                    icon: "view-pim-contacts"
                 },
                 ListElement {
                     name: "Librarian"
-                    icon: "view-pim-contact"
+                    icon: "view-pim-contacts"
                 }
             ]
         }
         ListElement {
             name: "Files"
+            countHint: 0
             elements: [
                 ListElement {
                     name: "MyThesys_V1.odp"
@@ -502,7 +525,7 @@ QtObject {
                     icon: "application-pdf"
                 },
                 ListElement {
-                    name: "Oopaga_pumillium_call.ogg"
+                    name: "Oopaga pumillium call.ogg"
                     icon: "audio-ac3"
                 },
                 ListElement {
@@ -514,21 +537,8 @@ QtObject {
                     icon: "application-vnd.oasis.opendocument.presentation"
                 },
                 ListElement {
-                    name: "Oopaga_pumillium_zoo.jpg"
+                    name: "Oopaga pumillium zoo.jpg"
                     icon: "image-x-generic"
-                }
-            ]
-        }
-        ListElement {
-            name: "Media"
-            elements: [
-                ListElement {
-                    name: "Playlist_aggressive_1"
-                    icon: "audio-ac3"
-                },
-                ListElement {
-                    name: "Playlist_calmdown_4"
-                    icon: "audio-ac3"
                 }
             ]
         }
