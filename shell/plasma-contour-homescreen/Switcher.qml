@@ -33,7 +33,6 @@ PlasmaCore.FrameSvgItem {
 
     property int current: 0
     onCurrentChanged: {
-        print("UUUU"+current+"EEE"+current*parent.width)
         if (current >= 0) {
             areasBarDragger.x = current*parent.width
         }
@@ -41,7 +40,7 @@ PlasmaCore.FrameSvgItem {
 
     Rectangle {
         id: areasBarDragger
-        color: Qt.rgba(1,1,1,0.5)
+        color: Qt.rgba(0,0,0,0.5)
         x: 0
         y: areasBar.y
         width: parent.width/2
