@@ -25,7 +25,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Item {
     id: activityPanel;
     height: 500;
-    width: 500
+    width: 380
     state: "show"
 
     Image {
