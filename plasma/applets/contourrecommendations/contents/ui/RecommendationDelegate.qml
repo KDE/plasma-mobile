@@ -19,19 +19,29 @@
 import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
+import org.kde.qtextracomponents 4.7
 
 ListItem {
     id: listItem
-    property string text;
-    property string description;
+    property string text
+    property string description
+    property string icon
     property bool articleRead: false
+
+    QIconItem {
+        x: listItem.padding.left
+        anchors.verticalCenter: parent.verticalCenter
+        width: 48
+        height: 48
+        icon: QIcon(listItem.icon)
+    }
 
     Column {
         id : delegateLayout
         width: parent.width
         spacing: 5
         anchors.left: listItem.padding.left
+        anchors.leftMargin: 50
         anchors.right: listItem.padding.right
         anchors.top: listItem.padding.top
 
