@@ -382,5 +382,155 @@ QtObject {
                 }
             ]
         }
+        ListElement {
+            name: "Locations"
+            elements: [
+                ListElement {
+                    name: "University TU Darmstadt"
+                    icon: "marble"
+                },
+                ListElement {
+                    name: "Institut for zoology"
+                    icon: "marble"
+                },
+                ListElement {
+                    name: "Library"
+                    icon: "marble"
+                },
+                ListElement {
+                    name: "Biology Library Frankfurt"
+                    icon: "marble"
+                },
+                ListElement {
+                    name: "Starbucks"
+                    icon: "marble"
+                },
+                ListElement {
+                    name: "Home office"
+                    icon: "marble"
+                },
+                ListElement {
+                    name: "Mates house"
+                    icon: "marble"
+                }
+            ]
+        }
+        ListElement {
+            name: "Events"
+            elements: [
+                ListElement {
+                    name: "Meeting with professor"
+                    icon: "view-task"
+                },
+                ListElement {
+                    name: "Discussion with collegue"
+                    icon: "view-task"
+                },
+                ListElement {
+                    name: "Call mum"
+                    icon: "view-task"
+                },
+                ListElement {
+                    name: "Send update Saturday"
+                    icon: "view-task"
+                },
+                ListElement {
+                    name: "Expedition to Brazil"
+                    icon: "view-task"
+                }
+            ]
+        }
+        ListElement {
+            name: "Urls"
+            elements: [
+                ListElement {
+                    name: "Wikipedia - Oopaga..."
+                    icon: "text-html"
+                },
+                ListElement {
+                    name: "www.tropical-rainforest.animals.com"
+                    icon: "text-html"
+                },
+                ListElement {
+                    name: "www.bgsu.edu"
+                    icon: "text-html"
+                },
+                ListElement {
+                    name: "www.natgeoeducationvideo.com"
+                    icon: "text-html"
+                },
+                ListElement {
+                    name: "Frogs mailinglist"
+                    icon: "text-html"
+                }
+            ]
+        }
+        ListElement {
+            name: "Contacts"
+            elements: [
+                ListElement {
+                    name: "Kiki Summers"
+                    icon: "view-pim-contact"
+                },
+                ListElement {
+                    name: "Horst Töpfert"
+                    icon: "view-pim-contact"
+                },
+                ListElement {
+                    name: "Mum"
+                    icon: "view-pim-contact"
+                },
+                ListElement {
+                    name: "Cindy"
+                    icon: "view-pim-contact"
+                },
+                ListElement {
+                    name: "Librarian"
+                    icon: "view-pim-contact"
+                }
+            ]
+        }
+        ListElement {
+            name: "Files"
+            elements: [
+                ListElement {
+                    name: "MyThesys_V1.odp"
+                    icon: "application-vnd.oasis.opendocument.presentation"
+                },
+                ListElement {
+                    name: "PoisonDartFrog.pdf"
+                    icon: "application-pdf"
+                },
+                ListElement {
+                    name: "Oopaga_pumillium_call.ogg"
+                    icon: "audio-ac3"
+                },
+                ListElement {
+                    name: "MyThesys_V2.odp"
+                    icon: "application-vnd.oasis.opendocument.presentation"
+                },
+                ListElement {
+                    name: "MyThesys_V3.odp"
+                    icon: "application-vnd.oasis.opendocument.presentation"
+                },
+                ListElement {
+                    name: "Oopaga_pumillium_zoo.jpg"
+                    icon: "image-x-generic"
+                }
+            ]
+        }
+        ListElement {
+            name: "Media"
+            elements: [
+                ListElement {
+                    name: "Playlist_aggressive_1"
+                    icon: "audio-ac3"
+                },
+                ListElement {
+                    name: "Playlist_calmdown_4"
+                    icon: "audio-ac3"
+                }
+            ]
+        }
     }
 }
