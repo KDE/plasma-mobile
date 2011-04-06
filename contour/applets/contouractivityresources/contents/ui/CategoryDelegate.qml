@@ -19,7 +19,7 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 4.7
+import org.kde.qtextracomponents 0.1
 
 Rectangle {
     property int count: countHint?countHint:Math.min(elementsView.count, 3)
