@@ -31,7 +31,7 @@ Item {
         anchors.horizontalCenter: systrayBackground.horizontalCenter
         width: 128
         height: 58
-        imagePath: "widgets/background"
+        imagePath: "dialogs/background"
         enabledBorders: "LeftBorder|RightBorder|BottomBorder"
         opacity: systrayPanel.state == "active"?1:0
 
