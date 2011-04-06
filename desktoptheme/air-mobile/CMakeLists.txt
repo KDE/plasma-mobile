@@ -12,4 +12,5 @@ install(DIRECTORY wallpapers/Universe DESTINATION ${DATA_INSTALL_DIR}/desktopthe
 
 #TODO: make possible to load other wallpapers fro the theme package
 install(DIRECTORY wallpapers/Fiber DESTINATION ${WALLPAPER_INSTALL_DIR} PATTERN .svn EXCLUDE)
+install(DIRECTORY wallpapers/HorosGreen DESTINATION ${WALLPAPER_INSTALL_DIR} PATTERN .svn EXCLUDE)
 
