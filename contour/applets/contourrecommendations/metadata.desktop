@@ -19,3 +19,5 @@ X-Plasma-API=declarativeappletscript
 X-Plasma-DefaultSize=200,400
 X-Plasma-MainScript=ui/recommendations.qml
 X-Plasma-RemoteLocation=
+X-Plasma-RequiredExtensions=LaunchApp
+

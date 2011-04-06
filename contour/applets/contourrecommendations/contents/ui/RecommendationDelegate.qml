@@ -26,7 +26,8 @@ ListItem {
     property string text
     property string description
     property string icon
-    property bool articleRead: false
+    property string command
+    property string arguments
 
     QIconItem {
         x: listItem.padding.left
@@ -58,5 +59,13 @@ ListItem {
             text: listItem.description
         }
 
+    }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            var args = arguments.split(' ')
+
+            plasmoid.runCommand(command, Array(args))
+        }
     }
 }
