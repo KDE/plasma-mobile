@@ -47,16 +47,21 @@ QtObject {
             text: "Read news"
             description: "You often used this application"
             icon: "akregator"
+            command: "news-tablet"
         }
         ListElement {
             text: "Wikipedia"
             description: "http://en.wikipedia.org"
             icon: "text-html"
+            command: "konqueror"
+            arguments: "http://en.wikipedia.org"
         }
         ListElement {
             text: "Youtube"
             description: "http://www.youtube.com"
             icon: "text-html"
+            command: "konqueror"
+            arguments: "http://www.youtube.com"
         }
     }
 
@@ -71,6 +76,8 @@ QtObject {
             text: "Open orange.pdf"
             description: "You often opened this file recently"
             icon: "application-pdf"
+            command: "okular"
+            arguments: "~/orange.pdf"
         }
         ListElement {
             text: "Send pictures to grandma"
@@ -95,6 +102,8 @@ QtObject {
             text: "img_0123.jpg"
             description: "tag as \"Holiday in barcelona\""
             icon: "image-generic"
+            command: "gwenview"
+            arguments: "~/img_0123.jpg"
         }
         ListElement {
             text: "12 photos tagged as \"Max\""

@@ -71,6 +71,14 @@ Rectangle {
                 anchors.top: elementIcon.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
             }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    var args = model.arguments.split(' ')
+
+                    plasmoid.runCommand(command, Array(args))
+                }
+            }
         }
     }
     PlasmaCore.Svg {

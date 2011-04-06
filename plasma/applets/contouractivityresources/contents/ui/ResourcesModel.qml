@@ -106,6 +106,8 @@ QtObject {
                 ListElement {
                     name: "Receipt.pdf"
                     icon: "application-pdf"
+                    command: "okular"
+                    args: "~/receipt.pdf"
                 }
             ]
         }
@@ -148,18 +150,22 @@ QtObject {
                 ListElement {
                     name: "KAddressbook"
                     icon: "kaddressbook"
+                    command: "kaddressbook"
                 },
                 ListElement {
                     name: "Words"
                     icon: "kword"
+                    command: "kword"
                 },
                 ListElement {
                     name: "KOrganizer"
                     icon: "korganizer"
+                    command: "korganizer"
                 },
                 ListElement {
                     name: "Kopete"
                     icon: "kopete"
+                    command: "kopete"
                 }
             ]
         }
@@ -293,10 +299,12 @@ QtObject {
                 ListElement {
                     name: "Digikam"
                     icon: "digikam"
+                    command: "digikam"
                 },
                 ListElement {
                     name: "Konqueror"
                     icon: "konqueror"
+                    command: "konqueror"
                 }
             ]
         }
@@ -343,6 +351,8 @@ QtObject {
                 ListElement {
                     name: "Flickr.com"
                     icon: "text-html"
+                    command: "konqueror"
+                    arguments: "http://www.flickr.com"
                 }
             ]
         }
@@ -375,14 +385,17 @@ QtObject {
                 ListElement {
                     name: "Words"
                     icon: "kword"
+                    command: "kword"
                 },
                 ListElement {
                     name: "Stage"
                     icon: "kpresenter"
+                    command: "kpresenter"
                 },
                 ListElement {
                     name: "ChemSketch"
                     icon: "kalzium"
+                    command: "kalzium"
                 }
             ]
         }
@@ -467,18 +480,26 @@ QtObject {
                 ListElement {
                     name: "Wikipedia - Oopaga..."
                     icon: "text-html"
+                    command: "konqueror"
+                    arguments: "http://en.wikipedia.org/wiki/Poison_dart_frog"
                 },
                 ListElement {
                     name: "www.tropical-rainforest.animals.com"
                     icon: "text-html"
+                    command: "konqueror"
+                    arguments: "http://www.tropical-rainforest-animals.com/"
                 },
                 ListElement {
                     name: "www.bgsu.edu"
                     icon: "text-html"
+                    command: "konqueror"
+                    arguments: "http://www.bgsu.edu"
                 },
                 ListElement {
                     name: "www.natgeo education video.com"
                     icon: "text-html"
+                    command: "konqueror"
+                    arguments: "http://education.nationalgeographic.com/education/edu/?ar_a=1&ar_r=1"
                 },
                 ListElement {
                     name: "Frogs mailinglist"
