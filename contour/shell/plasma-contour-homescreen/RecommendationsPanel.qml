@@ -28,6 +28,8 @@ Item {
     width: 380
     state: "show"
 
+
+
     Image {
         id: hint;
         source: "images/hint-vertical.png";
@@ -35,6 +37,26 @@ Item {
         anchors.verticalCenter: activityPanel.verticalCenter;
     }
 
+    Image {
+        id: hintNotify;
+        source: "images/hint-vertical-notify.png";
+        x: parent.width;
+        anchors.verticalCenter: activityPanel.verticalCenter;
+        opacity: 0
+        Behavior on opacity {
+            NumberAnimation {duration: 1000}
+        }
+    }
+    //FIXME: this thing exists only as demo
+    Timer {
+        id: notifyTimer
+        repeat: false
+        interval: 10000
+        running: true
+        onTriggered: {
+            hintNotify.opacity = 1
+        }
+    }
 
 
     MouseArea {
@@ -56,6 +78,8 @@ Item {
         onReleased: {
             if (-activityPanel.x < activityPanel.parent.width/3) {
                 activityPanel.state = "show"
+                hintNotify.opacity = 0
+                notifyTimer.running = true
                 timer.restart()
             } else {
                 activityPanel.state = "hidden"
@@ -89,7 +113,7 @@ Item {
         containment.height = background.height - background.margins.top - background.margins.bottom
         containment.z = timerResetRegion.z -1
     }
-    
+
     MouseArea {
         id: timerResetRegion;
         z: 9000
