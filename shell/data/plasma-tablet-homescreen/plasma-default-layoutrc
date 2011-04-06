@@ -18,11 +18,11 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][1][Wallpaper][image]
-wallpaper=Grass
+wallpaper=HorosGreen
 wallpaperposition=2
 
 [Containments][2]
-activity=
+activity=Web
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -34,6 +34,10 @@ screen=0
 zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
+
+[Containments][2][Wallpaper][image]
+wallpaper=HorosGreen
+wallpaperposition=2
 
 [Containments][2][Applets][1]
 geometry=0,0,310,310
@@ -47,7 +51,7 @@ zvalue=1
 
 
 [Containments][3]
-activity=network
+activity=SocialNetwork
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -61,7 +65,7 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][3][Wallpaper][image]
-wallpaper=Blue_Wood
+wallpaper=HorosGreen
 wallpaperposition=2
 
 [Containments][3][Applets][2]
@@ -70,14 +74,39 @@ plugin=twitter
 immutability=1
 zvalue=1
 
+
 [Containments][3][Applets][3]
-geometry=800,0,310,310
-plugin=opendesktop_activities
+geometry=0,0,348,554
 immutability=1
-zvalue=1
+plugin=news
+zvalue=0
+
+[Containments][3][Applets][3][Configuration]
+Share=false
+feeds=http://www.kde.org/dotkdeorg.rdf,http://planetkde.org/rss20.xml
+interval=30
+showDescriptions=false
+showTimestamps=true
+showTitles=true
+
+
+[Containments][3][Applets][4]
+geometry=0,0,348,554
+immutability=1
+plugin=quicklaunch
+zvalue=0
+
+[Containments][3][Applets][4][Configuration]
+Share=false
+launcherNamesVisible=true
+launchers=file:///usr/share/kde4/config/SuSE/default/tablet/TabletBrowser.desktop,file:///usr/share/applications/kde4/kpat.desktop
+launchersOnPopup=
+
+
+
 
 [Containments][4]
-activity=client
+activity=Multimedia
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -91,17 +120,11 @@ wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
 [Containments][4][Wallpaper][image]
-wallpaper=Evening
+wallpaper=HorosGreen
 wallpaperposition=2
 
 [Containments][4][Applets][1]
 plugin=weather
-geometry=0,0,300,300
-immutability=1
-zvalue=1
-
-[Containments][4][Applets][2]
-plugin=opendesktop
 geometry=0,0,300,300
 immutability=1
 zvalue=1
