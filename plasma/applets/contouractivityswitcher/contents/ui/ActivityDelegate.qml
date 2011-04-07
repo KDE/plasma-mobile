@@ -54,10 +54,18 @@ Item {
             anchors.bottomMargin: 5
             property string path: activityThumbnailsSource.data[model.DataEngineSource]["path"]
             source: path?path:plasmoid.file("images", "emptyactivity.png")
-            Text{
+            Rectangle {
                 color: "white"
-                text: model.Name
-                font.pixelSize: 20
+                x: 10
+                y: 25
+                radius: 10
+                width: childrenRect.width
+                height: childrenRect.height
+                Text{
+                    color: "black"
+                    text: model.Name
+                    font.pixelSize: 20
+                }
             }
         }
     }

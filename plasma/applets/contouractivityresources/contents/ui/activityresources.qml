@@ -36,12 +36,12 @@ Item {
         y: 48
         height: childrenRect.height
         width: childrenRect.width + 20
-        color: Qt.rgba(1,1,1,0.5)
+        color: "white"
         radius: 10
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             text: plasmoid.activityName
-            font.pixelSize: 20
+            font.pixelSize: 25
         }
     }
 
