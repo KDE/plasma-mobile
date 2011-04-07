@@ -1,4 +1,0 @@
-add_subdirectory(contouractivityresources)
-add_subdirectory(contourmobilemenu)
-add_subdirectory(contouractivityswitcher)
-add_subdirectory(contourrecommendations)
