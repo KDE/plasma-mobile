@@ -62,6 +62,7 @@ Item {
                 description: model.description
                 icon: model.icon
                 command: model.command
+                arguments: model.arguments
             }
     }
 }

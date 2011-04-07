@@ -63,9 +63,9 @@ ListItem {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            var args = arguments.split(' ')
+            var args = listItem.arguments.split(' ')
 
-            plasmoid.runCommand(command, Array(args))
+            plasmoid.runCommand(listItem.command, Array(args))
         }
     }
 }
