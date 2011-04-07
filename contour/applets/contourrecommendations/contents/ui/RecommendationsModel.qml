@@ -77,7 +77,7 @@ QtObject {
             description: "You often opened this file recently"
             icon: "application-pdf"
             command: "okular"
-            arguments: "~/orange.pdf"
+            arguments: "orange.pdf"
         }
         ListElement {
             text: "Send pictures to grandma"

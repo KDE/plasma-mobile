@@ -561,7 +561,7 @@ QtObject {
                     name: "Oopaga pumillium.jpg"
                     icon: "image-x-generic"
                     command: "gwenview"
-                    arguments: "~/oopaga_pumillium.jpg"
+                    arguments: "oopaga_pumillium.jpg"
                 }
             ]
         }
