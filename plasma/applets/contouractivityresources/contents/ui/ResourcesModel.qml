@@ -558,8 +558,10 @@ QtObject {
                     icon: "application-vnd.oasis.opendocument.presentation"
                 },
                 ListElement {
-                    name: "Oopaga pumillium zoo.jpg"
+                    name: "Oopaga pumillium.jpg"
                     icon: "image-x-generic"
+                    command: "gwenview"
+                    arguments: "~/oopaga_pumillium.jpg"
                 }
             ]
         }
