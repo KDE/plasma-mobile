@@ -32,7 +32,7 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 
 [Settings]
-FallbackTheme=oxygen
+FallbackTheme=default
 
 [Wallpaper]
 defaultWallpaperTheme=Universe

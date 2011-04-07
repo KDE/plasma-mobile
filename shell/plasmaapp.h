@@ -37,6 +37,7 @@
 class MobView;
 class MobCorona;
 class MobileWidgetsExplorer;
+class MobPluginLoader;
 
 namespace Plasma
 {
@@ -45,6 +46,8 @@ namespace Plasma
     class Corona;
     class DeclarativeWidget;
 } // namespace Plasma
+
+//Q_DECLARE_METATYPE(Plasma::Wallpaper*)
 
 class PlasmaApp : public KUniqueApplication
 {
@@ -98,6 +101,8 @@ private:
 
     QMap<int, Plasma::Containment*> m_containments;
     QHash<Plasma::Location, Plasma::Containment *> m_panelContainments;
+
+    MobPluginLoader *m_pluginLoader;
 
     QString m_homeScreenPath;
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
