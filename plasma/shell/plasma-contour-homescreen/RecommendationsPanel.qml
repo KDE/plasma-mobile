@@ -54,7 +54,17 @@ Item {
         interval: 10000
         running: true
         onTriggered: {
-            hintNotify.opacity = 1
+            notifyLoopTimer.running = true
+        }
+    }
+
+    Timer {
+        id: notifyLoopTimer
+        repeat: true
+        interval: 1500
+        running: false
+        onTriggered: {
+            hintNotify.opacity = 1 - hintNotify.opacity 
         }
     }
 
@@ -79,10 +89,12 @@ Item {
             if (-activityPanel.x < activityPanel.parent.width/3) {
                 activityPanel.state = "show"
                 hintNotify.opacity = 0
-                notifyTimer.running = true
+                notifyTimer.running = false
+                notifyLoopTimer.running = false
                 timer.restart()
             } else {
                 activityPanel.state = "hidden"
+                notifyTimer.running = true
             }
         }
 
