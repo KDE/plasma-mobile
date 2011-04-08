@@ -96,7 +96,7 @@ void Contour::RecommendationManager::Private::updateRecommendations()
     // FIXME: sort them by something
     const QString query
             = QString::fromLatin1("select ?r where { graph ?g { ?r ?p ?o . } . ?g %1 ?a . ?a %2 %3 . } LIMIT 6")
-            .arg(Soprano::Node::resourceToN3(KExt::usedActivity()),
+            .arg(Soprano::Node::resourceToN3(QUrl(KExt::kextNamespace().toString() + QLatin1String("usedActivity"))),
                  Soprano::Node::resourceToN3(NAO::identifier()),
                  Soprano::Node::literalToN3(Soprano::LiteralValue(m_activityConsumer->currentActivity())));
 
