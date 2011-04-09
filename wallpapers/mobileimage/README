@@ -1,0 +1,5 @@
+Plasma wallpaper plugin for mobile
+----------------------------------
+The defining feature of this wallpaper plugin is that it does not paint.  Instead, it provides the image URL as a property.
+
+The painting is carried out by the mobile shell QML, having read the wallpaper image URL property.  This allows QML to apply effects such as parallax scrolling to the wallpaper, while the wallpaper plugin allows the use of the existing Plasma wallpaper configuration system.
