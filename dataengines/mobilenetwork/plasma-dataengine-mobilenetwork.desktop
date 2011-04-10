@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Mobile Network Engine
 Name[et]=Mobiilivõrgu mootor
+Name[nl]=Engine voor mobiele netwerk
 Name[pt]=Motor de Rede Móvel
 Name[pt_BR]=Mecanismo de rede móvel
 Name[sv]=Mobilgränssnitt
@@ -8,6 +9,7 @@ Name[uk]=Рушій мобільних мереж
 Name[x-test]=xxMobile Network Enginexx
 Comment=Mobile network engine
 Comment[et]=Mobiilivõrgu mootor
+Comment[nl]=Engine voor mobiele netwerk
 Comment[pt]=Motor de rede móvel
 Comment[pt_BR]=Mecanismo de rede móvel
 Comment[sv]=Mobilgränssnitt
