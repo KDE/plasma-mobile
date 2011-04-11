@@ -33,10 +33,13 @@ Item {
         }
     }
 
-    transform: Rotation {
+    /*transform: Rotation {
         origin.x: delegate.width
         origin.y: delegate.height
         angle: PathView.itemRotation
+    }*/
+    transform: Translate {
+        y: PathView.translate
     }
 
     width: mainView.delegateWidth
@@ -70,8 +73,7 @@ Item {
         }
     }
     Item {
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 24
+        anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
         width: 240
         height: 32
