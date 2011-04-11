@@ -16,7 +16,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "nepomukmobileengine.h"
+#include "recommendationsengine.h"
 #include "testsource.h"
 #include "contour_interface.h"
 
@@ -25,7 +25,7 @@
 #include <KDebug>
 
 
-NepomukMobileTest::NepomukMobileTest(QObject* parent, const QVariantList& args)
+RecommendationsEngine::RecommendationsEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
 {
     setMinimumPollingInterval(2 * 1000); // 2 seconds minimum
@@ -51,11 +51,11 @@ NepomukMobileTest::NepomukMobileTest(QObject* parent, const QVariantList& args)
     }
 }
 
-NepomukMobileTest::~NepomukMobileTest()
+RecommendationsEngine::~RecommendationsEngine()
 {
 }
 
-void NepomukMobileTest::recommendationsCallback(QDBusPendingCallWatcher *call)
+void RecommendationsEngine::recommendationsCallback(QDBusPendingCallWatcher *call)
 {
     QDBusPendingReply<QVariantMap> reply = *call;
     QVariantMap properties = reply.argumentAt<0>();
@@ -68,7 +68,7 @@ void NepomukMobileTest::recommendationsCallback(QDBusPendingCallWatcher *call)
     }
 }
 
-void NepomukMobileTest::updateRecommendations(QVariantMap recommendations)
+void RecommendationsEngine::updateRecommendations(QVariantMap recommendations)
 {
     kWarning()<<"Map of recommendations: "<<recommendations;
     /*
@@ -77,7 +77,7 @@ void NepomukMobileTest::updateRecommendations(QVariantMap recommendations)
     }*/
 }
 
-bool NepomukMobileTest::sourceRequestEvent(const QString &name)
+bool RecommendationsEngine::sourceRequestEvent(const QString &name)
 {
     if (!name.startsWith("test") ) {
         return false;
@@ -88,7 +88,7 @@ bool NepomukMobileTest::sourceRequestEvent(const QString &name)
 }
 
 
-bool NepomukMobileTest::updateSourceEvent(const QString &name)
+bool RecommendationsEngine::updateSourceEvent(const QString &name)
 {
     kDebug() << name;
 
@@ -107,4 +107,4 @@ bool NepomukMobileTest::updateSourceEvent(const QString &name)
     return false;
 }
 
-#include "nepomukmobileengine.moc"
+#include "recommendationsengine.moc"

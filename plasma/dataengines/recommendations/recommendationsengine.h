@@ -26,13 +26,13 @@ class OrgKdeContourRecommendationManagerInterface;
 
 class QDBusPendingCallWatcher;
 
-class NepomukMobileTest : public Plasma::DataEngine
+class RecommendationsEngine : public Plasma::DataEngine
 {
     Q_OBJECT
 
 public:
-    NepomukMobileTest(QObject* parent, const QVariantList& args);
-    ~NepomukMobileTest();
+    RecommendationsEngine(QObject* parent, const QVariantList& args);
+    ~RecommendationsEngine();
 
 protected:
     //from DataEngine
@@ -48,6 +48,6 @@ private:
 
 };
 
-K_EXPORT_PLASMA_DATAENGINE(nepomukmobiletest, NepomukMobileTest)
+K_EXPORT_PLASMA_DATAENGINE(recommendations, RecommendationsEngine)
 
 #endif

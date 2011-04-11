@@ -1,15 +1,15 @@
 [Desktop Entry]
-Name=Nepomuk mobile
-Comment=Nepomuk mobile query test
+Name=Recommendations
+Comment=Contour Recommendations dataengine
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=nepomuk
-X-KDE-Library=plasma_engine_nepomukmobile
+X-KDE-Library=plasma_engine_recommendations
 
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Email=mart@kde.org
-X-KDE-PluginInfo-Name=org.kde.nepomukmobile
+X-KDE-PluginInfo-Name=org.kde.recommendations
 X-KDE-PluginInfo-Version=
 X-KDE-PluginInfo-Website=
 X-KDE-PluginInfo-Category=
