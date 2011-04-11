@@ -65,73 +65,70 @@ Item {
          anchors.fill: parent
          anchors.bottomMargin: 32
          anchors.leftMargin: 64
-         interactive: false
          model: PlasmaCore.DataModel{
                     dataSource: activitySource
                 }
-         pathItemCount: 6
-         property int delegateWidth: mainView.width/1.5
-         property int delegateHeight: mainView.height/1.5
+         pathItemCount: 7
+         property int delegateWidth: 400
+         property int delegateHeight: delegateWidth/1.6
 
-         preferredHighlightBegin: 0.16
-         preferredHighlightEnd: 0.16
+         preferredHighlightBegin: 0.5
+         preferredHighlightEnd: 0.5
 
 
          delegate: ActivityDelegate{}
          clip:true
 
-         MouseArea {
-             anchors.fill: parent
-             property int downX
-             property int downY
-
-             onPressed: {
-                 downX = mouse.x
-                 downY = mouse.y
+         path: Path {
+             startX: mainView.width
+             startY: 0
+             PathAttribute { name: "itemScale"; value: 0.1 }
+             PathAttribute { name: "itemOpacity"; value: 0 }
+             PathAttribute { name: "translate"; value: 0 }
+             PathAttribute { name: "z"; value: 0 }
+             
+             
+             PathLine {
+                 x: mainView.width-100
+                 y: mainView.height/4
+             }
+             PathAttribute { name: "itemScale"; value: 0.2 }
+             PathAttribute { name: "itemOpacity"; value: 1 }
+             PathAttribute { name: "translate"; value: -100 }
+             PathAttribute { name: "z"; value: 0 }
+             
+             PathQuad {
+                 x: mainView.width-mainView.delegateWidth/2
+                 y: mainView.height/2
+                 controlX: mainView.width-mainView.delegateWidth/1.8
+                 controlY: mainView.height/3
              }
 
-             onReleased: {
-                 if (mouse.x < downX && mouse.y > downY) {
-                     if (mainView.currentIndex < mainView.count) {
-                         ++mainView.currentIndex
-                     } else {
-                         mainView.currentIndex = 0
-                     }
-                 } else if (mouse.x > downX && mouse.y < downY) {
-                     if (mainView.currentIndex > 0) {
-                         --mainView.currentIndex
-                     } else {
-                         mainView.currentIndex = mainView.count-1
-                     }
-                 }
-            }
-         }
+             PathAttribute { name: "itemScale"; value: 1 }
+             PathAttribute { name: "itemOpacity"; value: 1 }
+             PathAttribute { name: "translate"; value: 0 }
+             PathAttribute { name: "z"; value: 100 }
 
-         path: Path {
-             startX: mainView.width/2.1
-             startY: mainView.height-mainView.delegateHeight/1.5+32
-             PathAttribute { name: "itemScale"; value: 1.0 }
-             PathAttribute { name: "itemOpacity"; value: 0 }
-             PathAttribute { name: "itemRotation"; value: 0 }
-             PathAttribute { name: "z"; value: 99 }
+
+
              PathLine {
-                 x: mainView.width/2
-                 y: mainView.height-mainView.delegateHeight/1.5+16
-            }
-            PathAttribute { name: "itemScale"; value: 1 }
-            PathAttribute { name: "itemOpacity"; value: 1 }
-            PathAttribute { name: "itemRotation"; value: 0 }
-            PathAttribute { name: "z"; value: 100 }
+                 x: mainView.width-100
+                 y: 3*(mainView.height/4)
+             }
+             PathAttribute { name: "itemScale"; value: 0.2 }
+             PathAttribute { name: "itemOpacity"; value: 1 }
+             PathAttribute { name: "translate"; value: 100 }
+             PathAttribute { name: "z"; value: 0 }
 
-            PathLine {
-                 x: mainView.width/1.6
-                 y: mainView.height-mainView.delegateHeight/1.5
-            }
-            PathAttribute { name: "itemScale"; value: 0.3 }
-            PathAttribute { name: "itemOpacity"; value: 0 }
-            PathAttribute { name: "itemRotation"; value: 45 }
-            PathAttribute { name: "z"; value: 0 }
 
+             PathLine {
+                 x: mainView.width
+                 y: mainView.height
+             }
+             PathAttribute { name: "itemScale"; value: 0.1 }
+             PathAttribute { name: "itemOpacity"; value: 0 }
+             PathAttribute { name: "translate"; value: 0 }
+             PathAttribute { name: "z"; value: 0 }
          }
      }
  }
