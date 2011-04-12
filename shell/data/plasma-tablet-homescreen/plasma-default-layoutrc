@@ -49,6 +49,11 @@ geometry=400,0,310,310
 plugin=plasma_applet_notes
 zvalue=1
 
+[Containments][4][Applets][3]
+plugin=blackboard
+geometry=1200,0,300,300
+immutability=1
+zvalue=1
 
 [Containments][3]
 activity=SocialNetwork
@@ -68,28 +73,6 @@ wallpaperpluginmode=SingleImage
 wallpaper=HorosGreen
 wallpaperposition=2
 
-[Containments][3][Applets][2]
-geometry=400,0,310,310
-plugin=twitter
-immutability=1
-zvalue=1
-
-
-[Containments][3][Applets][3]
-geometry=0,0,348,554
-immutability=1
-plugin=news
-zvalue=0
-
-[Containments][3][Applets][3][Configuration]
-Share=false
-feeds=http://www.kde.org/dotkdeorg.rdf,http://planetkde.org/rss20.xml
-interval=30
-showDescriptions=false
-showTimestamps=true
-showTitles=true
-
-
 [Containments][3][Applets][4]
 geometry=0,0,348,554
 immutability=1
@@ -99,7 +82,7 @@ zvalue=0
 [Containments][3][Applets][4][Configuration]
 Share=false
 launcherNamesVisible=true
-launchers=file:///usr/share/kde4/config/SuSE/default/tablet/TabletBrowser.desktop,file:///usr/share/applications/kde4/kpat.desktop
+launchers=file:///usr/share/kde4/config/SuSE/default/tablet/TabletBrowser.desktop,file:///usr/share/applications/kde4/news-tablet.desktop,file:///usr/share/applications/kde4/kpat.desktop
 launchersOnPopup=
 
 
@@ -129,21 +112,23 @@ geometry=0,0,300,300
 immutability=1
 zvalue=1
 
-[Containments][4][Applets][3]
-plugin=webbrowser
-geometry=400,0,300,300
-immutability=1
-zvalue=1
-
 [Containments][4][Applets][4]
-plugin=plasma_applet_rtm
-geometry=800,0,300,300
+geometry=0,0,348,554
 immutability=1
-zvalue=1
+plugin=news
+zvalue=0
+
+[Containments][4][Applets][4][Configuration]
+Share=false
+feeds=http://www.kde.org/dotkdeorg.rdf,http://planetkde.org/rss20.xml
+interval=30
+showDescriptions=false
+showTimestamps=true
+showTitles=true
 
 [Containments][4][Applets][5]
-plugin=blackboard
-geometry=1200,0,300,300
+plugin=plasma_applet_rtm
+geometry=800,0,300,300
 immutability=1
 zvalue=1
 
