@@ -79,17 +79,28 @@ QStringList MetadataEngine::sources() const
 
 bool MetadataEngine::sourceRequestEvent(const QString &name)
 {
-    Nepomuk::Query::FileQuery fileQuery;
-    Nepomuk::Query::LiteralTerm nepomukTerm(name);
-    fileQuery.setTerm(nepomukTerm);
-    fileQuery.addIncludeFolder(KUrl("/"), true);
-    fileQuery.setLimit( 20 );
-
-    kDebug() << "file search for query:" << name;
-    d->queryClient->query(fileQuery);
-    setData(name, Plasma::DataEngine::Data());
+    KUrl u = KUrl(name);
     d->query = name;
-    return true;
+    //if (u.isValid()) {
+    if (name.split("://").count() > 1) {
+        kDebug() << "Valid url ... creating resource synchronously";
+        Nepomuk::Resource r(u);
+        kDebug() << r.resourceUri();
+        addResource(r);
+        return true;
+    } else {
+        //Nepomuk::Query::FileQuery fileQuery;
+        Nepomuk::Query::Query fileQuery;
+        Nepomuk::Query::LiteralTerm nepomukTerm(name);
+        fileQuery.setTerm(nepomukTerm);
+        //fileQuery.addIncludeFolder(KUrl("/"), true);
+        fileQuery.setLimit( 20 );
+
+        kDebug() << "file search for query:" << name;
+        d->queryClient->query(fileQuery);
+        setData(name, Plasma::DataEngine::Data());
+        return true;
+    }
 }
 
 void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
@@ -98,19 +109,32 @@ void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         kDebug() << "Result Excerpt:" << res.excerpt();
         Nepomuk::Resource resource = res.resource();
-        QHash<QUrl, Nepomuk::Variant> props = resource.properties();
-        foreach(const QUrl &propertyUrl, props.keys()) {
-            QStringList _l = propertyUrl.toString().split('#');
-            if (_l.count() > 1) {
-                QString key = _l[1];
-                kDebug() << "" << key << propertyUrl << resource.property(propertyUrl).variant();
-                setData(d->query, key, resource.property(propertyUrl).variant());
-            } else {
-                kWarning() << "Could not parse ontology URL, missing '#':" << propertyUrl.toString();
-            }
-        }
+        addResource(resource);
     }
     scheduleSourcesUpdated();
+}
+
+void MetadataEngine::addResource(Nepomuk::Resource resource)
+{
+    QString uri = resource.resourceUri().toString();
+    QString source  = uri + "&query=" + d->query;
+
+    QHash<QUrl, Nepomuk::Variant> props = resource.properties();
+    foreach(const QUrl &propertyUrl, props.keys()) {
+        QStringList _l = propertyUrl.toString().split('#');
+        if (_l.count() > 1) {
+            QString key = _l[1];
+            kDebug() << " ... " << key << propertyUrl << resource.property(propertyUrl).variant();
+            setData(source, key, resource.property(propertyUrl).variant());
+            setData(source, "query", d->query);
+            // More properties
+
+
+
+        } else {
+            kWarning() << "Could not parse ontology URL, missing '#':" << propertyUrl.toString();
+        }
+    }
 }
 
 #include "metadataengine.moc"
