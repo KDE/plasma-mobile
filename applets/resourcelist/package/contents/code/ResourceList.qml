@@ -45,7 +45,7 @@ Item {
             for (d in data) {
                 print("  data " + d);
                 //timer.running = false
-                statusLabel.text = "Searching for " + searchBox.text + " finished.";
+                statusLabel.text = i18n("Searching for %1 finished.", searchBox.text);
 
                 plasmoid.busy = false
             }
@@ -139,12 +139,12 @@ Item {
 
                 PlasmaWidgets.Label {
                     id: previewLabel
-                    text: fileName
+                    text: label
                     //text: url
                     font.pixelSize: 14
                     font.bold: true
 
-                    width: 400
+                    width: parent.width - previewImage.width
                     anchors.top: itemFrame.top
                     //anchors.bottom: infoLabel.top;
                     anchors.left: previewImage.right
@@ -155,12 +155,16 @@ Item {
 
                 PlasmaWidgets.Label {
                     //image: metadataSource.data[DataEngineSource]["fileName"]
-                    text: lastModified
+                    text: {
+                        var t = resourceType;
+                        t = t.split('#')[1];
+                        return t;
+                    }
                     opacity: 0.6
                     //font.pixelSize: font.pixelSize * 1.8
                     font.pixelSize: 11
                     height: 14
-                    width: 200
+                    width: parent.width - previewImage.width
                     id: infoLabel
                     //wrapMode: Text.Wrap
                     anchors.right: itemFrame.right
@@ -177,7 +181,7 @@ Item {
     Text {
         id: statusLabel
         text: "end."
-        anchors { top: itemFrame.bottom; left:parent.left; right: parent.right; bottom: parent.bottom; }
+        anchors { top: webItemList.bottom; left:parent.left; right: parent.right; bottom: parent.bottom; }
 
     }
 
@@ -185,11 +189,11 @@ Item {
        id: timer
        running: false
        repeat: false
-       interval: 500
+       interval: 1000
        onTriggered: {
             plasmoid.busy = true
             metadataSource.connectedSources = [searchBox.text]
-            statusLabel.text = "Searching for " + searchBox.text + " ..."
+            statusLabel.text = i18n("Searching for %1 ...", searchBox.text);
        }
     }
 }
