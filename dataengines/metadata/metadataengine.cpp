@@ -79,22 +79,22 @@ QStringList MetadataEngine::sources() const
 
 bool MetadataEngine::sourceRequestEvent(const QString &name)
 {
-    KUrl u = KUrl(name);
     d->query = name;
-    //if (u.isValid()) {
     if (name.split("://").count() > 1) {
+        // We have a URL here, so we can create the results directly
         kDebug() << "Valid url ... creating resource synchronously";
+        KUrl u = KUrl(name);
         Nepomuk::Resource r(u);
         kDebug() << r.resourceUri();
         addResource(r);
         return true;
     } else {
-        //Nepomuk::Query::FileQuery fileQuery;
+        // Let's try a random query ...
         Nepomuk::Query::Query fileQuery;
         Nepomuk::Query::LiteralTerm nepomukTerm(name);
         fileQuery.setTerm(nepomukTerm);
         //fileQuery.addIncludeFolder(KUrl("/"), true);
-        fileQuery.setLimit( 20 );
+        fileQuery.setLimit(512);
 
         kDebug() << "file search for query:" << name;
         d->queryClient->query(fileQuery);
