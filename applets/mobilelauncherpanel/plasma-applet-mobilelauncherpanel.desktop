@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Launcher panel
 Name[et]=Käivitamispaneel
+Name[nl]=Startpaneel
 Name[pt]=Painel de lançamento
 Name[pt_BR]=Painel de lançamento
 Name[sv]=Startpanel
@@ -9,6 +10,7 @@ Name[uk]=Панель запуску
 Name[x-test]=xxLauncher panelxx
 Comment=Panel with some launcher icons
 Comment[et]=Paneel mõningate käivitamisikoonidega
+Comment[nl]=Paneel met pictogrammen om iets te starten
 Comment[pt]=Painel com alguns ícones de lançamento
 Comment[pt_BR]=Painel com alguns ícones de lançamento
 Comment[sv]=Panel med några programstartikoner

@@ -28,5 +28,5 @@ target_link_libraries(plasmainputcontextplugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_
 install(TARGETS plasmainputcontextplugin DESTINATION ${QT_PLUGINS_DIR}/inputmethods/)
 #install(TARGETS plasmainputcontextplugin DESTINATION ${PLUGIN_INSTALL_DIR}/inputmethods/)
 
-install(FILES plasmainputmethod.sh DESTINATION ${CMAKE_INSTALL_PREFIX}/env)
+#install(FILES plasmainputmethod.sh DESTINATION ${CMAKE_INSTALL_PREFIX}/env)
 

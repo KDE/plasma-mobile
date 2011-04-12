@@ -64,8 +64,8 @@ PreviewEngine::~PreviewEngine()
 
 QStringList PreviewEngine::sources() const
 {
-    //return QStringList();
-    return QStringList() << "https://wiki.ubuntu.com/X/Config/Input" << "file:///home/sebas/Documents/Curacao/wallpaper.jpg";
+    return QStringList();
+    //return QStringList() << "https://wiki.ubuntu.com/X/Config/Input" << "file:///home/sebas/Documents/Curacao/wallpaper.jpg";
 }
 
 bool PreviewEngine::sourceRequestEvent(const QString &name)
@@ -168,7 +168,10 @@ void PreviewEngine::updateData(KWebThumbnailer* wtn)
     setData(thumbnailerSource(wtn), "url", wtn->url().toString());
     setData(thumbnailerSource(wtn), "fileName", wtn->fileName());
     setData(thumbnailerSource(wtn), "thumbnail", wtn->thumbnail());
-    if (!wtn->fileName().isEmpty()) scheduleSourcesUpdated();
+    if (!wtn->fileName().isEmpty()) {
+        kDebug() << "sources updated." << wtn->fileName();
+        scheduleSourcesUpdated();
+    }
 }
 
 void PreviewEngine::previewJobFailed(const KFileItem &item)

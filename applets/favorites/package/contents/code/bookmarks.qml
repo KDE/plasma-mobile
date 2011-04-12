@@ -40,6 +40,8 @@ Item {
         //console.log(i18n("Time (fetched without datasource) Is %1 in %2", data.Time.toString(), source))
     }
     */
+    property alias title: header
+    property alias urls: previewSource.connectedSources
 
     PlasmaCore.DataSource {
         id: previewSource
@@ -47,12 +49,12 @@ Item {
 
         connectedSources: [ "file:///home/sebas/Documents/Curacao/wallpaper.jpg",
             "http://www.volkskrant.nl",
-            //"http://www.google.com"
-            //"http://www.kde.org",
-            ///"http://www.engadget.com",
+            "http://www.google.com",
+            "http://www.kde.org",
+            "http://www.engadget.com",
             "http://www.tweakers.net"
         ]
-        //interval: 0
+        interval: 0
         //connectedSources: sources
         onSourceAdded: {
             console.log("source added:" + source);
@@ -61,6 +63,12 @@ Item {
 
         onDataChanged: {
             console.log("========================== Data changed");
+            for (d in data) {
+                print("  data " + d);
+            }
+        }
+        Component.onCompleted: {
+            connectedSources = sources
         }
 
     }
@@ -74,113 +82,150 @@ Item {
         id: theme
     }
 
-    Column {
+    PlasmaWidgets.Label {
+        id: header
+        text: i18n("<h2>My Favorites</h2>")
+        anchors { top: parent.top; left:parent.left; right: parent.right; bottomMargin: 8 }
+    }
 
-        Text {
-            text: i18n("<h2>My Favorites</h2>")
+    ListView {
+        id: webItemList
+        //anchors.fill: parent
+        height: 400
+        snapMode: ListView.SnapToItem
+        clip: true
+        highlightMoveDuration: 300
+        spacing: 8;
+        orientation: Qt.Horizontal
+        anchors { top: header.bottom; left:parent.left; right: parent.right }
+
+        model: PlasmaCore.DataModel {
+            dataSource: previewSource
         }
 
-        ListView {
-            //anchors.fill: parent
-            height: 400
-            snapMode: ListView.SnapToItem
-            clip: true
-            highlightMoveDuration: 300
-            spacing: 8;
+        delegate: Item {
+            id: bookmarkItem
+            height: 128
+            width: 300
 
-            model: PlasmaCore.DataModel {
-                dataSource: previewSource
+            Item {
+                id: itemFrame
+                anchors { bottom: parent.bottom; top: parent.top; left: parent.left; right: parent.right; margins: 24; }
+                height: 128
+                //height: bookmarkItem.height
+                //frameShadow: "Raised"
+
+                Image {
+                    id: previewImage
+                    //anchors.fill: item
+                    //source: model.data[DataEngineSource]["fileName"]
+                    //source: fileName
+                    //source: fileName
+                    source: "/tmp/sebas-kde4/kde-sebas/plasmoidviewerb11537.png"
+                    height:96
+                    width: 128
+                    anchors.margins: 8
+
+                }
+
+                PlasmaWidgets.Label {
+                    id: previewLabel
+                    text: {
+                        //var s = url;
+                        var s = "http://plasma.kde.org";
+                        s = s.replace("http://", "");
+                        s = s.replace("https://", "");
+                        s = s.replace("www.", "");
+                        console.log(s + s.length);
+                        return s;
+                    }
+                    //text: url
+                    font.pixelSize: 14
+                    font.bold: true
+
+                    width: 400
+                    anchors.top: itemFrame.top
+                    //anchors.bottom: infoLabel.top;
+                    anchors.left: previewImage.right
+                    anchors.right: itemFrame.right
+                    anchors.margins: 8
+
+                }
+
+                PlasmaWidgets.Label {
+                    //image: previewSource.data[DataEngineSource]["fileName"]
+                    text: "To specify that an image..."
+                    opacity: 0.6
+                    //font.pixelSize: font.pixelSize * 1.8
+                    font.pixelSize: 11
+                    height: 14
+                    width: 200
+                    id: infoLabel
+                    //wrapMode: Text.Wrap
+                    anchors.right: itemFrame.right
+                    anchors.top: previewLabel.bottom
+                    anchors.bottom: itemFrame.bottom
+                    anchors.left: previewImage.right
+                    anchors.margins: 8
+
+                }
+                /*
+                Component.onCompleted: {
+                    //return;
+                    //console.log(" =========== Item ========= " + DataEngineSource )
+                    print("Print works.");
+                    for (var i in data) {
+                        print(i + " -> " + data[i])
+                    }
+                    var s;
+                    for (s in previewSource.data) {
+                        console.log("_____ " + s);
+                        //console.log("-->:" + s + "length: " + previewSource.data[s]["http://www.kde.org"]["fileName"]);
+                        for (k in previewSource.data[s]) {
+                            var v = previewSource.data[s][k];
+                            console.log("       v:" + k + " :: " + v);
+                            //if (k.indexOf("") != -1) {
+                            //    console.log(s+ "       =====> v:" + k + previewSource.data[s][k]);
+                            //}
+                        }
+                    }
+                }
+                */
             }
 
-            delegate: Item {
-                id: bookmarkItem
-                height: 72
-
-                PlasmaWidgets.Frame {
-                    id: itemFrame
-                    anchors.fill: bookmarkItem;
-                    frameShadow: "Raised"
-
-                    Image {
-                        id: previewImage
-                        //anchors.fill: item
-                        //source: model.data[DataEngineSource]["fileName"]
-                        //source: fileName
-                        source: "/tmp/thumbnail.png"
-                        height:32
-                        width: 42
-
-                    }
-
-                    PlasmaWidgets.Label {
-                        /*
-                        text: {
-                            //var s = url;
-                            var s = "http://plasma.kde.org";
-                            s = s.replace("http://", "");
-                            s = s.replace("https://", "");
-                            s = s.replace("www.", "");
-                            console.log(s + s.length);
-                            return s;
-                        }
-                        */
-                        text: "this is the url"
-                        font.pixelSize: 14
-                        font.bold: true
-
-                        width: 400
-                        id: previewLabel
-                        anchors.top: itemFrame.top
-                        //anchors.bottom: infoLabel.top;
-                        anchors.left: previewImage.right
-                        anchors.right: itemFrame.right
-
-                    }
-
-                    Text {
-                        //image: previewSource.data[DataEngineSource]["fileName"]
-                        text: "To specify that an image should be loaded by an image provider, use the \"image:\" scheme for the URL source of the image, followed by the identifiers of the image provider and the requested image. For example:"
-                        opacity: 0.6
-                        //font.pixelSize: font.pixelSize * 1.8
-                        font.pixelSize: 11
-                        height: 14
-                        width: 200
-                        id: infoLabel
-                        wrapMode: Text.Wrap
-                        anchors.right: itemFrame.right
-                        anchors.top: previewLabel.bottom
-                        anchors.bottom: itemFrame.bottom
-                        anchors.left: previewImage.right
-
-                    }
-
-                    Component.onCompleted: {
-                        //return;
-                        console.log(" =========== Item ========= " + DataEngineSource )
-                        print("Print works.");
-                        for (var i in data) {
-                            print(i + " -> " + data[i])
-                        }
-                        /*
-                        var s;
-                        for (s in previewSource.data) {
-                            console.log(url);
-                            console.log("-->:" + s + "length: " + previewSource.data[s]["http://www.kde.org"]["fileName"]);
-                            for (k in previewSource.data.s) {
-                                console.log("       v:" + k);
-                                //if (k.indexOf("") != -1) {
-                                //    console.log(s+ "       =====> v:" + k + previewSource.data[s][k]);
-                                //}
-                            }
-                        }
-                        */
+            Component.onCompleted: {
+                //return;
+                //console.log(" =========== Item ========= " + DataEngineSource )
+                //print("bookmarkItem-----" + bookmarkItem.DataEngineSource);
+                for (var i in previewSource) {
+                    print(" pewviewSource elements:" + i)
+                }
+                print("this ===========");
+                for (var i in this) {
+                    print(" elements:" + i)
+                }
+                for (var i in data) {
+                    print(i + " -> " + data[i])
+                }
+                var s;
+                for (s in previewSource.data) {
+                    console.log("_____ " + s);
+                    //console.log("-->:" + s + "length: " + previewSource.data[s]["http://www.kde.org"]["fileName"]);
+                    for (k in previewSource.data[s]) {
+                        var v = previewSource.data[s][k];
+                        console.log("       v:" + k + " :: " + v);
+                        //if (k.indexOf("") != -1) {
+                        //    console.log(s+ "       =====> v:" + k + previewSource.data[s][k]);
+                        //}
                     }
                 }
             }
         }
+    }
 
-        Text {
-            text: "end."
-        }
+    Text {
+        text: "end."
+        anchors { left:parent.left; right: parent.right; bottom: parent.bottom; }
+
     }
 }
