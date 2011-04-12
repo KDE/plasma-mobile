@@ -110,7 +110,7 @@ Item {
         delegate: Item {
             id: resourceItem
             height: 72
-            width: 300
+            width: parent.width
 
             Item {
                 id: itemFrame
@@ -143,6 +143,7 @@ Item {
                     //text: url
                     font.pixelSize: 14
                     font.bold: true
+                    height: font.pixelSize * 2.5
 
                     width: parent.width - previewImage.width
                     anchors.top: itemFrame.top
@@ -154,18 +155,14 @@ Item {
                 }
 
                 PlasmaWidgets.Label {
+                    id: infoLabel
                     //image: metadataSource.data[DataEngineSource]["fileName"]
-                    text: {
-                        var t = resourceType;
-                        t = t.split('#')[1];
-                        return t;
-                    }
+                    text: description
                     opacity: 0.6
                     //font.pixelSize: font.pixelSize * 1.8
                     font.pixelSize: 11
                     height: 14
                     width: parent.width - previewImage.width
-                    id: infoLabel
                     //wrapMode: Text.Wrap
                     anchors.right: itemFrame.right
                     anchors.top: previewLabel.bottom
@@ -180,9 +177,8 @@ Item {
 
     Text {
         id: statusLabel
-        text: "end."
+        text: i18n("Idle.")
         anchors { top: webItemList.bottom; left:parent.left; right: parent.right; bottom: parent.bottom; }
-
     }
 
     Timer {
@@ -193,7 +189,7 @@ Item {
        onTriggered: {
             plasmoid.busy = true
             metadataSource.connectedSources = [searchBox.text]
-            statusLabel.text = i18n("Searching for %1 ...", searchBox.text);
+            statusLabel.text = i18n("Searching for %1...", searchBox.text);
        }
     }
 }

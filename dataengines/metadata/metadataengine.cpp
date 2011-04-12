@@ -40,6 +40,8 @@
 
 #include "metadataengine.h"
 
+#define RESULT_LIMIT 10
+
 class MetadataEngineprivate
 {
 public:
@@ -55,7 +57,7 @@ MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
     Q_UNUSED(args);
     d = new MetadataEngineprivate;
     d->queryClient = 0;
-    setMaxSourceCount(24); // Guard against loading too many connections
+    setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
     init();
 }
 
@@ -86,19 +88,22 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
         KUrl u = KUrl(name);
         Nepomuk::Resource r(u);
         kDebug() << r.resourceUri();
+        if (!r.exists()) {
+            kWarning() << "Resource " << u << " does not exist.";
+            return false;
+        }
         addResource(r);
         return true;
     } else {
-        // Let's try a random query ...
+        // Let's try a literal query ...
+        kDebug() << "async search for query:" << name;
         Nepomuk::Query::Query fileQuery;
         Nepomuk::Query::LiteralTerm nepomukTerm(name);
         fileQuery.setTerm(nepomukTerm);
         //fileQuery.addIncludeFolder(KUrl("/"), true);
-        fileQuery.setLimit(512);
+        fileQuery.setLimit(RESULT_LIMIT);
 
-        kDebug() << "file search for query:" << name;
         d->queryClient->query(fileQuery);
-        //setData(name, Plasma::DataEngine::Data());
         return true;
     }
 }
@@ -124,24 +129,54 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
         source  = uri + "&query=" + d->query;
     }
 
-    QString desc = resource.description();
+    QString desc = resource.genericDescription();
     if (desc.isEmpty()) {
-        desc = "Empty description.";
+        //desc = "Empty description.";
     }
-    QString label = resource.label();
+    QString label = resource.genericLabel();
     if (label.isEmpty()) {
         label = "Empty label.";
     }
 
     setData(source, "label", label);
     setData(source, "description", desc);
-
+    setData(source, "icon", resource.genericIcon());
     setData(source, "isFile", resource.isFile());
+    setData(source, "exists", resource.exists());
     setData(source, "rating", resource.rating());
+    setData(source, "symbols", resource.rating());
 
-    //setData(source, "resourceType", resource.resourceType());
+    setData(source, "className", resource.className());
     setData(source, "resourceUri", resource.resourceUri());
     setData(source, "resourceType", resource.resourceType());
+    setData(source, "query", d->query);
+
+    // Types
+    QStringList _types;
+    foreach (const QUrl &u, resource.types()) {
+        _types << u.toString();
+    }
+    setData(source, "types", _types);
+
+    // Topics
+    QStringList _topics, _topicNames;
+    foreach (const Nepomuk::Resource &u, resource.topics()) {
+        _topics << u.resourceUri().toString();
+        _topicNames << u.genericLabel();
+    }
+    setData(source, "topics", _topics);
+    setData(source, "topicNames", _topicNames);
+
+    // Tags
+    QStringList _tags, _tagNames;
+    foreach (const Nepomuk::Tag &tag, resource.tags()) {
+        _tags << tag.resourceUri().toString();
+        _tagNames << tag.genericLabel();
+    }
+    setData(source, "tags", _tags);
+    setData(source, "tagNames", _tagNames);
+
+    // Related
 
 
 
@@ -153,9 +188,7 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
             QString key = _l[1];
             //kDebug() << " ... " << key << propertyUrl << resource.property(propertyUrl).variant();
             setData(source, key, resource.property(propertyUrl).variant());
-            setData(source, "query", d->query);
             // More properties
-
 
 
         } else {
