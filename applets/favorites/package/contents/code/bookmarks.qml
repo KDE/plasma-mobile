@@ -40,6 +40,8 @@ Item {
         //console.log(i18n("Time (fetched without datasource) Is %1 in %2", data.Time.toString(), source))
     }
     */
+    property alias title: header
+    property alias urls: previewSource.connectedSources
 
     PlasmaCore.DataSource {
         id: previewSource
@@ -47,9 +49,9 @@ Item {
 
         connectedSources: [ "file:///home/sebas/Documents/Curacao/wallpaper.jpg",
             "http://www.volkskrant.nl",
-            //"http://www.google.com"
-            //"http://www.kde.org",
-            ///"http://www.engadget.com",
+            "http://www.google.com",
+            "http://www.kde.org",
+            "http://www.engadget.com",
             "http://www.tweakers.net"
         ]
         interval: 0
@@ -80,10 +82,10 @@ Item {
         id: theme
     }
 
-    Text {
+    PlasmaWidgets.Label {
         id: header
         text: i18n("<h2>My Favorites</h2>")
-        anchors { top: parent.top; left:parent.left; right: parent.right }
+        anchors { top: parent.top; left:parent.left; right: parent.right; bottomMargin: 8 }
     }
 
     ListView {
@@ -94,6 +96,7 @@ Item {
         clip: true
         highlightMoveDuration: 300
         spacing: 8;
+        orientation: Qt.Horizontal
         anchors { top: header.bottom; left:parent.left; right: parent.right }
 
         model: PlasmaCore.DataModel {
@@ -105,24 +108,28 @@ Item {
             height: 128
             width: 300
 
-            PlasmaWidgets.Frame {
+            Item {
                 id: itemFrame
-                anchors.fill: bookmarkItem;
-                frameShadow: "Raised"
+                anchors { bottom: parent.bottom; top: parent.top; left: parent.left; right: parent.right; margins: 24; }
+                height: 128
+                //height: bookmarkItem.height
+                //frameShadow: "Raised"
 
                 Image {
                     id: previewImage
                     //anchors.fill: item
                     //source: model.data[DataEngineSource]["fileName"]
                     //source: fileName
-                    source: "/tmp/thumbnail.png"
+                    //source: fileName
+                    source: "/tmp/sebas-kde4/kde-sebas/plasmoidviewerb11537.png"
                     height:96
                     width: 128
+                    anchors.margins: 8
 
                 }
 
                 PlasmaWidgets.Label {
-                    /*
+                    id: previewLabel
                     text: {
                         //var s = url;
                         var s = "http://plasma.kde.org";
@@ -132,34 +139,34 @@ Item {
                         console.log(s + s.length);
                         return s;
                     }
-                    */
-                    text: "this is the url"
+                    //text: url
                     font.pixelSize: 14
                     font.bold: true
 
                     width: 400
-                    id: previewLabel
                     anchors.top: itemFrame.top
                     //anchors.bottom: infoLabel.top;
                     anchors.left: previewImage.right
                     anchors.right: itemFrame.right
+                    anchors.margins: 8
 
                 }
 
-                Text {
+                PlasmaWidgets.Label {
                     //image: previewSource.data[DataEngineSource]["fileName"]
-                    text: "To specify that an image should be loaded by an image provider, use the \"image:\" scheme for the URL source of the image, followed by the identifiers of the image provider and the requested image. For example:"
+                    text: "To specify that an image..."
                     opacity: 0.6
                     //font.pixelSize: font.pixelSize * 1.8
                     font.pixelSize: 11
                     height: 14
                     width: 200
                     id: infoLabel
-                    wrapMode: Text.Wrap
+                    //wrapMode: Text.Wrap
                     anchors.right: itemFrame.right
                     anchors.top: previewLabel.bottom
                     anchors.bottom: itemFrame.bottom
                     anchors.left: previewImage.right
+                    anchors.margins: 8
 
                 }
                 /*
