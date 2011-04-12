@@ -17,15 +17,6 @@
     02110-1301, USA.
 */
 
-//#include <KFileMetaInfo>
-//#include <KIcon>
-
-//#include <KIO/PreviewJob>
-//#include <KFileItem>
-//#include <KTemporaryFile>
-//#include <KRun>
-//#include <QWidget>
-
 // Nepomuk
 #include <Nepomuk/Resource>
 #include <Nepomuk/Variant>
@@ -49,15 +40,12 @@
 
 #include "metadataengine.h"
 
-//using namespace KIO;
-
 class MetadataEngineprivate
 {
 public:
     Nepomuk::Query::QueryServiceClient *queryClient;
     QString query;
     QSize previewSize;
-    //QHash<QString, KIO::PreviewJob*> workers;
 };
 
 
@@ -66,9 +54,8 @@ MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
 {
     Q_UNUSED(args);
     d = new MetadataEngineprivate;
-    //d->previewSize = QSize(180, 120);
     d->queryClient = 0;
-    //setMaxSourceCount(64); // Guard against loading too many connections
+    setMaxSourceCount(512); // Guard against loading too many connections
     init();
 }
 
@@ -78,7 +65,6 @@ void MetadataEngine::init()
     d->queryClient = new Nepomuk::Query::QueryServiceClient(this);
     connect(d->queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
             this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-
 }
 
 MetadataEngine::~MetadataEngine()
@@ -88,8 +74,7 @@ MetadataEngine::~MetadataEngine()
 
 QStringList MetadataEngine::sources() const
 {
-    //return QStringList();
-    return QStringList() << "Cactus";
+    return QStringList();
 }
 
 bool MetadataEngine::sourceRequestEvent(const QString &name)
@@ -111,12 +96,10 @@ void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
 {
     foreach (Nepomuk::Query::Result res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-        //addWidget(res.resource());
         kDebug() << "Result Excerpt:" << res.excerpt();
         Nepomuk::Resource resource = res.resource();
         QHash<QUrl, Nepomuk::Variant> props = resource.properties();
         foreach(const QUrl &propertyUrl, props.keys()) {
-            //QUrl propertyUrl
             QStringList _l = propertyUrl.toString().split('#');
             if (_l.count() > 1) {
                 QString key = _l[1];
@@ -128,7 +111,6 @@ void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
         }
     }
     scheduleSourcesUpdated();
-    //emit matchFound();
 }
 
 #include "metadataengine.moc"
