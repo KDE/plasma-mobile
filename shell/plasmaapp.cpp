@@ -22,8 +22,11 @@
 
 #include "plasmaapp.h"
 
+#include "cachingeffect.h"
 #include "mobview.h"
 #include "mobcorona.h"
+#include "mobpluginloader.h"
+#include "mobileactivitythumbnails/mobileactivitythumbnails.h"
 #include "widgetsexplorer/mobilewidgetsexplorer.h"
 
 #include <unistd.h>
@@ -53,34 +56,12 @@
 #include <Plasma/WindowEffects>
 #include <Plasma/Applet>
 #include <Plasma/Package>
+#include <Plasma/PluginLoader>
 #include <Plasma/Wallpaper>
 
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
 
-class CachingEffect : public QGraphicsEffect
-{
-  public :
-    CachingEffect(QObject *parent = 0) : QGraphicsEffect(parent)
-    {}
-
-    void draw(QPainter *p)
-    {
-        QPoint point;
-        QPixmap pixmap = sourcePixmap(Qt::LogicalCoordinates, &point);
-        //maybe we are in a view with save and restore disabled..
-        p->setCompositionMode(QPainter::CompositionMode_Source);
-
-        p->drawPixmap(point, pixmap);
-        p->setCompositionMode(QPainter::CompositionMode_SourceOver);
-    }
-
-    QPixmap cachedPixmap() const
-    {
-        QPoint point;
-        return sourcePixmap(Qt::LogicalCoordinates, &point);
-    }
-};
 
 PlasmaApp* PlasmaApp::self()
 {
@@ -101,6 +82,10 @@ PlasmaApp::PlasmaApp()
     KGlobal::locale()->insertCatalog("libplasma");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+    //FIXME: why does not work?
+    //qmlRegisterInterface<Plasma::Wallpaper>("Wallpaper");
+    //qRegisterMetaType<Plasma::Wallpaper*>("Wallpaper");
 
     bool useGL = args->isSet("opengl");
     m_mainView = new MobView(0, MobView::mainViewId(), 0);
@@ -154,6 +139,8 @@ PlasmaApp::PlasmaApp()
     m_homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
     kDebug() << "***** HSP from config" << m_homeScreenPath;
 
+    m_pluginLoader = new MobPluginLoader;
+    Plasma::PluginLoader::setPluginLoader(m_pluginLoader);
     // this line initializes the corona and setups the main qml homescreen
     corona();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
@@ -282,8 +269,14 @@ void PlasmaApp::containmentsTransformingChanged(bool transforming)
     if (m_currentContainment && m_currentContainment->graphicsEffect()) {
         m_currentContainment->graphicsEffect()->setEnabled(transforming);
     }
+
     if (m_oldContainment && m_oldContainment.data()->graphicsEffect()) {
         m_oldContainment.data()->graphicsEffect()->setEnabled(transforming);
+        //take a snapshot of the old one
+        if (transforming && m_pluginLoader->activityThumbnails()) {
+            m_pluginLoader->activityThumbnails()->snapshotContainment(m_oldContainment.data());
+        }
+
     }
     foreach (Plasma::Containment *cont, m_alternateContainments) {
         if (cont->graphicsEffect()) {
@@ -299,6 +292,14 @@ void PlasmaApp::changeContainment(Plasma::Containment *containment)
     containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
 
     m_oldContainment = m_currentContainment;
+
+    //FIXME: it should be possible to access containment.wallpaper
+    //expose the current wallpaper into the corona QML
+    if (containment->wallpaper()) {
+        QDeclarativeProperty containmentProperty(m_homeScreen, "activeWallpaper");
+        containmentProperty.write(QVariant::fromValue(static_cast<QObject*>(containment->wallpaper())));
+    }
+
     m_currentContainment = containment;
 }
 

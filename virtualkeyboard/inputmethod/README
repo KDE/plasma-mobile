@@ -1,0 +1,2 @@
+plasmainputmethod.sh should be installed in KDE's env dir (eg /usr/share/kde4/env). 
+Note this overrides QT_IM_MODULE which means any other input method modules in use will be disabled.

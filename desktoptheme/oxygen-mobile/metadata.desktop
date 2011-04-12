@@ -1,0 +1,37 @@
+[Desktop Entry]
+Name=Oxygen for Mobile
+Name[et]=Oxygen mobiilsetele seadmetele
+Name[nl]=Oxygen voor mobiel
+Name[pt]=Oxygen Móvel
+Name[sv]=Oxygen för mobiler
+Name[uk]=«Oxygen» для мобільного
+Name[x-test]=xxOxygen for Mobilexx
+Comment=A breath of fresh air
+Comment[de]=Ein Atemzug frische Luft
+Comment[es]=Un soplo de aire fresco
+Comment[et]=Värskendav tuulepuhang
+Comment[nds]=En beten Frischluft
+Comment[nl]=Een hap frisse lucht
+Comment[pt]=Uma brisa de ar fresco
+Comment[pt_BR]=Uma brisa de ar fresco
+Comment[sv]=En frisk fläkt
+Comment[uk]=Ковток свіжого повітря
+Comment[x-test]=xxA breath of fresh airxx
+
+
+X-KDE-PluginInfo-Author=The Oxygen Project
+X-KDE-PluginInfo-Email=kde-artists@kde.org
+X-KDE-PluginInfo-Name=oxygen-mobile
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org
+X-KDE-PluginInfo-Category=
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
+[Settings]
+FallbackTheme=oxygen
+
+[Wallpaper]
+defaultWallpaperTheme=Universe
+
