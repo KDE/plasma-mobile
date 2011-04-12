@@ -55,7 +55,7 @@ MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
     Q_UNUSED(args);
     d = new MetadataEngineprivate;
     d->queryClient = 0;
-    setMaxSourceCount(512); // Guard against loading too many connections
+    setMaxSourceCount(24); // Guard against loading too many connections
     init();
 }
 
@@ -117,8 +117,35 @@ void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
 void MetadataEngine::addResource(Nepomuk::Resource resource)
 {
     QString uri = resource.resourceUri().toString();
-    QString source  = uri + "&query=" + d->query;
+    // If we didn't explicitely search for a nepomuk:// url, let's add the query
+    // to the parameters
+    QString source  = uri;
+    if (uri != d->query) {
+        source  = uri + "&query=" + d->query;
+    }
 
+    QString desc = resource.description();
+    if (desc.isEmpty()) {
+        desc = "Empty description.";
+    }
+    QString label = resource.label();
+    if (label.isEmpty()) {
+        label = "Empty label.";
+    }
+
+    setData(source, "label", label);
+    setData(source, "description", desc);
+
+    setData(source, "isFile", resource.isFile());
+    setData(source, "rating", resource.rating());
+
+    //setData(source, "resourceType", resource.resourceType());
+    setData(source, "resourceUri", resource.resourceUri());
+    setData(source, "resourceType", resource.resourceType());
+
+
+
+    // Dynamic properties
     QHash<QUrl, Nepomuk::Variant> props = resource.properties();
     foreach(const QUrl &propertyUrl, props.keys()) {
         QStringList _l = propertyUrl.toString().split('#');
