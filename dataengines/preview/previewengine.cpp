@@ -120,10 +120,9 @@ void PreviewEngine::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
             kDebug() << "Starting previewjob" << source;
             // KIO::PreviewJob: http://api.kde.org/4.x-api/kdelibs-apidocs/kio/html/classKIO_1_1PreviewJob.html
             KFileItem kfile = KFileItem(mimejob->url(), mimetype, KFileItem::Unknown);
-            //kfile.setUrl();
             KFileItemList list;
             list << kfile;
-            KIO::PreviewJob *job = new KIO::PreviewJob(list, d->previewSize);
+            KIO::PreviewJob *job = new KIO::PreviewJob(list, d->previewSize, 0);
             connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)), SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
             connect(job, SIGNAL(failed(const KFileItem&)), SLOT(previewJobFailed(const KFileItem&)));
             connect(job, SIGNAL(result(KJob*)), SLOT(previewResult(KJob*)));
