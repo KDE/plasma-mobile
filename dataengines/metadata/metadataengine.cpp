@@ -98,7 +98,7 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
 
         kDebug() << "file search for query:" << name;
         d->queryClient->query(fileQuery);
-        setData(name, Plasma::DataEngine::Data());
+        //setData(name, Plasma::DataEngine::Data());
         return true;
     }
 }
@@ -124,7 +124,7 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
         QStringList _l = propertyUrl.toString().split('#');
         if (_l.count() > 1) {
             QString key = _l[1];
-            kDebug() << " ... " << key << propertyUrl << resource.property(propertyUrl).variant();
+            //kDebug() << " ... " << key << propertyUrl << resource.property(propertyUrl).variant();
             setData(source, key, resource.property(propertyUrl).variant());
             setData(source, "query", d->query);
             // More properties
