@@ -117,8 +117,14 @@ void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
         QHash<QUrl, Nepomuk::Variant> props = resource.properties();
         foreach(const QUrl &propertyUrl, props.keys()) {
             //QUrl propertyUrl
-            kDebug() << "" << propertyUrl << resource.property(propertyUrl).variant();
-            setData(d->query, propertyUrl.toString(), resource.property(propertyUrl).variant());
+            QStringList _l = propertyUrl.toString().split('#');
+            if (_l.count() > 1) {
+                QString key = _l[1];
+                kDebug() << "" << key << propertyUrl << resource.property(propertyUrl).variant();
+                setData(d->query, key, resource.property(propertyUrl).variant());
+            } else {
+                kWarning() << "Could not parse ontology URL, missing '#':" << propertyUrl.toString();
+            }
         }
     }
     scheduleSourcesUpdated();
