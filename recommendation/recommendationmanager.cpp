@@ -146,8 +146,6 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
     : QObject(parent),
       d(new Private())
 {
-    qDBusRegisterMetaType<QList<Contour::Recommendation*> >();
-    qDBusRegisterMetaType<Contour::RecommendationAction*>();
     d->q = this;
 
     connect(&d->m_queryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
@@ -163,6 +161,8 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
 
     // export via DBus
     qDBusRegisterMetaType<Contour::Recommendation*>();
+    qDBusRegisterMetaType<QList<Contour::Recommendation*> >();
+    qDBusRegisterMetaType<Contour::RecommendationAction*>();
     (void)new RecommendationManagerAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String("/recommendationmanager"), this);
 }

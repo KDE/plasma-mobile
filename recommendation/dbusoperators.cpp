@@ -26,10 +26,10 @@
 
 #include <KUrl>
 
-QDBusArgument& operator<<(QDBusArgument& arg, const Contour::Recommendation* r)
+QDBusArgument& operator<<(QDBusArgument& arg, const Contour::Recommendation *r)
 {
     arg.beginStructure();
-    arg << KUrl("http://fakeurl").url();//KUrl(r->resource().resourceUri()).url();
+    arg << KUrl(r->resource().resourceUri()).url();
     arg << r->relevance();
     arg.beginArray(qMetaTypeId<Contour::RecommendationAction*>());
     foreach(Contour::RecommendationAction* action, r->actions()) {
@@ -42,8 +42,9 @@ QDBusArgument& operator<<(QDBusArgument& arg, const Contour::Recommendation* r)
     return arg;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::Recommendation* r)
+const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::Recommendation *r)
 {
+    r = new Contour::Recommendation(Nepomuk::Resource(QUrl("http://www.kde.org")), 0.5);
     return arg;
 }
 
@@ -62,6 +63,7 @@ QDBusArgument& operator<<(QDBusArgument& arg, const Contour::RecommendationActio
 
 const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::RecommendationAction *action)
 {
+    action = new Contour::RecommendationAction();
     return arg;
 }
 
