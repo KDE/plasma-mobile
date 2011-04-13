@@ -53,34 +53,4 @@ void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommend
     }
 }
 
-/*bool RecommendationsEngine::sourceRequestEvent(const QString &name)
-{
-    if (!name.startsWith("test") ) {
-        return false;
-    }
-
-    updateSourceEvent(name); //start a download
-    return true;
-}
-
-
-bool RecommendationsEngine::updateSourceEvent(const QString &name)
-{
-    kDebug() << name;
-
-
-    TestSource *source = dynamic_cast<TestSource*>(containerForSource(name));
-
-    if (!source) {
-        source = new TestSource(this);
-        source->setObjectName(name);
-
-        addSource(source);
-    }
-
-
-    source->update();
-    return false;
-}*/
-
 #include "recommendationsengine.moc"
