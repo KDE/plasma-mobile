@@ -24,16 +24,17 @@
 
 #include <QtCore/QObject>
 
+#include "recommendationsclient_export.h"
+
+
 namespace Nepomuk {
 class Resource;
 }
 
-
-
 namespace Contour {
 class RecommendationAction;
 
-class Recommendation : public QObject
+class RECOMMENDATIONSCLIENT_EXPORT Recommendation : public QObject
 {
     Q_OBJECT
 

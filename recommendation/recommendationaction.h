@@ -24,9 +24,11 @@
 
 #include <QAction>
 
+#include "recommendationsclient_export.h"
+
 namespace Contour {
 
-class RecommendationAction : public QAction
+class RECOMMENDATIONSCLIENT_EXPORT RecommendationAction : public QAction
 {
     Q_OBJECT
 

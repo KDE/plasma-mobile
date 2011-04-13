@@ -18,11 +18,12 @@
 
 #include "recommendationsengine.h"
 #include "testsource.h"
-#include "contour_interface.h"
 
 #include <QDBusPendingCallWatcher>
 
 #include <KDebug>
+
+#include <Nepomuk/Resource>
 
 #include <recommendationsclient.h>
 #include <recommendation.h>
@@ -42,9 +43,11 @@ RecommendationsEngine::~RecommendationsEngine()
 
 void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommendation*> &recommendations)
 {
-    kWarning()<<"Map of recommendations: "<<recommendations;
+    kWarning()<<"New recommendations: "<<recommendations;
 
-    setData("recommendations", "recommendations");
+    foreach (Contour::Recommendation *rec, recommendations) {
+        setData(rec->resource().uri(), rec->relevance());
+    }
 }
 
 /*bool RecommendationsEngine::sourceRequestEvent(const QString &name)
