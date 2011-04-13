@@ -37,16 +37,16 @@ Item {
         interval: 0
 
         onSourceAdded: {
-            console.log("source added:" + source);
+            //console.log("source added:" + source);
             connectSource(source);
         }
 
         onDataChanged: {
             for (d in data) {
-                print("  data " + d);
+                //print("  data " + d);
                 //timer.running = false
-                statusLabel.text = i18n("Searching for %1 finished.", searchBox.text);
-
+                //statusLabel.text = i18n("Searching for %1 finished.", searchBox.text);
+                statusLabel.text = "";
                 plasmoid.busy = false
             }
         }
@@ -95,7 +95,7 @@ Item {
     ListView {
         id: webItemList
         //anchors.fill: parent
-        height: 400
+        height: 600
         snapMode: ListView.SnapToItem
         clip: true
         highlightMoveDuration: 300
@@ -124,17 +124,20 @@ Item {
                 height: resourceItem.height
                 //frameShadow: "Raised"
 
-                Image {
+                PlasmaWidgets.IconWidget {
                     id: previewImage
                     //anchors.fill: item
                     //source: model.data[DataEngineSource]["fileName"]
                     //source: fileName
                     //source: fileName
-                    source: "/home/sebas/Documents/wallpaper.png"
+                    //source: "/home/sebas/Documents/wallpaper.png"
                     height:64
-                    width: 96
+                    width: 64
                     anchors.margins: 8
-
+                    Component.onCompleted: {
+                        print("Setting icon " + "nepomuk");
+                        setIcon(icon);
+                    }
                 }
 
                 PlasmaWidgets.Label {
@@ -143,7 +146,7 @@ Item {
                     //text: url
                     font.pixelSize: 14
                     font.bold: true
-                    height: font.pixelSize * 2.5
+                    height: 30
 
                     width: parent.width - previewImage.width
                     anchors.top: itemFrame.top
@@ -157,7 +160,8 @@ Item {
                 PlasmaWidgets.Label {
                     id: infoLabel
                     //image: metadataSource.data[DataEngineSource]["fileName"]
-                    text: description
+                    //text: "the long and winding road..."
+                    text: lastModified.toString()
                     opacity: 0.6
                     //font.pixelSize: font.pixelSize * 1.8
                     font.pixelSize: 11
