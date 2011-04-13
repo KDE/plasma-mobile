@@ -27,6 +27,7 @@
 #include "recommendation.h"
 
 Q_DECLARE_METATYPE(QList<Contour::Recommendation*>)
+Q_DECLARE_METATYPE(Contour::Recommendation*)
 
 QDBusArgument& operator<<(QDBusArgument& arg, Contour::Recommendation*);
 const QDBusArgument& operator>>(const QDBusArgument& arg, const Contour::Recommendation*);

@@ -19,7 +19,7 @@
    License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <KApplication>
+#include <KUniqueApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KCmdLineOptions>
@@ -40,7 +40,7 @@ int main(int argc, char** argv)
     aboutData.addAuthor(ki18n("Sebastian Trüg"),ki18n("Maintainer"), "trueg@kde.org");
 
     KCmdLineArgs::init( argc, argv, &aboutData );
-    KApplication app;
+    KUniqueApplication app;
     (void)new Contour::RecommendationManager(&app);
     return app.exec();
 }

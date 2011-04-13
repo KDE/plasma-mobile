@@ -26,6 +26,11 @@ class OrgKdeContourRecommendationManagerInterface;
 
 class QDBusPendingCallWatcher;
 
+namespace Contour {
+    class RecommendationsClient;
+    class Recommendation;
+}
+
 class RecommendationsEngine : public Plasma::DataEngine
 {
     Q_OBJECT
@@ -36,15 +41,14 @@ public:
 
 protected:
     //from DataEngine
-    bool sourceRequestEvent(const QString &name);
+  // bool sourceRequestEvent(const QString &name);
 
 protected slots:
-    bool updateSourceEvent(const QString &name);
-    void updateRecommendations(QVariantMap recommendations);
-    void recommendationsCallback(QDBusPendingCallWatcher *call);
+    //bool updateSourceEvent(const QString &name);
+    void updateRecommendations(const QList<Contour::Recommendation*> &recommendations);
 
 private:
-    OrgKdeContourRecommendationManagerInterface *m_contourIface;
+    Contour::RecommendationsClient *m_recommendationsClient;
 
 };
 

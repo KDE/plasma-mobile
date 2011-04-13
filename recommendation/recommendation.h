@@ -28,6 +28,8 @@ namespace Nepomuk {
 class Resource;
 }
 
+
+
 namespace Contour {
 class RecommendationAction;
 

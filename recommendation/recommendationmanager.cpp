@@ -55,7 +55,7 @@ using namespace Nepomuk::Vocabulary;
 
 QTM_USE_NAMESPACE
 
-Q_DECLARE_METATYPE(Contour::Recommendation*)
+//Q_DECLARE_METATYPE(Contour::Recommendation*)
 
 
 // TODO: act on several changes:
@@ -146,6 +146,7 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
     : QObject(parent),
       d(new Private())
 {
+    qDBusRegisterMetaType<QList<Contour::Recommendation*> >();
     d->q = this;
 
     connect(&d->m_queryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),

@@ -45,20 +45,23 @@ RecommendationsClient::RecommendationsClient(QObject* parent)
     : QObject(parent),
       d(new RecommendationsClientPrivate(this))
 {
+    qDBusRegisterMetaType<QList<Contour::Recommendation*> >();
+    qDBusRegisterMetaType<Contour::Recommendation*>();
+
     d->contourIface = new OrgKdeContourRecommendationManagerInterface("org.kde.Contour", "/recommendationmanager",
                                     QDBusConnection::sessionBus());
     if (d->contourIface->isValid()) {
+        QDBusMessage message = QDBusMessage::createMethodCall(
+                                            d->contourIface->service(),
+                                            d->contourIface->path(),
+                                            "org.freedesktop.DBus.Properties",
+                                            "Get");
 
-        connect(d->contourIface, SIGNAL(recommendationsChanged(const QList<Contour::Recommendation*> &)) ,this, SLOT(updateRecommendations(const QList<Contour::Recommendation*> &)));
-
-
-        QDBusMessage message = QDBusMessage::createMethodCall("org.kde.Contour",
-                                         "/recommendationmanager", "", "recommendations");
-
-        QDBusPendingCall call = QDBusConnection::sessionBus().asyncCall(message);
+        message << d->contourIface->interface();
+        message << "recommendations";
+        QDBusPendingCall call = d->contourIface->connection().asyncCall(message);
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
         connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)), this, SLOT(recommendationsCallback(QDBusPendingCallWatcher *)));
-
     } else {
         delete d->contourIface;
         d->contourIface = 0;
@@ -73,13 +76,14 @@ RecommendationsClient::~RecommendationsClient()
 void RecommendationsClientPrivate::recommendationsCallback(QDBusPendingCallWatcher *call)
 {
     QDBusPendingReply<QVariantMap> reply = *call;
-    const QVariantMap properties = reply.argumentAt<0>();
 
     if (reply.isError()) {
         kWarning()<<"Invalid reply";
     } else {
+        QVariantMap properties = reply.argumentAt<0>();
+        const QList<Contour::Recommendation*> recommendations = (properties.value("recommendations")).value<QList<Contour::Recommendation*> >();
         kWarning()<<"Properties: "<<properties;
-        //updateRecommendations(properties);
+        updateRecommendations(recommendations);
     }
 }
 
