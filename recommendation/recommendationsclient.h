@@ -51,6 +51,7 @@ private:
     friend class RecommendationsClientPrivate;
     Q_PRIVATE_SLOT(d, void recommendationsCallback(QDBusPendingCallWatcher *call))
     Q_PRIVATE_SLOT(d, void updateRecommendations(const QList<Contour::Recommendation*> &recommendations))
+    Q_PRIVATE_SLOT(d, void serviceChange(const QString& name, const QString& oldOwner, const QString& newOwner))
 };
 
 }

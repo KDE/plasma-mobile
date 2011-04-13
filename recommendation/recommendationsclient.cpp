@@ -35,6 +35,8 @@ public:
 
     void recommendationsCallback(QDBusPendingCallWatcher *call);
     void updateRecommendations(const QList<Contour::Recommendation*> &recommendations);
+    void connectToContour();
+    void serviceChange(const QString& name, const QString& oldOwner, const QString& newOwner);
 
     RecommendationsClient *q;
     OrgKdeContourRecommendationManagerInterface *contourIface;
@@ -49,25 +51,13 @@ RecommendationsClient::RecommendationsClient(QObject* parent)
     qDBusRegisterMetaType<Contour::Recommendation*>();
     qDBusRegisterMetaType<Contour::RecommendationAction*>();
 
-    d->contourIface = new OrgKdeContourRecommendationManagerInterface("org.kde.Contour", "/recommendationmanager",
-                                    QDBusConnection::sessionBus());
-    if (d->contourIface->isValid()) {
-        QDBusMessage message = QDBusMessage::createMethodCall(
-                                            d->contourIface->service(),
-                                            d->contourIface->path(),
-                                            "org.freedesktop.DBus.Properties",
-                                            "Get");
+    d->connectToContour();
 
-        message << d->contourIface->interface();
-        message << "recommendations";
-        QDBusPendingCall call = d->contourIface->connection().asyncCall(message);
-        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
-        connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)), this, SLOT(recommendationsCallback(QDBusPendingCallWatcher *)));
-    } else {
-        delete d->contourIface;
-        d->contourIface = 0;
-        kWarning() << "Contour not reachable";
-    }
+    //the Contour service can come and go..
+    QDBusServiceWatcher *watcher = new QDBusServiceWatcher("org.kde.Contour", QDBusConnection::sessionBus(),
+                                             QDBusServiceWatcher::WatchForOwnerChange, this);
+    connect(watcher, SIGNAL(serviceOwnerChanged(QString,QString,QString)),
+            this, SLOT(serviceChange(QString,QString,QString)));
 }
 
 RecommendationsClient::~RecommendationsClient()
@@ -93,6 +83,43 @@ void RecommendationsClientPrivate::updateRecommendations(const QList<Contour::Re
     kWarning()<<"Map of recommendations: "<<recommendations;
     recommendations = newRecommendations;
     emit q->recommendationsChanged(newRecommendations);
+}
+
+void RecommendationsClientPrivate::connectToContour()
+{
+    contourIface = new OrgKdeContourRecommendationManagerInterface("org.kde.Contour", "/recommendationmanager",
+                                    QDBusConnection::sessionBus());
+    if (contourIface->isValid()) {
+        QDBusMessage message = QDBusMessage::createMethodCall(
+                                            contourIface->service(),
+                                            contourIface->path(),
+                                            "org.freedesktop.DBus.Properties",
+                                            "Get");
+
+        message << contourIface->interface();
+        message << "recommendations";
+        QDBusPendingCall call = contourIface->connection().asyncCall(message);
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, q);
+        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)), q, SLOT(recommendationsCallback(QDBusPendingCallWatcher *)));
+    } else {
+        delete contourIface;
+        contourIface = 0;
+        kWarning() << "Contour not reachable";
+    }
+}
+
+void RecommendationsClientPrivate::serviceChange(const QString& name, const QString& oldOwner, const QString& newOwner)
+{
+    kDebug()<< "Service" << name << "status change, old owner:" << oldOwner << "new:" << newOwner;
+
+    if (newOwner.isEmpty()) {
+        //unregistered
+        delete contourIface;
+        contourIface = 0;
+    } else if (oldOwner.isEmpty()) {
+        //registered
+        connectToContour();
+    }
 }
 
 }
