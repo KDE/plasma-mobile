@@ -81,6 +81,12 @@ QStringList MetadataEngine::sources() const
 
 bool MetadataEngine::sourceRequestEvent(const QString &name)
 {
+    foreach (const QString &s, Plasma::DataEngine::sources()) {
+        if (s.startsWith(name) || s.endsWith(name)) {
+            kWarning() << "!!! resource already exists." << name;
+            return false;
+        }
+    }
     d->query = name;
     if (name.split("://").count() > 1) {
         // We have a URL here, so we can create the results directly
@@ -112,7 +118,7 @@ void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
 {
     foreach (Nepomuk::Query::Result res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-        kDebug() << "Result Excerpt:" << res.excerpt();
+        //kDebug() << "Result label:" << res.genericLabel();
         Nepomuk::Resource resource = res.resource();
         addResource(resource);
     }
@@ -131,7 +137,7 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
 
     QString desc = resource.genericDescription();
     if (desc.isEmpty()) {
-        //desc = "Empty description.";
+        desc = resource.className();
     }
     QString label = resource.genericLabel();
     if (label.isEmpty()) {
