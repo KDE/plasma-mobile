@@ -46,7 +46,10 @@ void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommend
     kWarning()<<"New recommendations: "<<recommendations;
 
     foreach (Contour::Recommendation *rec, recommendations) {
-        setData(rec->resource().uri(), rec->relevance());
+        setData(rec->resource().uri(), "name", rec->resource().genericLabel());
+        setData(rec->resource().uri(), "description", rec->resource().genericDescription());
+        setData(rec->resource().uri(), "icon", rec->resource().genericIcon());
+        setData(rec->resource().uri(), "relevance", rec->relevance());
     }
 }
 
