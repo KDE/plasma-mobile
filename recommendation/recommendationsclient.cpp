@@ -47,6 +47,7 @@ RecommendationsClient::RecommendationsClient(QObject* parent)
 {
     qDBusRegisterMetaType<QList<Contour::Recommendation*> >();
     qDBusRegisterMetaType<Contour::Recommendation*>();
+    qDBusRegisterMetaType<Contour::RecommendationAction*>();
 
     d->contourIface = new OrgKdeContourRecommendationManagerInterface("org.kde.Contour", "/recommendationmanager",
                                     QDBusConnection::sessionBus());

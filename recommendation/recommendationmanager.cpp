@@ -147,6 +147,7 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
       d(new Private())
 {
     qDBusRegisterMetaType<QList<Contour::Recommendation*> >();
+    qDBusRegisterMetaType<Contour::RecommendationAction*>();
     d->q = this;
 
     connect(&d->m_queryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),

@@ -26,19 +26,14 @@
 
 #include <KUrl>
 
-QDBusArgument& operator<<(QDBusArgument& arg, Contour::Recommendation* r)
+QDBusArgument& operator<<(QDBusArgument& arg, const Contour::Recommendation* r)
 {
     arg.beginStructure();
-    arg << KUrl(r->resource().resourceUri()).url();
+    arg << KUrl("http://fakeurl").url();//KUrl(r->resource().resourceUri()).url();
     arg << r->relevance();
-    arg.beginArray();
+    arg.beginArray(qMetaTypeId<Contour::RecommendationAction*>());
     foreach(Contour::RecommendationAction* action, r->actions()) {
-        arg.beginStructure();
-        arg << action->id()
-            << action->text()
-            << action->icon().name()
-            << action->relevance();
-        arg.endStructure();
+        arg << action;
     }
 
     arg.endArray();
@@ -47,7 +42,26 @@ QDBusArgument& operator<<(QDBusArgument& arg, Contour::Recommendation* r)
     return arg;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument& arg, const Contour::Recommendation* r)
+const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::Recommendation* r)
 {
     return arg;
 }
+
+
+QDBusArgument& operator<<(QDBusArgument& arg, const Contour::RecommendationAction *action)
+{
+    arg.beginStructure();
+    arg << action->id()
+        << action->text()
+        << action->icon().name()
+        << action->relevance();
+    arg.endStructure();
+
+    return arg;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::RecommendationAction *action)
+{
+    return arg;
+}
+
