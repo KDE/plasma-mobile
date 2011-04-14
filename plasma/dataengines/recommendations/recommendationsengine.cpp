@@ -18,93 +18,39 @@
 
 #include "recommendationsengine.h"
 #include "testsource.h"
-#include "contour_interface.h"
 
 #include <QDBusPendingCallWatcher>
 
 #include <KDebug>
 
+#include <Nepomuk/Resource>
+
+#include <recommendationsclient.h>
+#include <recommendation.h>
 
 RecommendationsEngine::RecommendationsEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
 {
     setMinimumPollingInterval(2 * 1000); // 2 seconds minimum
 
-    m_contourIface = new OrgKdeContourRecommendationManagerInterface("org.kde.Contour", "/recommendationmanager",
-                                    QDBusConnection::sessionBus());
-    if (m_contourIface->isValid()) {
-
-        connect(m_contourIface, SIGNAL(recommendationsChanged(QVariant)) ,this, SLOT(updateRecommendations(QVariant)));
-
-
-        QDBusMessage message = QDBusMessage::createMethodCall("org.kde.Contour",
-                                         "/recommendationmanager", "", "recommendations");
-
-        QDBusPendingCall call = QDBusConnection::sessionBus().asyncCall(message);
-        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
-        connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)), this, SLOT(recommendationsCallback(QDBusPendingCallWatcher *)));
-
-    } else {
-        delete m_contourIface;
-        m_contourIface = 0;
-        kDebug()<<"Contour not reachable";
-    }
+    m_recommendationsClient = new Contour::RecommendationsClient(this);
+    connect(m_recommendationsClient, SIGNAL(recommendationsChanged(const QList<Contour::Recommendation*> &)), this, SLOT(updateRecommendations(const QList<Contour::Recommendation*> &)));
 }
 
 RecommendationsEngine::~RecommendationsEngine()
 {
 }
 
-void RecommendationsEngine::recommendationsCallback(QDBusPendingCallWatcher *call)
+void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommendation*> &recommendations)
 {
-    QDBusPendingReply<QVariantMap> reply = *call;
-    QVariantMap properties = reply.argumentAt<0>();
+    kWarning()<<"New recommendations: "<<recommendations;
 
-    if (reply.isError()) {
-        kWarning()<<"Invalid reply";
-    } else {
-        kWarning()<<"Properties: "<<properties;
-        updateRecommendations(properties);
+    foreach (Contour::Recommendation *rec, recommendations) {
+        setData(rec->resource().uri(), "name", rec->resource().genericLabel());
+        setData(rec->resource().uri(), "description", rec->resource().genericDescription());
+        setData(rec->resource().uri(), "icon", rec->resource().genericIcon());
+        setData(rec->resource().uri(), "relevance", rec->relevance());
     }
-}
-
-void RecommendationsEngine::updateRecommendations(QVariantMap recommendations)
-{
-    kWarning()<<"Map of recommendations: "<<recommendations;
-    /*
-    foreach (const QString &service, registeredItems) {
-        newItem(service);
-    }*/
-}
-
-bool RecommendationsEngine::sourceRequestEvent(const QString &name)
-{
-    if (!name.startsWith("test") ) {
-        return false;
-    }
-
-    updateSourceEvent(name); //start a download
-    return true;
-}
-
-
-bool RecommendationsEngine::updateSourceEvent(const QString &name)
-{
-    kDebug() << name;
-
-
-    TestSource *source = dynamic_cast<TestSource*>(containerForSource(name));
-
-    if (!source) {
-        source = new TestSource(this);
-        source->setObjectName(name);
-
-        addSource(source);
-    }
-
-
-    source->update();
-    return false;
 }
 
 #include "recommendationsengine.moc"

@@ -55,7 +55,7 @@ using namespace Nepomuk::Vocabulary;
 
 QTM_USE_NAMESPACE
 
-Q_DECLARE_METATYPE(Contour::Recommendation*)
+//Q_DECLARE_METATYPE(Contour::Recommendation*)
 
 
 // TODO: act on several changes:
@@ -161,6 +161,8 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
 
     // export via DBus
     qDBusRegisterMetaType<Contour::Recommendation*>();
+    qDBusRegisterMetaType<QList<Contour::Recommendation*> >();
+    qDBusRegisterMetaType<Contour::RecommendationAction*>();
     (void)new RecommendationManagerAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String("/recommendationmanager"), this);
 }

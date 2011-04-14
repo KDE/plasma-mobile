@@ -25,6 +25,8 @@
 #include <QObject>
 #include <QtCore/QList>
 
+#include "dbusoperators.h"
+
 namespace Contour {
 
 class Recommendation;
