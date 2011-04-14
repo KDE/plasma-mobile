@@ -135,21 +135,6 @@ Item {
             height: homeScreen.height
             property QGraphicsWidget containment
         }
-
-        Item {
-            id : spareSlot
-            objectName: "spareSlot"
-            x: 0
-            y: 0
-            z: 9999
-            width: homeScreen.width
-            height: homeScreen.height
-            property QGraphicsWidget containment
-        }
-    }
-
-    Switcher {
-        id: switcher
     }
 
     RecommendationsPanel {
@@ -179,6 +164,10 @@ Item {
                     target: spareSlot;
                     opacity: 0;
                 }
+                PropertyChanges {
+                    target: spareSlot;
+                    x: homeScreen.width/4
+                }
 
             },
             State {
@@ -195,10 +184,10 @@ Item {
                     target: spareSlot;
                     opacity: 1;
                 }
-                /*PropertyChanges {
-                    target: mainSlot;
-                    y: homeScreen.height;
-                }*/
+                PropertyChanges {
+                    target: spareSlot;
+                    x: 0
+                }
             }
     ]
 
@@ -220,6 +209,12 @@ Item {
                         easing.type: "OutQuad";
                         duration: 300;
                     }
+                    NumberAnimation {
+                        target: spareSlot;
+                        property: "x";
+                        easing.type: "OutQuad";
+                        duration: 300;
+                    }
                 }
                 ScriptAction {
                     script: finishTransition();
@@ -228,20 +223,30 @@ Item {
         }
 
 
-    SystrayPanel {
-        id: topEdgePanel;
-        objectName: "topEdgePanel";
-
-        anchors.horizontalCenter: homeScreen.horizontalCenter;
-        y: 0;
-    }
-
     ActivityPanel {
         id: rightEdgePanel
         objectName: "rightEdgePanel"
 
         anchors.verticalCenter: parent.verticalCenter
         x: parent.width - width
+    }
+
+    Item {
+        id : spareSlot
+        objectName: "spareSlot"
+        x: 0
+        y: 0
+        width: homeScreen.width
+        height: homeScreen.height
+        property QGraphicsWidget containment
+    }
+
+    SystrayPanel {
+        id: topEdgePanel;
+        objectName: "topEdgePanel";
+
+        anchors.horizontalCenter: homeScreen.horizontalCenter;
+        y: 0;
     }
 
     Rectangle {
