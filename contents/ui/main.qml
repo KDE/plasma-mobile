@@ -25,6 +25,7 @@ Item {
 
     Component.onCompleted: {
         plasmoid.containmentType = "CustomContainment"
+        plasmoid.drawWallpaper = false
         plasmoid.movableApplets = false
     }
 
