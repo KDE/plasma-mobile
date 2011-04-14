@@ -21,7 +21,7 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
-import PlasmaMobile 1.0
+import org.kde.plasma.mobilecomponents 0.1
 
 Item {
     id: activityPanel;
