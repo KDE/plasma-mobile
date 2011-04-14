@@ -29,6 +29,7 @@ Item {
     Component.onCompleted: {
         plasmoid.drawWallpaper = false
         plasmoid.containmentType = "CustomContainment"
+        plasmoid.status = "PassiveStatus"
     }
 
     PlasmaCore.DataSource {
@@ -57,6 +58,13 @@ Item {
 
         model: recommendationsModels.model(activitySource.data[activitySource.data["Status"]["Current"]]["Name"])
 
+        onCountChanged: {
+            if (count > 0) {
+                plasmoid.status = "NeedsAttentionStatus"
+            } else {
+                plasmoid.status = "PassiveStatus"
+            }
+        }
         delegate: RecommendationDelegate {
                 text: model.text
                 description: model.description

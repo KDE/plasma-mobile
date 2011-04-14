@@ -21,6 +21,7 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
+import PlasmaMobile 1.0
 
 Item {
     id: activityPanel;
@@ -47,22 +48,12 @@ Item {
             NumberAnimation {duration: 1000}
         }
     }
-    //FIXME: this thing exists only as demo
-    Timer {
-        id: notifyTimer
-        repeat: false
-        interval: 10000
-        running: true
-        onTriggered: {
-            notifyLoopTimer.running = true
-        }
-    }
 
     Timer {
         id: notifyLoopTimer
         repeat: true
         interval: 1500
-        running: false
+        running: appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus
         onTriggered: {
             hintNotify.opacity = 1 - hintNotify.opacity 
         }
@@ -89,12 +80,10 @@ Item {
             if (-activityPanel.x < activityPanel.parent.width/3) {
                 activityPanel.state = "show"
                 hintNotify.opacity = 0
-                notifyTimer.running = false
-                notifyLoopTimer.running = false
+                //notifyLoopTimer.running = false
                 timer.restart()
             } else {
                 activityPanel.state = "hidden"
-                notifyTimer.running = true
             }
         }
 
@@ -115,7 +104,11 @@ Item {
         imagePath: "widgets/background"
         enabledBorders: "RightBorder|TopBorder|BottomBorder"
     }
-    
+
+    AppletStatusWatcher {
+        id: appletStatusWatcher
+    }
+
     property QGraphicsWidget containment
     onContainmentChanged: {
         containment.parent = activityPanel
@@ -124,6 +117,7 @@ Item {
         containment.width = background.width - background.margins.left - background.margins.right
         containment.height = background.height - background.margins.top - background.margins.bottom
         containment.z = timerResetRegion.z -1
+        appletStatusWatcher.plasmoid = containment
     }
 
     MouseArea {
