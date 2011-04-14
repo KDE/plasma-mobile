@@ -62,6 +62,7 @@ RecommendationsClient::RecommendationsClient(QObject* parent)
 
 RecommendationsClient::~RecommendationsClient()
 {
+    delete d;
 }
 
 void RecommendationsClientPrivate::recommendationsCallback(QDBusPendingCallWatcher *call)
