@@ -77,7 +77,6 @@ Item {
 
 
          delegate: ActivityDelegate{}
-         clip:true
 
          path: Path {
              startX: mainView.width
