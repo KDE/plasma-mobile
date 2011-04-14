@@ -65,6 +65,11 @@ Item {
         activeContainment.parent = mainSlot
         activeContainment.x = 0
         activeContainment.y = 0
+
+        //hide the activity switcher
+        rightEdgePanel.x = homeScreen.width
+        rightEdgePanel.state = "hidden"
+
         state = "Normal"
         transformingChanged(false);
         switcher.current=0
