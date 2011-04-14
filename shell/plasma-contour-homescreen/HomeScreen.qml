@@ -139,24 +139,12 @@ Item {
         Item {
             id : spareSlot
             objectName: "spareSlot"
-            x: homeScreen.width
+            x: 0
             y: 0
             z: 9999
             width: homeScreen.width
             height: homeScreen.height
             property QGraphicsWidget containment
-        }
-
-        
-        Item {
-            //FIXME: shouldn't be a panel with that design, excludefromactivities containment assignments should be refactored
-            id: activitySlot
-            objectName: "activitySlot"
-
-            x: homeScreen.width
-            y: 0
-            width: homeScreen.width;
-            height: homeScreen.height
         }
     }
 
@@ -165,7 +153,7 @@ Item {
     }
 
     RecommendationsPanel {
-        id: rightEdgePanel
+        id: leftEdgePanel
         objectName: "leftEdgePanel"
 
         anchors.verticalCenter: parent.verticalCenter
@@ -248,7 +236,13 @@ Item {
         y: 0;
     }
 
+    ActivityPanel {
+        id: rightEdgePanel
+        objectName: "rightEdgePanel"
 
+        anchors.verticalCenter: parent.verticalCenter
+        x: parent.width - width
+    }
 
     Rectangle {
         id: lockScreenItem

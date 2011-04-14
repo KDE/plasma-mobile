@@ -141,10 +141,10 @@ zvalue=0
 [Containments][9]
 activity=
 desktop=-1
-formfactor=2
+formfactor=3
 geometry=0,0,800,100
 immutability=1
-location=1
+location=6
 excludeFromActivities=true
 declarativeSlot=activitySlot
 plugin=org.kde.contouractivityswitcher
