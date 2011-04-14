@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=Metadata
+Name[pt]=Meta-dados
+Name[sv]=Metadata
+Name[uk]=Метадані
+Name[x-test]=xxMetadataxx
 Comment=Provides metadata for semantic resources
+Comment[pt]=Fornece meta-dados para os recursos semânticos
+Comment[sv]=Tillhandahåller metadata för semantiska resurser
+Comment[uk]=Надає метадані для семантичних ресурсів
+Comment[x-test]=xxProvides metadata for semantic resourcesxx
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=nepomuk
