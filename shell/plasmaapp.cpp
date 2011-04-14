@@ -63,6 +63,55 @@
 #include <X11/extensions/Xrender.h>
 
 
+//TODO: move somewhere else?
+AppletStatusWatcher::AppletStatusWatcher(QObject *parent)
+    : QObject(parent)
+{
+}
+
+AppletStatusWatcher::~AppletStatusWatcher()
+{
+}
+
+void AppletStatusWatcher::setPlasmoid(QObject *plasmoid)
+{
+    Plasma::Applet *applet = qobject_cast<Plasma::Applet *>(plasmoid);
+    if (!applet || m_plasmoid.data() == applet) {
+        return;
+    } else if (m_plasmoid) {
+        disconnect(m_plasmoid.data(), 0, this, 0);
+    }
+    m_plasmoid = applet;
+    connect(applet, SIGNAL(newStatus(Plasma::ItemStatus)), this, SIGNAL(statusChanged()));
+}
+
+QObject *AppletStatusWatcher::plasmoid() const
+{
+    return m_plasmoid.data();
+}
+
+void AppletStatusWatcher::setStatus(const AppletStatusWatcher::ItemStatus status)
+{
+    if (!m_plasmoid) {
+        return;
+    }
+
+    m_plasmoid.data()->setStatus((Plasma::ItemStatus)status);
+}
+
+AppletStatusWatcher::ItemStatus AppletStatusWatcher::status() const
+{
+    if (!m_plasmoid) {
+        return UnknownStatus;
+    }
+
+    return (AppletStatusWatcher::ItemStatus)((int)(m_plasmoid.data()->status()));
+}
+
+
+
+/////////////////
+
 PlasmaApp* PlasmaApp::self()
 {
     if (!kapp) {
@@ -82,6 +131,8 @@ PlasmaApp::PlasmaApp()
     KGlobal::locale()->insertCatalog("libplasma");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+    qmlRegisterType<AppletStatusWatcher>("PlasmaMobile", 1, 0, "AppletStatusWatcher");
 
     //FIXME: why does not work?
     //qmlRegisterInterface<Plasma::Wallpaper>("Wallpaper");
