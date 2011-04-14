@@ -23,6 +23,7 @@
 
 #include <QtDeclarative/qdeclarative.h>
 
+#include "appletstatuswatcher.h"
 #include "pagedproxymodel.h"
 
 //QML_DECLARE_TYPE(PagedProxyModel)
@@ -32,6 +33,7 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.mobilecomponents"));
 
     qmlRegisterType<PagedProxyModel>(uri, 0, 1, "PagedProxyModel");
+    qmlRegisterType<AppletStatusWatcher>(uri, 0, 1, "AppletStatusWatcher");
 }
 
 

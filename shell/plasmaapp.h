@@ -47,40 +47,6 @@ namespace Plasma
     class DeclarativeWidget;
 } // namespace Plasma
 
-
-//FIXME: is there a better way to register enums of Plasma namespace?
-class AppletStatusWatcher : public QObject
-{
-    Q_OBJECT
-    Q_PROPERTY(QObject *plasmoid READ plasmoid WRITE setPlasmoid)
-    Q_PROPERTY(ItemStatus status READ status WRITE setStatus NOTIFY statusChanged)
-    Q_ENUMS(ItemStatus)
-
-public:
-    enum ItemStatus {
-        UnknownStatus = 0, /**< The status is unknown **/
-        PassiveStatus = 1, /**< The Item is passive **/
-        ActiveStatus = 2, /**< The Item is active **/
-        NeedsAttentionStatus = 3, /**< The Item needs attention **/
-        AcceptingInputStatus = 4 /**< The Item is accepting input **/
-    };
-
-    AppletStatusWatcher(QObject *parent = 0);
-    ~AppletStatusWatcher();
-
-    void setPlasmoid(QObject *applet);
-    QObject *plasmoid() const;
-
-    void setStatus(const ItemStatus status);
-    ItemStatus status() const;
-
-Q_SIGNALS:
-    void statusChanged();
-
-private:
-    QWeakPointer<Plasma::Applet> m_plasmoid;
-};
-
 class PlasmaApp : public KUniqueApplication
 {
     Q_OBJECT
