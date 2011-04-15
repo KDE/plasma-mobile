@@ -34,6 +34,7 @@ class Recommendation;
 class RecommendationManager : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QList<Contour::Recommendation*> recommendations READ recommendations)
 
 public:
     RecommendationManager(QObject* parent = 0);
@@ -58,5 +59,6 @@ private:
 };
 
 }
+
 
 #endif

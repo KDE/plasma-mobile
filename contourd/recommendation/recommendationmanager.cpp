@@ -21,7 +21,6 @@
 
 #include "recommendationmanager.h"
 #include "recommendationmanageradaptor.h"
-#include "dbusoperators.h"
 #include "recommendation.h"
 #include "recommendationaction.h"
 #include "locationmanager.h"
