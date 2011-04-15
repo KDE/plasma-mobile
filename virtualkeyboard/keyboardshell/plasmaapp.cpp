@@ -148,7 +148,7 @@ int  PlasmaApp::newInstance()
     KWindowSystem::setOnAllDesktops(dialog->winId(), true);
 
     //FIXME: hardcoding to MID for now
-    dialog->applet()->config().writeEntry("layout", "plasmaboard/mid.xml");
+    dialog->applet()->config().writeEntry("layout", "plasmaboard/tablet.xml");
     dialog->applet()->configChanged();
 
     dialog->hide();
