@@ -23,8 +23,7 @@
 #include <Plasma/DataEngine>
 
 MobPluginLoader::MobPluginLoader()
-    : Plasma::PluginLoader(),
-      m_activityThumbnails(0)
+    : Plasma::PluginLoader()
 {
 }
 
@@ -34,7 +33,7 @@ MobPluginLoader::~MobPluginLoader()
 
 MobileActivityThumbnails *MobPluginLoader::activityThumbnails() const
 {
-    return m_activityThumbnails;
+    return m_activityThumbnails.data();
 }
 
 Plasma::DataEngine* MobPluginLoader::internalLoadDataEngine(const QString &name)
@@ -43,7 +42,7 @@ Plasma::DataEngine* MobPluginLoader::internalLoadDataEngine(const QString &name)
         if (!m_activityThumbnails) {
             m_activityThumbnails = new MobileActivityThumbnails(0, QVariantList());
         }
-        return m_activityThumbnails;
+        return m_activityThumbnails.data();
     } else {
         return 0;
     }

@@ -41,7 +41,7 @@ protected:
     Plasma::DataEngine *internalLoadDataEngine(const QString &name);
 
 private:
-    MobileActivityThumbnails *m_activityThumbnails;
+    QWeakPointer<MobileActivityThumbnails> m_activityThumbnails;
 };
 
 #endif
