@@ -5,6 +5,7 @@ include(KDE4Defaults)
 set(mobilecomponents_SRCS
     mobilecomponentsplugin.cpp
     pagedproxymodel.cpp
+    appletstatuswatcher.cpp
     )
 
 INCLUDE_DIRECTORIES(
@@ -17,7 +18,7 @@ qt4_automoc(${mobilecomponents_SRCS})
 
 
 add_library(mobilecomponentsplugin SHARED ${mobilecomponents_SRCS})
-target_link_libraries(mobilecomponentsplugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY}  ${QT_QTGUI_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KDE4_KDECORE_LIBRARY})
+target_link_libraries(mobilecomponentsplugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY}  ${QT_QTGUI_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_PLASMA_LIBS})
 
 install(TARGETS mobilecomponentsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 

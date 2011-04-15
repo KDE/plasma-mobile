@@ -71,7 +71,7 @@ bool MobileActivityThumbnails::updateSourceEvent(const QString &source)
 }
 
 void MobileActivityThumbnails::snapshotContainment(Plasma::Containment *cont)
-{
+{return;
     m_containmentToSave = cont;
     m_containmentToSave.data()->graphicsEffect()->update();
     m_saveTimer->start(1000);
