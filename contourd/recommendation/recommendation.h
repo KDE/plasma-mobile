@@ -34,21 +34,11 @@ class Resource;
 namespace Contour {
 class RecommendationAction;
 
-class RECOMMENDATIONSCLIENT_EXPORT Recommendation
+struct RECOMMENDATIONSCLIENT_EXPORT Recommendation
 {
-public:
-    Recommendation();
-    ~Recommendation();
-
-    Nepomuk::Resource resource() const;
-    QList<RecommendationAction*> actions() const;
-    qreal relevance() const;
-
-    void addAction(RecommendationAction* action);
-
-private:
-    class Private;
-    Private*  d;
+    QString resourceUri;
+    QList<RecommendationAction> actions;
+    qreal relevance;
 };
 }
 

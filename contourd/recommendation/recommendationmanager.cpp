@@ -67,7 +67,7 @@ public:
     LocationManager* m_locationManager;
 
     QList<Recommendation> m_recommendations;
-    QHash<QString, RecommendationAction*> m_actionHash;
+    QHash<QString, RecommendationAction> m_actionHash;
 
     Nepomuk::Query::QueryServiceClient m_queryClient;
 
@@ -118,18 +118,19 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
 {
     foreach(const Nepomuk::Query::Result& result, results) {
         Recommendation r;
+        r.resourceUri = result.resource().uri();
 
         // for now we create the one dummy action: open the resource
         QString id;
         do {
             id = KRandom::randomString(5);
         } while(!m_actionHash.contains(id));
-        RecommendationAction* action = new RecommendationAction();
-        action->setId(id);
-        action->setText(i18n("Open '%1'", result.resource().genericLabel()));
+        RecommendationAction action;
+        action.id = id;
+        action.text = i18n("Open '%1'", result.resource().genericLabel());
         m_actionHash[id] = action;
 
-        r.addAction(action);
+        r.actions << action;
 
         m_recommendations << r;
     }
@@ -160,7 +161,7 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
     // export via DBus
     qDBusRegisterMetaType<Contour::Recommendation>();
     qDBusRegisterMetaType<QList<Contour::Recommendation> >();
-    qDBusRegisterMetaType<Contour::RecommendationAction*>();
+    qDBusRegisterMetaType<Contour::RecommendationAction>();
     (void)new RecommendationManagerAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String("/recommendationmanager"), this);
 }
@@ -178,7 +179,7 @@ QList<Contour::Recommendation> Contour::RecommendationManager::recommendations()
 void Contour::RecommendationManager::executeAction(const QString &actionId)
 {
     if(d->m_actionHash.contains(actionId)) {
-        RecommendationAction* action = d->m_actionHash[actionId];
+        RecommendationAction action = d->m_actionHash[actionId];
 
         // FIXME: this is the hacky execution of the action, make it correct
         //Recommendation* r = qobject_cast<Recommendation*>(action->parent());

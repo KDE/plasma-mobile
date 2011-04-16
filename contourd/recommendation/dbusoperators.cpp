@@ -29,14 +29,15 @@
 QDBusArgument& operator<<(QDBusArgument& arg, const Contour::Recommendation r)
 {
     arg.beginStructure();
-    arg << KUrl(r.resource().resourceUri()).url();
-    arg << r.relevance();
-    arg.beginArray(qMetaTypeId<Contour::RecommendationAction*>());
-    foreach(Contour::RecommendationAction* action, r.actions()) {
+    arg << r.resourceUri;
+    arg << r.relevance;
+    arg << r.actions;
+    /*arg.beginArray(qMetaTypeId<Contour::RecommendationAction>());
+    foreach(Contour::RecommendationAction action, r.actions()) {
         arg << action;
     }
 
-    arg.endArray();
+    arg.endArray();*/
     arg.endStructure();
 
     return arg;
@@ -49,21 +50,21 @@ const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::Recommendatio
 }
 
 
-QDBusArgument& operator<<(QDBusArgument& arg, const Contour::RecommendationAction *action)
+QDBusArgument& operator<<(QDBusArgument& arg, const Contour::RecommendationAction action)
 {
     arg.beginStructure();
-    arg << action->id()
-        << action->text()
-        << action->icon().name()
-        << action->relevance();
+    arg << action.id
+        << action.text
+        << action.iconName
+        << action.relevance;
     arg.endStructure();
 
     return arg;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::RecommendationAction *action)
+const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::RecommendationAction action)
 {
-    action = new Contour::RecommendationAction();
+//    action = new Contour::RecommendationAction();
     return arg;
 }
 

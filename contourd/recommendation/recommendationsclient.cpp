@@ -49,7 +49,7 @@ RecommendationsClient::RecommendationsClient(QObject* parent)
 {
     qDBusRegisterMetaType<QList<Contour::Recommendation> >();
     qDBusRegisterMetaType<Contour::Recommendation>();
-    qDBusRegisterMetaType<Contour::RecommendationAction*>();
+    qDBusRegisterMetaType<Contour::RecommendationAction>();
 
     d->connectToContour();
 

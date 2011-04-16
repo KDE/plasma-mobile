@@ -24,47 +24,47 @@
 
 #include <Nepomuk/Resource>
 
-
+/*
 class Contour::Recommendation::Private
 {
 public:
     Nepomuk::Resource m_resource;
     qreal m_relevance;
-    QList<RecommendationAction*> m_actions;
+    QList<RecommendationAction> m_actions;
 };
-
+*/
 
 Contour::Recommendation::Recommendation()
-    : d(new Private())
+    //: d(new Private())
 {
-    d->m_resource = Nepomuk::Resource("http://www.kde.org");
-    /*d->m_resource = res;
-    d->m_relevance = relevance;*/
+   // d.m_resource = Nepomuk::Resource("http://www.kde.org");
+    /*d.m_resource = res;
+    d.m_relevance = relevance;*/
 }
 
 Contour::Recommendation::~Recommendation()
 {
-    delete d;
+  //  delete d;
 }
 
 Nepomuk::Resource Contour::Recommendation::resource() const
-{
-    return d->m_resource;
+{return Nepomuk::Resource("http://www.kde.org");
+    //return d.m_resource;
 }
 
-QList<Contour::RecommendationAction *> Contour::Recommendation::actions() const
-{
-    return d->m_actions;
+QList<Contour::RecommendationAction> Contour::Recommendation::actions() const
+{return QList<Contour::RecommendationAction>();
+    //return d.m_actions;
 }
 
 qreal Contour::Recommendation::relevance() const
-{
-    return d->m_relevance;
+{return 0.5;
+   // return d.m_relevance;
 }
 
-void Contour::Recommendation::addAction(Contour::RecommendationAction *action)
+void Contour::Recommendation::addAction(Contour::RecommendationAction action)
 {
-    d->m_actions << action;
+    //d.m_actions << action;
 }
 
 #include "recommendation.moc"

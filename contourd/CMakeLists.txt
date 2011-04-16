@@ -18,8 +18,6 @@ include_directories(
 )
 
 set(recommendationmanager_SRC
-  recommendation/recommendationaction.cpp
-  recommendation/recommendation.cpp
   recommendation/recommendationmanager.cpp
   recommendation/dbusoperators.cpp
   location/locationmanager.cpp
@@ -54,8 +52,6 @@ target_link_libraries(
 )
 
 set(recommendationsclient_SRC
-  recommendation/recommendationaction.cpp
-  recommendation/recommendation.cpp
   recommendation/dbusoperators.cpp
   recommendation/recommendationsclient.cpp
 )

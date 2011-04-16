@@ -21,43 +21,54 @@
 
 #include "recommendationaction.h"
 
-class Contour::RecommendationAction::Private
+/*class Contour::RecommendationAction::Private
 {
 public:
     QString m_id;
+    QString m_text;
+    QString m_iconName;
     qreal m_relevance;
-};
+};*/
 
 
-Contour::RecommendationAction::RecommendationAction(QObject *parent)
-    : QAction(parent),
-      d(new Private())
+Contour::RecommendationAction::RecommendationAction()
+   // : d(new Private())
 {
 }
 
 Contour::RecommendationAction::~RecommendationAction()
 {
-    delete d;
+  //  delete d;
 }
 
 QString Contour::RecommendationAction::id() const
-{
-    return d->m_id;
+{return "DDDD";
+   // return d->m_id;
+}
+
+QString Contour::RecommendationAction::text() const
+{return "DDDD";
+  //  return d->m_text;
+}
+
+QString Contour::RecommendationAction::iconName() const
+{return "DDDD";
+   // return d->m_iconName;
 }
 
 qreal Contour::RecommendationAction::relevance() const
-{
-    return d->m_relevance;
+{return 0.5;
+    //return d->m_relevance;
 }
 
 void Contour::RecommendationAction::setId(const QString &id)
 {
-    d->m_id = id;
+   // d->m_id = id;
 }
 
 void Contour::RecommendationAction::setRelevance(qreal relevance)
 {
-    d->m_relevance = relevance;
+  //  d->m_relevance = relevance;
 }
 
 #include "recommendationaction.moc"

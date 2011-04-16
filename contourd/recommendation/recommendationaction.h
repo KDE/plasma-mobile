@@ -22,29 +22,18 @@
 #ifndef RECOMMENDATIONACTION_H
 #define RECOMMENDATIONACTION_H
 
-#include <QAction>
+#include <QString>
 
 #include "recommendationsclient_export.h"
 
 namespace Contour {
 
-class RECOMMENDATIONSCLIENT_EXPORT RecommendationAction : public QAction
+struct RECOMMENDATIONSCLIENT_EXPORT RecommendationAction
 {
-    Q_OBJECT
-
-public:
-    RecommendationAction(QObject* parent = 0);
-    ~RecommendationAction();
-
-    QString id() const;
-    qreal relevance() const;
-
-    void setId(const QString& id);
-    void setRelevance(qreal relevance);
-
-private:
-    class Private;
-    Private* const d;
+    QString id;
+    QString text;
+    QString iconName;
+    qreal relevance;
 };
 
 }
