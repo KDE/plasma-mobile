@@ -34,12 +34,10 @@ class Resource;
 namespace Contour {
 class RecommendationAction;
 
-class RECOMMENDATIONSCLIENT_EXPORT Recommendation : public QObject
+class RECOMMENDATIONSCLIENT_EXPORT Recommendation
 {
-    Q_OBJECT
-
 public:
-    Recommendation(const Nepomuk::Resource& res, qreal relevance = 1.0);
+    Recommendation();
     ~Recommendation();
 
     Nepomuk::Resource resource() const;
@@ -50,7 +48,7 @@ public:
 
 private:
     class Private;
-    Private* const d;
+    Private*  d;
 };
 }
 

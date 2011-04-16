@@ -34,21 +34,21 @@ public:
     {}
 
     void recommendationsCallback(QDBusPendingCallWatcher *call);
-    void updateRecommendations(const QList<Contour::Recommendation*> &recommendations);
+    void updateRecommendations(const QList<Contour::Recommendation> &recommendations);
     void connectToContour();
     void serviceChange(const QString& name, const QString& oldOwner, const QString& newOwner);
 
     RecommendationsClient *q;
     OrgKdeContourRecommendationManagerInterface *contourIface;
-    QList<Contour::Recommendation*> recommendations;
+    QList<Contour::Recommendation> recommendations;
 };
 
 RecommendationsClient::RecommendationsClient(QObject* parent)
     : QObject(parent),
       d(new RecommendationsClientPrivate(this))
 {
-    qDBusRegisterMetaType<QList<Contour::Recommendation*> >();
-    qDBusRegisterMetaType<Contour::Recommendation*>();
+    qDBusRegisterMetaType<QList<Contour::Recommendation> >();
+    qDBusRegisterMetaType<Contour::Recommendation>();
     qDBusRegisterMetaType<Contour::RecommendationAction*>();
 
     d->connectToContour();
@@ -73,15 +73,15 @@ void RecommendationsClientPrivate::recommendationsCallback(QDBusPendingCallWatch
         kWarning()<<"Invalid reply";
     } else {
         QVariantMap properties = reply.argumentAt<0>();
-        const QList<Contour::Recommendation*> recommendations = (properties.value("recommendations")).value<QList<Contour::Recommendation*> >();
+        const QList<Contour::Recommendation> recommendations = (properties.value("recommendations")).value<QList<Contour::Recommendation> >();
         kWarning()<<"Properties: "<<properties;
         updateRecommendations(recommendations);
     }
 }
 
-void RecommendationsClientPrivate::updateRecommendations(const QList<Contour::Recommendation*> &newRecommendations)
+void RecommendationsClientPrivate::updateRecommendations(const QList<Contour::Recommendation> &newRecommendations)
 {
-    kWarning()<<"Map of recommendations: "<<recommendations;
+//    kWarning()<<"Map of recommendations: "<<recommendations;
     recommendations = newRecommendations;
     emit q->recommendationsChanged(newRecommendations);
 }

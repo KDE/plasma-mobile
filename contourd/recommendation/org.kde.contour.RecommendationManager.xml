@@ -4,7 +4,7 @@
   <interface name="org.kde.contour.RecommendationManager">
 
     <property name="recommendations" type="a(sda(sssd))" access="read">
-      <annotation name="com.trolltech.QtDBus.QtTypeName" value="QList&lt;Contour::Recommendation*&gt;" />
+      <annotation name="com.trolltech.QtDBus.QtTypeName" value="QList&lt;Contour::Recommendation&gt;" />
     </property>
 
     <method name="executeAction">
@@ -12,7 +12,7 @@
     </method>
     <signal name="recommendationsChanged">
       <arg name="recommendations" type="a(sda(sssd))" />
-      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QList&lt;Contour::Recommendation*&gt;" />
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QList&lt;Contour::Recommendation&gt;" />
     </signal>
   </interface>
 </node>

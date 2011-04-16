@@ -66,7 +66,7 @@ public:
     KActivityConsumer* m_activityConsumer;
     LocationManager* m_locationManager;
 
-    QList<Recommendation*> m_recommendations;
+    QList<Recommendation> m_recommendations;
     QHash<QString, RecommendationAction*> m_actionHash;
 
     Nepomuk::Query::QueryServiceClient m_queryClient;
@@ -84,7 +84,6 @@ public:
 void Contour::RecommendationManager::Private::updateRecommendations()
 {
     // remove old recommendations
-    qDeleteAll(m_recommendations);
     m_recommendations.clear();
     m_actionHash.clear();
 
@@ -118,19 +117,19 @@ void Contour::RecommendationManager::Private::_k_currentActivityChanged(const QS
 void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk::Query::Result>& results)
 {
     foreach(const Nepomuk::Query::Result& result, results) {
-        Recommendation* r = new Recommendation(result.resource(), result.score());
+        Recommendation r;
 
         // for now we create the one dummy action: open the resource
         QString id;
         do {
             id = KRandom::randomString(5);
         } while(!m_actionHash.contains(id));
-        RecommendationAction* action = new RecommendationAction(r);
+        RecommendationAction* action = new RecommendationAction();
         action->setId(id);
         action->setText(i18n("Open '%1'", result.resource().genericLabel()));
         m_actionHash[id] = action;
 
-        r->addAction(action);
+        r.addAction(action);
 
         m_recommendations << r;
     }
@@ -159,8 +158,8 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
     d->updateRecommendations();
 
     // export via DBus
-    qDBusRegisterMetaType<Contour::Recommendation*>();
-    qDBusRegisterMetaType<QList<Contour::Recommendation*> >();
+    qDBusRegisterMetaType<Contour::Recommendation>();
+    qDBusRegisterMetaType<QList<Contour::Recommendation> >();
     qDBusRegisterMetaType<Contour::RecommendationAction*>();
     (void)new RecommendationManagerAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String("/recommendationmanager"), this);
@@ -171,7 +170,7 @@ Contour::RecommendationManager::~RecommendationManager()
     delete d;
 }
 
-QList<Contour::Recommendation *> Contour::RecommendationManager::recommendations() const
+QList<Contour::Recommendation> Contour::RecommendationManager::recommendations() const
 {
     return d->m_recommendations;
 }
@@ -182,8 +181,8 @@ void Contour::RecommendationManager::executeAction(const QString &actionId)
         RecommendationAction* action = d->m_actionHash[actionId];
 
         // FIXME: this is the hacky execution of the action, make it correct
-        Recommendation* r = qobject_cast<Recommendation*>(action->parent());
-        (void)new KRun(r->resource().resourceUri(), 0);
+        //Recommendation* r = qobject_cast<Recommendation*>(action->parent());
+        //(void)new KRun(r->resource().resourceUri(), 0);
     }
     else {
         kDebug() << "Invalid action id encountered:" << actionId;

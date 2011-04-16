@@ -34,13 +34,13 @@ class Recommendation;
 class RecommendationManager : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QList<Contour::Recommendation*> recommendations READ recommendations)
+    Q_PROPERTY(QList<Contour::Recommendation> recommendations READ recommendations)
 
 public:
     RecommendationManager(QObject* parent = 0);
     ~RecommendationManager();
 
-    QList<Recommendation*> recommendations() const;
+    QList<Recommendation> recommendations() const;
 
 public Q_SLOTS:
     void executeAction(const QString& actionId);

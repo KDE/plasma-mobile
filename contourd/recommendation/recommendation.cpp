@@ -34,12 +34,12 @@ public:
 };
 
 
-Contour::Recommendation::Recommendation(const Nepomuk::Resource& res, qreal relevance)
-    : QObject(),
-      d(new Private())
+Contour::Recommendation::Recommendation()
+    : d(new Private())
 {
-    d->m_resource = res;
-    d->m_relevance = relevance;
+    d->m_resource = Nepomuk::Resource("http://www.kde.org");
+    /*d->m_resource = res;
+    d->m_relevance = relevance;*/
 }
 
 Contour::Recommendation::~Recommendation()
