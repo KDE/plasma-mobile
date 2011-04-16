@@ -81,6 +81,7 @@ QStringList MetadataEngine::sources() const
 
 bool MetadataEngine::sourceRequestEvent(const QString &name)
 {
+    QString massagedName = name;
     foreach (const QString &s, Plasma::DataEngine::sources()) {
         if (s.startsWith(name) || s.endsWith(name)) {
             kWarning() << "!!! resource already exists." << name;
@@ -88,10 +89,13 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
         }
     }
     d->query = name;
-    if (name.split("://").count() > 1) {
+    if (name.startsWith('/')) {
+        massagedName = "file://" + name;
+    }
+    if (massagedName.split("://").count() > 1) {
         // We have a URL here, so we can create the results directly
         kDebug() << "Valid url ... creating resource synchronously";
-        KUrl u = KUrl(name);
+        KUrl u = KUrl(massagedName);
         Nepomuk::Resource r(u);
         kDebug() << r.resourceUri();
         if (!r.exists()) {
