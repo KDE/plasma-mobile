@@ -150,7 +150,13 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
 
     setData(source, "label", label);
     setData(source, "description", desc);
-    setData(source, "icon", resource.genericIcon());
+
+    QString _icon = resource.genericIcon();
+    if (_icon.isEmpty()) {
+        // go through KMimeType to find an icon.
+        // [...] FIXME
+    }
+    setData(source, "icon", _icon);
     setData(source, "isFile", resource.isFile());
     setData(source, "exists", resource.exists());
     setData(source, "rating", resource.rating());
@@ -187,8 +193,11 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
     setData(source, "tagNames", _tagNames);
 
     // Related
-
-
+    QStringList _relateds;
+    foreach (const Nepomuk::Resource &res, resource.isRelateds()) {
+        _relateds << res.resourceUri().toString();
+    }
+    setData(source, "relateds", _relateds);
 
     // Dynamic properties
     QHash<QUrl, Nepomuk::Variant> props = resource.properties();
