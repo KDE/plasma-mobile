@@ -173,9 +173,6 @@ Contour::RecommendationManager::~RecommendationManager()
 
 QList<Contour::Recommendation> Contour::RecommendationManager::recommendations() const
 {
-    Recommendation r;
-        r.resourceUri = "http://www.kde.org";
-        d->m_recommendations << r;
     return d->m_recommendations;
 }
 

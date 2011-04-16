@@ -21,6 +21,7 @@
 #include "contour_interface.h"
 
 #include <QDBusPendingCallWatcher>
+#include <QDBusMessage>
 
 #include <KDebug>
 
@@ -67,14 +68,15 @@ RecommendationsClient::~RecommendationsClient()
 
 void RecommendationsClientPrivate::recommendationsCallback(QDBusPendingCallWatcher *call)
 {
-    QDBusPendingReply<QVariantMap> reply = *call;
+    QDBusPendingReply<QVariant> reply = *call;
+    QDBusMessage message = call->reply();
 
     if (reply.isError()) {
-        kWarning()<<"Invalid reply";
+        kWarning()<<"Invalid reply"<<reply.error();
     } else {
-        QVariantMap properties = reply.argumentAt<0>();
-        const QList<Contour::Recommendation> recommendations = (properties.value("recommendations")).value<QList<Contour::Recommendation> >();
-        kWarning()<<"Properties: "<<properties;
+        QVariant property = reply.argumentAt<0>();
+        const QList<Contour::Recommendation> recommendations = qdbus_cast<QList<Contour::Recommendation> >(reply.value().value<QDBusArgument>());
+
         updateRecommendations(recommendations);
     }
 }
