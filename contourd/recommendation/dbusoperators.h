@@ -32,9 +32,9 @@ Q_DECLARE_METATYPE(Contour::Recommendation)
 Q_DECLARE_METATYPE(Contour::RecommendationAction)
 
 QDBusArgument& operator<<(QDBusArgument& arg, const Contour::Recommendation);
-const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::Recommendation);
+const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::Recommendation &rec);
 
 QDBusArgument& operator<<(QDBusArgument& arg, const Contour::RecommendationAction);
-const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::RecommendationAction action);
+const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::RecommendationAction &action);
 
 #endif

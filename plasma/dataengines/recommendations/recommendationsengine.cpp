@@ -27,6 +27,7 @@
 
 #include <recommendationsclient.h>
 #include <recommendation.h>
+#include <recommendationaction.h>
 
 RecommendationsEngine::RecommendationsEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
@@ -34,22 +35,22 @@ RecommendationsEngine::RecommendationsEngine(QObject* parent, const QVariantList
     setMinimumPollingInterval(2 * 1000); // 2 seconds minimum
 
     m_recommendationsClient = new Contour::RecommendationsClient(this);
-    connect(m_recommendationsClient, SIGNAL(recommendationsChanged(const QList<Contour::Recommendation*> &)), this, SLOT(updateRecommendations(const QList<Contour::Recommendation*> &)));
+    connect(m_recommendationsClient, SIGNAL(recommendationsChanged(const QList<Contour::Recommendation> &)), this, SLOT(updateRecommendations(const QList<Contour::Recommendation> &)));
 }
 
 RecommendationsEngine::~RecommendationsEngine()
 {
 }
 
-void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommendation*> &recommendations)
+void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommendation> &recommendations)
 {
-    kWarning()<<"New recommendations: "<<recommendations;
+    //kWarning()<<"New recommendations: "<<recommendations;
 
-    foreach (Contour::Recommendation *rec, recommendations) {
-        setData(rec->resource().uri(), "name", rec->resource().genericLabel());
-        setData(rec->resource().uri(), "description", rec->resource().genericDescription());
-        setData(rec->resource().uri(), "icon", rec->resource().genericIcon());
-        setData(rec->resource().uri(), "relevance", rec->relevance());
+    foreach (Contour::Recommendation rec, recommendations) {
+        //setData(rec.resource().uri(), "name", rec.resource().genericLabel());
+        //setData(rec.resource().uri(), "description", rec.resource().genericDescription());
+        //setData(rec.resource().uri(), "icon", rec.resource().genericIcon());
+        setData("http://www.kde.org"/*resourc.uri()*/, "relevance", rec.relevance);
     }
 }
 

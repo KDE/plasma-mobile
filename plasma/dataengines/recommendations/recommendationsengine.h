@@ -45,7 +45,7 @@ protected:
 
 protected slots:
     //bool updateSourceEvent(const QString &name);
-    void updateRecommendations(const QList<Contour::Recommendation*> &recommendations);
+    void updateRecommendations(const QList<Contour::Recommendation> &recommendations);
 
 private:
     Contour::RecommendationsClient *m_recommendationsClient;
