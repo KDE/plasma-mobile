@@ -68,6 +68,7 @@ public:
 
     QList<Recommendation> m_recommendations;
     QHash<QString, RecommendationAction> m_actionHash;
+    QHash<QString, Recommendation> m_RecommendationForAction;
 
     Nepomuk::Query::QueryServiceClient m_queryClient;
 
@@ -86,6 +87,7 @@ void Contour::RecommendationManager::Private::updateRecommendations()
     // remove old recommendations
     m_recommendations.clear();
     m_actionHash.clear();
+    m_RecommendationForAction.clear();
 
     // TODO: get some dummy recommendations for now
     //       for example: all files that were touched in this activity
@@ -129,6 +131,7 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
         action.id = id;
         action.text = i18n("Open '%1'", result.resource().genericLabel());
         m_actionHash[id] = action;
+        m_recommendationForAction[id] = r;
 
         r.actions << action;
 
@@ -179,11 +182,11 @@ QList<Contour::Recommendation> Contour::RecommendationManager::recommendations()
 void Contour::RecommendationManager::executeAction(const QString &actionId)
 {
     if(d->m_actionHash.contains(actionId)) {
-        RecommendationAction action = d->m_actionHash[actionId];
+        RecommendationAction action = d->m_actionHash.value(actionId);
 
         // FIXME: this is the hacky execution of the action, make it correct
-        //Recommendation* r = qobject_cast<Recommendation*>(action->parent());
-        //(void)new KRun(r->resource().resourceUri(), 0);
+        Recommendation r = d->m_recommendationforAction.value(actionId);
+        (void)new KRun(r.resourceUri, 0);
     }
     else {
         kDebug() << "Invalid action id encountered:" << actionId;
