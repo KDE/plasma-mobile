@@ -17,6 +17,7 @@
  */
 
 #include "recommendationsengine.h"
+#include "recommendationservice.h"
 #include "testsource.h"
 
 #include <QDBusPendingCallWatcher>
@@ -26,6 +27,8 @@
 #include <recommendationsclient.h>
 #include <recommendation.h>
 #include <recommendationaction.h>
+
+K_EXPORT_PLASMA_DATAENGINE(recommendations, RecommendationsEngine)
 
 RecommendationsEngine::RecommendationsEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
@@ -42,12 +45,11 @@ RecommendationsEngine::~RecommendationsEngine()
 
 void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommendation> &recommendations)
 {
-    m_recommendations = recommendations;
-    m_recommendationsResources.clear();
+    m_recommendations.clear();
 
     foreach (Contour::Recommendation rec, recommendations) {
         Nepomuk::Resource res(rec.resourceUri);
-        m_recommendationsResources[rec.resourceUri] = res;
+        m_recommendations[rec.resourceUri] = rec;
 
         setData(rec.resourceUri, "name", res.genericLabel());
         setData(rec.resourceUri, "description", res.genericDescription());
@@ -64,6 +66,16 @@ void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommend
         }
         setData(rec.resourceUri, "actions", actionsList);
     }
+}
+
+Plasma::Service *RecommendationsEngine::serviceForSource(const QString &source)
+{
+    if (!m_recommendations.contains(source)) {
+        return 0;
+    }
+
+    RecommendationService *service = new RecommendationService(m_recommendationsClient, m_recommendations.value(source), this);
+    return service;
 }
 
 #include "recommendationsengine.moc"

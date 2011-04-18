@@ -16,16 +16,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef NEPOMUKTESTENGINE_H
-#define NEPOMUKTESTENGINE_H
+#ifndef RECOMMENDATIONSENGINE_H
+#define RECOMMENDATIONSENGINE_H
 
 #include <plasma/dataengine.h>
 
 #include <Nepomuk/Resource>
-
-class OrgKdeContourRecommendationManagerInterface;
-
-class QDBusPendingCallWatcher;
 
 namespace Contour {
     class RecommendationsClient;
@@ -40,21 +36,15 @@ public:
     RecommendationsEngine(QObject* parent, const QVariantList& args);
     ~RecommendationsEngine();
 
-protected:
-    //from DataEngine
-  // bool sourceRequestEvent(const QString &name);
+    Plasma::Service *serviceForSource(const QString &source);
 
 protected slots:
-    //bool updateSourceEvent(const QString &name);
     void updateRecommendations(const QList<Contour::Recommendation> &recommendations);
 
 private:
     Contour::RecommendationsClient *m_recommendationsClient;
 
-    QList<Contour::Recommendation> m_recommendations;
-    QHash<QString, Nepomuk::Resource> m_recommendationsResources;
+    QHash<QString, Contour::Recommendation> m_recommendations;
 };
-
-K_EXPORT_PLASMA_DATAENGINE(recommendations, RecommendationsEngine)
 
 #endif

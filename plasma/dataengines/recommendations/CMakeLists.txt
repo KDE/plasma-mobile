@@ -3,6 +3,8 @@ ${QT_QTNETWORK_INCLUDES} ${QT_QTXML_INCLUDES} ${QCA2_INCLUDE_DIR} ${CMAKE_SOURCE
 
 set(recommendations_engine_SRCS
     recommendationsengine.cpp
+    recommendationservice.cpp
+    recommendationjob.cpp
     testsource.cpp
 )
 
