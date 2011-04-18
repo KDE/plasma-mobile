@@ -21,6 +21,7 @@
 
 #include <plasma/dataengine.h>
 
+#include <Nepomuk/Resource>
 
 class OrgKdeContourRecommendationManagerInterface;
 
@@ -50,6 +51,8 @@ protected slots:
 private:
     Contour::RecommendationsClient *m_recommendationsClient;
 
+    QList<Contour::Recommendation> m_recommendations;
+    QHash<QString, Nepomuk::Resource> m_recommendationsResources;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(recommendations, RecommendationsEngine)

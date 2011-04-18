@@ -23,8 +23,6 @@
 
 #include <KDebug>
 
-#include <Nepomuk/Resource>
-
 #include <recommendationsclient.h>
 #include <recommendation.h>
 #include <recommendationaction.h>
@@ -44,13 +42,27 @@ RecommendationsEngine::~RecommendationsEngine()
 
 void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommendation> &recommendations)
 {
-    //kWarning()<<"New recommendations: "<<recommendations;
+    m_recommendations = recommendations;
+    m_recommendationsResources.clear();
 
     foreach (Contour::Recommendation rec, recommendations) {
-        //setData(rec.resource().uri(), "name", rec.resource().genericLabel());
-        //setData(rec.resource().uri(), "description", rec.resource().genericDescription());
-        //setData(rec.resource().uri(), "icon", rec.resource().genericIcon());
-        setData("http://www.kde.org"/*resourc.uri()*/, "relevance", rec.relevance);
+        Nepomuk::Resource res(rec.resourceUri);
+        m_recommendationsResources[rec.resourceUri] = res;
+
+        setData(rec.resourceUri, "name", res.genericLabel());
+        setData(rec.resourceUri, "description", res.genericDescription());
+        setData(rec.resourceUri, "icon", res.genericIcon());
+        setData(rec.resourceUri, "relevance", rec.relevance);
+
+        QVariantList actionsList;
+        foreach (Contour::RecommendationAction action, rec.actions) {
+            DataEngine::Data actionData;
+            actionData["id"] = action.id;
+            actionData["text"] = action.text;
+            actionData["iconName"] = action.iconName;
+            actionData["relevance"] = action.relevance;
+        }
+        setData(rec.resourceUri, "actions", actionsList);
     }
 }
 
