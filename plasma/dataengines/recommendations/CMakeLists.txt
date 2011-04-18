@@ -5,7 +5,6 @@ set(recommendations_engine_SRCS
     recommendationsengine.cpp
     recommendationservice.cpp
     recommendationjob.cpp
-    testsource.cpp
 )
 
 kde4_add_plugin(plasma_engine_recommendations ${recommendations_engine_SRCS})

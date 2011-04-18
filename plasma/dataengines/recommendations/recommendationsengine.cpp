@@ -18,7 +18,6 @@
 
 #include "recommendationsengine.h"
 #include "recommendationservice.h"
-#include "testsource.h"
 
 #include <QDBusPendingCallWatcher>
 
