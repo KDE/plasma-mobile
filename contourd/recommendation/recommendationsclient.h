@@ -42,6 +42,9 @@ public:
 
     QList<Contour::Recommendation*> recommendations() const;
 
+public Q_SLOTS:
+    void executeAction(const QString &id);
+
 Q_SIGNALS:
     void recommendationsChanged(const QList<Contour::Recommendation> &);
 

@@ -66,6 +66,15 @@ RecommendationsClient::~RecommendationsClient()
     delete d;
 }
 
+void RecommendationsClient::executeAction(const QString &id)
+{
+    if (d->contourIface->isValid()) {
+        d->contourIface->asyncCall(QLatin1String("executeAction"), id);
+    } else {
+        kWarning() << "can't connect with Contour";
+    }
+}
+
 void RecommendationsClientPrivate::recommendationsCallback(QDBusPendingCallWatcher *call)
 {
     QDBusPendingReply<QVariant> reply = *call;
