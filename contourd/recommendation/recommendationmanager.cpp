@@ -131,7 +131,7 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
         action.id = id;
         action.text = i18n("Open '%1'", result.resource().genericLabel());
         m_actionHash[id] = action;
-        m_recommendationForAction[id] = r;
+        m_RecommendationForAction[id] = r;
 
         r.actions << action;
 
@@ -185,7 +185,7 @@ void Contour::RecommendationManager::executeAction(const QString &actionId)
         RecommendationAction action = d->m_actionHash.value(actionId);
 
         // FIXME: this is the hacky execution of the action, make it correct
-        Recommendation r = d->m_recommendationforAction.value(actionId);
+        Recommendation r = d->m_RecommendationForAction.value(actionId);
         (void)new KRun(r.resourceUri, 0);
     }
     else {
