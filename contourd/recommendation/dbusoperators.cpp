@@ -30,16 +30,11 @@
 QDBusArgument& operator<<(QDBusArgument& arg, const Contour::Recommendation r)
 {
     arg.beginStructure();
+
     arg << r.resourceUri;
     arg << r.relevance;
     arg << r.actions;
-    kWarning()<<"AAAA"<<r.resourceUri;
-    /*arg.beginArray(qMetaTypeId<Contour::RecommendationAction>());
-    foreach(Contour::RecommendationAction action, r.actions()) {
-        arg << action;
-    }
 
-    arg.endArray();*/
     arg.endStructure();
 
     return arg;
@@ -47,10 +42,10 @@ QDBusArgument& operator<<(QDBusArgument& arg, const Contour::Recommendation r)
 
 const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::Recommendation &r)
 {
-    //r = new Contour::Recommendation(Nepomuk::Resource(QUrl("http://www.kde.org")), 0.5);
     arg.beginStructure();
     arg >> r.resourceUri;
-    kWarning()<<"BBBB"<<r.resourceUri;
+    arg >> r.relevance;
+    arg >> r.actions;
     arg.endStructure();
     return arg;
 }
@@ -70,7 +65,13 @@ QDBusArgument& operator<<(QDBusArgument& arg, const Contour::RecommendationActio
 
 const QDBusArgument& operator>>(const QDBusArgument& arg, Contour::RecommendationAction &action)
 {
-//    action = new Contour::RecommendationAction();
+    arg.beginStructure();
+    arg >> action.id
+        >> action.text
+        >> action.iconName
+        >> action.relevance;
+    arg.endStructure();
+
     return arg;
 }
 
