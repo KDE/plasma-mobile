@@ -51,7 +51,7 @@ target_link_libraries(
   QtLocation
 )
 
-set(recommendationsclient_SRC
+set(contourclient_SRC
   recommendation/dbusoperators.cpp
   recommendation/recommendationsclient.cpp
 )
@@ -62,15 +62,15 @@ set_source_files_properties(${recommendationmanager_xml} PROPERTIES
    CLASSNAME OrgKdeContourRecommendationManagerInterface
 )
 
-QT4_ADD_DBUS_INTERFACE(recommendationsclient_SRC ${recommendationmanager_xml} contour_interface)
+QT4_ADD_DBUS_INTERFACE(contourclient_SRC ${recommendationmanager_xml} contour_interface)
 
-kde4_add_library(recommendationsclient SHARED ${recommendationsclient_SRC}
+kde4_add_library(contourclient SHARED ${contourclient_SRC}
 )
 
-set_target_properties(recommendationsclient PROPERTIES VERSION ${KDE_NON_GENERIC_LIB_VERSION} SOVERSION ${KDE_NON_GENERIC_LIB_SOVERSION})
+set_target_properties(contourclient PROPERTIES VERSION ${KDE_NON_GENERIC_LIB_VERSION} SOVERSION ${KDE_NON_GENERIC_LIB_SOVERSION})
 
 target_link_libraries(
-  recommendationsclient
+  contourclient
   ${QT_QTCORE_LIBRARY}
   ${QT_QTGUI_LIBRARY}
   ${KDE4_KDECORE_LIBS}
@@ -81,13 +81,13 @@ target_link_libraries(
   QtLocation
 )
 
-set(recommendationsclient_LIB_HEADERS
+set(contourclient_LIB_HEADERS
     recommendation/recommendation.h
     recommendation/recommendationaction.h
     recommendation/recommendationsclient.h
-    recommendation/recommendationsclient_export.h)
+    recommendation/contourclient_export.h)
 
-install(FILES ${recommendationsclient_LIB_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/ COMPONENT Devel)
+install(FILES ${contourclient_LIB_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/ COMPONENT Devel)
 
-install(TARGETS recommendationsclient EXPORT kdelibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS contourclient EXPORT kdelibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
