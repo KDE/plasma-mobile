@@ -136,7 +136,7 @@ Item {
                     anchors.margins: 8
                     Component.onCompleted: {
                         print("Setting icon " + "nepomuk");
-                        setIcon(icon);
+                        setIcon(hasSymbol);
                     }
                 }
 
@@ -161,7 +161,13 @@ Item {
                     id: infoLabel
                     //image: metadataSource.data[DataEngineSource]["fileName"]
                     //text: "the long and winding road..."
-                    text: lastModified.toString()
+                    text: { 
+                        if (lastModified) {
+                            lastModified.toString()
+                        } else {
+                            className
+                        }
+                    }
                     opacity: 0.6
                     //font.pixelSize: font.pixelSize * 1.8
                     font.pixelSize: 11
