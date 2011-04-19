@@ -68,16 +68,43 @@ QtObject {
     property ListModel birthday: ListModel {
         id: birthdayModel
         ListElement {
-            text: "Call grandma Niki"
+            text: "Grandma Niki"
             description: "Niki called you today at 09am"
-            icon: "voicecall"
+            icon: "user-properties"
+            actions: [
+                ListElement {
+                    actionId: "1"
+                    text: "Call"
+                    icon: "voicecall"
+                },
+                ListElement {
+                    actionId: "2"
+                    text: "Email"
+                    icon: "mail-send"
+                },
+                ListElement {
+                    actionId: "2"
+                    text: "SMS"
+                    icon: "phone"
+                }
+            ]
         }
         ListElement {
             text: "Open orange.pdf"
             description: "You often opened this file recently"
             icon: "application-pdf"
-            command: "okular"
-            arguments: "orange.pdf"
+            actions: [
+                ListElement {
+                    actionId: "1"
+                    text: "Open"
+                    icon: "document-open-data"
+                },
+                ListElement {
+                    actionId: "2"
+                    text: "Email to John"
+                    icon: "mail-send"
+                }
+            ]
         }
         ListElement {
             text: "Send pictures to grandma"

@@ -29,6 +29,7 @@ ListItem {
     property string command
     property string arguments
 
+
     QIconItem {
         x: listItem.padding.left
         anchors.verticalCenter: parent.verticalCenter
@@ -60,12 +61,39 @@ ListItem {
         }
 
     }
-    MouseArea {
+    Column {
+        id : actionsLayout
+        width: parent.width
+        spacing: 5
+        anchors.left: listItem.padding.left
+        anchors.leftMargin: 50
+        anchors.right: listItem.padding.right
+        anchors.top: delegateLayout.bottom
+        anchors.topMargin: 8
+
+        Repeater {
+            model: actions
+            Row {
+                spacing: 10
+                QIconItem {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 24
+                    height: 24
+                    icon: QIcon(model.icon)
+                }
+                Text {
+                    text: model.text
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+        }
+    }
+    /*MouseArea {
         anchors.fill: parent
         onClicked: {
             var args = listItem.arguments.split(' ')
 
             plasmoid.runCommand(listItem.command, Array(args))
         }
-    }
+    }*/
 }
