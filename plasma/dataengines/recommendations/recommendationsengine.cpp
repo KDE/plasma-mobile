@@ -44,6 +44,7 @@ RecommendationsEngine::~RecommendationsEngine()
 
 void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommendation> &recommendations)
 {
+    removeAllSources();
     m_recommendations.clear();
 
     foreach (Contour::Recommendation rec, recommendations) {
@@ -58,10 +59,11 @@ void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommend
         QVariantList actionsList;
         foreach (Contour::RecommendationAction action, rec.actions) {
             DataEngine::Data actionData;
-            actionData["id"] = action.id;
+            actionData["actionId"] = action.id;
             actionData["text"] = action.text;
             actionData["iconName"] = action.iconName;
             actionData["relevance"] = action.relevance;
+            actionsList << actionData;
         }
         setData(rec.resourceUri, "actions", actionsList);
     }

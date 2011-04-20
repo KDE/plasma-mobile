@@ -26,8 +26,7 @@ ListItem {
     property string text
     property string description
     property string icon
-    property string command
-    property string arguments
+    property variant actions
 
 
     QIconItem {
@@ -71,7 +70,7 @@ ListItem {
         anchors.topMargin: 8
 
         Repeater {
-            model: actions
+            model: actions.length
             MouseArea {
                 width: actionLayout.width
                 height: actionLayout.height
@@ -85,10 +84,10 @@ ListItem {
                         anchors.verticalCenter: parent.verticalCenter
                         width: 24
                         height: 24
-                        icon: QIcon(model.icon)
+                        icon: QIcon(actions[index].icon)
                     }
                     Text {
-                        text: model.text
+                        text: actions[index].text
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }

@@ -126,6 +126,7 @@ void RecommendationsClientPrivate::serviceChange(const QString& name, const QStr
 
     if (newOwner.isEmpty()) {
         //unregistered
+        updateRecommendations(QList<Contour::Recommendation>());
         delete contourIface;
         contourIface = 0;
     } else if (oldOwner.isEmpty()) {

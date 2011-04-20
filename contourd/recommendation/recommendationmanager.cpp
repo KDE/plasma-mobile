@@ -126,7 +126,7 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
         QString id;
         do {
             id = KRandom::randomString(5);
-        } while(!m_actionHash.contains(id));
+        } while(m_actionHash.contains(id));
         RecommendationAction action;
         action.id = id;
         action.text = i18n("Open '%1'", result.resource().genericLabel());
