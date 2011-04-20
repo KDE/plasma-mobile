@@ -12,4 +12,5 @@ target_link_libraries(plasma_engine_recommendations ${KDE4_PLASMA_LIBS}  ${NEPOM
 
 install(TARGETS plasma_engine_recommendations DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-dataengine-recommendations.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
-
+install(FILES recommendations.operations
+        DESTINATION ${DATA_INSTALL_DIR}/plasma/services)

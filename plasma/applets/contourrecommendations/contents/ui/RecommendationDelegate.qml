@@ -75,7 +75,10 @@ ListItem {
                 width: actionLayout.width
                 height: actionLayout.height
                 onClicked: {
-                    print(model.actionId)
+                    var service = recommendationsSource.serviceForSource(DataEngineSource)
+                    var operation = service.operationDescription("executeAction")
+                    operation.actionId = actions[index].actionId
+                    service.startOperationCall(operation)
                 }
                 Row {
                     id: actionLayout
