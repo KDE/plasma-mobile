@@ -48,10 +48,10 @@ Item {
         engine: "preview"
 
         connectedSources: [ "file:///home/sebas/Documents/Curacao/wallpaper.jpg",
-            "http://www.volkskrant.nl",
+            "http://www.wikipedia.org",
             "http://www.google.com",
             "http://www.kde.org",
-            "http://www.engadget.com",
+            "http://community.open-slx.de",
             "http://www.tweakers.net"
         ]
         interval: 0
@@ -62,6 +62,7 @@ Item {
         }
 
         onDataChanged: {
+            return;
             console.log("========================== Data changed");
             for (d in data) {
                 print("  data " + d);
@@ -91,7 +92,7 @@ Item {
     ListView {
         id: webItemList
         //anchors.fill: parent
-        height: 400
+        height: 128+16
         snapMode: ListView.SnapToItem
         clip: true
         highlightMoveDuration: 300
@@ -197,6 +198,7 @@ Item {
                 //return;
                 //console.log(" =========== Item ========= " + DataEngineSource )
                 //print("bookmarkItem-----" + bookmarkItem.DataEngineSource);
+                return;
                 for (var i in previewSource) {
                     print(" pewviewSource elements:" + i)
                 }
@@ -225,7 +227,7 @@ Item {
 
     Text {
         text: "end."
-        anchors { left:parent.left; right: parent.right; bottom: parent.bottom; }
+        anchors { left:parent.left; top: webItemList; right: parent.right; bottom: parent.bottom; }
 
     }
 }
