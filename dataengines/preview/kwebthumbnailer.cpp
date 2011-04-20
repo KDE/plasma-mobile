@@ -27,6 +27,7 @@
 #include <QtWebKit/QWebFrame>
 
 #include "kwebthumbnailer.h"
+#include <kimagecache.h>
 #include <KTemporaryFile>
 #include <KLocalizedString>
 
@@ -45,6 +46,7 @@ public:
     QString fileName;
     QString status;
     QString errorText;
+    KImageCache* cache;
 };
 
 KWebThumbnailer::KWebThumbnailer( QObject *parent )
@@ -60,11 +62,16 @@ KWebThumbnailer::KWebThumbnailer( const QUrl &url, const QSize &size, QObject *p
     d->url = url;
     d->size = size;
     d->status = "idle";
+    d->cache = new KImageCache("kwebthumbnailer", 1048576); // 10 MByte
+    kDebug() << "cache created." << d->cache->timestamp();
+
     // filename is set later.
 }
 
 KWebThumbnailer::~KWebThumbnailer()
 {
+    delete d->cache;
+    delete d->page;
     delete d;
 }
 
@@ -100,13 +107,23 @@ QString KWebThumbnailer::status()
 
 void KWebThumbnailer::start()
 {
-    d->status = "loading";
+    d->thumbnail = QImage(d->size, QImage::Format_ARGB32_Premultiplied);
+    if (d->cache->findImage(d->url.toString(), &(d->thumbnail))) {
+        // cache hit
+        d->status = i18nc("status of thumbnail loader", "Cached");
+        kDebug() << "cache hit for " << d->url;
+        saveThumbnail();
+        return;
+    }
+    kDebug() << "not cached, loading" << d->url;
+    d->status = i18nc("status of thumbnail loader", "Loading...");
+
     d->page = new QWebPage( this );
     d->page->mainFrame()->setScrollBarPolicy( Qt::Horizontal, Qt::ScrollBarAlwaysOff );
     d->page->mainFrame()->setScrollBarPolicy( Qt::Vertical, Qt::ScrollBarAlwaysOff );
     d->page->mainFrame()->load( d->url );
 
-    connect( d->page, SIGNAL(loadFinished(bool)), this, SLOT(completed(bool)) );
+    connect(d->page, SIGNAL(loadFinished(bool)), this, SLOT(completed(bool)));
 }
 
 void KWebThumbnailer::completed( bool success )
@@ -114,7 +131,9 @@ void KWebThumbnailer::completed( bool success )
     if ( !success ) {
         delete d->page;
         d->page = 0;
-        d->thumbnail = QImage();
+        d->thumbnail = QImage(d->size, QImage::Format_ARGB32_Premultiplied);
+        d->thumbnail.fill( Qt::transparent );
+        // FIXME: fallback pixmap
         d->status = "failed";
         d->errorText = i18n("Unknown error");
         emit done(false);
@@ -127,36 +146,40 @@ void KWebThumbnailer::completed( bool success )
     size.setHeight( size.width() * d->size.height() / d->size.width() );
 
     // create the target surface
-    d->thumbnail = QImage( size, QImage::Format_ARGB32_Premultiplied );
+    d->thumbnail = QImage( d->size, QImage::Format_ARGB32_Premultiplied );
     d->thumbnail.fill( Qt::transparent );
 
     // render and rescale
-    QPainter p( &(d->thumbnail) );
+    QPainter p(&(d->thumbnail));
     d->page->setViewportSize( d->page->mainFrame()->contentsSize() );
     d->page->mainFrame()->render( &p );
     p.end();
 
-    d->thumbnail = d->thumbnail.scaled( d->size, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation );
-
     delete d->page;
     d->page = 0;
+    saveThumbnail();
+}
 
+void KWebThumbnailer::saveThumbnail()
+{
     if (d->fileName.isEmpty()) {
         KTemporaryFile tmp;
         tmp.setSuffix(".png");
         tmp.open();
         d->fileName = tmp.fileName();
         tmp.close();
-        kDebug() << "OOO OOO OOO Image saved as " << d->fileName;
-        //d->fileName = "file:///tmp/bla.png";
+        kDebug() << "saving as ..." << d->fileName;
     }
 
 
     d->thumbnail.save(fileName());
-    kDebug() << "SAVED IMAGE TO:" << fileName();
-    d->status = i18nc("status of thumbnail loader", "Loaded");
+    kDebug() << "saved image to:" << fileName();
+    d->cache->insertImage(d->url.toString(), d->thumbnail);
+    kDebug() << "image inserted into CACHE:" << d->url.toString() << d->thumbnail.size();
+    d->status = "loaded";
+    d->errorText = i18nc("status of thumbnail loader", "Loaded");
 
-    emit done(success);
+    emit done(true);
 }
 
 QImage KWebThumbnailer::thumbnail() const

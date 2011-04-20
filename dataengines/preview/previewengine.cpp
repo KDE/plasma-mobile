@@ -157,6 +157,7 @@ void PreviewEngine::thumbnailerDone(bool success)
     }
     QLatin1String key = sizeString(wtn->size());
     QImage image = wtn->thumbnail();
+
     //kDebug() << "Thumbnail set:" << wtn->url() << key << image.height() << image.width();
     updateData(wtn);
 }
