@@ -32,7 +32,7 @@ ListItem {
 
     QIconItem {
         x: listItem.padding.left
-        anchors.verticalCenter: parent.verticalCenter
+        y: listItem.padding.top
         width: 48
         height: 48
         icon: QIcon(listItem.icon)
@@ -59,7 +59,6 @@ ListItem {
             width: delegateLayout.width
             text: listItem.description
         }
-
     }
     Column {
         id : actionsLayout
@@ -73,27 +72,27 @@ ListItem {
 
         Repeater {
             model: actions
-            Row {
-                spacing: 10
-                QIconItem {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: 24
-                    height: 24
-                    icon: QIcon(model.icon)
+            MouseArea {
+                width: actionLayout.width
+                height: actionLayout.height
+                onClicked: {
+                    print(model.actionId)
                 }
-                Text {
-                    text: model.text
-                    anchors.verticalCenter: parent.verticalCenter
+                Row {
+                    id: actionLayout
+                    spacing: 10
+                    QIconItem {
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: 24
+                        height: 24
+                        icon: QIcon(model.icon)
+                    }
+                    Text {
+                        text: model.text
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
             }
         }
     }
-    /*MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            var args = listItem.arguments.split(' ')
-
-            plasmoid.runCommand(listItem.command, Array(args))
-        }
-    }*/
 }
