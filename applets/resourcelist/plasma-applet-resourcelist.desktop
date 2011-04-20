@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Testing display of Nepomuk Resources
+Comment[et]=Nepomuki ressursside kuvamise test
 Comment[nl]=Testen van tonen van Nepomuk-hulpbronnen
 Comment[pt]=A testar a visualização dos Recursos do Nepomuk
 Comment[sv]=Testar visning av Nepomuk-resurser
@@ -15,6 +16,7 @@ Keywords[sv]=Nättjänster, webb
 Keywords[uk]=Служби мережі, інтернет
 Keywords[x-test]=xxOnline Services, Webxx
 Name=Resources List
+Name[et]=Ressursiloend
 Name[nl]=Lijst met hulpbronnen
 Name[pt]=Lista de Recursos
 Name[sv]=Resurslista

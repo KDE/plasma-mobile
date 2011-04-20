@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=Metadata
+Name[et]=Metaandmed
 Name[nl]=Metagegevens
 Name[pt]=Meta-dados
 Name[sv]=Metadata
 Name[uk]=Метадані
 Name[x-test]=xxMetadataxx
 Comment=Provides metadata for semantic resources
+Comment[et]=Semantiliste ressursside metaandmed
 Comment[nl]=Levert metagegevens voor semantische hulpbronnen
 Comment[pt]=Fornece meta-dados para os recursos semânticos
 Comment[sv]=Tillhandahåller metadata för semantiska resurser
