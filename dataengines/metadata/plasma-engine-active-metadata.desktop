@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Metadata
-Name[et]=Metaandmed
+Name=Active Metadata
 Name[nl]=Metagegevens
+Name[et]=Metaandmed
 Name[pt]=Meta-dados
 Name[sv]=Metadata
 Name[uk]=Метадані
@@ -16,10 +16,10 @@ Comment[x-test]=xxProvides metadata for semantic resourcesxx
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=nepomuk
-X-KDE-Library=plasma_engine_metadata
+X-KDE-Library=plasma_engine_active_metadata
 X-KDE-PluginInfo-Author=Sebastian Kügler
 X-KDE-PluginInfo-Email=sebas@kde.org
-X-KDE-PluginInfo-Name=metadata
+X-KDE-PluginInfo-Name=active_metadata
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://kde.org
 X-KDE-PluginInfo-Category=Utilities
