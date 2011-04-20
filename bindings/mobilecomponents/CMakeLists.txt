@@ -6,6 +6,7 @@ set(mobilecomponents_SRCS
     mobilecomponentsplugin.cpp
     pagedproxymodel.cpp
     appletstatuswatcher.cpp
+    resourcedelegate.cpp
     )
 
 INCLUDE_DIRECTORIES(
