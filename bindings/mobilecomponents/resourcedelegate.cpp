@@ -92,18 +92,21 @@ void ResourceDelegate::setResourceType(const QString &type)
         }
     }
 
-   /* TODO:
+    /* TODO:
     * should it use a Package?
     */
     QString path =
         KStandardDirs::locate("data", "plasma/resourcedelegates/" + type.split('#').last() + "/" + fileName );
 
     //fallback to FileDataObject
+    // TODO: we want cascading fallback from the most specific resource type
+    // to the more generic one, trueg can give us API for those, we'll basically
+    // want a sorted QStringList from most specific to most generic ontology, so
+    // we can always load the best matching resource delegate. -- sebas
     if (!QFile::exists(path)) {
         path = KStandardDirs::locate("data", "plasma/resourcedelegates/FileDataObject/"+fileName );
     }
     setMainFile(path);
-
 
     emit resourceTypeChanged();
 }
