@@ -52,7 +52,11 @@ Item {
             "http://www.google.com",
             "http://www.kde.org",
             "http://community.open-slx.de",
-            "http://www.tweakers.net"
+            "http://www.tweakers.net",
+            "http://dot.kde.org",
+            "http://plasma.kde.org",
+            "http://planetkde.org",
+            "http://lwn.net"
         ]
         interval: 0
         //connectedSources: sources
@@ -144,7 +148,7 @@ Item {
                     font.pixelSize: 14
                     font.bold: true
 
-                    width: 400
+                    width:250
                     anchors.top: itemFrame.top
                     //anchors.bottom: infoLabel.top;
                     anchors.left: previewImage.right

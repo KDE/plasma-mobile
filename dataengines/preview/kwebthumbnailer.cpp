@@ -71,7 +71,6 @@ KWebThumbnailer::KWebThumbnailer( const QUrl &url, const QSize &size, QObject *p
 KWebThumbnailer::~KWebThumbnailer()
 {
     delete d->cache;
-    delete d->page;
     delete d;
 }
 
@@ -146,7 +145,7 @@ void KWebThumbnailer::completed( bool success )
     size.setHeight( size.width() * d->size.height() / d->size.width() );
 
     // create the target surface
-    d->thumbnail = QImage( d->size, QImage::Format_ARGB32_Premultiplied );
+    d->thumbnail = QImage(size, QImage::Format_ARGB32_Premultiplied ); // clip here
     d->thumbnail.fill( Qt::transparent );
 
     // render and rescale
@@ -157,6 +156,10 @@ void KWebThumbnailer::completed( bool success )
 
     delete d->page;
     d->page = 0;
+
+    d->thumbnail = d->thumbnail.scaled(d->size,
+                                        Qt::KeepAspectRatioByExpanding,
+                                        Qt::SmoothTransformation);
     saveThumbnail();
 }
 
