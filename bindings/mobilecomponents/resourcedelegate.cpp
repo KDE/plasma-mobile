@@ -35,7 +35,6 @@ ResourceDelegate::ResourceDelegate(QDeclarativeItem *parent)
       m_context(0),
       m_mainObject(0)
 {
-    setFlag(QGraphicsItem::ItemHasNoContents, false);
 }
 
 void ResourceDelegate::setMainFile(const QString &file)
