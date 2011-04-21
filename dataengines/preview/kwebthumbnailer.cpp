@@ -28,6 +28,8 @@
 
 #include "kwebthumbnailer.h"
 #include <kimagecache.h>
+#include <KGlobal>
+#include <KStandardDirs>
 #include <KTemporaryFile>
 #include <KLocalizedString>
 
@@ -96,6 +98,15 @@ void KWebThumbnailer::setSize( const QSize &size )
 
 QString KWebThumbnailer::fileName()
 {
+    if (d->fileName.isEmpty()) {
+        kDebug() << "--- temp path" << KGlobal::dirs()->findDirs("tmp", QString())[0];
+        QString tmpFile = KGlobal::dirs()->findDirs("tmp", QString())[0];
+        tmpFile.append("previewengine_");
+        tmpFile.append(QString::number(qHash(d->url.toString())));
+        tmpFile.append(".png");
+        kDebug() << "Filename:" << tmpFile;
+        d->fileName = tmpFile;
+    }
     return d->fileName;
 }
 
@@ -165,20 +176,19 @@ void KWebThumbnailer::completed( bool success )
 
 void KWebThumbnailer::saveThumbnail()
 {
-    if (d->fileName.isEmpty()) {
-        KTemporaryFile tmp;
-        tmp.setSuffix(".png");
-        tmp.open();
-        d->fileName = tmp.fileName();
-        tmp.close();
-        kDebug() << "saving as ..." << d->fileName;
+    kDebug() << "saving";
+    if (QFile::exists(fileName())) {
+        kDebug() << ":-) File already exists:" << fileName();
+        d->thumbnail = QImage(fileName());
+    } else {
+        kDebug() << "saving to" << fileName();
+        d->thumbnail.save(fileName());
     }
 
-
-    d->thumbnail.save(fileName());
-    kDebug() << "saved image to:" << fileName();
-    d->cache->insertImage(d->url.toString(), d->thumbnail);
-    kDebug() << "image inserted into CACHE:" << d->url.toString() << d->thumbnail.size();
+    if (d->cache->contains(d->url.toString())) {
+        d->cache->insertImage(d->url.toString(), d->thumbnail);
+        kDebug() << "image inserted into CACHE:" << d->url.toString() << d->thumbnail.size();
+    }
     d->status = "loaded";
     d->errorText = i18nc("status of thumbnail loader", "Loaded");
 

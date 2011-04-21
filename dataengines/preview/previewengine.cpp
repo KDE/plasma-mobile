@@ -22,6 +22,8 @@
 
 #include <KIO/PreviewJob>
 #include <KFileItem>
+#include <KGlobal>
+#include <KStandardDirs>
 #include <KTemporaryFile>
 #include <KRun>
 #include <QWidget>
@@ -190,6 +192,8 @@ void PreviewEngine::previewUpdated(const KFileItem &item, const QPixmap &preview
 {
     //kDebug() << "preview for" << item.url().url() << "is in." << preview.width() << preview.height();
     QString fileName;
+    QString tmpFile;
+    kDebug() << "--- temp path" << KGlobal::dirs()->findDirs("tmp", QString())[0];
 
     KTemporaryFile* tmp = new KTemporaryFile();
     tmp->setSuffix(".png");
@@ -198,6 +202,7 @@ void PreviewEngine::previewUpdated(const KFileItem &item, const QPixmap &preview
     tmp->close();
     delete tmp;
 
+    fileName = tmpFile;
     //fileName = "/tmp/thumbnail.png";
     if (preview.save(fileName)) {
         //kDebug() << "pixmap saved, or so it says";
