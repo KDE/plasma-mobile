@@ -96,11 +96,11 @@ void ResourceDelegate::setResourceType(const QString &type)
     * should it use a Package?
     */
     const QString path =
-        KStandardDirs::locate("data", "plasma/resourcedelegates/" + QUrl::toPercentEncoding(type) + "/" + fileName );
+        KStandardDirs::locate("data", "plasma/resourcedelegates/" + type.split('#').last() + "/" + fileName );
 
     //fallback to FileDataObject
     if (!QFile::exists(path)) {
-        KStandardDirs::locate("data", "plasma/resourcedelegates/http%3A%2F%2Fwww.semanticdesktop.org%2Fontologies%2F2007%2F03%2F22%2Fnfo%23FileDataObject/"+fileName );
+        KStandardDirs::locate("data", "plasma/resourcedelegates/FileDataObject/"+fileName );
     }
     setMainFile(path);
 
