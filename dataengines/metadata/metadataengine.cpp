@@ -155,6 +155,7 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
     if (_icon.isEmpty()) {
         // go through KMimeType to find an icon.
         // [...] FIXME
+        _icon = "nepomuk";
     }
     setData(source, "icon", _icon);
     setData(source, "hasSymbol", _icon);
