@@ -55,6 +55,7 @@ class PreviewEngine : public Plasma::DataEngine
         QLatin1String sizeString(const QSize &s);
         QString thumbnailerSource(KWebThumbnailer* nailer);
         void updateData(KWebThumbnailer* nailer);
+        QString fileName(const QString &path);
 
         PreviewEnginePrivate* d;
 };

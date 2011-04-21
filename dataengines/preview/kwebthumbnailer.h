@@ -33,7 +33,7 @@ class KWebThumbnailer : public QObject
 
 public:
     KWebThumbnailer( QObject *parent = 0 );
-    KWebThumbnailer( const QUrl &url, const QSize &size, QObject *parent = 0 );
+    KWebThumbnailer( const QUrl &url, const QSize &size, const QString &fileName = QString(), QObject *parent = 0);
     ~KWebThumbnailer();
 
     void setUrl( const QUrl &url );
@@ -47,6 +47,7 @@ public:
     QImage thumbnail() const;
     QString fileName();
     QString status();
+    QString source();
 
     bool isValid() const;
 

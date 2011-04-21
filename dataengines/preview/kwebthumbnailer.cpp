@@ -27,6 +27,7 @@
 #include <QtWebKit/QWebFrame>
 
 #include "kwebthumbnailer.h"
+#include <KIcon>
 #include <kimagecache.h>
 #include <KGlobal>
 #include <KStandardDirs>
@@ -45,6 +46,7 @@ public:
     QImage thumbnail;
     QSize size;
     QUrl url;
+    QString source;
     QString fileName;
     QString status;
     QString errorText;
@@ -57,15 +59,17 @@ KWebThumbnailer::KWebThumbnailer( QObject *parent )
 {
 }
 
-KWebThumbnailer::KWebThumbnailer( const QUrl &url, const QSize &size, QObject *parent )
+KWebThumbnailer::KWebThumbnailer(const QUrl &url, const QSize &size,  const QString &source, QObject *parent)
     : QObject( parent ),
       d( new KWebThumbnailerPrivate )
 {
+    d->source = source;
     d->url = url;
+    d->fileName = fileName();
     d->size = size;
     d->status = "idle";
     d->cache = new KImageCache("kwebthumbnailer", 1048576); // 10 MByte
-    kDebug() << "cache created." << d->cache->timestamp();
+    kDebug() << "cache created." << d->cache->timestamp() << " Source: " << d->source;
 
     // filename is set later.
 }
@@ -79,6 +83,11 @@ KWebThumbnailer::~KWebThumbnailer()
 QUrl KWebThumbnailer::url()
 {
     return d->url;
+}
+
+QString KWebThumbnailer::source()
+{
+    return d->source;
 }
 
 void KWebThumbnailer::setUrl( const QUrl &url )
@@ -99,12 +108,16 @@ void KWebThumbnailer::setSize( const QSize &size )
 QString KWebThumbnailer::fileName()
 {
     if (d->fileName.isEmpty()) {
-        kDebug() << "--- temp path" << KGlobal::dirs()->findDirs("tmp", QString())[0];
+        //kDebug() << "--- temp path" << KGlobal::dirs()->findDirs("tmp", QString())[0];
         QString tmpFile = KGlobal::dirs()->findDirs("tmp", QString())[0];
+        QString u = d->source;
+        if (u.endsWith('/')) {
+            u.chop(1);
+        }
         tmpFile.append("previewengine_");
-        tmpFile.append(QString::number(qHash(d->url.toString())));
+        tmpFile.append(QString::number(qHash(u)));
         tmpFile.append(".png");
-        kDebug() << "Filename:" << tmpFile;
+        //kDebug() << "Filename:" << tmpFile;
         d->fileName = tmpFile;
     }
     return d->fileName;
@@ -121,11 +134,11 @@ void KWebThumbnailer::start()
     if (d->cache->findImage(d->url.toString(), &(d->thumbnail))) {
         // cache hit
         d->status = i18nc("status of thumbnail loader", "Cached");
-        kDebug() << "cache hit for " << d->url;
+        //kDebug() << "!!! imagecache hit for " << d->url;
         saveThumbnail();
         return;
     }
-    kDebug() << "not cached, loading" << d->url;
+    kDebug() << "####### not imagecached, loading webthumbnailer..." << d->url;
     d->status = i18nc("status of thumbnail loader", "Loading...");
 
     d->page = new QWebPage( this );
@@ -138,15 +151,17 @@ void KWebThumbnailer::start()
 
 void KWebThumbnailer::completed( bool success )
 {
-    if ( !success ) {
+    if (!success) {
         delete d->page;
         d->page = 0;
         d->thumbnail = QImage(d->size, QImage::Format_ARGB32_Premultiplied);
         d->thumbnail.fill( Qt::transparent );
         // FIXME: fallback pixmap
+        d->thumbnail = KIcon("internet-web-browser").pixmap(d->size).toImage();
         d->status = "failed";
         d->errorText = i18n("Unknown error");
-        emit done(false);
+        kDebug() << "creating thumbnail failed";
+        emit done(true);
 
         return;
     }
@@ -176,9 +191,9 @@ void KWebThumbnailer::completed( bool success )
 
 void KWebThumbnailer::saveThumbnail()
 {
-    kDebug() << "saving";
+    kDebug() << "saving" << d->url.toString() << fileName() << "?";
     if (QFile::exists(fileName())) {
-        kDebug() << ":-) File already exists:" << fileName();
+        kDebug() << ":-) File already exists:" <<  fileName();
         d->thumbnail = QImage(fileName());
     } else {
         kDebug() << "saving to" << fileName();

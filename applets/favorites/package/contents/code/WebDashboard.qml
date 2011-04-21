@@ -6,7 +6,7 @@ Item {
 
     Column {
         anchors.fill: parent
-        
+
         WebItemList {
             id: bookmarks
             width: parent.width

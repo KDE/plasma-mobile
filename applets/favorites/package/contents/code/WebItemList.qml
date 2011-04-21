@@ -35,7 +35,7 @@ Item {
         id: previewSource
         engine: "preview"
 
-        connectedSources: [ "file:///home/sebas/Documents/Curacao/wallpaper.jpg",
+        connectedSources: [
             "http://www.wikipedia.org",
             "http://www.google.com",
             "http://www.kde.org",
@@ -46,10 +46,12 @@ Item {
             "http://planetkde.org",
             "http://lwn.net"
         ]
+
+        //connectedSources: [ "http://www.google.com/linux", "http://plasma.kde.org/" ]
         interval: 0
         //connectedSources: sources
         onSourceAdded: {
-            console.log("source added:" + source);
+            //console.log("source added:" + source);
             connectSource(source);
         }
 
@@ -124,7 +126,7 @@ Item {
                         s = s.replace("http://", "");
                         s = s.replace("https://", "");
                         s = s.replace("www.", "");
-                        console.log(s + s.length);
+                        //console.log(s + s.length);
                         return s;
                     }
                     font.pixelSize: 14
