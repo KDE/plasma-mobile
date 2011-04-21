@@ -22,7 +22,7 @@
 #define PREVIEWENGINE_H
 
 #include <plasma/dataengine.h>
-
+#include <QImage>
 #include "kio/jobclasses.h" // for KIO::JobFlags
 #include "kio/job.h"
 #include "kio/scheduler.h"
@@ -51,8 +51,8 @@ class PreviewEngine : public Plasma::DataEngine
         void previewResult(KJob* job);
 
     protected:
+        void savePreview(const QString &source, QImage preview);
         bool sourceRequestEvent(const QString &name);
-        QLatin1String sizeString(const QSize &s);
         QString thumbnailerSource(KWebThumbnailer* nailer);
         void updateData(KWebThumbnailer* nailer);
         QString fileName(const QString &path);

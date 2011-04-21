@@ -21,6 +21,7 @@
 //#include <KIcon>
 
 #include <KIO/PreviewJob>
+#include <KImageCache>
 #include <KFileItem>
 #include <KGlobal>
 #include <KStandardDirs>
@@ -42,6 +43,7 @@ public:
     QHash<QString, KIO::PreviewJob*> workers;
     QHash<KIO::Job*, QString> fileNames;
     QHash<KIO::Job*, QString> sources;
+    KImageCache* cache;
 };
 
 
@@ -58,7 +60,7 @@ PreviewEngine::PreviewEngine(QObject* parent, const QVariantList& args)
 
 void PreviewEngine::init()
 {
-    kDebug() << "init.";
+    d->cache = new KImageCache("kwebthumbnailer", 1048576); // 10 MByte
 }
 
 PreviewEngine::~PreviewEngine()
@@ -69,12 +71,10 @@ PreviewEngine::~PreviewEngine()
 QStringList PreviewEngine::sources() const
 {
     return QStringList();
-    //return QStringList() << "https://wiki.ubuntu.com/X/Config/Input" << "file:///home/sebas/Documents/Curacao/wallpaper.jpg";
 }
 
 QString PreviewEngine::fileName(const QString& path)
 {
-    //kDebug() << "--- temp path" << KGlobal::dirs()->findDirs("tmp", QString())[0];
     QString tmpFile = KGlobal::dirs()->findDirs("tmp", QString())[0];
     QString u = path;
     if (u.endsWith('/')) {
@@ -84,7 +84,6 @@ QString PreviewEngine::fileName(const QString& path)
     tmpFile.append("previewengine_");
     tmpFile.append(QString::number(qHash(u)));
     tmpFile.append(".png");
-    //kDebug() << "tmp Filename:" << tmpFile;
     return tmpFile;
 }
 
@@ -93,8 +92,7 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
     // Check if the url is valid, and start a MimetypeJob
     // to find out what kind of preview we need
     if (sources().contains(name)) {
-
-        kDebug() << "source already there";
+        return true;
     }
     QUrl url = QUrl(name);
     if (!url.isValid()) {
@@ -103,7 +101,7 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
     }
     QString u = url.toString();
     if (QFile::exists(fileName(u))) {
-        //kDebug() << "this one would is cached on disk. " << u << fileName(u) << "====";
+        // Cache hit on disk
         setData(name, "status", "loaded");
         setData(name, "url", name);
         setData(name, "fileName", fileName(u));
@@ -111,10 +109,17 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
         //setData(name, "thumbnail", wtn->thumbnail());
         return true;
     }
-    kDebug() << "not cached as file" << name << fileName(name) << "----";
+
     if (d->webworkers.keys().contains(name) || d->workers.keys().contains(name)) {
         return true; // already got preview or at least tried to get it
     }
+    QImage preview = QImage(d->previewSize, QImage::Format_ARGB32_Premultiplied);
+    if (d->cache->findImage(name, &preview)) {
+        // cache hit
+        savePreview(name, preview);
+        return true;
+    }
+
     // It may be a directory or a file, let's stat
     KIO::JobFlags flags = KIO::HideProgressInfo;
     KIO::MimetypeJob *job = KIO::mimetype(url, flags);
@@ -128,23 +133,11 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
 void PreviewEngine::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
 {
     KIO::TransferJob* mimejob = dynamic_cast<KIO::TransferJob*>(job);
-
-    //KIO::MimetypeJob* mimejob = qobject_cast<KIO::MimetypeJob*>(job);
     if (!mimejob) {
         return;
     }
     QString source = mimejob->url().url();
     source = d->sources[job];
-    /*
-    if (d->fileNames.keys().contains(job)) {
-        source = d->fileNames[job];
-    } else {
-        kDebug() << "whoops." << source;
-    }
-    */
-    kDebug() << source << "job" << job;
-
-    //kDebug() << "mimetype retrieved:" << mimejob->url().url() << mimetype;
     if (!mimetype.isEmpty() && !mimejob->error()) {
         // Make job reusable by keeping the connection open:
         // We want to retrieve the target next to create a preview
@@ -154,16 +147,13 @@ void PreviewEngine::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
 
     if (mimetype == "text/html") {
         if (!(d->webworkers.keys().contains(source))) {
-            kDebug() << "Starting webthumbnailer" << source;
             KWebThumbnailer* wtn = new KWebThumbnailer(QUrl(source), d->previewSize, source, this);
             connect(wtn, SIGNAL(done(bool)), SLOT(thumbnailerDone(bool)));
             wtn->start();
             d->webworkers[source] = wtn;
-            //updateData(wtn);
         }
     } else {
         if (!(d->workers.keys().contains(source))) {
-            kDebug() << "Starting previewjob" << source;
             // KIO::PreviewJob: http://api.kde.org/4.x-api/kdelibs-apidocs/kio/html/classKIO_1_1PreviewJob.html
             KFileItem kfile = KFileItem(mimejob->url(), mimetype, KFileItem::Unknown);
             KFileItemList list;
@@ -178,17 +168,9 @@ void PreviewEngine::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
     }
 }
 
-QLatin1String PreviewEngine::sizeString(const QSize &s)
-{
-    Q_UNUSED(s)
-    return QLatin1String("thumbnail");
-    //return QString("%1x%2").arg(s.width(), s.height()).toLatin1();
-}
-
 QString PreviewEngine::thumbnailerSource(KWebThumbnailer* nailer)
 {
     return nailer->source();
-    //return nailer->url().toString();
 }
 
 void PreviewEngine::thumbnailerDone(bool success)
@@ -202,10 +184,6 @@ void PreviewEngine::thumbnailerDone(bool success)
         setData(wtn->source(), "status", "failed");
         return;
     }
-    //QLatin1String key = sizeString(wtn->size());
-    //QImage image = wtn->thumbnail();
-
-    //kDebug() << "Thumbnail set:" << wtn->url() << key << image.height() << image.width();
     updateData(wtn);
 }
 
@@ -216,7 +194,6 @@ void PreviewEngine::updateData(KWebThumbnailer* wtn)
     setData(thumbnailerSource(wtn), "fileName", wtn->fileName());
     //setData(thumbnailerSource(wtn), "thumbnail", wtn->thumbnail());
     if (!wtn->fileName().isEmpty()) {
-        kDebug() << "sources updated." << wtn->fileName();
         scheduleSourcesUpdated();
     }
 }
@@ -224,58 +201,40 @@ void PreviewEngine::updateData(KWebThumbnailer* wtn)
 void PreviewEngine::previewJobFailed(const KFileItem &item)
 {
     setData(item.url().url(), "status", "failed");
-    kDebug() << "preview failed for" << item.url().url();
+    kWarning() << "preview failed for" << item.url().url();
 }
 
 void PreviewEngine::previewResult(KJob* job)
 {
-    //setData(item.url().url(), "errorText", job->errorText());
-    kDebug() << "job result:" << job->errorText() << "success?" << (job->error() == 0);
+    Q_UNUSED( job );
+    //kDebug() << "job result:" << job->errorText() << "success?" << (job->error() == 0);
 }
 
 void PreviewEngine::previewUpdated(const KFileItem &item, const QPixmap &preview)
 {
-    //kDebug() << "preview for" << item.url().url() << "is in." << preview.width() << preview.height();
-    /*
-    QString fileName;
-    QString tmpFile;
-    kDebug() << "--- temp path" << KGlobal::dirs()->findDirs("tmp", QString())[0];
-    if (d->fileName.isEmpty()) {
-        kDebug() << "--- temp path" << KGlobal::dirs()->findDirs("tmp", QString())[0];
-        QString tmpFile = KGlobal::dirs()->findDirs("tmp", QString())[0];
-        tmpFile.append("previewengine_");
-        tmpFile.append(QString::number(qHash(d->url.toString())));
-        tmpFile.append(".png");
-        kDebug() << "Filename:" << tmpFile;
-        d->fileName = tmpFile;
-    }
-
-    KTemporaryFile* tmp = new KTemporaryFile();
-    tmp->setSuffix(".png");
-    //if (tmp->open()) kDebug() << "file opened";
-    fileName = tmp->fileName();
-    tmp->close();
-    delete tmp;
-    */
-    //fileName = tmpFile;
-    kDebug() << "uurl:" << item.url().url();
     QString tmpFile = fileName(item.url().url());
-    //fileName = "/tmp/thumbnail.png";
     if (preview.save(tmpFile)) {
-        //kDebug() << "pixmap saved, or so it says";
         setData(item.url().url(), "status", "done");
         setData(item.url().url(), "fileName", tmpFile);
         setData(item.url().url(), "url", item.url().url());
-        setData(item.url().url(), "thumbnail", preview.toImage());
-        //if (!fileName().isEmpty()) scheduleSourcesUpdated();
+        //setData(item.url().url(), "thumbnail", preview);
     } else {
-        //kDebug() << "saving failed";
         setData(item.url().url(), "status", "failed");
     }
-    //kDebug() << "==== File exists?" << QFile(fileName).exists();
-    kDebug() << "XXX XXX XXX Pixmap saved as " << tmpFile << item.url().url();
-    //KRun::runUrl(KUrl(fileName), "image/png", new QWidget());
-    // setData...
+    scheduleSourcesUpdated();
+}
+
+void PreviewEngine::savePreview(const QString &source, QImage preview)
+{
+    QString tmpFile = fileName(source);
+    if (preview.save(tmpFile)) {
+        setData(source, "status", "done");
+        setData(source, "fileName", tmpFile);
+        setData(source, "url", source);
+        //setData(source, "thumbnail", preview.toImage());
+    } else {
+        setData(source, "status", "failed");
+    }
     scheduleSourcesUpdated();
 }
 

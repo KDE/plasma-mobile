@@ -18,8 +18,6 @@
     02110-1301, USA.
 */
 
-
-
 #include <QtCore/QUrl>
 #include <QtCore/QSize>
 #include <QtGui/QPainter>
@@ -69,9 +67,6 @@ KWebThumbnailer::KWebThumbnailer(const QUrl &url, const QSize &size,  const QStr
     d->size = size;
     d->status = "idle";
     d->cache = new KImageCache("kwebthumbnailer", 1048576); // 10 MByte
-    kDebug() << "cache created." << d->cache->timestamp() << " Source: " << d->source;
-
-    // filename is set later.
 }
 
 KWebThumbnailer::~KWebThumbnailer()
@@ -108,7 +103,6 @@ void KWebThumbnailer::setSize( const QSize &size )
 QString KWebThumbnailer::fileName()
 {
     if (d->fileName.isEmpty()) {
-        //kDebug() << "--- temp path" << KGlobal::dirs()->findDirs("tmp", QString())[0];
         QString tmpFile = KGlobal::dirs()->findDirs("tmp", QString())[0];
         QString u = d->source;
         if (u.endsWith('/')) {
@@ -117,7 +111,6 @@ QString KWebThumbnailer::fileName()
         tmpFile.append("previewengine_");
         tmpFile.append(QString::number(qHash(u)));
         tmpFile.append(".png");
-        //kDebug() << "Filename:" << tmpFile;
         d->fileName = tmpFile;
     }
     return d->fileName;
@@ -134,11 +127,9 @@ void KWebThumbnailer::start()
     if (d->cache->findImage(d->url.toString(), &(d->thumbnail))) {
         // cache hit
         d->status = i18nc("status of thumbnail loader", "Cached");
-        //kDebug() << "!!! imagecache hit for " << d->url;
         saveThumbnail();
         return;
     }
-    kDebug() << "####### not imagecached, loading webthumbnailer..." << d->url;
     d->status = i18nc("status of thumbnail loader", "Loading...");
 
     d->page = new QWebPage( this );
@@ -160,7 +151,6 @@ void KWebThumbnailer::completed( bool success )
         d->thumbnail = KIcon("internet-web-browser").pixmap(d->size).toImage();
         d->status = "failed";
         d->errorText = i18n("Unknown error");
-        kDebug() << "creating thumbnail failed";
         emit done(true);
 
         return;
@@ -193,16 +183,14 @@ void KWebThumbnailer::saveThumbnail()
 {
     kDebug() << "saving" << d->url.toString() << fileName() << "?";
     if (QFile::exists(fileName())) {
-        kDebug() << ":-) File already exists:" <<  fileName();
         d->thumbnail = QImage(fileName());
     } else {
-        kDebug() << "saving to" << fileName();
         d->thumbnail.save(fileName());
     }
-
-    if (d->cache->contains(d->url.toString())) {
-        d->cache->insertImage(d->url.toString(), d->thumbnail);
-        kDebug() << "image inserted into CACHE:" << d->url.toString() << d->thumbnail.size();
+    kDebug() << "caching in KIC!?";
+    if (!d->cache->contains(d->source)) {
+        d->cache->insertImage(d->source, d->thumbnail);
+        kDebug() << "inserted into KIC" << d->source;
     }
     d->status = "loaded";
     d->errorText = i18nc("status of thumbnail loader", "Loaded");
