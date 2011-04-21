@@ -25,21 +25,9 @@ import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
     id: bookmarks
-    width: 540
-    height: 540
+    width: parent.width
+    height: 180
 
-    /*
-    Component.onCompleted: {
-        //plasmoid.addEventListener("dataUpdated", dataUpdated)
-        //dataEngine("favorites").connectSource("http://www.engadget.com", page, 500)
-    }
-
-    function dataUpdated(source, data)
-    {
-        console.log("data updated:" + source);
-        //console.log(i18n("Time (fetched without datasource) Is %1 in %2", data.Time.toString(), source))
-    }
-    */
     property alias title: header
     property alias urls: previewSource.connectedSources
 
@@ -96,13 +84,13 @@ Item {
     ListView {
         id: webItemList
         //anchors.fill: parent
-        height: 128+16
+        height: 128 + (spacing * 2)
         snapMode: ListView.SnapToItem
         clip: true
-        highlightMoveDuration: 300
+        highlightMoveDuration: 100
         spacing: 8;
         orientation: Qt.Horizontal
-        anchors { top: header.bottom; left:parent.left; right: parent.right }
+        anchors { top: header.bottom; left:parent.left; right: parent.right; bottom: parent.bottom }
 
         model: PlasmaCore.DataModel {
             dataSource: previewSource
@@ -122,11 +110,7 @@ Item {
 
                 Image {
                     id: previewImage
-                    //anchors.fill: item
-                    //source: model.data[DataEngineSource]["fileName"]
-                    //source: fileName
                     source: fileName
-                    //source: "/tmp/sebas-kde4/kde-sebas/plasmoidviewerb11537.png"
                     height:96
                     width: 128
                     anchors.margins: 8
@@ -137,16 +121,15 @@ Item {
                     id: previewLabel
                     text: {
                         var s = url;
-                        //var s = "http://plasma.kde.org";
                         s = s.replace("http://", "");
                         s = s.replace("https://", "");
                         s = s.replace("www.", "");
                         console.log(s + s.length);
                         return s;
                     }
-                    //text: url
                     font.pixelSize: 14
                     font.bold: true
+                    height: 14 * 2.4
 
                     width:250
                     anchors.top: itemFrame.top
@@ -158,11 +141,9 @@ Item {
                 }
 
                 PlasmaWidgets.Label {
-                    //image: previewSource.data[DataEngineSource]["fileName"]
-                    text: "To specify that an image..."
-                    opacity: 0.6
-                    //font.pixelSize: font.pixelSize * 1.8
-                    font.pixelSize: 11
+                    text: { url + " / " + status; }
+                    opacity: 0.8
+                    font.pixelSize: 14 * 0.8
                     height: 14
                     width: 200
                     id: infoLabel
@@ -174,64 +155,7 @@ Item {
                     anchors.margins: 8
 
                 }
-                /*
-                Component.onCompleted: {
-                    //return;
-                    //console.log(" =========== Item ========= " + DataEngineSource )
-                    print("Print works.");
-                    for (var i in data) {
-                        print(i + " -> " + data[i])
-                    }
-                    var s;
-                    for (s in previewSource.data) {
-                        console.log("_____ " + s);
-                        //console.log("-->:" + s + "length: " + previewSource.data[s]["http://www.kde.org"]["fileName"]);
-                        for (k in previewSource.data[s]) {
-                            var v = previewSource.data[s][k];
-                            console.log("       v:" + k + " :: " + v);
-                            //if (k.indexOf("") != -1) {
-                            //    console.log(s+ "       =====> v:" + k + previewSource.data[s][k]);
-                            //}
-                        }
-                    }
-                }
-                */
-            }
-
-            Component.onCompleted: {
-                //return;
-                //console.log(" =========== Item ========= " + DataEngineSource )
-                //print("bookmarkItem-----" + bookmarkItem.DataEngineSource);
-                return;
-                for (var i in previewSource) {
-                    print(" pewviewSource elements:" + i)
-                }
-                print("this ===========");
-                for (var i in this) {
-                    print(" elements:" + i)
-                }
-                for (var i in data) {
-                    print(i + " -> " + data[i])
-                }
-                var s;
-                for (s in previewSource.data) {
-                    console.log("_____ " + s);
-                    //console.log("-->:" + s + "length: " + previewSource.data[s]["http://www.kde.org"]["fileName"]);
-                    for (k in previewSource.data[s]) {
-                        var v = previewSource.data[s][k];
-                        console.log("       v:" + k + " :: " + v);
-                        //if (k.indexOf("") != -1) {
-                        //    console.log(s+ "       =====> v:" + k + previewSource.data[s][k]);
-                        //}
-                    }
-                }
             }
         }
-    }
-
-    Text {
-        text: "end."
-        anchors { left:parent.left; top: webItemList; right: parent.right; bottom: parent.bottom; }
-
     }
 }
