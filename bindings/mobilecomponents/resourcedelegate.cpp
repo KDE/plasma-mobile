@@ -19,11 +19,14 @@
 
 #include "resourcedelegate.h"
 
+
+#include <QFile>
 #include <QtDeclarative/QDeclarativeComponent>
 #include <QtDeclarative/QDeclarativeContext>
 #include <QtDeclarative/QDeclarativeEngine>
 
-#include <kdebug.h>
+#include <KStandardDirs>
+#include <KDebug>
 
 
 ResourceDelegate::ResourceDelegate(QDeclarativeItem *parent)
@@ -32,6 +35,7 @@ ResourceDelegate::ResourceDelegate(QDeclarativeItem *parent)
       m_context(0),
       m_mainObject(0)
 {
+    setFlag(QGraphicsItem::ItemHasNoContents, false);
 }
 
 void ResourceDelegate::setMainFile(const QString &file)
@@ -41,9 +45,17 @@ void ResourceDelegate::setMainFile(const QString &file)
     m_mainComponent = new QDeclarativeComponent(m_context->engine(), QUrl::fromLocalFile(file));
 
     m_mainObject = m_mainComponent->beginCreate(m_context);
-    m_mainObject->setParent(this);
 
-    m_context->setContextProperty("plasmoid", this);
+    if (!m_mainObject) {
+        return;
+    }
+
+    QGraphicsObject *qgo = qobject_cast<QDeclarativeItem *>(m_mainObject);
+    if (qgo) {
+        qgo->setParentItem(this);
+    } else {
+        m_mainObject->setParent(this);
+    }
 
     m_mainComponent->completeCreate();
 }
@@ -65,8 +77,19 @@ void ResourceDelegate::setResourceType(const QString &type)
         return;
     }
 
-    //TODO: 1) get the file name from a package
-    //2) setMainFile()
+   /* TODO:
+    * should it use a Package?
+    * should it provide different delegates for
+    *   different list types? (ListView, GridView, PathView)
+    */
+    const QString path =
+        KStandardDirs::locate("data", "plasma/resourcedelegates/" + QUrl::toPercentEncoding(type) + "/main.qml" );
+
+    //fallback to FileDataObject
+    if (!QFile::exists(path)) {
+        KStandardDirs::locate("data", "plasma/resourcedelegates/http%3A%2F%2Fwww.semanticdesktop.org%2Fontologies%2F2007%2F03%2F22%2Fnfo%23FileDataObject/main.qml" );
+    }
+    setMainFile(path);
 
     emit resourceTypeChanged();
 }
