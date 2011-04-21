@@ -157,6 +157,7 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
         // [...] FIXME
     }
     setData(source, "icon", _icon);
+    setData(source, "hasSymbol", _icon);
     setData(source, "isFile", resource.isFile());
     setData(source, "exists", resource.exists());
     setData(source, "rating", resource.rating());
