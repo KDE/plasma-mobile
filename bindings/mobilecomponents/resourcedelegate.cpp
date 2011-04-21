@@ -76,19 +76,34 @@ void ResourceDelegate::setResourceType(const QString &type)
         return;
     }
 
+    //Attempt to understand if we are in an itemview and what kind of
+    //default to ListView
+    QString fileName = "ListViewItem.qml";
+    QDeclarativeItem *par = property("parent").value<QDeclarativeItem *>();
+    if (par) {
+        par = par->property("parent").value<QDeclarativeItem *>();
+    }
+    if (par) {
+        const QString className = par->metaObject()->className();
+        if (className == "GridView") {
+            fileName = "GridView.qml";
+        } else if (className == "PathView") {
+            fileName = "PathView.qml";
+        }
+    }
+
    /* TODO:
     * should it use a Package?
-    * should it provide different delegates for
-    *   different list types? (ListView, GridView, PathView)
     */
     const QString path =
-        KStandardDirs::locate("data", "plasma/resourcedelegates/" + QUrl::toPercentEncoding(type) + "/main.qml" );
+        KStandardDirs::locate("data", "plasma/resourcedelegates/" + QUrl::toPercentEncoding(type) + "/" + fileName );
 
     //fallback to FileDataObject
     if (!QFile::exists(path)) {
-        KStandardDirs::locate("data", "plasma/resourcedelegates/http%3A%2F%2Fwww.semanticdesktop.org%2Fontologies%2F2007%2F03%2F22%2Fnfo%23FileDataObject/main.qml" );
+        KStandardDirs::locate("data", "plasma/resourcedelegates/http%3A%2F%2Fwww.semanticdesktop.org%2Fontologies%2F2007%2F03%2F22%2Fnfo%23FileDataObject/"+fileName );
     }
     setMainFile(path);
+
 
     emit resourceTypeChanged();
 }
