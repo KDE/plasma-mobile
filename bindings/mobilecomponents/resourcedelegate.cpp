@@ -95,12 +95,12 @@ void ResourceDelegate::setResourceType(const QString &type)
    /* TODO:
     * should it use a Package?
     */
-    const QString path =
+    QString path =
         KStandardDirs::locate("data", "plasma/resourcedelegates/" + type.split('#').last() + "/" + fileName );
 
     //fallback to FileDataObject
     if (!QFile::exists(path)) {
-        KStandardDirs::locate("data", "plasma/resourcedelegates/FileDataObject/"+fileName );
+        path = KStandardDirs::locate("data", "plasma/resourcedelegates/FileDataObject/"+fileName );
     }
     setMainFile(path);
 
