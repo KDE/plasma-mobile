@@ -85,9 +85,9 @@ void ResourceDelegate::setResourceType(const QString &type)
     }
     if (par) {
         const QString className = par->metaObject()->className();
-        if (className == "GridView") {
+        if (className == "QDeclarativeGridView") {
             fileName = "GridView.qml";
-        } else if (className == "PathView") {
+        } else if (className == "QDeclarativePathView") {
             fileName = "PathView.qml";
         }
     }
