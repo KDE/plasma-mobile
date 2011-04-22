@@ -29,7 +29,7 @@ class CategorizedProxyModel : public QProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(QObject *sourceModel READ sourceModel WRITE setSourceModel)
-    
+    Q_PROPERTY(QString categoryRole READ categoryRole WRITE setCategoryRole)
 
 public:
     CategorizedProxyModel(QObject *parent = 0);

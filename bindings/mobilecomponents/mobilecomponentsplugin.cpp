@@ -24,10 +24,9 @@
 #include <QtDeclarative/qdeclarative.h>
 
 #include "appletstatuswatcher.h"
+#include "categorizedproxymodel.h"
 #include "pagedproxymodel.h"
 #include "resourcedelegate.h"
-
-//QML_DECLARE_TYPE(PagedProxyModel)
 
 void MobileComponentsPlugin::registerTypes(const char *uri)
 {
@@ -36,6 +35,7 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<PagedProxyModel>(uri, 0, 1, "PagedProxyModel");
     qmlRegisterType<AppletStatusWatcher>(uri, 0, 1, "AppletStatusWatcher");
     qmlRegisterType<ResourceDelegate>(uri, 0, 1, "ResourceDelegate");
+    qmlRegisterType<CategorizedProxyModel>(uri, 0, 1, "CategorizedProxyModel");
 }
 
 
