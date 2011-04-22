@@ -42,7 +42,8 @@ void ResourceDelegate::setMainFile(const QString &file)
     m_context = QDeclarativeEngine::contextForObject(this);
 
     m_mainComponent = new QDeclarativeComponent(m_context->engine(), QUrl::fromLocalFile(file));
-
+    connect(m_mainComponent, SIGNAL(statusChanged(QDeclarativeComponent::Status)),
+                             SLOT(statusChanged(QDeclarativeComponent::Status)));
     m_mainObject = m_mainComponent->beginCreate(m_context);
 
     if (!m_mainObject) {
@@ -64,6 +65,20 @@ QObject *ResourceDelegate::mainObject() const
     return m_mainObject;
 }
 
+void ResourceDelegate::statusChanged(QDeclarativeComponent::Status status)
+{
+    if (status == QDeclarativeComponent::Error) {
+        kDebug() << "ERROR!!!!!";
+        foreach(QDeclarativeError e, m_mainComponent->errors()) {
+            kWarning() << "EE:" << e.url().toString() <<
+                            " line: " << e.line() <<
+                            " col: " << e.column() <<
+                            " Error: " << e.toString();
+            
+        }
+        // FIXME: pass it on to the item, so the error can somehow be handled
+    }
+}
 
 QString ResourceDelegate::resourceType() const
 {

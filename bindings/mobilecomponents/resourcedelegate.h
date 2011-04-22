@@ -21,6 +21,7 @@
 #define RESOURCEDELEGATE_H
 
 #include <QDeclarativeItem>
+#include <QtDeclarative/QDeclarativeComponent>
 
 #include <QVariantHash>
 
@@ -49,6 +50,9 @@ protected:
 Q_SIGNALS:
     void resourceTypeChanged();
     void dataChanged();
+
+private Q_SLOTS:
+    void statusChanged(QDeclarativeComponent::Status);
 
 private:
     QDeclarativeComponent *m_mainComponent;
