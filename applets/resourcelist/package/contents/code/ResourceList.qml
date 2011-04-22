@@ -52,7 +52,8 @@ Item {
             }
         }
         Component.onCompleted: {
-            connectedSources = sources;
+            //connectedSources = sources;
+            connectedSources = [ "wall" ]
         }
 
     }
