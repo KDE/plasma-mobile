@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=Active Metadata
+Name[pt]=Meta-Dados Activos
+Name[uk]=Активні метадані
+Name[x-test]=xxActive Metadataxx
 Comment=Provides metadata for semantic resources
 Comment[et]=Semantiliste ressursside metaandmed
 Comment[nl]=Levert metagegevens voor semantische hulpbronnen
