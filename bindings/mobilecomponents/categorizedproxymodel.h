@@ -44,6 +44,10 @@ public:
     void setCategoryRole(const QString &role);
     QString categoryRole() const;
 
+    QModelIndex index(int row, int column, const QModelIndex& parent) const;
+    QModelIndex mapFromSource(const QModelIndex & sourceIndex) const;
+    QModelIndex mapToSource(const QModelIndex & sourceIndex) const;
+
 Q_SIGNALS:
     void modelReset();
 

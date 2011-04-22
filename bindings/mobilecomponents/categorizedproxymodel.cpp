@@ -124,12 +124,20 @@ QVariant CategorizedProxyModel::data(const QModelIndex &index, int role) const
     return QProxyModel::data(QProxyModel::index(index.row()+offset, index.column()), role);
 }
 
+QModelIndex CategorizedProxyModel::index(int row, int column, const QModelIndex& parent) const
+{
+    return mapFromSource(model()->index(row, column, mapToSource(parent)));
+}
+
+
+
 void CategorizedProxyModel::fillCategories()
 {
     QAbstractItemModel *model = CategorizedProxyModel::model();
     if (!model) {
         return;
     }
+    setRoleNames(model->roleNames());
 
     QHash<int, QByteArray> names = model->roleNames();
     QHash<int, QByteArray>::const_iterator i;
@@ -160,7 +168,7 @@ void CategorizedProxyModel::slotInsertRows(const QModelIndex& sourceIndex, int b
     if (!model) {
         return;
     }
-
+    setRoleNames(model->roleNames());
     model->sort(m_categoryRoleInt);
 
     for (int i = begin; i <= end; i++) {
@@ -193,6 +201,49 @@ void CategorizedProxyModel::slotRemoveRows(const QModelIndex& sourceIndex, int b
             }
         }
     }
+}
+
+
+QModelIndex CategorizedProxyModel::mapFromSource(const QModelIndex & sourceIndex) const
+{
+    if (!sourceIndex.isValid()) {
+        return QModelIndex();
+    }
+    Q_ASSERT(sourceIndex.model() == sourceModel());
+
+    QString category = model()->data(sourceIndex, m_categoryRoleInt).toString();
+    int offset = 0;
+    foreach (QString cat, m_categories) {
+        if (cat == category) {
+            break;
+        }
+        offset += m_categoryHash.value(cat);
+    }
+
+    // Create an index that preserves the internal pointer from the source;
+    // this way KDDataConverterProxyModel preserves the structure of the source model
+    return createIndex(sourceIndex.row()-offset, sourceIndex.column(), sourceIndex.internalPointer());
+}
+
+QModelIndex CategorizedProxyModel::mapToSource(const QModelIndex & sourceIndex) const
+{
+    if (!sourceIndex.isValid()) {
+        return QModelIndex();
+    }
+    Q_ASSERT(sourceIndex.model() == sourceModel());
+
+    QString category = m_categories[sourceIndex.parent().row()];
+    int offset = 0;
+    foreach (QString cat, m_categories) {
+        if (cat == category) {
+            break;
+        }
+        offset += m_categoryHash.value(cat);
+    }
+
+    // Create an index that preserves the internal pointer from the source;
+    // this way KDDataConverterProxyModel preserves the structure of the source model
+    return createIndex(sourceIndex.row()+offset, sourceIndex.column(), sourceIndex.internalPointer());
 }
 
 #include "categorizedproxymodel.moc"
