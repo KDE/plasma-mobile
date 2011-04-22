@@ -20,16 +20,53 @@ Item {
         }
         //height: 128
         height: resourceItem.height
-        //frameShadow: "Raised"
 
         PlasmaWidgets.IconWidget {
             id: previewImage
             height:64
             width: 64
             anchors.margins: 8
+
+            function resourceIcon(resourceTypes) {
+                var icons = new Object();
+                icons["Resource"] = "nepomuk";
+                icons["FileDataObject"] = "unknown";
+
+                // Audio
+                icons["Audio"] = "audio-x-generic";
+                icons["MusicPiece"] = "audio-x-generic";
+
+                // Images
+                icons["Image"] = "image-x-generic";
+                icons["RasterImage"] = "image-x-generic";
+
+                icons["Email"] = "internet-mail";
+
+                // ... add some more
+
+                // keep searching until the most specific icon is found
+                var _icon = "nepomuk";
+                var typeList = resourceTypes.split(",");
+
+                for(var i = 0; i < typeList.length; i++) {
+                    var shortType = typeList[i].split("#")[1];
+                    for (key in icons) {
+                        if (key == shortType) {
+                            _icon = icons[shortType];
+                        }
+                    }
+                }
+                return _icon;
+            }
+
             Component.onCompleted: {
-                print("Setting icon " + hasSymbol);
-                setIcon(hasSymbol);
+                try {
+                    setIcon(hasSymbol);
+                } catch(e) {
+                    var _i = resourceIcon(types.toString())
+                    //print("fallback icon: " + _i);
+                    setIcon(_i);
+                }
             }
         }
 
