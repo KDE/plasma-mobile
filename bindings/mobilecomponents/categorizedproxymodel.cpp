@@ -51,6 +51,26 @@ QString CategorizedProxyModel::categoryRole() const
     return m_categoryRoleString;
 }
 
+void CategorizedProxyModel::setCurrentCategory(const QString &category)
+{
+    if (m_currentCategory == category) {
+        return;
+    }
+
+    m_currentCategory = category;
+    emit modelReset();
+}
+
+QString CategorizedProxyModel::currentCategory() const
+{
+    return m_currentCategory;
+}
+
+QStringList CategorizedProxyModel::categories() const
+{
+    return m_categories;
+}
+
 void CategorizedProxyModel::setSourceModel(QObject *source)
 {
     QAbstractItemModel *model = qobject_cast<QAbstractItemModel *>(source);
@@ -80,17 +100,11 @@ QObject *CategorizedProxyModel::sourceModel() const
 int CategorizedProxyModel::rowCount(const QModelIndex &parent) const
 {
     //if it's a root it's a category
-    if (parent.parent() == QModelIndex()) {
-        return m_categories.count();
-    }
-
-    if (parent.row() > m_categories.count()) {
+    if (parent.parent() != QModelIndex()) {
         return 0;
     }
 
-    QString category = m_categories[parent.row()];
-
-    return m_categoryHash.value(category);
+    return m_categoryHash.value(m_currentCategory);
 }
 
 QVariant CategorizedProxyModel::data(const QModelIndex &index, int role) const
@@ -99,34 +113,15 @@ QVariant CategorizedProxyModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    //if it's a root it's a category
-    if (index.parent() == QModelIndex()) {
-        if (index.row() > m_categories.count()) {
-            return QVariant();
-        }
-        return m_categories[index.row()];
-    }
-
-    if (index.row() > m_categories.count()) {
-        return QVariant();
-    }
-
-    QString category = m_categories[index.parent().row()];
-
     int offset = 0;
     foreach (QString cat, m_categories) {
-        if (cat == category) {
+        if (cat == m_currentCategory) {
             break;
         }
         offset += m_categoryHash.value(cat);
     }
 
-    return QProxyModel::data(QProxyModel::index(index.row()+offset, index.column()), role);
-}
-
-QModelIndex CategorizedProxyModel::index(int row, int column, const QModelIndex& parent) const
-{
-    return mapFromSource(model()->index(row, column, mapToSource(parent)));
+    return QProxyModel::data(QProxyModel::index(index.row()-offset, index.column()), role);
 }
 
 
@@ -152,6 +147,11 @@ void CategorizedProxyModel::fillCategories()
 
     for (int i = 0; i <= model->rowCount(); i++) {
         QString category = model->data(model->index(i, 0), m_categoryRoleInt).toString();
+
+        if (category.isEmpty()) {
+            continue;
+        }
+
         if (m_categoryHash.contains(category)) {
             ++m_categoryHash[category];
         } else {
@@ -159,6 +159,9 @@ void CategorizedProxyModel::fillCategories()
             m_categories.append(category);
         }
     }
+
+    emit modelReset();
+    emit categoriesChanged();
 }
 
 
@@ -173,6 +176,11 @@ void CategorizedProxyModel::slotInsertRows(const QModelIndex& sourceIndex, int b
 
     for (int i = begin; i <= end; i++) {
         QString category = model->data(model->index(i, 0), m_categoryRoleInt).toString();
+
+        if (category.isEmpty()) {
+            continue;
+        }
+
         if (m_categoryHash.contains(category)) {
             ++m_categoryHash[category];
         } else {
@@ -180,6 +188,8 @@ void CategorizedProxyModel::slotInsertRows(const QModelIndex& sourceIndex, int b
             m_categories.append(category);
         }
     }
+    //TODO: conditional
+    emit categoriesChanged();
 }
 
 
@@ -201,49 +211,10 @@ void CategorizedProxyModel::slotRemoveRows(const QModelIndex& sourceIndex, int b
             }
         }
     }
+    //TODO: conditional
+    emit categoriesChanged();
 }
 
 
-QModelIndex CategorizedProxyModel::mapFromSource(const QModelIndex & sourceIndex) const
-{
-    if (!sourceIndex.isValid()) {
-        return QModelIndex();
-    }
-    Q_ASSERT(sourceIndex.model() == sourceModel());
-
-    QString category = model()->data(sourceIndex, m_categoryRoleInt).toString();
-    int offset = 0;
-    foreach (QString cat, m_categories) {
-        if (cat == category) {
-            break;
-        }
-        offset += m_categoryHash.value(cat);
-    }
-
-    // Create an index that preserves the internal pointer from the source;
-    // this way KDDataConverterProxyModel preserves the structure of the source model
-    return createIndex(sourceIndex.row()-offset, sourceIndex.column(), sourceIndex.internalPointer());
-}
-
-QModelIndex CategorizedProxyModel::mapToSource(const QModelIndex & sourceIndex) const
-{
-    if (!sourceIndex.isValid()) {
-        return QModelIndex();
-    }
-    Q_ASSERT(sourceIndex.model() == sourceModel());
-
-    QString category = m_categories[sourceIndex.parent().row()];
-    int offset = 0;
-    foreach (QString cat, m_categories) {
-        if (cat == category) {
-            break;
-        }
-        offset += m_categoryHash.value(cat);
-    }
-
-    // Create an index that preserves the internal pointer from the source;
-    // this way KDDataConverterProxyModel preserves the structure of the source model
-    return createIndex(sourceIndex.row()+offset, sourceIndex.column(), sourceIndex.internalPointer());
-}
 
 #include "categorizedproxymodel.moc"
