@@ -106,7 +106,7 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
         setData(name, "url", name);
         setData(name, "fileName", fileName(u));
         scheduleSourcesUpdated();
-        //setData(name, "thumbnail", wtn->thumbnail());
+        setData(name, "thumbnail", QImage(fileName(u)));
         return true;
     }
 
@@ -192,7 +192,7 @@ void PreviewEngine::updateData(KWebThumbnailer* wtn)
     setData(thumbnailerSource(wtn), "status", wtn->status());
     setData(thumbnailerSource(wtn), "url", wtn->url().toString());
     setData(thumbnailerSource(wtn), "fileName", wtn->fileName());
-    //setData(thumbnailerSource(wtn), "thumbnail", wtn->thumbnail());
+    setData(thumbnailerSource(wtn), "thumbnail", wtn->thumbnail());
     if (!wtn->fileName().isEmpty()) {
         scheduleSourcesUpdated();
     }
@@ -217,7 +217,7 @@ void PreviewEngine::previewUpdated(const KFileItem &item, const QPixmap &preview
         setData(item.url().url(), "status", "done");
         setData(item.url().url(), "fileName", tmpFile);
         setData(item.url().url(), "url", item.url().url());
-        //setData(item.url().url(), "thumbnail", preview);
+        setData(item.url().url(), "thumbnail", preview.toImage());
     } else {
         setData(item.url().url(), "status", "failed");
     }
@@ -231,7 +231,7 @@ void PreviewEngine::savePreview(const QString &source, QImage preview)
         setData(source, "status", "done");
         setData(source, "fileName", tmpFile);
         setData(source, "url", source);
-        //setData(source, "thumbnail", preview.toImage());
+        setData(source, "thumbnail", preview);
     } else {
         setData(source, "status", "failed");
     }
