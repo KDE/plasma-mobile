@@ -47,6 +47,7 @@ class MetadataEngine : public Plasma::DataEngine
         bool sourceRequestEvent(const QString &name);
 
     private:
+        QString icon(const QStringList &types);
         void addResource(Nepomuk::Resource resource);
         MetadataEngineprivate* d;
 };

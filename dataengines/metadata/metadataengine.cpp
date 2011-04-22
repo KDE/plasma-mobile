@@ -48,6 +48,7 @@ public:
     Nepomuk::Query::QueryServiceClient *queryClient;
     QString query;
     QSize previewSize;
+    QHash<QString, QString> icons;
 };
 
 
@@ -59,6 +60,42 @@ MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
     d->queryClient = 0;
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
     init();
+}
+
+QString MetadataEngine::icon(const QStringList &types)
+{
+    if (!d->icons.size()) {
+        // Add fallback icons here from generic to specific
+        // The list of types is also sorted in this way, so
+        // we're returning the most specific icon, even with
+        // the hardcoded mapping.
+
+        // Files
+        d->icons["FileDataObject"] = QString("audio-x-generic");
+
+        // Audio
+        d->icons["Audio"] = QString("audio-x-generic");
+        d->icons["MusicPiece"] = QString("audio-x-generic");
+
+        // Images
+        d->icons["Image"] = QString("image-x-generic");
+        d->icons["RasterImage"] = QString("image-x-generic");
+
+        d->icons["Email"] = QString("internet-mail");
+
+        // ... add some more
+    }
+
+    // keep searching until the most specific icon is found
+    QString _icon = "nepomuk";
+    foreach(const QString &t, types) {
+        QString shortType = t.split('#').last();
+        if (d->icons.keys().contains(shortType)) {
+            _icon = d->icons[shortType];
+            kDebug() << "found icon for type" << shortType << _icon;
+        }
+    }
+    return _icon;
 }
 
 void MetadataEngine::init()
@@ -151,11 +188,18 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
     setData(source, "label", label);
     setData(source, "description", desc);
 
+    // Types
+    QStringList _types;
+    foreach (const QUrl &u, resource.types()) {
+        _types << u.toString();
+    }
+    setData(source, "types", _types);
+
     QString _icon = resource.genericIcon();
     if (_icon.isEmpty()) {
-        // go through KMimeType to find an icon.
-        // [...] FIXME
-        _icon = "nepomuk";
+        // use resource types to find a suitable icon.
+        _icon = icon(_types);
+        kDebug() << "symbol" << _icon;
     }
     setData(source, "icon", _icon);
     setData(source, "hasSymbol", _icon);
@@ -169,12 +213,6 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
     setData(source, "resourceType", resource.resourceType());
     setData(source, "query", d->query);
 
-    // Types
-    QStringList _types;
-    foreach (const QUrl &u, resource.types()) {
-        _types << u.toString();
-    }
-    setData(source, "types", _types);
 
     // Topics
     QStringList _topics, _topicNames;
