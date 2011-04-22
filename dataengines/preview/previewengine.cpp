@@ -105,8 +105,8 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
         setData(name, "status", "loaded");
         setData(name, "url", name);
         setData(name, "fileName", fileName(u));
-        scheduleSourcesUpdated();
         setData(name, "thumbnail", QImage(fileName(u)));
+        scheduleSourcesUpdated();
         return true;
     }
 
