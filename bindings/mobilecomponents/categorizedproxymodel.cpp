@@ -159,6 +159,7 @@ void CategorizedProxyModel::fillCategories()
         } else {
             m_categoryHash[category] = 1;
             m_categories.append(category);
+            qSort(m_categories.begin(), m_categories.end());
         }
     }
 
@@ -188,6 +189,7 @@ void CategorizedProxyModel::slotInsertRows(const QModelIndex& sourceIndex, int b
         } else {
             m_categoryHash[category] = 1;
             m_categories.append(category);
+            qSort(m_categories.begin(), m_categories.end());
         }
     }
     //TODO: conditional
