@@ -44,17 +44,12 @@ Item {
         }
 
         onDataChanged: {
-            for (d in data) {
-                //print("  data " + d);
-                //timer.running = false
-                //statusLabel.text = i18n("Searching for %1 finished.", searchBox.text);
-                statusLabel.text = "";
-                plasmoid.busy = false
-            }
+            statusLabel.text = i18n("Idle.");
+            plasmoid.busy = false
         }
         Component.onCompleted: {
             //connectedSources = sources;
-            connectedSources = [ "wall" ]
+            //connectedSources = [ "wall" ]
         }
 
     }
@@ -84,47 +79,66 @@ Item {
         }
         PlasmaWidgets.IconWidget {
             id: icon
+            icon: QIcon("system-search")
             onClicked: {
                 timer.running = true
             }
-        Component.onCompleted: {
-            icon.setIcon("system-search")
-        }
-
         }
 
     }
 
-    ListView {
-        id: webItemList
-        //anchors.fill: parent
-        height: 600
-        snapMode: ListView.SnapToItem
-        clip: true
-        highlightMoveDuration: 300
-        spacing: 8;
-        orientation: Qt.Vertical
-        anchors { top: searchRow.bottom; left:parent.left; right: parent.right }
+    PlasmaCore.DataModel {
+        id: metadataModel
+        dataSource: metadataSource
+    }
 
-        model: MobileComponents.CategorizedProxyModel {
-            sourceModel: PlasmaCore.DataModel {
-                            dataSource: metadataSource
-                         }
-            categoryRole: "resourceType"
-            currentCategory: categories[0]
+    MobileComponents.CategorizedProxyModel {
+        id: categoryListModel
+        sourceModel: metadataModel
+        categoryRole: "resourceType"
+    }
+
+    Flow {
+        id: resultsFlow
+
+        anchors {
+            top: searchRow.bottom
+            left:parent.left
+            bottom: statusLabel.top
+            right: parent.right
         }
 
-        delegate: MobileComponents.ResourceDelegate {
-            width:400
-            height:72
-            resourceType: model.resourceType
+        Repeater {
+            model: categoryListModel.categories.length
+            ListView {
+                id: webItemList
+                height: 200
+                width: 200
+                snapMode: ListView.SnapToItem
+                clip: true
+                highlightMoveDuration: 300
+                spacing: 8;
+                orientation: Qt.Vertical
+
+                model: MobileComponents.CategorizedProxyModel {
+                    sourceModel: metadataModel
+                    categoryRole: "resourceType"
+                    currentCategory: categories[index]
+                }
+
+                delegate: MobileComponents.ResourceDelegate {
+                    width:400
+                    height:72
+                    resourceType: model.resourceType
+                }
+            }
         }
     }
 
     Text {
         id: statusLabel
         text: i18n("Idle.")
-        anchors { top: webItemList.bottom; left:parent.left; right: parent.right; bottom: parent.bottom; }
+        anchors { left:parent.left; right: parent.right; bottom: parent.bottom; }
     }
 
     Timer {
