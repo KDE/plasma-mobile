@@ -96,11 +96,12 @@ Item {
     MobileComponents.CategorizedProxyModel {
         id: categoryListModel
         sourceModel: metadataModel
-        categoryRole: "resourceType"
+        categoryRole: "className"
     }
 
     Flow {
         id: resultsFlow
+        spacing: 8
 
         anchors {
             top: searchRow.bottom
@@ -111,26 +112,50 @@ Item {
 
         Repeater {
             model: categoryListModel.categories
-            ListView {
-                id: webItemList
-                height: 400
-                width: 200
-                snapMode: ListView.SnapToItem
-                clip: true
-                highlightMoveDuration: 300
-                spacing: 8;
-                orientation: Qt.Vertical
+            
+            PlasmaCore.FrameSvgItem {
+                imagePath: "widgets/frame"
+                prefix: "raised"
+                height: Math.min(400, 64+webItemList.count*78)
+                width: 300
 
-                model: MobileComponents.CategorizedProxyModel {
-                    sourceModel: metadataModel
-                    categoryRole: "resourceType"
-                    currentCategory: modelData
+                Text {
+                    id: categoryText
+                    text: modelData
+                    anchors {
+                        top: parent.top
+                        horizontalCenter: parent.horizontalCenter
+                        topMargin: parent.margins.top
+                    }
                 }
+                ListView {
+                    id: webItemList
+                    anchors {
+                        left: parent.left
+                        top: categoryText.bottom
+                        right: parent.right
+                        bottom:parent.bottom
+                        leftMargin: parent.margins.left
+                        rightMargin: parent.margins.right
+                        bottomMargin: parent.margins.bottom
+                    }
+                    snapMode: ListView.SnapToItem
+                    clip: true
+                    highlightMoveDuration: 300
+                    spacing: 8;
+                    orientation: Qt.Vertical
 
-                delegate: MobileComponents.ResourceDelegate {
-                    width:400
-                    height:72
-                    resourceType: model.resourceType
+                    model: MobileComponents.CategorizedProxyModel {
+                        sourceModel: metadataModel
+                        categoryRole: "className"
+                        currentCategory: modelData
+                    }
+
+                    delegate: MobileComponents.ResourceDelegate {
+                        width:400
+                        height:72
+                        resourceType: model.resourceType
+                    }
                 }
             }
         }
