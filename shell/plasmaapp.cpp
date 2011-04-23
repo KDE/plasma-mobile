@@ -129,7 +129,7 @@ PlasmaApp::PlasmaApp()
     m_mainView->move(0,0);
 
     KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
-    const QString themeName = cg.readEntry("name", "air-mobile");
+    const QString themeName = cg.readEntry("name", "oxygen-mobile");
     Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
     Plasma::Theme::defaultTheme()->setThemeName(themeName);
 
