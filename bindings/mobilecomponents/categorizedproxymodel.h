@@ -30,6 +30,8 @@ class CategorizedProxyModel : public QProxyModel
     Q_OBJECT
     Q_PROPERTY(QObject *sourceModel READ sourceModel WRITE setSourceModel)
     Q_PROPERTY(QString categoryRole READ categoryRole WRITE setCategoryRole)
+    Q_PROPERTY(QString currentCategory READ currentCategory WRITE setCurrentCategory)
+    Q_PROPERTY(QStringList categories READ categories NOTIFY categoriesChanged())
 
 public:
     CategorizedProxyModel(QObject *parent = 0);
@@ -44,8 +46,17 @@ public:
     void setCategoryRole(const QString &role);
     QString categoryRole() const;
 
+    void setCurrentCategory(const QString &category);
+    QString currentCategory() const;
+
+    QStringList categories() const;
+
+    QModelIndex mapFromSource(const QModelIndex & sourceIndex) const;
+    QModelIndex mapToSource(const QModelIndex & sourceIndex) const;
+
 Q_SIGNALS:
     void modelReset();
+    void categoriesChanged();
 
 private Q_SLOTS:
     void fillCategories();
@@ -53,6 +64,7 @@ private Q_SLOTS:
     void slotRemoveRows(const QModelIndex& sourceIndex, int begin, int end);
 
 private:
+    QString m_currentCategory;
     QString m_categoryRoleString;
     int m_categoryRoleInt;
     //FIXME: QVector?
