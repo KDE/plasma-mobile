@@ -39,6 +39,7 @@
 #include <nepomuk/resourcetypeterm.h>
 
 #include "metadataengine.h"
+#include <stdio.h>
 
 #define RESULT_LIMIT 10
 
@@ -121,7 +122,7 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
     QString massagedName = name;
     foreach (const QString &s, Plasma::DataEngine::sources()) {
         if (s.startsWith(name) || s.endsWith(name)) {
-            kWarning() << "!!! resource already exists." << name;
+            kDebug() << "!!! resource already exists." << name;
             return false;
         }
     }
@@ -136,7 +137,7 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
         Nepomuk::Resource r(u);
         kDebug() << r.resourceUri();
         if (!r.exists()) {
-            kWarning() << "Resource " << u << " does not exist.";
+            kDebug() << "Resource " << u << " does not exist.";
             return false;
         }
         addResource(r);
@@ -168,6 +169,7 @@ void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
 
 void MetadataEngine::addResource(Nepomuk::Resource resource)
 {
+    kDebug() << "ADDD " << resource.resourceUri().toString();
     QString uri = resource.resourceUri().toString();
     // If we didn't explicitely search for a nepomuk:// url, let's add the query
     // to the parameters
@@ -240,11 +242,13 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
     setData(source, "relateds", _relateds);
 
     // Dynamic properties
+    QStringList _properties;
     QHash<QUrl, Nepomuk::Variant> props = resource.properties();
     foreach(const QUrl &propertyUrl, props.keys()) {
         QStringList _l = propertyUrl.toString().split('#');
         if (_l.count() > 1) {
             QString key = _l[1];
+            _properties << key;
             //kDebug() << " ... " << key << propertyUrl << resource.property(propertyUrl).variant();
             setData(source, key, resource.property(propertyUrl).variant());
             // More properties
@@ -254,6 +258,7 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
             kWarning() << "Could not parse ontology URL, missing '#':" << propertyUrl.toString();
         }
     }
+    setData(source, "aproperties", _properties);
 }
 
 #include "metadataengine.moc"
