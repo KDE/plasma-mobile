@@ -24,7 +24,7 @@
 #include <KDebug>
 
 CategorizedProxyModel::CategorizedProxyModel(QObject *parent)
-    : QProxyModel(parent),
+    : QSortFilterProxyModel(parent),
       m_categoryRoleInt(Qt::UserRole)
 {
     m_fillCategoriesTimer = new QTimer(this);
@@ -71,7 +71,7 @@ QStringList CategorizedProxyModel::categories() const
     return m_categories;
 }
 
-void CategorizedProxyModel::setSourceModel(QObject *source)
+void CategorizedProxyModel::setModel(QObject *source)
 {
     QAbstractItemModel *model = qobject_cast<QAbstractItemModel *>(source);
     if (!model) {
@@ -82,18 +82,18 @@ void CategorizedProxyModel::setSourceModel(QObject *source)
 
     // TODO disconnect old model
     connect(model, SIGNAL(rowsInserted(QModelIndex, int, int)),
-            SLOT(slotInsertRows(QModelIndex, int, int)));
+            SLOT(slotInsertRows(QModelIndex, int, int)), Qt::QueuedConnection);
     connect(model, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)),
             SLOT(slotRemoveRows(QModelIndex, int, int)));
-    connect(model, SIGNAL(modelReset()), this, SLOT(fillCategories()));
+    connect(model, SIGNAL(modelReset()), this, SLOT(fillCategories()), Qt::QueuedConnection);
 
     setRoleNames(model->roleNames());
-    setModel(model);
+    setSourceModel(model);
 }
 
-QObject *CategorizedProxyModel::sourceModel() const
+QObject *CategorizedProxyModel::model() const
 {
-    return model();
+    return sourceModel();
 }
 
 
@@ -121,14 +121,14 @@ QVariant CategorizedProxyModel::data(const QModelIndex &index, int role) const
         offset += m_categoryHash.value(cat);
     }
 
-    return QProxyModel::data(QProxyModel::index(index.row()-offset, index.column()), role);
+    return QSortFilterProxyModel::data(CategorizedProxyModel::index(index.row()+offset, index.column()), role);
 }
 
 
 
 void CategorizedProxyModel::fillCategories()
 {
-    QAbstractItemModel *model = CategorizedProxyModel::model();
+    QAbstractItemModel *model = QSortFilterProxyModel::sourceModel();
     if (!model) {
         return;
     }
@@ -142,8 +142,10 @@ void CategorizedProxyModel::fillCategories()
         }
     }
 
-    model->sort(m_categoryRoleInt);
+    setSortRole(m_categoryRoleInt);
+    sort(0);
     m_categoryHash.clear();
+    m_categories.clear();
 
     for (int i = 0; i <= model->rowCount(); i++) {
         QString category = model->data(model->index(i, 0), m_categoryRoleInt).toString();
@@ -167,12 +169,12 @@ void CategorizedProxyModel::fillCategories()
 
 void CategorizedProxyModel::slotInsertRows(const QModelIndex& sourceIndex, int begin, int end)
 {
-    QAbstractItemModel *model = CategorizedProxyModel::model();
+    QAbstractItemModel *model = QSortFilterProxyModel::sourceModel();
     if (!model) {
         return;
     }
     setRoleNames(model->roleNames());
-    model->sort(m_categoryRoleInt);
+    sort(0);
 
     for (int i = begin; i <= end; i++) {
         QString category = model->data(model->index(i, 0), m_categoryRoleInt).toString();
@@ -195,7 +197,7 @@ void CategorizedProxyModel::slotInsertRows(const QModelIndex& sourceIndex, int b
 
 void CategorizedProxyModel::slotRemoveRows(const QModelIndex& sourceIndex, int begin, int end)
 {
-    QAbstractItemModel *model = CategorizedProxyModel::model();
+    QAbstractItemModel *model = QSortFilterProxyModel::sourceModel();
     if (!model) {
         return;
     }

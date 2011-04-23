@@ -81,7 +81,8 @@ Item {
             id: icon
             icon: QIcon("system-search")
             onClicked: {
-                timer.running = true
+                //timer.running = true
+                print(categoryListModel.categories)
             }
         }
 
@@ -109,10 +110,10 @@ Item {
         }
 
         Repeater {
-            model: categoryListModel.categories.length
+            model: categoryListModel.categories
             ListView {
                 id: webItemList
-                height: 200
+                height: 400
                 width: 200
                 snapMode: ListView.SnapToItem
                 clip: true
@@ -123,7 +124,7 @@ Item {
                 model: MobileComponents.CategorizedProxyModel {
                     sourceModel: metadataModel
                     categoryRole: "resourceType"
-                    currentCategory: categories[index]
+                    currentCategory: modelData
                 }
 
                 delegate: MobileComponents.ResourceDelegate {

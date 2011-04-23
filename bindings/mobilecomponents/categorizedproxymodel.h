@@ -20,15 +20,15 @@
 #ifndef CATEGORIZEDPROXYMODEL_H
 #define CATEGORIZEDPROXYMODEL_H
 
-#include <QProxyModel>
+#include <QSortFilterProxyModel>
 #include <QStringList>
 
 class QTimer;
 
-class CategorizedProxyModel : public QProxyModel
+class CategorizedProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
-    Q_PROPERTY(QObject *sourceModel READ sourceModel WRITE setSourceModel)
+    Q_PROPERTY(QObject *sourceModel READ model WRITE setModel)
     Q_PROPERTY(QString categoryRole READ categoryRole WRITE setCategoryRole)
     Q_PROPERTY(QString currentCategory READ currentCategory WRITE setCurrentCategory)
     Q_PROPERTY(QStringList categories READ categories NOTIFY categoriesChanged())
@@ -37,8 +37,8 @@ public:
     CategorizedProxyModel(QObject *parent = 0);
     ~CategorizedProxyModel();
 
-    void setSourceModel(QObject *source);
-    QObject *sourceModel() const;
+    void setModel(QObject *source);
+    QObject *model() const;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -50,9 +50,6 @@ public:
     QString currentCategory() const;
 
     QStringList categories() const;
-
-    QModelIndex mapFromSource(const QModelIndex & sourceIndex) const;
-    QModelIndex mapToSource(const QModelIndex & sourceIndex) const;
 
 Q_SIGNALS:
     void modelReset();
