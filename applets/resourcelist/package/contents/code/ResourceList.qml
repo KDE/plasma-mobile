@@ -53,7 +53,7 @@ Item {
         }
         Component.onCompleted: {
             //connectedSources = sources;
-            connectedSources = [ "wall" ]
+            connectedSources = [ "3voor12" ]
         }
 
     }
@@ -76,18 +76,18 @@ Item {
         PlasmaWidgets.LineEdit {
             id: searchBox
             clearButtonShown: true
-            width: parent.width - icon.width - parent.spacing
+            width: parent.width - iconWidget.width - parent.spacing
             onTextChanged: {
                 timer.running = true
             }
         }
         PlasmaWidgets.IconWidget {
-            id: icon
+            id: iconWidget
             onClicked: {
                 timer.running = true
             }
         Component.onCompleted: {
-            icon.setIcon("system-search")
+            iconWidget.setIcon("system-search")
         }
 
         }
@@ -126,7 +126,7 @@ Item {
        id: timer
        running: false
        repeat: false
-       interval: 1000
+       interval: 2000
        onTriggered: {
             plasmoid.busy = true
             metadataSource.connectedSources = [searchBox.text]

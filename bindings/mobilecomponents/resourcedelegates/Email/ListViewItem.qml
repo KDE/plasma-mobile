@@ -27,45 +27,12 @@ Item {
             width: 64
             anchors.margins: 8
 
-            function resourceIcon(resourceTypes) {
-                var icons = new Object();
-                icons["Resource"] = "nepomuk";
-                icons["FileDataObject"] = "unknown";
-
-                // Audio
-                icons["Audio"] = "audio-x-generic";
-                icons["MusicPiece"] = "audio-x-generic";
-
-                // Images
-                icons["Image"] = "image-x-generic";
-                icons["RasterImage"] = "image-x-generic";
-
-                icons["Email"] = "internet-mail";
-
-                // ... add some more
-
-                // keep searching until the most specific icon is found
-                var _icon = "nepomuk";
-                var typeList = resourceTypes.split(",");
-
-                for(var i = 0; i < typeList.length; i++) {
-                    var shortType = typeList[i].split("#")[1];
-                    for (key in icons) {
-                        if (key == shortType) {
-                            _icon = icons[shortType];
-                        }
-                    }
-                }
-                return _icon;
-            }
-
             Component.onCompleted: {
                 try {
+                    print("HHH:" + hasSymbol);
                     setIcon(hasSymbol);
                 } catch(e) {
-                    var _i = resourceIcon(types.toString())
-                    //print("fallback icon: " + _i);
-                    setIcon(_i);
+                    setIcon("internet-mail");
                 }
             }
         }
@@ -90,10 +57,10 @@ Item {
             id: infoLabel
             //image: metadataSource.data[DataEngineSource]["fileName"]
             //text: "the long and winding road..."
-            text: className + " This is an Email Resouce Delegate"
-            opacity: 0.6
+            text: className + " from " + from
+            opacity: 0.8
             //font.pixelSize: font.pixelSize * 1.8
-            font.pixelSize: 11
+            font.pixelSize: 12
             height: 14
             width: parent.width - previewImage.width
             //wrapMode: Text.Wrap

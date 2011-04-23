@@ -41,6 +41,8 @@ Item {
                 icons["RasterImage"] = "image-x-generic";
 
                 icons["Email"] = "internet-mail";
+                icons["PersonContact"] = "x-office-contact";
+                icons["Document"] = "kword";
 
                 // ... add some more
 
@@ -52,6 +54,7 @@ Item {
                     var shortType = typeList[i].split("#")[1];
                     for (key in icons) {
                         if (key == shortType) {
+                            print("M: " + key + icons[shortType]);
                             _icon = icons[shortType];
                         }
                     }
@@ -61,11 +64,21 @@ Item {
 
             Component.onCompleted: {
                 try {
-                    setIcon(hasSymbol);
+                    var _l = hasSymbol.toString().split(",");
+                    if (_l.length == 1) {
+                        setIcon(hasSymbol);
+                    } else if (_l.length > 1) {
+                        // pick the last one
+                        var _i = _l[_l.length-1];
+                    } else {
+                        resourceIcon(types.toString())
+                    }
+                    //print("icon:" + hasSymbol);
                 } catch(e) {
-                    var _i = resourceIcon(types.toString())
-                    //print("fallback icon: " + _i);
+                    var _i = resourceIcon(className);
+                    print("fallback icon: " + _i + e);
                     setIcon(_i);
+                    print("icon2:" + _i);
                 }
             }
         }
@@ -91,9 +104,9 @@ Item {
             //image: metadataSource.data[DataEngineSource]["fileName"]
             //text: "the long and winding road..."
             text: className
-            opacity: 0.6
+            opacity: 0.8
             //font.pixelSize: font.pixelSize * 1.8
-            font.pixelSize: 11
+            font.pixelSize: 12
             height: 14
             width: parent.width - previewImage.width
             //wrapMode: Text.Wrap
