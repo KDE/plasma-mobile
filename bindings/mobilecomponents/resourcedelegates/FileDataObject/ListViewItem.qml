@@ -70,7 +70,9 @@ Item {
                     } else if (_l.length > 1) {
                         // pick the last one
                         var _i = _l[_l.length-1];
+                        setIcon(_i);
                     } else {
+                        print("HHH types" + types.toString());
                         resourceIcon(types.toString())
                     }
                     //print("icon:" + hasSymbol);

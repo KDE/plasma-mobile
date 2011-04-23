@@ -29,7 +29,7 @@ Item {
 
             Component.onCompleted: {
                 try {
-                    print("HHH:" + hasSymbol);
+                    print("HHH:" + className + " " + hasSymbol);
                     setIcon(hasSymbol);
                 } catch(e) {
                     setIcon("internet-mail");
