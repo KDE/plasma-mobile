@@ -72,7 +72,7 @@ QString MetadataEngine::icon(const QStringList &types)
         // the hardcoded mapping.
 
         // Files
-        d->icons["FileDataObject"] = QString("audio-x-generic");
+        //d->icons["FileDataObject"] = QString("audio-x-generic");
 
         // Audio
         d->icons["Audio"] = QString("audio-x-generic");
@@ -83,6 +83,8 @@ QString MetadataEngine::icon(const QStringList &types)
         d->icons["RasterImage"] = QString("image-x-generic");
 
         d->icons["Email"] = QString("internet-mail");
+        d->icons["Document"] = QString("kword");
+        d->icons["PersonContact"] = QString("x-office-contact");
 
         // ... add some more
     }
@@ -169,7 +171,6 @@ void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
 
 void MetadataEngine::addResource(Nepomuk::Resource resource)
 {
-    kDebug() << "ADDD " << resource.resourceUri().toString();
     QString uri = resource.resourceUri().toString();
     // If we didn't explicitely search for a nepomuk:// url, let's add the query
     // to the parameters
@@ -200,8 +201,12 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
     QString _icon = resource.genericIcon();
     if (_icon.isEmpty()) {
         // use resource types to find a suitable icon.
-        _icon = icon(_types);
+        _icon = icon(QStringList(resource.className()));
         kDebug() << "symbol" << _icon;
+    }
+    if (_icon.split(",").count() > 1) {
+        kDebug() << "More than one icon!" << _icon;
+        _icon = _icon.split(",").last();
     }
     setData(source, "icon", _icon);
     setData(source, "hasSymbol", _icon);
@@ -249,8 +254,18 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
         if (_l.count() > 1) {
             QString key = _l[1];
             _properties << key;
+            //QString from = dynamic_cast<QList<QUrl>();
+            if (resource.property(propertyUrl).variant().canConvert(QVariant::List)) {
+                QVariantList tl = resource.property(propertyUrl).variant().toList();
+                foreach (QVariant vu, tl) {
+                    if (vu.canConvert(QVariant::Url) && vu.toUrl().isValid()) {
+                        //kDebug() <<  "HHH This is a QURL list.!!!" << key << vu.toUrl();
+                    }
+                }
+            }
             //kDebug() << " ... " << key << propertyUrl << resource.property(propertyUrl).variant();
-            setData(source, key, resource.property(propertyUrl).variant());
+            if (key != "plainTextMessageContent")
+                setData(source, key, resource.property(propertyUrl).variant());
             // More properties
 
 
@@ -258,7 +273,7 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
             kWarning() << "Could not parse ontology URL, missing '#':" << propertyUrl.toString();
         }
     }
-    setData(source, "aproperties", _properties);
+    setData(source, "properties", _properties);
 }
 
 #include "metadataengine.moc"
