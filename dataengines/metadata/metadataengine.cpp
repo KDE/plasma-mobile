@@ -258,8 +258,10 @@ void MetadataEngine::addResource(Nepomuk::Resource resource)
             if (resource.property(propertyUrl).variant().canConvert(QVariant::List)) {
                 QVariantList tl = resource.property(propertyUrl).variant().toList();
                 foreach (QVariant vu, tl) {
-                    if (vu.canConvert(QVariant::Url) && vu.toUrl().isValid()) {
-                        //kDebug() <<  "HHH This is a QURL list.!!!" << key << vu.toUrl();
+                    kDebug() << vu.toString().startsWith("nepomuk:") << vu.toString().startsWith("akonadi:") << vu.toString();
+                    if (vu.canConvert(QVariant::Url) &&
+                        (vu.toString().startsWith("nepomuk:") || vu.toString().startsWith("akonadi:"))) {
+                        kDebug() <<  "HHH This is a list.!!!" << key << vu.toString();
                     }
                 }
             }
