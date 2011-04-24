@@ -33,7 +33,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 60
+        height: 80
         color: Qt.rgba(0, 0, 0, 0.8)
     }
 
@@ -69,7 +69,7 @@ Rectangle {
             ]
 
             Behavior on opacity {
-                NumberAnimation { duration: 500 }
+                NumberAnimation { duration: 200 }
             }
         }
 
@@ -98,39 +98,71 @@ Rectangle {
     }
 
     Rectangle {
-        id: lockerBackground
-        anchors.fill: locker
-        color: Qt.rgba(0, 0, 0, 0.8)
-        radius: 10
-
-        states: [
-            State {
-                name: "active"
-                when: locker.state == "unlock"
-                PropertyChanges {
-                    target: lockerBackground
-                    color: "#0a4193"
-                }
-            }
-        ]
-    }
-
-    Image {
         id: locker
-        source: "images/lock.png"
         anchors.top: lockArea.top
-        anchors.topMargin: 5
+        anchors.topMargin: 10
         anchors.right: lockArea.right
         anchors.rightMargin: 20
+        color: Qt.rgba(0, 0, 0, 0.8)
+        radius: 10
+        width: 62
+        height: 62
+
+        Rectangle {
+            id: halo
+            anchors.fill: locker
+            radius: 10
+            color: "#0a4193"
+            opacity: 0
+
+            Timer {
+                id: haloTimer
+                // 2 minutes to turn off the halo
+                // ### TODO: take this from config file
+                interval: 2 * 60 * 1000
+                running: true
+                onTriggered: {
+                    halo.visible = false
+                }
+            }
+
+            SequentialAnimation on opacity {
+                running: (locker.state != "unlock")
+                loops: Animation.Infinite
+                NumberAnimation {
+                    to: 1
+                    duration: 1000
+                    easing.type: Easing.InOutQuad
+                }
+                NumberAnimation {
+                    to: 0
+                    duration: 1000
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+
+
+        Image {
+            id: lockerImage
+            width: 52
+            height: 52
+            anchors.centerIn: parent
+            source: "images/lock.png"
+        }
 
         states: [
             State {
                 name: "unlock"
                 PropertyChanges {
                     target: locker
-                    source: "images/unlock.png"
                     anchors.right: undefined
                     anchors.top: undefined
+                    color: "#0a4193"
+                }
+                PropertyChanges {
+                    target: lockerImage
+                    source: "images/unlock.png"
                 }
             }
         ]
@@ -140,6 +172,10 @@ Rectangle {
         // this is the item that will properly lock
         // the screen as it will grab all the events
         anchors.fill: parent
+        onPressed: {
+            halo.visible = true;
+            haloTimer.running = true;
+        }
     }
 
     MouseArea {
