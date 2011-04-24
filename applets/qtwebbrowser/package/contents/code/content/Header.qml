@@ -42,7 +42,6 @@
 import QtQuick 1.0
 
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
-import org.kde.plasma.core 0.1 as PlasmaCore
 
 Image {
     id: header
@@ -81,7 +80,7 @@ Image {
                 id: backButton
                 action: webView.back;
                 anchors { left: parent.left; bottom: parent.bottom }
-                Component.onCompleted: {setIcon("go-previous"); setText("");}
+                Component.onCompleted: setIcon("go-previous");
                 numDisplayLines: 0
             }
 

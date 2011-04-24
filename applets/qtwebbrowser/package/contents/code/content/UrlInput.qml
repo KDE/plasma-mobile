@@ -72,7 +72,7 @@ Item {
         font.pixelSize: 14;
 
         onTextChanged: {
-            print("url changed to" + text);
+            //print("url changed to" + text);
             container.urlChanged();
         }
 
