@@ -26,8 +26,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: bookmarks
-    width: 540
-    height: 540
+    width: 300
+    height: 150
 
     property alias title: header
     property alias urls: metadataSource.connectedSources
@@ -53,7 +53,7 @@ Item {
         }
         Component.onCompleted: {
             //connectedSources = sources;
-            connectedSources = [ "3voor12" ]
+            connectedSources = [ "Another brick" ]
         }
 
     }
@@ -97,13 +97,13 @@ Item {
     ListView {
         id: webItemList
         //anchors.fill: parent
-        height: 600
+        //height: 600
         snapMode: ListView.SnapToItem
         clip: true
         highlightMoveDuration: 300
         spacing: 8;
         orientation: Qt.Vertical
-        anchors { top: searchRow.bottom; left:parent.left; right: parent.right }
+        anchors { top: searchRow.bottom; left:parent.left; right: parent.right; bottom: statusLabel.top }
 
         model: PlasmaCore.DataModel {
             dataSource: metadataSource
@@ -119,7 +119,7 @@ Item {
     Text {
         id: statusLabel
         text: i18n("Idle.")
-        anchors { top: webItemList.bottom; left:parent.left; right: parent.right; bottom: parent.bottom; }
+        anchors { left:parent.left; right: parent.right; bottom: parent.bottom; }
     }
 
     Timer {
