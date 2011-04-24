@@ -57,7 +57,7 @@ Item {
             id: infoLabel
             //image: metadataSource.data[DataEngineSource]["fileName"]
             //text: "the long and winding road..."
-            text: className + " from "
+            text: "Performed by " + creator
             opacity: 0.8
             //font.pixelSize: font.pixelSize * 1.8
             font.pixelSize: 12
