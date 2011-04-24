@@ -18,6 +18,7 @@
  ***************************************************************************/
 
 import QtQuick 1.0
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 
 Rectangle {
@@ -27,6 +28,10 @@ Rectangle {
     color: Qt.rgba(0, 0, 0, 0.8)
 
     signal unlocked();
+
+    PlasmaCore.Theme {
+        id: theme
+    }
 
     Rectangle {
         id: lockArea
@@ -53,7 +58,7 @@ Rectangle {
         Text {
             id: unlockText
             text: "Drag here to unlock"
-            color: "white"
+            color: theme.textColor
             anchors.centerIn: parent
             font.pixelSize: 36
             opacity: 0
@@ -79,7 +84,7 @@ Rectangle {
                 when: (locker.state == "unlock") && (!unlockArea.unlock)
                 PropertyChanges {
                     target: unlockArea
-                    border.color: "#0a4193"
+                    border.color: theme.textColor
                     border.width: 5
                 }
             },
@@ -88,9 +93,9 @@ Rectangle {
                 when: (locker.state == "unlock") && (unlockArea.unlock)
                 PropertyChanges {
                     target: unlockArea
-                    color: "#0a4193"
+                    color: theme.textColor
                     opacity: 0.7
-                    border.color: "#0a4193"
+                    border.color: theme.textColor
                     border.width: 15
                 }
             }
@@ -103,7 +108,8 @@ Rectangle {
         anchors.topMargin: 10
         anchors.right: lockArea.right
         anchors.rightMargin: 20
-        color: Qt.rgba(0, 0, 0, 0.8)
+        color: theme.backgroundColor
+        opacity: 0.8
         radius: 10
         width: 62
         height: 62
@@ -112,7 +118,7 @@ Rectangle {
             id: halo
             anchors.fill: locker
             radius: 10
-            color: "#0a4193"
+            color: theme.textColor
             opacity: 0
 
             Timer {
@@ -158,7 +164,7 @@ Rectangle {
                     target: locker
                     anchors.right: undefined
                     anchors.top: undefined
-                    color: "#0a4193"
+                    color: theme.textColor
                 }
                 PropertyChanges {
                     target: lockerImage
