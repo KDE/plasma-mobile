@@ -8,5 +8,7 @@ install( FILES ${dialogs} DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/oxygen-mo
 FILE(GLOB icons icons/*.svgz)
 install( FILES ${icons} DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/oxygen-mobile/icons/ )
 
-install(DIRECTORY wallpapers/HorosGreen DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/oxygen-mobile/wallpapers PATTERN .svn EXCLUDE)
+# Install wallpaper globally, so it can be found from the config
+#install(DIRECTORY wallpapers/HorosGreen DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/oxygen-mobile/wallpapers PATTERN .svn EXCLUDE)
+install(DIRECTORY wallpapers/HorosGreen DESTINATION ${WALLPAPER_INSTALL_DIR} PATTERN .svn EXCLUDE)
 
