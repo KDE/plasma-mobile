@@ -1,7 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Web Browser
+Name[pt]=Navegação Web
+Name[uk]=Переглядач інтернету
+Name[x-test]=xxWeb Browserxx
 Comment=Simple web browser suited for touch interfaces
+Comment[pt]=Um navegador Web simples e adequado para interfaces por toque
+Comment[uk]=Проста програма для перегляду інтернету для сенсорних інтерфейсів
+Comment[x-test]=xxSimple web browser suited for touch interfacesxx
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=internet-web-browser
