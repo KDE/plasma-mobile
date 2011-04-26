@@ -30,12 +30,27 @@
 
 #include <QApplication>
 #include <KStandardAction>
+#include <KStandardDirs>
 #include <QAction>
 #include <KAction>
 
-MobileDolphin::MobileDolphin()
+MobileDolphin::MobileDolphin(KUrl url)
 {
+    KDeclarative kdeclarative;
+    kdeclarative.setDeclarativeEngine(engine());
+    kdeclarative.initialize();
+    kdeclarative.setupBindings();
 
+    lister = new KDirLister;
+    lister->openUrl(url);
+    files = new KDeclarativeDirModel;
+    files->setDirLister(lister);
+
+    rootContext()->setContextProperty("myModel", files);
+    rootContext()->setContextProperty("directory", lister->url().prettyUrl());
+    setSource(QUrl::fromLocalFile(KStandardDirs::locate("data", "mobiledolphin/ui/mobiledolphin.qml")));
+    connect(rootObject(), SIGNAL(fileClicked(QString)), this, SLOT(changeDir(QString)));
+    connect(rootObject(), SIGNAL(fileShowContextualMenu(QString)), this, SLOT(showContextualMenu(QString)));
 }
 
 void MobileDolphin::changeDir(QString name)

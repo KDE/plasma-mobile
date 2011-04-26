@@ -21,6 +21,7 @@
 #define _MOBILE_DOLPHIN_H
 
 #include <QDeclarativeView>
+#include <KUrl>
 
 #include "kdeclarativedirmodel.h"
 
@@ -29,7 +30,7 @@ class MobileDolphin : public QDeclarativeView
     Q_OBJECT
     
     public:
-        MobileDolphin();
+        MobileDolphin(KUrl url);
         KDeclarativeDirModel *files;
         KDirLister *lister;
 
