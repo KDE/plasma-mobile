@@ -61,6 +61,14 @@ Rectangle {
             color: theme.textColor
             anchors.centerIn: parent
             font.pixelSize: 36
+            font.family: theme.font.family
+            font.bold: theme.font.bold
+            font.capitalization: theme.font.capitalization
+            font.italic: theme.font.italic
+            font.weight: theme.font.weight
+            font.underline: theme.font.underline
+            font.strikeout: theme.font.strikeOut
+            font.wordSpacing: theme.font.wordSpacing
             opacity: 0
             states: [
                 State {
