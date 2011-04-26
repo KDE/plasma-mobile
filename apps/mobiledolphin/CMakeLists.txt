@@ -11,3 +11,4 @@ kde4_add_executable(mobiledolphin ${mobiledolphin_SRCS})
 target_link_libraries(mobiledolphin kdeclarative ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
 
 install(TARGETS mobiledolphin ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(DIRECTORY ui DESTINATION ${DATA_INSTALL_DIR}/mobiledolphin)

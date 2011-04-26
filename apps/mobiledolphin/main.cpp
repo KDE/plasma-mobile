@@ -17,17 +17,29 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include <QApplication>
-
 #include <QDeclarativeItem>
 #include <QDeclarativeContext>
+#include <KAboutData>
+#include <KApplication>
+#include <KCmdLineArgs>
 #include <kdeclarative.h>
+#include <KCmdLineArgs>
+#include <KStandardDirs>
+#include <kdebug.h>
 
 #include "mobiledolphin.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+   KAboutData about("mobiledolphin", 0,
+                     ki18nc("@title", "Mobile Dolphin"),
+                     "0.1",
+                     ki18nc("@title", "File Manager"),
+                     KAboutData::License_GPL,
+                     ki18nc("@info:credit", "(C) 2011 Davide Bettio"));
+
+    KCmdLineArgs::init(argc, argv, &about);
+    KApplication app;
 
     MobileDolphin view;
 
@@ -43,7 +55,7 @@ int main(int argc, char *argv[])
 
     view.rootContext()->setContextProperty("myModel", view.files);
     view.rootContext()->setContextProperty("directory", view.lister->url().prettyUrl());
-    view.setSource(QUrl::fromLocalFile("mobiledolphin.qml"));
+    view.setSource(QUrl::fromLocalFile(KStandardDirs::locate("data", "mobiledolphin/ui/mobiledolphin.qml")));
     QObject::connect(view.rootObject(), SIGNAL(fileClicked(QString)), &view, SLOT(changeDir(QString)));
     QObject::connect(view.rootObject(), SIGNAL(fileShowContextualMenu(QString)), &view, SLOT(showContextualMenu(QString)));
 
