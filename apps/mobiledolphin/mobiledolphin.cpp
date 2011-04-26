@@ -67,9 +67,9 @@ void MobileDolphin::showContextualMenu(QString name)
     actions.append(KStandardAction::copy(0, 0, 0));
     actions.append(KStandardAction::paste(0, 0, 0));
     actions.append(KStandardAction::cut(QApplication::instance(), SLOT(quit()), 0));
-    
+
     QDeclarativeContext *newContext = new QDeclarativeContext(rootContext());
-    QDeclarativeComponent component(engine(), QUrl::fromLocalFile("ActionsMenu.qml"));
+    QDeclarativeComponent component(engine(), QUrl::fromLocalFile(KStandardDirs::locate("data", "mobiledolphin/ui/ActionsMenu.qml")));
     newContext->setContextProperty("actionsModel", QVariant::fromValue(actions));
     QObject *myObject = component.create(newContext);
     QDeclarativeItem *item = static_cast<QDeclarativeItem *>(myObject);
