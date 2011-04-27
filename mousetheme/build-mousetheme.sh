@@ -1,10 +1,9 @@
 #!/bin/sh
 
-DIR="r-conf"
+mkdir -p theme;
 
-cd r-conf;
+cd config;
 for file in $(ls *.in); do
-#    echo $file
-    xcursorgen $file $(echo $file |cut -d. -f1)
+    xcursorgen $file ../theme/$(echo $file |cut -d. -f1)
 done
 
