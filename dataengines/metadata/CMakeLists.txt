@@ -16,5 +16,6 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/..
    )
 
+add_subdirectory(ontologies)
 add_subdirectory(metadata)
 add_subdirectory(bookmarks)
