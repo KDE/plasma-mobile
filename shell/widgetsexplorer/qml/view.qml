@@ -134,16 +134,23 @@ Rectangle {
     }
 
 
-    Rectangle {
+    PlasmaCore.FrameSvgItem {
         id: infoPanel
 
         state: "hidden"
 
-        color: Qt.rgba(0,0,0,0.4)
+        imagePath: "widgets/background"
+        
 
         Flow {
             id: infoContent
-            anchors.fill:parent
+            anchors {
+                fill:parent
+                leftMargin: parent.margins.left
+                topMargin: parent.margins.top
+                rightMargin: parent.margins.right
+                bottomMargin: parent.margins.bottom
+            }
 
             PlasmaWidgets.IconWidget {
                 id: detailsIcon
