@@ -28,8 +28,7 @@ Rectangle {
             }
             PropertyChanges {
                 target: appletsView;
-                anchors.bottom: widgetsExplorer.bottom
-                anchors.right: infoPanel.left
+                anchors.bottom: widgetsExplorer.bottom                
             }
             PropertyChanges {
                 target: infoContent;
@@ -56,7 +55,7 @@ Rectangle {
             }
             PropertyChanges {
                 target: appletsView;
-                anchors.bottom: infoPanel.top
+                anchors.bottomMargin: infopanel.height
                 anchors.right: widgetsExplorer.right
             }
             PropertyChanges {
@@ -126,9 +125,7 @@ Rectangle {
 
 
         width: parent.width
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        anchors.fill: parent
         anchors.topMargin: 4
         anchors.bottomMargin: closeButton.height
     }
@@ -185,7 +182,7 @@ Rectangle {
                         font.pixelSize : 30;
                         wrapMode : Text.Wrap
 
-                        color: "white"
+                        color: theme.textColor
                     }
 
                     Text {
@@ -195,7 +192,7 @@ Rectangle {
                         anchors.horizontalCenter: parent.horizontalCenter
                         wrapMode : Text.Wrap
 
-                        color: "white"
+                        color: theme.textColor
                     }
 
                     Text {
@@ -204,7 +201,7 @@ Rectangle {
                         width: parent.width
                         wrapMode : Text.Wrap
 
-                        color: "white"
+                        color: theme.textColor
                     }
 
 
@@ -214,7 +211,7 @@ Rectangle {
                         width: parent.width
                         wrapMode : Text.Wrap
 
-                        color: "white"
+                        color: theme.textColor
                     }
 
                     Text {
@@ -223,7 +220,7 @@ Rectangle {
                         width: parent.width
                         wrapMode : Text.Wrap
 
-                        color: "white"
+                        color: theme.textColor
                     }
 
                     Text {
@@ -232,7 +229,7 @@ Rectangle {
                         width: parent.width
                         wrapMode : Text.Wrap
 
-                        color: "white"
+                        color: theme.textColor
                     }
                 }
             }
@@ -240,12 +237,11 @@ Rectangle {
 
             Item {
                 id: addButtonParent
-                width: widgetsExplorer.width/4
+                width: parent.width
                 height: addButton.height
                 PlasmaWidgets.PushButton {
                     id: addButton
-                    anchors.right: parent.right
-                    anchors.rightMargin: 4
+                    anchors.horizontalCenter: parent.horizontalCenter
 
                     text: "Add widget"
                     onClicked : widgetsExplorer.addAppletRequested(appletsView.currentPlugin)
@@ -259,15 +255,16 @@ Rectangle {
                 name: "shown"
                 PropertyChanges {
                     target: infoPanel;
-                    x: if (widgetsExplorer.state == "horizontal")
-                           infoPanel.parent.width - infoPanel.width
-                       else
-                           infoPanel.x
+                    x: 0
 
                     y: if (widgetsExplorer.state == "vertical")
                            infoPanel.parent.height - infoPanel.height
                        else
-                           infoPanel.y
+                           0
+                }
+                PropertyChanges {
+                    target: appletsView
+                    anchors.leftMargin: infoPanel.width
                 }
             }
         ]
