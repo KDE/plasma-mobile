@@ -1,9 +1,14 @@
 #!/bin/sh
 
 mkdir -p theme;
+mkdir -p theme/cursors;
 
-cd config;
-for file in $(ls *.in); do
-    xcursorgen $file ../theme/$(echo $file |cut -d. -f1)
+for file in $(ls config/*.in); do
+    xcursorgen $file theme/cursors/$(echo $file |cut -d. -f1)
 done
+
+cp index.theme theme/
+
+tar -cjf plasma-mobile-cursors.tar.bz2 theme/
+rm -rf theme;
 
