@@ -114,7 +114,7 @@ Rectangle {
                     detailsEmail.text = "<b>Email:</b> "+email
                     detailsLicense.text = "<b>License:</b> "+license
 
-                    var pos = mapToItem(widgetsExplorer, 0, 0)
+                    var pos = mapToItem(widgetsExplorer, 0, -infoPanel.height/2)
                     infoPanel.x = pos.x
                     infoPanel.y = pos.y
                     infoPanel.state = "shown"
