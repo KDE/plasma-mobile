@@ -40,16 +40,15 @@ class MetadataEngine : public Plasma::DataEngine
         QStringList sources() const;
         virtual void init();
 
-    private Q_SLOTS:
+    protected Q_SLOTS:
         void newEntries(const QList< Nepomuk::Query::Result > &entries);
 
     protected:
-        bool sourceRequestEvent(const QString &name);
-
-    private:
+        virtual bool sourceRequestEvent(const QString &name);
+        MetadataEngineprivate* d;
         QString icon(const QStringList &types);
         void addResource(Nepomuk::Resource resource);
-        MetadataEngineprivate* d;
+
 };
 
 K_EXPORT_PLASMA_DATAENGINE(metadataengine, MetadataEngine)
