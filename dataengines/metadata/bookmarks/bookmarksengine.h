@@ -18,8 +18,8 @@
 */
 
 
-#ifndef METADATAENGINE_H
-#define METADATAENGINE_H
+#ifndef BOOKMARKSENGINE_H
+#define BOOKMARKSENGINE_H
 
 #include <plasma/dataengine.h>
 
@@ -31,15 +31,15 @@ namespace Nepomuk
     }
 }
 
-class MetadataEngineprivate;
+class BookmarksEnginePrivate;
 
-class MetadataEngine : public Plasma::DataEngine
+class BookmarksEngine : public Plasma::DataEngine
 {
     Q_OBJECT
 
     public:
-        MetadataEngine(QObject* parent, const QVariantList& args);
-        ~MetadataEngine();
+        BookmarksEngine(QObject* parent, const QVariantList& args);
+        ~BookmarksEngine();
         QStringList sources() const;
         virtual void init();
 
@@ -50,12 +50,12 @@ class MetadataEngine : public Plasma::DataEngine
 
     protected:
         virtual bool sourceRequestEvent(const QString &name);
-        MetadataEngineprivate* d;
+        BookmarksEnginePrivate* d;
         QString icon(const QStringList &types);
         void addResource(Nepomuk::Resource resource);
 
 };
 
-K_EXPORT_PLASMA_DATAENGINE(metadataengine, MetadataEngine)
+K_EXPORT_PLASMA_DATAENGINE(bookmarksengine, BookmarksEngine)
 
 #endif

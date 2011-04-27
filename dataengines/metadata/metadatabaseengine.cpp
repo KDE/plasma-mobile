@@ -43,7 +43,7 @@
 
 #define RESULT_LIMIT 10
 
-class MetadataEngineprivate
+class MetadataBaseEnginePrivate
 {
 public:
     Nepomuk::Query::QueryServiceClient *queryClient;
@@ -53,17 +53,17 @@ public:
 };
 
 
-MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
+MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent)
 {
     Q_UNUSED(args);
-    d = new MetadataEngineprivate;
+    d = new MetadataBaseEnginePrivate;
     d->queryClient = 0;
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
     init();
 }
 
-QString MetadataEngine::icon(const QStringList &types)
+QString MetadataBaseEngine::icon(const QStringList &types)
 {
     if (!d->icons.size()) {
         // Add fallback icons here from generic to specific
@@ -101,7 +101,7 @@ QString MetadataEngine::icon(const QStringList &types)
     return _icon;
 }
 
-void MetadataEngine::init()
+void MetadataBaseEngine::init()
 {
     kDebug() << "init.";
     d->queryClient = new Nepomuk::Query::QueryServiceClient(this);
@@ -109,23 +109,23 @@ void MetadataEngine::init()
             this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
 }
 
-MetadataEngine::~MetadataEngine()
+MetadataBaseEngine::~MetadataBaseEngine()
 {
     delete d;
 }
 
-bool MetadataEngine::query(Nepomuk::Query::Query &searchQuery)
+bool MetadataBaseEngine::query(Nepomuk::Query::Query &searchQuery)
 {
   searchQuery.setLimit(RESULT_LIMIT);
   return d->queryClient->query(searchQuery);
 }
 
-QStringList MetadataEngine::sources() const
+QStringList MetadataBaseEngine::sources() const
 {
     return QStringList();
 }
 
-bool MetadataEngine::sourceRequestEvent(const QString &name)
+bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
 {
     QString massagedName = name;
     foreach (const QString &s, Plasma::DataEngine::sources()) {
@@ -161,7 +161,7 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
     }
 }
 
-void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
+void MetadataBaseEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
 {
     foreach (Nepomuk::Query::Result res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
@@ -172,7 +172,7 @@ void MetadataEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
     scheduleSourcesUpdated();
 }
 
-void MetadataEngine::addResource(Nepomuk::Resource resource)
+void MetadataBaseEngine::addResource(Nepomuk::Resource resource)
 {
     QString uri = resource.resourceUri().toString();
     // If we didn't explicitely search for a nepomuk:// url, let's add the query
