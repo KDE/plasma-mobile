@@ -26,6 +26,9 @@
 namespace Nepomuk
 {
     class Resource;
+    namespace Query {
+        class Query;
+    }
 }
 
 class MetadataEngineprivate;
@@ -39,6 +42,8 @@ class MetadataEngine : public Plasma::DataEngine
         ~MetadataEngine();
         QStringList sources() const;
         virtual void init();
+
+        virtual bool query(Nepomuk::Query::Query &searchQuery);
 
     protected Q_SLOTS:
         void newEntries(const QList< Nepomuk::Query::Result > &entries);

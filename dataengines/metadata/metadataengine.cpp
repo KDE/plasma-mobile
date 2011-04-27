@@ -114,6 +114,12 @@ MetadataEngine::~MetadataEngine()
     delete d;
 }
 
+bool MetadataEngine::query(Nepomuk::Query::Query &searchQuery)
+{
+  searchQuery.setLimit(RESULT_LIMIT);
+  return d->queryClient->query(searchQuery);
+}
+
 QStringList MetadataEngine::sources() const
 {
     return QStringList();
@@ -151,10 +157,7 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
         Nepomuk::Query::LiteralTerm nepomukTerm(name);
         fileQuery.setTerm(nepomukTerm);
         //fileQuery.addIncludeFolder(KUrl("/"), true);
-        fileQuery.setLimit(RESULT_LIMIT);
-
-        d->queryClient->query(fileQuery);
-        return true;
+        return query(fileQuery);
     }
 }
 
