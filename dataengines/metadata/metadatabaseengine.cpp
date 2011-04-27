@@ -38,7 +38,7 @@
 #include <nepomuk/literalterm.h>
 #include <nepomuk/resourcetypeterm.h>
 
-#include "metadataengine.h"
+#include "metadatabaseengine.h"
 #include <stdio.h>
 
 #define RESULT_LIMIT 10
@@ -61,6 +61,11 @@ MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args
     d->queryClient = 0;
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
     init();
+}
+
+void MetadataBaseEngine::setQuery(const QString& q)
+{
+    d->query = q;
 }
 
 QString MetadataBaseEngine::icon(const QStringList &types)
@@ -281,4 +286,4 @@ void MetadataBaseEngine::addResource(Nepomuk::Resource resource)
     setData(source, "properties", _properties);
 }
 
-#include "metadataengine.moc"
+#include "metadatabaseengine.moc"

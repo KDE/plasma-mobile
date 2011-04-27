@@ -1,28 +1,17 @@
-project(metadataengine)
-
-
-find_package(Nepomuk REQUIRED)
-
-find_package(Soprano)
-  macro_log_feature(Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net"
-  TRUE "${SOPRANO_MIN_VERSION}" "Soprano is needed for Nepomuk")
-
-
-
-include(SopranoAddOntology)
 
 include_directories(
-                    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/..
    )
 
-set(metadataengine_srcs
-    metadataengine.cpp
+set(bookmarksdataengine_srcs
+    ../metadatabaseengine.cpp
     bookmarksengine.cpp
 )
 
-kde4_add_plugin(plasma_engine_active_metadata ${metadataengine_srcs})
+kde4_add_plugin(plasma_engine_active_bookmarks ${bookmarksdataengine_srcs})
 
-target_link_libraries(plasma_engine_active_metadata
+target_link_libraries(plasma_engine_active_bookmarks
     ${KDE4_KDECORE_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4_KIO_LIBS}
@@ -32,6 +21,6 @@ target_link_libraries(plasma_engine_active_metadata
     ${SOPRANO_CLIENT_LIBRARIES}
 )
 
-install(TARGETS plasma_engine_active_metadata DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-engine-active-metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(TARGETS plasma_engine_active_bookmarks DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES plasma-engine-active-bookmarks.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 

@@ -21,39 +21,19 @@
 #ifndef BOOKMARKSENGINE_H
 #define BOOKMARKSENGINE_H
 
-#include <plasma/dataengine.h>
-
-namespace Nepomuk
-{
-    class Resource;
-    namespace Query {
-        class Query;
-    }
-}
+#include "metadatabaseengine.h"
 
 class BookmarksEnginePrivate;
 
-class BookmarksEngine : public Plasma::DataEngine
+class BookmarksEngine : public MetadataBaseEngine
 {
     Q_OBJECT
 
     public:
         BookmarksEngine(QObject* parent, const QVariantList& args);
         ~BookmarksEngine();
-        QStringList sources() const;
-        virtual void init();
-
-        virtual bool query(Nepomuk::Query::Query &searchQuery);
-
-    protected Q_SLOTS:
-        void newEntries(const QList< Nepomuk::Query::Result > &entries);
-
     protected:
         virtual bool sourceRequestEvent(const QString &name);
-        BookmarksEnginePrivate* d;
-        QString icon(const QStringList &types);
-        void addResource(Nepomuk::Resource resource);
-
 };
 
 K_EXPORT_PLASMA_DATAENGINE(bookmarksengine, BookmarksEngine)

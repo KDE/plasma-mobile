@@ -21,7 +21,7 @@
 #ifndef METADATAENGINE_H
 #define METADATAENGINE_H
 
-#include <../metadatabaseengine.h>
+#include "../metadatabaseengine.h"
 
 namespace Nepomuk
 {
@@ -30,8 +30,6 @@ namespace Nepomuk
         class Query;
     }
 }
-
-class MetadataEnginePrivate;
 
 class MetadataEngine : public MetadataBaseEngine
 {
