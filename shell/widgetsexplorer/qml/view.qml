@@ -114,6 +114,9 @@ Rectangle {
                     detailsEmail.text = "<b>Email:</b> "+email
                     detailsLicense.text = "<b>License:</b> "+license
 
+                    var pos = mapToItem(widgetsExplorer, 0, 0)
+                    infoPanel.x = pos.x
+                    infoPanel.y = pos.y
                     infoPanel.state = "shown"
                 }
             }
@@ -267,6 +270,10 @@ Rectangle {
                     scale: 1
                 }
                 PropertyChanges {
+                    target: infoPanel;
+                    visible: true
+                }
+                PropertyChanges {
                     target: appletsView
                     anchors.leftMargin: infoPanel.width
                 }
@@ -285,6 +292,10 @@ Rectangle {
                 PropertyChanges {
                     target: infoPanel;
                     scale: 0
+                }
+                PropertyChanges {
+                    target: infoPanel;
+                    visible: false
                 }
                 PropertyChanges {
                     target: appletsView
