@@ -34,16 +34,8 @@
 #include <nepomuk/resourcetypeterm.h>
 
 #include "metadataengine.h"
-/*
-class MetadataEnginePrivate
-{
-public:
-    Nepomuk::Query::QueryServiceClient *queryClient;
-    QString query;
-    QSize previewSize;
-    QHash<QString, QString> icons;
-};
-*/
+
+
 MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
     : MetadataBaseEngine(parent, args)
 {

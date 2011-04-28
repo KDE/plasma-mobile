@@ -38,6 +38,9 @@
 #include "bookmarksengine.h"
 #include "../metadatabaseengine.h"
 
+// Ontos
+#include "bookmark.h"
+#include "personcontact.h"
 
 
 BookmarksEngine::BookmarksEngine(QObject* parent, const QVariantList& args)
@@ -51,13 +54,13 @@ BookmarksEngine::~BookmarksEngine()
 
 bool BookmarksEngine::sourceRequestEvent(const QString &name)
 {
-    // Let's try a literal query ...
-    kDebug() << "async search for query:" << name;
-    Nepomuk::Query::Query fileQuery;
-    Nepomuk::Query::LiteralTerm nepomukTerm(name);
-    fileQuery.setTerm(nepomukTerm);
-    //fileQuery.addIncludeFolder(KUrl("/"), true);
-    return query(fileQuery);
+    //Nepomuk::Types::Class bookmarkClass = Nepomuk::Types::Class(Nepomuk::Bookmark::resourceTypeUri());
+    //Nepomuk::Types::Class bookmarkClass = Nepomuk::Types::Class(Nepomuk::PersonContact::resourceTypeUri());
+    Nepomuk::Query::ResourceTypeTerm rtt = Nepomuk::Query::ResourceTypeTerm(bookmarkClass);
+
+    Nepomuk::Query::Query bookmarkQuery;
+    bookmarkQuery.setTerm(rtt);
+    return query(bookmarkQuery);
 }
 
 
