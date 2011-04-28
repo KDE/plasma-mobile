@@ -43,7 +43,7 @@
 #include "metadatabaseengine.h"
 #include <stdio.h>
 
-#define RESULT_LIMIT 10
+#define RESULT_LIMIT 24
 
 class MetadataBaseEnginePrivate
 {

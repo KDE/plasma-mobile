@@ -51,7 +51,6 @@ BookmarksEngine::~BookmarksEngine()
 
 bool BookmarksEngine::sourceRequestEvent(const QString &name)
 {
-    
     if (name.startsWith("add:")) {
         QString massagedName = name;
         QUrl url = QUrl(massagedName.remove("add:"));
