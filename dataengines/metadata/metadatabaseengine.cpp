@@ -20,6 +20,8 @@
 // Nepomuk
 #include <Nepomuk/Resource>
 #include <Nepomuk/Variant>
+//#include <Nepomuk/Query/QueryParser>
+#include <nepomuk/queryparser.h>
 #include <Nepomuk/Query/ResourceTerm>
 #include <Nepomuk/Tag>
 
@@ -91,7 +93,14 @@ QString MetadataBaseEngine::icon(const QStringList &types)
         d->icons["Document"] = QString("kword");
         d->icons["PersonContact"] = QString("x-office-contact");
 
+        // Filesystem
+        d->icons["Folder"] = QString("folder");
+        d->icons["Website"] = QString("text-html");
+
         // ... add some more
+        // Filesystem
+        d->icons["Bookmark"] = QString("bookmarks");
+        d->icons["BookmarksFolder"] = QString("bookmarks-organize");
     }
 
     // keep searching until the most specific icon is found
@@ -158,11 +167,12 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
     } else {
         // Let's try a literal query ...
         kDebug() << "async search for query:" << name;
-        Nepomuk::Query::Query fileQuery;
-        Nepomuk::Query::LiteralTerm nepomukTerm(name);
-        fileQuery.setTerm(nepomukTerm);
+        Nepomuk::Query::Query _query = Nepomuk::Query::QueryParser::parseQuery(name);
+        //Nepomuk::Query::LiteralTerm nepomukTerm(name);
+        //_query.setTerm(nepomukTerm);
         //fileQuery.addIncludeFolder(KUrl("/"), true);
-        return query(fileQuery);
+        //return query(fileQuery);
+        return query(_query);
     }
 }
 

@@ -54,8 +54,8 @@ BookmarksEngine::~BookmarksEngine()
 
 bool BookmarksEngine::sourceRequestEvent(const QString &name)
 {
-    //Nepomuk::Types::Class bookmarkClass = Nepomuk::Types::Class(Nepomuk::Bookmark::resourceTypeUri());
-    //Nepomuk::Types::Class bookmarkClass = Nepomuk::Types::Class(Nepomuk::PersonContact::resourceTypeUri());
+    Nepomuk::Types::Class bookmarkClass = Nepomuk::Types::Class(Nepomuk::Bookmark::resourceTypeUri());
+    //Nepomuk::Types::Class bookmarkClass = Nepomuk::Types::Class(Nepomuk::PersonContact::resourceTypeUri()); // for testing
     Nepomuk::Query::ResourceTypeTerm rtt = Nepomuk::Query::ResourceTypeTerm(bookmarkClass);
 
     Nepomuk::Query::Query bookmarkQuery;
