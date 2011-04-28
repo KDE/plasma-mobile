@@ -24,9 +24,6 @@
 #include <Nepomuk/Query/Query>
 #include <Nepomuk/Tag>
 
-// Ontologies
-#include "bookmark.h"
-
 // Query API
 #include <nepomuk/andterm.h>
 #include <nepomuk/orterm.h>
@@ -38,7 +35,7 @@
 #include "bookmarksengine.h"
 #include "../metadatabaseengine.h"
 
-// Ontos
+// Ontologies
 #include "bookmark.h"
 #include "personcontact.h"
 
