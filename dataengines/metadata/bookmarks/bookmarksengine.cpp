@@ -61,9 +61,9 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
         b.addBookmarks( url );
         kDebug() << "Added Bookmark:" << massagedName;
     }
-    Nepomuk::Types::Class bookmarkClass = Nepomuk::Types::Class(Nepomuk::Bookmark::resourceTypeUri());
+    Nepomuk::Types::Class bookmarkClass(Nepomuk::Bookmark::resourceTypeUri());
     //Nepomuk::Types::Class bookmarkClass = Nepomuk::Types::Class(Nepomuk::PersonContact::resourceTypeUri()); // for testing
-    Nepomuk::Query::ResourceTypeTerm rtt = Nepomuk::Query::ResourceTypeTerm(bookmarkClass);
+    Nepomuk::Query::ResourceTypeTerm rtt(bookmarkClass);
 
     Nepomuk::Query::Query bookmarkQuery;
     bookmarkQuery.setTerm(rtt);
