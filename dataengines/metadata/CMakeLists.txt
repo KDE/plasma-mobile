@@ -1,5 +1,7 @@
 project(metadataengine)
 
+# disable deprecated libnepomuk stuff for less compiler warnings
+add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 
 find_package(Nepomuk REQUIRED)
 
