@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2010 Lim Yuen Hoe <yuenhoe@hotmail.com>                     *
+ *   Copyright 2011 Davide Bettio <bettio@kde.org>                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -22,45 +23,35 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: systrayPanel;
-    state: "passive";
+    state: "passive"
+    height: handle.height + handle.y;
+    width:  parent.width;
 
-    PlasmaCore.FrameSvgItem {
-        id: hideButtonBackground
-        anchors.top: systrayBackground.bottom
-        anchors.topMargin: -10
-        anchors.horizontalCenter: systrayBackground.horizontalCenter
-        width: 128
-        height: 58
-        imagePath: "widgets/background"
-        enabledBorders: "LeftBorder|RightBorder|BottomBorder"
-        opacity: systrayPanel.state == "active"?1:0
-
-        Behavior on opacity {
-            NumberAnimation { duration: 500 }
-        }
-
-        PlasmaCore.SvgItem {
-            anchors.centerIn: parent
-            /*anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.bottom*/
-            width: 48
-            height: 48
-
-            svg: PlasmaCore.Svg {
-                imagePath: "widgets/arrows"
-            }
-            elementId: "up-arrow"
-            MouseArea {
-                anchors.fill: parent
-                anchors.bottomMargin: -16
-                anchors.leftMargin: -16
-                anchors.rightMargin: -16
-                onClicked: {
-                    systrayPanel.state = "passive"
+    Rectangle {
+        id: handle
+        anchors.right: parent.margins.right
+        width: 20
+        height: 40
+        z: systrayBackground.z + 1
+        MouseArea {
+            id: handleArea;
+            anchors.fill: parent;
+            onReleased: {
+                if ((systrayPanel.state == "passive") && ((handle.y > 200) || (handle.y == 0))){
+                    systrayPanel.state = "active";
+                }else{
+                    //horrible hack to force a change of state when we change from passive to passive
+                    systrayPanel.state = "tmp-passive";
+                    systrayPanel.state = "passive";
                 }
             }
+            drag.target: parent
+            drag.axis: Drag.YAxis
+            drag.minimumY: 0
+            drag.maximumY: systrayPanel.parent.height - parent.height
         }
     }
+    
     PlasmaCore.FrameSvgItem {
         id: systrayBackground
         anchors.fill: systrayPanel
@@ -85,7 +76,7 @@ Item {
 
     onContainmentChanged: {
         containment.parent = containmentParent
-        resizeTimer.running = true
+        timer.running = true
     }
     onHeightChanged: resizeTimer.running = true
     onWidthChanged: resizeTimer.running = true
@@ -113,8 +104,8 @@ Item {
     function resizeContainment()
     {
         containment.x = 0
-        containment.y = 0
-        containment.height = containmentParent.height
+        containment.y =  containmentParent.height - 35
+        containment.height = 35
         containment.width = containmentParent.width
     }
 
@@ -122,25 +113,15 @@ Item {
         State {
             name: "active";
             PropertyChanges {
-                target: systrayPanel;
-                height: 100;
-                width: parent.width;
-            }
-            PropertyChanges {
-                target: systrayPanelArea;
-                z : 0;
+                target: handle
+                y: systrayPanel.parent.height - handle.height;
             }
         },
         State {
             name: "passive";
             PropertyChanges {
-                target: systrayPanel;
-                height: 40;
-                width: parent.width;
-            }
-            PropertyChanges {
-                target: systrayPanelArea;
-                z : 500;
+                target: handle
+                y: 0
             }
         }
     ]
@@ -148,24 +129,14 @@ Item {
 
     transitions: [
         Transition {
-            from: "passive"
-            to: "active"
             reversible: true
             SequentialAnimation {
                 NumberAnimation {
-                    properties: "x, width, height"
+                    properties: "y, height"
                     duration: 500
                     easing.type: Easing.InOutQuad
                 }
             }
         }
     ]
-    MouseArea {
-        id: systrayPanelArea;
-        anchors.fill: parent;
-        onClicked: {
-            systrayPanel.state = (systrayPanel.state == "active") ? "passive" : "active";
-        }
-        z: 500;
-    }
 }
