@@ -28,6 +28,7 @@ namespace Nepomuk
     class Resource;
     namespace Query {
         class Query;
+        class Result;
     }
 }
 

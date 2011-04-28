@@ -21,17 +21,12 @@
 #include <Nepomuk/Resource>
 #include <Nepomuk/Variant>
 #include <Nepomuk/Query/ResourceTerm>
+#include <Nepomuk/Query/Query>
 #include <Nepomuk/Tag>
 
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Query/FileQuery>
-#include <Nepomuk/Query/QueryServiceClient>
-#include <Nepomuk/Query/Result>
+// Ontologies
 
-#include <soprano/queryresultiterator.h>
-#include <soprano/model.h>
-#include <soprano/vocabulary.h>
-
+// Query API
 #include <nepomuk/andterm.h>
 #include <nepomuk/orterm.h>
 #include <nepomuk/comparisonterm.h>
@@ -39,10 +34,7 @@
 #include <nepomuk/resourcetypeterm.h>
 
 #include "metadataengine.h"
-#include <stdio.h>
-
-#define RESULT_LIMIT 10
-
+/*
 class MetadataEnginePrivate
 {
 public:
@@ -51,13 +43,11 @@ public:
     QSize previewSize;
     QHash<QString, QString> icons;
 };
-
-
+*/
 MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
     : MetadataBaseEngine(parent, args)
 {
 }
-
 
 MetadataEngine::~MetadataEngine()
 {

@@ -21,26 +21,23 @@
 #include <Nepomuk/Resource>
 #include <Nepomuk/Variant>
 #include <Nepomuk/Query/ResourceTerm>
+#include <Nepomuk/Query/Query>
 #include <Nepomuk/Tag>
 
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Query/FileQuery>
-#include <Nepomuk/Query/QueryServiceClient>
-#include <Nepomuk/Query/Result>
+// Ontologies
+#include "bookmark.h"
 
-#include <soprano/queryresultiterator.h>
-#include <soprano/model.h>
-#include <soprano/vocabulary.h>
-
+// Query API
 #include <nepomuk/andterm.h>
 #include <nepomuk/orterm.h>
 #include <nepomuk/comparisonterm.h>
 #include <nepomuk/literalterm.h>
 #include <nepomuk/resourcetypeterm.h>
 
+// Own stuff
 #include "bookmarksengine.h"
 #include "../metadatabaseengine.h"
-#include <stdio.h>
+
 
 
 BookmarksEngine::BookmarksEngine(QObject* parent, const QVariantList& args)
