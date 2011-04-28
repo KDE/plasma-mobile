@@ -55,10 +55,10 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
     if (name.startsWith("add:")) {
         QString massagedName = name;
         QUrl url = QUrl(massagedName.remove("add:"));
-        Nepomuk::Resource r = Nepomuk::Resource(url);
-        Nepomuk::Bookmark b = Nepomuk::Bookmark(r);
+        Nepomuk::Bookmark b;
         b.setLabel("Active Bookmark!");
         b.setDescription(massagedName);
+        b.addBookmarks( url );
         kDebug() << "Added Bookmark:" << massagedName;
     }
     Nepomuk::Types::Class bookmarkClass = Nepomuk::Types::Class(Nepomuk::Bookmark::resourceTypeUri());
