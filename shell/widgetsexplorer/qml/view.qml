@@ -6,7 +6,7 @@ import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Rectangle {
-    color: Qt.rgba(0,0,0,0.4)
+    color: Qt.rgba(0,0,0,0.7)
     id: widgetsExplorer
     objectName: "widgetsExplorer"
     state: "horizontal"
@@ -114,6 +114,9 @@ Rectangle {
                     detailsEmail.text = "<b>Email:</b> "+email
                     detailsLicense.text = "<b>License:</b> "+license
 
+                    var pos = mapToItem(widgetsExplorer, 0, -infoPanel.height/2)
+                    infoPanel.x = pos.x
+                    infoPanel.y = pos.y
                     infoPanel.state = "shown"
                 }
             }
@@ -263,8 +266,40 @@ Rectangle {
                            0
                 }
                 PropertyChanges {
+                    target: infoPanel;
+                    scale: 1
+                }
+                PropertyChanges {
+                    target: infoPanel;
+                    visible: true
+                }
+                PropertyChanges {
                     target: appletsView
                     anchors.leftMargin: infoPanel.width
+                }
+            },
+            State {
+                name: "hidden"
+                PropertyChanges {
+                    target: infoPanel;
+                    x: 0
+
+                    y: if (widgetsExplorer.state == "vertical")
+                           infoPanel.parent.height - infoPanel.height
+                       else
+                           0
+                }
+                PropertyChanges {
+                    target: infoPanel;
+                    scale: 0
+                }
+                PropertyChanges {
+                    target: infoPanel;
+                    visible: false
+                }
+                PropertyChanges {
+                    target: appletsView
+                    anchors.leftMargin: 0
                 }
             }
         ]
@@ -276,6 +311,11 @@ Rectangle {
 
                 NumberAnimation {
                     properties: "x,y";
+                    duration: 300;
+                    easing.type: "OutQuad";
+                }
+                NumberAnimation {
+                    properties: "scale";
                     duration: 300;
                     easing.type: "OutQuad";
                 }
