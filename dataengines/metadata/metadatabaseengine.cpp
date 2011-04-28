@@ -62,7 +62,7 @@ MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args
     d = new MetadataBaseEnginePrivate;
     d->queryClient = 0;
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
-    init();
+    //init();
 }
 
 void MetadataBaseEngine::setQuery(const QString& q)

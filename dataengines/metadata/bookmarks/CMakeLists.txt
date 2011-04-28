@@ -30,6 +30,7 @@ nepomuk_add_ontology_classes(
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nco#PersonContact"
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Website"
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark"
+  "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmarks"
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#BookmarkFolder"
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Visual"
