@@ -98,6 +98,7 @@ Rectangle {
         id: appletsView
         property string currentPlugin
         model: PlasmaCore.SortFilterModel {
+            id:appletsFilter
             sourceModel: myModel
         }
 
@@ -117,10 +118,12 @@ Rectangle {
                     detailsEmail.text = "<b>Email:</b> "+email
                     detailsLicense.text = "<b>License:</b> "+license
 
-                    var pos = mapToItem(widgetsExplorer, 0, -infoPanel.height/2)
-                    infoPanel.x = pos.x
-                    infoPanel.y = pos.y
-                    infoPanel.state = "shown"
+                    if (infoPanel.state == "hidden") {
+                        var pos = mapToItem(widgetsExplorer, 0, -infoPanel.height/2)
+                        infoPanel.x = pos.x
+                        infoPanel.y = pos.y
+                        infoPanel.state = "shown"
+                    }
                 }
             }
         }
