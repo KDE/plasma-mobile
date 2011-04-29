@@ -71,7 +71,7 @@ void WindowStrip::init()
     m_desktop = 0;
     foreach (const WId &wid, m_windows.keys()) {
         KWindowInfo winInfo = KWindowSystem::windowInfo(wid, NET::WMWindowType);
-        if (winInfo.windowType(NET::AllTypesMask)) {
+        if (winInfo.windowType(NET::AllTypesMask) == NET::Desktop) {
             m_desktop = wid;
             kDebug() << "Found Desktop!";
         }

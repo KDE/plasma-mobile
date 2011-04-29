@@ -25,8 +25,8 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
-    width: 200
-    height: 300
+    width: 600
+    height: 240
 
     property string locked: "T0k4m4k5"
     signal lockedChanged();
