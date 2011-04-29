@@ -26,6 +26,8 @@
 #include <Plasma/Svg>
 #include <QtCore/QTimer>
 
+class QDeclarativeItem;
+
 class WindowStrip : public Plasma::DeclarativeWidget
 {
     Q_OBJECT
@@ -50,12 +52,15 @@ private Q_SLOTS:
     void showThumbnails();
     void hideThumbnails();
     void lockChanged();
+    void windowsPositionsChanged();
+    void scrollChanged();
 
 private:
     QString m_thumbnailRects;
     QHash<WId, QRect> m_windows;
     WId m_desktop;
     QTimer m_timer;
+    QDeclarativeItem *m_windowFlicker;
 };
 
 #endif

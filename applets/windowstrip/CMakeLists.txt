@@ -17,7 +17,7 @@ set(windowstrip_SRCS
 
 kde4_add_plugin(plasma_applet_windowstrip ${windowstrip_SRCS})
 target_link_libraries(plasma_applet_windowstrip
-                      ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS})
+                      ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTDECLARATIVE_LIBRARY})
 
 
 install(DIRECTORY qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/org.kde.windowstrip)

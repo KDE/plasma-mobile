@@ -22,6 +22,8 @@
 
 #include <QtGui/QGraphicsLinearLayout>
 #include <QDeclarativeComponent>
+#include <QDeclarativeItem>
+#include <QGraphicsView>
 
 #include <Plasma/Svg>
 #include <Plasma/WindowEffects>
@@ -36,7 +38,10 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     setThumbnailRects("Tokamak 5");
     setQmlPath(KStandardDirs::locate("data", "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
 
-    connect(rootObject(), SIGNAL(lockedChanged()), SLOT(lockChanged()));
+    connect(rootObject(), SIGNAL(lockedChanged()), this, SLOT(lockChanged()));
+    m_windowFlicker = rootObject()->findChild<QDeclarativeItem*>("windowFlicker");
+    connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()), this, SLOT(windowsPositionsChanged()));
+    connect(m_windowFlicker, SIGNAL(contentXChanged()), this, SLOT(scrollChanged()));
 }
 
 WindowStrip::~WindowStrip()
@@ -108,6 +113,58 @@ QString WindowStrip::thumbnailRects() const
 void WindowStrip::lockChanged()
 {
     kDebug() << "Hmmmmm ... " << mainComponent()->property("locked");
+}
+
+void WindowStrip::scrollChanged()
+{
+    QVariant data = m_windowFlicker->property("contentX");
+    //kWarning()<<"new X"<<data;
+
+    QList< WId > windows = KWindowSystem::windows();
+    int x, y, w, h, s;
+    x = -data.value<int>();
+    y = 20;
+    w = 200;
+    h = 400;
+    s = 10;
+    //QHash<WId>
+    
+    foreach (const WId wid, windows) {
+        m_windows[wid] = QRect(x, y, w, h);
+        x = x + w + s;
+        //kDebug() << "Window ID:" << w << m_windows[wid] << QString::number(wid);
+    }
+    
+    m_desktop = static_cast<Plasma::Applet *>(parentItem())->view()->effectiveWinId();
+    
+    showThumbnails();
+}
+
+void WindowStrip::windowsPositionsChanged()
+{
+    QVariant data = m_windowFlicker->property("childrenPositions");
+    QList<QVariant> thumbnailsPositions = data.value<QList<QVariant> >();
+    kDebug() << "window positions" << thumbnailsPositions;
+    /*m_thumbnailRects.clear();
+    foreach (QVariant pos, thumbnailsPositions) {
+         << QRect(pos.data<int>(), 0, 200, 100);
+    }*/
+
+
+    QList< WId > windows = KWindowSystem::windows();
+    int x, y, w, h, s;
+    x = 20;
+    y = 20;
+    w = 200;
+    h = 400;
+    s = 10;
+    //QHash<WId>
+    
+    foreach (const WId wid, windows) {
+        m_windows[wid] = QRect(x, y, w, h);
+        x = x + w + s;
+        kDebug() << "Window ID:" << w << m_windows[wid] << QString::number(wid);
+    }
 }
 
 #include "windowstrip.moc"

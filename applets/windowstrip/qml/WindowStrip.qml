@@ -51,25 +51,27 @@ Item {
 
     Flickable {
         id: windowFlicker
+        objectName: "windowFlicker"
         interactive: true
-        contentHeight: windowRow.height
-        contentWidth: windowRow.width
+        contentHeight: windowsRow.height
+        contentWidth: windowsRow.width
         anchors.fill: parent
+        
 
         Row {
             // FIX: connect to this row from C++, xChanged()
-            id: windowRow
-            objectName: "windowRow"
+            id: windowsRow
+            objectName: "windowsRow"
             property int mycounter;
             property variant childrenPositions
 
             onChildrenChanged: {
                 var childrenPositions = Array();
-                for (var i = 0; i < children.length; i++) {
-                    print("childx"+children[i].x)
-                    childrenPositions[i] = children[i].x
-                }
-                windowRow.childrenPositions = childrenPositions
+                /*for (var i = 0; i < children.length; i++) {
+                    var winId = children[i].winId
+                    childrenPositions[winId] = children[i].x
+                }*/
+                windowsRow.childrenPositions = childrenPositions
             }
             // add here: onChildrenChanged:, iterate over it, build a list of rectangles
             // assign only after list is complete to save updates
@@ -90,6 +92,7 @@ Item {
                     id: windowDelegate
                     width: 200
                     height: 200
+                    property string winId: DataEngineSource
 
                     Rectangle {
                         opacity: .4
