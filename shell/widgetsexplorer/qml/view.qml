@@ -104,6 +104,7 @@ Rectangle {
             MobileComponents.IconDelegate {
                 icon: decoration
                 text: display
+                textColor: "white"
                 onClicked: {
                     currentPlugin = pluginName
                     detailsIcon.icon = decoration

@@ -31,6 +31,7 @@ Item {
     property string text
     property variant icon
     signal clicked
+    property alias textColor: iconText.color
 
     PlasmaWidgets.IconWidget {
         anchors.horizontalCenter: parent.horizontalCenter
@@ -39,6 +40,7 @@ Item {
         icon: main.icon
     }
     Text {
+        id: iconText
         y: 67
         width: parent.width -16
         wrapMode:Text.Wrap
