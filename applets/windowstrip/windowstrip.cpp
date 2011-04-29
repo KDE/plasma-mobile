@@ -48,18 +48,27 @@ void WindowStrip::init()
     QList< WId > windows = KWindowSystem::windows();
 
     int x, y, w, h, s;
-    x = 50;
-    y = 50;
+    x = 20;
+    y = 20;
     w = 200;
-    h = 200;
-    s = 20;
+    h = 400;
+    s = 10;
     foreach (const WId wid, windows) {
         m_windows[wid] = QRect(x, y, w, h);
         x = x + w + s;
         kDebug() << "Window ID:" << w << m_windows[wid];
     }
 
-    QTimer::singleShot(5000, this, SLOT(hideThumbnails()));
+    m_desktop = 0;
+    foreach (const WId &wid, m_windows.keys()) {
+        KWindowInfo winInfo = KWindowSystem::windowInfo(wid, NET::WMWindowType);
+        if (winInfo.windowType(NET::AllTypesMask)) {
+            m_desktop = wid;
+            kDebug() << "Found Desktop!";
+        }
+    }
+    //kDebug() << "Desktop is:" << id != 0;
+    QTimer::singleShot(20000, this, SLOT(hideThumbnails()));
     showThumbnails();
 }
 
@@ -79,16 +88,13 @@ QGraphicsWidget* WindowStrip::graphicsWidget()
 
 void WindowStrip::showThumbnails()
 {
-    Plasma::WindowEffects::showWindowThumbnails(35651702, m_windows.keys(), m_windows.values());
+    Plasma::WindowEffects::showWindowThumbnails(m_desktop, m_windows.keys(), m_windows.values());
     kDebug() << "/// all shown" << m_windows.keys() << m_windows.values();
 }
 
 void WindowStrip::hideThumbnails()
 {
-    QList<WId> w;
-    QList<QRect> r;
-    //Plasma::WindowEffects::showWindowThumbnails(35651702, w, r);
-    Plasma::WindowEffects::showWindowThumbnails(35651702);
+    Plasma::WindowEffects::showWindowThumbnails(m_desktop);
     kDebug() << "/// all hidden ";
 }
 

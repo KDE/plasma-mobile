@@ -43,6 +43,7 @@ private Q_SLOTS:
 private:
     Plasma::DeclarativeWidget* m_widget;
     QHash<WId, QRect> m_windows;
+    WId m_desktop;
     QTimer m_timer;
 };
 
