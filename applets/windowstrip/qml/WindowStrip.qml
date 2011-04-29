@@ -91,7 +91,7 @@ Item {
                 Item {
                     id: windowDelegate
                     width: 200
-                    height: 200
+                    height: 500
                     property string winId: DataEngineSource
 
                     Rectangle {

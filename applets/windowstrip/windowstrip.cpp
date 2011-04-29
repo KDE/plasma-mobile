@@ -90,7 +90,7 @@ void WindowStrip::init()
 void WindowStrip::showThumbnails()
 {
     Plasma::WindowEffects::showWindowThumbnails(m_desktop, m_windows.keys(), m_windows.values());
-    kDebug() << "/// all shown" << m_windows.keys() << m_windows.values();
+    //kDebug() << "/// all shown" << m_windows.keys() << m_windows.values();
 }
 
 void WindowStrip::hideThumbnails()
