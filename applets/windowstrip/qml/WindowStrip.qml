@@ -28,7 +28,8 @@ Item {
     width: 200
     height: 300
 
-    property bool locked: true
+    property string locked: "T0k4m4k5"
+    signal lockedChanged();
 
     PlasmaCore.DataSource {
             id: tasksSource
@@ -77,5 +78,6 @@ Item {
 
     Component.onCompleted: {
         print ("done, yo!");
+        lockChanged();
     }
 }

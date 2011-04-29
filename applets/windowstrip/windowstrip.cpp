@@ -21,6 +21,7 @@
 #include "windowstrip.h"
 
 #include <QtGui/QGraphicsLinearLayout>
+#include <QDeclarativeComponent>
 
 #include <Plasma/Svg>
 #include <Plasma/WindowEffects>
@@ -34,6 +35,8 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     init();
     setThumbnailRects("Tokamak 5");
     setQmlPath(KStandardDirs::locate("data", "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
+
+    connect(mainComponent(), SIGNAL(lockedChanged()), SLOT(lockChanged()));
 }
 
 WindowStrip::~WindowStrip()
@@ -100,6 +103,11 @@ void WindowStrip::setThumbnailRects(const QString &rects)
 QString WindowStrip::thumbnailRects() const
 {
     return m_thumbnailRects;
+}
+
+void WindowStrip::lockChanged()
+{
+    kDebug() << "Hmmmmm ... " << mainComponent()->property("locked");
 }
 
 #include "windowstrip.moc"

@@ -49,6 +49,7 @@ public:
 private Q_SLOTS:
     void showThumbnails();
     void hideThumbnails();
+    void lockChanged();
 
 private:
     QString m_thumbnailRects;
