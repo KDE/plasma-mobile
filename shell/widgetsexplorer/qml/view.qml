@@ -98,7 +98,7 @@ Rectangle {
         id: appletsView
         property string currentPlugin
         model: PlasmaCore.SortFilterModel {
-            id:appletsFilter
+            id: appletsFilter
             sourceModel: myModel
         }
 
