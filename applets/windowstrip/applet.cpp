@@ -18,31 +18,45 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef WINDOWSTRIP_H
-#define WINDOWSTRIP_H
+#include "applet.h"
+#include "windowstrip.h"
 
-#include <Plasma/Applet>
-#include <Plasma/DeclarativeWidget>
+#include <QtGui/QGraphicsLinearLayout>
+
 #include <Plasma/Svg>
-#include <QtCore/QTimer>
+#include <Plasma/WindowEffects>
 
-class WindowStrip : public Plasma::DeclarativeWidget
+#include <KStandardDirs>
+#include <KWindowSystem>
+
+WindowStripApplet::WindowStripApplet(QObject *parent, const QVariantList &args)
+    : Plasma::Applet(parent, args),
+    m_widget(0)
 {
-    Q_OBJECT
-public:
-    // Basic Create/Destroy
-    WindowStrip(QGraphicsWidget* parent);
-    ~WindowStrip();
-    void init();
+    kDebug() << "ctor......";
+}
 
-private Q_SLOTS:
-    void showThumbnails();
-    void hideThumbnails();
+WindowStripApplet::~WindowStripApplet()
+{
+    kDebug() << "dtor......";
+}
 
-private:
-    QHash<WId, QRect> m_windows;
-    WId m_desktop;
-    QTimer m_timer;
-};
+void WindowStripApplet::init()
+{
+    graphicsWidget();
+}
 
-#endif
+QGraphicsWidget* WindowStripApplet::graphicsWidget()
+{
+    kDebug() << "gw......";
+    if (!m_widget) {
+        QGraphicsLinearLayout *l = new QGraphicsLinearLayout(this);
+        m_widget = new WindowStrip(this);
+        l->addItem(m_widget);
+    }
+    return m_widget;
+}
+
+K_EXPORT_PLASMA_APPLET(windowstrip, WindowStripApplet)
+
+#include "applet.moc"

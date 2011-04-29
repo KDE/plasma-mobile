@@ -18,31 +18,28 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef WINDOWSTRIP_H
-#define WINDOWSTRIP_H
+#ifndef WINDOWSTRIPAPPLET_H
+#define WINDOWSTRIPAPPLET_H
 
 #include <Plasma/Applet>
 #include <Plasma/DeclarativeWidget>
 #include <Plasma/Svg>
 #include <QtCore/QTimer>
 
-class WindowStrip : public Plasma::DeclarativeWidget
+class WindowStrip;
+
+class WindowStripApplet : public Plasma::Applet
 {
     Q_OBJECT
 public:
     // Basic Create/Destroy
-    WindowStrip(QGraphicsWidget* parent);
-    ~WindowStrip();
+    WindowStripApplet(QObject *parent, const QVariantList &args);
+    ~WindowStripApplet();
     void init();
-
-private Q_SLOTS:
-    void showThumbnails();
-    void hideThumbnails();
+    QGraphicsWidget* graphicsWidget();
 
 private:
-    QHash<WId, QRect> m_windows;
-    WId m_desktop;
-    QTimer m_timer;
+    WindowStrip* m_widget;
 };
 
 #endif

@@ -12,6 +12,7 @@ include_directories(
 
 set(windowstrip_SRCS
     windowstrip.cpp
+    applet.cpp
 )
 
 kde4_add_plugin(plasma_applet_windowstrip ${windowstrip_SRCS})

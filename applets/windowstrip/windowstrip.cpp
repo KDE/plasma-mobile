@@ -28,11 +28,11 @@
 #include <KStandardDirs>
 #include <KWindowSystem>
 
-WindowStrip::WindowStrip(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
-    m_widget(0)
+WindowStrip::WindowStrip(QGraphicsWidget *parent)
+    : Plasma::DeclarativeWidget(parent)
 {
-    kDebug() << "ctor......";
+    init();
+    setQmlPath(KStandardDirs::locate("data", "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
 }
 
 WindowStrip::~WindowStrip()
@@ -43,8 +43,10 @@ WindowStrip::~WindowStrip()
 
 void WindowStrip::init()
 {
+
+
+    
     kDebug() << "init......";
-    graphicsWidget();
     QList< WId > windows = KWindowSystem::windows();
 
     int x, y, w, h, s;
@@ -72,20 +74,6 @@ void WindowStrip::init()
     showThumbnails();
 }
 
-QGraphicsWidget* WindowStrip::graphicsWidget()
-{
-    kDebug() << "gw......";
-    if (!m_widget) {
-        QGraphicsLinearLayout *l = new QGraphicsLinearLayout(this);
-        m_widget = new Plasma::DeclarativeWidget(this);
-        kDebug() << "PATH: " << KStandardDirs::locate("data", "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml");
-        l->addItem(m_widget);
-
-        m_widget->setQmlPath(KStandardDirs::locate("data", "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
-    }
-    return m_widget;
-}
-
 void WindowStrip::showThumbnails()
 {
     Plasma::WindowEffects::showWindowThumbnails(m_desktop, m_windows.keys(), m_windows.values());
@@ -97,7 +85,5 @@ void WindowStrip::hideThumbnails()
     Plasma::WindowEffects::showWindowThumbnails(m_desktop);
     kDebug() << "/// all hidden ";
 }
-
-K_EXPORT_PLASMA_APPLET(windowstrip, WindowStrip)
 
 #include "windowstrip.moc"
