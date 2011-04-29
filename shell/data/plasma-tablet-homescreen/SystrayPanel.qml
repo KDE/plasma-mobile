@@ -37,7 +37,7 @@ Item {
             id: handleArea;
             anchors.fill: parent;
             onReleased: {
-                if ((systrayPanel.state == "passive") && ((handle.y > 200) || (handle.y == 0))){
+                if ((systrayPanel.state == "passive") && ((handle.y > (systrayPanel.parent.height / 100) * 40) || (handle.y == 0))){
                     systrayPanel.state = "active";
                 }else{
                     //horrible hack to force a change of state when we change from passive to passive
