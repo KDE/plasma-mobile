@@ -70,19 +70,12 @@ Item {
                         if (!searchField.activeFocus) {
                             searchField.forceActiveFocus()
                             searchField.openSoftwareInputPanel();
-                            print('aaa')
                         } else {
                             searchField.focus = false;
                         }
                     }
                     onPressAndHold: searchField.closeSoftwareInputPanel();
                 }
-            }
-            PropertyAnimation {
-                id: hideSearchFieldAnim
-                target: mainFlickable
-                properties: "contentY"
-                duration: 300
             }
             Timer {
                 id: searchTimer
@@ -140,9 +133,10 @@ Item {
         delegate: Item {
             width: appsView.width
             height: appsView.height
-            Grid {
-                anchors.horizontalCenter: parent.horizontalCenter
-                rows: appsView.width > 600 ? 3 : 5
+            Flow {
+                anchors.centerIn: parent
+                width: appsView.width
+                height: childrenRect.height
                 Repeater {
                     model: MobileComponents.PagedProxyModel {
                         sourceModel: main.model
