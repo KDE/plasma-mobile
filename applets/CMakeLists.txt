@@ -6,6 +6,7 @@ add_subdirectory(favorites)
 add_subdirectory(mobileactivityswitcher)
 add_subdirectory(mobilelauncherpanel)
 add_subdirectory(mobilesystemtray)
+add_subdirectory(notifications)
 
 add_subdirectory(qtwebbrowser)
 add_subdirectory(quickdialer)
