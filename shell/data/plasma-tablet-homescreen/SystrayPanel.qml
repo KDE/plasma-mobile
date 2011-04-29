@@ -27,10 +27,16 @@ Item {
     height: handle.height + handle.y;
     width:  parent.width;
 
-    Rectangle {
+    PlasmaCore.Svg {
+        id: arrows
+        imagePath: "widgets/arrows"
+    }
+    
+    PlasmaCore.SvgItem {
         id: handle
+        svg: arrows
         anchors.right: parent.right
-        width: 20
+        width: 40
         height: 40
         z: systrayBackground.z + 1
         MouseArea {
@@ -115,6 +121,7 @@ Item {
             PropertyChanges {
                 target: handle
                 y: systrayPanel.parent.height - handle.height;
+                elementId: "up-arrow"
             }
         },
         State {
@@ -122,6 +129,7 @@ Item {
             PropertyChanges {
                 target: handle
                 y: 0
+                elementId: "down-arrow"
             }
         }
     ]
