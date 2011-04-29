@@ -35,7 +35,7 @@ Item {
 
     PlasmaCore.DataSource {
         id: metadataSource
-        engine: "metadata"
+        engine: "active_metadata"
         interval: 0
 
         onSourceAdded: {

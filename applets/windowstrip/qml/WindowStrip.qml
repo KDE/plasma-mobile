@@ -59,18 +59,22 @@ Item {
         Row {
             // FIX: connect to this row from C++, xChanged()
             id: windowRow
+            objectName: "windowRow"
             property int mycounter;
+            property variant childrenPositions
 
             onChildrenChanged: {
-                print("GAAAAAAAAAAAA someone changed something" + mycounter);
-                mycounter++;
-                for (var ch in children) {
-                    print("Child:" + ch.x)
+                var childrenPositions = Array();
+                for (var i = 0; i < children.length; i++) {
+                    print("childx"+children[i].x)
+                    childrenPositions[i] = children[i].x
                 }
+                windowRow.childrenPositions = childrenPositions
             }
             // add here: onChildrenChanged:, iterate over it, build a list of rectangles
             // assign only after list is complete to save updates
             Repeater {
+
                 model: PlasmaCore.DataModel {
                     dataSource: tasksSource
                 }
