@@ -6,7 +6,7 @@ import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Rectangle {
-    color: Qt.rgba(0,0,0,0.7)
+    color: Qt.rgba(0,0,0,0.82)
     id: widgetsExplorer
     objectName: "widgetsExplorer"
     state: "horizontal"
@@ -97,7 +97,9 @@ Rectangle {
     MobileComponents.IconGrid {
         id: appletsView
         property string currentPlugin
-        model: myModel
+        model: PlasmaCore.SortFilterModel {
+            sourceModel: myModel
+        }
 
 
         delegate: Component {

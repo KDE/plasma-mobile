@@ -34,135 +34,132 @@ Item {
         id:theme
     }
 
-    Flickable {
-        id: mainFlickable
-        interactive:true
-        contentWidth: container.width; contentHeight: container.height
-        anchors.fill: parent
-        clip: true
-        
 
-        Column {
-            id: container
-            width: mainFlickable.width
-            Component.onCompleted: {
-                mainFlickable.contentY = searchFieldContainer.height
-            }
+    Item {
+        id: searchFieldContainer
+        anchors {
+            left: parent.left
+            top: parent.top
+            right: parent.right
+        }
 
-            Item {
-                id: searchFieldContainer
-                width: parent.width
-                height: 128
-                PlasmaCore.FrameSvgItem {
-                    id : background
-                    imagePath: "widgets/lineedit"
-                    prefix: "base"
+        height: 64
+        PlasmaCore.FrameSvgItem {
+            id : background
+            imagePath: "widgets/lineedit"
+            prefix: "base"
 
-                    width: 300
-                    height: 35
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                    TextInput {
-                        id: searchField
-                        anchors.fill:parent
-                        anchors.leftMargin: background.margins.left
-                        anchors.rightMargin: background.margins.right
-                        anchors.topMargin: background.margins.top
-                        anchors.bottomMargin: background.margins.bottom
-                        activeFocusOnPress: false
-                        onTextChanged: {
-                            searchTimer.running = true
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                if (!searchField.activeFocus) {
-                                    searchField.forceActiveFocus()
-                                    searchField.openSoftwareInputPanel();
-                                    print('aaa')
-                                } else {
-                                    searchField.focus = false;
-                                }
-                            }
-                            onPressAndHold: searchField.closeSoftwareInputPanel();
+            width: 300
+            height: 35
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            TextInput {
+                id: searchField
+                anchors.fill:parent
+                anchors.leftMargin: background.margins.left
+                anchors.rightMargin: background.margins.right
+                anchors.topMargin: background.margins.top
+                anchors.bottomMargin: background.margins.bottom
+                activeFocusOnPress: false
+                onTextChanged: {
+                    searchTimer.running = true
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (!searchField.activeFocus) {
+                            searchField.forceActiveFocus()
+                            searchField.openSoftwareInputPanel();
+                            print('aaa')
+                        } else {
+                            searchField.focus = false;
                         }
                     }
-                    PropertyAnimation {
-                        id: hideSearchFieldAnim
-                        target: mainFlickable
-                        properties: "contentY"
-                        duration: 300
-                    }
-                    Timer {
-                        id: searchTimer
-                        interval: 500;
-                        running: false
-                        repeat: false
-                        onTriggered: {
-                            if (searchField.text == "") {
-                                clearButton.visible = false
-                            } else {
-                                clearButton.visible = true
-                            }
-                            searchQuery = searchField.text
-                            hideSearchFieldAnim.to = searchFieldContainer.height;
-                            hideSearchFieldAnim.running = true;
-                        }
-                    }
-                    PlasmaWidgets.IconWidget {
-                        id: clearButton
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        anchors.rightMargin: -10
-                        visible: false
-                        size: "64x64"
-                        Component.onCompleted: {
-                            setIcon("edit-clear-locationbar-rtl")
-                        }
-                        onClicked: {
-                            searchField.text = ""
-                        }
-                    }
+                    onPressAndHold: searchField.closeSoftwareInputPanel();
                 }
             }
-            ListView {
-                id: appsView
-                objectName: "appsView"
-                width: mainFlickable.width
-                height: mainFlickable.height
-
-                model: main.model?Math.ceil(main.model.count/18.0):0
-                highlightRangeMode: ListView.StrictlyEnforceRange
-                orientation: ListView.Horizontal
-                snapMode: ListView.SnapOneItem
-
-                clip: true
-                signal clicked(string url)
-
-
-                delegate: Item {
-                    width: appsView.width
-                    height: appsView.height
-                    Grid {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        rows: appsView.width > 600 ? 3 : 5
-                        Repeater {
-                            model: MobileComponents.PagedProxyModel {
-                                sourceModel: main.model
-                                currentPage: index
-                                pageSize: 18
-                            }
-                            delegate: main.delegate
-                        }
+            PropertyAnimation {
+                id: hideSearchFieldAnim
+                target: mainFlickable
+                properties: "contentY"
+                duration: 300
+            }
+            Timer {
+                id: searchTimer
+                interval: 500;
+                running: false
+                repeat: false
+                onTriggered: {
+                    if (searchField.text == "") {
+                        clearButton.visible = false
+                    } else {
+                        clearButton.visible = true
                     }
+                    searchQuery = searchField.text
+                    hideSearchFieldAnim.to = searchFieldContainer.height;
+                    hideSearchFieldAnim.running = true;
+                }
+            }
+            PlasmaWidgets.IconWidget {
+                id: clearButton
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: -10
+                visible: false
+                size: "64x64"
+                Component.onCompleted: {
+                    setIcon("edit-clear-locationbar-rtl")
+                }
+                onClicked: {
+                    searchField.text = ""
                 }
             }
         }
     }
+    ListView {
+        id: appsView
+        objectName: "appsView"
+
+        anchors {
+            left: parent.left
+            top: searchFieldContainer.bottom
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+
+        model: main.model?Math.ceil(main.model.count/18.0):0
+        highlightRangeMode: ListView.StrictlyEnforceRange
+        orientation: ListView.Horizontal
+        snapMode: ListView.SnapOneItem
+
+        clip: true
+        signal clicked(string url)
+
+
+        delegate: Item {
+            width: appsView.width
+            height: appsView.height
+            Grid {
+                anchors.horizontalCenter: parent.horizontalCenter
+                rows: appsView.width > 600 ? 3 : 5
+                Repeater {
+                    model: MobileComponents.PagedProxyModel {
+                        sourceModel: main.model
+                        currentPage: index
+                        pageSize: 18
+                    }
+                    delegate: main.delegate
+                }
+            }
+        }
+    }
+
+
     Item {
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: mainFlickable.bottom
+        anchors.top: appsView.bottom
         anchors.topMargin: 10
         Row {
             anchors.centerIn: parent
