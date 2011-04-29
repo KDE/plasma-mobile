@@ -29,7 +29,7 @@ Item {
 
     Rectangle {
         id: handle
-        anchors.right: parent.margins.right
+        anchors.right: parent.right
         width: 20
         height: 40
         z: systrayBackground.z + 1
