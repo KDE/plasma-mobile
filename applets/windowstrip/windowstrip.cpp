@@ -32,6 +32,7 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     : Plasma::DeclarativeWidget(parent)
 {
     init();
+    setThumbnailRects("Tokamak 5");
     setQmlPath(KStandardDirs::locate("data", "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
 }
 
@@ -45,22 +46,25 @@ void WindowStrip::init()
 {
 
 
-    
     kDebug() << "init......";
     QList< WId > windows = KWindowSystem::windows();
 
+    // Make up a bunch of rects on screen for testing
     int x, y, w, h, s;
     x = 20;
     y = 20;
     w = 200;
     h = 400;
     s = 10;
+    //QHash<WId>
+    
     foreach (const WId wid, windows) {
         m_windows[wid] = QRect(x, y, w, h);
         x = x + w + s;
-        kDebug() << "Window ID:" << w << m_windows[wid];
+        kDebug() << "Window ID:" << w << m_windows[wid] << QString::number(wid);
     }
 
+    // Find out which window to put the thumbnails on
     m_desktop = 0;
     foreach (const WId &wid, m_windows.keys()) {
         KWindowInfo winInfo = KWindowSystem::windowInfo(wid, NET::WMWindowType);
@@ -69,7 +73,8 @@ void WindowStrip::init()
             kDebug() << "Found Desktop!";
         }
     }
-    //kDebug() << "Desktop is:" << id != 0;
+
+    // Hide them after a few second
     QTimer::singleShot(20000, this, SLOT(hideThumbnails()));
     showThumbnails();
 }
@@ -84,6 +89,17 @@ void WindowStrip::hideThumbnails()
 {
     Plasma::WindowEffects::showWindowThumbnails(m_desktop);
     kDebug() << "/// all hidden ";
+}
+
+void WindowStrip::setThumbnailRects(const QString &rects)
+{
+    m_thumbnailRects = rects;
+}
+
+
+QString WindowStrip::thumbnailRects() const
+{
+    return m_thumbnailRects;
 }
 
 #include "windowstrip.moc"

@@ -28,6 +28,8 @@ Item {
     width: 200
     height: 300
 
+    property bool locked: true
+
     PlasmaCore.DataSource {
             id: tasksSource
             engine: "tasks"
@@ -38,6 +40,7 @@ Item {
             }
             Component.onCompleted: {
                 connectedSources = sources
+                //print("----> thumbnailRects is: " + thumbnailRects);
             }
       }
 
@@ -55,16 +58,18 @@ Item {
             width: 200
             height: 200
 
+            Rectangle {
+                opacity: .4
+                anchors.fill: parent
+            }
+
             Text {
                 id: windowTitle
                 anchors.bottom: parent.bottom
-                horizontalAlignment: Text.AlignHCenter // doesn't work :/
-                text: "<strong>" + className + "</strong>"
-            }
+                anchors.horizontalCenter: parent.horizontalCenter;
 
-            Rectangle {
-                opacity: .2
-                anchors.fill: parent
+                //horizontalAlignment: Text.AlignHCenter // doesn't work :/
+                text: "<h2>" + className + "</h2>"
             }
         }
     }

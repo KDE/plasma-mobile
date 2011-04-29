@@ -29,17 +29,29 @@
 class WindowStrip : public Plasma::DeclarativeWidget
 {
     Q_OBJECT
+    Q_PROPERTY(QString thumbnailRects
+        READ thumbnailRects
+        WRITE setThumbnailRects
+        NOTIFY thumbnailRectsChanged)
+
+Q_SIGNALS:
+    void thumbnailRectsChanged();
+
 public:
     // Basic Create/Destroy
     WindowStrip(QGraphicsWidget* parent);
     ~WindowStrip();
     void init();
 
+    void setThumbnailRects(const QString &rects);
+    QString thumbnailRects() const;
+
 private Q_SLOTS:
     void showThumbnails();
     void hideThumbnails();
 
 private:
+    QString m_thumbnailRects;
     QHash<WId, QRect> m_windows;
     WId m_desktop;
     QTimer m_timer;
