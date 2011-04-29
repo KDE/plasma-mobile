@@ -36,7 +36,7 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     setThumbnailRects("Tokamak 5");
     setQmlPath(KStandardDirs::locate("data", "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
 
-    connect(mainComponent(), SIGNAL(lockedChanged()), SLOT(lockChanged()));
+    connect(rootObject(), SIGNAL(lockedChanged()), SLOT(lockChanged()));
 }
 
 WindowStrip::~WindowStrip()

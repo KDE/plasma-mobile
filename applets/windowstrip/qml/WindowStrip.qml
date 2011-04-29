@@ -78,6 +78,6 @@ Item {
 
     Component.onCompleted: {
         print ("done, yo!");
-        lockChanged();
+        lockedChanged();
     }
 }
