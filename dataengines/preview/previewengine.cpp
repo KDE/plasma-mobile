@@ -158,14 +158,7 @@ void PreviewEngine::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
             KFileItem kfile = KFileItem(mimejob->url(), mimetype, KFileItem::Unknown);
             KFileItemList list;
             list << kfile;
-            KIO::PreviewJob *job = new KIO::PreviewJob(list,
-                                                       d->previewSize.width(),
-                                                       d->previewSize.height(),
-                                                       0,
-                                                       0,
-                                                       true,
-                                                       true,
-                                                       0);
+            KIO::PreviewJob *job = new KIO::PreviewJob(list, d->previewSize, 0);
             connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)), SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
             connect(job, SIGNAL(failed(const KFileItem&)), SLOT(previewJobFailed(const KFileItem&)));
             connect(job, SIGNAL(result(KJob*)), SLOT(previewResult(KJob*)));
