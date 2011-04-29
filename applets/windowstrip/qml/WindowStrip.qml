@@ -34,7 +34,7 @@ Item {
     PlasmaCore.DataSource {
             id: tasksSource
             engine: "tasks"
-            interval: 0
+            interval: 30
             onSourceAdded: {
                 print("SOURCE added: " + source);
                 connectSource(source)
@@ -44,7 +44,68 @@ Item {
                 //print("----> thumbnailRects is: " + thumbnailRects);
             }
       }
+    // connect from C++ to update
+    // - position of the windows, relative to window element
+    // - actual position of the row
+    // -> calculate screen coordinates from these
 
+    Flickable {
+        id: windowFlicker
+        interactive: true
+        contentHeight: windowRow.height
+        contentWidth: windowRow.width
+        anchors.fill: parent
+
+        Row {
+            // FIX: connect to this row from C++, xChanged()
+            id: windowRow
+            property int mycounter;
+
+            onChildrenChanged: {
+                print("GAAAAAAAAAAAA someone changed something" + mycounter);
+                mycounter++;
+                for (var ch in children) {
+                    print("Child:" + ch.x)
+                }
+            }
+            // add here: onChildrenChanged:, iterate over it, build a list of rectangles
+            // assign only after list is complete to save updates
+            Repeater {
+                model: PlasmaCore.DataModel {
+                    dataSource: tasksSource
+                }
+
+                onChildrenChanged: {
+                    print(" someone changed something");
+                    for (var ch in children) {
+                        print("Child:" + ch.x)
+                    }
+                }
+
+                Item {
+                    id: windowDelegate
+                    width: 200
+                    height: 200
+
+                    Rectangle {
+                        opacity: .4
+                        anchors.fill: parent
+                    }
+
+                    Text {
+                        id: windowTitle
+                        anchors.bottom: parent.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter;
+                        text: "<h2>" + className + "</h2>"
+                    }
+                }
+                Component.onCompleted: {
+                    print("done with the item");
+                }
+            }
+        }
+    }
+    /*
     ListView {
         anchors.fill: parent
         orientation: Qt.Horizontal
@@ -53,6 +114,8 @@ Item {
         model: PlasmaCore.DataModel {
             dataSource: tasksSource
         }
+
+        
 
         delegate: Item {
             id: tasksDelegate
@@ -80,4 +143,5 @@ Item {
         print ("done, yo!");
         lockedChanged();
     }
+    */
 }
