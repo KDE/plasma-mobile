@@ -136,7 +136,13 @@ Item {
             Flow {
                 anchors.centerIn: parent
                 width: appsView.width
-                height: childrenRect.height
+                height: 400
+                move: Transition {
+                    NumberAnimation {
+                        properties: "x,y"
+                        duration: 150
+                    }
+                }
                 Repeater {
                     model: MobileComponents.PagedProxyModel {
                         sourceModel: main.model
