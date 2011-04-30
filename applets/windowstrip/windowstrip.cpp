@@ -117,6 +117,13 @@ void WindowStrip::lockChanged()
 
 void WindowStrip::scrollChanged()
 {
+    //kDebug() << "elapsed: " << m_time.elapsed();
+    if (m_time.elapsed() < 50) {
+        //kDebug() << "skipping";
+        return;
+    }
+    m_time.restart();
+
     QVariant data = m_windowFlicker->property("contentX");
     //kWarning()<<"new X"<<data;
 
@@ -128,15 +135,15 @@ void WindowStrip::scrollChanged()
     h = 400;
     s = 10;
     //QHash<WId>
-    
+
     foreach (const WId wid, windows) {
         m_windows[wid] = QRect(x, y, w, h);
         x = x + w + s;
         //kDebug() << "Window ID:" << w << m_windows[wid] << QString::number(wid);
     }
-    
+
     m_desktop = static_cast<Plasma::Applet *>(parentItem())->view()->effectiveWinId();
-    
+
     showThumbnails();
 }
 

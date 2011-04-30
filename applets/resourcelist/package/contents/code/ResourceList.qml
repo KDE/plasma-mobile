@@ -1,4 +1,4 @@
-// -*- coding: iso-8859-1 -*-
+u// -*- coding: iso-8859-1 -*-
 /*
  *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
  *

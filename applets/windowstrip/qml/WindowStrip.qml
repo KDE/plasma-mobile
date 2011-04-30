@@ -52,11 +52,24 @@ Item {
     Flickable {
         id: windowFlicker
         objectName: "windowFlicker"
+
+        property int minimumInterval: 50;
+        property bool blockUpdates: false;
+
         interactive: true
         contentHeight: windowsRow.height
         contentWidth: windowsRow.width
         anchors.fill: parent
-        
+
+        Timer {
+            id: throttleTimer
+            running: false
+            repeat: false
+            interval: 50
+            onTriggered: {
+                windowFlicker.blockUpdates = false;
+            }
+        }
 
         Row {
             // FIX: connect to this row from C++, xChanged()
@@ -66,6 +79,13 @@ Item {
             property variant childrenPositions
 
             onChildrenChanged: {
+                if (windowFlicker.blockUpdates) {
+                    print("skipping");
+                    return;
+                }
+                windowFlicker.blockUpdates = true;
+                throttleTimer.start();
+
                 var childrenPositions = Array();
                 /*for (var i = 0; i < children.length; i++) {
                     var winId = children[i].winId
@@ -112,43 +132,4 @@ Item {
             }
         }
     }
-    /*
-    ListView {
-        anchors.fill: parent
-        orientation: Qt.Horizontal
-        spacing: 10
-
-        model: PlasmaCore.DataModel {
-            dataSource: tasksSource
-        }
-
-        
-
-        delegate: Item {
-            id: tasksDelegate
-            width: 200
-            height: 200
-
-            Rectangle {
-                opacity: .4
-                anchors.fill: parent
-            }
-
-            Text {
-                id: windowTitle
-                anchors.bottom: parent.bottom
-                anchors.horizontalCenter: parent.horizontalCenter;
-
-                //horizontalAlignment: Text.AlignHCenter // doesn't work :/
-                text: "<h2>" + className + "</h2>"
-            }
-        }
-    }
-
-
-    Component.onCompleted: {
-        print ("done, yo!");
-        lockedChanged();
-    }
-    */
 }

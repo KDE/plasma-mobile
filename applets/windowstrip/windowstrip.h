@@ -59,7 +59,7 @@ private:
     QString m_thumbnailRects;
     QHash<WId, QRect> m_windows;
     WId m_desktop;
-    QTimer m_timer;
+    QTime m_time;
     QDeclarativeItem *m_windowFlicker;
 };
 
