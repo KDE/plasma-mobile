@@ -50,7 +50,6 @@ Item {
         objectName: "windowFlicker"
 
         interactive: true
-        contentHeight: windowsRow.height
         contentWidth: windowsRow.width
         anchors.fill: parent
         property variant childrenPositions
@@ -59,8 +58,6 @@ Item {
             id: windowsRow
             objectName: "windowsRow"
             spacing: 10
-
-            property int mycounter;
             
             onChildrenChanged: {
                 var childrenPositions = Array();
