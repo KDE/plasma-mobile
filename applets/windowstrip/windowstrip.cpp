@@ -34,13 +34,25 @@
 WindowStrip::WindowStrip(QGraphicsWidget *parent)
     : Plasma::DeclarativeWidget(parent)
 {
+    // Run the frameupdater once every 20 msec,
+    // so KWin gets in the ideal case updated
+    // rects for every frame
+    m_frameUpdater.setInterval(20);
+
+    // The frameController is used to stop updating the
+    // frame after a timeout after the animation has stopped
+    m_updateController.setSingleShot(true);
+    m_updateController.setInterval(200);
+    connect(&m_frameUpdater, SIGNAL(timeout()), SLOT(updateFrame()));
+    connect(&m_updateController, SIGNAL(timeout()), &m_frameUpdater, SLOT(stop()));
+
     init();
-    setThumbnailRects("Tokamak 5");
+    //setThumbnailRects("Tokamak 5");
     setQmlPath(KStandardDirs::locate("data", "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
 
     connect(rootObject(), SIGNAL(lockedChanged()), this, SLOT(lockChanged()));
     m_windowFlicker = rootObject()->findChild<QDeclarativeItem*>("windowFlicker");
-    connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()), this, SLOT(windowsPositionsChanged()));
+    //connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()), this, SLOT(windowsPositionsChanged()));
     connect(m_windowFlicker, SIGNAL(contentXChanged()), this, SLOT(scrollChanged()));
     connect(m_windowFlicker, SIGNAL(intermediateFrame()), this, SLOT(scrollChanged()));
 }
@@ -100,22 +112,6 @@ void WindowStrip::hideThumbnails()
     kDebug() << "/// all hidden ";
 }
 
-void WindowStrip::setThumbnailRects(const QString &rects)
-{
-    m_thumbnailRects = rects;
-}
-
-
-QString WindowStrip::thumbnailRects() const
-{
-    return m_thumbnailRects;
-}
-
-void WindowStrip::lockChanged()
-{
-    kDebug() << "Hmmmmm ... " << mainComponent()->property("locked");
-}
-
 void WindowStrip::scrollChanged()
 {
     //kDebug() << "elapsed: " << m_time.elapsed();
@@ -123,8 +119,17 @@ void WindowStrip::scrollChanged()
         //kDebug() << "skipping";
         //return;
     }
-    m_time.restart();
 
+    // the view has changed, update the windows,
+    // start the updating timer, and start the controller
+    // to kill the updater after a while
+    updateWindows();
+    m_updateController.start();
+    m_frameUpdater.start();
+}
+
+void WindowStrip::updateWindows()
+{
     QVariant data = m_windowFlicker->property("contentX");
     //kWarning()<<"new X"<<data;
 
@@ -135,7 +140,6 @@ void WindowStrip::scrollChanged()
     w = 200;
     h = 400;
     s = 10;
-    //QHash<WId>
 
     foreach (const WId wid, windows) {
         m_windows[wid] = QRect(x, y, w, h);
@@ -147,9 +151,16 @@ void WindowStrip::scrollChanged()
 
     showThumbnails();
     //kDebug() << "duration: " << m_time.elapsed();
-    m_time.restart();
+    //m_timer.restart();
 }
 
+void WindowStrip::updateFrame()
+{
+    //kDebug() << "updating frame";
+    updateWindows();
+}
+
+/*
 void WindowStrip::windowsPositionsChanged()
 {
     QVariant data = m_windowFlicker->property("childrenPositions");
@@ -158,7 +169,7 @@ void WindowStrip::windowsPositionsChanged()
     /*m_thumbnailRects.clear();
     foreach (QVariant pos, thumbnailsPositions) {
          << QRect(pos.data<int>(), 0, 200, 100);
-    }*/
+    }* /
 
 
     QList< WId > windows = KWindowSystem::windows();
@@ -176,5 +187,5 @@ void WindowStrip::windowsPositionsChanged()
         kDebug() << "Window ID:" << w << m_windows[wid] << QString::number(wid);
     }
 }
-
+*/
 #include "windowstrip.moc"

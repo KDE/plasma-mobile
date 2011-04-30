@@ -28,22 +28,18 @@ Item {
     width: 600
     height: 240
 
-    property string locked: "T0k4m4k5"
-    signal lockedChanged();
-
     PlasmaCore.DataSource {
-            id: tasksSource
-            engine: "tasks"
-            interval: 30
-            onSourceAdded: {
-                print("SOURCE added: " + source);
-                connectSource(source)
-            }
-            Component.onCompleted: {
-                connectedSources = sources
-                //print("----> thumbnailRects is: " + thumbnailRects);
-            }
-      }
+        id: tasksSource
+        engine: "tasks"
+        interval: 30
+        onSourceAdded: {
+            //print("SOURCE added: " + source);
+            connectSource(source)
+        }
+        Component.onCompleted: {
+            connectedSources = sources
+        }
+    }
     // connect from C++ to update
     // - position of the windows, relative to window element
     // - actual position of the row
@@ -55,7 +51,7 @@ Item {
 
         property int minimumInterval: 50;
         property bool blockUpdates: false;
-        signal intermediateFrame();
+        //signal intermediateFrame();
 
         interactive: true
         contentHeight: windowsRow.height
@@ -76,9 +72,11 @@ Item {
             // FIX: connect to this row from C++, xChanged()
             id: windowsRow
             objectName: "windowsRow"
-            property int mycounter;
-            property variant childrenPositions;
+            spacing: 10
 
+            //property int mycounter;
+            //property variant childrenPositions;
+            /*
             onChildrenChanged: {
                 if (windowFlicker.blockUpdates) {
                     //print("skipping");
@@ -86,29 +84,16 @@ Item {
                 }
                 windowFlicker.blockUpdates = true;
                 throttleTimer.start();
-                intermediateFrameTimer.start();
+                //intermediateFrameTimer.start();
 
                 var childrenPositions = Array();
-                /*for (var i = 0; i < children.length; i++) {
+                / *for (var i = 0; i < children.length; i++) {
                     var winId = children[i].winId
                     childrenPositions[winId] = children[i].x
-                }*/
+                }* /
                 windowsRow.childrenPositions = childrenPositions
             }
-
-            Timer {
-                id: intermediateFrameTimer
-                running: false
-                repeat: false
-                interval: 30
-                onTriggered: {
-                    //print("inserting frame");
-                    windowFlicker.intermediateFrame();
-                    running = false
-                }
-            }
-
-
+            */
             // add here: onChildrenChanged:, iterate over it, build a list of rectangles
             // assign only after list is complete to save updates
             Repeater {
@@ -141,9 +126,6 @@ Item {
                         anchors.horizontalCenter: parent.horizontalCenter;
                         text: "<h2>" + className + "</h2>"
                     }
-                }
-                Component.onCompleted: {
-                    print("done with the item");
                 }
             }
         }
