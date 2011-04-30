@@ -61,7 +61,6 @@ Item {
             spacing: 10
 
             property int mycounter;
-            spacing: 100
             
             onChildrenChanged: {
                 var childrenPositions = Array();
@@ -80,7 +79,7 @@ Item {
             }
             // add here: onChildrenChanged:, iterate over it, build a list of rectangles
             // assign only after list is complete to save updates
->>>>>>> send the whole geometry to the c++ part
+
             Repeater {
 
                 model: PlasmaCore.DataModel {
@@ -97,7 +96,7 @@ Item {
                 Item {
                     id: windowDelegate
                     width: 200
-                    height: 500
+                    height: 200
                     property string winId: DataEngineSource
 
                     Rectangle {
@@ -116,10 +115,4 @@ Item {
         }
     }
 }
-                Component.onCompleted: {
-                    print("done with the item");
-                }
-            }
-        }
-    }
-}
+

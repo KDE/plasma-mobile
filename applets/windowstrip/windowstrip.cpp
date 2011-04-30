@@ -50,15 +50,8 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     setQmlPath(KStandardDirs::locate("data", "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
     m_windowFlicker = rootObject()->findChild<QDeclarativeItem*>("windowFlicker");
 
-<<<<<<< HEAD
-    init();
-
-    //connect(rootObject(), SIGNAL(lockedChanged()), this, SLOT(lockChanged()));
-    //connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()), this, SLOT(windowsPositionsChanged()));
-=======
     connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()), this, SLOT(windowsPositionsChanged()));
 
->>>>>>> send the whole geometry to the c++ part
     connect(m_windowFlicker, SIGNAL(contentXChanged()), this, SLOT(scrollChanged()));
     //connect(m_windowFlicker, SIGNAL(intermediateFrame()), this, SLOT(scrollChanged()));
 }
@@ -115,28 +108,9 @@ void WindowStrip::updateWindows()
     QVariant dataY = m_windowFlicker->property("contentY");
     //kWarning()<<"new X"<<data;
 
-<<<<<<< HEAD
-    QList< WId > windows = KWindowSystem::windows();
-    int x, y, w, h, s;
-    x = -data.value<int>();
-    y = 20;
-    w = 200;
-    h = 400;
-    s = 10;
-
-    foreach (const WId wid, windows) {
-        m_windows[wid] = QRect(x, y, w, h);
-        x = x + w + s;
-        //kDebug() << "Window ID:" << w << m_windows[wid] << QString::number(wid);
-    }
-
-    m_desktop = static_cast<Plasma::Applet *>(parentItem())->view()->effectiveWinId();
-
-=======
     m_desktop = static_cast<Plasma::Applet *>(parentItem())->view()->effectiveWinId();
     m_windowsOffset = -QPoint(dataX.value<int>(), dataY.value<int>());
     
->>>>>>> send the whole geometry to the c++ part
     showThumbnails();
     //kDebug() << "duration: " << m_time.elapsed();
     //m_timer.restart();
@@ -144,21 +118,16 @@ void WindowStrip::updateWindows()
 
 void WindowStrip::updateFrame()
 {
-<<<<<<< HEAD
-    //kDebug() << "updating frame";
-    updateWindows();
-=======
     QVariant data = m_windowFlicker->property("childrenPositions");
     QList<QVariant> thumbnailsInfo = data.value<QList<QVariant> >();
     //kDebug() << "window positions" << thumbnailsInfo;
-    m_thumbnailRects.clear();
+
     foreach (QVariant windowData, thumbnailsInfo) {
          const QVariantMap windowInfo = windowData.value<QVariantMap>();
          WId winId = windowInfo["winId"].value<QString>().toInt();
 
          m_windows[winId] = QRect(windowInfo["x"].value<int>(), windowInfo["y"].value<int>(), windowInfo["width"].value<int>(), windowInfo["height"].value<int>());
     }
->>>>>>> send the whole geometry to the c++ part
 }
 
 #include "windowstrip.moc"
