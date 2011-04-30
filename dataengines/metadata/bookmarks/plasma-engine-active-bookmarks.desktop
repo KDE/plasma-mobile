@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Active Bookmarks
 Name[pt]=Favoritos Activos
+Name[sv]=Bokmärken
 Name[uk]=Активні закладки
 Name[x-test]=xxActive Bookmarksxx
 Comment=Bookmarks from Nepomuk
 Comment[pt]=Favoritos do Nepomuk
+Comment[sv]=Bokmärken från Nepomuk
 Comment[uk]=Закладки з Nepomuk
 Comment[x-test]=xxBookmarks from Nepomukxx
 X-KDE-ServiceTypes=Plasma/DataEngine
