@@ -49,15 +49,16 @@
 
 #include <ksmserver_interface.h>
 
+#include <Plasma/Applet>
 #include <Plasma/Containment>
 #include <Plasma/Context>
 #include <Plasma/DeclarativeWidget>
-#include <Plasma/Theme>
-#include <Plasma/WindowEffects>
-#include <Plasma/Applet>
 #include <Plasma/Package>
 #include <Plasma/PluginLoader>
+#include <Plasma/Theme>
+#include <Plasma/ToolTipManager>
 #include <Plasma/Wallpaper>
+#include <Plasma/WindowEffects>
 
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
@@ -141,6 +142,7 @@ PlasmaApp::PlasmaApp()
 
     m_pluginLoader = new MobPluginLoader;
     Plasma::PluginLoader::setPluginLoader(m_pluginLoader);
+    Plasma::ToolTipManager::self()->setState(Plasma::ToolTipManager::Deactivated);
     // this line initializes the corona and setups the main qml homescreen
     corona();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
