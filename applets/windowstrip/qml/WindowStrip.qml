@@ -55,6 +55,7 @@ Item {
 
         property int minimumInterval: 50;
         property bool blockUpdates: false;
+        signal intermediateFrame();
 
         interactive: true
         contentHeight: windowsRow.height
@@ -65,7 +66,7 @@ Item {
             id: throttleTimer
             running: false
             repeat: false
-            interval: 50
+            interval: 20
             onTriggered: {
                 windowFlicker.blockUpdates = false;
             }
@@ -76,15 +77,16 @@ Item {
             id: windowsRow
             objectName: "windowsRow"
             property int mycounter;
-            property variant childrenPositions
+            property variant childrenPositions;
 
             onChildrenChanged: {
                 if (windowFlicker.blockUpdates) {
-                    print("skipping");
+                    //print("skipping");
                     return;
                 }
                 windowFlicker.blockUpdates = true;
                 throttleTimer.start();
+                intermediateFrameTimer.start();
 
                 var childrenPositions = Array();
                 /*for (var i = 0; i < children.length; i++) {
@@ -93,6 +95,20 @@ Item {
                 }*/
                 windowsRow.childrenPositions = childrenPositions
             }
+
+            Timer {
+                id: intermediateFrameTimer
+                running: false
+                repeat: false
+                interval: 30
+                onTriggered: {
+                    //print("inserting frame");
+                    windowFlicker.intermediateFrame();
+                    running = false
+                }
+            }
+
+
             // add here: onChildrenChanged:, iterate over it, build a list of rectangles
             // assign only after list is complete to save updates
             Repeater {

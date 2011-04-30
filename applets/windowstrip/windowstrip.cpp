@@ -42,6 +42,7 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     m_windowFlicker = rootObject()->findChild<QDeclarativeItem*>("windowFlicker");
     connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()), this, SLOT(windowsPositionsChanged()));
     connect(m_windowFlicker, SIGNAL(contentXChanged()), this, SLOT(scrollChanged()));
+    connect(m_windowFlicker, SIGNAL(intermediateFrame()), this, SLOT(scrollChanged()));
 }
 
 WindowStrip::~WindowStrip()
@@ -65,7 +66,7 @@ void WindowStrip::init()
     h = 400;
     s = 10;
     //QHash<WId>
-    
+
     foreach (const WId wid, windows) {
         m_windows[wid] = QRect(x, y, w, h);
         x = x + w + s;
@@ -120,7 +121,7 @@ void WindowStrip::scrollChanged()
     //kDebug() << "elapsed: " << m_time.elapsed();
     if (m_time.elapsed() < 50) {
         //kDebug() << "skipping";
-        return;
+        //return;
     }
     m_time.restart();
 
@@ -145,6 +146,8 @@ void WindowStrip::scrollChanged()
     m_desktop = static_cast<Plasma::Applet *>(parentItem())->view()->effectiveWinId();
 
     showThumbnails();
+    //kDebug() << "duration: " << m_time.elapsed();
+    m_time.restart();
 }
 
 void WindowStrip::windowsPositionsChanged()
