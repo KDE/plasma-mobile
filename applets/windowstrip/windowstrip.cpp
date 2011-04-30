@@ -54,6 +54,9 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
 
     connect(m_windowFlicker, SIGNAL(contentXChanged()), this, SLOT(scrollChanged()));
     //connect(m_windowFlicker, SIGNAL(intermediateFrame()), this, SLOT(scrollChanged()));
+    scrollChanged();
+    updateWindows();
+    updateWindows();
 }
 
 WindowStrip::~WindowStrip()

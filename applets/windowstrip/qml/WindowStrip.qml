@@ -114,7 +114,8 @@ Item {
                         id: windowTitle
                         anchors.bottom: parent.bottom
                         anchors.horizontalCenter: parent.horizontalCenter;
-                        text: "<h2>" + className + "</h2>"
+                        text: className
+                        font.bold: true
                     }
 
                     MouseArea {
