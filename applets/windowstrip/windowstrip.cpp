@@ -21,9 +21,9 @@
 #include "windowstrip.h"
 
 #include <QtGui/QGraphicsLinearLayout>
-#include <QDeclarativeComponent>
-#include <QDeclarativeItem>
-#include <QGraphicsView>
+#include <QtDeclarative/QDeclarativeComponent>
+#include <QtDeclarative/QDeclarativeItem>
+#include <QtGui/QGraphicsView>
 
 #include <Plasma/Svg>
 #include <Plasma/WindowEffects>
@@ -53,7 +53,6 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()), this, SLOT(windowsPositionsChanged()));
 
     connect(m_windowFlicker, SIGNAL(contentXChanged()), this, SLOT(scrollChanged()));
-    //connect(m_windowFlicker, SIGNAL(intermediateFrame()), this, SLOT(scrollChanged()));
     scrollChanged();
     updateWindows();
     updateWindows();
@@ -62,15 +61,13 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
 WindowStrip::~WindowStrip()
 {
     hideThumbnails();
-    kDebug() << "dtor......";
 }
 
 void WindowStrip::init()
 {
-
-
-    kDebug() << "init......";
     QList< WId > windows = KWindowSystem::windows();
+    // use this once the kdelibs branch export-mru-window-list is merged to master
+    //QList< WId > windows = KWindowSystem::mostRecentlyUsedOrder();
 }
 
 void WindowStrip::showThumbnails()
