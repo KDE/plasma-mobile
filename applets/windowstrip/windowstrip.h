@@ -48,6 +48,7 @@ private Q_SLOTS:
 
 private:
     QHash<WId, QRect> m_windows;
+    QPoint m_windowsOffset;
     WId m_desktop;
     QTime m_time; // for profiling
     QTimer m_frameUpdater; // regularly updates the thumbnail rects during animations

@@ -53,12 +53,34 @@ Item {
         contentHeight: windowsRow.height
         contentWidth: windowsRow.width
         anchors.fill: parent
-
+        property variant childrenPositions
+        
         Row {
             id: windowsRow
             objectName: "windowsRow"
             spacing: 10
 
+            property int mycounter;
+            spacing: 100
+            
+            onChildrenChanged: {
+                var childrenPositions = Array();
+                for (var i = 0; i < children.length; i++) {
+                    var winId = children[i].winId
+                    var properties = new Object()
+                    properties.winId = winId
+                    //FIXME: why those hardoced numbers?
+                    properties.x = children[i].x + 30
+                    properties.y = children[i].y + 20
+                    properties.width = children[i].width - 20
+                    properties.height = children[i].height - 20
+                    childrenPositions[i] = properties
+                }
+                windowFlicker.childrenPositions = childrenPositions
+            }
+            // add here: onChildrenChanged:, iterate over it, build a list of rectangles
+            // assign only after list is complete to save updates
+>>>>>>> send the whole geometry to the c++ part
             Repeater {
 
                 model: PlasmaCore.DataModel {
@@ -89,6 +111,13 @@ Item {
                         anchors.horizontalCenter: parent.horizontalCenter;
                         text: "<h2>" + className + "</h2>"
                     }
+                }
+            }
+        }
+    }
+}
+                Component.onCompleted: {
+                    print("done with the item");
                 }
             }
         }
