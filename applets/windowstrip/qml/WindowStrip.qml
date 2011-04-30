@@ -107,6 +107,17 @@ Item {
                         anchors.horizontalCenter: parent.horizontalCenter;
                         text: "<h2>" + className + "</h2>"
                     }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            print(winId)
+                            var service = tasksSource.serviceForSource(winId)
+                            var operation = service.operationDescription("activate")
+
+                            service.startOperationCall(operation)
+                        }
+                    }
                 }
             }
         }
