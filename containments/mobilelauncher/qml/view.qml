@@ -39,8 +39,8 @@ Item {
         }
 
         anchors.fill: parent
-        anchors.topMargin: 32
-        anchors.bottomMargin: 128
+        anchors.topMargin: 4
+        anchors.bottomMargin: 4
         anchors.leftMargin: 4
         anchors.rightMargin: 4
 
