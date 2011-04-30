@@ -58,21 +58,30 @@ Item {
             id: windowsRow
             objectName: "windowsRow"
             spacing: 10
-            
-            onChildrenChanged: {
-                var childrenPositions = Array();
-                for (var i = 0; i < children.length; i++) {
-                    var winId = children[i].winId
-                    var properties = new Object()
-                    properties.winId = winId
-                    //FIXME: why those hardoced numbers?
-                    properties.x = children[i].x + 30
-                    properties.y = children[i].y + 20
-                    properties.width = children[i].width - 20
-                    properties.height = children[i].height - 20
-                    childrenPositions[i] = properties
+
+            Timer {
+                id: positionsTimer
+                interval: 300
+                repeat: false
+                onTriggered: {
+                    var childrenPositions = Array();
+                    for (var i = 0; i < windowsRow.children.length; i++) {
+                        var winId = windowsRow.children[i].winId
+                        var properties = new Object()
+                        properties.winId = winId
+                        //FIXME: why those hardoced numbers?
+                        properties.x = windowsRow.children[i].x + 30
+                        properties.y = windowsRow.children[i].y + 20
+                        properties.width = windowsRow.children[i].width - 20
+                        properties.height = windowsRow.children[i].height - 20
+                        childrenPositions[i] = properties
+                    }
+                    windowFlicker.childrenPositions = childrenPositions
                 }
-                windowFlicker.childrenPositions = childrenPositions
+            }
+
+            onChildrenChanged: {
+                positionsTimer.running = true
             }
             // add here: onChildrenChanged:, iterate over it, build a list of rectangles
             // assign only after list is complete to save updates
