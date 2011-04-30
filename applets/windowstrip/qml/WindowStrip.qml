@@ -49,53 +49,16 @@ Item {
         id: windowFlicker
         objectName: "windowFlicker"
 
-        property int minimumInterval: 50;
-        property bool blockUpdates: false;
-        //signal intermediateFrame();
-
         interactive: true
         contentHeight: windowsRow.height
         contentWidth: windowsRow.width
         anchors.fill: parent
 
-        Timer {
-            id: throttleTimer
-            running: false
-            repeat: false
-            interval: 20
-            onTriggered: {
-                windowFlicker.blockUpdates = false;
-            }
-        }
-
         Row {
-            // FIX: connect to this row from C++, xChanged()
             id: windowsRow
             objectName: "windowsRow"
             spacing: 10
 
-            //property int mycounter;
-            //property variant childrenPositions;
-            /*
-            onChildrenChanged: {
-                if (windowFlicker.blockUpdates) {
-                    //print("skipping");
-                    return;
-                }
-                windowFlicker.blockUpdates = true;
-                throttleTimer.start();
-                //intermediateFrameTimer.start();
-
-                var childrenPositions = Array();
-                / *for (var i = 0; i < children.length; i++) {
-                    var winId = children[i].winId
-                    childrenPositions[winId] = children[i].x
-                }* /
-                windowsRow.childrenPositions = childrenPositions
-            }
-            */
-            // add here: onChildrenChanged:, iterate over it, build a list of rectangles
-            // assign only after list is complete to save updates
             Repeater {
 
                 model: PlasmaCore.DataModel {
