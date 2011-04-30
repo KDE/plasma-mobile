@@ -40,8 +40,6 @@ public:
 private Q_SLOTS:
     void showThumbnails();
     void hideThumbnails();
-    //void lockChanged();
-    //void windowsPositionsChanged();
     void scrollChanged();
     void updateFrame();
     void updateWindows();

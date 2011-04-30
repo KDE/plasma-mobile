@@ -43,19 +43,21 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     // frame after a timeout after the animation has stopped
     m_updateController.setSingleShot(true);
     m_updateController.setInterval(200);
+
     connect(&m_frameUpdater, SIGNAL(timeout()), SLOT(updateFrame()));
     connect(&m_updateController, SIGNAL(timeout()), &m_frameUpdater, SLOT(stop()));
 
     //setThumbnailRects("Tokamak 5");
-    setQmlPath(KStandardDirs::locate("data", "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
+    setQmlPath(KStandardDirs::locate("data",
+                                     "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
     m_windowFlicker = rootObject()->findChild<QDeclarativeItem*>("windowFlicker");
 
-    connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()), this, SLOT(windowsPositionsChanged()));
+    connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()),
+            this, SLOT(scrollChanged()));
+    connect(m_windowFlicker, SIGNAL(contentXChanged()),
+            this, SLOT(scrollChanged()));
 
-    connect(m_windowFlicker, SIGNAL(contentXChanged()), this, SLOT(scrollChanged()));
     scrollChanged();
-    updateWindows();
-    updateWindows();
 }
 
 WindowStrip::~WindowStrip()
@@ -97,7 +99,9 @@ void WindowStrip::scrollChanged()
     // the view has changed, update the windows,
     // start the updating timer, and start the controller
     // to kill the updater after a while
+    updateFrame();
     updateWindows();
+
     m_updateController.start();
     m_frameUpdater.start();
 }
@@ -110,7 +114,7 @@ void WindowStrip::updateWindows()
 
     m_desktop = static_cast<Plasma::Applet *>(parentItem())->view()->effectiveWinId();
     m_windowsOffset = -QPoint(dataX.value<int>(), dataY.value<int>());
-    
+
     showThumbnails();
     //kDebug() << "duration: " << m_time.elapsed();
     //m_timer.restart();
