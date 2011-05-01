@@ -20,8 +20,28 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 Item {
+    id: notificationsApplet
+    state: "default"
+
+    states: [
+        State {
+            name: "default";
+            PropertyChanges {
+                target: notificationsApplet
+                popupIcon: QIcon("dialog-ok")
+            }
+        },
+        State {
+            name: "new-notifications";
+            PropertyChanges {
+                target: notificationsApplet
+                popupIcon: QIcon("preferences-desktop-notification")
+            }
+        }
+    ]
     
     ListModel {
         id: notifications;
@@ -37,6 +57,7 @@ Item {
         }
         
         onNewData: {
+            notificationsApplet.state = "new-notifications";
             notifications.append({"appIcon" : notificationsSource.data[sourceName]["appIcon"],
                                 "appName" : notificationsSource.data[sourceName]["appName"],
                                 "summary" : notificationsSource.data[sourceName]["summary"],
@@ -49,12 +70,14 @@ Item {
     ListView {
         model: notifications
         anchors.fill: parent
-        delegate: Component {
+        delegate: PlasmaComponents.ListItem {
              Row {
+                spacing: 6
                 PlasmaWidgets.IconWidget {
                     icon: QIcon(appIcon)
                 }
                 Column {
+                    spacing: 3
                     Text {
                         text: appName + ": " + body
                     }
