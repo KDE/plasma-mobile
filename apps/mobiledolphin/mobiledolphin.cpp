@@ -33,6 +33,7 @@
 #include <KStandardDirs>
 #include <QAction>
 #include <KAction>
+#include <KRun>
 
 MobileDolphin::MobileDolphin(KUrl url)
 {
@@ -56,9 +57,14 @@ MobileDolphin::MobileDolphin(KUrl url)
 void MobileDolphin::changeDir(QString name)
 {
     KUrl url = lister->url();
-    url.cd(name);
-    rootContext()->setContextProperty("directory", url.prettyUrl());
-    lister->openUrl(url);
+    url.cd(name);   
+    if (!QFileInfo(url.toLocalFile()).isDir()){
+        kDebug() << "eseguiamo: " << url;
+        new KRun(url, this);
+    }else{
+        rootContext()->setContextProperty("directory", url.prettyUrl());
+        lister->openUrl(url);
+    }
 }
 
 void MobileDolphin::showContextualMenu(QString name)
