@@ -52,7 +52,7 @@ Item {
         delegate: Component {
              Row {
                 PlasmaWidgets.IconWidget {
-                    icon: appIcon
+                    icon: QIcon(appIcon)
                 }
                 Column {
                     Text {
