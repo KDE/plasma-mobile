@@ -61,11 +61,14 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
         kDebug() << "Added Bookmark:" << massagedName;
     }
     Nepomuk::Types::Class bookmarkClass(Nepomuk::Bookmark::resourceTypeUri());
-    //Nepomuk::Types::Class bookmarkClass = Nepomuk::Types::Class(Nepomuk::PersonContact::resourceTypeUri()); // for testing
+    //Nepomuk::Types::Class bookmarkClass(Nepomuk::PersonContact::resourceTypeUri()); // for testing
     Nepomuk::Query::ResourceTypeTerm rtt(bookmarkClass);
 
     Nepomuk::Query::Query bookmarkQuery;
     bookmarkQuery.setTerm(rtt);
+
+    kDebug() << "Query:" << bookmarkQuery.toSparqlQuery();
+
     return query(bookmarkQuery);
 }
 

@@ -22,3 +22,4 @@ include_directories(
 add_subdirectory(ontologies)
 add_subdirectory(metadata)
 add_subdirectory(bookmarks)
+add_subdirectory(customsearch)
