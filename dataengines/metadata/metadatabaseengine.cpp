@@ -56,7 +56,7 @@ public:
 
 
 MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args)
-    : Plasma::DataEngine(parent)
+    : Plasma::DataEngine(parent, args)
 {
     Q_UNUSED(args);
     d = new MetadataBaseEnginePrivate;
@@ -172,7 +172,12 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         //_query.setTerm(nepomukTerm);
         //fileQuery.addIncludeFolder(KUrl("/"), true);
         //return query(fileQuery);
-        return query(_query);
+        if (_query.isValid()) {
+            return query(_query);
+        } else {
+            kWarning() << "Query is invalid:" << _query;
+            return false;
+        }
     }
 }
 
