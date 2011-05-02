@@ -24,8 +24,8 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: activityPanel;
-    height: 300;
-    width: 200
+    height: parent.height
+    width: 400
     state: "show"
 
     Image {
@@ -76,10 +76,10 @@ Item {
     property QGraphicsWidget containment
     onContainmentChanged: {
         containment.parent = flickableContainmentItem
-        containment.x = flickableContainmentItem.margins.left
-        containment.y = flickableContainmentItem.margins.top
-        containment.width = flickableContainmentItem.width - flickableContainmentItem.margins.left - flickableContainmentItem.margins.right
-        containment.height = flickableContainmentItem.height - flickableContainmentItem.margins.top - flickableContainmentItem.margins.bottom
+        containment.x = 0
+        containment.y = 0
+        containment.width = flickableContainmentItem.width
+        containment.height = flickableContainmentItem.height
         containment.z = timerResetRegion.z -1
     }
 
@@ -95,12 +95,10 @@ Item {
             }
         }
 
-        PlasmaCore.FrameSvgItem {
+        Item {
             id: flickableContainmentItem
             width: parent.width
             height: parent.height
-            imagePath: "widgets/background"
-            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
         }
     }
 
