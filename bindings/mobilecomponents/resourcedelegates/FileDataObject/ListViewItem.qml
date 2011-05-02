@@ -72,7 +72,7 @@ Item {
                         var _i = _l[_l.length-1];
                         setIcon(_i);
                     } else {
-                        print("HHH types" + types.toString());
+                        //print("HHH types" + types.toString());
                         resourceIcon(types.toString())
                     }
                     //print("icon:" + hasSymbol);
