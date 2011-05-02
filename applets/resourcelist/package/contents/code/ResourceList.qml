@@ -1,4 +1,4 @@
-u// -*- coding: iso-8859-1 -*-
+// -*- coding: iso-8859-1 -*-
 /*
  *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
  *
@@ -34,7 +34,7 @@ Item {
 
     PlasmaCore.DataSource {
         id: metadataSource
-        engine: "active_metadata"
+        engine: "org.kde.active.metadata"
         interval: 0
 
         onSourceAdded: {
@@ -53,7 +53,7 @@ Item {
         }
         Component.onCompleted: {
             //connectedSources = sources;
-            connectedSources = [ "Another brick" ]
+            connectedSources = [ "KDE" ]
         }
 
     }
