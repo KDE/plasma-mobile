@@ -35,7 +35,7 @@ Item {
 
     PlasmaCore.DataSource {
         id: metadataSource
-        engine: "active_metadata"
+        engine: "org.kde.active.metadata"
         interval: 0
 
         onSourceAdded: {
