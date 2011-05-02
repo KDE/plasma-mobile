@@ -98,26 +98,41 @@ Item {
         }
     }
 
-    PlasmaCore.FrameSvgItem {
-        id: background
-        anchors.fill: parent
-        imagePath: "widgets/background"
-        enabledBorders: "RightBorder|TopBorder|BottomBorder"
-    }
-
     AppletStatusWatcher {
         id: appletStatusWatcher
     }
 
     property QGraphicsWidget containment
     onContainmentChanged: {
-        containment.parent = activityPanel
-        containment.x = background.margins.left
-        containment.y = background.margins.top
-        containment.width = background.width - background.margins.left - background.margins.right
-        containment.height = background.height - background.margins.top - background.margins.bottom
+        containment.parent = flickableContainmentItem
+        containment.x = flickableContainmentItem.margins.left
+        containment.y = flickableContainmentItem.margins.top
+        containment.width = containmentFlickable.width - flickableContainmentItem.margins.left - flickableContainmentItem.margins.right
+        containment.height = containmentFlickable.height - flickableContainmentItem.margins.top - flickableContainmentItem.margins.bottom
         containment.z = timerResetRegion.z -1
         appletStatusWatcher.plasmoid = containment
+    }
+
+    Flickable {
+        id: containmentFlickable
+        anchors.fill: parent
+        contentWidth: parent.width+1
+        onContentXChanged: {
+            if (contentX < 0) {
+                contentX = 0;
+            } else if (contentX > width/3) {
+                activityPanel.state = "hidden"
+            }
+        }
+
+
+        PlasmaCore.FrameSvgItem {
+            id: flickableContainmentItem
+            width: parent.width
+            height: parent.height
+            imagePath: "widgets/background"
+            enabledBorders: "RightBorder|TopBorder|BottomBorder"
+        }
     }
 
     MouseArea {
