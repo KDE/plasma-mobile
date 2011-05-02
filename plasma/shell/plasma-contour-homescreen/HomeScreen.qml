@@ -65,6 +65,11 @@ Item {
         activeContainment.parent = mainSlot
         activeContainment.x = 0
         activeContainment.y = 0
+
+        //hide the activity switcher
+        rightEdgePanel.x = homeScreen.width
+        rightEdgePanel.state = "hidden"
+
         state = "Normal"
         transformingChanged(false);
         switcher.current=0
@@ -135,37 +140,10 @@ Item {
             height: homeScreen.height
             property QGraphicsWidget containment
         }
-
-        Item {
-            id : spareSlot
-            objectName: "spareSlot"
-            x: homeScreen.width
-            y: 0
-            z: 9999
-            width: homeScreen.width
-            height: homeScreen.height
-            property QGraphicsWidget containment
-        }
-
-        
-        Item {
-            //FIXME: shouldn't be a panel with that design, excludefromactivities containment assignments should be refactored
-            id: activitySlot
-            objectName: "activitySlot"
-
-            x: homeScreen.width
-            y: 0
-            width: homeScreen.width;
-            height: homeScreen.height
-        }
-    }
-
-    Switcher {
-        id: switcher
     }
 
     RecommendationsPanel {
-        id: rightEdgePanel
+        id: leftEdgePanel
         objectName: "leftEdgePanel"
 
         anchors.verticalCenter: parent.verticalCenter
@@ -191,6 +169,10 @@ Item {
                     target: spareSlot;
                     opacity: 0;
                 }
+                PropertyChanges {
+                    target: spareSlot;
+                    x: homeScreen.width/4
+                }
 
             },
             State {
@@ -207,10 +189,10 @@ Item {
                     target: spareSlot;
                     opacity: 1;
                 }
-                /*PropertyChanges {
-                    target: mainSlot;
-                    y: homeScreen.height;
-                }*/
+                PropertyChanges {
+                    target: spareSlot;
+                    x: 0
+                }
             }
     ]
 
@@ -232,6 +214,12 @@ Item {
                         easing.type: "OutQuad";
                         duration: 300;
                     }
+                    NumberAnimation {
+                        target: spareSlot;
+                        property: "x";
+                        easing.type: "OutQuad";
+                        duration: 300;
+                    }
                 }
                 ScriptAction {
                     script: finishTransition();
@@ -240,6 +228,24 @@ Item {
         }
 
 
+    ActivityPanel {
+        id: rightEdgePanel
+        objectName: "rightEdgePanel"
+
+        anchors.verticalCenter: parent.verticalCenter
+        x: parent.width - width
+    }
+
+    Item {
+        id : spareSlot
+        objectName: "spareSlot"
+        x: 0
+        y: 0
+        width: homeScreen.width
+        height: homeScreen.height
+        property QGraphicsWidget containment
+    }
+
     SystrayPanel {
         id: topEdgePanel;
         objectName: "topEdgePanel";
@@ -247,8 +253,6 @@ Item {
         anchors.horizontalCenter: homeScreen.horizontalCenter;
         y: 0;
     }
-
-
 
     Rectangle {
         id: lockScreenItem
