@@ -25,6 +25,7 @@ Item {
 
     Component.onCompleted: {
         plasmoid.containmentType = "CustomContainment"
+        plasmoid.drawWallpaper = false
         plasmoid.movableApplets = false
     }
 
@@ -70,8 +71,8 @@ Item {
                     dataSource: activitySource
                 }
          pathItemCount: 6
-         property int delegateWidth: mainView.width/1.5
-         property int delegateHeight: mainView.height/1.5
+         property int delegateWidth: mainView.width/1.2
+         property int delegateHeight: delegateWidth/1.6
 
          preferredHighlightBegin: 0.16
          preferredHighlightEnd: 0.16
@@ -91,13 +92,13 @@ Item {
              }
 
              onReleased: {
-                 if (mouse.x < downX && mouse.y > downY) {
+                 if (mouse.y > downY) {
                      if (mainView.currentIndex < mainView.count) {
                          ++mainView.currentIndex
                      } else {
                          mainView.currentIndex = 0
                      }
-                 } else if (mouse.x > downX && mouse.y < downY) {
+                 } else {
                      if (mainView.currentIndex > 0) {
                          --mainView.currentIndex
                      } else {
@@ -108,7 +109,7 @@ Item {
          }
 
          path: Path {
-             startX: mainView.width/2.1
+             startX: mainView.width/3
              startY: mainView.height-mainView.delegateHeight/1.5+32
              PathAttribute { name: "itemScale"; value: 1.0 }
              PathAttribute { name: "itemOpacity"; value: 0 }
@@ -124,7 +125,7 @@ Item {
             PathAttribute { name: "z"; value: 100 }
 
             PathLine {
-                 x: mainView.width/1.6
+                 x: mainView.width/1.2
                  y: mainView.height-mainView.delegateHeight/1.5
             }
             PathAttribute { name: "itemScale"; value: 0.3 }
