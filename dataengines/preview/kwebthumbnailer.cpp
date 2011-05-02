@@ -181,16 +181,16 @@ void KWebThumbnailer::completed( bool success )
 
 void KWebThumbnailer::saveThumbnail()
 {
-    kDebug() << "saving" << d->url.toString() << fileName() << "?";
+    //kDebug() << "saving" << d->url.toString() << fileName() << "?";
     if (QFile::exists(fileName())) {
         d->thumbnail = QImage(fileName());
     } else {
         d->thumbnail.save(fileName());
     }
-    kDebug() << "caching in KIC!?";
+    //kDebug() << "caching in KIC!?";
     if (!d->cache->contains(d->source)) {
         d->cache->insertImage(d->source, d->thumbnail);
-        kDebug() << "inserted into KIC" << d->source;
+        //kDebug() << "inserted into KIC" << d->source;
     }
     d->status = "loaded";
     d->errorText = i18nc("status of thumbnail loader", "Loaded");
