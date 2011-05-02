@@ -24,7 +24,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: activityPanel;
-    height: parent.height;
+    height: parent.height
     width: 400
     state: "show"
 
@@ -72,24 +72,36 @@ Item {
             activityPanel.state = "hidden"
         }
     }
-
-    PlasmaCore.FrameSvgItem {
-        id: background
-        anchors.fill: parent
-        imagePath: "widgets/backgrounda"
-        enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-    }
     
     property QGraphicsWidget containment
     onContainmentChanged: {
-        containment.parent = activityPanel
-        containment.x = background.margins.left
-        containment.y = background.margins.top
-        containment.width = background.width - background.margins.left - background.margins.right
-        containment.height = background.height - background.margins.top - background.margins.bottom
+        containment.parent = flickableContainmentItem
+        containment.x = 0
+        containment.y = 0
+        containment.width = flickableContainmentItem.width
+        containment.height = flickableContainmentItem.height
         containment.z = timerResetRegion.z -1
     }
-    
+
+    Flickable {
+        id: containmentFlickable
+        anchors.fill: parent
+        contentWidth: parent.width+1
+        onContentXChanged: {
+            if (contentX > 0) {
+                contentX = 0;
+            } else if (contentX < -width/3) {
+                activityPanel.state = "hidden"
+            }
+        }
+
+        Item {
+            id: flickableContainmentItem
+            width: parent.width
+            height: parent.height
+        }
+    }
+
     MouseArea {
         id: timerResetRegion;
         z: 9000
