@@ -3,13 +3,11 @@ Comment=
 Encoding=UTF-8
 Keywords=
 Name=activities
-Name[et]=tegevused
+Name[nds]=Aktiviteten
 Name[nl]=activiteiten
-Name[pt]=actividades
 Name[pt_BR]=atividades
 Name[sv]=aktiviteter
 Name[uk]=простори дій
-Name[x-test]=xxactivitiesxx
 Type=Service
 Icon=preferences-activities
 

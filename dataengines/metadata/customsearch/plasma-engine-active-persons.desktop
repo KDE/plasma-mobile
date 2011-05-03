@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=Custom Metadata Search Dataengine
+Name[pt]=Motor de Dados de Pesquisa de Meta-Dados
+Name[sv]=Eget datagränssnitt för metadatasökning
+Name[uk]=Нетиповий рушій для пошуку метаданих
+Name[x-test]=xxCustom Metadata Search Dataenginexx
 Comment=Provides metadata for custom searches in semantic resources
+Comment[pt]=Fornece meta-dados para pesquisas personalizadas nos recursos semânticos
+Comment[sv]=Tillhandahåller metadata för egna sökningar i semantiska resurser
+Comment[uk]=Надає метадані у семантичних ресурсах для нетипових пошуків
+Comment[x-test]=xxProvides metadata for custom searches in semantic resourcesxx
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=nepomuk
