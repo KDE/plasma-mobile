@@ -48,6 +48,9 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
         }
+        Behavior on opacity {
+            NumberAnimation {duration: 1000}
+        }
     }
 
     Image {
@@ -65,9 +68,9 @@ Item {
         id: notifyLoopTimer
         repeat: true
         interval: 1500
-        running: appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus
+        running: activityPanel.state == "hidden" && appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus
         onTriggered: {
-            hintNotify.opacity = 1 - hintNotify.opacity 
+            hint.opacity = 1 - hint.opacity + 0.3
         }
     }
 
@@ -78,18 +81,24 @@ Item {
         anchors.fill: parent
         anchors.rightMargin: -60
 
-        drag.target: activityPanel;
+        drag.target: activityPanel
+        drag.filterChildren: true
         drag.axis: "XAxis"
-        drag.minimumX: - activityPanel.width;
-        drag.maximumX: 0;
-
+        drag.minimumX: - activityPanel.width
+        drag.maximumX: 0
 
         onPressed: {
             activityPanel.state = "dragging"
         }
 
+        onClicked: {
+            if (mouse.x > containmentItem.width) {
+                activityPanel.state = "show"
+            }
+        }
+
         onReleased: {
-            if (-activityPanel.x < activityPanel.parent.width/3) {
+            if (activityPanel.x > -activityPanel.width/3) {
                 activityPanel.state = "show"
                 hintNotify.opacity = 0
                 //notifyLoopTimer.running = false
@@ -99,6 +108,13 @@ Item {
             }
         }
 
+        PlasmaCore.FrameSvgItem {
+            id: containmentItem
+            width: parent.width-60
+            height: parent.height
+            imagePath: "widgets/background"
+            enabledBorders: "RightBorder|TopBorder|BottomBorder"
+        }
     }
 
     Timer {
@@ -116,35 +132,13 @@ Item {
 
     property QGraphicsWidget containment
     onContainmentChanged: {
-        containment.parent = flickableContainmentItem
-        containment.x = flickableContainmentItem.margins.left
-        containment.y = flickableContainmentItem.margins.top
-        containment.width = containmentFlickable.width - flickableContainmentItem.margins.left - flickableContainmentItem.margins.right
-        containment.height = containmentFlickable.height - flickableContainmentItem.margins.top - flickableContainmentItem.margins.bottom
+        containment.parent = containmentItem
+        containment.x = containmentItem.margins.left
+        containment.y = containmentItem.margins.top
+        containment.width = containmentFlickable.width - containmentItem.margins.left - containmentItem.margins.right
+        containment.height = containmentFlickable.height - containmentItem.margins.top - containmentItem.margins.bottom
         containment.z = timerResetRegion.z -1
         appletStatusWatcher.plasmoid = containment
-    }
-
-    Flickable {
-        id: containmentFlickable
-        anchors.fill: parent
-        contentWidth: parent.width+1
-        onContentXChanged: {
-            if (contentX < 0) {
-                contentX = 0;
-            } else if (contentX > width/3) {
-                activityPanel.state = "hidden"
-            }
-        }
-
-
-        PlasmaCore.FrameSvgItem {
-            id: flickableContainmentItem
-            width: parent.width
-            height: parent.height
-            imagePath: "widgets/background"
-            enabledBorders: "RightBorder|TopBorder|BottomBorder"
-        }
     }
 
     MouseArea {
@@ -227,23 +221,11 @@ Item {
         Transition {
             from: "hidden";
             to: "show";
-            SequentialAnimation {
-                ParallelAnimation {
-                    PropertyAnimation {
-                        targets: hint;
-                        properties: "opacity";
-                        duration: 600;
-                        easing.type: "OutCubic";
-                    }
-                }
-                ParallelAnimation {
-                    NumberAnimation {
-                        targets: activityPanel;
-                        properties: "x";
-                        duration: 800;
-                        easing.type: "InOutCubic";
-                    }
-                }
+            NumberAnimation {
+                targets: activityPanel;
+                properties: "x";
+                duration: 800;
+                easing.type: "InOutCubic";
             }
         },
         Transition {
@@ -253,18 +235,6 @@ Item {
                 properties: "x,y";
                 easing.type: "OutQuad";
                 duration: 400;
-            }
-        },
-        Transition {
-            from: "*";
-            to: "dragging";
-            ParallelAnimation {
-                PropertyAnimation {
-                    targets: hint;
-                    properties: "opacity";
-                    duration: 600;
-                    easing.type: "OutCubic";
-                }
             }
         }
     ]
