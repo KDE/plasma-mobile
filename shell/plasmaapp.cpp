@@ -89,6 +89,13 @@ PlasmaApp::PlasmaApp()
     //qRegisterMetaType<Plasma::Wallpaper*>("Wallpaper");
 
     bool useGL = args->isSet("opengl");
+
+    if (!useGL) {
+        //use plasmarc to share this with plasma-windowed
+        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
+        useGL = cg.readEntry("UseOpenGl", false);
+    }
+
     m_mainView = new MobView(0, MobView::mainViewId(), 0);
     m_mainView->setUseGL(useGL);
 
