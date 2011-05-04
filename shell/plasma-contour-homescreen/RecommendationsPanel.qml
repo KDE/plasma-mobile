@@ -30,12 +30,24 @@ Item {
     state: "show"
 
 
-
-    Image {
-        id: hint;
-        source: "images/hint-vertical.png";
-        x: parent.width;
-        anchors.verticalCenter: activityPanel.verticalCenter;
+    PlasmaCore.FrameSvgItem {
+        id: hint
+        anchors.left: activityPanel.right
+        width: 40
+        height: 80
+        anchors.verticalCenter: activityPanel.verticalCenter
+        imagePath: "widgets/background"
+        enabledBorders: "RightBorder|TopBorder|BottomBorder"
+        PlasmaCore.SvgItem {
+            width:32
+            height:32
+            svg: PlasmaCore.Svg {
+                imagePath: "widgets/arrows"
+            }
+            elementId: "right-arrow"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+        }
     }
 
     Image {
@@ -184,7 +196,7 @@ Item {
             }
             PropertyChanges {
                 target: hint;
-                opacity: hint.opacity;
+                opacity: 0;
             }
         }
     ]
