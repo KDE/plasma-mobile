@@ -44,6 +44,7 @@ Item {
         anchors.leftMargin: -60
 
         drag.target: activityPanel;
+        drag.filterChildren: true
         drag.axis: "XAxis"
         drag.minimumX: activityPanel.parent.width - activityPanel.width;
         drag.maximumX: activityPanel.parent.width;
@@ -62,6 +63,12 @@ Item {
             }
         }
 
+        Item {
+            id: containmentItem
+            x: 60
+            width: parent.width
+            height: parent.height
+        }
     }
 
     Timer {
@@ -75,32 +82,12 @@ Item {
     
     property QGraphicsWidget containment
     onContainmentChanged: {
-        containment.parent = flickableContainmentItem
+        containment.parent = containmentItem
         containment.x = 0
         containment.y = 0
-        containment.width = flickableContainmentItem.width
-        containment.height = flickableContainmentItem.height
+        containment.width = activityPanel.width
+        containment.height = activityPanel.height
         containment.z = timerResetRegion.z -1
-    }
-
-    Flickable {
-        id: containmentFlickable
-        anchors.fill: parent
-        contentWidth: parent.width+1
-        flickableDirection: Flickable.HorizontalFlick
-        onContentXChanged: {
-            if (contentX > 0) {
-                contentX = 0;
-            } else if (contentX < -width/3) {
-                activityPanel.state = "hidden"
-            }
-        }
-
-        Item {
-            id: flickableContainmentItem
-            width: parent.width
-            height: parent.height
-        }
     }
 
     MouseArea {
