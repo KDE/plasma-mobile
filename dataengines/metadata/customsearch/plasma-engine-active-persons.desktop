@@ -1,10 +1,14 @@
 [Desktop Entry]
 Name=Custom Metadata Search Dataengine
+Name[et]=Kohandatud metaandmete otsingu andmemootor
+Name[nl]=Aangepaste engine voor zoeken in metagegevens
 Name[pt]=Motor de Dados de Pesquisa de Meta-Dados
 Name[sv]=Eget datagränssnitt för metadatasökning
 Name[uk]=Нетиповий рушій для пошуку метаданих
 Name[x-test]=xxCustom Metadata Search Dataenginexx
 Comment=Provides metadata for custom searches in semantic resources
+Comment[et]=Semantiliste ressurssides kohandatud otsingu metaandmed
+Comment[nl]=Levert metagegevens voor aangepast zoeken in semantische hulpbronnen
 Comment[pt]=Fornece meta-dados para pesquisas personalizadas nos recursos semânticos
 Comment[sv]=Tillhandahåller metadata för egna sökningar i semantiska resurser
 Comment[uk]=Надає метадані у семантичних ресурсах для нетипових пошуків
