@@ -68,7 +68,7 @@ Item {
         }
 
         onReleased: {
-            if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2  || mouse.x < 60) {
+            if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2 || mouse.x < 60) {
                 activityPanel.state = "show"
                 timer.restart()
             } else {
