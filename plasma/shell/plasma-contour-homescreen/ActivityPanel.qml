@@ -21,6 +21,7 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1
 
 Item {
     id: activityPanel;
@@ -28,57 +29,35 @@ Item {
     width: parent.width/1.5
     state: "show"
 
-    PlasmaCore.FrameSvgItem {
-        id: hint
-        x: -40
-        width: 40
-        height: 80
-        anchors.verticalCenter: activityPanel.verticalCenter
-        imagePath: "widgets/background"
-        enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-        PlasmaCore.SvgItem {
-            width:32
-            height:32
-            svg: PlasmaCore.Svg {
-                imagePath: "widgets/arrows"
-            }
-            elementId: "left-arrow"
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: parent.right
-        }
-    }
-
-
-
-    MouseArea {
+    //Uses a MouseEventListener instead of a MouseArea to not block any mouse event
+    MouseEventListener {
         id: hintregion;
 
         anchors.fill: parent
         anchors.leftMargin: -60
 
-        drag.target: activityPanel;
-        drag.filterChildren: true
-        drag.axis: "XAxis"
-        drag.minimumX: activityPanel.parent.width - activityPanel.width;
-        drag.maximumX: activityPanel.parent.width;
-
-        onClicked: {
-            if (mouse.x < 60) {
-                activityPanel.state = "show"
-            }
+        property int startX
+        property int startMouseX
+        onPressed: {
+            startMouseX = mouse.screenX
+            startX = activityPanel.x
+            hideTimer.running = false
+            activityPanel.state = "dragging"
         }
 
-        onPressed: {
-            activityPanel.state = "dragging"
+        onPositionChanged: {
+            activityPanel.x = Math.max(startX + (mouse.screenX - startMouseX),
+                                    activityPanel.parent.width - activityPanel.width)
+            hideTimer.running = false
         }
 
         onReleased: {
             if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
-                activityPanel.state = "show"
-                timer.restart()
-            } else {
-                activityPanel.state = "hidden"
-            }
+                    activityPanel.state = "show"
+                    hideTimer.restart()
+                } else {
+                    activityPanel.state = "hidden"
+                }
         }
 
         Item {
@@ -87,10 +66,34 @@ Item {
             width: parent.width
             height: parent.height
         }
+
+        PlasmaCore.FrameSvgItem {
+            id: hint
+            x: 20
+            width: 40
+            height: 80
+            anchors.verticalCenter: parent.verticalCenter
+            imagePath: "widgets/background"
+            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+            PlasmaCore.SvgItem {
+                width:32
+                height:32
+                svg: PlasmaCore.Svg {
+                    imagePath: "widgets/arrows"
+                }
+                elementId: "left-arrow"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: activityPanel.state = "show"
+            }
+        }
     }
 
     Timer {
-        id : timer
+        id : hideTimer
         interval: 4000;
         running: false;
         onTriggered:  {
@@ -105,19 +108,6 @@ Item {
         containment.y = 0
         containment.width = activityPanel.width
         containment.height = activityPanel.height
-        containment.z = timerResetRegion.z -1
-    }
-
-    MouseArea {
-        id: timerResetRegion;
-        z: 9000
-
-        anchors.fill: parent
-
-        onPressed: {
-            timer.restart()
-            mouse.accepted = false
-        }
     }
 
     states: [
@@ -132,7 +122,7 @@ Item {
                 opacity: 0;
             }
             PropertyChanges {
-                target: timer;
+                target: hideTimer;
                 running: true
             }
         },

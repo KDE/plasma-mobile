@@ -89,6 +89,7 @@ Item {
              onPressed: {
                  downX = mouse.x
                  downY = mouse.y
+                 plasmoid.status = "AcceptingInputStatus"
              }
 
              onReleased: {
@@ -105,6 +106,7 @@ Item {
                          mainView.currentIndex = mainView.count-1
                      }
                  }
+                 plasmoid.status = "PassiveStatus"
             }
          }
 
