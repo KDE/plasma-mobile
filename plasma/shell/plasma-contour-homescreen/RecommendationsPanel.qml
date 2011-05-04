@@ -24,87 +24,78 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1
 
 Item {
-    id: activityPanel;
+    id: recommendationsPanel;
     height: 500;
     width: 380
     state: "show"
 
 
-    PlasmaCore.FrameSvgItem {
-        id: hint
-        anchors.left: activityPanel.right
-        width: 40
-        height: 80
-        anchors.verticalCenter: activityPanel.verticalCenter
-        imagePath: "widgets/background"
-        enabledBorders: "RightBorder|TopBorder|BottomBorder"
-        PlasmaCore.SvgItem {
-            width:32
-            height:32
-            svg: PlasmaCore.Svg {
-                imagePath: "widgets/arrows"
-            }
-            elementId: "right-arrow"
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-        }
-        Behavior on opacity {
-            NumberAnimation {duration: 1000}
-        }
-    }
-
-    Image {
-        id: hintNotify;
-        source: "images/hint-vertical-notify.png";
-        x: parent.width;
-        anchors.verticalCenter: activityPanel.verticalCenter;
-        opacity: 0
-        Behavior on opacity {
-            NumberAnimation {duration: 1000}
-        }
-    }
-
     Timer {
         id: notifyLoopTimer
         repeat: true
         interval: 1500
-        running: activityPanel.state == "hidden" && appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus
+        running: recommendationsPanel.state == "hidden" && appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus
         onTriggered: {
             hint.opacity = 1 - hint.opacity + 0.3
         }
     }
 
 
-    MouseArea {
+    MouseEventListener {
         id: hintregion;
 
         anchors.fill: parent
         anchors.rightMargin: -60
 
-        drag.target: activityPanel
-        drag.filterChildren: true
-        drag.axis: "XAxis"
-        drag.minimumX: - activityPanel.width
-        drag.maximumX: 0
-
+        property int startX
+        property int startMouseX
         onPressed: {
-            activityPanel.state = "dragging"
+            startMouseX = mouse.screenX
+            startX = recommendationsPanel.x
+            hideTimer.running = false
+            recommendationsPanel.state = "dragging"
         }
 
-        onClicked: {
-            if (mouse.x > containmentItem.width) {
-                activityPanel.state = "show"
-            }
+        onPositionChanged: {
+            recommendationsPanel.x = Math.min(startX + (mouse.screenX - startMouseX), 0)
+            hideTimer.running = false
         }
 
         onReleased: {
-            if (activityPanel.x > -activityPanel.width/3) {
-                activityPanel.state = "show"
+            if (recommendationsPanel.x > -recommendationsPanel.width/3) {
+                recommendationsPanel.state = "show"
                 hintNotify.opacity = 0
                 //notifyLoopTimer.running = false
-                timer.restart()
+                hideTimer.restart()
             } else {
-                activityPanel.state = "hidden"
+                recommendationsPanel.state = "hidden"
+            }
+        }
+
+        PlasmaCore.FrameSvgItem {
+            id: hint
+            anchors.left: containmentItem.right
+            width: 40
+            height: 80
+            anchors.verticalCenter: parent.verticalCenter
+            imagePath: "widgets/background"
+            enabledBorders: "RightBorder|TopBorder|BottomBorder"
+            PlasmaCore.SvgItem {
+                width:32
+                height:32
+                svg: PlasmaCore.Svg {
+                    imagePath: "widgets/arrows"
+                }
+                elementId: "right-arrow"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+            }
+            Behavior on opacity {
+                NumberAnimation {duration: 1000}
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: recommendationsPanel.state = "show"
             }
         }
 
@@ -118,11 +109,11 @@ Item {
     }
 
     Timer {
-        id : timer
+        id : hideTimer
         interval: 4000;
         running: false;
         onTriggered:  {
-            activityPanel.state = "hidden"
+            recommendationsPanel.state = "hidden"
         }
     }
 
@@ -137,18 +128,18 @@ Item {
         containment.y = containmentItem.margins.top
         containment.width = containmentFlickable.width - containmentItem.margins.left - containmentItem.margins.right
         containment.height = containmentFlickable.height - containmentItem.margins.top - containmentItem.margins.bottom
-        containment.z = timerResetRegion.z -1
+        containment.z = hideTimerResetRegion.z -1
         appletStatusWatcher.plasmoid = containment
     }
 
     MouseArea {
-        id: timerResetRegion;
+        id: hideTimerResetRegion;
         z: 9000
 
         anchors.fill: parent
 
         onPressed: {
-            timer.restart()
+            hideTimer.restart()
             mouse.accepted = false
         }
     }
@@ -157,7 +148,7 @@ Item {
         State {
             name: "show";
             PropertyChanges {
-                target: activityPanel;
+                target: recommendationsPanel;
                 x: 0;
             }
             PropertyChanges {
@@ -165,14 +156,14 @@ Item {
                 opacity: 0;
             }
             PropertyChanges {
-                target: timer;
+                target: hideTimer;
                 running: true
             }
         },
         State {
             name: "hidden";
             PropertyChanges {
-                target: activityPanel;
+                target: recommendationsPanel;
                 x: - width;
             }
             PropertyChanges {
@@ -183,9 +174,9 @@ Item {
         State {
             name: "dragging"
             PropertyChanges {
-                target: activityPanel;
-                x: activityPanel.x;
-                y: activityPanel.y;
+                target: recommendationsPanel;
+                x: recommendationsPanel.x;
+                y: recommendationsPanel.y;
 
             }
             PropertyChanges {
@@ -202,7 +193,7 @@ Item {
             SequentialAnimation {
                 ParallelAnimation {
                     NumberAnimation {
-                        targets: activityPanel;
+                        targets: recommendationsPanel;
                         properties: "x";
                         duration: 1000;
                         easing.type: "InOutCubic";
@@ -222,7 +213,7 @@ Item {
             from: "hidden";
             to: "show";
             NumberAnimation {
-                targets: activityPanel;
+                targets: recommendationsPanel;
                 properties: "x";
                 duration: 800;
                 easing.type: "InOutCubic";
