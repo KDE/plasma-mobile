@@ -74,8 +74,8 @@ Item {
          property int delegateWidth: mainView.width/1.2
          property int delegateHeight: delegateWidth/1.6
 
-         preferredHighlightBegin: 0.16
-         preferredHighlightEnd: 0.16
+         preferredHighlightBegin: 0.08
+         preferredHighlightEnd: 0.08
 
 
          delegate: ActivityDelegate{}
