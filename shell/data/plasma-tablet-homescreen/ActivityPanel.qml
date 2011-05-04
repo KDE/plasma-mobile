@@ -21,12 +21,21 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1
 
-Item {
+MouseEventListener {
     id: activityPanel;
     height: parent.height
     width: 400
     state: "show"
+
+    onPressed: {
+        print(mouse.x)
+    }
+
+    onPositionChanged: {
+        print(mouse.x)
+    }
 
     PlasmaCore.FrameSvgItem {
         id: hint
@@ -70,6 +79,7 @@ Item {
 
         onPressed: {
             activityPanel.state = "dragging"
+            timer.running = false
         }
 
         onReleased: {
@@ -105,19 +115,6 @@ Item {
         containment.y = 0
         containment.width = activityPanel.width
         containment.height = activityPanel.height
-        containment.z = timerResetRegion.z -1
-    }
-
-    MouseArea {
-        id: timerResetRegion;
-        z: 9000
-
-        anchors.fill: parent
-
-        onPressed: {
-            timer.restart()
-            mouse.accepted = false
-        }
     }
 
     states: [

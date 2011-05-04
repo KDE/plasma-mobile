@@ -8,6 +8,7 @@ set(mobilecomponents_SRCS
     appletstatuswatcher.cpp
     resourcedelegate.cpp
     categorizedproxymodel.cpp
+    mouseeventlistener.cpp
     )
 
 INCLUDE_DIRECTORIES(

@@ -27,6 +27,7 @@
 #include "categorizedproxymodel.h"
 #include "pagedproxymodel.h"
 #include "resourcedelegate.h"
+#include "mouseeventlistener.h"
 
 void MobileComponentsPlugin::registerTypes(const char *uri)
 {
@@ -36,6 +37,7 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<AppletStatusWatcher>(uri, 0, 1, "AppletStatusWatcher");
     qmlRegisterType<ResourceDelegate>(uri, 0, 1, "ResourceDelegate");
     qmlRegisterType<CategorizedProxyModel>(uri, 0, 1, "CategorizedProxyModel");
+    qmlRegisterType<MouseEventListener>(uri, 0, 1, "MouseEventListener");
 }
 
 
