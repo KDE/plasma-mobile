@@ -28,11 +28,24 @@ Item {
     width: parent.width/1.5
     state: "show"
 
-    Image {
-        id: hint;
-        source: "images/hint-vertical.png";
-        x: -40;
-        anchors.verticalCenter: activityPanel.verticalCenter;
+    PlasmaCore.FrameSvgItem {
+        id: hint
+        x: -40
+        width: 40
+        height: 80
+        anchors.verticalCenter: activityPanel.verticalCenter
+        imagePath: "widgets/background"
+        enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+        PlasmaCore.SvgItem {
+            width:32
+            height:32
+            svg: PlasmaCore.Svg {
+                imagePath: "widgets/arrows"
+            }
+            elementId: "left-arrow"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+        }
     }
 
 
@@ -55,7 +68,7 @@ Item {
         }
 
         onReleased: {
-            if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
+            if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2  || mouse.x < 60) {
                 activityPanel.state = "show"
                 timer.restart()
             } else {
@@ -79,7 +92,7 @@ Item {
             activityPanel.state = "hidden"
         }
     }
-    
+
     property QGraphicsWidget containment
     onContainmentChanged: {
         containment.parent = containmentItem
@@ -139,7 +152,7 @@ Item {
             }
             PropertyChanges {
                 target: hint;
-                opacity: hint.opacity;
+                opacity: 0;
             }
         }
     ]
