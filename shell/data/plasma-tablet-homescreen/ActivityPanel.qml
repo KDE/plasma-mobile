@@ -62,13 +62,18 @@ Item {
         drag.minimumX: activityPanel.parent.width - activityPanel.width;
         drag.maximumX: activityPanel.parent.width;
 
+        onClicked: {
+            if (mouse.x < 60) {
+                activityPanel.state = "show"
+            }
+        }
 
         onPressed: {
             activityPanel.state = "dragging"
         }
 
         onReleased: {
-            if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2 || mouse.x < 60) {
+            if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
                 activityPanel.state = "show"
                 timer.restart()
             } else {
@@ -92,7 +97,7 @@ Item {
             activityPanel.state = "hidden"
         }
     }
-    
+
     property QGraphicsWidget containment
     onContainmentChanged: {
         containment.parent = containmentItem
