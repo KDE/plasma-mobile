@@ -87,6 +87,7 @@ Item {
         id: containmentFlickable
         anchors.fill: parent
         contentWidth: parent.width+1
+        flickableDirection: Flickable.HorizontalFlick
         onContentXChanged: {
             if (contentX > 0) {
                 contentX = 0;
