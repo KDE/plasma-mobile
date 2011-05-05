@@ -86,10 +86,7 @@ PlasmaCore.FrameSvgItem {
                 }
                 onPressAndHold: {
                     contextMenu.delegate = resourceDelegate
-                    contextMenu.visible = true
-                }
-                onReleased: {
-                    contextMenu.visible = false
+                    contextMenu.state = "show"
                 }
             }
         }

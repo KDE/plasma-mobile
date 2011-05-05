@@ -26,9 +26,11 @@ Rectangle {
     anchors.fill: parent
     color: Qt.rgba(0,0,0,0.4)
 
+    state: "hidden"
+
     MouseArea {
         anchors.fill:parent
-        onClicked: background.visible = false
+        onClicked: background.state = "hidden"
     }
 
     property Item delegate
@@ -36,6 +38,11 @@ Rectangle {
         var menuPos = delegate.mapToItem(parent, delegate.width/2-menuFrame.width/2, delegate.height)
         menuFrame.x = menuPos.x
         menuFrame.y = menuPos.y
+    }
+
+    PlasmaCore.Svg {
+        id: lineSvg
+        imagePath: "widgets/line"
     }
 
     PlasmaCore.FrameSvgItem {
@@ -51,9 +58,79 @@ Rectangle {
             Text {
                 text: "Share on Dropbox"
             }
+            PlasmaCore.SvgItem {
+                svg: lineSvg
+                elementId: "horizontal-line"
+                width: entriesColumn.width
+                height: lineSvg.elementSize("horizontal-line").height
+            }
             Text {
                 text: "Add to current Activity"
             }
         }
     }
+
+    states: [
+        State {
+            name: "show"
+            PropertyChanges {
+                target: background
+                opacity: 1
+            }
+            PropertyChanges {
+                target: menuFrame
+                scale: 1
+            }
+        },
+        State {
+            name: "hidden"
+            PropertyChanges {
+                target: background
+                opacity: 0
+            }
+            PropertyChanges {
+                target: menuFrame
+                scale: 0
+            }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            from: "show"
+            to: "hidden"
+            ParallelAnimation {
+                NumberAnimation {
+                    targets: background
+                    properties: "opacity"
+                    duration: 250
+                    easing.type: "InOutCubic"
+                }
+                NumberAnimation {
+                    targets: menuFrame
+                    properties: "scale"
+                    duration: 250
+                    easing.type: "InOutCubic"
+                }
+            }
+        },
+        Transition {
+            from: "hidden"
+            to: "show"
+            ParallelAnimation {
+                NumberAnimation {
+                    targets: background
+                    properties: "opacity"
+                    duration: 250
+                    easing.type: "InOutCubic"
+                }
+                NumberAnimation {
+                    targets: menuFrame
+                    properties: "scale"
+                    duration: 250
+                    easing.type: "InOutCubic"
+                }
+            }
+        }
+    ]
 }

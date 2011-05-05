@@ -160,6 +160,5 @@ Item {
 
     ContextMenu {
         id: contextMenu
-        visible: false
     }
 }
