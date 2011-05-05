@@ -134,17 +134,20 @@ Item {
                 left:parent.left
                 bottom: parent.bottom
                 right: parent.right
+                leftMargin: 32
+                rightMargin: 32
             }
 
             Repeater {
                 model: categoryListModel.categories
 
                 PlasmaCore.FrameSvgItem {
-                    imagePath: "widgets/background"
-                    height: Math.min(400, 64+webItemList.count*78)
-                    width: 300
+                    imagePath: "dialogs/background"
+                    width: Math.min(470, 64+webItemList.count*200)
+                    height: 190
 
                     PlasmaCore.FrameSvgItem {
+                        id: categoryTitle
                         imagePath: "widgets/extender-dragger"
                         prefix: "root"
                         anchors {
@@ -155,7 +158,7 @@ Item {
                             rightMargin: parent.margins.right
                             topMargin: parent.margins.top
                         }
-                        height: categoryText.height + margins.top+margins.bottom
+                        height: categoryText.height + margins.top + margins.bottom
                         Text {
                             id: categoryText
                             text: modelData
@@ -171,18 +174,17 @@ Item {
                         id: webItemList
                         anchors {
                             left: parent.left
-                            top: categoryText.bottom
+                            top: categoryTitle.bottom
                             right: parent.right
-                            bottom:parent.bottom
+                            bottom: parent.bottom
                             leftMargin: parent.margins.left
                             rightMargin: parent.margins.right
                             bottomMargin: parent.margins.bottom
                         }
                         snapMode: ListView.SnapToItem
                         clip: true
-                        highlightMoveDuration: 300
                         spacing: 8;
-                        orientation: Qt.Vertical
+                        orientation: Qt.Horizontal
 
                         model: MobileComponents.CategorizedProxyModel {
                             sourceModel: metadataModel
@@ -191,8 +193,8 @@ Item {
                         }
 
                         delegate: MobileComponents.ResourceDelegate {
-                            width:400
-                            height:72
+                            width: 200
+                            height: 64
                             resourceType: model.resourceType
                         }
                     }
