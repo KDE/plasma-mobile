@@ -33,6 +33,10 @@ Rectangle {
         id: theme
     }
 
+    Behavior on opacity {
+        NumberAnimation {duration: 250}
+    }
+
     Rectangle {
         id: lockArea
         anchors.top: parent.top

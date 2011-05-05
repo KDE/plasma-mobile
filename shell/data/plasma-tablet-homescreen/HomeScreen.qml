@@ -57,9 +57,9 @@ Item {
 
     onLockedChanged: {
         if (locked) {
-            lockScreenItem.visible = true
+            lockScreenItem.opacity = 1
         } else {
-            lockScreenItem.visible = false
+            lockScreenItem.opacity = 0
         }
     }
 
