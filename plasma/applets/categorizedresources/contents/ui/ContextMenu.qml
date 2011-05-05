@@ -31,7 +31,12 @@ Rectangle {
     function activateItem(x, y)
     {
         var pos = entriesColumn.mapFromItem(delegate, x, y)
-        print(entriesColumn.childAt(pos.x, pos.y))
+        var item = entriesColumn.childAt(pos.x, pos.y)
+        if (item) {
+            print("You clicked " + item.text)
+            feedbackMessageText.text = item.text
+            feedbackMessageAnimation.running = true
+        }
     }
 
     MouseArea {
@@ -39,11 +44,17 @@ Rectangle {
         onClicked: background.state = "hidden"
     }
 
+    property string resourceType
+
     property Item delegate
     onDelegateChanged: {
         var menuPos = delegate.mapToItem(parent, delegate.width/2-menuFrame.width/2, delegate.height)
         menuFrame.x = menuPos.x
         menuFrame.y = menuPos.y
+    }
+
+    ActionsModel {
+        id: actionsModel
     }
 
     PlasmaCore.Svg {
@@ -61,8 +72,12 @@ Rectangle {
             id: entriesColumn
             x: menuFrame.margins.left
             y: menuFrame.margins.top
-            Text {
-                text: "Share on Dropbox"
+            spacing: 5
+            Repeater {
+                model: actionsModel.model(resourceType)
+                Text {
+                    text: model.text
+                }
             }
             PlasmaCore.SvgItem {
                 svg: lineSvg
@@ -139,4 +154,41 @@ Rectangle {
             }
         }
     ]
+
+    PlasmaCore.FrameSvgItem {
+        id: feedbackMessage
+        imagePath: "dialogs/background"
+        width: feedbackMessageText.width + margins.left + margins.right
+        height: feedbackMessageText.height + margins.top + margins.bottom
+        anchors.centerIn: parent
+        Text {
+            id: feedbackMessageText
+            x: feedbackMessage.margins.left
+            y: feedbackMessage.margins.top
+            font.bold: true
+            font.pixelSize: 20
+        }
+        scale: 0
+    }
+    SequentialAnimation {
+        id: feedbackMessageAnimation
+        NumberAnimation {
+            target: feedbackMessage
+            properties: "scale"
+            to: 1
+            duration: 300
+        }
+        PauseAnimation {
+            duration: 500
+        }
+        NumberAnimation {
+            target: feedbackMessage
+            properties: "scale"
+            to: 0
+            duration: 300
+        }
+        ScriptAction {
+            script: background.state = "hidden"
+        }
+    }
 }

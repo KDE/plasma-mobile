@@ -86,6 +86,7 @@ PlasmaCore.FrameSvgItem {
                 }
                 onPressAndHold: {
                     contextMenu.delegate = resourceDelegate
+                    contextMenu.resourceType = modelData
                     contextMenu.state = "show"
                     //event.accepted = true
                     webItemList.interactive = false
