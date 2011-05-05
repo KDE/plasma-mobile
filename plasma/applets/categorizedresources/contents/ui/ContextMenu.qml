@@ -21,20 +21,39 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-PlasmaCore.FrameSvgItem {
-    imagePath: "dialogs/background"
-    width: entriesColumn.width + margins.left + margins.right
-    height: entriesColumn.height + margins.top + margins.bottom
+Rectangle {
+    id: background
+    anchors.fill: parent
+    color: Qt.rgba(0,0,0,0.4)
 
-    Column {
-        id: entriesColumn
-        x: margins.left
-        y: margins.top
-        Text {
-            text: "Share on"
-        }
-        Text {
-            text: "Add to current Activity"
+    MouseArea {
+        anchors.fill:parent
+        onClicked: background.visible = false
+    }
+
+    property Item delegate
+    onDelegateChanged: {
+        var menuPos = delegate.mapToItem(parent, delegate.width/2-menuFrame.width/2, delegate.height)
+        menuFrame.x = menuPos.x
+        menuFrame.y = menuPos.y
+    }
+
+    PlasmaCore.FrameSvgItem {
+        id: menuFrame
+        imagePath: "dialogs/background"
+        width: entriesColumn.width + margins.left + margins.right
+        height: entriesColumn.height + margins.top + margins.bottom
+
+        Column {
+            id: entriesColumn
+            x: menuFrame.margins.left
+            y: menuFrame.margins.top
+            Text {
+                text: "Share on Dropbox"
+            }
+            Text {
+                text: "Add to current Activity"
+            }
         }
     }
 }

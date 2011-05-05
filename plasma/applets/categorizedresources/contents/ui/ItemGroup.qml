@@ -75,6 +75,7 @@ PlasmaCore.FrameSvgItem {
         }
 
         delegate: MobileComponents.ResourceDelegate {
+            id: resourceDelegate
             width: 250
             height: 64
             resourceType: model.resourceType
@@ -84,9 +85,7 @@ PlasmaCore.FrameSvgItem {
                     plasmoid.openUrl(String(url))
                 }
                 onPressAndHold: {
-                    var menuPos = parent.mapToItem(main, 0, 0)
-                    contextMenu.x = menuPos.x
-                    contextMenu.y = menuPos.y
+                    contextMenu.delegate = resourceDelegate
                     contextMenu.visible = true
                 }
                 onReleased: {
