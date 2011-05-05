@@ -196,6 +196,12 @@ Item {
                             width: 250
                             height: 64
                             resourceType: model.resourceType
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: {
+                                    plasmoid.openUrl(String(url))
+                                }
+                            }
                         }
                     }
                 }
