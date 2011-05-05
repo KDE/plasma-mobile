@@ -7,8 +7,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
  
 Item {
     id: resourceItem
-    height: 72
-    width: 400
+    anchors.fill: parent
 
     Item {
         id: itemFrame
@@ -23,7 +22,7 @@ Item {
 
         PlasmaWidgets.IconWidget {
             id: previewImage
-            height:64
+            height: 64
             width: 64
             anchors.margins: 8
 
@@ -85,15 +84,14 @@ Item {
             }
         }
 
-        PlasmaWidgets.Label {
+        Text {
             id: previewLabel
             text: label
             //text: url
             font.pixelSize: 14
             font.bold: true
-            height: 30
+            wrapMode: Text.Wrap
 
-            width: parent.width - previewImage.width
             anchors.top: itemFrame.top
             //anchors.bottom: infoLabel.top;
             anchors.left: previewImage.right
@@ -101,7 +99,7 @@ Item {
             anchors.margins: 8
         }
 
-        PlasmaWidgets.Label {
+        Text {
             id: infoLabel
             //image: metadataSource.data[DataEngineSource]["fileName"]
             //text: "the long and winding road..."
