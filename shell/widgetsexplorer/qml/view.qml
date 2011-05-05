@@ -16,6 +16,10 @@ Rectangle {
     signal addAppletRequested(string plugin)
     signal closeRequested
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     states: [
         State {
             name: "horizontal"
@@ -107,7 +111,7 @@ Rectangle {
             MobileComponents.IconDelegate {
                 icon: decoration
                 text: display
-                textColor: "white"
+                textColor: theme.textColor
                 onClicked: {
                     currentPlugin = pluginName
                     detailsIcon.icon = decoration
@@ -146,7 +150,6 @@ Rectangle {
         state: "hidden"
 
         imagePath: "widgets/background"
-        
 
         Flow {
             id: infoContent
