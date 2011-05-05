@@ -28,6 +28,12 @@ Rectangle {
 
     state: "hidden"
 
+    function activateItem(x, y)
+    {
+        var pos = entriesColumn.mapFromItem(delegate, x, y)
+        print(entriesColumn.childAt(pos.x, pos.y))
+    }
+
     MouseArea {
         anchors.fill:parent
         onClicked: background.state = "hidden"
