@@ -19,14 +19,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
-    id: bookmarks
+    id: main
     width: 540
     height: 540
 
@@ -141,69 +140,8 @@ Item {
             Repeater {
                 model: categoryListModel.categories
 
-                PlasmaCore.FrameSvgItem {
-                    imagePath: "dialogs/background"
-                    width: Math.min(470, 64+webItemList.count*200)
-                    height: 190
-
-                    PlasmaCore.FrameSvgItem {
-                        id: categoryTitle
-                        imagePath: "widgets/extender-dragger"
-                        prefix: "root"
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                            top: parent.top
-                            leftMargin: parent.margins.left
-                            rightMargin: parent.margins.right
-                            topMargin: parent.margins.top
-                        }
-                        height: categoryText.height + margins.top + margins.bottom
-                        Text {
-                            id: categoryText
-                            text: modelData
-                            anchors {
-                                top: parent.top
-                                horizontalCenter: parent.horizontalCenter
-                                topMargin: parent.margins.top
-                            }
-                        }
-                    }
-
-                    ListView {
-                        id: webItemList
-                        anchors {
-                            left: parent.left
-                            top: categoryTitle.bottom
-                            right: parent.right
-                            bottom: parent.bottom
-                            leftMargin: parent.margins.left
-                            rightMargin: parent.margins.right
-                            bottomMargin: parent.margins.bottom
-                        }
-                        snapMode: ListView.SnapToItem
-                        clip: true
-                        spacing: 8;
-                        orientation: Qt.Horizontal
-
-                        model: MobileComponents.CategorizedProxyModel {
-                            sourceModel: metadataModel
-                            categoryRole: "className"
-                            currentCategory: modelData
-                        }
-
-                        delegate: MobileComponents.ResourceDelegate {
-                            width: 250
-                            height: 64
-                            resourceType: model.resourceType
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    plasmoid.openUrl(String(url))
-                                }
-                            }
-                        }
-                    }
+                ItemGroup {
+                    
                 }
             }
         }
@@ -218,5 +156,10 @@ Item {
             plasmoid.busy = true
             metadataSource.connectedSources = [searchBox.text]
        }
+    }
+
+    ContextMenu {
+        id: contextMenu
+        visible: false
     }
 }
