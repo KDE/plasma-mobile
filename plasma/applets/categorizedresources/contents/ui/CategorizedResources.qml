@@ -71,10 +71,12 @@ Item {
             y: 48
             height: childrenRect.height
             width: childrenRect.width + 20
-            color: "white"
+            color: Qt.rgba(1,1,1,0.8)
             radius: 10
             anchors.top: searchRow.top
             anchors.left: parent.left
+            anchors.leftMargin: 22
+
             Text {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: plasmoid.activityName
@@ -87,7 +89,7 @@ Item {
             anchors {
                 top: parent.top
                 right: parent.right
-                topMargin: 22
+                topMargin: 12
                 rightMargin: 22
             }
 
@@ -142,15 +144,29 @@ Item {
                     height: Math.min(400, 64+webItemList.count*78)
                     width: 300
 
-                    Text {
-                        id: categoryText
-                        text: modelData
+                    PlasmaCore.FrameSvgItem {
+                        imagePath: "widgets/extender-dragger"
+                        prefix: "root"
                         anchors {
+                            left: parent.left
+                            right: parent.right
                             top: parent.top
-                            horizontalCenter: parent.horizontalCenter
+                            leftMargin: parent.margins.left
+                            rightMargin: parent.margins.right
                             topMargin: parent.margins.top
                         }
+                        height: categoryText.height + margins.top+margins.bottom
+                        Text {
+                            id: categoryText
+                            text: modelData
+                            anchors {
+                                top: parent.top
+                                horizontalCenter: parent.horizontalCenter
+                                topMargin: parent.margins.top
+                            }
+                        }
                     }
+
                     ListView {
                         id: webItemList
                         anchors {
