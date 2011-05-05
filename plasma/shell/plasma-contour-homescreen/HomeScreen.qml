@@ -77,12 +77,9 @@ Item {
 
     onLockedChanged: {
         if (locked) {
-            lockScreenItem.x = 0
-            lockScreenItem.y = 0
-            unlockTextAnimation.running = true
-        } else if (lockScreenItem.x == 0 && lockScreenItem.y == 0) {
-            lockScreenItem.x = 0
-            lockScreenItem.y = homeScreen.height
+            lockScreenItem.opacity = 1
+        } else {
+            lockScreenItem.opacity = 0
         }
     }
 
@@ -254,76 +251,12 @@ Item {
         y: 0;
     }
 
-    Rectangle {
+    LockScreen {
         id: lockScreenItem
-        width: parent.width
-        height: parent.height
-        color: Qt.rgba(0, 0, 0, 0.8)
+        anchors.fill: parent
 
-        Text {
-            id: unlockText
-            text: "Drag away to unlock"
-            color: "white"
-            anchors.centerIn: parent
-            font.pixelSize: 30
-            opacity: 0
-            Component.onCompleted: {
-                unlockTextAnimation.running = true
-            }
-        }
-        SequentialAnimation {
-            id: unlockTextAnimation
-            running: false
-            NumberAnimation {
-                target: unlockText
-                property: "opacity"
-                to: 1
-                duration: 1000
-            }
-            PauseAnimation { duration: 5000 }
-            NumberAnimation {
-                target: unlockText
-                property: "opacity"
-                to: 0
-                duration: 1000
-            }
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            drag.target: lockScreenItem
-            onReleased: {
-                var lockedX = false
-                var lockedY = false
-                if (lockScreenItem.x > homeScreen.width/3) {
-                    lockScreenItem.x = homeScreen.width
-                } else if (lockScreenItem.x < -homeScreen.width/3) {
-                    lockScreenItem.x = -homeScreen.width
-                } else {
-                    lockScreenItem.x = 0
-                    lockedX = true
-                }
-
-                if (lockScreenItem.y > homeScreen.height/3) {
-                    lockScreenItem.y = homeScreen.height
-                } else if (lockScreenItem.y < -homeScreen.height/3) {
-                    lockScreenItem.y = -homeScreen.height
-                } else {
-                    lockScreenItem.y = 0
-                    lockedY = true
-                }
-                if (lockedX && lockedY) {
-                    homeScreen.locked = true
-                } else {
-                    homeScreen.locked = false
-                }
-            }
-        }
-        Behavior on x {
-            NumberAnimation { duration: 250 }
-        }
-        Behavior on y {
-            NumberAnimation { duration: 250 }
+        onUnlocked: {
+            homeScreen.locked = false
         }
     }
 }
