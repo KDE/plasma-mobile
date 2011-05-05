@@ -30,7 +30,6 @@ Item {
     width: 540
     height: 540
 
-    property alias title: header
     property alias urls: metadataSource.connectedSources
 
     PlasmaCore.DataSource {
@@ -44,7 +43,6 @@ Item {
         }
 
         onDataChanged: {
-            statusLabel.text = i18n("Idle.");
             plasmoid.busy = false
         }
         Component.onCompleted: {
@@ -58,113 +56,133 @@ Item {
         id: theme
     }
 
-    PlasmaWidgets.Label {
-        id: header
-        text: i18n("<h2>Search ...</h2>")
-        anchors { top: parent.top; left:parent.left; right: parent.right; bottomMargin: 8 }
-    }
+    Item {
+        property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
 
-    Row {
-        id: searchRow
-        width: parent.width
-        anchors { top: header.bottom; }
 
-        PlasmaWidgets.LineEdit {
-            id: searchBox
-            clearButtonShown: true
-            width: parent.width - icon.width - parent.spacing
-            onTextChanged: {
-                timer.running = true
+        anchors.fill: parent
+        anchors.leftMargin: availScreenRect.x
+        anchors.topMargin: availScreenRect.y
+        anchors.rightMargin: parent.width - availScreenRect.width - availScreenRect.x
+        anchors.bottomMargin: parent.height - availScreenRect.height - availScreenRect.y
+
+        Rectangle {
+            x: 32
+            y: 48
+            height: childrenRect.height
+            width: childrenRect.width + 20
+            color: "white"
+            radius: 10
+            anchors.top: searchRow.top
+            anchors.left: parent.left
+            Text {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: plasmoid.activityName
+                font.pixelSize: 25
             }
         }
-        PlasmaWidgets.IconWidget {
-            id: icon
-            icon: QIcon("system-search")
-            onClicked: {
-                //timer.running = true
-                print(categoryListModel.categories)
+
+        Row {
+            id: searchRow
+            anchors {
+                top: parent.top
+                right: parent.right
+                topMargin: 22
+                rightMargin: 22
             }
-        }
 
-    }
-
-    PlasmaCore.DataModel {
-        id: metadataModel
-        dataSource: metadataSource
-    }
-
-    MobileComponents.CategorizedProxyModel {
-        id: categoryListModel
-        sourceModel: metadataModel
-        categoryRole: "className"
-    }
-
-    Flow {
-        id: resultsFlow
-        spacing: 8
-
-        anchors {
-            top: searchRow.bottom
-            left:parent.left
-            bottom: statusLabel.top
-            right: parent.right
-        }
-
-        Repeater {
-            model: categoryListModel.categories
-            
-            PlasmaCore.FrameSvgItem {
-                imagePath: "widgets/frame"
-                prefix: "raised"
-                height: Math.min(400, 64+webItemList.count*78)
-                width: 300
-
-                Text {
-                    id: categoryText
-                    text: modelData
-                    anchors {
-                        top: parent.top
-                        horizontalCenter: parent.horizontalCenter
-                        topMargin: parent.margins.top
-                    }
-                }
-                ListView {
-                    id: webItemList
-                    anchors {
-                        left: parent.left
-                        top: categoryText.bottom
-                        right: parent.right
-                        bottom:parent.bottom
-                        leftMargin: parent.margins.left
-                        rightMargin: parent.margins.right
-                        bottomMargin: parent.margins.bottom
-                    }
-                    snapMode: ListView.SnapToItem
-                    clip: true
-                    highlightMoveDuration: 300
-                    spacing: 8;
-                    orientation: Qt.Vertical
-
-                    model: MobileComponents.CategorizedProxyModel {
-                        sourceModel: metadataModel
-                        categoryRole: "className"
-                        currentCategory: modelData
-                    }
-
-                    delegate: MobileComponents.ResourceDelegate {
-                        width:400
-                        height:72
-                        resourceType: model.resourceType
-                    }
+            PlasmaWidgets.LineEdit {
+                id: searchBox
+                clearButtonShown: true
+                width: 200
+                onTextChanged: {
+                    timer.running = true
                 }
             }
-        }
-    }
+            PlasmaWidgets.IconWidget {
+                id: icon
+                icon: QIcon("system-search")
+                size: "32x32"
+                onClicked: {
+                    timer.running = true
+                    print(categoryListModel.categories)
+                }
+            }
 
-    Text {
-        id: statusLabel
-        text: i18n("Idle.")
-        anchors { left:parent.left; right: parent.right; bottom: parent.bottom; }
+        }
+
+        PlasmaCore.DataModel {
+            id: metadataModel
+            dataSource: metadataSource
+        }
+
+        MobileComponents.CategorizedProxyModel {
+            id: categoryListModel
+            sourceModel: metadataModel
+            categoryRole: "className"
+        }
+
+        Flow {
+            id: resultsFlow
+            spacing: 8
+            flow: Flow.TopToBottom
+
+            anchors {
+                top: searchRow.bottom
+                left:parent.left
+                bottom: parent.bottom
+                right: parent.right
+            }
+
+            Repeater {
+                model: categoryListModel.categories
+
+                PlasmaCore.FrameSvgItem {
+                    imagePath: "widgets/background"
+                    height: Math.min(400, 64+webItemList.count*78)
+                    width: 300
+
+                    Text {
+                        id: categoryText
+                        text: modelData
+                        anchors {
+                            top: parent.top
+                            horizontalCenter: parent.horizontalCenter
+                            topMargin: parent.margins.top
+                        }
+                    }
+                    ListView {
+                        id: webItemList
+                        anchors {
+                            left: parent.left
+                            top: categoryText.bottom
+                            right: parent.right
+                            bottom:parent.bottom
+                            leftMargin: parent.margins.left
+                            rightMargin: parent.margins.right
+                            bottomMargin: parent.margins.bottom
+                        }
+                        snapMode: ListView.SnapToItem
+                        clip: true
+                        highlightMoveDuration: 300
+                        spacing: 8;
+                        orientation: Qt.Vertical
+
+                        model: MobileComponents.CategorizedProxyModel {
+                            sourceModel: metadataModel
+                            categoryRole: "className"
+                            currentCategory: modelData
+                        }
+
+                        delegate: MobileComponents.ResourceDelegate {
+                            width:400
+                            height:72
+                            resourceType: model.resourceType
+                        }
+                    }
+                }
+            }
+        }
     }
 
     Timer {
@@ -175,7 +193,6 @@ Item {
        onTriggered: {
             plasmoid.busy = true
             metadataSource.connectedSources = [searchBox.text]
-            statusLabel.text = i18n("Searching for %1...", searchBox.text);
        }
     }
 }
