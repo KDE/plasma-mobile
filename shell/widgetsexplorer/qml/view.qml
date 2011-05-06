@@ -32,7 +32,7 @@ Rectangle {
             }
             PropertyChanges {
                 target: appletsView;
-                anchors.bottom: widgetsExplorer.bottom                
+                anchors.bottom: widgetsExplorer.bottom
             }
             PropertyChanges {
                 target: infoContent;
