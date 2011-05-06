@@ -39,6 +39,22 @@ Rectangle {
         }
     }
 
+    function highlightItem(x, y)
+    {
+        var pos = entriesColumn.mapFromItem(delegate, x, y)
+        var item = entriesColumn.childAt(pos.x, pos.y)
+        if (item && item.text) {
+            var itemPos = menuFrame.mapFromItem(item, 0, 0)
+            highlightFrame.x = -highlightFrame.margins.right + itemPos.x
+            highlightFrame.y = -highlightFrame.margins.top + itemPos.y
+            highlightFrame.width = entriesColumn.width + highlightFrame.margins.right + highlightFrame.margins.left
+            highlightFrame.height = item.height + highlightFrame.margins.top + highlightFrame.margins.bottom
+            highlightFrame.opacity = 1
+        } else {
+            highlightFrame.opacity = 0
+        }
+    }
+
     MouseArea {
         anchors.fill:parent
         onClicked: background.state = "hidden"
@@ -63,6 +79,7 @@ Rectangle {
 
         menuObject.x = menuPos.x
         menuObject.y = menuPos.y
+        highlightFrame.opacity = 0
     }
 
     ActionsModel {
@@ -101,13 +118,32 @@ Rectangle {
         PlasmaCore.FrameSvgItem {
             id: menuFrame
             imagePath: "dialogs/background"
-            width: entriesColumn.width + margins.left + margins.right
-            height: entriesColumn.height + margins.top + margins.bottom
+            width: entriesColumn.width + margins.left + margins.right + highlightFrame.margins.left + highlightFrame.margins.right
+            height: entriesColumn.height + margins.top + margins.bottom + highlightFrame.margins.top + highlightFrame.margins.bottom
+
+            PlasmaCore.FrameSvgItem {
+                id: highlightFrame
+                imagePath: "widgets/viewitem"
+                prefix: "hover"
+                opacity: 0
+                Behavior on y {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            }
 
             Column {
                 id: entriesColumn
-                x: menuFrame.margins.left
-                y: menuFrame.margins.top
+                x: menuFrame.margins.left + highlightFrame.margins.left
+                y: menuFrame.margins.top + highlightFrame.margins.top
                 spacing: 8
                 Repeater {
                     model: actionsModel.model(resourceType)

@@ -23,6 +23,7 @@ import QtQuick 1.0
 Text {
     id: menuItem
     font.pointSize: 14
+    width: Math.max(paintedWidth, parent.width)
 
     MouseArea {
         anchors.fill: parent
