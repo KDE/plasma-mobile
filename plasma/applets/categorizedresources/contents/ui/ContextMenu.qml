@@ -95,10 +95,10 @@ Rectangle {
                 id: entriesColumn
                 x: menuFrame.margins.left
                 y: menuFrame.margins.top
-                spacing: 5
+                spacing: 8
                 Repeater {
                     model: actionsModel.model(resourceType)
-                    Text {
+                    MenuItem {
                         text: model.text
                     }
                 }
@@ -108,7 +108,7 @@ Rectangle {
                     width: entriesColumn.width
                     height: lineSvg.elementSize("horizontal-line").height
                 }
-                Text {
+                MenuItem {
                     text: "Add to current Activity"
                 }
             }
