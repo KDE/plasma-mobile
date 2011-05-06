@@ -49,6 +49,18 @@ Rectangle {
     property Item delegate
     onDelegateChanged: {
         var menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, delegate.height)
+
+        if (menuPos.y > background.height/2) {
+            menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, -menuFrame.height)
+            tipSvgItem.anchors.bottom = undefined
+            tipSvgItem.anchors.top = menuFrame.bottom
+            tipSvgItem.elementId = "baloon-tip-bottom"
+        } else {
+            tipSvgItem.anchors.bottom = menuFrame.top
+            tipSvgItem.anchors.top = undefined
+            tipSvgItem.elementId = "baloon-tip-top"
+        }
+
         menuObject.x = menuPos.x
         menuObject.y = menuPos.y
     }
@@ -76,12 +88,13 @@ Rectangle {
             id: tipSvgItem
             svg: tipSvg
             elementId: "baloon-tip-top"
-            width: tipSvg.elementSize("baloon-tip-top").width
-            height: tipSvg.elementSize("baloon-tip-top").height
+            width: tipSvg.elementSize(elementId).width
+            height: tipSvg.elementSize(elementId).height
             anchors {
                 horizontalCenter: menuFrame.horizontalCenter
                 bottom: menuFrame.top
                 bottomMargin: -tipSvg.elementSize("hint-top-shadow").height
+                topMargin: -tipSvg.elementSize("hint-bottom-shadow").height
             }
         }
 
