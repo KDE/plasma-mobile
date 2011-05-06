@@ -91,6 +91,10 @@ PlasmaCore.FrameSvgItem {
                     //event.accepted = true
                     webItemList.interactive = false
                 }
+                onPositionChanged: {
+                    contextMenu.highlightItem(mouse.x, mouse.y)
+                }
+
                 onReleased: {
                     webItemList.interactive = true
                     contextMenu.activateItem(mouse.x, mouse.y)
