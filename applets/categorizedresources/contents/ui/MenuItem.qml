@@ -23,6 +23,7 @@ import QtQuick 1.0
 Text {
     id: menuItem
     font.pointSize: 14
+    horizontalAlignment: Text.AlignHCenter
     width: Math.max(paintedWidth, parent.width)
 
     MouseArea {

@@ -21,12 +21,17 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-Rectangle {
+Item {
     id: background
     anchors.fill: parent
-    color: Qt.rgba(0,0,0,0.4)
 
     state: "hidden"
+
+    onStateChanged: {
+        if (state == "hidden") {
+            delegate.setDarkenVisible(false)
+        }
+    }
 
     function activateItem(x, y)
     {
@@ -104,6 +109,7 @@ Rectangle {
             width: tipSvg.elementSize(elementId).width
             height: tipSvg.elementSize(elementId).height
             state: "top"
+            z: 900
             anchors {
                 horizontalCenter: menuFrame.horizontalCenter
                 bottomMargin: -tipSvg.elementSize("hint-top-shadow").height
@@ -165,10 +171,11 @@ Rectangle {
                 id: entriesColumn
                 x: menuFrame.margins.left + highlightFrame.margins.left
                 y: menuFrame.margins.top + highlightFrame.margins.top
-                spacing: 8
+                spacing: 5
                 Repeater {
                     model: actionsModel.model(resourceType)
                     Column {
+                        spacing: 5
                         property alias text: menuItem.text
                         MenuItem {
                             id: menuItem
