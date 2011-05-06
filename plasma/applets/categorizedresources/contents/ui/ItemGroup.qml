@@ -74,10 +74,16 @@ PlasmaCore.FrameSvgItem {
             currentCategory: modelData
         }
 
+        highlight: PlasmaCore.FrameSvgItem {
+                id: highlightFrame
+                imagePath: "widgets/viewitem"
+                prefix: "hover"
+        }
+
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
             width: 250
-            height: 64
+            height: webItemList.height
             resourceType: model.resourceType
             MouseArea {
                 anchors.fill: parent
@@ -90,6 +96,7 @@ PlasmaCore.FrameSvgItem {
                     contextMenu.state = "show"
                     //event.accepted = true
                     webItemList.interactive = false
+                    webItemList.currentIndex = index
                 }
                 onPositionChanged: {
                     contextMenu.highlightItem(mouse.x, mouse.y)
@@ -98,6 +105,7 @@ PlasmaCore.FrameSvgItem {
                 onReleased: {
                     webItemList.interactive = true
                     contextMenu.activateItem(mouse.x, mouse.y)
+                    webItemList.currentIndex = -1
                 }
             }
         }

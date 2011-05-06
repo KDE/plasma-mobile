@@ -40,11 +40,11 @@ QtObject {
     property ListModel fileDataObjectModel: ListModel {
         id: fileDataObjectModel
         ListElement {
-            text: "Share on Dropbox"
+            text: "share on Dropbox"
             description: "Make this file available across the network and with your friends"
         }
         ListElement {
-            text: "Rename..."
+            text: "rename..."
             description: "Rename this file"
         }
     }
@@ -52,19 +52,19 @@ QtObject {
     property ListModel textDocumentModel: ListModel {
         id: textDocumentModel
         ListElement {
-            text: "Share on Dropbox"
+            text: "share on Dropbox"
             description: "Make this file available across the network and with your friends"
         }
         ListElement {
-            text: "Copy to Clipboard"
+            text: "copy to Clipboard"
             description: "Copy this text on the clipboard"
         }
         ListElement {
-            text: "Upload to Pastebin"
+            text: "upload to Pastebin"
             description: "Upload this text to the Pastebin service"
         }
         ListElement {
-            text: "Rename..."
+            text: "rename..."
             description: "Rename this file"
         }
     }
@@ -72,19 +72,19 @@ QtObject {
     property ListModel presentationModel: ListModel {
         id: presentationModel
         ListElement {
-            text: "Share on Dropbox"
+            text: "share on Dropbox"
             description: "Make this file available across the network and with your friends"
         }
         ListElement {
-            text: "Upload on SlideShare"
+            text: "upload on SlideShare"
             description: "Upload this presentation on SlideShare"
         }
         ListElement {
-            text: "Start full screen"
+            text: "start full screen"
             description: "directly start this presentation"
         }
         ListElement {
-            text: "Rename..."
+            text: "rename..."
             description: "Rename this file"
         }
     }

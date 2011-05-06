@@ -168,15 +168,19 @@ Rectangle {
                 spacing: 8
                 Repeater {
                     model: actionsModel.model(resourceType)
-                    MenuItem {
-                        text: model.text
+                    Column {
+                        property alias text: menuItem.text
+                        MenuItem {
+                            id: menuItem
+                            text: model.text
+                        }
+                        PlasmaCore.SvgItem {
+                            svg: lineSvg
+                            elementId: "horizontal-line"
+                            width: entriesColumn.width
+                            height: lineSvg.elementSize("horizontal-line").height
+                        }
                     }
-                }
-                PlasmaCore.SvgItem {
-                    svg: lineSvg
-                    elementId: "horizontal-line"
-                    width: entriesColumn.width
-                    height: lineSvg.elementSize("horizontal-line").height
                 }
                 MenuItem {
                     text: "Add to current Activity"
