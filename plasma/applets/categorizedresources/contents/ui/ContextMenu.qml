@@ -62,6 +62,23 @@ Rectangle {
         imagePath: "widgets/line"
     }
 
+    PlasmaCore.Svg {
+        id: tipSvg
+        imagePath: "dialogs/background"
+    }
+
+    PlasmaCore.SvgItem {
+        svg: tipSvg
+        elementId: "baloon-tip-top"
+        width: tipSvg.elementSize("baloon-tip-top").width
+        height: tipSvg.elementSize("baloon-tip-top").height
+        anchors {
+            horizontalCenter: menuFrame.horizontalCenter
+            bottom: menuFrame.top
+            bottomMargin: -tipSvg.elementSize("hint-top-shadow").height
+        }
+    }
+
     PlasmaCore.FrameSvgItem {
         id: menuFrame
         imagePath: "dialogs/background"
