@@ -78,8 +78,8 @@ Item {
     function addApplet(applet, pos)
     {
         if (applet.pluginName == "org.kde.appswitcher") {
-            applet.width = 64
-            applet.height = 48
+            applet.width = 50
+            applet.height = 36
             switcherDialog.mainItem = applet
 
             switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)

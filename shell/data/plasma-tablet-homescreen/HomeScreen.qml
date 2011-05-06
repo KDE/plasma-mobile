@@ -68,7 +68,7 @@ Item {
         id: availableScreenRect
         objectName: "availableScreenRect"
         anchors.fill: parent
-        anchors.topMargin: 32
+        anchors.topMargin: 42
         anchors.bottomMargin: 28
 
         //this properties will define "structs" for reserved screen of the panels

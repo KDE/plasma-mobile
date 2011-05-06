@@ -137,7 +137,7 @@ activity=
 excludeFromActivities=true
 desktop=-1
 formfactor=2
-geometry=0,0,800,100
+geometry=200,0,800,100
 immutability=1
 location=3
 plugin=org.kde.mobilesystemtray
@@ -145,37 +145,37 @@ screen=0
 zvalue=10
 
 [Containments][8][Applets][9]
-geometry=2,0,64,48
+geometry=0,0,48,32
 immutability=1
 plugin=org.kde.appswitcher
 zvalue=0
 
 [Containments][8][Applets][10]
-geometry=16,4,28.2857142857143,24
+geometry=60,2,24,24
 immutability=1
 plugin=notifications
 zvalue=0
 
 [Containments][8][Applets][11]
-geometry=49,4,24,24
+geometry=100,2,24,24
 immutability=1
 plugin=notifier
 zvalue=0
 
 [Containments][8][Applets][12]
-geometry=60,4,24,24
+geometry=140,2,24,24
 immutability=1
 plugin=battery
 zvalue=0
 
 [Containments][8][Applets][13]
-geometry=90,4,24,24
+geometry=180,2,24,24
 immutability=1
 plugin=org.kde.networkmanagement
 zvalue=0
 
 [Containments][8][Applets][14]
-geometry=120,4,24,24
+geometry=220,2,96,24
 immutability=1
 plugin=digital-clock
 zvalue=0

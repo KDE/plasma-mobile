@@ -24,7 +24,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Item {
     id: systrayPanel;
     state: "passive"
-    height: handle.height + handle.y;
+    height: handle.height + handle.y + 12;
     width:  parent.width;
 
     PlasmaCore.Svg {
