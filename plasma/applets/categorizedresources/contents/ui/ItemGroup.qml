@@ -24,9 +24,34 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 PlasmaCore.FrameSvgItem {
+    id: itemGroup
     imagePath: "dialogs/background"
     width: Math.min(470, 64+webItemList.count*200)
     height: 190
+    z: 0
+
+    Rectangle {
+        id: darkenRect
+        color: Qt.rgba(0,0,0,0.4)
+        width: main.width
+        height: main.height
+        opacity: 0
+
+        x: -itemGroup.x - itemGroup.parent.x
+        y: -itemGroup.y - itemGroup.parent.y
+
+        /*onOpacityChanged: {
+            darkenRect.x = -darkenRect.mapToItem(main, 0, 0).x
+            darkenRect.y = -darkenRect.mapToItem(main, 0, 0).y
+        }*/
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
 
     PlasmaCore.FrameSvgItem {
         id: categoryTitle
@@ -82,9 +107,21 @@ PlasmaCore.FrameSvgItem {
 
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
-            width: 250
+            width: 240
             height: webItemList.height
             resourceType: model.resourceType
+            function setDarkenVisible(visible)
+            {
+                if (visible) {
+                    itemGroup.z = 900
+                    darkenRect.opacity = 1
+                } else {
+                    webItemList.currentIndex = -1
+                    itemGroup.z = 0
+                    darkenRect.opacity = 0
+                }
+            }
+
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -96,8 +133,10 @@ PlasmaCore.FrameSvgItem {
                     contextMenu.state = "show"
                     //event.accepted = true
                     webItemList.interactive = false
+                    setDarkenVisible(true)
                     webItemList.currentIndex = index
                 }
+
                 onPositionChanged: {
                     contextMenu.highlightItem(mouse.x, mouse.y)
                 }
@@ -105,7 +144,6 @@ PlasmaCore.FrameSvgItem {
                 onReleased: {
                     webItemList.interactive = true
                     contextMenu.activateItem(mouse.x, mouse.y)
-                    webItemList.currentIndex = -1
                 }
             }
         }
