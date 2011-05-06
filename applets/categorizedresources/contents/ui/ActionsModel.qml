@@ -30,6 +30,9 @@ QtObject {
         case "TextDocument":
             return textDocumentModel;
             break;
+        case "Presentation":
+            return presentationModel;
+            break;
         default:
         }
     }
@@ -59,6 +62,26 @@ QtObject {
         ListElement {
             text: "Upload to Pastebin"
             description: "Upload this text to the Pastebin service"
+        }
+        ListElement {
+            text: "Rename..."
+            description: "Rename this file"
+        }
+    }
+
+    property ListModel presentationModel: ListModel {
+        id: presentationModel
+        ListElement {
+            text: "Share on Dropbox"
+            description: "Make this file available across the network and with your friends"
+        }
+        ListElement {
+            text: "Upload on SlideShare"
+            description: "Upload this presentation on SlideShare"
+        }
+        ListElement {
+            text: "Start full screen"
+            description: "directly start this presentation"
         }
         ListElement {
             text: "Rename..."
