@@ -70,11 +70,10 @@ Item {
         PlasmaCore.FrameSvgItem {
             id: hint
             x: 20
-            width: 40
+            width: 60
             height: 80
             anchors.verticalCenter: parent.verticalCenter
             imagePath: "widgets/background"
-            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
             PlasmaCore.SvgItem {
                 width:32
                 height:32
@@ -83,7 +82,8 @@ Item {
                 }
                 elementId: "left-arrow"
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
+                anchors.left: parent.left
+                anchors.leftMargin: hint.margins.left-5
             }
             MouseArea {
                 anchors.fill: parent

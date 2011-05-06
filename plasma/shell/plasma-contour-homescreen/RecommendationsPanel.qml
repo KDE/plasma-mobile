@@ -75,7 +75,8 @@ Item {
         PlasmaCore.FrameSvgItem {
             id: hint
             anchors.left: containmentItem.right
-            width: 40
+            anchors.leftMargin: -8
+            width: 48
             height: 80
             anchors.verticalCenter: parent.verticalCenter
             imagePath: "widgets/background"
@@ -88,7 +89,8 @@ Item {
                 }
                 elementId: "right-arrow"
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.rightMargin: hint.margins.right-5
             }
             Behavior on opacity {
                 NumberAnimation {duration: 1000}
