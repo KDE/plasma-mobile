@@ -48,9 +48,9 @@ Rectangle {
 
     property Item delegate
     onDelegateChanged: {
-        var menuPos = delegate.mapToItem(parent, delegate.width/2-menuFrame.width/2, delegate.height)
-        menuFrame.x = menuPos.x
-        menuFrame.y = menuPos.y
+        var menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, delegate.height)
+        menuObject.x = menuPos.x
+        menuObject.y = menuPos.y
     }
 
     ActionsModel {
@@ -67,43 +67,50 @@ Rectangle {
         imagePath: "dialogs/background"
     }
 
-    PlasmaCore.SvgItem {
-        svg: tipSvg
-        elementId: "baloon-tip-top"
-        width: tipSvg.elementSize("baloon-tip-top").width
-        height: tipSvg.elementSize("baloon-tip-top").height
-        anchors {
-            horizontalCenter: menuFrame.horizontalCenter
-            bottom: menuFrame.top
-            bottomMargin: -tipSvg.elementSize("hint-top-shadow").height
+
+    Item {
+        id: menuObject
+        width: menuFrame.width
+        height: 1
+        PlasmaCore.SvgItem {
+            id: tipSvgItem
+            svg: tipSvg
+            elementId: "baloon-tip-top"
+            width: tipSvg.elementSize("baloon-tip-top").width
+            height: tipSvg.elementSize("baloon-tip-top").height
+            anchors {
+                horizontalCenter: menuFrame.horizontalCenter
+                bottom: menuFrame.top
+                bottomMargin: -tipSvg.elementSize("hint-top-shadow").height
+            }
         }
-    }
 
-    PlasmaCore.FrameSvgItem {
-        id: menuFrame
-        imagePath: "dialogs/background"
-        width: entriesColumn.width + margins.left + margins.right
-        height: entriesColumn.height + margins.top + margins.bottom
+        PlasmaCore.FrameSvgItem {
+            id: menuFrame
+            imagePath: "dialogs/background"
+            width: entriesColumn.width + margins.left + margins.right
+            height: entriesColumn.height + margins.top + margins.bottom
 
-        Column {
-            id: entriesColumn
-            x: menuFrame.margins.left
-            y: menuFrame.margins.top
-            spacing: 5
-            Repeater {
-                model: actionsModel.model(resourceType)
-                Text {
-                    text: model.text
+            Column {
+                id: entriesColumn
+                x: menuFrame.margins.left
+                y: menuFrame.margins.top
+                spacing: 5
+                Repeater {
+                    model: actionsModel.model(resourceType)
+                    Text {
+                        text: model.text
+                    }
                 }
-            }
-            PlasmaCore.SvgItem {
-                svg: lineSvg
-                elementId: "horizontal-line"
-                width: entriesColumn.width
-                height: lineSvg.elementSize("horizontal-line").height
-            }
-            Text {
-                text: "Add to current Activity"
+                PlasmaCore.SvgItem {
+                    svg: lineSvg
+                    elementId: "horizontal-line"
+                    width: entriesColumn.width
+                    height: lineSvg.elementSize("horizontal-line").height
+                }
+                Text {
+                    text: "Add to current Activity"
+                }
             }
         }
     }
@@ -116,7 +123,7 @@ Rectangle {
                 opacity: 1
             }
             PropertyChanges {
-                target: menuFrame
+                target: menuObject
                 scale: 1
             }
         },
@@ -127,7 +134,7 @@ Rectangle {
                 opacity: 0
             }
             PropertyChanges {
-                target: menuFrame
+                target: menuObject
                 scale: 0
             }
         }
@@ -145,7 +152,7 @@ Rectangle {
                     easing.type: "InOutCubic"
                 }
                 NumberAnimation {
-                    targets: menuFrame
+                    targets: menuObject
                     properties: "scale"
                     duration: 250
                     easing.type: "InOutCubic"
@@ -163,7 +170,7 @@ Rectangle {
                     easing.type: "InOutCubic"
                 }
                 NumberAnimation {
-                    targets: menuFrame
+                    targets: menuObject
                     properties: "scale"
                     duration: 250
                     easing.type: "InOutCubic"
