@@ -17,11 +17,11 @@ Item {
         interval: 0
 
         Component.onCompleted: {
-            print("connected:" + connectedSources);
+            //print("connected:" + connectedSources);
         }
 
         onDataUpdated: {
-            print(" dataUpdated: " + source + data);
+            //print(" dataUpdated: " + source + data);
         }
     }
 
@@ -30,19 +30,28 @@ Item {
     }
 
 
-    Image {
-        id: previewImage
-        fillMode: Image.PreserveAspectCrop
-        smooth: true
-        width: 96
-        height: 72
-
+    Rectangle {
+        id: frameRect
         anchors {
             top: parent.top;
             left: parent.left;
             //right: textLabel.left;
             margins: 12;
         }
+        width: 100
+        height: 67
+        color: theme.textColor
+        opacity: .6
+        radius: 1
+    }
+
+    Image {
+        id: previewImage
+        fillMode: Image.PreserveAspectCrop
+        smooth: true
+        width: frameRect.width - 2
+        height: frameRect.height - 2
+        anchors.centerIn: frameRect
 
         source: {
             if (typeof pmSource.data[description] != "undefined") {
@@ -90,13 +99,6 @@ Item {
     }
 
     /*
-    Rectangle {
-        anchors { top: parent.top; left: parent.left; right: textLabel.right; }
-        height: parent.height
-        color: theme.textColor
-        opacity: .05
-        radius: 4
-    }
 
     Component.onCompleted: {
         print("Bookmark created: " + description);
