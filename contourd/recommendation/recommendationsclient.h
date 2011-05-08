@@ -21,7 +21,7 @@
 
 #include <QObject>
 
-#include "recommendationsclient_export.h"
+#include "contourclient_export.h"
 
 
 class QDBusPendingCallWatcher;

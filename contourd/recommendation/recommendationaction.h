@@ -24,7 +24,7 @@
 
 #include <QString>
 
-#include "recommendationsclient_export.h"
+#include "contourclient_export.h"
 
 namespace Contour {
 

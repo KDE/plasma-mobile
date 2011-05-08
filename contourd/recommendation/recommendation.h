@@ -24,7 +24,7 @@
 
 #include <QtCore/QObject>
 
-#include "recommendationsclient_export.h"
+#include "contourclient_export.h"
 
 
 namespace Nepomuk {
