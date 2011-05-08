@@ -1,6 +1,10 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Web Dashboard
+Name[pt]=Painel da Web
+Name[sv]=Webbinstrumentpanel
+Name[uk]=Інтернет-панель
+Name[x-test]=xxWeb Dashboardxx
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
