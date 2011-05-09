@@ -41,6 +41,7 @@ public:
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
+    void entriesRemoved(const QList<QUrl> &urls);
 
 private:
     Nepomuk::Query::Query m_query;

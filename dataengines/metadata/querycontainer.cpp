@@ -48,7 +48,15 @@ void QueryContainer::newEntries(const QList< Nepomuk::Query::Result >& entries)
         Nepomuk::Resource resource = res.resource();
         addResource(resource);
     }
-    //scheduleSourcesUpdated();
+    checkForUpdate();
+}
+
+void QueryContainer::entriesRemoved(const QList<QUrl> &urls)
+{
+    foreach (const QUrl &url, urls) {
+        setData(url.toString(), QVariant());
+    }
+    checkForUpdate();
 }
 
 void QueryContainer::addResource(Nepomuk::Resource resource)
@@ -163,7 +171,6 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
     }
     data["properties"] = _properties;
     setData(source, data);
-    checkForUpdate();
 }
 
 #include "querycontainer.moc"
