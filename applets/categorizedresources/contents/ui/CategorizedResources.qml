@@ -40,7 +40,7 @@ Item {
 
         onSourceAdded: {
             //console.log("source added:" + source);
-            connectSource(source);
+            //connectSource(source);
         }
 
         onDataChanged: {
@@ -52,6 +52,7 @@ Item {
         }
 
     }
+
 
     PlasmaCore.Theme {
         id: theme
@@ -116,6 +117,7 @@ Item {
 
         PlasmaCore.DataModel {
             id: metadataModel
+            keyRoleFilter: ".*"
             dataSource: metadataSource
         }
 
@@ -128,7 +130,7 @@ Item {
         Flow {
             id: resultsFlow
             spacing: 8
-            flow: Flow.TopToBottom
+            //flow: Flow.TopToBottom
 
             anchors {
                 top: searchRow.bottom
@@ -159,7 +161,7 @@ Item {
             if (searchBox.text) {
                 metadataSource.connectedSources = [searchBox.text]
             } else {
-                metadataSource.connectedSources = ["CurrentActivityResources:"]
+                metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]
             }
        }
     }

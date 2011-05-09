@@ -22,7 +22,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
-    id: background
+    id: contextMenu
     anchors.fill: parent
 
     state: "hidden"
@@ -41,6 +41,7 @@ Item {
             print("You clicked " + item.text)
             feedbackMessageText.text = item.text
             feedbackMessageAnimation.running = true
+            item.activated()
         }
     }
 
@@ -62,16 +63,18 @@ Item {
 
     MouseArea {
         anchors.fill:parent
-        onClicked: background.state = "hidden"
+        onClicked: contextMenu.state = "hidden"
     }
 
     property string resourceType
+    property string source
+    property string resourceUrl
 
     property Item delegate
     onDelegateChanged: {
         var menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, delegate.height)
 
-        if (menuPos.y > background.height/2) {
+        if (menuPos.y > contextMenu.height/2) {
             menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, -menuFrame.height)
             tipSvgItem.state = "top"
         } else {
@@ -189,7 +192,9 @@ Item {
                         }
                     }
                 }
-                AddToActivityItem {}
+                AddToActivityItem {
+                    
+                }
             }
         }
     }
@@ -198,7 +203,7 @@ Item {
         State {
             name: "show"
             PropertyChanges {
-                target: background
+                target: contextMenu
                 opacity: 1
             }
             PropertyChanges {
@@ -209,7 +214,7 @@ Item {
         State {
             name: "hidden"
             PropertyChanges {
-                target: background
+                target: contextMenu
                 opacity: 0
             }
             PropertyChanges {
@@ -225,7 +230,7 @@ Item {
             to: "hidden"
             ParallelAnimation {
                 NumberAnimation {
-                    targets: background
+                    targets: contextMenu
                     properties: "opacity"
                     duration: 250
                     easing.type: "InOutCubic"
@@ -243,7 +248,7 @@ Item {
             to: "show"
             ParallelAnimation {
                 NumberAnimation {
-                    targets: background
+                    targets: contextMenu
                     properties: "opacity"
                     duration: 250
                     easing.type: "InOutCubic"
@@ -291,7 +296,7 @@ Item {
             duration: 300
         }
         ScriptAction {
-            script: background.state = "hidden"
+            script: contextMenu.state = "hidden"
         }
     }
 }

@@ -30,9 +30,9 @@ Text {
     MouseArea {
         anchors.fill: parent
         onClicked: {
+            menuItem.activated()
             feedbackMessageText.text = menuItem.text
             feedbackMessageAnimation.running = true
-            menuItem.activated()
         }
     }
 }
