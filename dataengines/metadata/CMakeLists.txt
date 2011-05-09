@@ -23,3 +23,7 @@ add_subdirectory(ontologies)
 add_subdirectory(metadata)
 add_subdirectory(bookmarks)
 add_subdirectory(customsearch)
+
+
+install(FILES activityservice/activityresources.operations
+        DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
