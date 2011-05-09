@@ -47,7 +47,7 @@ void ActivityJob::start()
 
         Nepomuk::Resource fileRes(m_id);
         Nepomuk::Resource acRes("activities://" + m_activityConsumer->currentActivity());
-kWarning()<<"AAAAAA"<<m_id;
+
         acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
         setResult(true);
         return;
