@@ -38,6 +38,7 @@
 #include <nepomuk/resourcetypeterm.h>
 
 #include "customsearch.h"
+#include "../querycontainer.h"
 
 
 CustomSearch::CustomSearch(QObject* parent, const QVariantList& args)
@@ -71,7 +72,13 @@ void CustomSearch::init()
             Nepomuk::Query::Query _query = Nepomuk::Query::QueryParser::parseQuery(_q);
 
             if (_query.isValid()) {
-                query(_query);
+                QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(_q));
+                if (!container) {
+                    container = new QueryContainer(_query, this);
+                }
+                container->setObjectName(_q);
+                addSource(container);
+                return;
             } else {
                 kWarning() << "Query is invalid:" << _query;
             }

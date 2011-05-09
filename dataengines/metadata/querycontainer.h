@@ -1,4 +1,5 @@
 /*
+    Copyright 2011 Marco Martin <mart@kde.org>
     Copyright 2011 Sebastian Kügler <sebas@kde.org>
 
     This library is free software; you can redistribute it and/or modify it
@@ -17,41 +18,34 @@
     02110-1301, USA.
 */
 
+#ifndef QUERYCONTAINER_H
+#define QUERYCONTAINER_H
 
-#ifndef METADATABASEENGINE_H
-#define METADATABASEENGINE_H
+#include <Plasma/DataContainer>
 
-#include <plasma/dataengine.h>
+#include <Nepomuk/Query/Query>
+#include <Nepomuk/Query/Result>
+#include <Nepomuk/Query/QueryServiceClient>
+#include <Nepomuk/Resource>
 
-namespace Nepomuk
-{
-    class Resource;
-    namespace Query {
-        class Query;
-        class Result;
-    }
-}
 
-class MetadataBaseEnginePrivate;
-
-class MetadataBaseEngine : public Plasma::DataEngine
+class QueryContainer : public Plasma::DataContainer
 {
     Q_OBJECT
 
-    public:
-        MetadataBaseEngine(QObject* parent, const QVariantList& args);
-        ~MetadataBaseEngine();
-        QStringList sources() const;
-        virtual void init();
+public:
+    QueryContainer(const Nepomuk::Query::Query &query, QObject *parent = 0);
 
-        Plasma::Service *serviceForSource(const QString &source);
+    //FIXME: should be protected
+    void addResource(Nepomuk::Resource resource);
 
-    protected:
-        virtual bool sourceRequestEvent(const QString &name);
-        MetadataBaseEnginePrivate* d;
-        QString icon(const QStringList &types);
+protected Q_SLOTS:
+    void newEntries(const QList< Nepomuk::Query::Result > &entries);
+
+private:
+    Nepomuk::Query::Query m_query;
+    Nepomuk::Query::QueryServiceClient *m_queryClient;
+    QByteArray m_data;
 };
-
-//K_EXPORT_PLASMA_DATAENGINE(metadataengine, MetadataEngine)
 
 #endif

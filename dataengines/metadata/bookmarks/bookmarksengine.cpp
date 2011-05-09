@@ -34,6 +34,7 @@
 // Own stuff
 #include "bookmarksengine.h"
 #include "../metadatabaseengine.h"
+#include "../querycontainer.h"
 
 // Ontologies
 #include "bookmark.h"
@@ -69,7 +70,13 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
 
     kDebug() << "Query:" << bookmarkQuery.toSparqlQuery();
 
-    return query(bookmarkQuery);
+    QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
+    if (!container) {
+        container = new QueryContainer(bookmarkQuery, this);
+    }
+    container->setObjectName(name);
+    addSource(container);
+    return true;
 }
 
 

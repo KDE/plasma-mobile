@@ -46,14 +46,13 @@
 #include <kactivityconsumer.h>
 
 #include "activityservice/activityservice.h"
+#include "querycontainer.h"
 
 #define RESULT_LIMIT 24
 
 class MetadataBaseEnginePrivate
 {
 public:
-    Nepomuk::Query::QueryServiceClient *queryClient;
-    QString query;
     QSize previewSize;
     KActivityConsumer *activityConsumer;
     QHash<QString, QString> icons;
@@ -65,15 +64,9 @@ MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args
 {
     Q_UNUSED(args);
     d = new MetadataBaseEnginePrivate;
-    d->queryClient = 0;
     d->activityConsumer = new KActivityConsumer(this);
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
     //init();
-}
-
-void MetadataBaseEngine::setQuery(const QString& q)
-{
-    d->query = q;
 }
 
 QString MetadataBaseEngine::icon(const QStringList &types)
@@ -123,21 +116,12 @@ QString MetadataBaseEngine::icon(const QStringList &types)
 
 void MetadataBaseEngine::init()
 {
-    kDebug() << "init.";
-    d->queryClient = new Nepomuk::Query::QueryServiceClient(this);
-    connect(d->queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
+    //kDebug() << "init.";
 }
 
 MetadataBaseEngine::~MetadataBaseEngine()
 {
     delete d;
-}
-
-bool MetadataBaseEngine::query(Nepomuk::Query::Query &searchQuery)
-{
-  searchQuery.setLimit(RESULT_LIMIT);
-  return d->queryClient->query(searchQuery);
 }
 
 QStringList MetadataBaseEngine::sources() const
@@ -151,13 +135,15 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
     foreach (const QString &s, Plasma::DataEngine::sources()) {
         if (s.startsWith(name) || s.endsWith(name)) {
             kDebug() << "!!! resource already exists." << name;
-            return false;
+            //return false;
+            removeSource(s);
         }
     }
-    d->query = name;
+
     if (name.startsWith('/')) {
         massagedName = "file://" + name;
     }
+    //Simple case.. a single resource, don't need a DataContainer
     if (massagedName.split("://").count() > 1) {
         // We have a URL here, so we can create the results directly
         kDebug() << "Valid url ... creating resource synchronously";
@@ -168,17 +154,38 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
             kDebug() << "Resource " << u << " does not exist.";
             return false;
         }
-        addResource(r);
         return true;
+
+        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
+         if (!container) {
+             container = new QueryContainer(Nepomuk::Query::Query(), this);
+         }
+         container->setObjectName(name);
+         addSource(container);
+         //FIXME: this isn't really pretty
+         //TODO: create another type of DataContainer with a common superclass to visualize single resources
+         container->addResource(r);
+         return true;
+
+    //we want to list all resources liked to the current activity
     } else if (name == "CurrentActivityResources:") {
          const QString currentActivityId = d->activityConsumer->currentActivity();
          Nepomuk::Resource acRes("activities://" + currentActivityId);
          Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
          term.setInverted(true);
-         Nepomuk::Query::Query activityQuery = Nepomuk::Query::Query(term);
-         return query(activityQuery);
+         Nepomuk::Query::Query query = Nepomuk::Query::Query(term);
+         //return query(activityQuery);
+
+         QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
+         if (!container) {
+             container = new QueryContainer(query, this);
+         }
+         container->setObjectName(name);
+         addSource(container);
+         return true;
+
+    // Let's try a literal query ...
     } else {
-        // Let's try a literal query ...
         kDebug() << "async search for query:" << name;
         Nepomuk::Query::Query _query = Nepomuk::Query::QueryParser::parseQuery(name);
         //Nepomuk::Query::LiteralTerm nepomukTerm(name);
@@ -186,7 +193,13 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         //fileQuery.addIncludeFolder(KUrl("/"), true);
         //return query(fileQuery);
         if (_query.isValid()) {
-            return query(_query);
+            QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
+            if (!container) {
+                container = new QueryContainer(_query, this);
+            }
+            container->setObjectName(name);
+            addSource(container);
+            return true;
         } else {
             kWarning() << "Query is invalid:" << _query;
             return false;
@@ -202,124 +215,6 @@ Plasma::Service *MetadataBaseEngine::serviceForSource(const QString &source)
     return service;
 }
 
-void MetadataBaseEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)
-{
-    foreach (Nepomuk::Query::Result res, entries) {
-        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-        //kDebug() << "Result label:" << res.genericLabel();
-        Nepomuk::Resource resource = res.resource();
-        addResource(resource);
-    }
-    scheduleSourcesUpdated();
-}
 
-void MetadataBaseEngine::addResource(Nepomuk::Resource resource)
-{
-    QString uri = resource.resourceUri().toString();
-    // If we didn't explicitely search for a nepomuk:// url, let's add the query
-    // to the parameters
-    QString source  = uri;
-    if (uri != d->query && d->query != "CurrentActivityResources:") {
-        source  = uri + "&query=" + d->query;
-    }
-
-    QString desc = resource.genericDescription();
-    if (desc.isEmpty()) {
-        desc = resource.className();
-    }
-    QString label = resource.genericLabel();
-    if (label.isEmpty()) {
-        label = "Empty label.";
-    }
-
-    setData(source, "label", label);
-    setData(source, "description", desc);
-
-    // Types
-    QStringList _types;
-    foreach (const QUrl &u, resource.types()) {
-        _types << u.toString();
-    }
-    setData(source, "types", _types);
-
-    QString _icon = resource.genericIcon();
-    if (_icon.isEmpty()) {
-        // use resource types to find a suitable icon.
-        _icon = icon(QStringList(resource.className()));
-        kDebug() << "symbol" << _icon;
-    }
-    if (_icon.split(",").count() > 1) {
-        kDebug() << "More than one icon!" << _icon;
-        _icon = _icon.split(",").last();
-    }
-    setData(source, "icon", _icon);
-    setData(source, "hasSymbol", _icon);
-    setData(source, "isFile", resource.isFile());
-    setData(source, "exists", resource.exists());
-    setData(source, "rating", resource.rating());
-    setData(source, "symbols", resource.rating());
-
-    setData(source, "className", resource.className());
-    setData(source, "resourceUri", resource.resourceUri());
-    setData(source, "resourceType", resource.resourceType());
-    setData(source, "query", d->query);
-
-
-    // Topics
-    QStringList _topics, _topicNames;
-    foreach (const Nepomuk::Resource &u, resource.topics()) {
-        _topics << u.resourceUri().toString();
-        _topicNames << u.genericLabel();
-    }
-    setData(source, "topics", _topics);
-    setData(source, "topicNames", _topicNames);
-
-    // Tags
-    QStringList _tags, _tagNames;
-    foreach (const Nepomuk::Tag &tag, resource.tags()) {
-        _tags << tag.resourceUri().toString();
-        _tagNames << tag.genericLabel();
-    }
-    setData(source, "tags", _tags);
-    setData(source, "tagNames", _tagNames);
-
-    // Related
-    QStringList _relateds;
-    foreach (const Nepomuk::Resource &res, resource.isRelateds()) {
-        _relateds << res.resourceUri().toString();
-    }
-    setData(source, "relateds", _relateds);
-
-    // Dynamic properties
-    QStringList _properties;
-    QHash<QUrl, Nepomuk::Variant> props = resource.properties();
-    foreach(const QUrl &propertyUrl, props.keys()) {
-        QStringList _l = propertyUrl.toString().split('#');
-        if (_l.count() > 1) {
-            QString key = _l[1];
-            _properties << key;
-            //QString from = dynamic_cast<QList<QUrl>();
-            if (resource.property(propertyUrl).variant().canConvert(QVariant::List)) {
-                QVariantList tl = resource.property(propertyUrl).variant().toList();
-                foreach (QVariant vu, tl) {
-                    kDebug() << vu.toString().startsWith("nepomuk:") << vu.toString().startsWith("akonadi:") << vu.toString();
-                    if (vu.canConvert(QVariant::Url) &&
-                        (vu.toString().startsWith("nepomuk:") || vu.toString().startsWith("akonadi:"))) {
-                        kDebug() <<  "HHH This is a list.!!!" << key << vu.toString();
-                    }
-                }
-            }
-            //kDebug() << " ... " << key << propertyUrl << resource.property(propertyUrl).variant();
-            if (key != "plainTextMessageContent")
-                setData(source, key, resource.property(propertyUrl).variant());
-            // More properties
-
-
-        } else {
-            kWarning() << "Could not parse ontology URL, missing '#':" << propertyUrl.toString();
-        }
-    }
-    setData(source, "properties", _properties);
-}
 
 #include "metadatabaseengine.moc"

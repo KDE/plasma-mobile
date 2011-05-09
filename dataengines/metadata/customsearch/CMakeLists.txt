@@ -6,6 +6,7 @@ include_directories(
 
 set(customsearch_srcs
     ../metadatabaseengine.cpp
+    ../querycontainer.cpp
     ../activityservice/activityjob.cpp
     ../activityservice/activityservice.cpp
     customsearch.cpp
