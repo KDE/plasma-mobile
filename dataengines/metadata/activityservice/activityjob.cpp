@@ -26,12 +26,14 @@
 #include <soprano/vocabulary.h>
 
 #include <kactivityconsumer.h>
+#include <kdebug.h>
 
 ActivityJob::ActivityJob(KActivityConsumer *controller, const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent) :
     ServiceJob(parent->objectName(), operation, parameters, parent),
     m_activityConsumer(controller),
     m_id(id)
 {
+    m_id = m_id.replace(QRegExp("&query=.*"), "");
 }
 
 ActivityJob::~ActivityJob()
@@ -45,7 +47,7 @@ void ActivityJob::start()
 
         Nepomuk::Resource fileRes(m_id);
         Nepomuk::Resource acRes("activities://" + m_activityConsumer->currentActivity());
-
+kWarning()<<"AAAAAA"<<m_id;
         acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
         setResult(true);
         return;

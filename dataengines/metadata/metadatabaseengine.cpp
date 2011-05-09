@@ -219,7 +219,7 @@ void MetadataBaseEngine::addResource(Nepomuk::Resource resource)
     // If we didn't explicitely search for a nepomuk:// url, let's add the query
     // to the parameters
     QString source  = uri;
-    if (uri != d->query) {
+    if (uri != d->query && d->query != "CurrentActivityResources:") {
         source  = uri + "&query=" + d->query;
     }
 
