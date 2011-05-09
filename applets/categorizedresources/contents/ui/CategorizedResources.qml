@@ -29,6 +29,8 @@ Item {
     width: 540
     height: 540
 
+    property bool browsingActivity: searchBox.text.length == 0
+
     property alias urls: metadataSource.connectedSources
 
     PlasmaCore.DataSource {
@@ -149,12 +151,16 @@ Item {
 
     Timer {
        id: timer
-       running: false
+       running: true
        repeat: false
        interval: 1000
        onTriggered: {
             plasmoid.busy = true
-            metadataSource.connectedSources = [searchBox.text]
+            if (searchBox.text) {
+                metadataSource.connectedSources = [searchBox.text]
+            } else {
+                metadataSource.connectedSources = ["CurrentActivityResources:"]
+            }
        }
     }
 

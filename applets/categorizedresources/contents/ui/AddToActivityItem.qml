@@ -20,19 +20,19 @@
 import QtQuick 1.0
 
 
-Text {
+MenuItem {
     id: menuItem
-    font.pointSize: 14
-    horizontalAlignment: Text.AlignHCenter
-    width: Math.max(paintedWidth, parent.width)
-    signal activated
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            feedbackMessageText.text = menuItem.text
-            feedbackMessageAnimation.running = true
-            menuItem.activated()
+    text: main.browsingActivity?i18n("remove from current activity"):i18n("add to current activity")
+    onActivated: {
+        var resourceId = model["DataEngineSource"]
+        print(resourceId)
+        var service = activitySource.serviceForSource(resourceId)
+        var operation
+        if (main.browsingActivity) {
+            operation = service.operationDescription("addAssociation")
+        } else {
+            operation = service.operationDescription("removeAssociation")
         }
+        service.startOperationCall(operation)
     }
 }
