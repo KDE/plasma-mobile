@@ -43,6 +43,8 @@
 #include "metadatabaseengine.h"
 #include <stdio.h>
 
+#include <kactivityconsumer.h>
+
 #define RESULT_LIMIT 24
 
 class MetadataBaseEnginePrivate
@@ -51,6 +53,7 @@ public:
     Nepomuk::Query::QueryServiceClient *queryClient;
     QString query;
     QSize previewSize;
+    KActivityConsumer *activityConsumer;
     QHash<QString, QString> icons;
 };
 
@@ -61,6 +64,7 @@ MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args
     Q_UNUSED(args);
     d = new MetadataBaseEnginePrivate;
     d->queryClient = 0;
+    d->activityConsumer = new KActivityConsumer(this);
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
     //init();
 }
@@ -164,6 +168,13 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         }
         addResource(r);
         return true;
+    } else if (name == "CurrentActivityResources:") {
+         const QString currentActivityId = d->activityConsumer->currentActivity();
+         Nepomuk::Resource acRes("activities://" + currentActivityId);
+         Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
+         term.setInverted(true);
+         Nepomuk::Query::Query activityQuery = Nepomuk::Query::Query(term);
+         return query(activityQuery);
     } else {
         // Let's try a literal query ...
         kDebug() << "async search for query:" << name;

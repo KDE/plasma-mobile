@@ -49,6 +49,7 @@ target_link_libraries(plasma_engine_active_bookmarks
     ${NEPOMUK_QUERY_LIBRARIES}
     ${SOPRANO_LIBRARIES}
     ${SOPRANO_CLIENT_LIBRARIES}
+    kactivities
 )
 
 install(TARGETS plasma_engine_active_bookmarks DESTINATION ${PLUGIN_INSTALL_DIR})
