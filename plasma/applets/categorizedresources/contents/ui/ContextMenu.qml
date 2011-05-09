@@ -189,7 +189,7 @@ Item {
                         }
                     }
                 }
-                MenuItem {
+                AddToActivityItem {
                     text: "Add to current Activity"
                 }
             }
