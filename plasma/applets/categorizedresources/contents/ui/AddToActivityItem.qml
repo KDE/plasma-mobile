@@ -31,9 +31,11 @@ MenuItem {
         if (main.browsingActivity) {
             operation = service.operationDescription("removeAssociation")
             operation.ResourceUrl = contextMenu.resourceUrl
+            operation.ActivityUrl = plasmoid.activityId
         } else {
             operation = service.operationDescription("addAssociation")
             operation.ResourceUrl = contextMenu.resourceUrl
+            operation.ActivityUrl = plasmoid.activityId
         }
         service.startOperationCall(operation)
     }
