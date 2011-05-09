@@ -168,9 +168,9 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
          return true;
 
     //we want to list all resources liked to the current activity
-    } else if (name == "CurrentActivityResources:") {
-         const QString currentActivityId = d->activityConsumer->currentActivity();
-         Nepomuk::Resource acRes("activities://" + currentActivityId);
+    } else if (name.startsWith("CurrentActivityResources:")) {
+
+         Nepomuk::Resource acRes("activities://" + name.split(":").last());
          Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
          term.setInverted(true);
          Nepomuk::Query::Query query = Nepomuk::Query::Query(term);
