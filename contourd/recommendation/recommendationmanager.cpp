@@ -89,15 +89,16 @@ void Contour::RecommendationManager::Private::updateRecommendations()
     m_actionHash.clear();
     m_RecommendationForAction.clear();
 
-    // TODO: get some dummy recommendations for now
-    //       for example: all files that were touched in this activity
-
-    // get resources that have been touched in the current activity
-    // FIXME: sort them by something
+    // get resources that have been touched in the current activity (the dumb way for now)
     const QString query
-            = QString::fromLatin1("select ?r where { graph ?g { ?r ?p ?o . } . ?g %1 ?a . ?a %2 %3 . } LIMIT 6")
-            .arg(Soprano::Node::resourceToN3(QUrl(KExt::kextNamespace().toString() + QLatin1String("usedActivity"))),
-                 Soprano::Node::resourceToN3(NAO::identifier()),
+            = QString::fromLatin1("select ?r count(distinct ?e) as ?cnt where { "
+                                  "?e a nuao:DesktopEvent . "
+                                  "?e nuao:involves ?r . "
+                                  "?e %1 ?a . "
+                                  "?a nao:identifier %2 . "
+                                  "?e nuao:start ?d . "
+                                  "} ORDER BY (?cnt) LIMIT 6")
+            .arg(Soprano::Node::resourceToN3(KExt::usedActivity()),
                  Soprano::Node::literalToN3(Soprano::LiteralValue(m_activityConsumer->currentActivity())));
 
     m_queryClient.sparqlQuery(query);
@@ -120,7 +121,7 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
 {
     foreach(const Nepomuk::Query::Result& result, results) {
         Recommendation r;
-        r.resourceUri = result.resource().uri();
+        r.resourceUri = KUrl(result.resource().resourceUri()).url();
 
         // for now we create the one dummy action: open the resource
         QString id;
