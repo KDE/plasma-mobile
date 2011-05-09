@@ -33,7 +33,6 @@ ActivityJob::ActivityJob(KActivityConsumer *controller, const QString &id, const
     m_activityConsumer(controller),
     m_id(id)
 {
-    m_id = m_id.replace(QRegExp("&query=.*"), "");
 }
 
 ActivityJob::~ActivityJob()
@@ -43,9 +42,10 @@ ActivityJob::~ActivityJob()
 void ActivityJob::start()
 {
     const QString operation = operationName();
+    const QString resourceUrl = parameters()["ResourceUrl"].toString();
     if (operation == "addAssociation") {
 
-        Nepomuk::Resource fileRes(m_id);
+        Nepomuk::Resource fileRes(resourceUrl);
         Nepomuk::Resource acRes("activities://" + m_activityConsumer->currentActivity());
 
         acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
@@ -54,7 +54,7 @@ void ActivityJob::start()
     } else if (operation == "removeAssociation") {
         QString url = parameters()["ResourceUrl"].toString();
 
-        Nepomuk::Resource fileRes(m_id);
+        Nepomuk::Resource fileRes(resourceUrl);
         Nepomuk::Resource acRes("activities://" + m_activityConsumer->currentActivity());
 
         acRes.removeProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
