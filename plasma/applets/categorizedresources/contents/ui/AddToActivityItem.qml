@@ -24,14 +24,16 @@ MenuItem {
     id: menuItem
     text: main.browsingActivity?i18n("remove from current activity"):i18n("add to current activity")
     onActivated: {
-        var resourceId = model["DataEngineSource"]
-        print(resourceId)
-        var service = activitySource.serviceForSource(resourceId)
+        var source = contextMenu.source
+        print(source)
+        var service = metadataSource.serviceForSource(source)
         var operation
         if (main.browsingActivity) {
-            operation = service.operationDescription("addAssociation")
-        } else {
             operation = service.operationDescription("removeAssociation")
+            operation.ResourceUrl = contextMenu.resourceUrl
+        } else {
+            operation = service.operationDescription("addAssociation")
+            operation.ResourceUrl = contextMenu.resourceUrl
         }
         service.startOperationCall(operation)
     }
