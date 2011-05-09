@@ -43,6 +43,9 @@ void ActivityJob::start()
 {
     const QString operation = operationName();
     const QString resourceUrl = parameters()["ResourceUrl"].toString();
+
+    kDebug() << "starting operation" << operation << "on the resource" << resourceUrl;
+
     if (operation == "addAssociation") {
 
         Nepomuk::Resource fileRes(resourceUrl);
