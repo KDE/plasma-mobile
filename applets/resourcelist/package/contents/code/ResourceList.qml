@@ -39,7 +39,7 @@ Item {
 
         onSourceAdded: {
             //console.log("source added:" + source);
-            connectSource(source);
+            //connectSource(source);
         }
 
         onDataChanged: {
@@ -107,6 +107,7 @@ Item {
 
         model: PlasmaCore.DataModel {
             dataSource: metadataSource
+            keyRoleFilter: ".*"
         }
 
         delegate: MobileComponents.ResourceDelegate {
