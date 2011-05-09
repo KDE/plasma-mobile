@@ -43,8 +43,6 @@
 #include "metadatabaseengine.h"
 #include <stdio.h>
 
-#include <kactivityconsumer.h>
-
 #include "activityservice/activityservice.h"
 #include "querycontainer.h"
 
@@ -54,8 +52,6 @@ class MetadataBaseEnginePrivate
 {
 public:
     QSize previewSize;
-    KActivityConsumer *activityConsumer;
-    QHash<QString, QString> icons;
 };
 
 
@@ -64,54 +60,8 @@ MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args
 {
     Q_UNUSED(args);
     d = new MetadataBaseEnginePrivate;
-    d->activityConsumer = new KActivityConsumer(this);
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
     //init();
-}
-
-QString MetadataBaseEngine::icon(const QStringList &types)
-{
-    if (!d->icons.size()) {
-        // Add fallback icons here from generic to specific
-        // The list of types is also sorted in this way, so
-        // we're returning the most specific icon, even with
-        // the hardcoded mapping.
-
-        // Files
-        //d->icons["FileDataObject"] = QString("audio-x-generic");
-
-        // Audio
-        d->icons["Audio"] = QString("audio-x-generic");
-        d->icons["MusicPiece"] = QString("audio-x-generic");
-
-        // Images
-        d->icons["Image"] = QString("image-x-generic");
-        d->icons["RasterImage"] = QString("image-x-generic");
-
-        d->icons["Email"] = QString("internet-mail");
-        d->icons["Document"] = QString("kword");
-        d->icons["PersonContact"] = QString("x-office-contact");
-
-        // Filesystem
-        d->icons["Folder"] = QString("folder");
-        d->icons["Website"] = QString("text-html");
-
-        // ... add some more
-        // Filesystem
-        d->icons["Bookmark"] = QString("bookmarks");
-        d->icons["BookmarksFolder"] = QString("bookmarks-organize");
-    }
-
-    // keep searching until the most specific icon is found
-    QString _icon = "nepomuk";
-    foreach(const QString &t, types) {
-        QString shortType = t.split('#').last();
-        if (d->icons.keys().contains(shortType)) {
-            _icon = d->icons[shortType];
-            kDebug() << "found icon for type" << shortType << _icon;
-        }
-    }
-    return _icon;
 }
 
 void MetadataBaseEngine::init()
@@ -210,7 +160,7 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
 Plasma::Service *MetadataBaseEngine::serviceForSource(const QString &source)
 {
     //FIXME validate the name
-    ActivityService *service = new ActivityService(d->activityConsumer, source);
+    ActivityService *service = new ActivityService(source);
     service->setParent(this);
     return service;
 }

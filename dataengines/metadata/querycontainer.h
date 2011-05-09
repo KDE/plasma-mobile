@@ -43,10 +43,13 @@ protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
 
+protected:
+    QString icon(const QStringList &types);
+
 private:
     Nepomuk::Query::Query m_query;
     Nepomuk::Query::QueryServiceClient *m_queryClient;
-    QByteArray m_data;
+    QHash<QString, QString> m_icons;
 };
 
 #endif

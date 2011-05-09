@@ -34,12 +34,11 @@ class ActivityService : public Plasma::Service
     Q_OBJECT
 
 public:
-    ActivityService(KActivityConsumer *controller, const QString &source);
+    ActivityService(const QString &source);
     ServiceJob *createJob(const QString &operation,
                           QMap<QString, QVariant> &parameters);
 
 private:
-    KActivityConsumer *m_activityConsumer;
     QString m_id;
 };
 

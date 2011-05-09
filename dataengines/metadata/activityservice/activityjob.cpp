@@ -25,12 +25,10 @@
 
 #include <soprano/vocabulary.h>
 
-#include <kactivityconsumer.h>
 #include <kdebug.h>
 
-ActivityJob::ActivityJob(KActivityConsumer *controller, const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent) :
+ActivityJob::ActivityJob(const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent) :
     ServiceJob(parent->objectName(), operation, parameters, parent),
-    m_activityConsumer(controller),
     m_id(id)
 {
 }
@@ -43,13 +41,14 @@ void ActivityJob::start()
 {
     const QString operation = operationName();
     const QString resourceUrl = parameters()["ResourceUrl"].toString();
+    const QString activityUrl = parameters()["ActivityUrl"].toString();
 
-    kDebug() << "starting operation" << operation << "on the resource" << resourceUrl;
+    kDebug() << "starting operation" << operation << "on the resource" << resourceUrl << "and activity" << activityUrl;
 
     if (operation == "addAssociation") {
 
         Nepomuk::Resource fileRes(resourceUrl);
-        Nepomuk::Resource acRes("activities://" + m_activityConsumer->currentActivity());
+        Nepomuk::Resource acRes("activities://" + activityUrl);
 
         acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
         setResult(true);
@@ -58,7 +57,7 @@ void ActivityJob::start()
         QString url = parameters()["ResourceUrl"].toString();
 
         Nepomuk::Resource fileRes(resourceUrl);
-        Nepomuk::Resource acRes("activities://" + m_activityConsumer->currentActivity());
+        Nepomuk::Resource acRes("activities://" + activityUrl);
 
         acRes.removeProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
         setResult(true);

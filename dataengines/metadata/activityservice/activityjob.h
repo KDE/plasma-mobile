@@ -31,16 +31,14 @@ class ActivityJob : public Plasma::ServiceJob
     Q_OBJECT
 
     public:
-        ActivityJob(KActivityConsumer *controller, const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent = 0);
+        ActivityJob(const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent = 0);
         ~ActivityJob();
 
     protected:
         void start();
 
     private:
-        KActivityConsumer *m_activityConsumer;
         QString m_id;
-
 };
 
 #endif // TASKJOB_H

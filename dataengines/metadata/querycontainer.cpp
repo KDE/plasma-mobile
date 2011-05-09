@@ -65,8 +65,8 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
     // If we didn't explicitely search for a nepomuk:// url, let's add the query
     // to the parameters
     QString source  = uri;
-    /*if (uri != d->query) {
-        source  = uri + "&query=" + d->query;
+    /*if (uri != m_query) {
+        source  = uri + "&query=" + m_query;
     }*/
 
     QString desc = resource.genericDescription();
@@ -94,7 +94,7 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
     if (_icon.isEmpty()) {
         // use resource types to find a suitable icon.
         //TODO
-        _icon = "nepomuk";//icon(QStringList(resource.className()));
+        _icon = icon(QStringList(resource.className()));
         kDebug() << "symbol" << _icon;
     }
     if (_icon.split(",").count() > 1) {
@@ -171,6 +171,59 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
     }
     data["properties"] = _properties;
     setData(source, data);
+}
+
+QString QueryContainer::icon(const QStringList &types)
+{
+    if (!m_icons.size()) {
+        // Add fallback icons here from generic to specific
+        // The list of types is also sorted in this way, so
+        // we're returning the most specific icon, even with
+        // the hardcoded mapping.
+
+        // Files
+        //m_icons["FileDataObject"] = QString("audio-x-generic");
+
+        // Audio
+        m_icons["Audio"] = QString("audio-x-generic");
+        m_icons["MusicPiece"] = QString("audio-x-generic");
+
+        // Images
+        m_icons["Image"] = QString("image-x-generic");
+        m_icons["RasterImage"] = QString("image-x-generic");
+
+        m_icons["Email"] = QString("internet-mail");
+        m_icons["Document"] = QString("kword");
+        m_icons["PersonContact"] = QString("x-office-contact");
+
+        // Filesystem
+        m_icons["Folder"] = QString("folder");
+        m_icons["Website"] = QString("text-html");
+
+        // ... add some more
+        // Filesystem
+        m_icons["Bookmark"] = QString("bookmarks");
+        m_icons["BookmarksFolder"] = QString("bookmarks-organize");
+
+        m_icons["FileDataObject"] = QString("unknown");
+        m_icons["PaginatedTextDocument"] = QString("application-pdf");
+        m_icons["Presentation"] = QString("application-vnd.oasis.opendocument.presentation");
+        m_icons["TextDocument"] = QString("text-enriched");
+    }
+
+    // keep searching until the most specific icon is found
+    QString _icon = "nepomuk";
+    foreach(const QString &t, types) {
+        QString shortType = t.split('#').last();
+        if (shortType.isEmpty()) {
+            shortType = t;
+        }
+        if (m_icons.keys().contains(shortType)) {
+            _icon = m_icons[shortType];
+            kDebug() << "found icon for type" << shortType << _icon;
+        }
+    }
+    return _icon;
 }
 
 #include "querycontainer.moc"

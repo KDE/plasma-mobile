@@ -22,9 +22,8 @@
 #include "activityjob.h"
 
 
-ActivityService::ActivityService(KActivityConsumer *controller, const QString &source)
-    :m_activityConsumer(controller),
-    m_id(source)
+ActivityService::ActivityService(const QString &source)
+    : m_id(source)
 {
     setName("activityresources");
 }
@@ -32,7 +31,7 @@ ActivityService::ActivityService(KActivityConsumer *controller, const QString &s
 ServiceJob *ActivityService::createJob(const QString &operation,
                                            QMap<QString, QVariant> &parameters)
 {
-    return new ActivityJob(m_activityConsumer, m_id, operation, parameters, this);
+    return new ActivityJob(m_id, operation, parameters, this);
 }
 
 #include "activityservice.moc"

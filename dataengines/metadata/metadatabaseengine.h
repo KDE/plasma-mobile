@@ -49,7 +49,6 @@ class MetadataBaseEngine : public Plasma::DataEngine
     protected:
         virtual bool sourceRequestEvent(const QString &name);
         MetadataBaseEnginePrivate* d;
-        QString icon(const QStringList &types);
 };
 
 //K_EXPORT_PLASMA_DATAENGINE(metadataengine, MetadataEngine)
