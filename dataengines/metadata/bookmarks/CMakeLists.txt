@@ -6,6 +6,8 @@ include_directories(
 
 set(bookmarksdataengine_srcs
     ../metadatabaseengine.cpp
+    ../activityservice/activityjob.cpp
+    ../activityservice/activityservice.cpp
     bookmarksengine.cpp
 )
 

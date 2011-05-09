@@ -45,6 +45,8 @@
 
 #include <kactivityconsumer.h>
 
+#include "activityservice/activityservice.h"
+
 #define RESULT_LIMIT 24
 
 class MetadataBaseEnginePrivate
@@ -190,6 +192,14 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
             return false;
         }
     }
+}
+
+Plasma::Service *MetadataBaseEngine::serviceForSource(const QString &source)
+{
+    //FIXME validate the name
+    ActivityService *service = new ActivityService(d->activityConsumer, source);
+    service->setParent(this);
+    return service;
 }
 
 void MetadataBaseEngine::newEntries(const QList< Nepomuk::Query::Result >& entries)

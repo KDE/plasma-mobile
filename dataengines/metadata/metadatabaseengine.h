@@ -45,6 +45,7 @@ class MetadataBaseEngine : public Plasma::DataEngine
         virtual void init();
 
         virtual bool query(Nepomuk::Query::Query &searchQuery);
+        Plasma::Service *serviceForSource(const QString &source);
 
     protected Q_SLOTS:
         void newEntries(const QList< Nepomuk::Query::Result > &entries);

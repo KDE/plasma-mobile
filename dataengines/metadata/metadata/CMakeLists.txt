@@ -6,6 +6,8 @@ include_directories(
 
 set(metadataengine_srcs
     ../metadatabaseengine.cpp
+    ../activityservice/activityjob.cpp
+    ../activityservice/activityservice.cpp
     metadataengine.cpp
 )
 
