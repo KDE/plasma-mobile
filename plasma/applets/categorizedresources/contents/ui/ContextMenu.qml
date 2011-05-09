@@ -189,9 +189,7 @@ Item {
                         }
                     }
                 }
-                AddToActivityItem {
-                    text: "Add to current Activity"
-                }
+                AddToActivityItem {}
             }
         }
     }
