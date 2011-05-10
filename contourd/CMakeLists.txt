@@ -92,3 +92,6 @@ install(FILES ${contourclient_LIB_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/ C
 
 install(TARGETS contourclient EXPORT kdelibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
+install(TARGETS contour ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(FILES contour.desktop DESTINATION ${AUTOSTART_INSTALL_DIR})
+
