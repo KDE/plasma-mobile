@@ -107,7 +107,7 @@ PlasmaCore.FrameSvgItem {
 
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
-            width: 240
+            width: 210
             height: webItemList.height
             resourceType: model.resourceType
             function setDarkenVisible(visible)
@@ -148,6 +148,37 @@ PlasmaCore.FrameSvgItem {
                     contextMenu.activateItem(mouse.x, mouse.y)
                 }
             }
+        }
+    }
+
+    PlasmaCore.Svg {
+        id: arrowsSvg
+        imagePath: "widgets/arrows"
+    }
+
+    PlasmaCore.SvgItem {
+        anchors.left: webItemList.left
+        anchors.verticalCenter: webItemList.verticalCenter
+        width: 22
+        height: 22
+        svg: arrowsSvg
+        elementId: "left-arrow"
+        opacity: webItemList.atXBeginning?0.15:1
+        Behavior on opacity {
+            NumberAnimation {duration: 250}
+        }
+    }
+
+    PlasmaCore.SvgItem {
+        anchors.right: webItemList.right
+        anchors.verticalCenter: webItemList.verticalCenter
+        width: 22
+        height: 22
+        svg: arrowsSvg
+        elementId: "right-arrow"
+        opacity: webItemList.atXEnd?0.15:1
+        Behavior on opacity {
+            NumberAnimation {duration: 250}
         }
     }
 }
