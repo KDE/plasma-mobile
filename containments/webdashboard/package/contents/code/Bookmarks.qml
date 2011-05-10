@@ -76,13 +76,13 @@ Item {
 
         model: PlasmaCore.DataModel {
             dataSource: metadataSource
+            keyRoleFilter: ".*"
         }
 
         delegate: MobileComponents.ResourceDelegate {
             width:240
             height: 96
-            resourceType:
-            model.resourceType
+            resourceType: model.resourceType
         }
     }
 }
