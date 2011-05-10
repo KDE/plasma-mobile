@@ -85,7 +85,7 @@ set(contourclient_LIB_HEADERS
     recommendation/recommendation.h
     recommendation/recommendationaction.h
     recommendation/recommendationsclient.h
-    recommendation/recommendationsclient_export.h)
+    recommendation/contourclient_export.h)
 
 install(FILES ${contourclient_LIB_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/ COMPONENT Devel)
 
