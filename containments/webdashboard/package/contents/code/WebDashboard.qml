@@ -8,7 +8,7 @@ Item {
     width: 960
     height: 540
 
-    y: 56
+    y: 64
 
     PlasmaCore.Theme { id: theme }
 
@@ -80,6 +80,7 @@ Item {
         //height: 64
         //y: 64
         x: parent.width-width
+        y: -16
         //anchors.top: parent.top
         anchors.bottom: bookmarksLabel.bottom
         //anchors.right: parent.right
