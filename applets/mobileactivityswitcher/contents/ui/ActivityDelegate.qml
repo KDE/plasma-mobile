@@ -48,6 +48,7 @@ Item {
     Rectangle {
         anchors.fill:parent
         anchors.rightMargin: 100
+        radius: 4
 
         Image {
             anchors.fill: parent
@@ -73,10 +74,18 @@ Item {
         }
     }
     Item {
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 48
         anchors.right: parent.right
         width: 240
         height: 32
+        opacity: delegate.scale>0.9?1:0
+        Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
         Image {
             id: holeImage
             y: 4
@@ -108,13 +117,14 @@ Item {
                 drag.minimumX: holeImage.x - 4
                 drag.maximumX: parent.parent.width - width
                 onReleased: {
-                    parent.x = 0
-
-                    var activityId = model["DataEngineSource"]
-                    print(activityId)
-                    var service = activitySource.serviceForSource(activityId)
-                    var operation = service.operationDescription("setCurrent")
-                    service.startOperationCall(operation)
+                    if (parent.x <= 32) {
+                        var activityId = model["DataEngineSource"]
+                        print(activityId)
+                        var service = activitySource.serviceForSource(activityId)
+                        var operation = service.operationDescription("setCurrent")
+                        service.startOperationCall(operation)
+                    }
+                    parent.x = parent.parent.width - parent.width
                 }
             }
         }

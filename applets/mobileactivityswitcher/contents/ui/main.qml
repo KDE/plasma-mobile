@@ -21,7 +21,8 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
-    width: 240; height: 500
+    width: 240
+    height: 350
 
     Component.onCompleted: {
         plasmoid.containmentType = "CustomContainment"
@@ -69,7 +70,7 @@ Item {
          model: PlasmaCore.DataModel{
                     dataSource: activitySource
                 }
-         pathItemCount: 7
+         pathItemCount: 5
          property int delegateWidth: 400
          property int delegateHeight: delegateWidth/1.6
 
@@ -93,7 +94,7 @@ Item {
                  y: mainView.height/4
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
-             PathAttribute { name: "itemOpacity"; value: 1 }
+             PathAttribute { name: "itemOpacity"; value: 0.5 }
              PathAttribute { name: "translate"; value: -100 }
              PathAttribute { name: "z"; value: 0 }
              
@@ -116,7 +117,7 @@ Item {
                  y: 3*(mainView.height/4)
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
-             PathAttribute { name: "itemOpacity"; value: 1 }
+             PathAttribute { name: "itemOpacity"; value: 0.5 }
              PathAttribute { name: "translate"; value: 100 }
              PathAttribute { name: "z"; value: 0 }
 
