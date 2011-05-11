@@ -72,6 +72,12 @@ Item {
 
     property Item delegate
     onDelegateChanged: {
+        positionMenu()
+        highlightFrame.opacity = 0
+    }
+
+    function positionMenu()
+    {
         var menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, delegate.height)
 
         if (menuPos.y > contextMenu.height/2) {
@@ -83,7 +89,6 @@ Item {
 
         menuObject.x = menuPos.x
         menuObject.y = menuPos.y
-        highlightFrame.opacity = 0
     }
 
     ActionsModel {
@@ -150,6 +155,7 @@ Item {
             imagePath: "dialogs/background"
             width: entriesColumn.width + margins.left + margins.right + highlightFrame.margins.left + highlightFrame.margins.right
             height: entriesColumn.height + margins.top + margins.bottom + highlightFrame.margins.top + highlightFrame.margins.bottom
+            onHeightChanged: positionMenu()
 
             PlasmaCore.FrameSvgItem {
                 id: highlightFrame
