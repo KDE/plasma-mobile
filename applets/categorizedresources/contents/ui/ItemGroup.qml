@@ -68,7 +68,7 @@ PlasmaCore.FrameSvgItem {
         height: categoryText.height + margins.top + margins.bottom
         Text {
             id: categoryText
-            text: modelData
+            text: i18n("%1 (%2)", modelData, webItemList.count)
             anchors {
                 top: parent.top
                 horizontalCenter: parent.horizontalCenter
