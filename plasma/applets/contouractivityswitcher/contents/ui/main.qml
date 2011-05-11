@@ -50,17 +50,6 @@ Item {
         }
     }
 
-    //FIXME: why a timer is needed?
-    Timer {
-        id: highlightTimer
-        interval: 250;
-        running: false;
-        property int pendingIndex: -1
-        onTriggered:  {
-            mainView.currentIndex = pendingIndex
-        }
-    }
-
      PathView {
          id: mainView
          anchors.fill: parent
@@ -94,7 +83,7 @@ Item {
 
              onReleased: {
                  if (mouse.y > downY) {
-                     if (mainView.currentIndex < mainView.count) {
+                     if (mainView.currentIndex < mainView.count-1) {
                          ++mainView.currentIndex
                      } else {
                          mainView.currentIndex = 0
