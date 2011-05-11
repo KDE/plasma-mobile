@@ -7,7 +7,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
  
 Item {
     id: resourceItem
-    height: 96
+    height: 204
     width: 240
 
     PlasmaCore.DataSource {
@@ -38,8 +38,8 @@ Item {
             //right: textLabel.left;
             margins: 12;
         }
-        width: 100
-        height: 67
+        width: 180
+        height: 121
         color: theme.textColor
         opacity: .6
         radius: 1
@@ -61,7 +61,20 @@ Item {
         }
     }
 
-    
+    Rectangle {
+        id: textRect
+        width: 160
+        height: 32
+        color: theme.backgroundColor
+        radius: 4
+        opacity: .8
+        anchors {
+            bottom: frameRect.bottom
+            //left: frameRect.left
+            right: parent.right
+            margins: 10
+        }
+    }
     /*
     Rectangle {
         border.color: theme.textColor
@@ -74,9 +87,10 @@ Item {
     Text {
         id: textLabel
         color: theme.textColor
-        font.pointSize: 14
+        font.pointSize: 16
         style: Text.Sunken;
         styleColor: theme.backgroundColor
+        horizontalAlignment: Text.AlignRight
         text: {
             var s = description;
             s = s.replace("http://", "");
@@ -84,7 +98,9 @@ Item {
             s = s.replace("www.", "");
             return s;
         }
-
+        anchors.fill: textRect
+        anchors.margins: 4
+        /*
         anchors {
             right: parent.right;
             bottom: previewImage.bottom;
@@ -92,16 +108,7 @@ Item {
             margins: 12
             //margins: 4;
         }
+        */
     }
 
-    PlasmaWidgets.Separator {
-        anchors { top: textLabel.bottom; left: textLabel.left; right: textLabel.right; }
-    }
-
-    /*
-
-    Component.onCompleted: {
-        print("Bookmark created: " + description);
-    }
-    */
 }

@@ -9,7 +9,7 @@ Item {
     property int collapsedWidth: 10
     property int expandedWidth: width
     property string defaultText: "http://";
-    height: 64
+    height: 96
     width: parent.width/4
 
     state: "collapsed"
@@ -26,7 +26,7 @@ Item {
         enabledBorders: "LeftBorder|TopBorder|BottomBorder"
         imagePath: "widgets/background"
         anchors.fill: parent
-        width: parent.width + 32
+        width: parent.width + 64
         height: parent.height
     }
 
@@ -37,7 +37,7 @@ Item {
         PlasmaWidgets.LineEdit {
         //Rectangle { color: black
             id: lineEdit
-            width: expandedWidth - 64
+            width: expandedWidth - 96
             text: defaultText
             y: frame.margins.top
             clearButtonShown: true
@@ -48,9 +48,9 @@ Item {
         PlasmaWidgets.IconWidget {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
-            minimumIconSize : "32x32"
-            maximumIconSize : "32x32"
-            preferredIconSize : "32x32"
+            minimumIconSize : "48x48"
+            maximumIconSize : "48x48"
+            preferredIconSize : "48x48"
             id: newIcon
             icon: QIcon("bookmark-new")
             //height: parent.height
@@ -113,7 +113,7 @@ Item {
             //when: mouseArea.pressed
             PropertyChanges {
                 target: lineEdit
-                width: expandedWidth - 48
+                width: expandedWidth - 64
                 opacity: 1.0
             }
             PropertyChanges {
