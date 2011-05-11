@@ -117,13 +117,14 @@ Item {
                 drag.minimumX: holeImage.x - 4
                 drag.maximumX: parent.parent.width - width
                 onReleased: {
-                    parent.x = 0
-
-                    var activityId = model["DataEngineSource"]
-                    print(activityId)
-                    var service = activitySource.serviceForSource(activityId)
-                    var operation = service.operationDescription("setCurrent")
-                    service.startOperationCall(operation)
+                    if (parent.x <= 32) {
+                        var activityId = model["DataEngineSource"]
+                        print(activityId)
+                        var service = activitySource.serviceForSource(activityId)
+                        var operation = service.operationDescription("setCurrent")
+                        service.startOperationCall(operation)
+                    }
+                    parent.x = parent.parent.width - parent.width
                 }
             }
         }
