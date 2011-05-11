@@ -50,6 +50,17 @@ Item {
         }
     }
 
+    //FIXME: why a timer is needed?
+   /* Timer {
+        id: highlightTimer
+        interval: 250;
+        running: false;
+        property int pendingIndex: -1
+        onTriggered:  {
+            mainView.currentIndex = pendingIndex
+        }
+    }*/
+
      PathView {
          id: mainView
          anchors.fill: parent
