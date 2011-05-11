@@ -19,11 +19,14 @@ Item {
         engine: "org.kde.active.bookmarks"
         interval: 0
     }
-    
-    PlasmaWidgets.Frame {
+
+    PlasmaCore.FrameSvgItem {
         id: frame
+        //state: "hidden"
+        enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+        imagePath: "widgets/background"
         anchors.fill: parent
-        width: parent.width
+        width: parent.width + 32
         height: parent.height
     }
 
@@ -35,14 +38,23 @@ Item {
             id: lineEdit
             width: expandedWidth
             text: defaultText
+            y: frame.margins.top
+            clearButtonShown: true
             //anchors.top: parent.top
             //anchors.right: newIcon.left
         }
-        MobileComponents.IconDelegate {
+        PlasmaWidgets.IconWidget {
+            anchors.horizontalCenter: parent.horizontalCenter
+            minimumIconSize : "32x32"
+            maximumIconSize : "32x32"
+            preferredIconSize : "32x32"
             id: newIcon
             icon: QIcon("bookmark-new")
-            height: parent.height
-            width: parent.height
+            //height: parent.height
+            //width: parent.height
+            y: frame.margins.top
+            anchors.right: parent.right
+            //x: parent.width - frame.margins.right - width
             //anchors { right: parent.right; top: parent.top }
             onClicked: {
                 print("--> new bookmark clicked!")
@@ -50,7 +62,7 @@ Item {
                 print("--> new state: " + state);
                 if (newBookmarkItem.state == "expanded") {
                     print("expanded, let's see");
-                    if (lineEdit.text != defaultText) {
+                    if (isValidBookmark(lineEdit.text)) {
                         print("==> Add Bookmark: " + lineEdit.text);
                         bookmarksEngine.connectSource("add:" + lineEdit.text);
                     }
@@ -64,6 +76,26 @@ Item {
                 //icon = "bookmark-new";
                 state = "collapsed"
             }
+
+            function isValidBookmark(url) {
+                var ok = true;
+
+                // empty?
+                if (url == "") ok = false;
+
+                // does it begin with http(s)://?
+                if ((url.indexOf("http://") != 0) && 
+                            (url.indexOf("https://") != 0)) {
+                    ok = false;
+                }
+
+                if (url == defaultText) {
+                    ok = false;
+                }
+                print("valid url? " + url + " " + ok);
+                return ok;
+            }
+
         }
 
         Item {
@@ -81,6 +113,11 @@ Item {
                 width: expandedWidth
                 opacity: 1.0
             }
+            PropertyChanges {
+                target: frame
+                width: expandedWidth
+                opacity: 1.0
+            }
         },
 
         State {
@@ -88,6 +125,11 @@ Item {
             name: "collapsed";
             PropertyChanges {
                 target: lineEdit
+                width: collapsedWidth
+                opacity: 0
+            }
+            PropertyChanges {
+                target: frame
                 width: collapsedWidth
                 opacity: 0
             }

@@ -76,11 +76,12 @@ Item {
     NewBookmark {
         id: newBookmark
         width: parent.width / 4
-        height: parent.height / 4
+        //height: parent.height / 4
         //height: 64
         //y: 64
         x: parent.width-width
-        anchors.top: parent.top
+        //anchors.top: parent.top
+        anchors.bottom: bookmarksLabel.bottom
         //anchors.right: parent.right
     }
 
