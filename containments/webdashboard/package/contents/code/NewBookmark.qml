@@ -7,7 +7,7 @@ Item {
     id: newBookmarkItem
 
     property int collapsedWidth: 10
-    property int expandedWidth: 200
+    property int expandedWidth: width
     property string defaultText: "http://";
     height: 64
     width: parent.width/4
@@ -32,19 +32,22 @@ Item {
 
     Row {
         anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
 
         PlasmaWidgets.LineEdit {
         //Rectangle { color: black
             id: lineEdit
-            width: expandedWidth
+            width: expandedWidth - 64
             text: defaultText
             y: frame.margins.top
             clearButtonShown: true
+            anchors.verticalCenter: parent.verticalCenter
             //anchors.top: parent.top
             //anchors.right: newIcon.left
         }
         PlasmaWidgets.IconWidget {
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
             minimumIconSize : "32x32"
             maximumIconSize : "32x32"
             preferredIconSize : "32x32"
@@ -110,7 +113,7 @@ Item {
             //when: mouseArea.pressed
             PropertyChanges {
                 target: lineEdit
-                width: expandedWidth
+                width: expandedWidth - 48
                 opacity: 1.0
             }
             PropertyChanges {
