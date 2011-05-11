@@ -74,8 +74,8 @@ Item {
          property int delegateWidth: mainView.width/1.2
          property int delegateHeight: delegateWidth/1.6
 
-         preferredHighlightBegin: 0.08
-         preferredHighlightEnd: 0.08
+         preferredHighlightBegin: 0.12
+         preferredHighlightEnd: 0.12
 
 
          delegate: ActivityDelegate{}
@@ -111,7 +111,7 @@ Item {
          }
 
          path: Path {
-             startX: mainView.width/3
+             startX: mainView.width/2-32
              startY: mainView.height-mainView.delegateHeight/1.5+32
              PathAttribute { name: "itemScale"; value: 1.0 }
              PathAttribute { name: "itemOpacity"; value: 0 }
