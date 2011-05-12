@@ -40,8 +40,8 @@
 ****************************************************************************/
 
 import QtQuick 1.0
-
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Image {
     id: header
@@ -80,7 +80,7 @@ Image {
                 id: backButton
                 action: webView.back;
                 anchors { left: parent.left; bottom: parent.bottom }
-                Component.onCompleted: setIcon("go-previous");
+                icon: QIcon("go-previous")
                 numDisplayLines: 0
             }
 
@@ -88,15 +88,14 @@ Image {
                 id: nextButton
                 anchors.left: backButton.right; anchors.bottom: parent.bottom
                 action: webView.forward;
-                //image: "pics/go-next-view.png"
-                Component.onCompleted: setIcon("go-next")
+                icon: QIcon("go-next")
                 numDisplayLines: 0
             }
 
             UrlInput {
                 id: urlInput
                 anchors { left: nextButton.right; right: reloadButton.left; bottom: parent.bottom }
-                image: "pics/display.png"
+                //image: "pics/display.png"
                 onUrlEntered: {
                     webBrowser.urlString = url
                     webBrowser.focus = true
@@ -109,18 +108,16 @@ Image {
                 id: reloadButton
                 anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
                 action: webView.reload;
-                //image: "pics/view-refresh.png"
-                visible: webView.progress == 1.0 && !header.urlChanged
-                Component.onCompleted: { setIcon("view-refresh"); }
+                visible: { webView.progress == 1.0 && !header.urlChanged }
+                icon: QIcon("view-refresh")
             }
 
             PlasmaWidgets.IconWidget {
                 id: stopButton
                 anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
                 action: webView.stop;
-                //image: "pics/edit-delete.png"
                 visible: webView.progress < 1.0 && !header.urlChanged
-                Component.onCompleted: { setIcon("process-stop"); }
+                icon: QIcon("process-stop")
             }
 
             PlasmaWidgets.IconWidget {
@@ -133,7 +130,7 @@ Image {
                 }
                 //image: "pics/go-jump-locationbar.png";
                 visible: header.urlChanged
-                Component.onCompleted: { setIcon("go-jump-locationbar"); }
+                icon: QIcon("go-jump-locationbar")
             }
         }
     }
