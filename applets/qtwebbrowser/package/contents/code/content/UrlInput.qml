@@ -40,6 +40,7 @@
 ****************************************************************************/
 
 import QtQuick 1.0
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 Item {
     id: container
@@ -66,14 +67,19 @@ Item {
         opacity: webView.progress == 1.0 ? 0.0 : 1.0
     }
 
-    TextInput {
+    PlasmaWidgets.LineEdit {
         id: urlText
-        horizontalAlignment: TextEdit.AlignLeft
+        //horizontalAlignment: TextEdit.AlignLeft
         font.pixelSize: 14;
 
         onTextChanged: {
             //print("url changed to" + text);
             container.urlChanged();
+        }
+
+        onReturnPressed: {
+            container.urlEntered(urlText.text)
+            webView.focus = true
         }
 
         Keys.onEscapePressed: {
