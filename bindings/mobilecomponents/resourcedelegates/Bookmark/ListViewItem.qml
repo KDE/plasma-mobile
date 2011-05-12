@@ -34,14 +34,6 @@ Item {
         engine: "preview"
         connectedSources: [ description ]
         interval: 0
-
-        Component.onCompleted: {
-            //print("connected:" + connectedSources);
-        }
-
-        onDataUpdated: {
-            //print(" dataUpdated: " + source + data);
-        }
     }
 
     PlasmaCore.Theme {
@@ -54,11 +46,10 @@ Item {
         anchors {
             top: parent.top;
             left: parent.left;
-            //right: textLabel.left;
             margins: 12;
         }
-        width: 180
-        height: 121
+        width: 182
+        height: 122
         color: theme.textColor
         opacity: .6
         radius: 1
@@ -89,20 +80,11 @@ Item {
         opacity: .8
         anchors {
             bottom: frameRect.bottom
-            //left: frameRect.left
             right: parent.right
             margins: 10
         }
     }
-    /*
-    Rectangle {
-        border.color: theme.textColor
-        anchors.fill: previewImage
-        //spacing: 3
-        border.width: 3
-        opacity: .3
-    }
-    */
+
     Text {
         id: textLabel
         color: theme.textColor
@@ -119,15 +101,6 @@ Item {
         }
         anchors.fill: textRect
         anchors.margins: 4
-        /*
-        anchors {
-            right: parent.right;
-            bottom: previewImage.bottom;
-            left: previewImage.right;
-            margins: 12
-            //margins: 4;
-        }
-        */
     }
 
     MouseArea {
