@@ -130,4 +130,12 @@ Item {
         */
     }
 
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            print("Opening URL..." + description);
+            plasmoid.openUrl(description);
+        }
+    }
+
 }

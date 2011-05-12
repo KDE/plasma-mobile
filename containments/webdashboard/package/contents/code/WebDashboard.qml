@@ -27,7 +27,7 @@ Item {
     width: 960
     height: 540
 
-    y: 64
+    y: 64 // leave space for the top panel
 
     PlasmaCore.Theme { id: theme }
 
