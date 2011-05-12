@@ -81,19 +81,27 @@ Item {
             }
         }
 
-        Text {
-            id: previewLabel
-            text: model.label
-            //text: url
-            font.pixelSize: 14
-            wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
-
+        Rectangle {
+            radius: 5
+            opacity: 0.75
+            color: white
             anchors.top: previewImage.bottom
-            //anchors.bottom: infoLabel.top;
-            anchors.left: itemFrame.left
-            anchors.right: itemFrame.right
+
+            anchors.horizontalCenter: itemFrame.horizontalCenter
+            width: 130
+            height: previewLabel.paintedHeight
             anchors.margins: 8
+
+            Text {
+                id: previewLabel
+                text: model.label
+
+                font.pixelSize: 14
+                //wrapMode: Text.Wrap
+                horizontalAlignment: Text.AlignHCenter
+                elide: Text.ElideRight
+                anchors.fill: parent
+            }
         }
     }
 }

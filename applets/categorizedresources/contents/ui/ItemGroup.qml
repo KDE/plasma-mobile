@@ -25,9 +25,9 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 PlasmaCore.FrameSvgItem {
     id: itemGroup
-    imagePath: "dialogs/background"
-    width: Math.min(470, 64+webItemList.count*200)
-    height: 190
+    imagePath: "widgets/background"
+    width: Math.min(470, 32+webItemList.count*140)
+    height: 150
     z: 0
 
     Rectangle {
@@ -107,7 +107,7 @@ PlasmaCore.FrameSvgItem {
 
         delegate: IconDelegate {
             id: resourceDelegate
-            width: 100
+            width: 140
             height: webItemList.height
             resourceType: model.resourceType
             function setDarkenVisible(visible)
