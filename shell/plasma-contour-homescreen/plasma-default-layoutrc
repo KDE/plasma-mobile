@@ -1,5 +1,5 @@
 [ContainmentDefaults]
-defaultContainment=org.kde.contouractivityresources
+defaultContainment=org.kde.categorizedresources
 
 [Containments][1]
 activity=
@@ -24,7 +24,7 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=1
-plugin=org.kde.contouractivityresources
+plugin=org.kde.categorizedresources
 orientation=1
 screen=0
 zvalue=0
@@ -43,7 +43,7 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=1
-plugin=org.kde.contouractivityresources
+plugin=org.kde.categorizedresources
 orientation=1
 screen=0
 zvalue=0
@@ -61,7 +61,7 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=1
-plugin=org.kde.contouractivityresources
+plugin=org.kde.categorizedresources
 orientation=1
 screen=0
 zvalue=0
@@ -79,7 +79,7 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=1
-plugin=org.kde.contouractivityresources
+plugin=org.kde.categorizedresources
 orientation=1
 screen=0
 zvalue=0

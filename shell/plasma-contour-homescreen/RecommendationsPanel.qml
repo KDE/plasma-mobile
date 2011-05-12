@@ -25,8 +25,8 @@ import org.kde.plasma.mobilecomponents 0.1
 
 Item {
     id: recommendationsPanel;
-    height: 500;
-    width: 380
+    height: parent.height/1.5
+    width: 350
     state: "show"
 
 
