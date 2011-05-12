@@ -41,7 +41,6 @@ Item {
 
     PlasmaCore.FrameSvgItem {
         id: frame
-        //state: "hidden"
         enabledBorders: "LeftBorder|TopBorder|BottomBorder"
         imagePath: "widgets/background"
         anchors.fill: parent
@@ -54,36 +53,30 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
 
         PlasmaWidgets.LineEdit {
-        //Rectangle { color: black
             id: lineEdit
             width: expandedWidth - 96
             text: defaultText
             y: frame.margins.top
             clearButtonShown: true
             anchors.verticalCenter: parent.verticalCenter
-            //anchors.top: parent.top
-            //anchors.right: newIcon.left
         }
+
         PlasmaWidgets.IconWidget {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
+            id: newIcon
+            icon: QIcon("bookmark-new")
+
+            y: frame.margins.top
             minimumIconSize : "48x48"
             maximumIconSize : "48x48"
             preferredIconSize : "48x48"
-            id: newIcon
-            icon: QIcon("bookmark-new")
-            //height: parent.height
-            //width: parent.height
-            y: frame.margins.top
+
             anchors.right: parent.right
-            //x: parent.width - frame.margins.right - width
-            //anchors { right: parent.right; top: parent.top }
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+
             onClicked: {
                 print("--> new bookmark clicked!")
-                //state: "expanded"
-                print("--> new state: " + state);
                 if (newBookmarkItem.state == "expanded") {
-                    print("expanded, let's see");
                     if (isValidBookmark(lineEdit.text)) {
                         print("==> Add Bookmark: " + lineEdit.text);
                         bookmarksEngine.connectSource("add:" + lineEdit.text);
@@ -114,7 +107,7 @@ Item {
                 if (url == defaultText) {
                     ok = false;
                 }
-                print("valid url? " + url + " " + ok);
+                //print("valid url? " + url + " " + ok);
                 return ok;
             }
 
@@ -162,9 +155,10 @@ Item {
         Transition {
             PropertyAnimation {
                 properties: "width,opacity"
-                duration: 400;
-                easing.type: Easing.InOutElastic;
-                easing.amplitude: 2.0; easing.period: 1.5
+                duration: 200;
+                //easing.type: Easing.InOutElastic;
+                easing.type: Easing.OutQuad;
+                easing.amplitude: 2.0; easing.period: .2
             }
         }
     ]
