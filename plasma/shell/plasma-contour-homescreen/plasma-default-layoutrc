@@ -147,6 +147,6 @@ immutability=1
 location=6
 excludeFromActivities=true
 declarativeSlot=activitySlot
-plugin=org.kde.contouractivityswitcher
+plugin=org.kde.mobileactivityswitcher
 screen=0
 zvalue=10
