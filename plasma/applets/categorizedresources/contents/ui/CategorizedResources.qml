@@ -129,13 +129,15 @@ Item {
 
         Flow {
             id: resultsFlow
-            spacing: 8
+            spacing: 16
+            height: Math.min(300, childrenRect.height)
             //flow: Flow.TopToBottom
 
             anchors {
-                top: searchRow.bottom
+                //top: searchRow.bottom
                 left:parent.left
-                bottom: parent.bottom
+                //bottom: parent.bottom
+                verticalCenter: parent.verticalCenter
                 right: parent.right
                 leftMargin: 32
                 rightMargin: 32
