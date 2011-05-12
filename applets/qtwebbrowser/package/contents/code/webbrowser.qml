@@ -47,7 +47,7 @@ import "content"
 Rectangle {
     id: webBrowser
 
-    property string urlString : "http://plasma.kde.org"
+    property string urlString : ""
 
     width: 800; height: 600
     color: "#343434"
@@ -76,5 +76,14 @@ Rectangle {
     ScrollBar {
         scrollArea: webView; height: 8; orientation: Qt.Horizontal
         anchors { right: parent.right; rightMargin: 8; left: parent.left; bottom: parent.bottom }
+    }
+
+    Component.onCompleted: {
+        print("+=================" + startupArguments);
+        if (typeof startupArguments[0] != "undefined") {
+            urlString = startupArguments[0];
+        } else {
+            urlString = "http://plasma.kde.org";
+        }
     }
 }
