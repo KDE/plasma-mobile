@@ -22,7 +22,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     width: 240
-    height: 350
+    height: 300
 
     Component.onCompleted: {
         plasmoid.containmentType = "CustomContainment"
@@ -94,7 +94,7 @@ Item {
                  y: mainView.height/4
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
-             PathAttribute { name: "itemOpacity"; value: 0.5 }
+             PathAttribute { name: "itemOpacity"; value: 0.3 }
              PathAttribute { name: "translate"; value: -100 }
              PathAttribute { name: "z"; value: 0 }
              
@@ -117,7 +117,7 @@ Item {
                  y: 3*(mainView.height/4)
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
-             PathAttribute { name: "itemOpacity"; value: 0.5 }
+             PathAttribute { name: "itemOpacity"; value: 0.3 }
              PathAttribute { name: "translate"; value: 100 }
              PathAttribute { name: "z"; value: 0 }
 
