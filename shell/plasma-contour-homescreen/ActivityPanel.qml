@@ -25,8 +25,8 @@ import org.kde.plasma.mobilecomponents 0.1
 
 Item {
     id: activityPanel;
-    height: parent.height
-    width: parent.width/1.5
+    height: parent.height/1.5
+    width: 400
     state: "show"
 
     //Uses a MouseEventListener instead of a MouseArea to not block any mouse event
