@@ -61,6 +61,14 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
         b.addBookmarks( url );
         kDebug() << "Added Bookmark:" << massagedName;
     }
+    if (name.startsWith("remove:")) {
+        QString massagedName = name;
+        QUrl url = QUrl(massagedName.remove("remove:"));
+        Nepomuk::Resource b(url);
+        kDebug() << "TYPE: " << b.resourceType();
+        b.remove();
+        kDebug() << "Removed Bookmark:" << massagedName;
+    }
     Nepomuk::Types::Class bookmarkClass(Nepomuk::Bookmark::resourceTypeUri());
     //Nepomuk::Types::Class bookmarkClass(Nepomuk::PersonContact::resourceTypeUri()); // for testing
     Nepomuk::Query::ResourceTypeTerm rtt(bookmarkClass);

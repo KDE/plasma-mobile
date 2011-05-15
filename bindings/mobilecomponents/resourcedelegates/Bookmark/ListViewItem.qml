@@ -36,6 +36,12 @@ Item {
         interval: 0
     }
 
+    PlasmaCore.DataSource {
+        id: bookmarkSource
+        engine: "org.kde.active.bookmarks"
+        interval: 0
+    }
+
     PlasmaCore.Theme {
         id: theme
     }
@@ -108,6 +114,10 @@ Item {
         onClicked: {
             print("Opening URL..." + description);
             plasmoid.openUrl(description);
+        }
+        onPressAndHold: {
+            bookmarkSource.connectSource("remove:" + resourceUri);
+            print("Bookmark removed: " + resourceUri);
         }
     }
 
