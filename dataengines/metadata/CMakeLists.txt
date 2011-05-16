@@ -27,3 +27,6 @@ add_subdirectory(customsearch)
 
 install(FILES activityservice/activityresources.operations
         DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
+
+install(FILES metadataservice/metadataservice.operations
+        DESTINATION ${DATA_INSTALL_DIR}/plasma/services)

@@ -43,7 +43,9 @@
 #include "metadatabaseengine.h"
 #include <stdio.h>
 
-#include "activityservice/activityservice.h"
+//#include "activityservice/activityservice.h"
+#include "metadataservice/metadataservice.h"
+
 #include "querycontainer.h"
 
 #define RESULT_LIMIT 24
@@ -104,7 +106,7 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
             kDebug() << "Resource " << u << " does not exist.";
             return false;
         }
-        return true;
+        //return true;
 
         QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
          if (!container) {
@@ -160,7 +162,7 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
 Plasma::Service *MetadataBaseEngine::serviceForSource(const QString &source)
 {
     //FIXME validate the name
-    ActivityService *service = new ActivityService(source);
+    MetadataService *service = new MetadataService(source);
     service->setParent(this);
     return service;
 }
