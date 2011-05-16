@@ -80,7 +80,7 @@ Item {
     Rectangle {
         id: textRect
         width: 160
-        height: 32
+        height: 48
         color: theme.backgroundColor
         radius: 4
         opacity: .8
@@ -107,6 +107,17 @@ Item {
         }
         anchors.fill: textRect
         anchors.margins: 4
+    }
+
+    MobileComponents.Rating {
+        //color: "green"
+        id: ratingItem
+        width: 80
+        height: 16
+
+        anchors.right: textLabel.right
+        anchors.bottom: textRect.bottom
+        //margins.bottom: 20
     }
 
     MouseArea {
