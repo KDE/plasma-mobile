@@ -128,8 +128,8 @@ Item {
         containment.parent = containmentItem
         containment.x = containmentItem.margins.left
         containment.y = containmentItem.margins.top
-        containment.width = containmentFlickable.width - containmentItem.margins.left - containmentItem.margins.right
-        containment.height = containmentFlickable.height - containmentItem.margins.top - containmentItem.margins.bottom
+        containment.width = containmentItem.width - containmentItem.margins.left - containmentItem.margins.right
+        containment.height = containmentItem.height - containmentItem.margins.top - containmentItem.margins.bottom
         containment.z = hideTimerResetRegion.z -1
         appletStatusWatcher.plasmoid = containment
     }
