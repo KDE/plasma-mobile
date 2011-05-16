@@ -128,14 +128,20 @@ QtObject {
                 ListElement {
                     name: "Gmail"
                     icon: "kmail"
+                    command: "firefox-mobile"
+                    args: "http://www.gmail.com"
                 },
                 ListElement {
                     name: "Facebook"
                     icon: "facebook"
+                    command: "firefox-mobile"
+                    args: "http://www.facebook.com"
                 },
                 ListElement {
                     name: "Kde.org"
                     icon: "start-here-kde"
+                    command: "firefox-mobile"
+                    args: "http://www.kde.org"
                 }
             ]
         }
@@ -155,7 +161,7 @@ QtObject {
                 ListElement {
                     name: "Words"
                     icon: "kword"
-                    command: "kword"
+                    command: "calligramobile"
                 },
                 ListElement {
                     name: "KOrganizer"
@@ -200,6 +206,8 @@ QtObject {
                 ListElement {
                     name: "Flower store"
                     icon: "view-pim-contacts"
+                    command: "firefox-mobile"
+                    args: "http://www.flower-delivery-flowers.com"
                 }
             ]
         }
@@ -218,6 +226,8 @@ QtObject {
                 ListElement {
                     name: "Flower store"
                     icon: "marble"
+                    command: "firefox-mobile"
+                    args: "http://www.flower-delivery-flowers.com"
                 }
             ]
         }
@@ -268,18 +278,24 @@ QtObject {
                 ListElement {
                     name: "Ristorante Gino"
                     icon: "text-html"
+                    command: "firefox-mobile"
+                    args: "www.hotelginonoli.it"
                 },
                 ListElement {
                     name: "Fisherman's restaurant"
                     icon: "text-html"
                 },
                 ListElement {
-                    name: "Blossom flowers"
+                    name: "Pro flowers"
                     icon: "text-html"
+                    command: "firefox-mobile"
+                    args: "www.proflowers.com"
                 },
                 ListElement {
                     name: "Flowers express"
                     icon: "text-html"
+                    command: "firefox-mobile"
+                    args: "http://www.flower-delivery-flowers.com"
                 },
                 ListElement {
                     name: "Goldsmith"
@@ -302,9 +318,9 @@ QtObject {
                     command: "digikam"
                 },
                 ListElement {
-                    name: "Konqueror"
+                    name: "Firefox mobile"
                     icon: "konqueror"
-                    command: "konqueror"
+                    command: "firefox-mobile"
                 }
             ]
         }
@@ -351,7 +367,7 @@ QtObject {
                 ListElement {
                     name: "Flickr.com"
                     icon: "text-html"
-                    command: "konqueror"
+                    command: "firefox-mobile"
                     arguments: "http://www.flickr.com"
                 }
             ]
@@ -480,25 +496,25 @@ QtObject {
                 ListElement {
                     name: "Wikipedia - Oopaga..."
                     icon: "text-html"
-                    command: "konqueror"
+                    command: "firefox-mobile"
                     arguments: "http://en.wikipedia.org/wiki/Poison_dart_frog"
                 },
                 ListElement {
                     name: "www.tropical-rainforest.animals.com"
                     icon: "text-html"
-                    command: "konqueror"
+                    command: "firefox-mobile"
                     arguments: "http://www.tropical-rainforest-animals.com/"
                 },
                 ListElement {
                     name: "www.bgsu.edu"
                     icon: "text-html"
-                    command: "konqueror"
+                    command: "firefox-mobile"
                     arguments: "http://www.bgsu.edu"
                 },
                 ListElement {
                     name: "www.natgeo education video.com"
                     icon: "text-html"
-                    command: "konqueror"
+                    command: "firefox-mobile"
                     arguments: "http://education.nationalgeographic.com/education/edu/?ar_a=1&ar_r=1"
                 },
                 ListElement {
@@ -560,8 +576,8 @@ QtObject {
                 ListElement {
                     name: "Oopaga pumillium.jpg"
                     icon: "image-x-generic"
-                    command: "gwenview"
-                    arguments: "oopaga_pumillium.jpg"
+                    command: "simpleimageviewer"
+                    arguments: "~/contourdemo/oopagapumillium.jpg"
                 }
             ]
         }
