@@ -1,5 +1,5 @@
 [ContainmentDefaults]
-defaultContainment=org.kde.categorizedresources
+defaultContainment=org.kde.contouractivityresources
 
 [Containments][1]
 activity=
@@ -10,7 +10,7 @@ formfactor=3
 geometry=0,0,800,480
 immutability=1
 location=5
-plugin=org.kde.contourrecommendations
+plugin=org.kde.demorecommendations
 Orientation=1
 screen=0
 zvalue=0
@@ -43,7 +43,7 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=1
-plugin=org.kde.categorizedresources
+plugin=org.kde.contouractivityresources
 orientation=1
 screen=0
 zvalue=0
@@ -61,7 +61,7 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=1
-plugin=org.kde.categorizedresources
+plugin=org.kde.contouractivityresources
 orientation=1
 screen=0
 zvalue=0
@@ -79,14 +79,68 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=1
-plugin=org.kde.categorizedresources
+plugin=org.kde.contouractivityresources
 orientation=1
 screen=0
 zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][4][Wallpaper][image]
+[Containments][5][Wallpaper][image]
+wallpaper=
+wallpaperposition=2
+
+[Containments][5]
+activity=Architecture project
+desktop=-1
+formfactor=0
+geometry=0,0,800,480
+immutability=1
+location=1
+plugin=org.kde.contouractivityresources
+orientation=1
+screen=0
+zvalue=0
+wallpaperplugin=image
+wallpaperpluginmode=SingleImage
+
+[Containments][5][Wallpaper][image]
+wallpaper=
+wallpaperposition=2
+
+[Containments][6]
+activity=Barcelona trip
+desktop=-1
+formfactor=0
+geometry=0,0,800,480
+immutability=1
+location=1
+plugin=org.kde.contouractivityresources
+orientation=1
+screen=0
+zvalue=0
+wallpaperplugin=image
+wallpaperpluginmode=SingleImage
+
+[Containments][6][Wallpaper][image]
+wallpaper=
+wallpaperposition=2
+
+[Containments][7]
+activity=My Diary
+desktop=-1
+formfactor=0
+geometry=0,0,800,480
+immutability=1
+location=1
+plugin=org.kde.contouractivityresources
+orientation=1
+screen=0
+zvalue=0
+wallpaperplugin=image
+wallpaperpluginmode=SingleImage
+
+[Containments][7][Wallpaper][image]
 wallpaper=
 wallpaperposition=2
 
