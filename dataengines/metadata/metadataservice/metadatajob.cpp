@@ -84,7 +84,7 @@ void MetadataJob::start()
         b.setDescription(url);
         QUrl u(url);
         if (u.isValid()) {
-            b.addBookmarks( url );
+            b.setBookmarks( url );
             setResult(true);
         } else {
             setResult(false);
