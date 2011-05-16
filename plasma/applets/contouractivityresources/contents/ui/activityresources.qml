@@ -23,6 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
+    id: main
     width: 200
     height: 200
     property int delegateSize: 128
@@ -57,5 +58,9 @@ Item {
                 
             }
         }
+    }
+
+    ContextMenu {
+        id: contextMenu
     }
 }

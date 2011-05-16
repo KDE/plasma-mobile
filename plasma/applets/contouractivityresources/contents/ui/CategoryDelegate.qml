@@ -22,6 +22,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 
 Rectangle {
+    id: itemGroup
     property int count: countHint?countHint:Math.min(elementsView.count, 3)
     width: delegateSize*count+10*(count-1)
     height: delegateSize
@@ -29,6 +30,30 @@ Rectangle {
     radius: 5
     border.color: "white"
     border.width: 5
+
+    Rectangle {
+        id: darkenRect
+        color: Qt.rgba(0,0,0,0.4)
+        width: main.width
+        height: main.height
+        opacity: 0
+
+        x: -itemGroup.x - itemGroup.parent.x
+        y: -itemGroup.y - itemGroup.parent.y
+
+        /*onOpacityChanged: {
+            darkenRect.x = -darkenRect.mapToItem(main, 0, 0).x
+            darkenRect.y = -darkenRect.mapToItem(main, 0, 0).y
+        }*/
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
+
     Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -52,8 +77,21 @@ Rectangle {
         anchors.rightMargin: 8*/
 
         delegate: Item {
+            id: resourceDelegate
             width: delegateSize
             height: delegateSize
+            property string resourceType: model.resourceType
+            function setDarkenVisible(visible)
+            {
+                if (visible) {
+                    itemGroup.z = 900
+                    darkenRect.opacity = 1
+                } else {
+                    elementsView.currentIndex = -1
+                    itemGroup.z = 0
+                    darkenRect.opacity = 0
+                }
+            }
 
             QIconItem {
                 id: elementIcon
@@ -77,6 +115,26 @@ Rectangle {
                     var args = model.arguments.split(' ')
 
                     plasmoid.runCommand(command, Array(args))
+                }
+                onPressAndHold: {
+                    contextMenu.delegate = resourceDelegate
+                    contextMenu.resourceType = name
+                    /*contextMenu.source = model["DataEngineSource"]
+                    contextMenu.resourceUrl = model["resourceUri"]*/
+                    contextMenu.state = "show"
+                    //event.accepted = true
+                    elementsView.interactive = false
+                    setDarkenVisible(true)
+                    elementsView.currentIndex = index
+                }
+
+                onPositionChanged: {
+                    contextMenu.highlightItem(mouse.x, mouse.y)
+                }
+
+                onReleased: {
+                    elementsView.interactive = true
+                    contextMenu.activateItem(mouse.x, mouse.y)
                 }
             }
         }
