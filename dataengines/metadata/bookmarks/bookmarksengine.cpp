@@ -58,7 +58,7 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
         Nepomuk::Bookmark b;
         b.setLabel("Active Bookmark!");
         b.setDescription(massagedName);
-        b.addBookmarks( url );
+        b.setBookmarks( url );
         kDebug() << "Added Bookmark:" << massagedName;
     }
     if (name.startsWith("remove:")) {
