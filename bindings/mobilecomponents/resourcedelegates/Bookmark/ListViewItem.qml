@@ -112,6 +112,7 @@ Item {
     MobileComponents.Rating {
         //color: "green"
         id: ratingItem
+        rating: rating
         width: 80
         height: 16
 

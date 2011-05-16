@@ -32,18 +32,51 @@ Item {
     Row {
         MobileComponents.RatingIcon {
             id: rating2
+            baseRating: 2
         }
         MobileComponents.RatingIcon {
             id: rating4
+            baseRating: 4
         }
         MobileComponents.RatingIcon {
             id: rating6
+            baseRating: 6
         }
         MobileComponents.RatingIcon {
             id: rating8
+            baseRating: 8
         }
         MobileComponents.RatingIcon {
             id: rating10
+            baseRating: 10
+        }
+    }
+
+    onRatingChanged: {
+        print ("XXX :-) rating changed to " + rating);
+        updateIcons(rating);
+    }
+
+    Component.onCompleted: {
+        print("XXX done, rating " + rating);
+        updateIcons(rating);
+    }
+
+    function updateIcons(newRating) {
+        if (newRating > 1) {
+            rating2.enabled = true;
+        }
+        if (newRating > 3) {
+            rating4.enabled = true;
+        }
+        if (newRating > 5) {
+            rating6.enabled = true;
+        }
+        if (newRating > 7) {
+            rating8.enabled = true;
+        }
+        if (newRating > 9) {
+            rating10.enabled = true;
         }
     }
 }

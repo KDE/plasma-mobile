@@ -27,11 +27,21 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Item {
     width: 16
     height: 16
+    enabled: false
+    id: ratingIconItem
+
+    property int baseRating
+    signal rate(int newRating)
 
     PlasmaWidgets.IconWidget {
         id: newIcon
         icon: QIcon("rating")
         anchors.fill: parent
+
+        onClicked: {
+            print("XXX Rate: " + baseRating);
+            ratingIconItem.rate(baseRating);
+        }
     }
 }
 
