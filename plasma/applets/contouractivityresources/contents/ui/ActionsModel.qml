@@ -24,21 +24,45 @@ QtObject {
     function model(type)
     {
         switch (type) {
-        case "FileDataObject":
-            return fileDataObjectModel;
+        case "Applications":
+            return applicationsModel;
             break;
-        case "TextDocument":
-            return textDocumentModel;
+        case "Files":
+            return filesModel;
             break;
-        case "Presentation":
-            return presentationModel;
+        case "Media":
+            return mediaModel;
+            break;
+        case "Locations":
+            return locationsModel;
+            break;
+        case "events":
+            return eventsModel;
+            break;
+        case "Urls":
+            return urlsModel;
+            break;
+        case "Contacts":
+            return contactsModel;
             break;
         default:
         }
     }
 
-    property ListModel fileDataObjectModel: ListModel {
-        id: fileDataObjectModel
+    property ListModel applicationsModel: ListModel {
+        id: applicationsModel
+        ListElement {
+            text: "uninstall"
+            description: "Uninstall this application"
+        }
+        ListElement {
+            text: "rename..."
+            description: "Rename this file"
+        }
+    }
+
+    property ListModel filesModel: ListModel {
+        id: filesModel
         ListElement {
             text: "share on Dropbox"
             description: "Make this file available across the network and with your friends"
@@ -49,19 +73,27 @@ QtObject {
         }
     }
 
-    property ListModel textDocumentModel: ListModel {
-        id: textDocumentModel
+    property ListModel mediaModel: ListModel {
+        id: mediaModel
         ListElement {
             text: "share on Dropbox"
             description: "Make this file available across the network and with your friends"
         }
         ListElement {
-            text: "copy to Clipboard"
-            description: "Copy this text on the clipboard"
+            text: "upload on Ampache"
+            description: "Upload this presentation on Ampache"
         }
         ListElement {
-            text: "upload to Pastebin"
-            description: "Upload this text to the Pastebin service"
+            text: "like on Last.fm"
+            description: "Like this song on Last.fm"
+        }
+        ListElement {
+            text: "add to playlist"
+            description: "add this song to the playlist"
+        }
+        ListElement {
+            text: "play now"
+            description: "play this song now"
         }
         ListElement {
             text: "rename..."
@@ -69,23 +101,63 @@ QtObject {
         }
     }
 
-    property ListModel presentationModel: ListModel {
-        id: presentationModel
+    property ListModel locationsModel: ListModel {
+        id: locationsModel
         ListElement {
-            text: "share on Dropbox"
-            description: "Make this file available across the network and with your friends"
+            text: "look up on Google maps"
+            description: ""
         }
         ListElement {
-            text: "upload on SlideShare"
-            description: "Upload this presentation on SlideShare"
+            text: "look up on Foursquare"
+            description: ""
         }
         ListElement {
-            text: "start full screen"
-            description: "directly start this presentation"
+            text: "share on Facebook"
+            description: ""
+        }
+    }
+
+    property ListModel eventsModel: ListModel {
+        id: eventsModel
+        ListElement {
+            text: "add to organizer"
+            description: ""
         }
         ListElement {
-            text: "rename..."
-            description: "Rename this file"
+            text: "add to Google calendar"
+            description: ""
+        }
+        ListElement {
+            text: "show people involved in this event"
+            description: ""
+        }
+    }
+
+    property ListModel urlsModel: ListModel {
+        id: urlsModel
+        ListElement {
+            text: "share on Facebook"
+            description: ""
+        }
+        ListElement {
+            text: "share on Identica"
+            description: ""
+        }
+    }
+
+    property ListModel contactsModel: ListModel {
+        id: contactsModel
+        ListElement {
+            text: "send email"
+            description: ""
+        }
+        ListElement {
+            text: "send message"
+            description: ""
+        }
+        ListElement {
+            text: "look profile"
+            description: ""
         }
     }
 }

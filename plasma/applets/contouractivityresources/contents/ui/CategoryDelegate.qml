@@ -60,6 +60,7 @@ Rectangle {
         height: childrenRect.height
         radius: 5
         Text {
+            id: categoryName
             anchors.horizontalCenter: parent.horizontalCenter
             text: name
         }
@@ -80,7 +81,7 @@ Rectangle {
             id: resourceDelegate
             width: delegateSize
             height: delegateSize
-            property string resourceType: model.resourceType
+            property string resourceType: categoryName.text
             function setDarkenVisible(visible)
             {
                 if (visible) {
@@ -118,7 +119,7 @@ Rectangle {
                 }
                 onPressAndHold: {
                     contextMenu.delegate = resourceDelegate
-                    contextMenu.resourceType = name
+                    contextMenu.resourceType = categoryName.text
                     /*contextMenu.source = model["DataEngineSource"]
                     contextMenu.resourceUrl = model["resourceUri"]*/
                     contextMenu.state = "show"

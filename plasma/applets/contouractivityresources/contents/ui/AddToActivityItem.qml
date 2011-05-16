@@ -22,21 +22,5 @@ import QtQuick 1.0
 
 MenuItem {
     id: menuItem
-    text: main.browsingActivity?i18n("remove from current activity"):i18n("add to current activity")
-    onActivated: {
-        var source = contextMenu.source
-        print(source)
-        var service = metadataSource.serviceForSource(source)
-        var operation
-        if (main.browsingActivity) {
-            operation = service.operationDescription("removeAssociation")
-            operation.ResourceUrl = contextMenu.resourceUrl
-            operation.ActivityUrl = plasmoid.activityId
-        } else {
-            operation = service.operationDescription("addAssociation")
-            operation.ResourceUrl = contextMenu.resourceUrl
-            operation.ActivityUrl = plasmoid.activityId
-        }
-        service.startOperationCall(operation)
-    }
+    text: i18n("remove from current activity")
 }
