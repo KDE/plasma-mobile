@@ -116,7 +116,12 @@ Item {
                 drag.axis: Drag.XAxis
                 drag.minimumX: holeImage.x - 4
                 drag.maximumX: parent.parent.width - width
+                onPressed: {
+                    mainView.interactive = false
+                    mouse.accepted = true
+                }
                 onReleased: {
+                    mainView.interactive = true
                     if (parent.x <= 32) {
                         var activityId = model["DataEngineSource"]
                         print(activityId)
