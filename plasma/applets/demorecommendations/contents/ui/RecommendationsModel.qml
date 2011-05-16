@@ -53,20 +53,27 @@ QtObject {
             text: "Wikipedia"
             description: "http://en.wikipedia.org"
             icon: "text-html"
-            command: "konqueror"
+            command: "firefox-mobile"
             arguments: "http://en.wikipedia.org"
         }
         ListElement {
             text: "Youtube"
             description: "http://www.youtube.com"
             icon: "text-html"
-            command: "konqueror"
+            command: "firefox-mobile"
             arguments: "http://www.youtube.com"
         }
     }
 
     property ListModel birthday: ListModel {
         id: birthdayModel
+        ListElement {
+            text: "Open Flower house website"
+            description: "you looked at this url recently"
+            icon: "text-html"
+            command: "firefox-mobile"
+            arguments: "http://www.flower-delivery-flowers.com"
+        }
         ListElement {
             text: "Call grandma Niki"
             description: "Niki called you today at 09am"
@@ -99,11 +106,18 @@ QtObject {
     property ListModel photos: ListModel {
         id: photosModel
         ListElement {
-            text: "img_0123.jpg"
-            description: "tag as \"Holiday in barcelona\""
+            text: "Open image \"Hawaii Beach\""
+            description: "you often looked at it recently"
             icon: "image-generic"
-            command: "gwenview"
-            arguments: "~/img_0123.jpg"
+            command: "simpleimageviewer"
+            arguments: "~/contourdemo/Beach2.jpg"
+        }
+        ListElement {
+            text: "Open image \"Sunset\""
+            description: "you often looked at it recently"
+            icon: "image-generic"
+            command: "simpleimageviewer"
+            arguments: "~/contourdemo/Beach1.jpg"
         }
         ListElement {
             text: "12 photos tagged as \"Max\""
@@ -124,6 +138,13 @@ QtObject {
 
     property ListModel thesis: ListModel {
         id: thesisModel
+        ListElement {
+            text: "open recent url"
+            description: "you recently opened this Wikipedia entry"
+            icon: "text-html"
+            command: "firefox-mobile"
+            arguments: "http://en.wikipedia.org/wiki/Oophaga_pumilio"
+        }
         ListElement {
             text: "strawberryPoisonFrog.pdf"
             description: "Add strawberryPoisonFrog.pdf to the current  activity"
