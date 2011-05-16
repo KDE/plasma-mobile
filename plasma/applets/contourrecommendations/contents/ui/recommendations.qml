@@ -33,16 +33,21 @@ Item {
     }
 
     PlasmaCore.DataSource {
-        id: recommendationsSource
-        engine: "org.kde.recommendations"
+        id: activitySource
+        engine: "org.kde.activities"
         onSourceAdded: {
-            connectSource(source)
+            if (source != "Status") {
+                connectSource(source)
+            }
         }
         Component.onCompleted: {
             connectedSources = sources
         }
     }
 
+    RecommendationsModel {
+       id: recommendationsModels
+    }
 
     PlasmaCore.Theme {
         id: theme
@@ -50,10 +55,9 @@ Item {
 
     ListView {
         anchors.fill: parent
+        clip: true
 
-        model: PlasmaCore.DataModel{
-            dataSource: recommendationsSource
-        }
+        model: recommendationsModels.model(activitySource.data[activitySource.data["Status"]["Current"]]["Name"])
 
         onCountChanged: {
             if (count > 0) {
@@ -63,10 +67,11 @@ Item {
             }
         }
         delegate: RecommendationDelegate {
-                /*text: model.text
+                text: model.text
                 description: model.description
-                icon: model.icon*/
-                actions: model.actions
+                icon: model.icon
+                command: model.command
+                arguments: model.arguments
             }
     }
 }

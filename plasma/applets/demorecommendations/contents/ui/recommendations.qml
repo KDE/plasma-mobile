@@ -55,6 +55,7 @@ Item {
 
     ListView {
         anchors.fill: parent
+        clip: true
 
         model: recommendationsModels.model(activitySource.data[activitySource.data["Status"]["Current"]]["Name"])
 
