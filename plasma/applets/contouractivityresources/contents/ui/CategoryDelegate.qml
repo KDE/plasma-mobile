@@ -62,7 +62,7 @@ Rectangle {
         Text {
             id: categoryName
             anchors.horizontalCenter: parent.horizontalCenter
-            text: name
+            text: i18n("%1 (%2)", name, elements.count)
         }
     }
 
@@ -101,14 +101,23 @@ Rectangle {
                 height: 64
                 icon: QIcon(model.icon)
             }
-            Text {
-                id: nameText
-                text: name
-                wrapMode: Text.WordWrap
-                width: Math.min(paintedWidth, 100)
-                horizontalAlignment: Text.AlignHCenter
+            Rectangle {
+                radius: 5
+                opacity: 0.75
+                color: white
                 anchors.top: elementIcon.bottom
+
                 anchors.horizontalCenter: parent.horizontalCenter
+                width: nameText.paintedWidth
+                height: nameText.paintedHeight
+                anchors.margins: 8
+                Text {
+                    id: nameText
+                    text: model.name
+                    wrapMode: Text.NoWrap
+                    elide: Text.ElideRight
+                    width: 120
+                }
             }
             MouseArea {
                 anchors.fill: parent

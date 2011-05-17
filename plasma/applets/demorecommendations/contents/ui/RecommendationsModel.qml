@@ -53,14 +53,14 @@ QtObject {
             text: "Wikipedia"
             description: "http://en.wikipedia.org"
             icon: "text-html"
-            command: "firefox-mobile"
+            command: "fennec"
             arguments: "http://en.wikipedia.org"
         }
         ListElement {
             text: "Youtube"
             description: "http://www.youtube.com"
             icon: "text-html"
-            command: "firefox-mobile"
+            command: "fennec"
             arguments: "http://www.youtube.com"
         }
     }
@@ -71,7 +71,7 @@ QtObject {
             text: "Open Flower house website"
             description: "you looked at this url recently"
             icon: "text-html"
-            command: "firefox-mobile"
+            command: "fennec"
             arguments: "http://www.flower-delivery-flowers.com"
         }
         ListElement {
@@ -142,7 +142,7 @@ QtObject {
             text: "open recent url"
             description: "you recently opened this Wikipedia entry"
             icon: "text-html"
-            command: "firefox-mobile"
+            command: "fennec"
             arguments: "http://en.wikipedia.org/wiki/Oophaga_pumilio"
         }
         ListElement {

@@ -86,8 +86,9 @@ QtObject {
             countHint: 0
             elements: [
                 ListElement {
-                    name: "konqueror"
+                    name: "Firefox"
                     icon: "konqueror"
+                    command: "fennec"
                 },
                 ListElement {
                     name: "kmail"
@@ -128,19 +129,19 @@ QtObject {
                 ListElement {
                     name: "Gmail"
                     icon: "kmail"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     args: "http://www.gmail.com"
                 },
                 ListElement {
                     name: "Facebook"
                     icon: "facebook"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     args: "http://www.facebook.com"
                 },
                 ListElement {
                     name: "Kde.org"
                     icon: "start-here-kde"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     args: "http://www.kde.org"
                 }
             ]
@@ -206,7 +207,7 @@ QtObject {
                 ListElement {
                     name: "Flower store"
                     icon: "view-pim-contacts"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     args: "http://www.flower-delivery-flowers.com"
                 }
             ]
@@ -226,7 +227,7 @@ QtObject {
                 ListElement {
                     name: "Flower store"
                     icon: "marble"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     args: "http://www.flower-delivery-flowers.com"
                 }
             ]
@@ -278,7 +279,7 @@ QtObject {
                 ListElement {
                     name: "Ristorante Gino"
                     icon: "text-html"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     args: "www.hotelginonoli.it"
                 },
                 ListElement {
@@ -288,13 +289,13 @@ QtObject {
                 ListElement {
                     name: "Pro flowers"
                     icon: "text-html"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     args: "www.proflowers.com"
                 },
                 ListElement {
                     name: "Flowers express"
                     icon: "text-html"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     args: "http://www.flower-delivery-flowers.com"
                 },
                 ListElement {
@@ -320,7 +321,7 @@ QtObject {
                 ListElement {
                     name: "Firefox mobile"
                     icon: "konqueror"
-                    command: "firefox-mobile"
+                    command: "fennec"
                 }
             ]
         }
@@ -367,7 +368,7 @@ QtObject {
                 ListElement {
                     name: "Flickr.com"
                     icon: "text-html"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     arguments: "http://www.flickr.com"
                 }
             ]
@@ -496,25 +497,25 @@ QtObject {
                 ListElement {
                     name: "Wikipedia - Oopaga..."
                     icon: "text-html"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     arguments: "http://en.wikipedia.org/wiki/Poison_dart_frog"
                 },
                 ListElement {
                     name: "www.tropical-rainforest.animals.com"
                     icon: "text-html"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     arguments: "http://www.tropical-rainforest-animals.com/"
                 },
                 ListElement {
                     name: "www.bgsu.edu"
                     icon: "text-html"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     arguments: "http://www.bgsu.edu"
                 },
                 ListElement {
                     name: "www.natgeo education video.com"
                     icon: "text-html"
-                    command: "firefox-mobile"
+                    command: "fennec"
                     arguments: "http://education.nationalgeographic.com/education/edu/?ar_a=1&ar_r=1"
                 },
                 ListElement {
