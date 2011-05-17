@@ -111,6 +111,7 @@ Item {
                 onReleased: {
                     webItemList.interactive = true
                     contextMenu.activateItem(mouse.x, mouse.y)
+                    contextMenu.state = "hidden"
                 }
             }
 
