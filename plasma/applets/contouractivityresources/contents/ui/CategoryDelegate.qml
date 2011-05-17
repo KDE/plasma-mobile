@@ -30,6 +30,7 @@ Rectangle {
     radius: 5
     border.color: "white"
     border.width: 5
+    property string category: name
 
     Rectangle {
         id: darkenRect
@@ -81,7 +82,7 @@ Rectangle {
             id: resourceDelegate
             width: delegateSize
             height: delegateSize
-            property string resourceType: categoryName.text
+            property string resourceType: itemGroup.category
             function setDarkenVisible(visible)
             {
                 if (visible) {
@@ -128,7 +129,7 @@ Rectangle {
                 }
                 onPressAndHold: {
                     contextMenu.delegate = resourceDelegate
-                    contextMenu.resourceType = categoryName.text
+                    contextMenu.resourceType = itemGroup.category
                     /*contextMenu.source = model["DataEngineSource"]
                     contextMenu.resourceUrl = model["resourceUri"]*/
                     contextMenu.state = "show"

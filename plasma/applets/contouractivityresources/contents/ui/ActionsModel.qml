@@ -36,10 +36,11 @@ QtObject {
         case "Locations":
             return locationsModel;
             break;
-        case "events":
+        case "Events":
             return eventsModel;
             break;
         case "Urls":
+        case "URLs":
             return urlsModel;
             break;
         case "Contacts":
