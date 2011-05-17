@@ -53,14 +53,14 @@ QtObject {
             text: "Wikipedia"
             description: "http://en.wikipedia.org"
             icon: "text-html"
-            command: "fennec"
+            command: "meego-app-browser"
             arguments: "http://en.wikipedia.org"
         }
         ListElement {
             text: "Youtube"
             description: "http://www.youtube.com"
             icon: "text-html"
-            command: "fennec"
+            command: "meego-app-browser"
             arguments: "http://www.youtube.com"
         }
     }
@@ -71,7 +71,7 @@ QtObject {
             text: "Open Flower house website"
             description: "you looked at this url recently"
             icon: "text-html"
-            command: "fennec"
+            command: "meego-app-browser"
             arguments: "http://www.flower-delivery-flowers.com"
         }
         ListElement {
@@ -110,14 +110,14 @@ QtObject {
             description: "you often looked at it recently"
             icon: "image-generic"
             command: "simpleimageviewer"
-            arguments: "~/contourdemo/Beach2.jpg"
+            arguments: "/home/meego/contourdemo/Beach2.jpg"
         }
         ListElement {
             text: "Open image \"Sunset\""
             description: "you often looked at it recently"
             icon: "image-generic"
             command: "simpleimageviewer"
-            arguments: "~/contourdemo/Beach1.jpg"
+            arguments: "/home/meego/contourdemo/Beach1.jpg"
         }
         ListElement {
             text: "12 photos tagged as \"Max\""
@@ -142,7 +142,7 @@ QtObject {
             text: "open recent url"
             description: "you recently opened this Wikipedia entry"
             icon: "text-html"
-            command: "fennec"
+            command: "meego-app-browser"
             arguments: "http://en.wikipedia.org/wiki/Oophaga_pumilio"
         }
         ListElement {
