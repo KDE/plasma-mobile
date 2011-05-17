@@ -1,6 +1,7 @@
 /*
  *   Copyright 2011 Marco Martin <mart@kde.org>
- *
+ *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
+ * 
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
  *   published by the Free Software Foundation; either version 2 or
@@ -32,16 +33,29 @@ Item {
         }
     }
 
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.bookmarks"
+        interval: 0
+    }
+
+
     function activateItem(x, y)
     {
         var pos = entriesColumn.mapFromItem(delegate, x, y)
         var item = entriesColumn.childAt(pos.x, pos.y)
-        if (item) {
+        print("---------------------------" + item + pos);
+        if (item && typeof item != "undefined") {
             print("You clicked " + item.text)
+            if (item.text == "rate") {
+                print("YYY Let's rate!");
+                rateResource(resourceUrl, 6);
+            }
             feedbackMessageText.text = item.text
             feedbackMessageAnimation.running = true
-            item.activated()
+            //item.activated()
         }
+        print("bla");
     }
 
     function highlightItem(x, y)
@@ -60,8 +74,32 @@ Item {
         }
     }
 
+    function rateResource(resourceUrl, rating) {
+        print("YYY Rating " + resourceUrl + " *****: " + rating )
+
+        var service = metadataSource.serviceForSource("anything")
+        var operation = service.operationDescription("rate")
+
+        operation["ResourceUrl"] = resourceUrl;
+        operation["Rating"] = rating;
+        service.startOperationCall(operation)
+
+        /*
+        engine = dataEngine("notifications");
+        service = engine.serviceForSource("notification");
+        op = service.operationDescription("createNotification");
+        operation["resourceUrl"] = "foo";
+        operation["rating"] = rating;
+        op["summary"] = "this is a summary";
+        op["body"] = "body of notification";
+        op["timeout"] = 2000;
+
+        service.startOperationCall(op);
+        */
+    }
+
     MouseArea {
-        anchors.fill:parent
+        anchors.fill: parent
         onClicked: contextMenu.state = "hidden"
     }
 
@@ -77,10 +115,10 @@ Item {
 
     function positionMenu()
     {
-        var menuPos = parent.mapToItem(parent, parent.width/2-menuObject.width/2, parent.height)
+        var menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, delegate.height)
 
         if (menuPos.y > contextMenu.height/2) {
-            menuPos = parent.mapToItem(parent, parent.width/2-menuObject.width/2, -menuFrame.height)
+            menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, -menuFrame.height)
             tipSvgItem.state = "top"
         } else {
             tipSvgItem.state = "bottom"
@@ -238,13 +276,13 @@ Item {
                     targets: contextMenu
                     properties: "opacity"
                     duration: 250
-                    easing.type: "InOutCubic"
+                    easing.type: "InOutElastic"
                 }
                 NumberAnimation {
                     targets: menuObject
                     properties: "scale"
                     duration: 250
-                    easing.type: "InOutCubic"
+                    easing.type: "InOutElastic"
                 }
             }
         },
@@ -255,14 +293,14 @@ Item {
                 NumberAnimation {
                     targets: contextMenu
                     properties: "opacity"
-                    duration: 250
-                    easing.type: "InOutCubic"
+                    duration: 400
+                    easing.type: "InOutElastic"
                 }
                 NumberAnimation {
                     targets: menuObject
                     properties: "scale"
-                    duration: 250
-                    easing.type: "InOutCubic"
+                    duration: 800
+                    easing.type: "InOutElastic"
                 }
             }
         }
@@ -283,6 +321,7 @@ Item {
         }
         scale: 0
     }
+
     SequentialAnimation {
         id: feedbackMessageAnimation
         NumberAnimation {

@@ -31,6 +31,7 @@ Text {
         anchors.fill: parent
         onClicked: {
             menuItem.activated()
+            menuItem.run();
             feedbackMessageText.text = menuItem.text
             feedbackMessageAnimation.running = true
         }

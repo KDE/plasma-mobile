@@ -33,6 +33,9 @@ QtObject {
         case "Presentation":
             return presentationModel;
             break;
+        case "Bookmark":
+            return bookmarkModel;
+            break;
         default:
         }
     }
@@ -88,4 +91,17 @@ QtObject {
             description: "Rename this file"
         }
     }
+
+    property ListModel bookmarkModel: ListModel {
+        id: bookmarkModel
+        ListElement {
+            text: "rate"
+            description: "Rate this file"
+
+            function run() {
+                print("ZZZ -> activating inside the model.");
+            }
+        }
+    }
+
 }

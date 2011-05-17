@@ -26,7 +26,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 
 Item {
-    property int rating
+    property int score
     property string resourceUrl
 
     Row {
@@ -52,14 +52,16 @@ Item {
         }
     }
 
-    onRatingChanged: {
-        print ("XXX :-) rating changed to " + rating);
-        updateIcons(rating);
+    onScoreChanged: {
+        print ("XXX :-) rating changed to " + score);
+        updateIcons(score);
     }
 
     Component.onCompleted: {
-        print("XXX done, rating " + rating);
-        updateIcons(rating);
+        if (score > 0) {
+            print("XXX done, rating " + score);
+        }
+        updateIcons(score);
     }
 
     function updateIcons(newRating) {
