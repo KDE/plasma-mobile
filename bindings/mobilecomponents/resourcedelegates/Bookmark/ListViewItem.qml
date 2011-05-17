@@ -120,17 +120,19 @@ Item {
         anchors.bottom: textRect.bottom
         //margins.bottom: 20
     }
-
+    /*
     MouseArea {
         anchors.fill: parent
         onClicked: {
             print("Opening URL..." + description);
-            plasmoid.openUrl(description);
+            //plasmoid.openUrl(description);
         }
+        / *
         onPressAndHold: {
-            bookmarkSource.connectSource("remove:" + resourceUri);
+            //bookmarkSource.connectSource("remove:" + resourceUri);
             print("Bookmark removed: " + resourceUri);
         }
+        * /
     }
-
+    */
 }

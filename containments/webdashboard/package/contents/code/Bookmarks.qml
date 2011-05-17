@@ -80,9 +80,44 @@ Item {
         }
 
         delegate: MobileComponents.ResourceDelegate {
+            id: resourceDelegate
             width:240
             height: 96
             resourceType: model.resourceType
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    //plasmoid.openUrl(String(url))
+                }
+                onPressAndHold: {
+                    print("XXX CONTEXT MENU!!!");
+                    contextMenu.delegate = resourceDelegate
+                    contextMenu.resourceType = "Bookmark"
+                    //contextMenu.resourceType = modelData
+                    contextMenu.source = model["DataEngineSource"]
+                    contextMenu.resourceUrl = model["resourceUri"]
+                    contextMenu.state = "show"
+                    //event.accepted = true
+                    webItemList.interactive = false
+                    //setDarkenVisible(true)
+                    webItemList.currentIndex = index
+                }
+
+                onPositionChanged: {
+                    contextMenu.highlightItem(mouse.x, mouse.y)
+                }
+
+                onReleased: {
+                    webItemList.interactive = true
+                    contextMenu.activateItem(mouse.x, mouse.y)
+                }
+            }
+
         }
+    }
+
+    MobileComponents.ContextMenu {
+        id: contextMenu
     }
 }

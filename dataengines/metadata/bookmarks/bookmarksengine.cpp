@@ -52,38 +52,39 @@ BookmarksEngine::~BookmarksEngine()
 
 bool BookmarksEngine::sourceRequestEvent(const QString &name)
 {
+    QString massagedName = name;
     if (name.startsWith("add:")) {
-        QString massagedName = name;
+        //QString massagedName = name;
         QUrl url = QUrl(massagedName.remove("add:"));
         Nepomuk::Bookmark b;
         b.setLabel("Active Bookmark!");
         b.setDescription(massagedName);
         b.setBookmarks( url );
         kDebug() << "Added Bookmark:" << massagedName;
-    }
-    if (name.startsWith("remove:")) {
-        QString massagedName = name;
+    } else if (name.startsWith("remove:")) {
+        //QString massagedName = name;
         QUrl url = QUrl(massagedName.remove("remove:"));
         Nepomuk::Resource b(url);
         kDebug() << "TYPE: " << b.resourceType();
         b.remove();
         kDebug() << "Removed Bookmark:" << massagedName;
+    } else {
+        Nepomuk::Types::Class bookmarkClass(Nepomuk::Bookmark::resourceTypeUri());
+        //Nepomuk::Types::Class bookmarkClass(Nepomuk::PersonContact::resourceTypeUri()); // for testing
+        Nepomuk::Query::ResourceTypeTerm rtt(bookmarkClass);
+
+        Nepomuk::Query::Query bookmarkQuery;
+        bookmarkQuery.setTerm(rtt);
+
+        //kDebug() << "Query:" << bookmarkQuery.toSparqlQuery();
+
+        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(massagedName));
+        if (!container) {
+            container = new QueryContainer(bookmarkQuery, this);
+        }
+        container->setObjectName(massagedName);
+        addSource(container);
     }
-    Nepomuk::Types::Class bookmarkClass(Nepomuk::Bookmark::resourceTypeUri());
-    //Nepomuk::Types::Class bookmarkClass(Nepomuk::PersonContact::resourceTypeUri()); // for testing
-    Nepomuk::Query::ResourceTypeTerm rtt(bookmarkClass);
-
-    Nepomuk::Query::Query bookmarkQuery;
-    bookmarkQuery.setTerm(rtt);
-
-    kDebug() << "Query:" << bookmarkQuery.toSparqlQuery();
-
-    QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
-    if (!container) {
-        container = new QueryContainer(bookmarkQuery, this);
-    }
-    container->setObjectName(name);
-    addSource(container);
     return true;
 }
 
