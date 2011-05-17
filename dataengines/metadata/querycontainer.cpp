@@ -95,7 +95,7 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
         // use resource types to find a suitable icon.
         //TODO
         _icon = icon(QStringList(resource.className()));
-        kDebug() << "symbol" << _icon;
+        //kDebug() << "symbol" << _icon;
     }
     if (_icon.split(",").count() > 1) {
         kDebug() << "More than one icon!" << _icon;
@@ -220,7 +220,7 @@ QString QueryContainer::icon(const QStringList &types)
         }
         if (m_icons.keys().contains(shortType)) {
             _icon = m_icons[shortType];
-            kDebug() << "found icon for type" << shortType << _icon;
+            //kDebug() << "found icon for type" << shortType << _icon;
         }
     }
     return _icon;
