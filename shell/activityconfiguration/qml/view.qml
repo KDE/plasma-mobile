@@ -1,5 +1,5 @@
 /*
- *   Copyright 2011 Marco Martin <mart@kde.org>
+ *   Copyright 2010 Marco Martin <notmart@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -18,27 +18,33 @@
  */
 
 import Qt 4.7
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-PlasmaCore.SvgItem {
-    id: button
-    width: actionSize
-    height: actionSize
-    svg: iconsSvg
-    visible: action&&action.enabled
+Rectangle {
+    id: main
+    signal closeRequested
+    color: Qt.rgba(0,0,0,0.82)
+    width: 800
+    height: 480
 
-    property QtObject action
-
-    MouseArea {
+    PlasmaCore.FrameSvgItem {
+        id: frame
         anchors.fill: parent
-        anchors.leftMargin: -10
-        anchors.topMargin: -10
-        anchors.rightMargin: -10
-        anchors.bottomMargin: -10
-        onClicked: {
-            print(action)
-            print(action.enabled)
-            action.trigger()
+        anchors.margins: 100
+        imagePath: "dialogs/background"
+
+        PlasmaWidgets.PushButton {
+            id: closeButton
+            width: addButton.width
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            anchors.rightMargin: frame.margins.right
+            anchors.bottomMargin: frame.margins.bottom
+
+            text: i18n("Close")
+            onClicked : main.closeRequested()
         }
     }
 }

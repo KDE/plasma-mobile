@@ -105,6 +105,12 @@ Item {
         imagePath: "widgets/action-overlays"
     }
 
+    PlasmaCore.Svg {
+        id: configIconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
+    
+
     Item {
         id: appletsFlickableParent
         anchors.top: parent.top
@@ -171,10 +177,21 @@ Item {
                 Item {
                     height: appletsFlickable.height
                     width: main.width/appletColumns
-                    ActionButton {
+                    Column {
                         anchors.centerIn: parent
-                        elementId: "add-normal"
-                        action: plasmoid.action("add widgets")
+                        ActionButton {
+                            elementId: "add-normal"
+                            action: plasmoid.action("add widgets")
+                        }
+                        ActionButton {
+                            svg: configIconsSvg
+                            elementId: "configure"
+                            action: plasmoid.action("configure")
+                            //FIXME: WHY?
+                            Component.onCompleted: {
+                                action.enabled = true
+                            }
+                        }
                     }
                 }
             }

@@ -19,6 +19,8 @@ set(plasma-mobile_SRCS
 
     mobileactivitythumbnails/mobileactivitythumbnails.cpp
 
+    activityconfiguration/activityconfiguration.cpp
+
     widgetsexplorer/mobilewidgetsexplorer.cpp
     widgetsexplorer/kcategorizeditemsviewmodels.cpp
     widgetsexplorer/plasmaappletitemmodel.cpp
@@ -47,3 +49,4 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink
 #install(FILES plasma-mobile.desktop DESTINATION ${AUTOSTART_INSTALL_DIR})
 
 install(DIRECTORY widgetsexplorer/qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma-mobile/mobilewidgetsexplorer PATTERN .svn EXCLUDE)
+install(DIRECTORY activityconfiguration/qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma-mobile/activityconfiguration PATTERN .svn EXCLUDE)

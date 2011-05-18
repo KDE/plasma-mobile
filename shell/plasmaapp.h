@@ -34,6 +34,7 @@
 #include <fixx11h.h>
 #endif
 
+class ActivityConfiguration;
 class MobView;
 class MobCorona;
 class MobileWidgetsExplorer;
@@ -82,6 +83,7 @@ private Q_SLOTS:
     void syncConfig();
     void lockScreen();
     void showWidgetsExplorer();
+    void showActivityConfiguration();
     void mainViewGeometryChanged();
 
 private:
@@ -104,6 +106,7 @@ private:
 
     QString m_homeScreenPath;
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
+    QWeakPointer<ActivityConfiguration> m_activityConfiguration;
     bool m_isDesktop;
 };
 

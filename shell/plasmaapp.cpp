@@ -28,6 +28,7 @@
 #include "mobpluginloader.h"
 #include "mobileactivitythumbnails/mobileactivitythumbnails.h"
 #include "widgetsexplorer/mobilewidgetsexplorer.h"
+#include "activityconfiguration/activityconfiguration.h"
 
 #include <unistd.h>
 
@@ -384,6 +385,10 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     if (addAction) {
         connect(addAction, SIGNAL(triggered()), this, SLOT(showWidgetsExplorer()));
     }
+    QAction *configureAction = containment->action("configure");
+    if (configureAction) {
+        connect(configureAction, SIGNAL(triggered()), this, SLOT(showActivityConfiguration()));
+    }
 
     //Is it a panel?
     //if it's on an edge find a qml element propely named
@@ -578,6 +583,22 @@ void PlasmaApp::showWidgetsExplorer()
     }
     m_widgetsExplorer.data()->show();
 }
+
+void PlasmaApp::showActivityConfiguration()
+{
+    if (!m_activityConfiguration) {
+        m_activityConfiguration = new ActivityConfiguration();
+        m_activityConfiguration.data()->setZValue(1000);
+        m_corona->addItem(m_activityConfiguration.data());
+    }
+
+    m_activityConfiguration.data()->setContainment(m_currentContainment);
+    if (m_declarativeWidget) {
+        m_activityConfiguration.data()->setGeometry(m_declarativeWidget->geometry());
+    }
+    m_activityConfiguration.data()->show();
+}
+
 
 void PlasmaApp::containmentDestroyed(QObject *object)
 {
