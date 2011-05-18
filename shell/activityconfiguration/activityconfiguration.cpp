@@ -20,6 +20,7 @@
 
 //own
 #include "activityconfiguration.h"
+#include "backgroundlistmodel.h"
 
 //Qt
 #include <QtDeclarative/qdeclarative.h>
@@ -33,11 +34,13 @@
 
 //Plasma
 #include <Plasma/Containment>
+#include <Plasma/Package>
 
 ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     : Plasma::DeclarativeWidget(parent),
       m_containment(0),
-      m_mainWidget(0)
+      m_mainWidget(0),
+      m_model(0)
 {
     setQmlPath(KStandardDirs::locate("data", "plasma-mobile/activityconfiguration/view.qml"));
 
@@ -53,6 +56,8 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
                     this, SLOT(deleteLater()));
         }
     }
+
+    
 }
 
 ActivityConfiguration::~ActivityConfiguration()
@@ -62,6 +67,11 @@ ActivityConfiguration::~ActivityConfiguration()
 void ActivityConfiguration::setContainment(Plasma::Containment *cont)
 {
     m_containment = cont;
+    m_model = new BackgroundListModel(m_containment->wallpaper(), this);
+    m_model->setResizeMethod(Plasma::Wallpaper::CenteredResize);
+    m_model->setWallpaperSize(QSize(1024, 600));
+    m_model->reload();
+    emit modelChanged();
 }
 
 Plasma::Containment *ActivityConfiguration::containment() const
@@ -85,6 +95,38 @@ QString ActivityConfiguration::activityName() const
     }
 
     return m_containment->activity();
+}
+
+QObject *ActivityConfiguration::wallpaperModel()
+{
+    return m_model;
+}
+
+int ActivityConfiguration::wallpaperIndex()
+{
+    return m_wallpaperIndex;
+}
+
+void ActivityConfiguration::setWallpaperIndex(const int index)
+{
+    m_wallpaperIndex = index;
+    Plasma::Package *b = m_model->package(index);
+    if (!b) {
+        return;
+    }
+
+    QString wallpaper;
+    if (b->structure()->contentsPrefixPaths().isEmpty()) {
+        // it's not a full package, but a single paper
+        wallpaper = b->filePath("preferred");
+    } else {
+        wallpaper = b->path();
+    }
+
+    kDebug()<<"Setting new wallpaper path:"<<wallpaper;
+    if (m_containment->wallpaper()) {
+        m_containment->wallpaper()->setUrls(KUrl::List() << wallpaper);
+    }
 }
 
 #include "activityconfiguration.moc"

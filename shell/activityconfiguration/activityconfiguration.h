@@ -25,6 +25,7 @@
 class QDeclarativeItem;
 
 class PlasmaAppletItemModel;
+class BackgroundListModel;
 
 namespace Plasma
 {
@@ -35,6 +36,8 @@ class ActivityConfiguration : public Plasma::DeclarativeWidget
 {
     Q_OBJECT
     Q_PROPERTY(QString activityName READ activityName WRITE setActivityName)
+    Q_PROPERTY(QObject *wallpaperModel READ wallpaperModel NOTIFY modelChanged)
+    Q_PROPERTY(int wallpaperIndex READ wallpaperIndex WRITE setWallpaperIndex)
 
 public:
     ActivityConfiguration(QGraphicsWidget *parent = 0);
@@ -46,10 +49,19 @@ public:
     void setActivityName(const QString &name);
     QString activityName() const;
 
+    QObject *wallpaperModel();
+
+    int wallpaperIndex();
+    void setWallpaperIndex(const int index);
+
+Q_SIGNALS:
+    void modelChanged();
+
 private:
     Plasma::Containment *m_containment;
     QDeclarativeItem *m_mainWidget;
-
+    BackgroundListModel *m_model;
+    int m_wallpaperIndex;
 };
 
 #endif //PLASMA_ACTIVITYCONFIG_H

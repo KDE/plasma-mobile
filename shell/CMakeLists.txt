@@ -20,6 +20,7 @@ set(plasma-mobile_SRCS
     mobileactivitythumbnails/mobileactivitythumbnails.cpp
 
     activityconfiguration/activityconfiguration.cpp
+    activityconfiguration/backgroundlistmodel.cpp
 
     widgetsexplorer/mobilewidgetsexplorer.cpp
     widgetsexplorer/kcategorizeditemsviewmodels.cpp
