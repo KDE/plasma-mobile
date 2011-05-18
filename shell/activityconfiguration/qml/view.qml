@@ -96,8 +96,9 @@ Rectangle {
     PlasmaCore.FrameSvgItem {
         id: frame
         anchors.centerIn: parent
-        width: 500
-        height: 280
+        //FIXME: whi +40?
+        width: Math.min(wallpapersList.height*1.6*3+40, parent.width/1.05)
+        height: parent.height/2
         imagePath: "dialogs/background"
         scale: 0
 
@@ -135,7 +136,7 @@ Rectangle {
             delegate: Rectangle {
                 radius: 4
                 width: wallpapersList.height*1.6
-                height: wallpapersList.height
+                height: wallpapersList.height-4
 
                 QPixmapItem {
                     pixmap: screenshot
