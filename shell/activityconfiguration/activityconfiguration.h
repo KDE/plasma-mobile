@@ -34,6 +34,7 @@ namespace Plasma
 class ActivityConfiguration : public Plasma::DeclarativeWidget
 {
     Q_OBJECT
+    Q_PROPERTY(QString activityName READ activityName WRITE setActivityName)
 
 public:
     ActivityConfiguration(QGraphicsWidget *parent = 0);
@@ -41,6 +42,9 @@ public:
 
     void setContainment(Plasma::Containment *cont);
     Plasma::Containment *containment() const;
+
+    void setActivityName(const QString &name);
+    QString activityName() const;
 
 private:
     Plasma::Containment *m_containment;

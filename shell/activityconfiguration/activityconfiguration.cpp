@@ -44,6 +44,9 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     if (engine()) {
         QDeclarativeContext *ctxt = engine()->rootContext();
         m_mainWidget = qobject_cast<QDeclarativeItem *>(rootObject());
+        if (ctxt) {
+            ctxt->setContextProperty("configInterface", this);
+        }
 
         if (m_mainWidget) {
             connect(m_mainWidget, SIGNAL(closeRequested()),
@@ -66,5 +69,22 @@ Plasma::Containment *ActivityConfiguration::containment() const
     return m_containment;
 }
 
+void ActivityConfiguration::setActivityName(const QString &name)
+{
+    if (!m_containment) {
+        return;
+    }
+
+    m_containment->setActivity(name);
+}
+
+QString ActivityConfiguration::activityName() const
+{
+    if (!m_containment) {
+        return QString();
+    }
+
+    return m_containment->activity();
+}
 
 #include "activityconfiguration.moc"

@@ -25,26 +25,69 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Rectangle {
     id: main
     signal closeRequested
-    color: Qt.rgba(0,0,0,0.82)
+    property variant containmentConfig
+    color: Qt.rgba(0,0,0,0.5)
     width: 800
     height: 480
 
+    //FIXME: artificial delay to have configInterface working
+    Timer {
+        repeat: false
+        running: true
+        interval: 250
+        onTriggered: activityNameEdit.text = configInterface.activityName
+    }
+
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     PlasmaCore.FrameSvgItem {
         id: frame
-        anchors.fill: parent
-        anchors.margins: 100
+        anchors.centerIn: parent
+        width: 400
+        height: 180
         imagePath: "dialogs/background"
+
+        Row {
+            anchors.centerIn: parent
+            Text {
+                color: theme.textColor
+                text: i18n("Activity name:")
+                anchors.verticalCenter: activityNameEdit.verticalCenter
+            }
+            PlasmaWidgets.LineEdit {
+                id: activityNameEdit
+            }
+        }
 
         PlasmaWidgets.PushButton {
             id: closeButton
-            width: addButton.width
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            anchors.rightMargin: frame.margins.right
-            anchors.bottomMargin: frame.margins.bottom
+            anchors {
+                bottom: parent.bottom
+                right: parent.right
+                rightMargin: frame.margins.right
+                bottomMargin: frame.margins.bottom
+            }
 
-            text: i18n("Close")
+            text: i18n("Cancel")
             onClicked : main.closeRequested()
+        }
+
+        PlasmaWidgets.PushButton {
+            id: okButton
+            anchors {
+                bottom: parent.bottom
+                left: parent.left
+                leftMargin: frame.margins.left
+                bottomMargin: frame.margins.bottom
+            }
+
+            text: i18n("Ok")
+            onClicked : {
+                configInterface.activityName = activityNameEdit.text
+                main.closeRequested()
+            }
         }
     }
 }
