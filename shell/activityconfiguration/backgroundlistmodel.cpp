@@ -217,7 +217,6 @@ void BackgroundListModel::sizeFound(const QString &path, const QSize &s)
     if (index.isValid()) {
         Plasma::Package *package = m_packages.at(index.row());
         m_sizeCache.insert(package, s);
-//        static_cast<Image *>(m_structureParent)->updateScreenshot(index);
         emit dataChanged(index, index);
     }
 }
@@ -311,7 +310,6 @@ void BackgroundListModel::showPreview(const KFileItem &item, const QPixmap &prev
 
     m_previews.insert(b, preview);
     //kDebug() << "preview size:" << preview.size();
-//    static_cast<Image *>(m_structureParent)->updateScreenshot(index);
     emit dataChanged(index, index);
 }
 

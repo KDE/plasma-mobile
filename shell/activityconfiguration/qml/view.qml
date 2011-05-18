@@ -108,7 +108,7 @@ Rectangle {
             y: frame.margins.top
             Text {
                 color: theme.textColor
-                text: i18n("Activity name:")
+                text: i18n("Activity:")
                 anchors.verticalCenter: activityNameEdit.verticalCenter
             }
             PlasmaWidgets.LineEdit {
@@ -145,8 +145,8 @@ Rectangle {
                         margins: 6
                     }
                     Rectangle {
-                        x: 10
-                        y: 10
+                        anchors.bottom: parent.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter
                         color: Qt.rgba(1,1,1,0.6)
                         radius: 4
                         width: wallpaperName.paintedWidth
@@ -161,7 +161,7 @@ Rectangle {
                         width:10
                         height:10
                         radius:5
-                        anchors.bottom:parent.bottom
+                        anchors.top:parent.top
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
                 }
