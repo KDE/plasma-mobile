@@ -29,6 +29,52 @@ Rectangle {
     color: Qt.rgba(0,0,0,0.5)
     width: 800
     height: 480
+    opacity: 0
+
+    Component.onCompleted: {
+        appearAnimation.running = true
+    }
+
+    ParallelAnimation {
+        id: appearAnimation
+        NumberAnimation {
+            targets: main
+            properties: "opacity"
+            duration: 250
+            to: 1
+            easing.type: "InOutCubic"
+        }
+        NumberAnimation {
+            targets: frame
+            properties: "scale"
+            duration: 250
+            to: 1
+            easing.type: "InOutCubic"
+        }
+    }
+
+    SequentialAnimation {
+        id: disappearAnimation
+        ParallelAnimation {
+            NumberAnimation {
+                targets: main
+                properties: "opacity"
+                duration: 250
+                to: 0
+                easing.type: "InOutCubic"
+            }
+            NumberAnimation {
+                targets: frame
+                properties: "scale"
+                duration: 250
+                to: 0
+                easing.type: "InOutCubic"
+            }
+        }
+        ScriptAction {
+            script: main.closeRequested()
+        }
+    }
 
     //FIXME: artificial delay to have configInterface working
     Timer {
@@ -48,6 +94,7 @@ Rectangle {
         width: 400
         height: 180
         imagePath: "dialogs/background"
+        scale: 0
 
         Row {
             anchors.centerIn: parent
@@ -71,7 +118,7 @@ Rectangle {
             }
 
             text: i18n("Cancel")
-            onClicked : main.closeRequested()
+            onClicked : disappearAnimation.running = true
         }
 
         PlasmaWidgets.PushButton {
@@ -86,7 +133,7 @@ Rectangle {
             text: i18n("Ok")
             onClicked : {
                 configInterface.activityName = activityNameEdit.text
-                main.closeRequested()
+                disappearAnimation.running = true
             }
         }
     }
