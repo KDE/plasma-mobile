@@ -36,8 +36,6 @@ PlasmaCore.SvgItem {
         anchors.rightMargin: -10
         anchors.bottomMargin: -10
         onClicked: {
-            print(action)
-            print(action.enabled)
             action.trigger()
         }
     }
