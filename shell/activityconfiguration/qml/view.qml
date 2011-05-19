@@ -143,43 +143,7 @@ Rectangle {
             snapMode: ListView.SnapOneItem
             orientation: ListView.Horizontal
             model: configInterface.wallpaperModel
-            delegate: Rectangle {
-                radius: 4
-                width: wallpapersList.height*1.6
-                height: wallpapersList.height-4
-
-                QPixmapItem {
-                    pixmap: screenshot
-                    anchors {
-                        fill: parent
-                        margins: 6
-                    }
-                    Rectangle {
-                        anchors.bottom: parent.bottom
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        color: Qt.rgba(1,1,1,0.6)
-                        radius: 4
-                        width: wallpaperName.paintedWidth
-                        height: wallpaperName.paintedHeight
-                        Text {
-                            id: wallpaperName
-                            text: display
-                        }
-                    }
-                    Rectangle {
-                        opacity:wallpapersList.currentIndex == index?1:0
-                        width:10
-                        height:10
-                        radius:5
-                        anchors.top:parent.top
-                        anchors.horizontalCenter: parent.horizontalCenter
-                    }
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: wallpapersList.currentIndex = index
-                }
-            }
+            delegate: WallpaperDelegate {}
         }
 
         PlasmaWidgets.PushButton {
