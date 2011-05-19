@@ -23,40 +23,55 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-Rectangle {
-    radius: 4
-    width: (wallpapersList.height-4)*1.6
-    height: wallpapersList.height-4
+Item {
+    width: wallpapersList.delegateWidth
+    height: wallpapersList.delegateHeight
 
-    QPixmapItem {
-        pixmap: screenshot
+    z: wallpapersList.currentIndex == index?900:0
+
+    property alias screenshotPixmap: screenshotItem.pixmap
+    property alias wallpaperName: nameText.text
+
+    Rectangle {
+        radius: 4
+        scale: wallpapersList.currentIndex == index?1.06:1
+        Behavior on scale {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
         anchors {
             fill: parent
-            margins: 6
+            margins: 4
         }
-        Rectangle {
-            anchors.bottom: parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            color: Qt.rgba(1,1,1,0.6)
-            radius: 4
-            width: wallpaperName.paintedWidth
-            height: wallpaperName.paintedHeight
-            Text {
-                id: wallpaperName
-                text: display
+
+        QPixmapItem {
+            id: screenshotItem
+            pixmap: screenshot
+            anchors {
+                fill: parent
+                margins: 6
+            }
+            Rectangle {
+                anchors.bottom: parent.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: Qt.rgba(1,1,1,0.6)
+                radius: 4
+                width: nameText.paintedWidth
+                height: nameText.paintedHeight
+                Text {
+                    id: nameText
+                    text: display
+                }
+            }
+
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                wallpapersList.currentIndex = index
             }
         }
-        Rectangle {
-            opacity:wallpapersList.currentIndex == index?1:0
-            width:10
-            height:10
-            radius:5
-            anchors.top:parent.top
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-    }
-    MouseArea {
-        anchors.fill: parent
-        onClicked: wallpapersList.currentIndex = index
     }
 }

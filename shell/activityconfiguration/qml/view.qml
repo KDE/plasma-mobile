@@ -126,9 +126,18 @@ Rectangle {
             }
         }
 
+        Timer {
+            id: resizeScreenshotTimer
+            repeat: false
+            running: false
+            interval: 250
+            onTriggered: {
+                configInterface.screenshotSize=(wallpapersList.delegateWidth-20)+"x"+(wallpapersList.delegateHeight-20)
+            }
+        }
+
         ListView {
             id: wallpapersList
-            spacing: 4
             anchors {
                 top: nameRow.bottom
                 left: parent.left
@@ -139,8 +148,16 @@ Rectangle {
                 rightMargin: frame.margins.right
                 bottomMargin: 12
             }
-            //-16 because the screenshot is 4 pixels less-other 6*2 of margins
-            onHeightChanged: configInterface.screenshotSize=(childrens[0].width)+"x"+(childrens[0].height)
+            property int delegateWidth: (wallpapersList.height-2)*1.6
+            property int delegateHeight: wallpapersList.height-2
+            onHeightChanged: {
+                resizeScreenshotTimer.running = true
+                resizeScreenshotTimer.restart()
+            }
+            onWidthChanged: {
+                resizeScreenshotTimer.running = true
+                resizeScreenshotTimer.restart()
+            }
             clip: true
             snapMode: ListView.SnapOneItem
             orientation: ListView.Horizontal
