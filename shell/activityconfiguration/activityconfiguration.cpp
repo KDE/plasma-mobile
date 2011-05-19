@@ -129,4 +129,14 @@ void ActivityConfiguration::setWallpaperIndex(const int index)
     }
 }
 
+QSize ActivityConfiguration::screenshotSize()
+{
+    return m_model->screenshotSize();
+}
+
+void ActivityConfiguration::setScreenshotSize(const QSize &size)
+{
+    m_model->setScreenshotSize(size);
+}
+
 #include "activityconfiguration.moc"

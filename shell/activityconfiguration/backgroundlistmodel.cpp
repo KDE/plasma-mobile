@@ -43,6 +43,7 @@ void ImageSizeFinder::run()
 BackgroundListModel::BackgroundListModel(Plasma::Wallpaper *listener, QObject *parent)
     : QAbstractListModel(parent),
       m_structureParent(listener),
+      m_screenshotSize(320, 200),
       m_size(0,0),
       m_resizeMethod(Plasma::Wallpaper::ScaledResize)
 {
@@ -221,6 +222,22 @@ void BackgroundListModel::sizeFound(const QString &path, const QSize &s)
     }
 }
 
+void BackgroundListModel::setScreenshotSize(const QSize &size)
+{
+    if (m_screenshotSize == size) {
+        return;
+    }
+
+    m_screenshotSize = size;
+    //all screenshots have to be repainted
+    emit dataChanged(index(0), index(rowCount()));
+}
+
+QSize BackgroundListModel::screenshotSize() const
+{
+    return m_screenshotSize;
+}
+
 QVariant BackgroundListModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
@@ -257,9 +274,7 @@ QVariant BackgroundListModel::data(const QModelIndex &index, int role) const
         if (!m_previewJobs.contains(file) && file.isValid()) {
             KFileItemList list;
             list.append(KFileItem(file, QString(), 0));
-            KIO::PreviewJob* job = KIO::filePreview(list,
-                                                    QSize(SCREENSHOT_SIZE,
-                                                    SCREENSHOT_SIZE/1.6));
+            KIO::PreviewJob* job = KIO::filePreview(list, m_screenshotSize);
             job->setIgnoreMaximumSize(true);
             connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
                     this, SLOT(showPreview(const KFileItem&, const QPixmap&)));

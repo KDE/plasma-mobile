@@ -102,7 +102,7 @@ Rectangle {
         id: frame
         anchors.centerIn: parent
         //FIXME: why +40?
-        width: Math.min(wallpapersList.height*1.6*3+40, parent.width/1.05)
+        width: Math.min(wallpapersList.height*1.6*3+20, parent.width/1.05)
         height: parent.height/2
         imagePath: "dialogs/background"
         scale: 0
@@ -139,6 +139,8 @@ Rectangle {
                 rightMargin: frame.margins.right
                 bottomMargin: 12
             }
+            //-16 because the screenshot is 4 pixels less-other 6*2 of margins
+            onHeightChanged: configInterface.screenshotSize=(childrens[0].width)+"x"+(childrens[0].height)
             clip: true
             snapMode: ListView.SnapOneItem
             orientation: ListView.Horizontal

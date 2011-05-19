@@ -25,7 +25,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Rectangle {
     radius: 4
-    width: wallpapersList.height*1.6
+    width: (wallpapersList.height-4)*1.6
     height: wallpapersList.height-4
 
     QPixmapItem {

@@ -52,7 +52,6 @@ public:
         ScreenshotRole,
         ResolutionRole
     };
-    static const int SCREENSHOT_SIZE = 310;
     static const int BLUR_INCREMENT = 9;
     static const int MARGIN = 6;
     BackgroundListModel(Plasma::Wallpaper *listener, QObject *parent);
@@ -70,6 +69,9 @@ public:
 
     void setWallpaperSize(const QSize& size);
     void setResizeMethod(Plasma::Wallpaper::ResizeMethod resizeMethod);
+
+    void setScreenshotSize(const QSize &size);
+    QSize screenshotSize() const;
 
 protected Q_SLOTS:
     void removeBackground(const QString &path);
@@ -89,6 +91,7 @@ private:
     QHash<KUrl, QPersistentModelIndex> m_previewJobs;
     KDirWatch m_dirwatch;
 
+    QSize m_screenshotSize;
     QSize m_size;
     Plasma::Wallpaper::ResizeMethod m_resizeMethod;
     QString m_findToken;
