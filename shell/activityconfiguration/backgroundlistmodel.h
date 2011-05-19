@@ -52,7 +52,7 @@ public:
         ScreenshotRole,
         ResolutionRole
     };
-    static const int SCREENSHOT_SIZE = 200;
+    static const int SCREENSHOT_SIZE = 310;
     static const int BLUR_INCREMENT = 9;
     static const int MARGIN = 6;
     BackgroundListModel(Plasma::Wallpaper *listener, QObject *parent);

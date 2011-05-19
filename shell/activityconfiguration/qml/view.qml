@@ -32,6 +32,11 @@ Rectangle {
     height: 480
     opacity: 0
 
+    MouseArea {
+        anchors.fill: parent
+        onClicked: disappearAnimation.running=true
+    }
+
     Component.onCompleted: {
         appearAnimation.running = true
     }
@@ -96,11 +101,16 @@ Rectangle {
     PlasmaCore.FrameSvgItem {
         id: frame
         anchors.centerIn: parent
-        //FIXME: whi +40?
+        //FIXME: why +40?
         width: Math.min(wallpapersList.height*1.6*3+40, parent.width/1.05)
         height: parent.height/2
         imagePath: "dialogs/background"
         scale: 0
+
+        MouseArea {
+            anchors.fill: parent
+            onPressed: mouse.accepted = true
+        }
 
         Row {
             id: nameRow
