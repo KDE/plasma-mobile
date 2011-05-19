@@ -18,7 +18,7 @@
  */
 
 import Qt 4.7
-
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: delegate
@@ -32,12 +32,13 @@ Item {
             highlightTimer.running = true
         }
     }
+    property int iconSize: 48
 
-    /*transform: Rotation {
-        origin.x: delegate.width
-        origin.y: delegate.height
-        angle: PathView.itemRotation
-    }*/
+    PlasmaCore.Svg {
+        id: iconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
+
     transform: Translate {
         y: PathView.translate
     }
@@ -71,6 +72,12 @@ Item {
                     font.pixelSize: 20
                 }
             }
+            ActionButton {
+                elementId: "configure"
+                action: plasmoid.action("configure")
+                opacity: model["Current"]==true?1:0
+                anchors.bottom: parent.bottom
+            }
         }
     }
     Item {
@@ -97,7 +104,7 @@ Item {
             }
         }
         Image {
-            x: parent.width - width
+            x: model["Current"]==true?-4:parent.width - width
             source: plasmoid.file("images", "slider.png")
             Text {
                 anchors.centerIn: parent
@@ -116,6 +123,7 @@ Item {
                 drag.axis: Drag.XAxis
                 drag.minimumX: holeImage.x - 4
                 drag.maximumX: parent.parent.width - width
+                enabled: model["Current"]==true?false:true
                 onPressed: {
                     mainView.interactive = false
                     mouse.accepted = true

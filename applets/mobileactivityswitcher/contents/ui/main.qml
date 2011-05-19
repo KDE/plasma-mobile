@@ -87,8 +87,7 @@ Item {
              PathAttribute { name: "itemOpacity"; value: 0 }
              PathAttribute { name: "translate"; value: 0 }
              PathAttribute { name: "z"; value: 0 }
-             
-             
+
              PathLine {
                  x: mainView.width-100
                  y: mainView.height/4
@@ -97,7 +96,7 @@ Item {
              PathAttribute { name: "itemOpacity"; value: 0.3 }
              PathAttribute { name: "translate"; value: -100 }
              PathAttribute { name: "z"; value: 0 }
-             
+
              PathQuad {
                  x: mainView.width-mainView.delegateWidth/2
                  y: mainView.height/2
