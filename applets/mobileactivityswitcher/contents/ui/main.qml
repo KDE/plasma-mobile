@@ -54,8 +54,9 @@ Item {
     //FIXME: why a timer is needed?
     Timer {
         id: highlightTimer
-        interval: 250;
-        running: false;
+        interval: 250
+        running: false
+        repeat: false
         property int pendingIndex: -1
         onTriggered:  {
             mainView.currentIndex = pendingIndex
