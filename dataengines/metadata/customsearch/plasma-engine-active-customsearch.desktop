@@ -24,4 +24,5 @@ X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://kde.org
 X-KDE-PluginInfo-Category=Utilities
 X-KDE-PluginInfo-Depends=
+X-Plasma-Args=plasma
 
