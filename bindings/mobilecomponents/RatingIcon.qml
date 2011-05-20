@@ -25,10 +25,11 @@ import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
-    width: 16
-    height: 16
-    enabled: false
     id: ratingIconItem
+    property int iconSize: 22
+    width: 22
+    height: iconSize
+    enabled: false
 
     property int baseRating
     signal rate(int newRating)

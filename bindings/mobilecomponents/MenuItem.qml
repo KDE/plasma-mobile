@@ -18,6 +18,7 @@
  */
 
 import QtQuick 1.0
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 
 Text {
@@ -27,6 +28,11 @@ Text {
     width: Math.max(paintedWidth, parent.width)
     signal activated
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+    color: theme.textColor
+
     MouseArea {
         anchors.fill: parent
         onClicked: {
@@ -35,5 +41,9 @@ Text {
             feedbackMessageText.text = menuItem.text
             feedbackMessageAnimation.running = true
         }
+    }
+
+    function run() {
+        print("AAA menuItme run() ");
     }
 }

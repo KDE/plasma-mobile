@@ -49,11 +49,12 @@ Item {
             print("You clicked " + item.text)
             if (item.text == "rate") {
                 print("YYY Let's rate!");
-                rateResource(resourceUrl, 6);
+                rateResource(resourceUrl, 2);
+                //item.activated();
             }
             feedbackMessageText.text = item.text
             feedbackMessageAnimation.running = true
-            //item.activated()
+            item.activated()
         }
         print("bla");
     }
@@ -83,19 +84,6 @@ Item {
         operation["ResourceUrl"] = resourceUrl;
         operation["Rating"] = rating;
         service.startOperationCall(operation)
-
-        /*
-        engine = dataEngine("notifications");
-        service = engine.serviceForSource("notification");
-        op = service.operationDescription("createNotification");
-        operation["resourceUrl"] = "foo";
-        operation["rating"] = rating;
-        op["summary"] = "this is a summary";
-        op["body"] = "body of notification";
-        op["timeout"] = 2000;
-
-        service.startOperationCall(op);
-        */
     }
 
     MouseArea {
@@ -116,11 +104,6 @@ Item {
 
     function positionMenu()
     {
-        /*
-        if (typeof delegate == "undefined") {
-            return;
-        }
-        */
         var menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, delegate.height)
 
         if (menuPos.y > contextMenu.height/2) {
@@ -224,6 +207,21 @@ Item {
                 x: menuFrame.margins.left + highlightFrame.margins.left
                 y: menuFrame.margins.top + highlightFrame.margins.top
                 spacing: 5
+                width: 120
+
+                MobileComponents.Rating {
+                    //color: "green"
+                    id: ratingItem
+                    score: rating
+                    resourceUrl: resourceUrl
+                    //width: 160
+                    //width: parent.width
+                    //height: parent.width/5
+
+                    //anchors.right: textLabel.right
+                    //anchors.bottom: textRect.bottom
+                    //margins.bottom: 20
+                }
 
                 Repeater {
                     model: actionsModel.model(resourceType)

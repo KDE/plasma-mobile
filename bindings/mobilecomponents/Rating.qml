@@ -28,8 +28,11 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Item {
     property int score
     property string resourceUrl
+    height: 22
+    width: 22*5
 
     Row {
+        spacing: 0
         MobileComponents.RatingIcon {
             id: rating2
             baseRating: 2
@@ -53,13 +56,13 @@ Item {
     }
 
     onScoreChanged: {
-        print ("XXX :-) rating changed to " + score);
+        //print ("XXX :-) rating changed to " + score);
         updateIcons(score);
     }
 
     Component.onCompleted: {
         if (score > 0) {
-            print("XXX done, rating " + score);
+            //print("XXX done, rating " + score);
         }
         updateIcons(score);
     }

@@ -70,8 +70,6 @@ Item {
         height: frameRect.height - 2
         anchors.centerIn: frameRect
 
-        //image: pmSource.data[description]["thumbnail"]
-
         image: {
             if (typeof pmSource.data[description] != "undefined") {
                 return pmSource.data[description]["thumbnail"];
@@ -116,26 +114,11 @@ Item {
         //color: "green"
         id: ratingItem
         score: rating
-        width: 80
-        height: 16
+        //width: 22*5
+        //height: 22
 
         anchors.right: textLabel.right
         anchors.bottom: textRect.bottom
         //margins.bottom: 20
     }
-    /*
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            print("Opening URL..." + description);
-            //plasmoid.openUrl(description);
-        }
-        / *
-        onPressAndHold: {
-            //bookmarkSource.connectSource("remove:" + resourceUri);
-            print("Bookmark removed: " + resourceUri);
-        }
-        * /
-    }
-    */
 }
