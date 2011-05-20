@@ -87,7 +87,6 @@ Item {
              startY: 0
              PathAttribute { name: "itemScale"; value: 0.1 }
              PathAttribute { name: "itemOpacity"; value: 0 }
-             PathAttribute { name: "translate"; value: 0 }
              PathAttribute { name: "z"; value: 0 }
 
              PathLine {
@@ -96,7 +95,6 @@ Item {
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
              PathAttribute { name: "itemOpacity"; value: 0.3 }
-             PathAttribute { name: "translate"; value: -100 }
              PathAttribute { name: "z"; value: 0 }
 
              PathLine {
@@ -106,7 +104,6 @@ Item {
 
              PathAttribute { name: "itemScale"; value: 1 }
              PathAttribute { name: "itemOpacity"; value: 1 }
-             PathAttribute { name: "translate"; value: 0 }
              PathAttribute { name: "z"; value: 100 }
 
 
@@ -117,7 +114,6 @@ Item {
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
              PathAttribute { name: "itemOpacity"; value: 0.3 }
-             PathAttribute { name: "translate"; value: 100 }
              PathAttribute { name: "z"; value: 0 }
 
 
@@ -127,7 +123,6 @@ Item {
              }
              PathAttribute { name: "itemScale"; value: 0.1 }
              PathAttribute { name: "itemOpacity"; value: 0 }
-             PathAttribute { name: "translate"; value: 0 }
              PathAttribute { name: "z"; value: 0 }
          }
      }
