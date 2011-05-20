@@ -62,11 +62,12 @@ Item {
             Rectangle {
                 color: "white"
                 x: 10
-                y: 25
+                y: 10
                 radius: 10
-                width: childrenRect.width
+                width: childrenRect.width+10
                 height: childrenRect.height
                 Text{
+                    anchors.centerIn: parent
                     color: "black"
                     text: model.Name
                     font.pixelSize: 20
