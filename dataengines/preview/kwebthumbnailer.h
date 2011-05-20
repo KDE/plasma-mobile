@@ -58,7 +58,7 @@ private slots:
     void completed( bool success );
 
 private:
-    void saveThumbnail();
+    void setThumbnail();
     class KWebThumbnailerPrivate *d;
 };
 

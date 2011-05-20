@@ -51,11 +51,10 @@ class PreviewEngine : public Plasma::DataEngine
         void previewResult(KJob* job);
 
     protected:
-        void savePreview(const QString &source, QImage preview);
+        void setPreview(const QString &source, QImage preview);
         bool sourceRequestEvent(const QString &name);
         QString thumbnailerSource(KWebThumbnailer* nailer);
         void updateData(KWebThumbnailer* nailer);
-        QString fileName(const QString &path);
 
         PreviewEnginePrivate* d;
 };

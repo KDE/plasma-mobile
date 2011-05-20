@@ -41,7 +41,6 @@ public:
     QSize previewSize;
     QHash<QString, KWebThumbnailer*> webworkers;
     QHash<QString, KIO::PreviewJob*> workers;
-    QHash<KIO::Job*, QString> fileNames;
     QHash<KIO::Job*, QString> sources;
     KImageCache* cache;
 };
@@ -60,7 +59,7 @@ PreviewEngine::PreviewEngine(QObject* parent, const QVariantList& args)
 
 void PreviewEngine::init()
 {
-    d->cache = new KImageCache("kwebthumbnailer", 1048576); // 10 MByte
+    d->cache = new KImageCache("plasma_engine_preview", 1048576); // 10 MByte
 }
 
 PreviewEngine::~PreviewEngine()
@@ -71,20 +70,6 @@ PreviewEngine::~PreviewEngine()
 QStringList PreviewEngine::sources() const
 {
     return QStringList();
-}
-
-QString PreviewEngine::fileName(const QString& path)
-{
-    QString tmpFile = KGlobal::dirs()->findDirs("tmp", QString())[0];
-    QString u = path;
-    if (u.endsWith('/')) {
-        u.chop(1);
-    }
-
-    tmpFile.append("previewengine_");
-    tmpFile.append(QString::number(qHash(u)));
-    tmpFile.append(".png");
-    return tmpFile;
 }
 
 bool PreviewEngine::sourceRequestEvent(const QString &name)
@@ -99,16 +84,6 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
         kWarning() << "Not a URL:" << name;
         return false;
     }
-    QString u = url.toString();
-    if (QFile::exists(fileName(u))) {
-        // Cache hit on disk
-        setData(name, "status", "loaded");
-        setData(name, "url", name);
-        setData(name, "fileName", fileName(u));
-        setData(name, "thumbnail", QImage(fileName(u)));
-        scheduleSourcesUpdated();
-        return true;
-    }
 
     if (d->webworkers.keys().contains(name) || d->workers.keys().contains(name)) {
         return true; // already got preview or at least tried to get it
@@ -116,14 +91,13 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
     QImage preview = QImage(d->previewSize, QImage::Format_ARGB32_Premultiplied);
     if (d->cache->findImage(name, &preview)) {
         // cache hit
-        savePreview(name, preview);
+        setPreview(name, preview);
         return true;
     }
 
     // It may be a directory or a file, let's stat
     KIO::JobFlags flags = KIO::HideProgressInfo;
     KIO::MimetypeJob *job = KIO::mimetype(url, flags);
-    d->fileNames[job] = fileName(name);
     d->sources[job] = name;
     QObject::connect(job, SIGNAL(mimetype(KIO::Job *, const QString&)),
                           SLOT(mimetypeRetrieved(KIO::Job *, const QString&)));
@@ -191,11 +165,8 @@ void PreviewEngine::updateData(KWebThumbnailer* wtn)
 {
     setData(thumbnailerSource(wtn), "status", wtn->status());
     setData(thumbnailerSource(wtn), "url", wtn->url().toString());
-    setData(thumbnailerSource(wtn), "fileName", wtn->fileName());
     setData(thumbnailerSource(wtn), "thumbnail", wtn->thumbnail());
-    if (!wtn->fileName().isEmpty()) {
-        scheduleSourcesUpdated();
-    }
+    scheduleSourcesUpdated();
 }
 
 void PreviewEngine::previewJobFailed(const KFileItem &item)
@@ -212,29 +183,15 @@ void PreviewEngine::previewResult(KJob* job)
 
 void PreviewEngine::previewUpdated(const KFileItem &item, const QPixmap &preview)
 {
-    QString tmpFile = fileName(item.url().url());
-    if (preview.save(tmpFile)) {
-        setData(item.url().url(), "status", "done");
-        setData(item.url().url(), "fileName", tmpFile);
-        setData(item.url().url(), "url", item.url().url());
-        setData(item.url().url(), "thumbnail", preview.toImage());
-    } else {
-        setData(item.url().url(), "status", "failed");
-    }
-    scheduleSourcesUpdated();
+    setPreview(item.url().url(), preview.toImage());
 }
 
-void PreviewEngine::savePreview(const QString &source, QImage preview)
+
+void PreviewEngine::setPreview(const QString &source, QImage preview)
 {
-    QString tmpFile = fileName(source);
-    if (preview.save(tmpFile)) {
-        setData(source, "status", "done");
-        setData(source, "fileName", tmpFile);
-        setData(source, "url", source);
-        setData(source, "thumbnail", preview);
-    } else {
-        setData(source, "status", "failed");
-    }
+    setData(source, "status", "done");
+    setData(source, "url", source);
+    setData(source, "thumbnail", preview);
     scheduleSourcesUpdated();
 }
 

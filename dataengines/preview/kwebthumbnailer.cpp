@@ -123,11 +123,13 @@ QString KWebThumbnailer::status()
 
 void KWebThumbnailer::start()
 {
+    // check if the thumbnail is already cached, if not, create a new one
     d->thumbnail = QImage(d->size, QImage::Format_ARGB32_Premultiplied);
     if (d->cache->findImage(d->url.toString(), &(d->thumbnail))) {
         // cache hit
         d->status = i18nc("status of thumbnail loader", "Cached");
-        saveThumbnail();
+        kDebug() << "cache hit for " << d->url;
+        setThumbnail();
         return;
     }
     d->status = i18nc("status of thumbnail loader", "Loading...");
@@ -176,21 +178,15 @@ void KWebThumbnailer::completed( bool success )
     d->thumbnail = d->thumbnail.scaled(d->size,
                                         Qt::KeepAspectRatioByExpanding,
                                         Qt::SmoothTransformation);
-    saveThumbnail();
+    setThumbnail();
 }
 
-void KWebThumbnailer::saveThumbnail()
+void KWebThumbnailer::setThumbnail()
 {
-    //kDebug() << "saving" << d->url.toString() << fileName() << "?";
-    if (QFile::exists(fileName())) {
-        d->thumbnail = QImage(fileName());
-    } else {
-        d->thumbnail.save(fileName());
-    }
-    //kDebug() << "caching in KIC!?";
+    // is it already in the cache?
     if (!d->cache->contains(d->source)) {
         d->cache->insertImage(d->source, d->thumbnail);
-        //kDebug() << "inserted into KIC" << d->source;
+        kDebug() << "inserted into KIC" << d->source;
     }
     d->status = "loaded";
     d->errorText = i18nc("status of thumbnail loader", "Loaded");
