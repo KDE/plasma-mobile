@@ -152,7 +152,7 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
             if (resource.property(propertyUrl).variant().canConvert(QVariant::List)) {
                 QVariantList tl = resource.property(propertyUrl).variant().toList();
                 foreach (QVariant vu, tl) {
-                    kDebug() << vu.toString().startsWith("nepomuk:") << vu.toString().startsWith("akonadi:") << vu.toString();
+                    //kDebug() << vu.toString().startsWith("nepomuk:") << vu.toString().startsWith("akonadi:") << vu.toString();
                     if (vu.canConvert(QVariant::Url) &&
                         (vu.toString().startsWith("nepomuk:") || vu.toString().startsWith("akonadi:"))) {
                         kDebug() <<  "HHH This is a list.!!!" << key << vu.toString();
