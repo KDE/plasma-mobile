@@ -23,7 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.qtextracomponents 0.1 as QtExtra
+import org.kde.qtextracomponents 0.1 as QtExtraComponents
 
 Item {
     id: resourceItem
@@ -62,7 +62,7 @@ Item {
         radius: 1
     }
 
-    QtExtra.QImageItem {
+    QtExtraComponents.QImageItem {
         id: previewImage
         //fillMode: Image.PreserveAspectCrop
         //smooth: true
@@ -76,7 +76,7 @@ Item {
             if (typeof pmSource.data[description] != "undefined") {
                 return pmSource.data[description]["thumbnail"];
             }
-            return new QImage("bla");
+            return; // FIXME: sensible placeholder image
         }
     }
 
