@@ -33,7 +33,8 @@ Item {
     property alias wallpaperName: nameText.text
 
     PlasmaCore.FrameSvgItem {
-        imagePath: "widgets/picture-delegate"
+        imagePath: "widgets/media-delegate"
+        prefix: "picture"
 
         Behavior on width {
                 NumberAnimation {
