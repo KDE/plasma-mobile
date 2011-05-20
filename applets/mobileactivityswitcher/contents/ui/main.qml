@@ -91,8 +91,8 @@ Item {
              PathAttribute { name: "z"; value: 0 }
 
              PathLine {
-                 x: mainView.width-100
-                 y: mainView.height/4
+                 x: mainView.width-150
+                 y: -35
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
              PathAttribute { name: "itemOpacity"; value: 0.3 }
@@ -112,8 +112,8 @@ Item {
 
 
              PathLine {
-                 x: mainView.width-100
-                 y: 3*(mainView.height/4)
+                 x: mainView.width-150
+                 y: mainView.height+35
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
              PathAttribute { name: "itemOpacity"; value: 0.3 }

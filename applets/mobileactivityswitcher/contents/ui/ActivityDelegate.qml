@@ -39,9 +39,9 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    transform: Translate {
+    /*transform: Translate {
         y: PathView.translate
-    }
+    }*/
 
     width: mainView.delegateWidth
     height: mainView.delegateHeight
