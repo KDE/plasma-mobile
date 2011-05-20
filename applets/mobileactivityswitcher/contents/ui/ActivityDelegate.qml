@@ -46,17 +46,21 @@ Item {
     width: mainView.delegateWidth
     height: mainView.delegateHeight
 
-    Rectangle {
+    PlasmaCore.FrameSvgItem {
+        imagePath: "widgets/media-delegate"
+        prefix: "picture"
+
         anchors.fill:parent
         anchors.rightMargin: 100
-        radius: 4
 
         Image {
-            anchors.fill: parent
-            anchors.leftMargin: 5
-            anchors.topMargin: 5
-            anchors.rightMargin: 5
-            anchors.bottomMargin: 5
+            anchors {
+                fill: parent
+                leftMargin: parent.margins.left
+                topMargin: parent.margins.top
+                rightMargin: parent.margins.right
+                bottomMargin: parent.margins.bottom
+            }
             property string path: activityThumbnailsSource.data[model.DataEngineSource]["path"]
             source: path?path:plasmoid.file("images", "emptyactivity.png")
             Rectangle {
@@ -81,9 +85,12 @@ Item {
         }
     }
     Item {
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 48
-        anchors.right: parent.right
+        anchors {
+            bottom: parent.bottom
+            bottomMargin: 40
+            right: parent.right
+            rightMargin: 10
+        }
         width: 240
         height: 32
         opacity: delegate.scale>0.9?1:0
