@@ -72,7 +72,8 @@ Item {
                 }
          pathItemCount: 5
          property int delegateWidth: 400
-         property int delegateHeight: delegateWidth/1.6
+         //FIXME: the 100 is the handle width
+         property int delegateHeight: (delegateWidth-100)/1.6
 
          preferredHighlightBegin: 0.5
          preferredHighlightEnd: 0.5
