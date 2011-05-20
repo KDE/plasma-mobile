@@ -27,6 +27,7 @@
 #include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeContext>
 #include <QtDeclarative/QDeclarativeItem>
+#include <QTimer>
 
 //KDE
 #include <KDebug>
@@ -57,7 +58,6 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
         }
     }
 
-    
 }
 
 ActivityConfiguration::~ActivityConfiguration()
@@ -67,10 +67,14 @@ ActivityConfiguration::~ActivityConfiguration()
 void ActivityConfiguration::setContainment(Plasma::Containment *cont)
 {
     m_containment = cont;
+
+    delete m_model;
+
     m_model = new BackgroundListModel(m_containment->wallpaper(), this);
     m_model->setResizeMethod(Plasma::Wallpaper::CenteredResize);
     m_model->setWallpaperSize(QSize(1024, 600));
     m_model->reload();
+
     emit modelChanged();
 }
 
@@ -109,6 +113,10 @@ int ActivityConfiguration::wallpaperIndex()
 
 void ActivityConfiguration::setWallpaperIndex(const int index)
 {
+    if (m_wallpaperIndex == index || index < 0) {
+        return;
+    }
+
     m_wallpaperIndex = index;
     Plasma::Package *b = m_model->package(index);
     if (!b) {

@@ -86,11 +86,11 @@ Rectangle {
     Timer {
         repeat: false
         running: true
-        interval: 250
+        interval: 350
         onTriggered: {
-            print(configInterface.wallpaperModel)
             wallpapersList.model = configInterface.wallpaperModel
             activityNameEdit.text = configInterface.activityName
+            wallpapersList.currentIndex = -1
         }
     }
 
@@ -144,7 +144,7 @@ Rectangle {
                 bottom: closeButton.top
                 right: parent.right
                 leftMargin: frame.margins.left
-                topMargin: 12
+                topMargin: 6
                 rightMargin: frame.margins.right
                 bottomMargin: 12
             }

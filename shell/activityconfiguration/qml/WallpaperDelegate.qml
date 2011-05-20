@@ -63,15 +63,20 @@ Item {
                 bottomMargin: parent.margins.bottom
             }
             Rectangle {
-                anchors.bottom: parent.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
+                anchors {
+                    bottom: parent.bottom
+                    bottomMargin: 5
+                    horizontalCenter: parent.horizontalCenter
+                }
+
                 color: Qt.rgba(1,1,1,0.6)
                 radius: 4
-                width: nameText.paintedWidth
+                width: nameText.paintedWidth+10
                 height: nameText.paintedHeight
                 Text {
                     id: nameText
                     text: display
+                    anchors.centerIn: parent
                 }
             }
 
