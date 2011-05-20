@@ -97,11 +97,9 @@ Item {
              PathAttribute { name: "translate"; value: -100 }
              PathAttribute { name: "z"; value: 0 }
 
-             PathQuad {
+             PathLine {
                  x: mainView.width-mainView.delegateWidth/2
                  y: mainView.height/2
-                 controlX: mainView.width-mainView.delegateWidth/1.8
-                 controlY: mainView.height/3
              }
 
              PathAttribute { name: "itemScale"; value: 1 }
