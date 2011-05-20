@@ -66,7 +66,7 @@ KWebThumbnailer::KWebThumbnailer(const QUrl &url, const QSize &size,  const QStr
     d->fileName = fileName();
     d->size = size;
     d->status = "idle";
-    d->cache = new KImageCache("kwebthumbnailer", 1048576); // 10 MByte
+    d->cache = new KImageCache("plasma_engine_preview", 1048576); // 10 MByte
 }
 
 KWebThumbnailer::~KWebThumbnailer()
@@ -128,7 +128,7 @@ void KWebThumbnailer::start()
     if (d->cache->findImage(d->url.toString(), &(d->thumbnail))) {
         // cache hit
         d->status = i18nc("status of thumbnail loader", "Cached");
-        kDebug() << "cache hit for " << d->url;
+        kDebug() << "cache hit for " << d->url.toString();
         setThumbnail();
         return;
     }
