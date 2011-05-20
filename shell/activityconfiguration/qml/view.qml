@@ -101,7 +101,7 @@ Rectangle {
     PlasmaCore.FrameSvgItem {
         id: frame
         anchors.centerIn: parent
-        //FIXME: why +40?
+        //FIXME: why +20?
         width: Math.min(wallpapersList.height*1.6*3+20, parent.width/1.05)
         height: parent.height/2
         imagePath: "dialogs/background"
@@ -148,6 +148,7 @@ Rectangle {
                 rightMargin: frame.margins.right
                 bottomMargin: 12
             }
+
             property int delegateWidth: (wallpapersList.height-2)*1.6
             property int delegateHeight: wallpapersList.height-2
             onHeightChanged: {

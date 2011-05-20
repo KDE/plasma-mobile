@@ -32,26 +32,34 @@ Item {
     property alias screenshotPixmap: screenshotItem.pixmap
     property alias wallpaperName: nameText.text
 
-    Rectangle {
-        radius: 4
-        scale: wallpapersList.currentIndex == index?1.06:1
-        Behavior on scale {
+    PlasmaCore.FrameSvgItem {
+        imagePath: "widgets/picture-delegate"
+
+        Behavior on width {
                 NumberAnimation {
                     duration: 250
                     easing.type: Easing.InOutQuad
                 }
             }
-        anchors {
-            fill: parent
-            margins: 4
-        }
+        Behavior on height {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        anchors.centerIn: parent
+        width: wallpapersList.currentIndex == index?parent.width:parent.width-16
+        height: wallpapersList.currentIndex == index?parent.height:parent.height-16
 
         QPixmapItem {
             id: screenshotItem
             pixmap: screenshot
             anchors {
                 fill: parent
-                margins: 6
+                leftMargin: parent.margins.left
+                topMargin: parent.margins.top
+                rightMargin: parent.margins.right
+                bottomMargin: parent.margins.bottom
             }
             Rectangle {
                 anchors.bottom: parent.bottom
