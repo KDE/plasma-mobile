@@ -47,16 +47,19 @@ Item {
         print("---------------------------" + item + pos);
         if (item && typeof item != "undefined") {
             print("You clicked " + item.text)
-            if (item.text == "rate") {
+            if (item.text == "Rate") {
                 print("YYY Let's rate!");
-                rateResource(resourceUrl, 2);
+                rateResource(resourceUrl, 10);
                 //item.activated();
+            } if (item.text == "Delete") {
+                print("YYY delete!");
+                removeResource(resourceUrl);
             }
             feedbackMessageText.text = item.text
             feedbackMessageAnimation.running = true
-            item.activated()
+            //item.activated()
         }
-        print("bla");
+        //print("bla");
     }
 
     function highlightItem(x, y)
@@ -83,6 +86,16 @@ Item {
 
         operation["ResourceUrl"] = resourceUrl;
         operation["Rating"] = rating;
+        service.startOperationCall(operation)
+    }
+
+    function removeResource(resourceUrl) {
+        print("YYY REMOVING " + resourceUrl)
+
+        var service = metadataSource.serviceForSource("anything")
+        var operation = service.operationDescription("remove")
+
+        operation["ResourceUrl"] = resourceUrl;
         service.startOperationCall(operation)
     }
 
@@ -214,13 +227,6 @@ Item {
                     id: ratingItem
                     score: rating
                     resourceUrl: resourceUrl
-                    //width: 160
-                    //width: parent.width
-                    //height: parent.width/5
-
-                    //anchors.right: textLabel.right
-                    //anchors.bottom: textRect.bottom
-                    //margins.bottom: 20
                 }
 
                 Repeater {

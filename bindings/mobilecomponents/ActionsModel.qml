@@ -95,7 +95,7 @@ QtObject {
     property ListModel bookmarkModel: ListModel {
         id: bookmarkModel
         ListElement {
-            text: "rate"
+            text: "Rate"
             description: "Rate this file"
 
             function run() {
@@ -109,6 +109,10 @@ QtObject {
                 }
             }
             */
+        }
+        ListElement {
+            text: "Delete"
+            description: "Rate this file"
         }
     }
 
