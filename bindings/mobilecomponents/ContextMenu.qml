@@ -107,7 +107,8 @@ Item {
     property string source
     property string resourceUrl
 
-    property Item delegate
+    property Item delegate: parent;
+
     onDelegateChanged: {
         positionMenu()
         highlightFrame.opacity = 0
@@ -115,6 +116,11 @@ Item {
 
     function positionMenu()
     {
+        /*
+        if (typeof delegate == "undefined") {
+            return;
+        }
+        */
         var menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, delegate.height)
 
         if (menuPos.y > contextMenu.height/2) {
