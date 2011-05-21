@@ -20,7 +20,7 @@
 import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 PlasmaCore.FrameSvgItem {
@@ -37,7 +37,7 @@ PlasmaCore.FrameSvgItem {
     property alias email: detailsEmail.text
     property alias license: detailsLicense.text
 
-    Item {
+    Flow {
         id: infoContent
         anchors {
             fill:parent
@@ -46,15 +46,18 @@ PlasmaCore.FrameSvgItem {
             rightMargin: parent.margins.right
             bottomMargin: parent.margins.bottom
         }
-        state: widgetsExplorer.state=="vertical"?"horizontal":"vertical"
 
-        PlasmaWidgets.IconWidget {
-            id: detailsIcon
-            y: 8
-            anchors.horizontalCenter: parent.horizontalCenter
-            minimumIconSize : "128x128"
-            maximumIconSize : "128x128"
-            preferredIconSize : "128x128"
+        Item {
+            id: detailsIconParent
+            width: parent.width<parent.height?parent.width:128
+            height: parent.width<parent.height?128:parent.height
+            QIconItem {
+                id: detailsIcon
+                y: 8
+                width: 128
+                height: 128
+                anchors.centerIn: parent
+            }
         }
 
 
@@ -65,8 +68,9 @@ PlasmaCore.FrameSvgItem {
             contentHeight: column.height
             interactive : true
             clip:true
-            width: parent.width<parent.height?parent.width:column.width
-            height: parent.width<parent.height?parent.height-detailsIcon.height-addButtonParent.height:parent.height
+            //This horror is due to QML not having proper layouts
+            width: parent.width<parent.height?parent.width:parent.width-detailsIconParent.width-addButtonParent.width
+            height: parent.width<parent.height?parent.height-detailsIconParent.height-addButtonParent.height:parent.height
 
             Column {
                 id:column;
@@ -136,53 +140,17 @@ PlasmaCore.FrameSvgItem {
         }
 
 
-        PlasmaWidgets.PushButton {
-            id: addButton
-            text: i18n("Add widget")
-
-            onClicked : widgetsExplorer.addAppletRequested(appletsView.currentPlugin)
-        }
-
-        states: [
-            State {
-                name: "vertical"
-                PropertyChanges {
-                    target: infoFlickable
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        top: detailsIcon.bottom
-                        bottom: addButton.top
-                    }
-                }
-                PropertyChanges {
-                    target: addButton
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        bottom: parent.bottom
-                    }
-                }
-            },
-            State {
-                name: "horizontal"
-                PropertyChanges {
-                    target: infoFlickable
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        top: detailsIcon.bottom
-                        bottom: addButton.top
-                    }
-                }
-                PropertyChanges {
-                    target: addButton
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        right: parent.right
-                    }
-                }
+        Item {
+            id: addButtonParent
+            width: parent.width<parent.height?parent.width:addButton.width
+            height: parent.width<parent.height?addButton.height:parent.height
+            PlasmaWidgets.PushButton {
+                id: addButton
+                text: i18n("Add widget")
+                anchors.centerIn: parent
+                onClicked : widgetsExplorer.addAppletRequested(appletsView.currentPlugin)
             }
-        ]
+        }
 
     }
 
