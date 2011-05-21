@@ -20,21 +20,44 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 
-Item {
+PlasmaCore.FrameSvgItem {
     id: plasmoidContainer
     anchors.top: appletsRow.top
     anchors.bottom: appletsRow.bottom
+
+    //FIXME: this is due to the disappear anim managed by the applet itslef
+    scale: applet.scale
 
     property QGraphicsWidget applet
 
     onAppletChanged: {
         applet.appletDestroyed.connect(appletDestroyed)
         applet.parent = plasmoidContainer
-        applet.x = 0
-        applet.y = 0
-        height = main.width/appletColumns
-        applet.width = main.width/appletColumns
-        width = applet.width
+
+        appletTimer.running = true
+    }
+
+    //FIXME: this delay is becuase backgroundHints gets updated only after a while in qml applets
+    Timer {
+        id: appletTimer
+        interval: 250
+        repeat: false
+        running: false
+        onTriggered: {
+            if (applet.backgroundHints != 0) {
+                plasmoidContainer.imagePath = "widgets/background"
+            } else {
+                plasmoidContainer.imagePath = "invalid"
+            }
+            applet.backgroundHints = "NoBackground"
+
+            applet.x = plasmoidContainer.margins.left
+            applet.y = plasmoidContainer.margins.top
+            height = appletsRow.height
+            width = Math.max(main.width/appletColumns, applet.minimumSize.width + plasmoidContainer.margins.left + plasmoidContainer.margins.right)
+            applet.width = width - plasmoidContainer.margins.left - plasmoidContainer.margins.right
+            applet.height = height - plasmoidContainer.margins.top - /*plasmoidContainer.margins.bottom -*/ runButton.height
+        }
     }
 
     function appletDestroyed()
@@ -48,12 +71,18 @@ Item {
     }
 
     MoveButton {
-        
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+        }
     }
 
     ActionButton {
         id: runButton
-        anchors.right: parent.right
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+        }
         svg: iconsSvg
         elementId: "maximize"
         z: applet.z + 1
@@ -62,8 +91,10 @@ Item {
     }
 
     ExtraActions {
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors {
+            bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
+        }
         z: applet.z + 1
     }
 
