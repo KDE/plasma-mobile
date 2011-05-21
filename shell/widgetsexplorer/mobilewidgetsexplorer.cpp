@@ -91,9 +91,6 @@ void MobileWidgetsExplorer::addApplet(const QString &plugin)
         if (m_containment) {
             m_containment->addApplet(plugin);
         }
-
-        //close in a quite brutal way
-        deleteLater();
     }
 }
 

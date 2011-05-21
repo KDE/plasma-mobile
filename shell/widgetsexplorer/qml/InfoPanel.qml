@@ -148,7 +148,10 @@ PlasmaCore.FrameSvgItem {
                 id: addButton
                 text: i18n("Add widget")
                 anchors.centerIn: parent
-                onClicked : widgetsExplorer.addAppletRequested(appletsView.currentPlugin)
+                onClicked: {
+                    disappearAnimation.running = true
+                    widgetsExplorer.addAppletRequested(appletsView.currentPlugin)
+                }
             }
         }
 

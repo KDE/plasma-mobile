@@ -30,9 +30,55 @@ Rectangle {
     state: "horizontal"
     width:800
     height:480
+    opacity: 0
 
     signal addAppletRequested(string plugin)
     signal closeRequested
+
+    Component.onCompleted: {
+        appearAnimation.running = true
+    }
+
+    ParallelAnimation {
+        id: appearAnimation
+        NumberAnimation {
+            targets: widgetsExplorer
+            properties: "opacity"
+            duration: 250
+            to: 1
+            easing.type: "InOutCubic"
+        }
+        NumberAnimation {
+            targets: dialog
+            properties: "scale"
+            duration: 250
+            to: 1
+            easing.type: "InOutCubic"
+        }
+    }
+
+    SequentialAnimation {
+        id: disappearAnimation
+        ParallelAnimation {
+            NumberAnimation {
+                targets: widgetsExplorer
+                properties: "opacity"
+                duration: 250
+                to: 0
+                easing.type: "InOutCubic"
+            }
+            NumberAnimation {
+                targets: dialog
+                properties: "scale"
+                duration: 250
+                to: 0
+                easing.type: "InOutCubic"
+            }
+        }
+        ScriptAction {
+            script: widgetsExplorer.closeRequested()
+        }
+    }
 
     PlasmaCore.Theme {
         id: theme
@@ -40,7 +86,7 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: widgetsExplorer.closeRequested()
+        onClicked: disappearAnimation.running = true
     }
 
     states: [
@@ -96,8 +142,10 @@ Rectangle {
 
 
     Item {
+        id: dialog
         anchors.fill: parent
         anchors.margins: 32
+        scale: 0
 
         PlasmaCore.FrameSvgItem {
             id: iconsFrame
@@ -161,7 +209,7 @@ Rectangle {
                     anchors.right: parent.right
 
                     text: i18n("Close")
-                    onClicked : widgetsExplorer.closeRequested()
+                    onClicked : disappearAnimation.running = true
                 }
             }
         }
