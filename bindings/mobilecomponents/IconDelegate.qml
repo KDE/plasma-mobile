@@ -18,7 +18,7 @@
 */
 
 import Qt 4.7
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
@@ -33,9 +33,10 @@ Item {
     signal clicked
     property alias textColor: iconText.color
 
-    PlasmaWidgets.IconWidget {
+    QIconItem {
         anchors.horizontalCenter: parent.horizontalCenter
-        size: "64x64"
+        width: 64
+        height: 64
         id: iconWidgt
         icon: main.icon
     }
