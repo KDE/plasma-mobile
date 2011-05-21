@@ -78,47 +78,64 @@ Item {
         }
     }
 
-    Rectangle {
+    PlasmaCore.FrameSvgItem {
+        //id: highlightFrame
+        imagePath: "dialogs/background"
+        //prefix: "hover"
         id: textRect
+
         width: 160
-        height: 48
-        color: theme.backgroundColor
-        radius: 4
-        opacity: .8
+        height: 72
+        //color: theme.backgroundColor
+        //radius: 4
+        opacity: .6
         anchors {
             bottom: frameRect.bottom
             right: parent.right
-            margins: 10
+            //margins: 10
         }
-    }
 
-    Text {
-        id: textLabel
-        color: theme.textColor
-        font.pointSize: 16
-        style: Text.Sunken;
-        styleColor: theme.backgroundColor
-        horizontalAlignment: Text.AlignRight
-        text: {
-            var s = description;
-            s = s.replace("http://", "");
-            s = s.replace("https://", "");
-            s = s.replace("www.", "");
-            return s;
+    }
+//    Column {
+  //      anchors.bottom: parent.bottom
+    //    anchors.right: parent.right
+        Text {
+            id: textLabel
+            color: theme.textColor
+            font.pointSize: 16
+            style: Text.Sunken;
+            styleColor: theme.backgroundColor
+            horizontalAlignment: Text.AlignCenter
+            //anchors.horizontalCenter: parent.horizontalCenter
+            //anchors.margins: 12
+            anchors.topMargin: 24
+            anchors.leftMargin: 24
+            opacity: 1
+            text: {
+                var s = description;
+                s = s.replace("http://", "");
+                s = s.replace("https://", "");
+                s = s.replace("www.", "");
+                return s;
+            }
+            anchors.fill: textRect
+            //anchors.margins: 16
         }
-        anchors.fill: textRect
-        anchors.margins: 4
-    }
 
-    MobileComponents.Rating {
-        //color: "green"
-        id: ratingItem
-        score: rating
-        //width: 22*5
-        //height: 22
+        MobileComponents.Rating {
+            //color: "green"
+            id: ratingItem
+            score: rating
+            //anchors.margins: 12
+            anchors.horizontalCenter: textRect.horizontalCenter
+            anchors.leftMargin: 24
+            opacity: 1
+            width: 22*5
+            height: 22
 
-        anchors.right: textLabel.right
-        anchors.bottom: textRect.bottom
-        //margins.bottom: 20
-    }
+            //anchors.right: parent.right
+            anchors.bottom: frameRect.bottom
+            //margins.bottom: 20
+        }
+    //}
 }
