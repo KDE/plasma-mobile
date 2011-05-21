@@ -38,6 +38,11 @@ Rectangle {
         id: theme
     }
 
+    MouseArea {
+        anchors.fill: parent
+        onClicked: widgetsExplorer.closeRequested()
+    }
+
     states: [
         State {
             name: "horizontal"
