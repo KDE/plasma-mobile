@@ -44,68 +44,43 @@ Item {
         }
 
         height: 64
-        PlasmaCore.FrameSvgItem {
-            id : background
-            imagePath: "widgets/lineedit"
-            prefix: "base"
+        PlasmaWidgets.LineEdit {
+            id : searchField
 
-            width: 300
-            height: 35
+            /*width: 300
+            height: 35*/
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
-            TextInput {
-                id: searchField
-                anchors.fill:parent
-                anchors.leftMargin: background.margins.left
-                anchors.rightMargin: background.margins.right
-                anchors.topMargin: background.margins.top
-                anchors.bottomMargin: background.margins.bottom
-                activeFocusOnPress: false
-                onTextChanged: {
-                    searchTimer.running = true
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (!searchField.activeFocus) {
-                            searchField.forceActiveFocus()
-                            searchField.openSoftwareInputPanel();
-                        } else {
-                            searchField.focus = false;
-                        }
-                    }
-                    onPressAndHold: searchField.closeSoftwareInputPanel();
-                }
+            onTextChanged: {
+                searchTimer.running = true
             }
-            Timer {
-                id: searchTimer
-                interval: 500;
-                running: false
-                repeat: false
-                onTriggered: {
-                    if (searchField.text == "") {
-                        clearButton.visible = false
-                    } else {
-                        clearButton.visible = true
-                    }
-                    searchQuery = searchField.text
-                    hideSearchFieldAnim.to = searchFieldContainer.height;
-                    hideSearchFieldAnim.running = true;
+        }
+        Timer {
+            id: searchTimer
+            interval: 500;
+            running: false
+            repeat: false
+            onTriggered: {
+                if (searchField.text == "") {
+                    clearButton.visible = false
+                } else {
+                    clearButton.visible = true
                 }
+                searchQuery = searchField.text
             }
-            PlasmaWidgets.IconWidget {
-                id: clearButton
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
-                anchors.rightMargin: -10
-                visible: false
-                size: "64x64"
-                Component.onCompleted: {
-                    setIcon("edit-clear-locationbar-rtl")
-                }
-                onClicked: {
-                    searchField.text = ""
-                }
+        }
+        PlasmaWidgets.IconWidget {
+            id: clearButton
+            y: 6
+            anchors.right: searchField.right
+            anchors.rightMargin: -6
+            visible: false
+            size: "48x48"
+            Component.onCompleted: {
+                setIcon("edit-clear-locationbar-rtl")
+            }
+            onClicked: {
+                searchField.text = ""
             }
         }
     }
