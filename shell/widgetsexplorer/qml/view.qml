@@ -110,7 +110,7 @@ Rectangle {
                 target: infoPanel;
                 x: 0
                 y: parent.height
-                width: parent.width
+                width: parent.width+32
                 height: parent.height/4
             }
             PropertyChanges {
