@@ -177,8 +177,18 @@ PlasmaCore.FrameSvgItem {
             PropertyChanges {
                 target: iconsFrame
                 //FIXME: actual size of the shadow
-                anchors.leftMargin: infoPanel.width - infoPanel.margins.right + 5
-                enabledBorders: "TopBorder|RightBorder|BottomBorder"
+                anchors.leftMargin: if (widgetsExplorer.state == "vertical")
+                        32
+                    else
+                        infoPanel.width - infoPanel.margins.right + 5
+                anchors.bottomMargin: if (widgetsExplorer.state == "vertical")
+                        infoPanel.height - infoPanel.margins.bottom + 5
+                    else
+                        32
+                enabledBorders: if (widgetsExplorer.state == "vertical")
+                        "LeftBorder|TopBorder|RightBorder"
+                    else
+                        "TopBorder|RightBorder|BottomBorder"
             }
         },
         State {
