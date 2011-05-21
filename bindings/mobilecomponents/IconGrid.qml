@@ -157,10 +157,12 @@ Item {
 
 
     Item {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: appsView.bottom
-        anchors.topMargin: 10
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            bottomMargin:8
+        }
         Row {
             anchors.centerIn: parent
             spacing: 20
@@ -174,7 +176,8 @@ Item {
                     height: appsView.currentIndex == index ? 10 : 6
                     radius: 4
                     smooth: true
-                    color: appsView.currentIndex == index ? Qt.rgba(1,1,1,1) : Qt.rgba(1,1,1,0.6)
+                    opacity: appsView.currentIndex == index ? 1: 0.6
+                    color: theme.textColor
 
                     MouseArea {
                         width: 20; height: 20

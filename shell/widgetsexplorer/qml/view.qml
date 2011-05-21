@@ -24,7 +24,7 @@ import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Rectangle {
-    color: Qt.rgba(0,0,0,0.82)
+    color: Qt.rgba(0,0,0,0.5)
     id: widgetsExplorer
     objectName: "widgetsExplorer"
     state: "horizontal"
@@ -49,7 +49,7 @@ Rectangle {
                 height: parent.height
             }
             PropertyChanges {
-                target: appletsView;
+                target: iconsFrame;
                 anchors.bottom: widgetsExplorer.bottom
             }
         },
@@ -63,8 +63,8 @@ Rectangle {
                 height: parent.height/4
             }
             PropertyChanges {
-                target: appletsView;
-                anchors.bottomMargin: infopanel.height
+                target: iconsFrame;
+                anchors.bottomMargin: infoPanel.height
                 anchors.right: widgetsExplorer.right
             }
         }
@@ -90,49 +90,72 @@ Rectangle {
     }
 
 
-    MobileComponents.IconGrid {
-        id: appletsView
-        property string currentPlugin
-        model: PlasmaCore.SortFilterModel {
-            id: appletsFilter
-            sourceModel: myModel
-        }
+    PlasmaCore.FrameSvgItem {
+        id: iconsFrame
+
+        state: "hidden"
+        imagePath: "dialogs/background"
+
+        anchors.fill: parent
+        anchors.margins: 32
+
+        MobileComponents.IconGrid {
+            id: appletsView
+            property string currentPlugin
+
+            anchors {
+                fill: parent
+                leftMargin: parent.margins.left
+                topMargin: parent.margins.top
+                rightMargin: parent.margins.right
+                bottomMargin: parent.margins.bottom
+            }
+
+            model: PlasmaCore.SortFilterModel {
+                id: appletsFilter
+                sourceModel: myModel
+            }
 
 
-        delegate: Component {
-            MobileComponents.IconDelegate {
-                icon: decoration
-                text: display
-                textColor: theme.textColor
-                onClicked: {
-                    currentPlugin = pluginName
-                    infoPanel.icon = decoration
-                    infoPanel.name = display
-                    infoPanel.version = "Version "+version
-                    infoPanel.description = description
-                    infoPanel.author = "<b>Author:</b> "+author
-                    infoPanel.email = "<b>Email:</b> "+email
-                    infoPanel.license = "<b>License:</b> "+license
+            delegate: Component {
+                MobileComponents.IconDelegate {
+                    icon: decoration
+                    text: display.length<22?display:display.slice(0,22)+"..."
+                    textColor: theme.textColor
+                    onClicked: {
+                        currentPlugin = pluginName
+                        infoPanel.icon = decoration
+                        infoPanel.name = display
+                        infoPanel.version = "Version "+version
+                        infoPanel.description = description
+                        infoPanel.author = "<b>Author:</b> "+author
+                        infoPanel.email = "<b>Email:</b> "+email
+                        infoPanel.license = "<b>License:</b> "+license
 
-                    if (infoPanel.state == "hidden") {
-                        var pos = mapToItem(widgetsExplorer, 0, -infoPanel.height/2)
-                        infoPanel.x = pos.x
-                        infoPanel.y = pos.y
-                        infoPanel.state = "shown"
+                        if (infoPanel.state == "hidden") {
+                            var pos = mapToItem(widgetsExplorer, 0, -infoPanel.height/2)
+                            infoPanel.x = pos.x
+                            infoPanel.y = pos.y
+                            infoPanel.state = "shown"
+                        }
                     }
                 }
             }
+
+            onSearchQueryChanged: {
+                appletsFilter.filterRegExp = ".*"+searchQuery+".*"
+            }
+
+            PlasmaWidgets.PushButton {
+                id: closeButton
+                width: addButton.width
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+
+                text: i18n("Close")
+                onClicked : widgetsExplorer.closeRequested()
+            }
         }
-
-        onSearchQueryChanged: {
-            appletsFilter.filterRegExp = ".*"+searchQuery+".*"
-        }
-
-
-        width: parent.width
-        anchors.fill: parent
-        anchors.topMargin: 4
-        anchors.bottomMargin: closeButton.height
     }
 
 
@@ -140,17 +163,5 @@ Rectangle {
         id: infoPanel
     }
 
-
-    PlasmaWidgets.PushButton {
-        id: closeButton
-        width: addButton.width
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        anchors.rightMargin: 4
-        anchors.bottomMargin: 4
-
-        text: "Close"
-        onClicked : widgetsExplorer.closeRequested()
-    }
 
 }

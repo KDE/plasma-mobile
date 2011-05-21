@@ -175,8 +175,10 @@ PlasmaCore.FrameSvgItem {
                 visible: true
             }
             PropertyChanges {
-                target: appletsView
-                anchors.leftMargin: infoPanel.width
+                target: iconsFrame
+                //FIXME: actual size of the shadow
+                anchors.leftMargin: infoPanel.width - infoPanel.margins.right + 5
+                enabledBorders: "TopBorder|RightBorder|BottomBorder"
             }
         },
         State {
@@ -199,8 +201,9 @@ PlasmaCore.FrameSvgItem {
                 visible: false
             }
             PropertyChanges {
-                target: appletsView
+                target: iconsFrame
                 anchors.leftMargin: 0
+                enabledBorders: "LeftBorder|TopBorder|RightBorder|BottomBorder"
             }
         }
     ]
