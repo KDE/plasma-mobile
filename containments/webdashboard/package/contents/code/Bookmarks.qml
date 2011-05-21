@@ -74,9 +74,14 @@ Item {
         orientation: Qt.Horizontal
         anchors.fill: parent
 
-        model: PlasmaCore.DataModel {
-            dataSource: metadataSource
-            keyRoleFilter: ".*"
+        model: PlasmaCore.SortFilterModel {
+            id: bookmarksModel
+            sortRole: "rating"
+            sortOrder: "DescendingOrder"
+            sourceModel: PlasmaCore.DataModel {
+                dataSource: metadataSource
+                keyRoleFilter: ".*"
+            }
         }
 
         delegate: MobileComponents.ResourceDelegate {
