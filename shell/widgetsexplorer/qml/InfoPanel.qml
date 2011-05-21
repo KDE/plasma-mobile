@@ -159,32 +159,27 @@ PlasmaCore.FrameSvgItem {
             name: "shown"
             PropertyChanges {
                 target: infoPanel;
-                x: 0
+                x: -16
 
                 y: if (widgetsExplorer.state == "vertical")
-                        infoPanel.parent.height - infoPanel.height
-                    else
-                        0
-            }
-            PropertyChanges {
-                target: infoPanel;
+                       infoPanel.parent.height - infoPanel.height
+                   else
+                       -16
+
                 scale: 1
-            }
-            PropertyChanges {
-                target: infoPanel;
                 visible: true
             }
             PropertyChanges {
                 target: iconsFrame
                 //FIXME: actual size of the shadow
                 anchors.leftMargin: if (widgetsExplorer.state == "vertical")
-                        32
+                        0
                     else
-                        infoPanel.width - infoPanel.margins.right + 5
+                        infoPanel.width - infoPanel.margins.right + 5 -16
                 anchors.bottomMargin: if (widgetsExplorer.state == "vertical")
                         infoPanel.height - infoPanel.margins.bottom + 5
                     else
-                        32
+                        0
                 enabledBorders: if (widgetsExplorer.state == "vertical")
                         "LeftBorder|TopBorder|RightBorder"
                     else
@@ -201,13 +196,8 @@ PlasmaCore.FrameSvgItem {
                         infoPanel.parent.height - infoPanel.height
                     else
                         0
-            }
-            PropertyChanges {
-                target: infoPanel;
+
                 scale: 0
-            }
-            PropertyChanges {
-                target: infoPanel;
                 visible: false
             }
             PropertyChanges {

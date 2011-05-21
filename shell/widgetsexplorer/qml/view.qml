@@ -51,7 +51,7 @@ Rectangle {
                 x: parent.width
                 y: 0
                 width: parent.width/4
-                height: parent.height
+                height: parent.height+32
             }
             PropertyChanges {
                 target: iconsFrame;
@@ -95,77 +95,81 @@ Rectangle {
     }
 
 
-    PlasmaCore.FrameSvgItem {
-        id: iconsFrame
-
-        state: "hidden"
-        imagePath: "dialogs/background"
-
+    Item {
         anchors.fill: parent
         anchors.margins: 32
 
-        MobileComponents.IconGrid {
-            id: appletsView
-            property string currentPlugin
+        PlasmaCore.FrameSvgItem {
+            id: iconsFrame
 
-            anchors {
-                fill: parent
-                leftMargin: parent.margins.left
-                topMargin: parent.margins.top
-                rightMargin: parent.margins.right
-                bottomMargin: parent.margins.bottom
-            }
+            state: "hidden"
+            imagePath: "dialogs/background"
 
-            model: PlasmaCore.SortFilterModel {
-                id: appletsFilter
-                sourceModel: myModel
-            }
+            anchors.fill: parent
+
+            MobileComponents.IconGrid {
+                id: appletsView
+                property string currentPlugin
+
+                anchors {
+                    fill: parent
+                    leftMargin: parent.margins.left
+                    topMargin: parent.margins.top
+                    rightMargin: parent.margins.right
+                    bottomMargin: parent.margins.bottom
+                }
+
+                model: PlasmaCore.SortFilterModel {
+                    id: appletsFilter
+                    sourceModel: myModel
+                }
 
 
-            delegate: Component {
-                MobileComponents.IconDelegate {
-                    icon: decoration
-                    text: display.length<22?display:display.slice(0,22)+"..."
-                    textColor: theme.textColor
-                    onClicked: {
-                        currentPlugin = pluginName
-                        infoPanel.icon = decoration
-                        infoPanel.name = display
-                        infoPanel.version = "Version "+version
-                        infoPanel.description = description
-                        infoPanel.author = "<b>Author:</b> "+author
-                        infoPanel.email = "<b>Email:</b> "+email
-                        infoPanel.license = "<b>License:</b> "+license
+                delegate: Component {
+                    MobileComponents.IconDelegate {
+                        icon: decoration
+                        text: display.length<22?display:display.slice(0,22)+"..."
+                        textColor: theme.textColor
+                        onClicked: {
+                            currentPlugin = pluginName
+                            infoPanel.icon = decoration
+                            infoPanel.name = display
+                            infoPanel.version = "Version "+version
+                            infoPanel.description = description
+                            infoPanel.author = "<b>Author:</b> "+author
+                            infoPanel.email = "<b>Email:</b> "+email
+                            infoPanel.license = "<b>License:</b> "+license
 
-                        if (infoPanel.state == "hidden") {
-                            var pos = mapToItem(widgetsExplorer, 0, -infoPanel.height/2)
-                            infoPanel.x = pos.x
-                            infoPanel.y = pos.y
-                            infoPanel.state = "shown"
+                            if (infoPanel.state == "hidden") {
+                                var pos = mapToItem(widgetsExplorer, 0, -infoPanel.height/2)
+                                infoPanel.x = pos.x
+                                infoPanel.y = pos.y
+                                infoPanel.state = "shown"
+                            }
                         }
                     }
                 }
-            }
 
-            onSearchQueryChanged: {
-                appletsFilter.filterRegExp = ".*"+searchQuery+".*"
-            }
+                onSearchQueryChanged: {
+                    appletsFilter.filterRegExp = ".*"+searchQuery+".*"
+                }
 
-            PlasmaWidgets.PushButton {
-                id: closeButton
-                width: addButton.width
-                anchors.bottom: parent.bottom
-                anchors.right: parent.right
+                PlasmaWidgets.PushButton {
+                    id: closeButton
+                    width: addButton.width
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
 
-                text: i18n("Close")
-                onClicked : widgetsExplorer.closeRequested()
+                    text: i18n("Close")
+                    onClicked : widgetsExplorer.closeRequested()
+                }
             }
         }
-    }
 
 
-    InfoPanel {
-        id: infoPanel
+        InfoPanel {
+            id: infoPanel
+        }
     }
 
 
