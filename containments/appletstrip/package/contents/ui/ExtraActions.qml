@@ -101,9 +101,11 @@ Item {
         y: 0
         svg: iconsSvg
         elementId: "configure"
-        opacity: (actionSize-Math.abs(x))/actionSize
 
         Behavior on x {
+            NumberAnimation { duration: 250 }
+        }
+        Behavior on opacity {
             NumberAnimation { duration: 250 }
         }
 
@@ -123,9 +125,11 @@ Item {
             onPressed: {
                 mouse.accepted = true
                 extraActionsFrame.opacity = 1
+                extraActionsButton.opacity = 0
             }
             onReleased: {
                 extraActionsFrame.opacity = 0
+                extraActionsButton.opacity = 1
 
                 var pos = extraActionsButton.mapToItem(extraActionsFrame, 0, 10)
                 var button = layout.childAt(pos.x, pos.y)
