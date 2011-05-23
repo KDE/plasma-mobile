@@ -132,6 +132,7 @@ Item {
             spacing: 16
             height: Math.min(300, childrenRect.height)
             //flow: Flow.TopToBottom
+            visible: count>0
 
             anchors {
                 //top: searchRow.bottom
@@ -147,7 +148,6 @@ Item {
                 model: categoryListModel.categories
 
                 ItemGroup {
-                    
                 }
             }
         }
