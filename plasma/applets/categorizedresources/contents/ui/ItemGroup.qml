@@ -29,6 +29,7 @@ PlasmaCore.FrameSvgItem {
     width: Math.min(470, 32+webItemList.count*140)
     height: 150
     z: 0
+    visible: webItemList.count>0
 
     Rectangle {
         id: darkenRect
