@@ -96,15 +96,25 @@ void ResourceDelegate::setResourceType(const QString &type)
     QString fileName = "Item.qml";
     QDeclarativeItem *par = property("parent").value<QDeclarativeItem *>();
     if (par) {
+        //kDebug() << " 000 " << par->metaObject()->className() << par->property("id").toString();
         par = par->property("parent").value<QDeclarativeItem *>();
+    } else {
+        kDebug() << "did not find parent 0";
+
     }
     if (par) {
+        const QString objectId =  par->property("id").toString();
         const QString className = par->metaObject()->className();
 
         if (className == "QDeclarativeGridView" ||
             (Qt::Orientation)par->property("orientation").toInt() == Qt::Horizontal) {
             fileName = "ItemHorizontal.qml";
         }
+        //kDebug() << "class is: " << className << " objectId " << "";
+        //par->dumpObjectInfo();
+    } else {
+        kDebug() << "parent 1 not found";
+
     }
 
     /* TODO:
@@ -124,6 +134,16 @@ void ResourceDelegate::setResourceType(const QString &type)
     setMainFile(path);
 
     emit resourceTypeChanged();
+}
+
+QString ResourceDelegate::resourceUrl() const
+{
+    return m_resourceUrl;
+}
+
+void ResourceDelegate::setResourceUrl(const QString &url)
+{
+    m_resourceUrl = url;
 }
 
 QVariantHash ResourceDelegate::data() const

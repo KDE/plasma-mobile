@@ -32,12 +32,16 @@ class ResourceDelegate : public QDeclarativeItem
 {
     Q_OBJECT
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType)
+    Q_PROPERTY(QString resourceUrl READ resourceUrl WRITE setResourceUrl)
 
 public:
     ResourceDelegate(QDeclarativeItem *parent = 0);
 
     QString resourceType() const;
-    void setResourceType(const QString &plugin);
+    void setResourceType(const QString &type);
+
+    QString resourceUrl() const;
+    void setResourceUrl(const QString &url);
 
     QVariantHash data() const;
     void setData(const QVariantHash &data);
@@ -59,6 +63,7 @@ private:
     QDeclarativeContext *m_context;
     QObject *m_mainObject;
     QString m_resourceType;
+    QString m_resourceUrl;
     QVariantHash m_data;
 };
 

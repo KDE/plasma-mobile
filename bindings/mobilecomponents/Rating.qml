@@ -30,8 +30,10 @@ Item {
     property string resourceUrl
     height: 22
     width: 22*5
+    signal rateClicked(int newRating)
 
     Row {
+        id: iconRow
         spacing: 0
         MobileComponents.RatingIcon {
             id: rating2
@@ -60,11 +62,29 @@ Item {
         updateIcons(score);
     }
 
+    onResourceUrlChanged: {
+        print("someone poked resourceUrl");
+    }
+
     Component.onCompleted: {
         if (score > 0) {
             //print("XXX done, rating " + score);
         }
         updateIcons(score);
+    }
+
+    MouseArea {
+        anchors.fill: parent
+
+        onReleased: {
+            var star = iconRow.childAt(mouse.x, mouse.y);
+            if (star && star.baseRating) {
+                print("released with rating " + star.baseRating + " Item: " + resourceUrl);
+                rateResource(resourceUrl, star.baseRating);
+            } else{
+                print("released but could not figure out rating" + star);
+            }
+        }
     }
 
     function updateIcons(newRating) {
@@ -84,4 +104,19 @@ Item {
             rating10.enabled = true;
         }
     }
+
+    function rateResource(resourceUrl, rating) {
+        print("MMM Rating " + resourceUrl + " *****: " + rating )
+        if (resourceUrl == "") {
+            print("url empty.");
+            return;
+        }
+        var service = metadataSource.serviceForSource("anything")
+        var operation = service.operationDescription("rate")
+
+        operation["ResourceUrl"] = resourceUrl;
+        operation["Rating"] = rating;
+        service.startOperationCall(operation)
+    }
+
 }

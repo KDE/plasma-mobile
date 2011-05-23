@@ -21,6 +21,7 @@
 //#include <KIcon>
 
 #include <KIO/PreviewJob>
+#include <KIcon>
 #include <KImageCache>
 #include <KFileItem>
 #include <KGlobal>
@@ -78,6 +79,10 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
     // to find out what kind of preview we need
     if (sources().contains(name)) {
         return true;
+    }
+    if (!sources().contains("fallback")) {
+        //setData("fallback", "fallbackImage", KIcon("image-loading").pixmap(QSize(180, 120)).toImage());
+        setData("fallback", "fallbackImage", QImage("file://home/sebas/Documents/wallpaper.png"));
     }
     QUrl url = QUrl(name);
     if (!url.isValid()) {

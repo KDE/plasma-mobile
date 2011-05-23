@@ -18,7 +18,7 @@
  */
 
  
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
@@ -65,7 +65,7 @@ Item {
     QtExtraComponents.QImageItem {
         id: previewImage
         //fillMode: Image.PreserveAspectCrop
-        //smooth: true
+        smooth: true
         width: frameRect.width - 2
         height: frameRect.height - 2
         anchors.centerIn: frameRect
@@ -74,68 +74,61 @@ Item {
             if (typeof pmSource.data[description] != "undefined") {
                 return pmSource.data[description]["thumbnail"];
             }
-            return; // FIXME: sensible placeholder image
+            if (typeof pmSource.data["fallback"] != "undefined") {
+                return pmSource.data["fallback"]["fallbackImage"];
+            }
+            //QImage("file://home/sebas/Documents/wallpaper.png");
+            //var fallback = QImage("file:///home/sebas/Documents/wallpaper.png")
+            //return fallback.pixmap(width, height).toImage(); // FIXME: sensible placeholder image
+            
+            //return fallback;
         }
     }
 
     PlasmaCore.FrameSvgItem {
-        //id: highlightFrame
-        imagePath: "dialogs/background"
-        //prefix: "hover"
         id: textRect
-
+        imagePath: "dialogs/background"
         width: 160
         height: 72
-        //color: theme.backgroundColor
-        //radius: 4
         opacity: .6
         anchors {
             bottom: frameRect.bottom
             right: parent.right
-            //margins: 10
         }
-
     }
-//    Column {
-  //      anchors.bottom: parent.bottom
-    //    anchors.right: parent.right
-        Text {
-            id: textLabel
-            color: theme.textColor
-            font.pointSize: 16
-            style: Text.Sunken;
-            styleColor: theme.backgroundColor
-            horizontalAlignment: Text.AlignCenter
-            //anchors.horizontalCenter: parent.horizontalCenter
-            //anchors.margins: 12
-            anchors.topMargin: 24
-            anchors.leftMargin: 24
-            opacity: 1
-            text: {
-                var s = description;
-                s = s.replace("http://", "");
-                s = s.replace("https://", "");
-                s = s.replace("www.", "");
-                return s;
-            }
-            anchors.fill: textRect
-            //anchors.margins: 16
+    Text {
+        id: textLabel
+        color: theme.textColor
+        font.pointSize: 16
+        style: Text.Sunken;
+        styleColor: theme.backgroundColor
+        horizontalAlignment: Text.AlignCenter
+        //anchors.horizontalCenter: parent.horizontalCenter
+        //anchors.margins: 12
+        anchors.topMargin: 24
+        anchors.leftMargin: 24
+        opacity: 1
+        text: {
+            var s = description;
+            s = s.replace("http://", "");
+            s = s.replace("https://", "");
+            s = s.replace("www.", "");
+            return s;
         }
+        anchors.fill: textRect
+        //anchors.margins: 16
+    }
 
-        MobileComponents.Rating {
-            //color: "green"
-            id: ratingItem
-            score: rating
-            //anchors.margins: 12
-            anchors.horizontalCenter: textRect.horizontalCenter
-            anchors.leftMargin: 24
-            opacity: 1
-            width: 22*5
-            height: 22
-
-            //anchors.right: parent.right
-            anchors.bottom: frameRect.bottom
-            //margins.bottom: 20
-        }
-    //}
+    MobileComponents.Rating {
+        //color: "green"
+        id: ratingItem
+        score: rating
+        resourceUrl: resourceUrl
+        anchors.horizontalCenter: textRect.horizontalCenter
+        anchors.leftMargin: 24
+        opacity: 1
+        width: 22*5
+        height: 22
+        anchors.bottom: frameRect.bottom
+    }
 }

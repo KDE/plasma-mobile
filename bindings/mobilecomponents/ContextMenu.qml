@@ -66,7 +66,8 @@ Item {
     {
         var pos = entriesColumn.mapFromItem(delegate, x, y)
         var item = entriesColumn.childAt(pos.x, pos.y)
-        if (item && item.text) {
+        //if (item && item.text) {
+        if (item) {
             var itemPos = menuFrame.mapFromItem(item, 0, 0)
             highlightFrame.x = -highlightFrame.margins.right + itemPos.x
             highlightFrame.y = -highlightFrame.margins.top + itemPos.y
@@ -221,7 +222,6 @@ Item {
                 y: menuFrame.margins.top + highlightFrame.margins.top
                 spacing: 5
                 width: 120
-
                 MobileComponents.Rating {
                     //color: "green"
                     id: ratingItem
@@ -247,6 +247,23 @@ Item {
                             height: lineSvg.elementSize("horizontal-line").height
                         }
                     }
+                }
+
+                MobileComponents.ResourceDelegate {
+                    id: resourceDelegate
+                    width: parent.width
+                    height: 96
+                    resourceType: resourceType
+
+                    Component.onCompleted: {
+                        print("contextMenu delegate done" + resourceType );
+                    }
+                }
+
+                Text {
+                    width: parent.width
+                    text: "ContextMenu delegate should be above."
+                    wrapMode: Text.Wrap
                 }
             }
         }

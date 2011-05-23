@@ -41,7 +41,8 @@ Item {
 
         onClicked: {
             print("XXX Rate: " + baseRating);
-            ratingIconItem.rate(baseRating);
+            //ratingIconItem.rate(baseRating);
+            rateClicked(baseRating);
         }
     }
 }
