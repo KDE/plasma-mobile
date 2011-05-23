@@ -93,17 +93,17 @@ void ResourceDelegate::setResourceType(const QString &type)
 
     //Attempt to understand if we are in an itemview and what kind of
     //default to ListView
-    QString fileName = "ListViewItem.qml";
+    QString fileName = "Item.qml";
     QDeclarativeItem *par = property("parent").value<QDeclarativeItem *>();
     if (par) {
         par = par->property("parent").value<QDeclarativeItem *>();
     }
     if (par) {
         const QString className = par->metaObject()->className();
-        if (className == "QDeclarativeGridView") {
-            fileName = "GridView.qml";
-        } else if (className == "QDeclarativePathView") {
-            fileName = "PathView.qml";
+
+        if (className == "QDeclarativeGridView" ||
+            (Qt::Orientation)par->property("orientation").toInt() == Qt::Horizontal) {
+            fileName = "ItemHorizontal.qml";
         }
     }
 
