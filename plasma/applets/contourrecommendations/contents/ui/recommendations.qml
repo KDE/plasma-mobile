@@ -70,8 +70,6 @@ Item {
                 text: model.text
                 description: model.description
                 icon: model.icon
-                command: model.command
-                arguments: model.arguments
             }
     }
 }
