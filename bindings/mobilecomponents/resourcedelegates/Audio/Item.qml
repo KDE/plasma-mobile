@@ -7,8 +7,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
  
 Item {
     id: resourceItem
-    height: 72
-    width: 400
+    anchors.fill: parent
+    property alias infoLabelVisible: infoLabel.visible
 
     Item {
         id: itemFrame
@@ -23,29 +23,76 @@ Item {
 
         PlasmaWidgets.IconWidget {
             id: previewImage
-            height:64
+            height: 64
             width: 64
             anchors.margins: 8
 
+            function resourceIcon(resourceTypes) {
+                var icons = new Object();
+                icons["Resource"] = "nepomuk";
+                icons["FileDataObject"] = "unknown";
+
+                // Audio
+                icons["Audio"] = "audio-x-generic";
+                icons["MusicPiece"] = "audio-x-generic";
+
+                // Images
+                icons["Image"] = "image-x-generic";
+                icons["RasterImage"] = "image-x-generic";
+
+                icons["Email"] = "internet-mail";
+                icons["PersonContact"] = "x-office-contact";
+                icons["Document"] = "kword";
+
+                // ... add some more
+
+                // keep searching until the most specific icon is found
+                var _icon = "nepomuk";
+                var typeList = resourceTypes.split(",");
+
+                for(var i = 0; i < typeList.length; i++) {
+                    var shortType = typeList[i].split("#")[1];
+                    for (key in icons) {
+                        if (key == shortType) {
+                            print("M: " + key + icons[shortType]);
+                            _icon = icons[shortType];
+                        }
+                    }
+                }
+                return _icon;
+            }
+
             Component.onCompleted: {
                 try {
-                    //print("HHH:" + className + " " + hasSymbol);
-                    setIcon(hasSymbol);
+                    var _l = hasSymbol.toString().split(",");
+                    if (_l.length == 1) {
+                        setIcon(hasSymbol);
+                    } else if (_l.length > 1) {
+                        // pick the last one
+                        var _i = _l[_l.length-1];
+                        setIcon(_i);
+                    } else {
+                        //print("HHH types" + types.toString());
+                        resourceIcon(types.toString())
+                    }
+                    //print("icon:" + hasSymbol);
                 } catch(e) {
-                    setIcon("internet-mail");
+                    var _i = resourceIcon(className);
+                    print("fallback icon: " + _i + e);
+                    setIcon(_i);
+                    print("icon2:" + _i);
                 }
             }
         }
 
-        PlasmaWidgets.Label {
+        Text {
             id: previewLabel
             text: label
             //text: url
             font.pixelSize: 14
             font.bold: true
-            height: 30
+            wrapMode: Text.Wrap
 
-            width: parent.width - previewImage.width
             anchors.top: itemFrame.top
             //anchors.bottom: infoLabel.top;
             anchors.left: previewImage.right
@@ -53,11 +100,11 @@ Item {
             anchors.margins: 8
         }
 
-        PlasmaWidgets.Label {
+        Text {
             id: infoLabel
             //image: metadataSource.data[DataEngineSource]["fileName"]
             //text: "the long and winding road..."
-            text: "Performed by " + creator
+            text: className
             opacity: 0.8
             //font.pixelSize: font.pixelSize * 1.8
             font.pixelSize: 12
