@@ -15,7 +15,7 @@ Item {
                     top: parent.top;
                     left: parent.left;
                     right: parent.right;
-                    margins: 24;
+                    margins: 0;
         }
         //height: 128
         height: resourceItem.height
@@ -24,7 +24,8 @@ Item {
             id: previewImage
             height: 64
             width: 64
-            anchors.margins: 8
+            anchors.margins: 0
+            anchors.horizontalCenter: parent.horizontalCenter
 
             function resourceIcon(resourceTypes) {
                 var icons = new Object();
@@ -84,19 +85,29 @@ Item {
             }
         }
 
-        Text {
-            id: previewLabel
-            text: label
-            //text: url
-            font.pixelSize: 14
-            font.bold: true
-            wrapMode: Text.Wrap
+        Rectangle {
+            id: labelBackground
+            radius: 5
+            opacity: 0.75
+            color: white
+            anchors.top: previewImage.bottom
 
-            anchors.top: itemFrame.top
-            //anchors.bottom: infoLabel.top;
-            anchors.left: previewImage.right
-            anchors.right: itemFrame.right
+            anchors.horizontalCenter: itemFrame.horizontalCenter
+            width: 130
+            height: previewLabel.paintedHeight
             anchors.margins: 8
+
+            Text {
+                id: previewLabel
+                text: label
+
+                font.pixelSize: 14
+                //wrapMode: Text.Wrap
+                horizontalAlignment: Text.AlignHCenter
+                elide: Text.ElideRight
+                anchors.fill: parent
+                anchors.margins: 3
+            }
         }
 
         Text {
@@ -110,12 +121,8 @@ Item {
             height: 14
             width: parent.width - previewImage.width
             //wrapMode: Text.Wrap
-            anchors.right: itemFrame.right
-            anchors.top: previewLabel.bottom
-            anchors.bottom: itemFrame.bottom
-            anchors.left: previewImage.right
-            anchors.margins: 8
-
+            anchors.top: labelBackground.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 }
