@@ -8,6 +8,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Item {
     id: resourceItem
     anchors.fill: parent
+    property alias infoLabelVisible: infoLabel.visible
 
     Item {
         id: itemFrame

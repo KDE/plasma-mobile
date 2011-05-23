@@ -33,7 +33,8 @@ ResourceDelegate::ResourceDelegate(QDeclarativeItem *parent)
     : QDeclarativeItem(parent),
       m_mainComponent(0),
       m_context(0),
-      m_mainObject(0)
+      m_mainObject(0),
+      m_infoLabelVisible(true)
 {
 }
 
@@ -58,6 +59,8 @@ void ResourceDelegate::setMainFile(const QString &file)
     }
 
     m_mainComponent->completeCreate();
+
+    m_mainObject->setProperty("infoLabelVisible", m_infoLabelVisible);
 }
 
 QObject *ResourceDelegate::mainObject() const
@@ -83,6 +86,19 @@ void ResourceDelegate::statusChanged(QDeclarativeComponent::Status status)
 QString ResourceDelegate::resourceType() const
 {
     return m_resourceType;
+}
+
+bool ResourceDelegate::infoLabelVisible() const
+{
+    return m_infoLabelVisible;
+}
+
+void ResourceDelegate::setInfoLabelVisible(const bool visible)
+{
+    m_infoLabelVisible = visible;
+    if (m_mainObject) {
+        m_mainObject->setProperty("infoLabelVisible", visible);
+    }
 }
 
 void ResourceDelegate::setResourceType(const QString &type)

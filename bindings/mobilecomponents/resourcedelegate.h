@@ -33,6 +33,7 @@ class ResourceDelegate : public QDeclarativeItem
     Q_OBJECT
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType)
     Q_PROPERTY(QString resourceUrl READ resourceUrl WRITE setResourceUrl)
+    Q_PROPERTY(bool infoLabelVisible READ infoLabelVisible WRITE setInfoLabelVisible)
 
 public:
     ResourceDelegate(QDeclarativeItem *parent = 0);
@@ -42,6 +43,9 @@ public:
 
     QString resourceUrl() const;
     void setResourceUrl(const QString &url);
+
+    bool infoLabelVisible() const;
+    void setInfoLabelVisible(const bool visible);
 
     QVariantHash data() const;
     void setData(const QVariantHash &data);
@@ -65,6 +69,7 @@ private:
     QString m_resourceType;
     QString m_resourceUrl;
     QVariantHash m_data;
+    bool m_infoLabelVisible;
 };
 
 #endif
