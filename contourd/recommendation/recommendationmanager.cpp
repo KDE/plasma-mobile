@@ -123,6 +123,8 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
         Recommendation r;
         r.resourceUri = KUrl(result.resource().resourceUri()).url();
 
+        kWarning() << "Got a new result:" << result.excerpt() << result.score();
+
         // for now we create the one dummy action: open the resource
         QString id;
         do {
