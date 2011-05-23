@@ -105,11 +105,12 @@ PlasmaCore.FrameSvgItem {
                 prefix: "hover"
         }
 
-        delegate: IconDelegate {
+        delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
             width: 140
             height: webItemList.height
             resourceType: model.resourceType
+            infoLabelVisible: false
             function setDarkenVisible(visible)
             {
                 if (visible) {
