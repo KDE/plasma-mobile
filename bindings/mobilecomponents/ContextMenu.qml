@@ -37,11 +37,12 @@ Rectangle {
     PlasmaCore.DataSource {
         id: metadataSource
         engine: "org.kde.active.metadata"
+        connectedSources: ["CurrentActivityResources:"+plasmoid.activityId]
         interval: 0
     }
 
 
-    function activateItem(x, y)
+    function runItem(x, y)
     {
         var pos = entriesColumn.mapFromItem(delegate, x, y)
         var item = entriesColumn.childAt(pos.x, pos.y)
