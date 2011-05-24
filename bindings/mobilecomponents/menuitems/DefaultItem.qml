@@ -18,37 +18,25 @@
  */
 
 import QtQuick 1.0
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 
-Item {
-    id: main
-    width: Math.max(itemLoader.item.implicitWidth, parent.width)
-    height: itemLoader.item.implicitHeight
+Text {
+    id: menuItem
+    font.pointSize: 14
+    horizontalAlignment: Text.AlignHCenter
+    property int implicitWidth: paintedWidth
+    property int implicitHeight: paintedHeight
 
-    Loader {
-        id: itemLoader
+    text: label
 
-        //FIXME: the uppercasing should not be necessary, it's ugly
-        source: "menuitems/" + action.charAt(0).toUpperCase() + action.slice(1) + "Item.qml"
-        onStatusChanged: {
-            //fallback
-            if (status == Loader.Error) {
-                source = "menuitems/DefaultItem.qml"
-            }
-        }
+    PlasmaCore.Theme {
+        id: theme
     }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            itemLoader.item.run(mouse.x, mouse.y)
-            feedbackMessageText.text = menuItem.text
-            feedbackMessageAnimation.running = true
-        }
-    }
+    color: theme.textColor
 
     function run(x, y)
     {
-        itemLoader.item.run(x, y)
+        print("ITEM RUN: "+label+ " " + x + " " + y)
     }
 }

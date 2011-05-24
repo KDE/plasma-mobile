@@ -222,23 +222,16 @@ Item {
                 y: menuFrame.margins.top + highlightFrame.margins.top
                 spacing: 5
                 width: 120
-                MobileComponents.Rating {
-                    //color: "green"
-                    id: ratingItem
-                    score: rating
-                    resourceUrl: resourceUrl
-                }
 
                 Repeater {
                     model: actionsModel.model(resourceType)
 
                     Column {
                         spacing: 5
-                        property alias text: menuItem.text
+//                        property alias text: menuItem.text
 
                         MobileComponents.MenuItem {
                             id: menuItem
-                            text: model.text
                         }
                         PlasmaCore.SvgItem {
                             svg: lineSvg
@@ -247,23 +240,6 @@ Item {
                             height: lineSvg.elementSize("horizontal-line").height
                         }
                     }
-                }
-
-                MobileComponents.ResourceDelegate {
-                    id: resourceDelegate
-                    width: parent.width
-                    height: 96
-                    resourceType: resourceType
-
-                    Component.onCompleted: {
-                        print("contextMenu delegate done" + resourceType );
-                    }
-                }
-
-                Text {
-                    width: parent.width
-                    text: "ContextMenu delegate should be above."
-                    wrapMode: Text.Wrap
                 }
             }
         }

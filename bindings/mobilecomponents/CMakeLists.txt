@@ -36,3 +36,4 @@ install(FILES IconDelegate.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma
 install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
 install(DIRECTORY resourcedelegates/ DESTINATION ${DATA_INSTALL_DIR}/plasma/resourcedelegates/)
+install(DIRECTORY menuitems/ DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents/menuitems/)

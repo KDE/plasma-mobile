@@ -43,60 +43,50 @@ QtObject {
     property ListModel fileDataObjectModel: ListModel {
         id: fileDataObjectModel
         ListElement {
-            text: "share on Dropbox"
-            description: "Make this file available across the network and with your friends"
+            label: "share on Dropbox"
         }
         ListElement {
-            text: "rename..."
-            description: "Rename this file"
+            label: "rename..."
         }
     }
 
     property ListModel textDocumentModel: ListModel {
         id: textDocumentModel
         ListElement {
-            text: "share on Dropbox"
-            description: "Make this file available across the network and with your friends"
+            label: "share on Dropbox"
         }
         ListElement {
-            text: "copy to Clipboard"
-            description: "Copy this text on the clipboard"
+            label: "copy to Clipboard"
         }
         ListElement {
-            text: "upload to Pastebin"
-            description: "Upload this text to the Pastebin service"
+            label: "upload to Pastebin"
         }
         ListElement {
-            text: "rename..."
-            description: "Rename this file"
+            label: "rename..."
         }
     }
 
     property ListModel presentationModel: ListModel {
         id: presentationModel
         ListElement {
-            text: "share on Dropbox"
-            description: "Make this file available across the network and with your friends"
+            label: "share on Dropbox"
         }
         ListElement {
-            text: "upload on SlideShare"
-            description: "Upload this presentation on SlideShare"
+            label: "upload on SlideShare"
         }
         ListElement {
-            text: "start full screen"
-            description: "directly start this presentation"
+            label: "start full screen"
         }
         ListElement {
-            text: "rename..."
-            description: "Rename this file"
+            label: "rename..."
         }
     }
 
     property ListModel bookmarkModel: ListModel {
         id: bookmarkModel
         ListElement {
-            text: "Rate"
-            description: "Rate this file"
+            label: "Rate"
+            action: "rate"
 
             function run() {
                 print("ZZZ -> activating inside the model.");
@@ -111,8 +101,8 @@ QtObject {
             */
         }
         ListElement {
-            text: "Delete"
-            description: "Rate this file"
+            label: "Delete"
+            action: "delete"
         }
     }
 
