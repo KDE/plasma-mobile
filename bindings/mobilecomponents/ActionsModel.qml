@@ -86,7 +86,7 @@ QtObject {
         id: bookmarkModel
         ListElement {
             label: "Rate"
-            action: "rate"
+            operationName: "rate"
 
             function run() {
                 print("ZZZ -> activating inside the model.");
@@ -102,7 +102,9 @@ QtObject {
         }
         ListElement {
             label: "Delete"
-            action: "delete"
+            operationName: "delete"
+            dataEngineName: "metadata"
+            sourceName: "anything"
         }
     }
 

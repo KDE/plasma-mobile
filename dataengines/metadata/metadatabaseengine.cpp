@@ -96,7 +96,7 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         massagedName = "file://" + name;
     }
     //Simple case.. a single resource, don't need a DataContainer
-    if (massagedName.split("://").count() > 1) {
+    if (massagedName.split("://").count() == 1) {
         // We have a URL here, so we can create the results directly
         kDebug() << "Valid url ... creating resource synchronously";
         KUrl u = KUrl(massagedName);

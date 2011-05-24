@@ -46,20 +46,13 @@ Item {
         var item = entriesColumn.childAt(pos.x, pos.y)
         print("---------------------------" + item + pos);
         if (item && typeof item != "undefined") {
-            print("You clicked " + item.text)
-            if (item.text == "Rate") {
-                print("YYY Let's rate!");
-                rateResource(resourceUrl, 10);
-                //item.activated();
-            } if (item.text == "Delete") {
-                print("YYY delete!");
-                removeResource(resourceUrl);
-            }
-            feedbackMessageText.text = item.text
-            feedbackMessageAnimation.running = true
-            //item.activated()
+            print("You clicked " + item)
+
+            /*feedbackMessageText.text = item.text
+            feedbackMessageAnimation.running = true*/
+            var posInItem = entriesColumn.mapToItem(item, pos.x, pos.y)
+            item.run(posInItem.x, posInItem.y)
         }
-        //print("bla");
     }
 
     function highlightItem(x, y)
@@ -77,27 +70,6 @@ Item {
         } else {
             highlightFrame.opacity = 0
         }
-    }
-
-    function rateResource(resourceUrl, rating) {
-        print("YYY Rating " + resourceUrl + " *****: " + rating )
-
-        var service = metadataSource.serviceForSource("anything")
-        var operation = service.operationDescription("rate")
-
-        operation["ResourceUrl"] = resourceUrl;
-        operation["Rating"] = rating;
-        service.startOperationCall(operation)
-    }
-
-    function removeResource(resourceUrl) {
-        print("YYY REMOVING " + resourceUrl)
-
-        var service = metadataSource.serviceForSource("anything")
-        var operation = service.operationDescription("remove")
-
-        operation["ResourceUrl"] = resourceUrl;
-        service.startOperationCall(operation)
     }
 
     MouseArea {
@@ -226,19 +198,8 @@ Item {
                 Repeater {
                     model: actionsModel.model(resourceType)
 
-                    Column {
-                        spacing: 5
-//                        property alias text: menuItem.text
-
-                        MobileComponents.MenuItem {
-                            id: menuItem
-                        }
-                        PlasmaCore.SvgItem {
-                            svg: lineSvg
-                            elementId: "horizontal-line"
-                            width: entriesColumn.width
-                            height: lineSvg.elementSize("horizontal-line").height
-                        }
+                    MobileComponents.MenuItem {
+                        id: menuItem
                     }
                 }
             }

@@ -18,34 +18,44 @@
  */
 
 import QtQuick 1.0
+import org.kde.plasma.core 0.1 as PlasmaCore
 
-
-Item {
+Column {
     id: main
-    width: Math.max(itemLoader.item.implicitWidth, parent.width)
-    height: itemLoader.item.implicitHeight
+    spacing: 5
+
+    PlasmaCore.SvgItem {
+        svg: lineSvg
+        elementId: "horizontal-line"
+        width: entriesColumn.width
+        height: lineSvg.elementSize("horizontal-line").height
+        visible: main.y > 0
+    }
 
     Loader {
         id: itemLoader
+        width: Math.max(item.implicitWidth, main.parent.width)
+        height: item.implicitHeight
 
         //FIXME: the uppercasing should not be necessary, it's ugly
-        source: "menuitems/" + action.charAt(0).toUpperCase() + action.slice(1) + "Item.qml"
+        source: "menuitems/" + operationName.charAt(0).toUpperCase() + operationName.slice(1) + "Item.qml"
         onStatusChanged: {
             //fallback
             if (status == Loader.Error) {
                 source = "menuitems/DefaultItem.qml"
             }
         }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            itemLoader.item.run(mouse.x, mouse.y)
-            feedbackMessageText.text = menuItem.text
-            feedbackMessageAnimation.running = true
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                itemLoader.item.run(mouse.x, mouse.y)
+                feedbackMessageText.text = menuItem.text
+                feedbackMessageAnimation.running = true
+            }
         }
     }
+
+    
 
     function run(x, y)
     {

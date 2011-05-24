@@ -36,80 +36,43 @@ Item {
         MobileComponents.RatingIcon {
             id: rating2
             baseRating: 2
+            enabled: score > 1
         }
         MobileComponents.RatingIcon {
             id: rating4
             baseRating: 4
+            enabled: score > 3
         }
         MobileComponents.RatingIcon {
             id: rating6
             baseRating: 6
+            enabled: score > 5
         }
         MobileComponents.RatingIcon {
             id: rating8
             baseRating: 8
+            enabled: score > 7
         }
         MobileComponents.RatingIcon {
             id: rating10
             baseRating: 10
+            enabled: score > 9
         }
-    }
-
-    onScoreChanged: {
-        //print ("XXX :-) rating changed to " + score);
-        updateIcons(score);
     }
 
     onResourceUrlChanged: {
         print("someone poked resourceUrl");
     }
 
-    Component.onCompleted: {
-        if (score > 0) {
-            //print("XXX done, rating " + score);
-        }
-        updateIcons(score);
-    }
 
-    MouseArea {
-        anchors.fill: parent
-
-        onReleased: {
-            var star = iconRow.childAt(mouse.x, mouse.y);
-            if (star && star.baseRating) {
-                print("released with rating " + star.baseRating + " Item: " + resourceUrl);
-                rateResource(resourceUrl, star.baseRating);
-            } else{
-                print("released but could not figure out rating" + star);
-            }
-        }
-    }
-
-    function updateIcons(newRating) {
-        if (newRating > 1) {
-            rating2.enabled = true;
-        }
-        if (newRating > 3) {
-            rating4.enabled = true;
-        }
-        if (newRating > 5) {
-            rating6.enabled = true;
-        }
-        if (newRating > 7) {
-            rating8.enabled = true;
-        }
-        if (newRating > 9) {
-            rating10.enabled = true;
-        }
-    }
-
-    function rateResource(resourceUrl, rating) {
+    function rateResource(resourceUrl, rating)
+    {
         print("MMM Rating " + resourceUrl + " *****: " + rating )
         if (resourceUrl == "") {
             print("url empty.");
             return;
         }
-        var service = metadataSource.serviceForSource("anything")
+        var service = plasmoid.dataEngine("metadata").serviceForSource("anything")
         var operation = service.operationDescription("rate")
 
         operation["ResourceUrl"] = resourceUrl;
@@ -117,4 +80,14 @@ Item {
         service.startOperationCall(operation)
     }
 
+    function run(x, y)
+    {
+        var star = iconRow.childAt(x, y);
+        if (star && star.baseRating) {
+            print("released with rating " + star.baseRating + " Item: " + resourceUrl);
+            rateResource(resourceUrl, star.baseRating);
+        } else{
+            print("released but could not figure out rating" + star);
+        }
+    }
 }

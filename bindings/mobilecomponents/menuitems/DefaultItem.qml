@@ -38,5 +38,8 @@ Text {
     function run(x, y)
     {
         print("ITEM RUN: "+label+ " " + x + " " + y)
+        var controller = service(dataEngineName, sourceName)
+        var operation = controller.operationDescription(operationName)
+        controller.startOperationCall(operation)
     }
 }
