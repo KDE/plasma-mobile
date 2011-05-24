@@ -123,7 +123,4 @@ Item {
         }
     }
 
-    MobileComponents.ContextMenu {
-        id: contextMenu
-    }
 }

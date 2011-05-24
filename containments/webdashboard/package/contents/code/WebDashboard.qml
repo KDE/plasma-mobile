@@ -100,4 +100,8 @@ Item {
         anchors.bottom: bookmarksLabel.bottom
     }
 
+    MobileComponents.ContextMenu {
+        anchors.fill:parent
+        id: contextMenu
+    }
 }
