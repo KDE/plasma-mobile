@@ -49,13 +49,12 @@ Column {
             anchors.fill: parent
             onClicked: {
                 itemLoader.item.run(mouse.x, mouse.y)
-                feedbackMessageText.text = menuItem.text
+                feedbackMessageAnimation.target = main
                 feedbackMessageAnimation.running = true
             }
         }
     }
 
-    
 
     function run(x, y)
     {

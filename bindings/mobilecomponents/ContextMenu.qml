@@ -49,11 +49,10 @@ Rectangle {
         print("---------------------------" + item + pos);
         if (item && typeof item != "undefined") {
             print("You clicked " + item)
-
-            /*feedbackMessageText.text = item.text
-            feedbackMessageAnimation.running = true*/
             var posInItem = entriesColumn.mapToItem(item, pos.x, pos.y)
             item.run(posInItem.x, posInItem.y)
+            feedbackMessageAnimation.target = item
+            feedbackMessageAnimation.running = true
         }
     }
 
@@ -272,38 +271,24 @@ Rectangle {
         }
     ]
 
-    PlasmaCore.FrameSvgItem {
-        id: feedbackMessage
-        imagePath: "dialogs/background"
-        width: feedbackMessageText.width + margins.left + margins.right
-        height: feedbackMessageText.height + margins.top + margins.bottom
-        anchors.centerIn: parent
-        Text {
-            id: feedbackMessageText
-            x: feedbackMessage.margins.left
-            y: feedbackMessage.margins.top
-            font.bold: true
-            font.pixelSize: 20
-        }
-        scale: 0
-    }
-
     SequentialAnimation {
         id: feedbackMessageAnimation
+        property Item target
+
         NumberAnimation {
-            target: feedbackMessage
+            target: feedbackMessageAnimation.target
             properties: "scale"
-            to: 1
-            duration: 300
+            to: 2
+            duration: 250
         }
         PauseAnimation {
-            duration: 500
+            duration: 300
         }
         NumberAnimation {
-            target: feedbackMessage
+            target: feedbackMessageAnimation.target
             properties: "scale"
-            to: 0
-            duration: 300
+            to: 1
+            duration: 250
         }
         ScriptAction {
             script: contextMenu.state = "hidden"
