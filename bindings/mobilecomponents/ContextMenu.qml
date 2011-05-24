@@ -27,6 +27,8 @@ Rectangle {
     anchors.fill: parent
     color: Qt.rgba(0, 0, 0, 0.1)
 
+    property variant itemData
+
     state: "hidden"
     onStateChanged: {
         if (state == "hidden") {
@@ -57,9 +59,6 @@ Rectangle {
             print("You clicked " + item)
             var posInItem = entriesColumn.mapToItem(item, pos.x, pos.y)
             item.run(posInItem.x, posInItem.y)
-        }
-        for (i in metadataSource.data["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]]) {
-            print("AAAAA"+i+metadataSource.data["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]])
         }
     }
 

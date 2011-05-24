@@ -37,13 +37,21 @@ Column {
         id: itemLoader
         width: Math.max(item.implicitWidth, main.parent.width)
         height: item.implicitHeight
+        property int fallbackLevel
 
         //FIXME: the uppercasing should not be necessary, it's ugly
-        source: "menuitems/" + operationName.charAt(0).toUpperCase() + operationName.slice(1) + "Item.qml"
+        source: "menuitems/" + operationName + resourceType + "Item.qml"
         onStatusChanged: {
             //fallback
             if (status == Loader.Error) {
-                source = "menuitems/DefaultItem.qml"
+                if (fallbackLevel == 0) {
+                    ++fallbackLevel
+                    source = "menuitems/" + operationName + "Item.qml"
+                    print(itemLoader.fallbackLevel)
+                } else {
+                    ++fallbackLevel
+                    source = "menuitems/DefaultItem.qml"
+                }
             }
         }
         MouseArea {

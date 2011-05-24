@@ -40,7 +40,8 @@ Text {
         print("ITEM RUN: "+label+ " " + x + " " + y)
         var controller = metadataSource.serviceForSource(sourceName)
         var operation = controller.operationDescription(operationName)
-        operation.ResourceUrl = resourceUrl
+
+        operation["ResourceUrl"] = resourceUrl
         controller.startOperationCall(operation)
     }
 }

@@ -102,6 +102,7 @@ Item {
                     //contextMenu.resourceType = modelData
                     contextMenu.source = model["DataEngineSource"]
                     contextMenu.resourceUrl = model["resourceUri"]
+                    contextMenu.itemData = model;
                     contextMenu.state = "show"
                     //event.accepted = true
                     webItemList.interactive = false

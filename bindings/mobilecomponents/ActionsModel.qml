@@ -89,18 +89,6 @@ QtObject {
             operationName: "rate"
             dataEngineName: "metadata"
             sourceName: "anything"
-
-            function run() {
-                print("ZZZ -> activating inside the model.");
-            }
-/*
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    print("UUU -> activating inside the model.");
-                }
-            }
-            */
         }
         ListElement {
             label: "Remove"

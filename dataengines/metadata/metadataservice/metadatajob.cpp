@@ -91,9 +91,9 @@ void MetadataJob::start()
         }
         return;
     } else if (operation == "remove") {
-        const QString url = parameters()["Url"].toString();
+        const QString url = parameters()["ResourceUrl"].toString();
         Nepomuk::Resource b(url);
-        kDebug() << "Removing resource TYPE: " << b.resourceType();
+        kDebug() << "Removing resource TYPE: " << b.resourceType() << "url" << url;
         b.remove();
         setResult(true);
         return;
