@@ -51,8 +51,6 @@ Rectangle {
             print("You clicked " + item)
             var posInItem = entriesColumn.mapToItem(item, pos.x, pos.y)
             item.run(posInItem.x, posInItem.y)
-            feedbackMessageAnimation.target = item
-            feedbackMessageAnimation.running = true
         }
     }
 
@@ -280,15 +278,17 @@ Rectangle {
             properties: "scale"
             to: 2
             duration: 250
+            easing.type: "OutCubic"
         }
         PauseAnimation {
-            duration: 300
+            duration: 200
         }
         NumberAnimation {
             target: feedbackMessageAnimation.target
             properties: "scale"
             to: 1
             duration: 250
+            easing.type: "OutElastic"
         }
         ScriptAction {
             script: contextMenu.state = "hidden"

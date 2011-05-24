@@ -49,7 +49,7 @@ Column {
             anchors.fill: parent
             onClicked: {
                 itemLoader.item.run(mouse.x, mouse.y)
-                feedbackMessageAnimation.target = main
+                feedbackMessageAnimation.target = itemLoader
                 feedbackMessageAnimation.running = true
             }
         }
@@ -59,5 +59,7 @@ Column {
     function run(x, y)
     {
         itemLoader.item.run(x, y)
+        feedbackMessageAnimation.target = itemLoader
+        feedbackMessageAnimation.running = true
     }
 }
