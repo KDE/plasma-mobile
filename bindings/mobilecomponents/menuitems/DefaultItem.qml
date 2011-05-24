@@ -38,8 +38,9 @@ Text {
     function run(x, y)
     {
         print("ITEM RUN: "+label+ " " + x + " " + y)
-        var controller = service(dataEngineName, sourceName)
+        var controller = metadataSource.serviceForSource(sourceName)
         var operation = controller.operationDescription(operationName)
+        operation.ResourceUrl = resourceUrl
         controller.startOperationCall(operation)
     }
 }

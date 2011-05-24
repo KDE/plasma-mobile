@@ -25,7 +25,6 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     property int score
-    property string resourceUrl
     property int implicitHeight: 22
     property int implicitWidth: 22*5
     signal rateClicked(int newRating)
@@ -60,11 +59,6 @@ Item {
         }
     }
 
-    onResourceUrlChanged: {
-        print("someone poked resourceUrl");
-    }
-
-
     function rateResource(resourceUrl, rating)
     {
         print("MMM Rating " + resourceUrl + " *****: " + rating )
@@ -72,7 +66,7 @@ Item {
             print("url empty.");
             return;
         }
-        var service = plasmoid.dataEngine("metadata").serviceForSource("anything")
+        var service = metadataSource.serviceForSource(sourceName)
         var operation = service.operationDescription("rate")
 
         operation["ResourceUrl"] = resourceUrl;

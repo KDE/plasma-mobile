@@ -35,9 +35,15 @@ Rectangle {
     }
 
     PlasmaCore.DataSource {
+        id: activitySource
+        engine: "org.kde.activities"
+        connectedSources: ["Status"]
+    }
+
+    PlasmaCore.DataSource {
         id: metadataSource
         engine: "org.kde.active.metadata"
-        connectedSources: ["CurrentActivityResources:"+plasmoid.activityId]
+        connectedSources: ["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]]
         interval: 0
     }
 
@@ -51,6 +57,9 @@ Rectangle {
             print("You clicked " + item)
             var posInItem = entriesColumn.mapToItem(item, pos.x, pos.y)
             item.run(posInItem.x, posInItem.y)
+        }
+        for (i in metadataSource.data["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]]) {
+            print("AAAAA"+i+metadataSource.data["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]])
         }
     }
 
@@ -199,7 +208,20 @@ Rectangle {
 
                     MobileComponents.MenuItem {
                         id: menuItem
+                        resourceUrl: contextMenu.resourceUrl
                     }
+                }
+                Text {
+                    width:30
+                    height: 30
+                    text: "Add"
+                    visible: resourceUrl in metadataSource.data["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]]
+                }
+                Text {
+                    width:30
+                    height: 30
+                    text: "Remove"
+                    visible: !(resourceUrl in metadataSource.data["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]])
                 }
             }
         }

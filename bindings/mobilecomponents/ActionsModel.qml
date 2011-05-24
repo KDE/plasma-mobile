@@ -87,6 +87,8 @@ QtObject {
         ListElement {
             label: "Rate"
             operationName: "rate"
+            dataEngineName: "metadata"
+            sourceName: "anything"
 
             function run() {
                 print("ZZZ -> activating inside the model.");
@@ -101,8 +103,8 @@ QtObject {
             */
         }
         ListElement {
-            label: "Delete"
-            operationName: "delete"
+            label: "Remove"
+            operationName: "remove"
             dataEngineName: "metadata"
             sourceName: "anything"
         }
