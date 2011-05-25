@@ -72,7 +72,7 @@ Item {
             width: parent.width
         }
 
-
+        /*
         Text {
             id: openPagesLabel
             text: i18n("Open pages")
@@ -90,6 +90,7 @@ Item {
             id: tabs
             width: parent.width
         }
+        */
     }
 
     NewBookmark {
