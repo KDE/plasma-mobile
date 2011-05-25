@@ -23,6 +23,8 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Column {
     id: main
     spacing: 5
+    height: 30
+    anchors.margins: 8
     property string resourceUrl
 
     PlasmaCore.SvgItem {

@@ -203,7 +203,7 @@ Rectangle {
                 x: menuFrame.margins.left + highlightFrame.margins.left
                 y: menuFrame.margins.top + highlightFrame.margins.top
                 spacing: 5
-                width: 120
+                width: 160
 
                 Repeater {
                     model: actionsModel.model(resourceType)
