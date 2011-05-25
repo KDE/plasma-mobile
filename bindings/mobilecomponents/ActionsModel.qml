@@ -97,13 +97,13 @@ QtObject {
             sourceName: "anything"
         }
         ListElement {
-            label: "Add to activity"
+            label: "Connect to current activity"
             operationName: "addToActivity"
             dataEngineName: "metadata"
             sourceName: "anything"
         }
         ListElement {
-            label: "Remove from activity"
+            label: "Disconnect from current activity"
             operationName: "removeFromActivity"
             dataEngineName: "metadata"
             sourceName: "anything"
