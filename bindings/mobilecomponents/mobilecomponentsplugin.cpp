@@ -35,7 +35,7 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<PagedProxyModel>(uri, 0, 1, "PagedProxyModel");
     qmlRegisterType<AppletStatusWatcher>(uri, 0, 1, "AppletStatusWatcher");
-    qmlRegisterType<ResourceDelegate>(uri, 0, 1, "ResourceDelegate");
+    //qmlRegisterType<ResourceDelegate>(uri, 0, 1, "ResourceDelegate");
     qmlRegisterType<CategorizedProxyModel>(uri, 0, 1, "CategorizedProxyModel");
     qmlRegisterType<MouseEventListener>(uri, 0, 1, "MouseEventListener");
 }

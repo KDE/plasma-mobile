@@ -6,3 +6,4 @@ IconGrid 0.1 IconGrid.qml
 IconDelegate 0.1 IconDelegate.qml
 Rating 0.1 Rating.qml
 RatingIcon 0.1 RatingIcon.qml
+ResourceDelegate 0.1 ResourceDelegate.qml
