@@ -49,7 +49,6 @@ Column {
                 if (fallbackLevel == 0) {
                     ++fallbackLevel
                     source = "menuitems/" + operationName + "Item.qml"
-                    print(itemLoader.fallbackLevel)
                 } else {
                     ++fallbackLevel
                     source = "menuitems/DefaultItem.qml"
