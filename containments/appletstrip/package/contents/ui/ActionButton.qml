@@ -20,23 +20,60 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
-PlasmaCore.SvgItem {
+Item {
     id: button
+    property QtObject svg: iconsSvg
+    property alias elementId: icon.elementId
+    visible: action&&action.enabled
+    property QtObject action
     width: actionSize
     height: actionSize
-    svg: iconsSvg
-    visible: action&&action.enabled
 
-    property QtObject action
+    PlasmaCore.Svg {
+        id: buttonSvg
+        imagePath: "widgets/actionbutton"
+    }
 
-    MouseArea {
+    PlasmaCore.SvgItem {
+        id: shadowItem
+        svg: buttonSvg
+        elementId: "shadow"
         anchors.fill: parent
-        anchors.leftMargin: -10
-        anchors.topMargin: -10
-        anchors.rightMargin: -10
-        anchors.bottomMargin: -10
-        onClicked: {
-            action.trigger()
+    }
+
+    PlasmaCore.SvgItem {
+        id: buttonItem
+        svg: buttonSvg
+        elementId: "normal"
+        anchors.fill: parent
+
+        PlasmaCore.SvgItem {
+            id: icon
+            width: actionSize
+            height: actionSize
+            svg: button.svg
+            anchors.fill: parent
+            anchors.margins: 8
+
+            MouseArea {
+                anchors.fill: parent
+                anchors.leftMargin: -10
+                anchors.topMargin: -10
+                anchors.rightMargin: -10
+                anchors.bottomMargin: -10
+                onPressed: {
+                    buttonItem.elementId = "pressed"
+                    shadowItem.opacity = 0
+                }
+                onReleased: {
+                    buttonItem.elementId = "normal"
+                    shadowItem.opacity = 1
+                }
+                onClicked: {
+                    action.trigger()
+                }
+            }
         }
     }
+
 }

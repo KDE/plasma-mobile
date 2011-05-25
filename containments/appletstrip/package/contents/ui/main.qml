@@ -180,6 +180,7 @@ Item {
                     Column {
                         anchors.centerIn: parent
                         ActionButton {
+                            svg: iconsSvg
                             elementId: "add-normal"
                             action: plasmoid.action("add widgets")
                         }
