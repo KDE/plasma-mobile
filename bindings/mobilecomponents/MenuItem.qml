@@ -21,7 +21,7 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 
 Column {
-    id: main
+    id: menuItem
     spacing: 5
     height: 30
     anchors.margins: 8
@@ -32,12 +32,12 @@ Column {
         elementId: "horizontal-line"
         width: entriesColumn.width
         height: lineSvg.elementSize("horizontal-line").height
-        visible: main.y > 0
+        visible: menuItem.y > 0
     }
 
     Loader {
         id: itemLoader
-        width: Math.max(item.implicitWidth, main.parent.width)
+        width: Math.max(item.implicitWidth, entriesColumn.width)
         height: item.implicitHeight
         property int fallbackLevel
 

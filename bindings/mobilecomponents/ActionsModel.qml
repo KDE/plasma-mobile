@@ -96,6 +96,18 @@ QtObject {
             dataEngineName: "metadata"
             sourceName: "anything"
         }
+        ListElement {
+            label: "Add to activity"
+            operationName: "addToActivity"
+            dataEngineName: "metadata"
+            sourceName: "anything"
+        }
+        ListElement {
+            label: "Remove from activity"
+            operationName: "removeFromActivity"
+            dataEngineName: "metadata"
+            sourceName: "anything"
+        }
     }
 
 }

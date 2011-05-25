@@ -22,8 +22,9 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 
 Text {
-    id: menuItem
+    id: menuItemBody
     //font.pointSize: 14
+
     horizontalAlignment: Text.AlignHCenter
     property int implicitWidth: paintedWidth
     property int implicitHeight: paintedHeight

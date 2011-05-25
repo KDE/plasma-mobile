@@ -28,6 +28,12 @@ Rectangle {
     color: Qt.rgba(0, 0, 0, 0.1)
 
     property variant itemData
+    property string resourceType
+    property string source
+    property string resourceUrl
+    property string activityUrl: activitySource.data["Status"]["Current"]
+
+    property Item delegate: parent;
 
     state: "hidden"
     onStateChanged: {
@@ -45,7 +51,7 @@ Rectangle {
     PlasmaCore.DataSource {
         id: metadataSource
         engine: "org.kde.active.metadata"
-        connectedSources: ["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]]
+        connectedSources: ["CurrentActivityResources:"+activityUrl]
         interval: 0
     }
 
@@ -86,12 +92,6 @@ Rectangle {
         anchors.fill: parent
         onClicked: contextMenu.state = "hidden"
     }
-
-    property string resourceType
-    property string source
-    property string resourceUrl
-
-    property Item delegate: parent;
 
     onDelegateChanged: {
         positionMenu()
@@ -212,24 +212,6 @@ Rectangle {
                         id: menuItem
                         resourceUrl: contextMenu.resourceUrl
                     }
-                }
-                Text {
-                    width: parent.width
-                    height: 30
-                    color: theme.textColor
-                    anchors.margins: 8
-
-                    text: i18n("Connect to Activity")
-                    visible: resourceUrl in metadataSource.data["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]]
-                }
-                Text {
-                    width: parent.width
-                    height: 30
-                    anchors.margins: 8
-
-                    color: theme.textColor
-                    text: i18n("Disconnect from Activity")
-                    visible: !(resourceUrl in metadataSource.data["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]])
                 }
             }
         }
