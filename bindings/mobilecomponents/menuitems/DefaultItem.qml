@@ -23,10 +23,11 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Text {
     id: menuItem
-    font.pointSize: 14
+    //font.pointSize: 14
     horizontalAlignment: Text.AlignHCenter
     property int implicitWidth: paintedWidth
     property int implicitHeight: paintedHeight
+    anchors.margins: 20
 
     text: label
 

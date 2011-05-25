@@ -49,6 +49,9 @@ Rectangle {
         interval: 0
     }
 
+    PlasmaCore.Theme {
+        id: theme
+    }
 
     function runItem(x, y)
     {
@@ -211,15 +214,21 @@ Rectangle {
                     }
                 }
                 Text {
-                    width:30
+                    width: parent.width
                     height: 30
-                    text: "Add"
+                    color: theme.textColor
+                    anchors.margins: 8
+
+                    text: i18n("Connect to Activity")
                     visible: resourceUrl in metadataSource.data["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]]
                 }
                 Text {
-                    width:30
+                    width: parent.width
                     height: 30
-                    text: "Remove"
+                    anchors.margins: 8
+
+                    color: theme.textColor
+                    text: i18n("Disconnect from Activity")
                     visible: !(resourceUrl in metadataSource.data["CurrentActivityResources:activity://"+activitySource.data["Status"]["Current"]])
                 }
             }

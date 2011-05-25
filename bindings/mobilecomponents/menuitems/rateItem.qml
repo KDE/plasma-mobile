@@ -61,11 +61,12 @@ Item {
 
     function rateResource(resourceUrl, rating)
     {
-        print("MMM Rating " + resourceUrl + " *****: " + rating )
+        print("XXXXX MMM Rating " + resourceUrl + " *****: " + rating )
         if (resourceUrl == "") {
             print("url empty.");
             return;
         }
+        return;
         var service = metadataSource.serviceForSource(sourceName)
         var operation = service.operationDescription("rate")
 
@@ -82,6 +83,14 @@ Item {
             rateResource(resourceUrl, star.baseRating);
         } else{
             print("released but could not figure out rating" + star);
+        }
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        onPositionChanged: {
+            print("highlight ladieda ..." + mouse.x);
         }
     }
 }
