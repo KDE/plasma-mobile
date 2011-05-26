@@ -30,9 +30,12 @@
 
 #include <kdebug.h>
 
-MetadataJob::MetadataJob(const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent) :
+#include <kactivityconsumer.h>
+
+MetadataJob::MetadataJob(KActivityConsumer *consumer, const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent) :
     ServiceJob(parent->objectName(), operation, parameters, parent),
-    m_id(id)
+    m_id(id),
+    m_activityConsumer(consumer)
 {
 }
 
@@ -48,9 +51,12 @@ void MetadataJob::start()
 
     kDebug() << "starting operation" << operation << "on the resource" << resourceUrl << "and activity" << activityUrl;
 
-    if (operation == "addAssociation") {
+    if (operation == "linkToActivity") {
         const QString resourceUrl = parameters()["ResourceUrl"].toString();
-        const QString activityUrl = parameters()["ActivityUrl"].toString();
+        QString activityUrl = parameters()["ActivityUrl"].toString();
+        if (activityUrl.isEmpty()) {
+            activityUrl = m_activityConsumer->currentActivity();
+        }
 
         Nepomuk::Resource fileRes(resourceUrl);
         Nepomuk::Resource acRes("activities://" + activityUrl);
@@ -58,9 +64,10 @@ void MetadataJob::start()
         acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
         setResult(true);
         return;
-    } else if (operation == "removeAssociation") {
+    } else if (operation == "unlinkFromActivity") {
         const QString resourceUrl = parameters()["ResourceUrl"].toString();
-        const QString activityUrl = parameters()["ActivityUrl"].toString();
+        QString activityUrl = parameters()["ActivityUrl"].toString();
+        activityUrl = m_activityConsumer->currentActivity();
 
         QString url = parameters()["ResourceUrl"].toString();
 

@@ -41,6 +41,7 @@ public:
 
 private:
     QString m_id;
+    KActivityConsumer *m_activityConsumer;
 };
 
 #endif // METADATASERVICE_H

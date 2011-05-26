@@ -34,6 +34,8 @@ namespace Nepomuk
 
 class MetadataBaseEnginePrivate;
 
+class KActivityConsumer;
+
 class MetadataBaseEngine : public Plasma::DataEngine
 {
     Q_OBJECT

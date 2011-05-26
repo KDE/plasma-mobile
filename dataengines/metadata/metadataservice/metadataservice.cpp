@@ -22,17 +22,19 @@
 #include "metadataservice.h"
 #include "metadatajob.h"
 
+#include <kactivityconsumer.h>
 
 MetadataService::MetadataService(const QString &source)
     : m_id(source)
 {
     setName("metadataservice");
+    m_activityConsumer = new KActivityConsumer(this);
 }
 
 ServiceJob *MetadataService::createJob(const QString &operation,
                                            QMap<QString, QVariant> &parameters)
 {
-    return new MetadataJob(m_id, operation, parameters, this);
+    return new MetadataJob(m_activityConsumer, m_id, operation, parameters, this);
 }
 
 #include "metadataservice.moc"

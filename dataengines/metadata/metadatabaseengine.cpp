@@ -43,6 +43,8 @@
 #include "metadatabaseengine.h"
 #include <stdio.h>
 
+#include <kactivityconsumer.h>
+
 //#include "activityservice/activityservice.h"
 #include "metadataservice/metadataservice.h"
 
@@ -54,6 +56,7 @@ class MetadataBaseEnginePrivate
 {
 public:
     QSize previewSize;
+    KActivityConsumer *activityConsumer;
 };
 
 
@@ -63,6 +66,7 @@ MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args
     Q_UNUSED(args);
     d = new MetadataBaseEnginePrivate;
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
+    d->activityConsumer = new KActivityConsumer(this);
     //init();
 }
 
@@ -121,8 +125,12 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
          return true;
 
     //we want to list all resources liked to the current activity
-    } else if (name.startsWith("CurrentActivityResources:")) {
+    } else if (name.startsWith("CurrentActivityResources")) {
 
+         QString activityId = name.split(":").last();
+         if (activityId.isEmpty()) {
+             activityId = d->activityConsumer->currentActivity();
+        }
          Nepomuk::Resource acRes("activities://" + name.split(":").last());
          Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
          term.setInverted(true);
