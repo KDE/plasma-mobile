@@ -29,11 +29,11 @@ MenuItem {
         var service = metadataSource.serviceForSource(source)
         var operation
         if (main.browsingActivity) {
-            operation = service.operationDescription("removeAssociation")
+            operation = service.operationDescription("unlinkFromActivity")
             operation.ResourceUrl = contextMenu.resourceUrl
             operation.ActivityUrl = plasmoid.activityId
         } else {
-            operation = service.operationDescription("addAssociation")
+            operation = service.operationDescription("linkToActivity")
             operation.ResourceUrl = contextMenu.resourceUrl
             operation.ActivityUrl = plasmoid.activityId
         }
