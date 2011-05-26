@@ -31,7 +31,6 @@ Rectangle {
     property string resourceType
     property string source
     property string resourceUrl
-    property string activityUrl: activitySource.data["Status"]["Current"]
 
     property Item delegate: parent;
 
@@ -43,15 +42,9 @@ Rectangle {
     }
 
     PlasmaCore.DataSource {
-        id: activitySource
-        engine: "org.kde.activities"
-        connectedSources: ["Status"]
-    }
-
-    PlasmaCore.DataSource {
         id: metadataSource
         engine: "org.kde.active.metadata"
-        connectedSources: ["CurrentActivityResources:"+activityUrl]
+        connectedSources: ["CurrentActivityResources"]
         interval: 0
     }
 

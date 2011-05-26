@@ -23,7 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 DefaultItem {
     id: menuItemBody
-    property bool inActivity: resourceUrl in metadataSource.data["CurrentActivityResources:"+activityUrl]
+    property bool inActivity: resourceUrl in metadataSource.data["CurrentActivityResources"]
     onInActivityChanged: menuItem.visible = !inActivity
 
     function run(x, y)
@@ -32,7 +32,6 @@ DefaultItem {
         var controller = metadataSource.serviceForSource(sourceName)
         var operation = controller.operationDescription("connectToActivity")
 
-        operation["ActivityUrl"] = activityUrl
         operation["ResourceUrl"] = resourceUrl
         controller.startOperationCall(operation)
     }
