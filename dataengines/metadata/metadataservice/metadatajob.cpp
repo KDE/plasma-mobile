@@ -51,7 +51,7 @@ void MetadataJob::start()
 
     kDebug() << "starting operation" << operation << "on the resource" << resourceUrl << "and activity" << activityUrl;
 
-    if (operation == "linkToActivity") {
+    if (operation == "connectToActivity") {
         const QString resourceUrl = parameters()["ResourceUrl"].toString();
         QString activityUrl = parameters()["ActivityUrl"].toString();
         if (activityUrl.isEmpty()) {
@@ -64,7 +64,7 @@ void MetadataJob::start()
         acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
         setResult(true);
         return;
-    } else if (operation == "unlinkFromActivity") {
+    } else if (operation == "disconnectFromActivity") {
         const QString resourceUrl = parameters()["ResourceUrl"].toString();
         QString activityUrl = parameters()["ActivityUrl"].toString();
         activityUrl = m_activityConsumer->currentActivity();
