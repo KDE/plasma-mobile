@@ -29,11 +29,11 @@ MenuItem {
         var service = metadataSource.serviceForSource(source)
         var operation
         if (main.browsingActivity) {
-            operation = service.operationDescription("unlinkFromActivity")
+            operation = service.operationDescription("disconnectFromActivity")
             operation.ResourceUrl = contextMenu.resourceUrl
             operation.ActivityUrl = plasmoid.activityId
         } else {
-            operation = service.operationDescription("linkToActivity")
+            operation = service.operationDescription("connectToActivity")
             operation.ResourceUrl = contextMenu.resourceUrl
             operation.ActivityUrl = plasmoid.activityId
         }
