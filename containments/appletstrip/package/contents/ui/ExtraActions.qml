@@ -125,7 +125,7 @@ Item {
             onPressed: {
                 mouse.accepted = true
                 extraActionsFrame.opacity = 1
-                extraActionsButton.opacity = 0.2
+                extraActionsButton.opacity = 0.1
             }
             onReleased: {
                 extraActionsFrame.opacity = 0
