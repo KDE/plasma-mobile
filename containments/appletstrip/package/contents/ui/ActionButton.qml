@@ -26,8 +26,9 @@ Item {
     property alias elementId: icon.elementId
     visible: action&&action.enabled
     property QtObject action
-    width: actionSize
-    height: actionSize
+    property bool backgroundVisible: true
+    width: backgroundVisible?actionSize+8:actionSize
+    height: width
 
     PlasmaCore.Svg {
         id: buttonSvg
@@ -39,6 +40,7 @@ Item {
         svg: buttonSvg
         elementId: "shadow"
         anchors.fill: parent
+        visible: backgroundVisible
     }
 
     PlasmaCore.SvgItem {
@@ -46,32 +48,33 @@ Item {
         svg: buttonSvg
         elementId: "normal"
         anchors.fill: parent
+        visible: backgroundVisible
+    }
 
-        PlasmaCore.SvgItem {
-            id: icon
-            width: actionSize
-            height: actionSize
-            svg: button.svg
+    PlasmaCore.SvgItem {
+        id: icon
+        width: actionSize
+        height: actionSize
+        svg: button.svg
+        anchors.fill: buttonItem
+        anchors.margins: backgroundVisible?8:0
+
+        MouseArea {
             anchors.fill: parent
-            anchors.margins: 8
-
-            MouseArea {
-                anchors.fill: parent
-                anchors.leftMargin: -10
-                anchors.topMargin: -10
-                anchors.rightMargin: -10
-                anchors.bottomMargin: -10
-                onPressed: {
-                    buttonItem.elementId = "pressed"
-                    shadowItem.opacity = 0
-                }
-                onReleased: {
-                    buttonItem.elementId = "normal"
-                    shadowItem.opacity = 1
-                }
-                onClicked: {
-                    action.trigger()
-                }
+            anchors.leftMargin: -10
+            anchors.topMargin: -10
+            anchors.rightMargin: -10
+            anchors.bottomMargin: -10
+            onPressed: {
+                buttonItem.elementId = "pressed"
+                shadowItem.opacity = 0
+            }
+            onReleased: {
+                buttonItem.elementId = "normal"
+                shadowItem.opacity = 1
+            }
+            onClicked: {
+                action.trigger()
             }
         }
     }

@@ -29,7 +29,7 @@ Item {
     width: 1024
     height: 600
 
-    property int actionSize: 48
+    property int actionSize: 32
     property int appletColumns: 3
     property string appletsOrder
 

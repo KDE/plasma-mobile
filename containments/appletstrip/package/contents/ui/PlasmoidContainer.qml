@@ -56,7 +56,7 @@ PlasmaCore.FrameSvgItem {
             height = appletsRow.height
             width = Math.max(main.width/appletColumns, applet.minimumSize.width + plasmoidContainer.margins.left + plasmoidContainer.margins.right)
             applet.width = width - plasmoidContainer.margins.left - plasmoidContainer.margins.right
-            applet.height = height - plasmoidContainer.margins.top - /*plasmoidContainer.margins.bottom -*/ runButton.height
+            applet.height = height - plasmoidContainer.margins.top - plasmoidContainer.margins.bottom - runButton.height
         }
     }
 
@@ -74,6 +74,8 @@ PlasmaCore.FrameSvgItem {
         anchors {
             left: parent.left
             bottom: parent.bottom
+            leftMargin: plasmoidContainer.margins.left
+            bottomMargin: plasmoidContainer.margins.bottom
         }
     }
 
@@ -82,9 +84,12 @@ PlasmaCore.FrameSvgItem {
         anchors {
             right: parent.right
             bottom: parent.bottom
+            rightMargin: plasmoidContainer.margins.right
+            bottomMargin: plasmoidContainer.margins.bottom
         }
         svg: iconsSvg
         elementId: "maximize"
+        backgroundVisible: false
         z: applet.z + 1
 
         action: applet.action("run associated application")
@@ -94,6 +99,7 @@ PlasmaCore.FrameSvgItem {
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
+            bottomMargin: plasmoidContainer.margins.bottom
         }
         z: applet.z + 1
     }
