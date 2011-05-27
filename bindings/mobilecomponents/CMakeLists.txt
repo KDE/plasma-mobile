@@ -6,7 +6,7 @@ set(mobilecomponents_SRCS
     mobilecomponentsplugin.cpp
     pagedproxymodel.cpp
     appletstatuswatcher.cpp
-    resourcedelegate.cpp
+    fallbackcomponent.cpp
     categorizedproxymodel.cpp
     mouseeventlistener.cpp
     )
@@ -36,5 +36,5 @@ install(FILES ResourceDelegate.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/pl
 
 install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
-install(DIRECTORY resourcedelegates/ DESTINATION ${DATA_INSTALL_DIR}/org/kde/plasma/mobilecomponents/resourcedelegates/)
+install(DIRECTORY resourcedelegates/ DESTINATION ${DATA_INSTALL_DIR}/plasma/resourcedelegates/)
 install(DIRECTORY menuitems/ DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents/menuitems/)

@@ -3,7 +3,7 @@
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2 or
+ *   published by the Free Software Foundation; either version 2, or
  *   (at your option) any later version.
  *
  *   This program is distributed in the hope that it will be useful,
@@ -17,31 +17,32 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+#include "fallbackcomponent.h"
 
-Item {
-    id: delegateItem
-    property string resourceType
-    property bool infoLabelVisible
 
-    MobileComponents.FallbackComponent {
-        id: fallback
-    }
+#include <QFile>
 
-    Loader {
-        id: itemLoader
-        width: item.implicitWidth
-        height: item.implicitHeight
 
-        //FIXME: the uppercasing should not be necessary, it's ugly
-        source: fallback.resolvePath("resourcedelegates", [(resourceType.split("#")[1] + "/Item.qml"), "FileDataObject/Item.qml"])
+#include <KStandardDirs>
+#include <KDebug>
 
-        MouseArea {
-            anchors.fill: parent
-            onPressAndHold: {
-                //contextmenu code
-            }
+
+FallbackComponent::FallbackComponent(QObject *parent)
+    : QObject(parent)
+{
+}
+
+QString FallbackComponent::resolvePath(const QString &component, const QStringList &paths)
+{
+    foreach (const QString &path, paths) {
+        kDebug() << "Searching for" << path;
+        //TODO: cache this, to prevent too much disk access
+        QString resolved = KStandardDirs::locate("data", "plasma/" + component + "/" + path);
+        if (!resolved.isEmpty()) {
+            return resolved;
         }
     }
+    return QString();
 }
+
+#include "fallbackcomponent.moc"
