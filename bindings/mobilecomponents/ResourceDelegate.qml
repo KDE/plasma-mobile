@@ -36,7 +36,7 @@ Item {
         width: parent.width
         height: parent.height
 
-        //FIXME: assuming the view is parent.parent is bad, it should have the view attached property (it appears it doesnt, why?
+        //FIXME: assuming the view is parent.parent is bad, it should have the view attached property (it appears it doesnt, why?)
         source: {
                   if (delegateItem.parent.parent.orientation == ListView.Horizontal || delegateItem.view.cellHeight != undefined) {
                       return fallback.resolvePath("resourcedelegates", [(resourceType.split("#")[1] + "/ItemHorizontal.qml"), "FileDataObject/ItemHorizontal.qml"])
