@@ -2,13 +2,12 @@
 import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
  
 Item {
     id: resourceItem
     anchors.fill: parent
-    property alias infoLabelVisible: infoLabel.visible
 
     Item {
         id: itemFrame
@@ -21,7 +20,7 @@ Item {
         //height: 128
         height: resourceItem.height
 
-        PlasmaWidgets.IconWidget {
+        QIconItem {
             id: previewImage
             height: 64
             width: 64
@@ -67,11 +66,11 @@ Item {
                 try {
                     var _l = hasSymbol.toString().split(",");
                     if (_l.length == 1) {
-                        setIcon(hasSymbol);
+                        icon = QIcon(hasSymbol);
                     } else if (_l.length > 1) {
                         // pick the last one
                         var _i = _l[_l.length-1];
-                        setIcon(_i);
+                        icon = QIcon(_i);
                     } else {
                         //print("HHH types" + types.toString());
                         resourceIcon(types.toString())
@@ -80,7 +79,7 @@ Item {
                 } catch(e) {
                     var _i = resourceIcon(className);
                     print("fallback icon: " + _i + e);
-                    setIcon(_i);
+                    icon = QIcon(_i);
                     print("icon2:" + _i);
                 }
             }
@@ -124,6 +123,7 @@ Item {
             //wrapMode: Text.Wrap
             anchors.top: labelBackground.bottom
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: infoLabelVisible
         }
     }
 }

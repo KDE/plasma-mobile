@@ -27,6 +27,8 @@ Item {
     property int implicitWidth: itemLoader.item.implicitWidth
     property int implicitHeight: itemLoader.item.implicitHeight
 
+    signal clicked(variant mouse)
+
     MobileComponents.FallbackComponent {
         id: fallback
     }
@@ -44,12 +46,35 @@ Item {
                       return fallback.resolvePath("resourcedelegates", [(resourceType.split("#")[1] + "/Item.qml"), "FileDataObject/Item.qml"])
                   }
                 }
+    }
 
-        MouseArea {
-            anchors.fill: parent
-            onPressAndHold: {
-                //contextmenu code
-            }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: delegateItem.clicked(mouse)
+
+        onPressAndHold: {
+            print("XXX CONTEXT MENU!!!");
+            //FIXME: assuming existence of something in the parent contexts is bad, however having a copy of contextmenu in each delegate is bad
+            contextMenu.delegate = resourceDelegate
+            contextMenu.resourceType = "Bookmark"
+            //contextMenu.resourceType = modelData
+            contextMenu.source = model["DataEngineSource"]
+            contextMenu.resourceUrl = model["resourceUri"]
+            contextMenu.itemData = model;
+            contextMenu.state = "show"
+            //event.accepted = true
+            delegateItem.parent.parent.interactive = false
+            //setDarkenVisible(true)
+            webItemList.currentIndex = index
+        }
+
+        onPositionChanged: {
+            contextMenu.highlightItem(mouse.x, mouse.y)
+        }
+
+        onReleased: {
+            delegateItem.parent.parent.interactive = true
+            contextMenu.runItem(mouse.x, mouse.y)
         }
     }
 }
