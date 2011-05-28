@@ -24,6 +24,8 @@ Item {
     id: delegateItem
     property string resourceType
     property bool infoLabelVisible
+    property int implicitWidth: itemLoader.item.implicitWidth
+    property int implicitHeight: itemLoader.item.implicitHeight
 
     MobileComponents.FallbackComponent {
         id: fallback
@@ -31,11 +33,17 @@ Item {
 
     Loader {
         id: itemLoader
-        width: item.implicitWidth
-        height: item.implicitHeight
+        width: parent.width
+        height: parent.height
 
-        //FIXME: the uppercasing should not be necessary, it's ugly
-        source: fallback.resolvePath("resourcedelegates", [(resourceType.split("#")[1] + "/Item.qml"), "FileDataObject/Item.qml"])
+        //FIXME: assuming the view is parent.parent is bad, it should have the view attached property (it appears it doesnt, why?
+        source: {
+                  if (delegateItem.parent.parent.orientation == ListView.Horizontal || delegateItem.view.cellHeight != undefined) {
+                      return fallback.resolvePath("resourcedelegates", [(resourceType.split("#")[1] + "/ItemHorizontal.qml"), "FileDataObject/ItemHorizontal.qml"])
+                  } else {
+                      return fallback.resolvePath("resourcedelegates", [(resourceType.split("#")[1] + "/Item.qml"), "FileDataObject/Item.qml"])
+                  }
+                }
 
         MouseArea {
             anchors.fill: parent
