@@ -112,44 +112,11 @@ PlasmaCore.FrameSvgItem {
             height: webItemList.height
             resourceType: model.resourceType
             infoLabelVisible: false
-            function setDarkenVisible(visible)
-            {
-                if (visible) {
-                    itemGroup.z = 900
-                    darkenRect.opacity = 1
-                } else {
-                    webItemList.currentIndex = -1
-                    itemGroup.z = 0
-                    darkenRect.opacity = 0
-                }
+
+            onClicked: {
+                plasmoid.openUrl(String(model["url"]))
             }
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    plasmoid.openUrl(String(url))
-                }
-                onPressAndHold: {
-                    contextMenu.delegate = resourceDelegate
-                    contextMenu.resourceType = modelData
-                    contextMenu.source = model["DataEngineSource"]
-                    contextMenu.resourceUrl = model["resourceUri"]
-                    contextMenu.state = "show"
-                    //event.accepted = true
-                    webItemList.interactive = false
-                    setDarkenVisible(true)
-                    webItemList.currentIndex = index
-                }
-
-                onPositionChanged: {
-                    contextMenu.highlightItem(mouse.x, mouse.y)
-                }
-
-                onReleased: {
-                    webItemList.interactive = true
-                    contextMenu.activateItem(mouse.x, mouse.y)
-                }
-            }
         }
     }
 
