@@ -78,77 +78,7 @@ Rectangle {
         anchors.leftMargin: 8
         anchors.rightMargin: 8*/
 
-        delegate: Item {
-            id: resourceDelegate
-            width: delegateSize
-            height: delegateSize
-            property string resourceType: itemGroup.category
-            function setDarkenVisible(visible)
-            {
-                if (visible) {
-                    itemGroup.z = 900
-                    darkenRect.opacity = 1
-                } else {
-                    elementsView.currentIndex = -1
-                    itemGroup.z = 0
-                    darkenRect.opacity = 0
-                }
-            }
-
-            QIconItem {
-                id: elementIcon
-                anchors.centerIn: parent
-                width: 64
-                height: 64
-                icon: QIcon(model.icon)
-            }
-            Rectangle {
-                radius: 5
-                opacity: 0.75
-                color: white
-                anchors.top: elementIcon.bottom
-
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: nameText.paintedWidth
-                height: nameText.paintedHeight
-                anchors.margins: 8
-                Text {
-                    id: nameText
-                    text: model.name
-                    wrapMode: Text.NoWrap
-                    elide: Text.ElideRight
-                    width: 120
-                }
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    var args = model.arguments.split(' ')
-
-                    plasmoid.runCommand(command, Array(args))
-                }
-                onPressAndHold: {
-                    contextMenu.delegate = resourceDelegate
-                    contextMenu.resourceType = itemGroup.category
-                    /*contextMenu.source = model["DataEngineSource"]
-                    contextMenu.resourceUrl = model["resourceUri"]*/
-                    contextMenu.state = "show"
-                    //event.accepted = true
-                    elementsView.interactive = false
-                    setDarkenVisible(true)
-                    elementsView.currentIndex = index
-                }
-
-                onPositionChanged: {
-                    contextMenu.highlightItem(mouse.x, mouse.y)
-                }
-
-                onReleased: {
-                    elementsView.interactive = true
-                    contextMenu.activateItem(mouse.x, mouse.y)
-                }
-            }
-        }
+        delegate: IconDelegate {}
     }
     PlasmaCore.Svg {
         id: arrowsSvg
