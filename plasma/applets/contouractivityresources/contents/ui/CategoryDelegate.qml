@@ -78,7 +78,10 @@ Rectangle {
         anchors.leftMargin: 8
         anchors.rightMargin: 8*/
 
-        delegate: IconDelegate {}
+        delegate: IconDelegate {
+            text: model.name
+            icon: model.icon
+        }
     }
     PlasmaCore.Svg {
         id: arrowsSvg

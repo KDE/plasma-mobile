@@ -35,30 +35,12 @@ Item {
 
     function activateItem(x, y)
     {
-        var pos = entriesColumn.mapFromItem(delegate, x, y)
-        var item = entriesColumn.childAt(pos.x, pos.y)
-        if (item) {
-            print("You clicked " + item.text)
-            feedbackMessageText.text = item.text
-            feedbackMessageAnimation.running = true
-            item.activated()
-        }
+        menuObject.activateItem(x, y)
     }
 
     function highlightItem(x, y)
     {
-        var pos = entriesColumn.mapFromItem(delegate, x, y)
-        var item = entriesColumn.childAt(pos.x, pos.y)
-        if (item && item.text) {
-            var itemPos = menuFrame.mapFromItem(item, 0, 0)
-            highlightFrame.x = -highlightFrame.margins.right + itemPos.x
-            highlightFrame.y = -highlightFrame.margins.top + itemPos.y
-            highlightFrame.width = entriesColumn.width + highlightFrame.margins.right + highlightFrame.margins.left
-            highlightFrame.height = item.height + highlightFrame.margins.top + highlightFrame.margins.bottom
-            highlightFrame.opacity = 1
-        } else {
-            highlightFrame.opacity = 0
-        }
+        menuObject.highlightItem(x ,y)
     }
 
     MouseArea {
@@ -73,7 +55,17 @@ Item {
     property Item delegate
     onDelegateChanged: {
         positionMenu()
+        positionFrame()
         highlightFrame.opacity = 0
+    }
+
+    function positionFrame()
+    {
+        var framePos = delegate.mapToItem(parent, -30, -30)
+        frame.x = framePos.x
+        frame.y = framePos.y
+        frame.height = delegate.height + 60
+        frame.width = delegate.width + 60
     }
 
     function positionMenu()
@@ -81,10 +73,10 @@ Item {
         var menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, delegate.height)
 
         if (menuPos.y > contextMenu.height/2) {
-            menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, -menuFrame.height)
-            tipSvgItem.state = "top"
+            menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, -menuObject.height)
+            menuObject.positionState = "top"
         } else {
-            tipSvgItem.state = "bottom"
+            menuObject.positionState = "bottom"
         }
 
         menuObject.x = menuPos.x
@@ -105,104 +97,18 @@ Item {
         imagePath: "dialogs/background"
     }
 
+    PlasmaCore.FrameSvgItem {
+        id: frame
+        imagePath: "dialogs/background"
+        IconDelegate {
+            anchors.centerIn: parent
+            text: delegate.text
+            icon: delegate.icon
+        }
+    }
 
-    Item {
+    Menu {
         id: menuObject
-        width: menuFrame.width
-        height: 1
-        PlasmaCore.SvgItem {
-            id: tipSvgItem
-            svg: tipSvg
-            elementId: "baloon-tip-top"
-            width: tipSvg.elementSize(elementId).width
-            height: tipSvg.elementSize(elementId).height
-            state: "top"
-            z: 900
-            anchors {
-                horizontalCenter: menuFrame.horizontalCenter
-                bottomMargin: -tipSvg.elementSize("hint-top-shadow").height
-                topMargin: -tipSvg.elementSize("hint-bottom-shadow").height
-            }
-
-            states: [
-                State {
-                    name: "top"
-                    PropertyChanges {
-                        target: tipSvgItem
-                        elementId: "baloon-tip-bottom"
-                    }
-                    AnchorChanges {
-                        target: tipSvgItem
-                        anchors.top: menuFrame.bottom
-                    }
-                },
-                State {
-                    name: "bottom"
-                    PropertyChanges {
-                        target: tipSvgItem
-                        elementId: "baloon-tip-top"
-                    }
-                    AnchorChanges {
-                        target: tipSvgItem
-                        anchors.bottom: menuFrame.top
-                    }
-                }
-            ]
-        }
-
-        PlasmaCore.FrameSvgItem {
-            id: menuFrame
-            imagePath: "dialogs/background"
-            width: entriesColumn.width + margins.left + margins.right + highlightFrame.margins.left + highlightFrame.margins.right
-            height: entriesColumn.height + margins.top + margins.bottom + highlightFrame.margins.top + highlightFrame.margins.bottom
-            onHeightChanged: positionMenu()
-
-            PlasmaCore.FrameSvgItem {
-                id: highlightFrame
-                imagePath: "widgets/viewitem"
-                prefix: "hover"
-                opacity: 0
-                Behavior on y {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-
-            Column {
-                id: entriesColumn
-                x: menuFrame.margins.left + highlightFrame.margins.left
-                y: menuFrame.margins.top + highlightFrame.margins.top
-                spacing: 5
-                Repeater {
-                    model: actionsModel.model(resourceType)
-                    Column {
-                        spacing: 5
-                        property alias text: menuItem.text
-                        MenuItem {
-                            id: menuItem
-                            text: model.text
-                        }
-                        PlasmaCore.SvgItem {
-                            svg: lineSvg
-                            elementId: "horizontal-line"
-                            width: entriesColumn.width
-                            height: lineSvg.elementSize("horizontal-line").height
-                        }
-                    }
-                }
-                AddToActivityItem {
-                    
-                }
-            }
-        }
     }
 
     states: [

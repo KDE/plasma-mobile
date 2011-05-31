@@ -24,7 +24,9 @@ Item {
     id: resourceDelegate
     width: delegateSize
     height: delegateSize
+    property alias text: nameText.text
     property string resourceType: itemGroup.category
+    property string icon
     function setDarkenVisible(visible)
     {
         if (visible) {
@@ -42,7 +44,7 @@ Item {
         anchors.centerIn: parent
         width: 64
         height: 64
-        icon: QIcon(model.icon)
+        icon: QIcon(resourceDelegate.icon)
     }
     Rectangle {
         radius: 5
