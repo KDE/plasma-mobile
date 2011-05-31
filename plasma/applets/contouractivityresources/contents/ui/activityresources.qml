@@ -32,6 +32,67 @@ Item {
        id: resourceModels
     }
 
+    Row {
+        id: slcRow
+        height: 32
+        y: 48
+        spacing: 5
+        anchors.right: parent.right
+        property Item delegate
+        opacity: delegate==undefined?0.5:1
+        QIconItem {
+            width: height
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
+            icon: QIcon("system-users")
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    contextMenu.delegate = slcRow.delegate
+                    contextMenu.resourceType = slcRow.delegate.resourceType
+                    contextMenu.positionMenu(parent)
+                    contextMenu.state = "shown"
+                }
+            }
+        }
+        QIconItem {
+            width: height
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
+            icon: QIcon("emblem-favorite")
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    contextMenu.delegate = slcRow.delegate
+                    contextMenu.resourceType = slcRow.delegate.resourceType
+                    contextMenu.positionMenu(parent)
+                    contextMenu.state = "shown"
+                }
+            }
+        }
+        QIconItem {
+            width: height
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
+            icon: QIcon("network-connect")
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    contextMenu.delegate = slcRow.delegate
+                    contextMenu.resourceType = slcRow.delegate.resourceType
+                    contextMenu.positionMenu(parent)
+                    contextMenu.state = "shown"
+                }
+            }
+        }
+    }
+
     Rectangle {
         x: 32
         y: 48
@@ -47,6 +108,7 @@ Item {
     }
 
     Flow {
+        id: categoriesFlow
         anchors.centerIn: parent
         width: parent.width - 128
         height: childrenRect.height
