@@ -38,6 +38,7 @@ Item {
         y: 48
         spacing: 5
         anchors.right: parent.right
+        anchors.rightMargin: 32
         property Item delegate
         opacity: delegate==undefined?0.5:1
         QIconItem {

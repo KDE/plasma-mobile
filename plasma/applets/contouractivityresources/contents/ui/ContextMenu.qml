@@ -70,8 +70,12 @@ Item {
             menuObject.positionState = "bottom"
         }
 
+
         if (menuPos.x+menuObject.width > contextMenu.width) {
+            menuObject.tipX = menuObject.width/2 + ((menuPos.x+menuObject.width) - contextMenu.width) - 16
             menuPos.x = contextMenu.width - menuObject.width
+        } else {
+            menuObject.tipX = menuObject.width/2 - 12
         }
 
         menuObject.x = menuPos.x
