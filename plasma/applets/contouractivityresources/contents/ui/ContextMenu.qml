@@ -72,11 +72,11 @@ Item {
 
     property Item delegate
     onDelegateChanged: {
-        positionMenu()
+        positionMenu(delegate)
         highlightFrame.opacity = 0
     }
 
-    function positionMenu()
+    function positionMenu(delegate)
     {
         var menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, delegate.height)
 
@@ -85,6 +85,10 @@ Item {
             tipSvgItem.state = "top"
         } else {
             tipSvgItem.state = "bottom"
+        }
+
+        if (menuPos.x+menuObject.width > contextMenu.width) {
+            menuPos.x = contextMenu.width - menuObject.width
         }
 
         menuObject.x = menuPos.x
