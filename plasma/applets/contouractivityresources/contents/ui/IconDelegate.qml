@@ -47,7 +47,7 @@ Item {
     Rectangle {
         radius: 5
         opacity: 0.75
-        color: white
+        color: "white"
         anchors.top: elementIcon.bottom
 
         anchors.horizontalCenter: parent.horizontalCenter
@@ -62,6 +62,10 @@ Item {
             width: 120
         }
     }
+    Slider {
+        
+    }
+    /*
     MouseArea {
         anchors.fill: parent
         onClicked: {
@@ -69,11 +73,11 @@ Item {
 
             plasmoid.runCommand(command, Array(args))
         }
+
         onPressAndHold: {
             contextMenu.delegate = resourceDelegate
             contextMenu.resourceType = itemGroup.category
-            /*contextMenu.source = model["DataEngineSource"]
-            contextMenu.resourceUrl = model["resourceUri"]*/
+ 
             contextMenu.state = "show"
             //event.accepted = true
             elementsView.interactive = false
@@ -90,4 +94,5 @@ Item {
             contextMenu.activateItem(mouse.x, mouse.y)
         }
     }
+    */
 }
