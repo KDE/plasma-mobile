@@ -47,6 +47,7 @@ Item {
     }
 
     Flow {
+        id: categoriesFlow
         anchors.centerIn: parent
         width: parent.width - 128
         height: childrenRect.height
