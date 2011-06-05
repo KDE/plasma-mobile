@@ -25,7 +25,8 @@ PlasmaCore.SvgItem {
     width: iconSize
     height: iconSize
     svg: iconsSvg
-    visible: action&&action.enabled
+    visible: action==undefined||action.enabled
+    signal clicked
 
     property QtObject action
 
@@ -36,7 +37,11 @@ PlasmaCore.SvgItem {
         anchors.rightMargin: -10
         anchors.bottomMargin: -10
         onClicked: {
-            action.trigger()
+            if (action) {
+                action.trigger()
+            } else {
+                button.clicked()
+            }
         }
     }
 }

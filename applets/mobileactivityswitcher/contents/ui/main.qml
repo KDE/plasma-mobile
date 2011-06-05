@@ -23,6 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Item {
     width: 240
     height: 300
+    property int iconSize: 48
 
     Component.onCompleted: {
         plasmoid.containmentType = "CustomContainment"
@@ -60,6 +61,31 @@ Item {
         property int pendingIndex: -1
         onTriggered:  {
             mainView.currentIndex = pendingIndex
+        }
+    }
+
+    PlasmaCore.Svg {
+        id: addSvg
+        imagePath: "widgets/action-overlays"
+    }
+
+    ActionButton {
+        svg: addSvg
+        elementId: "add-normal"
+        anchors.top: parent.top
+        function creationFinished(activityJob)
+        {
+            var activityId = activityJob.result
+            var service = activitySource.serviceForSource(activityId)
+            var operation = service.operationDescription("setCurrent")
+            service.startOperationCall(operation)
+        }
+        onClicked: {
+            var service = activitySource.serviceForSource("Status")
+            var operation = service.operationDescription("add")
+            operation["Name"] = "New activity"
+            var job = service.startOperationCall(operation)
+            job.finished.connect(creationFinished)
         }
     }
 
