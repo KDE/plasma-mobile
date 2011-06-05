@@ -101,15 +101,9 @@ Item {
     }
 
     PlasmaCore.Svg {
-        id: iconsSvg
-        imagePath: "widgets/action-overlays"
-    }
-
-    PlasmaCore.Svg {
         id: configIconsSvg
         imagePath: "widgets/configuration-icons"
     }
-    
 
     Item {
         id: appletsFlickableParent
@@ -180,8 +174,8 @@ Item {
                     Column {
                         anchors.centerIn: parent
                         ActionButton {
-                            svg: iconsSvg
-                            elementId: "add-normal"
+                            svg: configIconsSvg
+                            elementId: "add"
                             action: plasmoid.action("add widgets")
                         }
                         ActionButton {

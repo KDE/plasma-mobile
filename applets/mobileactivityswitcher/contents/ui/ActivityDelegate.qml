@@ -35,11 +35,6 @@ Item {
         }
     }
 
-    PlasmaCore.Svg {
-        id: iconsSvg
-        imagePath: "widgets/configuration-icons"
-    }
-
     width: mainView.delegateWidth
     height: mainView.delegateHeight
 

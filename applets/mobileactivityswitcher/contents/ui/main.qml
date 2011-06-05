@@ -65,13 +65,12 @@ Item {
     }
 
     PlasmaCore.Svg {
-        id: addSvg
-        imagePath: "widgets/action-overlays"
+        id: iconsSvg
+        imagePath: "widgets/configuration-icons"
     }
 
     ActionButton {
-        svg: addSvg
-        elementId: "add-normal"
+        elementId: "add"
         anchors.top: parent.top
         function creationFinished(activityJob)
         {
