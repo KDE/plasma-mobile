@@ -34,7 +34,6 @@ Item {
             highlightTimer.running = true
         }
     }
-    property int iconSize: 48
 
     PlasmaCore.Svg {
         id: iconsSvg

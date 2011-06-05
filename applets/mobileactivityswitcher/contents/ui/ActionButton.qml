@@ -20,28 +20,68 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
-PlasmaCore.SvgItem {
+Item {
     id: button
-    width: iconSize
-    height: iconSize
-    svg: iconsSvg
+    property QtObject svg: iconsSvg
+    property alias elementId: icon.elementId
     visible: action==undefined||action.enabled
+    property QtObject action
+    property bool backgroundVisible: true
+    width: backgroundVisible?iconSize+8:iconSize
+    height: width
     signal clicked
 
-    property QtObject action
+    PlasmaCore.Svg {
+        id: buttonSvg
+        imagePath: "widgets/actionbutton"
+    }
 
-    MouseArea {
+    PlasmaCore.SvgItem {
+        id: shadowItem
+        svg: buttonSvg
+        elementId: "shadow"
         anchors.fill: parent
-        anchors.leftMargin: -10
-        anchors.topMargin: -10
-        anchors.rightMargin: -10
-        anchors.bottomMargin: -10
-        onClicked: {
-            if (action) {
-                action.trigger()
-            } else {
-                button.clicked()
+        visible: backgroundVisible
+    }
+
+    PlasmaCore.SvgItem {
+        id: buttonItem
+        svg: buttonSvg
+        elementId: "normal"
+        anchors.fill: parent
+        visible: backgroundVisible
+    }
+
+    PlasmaCore.SvgItem {
+        id: icon
+        width: iconSize
+        height: iconSize
+        svg: button.svg
+        anchors.fill: buttonItem
+        anchors.margins: backgroundVisible?8:0
+
+        MouseArea {
+            anchors.fill: parent
+            anchors.leftMargin: -10
+            anchors.topMargin: -10
+            anchors.rightMargin: -10
+            anchors.bottomMargin: -10
+            onPressed: {
+                buttonItem.elementId = "pressed"
+                shadowItem.opacity = 0
+            }
+            onReleased: {
+                buttonItem.elementId = "normal"
+                shadowItem.opacity = 1
+            }
+            onClicked: {
+                if (action) {
+                    action.trigger()
+                } else {
+                    button.clicked()
+                }
             }
         }
     }
+
 }

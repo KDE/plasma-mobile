@@ -23,7 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Item {
     width: 240
     height: 300
-    property int iconSize: 48
+    property int iconSize: 32
 
     Component.onCompleted: {
         plasmoid.containmentType = "CustomContainment"
