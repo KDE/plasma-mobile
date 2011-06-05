@@ -26,8 +26,10 @@ Item {
     opacity: PathView.itemOpacity
     z: PathView.z
     property string current: model["Current"]
+
     onCurrentChanged: {
-        if (current == "true") {
+        //avoid to restart the timer if the current index is already correct
+        if (current == "true" && highlightTimer.pendingIndex != index) {
             highlightTimer.pendingIndex = index
             highlightTimer.running = true
         }
