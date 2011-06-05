@@ -62,11 +62,23 @@ Item {
                 radius: 10
                 width: childrenRect.width+10
                 height: childrenRect.height
+                //only show for the non current
+                opacity: delegate.scale<0.9?1:0
                 Text{
                     anchors.centerIn: parent
                     color: "black"
                     text: model.Name
-                    font.pixelSize: 20
+                    font.pixelSize: 30
+                }
+                anchors {
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
             ActionButton {
