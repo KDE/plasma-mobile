@@ -22,13 +22,35 @@
 #include <QEvent>
 #include <QGraphicsSceneMouseEvent>
 
+#include <KDebug>
+
 MouseEventListener::MouseEventListener(QDeclarativeItem *parent)
+    : QDeclarativeItem(parent)
 {
     setFiltersChildEvents(true);
+    setAcceptedMouseButtons(Qt::LeftButton|Qt::RightButton|Qt::MidButton|Qt::XButton1|Qt::XButton2);
 }
 
 MouseEventListener::~MouseEventListener()
 {
+}
+
+void MouseEventListener::mousePressEvent(QGraphicsSceneMouseEvent *me)
+{
+    QDeclarativeMouseEvent dme(me->pos().x(), me->pos().y(), me->screenPos().x(), me->screenPos().y(), me->button(), me->buttons(), me->modifiers());
+    emit pressed(&dme);
+}
+
+void MouseEventListener::mouseMoveEvent(QGraphicsSceneMouseEvent *me)
+{
+    QDeclarativeMouseEvent dme(me->pos().x(), me->pos().y(), me->screenPos().x(), me->screenPos().y(), me->button(), me->buttons(), me->modifiers());
+    emit positionChanged(&dme);
+}
+
+void MouseEventListener::mouseReleaseEvent(QGraphicsSceneMouseEvent *me)
+{
+    QDeclarativeMouseEvent dme(me->pos().x(), me->pos().y(), me->screenPos().x(), me->screenPos().y(), me->button(), me->buttons(), me->modifiers());
+    emit released(&dme);
 }
 
 bool MouseEventListener::sceneEventFilter(QGraphicsItem *item, QEvent *event)

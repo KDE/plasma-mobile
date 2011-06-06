@@ -78,6 +78,9 @@ public:
     ~MouseEventListener();
 
 protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     bool sceneEventFilter(QGraphicsItem *i, QEvent *e);
 
 Q_SIGNALS:
