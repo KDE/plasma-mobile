@@ -33,9 +33,9 @@ Item {
     }
 
     onHeightChanged: {
+        var ratio = plasmoidContainer.applet.size.width/plasmoidContainer.applet.size.height
         plasmoidContainer.applet.height = plasmoidContainer.height
-        var ratio = plasmoidContainer.applet.preferredSize.width/plasmoidContainer.applet.preferredSize.height
         applet.width = ratio * height
-        width = plasmoidContainer.applet.width
+        plasmoidContainer.width = plasmoidContainer.applet.width
     }
 }
