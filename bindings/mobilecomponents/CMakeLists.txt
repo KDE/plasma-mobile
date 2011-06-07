@@ -25,7 +25,6 @@ target_link_libraries(mobilecomponentsplugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LI
 
 install(TARGETS mobilecomponentsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
-install(FILES ActionsModel.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES ContextMenu.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES MenuItem.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES Rating.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
