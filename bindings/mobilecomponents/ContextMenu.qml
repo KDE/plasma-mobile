@@ -28,26 +28,10 @@ Rectangle {
     anchors.fill: parent
     color: Qt.rgba(0, 0, 0, 0.1)
 
-    property variant itemData
-    property string resourceType
-    property string source
-    property string resourceUrl
-
     property Item delegate: parent;
 
     state: "hidden"
-    onStateChanged: {
-        if (state == "hidden") {
-            //delegate.setDarkenVisible(false)
-        }
-    }
 
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        connectedSources: ["CurrentActivityResources"]
-        interval: 0
-    }
 
     PlasmaCore.Theme {
         id: theme
@@ -107,37 +91,7 @@ Rectangle {
         menuObject.y = menuPos.y
     }
 
-    PlasmaCore.DataSource {
-        id: slcSource
-        engine: "org.kde.sharelikeconnect"
-        connectedSources: ["Current Content", "Share", "Like", "Connect"]
-    }
 
-    PlasmaCore.DataModel {
-        id: shareModel
-        dataSource: slcSource
-        sourceFilter: "Share"
-        keyRoleFilter: ".*"
-    }
-
-    PlasmaCore.DataModel {
-        id: likeModel
-        dataSource: slcSource
-        sourceFilter: "Like"
-        keyRoleFilter: ".*"
-    }
-
-    PlasmaCore.DataModel {
-        id: connectModel
-        dataSource: slcSource
-        sourceFilter: "Connect"
-        keyRoleFilter: ".*"
-    }
-
-    PlasmaCore.Svg {
-        id: lineSvg
-        imagePath: "widgets/line"
-    }
 
     PlasmaCore.Svg {
         id: tipSvg
