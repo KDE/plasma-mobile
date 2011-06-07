@@ -21,6 +21,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.slccomponents 0.1 as SlcComponents
 
 Rectangle {
     id: contextMenu
@@ -106,8 +107,31 @@ Rectangle {
         menuObject.y = menuPos.y
     }
 
-    MobileComponents.ActionsModel {
-        id: actionsModel
+    PlasmaCore.DataSource {
+        id: slcSource
+        engine: "org.kde.sharelikeconnect"
+        connectedSources: ["Current Content", "Share", "Like", "Connect"]
+    }
+
+    PlasmaCore.DataModel {
+        id: shareModel
+        dataSource: slcSource
+        sourceFilter: "Share"
+        keyRoleFilter: ".*"
+    }
+
+    PlasmaCore.DataModel {
+        id: likeModel
+        dataSource: slcSource
+        sourceFilter: "Like"
+        keyRoleFilter: ".*"
+    }
+
+    PlasmaCore.DataModel {
+        id: connectModel
+        dataSource: slcSource
+        sourceFilter: "Connect"
+        keyRoleFilter: ".*"
     }
 
     PlasmaCore.Svg {
@@ -196,15 +220,41 @@ Rectangle {
                 x: menuFrame.margins.left + highlightFrame.margins.left
                 y: menuFrame.margins.top + highlightFrame.margins.top
                 spacing: 5
-                width: 160
+                width: 200
 
-                Repeater {
-                    model: actionsModel.model(resourceType)
-
-                    MobileComponents.MenuItem {
-                        id: menuItem
-                        resourceUrl: contextMenu.resourceUrl
-                    }
+                Text {
+                    text: i18n("Share")
+                    color: theme.textColor
+                    font.bold: true
+                    visible: shareMenu.height > 0
+                }
+                SlcComponents.MenuArea {
+                    id: shareMenu
+                    width: 200
+                    menuModel: shareModel
+                    service: "Share"
+                }
+                Text {
+                    text: i18n("Like")
+                    color: theme.textColor
+                    font.bold: true
+                }
+                SlcComponents.MenuArea {
+                    id: likeMenu
+                    width: 200
+                    menuModel: likeModel
+                    service: "Like"
+                }
+                Text {
+                    text: i18n("Connect")
+                    color: theme.textColor
+                    font.bold: true
+                }
+                SlcComponents.MenuArea {
+                    id: connectMenu
+                    width: 200
+                    menuModel: connectModel
+                    service: "Connect"
                 }
             }
         }
