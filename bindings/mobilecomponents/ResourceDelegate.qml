@@ -48,33 +48,29 @@ Item {
                 }
     }
 
-    MouseArea {
+    //FIXME: this mess is due to mousearea not having screen coordinates
+    MobileComponents.MouseEventListener {
         anchors.fill: parent
-        onClicked: delegateItem.clicked(mouse)
+        MouseArea {
+            anchors.fill: parent
+            onClicked: delegateItem.clicked(mouse)
 
-        onPressAndHold: {
-            print("XXX CONTEXT MENU!!!");
-            //FIXME: assuming existence of something in the parent contexts is bad, however having a copy of contextmenu in each delegate is bad
-            contextMenu.delegate = resourceDelegate
-            contextMenu.resourceType = "Bookmark"
-            //contextMenu.resourceType = modelData
-            contextMenu.source = model["DataEngineSource"]
-            contextMenu.resourceUrl = model["resourceUri"]
-            contextMenu.itemData = model;
-            contextMenu.state = "show"
-            //event.accepted = true
-            delegateItem.parent.parent.interactive = false
-            //setDarkenVisible(true)
-            webItemList.currentIndex = index
+            onPressAndHold: {
+                contextMenu.parentItem = delegateItem
+                contextMenu.adjustPosition();
+                contextMenu.visible = true
+
+                webItemList.currentIndex = index
+            }
         }
 
         onPositionChanged: {
-            contextMenu.highlightItem(mouse.x, mouse.y)
+            contextMenu.mainItem.highlightItem(mouse.screenX, mouse.screenY)
         }
 
         onReleased: {
-            delegateItem.parent.parent.interactive = true
-            contextMenu.runItem(mouse.x, mouse.y)
+            //delegateItem.parent.parent.interactive = true
+            contextMenu.mainItem.runItem(mouse.screenX, mouse.screenY)
         }
     }
 }
