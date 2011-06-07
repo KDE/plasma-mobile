@@ -222,39 +222,9 @@ Rectangle {
                 spacing: 5
                 width: 200
 
-                Text {
-                    text: i18n("Share")
-                    color: theme.textColor
-                    font.bold: true
-                    visible: shareMenu.height > 0
-                }
                 SlcComponents.MenuArea {
                     id: shareMenu
                     width: 200
-                    menuModel: shareModel
-                    service: "Share"
-                }
-                Text {
-                    text: i18n("Like")
-                    color: theme.textColor
-                    font.bold: true
-                }
-                SlcComponents.MenuArea {
-                    id: likeMenu
-                    width: 200
-                    menuModel: likeModel
-                    service: "Like"
-                }
-                Text {
-                    text: i18n("Connect")
-                    color: theme.textColor
-                    font.bold: true
-                }
-                SlcComponents.MenuArea {
-                    id: connectMenu
-                    width: 200
-                    menuModel: connectModel
-                    service: "Connect"
                 }
             }
         }
