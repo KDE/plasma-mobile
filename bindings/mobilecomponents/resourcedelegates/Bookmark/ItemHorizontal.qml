@@ -27,8 +27,7 @@ import org.kde.qtextracomponents 0.1 as QtExtraComponents
 
 Item {
     id: resourceItem
-    height: 204
-    width: 240
+    anchors.fill: parent
 
     PlasmaCore.DataSource {
         id: pmSource
@@ -52,13 +51,11 @@ Item {
         imagePath: "widgets/media-delegate"
         prefix: "picture"
         id: frameRect
+        width: height*1.6
         anchors {
-            top: parent.top;
-            left: parent.left;
-            margins: 12;
+            top: parent.top
+            bottom: parent.bottom
         }
-        width: 182
-        height: 122
     }
 
     QtExtraComponents.QImageItem {
@@ -92,12 +89,12 @@ Item {
 
     PlasmaCore.FrameSvgItem {
         id: textRect
-        imagePath: "dialogs/background"
-        width: 160
+        imagePath: "widgets/background"
+
+        width: childrenRect.width + margins.left + margins.right
         height: childrenRect.height + margins.top + margins.bottom
-        opacity: .6
         anchors {
-            bottom: frameRect.bottom
+            bottom: parent.bottom
             right: parent.right
         }
 
@@ -136,6 +133,7 @@ Item {
                 opacity: 1
                 width: 22*5
                 height: 22
+                visible: resourceItem.height>64
             }
         }
     }

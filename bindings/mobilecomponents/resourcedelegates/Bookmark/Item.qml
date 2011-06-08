@@ -26,8 +26,7 @@ import org.kde.qtextracomponents 0.1 as QtExtraComponents
 
 Item {
     id: resourceItem
-    height: 204
-    width: 240
+    anchors.fill: parent
 
     PlasmaCore.DataSource {
         id: pmSource

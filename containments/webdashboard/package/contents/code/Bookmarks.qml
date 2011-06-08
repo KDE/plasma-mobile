@@ -86,7 +86,7 @@ Item {
 
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
-            width: 240
+            width: 96*1.6+24
             height: 96
             resourceType: model.resourceType
 
