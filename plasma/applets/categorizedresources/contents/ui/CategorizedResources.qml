@@ -70,23 +70,18 @@ Item {
         anchors.rightMargin: parent.width - availScreenRect.width - availScreenRect.x
         anchors.bottomMargin: parent.height - availScreenRect.height - availScreenRect.y
 
-        Rectangle {
-            x: 32
-            y: 48
-            height: childrenRect.height
-            width: childrenRect.width + 20
-            color: Qt.rgba(1,1,1,0.8)
-            radius: 10
+
+        Text {
             anchors.top: searchRow.top
             anchors.left: parent.left
             anchors.leftMargin: 22
-
-            Text {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: plasmoid.activityName
-                font.pixelSize: 25
-            }
+            text: plasmoid.activityName
+            font.bold: true
+            style: Text.Outline
+            styleColor: Qt.rgba(1, 1, 1, 0.6)
+            font.pixelSize: 25
         }
+
 
         Row {
             id: searchRow
