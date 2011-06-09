@@ -176,7 +176,7 @@ Rectangle {
                 spacing: 5
                 width: 200
 
-                SlcComponents.MenuArea {
+                Rectangle {
                     id: shareMenu
                     width: 200
                 }
