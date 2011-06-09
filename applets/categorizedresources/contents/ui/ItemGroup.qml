@@ -22,6 +22,7 @@ import QtQuick 1.0
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
 PlasmaCore.FrameSvgItem {
     id: itemGroup
@@ -31,27 +32,41 @@ PlasmaCore.FrameSvgItem {
     z: 0
     visible: webItemList.count>0
 
-    Rectangle {
-        id: darkenRect
-        color: Qt.rgba(0,0,0,0.4)
-        width: main.width
-        height: main.height
-        opacity: 0
-
-        x: -itemGroup.x - itemGroup.parent.x
-        y: -itemGroup.y - itemGroup.parent.y
-
-        /*onOpacityChanged: {
-            darkenRect.x = -darkenRect.mapToItem(main, 0, 0).x
-            darkenRect.y = -darkenRect.mapToItem(main, 0, 0).y
-        }*/
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
+    MouseArea {
+        anchors.fill: parent
+        drag.target: parent
+        onPressed: {
+            mouse.accepted = true
+            var x = Math.round(parent.x/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
+            var y = Math.round(parent.y/LayoutManager.cellSize.height)*LayoutManager.cellSize.height
+            LayoutManager.setSpaceAvailable(x, y, parent.width, parent.height, true)
+            
+            debugFlow.refresh();
         }
+        onReleased: {
+            LayoutManager.positionItem(parent)
+            debugFlow.refresh()
+        }
+    }
+    Behavior on x {
+        enabled: parent.enabled
+        NumberAnimation {
+            duration: 250
+            easing.type: Easing.InOutQuad
+        }
+    }
+    Behavior on y {
+        enabled: parent.enabled
+        NumberAnimation {
+            duration: 250
+            easing.type: Easing.InOutQuad
+        }
+    }
+    Component.onCompleted: {
+        layoutTimer.running = true
+        layoutTimer.restart()
+        enabled = false
+        visible = false
     }
 
     PlasmaCore.FrameSvgItem {
@@ -91,7 +106,7 @@ PlasmaCore.FrameSvgItem {
         }
         snapMode: ListView.SnapToItem
         clip: true
-        spacing: 8;
+        spacing: 32;
         orientation: Qt.Horizontal
 
         model: MobileComponents.CategorizedProxyModel {
