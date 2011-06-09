@@ -85,29 +85,20 @@ Item {
             }
         }
 
-        Rectangle {
-            id: labelBackground
-            radius: 5
-            opacity: 0.75
-            color: white
-            anchors.top: previewImage.bottom
 
+        Text {
+            id: previewLabel
+            text: label
+
+            font.pixelSize: 14
+            //wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
+            anchors.top: previewImage.bottom
             anchors.horizontalCenter: itemFrame.horizontalCenter
             width: 130
-            height: previewLabel.paintedHeight
-            anchors.margins: 8
-
-            Text {
-                id: previewLabel
-                text: label
-
-                font.pixelSize: 14
-                //wrapMode: Text.Wrap
-                horizontalAlignment: Text.AlignHCenter
-                elide: Text.ElideRight
-                anchors.fill: parent
-                anchors.margins: 3
-            }
+            style: Text.Outline
+            styleColor: Qt.rgba(1, 1, 1, 0.6)
         }
 
         Text {
