@@ -24,6 +24,8 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
+import "plasmapackage:/code/LayoutManager.js" as LayoutManager
+
 Item {
     id: main
     width: 540
@@ -127,28 +129,69 @@ Item {
             categoryRole: "className"
         }
 
+        //FIXME: debug purposes only, remove asap
         Flow {
+            id: debugFlow
+            anchors.fill: resultsFlow
+            visible: false
+            Repeater {
+                model: 60
+                Rectangle {
+                    width: LayoutManager.cellSize.width
+                    height: LayoutManager.cellSize.height
+                }
+            }
+            function refresh()
+            {
+                for (var i=0; i<debugFlow.children.length; ++i) {
+                    child = debugFlow.children[i]
+                    child.opacity = LayoutManager.isSpaceAvailable(child.x,child.y, LayoutManager.cellSize.width, LayoutManager.cellSize.height)?0.8:0.3
+                }
+            }
+        }
+
+        Item {
             id: resultsFlow
-            spacing: 16
-            height: Math.min(300, childrenRect.height)
-            //flow: Flow.TopToBottom
+            //height: Math.min(300, childrenRect.height)
+            width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
             visible: count>0
 
             anchors {
-                //top: searchRow.bottom
-                left:parent.left
-                //bottom: parent.bottom
-                verticalCenter: parent.verticalCenter
-                right: parent.right
-                leftMargin: 32
-                rightMargin: 32
+                top: searchRow.bottom
+                bottom: parent.bottom
+                horizontalCenter: parent.horizontalCenter
             }
+
 
             Repeater {
                 model: categoryListModel.categories
 
                 ItemGroup {
+                    id: group
+                    
                 }
+            }
+            Timer {
+                id: layoutTimer
+                repeat: false
+                running: false
+                interval: 2000
+                onTriggered: {
+                    for (var i=0; i<resultsFlow.children.length; ++i) {
+                        child = resultsFlow.children[i]
+                        if (1) {
+                            child.x = 0
+                            child.y = 0
+                            child.visible = true
+                            LayoutManager.positionItem(child)
+                            child.enabled = true
+                            debugFlow.refresh();
+                        }
+                    }
+                }
+            }
+            Component.onCompleted: {
+                LayoutManager.resultsFlow = resultsFlow
             }
         }
     }
@@ -160,6 +203,7 @@ Item {
        interval: 1000
        onTriggered: {
             plasmoid.busy = true
+            LayoutManager.positions = new Array()
             if (searchBox.text) {
                 metadataSource.connectedSources = [searchBox.text]
             } else {
