@@ -65,6 +65,7 @@ PlasmaCore.FrameSvgItem {
     Behavior on width {
         enabled: !resizeHandle.resizing
         NumberAnimation {
+            id: widthAnimation
             duration: 250
             easing.type: Easing.InOutQuad
         }
@@ -103,9 +104,10 @@ PlasmaCore.FrameSvgItem {
         }
         onReleased: {
             resizing = false
-            var newWidth =Math.round(itemGroup.width/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
-            itemGroup.width = newWidth
-            LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, newWidth, itemGroup.height, false)
+            /*var newWidth =Math.round(itemGroup.width/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
+            itemGroup.width = newWidth*/
+            LayoutManager.positionItem(parent)
+            LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, widthAnimation.to, itemGroup.height, false)
             debugFlow.refresh();
         }
     }
