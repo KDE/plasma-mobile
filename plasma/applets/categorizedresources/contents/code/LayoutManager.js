@@ -27,25 +27,69 @@ cellSize.height = 158
 
 var resultsFlow
 
-
-function isSpaceAvailable(x, y, width, height)
+function resetPositions()
 {
-    if (positions[x] == undefined || !positions[x][y]) {
-        return true
-    } else {
-        return false
+    positions = new Array()
+}
+
+//returns the available size at a given position
+function availableSpace(x, y, width, height)
+{
+    var row = Math.round(x/cellSize.width)
+    var column = Math.round(y/cellSize.height)
+    var rowsWidth = Math.round(width/cellSize.width)
+    var columnsHeight = Math.round(height/cellSize.height)
+
+    var availableSize = new Object
+    availableSize.width = 0
+    availableSize.height = 0
+
+    if (positions[row] == undefined) {
+        availableSize.width = width
+        availableSize.height = height
+        return availableSize;
+    } else if (!positions[row][column]) {
+
+        for (var w=0; w<rowsWidth; w++) {
+            //occupied?
+            if (!positions[row+w] || !positions[row+w][column]) {
+                availableSize.width = w+1
+            } else {
+                break;
+            }
+        }
+
+        for (var h=0; h<columnsHeight; h++) {
+            //occupied?
+            if (positions[row][column+h]) {
+                //print("occupied"+row+" "+column+" "+h+" "+positions[row][column+h]+" "+availableSize.height)
+                break;
+            } else {
+                availableSize.height = h+1
+            }
+        }
     }
+
+    availableSize.width *= cellSize.width
+    availableSize.height *= cellSize.height
+
+    return availableSize
 }
 
 function setSpaceAvailable(x, y, width, height, available)
 {
-    for (var i = x; i<x+width; i += cellSize.width) {
+    var row = Math.round(x/cellSize.width)
+    var column = Math.round(y/cellSize.height)
+    var rowsWidth = Math.round(width/cellSize.width)
+    var columnsHeight = Math.round(height/cellSize.height)
+
+    for (var i = row; i<row+rowsWidth; ++i) {
         if (!positions[i]) {
             positions[i] = new Array()
         }
-        for (var j = y; j<y+height; j += cellSize.height) {
+        for (var j = column; j<column+columnsHeight; ++j) {
             positions[i][j] = !available
-            print(i+" "+j+" "+!available)
+            print("set "+i+" "+j+" "+!available)
         }
     }
 }
@@ -70,8 +114,10 @@ function positionItem(item)
     var y = Math.max(0, Math.round(item.y/cellSize.height)*cellSize.height)
 
     while (1) {
-        print("checking"+x+" "+y+" "+isSpaceAvailable(x,y, item.width, item.height))
-        if (isSpaceAvailable(x,y, item.width, item.height)) {
+        var avail = availableSpace(x,y, item.width, item.height)
+        print("checking "+x/cellSize.width+" "+y/cellSize.height+" "+avail.width/cellSize.width+" "+avail.height/cellSize.height)
+
+        if (avail.width > 0 && avail.height > 0) {
             break
         }
         x += cellSize.width
@@ -83,12 +129,13 @@ function positionItem(item)
             }
         }
     }
-    setSpaceAvailable(x, y, item.width, item.height, false)
+    var width = Math.max(cellSize.width, Math.round(avail.width/cellSize.width)*cellSize.width)
+    var height = Math.max(cellSize.height, Math.round(avail.height/cellSize.height)*cellSize.height)
+
+    setSpaceAvailable(x, y, width, height, false)
     item.x = x
     item.y = y
 
-    var width = Math.max(cellSize.width, Math.round(item.width/cellSize.width)*cellSize.width)
-    var height = Math.max(cellSize.height, Math.round(item.height/cellSize.height)*cellSize.height)
     item.width = width
     item.height = height
 }

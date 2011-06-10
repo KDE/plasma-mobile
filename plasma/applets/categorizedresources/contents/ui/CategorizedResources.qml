@@ -140,7 +140,7 @@ Item {
             {
                 for (var i=0; i<debugFlow.children.length; ++i) {
                     child = debugFlow.children[i]
-                    child.opacity = LayoutManager.isSpaceAvailable(child.x,child.y, LayoutManager.cellSize.width, LayoutManager.cellSize.height)?0.8:0.3
+                    child.opacity = LayoutManager.availableSpace(child.x,child.y, LayoutManager.cellSize.width, LayoutManager.cellSize.height).width>0?0.8:0.3
                 }
             }
         }
@@ -198,7 +198,7 @@ Item {
        interval: 1000
        onTriggered: {
             plasmoid.busy = true
-            LayoutManager.positions = new Array()
+            LayoutManager.resetPositions()
             if (searchBox.text) {
                 metadataSource.connectedSources = [searchBox.text]
             } else {
