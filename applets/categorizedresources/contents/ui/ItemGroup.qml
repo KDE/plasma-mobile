@@ -62,6 +62,50 @@ PlasmaCore.FrameSvgItem {
             easing.type: Easing.InOutQuad
         }
     }
+    Behavior on width {
+        enabled: !resizeHandle.resizing
+        NumberAnimation {
+            duration: 250
+            easing.type: Easing.InOutQuad
+        }
+    }
+    Behavior on height {
+        enabled: !resizeHandle.resizing
+        NumberAnimation {
+            duration: 250
+            easing.type: Easing.InOutQuad
+        }
+    }
+    MouseArea {
+        id: resizeHandle
+        width: 48
+        height: 48
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            rightMargin: -16
+        }
+
+        property int startX
+        property int startY
+        property bool resizing
+
+        onPressed: {
+            resizing = true
+            startX = mouse.x
+            startY = mouse.y
+            LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, itemGroup.width, itemGroup.height, true)
+        }
+        onPositionChanged: {
+            //TODO: height as well if it's going to become a grid view
+            itemGroup.width = Math.max(LayoutManager.cellSize.width, itemGroup.width + mouse.x-startX)
+        }
+        onReleased: {
+            resizing = false
+            itemGroup.width = Math.round(itemGroup.width/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
+            LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, itemGroup.width, itemGroup.height, false)
+        }
+    }
     Component.onCompleted: {
         layoutTimer.running = true
         layoutTimer.restart()
