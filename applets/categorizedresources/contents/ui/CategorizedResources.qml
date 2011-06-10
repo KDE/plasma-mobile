@@ -128,7 +128,7 @@ Item {
         Flow {
             id: debugFlow
             anchors.fill: resultsFlow
-            visible: true
+            visible: false
             Repeater {
                 model: 60
                 Rectangle {
