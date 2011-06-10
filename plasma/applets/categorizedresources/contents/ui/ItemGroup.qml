@@ -95,6 +95,7 @@ PlasmaCore.FrameSvgItem {
             startX = mouse.x
             startY = mouse.y
             LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, itemGroup.width, itemGroup.height, true)
+            debugFlow.refresh();
         }
         onPositionChanged: {
             //TODO: height as well if it's going to become a grid view
@@ -102,8 +103,10 @@ PlasmaCore.FrameSvgItem {
         }
         onReleased: {
             resizing = false
-            itemGroup.width = Math.round(itemGroup.width/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
-            LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, itemGroup.width, itemGroup.height, false)
+            var newWidth =Math.round(itemGroup.width/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
+            itemGroup.width = newWidth
+            LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, newWidth, itemGroup.height, false)
+            debugFlow.refresh();
         }
     }
     Component.onCompleted: {
