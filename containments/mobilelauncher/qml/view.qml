@@ -27,7 +27,7 @@ Item {
     height: 480
 
     MobileComponents.IconGrid {
-        model: runnerModel
+        model: (searchQuery == "")?appModel:runnerModel
         delegate: Component {
             MobileComponents.IconDelegate {
                 icon: decoration

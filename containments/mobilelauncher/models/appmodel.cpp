@@ -45,7 +45,7 @@ AppModel::AppModel(QObject *parent)
     newRoleNames[CommonModel::ActionTypeRole] = "action";
 
     setRoleNames(newRoleNames);
-
+setCategory(QString());
    // setSortRole(CommonModel::Weight);
 }
 

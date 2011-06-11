@@ -20,6 +20,7 @@
 
 //own
 #include "mobilelauncher.h"
+#include "models/appmodel.h"
 #include "models/krunnermodel.h"
 
 
@@ -66,7 +67,7 @@ void MobileLauncher::init()
     connect(m_queryTimer, SIGNAL(timeout()), this, SLOT(updateQuery()));
 
     m_runnerModel = new KRunnerModel(this);
-    //m_runnerModel->setQuery("Network");
+    m_appModel = new AppModel(this);
 
     setContentsMargins(0, 0, 0, 0);
 
@@ -81,6 +82,7 @@ void MobileLauncher::init()
         QDeclarativeContext *ctxt = m_declarativeWidget->engine()->rootContext();
         if (ctxt) {
             ctxt->setContextProperty("runnerModel", m_runnerModel);
+            ctxt->setContextProperty("appModel", m_appModel);
         }
         QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_declarativeWidget->rootObject());
 
