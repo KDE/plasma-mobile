@@ -127,6 +127,8 @@ void AppModel::setShownCategories(const QStringList &categories)
             ++i;
         }
     }
+    emit countChanged();
+    emit shownCategoriesChanged();
 }
 
 QStringList AppModel::shownCategories() const

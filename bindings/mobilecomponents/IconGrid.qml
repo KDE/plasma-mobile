@@ -152,7 +152,7 @@ Item {
                     height: appsView.currentIndex == index ? 10 : 6
                     radius: 4
                     smooth: true
-                    opacity: appsView.currentIndex == index ? 1: 0.6
+                    opacity: appsView.currentIndex == index ? 0.8: 0.55
                     color: theme.textColor
 
                     MouseArea {
