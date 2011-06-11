@@ -31,6 +31,7 @@ Item {
         width: 300
         contentWidth: tagFlow.width
         contentHeight: tagFlow.height
+        visible: (appGrid.searchQuery == "")
 
         anchors {
             left: parent.left
@@ -97,6 +98,7 @@ Item {
     }
 
     MobileComponents.IconGrid {
+        id: appGrid
         model: (searchQuery == "")?appModel:runnerModel
         delegate: Component {
             MobileComponents.IconDelegate {
