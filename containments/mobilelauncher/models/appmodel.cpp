@@ -116,7 +116,7 @@ void AppModel::setShownCategories(const QStringList &categories)
         m_allCategoriesModel->clear();
         QHash<QString, int>::const_iterator i = categoryWeights.constBegin();
         while (i != categoryWeights.constEnd()) {
-            if (i.key().startsWith("X-")) {
+            if (i.key().startsWith("X-") || i.key() == "KDE" || i.key() == "GNOME" || i.key() == "GTK" || i.key() == "Qt") {
                 ++i;
                 continue;
             }
