@@ -62,14 +62,26 @@ void AppModel::setShownCategories(const QStringList &categories)
     m_initialized = true;
 
     QString query = "exist Exec";
-    foreach (const QString &category, categories) {
-        query += QString(" and (exist Categories and '%1' ~subin Categories)").arg(category);
+
+    if (!categories.isEmpty()) {
+        query += " and (";
+        bool first = true;
+        foreach (const QString &category, categories) {
+            if (!first) {
+                query += " or ";
+            }
+            first = false;
+            query += QString(" (exist Categories and '%1' ~subin Categories)").arg(category);
+        }
+        query += ")";
     }
+    kWarning()<<query;
     KService::List services = KServiceTypeTrader::self()->query("Application", query);
 
 
     QHash<QString, int> categoryWeights;
 
+    clear();
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
             continue;

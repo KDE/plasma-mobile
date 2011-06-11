@@ -45,10 +45,29 @@ Item {
             Repeater {
                 model: appModel.allCategories
                 Text {
+                    id: tagDelegate
                     text: display
                     font.pointSize: 8+(Math.min(weight*4, 40)/2)
                     MouseArea {
                         anchors.fill: parent
+                        onClicked: {
+                            var categories = appModel.shownCategories
+                            if (categories.indexOf(display) > -1) {
+                                j = 0;
+                                while (j < categories.length) {
+                                    if (categories[j] == display) {
+                                        categories.splice(j, 1);
+                                    } else {
+                                        j++;
+                                    }
+                                }
+                                tagDelegate.font.bold = false
+                            } else {
+                                categories[categories.length] = display
+                                tagDelegate.font.bold = true
+                            }
+                            appModel.shownCategories = categories
+                        }
                     }
                 }
             }
