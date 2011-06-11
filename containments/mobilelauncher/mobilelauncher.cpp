@@ -36,6 +36,7 @@
 //KDE
 #include <KDebug>
 #include <KStandardDirs>
+#include <KRun>
 
 //Plasma
 #include <Plasma/Corona>
@@ -123,7 +124,14 @@ void MobileLauncher::itemActivated(const QString &url)
 {
     kWarning() << "URL clicked" << url;
 
-    KRunnerItemHandler::openUrl(url);
+    if (url.startsWith("krunner")) {
+        KRunnerItemHandler::openUrl(url);
+    } else {
+        KService::Ptr service = KService::serviceByStorageId(url);
+        if (service) {
+            KRun::run(*service, KUrl::List(), 0);
+        }
+    }
 }
 
 K_EXPORT_PLASMA_APPLET(mobilelauncher, MobileLauncher)
