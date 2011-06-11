@@ -42,6 +42,27 @@ Item {
             width: 300
             spacing: 8
 
+            Text {
+                id: everythingTag
+                text: i18n("Everything")
+                font.pointSize: 20
+                font.bold: true
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        appModel.shownCategories = Array()
+                        for (var i=0; i<tagFlow.children.length; ++i ) {
+                            var child = tagFlow.children[i]
+                            if (child.font) {
+                                child.font.bold = false
+                            }
+                        }
+                        everythingTag.font.bold = true
+                    }
+                }
+            }
+
             Repeater {
                 model: appModel.allCategories
                 Text {
@@ -67,6 +88,7 @@ Item {
                                 tagDelegate.font.bold = true
                             }
                             appModel.shownCategories = categories
+                            everythingTag.font.bold = (categories.length == 0)
                         }
                     }
                 }
