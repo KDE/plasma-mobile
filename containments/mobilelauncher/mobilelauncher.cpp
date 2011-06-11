@@ -80,7 +80,7 @@ void MobileLauncher::init()
     if (m_declarativeWidget->engine()) {
         QDeclarativeContext *ctxt = m_declarativeWidget->engine()->rootContext();
         if (ctxt) {
-            ctxt->setContextProperty("myModel", m_runnerModel);
+            ctxt->setContextProperty("runnerModel", m_runnerModel);
         }
         QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_declarativeWidget->rootObject());
 

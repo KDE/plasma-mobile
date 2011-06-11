@@ -27,7 +27,7 @@ Item {
     height: 480
 
     MobileComponents.IconGrid {
-        model: myModel
+        model: runnerModel
         delegate: Component {
             MobileComponents.IconDelegate {
                 icon: decoration
@@ -46,9 +46,9 @@ Item {
 
         onSearchQueryChanged: {
             if (searchQuery == "") {
-                myModel.setQuery(myModel.defaultQuery)
+                runnerModel.setQuery(runnerModel.defaultQuery)
             } else {
-                myModel.setQuery(searchQuery)
+                runnerModel.setQuery(searchQuery)
             }
         }
     }
