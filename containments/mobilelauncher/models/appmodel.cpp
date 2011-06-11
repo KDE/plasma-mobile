@@ -36,7 +36,8 @@
 
 
 AppModel::AppModel(QObject *parent)
-        : QStandardItemModel(parent)
+        : QStandardItemModel(parent),
+          m_initialized(false)
 {
     QHash<int, QByteArray> newRoleNames = roleNames();
     newRoleNames[CommonModel::Description] = "description";
@@ -45,7 +46,8 @@ AppModel::AppModel(QObject *parent)
     newRoleNames[CommonModel::ActionTypeRole] = "action";
 
     setRoleNames(newRoleNames);
-setCategory(QString());
+
+    setShownCategories(QStringList());
    // setSortRole(CommonModel::Weight);
 }
 
@@ -54,15 +56,17 @@ AppModel::~AppModel()
 }
 
 //TODO: list of categories
-void AppModel::setCategory(const QString &category)
+void AppModel::setShownCategories(const QStringList &categories)
 {
-    m_category = category;
+    if (m_initialized && m_shownCategories == categories) {
+        return;
+    }
+    m_shownCategories = categories;
+    m_initialized = true;
 
-    QString query;
-    if (category.isEmpty()) {
-        query = "exist Exec";
-    } else {
-        query = QString("exist Exec and (exist Categories and '%1' ~subin Categories)").arg(category);
+    QString query = "exist Exec";
+    foreach (const QString &category, categories) {
+        query += QString(" and (exist Categories and '%1' ~subin Categories)").arg(category);
     }
     KService::List services = KServiceTypeTrader::self()->query("Application", query);
 
@@ -91,9 +95,9 @@ void AppModel::setCategory(const QString &category)
     }
 }
 
-QString AppModel::category() const
+QStringList AppModel::shownCategories() const
 {
-    return m_category;
+    return m_shownCategories;
 }
 
 #include "appmodel.moc"

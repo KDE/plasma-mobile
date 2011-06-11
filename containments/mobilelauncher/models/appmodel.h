@@ -31,14 +31,14 @@ class AppModel : public QStandardItemModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(QString category READ category WRITE setCategory)
+    Q_PROPERTY(QStringList shownCategories READ shownCategories WRITE setShownCategories)
 
 public:
     AppModel(QObject *parent);
     virtual ~AppModel();
 
-    void setCategory(const QString &category);
-    QString category() const;
+    void setShownCategories(const QStringList &categories);
+    QStringList shownCategories() const;
 
     int count() const {return QStandardItemModel::rowCount();}
 
@@ -46,7 +46,8 @@ Q_SIGNALS:
     void countChanged();
 
 private:
-    QString m_category;
+    QStringList m_shownCategories;
+    bool m_initialized;
 };
 
 #endif // APPMODEL_H
