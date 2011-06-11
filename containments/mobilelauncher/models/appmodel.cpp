@@ -104,6 +104,10 @@ void AppModel::setShownCategories(const QStringList &categories)
         m_allCategoriesModel->clear();
         QHash<QString, int>::const_iterator i = categoryWeights.constBegin();
         while (i != categoryWeights.constEnd()) {
+            if (i.key().startsWith("X-")) {
+                ++i;
+                continue;
+            }
             QStandardItem *catItem = new QStandardItem;
             catItem->setText(i.key());
             catItem->setData(i.value(), CommonModel::Weight);

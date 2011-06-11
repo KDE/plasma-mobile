@@ -26,19 +26,35 @@ Item {
     width: 800
     height: 480
 
-    ListView {
+    Flickable {
         id: tagCloud
-        width:200
-        model: appModel.allCategories
+        width: 300
+        contentWidth: tagFlow.width
+        contentHeight: tagFlow.height
+
         anchors {
             left: parent.left
             top: parent.top
             bottom: parent.bottom
         }
-        delegate: Text {
-            text: display
+        Flow {
+            id: tagFlow
+            width: 300
+            spacing: 8
+
+            Repeater {
+                model: appModel.allCategories
+                Text {
+                    text: display
+                    font.pointSize: 8+(Math.min(weight*4, 40)/2)
+                    MouseArea {
+                        anchors.fill: parent
+                    }
+                }
+            }
         }
     }
+
     MobileComponents.IconGrid {
         model: (searchQuery == "")?appModel:runnerModel
         delegate: Component {
