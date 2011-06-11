@@ -47,6 +47,9 @@ AppModel::AppModel(QObject *parent)
 
     setRoleNames(newRoleNames);
 
+    m_allCategoriesModel = new QStandardItemModel(this);
+    //m_allCategoriesModel->setRoleNames(newRoleNames);
+
     setShownCategories(QStringList());
    // setSortRole(CommonModel::Weight);
 }
@@ -70,6 +73,9 @@ void AppModel::setShownCategories(const QStringList &categories)
     }
     KService::List services = KServiceTypeTrader::self()->query("Application", query);
 
+
+    QHash<QString, int> categoryWeights;
+
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
             continue;
@@ -92,6 +98,24 @@ void AppModel::setShownCategories(const QStringList &categories)
             CommonModel::AddAction
             )
         );
+
+        if (categories.isEmpty()) {
+            foreach (const QString &category, service->categories()) {
+                categoryWeights[category] = categoryWeights[category]+1;
+            }
+        }
+    }
+
+    if (categories.isEmpty()) {
+        m_allCategoriesModel->clear();
+        QHash<QString, int>::const_iterator i = categoryWeights.constBegin();
+        while (i != categoryWeights.constEnd()) {
+            QStandardItem *catItem = new QStandardItem;
+            catItem->setText(i.key());
+            catItem->setData(i.value(), CommonModel::Weight);
+            m_allCategoriesModel->appendRow(catItem);
+            ++i;
+        }
     }
 }
 

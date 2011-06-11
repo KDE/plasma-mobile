@@ -31,7 +31,8 @@ class AppModel : public QStandardItemModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(QStringList shownCategories READ shownCategories WRITE setShownCategories)
+    Q_PROPERTY(QStringList shownCategories READ shownCategories WRITE setShownCategories NOTIFY shownCategoriesChanged)
+    Q_PROPERTY(QObject *allCategories READ allCategories)
 
 public:
     AppModel(QObject *parent);
@@ -40,13 +41,17 @@ public:
     void setShownCategories(const QStringList &categories);
     QStringList shownCategories() const;
 
+    QObject *allCategories() {return m_allCategoriesModel;}
+
     int count() const {return QStandardItemModel::rowCount();}
 
 Q_SIGNALS:
     void countChanged();
+    void shownCategoriesChanged();
 
 private:
     QStringList m_shownCategories;
+    QStandardItemModel *m_allCategoriesModel;
     bool m_initialized;
 };
 

@@ -26,6 +26,19 @@ Item {
     width: 800
     height: 480
 
+    ListView {
+        id: tagCloud
+        width:200
+        model: appModel.allCategories
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+        }
+        delegate: Text {
+            text: display
+        }
+    }
     MobileComponents.IconGrid {
         model: (searchQuery == "")?appModel:runnerModel
         delegate: Component {
@@ -38,11 +51,13 @@ Item {
             }
         }
 
-        anchors.fill: parent
-        anchors.topMargin: 4
-        anchors.bottomMargin: 4
-        anchors.leftMargin: 4
-        anchors.rightMargin: 4
+        anchors {
+            left: tagCloud.right
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+            margins: 4
+        }
 
         onSearchQueryChanged: {
             if (searchQuery == "") {
