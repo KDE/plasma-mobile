@@ -17,31 +17,25 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef COMMONMODEL_H
-#define COMMONMODEL_H
+#include "commonmodel.h"
 
-#include <QStandardItemModel>
 
-class CommonModel : public QStandardItemModel
+
+CommonModel::CommonModel(QObject *parent)
+        : QStandardItemModel(parent)
 {
-    Q_OBJECT
+    QHash<int, QByteArray> newRoleNames = roleNames();
+    newRoleNames[CommonModel::Description] = "description";
+    newRoleNames[CommonModel::Url] = "url";
+    newRoleNames[CommonModel::Weight] = "weight";
+    newRoleNames[CommonModel::ActionTypeRole] = "action";
 
-public:
-    enum ActionType {
-        NoAction = 0,
-        AddAction = 1,
-        RemoveAction = 2
-    };
+    setRoleNames(newRoleNames);
+}
 
-    enum Roles {
-        Description = Qt::UserRole+1,
-        Url = Qt::UserRole+2,
-        Weight = Qt::UserRole+3,
-        ActionTypeRole = Qt::UserRole+4
-    };
+CommonModel::~CommonModel()
+{
+}
 
-    CommonModel(QObject *parent);
-    virtual ~CommonModel();
-};
 
-#endif
+#include "commonmodel.moc"

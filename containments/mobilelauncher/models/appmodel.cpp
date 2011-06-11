@@ -36,18 +36,12 @@
 
 
 AppModel::AppModel(QObject *parent)
-        : QStandardItemModel(parent),
+        : CommonModel(parent),
           m_initialized(false)
 {
     QHash<int, QByteArray> newRoleNames = roleNames();
-    newRoleNames[CommonModel::Description] = "description";
-    newRoleNames[CommonModel::Url] = "url";
-    newRoleNames[CommonModel::Weight] = "weight";
-    newRoleNames[CommonModel::ActionTypeRole] = "action";
 
-    setRoleNames(newRoleNames);
-
-    m_allCategoriesModel = new QStandardItemModel(this);
+    m_allCategoriesModel = new CommonModel(this);
     //m_allCategoriesModel->setRoleNames(newRoleNames);
 
     setShownCategories(QStringList());

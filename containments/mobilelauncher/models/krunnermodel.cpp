@@ -107,21 +107,13 @@ public:
 };
 
 KRunnerModel::KRunnerModel(QObject *parent)
-        : QStandardItemModel(parent)
-        , d(new Private())
+        : CommonModel(parent),
+          d(new Private())
 {
     connect(runnerManager(),
             SIGNAL(matchesChanged (const QList< Plasma::QueryMatch > & )),
             this,
             SLOT(matchesChanged (const QList< Plasma::QueryMatch > & )));
-
-    QHash<int, QByteArray> newRoleNames = roleNames();
-    newRoleNames[CommonModel::Description] = "description";
-    newRoleNames[CommonModel::Url] = "url";
-    newRoleNames[CommonModel::Weight] = "weight";
-    newRoleNames[CommonModel::ActionTypeRole] = "action";
-
-    setRoleNames(newRoleNames);
 
     setSortRole(CommonModel::Weight);
 }

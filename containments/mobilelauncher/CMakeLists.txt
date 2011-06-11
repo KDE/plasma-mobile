@@ -4,6 +4,7 @@ include(KDE4Defaults)
 set(mobile_launcher_SRCS
     mobilelauncher.cpp
     models/appmodel.cpp
+    models/commonmodel.cpp
     models/krunnermodel.cpp
     models/standarditemfactory.cpp
     )

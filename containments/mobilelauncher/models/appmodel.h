@@ -21,13 +21,11 @@
 #ifndef APPMODEL_H
 #define APPMODEL_H
 
-#include <QStandardItemModel>
-
-
+#include "commonmodel.h"
 #include "standarditemfactory.h"
 
 
-class AppModel : public QStandardItemModel
+class AppModel : public CommonModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
@@ -51,7 +49,7 @@ Q_SIGNALS:
 
 private:
     QStringList m_shownCategories;
-    QStandardItemModel *m_allCategoriesModel;
+    CommonModel *m_allCategoriesModel;
     bool m_initialized;
 };
 

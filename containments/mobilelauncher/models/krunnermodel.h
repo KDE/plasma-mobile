@@ -21,7 +21,7 @@
 #ifndef KRUNNERMODEL_H
 #define KRUNNERMODEL_H
 
-#include <QStandardItemModel>
+#include "commonmodel.h"
 
 #include <KUrl>
 
@@ -38,7 +38,7 @@ namespace KRunnerItemHandler {
     bool openUrl(const KUrl& url);
 }
 
-class KRunnerModel : public QStandardItemModel
+class KRunnerModel : public CommonModel
 {
     Q_OBJECT
     Q_PROPERTY(QString defaultQuery READ defaultQuery WRITE setDefaultQuery)
