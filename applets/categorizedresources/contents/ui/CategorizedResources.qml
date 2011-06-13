@@ -206,11 +206,12 @@ Item {
        repeat: false
        interval: 1000
        onTriggered: {
-            plasmoid.busy = true
             LayoutManager.resetPositions()
             if (searchBox.text) {
+                plasmoid.busy = true
                 metadataSource.connectedSources = [searchBox.text]
             } else {
+                plasmoid.busy = false
                 metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]
             }
        }
