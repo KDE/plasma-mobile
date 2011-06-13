@@ -29,6 +29,7 @@ Item {
     property Component delegate
     property QtObject model
     property string searchQuery
+    property int pageSize: 18
 
     PlasmaCore.Theme {
         id:theme
@@ -96,7 +97,7 @@ Item {
         }
 
 
-        model: main.model?Math.ceil(main.model.count/18.0):0
+        model: main.model?Math.ceil(main.model.count/main.pageSize):0
         highlightRangeMode: ListView.StrictlyEnforceRange
         orientation: ListView.Horizontal
         snapMode: ListView.SnapOneItem
@@ -122,7 +123,7 @@ Item {
                     model: MobileComponents.PagedProxyModel {
                         sourceModel: main.model
                         currentPage: index
-                        pageSize: 18
+                        pageSize: main.pageSize
                     }
                     delegate: main.delegate
                 }
@@ -143,7 +144,7 @@ Item {
             spacing: 20
 
             Repeater {
-                model: main.model?Math.ceil(main.model.count/18.0):0
+                model: main.model?Math.ceil(main.model.count/main.pageSize):0
 
                 Rectangle {
                     y: appsView.currentIndex == index ? -2 : 0
@@ -151,7 +152,7 @@ Item {
                     height: appsView.currentIndex == index ? 10 : 6
                     radius: 4
                     smooth: true
-                    opacity: appsView.currentIndex == index ? 1: 0.6
+                    opacity: appsView.currentIndex == index ? 0.8: 0.55
                     color: theme.textColor
 
                     MouseArea {

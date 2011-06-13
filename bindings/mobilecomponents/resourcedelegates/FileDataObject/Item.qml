@@ -9,6 +9,10 @@ Item {
     id: resourceItem
     anchors.fill: parent
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     Item {
         id: itemFrame
         anchors {   bottom: parent.bottom;
@@ -91,7 +95,7 @@ Item {
             font.pixelSize: 14
             font.bold: true
             wrapMode: Text.Wrap
-
+            color: theme.textColor
             anchors.top: itemFrame.top
             //anchors.bottom: infoLabel.top;
             anchors.left: previewImage.right
@@ -104,6 +108,7 @@ Item {
             //image: metadataSource.data[DataEngineSource]["fileName"]
             //text: "the long and winding road..."
             text: className
+            color: theme.textColor
             opacity: 0.8
             //font.pixelSize: font.pixelSize * 1.8
             font.pixelSize: 12

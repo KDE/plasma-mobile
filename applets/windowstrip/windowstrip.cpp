@@ -112,7 +112,13 @@ void WindowStrip::updateWindows()
     QVariant dataY = m_windowFlicker->property("contentY");
     //kWarning()<<"new X"<<data;
 
-    m_desktop = static_cast<Plasma::Applet *>(parentItem())->view()->effectiveWinId();
+    QGraphicsView *view = static_cast<Plasma::Applet *>(parentItem())->view();
+    if (view) {
+        m_desktop = view->effectiveWinId();
+    } else {
+        m_desktop = 0;
+    }
+
     m_windowsOffset = -QPoint(dataX.value<int>(), dataY.value<int>());
 
     showThumbnails();

@@ -10,6 +10,10 @@ Item {
     anchors.fill: parent
     property alias infoLabelVisible: infoLabel.visible
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     Item {
         id: itemFrame
         anchors {   bottom: parent.bottom;
@@ -92,7 +96,7 @@ Item {
             font.pixelSize: 14
             font.bold: true
             wrapMode: Text.Wrap
-
+            color: theme.textColor
             anchors.top: itemFrame.top
             //anchors.bottom: infoLabel.top;
             anchors.left: previewImage.right

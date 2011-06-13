@@ -28,6 +28,7 @@ class QDeclarativeItem;
 class QStandardItemModel;
 class QTimer;
 
+class AppModel;
 class KRunnerModel;
 
 namespace Plasma
@@ -55,6 +56,7 @@ private:
     QTimer *m_queryTimer;
 
     KRunnerModel *m_runnerModel;
+    AppModel *m_appModel;
 };
 
 #endif //PLASMA_MOBILELAUNCHER_H

@@ -20,6 +20,7 @@
 
 //own
 #include "mobilelauncher.h"
+#include "models/appmodel.h"
 #include "models/krunnermodel.h"
 
 
@@ -35,6 +36,7 @@
 //KDE
 #include <KDebug>
 #include <KStandardDirs>
+#include <KRun>
 
 //Plasma
 #include <Plasma/Corona>
@@ -66,7 +68,7 @@ void MobileLauncher::init()
     connect(m_queryTimer, SIGNAL(timeout()), this, SLOT(updateQuery()));
 
     m_runnerModel = new KRunnerModel(this);
-    //m_runnerModel->setQuery("Network");
+    m_appModel = new AppModel(this);
 
     setContentsMargins(0, 0, 0, 0);
 
@@ -80,7 +82,8 @@ void MobileLauncher::init()
     if (m_declarativeWidget->engine()) {
         QDeclarativeContext *ctxt = m_declarativeWidget->engine()->rootContext();
         if (ctxt) {
-            ctxt->setContextProperty("myModel", m_runnerModel);
+            ctxt->setContextProperty("runnerModel", m_runnerModel);
+            ctxt->setContextProperty("appModel", m_appModel);
         }
         QDeclarativeItem *item = qobject_cast<QDeclarativeItem *>(m_declarativeWidget->rootObject());
 
@@ -121,7 +124,14 @@ void MobileLauncher::itemActivated(const QString &url)
 {
     kWarning() << "URL clicked" << url;
 
-    KRunnerItemHandler::openUrl(url);
+    if (url.startsWith("krunner")) {
+        KRunnerItemHandler::openUrl(url);
+    } else {
+        KService::Ptr service = KService::serviceByStorageId(url);
+        if (service) {
+            KRun::run(*service, KUrl::List(), 0);
+        }
+    }
 }
 
 K_EXPORT_PLASMA_APPLET(mobilelauncher, MobileLauncher)
