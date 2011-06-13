@@ -35,6 +35,10 @@ Item {
 
     property alias urls: metadataSource.connectedSources
 
+    Component.onCompleted: {
+        LayoutManager.restore()
+    }
+
     PlasmaCore.DataSource {
         id: metadataSource
         engine: "org.kde.active.metadata"
@@ -106,7 +110,6 @@ Item {
                 size: "32x32"
                 onClicked: {
                     timer.running = true
-                    print(categoryListModel.categories)
                 }
             }
 
@@ -149,7 +152,6 @@ Item {
             id: resultsFlow
             //height: Math.min(300, childrenRect.height)
             width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
-            visible: count>0
 
             anchors {
                 top: searchRow.bottom
@@ -174,14 +176,21 @@ Item {
                 onTriggered: {
                     for (var i=0; i<resultsFlow.children.length; ++i) {
                         child = resultsFlow.children[i]
-                        if (1) {
+                        if (LayoutManager.itemsConfig[child.name]) {
+                            var rect = LayoutManager.itemsConfig[child.name]
+                            child.x = rect.x
+                            child.y = rect.y
+                            child.width = rect.width
+                            child.height = rect.height
+                        } else {
                             child.x = 0
                             child.y = 0
-                            child.visible = true
-                            LayoutManager.positionItem(child)
-                            child.enabled = true
-                            debugFlow.refresh();
                         }
+
+                        child.visible = true
+                        LayoutManager.positionItem(child)
+                        child.enabled = true
+                        debugFlow.refresh();
                     }
                 }
             }

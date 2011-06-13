@@ -26,44 +26,48 @@ import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
 PlasmaCore.FrameSvgItem {
     id: itemGroup
+    property string name: modelData
     imagePath: "widgets/background"
     width: Math.min(470, 32+webItemList.count*140)
     height: 150
     z: 0
     visible: webItemList.count>0
+    property bool animationsEnabled: false
 
     MouseArea {
         anchors.fill: parent
         drag.target: parent
         onPressed: {
+            animationsEnabled = false
             mouse.accepted = true
             var x = Math.round(parent.x/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
             var y = Math.round(parent.y/LayoutManager.cellSize.height)*LayoutManager.cellSize.height
             LayoutManager.setSpaceAvailable(x, y, parent.width, parent.height, true)
-            
+
             debugFlow.refresh();
         }
         onReleased: {
+            animationsEnabled = true
             LayoutManager.positionItem(parent)
             debugFlow.refresh()
         }
     }
     Behavior on x {
-        enabled: parent.enabled
+        enabled: animationsEnabled
         NumberAnimation {
             duration: 250
             easing.type: Easing.InOutQuad
         }
     }
     Behavior on y {
-        enabled: parent.enabled
+        enabled: animationsEnabled
         NumberAnimation {
             duration: 250
             easing.type: Easing.InOutQuad
         }
     }
     Behavior on width {
-        enabled: !resizeHandle.resizing
+        enabled: animationsEnabled
         NumberAnimation {
             id: widthAnimation
             duration: 250
@@ -71,7 +75,7 @@ PlasmaCore.FrameSvgItem {
         }
     }
     Behavior on height {
-        enabled: !resizeHandle.resizing
+        enabled: animationsEnabled
         NumberAnimation {
             duration: 250
             easing.type: Easing.InOutQuad
@@ -89,10 +93,9 @@ PlasmaCore.FrameSvgItem {
 
         property int startX
         property int startY
-        property bool resizing
 
         onPressed: {
-            resizing = true
+            animationsEnabled = false
             startX = mouse.x
             startY = mouse.y
             LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, itemGroup.width, itemGroup.height, true)
@@ -103,9 +106,8 @@ PlasmaCore.FrameSvgItem {
             itemGroup.width = Math.max(LayoutManager.cellSize.width, itemGroup.width + mouse.x-startX)
         }
         onReleased: {
-            resizing = false
-            /*var newWidth =Math.round(itemGroup.width/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
-            itemGroup.width = newWidth*/
+            animationsEnabled = true
+
             LayoutManager.positionItem(parent)
             LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, widthAnimation.to, itemGroup.height, false)
             debugFlow.refresh();

@@ -27,6 +27,51 @@ cellSize.height = 158
 
 var resultsFlow
 
+var itemsConfig
+
+
+function restore()
+{
+    itemsConfig = new Object()
+    var configString = String(plasmoid.readConfig("ItemsGeometries"))
+
+    //array, a cell for encoded item geometry
+    var itemsStrings = configString.split(";")
+    for (var i=0; i<itemsStrings.length; i++) {
+        //[id, encoded geometry]
+        var idConfig = itemsStrings[i].split(":")
+        if (idConfig.length < 2) {
+            continue
+        }
+
+        //array [x, y, width, height]
+        var rect = idConfig[1].split(",")
+        if (rect.length < 4) {
+            continue
+        }
+        var geomObject = new Object()
+        geomObject.x = rect[0]
+        geomObject.y = rect[1]
+        geomObject.width = rect[2]
+        geomObject.height = rect[3]
+        itemsConfig[idConfig[0]] = geomObject
+    }
+
+}
+
+function save()
+{
+    var configString = String()
+
+    for (id in itemsConfig) {
+        var rect = itemsConfig[id]
+        configString += id + ":" + rect.x + "," + rect.y + "," + rect.width + "," + rect.height + ";"
+    }
+
+    print("saving "+configString)
+    plasmoid.writeConfig("ItemsGeometries", configString)
+}
+
 function resetPositions()
 {
     positions = new Array()
@@ -138,5 +183,13 @@ function positionItem(item)
 
     item.width = width
     item.height = height
+
+    var rect = new Object()
+    rect.x = item.x
+    rect.y = item.y
+    rect.width = item.width
+    rect.height = item.height
+    itemsConfig[item.name] = rect
+    save()
 }
 
