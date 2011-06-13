@@ -28,6 +28,8 @@ Item {
     property int implicitHeight: itemLoader.item.implicitHeight
 
     signal clicked(variant mouse)
+    signal pressed(variant mouse)
+    signal released(variant mouse)
 
     MobileComponents.FallbackComponent {
         id: fallback
@@ -55,6 +57,8 @@ Item {
             anchors.fill: parent
             onClicked: delegateItem.clicked(mouse)
 
+            onPressed: delegateItem.pressed(mouse)
+            onReleased: delegateItem.released(mouse)
             onPressAndHold: {
                 contextMenu.parentItem = delegateItem
                 contextMenu.adjustPosition();

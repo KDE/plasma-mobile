@@ -28,6 +28,7 @@
 #include "pagedproxymodel.h"
 #include "fallbackcomponent.h"
 #include "mouseeventlistener.h"
+#include "resourceinstance.h"
 
 void MobileComponentsPlugin::registerTypes(const char *uri)
 {
@@ -38,6 +39,7 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<FallbackComponent>(uri, 0, 1, "FallbackComponent");
     qmlRegisterType<CategorizedProxyModel>(uri, 0, 1, "CategorizedProxyModel");
     qmlRegisterType<MouseEventListener>(uri, 0, 1, "MouseEventListener");
+    qmlRegisterType<ResourceInstance>(uri, 0, 1, "ResourceInstance");
 }
 
 
