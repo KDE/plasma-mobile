@@ -205,7 +205,6 @@ QString QueryContainer::icon(const QStringList &types)
         m_icons["PersonContact"] = QString("x-office-contact");
 
         // Filesystem
-        m_icons["Folder"] = QString("folder");
         m_icons["Website"] = QString("text-html");
 
         // ... add some more
@@ -214,8 +213,6 @@ QString QueryContainer::icon(const QStringList &types)
         m_icons["BookmarksFolder"] = QString("bookmarks-organize");
 
         m_icons["FileDataObject"] = QString("unknown");
-        m_icons["PaginatedTextDocument"] = QString("application-pdf");
-        m_icons["Presentation"] = QString("application-vnd.oasis.opendocument.presentation");
         m_icons["TextDocument"] = QString("text-enriched");
     }
 
