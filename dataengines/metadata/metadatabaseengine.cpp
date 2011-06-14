@@ -43,7 +43,7 @@
 #include "metadatabaseengine.h"
 #include <stdio.h>
 
-#include <kactivityconsumer.h>
+#include <KDE/Activities/Consumer>
 
 //#include "activityservice/activityservice.h"
 #include "metadataservice/metadataservice.h"
@@ -56,7 +56,7 @@ class MetadataBaseEnginePrivate
 {
 public:
     QSize previewSize;
-    KActivityConsumer *activityConsumer;
+    Activities::Consumer *activityConsumer;
 };
 
 
@@ -66,7 +66,7 @@ MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args
     Q_UNUSED(args);
     d = new MetadataBaseEnginePrivate;
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
-    d->activityConsumer = new KActivityConsumer(this);
+    d->activityConsumer = new Activities::Consumer(this);
     //init();
 }
 

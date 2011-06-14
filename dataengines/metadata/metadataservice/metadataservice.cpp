@@ -22,13 +22,13 @@
 #include "metadataservice.h"
 #include "metadatajob.h"
 
-#include <kactivityconsumer.h>
+#include <KDE/Activities/Consumer>
 
 MetadataService::MetadataService(const QString &source)
     : m_id(source)
 {
     setName("metadataservice");
-    m_activityConsumer = new KActivityConsumer(this);
+    m_activityConsumer = new Activities::Consumer(this);
 }
 
 ServiceJob *MetadataService::createJob(const QString &operation,

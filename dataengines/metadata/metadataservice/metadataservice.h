@@ -28,7 +28,9 @@
 
 using namespace Plasma;
 
-class KActivityConsumer;
+namespace Activities {
+    class Consumer;
+}
 
 class MetadataService : public Plasma::Service
 {
@@ -41,7 +43,7 @@ public:
 
 private:
     QString m_id;
-    KActivityConsumer *m_activityConsumer;
+    Activities::Consumer *m_activityConsumer;
 };
 
 #endif // METADATASERVICE_H

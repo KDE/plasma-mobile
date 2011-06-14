@@ -30,9 +30,9 @@
 
 #include <kdebug.h>
 
-#include <kactivityconsumer.h>
+#include <KDE/Activities/Consumer>
 
-MetadataJob::MetadataJob(KActivityConsumer *consumer, const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent) :
+MetadataJob::MetadataJob(Activities::Consumer *consumer, const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent) :
     ServiceJob(parent->objectName(), operation, parameters, parent),
     m_id(id),
     m_activityConsumer(consumer)
