@@ -91,8 +91,7 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
     foreach (const QString &s, Plasma::DataEngine::sources()) {
         if (s.startsWith(name) || s.endsWith(name)) {
             kDebug() << "!!! resource already exists." << name;
-            //return false;
-            removeSource(s);
+            return false;
         }
     }
 
