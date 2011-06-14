@@ -28,6 +28,9 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
 
             function resourceIcon(resourceTypes) {
+                if (mimeType) {
+                    return mimeType.replace("/", "-")
+                }
                 var icons = new Object();
                 icons["Resource"] = "nepomuk";
                 icons["FileDataObject"] = "unknown";
