@@ -83,6 +83,9 @@ void ResourceInstance::syncWid()
 
         kWarning() << "Creating a new instance of the resource" << m_uri << "window id" << wid;
         m_resourceInstance = new Activities::ResourceInstance(wid, m_uri, m_mimetype);
+    } else {
+        m_resourceInstance->setUri(m_uri);
+        m_resourceInstance->setMimetype(m_mimetype);
     }
 }
 
