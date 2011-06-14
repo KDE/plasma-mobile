@@ -41,6 +41,7 @@
 
 import QtQuick 1.0
 import QtWebKit 1.0
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 import "content"
 
@@ -52,6 +53,11 @@ Rectangle {
     width: 800; height: 600
     color: "#343434"
     clip: true
+
+    MobileComponents.ResourceInstance {
+        id: resourceInstance
+        uri: webBrowser.urlString
+    }
 
     FlickableWebView {
         id: webView
