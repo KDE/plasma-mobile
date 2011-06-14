@@ -31,7 +31,6 @@ PlasmaCore.FrameSvgItem {
     width: Math.min(470, 32+webItemList.count*140)
     height: 150
     z: 0
-    visible: webItemList.count>0
     property bool animationsEnabled: false
 
     MouseArea {
@@ -178,6 +177,10 @@ PlasmaCore.FrameSvgItem {
             height: webItemList.height
             resourceType: model.resourceType
             infoLabelVisible: false
+
+            onPressed: {
+                resourceInstance.uri = model["url"]
+            }
 
             onClicked: {
                 plasmoid.openUrl(String(model["url"]))

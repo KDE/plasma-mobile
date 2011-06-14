@@ -60,6 +60,9 @@ Item {
 
     }
 
+    MobileComponents.ResourceInstance {
+        id: resourceInstance
+    }
 
     PlasmaCore.Theme {
         id: theme
