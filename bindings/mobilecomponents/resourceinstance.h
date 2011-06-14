@@ -19,14 +19,17 @@
 #ifndef RESOURCEINSTANCE_H
 #define RESOURCEINSTANCE_H
 
-#include <QObject>
+#include <QDeclarativeItem>
 #include <QUrl>
 
 namespace Activities {
     class ResourceInstance;
 }
 
-class ResourceInstance : public QObject
+class QTimer;
+class QGraphicsView;
+
+class ResourceInstance : public QDeclarativeItem
 {
     Q_OBJECT
 
@@ -35,7 +38,7 @@ class ResourceInstance : public QObject
     //Q_PROPERTY(OpenReason openReason READ openReason)
 
 public:
-    ResourceInstance(QObject *parent = 0);
+    ResourceInstance(QDeclarativeItem *parent = 0);
     ~ResourceInstance();
 
     QUrl uri() const;
@@ -44,6 +47,12 @@ public:
     QString mimetype() const;
     void setMimetype(const QString &mimetype);
 
+protected:
+    QGraphicsView *view() const;
+
+protected Q_SLOTS:
+    void syncWid();
+
 Q_SIGNALS:
     void uriChanged();
     void mimetypeChanged();
@@ -51,6 +60,9 @@ Q_SIGNALS:
 
 private:
     Activities::ResourceInstance *m_resourceInstance;
+    QUrl m_uri;
+    QString m_mimetype;
+    QTimer *m_syncTimer;
 };
 
 #endif

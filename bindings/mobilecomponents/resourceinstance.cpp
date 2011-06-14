@@ -20,14 +20,20 @@
 #include "resourceinstance.h"
 
 #include <QApplication>
+#include <QGraphicsObject>
+#include <QGraphicsView>
+#include <QTimer>
 
 #include <KDE/Activities/ResourceInstance>
 #include <KDebug>
 
 
-ResourceInstance::ResourceInstance(QObject *parent)
-    : QObject(parent)
+ResourceInstance::ResourceInstance(QDeclarativeItem *parent)
+    : QDeclarativeItem(parent)
 {
+    m_syncTimer = new QTimer(this);
+    m_syncTimer->setSingleShot(true);
+    connect(m_syncTimer, SIGNAL(timeout()), this, SLOT(syncWid()));
 }
 
 ResourceInstance::~ResourceInstance()
@@ -35,27 +41,77 @@ ResourceInstance::~ResourceInstance()
 
 }
 
+QGraphicsView *ResourceInstance::view() const
+{
+    // It's assumed that we won't be visible on more than one view here.
+    // Anything that actually needs view() should only really care about
+    // one of them anyway though.
+    if (!scene()) {
+        return 0;
+    }
+
+    QGraphicsView *found = 0;
+    QGraphicsView *possibleFind = 0;
+    //kDebug() << "looking through" << scene()->views().count() << "views";
+    foreach (QGraphicsView *view, scene()->views()) {
+        //kDebug() << "     checking" << view << view->sceneRect()
+        //         << "against" << sceneBoundingRect() << scenePos();
+        if (view->sceneRect().intersects(sceneBoundingRect()) ||
+            view->sceneRect().contains(scenePos())) {
+            //kDebug() << "     found something!" << view->isActiveWindow();
+            if (view->isActiveWindow()) {
+                found = view;
+            } else {
+                possibleFind = view;
+            }
+        }
+    }
+
+    return found ? found : possibleFind;
+}
+
+void ResourceInstance::syncWid()
+{
+    QGraphicsView *v = view();
+    if (!v) {
+        return;
+    }
+
+    WId wid = v->effectiveWinId();
+    if (!m_resourceInstance || m_resourceInstance->winId() != wid) {
+        delete m_resourceInstance;
+
+        kWarning() << "Creating a new instance of the resource" << m_uri << "window id" << wid;
+        m_resourceInstance = new Activities::ResourceInstance(wid, m_uri, m_mimetype);
+    }
+}
+
 QUrl ResourceInstance::uri() const
 {
-    return m_resourceInstance->uri();
+    return m_uri;
 }
 
 void ResourceInstance::setUri(const QUrl &uri)
 {
-    kDebug()<<"setting current uri:"<<uri;
-    //FIXME: this will leak like mad, ResourceInstance should be able to change window
-    m_resourceInstance = new Activities::ResourceInstance(QApplication::activeWindow()->winId(), QUrl());
-    m_resourceInstance->setUri(uri);
+    if (m_uri == uri) {
+        return;
+    }
+    m_uri = uri;
+    m_syncTimer->start(100);
 }
 
 QString ResourceInstance::mimetype() const
 {
-    return m_resourceInstance->mimetype();
+    return m_mimetype;
 }
 
 void ResourceInstance::setMimetype(const QString &mimetype)
 {
-    m_resourceInstance->setMimetype(mimetype);
+    if (m_mimetype == mimetype) {
+        return;
+    }
+    m_mimetype = mimetype;
+    m_syncTimer->start(100);
 }
 
 #include "resourceinstance.moc"
