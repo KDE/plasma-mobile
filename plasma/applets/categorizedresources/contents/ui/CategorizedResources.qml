@@ -36,6 +36,9 @@ Item {
 
     property alias urls: metadataSource.connectedSources
 
+    property Item currentGroup
+    property int currentIndex: -1
+
     Component.onCompleted: {
         LayoutManager.restore()
     }
