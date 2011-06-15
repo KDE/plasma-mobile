@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Web Browser
+GenericName=Web Browser
+Comment=A web browser reader for touch tablets
+Exec=plasma-windowed -graphicssystem raster qtwebbrowser
+Terminal=false
+Icon=internet-web-browser
+Type=Application
+Categories=Qt;KDE;News;
