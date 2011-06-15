@@ -67,6 +67,14 @@ Item {
         opacity: webView.progress == 1.0 ? 0.0 : 1.0
     }
 
+    function tameUrl(textUrl) {
+
+        if (textUrl.indexOf("http") != 0) {
+            return "http://" + textUrl;
+        }
+        return textUrl;
+    }
+
     PlasmaWidgets.LineEdit {
         id: urlText
         //horizontalAlignment: TextEdit.AlignLeft
@@ -78,7 +86,7 @@ Item {
         }
 
         onReturnPressed: {
-            container.urlEntered(urlText.text)
+            container.urlEntered(tameUrl(urlText.text))
             webView.focus = true
         }
 
@@ -88,12 +96,12 @@ Item {
         }
 
         Keys.onEnterPressed: {
-            container.urlEntered(urlText.text)
+            container.urlEntered(tameUrl(urlText.text))
             webView.focus = true
         }
 
         Keys.onReturnPressed: {
-            container.urlEntered(urlText.text)
+            container.urlEntered(tameUrl(urlText.text))
             webView.focus = true
         }
 
