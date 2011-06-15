@@ -107,8 +107,8 @@ PlasmaApp::PlasmaApp()
     }
 
 
-    int width = 800;
-    int height = 480;
+    int width = 1024;
+    int height = 600;
     if (isDesktop) {
         QRect rect = QApplication::desktop()->screenGeometry(m_mainView->screen());
         width = rect.width();
