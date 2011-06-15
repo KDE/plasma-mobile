@@ -89,7 +89,9 @@ function availableSpace(x, y, width, height)
     availableSize.width = 0
     availableSize.height = 0
 
-    if (positions[row] == undefined) {
+    if (x < 0 || y < 0) {
+        return availableSize;
+    } else if (positions[row] == undefined) {
         availableSize.width = width
         availableSize.height = height
         return availableSize;
@@ -117,6 +119,10 @@ function availableSpace(x, y, width, height)
 
     availableSize.width *= cellSize.width
     availableSize.height *= cellSize.height
+
+    //don't make it overflow
+    availableSize.width = Math.min(availableSize.width,
+                                   (resultsFlow.width-row*cellSize.width))
 
     return availableSize
 }
@@ -158,20 +164,51 @@ function positionItem(item)
     var x = Math.max(0, Math.round(item.x/cellSize.width)*cellSize.width)
     var y = Math.max(0, Math.round(item.y/cellSize.height)*cellSize.height)
 
+    var forwardX = x
+    var forwardY = y
+    var backX = x - cellSize.width
+    var backY = y
+    var avail
     while (1) {
-        var avail = availableSpace(x,y, item.width, item.height)
-        print("checking "+x/cellSize.width+" "+y/cellSize.height+" "+avail.width/cellSize.width+" "+avail.height/cellSize.height)
+        //look forward
+        var forwardAvail = availableSpace(forwardX, forwardY, item.width, item.height)
+        print("checking forward "+forwardX/cellSize.width+" "+forwardY/cellSize.height+" "+forwardAvail.width/cellSize.width+" "+forwardAvail.height/cellSize.height)
 
-        if (avail.width > 0 && avail.height > 0) {
+        if (forwardAvail.width > 0 && forwardAvail.height > 0) {
+            x = forwardX
+            y = forwardY
+            avail = forwardAvail
             break
         }
-        x += cellSize.width
-        if (x+item.width > resultsFlow.width) {
-            x = 0
-            y += cellSize.height
-            if (y > resultsFlow.height) {
+        forwardX += cellSize.width
+        if (forwardX+item.width > resultsFlow.width) {
+            forwardX = 0
+            forwardY += cellSize.height
+            //forward positions exausted
+            if (forwardY > resultsFlow.height) {
                 break;
             }
+        }
+
+        //backwards positions exausted
+        if (backY < 0) {
+            continue
+        }
+
+        //look backwards
+        var backAvail = availableSpace(backX, backY, item.width, item.height)
+        print("checking backwards "+backX/cellSize.width+" "+backY/cellSize.height+" "+backAvail.width/cellSize.width+" "+backAvail.height/cellSize.height)
+
+        if (backAvail.width > 0 && backAvail.height > 0) {
+            x = backX
+            y = backY
+            avail = backAvail
+            break
+        }
+        backX -= cellSize.width
+        if (backX < 0) {
+            backX = resultsFlow.width - item.width
+            backY -= cellSize.height
         }
     }
     var width = Math.max(cellSize.width, Math.round(avail.width/cellSize.width)*cellSize.width)
