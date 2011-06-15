@@ -168,7 +168,7 @@ PlasmaCore.FrameSvgItem {
         highlight: PlasmaCore.FrameSvgItem {
                 id: highlightFrame
                 imagePath: "widgets/viewitem"
-                prefix: "hover"
+                prefix: "selected+hover"
         }
 
         delegate: MobileComponents.ResourceDelegate {
