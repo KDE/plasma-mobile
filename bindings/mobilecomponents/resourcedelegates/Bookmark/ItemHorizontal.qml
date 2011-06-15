@@ -51,10 +51,10 @@ Item {
         imagePath: "widgets/media-delegate"
         prefix: "picture"
         id: frameRect
-        width: height*1.6
+        height: width/1.6
         anchors {
-            top: parent.top
-            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
         }
     }
 
@@ -89,7 +89,7 @@ Item {
 
     PlasmaCore.FrameSvgItem {
         id: textRect
-        imagePath: "widgets/background"
+        imagePath: "widgets/translucentbackground"
 
         width: childrenRect.width + margins.left + margins.right
         height: childrenRect.height + margins.top + margins.bottom
@@ -133,7 +133,7 @@ Item {
                 opacity: 1
                 width: 22*5
                 height: 22
-                visible: resourceItem.height>64
+                visible: resourceItem.height>70
             }
         }
     }
