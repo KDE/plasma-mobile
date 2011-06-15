@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Web Browser
+Name=Active Web Browser
 GenericName=Web Browser
 Comment=A web browser reader for touch tablets
 Exec=plasma-windowed -graphicssystem raster qtwebbrowser
