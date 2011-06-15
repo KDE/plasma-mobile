@@ -37,8 +37,10 @@ Item {
 
     Loader {
         id: itemLoader
-        width: parent.width
-        height: parent.height
+        anchors {
+            fill: parent
+            margins: 4
+        }
 
         //FIXME: assuming the view is parent.parent is bad, it should have the view attached property (it appears it doesnt, why?)
         source: {
