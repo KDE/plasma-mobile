@@ -90,8 +90,12 @@ Item {
             height: 96
             resourceType: model.resourceType
 
+            onPressed: {
+                resourceInstance.uri = model["description"]
+            }
+
             onClicked: {
-                //plasmoid.openUrl(String(url))
+                plasmoid.openUrl(model["description"])
             }
 
         }

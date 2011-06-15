@@ -86,7 +86,7 @@ void MetadataJob::start()
         return;
     } else if (operation == "addBookmark") {
         const QString url = parameters()["Url"].toString();
-        Nepomuk::Bookmark b;
+        Nepomuk::Bookmark b(url);
         b.setLabel("Active Bookmark!");
         b.setDescription(url);
         QUrl u(url);
