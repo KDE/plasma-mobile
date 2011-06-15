@@ -145,6 +145,7 @@ PlasmaCore.FrameSvgItem {
 
     ListView {
         id: webItemList
+        currentIndex: main.currentGroup==itemGroup?main.currentIndex:-1
         anchors {
             left: parent.left
             top: categoryTitle.bottom
@@ -180,12 +181,13 @@ PlasmaCore.FrameSvgItem {
 
             onPressed: {
                 resourceInstance.uri = model["url"]
+                main.currentIndex = index
+                main.currentGroup = itemGroup
             }
 
             onClicked: {
                 plasmoid.openUrl(String(model["url"]))
             }
-
         }
     }
 
