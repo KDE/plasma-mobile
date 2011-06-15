@@ -38,7 +38,6 @@
 
 // Ontologies
 #include "bookmark.h"
-#include "personcontact.h"
 
 
 BookmarksEngine::BookmarksEngine(QObject* parent, const QVariantList& args)

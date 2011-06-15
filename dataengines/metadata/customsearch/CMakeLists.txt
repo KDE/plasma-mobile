@@ -14,27 +14,6 @@ set(customsearch_srcs
     customsearch.cpp
 )
 
-nepomuk_add_ontology_classes(
-  customsearch_srcs
-  ONTOLOGIES
-  ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nexif.trig
-  ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
-  ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nmo.trig
-  ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nco.trig
-  CLASSES
-  "http://www.semanticdesktop.org/ontologies/2007/03/22/nmo#Email"
-  "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#RasterImage"
-  "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Image"
-  "http://www.semanticdesktop.org/ontologies/2007/03/22/nco#PersonContact"
-  "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Website"
-  "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark"
-  "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#BookmarkFolder"
-  "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"
-  "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Visual"
-  "http://www.semanticdesktop.org/ontologies/2007/05/10/nexif#Photo"
-
-  )
-
 kde4_add_plugin(plasma_engine_active_customsearch ${customsearch_srcs})
 
 target_link_libraries(plasma_engine_active_customsearch
@@ -46,6 +25,7 @@ target_link_libraries(plasma_engine_active_customsearch
     ${SOPRANO_LIBRARIES}
     ${SOPRANO_CLIENT_LIBRARIES}
     kactivities
+    ontologies
 )
 
 install(TARGETS plasma_engine_active_customsearch DESTINATION ${PLUGIN_INSTALL_DIR})
