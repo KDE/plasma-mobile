@@ -31,6 +31,7 @@ Item {
 
     property int iconSize: 22
 
+
     PlasmaCore.DataSource {
         id: tasksSource
         engine: "tasks"
