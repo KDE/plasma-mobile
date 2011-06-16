@@ -80,12 +80,12 @@ Item {
         if (applet.pluginName == "org.kde.windowstrip") {
             applet.width = 1024
             applet.height = 200
-            switcherDialog.mainItem = applet
+            slidingPanel.mainItem = applet
 
-            switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
-            switcherDialog.x = 0
-            switcherDialog.y = 0
-            switcherDialog.visible = false
+            slidingPanel.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
+            slidingPanel.x = 0
+            slidingPanel.y = 0
+            slidingPanel.visible = false
             return
         }
 
@@ -104,8 +104,8 @@ Item {
 
     }
 
-    PlasmaCore.Dialog {
-        id: switcherDialog
+    SlidingPanel {
+        id: slidingPanel
     }
 
 

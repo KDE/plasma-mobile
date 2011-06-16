@@ -20,35 +20,6 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
-PlasmaCore.SvgItem {
-
-    svg: PlasmaCore.Svg {
-        imagePath: "icons/dashboard"
-    }
-    elementId: "dashboard-show"
-    width: height
-    MouseArea {
-        anchors.fill: parent
-        property int startY
-        property bool dragging: false
-        onPressed: {
-            if (!slidingPanel.visible) {
-                dragging = true
-                startY = mouse.y
-                slidingPanel.y = -slidingPanel.height + main.height
-                slidingPanel.visible = true
-            }
-        }
-        onPositionChanged: {
-            if (dragging) {
-                slidingPanel.y = -slidingPanel.height + main.height + (mouse.y - startY)
-            }
-        }
-        onReleased: {
-            dragging = false
-        }
-        onClicked: {
-            slidingPanel.visible = !slidingPanel.visible
-        }
-    }
+PlasmaCore.Dialog {
+    id: slidingPanel
 }
