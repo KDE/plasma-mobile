@@ -21,9 +21,6 @@ import Qt 4.7
 
 Item {
     id: plasmoidContainer
-    width: 24
-    anchors.top: tasksRow.top
-    anchors.bottom: tasksRow.bottom
 
     property QGraphicsWidget applet
     onAppletChanged: {
