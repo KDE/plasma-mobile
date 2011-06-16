@@ -23,14 +23,16 @@
 #include <QObject>
 #include <QHash>
 
-#include "kactivityinfo.h"
+#include <Activities/Info>
 
 class QSize;
 class QString;
 class QPixmap;
 class KConfig;
 
-class KActivityConsumer;
+namespace Activities {
+    class Consumer;
+}
 
 namespace Plasma
 {
@@ -65,7 +67,7 @@ public:
     /**
      * state of the activity
      */
-    KActivityInfo::State state();
+    Activities::Info::State state();
 
     /**
      * save (copy) the activity out to an @p external config
@@ -91,7 +93,7 @@ public:
     /**
      * @returns the info object for this activity
      */
-    const KActivityInfo * info() const;
+    const Activities::Info * info() const;
 
 signals:
     void infoChanged();
@@ -131,7 +133,7 @@ private slots:
     void updateActivityName(Plasma::Context *context);
     void containmentDestroyed(QObject *object);
     void activityChanged();
-    void activityStateChanged(KActivityInfo::State);
+    void activityStateChanged(Activities::Info::State);
     void checkIfCurrent();
 
     void removed();
@@ -148,8 +150,8 @@ private:
     QString m_icon;
     QString m_plugin;
     QHash<QPair<int,int>, Plasma::Containment*> m_containments;
-    KActivityInfo *m_info;
-    KActivityConsumer *m_activityConsumer;
+    Activities::Info *m_info;
+    Activities::Consumer *m_activityConsumer;
     bool m_current;
 };
 

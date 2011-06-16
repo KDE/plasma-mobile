@@ -33,7 +33,9 @@ namespace Plasma
 } // namespace Plasma
 
 class Activity;
-class KActivityController;
+namespace Activities {
+    class Controller;
+}
 
 /**
  * @short A Corona with mobile considerations
@@ -77,7 +79,7 @@ private:
     Plasma::Applet *loadDefaultApplet(const QString &pluginName, Plasma::Containment *c);
     QRect m_screenGeometry;
     QRegion m_availableScreenRegion;
-    KActivityController *m_activityController;
+    Activities::Controller *m_activityController;
     QHash<QString, Activity*> m_activities;
 };
 

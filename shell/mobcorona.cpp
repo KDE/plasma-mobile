@@ -23,7 +23,6 @@
 #include "mobcorona.h"
 #include "mobdialogmanager.h"
 #include "activity.h"
-#include "kactivitycontroller.h"
 
 #include <QApplication>
 #include <QDesktopWidget>
@@ -46,9 +45,12 @@
 
 #include <Plasma/DeclarativeWidget>
 
+#include <Activities/Consumer>
+#include <Activities/Controller>
+
 MobCorona::MobCorona(QObject *parent)
     : Plasma::Corona(parent),
-      m_activityController(new KActivityController(this))
+      m_activityController(new Activities::Controller(this))
 {
     init();
 }
@@ -271,7 +273,7 @@ void MobCorona::activityRemoved(const QString &id)
 
 void MobCorona::activateNextActivity()
 {
-    QStringList list = m_activityController->listActivities(KActivityInfo::Running);
+    QStringList list = m_activityController->listActivities(Activities::Info::Running);
     if (list.isEmpty()) {
         return;
     }
@@ -285,7 +287,7 @@ void MobCorona::activateNextActivity()
 
 void MobCorona::activatePreviousActivity()
 {
-    QStringList list = m_activityController->listActivities(KActivityInfo::Running);
+    QStringList list = m_activityController->listActivities(Activities::Info::Running);
     if (list.isEmpty()) {
         return;
     }
@@ -305,9 +307,9 @@ void MobCorona::checkActivities()
 {
     kDebug() << "containments to start with" << containments().count();
 
-    KActivityConsumer::ServiceStatus status = m_activityController->serviceStatus();
+    Activities::Consumer::ServiceStatus status = m_activityController->serviceStatus();
     //kDebug() << "$%$%$#%$%$%Status:" << status;
-    if (status == KActivityConsumer::NotRunning) {
+    if (status == Activities::Consumer::NotRunning) {
         //panic and give up - better than causing a mess
         kDebug() << "No ActivityManager? Help, I've fallen and I can't get up!";
         return;

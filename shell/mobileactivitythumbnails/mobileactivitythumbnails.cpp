@@ -19,7 +19,6 @@
 
 #include "mobileactivitythumbnails.h"
 #include "../cachingeffect.h"
-#include "../kactivityconsumer.h"
 
 #include <QFile>
 #include <QPainter>
@@ -31,10 +30,12 @@
 #include <Plasma/Context>
 #include <Plasma/Wallpaper>
 
+#include <Activities/Consumer>
+
 MobileActivityThumbnails::MobileActivityThumbnails(QObject *parent, const QVariantList &args)
     : Plasma::DataEngine(parent, args)
 {
-    m_consumer = new KActivityConsumer(this);
+    m_consumer = new Activities::Consumer(this);
     m_saveTimer = new QTimer(this);
     m_saveTimer->setSingleShot(true);
     connect(m_saveTimer, SIGNAL(timeout()), this, SLOT(delayedSnapshotContainment()));

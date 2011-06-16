@@ -35,7 +35,7 @@ qt4_add_dbus_interface(plasma-mobile_SRCS ${ksmserver_xml} ksmserver_interface)
 kde4_add_kdeinit_executable(plasma-mobile ${plasma-mobile_SRCS})
 
 target_link_libraries(kdeinit_plasma-mobile ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTDECLARATIVE_LIBRARY} 
-                      ${KDE4_KIO_LIBS} ${X11_LIBRARIES} ${QT_QTOPENGL_LIBRARY} kworkspace)
+                      ${KDE4_KIO_LIBS} ${X11_LIBRARIES} ${QT_QTOPENGL_LIBRARY} kactivities)
 if(X11_Xrender_FOUND)
    target_link_libraries(kdeinit_plasma-mobile ${X11_Xrender_LIB})
 endif(X11_Xrender_FOUND)

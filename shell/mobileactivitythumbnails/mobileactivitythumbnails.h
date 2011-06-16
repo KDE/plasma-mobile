@@ -23,7 +23,9 @@
 #include <Plasma/DataEngine>
 
 class QTimer;
-class KActivityConsumer;
+namespace Activities {
+    class Consumer;
+}
 
 namespace Plasma {
     class Containment;
@@ -45,7 +47,7 @@ protected Q_SLOTS:
     void delayedSnapshotContainment();
 
 private:
-    KActivityConsumer *m_consumer;
+    Activities::Consumer *m_consumer;
     QTimer *m_saveTimer;
     QWeakPointer<Plasma::Containment>m_containmentToSave;
 };
