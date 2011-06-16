@@ -22,4 +22,38 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 PlasmaCore.Dialog {
     id: slidingPanel
+    property alias menuPlasmoid: menuContainer.applet
+    property alias windowListPlasmoid: windowListContainer.applet
+    mainItem: Column {
+        width: 1024
+        height: 550
+        PlasmoidContainer {
+            id: menuContainer
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: 350
+            onHeightChanged: {
+                applet.height = height
+            }
+            onWidthChanged: {
+                applet.width = width
+            }
+        }
+        PlasmoidContainer {
+            id: windowListContainer
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: 150
+            onHeightChanged: {
+                applet.height = height
+            }
+            onWidthChanged: {
+                applet.width = width
+            }
+        }
+    }
 }

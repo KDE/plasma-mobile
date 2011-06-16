@@ -23,15 +23,16 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
-    width: 800
-    height: 480
+    width: 400
+    height: 150
 
     Flickable {
         id: tagCloud
-        width: 300
+        width: 200
         contentWidth: tagFlow.width
         contentHeight: tagFlow.height
-        visible: (appGrid.searchQuery == "")
+        opacity: (appGrid.searchQuery == "")?1:0.3
+        clip: true
 
         anchors {
             left: parent.left
@@ -40,7 +41,7 @@ Item {
         }
         Flow {
             id: tagFlow
-            width: 300
+            width: 200
             spacing: 8
 
             Text {
@@ -100,6 +101,7 @@ Item {
     MobileComponents.IconGrid {
         id: appGrid
         model: (searchQuery == "")?appModel:runnerModel
+        pageSize: 14
         delegate: Component {
             MobileComponents.IconDelegate {
                 icon: decoration

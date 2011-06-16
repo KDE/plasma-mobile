@@ -112,7 +112,8 @@ Item {
             Flow {
                 anchors.centerIn: parent
                 width: appsView.width
-                height: 400
+                //FIXME: assuming 64x64 icons
+                height: 128*Math.ceil(pageSize/(appsView.width/64))
                 move: Transition {
                     NumberAnimation {
                         properties: "x,y"

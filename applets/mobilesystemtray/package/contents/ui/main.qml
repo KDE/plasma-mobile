@@ -78,16 +78,16 @@ Item {
     function addApplet(applet, pos)
     {
         if (applet.pluginName == "org.kde.windowstrip") {
-            applet.width = 1024
-            applet.height = 200
-            slidingPanel.mainItem = applet
+            slidingPanel.windowListPlasmoid = applet
 
-            slidingPanel.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
-            slidingPanel.x = 0
-            slidingPanel.y = 0
-            slidingPanel.visible = false
+            //slidingPanel.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
             return
-        }
+        } else if (applet.pluginName == "org.kde.mobilelauncher") {
+            slidingPanel.menuPlasmoid = applet
+
+            //slidingPanel.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
+            return
+        } 
 
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(tasksRow, {"x": pos.x, "y": pos.y});

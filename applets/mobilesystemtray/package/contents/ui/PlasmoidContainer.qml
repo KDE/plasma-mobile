@@ -27,6 +27,7 @@ Item {
         print(plasmoidContainer.applet)
         plasmoidContainer.applet.parent = plasmoidContainer
         plasmoidContainer.applet.x=0
+        plasmoidContainer.applet.y=0
     }
 
     onHeightChanged: {
