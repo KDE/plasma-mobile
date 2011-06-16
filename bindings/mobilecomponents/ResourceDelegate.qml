@@ -65,8 +65,6 @@ Item {
                 contextMenu.parentItem = delegateItem
                 contextMenu.adjustPosition();
                 contextMenu.visible = true
-
-                webItemList.currentIndex = index
             }
         }
 

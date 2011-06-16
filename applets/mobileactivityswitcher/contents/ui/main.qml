@@ -71,7 +71,10 @@ Item {
 
     ActionButton {
         elementId: "add"
-        anchors.top: parent.top
+        anchors {
+            top: parent.top
+            left: parent.left
+        }
         function creationFinished(activityJob)
         {
             var activityId = activityJob.result

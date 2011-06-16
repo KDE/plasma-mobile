@@ -39,6 +39,7 @@ Item {
     height: mainView.delegateHeight
 
     PlasmaCore.FrameSvgItem {
+        id: activityBorder
         imagePath: "widgets/media-delegate"
         prefix: "picture"
 
@@ -55,31 +56,15 @@ Item {
             }
             property string path: activityThumbnailsSource.data[model.DataEngineSource]["path"]
             source: path?path:plasmoid.file("images", "emptyactivity.png")
-            Rectangle {
-                color: "white"
-                x: 10
-                y: 10
-                radius: 10
-                width: childrenRect.width+10
-                height: childrenRect.height
-                //only show for the non current
-                opacity: delegate.scale<0.9?1:0
-                Text{
-                    anchors.centerIn: parent
-                    color: "black"
-                    text: model.Name
-                    font.pixelSize: 30
-                }
-                anchors {
-                    right: parent.right
-                    bottom: parent.bottom
-                }
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                }
+            Text {
+                anchors.top: parent.top
+                anchors.left: parent.left
+               // anchors.leftMargin: 22
+                text: model.Name
+                font.bold: true
+                style: Text.Outline
+                styleColor: Qt.rgba(1, 1, 1, 0.6)
+                font.pixelSize: 25
             }
             ActionButton {
                 elementId: "configure"
@@ -98,7 +83,7 @@ Item {
         }
         width: 240
         height: 32
-        opacity: delegate.scale>0.9?1:0
+        opacity: delegate.scale>0.9?1:(model["Current"]==true?1:0)
         Behavior on opacity {
                 NumberAnimation {
                     duration: 250
@@ -112,7 +97,7 @@ Item {
             anchors.left: parent.left
             Text {
                 anchors.centerIn: parent
-                text: "Slide to activate"
+                text: i18n("Slide to activate")
             }
         }
         Image {
@@ -120,7 +105,7 @@ Item {
             source: plasmoid.file("images", "slider.png")
             Text {
                 anchors.centerIn: parent
-                text: model.Name
+                text: model["Current"]==true?i18n("Active"):i18n("Activate")
                 font.pixelSize: 14
             }
             Behavior on x {
@@ -151,6 +136,39 @@ Item {
                     }
                     parent.x = parent.parent.width - parent.width
                 }
+            }
+        }
+    }
+    //TODO: load on demand of the qml file
+    ConfirmationDialog {
+        id: confirmationDialog
+        anchors {
+            right: deleteButton.horizontalCenter
+            top: deleteButton.verticalCenter
+        }
+        transformOrigin: Item.TopRight
+        question: i18n("Are you sure you want permanently delete this activity?")
+        onAccepted: {
+            var service = activitySource.serviceForSource("Status")
+            var operation = service.operationDescription("remove")
+            operation["Id"] = model["DataEngineSource"]
+            var job = service.startOperationCall(operation)
+        }
+    }
+    ActionButton {
+        id: deleteButton
+        elementId: "delete"
+        anchors {
+            top: activityBorder.top
+            right: activityBorder.right
+            topMargin: activityBorder.margins.top
+            rightMargin: activityBorder.margins.right
+        }
+        onClicked: {
+            if (confirmationDialog.scale == 1) {
+                confirmationDialog.scale = 0
+            } else {
+                confirmationDialog.scale = 1
             }
         }
     }
