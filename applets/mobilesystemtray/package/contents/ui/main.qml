@@ -77,15 +77,15 @@ Item {
 
     function addApplet(applet, pos)
     {
-        if (applet.pluginName == "org.kde.appswitcher") {
-            applet.width = 50
-            applet.height = 36
+        if (applet.pluginName == "org.kde.windowstrip") {
+            applet.width = 1024
+            applet.height = 200
             switcherDialog.mainItem = applet
 
             switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
             switcherDialog.x = 0
             switcherDialog.y = 0
-            switcherDialog.visible = true
+            switcherDialog.visible = false
             return
         }
 
@@ -178,6 +178,13 @@ Item {
                         
                     }
                 }
+            }
+        }
+        PanelDragButton {
+            anchors {
+                right: parent.right
+                top: parent.top
+                bottom: parent.bottom
             }
         }
     }
