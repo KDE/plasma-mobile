@@ -52,6 +52,7 @@ Plasma::RunnerManager * runnerManager() {
             << "bookmarks"
             << "org.kde.windowedwidgets"
             << "recentdocuments"
+            << "nepomuksearch"
             << "locations";
         s_runnerManager->setAllowedRunners(allowed);
     }
