@@ -54,7 +54,7 @@ Item {
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
             }
-            property string path: activityThumbnailsSource.data[model.DataEngineSource]["path"]
+            property string path: activityThumbnailsSource.data[model.DataEngineSource]?activityThumbnailsSource.data[model.DataEngineSource]["path"]:""
             source: path?path:plasmoid.file("images", "emptyactivity.png")
             Text {
                 anchors.top: parent.top
