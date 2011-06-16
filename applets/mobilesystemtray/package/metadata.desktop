@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Mobile System Tray
 Name[et]=Mobiili süsteemisalv
+Name[km]=ថាស​ប្រព័ន្ធ​ចល័ត
 Name[nl]=Systeemvak voor mobiel
 Name[pt]=Bandeja do Sistema Móvel
 Name[pt_BR]=Área de notificação móvel
@@ -10,6 +11,7 @@ Name[uk]=Мобільний у системному лотку
 Name[x-test]=xxMobile System Trayxx
 Comment=A system tray applet for mobile shell
 Comment[et]=Süsteemisalve aplett mobiilile
+Comment[km]=ថាស​ប្រព័ន្ធ​អាប់ភ្លេត​សម្រាប់​សែល​ចល័ត
 Comment[nl]=Een systeemvak-applet voor de mobiele shell
 Comment[pt]=Uma 'applet' da bandeja para a área de trabalho móvel
 Comment[pt_BR]=Um miniaplicativo de área de notificação para a área de trabalho móvel

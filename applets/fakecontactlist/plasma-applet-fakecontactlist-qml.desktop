@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Fake contact list (QML)
 Name[et]=Kontaktide libanimekiri (QML)
+Name[km]=បញ្ជី​ទំនាក់ទំនង​ក្លែងក្លាយ (QML)
 Name[nl]=Voorbeeld contactenlijst (QML)
 Name[pt]=Lista de contactos falsa (QML)
 Name[pt_BR]=Lista de contatos falsa (QML)
@@ -10,6 +11,7 @@ Name[uk]=Тестовий список контактів (QML)
 Name[x-test]=xxFake contact list (QML)xx
 Comment=A proof of concept contact list written in qml
 Comment[et]=Põhimõtteline QML-is kirjutatud kontaktide nimekiri
+Comment[km]=ភស្តុតាង​​បញ្ជី​ទំនាក់ទំនង​គំនិត​ដែល​បាន​សរសេរ​នៅ​ក្នុង qml
 Comment[nl]=Een 'proof of concept' contactenlijst geschreven in qml
 Comment[pt]=Uma lista de contactos de testes feita em QML
 Comment[pt_BR]=Uma lista de contatos de testes escrita em QML

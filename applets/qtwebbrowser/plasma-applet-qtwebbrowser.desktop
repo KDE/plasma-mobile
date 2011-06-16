@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Web Browser
 Name[et]=Veebibrauser
+Name[km]=កម្មវិធី​រុករក​បណ្ដាញ
 Name[nl]=Webbrowser
 Name[pt]=Navegação Web
 Name[pt_BR]=Navegador Web
@@ -11,6 +12,7 @@ Name[uk]=Переглядач інтернету
 Name[x-test]=xxWeb Browserxx
 Comment=Simple web browser suited for touch interfaces
 Comment[et]=Puutetundlikele ekraanidele kohandatud lihtne veebibrauser
+Comment[km]=កម្មវិធី​រុករក​បណ្ដាញ​ធម្មតា​ដែល​សមរម្យ​សម្រាប់​ចំណុចប្រទាក់​ប៉ះ
 Comment[nl]=Eenvoudige webbrowser geschikt voor aanraakinterfaces
 Comment[pt]=Um navegador Web simples e adequado para interfaces por toque
 Comment[pt_BR]=Um navegador Web simples e adequado para interfaces por toque
