@@ -66,7 +66,6 @@ PlasmaCore.Dialog {
                 PropertyChanges {
                     target: slidingPanel
                     y: main.height
-                    visible: true
                 }
             },
             State {
@@ -74,7 +73,6 @@ PlasmaCore.Dialog {
                 PropertyChanges {
                     target: slidingPanel
                     y: -slidingPanel.height
-                    visible: false
                 }
             },
             State {
@@ -82,7 +80,6 @@ PlasmaCore.Dialog {
                 PropertyChanges {
                     target: slidingPanel
                     y: -slidingPanel.height + main.height + 20
-                    visible: true
                 }
             },
             State {
@@ -90,7 +87,6 @@ PlasmaCore.Dialog {
                 PropertyChanges {
                     target: slidingPanel
                     y: -slidingPanel.height + windowListContainer.height + main.height +20
-                    visible: true
                 }
             }
         ]

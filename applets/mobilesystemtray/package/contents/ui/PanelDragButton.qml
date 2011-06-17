@@ -40,7 +40,7 @@ PlasmaCore.SvgItem {
         }
         onPositionChanged: {
             if (dragging) {
-                slidingPanel.y = -slidingPanel.height + main.height + (mouse.y - startY)
+                slidingPanel.y = -slidingPanel.height + main.height + (mouse.y - startY) + 20
             }
         }
         onReleased: {
