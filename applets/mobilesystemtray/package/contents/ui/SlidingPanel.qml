@@ -24,9 +24,14 @@ PlasmaCore.Dialog {
     id: slidingPanel
     property alias menuPlasmoid: menuContainer.applet
     property alias windowListPlasmoid: windowListContainer.applet
+    property alias state: containerColumn.state
+
+
     mainItem: Column {
+        id: containerColumn
         width: 1024
         height: 550
+        state: "Hidden"
         PlasmoidContainer {
             id: menuContainer
             anchors {
@@ -55,5 +60,78 @@ PlasmaCore.Dialog {
                 applet.width = width
             }
         }
+        states:  [
+            State {
+                name: "Full"
+                PropertyChanges {
+                    target: slidingPanel
+                    y: 0//slidingPanel.popupPosition(main)
+                    visible: true
+                }
+            },
+            State {
+                name: "Hidden"
+                PropertyChanges {
+                    target: slidingPanel
+                    y: -slidingPanel.height
+                    visible: false
+                }
+            },
+            State {
+                name: "Peek"
+                PropertyChanges {
+                    target: slidingPanel
+                    y: -slidingPanel.height + main.height + 20
+                    visible: true
+                }
+            },
+            State {
+                name: "Tasks"
+                PropertyChanges {
+                    target: slidingPanel
+                    y: -slidingPanel.height + windowListContainer.height +20
+                    visible: true
+                }
+            }
+        ]
+        transitions: [
+            Transition {
+                from: "Hidden"
+                SequentialAnimation {
+                    PropertyAction {
+                        target: slidingPanel
+                        properties: "visible"
+                        value: true
+                    }
+                    PropertyAnimation {
+                        properties: "y"
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            },
+            Transition {
+                to: "Hidden"
+                SequentialAnimation {
+                    PropertyAnimation {
+                        properties: "y"
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                    PropertyAction {
+                        target: slidingPanel
+                        properties: "visible"
+                        value: false
+                    }
+                }
+            },
+            Transition {
+                PropertyAnimation {
+                    properties: "y"
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        ]
     }
 }

@@ -32,11 +32,10 @@ PlasmaCore.SvgItem {
         property int startY
         property bool dragging: false
         onPressed: {
-            if (!slidingPanel.visible) {
+            if (slidingPanel.state == "Hidden") {
                 dragging = true
                 startY = mouse.y
-                slidingPanel.y = -slidingPanel.height + main.height
-                slidingPanel.visible = true
+                slidingPanel.state = "Peek"
             }
         }
         onPositionChanged: {
@@ -46,9 +45,20 @@ PlasmaCore.SvgItem {
         }
         onReleased: {
             dragging = false
+            if (slidingPanel.state == "Peek" && slidingPanel.y > -slidingPanel.height/3) {
+                slidingPanel.state = "Full"
+            } else if (slidingPanel.state == "Peek" && slidingPanel.y > -3*slidingPanel.height/4) {
+                slidingPanel.state = "Tasks"
+            } else if (slidingPanel.state != "Peek") {
+                slidingPanel.state = "Hidden"
+            }
         }
         onClicked: {
-            slidingPanel.visible = !slidingPanel.visible
+            if (slidingPanel.state == "Peek") {
+                slidingPanel.state = "Full"
+            } else {
+                slidingPanel.state = "Hidden"
+            }
         }
     }
 }
