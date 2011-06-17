@@ -31,41 +31,11 @@ Item {
                 if (mimeType) {
                     return mimeType.replace("/", "-")
                 }
-                var icons = new Object();
-                icons["Resource"] = "nepomuk";
-                icons["FileDataObject"] = "unknown";
-
-                // Audio
-                icons["Audio"] = "audio-x-generic";
-                icons["MusicPiece"] = "audio-x-generic";
-
-                // Images
-                icons["Image"] = "image-x-generic";
-                icons["RasterImage"] = "image-x-generic";
-
-                icons["Email"] = "internet-mail";
-                icons["PersonContact"] = "x-office-contact";
-                icons["Document"] = "kword";
-
-                // ... add some more
-
-                // keep searching until the most specific icon is found
-                var _icon = "nepomuk";
-                var typeList = resourceTypes.split(",");
-
-                for(var i = 0; i < typeList.length; i++) {
-                    var shortType = typeList[i].split("#")[1];
-                    for (key in icons) {
-                        if (key == shortType) {
-                            print("M: " + key + icons[shortType]);
-                            _icon = icons[shortType];
-                        }
-                    }
-                }
-                return _icon;
+                return "nepomuk"
             }
 
             Component.onCompleted: {
+                // FIXME: remove this crap, fix icon in metadata data set
                 try {
                     var _l = hasSymbol.toString().split(",");
                     if (_l.length == 1) {
