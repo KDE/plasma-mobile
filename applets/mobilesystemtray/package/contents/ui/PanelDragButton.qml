@@ -47,17 +47,12 @@ PlasmaCore.SvgItem {
             dragging = false
             if (slidingPanel.state == "Peek" && slidingPanel.y > -slidingPanel.height/3) {
                 slidingPanel.state = "Full"
-            } else if (slidingPanel.state == "Peek" && slidingPanel.y > -3*slidingPanel.height/4) {
-                slidingPanel.state = "Tasks"
             } else if (slidingPanel.state != "Peek") {
                 slidingPanel.state = "Hidden"
-            }
-        }
-        onClicked: {
-            if (slidingPanel.state == "Peek") {
-                slidingPanel.state = "Full"
+            } else if (mouse.y - startY > 10) {
+                slidingPanel.state = "Tasks"
             } else {
-                slidingPanel.state = "Hidden"
+                slidingPanel.state = "Full"
             }
         }
     }
