@@ -18,30 +18,51 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include <KIcon>
+#include <iostream>
+
+// KDE
+#include <KApplication>
+#include <KAboutData>
+#include <KCmdLineArgs>
+#include <KDebug>
+#include <KDE/KLocale>
+#include <KToolBar>
+
+// Own
 #include "rekonqactive.h"
 
-RekonqActive::RekonqActive()
-    : KMainWindow()
+static const char description[] = I18N_NOOP("Web browser for Plasma Active");
+
+static const char version[] = "0.1";
+
+void output(const QString &msg)
 {
-    setAcceptDrops(true);
-    m_widget = new View(this);
-    setCentralWidget(m_widget);
+    std::cout << msg.toLocal8Bit().constData() << std::endl;
 }
 
-RekonqActive::~RekonqActive()
+int main(int argc, char **argv)
 {
-}
+    // FIXME: selkie icon instead of internet-web-browser
+    KAboutData about("internet-web-browser", 0, ki18n("Rekonq Active"), version, ki18n(description),
+                     KAboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");
+                     about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
+    KCmdLineArgs::init(argc, argv, &about);
 
-QString RekonqActive::name()
-{
-    return "Rekonq Active";
-    return m_widget->options()->name;
-}
+    KCmdLineOptions options;
+    options.add("+[url]", ki18n( "URL to open" ), "http://dot.kde.org");
+    KCmdLineArgs::addCmdLineOptions(options);
+    KApplication app;
 
-QIcon RekonqActive::icon()
-{
-    return KIcon("internet-web-browser");
-}
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-#include "rekonqactive.moc"
+    //kDebug() << "ARGS:" << args << args->count();
+    QString url = "http://dot.kde.org";
+    if (args->count() > 0) {
+        url = args->arg(0);
+    }
+    output("Starting Rekonq Active..." + url);
+    RekonqActive *mainWindow = new RekonqActive();
+    mainWindow->show();
+    args->clear();
+    return app.exec();
+}

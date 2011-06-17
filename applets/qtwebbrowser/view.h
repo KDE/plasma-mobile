@@ -18,30 +18,49 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include <KIcon>
-#include "rekonqactive.h"
+#ifndef VIEW_H
+#define VIEW_H
+#include <QDeclarativeView>
+#include <qwebview.h>
+#include <qmap.h>
+#include <qaction.h>
 
-RekonqActive::RekonqActive()
-    : KMainWindow()
+
+#include <KActionCollection>
+#include <KMainWindow>
+#include <KPluginInfo>
+
+class KMainWindow;
+class QProgressBar;
+class QSignalMapper;
+class Page;
+class ScriptApi;
+class RekonqActive;
+
+/** Per-website data */
+struct WebsiteOptions
 {
-    setAcceptDrops(true);
-    m_widget = new View(this);
-    setCentralWidget(m_widget);
-}
+    QString name;
+    QString comment;
+    int rating;
+    QUrl startUrl;
+    QIcon windowIcon;
+    QString windowTitle;
+};
 
-RekonqActive::~RekonqActive()
+class View : public QDeclarativeView
 {
-}
+    Q_OBJECT
 
-QString RekonqActive::name()
-{
-    return "Rekonq Active";
-    return m_widget->options()->name;
-}
+public:
+    View( KMainWindow *win, QWidget *parent = 0 );
+    ~View();
 
-QIcon RekonqActive::icon()
-{
-    return KIcon("internet-web-browser");
-}
+    WebsiteOptions* options() const;
+    QString name() const;
 
-#include "rekonqactive.moc"
+private:
+    WebsiteOptions *m_options;
+};
+
+#endif // VIEW_H

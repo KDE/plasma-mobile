@@ -18,30 +18,31 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include <KIcon>
-#include "rekonqactive.h"
 
-RekonqActive::RekonqActive()
-    : KMainWindow()
+#ifndef REKONQACTIVE_H
+#define REKONQACTIVE_H
+
+#include "view.h"
+//#include <kxmlguiwindow.h>
+
+/**
+ * This class serves as the main window for rekonq active.
+ *
+ * @short Rekonq Active browser main window class
+ * @author Sebastian Kügler <sebas@kde.org>
+ * @version 0.1
+ */
+class RekonqActive : public KMainWindow
 {
-    setAcceptDrops(true);
-    m_widget = new View(this);
-    setCentralWidget(m_widget);
-}
+    Q_OBJECT
+public:
+    RekonqActive();
+    virtual ~RekonqActive();
+    QString name();
+    QIcon icon();
 
-RekonqActive::~RekonqActive()
-{
-}
+private:
+    View *m_widget;
+};
 
-QString RekonqActive::name()
-{
-    return "Rekonq Active";
-    return m_widget->options()->name;
-}
-
-QIcon RekonqActive::icon()
-{
-    return KIcon("internet-web-browser");
-}
-
-#include "rekonqactive.moc"
+#endif // REKONQACTIVE_H
