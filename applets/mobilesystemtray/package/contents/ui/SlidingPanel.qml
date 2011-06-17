@@ -65,7 +65,7 @@ PlasmaCore.Dialog {
                 name: "Full"
                 PropertyChanges {
                     target: slidingPanel
-                    y: 0//slidingPanel.popupPosition(main)
+                    y: main.height
                     visible: true
                 }
             },
@@ -89,7 +89,7 @@ PlasmaCore.Dialog {
                 name: "Tasks"
                 PropertyChanges {
                     target: slidingPanel
-                    y: -slidingPanel.height + windowListContainer.height +20
+                    y: -slidingPanel.height + windowListContainer.height + main.height +20
                     visible: true
                 }
             }
