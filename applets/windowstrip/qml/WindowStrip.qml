@@ -27,6 +27,8 @@ Item {
     width: 500
     height: 150
 
+    property int iconSize: 22
+
     PlasmaCore.DataSource {
         id: tasksSource
         engine: "tasks"
@@ -42,6 +44,11 @@ Item {
 
     PlasmaCore.Theme {
         id: theme
+    }
+
+    PlasmaCore.Svg {
+        id: iconsSvg
+        imagePath: "widgets/configuration-icons"
     }
 
     // connect from C++ to update
@@ -113,7 +120,7 @@ Item {
                     property string winId: DataEngineSource
 
                     Rectangle {
-                        opacity: .4
+                        opacity: 0.4
                         color: theme.backgroundColor
                         anchors.fill: parent
                     }
@@ -133,6 +140,21 @@ Item {
                             print(winId)
                             var service = tasksSource.serviceForSource(winId)
                             var operation = service.operationDescription("activate")
+
+                            service.startOperationCall(operation)
+                        }
+                    }
+
+                    ActionButton {
+                        id: closeButton
+                        elementId: "close"
+                        anchors {
+                            top: parent.top
+                            right: parent.right
+                        }
+                        onClicked: {
+                            var service = tasksSource.serviceForSource(winId)
+                            var operation = service.operationDescription("close")
 
                             service.startOperationCall(operation)
                         }
