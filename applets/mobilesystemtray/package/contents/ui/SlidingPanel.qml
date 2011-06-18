@@ -63,8 +63,8 @@ PlasmaCore.Dialog {
             }
         }
         SlidingDragButton {
-            width: 32
             height: 32
+            anchors.left: parent.left
             anchors.right: parent.right
             anchors.rightMargin: 8
             //FIXME: this is quite cheap as layout hack

@@ -21,12 +21,46 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-PlasmaCore.SvgItem {
+Item {
     id: panelDragButton
-    svg: PlasmaCore.Svg {
+
+    PlasmaCore.Svg {
+        id: iconSvg
         imagePath: "icons/dashboard"
     }
-    elementId: "dashboard-show"
+
+    PlasmaCore.SvgItem {
+        svg: iconSvg
+        elementId: "dashboard-show"
+        width: height
+        anchors {
+            top: parent.top
+            left: parent.left
+            bottom:parent.bottom
+        }
+    }
+
+    PlasmaCore.SvgItem {
+        svg: iconSvg
+        elementId: "dashboard-show"
+        width: height
+        anchors {
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
+            bottom:parent.bottom
+        }
+    }
+
+    PlasmaCore.SvgItem {
+        svg: iconSvg
+        elementId: "dashboard-show"
+        width: height
+        anchors {
+            top: parent.top
+            right: parent.right
+            bottom:parent.bottom
+        }
+    }
 
     MobileComponents.MouseEventListener {
         anchors.fill: parent
