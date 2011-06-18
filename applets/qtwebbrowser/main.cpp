@@ -49,14 +49,14 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
-    options.add("+[url]", ki18n( "URL to open" ), "http://dot.kde.org");
+    options.add("+[url]", ki18n( "URL to open" ), "http://rekonq.kde.org/");
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
     //kDebug() << "ARGS:" << args << args->count();
-    QString url = "http://dot.kde.org";
+    QString url = "http://rekonq.kde.org/";
     if (args->count() > 0) {
         url = args->arg(0);
     }
