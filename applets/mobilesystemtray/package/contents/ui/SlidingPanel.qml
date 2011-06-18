@@ -87,7 +87,7 @@ PlasmaCore.Dialog {
                 name: "Tasks"
                 PropertyChanges {
                     target: slidingPanel
-                    y: -slidingPanel.height + windowListContainer.height + main.height +20
+                    y: -slidingPanel.height + windowListContainer.height + main.height + 40
                 }
             }
         ]
