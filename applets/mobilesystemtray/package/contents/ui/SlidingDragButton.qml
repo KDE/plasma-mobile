@@ -70,7 +70,6 @@ Item {
         onPressed: {
             dragging = true
             startY = mouse.screenY
-            //slidingPanel.state = "Peek"
         }
         onPositionChanged: {
             if (dragging) {
@@ -80,9 +79,11 @@ Item {
         onReleased: {
             dragging = false
             slidingPanel.state = "none"
-            if (slidingPanel.y > -slidingPanel.height/4) {
+            if (Math.abs(mouse.screenY - startY) < 10) {
+                slidingPanel.state = "Hidden"
+            } else if (slidingPanel.y > -slidingPanel.height/4) {
                 slidingPanel.state = "Full"
-            } else if (slidingPanel.y > -slidingPanel.height/2) {
+            } else if (slidingPanel.screenY > -slidingPanel.height/2) {
                 slidingPanel.state = "Tasks"
             } else {
                 slidingPanel.state = "Hidden"
