@@ -22,6 +22,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 PlasmaCore.Dialog {
     id: slidingPanel
+    //windowFlags: Qt.Popup
     property alias menuPlasmoid: menuContainer.applet
     property alias windowListPlasmoid: windowListContainer.applet
     property alias state: containerColumn.state
@@ -29,7 +30,7 @@ PlasmaCore.Dialog {
 
     mainItem: Column {
         id: containerColumn
-        width: 1024
+        width: main.width
         height: 550
         state: "Hidden"
         PlasmoidContainer {
