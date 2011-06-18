@@ -132,11 +132,17 @@ void WindowStrip::updateFrame()
     QList<QVariant> thumbnailsInfo = data.value<QList<QVariant> >();
     //kDebug() << "window positions" << thumbnailsInfo;
 
+    QPoint offset;
+    QGraphicsView *v = static_cast<Plasma::Applet *>(parentItem())->view();
+    if (v) {
+        offset = v->mapFromScene(m_windowFlicker->mapToScene(0,0));
+    }
+
     foreach (QVariant windowData, thumbnailsInfo) {
          const QVariantMap windowInfo = windowData.value<QVariantMap>();
          WId winId = windowInfo["winId"].value<QString>().toInt();
 
-         m_windows[winId] = QRect(windowInfo["x"].value<int>(), windowInfo["y"].value<int>(), windowInfo["width"].value<int>(), windowInfo["height"].value<int>());
+         m_windows[winId] = QRect(windowInfo["x"].value<int>()+offset.x(), windowInfo["y"].value<int>()+offset.y(), windowInfo["width"].value<int>(), windowInfo["height"].value<int>());
     }
 }
 

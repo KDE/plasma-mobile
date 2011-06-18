@@ -25,13 +25,14 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
-    width: 600
-    height: 240
+    id: main
+    width: 500
+    height: 150
 
     PlasmaCore.DataSource {
         id: tasksSource
         engine: "tasks"
-        interval: 30
+        interval: 0
         onSourceAdded: {
             //print("SOURCE added: " + source);
             connectSource(source)
@@ -53,7 +54,7 @@ Item {
         contentWidth: windowsRow.width
         anchors.fill: parent
         property variant childrenPositions
-        
+
         Row {
             id: windowsRow
             objectName: "windowsRow"
@@ -70,10 +71,10 @@ Item {
                         var properties = new Object()
                         properties.winId = winId
                         //FIXME: why those hardoced numbers?
-                        properties.x = windowsRow.children[i].x + 30
+                        properties.x = windowsRow.children[i].x + 10
                         properties.y = windowsRow.children[i].y + 20
                         properties.width = windowsRow.children[i].width - 20
-                        properties.height = windowsRow.children[i].height - 20
+                        properties.height = windowsRow.children[i].height - 40
                         childrenPositions[i] = properties
                     }
                     windowFlicker.childrenPositions = childrenPositions
@@ -101,8 +102,11 @@ Item {
 
                 Item {
                     id: windowDelegate
-                    width: 200
-                    height: 200
+                    width: height*1.6
+                    height: main.height
+                    onHeightChanged: {
+                        positionsTimer.running = true
+                    }
                     property string winId: DataEngineSource
 
                     Rectangle {
