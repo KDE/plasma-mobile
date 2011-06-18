@@ -40,6 +40,7 @@ public:
     virtual ~RekonqActive();
     QString name();
     QIcon icon();
+    KConfigGroup config(const QString &group = "Default");
 
 private:
     View *m_widget;

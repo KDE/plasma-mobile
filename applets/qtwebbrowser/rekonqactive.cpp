@@ -26,11 +26,18 @@ RekonqActive::RekonqActive(const QString &url)
 {
     setAcceptDrops(true);
     m_widget = new View(url, this);
+    restoreWindowSize(config("Window"));
     setCentralWidget(m_widget);
 }
 
 RekonqActive::~RekonqActive()
 {
+    saveWindowSize(config("Window"));
+}
+
+KConfigGroup RekonqActive::config(const QString &group)
+{
+    return KConfigGroup(KSharedConfig::openConfig("rekonqactiverc"), group);
 }
 
 QString RekonqActive::name()
