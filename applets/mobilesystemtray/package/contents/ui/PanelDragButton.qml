@@ -20,17 +20,42 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
-PlasmaCore.SvgItem {
-
-    svg: PlasmaCore.Svg {
-        imagePath: "icons/dashboard"
-    }
-    elementId: "dashboard-show"
+Item {
+    id: panelDragButton
+    state: slidingPanel.state
     width: height
+
+    PlasmaCore.SvgItem {
+        svg: PlasmaCore.Svg {
+            imagePath: "widgets/arrows"
+        }
+        elementId: "up-arrow"
+        width: height
+        height: parent.height
+        anchors.bottom: dashboardIcon.top
+    }
+    PlasmaCore.SvgItem {
+        id: dashboardIcon
+        x: 0
+        svg: PlasmaCore.Svg {
+            imagePath: "icons/dashboard"
+        }
+        elementId: "dashboard-show"
+        width: height
+        height: parent.height
+    }
+
     MouseArea {
         anchors.fill: parent
         property int startY
         property bool dragging: false
+        drag {
+            target: dashboardIcon
+            maximumX: 0
+            minimumX: 0
+            minimumY: 0
+            maximumY: height
+        }
         onPressed: {
             if (slidingPanel.state == "Hidden") {
                 dragging = true
@@ -54,6 +79,37 @@ PlasmaCore.SvgItem {
             } else {
                 slidingPanel.state = "Full"
             }
+        }
+    }
+
+    states: [
+        State {
+            name: "Full"
+            PropertyChanges {
+                target: dashboardIcon
+                y: height
+            }
+        },
+        State {
+            name: "Hidden"
+            PropertyChanges {
+                target: dashboardIcon
+                y: 0
+            }
+        },
+        State {
+            name: "Tasks"
+            PropertyChanges {
+                target: dashboardIcon
+                y: height
+            }
+        }
+    ]
+    transitions: Transition {
+        PropertyAnimation {
+            properties: "y"
+            duration: 250
+            easing.type: Easing.InOutQuad
         }
     }
 }
