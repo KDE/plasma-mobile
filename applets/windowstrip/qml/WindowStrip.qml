@@ -21,6 +21,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.qtextracomponents 0.1
 
 Item {
     id: main
@@ -123,6 +124,13 @@ Item {
                         opacity: 0.4
                         color: theme.backgroundColor
                         anchors.fill: parent
+                    }
+
+                    QIconItem {
+                        anchors.centerIn: parent
+                        width: 64
+                        height: 64
+                        icon: model["icon"]
                     }
 
                     Text {
