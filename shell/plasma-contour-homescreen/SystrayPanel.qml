@@ -28,21 +28,9 @@ Item {
     }
     height: 48
 
-
-    PlasmaCore.FrameSvgItem {
-        id: systrayBackground
-        anchors.fill: systrayPanel
-        imagePath: "widgets/background"
-        enabledBorders: width < systrayPanel.parent.width?"LeftBorder|RightBorder|BottomBorder":"BottomBorder"
-        Item {
-            id: containmentParent
-            anchors.fill: parent
-            anchors.topMargin: systrayBackground.margins.top
-            anchors.bottomMargin: systrayBackground.margins.bottom
-            anchors.leftMargin: systrayBackground.margins.left
-            anchors.rightMargin: systrayBackground.margins.right
-        }
-        z: 10
+    Item {
+        id: containmentParent
+        anchors.fill: parent
     }
 
     property QGraphicsWidget containment

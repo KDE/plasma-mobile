@@ -243,13 +243,23 @@ Item {
         property QGraphicsWidget containment
     }
 
-    SystrayPanel {
-        id: topEdgePanel;
-        objectName: "topEdgePanel";
-
-        anchors.horizontalCenter: homeScreen.horizontalCenter;
-        y: 0;
+    PlasmaCore.Dialog {
+        id: panelDialog
+        //windowFlags: Qt.Window|Qt.StaysOnTopHint
+        Component.onCompleted: {
+            panelDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
+            panelDialog.setAttribute(Qt.WA_X11DoNotAcceptFocus, true)
+            panelDialog.visible = true
+        }
+        mainItem: SystrayPanel {
+            id: topEdgePanel;
+            objectName: "topEdgePanel";
+            y: 0
+            width: homeScreen.width
+            height:32
+        }
     }
+
 
     LockScreen {
         id: lockScreenItem
