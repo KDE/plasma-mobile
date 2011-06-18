@@ -31,7 +31,8 @@ PlasmaCore.Dialog {
     mainItem: Column {
         id: containerColumn
         width: main.width
-        height: 550
+        spacing: 4
+        //height: 550
         state: "Hidden"
         PlasmoidContainer {
             id: menuContainer
@@ -61,6 +62,14 @@ PlasmaCore.Dialog {
                 applet.width = width
             }
         }
+        SlidingDragButton {
+            width: 32
+            height: 32
+            anchors.right: parent.right
+            anchors.rightMargin: 8
+            //FIXME: this is quite cheap as layout hack
+            transform: Translate { y: 8 }
+        }
         states:  [
             State {
                 name: "Full"
@@ -87,7 +96,7 @@ PlasmaCore.Dialog {
                 name: "Tasks"
                 PropertyChanges {
                     target: slidingPanel
-                    y: -slidingPanel.height + windowListContainer.height + main.height + 40
+                    y: -slidingPanel.height + windowListContainer.height + main.height + 72
                 }
             }
         ]
