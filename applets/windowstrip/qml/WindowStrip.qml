@@ -19,10 +19,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
     id: main
@@ -41,6 +39,11 @@ Item {
             connectedSources = sources
         }
     }
+
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     // connect from C++ to update
     // - position of the windows, relative to window element
     // - actual position of the row
@@ -111,6 +114,7 @@ Item {
 
                     Rectangle {
                         opacity: .4
+                        color: theme.backgroundColor
                         anchors.fill: parent
                     }
 
@@ -119,6 +123,7 @@ Item {
                         anchors.bottom: parent.bottom
                         anchors.horizontalCenter: parent.horizontalCenter;
                         text: className
+                        color: theme.textColor
                         font.bold: true
                     }
 
