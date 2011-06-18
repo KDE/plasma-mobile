@@ -30,6 +30,7 @@
 View::View(const QString &url, QWidget *parent)
     : QDeclarativeView(parent)
 {
+    setResizeMode(QDeclarativeView::SizeRootObjectToView);
     // Tell the script engine where to find the Plasma Quick components
     QStringList importPathes = KGlobal::dirs()->findDirs("lib", "kde4/imports");
     foreach (const QString &iPath, importPathes) {
