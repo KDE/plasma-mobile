@@ -18,16 +18,49 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include "view.h"
+#include <QDeclarativeContext>
+#include <QDeclarativeEngine>
+#include <QScriptValue>
 
-View::View( KMainWindow *win, QWidget *parent)
+#include <KStandardDirs>
+
+#include "view.h"
+#include "kdebug.h"
+
+View::View(const QString &url, QWidget *parent)
     : QDeclarativeView(parent)
 {
-    Q_UNUSED( win )
+    // Tell the script engine where to find the Plasma Quick components
+    QStringList importPathes = KGlobal::dirs()->findDirs("lib", "kde4/imports");
+    foreach (const QString &iPath, importPathes) {
+        //kDebug() << "Adding import path to engine:" << iPath;
+        engine()->addImportPath(iPath);
+    }
+
+    // Make the url passed in as argument known to the webbrowser component
+    //kDebug() << "Setting startupArguments to " << url;
+    rootContext()->setContextProperty("startupArguments", QVariant(QStringList(url)));
+
+    // Locate the webbrowser QML component in the package
+    // Note that this is a bit brittle, since it relies on the package name,
+    // but it allows us to share the same code with the pure QML plasmoid
+    // In a later stadium, we can install the QML stuff in a different path.
+    QString qmlFile = KGlobal::dirs()->findResource("data", "plasma/plasmoids/qtwebbrowser/contents/code/webbrowser.qml");
+    //kDebug() << "Loading QML File:" << qmlFile;
+    setSource(QUrl(qmlFile));
+    //kDebug() << "Plugin pathes:" << engine()->pluginPathList();
+    show();
+
+    //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
 }
 
 View::~View()
 {
+}
+
+void View::exception()
+{   // TODO: do something useful, in case anything goes wrong in the QML files
+    kDebug() << "Exception in script.";
 }
 
 #include "view.moc"

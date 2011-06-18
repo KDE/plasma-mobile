@@ -36,7 +36,7 @@ class RekonqActive : public KMainWindow
 {
     Q_OBJECT
 public:
-    RekonqActive();
+    RekonqActive(const QString &url);
     virtual ~RekonqActive();
     QString name();
     QIcon icon();

@@ -21,11 +21,11 @@
 #include <KIcon>
 #include "rekonqactive.h"
 
-RekonqActive::RekonqActive()
+RekonqActive::RekonqActive(const QString &url)
     : KMainWindow()
 {
     setAcceptDrops(true);
-    m_widget = new View(this);
+    m_widget = new View(url, this);
     setCentralWidget(m_widget);
 }
 
@@ -36,7 +36,7 @@ RekonqActive::~RekonqActive()
 QString RekonqActive::name()
 {
     return "Rekonq Active";
-    return m_widget->options()->name;
+    //return m_widget->options()->name;
 }
 
 QIcon RekonqActive::icon()

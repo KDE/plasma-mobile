@@ -61,7 +61,7 @@ int main(int argc, char **argv)
         url = args->arg(0);
     }
     output("Starting Rekonq Active..." + url);
-    RekonqActive *mainWindow = new RekonqActive();
+    RekonqActive *mainWindow = new RekonqActive(url);
     mainWindow->show();
     args->clear();
     return app.exec();

@@ -53,7 +53,7 @@ class View : public QDeclarativeView
     Q_OBJECT
 
 public:
-    View( KMainWindow *win, QWidget *parent = 0 );
+    View(const QString &url, QWidget *parent = 0 );
     ~View();
 
     WebsiteOptions* options() const;
@@ -61,6 +61,9 @@ public:
 
 private:
     WebsiteOptions *m_options;
+
+private Q_SLOTS:
+    void exception();
 };
 
 #endif // VIEW_H
