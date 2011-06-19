@@ -21,6 +21,7 @@ import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.slccomponents 0.1 as SlcComponents
 
 Item {
     width: 400
@@ -28,6 +29,10 @@ Item {
 
     MobileComponents.ResourceInstance {
         id: resourceInstance
+    }
+
+    SlcComponents.SlcMenu {
+        id: contextMenu
     }
 
     Flickable {
