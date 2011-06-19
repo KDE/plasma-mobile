@@ -114,8 +114,18 @@ PlasmaCore.Dialog {
                     SequentialAnimation {
                         PropertyAction {
                             target: slidingPanel
+                            properties: "y"
+                            value: -height
+                        }
+                        PropertyAction {
+                            target: slidingPanel
                             properties: "visible"
                             value: true
+                        }
+                        PropertyAction {
+                            target: slidingPanel
+                            properties: "y"
+                            value: -height
                         }
                         PropertyAnimation {
                             properties: "y"
