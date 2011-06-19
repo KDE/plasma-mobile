@@ -113,7 +113,6 @@ Item {
                 resourceType: "FileDataObject"
                 property string label: display
                 property string mimeType: "buh"
-                property variant icon: decoration
                 onPressed: {
                     resourceInstance.uri = resourceUrl
                 }

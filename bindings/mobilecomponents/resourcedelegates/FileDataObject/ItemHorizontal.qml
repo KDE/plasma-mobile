@@ -37,7 +37,7 @@ Item {
             Component.onCompleted: {
                 // FIXME: remove this crap, fix icon in metadata data set
                 try {
-                    if (decoration) {
+                    if (!model["hasSymbol"]) {
                         icon = decoration
                         return
                     }
