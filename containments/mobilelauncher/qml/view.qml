@@ -26,6 +26,10 @@ Item {
     width: 400
     height: 150
 
+    MobileComponents.ResourceInstance {
+        id: resourceInstance
+    }
+
     Flickable {
         id: tagCloud
         width: 200
@@ -110,6 +114,9 @@ Item {
                 property string label: display
                 property string mimeType: "buh"
                 property variant icon: decoration
+                onPressed: {
+                    resourceInstance.uri = resourceUrl
+                }
                 onClicked: {
                     appsView.clicked(url)
                 }
