@@ -78,6 +78,7 @@ Q_SIGNALS:
 protected:
     void drawBackground(QPainter *painter, const QRectF &rect);
     void resizeEvent(QResizeEvent *event);
+    void closeEvent(QCloseEvent *event);
     bool event(QEvent *event);
 
 private:

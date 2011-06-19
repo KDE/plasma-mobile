@@ -130,6 +130,12 @@ void MobView::resizeEvent(QResizeEvent *event)
     emit geometryChanged();
 }
 
+void MobView::closeEvent(QCloseEvent *event)
+{
+    Q_UNUSED(event)
+    event->ignore();
+}
+
 Plasma::Location MobView::location() const
 {
     return containment()->location();
