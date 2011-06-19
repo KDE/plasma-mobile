@@ -28,116 +28,120 @@ PlasmaCore.Dialog {
     property alias state: containerColumn.state
 
 
-    mainItem: Column {
-        id: containerColumn
+    mainItem: SlidingDragButton {
+        height: childrenRect.height
         width: main.width
-        spacing: 4
-        //height: 550
-        state: "Hidden"
-        PlasmoidContainer {
-            id: menuContainer
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-            height: 350
-            onHeightChanged: {
-                applet.height = height
-            }
-            onWidthChanged: {
-                applet.width = width
-            }
-        }
-        PlasmoidContainer {
-            id: windowListContainer
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-            height: 150
-            onHeightChanged: {
-                applet.height = height
-            }
-            onWidthChanged: {
-                applet.width = width
-            }
-        }
-        SlidingDragButton {
-            height: 32
+
+
+        Column {
+            id: containerColumn
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.rightMargin: 8
-            //FIXME: this is quite cheap as layout hack
-            transform: Translate { y: 8 }
+            spacing: 4
+            //height: 550
+            state: "Hidden"
+            PlasmoidContainer {
+                id: menuContainer
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                height: 350
+                onHeightChanged: {
+                    applet.height = height
+                }
+                onWidthChanged: {
+                    applet.width = width
+                }
+            }
+            PlasmoidContainer {
+                id: windowListContainer
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                height: 150
+                onHeightChanged: {
+                    applet.height = height
+                }
+                onWidthChanged: {
+                    applet.width = width
+                }
+            }
+            Item {
+                width:32
+                height:32
+            }
+
+            states:  [
+                State {
+                    name: "Full"
+                    PropertyChanges {
+                        target: slidingPanel
+                        y: main.height
+                    }
+                },
+                State {
+                    name: "Hidden"
+                    PropertyChanges {
+                        target: slidingPanel
+                        y: -slidingPanel.height
+                    }
+                },
+                State {
+                    name: "Peek"
+                    PropertyChanges {
+                        target: slidingPanel
+                        y: -slidingPanel.height + main.height + 20
+                    }
+                },
+                State {
+                    name: "Tasks"
+                    PropertyChanges {
+                        target: slidingPanel
+                        y: -slidingPanel.height + windowListContainer.height + main.height + 72
+                    }
+                }
+            ]
+            transitions: [
+                Transition {
+                    from: "Hidden"
+                    SequentialAnimation {
+                        PropertyAction {
+                            target: slidingPanel
+                            properties: "visible"
+                            value: true
+                        }
+                        PropertyAnimation {
+                            properties: "y"
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+                },
+                Transition {
+                    to: "Hidden"
+                    SequentialAnimation {
+                        PropertyAnimation {
+                            properties: "y"
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+                        PropertyAction {
+                            target: slidingPanel
+                            properties: "visible"
+                            value: false
+                        }
+                    }
+                },
+                Transition {
+                    PropertyAnimation {
+                        properties: "y"
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            ]
         }
-        states:  [
-            State {
-                name: "Full"
-                PropertyChanges {
-                    target: slidingPanel
-                    y: main.height
-                }
-            },
-            State {
-                name: "Hidden"
-                PropertyChanges {
-                    target: slidingPanel
-                    y: -slidingPanel.height
-                }
-            },
-            State {
-                name: "Peek"
-                PropertyChanges {
-                    target: slidingPanel
-                    y: -slidingPanel.height + main.height + 20
-                }
-            },
-            State {
-                name: "Tasks"
-                PropertyChanges {
-                    target: slidingPanel
-                    y: -slidingPanel.height + windowListContainer.height + main.height + 72
-                }
-            }
-        ]
-        transitions: [
-            Transition {
-                from: "Hidden"
-                SequentialAnimation {
-                    PropertyAction {
-                        target: slidingPanel
-                        properties: "visible"
-                        value: true
-                    }
-                    PropertyAnimation {
-                        properties: "y"
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            },
-            Transition {
-                to: "Hidden"
-                SequentialAnimation {
-                    PropertyAnimation {
-                        properties: "y"
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                    PropertyAction {
-                        target: slidingPanel
-                        properties: "visible"
-                        value: false
-                    }
-                }
-            },
-            Transition {
-                PropertyAnimation {
-                    properties: "y"
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        ]
     }
 }

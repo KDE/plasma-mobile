@@ -21,7 +21,7 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-Item {
+ MobileComponents.MouseEventListener {
     id: panelDragButton
 
     PlasmaCore.Svg {
@@ -33,8 +33,8 @@ Item {
         svg: iconSvg
         elementId: "dashboard-show"
         width: height
+        height: 32
         anchors {
-            top: parent.top
             left: parent.left
             bottom:parent.bottom
         }
@@ -44,8 +44,8 @@ Item {
         svg: iconSvg
         elementId: "dashboard-show"
         width: height
+        height: 32
         anchors {
-            top: parent.top
             horizontalCenter: parent.horizontalCenter
             bottom:parent.bottom
         }
@@ -55,39 +55,49 @@ Item {
         svg: iconSvg
         elementId: "dashboard-show"
         width: height
+        height: 32
         anchors {
-            top: parent.top
             right: parent.right
             bottom:parent.bottom
         }
     }
 
-    MobileComponents.MouseEventListener {
-        anchors.fill: parent
-        property int startY
-        property bool dragging: false
 
-        onPressed: {
-            dragging = true
-            startY = mouse.screenY
-        }
-        onPositionChanged: {
-            if (dragging) {
-                slidingPanel.y = -slidingPanel.height + main.height + (mouse.screenY ) + 20
-            }
-        }
-        onReleased: {
+    property int startY
+    property int lastY
+    property bool dragging: false
+
+    onPressed: {
+        if (mouse.y < panelDragButton.height-250) {
             dragging = false
-            slidingPanel.state = "none"
-            if (Math.abs(mouse.screenY - startY) < 10) {
-                slidingPanel.state = "Hidden"
-            } else if (slidingPanel.y > -slidingPanel.height/4) {
-                slidingPanel.state = "Full"
-            } else if (slidingPanel.screenY > -slidingPanel.height/2) {
-                slidingPanel.state = "Tasks"
-            } else {
-                slidingPanel.state = "Hidden"
-            }
+            return
+        }
+        dragging = true
+        startY = mouse.screenY
+        lastY = mouse.screenY
+    }
+    onPositionChanged: {
+        if (dragging) {
+            slidingPanel.y += (mouse.screenY - lastY)
+            lastY = mouse.screenY
+        }
+    }
+    onReleased: {
+        if (!dragging) {
+            dragging = false
+            return
+        }
+
+        dragging = false
+        slidingPanel.state = "none"
+        if (mouse.y >= height-32 && Math.abs(mouse.screenY - startY) < 8) {
+            slidingPanel.state = "Hidden"
+        } else if (slidingPanel.y > -slidingPanel.height/4) {
+            slidingPanel.state = "Full"
+        } else if (slidingPanel.screenY > -slidingPanel.height/2) {
+            slidingPanel.state = "Tasks"
+        } else {
+            slidingPanel.state = "Hidden"
         }
     }
 }
