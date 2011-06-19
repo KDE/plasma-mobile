@@ -111,7 +111,9 @@ void MobView::setContainment(Plasma::Containment *c)
 
 void MobView::drawBackground(QPainter *painter, const QRectF &rect)
 {
-    painter->fillRect(rect.toAlignedRect(), Qt::black);
+    Q_UNUSED(painter)
+    Q_UNUSED(rect)
+    //don't do anything
 }
 
 

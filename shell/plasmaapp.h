@@ -89,6 +89,7 @@ private Q_SLOTS:
 private:
     MobCorona *m_corona;
     MobView *m_mainView;
+    QHash<Plasma::Location, MobView *> m_panelViews;
 
     //the main declarative scene loader
     Plasma::DeclarativeWidget *m_declarativeWidget;
