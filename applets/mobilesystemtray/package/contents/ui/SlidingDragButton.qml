@@ -68,7 +68,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     property bool dragging: false
 
     onPressed: {
-        if (mouse.y < panelDragButton.height-250) {
+        if (mouse.y < height-200) {
             dragging = false
             return
         }
@@ -90,12 +90,16 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
         dragging = false
         slidingPanel.state = "none"
+        //click on the handle area, hide
         if (mouse.y >= height-32 && Math.abs(mouse.screenY - startY) < 8) {
             slidingPanel.state = "Hidden"
-        } else if (slidingPanel.y > -slidingPanel.height/4) {
+        //more than 2/3 of the screen uncovered, full
+        } else if (slidingPanel.height+slidingPanel.y > 2*slidingPanel.height/3) {
             slidingPanel.state = "Full"
-        } else if (slidingPanel.screenY > -slidingPanel.height/2) {
+        //more then 1/4 of the screen uncovered, taskbar
+        } else if (slidingPanel.height+slidingPanel.y > slidingPanel.height/4) {
             slidingPanel.state = "Tasks"
+        //screen mostly hidden: hide
         } else {
             slidingPanel.state = "Hidden"
         }
