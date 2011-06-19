@@ -106,28 +106,22 @@ Item {
         signal clicked(string url)
 
 
-        delegate: Item {
+        delegate: Flow {
             width: appsView.width
             height: appsView.height
-            Flow {
-                anchors.centerIn: parent
-                width: appsView.width
-                //FIXME: assuming 64x64 icons
-                height: 128*Math.ceil(pageSize/(appsView.width/64))
-                move: Transition {
-                    NumberAnimation {
-                        properties: "x,y"
-                        duration: 150
-                    }
+            move: Transition {
+                NumberAnimation {
+                    properties: "x,y"
+                    duration: 150
                 }
-                Repeater {
-                    model: MobileComponents.PagedProxyModel {
-                        sourceModel: main.model
-                        currentPage: index
-                        pageSize: main.pageSize
-                    }
-                    delegate: main.delegate
+            }
+            Repeater {
+                model: MobileComponents.PagedProxyModel {
+                    sourceModel: main.model
+                    currentPage: index
+                    pageSize: main.pageSize
                 }
+                delegate: main.delegate
             }
         }
     }
