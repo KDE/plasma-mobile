@@ -101,7 +101,6 @@ Item {
     MobileComponents.IconGrid {
         id: appGrid
         model: (searchQuery == "")?appModel:runnerModel
-        pageSize: 14
         delegate: Component {
             MobileComponents.IconDelegate {
                 icon: decoration

@@ -29,7 +29,9 @@ Item {
     property Component delegate
     property QtObject model
     property string searchQuery
-    property int pageSize: 18
+    property int pageSize: Math.floor(appsView.width/delegateWidth)*Math.floor(appsView.height/delegateHeight)
+    property int delegateWidth: 120
+    property int delegateHeight: 120
 
     PlasmaCore.Theme {
         id:theme
