@@ -27,16 +27,21 @@ PlasmaCore.Dialog {
     property alias windowListPlasmoid: windowListContainer.applet
     property alias state: containerColumn.state
 
+    onActiveWindowChanged: {
+        if (!activeWindow) {
+            containerColumn.state = "Hidden"
+        }
+    }
 
     mainItem: SlidingDragButton {
         height: childrenRect.height
         width: main.width
 
-
         Column {
             id: containerColumn
             anchors.left: parent.left
             anchors.right: parent.right
+
             spacing: 4
             //height: 550
             state: "Hidden"

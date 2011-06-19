@@ -23,14 +23,16 @@ import org.kde.qtextracomponents 0.1 as QtExtra
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
-Item {
+PlasmaCore.FrameSvgItem {
     id: main
+    imagePath: "widgets/panel-background"
+    prefix: "north"
     signal shrinkRequested
     state: height>48?"active":"passive"
 
     Component.onCompleted: {
         plasmoid.drawWallpaper = false
-        plasmoid.containmentType = "CustomContainment"
+        plasmoid.containmentType = "CustomPanelContainment"
         plasmoid.movableApplets = false
 
         plasmoid.appletAdded.connect(addApplet)
