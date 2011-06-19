@@ -29,6 +29,8 @@ CommonModel::CommonModel(QObject *parent)
     newRoleNames[CommonModel::Url] = "url";
     newRoleNames[CommonModel::Weight] = "weight";
     newRoleNames[CommonModel::ActionTypeRole] = "action";
+    newRoleNames[CommonModel::ResourceUrl] = "resourceUrl";
+    newRoleNames[CommonModel::MimeType] = "mimeType";
 
     setRoleNames(newRoleNames);
 }

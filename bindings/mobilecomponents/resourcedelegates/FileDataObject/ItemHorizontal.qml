@@ -37,6 +37,10 @@ Item {
             Component.onCompleted: {
                 // FIXME: remove this crap, fix icon in metadata data set
                 try {
+                    if (decoration) {
+                        icon = decoration
+                        return
+                    }
                     var _l = hasSymbol.toString().split(",");
                     if (_l.length == 1) {
                         icon = QIcon(hasSymbol);
@@ -85,7 +89,7 @@ Item {
             height: 14
             width: parent.width - previewImage.width
             //wrapMode: Text.Wrap
-            anchors.top: labelBackground.bottom
+            anchors.top: previewLabel.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             visible: infoLabelVisible
         }

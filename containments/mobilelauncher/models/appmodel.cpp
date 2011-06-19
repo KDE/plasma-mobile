@@ -101,7 +101,9 @@ void AppModel::setShownCategories(const QStringList &categories)
             description,
             service->storageId(),
             1,
-            CommonModel::AddAction
+            CommonModel::AddAction,
+            service->storageId(),
+            "application/x-desktop"
             )
         );
 

@@ -102,6 +102,21 @@ Item {
         id: appGrid
         model: (searchQuery == "")?appModel:runnerModel
         delegate: Component {
+            MobileComponents.ResourceDelegate {
+                width: appGrid.delegateWidth
+                height: appGrid.delegateHeight
+                property string className: "FileDataObject"
+                resourceType: "FileDataObject"
+                property string label: display
+                property string mimeType: "buh"
+                property variant icon: decoration
+                onClicked: {
+                    appsView.clicked(url)
+                }
+
+            }
+        }
+        /*Component {
             MobileComponents.IconDelegate {
                 icon: decoration
                 text: display
@@ -109,7 +124,7 @@ Item {
                     appsView.clicked(url)
                 }
             }
-        }
+        }*/
 
         anchors {
             left: tagCloud.right
