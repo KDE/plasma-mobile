@@ -69,38 +69,8 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    PlasmaCore.FrameSvgItem {
+    ToolBar {
         id: actionsToolBar
-        imagePath: "widgets/background"
-        enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-        width: childrenRect.width+margins.left+margins.right
-        height: childrenRect.height+margins.top+margins.bottom
-        anchors {
-            top: parent.top
-            right: parent.right
-        }
-        Row {
-            x: actionsToolBar.margins.left
-            y: actionsToolBar.margins.top
-            ActionButton {
-                elementId: "add"
-
-                function creationFinished(activityJob)
-                {
-                    var activityId = activityJob.result
-                    var service = activitySource.serviceForSource(activityId)
-                    var operation = service.operationDescription("setCurrent")
-                    service.startOperationCall(operation)
-                }
-                onClicked: {
-                    var service = activitySource.serviceForSource("Status")
-                    var operation = service.operationDescription("add")
-                    operation["Name"] = "New activity"
-                    var job = service.startOperationCall(operation)
-                    job.finished.connect(creationFinished)
-                }
-            }
-        }
     }
 
      PathView {
