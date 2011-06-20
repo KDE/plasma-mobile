@@ -29,6 +29,17 @@ Item {
     width: 400
     state: "show"
 
+    AppletStatusWatcher {
+        id: appletStatusWatcher
+        onStatusChanged: {
+            if (status == AppletStatusWatcher.AcceptingInputStatus) {
+                hideTimer.running = false
+            } else {
+                hideTimer.restart()
+            }
+        }
+    }
+
     //Uses a MouseEventListener instead of a MouseArea to not block any mouse event
     MouseEventListener {
         id: hintregion;
@@ -54,7 +65,9 @@ Item {
         onReleased: {
             if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
                     activityPanel.state = "show"
-                    hideTimer.restart()
+                    if (appletStatusWatcher.status != AppletStatusWatcher.AcceptingInputStatus) {
+                        hideTimer.restart()
+                    }
                 } else {
                     activityPanel.state = "hidden"
                 }
@@ -70,10 +83,11 @@ Item {
         PlasmaCore.FrameSvgItem {
             id: hint
             x: 20
-            width: 60
+            width: 40
             height: 80
             anchors.verticalCenter: parent.verticalCenter
             imagePath: "widgets/background"
+            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
             PlasmaCore.SvgItem {
                 width:32
                 height:32
@@ -82,8 +96,7 @@ Item {
                 }
                 elementId: "left-arrow"
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: hint.margins.left-5
+                anchors.right: parent.right
             }
             MouseArea {
                 anchors.fill: parent
@@ -97,7 +110,9 @@ Item {
         interval: 4000;
         running: false;
         onTriggered:  {
-            activityPanel.state = "hidden"
+            if (appletStatusWatcher.status != AppletStatusWatcher.AcceptingInputStatus) {
+                activityPanel.state = "hidden"
+            }
         }
     }
 
@@ -108,6 +123,7 @@ Item {
         containment.y = 0
         containment.width = activityPanel.width
         containment.height = activityPanel.height
+        appletStatusWatcher.plasmoid = containment
     }
 
     states: [
