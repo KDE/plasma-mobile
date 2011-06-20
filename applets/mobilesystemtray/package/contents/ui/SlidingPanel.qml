@@ -27,6 +27,11 @@ PlasmaCore.Dialog {
     property alias windowListPlasmoid: windowListContainer.applet
     property alias state: containerColumn.state
 
+    onVisibleChanged: {
+        slidingPanel.setAttribute(Qt.WA_X11NetWmWindowTypeToolBar, true)
+        //slidingPanel.setAttribute(Qt.WA_X11DoNotAcceptFocus, false)
+    }
+
     onActiveWindowChanged: {
         if (!activeWindow) {
             containerColumn.state = "Hidden"

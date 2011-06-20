@@ -81,13 +81,9 @@ PlasmaCore.FrameSvgItem {
     {
         if (applet.pluginName == "org.kde.windowstrip") {
             slidingPanel.windowListPlasmoid = applet
-
-            slidingPanel.setAttribute(Qt.WA_X11NetWmWindowTypeToolBar, true)
             return
         } else if (applet.pluginName == "org.kde.mobilelauncher") {
             slidingPanel.menuPlasmoid = applet
-
-            slidingPanel.setAttribute(Qt.WA_X11NetWmWindowTypeToolBar, true)
             return
         } 
 
