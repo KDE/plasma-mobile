@@ -134,49 +134,60 @@ Item {
         }
     }
     
-    //TODO: load on demand of the qml file
-    ConfirmationDialog {
-        id: confirmationDialog
-        z: 899
-        anchors {
-            left: deleteButton.horizontalCenter
-            bottom: deleteButton.verticalCenter
-        }
-        transformOrigin: Item.BottomLeft
-        question: i18n("Are you sure you want permanently delete this activity?")
-        onAccepted: {
-            var service = activitySource.serviceForSource("Status")
-            var operation = service.operationDescription("remove")
-            operation["Id"] = model["DataEngineSource"]
-            var job = service.startOperationCall(operation)
-        }
-    }
-    ActionButton {
-        id: deleteButton
-        elementId: "delete"
-        z: 900
+    
+    Row {
         anchors {
             bottom: activityBorder.bottom
             left: activityBorder.left
             bottomMargin: activityBorder.margins.bottom
             leftMargin: activityBorder.margins.left
         }
-        onClicked: {
-            if (confirmationDialog.scale == 1) {
-                confirmationDialog.scale = 0
-            } else {
-                confirmationDialog.scale = 1
+        spacing: 8
+        opacity: delegate.scale>0.9?1:0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
             }
         }
-    }
-    ActionButton {
-        elementId: "configure"
-        action: plasmoid.action("configure")
-        opacity: model["Current"]==true?1:0
-        z: 0
-        anchors {
-            top: deleteButton.top
-            left: deleteButton.right
+        Item {
+            width:iconSize
+            height:iconSize
+            z: 900
+            //TODO: load on demand of the qml file
+            ConfirmationDialog {
+                id: confirmationDialog
+                anchors {
+                    left: deleteButton.horizontalCenter
+                    bottom: deleteButton.verticalCenter
+                }
+                transformOrigin: Item.BottomLeft
+                question: i18n("Are you sure you want permanently delete this activity?")
+                onAccepted: {
+                    var service = activitySource.serviceForSource("Status")
+                    var operation = service.operationDescription("remove")
+                    operation["Id"] = model["DataEngineSource"]
+                    var job = service.startOperationCall(operation)
+                }
+            }
+            ActionButton {
+                id: deleteButton
+                elementId: "delete"
+
+                onClicked: {
+                    if (confirmationDialog.scale == 1) {
+                        confirmationDialog.scale = 0
+                    } else {
+                        confirmationDialog.scale = 1
+                    }
+                }
+            }
+        }
+        ActionButton {
+            elementId: "configure"
+            action: plasmoid.action("configure")
+            opacity: model["Current"]==true?1:0
+            z: 0
         }
     }
 }
