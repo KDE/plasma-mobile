@@ -23,6 +23,9 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 PlasmaCore.FrameSvgItem {
     id: actionsToolBar
+
+    property alias query: filterField.text
+
     imagePath: "widgets/background"
     enabledBorders: "LeftBorder|TopBorder|BottomBorder"
     width: childrenRect.width+margins.left+margins.right
@@ -34,6 +37,7 @@ PlasmaCore.FrameSvgItem {
     Row {
         x: actionsToolBar.margins.left
         y: actionsToolBar.margins.top
+        spacing: 8
         ActionButton {
             elementId: "add"
 
@@ -50,6 +54,60 @@ PlasmaCore.FrameSvgItem {
                 operation["Name"] = "New activity"
                 var job = service.startOperationCall(operation)
                 job.finished.connect(creationFinished)
+            }
+        }
+        Item {
+            width: filterField.opacity>0.5?filterField.width+iconSize/2:iconSize
+            height: filterButton.height
+
+            Item {
+                clip: true
+                anchors {
+                    fill: parent
+                    rightMargin: iconSize/2
+                }
+                PlasmaWidgets.LineEdit {
+                    id: filterField
+                    opacity: 0
+                    anchors.verticalCenter: parent.verticalCenter
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+                }
+            }
+            Behavior on width {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            ActionButton {
+                id: filterButton
+                elementId: "close"
+                anchors.right: parent.right
+
+                onClicked: {
+                    if (filterField.opacity==1) {
+                        filterField.opacity = 0
+                        plasmoid.status = "ActiveStatus"
+                        filterField.text = ""
+                        query = ""
+                        fakeTextInput.closeSoftwareInputPanel()
+                    } else {
+                        filterField.opacity = 1
+                        plasmoid.status = "AcceptingInputStatus"
+                    }
+                    //TODO: should get focus
+                }
+            }
+            //FIXME: this dummy text edit is used only to close the on screen keyboard, need QtComponents
+            TextInput{
+                id: fakeTextInput
+                width: 0
+                height: 0
             }
         }
     }

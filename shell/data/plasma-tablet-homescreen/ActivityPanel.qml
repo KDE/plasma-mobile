@@ -29,6 +29,15 @@ Item {
     width: 400
     state: "show"
 
+    AppletStatusWatcher {
+        id: appletStatusWatcher
+        onStatusChanged: {
+            if (status == AppletStatusWatcher.AcceptingInputStatus) {
+                hideTimer.running = false
+            }
+        }
+    }
+
     //Uses a MouseEventListener instead of a MouseArea to not block any mouse event
     MouseEventListener {
         id: hintregion;
@@ -54,7 +63,9 @@ Item {
         onReleased: {
             if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
                     activityPanel.state = "show"
-                    hideTimer.restart()
+                    if (appletStatusWatcher.status != AppletStatusWatcher.AcceptingInputStatus) {
+                        hideTimer.restart()
+                    }
                 } else {
                     activityPanel.state = "hidden"
                 }
@@ -108,6 +119,7 @@ Item {
         containment.y = 0
         containment.width = activityPanel.width
         containment.height = activityPanel.height
+        appletStatusWatcher.plasmoid = containment
     }
 
     states: [
