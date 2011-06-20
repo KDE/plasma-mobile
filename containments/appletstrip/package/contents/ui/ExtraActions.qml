@@ -72,6 +72,7 @@ Item {
             y: extraActionsFrame.margins.top
             MobileComponents.ActionButton {
                 id: removeButton
+                iconSize: 22
                 svg: iconsSvg
                 elementId: "configure"
 
@@ -86,6 +87,7 @@ Item {
 
             MobileComponents.ActionButton {
                 id: runButton
+                iconSize: 22
                 svg: iconsSvg
                 elementId: "close"
 
