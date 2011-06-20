@@ -34,6 +34,8 @@ Item {
         onStatusChanged: {
             if (status == AppletStatusWatcher.AcceptingInputStatus) {
                 hideTimer.running = false
+            } else {
+                hideTimer.restart()
             }
         }
     }
@@ -108,7 +110,9 @@ Item {
         interval: 4000;
         running: false;
         onTriggered:  {
-            activityPanel.state = "hidden"
+            if (appletStatusWatcher.status != AppletStatusWatcher.AcceptingInputStatus) {
+                activityPanel.state = "hidden"
+            }
         }
     }
 
