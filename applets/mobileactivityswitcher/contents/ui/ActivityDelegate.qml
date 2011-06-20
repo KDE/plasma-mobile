@@ -170,11 +170,15 @@ Item {
                     operation["Id"] = model["DataEngineSource"]
                     var job = service.startOperationCall(operation)
                 }
+                onDismissed: {
+                    deleteButton.checked = false
+                }
             }
             MobileComponents.ActionButton {
                 id: deleteButton
                 svg: iconsSvg
                 elementId: "delete"
+                toggle: true
 
                 onClicked: {
                     if (confirmationDialog.scale == 1) {

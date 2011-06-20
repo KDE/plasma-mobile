@@ -40,7 +40,7 @@ Item {
     visible: action==undefined||action.enabled
 
     onCheckedChanged: {
-        if (pressed) {
+        if (checked) {
             buttonItem.elementId = "pressed"
             shadowItem.opacity = 0
         } else {
