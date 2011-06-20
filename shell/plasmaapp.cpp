@@ -79,7 +79,8 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
-      m_isDesktop(false)
+      m_isDesktop(false),
+      m_startupCompleted(false)
 {
     KGlobal::locale()->insertCatalog("libplasma");
 
@@ -337,8 +338,15 @@ Plasma::Corona* PlasmaApp::corona()
         m_mainView->setScene(m_corona);
         m_corona->checkActivities();
         m_mainView->show();
+        //FIXME: this will go away when containmentAdded connection won't be queued anymore
+        QTimer::singleShot(1000, this, SLOT(startupCompleted()));
     }
     return m_corona;
+}
+
+void PlasmaApp::startupCompleted()
+{
+        m_startupCompleted = true;
 }
 
 bool PlasmaApp::hasComposite()
@@ -504,6 +512,10 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     } else {
         containment->setPos(m_mainView->width(), m_mainView->height());
        // containment->setVisible(false);
+    }
+
+    if (m_startupCompleted) {
+        showActivityConfiguration();
     }
 }
 
