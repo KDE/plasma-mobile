@@ -1,6 +1,5 @@
 plugin mobilecomponentsplugin
-ContextMenu 0.1 ContextMenu.qml
-MenuItem 0.1 MenuItem.qml
+ActionButton 0.1 ActionButton.qml
 IconGrid 0.1 IconGrid.qml
 IconDelegate 0.1 IconDelegate.qml
 Rating 0.1 Rating.qml

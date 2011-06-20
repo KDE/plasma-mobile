@@ -19,6 +19,7 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: delegate
@@ -170,8 +171,9 @@ Item {
                     var job = service.startOperationCall(operation)
                 }
             }
-            ActionButton {
+            MobileComponents.ActionButton {
                 id: deleteButton
+                svg: iconsSvg
                 elementId: "delete"
 
                 onClicked: {
@@ -183,7 +185,8 @@ Item {
                 }
             }
         }
-        ActionButton {
+        MobileComponents.ActionButton {
+            svg: iconsSvg
             elementId: "configure"
             action: plasmoid.action("configure")
             opacity: model["Current"]==true?1:0.3

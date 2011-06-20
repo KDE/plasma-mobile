@@ -22,11 +22,12 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: button
-    property QtObject svg: iconsSvg
+    property QtObject svg
     property alias elementId: icon.elementId
     visible: action==undefined||action.enabled
     property QtObject action
     property bool backgroundVisible: true
+    property int iconSize: 32
     width: backgroundVisible?iconSize+8:iconSize
     height: width
     signal clicked

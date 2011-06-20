@@ -20,6 +20,7 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 PlasmaCore.FrameSvgItem {
     id: actionsToolBar
@@ -38,7 +39,8 @@ PlasmaCore.FrameSvgItem {
         x: actionsToolBar.margins.left
         y: actionsToolBar.margins.top
         spacing: 8
-        ActionButton {
+        MobileComponents.ActionButton {
+            svg: iconsSvg
             elementId: "add"
 
             function creationFinished(activityJob)
@@ -84,8 +86,9 @@ PlasmaCore.FrameSvgItem {
                     easing.type: Easing.InOutQuad
                 }
             }
-            ActionButton {
+            MobileComponents.ActionButton {
                 id: filterButton
+                svg: iconsSvg
                 elementId: "filter"
                 anchors.right: parent.right
 
