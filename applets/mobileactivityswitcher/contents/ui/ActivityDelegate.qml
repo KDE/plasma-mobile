@@ -151,8 +151,8 @@ Item {
             }
         }
         Item {
-            width:iconSize
-            height:iconSize
+            width: iconSize
+            height: iconSize
             z: 900
             //TODO: load on demand of the qml file
             ConfirmationDialog {
@@ -186,7 +186,8 @@ Item {
         ActionButton {
             elementId: "configure"
             action: plasmoid.action("configure")
-            opacity: model["Current"]==true?1:0
+            opacity: model["Current"]==true?1:0.3
+            enabled: opacity==1
             z: 0
         }
     }
