@@ -86,7 +86,7 @@ PlasmaCore.FrameSvgItem {
             }
             ActionButton {
                 id: filterButton
-                elementId: "close"
+                elementId: "filter"
                 anchors.right: parent.right
 
                 onClicked: {
