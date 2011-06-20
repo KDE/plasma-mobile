@@ -91,6 +91,7 @@ PlasmaCore.FrameSvgItem {
                 svg: iconsSvg
                 elementId: "filter"
                 anchors.right: parent.right
+                toggle: true
 
                 onClicked: {
                     if (filterField.opacity==1) {

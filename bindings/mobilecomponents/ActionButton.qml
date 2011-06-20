@@ -22,15 +22,32 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: button
+
+    //API
     property QtObject svg
     property alias elementId: icon.elementId
-    visible: action==undefined||action.enabled
     property QtObject action
     property bool backgroundVisible: true
     property int iconSize: 32
+    property bool checked: false
+    property bool toggle: false
+    signal clicked
+
+
+
     width: backgroundVisible?iconSize+8:iconSize
     height: width
-    signal clicked
+    visible: action==undefined||action.enabled
+
+    onCheckedChanged: {
+        if (pressed) {
+            buttonItem.elementId = "pressed"
+            shadowItem.opacity = 0
+        } else {
+            buttonItem.elementId = "normal"
+            shadowItem.opacity = 1
+        }
+    }
 
     PlasmaCore.Svg {
         id: buttonSvg
@@ -72,8 +89,13 @@ Item {
                 shadowItem.opacity = 0
             }
             onReleased: {
-                buttonItem.elementId = "normal"
-                shadowItem.opacity = 1
+                if (button.checked || !button.toggle) {
+                    buttonItem.elementId = "normal"
+                    shadowItem.opacity = 1
+                    button.checked = false
+                } else {
+                    button.checked = true
+                }
             }
             onClicked: {
                 if (action) {
