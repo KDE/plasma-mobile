@@ -69,25 +69,37 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    ActionButton {
-        elementId: "add"
+    PlasmaCore.FrameSvgItem {
+        id: actionsToolBar
+        imagePath: "widgets/background"
+        enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+        width: childrenRect.width+margins.left+margins.right
+        height: childrenRect.height+margins.top+margins.bottom
         anchors {
             top: parent.top
-            left: parent.left
+            right: parent.right
         }
-        function creationFinished(activityJob)
-        {
-            var activityId = activityJob.result
-            var service = activitySource.serviceForSource(activityId)
-            var operation = service.operationDescription("setCurrent")
-            service.startOperationCall(operation)
-        }
-        onClicked: {
-            var service = activitySource.serviceForSource("Status")
-            var operation = service.operationDescription("add")
-            operation["Name"] = "New activity"
-            var job = service.startOperationCall(operation)
-            job.finished.connect(creationFinished)
+        Row {
+            x: actionsToolBar.margins.left
+            y: actionsToolBar.margins.top
+            ActionButton {
+                elementId: "add"
+
+                function creationFinished(activityJob)
+                {
+                    var activityId = activityJob.result
+                    var service = activitySource.serviceForSource(activityId)
+                    var operation = service.operationDescription("setCurrent")
+                    service.startOperationCall(operation)
+                }
+                onClicked: {
+                    var service = activitySource.serviceForSource("Status")
+                    var operation = service.operationDescription("add")
+                    operation["Name"] = "New activity"
+                    var job = service.startOperationCall(operation)
+                    job.finished.connect(creationFinished)
+                }
+            }
         }
     }
 
