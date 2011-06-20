@@ -21,6 +21,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 
 Item {
@@ -153,8 +154,10 @@ Item {
                         }
                     }
 
-                    ActionButton {
+                    MobileComponents.ActionButton {
                         id: closeButton
+                        svg: iconsSvg
+                        iconSize: 22
                         elementId: "close"
                         anchors {
                             top: parent.top
