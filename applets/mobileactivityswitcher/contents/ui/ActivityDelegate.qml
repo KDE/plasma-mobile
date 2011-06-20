@@ -66,12 +66,6 @@ Item {
                 styleColor: Qt.rgba(1, 1, 1, 0.6)
                 font.pixelSize: 25
             }
-            ActionButton {
-                elementId: "configure"
-                action: plasmoid.action("configure")
-                opacity: model["Current"]==true?1:0
-                anchors.bottom: parent.bottom
-            }
         }
     }
     Item {
@@ -139,14 +133,16 @@ Item {
             }
         }
     }
+    
     //TODO: load on demand of the qml file
     ConfirmationDialog {
         id: confirmationDialog
+        z: 899
         anchors {
-            right: deleteButton.horizontalCenter
-            top: deleteButton.verticalCenter
+            left: deleteButton.horizontalCenter
+            bottom: deleteButton.verticalCenter
         }
-        transformOrigin: Item.TopRight
+        transformOrigin: Item.BottomLeft
         question: i18n("Are you sure you want permanently delete this activity?")
         onAccepted: {
             var service = activitySource.serviceForSource("Status")
@@ -158,11 +154,12 @@ Item {
     ActionButton {
         id: deleteButton
         elementId: "delete"
+        z: 900
         anchors {
-            top: activityBorder.top
-            right: activityBorder.right
-            topMargin: activityBorder.margins.top
-            rightMargin: activityBorder.margins.right
+            bottom: activityBorder.bottom
+            left: activityBorder.left
+            bottomMargin: activityBorder.margins.bottom
+            leftMargin: activityBorder.margins.left
         }
         onClicked: {
             if (confirmationDialog.scale == 1) {
@@ -170,6 +167,16 @@ Item {
             } else {
                 confirmationDialog.scale = 1
             }
+        }
+    }
+    ActionButton {
+        elementId: "configure"
+        action: plasmoid.action("configure")
+        opacity: model["Current"]==true?1:0
+        z: 0
+        anchors {
+            top: deleteButton.top
+            left: deleteButton.right
         }
     }
 }
