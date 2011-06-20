@@ -19,6 +19,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 
 Item {
@@ -69,7 +70,7 @@ Item {
             id: layout
             x: extraActionsFrame.margins.left
             y: extraActionsFrame.margins.top
-            ActionButton {
+            MobileComponents.ActionButton {
                 id: removeButton
                 svg: iconsSvg
                 elementId: "configure"
@@ -83,7 +84,7 @@ Item {
                 height: actionSize
             }
 
-            ActionButton {
+            MobileComponents.ActionButton {
                 id: runButton
                 svg: iconsSvg
                 elementId: "close"
