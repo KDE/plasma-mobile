@@ -29,6 +29,8 @@ var resultsFlow
 
 var itemsConfig
 
+//bookkeeping for the item groups
+var itemGroups = new Object()
 
 function restore()
 {
@@ -226,7 +228,7 @@ function positionItem(item)
     rect.y = item.y
     rect.width = item.width
     rect.height = item.height
-    itemsConfig[item.name] = rect
+    itemsConfig[item.category] = rect
     save()
 }
 
