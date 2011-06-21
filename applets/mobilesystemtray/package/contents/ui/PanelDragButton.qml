@@ -24,6 +24,7 @@ Item {
     id: panelDragButton
     state: slidingPanel.state
     width: height
+    clip: true
 
     PlasmaCore.SvgItem {
         svg: PlasmaCore.Svg {
@@ -92,6 +93,13 @@ Item {
         },
         State {
             name: "Hidden"
+            PropertyChanges {
+                target: dashboardIcon
+                y: 0
+            }
+        },
+        State {
+            name: "Peek"
             PropertyChanges {
                 target: dashboardIcon
                 y: 0
