@@ -108,7 +108,7 @@ Item {
                 clearButtonShown: true
                 width: 200
                 onTextChanged: {
-                    timer.running = true
+                    queryTimer.running = true
                 }
             }
             PlasmaWidgets.IconWidget {
@@ -116,7 +116,7 @@ Item {
                 icon: QIcon("system-search")
                 size: "32x32"
                 onClicked: {
-                    timer.running = true
+                    queryTimer.running = true
                 }
             }
 
@@ -128,10 +128,45 @@ Item {
             dataSource: metadataSource
         }
 
+        Timer {
+            id: categoriesTimer
+            repeat: false
+            running: false
+            interval: 2000
+            onTriggered: {
+                var component = Qt.createComponent("ItemGroup.qml")
+                var existingCategories = Array()
+
+                //FIXME: find a more efficient way
+                for (var category in LayoutManager.itemGroups) {
+                    if (categoryListModel.categories.indexOf(category) == -1) {
+                        var item = LayoutManager.itemGroups[category]
+                        LayoutManager.setSpaceAvailable(item.x, item.y, item.width, item.height, true)
+                        item.destroy()
+                        delete LayoutManager.itemGroups[category]
+                        debugFlow.refresh();
+                    }
+                }
+
+                for (var i = 0; i < categoryListModel.categories.length; ++i) {
+                    var category = categoryListModel.categories[i]
+                    if (!LayoutManager.itemGroups[category]) {
+                        var itemGroup = component.createObject(resultsFlow)
+                        itemGroup.category = category
+                        LayoutManager.itemGroups[category] = itemGroup
+                    }
+                    existingCategories[existingCategories.length] = category
+                }
+            }
+        }
+
         MobileComponents.CategorizedProxyModel {
             id: categoryListModel
             sourceModel: metadataModel
             categoryRole: "className"
+            onCategoriesChanged: {
+                categoriesTimer.restart()
+            }
         }
 
         //FIXME: debug purposes only, remove asap
@@ -167,24 +202,17 @@ Item {
             }
 
 
-            Repeater {
-                model: categoryListModel.categories
-
-                ItemGroup {
-                    id: group
-                    
-                }
-            }
             Timer {
                 id: layoutTimer
                 repeat: false
                 running: false
                 interval: 2000
                 onTriggered: {
+                    LayoutManager.resetPositions()
                     for (var i=0; i<resultsFlow.children.length; ++i) {
                         child = resultsFlow.children[i]
-                        if (LayoutManager.itemsConfig[child.name]) {
-                            var rect = LayoutManager.itemsConfig[child.name]
+                        if (LayoutManager.itemsConfig[child.category]) {
+                            var rect = LayoutManager.itemsConfig[child.category]
                             child.x = rect.x
                             child.y = rect.y
                             child.width = rect.width
@@ -192,6 +220,7 @@ Item {
                         } else {
                             child.x = 0
                             child.y = 0
+                            child.width = Math.min(470, 32+child.categoryCount*140)
                         }
 
                         child.visible = true
@@ -208,7 +237,7 @@ Item {
     }
 
     Timer {
-       id: timer
+       id: queryTimer
        running: true
        repeat: false
        interval: 1000
