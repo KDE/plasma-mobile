@@ -39,6 +39,7 @@ class ActivityConfiguration : public Plasma::DeclarativeWidget
     Q_PROPERTY(QObject *wallpaperModel READ wallpaperModel NOTIFY modelChanged)
     Q_PROPERTY(int wallpaperIndex READ wallpaperIndex WRITE setWallpaperIndex)
     Q_PROPERTY(QSize screenshotSize READ screenshotSize WRITE setScreenshotSize)
+    Q_PROPERTY(bool firstConfig READ firstConfig WRITE setFirstConfig NOTIFY firstConfigChanged)
 
 public:
     ActivityConfiguration(QGraphicsWidget *parent = 0);
@@ -46,6 +47,9 @@ public:
 
     void setContainment(Plasma::Containment *cont);
     Plasma::Containment *containment() const;
+
+    void setFirstConfig(bool firstConfig);
+    bool firstConfig() const;
 
     void setActivityName(const QString &name);
     QString activityName() const;
@@ -60,12 +64,14 @@ public:
 
 Q_SIGNALS:
     void modelChanged();
+    void firstConfigChanged();
 
 private:
     Plasma::Containment *m_containment;
     QDeclarativeItem *m_mainWidget;
     BackgroundListModel *m_model;
     int m_wallpaperIndex;
+    bool m_firstConfig;
 };
 
 #endif //PLASMA_ACTIVITYCONFIG_H

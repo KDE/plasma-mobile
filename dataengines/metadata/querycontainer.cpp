@@ -94,7 +94,7 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
 
     QString _icon = resource.genericIcon();
     if (_icon.isEmpty() && resource.isFile()) {
-        QString urlProp = resource.property("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url").toString();
+        QString urlProp = resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
         if (!urlProp.isEmpty()) {
             _icon = KMimeType::iconNameForUrl(KUrl(urlProp));
         }

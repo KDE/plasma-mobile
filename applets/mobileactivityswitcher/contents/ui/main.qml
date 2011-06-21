@@ -69,36 +69,18 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    ActionButton {
-        elementId: "add"
-        anchors {
-            top: parent.top
-            left: parent.left
-        }
-        function creationFinished(activityJob)
-        {
-            var activityId = activityJob.result
-            var service = activitySource.serviceForSource(activityId)
-            var operation = service.operationDescription("setCurrent")
-            service.startOperationCall(operation)
-        }
-        onClicked: {
-            var service = activitySource.serviceForSource("Status")
-            var operation = service.operationDescription("add")
-            operation["Name"] = "New activity"
-            var job = service.startOperationCall(operation)
-            job.finished.connect(creationFinished)
-        }
-    }
-
      PathView {
          id: mainView
          anchors.fill: parent
          anchors.bottomMargin: 32
          anchors.leftMargin: 64
-         model: PlasmaCore.DataModel{
-                    dataSource: activitySource
-                }
+         model: PlasmaCore.SortFilterModel {
+            sourceModel: PlasmaCore.DataModel {
+                dataSource: activitySource
+            }
+            filterRole: "Name"
+            filterRegExp: ".*"+actionsToolBar.query+".*"
+         }
          pathItemCount: 5
          property int delegateWidth: 400
          //FIXME: the 100 is the handle width
@@ -153,5 +135,9 @@ Item {
              PathAttribute { name: "itemOpacity"; value: 0 }
              PathAttribute { name: "z"; value: 0 }
          }
+     }
+
+     ToolBar {
+        id: actionsToolBar
      }
  }

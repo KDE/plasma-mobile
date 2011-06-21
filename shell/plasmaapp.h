@@ -70,6 +70,7 @@ protected:
     void setupContainment(Plasma::Containment *containment);
     void changeContainment(Plasma::Containment *containment);
     void reserveStruts(const int left, const int top, const int right, const int bottom);
+    void showActivityConfiguration(bool firstConfig);
 
 public Q_SLOTS:
     void containmentsTransformingChanged(bool transforming);
@@ -85,6 +86,7 @@ private Q_SLOTS:
     void showWidgetsExplorer();
     void showActivityConfiguration();
     void mainViewGeometryChanged();
+    void startupCompleted();
 
 private:
     MobCorona *m_corona;
@@ -109,6 +111,7 @@ private:
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
     QWeakPointer<ActivityConfiguration> m_activityConfiguration;
     bool m_isDesktop;
+    bool m_startupCompleted;
 };
 
 #endif // multiple inclusion guard
