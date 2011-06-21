@@ -26,12 +26,14 @@ import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
 PlasmaCore.FrameSvgItem {
     id: itemGroup
-    property string name: modelData
+    property string category
+    property alias categoryCount: webItemList.count
     imagePath: "widgets/background"
-    width: Math.min(470, 32+webItemList.count*140)
-    height: 150
+    width: LayoutManager.cellSize.width*2
+    height: LayoutManager.cellSize.height
     z: 0
     property bool animationsEnabled: false
+    scale: webItemList.count>0?1:0
 
     MouseArea {
         anchors.fill: parent
@@ -49,6 +51,12 @@ PlasmaCore.FrameSvgItem {
             animationsEnabled = true
             LayoutManager.positionItem(parent)
             debugFlow.refresh()
+        }
+    }
+    Behavior on scale {
+        NumberAnimation {
+            duration: 250
+            easing.type: Easing.InOutQuad
         }
     }
     Behavior on x {
@@ -113,6 +121,7 @@ PlasmaCore.FrameSvgItem {
         }
     }
     Component.onCompleted: {
+        //width = Math.min(470, 32+webItemList.count*140)
         layoutTimer.running = true
         layoutTimer.restart()
         enabled = false
@@ -134,7 +143,7 @@ PlasmaCore.FrameSvgItem {
         height: categoryText.height + margins.top + margins.bottom
         Text {
             id: categoryText
-            text: i18n("%1 (%2)", modelData, webItemList.count)
+            text: i18n("%1 (%2)", itemGroup.category, webItemList.count)
             anchors {
                 top: parent.top
                 horizontalCenter: parent.horizontalCenter
@@ -163,7 +172,7 @@ PlasmaCore.FrameSvgItem {
         model: MobileComponents.CategorizedProxyModel {
             sourceModel: metadataModel
             categoryRole: "className"
-            currentCategory: modelData
+            currentCategory: itemGroup.category
         }
 
         highlight: PlasmaCore.FrameSvgItem {
