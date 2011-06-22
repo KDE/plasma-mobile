@@ -16,6 +16,7 @@ set(plasma-mobile_SRCS
     plasmaapp.cpp
     mobdialogmanager.cpp
     mobpluginloader.cpp
+    declarativepanel.cpp
 
     mobileactivitythumbnails/mobileactivitythumbnails.cpp
 

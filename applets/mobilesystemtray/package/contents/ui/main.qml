@@ -32,7 +32,7 @@ PlasmaCore.FrameSvgItem {
 
     Component.onCompleted: {
         plasmoid.drawWallpaper = false
-        plasmoid.containmentType = "CustomPanelContainment"
+        plasmoid.containmentType = "CustomContainment"
         plasmoid.movableApplets = false
 
         plasmoid.appletAdded.connect(addApplet)

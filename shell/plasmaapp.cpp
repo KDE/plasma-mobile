@@ -29,6 +29,7 @@
 #include "mobileactivitythumbnails/mobileactivitythumbnails.h"
 #include "widgetsexplorer/mobilewidgetsexplorer.h"
 #include "activityconfiguration/activityconfiguration.h"
+#include "declarativepanel.h"
 
 #include <unistd.h>
 
@@ -85,6 +86,8 @@ PlasmaApp::PlasmaApp()
     KGlobal::locale()->insertCatalog("libplasma");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+    qmlRegisterType<PanelProxy>("MobileShell", 0, 1, "Panel");
 
     //FIXME: why does not work?
     //qmlRegisterInterface<Plasma::Wallpaper>("Wallpaper");
@@ -414,6 +417,12 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
             panel->setAutoFillBackground(false);
             panel->viewport()->setAutoFillBackground(false);
             panel->setAttribute(Qt::WA_TranslucentBackground);
+           /* Plasma::DeclarativeWidget *panelDeclarativeWidget = new Plasma::DeclarativeWidget();
+            panelDeclarativeWidget->setParent(panel);
+            m_corona->addItem(m_declarativeWidget);
+
+            QString qmlPath = KStandardDirs::locate("data", QString("plasma-mobile/%1/TopPanel.qml").arg(m_homeScreenPath));
+            panelDeclarativeWidget->setQmlPath(qmlPath);*/
         }
         panel->setWindowFlags(panel->windowFlags() | Qt::FramelessWindowHint);
         panel->setFrameShape(QFrame::NoFrame);
@@ -517,28 +526,33 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 }
 
 void PlasmaApp::positionPanels()
-{
+{return;
     QHash<Plasma::Location, MobView *>::const_iterator i = m_panelViews.constBegin();
     while (i != m_panelViews.constEnd()) {
+        MobView *view = i.value();
+        int windowOffset = 0;
+        if (view->containment()) {
+            windowOffset = view->containment()->property("moveOffset").toInt();
+        }
         switch (i.key()) {
         case Plasma::TopEdge:
-            i.value()->move(0,0);
-            i.value()->setMinimumSize(m_mainView->width(), -1);
+            view->move(0,0+windowOffset);
+            view->setMinimumSize(m_mainView->width(), -1);
             break;
         case Plasma::LeftEdge:
-            i.value()->move(0,0);
-            i.value()->setMinimumSize(-1, m_mainView->height());
+            view->move(0+windowOffset,0);
+            view->setMinimumSize(-1, m_mainView->height());
             break;
         case Plasma::RightEdge:
-            i.value()->move(m_mainView->size().width()-i.value()->size().width(),0);
-            i.value()->setMinimumSize(-1, m_mainView->height());
+            view->move(m_mainView->size().width()-view->size().width()-windowOffset,0);
+            view->setMinimumSize(-1, m_mainView->height());
             break;
         case Plasma::BottomEdge:
-            i.value()->move(0, m_mainView->size().height()-i.value()->size().height());
-            i.value()->setMinimumSize(m_mainView->width(), -1);
+            view->move(0, m_mainView->size().height()-view->size().height()-windowOffset);
+            view->setMinimumSize(m_mainView->width(), -1);
             break;
         }
-        i.value()->show();
+        view->show();
         ++i;
     }
 }

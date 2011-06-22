@@ -20,6 +20,7 @@
  ***************************************************************************/
 
 import QtQuick 1.0
+import MobileShell 0.1
 
 Item {
     id: homeScreen;
@@ -184,12 +185,15 @@ Item {
         height: 11
     }
 
-    SystrayPanel {
-        id: topEdgePanel;
-        objectName: "topEdgePanel";
+    MobileShell.Panel {
+        id: topEdgePanel
+        objectName: "topEdgePanel"
+        mainItem: SystrayPanel {
+            id: topEdgePanel;
+            objectName: "topEdgePanel";
 
-        anchors.horizontalCenter: homeScreen.horizontalCenter;
-        y: 0;
+            y: 0;
+        }
     }
 
     ActivityPanel {
