@@ -30,10 +30,12 @@
 #include <KWindowSystem>
 
 WindowStripApplet::WindowStripApplet(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
+    : Plasma::Containment(parent, args),
     m_widget(0)
 {
     kDebug() << "ctor......";
+    setContainmentType(Containment::CustomContainment);
+    setHasConfigurationInterface(false);
 }
 
 WindowStripApplet::~WindowStripApplet()
@@ -43,6 +45,7 @@ WindowStripApplet::~WindowStripApplet()
 
 void WindowStripApplet::init()
 {
+    Plasma::Containment::init();
     graphicsWidget();
 }
 
@@ -50,7 +53,9 @@ QGraphicsWidget* WindowStripApplet::graphicsWidget()
 {
     kDebug() << "gw......";
     if (!m_widget) {
+        setContentsMargins(0, 0, 0, 0);
         QGraphicsLinearLayout *l = new QGraphicsLinearLayout(this);
+        l->setContentsMargins(0, 0, 0, 0);
         m_widget = new WindowStrip(this);
         l->addItem(m_widget);
     }

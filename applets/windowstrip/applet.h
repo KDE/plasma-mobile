@@ -21,14 +21,14 @@
 #ifndef WINDOWSTRIPAPPLET_H
 #define WINDOWSTRIPAPPLET_H
 
-#include <Plasma/Applet>
+#include <Plasma/Containment>
 #include <Plasma/DeclarativeWidget>
 #include <Plasma/Svg>
 #include <QtCore/QTimer>
 
 class WindowStrip;
 
-class WindowStripApplet : public Plasma::Applet
+class WindowStripApplet : public Plasma::Containment
 {
     Q_OBJECT
 public:

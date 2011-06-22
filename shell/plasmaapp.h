@@ -102,7 +102,7 @@ private:
     QList<Plasma::Containment*> m_alternateContainments;
 
     QMap<int, Plasma::Containment*> m_containments;
-    QHash<Plasma::Location, Plasma::Containment *> m_panelContainments;
+    QHash<int, Plasma::Containment *> m_panelContainments;
 
     MobPluginLoader *m_pluginLoader;
 

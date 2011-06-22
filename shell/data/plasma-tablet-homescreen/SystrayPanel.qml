@@ -29,6 +29,17 @@ Item {
         anchors.fill:parent
     }
 
+    function addContainment(cont)
+    {
+        if (cont.pluginName == "org.kde.mobilelauncher") {
+            menuContainer.plasmoid = cont
+        } else if (cont.pluginName == "org.kde.windowstrip") {
+            windowListContainer.plasmoid = cont
+        } else if (cont.pluginName == "org.kde.mobilesystemtray") {
+            systrayContainer.plasmoid = cont
+        }
+    }
+
     SlidingDragButton {
         anchors {
             right: parent.right
@@ -38,47 +49,34 @@ Item {
         height: 32
     }
 
-    property QGraphicsWidget containment
-
-    Item {
-        id: containmentParent
+    Column {
         anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-            leftMargin: 32
+            fill: parent
+            rightMargin: 32
         }
-        height: 35
+        PlasmoidContainer {
+            id: menuContainer
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: parent.height - 35 - 150
+        }
+        PlasmoidContainer {
+            id: windowListContainer
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: 150
+        }
+        PlasmoidContainer {
+            id: systrayContainer
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: 35
+        }
     }
-
-    onContainmentChanged: {
-        containment.parent = containmentParent
-        containment.x = 0
-        containment.y = 0
-        timer.running = true
-    }
-    onHeightChanged: resizeTimer.running = true
-    onWidthChanged: resizeTimer.running = true
-
-    function updateState()
-    {
-        state = containment.state
-    }
-
-    Timer {
-        id: resizeTimer
-        interval: 500
-        running: false
-        repeat: false
-        onTriggered: resizeContainment()
-     }
-
-    function resizeContainment()
-    {
-        containment.x = 0
-        containment.y = 0
-        containment.height = containmentParent.height
-        containment.width = containmentParent.width
-    }
-
 }

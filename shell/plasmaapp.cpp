@@ -390,7 +390,7 @@ void PlasmaApp::mainContainmentActivated()
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
-    if (m_containments.contains(containment->id()) || m_panelContainments.contains(containment->location())) {
+    if (m_containments.contains(containment->id()) || m_panelContainments.contains(containment->id())) {
         return;
     }
     QAction *addAction = containment->action("add widgets");
@@ -433,10 +433,9 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
             containment->setParentItem(containmentPanel);
             containment->setParent(containmentPanel);
 
-            QDeclarativeProperty containmentProperty(containmentPanel, "containment");
-            containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
+            containmentPanel->metaObject()->invokeMethod(containmentPanel, "addContainment", Q_ARG(QVariant, QVariant::fromValue<QGraphicsWidget *>(containment)));
 
-            m_panelContainments.insert(containment->location(), containment);
+            m_panelContainments.insert(containment->id(), containment);
 
             //done, don't need further management
             return;
