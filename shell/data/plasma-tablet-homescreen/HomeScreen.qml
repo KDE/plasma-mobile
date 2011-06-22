@@ -20,7 +20,7 @@
  ***************************************************************************/
 
 import QtQuick 1.0
-import MobileShell 0.1
+import org.kde.plasma.mobileshell 0.1 as MobileShell
 
 Item {
     id: homeScreen;
@@ -185,14 +185,15 @@ Item {
         height: 11
     }
 
-    MobileShell.Panel {
-        id: topEdgePanel
-        objectName: "topEdgePanel"
+    MobileShell.MobilePanel {
+        id: slidingPanel
+        visible: true
+        y: -topEdgePanel.height +35
         mainItem: SystrayPanel {
-            id: topEdgePanel;
-            objectName: "topEdgePanel";
-
-            y: 0;
+            id: topEdgePanel
+            objectName: "topEdgePanel"
+            width: Math.max(800, homeScreen.width)
+            height: Math.max(480, homeScreen.height)
         }
     }
 

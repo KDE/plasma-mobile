@@ -30,11 +30,14 @@
 
 #include <Plasma/Corona>
 
+uint PanelProxy::s_numItems = 0;
 
 PanelProxy::PanelProxy(QObject *parent)
     : QObject(parent)
 {
     m_panel = new QGraphicsView();
+    m_panel->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_panel->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_panel->installEventFilter(this);
     m_panel->setAutoFillBackground(false);
     m_panel->viewport()->setAutoFillBackground(false);
@@ -63,6 +66,7 @@ void PanelProxy::setMainItem(QGraphicsObject *mainItem)
         if (m_mainItem) {
             m_mainItem.data()->setParent(mainItem->parent());
             m_mainItem.data()->removeEventFilter(this);
+            m_mainItem.data()->setY(0);
         }
         m_mainItem = mainItem;
         if (mainItem) {
@@ -72,8 +76,6 @@ void PanelProxy::setMainItem(QGraphicsObject *mainItem)
 
         mainItem->installEventFilter(this);
 
-        m_panel->resize(QSize(mainItem->boundingRect().width(), mainItem->boundingRect().height()));
-        m_panel->setSceneRect(QRectF(QPointF(mainItem->x(), mainItem->y()), QSize(mainItem->boundingRect().width(), mainItem->boundingRect().height())));
         //if this is called in Compenent.onCompleted we have to wait a loop the item is added to a scene
         QTimer::singleShot(0, this, SLOT(syncMainItem()));
         emit mainItemChanged();
@@ -86,7 +88,37 @@ void PanelProxy::syncMainItem()
         return;
     }
 
-    
+    //not have a scene? go up in the hyerarchy until we find something with a scene
+    QGraphicsScene *scene = m_mainItem.data()->scene();
+    if (!scene) {
+        QObject *parent = m_mainItem.data();
+        while ((parent = parent->parent())) {
+            QGraphicsObject *qo = qobject_cast<QGraphicsObject *>(parent);
+            if (qo) {
+                scene = qo->scene();
+                if (scene) {
+                    scene->addItem(m_mainItem.data());
+                    ++s_numItems;
+                    m_mainItem.data()->setY(-1000*s_numItems);
+                    m_mainItem.data()->setY(1000*s_numItems);
+                    break;
+                }
+            }
+        }
+    }
+
+    if (!scene) {
+        return;
+    }
+
+    m_panel->setScene(scene);
+
+    m_panel->resize(QSize(m_mainItem.data()->boundingRect().width(), m_mainItem.data()->boundingRect().height()));
+
+    QRectF itemGeometry(QPointF(m_mainItem.data()->x(), m_mainItem.data()->y()),
+                        QSize(m_mainItem.data()->boundingRect().width(), m_mainItem.data()->boundingRect().height()));
+
+    m_panel->setSceneRect(itemGeometry);
 }
 
 bool PanelProxy::isVisible() const
@@ -141,8 +173,7 @@ bool PanelProxy::eventFilter(QObject *watched, QEvent *event)
     //Main item
     } else if (watched == m_mainItem.data() &&
                (event->type() == QEvent::Resize || event->type() == QEvent::Move)) {
-        m_panel->resize(QSize(m_mainItem.data()->boundingRect().width(), m_mainItem.data()->boundingRect().height()));
-        m_panel->setSceneRect(QRectF(QPointF(m_mainItem.data()->x(), m_mainItem.data()->y()), QSize(m_mainItem.data()->boundingRect().width(), m_mainItem.data()->boundingRect().height())));
+        syncMainItem();
     }
     return false;
 }

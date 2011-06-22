@@ -72,6 +72,7 @@ protected:
 private:
     QGraphicsView *m_panel;
     QWeakPointer<QGraphicsObject> m_mainItem;
+    static uint s_numItems;
 };
 
 #endif

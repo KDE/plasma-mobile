@@ -23,65 +23,24 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: systrayPanel;
-    state: "passive"
-    height: handle.height + handle.y + 12;
-    width:  parent.width;
+Rectangle {
+    color: "red"
+    anchors.fill:parent
+}
 
-    PlasmaCore.Svg {
-        id: arrows
-        imagePath: "widgets/arrows"
-    }
-    
-    PlasmaCore.SvgItem {
-        id: handle
-        svg: arrows
-        anchors.right: parent.right
-        width: 40
-        height: 40
-        z: systrayBackground.z + 1
-        MouseArea {
-            id: handleArea;
-            anchors.fill: parent;
-            onReleased: {
-                if ((systrayPanel.state == "passive") && ((handle.y > (systrayPanel.parent.height / 100) * 40) || (handle.y == 0))){
-                    systrayPanel.state = "active";
-                }else{
-                    //horrible hack to force a change of state when we change from passive to passive
-                    systrayPanel.state = "tmp-passive";
-                    systrayPanel.state = "passive";
-                }
-            }
-            drag.target: parent
-            drag.axis: Drag.YAxis
-            drag.minimumY: 0
-            drag.maximumY: systrayPanel.parent.height - parent.height
+    SlidingDragButton {
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
         }
-    }
-    
-    PlasmaCore.FrameSvgItem {
-        id: systrayBackground
-        anchors.fill: systrayPanel
-        imagePath: "widgets/background"
-        enabledBorders: width < systrayPanel.parent.width?"LeftBorder|RightBorder|BottomBorder":"BottomBorder"
-        Item {
-            id: containmentParent
-            anchors.fill: parent
-            anchors.topMargin: systrayBackground.margins.top
-            anchors.bottomMargin: systrayBackground.margins.bottom
-            anchors.leftMargin: systrayBackground.margins.left
-            anchors.rightMargin: systrayBackground.margins.right
-
-            Behavior on opacity {
-                NumberAnimation { duration: 200 }
-            }
-        }
-        z: 10
+        width: 32
+        height: 32
     }
 
     property QGraphicsWidget containment
 
     onContainmentChanged: {
-        containment.parent = containmentParent
+        containment.parent = systrayPanel
         timer.running = true
     }
     onHeightChanged: resizeTimer.running = true
@@ -98,53 +57,14 @@ Item {
         running: false
         repeat: false
         onTriggered: resizeContainment()
-        onRunningChanged: {
-            if (running) {
-                containmentParent.opacity = 0
-            } else {
-                containmentParent.opacity = 1
-            }
-        }
      }
 
     function resizeContainment()
     {
         containment.x = 0
-        containment.y =  containmentParent.height - 35
-        containment.height = 35
-        containment.width = containmentParent.width
+        containment.y =  0
+        containment.height = systrayPanel.height
+        containment.width = systrayPanel.width - 32
     }
 
-    states: [
-        State {
-            name: "active";
-            PropertyChanges {
-                target: handle
-                y: systrayPanel.parent.height - handle.height;
-                elementId: "up-arrow"
-            }
-        },
-        State {
-            name: "passive";
-            PropertyChanges {
-                target: handle
-                y: 0
-                elementId: "down-arrow"
-            }
-        }
-    ]
-
-
-    transitions: [
-        Transition {
-            reversible: true
-            SequentialAnimation {
-                NumberAnimation {
-                    properties: "y, height"
-                    duration: 500
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        }
-    ]
 }

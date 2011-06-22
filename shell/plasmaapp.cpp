@@ -87,7 +87,7 @@ PlasmaApp::PlasmaApp()
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    qmlRegisterType<PanelProxy>("MobileShell", 0, 1, "Panel");
+    qmlRegisterType<PanelProxy>("org.kde.plasma.mobileshell", 0, 1, "MobilePanel");
 
     //FIXME: why does not work?
     //qmlRegisterInterface<Plasma::Wallpaper>("Wallpaper");

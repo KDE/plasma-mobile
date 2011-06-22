@@ -28,6 +28,7 @@ PlasmaCore.FrameSvgItem {
     imagePath: "widgets/panel-background"
     prefix: "north"
     signal shrinkRequested
+    property int iconSize: 32
     state: height>48?"active":"passive"
 
     Component.onCompleted: {
@@ -102,11 +103,6 @@ PlasmaCore.FrameSvgItem {
 
     }
 
-    SlidingPanel {
-        id: slidingPanel
-    }
-
-
     PlasmaCore.DataSource {
           id: statusNotifierSource
           engine: "statusnotifieritem"
@@ -130,8 +126,16 @@ PlasmaCore.FrameSvgItem {
         connectedSources: ["Local"]
     }
 
-    Item {
+    SlidingPanel {
+        id: slidingPanel
         anchors.top: parent.top
+        anchors.bottom: systrayItem.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+    }
+    Item {
+        id: systrayItem
+        height: iconSize+2
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
@@ -176,13 +180,6 @@ PlasmaCore.FrameSvgItem {
                         
                     }
                 }
-            }
-        }
-        PanelDragButton {
-            anchors {
-                right: parent.right
-                top: parent.top
-                bottom: parent.bottom
             }
         }
     }
