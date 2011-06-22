@@ -83,6 +83,9 @@ void MobileActivityThumbnails::snapshotContainment(Plasma::Containment *cont)
 
 void MobileActivityThumbnails::delayedSnapshotContainment()
 {
+    if (!m_containmentToSave) {
+        return;
+    }
     QGraphicsEffect *effect = m_containmentToSave.data()->graphicsEffect();
     //FIXME: is this REALLY sure?
     CachingEffect *cache = static_cast<CachingEffect *>(effect);

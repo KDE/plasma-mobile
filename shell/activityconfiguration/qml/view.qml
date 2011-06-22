@@ -90,7 +90,13 @@ Rectangle {
         onTriggered: {
             wallpapersList.model = configInterface.wallpaperModel
             activityNameEdit.text = configInterface.activityName
-            wallpapersList.currentIndex = -1
+            if (configInterface.firstConfig) {
+                var newIndex = Math.random()*wallpapersList.count
+                wallpapersList.currentIndex = newIndex
+                wallpapersList.positionViewAtIndex(newIndex, ListView.Center)
+            } else {
+                wallpapersList.currentIndex = -1
+            }
         }
     }
 
@@ -123,6 +129,7 @@ Rectangle {
             }
             PlasmaWidgets.LineEdit {
                 id: activityNameEdit
+                objectName: "activityNameEdit"
             }
         }
 

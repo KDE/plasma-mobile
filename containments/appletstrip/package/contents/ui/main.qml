@@ -17,9 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1 as QtExtra
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 import "LayoutManager.js" as LayoutManager
 
@@ -29,7 +30,7 @@ Item {
     width: 1024
     height: 600
 
-    property int actionSize: 32
+    property int actionSize: 22
     property int appletColumns: 3
     property string appletsOrder
 
@@ -173,12 +174,12 @@ Item {
                     width: main.width/appletColumns
                     Column {
                         anchors.centerIn: parent
-                        ActionButton {
+                        MobileComponents.ActionButton {
                             svg: configIconsSvg
                             elementId: "add"
                             action: plasmoid.action("add widgets")
                         }
-                        ActionButton {
+                        MobileComponents.ActionButton {
                             svg: configIconsSvg
                             elementId: "configure"
                             action: plasmoid.action("configure")

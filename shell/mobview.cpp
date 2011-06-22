@@ -111,7 +111,9 @@ void MobView::setContainment(Plasma::Containment *c)
 
 void MobView::drawBackground(QPainter *painter, const QRectF &rect)
 {
-    painter->fillRect(rect.toAlignedRect(), Qt::black);
+    Q_UNUSED(painter)
+    Q_UNUSED(rect)
+    //don't do anything
 }
 
 
@@ -128,6 +130,12 @@ void MobView::resizeEvent(QResizeEvent *event)
     Q_UNUSED(event)
     updateGeometry();
     emit geometryChanged();
+}
+
+void MobView::closeEvent(QCloseEvent *event)
+{
+    Q_UNUSED(event)
+    event->ignore();
 }
 
 Plasma::Location MobView::location() const

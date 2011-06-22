@@ -19,19 +19,22 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.qtextracomponents 0.1
 
 Item {
-    width: 600
-    height: 240
+    id: main
+    width: 500
+    height: 150
+
+    property int iconSize: 22
 
     PlasmaCore.DataSource {
         id: tasksSource
         engine: "tasks"
-        interval: 30
+        interval: 0
         onSourceAdded: {
             //print("SOURCE added: " + source);
             connectSource(source)
@@ -40,6 +43,16 @@ Item {
             connectedSources = sources
         }
     }
+
+    PlasmaCore.Theme {
+        id: theme
+    }
+
+    PlasmaCore.Svg {
+        id: iconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
+
     // connect from C++ to update
     // - position of the windows, relative to window element
     // - actual position of the row
@@ -53,7 +66,7 @@ Item {
         contentWidth: windowsRow.width
         anchors.fill: parent
         property variant childrenPositions
-        
+
         Row {
             id: windowsRow
             objectName: "windowsRow"
@@ -70,10 +83,10 @@ Item {
                         var properties = new Object()
                         properties.winId = winId
                         //FIXME: why those hardoced numbers?
-                        properties.x = windowsRow.children[i].x + 30
+                        properties.x = windowsRow.children[i].x + 10
                         properties.y = windowsRow.children[i].y + 20
                         properties.width = windowsRow.children[i].width - 20
-                        properties.height = windowsRow.children[i].height - 20
+                        properties.height = windowsRow.children[i].height - 40
                         childrenPositions[i] = properties
                     }
                     windowFlicker.childrenPositions = childrenPositions
@@ -101,13 +114,24 @@ Item {
 
                 Item {
                     id: windowDelegate
-                    width: 200
-                    height: 200
+                    width: height*1.6
+                    height: main.height
+                    onHeightChanged: {
+                        positionsTimer.running = true
+                    }
                     property string winId: DataEngineSource
 
                     Rectangle {
-                        opacity: .4
+                        opacity: 0.4
+                        color: theme.backgroundColor
                         anchors.fill: parent
+                    }
+
+                    QIconItem {
+                        anchors.centerIn: parent
+                        width: 64
+                        height: 64
+                        icon: model["icon"]
                     }
 
                     Text {
@@ -115,6 +139,7 @@ Item {
                         anchors.bottom: parent.bottom
                         anchors.horizontalCenter: parent.horizontalCenter;
                         text: className
+                        color: theme.textColor
                         font.bold: true
                     }
 
@@ -124,6 +149,23 @@ Item {
                             print(winId)
                             var service = tasksSource.serviceForSource(winId)
                             var operation = service.operationDescription("activate")
+
+                            service.startOperationCall(operation)
+                        }
+                    }
+
+                    MobileComponents.ActionButton {
+                        id: closeButton
+                        svg: iconsSvg
+                        iconSize: 22
+                        elementId: "close"
+                        anchors {
+                            top: parent.top
+                            right: parent.right
+                        }
+                        onClicked: {
+                            var service = tasksSource.serviceForSource(winId)
+                            var operation = service.operationDescription("close")
 
                             service.startOperationCall(operation)
                         }

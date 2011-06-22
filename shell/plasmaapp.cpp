@@ -79,7 +79,8 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
-      m_isDesktop(false)
+      m_isDesktop(false),
+      m_startupCompleted(false)
 {
     KGlobal::locale()->insertCatalog("libplasma");
 
@@ -323,8 +324,9 @@ Plasma::Corona* PlasmaApp::corona()
         m_corona->setItemIndexMethod(QGraphicsScene::NoIndex);
         m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->transformedSize()));
 
+        //FIXME libplasma2: qml containments cannot set containmentType before this signal is emitted
         connect(m_corona, SIGNAL(containmentAdded(Plasma::Containment*)),
-                this, SLOT(manageNewContainment(Plasma::Containment*)));
+                this, SLOT(manageNewContainment(Plasma::Containment*)), Qt::QueuedConnection);
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
         connect(m_corona, SIGNAL(screenOwnerChanged(int, int, Plasma::Containment *)), this, SLOT(containmentScreenOwnerChanged(int,int,Plasma::Containment*)));
 
@@ -336,8 +338,15 @@ Plasma::Corona* PlasmaApp::corona()
         m_mainView->setScene(m_corona);
         m_corona->checkActivities();
         m_mainView->show();
+        //FIXME: this will go away when containmentAdded connection won't be queued anymore
+        QTimer::singleShot(1000, this, SLOT(startupCompleted()));
     }
     return m_corona;
+}
+
+void PlasmaApp::startupCompleted()
+{
+        m_startupCompleted = true;
 }
 
 bool PlasmaApp::hasComposite()
@@ -391,46 +400,78 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     }
 
     //Is it a panel?
-    //if it's on an edge find a qml element propely named
-    //otherwise delete it
-    QString containmentPanelName;
+    //if it's a PanelContainment or CustomPanelContainment put it in its own view
+    if (containment->containmentType() == Plasma::Containment::PanelContainment ||
+        containment->containmentType() == Plasma::Containment::CustomPanelContainment) {
+        MobView *panel = m_panelViews.value(containment->location());
+        //TODO: track location changes
+        if (!panel) {
+            //TODO: better view numbering
+            panel = new MobView(0, MobView::mainViewId()+m_panelViews.count()+1, 0);
+            m_panelViews[containment->location()] = panel;
 
-    switch (containment->location()) {
-    case Plasma::LeftEdge:
-        containmentPanelName = "leftEdgePanel";
-        break;
-    case Plasma::TopEdge:
-        containmentPanelName = "topEdgePanel";
-        break;
-    case Plasma::RightEdge:
-        containmentPanelName = "rightEdgePanel";
-        break;
-    case Plasma::BottomEdge:
-        containmentPanelName = "bottomEdgePanel";
-        break;
-    default:
-        break;
-    }
+            panel->setTrackContainmentChanges(true);
+            panel->setAutoFillBackground(false);
+            panel->viewport()->setAutoFillBackground(false);
+            panel->setAttribute(Qt::WA_TranslucentBackground);
+        }
+        containment->setParentItem(0);
+        containment->setZValue(999999);
+        panel->setWindowFlags(panel->windowFlags() | Qt::FramelessWindowHint);
+        panel->setFrameShape(QFrame::NoFrame);
+        panel->setContainment(containment);
+        panel->move(0,0);
+        panel->setMinimumWidth(m_mainView->width());
+        panel->show();
 
-    //is it a panel?
-    if (!containmentPanelName.isEmpty()) {
-        QDeclarativeItem *containmentPanel = m_homeScreen->findChild<QDeclarativeItem*>(containmentPanelName);
+        KWindowSystem::setOnAllDesktops(panel->winId(), m_isDesktop);
+        unsigned long state = NET::Sticky | NET::StaysOnTop | NET::KeepAbove;
+        KWindowSystem::setState(panel->effectiveWinId(), state);
+        KWindowSystem::setType(panel->effectiveWinId(), NET::Dock);
+        return;
+    } else {
+        //put it into the main scene:
+        //if it's on an edge find a qml element propely named
+        //otherwise delete it
+        QString containmentPanelName;
 
-        if (containmentPanel) {
-            containment->setParentItem(containmentPanel);
-            containment->setParent(containmentPanel);
+        switch (containment->location()) {
+        case Plasma::LeftEdge:
+            containmentPanelName = "leftEdgePanel";
+            break;
+        case Plasma::TopEdge:
+            containmentPanelName = "topEdgePanel";
+            break;
+        case Plasma::RightEdge:
+            containmentPanelName = "rightEdgePanel";
+            break;
+        case Plasma::BottomEdge:
+            containmentPanelName = "bottomEdgePanel";
+            break;
+        default:
+            break;
+        }
 
-            QDeclarativeProperty containmentProperty(containmentPanel, "containment");
-            containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
+        //is it a panel?
+        if (!containmentPanelName.isEmpty()) {
+            QDeclarativeItem *containmentPanel = m_homeScreen->findChild<QDeclarativeItem*>(containmentPanelName);
 
-            m_panelContainments.insert(containment->location(), containment);
+            if (containmentPanel) {
+                containment->setParentItem(containmentPanel);
+                containment->setParent(containmentPanel);
 
-            //done, don't need further management
-            return;
-        } else {
-            //no panel? discard the containment
-            containment->deleteLater();
-            return;
+                QDeclarativeProperty containmentProperty(containmentPanel, "containment");
+                containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
+
+                m_panelContainments.insert(containment->location(), containment);
+
+                //done, don't need further management
+                return;
+            } else {
+                //no panel? discard the containment
+                containment->deleteLater();
+                return;
+            }
         }
     }
 
@@ -471,6 +512,10 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     } else {
         containment->setPos(m_mainView->width(), m_mainView->height());
        // containment->setVisible(false);
+    }
+
+    if (m_startupCompleted) {
+        showActivityConfiguration(true);
     }
 }
 
@@ -586,6 +631,11 @@ void PlasmaApp::showWidgetsExplorer()
 
 void PlasmaApp::showActivityConfiguration()
 {
+    showActivityConfiguration(false);
+}
+
+void PlasmaApp::showActivityConfiguration(bool firstConfig)
+{
     if (!m_activityConfiguration) {
         m_activityConfiguration = new ActivityConfiguration();
         m_activityConfiguration.data()->setZValue(1000);
@@ -596,6 +646,7 @@ void PlasmaApp::showActivityConfiguration()
     if (m_declarativeWidget) {
         m_activityConfiguration.data()->setGeometry(m_declarativeWidget->geometry());
     }
+    m_activityConfiguration.data()->setFirstConfig(firstConfig);
     m_activityConfiguration.data()->show();
 }
 

@@ -58,19 +58,23 @@ bool MouseEventListener::sceneEventFilter(QGraphicsItem *item, QEvent *event)
     switch (event->type()) {
     case QEvent::GraphicsSceneMousePress: {
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
-        QDeclarativeMouseEvent dme(me->pos().x(), me->pos().y(), me->screenPos().x(), me->screenPos().y(), me->button(), me->buttons(), me->modifiers());
+        //the parent will receive events in its own coordinates
+        const QPointF myPos = item->mapToItem(this, me->pos());
+        QDeclarativeMouseEvent dme(myPos.x(), myPos.y(), me->screenPos().x(), me->screenPos().y(), me->button(), me->buttons(), me->modifiers());
         emit pressed(&dme);
         break;
     }
     case QEvent::GraphicsSceneMouseMove: {
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
-        QDeclarativeMouseEvent dme(me->pos().x(), me->pos().y(), me->screenPos().x(), me->screenPos().y(), me->button(), me->buttons(), me->modifiers());
+        const QPointF myPos = item->mapToItem(this, me->pos());
+        QDeclarativeMouseEvent dme(myPos.x(), myPos.y(), me->screenPos().x(), me->screenPos().y(), me->button(), me->buttons(), me->modifiers());
         emit positionChanged(&dme);
         break;
     }
     case QEvent::GraphicsSceneMouseRelease: {
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
-        QDeclarativeMouseEvent dme(me->pos().x(), me->pos().y(), me->screenPos().x(), me->screenPos().y(), me->button(), me->buttons(), me->modifiers());
+        const QPointF myPos = item->mapToItem(this, me->pos());
+        QDeclarativeMouseEvent dme(myPos.x(), myPos.y(), me->screenPos().x(), me->screenPos().y(), me->button(), me->buttons(), me->modifiers());
         emit released(&dme);
         break;
     }

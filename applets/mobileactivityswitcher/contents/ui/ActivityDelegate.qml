@@ -19,6 +19,7 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: delegate
@@ -65,12 +66,6 @@ Item {
                 style: Text.Outline
                 styleColor: Qt.rgba(1, 1, 1, 0.6)
                 font.pixelSize: 25
-            }
-            ActionButton {
-                elementId: "configure"
-                action: plasmoid.action("configure")
-                opacity: model["Current"]==true?1:0
-                anchors.bottom: parent.bottom
             }
         }
     }
@@ -139,37 +134,68 @@ Item {
             }
         }
     }
-    //TODO: load on demand of the qml file
-    ConfirmationDialog {
-        id: confirmationDialog
+    
+    
+    Row {
         anchors {
-            right: deleteButton.horizontalCenter
-            top: deleteButton.verticalCenter
+            bottom: activityBorder.bottom
+            left: activityBorder.left
+            bottomMargin: activityBorder.margins.bottom
+            leftMargin: activityBorder.margins.left
         }
-        transformOrigin: Item.TopRight
-        question: i18n("Are you sure you want permanently delete this activity?")
-        onAccepted: {
-            var service = activitySource.serviceForSource("Status")
-            var operation = service.operationDescription("remove")
-            operation["Id"] = model["DataEngineSource"]
-            var job = service.startOperationCall(operation)
-        }
-    }
-    ActionButton {
-        id: deleteButton
-        elementId: "delete"
-        anchors {
-            top: activityBorder.top
-            right: activityBorder.right
-            topMargin: activityBorder.margins.top
-            rightMargin: activityBorder.margins.right
-        }
-        onClicked: {
-            if (confirmationDialog.scale == 1) {
-                confirmationDialog.scale = 0
-            } else {
-                confirmationDialog.scale = 1
+        spacing: 8
+        opacity: delegate.scale>0.9?1:0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
             }
+        }
+        Item {
+            width: iconSize
+            height: iconSize
+            z: 900
+            //TODO: load on demand of the qml file
+            ConfirmationDialog {
+                id: confirmationDialog
+                anchors {
+                    left: deleteButton.horizontalCenter
+                    bottom: deleteButton.verticalCenter
+                }
+                transformOrigin: Item.BottomLeft
+                question: i18n("Are you sure you want permanently delete this activity?")
+                onAccepted: {
+                    var service = activitySource.serviceForSource("Status")
+                    var operation = service.operationDescription("remove")
+                    operation["Id"] = model["DataEngineSource"]
+                    var job = service.startOperationCall(operation)
+                }
+                onDismissed: {
+                    deleteButton.checked = false
+                }
+            }
+            MobileComponents.ActionButton {
+                id: deleteButton
+                svg: iconsSvg
+                elementId: "delete"
+                toggle: true
+
+                onClicked: {
+                    if (confirmationDialog.scale == 1) {
+                        confirmationDialog.scale = 0
+                    } else {
+                        confirmationDialog.scale = 1
+                    }
+                }
+            }
+        }
+        MobileComponents.ActionButton {
+            svg: iconsSvg
+            elementId: "configure"
+            action: plasmoid.action("configure")
+            opacity: model["Current"]==true?1:0.3
+            enabled: opacity==1
+            z: 0
         }
     }
 }
