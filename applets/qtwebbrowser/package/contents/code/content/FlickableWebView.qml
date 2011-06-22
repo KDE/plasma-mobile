@@ -119,10 +119,20 @@ Flickable {
             contentsScale = Math.min(1,flickable.width / contentsSize.width)
         }
         onUrlChanged: {
+            print ("url changed ...");
             // got to topleft
             flickable.contentX = 0
             flickable.contentY = 0
-            if (url != null) { header.editUrl = url.toString(); }
+            if (url != null) {
+                header.editUrl = url.toString();
+
+                print("YO EMIT. " + url.toString());
+                webBrowser.urlLoaded(url.toString());
+            }
+        }
+        onTitleChanged: {
+            print("title changed in flickable " + title);
+            webBrowser.titleChanged();
         }
         onDoubleClick: {
                         if (!heuristicZoom(clickX,clickY,2.5)) {

@@ -20,6 +20,7 @@
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
+#include <QDeclarativeItem>
 #include <QScriptValue>
 
 #include <KStandardDirs>
@@ -28,7 +29,8 @@
 #include "kdebug.h"
 
 View::View(const QString &url, QWidget *parent)
-    : QDeclarativeView(parent)
+    : QDeclarativeView(parent),
+    m_webBrowser(0)
 {
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
     // Tell the script engine where to find the Plasma Quick components
@@ -46,22 +48,64 @@ View::View(const QString &url, QWidget *parent)
     // Note that this is a bit brittle, since it relies on the package name,
     // but it allows us to share the same code with the pure QML plasmoid
     // In a later stadium, we can install the QML stuff in a different path.
-    QString qmlFile = KGlobal::dirs()->findResource("data", "plasma/plasmoids/qtwebbrowser/contents/code/webbrowser.qml");
+    QString qmlFile = KGlobal::dirs()->findResource("data",
+                                    "plasma/plasmoids/qtwebbrowser/contents/code/webbrowser.qml");
     //kDebug() << "Loading QML File:" << qmlFile;
     setSource(QUrl(qmlFile));
     //kDebug() << "Plugin pathes:" << engine()->pluginPathList();
     show();
 
+    QList<QObject*> l = rootObject()->findChildren<QObject*>();
+
+    foreach (QObject *o, l) {
+        //kDebug() << "    child: " << o->objectName() << o->property("id");
+    }
+    
+    m_webBrowser = rootObject()->findChild<QDeclarativeItem*>("webView");
+
+    if (m_webBrowser) {
+        kDebug() << "connect ... OK!";
+        connect(m_webBrowser, SIGNAL(urlChanged()),
+                this, SLOT(urlChanged()));
+        //connect(m_webBrowser, SIGNAL(titleChanged()),
+                //this, SIGNAL(titleChanged()));
+        connect(m_webBrowser, SIGNAL(titleChanged()),
+                this, SLOT(onTitleChanged()));
+    } else {
+        kError() << "!!! item not found. :((";
+    }
+
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
+    connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
+            this, SLOT(handleError(QDeclarativeView::Status)));
+    
 }
 
 View::~View()
 {
 }
 
-void View::exception()
+void View::handleError(QDeclarativeView::Status status)
 {   // TODO: do something useful, in case anything goes wrong in the QML files
     kDebug() << "Exception in script.";
+    if (status == QDeclarativeView::Error) {
+        foreach (const QDeclarativeError &e, errors()) {
+            kWarning() << "error in QML: " << e.toString() << e.description();
+        }
+    }
+}
+
+void View::urlChanged()
+{
+    QVariant newUrl = m_webBrowser->property("url");
+    kDebug() << ":) :) :) Url changed to: " << newUrl;
+}
+
+void View::onTitleChanged()
+{
+    QString newTitle = m_webBrowser->property("title").toString();
+    kDebug() << ":) :) :) Title changed to: " << newTitle;
+    emit titleChanged(newTitle);
 }
 
 #include "view.moc"

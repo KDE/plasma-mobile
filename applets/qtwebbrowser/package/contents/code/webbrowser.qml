@@ -46,22 +46,29 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 import "content"
 
-Rectangle {
+Item {
     id: webBrowser
+    objectName: "webBrowser"
 
     property string urlString : ""
+    //url: fixUrl(webBrowser.urlString)
+    property alias url: webView.url
+    property alias title: webView.title
+    signal urlLoaded(string newUrl)
+    signal titleChanged()
 
     width: 800; height: 600
-    color: "#343434"
+    //color: "#343434"
     clip: true
 
     MobileComponents.ResourceInstance {
         id: resourceInstance
-        uri: webBrowser.urlString
+        uri: url
     }
 
     FlickableWebView {
         id: webView
+        objectName: "webView"
         url: webBrowser.urlString
         onProgressChanged: header.urlChanged = false
         anchors { top: headerSpace.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
@@ -86,11 +93,19 @@ Rectangle {
     }
 
     Component.onCompleted: {
-        print("+=================" + startupArguments);
+        //print("+=================" + startupArguments);
         if (typeof startupArguments[0] != "undefined") {
             urlString = startupArguments[0];
         } else {
             urlString = "http://plasma.kde.org";
         }
+
+        webView.urlChanged.connect(emitUrlLoaded);
+        webView.onTitleChanged.connect(titleChanged);
+    }
+
+    function emitUrlLoaded() {
+        print("EMIT load new URL: " + url);
+        webBrowser.urlLoaded(url);
     }
 }

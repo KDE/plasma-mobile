@@ -28,6 +28,8 @@ RekonqActive::RekonqActive(const QString &url)
     m_widget = new View(url, this);
     restoreWindowSize(config("Window"));
     setCentralWidget(m_widget);
+
+    connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
 }
 
 RekonqActive::~RekonqActive()

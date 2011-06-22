@@ -31,6 +31,7 @@
 #include <KPluginInfo>
 
 class KMainWindow;
+class QDeclarativeItem;
 class QProgressBar;
 class QSignalMapper;
 class Page;
@@ -59,11 +60,17 @@ public:
     WebsiteOptions* options() const;
     QString name() const;
 
+Q_SIGNALS:
+    void titleChanged(const QString&);
+
 private:
     WebsiteOptions *m_options;
+    QDeclarativeItem* m_webBrowser;
 
 private Q_SLOTS:
-    void exception();
+    void handleError(QDeclarativeView::Status status);
+    void urlChanged();
+    void onTitleChanged();
 };
 
 #endif // VIEW_H
