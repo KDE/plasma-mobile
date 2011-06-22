@@ -161,7 +161,7 @@ void KRunnerModel::matchesChanged(const QList< Plasma::QueryMatch > & m)
     while (matches.size()) {
         Plasma::QueryMatch match = matches.takeLast();
 
-        QString resourceUrl;
+        QString resourceUri;
         QString mimeType;
         QMimeData *mimeData = runnerManager()->mimeDataForMatch(match.id());
         if (mimeData) {
@@ -169,7 +169,7 @@ void KRunnerModel::matchesChanged(const QList< Plasma::QueryMatch > & m)
                 mimeType = mimeData->formats().first();
             }
             if (!mimeData->urls().isEmpty()) {
-                resourceUrl = mimeData->urls().first().toString();
+                resourceUri = mimeData->urls().first().toString();
             }
         }
 
@@ -181,7 +181,7 @@ void KRunnerModel::matchesChanged(const QList< Plasma::QueryMatch > & m)
                 QString("krunner://") + match.runner()->id() + "/" + ::runnerManager()->query() + "#" + match.id(),
                 match.relevance(),
                 CommonModel::AddAction,
-                resourceUrl,
+                resourceUri,
                 mimeType
                 )
             );

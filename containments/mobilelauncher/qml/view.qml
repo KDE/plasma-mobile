@@ -119,7 +119,7 @@ Item {
                 property string label: display
                 property string mimeType: "buh"
                 onPressed: {
-                    resourceInstance.uri = resourceUrl
+                    resourceInstance.uri = resourceUri
                 }
                 onClicked: {
                     appsView.clicked(url)

@@ -90,6 +90,7 @@ Item {
     ListView {
         id: appsView
         objectName: "appsView"
+        pressDelay: 200
 
         anchors {
             left: parent.left

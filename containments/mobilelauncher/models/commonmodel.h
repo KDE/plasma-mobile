@@ -38,7 +38,7 @@ public:
         Url = Qt::UserRole+2,
         Weight = Qt::UserRole+3,
         ActionTypeRole = Qt::UserRole+4,
-        ResourceUrl = Qt::UserRole+5,
+        ResourceUri = Qt::UserRole+5,
         MimeType = Qt::UserRole+6
     };
 

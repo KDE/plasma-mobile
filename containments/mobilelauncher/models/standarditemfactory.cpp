@@ -22,7 +22,7 @@
 #include "commonmodel.h"
 
 QStandardItem *StandardItemFactory::createItem(const QIcon & icon, const QString & title,
-        const QString & description, const QString & url, qreal weight, int actionType, const QString &resourceUrl, const QString &mimeType)
+        const QString & description, const QString & url, qreal weight, int actionType, const QString &resourceUri, const QString &mimeType)
 {
     QStandardItem *appItem = new QStandardItem;
 
@@ -32,7 +32,7 @@ QStandardItem *StandardItemFactory::createItem(const QIcon & icon, const QString
     appItem->setData(url, CommonModel::Url);
     appItem->setData(weight, CommonModel::Weight);
     appItem->setData(actionType, CommonModel::ActionTypeRole);
-    appItem->setData(resourceUrl, CommonModel::ResourceUrl);
+    appItem->setData(resourceUri, CommonModel::ResourceUri);
     appItem->setData(mimeType, CommonModel::MimeType);
 
     return appItem;

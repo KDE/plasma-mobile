@@ -62,19 +62,24 @@ Item {
             onPressed: delegateItem.pressed(mouse)
             onReleased: delegateItem.released(mouse)
             onPressAndHold: {
-                contextMenu.parentItem = delegateItem
-                contextMenu.adjustPosition();
-                contextMenu.visible = true
+                if (resourceInstance && contextMenu) {
+                    contextMenu.parentItem = delegateItem
+                    contextMenu.adjustPosition();
+                    contextMenu.visible = true
+                }
             }
         }
 
         onPositionChanged: {
-            contextMenu.mainItem.highlightItem(mouse.screenX, mouse.screenY)
+            if (contextMenu) {
+                contextMenu.mainItem.highlightItem(mouse.screenX, mouse.screenY)
+            }
         }
 
         onReleased: {
-            //delegateItem.parent.parent.interactive = true
-            contextMenu.mainItem.runItem(mouse.screenX, mouse.screenY)
+            if (contextMenu) {
+                contextMenu.mainItem.runItem(mouse.screenX, mouse.screenY)
+            }
         }
     }
 }
