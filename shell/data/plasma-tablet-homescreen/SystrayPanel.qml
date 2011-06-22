@@ -22,11 +22,12 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
-    id: systrayPanel;
-Rectangle {
-    color: "red"
-    anchors.fill:parent
-}
+    id: systrayPanel
+
+    Rectangle {
+        color: "red"
+        anchors.fill:parent
+    }
 
     SlidingDragButton {
         anchors {
@@ -39,8 +40,21 @@ Rectangle {
 
     property QGraphicsWidget containment
 
+    Item {
+        id: containmentParent
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            leftMargin: 32
+        }
+        height: 35
+    }
+
     onContainmentChanged: {
-        containment.parent = systrayPanel
+        containment.parent = containmentParent
+        containment.x = 0
+        containment.y = 0
         timer.running = true
     }
     onHeightChanged: resizeTimer.running = true
@@ -62,9 +76,9 @@ Rectangle {
     function resizeContainment()
     {
         containment.x = 0
-        containment.y =  0
-        containment.height = systrayPanel.height
-        containment.width = systrayPanel.width - 32
+        containment.y = 0
+        containment.height = containmentParent.height
+        containment.width = containmentParent.width
     }
 
 }

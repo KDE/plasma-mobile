@@ -23,8 +23,8 @@ import org.kde.qtextracomponents 0.1 as QtExtra
 
 Item  {
     id: taskIcon
-    width: iconSize
-    height: iconSize
+    width: Math.min(main.width, main.height)
+    height: width
     visible: main.state == "active" || Status != "Passive"
 
     PlasmaCore.Svg{

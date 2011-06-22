@@ -21,13 +21,15 @@ import Qt 4.7
 
 Item {
     id: plasmoidContainer
+    width: 24
+    anchors.top: tasksRow.top
+    anchors.bottom: tasksRow.bottom
 
     property QGraphicsWidget applet
     onAppletChanged: {
         print(plasmoidContainer.applet)
         plasmoidContainer.applet.parent = plasmoidContainer
         plasmoidContainer.applet.x=0
-        plasmoidContainer.applet.y=0
     }
 
     onHeightChanged: {

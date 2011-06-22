@@ -71,7 +71,6 @@ protected:
     void changeContainment(Plasma::Containment *containment);
     void reserveStruts(const int left, const int top, const int right, const int bottom);
     void showActivityConfiguration(bool firstConfig);
-    void positionPanels();
 
 public Q_SLOTS:
     void containmentsTransformingChanged(bool transforming);
@@ -92,7 +91,6 @@ private Q_SLOTS:
 private:
     MobCorona *m_corona;
     MobView *m_mainView;
-    QHash<Plasma::Location, MobView *> m_panelViews;
 
     //the main declarative scene loader
     Plasma::DeclarativeWidget *m_declarativeWidget;

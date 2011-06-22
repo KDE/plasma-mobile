@@ -403,81 +403,47 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     }
 
     //Is it a panel?
-    //if it's a PanelContainment or CustomPanelContainment put it in its own view
-    if (containment->containmentType() == Plasma::Containment::PanelContainment ||
-        containment->containmentType() == Plasma::Containment::CustomPanelContainment) {
-        MobView *panel = m_panelViews.value(containment->location());
-        //TODO: track location changes
-        if (!panel) {
-            //TODO: better view numbering
-            panel = new MobView(0, MobView::mainViewId()+m_panelViews.count()+1, 0);
-            m_panelViews[containment->location()] = panel;
+    //put it into the main scene:
+    //if it's on an edge find a qml element propely named
+    //otherwise delete it
+    QString containmentPanelName;
 
-            panel->setTrackContainmentChanges(true);
-            panel->setAutoFillBackground(false);
-            panel->viewport()->setAutoFillBackground(false);
-            panel->setAttribute(Qt::WA_TranslucentBackground);
-           /* Plasma::DeclarativeWidget *panelDeclarativeWidget = new Plasma::DeclarativeWidget();
-            panelDeclarativeWidget->setParent(panel);
-            m_corona->addItem(m_declarativeWidget);
+    switch (containment->location()) {
+    case Plasma::LeftEdge:
+        containmentPanelName = "leftEdgePanel";
+        break;
+    case Plasma::TopEdge:
+        containmentPanelName = "topEdgePanel";
+        break;
+    case Plasma::RightEdge:
+        containmentPanelName = "rightEdgePanel";
+        break;
+    case Plasma::BottomEdge:
+        containmentPanelName = "bottomEdgePanel";
+        break;
+    default:
+        break;
+    }
 
-            QString qmlPath = KStandardDirs::locate("data", QString("plasma-mobile/%1/TopPanel.qml").arg(m_homeScreenPath));
-            panelDeclarativeWidget->setQmlPath(qmlPath);*/
-        }
-        panel->setWindowFlags(panel->windowFlags() | Qt::FramelessWindowHint);
-        panel->setFrameShape(QFrame::NoFrame);
-        panel->setContainment(containment);
-        //FIXME: potentially useless moves
-        positionPanels();
+    //is it a panel?
+    if (!containmentPanelName.isEmpty()) {
+        QDeclarativeItem *containmentPanel = m_homeScreen->findChild<QDeclarativeItem*>(containmentPanelName);
 
-        KWindowSystem::setOnAllDesktops(panel->winId(), m_isDesktop);
-        unsigned long state = NET::Sticky | NET::StaysOnTop | NET::KeepAbove;
-        KWindowSystem::setState(panel->effectiveWinId(), state);
-        KWindowSystem::setType(panel->effectiveWinId(), NET::Dock);
-        return;
-    } else {
-        //put it into the main scene:
-        //if it's on an edge find a qml element propely named
-        //otherwise delete it
-        QString containmentPanelName;
+        if (containmentPanel) {
+            containment->setParentItem(containmentPanel);
+            containment->setParent(containmentPanel);
 
-        switch (containment->location()) {
-        case Plasma::LeftEdge:
-            containmentPanelName = "leftEdgePanel";
-            break;
-        case Plasma::TopEdge:
-            containmentPanelName = "topEdgePanel";
-            break;
-        case Plasma::RightEdge:
-            containmentPanelName = "rightEdgePanel";
-            break;
-        case Plasma::BottomEdge:
-            containmentPanelName = "bottomEdgePanel";
-            break;
-        default:
-            break;
-        }
+            QDeclarativeProperty containmentProperty(containmentPanel, "containment");
+            containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
 
-        //is it a panel?
-        if (!containmentPanelName.isEmpty()) {
-            QDeclarativeItem *containmentPanel = m_homeScreen->findChild<QDeclarativeItem*>(containmentPanelName);
+            m_panelContainments.insert(containment->location(), containment);
 
-            if (containmentPanel) {
-                containment->setParentItem(containmentPanel);
-                containment->setParent(containmentPanel);
-
-                QDeclarativeProperty containmentProperty(containmentPanel, "containment");
-                containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
-
-                m_panelContainments.insert(containment->location(), containment);
-
-                //done, don't need further management
-                return;
-            } else {
-                //no panel? discard the containment
-                containment->deleteLater();
-                return;
-            }
+            //done, don't need further management
+            return;
+        } else {
+            //no panel? discard the containment
+            containment->deleteLater();
+            return;
         }
     }
 
@@ -522,38 +488,6 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     if (m_startupCompleted) {
         showActivityConfiguration(true);
-    }
-}
-
-void PlasmaApp::positionPanels()
-{return;
-    QHash<Plasma::Location, MobView *>::const_iterator i = m_panelViews.constBegin();
-    while (i != m_panelViews.constEnd()) {
-        MobView *view = i.value();
-        int windowOffset = 0;
-        if (view->containment()) {
-            windowOffset = view->containment()->property("moveOffset").toInt();
-        }
-        switch (i.key()) {
-        case Plasma::TopEdge:
-            view->move(0,0+windowOffset);
-            view->setMinimumSize(m_mainView->width(), -1);
-            break;
-        case Plasma::LeftEdge:
-            view->move(0+windowOffset,0);
-            view->setMinimumSize(-1, m_mainView->height());
-            break;
-        case Plasma::RightEdge:
-            view->move(m_mainView->size().width()-view->size().width()-windowOffset,0);
-            view->setMinimumSize(-1, m_mainView->height());
-            break;
-        case Plasma::BottomEdge:
-            view->move(0, m_mainView->size().height()-view->size().height()-windowOffset);
-            view->setMinimumSize(m_mainView->width(), -1);
-            break;
-        }
-        view->show();
-        ++i;
     }
 }
 

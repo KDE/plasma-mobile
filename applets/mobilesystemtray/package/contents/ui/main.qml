@@ -23,12 +23,9 @@ import org.kde.qtextracomponents 0.1 as QtExtra
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
-PlasmaCore.FrameSvgItem {
+Item {
     id: main
-    imagePath: "widgets/panel-background"
-    prefix: "north"
     signal shrinkRequested
-    property int iconSize: 32
     state: height>48?"active":"passive"
 
     Component.onCompleted: {
@@ -80,13 +77,17 @@ PlasmaCore.FrameSvgItem {
 
     function addApplet(applet, pos)
     {
-        if (applet.pluginName == "org.kde.windowstrip") {
-            slidingPanel.windowListPlasmoid = applet
+        if (applet.pluginName == "org.kde.appswitcher") {
+            applet.width = 50
+            applet.height = 36
+            switcherDialog.mainItem = applet
+
+            switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
+            switcherDialog.x = 0
+            switcherDialog.y = 0
+            switcherDialog.visible = true
             return
-        } else if (applet.pluginName == "org.kde.mobilelauncher") {
-            slidingPanel.menuPlasmoid = applet
-            return
-        } 
+        }
 
         var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(tasksRow, {"x": pos.x, "y": pos.y});
@@ -102,6 +103,11 @@ PlasmaCore.FrameSvgItem {
         plasmoidContainer.anchors.bottom = tasksRow.bottom
 
     }
+
+    PlasmaCore.Dialog {
+        id: switcherDialog
+    }
+
 
     PlasmaCore.DataSource {
           id: statusNotifierSource
@@ -126,16 +132,8 @@ PlasmaCore.FrameSvgItem {
         connectedSources: ["Local"]
     }
 
-    SlidingPanel {
-        id: slidingPanel
-        anchors.top: parent.top
-        anchors.bottom: systrayItem.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-    }
     Item {
-        id: systrayItem
-        height: iconSize+2
+        anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
