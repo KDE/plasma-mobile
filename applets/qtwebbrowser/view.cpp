@@ -30,6 +30,7 @@
 
 View::View(const QString &url, QWidget *parent)
     : QDeclarativeView(parent),
+    m_options(new WebsiteOptions),
     m_webBrowser(0)
 {
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
@@ -55,20 +56,12 @@ View::View(const QString &url, QWidget *parent)
     //kDebug() << "Plugin pathes:" << engine()->pluginPathList();
     show();
 
-    QList<QObject*> l = rootObject()->findChildren<QObject*>();
-
-    foreach (QObject *o, l) {
-        //kDebug() << "    child: " << o->objectName() << o->property("id");
-    }
-    
     m_webBrowser = rootObject()->findChild<QDeclarativeItem*>("webView");
 
     if (m_webBrowser) {
         kDebug() << "connect ... OK!";
         connect(m_webBrowser, SIGNAL(urlChanged()),
                 this, SLOT(urlChanged()));
-        //connect(m_webBrowser, SIGNAL(titleChanged()),
-                //this, SIGNAL(titleChanged()));
         connect(m_webBrowser, SIGNAL(titleChanged()),
                 this, SLOT(onTitleChanged()));
     } else {
@@ -78,7 +71,6 @@ View::View(const QString &url, QWidget *parent)
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
     connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
             this, SLOT(handleError(QDeclarativeView::Status)));
-    
 }
 
 View::~View()
@@ -86,7 +78,7 @@ View::~View()
 }
 
 void View::handleError(QDeclarativeView::Status status)
-{   // TODO: do something useful, in case anything goes wrong in the QML files
+{
     kDebug() << "Exception in script.";
     if (status == QDeclarativeView::Error) {
         foreach (const QDeclarativeError &e, errors()) {
@@ -98,14 +90,17 @@ void View::handleError(QDeclarativeView::Status status)
 void View::urlChanged()
 {
     QVariant newUrl = m_webBrowser->property("url");
-    kDebug() << ":) :) :) Url changed to: " << newUrl;
+    m_options->url = newUrl.toString();
+    // TODO: we could expose the URL to the activity here, but that's already done in QML
 }
 
 void View::onTitleChanged()
 {
-    QString newTitle = m_webBrowser->property("title").toString();
-    kDebug() << ":) :) :) Title changed to: " << newTitle;
-    emit titleChanged(newTitle);
+    if (m_webBrowser) {
+        m_options->title = m_webBrowser->property("title").toString();
+        kDebug() << "Title changed to: " << m_options->title;
+        emit titleChanged(m_options->title); // sets window caption
+    }
 }
 
 #include "view.moc"

@@ -126,8 +126,7 @@ Flickable {
             if (url != null) {
                 header.editUrl = url.toString();
 
-                print("YO EMIT. " + url.toString());
-                webBrowser.urlLoaded(url.toString());
+                //webBrowser.urlLoaded(url.toString());
             }
         }
         onTitleChanged: {

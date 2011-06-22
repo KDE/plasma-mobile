@@ -41,12 +41,11 @@ class RekonqActive;
 /** Per-website data */
 struct WebsiteOptions
 {
-    QString name;
+    QString title;
+    QString url;
+    QString mimetype;
     QString comment;
     int rating;
-    QUrl startUrl;
-    QIcon windowIcon;
-    QString windowTitle;
 };
 
 class View : public QDeclarativeView

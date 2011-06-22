@@ -54,8 +54,6 @@ Item {
     //url: fixUrl(webBrowser.urlString)
     property alias url: webView.url
     property alias title: webView.title
-    signal urlLoaded(string newUrl)
-    signal titleChanged()
 
     width: 800; height: 600
     //color: "#343434"
@@ -99,13 +97,5 @@ Item {
         } else {
             urlString = "http://plasma.kde.org";
         }
-
-        webView.urlChanged.connect(emitUrlLoaded);
-        webView.onTitleChanged.connect(titleChanged);
-    }
-
-    function emitUrlLoaded() {
-        print("EMIT load new URL: " + url);
-        webBrowser.urlLoaded(url);
     }
 }
