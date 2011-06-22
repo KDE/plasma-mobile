@@ -415,14 +415,11 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
             panel->viewport()->setAutoFillBackground(false);
             panel->setAttribute(Qt::WA_TranslucentBackground);
         }
-        containment->setParentItem(0);
-        containment->setZValue(999999);
         panel->setWindowFlags(panel->windowFlags() | Qt::FramelessWindowHint);
         panel->setFrameShape(QFrame::NoFrame);
         panel->setContainment(containment);
-        panel->move(0,0);
-        panel->setMinimumWidth(m_mainView->width());
-        panel->show();
+        //FIXME: potentially useless moves
+        positionPanels();
 
         KWindowSystem::setOnAllDesktops(panel->winId(), m_isDesktop);
         unsigned long state = NET::Sticky | NET::StaysOnTop | NET::KeepAbove;
@@ -516,6 +513,33 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     if (m_startupCompleted) {
         showActivityConfiguration(true);
+    }
+}
+
+void PlasmaApp::positionPanels()
+{
+    QHash<Plasma::Location, MobView *>::const_iterator i = m_panelViews.constBegin();
+    while (i != m_panelViews.constEnd()) {
+        switch (i.key()) {
+        case Plasma::TopEdge:
+            i.value()->move(0,0);
+            i.value()->setMinimumSize(m_mainView->width(), -1);
+            break;
+        case Plasma::LeftEdge:
+            i.value()->move(0,0);
+            i.value()->setMinimumSize(-1, m_mainView->height());
+            break;
+        case Plasma::RightEdge:
+            i.value()->move(m_mainView->size().width()-i.value()->size().width(),0);
+            i.value()->setMinimumSize(-1, m_mainView->height());
+            break;
+        case Plasma::BottomEdge:
+            i.value()->move(0, m_mainView->size().height()-i.value()->size().height());
+            i.value()->setMinimumSize(m_mainView->width(), -1);
+            break;
+        }
+        i.value()->show();
+        ++i;
     }
 }
 

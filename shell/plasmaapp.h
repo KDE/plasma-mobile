@@ -71,6 +71,7 @@ protected:
     void changeContainment(Plasma::Containment *containment);
     void reserveStruts(const int left, const int top, const int right, const int bottom);
     void showActivityConfiguration(bool firstConfig);
+    void positionPanels();
 
 public Q_SLOTS:
     void containmentsTransformingChanged(bool transforming);

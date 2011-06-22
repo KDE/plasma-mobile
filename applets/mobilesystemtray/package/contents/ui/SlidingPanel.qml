@@ -28,8 +28,8 @@ PlasmaCore.Dialog {
     property alias state: containerColumn.state
 
     onVisibleChanged: {
-        slidingPanel.setAttribute(Qt.WA_X11NetWmWindowTypeToolBar, true)
-        //slidingPanel.setAttribute(Qt.WA_X11DoNotAcceptFocus, false)
+        slidingPanel.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
+        slidingPanel.setAttribute(Qt.WA_X11DoNotAcceptFocus, false)
     }
 
     onActiveWindowChanged: {
