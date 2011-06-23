@@ -192,6 +192,11 @@ Item {
             id: topEdgePanel
             objectName: "topEdgePanel"
         }
+        onActiveWindowChanged: {
+            if (acceptsFocus) {
+                topEdgePanel.state = "Hidden"
+            }
+        }
     }
 
     ActivityPanel {
