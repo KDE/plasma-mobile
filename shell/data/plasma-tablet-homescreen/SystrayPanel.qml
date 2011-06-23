@@ -93,6 +93,10 @@ Item {
                 target: slidingPanel
                 y: 0
             }
+            PropertyChanges {
+                target: slidingPanel
+                acceptsFocus: true
+            }
         },
         State {
             name: "Hidden"
@@ -100,12 +104,20 @@ Item {
                 target: slidingPanel
                 y: -topEdgePanel.height + systrayContainer.height+ background.margins.bottom
             }
+            PropertyChanges {
+                target: slidingPanel
+                acceptsFocus: false
+            }
         },
         State {
             name: "Tasks"
             PropertyChanges {
                 target: slidingPanel
                 y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom
+            }
+            PropertyChanges {
+                target: slidingPanel
+                acceptsFocus: true
             }
         }
     ]

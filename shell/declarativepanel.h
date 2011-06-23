@@ -35,6 +35,7 @@ class PanelProxy : public QObject
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
     Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged)
     Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged)
+    Q_PROPERTY(bool acceptsFucus READ acceptsFocus WRITE setAcceptsFocus NOTIFY acceptsFocusChanged)
 
 public:
     enum WidgetAttribute {
@@ -56,12 +57,15 @@ public:
     int y() const;
     void setY(int y);
 
+    bool acceptsFocus() const;
+    void setAcceptsFocus(bool accepts);
 
 Q_SIGNALS:
     void mainItemChanged();
     void visibleChanged();
     void xChanged();
     void yChanged();
+    void acceptsFocusChanged();
 
 protected Q_SLOTS:
     void syncMainItem();
@@ -72,6 +76,7 @@ protected:
 private:
     QGraphicsView *m_panel;
     QWeakPointer<QGraphicsObject> m_mainItem;
+    bool m_acceptsFocus;
     static uint s_numItems;
 };
 
