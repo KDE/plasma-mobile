@@ -26,7 +26,6 @@ Item {
     width: menuFrame.width
     height: childrenRect.height
     property alias positionState: tipSvgItem.state
-    property alias tipX: tipSvgItem.x
 
     function activateItem(x, y)
     {
@@ -62,10 +61,10 @@ Item {
         elementId: "baloon-tip-top"
         width: tipSvg.elementSize(elementId).width
         height: tipSvg.elementSize(elementId).height
-        x: parent.width/2-width/2
         state: "top"
         z: 900
         anchors {
+            horizontalCenter: menuFrame.horizontalCenter
             bottomMargin: -tipSvg.elementSize("hint-top-shadow").height
             topMargin: -tipSvg.elementSize("hint-bottom-shadow").height
         }

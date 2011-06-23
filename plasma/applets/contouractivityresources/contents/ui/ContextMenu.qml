@@ -55,11 +55,20 @@ Item {
     property Item delegate
     onDelegateChanged: {
         positionMenu()
+        positionFrame()
         highlightFrame.opacity = 0
     }
 
+    function positionFrame()
+    {
+        var framePos = delegate.mapToItem(parent, -30, -30)
+        frame.x = framePos.x
+        frame.y = framePos.y
+        frame.height = delegate.height + 60
+        frame.width = delegate.width + 60
+    }
 
-    function positionMenu(delegate)
+    function positionMenu()
     {
         var menuPos = delegate.mapToItem(parent, delegate.width/2-menuObject.width/2, delegate.height)
 
@@ -68,14 +77,6 @@ Item {
             menuObject.positionState = "top"
         } else {
             menuObject.positionState = "bottom"
-        }
-
-
-        if (menuPos.x+menuObject.width > contextMenu.width) {
-            menuObject.tipX = menuObject.width/2 + ((menuPos.x+menuObject.width) - contextMenu.width) - 16
-            menuPos.x = contextMenu.width - menuObject.width
-        } else {
-            menuObject.tipX = menuObject.width/2 - 12
         }
 
         menuObject.x = menuPos.x
@@ -94,6 +95,16 @@ Item {
     PlasmaCore.Svg {
         id: tipSvg
         imagePath: "dialogs/background"
+    }
+
+    PlasmaCore.FrameSvgItem {
+        id: frame
+        imagePath: "dialogs/background"
+        IconDelegate {
+            anchors.centerIn: parent
+            text: delegate.text
+            icon: delegate.icon
+        }
     }
 
     Menu {

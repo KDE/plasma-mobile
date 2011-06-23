@@ -31,7 +31,6 @@ Rectangle {
     border.color: "white"
     border.width: 5
     property string category: name
-    property alias currentIndex: elementsView.currentIndex
 
     Rectangle {
         id: darkenRect
@@ -75,14 +74,9 @@ Rectangle {
         clip: true
         anchors.fill: parent
         snapMode: ListView.SnapOneItem
-        pressDelay: 250
-        currentIndex: -1
-
-        highlight: PlasmaCore.FrameSvgItem {
-                id: highlightFrame
-                imagePath: "widgets/viewitem"
-                prefix: "hover"
-        }
+        /*spacing: 16
+        anchors.leftMargin: 8
+        anchors.rightMargin: 8*/
 
         delegate: IconDelegate {
             text: model.name
