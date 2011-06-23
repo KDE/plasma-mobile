@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2010 Lim Yuen Hoe <yuenhoe@hotmail.com>                     *
+ *   Copyright 2011 Davide Bettio <bettio@kde.org>                         *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -21,58 +22,112 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
-    id: systrayPanel;
-    anchors {
-        left:parent.left
-        right:parent.right
-    }
-    height: 48
-
+    id: systrayPanel
+    state: "Hidden"
+    width: Math.max(800, homeScreen.width)
+    height: Math.max(480, homeScreen.height+background.margins.bottom)
 
     PlasmaCore.FrameSvgItem {
-        id: systrayBackground
-        anchors.fill: systrayPanel
-        imagePath: "widgets/background"
-        enabledBorders: width < systrayPanel.parent.width?"LeftBorder|RightBorder|BottomBorder":"BottomBorder"
-        Item {
-            id: containmentParent
-            anchors.fill: parent
-            anchors.topMargin: systrayBackground.margins.top
-            anchors.bottomMargin: systrayBackground.margins.bottom
-            anchors.leftMargin: systrayBackground.margins.left
-            anchors.rightMargin: systrayBackground.margins.right
+        id: background
+        anchors.fill:parent
+        imagePath: "dialogs/background"
+        enabledBorders: "BottomBorder"
+    }
+
+    function addContainment(cont)
+    {
+        if (cont.pluginName == "org.kde.mobilelauncher") {
+            menuContainer.plasmoid = cont
+        } else if (cont.pluginName == "org.kde.windowstrip") {
+            windowListContainer.plasmoid = cont
+        } else if (cont.pluginName == "org.kde.mobilesystemtray") {
+            systrayContainer.plasmoid = cont
         }
-        z: 10
     }
 
-    property QGraphicsWidget containment
-
-    onContainmentChanged: {
-        containment.parent = containmentParent
-        resizeTimer.running = true
-    }
-    onHeightChanged: resizeTimer.running = true
-    onWidthChanged: resizeTimer.running = true
-
-    function updateState()
-    {
-        state = containment.state
+    SlidingDragButton {
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            bottomMargin: background.margins.bottom
+        }
+        width: 32
+        height: 32
     }
 
-    Timer {
-        id: resizeTimer
-        interval: 500
-        running: false
-        repeat: false
-        onTriggered: resizeContainment()
-     }
+    Column {
+        anchors.fill: parent
+        anchors.bottomMargin: background.margins.bottom
 
-    function resizeContainment()
-    {
-        containment.x = 0
-        containment.y = 0
-        containment.height = containmentParent.height
-        containment.width = containmentParent.width
+        PlasmoidContainer {
+            id: menuContainer
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: parent.height - systrayContainer.height - windowListContainer.height
+        }
+        PlasmoidContainer {
+            id: windowListContainer
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: parent.height/4
+        }
+        PlasmoidContainer {
+            id: systrayContainer
+            anchors {
+                left: parent.left
+                right: parent.right
+                rightMargin: 32
+            }
+            height: 35
+        }
     }
 
+    states:  [
+        State {
+            name: "Full"
+            PropertyChanges {
+                target: slidingPanel
+                y: 0
+            }
+            PropertyChanges {
+                target: slidingPanel
+                acceptsFocus: true
+            }
+        },
+        State {
+            name: "Hidden"
+            PropertyChanges {
+                target: slidingPanel
+                y: -topEdgePanel.height + systrayContainer.height+ background.margins.bottom
+            }
+            PropertyChanges {
+                target: slidingPanel
+                acceptsFocus: false
+            }
+        },
+        State {
+            name: "Tasks"
+            PropertyChanges {
+                target: slidingPanel
+                y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom
+            }
+            PropertyChanges {
+                target: slidingPanel
+                acceptsFocus: true
+            }
+        }
+    ]
+    transitions: [
+        Transition {
+            PropertyAnimation {
+                properties: "y"
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+    ]
 }
