@@ -50,17 +50,15 @@ Item {
     }
 
     Column {
-        anchors {
-            fill: parent
-            rightMargin: 32
-        }
+        anchors.fill: parent
+
         PlasmoidContainer {
             id: menuContainer
             anchors {
                 left: parent.left
                 right: parent.right
             }
-            height: parent.height - 35 - 150
+            height: parent.height - 35 - parent.height/4
         }
         PlasmoidContainer {
             id: windowListContainer
@@ -68,13 +66,14 @@ Item {
                 left: parent.left
                 right: parent.right
             }
-            height: 150
+            height: parent.height/4
         }
         PlasmoidContainer {
             id: systrayContainer
             anchors {
                 left: parent.left
                 right: parent.right
+                rightMargin: 32
             }
             height: 35
         }

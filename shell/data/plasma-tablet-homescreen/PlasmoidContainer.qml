@@ -28,7 +28,7 @@ Item {
         plasmoidContainer.plasmoid.x=0
         plasmoidContainer.plasmoid.y=0
         plasmoidContainer.plasmoid.width = plasmoidContainer.width
-        lasmoidContainer.plasmoid.height = plasmoidContainer.height
+        plasmoidContainer.plasmoid.height = plasmoidContainer.height
     }
 
     onWidthChanged: {
