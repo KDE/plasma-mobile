@@ -91,24 +91,37 @@ void Contour::RecommendationManager::Private::updateRecommendations()
 
     // get resources that have been touched in the current activity (the dumb way for now)
     const QString query
-            = QString::fromLatin1("select distinct ?resource, ?uri, ?cache,"
-                    "("
-                        "("
-                            "?lastScore * bif:exp(-"
-                                "bif:datediff('day', ?lastUpdate, \"2011-06-30T13:45:01.996Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime>"
-                            ")"
-                        ")"
-                    "as ?score) where {"
-                        "?cache kext:targettedResource ?resource ."
-                        "?cache a kext:ResourceScoreCache ."
-                        "?cache nao:lastModified ?lastUpdate ."
-                        "?cache kext:cachedScore ?lastScore ."
-                        "?cache kext:usedActivity %1 ."
-                        "OPTIONAL { ?resource nie:url ?uri . } ."
-                    "}"
-                    "ORDER BY DESC (?score)"
-                    "LIMIT 10")
-            .arg(Soprano::Node::resourceToN3(Nepomuk::Resource(m_activityConsumer->currentActivity(), KExt::Activity()).resourceUri()) /*Soprano::Node::literalToN3(Soprano::LiteralValue(m_activityConsumer->currentActivity()))*/);
+            = QString::fromLatin1(
+                "select distinct ?resource, "
+                "    ( "
+                "        ( "
+                "            SUM ( "
+                "                ?lastScore * bif:exp( "
+                "                    - bif:datediff('day', ?lastUpdate, %1) "
+                "                ) "
+                "            ) "
+                "        ) "
+                "        as ?score "
+                "    ) where { "
+                "        ?cache kext:targettedResource ?resource . "
+                "        ?cache a kext:ResourceScoreCache . "
+                "        ?cache nao:lastModified ?lastUpdate . "
+                "        ?cache kext:cachedScore ?lastScore . "
+                "        ?cache kext:usedActivity %2 . "
+                "    } "
+                "    GROUP BY (?resource) "
+                "    ORDER BY DESC (?score) "
+                "    LIMIT 10 "
+            ).arg(
+                Soprano::Node::literalToN3(
+                    QDateTime::currentDateTime()
+                ),
+                Soprano::Node::resourceToN3(
+                    Nepomuk::Resource(m_activityConsumer->currentActivity(), KExt::Activity()).resourceUri()
+                )
+            );
+
+    kDebug() << query;
 
     m_queryClient.sparqlQuery(query);
 
@@ -132,7 +145,7 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
         Recommendation r;
         r.resourceUri = KUrl(result.resource().resourceUri()).url();
 
-        kWarning() << "Got a new result:" << result.excerpt() << result.score();
+        kWarning() << "Got a new result:" << r.resourceUri << result.excerpt() << result.score();
 
         // for now we create the one dummy action: open the resource
         QString id;
