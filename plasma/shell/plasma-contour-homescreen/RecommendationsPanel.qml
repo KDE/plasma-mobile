@@ -29,6 +29,10 @@ Item {
     width: 350
     state: "show"
 
+    function addContainment(cont)
+    {
+        containment = cont
+    }
 
     Timer {
         id: notifyLoopTimer
