@@ -155,6 +155,7 @@ PlasmaCore.FrameSvgItem {
     ListView {
         id: webItemList
         currentIndex: main.currentGroup==itemGroup?main.currentIndex:-1
+        pressDelay: 200
         anchors {
             left: parent.left
             top: categoryTitle.bottom
@@ -189,7 +190,7 @@ PlasmaCore.FrameSvgItem {
             infoLabelVisible: false
 
             onPressed: {
-                resourceInstance.uri = model["url"]
+                resourceInstance.uri = model["resourceUri"]
                 main.currentIndex = index
                 main.currentGroup = itemGroup
             }
