@@ -22,6 +22,7 @@
 import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobileshell 0.1 as MobileShell
 
 Item {
     id: homeScreen;
@@ -224,6 +225,19 @@ Item {
             }
         }
 
+    MobileShell.MobilePanel {
+        id: slidingPanel
+        visible: true
+        mainItem: SystrayPanel {
+            id: topEdgePanel
+            objectName: "topEdgePanel"
+        }
+        onActiveWindowChanged: {
+            if (acceptsFocus && !activeWindow) {
+                topEdgePanel.state = "Hidden"
+            }
+        }
+    }
 
     ActivityPanel {
         id: rightEdgePanel
