@@ -99,8 +99,8 @@ void PanelProxy::syncMainItem()
                 if (scene) {
                     scene->addItem(m_mainItem.data());
                     ++s_numItems;
-                    m_mainItem.data()->setY(-1000*s_numItems);
-                    m_mainItem.data()->setY(1000*s_numItems);
+                    m_mainItem.data()->setY(-10000*s_numItems);
+                    m_mainItem.data()->setY(10000*s_numItems);
                     break;
                 }
             }
@@ -113,10 +113,11 @@ void PanelProxy::syncMainItem()
 
     m_panel->setScene(scene);
 
-    m_panel->resize(QSize(m_mainItem.data()->boundingRect().width(), m_mainItem.data()->boundingRect().height()));
+    m_panel->setMinimumSize(QSize(m_mainItem.data()->boundingRect().width(), m_mainItem.data()->boundingRect().height()));
+    m_panel->setMaximumSize(m_panel->minimumSize());
 
     QRectF itemGeometry(QPointF(m_mainItem.data()->x(), m_mainItem.data()->y()),
-                        QSize(m_mainItem.data()->boundingRect().width(), m_mainItem.data()->boundingRect().height()));
+                        QSizeF(m_mainItem.data()->boundingRect().size()));
 
     m_panel->setSceneRect(itemGeometry);
 }
