@@ -91,15 +91,24 @@ void Contour::RecommendationManager::Private::updateRecommendations()
 
     // get resources that have been touched in the current activity (the dumb way for now)
     const QString query
-            = QString::fromLatin1("select ?r count(distinct ?e) as ?cnt where { "
-                                  "?e a nuao:DesktopEvent . "
-                                  "?e nuao:involves ?r . "
-                                  "?e %1 ?a . "
-                                  "?a nao:identifier %2 . "
-                                  "?e nuao:start ?d . "
-                                  "} ORDER BY (?cnt) LIMIT 6")
-            .arg(Soprano::Node::resourceToN3(KExt::usedActivity()),
-                 Soprano::Node::literalToN3(Soprano::LiteralValue(m_activityConsumer->currentActivity())));
+            = QString::fromLatin1("select distinct ?resource, ?uri, ?cache,"
+                    "("
+                        "("
+                            "?lastScore * bif:exp(-"
+                                "bif:datediff('day', ?lastUpdate, \"2011-06-30T13:45:01.996Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime>"
+                            ")"
+                        ")"
+                    "as ?score) where {"
+                        "?cache kext:targettedResource ?resource ."
+                        "?cache a kext:ResourceScoreCache ."
+                        "?cache nao:lastModified ?lastUpdate ."
+                        "?cache kext:cachedScore ?lastScore ."
+                        "?cache kext:usedActivity %1 ."
+                        "OPTIONAL { ?resource nie:url ?uri . } ."
+                    "}"
+                    "ORDER BY DESC (?score)"
+                    "LIMIT 10")
+            .arg(Soprano::Node::resourceToN3(Nepomuk::Resource(m_activityConsumer->currentActivity(), KExt::Activity()).resourceUri()) /*Soprano::Node::literalToN3(Soprano::LiteralValue(m_activityConsumer->currentActivity()))*/);
 
     m_queryClient.sparqlQuery(query);
 
