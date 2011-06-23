@@ -34,7 +34,8 @@ uint PanelProxy::s_numItems = 0;
 
 PanelProxy::PanelProxy(QObject *parent)
     : QObject(parent),
-      m_acceptsFocus(false)
+      m_acceptsFocus(false),
+      m_activeWindow(false)
 {
     m_panel = new QGraphicsView();
     m_panel->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -183,6 +184,11 @@ void PanelProxy::setAcceptsFocus(bool accepts)
     emit acceptsFocusChanged();
 }
 
+bool PanelProxy::isActiveWindow() const
+{
+    return m_activeWindow;
+}
+
 bool PanelProxy::eventFilter(QObject *watched, QEvent *event)
 {
     //Panel
@@ -194,6 +200,12 @@ bool PanelProxy::eventFilter(QObject *watched, QEvent *event)
         if (me->oldPos().y() != me->pos().y()) {
             emit yChanged();
         }
+    } else if (watched == m_panel && event->type() == QEvent::WindowActivate) {
+        m_activeWindow = true;
+        emit activeWindowChanged();
+    } else if (watched == m_panel && event->type() == QEvent::WindowDeactivate) {
+        m_activeWindow = false;
+        emit activeWindowChanged();
 
     //Main item
     } else if (watched == m_mainItem.data() &&
