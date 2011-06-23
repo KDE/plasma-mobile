@@ -190,7 +190,7 @@ PlasmaCore.FrameSvgItem {
             infoLabelVisible: false
 
             onPressed: {
-                resourceInstance.uri = model["url"]
+                resourceInstance.uri = model["resourceUri"]
                 main.currentIndex = index
                 main.currentGroup = itemGroup
             }
