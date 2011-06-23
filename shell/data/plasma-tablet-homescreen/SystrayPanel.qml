@@ -23,6 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: systrayPanel
+    state: hidden
 
     Rectangle {
         color: "red"
@@ -78,4 +79,44 @@ Item {
             height: 35
         }
     }
+
+    states:  [
+        State {
+            name: "Full"
+            PropertyChanges {
+                target: slidingPanel
+                y: 0
+            }
+        },
+        State {
+            name: "Hidden"
+            PropertyChanges {
+                target: slidingPanel
+                y: -topEdgePanel.height +35
+            }
+        },
+        State {
+            name: "Peek"
+            PropertyChanges {
+                target: slidingPanel
+                y: -topEdgePanel.height +45
+            }
+        },
+        State {
+            name: "Tasks"
+            PropertyChanges {
+                target: slidingPanel
+                y: -topEdgePanel.height +35+topEdgePanel.height/4
+            }
+        }
+    ]
+    transitions: [
+        Transition {
+            PropertyAnimation {
+                properties: "y"
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+    ]
 }
