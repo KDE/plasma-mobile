@@ -50,6 +50,7 @@ MobileLauncher::MobileLauncher(QObject *parent, const QVariantList &args)
 {
     setHasConfigurationInterface(false);
     kDebug() << "!!! loading mobile launcher";
+    setDrawWallpaper(false);
 
     // At some point it has to be a custom constainment
     setContainmentType(Containment::CustomContainment);

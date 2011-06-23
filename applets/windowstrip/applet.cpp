@@ -34,6 +34,7 @@ WindowStripApplet::WindowStripApplet(QObject *parent, const QVariantList &args)
     m_widget(0)
 {
     kDebug() << "ctor......";
+    setDrawWallpaper(false);
     setContainmentType(Containment::CustomContainment);
     setHasConfigurationInterface(false);
 }
