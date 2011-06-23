@@ -188,12 +188,9 @@ Item {
     MobileShell.MobilePanel {
         id: slidingPanel
         visible: true
-        y: -topEdgePanel.height +35
         mainItem: SystrayPanel {
             id: topEdgePanel
             objectName: "topEdgePanel"
-            width: Math.max(800, homeScreen.width)
-            height: Math.max(480, homeScreen.height)
         }
     }
 

@@ -23,11 +23,15 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
     id: systrayPanel
-    state: hidden
+    state: "Hidden"
+    width: Math.max(800, homeScreen.width)
+    height: Math.max(480, homeScreen.height+background.margins.bottom)
 
-    Rectangle {
-        color: "red"
+    PlasmaCore.FrameSvgItem {
+        id: background
         anchors.fill:parent
+        imagePath: "dialogs/background"
+        enabledBorders: "BottomBorder"
     }
 
     function addContainment(cont)
@@ -45,6 +49,7 @@ Item {
         anchors {
             right: parent.right
             bottom: parent.bottom
+            bottomMargin: background.margins.bottom
         }
         width: 32
         height: 32
@@ -52,6 +57,7 @@ Item {
 
     Column {
         anchors.fill: parent
+        anchors.bottomMargin: background.margins.bottom
 
         PlasmoidContainer {
             id: menuContainer
@@ -59,7 +65,7 @@ Item {
                 left: parent.left
                 right: parent.right
             }
-            height: parent.height - 35 - parent.height/4
+            height: parent.height - systrayContainer.height - windowListContainer.height
         }
         PlasmoidContainer {
             id: windowListContainer
@@ -92,21 +98,14 @@ Item {
             name: "Hidden"
             PropertyChanges {
                 target: slidingPanel
-                y: -topEdgePanel.height +35
-            }
-        },
-        State {
-            name: "Peek"
-            PropertyChanges {
-                target: slidingPanel
-                y: -topEdgePanel.height +45
+                y: -topEdgePanel.height + systrayContainer.height+ background.margins.bottom
             }
         },
         State {
             name: "Tasks"
             PropertyChanges {
                 target: slidingPanel
-                y: -topEdgePanel.height +35+topEdgePanel.height/4
+                y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom
             }
         }
     ]
