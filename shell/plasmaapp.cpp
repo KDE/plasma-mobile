@@ -633,6 +633,8 @@ void PlasmaApp::containmentDestroyed(QObject *object)
 
 void PlasmaApp::containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasma::Containment *cont)
 {
+    Q_UNUSED(wasScreen)
+
     bool excludeFromActivities = cont->config().readEntry("excludeFromActivities", false);
 
     if (!excludeFromActivities && isScreen >= 0 && (cont->location() == Plasma::Desktop || cont->location() == Plasma::Floating)) {
