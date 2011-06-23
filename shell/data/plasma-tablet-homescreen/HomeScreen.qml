@@ -193,7 +193,7 @@ Item {
             objectName: "topEdgePanel"
         }
         onActiveWindowChanged: {
-            if (acceptsFocus) {
+            if (acceptsFocus && !activeWindow) {
                 topEdgePanel.state = "Hidden"
             }
         }

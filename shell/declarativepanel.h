@@ -35,7 +35,7 @@ class PanelProxy : public QObject
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
     Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged)
     Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged)
-    Q_PROPERTY(bool acceptsFucus READ acceptsFocus WRITE setAcceptsFocus NOTIFY acceptsFocusChanged)
+    Q_PROPERTY(bool acceptsFocus READ acceptsFocus WRITE setAcceptsFocus NOTIFY acceptsFocusChanged)
     Q_PROPERTY(bool activeWindow READ isActiveWindow NOTIFY activeWindowChanged)
 
 public:
