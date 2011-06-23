@@ -29,6 +29,11 @@ Item {
     width: 400
     state: "show"
 
+    function addContainment(cont)
+    {
+        containment = cont
+    }
+
     AppletStatusWatcher {
         id: appletStatusWatcher
         onStatusChanged: {
