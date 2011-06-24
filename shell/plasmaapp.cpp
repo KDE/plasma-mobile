@@ -203,11 +203,11 @@ void PlasmaApp::setIsDesktop(bool isDesktop)
 
     if (isDesktop) {
         KWindowSystem::setType(m_mainView->winId(), NET::Normal);
-        m_mainView->setWindowFlags(m_mainView->windowFlags() | Qt::FramelessWindowHint);
+        m_mainView->setWindowFlags((m_mainView->windowFlags() | Qt::FramelessWindowHint | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint);
         KWindowSystem::setOnAllDesktops(m_mainView->winId(), true);
         m_mainView->show();
     } else {
-        m_mainView->setWindowFlags(m_mainView->windowFlags() & ~Qt::FramelessWindowHint);
+        m_mainView->setWindowFlags(((m_mainView->windowFlags() | Qt::CustomizeWindowHint) & ~Qt::FramelessWindowHint) & ~Qt::WindowCloseButtonHint);
         KWindowSystem::setOnAllDesktops(m_mainView->winId(), false);
         KWindowSystem::setType(m_mainView->winId(), NET::Normal);
     }
