@@ -109,6 +109,8 @@ Item {
 
     MobileComponents.IconGrid {
         id: appGrid
+        delegateWidth: 128
+        delegateHeight: 100
         model: (searchQuery == "")?appModel:runnerModel
         delegate: Component {
             MobileComponents.ResourceDelegate {
