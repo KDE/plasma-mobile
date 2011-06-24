@@ -81,9 +81,10 @@ void ResourceInstance::syncWid()
     if (!m_resourceInstance || m_resourceInstance->winId() != wid) {
         delete m_resourceInstance;
 
-        kWarning() << "Creating a new instance of the resource" << m_uri << "window id" << wid;
+        kDebug() << "Creating a new instance of the resource" << m_uri << "window id" << wid;
         m_resourceInstance = new Activities::ResourceInstance(wid, m_uri, m_mimetype);
     } else {
+        kDebug() << "Setting" << m_uri << m_mimetype << "to window" << wid;
         m_resourceInstance->setUri(m_uri);
         m_resourceInstance->setMimetype(m_mimetype);
     }

@@ -35,7 +35,7 @@ FallbackComponent::FallbackComponent(QObject *parent)
 QString FallbackComponent::resolvePath(const QString &component, const QStringList &paths)
 {
     foreach (const QString &path, paths) {
-        kDebug() << "Searching for" << path;
+        //kDebug() << "Searching for" << path;
         //TODO: cache this, to prevent too much disk access
         QString resolved = KStandardDirs::locate("data", "plasma/" + component + "/" + path);
         if (!resolved.isEmpty()) {
