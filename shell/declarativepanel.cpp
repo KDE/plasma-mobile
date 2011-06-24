@@ -213,6 +213,9 @@ bool PanelProxy::eventFilter(QObject *watched, QEvent *event)
     } else if (watched == m_panel && event->type() == QEvent::WindowDeactivate) {
         m_activeWindow = false;
         emit activeWindowChanged();
+    } else if (watched == m_panel && event->type() == QEvent::Close) {
+        event->ignore();
+        return true;
 
     //Main item
     } else if (watched == m_mainItem.data() &&
