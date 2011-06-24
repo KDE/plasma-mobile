@@ -177,6 +177,7 @@ void CategorizedProxyModel::slotInsertRows(const QModelIndex& sourceIndex, int b
     setRoleNames(model->roleNames());
     sort(0);
 
+    bool changed = false;
     for (int i = begin; i <= end; i++) {
         QString category = model->data(model->index(i, 0), m_categoryRoleInt).toString();
 
@@ -190,10 +191,12 @@ void CategorizedProxyModel::slotInsertRows(const QModelIndex& sourceIndex, int b
             m_categoryHash[category] = 1;
             m_categories.append(category);
             qSort(m_categories.begin(), m_categories.end());
+            changed = true;
         }
     }
-    //TODO: conditional
-    emit categoriesChanged();
+    if (changed) {
+        emit categoriesChanged();
+    }
 }
 
 
@@ -204,19 +207,23 @@ void CategorizedProxyModel::slotRemoveRows(const QModelIndex& sourceIndex, int b
         return;
     }
 
+    bool changed = false;
     for (int i = begin; i <= end; i++) {
         QString category = model->data(model->index(i, 0), m_categoryRoleInt).toString();
+
         if (m_categoryHash.contains(category)) {
             if (m_categoryHash.value(category) <= 1) {
                 m_categoryHash.remove(category);
+                m_categories.removeAll(category);
+                changed = true;
             } else {
                 --m_categoryHash[category];
-                m_categories.removeAll(category);
             }
         }
     }
-    //TODO: conditional
-    emit categoriesChanged();
+    if (changed) {
+        emit categoriesChanged();
+    }
 }
 
 
