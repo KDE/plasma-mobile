@@ -30,12 +30,13 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     }
 
     PlasmaCore.SvgItem {
+        id: iconItem
         svg: iconSvg
         elementId: "dashboard-show"
         width: height
         height: 32
         anchors {
-            left: parent.left
+            right: parent.right
             bottom:parent.bottom
         }
     }
@@ -46,15 +47,21 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     property bool dragging: false
 
     onPressed: {
-        if (mouse.y < height-200) {
+        if (mouse.y < height-200 || (mouse.y > height - 33 && mouse.x < iconItem.x)) {
             dragging = false
             return
         }
-        dragging = true
+        if (systrayPanel.state != "Tasks") {
+            dragging = true
+        }
         startY = mouse.screenY
         lastY = mouse.screenY
     }
     onPositionChanged: {
+        if (systrayPanel.state == "Tasks" &&
+            Math.abs(mouse.screenY - startY) > 35) {
+                dragging = true
+            }
         if (dragging) {
             slidingPanel.y = Math.min(0, (slidingPanel.y+mouse.screenY - lastY))
             lastY = mouse.screenY
@@ -70,7 +77,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         var oldState = systrayPanel.state
         systrayPanel.state = "none"
         //click on the handle area, switch hidden/full
-        if (mouse.y >= height-35 && Math.abs(mouse.screenY - startY) < 8) {
+        if (mouse.y > height-35 && Math.abs(mouse.screenY - startY) < 8) {
             if (oldState == "Hidden") {
                 systrayPanel.state = "Full"
             } else {
