@@ -144,8 +144,8 @@ void CategorizedProxyModel::fillCategories()
 
     setSortRole(m_categoryRoleInt);
     sort(0);
-    m_categoryHash.clear();
-    m_categories.clear();
+    QHash <QString, int> categoryHash;
+    QStringList categories;
 
     for (int i = 0; i <= model->rowCount(); i++) {
         QString category = model->data(model->index(i, 0), m_categoryRoleInt).toString();
@@ -154,17 +154,22 @@ void CategorizedProxyModel::fillCategories()
             continue;
         }
 
-        if (m_categoryHash.contains(category)) {
-            ++m_categoryHash[category];
+        if (categoryHash.contains(category)) {
+            ++categoryHash[category];
         } else {
-            m_categoryHash[category] = 1;
-            m_categories.append(category);
-            qSort(m_categories.begin(), m_categories.end());
+            categoryHash[category] = 1;
+            categories.append(category);
+            qSort(categories.begin(), categories.end());
         }
     }
 
-    emit modelReset();
-    emit categoriesChanged();
+    if (categoryHash != m_categoryHash) {
+        m_categoryHash = categoryHash;
+        m_categories = categories;
+        emit modelReset();
+        emit categoriesChanged();
+    }
+
 }
 
 
