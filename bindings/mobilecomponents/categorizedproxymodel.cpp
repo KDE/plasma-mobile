@@ -58,7 +58,8 @@ void CategorizedProxyModel::setCurrentCategory(const QString &category)
     }
 
     m_currentCategory = category;
-    emit modelReset();
+    beginResetModel();
+    endResetModel();
 }
 
 QString CategorizedProxyModel::currentCategory() const
@@ -164,9 +165,10 @@ void CategorizedProxyModel::fillCategories()
     }
 
     if (categoryHash != m_categoryHash) {
+        beginResetModel();
         m_categoryHash = categoryHash;
         m_categories = categories;
-        emit modelReset();
+        endResetModel();
         emit categoriesChanged();
     }
 

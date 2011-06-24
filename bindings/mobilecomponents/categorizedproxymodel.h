@@ -52,7 +52,6 @@ public:
     QStringList categories() const;
 
 Q_SIGNALS:
-    void modelReset();
     void categoriesChanged();
 
 private Q_SLOTS:
