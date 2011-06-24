@@ -47,8 +47,9 @@ void PagedProxyModel::setCurrentPage(const int page)
         return;
     }
 
+    beginResetModel();
     m_currentPage = page;
-    emit modelReset();
+    endResetModel();
 }
 
 int PagedProxyModel::currentPage() const
@@ -62,8 +63,9 @@ void PagedProxyModel::setPageSize(const int size)
         return;
     }
 
+    beginResetModel();
     m_pageSize = size;
-    emit modelReset();
+    endResetModel();
 }
 
 int PagedProxyModel::pageSize() const
