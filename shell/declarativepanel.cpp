@@ -44,10 +44,10 @@ PanelProxy::PanelProxy(QObject *parent)
     m_panel->setAutoFillBackground(false);
     m_panel->viewport()->setAutoFillBackground(false);
     m_panel->setAttribute(Qt::WA_TranslucentBackground);
-    m_panel->setWindowFlags(m_panel->windowFlags() | Qt::FramelessWindowHint);
+    m_panel->setWindowFlags(m_panel->windowFlags() | Qt::FramelessWindowHint | Qt::CustomizeWindowHint);
     m_panel->setFrameShape(QFrame::NoFrame);
     KWindowSystem::setOnAllDesktops(m_panel->winId(), true);
-    unsigned long state = NET::Sticky | NET::StaysOnTop | NET::KeepAbove;
+    unsigned long state = NET::Sticky | NET::StaysOnTop | NET::KeepAbove | NET::SkipTaskbar | NET::SkipPager;
     KWindowSystem::setState(m_panel->effectiveWinId(), state);
     KWindowSystem::setType(m_panel->effectiveWinId(), NET::Dock);
 }

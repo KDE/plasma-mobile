@@ -160,6 +160,7 @@ Item {
                         svg: iconsSvg
                         iconSize: 22
                         elementId: "close"
+                        visible: actionClose
                         anchors {
                             top: parent.top
                             right: parent.right
