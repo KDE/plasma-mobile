@@ -47,42 +47,43 @@ Item {
 
     SlidingDragButton {
         anchors {
-            right: parent.right
-            bottom: parent.bottom
+            fill: parent
             bottomMargin: background.margins.bottom
         }
-        width: 32
-        height: 32
-    }
+        height: 150
 
-    Column {
-        anchors.fill: parent
-        anchors.bottomMargin: background.margins.bottom
+        Column {
+            anchors.fill: parent
 
-        PlasmoidContainer {
-            id: menuContainer
-            anchors {
-                left: parent.left
-                right: parent.right
+            PlasmoidContainer {
+                id: menuContainer
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                height: parent.height - systrayContainer.height - windowListContainer.height - 2
             }
-            height: parent.height - systrayContainer.height - windowListContainer.height
-        }
-        PlasmoidContainer {
-            id: windowListContainer
-            anchors {
-                left: parent.left
-                right: parent.right
+            PlasmoidContainer {
+                id: windowListContainer
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                height: parent.height/4
             }
-            height: parent.height/4
-        }
-        PlasmoidContainer {
-            id: systrayContainer
-            anchors {
-                left: parent.left
-                right: parent.right
-                rightMargin: 32
+            Item {
+                width: 2
+                height: 2
             }
-            height: 35
+            PlasmoidContainer {
+                id: systrayContainer
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    rightMargin: 32
+                }
+                height: 32
+            }
         }
     }
 
@@ -102,7 +103,7 @@ Item {
             name: "Hidden"
             PropertyChanges {
                 target: slidingPanel
-                y: -topEdgePanel.height + systrayContainer.height+ background.margins.bottom
+                y: -topEdgePanel.height + systrayContainer.height+ background.margins.bottom + 2
             }
             PropertyChanges {
                 target: slidingPanel
