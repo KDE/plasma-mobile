@@ -39,6 +39,7 @@ PlasmaCore.FrameSvgItem {
         anchors.fill: parent
         drag.target: parent
         onPressed: {
+            itemGroup.z = 999
             animationsEnabled = false
             mouse.accepted = true
             var x = Math.round(parent.x/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
@@ -48,6 +49,7 @@ PlasmaCore.FrameSvgItem {
             debugFlow.refresh();
         }
         onReleased: {
+            itemGroup.z = 0
             animationsEnabled = true
             LayoutManager.positionItem(parent)
             debugFlow.refresh()
