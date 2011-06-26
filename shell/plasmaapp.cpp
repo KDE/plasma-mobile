@@ -202,8 +202,9 @@ void PlasmaApp::setIsDesktop(bool isDesktop)
     m_isDesktop = isDesktop;
 
     if (isDesktop) {
+        //FIXME: remove close button *and* window border: possible?
         KWindowSystem::setType(m_mainView->winId(), NET::Normal);
-        m_mainView->setWindowFlags((m_mainView->windowFlags() | Qt::FramelessWindowHint | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint);
+        m_mainView->setWindowFlags((m_mainView->windowFlags() | Qt::FramelessWindowHint /*| Qt::CustomizeWindowHint*/) /*& ~Qt::WindowCloseButtonHint*/);
         KWindowSystem::setOnAllDesktops(m_mainView->winId(), true);
         m_mainView->show();
     } else {
