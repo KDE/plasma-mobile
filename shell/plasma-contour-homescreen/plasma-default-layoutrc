@@ -51,15 +51,17 @@ screen=0
 
 
 [Containments][9]
+ActionPluginsSource=Global
 activity=
+activityId=
 excludeFromActivities=true
 desktop=-1
 formfactor=2
-geometry=0,0,800,100
+geometry=0,0,800,32
 immutability=1
 location=3
 plugin=org.kde.mobilesystemtray
-screen=0
+screen=-1
 
 [Containments][9][Applets][10]
 geometry=2,0,64,48
@@ -82,7 +84,7 @@ immutability=1
 plugin=org.kde.networkmanagement
 
 [Containments][9][Applets][14]
-geometry=90,4,24,24
+geometry=90,4,120,24
 immutability=1
 plugin=org.kde.sharelikeconnect
 
@@ -114,7 +116,7 @@ wallpaper=Horos
 wallpaperposition=2
 
 
-[Containments][9]
+[Containments][21]
 activity=Grandma's birthday
 desktop=-1
 formfactor=0
@@ -126,7 +128,7 @@ screen=-1
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][9][Wallpaper][image]
+[Containments][21][Wallpaper][image]
 wallpaper=Blue_Wood
 wallpaperposition=2
 
