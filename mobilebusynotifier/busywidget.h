@@ -33,6 +33,7 @@ public:
     BusyWidget(QWidget *parent=0);
     ~BusyWidget();
 
+    void paintEvent(QPaintEvent *e);
 };
 
 #endif // multiple inclusion guard

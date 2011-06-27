@@ -18,6 +18,9 @@
 
 #include "busywidget.h"
 
+#include <QPainter>
+#include <QPaintEvent>
+
 #include <KWindowSystem>
 
 #include <Plasma/Svg>
@@ -25,6 +28,9 @@
 BusyWidget::BusyWidget(QWidget *parent)
     : QWidget(parent)
 {
+    setAutoFillBackground(false);
+    setAttribute(Qt::WA_TranslucentBackground);
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
     KWindowSystem::setState(winId(), NET::MaxVert|NET::MaxHoriz);
 
     hide();
@@ -34,6 +40,12 @@ BusyWidget::~BusyWidget()
 {
 }
 
+void BusyWidget::paintEvent(QPaintEvent *e)
+{
+    QPainter p(this);
+    p.setCompositionMode(QPainter::CompositionMode_Source);
+    p.fillRect(e->rect(), QColor(0,0,0,95));
+}
 
 #include "busywidget.moc"
 
