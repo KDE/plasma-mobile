@@ -343,14 +343,14 @@ Plasma::Corona* PlasmaApp::corona()
         m_corona->checkActivities();
         m_mainView->show();
         //FIXME: this will go away when containmentAdded connection won't be queued anymore
-        QTimer::singleShot(1000, this, SLOT(startupCompleted()));
+        QTimer::singleShot(4000, this, SLOT(startupCompleted()));
     }
     return m_corona;
 }
 
 void PlasmaApp::startupCompleted()
 {
-        m_startupCompleted = true;
+    m_startupCompleted = true;
 }
 
 bool PlasmaApp::hasComposite()
