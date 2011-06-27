@@ -22,6 +22,7 @@
 
 #include <KCrash>
 #include <KLocale>
+#include <KIcon>
 
 BusyApp* BusyApp::self()
 {
@@ -67,6 +68,9 @@ void BusyApp::gotNewStartup( const KStartupInfoId& id, const KStartupInfoData& d
     if (!m_busyWidget) {
         m_busyWidget = new BusyWidget();
     }
+
+    m_busyWidget->setWindowTitle(data.findName());
+    m_busyWidget->setWindowIcon(KIcon(data.findIcon()));
 
     m_busyWidget->show();
 }

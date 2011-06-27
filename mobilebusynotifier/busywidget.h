@@ -21,9 +21,16 @@
 #define BUSYWIDGET_H
 
 
+#include <QHash>
+#include <QPixmap>
 #include <QWidget>
 
 class BusyWidget;
+
+namespace Plasma
+{
+    class Svg;
+}
 
 class BusyWidget : public QWidget
 {
@@ -34,6 +41,15 @@ public:
     ~BusyWidget();
 
     void paintEvent(QPaintEvent *e);
+
+protected Q_SLOTS:
+    void refreshSpinner();
+
+private:
+    Plasma::Svg *m_svg;
+    QHash<int, QPixmap> m_frames;
+    QTimer *m_rotationTimer;
+    qreal m_rotation;
 };
 
 #endif // multiple inclusion guard
