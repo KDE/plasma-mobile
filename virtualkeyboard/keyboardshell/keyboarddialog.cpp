@@ -76,6 +76,10 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 
     setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
 
+    QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
+    screenGeom.setWidth(screenGeom.width()-100);
+    setFixedWidth(screenGeom.width());
+
     hide();
     updateGeometry();
 }
@@ -155,7 +159,7 @@ void KeyboardDialog::setDirection(const Plasma::Direction direction)
     QDesktopWidget *desktop = QApplication::desktop();
     QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
 
-    screenGeom.setWidth(qMin(screenGeom.width(), (int)m_applet->effectiveSizeHint(Qt::PreferredSize).width())-300);
+    screenGeom.setWidth(screenGeom.width()-100);
 
     switch (direction) {
     case Plasma::Down:
