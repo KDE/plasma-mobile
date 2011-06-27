@@ -9,7 +9,7 @@ formfactor=3
 geometry=0,0,800,480
 immutability=1
 location=5
-plugin=org.kde.demorecommendations
+plugin=org.kde.contour.recommendations
 screen=0
 
 
