@@ -77,7 +77,7 @@ ListItem {
                 onClicked: {
                     var service = recommendationsSource.serviceForSource(DataEngineSource)
                     var operation = service.operationDescription("executeAction")
-                    operation.actionId = actions[modelData].actionId
+                    operation.Id = actions[modelData].actionId
 
                     service.startOperationCall(operation)
                 }

@@ -18,6 +18,8 @@
 
 #include "recommendationjob.h"
 
+#include <KDebug>
+
 #include <recommendationsclient.h>
 
 RecommendationJob::RecommendationJob(Contour::RecommendationsClient *client,
