@@ -92,7 +92,7 @@ void RecommendationsClientPrivate::recommendationsCallback(QDBusPendingCallWatch
 
 void RecommendationsClientPrivate::updateRecommendations(const QList<Contour::Recommendation> &newRecommendations)
 {
-//    kWarning()<<"Map of recommendations: "<<recommendations;
+    kDebug()<<"New recommendations: "<<recommendations.count();
     recommendations = newRecommendations;
     emit q->recommendationsChanged(newRecommendations);
 }
@@ -113,6 +113,9 @@ void RecommendationsClientPrivate::connectToContour()
         QDBusPendingCall call = contourIface->connection().asyncCall(message);
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, q);
         QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)), q, SLOT(recommendationsCallback(QDBusPendingCallWatcher *)));
+        QObject::connect(contourIface,
+                         SIGNAL(recommendationsChanged(const QList<Contour::Recommendation> &)),
+                         q, SLOT(updateRecommendations(const QList<Contour::Recommendation> &)));
     } else {
         delete contourIface;
         contourIface = 0;

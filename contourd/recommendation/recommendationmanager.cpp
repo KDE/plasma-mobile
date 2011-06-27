@@ -172,7 +172,7 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
 
 void Contour::RecommendationManager::Private::_k_queryFinished()
 {
-    emit q->recommendationsChanged();
+    emit q->recommendationsChanged(m_recommendations);
 }
 
 Contour::RecommendationManager::RecommendationManager(QObject *parent)
@@ -183,6 +183,8 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
 
     connect(&d->m_queryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
             this, SLOT(_k_newResults(QList<Nepomuk::Query::Result>)));
+    connect(&d->m_queryClient, SIGNAL(finishedListing()),
+            this, SLOT(_k_queryFinished()));
 
     d->m_activityConsumer = new KActivityConsumer(this);
     connect(d->m_activityConsumer, SIGNAL(currentActivityChanged(QString)),
