@@ -22,6 +22,9 @@
 #include <QDBusPendingCallWatcher>
 
 #include <KDebug>
+#include <KMimeType>
+
+#include <Nepomuk/Variant>
 
 #include <recommendationsclient.h>
 #include <recommendation.h>
@@ -54,6 +57,11 @@ void RecommendationsEngine::updateRecommendations(const QList<Contour::Recommend
         setData(rec.resourceUri, "name", res.genericLabel());
         setData(rec.resourceUri, "description", res.genericDescription());
         setData(rec.resourceUri, "icon", res.genericIcon());
+
+        QString urlProp = res.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
+        if (!urlProp.isEmpty()) {
+            setData(rec.resourceUri, "icon", KMimeType::iconNameForUrl(KUrl(urlProp)));
+        }
         setData(rec.resourceUri, "relevance", rec.relevance);
 
         QVariantList actionsList;

@@ -41,6 +41,7 @@
 #include <Nepomuk/Query/QueryServiceClient>
 #include <Nepomuk/Query/Result>
 #include <Nepomuk/Resource>
+#include <Nepomuk/Variant>
 
 #include <Soprano/Vocabulary/NAO>
 
@@ -143,9 +144,10 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
 {
     foreach(const Nepomuk::Query::Result& result, results) {
         Recommendation r;
-        r.resourceUri = KUrl(result.resource().resourceUri()).url();
+        r.resourceUri = KUrl(result.additionalBinding("resource").toString()).url();
+        r.relevance = result.additionalBinding("score").toDouble();
 
-        kWarning() << "Got a new result:" << r.resourceUri << result.excerpt() << result.score();
+        kWarning() << "Got a new result:" << r.resourceUri << result.excerpt() << result.additionalBinding("score");
 
         // for now we create the one dummy action: open the resource
         QString id;
@@ -155,6 +157,8 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
         RecommendationAction action;
         action.id = id;
         action.text = i18n("Open '%1'", result.resource().genericLabel());
+        //TODO
+        action.relevance = 1;
         m_actionHash[id] = action;
         m_RecommendationForAction[id] = r;
 

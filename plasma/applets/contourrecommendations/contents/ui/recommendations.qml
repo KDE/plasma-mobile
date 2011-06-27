@@ -64,7 +64,7 @@ Item {
             }
         }
         delegate: RecommendationDelegate {
-                text: model.text
+                text: model.text?model.text:model.name
                 description: model.description
                 icon: model.icon
             }
