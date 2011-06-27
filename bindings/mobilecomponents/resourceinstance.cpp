@@ -118,5 +118,27 @@ void ResourceInstance::setMimetype(const QString &mimetype)
     m_syncTimer->start(100);
 }
 
+void ResourceInstance::notifyModified()
+{
+    //ensure the resource instance exists
+    syncWid();
+    m_resourceInstance->notifyModified();
+}
+
+void ResourceInstance::notifyFocussedIn()
+{
+    //ensure the resource instance exists
+    syncWid();
+    m_resourceInstance->notifyFocussedIn();
+}
+
+
+void ResourceInstance::notifyFocussedOut()
+{
+    //ensure the resource instance exists
+    syncWid();
+    m_resourceInstance->notifyFocussedOut();
+}
+
 #include "resourceinstance.moc"
 

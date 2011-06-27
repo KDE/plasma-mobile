@@ -57,6 +57,26 @@ Q_SIGNALS:
     void uriChanged();
     void mimetypeChanged();
 
+public Q_SLOTS:
+    /**
+     * Call this method to notify the system that you modified
+     * (the contents of) the resource
+     */
+    void notifyModified();
+
+    /**
+     * Call this method to notify the system that the resource
+     * has the focus in your application
+     * @note You only need to call this in MDI applications
+     */
+    void notifyFocussedIn();
+
+    /**
+     * Call this method to notify the system that the resource
+     * lost the focus in your application
+     * @note You only need to call this in MDI applications
+     */
+    void notifyFocussedOut();
 
 private:
     Activities::ResourceInstance *m_resourceInstance;
