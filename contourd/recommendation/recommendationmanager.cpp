@@ -144,7 +144,8 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
 {
     foreach(const Nepomuk::Query::Result& result, results) {
         Recommendation r;
-        r.resourceUri = KUrl(result.additionalBinding("resource").toString()).url();
+        Nepomuk::Resource resource(result.additionalBinding("resource").toString());
+        r.resourceUri = KUrl(resource.resourceUri()).url();
         r.relevance = result.additionalBinding("score").toDouble();
 
         kWarning() << "Got a new result:" << r.resourceUri << result.excerpt() << result.additionalBinding("score");
@@ -156,7 +157,8 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
         } while(m_actionHash.contains(id));
         RecommendationAction action;
         action.id = id;
-        action.text = i18n("Open '%1'", result.resource().genericLabel());
+        action.text = i18n("Open '%1'", resource.genericLabel());
+        action.iconName = "document-open";
         //TODO
         action.relevance = 1;
         m_actionHash[id] = action;
@@ -215,7 +217,13 @@ void Contour::RecommendationManager::executeAction(const QString &actionId)
 
         // FIXME: this is the hacky execution of the action, make it correct
         Recommendation r = d->m_RecommendationForAction.value(actionId);
-        (void)new KRun(r.resourceUri, 0);
+        Nepomuk::Resource res(r.resourceUri);
+        QString url = res.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
+        if (url.isEmpty()) {
+            return;
+        }
+        KRun *run = new KRun(url, 0);
+        run->setAutoDelete(true);
     }
     else {
         kDebug() << "Invalid action id encountered:" << actionId;

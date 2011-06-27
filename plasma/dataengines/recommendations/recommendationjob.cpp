@@ -39,7 +39,7 @@ void RecommendationJob::start()
 {
     const QString operation = operationName();
     if (operation == "executeAction") {
-        QString id = parameters()["Id"].toString();
+        QString id = parameters().value("Id").toString();
         if (id.isEmpty()) {
             setResult(false);
             return;

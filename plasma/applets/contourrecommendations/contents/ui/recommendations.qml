@@ -64,9 +64,10 @@ Item {
             }
         }
         delegate: RecommendationDelegate {
-                text: model.text?model.text:model.name
+                name: model.name
                 description: model.description
                 icon: model.icon
+                actions: model.actions
             }
     }
 }

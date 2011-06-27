@@ -23,7 +23,7 @@ import org.kde.qtextracomponents 0.1
 
 ListItem {
     id: listItem
-    property string text
+    property string name
     property string description
     property string icon
     property variant actions
@@ -50,7 +50,7 @@ ListItem {
             width: delegateLayout.width
             color: theme.textColor
             font.pixelSize: 24
-            text: listItem.text
+            text: listItem.name
         }
         Text {
             color: theme.textColor
@@ -77,7 +77,8 @@ ListItem {
                 onClicked: {
                     var service = recommendationsSource.serviceForSource(DataEngineSource)
                     var operation = service.operationDescription("executeAction")
-                    operation.actionId = actions[index].actionId
+                    operation.actionId = actions[modelData].actionId
+
                     service.startOperationCall(operation)
                 }
                 Row {
@@ -87,10 +88,10 @@ ListItem {
                         anchors.verticalCenter: parent.verticalCenter
                         width: 24
                         height: 24
-                        icon: QIcon(actions[index].icon)
+                        icon: QIcon(actions[modelData].iconName)
                     }
                     Text {
-                        text: actions[index].text
+                        text: actions[modelData].text
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }
