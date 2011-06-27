@@ -74,6 +74,7 @@ public:
     Nepomuk::Query::QueryServiceClient m_queryClient;
 
     RecommendationManager* q;
+    QTimer *m_changedSignalTimer;
 
     void updateRecommendations();
     void _k_locationChanged(const QList<QLandmark>&);
@@ -168,10 +169,12 @@ void Contour::RecommendationManager::Private::_k_newResults(const QList<Nepomuk:
 
         m_recommendations << r;
     }
+    m_changedSignalTimer->start(300);
 }
 
 void Contour::RecommendationManager::Private::_k_queryFinished()
 {
+    m_changedSignalTimer->stop();
     emit q->recommendationsChanged(m_recommendations);
 }
 
@@ -180,6 +183,11 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
       d(new Private())
 {
     d->q = this;
+
+    d->m_changedSignalTimer = new QTimer(this);
+    d->m_changedSignalTimer->setSingleShot(true);
+    connect(d->m_changedSignalTimer, SIGNAL(timeout()), this, SLOT(_k_queryFinished()));
+
 
     connect(&d->m_queryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
             this, SLOT(_k_newResults(QList<Nepomuk::Query::Result>)));
