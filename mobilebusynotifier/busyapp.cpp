@@ -33,10 +33,24 @@ BusyApp* BusyApp::self()
 }
 
 BusyApp::BusyApp()
-    : KUniqueApplication()
+    : KUniqueApplication(),
+      m_busyWidget(0)
 {
     KGlobal::locale()->insertCatalog("mobilebusynotifier");
     KCrash::setFlags(KCrash::AutoRestart);
+    setQuitOnLastWindowClosed(false);
+
+    m_startupInfo = new KStartupInfo(KStartupInfo::CleanOnCantDetect, this );
+
+    connect(m_startupInfo,
+            SIGNAL(gotNewStartup(const KStartupInfoId&, const KStartupInfoData&)),
+            SLOT(gotNewStartup(const KStartupInfoId&, const KStartupInfoData&)));
+    connect(m_startupInfo,
+            SIGNAL(gotStartupChange(const KStartupInfoId&, const KStartupInfoData&)),
+            SLOT(gotStartupChange(const KStartupInfoId&, const KStartupInfoData&)));
+    connect(m_startupInfo,
+            SIGNAL(gotRemoveStartup(const KStartupInfoId&, const KStartupInfoData&)),
+            SLOT(killStartup(const KStartupInfoId&)));
 }
 
 BusyApp::~BusyApp()
@@ -46,6 +60,34 @@ BusyApp::~BusyApp()
 int  BusyApp::newInstance()
 {
     return 0;
+}
+
+void BusyApp::gotNewStartup( const KStartupInfoId& id, const KStartupInfoData& data )
+{
+    if (!m_busyWidget) {
+        m_busyWidget = new BusyWidget();
+    }
+
+    m_busyWidget->show();
+}
+
+void BusyApp::gotStartupChange( const KStartupInfoId& id, const KStartupInfoData& data )
+{
+    if (!m_busyWidget) {
+        m_busyWidget = new BusyWidget();
+    }
+
+    m_busyWidget->show();
+}
+
+void BusyApp::killStartup( const KStartupInfoId& id )
+{
+    if (!m_busyWidget) {
+        return;
+    }
+
+    m_busyWidget->deleteLater();
+    m_busyWidget = 0;
 }
 
 #include "busyapp.moc"

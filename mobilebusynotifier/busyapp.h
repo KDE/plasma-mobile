@@ -21,6 +21,8 @@
 #define BUSYAPP_H
 
 #include <KUniqueApplication>
+#include <KStartupInfo>
+#include <KStartupInfoData>
 
 #include <plasma/plasma.h>
 
@@ -29,7 +31,8 @@
 #include <fixx11h.h>
 #endif
 
-class KeyboardDialog;
+class BusyWidget;
+class KStartupInfo;
 
 class BusyApp : public KUniqueApplication
 {
@@ -41,13 +44,17 @@ public:
 
     static BusyApp* self();
 
+protected Q_SLOTS:
+    void gotNewStartup(const KStartupInfoId& id, const KStartupInfoData& data);
+    void gotStartupChange(const KStartupInfoId& id, const KStartupInfoData& data);
+    void killStartup(const KStartupInfoId& id);
 
 private:
     BusyApp();
 
 private:
-
-
+    KStartupInfo *m_startupInfo;
+    BusyWidget *m_busyWidget;
 };
 
 #endif // multiple inclusion guard

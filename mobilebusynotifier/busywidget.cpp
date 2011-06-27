@@ -18,21 +18,16 @@
 
 #include "busywidget.h"
 
-#include <QApplication>
-#include <QDesktopWidget>
+#include <KWindowSystem>
 
 #include <Plasma/Svg>
 
 BusyWidget::BusyWidget(QWidget *parent)
     : QWidget(parent)
 {
-    QDesktopWidget *desktop = QApplication::desktop();
-    connect(desktop, SIGNAL(resized(int )), this, SLOT(updateGeometry()));
-    QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
-    setFixedSize(screenGeom.size());
+    KWindowSystem::setState(winId(), NET::MaxVert|NET::MaxHoriz);
 
     hide();
-    updateGeometry();
 }
 
 BusyWidget::~BusyWidget()
