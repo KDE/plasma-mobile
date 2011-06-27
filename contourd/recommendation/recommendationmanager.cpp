@@ -219,7 +219,8 @@ void Contour::RecommendationManager::executeAction(const QString &actionId)
         Recommendation r = d->m_RecommendationForAction.value(actionId);
         Nepomuk::Resource res(r.resourceUri);
         QString url = res.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
-        if (url.isEmpty()) {
+        //FIXME: why it exits (not even crash) with nepomuk uris?
+        if (url.isEmpty() || url.startsWith("nepomuk:/")) {
             return;
         }
         KRun *run = new KRun(url, 0);
