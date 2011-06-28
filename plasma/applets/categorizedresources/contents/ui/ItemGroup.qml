@@ -27,13 +27,13 @@ import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 PlasmaCore.FrameSvgItem {
     id: itemGroup
     property string category
-    property alias categoryCount: webItemList.count
+    property alias categoryCount: itemsList.count
     imagePath: "widgets/background"
     width: LayoutManager.cellSize.width*2
     height: LayoutManager.cellSize.height
     z: 0
     property bool animationsEnabled: false
-    scale: webItemList.count>0?1:0
+    scale: itemsList.count>0?1:0
 
     MouseArea {
         anchors.fill: parent
@@ -123,7 +123,7 @@ PlasmaCore.FrameSvgItem {
         }
     }
     Component.onCompleted: {
-        //width = Math.min(470, 32+webItemList.count*140)
+        //width = Math.min(470, 32+itemsList.count*140)
         layoutTimer.running = true
         layoutTimer.restart()
         enabled = false
@@ -145,7 +145,7 @@ PlasmaCore.FrameSvgItem {
         height: categoryText.height + margins.top + margins.bottom
         Text {
             id: categoryText
-            text: i18n("%1 (%2)", itemGroup.category, webItemList.count)
+            text: i18n("%1 (%2)", itemGroup.category, itemsList.count)
             anchors {
                 top: parent.top
                 horizontalCenter: parent.horizontalCenter
@@ -155,7 +155,7 @@ PlasmaCore.FrameSvgItem {
     }
 
     ListView {
-        id: webItemList
+        id: itemsList
         currentIndex: main.currentGroup==itemGroup?main.currentIndex:-1
         pressDelay: 200
         anchors {
@@ -187,7 +187,7 @@ PlasmaCore.FrameSvgItem {
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
             width: 140
-            height: webItemList.height
+            height: itemsList.height
             resourceType: model.resourceType
             infoLabelVisible: false
 
@@ -209,26 +209,26 @@ PlasmaCore.FrameSvgItem {
     }
 
     PlasmaCore.SvgItem {
-        anchors.left: webItemList.left
-        anchors.verticalCenter: webItemList.verticalCenter
+        anchors.left: itemsList.left
+        anchors.verticalCenter: itemsList.verticalCenter
         width: 22
         height: 22
         svg: arrowsSvg
         elementId: "left-arrow"
-        opacity: webItemList.atXBeginning?0.15:1
+        opacity: itemsList.atXBeginning?0.15:1
         Behavior on opacity {
             NumberAnimation {duration: 250}
         }
     }
 
     PlasmaCore.SvgItem {
-        anchors.right: webItemList.right
-        anchors.verticalCenter: webItemList.verticalCenter
+        anchors.right: itemsList.right
+        anchors.verticalCenter: itemsList.verticalCenter
         width: 22
         height: 22
         svg: arrowsSvg
         elementId: "right-arrow"
-        opacity: webItemList.atXEnd?0.15:1
+        opacity: itemsList.atXEnd?0.15:1
         Behavior on opacity {
             NumberAnimation {duration: 250}
         }
