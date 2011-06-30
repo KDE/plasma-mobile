@@ -43,6 +43,11 @@ Item {
         LayoutManager.restore()
     }
 
+    PlasmaCore.Svg {
+        id: iconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
+
     PlasmaCore.DataSource {
         id: metadataSource
         engine: "org.kde.active.metadata"
@@ -83,7 +88,7 @@ Item {
 
 
         Text {
-            anchors.top: searchRow.top
+            anchors.top: toolRow.top
             anchors.left: parent.left
             anchors.leftMargin: 22
             text: plasmoid.activityName
@@ -95,7 +100,8 @@ Item {
 
 
         Row {
-            id: searchRow
+            id: toolRow
+            spacing: 8
             anchors {
                 top: parent.top
                 right: parent.right
@@ -103,23 +109,25 @@ Item {
                 rightMargin: 22
             }
 
-            PlasmaWidgets.LineEdit {
-                id: searchBox
-                clearButtonShown: true
-                width: 200
-                onTextChanged: {
-                    queryTimer.running = true
-                }
-            }
-            PlasmaWidgets.IconWidget {
-                id: icon
-                icon: QIcon("system-search")
-                size: "32x32"
+            MobileComponents.ActionButton {
+                svg: iconsSvg
+                elementId: "add"
                 onClicked: {
-                    queryTimer.running = true
+                    addResource.opacity = 1
                 }
+                text: i18n("Add item")
             }
 
+            MobileComponents.ActionButton {
+                svg: iconsSvg
+                elementId: "configure"
+                action: plasmoid.action("configure")
+                text: i18n("Configure")
+                //FIXME: WHY?
+                Component.onCompleted: {
+                    action.enabled = true
+                }
+            }
         }
 
         PlasmaCore.DataModel {
@@ -196,7 +204,7 @@ Item {
             width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
 
             anchors {
-                top: searchRow.bottom
+                top: toolRow.bottom
                 bottom: parent.bottom
                 horizontalCenter: parent.horizontalCenter
             }
@@ -236,6 +244,11 @@ Item {
         }
     }
 
+    AddResource {
+        id: addResource
+        anchors.fill: parent
+    }
+
     Timer {
        id: queryTimer
        running: true
@@ -243,13 +256,8 @@ Item {
        interval: 1000
        onTriggered: {
             LayoutManager.resetPositions()
-            if (searchBox.text) {
-                plasmoid.busy = true
-                metadataSource.connectedSources = [searchBox.text]
-            } else {
-                plasmoid.busy = false
-                metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]
-            }
+            plasmoid.busy = false
+            metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]
        }
     }
 
