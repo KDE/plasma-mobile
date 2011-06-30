@@ -60,7 +60,10 @@ Item {
             Text {
                 anchors.top: parent.top
                 anchors.left: parent.left
-               // anchors.leftMargin: 22
+                anchors.leftMargin: 10
+                anchors.topMargin: 10
+                width: parent.width-10
+                wrapMode: Text.Wrap
                 text: model.Name
                 font.bold: true
                 style: Text.Outline
@@ -141,8 +144,8 @@ Item {
         anchors {
             bottom: activityBorder.bottom
             left: activityBorder.left
-            bottomMargin: activityBorder.margins.bottom
-            leftMargin: activityBorder.margins.left
+            bottomMargin: activityBorder.margins.bottom+10
+            leftMargin: activityBorder.margins.left+5
         }
         spacing: 8
         opacity: delegate.scale>0.9?1:0
@@ -180,7 +183,7 @@ Item {
                 svg: iconsSvg
                 elementId: "delete"
                 toggle: true
-                opacity: model["Current"]==true?0.3:1
+                opacity: model["Current"]==true?0.4:1
                 enabled: opacity==1
 
                 onClicked: {
