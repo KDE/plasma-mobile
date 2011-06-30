@@ -37,6 +37,7 @@
 
 //Plasma
 #include <Plasma/Containment>
+#include <Plasma/Context>
 #include <Plasma/Package>
 
 ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
@@ -134,6 +135,15 @@ QString ActivityConfiguration::activityName() const
     }
 
     return m_containment->activity();
+}
+
+QString ActivityConfiguration::activityId() const
+{
+    if (!m_containment) {
+        return QString();
+    }
+
+    return m_containment->context()->currentActivityId();
 }
 
 QObject *ActivityConfiguration::wallpaperModel()

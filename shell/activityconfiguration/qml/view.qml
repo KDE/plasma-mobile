@@ -32,9 +32,26 @@ Rectangle {
     height: 480
     opacity: 0
 
+    PlasmaCore.DataSource {
+        id: activitySource
+        engine: "org.kde.activities"
+        connectedSources: ["Status"]
+    }
+
+    function deleteActivity()
+    {
+        var service = activitySource.serviceForSource("Status")
+        var operation = service.operationDescription("remove")
+        operation["Id"] = configInterface.activityId
+        var job = service.startOperationCall(operation)
+    }
+
     MouseArea {
         anchors.fill: parent
-        onClicked: disappearAnimation.running=true
+        onClicked: {
+            disappearAnimation.running=true
+            deleteActivity()
+        }
     }
 
     Component.onCompleted: {
@@ -189,7 +206,13 @@ Rectangle {
                 id: closeButton
 
                 text: i18n("Cancel")
-                onClicked : disappearAnimation.running = true
+
+                onClicked: {
+                    disappearAnimation.running = true
+                    if (configInterface.firstConfig) {
+                        main.deleteActivity()
+                    }
+                }
             }
             
         }

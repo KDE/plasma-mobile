@@ -36,6 +36,7 @@ class ActivityConfiguration : public Plasma::DeclarativeWidget
 {
     Q_OBJECT
     Q_PROPERTY(QString activityName READ activityName WRITE setActivityName)
+    Q_PROPERTY(QString activityId READ activityId)
     Q_PROPERTY(QObject *wallpaperModel READ wallpaperModel NOTIFY modelChanged)
     Q_PROPERTY(int wallpaperIndex READ wallpaperIndex WRITE setWallpaperIndex)
     Q_PROPERTY(QSize screenshotSize READ screenshotSize WRITE setScreenshotSize)
@@ -53,6 +54,7 @@ public:
 
     void setActivityName(const QString &name);
     QString activityName() const;
+    QString activityId() const;
 
     QObject *wallpaperModel();
 
