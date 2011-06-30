@@ -39,6 +39,7 @@ Item {
     PlasmaWidgets.LineEdit {
         id : searchField
 
+        clickMessage: i18n("Click to search...")
         /*width: 300
         height: 35*/
         anchors.horizontalCenter: parent.horizontalCenter
