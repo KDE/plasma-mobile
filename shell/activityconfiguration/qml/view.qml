@@ -109,7 +109,7 @@ Rectangle {
         anchors.centerIn: parent
         //FIXME: why +20?
         width: Math.min(wallpapersList.height*1.6*3+20, parent.width/1.05)
-        height: parent.height/2
+        height: parent.height/1.3
         imagePath: "dialogs/background"
         scale: 0
 
@@ -124,7 +124,7 @@ Rectangle {
             y: frame.margins.top
             Text {
                 color: theme.textColor
-                text: i18n("Activity:")
+                text: i18n("Activity name:")
                 anchors.verticalCenter: activityNameEdit.verticalCenter
             }
             PlasmaWidgets.LineEdit {
@@ -143,40 +143,13 @@ Rectangle {
             }
         }
 
-        /*ListView {
-            id: wallpapersList
-            anchors {
-                top: nameRow.bottom
-                left: parent.left
-                bottom: closeButton.top
-                right: parent.right
-                leftMargin: frame.margins.left
-                topMargin: 6
-                rightMargin: frame.margins.right
-                bottomMargin: 12
-            }
-
-            property int delegateWidth: (wallpapersList.height-2)*1.6
-            property int delegateHeight: wallpapersList.height-2
-            onHeightChanged: {
-                resizeScreenshotTimer.running = true
-                resizeScreenshotTimer.restart()
-            }
-            onWidthChanged: {
-                resizeScreenshotTimer.running = true
-                resizeScreenshotTimer.restart()
-            }
-            clip: true
-            snapMode: ListView.SnapOneItem
-            orientation: ListView.Horizontal
-            model: configInterface.wallpaperModel
-            delegate: WallpaperDelegate {}
-        }*/
-
         MobileComponents.IconGrid {
             id: wallpapersList
             property int currentIndex: 0
-            property int delegateWidth: 128
+            onCurrentIndexChanged: {
+                print("Current index: "+currentIndex)
+            }
+            property int delegateWidth: 148
             property int delegateHeight: delegateWidth/1.6
             anchors {
                 top: nameRow.bottom
