@@ -104,7 +104,7 @@ Item {
                  y: -35
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
-             PathAttribute { name: "itemOpacity"; value: 0.3 }
+             PathAttribute { name: "itemOpacity"; value: 0.65 }
              PathAttribute { name: "z"; value: 0 }
 
              PathLine {
@@ -123,7 +123,7 @@ Item {
                  y: mainView.height+35
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
-             PathAttribute { name: "itemOpacity"; value: 0.3 }
+             PathAttribute { name: "itemOpacity"; value: 0.65 }
              PathAttribute { name: "z"; value: 0 }
 
 
