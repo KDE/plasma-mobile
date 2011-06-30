@@ -61,7 +61,7 @@ Rectangle {
 
     PlasmaCore.FrameSvgItem {
         anchors.fill: parent
-        anchors.margins: 100
+        anchors.margins: 80
         imagePath: "dialogs/background"
         MobileComponents.ViewSearch {
             id: searchBox
@@ -97,7 +97,12 @@ Rectangle {
                 infoLabelVisible: false
 
                 onClicked: {
-                    print(String(model["url"]))
+                    print(resourceUri)
+                    var service = metadataSource.serviceForSource(metadataSource.connectedSources[0])
+                    var operation = service.operationDescription("connectToActivity")
+                    operation["ActivityUrl"] = plasmoid.activityId
+                    operation["ResourceUrl"] = resourceUri
+                    service.startOperationCall(operation)
                 }
             }
         }
