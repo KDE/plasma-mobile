@@ -108,8 +108,8 @@ Rectangle {
         id: frame
         anchors.centerIn: parent
         //FIXME: why +20?
-        width: Math.min(wallpapersList.height*1.6*3+20, parent.width/1.05)
-        height: parent.height/1.3
+        width: parent.width-100
+        height: parent.height/1.4
         imagePath: "dialogs/background"
         scale: 0
 
@@ -154,7 +154,7 @@ Rectangle {
             anchors {
                 top: nameRow.bottom
                 left: parent.left
-                bottom: closeButton.top
+                bottom: buttonsRow.top
                 right: parent.right
                 leftMargin: frame.margins.left
                 topMargin: 6
@@ -165,34 +165,33 @@ Rectangle {
             delegate: WallpaperDelegate {}
         }
 
-        PlasmaWidgets.PushButton {
-            id: closeButton
+        Row {
+            id: buttonsRow
+            spacing: 8
             anchors {
                 bottom: parent.bottom
-                right: parent.right
-                rightMargin: frame.margins.right
+                horizontalCenter: parent.horizontalCenter
                 bottomMargin: frame.margins.bottom
             }
 
-            text: i18n("Cancel")
-            onClicked : disappearAnimation.running = true
-        }
+            PlasmaWidgets.PushButton {
+                id: okButton
 
-        PlasmaWidgets.PushButton {
-            id: okButton
-            anchors {
-                bottom: parent.bottom
-                left: parent.left
-                leftMargin: frame.margins.left
-                bottomMargin: frame.margins.bottom
+                text: configInterface.firstConfig?i18n("Create activity"):i18n("Save changes")
+                onClicked : {
+                    configInterface.activityName = activityNameEdit.text
+                    configInterface.wallpaperIndex = wallpapersList.currentIndex
+                    disappearAnimation.running = true
+                }
             }
 
-            text: i18n("Ok")
-            onClicked : {
-                configInterface.activityName = activityNameEdit.text
-                configInterface.wallpaperIndex = wallpapersList.currentIndex
-                disappearAnimation.running = true
+            PlasmaWidgets.PushButton {
+                id: closeButton
+
+                text: i18n("Cancel")
+                onClicked : disappearAnimation.running = true
             }
+            
         }
     }
 }

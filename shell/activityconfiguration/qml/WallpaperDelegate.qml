@@ -49,8 +49,9 @@ Item {
                 }
             }
         anchors.centerIn: parent
-        width: wallpapersList.currentIndex == index?parent.width:parent.width-16
-        height: wallpapersList.currentIndex == index?parent.height:parent.height-16
+        width: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index?parent.width+5:parent.width-16
+
+        height: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index?parent.height+5:parent.height-16
 
         QPixmapItem {
             id: screenshotItem
@@ -84,7 +85,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                wallpapersList.currentIndex = index
+                wallpapersList.currentIndex = (wallpapersList.currentPage*wallpapersList.pageSize) + index
             }
         }
     }

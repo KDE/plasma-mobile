@@ -31,6 +31,7 @@ Item {
     property int pageSize: Math.floor(appsView.width/delegateWidth)*Math.floor(appsView.height/delegateHeight)
     property int delegateWidth: 120
     property int delegateHeight: 120
+    property int currentPage: appsView.currentIndex
 
     PlasmaCore.Theme {
         id:theme
