@@ -42,6 +42,7 @@ Item {
         id: appsView
         objectName: "appsView"
         pressDelay: 200
+        cacheBuffer: 2000
 
         anchors.fill: parent
 
