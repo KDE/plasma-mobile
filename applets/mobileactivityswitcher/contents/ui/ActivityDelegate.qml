@@ -92,15 +92,16 @@ Item {
             anchors.left: parent.left
             Text {
                 anchors.centerIn: parent
-                text: i18n("Slide to activate")
+                text: model["Current"]==true?i18n("Active"):i18n("Slide to activate")
             }
         }
         Image {
-            x: model["Current"]==true?-4:parent.width - width
+            x: parent.width - width
             source: plasmoid.file("images", "slider.png")
+            opacity: model["Current"]==true?0:1
             Text {
                 anchors.centerIn: parent
-                text: model["Current"]==true?i18n("Active"):i18n("Activate")
+                text: i18n("Activate")
                 font.pixelSize: 14
             }
             Behavior on x {
