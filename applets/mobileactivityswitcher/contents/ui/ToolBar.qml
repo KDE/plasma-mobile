@@ -38,7 +38,7 @@ PlasmaCore.FrameSvgItem {
     Row {
         x: actionsToolBar.margins.left
         y: actionsToolBar.margins.top
-        spacing: 16
+        spacing: 24
         MobileComponents.ActionButton {
             svg: iconsSvg
             elementId: "add"

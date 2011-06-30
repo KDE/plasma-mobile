@@ -64,7 +64,7 @@ Item {
                 anchors.topMargin: 10
                 width: parent.width-10
                 wrapMode: Text.Wrap
-                text: model.Name
+                text: String(model.Name).length<28?model.name:String(model.Name).substr(0, 28)+"..."
                 font.bold: true
                 style: Text.Outline
                 styleColor: Qt.rgba(1, 1, 1, 0.6)
