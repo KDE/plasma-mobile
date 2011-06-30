@@ -28,7 +28,6 @@ Item {
 
     property Component delegate
     property QtObject model
-    property string searchQuery
     property int pageSize: Math.floor(appsView.width/delegateWidth)*Math.floor(appsView.height/delegateHeight)
     property int delegateWidth: 120
     property int delegateHeight: 120
@@ -38,66 +37,12 @@ Item {
     }
 
 
-    Item {
-        id: searchFieldContainer
-        anchors {
-            left: parent.left
-            top: parent.top
-            right: parent.right
-        }
-
-        height: 64
-        PlasmaWidgets.LineEdit {
-            id : searchField
-
-            /*width: 300
-            height: 35*/
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            onTextChanged: {
-                searchTimer.running = true
-            }
-        }
-        Timer {
-            id: searchTimer
-            interval: 500;
-            running: false
-            repeat: false
-            onTriggered: {
-                if (searchField.text == "") {
-                    clearButton.visible = false
-                } else {
-                    clearButton.visible = true
-                }
-                searchQuery = searchField.text
-            }
-        }
-        PlasmaWidgets.IconWidget {
-            id: clearButton
-            y: 6
-            anchors.right: searchField.right
-            anchors.rightMargin: -6
-            visible: false
-            size: "48x48"
-            Component.onCompleted: {
-                setIcon("edit-clear-locationbar-rtl")
-            }
-            onClicked: {
-                searchField.text = ""
-            }
-        }
-    }
     ListView {
         id: appsView
         objectName: "appsView"
         pressDelay: 200
 
-        anchors {
-            left: parent.left
-            top: searchFieldContainer.bottom
-            right: parent.right
-            bottom: parent.bottom
-        }
+        anchors.fill: parent
 
 
         model: main.model?Math.ceil(main.model.count/main.pageSize):0

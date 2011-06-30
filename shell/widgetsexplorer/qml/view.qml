@@ -155,12 +155,29 @@ Rectangle {
 
             anchors.fill: parent
 
+
+            MobileComponents.ViewSearch {
+                id: searchField
+
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+
+                onSearchQueryChanged: {
+                    appletsFilter.filterRegExp = ".*"+searchQuery+".*"
+                }
+            }
             MobileComponents.IconGrid {
                 id: appletsView
                 property string currentPlugin
 
                 anchors {
-                    fill: parent
+                    left: parent.left
+                    right: parent.right
+                    top: searchField.bottom
+                    bottom: parent.bottom
                     leftMargin: parent.margins.left
                     topMargin: parent.margins.top
                     rightMargin: parent.margins.right
@@ -196,10 +213,6 @@ Rectangle {
                             }
                         }
                     }
-                }
-
-                onSearchQueryChanged: {
-                    appletsFilter.filterRegExp = ".*"+searchQuery+".*"
                 }
 
                 PlasmaWidgets.PushButton {

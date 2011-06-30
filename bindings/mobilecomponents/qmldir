@@ -5,3 +5,4 @@ IconDelegate 0.1 IconDelegate.qml
 Rating 0.1 Rating.qml
 RatingIcon 0.1 RatingIcon.qml
 ResourceDelegate 0.1 ResourceDelegate.qml
+ViewSearch 0.1 ViewSearch.qml

@@ -40,7 +40,7 @@ Item {
         width: 200
         contentWidth: tagFlow.width
         contentHeight: tagFlow.height
-        opacity: (appGrid.searchQuery == "")?1:0.3
+        opacity: (searchField.searchQuery == "")?1:0.3
         clip: true
 
         anchors {
@@ -107,11 +107,29 @@ Item {
         }
     }
 
+    MobileComponents.ViewSearch {
+        id: searchField
+
+        anchors {
+            left: tagCloud.right
+            right: parent.right
+            top:parent.top
+        }
+        
+        onSearchQueryChanged: {
+            if (searchQuery == "") {
+                runnerModel.setQuery(runnerModel.defaultQuery)
+            } else {
+                runnerModel.setQuery(searchQuery)
+            }
+        }
+    }
+
     MobileComponents.IconGrid {
         id: appGrid
         delegateWidth: 128
         delegateHeight: 100
-        model: (searchQuery == "")?appModel:runnerModel
+        model: (searchField.searchQuery == "")?appModel:runnerModel
         delegate: Component {
             MobileComponents.ResourceDelegate {
                 width: appGrid.delegateWidth
@@ -142,17 +160,9 @@ Item {
         anchors {
             left: tagCloud.right
             right: parent.right
-            top: parent.top
+            top: searchField.bottom
             bottom: parent.bottom
             margins: 4
-        }
-
-        onSearchQueryChanged: {
-            if (searchQuery == "") {
-                runnerModel.setQuery(runnerModel.defaultQuery)
-            } else {
-                runnerModel.setQuery(searchQuery)
-            }
         }
     }
 }
