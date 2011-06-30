@@ -88,14 +88,19 @@ Item {
 
 
         Text {
+            id: titleText
             anchors.top: toolRow.top
             anchors.left: parent.left
-            anchors.leftMargin: 22
+            anchors.leftMargin: 72
             text: plasmoid.activityName
             font.bold: true
             style: Text.Outline
             styleColor: Qt.rgba(1, 1, 1, 0.6)
             font.pixelSize: 25
+        }
+        Connections {
+            target: plasmoid
+            onActivityNameChanged: titleText.text = plasmoid.activityName
         }
 
 
