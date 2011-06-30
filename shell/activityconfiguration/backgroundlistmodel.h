@@ -45,6 +45,7 @@ class ImageSizeFinder : public QObject, public QRunnable
 class BackgroundListModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
     enum {
@@ -72,6 +73,10 @@ public:
 
     void setScreenshotSize(const QSize &size);
     QSize screenshotSize() const;
+    int count() const {return m_packages.size();}
+
+Q_SIGNALS:
+    void countChanged();
 
 protected Q_SLOTS:
     void removeBackground(const QString &path);

@@ -143,7 +143,7 @@ Rectangle {
             }
         }
 
-        ListView {
+        /*ListView {
             id: wallpapersList
             anchors {
                 top: nameRow.bottom
@@ -169,6 +169,25 @@ Rectangle {
             clip: true
             snapMode: ListView.SnapOneItem
             orientation: ListView.Horizontal
+            model: configInterface.wallpaperModel
+            delegate: WallpaperDelegate {}
+        }*/
+
+        MobileComponents.IconGrid {
+            id: wallpapersList
+            property int currentIndex: 0
+            property int delegateWidth: 128
+            property int delegateHeight: delegateWidth/1.6
+            anchors {
+                top: nameRow.bottom
+                left: parent.left
+                bottom: closeButton.top
+                right: parent.right
+                leftMargin: frame.margins.left
+                topMargin: 6
+                rightMargin: frame.margins.right
+                bottomMargin: 12
+            }
             model: configInterface.wallpaperModel
             delegate: WallpaperDelegate {}
         }

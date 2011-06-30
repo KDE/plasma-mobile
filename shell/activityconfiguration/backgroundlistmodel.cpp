@@ -72,6 +72,7 @@ void BackgroundListModel::removeBackground(const QString &path)
         m_packages.removeAt(index.row());
         delete package;
         endRemoveRows();
+        emit countChanged();
     }
 }
 
@@ -87,6 +88,7 @@ void BackgroundListModel::reload(const QStringList &selected)
         qDeleteAll(m_packages);
         m_packages.clear();
         endRemoveRows();
+        emit countChanged();
     }
 
     if (!selected.isEmpty()) {
@@ -135,6 +137,7 @@ void BackgroundListModel::processPaths(const QStringList &paths)
         beginInsertRows(QModelIndex(), start, start + newPackages.size());
         m_packages.append(newPackages);
         endInsertRows();
+        emit countChanged();
     }
     //kDebug() << t.elapsed();
 }
@@ -150,6 +153,7 @@ void BackgroundListModel::addBackground(const QString& path)
         Plasma::Package *pkg = new Plasma::Package(path, structure);
         m_packages.prepend(pkg);
         endInsertRows();
+        emit countChanged();
     }
 }
 
