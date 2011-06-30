@@ -73,6 +73,7 @@ Item {
          id: mainView
          anchors.fill: parent
          anchors.bottomMargin: 32
+         anchors.topMargin: 32
          anchors.leftMargin: 64
          model: PlasmaCore.SortFilterModel {
             sourceModel: PlasmaCore.DataModel {
@@ -94,14 +95,14 @@ Item {
 
          path: Path {
              startX: mainView.width
-             startY: 0
+             startY: 32
              PathAttribute { name: "itemScale"; value: 0.1 }
              PathAttribute { name: "itemOpacity"; value: 0 }
              PathAttribute { name: "z"; value: 0 }
 
              PathLine {
                  x: mainView.width-150
-                 y: -35
+                 y: 100
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
              PathAttribute { name: "itemOpacity"; value: 0.65 }
@@ -120,7 +121,7 @@ Item {
 
              PathLine {
                  x: mainView.width-150
-                 y: mainView.height+35
+                 y: mainView.height-100
              }
              PathAttribute { name: "itemScale"; value: 0.2 }
              PathAttribute { name: "itemOpacity"; value: 0.65 }
@@ -129,7 +130,7 @@ Item {
 
              PathLine {
                  x: mainView.width
-                 y: mainView.height
+                 y: mainView.height-32
              }
              PathAttribute { name: "itemScale"; value: 0.1 }
              PathAttribute { name: "itemOpacity"; value: 0 }
