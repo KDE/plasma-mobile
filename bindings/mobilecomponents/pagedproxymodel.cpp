@@ -22,7 +22,7 @@
 #include <KDebug>
 
 PagedProxyModel::PagedProxyModel(QObject *parent)
-    : QProxyModel(parent),
+    : QAbstractProxyModel(parent),
       m_pageSize(16),
       m_currentPage(0)
 {
@@ -34,11 +34,11 @@ PagedProxyModel::~PagedProxyModel()
 
 int PagedProxyModel::totalPages()
 {
-    if (!model()) {
+    if (!sourceModel()) {
         return 0;
     }
 
-    return model()->rowCount() / m_pageSize;
+    return sourceModel()->rowCount() / m_pageSize;
 }
 
 void PagedProxyModel::setCurrentPage(const int page)
@@ -73,30 +73,78 @@ int PagedProxyModel::pageSize() const
     return m_pageSize;
 }
 
-void PagedProxyModel::setSourceModel(QObject *source)
+void PagedProxyModel::setSourceModelObject(QObject *source)
 {
     QAbstractItemModel *model = qobject_cast<QAbstractItemModel *>(source);
     if (!model) {
         return;
     }
     setRoleNames(model->roleNames());
-    setModel(model);
+    setSourceModel(model);
 }
 
-QObject *PagedProxyModel::sourceModel() const
+QObject *PagedProxyModel::sourceModelObject() const
 {
-    return model();
+    return sourceModel();
 }
 
 
 int PagedProxyModel::rowCount(const QModelIndex &parent) const
 {
-    return qMin(m_pageSize, (QProxyModel::rowCount(parent)-m_currentPage*m_pageSize));
+    if (!sourceModel()) {
+        return 0;
+    }
+
+    return qMin(m_pageSize, (sourceModel()->rowCount(parent)-m_currentPage*m_pageSize));
 }
 
 QVariant PagedProxyModel::data(const QModelIndex &index, int role) const
 {
-    return QProxyModel::data(QProxyModel::index(index.row()+(m_pageSize*m_currentPage), index.column()), role);
+    if (!sourceModel()) {
+        return QVariant();
+    }
+
+    return sourceModel()->data(PagedProxyModel::index(index.row()+ (m_currentPage*m_pageSize), index.column(), QModelIndex()), role);
+}
+
+QModelIndex PagedProxyModel::index(int row, int column, const QModelIndex &parent) const
+{
+    if (!sourceModel()) {
+        return QModelIndex();
+    }
+
+    return sourceModel()->index(row, column, parent);
+}
+
+QModelIndex PagedProxyModel::parent(const QModelIndex &index) const
+{
+    return QModelIndex();
+}
+
+QModelIndex PagedProxyModel::mapFromSource(const QModelIndex &sourceIndex) const
+{
+    if (!sourceModel()) {
+        return QModelIndex();
+    }
+
+    return sourceModel()->index(sourceIndex.row() - (m_currentPage*m_pageSize), sourceIndex.column(), sourceIndex);
+}
+
+QModelIndex PagedProxyModel::mapToSource(const QModelIndex &proxyIndex) const
+{
+    if (!sourceModel()) {
+        return QModelIndex();
+    }
+
+    return sourceModel()->index(proxyIndex.row() + (m_currentPage*m_pageSize), proxyIndex.column(), proxyIndex);
+}
+
+int PagedProxyModel::columnCount(const QModelIndex &index) const
+{
+    if (!sourceModel()) {
+        return 0;
+    }
+    return sourceModel()->columnCount(index);
 }
 
 #include "pagedproxymodel.moc"

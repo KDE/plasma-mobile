@@ -20,21 +20,21 @@
 #ifndef PAGEDPROXYMODEL_H
 #define PAGEDPROXYMODEL_H
 
-#include <QProxyModel>
+#include <QAbstractProxyModel>
 
-class PagedProxyModel : public QProxyModel
+class PagedProxyModel : public QAbstractProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(int currentPage READ currentPage WRITE setCurrentPage)
     Q_PROPERTY(int pageSize READ pageSize WRITE setPageSize)
-    Q_PROPERTY(QObject *sourceModel READ sourceModel WRITE setSourceModel)
+    Q_PROPERTY(QObject *sourceModel READ sourceModelObject WRITE setSourceModelObject)
 
 public:
     PagedProxyModel(QObject *parent = 0);
     ~PagedProxyModel();
 
-    void setSourceModel(QObject *source);
-    QObject *sourceModel() const;
+    void setSourceModelObject(QObject *source);
+    QObject *sourceModelObject() const;
 
     int totalPages();
 
@@ -46,6 +46,12 @@ public:
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+
+    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
+    QModelIndex parent(const QModelIndex &index) const;
+    QModelIndex mapFromSource(const QModelIndex &sourceIndex) const;
+    QModelIndex mapToSource(const QModelIndex &proxyIndex) const;
+    int columnCount(const QModelIndex &index) const;
 
 private:
     int m_pageSize;
