@@ -28,9 +28,52 @@ Rectangle {
     color: Qt.rgba(0, 0, 0, 0.4)
     opacity: 0
 
+    function show()
+    {
+        appearAnimation.running = true
+    }
+
+    ParallelAnimation {
+        id: appearAnimation
+        NumberAnimation {
+            targets: main
+            properties: "opacity"
+            duration: 250
+            to: 1
+            easing.type: "InOutCubic"
+        }
+        NumberAnimation {
+            targets: dialog
+            properties: "scale"
+            duration: 250
+            to: 1
+            easing.type: "InOutCubic"
+        }
+    }
+
+    SequentialAnimation {
+        id: disappearAnimation
+        ParallelAnimation {
+            NumberAnimation {
+                targets: main
+                properties: "opacity"
+                duration: 250
+                to: 0
+                easing.type: "InOutCubic"
+            }
+            NumberAnimation {
+                targets: dialog
+                properties: "scale"
+                duration: 250
+                to: 0
+                easing.type: "InOutCubic"
+            }
+        }
+    }
+
     MouseArea {
         anchors.fill: parent
-        onClicked: main.opacity = 0
+        onClicked: disappearAnimation.running = true
     }
 
     PlasmaCore.DataSource {
@@ -60,6 +103,8 @@ Rectangle {
 
 
     PlasmaCore.FrameSvgItem {
+        id: dialog
+        scale: 0
         anchors.fill: parent
         anchors.margins: 80
         imagePath: "dialogs/background"
@@ -91,7 +136,7 @@ Rectangle {
             model: metadataModel
             delegate: MobileComponents.ResourceDelegate {
                 id: resourceDelegate
-                width: 140
+                width: 130
                 height: 120
                 resourceType: model.resourceType
                 infoLabelVisible: false
@@ -103,6 +148,8 @@ Rectangle {
                     operation["ActivityUrl"] = plasmoid.activityId
                     operation["ResourceUrl"] = resourceUri
                     service.startOperationCall(operation)
+
+                    disappearAnimation.running = true
                 }
             }
         }

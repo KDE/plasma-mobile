@@ -113,7 +113,7 @@ Item {
                 svg: iconsSvg
                 elementId: "add"
                 onClicked: {
-                    addResource.opacity = 1
+                    addResource.show()
                 }
                 text: i18n("Add item")
             }
