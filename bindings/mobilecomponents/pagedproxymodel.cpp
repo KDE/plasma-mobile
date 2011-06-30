@@ -79,6 +79,12 @@ void PagedProxyModel::setSourceModelObject(QObject *source)
     if (!model) {
         return;
     }
+    if (sourceModel()) {
+        disconnect(sourceModel(), 0, this, 0);
+    }
+
+    connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(sourceDataChanged(QModelIndex,QModelIndex)));
+
     setRoleNames(model->roleNames());
     setSourceModel(model);
 }
@@ -88,6 +94,11 @@ QObject *PagedProxyModel::sourceModelObject() const
     return sourceModel();
 }
 
+
+void PagedProxyModel::sourceDataChanged(const QModelIndex &from, const QModelIndex &to)
+{
+    emit dataChanged(mapFromSource(from), mapFromSource(to));
+}
 
 int PagedProxyModel::rowCount(const QModelIndex &parent) const
 {
@@ -127,7 +138,7 @@ QModelIndex PagedProxyModel::mapFromSource(const QModelIndex &sourceIndex) const
         return QModelIndex();
     }
 
-    return sourceModel()->index(sourceIndex.row() - (m_currentPage*m_pageSize), sourceIndex.column(), sourceIndex);
+    return sourceModel()->index(sourceIndex.row() - (m_currentPage*m_pageSize), sourceIndex.column(), QModelIndex());
 }
 
 QModelIndex PagedProxyModel::mapToSource(const QModelIndex &proxyIndex) const
@@ -136,7 +147,7 @@ QModelIndex PagedProxyModel::mapToSource(const QModelIndex &proxyIndex) const
         return QModelIndex();
     }
 
-    return sourceModel()->index(proxyIndex.row() + (m_currentPage*m_pageSize), proxyIndex.column(), proxyIndex);
+    return sourceModel()->index(proxyIndex.row() + (m_currentPage*m_pageSize), proxyIndex.column(), QModelIndex());
 }
 
 int PagedProxyModel::columnCount(const QModelIndex &index) const

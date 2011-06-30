@@ -53,6 +53,9 @@ public:
     QModelIndex mapToSource(const QModelIndex &proxyIndex) const;
     int columnCount(const QModelIndex &index) const;
 
+protected Q_SLOTS:
+    void sourceDataChanged(const QModelIndex &from, const QModelIndex &to);
+
 private:
     int m_pageSize;
     int m_currentPage;
