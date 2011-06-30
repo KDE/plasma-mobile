@@ -25,7 +25,7 @@ import org.kde.plasma.mobilecomponents 0.1
 
 Item {
     id: activityPanel;
-    height: parent.height/1.5
+    height: parent.height-40
     width: 400
     state: "show"
 
