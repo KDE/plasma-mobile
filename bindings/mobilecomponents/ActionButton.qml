@@ -31,12 +31,12 @@ Item {
     property int iconSize: 32
     property bool checked: false
     property bool toggle: false
+    property string text
     signal clicked
 
+    width: buttonRow.width
+    height: buttonRow.height
 
-
-    width: backgroundVisible?iconSize+8:iconSize
-    height: width
     visible: action==undefined||action.enabled
 
     onCheckedChanged: {
@@ -58,53 +58,67 @@ Item {
         id: shadowItem
         svg: buttonSvg
         elementId: "shadow"
-        anchors.fill: parent
-        visible: backgroundVisible
+        width: button.backgroundVisible?iconSize+8:iconSize
+        height: width
+        visible: button.backgroundVisible
     }
 
-    PlasmaCore.SvgItem {
-        id: buttonItem
-        svg: buttonSvg
-        elementId: "normal"
-        anchors.fill: parent
-        visible: backgroundVisible
-    }
+    Row {
+        id: buttonRow
 
-    PlasmaCore.SvgItem {
-        id: icon
-        width: iconSize
-        height: iconSize
-        svg: button.svg
-        anchors.fill: buttonItem
-        anchors.margins: backgroundVisible?8:0
+        PlasmaCore.SvgItem {
+            id: buttonItem
+            svg: buttonSvg
+            elementId: "normal"
+            width: shadowItem.width
+            height: shadowItem.height
+            visible: backgroundVisible
 
-        MouseArea {
-            anchors.fill: parent
-            anchors.leftMargin: -10
-            anchors.topMargin: -10
-            anchors.rightMargin: -10
-            anchors.bottomMargin: -10
-            onPressed: {
-                buttonItem.elementId = "pressed"
-                shadowItem.opacity = 0
+            PlasmaCore.SvgItem {
+                id: icon
+                width: iconSize
+                height: iconSize
+                svg: button.svg
+                anchors.fill: buttonItem
+                anchors.margins: backgroundVisible?8:0
             }
-            onReleased: {
-                if (button.checked || !button.toggle) {
-                    buttonItem.elementId = "normal"
-                    shadowItem.opacity = 1
-                    button.checked = false
-                } else {
-                    button.checked = true
-                }
-            }
-            onClicked: {
-                if (action) {
-                    action.trigger()
-                } else {
-                    button.clicked()
-                }
-            }
+        }
+
+        Text {
+            id: actionText
+            text: button.text
+            style: Text.Outline
+            color: theme.textColor
+            styleColor: Qt.rgba(1,1,1,0.4)
+            anchors.verticalCenter: parent.verticalCenter
         }
     }
 
+    MouseArea {
+        anchors.fill: parent
+        anchors.leftMargin: -10
+        anchors.topMargin: -10
+        anchors.rightMargin: -10
+        anchors.bottomMargin: -10
+        onPressed: {
+            buttonItem.elementId = "pressed"
+            shadowItem.opacity = 0
+        }
+        onReleased: {
+            if (button.checked || !button.toggle) {
+                buttonItem.elementId = "normal"
+                shadowItem.opacity = 1
+                button.checked = false
+            } else {
+                button.checked = true
+            }
+        }
+        onClicked: {
+            if (action) {
+                action.trigger()
+            } else {
+                button.clicked()
+            }
+        }
+    }
 }
