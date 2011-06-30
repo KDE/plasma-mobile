@@ -179,6 +179,8 @@ Item {
                 svg: iconsSvg
                 elementId: "delete"
                 toggle: true
+                opacity: model["Current"]==true?0.3:1
+                enabled: opacity==1
 
                 onClicked: {
                     if (confirmationDialog.scale == 1) {
@@ -188,14 +190,6 @@ Item {
                     }
                 }
             }
-        }
-        MobileComponents.ActionButton {
-            svg: iconsSvg
-            elementId: "configure"
-            action: plasmoid.action("configure")
-            opacity: model["Current"]==true?1:0.3
-            enabled: opacity==1
-            z: 0
         }
     }
 }
