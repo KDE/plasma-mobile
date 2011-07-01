@@ -64,7 +64,9 @@ Item {
                 anchors.topMargin: 10
                 width: parent.width-10
                 wrapMode: Text.Wrap
-                text: String(model.Name).length<28?model.name:String(model.Name).substr(0, 28)+"..."
+                //FIXME: MEEGO BUG
+                //text: String(model.Name).length<28?model.name:String(model.Name).substr(0, 28)+"..."
+                text: model.Name
                 font.bold: true
                 style: Text.Outline
                 styleColor: Qt.rgba(1, 1, 1, 0.6)
