@@ -24,8 +24,8 @@ Item {
     id: delegateItem
     property string resourceType
     property bool infoLabelVisible
-    property int implicitWidth: itemLoader.item.implicitWidth
-    property int implicitHeight: itemLoader.item.implicitHeight
+//    property int implicitWidth: itemLoader.item.implicitWidth
+  //  property int implicitHeight: itemLoader.item.implicitHeight
 
     signal clicked(variant mouse)
     signal pressed(variant mouse)
