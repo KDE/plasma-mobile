@@ -35,6 +35,10 @@ Item {
         id: contextMenu
     }
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     Flickable {
         id: tagCloud
         width: 200
@@ -58,6 +62,7 @@ Item {
                 text: i18n("Everything")
                 font.pointSize: 20
                 font.bold: true
+                color: theme.textColor
 
                 MouseArea {
                     anchors.fill: parent
@@ -80,6 +85,8 @@ Item {
                     id: tagDelegate
                     text: display
                     font.pointSize: 8+(Math.min(weight*4, 40)/2)
+                    color: theme.textColor
+
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
