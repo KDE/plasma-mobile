@@ -2,13 +2,12 @@
 import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
  
 Item {
     id: resourceItem
     anchors.fill: parent
-    property alias infoLabelVisible: infoLabel.visible
 
     Item {
         id: itemFrame
@@ -21,7 +20,7 @@ Item {
         //height: 128
         height: resourceItem.height
 
-        PlasmaWidgets.IconWidget {
+        QIconItem {
             id: previewImage
             height: 64
             width: 64
@@ -29,49 +28,26 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
 
             function resourceIcon(resourceTypes) {
-                var icons = new Object();
-                icons["Resource"] = "nepomuk";
-                icons["FileDataObject"] = "unknown";
-
-                // Audio
-                icons["Audio"] = "audio-x-generic";
-                icons["MusicPiece"] = "audio-x-generic";
-
-                // Images
-                icons["Image"] = "image-x-generic";
-                icons["RasterImage"] = "image-x-generic";
-
-                icons["Email"] = "internet-mail";
-                icons["PersonContact"] = "x-office-contact";
-                icons["Document"] = "kword";
-
-                // ... add some more
-
-                // keep searching until the most specific icon is found
-                var _icon = "nepomuk";
-                var typeList = resourceTypes.split(",");
-
-                for(var i = 0; i < typeList.length; i++) {
-                    var shortType = typeList[i].split("#")[1];
-                    for (key in icons) {
-                        if (key == shortType) {
-                            print("M: " + key + icons[shortType]);
-                            _icon = icons[shortType];
-                        }
-                    }
+                if (mimeType) {
+                    return mimeType.replace("/", "-")
                 }
-                return _icon;
+                return "nepomuk"
             }
 
             Component.onCompleted: {
+                // FIXME: remove this crap, fix icon in metadata data set
                 try {
+                    if (!model["hasSymbol"]) {
+                        icon = decoration
+                        return
+                    }
                     var _l = hasSymbol.toString().split(",");
                     if (_l.length == 1) {
-                        setIcon(hasSymbol);
+                        icon = QIcon(hasSymbol);
                     } else if (_l.length > 1) {
                         // pick the last one
                         var _i = _l[_l.length-1];
-                        setIcon(_i);
+                        icon = QIcon(_i);
                     } else {
                         //print("HHH types" + types.toString());
                         resourceIcon(types.toString())
@@ -80,35 +56,26 @@ Item {
                 } catch(e) {
                     var _i = resourceIcon(className);
                     print("fallback icon: " + _i + e);
-                    setIcon(_i);
+                    icon = QIcon(_i);
                     print("icon2:" + _i);
                 }
             }
         }
 
-        Rectangle {
-            id: labelBackground
-            radius: 5
-            opacity: 0.75
-            color: white
-            anchors.top: previewImage.bottom
 
+        Text {
+            id: previewLabel
+            text: label
+
+            font.pixelSize: 14
+            //wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
+            anchors.top: previewImage.bottom
             anchors.horizontalCenter: itemFrame.horizontalCenter
             width: 130
-            height: previewLabel.paintedHeight
-            anchors.margins: 8
-
-            Text {
-                id: previewLabel
-                text: label
-
-                font.pixelSize: 14
-                //wrapMode: Text.Wrap
-                horizontalAlignment: Text.AlignHCenter
-                elide: Text.ElideRight
-                anchors.fill: parent
-                anchors.margins: 3
-            }
+            style: Text.Outline
+            styleColor: Qt.rgba(1, 1, 1, 0.6)
         }
 
         Text {
@@ -122,8 +89,9 @@ Item {
             height: 14
             width: parent.width - previewImage.width
             //wrapMode: Text.Wrap
-            anchors.top: labelBackground.bottom
+            anchors.top: previewLabel.bottom
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: infoLabelVisible
         }
     }
 }
