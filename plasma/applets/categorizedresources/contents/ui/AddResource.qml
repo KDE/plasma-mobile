@@ -148,8 +148,13 @@ Rectangle {
                     operation["ActivityUrl"] = plasmoid.activityId
                     operation["ResourceUrl"] = resourceUri
                     service.startOperationCall(operation)
+                    queryTimer.running = true
 
                     disappearAnimation.running = true
+                    
+                    //FIXME: MEEGO BUG
+                    metadataSource.connectedSources = ["x"]
+                    metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]
                 }
             }
         }
