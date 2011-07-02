@@ -21,8 +21,10 @@
 
 #include <QtContacts/QContactManager>
 #include <QtContacts/QContact>
+
 #include <QtContacts/QContactName>
 #include <QtContacts/QContactEmailAddress>
+#include <QtContacts/QContactTimestamp>
 
 #include <Nepomuk/Resource>
 #include <Nepomuk/Variant>
@@ -122,28 +124,38 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
         kDebug() << detail;
         const QString type = detail.definitionName();
 
+        #define SET_PROPERTY_VARIANT(Property, Value, Cast) \
+            if (detail.hasValue(Value)) contactRes.setProperty(Property(), detail.variantValue(Value).Cast());
+        #define SET_PROPERTY(Property, Value) \
+            if (detail.hasValue(Value)) contactRes.setProperty(Property(), detail.value(Value));
+
         // TODO: Feed other fields
-        if (type == "DisplayLabel") {
+        if (type == QContactDisplayLabel::DefinitionName) {
             contactRes.setLabel(detail.value("Label"));
 
-        } else if (type == "Name") {
-            contactRes.setProperty(NCO::nameGiven(), Nepomuk::Variant(detail.value("FirstName")));
-            contactRes.setProperty(NCO::nameFamily(), Nepomuk::Variant(detail.value("LastName")));
+        } else if (type == QContactName::DefinitionName) {
+            SET_PROPERTY(NCO::nameGiven,            QContactName::FieldFirstName);
+            SET_PROPERTY(NCO::nameGiven,            QContactName::FieldFirstName);
+            SET_PROPERTY(NCO::nameFamily,           QContactName::FieldLastName);
+            SET_PROPERTY(NCO::nameAdditional,       QContactName::FieldMiddleName);
+            SET_PROPERTY(NCO::nameHonorificPrefix,  QContactName::FieldPrefix);
+            SET_PROPERTY(NCO::nameHonorificSuffix,  QContactName::FieldSuffix);
 
-        } else if (type == "EmailAddress") {
+        } else if (type == QContactEmailAddress::DefinitionName) {
             // TODO: Multiple e-mail addresses
-            Nepomuk::Resource emailRes("mailto:" + detail.value("EmailAddress"), NCO::EmailAddress());
-            emailRes.setProperty(NCO::emailAddress(), Nepomuk::Variant(detail.value("EmailAddress")));
+            Nepomuk::Resource emailRes("mailto:" + detail.value(QContactEmailAddress::FieldEmailAddress), NCO::EmailAddress());
+            emailRes.setProperty(NCO::emailAddress(), detail.value(QContactEmailAddress::FieldEmailAddress));
 
             contactRes.addProperty(NCO::hasEmailAddress(), emailRes);
 
-        } else if (type == "Timestamp") {
-            contactRes.setProperty(NIE::lastModified(),
-                    detail.variantValue("ModificationTimestamp").toDateTime());
-            contactRes.setProperty(NIE::created(),
-                    detail.variantValue("CreationTimestamp").toDateTime());
+        } else if (type == QContactTimestamp::DefinitionName) {
+            SET_PROPERTY_VARIANT(NIE::lastModified, QContactTimestamp::FieldModificationTimestamp, toDateTime);
+            SET_PROPERTY_VARIANT(NIE::lastModified, QContactTimestamp::FieldCreationTimestamp, toDateTime);
 
         }
+
+        #undef SET_PROPERTY_VARIANT
+        #undef SET_PROPERTY
     }
 }
 
