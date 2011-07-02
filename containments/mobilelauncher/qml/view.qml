@@ -39,79 +39,8 @@ Item {
         id: theme
     }
 
-    Flickable {
-        id: tagCloud
-        width: 200
-        contentWidth: tagFlow.width
-        contentHeight: tagFlow.height
-        opacity: (searchField.searchQuery == "")?1:0.3
-        clip: true
-
-        anchors {
-            left: parent.left
-            top: parent.top
-            bottom: parent.bottom
-        }
-        Flow {
-            id: tagFlow
-            width: 200
-            spacing: 8
-
-            Text {
-                id: everythingTag
-                text: i18n("Everything")
-                font.pointSize: 20
-                font.bold: true
-                color: theme.textColor
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        appModel.shownCategories = Array()
-                        for (var i=0; i<tagFlow.children.length; ++i ) {
-                            var child = tagFlow.children[i]
-                            if (child.font) {
-                                child.font.bold = false
-                            }
-                        }
-                        everythingTag.font.bold = true
-                    }
-                }
-            }
-
-            Repeater {
-                model: appModel.allCategories
-                Text {
-                    id: tagDelegate
-                    text: display
-                    font.pointSize: 8+(Math.min(weight*4, 40)/2)
-                    color: theme.textColor
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            var categories = appModel.shownCategories
-                            if (categories.indexOf(display) > -1) {
-                                j = 0;
-                                while (j < categories.length) {
-                                    if (categories[j] == display) {
-                                        categories.splice(j, 1);
-                                    } else {
-                                        j++;
-                                    }
-                                }
-                                tagDelegate.font.bold = false
-                            } else {
-                                categories[categories.length] = display
-                                tagDelegate.font.bold = true
-                            }
-                            appModel.shownCategories = categories
-                            everythingTag.font.bold = (categories.length == 0)
-                        }
-                    }
-                }
-            }
-        }
+    TagCloud {
+        id:tagCloud
     }
 
     MobileComponents.ViewSearch {
