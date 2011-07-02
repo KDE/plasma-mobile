@@ -26,6 +26,7 @@
 #include <KLocale>
 
 #include "recommendation/recommendationmanager.h"
+#include "qtmobilityfeeder/qtmobilityfeeder.h"
 
 int main(int argc, char** argv)
 {
@@ -41,6 +42,9 @@ int main(int argc, char** argv)
 
     KCmdLineArgs::init( argc, argv, &aboutData );
     KUniqueApplication app;
+
     (void)new Contour::RecommendationManager(&app);
+    (void)new Contour::QtMobilityFeeder(&app);
+
     return app.exec();
 }
