@@ -22,12 +22,21 @@
 #include <QtContacts/QContactManager>
 #include <QtContacts/QContact>
 
-#include <QtContacts/QContactName>
+#include <QtContacts/QContactAddress>
+#include <QtContacts/QContactBirthday>
 #include <QtContacts/QContactEmailAddress>
+#include <QtContacts/QContactGender>
+#include <QtContacts/QContactName>
+#include <QtContacts/QContactNickname>
+#include <QtContacts/QContactNote>
+#include <QtContacts/QContactPhoneNumber>
+#include <QtContacts/QContactTag>
 #include <QtContacts/QContactTimestamp>
+#include <QtContacts/QContactUrl>
 
 #include <Nepomuk/Resource>
 #include <Nepomuk/Variant>
+#include <Nepomuk/Tag>
 
 #include "nco.h"
 #include "nao.h"
@@ -124,35 +133,77 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
         kDebug() << detail;
         const QString type = detail.definitionName();
 
-        #define SET_PROPERTY_VARIANT(Property, Value, Cast) \
-            if (detail.hasValue(Value)) contactRes.setProperty(Property(), detail.variantValue(Value).Cast());
-        #define SET_PROPERTY(Property, Value) \
-            if (detail.hasValue(Value)) contactRes.setProperty(Property(), detail.value(Value));
+        #define SET_PROPERTY_VARIANT(Resource, Property, Value, Cast) \
+            if (detail.hasValue(Value)) Resource.setProperty(Property(), detail.variantValue(Value).Cast());
+        #define SET_PROPERTY(Resource, Property, Value) \
+            if (detail.hasValue(Value)) Resource.setProperty(Property(), detail.value(Value));
 
         // TODO: Feed other fields
         if (type == QContactDisplayLabel::DefinitionName) {
-            contactRes.setLabel(detail.value("Label"));
+            contactRes.setLabel(detail.value(QContactDisplayLabel::FieldLabel));
 
         } else if (type == QContactName::DefinitionName) {
-            SET_PROPERTY(NCO::nameGiven,            QContactName::FieldFirstName);
-            SET_PROPERTY(NCO::nameGiven,            QContactName::FieldFirstName);
-            SET_PROPERTY(NCO::nameFamily,           QContactName::FieldLastName);
-            SET_PROPERTY(NCO::nameAdditional,       QContactName::FieldMiddleName);
-            SET_PROPERTY(NCO::nameHonorificPrefix,  QContactName::FieldPrefix);
-            SET_PROPERTY(NCO::nameHonorificSuffix,  QContactName::FieldSuffix);
+            SET_PROPERTY(contactRes, NCO::nameGiven,            QContactName::FieldFirstName);
+            SET_PROPERTY(contactRes, NCO::nameGiven,            QContactName::FieldFirstName);
+            SET_PROPERTY(contactRes, NCO::nameFamily,           QContactName::FieldLastName);
+            SET_PROPERTY(contactRes, NCO::nameAdditional,       QContactName::FieldMiddleName);
+            SET_PROPERTY(contactRes, NCO::nameHonorificPrefix,  QContactName::FieldPrefix);
+            SET_PROPERTY(contactRes, NCO::nameHonorificSuffix,  QContactName::FieldSuffix);
 
         } else if (type == QContactEmailAddress::DefinitionName) {
-            // TODO: Multiple e-mail addresses
             Nepomuk::Resource emailRes("mailto:" + detail.value(QContactEmailAddress::FieldEmailAddress), NCO::EmailAddress());
             emailRes.setProperty(NCO::emailAddress(), detail.value(QContactEmailAddress::FieldEmailAddress));
 
             contactRes.addProperty(NCO::hasEmailAddress(), emailRes);
 
         } else if (type == QContactTimestamp::DefinitionName) {
-            SET_PROPERTY_VARIANT(NIE::lastModified, QContactTimestamp::FieldModificationTimestamp, toDateTime);
-            SET_PROPERTY_VARIANT(NIE::lastModified, QContactTimestamp::FieldCreationTimestamp, toDateTime);
+            SET_PROPERTY_VARIANT(contactRes, NIE::lastModified, QContactTimestamp::FieldModificationTimestamp, toDateTime);
+            SET_PROPERTY_VARIANT(contactRes, NIE::lastModified, QContactTimestamp::FieldCreationTimestamp, toDateTime);
+
+        } else if (type == QContactAddress::DefinitionName) {
+            Nepomuk::Resource addressRes("mailto:" + detail.value(QContactEmailAddress::FieldEmailAddress), NCO::PostalAddress());
+
+            SET_PROPERTY(addressRes,  NCO::country,        QContactAddress::FieldCountry);
+            SET_PROPERTY(addressRes,  NCO::locality,       QContactAddress::FieldLocality);
+            SET_PROPERTY(addressRes,  NCO::pobox,          QContactAddress::FieldPostOfficeBox);
+            SET_PROPERTY(addressRes,  NCO::postalcode,     QContactAddress::FieldPostcode);
+            SET_PROPERTY(addressRes,  NCO::region,         QContactAddress::FieldRegion);
+            SET_PROPERTY(addressRes,  NCO::streetAddress,  QContactAddress::FieldStreet);
+
+        } else if (type == QContactBirthday::DefinitionName) {
+            SET_PROPERTY_VARIANT(contactRes, NCO::birthDate, QContactBirthday::FieldBirthday, toDateTime);
+
+        } else if (type == QContactGender::DefinitionName) {
+            SET_PROPERTY(contactRes, NCO::gender, QContactGender::FieldGender);
+
+        } else if (type == QContactNickname::DefinitionName) {
+            SET_PROPERTY(contactRes, NCO::nickname, QContactNickname::FieldNickname);
+
+        } else if (type == QContactNote::DefinitionName) {
+            SET_PROPERTY(contactRes, NCO::note, QContactNote::FieldNote);
+
+        } else if (type == QContactPhoneNumber::DefinitionName) {
+
+
+        } else if (type == QContactTag::DefinitionName) {
+            contactRes.addTag(Nepomuk::Tag(detail.value(QContactTag::FieldTag)));
+
+        } else if (type == QContactUrl::DefinitionName) {
+            if (detail.value(QContactUrl::FieldSubType) == QContactUrl::SubTypeBlog) {
+                SET_PROPERTY(contactRes, NCO::blogUrl, QContactUrl::FieldUrl);
+            } else if (detail.value(QContactUrl::FieldSubType) == QContactUrl::SubTypeHomePage) {
+                SET_PROPERTY(contactRes, NCO::websiteUrl, QContactUrl::FieldUrl);
+            }
+            // Not handling QContactUrl::SubTypeFavourite
 
         }
+
+        // Not handling QContactAnniversary since it is not covered by NCO
+        // Not handling QContactAvatar, QContactFamily, QContactRingtone, QContactSyncTarget,
+        //     QContactThumbnail not really important here
+        // Not handling QContactGlobalPresence since it is volatile data
+        // TODO: Handle QContactFavorite, QContactOnlineAccount, QContactType
+        // TODO: Should we handle QContactGeoLocation, QContactOrganization
 
         #undef SET_PROPERTY_VARIANT
         #undef SET_PROPERTY
