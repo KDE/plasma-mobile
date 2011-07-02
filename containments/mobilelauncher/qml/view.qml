@@ -83,15 +83,6 @@ Item {
 
             }
         }
-        /*Component {
-            MobileComponents.IconDelegate {
-                icon: decoration
-                text: display
-                onClicked: {
-                    appsView.clicked(url)
-                }
-            }
-        }*/
 
         anchors {
             left: tagCloud.right
