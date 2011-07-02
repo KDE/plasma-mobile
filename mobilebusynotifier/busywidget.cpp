@@ -45,6 +45,9 @@ BusyWidget::BusyWidget(QWidget *parent)
     connect(m_rotationTimer, SIGNAL(timeout()), this, SLOT(refreshSpinner()));
     m_rotationTimer->start(40);
 
+    //suicide after 20 seconds
+    QTimer::singleShot(20*1000, this, SLOT(close()));
+
     hide();
 }
 
