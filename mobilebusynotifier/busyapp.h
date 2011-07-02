@@ -54,7 +54,7 @@ private:
 
 private:
     KStartupInfo *m_startupInfo;
-    BusyWidget *m_busyWidget;
+    QWeakPointer<BusyWidget> m_busyWidget;
 };
 
 #endif // multiple inclusion guard
