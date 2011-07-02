@@ -42,7 +42,7 @@ namespace Contour {
 class QtMobilityFeederPrivate {
 public:
 
-    QContactId uriToId(const QString & uri)
+    static QContactId uriToId(const QString & uri)
     {
         QContactId result;
         int position = uri.lastIndexOf('/');
@@ -55,35 +55,40 @@ public:
         return result;
     }
 
-    QString idToUri(const QContactId & id)
+    static QString idToUri(const QContactId & id)
     {
         kDebug() << id.managerUri() + '/' + QString::number(id.localId());
         return id.managerUri() + '/' + QString::number(id.localId());
     }
 
+    QContactManager * manager;
+    QString managerName;
 };
 
-QtMobilityFeeder::QtMobilityFeeder(QObject * parent)
-    : QObject(parent), d(new QtMobilityFeederPrivate())
+QtMobilityFeeder::QtMobilityFeeder(const QString & managerName)
+    : d(new QtMobilityFeederPrivate())
 {
-    kDebug() << "availableManagers" << QContactManager::availableManagers();
-    kDebug() << QContactManager::buildUri(
-            "memory", QMap < QString, QString > ());
+    d->managerName = managerName;
+}
 
-    // TODO: Remove this and change to a real address book model
-    QContactManager manager("memory");
-    ::addDummyContacts(manager);
+void QtMobilityFeeder::run()
+{
+    d->manager = new QContactManager(d->managerName);
 
-    connect(&manager, SIGNAL(contactsAdded(QList < QContactLocalId >)),
+    if (d->managerName == "memory") {
+        ::addDummyContacts(d->manager);
+    }
+
+    connect(d->manager, SIGNAL(contactsAdded(QList < QContactLocalId >)),
             this,     SLOT(contactsAdded(QList < QContactLocalId >)));
-    connect(&manager, SIGNAL(contactsChanged(QList < QContactLocalId >)),
+    connect(d->manager, SIGNAL(contactsChanged(QList < QContactLocalId >)),
             this,     SLOT(contactsChanged(QList < QContactLocalId >)));
-    connect(&manager, SIGNAL(contactsRemoved(QList < QContactLocalId >)),
+    connect(d->manager, SIGNAL(contactsRemoved(QList < QContactLocalId >)),
             this,     SLOT(contactsRemoved(QList < QContactLocalId >)));
-    connect(&manager, SIGNAL(dataChanged()),
+    connect(d->manager, SIGNAL(dataChanged()),
             this,     SLOT(dataChanged()));
 
-    foreach (const QContact & contact, manager.contacts()) {
+    foreach (const QContact & contact, d->manager->contacts()) {
         // TODO: Support contact groups later?
         if (contact.type() != QContactType::TypeContact) continue;
 
@@ -95,6 +100,7 @@ QtMobilityFeeder::QtMobilityFeeder(QObject * parent)
 
 QtMobilityFeeder::~QtMobilityFeeder()
 {
+    delete d->manager;
     delete d;
 }
 

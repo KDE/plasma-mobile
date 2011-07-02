@@ -27,7 +27,7 @@
 
 using namespace QtMobility;
 
-void addDummyContact(QContactManager & manager, const QString & name, const QString & email)
+void addDummyContact(QContactManager * manager, const QString & name, const QString & email)
 {
     QContact * c = new QContact();
 
@@ -39,10 +39,10 @@ void addDummyContact(QContactManager & manager, const QString & name, const QStr
     emailDetail->setEmailAddress(email);
     c->saveDetail(emailDetail);
 
-    manager.saveContact(c);
+    manager->saveContact(c);
 }
 
-void addDummyContacts(QContactManager & manager)
+void addDummyContacts(QContactManager * manager)
 {
     addDummyContact(manager,  "Ivan",    "john.doe@doctor.com");
     addDummyContact(manager,  "Mica",    "mica@gmail.com");
