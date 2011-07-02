@@ -22,6 +22,10 @@
 
 #include <QObject>
 
+namespace QtMobility {
+    class QContact;
+} // namespace QtMobility
+
 namespace Contour {
 
 class QtMobilityFeederPrivate;
@@ -37,6 +41,9 @@ public:
     virtual ~QtMobilityFeeder();
 
 private:
+    void updateContact(const QtMobility::QContact & contact);
+
+
     class QtMobilityFeederPrivate * const d;
 };
 

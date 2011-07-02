@@ -78,26 +78,7 @@ QtMobilityFeeder::QtMobilityFeeder(QObject * parent)
         // TODO: Support contact groups later?
         if (contact.type() != QContactType::TypeContact) continue;
 
-        Nepomuk::Resource contactRes(d->idToUri(contact.id()), NCO::Contact());
-
-        foreach(const QContactDetail & detail, contact.details()) {
-            kDebug() << detail;
-            const QString type = detail.definitionName();
-
-            // TODO: Feed other fields
-            if (type == "DisplayLabel") {
-                contactRes.setLabel(detail.value("Label"));
-
-            } else if (type == "Name") {
-                contactRes.setProperty(NCO::nameGiven(), Nepomuk::Variant(detail.value("FirstName")));
-                contactRes.setProperty(NCO::nameFamily(), Nepomuk::Variant(detail.value("LastName")));
-
-            } else if (type == "EmailAddress") {
-                // TODO: Multiple e-mail addresses
-                contactRes.setProperty(NCO::emailAddress(), Nepomuk::Variant(detail.value("EmailAddress")));
-
-            }
-        }
+        updateContact(contact);
     }
 
     kDebug() << "List ended";
@@ -106,6 +87,41 @@ QtMobilityFeeder::QtMobilityFeeder(QObject * parent)
 QtMobilityFeeder::~QtMobilityFeeder()
 {
     delete d;
+}
+
+void QtMobilityFeeder::updateContact(const QContact & contact)
+{
+    // To list all QtMobility contacts in Nepomuk, do:
+    // select ?contact, ?url where {
+    //     ?contact a nco:Contact .
+    //     ?contact nie:url ?url .
+    //     FILTER (regex(?url, '^qtcontacts') )
+    // }
+
+    const QString & contactResId = d->idToUri(contact.id());
+    Nepomuk::Resource contactRes(contactResId, NCO::Contact());
+
+    foreach(const QContactDetail & detail, contact.details()) {
+        kDebug() << detail;
+        const QString type = detail.definitionName();
+
+        // TODO: Feed other fields
+        if (type == "DisplayLabel") {
+            contactRes.setLabel(detail.value("Label"));
+
+        } else if (type == "Name") {
+            contactRes.setProperty(NCO::nameGiven(), Nepomuk::Variant(detail.value("FirstName")));
+            contactRes.setProperty(NCO::nameFamily(), Nepomuk::Variant(detail.value("LastName")));
+
+        } else if (type == "EmailAddress") {
+            // TODO: Multiple e-mail addresses
+            contactRes.setProperty(NCO::hasEmailAddress(),
+                    Nepomuk::Variant("mailto:" + detail.value("EmailAddress")));
+
+            // TODO: Remove this - leaving for debugging purposes
+            contactRes.setProperty(NCO::emailAddress(), Nepomuk::Variant(detail.value("EmailAddress")));
+        }
+    }
 }
 
 } // namespace Contour
