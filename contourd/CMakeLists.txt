@@ -48,6 +48,11 @@ soprano_add_ontology(recommendationmanager_SRC
     )
 
 soprano_add_ontology(recommendationmanager_SRC
+    ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nie.trig
+    "NIE" "Nepomuk::Vocabulary" "trig"
+    )
+
+soprano_add_ontology(recommendationmanager_SRC
     ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nco.trig
     "NCO" "Nepomuk::Vocabulary" "trig"
     )

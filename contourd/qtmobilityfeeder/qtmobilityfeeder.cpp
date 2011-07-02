@@ -29,6 +29,7 @@
 
 #include "nco.h"
 #include "nao.h"
+#include "nie.h"
 
 #include <KDebug>
 
@@ -115,6 +116,7 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
 
     const QString & contactResId = d->idToUri(contact.id());
     Nepomuk::Resource contactRes(contactResId, NCO::Contact());
+    contactRes.removeProperty(NCO::hasEmailAddress());
 
     foreach(const QContactDetail & detail, contact.details()) {
         kDebug() << detail;
@@ -133,17 +135,30 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
             Nepomuk::Resource emailRes("mailto:" + detail.value("EmailAddress"), NCO::EmailAddress());
             emailRes.setProperty(NCO::emailAddress(), Nepomuk::Variant(detail.value("EmailAddress")));
 
-            contactRes.setProperty(NCO::hasEmailAddress(), emailRes);
+            contactRes.addProperty(NCO::hasEmailAddress(), emailRes);
+
+        } else if (type == "Timestamp") {
+            contactRes.setProperty(NIE::lastModified(),
+                    detail.variantValue("ModificationTimestamp").toDateTime());
+            contactRes.setProperty(NIE::created(),
+                    detail.variantValue("CreationTimestamp").toDateTime());
+
         }
     }
 }
 
 void QtMobilityFeeder::contactsAdded(const QList < QContactLocalId > & contactIds)
 {
+    foreach (const QContactLocalId & id, contactIds) {
+        updateContact(d->manager->contact(id));
+    }
 }
 
 void QtMobilityFeeder::contactsChanged(const QList < QContactLocalId > & contactIds)
 {
+    foreach (const QContactLocalId & id, contactIds) {
+        updateContact(d->manager->contact(id));
+    }
 }
 
 void QtMobilityFeeder::contactsRemoved(const QList < QContactLocalId > & contactIds)

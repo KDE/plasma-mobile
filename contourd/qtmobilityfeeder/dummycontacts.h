@@ -24,31 +24,40 @@
 #include <QtContacts/QContact>
 #include <QtContacts/QContactName>
 #include <QtContacts/QContactEmailAddress>
+#include <QStringList>
 
 using namespace QtMobility;
 
-void addDummyContact(QContactManager * manager, const QString & name, const QString & email)
+void addDummyContact(QContactManager * manager, const QString & name, const QString & surname, const QStringList & emails)
 {
     QContact * c = new QContact();
 
     QContactName * nameDetail = new QContactName();
     nameDetail->setFirstName(name);
+    nameDetail->setLastName(surname);
     c->saveDetail(nameDetail);
 
-    QContactEmailAddress * emailDetail = new QContactEmailAddress();
-    emailDetail->setEmailAddress(email);
-    c->saveDetail(emailDetail);
+    foreach (const QString & email, emails) {
+        QContactEmailAddress * emailDetail = new QContactEmailAddress();
+        emailDetail->setEmailAddress(email);
+        c->saveDetail(emailDetail);
+    }
 
     manager->saveContact(c);
 }
 
+void addDummyContact(QContactManager * manager, const QString & name, const QString & surname, const QString & email)
+{
+    addDummyContact(manager, name, surname, QStringList() << email);
+}
+
 void addDummyContacts(QContactManager * manager)
 {
-    addDummyContact(manager,  "Ivan",    "john.doe@doctor.com");
-    addDummyContact(manager,  "Mica",    "mica@gmail.com");
-    addDummyContact(manager,  "Nikola",  "cuka@gmail.com");
-    addDummyContact(manager,  "Tamara",  "bch@gmail.com");
-    addDummyContact(manager,  "Anne",    "hath@gmail.com");
+    addDummyContact(manager,  "Ivan",    "Cukic",     "john.doe@doctor.com");
+    addDummyContact(manager,  "Mica",    "Zivic",     "mica@gmail.com");
+    addDummyContact(manager,  "Nikola",  "Jelic",     QStringList() << "cuka@gmail.com" << "mr02020@alas.rs");
+    addDummyContact(manager,  "Tamara",  "Mani",      "bch@gmail.com");
+    addDummyContact(manager,  "Anne",    "Hathaway",  "hath@gmail.com");
 
 }
 

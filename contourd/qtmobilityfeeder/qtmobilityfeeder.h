@@ -50,6 +50,7 @@ private Q_SLOTS:
 
 private:
     void updateContact(const QContact & contact);
+    void removeContact(const QContact & contact);
 
     class QtMobilityFeederPrivate * const d;
 };
