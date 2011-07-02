@@ -22,9 +22,9 @@
 
 #include <QObject>
 
-namespace QtMobility {
-    class QContact;
-} // namespace QtMobility
+#include <QtContacts/QContact>
+
+using namespace QtMobility;
 
 namespace Contour {
 
@@ -40,9 +40,14 @@ public:
     QtMobilityFeeder(QObject* parent = 0);
     virtual ~QtMobilityFeeder();
 
-private:
-    void updateContact(const QtMobility::QContact & contact);
+private Q_SLOTS:
+    void contactsAdded(const QList < QContactLocalId > & contactIds);
+    void contactsChanged(const QList < QContactLocalId > & contactIds);
+    void contactsRemoved(const QList < QContactLocalId > & contactIds);
+    void dataChanged();
 
+private:
+    void updateContact(const QContact & contact);
 
     class QtMobilityFeederPrivate * const d;
 };

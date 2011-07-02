@@ -74,6 +74,15 @@ QtMobilityFeeder::QtMobilityFeeder(QObject * parent)
     QContactManager manager("memory");
     ::addDummyContacts(manager);
 
+    connect(&manager, SIGNAL(contactsAdded(QList < QContactLocalId >)),
+            this,     SLOT(contactsAdded(QList < QContactLocalId >)));
+    connect(&manager, SIGNAL(contactsChanged(QList < QContactLocalId >)),
+            this,     SLOT(contactsChanged(QList < QContactLocalId >)));
+    connect(&manager, SIGNAL(contactsRemoved(QList < QContactLocalId >)),
+            this,     SLOT(contactsRemoved(QList < QContactLocalId >)));
+    connect(&manager, SIGNAL(dataChanged()),
+            this,     SLOT(dataChanged()));
+
     foreach (const QContact & contact, manager.contacts()) {
         // TODO: Support contact groups later?
         if (contact.type() != QContactType::TypeContact) continue;
@@ -121,6 +130,22 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
             contactRes.setProperty(NCO::hasEmailAddress(), emailRes);
         }
     }
+}
+
+void QtMobilityFeeder::contactsAdded(const QList < QContactLocalId > & contactIds)
+{
+}
+
+void QtMobilityFeeder::contactsChanged(const QList < QContactLocalId > & contactIds)
+{
+}
+
+void QtMobilityFeeder::contactsRemoved(const QList < QContactLocalId > & contactIds)
+{
+}
+
+void QtMobilityFeeder::dataChanged()
+{
 }
 
 } // namespace Contour
