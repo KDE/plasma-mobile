@@ -115,11 +115,10 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
 
         } else if (type == "EmailAddress") {
             // TODO: Multiple e-mail addresses
-            contactRes.setProperty(NCO::hasEmailAddress(),
-                    Nepomuk::Variant("mailto:" + detail.value("EmailAddress")));
+            Nepomuk::Resource emailRes("mailto:" + detail.value("EmailAddress"), NCO::EmailAddress());
+            emailRes.setProperty(NCO::emailAddress(), Nepomuk::Variant(detail.value("EmailAddress")));
 
-            // TODO: Remove this - leaving for debugging purposes
-            contactRes.setProperty(NCO::emailAddress(), Nepomuk::Variant(detail.value("EmailAddress")));
+            contactRes.setProperty(NCO::hasEmailAddress(), emailRes);
         }
     }
 }
