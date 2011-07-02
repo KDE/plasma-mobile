@@ -44,8 +44,11 @@ void addDummyContact(QContactManager & manager, const QString & name, const QStr
 
 void addDummyContacts(QContactManager & manager)
 {
-    addDummyContact(manager, "Ivan", "john.doe@doctor.com");
-    addDummyContact(manager, "Mica", "mica@gmail.com");
+    addDummyContact(manager,  "Ivan",    "john.doe@doctor.com");
+    addDummyContact(manager,  "Mica",    "mica@gmail.com");
+    addDummyContact(manager,  "Nikola",  "cuka@gmail.com");
+    addDummyContact(manager,  "Tamara",  "bch@gmail.com");
+    addDummyContact(manager,  "Anne",    "hath@gmail.com");
 
 }
 

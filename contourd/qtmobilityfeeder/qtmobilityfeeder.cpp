@@ -25,6 +25,7 @@
 #include <QtContacts/QContactEmailAddress>
 
 #include <Nepomuk/Resource>
+#include <Nepomuk/Variant>
 
 #include "nco.h"
 #include "nao.h"
@@ -34,6 +35,7 @@
 #include "dummycontacts.h"
 
 using namespace QtMobility;
+using namespace Nepomuk::Vocabulary;
 
 namespace Contour {
 
@@ -68,15 +70,34 @@ QtMobilityFeeder::QtMobilityFeeder(QObject * parent)
     kDebug() << QContactManager::buildUri(
             "memory", QMap < QString, QString > ());
 
-    // TODO: Remove this and change to real address book model
+    // TODO: Remove this and change to a real address book model
     QContactManager manager("memory");
     ::addDummyContacts(manager);
 
     foreach (const QContact & contact, manager.contacts()) {
-        kDebug() << contact.id();
+        // TODO: Support contact groups later?
+        if (contact.type() != QContactType::TypeContact) continue;
 
-        QString uri = d->idToUri(contact.id());
-        d->uriToId(uri);
+        Nepomuk::Resource contactRes(d->idToUri(contact.id()), NCO::Contact());
+
+        foreach(const QContactDetail & detail, contact.details()) {
+            kDebug() << detail;
+            const QString type = detail.definitionName();
+
+            // TODO: Feed other fields
+            if (type == "DisplayLabel") {
+                contactRes.setLabel(detail.value("Label"));
+
+            } else if (type == "Name") {
+                contactRes.setProperty(NCO::nameGiven(), Nepomuk::Variant(detail.value("FirstName")));
+                contactRes.setProperty(NCO::nameFamily(), Nepomuk::Variant(detail.value("LastName")));
+
+            } else if (type == "EmailAddress") {
+                // TODO: Multiple e-mail addresses
+                contactRes.setProperty(NCO::emailAddress(), Nepomuk::Variant(detail.value("EmailAddress")));
+
+            }
+        }
     }
 
     kDebug() << "List ended";
