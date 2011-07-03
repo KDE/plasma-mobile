@@ -22,7 +22,7 @@ import QtQuick 1.0
 
 Flickable {
     id: tagCloud
-    width: 200
+    height: 200
     contentWidth: tagFlow.width
     contentHeight: tagFlow.height
     opacity: (searchField.searchQuery == "")?1:0.3
@@ -31,12 +31,13 @@ Flickable {
     anchors {
         left: parent.left
         top: parent.top
-        bottom: parent.bottom
+        right: parent.right
     }
     Flow {
         id: tagFlow
-        width: 200
+        height: 200
         spacing: 8
+        flow: Flow.TopToBottom
 
         Text {
             id: everythingTag

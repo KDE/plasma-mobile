@@ -23,9 +23,13 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
 
-Item {
+Flickable {
+    id: main
     width: 400
     height: 150
+    contentWidth: content.width
+    contentHeight: content.height
+    clip: true
 
     MobileComponents.ResourceInstance {
         id: resourceInstance
@@ -39,57 +43,63 @@ Item {
         id: theme
     }
 
-    TagCloud {
-        id:tagCloud
-    }
-
-    MobileComponents.ViewSearch {
-        id: searchField
-
-        anchors {
-            left: tagCloud.right
-            right: parent.right
-            top:parent.top
+    Item {
+        id: content
+        width: main.width
+        height: main.height+200
+        TagCloud {
+            id:tagCloud
         }
-        
-        onSearchQueryChanged: {
-            if (searchQuery == "") {
-                runnerModel.setQuery(runnerModel.defaultQuery)
-            } else {
-                runnerModel.setQuery(searchQuery)
+        Component.onCompleted: contentY=200
+
+        MobileComponents.ViewSearch {
+            id: searchField
+
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: tagCloud.bottom
             }
-        }
-    }
-
-    MobileComponents.IconGrid {
-        id: appGrid
-        delegateWidth: 128
-        delegateHeight: 100
-        model: (searchField.searchQuery == "")?appModel:runnerModel
-        delegate: Component {
-            MobileComponents.ResourceDelegate {
-                width: appGrid.delegateWidth
-                height: appGrid.delegateHeight
-                property string className: "FileDataObject"
-                resourceType: "FileDataObject"
-                property string label: display
-                property string mimeType: "buh"
-                onPressed: {
-                    resourceInstance.uri = resourceUri
+            
+            onSearchQueryChanged: {
+                if (searchQuery == "") {
+                    runnerModel.setQuery(runnerModel.defaultQuery)
+                } else {
+                    runnerModel.setQuery(searchQuery)
                 }
-                onClicked: {
-                    appsView.clicked(url)
-                }
-
             }
         }
 
-        anchors {
-            left: tagCloud.right
-            right: parent.right
-            top: searchField.bottom
-            bottom: parent.bottom
-            margins: 4
+        MobileComponents.IconGrid {
+            id: appGrid
+            delegateWidth: 128
+            delegateHeight: 100
+            model: (searchField.searchQuery == "")?appModel:runnerModel
+            delegate: Component {
+                MobileComponents.ResourceDelegate {
+                    width: appGrid.delegateWidth
+                    height: appGrid.delegateHeight
+                    property string className: "FileDataObject"
+                    resourceType: "FileDataObject"
+                    property string label: display
+                    property string mimeType: "buh"
+                    onPressed: {
+                        resourceInstance.uri = resourceUri
+                    }
+                    onClicked: {
+                        appsView.clicked(url)
+                    }
+
+                }
+            }
+
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: searchField.bottom
+                bottom: parent.bottom
+                margins: 4
+            }
         }
     }
 }
