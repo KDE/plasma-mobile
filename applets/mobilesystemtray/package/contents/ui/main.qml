@@ -77,19 +77,21 @@ Item {
 
     function addApplet(applet, pos)
     {
-        if (applet.pluginName == "org.kde.appswitcher") {
-            applet.width = 50
-            applet.height = 36
-            switcherDialog.mainItem = applet
+        var component = Qt.createComponent("PlasmoidContainer.qml")
 
-            switcherDialog.setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
-            switcherDialog.x = 0
-            switcherDialog.y = 0
-            switcherDialog.visible = true
+        if (applet.pluginName == "org.kde.sharelikeconnect" ||
+            applet.pluginName == "digital-clock") {
+            applet.width = 120
+            applet.height = 32
+
+            var plasmoidContainer = component.createObject(rightPanel);
+            plasmoidContainer.parent = rightPanel
+            plasmoidContainer.anchors.top = rightPanel.top
+            plasmoidContainer.anchors.bottom = rightPanel.bottom
+            plasmoidContainer.applet = applet
             return
         }
 
-        var component = Qt.createComponent("PlasmoidContainer.qml");
         var plasmoidContainer = component.createObject(tasksRow, {"x": pos.x, "y": pos.y});
 
         var index = tasksRow.children.length
@@ -102,10 +104,6 @@ Item {
         plasmoidContainer.anchors.top = tasksRow.top
         plasmoidContainer.anchors.bottom = tasksRow.bottom
 
-    }
-
-    PlasmaCore.Dialog {
-        id: switcherDialog
     }
 
 
@@ -141,7 +139,7 @@ Item {
             id: tasksFlickable
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.left: parent.left
             clip: true
             interactive:true
             contentWidth: tasksRow.width
@@ -178,6 +176,14 @@ Item {
                         
                     }
                 }
+            }
+        }
+        Row {
+            id: rightPanel
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                right: parent.right
             }
         }
     }
