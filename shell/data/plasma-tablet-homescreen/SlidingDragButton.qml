@@ -47,7 +47,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     property bool dragging: false
 
     onPressed: {
-        if (mouse.y < height-200 || (mouse.y > height - 33 && mouse.x < iconItem.x)) {
+        if ((mouse.y > height - 33 && mouse.x < iconItem.x)) {
             dragging = false
             return
         }
@@ -83,8 +83,11 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
             } else {
                 systrayPanel.state = "Hidden"
             }
+        //the biggest one, Launcher
+        } else if (slidingPanel.y > -100) {
+            systrayPanel.state = "Launcher"
         //more than 2/3 of the screen uncovered, full
-        } else if (systrayPanel.height+slidingPanel.y > 2*systrayPanel.height/3) {
+        } else if (systrayPanel.height+slidingPanel.y > systrayPanel.height/2) {
             systrayPanel.state = "Full"
         //more then 1/4 of the screen uncovered, taskbar
         } else if (systrayPanel.height+slidingPanel.y > systrayPanel.height/4) {

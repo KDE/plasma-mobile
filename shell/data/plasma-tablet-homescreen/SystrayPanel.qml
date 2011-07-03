@@ -25,7 +25,7 @@ Item {
     id: systrayPanel
     state: "Hidden"
     width: Math.max(800, homeScreen.width)
-    height: Math.max(480, homeScreen.height+background.margins.bottom)
+    height: Math.max(480, homeScreen.height+background.margins.bottom+200)
 
     PlasmaCore.FrameSvgItem {
         id: background
@@ -62,6 +62,18 @@ Item {
                     right: parent.right
                 }
                 height: parent.height - systrayContainer.height - windowListContainer.height - 2
+                PlasmaCore.SvgItem {
+                    svg: PlasmaCore.Svg {
+                        imagePath: "widgets/extender-background"
+                    }
+                    elementId: "top"
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
+                    }
+                    height: 16
+                }
             }
             PlasmoidContainer {
                 id: windowListContainer
@@ -69,7 +81,7 @@ Item {
                     left: parent.left
                     right: parent.right
                 }
-                height: parent.height/4
+                height: 150
             }
             Item {
                 width: 2
@@ -90,6 +102,17 @@ Item {
     states:  [
         State {
             name: "Full"
+            PropertyChanges {
+                target: slidingPanel
+                y: -200
+            }
+            PropertyChanges {
+                target: slidingPanel
+                acceptsFocus: true
+            }
+        },
+        State {
+            name: "Launcher"
             PropertyChanges {
                 target: slidingPanel
                 y: 0
