@@ -62,7 +62,9 @@ Item {
 
     Rectangle {
         anchors.bottom: bg.bottom
-        x: 18; height: 4; color: "#63b1ed"
+        x: 18
+        height: urlText.height
+        color: "#63b1ed"
         width: (bg.width - 20) * webView.progress
         opacity: webView.progress == 1.0 ? 0.0 : 1.0
     }
