@@ -144,7 +144,8 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
              activityId = d->activityConsumer->currentActivity();
          } else {
              activityId = name.split(":").last();
-        }
+         }
+
          kWarning() << "Asking for resources of activity" << activityId;
          Nepomuk::Resource acRes("activities://" + activityId);
          Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));

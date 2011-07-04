@@ -168,8 +168,9 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
                 }
             }
             //kDebug() << " ... " << key << propertyUrl << resource.property(propertyUrl).variant();
-            if (key != "plainTextMessageContent")
+            if (key != "plainTextMessageContent" && !data.contains(key)) {
                 data[key] = resource.property(propertyUrl).variant();
+            }
             // More properties
 
 
@@ -178,6 +179,7 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
         }
     }
     data["properties"] = _properties;
+
     setData(source, data);
 }
 
