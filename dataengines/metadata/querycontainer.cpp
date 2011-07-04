@@ -92,6 +92,22 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
 
     data["types"] = _types;
 
+    Nepomuk::Types::Class resClass(resource.resourceType());
+
+    //FIXME: a more elegant way is needed
+    data["genericClassName"] = resource.className();
+    foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
+        if (parentClass.label() == "Document" ||
+            parentClass.label() == "Audio" ||
+            parentClass.label() == "Video" ||
+            parentClass.label() == "Image") {
+            data["genericClassName"] = parentClass.label();
+            break;
+        } else if (parentClass.label() == "TextDocument") {
+            data["genericClassName"] = "Document";
+        }
+    }
+
     QString _icon = resource.genericIcon();
     if (_icon.isEmpty() && resource.isFile()) {
         QString urlProp = resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
