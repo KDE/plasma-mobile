@@ -49,7 +49,7 @@ Item {
 
         model: MobileComponents.CategorizedProxyModel {
             sourceModel: metadataModel
-            categoryRole: "className"
+            categoryRole: categoryListModel.categoryRole
             currentCategory: itemGroup.category
         }
 
