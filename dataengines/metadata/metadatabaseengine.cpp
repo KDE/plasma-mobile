@@ -101,7 +101,7 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         massagedName = "file://" + name;
     }
 
-    if (name.startsWith("ResourceType") && name.split(":").count() == 2) {
+    if (name.startsWith("ResourcesOfType") && name.split(":").count() == 2) {
         Nepomuk::Query::Query _query;
         //_query.setTerm(Nepomuk::Query::ResourceTypeTerm(Nepomuk::Vocabulary::NFO::Document()));
         _query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+name.split(":").last())));
@@ -139,11 +139,14 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
     //we want to list all resources liked to the current activity
     } else if (name.startsWith("CurrentActivityResources")) {
 
-         QString activityId = name.split(":").last();
-         if (activityId.isEmpty()) {
+         QString activityId;
+         if (name.split(":").count() < 2) {
              activityId = d->activityConsumer->currentActivity();
+         } else {
+             activityId = name.split(":").last();
         }
-         Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KExt::Activity());
+         kWarning() << "Asking for resources of activity" << activityId;
+         Nepomuk::Resource acRes("activities://" + activityId);
          Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
          term.setInverted(true);
          Nepomuk::Query::Query query = Nepomuk::Query::Query(term);
