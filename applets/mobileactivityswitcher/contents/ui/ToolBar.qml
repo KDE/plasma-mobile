@@ -27,18 +27,18 @@ PlasmaCore.FrameSvgItem {
 
     property alias query: filterField.text
 
-    imagePath: "widgets/background"
+    imagePath: "dialogs/background"
     enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-    width: childrenRect.width+margins.left+margins.right+16
+    width: childrenRect.width+margins.left+margins.right+96
     height: childrenRect.height+margins.top+margins.bottom
     anchors {
         top: parent.top
         right: parent.right
     }
     Row {
-        x: actionsToolBar.margins.left
+        x: actionsToolBar.margins.left+48
         y: actionsToolBar.margins.top
-        spacing: 24
+        spacing: 48
         MobileComponents.ActionButton {
             svg: iconsSvg
             elementId: "add"
