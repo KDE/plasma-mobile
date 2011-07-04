@@ -25,7 +25,7 @@
 #include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
 
-#define RESULT_LIMIT 24
+#define RESULT_LIMIT 84
 
 QueryContainer::QueryContainer(const Nepomuk::Query::Query &query, QObject *parent)
     : Plasma::DataContainer(parent),
