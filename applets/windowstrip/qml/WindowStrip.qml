@@ -139,8 +139,10 @@ Item {
                         id: windowTitle
                         anchors.bottom: parent.bottom
                         anchors.horizontalCenter: parent.horizontalCenter;
-                        text: className
+                        text: visibleName
+                        elide: Text.ElideMiddle
                         color: theme.textColor
+                        width: parent.width
                         font.bold: true
                     }
 
