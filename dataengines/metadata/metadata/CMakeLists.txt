@@ -17,7 +17,6 @@ set(metadataengine_srcs
 find_file(kext_onto_src kext.trig PATH_SUFFIXES "ontology/kde" PATHS ${CMAKE_INSTALL_PREFIX}/share ENV XDG_DATA_DIRS)
 soprano_add_ontology(metadataengine_srcs ${kext_onto_src} "KExt" "Nepomuk::Vocabulary" "trig")
 
-
 kde4_add_plugin(plasma_engine_active_metadata ${metadataengine_srcs})
 
 target_link_libraries(plasma_engine_active_metadata

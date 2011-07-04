@@ -50,6 +50,7 @@
 
 #include "querycontainer.h"
 #include "kext.h"
+#include <nepomuk/nfo.h>
 
 #define RESULT_LIMIT 24
 
@@ -100,8 +101,19 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         massagedName = "file://" + name;
     }
 
+    if (name.startsWith("ResourceType") && name.split(":").count() == 2) {
+        Nepomuk::Query::Query _query;
+        //_query.setTerm(Nepomuk::Query::ResourceTypeTerm(Nepomuk::Vocabulary::NFO::Document()));
+        _query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+name.split(":").last())));
+        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
+        if (!container) {
+            container = new QueryContainer(_query, this);
+        }
+        container->setObjectName(name);
+        addSource(container);
+        return true;
     //Simple case.. a single resource, don't need a DataContainer
-    if (massagedName.split("://").count() > 1) {
+    } else if (massagedName.split("://").count() > 1) {
         // We have a URL here, so we can create the results directly
         kDebug() << "Valid url ... creating resource synchronously";
         KUrl u = KUrl(massagedName);
