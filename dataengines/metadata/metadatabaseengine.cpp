@@ -103,8 +103,13 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
 
     if (name.startsWith("ResourcesOfType") && name.split(":").count() == 2) {
         Nepomuk::Query::Query _query;
-        //_query.setTerm(Nepomuk::Query::ResourceTypeTerm(Nepomuk::Vocabulary::NFO::Document()));
-        _query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+name.split(":").last())));
+        const QString type = name.split(":").last();
+        //FIXME: more elegant
+        if (type == "Contact") {
+            _query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+type)));
+        } else {
+            _query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+type)));
+        }
         QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
         if (!container) {
             container = new QueryContainer(_query, this);
