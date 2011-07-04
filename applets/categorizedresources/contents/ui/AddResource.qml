@@ -90,7 +90,7 @@ Rectangle {
             if (searchBox.searchQuery) {
                 metadataSource.connectedSources = [searchBox.searchQuery]
             } else {
-                metadataSource.connectedSources = ["everything"]
+                metadataSource.connectedSources = ["ResourcesOfType:Document"]
             }
        }
     }
@@ -151,10 +151,10 @@ Rectangle {
                     queryTimer.running = true
 
                     disappearAnimation.running = true
-                    
+                    /*
                     //FIXME: MEEGO BUG
                     metadataSource.connectedSources = ["x"]
-                    metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]
+                    metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]*/
                 }
             }
         }
