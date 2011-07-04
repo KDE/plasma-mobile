@@ -22,6 +22,7 @@ import QtQuick 1.0
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.qtextracomponents 0.1
 
 Rectangle {
     id: main
@@ -89,8 +90,9 @@ Rectangle {
        onTriggered: {
             if (searchBox.searchQuery) {
                 metadataSource.connectedSources = [searchBox.searchQuery]
+                resultsGrid.y = 0
             } else {
-                metadataSource.connectedSources = ["ResourcesOfType:Document"]
+                resultsGrid.y = -resultsGrid.height
             }
        }
     }
@@ -123,7 +125,9 @@ Rectangle {
                 queryTimer.running = true
             }
         }
-        MobileComponents.IconGrid {
+        Item {
+            id: resultsContainer
+            clip: true
             anchors {
                 left: parent.left
                 right:parent.right
@@ -133,28 +137,99 @@ Rectangle {
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
             }
-            model: metadataModel
-            delegate: MobileComponents.ResourceDelegate {
-                id: resourceDelegate
-                width: 130
-                height: 120
-                resourceType: model.resourceType
-                infoLabelVisible: false
 
-                onClicked: {
-                    print(resourceUri)
-                    var service = metadataSource.serviceForSource(metadataSource.connectedSources[0])
-                    var operation = service.operationDescription("connectToActivity")
-                    operation["ActivityUrl"] = plasmoid.activityId
-                    operation["ResourceUrl"] = resourceUri
-                    service.startOperationCall(operation)
-                    queryTimer.running = true
+            MobileComponents.IconGrid {
+                id: resultsGrid
+                anchors {
+                    left: parent.left
+                    right:parent.right
+                }
 
-                    disappearAnimation.running = true
-                    /*
-                    //FIXME: MEEGO BUG
-                    metadataSource.connectedSources = ["x"]
-                    metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]*/
+                Behavior on y {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+
+                QIconItem {
+                    icon: QIcon("go-up")
+                    width: 22
+                    height: 22
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            resultsGrid.y = -resultsGrid.height
+                        }
+                    }
+                }
+                Component.onCompleted: resultsGrid.y = -resultsGrid.height
+                height: resultsContainer.height
+                model: metadataModel
+                delegate: MobileComponents.ResourceDelegate {
+                    id: resourceDelegate
+                    width: 130
+                    height: 120
+                    resourceType: model.resourceType
+                    infoLabelVisible: false
+
+                    onClicked: {
+                        print(resourceUri)
+                        var service = metadataSource.serviceForSource(metadataSource.connectedSources[0])
+                        var operation = service.operationDescription("connectToActivity")
+                        operation["ActivityUrl"] = plasmoid.activityId
+                        operation["ResourceUrl"] = resourceUri
+                        service.startOperationCall(operation)
+                        queryTimer.running = true
+
+                        disappearAnimation.running = true
+                        /*
+                        //FIXME: MEEGO BUG
+                        metadataSource.connectedSources = ["x"]
+                        metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]*/
+                    }
+                }
+            }
+            GridView {
+                id: categoriesView
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: resultsGrid.bottom
+                }
+                height: resultsContainer.height
+
+                model: ListModel {
+                    ListElement {
+                        name: "Contacts"
+                        className: "Contact"
+                    }
+                    ListElement {
+                        name: "Documents"
+                        className: "Document"
+                    }
+                    ListElement {
+                        name: "Images"
+                        className: "Image"
+                    }
+                    ListElement {
+                        name: "Music"
+                        className: "Audio"
+                    }
+                    ListElement {
+                        name: "Videos"
+                        className: "Video"
+                    }
+                }
+                delegate: Text {
+                    text: name
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            metadataSource.connectedSources = ["ResourcesOfType:"+className]
+                            resultsGrid.y = 0
+                        }
+                    }
                 }
             }
         }

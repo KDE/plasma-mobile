@@ -151,6 +151,7 @@ Item {
                 var existingCategories = Array()
 
                 //FIXME: find a more efficient way
+                //destroy removed categories
                 for (var category in LayoutManager.itemGroups) {
                     if (categoryListModel.categories.indexOf(category) == -1) {
                         var item = LayoutManager.itemGroups[category]
@@ -161,6 +162,7 @@ Item {
                     }
                 }
 
+                //add newly created categories
                 for (var i = 0; i < categoryListModel.categories.length; ++i) {
                     var category = categoryListModel.categories[i]
                     if (!LayoutManager.itemGroups[category]) {
@@ -176,7 +178,7 @@ Item {
         MobileComponents.CategorizedProxyModel {
             id: categoryListModel
             sourceModel: metadataModel
-            categoryRole: "className"
+            categoryRole: "genericClassName"
             onCategoriesChanged: {
                 categoriesTimer.restart()
             }
