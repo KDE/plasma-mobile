@@ -203,30 +203,49 @@ Rectangle {
                     ListElement {
                         name: "Contacts"
                         className: "Contact"
+                        hasSymbol: "view-pim-contacts"
                     }
                     ListElement {
                         name: "Documents"
                         className: "Document"
+                        hasSymbol: "application-vnd.oasis.opendocument.text"
                     }
                     ListElement {
                         name: "Images"
                         className: "Image"
+                        hasSymbol: "image-x-generic"
                     }
                     ListElement {
                         name: "Music"
                         className: "Audio"
+                        hasSymbol: "audio-x-generic"
                     }
                     ListElement {
                         name: "Videos"
                         className: "Video"
+                        hasSymbol: "video-x-generic"
                     }
                 }
-                delegate: Text {
+                delegate: /*Text {
                     text: name
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
                             metadataSource.connectedSources = ["ResourcesOfType:"+className]
+                            resultsGrid.y = 0
+                        }
+                    }
+                }*/
+                 Component {
+                    MobileComponents.ResourceDelegate {
+                        width: 140
+                        height: 120
+                        property string className: "FileDataObject"
+                        resourceType: "FileDataObject"
+                        property string label: name
+                        property string mimeType: "x"
+                        onClicked: {
+                            metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
                             resultsGrid.y = 0
                         }
                     }
