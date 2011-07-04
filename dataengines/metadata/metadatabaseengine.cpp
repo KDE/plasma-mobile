@@ -49,6 +49,7 @@
 #include "metadataservice/metadataservice.h"
 
 #include "querycontainer.h"
+#include "kext.h"
 
 #define RESULT_LIMIT 24
 
@@ -130,7 +131,7 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
          if (activityId.isEmpty()) {
              activityId = d->activityConsumer->currentActivity();
         }
-         Nepomuk::Resource acRes("activities://" + name.split(":").last());
+         Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KExt::Activity());
          Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
          term.setInverted(true);
          Nepomuk::Query::Query query = Nepomuk::Query::Query(term);
