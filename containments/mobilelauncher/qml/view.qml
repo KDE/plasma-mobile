@@ -53,7 +53,7 @@ Item {
             right: parent.right
             top: tagCloud.bottom
         }
-        
+
         onSearchQueryChanged: {
             if (searchQuery == "") {
                 runnerModel.setQuery(runnerModel.defaultQuery)
