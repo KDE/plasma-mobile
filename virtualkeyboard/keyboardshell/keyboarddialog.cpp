@@ -49,6 +49,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     m_containment->setFormFactor(Plasma::Planar);
     m_containment->setLocation(Plasma::BottomEdge);
     KWindowSystem::setType(winId(), NET::Dock);
+    setAttribute(Qt::WA_X11DoNotAcceptFocus);
     QFileInfo info(pluginName);
     if (!info.isAbsolute()) {
         info = QFileInfo(QDir::currentPath() + "/" + pluginName);
@@ -198,6 +199,7 @@ Plasma::Direction KeyboardDialog::direction() const
 
 void KeyboardDialog::showEvent(QShowEvent *event)
 {
+    KWindowSystem::setType(winId(), NET::Dock);
     Plasma::Dialog::showEvent(event);
 
     //FIXME: this is an hack for the applet disabing itself in panic when doesn't immediately find a view
