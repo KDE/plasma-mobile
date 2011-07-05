@@ -47,6 +47,11 @@ Item {
         spacing: 32;
         orientation: Qt.Horizontal
 
+        Behavior on contentX {
+            enabled: !itemsList.moving
+            NumberAnimation {duration: 250}
+        }
+
         model: MobileComponents.CategorizedProxyModel {
             sourceModel: metadataModel
             categoryRole: categoryListModel.categoryRole
