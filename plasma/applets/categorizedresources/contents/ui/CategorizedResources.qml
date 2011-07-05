@@ -32,8 +32,6 @@ Item {
     width: 540
     height: 540
 
-    property bool browsingActivity: searchBox.text.length == 0
-
     property alias urls: metadataSource.connectedSources
 
     property Item currentGroup
@@ -41,6 +39,11 @@ Item {
 
     Component.onCompleted: {
         LayoutManager.restore()
+
+        //FIXME: why it arrives as a string?
+        if (plasmoid.readConfig("FirstStartup") == true) {
+            addResource.show()
+        }
     }
 
     PlasmaCore.Svg {
