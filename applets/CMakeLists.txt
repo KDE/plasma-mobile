@@ -1,3 +1,4 @@
+add_subdirectory(active-welcome)
 add_subdirectory(appswitcher)
 add_subdirectory(batterymonitor)
 #add_subdirectory(fakebattery)
