@@ -34,16 +34,6 @@ Item {
         containment = cont
     }
 
-    Timer {
-        id: notifyLoopTimer
-        repeat: true
-        interval: 1500
-        running: recommendationsPanel.state == "hidden" && appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus
-        onTriggered: {
-            hint.opacity = 1 - hint.opacity + 0.3
-        }
-    }
-
 
     MouseEventListener {
         id: hintregion;
@@ -68,7 +58,7 @@ Item {
         onReleased: {
             if (recommendationsPanel.x > -recommendationsPanel.width/3) {
                 recommendationsPanel.state = "show"
-                hintNotify.opacity = 0
+                //hintNotify.opacity = 0
                 //notifyLoopTimer.running = false
                 hideTimer.restart()
             } else {
@@ -85,16 +75,32 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             imagePath: "widgets/background"
             enabledBorders: "RightBorder|TopBorder|BottomBorder"
+            enabled: opacity==1
+
             PlasmaCore.SvgItem {
+                id: arrowSvgItem
                 width:32
                 height:32
                 svg: PlasmaCore.Svg {
                     imagePath: "widgets/arrows"
                 }
+                opacity: appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus?0:1
+                Behavior on opacity {
+                    NumberAnimation {duration: 250}
+                }
                 elementId: "right-arrow"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
                 anchors.rightMargin: hint.margins.right-5
+            }
+            Image {
+                id: hintNotify
+                source: "images/colored-right-arrow.png"
+                anchors.fill: arrowSvgItem
+                opacity: appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus?1:0
+                Behavior on opacity {
+                    NumberAnimation {duration: 250}
+                }
             }
             Behavior on opacity {
                 NumberAnimation {duration: 1000}
@@ -174,7 +180,7 @@ Item {
             }
             PropertyChanges {
                 target: hint;
-                opacity: 1;
+                opacity: appletStatusWatcher.status == AppletStatusWatcher.PassiveStatus?0.3:1;
             }
         },
         State {
