@@ -26,9 +26,10 @@
 #include <QDesktopWidget>
 #include <QFileInfo>
 #include <QDir>
-
+#include <QPushButton>
 
 #include <KWindowSystem>
+#include <KIcon>
 #include <KIconLoader>
 #include <KCmdLineArgs>
 
@@ -45,6 +46,13 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
       m_direction(Plasma::Up),
       m_rotation(0)
 {
+    m_closeButton = new QPushButton(this);
+    m_closeButton->setFlat(true);
+    m_closeButton->setIcon(KIcon("dialog-close"));
+    m_closeButton->setIconSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
+
+    connect(m_closeButton, SIGNAL(clicked()), this, SLOT(hide()));
+
     setContainment(containment);
     m_containment->setFormFactor(Plasma::Planar);
     m_containment->setLocation(Plasma::BottomEdge);
@@ -125,6 +133,8 @@ void KeyboardDialog::updateGeometry()
     QDesktopWidget *desktop = QApplication::desktop();
     m_containment->setGeometry(QRect(QPoint(0,0), desktop->size()));
     m_corona->setSceneRect(m_containment->geometry());
+    m_closeButton->setGeometry(width()-KIconLoader::SizeMedium, 0, KIconLoader::SizeMedium, KIconLoader::SizeMedium);
+    m_closeButton->raise();
 }
 
 void KeyboardDialog::setRotation(const int degrees)

@@ -33,6 +33,7 @@ namespace Plasma
 } // namespace Plasma
 
 class KeyboardDialog;
+class QPushButton;
 
 class KeyboardDialog : public Plasma::Dialog
 {
@@ -73,6 +74,7 @@ private:
     Plasma::Containment *m_containment;
     Plasma::Corona *m_corona;
     Plasma::Direction m_direction;
+    QPushButton *m_closeButton;
     int m_rotation;
 };
 
