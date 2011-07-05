@@ -36,7 +36,7 @@ Item {
         id: startPage
     }
 
-    Activities {
+    ActivitiesPage {
         id: activitiesPage
         anchors.fill: parent
         opacity: 0
