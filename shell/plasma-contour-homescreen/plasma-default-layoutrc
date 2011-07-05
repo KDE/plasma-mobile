@@ -101,6 +101,7 @@ plugin=digital-clock
 
 [Containments][20]
 activity=Network
+firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -118,6 +119,7 @@ wallpaperposition=2
 
 [Containments][21]
 activity=Grandma's birthday
+firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -134,6 +136,7 @@ wallpaperposition=2
 
 [Containments][22]
 activity=Managing Photos
+firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -150,6 +153,7 @@ wallpaperposition=2
 
 [Containments][22]
 activity=Diploma thesis
+firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -166,6 +170,7 @@ wallpaperposition=2
 
 [Containments][23]
 activity=Architecture project
+firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -182,6 +187,7 @@ wallpaperposition=2
 
 [Containments][24]
 activity=Barcelona trip
+firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -198,6 +204,7 @@ wallpaperposition=2
 
 [Containments][25]
 activity=My Diary
+firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
