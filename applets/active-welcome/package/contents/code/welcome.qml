@@ -34,28 +34,18 @@ Item {
     }
 
     StartPage {
-        anchors.fill: parent
         id: startPage
+        anchors.fill: parent
     }
 
     ActivitiesPage {
         id: activitiesPage
         anchors.fill: parent
-        //opacity: 0
     }
 
     MouseArea {
         anchors.fill: parent
         onClicked: nextPage()
-    }
-
-    function nextPage() {
-        print("next page ...");
-        if (welcome.state == "StartPage") {
-            welcome.state = "ActivitiesPage";
-        } else {
-            welcome.state = "StartPage";
-        }
     }
 
     states: [
@@ -70,5 +60,25 @@ Item {
             PropertyChanges { target: activitiesPage; opacity: 1.0}
         }
     ]
+
+    transitions: [
+        Transition {
+            from: "*"; to: "StartPage"
+            PropertyAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
+        },
+        Transition {
+            from: "*"; to: "ActivitiesPage"
+            PropertyAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
+        }
+    ]
+
+    function nextPage() {
+        print("next page ...");
+        if (welcome.state == "StartPage") {
+            welcome.state = "ActivitiesPage";
+        } else {
+            welcome.state = "StartPage";
+        }
+    }
 
 }
