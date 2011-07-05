@@ -28,6 +28,7 @@ Item {
     height: parent.height/1.5
     width: 350
     state: "show"
+    enabled: appletStatusWatcher.status == AppletStatusWatcher.PassiveStatus?false:true
 
     function addContainment(cont)
     {
@@ -40,6 +41,7 @@ Item {
 
         anchors.fill: parent
         anchors.rightMargin: -60
+        enabled: appletStatusWatcher.status == AppletStatusWatcher.PassiveStatus?false:true
 
         property int startX
         property int startMouseX
@@ -75,7 +77,6 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             imagePath: "widgets/background"
             enabledBorders: "RightBorder|TopBorder|BottomBorder"
-            enabled: opacity==1
 
             PlasmaCore.SvgItem {
                 id: arrowSvgItem
