@@ -55,6 +55,10 @@ void MouseEventListener::mouseReleaseEvent(QGraphicsSceneMouseEvent *me)
 
 bool MouseEventListener::sceneEventFilter(QGraphicsItem *item, QEvent *event)
 {
+    if (!isEnabled()) {
+        return false;
+    }
+
     switch (event->type()) {
     case QEvent::GraphicsSceneMousePress: {
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
