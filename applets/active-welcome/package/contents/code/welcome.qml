@@ -24,8 +24,10 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
+    id: welcome
     width: 200
     height: 300
+    state: "StartPage"
 
     PlasmaCore.Theme {
         id: theme
@@ -39,11 +41,34 @@ Item {
     ActivitiesPage {
         id: activitiesPage
         anchors.fill: parent
-        opacity: 0
+        //opacity: 0
     }
-    /*
-    Component.onCompleted: {
-        print("done loading.");
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: nextPage()
     }
-    */
+
+    function nextPage() {
+        print("next page ...");
+        if (welcome.state == "StartPage") {
+            welcome.state = "ActivitiesPage";
+        } else {
+            welcome.state = "StartPage";
+        }
+    }
+
+    states: [
+        State {
+            name: "StartPage"
+            PropertyChanges { target: startPage; opacity: 1.0}
+            PropertyChanges { target: activitiesPage; opacity: 0.0}
+        },
+        State {
+            name: "ActivitiesPage"
+            PropertyChanges { target: startPage; opacity: 0.0}
+            PropertyChanges { target: activitiesPage; opacity: 1.0}
+        }
+    ]
+
 }
