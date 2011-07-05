@@ -91,8 +91,16 @@ Item {
         svg: arrowsSvg
         elementId: "left-arrow"
         opacity: itemsList.atXBeginning?0.15:1
+        enabled: !itemsList.atXBeginning
         Behavior on opacity {
             NumberAnimation {duration: 250}
+        }
+        MouseArea {
+            anchors {
+                fill: parent
+                margins: -5
+            }
+            onClicked:  itemsList.contentX = itemsList.contentX-156
         }
     }
 
@@ -104,8 +112,16 @@ Item {
         svg: arrowsSvg
         elementId: "right-arrow"
         opacity: itemsList.atXEnd?0.15:1
+        enabled: !itemsList.atXEnd
         Behavior on opacity {
             NumberAnimation {duration: 250}
+        }
+        MouseArea {
+            anchors {
+                fill: parent
+                margins: -5
+            }
+            onClicked: itemsList.contentX = itemsList.contentX+156
         }
     }
 }
