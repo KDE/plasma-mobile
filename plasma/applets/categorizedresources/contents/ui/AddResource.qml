@@ -226,17 +226,7 @@ Rectangle {
                         hasSymbol: "video-x-generic"
                     }
                 }
-                delegate: /*Text {
-                    text: name
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            metadataSource.connectedSources = ["ResourcesOfType:"+className]
-                            resultsGrid.y = 0
-                        }
-                    }
-                }*/
-                 Component {
+                delegate: Component {
                     MobileComponents.ResourceDelegate {
                         width: 140
                         height: 120
