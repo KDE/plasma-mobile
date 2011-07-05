@@ -101,7 +101,7 @@ plugin=digital-clock
 
 [Containments][20]
 activity=Network
-firstStartup=false
+FirstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -112,6 +112,9 @@ screen=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
+[Containments][20][General]
+FirstStartup=false
+
 [Containments][20][Wallpaper][image]
 wallpaper=Horos
 wallpaperposition=2
@@ -119,7 +122,7 @@ wallpaperposition=2
 
 [Containments][21]
 activity=Grandma's birthday
-firstStartup=false
+FirstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -129,6 +132,9 @@ plugin=org.kde.contouractivityresources
 screen=-1
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
+
+[Containments][21][General]
+FirstStartup=false
 
 [Containments][21][Wallpaper][image]
 wallpaper=Blue_Wood
@@ -136,7 +142,6 @@ wallpaperposition=2
 
 [Containments][22]
 activity=Managing Photos
-firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -146,14 +151,16 @@ plugin=org.kde.contouractivityresources
 screen=-1
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
+
+[Containments][22][General]
+FirstStartup=false
 
 [Containments][22][Wallpaper][image]
 wallpaper=Grass
 wallpaperposition=2
 
-[Containments][22]
+[Containments][23]
 activity=Diploma thesis
-firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -164,30 +171,15 @@ screen=-1
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
-[Containments][23][Wallpaper][image]
-wallpaper=Stripes
-wallpaperposition=2
-
-[Containments][23]
-activity=Architecture project
-firstStartup=false
-desktop=-1
-formfactor=0
-geometry=0,0,800,480
-immutability=1
-location=1
-plugin=org.kde.categorizedResources
-screen=-1
-wallpaperplugin=image
-wallpaperpluginmode=SingleImage
+[Containments][23][General]
+FirstStartup=false
 
 [Containments][23][Wallpaper][image]
 wallpaper=Stripes
 wallpaperposition=2
 
 [Containments][24]
-activity=Barcelona trip
-firstStartup=false
+activity=Architecture project
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -197,14 +189,16 @@ plugin=org.kde.categorizedResources
 screen=-1
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
+
+[Containments][24][General]
+FirstStartup=false
 
 [Containments][24][Wallpaper][image]
 wallpaper=Stripes
 wallpaperposition=2
 
 [Containments][25]
-activity=My Diary
-firstStartup=false
+activity=Barcelona trip
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -215,6 +209,28 @@ screen=-1
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
+[Containments][25][General]
+FirstStartup=false
+
 [Containments][25][Wallpaper][image]
+wallpaper=Stripes
+wallpaperposition=2
+
+[Containments][26]
+activity=My Diary
+desktop=-1
+formfactor=0
+geometry=0,0,800,480
+immutability=1
+location=1
+plugin=org.kde.categorizedResources
+screen=-1
+wallpaperplugin=image
+wallpaperpluginmode=SingleImage
+
+[Containments][26][General]
+FirstStartup=false
+
+[Containments][26][Wallpaper][image]
 wallpaper=Stripes
 wallpaperposition=2
