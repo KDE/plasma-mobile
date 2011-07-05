@@ -4,7 +4,6 @@ defaultContainment=org.kde.appletstrip
 [Containments][1]
 activity=
 excludeFromActivities=true
-firstStartup=false
 declarativeSlot=alternateSlot
 desktop=-1
 formfactor=0
@@ -24,7 +23,6 @@ wallpaperposition=2
 
 [Containments][2]
 activity=Web
-firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -37,19 +35,16 @@ zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
+[Containments][2][General]
+FirstStartup=false
+
 [Containments][2][Wallpaper][image]
 wallpaper=HorosGreen
 wallpaperposition=2
 
-[Containments][4][Applets][3]
-plugin=blackboard
-geometry=1200,0,300,300
-immutability=1
-zvalue=1
 
 [Containments][3]
 activity=SocialNetwork
-firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -61,6 +56,9 @@ screen=0
 zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
+
+[Containments][3][General]
+FirstStartup=false
 
 [Containments][3][Wallpaper][image]
 wallpaper=HorosGreen
@@ -95,6 +93,9 @@ screen=0
 zvalue=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
+
+[Containments][4][General]
+FirstStartup=false
 
 [Containments][4][Wallpaper][image]
 wallpaper=HorosGreen
