@@ -4,6 +4,7 @@ defaultContainment=org.kde.appletstrip
 [Containments][1]
 activity=
 excludeFromActivities=true
+firstStartup=false
 declarativeSlot=alternateSlot
 desktop=-1
 formfactor=0
@@ -23,6 +24,7 @@ wallpaperposition=2
 
 [Containments][2]
 activity=Web
+firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -47,6 +49,7 @@ zvalue=1
 
 [Containments][3]
 activity=SocialNetwork
+firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -80,6 +83,7 @@ launchersOnPopup=
 
 [Containments][4]
 activity=Multimedia
+firstStartup=false
 desktop=-1
 formfactor=0
 geometry=0,0,800,480

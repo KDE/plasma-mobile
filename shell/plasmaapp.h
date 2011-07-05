@@ -86,7 +86,6 @@ private Q_SLOTS:
     void showWidgetsExplorer();
     void showActivityConfiguration();
     void mainViewGeometryChanged();
-    void startupCompleted();
 
 private:
     MobCorona *m_corona;
@@ -110,7 +109,6 @@ private:
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
     QWeakPointer<ActivityConfiguration> m_activityConfiguration;
     bool m_isDesktop;
-    bool m_startupCompleted;
 };
 
 #endif // multiple inclusion guard
