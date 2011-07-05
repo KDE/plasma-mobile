@@ -35,12 +35,12 @@ Item {
 
     StartPage {
         id: startPage
-        anchors.fill: parent
+        width: welcome.width
     }
 
     ActivitiesPage {
         id: activitiesPage
-        anchors.fill: parent
+        width: welcome.width
     }
 
     MouseArea {
@@ -52,24 +52,39 @@ Item {
         State {
             name: "StartPage"
             PropertyChanges { target: startPage; opacity: 1.0}
-            PropertyChanges { target: activitiesPage; opacity: 0.0}
+            PropertyChanges { target: activitiesPage; opacity: 0.5}
+            PropertyChanges { target: startPage; x: welcome.x; y: welcome.y }
+            PropertyChanges { target: activitiesPage; x: (welcome.x + activitiesPage.width); y: welcome.y }
         },
         State {
             name: "ActivitiesPage"
-            PropertyChanges { target: startPage; opacity: 0.0}
+            PropertyChanges { target: startPage; opacity: 0.5}
             PropertyChanges { target: activitiesPage; opacity: 1.0}
+            PropertyChanges { target: activitiesPage; x: welcome.x; y: welcome.y }
+            //PropertyChanges { target: activitiesPage; x: (welcome.x - activitiesPage.width); y: welcome.y }
+            PropertyChanges { target: startPage; x: (welcome.x - activitiesPage.width); y: welcome.y }
         }
     ]
 
     transitions: [
         Transition {
             from: "*"; to: "StartPage"
-            PropertyAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
+            NumberAnimation { properties: "x,y"; easing.type: Easing.InOutElastic; duration: 800 }
+            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
         },
         Transition {
             from: "*"; to: "ActivitiesPage"
-            PropertyAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
+            //PropertyAnimation { properties: "x,y,opacity"; easing.type: Easing.InOutQuint; duration: 500 }
+            NumberAnimation { properties: "x,y"; easing.type: Easing.InOutElastic; duration: 800 }
+            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
         }
+        /*
+        ,
+
+        Transition {
+            NumberAnimation { properties: "x,y"; duration: 500 }
+        }
+        */
     ]
 
     function nextPage() {
