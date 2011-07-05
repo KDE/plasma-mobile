@@ -24,26 +24,32 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
-    width: 200
+    width: 400
     height: 300
 
     PlasmaCore.Theme {
         id: theme
     }
 
-    StartPage {
+    Column {
         anchors.fill: parent
-        id: startPage
-    }
+        Text {
+            width: parent.width
+            id: title
+            text: i18n("<h1>At your Fingertips...</h1>")
+            color: theme.textColor
+            style: Text.Sunken
+            styleColor: theme.backgroundColor
+        }
 
-    Activities {
-        id: activitiesPage
-        anchors.fill: parent
-        opacity: 0
+        Text {
+            id: description
+            width: parent.width
+            wrapMode: Text.WordWrap
+            text: i18n("<p>Use the Activity Switcher on the right to organize your tasks and events. Connect documents, locations, websites and much more with each other and never lose track again.</p>")
+            color: theme.textColor
+            style: Text.Sunken
+            styleColor: theme.backgroundColor
+        }
     }
-    /*
-    Component.onCompleted: {
-        print("done loading.");
-    }
-    */
 }

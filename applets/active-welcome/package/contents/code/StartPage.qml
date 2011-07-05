@@ -24,26 +24,32 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
-    width: 200
+    width: 400
     height: 300
 
     PlasmaCore.Theme {
         id: theme
     }
 
-    StartPage {
+    Column {
         anchors.fill: parent
-        id: startPage
-    }
+        Text {
+            width: parent.width
+            id: title
+            text: i18n("<h1>Discover Plasma Active</h1>")
+            color: theme.textColor
+            style: Text.Sunken
+            styleColor: theme.backgroundColor
+        }
 
-    Activities {
-        id: activitiesPage
-        anchors.fill: parent
-        opacity: 0
+        Text {
+            id: description
+            width: parent.width
+            wrapMode: Text.WordWrap
+            text: i18n("<p>Plasma Active allows you to browse and interact with the web. Stay in contact with your friends, read the latest news, enjoy your music and movies.</p><p>Get the best out of your device with <i>Plasma Active</i>, download and install many popular and new apps. Stay in control of your data and shape your user experience.</p>")
+            color: theme.textColor
+            style: Text.Sunken
+            styleColor: theme.backgroundColor
+        }
     }
-    /*
-    Component.onCompleted: {
-        print("done loading.");
-    }
-    */
 }
