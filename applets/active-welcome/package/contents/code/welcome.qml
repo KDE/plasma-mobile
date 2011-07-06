@@ -19,6 +19,7 @@
  */
 
 import QtQuick 1.0
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
@@ -29,23 +30,43 @@ Item {
     height: 300
     state: "StartPage"
 
+    Item {
+        //anchors.fill: parent
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        id: contentArea
+        clip: true
+    }
+
+    QIconItem {
+        id: nextIcon
+        width: 64; height: 64
+        icon: QIcon("go-next")
+        anchors.top: contentArea.bottom
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: nextPage()
+        }
+
+    }
+
+
     PlasmaCore.Theme {
         id: theme
     }
 
     StartPage {
         id: startPage
-        width: welcome.width
+        width: contentArea.width
     }
 
     ActivitiesPage {
         id: activitiesPage
-        width: welcome.width
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: nextPage()
+        width: contentArea.width
     }
 
     states: [
@@ -53,16 +74,16 @@ Item {
             name: "StartPage"
             PropertyChanges { target: startPage; opacity: 1.0}
             PropertyChanges { target: activitiesPage; opacity: 0.5}
-            PropertyChanges { target: startPage; x: welcome.x; y: welcome.y }
-            PropertyChanges { target: activitiesPage; x: (welcome.x + activitiesPage.width); y: welcome.y }
+            PropertyChanges { target: startPage; x: contentArea.x; y: contentArea.y }
+            PropertyChanges { target: activitiesPage; x: (contentArea.x + activitiesPage.width); y: contentArea.y }
         },
         State {
             name: "ActivitiesPage"
             PropertyChanges { target: startPage; opacity: 0.5}
             PropertyChanges { target: activitiesPage; opacity: 1.0}
-            PropertyChanges { target: activitiesPage; x: welcome.x; y: welcome.y }
-            //PropertyChanges { target: activitiesPage; x: (welcome.x - activitiesPage.width); y: welcome.y }
-            PropertyChanges { target: startPage; x: (welcome.x - activitiesPage.width); y: welcome.y }
+            PropertyChanges { target: activitiesPage; x: contentArea.x; y: contentArea.y }
+            //PropertyChanges { target: activitiesPage; x: (contentArea.x - activitiesPage.width); y: contentArea.y }
+            PropertyChanges { target: startPage; x: (contentArea.x - activitiesPage.width); y: contentArea.y }
         }
     ]
 

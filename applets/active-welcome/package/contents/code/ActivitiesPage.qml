@@ -27,10 +27,6 @@ Item {
     width: 400
     height: 300
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     Column {
         anchors.fill: parent
         Text {
