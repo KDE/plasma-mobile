@@ -19,6 +19,7 @@
  */
 
 import QtQuick 1.0
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
@@ -46,6 +47,16 @@ Item {
             color: theme.textColor
             style: Text.Sunken
             styleColor: theme.backgroundColor
+        }
+
+        QIconItem {
+            width: 128
+            height: 128
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            icon: QIcon("start-here")
+            opacity: 0.1
+
         }
     }
 }

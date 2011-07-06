@@ -19,13 +19,11 @@
  */
 
 import QtQuick 1.0
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
     width: 400
-    height: 300
+    height: 500
 
     Column {
         anchors.fill: parent
@@ -46,6 +44,14 @@ Item {
             color: theme.textColor
             //style: Text.Sunken
             styleColor: theme.backgroundColor
+        }
+
+        Image {
+            id: exampleImage
+            scale: 0.4
+            source: plasmoid.file("images", "example_image.png")
+            anchors.top: description.top
+            anchors.right: description.right
         }
     }
 }
