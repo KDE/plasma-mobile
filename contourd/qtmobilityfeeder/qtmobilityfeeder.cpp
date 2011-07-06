@@ -127,8 +127,9 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
     // }
 
     const QString & contactResId = d->idToUri(contact.id());
-    Nepomuk::Resource contactRes(contactResId, NCO::Contact());
-    contactRes.removeProperty(NCO::hasEmailAddress());
+    Nepomuk::Resource contactResource(contactResId, NCO::Contact());
+    contactResource.removeProperty(NCO::hasEmailAddress());
+    contactResource.removeProperty(NCO::hasPhoneNumber());
 
     foreach(const QContactDetail & detail, contact.details()) {
         kDebug() << detail;
@@ -141,46 +142,46 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
 
         // TODO: Feed other fields
         if (type == QContactDisplayLabel::DefinitionName) {
-            contactRes.setLabel(detail.value(QContactDisplayLabel::FieldLabel));
+            contactResource.setLabel(detail.value(QContactDisplayLabel::FieldLabel));
 
         } else if (type == QContactName::DefinitionName) {
-            SET_PROPERTY(contactRes, NCO::nameGiven,            QContactName::FieldFirstName);
-            SET_PROPERTY(contactRes, NCO::nameFamily,           QContactName::FieldLastName);
-            SET_PROPERTY(contactRes, NCO::nameAdditional,       QContactName::FieldMiddleName);
-            SET_PROPERTY(contactRes, NCO::nameHonorificPrefix,  QContactName::FieldPrefix);
-            SET_PROPERTY(contactRes, NCO::nameHonorificSuffix,  QContactName::FieldSuffix);
+            SET_PROPERTY(contactResource, NCO::nameGiven,            QContactName::FieldFirstName);
+            SET_PROPERTY(contactResource, NCO::nameFamily,           QContactName::FieldLastName);
+            SET_PROPERTY(contactResource, NCO::nameAdditional,       QContactName::FieldMiddleName);
+            SET_PROPERTY(contactResource, NCO::nameHonorificPrefix,  QContactName::FieldPrefix);
+            SET_PROPERTY(contactResource, NCO::nameHonorificSuffix,  QContactName::FieldSuffix);
 
         } else if (type == QContactEmailAddress::DefinitionName) {
-            Nepomuk::Resource emailRes("mailto:" + detail.value(QContactEmailAddress::FieldEmailAddress), NCO::EmailAddress());
-            emailRes.setProperty(NCO::emailAddress(), detail.value(QContactEmailAddress::FieldEmailAddress));
+            Nepomuk::Resource emailResource("mailto:" + detail.value(QContactEmailAddress::FieldEmailAddress), NCO::EmailAddress());
+            emailResource.setProperty(NCO::emailAddress(), detail.value(QContactEmailAddress::FieldEmailAddress));
 
-            contactRes.addProperty(NCO::hasEmailAddress(), emailRes);
+            contactResource.addProperty(NCO::hasEmailAddress(), emailResource);
 
         } else if (type == QContactTimestamp::DefinitionName) {
-            SET_PROPERTY_VARIANT(contactRes, NIE::lastModified, QContactTimestamp::FieldModificationTimestamp, toDateTime);
-            SET_PROPERTY_VARIANT(contactRes, NIE::lastModified, QContactTimestamp::FieldCreationTimestamp, toDateTime);
+            SET_PROPERTY_VARIANT(contactResource, NIE::lastModified, QContactTimestamp::FieldModificationTimestamp, toDateTime);
+            SET_PROPERTY_VARIANT(contactResource, NIE::lastModified, QContactTimestamp::FieldCreationTimestamp, toDateTime);
 
         } else if (type == QContactAddress::DefinitionName) {
-            Nepomuk::Resource addressRes("mailto:" + detail.value(QContactEmailAddress::FieldEmailAddress), NCO::PostalAddress());
+            Nepomuk::Resource addressResource("mailto:" + detail.value(QContactEmailAddress::FieldEmailAddress), NCO::PostalAddress());
 
-            SET_PROPERTY(addressRes,  NCO::country,        QContactAddress::FieldCountry);
-            SET_PROPERTY(addressRes,  NCO::locality,       QContactAddress::FieldLocality);
-            SET_PROPERTY(addressRes,  NCO::pobox,          QContactAddress::FieldPostOfficeBox);
-            SET_PROPERTY(addressRes,  NCO::postalcode,     QContactAddress::FieldPostcode);
-            SET_PROPERTY(addressRes,  NCO::region,         QContactAddress::FieldRegion);
-            SET_PROPERTY(addressRes,  NCO::streetAddress,  QContactAddress::FieldStreet);
+            SET_PROPERTY(addressResource,  NCO::country,        QContactAddress::FieldCountry);
+            SET_PROPERTY(addressResource,  NCO::locality,       QContactAddress::FieldLocality);
+            SET_PROPERTY(addressResource,  NCO::pobox,          QContactAddress::FieldPostOfficeBox);
+            SET_PROPERTY(addressResource,  NCO::postalcode,     QContactAddress::FieldPostcode);
+            SET_PROPERTY(addressResource,  NCO::region,         QContactAddress::FieldRegion);
+            SET_PROPERTY(addressResource,  NCO::streetAddress,  QContactAddress::FieldStreet);
 
         } else if (type == QContactBirthday::DefinitionName) {
-            SET_PROPERTY_VARIANT(contactRes, NCO::birthDate, QContactBirthday::FieldBirthday, toDateTime);
+            SET_PROPERTY_VARIANT(contactResource, NCO::birthDate, QContactBirthday::FieldBirthday, toDateTime);
 
         } else if (type == QContactGender::DefinitionName) {
-            SET_PROPERTY(contactRes, NCO::gender, QContactGender::FieldGender);
+            SET_PROPERTY(contactResource, NCO::gender, QContactGender::FieldGender);
 
         } else if (type == QContactNickname::DefinitionName) {
-            SET_PROPERTY(contactRes, NCO::nickname, QContactNickname::FieldNickname);
+            SET_PROPERTY(contactResource, NCO::nickname, QContactNickname::FieldNickname);
 
         } else if (type == QContactNote::DefinitionName) {
-            SET_PROPERTY(contactRes, NCO::note, QContactNote::FieldNote);
+            SET_PROPERTY(contactResource, NCO::note, QContactNote::FieldNote);
 
         } else if (type == QContactPhoneNumber::DefinitionName) {
             Nepomuk::Resource phoneResource(detail.value(QContactPhoneNumber::FieldNumber), NCO::PhoneNumber());
@@ -208,16 +209,18 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
                     phoneResource.addType(NCO::VoicePhoneNumber());
             }
 
+            contactResource.addProperty(NCO::hasPhoneNumber(), phoneResource);
+
         } else if (type == QContactOnlineAccount::DefinitionName) {
 
         } else if (type == QContactTag::DefinitionName) {
-            contactRes.addTag(Nepomuk::Tag(detail.value(QContactTag::FieldTag)));
+            contactResource.addTag(Nepomuk::Tag(detail.value(QContactTag::FieldTag)));
 
         } else if (type == QContactUrl::DefinitionName) {
             if (detail.value(QContactUrl::FieldSubType) == QContactUrl::SubTypeBlog) {
-                SET_PROPERTY(contactRes, NCO::blogUrl, QContactUrl::FieldUrl);
+                SET_PROPERTY(contactResource, NCO::blogUrl, QContactUrl::FieldUrl);
             } else if (detail.value(QContactUrl::FieldSubType) == QContactUrl::SubTypeHomePage) {
-                SET_PROPERTY(contactRes, NCO::websiteUrl, QContactUrl::FieldUrl);
+                SET_PROPERTY(contactResource, NCO::websiteUrl, QContactUrl::FieldUrl);
             }
             // Not handling QContactUrl::SubTypeFavourite
 
