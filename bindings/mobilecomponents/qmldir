@@ -1,5 +1,6 @@
 plugin mobilecomponentsplugin
 ActionButton 0.1 ActionButton.qml
+IconButton 0.1 IconButton.qml
 IconGrid 0.1 IconGrid.qml
 IconDelegate 0.1 IconDelegate.qml
 Rating 0.1 Rating.qml
