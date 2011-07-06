@@ -1,6 +1,7 @@
 project(contourd)
 
-
+# This should be REQUIRED once we get rid of the hack below
+find_package(QtMobility)
 
 # build stuff
 # ===============================================================================================
@@ -15,6 +16,8 @@ include_directories(
 #hack to find qt-mobility includes. TODO: get cmake macro
   ${INCLUDE_INSTALL_DIR}/QtMobility
   ${INCLUDE_INSTALL_DIR}/QtMobility/QtMobility
+#this uses the cmake macro
+  ${QTMOBILITY_INCLUDE_DIR}
 )
 
 set(recommendationmanager_SRC
