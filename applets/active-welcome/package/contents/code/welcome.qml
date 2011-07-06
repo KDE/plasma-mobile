@@ -30,6 +30,7 @@ Item {
     width: 400
     height: 300
     state: "StartPage"
+    clip: true
 
     Item {
         //anchors.fill: parent
@@ -45,7 +46,6 @@ Item {
         icon: QIcon("go-previous")
         onClicked: previousPage();
 
-        anchors.top: contentArea.bottom
         anchors.left: parent.left
         anchors.bottom: parent.bottom
     }
@@ -55,7 +55,6 @@ Item {
         icon: QIcon("go-next")
         onClicked: nextPage();
 
-        anchors.top: contentArea.bottom
         anchors.right: parent.right
         anchors.bottom: parent.bottom
     }
@@ -86,9 +85,10 @@ Item {
             PropertyChanges { target: previousIcon; opacity: 0.0}
             PropertyChanges { target: startPage; opacity: 1.0}
             PropertyChanges { target: activitiesPage; opacity: 0.2}
+            PropertyChanges { target: appsPage; opacity: 0.2}
             PropertyChanges { target: startPage; x: contentArea.x; y: contentArea.y }
             PropertyChanges { target: activitiesPage; x: (contentArea.x + activitiesPage.width); y: contentArea.y }
-            PropertyChanges { target: appsPage; x: (contentArea.x - appsPage.width); y: contentArea.y }
+            PropertyChanges { target: appsPage; x: (contentArea.x + appsPage.width); y: contentArea.y }
         },
         State {
             name: "ActivitiesPage"
@@ -98,7 +98,7 @@ Item {
             PropertyChanges { target: activitiesPage; opacity: 1.0}
             PropertyChanges { target: activitiesPage; x: contentArea.x; y: contentArea.y }
             PropertyChanges { target: startPage; x: (contentArea.x - activitiesPage.width); y: contentArea.y }
-            PropertyChanges { target: appsPage; x: (contentArea.x - appsPage.width); y: contentArea.y }
+            PropertyChanges { target: appsPage; x: (contentArea.x + appsPage.width); y: contentArea.y }
         },
         State {
             name: "AppsPage"
