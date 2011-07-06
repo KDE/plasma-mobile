@@ -29,6 +29,7 @@
 #include <QtContacts/QContactName>
 #include <QtContacts/QContactNickname>
 #include <QtContacts/QContactNote>
+#include <QtContacts/QContactOnlineAccount>
 #include <QtContacts/QContactPhoneNumber>
 #include <QtContacts/QContactTag>
 #include <QtContacts/QContactTimestamp>
@@ -144,7 +145,6 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
 
         } else if (type == QContactName::DefinitionName) {
             SET_PROPERTY(contactRes, NCO::nameGiven,            QContactName::FieldFirstName);
-            SET_PROPERTY(contactRes, NCO::nameGiven,            QContactName::FieldFirstName);
             SET_PROPERTY(contactRes, NCO::nameFamily,           QContactName::FieldLastName);
             SET_PROPERTY(contactRes, NCO::nameAdditional,       QContactName::FieldMiddleName);
             SET_PROPERTY(contactRes, NCO::nameHonorificPrefix,  QContactName::FieldPrefix);
@@ -183,7 +183,32 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
             SET_PROPERTY(contactRes, NCO::note, QContactNote::FieldNote);
 
         } else if (type == QContactPhoneNumber::DefinitionName) {
+            Nepomuk::Resource phoneResource(detail.value(QContactPhoneNumber::FieldNumber), NCO::PhoneNumber());
 
+            SET_PROPERTY(phoneResource, NCO::hasPhoneNumber, QContactPhoneNumber::FieldNumber);
+
+            foreach (const QString & subType, ((QContactPhoneNumber)detail).subTypes()) {
+                if (subType == QContactPhoneNumber::SubTypeCar)
+                    phoneResource.addType(NCO::CarPhoneNumber());
+                else if (subType == QContactPhoneNumber::SubTypeFax)
+                    phoneResource.addType(NCO::FaxNumber());
+                else if (subType == QContactPhoneNumber::SubTypeLandline)
+                    phoneResource.addType(NCO::PhoneNumber());
+                else if (subType == QContactPhoneNumber::SubTypeMessagingCapable)
+                    phoneResource.addType(NCO::MessagingNumber());
+                else if (subType == QContactPhoneNumber::SubTypeMobile)
+                    phoneResource.addType(NCO::CellPhoneNumber());
+                else if (subType == QContactPhoneNumber::SubTypeModem)
+                    phoneResource.addType(NCO::ModemNumber());
+                else if (subType == QContactPhoneNumber::SubTypePager)
+                    phoneResource.addType(NCO::PagerNumber());
+                else if (subType == QContactPhoneNumber::SubTypeVideo)
+                    phoneResource.addType(NCO::VideoTelephoneNumber());
+                else if (subType == QContactPhoneNumber::SubTypeVoice)
+                    phoneResource.addType(NCO::VoicePhoneNumber());
+            }
+
+        } else if (type == QContactOnlineAccount::DefinitionName) {
 
         } else if (type == QContactTag::DefinitionName) {
             contactRes.addTag(Nepomuk::Tag(detail.value(QContactTag::FieldTag)));
@@ -202,7 +227,9 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
         // Not handling QContactAvatar, QContactFamily, QContactRingtone, QContactSyncTarget,
         //     QContactThumbnail not really important here
         // Not handling QContactGlobalPresence since it is volatile data
-        // TODO: Handle QContactFavorite, QContactOnlineAccount, QContactType
+        // TODO: QContactFavorite - needs support for fav resources in KAMD
+        // TODO: QContactOnlineAccount
+        // TODO: QContactType handling - we can support groups as well as normal contacts
         // TODO: Should we handle QContactGeoLocation, QContactOrganization
 
         #undef SET_PROPERTY_VARIANT
