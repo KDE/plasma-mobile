@@ -1,7 +1,9 @@
 [Desktop Entry]
 Name=Custom Metadata Search Dataengine
 Name[et]=Kohandatud metaandmete otsingu andmemootor
+Name[km]=ម៉ាស៊ីន​ស្វែងរក​ទិន្នន័យ​មេតា​ផ្ទាល់ខ្លួន
 Name[nl]=Aangepaste engine voor zoeken in metagegevens
+Name[pl]=Własny silnik danych do wyszukiwania metadanych
 Name[pt]=Motor de Dados de Pesquisa de Meta-Dados
 Name[pt_BR]=Motor de dados de pesquisa de meta-dados
 Name[sv]=Eget datagränssnitt för metadatasökning
@@ -11,6 +13,7 @@ Comment=Provides metadata for custom searches in semantic resources
 Comment[et]=Semantiliste ressurssides kohandatud otsingu metaandmed
 Comment[km]=ផ្ដល់​ទិន្នន័យ​មេតា​សម្រាប់​ការស្វែងរក​ផ្ទាល់ខ្លួន​នៅ​ក្នុង​ប្រភព​​ស៊ីមែនទិក
 Comment[nl]=Levert metagegevens voor aangepast zoeken in semantische hulpbronnen
+Comment[pl]=Dostarcza metadane dla własnych wyszukiwań w zasobach semantycznych
 Comment[pt]=Fornece meta-dados para pesquisas personalizadas nos recursos semânticos
 Comment[pt_BR]=Fornece meta-dados para pesquisas personalizadas nos recursos semânticos
 Comment[sv]=Tillhandahåller metadata för egna sökningar i semantiska resurser
