@@ -171,6 +171,8 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
             SET_PROPERTY(addressResource,  NCO::region,         QContactAddress::FieldRegion);
             SET_PROPERTY(addressResource,  NCO::streetAddress,  QContactAddress::FieldStreet);
 
+            contactResource.addProperty(NCO::hasPostalAddress(), addressResource);
+
         } else if (type == QContactBirthday::DefinitionName) {
             SET_PROPERTY_VARIANT(contactResource, NCO::birthDate, QContactBirthday::FieldBirthday, toDateTime);
 
@@ -212,6 +214,13 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
             contactResource.addProperty(NCO::hasPhoneNumber(), phoneResource);
 
         } else if (type == QContactOnlineAccount::DefinitionName) {
+
+            Nepomuk::Resource imResource(detail.value(QContactOnlineAccount::FieldAccountUri), NCO::IMAccount());
+
+            SET_PROPERTY(imResource, NCO::imAccountType, QContactOnlineAccount::FieldServiceProvider);
+            // TODO: Save something else?
+
+            contactResource.addProperty(NCO::hasIMAccount(), imResource);
 
         } else if (type == QContactTag::DefinitionName) {
             contactResource.addTag(Nepomuk::Tag(detail.value(QContactTag::FieldTag)));
