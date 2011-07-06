@@ -128,6 +128,17 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
 
     const QString & contactResId = d->idToUri(contact.id());
     Nepomuk::Resource contactResource(contactResId, NCO::Contact());
+
+    QContactTimestamp timestamp = contact.detail(QContactTimestamp::DefinitionName);
+
+    if (!timestamp.isEmpty()) {
+        if (timestamp.lastModified() <= contactResource.property(NIE::lastModified()).toDateTime()) {
+            return;
+        }
+    }
+
+    contactResource.setProperty(NIE::lastModified(), QDateTime::currentDateTime());
+
     contactResource.removeProperty(NCO::hasEmailAddress());
     contactResource.removeProperty(NCO::hasPhoneNumber());
 
