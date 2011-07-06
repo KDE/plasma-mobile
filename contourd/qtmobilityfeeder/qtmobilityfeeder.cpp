@@ -139,8 +139,11 @@ void QtMobilityFeeder::updateContact(const QContact & contact)
 
     contactResource.setProperty(NIE::lastModified(), QDateTime::currentDateTime());
 
+    // Deleting the non 1-1 stuff
     contactResource.removeProperty(NCO::hasEmailAddress());
     contactResource.removeProperty(NCO::hasPhoneNumber());
+    contactResource.removeProperty(NCO::hasPostalAddress());
+    contactResource.removeProperty(NCO::hasIMAccount());
 
     foreach(const QContactDetail & detail, contact.details()) {
         kDebug() << detail;
