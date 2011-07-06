@@ -47,8 +47,26 @@ PlasmaCore.FrameSvgItem {
             LayoutManager.setSpaceAvailable(x, y, parent.width, parent.height, true)
 
             debugFlow.refresh();
+
+
+            placeHolder.x = parent.x
+            placeHolder.y = parent.y
+            placeHolder.width = parent.width
+            placeHolder.height = parent.height
+            LayoutManager.positionItem(placeHolder)
+            LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
+            placeHolderPaint.opacity = 1
+        }
+        onPositionChanged: {
+            placeHolder.x = parent.x
+            placeHolder.y = parent.y
+            placeHolder.width = parent.width
+            placeHolder.height = parent.height
+            LayoutManager.positionItem(placeHolder)
+            LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
         }
         onReleased: {
+            placeHolderPaint.opacity = 0
             itemGroup.z = 0
             animationsEnabled = true
             LayoutManager.positionItem(parent)
