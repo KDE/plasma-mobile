@@ -75,6 +75,11 @@ Item {
         width: contentArea.width
     }
 
+    AppsPage {
+        id: appsPage
+        width: contentArea.width
+    }
+
     states: [
         State {
             name: "StartPage"
@@ -83,14 +88,27 @@ Item {
             PropertyChanges { target: activitiesPage; opacity: 0.2}
             PropertyChanges { target: startPage; x: contentArea.x; y: contentArea.y }
             PropertyChanges { target: activitiesPage; x: (contentArea.x + activitiesPage.width); y: contentArea.y }
+            PropertyChanges { target: appsPage; x: (contentArea.x - appsPage.width); y: contentArea.y }
         },
         State {
             name: "ActivitiesPage"
-            PropertyChanges { target: nextIcon; opacity: 0.0}
+            //PropertyChanges { target: nextIcon; opacity: 0.0}
             PropertyChanges { target: startPage; opacity: 0.2}
+            PropertyChanges { target: appsPage; opacity: 0.2}
             PropertyChanges { target: activitiesPage; opacity: 1.0}
             PropertyChanges { target: activitiesPage; x: contentArea.x; y: contentArea.y }
             PropertyChanges { target: startPage; x: (contentArea.x - activitiesPage.width); y: contentArea.y }
+            PropertyChanges { target: appsPage; x: (contentArea.x - appsPage.width); y: contentArea.y }
+        },
+        State {
+            name: "AppsPage"
+            PropertyChanges { target: nextIcon; opacity: 0.0}
+            PropertyChanges { target: startPage; opacity: 0.2}
+            PropertyChanges { target: activitiesPage; opacity: 0.2}
+            PropertyChanges { target: appsPage; opacity: 1.0}
+            PropertyChanges { target: appsPage; x: contentArea.x; y: contentArea.y }
+            PropertyChanges { target: startPage; x: (contentArea.x - startPage.width); y: contentArea.y }
+            PropertyChanges { target: activitiesPage; x: (contentArea.x - activitiesPage.width); y: contentArea.y }
         }
     ]
 
@@ -104,18 +122,27 @@ Item {
             from: "*"; to: "ActivitiesPage"
             NumberAnimation { properties: "x,y"; easing.type: Easing.InOutElastic; duration: 800 }
             NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
+        },
+        Transition {
+            from: "*"; to: "AppsPage"
+            NumberAnimation { properties: "x,y"; easing.type: Easing.InOutElastic; duration: 800 }
+            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
         }
     ]
 
     function previousPage() {
         if (welcome.state == "ActivitiesPage") {
             welcome.state = "StartPage";
+        } else if (welcome.state == "AppsPage") {
+            welcome.state = "ActivitiesPage";
         }
     }
 
     function nextPage() {
         if (welcome.state == "StartPage") {
             welcome.state = "ActivitiesPage";
+        } else if (welcome.state == "ActivitiesPage") {
+            welcome.state = "AppsPage";
         }
     }
 
