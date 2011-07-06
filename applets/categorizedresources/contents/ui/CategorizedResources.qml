@@ -252,6 +252,51 @@ Item {
                 LayoutManager.resultsFlow = resultsFlow
             }
         }
+        Item {
+            anchors.fill: resultsFlow
+            Item {
+                id: placeHolder
+                property bool animationsEnabled
+                width: 100
+                height: 100
+            }
+            Rectangle {
+                id: placeHolderPaint
+                x: placeHolder.x
+                y: placeHolder.y
+                width: placeHolder.width
+                height: placeHolder.height
+                z: 0
+                opacity: 0
+                radius: 8
+                smooth: true
+                color: Qt.rgba(1,1,1,0.3)
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+                Behavior on x {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+                Behavior on y {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            }
+        }
     }
 
     AddResource {
