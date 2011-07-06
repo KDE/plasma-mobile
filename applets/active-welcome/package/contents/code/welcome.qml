@@ -92,7 +92,6 @@ Item {
         },
         State {
             name: "ActivitiesPage"
-            //PropertyChanges { target: nextIcon; opacity: 0.0}
             PropertyChanges { target: startPage; opacity: 0.2}
             PropertyChanges { target: appsPage; opacity: 0.2}
             PropertyChanges { target: activitiesPage; opacity: 1.0}
