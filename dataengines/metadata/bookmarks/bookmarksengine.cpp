@@ -17,6 +17,13 @@
     02110-1301, USA.
 */
 
+// Qt
+#include <QIcon>
+#include <QImage>
+
+// KDE
+#include <KIcon>
+
 // Nepomuk
 #include <Nepomuk/Resource>
 #include <Nepomuk/Variant>
@@ -51,6 +58,10 @@ BookmarksEngine::~BookmarksEngine()
 
 bool BookmarksEngine::sourceRequestEvent(const QString &name)
 {
+    if (!sources().contains("fallbackImage")) {
+        QImage im = KIcon("nepomuk").pixmap(256, 256).toImage();
+        setData("fallbackImage", "fallbackImage", im);
+    }
     QString massagedName = name;
     if (name.startsWith("add:")) {
         //QString massagedName = name;
