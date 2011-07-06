@@ -26,7 +26,7 @@ import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
     id: welcome
-    width: 200
+    width: 400
     height: 300
     state: "StartPage"
 
@@ -39,19 +39,24 @@ Item {
         clip: true
     }
 
-    QIconItem {
+    IconButton {
+        id: previousIcon
+        icon: QIcon("go-previous")
+        onClicked: previousPage();
+
+        anchors.top: contentArea.bottom
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+    }
+
+    IconButton {
         id: nextIcon
-        width: 64; height: 64
         icon: QIcon("go-next")
+        onClicked: nextPage();
+
         anchors.top: contentArea.bottom
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: nextPage()
-        }
-
     }
 
 
@@ -72,17 +77,18 @@ Item {
     states: [
         State {
             name: "StartPage"
+            PropertyChanges { target: previousIcon; opacity: 0.0}
             PropertyChanges { target: startPage; opacity: 1.0}
-            PropertyChanges { target: activitiesPage; opacity: 0.5}
+            PropertyChanges { target: activitiesPage; opacity: 0.2}
             PropertyChanges { target: startPage; x: contentArea.x; y: contentArea.y }
             PropertyChanges { target: activitiesPage; x: (contentArea.x + activitiesPage.width); y: contentArea.y }
         },
         State {
             name: "ActivitiesPage"
-            PropertyChanges { target: startPage; opacity: 0.5}
+            PropertyChanges { target: nextIcon; opacity: 0.0}
+            PropertyChanges { target: startPage; opacity: 0.2}
             PropertyChanges { target: activitiesPage; opacity: 1.0}
             PropertyChanges { target: activitiesPage; x: contentArea.x; y: contentArea.y }
-            //PropertyChanges { target: activitiesPage; x: (contentArea.x - activitiesPage.width); y: contentArea.y }
             PropertyChanges { target: startPage; x: (contentArea.x - activitiesPage.width); y: contentArea.y }
         }
     ]
@@ -95,25 +101,20 @@ Item {
         },
         Transition {
             from: "*"; to: "ActivitiesPage"
-            //PropertyAnimation { properties: "x,y,opacity"; easing.type: Easing.InOutQuint; duration: 500 }
             NumberAnimation { properties: "x,y"; easing.type: Easing.InOutElastic; duration: 800 }
             NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
         }
-        /*
-        ,
-
-        Transition {
-            NumberAnimation { properties: "x,y"; duration: 500 }
-        }
-        */
     ]
 
+    function previousPage() {
+        if (welcome.state == "ActivitiesPage") {
+            welcome.state = "StartPage";
+        }
+    }
+
     function nextPage() {
-        print("next page ...");
         if (welcome.state == "StartPage") {
             welcome.state = "ActivitiesPage";
-        } else {
-            welcome.state = "StartPage";
         }
     }
 
