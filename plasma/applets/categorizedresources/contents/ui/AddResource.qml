@@ -28,6 +28,7 @@ Rectangle {
     id: main
     color: Qt.rgba(0, 0, 0, 0.4)
     opacity: 0
+    anchors.fill: parent
 
     function show()
     {
@@ -68,6 +69,9 @@ Rectangle {
                 duration: 250
                 to: 0
                 easing.type: "InOutCubic"
+            }
+            ScriptAction {
+                script: main.destroy
             }
         }
     }
