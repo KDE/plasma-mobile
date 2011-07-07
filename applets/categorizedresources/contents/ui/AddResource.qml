@@ -136,7 +136,7 @@ Rectangle {
                 left: parent.left
                 right:parent.right
                 top: searchBox.bottom
-                bottom: parent.bottom
+                bottom: buttonsRow.top
                 leftMargin: parent.margins.left
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
@@ -243,6 +243,34 @@ Rectangle {
                             resultsGrid.y = 0
                         }
                     }
+                }
+            }
+        }
+        Row {
+            id: buttonsRow
+            spacing: 8
+            anchors {
+                bottom: parent.bottom
+                horizontalCenter: parent.horizontalCenter
+                bottomMargin: dialog.margins.bottom
+            }
+
+            PlasmaWidgets.PushButton {
+                id: okButton
+
+                text: i18n("Add items")
+                onClicked : {
+                    disappearAnimation.running = true
+                }
+            }
+
+            PlasmaWidgets.PushButton {
+                id: closeButton
+
+                text: i18n("Cancel")
+
+                onClicked: {
+                    disappearAnimation.running = true
                 }
             }
         }
