@@ -115,7 +115,7 @@ Item {
         Item {
             id: contentItem
             width: mainFlickable.width
-            height: childrenRect.height
+            height: childrenRect.height+availScreenRect.y
 
             Item {
                 id: toolBar
@@ -235,6 +235,7 @@ Item {
                 id: resultsFlow
                 //height: Math.min(300, childrenRect.height)
                 width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
+                height: childrenRect.height
 
                 anchors {
                     top: toolBar.bottom
