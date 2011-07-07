@@ -257,6 +257,7 @@ Rectangle {
 
             PlasmaWidgets.PushButton {
                 id: okButton
+                visible: false
 
                 text: i18n("Add items")
                 onClicked : {
