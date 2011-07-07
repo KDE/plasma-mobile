@@ -37,13 +37,22 @@ Item {
     property Item currentGroup
     property int currentIndex: -1
 
+    property Item addResource
+
     Component.onCompleted: {
         LayoutManager.restore()
 
         //FIXME: why it arrives as a string?
         if (plasmoid.readConfig("FirstStartup") == true) {
-            addResource.show()
+            showAddResource()
         }
+    }
+
+    function showAddResource()
+    {
+        var component = Qt.createComponent("AddResource.qml");
+        main.addResource = component.createObject(main);
+        addResource.show()
     }
 
     PlasmaCore.Svg {
@@ -121,7 +130,7 @@ Item {
                 svg: iconsSvg
                 elementId: "add"
                 onClicked: {
-                    addResource.show()
+                    showAddResource()
                 }
                 text: i18n("Add item")
             }
@@ -297,11 +306,6 @@ Item {
                 }
             }
         }
-    }
-
-    AddResource {
-        id: addResource
-        anchors.fill: parent
     }
 
     Timer {
