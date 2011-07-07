@@ -219,6 +219,7 @@ function positionItem(item)
     setSpaceAvailable(x, y, width, height, false)
     item.x = x
     item.y = y
+    resultsFlow.height = Math.max(resultsFlow.height, y+cellSize.height)
 
     item.width = width
     item.height = height
