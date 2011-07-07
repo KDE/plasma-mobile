@@ -44,7 +44,6 @@ Item {
             wrapMode: Text.WordWrap
             text: i18n("<p>Use the Activity Switcher on the right to organize your tasks and events. Connect documents, locations, websites and much more with each other and never lose track again.</p>")
             color: theme.textColor
-            style: Text.Sunken
             styleColor: theme.backgroundColor
         }
     }

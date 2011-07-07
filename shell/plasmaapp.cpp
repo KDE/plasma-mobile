@@ -386,6 +386,9 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     if (m_containments.contains(containment->id()) || m_panelContainments.contains(containment->id())) {
         return;
     }
+
+    m_currentContainment = containment;
+
     QAction *addAction = containment->action("add widgets");
     if (addAction) {
         connect(addAction, SIGNAL(triggered()), this, SLOT(showWidgetsExplorer()));

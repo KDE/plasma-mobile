@@ -45,7 +45,6 @@ Item {
             wrapMode: Text.WordWrap
             text: i18n("<p>Plasma Active allows you to browse and interact with the web. Stay in contact with your friends, read the latest news, enjoy your music and movies.</p><p>Get the best out of your device with <i>Plasma Active</i>, download and install many popular and new apps. Stay in control of your data and shape your user experience.</p>")
             color: theme.textColor
-            style: Text.Sunken
             styleColor: theme.backgroundColor
         }
 
