@@ -39,6 +39,8 @@ Item {
 
     property Item addResource
 
+    property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
+
     Component.onCompleted: {
         LayoutManager.restore()
 
@@ -80,6 +82,21 @@ Item {
 
     }
 
+    PlasmaCore.DataModel {
+        id: metadataModel
+        keyRoleFilter: ".*"
+        dataSource: metadataSource
+    }
+
+    MobileComponents.CategorizedProxyModel {
+        id: categoryListModel
+        sourceModel: metadataModel
+        categoryRole: "genericClassName"
+        onCategoriesChanged: {
+            categoriesTimer.restart()
+        }
+    }
+
     MobileComponents.ResourceInstance {
         id: resourceInstance
     }
@@ -88,220 +105,217 @@ Item {
         id: theme
     }
 
-    Item {
-        property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
-
-
-        anchors.fill: parent
-        anchors.leftMargin: availScreenRect.x
-        anchors.topMargin: availScreenRect.y
-        anchors.rightMargin: parent.width - availScreenRect.width - availScreenRect.x
-        anchors.bottomMargin: parent.height - availScreenRect.height - availScreenRect.y
-
-
-        Text {
-            id: titleText
-            anchors.top: toolRow.top
-            anchors.left: parent.left
-            anchors.leftMargin: 72
-            text: plasmoid.activityName
-            font.bold: true
-            style: Text.Outline
-            styleColor: Qt.rgba(1, 1, 1, 0.6)
-            font.pixelSize: 25
-        }
-        Connections {
-            target: plasmoid
-            onActivityNameChanged: titleText.text = plasmoid.activityName
-        }
-
-
-        Row {
-            id: toolRow
-            spacing: 8
-            anchors {
-                top: parent.top
-                right: parent.right
-                topMargin: 12
-                rightMargin: 22
-            }
-
-            MobileComponents.ActionButton {
-                svg: iconsSvg
-                elementId: "add"
-                onClicked: {
-                    showAddResource()
-                }
-                text: i18n("Add item")
-            }
-
-            MobileComponents.ActionButton {
-                svg: iconsSvg
-                elementId: "configure"
-                action: plasmoid.action("configure")
-                text: i18n("Configure")
-                //FIXME: WHY?
-                Component.onCompleted: {
-                    action.enabled = true
-                }
-            }
-        }
-
-        PlasmaCore.DataModel {
-            id: metadataModel
-            keyRoleFilter: ".*"
-            dataSource: metadataSource
-        }
-
-        Timer {
-            id: categoriesTimer
-            repeat: false
-            running: false
-            interval: 2000
-            onTriggered: {
-                var component = Qt.createComponent("ItemGroup.qml")
-                var existingCategories = Array()
-
-                //FIXME: find a more efficient way
-                //destroy removed categories
-                for (var category in LayoutManager.itemGroups) {
-                    if (categoryListModel.categories.indexOf(category) == -1) {
-                        var item = LayoutManager.itemGroups[category]
-                        LayoutManager.setSpaceAvailable(item.x, item.y, item.width, item.height, true)
-                        item.destroy()
-                        delete LayoutManager.itemGroups[category]
-                        debugFlow.refresh();
-                    }
-                }
-
-                //add newly created categories
-                for (var i = 0; i < categoryListModel.categories.length; ++i) {
-                    var category = categoryListModel.categories[i]
-                    if (!LayoutManager.itemGroups[category]) {
-                        var itemGroup = component.createObject(resultsFlow)
-                        itemGroup.category = category
-                        LayoutManager.itemGroups[category] = itemGroup
-                    }
-                    existingCategories[existingCategories.length] = category
-                }
-            }
-        }
-
-        MobileComponents.CategorizedProxyModel {
-            id: categoryListModel
-            sourceModel: metadataModel
-            categoryRole: "genericClassName"
-            onCategoriesChanged: {
-                categoriesTimer.restart()
-            }
-        }
-
-        //FIXME: debug purposes only, remove asap
-        Flow {
-            id: debugFlow
-            anchors.fill: resultsFlow
-            visible: false
-            Repeater {
-                model: 60
-                Rectangle {
-                    width: LayoutManager.cellSize.width
-                    height: LayoutManager.cellSize.height
-                }
-            }
-            function refresh()
-            {
-                for (var i=0; i<debugFlow.children.length; ++i) {
-                    child = debugFlow.children[i]
-                    child.opacity = LayoutManager.availableSpace(child.x,child.y, LayoutManager.cellSize.width, LayoutManager.cellSize.height).width>0?0.8:0.3
-                }
-            }
-        }
+    Flickable {
+        id: mainFlickable
+        anchors.fill: main
+        interactive: true
+        contentWidth: contentItem.width
+        contentHeight: contentItem.height
 
         Item {
-            id: resultsFlow
-            //height: Math.min(300, childrenRect.height)
-            width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
+            id: contentItem
+            width: mainFlickable.width
+            height: childrenRect.height
 
-            anchors {
-                top: toolRow.bottom
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
+            Item {
+                id: toolBar
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    topMargin: availScreenRect.y
+                }
+                height: childrenRect.height
+                Text {
+                    id: titleText
+                    anchors {
+                        top: toolRow.top
+                        left: parent.left
+                        leftMargin: 72
+                    }
+                    text: plasmoid.activityName
+                    font.bold: true
+                    style: Text.Outline
+                    styleColor: Qt.rgba(1, 1, 1, 0.6)
+                    font.pixelSize: 25
+                }
+                Connections {
+                    target: plasmoid
+                    onActivityNameChanged: titleText.text = plasmoid.activityName
+                }
+
+                Row {
+                    id: toolRow
+                    spacing: 8
+                    anchors {
+                        top: parent.top
+                        right: parent.right
+                        topMargin: 12
+                        rightMargin: 22
+                    }
+
+                    MobileComponents.ActionButton {
+                        svg: iconsSvg
+                        elementId: "add"
+                        onClicked: {
+                            showAddResource()
+                        }
+                        text: i18n("Add item")
+                    }
+
+                    MobileComponents.ActionButton {
+                        svg: iconsSvg
+                        elementId: "configure"
+                        action: plasmoid.action("configure")
+                        text: i18n("Configure")
+                        //FIXME: WHY?
+                        Component.onCompleted: {
+                            action.enabled = true
+                        }
+                    }
+                }
             }
 
-
             Timer {
-                id: layoutTimer
+                id: categoriesTimer
                 repeat: false
                 running: false
                 interval: 2000
                 onTriggered: {
-                    LayoutManager.resetPositions()
-                    for (var i=0; i<resultsFlow.children.length; ++i) {
-                        child = resultsFlow.children[i]
-                        if (LayoutManager.itemsConfig[child.category]) {
-                            var rect = LayoutManager.itemsConfig[child.category]
-                            child.x = rect.x
-                            child.y = rect.y
-                            child.width = rect.width
-                            child.height = rect.height
-                        } else {
-                            child.x = 0
-                            child.y = 0
-                            child.width = Math.min(470, 32+child.categoryCount*140)
-                        }
+                    var component = Qt.createComponent("ItemGroup.qml")
+                    var existingCategories = Array()
 
-                        child.visible = true
-                        LayoutManager.positionItem(child)
-                        child.enabled = true
-                        debugFlow.refresh();
+                    //FIXME: find a more efficient way
+                    //destroy removed categories
+                    for (var category in LayoutManager.itemGroups) {
+                        if (categoryListModel.categories.indexOf(category) == -1) {
+                            var item = LayoutManager.itemGroups[category]
+                            LayoutManager.setSpaceAvailable(item.x, item.y, item.width, item.height, true)
+                            item.destroy()
+                            delete LayoutManager.itemGroups[category]
+                            debugFlow.refresh();
+                        }
+                    }
+
+                    //add newly created categories
+                    for (var i = 0; i < categoryListModel.categories.length; ++i) {
+                        var category = categoryListModel.categories[i]
+                        if (!LayoutManager.itemGroups[category]) {
+                            var itemGroup = component.createObject(resultsFlow)
+                            itemGroup.category = category
+                            LayoutManager.itemGroups[category] = itemGroup
+                        }
+                        existingCategories[existingCategories.length] = category
                     }
                 }
             }
-            Component.onCompleted: {
-                LayoutManager.resultsFlow = resultsFlow
+
+            //FIXME: debug purposes only, remove asap
+            Flow {
+                id: debugFlow
+                anchors.fill: resultsFlow
+                visible: false
+                Repeater {
+                    model: 60
+                    Rectangle {
+                        width: LayoutManager.cellSize.width
+                        height: LayoutManager.cellSize.height
+                    }
+                }
+                function refresh()
+                {
+                    for (var i=0; i<debugFlow.children.length; ++i) {
+                        child = debugFlow.children[i]
+                        child.opacity = LayoutManager.availableSpace(child.x,child.y, LayoutManager.cellSize.width, LayoutManager.cellSize.height).width>0?0.8:0.3
+                    }
+                }
             }
-        }
-        Item {
-            anchors.fill: resultsFlow
+
             Item {
-                id: placeHolder
-                property bool animationsEnabled
-                width: 100
-                height: 100
+                id: resultsFlow
+                //height: Math.min(300, childrenRect.height)
+                width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
+
+                anchors {
+                    top: toolBar.bottom
+                    horizontalCenter: parent.horizontalCenter
+                }
+
+
+                Timer {
+                    id: layoutTimer
+                    repeat: false
+                    running: false
+                    interval: 2000
+                    onTriggered: {
+                        LayoutManager.resetPositions()
+                        for (var i=0; i<resultsFlow.children.length; ++i) {
+                            child = resultsFlow.children[i]
+                            if (LayoutManager.itemsConfig[child.category]) {
+                                var rect = LayoutManager.itemsConfig[child.category]
+                                child.x = rect.x
+                                child.y = rect.y
+                                child.width = rect.width
+                                child.height = rect.height
+                            } else {
+                                child.x = 0
+                                child.y = 0
+                                child.width = Math.min(470, 32+child.categoryCount*140)
+                            }
+
+                            child.visible = true
+                            LayoutManager.positionItem(child)
+                            child.enabled = true
+                            debugFlow.refresh();
+                        }
+                    }
+                }
+                Component.onCompleted: {
+                    LayoutManager.resultsFlow = resultsFlow
+                }
             }
-            Rectangle {
-                id: placeHolderPaint
-                x: placeHolder.x
-                y: placeHolder.y
-                width: placeHolder.width
-                height: placeHolder.height
-                z: 0
-                opacity: 0
-                radius: 8
-                smooth: true
-                color: Qt.rgba(1,1,1,0.3)
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
+            Item {
+                anchors.fill: resultsFlow
+                Item {
+                    id: placeHolder
+                    property bool animationsEnabled
+                    width: 100
+                    height: 100
                 }
-                Behavior on x {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
+                Rectangle {
+                    id: placeHolderPaint
+                    x: placeHolder.x
+                    y: placeHolder.y
+                    width: placeHolder.width
+                    height: placeHolder.height
+                    z: 0
+                    opacity: 0
+                    radius: 8
+                    smooth: true
+                    color: Qt.rgba(1,1,1,0.3)
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
                     }
-                }
-                Behavior on y {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
+                    Behavior on x {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
                     }
-                }
-                Behavior on width {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
+                    Behavior on y {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+                    Behavior on width {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
                     }
                 }
             }
