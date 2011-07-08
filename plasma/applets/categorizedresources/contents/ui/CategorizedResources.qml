@@ -105,6 +105,26 @@ Item {
         id: theme
     }
 
+    Timer {
+        id: scrollTimer
+        running: false
+        interval: 40
+        repeat: true
+        property bool backwards
+        property Item draggingItem
+        onTriggered: {
+            if (backwards) {
+                if (mainFlickable.contentY > 0) {
+                    mainFlickable.contentY -= 10
+                    draggingItem.y -= 10
+                }
+            } else {
+                mainFlickable.contentY += 10
+                draggingItem.y += 10
+            }
+        }
+    }
+
     Flickable {
         id: mainFlickable
         anchors.fill: main

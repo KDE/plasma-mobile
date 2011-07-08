@@ -64,8 +64,22 @@ PlasmaCore.FrameSvgItem {
             placeHolder.height = parent.height
             LayoutManager.positionItem(placeHolder)
             LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
+
+            var globalPos = mapToItem(main, x, y)
+            if (!scrollTimer.running && globalPos.y < 100) {
+                scrollTimer.backwards = true
+                scrollTimer.running = true
+                scrollTimer.draggingItem = itemGroup
+            } else if (!scrollTimer.running && globalPos.y > main.height-100) {
+                scrollTimer.backwards = false
+                scrollTimer.running = true
+                scrollTimer.draggingItem = itemGroup
+            } else if (scrollTimer.running) {
+                scrollTimer.running = false
+            }
         }
         onReleased: {
+            scrollTimer.running = false
             placeHolderPaint.opacity = 0
             itemGroup.z = 0
             animationsEnabled = true
