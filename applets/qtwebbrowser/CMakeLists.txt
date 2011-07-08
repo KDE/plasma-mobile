@@ -20,6 +20,5 @@ install( TARGETS rekonq-active ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 # QML-only thing
 install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/qtwebbrowser PATTERN .svn EXCLUDE)
-install(FILES plasma-applet-qtwebbrowser.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES package/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-applet-qtwebbrowser.desktop)
 install(FILES active-web-browser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

@@ -6,8 +6,4 @@ install(
     PATTERN .svn EXCLUDE
 )
 
-install(
-    FILES
-        plasma-applet-mobilenetworkstatus.desktop
-    DESTINATION ${SERVICES_INSTALL_DIR}
-)
+install(FILES package/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-applet-mobilenetworkstatus.desktop)
