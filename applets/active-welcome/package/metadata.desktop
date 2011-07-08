@@ -2,6 +2,7 @@
 Name=org.kde.active.welcome
 Name[nl]=org.kde.active.welcome
 Name[pt]=org.kde.active.welcome
+Name[pt_BR]=org.kde.active.welcome
 Name[sv]=org.kde.active.welcome
 Name[x-test]=xxorg.kde.active.welcomexx
 Type=Service
