@@ -2,6 +2,11 @@ find_package(KDE4 REQUIRED)
 
 include(KDE4Defaults)
 
+MACRO(install_metadata_file metadata dest)
+   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${metadata} ${CMAKE_CURRENT_BINARY_DIR}/${dest} COPYONLY)
+   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${dest} DESTINATION ${SERVICES_INSTALL_DIR})
+ENDMACRO(install_metadata_file)
+
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(
    ${CMAKE_SOURCE_DIR}
