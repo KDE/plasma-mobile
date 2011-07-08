@@ -166,7 +166,7 @@ zvalue=10
 [Containments][8][Applets][9]
 geometry=0,0,48,32
 immutability=1
-plugin=org.kde.notifications
+plugin=notifications
 zvalue=0
 
 [Containments][8][Applets][10]
