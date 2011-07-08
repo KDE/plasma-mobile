@@ -98,6 +98,8 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
         // cache hit
         setPreview(name, preview);
         return true;
+    } else {
+        setData(name, Plasma::DataEngine::Data());
     }
 
     // It may be a directory or a file, let's stat
@@ -198,6 +200,7 @@ void PreviewEngine::setPreview(const QString &source, QImage preview)
     setData(source, "url", source);
     setData(source, "thumbnail", preview);
     scheduleSourcesUpdated();
+    //forceImmediateUpdateOfAllVisualizations();
 }
 
 #include "previewengine.moc"
