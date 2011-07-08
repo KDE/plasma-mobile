@@ -174,7 +174,6 @@ Rectangle {
                     id: resourceDelegate
                     width: 130
                     height: 120
-                    resourceType: model.resourceType
                     infoLabelVisible: false
 
                     onClicked: {
@@ -234,8 +233,8 @@ Rectangle {
                     MobileComponents.ResourceDelegate {
                         width: 140
                         height: 120
-                        property string className: "FileDataObject"
-                        resourceType: "FileDataObject"
+                        className: "FileDataObject"
+                        genericClassName: "FileDataObject"
                         property string label: name
                         property string mimeType: "x"
                         onClicked: {

@@ -68,7 +68,6 @@ Item {
             id: resourceDelegate
             width: 140
             height: itemsList.height
-            resourceType: model.resourceType
             infoLabelVisible: false
 
             onPressed: {
