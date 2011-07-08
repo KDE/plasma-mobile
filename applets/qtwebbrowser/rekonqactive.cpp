@@ -18,13 +18,18 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include <KAction>
 #include <KIcon>
+#include <KStandardAction>
+
 #include "rekonqactive.h"
 
 RekonqActive::RekonqActive(const QString &url)
     : KMainWindow()
 {
     setAcceptDrops(true);
+    addAction(KStandardAction::close(this, SLOT(close()), this));
+    addAction(KStandardAction::quit(this, SLOT(close()), this));
     m_widget = new View(url, this);
     restoreWindowSize(config("Window"));
     setCentralWidget(m_widget);
