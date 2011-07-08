@@ -59,6 +59,7 @@ Item {
         delegate: Flow {
             width: appsView.width
             height: appsView.height
+            property int orientation: ListView.Horizontal
             move: Transition {
                 NumberAnimation {
                     properties: "x,y"
