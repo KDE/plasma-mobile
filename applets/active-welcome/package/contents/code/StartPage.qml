@@ -54,7 +54,7 @@ Item {
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             icon: QIcon("start-here")
-            opacity: 0.1
+            opacity: 0.4
 
         }
     }
