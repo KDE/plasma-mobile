@@ -48,6 +48,7 @@ protected Q_SLOTS:
     void gotNewStartup(const KStartupInfoId& id, const KStartupInfoData& data);
     void gotStartupChange(const KStartupInfoId& id, const KStartupInfoData& data);
     void killStartup(const KStartupInfoId& id);
+    void windowAdded(WId id);
 
 private:
     BusyApp();
