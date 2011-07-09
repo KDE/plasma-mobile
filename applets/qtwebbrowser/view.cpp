@@ -24,26 +24,28 @@
 #include <QScriptValue>
 
 #include <KStandardDirs>
-
+#include <KUriFilter>
 #include "view.h"
 #include "kdebug.h"
 
 View::View(const QString &url, QWidget *parent)
     : QDeclarativeView(parent),
     m_options(new WebsiteOptions),
-    m_webBrowser(0)
+    m_webBrowser(0),
+    m_urlInput(0)
 {
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
     // Tell the script engine where to find the Plasma Quick components
     QStringList importPathes = KGlobal::dirs()->findDirs("lib", "kde4/imports");
     foreach (const QString &iPath, importPathes) {
-        //kDebug() << "Adding import path to engine:" << iPath;
         engine()->addImportPath(iPath);
     }
 
-    // Make the url passed in as argument known to the webbrowser component
-    //kDebug() << "Setting startupArguments to " << url;
-    rootContext()->setContextProperty("startupArguments", QVariant(QStringList(url)));
+    // Filter the supplied argument through KUriFilter and then
+    // make the resulting url known to the webbrowser component
+    // as startupArguments property
+    QVariant a = QVariant(QStringList(filterUrl(url)));
+    rootContext()->setContextProperty("startupArguments", a);
 
     // Locate the webbrowser QML component in the package
     // Note that this is a bit brittle, since it relies on the package name,
@@ -55,36 +57,52 @@ View::View(const QString &url, QWidget *parent)
     setSource(QUrl(qmlFile));
     //kDebug() << "Plugin pathes:" << engine()->pluginPathList();
     show();
+    rootContext()->setContextProperty("filteredUrl", QVariant(QString()));
 
-    m_webBrowser = rootObject()->findChild<QDeclarativeItem*>("webView");
+    onStatusChanged(status());
 
-    if (m_webBrowser) {
-        kDebug() << "connect ... OK!";
-        connect(m_webBrowser, SIGNAL(urlChanged()),
-                this, SLOT(urlChanged()));
-        connect(m_webBrowser, SIGNAL(titleChanged()),
-                this, SLOT(onTitleChanged()));
-    } else {
-        kError() << "!!! item not found. :((";
-    }
 
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
     connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
-            this, SLOT(handleError(QDeclarativeView::Status)));
+            this, SLOT(onStatusChanged(QDeclarativeView::Status)));
 }
 
 View::~View()
 {
 }
 
-void View::handleError(QDeclarativeView::Status status)
+void View::onStatusChanged(QDeclarativeView::Status status)
 {
-    kDebug() << "Exception in script.";
-    if (status == QDeclarativeView::Error) {
+    if (status == QDeclarativeView::Ready) {
+
+        if (!m_webBrowser && !m_urlInput) {
+            // Note that "webView" is defined as objectName in the QML file
+            m_webBrowser = rootObject()->findChild<QDeclarativeItem*>("webView");
+            if (m_webBrowser) {
+                connect(m_webBrowser, SIGNAL(urlChanged()),
+                        this, SLOT(urlChanged()));
+                connect(m_webBrowser, SIGNAL(titleChanged()),
+                        this, SLOT(onTitleChanged()));
+            } else {
+                kError() << "webView component not found. :(";
+            }
+
+            // Note that "urlInput" is defined as objectName in the QML file
+            m_urlInput = rootObject()->findChild<QDeclarativeItem*>("urlInput");
+            if (m_urlInput) {
+                connect(m_urlInput, SIGNAL(urlEntered(const QString&)),
+                        this, SLOT(onUrlEntered(const QString&)));
+            } else {
+                kError() << "urlInput component not found.";
+            }
+        }
+    } else if (status == QDeclarativeView::Error) {
         foreach (const QDeclarativeError &e, errors()) {
             kWarning() << "error in QML: " << e.toString() << e.description();
         }
-    }
+    } else if (status == QDeclarativeView::Loading) { 
+        //kDebug() << "Loading.";
+    } 
 }
 
 void View::urlChanged()
@@ -98,8 +116,24 @@ void View::onTitleChanged()
 {
     if (m_webBrowser) {
         m_options->title = m_webBrowser->property("title").toString();
-        kDebug() << "Title changed to: " << m_options->title;
+        //kDebug() << "Title changed to: " << m_options->title;
         emit titleChanged(m_options->title); // sets window caption
+    }
+}
+
+QString View::filterUrl(const QString &url)
+{
+    QString filteredUrl = KUriFilter::self()->filteredUri(url);
+    return filteredUrl;
+}
+
+void View::onUrlEntered(const QString &newUrl)
+{
+    QString filteredUrl = filterUrl(newUrl);
+    QDeclarativeItem *b = rootObject()->findChild<QDeclarativeItem*>("urlInput");
+    if (b) {
+        //kDebug() << "setting new property: filteredUrl : " << filteredUrl;
+        b->setProperty("filteredUrl", QVariant(filteredUrl));
     }
 }
 

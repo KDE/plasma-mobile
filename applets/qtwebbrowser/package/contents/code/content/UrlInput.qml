@@ -37,7 +37,9 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 Item {
     id: container
+    objectName: "urlInput"
 
+    property string filteredUrl: ""
     property alias image: bg.source
     property alias url: urlText.text
 
@@ -76,12 +78,11 @@ Item {
         font.pixelSize: 14;
 
         onTextChanged: {
-            //print("url changed to" + text);
             container.urlChanged();
         }
 
         onReturnPressed: {
-            container.urlEntered(tameUrl(urlText.text))
+            container.urlEntered(urlText.text)
             webView.focus = true
         }
 
@@ -91,12 +92,12 @@ Item {
         }
 
         Keys.onEnterPressed: {
-            container.urlEntered(tameUrl(urlText.text))
+            container.urlEntered(urlText.text)
             webView.focus = true
         }
 
         Keys.onReturnPressed: {
-            container.urlEntered(tameUrl(urlText.text))
+            container.urlEntered(urlText.text)
             webView.focus = true
         }
 
@@ -105,4 +106,10 @@ Item {
             verticalCenter: parent.verticalCenter
         }
     }
+
+    onFilteredUrlChanged: {
+        // the entered URL has been filtered by KUriFilter, load the result
+        loadUrl(filteredUrl);
+    }
+
 }
