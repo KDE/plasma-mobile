@@ -81,8 +81,8 @@ Item {
 
         if (applet.pluginName == "org.kde.sharelikeconnect" ||
             applet.pluginName == "digital-clock") {
+            applet.height = tasksRow.height
             applet.width = 120
-            applet.height = 32
 
             var plasmoidContainer = component.createObject(rightPanel);
             plasmoidContainer.parent = rightPanel
