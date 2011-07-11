@@ -100,7 +100,8 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
         if (parentClass.label() == "Document" ||
             parentClass.label() == "Audio" ||
             parentClass.label() == "Video" ||
-            parentClass.label() == "Image") {
+            parentClass.label() == "Image" ||
+            parentClass.label() == "Contact") {
             data["genericClassName"] = parentClass.label();
             break;
         } else if (parentClass.label() == "TextDocument") {
