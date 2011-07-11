@@ -107,6 +107,9 @@ Rectangle {
         dataSource: metadataSource
     }
 
+    ListModel {
+        id: selectedModel
+    }
 
     PlasmaCore.FrameSvgItem {
         id: dialog
@@ -180,6 +183,9 @@ Rectangle {
                         infoLabelVisible: false
 
                         onClicked: {
+                            selectedModel.append(model)
+                            return
+
                             print(resourceUri)
                             var service = metadataSource.serviceForSource(metadataSource.connectedSources[0])
                             var operation = service.operationDescription("connectToActivity")
@@ -251,8 +257,9 @@ Rectangle {
         }
         ListView {
             id: selectedResourcesList
-            model: 3
+            model: selectedModel
             orientation: ListView.Horizontal
+            clip: true
             anchors {
                 left: parent.left
                 right: parent.right
@@ -276,7 +283,7 @@ Rectangle {
 
             PlasmaWidgets.PushButton {
                 id: okButton
-                visible: false
+                enabled: selectedResourcesList.count>0
 
                 text: i18n("Add items")
                 onClicked : {
