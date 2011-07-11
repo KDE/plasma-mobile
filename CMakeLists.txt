@@ -11,11 +11,10 @@ include_directories(
    )
 
 add_subdirectory(applets)
+add_subdirectory(artwork)
 add_subdirectory(components)
 add_subdirectory(containments)
 add_subdirectory(dataengines)
-add_subdirectory(desktoptheme)
-add_subdirectory(mousetheme)
 add_subdirectory(mobilebusynotifier)
 add_subdirectory(virtualkeyboard)
 add_subdirectory(wallpapers)
