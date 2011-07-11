@@ -130,7 +130,9 @@ void MobileImage::setSingleImage()
         if (wallpaper != m_wallpaper) {
             setSingleImage();
         }
-    }kWarning()<<"OOOOOOOOOOOOOOOOOOOOO"<<img<<m_wallpaper;
+    }
+
+    kDebug() << "OOOOOOOOOOOOOOOOOOOOO" << img << m_wallpaper;
     m_wallpaperPath = img;
     emit wallpaperPathChanged();
 }
@@ -264,7 +266,7 @@ void MobileImage::removeWallpaper(QString name)
         m_usersWallpapers.removeAt(wallpaperIndex);
         m_model->reload(m_usersWallpapers);
         //TODO: save the configuration in the right way
-	emit settingsChanged(true);
+        emit settingsChanged(true);
     }
 }
 
