@@ -21,8 +21,10 @@
 #include "busywidget.h"
 
 #include <KCrash>
+#include <KDebug>
 #include <KLocale>
 #include <KIcon>
+#include <KWindowSystem>
 
 BusyApp* BusyApp::self()
 {
@@ -51,6 +53,8 @@ BusyApp::BusyApp()
     connect(m_startupInfo,
             SIGNAL(gotRemoveStartup(const KStartupInfoId&, const KStartupInfoData&)),
             SLOT(killStartup(const KStartupInfoId&)));
+
+    connect(KWindowSystem::self(), SIGNAL(windowAdded(WId)), this, SLOT(windowAdded(WId)));
 }
 
 BusyApp::~BusyApp()
@@ -72,6 +76,8 @@ void BusyApp::gotNewStartup( const KStartupInfoId& id, const KStartupInfoData& d
     m_busyWidget.data()->setWindowIcon(KIcon(data.findIcon()));
 
     m_busyWidget.data()->show();
+    KWindowSystem::activateWindow(m_busyWidget.data()->winId(), 500);
+    KWindowSystem::raiseWindow(m_busyWidget.data()->winId());
 }
 
 void BusyApp::gotStartupChange( const KStartupInfoId& id, const KStartupInfoData& data )
@@ -90,6 +96,15 @@ void BusyApp::killStartup( const KStartupInfoId& id )
     }
 
     m_busyWidget.data()->deleteLater();
+}
+
+void BusyApp::windowAdded(WId id)
+{
+    if (m_busyWidget) {
+        KWindowSystem::forceActiveWindow(id);
+        KWindowSystem::raiseWindow(id);
+    }
+    
 }
 
 #include "busyapp.moc"

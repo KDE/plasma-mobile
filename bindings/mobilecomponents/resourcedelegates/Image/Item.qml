@@ -1,14 +1,32 @@
- 
+/*
+ *   Copyright 2011 Marco Martin <mart@kde.org>
+ *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Library General Public License as
+ *   published by the Free Software Foundation; either version 2 or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details
+ *
+ *   You should have received a copy of the GNU Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
 import Qt 4.7
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
  
 Item {
     id: resourceItem
     anchors.fill: parent
-    property alias infoLabelVisible: infoLabel.visible
 
     PlasmaCore.Theme {
         id: theme
@@ -25,7 +43,7 @@ Item {
         //height: 128
         height: resourceItem.height
 
-        PlasmaWidgets.IconWidget {
+        QIconItem {
             id: previewImage
             height: 64
             width: 64
@@ -70,11 +88,11 @@ Item {
                 try {
                     var _l = hasSymbol.toString().split(",");
                     if (_l.length == 1) {
-                        setIcon(hasSymbol);
+                        icon = QIcon(hasSymbol);
                     } else if (_l.length > 1) {
                         // pick the last one
                         var _i = _l[_l.length-1];
-                        setIcon(_i);
+                        icon = QIcon(_i);
                     } else {
                         //print("HHH types" + types.toString());
                         resourceIcon(types.toString())
@@ -83,7 +101,7 @@ Item {
                 } catch(e) {
                     var _i = resourceIcon(className);
                     print("fallback icon: " + _i + e);
-                    setIcon(_i);
+                    icon = QIcon(_i);
                     print("icon2:" + _i);
                 }
             }
@@ -109,6 +127,7 @@ Item {
             //image: metadataSource.data[DataEngineSource]["fileName"]
             //text: "the long and winding road..."
             text: className
+            color: theme.textColor
             opacity: 0.8
             //font.pixelSize: font.pixelSize * 1.8
             font.pixelSize: 12
@@ -120,7 +139,7 @@ Item {
             anchors.bottom: itemFrame.bottom
             anchors.left: previewImage.right
             anchors.margins: 8
-
+            visible: infoLabelVisible
         }
     }
 }

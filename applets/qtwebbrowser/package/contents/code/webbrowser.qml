@@ -46,22 +46,21 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 import "content"
 
-Item {
+Rectangle {
     id: webBrowser
     objectName: "webBrowser"
 
     property string urlString : ""
-    //url: fixUrl(webBrowser.urlString)
     property alias url: webView.url
     property alias title: webView.title
 
     width: 800; height: 600
-    //color: "#343434"
+    color: "#343434"
     clip: true
 
     MobileComponents.ResourceInstance {
         id: resourceInstance
-        uri: url
+        uri: webBrowser.url
     }
 
     FlickableWebView {
@@ -90,8 +89,13 @@ Item {
         anchors { right: parent.right; rightMargin: 8; left: parent.left; bottom: parent.bottom }
     }
 
+    function loadUrl(filteredUrl) {
+        webBrowser.urlString = filteredUrl
+        webBrowser.focus = true
+        header.urlChanged = false
+    }
+
     Component.onCompleted: {
-        //print("+=================" + startupArguments);
         if (typeof startupArguments[0] != "undefined") {
             urlString = startupArguments[0];
         } else {

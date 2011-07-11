@@ -29,13 +29,16 @@ Item {
     onAppletChanged: {
         print(plasmoidContainer.applet)
         plasmoidContainer.applet.parent = plasmoidContainer
+        plasmoidContainer.applet.height = plasmoidContainer.height
         plasmoidContainer.applet.x=0
     }
 
     onHeightChanged: {
-        var ratio = plasmoidContainer.applet.size.width/plasmoidContainer.applet.size.height
-        plasmoidContainer.applet.height = plasmoidContainer.height
-        applet.width = ratio * height
+        //FIXME:: why -2?
+        plasmoidContainer.applet.height = height-2
+        if (plasmoidContainer.applet.minimumSize.width>0) {
+            plasmoidContainer.applet.width = plasmoidContainer.applet.preferredSize.width
+        }
         plasmoidContainer.width = plasmoidContainer.applet.width
     }
 }

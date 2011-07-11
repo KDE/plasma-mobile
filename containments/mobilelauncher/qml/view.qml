@@ -72,8 +72,8 @@ Item {
             MobileComponents.ResourceDelegate {
                 width: appGrid.delegateWidth
                 height: appGrid.delegateHeight
-                property string className: "FileDataObject"
-                resourceType: "FileDataObject"
+                className: "FileDataObject"
+                genericClassName: "FileDataObject"
                 property string label: display
                 property string mimeType: "buh"
                 onPressed: {

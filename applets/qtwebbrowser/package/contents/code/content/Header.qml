@@ -97,11 +97,6 @@ Image {
                 id: urlInput
                 anchors { left: nextButton.right; right: reloadButton.left; bottom: parent.bottom }
                 //image: "pics/display.png"
-                onUrlEntered: {
-                    webBrowser.urlString = url
-                    webBrowser.focus = true
-                    header.urlChanged = false
-                }
                 onUrlChanged: header.urlChanged = true
             }
 

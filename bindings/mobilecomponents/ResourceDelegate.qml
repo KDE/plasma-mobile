@@ -22,7 +22,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: delegateItem
-    property string resourceType
+    property string className: model["className"]
+    property string genericClassName: model["genericClassName"]
     property bool infoLabelVisible
 //    property int implicitWidth: itemLoader.item.implicitWidth
   //  property int implicitHeight: itemLoader.item.implicitHeight
@@ -44,12 +45,18 @@ Item {
 
         //FIXME: assuming the view is parent.parent is bad, it should have the view attached property (it appears it doesnt, why?)
         source: {
-                  if (!delegateItem.parent.parent || !delegateItem.view || delegateItem.parent.parent.orientation == ListView.Horizontal || delegateItem.view.cellHeight != undefined) {
-                      return fallback.resolvePath("resourcedelegates", [(resourceType.split("#")[1] + "/ItemHorizontal.qml"), "FileDataObject/ItemHorizontal.qml"])
-                  } else {
-                      return fallback.resolvePath("resourcedelegates", [(resourceType.split("#")[1] + "/Item.qml"), "FileDataObject/Item.qml"])
-                  }
-                }
+            var view = delegateItem.parent
+
+            if (view.orientation == undefined) {
+                view = delegateItem.parent.parent
+            }
+
+            if (!delegateItem.parent.parent || view == undefined || view.orientation == ListView.Horizontal || view.cellHeight != undefined) {
+                return fallback.resolvePath("resourcedelegates", [(className + "/ItemHorizontal.qml"), (genericClassName + "/ItemHorizontal.qml"), "FileDataObject/ItemHorizontal.qml"])
+            } else {
+                return fallback.resolvePath("resourcedelegates", [(className + "/Item.qml"), (genericClassName + "/Item.qml"), "FileDataObject/Item.qml"])
+            }
+        }
     }
 
     //FIXME: this mess is due to mousearea not having screen coordinates

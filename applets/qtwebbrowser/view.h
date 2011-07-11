@@ -65,11 +65,16 @@ Q_SIGNALS:
 private:
     WebsiteOptions *m_options;
     QDeclarativeItem* m_webBrowser;
+    QDeclarativeItem* m_urlInput;
 
 private Q_SLOTS:
-    void handleError(QDeclarativeView::Status status);
+    void onStatusChanged(QDeclarativeView::Status status);
     void urlChanged();
     void onTitleChanged();
+    void onUrlEntered(const QString&);
+
+private:
+    QString filterUrl(const QString &url);
 };
 
 #endif // VIEW_H
