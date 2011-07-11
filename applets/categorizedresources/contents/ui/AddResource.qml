@@ -183,7 +183,14 @@ Rectangle {
                         infoLabelVisible: false
 
                         onClicked: {
-                            selectedModel.append(model)
+
+                            var item = new Object
+                            for (i in model) {
+                                if (i != "index") {
+                                    item[i] = model[i]
+                                }
+                            }
+                            selectedModel.append(item)
                             return
 
                             print(resourceUri)
@@ -264,12 +271,17 @@ Rectangle {
                 left: parent.left
                 right: parent.right
                 bottom: buttonsRow.top
+                leftMargin: parent.margins.left
+                rightMargin: parent.margins.right
             }
-            height: count>1?120:0
+            height: count>0?120:0
             delegate: MobileComponents.ResourceDelegate {
                 width: 130
                 height: 120
                 infoLabelVisible: false
+                onClicked: {
+                    selectedModel.remove(index)
+                }
             }
         }
         Row {
@@ -283,7 +295,7 @@ Rectangle {
 
             PlasmaWidgets.PushButton {
                 id: okButton
-                enabled: selectedResourcesList.count>0
+                //enabled: selectedResourcesList.count>0
 
                 text: i18n("Add items")
                 onClicked : {
