@@ -127,6 +127,25 @@ Rectangle {
                 rightMargin: parent.margins.right
                 topMargin: parent.margins.top
             }
+            
+            QIconItem {
+                icon: QIcon("go-up")
+                width: 32
+                height: 32
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        resultsColumn.y = -resultsContainer.height
+                    }
+                }
+                opacity: resultsColumn.y==0?1:0
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            }
 
             onSearchQueryChanged: {
                 queryTimer.running = true
@@ -162,17 +181,6 @@ Rectangle {
                     }
 
 
-                    QIconItem {
-                        icon: QIcon("go-up")
-                        width: 22
-                        height: 22
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                resultsColumn.y = -resultsContainer.height
-                            }
-                        }
-                    }
                     Component.onCompleted: resultsColumn.y = -resultsContainer.height
                     height: resultsContainer.height
                     model: metadataModel
