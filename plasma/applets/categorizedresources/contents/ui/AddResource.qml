@@ -94,9 +94,9 @@ Rectangle {
        onTriggered: {
             if (searchBox.searchQuery) {
                 metadataSource.connectedSources = [searchBox.searchQuery]
-                resultsGrid.y = 0
+                resultsColumn.y = 0
             } else {
-                resultsGrid.y = -resultsGrid.height
+                resultsColumn.y = -resultsContainer.height
             }
        }
     }
@@ -112,7 +112,7 @@ Rectangle {
         id: dialog
         scale: 0
         anchors.fill: parent
-        anchors.margins: 80
+        anchors.margins: 50
         imagePath: "dialogs/background"
         MobileComponents.ViewSearch {
             id: searchBox
@@ -136,113 +136,133 @@ Rectangle {
                 left: parent.left
                 right:parent.right
                 top: searchBox.bottom
-                bottom: buttonsRow.top
+                bottom: selectedResourcesList.top
                 leftMargin: parent.margins.left
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
             }
 
-            MobileComponents.IconGrid {
-                id: resultsGrid
-                anchors {
-                    left: parent.left
-                    right:parent.right
-                }
-
+            Column {
+                id: resultsColumn
+                width: parent.width
                 Behavior on y {
                     NumberAnimation {
                         duration: 250
                         easing.type: Easing.InOutQuad
                     }
                 }
+                MobileComponents.IconGrid {
+                    id: resultsGrid
+                    anchors {
+                        left: parent.left
+                        right:parent.right
+                    }
 
-                QIconItem {
-                    icon: QIcon("go-up")
-                    width: 22
-                    height: 22
-                    MouseArea {
-                        anchors.fill: parent
+
+                    QIconItem {
+                        icon: QIcon("go-up")
+                        width: 22
+                        height: 22
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                resultsColumn.y = -resultsContainer.height
+                            }
+                        }
+                    }
+                    Component.onCompleted: resultsColumn.y = -resultsContainer.height
+                    height: resultsContainer.height
+                    model: metadataModel
+                    delegate: MobileComponents.ResourceDelegate {
+                        id: resourceDelegate
+                        width: 130
+                        height: 120
+                        infoLabelVisible: false
+
                         onClicked: {
-                            resultsGrid.y = -resultsGrid.height
+                            print(resourceUri)
+                            var service = metadataSource.serviceForSource(metadataSource.connectedSources[0])
+                            var operation = service.operationDescription("connectToActivity")
+                            operation["ActivityUrl"] = plasmoid.activityId
+                            operation["ResourceUrl"] = resourceUri
+                            service.startOperationCall(operation)
+                            queryTimer.running = true
+
+                            disappearAnimation.running = true
+                            /*
+                            //FIXME: MEEGO BUG
+                            metadataSource.connectedSources = ["x"]
+                            metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]*/
                         }
                     }
                 }
-                Component.onCompleted: resultsGrid.y = -resultsGrid.height
-                height: resultsContainer.height
-                model: metadataModel
-                delegate: MobileComponents.ResourceDelegate {
-                    id: resourceDelegate
-                    width: 130
-                    height: 120
-                    infoLabelVisible: false
 
-                    onClicked: {
-                        print(resourceUri)
-                        var service = metadataSource.serviceForSource(metadataSource.connectedSources[0])
-                        var operation = service.operationDescription("connectToActivity")
-                        operation["ActivityUrl"] = plasmoid.activityId
-                        operation["ResourceUrl"] = resourceUri
-                        service.startOperationCall(operation)
-                        queryTimer.running = true
+                GridView {
+                    id: categoriesView
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    height: resultsContainer.height
 
-                        disappearAnimation.running = true
-                        /*
-                        //FIXME: MEEGO BUG
-                        metadataSource.connectedSources = ["x"]
-                        metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]*/
+                    model: ListModel {
+                        ListElement {
+                            name: "Contacts"
+                            className: "Contact"
+                            hasSymbol: "view-pim-contacts"
+                        }
+                        ListElement {
+                            name: "Documents"
+                            className: "Document"
+                            hasSymbol: "application-vnd.oasis.opendocument.text"
+                        }
+                        ListElement {
+                            name: "Images"
+                            className: "Image"
+                            hasSymbol: "image-x-generic"
+                        }
+                        ListElement {
+                            name: "Music"
+                            className: "Audio"
+                            hasSymbol: "audio-x-generic"
+                        }
+                        ListElement {
+                            name: "Videos"
+                            className: "Video"
+                            hasSymbol: "video-x-generic"
+                        }
+                    }
+                    delegate: Component {
+                        MobileComponents.ResourceDelegate {
+                            width: 140
+                            height: 120
+                            className: "FileDataObject"
+                            genericClassName: "FileDataObject"
+                            property string label: name
+                            property string mimeType: "x"
+                            onClicked: {
+                                metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
+                                resultsColumn.y = 0
+                            }
+                        }
                     }
                 }
             }
-            GridView {
-                id: categoriesView
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    top: resultsGrid.bottom
-                }
-                height: resultsContainer.height
-
-                model: ListModel {
-                    ListElement {
-                        name: "Contacts"
-                        className: "Contact"
-                        hasSymbol: "view-pim-contacts"
-                    }
-                    ListElement {
-                        name: "Documents"
-                        className: "Document"
-                        hasSymbol: "application-vnd.oasis.opendocument.text"
-                    }
-                    ListElement {
-                        name: "Images"
-                        className: "Image"
-                        hasSymbol: "image-x-generic"
-                    }
-                    ListElement {
-                        name: "Music"
-                        className: "Audio"
-                        hasSymbol: "audio-x-generic"
-                    }
-                    ListElement {
-                        name: "Videos"
-                        className: "Video"
-                        hasSymbol: "video-x-generic"
-                    }
-                }
-                delegate: Component {
-                    MobileComponents.ResourceDelegate {
-                        width: 140
-                        height: 120
-                        className: "FileDataObject"
-                        genericClassName: "FileDataObject"
-                        property string label: name
-                        property string mimeType: "x"
-                        onClicked: {
-                            metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
-                            resultsGrid.y = 0
-                        }
-                    }
-                }
+        }
+        ListView {
+            id: selectedResourcesList
+            model: 3
+            orientation: ListView.Horizontal
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: buttonsRow.top
+            }
+            height: count>1?120:0
+            delegate: MobileComponents.ResourceDelegate {
+                width: 130
+                height: 120
+                infoLabelVisible: false
             }
         }
         Row {

@@ -54,6 +54,7 @@ Item {
     {
         var component = Qt.createComponent("AddResource.qml");
         main.addResource = component.createObject(main);
+        print(component.errorString())
         addResource.show()
     }
 
