@@ -11,7 +11,6 @@ include_directories(
    )
 
 add_subdirectory(applets)
-add_subdirectory(config)
 add_subdirectory(containments)
 add_subdirectory(dataengines)
 add_subdirectory(desktoptheme)
