@@ -40,7 +40,6 @@ AppSwitcher::AppSwitcher(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args)
 {
     setBackgroundHints(NoBackground);
-    //setAspectRatioMode(Plasma::Square);
     resize(80, 80);
 }
 
@@ -62,14 +61,8 @@ void AppSwitcher::init()
 
     setImmutability(Plasma::SystemImmutable);
 
-    //### FIXME doesn't work well
-    /*Plasma::ToolTipManager::self()->registerWidget(this);
-    Plasma::ToolTipContent toolTipData(i18n("Show the hildon application switcher"), QString(),
-                                       icon->icon().pixmap(IconSize(KIconLoader::Desktop)));
-    Plasma::ToolTipManager::self()->setContent(this, toolTipData);*/
     setAspectRatioMode(Plasma::ConstrainedSquare);
 
-    //connect(icon, SIGNAL(pressed(bool)),this, SLOT(toggleAppSwitcher(bool)));
     connect(icon, SIGNAL(clicked()), this, SLOT(toggleAppSwitcher()));
 }
 
@@ -88,12 +81,7 @@ void AppSwitcher::toggleAppSwitcher(bool pressed)
 
 void AppSwitcher::toggleAppSwitcher()
 {
-#ifdef Q_WS_MAEMO_5
-    QDBusMessage signal = QDBusMessage::createSignal("/com/nokia/hildon_desktop", "com.nokia.hildon_desktop", "exit_app_view");
-    QDBusConnection::sessionBus().send(signal);
-#else
     Plasma::WindowEffects::presentWindows(view()->effectiveWinId() , KWindowSystem::currentDesktop());
-#endif
 }
 
 #include "appswitcher.moc"
