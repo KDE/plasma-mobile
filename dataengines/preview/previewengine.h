@@ -53,7 +53,6 @@ class PreviewEngine : public Plasma::DataEngine
     protected:
         void setPreview(const QString &source, QImage preview);
         bool sourceRequestEvent(const QString &name);
-        QString thumbnailerSource(KWebThumbnailer* nailer);
         void updateData(KWebThumbnailer* nailer);
 
         PreviewEnginePrivate* d;

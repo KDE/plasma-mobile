@@ -61,6 +61,8 @@ PreviewEngine::PreviewEngine(QObject* parent, const QVariantList& args)
 void PreviewEngine::init()
 {
     d->cache = new KImageCache("plasma_engine_preview", 1048576); // 10 MByte
+    //setData("fallback", "fallbackImage", QImage("file://home/sebas/Documents/wallpaper.png"));
+    setData("fallback", "fallbackImage", KIcon("image-loading").pixmap(QSize(180, 120)).toImage());
 }
 
 PreviewEngine::~PreviewEngine()
@@ -77,13 +79,6 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
 {
     // Check if the url is valid, and start a MimetypeJob
     // to find out what kind of preview we need
-    if (sources().contains(name)) {
-        return true;
-    }
-    if (!sources().contains("fallback")) {
-        //setData("fallback", "fallbackImage", KIcon("image-loading").pixmap(QSize(180, 120)).toImage());
-        setData("fallback", "fallbackImage", QImage("file://home/sebas/Documents/wallpaper.png"));
-    }
     QUrl url = QUrl(name);
     if (!url.isValid()) {
         kWarning() << "Not a URL:" << name;
@@ -93,15 +88,15 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
     if (d->webworkers.keys().contains(name) || d->workers.keys().contains(name)) {
         return true; // already got preview or at least tried to get it
     }
+
     QImage preview = QImage(d->previewSize, QImage::Format_ARGB32_Premultiplied);
     if (d->cache->findImage(name, &preview)) {
         // cache hit
         setPreview(name, preview);
         return true;
-    } else {
-        setData(name, Plasma::DataEngine::Data());
     }
 
+    setData(name, Plasma::DataEngine::Data());
     // It may be a directory or a file, let's stat
     KIO::JobFlags flags = KIO::HideProgressInfo;
     KIO::MimetypeJob *job = KIO::mimetype(url, flags);
@@ -117,8 +112,7 @@ void PreviewEngine::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
     if (!mimejob) {
         return;
     }
-    QString source = mimejob->url().url();
-    source = d->sources[job];
+
     if (!mimetype.isEmpty() && !mimejob->error()) {
         // Make job reusable by keeping the connection open:
         // We want to retrieve the target next to create a preview
@@ -126,32 +120,27 @@ void PreviewEngine::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
         KIO::Scheduler::publishSlaveOnHold();
     }
 
+    const QString source = d->sources[job];
+
     if (mimetype == "text/html") {
         if (!(d->webworkers.keys().contains(source))) {
             KWebThumbnailer* wtn = new KWebThumbnailer(QUrl(source), d->previewSize, source, this);
             connect(wtn, SIGNAL(done(bool)), SLOT(thumbnailerDone(bool)));
-            wtn->start();
             d->webworkers[source] = wtn;
+            wtn->start();
         }
-    } else {
-        if (!(d->workers.keys().contains(source))) {
-            // KIO::PreviewJob: http://api.kde.org/4.x-api/kdelibs-apidocs/kio/html/classKIO_1_1PreviewJob.html
-            KFileItem kfile = KFileItem(mimejob->url(), mimetype, KFileItem::Unknown);
-            KFileItemList list;
-            list << kfile;
-            KIO::PreviewJob *job = new KIO::PreviewJob(list, d->previewSize, 0);
-            connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)), SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
-            connect(job, SIGNAL(failed(const KFileItem&)), SLOT(previewJobFailed(const KFileItem&)));
-            connect(job, SIGNAL(result(KJob*)), SLOT(previewResult(KJob*)));
-            d->workers[source] = job;
-            job->start();
-        }
+    } else if (!d->workers.keys().contains(source)) {
+        // KIO::PreviewJob: http://api.kde.org/4.x-api/kdelibs-apidocs/kio/html/classKIO_1_1PreviewJob.html
+        KFileItem kfile = KFileItem(mimejob->url(), mimetype, KFileItem::Unknown);
+        KFileItemList list;
+        list << kfile;
+        KIO::PreviewJob *job = new KIO::PreviewJob(list, d->previewSize, 0);
+        connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)), SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
+        connect(job, SIGNAL(failed(const KFileItem&)), SLOT(previewJobFailed(const KFileItem&)));
+        connect(job, SIGNAL(result(KJob*)), SLOT(previewResult(KJob*)));
+        d->workers[source] = job;
+        job->start();
     }
-}
-
-QString PreviewEngine::thumbnailerSource(KWebThumbnailer* nailer)
-{
-    return nailer->source();
 }
 
 void PreviewEngine::thumbnailerDone(bool success)
@@ -161,18 +150,21 @@ void PreviewEngine::thumbnailerDone(bool success)
         kWarning() << "wrong sender";
         return;
     }
+
     if (!success) {
         setData(wtn->source(), "status", "failed");
         return;
     }
+
     updateData(wtn);
 }
 
 void PreviewEngine::updateData(KWebThumbnailer* wtn)
 {
-    setData(thumbnailerSource(wtn), "status", wtn->status());
-    setData(thumbnailerSource(wtn), "url", wtn->url().toString());
-    setData(thumbnailerSource(wtn), "thumbnail", wtn->thumbnail());
+    const QString source = wtn->source();
+    setData(source, "status", wtn->status());
+    setData(source, "url", wtn->url().toString());
+    setData(source, "thumbnail", wtn->thumbnail());
     scheduleSourcesUpdated();
 }
 
@@ -199,7 +191,6 @@ void PreviewEngine::setPreview(const QString &source, QImage preview)
     setData(source, "status", "done");
     setData(source, "url", source);
     setData(source, "thumbnail", preview);
-    scheduleSourcesUpdated();
     //forceImmediateUpdateOfAllVisualizations();
 }
 
