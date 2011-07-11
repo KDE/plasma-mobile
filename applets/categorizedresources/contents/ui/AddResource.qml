@@ -184,28 +184,20 @@ Rectangle {
 
                         onClicked: {
 
+                            //already in the model?
+                            for (var i = 0; i < selectedModel.count; ++i) {
+                                if (model.resourceUri == selectedModel.get(i).resourceUri) {
+                                    return
+                                }
+                            }
+
                             var item = new Object
-                            for (i in model) {
+                            for (i in model) {print(i)
                                 if (i != "index") {
                                     item[i] = model[i]
                                 }
                             }
                             selectedModel.append(item)
-                            return
-
-                            print(resourceUri)
-                            var service = metadataSource.serviceForSource(metadataSource.connectedSources[0])
-                            var operation = service.operationDescription("connectToActivity")
-                            operation["ActivityUrl"] = plasmoid.activityId
-                            operation["ResourceUrl"] = resourceUri
-                            service.startOperationCall(operation)
-                            queryTimer.running = true
-
-                            disappearAnimation.running = true
-                            /*
-                            //FIXME: MEEGO BUG
-                            metadataSource.connectedSources = ["x"]
-                            metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]*/
                         }
                     }
                 }
@@ -299,7 +291,21 @@ Rectangle {
 
                 text: i18n("Add items")
                 onClicked : {
+                    var service = metadataSource.serviceForSource(metadataSource.connectedSources[0])
+                    var operation = service.operationDescription("connectToActivity")
+                    operation["ActivityUrl"] = plasmoid.activityId
+
+                    for (var i = 0; i < selectedModel.count; ++i) {
+                        operation["ResourceUrl"] = selectedModel.get(i).resourceUri
+                        service.startOperationCall(operation)
+                    }
+                    queryTimer.running = true
+
                     disappearAnimation.running = true
+                    /*
+                    //FIXME: MEEGO BUG
+                    metadataSource.connectedSources = ["x"]
+                    metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]*/
                 }
             }
 
