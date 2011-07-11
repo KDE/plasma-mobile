@@ -1,4 +1,5 @@
-project(news)
+project(quickdialer)
+add_subdirectory(phone)
 
 install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/org.kde.quickdialer-qml PATTERN .svn EXCLUDE)
 
