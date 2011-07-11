@@ -53,7 +53,7 @@ Item {
         }
         Component.onCompleted: {
             //connectedSources = sources;
-            connectedSources = [ "KDE" ]
+            //connectedSources = [ "KDE" ]
         }
 
     }
