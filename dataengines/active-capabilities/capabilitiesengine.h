@@ -34,6 +34,7 @@ class CapabilitiesEngine : public Plasma::DataEngine
         ~CapabilitiesEngine();
         QStringList sources() const;
         virtual void init();
+        void emptySources();
 
     protected:
         bool sourceRequestEvent(const QString &name);

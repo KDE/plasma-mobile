@@ -33,15 +33,21 @@ CapabilitiesEngine::CapabilitiesEngine(QObject* parent, const QVariantList& args
     Q_UNUSED(args);
     d = new CapabilitiesEnginePrivate;
     setMaxSourceCount(64); // Guard against loading too many connections
-    init();
 }
 
 void CapabilitiesEngine::init()
 {
+    emptySources();
+}
+
+void CapabilitiesEngine::emptySources()
+{
     setData("Input", Plasma::DataEngine::Data());
     setData("PowerManagement", Plasma::DataEngine::Data());
-    setData("Screen", Plasma::DataEngine::Data());   
+    setData("Screen", Plasma::DataEngine::Data());  
+    scheduleSourcesUpdated();
 }
+
 
 CapabilitiesEngine::~CapabilitiesEngine()
 {
@@ -55,7 +61,6 @@ QStringList CapabilitiesEngine::sources() const
 
 bool CapabilitiesEngine::sourceRequestEvent(const QString &name)
 {
-
     setData(name, Plasma::DataEngine::Data());
     // more
     return true;
