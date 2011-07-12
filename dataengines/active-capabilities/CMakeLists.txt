@@ -6,6 +6,8 @@ include_directories(
 
 set(capability_srcs
     capabilitiesengine.cpp
+    powermanagementjob.cpp
+    powermanagementservice.cpp
 )
 
 kde4_add_plugin(plasma_engine_active_capabilities ${capability_srcs})
@@ -18,4 +20,6 @@ target_link_libraries(plasma_engine_active_capabilities
 
 install(TARGETS plasma_engine_active_capabilities DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES plasma-engine-active-capabilities.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES powermanagementservice.operations
+        DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
 

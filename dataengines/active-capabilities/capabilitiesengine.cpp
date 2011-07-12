@@ -19,6 +19,7 @@
 
 
 #include "capabilitiesengine.h"
+#include "powermanagementservice.h"
 
 class CapabilitiesEnginePrivate
 {
@@ -44,7 +45,7 @@ void CapabilitiesEngine::emptySources()
 {
     setData("Input", Plasma::DataEngine::Data());
     setData("PowerManagement", Plasma::DataEngine::Data());
-    setData("Screen", Plasma::DataEngine::Data());  
+    setData("Screen", Plasma::DataEngine::Data());
     scheduleSourcesUpdated();
 }
 
@@ -56,7 +57,7 @@ CapabilitiesEngine::~CapabilitiesEngine()
 
 QStringList CapabilitiesEngine::sources() const
 {
-    return QStringList();
+    return QStringList() << "Input" << "PowerManagement" << "Screen";
 }
 
 bool CapabilitiesEngine::sourceRequestEvent(const QString &name)
@@ -66,5 +67,21 @@ bool CapabilitiesEngine::sourceRequestEvent(const QString &name)
     return true;
 }
 
+Plasma::Service* CapabilitiesEngine::serviceForSource(const QString &source)
+{
+    if (source == "PowerManagement") {
+        PowerManagementService *service = new PowerManagementService(source);
+        service->setParent(this);
+        return service;
+    } else if (source == "Screen") {
+        kWarning() << "FIXME: Service \"Screen\" not yet implemented";
+    } else if (source == "Input") {
+        kWarning() << "FIXME: Service \"Input\" not yet implemented";
+    } else {
+        kWarning() << "No service for " << source << "found, " <<
+                      "should be \"PowerManagement\", \"Input\" or \"Screen\".";
+    }
+    return 0;
+}
 
 #include "capabilitiesengine.moc"

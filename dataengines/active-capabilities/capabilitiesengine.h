@@ -35,6 +35,7 @@ class CapabilitiesEngine : public Plasma::DataEngine
         QStringList sources() const;
         virtual void init();
         void emptySources();
+        Plasma::Service *serviceForSource(const QString &source);
 
     protected:
         bool sourceRequestEvent(const QString &name);
