@@ -68,12 +68,6 @@ Item {
         engine: "org.kde.active.metadata"
         interval: 0
         connectedSources: ["CurrentActivityResources:"+plasmoid.activityId]
-
-        Component.onCompleted: {
-            //connectedSources = sources;
-            //connectedSources = [ "wall" ]
-        }
-
     }
 
     PlasmaCore.DataModel {
@@ -258,11 +252,12 @@ Item {
                 }
 
 
+                //This is just for event compression when a lot of boxes is created one after the other
                 Timer {
                     id: layoutTimer
                     repeat: false
                     running: false
-                    interval: 2000
+                    interval: 100
                     onTriggered: {
                         LayoutManager.resetPositions()
                         for (var i=0; i<resultsFlow.children.length; ++i) {
