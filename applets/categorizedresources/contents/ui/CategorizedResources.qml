@@ -67,15 +67,8 @@ Item {
         id: metadataSource
         engine: "org.kde.active.metadata"
         interval: 0
+        connectedSources: ["CurrentActivityResources:"+plasmoid.activityId]
 
-        onSourceAdded: {
-            //console.log("source added:" + source);
-            //connectSource(source);
-        }
-
-        onDataChanged: {
-            plasmoid.busy = false
-        }
         Component.onCompleted: {
             //connectedSources = sources;
             //connectedSources = [ "wall" ]
@@ -373,18 +366,6 @@ Item {
                 }
             }
         }
-    }
-
-    Timer {
-       id: queryTimer
-       running: true
-       repeat: false
-       interval: 1000
-       onTriggered: {
-            LayoutManager.resetPositions()
-            plasmoid.busy = false
-            metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]
-       }
     }
 
     SlcComponents.SlcMenu {
