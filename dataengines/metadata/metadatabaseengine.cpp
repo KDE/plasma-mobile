@@ -49,7 +49,6 @@
 #include "metadataservice/metadataservice.h"
 
 #include "querycontainer.h"
-#include "kext.h"
 #include <nepomuk/nfo.h>
 
 #define RESULT_LIMIT 24
