@@ -309,6 +309,18 @@ Item {
                     {
                         syncItem = item
                         repositionTimer.running = true
+                        if (placeHolderPaint.opacity < 1) {
+                            placeHolder.delayedSyncWithItem()
+                        }
+                    }
+                    function delayedSyncWithItem()
+                    {
+                        placeHolder.x = placeHolder.syncItem.x
+                        placeHolder.y = placeHolder.syncItem.y
+                        placeHolder.width = placeHolder.syncItem.width
+                        placeHolder.height = placeHolder.syncItem.height
+                        LayoutManager.positionItem(placeHolder)
+                        LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
                     }
                     Timer {
                         id: repositionTimer
@@ -316,12 +328,7 @@ Item {
                         repeat: false
                         running: false
                         onTriggered: {
-                            placeHolder.x = placeHolder.syncItem.x
-                            placeHolder.y = placeHolder.syncItem.y
-                            placeHolder.width = placeHolder.syncItem.width
-                            placeHolder.height = placeHolder.syncItem.height
-                            LayoutManager.positionItem(placeHolder)
-                            LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
+                            placeHolder.delayedSyncWithItem()
                         }
                     }
                 }
@@ -343,18 +350,21 @@ Item {
                         }
                     }
                     Behavior on x {
+                        enabled: placeHolderPaint.opacity == 1
                         NumberAnimation {
                             duration: 250
                             easing.type: Easing.InOutQuad
                         }
                     }
                     Behavior on y {
+                        enabled: placeHolderPaint.opacity == 1
                         NumberAnimation {
                             duration: 250
                             easing.type: Easing.InOutQuad
                         }
                     }
                     Behavior on width {
+                        enabled: placeHolderPaint.opacity == 1
                         NumberAnimation {
                             duration: 250
                             easing.type: Easing.InOutQuad
