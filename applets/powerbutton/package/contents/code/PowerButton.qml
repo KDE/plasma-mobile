@@ -19,14 +19,13 @@
  */
 
 import Qt 4.7
-//import org.kde.qtextracomponents 0.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1
 
 Item {
     id: batterymonitor
-    width: 48
-    height: 48
+    width: 32
+    height: 32
 
     PlasmaCore.DataSource {
         id: pmSource
@@ -39,5 +38,12 @@ Item {
     IconButton {
         anchors.fill: parent
         icon: QIcon("system-suspend")
+
+        onClicked: {
+            print("suspendbutton triggered");
+            var service = pmSource.serviceForSource("PowerManagement")
+            var operation = service.operationDescription("suspend")
+            service.startOperationCall(operation)
+        }
     }
 }

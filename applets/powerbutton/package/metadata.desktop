@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=Simple Battery
-Comment=Simple battery monitor
+Name=Power Button
+Comment=Suspends the device
 Encoding=UTF-8
 Keywords=Power Management, Battery, System, Energy
 Type=Service
-Icon=battery
+Icon=system-suspend
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Sebastian Kügler
 X-KDE-PluginInfo-Category=System Information
@@ -15,6 +15,7 @@ X-KDE-PluginInfo-Version=
 X-KDE-PluginInfo-Website=http://plasma.kde.org
 X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
-X-Plasma-DefaultSize=48,48
+X-Plasma-DefaultSize=32,32
 X-Plasma-MainScript=code/PowerButton.qml
 X-Plasma-RemoteLocation=
+X-Plasma-NotificationArea=true
