@@ -49,21 +49,11 @@ PlasmaCore.FrameSvgItem {
             debugFlow.refresh();
 
 
-            placeHolder.x = parent.x
-            placeHolder.y = parent.y
-            placeHolder.width = parent.width
-            placeHolder.height = parent.height
-            LayoutManager.positionItem(placeHolder)
-            LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
+            placeHolder.syncWithItem(parent)
             placeHolderPaint.opacity = 1
         }
         onPositionChanged: {
-            placeHolder.x = parent.x
-            placeHolder.y = parent.y
-            placeHolder.width = parent.width
-            placeHolder.height = parent.height
-            LayoutManager.positionItem(placeHolder)
-            LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
+            placeHolder.syncWithItem(parent)
 
             var globalPos = mapToItem(main, x, y)
             if (!scrollTimer.running && globalPos.y < 100) {

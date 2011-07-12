@@ -304,6 +304,15 @@ Item {
                     property bool animationsEnabled
                     width: 100
                     height: 100
+                    function syncWithItem(item)
+                    {
+                        placeHolder.x = item.x
+                        placeHolder.y = item.y
+                        placeHolder.width = item.width
+                        placeHolder.height = item.height
+                        LayoutManager.positionItem(placeHolder)
+                        LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
+                    }
                 }
                 Rectangle {
                     id: placeHolderPaint
