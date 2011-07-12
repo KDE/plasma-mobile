@@ -180,7 +180,6 @@ Rectangle {
                         right:parent.right
                     }
 
-
                     Component.onCompleted: resultsColumn.y = -resultsContainer.height
                     height: resultsContainer.height
                     model: metadataModel
@@ -274,6 +273,7 @@ Rectangle {
                 leftMargin: parent.margins.left
                 rightMargin: parent.margins.right
             }
+
             height: count>0?120:0
             delegate: MobileComponents.ResourceDelegate {
                 width: 130
