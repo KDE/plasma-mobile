@@ -16,8 +16,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "powermanagementjob.h"
+#include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusPendingReply>
 
+#include "powermanagementjob.h"
 
 #include <kdebug.h>
 
@@ -36,12 +39,21 @@ void PowerManagementJob::start()
     kDebug() << "starting operation" << operation;
 
     if (operation == "suspend") {
-        // TODO: suspend the device
-
+        // suspend the device
+        suspend();
         setResult(true);
         return;
     }
     setResult(false);
+}
+
+void PowerManagementJob::suspend()
+{
+    QDBusMessage msg = QDBusMessage::createMethodCall("org.kde.Solid.PowerManagement",
+                                                      "/org/kde/Solid/PowerManagement",
+                                                      "org.kde.Solid.PowerManagement",
+                                                      "suspendToRam");
+    QDBusPendingReply< QString > reply = QDBusConnection::sessionBus().asyncCall(msg);
 }
 
 #include "powermanagementjob.moc"

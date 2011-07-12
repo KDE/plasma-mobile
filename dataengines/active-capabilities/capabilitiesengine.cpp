@@ -17,7 +17,6 @@
     02110-1301, USA.
 */
 
-
 #include "capabilitiesengine.h"
 #include "powermanagementservice.h"
 

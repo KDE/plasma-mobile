@@ -35,6 +35,8 @@ class PowerManagementJob : public Plasma::ServiceJob
     protected:
         void start();
 
+    private:
+        void suspend();
 };
 
 #endif // POWERMANAGEMENTJOB_H
