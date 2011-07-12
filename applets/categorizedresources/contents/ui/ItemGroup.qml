@@ -136,6 +136,9 @@ PlasmaCore.FrameSvgItem {
         property int startY
 
         onPressed: {
+            mouse.accepted = true
+            //FIXME: this shouldn't be necessary
+            mainFlickable.interactive = false
             animationsEnabled = false
             startX = mouse.x
             startY = mouse.y
@@ -149,6 +152,7 @@ PlasmaCore.FrameSvgItem {
         onReleased: {
             animationsEnabled = true
 
+            mainFlickable.interactive = true
             LayoutManager.positionItem(parent)
             LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, widthAnimation.to, itemGroup.height, false)
             debugFlow.refresh();
