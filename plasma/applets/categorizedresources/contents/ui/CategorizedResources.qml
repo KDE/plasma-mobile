@@ -260,6 +260,7 @@ Item {
 
                 anchors {
                     top: toolBar.bottom
+                    topMargin: 10
                     horizontalCenter: parent.horizontalCenter
                 }
 
