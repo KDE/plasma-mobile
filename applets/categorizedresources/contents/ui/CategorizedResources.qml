@@ -304,14 +304,25 @@ Item {
                     property bool animationsEnabled
                     width: 100
                     height: 100
+                    property Item syncItem
                     function syncWithItem(item)
                     {
-                        placeHolder.x = item.x
-                        placeHolder.y = item.y
-                        placeHolder.width = item.width
-                        placeHolder.height = item.height
-                        LayoutManager.positionItem(placeHolder)
-                        LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
+                        syncItem = item
+                        repositionTimer.running = true
+                    }
+                    Timer {
+                        id: repositionTimer
+                        interval: 200
+                        repeat: false
+                        running: false
+                        onTriggered: {
+                            placeHolder.x = placeHolder.syncItem.x
+                            placeHolder.y = placeHolder.syncItem.y
+                            placeHolder.width = placeHolder.syncItem.width
+                            placeHolder.height = placeHolder.syncItem.height
+                            LayoutManager.positionItem(placeHolder)
+                            LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
+                        }
                     }
                 }
                 Rectangle {
