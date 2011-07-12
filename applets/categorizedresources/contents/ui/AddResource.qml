@@ -94,9 +94,9 @@ Rectangle {
        onTriggered: {
             if (searchBox.searchQuery) {
                 metadataSource.connectedSources = [searchBox.searchQuery]
-                resultsColumn.y = 0
+                resultsContainer.contentY = 0
             } else {
-                resultsColumn.y = -resultsContainer.height
+                resultsContainer.contentY = resultsContainer.height
             }
        }
     }
@@ -135,10 +135,10 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        resultsColumn.y = -resultsContainer.height
+                        resultsContainer.contentY = resultsContainer.height
                     }
                 }
-                opacity: resultsColumn.y==0?1:0
+                opacity: resultsContainer.contentY==0?1:0
                 Behavior on opacity {
                     NumberAnimation {
                         duration: 250
@@ -151,9 +151,19 @@ Rectangle {
                 queryTimer.running = true
             }
         }
-        Item {
+        Flickable {
             id: resultsContainer
             clip: true
+            interactive: contentY < height
+            onMovementEnded: {
+                if (contentY < height/2) {
+                    contentY = 0
+                } else {
+                    contentY = height
+                }
+            }
+            contentWidth: resultsColumn.width
+            contentHeight: resultsColumn.height
             anchors {
                 left: parent.left
                 right:parent.right
@@ -163,16 +173,17 @@ Rectangle {
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
             }
+            Behavior on contentY {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
 
             Column {
                 id: resultsColumn
-                width: parent.width
-                Behavior on y {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                }
+                width: resultsContainer.width
+
                 MobileComponents.IconGrid {
                     id: resultsGrid
                     anchors {
@@ -180,7 +191,7 @@ Rectangle {
                         right:parent.right
                     }
 
-                    Component.onCompleted: resultsColumn.y = -resultsContainer.height
+                    Component.onCompleted: resultsContainer.contentY = resultsContainer.height
                     height: resultsContainer.height
                     model: metadataModel
                     delegate: MobileComponents.ResourceDelegate {
@@ -199,7 +210,7 @@ Rectangle {
                             }
 
                             var item = new Object
-                            for (i in model) {print(i)
+                            for (i in model) {
                                 if (i != "index") {
                                     item[i] = model[i]
                                 }
@@ -254,7 +265,7 @@ Rectangle {
                             property string mimeType: "x"
                             onClicked: {
                                 metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
-                                resultsColumn.y = 0
+                                resultsContainer.contentY = 0
                             }
                         }
                     }
