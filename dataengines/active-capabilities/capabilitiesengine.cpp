@@ -32,7 +32,6 @@ CapabilitiesEngine::CapabilitiesEngine(QObject* parent, const QVariantList& args
 {
     Q_UNUSED(args);
     d = new CapabilitiesEnginePrivate;
-    setMaxSourceCount(64); // Guard against loading too many connections
 }
 
 void CapabilitiesEngine::init()
