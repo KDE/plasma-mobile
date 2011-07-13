@@ -102,11 +102,15 @@ Item {
             imagePath: "widgets/media-delegate"
             prefix: "picture"
             id: previewFrame
-            height: width/1.6
+            //height: width/1.6
+            width: height*1.6
             visible: false
             anchors {
-                left: parent.left
-                right: parent.right
+                /*left: parent.left
+                right: parent.right*/
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                bottom: iconItem.bottom
             }
             QImageItem {
                 id: previewImage
