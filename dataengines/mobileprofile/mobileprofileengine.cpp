@@ -32,12 +32,12 @@ MobileProfileEngine::~MobileProfileEngine()
 
 bool MobileProfileEngine::sourceRequestEvent(const QString &name)
 {
-    if (name != "default") {
-        return false;
+    if (name == "default") {
+        updateSourceEvent(name);
+        return true;
     }
 
-    updateSourceEvent(name);
-    return true;
+    return false;
 }
 
 
