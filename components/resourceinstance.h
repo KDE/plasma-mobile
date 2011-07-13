@@ -69,14 +69,14 @@ public Q_SLOTS:
      * has the focus in your application
      * @note You only need to call this in MDI applications
      */
-    void notifyFocussedIn();
+    void notifyFocusedIn();
 
     /**
      * Call this method to notify the system that the resource
      * lost the focus in your application
      * @note You only need to call this in MDI applications
      */
-    void notifyFocussedOut();
+    void notifyFocusedOut();
 
 private:
     Activities::ResourceInstance *m_resourceInstance;
