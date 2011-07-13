@@ -20,48 +20,38 @@
 #include "capabilitiesengine.h"
 #include "powermanagementservice.h"
 
-class CapabilitiesEnginePrivate
-{
-public:
-    //int i;
-};
-
-
 CapabilitiesEngine::CapabilitiesEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent)
 {
     Q_UNUSED(args);
-    d = new CapabilitiesEnginePrivate;
+    m_sources << "Input" << "PowerManagement" << "Screen";
 }
 
 void CapabilitiesEngine::init()
 {
-    emptySources();
 }
-
-void CapabilitiesEngine::emptySources()
-{
-    setData("Input", Plasma::DataEngine::Data());
-    setData("PowerManagement", Plasma::DataEngine::Data());
-    setData("Screen", Plasma::DataEngine::Data());
-    scheduleSourcesUpdated();
-}
-
 
 CapabilitiesEngine::~CapabilitiesEngine()
 {
-    delete d;
 }
 
 QStringList CapabilitiesEngine::sources() const
 {
-    return QStringList() << "Input" << "PowerManagement" << "Screen";
+    return m_sources;
 }
 
 bool CapabilitiesEngine::sourceRequestEvent(const QString &name)
 {
-    setData(name, Plasma::DataEngine::Data());
-    // more
+    if (name == "Input") {
+        setData(name, Plasma::DataEngine::Data());
+    } else if (name == "PowerManagement") {
+        setData(name, Plasma::DataEngine::Data());
+    } else if (name == "Screen") {
+        setData(name, Plasma::DataEngine::Data());
+    } else {
+        return false;
+    }
+
     return true;
 }
 
@@ -79,6 +69,7 @@ Plasma::Service* CapabilitiesEngine::serviceForSource(const QString &source)
         kWarning() << "No service for " << source << "found, " <<
                       "should be \"PowerManagement\", \"Input\" or \"Screen\".";
     }
+
     return 0;
 }
 

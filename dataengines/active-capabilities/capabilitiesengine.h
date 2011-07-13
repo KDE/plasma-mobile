@@ -34,13 +34,13 @@ class CapabilitiesEngine : public Plasma::DataEngine
         ~CapabilitiesEngine();
         QStringList sources() const;
         virtual void init();
-        void emptySources();
         Plasma::Service *serviceForSource(const QString &source);
 
     protected:
         bool sourceRequestEvent(const QString &name);
 
-        CapabilitiesEnginePrivate* d;
+    private:
+        QStringList m_sources;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(capabilitiesengine, CapabilitiesEngine)
