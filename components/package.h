@@ -42,7 +42,7 @@ public:
     QString name() const;
     void setName(const QString &name);
 
-    Q_INVOKABLE QString filePath(const char *fileType, const QString &filename) const;
+    Q_INVOKABLE QString filePath(const QString &fileType, const QString &filename) const;
     
 
 Q_SIGNALS:

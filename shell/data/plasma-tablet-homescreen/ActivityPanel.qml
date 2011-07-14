@@ -21,7 +21,7 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: activityPanel;
@@ -34,7 +34,7 @@ Item {
         containment = cont
     }
 
-    AppletStatusWatcher {
+    MobileComponents.AppletStatusWatcher {
         id: appletStatusWatcher
         onStatusChanged: {
             if (status == AppletStatusWatcher.AcceptingInputStatus) {
@@ -46,7 +46,7 @@ Item {
     }
 
     //Uses a MouseEventListener instead of a MouseArea to not block any mouse event
-    MouseEventListener {
+    MobileComponents.MouseEventListener {
         id: hintregion;
 
         anchors.fill: parent
@@ -111,13 +111,23 @@ Item {
     }
 
     Timer {
-        id : hideTimer
+        id: hideTimer
         interval: 4000;
         running: false;
         onTriggered:  {
             if (appletStatusWatcher.status != AppletStatusWatcher.AcceptingInputStatus) {
                 activityPanel.state = "hidden"
             }
+        }
+    }
+
+    MobileComponents.Package {
+        id: switcherPackage
+        name: "org.kde.activityswitcher"
+        Component.onCompleted: {
+            print("file from package:"+switcherPackage.filePath("ui", "main.qml"))
+            var component = Qt.createComponent(switcherPackage.filePath("ui", "main.qml"));
+        component.createObject(activityPanel);
         }
     }
 

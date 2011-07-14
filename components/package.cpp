@@ -56,13 +56,13 @@ void Package::setName(const QString &name)
     emit nameChanged(name);
 }
 
-QString Package::filePath(const char *fileType, const QString &fileName) const
+QString Package::filePath(const QString &fileType, const QString &fileName) const
 {
     if (!m_package) {
         return QString();
     }
 
-    return m_package->filePath(fileType, fileName);
+    return m_package->filePath(fileType.toLatin1(), fileName);
 }
 
 #include "package.moc"
