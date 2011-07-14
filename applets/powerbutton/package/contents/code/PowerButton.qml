@@ -23,7 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1
 
 Item {
-    id: batterymonitor
+    id: powerbutton
     width: 32
     height: 32
 
@@ -43,6 +43,13 @@ Item {
             print("suspendbutton triggered");
             var service = pmSource.serviceForSource("PowerManagement")
             var operation = service.operationDescription("suspend")
+            service.startOperationCall(operation)
+        }
+
+        onPressAndHold: {
+            print("suspendbutton pressAndHold");
+            var service = pmSource.serviceForSource("PowerManagement")
+            var operation = service.operationDescription("requestShutDown")
             service.startOperationCall(operation)
         }
     }
