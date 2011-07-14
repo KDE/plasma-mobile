@@ -56,7 +56,7 @@ Item {
                 bottomMargin: parent.margins.bottom
             }
             property string path: activityThumbnailsSource.data[model.DataEngineSource]?activityThumbnailsSource.data[model.DataEngineSource]["path"]:""
-            source: path?path:plasmoid.file("images", "emptyactivity.png")
+            source: path?path:switcherPackage.filePath("images", "emptyactivity.png")
             Text {
                 anchors.top: parent.top
                 anchors.left: parent.left
@@ -93,7 +93,7 @@ Item {
         Image {
             id: holeImage
             y: 4
-            source: plasmoid.file("images", "sliderhole.png")
+            source: switcherPackage.filePath("images", "sliderhole.png")
             anchors.left: parent.left
             Text {
                 anchors.centerIn: parent
@@ -102,7 +102,7 @@ Item {
         }
         Image {
             x: parent.width - width
-            source: plasmoid.file("images", "slider.png")
+            source: switcherPackage.filePath("images", "slider.png")
             opacity: model["Current"]==true?0:1
             Text {
                 anchors.centerIn: parent

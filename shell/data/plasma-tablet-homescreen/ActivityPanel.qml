@@ -125,7 +125,6 @@ Item {
         id: switcherPackage
         name: "org.kde.activityswitcher"
         Component.onCompleted: {
-            print("file from package:"+switcherPackage.filePath("ui", "main.qml"))
             var component = Qt.createComponent(switcherPackage.filePath("ui", "main.qml"));
         component.createObject(activityPanel);
         }

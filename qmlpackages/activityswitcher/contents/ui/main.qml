@@ -24,12 +24,6 @@ Item {
     anchors.fill: parent
     property int iconSize: 32
 
-    Component.onCompleted: {
-        plasmoid.containmentType = "CustomContainment"
-        plasmoid.drawWallpaper = false
-        plasmoid.movableApplets = false
-    }
-
     PlasmaCore.DataSource {
         id: activityThumbnailsSource
         engine: "org.kde.mobileactivitythumbnails"
