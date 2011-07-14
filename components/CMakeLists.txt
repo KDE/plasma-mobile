@@ -9,6 +9,7 @@ set(mobilecomponents_SRCS
     fallbackcomponent.cpp
     categorizedproxymodel.cpp
     mouseeventlistener.cpp
+    package.cpp
     resourceinstance.cpp
     )
 
