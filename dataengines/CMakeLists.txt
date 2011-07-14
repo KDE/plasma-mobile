@@ -1,4 +1,4 @@
-add_subdirectory(active-capabilities)
+add_subdirectory(devicecapabilities)
 add_subdirectory(metadata)
 add_subdirectory(preview)
 add_subdirectory(mobilenetwork)
