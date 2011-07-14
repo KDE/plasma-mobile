@@ -20,6 +20,9 @@
 #include <QDBusMessage>
 #include <QDBusPendingReply>
 
+// kde-workspace/libs
+#include <kworkspace/kworkspace.h>
+
 #include "powermanagementjob.h"
 
 #include <kdebug.h>
@@ -36,24 +39,35 @@ PowerManagementJob::~PowerManagementJob()
 void PowerManagementJob::start()
 {
     const QString operation = operationName();
-    kDebug() << "starting operation" << operation;
+    kDebug() << "starting operation  ... " << operation;
 
     if (operation == "suspend") {
         // suspend the device
-        suspend();
-        setResult(true);
+        setResult(suspend());
+        return;
+    } else if (operation == "requestShutDown") {
+        // Show the shutdown dialog
+        setResult(requestShutDown());
         return;
     }
+    kDebug() << "don't know what to do with " << operation;
     setResult(false);
 }
 
-void PowerManagementJob::suspend()
+bool PowerManagementJob::suspend()
 {
     QDBusMessage msg = QDBusMessage::createMethodCall("org.kde.Solid.PowerManagement",
                                                       "/org/kde/Solid/PowerManagement",
                                                       "org.kde.Solid.PowerManagement",
                                                       "suspendToRam");
     QDBusPendingReply< QString > reply = QDBusConnection::sessionBus().asyncCall(msg);
+
+    return true;
+}
+
+bool PowerManagementJob::requestShutDown()
+{
+    return KWorkSpace::requestShutDown();
 }
 
 #include "powermanagementjob.moc"

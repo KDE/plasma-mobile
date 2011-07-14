@@ -4,4 +4,6 @@
 <kcfg>
     <group name="suspend">
     </group>
+    <group name="requestShutDown">
+    </group>
 </kcfg>
