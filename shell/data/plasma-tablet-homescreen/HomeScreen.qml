@@ -200,8 +200,7 @@ Item {
     }
 
     ActivityPanel {
-        id: rightEdgePanel
-        objectName: "rightEdgePanel"
+        id: activityPanel
 
         anchors.verticalCenter: parent.verticalCenter
         x: parent.width - width
