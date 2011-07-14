@@ -8,15 +8,18 @@ set(capability_srcs
     powermanagementservice.cpp
 )
 
-kde4_add_plugin(plasma_engine_active_capabilities ${capability_srcs})
+kde4_add_plugin(plasma_engine_devicecapabilities ${capability_srcs})
 
-target_link_libraries(plasma_engine_active_capabilities
+target_link_libraries(plasma_engine_devicecapabilities
     ${KDE4_KDECORE_LIBS}
     ${KDE4_PLASMA_LIBS}
 )
 
-install(TARGETS plasma_engine_active_capabilities DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-engine-active-capabilities.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+# Engine
+install(TARGETS plasma_engine_devicecapabilities DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES plasma-engine-devicecapabilities.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+
+# Services
 install(FILES powermanagementservice.operations
         DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
 

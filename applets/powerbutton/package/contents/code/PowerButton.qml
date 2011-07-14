@@ -29,7 +29,7 @@ Item {
 
     PlasmaCore.DataSource {
         id: pmSource
-        engine: "org.kde.active.capabilities"
+        engine: "org.kde.devicecapabilities"
         connectedSources: ["PowerManagement"]
         interval: 0
     }
