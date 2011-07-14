@@ -23,6 +23,7 @@ import org.kde.qtextracomponents 0.1
 Item {
     property alias icon: iconItem.icon
     signal clicked
+    signal onTapAndHold
     id: iconButton
     width: 64
     height: 64
@@ -34,6 +35,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: iconButton.clicked()
+            onTapAndHold: iconButton.onTapAndHold()
             onPressed: iconButton.state = "Pressed"
             onReleased: iconButton.state = "Normal"
         }
