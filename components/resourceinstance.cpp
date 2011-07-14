@@ -129,7 +129,7 @@ void ResourceInstance::notifyFocusedIn()
 {
     //ensure the resource instance exists
     syncWid();
-    m_resourceInstance->notifyFocusedIn();
+    m_resourceInstance->notifyFocussedIn();
 }
 
 
@@ -137,7 +137,7 @@ void ResourceInstance::notifyFocusedOut()
 {
     //ensure the resource instance exists
     syncWid();
-    m_resourceInstance->notifyFocusedOut();
+    m_resourceInstance->notifyFocussedOut();
 }
 
 #include "resourceinstance.moc"
