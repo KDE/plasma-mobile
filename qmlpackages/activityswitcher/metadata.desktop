@@ -18,7 +18,7 @@ Name[x-test]=xxactivitiesxx
 Type=Service
 Icon=preferences-activities
 
-X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
+X-KDE-ServiceTypes=Plasma/GenericPackage
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Category=
@@ -27,7 +27,4 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Name=org.kde.mobileactivityswitcher
 X-KDE-PluginInfo-Version=
 X-KDE-PluginInfo-Website=
-X-Plasma-API=declarativeappletscript
-X-Plasma-DefaultSize=200,100
 X-Plasma-MainScript=ui/main.qml
-X-Plasma-RemoteLocation=
