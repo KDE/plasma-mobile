@@ -164,6 +164,10 @@ PlasmaApp::PlasmaApp()
     lockAction->setGlobalShortcut(KShortcut(Qt::CTRL + Qt::Key_L));
     m_mainView->addAction(lockAction);
     connect(lockAction, SIGNAL(triggered()), this, SLOT(lockScreen()));
+
+    if (isDesktop) {
+        notifyStartup(true);
+    }
 }
 
 PlasmaApp::~PlasmaApp()
