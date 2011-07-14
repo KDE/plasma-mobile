@@ -21,8 +21,7 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
-    width: 240
-    height: 300
+    anchors.fill: parent
     property int iconSize: 32
 
     Component.onCompleted: {
