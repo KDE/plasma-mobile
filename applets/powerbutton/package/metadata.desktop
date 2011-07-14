@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Power Button
+Name[pt]=Botão de Energia
+Name[pt_BR]=Botão de energia
+Name[sv]=Strömknapp
+Name[uk]=Кнопка живлення
+Name[x-test]=xxPower Buttonxx
 Comment=Suspends the device
+Comment[pt]=Suspende o dispositivo
+Comment[pt_BR]=Suspende o dispositivo
+Comment[sv]=Placerar enheten i viloläge
+Comment[uk]=Призупиняє роботу пристрою
+Comment[x-test]=xxSuspends the devicexx
 Encoding=UTF-8
 Keywords=Power Management, Battery, System, Energy
 Keywords[et]=Toitehaldus, aku, süsteem, energia
