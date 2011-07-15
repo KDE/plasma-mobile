@@ -73,7 +73,7 @@ zvalue=0
 [Containments][3][Applets][4][Configuration]
 Share=false
 launcherNamesVisible=true
-launchers=file:///usr/share/applications/kde4/active-web-browser.desktop,file:///usr/share/applications/kde4/active-news-reader.desktop,file:///usr/share/applications/kde4/kdiamond.desktop,file:///usr/share/applications/kde4/calligramobile.desktop,file:///usr/share/applications/kde4/kmail-mobile.desktop,file:///usr/share/applications/kde4/korganizer-mobile.desktop
+launchers=file:///usr/share/applications/kde4/active-web-browser.desktop,file:///usr/share/applications/kde4/active-news-reader.desktop,file:///usr/share/applications/kde4/kdiamond.desktop,file:///usr/share/applications/calligraactive.desktop
 launchersOnPopup=
 
 
