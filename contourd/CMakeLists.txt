@@ -24,8 +24,6 @@ set(recommendationmanager_SRC
   recommendation/recommendationmanager.cpp
   recommendation/dbusoperators.cpp
   location/locationmanager.cpp
-  qtmobilityfeeder/qtmobilityfeeder.cpp
-  qtmobilityfeeder/qtmobilitymanager.cpp
   main.cpp
 )
 
