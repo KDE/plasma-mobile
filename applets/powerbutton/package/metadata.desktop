@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=Power Button
+Name[nl]=Aan/Uit-knop
 Name[pt]=Botão de Energia
 Name[pt_BR]=Botão de energia
 Name[sv]=Strömknapp
 Name[uk]=Кнопка живлення
 Name[x-test]=xxPower Buttonxx
 Comment=Suspends the device
+Comment[nl]=Apparaat onderbreken
 Comment[pt]=Suspende o dispositivo
 Comment[pt_BR]=Suspende o dispositivo
 Comment[sv]=Placerar enheten i viloläge
