@@ -41,6 +41,8 @@ int main(int argc, char** argv)
 
     KCmdLineArgs::init( argc, argv, &aboutData );
     KUniqueApplication app;
+
     (void)new Contour::RecommendationManager(&app);
+
     return app.exec();
 }

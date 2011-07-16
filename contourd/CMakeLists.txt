@@ -1,6 +1,7 @@
 project(contourd)
 
-
+# This should be REQUIRED once we get rid of the hack below
+find_package(QtMobility)
 
 # build stuff
 # ===============================================================================================
@@ -15,6 +16,8 @@ include_directories(
 #hack to find qt-mobility includes. TODO: get cmake macro
   ${INCLUDE_INSTALL_DIR}/QtMobility
   ${INCLUDE_INSTALL_DIR}/QtMobility/QtMobility
+#this uses the cmake macro
+  ${QTMOBILITY_INCLUDE_DIR}
 )
 
 set(recommendationmanager_SRC
@@ -34,7 +37,27 @@ qt4_add_dbus_adaptor(
   "recommendationmanageradaptor")
 
 find_file(kext_onto_src kext.trig PATH_SUFFIXES "ontology/kde" PATHS ${CMAKE_INSTALL_PREFIX}/share ENV XDG_DATA_DIRS)
-soprano_add_ontology(recommendationmanager_SRC ${kext_onto_src} "KExt" "Nepomuk::Vocabulary" "trig")
+
+soprano_add_ontology(recommendationmanager_SRC
+    ${kext_onto_src}
+    "KExt" "Nepomuk::Vocabulary" "trig"
+    )
+
+soprano_add_ontology(recommendationmanager_SRC
+    ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/nao.trig
+    "NAO" "Nepomuk::Vocabulary" "trig"
+    )
+
+soprano_add_ontology(recommendationmanager_SRC
+    ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nie.trig
+    "NIE" "Nepomuk::Vocabulary" "trig"
+    )
+
+soprano_add_ontology(recommendationmanager_SRC
+    ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nco.trig
+    "NCO" "Nepomuk::Vocabulary" "trig"
+    )
+
 
 kde4_add_executable(contour
   ${recommendationmanager_SRC}
@@ -50,6 +73,7 @@ target_link_libraries(
   ${NEPOMUK_QUERY_LIBRARIES}
   kworkspace
   QtLocation
+  QtContacts
 )
 
 set(contourclient_SRC
