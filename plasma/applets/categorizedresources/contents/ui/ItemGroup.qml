@@ -112,10 +112,25 @@ PlasmaCore.FrameSvgItem {
             easing.type: Easing.InOutQuad
         }
     }
+
+    PlasmaCore.SvgItem {
+        svg: PlasmaCore.Svg {
+            imagePath: plasmoid.file("images", "resize-handle.svgz")
+        }
+        width: 24
+        height: 24
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            rightMargin: itemGroup.margins.right
+            bottomMargin: itemGroup.margins.bottom
+        }
+    }
     MouseArea {
         id: resizeHandle
         width: 48
         height: 48
+        z: 9999
         anchors {
             right: parent.right
             bottom: parent.bottom
