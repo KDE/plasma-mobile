@@ -101,7 +101,7 @@ Item {
         interval: 4000;
         running: false;
         onTriggered:  {
-            if (appletStatusWatcher.status != AppletStatusWatcher.AcceptingInputStatus) {
+            if (activityPanel.switcher.state != "AcceptingInput") {
                 activityPanel.state = "hidden"
             }
         }
