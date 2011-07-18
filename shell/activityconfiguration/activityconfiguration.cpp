@@ -74,6 +74,10 @@ ActivityConfiguration::~ActivityConfiguration()
 
 void ActivityConfiguration::ensureContainmentExistence()
 {
+    if (m_containment) {
+        return;
+    }
+
     const QString id = m_activityController->addActivity(m_activityName);
     m_activityController->setCurrentActivity(id);
     Plasma::Corona *corona = qobject_cast<Plasma::Corona *>(scene());
@@ -130,6 +134,21 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
     } else {
         wp = Plasma::Wallpaper::load("image");
         wp->setParent(this);
+
+        //FIXME: this has to be done in C++ until we have QtComponents
+        //doesn't really belong here, this is for the "first run"
+        QGraphicsWidget *activityNameEdit = m_mainWidget->findChild<QGraphicsWidget*>("activityNameEdit");
+        if (activityNameEdit) {
+            activityNameEdit->setFocus(Qt::MouseFocusReason);
+            QEvent openEvent(QEvent::RequestSoftwareInputPanel);
+            if (qApp) {
+                if (QGraphicsView *view = qobject_cast<QGraphicsView*>(qApp->focusWidget())) {
+                    if (view->scene() && view->scene() == scene()) {
+                        QApplication::sendEvent(view, &openEvent);
+                    }
+                }
+            }
+        }
     }
 
     m_model = new BackgroundListModel(wp, this);

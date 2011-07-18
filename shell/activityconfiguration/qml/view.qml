@@ -38,19 +38,10 @@ Rectangle {
         connectedSources: ["Status"]
     }
 
-    function deleteActivity()
-    {
-        var service = activitySource.serviceForSource("Status")
-        var operation = service.operationDescription("remove")
-        operation["Id"] = configInterface.activityId
-        var job = service.startOperationCall(operation)
-    }
-
     MouseArea {
         anchors.fill: parent
         onClicked: {
             disappearAnimation.running=true
-            deleteActivity()
         }
     }
 
@@ -106,7 +97,12 @@ Rectangle {
         interval: 350
         onTriggered: {
             wallpapersList.model = configInterface.wallpaperModel
-            activityNameEdit.text = configInterface.activityName
+            if (configInterface.activityName == "") {
+                activityNameEdit.text = i18n("New Activity")
+            } else {
+                activityNameEdit.text = configInterface.activityName
+            }
+
             if (configInterface.firstConfig) {
                 var newIndex = Math.random()*wallpapersList.count
                 wallpapersList.currentIndex = newIndex
@@ -209,9 +205,6 @@ Rectangle {
 
                 onClicked: {
                     disappearAnimation.running = true
-                    if (configInterface.firstConfig) {
-                        main.deleteActivity()
-                    }
                 }
             }
         }
