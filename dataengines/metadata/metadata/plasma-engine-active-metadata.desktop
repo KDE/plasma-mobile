@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Active Metadata
 Name[et]=Aktiivsed metaandmed
+Name[fr]=Métadonnées actives
 Name[km]=ទិន្នន័យ​មេតា​សកម្ម
 Name[nl]=Actieve metagegevens
 Name[pl]=Aktywne metadane
@@ -11,6 +12,7 @@ Name[uk]=Активні метадані
 Name[x-test]=xxActive Metadataxx
 Comment=Provides metadata for semantic resources
 Comment[et]=Semantiliste ressursside metaandmed
+Comment[fr]=Fournit des métadonnées pour les ressources sémantiques
 Comment[km]=ផ្ដល់​ទិន្នន័យ​មេតា​សម្រាប់​ប្រភព​ស៊ីមែនទិក
 Comment[nl]=Levert metagegevens voor semantische hulpbronnen
 Comment[pl]=Dostarcza metadane dla semantycznych zasobów

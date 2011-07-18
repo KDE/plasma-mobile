@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Notifications
 Name[et]=Märguanded
+Name[fr]=Notifications
 Name[km]=ការ​ជូនដំណឹង
 Name[nl]=Meldingen
 Name[pl]=Powiadomienia
@@ -13,6 +14,7 @@ Name[uk]=Сповіщення
 Name[x-test]=xxNotificationsxx
 Comment=Notifications
 Comment[et]=Märguanded
+Comment[fr]=Notifications
 Comment[km]=ការ​ជូនដំណឹង
 Comment[nl]=Meldingen
 Comment[pl]=Powiadomienia

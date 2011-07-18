@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Active Web Browser
 Name[et]=Aktiivne veebibrauser
+Name[fr]=Navigateur web actif
 Name[km]=កម្មវិធី​រុករក​បណ្ដាញ​សកម្ម
 Name[nl]=Actieve webbrowser
 Name[pl]=Aktywna przeglądarka internetowa
@@ -11,6 +12,7 @@ Name[uk]=Активний переглядач інтернету
 Name[x-test]=xxActive Web Browserxx
 GenericName=Web Browser
 GenericName[et]=Veebibrauser
+GenericName[fr]=Navigateur web
 GenericName[km]=កម្មវិធី​រុករក​បណ្ដាញ
 GenericName[nl]=Webbrowser
 GenericName[pl]=Przeglądarka internetowa
@@ -22,6 +24,7 @@ GenericName[uk]=Переглядач інтернету
 GenericName[x-test]=xxWeb Browserxx
 Comment=A web browser reader for touch tablets
 Comment[et]=Veebibrauser puuteekraaniga tahvelarvutitele
+Comment[fr]=Un lecteur de navigateur web pour les tablettes graphiques
 Comment[km]=កម្មវិធី​រុករក​បណ្ដាញ​ធម្មតា​ដែល​សមរម្យ​សម្រាប់​ចំណុចប្រទាក់​ប៉ះ
 Comment[nl]=Een webbrowser voor aanraaktablets
 Comment[pl]=Czytnik przeglądarki internetowej dla tabletów dotykowych

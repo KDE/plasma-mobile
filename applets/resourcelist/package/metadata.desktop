@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Testing display of Nepomuk Resources
 Comment[et]=Nepomuki ressursside kuvamise test
+Comment[fr]=Test d'affichage des ressources Nepomuk
 Comment[km]=សាកល្បង​ទិដ្ឋភាព​របស់​ប្រភព​ Nepomuk
 Comment[nl]=Testen van tonen van Nepomuk-hulpbronnen
 Comment[pl]=Testowanie wyświetlania zasobów Nepomuk
@@ -12,6 +13,7 @@ Comment[x-test]=xxTesting display of Nepomuk Resourcesxx
 Encoding=UTF-8
 Keywords=Online Services, Web
 Keywords[et]=Võrguteenused, veeb
+Keywords[fr]=Services en ligne, Web
 Keywords[km]=សេវាកម្ម​លើ​បណ្ដាញ បណ្ដាញ
 Keywords[nl]=Online-diensten, web
 Keywords[pl]=Usługi online, internetowe
@@ -22,6 +24,7 @@ Keywords[uk]=Служби мережі, інтернет
 Keywords[x-test]=xxOnline Services, Webxx
 Name=Resources List
 Name[et]=Ressursiloend
+Name[fr]=Liste des ressources
 Name[km]=បញ្ជី​ប្រភព
 Name[nl]=Lijst met hulpbronnen
 Name[pl]=Lista zasobów
