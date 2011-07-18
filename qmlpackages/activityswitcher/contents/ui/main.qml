@@ -22,8 +22,15 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
+    id: activitySwitcher
     anchors.fill: parent
     property int iconSize: 32
+    state: "Normal"
+    onStateChanged: {
+        if (state == "Passive") {
+            highlightTimer.restart()
+        }
+    }
 
     MobileComponents.Package {
         id: switcherPackage
@@ -59,7 +66,9 @@ Item {
         repeat: false
         property int pendingIndex: -1
         onTriggered:  {
-            mainView.currentIndex = pendingIndex
+            if (activitySwitcher.state == "Passive") {
+                mainView.currentIndex = pendingIndex
+            }
         }
     }
 

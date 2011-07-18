@@ -96,13 +96,13 @@ PlasmaCore.FrameSvgItem {
                 onClicked: {
                     if (filterField.opacity==1) {
                         filterField.opacity = 0
-                        plasmoid.status = "ActiveStatus"
+                        activitySwitcher.state = "Normal"
                         filterField.text = ""
                         query = ""
                         fakeTextInput.closeSoftwareInputPanel()
                     } else {
                         filterField.opacity = 1
-                        plasmoid.status = "AcceptingInputStatus"
+                        activitySwitcher.state = "AcceptingInput"
                     }
                     //TODO: should get focus
                 }

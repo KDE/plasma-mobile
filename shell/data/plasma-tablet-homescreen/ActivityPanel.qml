@@ -28,6 +28,14 @@ Item {
     height: parent.height-80
     width: 400
     state: "show"
+    property Item switcher
+    onStateChanged: {
+        if (state == "hidden") {
+            switcher.state = "Passive"
+        } else if (switcher.state == "Passive") {
+            switcher.state = "Normal"
+        }
+    }
 
 
     //Uses a MouseEventListener instead of a MouseArea to not block any mouse event
@@ -55,7 +63,7 @@ Item {
         onReleased: {
             if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
                     activityPanel.state = "show"
-                    if (appletStatusWatcher.status != AppletStatusWatcher.AcceptingInputStatus) {
+                    if (activityPanel.switcher.state != "AcceptingInput") {
                         hideTimer.restart()
                     }
                 } else {
@@ -104,7 +112,7 @@ Item {
         name: "org.kde.activityswitcher"
         Component.onCompleted: {
             var component = Qt.createComponent(switcherPackage.filePath("ui", "main.qml"));
-        component.createObject(hintregion);
+            activityPanel.switcher = component.createObject(hintregion);
         }
     }
 
