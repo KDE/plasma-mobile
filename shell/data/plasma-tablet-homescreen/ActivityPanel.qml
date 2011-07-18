@@ -37,6 +37,10 @@ Item {
         }
     }
 
+    Connections {
+        target: switcher
+        onNewActivityRequested: homeScreen.newActivityRequested()
+    }
 
     //Uses a MouseEventListener instead of a MouseArea to not block any mouse event
     MobileComponents.MouseEventListener {

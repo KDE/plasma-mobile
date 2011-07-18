@@ -25,6 +25,7 @@ Item {
     id: activitySwitcher
     anchors.fill: parent
     property int iconSize: 32
+    signal newActivityRequested
     state: "Normal"
     onStateChanged: {
         if (state == "Passive") {

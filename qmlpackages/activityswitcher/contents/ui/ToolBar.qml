@@ -56,19 +56,8 @@ PlasmaCore.FrameSvgItem {
             svg: iconsSvg
             elementId: "add"
 
-            function creationFinished(activityJob)
-            {
-                var activityId = activityJob.result
-                var service = activitySource.serviceForSource(activityId)
-                var operation = service.operationDescription("setCurrent")
-                service.startOperationCall(operation)
-            }
             onClicked: {
-                var service = activitySource.serviceForSource("Status")
-                var operation = service.operationDescription("add")
-                operation["Name"] = "New activity"
-                var job = service.startOperationCall(operation)
-                job.finished.connect(creationFinished)
+                activitySwitcher.newActivityRequested()
             }
         }
         Item {

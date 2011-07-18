@@ -29,8 +29,9 @@ Item {
     y: 0;
     width: 800;
     height: 480;
-    signal nextActivityRequested();
-    signal previousActivityRequested();
+    signal nextActivityRequested
+    signal previousActivityRequested
+    signal newActivityRequested
 
     state : "Normal"
     signal transformingChanged(bool transforming)

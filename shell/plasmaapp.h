@@ -85,6 +85,7 @@ private Q_SLOTS:
     void lockScreen();
     void showWidgetsExplorer();
     void showActivityConfiguration();
+    void showActivityCreation();
     void mainViewGeometryChanged();
 
 private:

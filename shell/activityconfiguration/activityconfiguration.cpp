@@ -37,8 +37,11 @@
 
 //Plasma
 #include <Plasma/Containment>
+#include <Plasma/Corona>
 #include <Plasma/Context>
 #include <Plasma/Package>
+
+#include <Activities/Controller>
 
 ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     : Plasma::DeclarativeWidget(parent),
@@ -48,6 +51,7 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
       m_firstConfig(false)
 {
     setQmlPath(KStandardDirs::locate("data", "plasma-mobile/activityconfiguration/view.qml"));
+    m_activityController = new Activities::Controller(this);
 
     if (engine()) {
         QDeclarativeContext *ctxt = engine()->rootContext();
@@ -66,6 +70,20 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
 
 ActivityConfiguration::~ActivityConfiguration()
 {
+}
+
+void ActivityConfiguration::ensureContainmentExistence()
+{
+    const QString id = m_activityController->addActivity(m_activityName);
+    m_activityController->setCurrentActivity(id);
+    Plasma::Corona *corona = qobject_cast<Plasma::Corona *>(scene());
+    QEventLoop loop;
+    //FIXME: find a better way
+    QTimer::singleShot(100, &loop, SLOT(quit()));
+    loop.exec();
+    if (corona) {
+        m_containment = corona->containmentForScreen(0);
+    }
 }
 
 void ActivityConfiguration::setFirstConfig(bool firstConfig)
@@ -106,7 +124,15 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
 
     delete m_model;
 
-    m_model = new BackgroundListModel(m_containment->wallpaper(), this);
+    Plasma::Wallpaper *wp = 0;
+    if (m_containment && m_containment->wallpaper()) {
+        wp = m_containment->wallpaper();
+    } else {
+        wp = Plasma::Wallpaper::load("image");
+        wp->setParent(this);
+    }
+
+    m_model = new BackgroundListModel(wp, this);
     m_model->setResizeMethod(Plasma::Wallpaper::CenteredResize);
     m_model->setWallpaperSize(QSize(1024, 600));
     m_model->reload();
@@ -121,8 +147,18 @@ Plasma::Containment *ActivityConfiguration::containment() const
 
 void ActivityConfiguration::setActivityName(const QString &name)
 {
-    if (!m_containment) {
+    if (name == m_activityName) {
         return;
+    }
+
+    m_activityName = name;
+
+    if (!m_containment) {
+        ensureContainmentExistence();
+        //should never happen
+        if (!m_containment) {
+            return;
+        }
     }
 
     m_containment->setActivity(name);
@@ -130,11 +166,7 @@ void ActivityConfiguration::setActivityName(const QString &name)
 
 QString ActivityConfiguration::activityName() const
 {
-    if (!m_containment) {
-        return QString();
-    }
-
-    return m_containment->activity();
+    return m_activityName;
 }
 
 QString ActivityConfiguration::activityId() const
@@ -158,7 +190,15 @@ int ActivityConfiguration::wallpaperIndex()
 
 void ActivityConfiguration::setWallpaperIndex(const int index)
 {
-    if (m_wallpaperIndex == index || index < 0) {
+    if (!m_containment) {
+        ensureContainmentExistence();
+        //should never happen
+        if (!m_containment) {
+            return;
+        }
+    }
+
+    if (!m_wallpaperIndex == index || index < 0) {
         return;
     }
 

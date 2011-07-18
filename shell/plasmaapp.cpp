@@ -266,6 +266,9 @@ void PlasmaApp::setupHomeScreen()
     connect(m_homeScreen, SIGNAL(previousActivityRequested()),
             m_corona, SLOT(activatePreviousActivity()));
 
+    connect(m_homeScreen, SIGNAL(newActivityRequested()),
+            this, SLOT(showActivityCreation()));
+
     QDeclarativeItem *panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
 
     m_mainView->setSceneRect(mainItem->x(), mainItem->y(),
@@ -487,12 +490,6 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     KConfigGroup cg = containment->config();
     cg = KConfigGroup(&cg, "General");
-    const bool firstStartup = cg.readEntry("FirstStartup", true);
-
-    if (firstStartup) {
-        showActivityConfiguration(true);
-        cg.writeEntry("FirstStartup", false);
-    }
 }
 
 void PlasmaApp::mainViewGeometryChanged()
@@ -608,6 +605,22 @@ void PlasmaApp::showWidgetsExplorer()
 void PlasmaApp::showActivityConfiguration()
 {
     showActivityConfiguration(false);
+}
+
+void PlasmaApp::showActivityCreation()
+{
+    if (!m_activityConfiguration) {
+        m_activityConfiguration = new ActivityConfiguration();
+        m_activityConfiguration.data()->setZValue(1000);
+        m_corona->addItem(m_activityConfiguration.data());
+    }
+
+    //without a containment, one will be created
+    m_activityConfiguration.data()->setContainment(0);
+    if (m_declarativeWidget) {
+        m_activityConfiguration.data()->setGeometry(m_declarativeWidget->geometry());
+    }
+    m_activityConfiguration.data()->show();
 }
 
 void PlasmaApp::showActivityConfiguration(bool firstConfig)
