@@ -602,11 +602,6 @@ void PlasmaApp::showWidgetsExplorer()
     m_widgetsExplorer.data()->show();
 }
 
-void PlasmaApp::showActivityConfiguration()
-{
-    showActivityConfiguration(false);
-}
-
 void PlasmaApp::showActivityCreation()
 {
     if (!m_activityConfiguration) {
@@ -623,7 +618,7 @@ void PlasmaApp::showActivityCreation()
     m_activityConfiguration.data()->show();
 }
 
-void PlasmaApp::showActivityConfiguration(bool firstConfig)
+void PlasmaApp::showActivityConfiguration()
 {
     if (!m_activityConfiguration) {
         m_activityConfiguration = new ActivityConfiguration();
@@ -635,7 +630,6 @@ void PlasmaApp::showActivityConfiguration(bool firstConfig)
     if (m_declarativeWidget) {
         m_activityConfiguration.data()->setGeometry(m_declarativeWidget->geometry());
     }
-    m_activityConfiguration.data()->setFirstConfig(firstConfig);
     m_activityConfiguration.data()->show();
 }
 

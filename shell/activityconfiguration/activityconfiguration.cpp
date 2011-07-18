@@ -47,8 +47,7 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     : Plasma::DeclarativeWidget(parent),
       m_containment(0),
       m_mainWidget(0),
-      m_model(0),
-      m_firstConfig(false)
+      m_model(0)
 {
     setQmlPath(KStandardDirs::locate("data", "plasma-mobile/activityconfiguration/view.qml"));
     m_activityController = new Activities::Controller(this);
@@ -88,38 +87,6 @@ void ActivityConfiguration::ensureContainmentExistence()
     if (corona) {
         m_containment = corona->containmentForScreen(0);
     }
-}
-
-void ActivityConfiguration::setFirstConfig(bool firstConfig)
-{
-    if (m_firstConfig == firstConfig) {
-        return;
-    }
-
-    m_firstConfig = firstConfig;
-
-    //FIXME: this has to be done in C++ until we have QtComponents
-    if (firstConfig) {
-        QGraphicsWidget *activityNameEdit = m_mainWidget->findChild<QGraphicsWidget*>("activityNameEdit");
-        if (activityNameEdit) {
-            activityNameEdit->setFocus(Qt::MouseFocusReason);
-            QEvent openEvent(QEvent::RequestSoftwareInputPanel);
-            if (qApp) {
-                if (QGraphicsView *view = qobject_cast<QGraphicsView*>(qApp->focusWidget())) {
-                    if (view->scene() && view->scene() == scene()) {
-                        QApplication::sendEvent(view, &openEvent);
-                    }
-                }
-            }
-        }
-    }
-
-    emit firstConfigChanged();
-}
-
-bool ActivityConfiguration::firstConfig() const
-{
-    return m_firstConfig;
 }
 
 void ActivityConfiguration::setContainment(Plasma::Containment *cont)

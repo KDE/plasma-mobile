@@ -103,7 +103,7 @@ Rectangle {
                 activityNameEdit.text = configInterface.activityName
             }
 
-            if (configInterface.firstConfig) {
+            if (configInterface.activityName == "") {
                 var newIndex = Math.random()*wallpapersList.count
                 wallpapersList.currentIndex = newIndex
                 wallpapersList.positionViewAtIndex(newIndex, ListView.Center)
@@ -190,7 +190,7 @@ Rectangle {
             PlasmaWidgets.PushButton {
                 id: okButton
 
-                text: configInterface.firstConfig?i18n("Create activity"):i18n("Save changes")
+                text: configInterface.activityName == ""?i18n("Create activity"):i18n("Save changes")
                 onClicked : {
                     configInterface.activityName = activityNameEdit.text
                     configInterface.wallpaperIndex = wallpapersList.currentIndex
