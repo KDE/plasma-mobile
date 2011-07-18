@@ -29,21 +29,6 @@ Item {
     width: 400
     state: "show"
 
-    function addContainment(cont)
-    {
-        containment = cont
-    }
-
-    MobileComponents.AppletStatusWatcher {
-        id: appletStatusWatcher
-        onStatusChanged: {
-            if (status == AppletStatusWatcher.AcceptingInputStatus) {
-                hideTimer.running = false
-            } else {
-                hideTimer.restart()
-            }
-        }
-    }
 
     //Uses a MouseEventListener instead of a MouseArea to not block any mouse event
     MobileComponents.MouseEventListener {
@@ -76,13 +61,6 @@ Item {
                 } else {
                     activityPanel.state = "hidden"
                 }
-        }
-
-        Item {
-            id: containmentItem
-            x: 60
-            width: parent.width
-            height: parent.height
         }
 
         PlasmaCore.FrameSvgItem {
@@ -126,18 +104,8 @@ Item {
         name: "org.kde.activityswitcher"
         Component.onCompleted: {
             var component = Qt.createComponent(switcherPackage.filePath("ui", "main.qml"));
-        component.createObject(activityPanel);
+        component.createObject(hintregion);
         }
-    }
-
-    property QGraphicsWidget containment
-    onContainmentChanged: {
-        containment.parent = containmentItem
-        containment.x = 0
-        containment.y = 0
-        containment.width = activityPanel.width
-        containment.height = activityPanel.height
-        appletStatusWatcher.plasmoid = containment
     }
 
     states: [
