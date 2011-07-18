@@ -27,6 +27,19 @@ PlasmaCore.FrameSvgItem {
 
     property alias query: filterField.text
 
+    Connections {
+        target: activitySwitcher
+        onStateChanged: {
+            if (activitySwitcher.state != "AcceptingInput") {
+                filterField.opacity = 0
+                filterField.text = ""
+                query = ""
+                fakeTextInput.closeSoftwareInputPanel()
+                filterButton.checked = false
+            }
+        }
+    }
+
     imagePath: "dialogs/background"
     enabledBorders: "LeftBorder|TopBorder|BottomBorder"
     width: childrenRect.width+margins.left+margins.right+96
