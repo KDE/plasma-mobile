@@ -83,7 +83,7 @@ void MobileActivityThumbnails::snapshotContainment(Plasma::Containment *cont)
 
 void MobileActivityThumbnails::delayedSnapshotContainment()
 {
-    if (!m_containmentToSave) {
+    if (!m_containmentToSave || !m_containmentToSave.data()->wallpaper()) {
         return;
     }
     QGraphicsEffect *effect = m_containmentToSave.data()->graphicsEffect();
