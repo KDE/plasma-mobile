@@ -160,7 +160,7 @@ Rectangle {
             id: wallpapersList
             property int currentIndex: 0
             onCurrentIndexChanged: {
-                print("Current index: "+currentIndex)
+                currentPage = Math.floor(currentIndex/pageSize)
             }
             property int delegateWidth: 148
             property int delegateHeight: delegateWidth/1.6

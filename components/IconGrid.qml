@@ -31,7 +31,9 @@ Item {
     property int pageSize: Math.floor(appsView.width/delegateWidth)*Math.floor(appsView.height/delegateHeight)
     property int delegateWidth: 120
     property int delegateHeight: 120
-    property int currentPage: appsView.currentIndex
+    property alias currentPage: appsView.currentIndex
+    property int pagesCount: Math.ceil(model.count/pageSize)
+    property int count: model.count
 
     PlasmaCore.Theme {
         id:theme
@@ -54,7 +56,6 @@ Item {
 
         clip: true
         signal clicked(string url)
-
 
         delegate: Flow {
             width: appsView.width
