@@ -46,14 +46,11 @@ public:
     void init();
 
 protected Q_SLOTS:
-    void updateActivity(int wasScreen, int isScreen, Plasma::Containment *containment);
-    void updateQuery();
     void itemActivated(const QString &url);
 
 private:
     Plasma::DeclarativeWidget *m_declarativeWidget;
     QDeclarativeItem *m_view;
-    QTimer *m_queryTimer;
 
     KRunnerModel *m_runnerModel;
     AppModel *m_appModel;

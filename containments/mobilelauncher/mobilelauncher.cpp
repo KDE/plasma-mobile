@@ -64,10 +64,6 @@ void MobileLauncher::init()
 {
     Containment::init();
 
-    m_queryTimer = new QTimer(this);
-    m_queryTimer->setSingleShot(true);
-    connect(m_queryTimer, SIGNAL(timeout()), this, SLOT(updateQuery()));
-
     m_runnerModel = new KRunnerModel(this);
     m_appModel = new AppModel(this);
 
@@ -96,29 +92,6 @@ void MobileLauncher::init()
             }
         }
     }
-    Plasma::Corona *c = corona();
-    if (c) {
-        connect(c, SIGNAL(screenOwnerChanged(int, int, Plasma::Containment *)), this, SLOT(updateActivity(int, int, Plasma::Containment *)));
-    }
-}
-
-void MobileLauncher::updateActivity(int wasScreen, int isScreen, Plasma::Containment *containment)
-{
-    Q_UNUSED(wasScreen)
-    Q_UNUSED(wasScreen)
-
-    m_queryTimer->start(1000);
-    setBusy(true);
-}
-
-void MobileLauncher::updateQuery()
-{
-    Plasma::Containment *containment = corona()->containmentForScreen(0);
-    if (containment) {
-        m_runnerModel->setDefaultQuery(containment->activity());
-        m_runnerModel->setQuery(containment->activity());
-    }
-    setBusy(false);
 }
 
 void MobileLauncher::itemActivated(const QString &url)
