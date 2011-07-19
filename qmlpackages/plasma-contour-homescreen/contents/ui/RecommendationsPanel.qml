@@ -60,8 +60,6 @@ Item {
         onReleased: {
             if (recommendationsPanel.x > -recommendationsPanel.width/3) {
                 recommendationsPanel.state = "show"
-                //hintNotify.opacity = 0
-                //notifyLoopTimer.running = false
                 hideTimer.restart()
             } else {
                 recommendationsPanel.state = "hidden"
@@ -83,26 +81,17 @@ Item {
                 width:32
                 height:32
                 svg: PlasmaCore.Svg {
-                    imagePath: "widgets/arrows"
+                    imagePath: homeScreenPackage.filePath("images", "panel-icons.svgz")
                 }
-                opacity: appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus?0:1
-                Behavior on opacity {
-                    NumberAnimation {duration: 250}
-                }
-                elementId: "right-arrow"
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
-                anchors.rightMargin: hint.margins.right-5
-            }
-            Image {
-                id: hintNotify
-                source: homeScreenPackage.filePath("images", "colored-right-arrow.png")
-                anchors.fill: arrowSvgItem
-                opacity: appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus?1:0
-                Behavior on opacity {
-                    NumberAnimation {duration: 250}
+
+                elementId: "contour"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: hint.right
+                    rightMargin: hint.margins.right -5
                 }
             }
+
             Behavior on opacity {
                 NumberAnimation {duration: 1000}
             }
