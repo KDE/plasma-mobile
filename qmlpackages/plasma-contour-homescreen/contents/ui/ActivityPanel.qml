@@ -84,14 +84,17 @@ Item {
             imagePath: "widgets/background"
             enabledBorders: "LeftBorder|TopBorder|BottomBorder"
             PlasmaCore.SvgItem {
-                width:32
-                height:32
+                width:22
+                height:22
                 svg: PlasmaCore.Svg {
-                    imagePath: "./widgets/arrows"
+                    imagePath: homeScreenPackage.filePath("images", "panel-icons.svgz")
                 }
-                elementId: "left-arrow"
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
+                elementId: "activities"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    leftMargin: hint.margins.left
+                }
             }
             MouseArea {
                 anchors.fill: parent

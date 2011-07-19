@@ -19,10 +19,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import Qt 4.7
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobileshell 0.1 as MobileShell
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: homeScreen;
@@ -41,6 +41,11 @@ Item {
     property QtObject activeWallpaper
     onActiveWallpaperChanged: {
         print("Current wallpaper path"+activeWallpaper.wallpaperPath);
+    }
+
+    MobileComponents.Package {
+        id: homeScreenPackage
+        name: "plasma-contour-homescreen"
     }
 
     property QGraphicsWidget activeContainment
