@@ -112,6 +112,7 @@ KConfigGroup MobCorona::defaultConfig() const
     }
 
     QString defaultConfig = package->filePath("config", "plasma-default-layoutrc");
+    delete package;
 
     //kDebug() << "============================================================================";
     //kDebug() << "layout HSP:" << homeScreenPath;
