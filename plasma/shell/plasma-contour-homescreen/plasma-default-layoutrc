@@ -14,19 +14,6 @@ screen=0
 
 
 
-[Containments][2]
-activity=
-desktop=-1
-formfactor=3
-geometry=0,0,800,100
-immutability=1
-location=6
-excludeFromActivities=true
-declarativeSlot=activitySlot
-plugin=org.kde.mobileactivityswitcher
-screen=0
-
-
 [Containments][7]
 activity=
 excludeFromActivities=true

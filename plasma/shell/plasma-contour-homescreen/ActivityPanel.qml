@@ -21,32 +21,29 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: activityPanel;
     height: parent.height-80
     width: 400
     state: "show"
-
-    function addContainment(cont)
-    {
-        containment = cont
-    }
-
-    AppletStatusWatcher {
-        id: appletStatusWatcher
-        onStatusChanged: {
-            if (status == AppletStatusWatcher.AcceptingInputStatus) {
-                hideTimer.running = false
-            } else {
-                hideTimer.restart()
-            }
+    property Item switcher
+    onStateChanged: {
+        if (state == "hidden") {
+            switcher.state = "Passive"
+        } else if (switcher.state == "Passive") {
+            switcher.state = "Normal"
         }
     }
 
+    Connections {
+        target: switcher
+        onNewActivityRequested: homeScreen.newActivityRequested()
+    }
+
     //Uses a MouseEventListener instead of a MouseArea to not block any mouse event
-    MouseEventListener {
+    MobileComponents.MouseEventListener {
         id: hintregion;
 
         anchors.fill: parent
@@ -70,19 +67,12 @@ Item {
         onReleased: {
             if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
                     activityPanel.state = "show"
-                    if (appletStatusWatcher.status != AppletStatusWatcher.AcceptingInputStatus) {
+                    if (activityPanel.switcher.state != "AcceptingInput") {
                         hideTimer.restart()
                     }
                 } else {
                     activityPanel.state = "hidden"
                 }
-        }
-
-        Item {
-            id: containmentItem
-            x: 60
-            width: parent.width
-            height: parent.height
         }
 
         PlasmaCore.FrameSvgItem {
@@ -111,24 +101,23 @@ Item {
     }
 
     Timer {
-        id : hideTimer
+        id: hideTimer
         interval: 4000;
         running: false;
         onTriggered:  {
-            if (appletStatusWatcher.status != AppletStatusWatcher.AcceptingInputStatus) {
+            if (activityPanel.switcher.state != "AcceptingInput") {
                 activityPanel.state = "hidden"
             }
         }
     }
 
-    property QGraphicsWidget containment
-    onContainmentChanged: {
-        containment.parent = containmentItem
-        containment.x = 0
-        containment.y = 0
-        containment.width = activityPanel.width
-        containment.height = activityPanel.height
-        appletStatusWatcher.plasmoid = containment
+    MobileComponents.Package {
+        id: switcherPackage
+        name: "org.kde.activityswitcher"
+        Component.onCompleted: {
+            var component = Qt.createComponent(switcherPackage.filePath("ui", "main.qml"));
+            activityPanel.switcher = component.createObject(hintregion);
+        }
     }
 
     states: [
