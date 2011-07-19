@@ -21,6 +21,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.mobileshell 0.1 as MobileShell
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: homeScreen;
@@ -36,6 +37,11 @@ Item {
     state : "Normal"
     signal transformingChanged(bool transforming)
     property bool locked: true
+
+    MobileComponents.Package {
+        id: homeScreenPackage
+        name: "plasma-tablet-homescreen"
+    }
 
     property QGraphicsWidget activeContainment
     onActiveContainmentChanged: {
@@ -171,7 +177,7 @@ Item {
     }
     Shadow {
         id: alternateSlotShadowTop
-        source: "images/shadow-top.png"
+        source: homeScreenPackage.filePath("images", "shadow-top.png")
         anchors.bottom: alternateSlot.top
         anchors.topMargin: -1
         width: alternateSlot.width
@@ -179,7 +185,7 @@ Item {
     }
     Shadow {
         id: alternateSlotShadowBottom
-        source: "images/shadow-bottom.png"
+        source: homeScreenPackage.filePath("images", "shadow-bottom.png")
         anchors.top: alternateSlot.bottom
         anchors.topMargin: -1
         width: alternateSlot.width

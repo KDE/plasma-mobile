@@ -44,6 +44,7 @@
 #include <plasma/containmentactionspluginsconfig.h>
 
 #include <Plasma/DeclarativeWidget>
+#include <Plasma/Package>
 
 #include <Activities/Consumer>
 #include <Activities/Controller>
@@ -102,8 +103,16 @@ KConfigGroup MobCorona::defaultConfig() const
 {
     QString homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
 
-    QString layoutRc = QString("plasma-mobile/%1/plasma-default-layoutrc").arg(homeScreenPath);
-    QString defaultConfig = KStandardDirs::locate("data", layoutRc);
+    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+    Plasma::Package *package = new Plasma::Package(QString(), homeScreenPath, structure);
+    //fallback to plasma-mobile package
+    if (!package->isValid()) {
+        delete package;
+        package = new Plasma::Package(QString(), "plasma-mobile", structure);
+    }
+
+    QString defaultConfig = package->filePath("config", "plasma-default-layoutrc");
+
     //kDebug() << "============================================================================";
     //kDebug() << "layout HSP:" << homeScreenPath;
     //kDebug() << "layout RC :" << layoutRc;

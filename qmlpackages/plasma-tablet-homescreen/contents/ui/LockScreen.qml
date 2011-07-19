@@ -19,6 +19,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.qtextracomponents 0.1
 
 
 Rectangle {
@@ -161,12 +162,12 @@ Rectangle {
         }
 
 
-        Image {
+        QIconItem {
             id: lockerImage
-            width: 52
-            height: 52
+            width: 48
+            height: 48
             anchors.centerIn: parent
-            source: "images/lock.png"
+            icon: QIcon("object-locked")
         }
 
         states: [
@@ -180,7 +181,7 @@ Rectangle {
                 }
                 PropertyChanges {
                     target: lockerImage
-                    source: "images/unlock.png"
+                    icon: QIcon("object-unlocked")
                 }
             }
         ]

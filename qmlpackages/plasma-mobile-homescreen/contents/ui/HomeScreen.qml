@@ -19,7 +19,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import Qt 4.7
+import QtQuick 1.0
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: homeScreen;
@@ -32,6 +33,11 @@ Item {
     state : "Normal";
     property bool locked: true
     signal transformingChanged(bool transforming)
+
+    MobileComponents.Package {
+        id: homeScreenPackage
+        name: "plasma-mobile-homescreen"
+    }
 
     property QGraphicsWidget activeContainment
     onActiveContainmentChanged: {

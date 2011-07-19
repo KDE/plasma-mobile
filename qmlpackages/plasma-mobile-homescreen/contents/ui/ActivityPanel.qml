@@ -30,7 +30,7 @@ Item {
 
     Image {
         id: hint;
-        source: "images/hint-vertical.png";
+        source: homeScreenPackage.filePath("images", "hint-vertical.png")
         x: -40;
         anchors.verticalCenter: activityPanel.verticalCenter;
     }

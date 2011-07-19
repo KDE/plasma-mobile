@@ -41,7 +41,7 @@ Image {
     onLocationChanged: {
         //dragger.anchors.horizontalCenter = ''
         if (location == "BottomEdge") {
-            dragger.source= "images/hint.png"
+            dragger.source= homeScreenPackage.filePath("images", "hint.png")
             dragger.height= 35
             dragger.width= 103
             dragger.anchors.horizontalCenter = homeScreen.horizontalCenter;
@@ -52,7 +52,7 @@ Image {
             draggerRegion.drag.minimumY = 0;
             draggerRegion.drag.maximumY = homeScreen.height-dragger.height;
         } else if (location == "TopEdge") {
-            dragger.source= "images/hint.png"
+            dragger.source= homeScreenPackage.filePath("images", "hint.png")
             dragger.height= 35
             dragger.width= 103
             dragger.anchors.horizontalCenter = homeScreen.horizontalCenter;
@@ -63,7 +63,7 @@ Image {
             draggerRegion.drag.minimumY = 0;
             draggerRegion.drag.maximumY = homeScreen.height;
         } else if (location == "LeftEdge") {
-            dragger.source= "images/hint-vertical.png"
+            dragger.source= homeScreenPackage.filePath("images", "hint-vertical.png")
             dragger.height= 103
             dragger.width= 35
             dragger.anchors.verticalCenter = homeScreen.verticalCenter;
@@ -75,7 +75,7 @@ Image {
             draggerRegion.drag.maximumX = homeScreen.width;
         //RightEdge
         } else {
-            dragger.source= "images/hint-vertical.png"
+            dragger.source= homeScreenPackage.filePath("images", "hint-vertical.png")
             dragger.height= 103
             dragger.width= 35
             dragger.anchors.verticalCenter = homeScreen.verticalCenter;

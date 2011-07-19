@@ -38,14 +38,14 @@ Item {
         anchors.left: parent.left;
         anchors.right: parent.right;
         fillMode: Image.Tile
-        source: "images/launcherpanel.png";
+        source: homeScreenPackage.filePath("images", "launcherpanel.png")
     }
 
     Image {
         id: stars;
         anchors.left: parent.left;
         anchors.right: parent.right;
-        source: "images/stars.png";
+        source: homeScreenPackage.filePath("images", "stars.png")
         fillMode: Image.Tile
         y: launcherPanelImage.height - stars.height;
     }
@@ -63,7 +63,7 @@ Item {
 
     Image {
         id: hint;
-        source: "images/hint.png";
+        source: homeScreenPackage.filePath("images", "hint.png")
         y: -40;
         anchors.horizontalCenter: launcherPanel.horizontalCenter;
     }
@@ -92,7 +92,7 @@ Item {
 
     Image {
         id: activityIndicator
-        source: "images/activityIndicator.png";
+        source: homeScreenPackage.filePath("images", "activityIndicator.png")
         //anchors.bottom: parent.bottom
         y: parent.height
         x: -width

@@ -43,7 +43,7 @@ Flow {
 
         Image {
             id: internet;
-            source: "images/internet.png";
+            source: homeScreenPackage.filePath("images", "internet.png")
         }
     }
 
@@ -56,7 +56,7 @@ Flow {
 
         Image {
             id: instantmessaging;
-            source: "images/im.png";
+            source: homeScreenPackage.filePath("images", "im.png")
         }
 
     }
@@ -77,7 +77,7 @@ Flow {
 
         Image {
             id: phone;
-            source: "images/phone.png";
+            source: homeScreenPackage.filePath("images", "phone.png")
         }
 
     }
@@ -91,7 +91,7 @@ Flow {
 
         Image {
             id: social;
-            source: "images/social.png";
+            source: homeScreenPackage.filePath("images", "internet.png")
         }
 
     }
@@ -105,7 +105,7 @@ Flow {
 
         Image {
             id: games;
-            source: "images/games.png";
+            source: homeScreenPackage.filePath("images", "games.png")
         }
 
     }

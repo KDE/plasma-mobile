@@ -80,7 +80,8 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
-      m_isDesktop(false)
+      m_isDesktop(false),
+      m_package(false)
 {
     KGlobal::locale()->insertCatalog("libplasma");
 
@@ -236,15 +237,17 @@ void PlasmaApp::setupHomeScreen()
         m_homeScreenPath = QString("mobile-homescreen");
     }
 
-    QString qmlPath = KStandardDirs::locate("data", QString("plasma-mobile/%1/HomeScreen.qml").arg(m_homeScreenPath));
-    if (qmlPath.isEmpty()) {
-        kWarning() << "***** QML File not found.";
-        kDebug() << "CFG:" << m_homeScreenPath;
-        kDebug() << "HSP:" << QString(m_homeScreenPath).append("/HomeScreen.qml");
-        kDebug() << "KSD:" << KStandardDirs::locate("data", "plasma-mobile/mobile-homescreen/HomeScreen.qml");
+
+    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+    m_package = new Plasma::Package(QString(), m_homeScreenPath, structure);
+    //fallback to plasma-mobile package
+    if (!m_package->isValid()) {
+        delete m_package;
+        m_package = new Plasma::Package(QString(), "plasma-mobile", structure);
     }
-    kDebug() << "QML:" << qmlPath;
-    m_declarativeWidget->setQmlPath(qmlPath);
+
+    kDebug() << "QML:" << m_package->filePath("mainscript");
+    m_declarativeWidget->setQmlPath(m_package->filePath("mainscript"));
 
     if (!m_declarativeWidget->engine()) {
         QCoreApplication::quit();
