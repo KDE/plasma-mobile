@@ -88,7 +88,7 @@ Item {
             id: resourceDelegate
             width: 96*1.6+24
             height: 96
-            resourceType: model.resourceType
+            className: model.className
 
             onPressed: {
                 resourceInstance.uri = model["url"]
