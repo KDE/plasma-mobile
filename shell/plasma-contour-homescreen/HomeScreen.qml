@@ -31,8 +31,9 @@ Item {
     y: 0;
     width: 800;
     height: 480;
-    signal nextActivityRequested();
-    signal previousActivityRequested();
+    signal nextActivityRequested
+    signal previousActivityRequested
+    signal newActivityRequested
     state : "Normal"
     signal transformingChanged(bool transforming)
     property bool locked: true
@@ -240,8 +241,7 @@ Item {
     }
 
     ActivityPanel {
-        id: rightEdgePanel
-        objectName: "rightEdgePanel"
+        id: activityPanel
 
         anchors.verticalCenter: parent.verticalCenter
         x: parent.width - width
