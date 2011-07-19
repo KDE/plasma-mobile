@@ -74,8 +74,8 @@ Item {
         activeContainment.y = 0
 
         //hide the activity switcher
-        rightEdgePanel.x = homeScreen.width
-        rightEdgePanel.state = "hidden"
+        activityPanel.x = homeScreen.width
+        activityPanel.state = "hidden"
 
         state = "Normal"
         transformingChanged(false);
