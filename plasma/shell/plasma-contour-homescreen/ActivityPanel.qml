@@ -87,7 +87,7 @@ Item {
                 width:32
                 height:32
                 svg: PlasmaCore.Svg {
-                    imagePath: "widgets/arrows"
+                    imagePath: "./widgets/arrows"
                 }
                 elementId: "left-arrow"
                 anchors.verticalCenter: parent.verticalCenter
