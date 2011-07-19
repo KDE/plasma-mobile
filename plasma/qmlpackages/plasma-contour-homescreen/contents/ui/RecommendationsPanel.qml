@@ -96,7 +96,7 @@ Item {
             }
             Image {
                 id: hintNotify
-                source: "images/colored-right-arrow.png"
+                source: homeScreenPackage.filePath("images", "colored-right-arrow.png")
                 anchors.fill: arrowSvgItem
                 opacity: appletStatusWatcher.status == AppletStatusWatcher.NeedsAttentionStatus?1:0
                 Behavior on opacity {

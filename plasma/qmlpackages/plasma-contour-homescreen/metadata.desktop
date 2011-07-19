@@ -1,0 +1,18 @@
+[Desktop Entry]
+Comment=
+Encoding=UTF-8
+Keywords=
+Name=plasma-contour-homescreen
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/GenericPackage
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Category=
+X-KDE-PluginInfo-Email=mart@kde.org
+X-KDE-PluginInfo-License=GPL
+#FIXME: will be called org.kde.active.contour-homescreen or just be merged in tablet
+X-KDE-PluginInfo-Name=plasma-contour-homescreen
+X-KDE-PluginInfo-Version=
+X-KDE-PluginInfo-Website=
+X-Plasma-MainScript=ui/HomeScreen.qml
