@@ -205,6 +205,9 @@ Item {
             to: "Slide"
             SequentialAnimation {
 
+                PauseAnimation {
+                    duration: 2000
+                }
                 ParallelAnimation {
                     NumberAnimation {
                         target: spareSlot;
