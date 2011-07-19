@@ -43,11 +43,6 @@ Item {
 
     Component.onCompleted: {
         LayoutManager.restore()
-
-        //FIXME: why it arrives as a string?
-        if (plasmoid.readConfig("FirstStartup") == true) {
-            showAddResource()
-        }
     }
 
     function showAddResource()
