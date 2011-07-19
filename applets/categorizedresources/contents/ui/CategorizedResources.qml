@@ -120,62 +120,51 @@ Item {
             width: mainFlickable.width
             height: childrenRect.height+availScreenRect.y
 
-            Item {
+
+            Connections {
+                target: plasmoid
+                onActivityNameChanged: titleText.text = plasmoid.activityName
+            }
+
+            Row {
                 id: toolBar
+                spacing: 8
                 anchors {
                     top: parent.top
                     left: parent.left
-                    right: parent.right
                     topMargin: availScreenRect.y
+                    leftMargin: 72
                 }
-                height: childrenRect.height
+
+                MobileComponents.ActionButton {
+                    svg: iconsSvg
+                    elementId: "add"
+                    onClicked: {
+                        showAddResource()
+                    }
+                    text: i18n("Add item")
+                }
+
+                MobileComponents.ActionButton {
+                    id: configureButton
+                    svg: iconsSvg
+                    elementId: "configure"
+                    action: plasmoid.action("configure")
+                    text: i18n("Configure")
+                    //FIXME: WHY?
+                    Component.onCompleted: {
+                        action.enabled = true
+                    }
+                }
+
                 Text {
                     id: titleText
-                    anchors {
-                        top: toolRow.top
-                        left: parent.left
-                        leftMargin: 72
-                    }
                     text: plasmoid.activityName
                     font.bold: true
                     style: Text.Outline
                     styleColor: Qt.rgba(1, 1, 1, 0.6)
                     font.pixelSize: 25
-                }
-                Connections {
-                    target: plasmoid
-                    onActivityNameChanged: titleText.text = plasmoid.activityName
-                }
-
-                Row {
-                    id: toolRow
-                    spacing: 8
-                    anchors {
-                        top: parent.top
-                        right: parent.right
-                        topMargin: 12
-                        rightMargin: 22
-                    }
-
-                    MobileComponents.ActionButton {
-                        svg: iconsSvg
-                        elementId: "add"
-                        onClicked: {
-                            showAddResource()
-                        }
-                        text: i18n("Add item")
-                    }
-
-                    MobileComponents.ActionButton {
-                        svg: iconsSvg
-                        elementId: "configure"
-                        action: plasmoid.action("configure")
-                        text: i18n("Configure")
-                        //FIXME: WHY?
-                        Component.onCompleted: {
-                            action.enabled = true
-                        }
-                    }
+                    anchors.verticalCenter: configureButton.verticalCenter
                 }
             }
 
