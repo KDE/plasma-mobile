@@ -75,6 +75,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             imagePath: "widgets/background"
             enabledBorders: "RightBorder|TopBorder|BottomBorder"
+            opacity: appletStatusWatcher.status == AppletStatusWatcher.PassiveStatus?0.3:1;
 
             PlasmaCore.SvgItem {
                 id: arrowSvgItem
@@ -97,7 +98,7 @@ Item {
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: recommendationsPanel.state = "show"
+                onClicked: recommendationsPanel.state = recommendationsPanel.x == 0?"hidden":"show"
             }
         }
 
@@ -154,10 +155,6 @@ Item {
                 x: 0;
             }
             PropertyChanges {
-                target: hint;
-                opacity: 0;
-            }
-            PropertyChanges {
                 target: hideTimer;
                 running: true
             }
@@ -168,10 +165,6 @@ Item {
                 target: recommendationsPanel;
                 x: - width;
             }
-            PropertyChanges {
-                target: hint;
-                opacity: appletStatusWatcher.status == AppletStatusWatcher.PassiveStatus?0.3:1;
-            }
         },
         State {
             name: "dragging"
@@ -180,10 +173,6 @@ Item {
                 x: recommendationsPanel.x;
                 y: recommendationsPanel.y;
 
-            }
-            PropertyChanges {
-                target: hint;
-                opacity: 0;
             }
         }
     ]
@@ -199,14 +188,6 @@ Item {
                         properties: "x";
                         duration: 1000;
                         easing.type: "InOutCubic";
-                    }
-                }
-                ParallelAnimation {
-                    PropertyAnimation {
-                        target: hint;
-                        property: "opacity";
-                        duration: 600;
-                        easing.type: "InCubic";
                     }
                 }
             }
