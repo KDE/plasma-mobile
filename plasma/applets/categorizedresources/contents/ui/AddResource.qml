@@ -171,7 +171,7 @@ Rectangle {
                 left: parent.left
                 right:parent.right
                 top: searchBox.bottom
-                bottom: selectedResourcesList.top
+                bottom: buttonsRow.top
                 leftMargin: parent.margins.left
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
@@ -197,28 +197,56 @@ Rectangle {
                     Component.onCompleted: resultsContainer.contentY = resultsContainer.height
                     height: resultsContainer.height
                     model: metadataModel
-                    delegate: MobileComponents.ResourceDelegate {
-                        id: resourceDelegate
+                    delegate: Item {
                         width: 130
                         height: 120
-                        infoLabelVisible: false
+                        PlasmaCore.FrameSvgItem {
+                                id: highlightFrame
+                                imagePath: "widgets/viewitem"
+                                prefix: "selected+hover"
+                                opacity: 0
+                                width: 130
+                                height: 120
+                                Behavior on opacity {
+                                    NumberAnimation {duration: 250}
+                                }
+                        }
+                        MobileComponents.ResourceDelegate {
+                            id: resourceDelegate
+                            width: 130
+                            height: 120
+                            infoLabelVisible: false
 
-                        onClicked: {
+                            onClicked: {
 
-                            //already in the model?
-                            for (var i = 0; i < selectedModel.count; ++i) {
-                                if (model.resourceUri == selectedModel.get(i).resourceUri) {
-                                    return
+                                //already in the model?
+                                for (var i = 0; i < selectedModel.count; ++i) {
+                                    if (model.resourceUri == selectedModel.get(i).resourceUri) {
+                                        highlightFrame.opacity = 0
+                                        selectedModel.remove(i)
+                                        return
+                                    }
+                                }
+
+                                var item = new Object
+                                for (i in model) {
+                                    if (i != "index") {
+                                        item[i] = model[i]
+                                    }
+                                }
+                                selectedModel.append(item)
+                                highlightFrame.opacity = 1
+                            }
+                            Component.onCompleted: {
+                                //FIXME: horribly inefficient
+                                //already in the model?
+                                for (var i = 0; i < selectedModel.count; ++i) {
+                                    if (model.resourceUri == selectedModel.get(i).resourceUri) {
+                                        highlightFrame.opacity = 1
+                                        return
+                                    }
                                 }
                             }
-
-                            var item = new Object
-                            for (i in model) {
-                                if (i != "index") {
-                                    item[i] = model[i]
-                                }
-                            }
-                            selectedModel.append(item)
                         }
                     }
                 }
@@ -272,29 +300,6 @@ Rectangle {
                             }
                         }
                     }
-                }
-            }
-        }
-        ListView {
-            id: selectedResourcesList
-            model: selectedModel
-            orientation: ListView.Horizontal
-            clip: true
-            anchors {
-                left: parent.left
-                right: parent.right
-                bottom: buttonsRow.top
-                leftMargin: parent.margins.left
-                rightMargin: parent.margins.right
-            }
-
-            height: count>0?120:0
-            delegate: MobileComponents.ResourceDelegate {
-                width: 130
-                height: 120
-                infoLabelVisible: false
-                onClicked: {
-                    selectedModel.remove(index)
                 }
             }
         }
