@@ -107,8 +107,32 @@ Item {
             width: parent.width-60
             height: parent.height-80
             y: 80
-            imagePath: "widgets/background"
+            imagePath: "dialogs/background"
             enabledBorders: "RightBorder|TopBorder"
+            PlasmaCore.FrameSvgItem {
+                id: titleItem
+                imagePath: "widgets/extender-dragger"
+                prefix: "root"
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                    leftMargin: parent.margins.left
+                    rightMargin: parent.margins.right
+                    topMargin: parent.margins.top
+                }
+                height: titleText.height + margins.top + margins.bottom
+                Text {
+                    id: titleText
+                    text: i18n("Recommendations")
+                    font.pointSize: 18
+                    anchors {
+                        top: parent.top
+                        horizontalCenter: parent.horizontalCenter
+                        topMargin: parent.margins.top
+                    }
+                }
+            }
         }
     }
 
@@ -129,9 +153,9 @@ Item {
     onContainmentChanged: {
         containment.parent = containmentItem
         containment.x = containmentItem.margins.left
-        containment.y = containmentItem.margins.top
+        containment.y = titleItem.height + containmentItem.margins.top
         containment.width = containmentItem.width - containmentItem.margins.left - containmentItem.margins.right
-        containment.height = containmentItem.height - containmentItem.margins.top - containmentItem.margins.bottom
+        containment.height = containmentItem.height - containmentItem.margins.top - containmentItem.margins.bottom - titleItem.height
         containment.z = hideTimerResetRegion.z -1
         appletStatusWatcher.plasmoid = containment
     }
