@@ -30,8 +30,9 @@ ListItem {
 
 
     QIconItem {
-        x: listItem.padding.left
-        y: listItem.padding.top
+        id: iconItem
+        x: y
+        anchors.verticalCenter: parent.verticalCenter
         width: 48
         height: 48
         icon: QIcon(listItem.icon)
@@ -41,8 +42,8 @@ ListItem {
         id : delegateLayout
         width: parent.width
         spacing: 5
-        anchors.left: listItem.padding.left
-        anchors.leftMargin: 50
+        anchors.left: iconItem.right
+        anchors.leftMargin: 8
         anchors.right: listItem.padding.right
         anchors.top: listItem.padding.top
 
@@ -63,8 +64,8 @@ ListItem {
         id : actionsLayout
         width: parent.width
         spacing: 5
-        anchors.left: listItem.padding.left
-        anchors.leftMargin: 50
+        anchors.left: iconItem.right
+        anchors.leftMargin: 8
         anchors.right: listItem.padding.right
         anchors.top: delegateLayout.bottom
         anchors.topMargin: 8

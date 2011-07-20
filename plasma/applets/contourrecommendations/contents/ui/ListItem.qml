@@ -32,12 +32,11 @@ Item {
 
     PlasmaCore.FrameSvgItem {
         id : background
-        imagePath: "widgets/frame"
-        prefix: "plain"
+        imagePath: "widgets/listitem"
+        prefix: "normal"
 
         anchors.fill: parent
-        anchors.topMargin: 2
-        anchors.bottomMargin: 2
+
 
         MouseArea {
             id: itemMouse
