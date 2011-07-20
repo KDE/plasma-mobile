@@ -98,6 +98,7 @@ Rectangle {
             } else {
                 resultsContainer.contentY = resultsContainer.height
             }
+            selectedModel.clear()
        }
     }
 
@@ -127,7 +128,7 @@ Rectangle {
                 rightMargin: parent.margins.right
                 topMargin: parent.margins.top
             }
-            
+
             QIconItem {
                 icon: QIcon("go-up")
                 width: 32
@@ -136,6 +137,7 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         resultsContainer.contentY = resultsContainer.height
+                        selectedModel.clear()
                     }
                 }
                 opacity: resultsContainer.contentY==0?1:0
@@ -161,6 +163,7 @@ Rectangle {
                 } else {
                     contentY = height
                 }
+                selectedModel.clear()
             }
             contentWidth: resultsColumn.width
             contentHeight: resultsColumn.height
