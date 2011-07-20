@@ -118,6 +118,11 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
         }
     }
 
+    if (m_containment) {
+        m_activityName = m_containment->activity();
+        emit activityNameChanged();
+    }
+
     m_model = new BackgroundListModel(wp, this);
     m_model->setResizeMethod(Plasma::Wallpaper::CenteredResize);
     m_model->setWallpaperSize(QSize(1024, 600));
@@ -148,6 +153,7 @@ void ActivityConfiguration::setActivityName(const QString &name)
     }
 
     m_containment->setActivity(name);
+    emit activityNameChanged();
 }
 
 QString ActivityConfiguration::activityName() const

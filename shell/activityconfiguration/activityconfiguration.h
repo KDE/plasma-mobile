@@ -40,7 +40,7 @@ namespace Plasma
 class ActivityConfiguration : public Plasma::DeclarativeWidget
 {
     Q_OBJECT
-    Q_PROPERTY(QString activityName READ activityName WRITE setActivityName)
+    Q_PROPERTY(QString activityName READ activityName WRITE setActivityName NOTIFY activityNameChanged)
     Q_PROPERTY(QString activityId READ activityId)
     Q_PROPERTY(QObject *wallpaperModel READ wallpaperModel NOTIFY modelChanged)
     Q_PROPERTY(int wallpaperIndex READ wallpaperIndex WRITE setWallpaperIndex)
@@ -67,6 +67,7 @@ public:
 
 Q_SIGNALS:
     void modelChanged();
+    void activityNameChanged();
 
 protected:
     void ensureContainmentExistence();
