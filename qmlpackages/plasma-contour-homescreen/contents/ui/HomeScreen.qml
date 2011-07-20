@@ -150,7 +150,10 @@ Item {
         id: leftEdgePanel
         objectName: "leftEdgePanel"
 
-        anchors.verticalCenter: parent.verticalCenter
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+        }
         x: - width
     }
 
