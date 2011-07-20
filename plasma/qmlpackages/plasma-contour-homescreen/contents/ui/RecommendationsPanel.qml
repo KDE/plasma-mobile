@@ -25,8 +25,8 @@ import org.kde.plasma.mobilecomponents 0.1
 
 Item {
     id: recommendationsPanel;
-    height: parent.height/1.5
-    width: 350
+    height: parent.height/1.2
+    width: parent.width/1.8
     state: "show"
     enabled: appletStatusWatcher.status == AppletStatusWatcher.PassiveStatus?false:true
 
@@ -105,9 +105,10 @@ Item {
         PlasmaCore.FrameSvgItem {
             id: containmentItem
             width: parent.width-60
-            height: parent.height
+            height: parent.height-80
+            y: 80
             imagePath: "widgets/background"
-            enabledBorders: "RightBorder|TopBorder|BottomBorder"
+            enabledBorders: "RightBorder|TopBorder"
         }
     }
 
