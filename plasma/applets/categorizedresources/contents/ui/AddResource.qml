@@ -247,6 +247,15 @@ Rectangle {
                                     }
                                 }
                             }
+                            //FIXME here too
+                            Connections {
+                                target: selectedModel
+                                onCountChanged: {
+                                    if (selectedModel.count == 0) {
+                                        highlightFrame.opacity = 0
+                                    }
+                                }
+                            }
                         }
                     }
                 }
