@@ -128,7 +128,7 @@ Item {
 
             Row {
                 id: toolBar
-                spacing: 8
+                spacing: 16
                 anchors {
                     top: parent.top
                     left: parent.left
@@ -142,7 +142,7 @@ Item {
                     onClicked: {
                         showAddResource()
                     }
-                    text: i18n("Add item")
+                    //text: i18n("Add item")
                 }
 
                 MobileComponents.ActionButton {
@@ -150,7 +150,7 @@ Item {
                     svg: iconsSvg
                     elementId: "configure"
                     action: plasmoid.action("configure")
-                    text: i18n("Configure")
+                    //text: i18n("Configure")
                     //FIXME: WHY?
                     Component.onCompleted: {
                         action.enabled = true
@@ -163,7 +163,7 @@ Item {
                     font.bold: true
                     style: Text.Outline
                     styleColor: Qt.rgba(1, 1, 1, 0.6)
-                    font.pixelSize: 25
+                    font.pixelSize: 20
                     anchors.verticalCenter: configureButton.verticalCenter
                 }
             }

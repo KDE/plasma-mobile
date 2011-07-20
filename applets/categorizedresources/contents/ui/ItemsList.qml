@@ -94,7 +94,7 @@ Item {
         height: 22
         svg: arrowsSvg
         elementId: "left-arrow"
-        opacity: itemsList.atXBeginning?0.15:1
+        opacity: itemsList.atXBeginning?0:1
         enabled: !itemsList.atXBeginning
         Behavior on opacity {
             NumberAnimation {duration: 250}
@@ -115,7 +115,7 @@ Item {
         height: 22
         svg: arrowsSvg
         elementId: "right-arrow"
-        opacity: itemsList.atXEnd?0.15:1
+        opacity: itemsList.atXEnd?0:1
         enabled: !itemsList.atXEnd
         Behavior on opacity {
             NumberAnimation {duration: 250}
