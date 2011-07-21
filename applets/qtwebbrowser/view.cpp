@@ -28,6 +28,8 @@
 #include "view.h"
 #include "kdebug.h"
 
+#include "Plasma/Package"
+
 View::View(const QString &url, QWidget *parent)
     : QDeclarativeView(parent),
     m_options(new WebsiteOptions),
@@ -53,8 +55,12 @@ View::View(const QString &url, QWidget *parent)
     // In a later stadium, we can install the QML stuff in a different path.
     QString qmlFile = KGlobal::dirs()->findResource("data",
                                     "plasma/plasmoids/qtwebbrowser/contents/code/webbrowser.qml");
+
+    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+    m_package = new Plasma::Package(QString(), "org.kde.rekonqactive", structure);
+
     //kDebug() << "Loading QML File:" << qmlFile;
-    setSource(QUrl(qmlFile));
+    setSource(QUrl(m_package->filePath("mainscript")));
     //kDebug() << "Plugin pathes:" << engine()->pluginPathList();
     show();
     rootContext()->setContextProperty("filteredUrl", QVariant(QString()));

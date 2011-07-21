@@ -48,6 +48,11 @@ struct WebsiteOptions
     int rating;
 };
 
+namespace Plasma
+{
+    class Package;
+};
+
 class View : public QDeclarativeView
 {
     Q_OBJECT
@@ -75,6 +80,7 @@ private Q_SLOTS:
 
 private:
     QString filterUrl(const QString &url);
+    Plasma::Package *m_package;
 };
 
 #endif // VIEW_H
