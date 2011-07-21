@@ -138,7 +138,7 @@ PlasmaCore.FrameSvgItem {
                     svg: toolbarIconsSvg
                     elementId: "reload"
                     action: webView.reload
-                    opacity: action.enabled?1:0
+                    visible: action.enabled
                 }
 
                 MobileComponents.ActionButton {
@@ -146,7 +146,7 @@ PlasmaCore.FrameSvgItem {
                     svg: toolbarIconsSvg
                     elementId: "stop"
                     action: webView.stop
-                    opacity: action.enabled?1:0
+                    visible: action.enabled
                 }
 
                 QIconItem {
