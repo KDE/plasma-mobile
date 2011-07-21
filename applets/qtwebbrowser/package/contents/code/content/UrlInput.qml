@@ -34,6 +34,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.qtextracomponents 0.1
 
 Item {
     id: container
@@ -46,7 +47,8 @@ Item {
     signal urlEntered(string url)
     signal urlChanged
 
-    width: parent.height; height: parent.height
+    width: parent.height
+    height: urlText.height
 
     BorderImage {
         id: bg; rotation: 180
@@ -55,14 +57,6 @@ Item {
         border { left: 10; top: 10; right: 10; bottom: 10 }
     }
 
-    Rectangle {
-        anchors.bottom: bg.bottom
-        x: 18
-        height: urlText.height
-        color: "#63b1ed"
-        width: (bg.width - 20) * webView.progress
-        opacity: webView.progress == 1.0 ? 0.0 : 1.0
-    }
 
     function tameUrl(textUrl) {
 
@@ -102,9 +96,47 @@ Item {
         }
 
         anchors {
-            left: parent.left; right: parent.right; leftMargin: 18; rightMargin: 18
-            verticalCenter: parent.verticalCenter
+            left: parent.left
+            right: parent.right
+            leftMargin: 8
+            rightMargin: 8
         }
+    }
+
+    QIconItem {
+        id: clearButton
+        icon: QIcon("edit-clear-locationbar-rtl")
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                urlText.text = ""
+            }
+        }
+        width: 48
+        height: 48
+        opacity: urlText.text == "" ?0: 1
+        anchors {
+            right: urlText.right
+            rightMargin: -8
+            verticalCenter: urlText.verticalCenter
+            verticalCenterOffset: -2
+        }
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
+
+    Rectangle {
+        anchors.bottom: urlText.bottom
+        x: urlText.x + 2
+        height: 6
+        radius: 4
+        color: theme.highlightColor
+        width: (bg.width - 20) * webView.progress
+        opacity: webView.progress == 1.0 ? 0.0 : 0.7
     }
 
     onFilteredUrlChanged: {
