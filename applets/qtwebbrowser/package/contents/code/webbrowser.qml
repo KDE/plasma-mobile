@@ -81,10 +81,11 @@ Rectangle {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
+            topMargin: -4
         }
     }
 
-    Item { id: headerSpace; width: parent.width; height: 62 }
+    Item { id: headerSpace; width: parent.width; height: header.height }
 
     Header {
         id: header
