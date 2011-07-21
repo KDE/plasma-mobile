@@ -22,6 +22,8 @@
 #include <KIcon>
 #include <KStandardAction>
 
+#include <Plasma/Theme>
+
 #include "rekonqactive.h"
 
 RekonqActive::RekonqActive(const QString &url)
@@ -33,6 +35,11 @@ RekonqActive::RekonqActive(const QString &url)
     m_widget = new View(url, this);
     restoreWindowSize(config("Window"));
     setCentralWidget(m_widget);
+
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
+    const QString themeName = cg.readEntry("name", "air-mobile");
+    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
+    Plasma::Theme::defaultTheme()->setThemeName(themeName);
 
     connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
 }
