@@ -15,6 +15,7 @@ target_link_libraries(rekonq-active
     ${KDE4_KDEUI_LIBS}
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
+    kdeclarative
 )
 
 install( TARGETS rekonq-active ${INSTALL_TARGETS_DEFAULT_ARGS} )

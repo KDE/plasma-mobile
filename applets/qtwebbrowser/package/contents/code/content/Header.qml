@@ -43,6 +43,7 @@ import QtQuick 1.0
 import org.kde.qtextracomponents 0.1 as QtExtra
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Image {
@@ -83,64 +84,83 @@ Image {
         Item {
             width: parent.width; height: 40
 
-            MobileComponents.ActionButton {
-                id: backButton
-                svg: toolbarIconsSvg
-                elementId: "go-previous"
-                action: webView.back
-                anchors { left: parent.left; bottom: parent.bottom }
-                width: 32
-                height: 32
-            }
+            Row {
+                id: leftButtonsRow
+                spacing: 10
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                }
+                MobileComponents.ActionButton {
+                    id: backButton
+                    svg: toolbarIconsSvg
+                    elementId: "go-previous"
+                    action: webView.back
+                    width: 32
+                    height: 32
+                }
 
-            MobileComponents.ActionButton {
-                id: nextButton
-                svg: toolbarIconsSvg
-                elementId: "go-next"
-                action: webView.forward
-                anchors.left: backButton.right; anchors.bottom: parent.bottom
-                width: 32
-                height: 32
+                MobileComponents.ActionButton {
+                    id: nextButton
+                    svg: toolbarIconsSvg
+                    elementId: "go-next"
+                    action: webView.forward
+                    width: 32
+                    height: 32
+                }
             }
 
             UrlInput {
                 id: urlInput
-                anchors { left: nextButton.right; right: reloadButton.left; bottom: parent.bottom }
+                anchors { left: leftButtonsRow.right; right: rightButtonsRow.left; verticalCenter: parent.verticalCenter }
                 //image: "pics/display.png"
                 onUrlChanged: header.urlChanged = true
             }
 
-            MobileComponents.ActionButton {
-                id: reloadButton
-                svg: toolbarIconsSvg
-                elementId: "reload"
-                action: webView.reload
-                anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
-                width: 32
-                height: 32
-            }
-
-            MobileComponents.ActionButton {
-                id: stopButton
-                svg: toolbarIconsSvg
-                elementId: "stop"
-                action: webView.stop
-                anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
-                width: 32
-                height: 32
-            }
-
-            PlasmaWidgets.IconWidget {
-                id: goButton
-                anchors { right: parent.right; bottom: parent.bottom; rightMargin: 4 }
-                onClicked: {
-                    webBrowser.urlString = urlInput.url
-                    webBrowser.focus = true
-                    header.urlChanged = false
+            Row {
+                id: rightButtonsRow
+                spacing: 10
+                anchors {
+                    right: parent.right
+                    rightMargin: 10
+                    verticalCenter: parent.verticalCenter
                 }
-                //image: "pics/go-jump-locationbar.png";
-                visible: header.urlChanged
-                icon: QIcon("go-jump-locationbar")
+                MobileComponents.ActionButton {
+                    id: reloadButton
+                    svg: toolbarIconsSvg
+                    elementId: "reload"
+                    action: webView.reload
+                    width: 32
+                    height: 32
+                    opacity: action.enabled?1:0
+                }
+
+                MobileComponents.ActionButton {
+                    id: stopButton
+                    svg: toolbarIconsSvg
+                    elementId: "stop"
+                    action: webView.stop
+                    width: 32
+                    height: 32
+                    opacity: action.enabled?1:0
+                }
+
+                QIconItem {
+                    id: goButton
+                    icon: QIcon("go-jump-locationbar")
+                    visible: true
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            webBrowser.urlString = urlInput.url
+                            webBrowser.focus = true
+                            header.urlChanged = false
+                        }
+                    }
+                    width: 32
+                    height: 32
+                   // enabled: header.urlChanged
+                }
             }
         }
     }

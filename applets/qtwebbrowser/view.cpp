@@ -28,6 +28,8 @@
 #include "view.h"
 #include "kdebug.h"
 
+#include  <kdeclarative.h>
+
 #include "Plasma/Package"
 
 View::View(const QString &url, QWidget *parent)
@@ -42,6 +44,12 @@ View::View(const QString &url, QWidget *parent)
     foreach (const QString &iPath, importPathes) {
         engine()->addImportPath(iPath);
     }
+
+    KDeclarative kdeclarative;
+    kdeclarative.setDeclarativeEngine(engine());
+    kdeclarative.initialize();
+    //binds things like kconfig and icons
+    kdeclarative.setupBindings();
 
     // Filter the supplied argument through KUriFilter and then
     // make the resulting url known to the webbrowser component
