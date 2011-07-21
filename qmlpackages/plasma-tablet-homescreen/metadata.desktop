@@ -3,6 +3,12 @@ Comment=
 Encoding=UTF-8
 Keywords=
 Name=plasma-tablet-homescreen
+Name[nl]=plasma-tablet-homescreen
+Name[pt]=plasma-tablet-homescreen
+Name[pt_BR]=plasma-tablet-homescreen
+Name[sv]=Plasma hemskärm för surfplatta
+Name[uk]=планшетна-домівка-плазми
+Name[x-test]=xxplasma-tablet-homescreenxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/GenericPackage
