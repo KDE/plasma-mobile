@@ -159,7 +159,7 @@ Image {
                     }
                     width: 32
                     height: 32
-                   // enabled: header.urlChanged
+                    opacity: header.urlChanged?1:0.6
                 }
             }
         }
