@@ -109,7 +109,7 @@ Image {
             MobileComponents.ActionButton {
                 id: reloadButton
                 svg: configIconsSvg
-                elementId: "rotate"
+                elementId: "reload"
                 action: webView.reload
                 anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
                 width: 32
@@ -119,7 +119,7 @@ Image {
             MobileComponents.ActionButton {
                 id: stopButton
                 svg: configIconsSvg
-                elementId: "close"
+                elementId: "stop"
                 action: webView.stop
                 anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
                 width: 32
