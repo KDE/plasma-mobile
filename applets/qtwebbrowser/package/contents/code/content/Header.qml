@@ -42,6 +42,7 @@
 import QtQuick 1.0
 import org.kde.qtextracomponents 0.1 as QtExtra
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Image {
@@ -51,6 +52,11 @@ Image {
     property bool urlChanged: false
 
     source: "pics/titlebar-bg.png"; fillMode: Image.TileHorizontally
+
+    PlasmaCore.Svg {
+        id: configIconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
 
     x: webView.contentX < 0 ? -webView.contentX : webView.contentX > webView.contentWidth-webView.width
        ? -webView.contentX+webView.contentWidth-webView.width : 0
@@ -100,20 +106,24 @@ Image {
                 onUrlChanged: header.urlChanged = true
             }
 
-            PlasmaWidgets.IconWidget {
+            MobileComponents.ActionButton {
                 id: reloadButton
+                svg: configIconsSvg
+                elementId: "rotate"
+                action: webView.reload
                 anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
-                action: webView.reload;
-                visible: { webView.progress == 1.0 && !header.urlChanged }
-                icon: QIcon("view-refresh")
+                width: 32
+                height: 32
             }
 
-            PlasmaWidgets.IconWidget {
+            MobileComponents.ActionButton {
                 id: stopButton
+                svg: configIconsSvg
+                elementId: "close"
+                action: webView.stop
                 anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
-                action: webView.stop;
-                visible: webView.progress < 1.0 && !header.urlChanged
-                icon: QIcon("process-stop")
+                width: 32
+                height: 32
             }
 
             PlasmaWidgets.IconWidget {
