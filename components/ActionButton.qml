@@ -39,6 +39,13 @@ Item {
 
     opacity: action==undefined||action.enabled?1:0.6
 
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 250
+            easing.type: Easing.InOutQuad
+        }
+    }
+
     onCheckedChanged: {
         if (checked) {
             buttonItem.elementId = "pressed"
