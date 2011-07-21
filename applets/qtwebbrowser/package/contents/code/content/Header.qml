@@ -54,8 +54,8 @@ Image {
     source: "pics/titlebar-bg.png"; fillMode: Image.TileHorizontally
 
     PlasmaCore.Svg {
-        id: configIconsSvg
-        imagePath: "widgets/configuration-icons"
+        id: toolbarIconsSvg
+        imagePath: rekonqPackage.filePath("images", "toolbar-icons.svgz")
     }
 
     x: webView.contentX < 0 ? -webView.contentX : webView.contentX > webView.contentWidth-webView.width
@@ -83,20 +83,24 @@ Image {
         Item {
             width: parent.width; height: 40
 
-            PlasmaWidgets.IconWidget {
+            MobileComponents.ActionButton {
                 id: backButton
-                action: webView.back;
+                svg: toolbarIconsSvg
+                elementId: "go-previous"
+                action: webView.back
                 anchors { left: parent.left; bottom: parent.bottom }
-                icon: QIcon("go-previous")
-                numDisplayLines: 0
+                width: 32
+                height: 32
             }
 
-            PlasmaWidgets.IconWidget {
+            MobileComponents.ActionButton {
                 id: nextButton
+                svg: toolbarIconsSvg
+                elementId: "go-next"
+                action: webView.forward
                 anchors.left: backButton.right; anchors.bottom: parent.bottom
-                action: webView.forward;
-                icon: QIcon("go-next")
-                numDisplayLines: 0
+                width: 32
+                height: 32
             }
 
             UrlInput {
@@ -108,7 +112,7 @@ Image {
 
             MobileComponents.ActionButton {
                 id: reloadButton
-                svg: configIconsSvg
+                svg: toolbarIconsSvg
                 elementId: "reload"
                 action: webView.reload
                 anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }
@@ -118,7 +122,7 @@ Image {
 
             MobileComponents.ActionButton {
                 id: stopButton
-                svg: configIconsSvg
+                svg: toolbarIconsSvg
                 elementId: "stop"
                 action: webView.stop
                 anchors { right: parent.right; bottom: parent.bottom; rightMargin: 10 }

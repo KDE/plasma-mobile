@@ -58,6 +58,11 @@ Rectangle {
     color: "#343434"
     clip: true
 
+    MobileComponents.Package {
+        id: rekonqPackage
+        name: "org.kde.rekonqactive"
+    }
+
     MobileComponents.ResourceInstance {
         id: resourceInstance
         uri: webBrowser.url

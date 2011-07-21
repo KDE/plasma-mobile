@@ -37,7 +37,7 @@ Item {
     width: buttonRow.width
     height: buttonRow.height
 
-    visible: action==undefined||action.enabled
+    opacity: action==undefined||action.enabled?1:0.6
 
     onCheckedChanged: {
         if (checked) {
