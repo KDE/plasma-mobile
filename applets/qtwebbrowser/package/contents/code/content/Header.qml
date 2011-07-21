@@ -122,7 +122,6 @@ PlasmaCore.FrameSvgItem {
                     right: rightButtonsRow.left
                     verticalCenter: parent.verticalCenter
                 }
-                //image: "pics/display.png"
                 onUrlChanged: header.urlChanged = true
             }
 
