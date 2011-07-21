@@ -43,6 +43,7 @@ import QtQuick 1.0
 import QtWebKit 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import Qt.labs.gestures 1.0
 
 import "content"
 
@@ -82,6 +83,14 @@ Rectangle {
             right: parent.right
             bottom: parent.bottom
             topMargin: -4
+        }
+    }
+
+    //FIXME: for Qt 4.8 this api will change
+    GestureArea {
+        anchors.fill: webView
+        onPinch: {
+            webView.doZoom(scaleFactor, centerPoint.x, centerPoint.y)
         }
     }
 
