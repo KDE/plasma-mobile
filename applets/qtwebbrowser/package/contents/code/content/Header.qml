@@ -157,7 +157,7 @@ PlasmaCore.FrameSvgItem {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            webBrowser.urlString = urlInput.url
+                            urlInput.urlEntered(urlInput.url)
                             webBrowser.focus = true
                             header.urlChanged = false
                         }

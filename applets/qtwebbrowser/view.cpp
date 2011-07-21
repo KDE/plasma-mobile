@@ -137,7 +137,15 @@ void View::onTitleChanged()
 
 QString View::filterUrl(const QString &url)
 {
-    QString filteredUrl = KUriFilter::self()->filteredUri(url);
+    QString filteredUrl(url);
+
+    if (filteredUrl.indexOf('.') < 0) {
+        //TODO: search engine config
+        filteredUrl = "gg:"+filteredUrl;
+    }
+
+    filteredUrl = KUriFilter::self()->filteredUri(filteredUrl);
+
     return filteredUrl;
 }
 

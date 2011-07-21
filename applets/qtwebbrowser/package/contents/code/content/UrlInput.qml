@@ -57,15 +57,6 @@ Item {
         border { left: 10; top: 10; right: 10; bottom: 10 }
     }
 
-
-    function tameUrl(textUrl) {
-
-        if (textUrl.indexOf("http") != 0) {
-            return "http://" + textUrl;
-        }
-        return textUrl;
-    }
-
     PlasmaWidgets.LineEdit {
         id: urlText
         //horizontalAlignment: TextEdit.AlignLeft
