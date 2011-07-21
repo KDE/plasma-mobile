@@ -55,8 +55,11 @@ Rectangle {
     property alias title: webView.title
 
     width: 800; height: 600
-    color: "#343434"
-    clip: true
+    color: theme.backgroundColor
+
+    PlasmaCore.Theme {
+        id: theme
+    }
 
     MobileComponents.Package {
         id: rekonqPackage
@@ -73,7 +76,13 @@ Rectangle {
         objectName: "webView"
         url: webBrowser.urlString
         onProgressChanged: header.urlChanged = false
-        anchors { top: headerSpace.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+        anchors {
+            top: headerSpace.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            //topMargin: -3
+        }
     }
 
     Item { id: headerSpace; width: parent.width; height: 62 }
@@ -81,7 +90,8 @@ Rectangle {
     Header {
         id: header
         editUrl: webBrowser.urlString
-        width: headerSpace.width; height: headerSpace.height
+        width: headerSpace.width
+        //height: headerSpace.height
     }
 
     ScrollBar {

@@ -46,13 +46,16 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-Image {
+PlasmaCore.FrameSvgItem {
     id: header
 
+    height: childrenRect.height + margins.bottom + 8
     property alias editUrl: urlInput.url
     property bool urlChanged: false
 
-    source: "pics/titlebar-bg.png"; fillMode: Image.TileHorizontally
+    imagePath: "widgets/frame"
+    prefix: "raised"
+    enabledBorders: "BottomBorder"
 
     PlasmaCore.Svg {
         id: toolbarIconsSvg
@@ -77,12 +80,16 @@ Image {
             Text {
                 anchors.centerIn: parent
                 text: webView.title; font.pixelSize: 14; font.bold: true
-                color: "white"; styleColor: "black"; style: Text.Sunken
+                color: theme.textColor
+                opacity: 0.7
+                styleColor: theme.backgroundColor
+                style: Text.Sunken
             }
         }
 
         Item {
-            width: parent.width; height: 40
+            width: parent.width
+            height: 32
 
             Row {
                 id: leftButtonsRow
@@ -112,7 +119,11 @@ Image {
 
             UrlInput {
                 id: urlInput
-                anchors { left: leftButtonsRow.right; right: rightButtonsRow.left; verticalCenter: parent.verticalCenter }
+                anchors { 
+                    left: leftButtonsRow.right
+                    right: rightButtonsRow.left
+                    verticalCenter: parent.verticalCenter
+                }
                 //image: "pics/display.png"
                 onUrlChanged: header.urlChanged = true
             }
