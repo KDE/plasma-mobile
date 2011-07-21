@@ -93,9 +93,10 @@ PlasmaCore.FrameSvgItem {
 
             Row {
                 id: leftButtonsRow
-                spacing: 10
+                spacing: 8
                 anchors {
                     left: parent.left
+                    leftMargin: 8
                     verticalCenter: parent.verticalCenter
                 }
                 MobileComponents.ActionButton {
@@ -103,8 +104,7 @@ PlasmaCore.FrameSvgItem {
                     svg: toolbarIconsSvg
                     elementId: "go-previous"
                     action: webView.back
-                    width: 32
-                    height: 32
+
                 }
 
                 MobileComponents.ActionButton {
@@ -112,8 +112,6 @@ PlasmaCore.FrameSvgItem {
                     svg: toolbarIconsSvg
                     elementId: "go-next"
                     action: webView.forward
-                    width: 32
-                    height: 32
                 }
             }
 
@@ -130,10 +128,10 @@ PlasmaCore.FrameSvgItem {
 
             Row {
                 id: rightButtonsRow
-                spacing: 10
+                spacing: 8
                 anchors {
                     right: parent.right
-                    rightMargin: 10
+                    rightMargin: 8
                     verticalCenter: parent.verticalCenter
                 }
                 MobileComponents.ActionButton {
@@ -141,8 +139,6 @@ PlasmaCore.FrameSvgItem {
                     svg: toolbarIconsSvg
                     elementId: "reload"
                     action: webView.reload
-                    width: 32
-                    height: 32
                     opacity: action.enabled?1:0
                 }
 
@@ -151,8 +147,6 @@ PlasmaCore.FrameSvgItem {
                     svg: toolbarIconsSvg
                     elementId: "stop"
                     action: webView.stop
-                    width: 32
-                    height: 32
                     opacity: action.enabled?1:0
                 }
 
@@ -171,6 +165,7 @@ PlasmaCore.FrameSvgItem {
                     width: 32
                     height: 32
                     opacity: header.urlChanged?1:0.6
+                    anchors.verticalCenter: stopButton.verticalCenter
                 }
             }
         }
