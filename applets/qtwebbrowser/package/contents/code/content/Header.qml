@@ -163,7 +163,7 @@ PlasmaCore.FrameSvgItem {
                     }
                     width: 32
                     height: 32
-                    opacity: header.urlChanged?1:0.6
+                    opacity: header.urlChanged?1:0.3
                     anchors.verticalCenter: stopButton.verticalCenter
                 }
             }
