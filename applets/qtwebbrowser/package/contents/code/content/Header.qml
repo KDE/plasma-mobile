@@ -165,6 +165,12 @@ PlasmaCore.FrameSvgItem {
                     height: 32
                     opacity: header.urlChanged?1:0.3
                     anchors.verticalCenter: stopButton.verticalCenter
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
                 }
             }
         }
