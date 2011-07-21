@@ -30,6 +30,7 @@
 namespace Plasma
 {
     class Applet;
+    class Package;
 } // namespace Plasma
 
 class Activity;
@@ -62,6 +63,8 @@ public:
 
     void checkActivities();
 
+    Plasma::Package *homeScreenPackage() const;
+
 public Q_SLOTS:
     void layoutContainments();
     void currentActivityChanged(const QString &newActivity);
@@ -81,6 +84,8 @@ private:
     QRegion m_availableScreenRegion;
     Activities::Controller *m_activityController;
     QHash<QString, Activity*> m_activities;
+    //main homescreen
+    Plasma::Package *m_package;
 };
 
 #endif

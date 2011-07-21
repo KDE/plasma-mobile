@@ -46,7 +46,6 @@ namespace Plasma
     class Containment;
     class Corona;
     class DeclarativeWidget;
-    class Package;
 } // namespace Plasma
 
 class PlasmaApp : public KUniqueApplication
@@ -110,8 +109,6 @@ private:
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
     QWeakPointer<ActivityConfiguration> m_activityConfiguration;
     bool m_isDesktop;
-    //main homescreen
-    Plasma::Package *m_package;
 };
 
 #endif // multiple inclusion guard

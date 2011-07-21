@@ -80,8 +80,7 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
-      m_isDesktop(false),
-      m_package(false)
+      m_isDesktop(false)
 {
     KGlobal::locale()->insertCatalog("libplasma");
 
@@ -237,17 +236,8 @@ void PlasmaApp::setupHomeScreen()
         m_homeScreenPath = QString("mobile-homescreen");
     }
 
-
-    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    m_package = new Plasma::Package(QString(), m_homeScreenPath, structure);
-    //fallback to plasma-mobile package
-    if (!m_package->isValid()) {
-        delete m_package;
-        m_package = new Plasma::Package(QString(), "plasma-mobile", structure);
-    }
-
-    kDebug() << "QML:" << m_package->filePath("mainscript");
-    m_declarativeWidget->setQmlPath(m_package->filePath("mainscript"));
+    kDebug() << "QML:" << m_corona->homeScreenPackage()->filePath("mainscript");
+    m_declarativeWidget->setQmlPath(m_corona->homeScreenPackage()->filePath("mainscript"));
 
     if (!m_declarativeWidget->engine()) {
         QCoreApplication::quit();

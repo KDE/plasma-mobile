@@ -51,7 +51,8 @@
 
 MobCorona::MobCorona(QObject *parent)
     : Plasma::Corona(parent),
-      m_activityController(new Activities::Controller(this))
+      m_activityController(new Activities::Controller(this)),
+      m_package(0)
 {
     init();
 }
@@ -73,6 +74,17 @@ MobCorona::~MobCorona()
 
 void MobCorona::init()
 {
+    QString homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
+    //setup package for the home screen
+    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+    m_package = new Plasma::Package(QString(), homeScreenPath, structure);
+    //fallback to plasma-mobile package
+    if (!m_package->isValid()) {
+        delete m_package;
+        m_package = new Plasma::Package(QString(), "plasma-mobile", structure);
+        homeScreenPath = "plasma-mobile-homescreen";
+    }
+
     Plasma::ContainmentActionsPluginsConfig desktopPlugins;
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::Vertical, "switchdesktop");
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
@@ -101,18 +113,7 @@ void MobCorona::init()
 
 KConfigGroup MobCorona::defaultConfig() const
 {
-    QString homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
-
-    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    Plasma::Package *package = new Plasma::Package(QString(), homeScreenPath, structure);
-    //fallback to plasma-mobile package
-    if (!package->isValid()) {
-        delete package;
-        package = new Plasma::Package(QString(), "plasma-mobile", structure);
-    }
-
-    QString defaultConfig = package->filePath("config", "plasma-default-layoutrc");
-    delete package;
+    QString defaultConfig = m_package->filePath("config", "plasma-default-layoutrc");
 
     //kDebug() << "============================================================================";
     //kDebug() << "layout HSP:" << homeScreenPath;
@@ -411,6 +412,10 @@ void MobCorona::checkActivities()
     }
 }
 
+Plasma::Package *MobCorona::homeScreenPackage() const
+{
+    return m_package;
+}
 
 #include "mobcorona.moc"
 
