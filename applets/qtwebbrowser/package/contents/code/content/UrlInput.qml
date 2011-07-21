@@ -128,6 +128,13 @@ Item {
         color: theme.highlightColor
         width: (bg.width - 20) * webView.progress
         opacity: webView.progress == 1.0 ? 0.0 : 0.7
+        smooth: true
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 
     onFilteredUrlChanged: {
