@@ -34,6 +34,7 @@
 static const char description[] = I18N_NOOP("Web browser for Plasma Active");
 
 static const char version[] = "0.1";
+static const char HOME_URL[] = "http://community.kde.org/Plasma/Active";
 
 void output(const QString &msg)
 {
@@ -49,17 +50,14 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
-    options.add("+[url]", ki18n( "URL to open" ), "http://rekonq.kde.org/");
+    options.add("+[url]", ki18n( "URL to open" ), HOME_URL);
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
     //kDebug() << "ARGS:" << args << args->count();
-    QString url = "http://rekonq.kde.org/";
-    if (args->count() > 0) {
-        url = args->arg(0);
-    }
+    const QString url = args->count() ? args->arg(0) : HOME_URL;
     output("Starting Rekonq Active..." + url);
     RekonqActive *mainWindow = new RekonqActive(url);
     mainWindow->show();
