@@ -1,0 +1,5 @@
+add_subdirectory(batterymonitor)
+add_subdirectory(quickdialer)
+add_subdirectory(mobilenetworkstatus)
+add_subdirectory(mobilenetworkoperator)
+
