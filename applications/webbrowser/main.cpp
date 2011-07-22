@@ -36,15 +36,10 @@ static const char description[] = I18N_NOOP("Web browser for Plasma Active");
 static const char version[] = "0.1";
 static const char HOME_URL[] = "http://community.kde.org/Plasma/Active";
 
-void output(const QString &msg)
-{
-    std::cout << msg.toLocal8Bit().constData() << std::endl;
-}
-
 int main(int argc, char **argv)
 {
     // FIXME: selkie icon instead of internet-web-browser
-    KAboutData about("internet-web-browser", 0, ki18n("Rekonq Active"), version, ki18n(description),
+    KAboutData about("internet-web-browser", 0, ki18n("Plasma Active Web Browser"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");
                      about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
@@ -60,7 +55,6 @@ int main(int argc, char **argv)
 
     //kDebug() << "ARGS:" << args << args->count();
     const QString url = args->count() ? args->arg(0) : homeUrl;
-    output("Starting Rekonq Active..." + url);
     ActiveBrowserWindow *mainWindow = new ActiveBrowserWindow(url);
     mainWindow->show();
     args->clear();
