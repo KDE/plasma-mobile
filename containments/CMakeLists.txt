@@ -1,4 +1,3 @@
 add_subdirectory(appletstrip)
-add_subdirectory(mobiledesktop)
 add_subdirectory(mobilelauncher)
 add_subdirectory(webdashboard)

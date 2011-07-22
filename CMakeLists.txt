@@ -20,3 +20,5 @@ add_subdirectory(mobilebusynotifier)
 add_subdirectory(virtualkeyboard)
 add_subdirectory(wallpapers)
 add_subdirectory(shell)
+
+add_subdirectory(handset)
