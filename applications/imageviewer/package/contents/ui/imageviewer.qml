@@ -25,6 +25,7 @@ import org.kde.qtextracomponents 0.1
 Rectangle {
     id: imageViewer
     objectName: "imageViewer"
+    color: "#ddd"
 
     width: 360
     height: 360
@@ -66,6 +67,7 @@ Rectangle {
     Rectangle {
         id: viewer
         visible: startupArguments[0].length > 0
+        color: "#ddd"
         anchors {
             fill:  parent
         }
@@ -73,13 +75,19 @@ Rectangle {
             anchors {
                 fill:  parent
             }
-            contentWidth: mainImage.width
-            contentHeight: mainImage.height
+            contentWidth: imageMargin.width
+            contentHeight: imageMargin.height
             interactive:  true
-            Image {
-                id:mainImage
-                objectName: "mainImage"
-                source: startupArguments[0]
+            Item {
+                id: imageMargin
+                width: Math.max(viewer.width, mainImage.width)
+                height: Math.max(viewer.height, mainImage.height)
+                Image {
+                    id: mainImage
+                    objectName: "mainImage"
+                    source: startupArguments[0]
+                    anchors.centerIn: parent
+                }
             }
         }
     }
