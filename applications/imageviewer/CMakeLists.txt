@@ -2,6 +2,7 @@
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
 set(active-imageviewer_SRCS
+    dataenginebindings.cpp
     main.cpp
     imageviewer.cpp
     view.cpp

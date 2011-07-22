@@ -20,6 +20,7 @@
  ***************************************************************************/
 
 #include "view.h"
+#include "dataenginebindings.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
@@ -49,6 +50,8 @@ View::View(const QString &url, QWidget *parent)
     kdeclarative.initialize();
     //binds things like kconfig and icons
     kdeclarative.setupBindings();
+    QScriptEngine *scriptEngine = kdeclarative.scriptEngine();
+    registerDataEngineMetaTypes(scriptEngine);
 
     // Filter the supplied argument through KUriFilter and then
     // make the resulting url known to the webbrowser component
