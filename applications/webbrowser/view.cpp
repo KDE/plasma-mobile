@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "view.h"
+
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
@@ -25,12 +27,10 @@
 
 #include <KStandardDirs>
 #include <KUriFilter>
-#include "view.h"
-#include "kdebug.h"
-
-#include  <kdeclarative.h>
 
 #include "Plasma/Package"
+
+#include <kdeclarative.h>
 
 View::View(const QString &url, QWidget *parent)
     : QDeclarativeView(parent),

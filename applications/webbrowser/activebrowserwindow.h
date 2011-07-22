@@ -24,8 +24,7 @@
 
 #include <QMainWindow>
 
-#include "view.h"
-//#include <kxmlguiwindow.h>
+class View;
 
 /**
  * This class serves as the main window for rekonq active.
@@ -42,7 +41,6 @@ public:
     virtual ~ActiveBrowserWindow();
     QString name();
     QIcon icon();
-    KConfigGroup config(const QString &group = "Default");
 
 protected:
     void closeEvent(QCloseEvent *);

@@ -21,20 +21,12 @@
 #ifndef VIEW_H
 #define VIEW_H
 #include <QDeclarativeView>
-#include <QWebView>
-#include <QAction>
 
-
-#include <KActionCollection>
-#include <KPluginInfo>
-
-class KMainWindow;
 class QDeclarativeItem;
 class QProgressBar;
 class QSignalMapper;
 class Page;
 class ScriptApi;
-class RekonqActive;
 
 /** Per-website data */
 struct WebsiteOptions

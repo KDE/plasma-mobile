@@ -18,15 +18,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include <iostream>
-
 // KDE
 #include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KDebug>
-#include <KDE/KLocale>
-#include <KToolBar>
+#include <KService>
 
 // Own
 #include "activebrowserwindow.h"

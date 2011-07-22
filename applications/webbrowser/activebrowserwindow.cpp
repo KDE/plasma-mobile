@@ -18,6 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "activebrowserwindow.h"
+
 #include <QApplication>
 #include <QDesktopWidget>
 
@@ -27,7 +29,7 @@
 
 #include <Plasma/Theme>
 
-#include "activebrowserwindow.h"
+#include "view.h"
 
 ActiveBrowserWindow::ActiveBrowserWindow(const QString &url, QWidget *parent)
     : QMainWindow(parent)
@@ -36,7 +38,8 @@ ActiveBrowserWindow::ActiveBrowserWindow(const QString &url, QWidget *parent)
     addAction(KStandardAction::close(this, SLOT(close()), this));
     addAction(KStandardAction::quit(this, SLOT(close()), this));
     m_widget = new View(url, this);
-    const QByteArray geom = config("Window").readEntry("Geometry", QByteArray());
+    KConfigGroup config(KGlobal::config(), "Window");
+    const QByteArray geom = config.readEntry("Geometry", QByteArray());
     if (geom.isEmpty()) {
         setGeometry(qApp->desktop()->screenGeometry());
     } else {
@@ -59,12 +62,8 @@ ActiveBrowserWindow::~ActiveBrowserWindow()
 void ActiveBrowserWindow::closeEvent(QCloseEvent *)
 {
     kDebug() << "going to save" << saveGeometry();
-    config("Window").writeEntry("Geometry", saveGeometry());
-}
-
-KConfigGroup ActiveBrowserWindow::config(const QString &group)
-{
-    return KConfigGroup(KSharedConfig::openConfig("rekonqactiverc"), group);
+    KConfigGroup config(KGlobal::config(), "Window");
+    config.writeEntry("Geometry", saveGeometry());
 }
 
 QString ActiveBrowserWindow::name()
