@@ -29,7 +29,7 @@
 #include <KToolBar>
 
 // Own
-#include "rekonqactive.h"
+#include "activebrowserwindow.h"
 
 static const char description[] = I18N_NOOP("Web browser for Plasma Active");
 
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     //kDebug() << "ARGS:" << args << args->count();
     const QString url = args->count() ? args->arg(0) : homeUrl;
     output("Starting Rekonq Active..." + url);
-    RekonqActive *mainWindow = new RekonqActive(url);
+    ActiveBrowserWindow *mainWindow = new ActiveBrowserWindow(url);
     mainWindow->show();
     args->clear();
     return app.exec();

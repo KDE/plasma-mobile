@@ -3,7 +3,7 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
 set(rekonqactive_SRCS
     main.cpp
-    rekonqactive.cpp
+    activebrowserwindow.cpp
     view.cpp
 )
 

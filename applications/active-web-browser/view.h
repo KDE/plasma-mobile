@@ -21,13 +21,11 @@
 #ifndef VIEW_H
 #define VIEW_H
 #include <QDeclarativeView>
-#include <qwebview.h>
-#include <qmap.h>
-#include <qaction.h>
+#include <QWebView>
+#include <QAction>
 
 
 #include <KActionCollection>
-#include <KMainWindow>
 #include <KPluginInfo>
 
 class KMainWindow;

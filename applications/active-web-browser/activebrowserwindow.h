@@ -18,51 +18,37 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include <KAction>
-#include <KIcon>
-#include <KStandardAction>
 
-#include <Plasma/Theme>
+#ifndef ACTIVEBROWSERWINDOW_H
+#define ACTIVEBROWSERWINDOW_H
 
-#include "rekonqactive.h"
+#include <QMainWindow>
 
-RekonqActive::RekonqActive(const QString &url)
-    : KMainWindow()
+#include "view.h"
+//#include <kxmlguiwindow.h>
+
+/**
+ * This class serves as the main window for rekonq active.
+ *
+ * @short Rekonq Active browser main window class
+ * @author Sebastian Kügler <sebas@kde.org>
+ * @version 0.1
+ */
+class ActiveBrowserWindow : public QMainWindow
 {
-    setAcceptDrops(true);
-    addAction(KStandardAction::close(this, SLOT(close()), this));
-    addAction(KStandardAction::quit(this, SLOT(close()), this));
-    m_widget = new View(url, this);
-    restoreWindowSize(config("Window"));
-    setCentralWidget(m_widget);
+    Q_OBJECT
+public:
+    ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
+    virtual ~ActiveBrowserWindow();
+    QString name();
+    QIcon icon();
+    KConfigGroup config(const QString &group = "Default");
 
-    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
-    const QString themeName = cg.readEntry("name", "air-mobile");
-    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
-    Plasma::Theme::defaultTheme()->setThemeName(themeName);
+protected:
+    void closeEvent(QCloseEvent *);
 
-    connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
-}
+private:
+    View *m_widget;
+};
 
-RekonqActive::~RekonqActive()
-{
-    saveWindowSize(config("Window"));
-}
-
-KConfigGroup RekonqActive::config(const QString &group)
-{
-    return KConfigGroup(KSharedConfig::openConfig("rekonqactiverc"), group);
-}
-
-QString RekonqActive::name()
-{
-    return "Rekonq Active";
-    //return m_widget->options()->name;
-}
-
-QIcon RekonqActive::icon()
-{
-    return KIcon("internet-web-browser");
-}
-
-#include "rekonqactive.moc"
+#endif // REKONQACTIVE_H
