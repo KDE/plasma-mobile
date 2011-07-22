@@ -1,7 +1,5 @@
 add_subdirectory(active-welcome)
 add_subdirectory(appswitcher)
-#add_subdirectory(fakebattery)
-add_subdirectory(fakecontactlist)
 add_subdirectory(mobilelauncherpanel)
 add_subdirectory(mobilesystemtray)
 add_subdirectory(notifications)
