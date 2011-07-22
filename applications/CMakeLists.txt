@@ -1,2 +1,2 @@
-add_subdirectory(active-web-browser)
+add_subdirectory(webbrowser)
 add_subdirectory(imageviewer)
