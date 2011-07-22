@@ -121,7 +121,6 @@ Rectangle {
             anchors {
                 fill:  parent
             }
-            interactive: true
             visible: false
         }
         ListView {
