@@ -11,6 +11,7 @@ include_directories(
    )
 
 add_subdirectory(applets)
+add_subdirectory(applications)
 add_subdirectory(artwork)
 add_subdirectory(components)
 add_subdirectory(containments)

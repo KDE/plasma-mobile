@@ -6,7 +6,6 @@ add_subdirectory(mobilelauncherpanel)
 add_subdirectory(mobilesystemtray)
 add_subdirectory(notifications)
 
-add_subdirectory(qtwebbrowser)
 add_subdirectory(powerbutton)
 add_subdirectory(resourcelist)
 add_subdirectory(windowstrip)
