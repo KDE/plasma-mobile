@@ -112,6 +112,18 @@ void KeyboardDialog::setContainment(Plasma::Containment *c)
 
 
 
+//HACK: give the focus back if somehow gotten it: KWin bug probably
+void KeyboardDialog::focusInEvent(QFocusEvent *event)
+{
+    foreach (WId id, KWindowSystem::stackingOrder()) {
+        KWindowInfo info = KWindowSystem::windowInfo(id, NET::WMWindowType);
+        if (info.windowType(NET::Normal|NET::Dock) != NET::Dock) {
+            KWindowSystem::forceActiveWindow(id);
+            return;
+        }
+    }
+}
+
 
 Plasma::Applet *KeyboardDialog::applet()
 {

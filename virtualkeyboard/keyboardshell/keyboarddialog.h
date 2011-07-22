@@ -68,6 +68,7 @@ Q_SIGNALS:
 protected:
     void resizeEvent(QResizeEvent *event);
     void showEvent(QShowEvent *event);
+    void focusInEvent(QFocusEvent *event);
 
 private:
     Plasma::Applet *m_applet;
