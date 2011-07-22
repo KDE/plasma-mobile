@@ -49,15 +49,17 @@ int main(int argc, char **argv)
                      about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
 
+    KService::Ptr service = KService::serviceByDesktopName("active-web-browser");
+    const QString homeUrl = service ? service->property("X-KDE-PluginInfo-Website", QVariant::String).toString() : HOME_URL;
     KCmdLineOptions options;
-    options.add("+[url]", ki18n( "URL to open" ), HOME_URL);
+    options.add("+[url]", ki18n( "URL to open" ), homeUrl.toLocal8Bit());
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
     //kDebug() << "ARGS:" << args << args->count();
-    const QString url = args->count() ? args->arg(0) : HOME_URL;
+    const QString url = args->count() ? args->arg(0) : homeUrl;
     output("Starting Rekonq Active..." + url);
     RekonqActive *mainWindow = new RekonqActive(url);
     mainWindow->show();
