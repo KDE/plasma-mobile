@@ -18,6 +18,9 @@
  */
 
 import QtQuick 1.0
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.qtextracomponents 0.1
 
 Rectangle {
     id: imageViewer
@@ -26,11 +29,48 @@ Rectangle {
     width: 360
     height: 360
 
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.metadata"
+        connectedSources: ["ResourcesOfType:Image"]
+        interval: 0
+    }
+    PlasmaCore.DataModel {
+        id: metadataModel
+        keyRoleFilter: ".*"
+        dataSource: metadataSource
+    }
+
+    MobileComponents.IconGrid {
+        id: resultsGrid
+        anchors {
+            fill: parent
+        }
+
+        Component.onCompleted: resultsContainer.contentY = resultsContainer.height
+        height: resultsContainer.height
+        model: metadataModel
+        delegate: MobileComponents.ResourceDelegate {
+            id: resourceDelegate
+            width: 130
+            height: 120
+            infoLabelVisible: false
+
+            onClicked: {
+                
+            }
+        }
+    }
+
     Flickable {
-        anchors.fill:  parent
+        id: viewer
+        anchors {
+            fill:  parent
+        }
         contentWidth: mainImage.width
         contentHeight: mainImage.height
         interactive:  true
+        visible: startupArguments[0].length > 0
         Image {
             id:mainImage
             objectName: "mainImage"
