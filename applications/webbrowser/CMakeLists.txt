@@ -1,15 +1,15 @@
 
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
-set(rekonqactive_SRCS
+set(active-webbrowser_SRCS
     main.cpp
     activebrowserwindow.cpp
     view.cpp
 )
 
-KDE4_ADD_EXECUTABLE(rekonq-active ${rekonqactive_SRCS})
+KDE4_ADD_EXECUTABLE(active-webbrowser ${active-webbrowser_SRCS})
 
-target_link_libraries(rekonq-active
+target_link_libraries(active-webbrowser
     ${QT_QTWEBKIT_LIBRARY}
     ${QT_QTDECLARATIVE_LIBRARY} 
     ${KDE4_KDEUI_LIBS}
@@ -18,8 +18,8 @@ target_link_libraries(rekonq-active
     kdeclarative
 )
 
-install( TARGETS rekonq-active ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS active-webbrowser ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 # QML-only thing
-install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.rekonqactive PATTERN .svn EXCLUDE)
+install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.webbrowser)
 install(FILES active-web-browser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

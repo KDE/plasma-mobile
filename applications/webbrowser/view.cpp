@@ -65,7 +65,7 @@ View::View(const QString &url, QWidget *parent)
                                     "plasma/plasmoids/qtwebbrowser/contents/code/webbrowser.qml");
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    m_package = new Plasma::Package(QString(), "org.kde.rekonqactive", structure);
+    m_package = new Plasma::Package(QString(), "org.kde.active.webbrowser", structure);
 
     //kDebug() << "Loading QML File:" << qmlFile;
     setSource(QUrl(m_package->filePath("mainscript")));
