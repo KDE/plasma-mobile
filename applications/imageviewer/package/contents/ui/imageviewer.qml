@@ -59,17 +59,23 @@ Rectangle {
 
             onClicked: {
                 mainImage.source = model["url"]
-                viewer.visible = true
+                viewer.scale = 1
             }
         }
     }
 
     Rectangle {
         id: viewer
-        visible: startupArguments[0].length > 0
+        scale: startupArguments[0].length > 0?1:0
         color: "#ddd"
         anchors {
             fill:  parent
+        }
+        Behavior on scale {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
         }
         Flickable {
             anchors {
@@ -105,7 +111,7 @@ Rectangle {
         }
         MouseArea {
             anchors.fill: parent
-            onClicked: viewer.visible = false
+            onClicked: viewer.scale = 0
         }
     }
 }
