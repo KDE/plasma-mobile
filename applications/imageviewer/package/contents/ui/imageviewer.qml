@@ -21,6 +21,7 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
+import Qt.labs.gestures 1.0
 
 Rectangle {
     id: imageViewer
@@ -30,11 +31,50 @@ Rectangle {
     width: 360
     height: 360
 
+    property bool firstRun: true
+
+    function loadImage(path)
+    {
+        var i = 0
+        if (String(path).indexOf("/") === 0) {
+            path = "file://"+path
+        }
+
+        for (prop in metadataSource.data["ResourcesOfType:Image"]) {
+            if (metadataSource.data["ResourcesOfType:Image"][prop]["url"] == path) {
+                fullList.currentIndex = i
+                spareDelegate.visible = false
+                fullList.visible = true
+                viewer.scale = 1
+                return
+            }
+            ++i
+        }
+
+        spareDelegate.source = path
+        spareDelegate.visible = true
+        fullList.visible = false
+        viewer.scale = 1
+    }
+
+    Timer {
+        id: firstRunTimer
+        interval: 300
+        repeat: false
+        onTriggered: {
+            loadImage(startupArguments[0])
+            imageViewer.firstRun = false
+        }
+    }
+
     PlasmaCore.DataSource {
         id: metadataSource
         engine: "org.kde.active.metadata"
         connectedSources: ["ResourcesOfType:Image"]
         interval: 0
+        onDataChanged: {
+            firstRunTimer.restart()
+        }
     }
     PlasmaCore.DataModel {
         id: metadataModel
@@ -58,8 +98,7 @@ Rectangle {
             infoLabelVisible: false
 
             onClicked: {
-                mainImage.source = model["url"]
-                viewer.scale = 1
+                loadImage(model["url"])
             }
         }
     }
@@ -77,32 +116,33 @@ Rectangle {
                 easing.type: Easing.InOutQuad
             }
         }
-        Flickable {
+        FullScreenDelegate {
+            id: spareDelegate
             anchors {
                 fill:  parent
             }
-            contentWidth: imageMargin.width
-            contentHeight: imageMargin.height
-            interactive:  true
-            Item {
-                id: imageMargin
-                width: Math.max(viewer.width, mainImage.width)
-                height: Math.max(viewer.height, mainImage.height)
-                Image {
-                    id: mainImage
-                    objectName: "mainImage"
-                    source: startupArguments[0]
-                    anchors.centerIn: parent
-                }
+            interactive: true
+            visible: false
+        }
+        ListView {
+            id: fullList
+            anchors.fill: parent
+            orientation: ListView.Horizontal
+            model: metadataModel
+            snapMode: ListView.SnapToItem
+            delegate: FullScreenDelegate {
+                source: model["url"]
             }
+            visible: false
         }
     }
+
 
     QIconItem {
         icon: QIcon("go-previous")
         width: 48
         height: 48
-        opacity: viewer.visible?1:0
+        opacity: viewer.scale==1?1:0
         Behavior on opacity {
             NumberAnimation {
                 duration: 250
