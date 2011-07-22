@@ -61,7 +61,6 @@ ActiveBrowserWindow::~ActiveBrowserWindow()
 
 void ActiveBrowserWindow::closeEvent(QCloseEvent *)
 {
-    kDebug() << "going to save" << saveGeometry();
     KConfigGroup config(KGlobal::config(), "Window");
     config.writeEntry("Geometry", saveGeometry());
 }
