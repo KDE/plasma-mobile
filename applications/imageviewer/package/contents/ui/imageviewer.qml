@@ -42,7 +42,7 @@ Rectangle {
 
         for (prop in metadataSource.data["ResourcesOfType:Image"]) {
             if (metadataSource.data["ResourcesOfType:Image"][prop]["url"] == path) {
-                fullList.currentIndex = i
+                fullList.positionViewAtIndex(i, ListView.Center)
                 spareDelegate.visible = false
                 fullList.visible = true
                 viewer.scale = 1
