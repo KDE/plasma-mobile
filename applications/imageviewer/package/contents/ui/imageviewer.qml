@@ -57,24 +57,47 @@ Rectangle {
             infoLabelVisible: false
 
             onClicked: {
-                
+                mainImage.source = model["url"]
+                viewer.visible = true
             }
         }
     }
 
-    Flickable {
+    Rectangle {
         id: viewer
+        visible: startupArguments[0].length > 0
         anchors {
             fill:  parent
         }
-        contentWidth: mainImage.width
-        contentHeight: mainImage.height
-        interactive:  true
-        visible: startupArguments[0].length > 0
-        Image {
-            id:mainImage
-            objectName: "mainImage"
-            source: startupArguments[0]
+        Flickable {
+            anchors {
+                fill:  parent
+            }
+            contentWidth: mainImage.width
+            contentHeight: mainImage.height
+            interactive:  true
+            Image {
+                id:mainImage
+                objectName: "mainImage"
+                source: startupArguments[0]
+            }
+        }
+    }
+
+    QIconItem {
+        icon: QIcon("go-previous")
+        width: 48
+        height: 48
+        opacity: viewer.visible?1:0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: viewer.visible = false
         }
     }
 }
