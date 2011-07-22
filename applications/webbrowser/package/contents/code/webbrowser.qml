@@ -63,8 +63,8 @@ Rectangle {
     }
 
     MobileComponents.Package {
-        id: rekonqPackage
-        name: "org.kde.rekonqactive"
+        id: activeWebBrowserPackage
+        name: "org.kde.active.webbrowser"
     }
 
     MobileComponents.ResourceInstance {

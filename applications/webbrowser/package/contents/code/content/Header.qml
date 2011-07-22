@@ -59,7 +59,7 @@ PlasmaCore.FrameSvgItem {
 
     PlasmaCore.Svg {
         id: toolbarIconsSvg
-        imagePath: rekonqPackage.filePath("images", "toolbar-icons.svgz")
+        imagePath: activeWebBrowserPackage.filePath("images", "toolbar-icons.svgz")
     }
 
     x: webView.contentX < 0 ? -webView.contentX : webView.contentX > webView.contentWidth-webView.width
