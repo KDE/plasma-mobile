@@ -34,66 +34,80 @@ ListItem {
         x: y
         anchors.verticalCenter: parent.verticalCenter
         width: 48
-        height: 48
+        height: 68
         icon: QIcon(listItem.icon)
     }
 
     Column {
-        id : delegateLayout
-        width: parent.width
-        spacing: 5
         anchors.left: iconItem.right
         anchors.leftMargin: 8
         anchors.right: listItem.padding.right
-        anchors.top: listItem.padding.top
+        anchors.verticalCenter: listItem.verticalCenter
+        Column {
+            id : delegateLayout
+            width: parent.width
+            spacing: 5
 
-        Text {
-            width: delegateLayout.width
-            color: theme.textColor
-            font.pixelSize: 24
-            text: listItem.name
-        }
-        Text {
-            color: theme.textColor
-            font.pixelSize: 13
-            width: delegateLayout.width
-            text: listItem.description
-        }
-    }
-    Column {
-        id : actionsLayout
-        width: parent.width
-        spacing: 5
-        anchors.left: iconItem.right
-        anchors.leftMargin: 8
-        anchors.right: listItem.padding.right
-        anchors.top: delegateLayout.bottom
-        anchors.topMargin: 8
+            Text {
+                width: delegateLayout.width
+                color: theme.textColor
+                font.pointSize: 20
+                text: listItem.name
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        var service = recommendationsSource.serviceForSource(DataEngineSource)
+                        var operation = service.operationDescription("executeAction")
+                        operation.Id = actions[0].actionId
 
-        Repeater {
-            model: actions.length
-            MouseArea {
-                width: actionLayout.width
-                height: actionLayout.height
-                onClicked: {
-                    var service = recommendationsSource.serviceForSource(DataEngineSource)
-                    var operation = service.operationDescription("executeAction")
-                    operation.Id = actions[modelData].actionId
-
-                    service.startOperationCall(operation)
-                }
-                Row {
-                    id: actionLayout
-                    spacing: 10
-                    QIconItem {
-                        anchors.verticalCenter: parent.verticalCenter
-                        width: 24
-                        height: 24
-                        icon: QIcon(actions[modelData].iconName)
+                        service.startOperationCall(operation)
                     }
-                    Text {
-                        text: actions[modelData].text
-                        anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+            Text {
+                color: theme.textColor
+                font.pixelSize: 13
+                width: delegateLayout.width
+                text: listItem.description
+                visible: listItem.description.length>0
+            }
+        }
+        Column {
+            id : actionsLayout
+            width: parent.width
+            spacing: 5
+            anchors.left: iconItem.right
+            anchors.leftMargin: 8
+            anchors.right: listItem.padding.right
+            anchors.top: delegateLayout.bottom
+            anchors.topMargin: 8
+            visible: actions.length > 1
+
+            Repeater {
+                model: actions.length
+                MouseArea {
+                    width: actionLayout.width
+                    height: actionLayout.height
+                    onClicked: {
+                        var service = recommendationsSource.serviceForSource(DataEngineSource)
+                        var operation = service.operationDescription("executeAction")
+                        operation.Id = actions[modelData].actionId
+
+                        service.startOperationCall(operation)
+                    }
+                    Row {
+                        id: actionLayout
+                        spacing: 10
+                        QIconItem {
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: 24
+                            height: 24
+                            icon: QIcon(actions[modelData].iconName)
+                        }
+                        Text {
+                            text: actions[modelData].text
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
                     }
                 }
             }
