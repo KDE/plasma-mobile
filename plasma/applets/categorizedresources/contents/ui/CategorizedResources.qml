@@ -42,7 +42,24 @@ Item {
     property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
 
     Component.onCompleted: {
+        plasmoid.containmentType = "CustomContainment"
+        plasmoid.appletAdded.connect(addApplet)
         LayoutManager.restore()
+        for (var i = 0; i < plasmoid.applets.length; ++i) {
+            var applet = plasmoid.applets[i]
+            addApplet(applet, 0)
+        }
+    }
+
+    function addApplet(applet, pos)
+    {
+        var component = Qt.createComponent("ItemGroup.qml")
+        var itemGroup = component.createObject(resultsFlow)
+        itemGroup.scale = 1
+        applet.parent = itemGroup
+        applet.backgroundHints = "NoBackground"
+        itemGroup.category = "Applet-"+applet.id
+        LayoutManager.itemGroups[itemGroup.category] = itemGroup
     }
 
     function showAddResource()
@@ -180,7 +197,8 @@ Item {
                     //FIXME: find a more efficient way
                     //destroy removed categories
                     for (var category in LayoutManager.itemGroups) {
-                        if (categoryListModel.categories.indexOf(category) == -1) {
+                        if (category.indexOf("Applet-") == -1 ||
+                            categoryListModel.categories.indexOf(category) == -1) {
                             var item = LayoutManager.itemGroups[category]
                             LayoutManager.setSpaceAvailable(item.x, item.y, item.width, item.height, true)
                             item.destroy()
