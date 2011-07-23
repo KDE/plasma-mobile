@@ -232,6 +232,8 @@ void PlasmaApp::show()
 {
     Plasma::WindowEffects::slideWindow(m_dialog, m_dialog->location());
     m_dialog->show();
+    //if the cursor is outside the keyboard at the first touch event, the current window loses focus and the keyboard will hide
+    QCursor::setPos(m_dialog->geometry().center());
 }
 
 void PlasmaApp::hide()
