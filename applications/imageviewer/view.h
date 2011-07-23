@@ -55,12 +55,16 @@ public:
 
     QString name() const;
 
+    void setUseGL(const bool on);
+    bool useGL() const;
+
 private Q_SLOTS:
     void onStatusChanged(QDeclarativeView::Status status);
 
 private:
     QDeclarativeItem* m_imageViewer;
     Plasma::Package *m_package;
+    bool m_useGL;
 };
 
 #endif // VIEW_H

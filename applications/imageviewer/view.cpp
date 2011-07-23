@@ -26,6 +26,7 @@
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
 #include <QScriptValue>
+#include <QGLWidget>
 
 #include <KStandardDirs>
 #include <KDebug>
@@ -36,7 +37,8 @@
 
 View::View(const QString &url, QWidget *parent)
     : QDeclarativeView(parent),
-      m_imageViewer(0)
+      m_imageViewer(0),
+      m_useGL(false)
 {
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
     // Tell the script engine where to find the Plasma Quick components
@@ -77,6 +79,23 @@ View::View(const QString &url, QWidget *parent)
 
 View::~View()
 {
+}
+
+void View::setUseGL(const bool on)
+{
+#ifndef QT_NO_OPENGL
+    if (on) {
+      QGLWidget *glWidget = new QGLWidget;
+      glWidget->setAutoFillBackground(false);
+      setViewport(glWidget);
+    }
+#endif
+    m_useGL = on;
+}
+
+bool View::useGL() const
+{
+    return m_useGL;
 }
 
 void View::onStatusChanged(QDeclarativeView::Status status)

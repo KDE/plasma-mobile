@@ -34,6 +34,7 @@ ImageViewer::ImageViewer(const QString &url)
     addAction(KStandardAction::close(this, SLOT(close()), this));
     addAction(KStandardAction::quit(this, SLOT(close()), this));
     m_widget = new View(url, this);
+
     restoreWindowSize(config("Window"));
     setCentralWidget(m_widget);
 
@@ -64,6 +65,16 @@ QString ImageViewer::name()
 QIcon ImageViewer::icon()
 {
     return KIcon("gwenview");
+}
+
+void ImageViewer::setUseGL(const bool on)
+{
+    m_widget->setUseGL(on);
+}
+
+bool ImageViewer::useGL() const
+{
+    return m_widget->useGL();
 }
 
 #include "imageviewer.moc"

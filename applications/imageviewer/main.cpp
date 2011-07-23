@@ -44,10 +44,21 @@ int main(int argc, char **argv)
 
     KCmdLineOptions options;
     options.add("+[url]", ki18n( "URL of the image to open" ));
+#ifndef QT_NO_OPENGL
+    options.add("opengl", ki18n("use a QGLWidget for the viewport"));
+#endif
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+    bool useGL = args->isSet("opengl");
+
+    if (!useGL) {
+        //use plasmarc to share this with plasma-windowed
+        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
+        useGL = cg.readEntry("UseOpenGl", true);
+    }
 
     //kDebug() << "ARGS:" << args << args->count();
     QString url;
@@ -56,6 +67,7 @@ int main(int argc, char **argv)
     }
 
     ImageViewer *mainWindow = new ImageViewer(url);
+    mainWindow->setUseGL(useGL);
     mainWindow->show();
     args->clear();
     return app.exec();

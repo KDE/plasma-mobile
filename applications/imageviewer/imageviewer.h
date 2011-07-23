@@ -37,6 +37,9 @@ public:
     QIcon icon();
     KConfigGroup config(const QString &group = "Default");
 
+    void setUseGL(const bool on);
+    bool useGL() const;
+
 private:
     View *m_widget;
 };
