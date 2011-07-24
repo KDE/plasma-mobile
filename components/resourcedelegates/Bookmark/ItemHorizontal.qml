@@ -91,10 +91,10 @@ Item {
         id: textRect
         imagePath: "widgets/translucentbackground"
 
-        width: childrenRect.width + margins.left + margins.right
         height: childrenRect.height + margins.top + margins.bottom
         anchors {
             bottom: parent.bottom
+            left: parent.left
             right: parent.right
         }
 
@@ -108,8 +108,9 @@ Item {
             Text {
                 id: textLabel
                 color: theme.textColor
-                font.pointSize: 16
-                style: Text.Sunken;
+                font.pixelSize: 13
+                style: Text.Sunken
+                elide: Text.ElideRight
                 styleColor: theme.backgroundColor
                 horizontalAlignment: Text.AlignCenter
 
@@ -121,7 +122,7 @@ Item {
                     s = s.replace("www.", "");
                     return s;
                 }
-                anchors.fill: textRect
+                width: parent.width
                 //anchors.margins: 16
             }
 
