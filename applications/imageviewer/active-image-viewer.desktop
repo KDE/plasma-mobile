@@ -18,7 +18,7 @@ Comment[sv]=En bildvisare för pekskärmar
 Comment[uk]=Програма для перегляду зображень на сенсорних планшетах
 Comment[x-test]=xxAn image viewer for touch tabletsxx
 
-Exec=imageviewer-active -graphicssystem raster %u
+Exec=active-imageviewer -graphicssystem raster %u
 Terminal=false
 Icon=gwenview
 Type=Application
