@@ -1,6 +1,17 @@
 [Desktop Entry]
 Name=Image Viewer
+Name[pt]=Visualizador de Imagens
+Name[pt_BR]=Visualizador de imagem
+Name[sv]=Bildvisare
+Name[ug]=سۈرەت كۆرگۈچ
+Name[uk]=Переглядач зображень
+Name[x-test]=xxImage Viewerxx
 Comment=Touchscreen friendly simple image viewer
+Comment[pt]=Visualizador de imagens simples e amigável por toque
+Comment[pt_BR]=Visualizador de imagem simples e amigável por toque
+Comment[sv]=Enkel bildvisare bra för pekskärmar
+Comment[uk]=Проста сенсорна програма для перегляду зображень
+Comment[x-test]=xxTouchscreen friendly simple image viewerxx
 Encoding=UTF-8
 Type=Service
 Icon=gwenview

@@ -1,7 +1,22 @@
 [Desktop Entry]
 Name=Active Image viewer
+Name[pt]=Visualizador de Imagens Activo
+Name[pt_BR]=Visualizador da imagem ativa
+Name[sv]=Aktiv bildvisare
+Name[uk]=Активний переглядач зображень
+Name[x-test]=xxActive Image viewerxx
 GenericName=Image viewer
+GenericName[pt]=Visualizador de imagens
+GenericName[pt_BR]=Visualizador de imagem
+GenericName[sv]=Bildvisare
+GenericName[uk]=Переглядач зображень
+GenericName[x-test]=xxImage viewerxx
 Comment=An image viewer for touch tablets
+Comment[pt]=Um visualizador de imagens para tabletes por toque
+Comment[pt_BR]=Um visualizador de imagem para tabletes por toque
+Comment[sv]=En bildvisare för pekskärmar
+Comment[uk]=Програма для перегляду зображень на сенсорних планшетах
+Comment[x-test]=xxAn image viewer for touch tabletsxx
 
 Exec=imageviewer-active -graphicssystem raster %u
 Terminal=false
