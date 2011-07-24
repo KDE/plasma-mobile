@@ -160,8 +160,9 @@ Rectangle {
             id: wallpapersList
             property int currentIndex: 0
             onCurrentIndexChanged: {
-                currentPage = Math.floor(currentIndex/pageSize)
+                currentPage = Math.max(0, Math.floor(currentIndex/pageSize))
             }
+
             property int delegateWidth: 148
             property int delegateHeight: delegateWidth/1.6
             anchors {

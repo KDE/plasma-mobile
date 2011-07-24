@@ -47,7 +47,8 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     : Plasma::DeclarativeWidget(parent),
       m_containment(0),
       m_mainWidget(0),
-      m_model(0)
+      m_model(0),
+      m_wallpaperIndex(-1)
 {
     setQmlPath(KStandardDirs::locate("data", "plasma-mobile/activityconfiguration/view.qml"));
     m_activityController = new Activities::Controller(this);
@@ -190,7 +191,7 @@ void ActivityConfiguration::setWallpaperIndex(const int index)
         }
     }
 
-    if (!m_wallpaperIndex == index || index < 0) {
+    if (m_wallpaperIndex == index || index < 0) {
         return;
     }
 
