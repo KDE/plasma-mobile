@@ -54,6 +54,9 @@ public:
     WebsiteOptions* options() const;
     QString name() const;
 
+    void setUseGL(const bool on);
+    bool useGL() const;
+
 Q_SIGNALS:
     void titleChanged(const QString&);
 
@@ -71,6 +74,7 @@ private Q_SLOTS:
 private:
     QString filterUrl(const QString &url);
     Plasma::Package *m_package;
+    bool m_useGL;
 };
 
 #endif // VIEW_H

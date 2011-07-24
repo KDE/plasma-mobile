@@ -76,4 +76,14 @@ QIcon ActiveBrowserWindow::icon()
     return KIcon("internet-web-browser");
 }
 
+void ActiveBrowserWindow::setUseGL(const bool on)
+{
+    m_widget->setUseGL(on);
+}
+
+bool ActiveBrowserWindow::useGL() const
+{
+    return m_widget->useGL();
+}
+
 #include "activebrowserwindow.moc"

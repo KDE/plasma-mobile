@@ -24,6 +24,7 @@
 #include <KCmdLineArgs>
 #include <KDebug>
 #include <KService>
+#include <KConfigGroup>
 
 // Own
 #include "activebrowserwindow.h"
@@ -45,14 +46,26 @@ int main(int argc, char **argv)
     const QString homeUrl = service ? service->property("X-KDE-PluginInfo-Website", QVariant::String).toString() : HOME_URL;
     KCmdLineOptions options;
     options.add("+[url]", ki18n( "URL to open" ), homeUrl.toLocal8Bit());
+#ifndef QT_NO_OPENGL
+    options.add("opengl", ki18n("use a QGLWidget for the viewport"));
+#endif
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
+    bool useGL = args->isSet("opengl");
+
+    if (!useGL) {
+        //use plasmarc to share this with plasma-windowed
+        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
+        useGL = cg.readEntry("UseOpenGl", true);
+    }
+
     //kDebug() << "ARGS:" << args << args->count();
     const QString url = args->count() ? args->arg(0) : homeUrl;
     ActiveBrowserWindow *mainWindow = new ActiveBrowserWindow(url);
+    mainWindow->setUseGL(useGL);
     mainWindow->show();
     args->clear();
     return app.exec();

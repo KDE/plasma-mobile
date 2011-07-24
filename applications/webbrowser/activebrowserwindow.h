@@ -42,6 +42,9 @@ public:
     QString name();
     QIcon icon();
 
+    void setUseGL(const bool on);
+    bool useGL() const;
+
 protected:
     void closeEvent(QCloseEvent *);
 
