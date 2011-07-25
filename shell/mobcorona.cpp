@@ -49,6 +49,8 @@
 #include <Activities/Consumer>
 #include <Activities/Controller>
 
+static const char *DEFAUL_CONTAINMENT = "org.kde.mobiledesktop";
+
 MobCorona::MobCorona(QObject *parent)
     : Plasma::Corona(parent),
       m_activityController(new Activities::Controller(this)),
@@ -59,7 +61,7 @@ MobCorona::MobCorona(QObject *parent)
 
 MobCorona::~MobCorona()
 {
-    KConfigGroup cg(config(), "SavedContainments");
+    //KConfigGroup cg(config(), "SavedContainments");
 
     //TODO: it will have an auto-stop activity feature
     /*foreach (Plasma::Containment *cont, containments()) {
@@ -74,16 +76,10 @@ MobCorona::~MobCorona()
 
 void MobCorona::init()
 {
-    QString homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
+    const QString homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
     //setup package for the home screen
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), homeScreenPath, structure);
-    //fallback to plasma-mobile package
-    if (!m_package->isValid()) {
-        delete m_package;
-        m_package = new Plasma::Package(QString(), "plasma-mobile", structure);
-        homeScreenPath = "plasma-mobile-homescreen";
-    }
 
     Plasma::ContainmentActionsPluginsConfig desktopPlugins;
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::Vertical, "switchdesktop");
@@ -92,10 +88,14 @@ void MobCorona::init()
     panelPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
 
     KConfigGroup cg(defaultConfig());
-    cg = KConfigGroup(&cg, "ContainmentDefaults");
-    QString defaultContainment = cg.readEntry("defaultContainment", "org.kde.mobiledesktop");
-    kDebug() << "Using" << defaultContainment << "as default containment plugin";
-    setDefaultContainmentPlugin(defaultContainment);
+    if (cg.isValid()) {
+        cg = KConfigGroup(&cg, "ContainmentDefaults");
+        const QString defaultContainment = cg.readEntry("defaultContainment", DEFAUL_CONTAINMENT);
+        kDebug() << "Using" << defaultContainment << "as default containment plugin";
+        setDefaultContainmentPlugin(defaultContainment);
+    } else {
+        setDefaultContainmentPlugin(DEFAUL_CONTAINMENT);
+    }
 
     setContainmentActionsDefaults(Plasma::Containment::DesktopContainment, desktopPlugins);
     setContainmentActionsDefaults(Plasma::Containment::PanelContainment, panelPlugins);
@@ -105,7 +105,7 @@ void MobCorona::init()
 
     setItemIndexMethod(QGraphicsScene::NoIndex);
     setDialogManager(new MobDialogManager(this));
-    
+
     connect(m_activityController, SIGNAL(currentActivityChanged(QString)), this, SLOT(currentActivityChanged(QString)));
     connect(m_activityController, SIGNAL(activityAdded(const QString &)), this, SLOT(activityAdded(const QString &)));
     connect(m_activityController, SIGNAL(activityRemoved(const QString &)), this, SLOT(activityRemoved(const QString &)));
@@ -113,7 +113,7 @@ void MobCorona::init()
 
 KConfigGroup MobCorona::defaultConfig() const
 {
-    QString defaultConfig = m_package->filePath("config", "plasma-default-layoutrc");
+    const QString defaultConfig = m_package->filePath("config", "plasma-default-layoutrc");
 
     //kDebug() << "============================================================================";
     //kDebug() << "layout HSP:" << homeScreenPath;
@@ -219,6 +219,7 @@ void MobCorona::setScreenGeometry(const QRect &geometry)
 
 QRect MobCorona::screenGeometry(int id) const
 {
+    Q_UNUSED(id)
     return m_screenGeometry;
 }
 
