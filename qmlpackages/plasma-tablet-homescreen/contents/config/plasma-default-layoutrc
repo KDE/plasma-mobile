@@ -76,9 +76,6 @@ launcherNamesVisible=true
 launchers=file:///usr/share/applications/kde4/active-web-browser.desktop,file:///usr/share/applications/kde4/active-news-reader.desktop,file:///usr/share/applications/kde4/kdiamond.desktop,file:///usr/share/applications/calligraactive.desktop
 launchersOnPopup=
 
-
-
-
 [Containments][4]
 activity=Multimedia
 firstStartup=false
@@ -159,7 +156,7 @@ formfactor=2
 geometry=0,2,800,35
 immutability=1
 location=3
-plugin=org.kde.mobilesystemtray
+plugin=org.kde.active.systemtray
 screen=0
 zvalue=10
 
@@ -172,7 +169,7 @@ zvalue=0
 [Containments][8][Applets][9]
 geometry=0,0,48,32
 immutability=1
-plugin=notifications
+plugin=org.kde.active.notifications
 zvalue=0
 
 [Containments][8][Applets][10]

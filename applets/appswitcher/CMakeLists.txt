@@ -11,5 +11,5 @@ target_link_libraries(plasma_applet_appswitcher
 install(TARGETS plasma_applet_appswitcher
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install(FILES plasma-applet-appswitcher.desktop
+install(FILES plasma-applet-org.kde.appswitcher.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

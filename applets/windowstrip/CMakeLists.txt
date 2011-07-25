@@ -25,5 +25,5 @@ install(DIRECTORY qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma/plasmoids/org.kde.
 install(TARGETS plasma_applet_windowstrip
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
-install(FILES plasma-applet-windowstrip.desktop
+install(FILES plasma-applet-org.kde.windowstrip.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
