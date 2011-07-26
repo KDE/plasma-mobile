@@ -18,6 +18,7 @@
  */
 
 import QtQuick 1.0
+import org.kde.plasma.core 0.1 as PlasmaCore
 
 ItemGroup {
     id: plasmoidContainer
@@ -47,6 +48,27 @@ ItemGroup {
         plasmoidContainer.title = applet.name
 
         appletTimer.running = true
+    }
+
+    PlasmaCore.SvgItem {
+        svg: PlasmaCore.Svg {
+            imagePath: "widgets/configuration-icons"
+        }
+        elementId: "close"
+        width: 16
+        height: 16
+        anchors {
+            right: plasmoidContainer.contents.right
+            bottom: plasmoidContainer.contents.top
+            bottomMargin: 6
+        }
+        MouseArea {
+            anchors.fill: parent
+            anchors.margins: -6
+            onClicked: {
+                applet.action("remove").trigger()
+            }
+        }
     }
 
     //FIXME: this delay is becuase backgroundHints gets updated only after a while in qml applets
