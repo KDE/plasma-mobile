@@ -28,6 +28,7 @@ PlasmaCore.FrameSvgItem {
     id: itemGroup
     property string category
     property alias categoryCount: itemsList.count
+    property string title: i18n("%1 (%2)", itemGroup.category, itemsList.count)
     imagePath: "widgets/background"
     width: LayoutManager.cellSize.width*2
     height: LayoutManager.cellSize.height
@@ -186,7 +187,7 @@ PlasmaCore.FrameSvgItem {
         height: categoryText.height + margins.top + margins.bottom
         Text {
             id: categoryText
-            text: i18n("%1 (%2)", itemGroup.category, itemsList.count)
+            text: itemGroup.title
             anchors {
                 top: parent.top
                 horizontalCenter: parent.horizontalCenter
