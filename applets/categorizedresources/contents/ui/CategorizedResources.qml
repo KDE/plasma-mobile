@@ -246,6 +246,7 @@ Item {
                 //height: Math.min(300, childrenRect.height)
                 width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
                 height: childrenRect.height
+                z: 900
 
                 anchors {
                     top: toolBar.bottom
@@ -289,6 +290,7 @@ Item {
             }
             Item {
                 anchors.fill: resultsFlow
+                z: 0
                 Item {
                     id: placeHolder
                     property bool animationsEnabled
