@@ -27,15 +27,7 @@ import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
 Item {
     property alias count: itemsList.count
-    anchors {
-        left: parent.left
-        top: categoryTitle.bottom
-        right: parent.right
-        bottom: parent.bottom
-        leftMargin: parent.margins.left
-        rightMargin: parent.margins.right
-        bottomMargin: parent.margins.bottom
-    }
+    anchors.fill: itemGroup.contents
 
     ListView {
         id: itemsList

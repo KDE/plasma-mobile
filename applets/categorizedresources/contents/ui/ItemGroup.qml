@@ -27,14 +27,28 @@ import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 PlasmaCore.FrameSvgItem {
     id: itemGroup
     property string category
-    property alias categoryCount: itemsList.count
-    property string title: i18n("%1 (%2)", itemGroup.category, itemsList.count)
+    property string title
+    property bool canResizeHeight: false
     imagePath: "widgets/background"
     width: LayoutManager.cellSize.width*2
     height: LayoutManager.cellSize.height
     z: 0
     property bool animationsEnabled: false
-    scale: itemsList.count>0?1:0
+
+    property Item contents: contentsItem
+    Item {
+        id: contentsItem
+        anchors {
+            left: parent.left
+            top: parent.top
+            right: parent.right
+            bottom: parent.bottom
+            topMargin: parent.margins.top+categoryTitle.height
+            leftMargin: parent.margins.left
+            rightMargin: parent.margins.right
+            bottomMargin: parent.margins.bottom
+        }
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -154,6 +168,9 @@ PlasmaCore.FrameSvgItem {
         onPositionChanged: {
             //TODO: height as well if it's going to become a grid view
             itemGroup.width = Math.max(LayoutManager.cellSize.width, itemGroup.width + mouse.x-startX)
+            if (itemGroup.canResizeHeight) {
+                itemGroup.height = Math.max(LayoutManager.cellSize.height, itemGroup.height + mouse.y-startY)
+            }
         }
         onReleased: {
             animationsEnabled = true
@@ -194,9 +211,5 @@ PlasmaCore.FrameSvgItem {
                 topMargin: parent.margins.top
             }
         }
-    }
-
-    ItemsList {
-        id: itemsList
     }
 }
