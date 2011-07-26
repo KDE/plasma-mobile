@@ -19,6 +19,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
 ItemGroup {
     id: plasmoidContainer
@@ -38,6 +39,7 @@ ItemGroup {
 
     function appletDestroyed()
     {
+        LayoutManager.setSpaceAvailable(plasmoidContainer.x, plasmoidContainer.y, plasmoidContainer.width, plasmoidContainer.height, true)
         plasmoidContainer.destroy()
     }
 
