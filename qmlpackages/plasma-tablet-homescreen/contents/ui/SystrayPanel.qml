@@ -36,11 +36,11 @@ Item {
 
     function addContainment(cont)
     {
-        if (cont.pluginName == "org.kde.mobilelauncher") {
+        if (cont.pluginName == "org.kde.active.launcher") {
             menuContainer.plasmoid = cont
         } else if (cont.pluginName == "org.kde.windowstrip") {
             windowListContainer.plasmoid = cont
-        } else if (cont.pluginName == "org.kde.mobilesystemtray") {
+        } else if (cont.pluginName == "org.kde.active.systemtray") {
             systrayContainer.plasmoid = cont
         }
     }
