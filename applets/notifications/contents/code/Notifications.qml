@@ -62,6 +62,68 @@ Item {
         imagePath: "icons/notification"
     }
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
+    Item {
+        id: lastNotificationClip
+        x: notificationsApplet.width/2
+        width: 320
+        height: parent.height
+        clip: true
+        visible: false
+        PlasmaCore.FrameSvgItem {
+            id: lastNotificationRectangle
+            imagePath: "widgets/frame"
+            prefix: "plain"
+            x: -width
+            width: parent.width
+            height: parent.height
+            Text {
+                id: lastNotificationText
+                anchors {
+                    left: parent.left
+                    leftMargin: notificationsApplet.width/2
+                    right: parent.width
+                    verticalCenter: parent.verticalCenter
+                }
+                color: theme.textColor
+                wrapMode: Text.NoWrap
+                elide: Text.ElideRight
+            }
+        }
+    }
+
+    SequentialAnimation {
+        id: lastNotificationAnimation
+        PropertyAction {
+            target: lastNotificationClip
+            property: "visible"
+            value: true
+        }
+        NumberAnimation {
+            target: lastNotificationRectangle
+            duration: 300
+            property: "x"
+            to: 0
+        }
+        PauseAnimation {
+            duration: 8000
+        }
+        NumberAnimation {
+            target: lastNotificationRectangle
+            duration: 300
+            property: "x"
+            to: -lastNotificationRectangle.width
+        }
+        PropertyAction {
+            target: lastNotificationClip
+            property: "visible"
+            value: false
+        }
+    }
+
     PlasmaCore.SvgItem {
         id: notificationSvgItem
         svg: notificationSvg
@@ -87,10 +149,8 @@ Item {
         }
     }
 
-
-    PlasmaCore.DataModel {
-        id: notificationsModel
-        dataSource: notificationsSource
+    ListModel {
+        id: notifications
     }
 
     PlasmaCore.DataSource {
@@ -102,12 +162,26 @@ Item {
             connectSource(source);
         }
 
+        onNewData: {
+            notifications.append({"appIcon" : notificationsSource.data[sourceName]["appIcon"],
+                                "appName" : notificationsSource.data[sourceName]["appName"],
+                                "summary" : notificationsSource.data[sourceName]["summary"],
+                                "body" : notificationsSource.data[sourceName]["body"],
+                                "expireTimeout" : notificationsSource.data[sourceName]["expireTimeout"],
+                                "urgency": notificationsSource.data[sourceName]["urgency"]});
+        }
+
         onConnectedSourcesChanged: {
             if (connectedSources.length > 0) {
                 notificationsApplet.state = "new-notifications"
             } else {
                 notificationsApplet.state = "default"
             }
+        }
+        onDataChanged: {
+            var i = connectedSources[connectedSources.length-1]
+            lastNotificationText.text = data[i]["body"]
+            lastNotificationAnimation.running = true
         }
     }
 
@@ -117,7 +191,7 @@ Item {
             id: notificationsList
             width: 400
             height: 250
-            model: notificationsModel
+            model: notifications
             anchors.fill: parent
             clip: true
             delegate: ListItem {
@@ -126,14 +200,10 @@ Item {
                     PlasmaWidgets.IconWidget {
                         icon: QIcon(appIcon)
                     }
-                    Column {
-                        spacing: 3
-                        Text {
-                            text: appName + ": " + body
-                        }
-                        Text {
-                            text: body
-                        }
+
+                    Text {
+                        text: appName + ": " + body
+                        color: theme.textColor
                     }
                 }
             }
