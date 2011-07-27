@@ -140,7 +140,6 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: parent.left
-            clip: true
             interactive:true
             contentWidth: tasksRow.width
             contentHeight: tasksRow.height
