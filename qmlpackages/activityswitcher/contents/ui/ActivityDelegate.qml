@@ -140,8 +140,7 @@ Item {
             }
         }
     }
-    
-    
+
     Row {
         anchors {
             bottom: activityBorder.bottom
@@ -164,6 +163,7 @@ Item {
             //TODO: load on demand of the qml file
             ConfirmationDialog {
                 id: confirmationDialog
+
                 anchors {
                     left: deleteButton.horizontalCenter
                     bottom: deleteButton.verticalCenter
@@ -171,10 +171,12 @@ Item {
                 transformOrigin: Item.BottomLeft
                 question: i18n("Are you sure you want permanently delete this activity?")
                 onAccepted: {
-                    var service = activitySource.serviceForSource("Status")
-                    var operation = service.operationDescription("remove")
-                    operation["Id"] = model["DataEngineSource"]
-                    var job = service.startOperationCall(operation)
+                    var service = activitySource.serviceForSource(model["DataEngineSource"])
+                    var operation = service.operationDescription("stop")
+                    service.startOperationCall(operation)
+
+                    deleteTimer.activityId = model["DataEngineSource"]
+                    deleteTimer.running = true
                 }
                 onDismissed: {
                     deleteButton.checked = false

@@ -33,6 +33,21 @@ Item {
         }
     }
 
+    //FIXME: delete after stoppping: otherwise another empty activity will be created
+    Timer {
+        id: deleteTimer
+        interval: 200
+        repeat: false
+        running: false
+        property string activityId
+        onTriggered: {
+            var service = activitySource.serviceForSource("Status")
+            var operation = service.operationDescription("remove")
+            operation["Id"] = activityId
+            service.startOperationCall(operation)
+        }
+    }
+
     MobileComponents.Package {
         id: switcherPackage
         name: "org.kde.activityswitcher"
