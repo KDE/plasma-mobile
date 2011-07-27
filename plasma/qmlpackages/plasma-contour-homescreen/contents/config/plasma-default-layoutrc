@@ -22,7 +22,7 @@ formfactor=2
 geometry=0,0,800,100
 immutability=1
 location=3
-plugin=org.kde.mobilelauncher
+plugin=org.kde.active.launcher
 screen=0
 
 [Containments][8]
