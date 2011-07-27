@@ -25,32 +25,72 @@ import org.kde.plasma.mobilecomponents 0.1 as PlasmaComponents
 Item {
     id: notificationsApplet
     state: "default"
-    width: 400
-    height: 250
+    width: 32
+    height: 32
 
     Component.onCompleted: {
-        plasmoid.popupIcon = QIcon("preferences-desktop-notification")
+        //plasmoid.popupIcon = QIcon("preferences-desktop-notification")
     }
 
     states: [
         State {
-            name: "default";
+            name: "default"
             PropertyChanges {
-                target: notificationsApplet
-                popupIcon: QIcon("dialog-ok")
+                target: notificationSvgItem
+                elementId: "notification-disabled"
+            }
+            PropertyChanges {
+                target: countText
+                visible: false
             }
         },
         State {
-            name: "new-notifications";
+            name: "new-notifications"
             PropertyChanges {
-                target: notificationsApplet
-                popupIcon: QIcon("preferences-desktop-notification")
+                target: notificationSvgItem
+                elementId: "notification-empty"
+            }
+            PropertyChanges {
+                target: countText
+                visible: true
             }
         }
     ]
 
-    ListModel {
-        id: notifications;
+    PlasmaCore.Svg {
+        id: notificationSvg
+        imagePath: "icons/notification"
+    }
+
+    PlasmaCore.SvgItem {
+        id: notificationSvgItem
+        svg: notificationSvg
+        elementId: "notification-disabled"
+        anchors.fill: parent
+        Text {
+            id: countText
+            text: notificationsList.count
+            anchors.centerIn: parent
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if (popup.visible) {
+                    popup.visible = false
+                } else {
+                    var pos = popup.popupPosition(notificationsApplet, Qt.AlignCenter)
+                    popup.x = pos.x
+                    popup.y = pos.y
+                    popup.visible = true
+                }
+            }
+        }
+    }
+
+
+    PlasmaCore.DataModel {
+        id: notificationsModel
+        dataSource: notificationsSource
     }
 
     PlasmaCore.DataSource {
@@ -62,34 +102,38 @@ Item {
             connectSource(source);
         }
 
-        onNewData: {
-            notificationsApplet.state = "new-notifications";
-            notifications.append({"appIcon" : notificationsSource.data[sourceName]["appIcon"],
-                                "appName" : notificationsSource.data[sourceName]["appName"],
-                                "summary" : notificationsSource.data[sourceName]["summary"],
-                                "body" : notificationsSource.data[sourceName]["body"],
-                                "expireTimeout" : notificationsSource.data[sourceName]["expireTimeout"],
-                                "urgency": notificationsSource.data[sourceName]["urgency"]});
+        onConnectedSourcesChanged: {
+            if (connectedSources.length > 0) {
+                notificationsApplet.state = "new-notifications"
+            } else {
+                notificationsApplet.state = "default"
+            }
         }
     }
-    
-    ListView {
-        model: notifications
-        anchors.fill: parent
-        clip: true
-        delegate: ListItem {
-             Row {
-                spacing: 6
-                PlasmaWidgets.IconWidget {
-                    icon: QIcon(appIcon)
-                }
-                Column {
-                    spacing: 3
-                    Text {
-                        text: appName + ": " + body
+
+    PlasmaCore.Dialog {
+        id: popup
+        mainItem: ListView {
+            id: notificationsList
+            width: 400
+            height: 250
+            model: notificationsModel
+            anchors.fill: parent
+            clip: true
+            delegate: ListItem {
+                Row {
+                    spacing: 6
+                    PlasmaWidgets.IconWidget {
+                        icon: QIcon(appIcon)
                     }
-                    Text {
-                        text: body
+                    Column {
+                        spacing: 3
+                        Text {
+                            text: appName + ": " + body
+                        }
+                        Text {
+                            text: body
+                        }
                     }
                 }
             }
