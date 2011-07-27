@@ -29,7 +29,7 @@ X-Plasma-ContainmentCategories=desktop
 NoDisplay=true
 
 X-KDE-ParentAppp=plasma-mobile
-X-KDE-Library=plasma_containment_mobilelauncher
+X-KDE-Library=plasma_containment_activelauncher
 X-KDE-PluginInfo-Author=The Plasma Team
 X-KDE-PluginInfo-Email=panel-devel@kde.org
 X-KDE-PluginInfo-Name=org.kde.active.launcher
