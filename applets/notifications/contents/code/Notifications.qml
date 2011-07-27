@@ -70,7 +70,8 @@ Item {
     ListView {
         model: notifications
         anchors.fill: parent
-        delegate: PlasmaComponents.ListItem {
+        clip: true
+        delegate: ListItem {
              Row {
                 spacing: 6
                 PlasmaWidgets.IconWidget {
