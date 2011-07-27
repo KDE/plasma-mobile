@@ -26,7 +26,7 @@ Comment[uk]=Сповіщення
 Comment[x-test]=xxNotificationsxx
 
 Type=Service
-Icon=notifications
+Icon=preferences-desktop-notification
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Davide Bettio
 X-KDE-PluginInfo-Category=Tasks

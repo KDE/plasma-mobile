@@ -25,6 +25,12 @@ import org.kde.plasma.mobilecomponents 0.1 as PlasmaComponents
 Item {
     id: notificationsApplet
     state: "default"
+    width: 400
+    height: 250
+
+    Component.onCompleted: {
+        plasmoid.popupIcon = QIcon("preferences-desktop-notification")
+    }
 
     states: [
         State {
@@ -42,11 +48,11 @@ Item {
             }
         }
     ]
-    
+
     ListModel {
         id: notifications;
     }
-    
+
     PlasmaCore.DataSource {
         id: notificationsSource
         engine: "notifications"
@@ -55,7 +61,7 @@ Item {
         onSourceAdded: {
             connectSource(source);
         }
-        
+
         onNewData: {
             notificationsApplet.state = "new-notifications";
             notifications.append({"appIcon" : notificationsSource.data[sourceName]["appIcon"],
