@@ -34,6 +34,8 @@ PlasmaCore.FrameSvgItem {
     height: LayoutManager.cellSize.height
     z: 0
     property bool animationsEnabled: false
+    property int minimumWidth: LayoutManager.cellSize.width
+    property int minimumHeight: LayoutManager.cellSize.height
 
     property Item contents: contentsItem
     Item {
@@ -167,9 +169,9 @@ PlasmaCore.FrameSvgItem {
         }
         onPositionChanged: {
             //TODO: height as well if it's going to become a grid view
-            itemGroup.width = Math.max(LayoutManager.cellSize.width, itemGroup.width + mouse.x-startX)
+            itemGroup.width = Math.max(itemGroup.minimumWidth, itemGroup.width + mouse.x-startX)
             if (itemGroup.canResizeHeight) {
-                itemGroup.height = Math.max(LayoutManager.cellSize.height, itemGroup.height + mouse.y-startY)
+                itemGroup.height = Math.max(itemGroup.minimumHeight, itemGroup.height + mouse.y-startY)
             }
         }
         onReleased: {
