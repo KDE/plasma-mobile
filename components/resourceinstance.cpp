@@ -77,7 +77,7 @@ void ResourceInstance::syncWid()
         return;
     }
 
-    WId wid = v->effectiveWinId();
+    WId wid = v->topLevelWidget()->effectiveWinId();
     if (!m_resourceInstance || m_resourceInstance->winId() != wid) {
         delete m_resourceInstance;
 
@@ -100,6 +100,7 @@ void ResourceInstance::setUri(const QUrl &uri)
     if (m_uri == uri) {
         return;
     }
+
     m_uri = uri;
     m_syncTimer->start(100);
 }
