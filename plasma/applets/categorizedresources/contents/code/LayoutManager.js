@@ -213,8 +213,10 @@ function positionItem(item)
             backY -= cellSize.height
         }
     }
-    var width = Math.max(cellSize.width, Math.round(avail.width/cellSize.width)*cellSize.width)
-    var height = Math.max(cellSize.height, Math.round(avail.height/cellSize.height)*cellSize.height)
+    var width = Math.max(cellSize.width*Math.max(1, Math.ceil(item.minimumWidth/cellSize.width)),
+                         Math.round(avail.width/cellSize.width)*cellSize.width)
+    var height = Math.max(cellSize.height*Math.max(1, Math.ceil(item.minimumHeight/cellSize.height)),
+                          Math.round(avail.height/cellSize.height)*cellSize.height)
 
     setSpaceAvailable(x, y, width, height, false)
     item.x = x

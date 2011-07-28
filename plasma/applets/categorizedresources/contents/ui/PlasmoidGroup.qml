@@ -50,6 +50,8 @@ ItemGroup {
         plasmoidContainer.title = applet.name
 
         appletTimer.running = true
+        plasmoidContainer.minimumWidth = Math.max(LayoutManager.cellSize.width, applet.minimumSize.width)
+        plasmoidContainer.minimumHeight = Math.max(LayoutManager.cellSize.height, applet.minimumSize.height)
     }
 
     PlasmaCore.SvgItem {
