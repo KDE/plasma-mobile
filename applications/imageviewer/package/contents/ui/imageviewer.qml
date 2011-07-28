@@ -33,8 +33,16 @@ Rectangle {
 
     property bool firstRun: true
 
+    MobileComponents.ResourceInstance {
+        id: resourceInstance
+    }
+
     function loadImage(path)
     {
+        if (path.length == 0) {
+            return
+        }
+
         var i = 0
         if (String(path).indexOf("/") === 0) {
             path = "file://"+path
@@ -43,6 +51,7 @@ Rectangle {
         for (prop in metadataSource.data["ResourcesOfType:Image"]) {
             if (metadataSource.data["ResourcesOfType:Image"][prop]["url"] == path) {
                 fullList.positionViewAtIndex(i, ListView.Center)
+                fullList.currentIndex = i
                 spareDelegate.visible = false
                 fullList.visible = true
                 viewer.scale = 1
@@ -52,6 +61,7 @@ Rectangle {
         }
 
         spareDelegate.source = path
+        resourceInstance.uri = path
         spareDelegate.visible = true
         fullList.visible = false
         viewer.scale = 1
@@ -126,12 +136,16 @@ Rectangle {
         ListView {
             id: fullList
             anchors.fill: parent
-            orientation: ListView.Horizontal
             model: metadataModel
-            snapMode: ListView.SnapToItem
+            highlightRangeMode: ListView.StrictlyEnforceRange
+            orientation: ListView.Horizontal
+            snapMode: ListView.SnapOneItem
+            //highlightFollowsCurrentItem: true
             delegate: FullScreenDelegate {
                 source: model["url"]
             }
+
+            onCurrentIndexChanged: resourceInstance.uri = currentItem.source
             visible: false
         }
     }

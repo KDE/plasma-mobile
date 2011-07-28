@@ -29,7 +29,7 @@ Flickable {
     height: fullList.height
     contentWidth: mainImage.width*mainImage.scale
     contentHeight: mainImage.height*mainImage.scale
-    interactive: contentWidth>width || contentHeight > height
+    interactive: contentWidth > width || contentHeight > height
     property alias source: mainImage.source
 
     Rectangle {
