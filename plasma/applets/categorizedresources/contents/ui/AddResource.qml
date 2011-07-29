@@ -29,6 +29,8 @@ Rectangle {
     color: Qt.rgba(0, 0, 0, 0.4)
     opacity: 0
     anchors.fill: parent
+    //FIXME: why has to be added here as a property for trigger() to work?
+    property QtObject addAction: plasmoid.action("add widgets")
 
     function show()
     {
@@ -71,7 +73,7 @@ Rectangle {
                 easing.type: "InOutCubic"
             }
             ScriptAction {
-                script: main.destroy
+                script: main.destroy()
             }
         }
     }
@@ -294,6 +296,11 @@ Rectangle {
                             className: "Video"
                             hasSymbol: "video-x-generic"
                         }
+                        ListElement {
+                            name: "Widgets"
+                            className: "_PlasmaWidgets"
+                            hasSymbol: "dashboard-show"
+                        }
                     }
                     delegate: Component {
                         MobileComponents.ResourceDelegate {
@@ -304,8 +311,14 @@ Rectangle {
                             property string label: name
                             property string mimeType: "x"
                             onClicked: {
-                                metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
-                                resultsContainer.contentY = 0
+                                //FIXME: make all of this way cleaner, hardcoding _PlasmaWidgets seems pretty bad
+                                if (model["className"] == "_PlasmaWidgets") {
+                                    main.addAction.trigger()
+                                    main.destroy()
+                                } else {
+                                    metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
+                                    resultsContainer.contentY = 0
+                                }
                             }
                         }
                     }
