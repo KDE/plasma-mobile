@@ -91,11 +91,11 @@ Item {
             className: model.className
 
             onPressed: {
-                resourceInstance.uri = model["url"]
+                resourceInstance.uri = model["description"]
             }
 
             onClicked: {
-                plasmoid.openUrl(model["url"])
+                plasmoid.openUrl(model["description"])
             }
 
         }
