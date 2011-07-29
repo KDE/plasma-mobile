@@ -149,7 +149,7 @@ Item {
                 anchors {
                     top: parent.top
                     left: parent.left
-                    topMargin: availScreenRect.y
+                    topMargin: availScreenRect.y+16
                     leftMargin: 72
                 }
 
