@@ -48,6 +48,7 @@ Item {
             styleColor: theme.backgroundColor
         }
         PlasmaWidgets.Separator {
+            id: separator
             width: bookmarksLabel.width * 1.1
             anchors.left: parent.left
         }
@@ -57,24 +58,6 @@ Item {
             width: parent.width
         }
 
-        Text {
-            id: recentlyViewedLabel
-            text: i18n("Recently viewed")
-            color: theme.textColor
-            font.pointSize: 24
-            style: Text.Sunken;
-            styleColor: theme.backgroundColor
-        }
-
-        PlasmaWidgets.Separator {
-            width: recentlyViewedLabel.width * 1.1
-            anchors.left: parent.left
-        }
-
-        Bookmarks {
-            id: history
-            width: parent.width
-        }
 
         /*
         Text {

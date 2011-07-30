@@ -26,8 +26,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: bookmarks
-    width: 300
-    height: 144
+    width: 800
+    height: 540
 
     //property alias title: header
     property alias urls: metadataSource.connectedSources
@@ -62,17 +62,15 @@ Item {
         id: theme
     }
 
-    ListView {
+    GridView {
         id: webItemList
-        //anchors.fill: parent
-        //height: 600
-        height: 96 + (spacing * 2)
+        anchors.fill: parent
+        cellHeight: 130
+        cellWidth: 200
+        flickableDirection: Flickable.HorizontalFlick
         snapMode: ListView.SnapToItem
         clip: true
         highlightMoveDuration: 300
-        spacing: 16;
-        orientation: Qt.Horizontal
-        anchors.fill: parent
 
         model: PlasmaCore.SortFilterModel {
             id: bookmarksModel
