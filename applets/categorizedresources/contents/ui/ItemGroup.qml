@@ -90,7 +90,7 @@ PlasmaCore.FrameSvgItem {
             placeHolderPaint.opacity = 0
             itemGroup.z = 0
             animationsEnabled = true
-            LayoutManager.positionItem(parent)
+            LayoutManager.positionItem(itemGroup)
             //debugFlow.refresh()
         }
     }
@@ -178,7 +178,7 @@ PlasmaCore.FrameSvgItem {
             animationsEnabled = true
 
             mainFlickable.interactive = true
-            LayoutManager.positionItem(parent)
+            LayoutManager.positionItem(itemGroup)
             LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, widthAnimation.to, itemGroup.height, false)
             //debugFlow.refresh();
         }
