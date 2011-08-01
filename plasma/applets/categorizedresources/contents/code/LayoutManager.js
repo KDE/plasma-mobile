@@ -84,8 +84,8 @@ function availableSpace(x, y, width, height)
 {
     var row = Math.round(x/cellSize.width)
     var column = Math.round(y/cellSize.height)
-    var rowsWidth = Math.round(width/cellSize.width)
-    var columnsHeight = Math.round(height/cellSize.height)
+    var rowsWidth = Math.ceil(width/cellSize.width)
+    var columnsHeight = Math.ceil(height/cellSize.height)
 
     var availableSize = new Object
     availableSize.width = 0
@@ -171,25 +171,31 @@ function positionItem(item)
     var backX = x - cellSize.width
     var backY = y
     var avail
+
     while (1) {
         //look forward
-        var forwardAvail = availableSpace(forwardX, forwardY, item.width, item.height)
+        var forwardAvail = availableSpace(forwardX, forwardY,
+                                          Math.max(item.minimumWidth, item.width),
+                                          Math.max(item.minimumHeight, item.height))
         print("checking forward "+forwardX/cellSize.width+" "+forwardY/cellSize.height+" "+forwardAvail.width/cellSize.width+" "+forwardAvail.height/cellSize.height)
 
-        if (forwardAvail.width > 0 && forwardAvail.height > 0) {
+        if (forwardAvail.width >= item.minimumWidth &&
+            forwardAvail.height >= item.minimumHeight) {
             x = forwardX
             y = forwardY
             avail = forwardAvail
             break
         }
         forwardX += cellSize.width
+        //new line
         if (forwardX+item.width > resultsFlow.width) {
             forwardX = 0
             forwardY += cellSize.height
             //forward positions exausted
-            if (forwardY > resultsFlow.height) {
+            //scrolling now
+            /*if (forwardY > resultsFlow.height) {
                 break;
-            }
+            }*/
         }
 
         //backwards positions exausted
@@ -198,10 +204,13 @@ function positionItem(item)
         }
 
         //look backwards
-        var backAvail = availableSpace(backX, backY, item.width, item.height)
+        var backAvail = availableSpace(backX, backY,
+                                       Math.max(item.minimumWidth, item.width),
+                                       Math.max(item.minimumHeight, item.height))
         print("checking backwards "+backX/cellSize.width+" "+backY/cellSize.height+" "+backAvail.width/cellSize.width+" "+backAvail.height/cellSize.height)
 
-        if (backAvail.width > 0 && backAvail.height > 0) {
+        if (backAvail.width >= item.minimumWidth &&
+            backAvail.height >= item.minimumHeight) {
             x = backX
             y = backY
             avail = backAvail
