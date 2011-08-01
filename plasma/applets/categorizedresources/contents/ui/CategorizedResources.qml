@@ -149,7 +149,7 @@ Item {
                 anchors {
                     top: parent.top
                     left: parent.left
-                    topMargin: availScreenRect.y+16
+                    topMargin: availScreenRect.y+20
                     leftMargin: 72
                 }
 
@@ -248,7 +248,7 @@ Item {
 
                 anchors {
                     top: toolBar.bottom
-                    topMargin: 10
+                    topMargin: 5
                     horizontalCenter: parent.horizontalCenter
                 }
 
