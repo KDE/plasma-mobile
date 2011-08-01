@@ -201,7 +201,7 @@ Item {
                             LayoutManager.setSpaceAvailable(item.x, item.y, item.width, item.height, true)
                             item.destroy()
                             delete LayoutManager.itemGroups[category]
-                            debugFlow.refresh();
+                            //debugFlow.refresh();
                         }
                     }
 
@@ -219,7 +219,7 @@ Item {
             }
 
             //FIXME: debug purposes only, remove asap
-            Flow {
+            /*Flow {
                 id: debugFlow
                 anchors.fill: resultsFlow
                 visible: false
@@ -237,7 +237,7 @@ Item {
                         child.opacity = LayoutManager.availableSpace(child.x,child.y, LayoutManager.cellSize.width, LayoutManager.cellSize.height).width>0?0.8:0.3
                     }
                 }
-            }
+            }*/
 
             Item {
                 id: resultsFlow
@@ -278,7 +278,7 @@ Item {
                             child.visible = true
                             LayoutManager.positionItem(child)
                             child.enabled = true
-                            debugFlow.refresh();
+                            //debugFlow.refresh();
                         }
                     }
                 }

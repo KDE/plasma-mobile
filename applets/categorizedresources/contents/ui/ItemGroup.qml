@@ -63,7 +63,7 @@ PlasmaCore.FrameSvgItem {
             var y = Math.round(parent.y/LayoutManager.cellSize.height)*LayoutManager.cellSize.height
             LayoutManager.setSpaceAvailable(x, y, parent.width, parent.height, true)
 
-            debugFlow.refresh();
+            //debugFlow.refresh();
 
 
             placeHolder.syncWithItem(parent)
@@ -91,7 +91,7 @@ PlasmaCore.FrameSvgItem {
             itemGroup.z = 0
             animationsEnabled = true
             LayoutManager.positionItem(parent)
-            debugFlow.refresh()
+            //debugFlow.refresh()
         }
     }
     Behavior on scale {
@@ -165,7 +165,7 @@ PlasmaCore.FrameSvgItem {
             startX = mouse.x
             startY = mouse.y
             LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, itemGroup.width, itemGroup.height, true)
-            debugFlow.refresh();
+            //debugFlow.refresh();
         }
         onPositionChanged: {
             //TODO: height as well if it's going to become a grid view
@@ -180,7 +180,7 @@ PlasmaCore.FrameSvgItem {
             mainFlickable.interactive = true
             LayoutManager.positionItem(parent)
             LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, widthAnimation.to, itemGroup.height, false)
-            debugFlow.refresh();
+            //debugFlow.refresh();
         }
     }
     Component.onCompleted: {
