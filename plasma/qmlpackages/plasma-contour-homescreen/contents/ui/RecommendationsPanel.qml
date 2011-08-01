@@ -125,7 +125,7 @@ Item {
                 Text {
                     id: titleText
                     text: i18n("Recommendations")
-                    font.pointSize: 18
+                    font.pixelSize: 18
                     anchors {
                         top: parent.top
                         horizontalCenter: parent.horizontalCenter

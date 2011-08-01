@@ -35,6 +35,7 @@ Item {
     PlasmaCore.DataSource {
         id: recommendationsSource
         engine: "org.kde.recommendations"
+        interval: 5000
         onSourceAdded: {
             connectSource(source)
         }

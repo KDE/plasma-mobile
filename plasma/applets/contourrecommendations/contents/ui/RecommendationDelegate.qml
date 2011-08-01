@@ -51,7 +51,7 @@ ListItem {
             Text {
                 width: delegateLayout.width
                 color: theme.textColor
-                font.pointSize: 20
+                font.pixelSize: 15
                 text: listItem.name
                 MouseArea {
                     anchors.fill: parent
