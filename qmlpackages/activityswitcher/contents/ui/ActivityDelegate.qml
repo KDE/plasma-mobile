@@ -57,20 +57,18 @@ Item {
             }
             property string path: activityThumbnailsSource.data[model.DataEngineSource]?activityThumbnailsSource.data[model.DataEngineSource]["path"]:""
             source: path?path:switcherPackage.filePath("images", "emptyactivity.png")
-            Text {
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-                anchors.topMargin: 10
-                width: parent.width-10
-                wrapMode: Text.Wrap
-                //FIXME: MEEGO BUG
-                //text: String(model.Name).length<28?model.name:String(model.Name).substr(0, 28)+"..."
-                text: model.Name
-                font.bold: true
-                style: Text.Outline
-                styleColor: Qt.rgba(1, 1, 1, 0.6)
-                font.pixelSize: 25
+
+            MobileComponents.TextEffects {
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    leftMargin: 10
+                    topMargin: 10
+                }
+
+                text: String(model.Name).length<=18?model.Name:String(model.Name).substr(0,18)+"..."
+                pixelSize: 25
+                bold: true
             }
         }
     }

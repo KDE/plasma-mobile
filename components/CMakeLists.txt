@@ -11,6 +11,7 @@ set(mobilecomponents_SRCS
     mouseeventlistener.cpp
     package.cpp
     resourceinstance.cpp
+    texteffects.cpp
     )
 
 INCLUDE_DIRECTORIES(
