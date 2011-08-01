@@ -222,7 +222,7 @@ Item {
             /*Flow {
                 id: debugFlow
                 anchors.fill: resultsFlow
-                visible: false
+                visible: true
                 Repeater {
                     model: 60
                     Rectangle {
@@ -294,10 +294,14 @@ Item {
                     property bool animationsEnabled
                     width: 100
                     height: 100
+                    property int minimumWidth
+                    property int minimumHeight
                     property Item syncItem
                     function syncWithItem(item)
                     {
                         syncItem = item
+                        minimumWidth = item.minimumWidth
+                        minimumHeight = item.minimumHeight
                         repositionTimer.running = true
                         if (placeHolderPaint.opacity < 1) {
                             placeHolder.delayedSyncWithItem()
