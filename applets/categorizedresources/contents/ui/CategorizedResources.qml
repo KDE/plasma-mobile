@@ -174,13 +174,11 @@ Item {
                     }
                 }
 
-                Text {
+                MobileComponents.TextEffects {
                     id: titleText
                     text: plasmoid.activityName
-                    font.bold: true
-                    style: Text.Outline
-                    styleColor: Qt.rgba(1, 1, 1, 0.6)
-                    font.pixelSize: 20
+                    bold: true
+                    pixelSize: 20
                     anchors.verticalCenter: configureButton.verticalCenter
                 }
             }
