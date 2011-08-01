@@ -67,6 +67,7 @@ Item {
                 }
 
                 text: String(model.Name).length<=18?model.Name:String(model.Name).substr(0,18)+"..."
+                color: "white"
                 pixelSize: 25
                 bold: true
             }

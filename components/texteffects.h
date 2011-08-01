@@ -35,6 +35,7 @@ class TextEffects : public QDeclarativeItem
     Q_PROPERTY(int radius READ radius WRITE setRadius NOTIFY radiusChanged)
     Q_PROPERTY(int horizontalOffset READ horizontalOffset WRITE setHorizontalOffset NOTIFY horizontalOffsetChanged)
     Q_PROPERTY(int verticalOffset READ verticalOffset WRITE setVerticalOffset NOTIFY verticalOffsetChanged)
+    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
 
 public:
     TextEffects(QDeclarativeItem *parent = 0);
@@ -59,6 +60,9 @@ public:
     int verticalOffset() const;
     void setVerticalOffset(int verticalOffset);
 
+    QColor color() const;
+    void setColor(const QColor &color);
+
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 private:
@@ -72,6 +76,7 @@ Q_SIGNALS:
     void radiusChanged(int radius);
     void horizontalOffsetChanged(int horizontalOffset);
     void verticalOffsetChanged(int verticalOffset);
+    void colorChanged(const QColor &color);
 
 private:
     QString m_text;
@@ -80,6 +85,7 @@ private:
     int m_radius;
     int m_horizontalOffset;
     int m_verticalOffset;
+    QColor m_color;
 };
 
 #endif

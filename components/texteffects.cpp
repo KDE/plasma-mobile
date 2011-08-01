@@ -172,12 +172,29 @@ void TextEffects::setVerticalOffset(int verticalOffset)
     update();
 }
 
+QColor TextEffects::color() const
+{
+    return m_verticalOffset;
+}
+
+void TextEffects::setColor(const QColor &color)
+{
+    if (color == m_color) {
+        return;
+    }
+
+    m_color = color;
+    refreshPixmap();
+    setWidth(m_pixmap.width());
+    setHeight(m_pixmap.height());
+    emit colorChanged(color);
+    update();
+}
 
 void TextEffects::refreshPixmap()
 {
-    QColor color = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor);
-    QColor shadowColor = qGray(color.red(), color.green(), color.blue()) > 120?Qt::black:Qt::white;
-    m_pixmap = Plasma::PaintUtils::shadowText(m_text, m_font, color, Qt::white, QPoint(m_horizontalOffset, m_verticalOffset), m_radius);
+    QColor shadowColor = qGray(m_color.red(), m_color.green(), m_color.blue()) > 120?Qt::black:Qt::white;
+    m_pixmap = Plasma::PaintUtils::shadowText(m_text, m_font, m_color, shadowColor, QPoint(m_horizontalOffset, m_verticalOffset), m_radius);
 }
 
 void TextEffects::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
