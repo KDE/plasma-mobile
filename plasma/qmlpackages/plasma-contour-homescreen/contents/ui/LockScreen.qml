@@ -43,7 +43,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 80
+        height: 120
         color: Qt.rgba(0, 0, 0, 0.8)
     }
 
@@ -117,7 +117,7 @@ Rectangle {
 
     Rectangle {
         id: locker
-        anchors.top: lockArea.top
+        anchors.bottom: lockArea.bottom
         anchors.topMargin: 10
         anchors.right: lockArea.right
         anchors.rightMargin: 20
@@ -176,7 +176,7 @@ Rectangle {
                 PropertyChanges {
                     target: locker
                     anchors.right: undefined
-                    anchors.top: undefined
+                    anchors.bottom: undefined
                     color: theme.textColor
                 }
                 PropertyChanges {
