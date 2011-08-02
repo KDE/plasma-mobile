@@ -23,14 +23,10 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
+    id: main
     width: 200
     height: 200
-
-    Component.onCompleted: {
-        plasmoid.drawWallpaper = false
-        plasmoid.containmentType = "CustomContainment"
-        plasmoid.status = "PassiveStatus"
-    }
+    state: "Passive"
 
     PlasmaCore.DataSource {
         id: recommendationsSource
@@ -59,9 +55,9 @@ Item {
 
         onCountChanged: {
             if (count > 0) {
-                plasmoid.status = "NeedsAttentionStatus"
+                main.state = "Normal"
             } else {
-                plasmoid.status = "PassiveStatus"
+                main.state = "Passive"
             }
         }
         delegate: RecommendationDelegate {
