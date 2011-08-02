@@ -26,7 +26,7 @@ Item {
     property alias padding: paddingRectangle
     signal clicked;
     width: parent.width
-    height: childrenRect.height+4
+    height: 48+16
     property int implicitHeight
 
 
