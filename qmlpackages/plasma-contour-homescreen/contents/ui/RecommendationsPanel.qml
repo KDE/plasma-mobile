@@ -22,26 +22,34 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: recommendationsPanel;
     height: parent.height/1.2
     width: parent.width/1.8
     state: "show"
-    enabled: appletStatusWatcher.status == AppletStatusWatcher.PassiveStatus?false:true
+    property Item recommendations
+    enabled: recommendations.state == "Passive"?false:true
 
-    function addContainment(cont)
-    {
-        containment = cont
+    MobileComponents.Package {
+        id: recommendationsPackage
+        name: "org.kde.contour.recommendations"
+        Component.onCompleted: {
+            var component = Qt.createComponent(recommendationsPackage.filePath("mainscript"));
+            recommendationsPanel.recommendations = component.createObject(mainFrame);
+            recommendationsPanel.recommendations.anchors.fill = mainFrame
+            recommendationsPanel.recommendations.anchors.topMargin = titleItem.height+mainFrame.margins.top
+            recommendationsPanel.recommendations.anchors.rightMargin = mainFrame.margins.right
+        }
     }
-
 
     MouseEventListener {
         id: hintregion;
 
         anchors.fill: parent
         anchors.rightMargin: -60
-        enabled: appletStatusWatcher.status == AppletStatusWatcher.PassiveStatus?false:true
+        enabled: recommendations.state == "Passive"?false:true
 
         property int startX
         property int startMouseX
@@ -68,14 +76,14 @@ Item {
 
         PlasmaCore.FrameSvgItem {
             id: hint
-            anchors.left: containmentItem.right
+            anchors.left: mainFrame.right
             anchors.leftMargin: -8
             width: 48
             height: 80
             anchors.verticalCenter: parent.verticalCenter
             imagePath: "widgets/background"
             enabledBorders: "RightBorder|TopBorder|BottomBorder"
-            opacity: appletStatusWatcher.status == AppletStatusWatcher.PassiveStatus?0.3:1;
+            opacity: recommendations.state == "Passive"?0.3:1;
 
             PlasmaCore.SvgItem {
                 id: arrowSvgItem
@@ -103,7 +111,7 @@ Item {
         }
 
         PlasmaCore.FrameSvgItem {
-            id: containmentItem
+            id: mainFrame
             width: parent.width-60
             height: parent.height-80
             y: 80
@@ -143,21 +151,6 @@ Item {
         onTriggered:  {
             recommendationsPanel.state = "hidden"
         }
-    }
-
-    AppletStatusWatcher {
-        id: appletStatusWatcher
-    }
-
-    property QGraphicsWidget containment
-    onContainmentChanged: {
-        containment.parent = containmentItem
-        containment.x = containmentItem.margins.left
-        containment.y = titleItem.height + containmentItem.margins.top
-        containment.width = containmentItem.width - containmentItem.margins.left - containmentItem.margins.right
-        containment.height = containmentItem.height - containmentItem.margins.top - containmentItem.margins.bottom - titleItem.height
-        containment.z = hideTimerResetRegion.z -1
-        appletStatusWatcher.plasmoid = containment
     }
 
     MouseArea {
