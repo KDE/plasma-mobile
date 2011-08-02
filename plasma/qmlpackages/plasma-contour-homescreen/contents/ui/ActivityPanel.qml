@@ -118,7 +118,7 @@ Item {
         id: switcherPackage
         name: "org.kde.activityswitcher"
         Component.onCompleted: {
-            var component = Qt.createComponent(switcherPackage.filePath("ui", "main.qml"));
+            var component = Qt.createComponent(switcherPackage.filePath("mainscript"));
             activityPanel.switcher = component.createObject(hintregion);
         }
     }
