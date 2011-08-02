@@ -62,7 +62,20 @@ QString Package::filePath(const QString &fileType, const QString &fileName) cons
         return QString();
     }
 
-    return m_package->filePath(fileType.toLatin1(), fileName);
+    if (fileName.isEmpty()) {
+        return m_package->filePath(fileType.toLatin1());
+    } else {
+        return m_package->filePath(fileType.toLatin1(), fileName);
+    }
+}
+
+QString Package::filePath(const QString &fileType) const
+{
+    if (!m_package) {
+        return QString();
+    }
+
+    return m_package->filePath(fileType.toLatin1());
 }
 
 #include "package.moc"
