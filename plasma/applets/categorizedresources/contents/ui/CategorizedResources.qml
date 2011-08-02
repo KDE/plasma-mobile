@@ -177,6 +177,9 @@ Item {
                 MobileComponents.TextEffects {
                     id: titleText
                     text: plasmoid.activityName
+                    color: "white"
+                    horizontalOffset: 1
+                    verticalOffset: 1
                     bold: true
                     pixelSize: 20
                     anchors.verticalCenter: configureButton.verticalCenter
