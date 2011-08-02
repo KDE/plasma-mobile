@@ -204,8 +204,6 @@ void TextEffects::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
     //FIXME: better control of the halo strength
     painter->drawPixmap(QPoint(), m_pixmap);
-    painter->drawPixmap(QPoint(), m_pixmap);
-    painter->drawPixmap(QPoint(), m_pixmap);
 }
 
 #include "texteffects.moc"

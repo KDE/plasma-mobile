@@ -68,6 +68,8 @@ Item {
 
                 text: String(model.Name).length<=18?model.Name:String(model.Name).substr(0,18)+"..."
                 color: "white"
+                horizontalOffset: 1
+                verticalOffset: 1
                 pixelSize: 25
                 bold: true
             }
