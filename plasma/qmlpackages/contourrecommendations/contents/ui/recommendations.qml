@@ -69,9 +69,6 @@ Item {
                 description: model.description
                 icon: model.icon
                 actions: model.actions
-                Text {
-                    text: relevance
-                }
             }
     }
 }
