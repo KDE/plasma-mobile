@@ -49,8 +49,12 @@ Item {
         anchors.fill: parent
         clip: true
 
-        model: PlasmaCore.DataModel{
-            dataSource: recommendationsSource
+        model: PlasmaCore.SortFilterModel {
+            sourceModel: PlasmaCore.DataModel {
+                dataSource: recommendationsSource
+            }
+            sortRole: "relevance"
+            sortOrder: Qt.DescendingOrder
         }
 
         onCountChanged: {
@@ -65,6 +69,9 @@ Item {
                 description: model.description
                 icon: model.icon
                 actions: model.actions
+                Text {
+                    text: relevance
+                }
             }
     }
 }

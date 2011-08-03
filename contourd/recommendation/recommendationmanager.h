@@ -56,6 +56,7 @@ private:
     Q_PRIVATE_SLOT(d, void _k_currentActivityChanged(QString))
     Q_PRIVATE_SLOT(d, void _k_newResults(QList<Nepomuk::Query::Result>))
     Q_PRIVATE_SLOT(d, void _k_queryFinished())
+    Q_PRIVATE_SLOT(d, void updateRecommendations())
 };
 
 }
