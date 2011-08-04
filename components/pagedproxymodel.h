@@ -55,6 +55,10 @@ public:
 
 protected Q_SLOTS:
     void sourceDataChanged(const QModelIndex &from, const QModelIndex &to);
+    void sourceRowsAboutToBeInserted(const QModelIndex &parent, int start, int end);
+    void sourceRowsInserted(const QModelIndex &parent, int start, int end);
+    void sourceRowsAboutToBeRemoved(const QModelIndex &parent, int start, int end);
+    void sourceRowsRemoved(const QModelIndex &parent, int start, int end);
 
 private:
     int m_pageSize;
