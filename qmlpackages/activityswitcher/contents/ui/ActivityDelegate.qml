@@ -25,6 +25,7 @@ Item {
     id: delegate
     scale: PathView.itemScale
     opacity: PathView.itemOpacity
+
     z: PathView.z
     property string current: model["Current"]
 
@@ -38,6 +39,11 @@ Item {
 
     width: mainView.delegateWidth
     height: mainView.delegateHeight
+
+    transform: Translate {
+        x: delegate.PathView.itemXTranslate
+    }
+
 
     PlasmaCore.FrameSvgItem {
         id: activityBorder
@@ -75,70 +81,15 @@ Item {
             }
         }
     }
-    Item {
-        anchors {
-            bottom: parent.bottom
-            bottomMargin: 40
-            right: parent.right
-            rightMargin: 10
-        }
-        width: 240
-        height: 32
-        opacity: delegate.scale>0.9?1:(model["Current"]==true?1:0)
-        Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        Image {
-            id: holeImage
-            y: 4
-            source: switcherPackage.filePath("images", "sliderhole.png")
-            anchors.left: parent.left
-            Text {
-                anchors.centerIn: parent
-                text: model["Current"]==true?i18n("Active"):i18n("Slide to activate")
-            }
-        }
-        Image {
-            x: parent.width - width
-            source: switcherPackage.filePath("images", "slider.png")
-            opacity: model["Current"]==true?0:1
-            Text {
-                anchors.centerIn: parent
-                text: i18n("Activate")
-                font.pixelSize: 14
-            }
-            Behavior on x {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            MouseArea {
-                anchors.fill: parent
-                drag.target: parent
-                drag.axis: Drag.XAxis
-                drag.minimumX: holeImage.x - 4
-                drag.maximumX: parent.parent.width - width
-                enabled: model["Current"]==true?false:true
-                onPressed: {
-                    mainView.interactive = false
-                    mouse.accepted = true
-                }
-                onReleased: {
-                    mainView.interactive = true
-                    if (parent.x <= 32) {
-                        var activityId = model["DataEngineSource"]
-                        print(activityId)
-                        var service = activitySource.serviceForSource(activityId)
-                        var operation = service.operationDescription("setCurrent")
-                        service.startOperationCall(operation)
-                    }
-                    parent.x = parent.parent.width - parent.width
-                }
-            }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            var activityId = model["DataEngineSource"]
+            print(activityId)
+            var service = activitySource.serviceForSource(activityId)
+            var operation = service.operationDescription("setCurrent")
+            service.startOperationCall(operation)
         }
     }
 
