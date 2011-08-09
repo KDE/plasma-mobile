@@ -25,7 +25,11 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: activityPanel;
-    height: parent.height-80
+    anchors {
+        top: parent.top
+        bottom: parent.bottom
+        topMargin: 50
+    }
     width: 400
     state: "show"
     property Item switcher
@@ -81,6 +85,7 @@ Item {
             width: 40
             height: 80
             anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenterOffset: -50
             imagePath: "widgets/background"
             enabledBorders: "LeftBorder|TopBorder|BottomBorder"
             PlasmaCore.SvgItem {
