@@ -26,5 +26,5 @@ Exec=active-imageviewer -graphicssystem raster %u
 Terminal=false
 Icon=gwenview
 Type=Application
-Categories=Qt;KDE;Graphics;Viewer;Photography;
+Categories=Qt;KDE;Graphics;RasterGraphics;Viewer;Photography;
 MimeType=inode/directory;image/gif;image/jpeg;image/png;image/bmp;image/x-eps;image/x-ico;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-xbitmap;image/x-xpixmap;
