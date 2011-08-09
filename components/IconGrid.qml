@@ -105,7 +105,7 @@ Item {
                     MouseArea {
                         width: 20; height: 20
                         anchors.centerIn: parent
-                        onClicked: appsView.currentIndex = index
+                        onClicked: appsView.positionViewAtIndex(index)
                     }
                 }
             }
