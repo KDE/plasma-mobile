@@ -89,7 +89,7 @@ void AppModel::setShownCategories(const QStringList &categories)
     KService::List services = KServiceTypeTrader::self()->query("Application", query);
     qSort(services.begin(), services.end(), lessThanForServices);
 
-    QHash<QString, int> categoryWeights;
+    QMap<QString, int> categoryWeights;
 
     clear();
     foreach (const KService::Ptr &service, services) {
@@ -126,7 +126,7 @@ void AppModel::setShownCategories(const QStringList &categories)
 
     if (categories.isEmpty()) {
         m_allCategoriesModel->clear();
-        QHash<QString, int>::const_iterator i = categoryWeights.constBegin();
+        QMap<QString, int>::const_iterator i = categoryWeights.constBegin();
         while (i != categoryWeights.constEnd()) {
             if (i.key().startsWith("X-") || i.key() == "KDE" || i.key() == "GNOME" || i.key() == "GTK" || i.key() == "Qt") {
                 ++i;
