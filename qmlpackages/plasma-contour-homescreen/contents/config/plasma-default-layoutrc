@@ -53,7 +53,7 @@ screen=-1
 [Containments][9][Applets][10]
 geometry=2,0,64,48
 immutability=1
-plugin=org.kde.notifications
+plugin=org.kde.active.notifications
 
 [Containments][9][Applets][11]
 geometry=16,4,28.2857142857143,24
