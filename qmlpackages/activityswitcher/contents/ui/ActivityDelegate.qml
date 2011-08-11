@@ -42,6 +42,7 @@ Item {
 
     transform: Translate {
         x: delegate.PathView.itemXTranslate
+        y: delegate.PathView.itemYTranslate
     }
 
 
