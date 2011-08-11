@@ -85,7 +85,7 @@ Item {
             width: 40
             height: 80
             anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: -50
+            anchors.verticalCenterOffset: -25
             imagePath: "widgets/background"
             enabledBorders: "LeftBorder|TopBorder|BottomBorder"
             PlasmaCore.SvgItem {
