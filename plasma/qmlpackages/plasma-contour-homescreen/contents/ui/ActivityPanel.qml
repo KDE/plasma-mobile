@@ -82,12 +82,11 @@ Item {
         PlasmaCore.FrameSvgItem {
             id: hint
             x: 20
-            width: 40
+            width: 60
             height: 80
             anchors.verticalCenter: parent.verticalCenter
             anchors.verticalCenterOffset: -25
             imagePath: "widgets/background"
-            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
             PlasmaCore.SvgItem {
                 width:22
                 height:22
@@ -136,10 +135,6 @@ Item {
                 x: parent.width - width;
             }
             PropertyChanges {
-                target: hint;
-                opacity: 0;
-            }
-            PropertyChanges {
                 target: hideTimer;
                 running: true
             }
@@ -150,10 +145,6 @@ Item {
                 target: activityPanel;
                 x: parent.width;
             }
-            PropertyChanges {
-                target: hint;
-                opacity: 1;
-            }
         },
         State {
             name: "dragging"
@@ -162,10 +153,6 @@ Item {
                 x: activityPanel.x;
                 y: activityPanel.y;
 
-            }
-            PropertyChanges {
-                target: hint;
-                opacity: 0;
             }
         }
     ]
@@ -183,28 +170,12 @@ Item {
                         easing.type: "InOutCubic";
                     }
                 }
-                ParallelAnimation {
-                    PropertyAnimation {
-                        target: hint;
-                        property: "opacity";
-                        duration: 600;
-                        easing.type: "InCubic";
-                    }
-                }
             }
         },
         Transition {
             from: "hidden";
             to: "show";
             SequentialAnimation {
-                ParallelAnimation {
-                    PropertyAnimation {
-                        targets: hint;
-                        properties: "opacity";
-                        duration: 600;
-                        easing.type: "OutCubic";
-                    }
-                }
                 ParallelAnimation {
                     NumberAnimation {
                         targets: activityPanel;
@@ -222,18 +193,6 @@ Item {
                 properties: "x,y";
                 easing.type: "OutQuad";
                 duration: 400;
-            }
-        },
-        Transition {
-            from: "*";
-            to: "dragging";
-            ParallelAnimation {
-                PropertyAnimation {
-                    targets: hint;
-                    properties: "opacity";
-                    duration: 600;
-                    easing.type: "OutCubic";
-                }
             }
         }
     ]
