@@ -97,6 +97,7 @@ Item {
 
 
     Item {
+        visible: main.model && Math.ceil(main.model.count/main.pageSize) > 1
         anchors {
             left: parent.left
             right: parent.right
