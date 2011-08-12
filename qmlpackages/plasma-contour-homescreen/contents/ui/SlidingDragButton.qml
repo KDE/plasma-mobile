@@ -77,7 +77,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         var oldState = systrayPanel.state
         systrayPanel.state = "none"
         //click on the handle area, switch hidden/full
-        if (mouse.y > height-35 && Math.abs(mouse.screenY - startY) < 8) {
+        if (mouse.y > height-35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8) {
             if (oldState == "Hidden") {
                 systrayPanel.state = "Full"
             } else {
