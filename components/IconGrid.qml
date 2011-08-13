@@ -84,7 +84,7 @@ Item {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            bottomMargin:8
+            bottomMargin: 12
         }
         Row {
             anchors.centerIn: parent
@@ -105,7 +105,7 @@ Item {
                     MouseArea {
                         width: 20; height: 20
                         anchors.centerIn: parent
-                        onClicked: appsView.positionViewAtIndex(index)
+                        onClicked: appsView.currentIndex = index
                     }
                 }
             }
