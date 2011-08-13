@@ -175,14 +175,12 @@ void PanelProxy::setAcceptsFocus(bool accepts)
     m_acceptsFocus = accepts;
 
     if (accepts) {
-        KWindowSystem::setType(m_panel->effectiveWinId(), NET::Normal);
         KWindowSystem::clearState(m_panel->effectiveWinId(), NET::StaysOnTop|NET::KeepAbove);
         m_panel->setAttribute(Qt::WA_X11DoNotAcceptFocus, false);
 
         m_panel->activateWindow();
         KWindowSystem::forceActiveWindow(m_panel->effectiveWinId());
     } else {
-        KWindowSystem::setType(m_panel->effectiveWinId(), NET::Dock);
         unsigned long state = NET::Sticky | NET::StaysOnTop | NET::KeepAbove;
         KWindowSystem::setState(m_panel->effectiveWinId(), state);
         m_panel->setAttribute(Qt::WA_X11DoNotAcceptFocus, true);
