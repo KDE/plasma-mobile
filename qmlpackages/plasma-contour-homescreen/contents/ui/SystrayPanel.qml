@@ -62,17 +62,16 @@ Item {
                     right: parent.right
                 }
                 height: parent.height - systrayContainer.height - windowListContainer.height - 2
-                PlasmaCore.SvgItem {
-                    svg: PlasmaCore.Svg {
-                        imagePath: "widgets/extender-background"
-                    }
-                    elementId: "top"
+                Image {
+                    source: homeScreenPackage.filePath("images", "shadow-top.png")
+                    fillMode: Image.TileHorizontally
+                    height: sourceSize.height
                     anchors {
                         left: parent.left
                         right: parent.right
                         bottom: parent.bottom
+                        bottomMargin: 8
                     }
-                    height: 16
                 }
             }
             PlasmoidContainer {
