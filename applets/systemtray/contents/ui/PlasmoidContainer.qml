@@ -31,11 +31,12 @@ Item {
         plasmoidContainer.applet.parent = plasmoidContainer
         plasmoidContainer.applet.height = plasmoidContainer.height
         plasmoidContainer.applet.x=0
+        plasmoidContainer.applet.y=0
     }
 
     onHeightChanged: {
         //FIXME:: why -2?
-        plasmoidContainer.applet.height = height-2
+        plasmoidContainer.applet.height = height
         if (plasmoidContainer.applet.minimumSize.width>0) {
             plasmoidContainer.applet.width = plasmoidContainer.applet.preferredSize.width
         }
