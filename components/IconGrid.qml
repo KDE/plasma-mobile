@@ -44,7 +44,7 @@ Item {
         id: appsView
         objectName: "appsView"
         pressDelay: 200
-        cacheBuffer: 2000
+        cacheBuffer: width*2
 
         anchors.fill: parent
 
@@ -57,23 +57,40 @@ Item {
         clip: true
         signal clicked(string url)
 
-        delegate: Flow {
-            width: appsView.width
-            height: appsView.height
-            property int orientation: ListView.Horizontal
-            move: Transition {
-                NumberAnimation {
-                    properties: "x,y"
-                    duration: 150
+        delegate: Component {
+            Item {
+                width: appsView.width
+                height: appsView.height
+                Flow {
+                    id: iconFlow
+                    width: iconRepeater.suggestedWidth
+
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    property int orientation: ListView.Horizontal
+                    move: Transition {
+                        NumberAnimation {
+                            properties: "x,y"
+                            duration: 150
+                        }
+                    }
+                    Repeater {
+                        id: iconRepeater
+                        property int columns: Math.min(count, Math.floor(appsView.width/main.delegateWidth))
+                        property int suggestedWidth: main.delegateWidth*columns
+                        //property int suggestedHeight: main.delegateHeight*Math.floor(count/columns)
+
+                        model: MobileComponents.PagedProxyModel {
+                            sourceModel: main.model
+                            currentPage: index
+                            pageSize: main.pageSize
+                        }
+                        delegate: main.delegate
+                    }
                 }
-            }
-            Repeater {
-                model: MobileComponents.PagedProxyModel {
-                    sourceModel: main.model
-                    currentPage: index
-                    pageSize: main.pageSize
-                }
-                delegate: main.delegate
             }
         }
     }
@@ -92,6 +109,7 @@ Item {
 
             Repeater {
                 model: main.model?Math.ceil(main.model.count/main.pageSize):0
+
 
                 Rectangle {
                     y: appsView.currentIndex == index ? -2 : 0
