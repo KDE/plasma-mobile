@@ -102,7 +102,7 @@ Item {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            bottomMargin: 12
+            bottomMargin: 16
         }
         Row {
             anchors.centerIn: parent
@@ -124,7 +124,14 @@ Item {
                     MouseArea {
                         width: 20; height: 20
                         anchors.centerIn: parent
-                        onClicked: appsView.currentIndex = index
+                        onClicked: {
+                            //animate only if near
+                            if (Math.abs(appsView.currentIndex - index) > 1) {
+                                appsView.positionViewAtIndex(index, ListView.Beginning)
+                            } else {
+                                appsView.currentIndex = index
+                            }
+                        }
                     }
                 }
             }
