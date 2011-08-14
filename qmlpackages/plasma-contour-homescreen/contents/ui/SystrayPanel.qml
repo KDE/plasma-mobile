@@ -52,6 +52,16 @@ Item {
         }
         height: 150
 
+        Image {
+            source: homeScreenPackage.filePath("images", "fabrictexture.png")
+            fillMode: Image.Tile
+            height: menuContainer.height-8
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+        }
+
         Column {
             anchors.fill: parent
 
