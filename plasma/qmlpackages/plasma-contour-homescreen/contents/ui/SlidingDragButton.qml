@@ -49,17 +49,13 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     onPressed: {
         startY = mouse.screenY
         lastY = mouse.screenY
-        if ((mouse.y > height - 33 && mouse.x < iconItem.x)) {
-            dragging = false
-            return
-        }
+
         if (systrayPanel.state != "Tasks") {
             dragging = true
         }
     }
     onPositionChanged: {
-        if (systrayPanel.state == "Tasks" &&
-            Math.abs(mouse.screenY - startY) > 35) {
+        if (systrayPanel.state == "Tasks" ) {
                 dragging = true
             }
         if (dragging) {
@@ -69,7 +65,6 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     }
     onReleased: {
         if (!dragging) {
-            dragging = false
             return
         }
 
