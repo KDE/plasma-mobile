@@ -17,13 +17,22 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.0
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: plasmoidContainer
     width: 24
     anchors.top: tasksRow.top
     anchors.bottom: tasksRow.bottom
+    opacity: watcher.status != MobileComponents.AppletStatusWatcher.PassiveStatus?1:0
+
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 300
+            easing.type: Easing.InOutQuad
+        }
+    }
 
     property QGraphicsWidget applet
     onAppletChanged: {
@@ -32,10 +41,14 @@ Item {
         plasmoidContainer.applet.height = plasmoidContainer.height
         plasmoidContainer.applet.x=0
         plasmoidContainer.applet.y=0
+        watcher.plasmoid = plasmoidContainer.applet
+    }
+
+    MobileComponents.AppletStatusWatcher {
+        id: watcher
     }
 
     onHeightChanged: {
-        //FIXME:: why -2?
         plasmoidContainer.applet.height = height
         if (plasmoidContainer.applet.minimumSize.width>0) {
             plasmoidContainer.applet.width = plasmoidContainer.applet.preferredSize.width
