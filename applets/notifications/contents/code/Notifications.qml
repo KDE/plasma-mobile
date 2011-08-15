@@ -205,7 +205,27 @@ Item {
             anchors.fill: parent
             clip: true
             delegate: ListItem {
+                id: notificationItem
                 width: notificationsList.width
+                ListView.onRemove: SequentialAnimation {
+                    PropertyAction {
+                        target: notificationItem
+                        property: "ListView.delayRemove"
+                        value: true
+                    }
+                    NumberAnimation {
+                        target: notificationItem
+                        property: "scale"
+                        to: 0
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                    PropertyAction {
+                        target: notificationItem
+                        property: "ListView.delayRemove"
+                        value: false
+                    }
+                }
                 Column {
                     spacing: 8
                     width: notificationsList.width
