@@ -178,13 +178,6 @@ Item {
                                 "urgency": notificationsSource.data[sourceName]["urgency"]});
         }
 
-        onConnectedSourcesChanged: {
-            if (connectedSources.length > 0) {
-                notificationsApplet.state = "new-notifications"
-            } else {
-                notificationsApplet.state = "default"
-            }
-        }
         onDataChanged: {
             var i = connectedSources[connectedSources.length-1]
             lastNotificationText.text = String(data[i]["body"]).replace("\n", " ")
@@ -205,7 +198,10 @@ Item {
             anchors.fill: parent
             clip: true
             onCountChanged: {
-                if (count == 0) {
+                if (count > 0) {
+                    notificationsApplet.state = "new-notifications"
+                } else {
+                    notificationsApplet.state = "default"
                     popup.visible = false
                 }
             }
