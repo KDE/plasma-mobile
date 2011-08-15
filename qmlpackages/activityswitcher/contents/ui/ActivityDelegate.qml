@@ -98,8 +98,8 @@ Item {
         anchors {
             bottom: activityBorder.bottom
             left: activityBorder.left
-            bottomMargin: activityBorder.margins.bottom+10
-            leftMargin: activityBorder.margins.left+5
+            bottomMargin: activityBorder.margins.bottom + 13
+            leftMargin: activityBorder.margins.left
         }
         spacing: 8
         opacity: delegate.scale>0.9?1:0
