@@ -66,7 +66,7 @@ int  BusyApp::newInstance()
     return 0;
 }
 
-void BusyApp::gotNewStartup( const KStartupInfoId& id, const KStartupInfoData& data )
+void BusyApp::gotNewStartup( const KStartupInfoId &id, const KStartupInfoData& data )
 {
     if (!m_busyWidget) {
         m_busyWidget = new BusyWidget();
@@ -75,6 +75,7 @@ void BusyApp::gotNewStartup( const KStartupInfoId& id, const KStartupInfoData& d
     m_busyWidget.data()->setWindowTitle(data.findName());
     m_busyWidget.data()->setWindowIcon(KIcon(data.findIcon()));
 
+    KWindowSystem::setState(m_busyWidget.data()->winId(), NET::SkipTaskbar | NET::KeepAbove);
     m_busyWidget.data()->show();
     KWindowSystem::activateWindow(m_busyWidget.data()->winId(), 500);
     KWindowSystem::raiseWindow(m_busyWidget.data()->winId());
@@ -104,7 +105,6 @@ void BusyApp::windowAdded(WId id)
         KWindowSystem::forceActiveWindow(id);
         KWindowSystem::raiseWindow(id);
     }
-    
 }
 
 #include "busyapp.moc"
