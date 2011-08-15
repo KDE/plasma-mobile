@@ -75,7 +75,7 @@ Item {
     Item {
         id: lastNotificationClip
         x: notificationsApplet.width/2
-        width: 320
+        width: 420
         height: parent.height
         clip: true
         visible: false
@@ -91,9 +91,10 @@ Item {
                 anchors {
                     left: parent.left
                     leftMargin: notificationsApplet.width/2
-                    right: parent.width
+                    right: parent.right
                     verticalCenter: parent.verticalCenter
                 }
+                textFormat: Text.PlainText
                 color: theme.textColor
                 wrapMode: Text.NoWrap
                 elide: Text.ElideRight
@@ -186,7 +187,8 @@ Item {
         }
         onDataChanged: {
             var i = connectedSources[connectedSources.length-1]
-            lastNotificationText.text = data[i]["body"]
+            lastNotificationText.text = String(data[i]["body"]).replace("\n", " ")
+
             lastNotificationAnimation.running = true
         }
     }
