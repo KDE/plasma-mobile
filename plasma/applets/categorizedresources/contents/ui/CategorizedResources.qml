@@ -105,6 +105,11 @@ Item {
         id: theme
     }
 
+    PlasmaCore.Svg {
+        id: configIconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
+
     Timer {
         id: scrollTimer
         running: false

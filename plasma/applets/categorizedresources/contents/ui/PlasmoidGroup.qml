@@ -55,9 +55,7 @@ ItemGroup {
     }
 
     PlasmaCore.SvgItem {
-        svg: PlasmaCore.Svg {
-            imagePath: "widgets/configuration-icons"
-        }
+        svg: configIconsSvg
         elementId: "close"
         width: 16
         height: 16
@@ -71,6 +69,25 @@ ItemGroup {
             anchors.margins: -6
             onClicked: {
                 applet.action("remove").trigger()
+            }
+        }
+    }
+
+    PlasmaCore.SvgItem {
+        svg: configIconsSvg
+        elementId: "configure"
+        width: 16
+        height: 16
+        anchors {
+            left: plasmoidContainer.contents.left
+            bottom: plasmoidContainer.contents.top
+            bottomMargin: 6
+        }
+        MouseArea {
+            anchors.fill: parent
+            anchors.margins: -6
+            onClicked: {
+                applet.action("configure").trigger()
             }
         }
     }
