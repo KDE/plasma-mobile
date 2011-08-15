@@ -46,10 +46,10 @@ BusyApp::BusyApp()
 
     connect(m_startupInfo,
             SIGNAL(gotNewStartup(const KStartupInfoId&, const KStartupInfoData&)),
-            SLOT(gotNewStartup(const KStartupInfoId&, const KStartupInfoData&)));
+            SLOT(gotStartup(const KStartupInfoId&, const KStartupInfoData&)));
     connect(m_startupInfo,
             SIGNAL(gotStartupChange(const KStartupInfoId&, const KStartupInfoData&)),
-            SLOT(gotStartupChange(const KStartupInfoId&, const KStartupInfoData&)));
+            SLOT(gotStartup(const KStartupInfoId&, const KStartupInfoData&)));
     connect(m_startupInfo,
             SIGNAL(gotRemoveStartup(const KStartupInfoId&, const KStartupInfoData&)),
             SLOT(killStartup(const KStartupInfoId&)));
@@ -66,8 +66,10 @@ int  BusyApp::newInstance()
     return 0;
 }
 
-void BusyApp::gotNewStartup( const KStartupInfoId &id, const KStartupInfoData& data )
+void BusyApp::gotStartup(const KStartupInfoId &id, const KStartupInfoData &data)
 {
+    Q_UNUSED(id)
+
     if (!m_busyWidget) {
         m_busyWidget = new BusyWidget();
     }
@@ -81,17 +83,10 @@ void BusyApp::gotNewStartup( const KStartupInfoId &id, const KStartupInfoData& d
     KWindowSystem::raiseWindow(m_busyWidget.data()->winId());
 }
 
-void BusyApp::gotStartupChange( const KStartupInfoId& id, const KStartupInfoData& data )
+void BusyApp::killStartup(const KStartupInfoId &id)
 {
-    if (!m_busyWidget) {
-        m_busyWidget = new BusyWidget();
-    }
+    Q_UNUSED(id)
 
-    m_busyWidget.data()->show();
-}
-
-void BusyApp::killStartup( const KStartupInfoId& id )
-{
     if (!m_busyWidget) {
         return;
     }
