@@ -196,7 +196,7 @@ Item {
         mainItem: ListView {
             id: notificationsList
             width: 400
-            height: 250
+            height: Math.min(350, contentHeight)
             model: notificationsModel
             anchors.fill: parent
             clip: true
