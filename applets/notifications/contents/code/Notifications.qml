@@ -193,6 +193,7 @@ Item {
     PlasmaCore.Dialog {
         id: popup
         location: plasmoid.location
+        windowFlags: Qt.Popup
         mainItem: ListView {
             id: notificationsList
             width: 400
