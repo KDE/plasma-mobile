@@ -192,6 +192,7 @@ Item {
 
     PlasmaCore.Dialog {
         id: popup
+        location: plasmoid.location
         mainItem: ListView {
             id: notificationsList
             width: 400
