@@ -66,6 +66,11 @@ Item {
         id: theme
     }
 
+    PlasmaCore.Svg {
+        id: configIconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
+
     Item {
         id: lastNotificationClip
         x: notificationsApplet.width/2
@@ -191,19 +196,47 @@ Item {
             id: notificationsList
             width: 400
             height: 250
-            model: notifications
+            model: notificationsModel
             anchors.fill: parent
             clip: true
             delegate: ListItem {
-                Row {
-                    spacing: 6
-                    PlasmaWidgets.IconWidget {
-                        icon: QIcon(appIcon)
-                    }
-
+                width: notificationsList.width
+                Column {
+                    spacing: 8
+                    width: notificationsList.width
                     Text {
-                        text: appName + ": " + body
+                        text: appName
+                        font.bold: true
                         color: theme.textColor
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                    Row {
+                        spacing: 6
+                        PlasmaWidgets.IconWidget {
+                            icon: QIcon(appIcon)
+                            width: 32
+                            height: 32
+                        }
+
+                        Text {
+                            text: body
+                            color: theme.textColor
+                            width: notificationsList.width - 24 - 32 - 12
+                        }
+                        PlasmaCore.SvgItem {
+                            svg: configIconsSvg
+                            elementId: "close"
+                            width: 24
+                            height: 24
+                            anchors.verticalCenter: parent.verticalCenter
+                            MouseArea {
+                                anchors.fill: parent
+                                anchors.margins: -6
+                                onClicked: {
+                                    notificationsModel.remove(index)
+                                }
+                            }
+                        }
                     }
                 }
             }
