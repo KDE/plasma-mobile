@@ -30,6 +30,7 @@ Item {
 
     Component.onCompleted: {
         //plasmoid.popupIcon = QIcon("preferences-desktop-notification")
+        plasmoid.aspectRatioMode = "ConstrainedSquare"
     }
 
     states: [
