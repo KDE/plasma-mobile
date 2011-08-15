@@ -146,7 +146,7 @@ Item {
             onClicked: {
                 if (popup.visible) {
                     popup.visible = false
-                } else {
+                } else if (notificationsList.count > 0) {
                     var pos = popup.popupPosition(notificationsApplet, Qt.AlignCenter)
                     popup.x = pos.x
                     popup.y = pos.y
@@ -204,6 +204,11 @@ Item {
             model: notificationsModel
             anchors.fill: parent
             clip: true
+            onCountChanged: {
+                if (count == 0) {
+                    popup.visible = false
+                }
+            }
             delegate: ListItem {
                 id: notificationItem
                 width: notificationsList.width
