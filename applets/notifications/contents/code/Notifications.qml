@@ -150,7 +150,7 @@ Item {
     }
 
     ListModel {
-        id: notifications
+        id: notificationsModel
     }
 
     PlasmaCore.DataSource {
@@ -163,7 +163,7 @@ Item {
         }
 
         onNewData: {
-            notifications.append({"appIcon" : notificationsSource.data[sourceName]["appIcon"],
+            notificationsModel.append({"appIcon" : notificationsSource.data[sourceName]["appIcon"],
                                 "appName" : notificationsSource.data[sourceName]["appName"],
                                 "summary" : notificationsSource.data[sourceName]["summary"],
                                 "body" : notificationsSource.data[sourceName]["body"],
