@@ -133,14 +133,14 @@ Item {
     Flickable {
         id: mainFlickable
         anchors.fill: main
-        interactive: true
+        interactive: contentItem.height>height
         contentWidth: contentItem.width
         contentHeight: contentItem.height
 
         Item {
             id: contentItem
             width: mainFlickable.width
-            height: childrenRect.height+availScreenRect.y
+            height: childrenRect.height+availScreenRect.y+20
 
 
             Connections {
