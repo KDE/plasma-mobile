@@ -54,14 +54,22 @@ PlasmaCore.FrameSvgItem {
 
     MouseArea {
         anchors.fill: parent
-        drag.target: parent
+        property int lastX
+        property int lastY
+
         onPressed: {
+            //FIXME: this shouldn't be necessary
+            mainFlickable.interactive = false
             itemGroup.z = 999
             animationsEnabled = false
             mouse.accepted = true
             var x = Math.round(parent.x/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
             var y = Math.round(parent.y/LayoutManager.cellSize.height)*LayoutManager.cellSize.height
             LayoutManager.setSpaceAvailable(x, y, parent.width, parent.height, true)
+
+            var globalMousePos = mapToItem(main, mouse.x, mouse.y)
+            lastX = globalMousePos.x
+            lastY = globalMousePos.y
 
             //debugFlow.refresh();
 
@@ -73,11 +81,19 @@ PlasmaCore.FrameSvgItem {
             placeHolder.syncWithItem(parent)
 
             var globalPos = mapToItem(main, x, y)
-            if (!scrollTimer.running && globalPos.y < 100) {
+
+            var globalMousePos = mapToItem(main, mouse.x, mouse.y)
+            itemGroup.x += (globalMousePos.x - lastX)
+            itemGroup.y += (globalMousePos.y - lastY)
+
+            lastX = globalMousePos.x
+            lastY = globalMousePos.y
+
+            if (globalPos.y < 100) {
                 scrollTimer.backwards = true
                 scrollTimer.running = true
                 scrollTimer.draggingItem = itemGroup
-            } else if (!scrollTimer.running && globalPos.y > main.height-100) {
+            } else if (globalPos.y > main.height-100) {
                 scrollTimer.backwards = false
                 scrollTimer.running = true
                 scrollTimer.draggingItem = itemGroup
@@ -86,6 +102,7 @@ PlasmaCore.FrameSvgItem {
             }
         }
         onReleased: {
+            mainFlickable.interactive = true
             scrollTimer.running = false
             placeHolderPaint.opacity = 0
             itemGroup.z = 0
