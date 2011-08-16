@@ -102,7 +102,7 @@ Item {
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: activityPanel.state = "show"
+                onClicked: activityPanel.state = activityPanel.x < homeScreen.width?"hidden":"show"
             }
         }
     }
