@@ -46,10 +46,12 @@ Item {
 
     Item {
         id: paddingRectangle
-        anchors.fill: background
-        anchors.leftMargin: background.margins.left
-        anchors.topMargin: background.margins.top
-        anchors.rightMargin: background.margins.right
-        anchors.bottomMargin: background.margins.bottom
+        anchors {
+            fill: background
+            leftMargin: background.margins.left
+            topMargin: background.margins.top
+            rightMargin: background.margins.right
+            bottomMargin: background.margins.bottom
+        }
     }
 }
