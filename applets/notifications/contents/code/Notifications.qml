@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2011 Davide Bettio <davide.bettio@kdemail.net>              *
+ *   Copyright 2011 Marco Martin <mart@kde.org>                            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,7 +20,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as PlasmaComponents
 
 Item {
@@ -238,7 +239,7 @@ Item {
                     }
                     Row {
                         spacing: 6
-                        PlasmaWidgets.IconWidget {
+                        QIconItem {
                             icon: QIcon(appIcon)
                             width: 32
                             height: 32
