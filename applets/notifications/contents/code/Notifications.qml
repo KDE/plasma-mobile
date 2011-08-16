@@ -198,6 +198,8 @@ Item {
             model: notificationsModel
             anchors.fill: parent
             clip: true
+            //this to not make delegates die since they have a timer that deletes themselves
+            cacheBuffer: 2000
             onCountChanged: {
                 if (count > 0) {
                     notificationsApplet.state = "new-notifications"
@@ -209,6 +211,16 @@ Item {
             delegate: ListItem {
                 id: notificationItem
                 width: notificationsList.width
+
+                Timer {
+                    interval: 30*60*1000
+                    repeat: false
+                    running: true
+                    onTriggered: {
+                        notificationsModel.remove(index)
+                    }
+                }
+
                 ListView.onRemove: SequentialAnimation {
                     PropertyAction {
                         target: notificationItem
