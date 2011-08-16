@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=Widget strip
+Name=Widget Strip
+GenericName=Widget Strip
 Comment=A collection of widgets
-
 
 Exec=appletstrip-shell
 Terminal=false
 Icon=dashboard-show
 Type=Application
-Categories=Qt;KDE;System;Utility;Network
+Categories=Qt;KDE;Network;WebBrowser;
