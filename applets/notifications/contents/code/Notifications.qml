@@ -137,11 +137,34 @@ Item {
         svg: notificationSvg
         elementId: "notification-disabled"
         anchors.fill: parent
+        Item {
+            id: jobProgressItem
+            width: 0
+            clip: true
+            visible: jobsSource.sources.length > 0
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
+            }
+            PlasmaCore.SvgItem {
+                svg: notificationSvg
+                elementId: "notification-progress-active"
+                anchors {
+                    left: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                }
+                width: notificationSvgItem.width
+            }
+        }
+
         Text {
             id: countText
             text: notificationsRepeater.count+jobsRepeater.count
             anchors.centerIn: parent
         }
+
         MouseArea {
             anchors.fill: parent
             onClicked: {
@@ -156,6 +179,7 @@ Item {
             }
         }
     }
+
 
     ListModel {
         id: notificationsModel
@@ -197,6 +221,15 @@ Item {
         }
         Component.onCompleted: {
             connectedSources = sources
+        }
+        onDataChanged: {
+            var total = 0
+            for (var i = 0; i < sources.length; ++i) {
+                total += jobsSource.data[sources[i]]["percentage"]
+            }
+
+            total /= sources.length
+            jobProgressItem.width = notificationSvgItem.width * (total/100)
         }
     }
 
