@@ -187,6 +187,25 @@ Item {
         }
     }
 
+    PlasmaCore.DataSource {
+        id: jobsSource
+        engine: "applicationjobs"
+        interval: 0
+
+        onSourceAdded: {
+            connectSource(source);
+        }
+        Component.onCompleted: {
+            connectedSources = sources
+        }
+    }
+
+    PlasmaCore.DataModel {
+        id: jobsModel
+        dataSource: jobsSource
+        
+    }
+
     PlasmaCore.Dialog {
         id: popup
         location: plasmoid.location
@@ -201,6 +220,10 @@ Item {
 
             Column {
                 id: contentsColumn
+                Repeater {
+                    model: jobsModel
+                    delegate: JobDelegate {}
+                }
                 Repeater {
                     id: notificationsRepeater
                     model: notificationsModel
