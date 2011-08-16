@@ -53,13 +53,13 @@ Item {
 
     function addApplet(applet, pos)
     {
-        var component = Qt.createComponent("ItemGroup.qml")
-        var itemGroup = component.createObject(resultsFlow)
-        itemGroup.scale = 1
-        applet.parent = itemGroup
-        applet.backgroundHints = "NoBackground"
-        itemGroup.category = "Applet-"+applet.id
-        LayoutManager.itemGroups[itemGroup.category] = itemGroup
+        var component = Qt.createComponent("PlasmoidGroup.qml")
+        var plasmoidGroup = component.createObject(resultsFlow)
+        plasmoidGroup.width = LayoutManager.cellSize.width*2
+        plasmoidGroup.height = LayoutManager.cellSize.height*2
+        plasmoidGroup.applet = applet
+        plasmoidGroup.category = "Applet-"+applet.id
+        LayoutManager.itemGroups[plasmoidGroup.category] = plasmoidGroup
     }
 
     function showAddResource()
@@ -105,6 +105,11 @@ Item {
         id: theme
     }
 
+    PlasmaCore.Svg {
+        id: configIconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
+
     Timer {
         id: scrollTimer
         running: false
@@ -128,14 +133,14 @@ Item {
     Flickable {
         id: mainFlickable
         anchors.fill: main
-        interactive: true
+        interactive: contentItem.height>height
         contentWidth: contentItem.width
         contentHeight: contentItem.height
 
         Item {
             id: contentItem
             width: mainFlickable.width
-            height: childrenRect.height+availScreenRect.y
+            height: childrenRect.height+availScreenRect.y+20
 
 
             Connections {
@@ -149,7 +154,7 @@ Item {
                 anchors {
                     top: parent.top
                     left: parent.left
-                    topMargin: availScreenRect.y
+                    topMargin: availScreenRect.y+20
                     leftMargin: 72
                 }
 
@@ -174,13 +179,14 @@ Item {
                     }
                 }
 
-                Text {
+                MobileComponents.TextEffects {
                     id: titleText
                     text: plasmoid.activityName
-                    font.bold: true
-                    style: Text.Outline
-                    styleColor: Qt.rgba(1, 1, 1, 0.6)
-                    font.pixelSize: 20
+                    color: "white"
+                    horizontalOffset: 1
+                    verticalOffset: 1
+                    bold: true
+                    pixelSize: 20
                     anchors.verticalCenter: configureButton.verticalCenter
                 }
             }
@@ -191,19 +197,19 @@ Item {
                 running: false
                 interval: 2000
                 onTriggered: {
-                    var component = Qt.createComponent("ItemGroup.qml")
+                    var component = Qt.createComponent("ItemsListGroup.qml")
                     var existingCategories = Array()
 
                     //FIXME: find a more efficient way
                     //destroy removed categories
                     for (var category in LayoutManager.itemGroups) {
-                        if (category.indexOf("Applet-") == -1 ||
+                        if (category.indexOf("Applet-") != 0 &&
                             categoryListModel.categories.indexOf(category) == -1) {
                             var item = LayoutManager.itemGroups[category]
                             LayoutManager.setSpaceAvailable(item.x, item.y, item.width, item.height, true)
                             item.destroy()
                             delete LayoutManager.itemGroups[category]
-                            debugFlow.refresh();
+                            //debugFlow.refresh();
                         }
                     }
 
@@ -221,10 +227,10 @@ Item {
             }
 
             //FIXME: debug purposes only, remove asap
-            Flow {
+            /*Flow {
                 id: debugFlow
                 anchors.fill: resultsFlow
-                visible: false
+                visible: true
                 Repeater {
                     model: 60
                     Rectangle {
@@ -239,17 +245,18 @@ Item {
                         child.opacity = LayoutManager.availableSpace(child.x,child.y, LayoutManager.cellSize.width, LayoutManager.cellSize.height).width>0?0.8:0.3
                     }
                 }
-            }
+            }*/
 
             Item {
                 id: resultsFlow
                 //height: Math.min(300, childrenRect.height)
                 width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
                 height: childrenRect.height
+                z: 900
 
                 anchors {
                     top: toolBar.bottom
-                    topMargin: 10
+                    topMargin: 5
                     horizontalCenter: parent.horizontalCenter
                 }
 
@@ -279,7 +286,7 @@ Item {
                             child.visible = true
                             LayoutManager.positionItem(child)
                             child.enabled = true
-                            debugFlow.refresh();
+                            //debugFlow.refresh();
                         }
                     }
                 }
@@ -289,15 +296,20 @@ Item {
             }
             Item {
                 anchors.fill: resultsFlow
+                z: 0
                 Item {
                     id: placeHolder
                     property bool animationsEnabled
                     width: 100
                     height: 100
+                    property int minimumWidth
+                    property int minimumHeight
                     property Item syncItem
                     function syncWithItem(item)
                     {
                         syncItem = item
+                        minimumWidth = item.minimumWidth
+                        minimumHeight = item.minimumHeight
                         repositionTimer.running = true
                         if (placeHolderPaint.opacity < 1) {
                             placeHolder.delayedSyncWithItem()

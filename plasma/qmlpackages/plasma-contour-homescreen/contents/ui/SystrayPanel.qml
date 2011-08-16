@@ -36,11 +36,11 @@ Item {
 
     function addContainment(cont)
     {
-        if (cont.pluginName == "org.kde.mobilelauncher") {
+        if (cont.pluginName == "org.kde.active.launcher") {
             menuContainer.plasmoid = cont
         } else if (cont.pluginName == "org.kde.windowstrip") {
             windowListContainer.plasmoid = cont
-        } else if (cont.pluginName == "org.kde.mobilesystemtray") {
+        } else if (cont.pluginName == "org.kde.active.systemtray") {
             systrayContainer.plasmoid = cont
         }
     }
@@ -52,6 +52,16 @@ Item {
         }
         height: 150
 
+        Image {
+            source: homeScreenPackage.filePath("images", "fabrictexture.png")
+            fillMode: Image.Tile
+            height: menuContainer.height-8
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+        }
+
         Column {
             anchors.fill: parent
 
@@ -62,17 +72,16 @@ Item {
                     right: parent.right
                 }
                 height: parent.height - systrayContainer.height - windowListContainer.height - 2
-                PlasmaCore.SvgItem {
-                    svg: PlasmaCore.Svg {
-                        imagePath: "widgets/extender-background"
-                    }
-                    elementId: "top"
+                Image {
+                    source: homeScreenPackage.filePath("images", "shadow-top.png")
+                    fillMode: Image.TileHorizontally
+                    height: sourceSize.height
                     anchors {
                         left: parent.left
                         right: parent.right
                         bottom: parent.bottom
+                        bottomMargin: 8
                     }
-                    height: 16
                 }
             }
             PlasmoidContainer {

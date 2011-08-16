@@ -51,7 +51,7 @@ ListItem {
             Text {
                 width: delegateLayout.width
                 color: theme.textColor
-                font.pointSize: 20
+                font.pixelSize: 15
                 text: listItem.name
                 MouseArea {
                     anchors.fill: parent
@@ -76,11 +76,9 @@ ListItem {
             id : actionsLayout
             width: parent.width
             spacing: 5
-            anchors.left: iconItem.right
+            anchors.left: parent.left
+            anchors.right: parent.right
             anchors.leftMargin: 8
-            anchors.right: listItem.padding.right
-            anchors.top: delegateLayout.bottom
-            anchors.topMargin: 8
             visible: actions.length > 1
 
             Repeater {

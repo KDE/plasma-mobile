@@ -94,7 +94,7 @@ Item {
         id: theme
     }
 
-    Image {
+    /*Image {
         //TODO: take scale mode from Wallpaper config
         asynchronous: true
         source: activeWallpaper.wallpaperPath
@@ -102,7 +102,7 @@ Item {
         height: Math.max(homeScreen.height, sourceSize.height)
         //Parallax: the background moves for is width
         x: (mainContainments.width-width)*(1-((mainContainments.x+mainContainments.width)/(mainContainments.width*3)))
-    }
+    }*/
 
     //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
     Item {

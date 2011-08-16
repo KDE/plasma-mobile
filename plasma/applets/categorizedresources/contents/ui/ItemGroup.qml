@@ -27,18 +27,39 @@ import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 PlasmaCore.FrameSvgItem {
     id: itemGroup
     property string category
-    property alias categoryCount: itemsList.count
+    property string title
+    property bool canResizeHeight: false
     imagePath: "widgets/background"
     width: LayoutManager.cellSize.width*2
     height: LayoutManager.cellSize.height
     z: 0
     property bool animationsEnabled: false
-    scale: itemsList.count>0?1:0
+    property int minimumWidth: LayoutManager.cellSize.width
+    property int minimumHeight: LayoutManager.cellSize.height
+
+    property Item contents: contentsItem
+    Item {
+        id: contentsItem
+        anchors {
+            left: parent.left
+            top: parent.top
+            right: parent.right
+            bottom: parent.bottom
+            topMargin: parent.margins.top+categoryTitle.height
+            leftMargin: parent.margins.left
+            rightMargin: parent.margins.right
+            bottomMargin: parent.margins.bottom
+        }
+    }
 
     MouseArea {
         anchors.fill: parent
-        drag.target: parent
+        property int lastX
+        property int lastY
+
         onPressed: {
+            //FIXME: this shouldn't be necessary
+            mainFlickable.interactive = false
             itemGroup.z = 999
             animationsEnabled = false
             mouse.accepted = true
@@ -46,7 +67,11 @@ PlasmaCore.FrameSvgItem {
             var y = Math.round(parent.y/LayoutManager.cellSize.height)*LayoutManager.cellSize.height
             LayoutManager.setSpaceAvailable(x, y, parent.width, parent.height, true)
 
-            debugFlow.refresh();
+            var globalMousePos = mapToItem(main, mouse.x, mouse.y)
+            lastX = globalMousePos.x
+            lastY = globalMousePos.y
+
+            //debugFlow.refresh();
 
 
             placeHolder.syncWithItem(parent)
@@ -56,11 +81,19 @@ PlasmaCore.FrameSvgItem {
             placeHolder.syncWithItem(parent)
 
             var globalPos = mapToItem(main, x, y)
-            if (!scrollTimer.running && globalPos.y < 100) {
+
+            var globalMousePos = mapToItem(main, mouse.x, mouse.y)
+            itemGroup.x += (globalMousePos.x - lastX)
+            itemGroup.y += (globalMousePos.y - lastY)
+
+            lastX = globalMousePos.x
+            lastY = globalMousePos.y
+
+            if (globalPos.y < 100) {
                 scrollTimer.backwards = true
                 scrollTimer.running = true
                 scrollTimer.draggingItem = itemGroup
-            } else if (!scrollTimer.running && globalPos.y > main.height-100) {
+            } else if (globalPos.y > main.height-100) {
                 scrollTimer.backwards = false
                 scrollTimer.running = true
                 scrollTimer.draggingItem = itemGroup
@@ -69,12 +102,13 @@ PlasmaCore.FrameSvgItem {
             }
         }
         onReleased: {
+            mainFlickable.interactive = true
             scrollTimer.running = false
             placeHolderPaint.opacity = 0
             itemGroup.z = 0
             animationsEnabled = true
-            LayoutManager.positionItem(parent)
-            debugFlow.refresh()
+            LayoutManager.positionItem(itemGroup)
+            //debugFlow.refresh()
         }
     }
     Behavior on scale {
@@ -148,19 +182,22 @@ PlasmaCore.FrameSvgItem {
             startX = mouse.x
             startY = mouse.y
             LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, itemGroup.width, itemGroup.height, true)
-            debugFlow.refresh();
+            //debugFlow.refresh();
         }
         onPositionChanged: {
             //TODO: height as well if it's going to become a grid view
-            itemGroup.width = Math.max(LayoutManager.cellSize.width, itemGroup.width + mouse.x-startX)
+            itemGroup.width = Math.max(itemGroup.minimumWidth, itemGroup.width + mouse.x-startX)
+            if (itemGroup.canResizeHeight) {
+                itemGroup.height = Math.max(itemGroup.minimumHeight, itemGroup.height + mouse.y-startY)
+            }
         }
         onReleased: {
             animationsEnabled = true
 
             mainFlickable.interactive = true
-            LayoutManager.positionItem(parent)
+            LayoutManager.positionItem(itemGroup)
             LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, widthAnimation.to, itemGroup.height, false)
-            debugFlow.refresh();
+            //debugFlow.refresh();
         }
     }
     Component.onCompleted: {
@@ -186,16 +223,12 @@ PlasmaCore.FrameSvgItem {
         height: categoryText.height + margins.top + margins.bottom
         Text {
             id: categoryText
-            text: i18n("%1 (%2)", itemGroup.category, itemsList.count)
+            text: itemGroup.title
             anchors {
                 top: parent.top
                 horizontalCenter: parent.horizontalCenter
                 topMargin: parent.margins.top
             }
         }
-    }
-
-    ItemsList {
-        id: itemsList
     }
 }
