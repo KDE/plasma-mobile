@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Widget strip
+Comment=A collection of widgets
+
+
+Exec=appletstrip-shell
+Terminal=false
+Icon=dashboard-show
+Type=Application
+Categories=Qt;KDE;System;Utility;Network

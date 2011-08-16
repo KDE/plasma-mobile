@@ -27,4 +27,4 @@ target_link_libraries(kdeinit_appletstrip-shell ${KDE4_PLASMA_LIBS} kworkspace $
 
 install(TARGETS kdeinit_appletstrip-shell DESTINATION ${LIB_INSTALL_DIR})
 install(TARGETS appletstrip-shell ${INSTALL_TARGETS_DEFAULT_ARGS})
-
+install(FILES widget-strip.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
