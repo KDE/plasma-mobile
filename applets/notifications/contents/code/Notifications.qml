@@ -200,12 +200,6 @@ Item {
         }
     }
 
-    PlasmaCore.DataModel {
-        id: jobsModel
-        dataSource: jobsSource
-        
-    }
-
     PlasmaCore.Dialog {
         id: popup
         location: plasmoid.location

@@ -20,6 +20,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 
 ListItem {
@@ -67,18 +68,49 @@ ListItem {
                 elide: Text.ElideMiddle
             }
         }
-        PlasmaWidgets.Meter {
+        Row {
+            spacing: 6
             anchors {
                 left: parent.left
                 right: parent.right
             }
-            height: 16
-            meterType: "BarMeterHorizontal"
-            svg: "widgets/bar_meter_horizontal"
-            minimum: 0
-            maximum: 100
-            //percentage doesn't always exist, so doesn't get in the model
-            value: jobsSource.data[modelData]["percentage"]
+            PlasmaWidgets.Meter {
+                width: parent.width - 48 - 12
+                height: 16
+                meterType: "BarMeterHorizontal"
+                svg: "widgets/bar_meter_horizontal"
+                minimum: 0
+                maximum: 100
+                //percentage doesn't always exist, so doesn't get in the model
+                value: jobsSource.data[modelData]["percentage"]
+                anchors.verticalCenter: pauseButton.verticalCenter
+            }
+            MobileComponents.IconButton {
+                id: pauseButton
+                width: 22
+                height: 22
+                icon: jobsSource.data[modelData]["state"] == "suspended"?QIcon("media-playback-start"):QIcon("media-playback-pause")
+                onClicked: {
+                    var operationName = "suspend"
+                    if (jobsSource.data[modelData]["state"] == "suspended") {
+                        operationName = "resume"
+                    }
+                    var service = jobsSource.serviceForSource(modelData)
+                    var operation = service.operationDescription(operationName)
+                    service.startOperationCall(operation)
+                }
+            }
+            MobileComponents.IconButton {
+                id: stopButton
+                width: 22
+                height: 22
+                icon: QIcon("media-playback-stop")
+                onClicked: {
+                    var service = jobsSource.serviceForSource(modelData)
+                    var operation = service.operationDescription("stop")
+                    service.startOperationCall(operation)
+                }
+            }
         }
 
         Item {
@@ -87,6 +119,7 @@ ListItem {
                 right: parent.right
             }
             height: childrenRect.height
+            //FIXME: proper localization
             Text {
                 text: jobsSource.data[modelData]["processedAmount0"]+" "+jobsSource.data[modelData]["processedUnit0"]+"/"+jobsSource.data[modelData]["totalAmount0"]+" "+jobsSource.data[modelData]["totalUnit0"]
                 anchors.left: parent.left
