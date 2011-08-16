@@ -20,6 +20,7 @@
 
 #include "plasmaapp.h"
 #include "../shell/widgetsexplorer/mobilewidgetsexplorer.h"
+#include "../shell/activityconfiguration/activityconfiguration.h"
 
 #include <unistd.h>
 
@@ -141,6 +142,10 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     if (addAction) {
         connect(addAction, SIGNAL(triggered()), this, SLOT(showWidgetsExplorer()));
     }
+    QAction *configureAction = containment->action("configure");
+    if (configureAction) {
+        connect(configureAction, SIGNAL(triggered()), this, SLOT(showActivityConfiguration()));
+    }
 }
 
 void PlasmaApp::showWidgetsExplorer()
@@ -154,6 +159,19 @@ void PlasmaApp::showWidgetsExplorer()
     m_widgetsExplorer.data()->setContainment(m_view->containment());
     m_widgetsExplorer.data()->setGeometry(m_view->containment()->geometry());
     m_widgetsExplorer.data()->show();
+}
+
+void PlasmaApp::showActivityConfiguration()
+{
+    if (!m_activityConfiguration) {
+        m_activityConfiguration = new ActivityConfiguration();
+        m_activityConfiguration.data()->setZValue(1000);
+        m_corona->addItem(m_activityConfiguration.data());
+    }
+
+    m_activityConfiguration.data()->setContainment(m_view->containment());
+    m_activityConfiguration.data()->setGeometry(m_view->containment()->geometry());
+    m_activityConfiguration.data()->show();
 }
 
 #include "plasmaapp.moc"

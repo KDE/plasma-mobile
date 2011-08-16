@@ -41,7 +41,9 @@
 #include <Plasma/Context>
 #include <Plasma/Package>
 
+#ifndef NO_ACTIVITIES
 #include <Activities/Controller>
+#endif
 
 ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     : Plasma::DeclarativeWidget(parent),
@@ -51,7 +53,9 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
       m_wallpaperIndex(-1)
 {
     setQmlPath(KStandardDirs::locate("data", "plasma-mobile/activityconfiguration/view.qml"));
+#ifndef NO_ACTIVITIES
     m_activityController = new Activities::Controller(this);
+#endif
 
     if (engine()) {
         QDeclarativeContext *ctxt = engine()->rootContext();
@@ -77,9 +81,10 @@ void ActivityConfiguration::ensureContainmentExistence()
     if (m_containment) {
         return;
     }
-
+#ifndef NO_ACTIVITIES
     const QString id = m_activityController->addActivity(m_activityName);
     m_activityController->setCurrentActivity(id);
+#endif
     Plasma::Corona *corona = qobject_cast<Plasma::Corona *>(scene());
     QEventLoop loop;
     //FIXME: find a better way

@@ -1,14 +1,16 @@
 include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kworkspace)
 
 
+ADD_DEFINITIONS(-DNO_ACTIVITIES)
+
 set(appletstrip-shell_SRCS
     singleview.cpp
     main.cpp
     plasmaapp.cpp
     stripcorona.cpp
 
-    #../shell/activityconfiguration/activityconfiguration.cpp
-    #../shell/activityconfiguration/backgroundlistmodel.cpp
+    ../shell/activityconfiguration/activityconfiguration.cpp
+    ../shell/activityconfiguration/backgroundlistmodel.cpp
 
     ../shell/widgetsexplorer/mobilewidgetsexplorer.cpp
     ../shell/widgetsexplorer/kcategorizeditemsviewmodels.cpp
