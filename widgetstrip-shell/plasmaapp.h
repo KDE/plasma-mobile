@@ -36,6 +36,7 @@
 
 namespace Plasma
 {
+    class Containment;
     class Corona;
     class View;
     class Applet;
@@ -43,6 +44,7 @@ namespace Plasma
 
 class SingleView;
 class StripCorona;
+class MobileWidgetsExplorer;
 
 class PlasmaApp : public KUniqueApplication
 {
@@ -63,10 +65,13 @@ private:
 private Q_SLOTS:
     void cleanup();
     void syncConfig();
+    void showWidgetsExplorer();
+    void manageNewContainment(Plasma::Containment *containment);
 
 private:
     StripCorona *m_corona;
     SingleView *m_view;
+    QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
 };
 
 #endif // multiple inclusion guard

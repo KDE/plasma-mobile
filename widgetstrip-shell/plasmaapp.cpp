@@ -19,11 +19,13 @@
  */
 
 #include "plasmaapp.h"
+#include "../shell/widgetsexplorer/mobilewidgetsexplorer.h"
 
 #include <unistd.h>
 
 #include <QPixmapCache>
 #include <QtDBus/QtDBus>
+#include <QAction>
 
 #include <KCrash>
 #include <KColorUtils>
@@ -118,6 +120,8 @@ Plasma::Corona* PlasmaApp::corona()
     if (!m_corona) {
         m_corona = new StripCorona(this);
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
+        connect(m_corona, SIGNAL(containmentAdded(Plasma::Containment*)),
+                this, SLOT(manageNewContainment(Plasma::Containment*)), Qt::QueuedConnection);
 
         m_corona->setItemIndexMethod(QGraphicsScene::NoIndex);
         m_corona->initializeLayout();
@@ -131,5 +135,25 @@ bool PlasmaApp::hasComposite()
     return KWindowSystem::compositingActive();
 }
 
+void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
+{
+    QAction *addAction = containment->action("add widgets");
+    if (addAction) {
+        connect(addAction, SIGNAL(triggered()), this, SLOT(showWidgetsExplorer()));
+    }
+}
+
+void PlasmaApp::showWidgetsExplorer()
+{
+    if (!m_widgetsExplorer) {
+        m_widgetsExplorer = new MobileWidgetsExplorer(0);
+        m_widgetsExplorer.data()->setZValue(1000);
+        m_corona->addItem(m_widgetsExplorer.data());
+    }
+
+    m_widgetsExplorer.data()->setContainment(m_view->containment());
+    m_widgetsExplorer.data()->setGeometry(m_view->containment()->geometry());
+    m_widgetsExplorer.data()->show();
+}
 
 #include "plasmaapp.moc"
