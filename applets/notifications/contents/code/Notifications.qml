@@ -212,59 +212,7 @@ Item {
                             popup.visible = false
                         }
                     }
-                    delegate: ListItem {
-                        id: notificationItem
-                        width: popupFlickable.width
-
-                        Timer {
-                            interval: 30*60*1000
-                            repeat: false
-                            running: true
-                            onTriggered: {
-                                notificationsModel.remove(index)
-                            }
-                        }
-
-
-                        Column {
-                            spacing: 8
-                            width: popupFlickable.width
-                            Text {
-                                text: appName
-                                font.bold: true
-                                color: theme.textColor
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-                            Row {
-                                spacing: 6
-                                QIconItem {
-                                    icon: QIcon(appIcon)
-                                    width: 32
-                                    height: 32
-                                }
-
-                                Text {
-                                    text: body
-                                    color: theme.textColor
-                                    width: popupFlickable.width - 24 - 32 - 12
-                                }
-                                PlasmaCore.SvgItem {
-                                    svg: configIconsSvg
-                                    elementId: "close"
-                                    width: 24
-                                    height: 24
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    MouseArea {
-                                        anchors.fill: parent
-                                        anchors.margins: -6
-                                        onClicked: {
-                                            notificationsModel.remove(index)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    delegate: NotificationDelegate {}
                 }
             }
         }
