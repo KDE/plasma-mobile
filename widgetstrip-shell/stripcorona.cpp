@@ -19,6 +19,7 @@
 
 #include "stripcorona.h"
 
+#include <QGraphicsView>
 
 static const char *DEFAULT_CONTAINMENT = "org.kde.appletstrip";
 
@@ -30,6 +31,18 @@ StripCorona::StripCorona(QObject *parent)
 StripCorona::~StripCorona()
 {
 
+}
+
+
+QRect StripCorona::screenGeometry(int id) const
+{
+    Q_UNUSED(id);
+    QGraphicsView *v = views().value(0);
+    if (v) {
+        return QRect(QPoint(0, 0), v->size());
+    }
+
+    return sceneRect().toRect();
 }
 
 

@@ -34,6 +34,7 @@ public:
      * Loads the default (system wide) layout for this user
      **/
     void loadDefaultLayout();
+    QRect screenGeometry(int id) const;
 };
 
 #endif
