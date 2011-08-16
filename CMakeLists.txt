@@ -33,6 +33,7 @@ add_subdirectory(mobilebusynotifier)
 add_subdirectory(virtualkeyboard)
 add_subdirectory(wallpapers)
 add_subdirectory(shell)
+add_subdirectory(widgetstrip-shell)
 
 if (BUILD_HANDSET)
    add_subdirectory(handset)
