@@ -45,6 +45,7 @@ class ActivityConfiguration : public Plasma::DeclarativeWidget
     Q_PROPERTY(QObject *wallpaperModel READ wallpaperModel NOTIFY modelChanged)
     Q_PROPERTY(int wallpaperIndex READ wallpaperIndex WRITE setWallpaperIndex)
     Q_PROPERTY(QSize screenshotSize READ screenshotSize WRITE setScreenshotSize)
+    Q_PROPERTY(bool activityNameConfigurable READ isActivityNameConfigurable)
 
 public:
     ActivityConfiguration(QGraphicsWidget *parent = 0);
@@ -64,6 +65,8 @@ public:
 
     QSize screenshotSize();
     void setScreenshotSize(const QSize &size);
+
+    bool isActivityNameConfigurable() const;
 
 Q_SIGNALS:
     void modelChanged();

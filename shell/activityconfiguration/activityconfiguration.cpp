@@ -176,6 +176,15 @@ QString ActivityConfiguration::activityId() const
     return m_containment->context()->currentActivityId();
 }
 
+bool ActivityConfiguration::isActivityNameConfigurable() const
+{
+#ifndef NO_ACTIVITIES
+    return true;
+#else
+    return false;
+#endif
+}
+
 QObject *ActivityConfiguration::wallpaperModel()
 {
     return m_model;
