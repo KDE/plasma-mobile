@@ -38,10 +38,14 @@ KDE_EXPORT int kdemain(int argc, char **argv)
                         ki18n("Author and maintainer"),
                         "notmart@gmail.com");
 
+    QApplication::setGraphicsSystem("raster");
     KCmdLineArgs::init(argc, argv, &aboutData);
 
     KCmdLineOptions options;
-
+#ifndef QT_NO_OPENGL
+    options.add("opengl", ki18n("use a QGLWidget for the viewport"));
+#endif
+    KCmdLineArgs::addCmdLineOptions(options);
 
     PlasmaApp *app = PlasmaApp::self();
     QApplication::setWindowIcon(KIcon("dashboard-show"));

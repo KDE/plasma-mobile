@@ -85,7 +85,18 @@ int  PlasmaApp::newInstance()
         return 0;
     }
 
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    bool useGL = args->isSet("opengl");
+
+    if (!useGL) {
+        //use plasmarc to share this with plasma-windowed
+        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
+        useGL = cg.readEntry("UseOpenGl", true);
+    }
+
+
     SingleView *view = new SingleView(m_corona);
+    view->setUseGL(useGL);
     view->setWindowState(Qt::WindowMaximized);
 
 

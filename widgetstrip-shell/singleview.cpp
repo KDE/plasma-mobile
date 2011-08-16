@@ -28,16 +28,20 @@
 #include <KAction>
 #include <KIconLoader>
 
-
 #include <Plasma/Applet>
 #include <Plasma/Containment>
 #include <Plasma/Corona>
 #include <Plasma/PopupApplet>
 #include <Plasma/WindowEffects>
 
+#ifndef QT_NO_OPENGL
+#include <QtOpenGL/QtOpenGL>
+#endif
+
 SingleView::SingleView(Plasma::Corona *corona, QWidget *parent)
     : Plasma::View(corona->containments().first(), parent),
-      m_corona(corona)
+      m_corona(corona),
+      m_useGL(false)
 {
     setScene(m_corona);
 
@@ -52,6 +56,23 @@ SingleView::~SingleView()
    // m_containment->destroy(false);
 }
 
+
+void SingleView::setUseGL(const bool on)
+{
+#ifndef QT_NO_OPENGL
+    if (on) {
+      QGLWidget *glWidget = new QGLWidget;
+      glWidget->setAutoFillBackground(false);
+      setViewport(glWidget);
+    }
+#endif
+    m_useGL = on;
+}
+
+bool SingleView::useGL() const
+{
+    return m_useGL;
+}
 
 
 void SingleView::resizeEvent(QResizeEvent *event)

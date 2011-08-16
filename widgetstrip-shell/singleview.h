@@ -42,11 +42,15 @@ public:
     SingleView(Plasma::Corona *corona, QWidget *parent=0);
     ~SingleView();
 
+    void setUseGL(const bool on);
+    bool useGL() const;
+
 protected:
     void resizeEvent(QResizeEvent *event);
 
 private:
     Plasma::Corona *m_corona;
+    bool m_useGL;
 };
 
 #endif // multiple inclusion guard

@@ -22,7 +22,7 @@ set(appletstrip-shell_SRCS
 
 kde4_add_kdeinit_executable(appletstrip-shell ${appletstrip-shell_SRCS})
 
-target_link_libraries(kdeinit_appletstrip-shell ${KDE4_PLASMA_LIBS} kworkspace ${KDE4_KIO_LIBS} ${X11_LIBRARIES} ${KDE4_KFILE_LIBS} ${QT_QTDECLARATIVE_LIBRARY} )
+target_link_libraries(kdeinit_appletstrip-shell ${KDE4_PLASMA_LIBS} kworkspace ${KDE4_KIO_LIBS} ${X11_LIBRARIES} ${KDE4_KFILE_LIBS} ${QT_QTOPENGL_LIBRARY}  ${QT_QTDECLARATIVE_LIBRARY} )
 
 
 install(TARGETS kdeinit_appletstrip-shell DESTINATION ${LIB_INSTALL_DIR})
