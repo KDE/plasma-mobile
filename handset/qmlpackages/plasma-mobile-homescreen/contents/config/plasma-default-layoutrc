@@ -81,6 +81,9 @@ immutability=2
 plugin=digital-clock
 zvalue=0
 
+[Containments][8][Applets][11][Configuration]
+ShowCalendarPopup=false
+
 [Containments][9]
 activity=
 desktop=-1
