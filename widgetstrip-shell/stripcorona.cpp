@@ -54,6 +54,10 @@ void StripCorona::loadDefaultLayout()
     c->setPos(0, 0);
 
     emit containmentAdded(c);
+
+    c->addApplet("org.kde.news-qml");
+    c->addApplet("org.kde.analogclock");
+
     requestConfigSync();
 }
 

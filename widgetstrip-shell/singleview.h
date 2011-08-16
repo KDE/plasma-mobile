@@ -42,9 +42,6 @@ public:
     SingleView(Plasma::Corona *corona, QWidget *parent=0);
     ~SingleView();
 
-Q_SIGNALS:
-    void containmentActivated();
-
 protected:
     void resizeEvent(QResizeEvent *event);
 
