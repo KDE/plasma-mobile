@@ -51,6 +51,7 @@ public:
     void setRotation(const int rotation);
     int rotation() const;
 
+    void setLocation(const Plasma::Location location);
     void setDirection(const Plasma::Direction direction);
     Plasma::Direction direction() const;
     QSize transformedSize() const;
@@ -58,6 +59,7 @@ public:
 public Q_SLOTS:
     void setContainment(Plasma::Containment *containment);
     void updateGeometry();
+    void swapScreenEdge();
 
 Q_SIGNALS:
     void locationChanged(const KeyboardDialog *view);
@@ -74,7 +76,9 @@ private:
     Plasma::Containment *m_containment;
     Plasma::Corona *m_corona;
     Plasma::Direction m_direction;
+    Plasma::Location m_location;
     QPushButton *m_closeButton;
+    QPushButton *m_moveButton;
     int m_rotation;
 };
 
