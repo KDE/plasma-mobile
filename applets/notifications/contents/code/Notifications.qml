@@ -221,7 +221,7 @@ Item {
             Column {
                 id: contentsColumn
                 Repeater {
-                    model: jobsModel
+                    model: jobsSource.sources
                     delegate: JobDelegate {}
                 }
                 Repeater {

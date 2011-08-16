@@ -30,7 +30,7 @@ ListItem {
         spacing: 8
         width: popupFlickable.width
         Text {
-            text: appName
+            text: jobsSource.data[modelData]["appName"]
             font.bold: true
             color: theme.textColor
             anchors.horizontalCenter: parent.horizontalCenter
@@ -46,23 +46,23 @@ ListItem {
 
             Text {
                 id: labelName0Text
-                text: labelName0
+                text: jobsSource.data[modelData]["labelName0"]
                 width: Math.max(paintedWidth, labelName1Text.paintedWidth)
                 horizontalAlignment: Text.AlignRight
             }
             Text {
-                text: label0
+                text: jobsSource.data[modelData]["label0"]
                 width: parent.width - labelName0Text.width
                 elide: Text.ElideMiddle
             }
             Text {
                 id: labelName1Text
-                text: labelName1
+                text: jobsSource.data[modelData]["labelName1"]
                 width: Math.max(paintedWidth, labelName0Text.paintedWidth)
                 horizontalAlignment: Text.AlignRight
             }
             Text {
-                text: label1
+                text: jobsSource.data[modelData]["label1"]
                 width: parent.width - labelName0Text.width
                 elide: Text.ElideMiddle
             }
@@ -75,6 +75,28 @@ ListItem {
             height: 16
             meterType: "BarMeterHorizontal"
             svg: "widgets/bar_meter_horizontal"
+            minimum: 0
+            maximum: 100
+            //percentage doesn't always exist, so doesn't get in the model
+            value: jobsSource.data[modelData]["percentage"]
+        }
+
+        Item {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: childrenRect.height
+            Text {
+                text: jobsSource.data[modelData]["processedAmount0"]+" "+jobsSource.data[modelData]["processedUnit0"]+"/"+jobsSource.data[modelData]["totalAmount0"]+" "+jobsSource.data[modelData]["totalUnit0"]
+                anchors.left: parent.left
+                color: theme.color
+            }
+            Text {
+                text: jobsSource.data[modelData]["speed"]
+                anchors.right: parent.right
+                color: theme.color
+            }
         }
     }
 }
