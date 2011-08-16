@@ -139,7 +139,7 @@ Item {
         anchors.fill: parent
         Text {
             id: countText
-            text: notificationsRepeater.count
+            text: notificationsRepeater.count+jobsRepeater.count
             anchors.centerIn: parent
         }
         MouseArea {
@@ -147,7 +147,7 @@ Item {
             onClicked: {
                 if (popup.visible) {
                     popup.visible = false
-                } else if (notificationsRepeater.count > 0) {
+                } else if (notificationsRepeater.count+jobsRepeater.count > 0) {
                     var pos = popup.popupPosition(notificationsApplet, Qt.AlignCenter)
                     popup.x = pos.x
                     popup.y = pos.y
@@ -215,14 +215,23 @@ Item {
             Column {
                 id: contentsColumn
                 Repeater {
+                    id: jobsRepeater
                     model: jobsSource.sources
                     delegate: JobDelegate {}
+                    onCountChanged: {
+                        if (count+notificationsRepeater.count > 0) {
+                            notificationsApplet.state = "new-notifications"
+                        } else {
+                            notificationsApplet.state = "default"
+                            popup.visible = false
+                        }
+                    }
                 }
                 Repeater {
                     id: notificationsRepeater
                     model: notificationsModel
                     onCountChanged: {
-                        if (count > 0) {
+                        if (count+jobsRepeater.count > 0) {
                             notificationsApplet.state = "new-notifications"
                         } else {
                             notificationsApplet.state = "default"
