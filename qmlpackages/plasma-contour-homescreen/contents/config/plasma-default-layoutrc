@@ -68,11 +68,8 @@ geometry=120,4,24,24
 immutability=1
 plugin=digital-clock
 
-
-
-
-
-
+[Containments][9][Applets][15][Configuration]
+ShowCalendarPopup=false
 
 [Containments][20]
 activity=Network
