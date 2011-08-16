@@ -139,7 +139,7 @@ Item {
         anchors.fill: parent
         Text {
             id: countText
-            text: notificationsList.count
+            text: notificationsRepeater.count
             anchors.centerIn: parent
         }
         MouseArea {
@@ -147,7 +147,7 @@ Item {
             onClicked: {
                 if (popup.visible) {
                     popup.visible = false
-                } else if (notificationsList.count > 0) {
+                } else if (notificationsRepeater.count > 0) {
                     var pos = popup.popupPosition(notificationsApplet, Qt.AlignCenter)
                     popup.x = pos.x
                     popup.y = pos.y
@@ -191,88 +191,76 @@ Item {
         id: popup
         location: plasmoid.location
         windowFlags: Qt.Popup
-        mainItem: ListView {
-            id: notificationsList
+        mainItem: Flickable {
+            id: popupFlickable
             width: 400
             height: Math.min(350, contentHeight)
-            model: notificationsModel
-            anchors.fill: parent
+            contentWidth: contentsColumn.width
+            contentHeight: contentsColumn.height
             clip: true
-            //this to not make delegates die since they have a timer that deletes themselves
-            cacheBuffer: 2000
-            onCountChanged: {
-                if (count > 0) {
-                    notificationsApplet.state = "new-notifications"
-                } else {
-                    notificationsApplet.state = "default"
-                    popup.visible = false
-                }
-            }
-            delegate: ListItem {
-                id: notificationItem
-                width: notificationsList.width
 
-                Timer {
-                    interval: 30*60*1000
-                    repeat: false
-                    running: true
-                    onTriggered: {
-                        notificationsModel.remove(index)
+            Column {
+                id: contentsColumn
+                Repeater {
+                    id: notificationsRepeater
+                    model: notificationsModel
+                    onCountChanged: {
+                        if (count > 0) {
+                            notificationsApplet.state = "new-notifications"
+                        } else {
+                            notificationsApplet.state = "default"
+                            popup.visible = false
+                        }
                     }
-                }
+                    delegate: ListItem {
+                        id: notificationItem
+                        width: popupFlickable.width
 
-                ListView.onRemove: SequentialAnimation {
-                    PropertyAction {
-                        target: notificationItem
-                        property: "ListView.delayRemove"
-                        value: true
-                    }
-                    NumberAnimation {
-                        target: notificationItem
-                        property: "scale"
-                        to: 0
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                    PropertyAction {
-                        target: notificationItem
-                        property: "ListView.delayRemove"
-                        value: false
-                    }
-                }
-                Column {
-                    spacing: 8
-                    width: notificationsList.width
-                    Text {
-                        text: appName
-                        font.bold: true
-                        color: theme.textColor
-                        anchors.horizontalCenter: parent.horizontalCenter
-                    }
-                    Row {
-                        spacing: 6
-                        QIconItem {
-                            icon: QIcon(appIcon)
-                            width: 32
-                            height: 32
+                        Timer {
+                            interval: 30*60*1000
+                            repeat: false
+                            running: true
+                            onTriggered: {
+                                notificationsModel.remove(index)
+                            }
                         }
 
-                        Text {
-                            text: body
-                            color: theme.textColor
-                            width: notificationsList.width - 24 - 32 - 12
-                        }
-                        PlasmaCore.SvgItem {
-                            svg: configIconsSvg
-                            elementId: "close"
-                            width: 24
-                            height: 24
-                            anchors.verticalCenter: parent.verticalCenter
-                            MouseArea {
-                                anchors.fill: parent
-                                anchors.margins: -6
-                                onClicked: {
-                                    notificationsModel.remove(index)
+
+                        Column {
+                            spacing: 8
+                            width: popupFlickable.width
+                            Text {
+                                text: appName
+                                font.bold: true
+                                color: theme.textColor
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+                            Row {
+                                spacing: 6
+                                QIconItem {
+                                    icon: QIcon(appIcon)
+                                    width: 32
+                                    height: 32
+                                }
+
+                                Text {
+                                    text: body
+                                    color: theme.textColor
+                                    width: popupFlickable.width - 24 - 32 - 12
+                                }
+                                PlasmaCore.SvgItem {
+                                    svg: configIconsSvg
+                                    elementId: "close"
+                                    width: 24
+                                    height: 24
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        anchors.margins: -6
+                                        onClicked: {
+                                            notificationsModel.remove(index)
+                                        }
+                                    }
                                 }
                             }
                         }
