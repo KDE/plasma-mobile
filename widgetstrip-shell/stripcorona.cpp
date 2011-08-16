@@ -30,7 +30,6 @@ StripCorona::StripCorona(QObject *parent)
 
 StripCorona::~StripCorona()
 {
-
 }
 
 
