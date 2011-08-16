@@ -143,6 +143,7 @@ Item {
                         elide: Text.ElideMiddle
                         color: theme.textColor
                         width: parent.width
+                        horizontalAlignment: Text.AlignHCenter
                         font.bold: true
                     }
 
