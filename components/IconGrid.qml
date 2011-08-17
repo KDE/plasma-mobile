@@ -53,6 +53,7 @@ Item {
         highlightRangeMode: ListView.StrictlyEnforceRange
         orientation: ListView.Horizontal
         snapMode: ListView.SnapOneItem
+        boundsBehavior: Flickable.DragOverBounds
 
         clip: true
         signal clicked(string url)
