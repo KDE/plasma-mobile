@@ -123,8 +123,7 @@ Item {
                     property string winId: DataEngineSource
 
                     Rectangle {
-                        opacity: 0.4
-                        color: theme.backgroundColor
+                        opacity: 0
                         anchors.fill: parent
                     }
 
