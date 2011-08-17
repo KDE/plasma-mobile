@@ -163,15 +163,23 @@ Item {
                         iconSize: 22
                         elementId: "close"
                         visible: actionClose
+
                         anchors {
                             top: parent.top
                             right: parent.right
                         }
+
                         onClicked: {
                             var service = tasksSource.serviceForSource(winId)
                             var operation = service.operationDescription("close")
 
                             service.startOperationCall(operation)
+                        }
+
+                        Component.onCompleted: {
+                            if (className == shellName) {
+                                visible = false;
+                            }
                         }
                     }
                 }

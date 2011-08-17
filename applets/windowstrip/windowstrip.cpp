@@ -22,8 +22,14 @@
 
 #include <QtGui/QGraphicsLinearLayout>
 #include <QtDeclarative/QDeclarativeComponent>
+#include <QtDeclarative/QDeclarativeContext>
+#include <QtDeclarative/QDeclarativeEngine>
 #include <QtDeclarative/QDeclarativeItem>
 #include <QtGui/QGraphicsView>
+
+#include <KGlobal>
+#include <KComponentData>
+#include <KAboutData>
 
 #include <Plasma/Svg>
 #include <Plasma/WindowEffects>
@@ -51,6 +57,11 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     setQmlPath(KStandardDirs::locate("data",
                                      "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
     m_windowFlicker = rootObject()->findChild<QDeclarativeItem*>("windowFlicker");
+
+    // allow the QML to know the name of the shell to compare against the window.
+    if (QDeclarativeContext *context = engine()->rootContext()) {
+        context->setContextProperty("shellName", KGlobal::mainComponent().aboutData()->appName());
+    }
 
     connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()),
             this, SLOT(scrollChanged()));
