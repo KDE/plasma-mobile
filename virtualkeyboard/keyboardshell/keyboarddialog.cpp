@@ -44,14 +44,20 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
       m_containment(0),
       m_corona(corona),
       m_direction(Plasma::Up),
+      m_location(Plasma::BottomEdge),
       m_rotation(0)
 {
     m_closeButton = new QPushButton(this);
     m_closeButton->setFlat(true);
     m_closeButton->setIcon(KIcon("dialog-close"));
     m_closeButton->setIconSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
-
     connect(m_closeButton, SIGNAL(clicked()), this, SLOT(hide()));
+
+    m_moveButton = new QPushButton(this);
+    m_moveButton->setFlat(true);
+    m_moveButton->setIcon(KIcon("arrow-up"));
+    m_moveButton->setIconSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
+    connect(m_moveButton, SIGNAL(clicked()), this, SLOT(swapScreenEdge()));
 
     setContainment(containment);
     m_containment->setFormFactor(Plasma::Planar);
@@ -98,7 +104,6 @@ KeyboardDialog::~KeyboardDialog()
     emit storeApplet(m_applet);
 }
 
-
 void KeyboardDialog::setContainment(Plasma::Containment *c)
 {
     if (m_containment) {
@@ -130,8 +135,49 @@ void KeyboardDialog::updateGeometry()
     QDesktopWidget *desktop = QApplication::desktop();
     m_containment->setGeometry(QRect(QPoint(0,0), desktop->size()));
     m_corona->setSceneRect(m_containment->geometry());
-    m_closeButton->setGeometry(width()-KIconLoader::SizeMedium, 0, KIconLoader::SizeMedium, KIconLoader::SizeMedium);
+    const int iconSize = KIconLoader::SizeMedium;
+    switch (m_location) {
+        case Plasma::TopEdge:
+            m_closeButton->setGeometry(width() - iconSize, height() - iconSize, iconSize, iconSize);
+            m_moveButton->setGeometry(0, height() - iconSize, iconSize, iconSize);
+            break;
+        case Plasma::RightEdge:
+            m_closeButton->setGeometry(0, 0, iconSize, iconSize);
+            m_moveButton->setGeometry(0, height() - iconSize, iconSize, iconSize);
+            break;
+        case Plasma::LeftEdge:
+            m_closeButton->setGeometry(width() - iconSize, 0, iconSize, iconSize);
+            m_moveButton->setGeometry(width() - iconSize, height() - iconSize, iconSize, iconSize);
+            break;
+        case Plasma::BottomEdge:
+            m_closeButton->setGeometry(width() - iconSize, 0, iconSize, iconSize);
+            m_moveButton->setGeometry(0, 0, iconSize, iconSize);
+            break;
+        default:
+            break;
+    }
     m_closeButton->raise();
+    m_moveButton->raise();
+}
+
+void KeyboardDialog::swapScreenEdge()
+{
+    switch (m_location) {
+    case Plasma::TopEdge:
+        setLocation(Plasma::BottomEdge);
+        break;
+    case Plasma::RightEdge:
+        setLocation(Plasma::LeftEdge);
+        break;
+    case Plasma::LeftEdge:
+        setLocation(Plasma::RightEdge);
+        break;
+    case Plasma::BottomEdge:
+        setLocation(Plasma::TopEdge);
+        break;
+    default:
+        break;
+    }
 }
 
 void KeyboardDialog::setRotation(const int degrees)
@@ -156,6 +202,48 @@ int KeyboardDialog::rotation() const
     return m_rotation;
 }
 
+void KeyboardDialog::setLocation(const Plasma::Location location)
+{
+    if (location == m_location) {
+        return;
+    }
+
+    const Plasma::Location oldLocation = m_location;
+    m_location = location;
+
+    QDesktopWidget *desktop = QApplication::desktop();
+    const QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
+
+    switch (location) {
+    case Plasma::TopEdge:
+        setFixedSize(screenGeom.width() - 100, static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
+        move(screenGeom.left() + 50, screenGeom.top());
+        m_moveButton->setIcon(KIcon("arrow-down"));
+        break;
+    case Plasma::RightEdge:
+        setFixedSize(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).width(), screenGeom.height() - 100);
+        move(screenGeom.right() - width(), screenGeom.top() + 50);
+        m_moveButton->setIcon(KIcon("arrow-left"));
+        break;
+    case Plasma::LeftEdge:
+        setFixedSize(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).width(), screenGeom.height() - 100);
+        move(screenGeom.left(), screenGeom.top() + 50);
+        m_moveButton->setIcon(KIcon("arrow-right"));
+        break;
+    case Plasma::BottomEdge:
+        setFixedSize(screenGeom.width() - 100, static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
+        move(screenGeom.left() + 50, screenGeom.height() - height());
+        m_moveButton->setIcon(KIcon("arrow-up"));
+        break;
+    default:
+        // we don't support this location, so just revert back
+        m_location = oldLocation;
+        break;
+    }
+
+    updateGeometry();
+}
+
 void KeyboardDialog::setDirection(const Plasma::Direction direction)
 {
     if (direction == m_direction) {
@@ -164,36 +252,19 @@ void KeyboardDialog::setDirection(const Plasma::Direction direction)
 
     m_direction = direction;
 
-    QDesktopWidget *desktop = QApplication::desktop();
-    QRect screenGeom = desktop->screenGeometry(desktop->screenNumber(this));
-
-    screenGeom.setWidth(screenGeom.width()-100);
-
     switch (direction) {
     case Plasma::Down:
         setRotation(180);
-        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
-        setFixedWidth(screenGeom.width());
-        move(screenGeom.left(), screenGeom.top());
         break;
     case Plasma::Left:
         setRotation(270);
-        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
-        setFixedHeight(screenGeom.height());
-        move(screenGeom.right() - width(), screenGeom.top());
         break;
     case Plasma::Right:
         setRotation(90);
-        setFixedWidth(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
-        setFixedHeight(screenGeom.height());
-        move(screenGeom.left(), screenGeom.top());
         break;
     case Plasma::Up:
     default:
         setRotation(0);
-        setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
-        setFixedWidth(screenGeom.width());
-        move(screenGeom.left(), screenGeom.height() - height());
         break;
     }
 
@@ -221,9 +292,28 @@ void KeyboardDialog::showEvent(QShowEvent *event)
 
 void KeyboardDialog::resizeEvent(QResizeEvent *event)
 {
+    if (event->oldSize() == event->size()) {
+        return;
+    }
+
     Plasma::Dialog::resizeEvent(event);
     QDesktopWidget *desktop = QApplication::desktop();
-    move(desktop->size().width()/2-event->size().width()/2, desktop->size().height()-event->size().height());
+    switch (m_location) {
+    case Plasma::TopEdge:
+        move((desktop->size().width() / 2) - (event->size().width() / 2), desktop->screenGeometry().y());
+        break;
+    case Plasma::RightEdge:
+        move(desktop->size().width() - event->size().width(), (desktop->size().height() / 2) - (event->size().height() / 2));
+         break;
+    case Plasma::LeftEdge:
+        move(desktop->screenGeometry().x(), (desktop->size().height() / 2) - (event->size().width() / 2));
+        break;
+    case Plasma::BottomEdge:
+        move((desktop->size().width() / 2) - (event->size().width() / 2), desktop->size().height() - event->size().height());
+        break;
+    default:
+        break;
+    }
 }
 
 QSize KeyboardDialog::transformedSize() const
