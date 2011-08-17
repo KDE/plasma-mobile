@@ -1,5 +1,5 @@
 [ContainmentDefaults]
-defaultContainment=org.kde.categorizedresources
+defaultContainment=org.kde.active.activityscreen
 
 
 [Containments][7]
@@ -79,7 +79,7 @@ formfactor=0
 geometry=0,0,800,480
 immutability=1
 location=1
-plugin=org.kde.categorizedresources
+plugin=org.kde.active.activityscreen
 screen=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage

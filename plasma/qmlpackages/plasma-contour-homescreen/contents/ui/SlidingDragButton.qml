@@ -49,24 +49,18 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     onPressed: {
         startY = mouse.screenY
         lastY = mouse.screenY
-
-        if (systrayPanel.state != "Tasks") {
-            dragging = true
-        }
     }
     onPositionChanged: {
-        if (systrayPanel.state == "Tasks" ) {
-                dragging = true
-            }
+        if ( Math.abs(startY - lastY) > 32 ) {
+            dragging = true
+        }
         if (dragging) {
             slidingPanel.y = Math.min(0, (slidingPanel.y+mouse.screenY - lastY))
-            lastY = mouse.screenY
         }
+        lastY = mouse.screenY
     }
     onReleased: {
-        if (!dragging) {
-            return
-        }
+
 
         dragging = false
         var oldState = systrayPanel.state
@@ -85,7 +79,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         } else if (systrayPanel.height+slidingPanel.y > systrayPanel.height/2) {
             systrayPanel.state = "Full"
         //more then 1/4 of the screen uncovered, taskbar
-        } else if (systrayPanel.height+slidingPanel.y > systrayPanel.height/4) {
+        } else if (systrayPanel.height+slidingPanel.y > 150) {
             systrayPanel.state = "Tasks"
         //screen mostly hidden: hide
         } else {

@@ -101,7 +101,14 @@ function availableSpace(x, y, width, height)
 
         for (var w=0; w<rowsWidth; w++) {
             //occupied?
-            if (!positions[row+w] || !positions[row+w][column]) {
+            var free = true;
+            for (var i = column; i < column+columnsHeight; ++i) {
+                if (positions[row+w] && positions[row+w][i]) {
+                    free = false;
+                    break;
+                }
+            }
+            if (free) {
                 availableSize.width = w+1
             } else {
                 break;
