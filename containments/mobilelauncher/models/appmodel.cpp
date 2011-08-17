@@ -1,6 +1,7 @@
 /*
     Copyright 2009 Ivan Cukic <ivan.cukic+kde@gmail.com>
     Copyright 2011 Marco Martin <notmart@gmail.com>
+    Copyright 2011 Stefan Majewsky <majewsky@gmx.net>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -52,6 +53,11 @@ AppModel::~AppModel()
 {
 }
 
+static bool lessThanForServices(KService::Ptr service1, KService::Ptr service2)
+{
+    return QString::localeAwareCompare(service1->name(), service2->name()) < 0;
+}
+
 //TODO: list of categories
 void AppModel::setShownCategories(const QStringList &categories)
 {
@@ -75,11 +81,15 @@ void AppModel::setShownCategories(const QStringList &categories)
         }
         query += ")";
     }
+
+    //openSUSE: exclude YaST modules from the list
+    query += " and (not (exist Categories and 'X-SuSE-YaST' in Categories))";
+
     kWarning()<<query;
     KService::List services = KServiceTypeTrader::self()->query("Application", query);
+    qSort(services.begin(), services.end(), lessThanForServices);
 
-
-    QHash<QString, int> categoryWeights;
+    QMap<QString, int> categoryWeights;
 
     clear();
     foreach (const KService::Ptr &service, services) {
@@ -116,7 +126,7 @@ void AppModel::setShownCategories(const QStringList &categories)
 
     if (categories.isEmpty()) {
         m_allCategoriesModel->clear();
-        QHash<QString, int>::const_iterator i = categoryWeights.constBegin();
+        QMap<QString, int>::const_iterator i = categoryWeights.constBegin();
         while (i != categoryWeights.constEnd()) {
             if (i.key().startsWith("X-") || i.key() == "KDE" || i.key() == "GNOME" || i.key() == "GTK" || i.key() == "Qt") {
                 ++i;

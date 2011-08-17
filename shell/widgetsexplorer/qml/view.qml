@@ -144,7 +144,7 @@ Rectangle {
     Item {
         id: dialog
         anchors.fill: parent
-        anchors.margins: 32
+        anchors.margins: 50
         scale: 0
 
         PlasmaCore.FrameSvgItem {

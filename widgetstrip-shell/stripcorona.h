@@ -16,41 +16,27 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
-#ifndef PACKAGE_H
-#define PACKAGE_H
 
-#include <QDeclarativeItem>
-#include <QUrl>
+#ifndef STRIPCORONA_H
+#define STRIPCORONA_H
 
-namespace Plasma {
-    class Package;
-}
+#include <Plasma/Corona>
 
-
-class QTimer;
-class QGraphicsView;
-
-class Package : public QObject
+class StripCorona : public Plasma::Corona
 {
     Q_OBJECT
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 
 public:
-    Package(QObject *parent = 0);
-    ~Package();
+    StripCorona(QObject *parent);
+    ~StripCorona();
 
-    QString name() const;
-    void setName(const QString &name);
-
-    Q_INVOKABLE QString filePath(const QString &fileType, const QString &filename) const;
-    Q_INVOKABLE QString filePath(const QString &fileType) const;
-
-Q_SIGNALS:
-    void nameChanged(const QString &);
-
-private:
-    QString m_name;
-    Plasma::Package *m_package;
+    /**
+     * Loads the default (system wide) layout for this user
+     **/
+    void loadDefaultLayout();
+    QRect screenGeometry(int id) const;
 };
 
 #endif
+
+

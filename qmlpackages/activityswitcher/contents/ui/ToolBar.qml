@@ -42,16 +42,16 @@ PlasmaCore.FrameSvgItem {
 
     imagePath: "dialogs/background"
     enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-    width: childrenRect.width+margins.left+margins.right+96
+    width: childrenRect.width+margins.left+margins.right+60
     height: childrenRect.height+margins.top+margins.bottom
     anchors {
         top: parent.top
         right: parent.right
     }
     Row {
-        x: actionsToolBar.margins.left+48
+        x: actionsToolBar.margins.left+30
         y: actionsToolBar.margins.top
-        spacing: 48
+        spacing: 40
         MobileComponents.ActionButton {
             svg: iconsSvg
             elementId: "add"

@@ -1,4 +1,5 @@
 /*
+ *   Copyright 2006-2008 Aaron Seigo <aseigo@kde.org>
  *   Copyright 2009 Marco Martin <notmart@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -17,12 +18,14 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef BUSYAPP_H
-#define BUSYAPP_H
+#ifndef PLASMA_APP_H
+#define PLASMA_APP_H
 
+#include <QList>
+#include <QMultiHash>
+
+#include <KConfigGroup>
 #include <KUniqueApplication>
-#include <KStartupInfo>
-#include <KStartupInfoData>
 
 #include <plasma/plasma.h>
 
@@ -31,30 +34,47 @@
 #include <fixx11h.h>
 #endif
 
-class BusyWidget;
-class KStartupInfo;
+namespace Plasma
+{
+    class Containment;
+    class Corona;
+    class View;
+    class Applet;
+} // namespace Plasma
 
-class BusyApp : public KUniqueApplication
+class SingleView;
+class StripCorona;
+class MobileWidgetsExplorer;
+class ActivityConfiguration;
+
+class PlasmaApp : public KUniqueApplication
 {
     Q_OBJECT
 public:
-    ~BusyApp();
+    ~PlasmaApp();
 
     int newInstance();
 
-    static BusyApp* self();
+    static PlasmaApp* self();
+    static bool hasComposite();
 
-protected Q_SLOTS:
-    void gotStartup(const KStartupInfoId& id, const KStartupInfoData& data);
-    void killStartup(const KStartupInfoId& id);
-    void windowAdded(WId id);
+    Plasma::Corona* corona();
 
 private:
-    BusyApp();
+    PlasmaApp();
+
+private Q_SLOTS:
+    void cleanup();
+    void syncConfig();
+    void showWidgetsExplorer();
+    void showActivityConfiguration();
+    void manageNewContainment(Plasma::Containment *containment);
 
 private:
-    KStartupInfo *m_startupInfo;
-    QWeakPointer<BusyWidget> m_busyWidget;
+    StripCorona *m_corona;
+    SingleView *m_view;
+    QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
+    QWeakPointer<ActivityConfiguration> m_activityConfiguration;
 };
 
 #endif // multiple inclusion guard

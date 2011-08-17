@@ -30,6 +30,7 @@
 #include "mouseeventlistener.h"
 #include "resourceinstance.h"
 #include "package.h"
+#include "texteffects.h"
 
 void MobileComponentsPlugin::registerTypes(const char *uri)
 {
@@ -42,6 +43,7 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<MouseEventListener>(uri, 0, 1, "MouseEventListener");
     qmlRegisterType<ResourceInstance>(uri, 0, 1, "ResourceInstance");
     qmlRegisterType<Package>(uri, 0, 1, "Package");
+    qmlRegisterType<TextEffects>(uri, 0, 1, "TextEffects");
 }
 
 

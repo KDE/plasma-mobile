@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright 2011 Marco Martin <mart@kde.org>                            *
+ *   Copyright 2009 Marco Martin <mart@kde.org>                            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -16,41 +16,63 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
-#ifndef PACKAGE_H
-#define PACKAGE_H
 
-#include <QDeclarativeItem>
-#include <QUrl>
+#include "stripcorona.h"
 
-namespace Plasma {
-    class Package;
+#include <QGraphicsView>
+
+static const char *DEFAULT_CONTAINMENT = "org.kde.appletstrip";
+
+StripCorona::StripCorona(QObject *parent)
+    : Plasma::Corona(parent)
+{
+}
+
+StripCorona::~StripCorona()
+{
 }
 
 
-class QTimer;
-class QGraphicsView;
-
-class Package : public QObject
+QRect StripCorona::screenGeometry(int id) const
 {
-    Q_OBJECT
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_UNUSED(id);
+    QGraphicsView *v = views().value(0);
+    if (v) {
+        return QRect(QPoint(0, 0), v->size());
+    }
 
-public:
-    Package(QObject *parent = 0);
-    ~Package();
+    return sceneRect().toRect();
+}
 
-    QString name() const;
-    void setName(const QString &name);
 
-    Q_INVOKABLE QString filePath(const QString &fileType, const QString &filename) const;
-    Q_INVOKABLE QString filePath(const QString &fileType) const;
+void StripCorona::loadDefaultLayout()
+{
+    Plasma::Containment* c = addContainmentDelayed(DEFAULT_CONTAINMENT);
 
-Q_SIGNALS:
-    void nameChanged(const QString &);
+    if (!c) {
+        return;
+    }
 
-private:
-    QString m_name;
-    Plasma::Package *m_package;
-};
+    c->init();
 
-#endif
+    c->setScreen(0);
+
+    c->setWallpaper("image", "SingleImage");
+    c->setFormFactor(Plasma::Planar);
+    c->updateConstraints(Plasma::StartupCompletedConstraint);
+    c->flushPendingConstraintsEvents();
+
+    // stacks all the containments at the same place
+    c->setPos(0, 0);
+
+    emit containmentAdded(c);
+
+    c->addApplet("org.kde.news-qml");
+    c->addApplet("org.kde.analogclock");
+
+    requestConfigSync();
+}
+
+
+#include "stripcorona.moc"
+

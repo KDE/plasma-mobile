@@ -69,7 +69,7 @@ Item {
         id: shadowItem
         svg: buttonSvg
         elementId: "shadow"
-        width: button.backgroundVisible?iconSize+8:iconSize
+        width: iconSize+13//button.backgroundVisible?iconSize+8:iconSize
         height: width
         visible: button.backgroundVisible
     }
@@ -90,8 +90,7 @@ Item {
                 width: iconSize
                 height: iconSize
                 svg: button.svg
-                anchors.fill: buttonItem
-                anchors.margins: backgroundVisible?8:0
+                anchors.centerIn: parent
             }
         }
 

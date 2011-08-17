@@ -135,6 +135,7 @@ Rectangle {
             id: nameRow
             anchors.horizontalCenter: parent.horizontalCenter
             y: frame.margins.top
+            visible: configInterface.activityNameConfigurable
             Text {
                 color: theme.textColor
                 text: i18n("Activity name:")

@@ -131,7 +131,8 @@ Flickable {
             webBrowser.titleChanged();
         }
         onDoubleClick: {
-                        if (!heuristicZoom(clickX,clickY,2.5)) {
+                        preferredWidth = flickable.width - 50;
+                        if (!heuristicZoom(clickX,clickY,2.0)) {
                             var zf = flickable.width / contentsSize.width
                             if (zf >= contentsScale)
                                 zf = 2.0*contentsScale // zoom in (else zooming out)

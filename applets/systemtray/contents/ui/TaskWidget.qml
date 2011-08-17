@@ -25,7 +25,14 @@ Item  {
     id: taskIcon
     width: Math.min(main.width, main.height)
     height: width
-    visible: main.state == "active" || Status != "Passive"
+    opacity: (main.state == "active" || Status != "Passive")?1:0
+
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 300
+            easing.type: Easing.InOutQuad
+        }
+    }
 
     PlasmaCore.Svg{
         id: iconSvg

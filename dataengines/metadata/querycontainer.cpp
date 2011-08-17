@@ -20,6 +20,9 @@
 
 #include "querycontainer.h"
 
+#include <QDBusServiceWatcher>
+#include <QDBusConnection>
+
 #include <KMimeType>
 
 #include <Nepomuk/Tag>
@@ -29,7 +32,29 @@
 
 QueryContainer::QueryContainer(const Nepomuk::Query::Query &query, QObject *parent)
     : Plasma::DataContainer(parent),
-      m_query(query)
+      m_query(query),
+      m_queryClient(0)
+{
+    if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
+        doQuery();
+    }
+    //FIXME: this will go in queryservicewatcher
+    m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
+                        QDBusConnection::sessionBus(),
+                        QDBusServiceWatcher::WatchForRegistration,
+                        this);
+    connect(m_queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
+}
+
+void QueryContainer::serviceRegistered(const QString &service)
+{
+    if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
+        delete m_queryClient; //m_queryClient still doesn't fix itself
+        doQuery();
+    }
+}
+
+void QueryContainer::doQuery()
 {
     m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
 

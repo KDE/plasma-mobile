@@ -207,6 +207,9 @@ Plasma::Direction KeyboardDialog::direction() const
 void KeyboardDialog::showEvent(QShowEvent *event)
 {
     KWindowSystem::setType(winId(), NET::Dock);
+    unsigned long state = NET::Sticky | NET::StaysOnTop | NET::KeepAbove;
+    KWindowSystem::setState(winId(), state);
+    KWindowSystem::raiseWindow(effectiveWinId());
     Plasma::Dialog::showEvent(event);
 
     //FIXME: this is an hack for the applet disabing itself in panic when doesn't immediately find a view

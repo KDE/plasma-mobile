@@ -42,6 +42,7 @@ void AppletStatusWatcher::setPlasmoid(QObject *plasmoid)
     }
     m_plasmoid = applet;
     connect(applet, SIGNAL(newStatus(Plasma::ItemStatus)), this, SIGNAL(statusChanged()));
+    emit statusChanged();
 }
 
 QObject *AppletStatusWatcher::plasmoid() const

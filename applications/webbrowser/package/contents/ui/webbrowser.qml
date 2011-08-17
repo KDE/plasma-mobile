@@ -70,6 +70,7 @@ Rectangle {
     MobileComponents.ResourceInstance {
         id: resourceInstance
         uri: webBrowser.url
+        mimetype: "text/x-html"
     }
 
     FlickableWebView {

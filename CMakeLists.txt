@@ -1,3 +1,6 @@
+project(plasma-mobile)
+cmake_minimum_required (VERSION 2.8)
+
 find_package(KDE4 REQUIRED)
 
 include(KDE4Defaults)
@@ -30,6 +33,7 @@ add_subdirectory(mobilebusynotifier)
 add_subdirectory(virtualkeyboard)
 add_subdirectory(wallpapers)
 add_subdirectory(shell)
+add_subdirectory(widgetstrip-shell)
 
 if (BUILD_HANDSET)
    add_subdirectory(handset)

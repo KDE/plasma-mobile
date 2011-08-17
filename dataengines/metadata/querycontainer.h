@@ -29,6 +29,8 @@
 #include <Nepomuk/Resource>
 
 
+class QDBusServiceWatcher;
+
 class QueryContainer : public Plasma::DataContainer
 {
     Q_OBJECT
@@ -42,14 +44,17 @@ public:
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
+    void serviceRegistered(const QString &service);
 
 protected:
     QString icon(const QStringList &types);
+    void doQuery();
 
 private:
     Nepomuk::Query::Query m_query;
     Nepomuk::Query::QueryServiceClient *m_queryClient;
     QHash<QString, QString> m_icons;
+    QDBusServiceWatcher *m_queryServiceWatcher;
 };
 
 #endif

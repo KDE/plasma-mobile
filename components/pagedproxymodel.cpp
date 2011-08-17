@@ -83,8 +83,22 @@ void PagedProxyModel::setSourceModelObject(QObject *source)
         disconnect(sourceModel(), 0, this, 0);
     }
 
-    connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(sourceDataChanged(QModelIndex,QModelIndex)));
+    connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+            this, SLOT(sourceDataChanged(QModelIndex,QModelIndex)));
 
+    connect(model,  SIGNAL(rowsAboutToBeInserted(QModelIndex, int,int)),
+            this, SLOT(sourceRowsAboutToBeInserted(QModelIndex,int,int)) );
+    connect(model,  SIGNAL(rowsInserted(QModelIndex, int,int)),
+            this, SLOT(sourceRowsInserted(QModelIndex,int,int)) );
+    connect(model,  SIGNAL(rowsAboutToBeRemoved(QModelIndex, int,int)),
+            this, SLOT(sourceRowsAboutToBeRemoved(QModelIndex,int,int)) );
+    connect(model,  SIGNAL(rowsRemoved(QModelIndex, int,int)),
+            this, SLOT(sourceRowsRemoved(QModelIndex,int,int)) );
+
+    connect(model, SIGNAL(modelAboutToBeReset()),
+               this, SIGNAL(modelAboutToBeReset()));
+    connect(model, SIGNAL(modelReset()),
+               this, SIGNAL(modelReset()));
     setRoleNames(model->roleNames());
     setSourceModel(model);
 }
@@ -98,6 +112,35 @@ QObject *PagedProxyModel::sourceModelObject() const
 void PagedProxyModel::sourceDataChanged(const QModelIndex &from, const QModelIndex &to)
 {
     emit dataChanged(mapFromSource(from), mapFromSource(to));
+}
+
+void PagedProxyModel::sourceRowsAboutToBeInserted( const QModelIndex & parentIdx, int start, int end )
+{
+    beginInsertRows(parentIdx, start, end );
+}
+
+
+void PagedProxyModel::sourceRowsInserted( const QModelIndex& parentIdx, int start, int end )
+{
+    Q_UNUSED( parentIdx );
+    Q_UNUSED( start );
+    Q_UNUSED( end );
+    endInsertRows();
+}
+
+
+void PagedProxyModel::sourceRowsAboutToBeRemoved( const QModelIndex & parentIdx, int start, int end )
+{
+    beginRemoveRows(parentIdx, start, end );
+}
+
+
+void PagedProxyModel::sourceRowsRemoved( const QModelIndex& parentIdx, int start, int end )
+{
+    Q_UNUSED( parentIdx );
+    Q_UNUSED( start );
+    Q_UNUSED( end );
+    endRemoveRows();
 }
 
 int PagedProxyModel::rowCount(const QModelIndex &parent) const

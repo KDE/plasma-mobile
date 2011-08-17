@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright 2011 Davide Bettio <davide.bettio@kdemail.net>              *
+ *   Copyright 2011 Marco Martin <mart@kde.org>                            *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -19,7 +20,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as PlasmaComponents
 
 Item {
@@ -30,6 +31,7 @@ Item {
 
     Component.onCompleted: {
         //plasmoid.popupIcon = QIcon("preferences-desktop-notification")
+        plasmoid.aspectRatioMode = "ConstrainedSquare"
     }
 
     states: [
@@ -66,10 +68,15 @@ Item {
         id: theme
     }
 
+    PlasmaCore.Svg {
+        id: configIconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
+
     Item {
         id: lastNotificationClip
         x: notificationsApplet.width/2
-        width: 320
+        width: 420
         height: parent.height
         clip: true
         visible: false
@@ -85,9 +92,10 @@ Item {
                 anchors {
                     left: parent.left
                     leftMargin: notificationsApplet.width/2
-                    right: parent.width
+                    right: parent.right
                     verticalCenter: parent.verticalCenter
                 }
+                //textFormat: Text.PlainText
                 color: theme.textColor
                 wrapMode: Text.NoWrap
                 elide: Text.ElideRight
@@ -129,17 +137,40 @@ Item {
         svg: notificationSvg
         elementId: "notification-disabled"
         anchors.fill: parent
+        Item {
+            id: jobProgressItem
+            width: 0
+            clip: true
+            visible: jobsSource.sources.length > 0
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
+            }
+            PlasmaCore.SvgItem {
+                svg: notificationSvg
+                elementId: "notification-progress-active"
+                anchors {
+                    left: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                }
+                width: notificationSvgItem.width
+            }
+        }
+
         Text {
             id: countText
-            text: notificationsList.count
+            text: notificationsRepeater.count+jobsRepeater.count
             anchors.centerIn: parent
         }
+
         MouseArea {
             anchors.fill: parent
             onClicked: {
                 if (popup.visible) {
                     popup.visible = false
-                } else {
+                } else if (notificationsRepeater.count+jobsRepeater.count > 0) {
                     var pos = popup.popupPosition(notificationsApplet, Qt.AlignCenter)
                     popup.x = pos.x
                     popup.y = pos.y
@@ -149,8 +180,9 @@ Item {
         }
     }
 
+
     ListModel {
-        id: notifications
+        id: notificationsModel
     }
 
     PlasmaCore.DataSource {
@@ -163,7 +195,7 @@ Item {
         }
 
         onNewData: {
-            notifications.append({"appIcon" : notificationsSource.data[sourceName]["appIcon"],
+            notificationsModel.append({"appIcon" : notificationsSource.data[sourceName]["appIcon"],
                                 "appName" : notificationsSource.data[sourceName]["appName"],
                                 "summary" : notificationsSource.data[sourceName]["summary"],
                                 "body" : notificationsSource.data[sourceName]["body"],
@@ -171,40 +203,75 @@ Item {
                                 "urgency": notificationsSource.data[sourceName]["urgency"]});
         }
 
-        onConnectedSourcesChanged: {
-            if (connectedSources.length > 0) {
-                notificationsApplet.state = "new-notifications"
-            } else {
-                notificationsApplet.state = "default"
-            }
-        }
         onDataChanged: {
             var i = connectedSources[connectedSources.length-1]
-            lastNotificationText.text = data[i]["body"]
+            lastNotificationText.text = String(data[i]["body"]).replace("\n", " ")
+
             lastNotificationAnimation.running = true
+        }
+    }
+
+    PlasmaCore.DataSource {
+        id: jobsSource
+        engine: "applicationjobs"
+        interval: 0
+
+        onSourceAdded: {
+            connectSource(source);
+        }
+        Component.onCompleted: {
+            connectedSources = sources
+        }
+        onDataChanged: {
+            var total = 0
+            for (var i = 0; i < sources.length; ++i) {
+                total += jobsSource.data[sources[i]]["percentage"]
+            }
+
+            total /= sources.length
+            jobProgressItem.width = notificationSvgItem.width * (total/100)
         }
     }
 
     PlasmaCore.Dialog {
         id: popup
-        mainItem: ListView {
-            id: notificationsList
+        location: plasmoid.location
+        windowFlags: Qt.Popup
+        mainItem: Flickable {
+            id: popupFlickable
             width: 400
-            height: 250
-            model: notifications
-            anchors.fill: parent
+            height: Math.min(350, contentHeight)
+            contentWidth: contentsColumn.width
+            contentHeight: contentsColumn.height
             clip: true
-            delegate: ListItem {
-                Row {
-                    spacing: 6
-                    PlasmaWidgets.IconWidget {
-                        icon: QIcon(appIcon)
-                    }
 
-                    Text {
-                        text: appName + ": " + body
-                        color: theme.textColor
+            Column {
+                id: contentsColumn
+                Repeater {
+                    id: jobsRepeater
+                    model: jobsSource.sources
+                    delegate: JobDelegate {}
+                    onCountChanged: {
+                        if (count+notificationsRepeater.count > 0) {
+                            notificationsApplet.state = "new-notifications"
+                        } else {
+                            notificationsApplet.state = "default"
+                            popup.visible = false
+                        }
                     }
+                }
+                Repeater {
+                    id: notificationsRepeater
+                    model: notificationsModel
+                    onCountChanged: {
+                        if (count+jobsRepeater.count > 0) {
+                            notificationsApplet.state = "new-notifications"
+                        } else {
+                            notificationsApplet.state = "default"
+                            popup.visible = false
+                        }
+                    }
+                    delegate: NotificationDelegate {}
                 }
             }
         }

@@ -25,6 +25,7 @@ Item {
     id: delegate
     scale: PathView.itemScale
     opacity: PathView.itemOpacity
+
     z: PathView.z
     property string current: model["Current"]
 
@@ -38,6 +39,12 @@ Item {
 
     width: mainView.delegateWidth
     height: mainView.delegateHeight
+
+    transform: Translate {
+        x: delegate.PathView.itemXTranslate
+        y: delegate.PathView.itemYTranslate
+    }
+
 
     PlasmaCore.FrameSvgItem {
         id: activityBorder
@@ -57,87 +64,33 @@ Item {
             }
             property string path: activityThumbnailsSource.data[model.DataEngineSource]?activityThumbnailsSource.data[model.DataEngineSource]["path"]:""
             source: path?path:switcherPackage.filePath("images", "emptyactivity.png")
-            Text {
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-                anchors.topMargin: 10
-                width: parent.width-10
-                wrapMode: Text.Wrap
-                //FIXME: MEEGO BUG
-                //text: String(model.Name).length<28?model.name:String(model.Name).substr(0, 28)+"..."
-                text: model.Name
-                font.bold: true
-                style: Text.Outline
-                styleColor: Qt.rgba(1, 1, 1, 0.6)
-                font.pixelSize: 25
+
+            MobileComponents.TextEffects {
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    leftMargin: 10
+                    topMargin: 10
+                }
+
+                text: String(model.Name).length<=18?model.Name:String(model.Name).substr(0,18)+"..."
+                color: "white"
+                horizontalOffset: 1
+                verticalOffset: 1
+                pixelSize: 25
+                bold: true
             }
         }
     }
-    Item {
-        anchors {
-            bottom: parent.bottom
-            bottomMargin: 40
-            right: parent.right
-            rightMargin: 10
-        }
-        width: 240
-        height: 32
-        opacity: delegate.scale>0.9?1:(model["Current"]==true?1:0)
-        Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        Image {
-            id: holeImage
-            y: 4
-            source: switcherPackage.filePath("images", "sliderhole.png")
-            anchors.left: parent.left
-            Text {
-                anchors.centerIn: parent
-                text: model["Current"]==true?i18n("Active"):i18n("Slide to activate")
-            }
-        }
-        Image {
-            x: parent.width - width
-            source: switcherPackage.filePath("images", "slider.png")
-            opacity: model["Current"]==true?0:1
-            Text {
-                anchors.centerIn: parent
-                text: i18n("Activate")
-                font.pixelSize: 14
-            }
-            Behavior on x {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            MouseArea {
-                anchors.fill: parent
-                drag.target: parent
-                drag.axis: Drag.XAxis
-                drag.minimumX: holeImage.x - 4
-                drag.maximumX: parent.parent.width - width
-                enabled: model["Current"]==true?false:true
-                onPressed: {
-                    mainView.interactive = false
-                    mouse.accepted = true
-                }
-                onReleased: {
-                    mainView.interactive = true
-                    if (parent.x <= 32) {
-                        var activityId = model["DataEngineSource"]
-                        print(activityId)
-                        var service = activitySource.serviceForSource(activityId)
-                        var operation = service.operationDescription("setCurrent")
-                        service.startOperationCall(operation)
-                    }
-                    parent.x = parent.parent.width - parent.width
-                }
-            }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            var activityId = model["DataEngineSource"]
+            print(activityId)
+            var service = activitySource.serviceForSource(activityId)
+            var operation = service.operationDescription("setCurrent")
+            service.startOperationCall(operation)
         }
     }
 
@@ -145,8 +98,8 @@ Item {
         anchors {
             bottom: activityBorder.bottom
             left: activityBorder.left
-            bottomMargin: activityBorder.margins.bottom+10
-            leftMargin: activityBorder.margins.left+5
+            bottomMargin: activityBorder.margins.bottom + 13
+            leftMargin: activityBorder.margins.left
         }
         spacing: 8
         opacity: delegate.scale>0.9?1:0

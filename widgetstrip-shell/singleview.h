@@ -1,4 +1,5 @@
 /*
+ *   Copyright 2007-2008 Aaron Seigo <aseigo@kde.org>
  *   Copyright 2009 Marco Martin <notmart@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -17,45 +18,39 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef BUSYAPP_H
-#define BUSYAPP_H
+#ifndef SINGLEVIEW_H
+#define SINGLEVIEW_H
 
-#include <KUniqueApplication>
-#include <KStartupInfo>
-#include <KStartupInfoData>
+#include <Plasma/View>
 
-#include <plasma/plasma.h>
+#include <Plasma/Plasma>
 
-#ifdef Q_WS_X11
-#include <X11/Xlib.h>
-#include <fixx11h.h>
-#endif
+namespace Plasma
+{
+    class Containment;
+    class Applet;
+    class Corona;
+} // namespace Plasma
 
-class BusyWidget;
-class KStartupInfo;
+class SingleView;
 
-class BusyApp : public KUniqueApplication
+class SingleView : public Plasma::View
 {
     Q_OBJECT
+
 public:
-    ~BusyApp();
+    SingleView(Plasma::Corona *corona, QWidget *parent=0);
+    ~SingleView();
 
-    int newInstance();
+    void setUseGL(const bool on);
+    bool useGL() const;
 
-    static BusyApp* self();
-
-protected Q_SLOTS:
-    void gotStartup(const KStartupInfoId& id, const KStartupInfoData& data);
-    void killStartup(const KStartupInfoId& id);
-    void windowAdded(WId id);
+protected:
+    void resizeEvent(QResizeEvent *event);
 
 private:
-    BusyApp();
-
-private:
-    KStartupInfo *m_startupInfo;
-    QWeakPointer<BusyWidget> m_busyWidget;
+    Plasma::Corona *m_corona;
+    bool m_useGL;
 };
 
 #endif // multiple inclusion guard
-

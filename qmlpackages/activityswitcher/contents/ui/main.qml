@@ -118,25 +118,34 @@ Item {
          delegate: ActivityDelegate{}
 
          path: Path {
-             startX: mainView.width
-             startY: 32
-             PathAttribute { name: "itemScale"; value: 0.1 }
+             startX: mainView.width-mainView.delegateWidth/2
+             startY: 0
+             PathAttribute { name: "itemXTranslate"; value: mainView.delegateWidth/3 }
+             PathAttribute { name: "itemYTranslate"; value: 20 }
+             PathAttribute { name: "itemScale"; value: 0.3 }
              PathAttribute { name: "itemOpacity"; value: 0 }
              PathAttribute { name: "z"; value: 0 }
 
+             
+
              PathLine {
-                 x: mainView.width-150
-                 y: 100
+                 x: mainView.width-mainView.delegateWidth/2
+                 y: mainView.height/4
              }
-             PathAttribute { name: "itemScale"; value: 0.2 }
+             PathAttribute { name: "itemXTranslate"; value: mainView.delegateWidth/4 }
+             PathAttribute { name: "itemYTranslate"; value: -50 }
+             PathAttribute { name: "itemScale"; value: 0.5 }
              PathAttribute { name: "itemOpacity"; value: 0.65 }
              PathAttribute { name: "z"; value: 0 }
+
 
              PathLine {
                  x: mainView.width-mainView.delegateWidth/2
                  y: mainView.height/2
              }
 
+             PathAttribute { name: "itemXTranslate"; value: 0 }
+             PathAttribute { name: "itemYTranslate"; value: 0 }
              PathAttribute { name: "itemScale"; value: 1 }
              PathAttribute { name: "itemOpacity"; value: 1 }
              PathAttribute { name: "z"; value: 100 }
@@ -144,19 +153,22 @@ Item {
 
 
              PathLine {
-                 x: mainView.width-150
-                 y: mainView.height-100
+                 x: mainView.width-mainView.delegateWidth/2
+                 y: mainView.height/4*3
              }
-             PathAttribute { name: "itemScale"; value: 0.2 }
+             PathAttribute { name: "itemXTranslate"; value: mainView.delegateWidth/4 }
+             PathAttribute { name: "itemYTranslate"; value: 50 }
+             PathAttribute { name: "itemScale"; value: 0.5 }
              PathAttribute { name: "itemOpacity"; value: 0.65 }
              PathAttribute { name: "z"; value: 0 }
 
 
              PathLine {
-                 x: mainView.width
-                 y: mainView.height-32
+                 x: mainView.width-mainView.delegateWidth/2
+                 y: mainView.height
              }
-             PathAttribute { name: "itemScale"; value: 0.1 }
+             PathAttribute { name: "itemXTranslate"; value: mainView.delegateWidth/3 }
+             PathAttribute { name: "itemScale"; value: 0.3 }
              PathAttribute { name: "itemOpacity"; value: 0 }
              PathAttribute { name: "z"; value: 0 }
          }
