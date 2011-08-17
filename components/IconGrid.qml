@@ -114,13 +114,27 @@ Item {
 
 
                 Rectangle {
-                    y: appsView.currentIndex == index ? -2 : 0
-                    width: appsView.currentIndex == index ? 10 : 6
-                    height: appsView.currentIndex == index ? 10 : 6
-                    radius: 4
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 6
+                    height: 6
+                    scale: appsView.currentIndex == index ? 1.5 : 1
+                    radius: 5
                     smooth: true
-                    opacity: appsView.currentIndex == index ? 0.8: 0.55
+                    opacity: appsView.currentIndex == index ? 0.8: 0.4
                     color: theme.textColor
+
+                    Behavior on scale {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
 
                     MouseArea {
                         width: 20; height: 20
