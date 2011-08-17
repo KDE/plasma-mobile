@@ -101,6 +101,7 @@ PlasmaApp::PlasmaApp()
     }
 
     m_mainView = new MobView(0, MobView::mainViewId(), 0);
+    m_mainView->setWindowTitle(i18n("Home Screen"));
     m_mainView->setUseGL(useGL);
 
     bool isDesktop = args->isSet("desktop");
