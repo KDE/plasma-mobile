@@ -130,6 +130,16 @@ Item {
         }
     }
 
+    ScrollBar {
+        scrollArea: mainFlickable
+        width: 8
+        anchors {
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+        }
+    }
+
     Flickable {
         id: mainFlickable
         anchors.fill: main
