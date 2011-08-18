@@ -1,7 +1,16 @@
 [Desktop Entry]
 Name=Widget Strip
+Name[nl]=Widget-strip
+Name[uk]=Стрічка віджетів
+Name[x-test]=xxWidget Stripxx
 GenericName=Widget Strip
+GenericName[nl]=Widget-strip
+GenericName[uk]=Стрічка віджетів
+GenericName[x-test]=xxWidget Stripxx
 Comment=A collection of widgets
+Comment[nl]=Een verzameling widgets
+Comment[uk]=Збірка віджетів
+Comment[x-test]=xxA collection of widgetsxx
 
 Exec=appletstrip-shell
 Terminal=false
