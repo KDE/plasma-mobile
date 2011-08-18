@@ -36,7 +36,6 @@ static const char HOME_URL[] = "http://community.kde.org/Plasma/Active";
 
 int main(int argc, char **argv)
 {
-    // FIXME: selkie icon instead of internet-web-browser
     KAboutData about("internet-web-browser", 0, ki18n("Plasma Active Web Browser"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");
                      about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
