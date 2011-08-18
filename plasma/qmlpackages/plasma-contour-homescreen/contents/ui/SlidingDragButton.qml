@@ -45,14 +45,30 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     property int startY
     property int lastY
     property bool dragging: false
+    property bool dragEnabled: true
+
+    Timer {
+        id: disableTimer
+        running: false
+        repeat: false
+        interval: 400
+        onTriggered: {
+            panelDragButton.dragEnabled = false
+        }
+    }
 
     onPressed: {
         startY = mouse.screenY
         lastY = mouse.screenY
+        disableTimer.running = true
     }
     onPositionChanged: {
+        if (!panelDragButton.dragEnabled ) {
+            return
+        }
         if ( Math.abs(startY - lastY) > 32 ) {
             dragging = true
+            disableTimer.running = false
         }
         if (dragging) {
             slidingPanel.y = Math.min(0, (slidingPanel.y+mouse.screenY - lastY))
@@ -61,7 +77,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     }
     onReleased: {
 
-
+        panelDragButton.dragEnabled = true
+        disableTimer.running = false
         dragging = false
         var oldState = systrayPanel.state
         systrayPanel.state = "none"
