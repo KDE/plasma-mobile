@@ -59,8 +59,6 @@ bool MouseEventListener::sceneEventFilter(QGraphicsItem *item, QEvent *event)
         return false;
     }
 
-    
-
     switch (event->type()) {
     case QEvent::GraphicsSceneMousePress: {
         QGraphicsSceneMouseEvent *me = static_cast<QGraphicsSceneMouseEvent *>(event);
