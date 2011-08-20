@@ -147,10 +147,15 @@ Item {
         contentWidth: contentItem.width
         contentHeight: contentItem.height
 
-        Item {
+        MouseArea {
             id: contentItem
             width: mainFlickable.width
             height: childrenRect.height+availScreenRect.y+20
+            onClicked: {
+                resourceInstance.uri = ""
+                main.currentIndex = -1
+                main.currentGroup = 0
+            }
 
 
             Connections {
