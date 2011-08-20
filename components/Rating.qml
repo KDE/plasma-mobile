@@ -18,11 +18,9 @@
  */
 
 
-import Qt 4.7
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.qtextracomponents 0.1
 
 
 Item {
@@ -30,48 +28,24 @@ Item {
     property string resourceUrl
     height: 22
     width: 22*5
-    signal rateClicked(int newRating)
 
     Row {
         id: iconRow
+        anchors.centerIn: parent
         spacing: 0
-        MobileComponents.RatingIcon {
-            id: rating2
-            baseRating: 2
-        }
-        MobileComponents.RatingIcon {
-            id: rating4
-            baseRating: 4
-        }
-        MobileComponents.RatingIcon {
-            id: rating6
-            baseRating: 6
-        }
-        MobileComponents.RatingIcon {
-            id: rating8
-            baseRating: 8
-        }
-        MobileComponents.RatingIcon {
-            id: rating10
-            baseRating: 10
+        Repeater {
+            model: 5
+
+            QIconItem {
+                width: 22
+                height: 22
+                icon: QIcon("rating")
+                property int baseRating: (index+1)*2
+                enabled: (score > index*2)
+            }
         }
     }
 
-    onScoreChanged: {
-        //print ("XXX :-) rating changed to " + score);
-        updateIcons(score);
-    }
-
-    onResourceUrlChanged: {
-        print("someone poked resourceUrl");
-    }
-
-    Component.onCompleted: {
-        if (score > 0) {
-            //print("XXX done, rating " + score);
-        }
-        updateIcons(score);
-    }
 
     MouseArea {
         anchors.fill: parent
@@ -87,23 +61,6 @@ Item {
         }
     }
 
-    function updateIcons(newRating) {
-        if (newRating > 1) {
-            rating2.enabled = true;
-        }
-        if (newRating > 3) {
-            rating4.enabled = true;
-        }
-        if (newRating > 5) {
-            rating6.enabled = true;
-        }
-        if (newRating > 7) {
-            rating8.enabled = true;
-        }
-        if (newRating > 9) {
-            rating10.enabled = true;
-        }
-    }
 
     function rateResource(resourceUrl, rating) {
         print("MMM Rating " + resourceUrl + " *****: " + rating )
