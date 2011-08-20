@@ -31,6 +31,7 @@ Item {
     QIconItem {
         id: iconItem
         anchors.fill: parent
+        smooth: true
 
         MouseArea {
             anchors.fill: parent
