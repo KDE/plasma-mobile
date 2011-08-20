@@ -31,6 +31,13 @@ Item {
     state: "show"
     property Item recommendations
     enabled: recommendations.state == "Passive"?false:true
+    onEnabledChanged: {
+        if (!enabled) {
+            state = "disabled"
+        } else if (state == "disabled") {
+            state = "hidden"
+        }
+    }
 
     MobileComponents.Package {
         id: recommendationsPackage
@@ -83,7 +90,6 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             imagePath: "widgets/background"
             enabledBorders: "RightBorder|TopBorder|BottomBorder"
-            opacity: recommendations.state == "Passive"?0.3:1;
 
             PlasmaCore.SvgItem {
                 id: arrowSvgItem
@@ -185,6 +191,13 @@ Item {
             }
         },
         State {
+            name: "disabled";
+            PropertyChanges {
+                target: recommendationsPanel;
+                x: - width - 60;
+            }
+        },
+        State {
             name: "dragging"
             PropertyChanges {
                 target: recommendationsPanel;
@@ -197,34 +210,10 @@ Item {
 
     transitions: [
         Transition {
-            from: "show";
-            to: "hidden";
-            SequentialAnimation {
-                ParallelAnimation {
-                    NumberAnimation {
-                        targets: recommendationsPanel;
-                        properties: "x";
-                        duration: 1000;
-                        easing.type: "InOutCubic";
-                    }
-                }
-            }
-        },
-        Transition {
-            from: "hidden";
-            to: "show";
-            NumberAnimation {
-                targets: recommendationsPanel;
-                properties: "x";
-                duration: 800;
-                easing.type: "InOutCubic";
-            }
-        },
-        Transition {
-            from: "dragging";
+            from: "*";
             to: "*";
             NumberAnimation {
-                properties: "x,y";
+                properties: "x";
                 easing.type: "OutQuad";
                 duration: 400;
             }
