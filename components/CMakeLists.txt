@@ -30,7 +30,6 @@ install(TARGETS mobilecomponentsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kd
 
 install(FILES ActionButton.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES Rating.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES RatingIcon.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES IconButton.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES IconGrid.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES IconDelegate.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
