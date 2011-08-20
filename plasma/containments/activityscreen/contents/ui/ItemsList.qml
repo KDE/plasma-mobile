@@ -63,7 +63,7 @@ Item {
             infoLabelVisible: false
 
             onPressed: {
-                resourceInstance.uri = model["resourceUri"]
+                resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
                 main.currentIndex = index
                 main.currentGroup = itemGroup
             }
