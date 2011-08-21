@@ -70,6 +70,7 @@ private Q_SLOTS:
     void urlChanged();
     void onTitleChanged();
     void onUrlEntered(const QString&);
+    void newWindow(const QString &url);
 
 private:
     QString filterUrl(const QString &url);

@@ -52,6 +52,8 @@ Flickable {
     property alias reload: webView.reload
     property alias forward: webView.forward
 
+    signal newWindowRequested(string url)
+
     id: flickable
     width: parent.width
     contentWidth: Math.max(parent.width,webView.width)
@@ -68,9 +70,32 @@ Flickable {
             webView.contentsScale = width / webView.width * webView.contentsScale;
     }
 
+
     WebView {
         id: webView
         transformOrigin: Item.TopLeft
+
+        //FIXME: glorious hack just to obtain a signal of the url of the new requested page
+        newWindowComponent: Component {
+            Item {
+                id: newPageComponent
+
+                WebView {
+                    id: newWindow
+                    onUrlChanged: {
+                        if (url != "") {
+                            flickable.newWindowRequested(url)
+
+                             var newObject = Qt.createQmlObject('import QtQuick 1.0; Item {}', webView);
+                            newPageComponent.parent = newObject
+                            newObject.destroy()
+                        }
+                    }
+                }
+            }
+        }
+
+        newWindowParent: webView
 
         function fixUrl(url)
         {
