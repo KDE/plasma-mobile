@@ -22,11 +22,15 @@
 #define VIEW_H
 #include <QDeclarativeView>
 
+#include <KUrl>
+#include <KIO/MetaData>
+
 class QDeclarativeItem;
 class QProgressBar;
 class QSignalMapper;
 class Page;
 class ScriptApi;
+class QNetworkRequest;
 
 /** Per-website data */
 struct WebsiteOptions
@@ -42,6 +46,7 @@ namespace Plasma
 {
     class Package;
 };
+
 
 class View : public QDeclarativeView
 {
@@ -71,9 +76,11 @@ private Q_SLOTS:
     void onTitleChanged();
     void onUrlEntered(const QString&);
     void newWindow(const QString &url);
+    void downloadRequest(const QNetworkRequest &request);
 
 private:
     QString filterUrl(const QString &url);
+
     Plasma::Package *m_package;
     bool m_useGL;
 };

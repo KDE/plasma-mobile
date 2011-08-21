@@ -28,6 +28,7 @@
 
 // Own
 #include "activebrowserwindow.h"
+#include "kdeclarativewebview.h"
 
 static const char description[] = I18N_NOOP("Web browser for Plasma Active");
 
@@ -61,6 +62,8 @@ int main(int argc, char **argv)
         KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
         useGL = cg.readEntry("UseOpenGl", true);
     }
+
+    qmlRegisterType<KDeclarativeWebView>("org.kde.kdewebkit", 0, 1, "WebView");
 
     //kDebug() << "ARGS:" << args << args->count();
     const QString url = args->count() ? args->arg(0) : homeUrl;

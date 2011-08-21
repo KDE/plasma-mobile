@@ -19,16 +19,23 @@
  ***************************************************************************/
 
 #include "view.h"
+#include "kdeclarativewebview.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
 #include <QScriptValue>
 #include <QGLWidget>
+#include <QNetworkRequest>
+#include <QDir>
+#include <QGraphicsWebView>
 
 #include <KStandardDirs>
 #include <KUriFilter>
 #include <KRun>
+#include <KIO/AccessManager>
+#include <KIO/Job>
+#include <KIO/JobUiDelegate>
 
 #include "Plasma/Package"
 
@@ -122,6 +129,12 @@ void View::onStatusChanged(QDeclarativeView::Status status)
             } else {
                 kError() << "webView component not found. :(";
             }
+            KDeclarativeWebView *webView = qobject_cast<KDeclarativeWebView *>(rootObject()->findChild<QDeclarativeItem*>("webViewImplementation"));
+            if (webView) {
+                //here we assume it's a qgraphicswebview
+                connect(webView->page(), SIGNAL(downloadRequested(const QNetworkRequest &)),
+                        webView->page(), SLOT(downloadRequest(const QNetworkRequest &)));
+            }
 
             // Note that "urlInput" is defined as objectName in the QML file
             m_urlInput = rootObject()->findChild<QDeclarativeItem*>("urlInput");
@@ -185,5 +198,35 @@ void View::onUrlEntered(const QString &newUrl)
         b->setProperty("filteredUrl", QVariant(filteredUrl));
     }
 }
+
+static void downloadResource(const KUrl& srcUrl, const QString& suggestedName = QString(),
+                              QWidget* parent = 0, const KIO::MetaData& metaData = KIO::MetaData())
+{
+    kWarning()<<"AAAAA"<<metaData;
+    const KUrl& destUrl(QString("file://%1/%2").arg(QDir::homePath()).arg("boh"));
+
+    if (!destUrl.isValid())
+        return;
+
+    KIO::Job *job = KIO::file_copy(srcUrl, destUrl);
+
+    if (!metaData.isEmpty()) {
+        job->setMetaData(metaData);
+    }
+
+    job->addMetaData(QLatin1String("MaxCacheSize"), QLatin1String("0")); // Don't store in http cache.
+    job->addMetaData(QLatin1String("cache"), QLatin1String("cache")); // Use entry from cache if available.
+    job->ui()->setWindow((parent ? parent->window() : 0));
+    job->ui()->setAutoErrorHandlingEnabled(true);
+    return;
+}
+
+void View::downloadRequest(const QNetworkRequest &request)
+{
+    downloadResource(request.url(), QString(), this,
+                     request.attribute(static_cast<QNetworkRequest::Attribute>(KIO::AccessManager::MetaData)).toMap());
+}
+
+
 
 #include "view.moc"

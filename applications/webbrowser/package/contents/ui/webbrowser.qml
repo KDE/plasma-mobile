@@ -40,7 +40,7 @@
 ****************************************************************************/
 
 import QtQuick 1.0
-import QtWebKit 1.0
+import org.kde.kdewebkit 0.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import Qt.labs.gestures 1.0
