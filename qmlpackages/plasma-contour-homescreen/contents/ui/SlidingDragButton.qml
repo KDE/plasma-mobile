@@ -66,10 +66,16 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         if (!panelDragButton.dragEnabled ) {
             return
         }
+        //FIXME: why sometimes onPressed doesn't arrive?
+        if (startY < 0 || lastY < 0) {
+            startY = mouse.screenY
+            lastY = mouse.screenY
+        }
         if ( Math.abs(startY - lastY) > 32 ) {
             dragging = true
             disableTimer.running = false
         }
+
         if (dragging) {
             slidingPanel.y = Math.min(0, (slidingPanel.y+mouse.screenY - lastY))
         }
@@ -102,5 +108,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         } else {
             systrayPanel.state = "Hidden"
         }
+        startY = -1
+        lastY = -1
     }
 }
