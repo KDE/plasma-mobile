@@ -38,6 +38,12 @@ location=3
 plugin=org.kde.active.systemtray
 screen=-1
 
+[Containments][8][Applets][9]
+geometry=0,0,32,32
+immutability=1
+plugin=org.kde.active.powerbutton
+zvalue=0
+
 [Containments][9][Applets][10]
 geometry=2,0,64,48
 immutability=1
