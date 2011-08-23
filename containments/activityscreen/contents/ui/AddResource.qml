@@ -120,6 +120,13 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: 50
         imagePath: "dialogs/background"
+
+        MouseArea {
+            anchors.fill: parent
+            //eat mouse events to mot trigger the dialog hide
+            onPressed: mouse.accepted = true
+        }
+
         MobileComponents.ViewSearch {
             id: searchBox
             anchors {
