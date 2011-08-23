@@ -97,23 +97,29 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         dragging = false
         var oldState = systrayPanel.state
         systrayPanel.state = "none"
-        //click on the handle area, switch hidden/full
+
+        //click on the handle area, always switch hidden/full
         if (mouse.y > height-35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8) {
             if (oldState == "Hidden") {
                 systrayPanel.state = "Full"
             } else {
                 systrayPanel.state = "Hidden"
             }
-        //the biggest one, Launcher
+
+        //the biggest one, Launcher with tag cloud
         } else if (slidingPanel.y > -100) {
             systrayPanel.state = "Launcher"
+
         //more than 2/3 of the screen uncovered, full
         } else if (systrayPanel.height+slidingPanel.y > systrayPanel.height/2) {
             systrayPanel.state = "Full"
-        //more then 1/4 of the screen uncovered, taskbar
-        } else if (systrayPanel.height+slidingPanel.y > 150) {
+
+        //show only the taskbar: require a smaller quantity of the screen uncovered when the previous state is hidden
+        } else if ((oldState == "Hidden" && systrayPanel.height+slidingPanel.y > 80) ||
+                   (systrayPanel.height+slidingPanel.y > 160)) {
             systrayPanel.state = "Tasks"
-        //screen mostly hidden: hide
+
+        //Only the small top panel
         } else {
             systrayPanel.state = "Hidden"
         }
