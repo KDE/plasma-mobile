@@ -19,6 +19,7 @@
 */
 
 #include "querycontainer.h"
+#include "resourcewatcher.h"
 
 #include <QDBusServiceWatcher>
 #include <QDBusConnection>
@@ -44,6 +45,21 @@ QueryContainer::QueryContainer(const Nepomuk::Query::Query &query, QObject *pare
                         QDBusServiceWatcher::WatchForRegistration,
                         this);
     connect(m_queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
+
+    m_watcher = new Nepomuk::ResourceWatcher(this);
+
+    m_watcher->addProperty(QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#numericRating"));
+    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)),
+            this, SLOT(propertyChanged(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)));
+
+    m_addWatcherTimer = new QTimer(this);
+    m_addWatcherTimer->setSingleShot(true);
+    connect(m_addWatcherTimer, SIGNAL(timeout()), this, SLOT(addWatcherDelayed()));
+}
+
+QueryContainer::~QueryContainer()
+{
+    m_watcher->stop();
 }
 
 void QueryContainer::serviceRegistered(const QString &service)
@@ -52,6 +68,11 @@ void QueryContainer::serviceRegistered(const QString &service)
         delete m_queryClient; //m_queryClient still doesn't fix itself
         doQuery();
     }
+}
+
+void QueryContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
+{
+    addResource(res);
 }
 
 void QueryContainer::doQuery()
@@ -86,6 +107,16 @@ void QueryContainer::entriesRemoved(const QList<QUrl> &urls)
     checkForUpdate();
 }
 
+void QueryContainer::addWatcherDelayed()
+{
+    m_watcher->stop();
+    foreach (const Nepomuk::Resource &resource, m_resourcesToWatch) {
+        m_watcher->addResource(resource);
+    }
+    m_watcher->start();
+    m_resourcesToWatch.clear();
+}
+
 void QueryContainer::addResource(Nepomuk::Resource resource)
 {
     QString uri = resource.resourceUri().toString();
@@ -95,6 +126,12 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
     /*if (uri != m_query) {
         source  = uri + "&query=" + m_query;
     }*/
+
+    if (!data().contains(uri)) {
+        m_resourcesToWatch << resource;
+        m_addWatcherTimer->start(500);
+    }
+
 
     QString desc = resource.genericDescription();
     if (desc.isEmpty()) {
@@ -222,7 +259,17 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
     }
     data["properties"] = _properties;
 
+    //if is a property update, force the update of the visualization
+    //FIXME: shouldn't be necessary
+    bool force = false;
+    if (QueryContainer::data().contains(source)) {
+        force = true;
+    }
     setData(source, data);
+
+    if (force) {
+        forceImmediateUpdate();
+    }
 }
 
 QString QueryContainer::icon(const QStringList &types)

@@ -28,6 +28,9 @@
 #include <Nepomuk/Query/QueryServiceClient>
 #include <Nepomuk/Resource>
 
+namespace Nepomuk {
+    class ResourceWatcher;
+}
 
 class QDBusServiceWatcher;
 
@@ -37,6 +40,7 @@ class QueryContainer : public Plasma::DataContainer
 
 public:
     QueryContainer(const Nepomuk::Query::Query &query, QObject *parent = 0);
+    ~QueryContainer();
 
     //FIXME: should be protected
     void addResource(Nepomuk::Resource resource);
@@ -45,6 +49,8 @@ protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
     void serviceRegistered(const QString &service);
+    void propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property, QVariant);
+    void addWatcherDelayed();
 
 protected:
     QString icon(const QStringList &types);
@@ -53,8 +59,11 @@ protected:
 private:
     Nepomuk::Query::Query m_query;
     Nepomuk::Query::QueryServiceClient *m_queryClient;
+    Nepomuk::ResourceWatcher* m_watcher;
+    QList<Nepomuk::Resource> m_resourcesToWatch;
     QHash<QString, QString> m_icons;
     QDBusServiceWatcher *m_queryServiceWatcher;
+    QTimer *m_addWatcherTimer;
 };
 
 #endif
