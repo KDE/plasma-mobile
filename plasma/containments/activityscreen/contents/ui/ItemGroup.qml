@@ -36,6 +36,7 @@ PlasmaCore.FrameSvgItem {
     property bool animationsEnabled: false
     property int minimumWidth: LayoutManager.cellSize.width
     property int minimumHeight: LayoutManager.cellSize.height
+    property int titleHeight: categoryTitle.height
 
     property Item contents: contentsItem
     Item {
@@ -45,7 +46,7 @@ PlasmaCore.FrameSvgItem {
             top: parent.top
             right: parent.right
             bottom: parent.bottom
-            topMargin: parent.margins.top+categoryTitle.height
+            topMargin: parent.margins.top+itemGroup.titleHeight
             leftMargin: parent.margins.left
             rightMargin: parent.margins.right
             bottomMargin: parent.margins.bottom

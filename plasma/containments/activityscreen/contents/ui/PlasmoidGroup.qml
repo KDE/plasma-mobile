@@ -57,12 +57,12 @@ ItemGroup {
     PlasmaCore.SvgItem {
         svg: configIconsSvg
         elementId: "close"
-        width: 16
-        height: 16
+        width: Math.max(16, plasmoidContainer.titleHeight - 2)
+        height: width
         anchors {
             right: plasmoidContainer.contents.right
             bottom: plasmoidContainer.contents.top
-            bottomMargin: 6
+            bottomMargin: 4
         }
         MouseArea {
             anchors.fill: parent
@@ -76,12 +76,12 @@ ItemGroup {
     PlasmaCore.SvgItem {
         svg: configIconsSvg
         elementId: "configure"
-        width: 16
-        height: 16
+        width: Math.max(16, plasmoidContainer.titleHeight - 2)
+        height: width
         anchors {
             left: plasmoidContainer.contents.left
             bottom: plasmoidContainer.contents.top
-            bottomMargin: 6
+            bottomMargin: 4
         }
         MouseArea {
             anchors.fill: parent
