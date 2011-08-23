@@ -43,6 +43,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 
     property int startY
+    property int startX
     property int lastY
     property bool dragging: false
     property bool dragEnabled: true
@@ -59,19 +60,27 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
     onPressed: {
         startY = mouse.screenY
+        startX = mouse.screenX
         lastY = mouse.screenY
         disableTimer.running = true
     }
     onPositionChanged: {
-        if (!panelDragButton.dragEnabled ) {
+        if (!panelDragButton.dragEnabled) {
             return
         }
         //FIXME: why sometimes onPressed doesn't arrive?
         if (startY < 0 || lastY < 0) {
             startY = mouse.screenY
+            startX = mouse.screenX
             lastY = mouse.screenY
         }
-        if ( Math.abs(startY - lastY) > 32 ) {
+
+        //try to avoid vertical scrolling when an horizontal one is in place
+        if (!dragging && Math.abs(startX - mouse.screenX) > 32) {
+            panelDragButton.dragEnabled = false;
+        }
+
+        if (Math.abs(startY - lastY) > 32) {
             dragging = true
             disableTimer.running = false
         }
@@ -109,6 +118,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
             systrayPanel.state = "Hidden"
         }
         startY = -1
+        startX = -1
         lastY = -1
     }
 }
