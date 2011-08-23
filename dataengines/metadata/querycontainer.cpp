@@ -120,12 +120,6 @@ void QueryContainer::addWatcherDelayed()
 void QueryContainer::addResource(Nepomuk::Resource resource)
 {
     QString uri = resource.resourceUri().toString();
-    // If we didn't explicitely search for a nepomuk:// url, let's add the query
-    // to the parameters
-    QString source  = uri;
-    /*if (uri != m_query) {
-        source  = uri + "&query=" + m_query;
-    }*/
 
     if (!data().contains(uri)) {
         m_resourcesToWatch << resource;
@@ -262,10 +256,10 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
     //if is a property update, force the update of the visualization
     //FIXME: shouldn't be necessary
     bool force = false;
-    if (QueryContainer::data().contains(source)) {
+    if (QueryContainer::data().contains(uri)) {
         force = true;
     }
-    setData(source, data);
+    setData(uri, data);
 
     if (force) {
         forceImmediateUpdate();
