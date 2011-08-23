@@ -187,6 +187,8 @@ PlasmaCore.FrameSvgItem {
                         "LeftBorder|TopBorder|RightBorder"
                     else
                         "TopBorder|RightBorder|BottomBorder"
+
+                anchors.rightMargin: 0
             }
         },
         State {
@@ -205,7 +207,14 @@ PlasmaCore.FrameSvgItem {
             }
             PropertyChanges {
                 target: iconsFrame
-                anchors.leftMargin: 0
+                anchors.leftMargin: if (widgetsExplorer.state == "vertical")
+                                        0
+                                    else
+                                        infoPanel.width/2
+                anchors.rightMargin: if (widgetsExplorer.state == "vertical")
+                                         0
+                                     else
+                                         infoPanel.width/2
                 enabledBorders: "LeftBorder|TopBorder|RightBorder|BottomBorder"
             }
         }

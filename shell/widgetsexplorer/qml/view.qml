@@ -156,6 +156,7 @@ Rectangle {
             anchors.fill: parent
 
 
+
             MobileComponents.ViewSearch {
                 id: searchField
 
