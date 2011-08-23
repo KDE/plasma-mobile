@@ -24,6 +24,14 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
  MobileComponents.MouseEventListener {
     id: panelDragButton
 
+    property int startY
+    property int startX
+    property int lastY
+    property bool dragging: false
+    property bool dragEnabled: true
+    property int panelHeight
+    property int tasksHeight
+
     PlasmaCore.Svg {
         id: iconSvg
         imagePath: "icons/dashboard"
@@ -40,13 +48,6 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
             bottom:parent.bottom
         }
     }
-
-
-    property int startY
-    property int startX
-    property int lastY
-    property bool dragging: false
-    property bool dragEnabled: true
 
     Timer {
         id: disableTimer
@@ -76,6 +77,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         }
 
         //try to avoid vertical scrolling when an horizontal one is in place
+        //this 32 is completely arbitrary
         if (!dragging && Math.abs(startX - mouse.screenX) > 32) {
             panelDragButton.dragEnabled = false;
         }
@@ -90,8 +92,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         }
         lastY = mouse.screenY
     }
-    onReleased: {
 
+    onReleased: {
         panelDragButton.dragEnabled = true
         disableTimer.running = false
         dragging = false
@@ -115,8 +117,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
             systrayPanel.state = "Full"
 
         //show only the taskbar: require a smaller quantity of the screen uncovered when the previous state is hidden
-        } else if ((oldState == "Hidden" && systrayPanel.height+slidingPanel.y > 80) ||
-                   (systrayPanel.height+slidingPanel.y > 160)) {
+        } else if ((oldState == "Hidden" && systrayPanel.height+slidingPanel.y > panelDragButton.tasksHeight/2) ||
+                   (systrayPanel.height+slidingPanel.y > (panelDragButton.tasksHeight/5)*6)) {
             systrayPanel.state = "Tasks"
 
         //Only the small top panel

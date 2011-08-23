@@ -46,11 +46,14 @@ Item {
     }
 
     SlidingDragButton {
+        id: slidingDragButton
+        panelHeight: 32
+        tasksHeight: 150
+
         anchors {
             fill: parent
             bottomMargin: background.margins.bottom
         }
-        height: 150
 
         Image {
             source: homeScreenPackage.filePath("images", "fabrictexture.png")
@@ -90,7 +93,7 @@ Item {
                     left: parent.left
                     right: parent.right
                 }
-                height: 150
+                height: slidingDragButton.tasksHeight
             }
             Item {
                 width: 2
@@ -103,7 +106,7 @@ Item {
                     right: parent.right
                     rightMargin: 32
                 }
-                height: 32
+                height: slidingDragButton.panelHeight
             }
         }
     }
