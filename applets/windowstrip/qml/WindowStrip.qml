@@ -68,6 +68,18 @@ Item {
         anchors.fill: parent
         property variant childrenPositions
 
+        onMovementEnded: NumberAnimation {
+            target: windowFlicker
+            properties: "contentX"
+            to: {
+                //align to the cell
+                var width = windowFlicker.height * 1.6
+                var cells = Math.round(windowFlicker.contentX/width)
+                return ((cells-1) * 10) + (width * cells)
+            }
+            duration: 250
+        }
+
         Row {
             id: windowsRow
             objectName: "windowsRow"
