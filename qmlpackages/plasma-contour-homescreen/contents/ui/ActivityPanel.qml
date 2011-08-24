@@ -66,10 +66,11 @@ Item {
             activityPanel.x = Math.max(startX + (mouse.screenX - startMouseX),
                                     activityPanel.parent.width - activityPanel.width)
             hideTimer.running = false
+
         }
 
         onReleased: {
-            if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
+            if (activityPanel.x < homeScreen.width - activityPanel.width/2) {
                     activityPanel.state = "show"
                     if (activityPanel.switcher.state != "AcceptingInput") {
                         hideTimer.restart()
@@ -102,7 +103,13 @@ Item {
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: activityPanel.state = activityPanel.x < homeScreen.width?"hidden":"show"
+                property int startX
+                onPressed: startX = activityPanel.x
+                onClicked: {
+                    if (Math.abs(startX - activityPanel.x) < 8) {
+                        activityPanel.state = activityPanel.x < homeScreen.width?"hidden":"show"
+                    }
+                }
             }
         }
     }
