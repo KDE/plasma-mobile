@@ -101,6 +101,7 @@ PlasmaApp::PlasmaApp()
     }
 
     m_mainView = new MobView(0, MobView::mainViewId(), 0);
+    m_mainView->setWindowTitle(i18n("Home Screen"));
     m_mainView->setUseGL(useGL);
 
     bool isDesktop = args->isSet("desktop");
@@ -145,9 +146,6 @@ PlasmaApp::PlasmaApp()
 
     cg = KConfigGroup(KGlobal::config(), "General");
     Plasma::Theme::defaultTheme()->setFont(cg.readEntry("desktopFont", font()));
-
-    m_homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
-    kDebug() << "***** HSP from config" << m_homeScreenPath;
 
     m_pluginLoader = new MobPluginLoader;
     Plasma::PluginLoader::setPluginLoader(m_pluginLoader);
@@ -231,21 +229,26 @@ void PlasmaApp::setupHomeScreen()
     m_declarativeWidget = new Plasma::DeclarativeWidget();
     m_corona->addItem(m_declarativeWidget);
 
+    m_homeScreenPath = m_corona->homeScreenPackage()->filePath("mainscript");
     if (m_homeScreenPath.isEmpty()) {
-        kWarning() << "***** m_homeScreenPath is empty, this should not happen. Trying to correct it.";
-        m_homeScreenPath = QString("mobile-homescreen");
+        m_homeScreenPath = QString("tablet-homescreen");
+        kWarning() << "m_homeScreenPath is empty, this should not happen. Trying " << m_homeScreenPath;
     }
-
-    kDebug() << "QML:" << m_corona->homeScreenPackage()->filePath("mainscript");
-    m_declarativeWidget->setQmlPath(m_corona->homeScreenPackage()->filePath("mainscript"));
+    kDebug() << "Loading " << m_homeScreenPath;
+    m_declarativeWidget->setQmlPath(m_homeScreenPath);
 
     if (!m_declarativeWidget->engine()) {
+        kDebug() << "Invalid main declarative widget, exiting.";
         QCoreApplication::quit();
     }
 
-    QDeclarativeItem *mainItem = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
+    QDeclarativeItem *m_homeScreen = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
 
-    m_homeScreen = mainItem;
+    if (!m_homeScreen) {
+        kError() << "Could not find homescreen package. Exiting. " << m_homeScreenPath;
+        QCoreApplication::quit();
+    }
+
     mainViewGeometryChanged();
     connect(m_mainView, SIGNAL(geometryChanged()), this, SLOT(mainViewGeometryChanged()));
     connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
@@ -262,10 +265,10 @@ void PlasmaApp::setupHomeScreen()
     connect(m_homeScreen, SIGNAL(newActivityRequested()),
             this, SLOT(showActivityCreation()));
 
-    QDeclarativeItem *panel = mainItem->findChild<QDeclarativeItem*>("activitypanel");
+    QDeclarativeItem *panel = m_homeScreen->findChild<QDeclarativeItem*>("activitypanel");
 
-    m_mainView->setSceneRect(mainItem->x(), mainItem->y(),
-                             mainItem->width(), mainItem->height());
+    m_mainView->setSceneRect(m_homeScreen->x(), m_homeScreen->y(),
+                             m_homeScreen->width(), m_homeScreen->height());
 
     QDeclarativeItem *panelItems = panel->findChild<QDeclarativeItem*>("panelitems");
 

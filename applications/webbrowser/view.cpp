@@ -28,6 +28,7 @@
 
 #include <KStandardDirs>
 #include <KUriFilter>
+#include <KRun>
 
 #include "Plasma/Package"
 
@@ -116,6 +117,8 @@ void View::onStatusChanged(QDeclarativeView::Status status)
                         this, SLOT(urlChanged()));
                 connect(m_webBrowser, SIGNAL(titleChanged()),
                         this, SLOT(onTitleChanged()));
+                connect(m_webBrowser, SIGNAL(newWindowRequested(QString)),
+                        this, SLOT(newWindow(QString)));
             } else {
                 kError() << "webView component not found. :(";
             }
@@ -152,6 +155,11 @@ void View::onTitleChanged()
         //kDebug() << "Title changed to: " << m_options->title;
         emit titleChanged(m_options->title); // sets window caption
     }
+}
+
+void View::newWindow(const QString &url)
+{
+    KRun::runCommand(QString("active-webbrowser '%1'").arg(url), this);
 }
 
 QString View::filterUrl(const QString &url)

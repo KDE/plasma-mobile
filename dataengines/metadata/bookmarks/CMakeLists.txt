@@ -26,6 +26,7 @@ target_link_libraries(plasma_engine_active_bookmarks
     ${SOPRANO_CLIENT_LIBRARIES}
     kactivities
     ontologies
+    nepomukdatamanagement
 )
 
 install(TARGETS plasma_engine_active_bookmarks DESTINATION ${PLUGIN_INSTALL_DIR})

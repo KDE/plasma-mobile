@@ -67,7 +67,7 @@ void ActiveBrowserWindow::closeEvent(QCloseEvent *)
 
 QString ActiveBrowserWindow::name()
 {
-    return "Rekonq Active";
+    return "Active Browser";
     //return m_widget->options()->name;
 }
 
@@ -84,6 +84,11 @@ void ActiveBrowserWindow::setUseGL(const bool on)
 bool ActiveBrowserWindow::useGL() const
 {
     return m_widget->useGL();
+}
+
+void ActiveBrowserWindow::setCaption(const QString &caption)
+{
+    setWindowTitle(caption);
 }
 
 #include "activebrowserwindow.moc"

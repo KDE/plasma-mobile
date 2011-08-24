@@ -45,6 +45,9 @@ public:
     void setUseGL(const bool on);
     bool useGL() const;
 
+protected Q_SLOTS:
+    void setCaption(const QString &caption);
+
 protected:
     void closeEvent(QCloseEvent *);
 

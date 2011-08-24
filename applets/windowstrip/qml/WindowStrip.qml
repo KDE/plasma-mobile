@@ -68,6 +68,18 @@ Item {
         anchors.fill: parent
         property variant childrenPositions
 
+        onMovementEnded: NumberAnimation {
+            target: windowFlicker
+            properties: "contentX"
+            to: {
+                //align to the cell
+                var width = windowFlicker.height * 1.6
+                var cells = Math.round(windowFlicker.contentX/width)
+                return ((cells-1) * 10) + (width * cells)
+            }
+            duration: 250
+        }
+
         Row {
             id: windowsRow
             objectName: "windowsRow"
@@ -123,8 +135,7 @@ Item {
                     property string winId: DataEngineSource
 
                     Rectangle {
-                        opacity: 0.4
-                        color: theme.backgroundColor
+                        opacity: 0
                         anchors.fill: parent
                     }
 
@@ -164,15 +175,23 @@ Item {
                         iconSize: 22
                         elementId: "close"
                         visible: actionClose
+
                         anchors {
                             top: parent.top
                             right: parent.right
                         }
+
                         onClicked: {
                             var service = tasksSource.serviceForSource(winId)
                             var operation = service.operationDescription("close")
 
                             service.startOperationCall(operation)
+                        }
+
+                        Component.onCompleted: {
+                            if (className == shellName) {
+                                visible = false;
+                            }
                         }
                     }
                 }
