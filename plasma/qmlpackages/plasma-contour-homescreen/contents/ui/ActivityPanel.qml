@@ -55,10 +55,12 @@ Item {
 
         property int startX
         property int startMouseX
+        property string previousState
         onPressed: {
             startMouseX = mouse.screenX
             startX = activityPanel.x
             hideTimer.running = false
+            previousState = activityPanel.state
             activityPanel.state = "dragging"
         }
 
@@ -70,7 +72,8 @@ Item {
         }
 
         onReleased: {
-            if (activityPanel.x < homeScreen.width - activityPanel.width/2) {
+            if ((previousState == "hidden" && activityPanel.x < homeScreen.width - activityPanel.width/3) ||
+                (previousState == "show" && activityPanel.x < homeScreen.width - activityPanel.width/3*2)) {
                     activityPanel.state = "show"
                     if (activityPanel.switcher.state != "AcceptingInput") {
                         hideTimer.restart()
