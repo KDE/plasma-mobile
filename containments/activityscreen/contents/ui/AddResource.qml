@@ -279,6 +279,11 @@ Rectangle {
 
                     model: ListModel {
                         ListElement {
+                            name: "Bookmarks"
+                            className: "Bookmark"
+                            hasSymbol: "emblem-favorite"
+                        }
+                        ListElement {
                             name: "Contacts"
                             className: "Contact"
                             hasSymbol: "view-pim-contacts"
