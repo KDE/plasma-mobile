@@ -19,16 +19,23 @@
  ***************************************************************************/
 
 #include "view.h"
+#include "kdeclarativewebview.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
 #include <QScriptValue>
 #include <QGLWidget>
+#include <QNetworkRequest>
+#include <QDir>
+#include <QGraphicsWebView>
 
 #include <KStandardDirs>
 #include <KUriFilter>
 #include <KRun>
+#include <KIO/AccessManager>
+#include <KIO/Job>
+#include <KIO/JobUiDelegate>
 
 #include "Plasma/Package"
 
@@ -185,5 +192,6 @@ void View::onUrlEntered(const QString &newUrl)
         b->setProperty("filteredUrl", QVariant(filteredUrl));
     }
 }
+
 
 #include "view.moc"
