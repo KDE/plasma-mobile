@@ -242,7 +242,7 @@ void PlasmaApp::setupHomeScreen()
         QCoreApplication::quit();
     }
 
-    QDeclarativeItem *m_homeScreen = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
+    m_homeScreen = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
 
     if (!m_homeScreen) {
         kError() << "Could not find homescreen package. Exiting. " << m_homeScreenPath;
