@@ -18,41 +18,52 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "activewebbrowser.h"
 
-#ifndef ACTIVEBROWSERWINDOW_H
-#define ACTIVEBROWSERWINDOW_H
+#include <QApplication>
+#include <QDesktopWidget>
 
-#include <QMainWindow>
+#include <KAction>
+#include <KCmdLineArgs>
+#include <KIcon>
+#include <KStandardAction>
 
-class View;
+#include <Plasma/Theme>
 
-/**
- * This class serves as the main window for the Active Webbrowser.
- *
- * @short Active Webbrowser main window class
- * @author Sebastian Kügler <sebas@kde.org>
- * @version 0.1
- */
-class ActiveBrowserWindow : public QMainWindow
+#include "activebrowserwindow.h"
+#include "kdeclarativewebview.h"
+#include "view.h"
+
+
+ActiveWebbrowser::ActiveWebbrowser(const KCmdLineArgs *args)
+    : KApplication()
 {
-    Q_OBJECT
-public:
-    ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
-    virtual ~ActiveBrowserWindow();
-    QString name();
-    QIcon icon();
+    qmlRegisterType<KDeclarativeWebView>("org.kde.kdewebkit", 0, 1, "WebView");
 
-    void setUseGL(const bool on);
-    bool useGL() const;
+    //kDebug() << "ARGS:" << args << args->count();
+    //const QString url = args->count() ? args->arg(0) : homeUrl;
+}
 
-protected Q_SLOTS:
-    void setCaption(const QString &caption);
+ActiveWebbrowser::~ActiveWebbrowser()
+{
+}
 
-protected:
-    void closeEvent(QCloseEvent *);
+void ActiveWebbrowser::openUrl(const QString& url)
+{
+    ActiveBrowserWindow *mainWindow = new ActiveBrowserWindow(url);
+    mainWindow->setUseGL(m_useGL);
+    mainWindow->show();
+}
 
-private:
-    View *m_widget;
-};
+void ActiveWebbrowser::setUseGL(const bool on)
+{
+    m_useGL = on;
+    //m_widget->setUseGL(on);
+}
 
-#endif // REKONQACTIVE_H
+bool ActiveWebbrowser::useGL() const
+{
+    return m_useGL;
+}
+
+#include "activewebbrowser.moc"

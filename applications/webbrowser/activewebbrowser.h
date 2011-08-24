@@ -19,40 +19,35 @@
  ***************************************************************************/
 
 
-#ifndef ACTIVEBROWSERWINDOW_H
-#define ACTIVEBROWSERWINDOW_H
+#ifndef ACTIVEWEBBROWSER_H
+#define ACTIVEWEBBROWSER_H
 
-#include <QMainWindow>
+#include <KApplication>
 
-class View;
+class KCmdLineArgs;
 
 /**
- * This class serves as the main window for the Active Webbrowser.
+ * This class serves as the main application for the Active Webbrowser.
  *
- * @short Active Webbrowser main window class
+ * @short Active Webbrowser browser application class, managing browser windows
  * @author Sebastian Kügler <sebas@kde.org>
  * @version 0.1
  */
-class ActiveBrowserWindow : public QMainWindow
+class ActiveWebbrowser : public KApplication
 {
     Q_OBJECT
 public:
-    ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
-    virtual ~ActiveBrowserWindow();
-    QString name();
-    QIcon icon();
+    ActiveWebbrowser(const KCmdLineArgs *args);
+    virtual ~ActiveWebbrowser();
 
     void setUseGL(const bool on);
     bool useGL() const;
 
-protected Q_SLOTS:
-    void setCaption(const QString &caption);
-
-protected:
-    void closeEvent(QCloseEvent *);
+public Q_SLOTS:
+    void openUrl(const QString &url);
 
 private:
-    View *m_widget;
+    bool m_useGL;
 };
 
-#endif // REKONQACTIVE_H
+#endif // ACTIVEWEBBROWSER_H

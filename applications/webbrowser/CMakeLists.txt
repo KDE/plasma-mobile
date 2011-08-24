@@ -3,6 +3,7 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
 set(active-webbrowser_SRCS
     main.cpp
+    activewebbrowser.cpp
     activebrowserwindow.cpp
     kdeclarativewebview.cpp
     view.cpp

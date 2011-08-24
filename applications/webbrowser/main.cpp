@@ -19,7 +19,6 @@
  ***************************************************************************/
 
 // KDE
-#include <KApplication>
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KDebug>
@@ -27,8 +26,7 @@
 #include <KConfigGroup>
 
 // Own
-#include "activebrowserwindow.h"
-#include "kdeclarativewebview.h"
+#include "activewebbrowser.h"
 
 static const char description[] = I18N_NOOP("Web browser for Plasma Active");
 
@@ -50,9 +48,10 @@ int main(int argc, char **argv)
     options.add("opengl", ki18n("use a QGLWidget for the viewport"));
 #endif
     KCmdLineArgs::addCmdLineOptions(options);
-    KApplication app;
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+    ActiveWebbrowser app(args);
 
     bool useGL = args->isSet("opengl");
 
@@ -61,14 +60,10 @@ int main(int argc, char **argv)
         KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
         useGL = cg.readEntry("UseOpenGl", true);
     }
-
-    qmlRegisterType<KDeclarativeWebView>("org.kde.kdewebkit", 0, 1, "WebView");
-
-    //kDebug() << "ARGS:" << args << args->count();
     const QString url = args->count() ? args->arg(0) : homeUrl;
-    ActiveBrowserWindow *mainWindow = new ActiveBrowserWindow(url);
-    mainWindow->setUseGL(useGL);
-    mainWindow->show();
+
+    app.setUseGL(useGL);
+    app.openUrl(url);
     args->clear();
     return app.exec();
 }
