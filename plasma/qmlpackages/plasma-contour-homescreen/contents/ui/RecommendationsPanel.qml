@@ -112,7 +112,13 @@ Item {
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: recommendationsPanel.state = recommendationsPanel.x == 0?"hidden":"show"
+                property int startX
+                onPressed: startX = activityPanel.x
+                onClicked: {
+                    if (Math.abs(startX - activityPanel.x) < 8) {
+                        recommendationsPanel.state = recommendationsPanel.x == 0?"hidden":"show"
+                    }
+                }
             }
         }
 
