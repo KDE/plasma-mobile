@@ -26,8 +26,10 @@
 #include <QtDeclarative/QDeclarativeItem>
 #include <QtGui/QAction>
 #include <QtNetwork/QNetworkAccessManager>
-#include "qgraphicswebview.h"
-#include "qwebpage.h"
+#include <kgraphicswebview.h>
+#include <qwebpage.h>
+
+#include <KIO/MetaData>
 
 #include "kwebpage.h"
 
@@ -45,6 +47,10 @@ class QNetworkRequest;
 class KDeclarativeWebView;
 class KDeclarativeWebViewPrivate;
 
+namespace Activities {
+    class Consumer;
+}
+
 class QDeclarativeWebPage : public KWebPage {
     Q_OBJECT
 public:
@@ -61,9 +67,13 @@ protected Q_SLOTS:
     void handleUnsupportedContent(QNetworkReply *);
     void downloadRequest(const QNetworkRequest &request);
     void downloadUrl(const KUrl &url);
+    void downloadFinished(KJob *job);
 
 private:
+    bool downloadResource(const KUrl& srcUrl, const QString& suggestedName = QString(),
+                          QWidget* parent = 0, const KIO::MetaData& metaData = KIO::MetaData());
     KDeclarativeWebView *viewItem();
+    Activities::Consumer *m_activityConsumer;
 };
 
 class GraphicsWebView : public QGraphicsWebView {

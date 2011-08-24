@@ -18,6 +18,7 @@ target_link_libraries(active-webbrowser
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
     kdeclarative
+    kactivities
 )
 
 install( TARGETS active-webbrowser ${INSTALL_TARGETS_DEFAULT_ARGS} )
