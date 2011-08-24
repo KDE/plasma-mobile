@@ -202,12 +202,6 @@ Contour::RecommendationManager::RecommendationManager(QObject *parent)
             this, SLOT(_k_locationChanged(QList<QLandmark>)));
     d->updateRecommendations();
 
-    //FIXME: ugly workaround?
-    QTimer *timer = new QTimer(this);
-    timer->setSingleShot(false);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateRecommendations()));
-    timer->start(15000);
-
     // export via DBus
     qDBusRegisterMetaType<Contour::Recommendation>();
     qDBusRegisterMetaType<QList<Contour::Recommendation> >();
