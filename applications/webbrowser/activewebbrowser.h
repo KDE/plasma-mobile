@@ -44,7 +44,7 @@ public:
     bool useGL() const;
 
 public Q_SLOTS:
-    void openUrl(const QString &url);
+    void newWindow(const QString &url);
 
 private:
     bool m_useGL;

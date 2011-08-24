@@ -45,6 +45,9 @@ public:
     void setUseGL(const bool on);
     bool useGL() const;
 
+Q_SIGNALS:
+    void newWindow(const QString &url);
+
 protected Q_SLOTS:
     void setCaption(const QString &caption);
 

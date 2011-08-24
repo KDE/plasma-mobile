@@ -20,15 +20,12 @@
 
 #include "activewebbrowser.h"
 
-#include <QApplication>
-#include <QDesktopWidget>
 
 #include <KAction>
 #include <KCmdLineArgs>
 #include <KIcon>
+#include <KRun>
 #include <KStandardAction>
-
-#include <Plasma/Theme>
 
 #include "activebrowserwindow.h"
 #include "kdeclarativewebview.h"
@@ -39,31 +36,36 @@ ActiveWebbrowser::ActiveWebbrowser(const KCmdLineArgs *args)
     : KApplication()
 {
     qmlRegisterType<KDeclarativeWebView>("org.kde.kdewebkit", 0, 1, "WebView");
-
-    //kDebug() << "ARGS:" << args << args->count();
-    //const QString url = args->count() ? args->arg(0) : homeUrl;
 }
 
 ActiveWebbrowser::~ActiveWebbrowser()
 {
 }
 
-void ActiveWebbrowser::openUrl(const QString& url)
+void ActiveWebbrowser::newWindow(const QString& url)
 {
-    ActiveBrowserWindow *mainWindow = new ActiveBrowserWindow(url);
-    mainWindow->setUseGL(m_useGL);
-    mainWindow->show();
+    ActiveBrowserWindow *browserWindow = new ActiveBrowserWindow(url);
+    browserWindow->setUseGL(m_useGL);
+    connect(browserWindow, SIGNAL(newWindow(const QString&)), SLOT(newWindow(const QString&)));
+    browserWindow->show();
 }
 
 void ActiveWebbrowser::setUseGL(const bool on)
 {
+    /* not switchable at runtime for now, if we want this, we can add
+     * some housekeeping for the windows, let's keep it KISS for now.
+     */
     m_useGL = on;
-    //m_widget->setUseGL(on);
 }
 
 bool ActiveWebbrowser::useGL() const
 {
     return m_useGL;
 }
-
+/*
+void View::newWindow(const QString &url)
+{
+    KRun::runCommand(QString("active-webbrowser '%1'").arg(url), this);
+}
+*/
 #include "activewebbrowser.moc"

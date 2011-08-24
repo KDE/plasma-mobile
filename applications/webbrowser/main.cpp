@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     const QString url = args->count() ? args->arg(0) : homeUrl;
 
     app.setUseGL(useGL);
-    app.openUrl(url);
+    app.newWindow(url);
     args->clear();
     return app.exec();
 }
