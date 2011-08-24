@@ -31,6 +31,8 @@
 #include <QtGui/QKeyEvent>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPen>
+#include <QNetworkReply>
+#include <KUrl>
 #include "qwebelement.h"
 #include "qwebframe.h"
 #include "qwebpage.h"
@@ -272,10 +274,12 @@ void KDeclarativeWebView::init()
     d->view = new GraphicsWebView(this);
     d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
+    wp->setForwardUnsupportedContent(true);
     setPage(wp);
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
+    connect(wp, SIGNAL(unsupportedContent(QNetworkReply *)), this, SLOT(handleUnsupportedContent(QNetworkReply *)));
 }
 
 void KDeclarativeWebView::componentComplete()
@@ -460,6 +464,22 @@ void KDeclarativeWebView::updateDeclarativeWebViewSize()
 void KDeclarativeWebView::initialLayout()
 {
     // nothing useful to do at this point
+}
+
+void KDeclarativeWebView::handleUnsupportedContent(QNetworkReply *reply)
+{
+    if (!reply) {
+        return;
+    }
+
+    QUrl replyUrl = reply->url();
+
+    if (replyUrl.scheme() == QLatin1String("abp"))
+        return;
+
+    if (reply->error() == QNetworkReply::NoError && reply->header(QNetworkRequest::ContentTypeHeader).isValid()) {
+        static_cast<QDeclarativeWebPage *>(page())->downloadUrl(replyUrl);
+    }
 }
 
 void KDeclarativeWebView::updateContentsSize()

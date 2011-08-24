@@ -232,6 +232,7 @@ private Q_SLOTS:
     void windowObjectCleared();
     void pageUrlChanged();
     void initialLayout();
+    void handleUnsupportedContent(QNetworkReply *);
 
     void updateDeclarativeWebViewSize();
 
