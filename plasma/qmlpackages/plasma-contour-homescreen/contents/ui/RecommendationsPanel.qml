@@ -60,10 +60,12 @@ Item {
 
         property int startX
         property int startMouseX
+        property string previousState
         onPressed: {
             startMouseX = mouse.screenX
             startX = recommendationsPanel.x
             hideTimer.running = false
+            previousState = recommendationsPanel.state
             recommendationsPanel.state = "dragging"
         }
 
@@ -74,7 +76,8 @@ Item {
         }
 
         onReleased: {
-            if (recommendationsPanel.x > -recommendationsPanel.width/3) {
+            if ((previousState == "show" && recommendationsPanel.x > -recommendationsPanel.width/3) ||
+                (previousState == "hidden" && recommendationsPanel.x > -recommendationsPanel.width/3*2)) {
                 recommendationsPanel.state = "show"
                 hideTimer.restart()
             } else {
@@ -116,7 +119,7 @@ Item {
                 property int startX
                 onPressed: startX = activityPanel.x
                 onClicked: {
-                    if (Math.abs(startX - activityPanel.x) < 8) {
+                    if (Math.abs(startX - recommendationsPanel.x) < 8) {
                         recommendationsPanel.state = recommendationsPanel.x == 0?"hidden":"show"
                     }
                 }
