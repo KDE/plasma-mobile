@@ -173,7 +173,7 @@ Item {
                     NumberAnimation {
                         targets: activityPanel;
                         properties: "x";
-                        duration: 1000;
+                        duration: 500;
                         easing.type: "InOutCubic";
                     }
                 }
@@ -187,7 +187,7 @@ Item {
                     NumberAnimation {
                         targets: activityPanel;
                         properties: "x";
-                        duration: 800;
+                        duration: 400;
                         easing.type: "InOutCubic";
                     }
                 }
