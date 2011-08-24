@@ -33,10 +33,10 @@
 #include <QtGui/QPen>
 #include <QNetworkReply>
 #include <KUrl>
-#include "qwebelement.h"
-#include "qwebframe.h"
-#include "qwebpage.h"
-#include "qwebsettings.h"
+#include <qwebelement.h>
+#include <qwebframe.h>
+#include <qwebpage.h>
+#include <qwebsettings.h>
 
 QT_BEGIN_NAMESPACE
 
