@@ -76,7 +76,6 @@ private Q_SLOTS:
     void onTitleChanged();
     void onUrlEntered(const QString&);
     void newWindow(const QString &url);
-    void downloadRequest(const QNetworkRequest &request);
 
 private:
     QString filterUrl(const QString &url);
