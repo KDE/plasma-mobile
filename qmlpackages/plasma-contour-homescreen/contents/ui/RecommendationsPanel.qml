@@ -25,7 +25,7 @@ import org.kde.plasma.mobilecomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
-    id: recommendationsPanel;
+    id: recommendationsPanel
     height: parent.height/1.2
     width: parent.width/1.8
     state: "show"
@@ -69,6 +69,7 @@ Item {
 
         onPositionChanged: {
             recommendationsPanel.x = Math.min(startX + (mouse.screenX - startMouseX), 0)
+
             hideTimer.running = false
         }
 
@@ -206,17 +207,33 @@ Item {
         State {
             name: "dragging"
             PropertyChanges {
-                target: recommendationsPanel;
-                x: recommendationsPanel.x;
-                y: recommendationsPanel.y;
-
+                target: recommendationsPanel
+                x: recommendationsPanel.x
             }
         }
     ]
 
     transitions: [
         Transition {
-            from: "*";
+            from: "show";
+            to: "hidden";
+            NumberAnimation {
+                properties: "x";
+                easing.type: "InOutCubic";
+                duration: 500;
+            }
+        },
+        Transition {
+            from: "hidden";
+            to: "show";
+            NumberAnimation {
+                properties: "x";
+                easing.type: "InOutCubic";
+                duration: 400;
+            }
+        },
+        Transition {
+            from: "dragging";
             to: "*";
             NumberAnimation {
                 properties: "x";
