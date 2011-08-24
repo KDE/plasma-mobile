@@ -32,11 +32,20 @@
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPen>
 #include <QNetworkReply>
-#include <KUrl>
+#include <QDir>
+
 #include <qwebelement.h>
 #include <qwebframe.h>
 #include <qwebpage.h>
 #include <qwebsettings.h>
+
+#include <KUrl>
+#include <KIO/Job>
+#include <KIO/CopyJob>
+#include <KIO/AccessManager>
+#include <KIO/MetaData>
+#include <KIO/JobUiDelegate>
+#include <klocalizedstring.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -279,7 +288,6 @@ void KDeclarativeWebView::init()
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
-    connect(wp, SIGNAL(unsupportedContent(QNetworkReply *)), this, SLOT(handleUnsupportedContent(QNetworkReply *)));
 }
 
 void KDeclarativeWebView::componentComplete()
@@ -464,22 +472,6 @@ void KDeclarativeWebView::updateDeclarativeWebViewSize()
 void KDeclarativeWebView::initialLayout()
 {
     // nothing useful to do at this point
-}
-
-void KDeclarativeWebView::handleUnsupportedContent(QNetworkReply *reply)
-{
-    if (!reply) {
-        return;
-    }
-
-    QUrl replyUrl = reply->url();
-
-    if (replyUrl.scheme() == QLatin1String("abp"))
-        return;
-
-    if (reply->error() == QNetworkReply::NoError && reply->header(QNetworkRequest::ContentTypeHeader).isValid()) {
-        static_cast<QDeclarativeWebPage *>(page())->downloadUrl(replyUrl);
-    }
 }
 
 void KDeclarativeWebView::updateContentsSize()
@@ -1029,6 +1021,7 @@ QRect KDeclarativeWebView::elementAreaAt(int x, int y, int maxWidth, int maxHeig
 QDeclarativeWebPage::QDeclarativeWebPage(KDeclarativeWebView* parent) :
     KWebPage(parent)
 {
+    connect(this, SIGNAL(unsupportedContent(QNetworkReply *)), this, SLOT(handleUnsupportedContent(QNetworkReply *)));
 }
 
 QDeclarativeWebPage::~QDeclarativeWebPage()
@@ -1087,6 +1080,59 @@ QWebPage* QDeclarativeWebPage::createWindow(WebWindowType type)
     if (newView)
         return newView->page();
     return 0;
+}
+
+void QDeclarativeWebPage::handleUnsupportedContent(QNetworkReply *reply)
+{
+    if (!reply) {
+        return;
+    }
+
+    QUrl replyUrl = reply->url();
+
+    if (replyUrl.scheme() == QLatin1String("abp"))
+        return;
+
+    if (reply->error() == QNetworkReply::NoError && reply->header(QNetworkRequest::ContentTypeHeader).isValid()) {
+        downloadUrl(replyUrl);
+    }
+}
+
+static bool downloadResource (const KUrl& srcUrl, const QString& suggestedName = QString(),
+                              QWidget* parent = 0, const KIO::MetaData& metaData = KIO::MetaData())
+{
+    
+    const QString fileName ((suggestedName.isEmpty() ? srcUrl.fileName() : suggestedName));
+    const KUrl &destUrl(QString("file://%1/%2").arg(QDir::homePath()).arg(fileName));
+
+   
+    if (!destUrl.isValid()) {
+        return false;
+    }
+
+    KIO::CopyJob *job = KIO::copy(srcUrl, destUrl);
+
+    if (!metaData.isEmpty()) {
+        job->setMetaData(metaData);
+    }
+
+    job->setAutoRename(true);
+    job->addMetaData(QLatin1String("MaxCacheSize"), QLatin1String("0")); // Don't store in http cache.
+    job->addMetaData(QLatin1String("cache"), QLatin1String("cache")); // Use entry from cache if available.
+    job->ui()->setWindow((parent ? parent->window() : 0));
+    job->ui()->setAutoErrorHandlingEnabled(true);
+    return true;
+}
+
+void QDeclarativeWebPage::downloadRequest(const QNetworkRequest &request)
+{
+    downloadResource(request.url(), QString(), view(),
+                     request.attribute(static_cast<QNetworkRequest::Attribute>(KIO::AccessManager::MetaData)).toMap());
+}
+
+void QDeclarativeWebPage::downloadUrl(const KUrl &url)
+{
+    downloadResource(url, QString(), view());
 }
 
 QT_END_NAMESPACE

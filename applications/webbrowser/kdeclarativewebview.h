@@ -57,6 +57,11 @@ protected:
     bool javaScriptConfirm(QWebFrame *originatingFrame, const QString& msg);
     bool javaScriptPrompt(QWebFrame *originatingFrame, const QString& msg, const QString& defaultValue, QString* result);
 
+protected Q_SLOTS:
+    void handleUnsupportedContent(QNetworkReply *);
+    void downloadRequest(const QNetworkRequest &request);
+    void downloadUrl(const KUrl &url);
+
 private:
     KDeclarativeWebView *viewItem();
 };
@@ -232,7 +237,6 @@ private Q_SLOTS:
     void windowObjectCleared();
     void pageUrlChanged();
     void initialLayout();
-    void handleUnsupportedContent(QNetworkReply *);
 
     void updateDeclarativeWebViewSize();
 
