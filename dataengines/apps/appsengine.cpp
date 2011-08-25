@@ -20,6 +20,7 @@
 #include "appsengine.h"
 #include "appsource.h"
 #include "appservice.h"
+#include "categoriessource.h"
 
 
 AppsEngine::AppsEngine(QObject *parent, const QVariantList &args) :
@@ -41,6 +42,10 @@ bool AppsEngine::sourceRequestEvent(const QString &name)
     if (name.startsWith("Apps")) {
         AppSource *appSource = new AppSource(name, this);
         addSource(appSource);
+        return true;
+    } else if (name.startsWith("Categories")) {
+        CategoriesSource *catSource = new CategoriesSource(name, this);
+        addSource(catSource);
         return true;
     }
 
