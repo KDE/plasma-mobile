@@ -38,7 +38,7 @@ bool AppsEngine::sourceRequestEvent(const QString &name)
         return true;
     }
 
-    if (name == "Apps") {
+    if (name.startsWith("Apps")) {
         AppSource *appSource = new AppSource(name, this);
         addSource(appSource);
         return true;

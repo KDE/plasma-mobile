@@ -44,6 +44,8 @@ protected:
 private Q_SLOTS:
     void sycocaChanged(const QStringList &changes);
 
+private:
+    QStringList m_categories;
 };
 
 #endif // APPSOURCE_H

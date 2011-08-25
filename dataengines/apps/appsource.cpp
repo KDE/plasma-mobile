@@ -27,6 +27,12 @@ AppSource::AppSource(const QString &name, QObject *parent)
     : Plasma::DataContainer(parent)
 {
     setObjectName(name);
+
+    QStringList names = name.split(':');
+    if (names.length() == 2) {
+        m_categories = names.last().split('|');
+    }
+
     populate();
     connect(KSycoca::self(), SIGNAL(databaseChanged(QStringList)), this, SLOT(sycocaChanged(QStringList)));
 }
@@ -42,15 +48,35 @@ void AppSource::sycocaChanged(const QStringList &changes)
     }
 }
 
+static bool lessThanForServices(KService::Ptr service1, KService::Ptr service2)
+{
+    return QString::localeAwareCompare(service1->name(), service2->name()) < 0;
+}
+
 void AppSource::populate()
 {
     QString query = "exist Exec";
+
+    if (!m_categories.isEmpty()) {
+        query += " and (";
+        bool first = true;
+        foreach (const QString &category, m_categories) {
+            if (!first) {
+                query += " or ";
+            }
+            first = false;
+            query += QString(" (exist Categories and '%1' ~subin Categories)").arg(category);
+        }
+        query += ")";
+    }
 
     //openSUSE: exclude YaST modules from the list
     query += " and (not (exist Categories and 'X-SuSE-YaST' in Categories))";
 
     kWarning()<<query;
     KService::List services = KServiceTypeTrader::self()->query("Application", query);
+
+    qSort(services.begin(), services.end(), lessThanForServices);
 
     removeAllData();
     Plasma::DataEngine::Data data;
