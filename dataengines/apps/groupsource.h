@@ -17,8 +17,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef APPSOURCE_H
-#define APPSOURCE_H
+#ifndef GROUPSOURCE_H
+#define GROUPSOURCE_H
 
 // plasma
 #include <Plasma/DataContainer>
@@ -27,25 +27,26 @@
 #include <KServiceGroup>
 
 /**
- * App categories Source
+ * App group Source
  */
-class AppSource : public Plasma::DataContainer
+class GroupSource : public Plasma::DataContainer
 {
     Q_OBJECT
 
 public:
-    AppSource(const QString &name, QObject *parent = 0);
-    ~AppSource();
+    GroupSource(const QString &name, QObject *parent = 0);
+    ~GroupSource();
 
 protected:
     Plasma::Service *createService();
     void populate();
+    void loadGroup(KServiceGroup::Ptr group);
 
 private Q_SLOTS:
     void sycocaChanged(const QStringList &changes);
 
 private:
-    QStringList m_categories;
+    QString m_group;
 };
 
-#endif // APPSOURCE_H
+#endif // GROUPSOURCE_H

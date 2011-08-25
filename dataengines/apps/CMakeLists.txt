@@ -4,6 +4,7 @@ set(apps_engine_SRCS
     appservice.cpp
     appjob.cpp
     categoriessource.cpp
+    groupsource.cpp
 )
 
 kde4_add_plugin(plasma_engine_active_apps ${apps_engine_SRCS})

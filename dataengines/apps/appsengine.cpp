@@ -21,6 +21,7 @@
 #include "appsource.h"
 #include "appservice.h"
 #include "categoriessource.h"
+#include "groupsource.h"
 
 
 AppsEngine::AppsEngine(QObject *parent, const QVariantList &args) :
@@ -46,6 +47,10 @@ bool AppsEngine::sourceRequestEvent(const QString &name)
     } else if (name.startsWith("Categories")) {
         CategoriesSource *catSource = new CategoriesSource(name, this);
         addSource(catSource);
+        return true;
+    } else if (name.startsWith("Group")) {
+        GroupSource *grpSource = new GroupSource(name, this);
+        addSource(grpSource);
         return true;
     }
 
