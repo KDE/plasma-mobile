@@ -46,6 +46,13 @@
 #include <KIO/MetaData>
 #include <KIO/JobUiDelegate>
 #include <klocalizedstring.h>
+#include <kactivities/consumer.h>
+
+#include <soprano/vocabulary.h>
+#include <Nepomuk/Resource>
+#include <Nepomuk/Tag>
+#include <Nepomuk/Variant>
+
 
 QT_BEGIN_NAMESPACE
 
@@ -1022,6 +1029,8 @@ QDeclarativeWebPage::QDeclarativeWebPage(KDeclarativeWebView* parent) :
     KWebPage(parent)
 {
     connect(this, SIGNAL(unsupportedContent(QNetworkReply *)), this, SLOT(handleUnsupportedContent(QNetworkReply *)));
+    //TODO: move this in the webbrowser implementation
+    m_activityConsumer = new Activities::Consumer(this);
 }
 
 QDeclarativeWebPage::~QDeclarativeWebPage()
@@ -1098,8 +1107,8 @@ void QDeclarativeWebPage::handleUnsupportedContent(QNetworkReply *reply)
     }
 }
 
-static bool downloadResource (const KUrl& srcUrl, const QString& suggestedName = QString(),
-                              QWidget* parent = 0, const KIO::MetaData& metaData = KIO::MetaData())
+bool QDeclarativeWebPage::downloadResource (const KUrl& srcUrl, const QString& suggestedName,
+                              QWidget* parent, const KIO::MetaData& metaData)
 {
     
     const QString fileName ((suggestedName.isEmpty() ? srcUrl.fileName() : suggestedName));
@@ -1121,7 +1130,24 @@ static bool downloadResource (const KUrl& srcUrl, const QString& suggestedName =
     job->addMetaData(QLatin1String("cache"), QLatin1String("cache")); // Use entry from cache if available.
     job->ui()->setWindow((parent ? parent->window() : 0));
     job->ui()->setAutoErrorHandlingEnabled(true);
+    connect(job, SIGNAL(result(KJob *)), this, SLOT(downloadFinished(KJob *)));
     return true;
+}
+
+void QDeclarativeWebPage::downloadFinished(KJob *job)
+{
+    //FIXME: this breaks all resources currently connected to the current activity
+    //reactivate as soon as the nepomuk bug is fixed
+    /*KIO::CopyJob *cj = qobject_cast<KIO::CopyJob *>(job);
+    if (cj && job->error() == KJob::NoError) {
+        QString activityId = m_activityConsumer->currentActivity();
+        Nepomuk::Resource fileRes(cj->destUrl());
+        fileRes.addType(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject"));
+        fileRes.addTag(Nepomuk::Tag("Download"));
+
+        Nepomuk::Resource acRes("activities://" + activityId);
+        acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
+    }*/
 }
 
 void QDeclarativeWebPage::downloadRequest(const QNetworkRequest &request)
