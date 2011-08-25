@@ -17,20 +17,26 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "groupsource.h"
+#include "groupssource.h"
 
 #include <KDebug>
 #include <KServiceTypeTrader>
 #include <KSycoca>
 
-GroupSource::GroupSource(const QString &name, QObject *parent)
-    : Plasma::DataContainer(parent)
+int GroupsSource::s_depth = 0;
+
+GroupsSource::GroupsSource(const QString &name, QObject *parent)
+    : Plasma::DataContainer(parent),
+      m_maxDepth(-1)
 {
     setObjectName(name);
 
     QStringList split = name.split(':');
-    if (split.length() == 2) {
-        m_group = split.last();
+    if (split.length() >= 2) {
+        m_group = split[1];
+    }
+    if (split.length() == 3) {
+        m_maxDepth = split[2].toInt();
     }
 
     if (m_group.isEmpty()) {
@@ -41,28 +47,34 @@ GroupSource::GroupSource(const QString &name, QObject *parent)
     connect(KSycoca::self(), SIGNAL(databaseChanged(QStringList)), this, SLOT(sycocaChanged(QStringList)));
 }
 
-GroupSource::~GroupSource()
+GroupsSource::~GroupsSource()
 {
 }
 
-void GroupSource::sycocaChanged(const QStringList &changes)
+void GroupsSource::sycocaChanged(const QStringList &changes)
 {
     if (changes.contains("apps") || changes.contains("xdgdata-apps")) {
         populate();
     }
 }
 
-void GroupSource::populate()
+void GroupsSource::populate()
 {
     KServiceGroup::Ptr group = KServiceGroup::group(m_group);
 
+    s_depth = 0;
     removeAllData();
     loadGroup(group);
     checkForUpdate();
 }
 
-void GroupSource::loadGroup(KServiceGroup::Ptr group)
+void GroupsSource::loadGroup(KServiceGroup::Ptr group)
 {
+    if (m_maxDepth >= 0 && s_depth > m_maxDepth) {
+        return;
+    }
+    ++s_depth;
+
     if (group && group->isValid()) {
         KServiceGroup::List list = group->entries();
 
@@ -70,32 +82,17 @@ void GroupSource::loadGroup(KServiceGroup::Ptr group)
              it != list.constEnd(); it++) {
             const KSycocaEntry::Ptr p = (*it);
 
-            if (p->isType(KST_KService)) {
-                const KService::Ptr service = KService::Ptr::staticCast(p);
-
-                if (!service->noDisplay()) {
-                    QString genericName = service->genericName();
-                    if (genericName.isNull()) {
-                        genericName = service->comment();
-                    }
-                    QString description;
-                    if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
-                        description = service->genericName();
-                    } else if (!service->comment().isEmpty()) {
-                        description = service->comment();
-                    }
-                    Plasma::DataEngine::Data data;
-                    data["icon"] = service->icon();
-                    data["name"] = service->name();
-                    data["genericName"] = service->genericName();
-                    data["description"] = description;
-                    data["storageId"] = service->storageId();
-                    data["entryPath"] = service->entryPath();
-                    setData(service->storageId(), data);
-                }
-
-            } else if (p->isType(KST_KServiceGroup)) {
+            if (p->isType(KST_KServiceGroup)) {
                 const KServiceGroup::Ptr subGroup = KServiceGroup::Ptr::staticCast(p);
+
+                Plasma::DataEngine::Data data;
+                data["icon"] = subGroup->icon();
+                data["name"] = subGroup->name();
+                data["description"] = subGroup->comment();
+                data["relPath"] = subGroup->relPath();
+                data["display"] = !subGroup->noDisplay();
+                data["childCount"] = subGroup->childCount();
+                setData(subGroup->relPath(), data);
 
                 if (!subGroup->noDisplay() && subGroup->childCount() > 0) {
                     loadGroup(subGroup);
@@ -105,4 +102,4 @@ void GroupSource::loadGroup(KServiceGroup::Ptr group)
     }
 }
 
-#include "groupsource.moc"
+#include "groupssource.moc"
