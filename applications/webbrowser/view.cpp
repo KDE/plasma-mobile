@@ -32,7 +32,6 @@
 
 #include <KStandardDirs>
 #include <KUriFilter>
-#include <KRun>
 #include <KIO/AccessManager>
 #include <KIO/Job>
 #include <KIO/JobUiDelegate>
@@ -85,7 +84,6 @@ View::View(const QString &url, QWidget *parent)
 
     onStatusChanged(status());
 
-
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
     connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
             this, SLOT(onStatusChanged(QDeclarativeView::Status)));
@@ -125,7 +123,7 @@ void View::onStatusChanged(QDeclarativeView::Status status)
                 connect(m_webBrowser, SIGNAL(titleChanged()),
                         this, SLOT(onTitleChanged()));
                 connect(m_webBrowser, SIGNAL(newWindowRequested(QString)),
-                        this, SLOT(newWindow(QString)));
+                        this, SIGNAL(newWindow(QString)));
             } else {
                 kError() << "webView component not found. :(";
             }
@@ -162,11 +160,6 @@ void View::onTitleChanged()
         //kDebug() << "Title changed to: " << m_options->title;
         emit titleChanged(m_options->title); // sets window caption
     }
-}
-
-void View::newWindow(const QString &url)
-{
-    KRun::runCommand(QString("active-webbrowser '%1'").arg(url), this);
 }
 
 QString View::filterUrl(const QString &url)

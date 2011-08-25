@@ -18,44 +18,54 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "activewebbrowser.h"
 
-#ifndef ACTIVEBROWSERWINDOW_H
-#define ACTIVEBROWSERWINDOW_H
 
-#include <QMainWindow>
+#include <KAction>
+#include <KCmdLineArgs>
+#include <KIcon>
+#include <KRun>
+#include <KStandardAction>
 
-class View;
+#include "activebrowserwindow.h"
+#include "kdeclarativewebview.h"
+#include "view.h"
 
-/**
- * This class serves as the main window for the Active Webbrowser.
- *
- * @short Active Webbrowser main window class
- * @author Sebastian Kügler <sebas@kde.org>
- * @version 0.1
- */
-class ActiveBrowserWindow : public QMainWindow
+
+ActiveWebbrowser::ActiveWebbrowser(const KCmdLineArgs *args)
+    : KApplication()
 {
-    Q_OBJECT
-public:
-    ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
-    virtual ~ActiveBrowserWindow();
-    QString name();
-    QIcon icon();
+    qmlRegisterType<KDeclarativeWebView>("org.kde.kdewebkit", 0, 1, "WebView");
+}
 
-    void setUseGL(const bool on);
-    bool useGL() const;
+ActiveWebbrowser::~ActiveWebbrowser()
+{
+}
 
-Q_SIGNALS:
-    void newWindow(const QString &url);
+void ActiveWebbrowser::newWindow(const QString& url)
+{
+    ActiveBrowserWindow *browserWindow = new ActiveBrowserWindow(url);
+    browserWindow->setUseGL(m_useGL);
+    connect(browserWindow, SIGNAL(newWindow(const QString&)), SLOT(newWindow(const QString&)));
+    browserWindow->show();
+}
 
-protected Q_SLOTS:
-    void setCaption(const QString &caption);
+void ActiveWebbrowser::setUseGL(const bool on)
+{
+    /* not switchable at runtime for now, if we want this, we can add
+     * some housekeeping for the windows, let's keep it KISS for now.
+     */
+    m_useGL = on;
+}
 
-protected:
-    void closeEvent(QCloseEvent *);
-
-private:
-    View *m_widget;
-};
-
-#endif // REKONQACTIVE_H
+bool ActiveWebbrowser::useGL() const
+{
+    return m_useGL;
+}
+/*
+void View::newWindow(const QString &url)
+{
+    KRun::runCommand(QString("active-webbrowser '%1'").arg(url), this);
+}
+*/
+#include "activewebbrowser.moc"
