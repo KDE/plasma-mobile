@@ -154,7 +154,6 @@ Item {
             onClicked: {
                 resourceInstance.uri = ""
                 main.currentIndex = -1
-                main.currentGroup = 0
             }
 
 
