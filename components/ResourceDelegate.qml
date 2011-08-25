@@ -22,8 +22,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: delegateItem
-    property string className: model["className"]
-    property string genericClassName: model["genericClassName"]
+    property string className: model["className"]?model["className"]:"FileDataObject"
+    property string genericClassName: model["genericClassName"]?model["genericClassName"]:"FileDataObject"
     property bool infoLabelVisible
 //    property int implicitWidth: itemLoader.item.implicitWidth
   //  property int implicitHeight: itemLoader.item.implicitHeight

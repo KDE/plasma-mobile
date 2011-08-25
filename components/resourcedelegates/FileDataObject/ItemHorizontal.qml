@@ -28,16 +28,6 @@ Item {
     id: resourceItem
     anchors.fill: parent
 
-    Item {
-        id: itemFrame
-        anchors {   bottom: parent.bottom;
-                    top: parent.top;
-                    left: parent.left;
-                    right: parent.right;
-                    margins: 0;
-        }
-        //height: 128
-        height: resourceItem.height
 
         QIconItem {
             id: previewImage
@@ -56,7 +46,11 @@ Item {
             Component.onCompleted: {
                 // FIXME: remove this crap, fix icon in metadata data set
                 try {
-                    if (!model["hasSymbol"]) {
+                    if (model["iconName"]) {
+                        icon = QIcon(model["iconName"])
+                        return
+                    }
+                    if (!model["hasSymbol"] && decoration) {
                         icon = decoration
                         return
                     }
@@ -91,7 +85,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
             anchors.top: previewImage.bottom
-            anchors.horizontalCenter: itemFrame.horizontalCenter
+            anchors.horizontalCenter: resourceItem.horizontalCenter
             width: 130
             style: Text.Outline
             styleColor: Qt.rgba(1, 1, 1, 0.6)
@@ -112,5 +106,4 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             visible: infoLabelVisible
         }
-    }
 }
