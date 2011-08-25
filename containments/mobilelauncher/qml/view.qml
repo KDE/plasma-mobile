@@ -75,7 +75,7 @@ Item {
                 className: "FileDataObject"
                 genericClassName: "FileDataObject"
                 property string label: display
-                property string mimeType: "buh"
+                property string mimeType: "application/x-desktop"
                 onPressed: {
                     resourceInstance.uri = resourceUri
                 }
