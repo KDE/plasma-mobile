@@ -155,7 +155,6 @@ Item {
                         color: theme.textColor
                         width: parent.width
                         horizontalAlignment: Text.AlignHCenter
-                        font.bold: true
                     }
 
                     MouseArea {
