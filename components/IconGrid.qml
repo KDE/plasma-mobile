@@ -106,6 +106,7 @@ Item {
             bottomMargin: 16
         }
         Row {
+            id: dotsRow
             anchors.centerIn: parent
             spacing: 20
 
@@ -114,7 +115,7 @@ Item {
 
 
                 Rectangle {
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: dotsRow.verticalCenter
                     width: 6
                     height: 6
                     scale: appsView.currentIndex == index ? 1.5 : 1
