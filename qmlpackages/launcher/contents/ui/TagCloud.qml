@@ -19,100 +19,141 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import "categories.js" as Categories
 
 
-Flickable {
-    id: tagCloud
+Item {
     height: 200
-    contentWidth: tagFlow.width
-    contentHeight: tagFlow.height
-    opacity: (searchField.searchQuery == "")?1:0.3
-    clip: true
-
-
-    PlasmaCore.DataSource {
-        id: categoriesSource
-        engine: "org.kde.active.apps"
-        connectedSources: ["Categories"]
-        interval: 0
-    }
-    PlasmaCore.DataModel {
-        id: categoriesModel
-        keyRoleFilter: ".*"
-        dataSource: categoriesSource
-    }
-
     anchors {
-        left: parent.left
-        top: parent.top
-        right: parent.right
-    }
-    Flow {
-        id: tagFlow
-        height: 200
-        spacing: 8
-        flow: Flow.TopToBottom
+            left: parent.left
+            top: parent.top
+            right: parent.right
+        }
+    Item {
+        id: everythingButton
+        x: enabled?parent.width/6:-width-10
+        y: parent.height + 18
+        width: everythingPushButton.width
+        height: everythingPushButton.height
+        enabled: false
 
-        Text {
-            id: everythingTag
-            text: i18n("Everything")
-            font.pointSize: 20
-            font.bold: true
-            color: theme.textColor
+        PlasmaWidgets.PushButton {
+            id: everythingPushButton
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    appsSource.connectedSources = ["Apps"]
-                    Categories.activeCategories = new Array()
-                    for (var i=0; i<tagFlow.children.length; ++i ) {
-                        var child = tagFlow.children[i]
-                        if (child.font) {
-                            child.font.bold = false
-                        }
+            text: i18n("Show everything")
+
+            onEnabledChanged: NumberAnimation {
+                                duration: 250
+                                target: everythingButton
+                                properties: "x"
+                                easing.type: Easing.InOutQuad
+                            }
+            onClicked: {
+                appsSource.connectedSources = ["Apps"]
+                Categories.activeCategories = new Array()
+                for (var i=0; i<tagFlow.children.length; ++i ) {
+                    var child = tagFlow.children[i]
+                    if (child.active != undefined) {
+                        child.active = false
                     }
-                    everythingTag.font.bold = true
                 }
+                everythingButton.enabled = false
             }
         }
+        Behavior on x {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
 
-        Repeater {
-            model: categoriesModel
-            Text {
-                id: tagDelegate
-                text: name
-                font.pointSize: 8+(Math.min(items*4, 40)/2)
-                color: theme.textColor
+    Flickable {
+        id: tagCloud
+        contentWidth: tagFlow.width
+        contentHeight: tagFlow.height
+        opacity: (searchField.searchQuery == "")?1:0
+        clip: false
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (Categories.activeCategories.indexOf(name) > -1) {
-                            j = 0;
-                            while (j < Categories.activeCategories.length) {
-                                if (Categories.activeCategories[j] == name) {
-                                    Categories.activeCategories.splice(j, 1);
-                                } else {
-                                    j++;
-                                }
+
+        PlasmaCore.DataSource {
+            id: categoriesSource
+            engine: "org.kde.active.apps"
+            connectedSources: ["Categories"]
+            interval: 0
+        }
+        PlasmaCore.DataModel {
+            id: categoriesModel
+            keyRoleFilter: ".*"
+            dataSource: categoriesSource
+        }
+
+        anchors.fill: parent
+
+        Flow {
+            id: tagFlow
+            height: 200
+            spacing: 8
+            flow: Flow.TopToBottom
+
+
+            Repeater {
+                model: categoriesModel
+                Item {
+                    id: tagDelegate
+                    width: tagText.width
+                    height: tagText.height
+                    property bool active
+                    Rectangle {
+                        anchors.fill: parent
+                        color: theme.backgroundColor
+                        radius: 3
+                        smooth: true
+                        opacity: tagDelegate.active?0.5:0
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: 250
+                                easing.type: Easing.InOutQuad
                             }
-                            tagDelegate.font.bold = false
-                        } else {
-                            Categories.activeCategories[Categories.activeCategories.length] = name
-                            tagDelegate.font.bold = true
                         }
+                    }
+                    Text {
+                        id: tagText
+                        text: name
+                        font.pointSize: 8+(Math.min(items*4, 40)/2)
+                        color: theme.textColor
+                        font.bold: tagDelegate.active
 
-                        if (Categories.activeCategories.length > 0) {
-                            appsSource.connectedSources = ["Apps:"+Categories.activeCategories.join("|")]
-                        } else {
-                            appsSource.connectedSources = ["Apps"]
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                if (Categories.activeCategories.indexOf(name) > -1) {
+                                    j = 0;
+                                    while (j < Categories.activeCategories.length) {
+                                        if (Categories.activeCategories[j] == name) {
+                                            Categories.activeCategories.splice(j, 1);
+                                        } else {
+                                            j++;
+                                        }
+                                    }
+                                    tagDelegate.active = false
+                                } else {
+                                    Categories.activeCategories[Categories.activeCategories.length] = name
+                                    tagDelegate.active = true
+                                }
+
+                                if (Categories.activeCategories.length > 0) {
+                                    appsSource.connectedSources = ["Apps:"+Categories.activeCategories.join("|")]
+                                } else {
+                                    appsSource.connectedSources = ["Apps"]
+                                }
+                                everythingButton.enabled = (Categories.activeCategories.length > 0)
+                            }
                         }
-                        everythingTag.font.bold = (Categories.activeCategories.length == 0)
                     }
                 }
             }
         }
     }
 }
-
