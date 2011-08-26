@@ -74,7 +74,11 @@ void CategoriesSource::populate()
             continue;
         }
 
-        setData(i.key(), i.value());
+        Plasma::DataEngine::Data data;
+        data["name"] = i.key();
+        data["items"] = i.value();
+
+        setData(i.key(), data);
 
         ++i;
     }
