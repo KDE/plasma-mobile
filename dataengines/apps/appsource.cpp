@@ -93,7 +93,7 @@ void AppSource::populate()
             description = service->comment();
         }
 
-        data["icon"] = service->icon();
+        data["iconName"] = service->icon();
         data["name"] = service->name();
         data["genericName"] = service->genericName();
         data["description"] = description;

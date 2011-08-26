@@ -86,7 +86,7 @@ void GroupsSource::loadGroup(KServiceGroup::Ptr group)
                 const KServiceGroup::Ptr subGroup = KServiceGroup::Ptr::staticCast(p);
 
                 Plasma::DataEngine::Data data;
-                data["icon"] = subGroup->icon();
+                data["iconName"] = subGroup->icon();
                 data["name"] = subGroup->name();
                 data["description"] = subGroup->comment();
                 data["relPath"] = subGroup->relPath();
