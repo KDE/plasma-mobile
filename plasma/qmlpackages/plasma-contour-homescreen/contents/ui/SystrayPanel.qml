@@ -20,6 +20,7 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: systrayPanel
@@ -34,11 +35,18 @@ Item {
         enabledBorders: "BottomBorder"
     }
 
+    MobileComponents.Package {
+        id: launcherPackage
+        name: "org.kde.active.launcher"
+        Component.onCompleted: {
+            var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
+            menuContainer.plasmoid = component.createObject(menuContainer);
+        }
+    }
+
     function addContainment(cont)
     {
-        if (cont.pluginName == "org.kde.active.launcher") {
-            menuContainer.plasmoid = cont
-        } else if (cont.pluginName == "org.kde.windowstrip") {
+        if (cont.pluginName == "org.kde.windowstrip") {
             windowListContainer.plasmoid = cont
         } else if (cont.pluginName == "org.kde.active.systemtray") {
             systrayContainer.plasmoid = cont

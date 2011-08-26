@@ -108,7 +108,6 @@ Rectangle {
         engine: "org.kde.active.metadata"
         interval: 0
     }
-
     PlasmaCore.DataModel {
         id: metadataModel
         keyRoleFilter: ".*"
@@ -121,14 +120,12 @@ Rectangle {
 
 
 
-    property QtObject model: appsModel
     PlasmaCore.DataSource {
         id: appsSource
         engine: "org.kde.active.apps"
         connectedSources: ["Apps"]
         interval: 0
     }
-
     PlasmaCore.DataModel {
         id: appsModel
         keyRoleFilter: ".*"
