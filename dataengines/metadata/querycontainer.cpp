@@ -59,7 +59,6 @@ QueryContainer::QueryContainer(const Nepomuk::Query::Query &query, QObject *pare
 
 QueryContainer::~QueryContainer()
 {
-    m_watcher->stop();
 }
 
 void QueryContainer::serviceRegistered(const QString &service)
