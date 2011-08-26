@@ -24,6 +24,14 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
  MobileComponents.MouseEventListener {
     id: panelDragButton
 
+    property int startY
+    property int startX
+    property int lastY
+    property bool dragging: false
+    property bool dragEnabled: true
+    property int panelHeight
+    property int tasksHeight
+
     PlasmaCore.Svg {
         id: iconSvg
         imagePath: "icons/dashboard"
@@ -41,60 +49,84 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         }
     }
 
-
-    property int startY
-    property int lastY
-    property bool dragging: false
+    Timer {
+        id: disableTimer
+        running: false
+        repeat: false
+        interval: 400
+        onTriggered: {
+            panelDragButton.dragEnabled = false
+        }
+    }
 
     onPressed: {
-        if ((mouse.y > height - 33 && mouse.x < iconItem.x)) {
-            dragging = false
-            return
-        }
-        if (systrayPanel.state != "Tasks") {
-            dragging = true
-        }
         startY = mouse.screenY
+        startX = mouse.screenX
         lastY = mouse.screenY
+        disableTimer.running = true
     }
     onPositionChanged: {
-        if (systrayPanel.state == "Tasks" &&
-            Math.abs(mouse.screenY - startY) > 35) {
-                dragging = true
-            }
-        if (dragging) {
-            slidingPanel.y = Math.min(0, (slidingPanel.y+mouse.screenY - lastY))
-            lastY = mouse.screenY
-        }
-    }
-    onReleased: {
-        if (!dragging) {
-            dragging = false
+        if (!panelDragButton.dragEnabled) {
             return
         }
+        //FIXME: why sometimes onPressed doesn't arrive?
+        if (startY < 0 || lastY < 0) {
+            startY = mouse.screenY
+            startX = mouse.screenX
+            lastY = mouse.screenY
+        }
 
+        //try to avoid vertical scrolling when an horizontal one is in place
+        //this 32 is completely arbitrary
+        if (!dragging && Math.abs(startX - mouse.screenX) > 32) {
+            panelDragButton.dragEnabled = false;
+        }
+
+        if (Math.abs(startY - lastY) > 32) {
+            dragging = true
+            disableTimer.running = false
+        }
+
+        if (dragging) {
+            slidingPanel.y = Math.min(0, (slidingPanel.y+mouse.screenY - lastY))
+        }
+        lastY = mouse.screenY
+    }
+
+    onReleased: {
+        panelDragButton.dragEnabled = true
+        disableTimer.running = false
         dragging = false
         var oldState = systrayPanel.state
         systrayPanel.state = "none"
-        //click on the handle area, switch hidden/full
-        if (mouse.y > height-35 && Math.abs(mouse.screenY - startY) < 8) {
+
+        //click on the handle area, always switch hidden/full
+        if (mouse.y > height-35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8) {
             if (oldState == "Hidden") {
                 systrayPanel.state = "Full"
             } else {
                 systrayPanel.state = "Hidden"
             }
-        //the biggest one, Launcher
+
+        //the biggest one, Launcher with tag cloud
         } else if (slidingPanel.y > -100) {
             systrayPanel.state = "Launcher"
+
         //more than 2/3 of the screen uncovered, full
         } else if (systrayPanel.height+slidingPanel.y > systrayPanel.height/2) {
             systrayPanel.state = "Full"
-        //more then 1/4 of the screen uncovered, taskbar
-        } else if (systrayPanel.height+slidingPanel.y > systrayPanel.height/4) {
+
+        //show only the taskbar: require a smaller quantity of the screen uncovered when the previous state is hidden
+        } else if ((oldState == "Hidden" && systrayPanel.height+slidingPanel.y > panelDragButton.tasksHeight/2) ||
+                   (systrayPanel.height+slidingPanel.y > (panelDragButton.tasksHeight/5)*6)) {
             systrayPanel.state = "Tasks"
-        //screen mostly hidden: hide
+
+        //Only the small top panel
         } else {
             systrayPanel.state = "Hidden"
         }
+        startY = -1
+        startX = -1
+        lastY = -1
     }
 }

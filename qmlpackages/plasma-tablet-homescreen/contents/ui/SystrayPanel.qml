@@ -20,6 +20,7 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: systrayPanel
@@ -34,11 +35,18 @@ Item {
         enabledBorders: "BottomBorder"
     }
 
+    MobileComponents.Package {
+        id: launcherPackage
+        name: "org.kde.active.launcher"
+        Component.onCompleted: {
+            var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
+            menuContainer.plasmoid = component.createObject(menuContainer);
+        }
+    }
+
     function addContainment(cont)
     {
-        if (cont.pluginName == "org.kde.active.launcher") {
-            menuContainer.plasmoid = cont
-        } else if (cont.pluginName == "org.kde.windowstrip") {
+        if (cont.pluginName == "org.kde.windowstrip") {
             windowListContainer.plasmoid = cont
         } else if (cont.pluginName == "org.kde.active.systemtray") {
             systrayContainer.plasmoid = cont
@@ -46,11 +54,24 @@ Item {
     }
 
     SlidingDragButton {
+        id: slidingDragButton
+        panelHeight: 32
+        tasksHeight: 150
+
         anchors {
             fill: parent
             bottomMargin: background.margins.bottom
         }
-        height: 150
+
+        Image {
+            source: homeScreenPackage.filePath("images", "fabrictexture.png")
+            fillMode: Image.Tile
+            height: menuContainer.height-8
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+        }
 
         Column {
             anchors.fill: parent
@@ -62,17 +83,16 @@ Item {
                     right: parent.right
                 }
                 height: parent.height - systrayContainer.height - windowListContainer.height - 2
-                PlasmaCore.SvgItem {
-                    svg: PlasmaCore.Svg {
-                        imagePath: "widgets/extender-background"
-                    }
-                    elementId: "top"
+                Image {
+                    source: homeScreenPackage.filePath("images", "shadow-top.png")
+                    fillMode: Image.TileHorizontally
+                    height: sourceSize.height
                     anchors {
                         left: parent.left
                         right: parent.right
                         bottom: parent.bottom
+                        bottomMargin: 8
                     }
-                    height: 16
                 }
             }
             PlasmoidContainer {
@@ -81,7 +101,7 @@ Item {
                     left: parent.left
                     right: parent.right
                 }
-                height: 150
+                height: slidingDragButton.tasksHeight
             }
             Item {
                 width: 2
@@ -94,7 +114,7 @@ Item {
                     right: parent.right
                     rightMargin: 32
                 }
-                height: 32
+                height: slidingDragButton.panelHeight
             }
         }
     }
