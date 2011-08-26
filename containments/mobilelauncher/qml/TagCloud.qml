@@ -18,6 +18,8 @@
 */
 
 import QtQuick 1.0
+import org.kde.plasma.core 0.1 as PlasmaCore
+import "categories.js" as Categories
 
 
 Flickable {
@@ -27,6 +29,19 @@ Flickable {
     contentHeight: tagFlow.height
     opacity: (searchField.searchQuery == "")?1:0.3
     clip: true
+
+
+    PlasmaCore.DataSource {
+        id: categoriesSource
+        engine: "org.kde.active.apps"
+        connectedSources: ["Categories"]
+        interval: 0
+    }
+    PlasmaCore.DataModel {
+        id: categoriesModel
+        keyRoleFilter: ".*"
+        dataSource: categoriesSource
+    }
 
     anchors {
         left: parent.left
@@ -49,7 +64,8 @@ Flickable {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    appModel.shownCategories = Array()
+                    appsSource.connectedSources = ["Apps"]
+                    Categories.activeCategories = new Array()
                     for (var i=0; i<tagFlow.children.length; ++i ) {
                         var child = tagFlow.children[i]
                         if (child.font) {
@@ -62,33 +78,37 @@ Flickable {
         }
 
         Repeater {
-            model: appModel.allCategories
+            model: categoriesModel
             Text {
                 id: tagDelegate
-                text: display
-                font.pointSize: 8+(Math.min(weight*4, 40)/2)
+                text: name
+                font.pointSize: 8+(Math.min(items*4, 40)/2)
                 color: theme.textColor
 
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        var categories = appModel.shownCategories
-                        if (categories.indexOf(display) > -1) {
+                        if (Categories.activeCategories.indexOf(name) > -1) {
                             j = 0;
-                            while (j < categories.length) {
-                                if (categories[j] == display) {
-                                    categories.splice(j, 1);
+                            while (j < Categories.activeCategories.length) {
+                                if (Categories.activeCategories[j] == name) {
+                                    Categories.activeCategories.splice(j, 1);
                                 } else {
                                     j++;
                                 }
                             }
                             tagDelegate.font.bold = false
                         } else {
-                            categories[categories.length] = display
+                            Categories.activeCategories[Categories.activeCategories.length] = name
                             tagDelegate.font.bold = true
                         }
-                        appModel.shownCategories = categories
-                        everythingTag.font.bold = (categories.length == 0)
+
+                        if (Categories.activeCategories.length > 0) {
+                            appsSource.connectedSources = ["Apps:"+Categories.activeCategories.join("|")]
+                        } else {
+                            appsSource.connectedSources = ["Apps"]
+                        }
+                        everythingTag.font.bold = (Categories.activeCategories.length == 0)
                     }
                 }
             }

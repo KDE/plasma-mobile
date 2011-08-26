@@ -45,6 +45,31 @@ Item {
         id:tagCloud
     }
 
+
+    PlasmaCore.DataSource {
+        id: appsSource
+        engine: "org.kde.active.apps"
+        connectedSources: ["Apps"]
+        interval: 0
+    }
+    PlasmaCore.DataModel {
+        id: appsModel
+        keyRoleFilter: ".*"
+        dataSource: appsSource
+    }
+
+    PlasmaCore.DataSource {
+        id: runnerSource
+        engine: "org.kde.runner"
+        interval: 0
+    }
+    PlasmaCore.DataModel {
+        id: runnerModel
+        keyRoleFilter: ".*"
+        dataSource: runnerSource
+    }
+
+
     MobileComponents.ViewSearch {
         id: searchField
 
@@ -56,9 +81,9 @@ Item {
 
         onSearchQueryChanged: {
             if (searchQuery == "") {
-                runnerModel.setQuery(runnerModel.defaultQuery)
+                runnerSource.connectedSources = []
             } else {
-                runnerModel.setQuery(searchQuery)
+                runnerSource.connectedSources = [searchQuery]
             }
         }
     }
@@ -67,20 +92,33 @@ Item {
         id: appGrid
         delegateWidth: 128
         delegateHeight: 100
-        model: (searchField.searchQuery == "")?appModel:runnerModel
+        model: (searchField.searchQuery == "")?appsModel:runnerModel
         delegate: Component {
             MobileComponents.ResourceDelegate {
                 width: appGrid.delegateWidth
                 height: appGrid.delegateHeight
                 className: "FileDataObject"
                 genericClassName: "FileDataObject"
-                property string label: display
-                property string mimeType: "application/x-desktop"
+                property string label: model["name"]?model["name"]:model["text"]
+                property string mimeType: model["mimeType"]?model["mimeType"]:"application/x-desktop"
                 onPressed: {
-                    resourceInstance.uri = resourceUri
+                    resourceInstance.uri = model["resourceUri"]?model["resourceUri"]:model["entryPath"]
                 }
                 onClicked: {
-                    appsView.clicked(url)
+                    //showing apps model?
+                    if (searchField.searchQuery == "") {
+                        var service = appsSource.serviceForSource(appsSource.connectedSources[0])
+                        var operation = service.operationDescription("launch")
+
+                        operation["Path"] = model["entryPath"]
+                        service.startOperationCall(operation)
+                    } else {
+                        var service = runnerSource.serviceForSource(runnerSource.connectedSources[0])
+                        var operation = service.operationDescription("run")
+
+                        operation["id"] = model["id"]
+                        service.startOperationCall(operation)
+                    }
                 }
 
             }
