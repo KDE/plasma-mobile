@@ -1,5 +1,6 @@
 /*
  * Copyright 2009 Chani Armitage <chani@kde.org>
+ * Copyright 2011 Marco Martin <mart@kde.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Library General Public License version 2 as
@@ -16,8 +17,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef TASKSERVICE_H
-#define TASKSERVICE_H
+#ifndef APPSSERVICE_H
+#define APPSSERVICE_H
 
 // plasma
 #include <Plasma/Service>
@@ -45,4 +46,4 @@ class AppService : public Plasma::Service
         AppSource *m_source;
 };
 
-#endif // TASKSERVICE_H
+#endif // APPSSERVICE_H
