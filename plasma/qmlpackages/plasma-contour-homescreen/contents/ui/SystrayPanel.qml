@@ -162,7 +162,7 @@ Item {
             PropertyAnimation {
                 properties: "y"
                 duration: 250
-                easing.type: Easing.InOutQuad
+                easing.type: Easing.OutQuad
             }
         }
     ]
