@@ -38,13 +38,15 @@ RunnerSource::RunnerSource(const QString &name, QObject *parent)
         m_runners = names.last().split('|');
     }
 
+    //one for each source is a waste, but we can need different queries ran at once with different runners
+    m_runnerManager = new Plasma::RunnerManager(this);
+
     QString runner;
     if (m_runners.count() == 1) {
         runner = m_runners.first();
+    } else if (m_runners.count() > 1) {
+        m_runnerManager->setAllowedRunners(m_runners);
     }
-
-    //one for each source is a waste, but we can need different queries ran at once with different runners
-    m_runnerManager = new Plasma::RunnerManager(this);
 
     connect(m_runnerManager,
             SIGNAL(matchesChanged (const QList< Plasma::QueryMatch > & )),
