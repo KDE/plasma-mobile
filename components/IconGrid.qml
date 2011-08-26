@@ -115,7 +115,6 @@ Item {
 
 
                 Rectangle {
-                    anchors.verticalCenter: dotsRow.verticalCenter
                     width: 6
                     height: 6
                     scale: appsView.currentIndex == index ? 1.5 : 1
