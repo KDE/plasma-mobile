@@ -22,7 +22,7 @@ import Qt 4.7
 Item {
     id: plasmoidContainer
 
-    property QGraphicsWidget plasmoid
+    property QtObject plasmoid
     onPlasmoidChanged: {
         plasmoidContainer.plasmoid.parent = plasmoidContainer
         plasmoidContainer.plasmoid.x=0
