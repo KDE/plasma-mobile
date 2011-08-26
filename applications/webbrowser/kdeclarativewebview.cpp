@@ -290,6 +290,11 @@ void KDeclarativeWebView::init()
     d->view = new GraphicsWebView(this);
     d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
+#ifndef NO_KIO
+    KIO::AccessManager *access = new KIO::AccessManager( this );
+    wp->setNetworkAccessManager(access);
+#endif
+
     wp->setForwardUnsupportedContent(true);
     setPage(wp);
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
@@ -300,7 +305,12 @@ void KDeclarativeWebView::init()
 void KDeclarativeWebView::componentComplete()
 {
     QDeclarativeItem::componentComplete();
+#ifndef NO_KIO
+    KIO::AccessManager *access = new KIO::AccessManager( this );
+    page()->setNetworkAccessManager(access);
+#else
     page()->setNetworkAccessManager(qmlEngine(this)->networkAccessManager());
+#endif
 
     switch (d->pending) {
     case KDeclarativeWebViewPrivate::PendingUrl:
