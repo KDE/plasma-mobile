@@ -83,17 +83,14 @@ Rectangle {
         onClicked: disappearAnimation.running = true
     }
 
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        interval: 0
-    }
+
     Timer {
        id: queryTimer
        running: true
        repeat: false
        interval: 1000
        onTriggered: {
+            resultsGrid.model = metadataModel
             if (searchBox.searchQuery) {
                 metadataSource.connectedSources = [searchBox.searchQuery]
                 resultsContainer.contentY = 0
@@ -102,6 +99,14 @@ Rectangle {
             }
             selectedModel.clear()
        }
+    }
+
+
+
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.metadata"
+        interval: 0
     }
 
     PlasmaCore.DataModel {
@@ -113,6 +118,23 @@ Rectangle {
     ListModel {
         id: selectedModel
     }
+
+
+
+    property QtObject model: appsModel
+    PlasmaCore.DataSource {
+        id: appsSource
+        engine: "org.kde.active.apps"
+        connectedSources: ["Apps"]
+        interval: 0
+    }
+
+    PlasmaCore.DataModel {
+        id: appsModel
+        keyRoleFilter: ".*"
+        dataSource: appsSource
+    }
+
 
     PlasmaCore.FrameSvgItem {
         id: dialog
@@ -225,6 +247,8 @@ Rectangle {
                             width: 130
                             height: 120
                             infoLabelVisible: false
+                            //those two are to make appModel work
+                            property string label: model["label"]?model["label"]:model["name"]
 
                             onClicked: {
 
@@ -238,11 +262,12 @@ Rectangle {
                                 }
 
                                 var item = new Object
-                                for (i in model) {
-                                    if (i != "index") {
-                                        item[i] = model[i]
-                                    }
+                                item["resourceUri"] = model["resourceUri"]
+                                //this is to make AppModel work
+                                if (!item["resourceUri"]) {
+                                    item["resourceUri"] = model["entryPath"]
                                 }
+
                                 selectedModel.append(item)
                                 highlightFrame.opacity = 1
                             }
@@ -278,6 +303,11 @@ Rectangle {
                     height: resultsContainer.height
 
                     model: ListModel {
+                        ListElement {
+                            name: "Apps"
+                            className: "_Apps"
+                            hasSymbol: "application-x-executable"
+                        }
                         ListElement {
                             name: "Bookmarks"
                             className: "Bookmark"
@@ -327,7 +357,12 @@ Rectangle {
                                 if (model["className"] == "_PlasmaWidgets") {
                                     main.addAction.trigger()
                                     main.destroy()
+                                } else if (model["className"] == "_Apps") {
+                                    resultsGrid.model = appsModel
+
+                                    resultsContainer.contentY = 0
                                 } else {
+                                    resultsGrid.model = metadataModel
                                     metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
                                     resultsContainer.contentY = 0
                                 }
