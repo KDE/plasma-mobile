@@ -49,8 +49,9 @@ Item {
                     if (model["iconName"]) {
                         icon = QIcon(model["iconName"])
                         return
+                    //assume model["icon"] is a QIcon
                     } else if (model["icon"]) {
-                        icon = QIcon(model["icon"])
+                        icon = model["icon"]
                         return
                     }
                     if (!model["hasSymbol"] && decoration) {
