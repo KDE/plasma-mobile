@@ -45,24 +45,26 @@ plugin=org.kde.active.powerbutton
 zvalue=0
 
 [Containments][9][Applets][10]
-geometry=2,0,64,48
-immutability=1
-plugin=org.kde.active.notifications
-
-[Containments][9][Applets][11]
-geometry=16,4,28.2857142857143,24
+geometry=2,4,28.2857142857143,24
 immutability=1
 plugin=notifier
+
+[Containments][9][Applets][11]
+geometry=16,4,24,24
+immutability=1
+plugin=battery
 
 [Containments][9][Applets][12]
 geometry=49,4,24,24
 immutability=1
-plugin=battery
+plugin=org.kde.networkmanagement
 
 [Containments][9][Applets][13]
-geometry=60,4,24,24
+geometry=60,0,64,48
 immutability=1
-plugin=org.kde.networkmanagement
+plugin=org.kde.active.notifications
+
+
 
 [Containments][9][Applets][14]
 geometry=90,4,120,24
