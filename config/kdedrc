@@ -1,0 +1,7 @@
+[General]
+#CheckSycoca=false
+#CheckUpdates=false
+
+[Module-kpackagekitd]
+autoload=false
+

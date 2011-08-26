@@ -1,0 +1,11 @@
+[Desktop Entry]
+X-SuSE-translate=true
+Exec=sleep 3 ; plasma-contour
+X-DBUS-StartupType=wait
+Name=Plasma Active Contour Shell
+Type=Service
+X-KDE-StartupNotify=false
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=0
+
+

@@ -1,0 +1,22 @@
+[$Version]
+update_info=kded.upd:kde3.0,kwin.upd:kde3.2Xinerama,mouse_cursor_theme.upd:kde3.4.99,kaccel.upd:kde3.3/r1
+
+[General]
+BrowserApplication[$d]=active-webbrowser
+XftAntialias=true
+XftHintStyle=hintmedium
+XftSubPixel=rgb
+desktopFont=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
+fixed=Droid Sans Mono,12,-1,5,50,0,0,0,0,0
+font=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
+menuFont=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
+smallestReadableFont=Droid Sans Fallback,10,-1,5,50,0,0,0,0,0
+taskbarFont=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
+toolBarFont=Droid Sans Fallback,11,-1,5,50,0,0,0,0,0
+
+[KDE]
+ShowDeleteCommand=false
+SingleClick=false
+
+[WM]
+activeFont=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0

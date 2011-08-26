@@ -1,0 +1,57 @@
+[ActiveShadow]
+InnerColor=112,239,255
+OuterColor=84,167,240
+Size=40
+UseOuterColor=true
+VerticalOffset=0.1
+
+[InactiveShadow]
+InnerColor=0,0,0
+OuterColor=0,0,0
+Size=40
+UseOuterColor=false
+VerticalOffset=0.2
+
+[Style]
+ScrollBarWidth=30
+
+[Windeco]
+AnimateTitleChange=true
+BlendColor=Radial Gradient
+ButtonSize=Huge
+DrawSeparator=false
+DrawTitleOutline=false
+FrameBorder=Tiny
+ShadowCacheMode=Variable
+ShadowMode=Use Oxygen Shadows
+SizeGripMode=Show Extra Size Grip When Needed
+TabsEnabled=true
+TitleAlignment=Center
+UseAnimations=true
+UseDropShadows=true
+UseNarrowButtonSpacing=false
+UseOxygenShadows=true
+
+[Windeco Exception 0]
+AnimateTitleChange=true
+AnimationsDuration=150
+BlendColor=Solid Color
+ButtonSize=Normal
+DrawSeparator=false
+DrawTitleOutline=false
+Enabled=true
+FrameBorder=Tiny
+HideTitleBar=false
+Mask=32
+Pattern=(Firefox)|(Thunderbird)|(Gimp)
+SeparatorActiveOnly=false
+ShadowCacheMode=Variable
+ShadowMode=Use Oxygen Shadows
+SizeGripMode=Show Extra Size Grip When Needed
+TabsEnabled=true
+TitleAlignment=Center
+Type=Window Class Name
+UseAnimations=true
+UseDropShadows=true
+UseNarrowButtonSpacing=false
+UseOxygenShadows=true
