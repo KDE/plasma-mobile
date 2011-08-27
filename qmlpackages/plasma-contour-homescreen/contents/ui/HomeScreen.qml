@@ -36,7 +36,6 @@ Item {
     signal newActivityRequested
     state : "Normal"
     signal transformingChanged(bool transforming)
-    property bool locked: true
 
     property QtObject activeWallpaper
     onActiveWallpaperChanged: {
@@ -80,14 +79,6 @@ Item {
         state = "Normal"
         transformingChanged(false);
         switcher.current=0
-    }
-
-    onLockedChanged: {
-        if (locked) {
-            lockScreenItem.opacity = 1
-        } else {
-            lockScreenItem.opacity = 0
-        }
     }
 
     PlasmaCore.Theme {
@@ -271,9 +262,5 @@ Item {
     LockScreen {
         id: lockScreenItem
         anchors.fill: parent
-
-        onUnlocked: {
-            homeScreen.locked = false
-        }
     }
 }

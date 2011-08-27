@@ -28,8 +28,6 @@ Rectangle {
     height: 600
     color: Qt.rgba(0, 0, 0, 0.8)
 
-    signal unlocked();
-
     PlasmaCore.Theme {
         id: theme
     }
@@ -38,32 +36,26 @@ Rectangle {
         NumberAnimation {duration: 250}
     }
 
-    Rectangle {
+    Item {
         id: lockArea
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         height: 120
-        color: Qt.rgba(0, 0, 0, 0.8)
     }
 
-    Rectangle {
+    Item {
         id: unlockArea
         anchors.top: lockArea.bottom
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        color: Qt.rgba(0, 0, 0, 0.8)
-        border.color: Qt.rgba(0, 0, 0, 0.8)
-        border.width: 0
 
-        property bool unlock: (locker.x > unlockArea.x && locker.y > unlockArea.y) &&
-            (locker.x < unlockArea.width && locker.y < unlockArea.height);
 
         Text {
             id: unlockText
-            text: "Drag here to unlock"
-            color: theme.textColor
+            text: i18n("Drag here to unlock")
+            color: "white"
             anchors.centerIn: parent
             font.pixelSize: 36
             font.family: theme.font.family
@@ -75,44 +67,12 @@ Rectangle {
             font.strikeout: theme.font.strikeOut
             font.wordSpacing: theme.font.wordSpacing
             opacity: 0
-            states: [
-                State {
-                    name: "active"
-                    when: (locker.state == "unlock")
-                    PropertyChanges {
-                        target: unlockText
-                        opacity: 1
-                    }
-                }
-            ]
 
             Behavior on opacity {
                 NumberAnimation { duration: 200 }
             }
         }
 
-        states: [
-            State {
-                name: "active"
-                when: (locker.state == "unlock") && (!unlockArea.unlock)
-                PropertyChanges {
-                    target: unlockArea
-                    border.color: theme.textColor
-                    border.width: 5
-                }
-            },
-            State {
-                name: "unlock"
-                when: (locker.state == "unlock") && (unlockArea.unlock)
-                PropertyChanges {
-                    target: unlockArea
-                    color: theme.textColor
-                    opacity: 0.7
-                    border.color: theme.textColor
-                    border.width: 15
-                }
-            }
-        ]
     }
 
     Rectangle {
@@ -126,6 +86,7 @@ Rectangle {
         radius: 10
         width: 62
         height: 62
+        state: "default"
 
         Rectangle {
             id: halo
@@ -133,34 +94,7 @@ Rectangle {
             radius: 10
             color: theme.textColor
             opacity: 0
-
-            Timer {
-                id: haloTimer
-                // 2 minutes to turn off the halo
-                // ### TODO: take this from config file
-                interval: 2 * 60 * 1000
-                running: true
-                onTriggered: {
-                    halo.visible = false
-                }
-            }
-
-            SequentialAnimation on opacity {
-                running: (locker.state != "unlock")
-                loops: Animation.Infinite
-                NumberAnimation {
-                    to: 1
-                    duration: 1000
-                    easing.type: Easing.InOutQuad
-                }
-                NumberAnimation {
-                    to: 0
-                    duration: 1000
-                    easing.type: Easing.InOutQuad
-                }
-            }
         }
-
 
         QIconItem {
             id: lockerImage
@@ -170,51 +104,69 @@ Rectangle {
             icon: QIcon("object-locked")
         }
 
+        MouseArea {
+            anchors.fill: locker
+            drag.target: locker
+            onPressed: {
+                locker.state = "drag"
+            }
+
+            onReleased: {
+                var pos = (locker.x > unlockArea.x && locker.y > unlockArea.y);
+                var size = (locker.x < unlockArea.width && locker.y < unlockArea.height);
+
+                if (pos && size) {
+                    lockScreen.state = "unlock"
+                }
+
+                locker.state = "default"
+            }
+        }
+
         states: [
             State {
-                name: "unlock"
+                name: "drag"
                 PropertyChanges {
                     target: locker
-                    anchors.right: undefined
                     anchors.bottom: undefined
-                    color: theme.textColor
+                    anchors.right: undefined
                 }
                 PropertyChanges {
                     target: lockerImage
                     icon: QIcon("object-unlocked")
                 }
+                PropertyChanges {
+                    target: unlockText
+                    opacity: 0.6
+                }
+            },
+            State {
+                name: "default"
+                PropertyChanges {
+                    target: locker
+                    anchors.bottom: lockArea.bottom
+                    anchors.right: lockArea.right
+                }
+                PropertyChanges {
+                    target: lockerImage
+                    icon: QIcon("object-locked")
+                }
+                PropertyChanges {
+                    target: unlockText
+                    opacity: 0
+                }
             }
         ]
     }
 
-    MouseArea {
-        // this is the item that will properly lock
-        // the screen as it will grab all the events
-        anchors.fill: parent
-        onPressed: {
-            halo.visible = true;
-            haloTimer.running = true;
-        }
-    }
-
-    MouseArea {
-        anchors.fill: locker
-        drag.target: locker
-        onPressed: {
-            locker.state = "unlock"
-        }
-
-        onReleased: {
-            var pos = (locker.x > unlockArea.x && locker.y > unlockArea.y);
-            var size = (locker.x < unlockArea.width && locker.y < unlockArea.height);
-
-            if (pos && size) {
-                unlocked();
+    states: [
+        State {
+            name: "unlock"
+            PropertyChanges {
+                target: lockScreen
+                opacity: 0
             }
-
-            // give some time to restore default state?
-            locker.state = "default"
         }
-    }
+    ]
 }
 
