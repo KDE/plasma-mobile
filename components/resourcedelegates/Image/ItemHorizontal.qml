@@ -35,6 +35,10 @@ Item {
         interval: 0
         Component.onCompleted: {
             pmSource.connectedSources = [url]
+            if (previewFrame.visible = data[url] == undefined) {
+                previewFrame.visible = false
+                return
+            }
             previewFrame.visible = data[url]["status"] == "done"
             iconItem.visible = !previewFrame.visible
             previewImage.image = data[url]["thumbnail"]
