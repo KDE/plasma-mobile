@@ -71,6 +71,7 @@ public:
       , newWindowComponent(0)
       , newWindowParent(0)
       , rendering(true)
+      , wallet(0)
     {
     }
 
