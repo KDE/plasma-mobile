@@ -38,18 +38,22 @@ Rectangle {
 
     Item {
         id: lockArea
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
         height: 120
     }
 
     Item {
         id: unlockArea
-        anchors.top: lockArea.bottom
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors {
+            top: parent.top
+            bottom: lockArea.top
+            left: parent.left
+            right: parent.right
+        }
 
 
         Text {
@@ -75,51 +79,36 @@ Rectangle {
 
     }
 
-    Rectangle {
-        id: locker
-        anchors.bottom: lockArea.bottom
-        anchors.topMargin: 10
-        anchors.right: lockArea.right
-        anchors.rightMargin: 20
-        color: theme.backgroundColor
-        opacity: 0.8
-        radius: 10
-        width: 62
-        height: 62
+
+    Image {
+        id: lockerImage
+        width: 64
+        height: 64
+        source: homeScreenPackage.filePath("images", "unlock-normal.png")
         state: "default"
 
-        Rectangle {
-            id: halo
-            anchors.fill: locker
-            radius: 10
-            color: theme.textColor
-            opacity: 0
-        }
-
-        QIconItem {
-            id: lockerImage
-            width: 48
-            height: 48
-            anchors.centerIn: parent
-            icon: QIcon("object-locked")
+        anchors {
+            bottom: lockArea.bottom
+            topMargin: 10
+            horizontalCenter: lockArea.horizontalCenter
         }
 
         MouseArea {
-            anchors.fill: locker
-            drag.target: locker
+            anchors.fill: parent
+            drag.target: parent
             onPressed: {
-                locker.state = "drag"
+                lockerImage.state = "drag"
             }
 
             onReleased: {
-                var pos = (locker.x > unlockArea.x && locker.y > unlockArea.y);
-                var size = (locker.x < unlockArea.width && locker.y < unlockArea.height);
+                var pos = (lockerImage.x > unlockArea.x && lockerImage.y > unlockArea.y);
+                var size = (lockerImage.x < unlockArea.width && lockerImage.y < unlockArea.height);
 
                 if (pos && size) {
                     lockScreen.state = "unlock"
                 }
 
-                locker.state = "default"
+                lockerImage.state = "default"
             }
         }
 
@@ -127,13 +116,10 @@ Rectangle {
             State {
                 name: "drag"
                 PropertyChanges {
-                    target: locker
-                    anchors.bottom: undefined
-                    anchors.right: undefined
-                }
-                PropertyChanges {
                     target: lockerImage
-                    icon: QIcon("object-unlocked")
+                    anchors.bottom: undefined
+                    horizontalCenter: undefined
+                    source: homeScreenPackage.filePath("images", "unlock-pressed.png")
                 }
                 PropertyChanges {
                     target: unlockText
@@ -143,13 +129,10 @@ Rectangle {
             State {
                 name: "default"
                 PropertyChanges {
-                    target: locker
-                    anchors.bottom: lockArea.bottom
-                    anchors.right: lockArea.right
-                }
-                PropertyChanges {
                     target: lockerImage
-                    icon: QIcon("object-locked")
+                    anchors.bottom: lockArea.bottom
+                    horizontalCenter: lockArea.horizontalCenter
+                    source: homeScreenPackage.filePath("images", "unlock-normal.png")
                 }
                 PropertyChanges {
                     target: unlockText
@@ -158,6 +141,7 @@ Rectangle {
             }
         ]
     }
+
 
     states: [
         State {
