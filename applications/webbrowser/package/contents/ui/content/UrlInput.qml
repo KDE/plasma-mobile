@@ -106,23 +106,13 @@ Item {
         }
     }
 
-    PlasmaCore.FrameSvgItem {
+    CompletionPopup {
         id: completionPopup
         height: 200
         visible: false
         anchors.top: urlText.bottom
         anchors.left: urlText.left
         anchors.right: urlText.right
-
-        imagePath: "widgets/frame"
-        prefix: "raised"
-        /*
-        Rectangle {
-            anchors.fill: parent
-            color: QColor("green")
-        }
-
-        */
     }
 
     QIconItem {
