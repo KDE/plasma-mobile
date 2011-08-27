@@ -1,15 +1,5 @@
 [Desktop Entry]
-Name=Active Web Browser
-Name[et]=Aktiivne veebibrauser
-Name[fr]=Navigateur web actif
-Name[km]=កម្មវិធី​រុករក​បណ្ដាញ​សកម្ម
-Name[nl]=Actieve webbrowser
-Name[pl]=Aktywna przeglądarka internetowa
-Name[pt]=Navegador Web Activo
-Name[pt_BR]=Navegador Web ativo
-Name[sv]=Aktiv webbläsare
-Name[uk]=Активний переглядач інтернету
-Name[x-test]=xxActive Web Browserxx
+Name=Browser
 GenericName=Web Browser
 GenericName[et]=Veebibrauser
 GenericName[fr]=Navigateur web
@@ -35,7 +25,7 @@ Comment[uk]=Програма для перегляду інтернету для
 Comment[x-test]=xxA web browser reader for touch tabletsxx
 Exec=active-webbrowser -graphicssystem raster %u
 Terminal=false
-Icon=internet-web-browser
+Icon=active-web-browser
 Type=Application
 Categories=Qt;KDE;Network;WebBrowser;
 X-KDE-PluginInfo-Website=http://community.kde.org/Plasma/Active

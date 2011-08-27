@@ -27,6 +27,14 @@
 
 #include <Plasma/RunnerManager>
 
+Plasma::RunnerManager * s_runnerManager = NULL;
+Plasma::RunnerManager * runnerManagerInstance() {
+    if (s_runnerManager == NULL) {
+        s_runnerManager = new Plasma::RunnerManager();
+    }
+    return s_runnerManager;
+}
+
 RunnerSource::RunnerSource(const QString &name, QObject *parent)
     : Plasma::DataContainer(parent)
 {
@@ -38,24 +46,21 @@ RunnerSource::RunnerSource(const QString &name, QObject *parent)
         m_runners = names.last().split('|');
     }
 
-    //one for each source is a waste, but we can need different queries ran at once with different runners
-    m_runnerManager = new Plasma::RunnerManager(this);
-
     QString runner;
     if (m_runners.count() == 1) {
         runner = m_runners.first();
     } else if (m_runners.count() > 1) {
-        m_runnerManager->setAllowedRunners(m_runners);
+        runnerManagerInstance()->setAllowedRunners(m_runners);
     }
 
-    connect(m_runnerManager,
+    connect(runnerManagerInstance(),
             SIGNAL(matchesChanged (const QList< Plasma::QueryMatch > & )),
             this,
             SLOT(matchesChanged (const QList< Plasma::QueryMatch > & )));
 
-    m_runnerManager->reset();
+    runnerManagerInstance()->reset();
 
-    m_runnerManager->launchQuery(m_query, runner);
+    runnerManagerInstance()->launchQuery(m_query, runner);
 }
 
 RunnerSource::~RunnerSource()
@@ -76,7 +81,7 @@ void RunnerSource::matchesChanged(const QList< Plasma::QueryMatch > &m)
 
         QString resourceUri;
         QString mimeType;
-        QMimeData *mimeData = m_runnerManager->mimeDataForMatch(match.id());
+        QMimeData *mimeData = runnerManagerInstance()->mimeDataForMatch(match.id());
         if (mimeData) {
             if (!mimeData->formats().isEmpty()) {
                 mimeType = mimeData->formats().first();
@@ -102,7 +107,7 @@ void RunnerSource::matchesChanged(const QList< Plasma::QueryMatch > &m)
 
 Plasma::RunnerManager *RunnerSource::runnerManager() const
 {
-    return m_runnerManager;
+    return runnerManagerInstance();
 }
 
 #include "runnersource.moc"
