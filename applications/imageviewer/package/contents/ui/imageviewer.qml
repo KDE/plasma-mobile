@@ -23,15 +23,21 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 import Qt.labs.gestures 1.0
 
-Rectangle {
+Image {
     id: imageViewer
     objectName: "imageViewer"
-    color: "#ddd"
+    source: viewerPackage.filePath("images", "fabrictexture.png")
+    fillMode: Image.Tile
 
     width: 360
     height: 360
 
     property bool firstRun: true
+
+    MobileComponents.Package {
+        id: viewerPackage
+        name: "org.kde.active.imageviewer"
+    }
 
     MobileComponents.ResourceInstance {
         id: resourceInstance
@@ -86,21 +92,92 @@ Rectangle {
             firstRunTimer.restart()
         }
     }
-    PlasmaCore.DataModel {
-        id: metadataModel
-        keyRoleFilter: ".*"
-        dataSource: metadataSource
+    PlasmaCore.SortFilterModel {
+        id: filterModel
+        sourceModel: PlasmaCore.DataModel {
+            id: metadataModel
+            keyRoleFilter: ".*"
+            dataSource: metadataSource
+        }
+        filterRole: "label"
+    }
+
+    Timer {
+       id: queryTimer
+       running: true
+       repeat: false
+       interval: 1000
+       onTriggered: {
+            filterModel.filterRegExp = ".*"+searchBox.searchQuery+".*"
+       }
+    }
+
+
+    PlasmaCore.FrameSvgItem {
+        id: toolbar
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+        height: childrenRect.height + margins.bottom
+        imagePath: "widgets/frame"
+        prefix: "raised"
+        enabledBorders: "BottomBorder"
+        z: 9000
+        Behavior on y {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+        
+        QIconItem {
+            icon: QIcon("go-previous")
+            width: 48
+            height: 48
+            opacity: viewer.scale==1?1:0
+            anchors.verticalCenter: parent.verticalCenter
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: viewer.scale = 0
+            }
+        }
+        MobileComponents.ViewSearch {
+            id: searchBox
+            anchors {
+                left: parent.left
+                right:parent.right
+                top:parent.top
+            }
+            onSearchQueryChanged: {
+                queryTimer.running = true
+            }
+            opacity: viewer.scale==1?0:1
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
     }
 
     MobileComponents.IconGrid {
         id: resultsGrid
         anchors {
             fill: parent
+            topMargin: toolbar.height
         }
 
         Component.onCompleted: resultsContainer.contentY = resultsContainer.height
         height: resultsContainer.height
-        model: metadataModel
+        model: filterModel
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
             width: 130
@@ -116,6 +193,12 @@ Rectangle {
     Rectangle {
         id: viewer
         scale: startupArguments[0].length > 0?1:0
+        //FIXME: use states
+        onScaleChanged: {
+            if (scale == 1) {
+                toolbar.y = -toolbar.height
+            }
+        }
         color: "#ddd"
         anchors {
             fill:  parent
@@ -147,24 +230,6 @@ Rectangle {
 
             onCurrentIndexChanged: resourceInstance.uri = currentItem.source
             visible: false
-        }
-    }
-
-
-    QIconItem {
-        icon: QIcon("go-previous")
-        width: 48
-        height: 48
-        opacity: viewer.scale==1?1:0
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: viewer.scale = 0
         }
     }
 }
