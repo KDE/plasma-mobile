@@ -55,6 +55,10 @@ QueryContainer::QueryContainer(const Nepomuk::Query::Query &query, QObject *pare
     m_addWatcherTimer = new QTimer(this);
     m_addWatcherTimer->setSingleShot(true);
     connect(m_addWatcherTimer, SIGNAL(timeout()), this, SLOT(addWatcherDelayed()));
+
+    m_addResourcesTimer = new QTimer(this);
+    m_addResourcesTimer->setSingleShot(true);
+    connect(m_addResourcesTimer, SIGNAL(timeout()), this, SLOT(addResourcesDelayed()));
 }
 
 QueryContainer::~QueryContainer()
@@ -92,9 +96,19 @@ void QueryContainer::newEntries(const QList< Nepomuk::Query::Result >& entries)
     foreach (Nepomuk::Query::Result res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
-        Nepomuk::Resource resource = res.resource();
+        m_resourcesToAdd << res.resource();
+    }
+    m_addResourcesTimer->start(250);
+    checkForUpdate();
+}
+
+void QueryContainer::addResourcesDelayed()
+{
+    foreach (Nepomuk::Resource resource, m_resourcesToAdd) {
         addResource(resource);
     }
+
+    m_resourcesToAdd.clear();
     checkForUpdate();
 }
 
