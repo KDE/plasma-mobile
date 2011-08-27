@@ -33,6 +33,7 @@
 ****************************************************************************/
 
 import QtQuick 1.0
+import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.qtextracomponents 0.1
 
@@ -64,6 +65,12 @@ Item {
 
         onTextChanged: {
             container.urlChanged();
+            print("XXX text changed" + text);
+            if (text != "http://community.kde.org/Plasma/Active") {
+                completionPopup.visible = true;
+            } else {
+                completionPopup.visible = false;
+            }
         }
 
         onReturnPressed: {
@@ -86,12 +93,36 @@ Item {
             webView.focus = true
         }
 
+        /*
+        onFocusInEvent: {
+            print("Print focus: " + focus);
+        }
+        */
         anchors {
             left: parent.left
             right: parent.right
             leftMargin: 8
             rightMargin: 8
         }
+    }
+
+    PlasmaCore.FrameSvgItem {
+        id: completionPopup
+        height: 200
+        visible: false
+        anchors.top: urlText.bottom
+        anchors.left: urlText.left
+        anchors.right: urlText.right
+
+        imagePath: "widgets/frame"
+        prefix: "raised"
+        /*
+        Rectangle {
+            anchors.fill: parent
+            color: QColor("green")
+        }
+
+        */
     }
 
     QIconItem {
