@@ -118,7 +118,7 @@ Rectangle {
                 PropertyChanges {
                     target: lockerImage
                     anchors.bottom: undefined
-                    horizontalCenter: undefined
+                    anchors.horizontalCenter: undefined
                     source: homeScreenPackage.filePath("images", "unlock-pressed.png")
                 }
                 PropertyChanges {
@@ -131,7 +131,7 @@ Rectangle {
                 PropertyChanges {
                     target: lockerImage
                     anchors.bottom: lockArea.bottom
-                    horizontalCenter: lockArea.horizontalCenter
+                    anchors.horizontalCenter: lockArea.horizontalCenter
                     source: homeScreenPackage.filePath("images", "unlock-normal.png")
                 }
                 PropertyChanges {
