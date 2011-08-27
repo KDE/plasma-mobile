@@ -1,15 +1,5 @@
 [Desktop Entry]
-Name=Active Web Browser
-Name[et]=Aktiivne veebibrauser
-Name[fr]=Navigateur web actif
-Name[km]=កម្មវិធី​រុករក​បណ្ដាញ​សកម្ម
-Name[nl]=Actieve webbrowser
-Name[pl]=Aktywna przeglądarka internetowa
-Name[pt]=Navegador Web Activo
-Name[pt_BR]=Navegador Web ativo
-Name[sv]=Aktiv webbläsare
-Name[uk]=Активний переглядач інтернету
-Name[x-test]=xxActive Web Browserxx
+Name=Browser
 GenericName=Web Browser
 GenericName[et]=Veebibrauser
 GenericName[fr]=Navigateur web
