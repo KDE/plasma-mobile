@@ -66,7 +66,7 @@ Item {
         onTextChanged: {
             container.urlChanged();
             print("XXX text changed" + text);
-            if (text != "http://community.kde.org/Plasma/Active") {
+            if (text == "http://community.kde.org/Plasma/Active") {
                 //completionPopup.visible = true;
                 completionPopup.state = "expanded"
             } else {

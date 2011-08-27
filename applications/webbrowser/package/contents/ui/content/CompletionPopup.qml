@@ -30,6 +30,10 @@ Item {
     id: mainItem
     state: "expanded"
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+    
     PlasmaCore.FrameSvgItem {
         id: frame
 
@@ -51,7 +55,30 @@ Item {
             }
         }
         */
+        ListModel {
+            id: myModel
+            ListElement { type: "Dog"; age: 8 }
+            ListElement { type: "Cat"; age: 5 }
+        }
+
+        Component {
+            id: myDelegate
+            Text {
+                text: type + ", " + age
+                color: theme.textColor
+            }
+        }
+
+        ListView {
+            anchors.fill: parent
+            anchors.margins: 16
+            y: 16
+            spacing: 10
+            model: myModel
+            delegate: myDelegate
+        }
     }
+    
 
     Component.onCompleted: {
         print("completer loaded");
