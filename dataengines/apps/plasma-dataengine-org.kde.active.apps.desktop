@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Application Information
+Name[nl]=Programmainformatie
+Name[pt]=Informação da Aplicação
+Name[pt_BR]=Informações do aplicativo
+Name[ug]=پروگرامما ئۇچۇرى
+Name[uk]=Відомості щодо програм
+Name[x-test]=xxApplication Informationxx
 Comment=Information and launching of all applications in the app menu.
+Comment[nl]=Informatie en starten van alle programma's in het progmenu.
+Comment[pt]=Informação e lançamento de todas as aplicações no menu de aplicações.
+Comment[pt_BR]=Informação e inicialização de todos os aplicativos no menu de aplicativos.
+Comment[ug]=ئۇچۇر كۆرسىتىدۇ ياكى تىزىملىكتىكى ھەممە پروگراممىلارنى ئىجرا قىلىدۇ
+Comment[uk]=Відомості і запуск всіх програма з меню програм.
+Comment[x-test]=xxInformation and launching of all applications in the app menu.xx
 Type=Service
 Icon=user-desktop
 
