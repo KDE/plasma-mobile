@@ -57,15 +57,32 @@ Item {
         */
         ListModel {
             id: myModel
-            ListElement { type: "Dog"; age: 8 }
-            ListElement { type: "Cat"; age: 5 }
+            ListElement { type: "Planet KDE"; url: "http://planetkde.org" }
+            ListElement { type: "KDE Dot News"; url: "http://dot.kde.org" }
+            ListElement { type: "Cookie Tes"; url: "http://vizZzion.org/stuff/cookie.php" }
         }
 
         Component {
             id: myDelegate
-            Text {
-                text: type + ", " + age
-                color: theme.textColor
+            Item {
+                height: 24
+                //anchors.fill: parent
+                anchors.margins: 20
+                Text {
+                    height: 24
+                    id: labelText
+                    //anchors.fill: parent
+                    text: "<strong>" + type + "</strong> " + url
+                    color: theme.textColor
+                    MouseArea {
+                        anchors.fill: labelText
+                        onClicked: {
+                            print("URL from completer chosen: " + url);
+                            urlEntered(url);
+                        }
+                    }
+                }
+                
             }
         }
 
@@ -76,6 +93,7 @@ Item {
             spacing: 10
             model: myModel
             delegate: myDelegate
+            highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
         }
     }
     
