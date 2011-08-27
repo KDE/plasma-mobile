@@ -3,7 +3,7 @@ set(active-webbrowser_SRCS
     activewebbrowser.cpp
     activebrowserwindow.cpp
     kdeclarativewebview.cpp
-    bookmark.cpp
+    completionitem.cpp
     completionmodel.cpp
     view.cpp
 )

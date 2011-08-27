@@ -21,8 +21,6 @@
 #ifndef COMPLETIONMODEL_H
 #define COMPLETIONMODEL_H
 
-#include "bookmark.h"
-
 #include <QObject>
 #include <QImage>
 

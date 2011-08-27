@@ -33,34 +33,13 @@ Item {
     PlasmaCore.Theme {
         id: theme
     }
-    
+
     PlasmaCore.FrameSvgItem {
         id: frame
 
         anchors.fill: parent
         imagePath: "widgets/frame"
         prefix: "raised"
-        /*
-        PlasmaCore.DataSource {
-            id: bookmarksSource
-            engine: "org.kde.active.bookmarks"
-            connectedSources: ["bookmarks"]
-
-            onSourceAdded: {
-                print("source added!" + source);
-            }
-
-            Component.onCompleted: {
-                connectSource("all");
-            }
-        }
-        */
-        ListModel {
-            id: myModel
-            ListElement { type: "Planet KDE"; url: "http://planetkde.org" }
-            ListElement { type: "KDE Dot News"; url: "http://dot.kde.org" }
-            ListElement { type: "Cookie Tes"; url: "http://vizZzion.org/stuff/cookie.php" }
-        }
 
         Component {
             id: myDelegate
@@ -71,7 +50,6 @@ Item {
                 Text {
                     height: 24
                     id: labelText
-                    //anchors.fill: parent
                     text: "<strong>" + name + "</strong> " + url
                     color: theme.textColor
                     MouseArea {
@@ -82,7 +60,6 @@ Item {
                         }
                     }
                 }
-                
             }
         }
 

@@ -21,7 +21,6 @@
 #include "view.h"
 #include "kdeclarativewebview.h"
 #include "completionmodel.h"
-#include "bookmark.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>

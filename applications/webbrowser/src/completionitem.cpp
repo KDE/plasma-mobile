@@ -18,46 +18,59 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef BOOKMARK_H
-#define BOOKMARK_H
+#include "completionitem.h"
 
-#include <QObject>
-#include <QImage>
-
-class BookmarkPrivate;
-
-class Bookmark : public QObject
-{
-    Q_OBJECT
-
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-    Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
-    Q_PROPERTY(QImage image READ image WRITE setImage NOTIFY imageChanged)
+class CompletionItemPrivate {
 
 public:
-    Bookmark(const QString &name = QString(),
-             const QString &url = QString(),
-             const QImage &i = QImage(),
-             QObject *parent = 0 );
-    ~Bookmark();
-
-    QString name();
-    QString url();
-    QImage image();
-
-public Q_SLOTS:
-    void setName(const QString &n);
-    void setUrl(const QString &u);
-    void setImage(const QImage &i);
-
-Q_SIGNALS:
-    void nameChanged();
-    void urlChanged();
-    void imageChanged();
-
-private:
-    BookmarkPrivate* d;
-
+    QString name;
+    QString url;
+    QImage image;
 };
 
-#endif // BOOKMARK_H
+
+CompletionItem::CompletionItem(const QString &n, const QString &u, const QImage &i, QObject *parent)
+    : QObject(parent)
+{
+    d = new CompletionItemPrivate;
+    d->name = n;
+    d->url = u;
+    d->image = i;
+}
+
+CompletionItem::~CompletionItem()
+{
+    delete d;
+}
+
+QString CompletionItem::name()
+{
+    return d->name;
+}
+
+QString CompletionItem::url()
+{
+    return d->url;
+}
+
+QImage CompletionItem::image()
+{
+    return d->image;
+}
+
+void CompletionItem::setName(const QString &name)
+{
+    d->name = name;
+}
+
+void CompletionItem::setUrl(const QString &url)
+{
+    d->url = url;
+}
+
+void CompletionItem::setImage(const QImage &image)
+{
+    d->image = image;
+}
+
+#include "completionitem.moc"

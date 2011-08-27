@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "completionmodel.h"
+#include "completionitem.h"
 
 #include "kdebug.h"
 
@@ -50,9 +51,9 @@ QList<QObject*> CompletionModel::items()
 void CompletionModel::populate()
 {
     kDebug() << "populating model...";
-    d->items.append(new Bookmark("Planet KDE", "http://planetkde.org", QImage(), this));
-    d->items.append(new Bookmark("Cookie Test", "http://vizZzion.org", QImage(), this));
-    d->items.append(new Bookmark("G..gle", "http://google.com", QImage(), this));
+    d->items.append(new CompletionItem("Planet KDE", "http://planetkde.org", QImage(), this));
+    d->items.append(new CompletionItem("Cookie Test", "http://vizZzion.org", QImage(), this));
+    d->items.append(new CompletionItem("G..gle", "http://google.com", QImage(), this));
 }
 
 
