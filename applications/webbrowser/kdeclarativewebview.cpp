@@ -45,6 +45,9 @@
 #include <KIO/AccessManager>
 #include <KIO/MetaData>
 #include <KIO/JobUiDelegate>
+#include <KWebWallet>
+#include <KWindowSystem>
+#include <KDebug>
 #include <klocalizedstring.h>
 #include <kactivities/consumer.h>
 
@@ -79,6 +82,7 @@ public:
     int preferredwidth, preferredheight;
     qreal progress;
     KDeclarativeWebView::Status status;
+    KWebWallet *wallet;
     QString statusText;
     enum { PendingNone, PendingUrl, PendingHtml, PendingContent } pending;
     QUrl pendingUrl;
@@ -294,6 +298,13 @@ void KDeclarativeWebView::init()
     KIO::AccessManager *access = new KIO::AccessManager( this );
     wp->setNetworkAccessManager(access);
 #endif
+    KWebPage* kwp = qobject_cast<KWebPage*>(wp);
+    if (kwp) {
+        kDebug() << "KWebPage found";
+        WId wid = KWindowSystem::activeWindow();
+        d->wallet = new KWebWallet(this, wid);
+        kwp->setWallet(d->wallet);
+    }
 
     wp->setForwardUnsupportedContent(true);
     setPage(wp);
@@ -383,6 +394,11 @@ void KDeclarativeWebView::doLoadFinished(bool ok)
     if (ok) {
         d->status = d->url.isEmpty() ? Null : Ready;
         emit loadFinished();
+        if (d->status == Ready) {
+            if (d->wallet) {
+                d->wallet->fillFormData(page()->mainFrame());
+            }
+        }
     } else {
         d->status = Error;
         emit loadFailed();
@@ -1036,7 +1052,7 @@ QRect KDeclarativeWebView::elementAreaAt(int x, int y, int maxWidth, int maxHeig
     \sa KDeclarativeWebView
 */
 QDeclarativeWebPage::QDeclarativeWebPage(KDeclarativeWebView* parent) :
-    KWebPage(parent)
+    KWebPage(parent, KWalletIntegration)
 {
     connect(this, SIGNAL(unsupportedContent(QNetworkReply *)), this, SLOT(handleUnsupportedContent(QNetworkReply *)));
     //TODO: move this in the webbrowser implementation
