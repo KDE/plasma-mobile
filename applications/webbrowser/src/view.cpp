@@ -20,6 +20,8 @@
 
 #include "view.h"
 #include "kdeclarativewebview.h"
+#include "completionmodel.h"
+#include "bookmark.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
@@ -89,6 +91,8 @@ View::View(const QString &url, QWidget *parent)
             this, SLOT(onStatusChanged(QDeclarativeView::Status)));
 
     // TODO: share across windows
+    m_completionModel = new CompletionModel(this);
+
     QStringList bookmarks;
     bookmarks.append("http://planetkde.org");
     bookmarks.append("http://vizZzion.org/stuff/cookie.php");
@@ -120,9 +124,12 @@ bool View::useGL() const
 
 void View::setBookmarks(const QStringList &bookmarks)
 {
+    Q_UNUSED( bookmarks );
     QDeclarativeItem* popup = rootObject()->findChild<QDeclarativeItem*>("completionPopup");
     if (popup) {
-        rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(bookmarks));
+        QList<QObject*> items = m_completionModel->items();
+        kDebug() << "MODEL IS: " << items.count();
+        rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(items));
     }
 }
 

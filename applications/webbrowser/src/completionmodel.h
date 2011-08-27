@@ -36,7 +36,7 @@ public:
     CompletionModel(QObject *parent = 0 );
     ~CompletionModel();
 
-    QList<Bookmark*> data();
+    QList<QObject*> items();
 
 public Q_SLOTS:
     void populate();

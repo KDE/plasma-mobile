@@ -46,8 +46,7 @@ namespace Plasma
 {
     class Package;
 };
-
-class BookmarksModel;
+class CompletionModel;
 
 class View : public QDeclarativeView
 {
@@ -86,7 +85,7 @@ private:
 
     Plasma::Package *m_package;
     bool m_useGL;
-    BookmarksModel* completerModel;
+    CompletionModel* m_completionModel;
 };
 
 #endif // VIEW_H

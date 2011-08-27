@@ -25,7 +25,7 @@
 class CompletionModelPrivate {
 
 public:
-    QList<Bookmark*> items;
+    QList<QObject*> items;
 };
 
 
@@ -33,6 +33,7 @@ CompletionModel::CompletionModel(QObject *parent)
     : QObject(parent)
 {
     d = new CompletionModelPrivate;
+    populate();
 }
 
 CompletionModel::~CompletionModel()
@@ -40,7 +41,7 @@ CompletionModel::~CompletionModel()
     delete d;
 }
 
-QList<Bookmark*> CompletionModel::data()
+QList<QObject*> CompletionModel::items()
 {
     return d->items;
 }

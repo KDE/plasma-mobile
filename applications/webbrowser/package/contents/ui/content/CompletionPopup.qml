@@ -72,13 +72,13 @@ Item {
                     height: 24
                     id: labelText
                     //anchors.fill: parent
-                    text: "<strong>" + modelData + "</strong> "
+                    text: "<strong>" + name + "</strong> " + url
                     color: theme.textColor
                     MouseArea {
                         anchors.fill: labelText
                         onClicked: {
-                            print("URL from completer chosen: " + modelData);
-                            urlEntered(modelData);
+                            print("URL from completer chosen: " + name + " " + url);
+                            urlEntered(url);
                         }
                     }
                 }
