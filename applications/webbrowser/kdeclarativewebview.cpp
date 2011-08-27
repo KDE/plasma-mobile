@@ -304,6 +304,10 @@ void KDeclarativeWebView::init()
         WId wid = KWindowSystem::activeWindow();
         d->wallet = new KWebWallet(this, wid);
         kwp->setWallet(d->wallet);
+        // TODO: hook in some dialog wether the user wants to save the form data
+        // happens unconditionally right now for every form filled in
+        connect(d->wallet, SIGNAL(saveFormDataRequested(const QString &, const QUrl &)),
+            d->wallet, SLOT(acceptSaveFormDataRequest(const QString &)), Qt::UniqueConnection);
     }
 
     wp->setForwardUnsupportedContent(true);
