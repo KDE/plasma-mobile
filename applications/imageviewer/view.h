@@ -43,7 +43,7 @@ class ImageViewer;
 namespace Plasma
 {
     class Package;
-};
+}
 
 class View : public QDeclarativeView
 {
