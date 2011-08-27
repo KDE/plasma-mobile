@@ -72,13 +72,13 @@ Item {
                     height: 24
                     id: labelText
                     //anchors.fill: parent
-                    text: "<strong>" + type + "</strong> " + url
+                    text: "<strong>" + modelData + "</strong> "
                     color: theme.textColor
                     MouseArea {
                         anchors.fill: labelText
                         onClicked: {
-                            print("URL from completer chosen: " + url);
-                            urlEntered(url);
+                            print("URL from completer chosen: " + modelData);
+                            urlEntered(modelData);
                         }
                     }
                 }
@@ -91,7 +91,7 @@ Item {
             anchors.margins: 16
             y: 16
             spacing: 10
-            model: myModel
+            model: bookmarksModel
             delegate: myDelegate
             highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
         }

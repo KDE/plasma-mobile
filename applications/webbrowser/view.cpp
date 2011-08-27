@@ -87,6 +87,14 @@ View::View(const QString &url, QWidget *parent)
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
     connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
             this, SLOT(onStatusChanged(QDeclarativeView::Status)));
+
+    // TODO: share across windows
+    QStringList bookmarks;
+    bookmarks.append("http://planetkde.org");
+    bookmarks.append("http://vizZzion.org/stuff/cookie.php");
+    bookmarks.append("http://dot.kde.org");
+    bookmarks.append("http://lwn.net");
+    setBookmarks(bookmarks);
 }
 
 View::~View()
@@ -108,6 +116,14 @@ void View::setUseGL(const bool on)
 bool View::useGL() const
 {
     return m_useGL;
+}
+
+void View::setBookmarks(const QStringList &bookmarks)
+{
+    QDeclarativeItem* popup = rootObject()->findChild<QDeclarativeItem*>("completionPopup");
+    if (popup) {
+        rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(bookmarks));
+    }
 }
 
 void View::onStatusChanged(QDeclarativeView::Status status)
