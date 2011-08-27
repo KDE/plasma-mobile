@@ -18,59 +18,46 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include "bookmarksmodel.h"
+#ifndef BOOKMARK_H
+#define BOOKMARK_H
 
-class BookmarkPrivate {
+#include <QObject>
+#include <QImage>
+
+class BookmarkPrivate;
+
+class Bookmark : public QObject
+{
+    Q_OBJECT
+
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
+    Q_PROPERTY(QImage image READ image WRITE setImage NOTIFY imageChanged)
 
 public:
-    QString name;
-    QString url;
-    QImage image;
+    Bookmark(const QString &name = QString(),
+             const QString &url = QString(),
+             const QImage &i = QImage(),
+             QObject *parent = 0 );
+    ~Bookmark();
+
+    QString name();
+    QString url();
+    QImage image();
+
+public Q_SLOTS:
+    void setName(const QString &n);
+    void setUrl(const QString &u);
+    void setImage(const QImage &i);
+
+Q_SIGNALS:
+    void nameChanged();
+    void urlChanged();
+    void imageChanged();
+
+private:
+    BookmarkPrivate* d;
+
 };
 
-
-Bookmark::Bookmark(const QString &n, const QString &u, const QImage &i, QObject *parent)
-    : QObject(parent)
-{
-    d = new BookmarkPrivate;
-    d->name = n;
-    d->url = u;
-    d->image = i;
-}
-
-Bookmark::~Bookmark()
-{
-    delete d;
-}
-
-QString Bookmark::name()
-{
-    return d->name;
-}
-
-QString Bookmark::url()
-{
-    return d->url;
-}
-
-QImage Bookmark::image()
-{
-    return d->image;
-}
-
-void Bookmark::setName(const QString &name)
-{
-    d->name = name;
-}
-
-void Bookmark::setUrl(const QString &url)
-{
-    d->url = url;
-}
-
-void Bookmark::setImage(const QImage &image)
-{
-    d->image = image;
-}
-
-#include "bookmarksmodel.moc"
+#endif // BOOKMARK_H

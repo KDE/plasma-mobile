@@ -18,46 +18,41 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef BOOKMARKSMODEL_H
-#define BOOKMARKSMODEL_H
+#include "completionmodel.h"
 
-#include <QObject>
-#include <QImage>
+#include "kdebug.h"
 
-class BookmarkPrivate;
-
-class Bookmark : public QObject
-{
-    Q_OBJECT
-
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-    Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
-    Q_PROPERTY(QImage image READ image WRITE setImage NOTIFY imageChanged)
+class CompletionModelPrivate {
 
 public:
-    Bookmark(const QString &name = QString(),
-             const QString &url = QString(),
-             const QImage &i = QImage(),
-             QObject *parent = 0 );
-    ~Bookmark();
-
-    QString name();
-    QString url();
-    QImage image();
-
-public Q_SLOTS:
-    void setName(const QString &n);
-    void setUrl(const QString &u);
-    void setImage(const QImage &i);
-
-Q_SIGNALS:
-    void nameChanged();
-    void urlChanged();
-    void imageChanged();
-
-private:
-    BookmarkPrivate* d;
-
+    QList<Bookmark*> items;
 };
 
-#endif // BOOKMARKSMODEL_H
+
+CompletionModel::CompletionModel(QObject *parent)
+    : QObject(parent)
+{
+    d = new CompletionModelPrivate;
+}
+
+CompletionModel::~CompletionModel()
+{
+    delete d;
+}
+
+QList<Bookmark*> CompletionModel::data()
+{
+    return d->items;
+}
+
+
+void CompletionModel::populate()
+{
+    kDebug() << "populating model...";
+    d->items.append(new Bookmark("Planet KDE", "http://planetkde.org", QImage(), this));
+    d->items.append(new Bookmark("Cookie Test", "http://vizZzion.org", QImage(), this));
+    d->items.append(new Bookmark("G..gle", "http://google.com", QImage(), this));
+}
+
+
+#include "completionmodel.moc"

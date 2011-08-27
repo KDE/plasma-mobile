@@ -61,6 +61,11 @@ ActiveBrowserWindow::~ActiveBrowserWindow()
 {
 }
 
+View* ActiveBrowserWindow::view()
+{
+    return m_widget;
+}
+
 void ActiveBrowserWindow::closeEvent(QCloseEvent *)
 {
     KConfigGroup config(KGlobal::config(), "Window");

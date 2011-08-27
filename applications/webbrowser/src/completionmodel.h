@@ -18,45 +18,35 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#ifndef COMPLETIONMODEL_H
+#define COMPLETIONMODEL_H
 
-#ifndef ACTIVEBROWSERWINDOW_H
-#define ACTIVEBROWSERWINDOW_H
+#include "bookmark.h"
 
-#include <QMainWindow>
+#include <QObject>
+#include <QImage>
 
-class View;
+class CompletionModelPrivate;
 
-/**
- * This class serves as the main window for the Active Webbrowser.
- *
- * @short Active Webbrowser main window class
- * @author Sebastian Kügler <sebas@kde.org>
- * @version 0.1
- */
-class ActiveBrowserWindow : public QMainWindow
+class CompletionModel : public QObject
 {
     Q_OBJECT
-public:
-    ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
-    virtual ~ActiveBrowserWindow();
-    QString name();
-    QIcon icon();
 
-    void setUseGL(const bool on);
-    bool useGL() const;
-    View* view();
+public:
+    CompletionModel(QObject *parent = 0 );
+    ~CompletionModel();
+
+    QList<Bookmark*> data();
+
+public Q_SLOTS:
+    void populate();
 
 Q_SIGNALS:
-    void newWindow(const QString &url);
-
-protected Q_SLOTS:
-    void setCaption(const QString &caption);
-
-protected:
-    void closeEvent(QCloseEvent *);
+    void dataChanged();
 
 private:
-    View *m_widget;
+    CompletionModelPrivate* d;
+
 };
 
-#endif // REKONQACTIVE_H
+#endif // BOOKMARKSMODEL_H

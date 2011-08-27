@@ -18,45 +18,59 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "bookmark.h"
 
-#ifndef ACTIVEBROWSERWINDOW_H
-#define ACTIVEBROWSERWINDOW_H
+class BookmarkPrivate {
 
-#include <QMainWindow>
-
-class View;
-
-/**
- * This class serves as the main window for the Active Webbrowser.
- *
- * @short Active Webbrowser main window class
- * @author Sebastian Kügler <sebas@kde.org>
- * @version 0.1
- */
-class ActiveBrowserWindow : public QMainWindow
-{
-    Q_OBJECT
 public:
-    ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
-    virtual ~ActiveBrowserWindow();
-    QString name();
-    QIcon icon();
-
-    void setUseGL(const bool on);
-    bool useGL() const;
-    View* view();
-
-Q_SIGNALS:
-    void newWindow(const QString &url);
-
-protected Q_SLOTS:
-    void setCaption(const QString &caption);
-
-protected:
-    void closeEvent(QCloseEvent *);
-
-private:
-    View *m_widget;
+    QString name;
+    QString url;
+    QImage image;
 };
 
-#endif // REKONQACTIVE_H
+
+Bookmark::Bookmark(const QString &n, const QString &u, const QImage &i, QObject *parent)
+    : QObject(parent)
+{
+    d = new BookmarkPrivate;
+    d->name = n;
+    d->url = u;
+    d->image = i;
+}
+
+Bookmark::~Bookmark()
+{
+    delete d;
+}
+
+QString Bookmark::name()
+{
+    return d->name;
+}
+
+QString Bookmark::url()
+{
+    return d->url;
+}
+
+QImage Bookmark::image()
+{
+    return d->image;
+}
+
+void Bookmark::setName(const QString &name)
+{
+    d->name = name;
+}
+
+void Bookmark::setUrl(const QString &url)
+{
+    d->url = url;
+}
+
+void Bookmark::setImage(const QImage &image)
+{
+    d->image = image;
+}
+
+#include "bookmark.moc"
