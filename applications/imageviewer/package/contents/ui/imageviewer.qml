@@ -119,6 +119,9 @@ Image {
             left: parent.left
             right: parent.right
         }
+        signal zoomIn()
+        signal zoomOut()
+
         height: childrenRect.height + margins.bottom
         imagePath: "widgets/frame"
         prefix: "raised"
@@ -163,6 +166,39 @@ Image {
                 NumberAnimation {
                     duration: 250
                     easing.type: Easing.InOutQuad
+                }
+            }
+        }
+
+        PlasmaCore.Svg {
+            id: iconsSvg
+            imagePath: "widgets/configuration-icons"
+        }
+        Row {
+            opacity: viewer.scale==1?1:0
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            anchors {
+                verticalCenter: parent.verticalCenter
+                right: parent.right
+            }
+            //TODO: ad hoc icons
+            MobileComponents.ActionButton {
+                svg: iconsSvg
+                elementId: "add"
+                onClicked: {
+                    toolbar.zoomIn()
+                }
+            }
+            MobileComponents.ActionButton {
+                svg: iconsSvg
+                elementId: "remove"
+                onClicked: {
+                    toolbar.zoomOut()
                 }
             }
         }

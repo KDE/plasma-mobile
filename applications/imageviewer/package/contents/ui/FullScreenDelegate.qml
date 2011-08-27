@@ -32,6 +32,26 @@ Flickable {
     interactive: contentWidth > width || contentHeight > height
     property alias source: mainImage.source
 
+    NumberAnimation {
+        id: zoomAnim
+        duration: 250
+        easing.type: Easing.InOutQuad
+        target: mainImage
+        property: "scale"
+    }
+
+    Connections {
+        target: toolbar
+        onZoomIn: {
+            zoomAnim.to = mainImage.scale * 1.4
+            zoomAnim.running = true
+        }
+        onZoomOut: {
+            zoomAnim.to = mainImage.scale * 0.6
+            zoomAnim.running = true
+        }
+    }
+
     Rectangle {
         id: imageMargin
         width: Math.max(mainFlickable.width, mainImage.width*mainImage.scale)
