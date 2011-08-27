@@ -4,7 +4,7 @@ Encoding=UTF-8
 Keywords=
 Name=Launcher
 Type=Service
-Icon=preferences-activities
+Icon=start-here-kde
 
 X-KDE-ServiceTypes=Plasma/GenericPackage
 X-KDE-ParentApp=
