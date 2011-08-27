@@ -27,6 +27,8 @@ Item {
     width: 100
     height: 200
     objectName: "completionPopup"
+    id: mainItem
+    state: "expanded"
 
     PlasmaCore.FrameSvgItem {
         id: frame
@@ -58,4 +60,42 @@ Item {
     onVisibleChanged: {
         print("visibility changed to " + visible);
     }
+
+    onStateChanged: {
+        print("state changed: " + state);
+    }
+
+
+    states: [
+        State {
+            id: expanded
+            name: "expanded";
+            PropertyChanges {
+                target: mainItem
+                opacity: 1
+            }
+        },
+
+        State {
+            id: collapsed
+            name: "collapsed";
+            PropertyChanges {
+                target: mainItem
+                opacity: 0
+            }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            PropertyAnimation {
+                properties: "opacity"
+                duration: 400;
+                easing.type: Easing.InOutElastic;
+                easing.amplitude: 2.0; easing.period: 1.5
+            }
+        }
+    ]
+
+    
 }

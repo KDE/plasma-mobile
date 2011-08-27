@@ -67,9 +67,11 @@ Item {
             container.urlChanged();
             print("XXX text changed" + text);
             if (text != "http://community.kde.org/Plasma/Active") {
-                completionPopup.visible = true;
+                //completionPopup.visible = true;
+                completionPopup.state = "expanded"
             } else {
-                completionPopup.visible = false;
+                //completionPopup.visible = false;
+                completionPopup.state = "collapsed"
             }
         }
 
@@ -109,7 +111,7 @@ Item {
     CompletionPopup {
         id: completionPopup
         height: 200
-        visible: false
+        state: "collapsed"
         anchors.top: urlText.bottom
         anchors.left: urlText.left
         anchors.right: urlText.right
