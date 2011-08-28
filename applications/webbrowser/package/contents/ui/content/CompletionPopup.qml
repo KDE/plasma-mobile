@@ -73,7 +73,6 @@ Item {
             highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
         }
     }
-    
 
     Component.onCompleted: {
         print("completer loaded");

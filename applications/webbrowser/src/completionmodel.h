@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QImage>
+#include <Nepomuk/Query/Result>
 
 class CompletionModelPrivate;
 
@@ -42,8 +43,14 @@ public Q_SLOTS:
 Q_SIGNALS:
     void dataChanged();
 
+private Q_SLOTS:
+    void newEntries(const QList< Nepomuk::Query::Result > &entries);
+    void entriesRemoved(const QList<QUrl> &urls);
+    void finishedListing();
+
 private:
     CompletionModelPrivate* d;
+    void loadBookmarks();
 
 };
 

@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QImage>
+#include <Nepomuk/Resource>
 
 class CompletionItemPrivate;
 
@@ -39,7 +40,10 @@ public:
              const QString &url = QString(),
              const QImage &i = QImage(),
              QObject *parent = 0 );
+    CompletionItem(QObject *parent);
+    //CompletionItem(Nepomuk::Resource resource, QObject *parent = 0);
     ~CompletionItem();
+    void setResource(Nepomuk::Resource resource);
 
     QString name();
     QString url();

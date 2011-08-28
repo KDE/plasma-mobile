@@ -18,8 +18,32 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+//#define KDE_DEPRECATED 1
+
 #include "completionmodel.h"
 #include "completionitem.h"
+
+// Nepomuk
+#include <Nepomuk/Resource>
+#include <Nepomuk/Variant>
+#include <nepomuk/queryparser.h>
+#include <Nepomuk/Query/ResourceTerm>
+#include "bookmark.h"
+
+#include <Nepomuk/Query/Query>
+//#include <Nepomuk/Query/FileQuery>
+#include <Nepomuk/Query/QueryServiceClient>
+#include <Nepomuk/Query/Result>
+
+//#include <soprano/queryresultiterator.h>
+//#include <soprano/model.h>
+#include <soprano/vocabulary.h>
+
+#include <nepomuk/andterm.h>
+#include <nepomuk/orterm.h>
+#include <nepomuk/comparisonterm.h>
+#include <nepomuk/literalterm.h>
+#include <nepomuk/resourcetypeterm.h>
 
 #include "kdebug.h"
 
@@ -27,6 +51,8 @@ class CompletionModelPrivate {
 
 public:
     QList<QObject*> items;
+    Nepomuk::Query::Query query;
+    Nepomuk::Query::QueryServiceClient* queryClient;
 };
 
 
@@ -54,7 +80,70 @@ void CompletionModel::populate()
     d->items.append(new CompletionItem("Planet KDE", "http://planetkde.org", QImage(), this));
     d->items.append(new CompletionItem("Cookie Test", "http://vizZzion.org", QImage(), this));
     d->items.append(new CompletionItem("G..gle", "http://google.com", QImage(), this));
+    loadBookmarks();
 }
 
+void CompletionModel::loadBookmarks()
+{
+    if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
+        kDebug() << "Nepomuk service is there";
+    }
+
+    kDebug() << "Loading bookmarks...";
+    Nepomuk::Types::Class bookmarkClass(Nepomuk::Bookmark::resourceTypeUri());
+    //Nepomuk::Types::Class bookmarkClass(Nepomuk::PersonContact::resourceTypeUri()); // for testing
+    Nepomuk::Query::ResourceTypeTerm rtt(bookmarkClass);
+
+    Nepomuk::Query::Query bookmarkQuery;
+    bookmarkQuery.setTerm(rtt);
+
+    kDebug() << "Query:" << bookmarkQuery.toSparqlQuery();
+    /*
+    QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(massagedName));
+    if (!container) {
+        container = new QueryContainer(bookmarkQuery, this);
+    }
+    container->setObjectName(massagedName);
+    addSource(container);
+    */
+    d->queryClient = new Nepomuk::Query::QueryServiceClient(this);
+
+    connect(d->queryClient, SIGNAL(finishedListing()),
+            this, SLOT(finishedListing()));
+    connect(d->queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
+            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
+    connect(d->queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
+            this, SLOT(entriesRemoved(const QList<QUrl> &)));
+
+    d->query.setLimit(64);
+    d->queryClient->query(d->query);
+
+    kDebug() << "Waiting for bookmarks...";
+
+}
+
+void CompletionModel::finishedListing()
+{
+    kDebug() << "Done listing.";
+}
+
+void CompletionModel::newEntries(const QList< Nepomuk::Query::Result >& entries)
+{
+    kDebug() << "new entries....";
+    foreach (Nepomuk::Query::Result res, entries) {
+        kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+        //kDebug() << "Result label:" << res.genericLabel();
+        CompletionItem* item = new CompletionItem(this);
+        item->setResource(res.resource());
+        d->items.append(item);
+    }
+
+    emit dataChanged();
+}
+
+void CompletionModel::entriesRemoved(const QList< QUrl >& urls)
+{
+
+}
 
 #include "completionmodel.moc"

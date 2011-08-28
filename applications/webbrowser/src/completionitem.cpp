@@ -20,8 +20,10 @@
 
 #include "completionitem.h"
 
-class CompletionItemPrivate {
+#include <kdebug.h>
+#include <Nepomuk/Variant>
 
+class CompletionItemPrivate {
 public:
     QString name;
     QString url;
@@ -37,6 +39,27 @@ CompletionItem::CompletionItem(const QString &n, const QString &u, const QImage 
     d->url = u;
     d->image = i;
 }
+
+CompletionItem::CompletionItem(QObject *parent)
+    : QObject(parent)
+{
+    d = new CompletionItemPrivate;
+    d->name = QString();
+    d->url = QString();
+    d->image = QImage();
+}
+
+void CompletionItem::setResource(Nepomuk::Resource resource)
+{
+    //d->url = resource.
+    //kDebug() << "!!!!! res props: " << resource.properties().keys();
+    kDebug() << "SET RESOURCE" << resource.resourceUri();
+    d->name = resource.genericDescription();
+    d->url = resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
+    //d->url = resource.property(resour).toString();
+    
+}
+
 
 CompletionItem::~CompletionItem()
 {
