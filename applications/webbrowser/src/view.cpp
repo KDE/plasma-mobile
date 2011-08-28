@@ -119,9 +119,8 @@ void View::setBookmarks()
     //Q_UNUSED( bookmarks );
     QDeclarativeItem* popup = rootObject()->findChild<QDeclarativeItem*>("completionPopup");
     if (popup) {
-        QList<QObject*> items = m_completionModel->items();
-        kDebug() << "MODEL IS: " << items.count();
-        rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(items));
+        //QList<QObject*> items = ;
+        rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(m_completionModel->items()));
     }
 }
 

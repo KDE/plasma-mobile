@@ -22,6 +22,7 @@
 
 #include "completionmodel.h"
 #include "completionitem.h"
+#include "history.h"
 
 // Nepomuk
 #include <Nepomuk/Resource>
@@ -51,6 +52,7 @@ public:
     QList<QObject*> items;
     Nepomuk::Query::Query query;
     Nepomuk::Query::QueryServiceClient* queryClient;
+    History* history;
 };
 
 
@@ -68,18 +70,25 @@ CompletionModel::~CompletionModel()
 
 QList<QObject*> CompletionModel::items()
 {
-    return d->items;
+    QList<QObject*> l;
+    l.append(d->history->items());
+    l.append(d->items);
+
+    return l;
 }
 
 
 void CompletionModel::populate()
 {
     kDebug() << "populating model...";
+    d->history = new History(this);
+    //d->history->loadHistory();
     /*
     d->items.append(new CompletionItem("Planet KDE", "http://planetkde.org", QImage(), this));
     d->items.append(new CompletionItem("Cookie Test", "http://vizZzion.org", QImage(), this));
     d->items.append(new CompletionItem("G..gle", "http://google.com", QImage(), this));
     */
+    
     loadBookmarks();
 }
 

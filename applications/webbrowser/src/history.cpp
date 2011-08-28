@@ -18,40 +18,44 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef COMPLETIONMODEL_H
-#define COMPLETIONMODEL_H
+#include "history.h"
+#include "completionitem.h"
 
-#include <QObject>
-#include <QImage>
-#include <Nepomuk/Query/Result>
+#include "kdebug.h"
 
-class CompletionModelPrivate;
-
-class CompletionModel : public QObject
-{
-    Q_OBJECT
+class HistoryPrivate {
 
 public:
-    CompletionModel(QObject *parent = 0 );
-    ~CompletionModel();
-
-    QList<QObject*> items();
-
-public Q_SLOTS:
-    void populate();
-
-Q_SIGNALS:
-    void dataChanged();
-
-private Q_SLOTS:
-    void newEntries(const QList< Nepomuk::Query::Result > &entries);
-    void entriesRemoved(const QList<QUrl> &urls);
-    void finishedListing();
-
-private:
-    CompletionModelPrivate* d;
-    void loadBookmarks();
+    QList<QObject*> items;
 
 };
 
-#endif // COMPLETIONMODEL_H
+
+History::History(QObject *parent)
+    : QObject(parent)
+{
+    d = new HistoryPrivate;
+    loadHistory();
+}
+
+History::~History()
+{
+    delete d;
+}
+
+QList<QObject*> History::items()
+{
+    return d->items;
+}
+
+void History::loadHistory()
+{
+    kDebug() << "populating model...";
+    d->items.append(new CompletionItem("Tagesschau", "http://tagesschau.de", QImage(), this));
+    d->items.append(new CompletionItem("Planet KDE", "http://planetkde.org", QImage(), this));
+    d->items.append(new CompletionItem("Cookie Test", "http://vizZzion.org", QImage(), this));
+    d->items.append(new CompletionItem("G..gle", "http://google.com", QImage(), this));
+}
+
+
+#include "history.moc"

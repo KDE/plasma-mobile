@@ -18,40 +18,35 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef COMPLETIONMODEL_H
-#define COMPLETIONMODEL_H
+#ifndef HISTORY_H
+#define HISTORY_H
 
 #include <QObject>
 #include <QImage>
 #include <Nepomuk/Query/Result>
 
-class CompletionModelPrivate;
+class HistoryPrivate;
 
-class CompletionModel : public QObject
+class History : public QObject
 {
     Q_OBJECT
 
 public:
-    CompletionModel(QObject *parent = 0 );
-    ~CompletionModel();
+    History(QObject *parent = 0 );
+    ~History();
 
     QList<QObject*> items();
 
 public Q_SLOTS:
-    void populate();
+    void loadHistory();
 
 Q_SIGNALS:
     void dataChanged();
 
-private Q_SLOTS:
-    void newEntries(const QList< Nepomuk::Query::Result > &entries);
-    void entriesRemoved(const QList<QUrl> &urls);
-    void finishedListing();
 
 private:
-    CompletionModelPrivate* d;
-    void loadBookmarks();
+    HistoryPrivate* d;
 
 };
 
-#endif // COMPLETIONMODEL_H
+#endif // HISTORY_H

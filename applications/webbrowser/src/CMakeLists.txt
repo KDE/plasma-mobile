@@ -24,6 +24,7 @@ set(active-webbrowser_SRCS
     kdeclarativewebview.cpp
     completionitem.cpp
     completionmodel.cpp
+    history.cpp
     view.cpp
 )
 
