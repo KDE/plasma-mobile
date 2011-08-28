@@ -25,7 +25,7 @@ import org.kde.qtextracomponents 0.1
 
 Item {
     width: 100
-    height: 200
+    height: 300
     objectName: "completionPopup"
     id: mainItem
     state: "expanded"
@@ -45,14 +45,31 @@ Item {
         Component {
             id: myDelegate
             Item {
-                height: 24
+                height: 48
                 //anchors.fill: parent
                 anchors.margins: 20
+
+                QIconItem {
+                    id: previewImage
+                    width: 48
+                    height: 32
+                    icon: QIcon("view-history")
+                    //anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
+                    anchors.rightMargin: 8
+                    //image: preview
+                }
+
                 Text {
-                    height: 24
+                    height: 32
                     id: labelText
-                    text: "<strong>" + name + "</strong> " + url
+                    text: "<strong>" + name + "</strong> <br />" + url
                     color: theme.textColor
+                    anchors.left: previewImage.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
                     MouseArea {
                         anchors.fill: labelText
                         onClicked: {
@@ -61,14 +78,27 @@ Item {
                         }
                     }
                 }
+
+                QImageItem {
+                    id: rightPreview
+                    width: 32
+                    height: 32
+                    //icon: QIcon("view-history")
+                    //anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    image: preview
+                }
+
             }
         }
 
         ListView {
             anchors.fill: parent
-            anchors.margins: 16
+            anchors.margins: 12
             y: 16
-            spacing: 10
+            spacing: 4
             model: bookmarksModel
             delegate: myDelegate
             highlight: Rectangle { color: theme.textColor; opacity: 0.3 }

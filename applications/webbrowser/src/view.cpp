@@ -67,6 +67,7 @@ View::View(const QString &url, QWidget *parent)
     // as startupArguments property
     QVariant a = QVariant(QStringList(filterUrl(url)));
     rootContext()->setContextProperty("startupArguments", a);
+    rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(m_completionModel->items()));
 
     // Locate the webbrowser QML component in the package
     // Note that this is a bit brittle, since it relies on the package name,
@@ -116,7 +117,6 @@ bool View::useGL() const
 
 void View::setBookmarks()
 {
-    //Q_UNUSED( bookmarks );
     QDeclarativeItem* popup = rootObject()->findChild<QDeclarativeItem*>("completionPopup");
     if (popup) {
         //QList<QObject*> items = ;
@@ -163,6 +163,7 @@ void View::onStatusChanged(QDeclarativeView::Status status)
 void View::urlChanged()
 {
     QVariant newUrl = m_webBrowser->property("url");
+    QString newTitle = m_webBrowser->property("title").toString();
     m_options->url = newUrl.toString();
     // TODO: we could expose the URL to the activity here, but that's already done in QML
     kDebug() << "TODO: record history" << newUrl;

@@ -33,7 +33,7 @@ class CompletionItem : public QObject
 
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
-    Q_PROPERTY(QImage image READ image WRITE setImage NOTIFY imageChanged)
+    Q_PROPERTY(QImage preview READ preview WRITE setPreview NOTIFY previewChanged)
 
 public:
     CompletionItem(const QString &name = QString(),
@@ -47,17 +47,17 @@ public:
 
     QString name();
     QString url();
-    QImage image();
+    QImage preview();
 
 public Q_SLOTS:
-    void setName(const QString &n);
-    void setUrl(const QString &u);
-    void setImage(const QImage &i);
+    void setName(const QString &name);
+    void setUrl(const QString &url);
+    void setPreview(const QImage &image);
 
 Q_SIGNALS:
     void nameChanged();
     void urlChanged();
-    void imageChanged();
+    void previewChanged();
 
 private:
     CompletionItemPrivate* d;

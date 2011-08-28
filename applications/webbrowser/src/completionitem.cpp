@@ -27,7 +27,7 @@ class CompletionItemPrivate {
 public:
     QString name;
     QString url;
-    QImage image;
+    QImage preview;
 };
 
 
@@ -37,7 +37,7 @@ CompletionItem::CompletionItem(const QString &n, const QString &u, const QImage 
     d = new CompletionItemPrivate;
     d->name = n;
     d->url = u;
-    d->image = i;
+    d->preview = i;
 }
 
 CompletionItem::CompletionItem(QObject *parent)
@@ -46,14 +46,14 @@ CompletionItem::CompletionItem(QObject *parent)
     d = new CompletionItemPrivate;
     d->name = QString();
     d->url = QString();
-    d->image = QImage();
+    d->preview = QImage();
 }
 
 void CompletionItem::setResource(Nepomuk::Resource resource)
 {
     //d->url = resource.
     //kDebug() << "!!!!! res props: " << resource.properties().keys();
-    kDebug() << "SET RESOURCE" << resource.resourceUri();
+    //kDebug() << "SET RESOURCE" << resource.resourceUri();
     d->name = resource.genericDescription();
     d->url = resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
     //d->url = resource.property(resour).toString();
@@ -76,9 +76,9 @@ QString CompletionItem::url()
     return d->url;
 }
 
-QImage CompletionItem::image()
+QImage CompletionItem::preview()
 {
-    return d->image;
+    return d->preview;
 }
 
 void CompletionItem::setName(const QString &name)
@@ -91,9 +91,9 @@ void CompletionItem::setUrl(const QString &url)
     d->url = url;
 }
 
-void CompletionItem::setImage(const QImage &image)
+void CompletionItem::setPreview(const QImage &preview)
 {
-    d->image = image;
+    d->preview = preview;
 }
 
 #include "completionitem.moc"

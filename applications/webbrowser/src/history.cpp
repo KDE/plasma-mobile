@@ -20,13 +20,14 @@
 
 #include "history.h"
 #include "completionitem.h"
-
+#include <KIcon>
 #include "kdebug.h"
 
 class HistoryPrivate {
 
 public:
     QList<QObject*> items;
+    QImage icon;
 
 };
 
@@ -36,6 +37,9 @@ History::History(QObject *parent)
 {
     d = new HistoryPrivate;
     loadHistory();
+    d->icon = KIcon("view-history").pixmap(48, 48).toImage();
+    d->icon = QImage("/home/sebas/Documents/wallpaper.png");
+    kDebug() << "ionsize" << d->icon.size();
 }
 
 History::~History()
@@ -51,11 +55,17 @@ QList<QObject*> History::items()
 void History::loadHistory()
 {
     kDebug() << "populating model...";
-    d->items.append(new CompletionItem("Tagesschau", "http://tagesschau.de", QImage(), this));
-    d->items.append(new CompletionItem("Planet KDE", "http://planetkde.org", QImage(), this));
-    d->items.append(new CompletionItem("Cookie Test", "http://vizZzion.org", QImage(), this));
-    d->items.append(new CompletionItem("G..gle", "http://google.com", QImage(), this));
+    d->items.append(new CompletionItem("Tagesschau", "http://tagesschau.de", d->icon, this));
+    d->items.append(new CompletionItem("Planet KDE", "http://planetkde.org", d->icon, this));
+    d->items.append(new CompletionItem("Cookie Test", "http://vizZzion.org/stuff/cookie.php", d->icon, this));
+    d->items.append(new CompletionItem("G..gle", "http://google.com", d->icon, this));
 }
 
+void History::addPage(const QString &url, const QString &title)
+{
+    CompletionItem* item = new CompletionItem(title, url, d->icon, this);
+    d->items.append(item);
+    emit dataChanged();
+}
 
 #include "history.moc"

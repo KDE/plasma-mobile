@@ -82,6 +82,7 @@ void CompletionModel::populate()
 {
     kDebug() << "populating model...";
     d->history = new History(this);
+    connect(d->history, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
     //d->history->loadHistory();
     /*
     d->items.append(new CompletionItem("Planet KDE", "http://planetkde.org", QImage(), this));
