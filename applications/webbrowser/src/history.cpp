@@ -55,15 +55,16 @@ QList<QObject*> History::items()
 void History::loadHistory()
 {
     kDebug() << "populating model...";
-    d->items.append(new CompletionItem("Tagesschau", "http://tagesschau.de", d->icon, this));
-    d->items.append(new CompletionItem("Planet KDE", "http://planetkde.org", d->icon, this));
-    d->items.append(new CompletionItem("Cookie Test", "http://vizZzion.org/stuff/cookie.php", d->icon, this));
-    d->items.append(new CompletionItem("G..gle", "http://google.com", d->icon, this));
+    addPage("http://tagesschau.de", "Tagesschau");
+    addPage("http://planetkde.org", "Planet KDE");
+    addPage("http://vizZzion.org/stuff/cookie.php", "Cookie Test");
+    addPage("http://google.com", "G--gle");
 }
 
 void History::addPage(const QString &url, const QString &title)
 {
     CompletionItem* item = new CompletionItem(title, url, d->icon, this);
+    item->setIconName("view-history");
     d->items.append(item);
     emit dataChanged();
 }

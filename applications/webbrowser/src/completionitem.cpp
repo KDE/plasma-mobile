@@ -27,6 +27,7 @@ class CompletionItemPrivate {
 public:
     QString name;
     QString url;
+    QString iconName;
     QImage preview;
 };
 
@@ -56,6 +57,7 @@ void CompletionItem::setResource(Nepomuk::Resource resource)
     //kDebug() << "SET RESOURCE" << resource.resourceUri();
     d->name = resource.genericDescription();
     d->url = resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
+    d->iconName = "bookmarks";
     //d->url = resource.property(resour).toString();
     
 }
@@ -76,6 +78,11 @@ QString CompletionItem::url()
     return d->url;
 }
 
+QString CompletionItem::iconName()
+{
+    return d->iconName;
+}
+
 QImage CompletionItem::preview()
 {
     return d->preview;
@@ -84,6 +91,11 @@ QImage CompletionItem::preview()
 void CompletionItem::setName(const QString &name)
 {
     d->name = name;
+}
+
+void CompletionItem::setIconName(const QString &iconName)
+{
+    d->iconName = iconName;
 }
 
 void CompletionItem::setUrl(const QString &url)

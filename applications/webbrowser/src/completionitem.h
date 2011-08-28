@@ -34,6 +34,7 @@ class CompletionItem : public QObject
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(QImage preview READ preview WRITE setPreview NOTIFY previewChanged)
+    Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
 
 public:
     CompletionItem(const QString &name = QString(),
@@ -46,6 +47,7 @@ public:
     void setResource(Nepomuk::Resource resource);
 
     QString name();
+    QString iconName();
     QString url();
     QImage preview();
 
@@ -53,11 +55,13 @@ public Q_SLOTS:
     void setName(const QString &name);
     void setUrl(const QString &url);
     void setPreview(const QImage &image);
+    void setIconName(const QString &iconName);
 
 Q_SIGNALS:
     void nameChanged();
     void urlChanged();
     void previewChanged();
+    void iconNameChanged();
 
 private:
     CompletionItemPrivate* d;

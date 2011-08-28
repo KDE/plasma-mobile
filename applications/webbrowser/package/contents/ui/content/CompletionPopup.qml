@@ -53,7 +53,7 @@ Item {
                     id: previewImage
                     width: 48
                     height: 32
-                    icon: QIcon("view-history")
+                    icon: QIcon(iconName)
                     //anchors.horizontalCenter: parent.horizontalCenter
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
