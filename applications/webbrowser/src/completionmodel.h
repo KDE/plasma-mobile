@@ -25,6 +25,7 @@
 #include <QImage>
 #include <Nepomuk/Query/Result>
 
+class History;
 class CompletionModelPrivate;
 
 class CompletionModel : public QObject
@@ -37,7 +38,7 @@ public:
 
     QList<QObject*> items();
     QList<QObject*> filteredItems();
-
+    History* history();
 
 public Q_SLOTS:
     void populate();

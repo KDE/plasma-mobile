@@ -65,17 +65,26 @@ Item {
         //horizontalAlignment: TextEdit.AlignLeft
         font.pixelSize: 14;
 
+        function updateState() {
+            if (text != webView.url) {
+                completionPopup.state = "expanded"
+            } else {
+                completionPopup.state = "collapsed"
+            }
+
+        }
+
         onTextChanged: {
             container.urlChanged();
             print("XXX text changed" + text);
+            updateState();
+            /*
             if (text != webView.url) {
-            //if (text != "http://community.kde.org/Plasma/Active") {
-                //completionPopup.visible = true;
                 completionPopup.state = "expanded"
             } else {
-                //completionPopup.visible = false;
                 completionPopup.state = "collapsed"
             }
+            */
             urlFilter = text;
             urlFilterChanged();
         }

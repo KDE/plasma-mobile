@@ -45,6 +45,8 @@ public Q_SLOTS:
 Q_SIGNALS:
     void dataChanged();
 
+private Q_SLOTS:
+    void recordHistory();
 
 private:
     void addPage(const QString &url, const QString &title);

@@ -21,6 +21,7 @@
 #include "view.h"
 #include "kdeclarativewebview.h"
 #include "completionmodel.h"
+#include "history.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
@@ -96,6 +97,7 @@ View::View(const QString &url, QWidget *parent)
 
 View::~View()
 {
+    m_completionModel->history()->saveHistory();
 }
 
 void View::setUseGL(const bool on)
@@ -164,11 +166,12 @@ void View::onStatusChanged(QDeclarativeView::Status status)
 
 void View::urlChanged()
 {
-    QVariant newUrl = m_webBrowser->property("url");
+    QString newUrl = m_webBrowser->property("url").toString();
     QString newTitle = m_webBrowser->property("title").toString();
-    m_options->url = newUrl.toString();
+    m_options->url = newUrl;
     // TODO: we could expose the URL to the activity here, but that's already done in QML
-    kDebug() << "TODO: record history" << newUrl;
+    m_completionModel->history()->visitPage(newUrl, newTitle);
+    //kDebug() << "TODO: record history" << newUrl;
 }
 
 void View::urlFilterChanged()

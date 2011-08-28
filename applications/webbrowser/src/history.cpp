@@ -35,6 +35,8 @@ public:
     KConfigGroup config;
     QTimer saveTimer;
     QString separator;
+    CompletionItem* currentPage;
+    QTimer addHistoryTimer;
 };
 
 
@@ -45,16 +47,27 @@ History::History(QObject *parent)
     KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
     d->config = KConfigGroup(ptr, "history");
     d->separator = "|X|";
+    d->currentPage = 0;
+    d->addHistoryTimer.setSingleShot(true);
+    // wait 30 sec before saving to history,
+    // transient pages aren't interesting enough
+    d->addHistoryTimer.setInterval(30000);
+    connect(&d->addHistoryTimer, SIGNAL(timeout()), SLOT(recordHistory()));
+
+    d->saveTimer.setSingleShot(true);
+    d->saveTimer.setInterval(30000); // wait 30 sec before saving to history
+    connect(&d->saveTimer, SIGNAL(timeout()), SLOT(saveHistory()));
     //saveHistory();
 
-    loadHistory();
-    d->icon = KIcon("view-history").pixmap(48, 48).toImage();
-    d->icon = QImage("/home/sebas/Documents/wallpaper.png");
-    kDebug() << "ionsize" << d->icon.size();
+    //loadHistory();
+    //d->icon = KIcon("view-history").pixmap(48, 48).toImage();
+    //d->icon = QImage("/home/sebas/Documents/wallpaper.png");
+    //kDebug() << "ionsize" << d->icon.size();
 }
 
 History::~History()
 {
+    saveHistory();
     delete d;
 }
 
@@ -70,7 +83,7 @@ void History::loadHistory()
     QStringList h = d->config.readEntry("history", QStringList("empty"));
     foreach (const QString &hitem, h) {
         QStringList hs = hitem.split(d->separator);
-        kDebug() << "HITEM: " << hs;
+        kDebug() << "history: " << hs;
         QString url = hs.at(0);
         QString title;
         if (hs.count() > 1) {
@@ -78,12 +91,6 @@ void History::loadHistory()
         }
         addPage(url, title);
     }
-    /*
-    addPage("http://tagesschau.de", "Tagesschau");
-    addPage("http://planetkde.org", "Planet KDE");
-    addPage("http://vizZzion.org/stuff/cookie.php", "Cookie Test");
-    addPage("http://google.com", "G--gle");
-    */
 }
 
 void History::addPage(const QString &url, const QString &title)
@@ -96,17 +103,43 @@ void History::addPage(const QString &url, const QString &title)
 
 void History::visitPage(const QString &url, const QString &title)
 {
+    kDebug() << "Visiting page" << title << url;
+    d->currentPage = new CompletionItem(title, url, d->icon, this);
+    d->currentPage->setIconName("view-history");
+    d->addHistoryTimer.start();
+}
 
+void History::recordHistory()
+{
+    // TODO: re-query for the title here, page wasn't loaded before ...
+    kDebug() << "count:" << d->items.count();
+    d->items.insert(0, d->currentPage);
+    while (d->items.count() > 256) {
+        d->items.takeLast();
+    }
+    emit dataChanged();
+    kDebug() << "DDD HIstory recorded: items count:" << d->items.count();
+    d->saveTimer.start();
 }
 
 void History::saveHistory()
 {
     QStringList l;
+    foreach(QObject* it, d->items) {
+        CompletionItem* ci = qobject_cast<CompletionItem*>(it);
+        if (ci) {
+            l.append(ci->url() + d->separator + ci->name());
+        }
+    }
+    kDebug() << "Saving history:" << l.join("\n");
+    /*
     l.append("http://lwn.net" + d->separator + "Linux Weekly News");
     l.append("http://vizZzion.org/stuff/cookie.php" + d->separator + "Cookie Test");
     l.append("http://volkskrant.nl" + d->separator + "Volkskrant");
     l.append("http://heise.de" + d->separator + "Heise");
     l.append("http://tweakers.net");
+    foreach (
+    */
     d->config.writeEntry("history", l);
     d->config.sync();
 }

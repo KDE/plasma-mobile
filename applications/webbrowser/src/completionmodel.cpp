@@ -70,6 +70,11 @@ CompletionModel::~CompletionModel()
     delete d;
 }
 
+History* CompletionModel::history()
+{
+    return d->history;
+}
+
 QList<QObject*> CompletionModel::items()
 {
     QList<QObject*> l;
@@ -112,16 +117,11 @@ void CompletionModel::setFilter(const QString &filter)
 
 void CompletionModel::populate()
 {
-    kDebug() << "populating model...";
+    //kDebug() << "populating model...";
     d->history = new History(this);
     connect(d->history, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
-    //d->history->loadHistory();
-    /*
-    d->items.append(new CompletionItem("Planet KDE", "http://planetkde.org", QImage(), this));
-    d->items.append(new CompletionItem("Cookie Test", "http://vizZzion.org", QImage(), this));
-    d->items.append(new CompletionItem("G..gle", "http://google.com", QImage(), this));
-    */
-    
+
+    d->history->loadHistory();
     loadBookmarks();
 }
 
