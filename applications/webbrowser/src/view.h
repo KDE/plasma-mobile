@@ -63,8 +63,8 @@ public:
     bool useGL() const;
 
 public Q_SLOTS:
-    void setBookmarks(const QStringList &bookmarks);
-    
+    void setBookmarks();
+
 Q_SIGNALS:
     void titleChanged(const QString&);
     void newWindow(const QString &url);

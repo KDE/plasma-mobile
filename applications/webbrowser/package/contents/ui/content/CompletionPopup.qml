@@ -29,6 +29,7 @@ Item {
     objectName: "completionPopup"
     id: mainItem
     state: "expanded"
+    clip: true
 
     PlasmaCore.Theme {
         id: theme

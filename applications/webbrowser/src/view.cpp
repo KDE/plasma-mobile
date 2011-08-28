@@ -46,7 +46,8 @@ View::View(const QString &url, QWidget *parent)
       m_options(new WebsiteOptions),
       m_webBrowser(0),
       m_urlInput(0),
-      m_useGL(false)
+      m_useGL(false),
+      m_completionModel(new CompletionModel(this))
 {
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
     // Tell the script engine where to find the Plasma Quick components
@@ -89,15 +90,7 @@ View::View(const QString &url, QWidget *parent)
     connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
             this, SLOT(onStatusChanged(QDeclarativeView::Status)));
 
-    // TODO: share across windows
-    m_completionModel = new CompletionModel(this);
-
-    QStringList bookmarks;
-    bookmarks.append("http://planetkde.org");
-    bookmarks.append("http://vizZzion.org/stuff/cookie.php");
-    bookmarks.append("http://dot.kde.org");
-    bookmarks.append("http://lwn.net");
-    setBookmarks(bookmarks);
+    connect(m_completionModel, SIGNAL(dataChanged()), SLOT(setBookmarks()));
 }
 
 View::~View()
@@ -121,9 +114,9 @@ bool View::useGL() const
     return m_useGL;
 }
 
-void View::setBookmarks(const QStringList &bookmarks)
+void View::setBookmarks()
 {
-    Q_UNUSED( bookmarks );
+    //Q_UNUSED( bookmarks );
     QDeclarativeItem* popup = rootObject()->findChild<QDeclarativeItem*>("completionPopup");
     if (popup) {
         QList<QObject*> items = m_completionModel->items();
@@ -173,6 +166,7 @@ void View::urlChanged()
     QVariant newUrl = m_webBrowser->property("url");
     m_options->url = newUrl.toString();
     // TODO: we could expose the URL to the activity here, but that's already done in QML
+    kDebug() << "TODO: record history" << newUrl;
 }
 
 void View::onTitleChanged()
