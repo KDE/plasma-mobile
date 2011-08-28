@@ -77,6 +77,7 @@ private:
 private Q_SLOTS:
     void onStatusChanged(QDeclarativeView::Status status);
     void urlChanged();
+    void urlFilterChanged();
     void onTitleChanged();
     void onUrlEntered(const QString&);
 

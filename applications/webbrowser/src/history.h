@@ -39,7 +39,7 @@ public:
 
 public Q_SLOTS:
     void loadHistory();
-    void addPage(const QString &url, const QString &title);
+    void visitPage(const QString &url, const QString &title);
     void saveHistory();
 
 Q_SIGNALS:
@@ -47,6 +47,7 @@ Q_SIGNALS:
 
 
 private:
+    void addPage(const QString &url, const QString &title);
     HistoryPrivate* d;
 
 };

@@ -20,6 +20,7 @@
 
 #include "history.h"
 #include "completionitem.h"
+#include <QTimer>
 #include <KIcon>
 #include "kdebug.h"
 
@@ -33,6 +34,7 @@ public:
     QImage icon;
     KConfigGroup config;
     QTimer saveTimer;
+    QString separator;
 };
 
 
@@ -42,6 +44,8 @@ History::History(QObject *parent)
     d = new HistoryPrivate;
     KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
     d->config = KConfigGroup(ptr, "history");
+    d->separator = "|X|";
+    //saveHistory();
 
     loadHistory();
     d->icon = KIcon("view-history").pixmap(48, 48).toImage();
@@ -65,7 +69,14 @@ void History::loadHistory()
     kDebug() << "populating history...";
     QStringList h = d->config.readEntry("history", QStringList("empty"));
     foreach (const QString &hitem, h) {
-        addPage(hitem, "history item");
+        QStringList hs = hitem.split(d->separator);
+        kDebug() << "HITEM: " << hs;
+        QString url = hs.at(0);
+        QString title;
+        if (hs.count() > 1) {
+            title = hs.at(1);
+        }
+        addPage(url, title);
     }
     /*
     addPage("http://tagesschau.de", "Tagesschau");
@@ -83,13 +94,19 @@ void History::addPage(const QString &url, const QString &title)
     emit dataChanged();
 }
 
+void History::visitPage(const QString &url, const QString &title)
+{
+
+}
+
 void History::saveHistory()
 {
     QStringList l;
-    l.append("http://lwn.net");
-    l.append("http://vizZzion.org/stuff/cookie.php");
-    l.append("http://volkskrant.nl");
-    l.append("http://heise.de");
+    l.append("http://lwn.net" + d->separator + "Linux Weekly News");
+    l.append("http://vizZzion.org/stuff/cookie.php" + d->separator + "Cookie Test");
+    l.append("http://volkskrant.nl" + d->separator + "Volkskrant");
+    l.append("http://heise.de" + d->separator + "Heise");
+    l.append("http://tweakers.net");
     d->config.writeEntry("history", l);
     d->config.sync();
 }

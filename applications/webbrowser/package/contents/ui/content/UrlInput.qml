@@ -44,9 +44,11 @@ Item {
     property string filteredUrl: ""
     property alias image: bg.source
     property alias url: urlText.text
+    property string urlFilter
 
     signal urlEntered(string url)
     signal urlChanged
+    signal urlFilterChanged()
 
     width: parent.height
     height: urlText.height
@@ -66,13 +68,16 @@ Item {
         onTextChanged: {
             container.urlChanged();
             print("XXX text changed" + text);
-            if (text == "http://community.kde.org/Plasma/Active") {
+            if (text != webView.url) {
+            //if (text != "http://community.kde.org/Plasma/Active") {
                 //completionPopup.visible = true;
                 completionPopup.state = "expanded"
             } else {
                 //completionPopup.visible = false;
                 completionPopup.state = "collapsed"
             }
+            urlFilter = text;
+            urlFilterChanged();
         }
 
         onReturnPressed: {

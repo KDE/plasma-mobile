@@ -120,7 +120,7 @@ void View::setBookmarks()
     QDeclarativeItem* popup = rootObject()->findChild<QDeclarativeItem*>("completionPopup");
     if (popup) {
         //QList<QObject*> items = ;
-        rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(m_completionModel->items()));
+        rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(m_completionModel->filteredItems()));
     }
 }
 
@@ -147,6 +147,8 @@ void View::onStatusChanged(QDeclarativeView::Status status)
             if (m_urlInput) {
                 connect(m_urlInput, SIGNAL(urlEntered(const QString&)),
                         this, SLOT(onUrlEntered(const QString&)));
+                connect(m_urlInput, SIGNAL(urlFilterChanged()),
+                        this, SLOT(urlFilterChanged()));
             } else {
                 kError() << "urlInput component not found.";
             }
@@ -167,6 +169,13 @@ void View::urlChanged()
     m_options->url = newUrl.toString();
     // TODO: we could expose the URL to the activity here, but that's already done in QML
     kDebug() << "TODO: record history" << newUrl;
+}
+
+void View::urlFilterChanged()
+{
+    QString newFilter = m_urlInput->property("urlFilter").toString();
+    //kDebug() << "Filtering completion" << newFilter;
+    m_completionModel->setFilter(newFilter);
 }
 
 void View::onTitleChanged()

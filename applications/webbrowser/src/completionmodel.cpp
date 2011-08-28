@@ -50,9 +50,11 @@ class CompletionModelPrivate {
 
 public:
     QList<QObject*> items;
+    QList<QObject*> filteredItems;
     Nepomuk::Query::Query query;
     Nepomuk::Query::QueryServiceClient* queryClient;
     History* history;
+    QString filter;
 };
 
 
@@ -77,6 +79,36 @@ QList<QObject*> CompletionModel::items()
     return l;
 }
 
+QList<QObject*> CompletionModel::filteredItems()
+{
+    QList<QObject*> l;
+    l.append(d->history->items());
+    l.append(d->items);
+    if (d->filter.isEmpty()) {
+        return l;
+    }
+    d->filteredItems.clear();
+    foreach(QObject* it, l) {
+        CompletionItem* ci = qobject_cast<CompletionItem*>(it);
+        if (ci) {
+            kDebug() << "cast OK" << ci->url();
+            if (ci->name().contains(d->filter, Qt::CaseInsensitive)) {
+                d->filteredItems.append(ci);
+            } else if (ci->url().contains(d->filter, Qt::CaseInsensitive)) {
+                d->filteredItems.append(ci);
+            }
+        }
+    }
+
+    return d->filteredItems;
+}
+
+void CompletionModel::setFilter(const QString &filter)
+{
+    d->filter = filter;
+    //kDebug() << "OOO FIlter set to " << filter;
+    emit dataChanged();
+}
 
 void CompletionModel::populate()
 {
@@ -120,8 +152,10 @@ void CompletionModel::loadBookmarks()
 
 void CompletionModel::finishedListing()
 {
-    kDebug() << "Done listing.";
+    //kDebug() << "Done listing.";
 }
+
+
 
 void CompletionModel::newEntries(const QList< Nepomuk::Query::Result >& entries)
 {

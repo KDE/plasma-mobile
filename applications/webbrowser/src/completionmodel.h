@@ -36,9 +36,12 @@ public:
     ~CompletionModel();
 
     QList<QObject*> items();
+    QList<QObject*> filteredItems();
+
 
 public Q_SLOTS:
     void populate();
+    void setFilter(const QString &filter);
 
 Q_SIGNALS:
     void dataChanged();
