@@ -40,6 +40,7 @@ public:
 public Q_SLOTS:
     void loadHistory();
     void addPage(const QString &url, const QString &title);
+    void saveHistory();
 
 Q_SIGNALS:
     void dataChanged();

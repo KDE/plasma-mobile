@@ -25,7 +25,7 @@ import org.kde.qtextracomponents 0.1
 
 Item {
     width: 100
-    height: 300
+    height: 360
     objectName: "completionPopup"
     id: mainItem
     state: "expanded"
@@ -96,7 +96,7 @@ Item {
 
         ListView {
             anchors.fill: parent
-            anchors.margins: 12
+            anchors.margins: 16
             y: 16
             spacing: 4
             model: bookmarksModel

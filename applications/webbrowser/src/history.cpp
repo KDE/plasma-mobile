@@ -23,12 +23,16 @@
 #include <KIcon>
 #include "kdebug.h"
 
+#include <KConfigGroup>
+#include <KSharedConfig>
+
 class HistoryPrivate {
 
 public:
     QList<QObject*> items;
     QImage icon;
-
+    KConfigGroup config;
+    QTimer saveTimer;
 };
 
 
@@ -36,6 +40,9 @@ History::History(QObject *parent)
     : QObject(parent)
 {
     d = new HistoryPrivate;
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+    d->config = KConfigGroup(ptr, "history");
+
     loadHistory();
     d->icon = KIcon("view-history").pixmap(48, 48).toImage();
     d->icon = QImage("/home/sebas/Documents/wallpaper.png");
@@ -54,11 +61,18 @@ QList<QObject*> History::items()
 
 void History::loadHistory()
 {
-    kDebug() << "populating model...";
+
+    kDebug() << "populating history...";
+    QStringList h = d->config.readEntry("history", QStringList("empty"));
+    foreach (const QString &hitem, h) {
+        addPage(hitem, "history item");
+    }
+    /*
     addPage("http://tagesschau.de", "Tagesschau");
     addPage("http://planetkde.org", "Planet KDE");
     addPage("http://vizZzion.org/stuff/cookie.php", "Cookie Test");
     addPage("http://google.com", "G--gle");
+    */
 }
 
 void History::addPage(const QString &url, const QString &title)
@@ -67,6 +81,17 @@ void History::addPage(const QString &url, const QString &title)
     item->setIconName("view-history");
     d->items.append(item);
     emit dataChanged();
+}
+
+void History::saveHistory()
+{
+    QStringList l;
+    l.append("http://lwn.net");
+    l.append("http://vizZzion.org/stuff/cookie.php");
+    l.append("http://volkskrant.nl");
+    l.append("http://heise.de");
+    d->config.writeEntry("history", l);
+    d->config.sync();
 }
 
 #include "history.moc"
