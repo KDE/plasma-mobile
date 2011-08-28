@@ -91,7 +91,7 @@ QList<QObject*> CompletionModel::filteredItems()
     foreach(QObject* it, l) {
         CompletionItem* ci = qobject_cast<CompletionItem*>(it);
         if (ci) {
-            kDebug() << "cast OK" << ci->url();
+            // Matching, pretty basic right now
             if (ci->name().contains(d->filter, Qt::CaseInsensitive)) {
                 d->filteredItems.append(ci);
             } else if (ci->url().contains(d->filter, Qt::CaseInsensitive)) {
