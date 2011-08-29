@@ -252,8 +252,10 @@ Rectangle {
                             //those two are to make appModel and runnerModel work
                             property string label: model["label"]?model["label"]:(model["name"]?model["name"]:model["text"])
 
+                            onPressed: {
+                                resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
+                            }
                             onClicked: {
-
                                 //already in the model?
                                 for (var i = 0; i < selectedModel.count; ++i) {
                                     if (model.resourceUri == selectedModel.get(i).resourceUri) {
