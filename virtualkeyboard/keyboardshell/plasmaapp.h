@@ -69,6 +69,8 @@ public Q_SLOTS:
     void hide();
     void setDirection(const QString &direction);
     void setLocation(const QString &direction);
+    void requestLayout(const QString &layout);
+    void resetLayout();
 
 private:
     PlasmaApp();

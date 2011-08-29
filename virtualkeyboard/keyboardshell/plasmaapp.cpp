@@ -212,6 +212,26 @@ void PlasmaApp::setLocation(const QString &location)
     m_dialog->setLocation(loc);
 }
 
+void PlasmaApp::requestLayout(const QString &layout)
+{
+    Plasma::Applet *applet = m_dialog->applet();
+    if (!applet) {
+        return;
+    }
+
+    QMetaObject::invokeMethod(applet, "showLayout", Q_ARG(QString, layout));
+}
+
+void PlasmaApp::resetLayout()
+{
+    Plasma::Applet *applet = m_dialog->applet();
+    if (!applet) {
+        return;
+    }
+
+    QMetaObject::invokeMethod(applet, "resetLayout");
+}
+
 void PlasmaApp::show()
 {
     Plasma::WindowEffects::slideWindow(m_dialog, m_dialog->location());
