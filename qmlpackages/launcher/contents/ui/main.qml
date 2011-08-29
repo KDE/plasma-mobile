@@ -28,6 +28,14 @@ Item {
     width: 400
     height: 150
 
+    signal itemLaunched()
+
+    function resetStatus()
+    {
+        searchField.searchQuery = ""
+        appGrid.currentPage = 0
+        tagCloud.resetStatus()
+    }
 
     MobileComponents.ResourceInstance {
         id: resourceInstance
@@ -120,6 +128,8 @@ Item {
                         operation["id"] = model["id"]
                         service.startOperationCall(operation)
                     }
+                    resetStatus()
+                    itemLaunched()
                 }
 
             }

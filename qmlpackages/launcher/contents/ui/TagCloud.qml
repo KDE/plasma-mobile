@@ -24,12 +24,29 @@ import "categories.js" as Categories
 
 
 Item {
+    id: tagCloudMain
+
     height: 200
     anchors {
-            left: parent.left
-            top: parent.top
-            right: parent.right
+        left: parent.left
+        top: parent.top
+        right: parent.right
+    }
+
+    function resetStatus()
+    {
+        appsSource.connectedSources = ["Apps"]
+        Categories.activeCategories = new Array()
+        for (var i=0; i<tagFlow.children.length; ++i ) {
+            var child = tagFlow.children[i]
+            if (child.active != undefined) {
+                child.active = false
+            }
         }
+        everythingButton.enabled = false
+    }
+
+
     Item {
         id: everythingButton
         x: enabled?parent.width/6:-width-10
@@ -49,17 +66,7 @@ Item {
                                 properties: "x"
                                 easing.type: Easing.InOutQuad
                             }
-            onClicked: {
-                appsSource.connectedSources = ["Apps"]
-                Categories.activeCategories = new Array()
-                for (var i=0; i<tagFlow.children.length; ++i ) {
-                    var child = tagFlow.children[i]
-                    if (child.active != undefined) {
-                        child.active = false
-                    }
-                }
-                everythingButton.enabled = false
-            }
+            onClicked: tagCloudMain.resetStatus()
         }
         Behavior on x {
             NumberAnimation {
