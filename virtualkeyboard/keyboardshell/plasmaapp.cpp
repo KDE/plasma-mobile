@@ -186,20 +186,30 @@ bool PlasmaApp::hasComposite()
 
 void PlasmaApp::setDirection(const QString &direction)
 {
-    Plasma::Direction dir;
+    Plasma::Direction dir = Plasma::Down;
     if (direction == "up") {
         dir = Plasma::Up;
-    } else if (direction == "down") {
-        dir = Plasma::Down;
     } else if (direction == "left") {
         dir = Plasma::Left;
     } else if (direction == "right") {
         dir = Plasma::Right;
-    } else {
-        dir = Plasma::Down;
     }
 
     m_dialog->setDirection(dir);
+}
+
+void PlasmaApp::setLocation(const QString &location)
+{
+    Plasma::Location loc = Plasma::BottomEdge;
+    if (location.compare("top", Qt::CaseInsensitive) == 0) {
+        loc = Plasma::TopEdge;
+    } else if (location.compare("left", Qt::CaseInsensitive) == 0) {
+        loc = Plasma::LeftEdge;
+    } else if (location.compare("Right", Qt::CaseInsensitive) == 0) {
+        loc = Plasma::RightEdge;
+    }
+
+    m_dialog->setLocation(loc);
 }
 
 void PlasmaApp::show()
