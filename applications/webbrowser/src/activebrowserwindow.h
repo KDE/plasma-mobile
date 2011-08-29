@@ -44,6 +44,7 @@ public:
 
     void setUseGL(const bool on);
     bool useGL() const;
+    View* view();
 
 Q_SIGNALS:
     void newWindow(const QString &url);

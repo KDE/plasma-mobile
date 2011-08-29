@@ -20,6 +20,8 @@
 
 #include "view.h"
 #include "kdeclarativewebview.h"
+#include "completionmodel.h"
+#include "history.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
@@ -45,7 +47,8 @@ View::View(const QString &url, QWidget *parent)
       m_options(new WebsiteOptions),
       m_webBrowser(0),
       m_urlInput(0),
-      m_useGL(false)
+      m_useGL(false),
+      m_completionModel(new CompletionModel(this))
 {
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
     // Tell the script engine where to find the Plasma Quick components
@@ -65,6 +68,7 @@ View::View(const QString &url, QWidget *parent)
     // as startupArguments property
     QVariant a = QVariant(QStringList(filterUrl(url)));
     rootContext()->setContextProperty("startupArguments", a);
+    rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(m_completionModel->items()));
 
     // Locate the webbrowser QML component in the package
     // Note that this is a bit brittle, since it relies on the package name,
@@ -87,10 +91,13 @@ View::View(const QString &url, QWidget *parent)
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
     connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
             this, SLOT(onStatusChanged(QDeclarativeView::Status)));
+
+    connect(m_completionModel, SIGNAL(dataChanged()), SLOT(setBookmarks()));
 }
 
 View::~View()
 {
+    m_completionModel->history()->saveHistory();
 }
 
 void View::setUseGL(const bool on)
@@ -108,6 +115,15 @@ void View::setUseGL(const bool on)
 bool View::useGL() const
 {
     return m_useGL;
+}
+
+void View::setBookmarks()
+{
+    QDeclarativeItem* popup = rootObject()->findChild<QDeclarativeItem*>("completionPopup");
+    if (popup) {
+        //QList<QObject*> items = ;
+        rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(m_completionModel->filteredItems()));
+    }
 }
 
 void View::onStatusChanged(QDeclarativeView::Status status)
@@ -133,6 +149,8 @@ void View::onStatusChanged(QDeclarativeView::Status status)
             if (m_urlInput) {
                 connect(m_urlInput, SIGNAL(urlEntered(const QString&)),
                         this, SLOT(onUrlEntered(const QString&)));
+                connect(m_urlInput, SIGNAL(urlFilterChanged()),
+                        this, SLOT(urlFilterChanged()));
             } else {
                 kError() << "urlInput component not found.";
             }
@@ -148,16 +166,24 @@ void View::onStatusChanged(QDeclarativeView::Status status)
 
 void View::urlChanged()
 {
-    QVariant newUrl = m_webBrowser->property("url");
-    m_options->url = newUrl.toString();
-    // TODO: we could expose the URL to the activity here, but that's already done in QML
+    QString newUrl = m_webBrowser->property("url").toString();
+    QString newTitle = m_webBrowser->property("title").toString();
+    m_options->url = newUrl;
+}
+
+void View::urlFilterChanged()
+{
+    QString newFilter = m_urlInput->property("urlFilter").toString();
+    //kDebug() << "Filtering completion" << newFilter;
+    m_completionModel->setFilter(newFilter);
 }
 
 void View::onTitleChanged()
 {
     if (m_webBrowser) {
         m_options->title = m_webBrowser->property("title").toString();
-        //kDebug() << "Title changed to: " << m_options->title;
+        QString u = m_webBrowser->property("url").toString();
+        m_completionModel->history()->visitPage(u, m_options->title);
         emit titleChanged(m_options->title); // sets window caption
     }
 }

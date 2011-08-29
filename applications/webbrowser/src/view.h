@@ -46,7 +46,7 @@ namespace Plasma
 {
     class Package;
 };
-
+class CompletionModel;
 
 class View : public QDeclarativeView
 {
@@ -62,6 +62,9 @@ public:
     void setUseGL(const bool on);
     bool useGL() const;
 
+public Q_SLOTS:
+    void setBookmarks();
+
 Q_SIGNALS:
     void titleChanged(const QString&);
     void newWindow(const QString &url);
@@ -74,6 +77,7 @@ private:
 private Q_SLOTS:
     void onStatusChanged(QDeclarativeView::Status status);
     void urlChanged();
+    void urlFilterChanged();
     void onTitleChanged();
     void onUrlEntered(const QString&);
 
@@ -82,6 +86,7 @@ private:
 
     Plasma::Package *m_package;
     bool m_useGL;
+    CompletionModel* m_completionModel;
 };
 
 #endif // VIEW_H

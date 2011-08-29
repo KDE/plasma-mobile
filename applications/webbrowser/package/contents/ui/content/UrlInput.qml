@@ -33,6 +33,7 @@
 ****************************************************************************/
 
 import QtQuick 1.0
+import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.qtextracomponents 0.1
 
@@ -43,9 +44,11 @@ Item {
     property string filteredUrl: ""
     property alias image: bg.source
     property alias url: urlText.text
+    property string urlFilter
 
     signal urlEntered(string url)
     signal urlChanged
+    signal urlFilterChanged()
 
     width: parent.height
     height: urlText.height
@@ -62,8 +65,19 @@ Item {
         //horizontalAlignment: TextEdit.AlignLeft
         font.pixelSize: 14;
 
+        function updateState() {
+            if (text != webView.url) {
+                completionPopup.state = "expanded"
+            } else {
+                completionPopup.state = "collapsed"
+            }
+
+        }
+
         onTextChanged: {
             container.urlChanged();
+            urlFilter = text;
+            urlFilterChanged();
         }
 
         onReturnPressed: {
@@ -86,12 +100,30 @@ Item {
             webView.focus = true
         }
 
+
+        onFocusChanged: {
+            if (focused) {
+                completionPopup.state = "expanded"
+            } else {
+                completionPopup.state = "collapsed"
+            }
+        }
+
         anchors {
             left: parent.left
             right: parent.right
             leftMargin: 8
             rightMargin: 8
         }
+    }
+
+    CompletionPopup {
+        id: completionPopup
+        height: 200
+        state: "collapsed"
+        anchors.top: urlText.bottom
+        anchors.left: urlText.left
+        anchors.right: urlText.right
     }
 
     QIconItem {
