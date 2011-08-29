@@ -1,5 +1,5 @@
 /*
-    Copyright 2010 Marco Martin <notmart@gmail.com>
+    Copyright 2011 Marco Martin <mart@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -17,7 +17,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
@@ -26,9 +26,9 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: searchFieldContainer
-    
+
     property string searchQuery
-    
+
     anchors {
         left: parent.left
         top: parent.top
@@ -40,8 +40,6 @@ Item {
         id : searchField
 
         clickMessage: i18n("Tap to search...")
-        /*width: 300
-        height: 35*/
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         onTextChanged: {
@@ -50,7 +48,7 @@ Item {
     }
     Timer {
         id: searchTimer
-        interval: 500;
+        interval: 1000;
         running: false
         repeat: false
         onTriggered: {
