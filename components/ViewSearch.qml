@@ -28,6 +28,9 @@ Item {
     id: searchFieldContainer
 
     property string searchQuery
+    onSearchQueryChanged: {
+        searchField.text = searchQuery
+    }
 
     anchors {
         left: parent.left
