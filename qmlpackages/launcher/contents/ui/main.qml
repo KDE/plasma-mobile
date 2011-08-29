@@ -83,7 +83,8 @@ Item {
             if (searchQuery == "") {
                 runnerSource.connectedSources = []
             } else {
-                runnerSource.connectedSources = [searchQuery]
+                //limit to just some runners
+                runnerSource.connectedSources = [searchQuery+":services|nepomuksearch|recentdocuments"]
             }
         }
     }
