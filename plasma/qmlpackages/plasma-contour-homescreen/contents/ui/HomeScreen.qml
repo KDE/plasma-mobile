@@ -228,6 +228,17 @@ Item {
             }
         }
 
+    //acceptsFocus property is costly, delay it after the animation
+    Timer {
+        id: topEdgePanelStateTimer
+        interval: 500
+        repeat: false
+        running: false
+        onTriggered: {
+            topEdgePanel.state = "Hidden"
+        }
+    }
+
     MobileShell.MobilePanel {
         id: slidingPanel
         visible: true
@@ -237,7 +248,7 @@ Item {
         }
         onActiveWindowChanged: {
             if (acceptsFocus && !activeWindow) {
-                topEdgePanel.state = "Hidden"
+                topEdgePanelStateTimer.restart()
             }
         }
     }
