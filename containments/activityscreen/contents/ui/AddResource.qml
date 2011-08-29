@@ -114,6 +114,17 @@ Rectangle {
         dataSource: appsSource
     }
 
+    PlasmaCore.DataSource {
+        id: runnerSource
+        engine: "org.kde.runner"
+        interval: 0
+    }
+    PlasmaCore.DataModel {
+        id: runnerModel
+        keyRoleFilter: ".*"
+        dataSource: runnerSource
+    }
+
 
     PlasmaCore.FrameSvgItem {
         id: dialog
@@ -160,9 +171,10 @@ Rectangle {
             }
 
             onSearchQueryChanged: {
-                resultsGrid.model = metadataModel
+                resultsGrid.model = runnerModel
                 if (searchBox.searchQuery) {
-                    metadataSource.connectedSources = [searchBox.searchQuery]
+                    //limit to just some runners
+                    runnerSource.connectedSources = [searchBox.searchQuery+":services|nepomuksearch|recentdocuments"]
                     resultsContainer.contentY = 0
                 } else {
                     resultsContainer.contentY = resultsContainer.height
@@ -170,6 +182,7 @@ Rectangle {
                 selectedModel.clear()
                 }
         }
+
         Flickable {
             id: resultsContainer
             clip: true
