@@ -28,6 +28,7 @@
 
 #include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
+#include <Nepomuk/File>
 
 #define RESULT_LIMIT 84
 
@@ -180,9 +181,9 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
 
     QString _icon = resource.genericIcon();
     if (_icon.isEmpty() && resource.isFile()) {
-        QString urlProp = resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
-        if (!urlProp.isEmpty()) {
-            _icon = KMimeType::iconNameForUrl(KUrl(urlProp));
+        KUrl url = resource.toFile().url();
+        if (!url.isEmpty()) {
+            _icon = KMimeType::iconNameForUrl(url);
         }
     }
     if (_icon.isEmpty()) {
@@ -208,6 +209,9 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
     data["resourceType"] = resource.resourceType();
     data["query"] = objectName();
 
+    if (resource.isFile() && resource.toFile().url().isLocalFile()) {
+        data["url"] = resource.toFile().url().prettyUrl();
+    }
 
     // Topics
     QStringList _topics, _topicNames;
@@ -238,6 +242,7 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
     QStringList _properties;
     QHash<QUrl, Nepomuk::Variant> props = resource.properties();
     foreach(const QUrl &propertyUrl, props.keys()) {
+
         QStringList _l = propertyUrl.toString().split('#');
         if (_l.count() > 1) {
             QString key = _l[1];
