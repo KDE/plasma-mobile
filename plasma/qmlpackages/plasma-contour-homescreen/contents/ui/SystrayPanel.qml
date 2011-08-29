@@ -41,7 +41,14 @@ Item {
         Component.onCompleted: {
             var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
             menuContainer.plasmoid = component.createObject(menuContainer);
+            //assume menuContainer provides a itemLaunched signal
+            menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
         }
+    }
+
+    function itemLaunched()
+    {
+        systrayPanel.state = "Hidden"
     }
 
     function addContainment(cont)
