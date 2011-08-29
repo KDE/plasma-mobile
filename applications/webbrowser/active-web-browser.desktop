@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=Browser
+Name[pt_BR]=Navegador
+Name[sv]=Webbläsare
+Name[uk]=Переглядач
+Name[x-test]=xxBrowserxx
 GenericName=Web Browser
 GenericName[et]=Veebibrauser
 GenericName[fr]=Navigateur web
