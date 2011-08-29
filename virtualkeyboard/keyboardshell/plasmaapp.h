@@ -69,7 +69,7 @@ public Q_SLOTS:
 
 private:
     PlasmaApp();
-    KConfigGroup storedConfig(int appletId);
+    KConfigGroup storedConfig();
 
 private Q_SLOTS:
     void cleanup();
@@ -79,11 +79,7 @@ private Q_SLOTS:
 private:
     Plasma::Corona *m_corona;
     Plasma::Containment *m_containment;
-    QMultiHash<QString, int>m_storedApplets;
-    int m_maxId;
-
     KeyboardDialog * m_dialog;
-
 };
 
 #endif // multiple inclusion guard

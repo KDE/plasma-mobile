@@ -61,7 +61,6 @@ PlasmaApp* PlasmaApp::self()
 PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
       m_corona(0),
-      m_maxId(0),
       m_dialog(0)
 {
     KGlobal::locale()->insertCatalog("plasma-keyboardcontainer");
@@ -81,20 +80,6 @@ PlasmaApp::PlasmaApp()
     new PlasmaKeyboardAdaptor(this);
     QDBusConnection::sessionBus().registerObject("/App", this);
 
-    KConfigGroup applets = storedConfig(0);
-
-    foreach (const QString &group, applets.groupList()) {
-        KConfigGroup appletGroup(&applets, group);
-
-        int id = appletGroup.name().toInt();
-        QString pluginName = appletGroup.readEntry("plugin", QString());
-
-        if (id != 0 && !pluginName.isEmpty()) {
-            m_storedApplets.insert(pluginName, id);
-            m_maxId = qMax(id, m_maxId);
-        }
-    }
-
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
 }
 
@@ -102,14 +87,9 @@ PlasmaApp::~PlasmaApp()
 {
 }
 
-KConfigGroup PlasmaApp::storedConfig(int appletId)
+KConfigGroup PlasmaApp::storedConfig()
 {
-    KConfigGroup cg(m_corona->config(), "StoredApplets");
-
-    if (appletId > 0) {
-        cg = KConfigGroup(&cg, QString::number(appletId));
-    }
-
+    KConfigGroup cg(KGlobal::config(), "KeyboardConfig");
     return cg;
 }
 
@@ -119,23 +99,17 @@ int  PlasmaApp::newInstance()
         return 0;
     }
 
-    QString pluginName = "plasmaboard";
+    const QString pluginName = "plasmaboard";
 
-    int appletId = ++m_maxId;;
-    if (m_storedApplets.contains(pluginName)) {
-        int storedAppletId = m_storedApplets.values(pluginName).first();
-        KConfigGroup config = storedConfig(storedAppletId);
+    KConfigGroup config = storedConfig();
+    KConfigGroup actualConfig(m_containment->config());
+    actualConfig = KConfigGroup(&actualConfig, "Applets");
+    actualConfig = KConfigGroup(&actualConfig, QString::number(1));
 
-        KConfigGroup actualConfig(m_containment->config());
-        actualConfig = KConfigGroup(&actualConfig, "Applets");
-        actualConfig = KConfigGroup(&actualConfig, QString::number(appletId));
+    config.copyTo(&actualConfig);
+    config.deleteGroup();
 
-        config.copyTo(&actualConfig);
-        config.deleteGroup();
-        m_storedApplets.remove(pluginName, storedAppletId);
-    }
-
-    KeyboardDialog *dialog = new KeyboardDialog(m_corona, m_containment, pluginName, appletId, QVariantList());
+    KeyboardDialog *dialog = new KeyboardDialog(m_corona, m_containment, pluginName, 1, QVariantList());
     dialog->installEventFilter(this);
     connect(dialog, SIGNAL(storeApplet(Plasma::Applet*)), this, SLOT(storeApplet(Plasma::Applet*)));
 
@@ -176,8 +150,7 @@ void PlasmaApp::cleanup()
 
 void PlasmaApp::storeApplet(Plasma::Applet *applet)
 {
-    m_storedApplets.insert(applet->name(), applet->id());
-    KConfigGroup storage = storedConfig(0);
+    KConfigGroup storage = storedConfig();
     KConfigGroup cg(applet->containment()->config());
     cg = KConfigGroup(&cg, "Applets");
     cg = KConfigGroup(&cg, QString::number(applet->id()));
