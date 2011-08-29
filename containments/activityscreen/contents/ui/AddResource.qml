@@ -249,8 +249,8 @@ Rectangle {
                             width: 130
                             height: 120
                             infoLabelVisible: false
-                            //those two are to make appModel work
-                            property string label: model["label"]?model["label"]:model["name"]
+                            //those two are to make appModel and runnerModel work
+                            property string label: model["label"]?model["label"]:(model["name"]?model["name"]:model["text"])
 
                             onClicked: {
 
