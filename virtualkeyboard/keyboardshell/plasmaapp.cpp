@@ -77,8 +77,9 @@ PlasmaApp::PlasmaApp()
     corona();
     m_containment = m_corona->addContainment("null");
 
-    new PlasmaKeyboardAdaptor(this);
-    QDBusConnection::sessionBus().registerObject("/App", this);
+    new VirtualKeyboardAdaptor(this);
+    QDBusConnection::sessionBus().registerService("org.kde.plasma.VirtualKeyboard");
+    QDBusConnection::sessionBus().registerObject("/", this);
 
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
 }
