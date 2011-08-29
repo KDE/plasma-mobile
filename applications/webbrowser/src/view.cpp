@@ -169,9 +169,6 @@ void View::urlChanged()
     QString newUrl = m_webBrowser->property("url").toString();
     QString newTitle = m_webBrowser->property("title").toString();
     m_options->url = newUrl;
-    // TODO: we could expose the URL to the activity here, but that's already done in QML
-    m_completionModel->history()->visitPage(newUrl, newTitle);
-    //kDebug() << "TODO: record history" << newUrl;
 }
 
 void View::urlFilterChanged()
@@ -185,7 +182,8 @@ void View::onTitleChanged()
 {
     if (m_webBrowser) {
         m_options->title = m_webBrowser->property("title").toString();
-        //kDebug() << "Title changed to: " << m_options->title;
+        QString u = m_webBrowser->property("url").toString();
+        m_completionModel->history()->visitPage(u, m_options->title);
         emit titleChanged(m_options->title); // sets window caption
     }
 }

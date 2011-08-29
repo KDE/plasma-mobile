@@ -76,15 +76,6 @@ Item {
 
         onTextChanged: {
             container.urlChanged();
-            print("XXX text changed" + text);
-            updateState();
-            /*
-            if (text != webView.url) {
-                completionPopup.state = "expanded"
-            } else {
-                completionPopup.state = "collapsed"
-            }
-            */
             urlFilter = text;
             urlFilterChanged();
         }
@@ -109,11 +100,15 @@ Item {
             webView.focus = true
         }
 
-        /*
-        onFocusInEvent: {
-            print("Print focus: " + focus);
+
+        onFocusChanged: {
+            if (focused) {
+                completionPopup.state = "expanded"
+            } else {
+                completionPopup.state = "collapsed"
+            }
         }
-        */
+
         anchors {
             left: parent.left
             right: parent.right

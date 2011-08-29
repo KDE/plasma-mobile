@@ -70,8 +70,8 @@ public:
       , pending(PendingNone)
       , newWindowComponent(0)
       , newWindowParent(0)
-      , rendering(true)
       , wallet(0)
+      , rendering(true)
     {
     }
 

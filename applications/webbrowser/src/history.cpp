@@ -55,14 +55,8 @@ History::History(QObject *parent)
     connect(&d->addHistoryTimer, SIGNAL(timeout()), SLOT(recordHistory()));
 
     d->saveTimer.setSingleShot(true);
-    d->saveTimer.setInterval(30000); // wait 30 sec before saving to history
+    d->saveTimer.setInterval(1000); // wait 1 sec before saving to history
     connect(&d->saveTimer, SIGNAL(timeout()), SLOT(saveHistory()));
-    //saveHistory();
-
-    //loadHistory();
-    //d->icon = KIcon("view-history").pixmap(48, 48).toImage();
-    //d->icon = QImage("/home/sebas/Documents/wallpaper.png");
-    //kDebug() << "ionsize" << d->icon.size();
 }
 
 History::~History()
@@ -80,7 +74,7 @@ void History::loadHistory()
 {
 
     kDebug() << "populating history...";
-    QStringList h = d->config.readEntry("history", QStringList("empty"));
+    QStringList h = d->config.readEntry("history", QStringList());
     foreach (const QString &hitem, h) {
         QStringList hs = hitem.split(d->separator);
         kDebug() << "history: " << hs;
@@ -111,14 +105,11 @@ void History::visitPage(const QString &url, const QString &title)
 
 void History::recordHistory()
 {
-    // TODO: re-query for the title here, page wasn't loaded before ...
-    kDebug() << "count:" << d->items.count();
     d->items.insert(0, d->currentPage);
     while (d->items.count() > 256) {
         d->items.takeLast();
     }
     emit dataChanged();
-    kDebug() << "DDD HIstory recorded: items count:" << d->items.count();
     d->saveTimer.start();
 }
 
@@ -131,15 +122,6 @@ void History::saveHistory()
             l.append(ci->url() + d->separator + ci->name());
         }
     }
-    kDebug() << "Saving history:" << l.join("\n");
-    /*
-    l.append("http://lwn.net" + d->separator + "Linux Weekly News");
-    l.append("http://vizZzion.org/stuff/cookie.php" + d->separator + "Cookie Test");
-    l.append("http://volkskrant.nl" + d->separator + "Volkskrant");
-    l.append("http://heise.de" + d->separator + "Heise");
-    l.append("http://tweakers.net");
-    foreach (
-    */
     d->config.writeEntry("history", l);
     d->config.sync();
 }

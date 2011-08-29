@@ -110,19 +110,6 @@ Item {
         }
     }
 
-    Component.onCompleted: {
-        print("completer loaded");
-    }
-
-    onVisibleChanged: {
-        print("visibility changed to " + visible);
-    }
-
-    onStateChanged: {
-        print("state changed: " + state);
-    }
-
-
     states: [
         State {
             id: expanded
