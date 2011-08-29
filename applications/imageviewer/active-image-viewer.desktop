@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=Images
+Name[pt_BR]=Imagens
+Name[sv]=Bilder
+Name[uk]=Зображення
+Name[x-test]=xxImagesxx
 GenericName=Image viewer
 GenericName[nl]=Afbeeldingenviewer
 GenericName[pt]=Visualizador de imagens

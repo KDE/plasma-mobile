@@ -214,6 +214,8 @@ Image {
         Component.onCompleted: resultsContainer.contentY = resultsContainer.height
         height: resultsContainer.height
         model: filterModel
+        delegateWidth: 130
+        delegateHeight: 120
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
             width: 130

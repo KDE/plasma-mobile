@@ -73,14 +73,14 @@ Flickable {
                         mainImage.scale = Math.min(1, mainFlickable.width/sourceSize.width)
                     }
                 }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (toolbar.y == 0) {
-                            toolbar.y = -toolbar.height
-                        } else {
-                            toolbar.y = 0
-                        }
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (toolbar.y == 0) {
+                        toolbar.y = -toolbar.height
+                    } else {
+                        toolbar.y = 0
                     }
                 }
             }
