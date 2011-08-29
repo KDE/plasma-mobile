@@ -159,6 +159,7 @@ Rectangle {
                     onClicked: {
                         resultsContainer.contentY = resultsContainer.height
                         selectedModel.clear()
+                        searchBox.searchQuery = ""
                     }
                 }
                 opacity: resultsContainer.contentY==0?1:0
