@@ -45,30 +45,13 @@
 KeyboardCorona::KeyboardCorona(QObject *parent)
     : Plasma::Corona(parent)
 {
-    init();
+    enableAction("lock widgets", false);
+    setItemIndexMethod(QGraphicsScene::NoIndex);
 }
 
 KeyboardCorona::~KeyboardCorona()
 {
 }
-
-void KeyboardCorona::init()
-{
-    Plasma::ContainmentActionsPluginsConfig desktopPlugins;
-    desktopPlugins.addPlugin(Qt::NoModifier, Qt::Vertical, "switchdesktop");
-    desktopPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
-    Plasma::ContainmentActionsPluginsConfig panelPlugins;
-    panelPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
-
-    setContainmentActionsDefaults(Plasma::Containment::DesktopContainment, desktopPlugins);
-    setContainmentActionsDefaults(Plasma::Containment::PanelContainment, panelPlugins);
-    setContainmentActionsDefaults(Plasma::Containment::CustomPanelContainment, panelPlugins);
-
-    enableAction("lock widgets", false);
-
-    setItemIndexMethod(QGraphicsScene::NoIndex);
-}
-
 
 int KeyboardCorona::numScreens() const
 {
