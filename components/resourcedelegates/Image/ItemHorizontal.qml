@@ -50,16 +50,8 @@ Item {
         }
     }
 
-    Item {
-        id: itemFrame
-        anchors {   bottom: parent.bottom;
-                    top: parent.top;
-                    left: parent.left;
-                    right: parent.right;
-                    margins: 0;
-        }
-        //height: 128
-        height: resourceItem.height
+    Column {
+        anchors.centerIn: parent
 
         QIconItem {
             id: iconItem
@@ -102,27 +94,51 @@ Item {
                 }
             }
         }
+
         PlasmaCore.FrameSvgItem {
             imagePath: "widgets/media-delegate"
             prefix: "picture"
             id: previewFrame
-            //height: width/1.6
-            width: height*1.6
+            height: previewImage.height+margins.top+margins.bottom
+            width: previewImage.width+margins.left+margins.right
             visible: false
-            anchors {
-                /*left: parent.left
-                right: parent.right*/
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-                bottom: iconItem.bottom
-            }
-            QImageItem {
-                id: previewImage
-                anchors.fill: parent
-                anchors.margins: previewFrame.margins.left
-            }
+            anchors.centerIn: previewArea
         }
 
+        Item {
+            id: previewArea
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: parent.top
+                bottom: iconItem.bottom
+
+                leftMargin: previewFrame.margins.left
+                topMargin: previewFrame.margins.top
+                rightMargin: previewFrame.margins.right
+                bottomMargin: previewFrame.margins.bottom
+            }
+
+            QImageItem {
+                id: previewImage
+                anchors.centerIn: parent
+
+                width: {
+                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
+                        return parent.width
+                    } else {
+                        return parent.height * (nativeWidth/nativeHeight)
+                    }
+                }
+                height: {
+                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
+                        return parent.width / (nativeWidth/nativeHeight)
+                    } else {
+                        return parent.height
+                    }
+                }
+            }
+        }
 
         Text {
             id: previewLabel
@@ -133,7 +149,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
             anchors.top: iconItem.bottom
-            anchors.horizontalCenter: itemFrame.horizontalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
             width: 130
             style: Text.Outline
             styleColor: Qt.rgba(1, 1, 1, 0.6)
