@@ -84,24 +84,6 @@ Rectangle {
     }
 
 
-    Timer {
-       id: queryTimer
-       running: true
-       repeat: false
-       interval: 1000
-       onTriggered: {
-            resultsGrid.model = metadataModel
-            if (searchBox.searchQuery) {
-                metadataSource.connectedSources = [searchBox.searchQuery]
-                resultsContainer.contentY = 0
-            } else {
-                resultsContainer.contentY = resultsContainer.height
-            }
-            selectedModel.clear()
-       }
-    }
-
-
 
     PlasmaCore.DataSource {
         id: metadataSource
@@ -178,8 +160,15 @@ Rectangle {
             }
 
             onSearchQueryChanged: {
-                queryTimer.running = true
-            }
+                resultsGrid.model = metadataModel
+                if (searchBox.searchQuery) {
+                    metadataSource.connectedSources = [searchBox.searchQuery]
+                    resultsContainer.contentY = 0
+                } else {
+                    resultsContainer.contentY = resultsContainer.height
+                }
+                selectedModel.clear()
+                }
         }
         Flickable {
             id: resultsContainer
@@ -224,10 +213,12 @@ Rectangle {
 
                     Component.onCompleted: resultsContainer.contentY = resultsContainer.height
                     height: resultsContainer.height
+                    delegateWidth: 130
+                    delegateHeight: 120
                     model: metadataModel
                     delegate: Item {
-                        width: 130
-                        height: 120
+                        width: resultsGrid.delegateWidth
+                        height: resultsGrid.delegateHeight
                         PlasmaCore.FrameSvgItem {
                                 id: highlightFrame
                                 imagePath: "widgets/viewitem"
@@ -392,13 +383,8 @@ Rectangle {
                         operation["ResourceUrl"] = selectedModel.get(i).resourceUri
                         service.startOperationCall(operation)
                     }
-                    queryTimer.running = true
 
                     disappearAnimation.running = true
-                    /*
-                    //FIXME: MEEGO BUG
-                    metadataSource.connectedSources = ["x"]
-                    metadataSource.connectedSources = ["CurrentActivityResources:"+plasmoid.activityId]*/
                 }
             }
 
