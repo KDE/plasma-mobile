@@ -202,7 +202,7 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
     data["isFile"] = resource.isFile();
     data["exists"] = resource.exists();
     data["rating"] = resource.rating();
-    data["symbols"] = resource.rating();
+    data["symbols"] = resource.symbols();
 
     data["className"] = resource.className();
     data["resourceUri"] = resource.resourceUri();
