@@ -29,7 +29,6 @@ Item {
     objectName: "completionPopup"
     id: mainItem
     state: "expanded"
-    clip: true
 
     PlasmaCore.Theme {
         id: theme
@@ -95,10 +94,16 @@ Item {
         }
 
         ListView {
-            anchors.fill: parent
-            anchors.margins: 16
+            anchors {
+                fill: parent
+                leftMargin: frame.margins.left
+                rightMargin: frame.margins.right
+                topMargin: frame.margins.top
+                bottomMargin: frame.margins.bottom
+            }
             y: 16
             spacing: 4
+            clip: true
             model: bookmarksModel
             delegate: myDelegate
             highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
