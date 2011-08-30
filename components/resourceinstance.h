@@ -35,6 +35,7 @@ class ResourceInstance : public QDeclarativeItem
 
     Q_PROPERTY(QUrl uri READ uri WRITE setUri NOTIFY uriChanged)
     Q_PROPERTY(QString mimetype READ mimetype WRITE setMimetype NOTIFY mimetypeChanged)
+    Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
     //Q_PROPERTY(OpenReason openReason READ openReason)
 
 public:
@@ -47,6 +48,9 @@ public:
     QString mimetype() const;
     void setMimetype(const QString &mimetype);
 
+    QString title() const;
+    void setTitle(const QString &title);
+
 protected:
     QGraphicsView *view() const;
 
@@ -56,6 +60,7 @@ protected Q_SLOTS:
 Q_SIGNALS:
     void uriChanged();
     void mimetypeChanged();
+    void titleChanged();
 
 public Q_SLOTS:
     /**
@@ -82,6 +87,7 @@ private:
     Activities::ResourceInstance *m_resourceInstance;
     QUrl m_uri;
     QString m_mimetype;
+    QString m_title;
     QTimer *m_syncTimer;
 };
 
