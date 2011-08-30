@@ -16,7 +16,7 @@ toolBarFont=Droid Sans Fallback,11,-1,5,50,0,0,0,0,0
 
 [KDE]
 ShowDeleteCommand=false
-SingleClick=false
+SingleClick=true
 
 [WM]
 activeFont=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
