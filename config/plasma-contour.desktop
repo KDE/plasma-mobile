@@ -4,6 +4,7 @@ Exec=sleep 3 ; plasma-contour
 X-DBUS-StartupType=wait
 Name=Plasma Active Contour Shell
 Name[nl]=Plasma-shell met actieve omtrek
+Name[pt]=Consola Active Contour do Plasma
 Name[pt_BR]=Shell do Plasma Active Contour
 Name[sv]=Plasma aktivt konturskal
 Name[uk]=Оболонка Контур Плазми для сенсорних екранів
