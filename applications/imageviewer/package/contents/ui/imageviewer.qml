@@ -22,6 +22,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 import Qt.labs.gestures 1.0
+import org.kde.plasma.slccomponents 0.1 as SlcComponents
 
 Image {
     id: imageViewer
@@ -133,7 +134,7 @@ Image {
                 easing.type: Easing.InOutQuad
             }
         }
-        
+
         QIconItem {
             icon: QIcon("go-previous")
             width: 48
@@ -222,6 +223,11 @@ Image {
             height: 120
             infoLabelVisible: false
 
+            onPressed: {
+                resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
+                resourceInstance.title = model["label"]
+            }
+
             onClicked: {
                 loadImage(model["url"])
             }
@@ -266,8 +272,16 @@ Image {
                 source: model["url"]
             }
 
-            onCurrentIndexChanged: resourceInstance.uri = currentItem.source
+            onCurrentIndexChanged: {
+                resourceInstance.uri = currentItem.source
+                resourceInstance.title = currentItem.label
+            }
             visible: false
         }
+
+    }
+
+    SlcComponents.SlcMenu {
+        id: contextMenu
     }
 }

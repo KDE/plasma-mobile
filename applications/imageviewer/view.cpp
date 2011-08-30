@@ -33,13 +33,16 @@
 
 #include  <kdeclarative.h>
 
+#include <Plasma/Corona>
 #include <Plasma/Package>
 
-View::View(const QString &url, QWidget *parent)
+AppView::AppView(const QString &url, QWidget *parent)
     : QDeclarativeView(parent),
       m_imageViewer(0),
       m_useGL(false)
 {
+    delete scene();
+    setScene(new Plasma::Corona(this));
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
     // Tell the script engine where to find the Plasma Quick components
     QStringList importPaths = KGlobal::dirs()->findDirs("lib", "kde4/imports");
@@ -77,11 +80,11 @@ View::View(const QString &url, QWidget *parent)
             this, SLOT(onStatusChanged(QDeclarativeView::Status)));
 }
 
-View::~View()
+AppView::~AppView()
 {
 }
 
-void View::setUseGL(const bool on)
+void AppView::setUseGL(const bool on)
 {
 #ifndef QT_NO_OPENGL
     if (on) {
@@ -93,12 +96,12 @@ void View::setUseGL(const bool on)
     m_useGL = on;
 }
 
-bool View::useGL() const
+bool AppView::useGL() const
 {
     return m_useGL;
 }
 
-void View::onStatusChanged(QDeclarativeView::Status status)
+void AppView::onStatusChanged(QDeclarativeView::Status status)
 {
     if (status == QDeclarativeView::Ready) {
 

@@ -31,6 +31,7 @@ Flickable {
     contentHeight: mainImage.height*mainImage.scale
     interactive: contentWidth > width || contentHeight > height
     property alias source: mainImage.source
+    property string label: model["label"]
 
     NumberAnimation {
         id: zoomAnim

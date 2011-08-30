@@ -45,13 +45,13 @@ namespace Plasma
     class Package;
 }
 
-class View : public QDeclarativeView
+class AppView : public QDeclarativeView
 {
     Q_OBJECT
 
 public:
-    View(const QString &url, QWidget *parent = 0 );
-    ~View();
+    AppView(const QString &url, QWidget *parent = 0 );
+    ~AppView();
 
     QString name() const;
 
