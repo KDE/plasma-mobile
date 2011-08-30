@@ -253,7 +253,23 @@ Rectangle {
                             property string label: model["label"]?model["label"]:(model["name"]?model["name"]:model["text"])
 
                             onPressed: {
-                                resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
+                                //take into account cases for all 3 models
+
+                                if (model["url"]) {
+                                    resourceInstance.uri = model["url"]
+                                } else if (model["resourceUri"]) {
+                                    resourceInstance.uri = model["resourceUri"]
+                                } else if (model["entryPath"]) {
+                                    resourceInstance.uri = model["entryPath"]
+                                }
+
+                                if (model["label"]) {
+                                    resourceInstance.title = model["label"]
+                                } else if (model["name"]) {
+                                    resourceInstance.title = model["name"]
+                                } else if (model["text"]) {
+                                    resourceInstance.title = model["text"]
+                                }
                             }
                             onClicked: {
                                 //already in the model?

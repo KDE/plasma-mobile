@@ -112,6 +112,7 @@ Item {
                 property string mimeType: model["mimeType"]?model["mimeType"]:"application/x-desktop"
                 onPressed: {
                     resourceInstance.uri = model["resourceUri"]?model["resourceUri"]:model["entryPath"]
+                    resourceInstance.title = model["name"]?model["name"]:model["text"]
                 }
                 onClicked: {
                     //showing apps model?
