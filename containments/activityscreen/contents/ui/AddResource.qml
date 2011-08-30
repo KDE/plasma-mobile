@@ -314,77 +314,80 @@ Rectangle {
                     }
                 }
 
-                GridView {
+                Flow {
                     id: categoriesView
                     anchors {
                         left: parent.left
                         right: parent.right
                     }
                     height: resultsContainer.height
+                    property int orientation: ListView.Horizontal
 
-                    model: ListModel {
-                        ListElement {
-                            name: "Apps"
-                            className: "_Apps"
-                            hasSymbol: "application-x-executable"
+                    Repeater {
+                        model: ListModel {
+                            ListElement {
+                                name: "Apps"
+                                className: "_Apps"
+                                hasSymbol: "application-x-executable"
+                            }
+                            ListElement {
+                                name: "Bookmarks"
+                                className: "Bookmark"
+                                hasSymbol: "emblem-favorite"
+                            }
+                            ListElement {
+                                name: "Contacts"
+                                className: "Contact"
+                                hasSymbol: "view-pim-contacts"
+                            }
+                            ListElement {
+                                name: "Documents"
+                                className: "Document"
+                                hasSymbol: "application-vnd.oasis.opendocument.text"
+                            }
+                            ListElement {
+                                name: "Images"
+                                className: "Image"
+                                hasSymbol: "image-x-generic"
+                            }
+                            ListElement {
+                                name: "Music"
+                                className: "Audio"
+                                hasSymbol: "audio-x-generic"
+                            }
+                            ListElement {
+                                name: "Videos"
+                                className: "Video"
+                                hasSymbol: "video-x-generic"
+                            }
+                            ListElement {
+                                name: "Widgets"
+                                className: "_PlasmaWidgets"
+                                hasSymbol: "dashboard-show"
+                            }
                         }
-                        ListElement {
-                            name: "Bookmarks"
-                            className: "Bookmark"
-                            hasSymbol: "emblem-favorite"
-                        }
-                        ListElement {
-                            name: "Contacts"
-                            className: "Contact"
-                            hasSymbol: "view-pim-contacts"
-                        }
-                        ListElement {
-                            name: "Documents"
-                            className: "Document"
-                            hasSymbol: "application-vnd.oasis.opendocument.text"
-                        }
-                        ListElement {
-                            name: "Images"
-                            className: "Image"
-                            hasSymbol: "image-x-generic"
-                        }
-                        ListElement {
-                            name: "Music"
-                            className: "Audio"
-                            hasSymbol: "audio-x-generic"
-                        }
-                        ListElement {
-                            name: "Videos"
-                            className: "Video"
-                            hasSymbol: "video-x-generic"
-                        }
-                        ListElement {
-                            name: "Widgets"
-                            className: "_PlasmaWidgets"
-                            hasSymbol: "dashboard-show"
-                        }
-                    }
-                    delegate: Component {
-                        MobileComponents.ResourceDelegate {
-                            width: 140
-                            height: 120
-                            className: "FileDataObject"
-                            genericClassName: "FileDataObject"
-                            property string label: name
-                            property string mimeType: "x"
-                            onClicked: {
-                                //FIXME: make all of this way cleaner, hardcoding _PlasmaWidgets seems pretty bad
-                                if (model["className"] == "_PlasmaWidgets") {
-                                    main.addAction.trigger()
-                                    main.destroy()
-                                } else if (model["className"] == "_Apps") {
-                                    resultsGrid.model = appsModel
+                        delegate: Component {
+                            MobileComponents.ResourceDelegate {
+                                width: 140
+                                height: 120
+                                className: "FileDataObject"
+                                genericClassName: "FileDataObject"
+                                property string label: name
+                                property string mimeType: "x"
+                                onClicked: {
+                                    //FIXME: make all of this way cleaner, hardcoding _PlasmaWidgets seems pretty bad
+                                    if (model["className"] == "_PlasmaWidgets") {
+                                        main.addAction.trigger()
+                                        main.destroy()
+                                    } else if (model["className"] == "_Apps") {
+                                        resultsGrid.model = appsModel
 
-                                    resultsContainer.contentY = 0
-                                } else {
-                                    resultsGrid.model = metadataModel
-                                    metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
-                                    resultsContainer.contentY = 0
+                                        resultsContainer.contentY = 0
+                                    } else {
+                                        resultsGrid.model = metadataModel
+                                        metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
+                                        resultsContainer.contentY = 0
+                                    }
                                 }
                             }
                         }
