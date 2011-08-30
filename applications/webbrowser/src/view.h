@@ -45,7 +45,7 @@ struct WebsiteOptions
 namespace Plasma
 {
     class Package;
-};
+}
 class CompletionModel;
 
 class View : public QDeclarativeView
