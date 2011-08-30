@@ -71,6 +71,7 @@ Rectangle {
         id: resourceInstance
         uri: webBrowser.url
         mimetype: "text/x-html"
+        title: webView.title
     }
 
     FlickableWebView {
