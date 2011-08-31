@@ -83,10 +83,11 @@ PlasmaApp::PlasmaApp()
       m_isDesktop(false)
 {
     KGlobal::locale()->insertCatalog("libplasma");
+    KGlobal::locale()->insertCatalog("plasma-active");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    qmlRegisterType<PanelProxy>("org.kde.plasma.mobileshell", 0, 1, "MobilePanel");
+    qmlRegisterType<PanelProxy>("org.kde.plasma.activeshell", 0, 1, "ActivePanel");
 
     //FIXME: why does not work?
     //qmlRegisterInterface<Plasma::Wallpaper>("Wallpaper");
@@ -139,7 +140,7 @@ PlasmaApp::PlasmaApp()
     m_mainView->setFixedSize(width, height);
     m_mainView->move(0,0);
 
-    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-active");
     const QString themeName = cg.readEntry("name", "air-mobile");
     Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
     Plasma::Theme::defaultTheme()->setThemeName(themeName);

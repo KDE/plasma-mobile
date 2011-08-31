@@ -21,7 +21,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobileshell 0.1 as MobileShell
+import org.kde.plasma.activeshell 0.1 as ActiveShell
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
