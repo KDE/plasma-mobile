@@ -147,16 +147,6 @@ Rectangle {
             }
         }
 
-        Timer {
-            id: resizeScreenshotTimer
-            repeat: false
-            running: false
-            interval: 250
-            onTriggered: {
-                configInterface.screenshotSize=(wallpapersList.delegateWidth-20)+"x"+(wallpapersList.delegateHeight-20)
-            }
-        }
-
         MobileComponents.IconGrid {
             id: wallpapersList
             property int currentIndex: 0
