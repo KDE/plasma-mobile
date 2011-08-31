@@ -155,15 +155,6 @@ PlasmaApp::PlasmaApp()
     corona();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
 
-    KAction *lockAction = new KAction(this);
-    lockAction->setText(i18n("Lock Plasma Mobile screen"));
-    lockAction->setObjectName(QString("lock screen")); // NO I18
-
-    KGlobalAccel::cleanComponent(KGlobal::mainComponent().componentName());
-    lockAction->setGlobalShortcut(KShortcut(Qt::CTRL + Qt::Key_L));
-    m_mainView->addAction(lockAction);
-    connect(lockAction, SIGNAL(triggered()), this, SLOT(lockScreen()));
-
     if (isDesktop) {
         notifyStartup(true);
     }
@@ -313,11 +304,6 @@ void PlasmaApp::changeContainment(Plasma::Containment *containment)
     }
 
     m_currentContainment = containment;
-}
-
-void PlasmaApp::lockScreen()
-{
-    m_homeScreen->setProperty("locked", true);
 }
 
 Plasma::Corona* PlasmaApp::corona()
