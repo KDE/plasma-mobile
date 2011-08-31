@@ -78,7 +78,6 @@ Item {
 
         state = "Normal"
         transformingChanged(false);
-        switcher.current=0
     }
 
     PlasmaCore.Theme {
@@ -151,42 +150,22 @@ Item {
     states: [
             State {
                 name: "Normal"
-                /*PropertyChanges {
-                    target: mainSlot;
-                    y: 0;
-                }
-                PropertyChanges {
-                    target: spareSlot;
-                    y: -homeScreen.height;
-                }*/
-                PropertyChanges {
+               /* PropertyChanges {
                     target: spareSlot;
                     scale: 0.3;
                 }
                 PropertyChanges {
                     target: spareSlot;
                     opacity: 0;
-                }
+                }*/
                 PropertyChanges {
                     target: spareSlot;
-                    x: homeScreen.width/4
+                    x: homeScreen.width
                 }
 
             },
             State {
                 name: "Slide"
-                PropertyChanges {
-                    target: spareSlot;
-                    y: 0;
-                }
-                PropertyChanges {
-                    target: spareSlot;
-                    scale: 1;
-                }
-                PropertyChanges {
-                    target: spareSlot;
-                    opacity: 1;
-                }
                 PropertyChanges {
                     target: spareSlot;
                     x: 0
@@ -195,38 +174,22 @@ Item {
     ]
 
     transitions: Transition {
-            from: "Normal"
-            to: "Slide"
-            SequentialAnimation {
+        from: "Normal"
+        to: "Slide"
+        SequentialAnimation {
 
-                PauseAnimation {
-                    duration: 2000
-                }
-                ParallelAnimation {
-                    NumberAnimation {
-                        target: spareSlot;
-                        property: "opacity";
-                        easing.type: "OutQuad";
-                        duration: 300;
-                    }
-                    NumberAnimation {
-                        target: spareSlot;
-                        property: "scale";
-                        easing.type: "OutQuad";
-                        duration: 300;
-                    }
-                    NumberAnimation {
-                        target: spareSlot;
-                        property: "x";
-                        easing.type: "OutQuad";
-                        duration: 300;
-                    }
-                }
-                ScriptAction {
-                    script: finishTransition();
-                }
+            NumberAnimation {
+                target: spareSlot;
+                property: "x";
+                easing.type: "OutQuad";
+                duration: 300;
+            }
+
+            ScriptAction {
+                script: finishTransition();
             }
         }
+    }
 
     //acceptsFocus property is costly, delay it after the animation
     Timer {

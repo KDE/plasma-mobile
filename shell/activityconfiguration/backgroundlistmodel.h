@@ -68,9 +68,6 @@ public:
     QModelIndex indexOf(const QString &path) const;
     virtual bool contains(const QString &bg) const;
 
-    void setWallpaperSize(const QSize& size);
-    void setResizeMethod(Plasma::Wallpaper::ResizeMethod resizeMethod);
-
     void setScreenshotSize(const QSize &size);
     QSize screenshotSize() const;
     int count() const {return m_packages.size();}
@@ -97,8 +94,6 @@ private:
     KDirWatch m_dirwatch;
 
     QSize m_screenshotSize;
-    QSize m_size;
-    Plasma::Wallpaper::ResizeMethod m_resizeMethod;
     QString m_findToken;
     QPixmap m_previewUnavailablePix;
 };

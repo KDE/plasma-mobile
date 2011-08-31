@@ -72,6 +72,7 @@ Q_SIGNALS:
     void modelChanged();
     void wallpaperIndexChanged();
     void activityNameChanged();
+    void containmentAvailable();
 
 protected:
     void ensureContainmentExistence();

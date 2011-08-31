@@ -26,7 +26,6 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Rectangle {
     id: main
     signal closeRequested
-    property variant containmentConfig
     color: Qt.rgba(0,0,0,0.5)
     width: 800
     height: 480
@@ -90,30 +89,6 @@ Rectangle {
         }
     }
 
-    //FIXME: artificial delay to have configInterface working
-    Timer {
-        repeat: false
-        running: true
-        interval: 350
-        onTriggered: {
-            wallpapersList.model = configInterface.wallpaperModel
-            if (configInterface.activityName == "") {
-                activityNameEdit.text = i18n("New Activity")
-            } else {
-                activityNameEdit.text = configInterface.activityName
-            }
-
-            if (configInterface.activityName == "") {
-                var newIndex = Math.random()*wallpapersList.count
-                wallpapersList.positionViewAtIndex(newIndex, ListView.Center)
-                wallpapersList.currentIndex = newIndex
-            } else {
-                wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex, ListView.Center)
-                wallpapersList.currentIndex = configInterface.wallpaperInde
-            }
-        }
-    }
-
     PlasmaCore.Theme {
         id: theme
     }
@@ -169,6 +144,32 @@ Rectangle {
             }
             model: configInterface.wallpaperModel
             delegate: WallpaperDelegate {}
+        }
+
+        Connections {
+            target: configInterface
+            onModelChanged: {
+                wallpapersList.model =  configInterface.wallpaperModel
+            }
+
+            onWallpaperIndexChanged: {
+                if (configInterface.activityName == "" || configInterface.wallpaperIndex < 0) {
+                    var newIndex = Math.random()*wallpapersList.count
+                        wallpapersList.positionViewAtIndex(newIndex)
+                        wallpapersList.currentIndex = newIndex
+                } else {
+                    wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex)
+                        wallpapersList.currentIndex = configInterface.wallpaperIndex
+                }
+            }
+
+            onActivityNameChanged: {
+                if (configInterface.activityName == "") {
+                    activityNameEdit.text = i18n("New Activity")
+                } else {
+                    activityNameEdit.text = configInterface.activityName
+                }
+            }
         }
 
         Row {
