@@ -231,22 +231,24 @@ void PlasmaApp::setupHomeScreen()
 
     m_homeScreenPath = m_corona->homeScreenPackage()->filePath("mainscript");
     if (m_homeScreenPath.isEmpty()) {
-        m_homeScreenPath = QString("tablet-homescreen");
-        kWarning() << "m_homeScreenPath is empty, this should not happen. Trying " << m_homeScreenPath;
+        kWarning() << "Could not find an home screen, exiting.";
+        QCoreApplication::quit();
+        return;
     }
     kDebug() << "Loading " << m_homeScreenPath;
     m_declarativeWidget->setQmlPath(m_homeScreenPath);
 
     if (!m_declarativeWidget->engine()) {
-        kDebug() << "Invalid main declarative widget, exiting.";
+        kDebug() << "Invalid main declarative engine, exiting.";
         QCoreApplication::quit();
     }
 
     m_homeScreen = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
 
     if (!m_homeScreen) {
-        kError() << "Could not find homescreen package. Exiting. " << m_homeScreenPath;
+        kError() << "Error in creation of the homescreen object, exiting. " << m_homeScreenPath;
         QCoreApplication::quit();
+        return;
     }
 
     mainViewGeometryChanged();
