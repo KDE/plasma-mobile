@@ -239,7 +239,7 @@ Item {
         }
     }
 
-    MobileShell.MobilePanel {
+    ActiveShell.ActivePanel {
         id: slidingPanel
         visible: true
         mainItem: SystrayPanel {

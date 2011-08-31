@@ -28,7 +28,7 @@
 
 #include "plasmaapp.h"
 
-static const char description[] = I18N_NOOP( "The mobile version of the KDE workspace" );
+static const char description[] = I18N_NOOP( "Plasma Active workspace by the KDE community" );
 static const char version[] = "0.1";
 
 extern "C"
