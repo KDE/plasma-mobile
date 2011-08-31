@@ -69,7 +69,6 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
                     this, SLOT(deleteLater()));
         }
     }
-
 }
 
 ActivityConfiguration::~ActivityConfiguration()
@@ -134,6 +133,9 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
     m_model->setWallpaperSize(QSize(1024, 600));
     m_model->reload();
 
+    // since we're using the Image plugin, we'll cheat a bit and peek at the configuration
+    // to see what wallpaper we're using
+
     emit modelChanged();
 }
 
@@ -150,12 +152,10 @@ void ActivityConfiguration::setActivityName(const QString &name)
 
     m_activityName = name;
 
+    ensureContainmentExistence();
     if (!m_containment) {
-        ensureContainmentExistence();
         //should never happen
-        if (!m_containment) {
-            return;
-        }
+        return;
     }
 
     m_containment->setActivity(name);
@@ -197,12 +197,10 @@ int ActivityConfiguration::wallpaperIndex()
 
 void ActivityConfiguration::setWallpaperIndex(const int index)
 {
+    ensureContainmentExistence();
     if (!m_containment) {
-        ensureContainmentExistence();
         //should never happen
-        if (!m_containment) {
-            return;
-        }
+        return;
     }
 
     if (m_wallpaperIndex == index || index < 0) {

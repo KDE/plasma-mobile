@@ -108,7 +108,7 @@ Rectangle {
                 wallpapersList.currentIndex = newIndex
                 wallpapersList.positionViewAtIndex(newIndex, ListView.Center)
             } else {
-                wallpapersList.currentIndex = -1
+                wallpapersList.currentIndex = configInterface.wallpaperIndex
             }
         }
     }
