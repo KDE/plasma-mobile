@@ -66,7 +66,6 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     addAction(a);
     a->setShortcut(QKeySequence("Ctrl+Shift+R"));
     connect(a, SIGNAL(triggered()), this, SLOT(rotateClockwise()));
-    
 }
 
 MobView::~MobView()
