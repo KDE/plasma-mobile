@@ -253,10 +253,13 @@ void PlasmaApp::setupHomeScreen()
     }
 
     mainViewGeometryChanged();
-    connect(m_mainView, SIGNAL(geometryChanged()), this, SLOT(mainViewGeometryChanged()));
-    connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
+    connect(m_mainView, SIGNAL(geometryChanged()),
+            this, SLOT(mainViewGeometryChanged()));
+    connect(m_mainView, SIGNAL(containmentActivated()),
+            this, SLOT(mainContainmentActivated()));
 
-    connect(m_homeScreen, SIGNAL(transformingChanged(bool)), this, SLOT(containmentsTransformingChanged(bool)));
+    connect(m_homeScreen, SIGNAL(transformingChanged(bool)),
+            this, SLOT(containmentsTransformingChanged(bool)));
 
 
     connect(m_homeScreen, SIGNAL(nextActivityRequested()),
@@ -268,18 +271,8 @@ void PlasmaApp::setupHomeScreen()
     connect(m_homeScreen, SIGNAL(newActivityRequested()),
             this, SLOT(showActivityCreation()));
 
-    QDeclarativeItem *panel = m_homeScreen->findChild<QDeclarativeItem*>("activitypanel");
-
     m_mainView->setSceneRect(m_homeScreen->x(), m_homeScreen->y(),
                              m_homeScreen->width(), m_homeScreen->height());
-
-    QDeclarativeItem *panelItems = panel->findChild<QDeclarativeItem*>("panelitems");
-
-    if (panelItems) {
-        foreach(QObject *item, panelItems->children()) {
-            connect(item, SIGNAL(clicked()), this, SLOT(changeActivity()));
-        }
-    }
 }
 
 void PlasmaApp::containmentsTransformingChanged(bool transforming)
