@@ -90,15 +90,13 @@ void ActivityConfiguration::ensureContainmentExistence()
     QTimer::singleShot(100, &loop, SLOT(quit()));
     loop.exec();
     if (corona) {
-        m_containment = corona->containmentForScreen(0);
+        setContainment(corona->containmentForScreen(0));
     }
 }
 
 void ActivityConfiguration::setContainment(Plasma::Containment *cont)
 {
     m_containment = cont;
-
-    delete m_model;
 
     Plasma::Wallpaper *wp = 0;
     if (m_containment && m_containment->wallpaper()) {
@@ -129,12 +127,9 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
     }
 
     m_model = new BackgroundListModel(wp, this);
-    connect(m_model, SIGNAL(countChanged()), this, SLOT(modelCountChanged()));
-    m_model->setResizeMethod(Plasma::Wallpaper::CenteredResize);
-    m_model->setWallpaperSize(QSize(1024, 600));
-    m_model->reload();
-
     emit modelChanged();
+    connect(m_model, SIGNAL(countChanged()), this, SLOT(modelCountChanged()));
+    m_model->reload();
 }
 
 void ActivityConfiguration::modelCountChanged()
