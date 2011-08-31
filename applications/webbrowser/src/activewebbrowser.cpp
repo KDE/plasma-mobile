@@ -35,6 +35,7 @@
 ActiveWebbrowser::ActiveWebbrowser(const KCmdLineArgs *args)
     : KApplication()
 {
+    qmlRegisterType<KDeclarativeWebSettings>();
     qmlRegisterType<KDeclarativeWebView>("org.kde.kdewebkit", 0, 1, "WebView");
 }
 

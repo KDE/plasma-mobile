@@ -42,6 +42,7 @@
 import QtQuick 1.0
 import org.kde.kdewebkit 0.1
 
+
 Flickable {
     property alias title: webView.title
     property alias icon: webView.icon
@@ -76,6 +77,7 @@ Flickable {
         id: webView
         objectName: "webViewImplementation"
         transformOrigin: Item.TopLeft
+        settings.pluginsEnabled: true
 
         //FIXME: glorious hack just to obtain a signal of the url of the new requested page
         newWindowComponent: Component {
