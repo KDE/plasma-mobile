@@ -233,7 +233,7 @@ void PlasmaApp::setupHomeScreen()
     m_homeScreenPath = m_corona->homeScreenPackage()->filePath("mainscript");
     if (m_homeScreenPath.isEmpty()) {
         kWarning() << "Could not find an home screen, exiting.";
-        QCoreApplication::quit();
+        QTimer::singleShot(0, QCoreApplication::instance(), SLOT(quit()));
         return;
     }
     kDebug() << "Loading " << m_homeScreenPath;
@@ -241,14 +241,15 @@ void PlasmaApp::setupHomeScreen()
 
     if (!m_declarativeWidget->engine()) {
         kDebug() << "Invalid main declarative engine, exiting.";
-        QCoreApplication::quit();
+        QTimer::singleShot(0, QCoreApplication::instance(), SLOT(quit()));
+        return;
     }
 
     m_homeScreen = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
 
     if (!m_homeScreen) {
         kError() << "Error in creation of the homescreen object, exiting. " << m_homeScreenPath;
-        QCoreApplication::quit();
+        QTimer::singleShot(0, QCoreApplication::instance(), SLOT(quit()));
         return;
     }
 
