@@ -129,14 +129,30 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
     }
 
     m_model = new BackgroundListModel(wp, this);
+    connect(m_model, SIGNAL(countChanged()), this, SLOT(modelCountChanged()));
     m_model->setResizeMethod(Plasma::Wallpaper::CenteredResize);
     m_model->setWallpaperSize(QSize(1024, 600));
     m_model->reload();
 
+    emit modelChanged();
+}
+
+void ActivityConfiguration::modelCountChanged()
+{
+    if (!m_containment || m_model->count() < 1) {
+        return;
+    }
+
     // since we're using the Image plugin, we'll cheat a bit and peek at the configuration
     // to see what wallpaper we're using
-
-    emit modelChanged();
+    KConfigGroup wpConfig = m_containment->config();
+    wpConfig = KConfigGroup(&wpConfig, "Wallpaper");
+    wpConfig = KConfigGroup(&wpConfig, "image");
+    QModelIndex index = m_model->indexOf(wpConfig.readEntry("wallpaper", QString()));
+    if (index.isValid()) {
+        m_wallpaperIndex = index.row();
+        emit wallpaperIndexChanged();
+    }
 }
 
 Plasma::Containment *ActivityConfiguration::containment() const
@@ -225,6 +241,8 @@ void ActivityConfiguration::setWallpaperIndex(const int index)
     if (m_containment->wallpaper()) {
         m_containment->wallpaper()->setUrls(KUrl::List() << wallpaper);
     }
+
+    emit wallpaperIndexChanged();
 }
 
 QSize ActivityConfiguration::screenshotSize()
