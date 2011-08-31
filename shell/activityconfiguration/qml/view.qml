@@ -26,7 +26,6 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Rectangle {
     id: main
     signal closeRequested
-    property variant containmentConfig
     color: Qt.rgba(0,0,0,0.5)
     width: 800
     height: 480
