@@ -105,10 +105,11 @@ Rectangle {
 
             if (configInterface.activityName == "") {
                 var newIndex = Math.random()*wallpapersList.count
-                wallpapersList.currentIndex = newIndex
                 wallpapersList.positionViewAtIndex(newIndex, ListView.Center)
+                wallpapersList.currentIndex = newIndex
             } else {
-                wallpapersList.currentIndex = configInterface.wallpaperIndex
+                wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex, ListView.Center)
+                wallpapersList.currentIndex = configInterface.wallpaperInde
             }
         }
     }
