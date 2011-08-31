@@ -1,7 +1,7 @@
 [Desktop Entry]
-Exec=plasma-active
+Exec=plasma-device
 X-DBUS-StartupType=wait
-Name=Plasma Active
+Name=Plasma device shell
 Comment=Workspace shell for a wide spectrum of portable devices.
 Type=Service
 X-KDE-StartupNotify=false
