@@ -31,6 +31,27 @@ Flickable {
     contentHeight: mainImage.height*mainImage.scale
     interactive: contentWidth > width || contentHeight > height
     property alias source: mainImage.source
+    property string label: model["label"]
+
+    NumberAnimation {
+        id: zoomAnim
+        duration: 250
+        easing.type: Easing.InOutQuad
+        target: mainImage
+        property: "scale"
+    }
+
+    Connections {
+        target: toolbar
+        onZoomIn: {
+            zoomAnim.to = mainImage.scale * 1.4
+            zoomAnim.running = true
+        }
+        onZoomOut: {
+            zoomAnim.to = mainImage.scale * 0.6
+            zoomAnim.running = true
+        }
+    }
 
     Rectangle {
         id: imageMargin
@@ -51,6 +72,16 @@ Flickable {
                         mainImage.scale = Math.min(1, mainFlickable.height/sourceSize.height)
                     } else {
                         mainImage.scale = Math.min(1, mainFlickable.width/sourceSize.width)
+                    }
+                }
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (toolbar.y == 0) {
+                        toolbar.y = -toolbar.height
+                    } else {
+                        toolbar.y = 0
                     }
                 }
             }

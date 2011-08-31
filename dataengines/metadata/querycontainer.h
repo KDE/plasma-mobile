@@ -51,6 +51,7 @@ protected Q_SLOTS:
     void serviceRegistered(const QString &service);
     void propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property, QVariant);
     void addWatcherDelayed();
+    void addResourcesDelayed();
 
 protected:
     QString icon(const QStringList &types);
@@ -63,7 +64,9 @@ private:
     QList<Nepomuk::Resource> m_resourcesToWatch;
     QHash<QString, QString> m_icons;
     QDBusServiceWatcher *m_queryServiceWatcher;
+    QList<Nepomuk::Resource> m_resourcesToAdd;
     QTimer *m_addWatcherTimer;
+    QTimer *m_addResourcesTimer;
 };
 
 #endif

@@ -28,7 +28,8 @@ Item {
     id: resourceItem
     anchors.fill: parent
 
-
+    Column {
+        anchors.centerIn: parent
         QIconItem {
             id: previewImage
             height: 64
@@ -48,6 +49,13 @@ Item {
                 try {
                     if (model["iconName"]) {
                         icon = QIcon(model["iconName"])
+                        return
+                    //check if model["icon"] is a QIcon
+                    } else if (model["icon"] && model["icon"].addPixmap) {
+                        icon = model["icon"]
+                        return
+                    } else if (model["icon"]) {
+                        icon = QIcon(model["icon"])
                         return
                     }
                     if (!model["hasSymbol"] && decoration) {
@@ -85,7 +93,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
             anchors.top: previewImage.bottom
-            anchors.horizontalCenter: resourceItem.horizontalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
             width: 130
             style: Text.Outline
             styleColor: Qt.rgba(1, 1, 1, 0.6)
@@ -106,4 +114,5 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             visible: infoLabelVisible
         }
+    }
 }

@@ -41,7 +41,7 @@ public:
     bool useGL() const;
 
 private:
-    View *m_widget;
+    AppView *m_widget;
 };
 
 #endif // IMAGEVIEWER_H

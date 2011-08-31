@@ -83,7 +83,7 @@ public:
         WebsiteRole = Qt::UserRole+5,
         VersionRole = Qt::UserRole+6,
         AuthorRole = Qt::UserRole+7,
-        EmailRole = Qt::UserRole+8,
+        EmailRole = Qt::UserRole+8
     };
 
     explicit PlasmaAppletItemModel(QObject * parent = 0);

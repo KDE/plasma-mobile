@@ -82,11 +82,12 @@ void ResourceInstance::syncWid()
         delete m_resourceInstance;
 
         kDebug() << "Creating a new instance of the resource" << m_uri << "window id" << wid;
-        m_resourceInstance = new Activities::ResourceInstance(wid, m_uri, m_mimetype);
+        m_resourceInstance = new Activities::ResourceInstance(wid, m_uri, m_mimetype, m_title);
     } else {
         kDebug() << "Setting" << m_uri << m_mimetype << "to window" << wid;
         m_resourceInstance->setUri(m_uri);
         m_resourceInstance->setMimetype(m_mimetype);
+        m_resourceInstance->setTitle(m_title);
     }
 }
 
@@ -116,6 +117,20 @@ void ResourceInstance::setMimetype(const QString &mimetype)
         return;
     }
     m_mimetype = mimetype;
+    m_syncTimer->start(100);
+}
+
+QString ResourceInstance::title() const
+{
+    return m_title;
+}
+
+void ResourceInstance::setTitle(const QString &title)
+{
+    if (m_title == title) {
+        return;
+    }
+    m_title = title;
     m_syncTimer->start(100);
 }
 

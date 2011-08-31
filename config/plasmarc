@@ -1,0 +1,14 @@
+[$Version]
+update_info=plasma_popupapplet_fix_groups.upd:PlasmaPopupAppletFixGroups2
+
+[Theme-plasma-netbook]
+name=air-mobile
+
+[Theme-plasma-tablet]
+name=air-mobile
+
+[Theme-plasma-contour]
+name=air-mobile
+
+[Theme-plasma-mobile]
+name=air-mobile

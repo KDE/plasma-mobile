@@ -61,7 +61,6 @@ PlasmaApp* PlasmaApp::self()
 PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
       m_corona(0),
-      m_maxId(0),
       m_dialog(0)
 {
     KGlobal::locale()->insertCatalog("plasma-keyboardcontainer");
@@ -78,22 +77,9 @@ PlasmaApp::PlasmaApp()
     corona();
     m_containment = m_corona->addContainment("null");
 
-    new PlasmaKeyboardAdaptor(this);
-    QDBusConnection::sessionBus().registerObject("/App", this);
-
-    KConfigGroup applets = storedConfig(0);
-
-    foreach (const QString &group, applets.groupList()) {
-        KConfigGroup appletGroup(&applets, group);
-
-        int id = appletGroup.name().toInt();
-        QString pluginName = appletGroup.readEntry("plugin", QString());
-
-        if (id != 0 && !pluginName.isEmpty()) {
-            m_storedApplets.insert(pluginName, id);
-            m_maxId = qMax(id, m_maxId);
-        }
-    }
+    new VirtualKeyboardAdaptor(this);
+    QDBusConnection::sessionBus().registerService("org.kde.plasma.VirtualKeyboard");
+    QDBusConnection::sessionBus().registerObject("/", this);
 
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
 }
@@ -102,14 +88,9 @@ PlasmaApp::~PlasmaApp()
 {
 }
 
-KConfigGroup PlasmaApp::storedConfig(int appletId)
+KConfigGroup PlasmaApp::storedConfig()
 {
-    KConfigGroup cg(m_corona->config(), "StoredApplets");
-
-    if (appletId > 0) {
-        cg = KConfigGroup(&cg, QString::number(appletId));
-    }
-
+    KConfigGroup cg(KGlobal::config(), "KeyboardConfig");
     return cg;
 }
 
@@ -119,23 +100,17 @@ int  PlasmaApp::newInstance()
         return 0;
     }
 
-    QString pluginName = "plasmaboard";
+    const QString pluginName = "plasmaboard";
 
-    int appletId = ++m_maxId;;
-    if (m_storedApplets.contains(pluginName)) {
-        int storedAppletId = m_storedApplets.values(pluginName).first();
-        KConfigGroup config = storedConfig(storedAppletId);
+    KConfigGroup config = storedConfig();
+    KConfigGroup actualConfig(m_containment->config());
+    actualConfig = KConfigGroup(&actualConfig, "Applets");
+    actualConfig = KConfigGroup(&actualConfig, QString::number(1));
 
-        KConfigGroup actualConfig(m_containment->config());
-        actualConfig = KConfigGroup(&actualConfig, "Applets");
-        actualConfig = KConfigGroup(&actualConfig, QString::number(appletId));
+    config.copyTo(&actualConfig);
+    config.deleteGroup();
 
-        config.copyTo(&actualConfig);
-        config.deleteGroup();
-        m_storedApplets.remove(pluginName, storedAppletId);
-    }
-
-    KeyboardDialog *dialog = new KeyboardDialog(m_corona, m_containment, pluginName, appletId, QVariantList());
+    KeyboardDialog *dialog = new KeyboardDialog(m_corona, m_containment, pluginName, 1, QVariantList());
     dialog->installEventFilter(this);
     connect(dialog, SIGNAL(storeApplet(Plasma::Applet*)), this, SLOT(storeApplet(Plasma::Applet*)));
 
@@ -176,8 +151,7 @@ void PlasmaApp::cleanup()
 
 void PlasmaApp::storeApplet(Plasma::Applet *applet)
 {
-    m_storedApplets.insert(applet->name(), applet->id());
-    KConfigGroup storage = storedConfig(0);
+    KConfigGroup storage = storedConfig();
     KConfigGroup cg(applet->containment()->config());
     cg = KConfigGroup(&cg, "Applets");
     cg = KConfigGroup(&cg, QString::number(applet->id()));
@@ -212,20 +186,50 @@ bool PlasmaApp::hasComposite()
 
 void PlasmaApp::setDirection(const QString &direction)
 {
-    Plasma::Direction dir;
+    Plasma::Direction dir = Plasma::Down;
     if (direction == "up") {
         dir = Plasma::Up;
-    } else if (direction == "down") {
-        dir = Plasma::Down;
     } else if (direction == "left") {
         dir = Plasma::Left;
     } else if (direction == "right") {
         dir = Plasma::Right;
-    } else {
-        dir = Plasma::Down;
     }
 
     m_dialog->setDirection(dir);
+}
+
+void PlasmaApp::setLocation(const QString &location)
+{
+    Plasma::Location loc = Plasma::BottomEdge;
+    if (location.compare("top", Qt::CaseInsensitive) == 0) {
+        loc = Plasma::TopEdge;
+    } else if (location.compare("left", Qt::CaseInsensitive) == 0) {
+        loc = Plasma::LeftEdge;
+    } else if (location.compare("Right", Qt::CaseInsensitive) == 0) {
+        loc = Plasma::RightEdge;
+    }
+
+    m_dialog->setLocation(loc);
+}
+
+void PlasmaApp::requestLayout(const QString &layout)
+{
+    Plasma::Applet *applet = m_dialog->applet();
+    if (!applet) {
+        return;
+    }
+
+    QMetaObject::invokeMethod(applet, "showLayout", Q_ARG(QString, layout));
+}
+
+void PlasmaApp::resetLayout()
+{
+    Plasma::Applet *applet = m_dialog->applet();
+    if (!applet) {
+        return;
+    }
+
+    QMetaObject::invokeMethod(applet, "resetLayout");
 }
 
 void PlasmaApp::show()

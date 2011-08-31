@@ -58,6 +58,7 @@ Flickable {
     width: parent.width
     contentWidth: Math.max(parent.width,webView.width)
     contentHeight: Math.max(parent.height,webView.height)
+    interactive: (webView.height > height) || (webView.height > height)
     anchors.top: headerSpace.bottom
     anchors.bottom: parent.top
     anchors.left: parent.left

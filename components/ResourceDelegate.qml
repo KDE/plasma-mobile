@@ -47,11 +47,11 @@ Item {
         source: {
             var view = delegateItem.parent
 
-            if (view.orientation == undefined) {
+            if (view != undefined && view.orientation == undefined) {
                 view = delegateItem.parent.parent
             }
 
-            if (!delegateItem.parent.parent || view == undefined || view.orientation == ListView.Horizontal || view.cellHeight != undefined) {
+            if (!delegateItem.parent || !delegateItem.parent.parent || view == undefined || view.orientation == ListView.Horizontal || view.cellHeight != undefined) {
                 return fallback.resolvePath("resourcedelegates", [(className + "/ItemHorizontal.qml"), (genericClassName + "/ItemHorizontal.qml"), "FileDataObject/ItemHorizontal.qml"])
             } else {
                 return fallback.resolvePath("resourcedelegates", [(className + "/Item.qml"), (genericClassName + "/Item.qml"), "FileDataObject/Item.qml"])

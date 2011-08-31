@@ -1,11 +1,11 @@
 [Desktop Entry]
-Name=Active Image viewer
-Name[nl]=Actieve afbeeldingenviewer
-Name[pt]=Visualizador de Imagens Activo
-Name[pt_BR]=Visualizador da imagem ativa
-Name[sv]=Aktiv bildvisare
-Name[uk]=Активний переглядач зображень
-Name[x-test]=xxActive Image viewerxx
+Name=Images
+Name[nl]=Afbeeldingen
+Name[pt]=Imagens
+Name[pt_BR]=Imagens
+Name[sv]=Bilder
+Name[uk]=Зображення
+Name[x-test]=xxImagesxx
 GenericName=Image viewer
 GenericName[nl]=Afbeeldingenviewer
 GenericName[pt]=Visualizador de imagens
@@ -24,7 +24,7 @@ Comment[x-test]=xxAn image viewer for touch tabletsxx
 
 Exec=active-imageviewer -graphicssystem raster %u
 Terminal=false
-Icon=gwenview
+Icon=active-image-viewer
 Type=Application
 Categories=Qt;KDE;Graphics;RasterGraphics;Viewer;Photography;
 MimeType=inode/directory;image/gif;image/jpeg;image/png;image/bmp;image/x-eps;image/x-ico;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-xbitmap;image/x-xpixmap;

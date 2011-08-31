@@ -50,6 +50,7 @@ namespace Kephal
 
 class PlasmaApp : public KUniqueApplication
 {
+    Q_CLASSINFO("D-Bus Interface", "org.kde.plasma.VirtualKeyboard")
     Q_OBJECT
 public:
     ~PlasmaApp();
@@ -62,14 +63,18 @@ public:
     Plasma::Corona* corona();
 
 public Q_SLOTS:
+    // DBUS interface. if you change these methods, you MUST run:
+    // qdbuscpp2xml plasmaapp.h -o org.kde.PlasmaKeyboardShell.xml
     void show();
     void hide();
     void setDirection(const QString &direction);
-
+    void setLocation(const QString &direction);
+    void requestLayout(const QString &layout);
+    void resetLayout();
 
 private:
     PlasmaApp();
-    KConfigGroup storedConfig(int appletId);
+    KConfigGroup storedConfig();
 
 private Q_SLOTS:
     void cleanup();
@@ -79,11 +84,7 @@ private Q_SLOTS:
 private:
     Plasma::Corona *m_corona;
     Plasma::Containment *m_containment;
-    QMultiHash<QString, int>m_storedApplets;
-    int m_maxId;
-
     KeyboardDialog * m_dialog;
-
 };
 
 #endif // multiple inclusion guard

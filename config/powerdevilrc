@@ -1,0 +1,11 @@
+[BatteryManagement]
+BatteryCriticalAction=1
+
+[General]
+configLockScreen=false
+
+[Profiles]
+ACProfile=Performance
+BatteryProfile=Powersave
+LowProfile=Aggressive powersave
+WarningProfile=Aggressive powersave

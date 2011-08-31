@@ -52,7 +52,7 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
       m_model(0),
       m_wallpaperIndex(-1)
 {
-    setQmlPath(KStandardDirs::locate("data", "plasma-mobile/activityconfiguration/view.qml"));
+    setQmlPath(KStandardDirs::locate("data", "plasma-active/activityconfiguration/view.qml"));
 #ifndef NO_ACTIVITIES
     m_activityController = new Activities::Controller(this);
 #endif

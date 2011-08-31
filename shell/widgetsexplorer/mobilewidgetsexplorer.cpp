@@ -53,7 +53,7 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
     m_appletsModel = new PlasmaAppletItemModel(this);
     m_appletsModel->setApplication(QString());
 
-    m_declarativeWidget->setQmlPath(KStandardDirs::locate("data", "plasma-mobile/mobilewidgetsexplorer/view.qml"));
+    m_declarativeWidget->setQmlPath(KStandardDirs::locate("data", "plasma-active/mobilewidgetsexplorer/view.qml"));
 
     if (m_declarativeWidget->engine()) {
         QDeclarativeContext *ctxt = m_declarativeWidget->engine()->rootContext();

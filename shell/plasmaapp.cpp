@@ -83,10 +83,11 @@ PlasmaApp::PlasmaApp()
       m_isDesktop(false)
 {
     KGlobal::locale()->insertCatalog("libplasma");
+    KGlobal::locale()->insertCatalog("plasma-active");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    qmlRegisterType<PanelProxy>("org.kde.plasma.mobileshell", 0, 1, "MobilePanel");
+    qmlRegisterType<PanelProxy>("org.kde.plasma.activeshell", 0, 1, "ActivePanel");
 
     //FIXME: why does not work?
     //qmlRegisterInterface<Plasma::Wallpaper>("Wallpaper");
@@ -139,7 +140,7 @@ PlasmaApp::PlasmaApp()
     m_mainView->setFixedSize(width, height);
     m_mainView->move(0,0);
 
-    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-active");
     const QString themeName = cg.readEntry("name", "air-mobile");
     Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
     Plasma::Theme::defaultTheme()->setThemeName(themeName);
@@ -231,22 +232,24 @@ void PlasmaApp::setupHomeScreen()
 
     m_homeScreenPath = m_corona->homeScreenPackage()->filePath("mainscript");
     if (m_homeScreenPath.isEmpty()) {
-        m_homeScreenPath = QString("tablet-homescreen");
-        kWarning() << "m_homeScreenPath is empty, this should not happen. Trying " << m_homeScreenPath;
+        kWarning() << "Could not find an home screen, exiting.";
+        QCoreApplication::quit();
+        return;
     }
     kDebug() << "Loading " << m_homeScreenPath;
     m_declarativeWidget->setQmlPath(m_homeScreenPath);
 
     if (!m_declarativeWidget->engine()) {
-        kDebug() << "Invalid main declarative widget, exiting.";
+        kDebug() << "Invalid main declarative engine, exiting.";
         QCoreApplication::quit();
     }
 
     m_homeScreen = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
 
     if (!m_homeScreen) {
-        kError() << "Could not find homescreen package. Exiting. " << m_homeScreenPath;
+        kError() << "Error in creation of the homescreen object, exiting. " << m_homeScreenPath;
         QCoreApplication::quit();
+        return;
     }
 
     mainViewGeometryChanged();

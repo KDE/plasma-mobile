@@ -1,0 +1,8 @@
+[Auto Allow]
+kdewallet=Network Management,KDE Daemon,KDE Control Module
+
+[Wallet]
+Close When Idle=false
+Enabled=true
+First Use=false
+Use One Wallet=true

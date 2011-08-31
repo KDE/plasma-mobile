@@ -1,0 +1,55 @@
+[Aggressive powersave]
+icon=battery-low
+
+[Aggressive powersave][BrightnessControl]
+value=30
+
+[Aggressive powersave][DPMSControl]
+idleTime=120
+
+[Aggressive powersave][DimDisplay]
+idleTime=120000
+
+[Aggressive powersave][HandleButtonEvents]
+lidAction=1
+powerButtonAction=1
+
+[Aggressive powersave][SuspendSession]
+idleTime=300000
+suspendType=1
+
+[Performance]
+icon=preferences-system-performance
+
+[Performance][BrightnessControl]
+value=100
+
+[Performance][DPMSControl]
+idleTime=1800
+
+[Performance][DimDisplay]
+idleTime=600000
+
+[Performance][HandleButtonEvents]
+lidAction=1
+powerButtonAction=1
+
+[Powersave]
+icon=preferences-system-power-management
+
+[Powersave][BrightnessControl]
+value=60
+
+[Powersave][DPMSControl]
+idleTime=300
+
+[Powersave][DimDisplay]
+idleTime=300000
+
+[Powersave][HandleButtonEvents]
+lidAction=1
+powerButtonAction=1
+
+[Powersave][SuspendSession]
+idleTime=600000
+suspendType=1

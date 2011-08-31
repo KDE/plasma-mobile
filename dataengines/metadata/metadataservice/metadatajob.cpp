@@ -61,7 +61,7 @@ void MetadataJob::start()
         Nepomuk::Resource fileRes(resourceUrl);
         Nepomuk::Resource acRes("activities://" + activityUrl);
         QUrl typeUrl;
-kWarning()<<"AAAA"<<resourceUrl<<resourceUrl.endsWith(".desktop");
+
         //Bookmark?
         if (QUrl(resourceUrl).scheme() == "http") {
             typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark");
