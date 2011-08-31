@@ -3,6 +3,10 @@ Comment=
 Encoding=UTF-8
 Keywords=
 Name=plasma-contour-homescreen
+Name[pt_BR]=plasma-contour-homescreen
+Name[sv]=Plasma kontur-hemskärm
+Name[uk]=домівка-мобільної-плазми
+Name[x-test]=xxplasma-contour-homescreenxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/GenericPackage
