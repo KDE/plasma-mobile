@@ -101,15 +101,6 @@ Rectangle {
             } else {
                 activityNameEdit.text = configInterface.activityName
             }
-
-            if (configInterface.activityName == "") {
-                var newIndex = Math.random()*wallpapersList.count
-                wallpapersList.positionViewAtIndex(newIndex)
-                wallpapersList.currentIndex = newIndex
-            } else {
-                wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex)
-                wallpapersList.currentIndex = configInterface.wallpaperIndex
-            }
         }
     }
 
@@ -168,6 +159,20 @@ Rectangle {
             }
             model: configInterface.wallpaperModel
             delegate: WallpaperDelegate {}
+        }
+
+        Connections {
+            target: configInterface
+            onWallpaperIndexChanged: {
+                if (configInterface.activityName == "" || configInterface.wallpaperIndex < 0) {
+                    var newIndex = Math.random()*wallpapersList.count
+                        wallpapersList.positionViewAtIndex(newIndex)
+                        wallpapersList.currentIndex = newIndex
+                } else {
+                    wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex)
+                        wallpapersList.currentIndex = configInterface.wallpaperIndex
+                }
+            }
         }
 
         Row {
