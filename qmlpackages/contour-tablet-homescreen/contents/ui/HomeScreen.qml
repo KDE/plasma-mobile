@@ -76,9 +76,10 @@ Item {
         activityPanel.x = homeScreen.width
         activityPanel.state = "hidden"
 
+        leftEdgePanel.x = -leftEdgePanel.width
+
         state = "Normal"
         transformingChanged(false);
-        switcher.current=0
     }
 
     PlasmaCore.Theme {
@@ -151,34 +152,6 @@ Item {
     states: [
             State {
                 name: "Normal"
-                /*PropertyChanges {
-                    target: mainSlot;
-                    y: 0;
-                }
-                PropertyChanges {
-                    target: spareSlot;
-                    y: -homeScreen.height;
-                }*/
-                PropertyChanges {
-                    target: spareSlot;
-                    scale: 0.3;
-                }
-                PropertyChanges {
-                    target: spareSlot;
-                    opacity: 0;
-                }
-                PropertyChanges {
-                    target: spareSlot;
-                    x: homeScreen.width/4
-                }
-
-            },
-            State {
-                name: "Slide"
-                PropertyChanges {
-                    target: spareSlot;
-                    y: 0;
-                }
                 PropertyChanges {
                     target: spareSlot;
                     scale: 1;
@@ -189,44 +162,20 @@ Item {
                 }
                 PropertyChanges {
                     target: spareSlot;
-                    x: 0
+                    x: 0;
                 }
-            }
-    ]
-
-    transitions: Transition {
-            from: "Normal"
-            to: "Slide"
-            SequentialAnimation {
-
-                PauseAnimation {
-                    duration: 2000
+                PropertyChanges {
+                    target: spareSlot;
+                    y: 0;
                 }
-                ParallelAnimation {
-                    NumberAnimation {
-                        target: spareSlot;
-                        property: "opacity";
-                        easing.type: "OutQuad";
-                        duration: 300;
-                    }
-                    NumberAnimation {
-                        target: spareSlot;
-                        property: "scale";
-                        easing.type: "OutQuad";
-                        duration: 300;
-                    }
-                    NumberAnimation {
-                        target: spareSlot;
-                        property: "x";
-                        easing.type: "OutQuad";
-                        duration: 300;
-                    }
-                }
-                ScriptAction {
+            },
+            State {
+                name: "Slide"
+                StateChangeScript {
                     script: finishTransition();
                 }
             }
-        }
+    ]
 
     //acceptsFocus property is costly, delay it after the animation
     Timer {
