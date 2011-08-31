@@ -19,7 +19,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
@@ -117,7 +117,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 property int startX
-                onPressed: startX = activityPanel.x
+                onPressed: startX = recommendationsPanel.x
                 onClicked: {
                     if (Math.abs(startX - recommendationsPanel.x) < 8) {
                         recommendationsPanel.state = recommendationsPanel.x == 0?"hidden":"show"

@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-$XGETTEXT *.cpp -o $podir/plasma-active.pot
+$XGETTEXT *.cpp -o $podir/plasma-device.pot

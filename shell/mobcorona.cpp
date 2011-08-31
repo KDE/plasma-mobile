@@ -88,7 +88,7 @@ void MobCorona::init()
     //if the package is invalid, don't launch the application
     if (!m_package->isValid()) {
         kWarning()<<"Invalid home screen package:"<<homeScreenPath;
-        QCoreApplication::quit();
+        QTimer::singleShot(0, QCoreApplication::instance(), SLOT(quit()));
         return;
     }
 

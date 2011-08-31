@@ -21,7 +21,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.activeshell 0.1 as ActiveShell
+import org.kde.plasma.deviceshell 0.1 as DeviceShell
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
@@ -239,7 +239,7 @@ Item {
         }
     }
 
-    ActiveShell.ActivePanel {
+    DeviceShell.DevicePanel {
         id: slidingPanel
         visible: true
         mainItem: SystrayPanel {
