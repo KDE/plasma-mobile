@@ -49,7 +49,7 @@
 #include <Activities/Consumer>
 #include <Activities/Controller>
 
-static const char *DEFAUL_CONTAINMENT = "org.kde.mobiledesktop";
+static const char *DEFAUL_CONTAINMENT = "org.kde.active.activityscreen";
 
 MobCorona::MobCorona(QObject *parent)
     : Plasma::Corona(parent),
