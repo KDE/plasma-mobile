@@ -76,8 +76,6 @@ Item {
         activityPanel.x = homeScreen.width
         activityPanel.state = "hidden"
 
-        leftEdgePanel.x = -leftEdgePanel.width
-
         state = "Normal"
         transformingChanged(false);
     }
@@ -152,30 +150,46 @@ Item {
     states: [
             State {
                 name: "Normal"
-                PropertyChanges {
+               /* PropertyChanges {
                     target: spareSlot;
-                    scale: 1;
+                    scale: 0.3;
                 }
                 PropertyChanges {
                     target: spareSlot;
-                    opacity: 1;
-                }
+                    opacity: 0;
+                }*/
                 PropertyChanges {
                     target: spareSlot;
-                    x: 0;
+                    x: homeScreen.width
                 }
-                PropertyChanges {
-                    target: spareSlot;
-                    y: 0;
-                }
+
             },
             State {
                 name: "Slide"
-                StateChangeScript {
-                    script: finishTransition();
+                PropertyChanges {
+                    target: spareSlot;
+                    x: 0
                 }
             }
     ]
+
+    transitions: Transition {
+        from: "Normal"
+        to: "Slide"
+        SequentialAnimation {
+
+            NumberAnimation {
+                target: spareSlot;
+                property: "x";
+                easing.type: "OutQuad";
+                duration: 300;
+            }
+
+            ScriptAction {
+                script: finishTransition();
+            }
+        }
+    }
 
     //acceptsFocus property is costly, delay it after the animation
     Timer {
