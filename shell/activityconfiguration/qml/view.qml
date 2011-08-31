@@ -89,21 +89,6 @@ Rectangle {
         }
     }
 
-    //FIXME: artificial delay to have configInterface working
-    Timer {
-        repeat: false
-        running: true
-        interval: 350
-        onTriggered: {
-            wallpapersList.model = configInterface.wallpaperModel
-            if (configInterface.activityName == "") {
-                activityNameEdit.text = i18n("New Activity")
-            } else {
-                activityNameEdit.text = configInterface.activityName
-            }
-        }
-    }
-
     PlasmaCore.Theme {
         id: theme
     }
@@ -163,6 +148,10 @@ Rectangle {
 
         Connections {
             target: configInterface
+            onModelChanged: {
+                wallpapersList.model =  configInterface.wallpaperModel
+            }
+
             onWallpaperIndexChanged: {
                 if (configInterface.activityName == "" || configInterface.wallpaperIndex < 0) {
                     var newIndex = Math.random()*wallpapersList.count
@@ -171,6 +160,14 @@ Rectangle {
                 } else {
                     wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex)
                         wallpapersList.currentIndex = configInterface.wallpaperIndex
+                }
+            }
+
+            onActivityNameChanged: {
+                if (configInterface.activityName == "") {
+                    activityNameEdit.text = i18n("New Activity")
+                } else {
+                    activityNameEdit.text = configInterface.activityName
                 }
             }
         }
