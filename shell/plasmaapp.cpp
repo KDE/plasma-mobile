@@ -214,9 +214,9 @@ void PlasmaApp::syncConfig()
 
 void PlasmaApp::setupHomeScreen()
 {
-    if (m_declarativeWidget) {
-        kWarning() << "The home screen can be set up a single time";
-    }
+    //The home screen can be set up a single time
+    Q_ASSERT(!m_declarativeWidget);
+
 
     m_declarativeWidget = new Plasma::DeclarativeWidget();
     m_corona->addItem(m_declarativeWidget);
