@@ -41,7 +41,6 @@ public:
 
 protected:
     bool sourceRequestEvent(const QString &source);
-    bool updateSourceEvent(const QString &source);
 
 protected Q_SLOTS:
     void delayedSnapshotContainment();
