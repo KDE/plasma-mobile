@@ -75,6 +75,7 @@ Q_SIGNALS:
     void wallpaperIndexChanged();
     void activityNameChanged();
     void containmentAvailable();
+    void containmentWallpaperChanged(Plasma::Containment *containment);
 
 protected:
     void ensureContainmentExistence();

@@ -277,6 +277,8 @@ void ActivityConfiguration::setWallpaperIndex(const int index)
         if (wpConfig.isValid()) {
             m_containment->wallpaper()->save(wpConfig);
         }
+
+        emit containmentWallpaperChanged(m_containment);
     }
 
     emit wallpaperIndexChanged();
