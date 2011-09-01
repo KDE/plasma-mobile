@@ -181,6 +181,10 @@ void View::urlFilterChanged()
 void View::onTitleChanged()
 {
     if (m_webBrowser) {
+        if (m_options->title == m_webBrowser->property("title").toString()) {
+            return;
+        }
+        kDebug() << "XXX title changed" << m_webBrowser->property("title").toString();
         m_options->title = m_webBrowser->property("title").toString();
         QString u = m_webBrowser->property("url").toString();
         m_completionModel->history()->visitPage(u, m_options->title);
