@@ -93,6 +93,7 @@ private:
     Activities::Controller *m_activityController;
     QString m_activityName;
     int m_wallpaperIndex;
+    bool m_newContainment;
 };
 
 #endif //PLASMA_ACTIVITYCONFIG_H

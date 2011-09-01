@@ -50,7 +50,8 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
       m_containment(0),
       m_mainWidget(0),
       m_model(0),
-      m_wallpaperIndex(-1)
+      m_wallpaperIndex(-1),
+      m_newContainment(false)
 {
     setQmlPath(KStandardDirs::locate("data", "plasma-device/activityconfiguration/view.qml"));
 #ifndef NO_ACTIVITIES
@@ -80,6 +81,7 @@ void ActivityConfiguration::ensureContainmentExistence()
     if (m_containment) {
         return;
     }
+
 #ifndef NO_ACTIVITIES
     const QString id = m_activityController->addActivity(m_activityName);
     m_activityController->setCurrentActivity(id);
@@ -87,8 +89,10 @@ void ActivityConfiguration::ensureContainmentExistence()
     Plasma::Corona *corona = qobject_cast<Plasma::Corona *>(scene());
     QEventLoop loop;
     //FIXME: find a better way
+    // AJS: a better way would be to connect the new containment signal in Corona
     QTimer::singleShot(100, &loop, SLOT(quit()));
     loop.exec();
+
     if (corona) {
         setContainment(corona->containmentForScreen(0));
     }
@@ -101,6 +105,8 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
     m_model = 0;
 
     if (!m_containment) {
+        // we are being setup for containment creation!
+        m_newContainment = true;
         return;
     }
 
@@ -109,9 +115,8 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
         emit activityNameChanged();
     }
 
-    if (!m_containment->wallpaper()) {
+    if (m_newContainment) {
         //FIXME: this has to be done in C++ until we have QtComponents
-        //doesn't really belong here, this is for the "first run":
         // we have a new containment, we now assume it is a new activity, call up the keyboard
         QGraphicsWidget *activityNameEdit = m_mainWidget->findChild<QGraphicsWidget*>("activityNameEdit");
         if (activityNameEdit) {
@@ -125,6 +130,9 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
                 }
             }
         }
+
+        // reset this for the next time this dialog is used
+        m_newContainment = false;
     }
 
     ensureContainmentHasWallpaperPlugin();
