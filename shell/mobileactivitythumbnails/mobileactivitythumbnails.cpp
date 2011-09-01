@@ -72,44 +72,63 @@ bool MobileActivityThumbnails::updateSourceEvent(const QString &source)
     return true;
 }
 
-void MobileActivityThumbnails::snapshotContainment(Plasma::Containment *cont)
+void MobileActivityThumbnails::snapshotContainment(Plasma::Containment *containment)
 {
-    if (!cont) {
+    if (!containment) {
         return;
     }
 
-    m_containmentToSave = cont;
-    m_containmentToSave.data()->graphicsEffect()->update();
+    if (containment->graphicsEffect()) {
+        containment->graphicsEffect()->update();
+    }
+
+    m_containmentsToSave.append(containment);
+    // FIXME: this is ugly. should be connected to the graphics effect being ready.
     m_saveTimer->start(1000);
 }
 
 void MobileActivityThumbnails::delayedSnapshotContainment()
 {
     //FIXME: this really all ought to be a thread
-    if (!m_containmentToSave || !m_containmentToSave.data()->wallpaper()) {
+    QSet<Plasma::Containment *> seen;
+    foreach (QWeakPointer<Plasma::Containment> containment, m_containmentsToSave) {
+        if (!containment || seen.contains(containment.data())) {
+            continue;
+        }
+
+        seen.insert(containment.data());
+        snapshot(containment.data());
+    }
+
+    m_containmentsToSave.clear();
+}
+
+void MobileActivityThumbnails::snapshot(Plasma::Containment *containment)
+{
+    if (!containment->wallpaper()) {
         return;
     }
 
-    QImage activityImage = QImage(m_containmentToSave.data()->size().toSize(), QImage::Format_ARGB32);
-    const QString wallpaperPath = m_containmentToSave.data()->wallpaper()->property("wallpaperPath").toString();
+    QImage activityImage = QImage(containment->size().toSize(), QImage::Format_ARGB32);
+    const QString wallpaperPath = containment->wallpaper()->property("wallpaperPath").toString();
     QPainter p(&activityImage);
     //The wallpaper has paths or paints by itself?
     if (wallpaperPath.isEmpty()) {
-        m_containmentToSave.data()->wallpaper()->paint(&p, m_containmentToSave.data()->wallpaper()->boundingRect());
+        containment->wallpaper()->paint(&p, containment->wallpaper()->boundingRect());
     } else {
         //TODO: load a smaller image for this if available
         p.drawImage(QPoint(0,0), QImage(wallpaperPath));
     }
     p.setCompositionMode(QPainter::CompositionMode_SourceOver);
 
-    CachingEffect *cache = qobject_cast<CachingEffect *>(m_containmentToSave.data()->graphicsEffect());
+    CachingEffect *cache = qobject_cast<CachingEffect *>(containment->graphicsEffect());
     if (cache) {
         p.drawPixmap(QPoint(0,0), cache->cachedPixmap());
     }
 
     p.end();
 
-    const QString activity = m_containmentToSave.data()->context()->currentActivityId();
+    const QString activity = containment->context()->currentActivityId();
     const QString path = KStandardDirs::locateLocal("data", QString("plasma/activities-screenshots/%1.png").arg(activity));
     activityImage.save(path, "PNG");
     Plasma::DataContainer *container = containerForSource(activity);
