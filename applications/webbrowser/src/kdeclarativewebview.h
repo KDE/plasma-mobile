@@ -41,7 +41,7 @@ class QWebSettings;
 QT_BEGIN_NAMESPACE
 
 QT_MODULE(Declarative)
-class QDeclarativeWebSettings;
+class KDeclarativeWebSettings;
 class KDeclarativeWebViewPrivate;
 class QNetworkRequest;
 class KDeclarativeWebView;
@@ -128,7 +128,7 @@ class KDeclarativeWebView : public QDeclarativeItem {
     Q_PROPERTY(QAction* stop READ stopAction CONSTANT)
 #endif
 
-    Q_PROPERTY(QDeclarativeWebSettings* settings READ settingsObject CONSTANT)
+    Q_PROPERTY(KDeclarativeWebSettings* settings READ settingsObject CONSTANT)
 
     Q_PROPERTY(QDeclarativeListProperty<QObject> javaScriptWindowObjects READ javaScriptWindowObjects CONSTANT)
 
@@ -188,7 +188,7 @@ public:
 
     QWebHistory* history() const;
     QWebSettings* settings() const;
-    QDeclarativeWebSettings *settingsObject() const;
+    KDeclarativeWebSettings *settingsObject() const;
 
     bool renderingEnabled() const;
     void setRenderingEnabled(bool);
@@ -288,7 +288,7 @@ private:
     QString m_windowObjectName;
 };
 
-class QDeclarativeWebSettings : public QObject {
+class KDeclarativeWebSettings : public QObject {
     Q_OBJECT
 
     Q_PROPERTY(QString standardFontFamily READ standardFontFamily WRITE setStandardFontFamily)
@@ -320,7 +320,7 @@ class QDeclarativeWebSettings : public QObject {
     Q_PROPERTY(bool localContentCanAccessRemoteUrls READ localContentCanAccessRemoteUrls WRITE setLocalContentCanAccessRemoteUrls)
 
 public:
-    QDeclarativeWebSettings() {}
+    KDeclarativeWebSettings() {}
 
     QString standardFontFamily() const { return s->fontFamily(QWebSettings::StandardFont); }
     void setStandardFontFamily(const QString& f) { s->setFontFamily(QWebSettings::StandardFont, f); }
@@ -381,7 +381,7 @@ public:
 QT_END_NAMESPACE
 
 QML_DECLARE_TYPE(KDeclarativeWebView)
-QML_DECLARE_TYPE(QDeclarativeWebSettings)
+QML_DECLARE_TYPE(KDeclarativeWebSettings)
 QML_DECLARE_TYPEINFO(KDeclarativeWebView, QML_HAS_ATTACHED_PROPERTIES)
 
 QT_END_HEADER

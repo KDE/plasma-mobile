@@ -33,7 +33,7 @@ ImageViewer::ImageViewer(const QString &url)
     setAcceptDrops(true);
     addAction(KStandardAction::close(this, SLOT(close()), this));
     addAction(KStandardAction::quit(this, SLOT(close()), this));
-    m_widget = new View(url, this);
+    m_widget = new AppView(url, this);
 
     restoreWindowSize(config("Window"));
     setCentralWidget(m_widget);

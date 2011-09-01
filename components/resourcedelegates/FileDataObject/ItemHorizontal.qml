@@ -28,7 +28,8 @@ Item {
     id: resourceItem
     anchors.fill: parent
 
-
+    Column {
+        anchors.centerIn: parent
         QIconItem {
             id: previewImage
             height: 64
@@ -92,7 +93,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
             anchors.top: previewImage.bottom
-            anchors.horizontalCenter: resourceItem.horizontalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
             width: 130
             style: Text.Outline
             styleColor: Qt.rgba(1, 1, 1, 0.6)
@@ -113,4 +114,5 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             visible: infoLabelVisible
         }
+    }
 }

@@ -83,10 +83,11 @@ PlasmaApp::PlasmaApp()
       m_isDesktop(false)
 {
     KGlobal::locale()->insertCatalog("libplasma");
+    KGlobal::locale()->insertCatalog("plasma-device");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    qmlRegisterType<PanelProxy>("org.kde.plasma.mobileshell", 0, 1, "MobilePanel");
+    qmlRegisterType<PanelProxy>("org.kde.plasma.deviceshell", 0, 1, "DevicePanel");
 
     //FIXME: why does not work?
     //qmlRegisterInterface<Plasma::Wallpaper>("Wallpaper");
@@ -139,7 +140,7 @@ PlasmaApp::PlasmaApp()
     m_mainView->setFixedSize(width, height);
     m_mainView->move(0,0);
 
-    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-device");
     const QString themeName = cg.readEntry("name", "air-mobile");
     Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
     Plasma::Theme::defaultTheme()->setThemeName(themeName);
@@ -153,15 +154,6 @@ PlasmaApp::PlasmaApp()
     // this line initializes the corona and setups the main qml homescreen
     corona();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
-
-    KAction *lockAction = new KAction(this);
-    lockAction->setText(i18n("Lock Plasma Mobile screen"));
-    lockAction->setObjectName(QString("lock screen")); // NO I18
-
-    KGlobalAccel::cleanComponent(KGlobal::mainComponent().componentName());
-    lockAction->setGlobalShortcut(KShortcut(Qt::CTRL + Qt::Key_L));
-    m_mainView->addAction(lockAction);
-    connect(lockAction, SIGNAL(triggered()), this, SLOT(lockScreen()));
 
     if (isDesktop) {
         notifyStartup(true);
@@ -222,38 +214,44 @@ void PlasmaApp::syncConfig()
 
 void PlasmaApp::setupHomeScreen()
 {
-    if (m_declarativeWidget) {
-        kWarning() << "The home screen can be set up a single time";
-    }
+    //The home screen can be set up a single time
+    Q_ASSERT(!m_declarativeWidget);
+
 
     m_declarativeWidget = new Plasma::DeclarativeWidget();
     m_corona->addItem(m_declarativeWidget);
 
     m_homeScreenPath = m_corona->homeScreenPackage()->filePath("mainscript");
     if (m_homeScreenPath.isEmpty()) {
-        m_homeScreenPath = QString("tablet-homescreen");
-        kWarning() << "m_homeScreenPath is empty, this should not happen. Trying " << m_homeScreenPath;
+        kWarning() << "Could not find an home screen, exiting.";
+        QTimer::singleShot(0, QCoreApplication::instance(), SLOT(quit()));
+        return;
     }
     kDebug() << "Loading " << m_homeScreenPath;
     m_declarativeWidget->setQmlPath(m_homeScreenPath);
 
     if (!m_declarativeWidget->engine()) {
-        kDebug() << "Invalid main declarative widget, exiting.";
-        QCoreApplication::quit();
+        kDebug() << "Invalid main declarative engine, exiting.";
+        QTimer::singleShot(0, QCoreApplication::instance(), SLOT(quit()));
+        return;
     }
 
     m_homeScreen = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
 
     if (!m_homeScreen) {
-        kError() << "Could not find homescreen package. Exiting. " << m_homeScreenPath;
-        QCoreApplication::quit();
+        kError() << "Error in creation of the homescreen object, exiting. " << m_homeScreenPath;
+        QTimer::singleShot(0, QCoreApplication::instance(), SLOT(quit()));
+        return;
     }
 
     mainViewGeometryChanged();
-    connect(m_mainView, SIGNAL(geometryChanged()), this, SLOT(mainViewGeometryChanged()));
-    connect(m_mainView, SIGNAL(containmentActivated()), this, SLOT(mainContainmentActivated()));
+    connect(m_mainView, SIGNAL(geometryChanged()),
+            this, SLOT(mainViewGeometryChanged()));
+    connect(m_mainView, SIGNAL(containmentActivated()),
+            this, SLOT(mainContainmentActivated()));
 
-    connect(m_homeScreen, SIGNAL(transformingChanged(bool)), this, SLOT(containmentsTransformingChanged(bool)));
+    connect(m_homeScreen, SIGNAL(transformingChanged(bool)),
+            this, SLOT(containmentsTransformingChanged(bool)));
 
 
     connect(m_homeScreen, SIGNAL(nextActivityRequested()),
@@ -265,18 +263,8 @@ void PlasmaApp::setupHomeScreen()
     connect(m_homeScreen, SIGNAL(newActivityRequested()),
             this, SLOT(showActivityCreation()));
 
-    QDeclarativeItem *panel = m_homeScreen->findChild<QDeclarativeItem*>("activitypanel");
-
     m_mainView->setSceneRect(m_homeScreen->x(), m_homeScreen->y(),
                              m_homeScreen->width(), m_homeScreen->height());
-
-    QDeclarativeItem *panelItems = panel->findChild<QDeclarativeItem*>("panelitems");
-
-    if (panelItems) {
-        foreach(QObject *item, panelItems->children()) {
-            connect(item, SIGNAL(clicked()), this, SLOT(changeActivity()));
-        }
-    }
 }
 
 void PlasmaApp::containmentsTransformingChanged(bool transforming)
@@ -316,11 +304,6 @@ void PlasmaApp::changeContainment(Plasma::Containment *containment)
     }
 
     m_currentContainment = containment;
-}
-
-void PlasmaApp::lockScreen()
-{
-    m_homeScreen->setProperty("locked", true);
 }
 
 Plasma::Corona* PlasmaApp::corona()
@@ -394,10 +377,9 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     if (addAction) {
         connect(addAction, SIGNAL(triggered()), this, SLOT(showWidgetsExplorer()));
     }
-    QAction *configureAction = containment->action("configure");
-    if (configureAction) {
-        connect(configureAction, SIGNAL(triggered()), this, SLOT(showActivityConfiguration()));
-    }
+
+    connect(containment, SIGNAL(configureRequested(Plasma::Containment*)),
+            this, SLOT(showActivityConfiguration(Plasma::Containment*)));
 
     //Is it a panel?
     //put it into the main scene:
@@ -598,35 +580,32 @@ void PlasmaApp::showWidgetsExplorer()
 
 void PlasmaApp::showActivityCreation()
 {
-    if (!m_activityConfiguration) {
-        m_activityConfiguration = new ActivityConfiguration();
-        m_activityConfiguration.data()->setZValue(1000);
-        m_corona->addItem(m_activityConfiguration.data());
-    }
-
-    //without a containment, one will be created
-    m_activityConfiguration.data()->setContainment(0);
-    if (m_declarativeWidget) {
-        m_activityConfiguration.data()->setGeometry(m_declarativeWidget->geometry());
-    }
-    m_activityConfiguration.data()->show();
+    showActivityConfiguration(0);
 }
 
-void PlasmaApp::showActivityConfiguration()
+void PlasmaApp::showActivityConfiguration(Plasma::Containment *containment)
 {
     if (!m_activityConfiguration) {
         m_activityConfiguration = new ActivityConfiguration();
+        connect(m_activityConfiguration.data(), SIGNAL(containmentWallpaperChanged(Plasma::Containment*)),
+                this, SLOT(containmentWallpaperChanged(Plasma::Containment*)));
         m_activityConfiguration.data()->setZValue(1000);
         m_corona->addItem(m_activityConfiguration.data());
     }
 
-    m_activityConfiguration.data()->setContainment(m_currentContainment);
+    m_activityConfiguration.data()->setContainment(containment);
     if (m_declarativeWidget) {
         m_activityConfiguration.data()->setGeometry(m_declarativeWidget->geometry());
     }
     m_activityConfiguration.data()->show();
 }
 
+void PlasmaApp::containmentWallpaperChanged(Plasma::Containment *containment)
+{
+    if (m_pluginLoader->activityThumbnails()) {
+        m_pluginLoader->activityThumbnails()->snapshotContainment(containment);
+    }
+}
 
 void PlasmaApp::containmentDestroyed(QObject *object)
 {

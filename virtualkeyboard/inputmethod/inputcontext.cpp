@@ -28,10 +28,8 @@
 
 InputContext::InputContext()
 {
-    m_keyboard = new LocalPlasmaKeyboardInterface("org.kde.plasma-keyboardcontainer", "/App",
-                                      QDBusConnection::sessionBus());
+    m_keyboard = new OrgKdePlasmaVirtualKeyboardInterface("org.kde.plasma.VirtualKeyboard", "/", QDBusConnection::sessionBus());
 }
-
 
 InputContext::~InputContext()
 {

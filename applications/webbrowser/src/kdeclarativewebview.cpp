@@ -67,10 +67,10 @@ public:
       , preferredheight(0)
       , progress(1.0)
       , status(KDeclarativeWebView::Null)
+      , wallet(0)
       , pending(PendingNone)
       , newWindowComponent(0)
       , newWindowParent(0)
-      , wallet(0)
       , rendering(true)
     {
     }
@@ -89,7 +89,7 @@ public:
     QUrl pendingUrl;
     QString pendingString;
     QByteArray pendingData;
-    mutable QDeclarativeWebSettings settings;
+    mutable KDeclarativeWebSettings settings;
     QDeclarativeComponent* newWindowComponent;
     QDeclarativeItem* newWindowParent;
 
@@ -799,7 +799,7 @@ QWebPage* KDeclarativeWebView::page() const
     }
     \endqml
 */
-QDeclarativeWebSettings* KDeclarativeWebView::settingsObject() const
+KDeclarativeWebSettings* KDeclarativeWebView::settingsObject() const
 {
     d->settings.s = page()->settings();
     return &d->settings;

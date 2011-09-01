@@ -27,6 +27,8 @@ class QDeclarativeItem;
 class PlasmaAppletItemModel;
 class BackgroundListModel;
 
+#include <KConfigGroup>
+
 namespace Activities
 {
     class Controller;
@@ -43,7 +45,7 @@ class ActivityConfiguration : public Plasma::DeclarativeWidget
     Q_PROPERTY(QString activityName READ activityName WRITE setActivityName NOTIFY activityNameChanged)
     Q_PROPERTY(QString activityId READ activityId)
     Q_PROPERTY(QObject *wallpaperModel READ wallpaperModel NOTIFY modelChanged)
-    Q_PROPERTY(int wallpaperIndex READ wallpaperIndex WRITE setWallpaperIndex)
+    Q_PROPERTY(int wallpaperIndex READ wallpaperIndex WRITE setWallpaperIndex NOTIFY wallpaperIndexChanged)
     Q_PROPERTY(QSize screenshotSize READ screenshotSize WRITE setScreenshotSize)
     Q_PROPERTY(bool activityNameConfigurable READ isActivityNameConfigurable)
 
@@ -70,10 +72,20 @@ public:
 
 Q_SIGNALS:
     void modelChanged();
+    void wallpaperIndexChanged();
     void activityNameChanged();
+    void containmentAvailable();
+    void containmentWallpaperChanged(Plasma::Containment *containment);
 
 protected:
     void ensureContainmentExistence();
+
+private:
+    void ensureContainmentHasWallpaperPlugin(const QString &mimetype = "image/jpeg");
+    KConfigGroup wallpaperConfig();
+
+private Q_SLOTS:
+    void modelCountChanged();
 
 private:
     Plasma::Containment *m_containment;
@@ -82,6 +94,7 @@ private:
     Activities::Controller *m_activityController;
     QString m_activityName;
     int m_wallpaperIndex;
+    bool m_newContainment;
 };
 
 #endif //PLASMA_ACTIVITYCONFIG_H

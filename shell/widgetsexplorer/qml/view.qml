@@ -196,10 +196,13 @@ Rectangle {
 
 
                 delegate: Component {
-                    MobileComponents.IconDelegate {
-                        icon: decoration
-                        text: display.length<22?display:display.slice(0,22)+"..."
-                        textColor: theme.textColor
+                    MobileComponents.ResourceDelegate {
+                        //icon: decoration
+                        genericClassName: "FileDataObject"
+                        property string label: display
+                        width: appletsView.delegateWidth
+                        height: appletsView.delegateHeight
+
                         onClicked: {
                             currentPlugin = pluginName
                             infoPanel.icon = decoration

@@ -22,7 +22,7 @@
 
 #include <QtGui/QInputContext>
 
-class LocalPlasmaKeyboardInterface;
+class QDBusAbstractInterface;
 
 class InputContext : public QInputContext
 {
@@ -42,7 +42,7 @@ public:
     void reset();
 
 private:
-    LocalPlasmaKeyboardInterface *m_keyboard;
+    QDBusAbstractInterface *m_keyboard;
 };
 
 

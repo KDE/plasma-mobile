@@ -28,6 +28,14 @@ Item {
     width: 400
     height: 150
 
+    signal itemLaunched()
+
+    function resetStatus()
+    {
+        searchField.searchQuery = ""
+        appGrid.currentPage = 0
+        tagCloud.resetStatus()
+    }
 
     MobileComponents.ResourceInstance {
         id: resourceInstance
@@ -83,7 +91,8 @@ Item {
             if (searchQuery == "") {
                 runnerSource.connectedSources = []
             } else {
-                runnerSource.connectedSources = [searchQuery]
+                //limit to just some runners
+                runnerSource.connectedSources = [searchQuery+":services|nepomuksearch|recentdocuments"]
             }
         }
     }
@@ -103,6 +112,7 @@ Item {
                 property string mimeType: model["mimeType"]?model["mimeType"]:"application/x-desktop"
                 onPressed: {
                     resourceInstance.uri = model["resourceUri"]?model["resourceUri"]:model["entryPath"]
+                    resourceInstance.title = model["name"]?model["name"]:model["text"]
                 }
                 onClicked: {
                     //showing apps model?
@@ -119,6 +129,8 @@ Item {
                         operation["id"] = model["id"]
                         service.startOperationCall(operation)
                     }
+                    resetStatus()
+                    itemLaunched()
                 }
 
             }

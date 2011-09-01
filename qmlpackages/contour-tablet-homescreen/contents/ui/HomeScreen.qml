@@ -20,7 +20,8 @@
  ***************************************************************************/
 
 import QtQuick 1.0
-import org.kde.plasma.mobileshell 0.1 as MobileShell
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.deviceshell 0.1 as DeviceShell
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
@@ -33,51 +34,73 @@ Item {
     signal nextActivityRequested
     signal previousActivityRequested
     signal newActivityRequested
-
     state : "Normal"
     signal transformingChanged(bool transforming)
-    property bool locked: true
+
+    property QtObject activeWallpaper
+    onActiveWallpaperChanged: {
+        print("Current wallpaper path"+activeWallpaper.wallpaperPath);
+    }
 
     MobileComponents.Package {
         id: homeScreenPackage
-        name: "plasma-tablet-homescreen"
+        name: "org.kde.active.contour-tablet-homescreen"
     }
 
     property QGraphicsWidget activeContainment
     onActiveContainmentChanged: {
+        activeContainment.visible=true
+        spareSlot.containment = activeContainment
         activeContainment.parent = spareSlot
         activeContainment.visible = true
         activeContainment.x = 0
         activeContainment.y = 0
         activeContainment.size = width + "x" + height
+        //view the main containment
         state = "Slide"
         transformingChanged(true);
     }
 
     function finishTransition()
     {
+        //spareSlot.containment = undefined
+        if (mainSlot.containment) {
+            mainSlot.containment.visible = false
+        }
+        mainSlot.containment = activeContainment
         activeContainment.parent = mainSlot
         activeContainment.x = 0
         activeContainment.y = 0
+
+        //hide the activity switcher
+        activityPanel.x = homeScreen.width
+        activityPanel.state = "hidden"
+
         state = "Normal"
         transformingChanged(false);
     }
 
-    onLockedChanged: {
-        if (locked) {
-            lockScreenItem.opacity = 1
-        } else {
-            lockScreenItem.opacity = 0
-        }
+    PlasmaCore.Theme {
+        id: theme
     }
+
+    /*Image {
+        //TODO: take scale mode from Wallpaper config
+        asynchronous: true
+        source: activeWallpaper.wallpaperPath
+        width: Math.max(homeScreen.width, sourceSize.width)
+        height: Math.max(homeScreen.height, sourceSize.height)
+        //Parallax: the background moves for is width
+        x: (mainContainments.width-width)*(1-((mainContainments.x+mainContainments.width)/(mainContainments.width*3)))
+    }*/
 
     //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
     Item {
         id: availableScreenRect
         objectName: "availableScreenRect"
         anchors.fill: parent
-        anchors.topMargin: 42
-        anchors.bottomMargin: 28
+        anchors.topMargin: 38
+        anchors.bottomMargin: 12
 
         //this properties will define "structs" for reserved screen of the panels
         property int leftReserved: 0
@@ -87,33 +110,57 @@ Item {
     }
 
     Item {
-        id: mainSlot;
-        objectName: "mainSlot";
-        x: 0;
-        y: 0;
+        id: alternateSlot;
+        objectName: "alternateSlot";
+        x: -width
+        y: 0
         width: homeScreen.width;
         height: homeScreen.height;
-        transformOrigin : Item.Center;
     }
 
     Item {
-        id : spareSlot;
-        objectName: "spareSlot";
-        x: -homeScreen.width;
-        y: 0;
-        width: homeScreen.width;
-        height: homeScreen.height;
+        id: mainContainments
+        width: homeScreen.width
+        height: homeScreen.height
+        x: 0
+        y: 0
+
+        Item {
+            id: mainSlot;
+            objectName: "mainSlot"
+            x: 0;
+            y: 0;
+            width: homeScreen.width
+            height: homeScreen.height
+            property QGraphicsWidget containment
+        }
     }
+
+    RecommendationsPanel {
+        id: leftEdgePanel
+        objectName: "leftEdgePanel"
+
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+        }
+        x: - width
+    }
+
     states: [
             State {
                 name: "Normal"
-                PropertyChanges {
-                    target: mainSlot;
-                    x: 0;
+               /* PropertyChanges {
+                    target: spareSlot;
+                    scale: 0.3;
                 }
                 PropertyChanges {
                     target: spareSlot;
-                    x: -homeScreen.width;
+                    opacity: 0;
+                }*/
+                PropertyChanges {
+                    target: spareSlot;
+                    x: homeScreen.width
                 }
 
             },
@@ -121,11 +168,7 @@ Item {
                 name: "Slide"
                 PropertyChanges {
                     target: spareSlot;
-                    x: 0;
-                }
-                PropertyChanges {
-                    target: mainSlot;
-                    x: homeScreen.width;
+                    x: 0
                 }
             }
     ]
@@ -134,65 +177,32 @@ Item {
         from: "Normal"
         to: "Slide"
         SequentialAnimation {
-            NumberAnimation {
-                target: mainSlot;
-                property: "scale";
-                easing.type: "OutQuint";
-                duration: 250;
-            }
-            ParallelAnimation {
-                NumberAnimation {
-                    target: spareSlot;
-                    property: "x";
-                    easing.type: "InQuad";
-                    duration: 300;
-                }
-                NumberAnimation {
-                    target: mainSlot;
-                    property: "x";
-                    easing.type: "InQuad";
-                    duration: 300;
-                }
-            }
+
             NumberAnimation {
                 target: spareSlot;
-                property: "scale";
-                easing.type: "OutQuint";
-                duration: 250;
+                property: "x";
+                easing.type: "OutQuad";
+                duration: 300;
             }
+
             ScriptAction {
                 script: finishTransition();
             }
         }
     }
 
-
-    Item {
-        id: alternateSlot;
-        objectName: "alternateSlot";
-        x: 0;
-        y: alternateDrag.y + alternateDrag.height;
-        width: homeScreen.width;
-        height: homeScreen.height;
-    }
-    Shadow {
-        id: alternateSlotShadowTop
-        source: homeScreenPackage.filePath("images", "shadow-top.png")
-        anchors.bottom: alternateSlot.top
-        anchors.topMargin: -1
-        width: alternateSlot.width
-        height: 11
-    }
-    Shadow {
-        id: alternateSlotShadowBottom
-        source: homeScreenPackage.filePath("images", "shadow-bottom.png")
-        anchors.top: alternateSlot.bottom
-        anchors.topMargin: -1
-        width: alternateSlot.width
-        height: 11
+    //acceptsFocus property is costly, delay it after the animation
+    Timer {
+        id: topEdgePanelStateTimer
+        interval: 500
+        repeat: false
+        running: false
+        onTriggered: {
+            topEdgePanel.state = "Hidden"
+        }
     }
 
-    MobileShell.MobilePanel {
+    DeviceShell.DevicePanel {
         id: slidingPanel
         visible: true
         mainItem: SystrayPanel {
@@ -201,7 +211,7 @@ Item {
         }
         onActiveWindowChanged: {
             if (acceptsFocus && !activeWindow) {
-                topEdgePanel.state = "Hidden"
+                topEdgePanelStateTimer.restart()
             }
         }
     }
@@ -213,36 +223,18 @@ Item {
         x: parent.width - width
     }
 
-    Dragger {
-        id: alternateDrag
-
-        location: "BottomEdge"
-        targetItem: alternateSlot
-        onTransitionFinished : {
-            alternateSlotShadowBottom.state = "invisible"
-            alternateSlotShadowTop.state = "invisible"
-        }
-
-        onActivated: {
-            alternateSlotShadowBottom.state = "visible"
-            alternateSlotShadowTop.state = "visible"
-        }
-    }
-
-    //FIXME: this should be automatic
-    onWidthChanged: {
-        alternateDrag.updateDrag();
-    }
-    onHeightChanged: {
-        alternateDrag.updateDrag();
+    Item {
+        id : spareSlot
+        objectName: "spareSlot"
+        x: 0
+        y: 0
+        width: homeScreen.width
+        height: homeScreen.height
+        property QGraphicsWidget containment
     }
 
     LockScreen {
         id: lockScreenItem
         anchors.fill: parent
-
-        onUnlocked: {
-            homeScreen.locked = false
-        }
     }
 }

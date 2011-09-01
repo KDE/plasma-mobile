@@ -43,9 +43,7 @@ void ImageSizeFinder::run()
 BackgroundListModel::BackgroundListModel(Plasma::Wallpaper *listener, QObject *parent)
     : QAbstractListModel(parent),
       m_structureParent(listener),
-      m_screenshotSize(320, 200),
-      m_size(0,0),
-      m_resizeMethod(Plasma::Wallpaper::ScaledResize)
+      m_screenshotSize(320, 200)
 {
     connect(&m_dirwatch, SIGNAL(deleted(QString)), this, SLOT(removeBackground(QString)));
     m_previewUnavailablePix.fill(Qt::transparent);
@@ -340,16 +338,6 @@ void BackgroundListModel::previewFailed(const KFileItem &item)
 Plasma::Package* BackgroundListModel::package(int index) const
 {
     return m_packages.at(index);
-}
-
-void BackgroundListModel::setWallpaperSize(const QSize& size)
-{
-    m_size = size;
-}
-
-void BackgroundListModel::setResizeMethod(Plasma::Wallpaper::ResizeMethod resizeMethod)
-{
-    m_resizeMethod = resizeMethod;
 }
 
 BackgroundFinder::BackgroundFinder(Plasma::Wallpaper *structureParent, const QStringList &paths)

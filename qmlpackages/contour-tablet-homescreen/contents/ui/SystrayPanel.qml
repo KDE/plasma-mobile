@@ -41,7 +41,14 @@ Item {
         Component.onCompleted: {
             var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
             menuContainer.plasmoid = component.createObject(menuContainer);
+            //assume menuContainer provides a itemLaunched signal
+            menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
         }
+    }
+
+    function itemLaunched()
+    {
+        systrayPanel.state = "Hidden"
     }
 
     function addContainment(cont)
@@ -158,19 +165,23 @@ Item {
             PropertyChanges {
                 target: slidingPanel
                 y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom
-            }
-            PropertyChanges {
-                target: slidingPanel
+
                 acceptsFocus: true
             }
         }
     ]
     transitions: [
         Transition {
-            PropertyAnimation {
-                properties: "y"
-                duration: 250
-                easing.type: Easing.InOutQuad
+            SequentialAnimation {
+                PropertyAction { 
+                    target: slidingPanel
+                    property: "acceptsFocus"
+                }
+                PropertyAnimation {
+                    properties: "y"
+                    duration: 250
+                    easing.type: Easing.OutQuad
+                }
             }
         }
     ]

@@ -81,11 +81,11 @@ private Q_SLOTS:
     void containmentDestroyed(QObject *);
     void containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasma::Containment *cont);
     void syncConfig();
-    void lockScreen();
     void showWidgetsExplorer();
-    void showActivityConfiguration();
+    void showActivityConfiguration(Plasma::Containment *containment);
     void showActivityCreation();
     void mainViewGeometryChanged();
+    void containmentWallpaperChanged(Plasma::Containment *containment);
 
 private:
     MobCorona *m_corona;

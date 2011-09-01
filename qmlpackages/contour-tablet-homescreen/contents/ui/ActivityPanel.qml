@@ -25,9 +25,13 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: activityPanel;
-    height: parent.height-80
+    anchors {
+        top: parent.top
+        bottom: parent.bottom
+        topMargin: 50
+    }
     width: 400
-    state: "show"
+    state: "hidden"
     property Item switcher
     onStateChanged: {
         if (state == "hidden") {
@@ -51,10 +55,12 @@ Item {
 
         property int startX
         property int startMouseX
+        property string previousState
         onPressed: {
             startMouseX = mouse.screenX
             startX = activityPanel.x
             hideTimer.running = false
+            previousState = activityPanel.state
             activityPanel.state = "dragging"
         }
 
@@ -62,10 +68,12 @@ Item {
             activityPanel.x = Math.max(startX + (mouse.screenX - startMouseX),
                                     activityPanel.parent.width - activityPanel.width)
             hideTimer.running = false
+
         }
 
         onReleased: {
-            if (activityPanel.x < activityPanel.parent.width - activityPanel.width/2) {
+            if ((previousState == "hidden" && activityPanel.x < homeScreen.width - activityPanel.width/3) ||
+                (previousState == "show" && activityPanel.x < homeScreen.width - activityPanel.width/3*2)) {
                     activityPanel.state = "show"
                     if (activityPanel.switcher.state != "AcceptingInput") {
                         hideTimer.restart()
@@ -78,24 +86,33 @@ Item {
         PlasmaCore.FrameSvgItem {
             id: hint
             x: 20
-            width: 40
+            width: 60
             height: 80
             anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenterOffset: -25
             imagePath: "widgets/background"
-            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
             PlasmaCore.SvgItem {
-                width:32
-                height:32
+                width:22
+                height:22
                 svg: PlasmaCore.Svg {
-                    imagePath: "widgets/arrows"
+                    imagePath: homeScreenPackage.filePath("images", "panel-icons.svgz")
                 }
-                elementId: "left-arrow"
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: parent.right
+                elementId: "activities"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    leftMargin: hint.margins.left
+                }
             }
             MouseArea {
                 anchors.fill: parent
-                onClicked: activityPanel.state = "show"
+                property int startX
+                onPressed: startX = activityPanel.x
+                onClicked: {
+                    if (Math.abs(startX - activityPanel.x) < 8) {
+                        activityPanel.state = activityPanel.x < homeScreen.width?"hidden":"show"
+                    }
+                }
             }
         }
     }
@@ -115,7 +132,7 @@ Item {
         id: switcherPackage
         name: "org.kde.activityswitcher"
         Component.onCompleted: {
-            var component = Qt.createComponent(switcherPackage.filePath("ui", "main.qml"));
+            var component = Qt.createComponent(switcherPackage.filePath("mainscript"));
             activityPanel.switcher = component.createObject(hintregion);
         }
     }
@@ -128,10 +145,6 @@ Item {
                 x: parent.width - width;
             }
             PropertyChanges {
-                target: hint;
-                opacity: 0;
-            }
-            PropertyChanges {
                 target: hideTimer;
                 running: true
             }
@@ -142,10 +155,6 @@ Item {
                 target: activityPanel;
                 x: parent.width;
             }
-            PropertyChanges {
-                target: hint;
-                opacity: 1;
-            }
         },
         State {
             name: "dragging"
@@ -154,10 +163,6 @@ Item {
                 x: activityPanel.x;
                 y: activityPanel.y;
 
-            }
-            PropertyChanges {
-                target: hint;
-                opacity: 0;
             }
         }
     ]
@@ -171,16 +176,8 @@ Item {
                     NumberAnimation {
                         targets: activityPanel;
                         properties: "x";
-                        duration: 1000;
+                        duration: 500;
                         easing.type: "InOutCubic";
-                    }
-                }
-                ParallelAnimation {
-                    PropertyAnimation {
-                        target: hint;
-                        property: "opacity";
-                        duration: 600;
-                        easing.type: "InCubic";
                     }
                 }
             }
@@ -190,18 +187,10 @@ Item {
             to: "show";
             SequentialAnimation {
                 ParallelAnimation {
-                    PropertyAnimation {
-                        targets: hint;
-                        properties: "opacity";
-                        duration: 600;
-                        easing.type: "OutCubic";
-                    }
-                }
-                ParallelAnimation {
                     NumberAnimation {
                         targets: activityPanel;
                         properties: "x";
-                        duration: 800;
+                        duration: 400;
                         easing.type: "InOutCubic";
                     }
                 }
@@ -214,18 +203,6 @@ Item {
                 properties: "x,y";
                 easing.type: "OutQuad";
                 duration: 400;
-            }
-        },
-        Transition {
-            from: "*";
-            to: "dragging";
-            ParallelAnimation {
-                PropertyAnimation {
-                    targets: hint;
-                    properties: "opacity";
-                    duration: 600;
-                    easing.type: "OutCubic";
-                }
             }
         }
     ]

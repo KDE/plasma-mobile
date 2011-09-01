@@ -77,6 +77,8 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
         m_applet = Plasma::Applet::load(pluginName, appletId, appletArgs);
     }
 
+    // ensure that the keyboard knows when to reset itself
+    connect(this, SIGNAL(dialogVisible(bool)), m_applet, SLOT(dialogStatusChanged(bool)));
     m_containment->addApplet(m_applet, QPointF(-1, -1), false);
 
     setGraphicsWidget(m_applet);

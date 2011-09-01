@@ -13,7 +13,7 @@ INCLUDE_DIRECTORIES(
         ${KDE4_INCLUDES}
 )
 
-qt4_add_dbus_interface(plasmainputcontext_SRCS org.kde.PlasmaKeyboardShell.xml keyboard_interface)
+qt4_add_dbus_interface(plasmainputcontext_SRCS ../keyboardshell/org.kde.PlasmaKeyboardShell.xml keyboard_interface)
 
 qt4_automoc(${plasmainputcontext_SRCS})
 

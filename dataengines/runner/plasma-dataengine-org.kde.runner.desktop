@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Query KRunner and execute the results
 Comment[nl]=In KRunner zoeken en de resultaten uitvoeren
+Comment[pt]=Consulta o KRunner e executa os resultados
 Comment[pt_BR]=Pesquisa com o KRunner e execução dos resultados
 Comment[sv]=Skicka förfrågan till Kör program och kör resultaten
 Comment[uk]=Опитує KRunner і виконує отриманий результат
@@ -8,6 +9,7 @@ Comment[x-test]=xxQuery KRunner and execute the resultsxx
 Icon=system-run
 Name=KRunner
 Name[nl]=KRunner
+Name[pt]=KRunner
 Name[pt_BR]=KRunner
 Name[sv]=Kör program
 Name[uk]=KRunner

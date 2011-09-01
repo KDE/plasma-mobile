@@ -49,7 +49,7 @@
 #include <Activities/Consumer>
 #include <Activities/Controller>
 
-static const char *DEFAUL_CONTAINMENT = "org.kde.mobiledesktop";
+static const char *DEFAUL_CONTAINMENT = "org.kde.active.activityscreen";
 
 MobCorona::MobCorona(QObject *parent)
     : Plasma::Corona(parent),
@@ -76,10 +76,21 @@ MobCorona::~MobCorona()
 
 void MobCorona::init()
 {
-    const QString homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
+    QString homeScreenPath = KGlobal::mainComponent().componentName() + "-homescreen";
+    KConfigGroup globalConfig(KGlobal::config(), "General");
+    homeScreenPath = globalConfig.readEntry("HomeScreenPackage", "org.kde.active.contour-tablet-homescreen");
+    kDebug()<<"Searching for the home screen"<<homeScreenPath;
+
     //setup package for the home screen
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), homeScreenPath, structure);
+
+    //if the package is invalid, don't launch the application
+    if (!m_package->isValid()) {
+        kWarning()<<"Invalid home screen package:"<<homeScreenPath;
+        QTimer::singleShot(0, QCoreApplication::instance(), SLOT(quit()));
+        return;
+    }
 
     Plasma::ContainmentActionsPluginsConfig desktopPlugins;
     desktopPlugins.addPlugin(Qt::NoModifier, Qt::Vertical, "switchdesktop");

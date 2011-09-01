@@ -35,6 +35,21 @@ Item {
     property int pagesCount: Math.ceil(model.count/pageSize)
     property int count: model.count
 
+    function pageForIndex(index)
+    {
+        return Math.floor(index / pageSize)
+    }
+
+    function positionViewAtIndex(index)
+    {
+        appsView.positionViewAtIndex(index / pageSize, ListView.Beginning)
+    }
+
+    function positionViewAtPage(page)
+    {
+        appsView.positionViewAtIndex(page, ListView.Beginning)
+    }
+
     PlasmaCore.Theme {
         id:theme
     }
