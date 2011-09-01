@@ -33,7 +33,6 @@
 #include <Activities/Consumer>
 
 #include "../cachingeffect.h"
-//#include "dataenginetracker.h"
 
 MobileActivityThumbnails::MobileActivityThumbnails(QObject *parent, const QVariantList &args)
     : Plasma::DataEngine(parent, args)
@@ -42,7 +41,6 @@ MobileActivityThumbnails::MobileActivityThumbnails(QObject *parent, const QVaria
     m_saveTimer = new QTimer(this);
     m_saveTimer->setSingleShot(true);
     connect(m_saveTimer, SIGNAL(timeout()), this, SLOT(delayedSnapshotContainment()));
-//    new DataEngineTracker(this);
 }
 
 bool MobileActivityThumbnails::sourceRequestEvent(const QString &source)
