@@ -31,7 +31,7 @@ Item {
         topMargin: 50
     }
     width: 400
-    state: "show"
+    state: "hidden"
     property Item switcher
     onStateChanged: {
         if (state == "hidden") {
