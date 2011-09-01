@@ -18,7 +18,6 @@
  */
 
 #include "mobileactivitythumbnails.h"
-#include "../cachingeffect.h"
 
 #include <QFile>
 #include <QPainter>
@@ -33,6 +32,9 @@
 
 #include <Activities/Consumer>
 
+#include "../cachingeffect.h"
+//#include "dataenginetracker.h"
+
 MobileActivityThumbnails::MobileActivityThumbnails(QObject *parent, const QVariantList &args)
     : Plasma::DataEngine(parent, args)
 {
@@ -40,6 +42,7 @@ MobileActivityThumbnails::MobileActivityThumbnails(QObject *parent, const QVaria
     m_saveTimer = new QTimer(this);
     m_saveTimer->setSingleShot(true);
     connect(m_saveTimer, SIGNAL(timeout()), this, SLOT(delayedSnapshotContainment()));
+//    new DataEngineTracker(this);
 }
 
 bool MobileActivityThumbnails::sourceRequestEvent(const QString &source)
@@ -50,7 +53,11 @@ bool MobileActivityThumbnails::sourceRequestEvent(const QString &source)
     QString path = KStandardDirs::locateLocal("data", QString("plasma/activities-screenshots/%1.png").arg(source));
 
     if (QFile::exists(path)) {
-        setData(source, "path", path);
+        QImage image(path);
+        DataEngine::Data data;
+        data.insert("path", path);
+        data.insert("image", image);
+        setData(source, data);
     } else {
         setData(source, "path", QString());
     }
@@ -121,7 +128,8 @@ void MobileActivityThumbnails::snapshot(Plasma::Containment *containment)
     Plasma::DataContainer *container = containerForSource(activity);
     //kDebug() << "setting the thumbnail for" << activity << path << container;
     if (container) {
-        container->setData(activity, path);
+        container->setData("path", path);
+        container->setData("image", activityImage);
         scheduleSourcesUpdated();
     }
 }
