@@ -79,8 +79,7 @@ Item {
     {
         var component = Qt.createComponent("PlasmoidContainer.qml")
 
-        if (applet.pluginName == "org.kde.sharelikeconnect" ||
-            applet.pluginName == "digital-clock") {
+        if (applet.pluginName == "org.kde.sharelikeconnect") {
             applet.height = tasksRow.height
             applet.width = 120
 
@@ -88,6 +87,16 @@ Item {
             plasmoidContainer.parent = rightPanel
             plasmoidContainer.anchors.top = rightPanel.top
             plasmoidContainer.anchors.bottom = rightPanel.bottom
+            plasmoidContainer.applet = applet
+            return
+        } else if (applet.pluginName == "digital-clock") {
+            applet.height = tasksRow.height
+            applet.width = 120
+
+            var plasmoidContainer = component.createObject(rightPanel);
+            plasmoidContainer.parent = centerPanel
+            plasmoidContainer.anchors.top = centerPanel.top
+            plasmoidContainer.anchors.bottom = centerPanel.bottom
             plasmoidContainer.applet = applet
             return
         }
@@ -175,6 +184,14 @@ Item {
                         
                     }
                 }
+            }
+        }
+        Row {
+            id: centerPanel
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                horizontalCenter: parent.horizontalCenter
             }
         }
         Row {

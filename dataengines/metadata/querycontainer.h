@@ -67,6 +67,7 @@ private:
     QList<Nepomuk::Resource> m_resourcesToAdd;
     QTimer *m_addWatcherTimer;
     QTimer *m_addResourcesTimer;
+    int m_resultLimit;
 };
 
 #endif

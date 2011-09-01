@@ -96,27 +96,30 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         }
     }
 
+    int resultLimit = -1;
+    // if the strings ends with :number it's the limit for the query
+    if (name.contains(QRegExp(".*:\\d+$"))) {
+        QStringList tokens = name.split(":");
+        resultLimit = tokens.last().toInt();
+        massagedName = massagedName.mid(0, massagedName.lastIndexOf(":"));
+    }
+
     if (name.startsWith('/')) {
         massagedName = "file://" + name;
     }
 
-    if (name.startsWith("ResourcesOfType") && name.split(":").count() == 2) {
-        Nepomuk::Query::Query _query;
-        const QString type = name.split(":").last();
+    Nepomuk::Query::Query query;
+
+    if (massagedName.startsWith("ResourcesOfType") && massagedName.split(":").count() >= 2) {
+        const QString type = massagedName.split(":").value(1);
         //FIXME: more elegant
         if (type == "Contact") {
-            _query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+type)));
+            query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+type)));
         } else {
-            _query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+type)));
+            query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+type)));
         }
-        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
-        if (!container) {
-            container = new QueryContainer(_query, this);
-        }
-        container->setObjectName(name);
-        addSource(container);
-        return true;
-    //Simple case.. a single resource, don't need a DataContainer
+
+    //Simple case.. a single resource
     } else if (massagedName.split("://").count() > 1) {
         // We have a URL here, so we can create the results directly
         kDebug() << "Valid url ... creating resource synchronously";
@@ -129,11 +132,11 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         }
         //return true;
 
-        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
+        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(massagedName));
          if (!container) {
              container = new QueryContainer(Nepomuk::Query::Query(), this);
          }
-         container->setObjectName(name);
+         container->setObjectName(massagedName);
          addSource(container);
          //FIXME: this isn't really pretty
          //TODO: create another type of DataContainer with a common superclass to visualize single resources
@@ -141,50 +144,45 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
          return true;
 
     //we want to list all resources liked to the current activity
-    } else if (name.startsWith("CurrentActivityResources")) {
+    } else if (massagedName.startsWith("CurrentActivityResources")) {
 
          QString activityId;
-         if (name.split(":").count() < 2) {
+         if (massagedName.split(":").count() < 2) {
              activityId = d->activityConsumer->currentActivity();
          } else {
-             activityId = name.split(":").last();
+             activityId = massagedName.split(":").value(1);
          }
 
          kWarning() << "Asking for resources of activity" << activityId;
          Nepomuk::Resource acRes("activities://" + activityId);
          Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
          term.setInverted(true);
-         Nepomuk::Query::Query query = Nepomuk::Query::Query(term);
-         //return query(activityQuery);
-
-         QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
-         if (!container) {
-             container = new QueryContainer(query, this);
-         }
-         container->setObjectName(name);
-         addSource(container);
-         return true;
+         query = Nepomuk::Query::Query(term);
 
     // Let's try a literal query ...
     } else {
-        kDebug() << "async search for query:" << name;
-        Nepomuk::Query::Query _query = Nepomuk::Query::QueryParser::parseQuery(name);
-        //Nepomuk::Query::LiteralTerm nepomukTerm(name);
-        //_query.setTerm(nepomukTerm);
-        //fileQuery.addIncludeFolder(KUrl("/"), true);
-        //return query(fileQuery);
-        if (_query.isValid()) {
-            QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
-            if (!container) {
-                container = new QueryContainer(_query, this);
-            }
-            container->setObjectName(name);
-            addSource(container);
-            return true;
-        } else {
-            kWarning() << "Query is invalid:" << _query;
-            return false;
+        kDebug() << "async search for query:" << massagedName;
+        query = Nepomuk::Query::QueryParser::parseQuery(massagedName);
+    }
+
+    //query has been constructed at this point
+    if (query.isValid()) {
+        //was the query limited?
+        if (resultLimit > 0) {
+            query.setLimit(resultLimit);
         }
+
+        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
+
+        if (!container) {
+            container = new QueryContainer(query, this);
+        }
+        container->setObjectName(name);
+        addSource(container);
+        return true;
+    } else {
+        kWarning() << "Query is invalid:" << query;
+        return false;
     }
 }
 
