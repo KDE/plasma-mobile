@@ -59,6 +59,7 @@ History::History(QObject *parent)
     d->addHistoryTimer.setInterval(10000);
     connect(&d->addHistoryTimer, SIGNAL(timeout()), SLOT(recordHistory()));
     connect(d->dirWatch, SIGNAL(dirty(const QString&)), SLOT(loadHistory()));
+    connect(d->dirWatch, SIGNAL(created(const QString&)), SLOT(loadHistory()));
 
 }
 
