@@ -85,6 +85,15 @@ Rectangle {
 
 
 
+    //this one is just used to find out what resource types actually exist
+    PlasmaCore.DataSource {
+        id: resourcesStatSource
+        engine: "org.kde.active.metadata"
+        interval: 0
+        connectedSources: ["ResourcesOfType:Bookmark:1", "ResourcesOfType:Contact:1", "ResourcesOfType:Document:1", "ResourcesOfType:Image:1", "ResourcesOfType:Audio:1", "ResourcesOfType:Video:1"]
+    }
+
+
     PlasmaCore.DataSource {
         id: metadataSource
         engine: "org.kde.active.metadata"
@@ -374,6 +383,8 @@ Rectangle {
                                 genericClassName: "FileDataObject"
                                 property string label: name
                                 property string mimeType: "x"
+                                visible: String(model["className"]).charAt(0) == "_" || (resourcesStatSource.data["ResourcesOfType:"+model["className"]+":1"] != undefined)
+
                                 onClicked: {
                                     //FIXME: make all of this way cleaner, hardcoding _PlasmaWidgets seems pretty bad
                                     if (model["className"] == "_PlasmaWidgets") {
