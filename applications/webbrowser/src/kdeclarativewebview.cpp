@@ -67,10 +67,10 @@ public:
       , preferredheight(0)
       , progress(1.0)
       , status(KDeclarativeWebView::Null)
+      , wallet(0)
       , pending(PendingNone)
       , newWindowComponent(0)
       , newWindowParent(0)
-      , wallet(0)
       , rendering(true)
     {
     }
