@@ -50,7 +50,7 @@ History::History(QObject *parent)
     d->dirWatch = new KDirWatch(this);
 
     QString configPath = KStandardDirs::locateLocal("config", "active-webbrowserrc");
-    kDebug() << "XXXXX configPath is " << configPath;
+    //kDebug() << "XXXXX configPath is " << configPath;
     d->dirWatch->addFile(configPath);
     d->separator = "|X|";
     d->currentPage = 0;
@@ -95,7 +95,7 @@ void History::loadHistory()
         d->items.append(item);
     }
     emit dataChanged();
-    kDebug() << "XXX (Re)loaded history..." << d->items.count();
+    //kDebug() << "XXX (Re)loaded history..." << d->items.count();
 }
 
 void History::addPage(const QString &url, const QString &title)
@@ -111,7 +111,7 @@ void History::addPage(const QString &url, const QString &title)
     foreach (QObject* i, d->items) {
         CompletionItem* ci = qobject_cast<CompletionItem*>(i);
         if (ci->url() == url) {
-            kDebug() << "XXXXX Removing " << ci->name() << " ... " << ci->url();
+            //kDebug() << "XXXXX Removing " << ci->name() << " ... " << ci->url();
             d->items.removeAll(i);
         }
     }
@@ -124,16 +124,16 @@ void History::addPage(const QString &url, const QString &title)
 
 void History::visitPage(const QString &url, const QString &title)
 {
-    kDebug() << "XXXX Visiting page" << title << url;
+    //kDebug() << "XXXX Visiting page" << title << url;
     d->currentPage = new CompletionItem(title, url, d->icon, this);
     d->currentPage->setIconName("view-history");
-    kDebug() << "XXX starting timer";
+    //kDebug() << "XXX starting timer";
     d->addHistoryTimer.start();
 }
 
 void History::recordHistory()
 {
-    kDebug() << "XXX Recording history!";
+    //kDebug() << "XXX Recording history!";
     d->addHistoryTimer.stop();
     d->items.insert(0, d->currentPage);
     while (d->items.count() > 256) {
@@ -156,7 +156,7 @@ void History::saveHistory()
     KConfigGroup config = KConfigGroup(ptr, "history");
     config.writeEntry("history", l);
     config.sync();
-    kDebug() << "XXX History saved to disk";
+    //kDebug() << "XXX History saved to disk";
 }
 
 #include "history.moc"
