@@ -97,6 +97,9 @@ void History::loadHistory()
 
 void History::addPage(const QString &url, const QString &title)
 {
+    if (url.isEmpty() && title.isEmpty()) {
+        return;
+    }
     if (d->currentPage && d->currentPage->url() == url && d->currentPage->name() == title) {
         //kDebug() << "XXX nothing changed" << url << title;
         return;

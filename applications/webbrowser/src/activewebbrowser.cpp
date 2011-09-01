@@ -35,7 +35,9 @@
 ActiveWebbrowser::ActiveWebbrowser(const KCmdLineArgs *args)
     : KApplication()
 {
+    Q_UNUSED(args);
     qmlRegisterType<KDeclarativeWebView>("org.kde.kdewebkit", 0, 1, "WebView");
+    setStartDragDistance(20);
 }
 
 ActiveWebbrowser::~ActiveWebbrowser()
