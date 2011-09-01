@@ -64,7 +64,6 @@ History::History(QObject *parent)
 
 History::~History()
 {
-    saveHistory();
     delete d;
 }
 
@@ -84,6 +83,9 @@ void History::loadHistory()
         //kDebug() << "XXX history: " << hs;
         QString url = hs.at(0);
         QString title;
+        if (url.isEmpty()) {
+            continue;
+        }
         if (hs.count() > 1) {
             title = hs.at(1);
         }
