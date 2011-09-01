@@ -62,8 +62,8 @@ Item {
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
             }
-            property string path: activityThumbnailsSource.data[model.DataEngineSource]?activityThumbnailsSource.data[model.DataEngineSource]["path"]:""
-            source: path?path:switcherPackage.filePath("images", "emptyactivity.png")
+            property string path: activityThumbnailsSource.data[model.DataEngineSource] ? activityThumbnailsSource.data[model.DataEngineSource]["path"] : ""
+            source: path ? path : switcherPackage.filePath("images", "emptyactivity.png")
 
             MobileComponents.TextEffects {
                 anchors {
@@ -73,7 +73,7 @@ Item {
                     topMargin: 10
                 }
 
-                text: String(model.Name).length<=18?model.Name:String(model.Name).substr(0,18)+"..."
+                text: (String(model.Name).length <= 18) ? model.Name:String(model.Name).substr(0,18) + "..."
                 color: "white"
                 horizontalOffset: 1
                 verticalOffset: 1
