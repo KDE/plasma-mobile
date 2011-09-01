@@ -27,6 +27,8 @@ class QDeclarativeItem;
 class PlasmaAppletItemModel;
 class BackgroundListModel;
 
+#include <KConfigGroup>
+
 namespace Activities
 {
     class Controller;
@@ -76,6 +78,10 @@ Q_SIGNALS:
 
 protected:
     void ensureContainmentExistence();
+
+private:
+    void ensureContainmentHasWallpaperPlugin(const QString &mimetype = "image/jpeg");
+    KConfigGroup wallpaperConfig();
 
 private Q_SLOTS:
     void modelCountChanged();
