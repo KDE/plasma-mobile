@@ -377,10 +377,9 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     if (addAction) {
         connect(addAction, SIGNAL(triggered()), this, SLOT(showWidgetsExplorer()));
     }
-    QAction *configureAction = containment->action("configure");
-    if (configureAction) {
-        connect(configureAction, SIGNAL(triggered()), this, SLOT(showActivityConfiguration()));
-    }
+
+    connect(containment, SIGNAL(configureRequested(Plasma::Containment*)),
+            this, SLOT(showActivityConfiguration(Plasma::Containment*)));
 
     //Is it a panel?
     //put it into the main scene:
@@ -581,21 +580,10 @@ void PlasmaApp::showWidgetsExplorer()
 
 void PlasmaApp::showActivityCreation()
 {
-    if (!m_activityConfiguration) {
-        m_activityConfiguration = new ActivityConfiguration();
-        m_activityConfiguration.data()->setZValue(1000);
-        m_corona->addItem(m_activityConfiguration.data());
-    }
-
-    //without a containment, one will be created
-    m_activityConfiguration.data()->setContainment(0);
-    if (m_declarativeWidget) {
-        m_activityConfiguration.data()->setGeometry(m_declarativeWidget->geometry());
-    }
-    m_activityConfiguration.data()->show();
+    showActivityConfiguration(0);
 }
 
-void PlasmaApp::showActivityConfiguration()
+void PlasmaApp::showActivityConfiguration(Plasma::Containment *containment)
 {
     if (!m_activityConfiguration) {
         m_activityConfiguration = new ActivityConfiguration();
@@ -603,13 +591,12 @@ void PlasmaApp::showActivityConfiguration()
         m_corona->addItem(m_activityConfiguration.data());
     }
 
-    m_activityConfiguration.data()->setContainment(m_currentContainment);
+    m_activityConfiguration.data()->setContainment(containment);
     if (m_declarativeWidget) {
         m_activityConfiguration.data()->setGeometry(m_declarativeWidget->geometry());
     }
     m_activityConfiguration.data()->show();
 }
-
 
 void PlasmaApp::containmentDestroyed(QObject *object)
 {

@@ -82,7 +82,7 @@ private Q_SLOTS:
     void containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasma::Containment *cont);
     void syncConfig();
     void showWidgetsExplorer();
-    void showActivityConfiguration();
+    void showActivityConfiguration(Plasma::Containment *containment);
     void showActivityCreation();
     void mainViewGeometryChanged();
 
