@@ -587,6 +587,8 @@ void PlasmaApp::showActivityConfiguration(Plasma::Containment *containment)
 {
     if (!m_activityConfiguration) {
         m_activityConfiguration = new ActivityConfiguration();
+        connect(m_activityConfiguration.data(), SIGNAL(containmentWallpaperChanged(Plasma::Containment*)),
+                this, SLOT(containmentWallpaperChanged(Plasma::Containment*)));
         m_activityConfiguration.data()->setZValue(1000);
         m_corona->addItem(m_activityConfiguration.data());
     }
@@ -596,6 +598,13 @@ void PlasmaApp::showActivityConfiguration(Plasma::Containment *containment)
         m_activityConfiguration.data()->setGeometry(m_declarativeWidget->geometry());
     }
     m_activityConfiguration.data()->show();
+}
+
+void PlasmaApp::containmentWallpaperChanged(Plasma::Containment *containment)
+{
+    if (m_pluginLoader->activityThumbnails()) {
+        m_pluginLoader->activityThumbnails()->snapshotContainment(containment);
+    }
 }
 
 void PlasmaApp::containmentDestroyed(QObject *object)

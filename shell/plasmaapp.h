@@ -85,6 +85,7 @@ private Q_SLOTS:
     void showActivityConfiguration(Plasma::Containment *containment);
     void showActivityCreation();
     void mainViewGeometryChanged();
+    void containmentWallpaperChanged(Plasma::Containment *containment);
 
 private:
     MobCorona *m_corona;
