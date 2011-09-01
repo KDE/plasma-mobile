@@ -25,7 +25,9 @@
 #include "kdebug.h"
 
 #include <KConfigGroup>
+#include <KDirWatch>
 #include <KSharedConfig>
+#include <KStandardDirs>
 
 class HistoryPrivate {
 
@@ -33,6 +35,7 @@ public:
     QList<QObject*> items;
     QImage icon;
     KConfigGroup config;
+    KDirWatch* dirWatch;
     QTimer saveTimer;
     QString separator;
     CompletionItem* currentPage;
@@ -44,15 +47,19 @@ History::History(QObject *parent)
     : QObject(parent)
 {
     d = new HistoryPrivate;
-    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
-    d->config = KConfigGroup(ptr, "history");
+    d->dirWatch = new KDirWatch(this);
+
+    QString configPath = KStandardDirs::locateLocal("config", "active-webbrowserrc");
+    kDebug() << "XXXXX configPath is " << configPath;
+    d->dirWatch->addFile(configPath);
     d->separator = "|X|";
     d->currentPage = 0;
-    //d->addHistoryTimer.setSingleShot(true);
     // wait 30 sec before saving to history,
     // transient pages aren't interesting enough
     d->addHistoryTimer.setInterval(10000);
     connect(&d->addHistoryTimer, SIGNAL(timeout()), SLOT(recordHistory()));
+    connect(d->dirWatch, SIGNAL(dirty(const QString&)), SLOT(loadHistory()));
+
 }
 
 History::~History()
@@ -68,10 +75,10 @@ QList<QObject*> History::items()
 
 void History::loadHistory()
 {
-
-    kDebug() << "XXX populating history...";
-
-    QStringList h = d->config.readEntry("history", QStringList());
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+    KConfigGroup config = KConfigGroup(ptr, "history");
+    d->items.clear();
+    QStringList h = config.readEntry("history", QStringList());
     foreach (const QString &hitem, h) {
         QStringList hs = hitem.split(d->separator);
         //kDebug() << "XXX history: " << hs;
@@ -85,12 +92,13 @@ void History::loadHistory()
         d->items.append(item);
     }
     emit dataChanged();
+    kDebug() << "XXX (Re)loaded history..." << d->items.count();
 }
 
 void History::addPage(const QString &url, const QString &title)
 {
     if (d->currentPage && d->currentPage->url() == url && d->currentPage->name() == title) {
-        kDebug() << "XXX nothing changed" << url << title;
+        //kDebug() << "XXX nothing changed" << url << title;
         return;
     }
     // Remove entry from earlier in the history: less clutter
@@ -138,8 +146,10 @@ void History::saveHistory()
             l.append(ci->url() + d->separator + ci->name());
         }
     }
-    d->config.writeEntry("history", l);
-    d->config.sync();
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+    KConfigGroup config = KConfigGroup(ptr, "history");
+    config.writeEntry("history", l);
+    config.sync();
     kDebug() << "XXX History saved to disk";
 }
 
