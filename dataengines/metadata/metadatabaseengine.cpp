@@ -90,9 +90,9 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
 {
     QString massagedName = name;
     foreach (const QString &s, Plasma::DataEngine::sources()) {
-        if (s.startsWith(name) || s.endsWith(name)) {
+        if (s == name) {
             kDebug() << "!!! resource already exists." << name;
-            return false;
+            return true;
         }
     }
 
