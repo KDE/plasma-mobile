@@ -28,6 +28,11 @@ Rectangle {
     height: 600
     color: Qt.rgba(0, 0, 0, 0.8)
 
+    MouseArea {
+        anchors.fill: parent
+        onPressed: mouse.accepted = true
+    }
+
     PlasmaCore.Theme {
         id: theme
     }

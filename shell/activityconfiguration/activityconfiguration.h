@@ -27,6 +27,8 @@ class QDeclarativeItem;
 class PlasmaAppletItemModel;
 class BackgroundListModel;
 
+#include <KConfigGroup>
+
 namespace Activities
 {
     class Controller;
@@ -73,9 +75,14 @@ Q_SIGNALS:
     void wallpaperIndexChanged();
     void activityNameChanged();
     void containmentAvailable();
+    void containmentWallpaperChanged(Plasma::Containment *containment);
 
 protected:
     void ensureContainmentExistence();
+
+private:
+    void ensureContainmentHasWallpaperPlugin(const QString &mimetype = "image/jpeg");
+    KConfigGroup wallpaperConfig();
 
 private Q_SLOTS:
     void modelCountChanged();
@@ -87,6 +94,7 @@ private:
     Activities::Controller *m_activityController;
     QString m_activityName;
     int m_wallpaperIndex;
+    bool m_newContainment;
 };
 
 #endif //PLASMA_ACTIVITYCONFIG_H

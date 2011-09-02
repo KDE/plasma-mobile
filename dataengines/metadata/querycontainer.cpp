@@ -30,12 +30,13 @@
 #include <Nepomuk/Variant>
 #include <Nepomuk/File>
 
-#define RESULT_LIMIT 84
+#define RESULT_LIMIT 128
 
 QueryContainer::QueryContainer(const Nepomuk::Query::Query &query, QObject *parent)
     : Plasma::DataContainer(parent),
       m_query(query),
-      m_queryClient(0)
+      m_queryClient(0),
+      m_resultLimit(RESULT_LIMIT)
 {
     if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
         doQuery();
@@ -76,6 +77,9 @@ void QueryContainer::serviceRegistered(const QString &service)
 
 void QueryContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
 {
+    Q_UNUSED(prop)
+    Q_UNUSED(val)
+
     addResource(res);
 }
 
@@ -88,7 +92,12 @@ void QueryContainer::doQuery()
     connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
             this, SLOT(entriesRemoved(const QList<QUrl> &)));
 
-    m_query.setLimit(RESULT_LIMIT);
+    const int limit = m_query.limit();
+
+    if (limit > RESULT_LIMIT || limit <= 0) {
+        m_query.setLimit(RESULT_LIMIT);
+    }
+
     m_queryClient->query(m_query);
 }
 

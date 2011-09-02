@@ -44,7 +44,7 @@ Item {
 
     MobileComponents.Package {
         id: homeScreenPackage
-        name: "plasma-contour-homescreen"
+        name: "org.kde.active.contour-tablet-homescreen"
     }
 
     property QGraphicsWidget activeContainment

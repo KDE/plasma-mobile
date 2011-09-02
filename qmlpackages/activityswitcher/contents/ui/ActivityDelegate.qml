@@ -20,6 +20,7 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.qtextracomponents 0.1
 
 Item {
     id: delegate
@@ -54,7 +55,7 @@ Item {
         anchors.fill:parent
         anchors.rightMargin: 100
 
-        Image {
+        QImageItem {
             anchors {
                 fill: parent
                 leftMargin: parent.margins.left
@@ -62,8 +63,20 @@ Item {
                 rightMargin: parent.margins.right
                 bottomMargin: parent.margins.bottom
             }
-            property string path: activityThumbnailsSource.data[model.DataEngineSource]?activityThumbnailsSource.data[model.DataEngineSource]["path"]:""
-            source: path?path:switcherPackage.filePath("images", "emptyactivity.png")
+
+            image: activityThumbnailsSource.data[model.DataEngineSource]["image"]
+
+            Image {
+                anchors.fill: parent
+
+                source: switcherPackage.filePath("images", "emptyactivity.png")
+                visible: !activityThumbnailsSource.data[model.DataEngineSource]["path"]
+                onVisibleChanged: {
+                    if (!visible) {
+                        destroy()
+                    }
+                }
+            }
 
             MobileComponents.TextEffects {
                 anchors {
@@ -73,7 +86,7 @@ Item {
                     topMargin: 10
                 }
 
-                text: String(model.Name).length<=18?model.Name:String(model.Name).substr(0,18)+"..."
+                text: (String(model.Name).length <= 18) ? model.Name:String(model.Name).substr(0,18) + "..."
                 color: "white"
                 horizontalOffset: 1
                 verticalOffset: 1

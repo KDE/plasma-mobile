@@ -50,7 +50,8 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
       m_containment(0),
       m_mainWidget(0),
       m_model(0),
-      m_wallpaperIndex(-1)
+      m_wallpaperIndex(-1),
+      m_newContainment(false)
 {
     setQmlPath(KStandardDirs::locate("data", "plasma-device/activityconfiguration/view.qml"));
 #ifndef NO_ACTIVITIES
@@ -80,6 +81,7 @@ void ActivityConfiguration::ensureContainmentExistence()
     if (m_containment) {
         return;
     }
+
 #ifndef NO_ACTIVITIES
     const QString id = m_activityController->addActivity(m_activityName);
     m_activityController->setCurrentActivity(id);
@@ -87,8 +89,10 @@ void ActivityConfiguration::ensureContainmentExistence()
     Plasma::Corona *corona = qobject_cast<Plasma::Corona *>(scene());
     QEventLoop loop;
     //FIXME: find a better way
+    // AJS: a better way would be to connect the new containment signal in Corona
     QTimer::singleShot(100, &loop, SLOT(quit()));
     loop.exec();
+
     if (corona) {
         setContainment(corona->containmentForScreen(0));
     }
@@ -97,16 +101,23 @@ void ActivityConfiguration::ensureContainmentExistence()
 void ActivityConfiguration::setContainment(Plasma::Containment *cont)
 {
     m_containment = cont;
+    delete m_model;
+    m_model = 0;
 
-    Plasma::Wallpaper *wp = 0;
-    if (m_containment && m_containment->wallpaper()) {
-        wp = m_containment->wallpaper();
-    } else {
-        wp = Plasma::Wallpaper::load("image");
-        wp->setParent(this);
+    if (!m_containment) {
+        // we are being setup for containment creation!
+        m_newContainment = true;
+        return;
+    }
 
+    if (m_containment) {
+        m_activityName = m_containment->activity();
+        emit activityNameChanged();
+    }
+
+    if (m_newContainment) {
         //FIXME: this has to be done in C++ until we have QtComponents
-        //doesn't really belong here, this is for the "first run"
+        // we have a new containment, we now assume it is a new activity, call up the keyboard
         QGraphicsWidget *activityNameEdit = m_mainWidget->findChild<QGraphicsWidget*>("activityNameEdit");
         if (activityNameEdit) {
             activityNameEdit->setFocus(Qt::MouseFocusReason);
@@ -119,17 +130,41 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
                 }
             }
         }
+
+        // reset this for the next time this dialog is used
+        m_newContainment = false;
     }
 
-    if (m_containment) {
-        m_activityName = m_containment->activity();
-        emit activityNameChanged();
+    ensureContainmentHasWallpaperPlugin();
+
+    // save the wallpaper config so we can find the proper index later in modelCountChanged
+    Plasma::Wallpaper *wp = m_containment->wallpaper();
+    if (!wp) {
+        // can only happen on a broken system with no wallpapers able to show images
+        return;
+    }
+
+    KConfigGroup wpConfig = wallpaperConfig();
+    if (wpConfig.isValid()) {
+        wp->save(wpConfig);
     }
 
     m_model = new BackgroundListModel(wp, this);
     emit modelChanged();
     connect(m_model, SIGNAL(countChanged()), this, SLOT(modelCountChanged()));
     m_model->reload();
+}
+
+KConfigGroup ActivityConfiguration::wallpaperConfig()
+{
+    if (!m_containment && m_containment->wallpaper()) {
+        return KConfigGroup();
+    }
+
+    KConfigGroup wpConfig = m_containment->config();
+    wpConfig = KConfigGroup(&wpConfig, "Wallpaper");
+    wpConfig = KConfigGroup(&wpConfig, m_containment->wallpaper()->pluginName());
+    return wpConfig;
 }
 
 void ActivityConfiguration::modelCountChanged()
@@ -140,10 +175,7 @@ void ActivityConfiguration::modelCountChanged()
 
     // since we're using the Image plugin, we'll cheat a bit and peek at the configuration
     // to see what wallpaper we're using
-    KConfigGroup wpConfig = m_containment->config();
-    wpConfig = KConfigGroup(&wpConfig, "Wallpaper");
-    wpConfig = KConfigGroup(&wpConfig, "image");
-    QModelIndex index = m_model->indexOf(wpConfig.readEntry("wallpaper", QString()));
+    QModelIndex index = m_model->indexOf(wallpaperConfig().readEntry("wallpaper", QString()));
     if (index.isValid()) {
         m_wallpaperIndex = index.row();
         emit wallpaperIndexChanged();
@@ -209,7 +241,7 @@ int ActivityConfiguration::wallpaperIndex()
 void ActivityConfiguration::setWallpaperIndex(const int index)
 {
     ensureContainmentExistence();
-    if (!m_containment) {
+    if (!m_containment || !m_model) {
         //should never happen
         return;
     }
@@ -233,21 +265,59 @@ void ActivityConfiguration::setWallpaperIndex(const int index)
     }
 
     kDebug()<<"Setting new wallpaper path:"<<wallpaper;
+
+    if (!m_containment->wallpaper()) {
+        const QString mimetype = KMimeType::findByUrl(wallpaper).data()->name();
+        ensureContainmentHasWallpaperPlugin(mimetype);
+    }
+
     if (m_containment->wallpaper()) {
         m_containment->wallpaper()->setUrls(KUrl::List() << wallpaper);
+        KConfigGroup wpConfig = wallpaperConfig();
+        if (wpConfig.isValid()) {
+            m_containment->wallpaper()->save(wpConfig);
+        }
+
+        emit containmentWallpaperChanged(m_containment);
     }
 
     emit wallpaperIndexChanged();
 }
 
+void ActivityConfiguration::ensureContainmentHasWallpaperPlugin(const QString &mimetype)
+{
+    if (!m_containment ||
+        (m_containment->wallpaper() && m_containment->wallpaper()->supportsMimetype(mimetype))) {
+        return;
+    }
+
+    KPluginInfo::List wallpaperList = m_containment->wallpaper()->listWallpaperInfoForMimetype(mimetype);
+    KPluginInfo wallpaper;
+    bool image = false;
+    foreach (wallpaper, wallpaperList) {
+        if (wallpaper.pluginName() == "image") {
+            image = true;
+            break;
+        }
+    }
+
+    if (image) {
+        m_containment->setWallpaper("image");
+    } else {
+        m_containment->setWallpaper(wallpaperList.at(0).name());
+    }
+}
+
 QSize ActivityConfiguration::screenshotSize()
 {
-    return m_model->screenshotSize();
+    return m_model ? m_model->screenshotSize() : QSize(320, 280);
 }
 
 void ActivityConfiguration::setScreenshotSize(const QSize &size)
 {
-    m_model->setScreenshotSize(size);
+    if (m_model) {
+        m_model->setScreenshotSize(size);
+    }
 }
 
 #include "activityconfiguration.moc"

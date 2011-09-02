@@ -155,11 +155,11 @@ Rectangle {
             onWallpaperIndexChanged: {
                 if (configInterface.activityName == "" || configInterface.wallpaperIndex < 0) {
                     var newIndex = Math.random()*wallpapersList.count
-                        wallpapersList.positionViewAtIndex(newIndex)
-                        wallpapersList.currentIndex = newIndex
+                    wallpapersList.positionViewAtIndex(newIndex)
+                    wallpapersList.currentIndex = newIndex
                 } else {
                     wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex)
-                        wallpapersList.currentIndex = configInterface.wallpaperIndex
+                    wallpapersList.currentIndex = configInterface.wallpaperIndex
                 }
             }
 

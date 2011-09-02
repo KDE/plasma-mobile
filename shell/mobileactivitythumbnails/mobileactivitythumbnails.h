@@ -37,19 +37,20 @@ class MobileActivityThumbnails : public Plasma::DataEngine
 
 public:
     MobileActivityThumbnails(QObject *parent, const QVariantList &args);
-    void snapshotContainment(Plasma::Containment *cont);
+    void snapshotContainment(Plasma::Containment *containtment);
 
 protected:
     bool sourceRequestEvent(const QString &source);
-    bool updateSourceEvent(const QString &source);
 
 protected Q_SLOTS:
     void delayedSnapshotContainment();
 
 private:
+    void snapshot(Plasma::Containment *containment);
+
     Activities::Consumer *m_consumer;
     QTimer *m_saveTimer;
-    QWeakPointer<Plasma::Containment>m_containmentToSave;
+    QList<QWeakPointer<Plasma::Containment> > m_containmentsToSave;
 };
 
 #endif

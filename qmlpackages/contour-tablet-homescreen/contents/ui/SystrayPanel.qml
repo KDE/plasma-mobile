@@ -165,19 +165,23 @@ Item {
             PropertyChanges {
                 target: slidingPanel
                 y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom
-            }
-            PropertyChanges {
-                target: slidingPanel
+
                 acceptsFocus: true
             }
         }
     ]
     transitions: [
         Transition {
-            PropertyAnimation {
-                properties: "y"
-                duration: 250
-                easing.type: Easing.OutQuad
+            SequentialAnimation {
+                PropertyAction { 
+                    target: slidingPanel
+                    property: "acceptsFocus"
+                }
+                PropertyAnimation {
+                    properties: "y"
+                    duration: 250
+                    easing.type: Easing.OutQuad
+                }
             }
         }
     ]

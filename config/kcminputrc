@@ -5,4 +5,4 @@ update_info=mouse_cursor_theme.upd:kde3.4.99
 cursorTheme=plasmamobilemouse
 
 [KDE]
-StartDragDist=15
+StartDragDist=16

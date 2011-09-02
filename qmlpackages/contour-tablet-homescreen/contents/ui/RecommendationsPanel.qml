@@ -28,7 +28,7 @@ Item {
     id: recommendationsPanel
     height: parent.height/1.2
     width: parent.width/1.8
-    state: "show"
+    state: "hidden"
     property Item recommendations
     enabled: recommendations.state == "Passive"?false:true
     onEnabledChanged: {
