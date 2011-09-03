@@ -23,6 +23,7 @@
 
 #include <QtDeclarative/qdeclarative.h>
 
+#include "appletcontainer.h"
 #include "appletstatuswatcher.h"
 #include "categorizedproxymodel.h"
 #include "pagedproxymodel.h"
@@ -44,6 +45,7 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<ResourceInstance>(uri, 0, 1, "ResourceInstance");
     qmlRegisterType<Package>(uri, 0, 1, "Package");
     qmlRegisterType<TextEffects>(uri, 0, 1, "TextEffects");
+    qmlRegisterType<AppletContainer>(uri, 0, 1, "AppletContainer");
 }
 
 

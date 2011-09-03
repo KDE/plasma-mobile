@@ -20,12 +20,12 @@
 import QtQuick 1.0
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-Item {
+MobileComponents.AppletContainer {
     id: plasmoidContainer
     width: 24
     anchors.top: tasksRow.top
     anchors.bottom: tasksRow.bottom
-    opacity: watcher.status != MobileComponents.AppletStatusWatcher.PassiveStatus?1:0
+    opacity: status != MobileComponents.AppletContainer.PassiveStatus?1:0
 
     Behavior on opacity {
         NumberAnimation {
@@ -34,25 +34,7 @@ Item {
         }
     }
 
-    property QGraphicsWidget applet
-    onAppletChanged: {
-        print(plasmoidContainer.applet)
-        plasmoidContainer.applet.parent = plasmoidContainer
-        plasmoidContainer.applet.height = plasmoidContainer.height
-        plasmoidContainer.applet.x=0
-        plasmoidContainer.applet.y=0
-        watcher.plasmoid = plasmoidContainer.applet
-    }
-
-    MobileComponents.AppletStatusWatcher {
-        id: watcher
-    }
-
-    onHeightChanged: {
-        plasmoidContainer.applet.height = height
-        if (plasmoidContainer.applet.minimumSize.width>0) {
-            plasmoidContainer.applet.width = plasmoidContainer.applet.preferredSize.width
-        }
-        plasmoidContainer.width = plasmoidContainer.applet.width
+    onMinimumWidthChanged: {
+        plasmoidContainer.width = Math.max(height, plasmoidContainer.minimumWidth)
     }
 }
