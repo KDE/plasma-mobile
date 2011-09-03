@@ -188,7 +188,12 @@ void PreviewEngine::previewResult(KJob* job)
 
 void PreviewEngine::previewUpdated(const KFileItem &item, const QPixmap &preview)
 {
-    setPreview(item.url().url(), preview.toImage());
+    //check whether we used % encoding for spaces and such when we asked the source
+    if (containerForSource(item.url().prettyUrl())) {
+        setPreview(item.url().prettyUrl(), preview.toImage());
+    } else {
+        setPreview(item.url().url(), preview.toImage());
+    }
 }
 
 
