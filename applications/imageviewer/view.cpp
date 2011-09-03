@@ -33,7 +33,6 @@
 
 #include  <kdeclarative.h>
 
-#include <Plasma/Corona>
 #include <Plasma/Package>
 
 AppView::AppView(const QString &url, QWidget *parent)
@@ -41,8 +40,6 @@ AppView::AppView(const QString &url, QWidget *parent)
       m_imageViewer(0),
       m_useGL(false)
 {
-    delete scene();
-    setScene(new Plasma::Corona(this));
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
     // Tell the script engine where to find the Plasma Quick components
     QStringList importPaths = KGlobal::dirs()->findDirs("lib", "kde4/imports");
