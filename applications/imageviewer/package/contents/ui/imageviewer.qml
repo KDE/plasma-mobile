@@ -240,7 +240,7 @@ Image {
         height: 65
         PlasmaCore.DataSource {
             id: previewSource
-            engine: "preview"
+            engine: "org.kde.preview"
         }
         ListView {
             id: bottomThumbnails

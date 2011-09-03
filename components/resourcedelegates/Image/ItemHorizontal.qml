@@ -30,7 +30,7 @@ Item {
 
     PlasmaCore.DataSource {
         id: pmSource
-        engine: "preview"
+        engine: "org.kde.preview"
 
         interval: 0
         Component.onCompleted: {

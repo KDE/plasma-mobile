@@ -29,7 +29,7 @@ Item {
 
     PlasmaCore.DataSource {
         id: pmSource
-        engine: "preview"
+        engine: "org.kde.preview"
         connectedSources: [ description ]
         interval: 0
     }
