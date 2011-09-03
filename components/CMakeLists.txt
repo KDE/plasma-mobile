@@ -6,7 +6,6 @@ set(mobilecomponents_SRCS
     appletcontainer.cpp
     mobilecomponentsplugin.cpp
     pagedproxymodel.cpp
-    appletstatuswatcher.cpp
     fallbackcomponent.cpp
     categorizedproxymodel.cpp
     mouseeventlistener.cpp
