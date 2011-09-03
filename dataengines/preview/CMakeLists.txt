@@ -7,6 +7,7 @@ include_directories(
 set(previewengine_srcs
     kwebthumbnailer.cpp
     previewengine.cpp
+    previewcontainer.cpp
 )
 
 kde4_add_plugin(plasma_engine_preview ${previewengine_srcs})

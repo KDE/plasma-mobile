@@ -1,5 +1,6 @@
 /*
     Copyright 2011 Sebastian Kügler <sebas@kde.org>
+    Copyright 2011 Marco Martin <mart@kde.org>
 
     This library is free software; you can redistribute it and/or modify it
     under the terms of the GNU Library General Public License as published by
@@ -32,177 +33,63 @@
 
 #include "previewengine.h"
 #include "kwebthumbnailer.h"
+#include "previewcontainer.h"
 
 using namespace KIO;
 
-class PreviewEnginePrivate
-{
-public:
-    int i;
-    QSize previewSize;
-    QHash<QString, KWebThumbnailer*> webworkers;
-    QHash<QString, KIO::PreviewJob*> workers;
-    QHash<KIO::Job*, QString> sources;
-    KImageCache* cache;
-};
+
+K_EXPORT_PLASMA_DATAENGINE(previewengine, PreviewEngine)
 
 
 PreviewEngine::PreviewEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent)
 {
     Q_UNUSED(args);
-    d = new PreviewEnginePrivate;
-    d->previewSize = QSize(180, 120);
-    d->i = 0;
     setMaxSourceCount(64); // Guard against loading too many connections
     init();
 }
 
 void PreviewEngine::init()
 {
-    d->cache = new KImageCache("plasma_engine_preview", 1048576); // 10 MByte
-    //setData("fallback", "fallbackImage", QImage("file://home/sebas/Documents/wallpaper.png"));
+    m_imageCache = new KImageCache("plasma_engine_preview", 1048576); // 10 MByte
+
     setData("fallback", "fallbackImage", KIcon("image-loading").pixmap(QSize(180, 120)).toImage());
 }
 
 PreviewEngine::~PreviewEngine()
 {
-    delete d;
 }
 
-QStringList PreviewEngine::sources() const
+KImageCache* PreviewEngine::imageCache() const
 {
-    return QStringList();
+    return m_imageCache;
 }
 
 bool PreviewEngine::sourceRequestEvent(const QString &name)
 {
-    // Check if the url is valid, and start a MimetypeJob
-    // to find out what kind of preview we need
+    // Check if the url is valid
     QUrl url = QUrl(name);
     if (!url.isValid()) {
         kWarning() << "Not a URL:" << name;
         return false;
     }
 
-    if (d->webworkers.keys().contains(name) || d->workers.keys().contains(name)) {
-        return true; // already got preview or at least tried to get it
-    }
-
-    QImage preview = QImage(d->previewSize, QImage::Format_ARGB32_Premultiplied);
+    /*QImage preview = QImage(d->previewSize, QImage::Format_ARGB32_Premultiplied);
     if (d->cache->findImage(name, &preview)) {
         // cache hit
         setPreview(name, preview);
         return true;
+    }*/
+
+    PreviewContainer *container = qobject_cast<PreviewContainer *>(containerForSource(name));
+
+    if (!container) {
+        //the name and the url are separate because is not possible to know the original string encoding given a QUrl
+        container = new PreviewContainer(name, url, this);
+        addSource(container);
     }
 
-    setData(name, Plasma::DataEngine::Data());
-    // It may be a directory or a file, let's stat
-    KIO::JobFlags flags = KIO::HideProgressInfo;
-    KIO::MimetypeJob *job = KIO::mimetype(url, flags);
-    d->sources[job] = name;
-    QObject::connect(job, SIGNAL(mimetype(KIO::Job *, const QString&)),
-                          SLOT(mimetypeRetrieved(KIO::Job *, const QString&)));
     return true;
-}
-
-void PreviewEngine::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
-{
-    KIO::TransferJob* mimejob = dynamic_cast<KIO::TransferJob*>(job);
-    if (!mimejob) {
-        return;
-    }
-
-    if (!mimetype.isEmpty() && !mimejob->error()) {
-        // Make job reusable by keeping the connection open:
-        // We want to retrieve the target next to create a preview
-        mimejob->putOnHold();
-        KIO::Scheduler::publishSlaveOnHold();
-    }
-
-    const QString source = d->sources[job];
-
-    if (mimetype == "text/html") {
-        if (!(d->webworkers.keys().contains(source))) {
-            KWebThumbnailer* wtn = new KWebThumbnailer(QUrl(source), d->previewSize, source, this);
-
-            connect(wtn, SIGNAL(done(bool)), SLOT(thumbnailerDone(bool)));
-
-            d->webworkers[source] = wtn;
-            wtn->start();
-        }
-    } else if (!d->workers.keys().contains(source)) {
-        // KIO::PreviewJob: http://api.kde.org/4.x-api/kdelibs-apidocs/kio/html/classKIO_1_1PreviewJob.html
-        KFileItem kfile = KFileItem(mimejob->url(), mimetype, KFileItem::Unknown);
-        KFileItemList list;
-        list << kfile;
-        KIO::PreviewJob *job = new KIO::PreviewJob(list, d->previewSize, 0);
-
-        connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-                SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
-        connect(job, SIGNAL(failed(const KFileItem&)),
-                SLOT(previewJobFailed(const KFileItem&)));
-        connect(job, SIGNAL(result(KJob*)), SLOT(previewResult(KJob*)));
-
-        d->workers[source] = job;
-        job->start();
-    }
-}
-
-void PreviewEngine::thumbnailerDone(bool success)
-{
-    KWebThumbnailer* wtn = static_cast<KWebThumbnailer*>(sender());
-    if (!wtn) {
-        kWarning() << "wrong sender";
-        return;
-    }
-
-    if (!success) {
-        setData(wtn->source(), "status", "failed");
-        return;
-    }
-
-    updateData(wtn);
-}
-
-void PreviewEngine::updateData(KWebThumbnailer* wtn)
-{
-    const QString source = wtn->source();
-    setData(source, "status", wtn->status());
-    setData(source, "url", wtn->url().toString());
-    setData(source, "thumbnail", wtn->thumbnail());
-    scheduleSourcesUpdated();
-}
-
-void PreviewEngine::previewJobFailed(const KFileItem &item)
-{
-    setData(item.url().url(), "status", "failed");
-    kWarning() << "preview failed for" << item.url().url();
-}
-
-void PreviewEngine::previewResult(KJob* job)
-{
-    Q_UNUSED( job );
-    //kDebug() << "job result:" << job->errorText() << "success?" << (job->error() == 0);
-}
-
-void PreviewEngine::previewUpdated(const KFileItem &item, const QPixmap &preview)
-{
-    //check whether we used % encoding for spaces and such when we asked the source
-    if (containerForSource(item.url().prettyUrl())) {
-        setPreview(item.url().prettyUrl(), preview.toImage());
-    } else {
-        setPreview(item.url().url(), preview.toImage());
-    }
-}
-
-
-void PreviewEngine::setPreview(const QString &source, QImage preview)
-{
-    setData(source, "status", "done");
-    setData(source, "url", source);
-    setData(source, "thumbnail", preview);
-    //forceImmediateUpdateOfAllVisualizations();
 }
 
 #include "previewengine.moc"
