@@ -44,12 +44,9 @@ Item {
             previewImage.image = data[url]["thumbnail"]
         }
         onDataChanged: {
-            previewFrame.visible = data[url]["status"] == "done"
+            previewFrame.visible = (data[url]["status"] == "done")
             iconItem.visible = !previewFrame.visible
-            //avoid output warnings
-            if (previewFrame.visible) {
-                previewImage.image = data[url]["thumbnail"]
-            }
+            previewImage.image = data[url]["thumbnail"]
         }
     }
 
@@ -58,22 +55,22 @@ Item {
 
         Item {
             id: iconContainer
-            height: 64
+            height: resourceItem.height - previewLabel.height - infoLabel.height
             width: resourceItem.width
 
             QIconItem {
                 id: iconItem
                 width: 64
                 height: 64
-                anchors.margins: 0
-                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.centerIn: parent
                 icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
             }
 
             PlasmaCore.FrameSvgItem {
+                id: previewFrame
                 imagePath: "widgets/media-delegate"
                 prefix: "picture"
-                id: previewFrame
+
                 height: previewImage.height+margins.top+margins.bottom
                 width: previewImage.width+margins.left+margins.right
                 visible: false
@@ -83,10 +80,7 @@ Item {
             Item {
                 id: previewArea
                 anchors {
-                    left: parent.left
-                    right: parent.right
-                    top: parent.top
-                    bottom: iconItem.bottom
+                    fill: parent
 
                     leftMargin: previewFrame.margins.left
                     topMargin: previewFrame.margins.top
