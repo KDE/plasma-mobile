@@ -152,6 +152,7 @@ Item {
 
             Row {
                 id: tasksRow
+                spacing: 8
 
                 height: tasksFlickable.height
 
@@ -195,6 +196,7 @@ Item {
                 top: parent.top
                 bottom: parent.bottom
                 right: parent.right
+                rightMargin: 8
             }
         }
     }
