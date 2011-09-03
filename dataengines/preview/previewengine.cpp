@@ -125,7 +125,9 @@ void PreviewEngine::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
     if (mimetype == "text/html") {
         if (!(d->webworkers.keys().contains(source))) {
             KWebThumbnailer* wtn = new KWebThumbnailer(QUrl(source), d->previewSize, source, this);
+
             connect(wtn, SIGNAL(done(bool)), SLOT(thumbnailerDone(bool)));
+
             d->webworkers[source] = wtn;
             wtn->start();
         }
@@ -135,9 +137,13 @@ void PreviewEngine::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
         KFileItemList list;
         list << kfile;
         KIO::PreviewJob *job = new KIO::PreviewJob(list, d->previewSize, 0);
-        connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)), SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
-        connect(job, SIGNAL(failed(const KFileItem&)), SLOT(previewJobFailed(const KFileItem&)));
+
+        connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
+                SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
+        connect(job, SIGNAL(failed(const KFileItem&)),
+                SLOT(previewJobFailed(const KFileItem&)));
         connect(job, SIGNAL(result(KJob*)), SLOT(previewResult(KJob*)));
+
         d->workers[source] = job;
         job->start();
     }
