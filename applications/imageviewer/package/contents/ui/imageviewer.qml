@@ -29,6 +29,7 @@ Image {
     objectName: "imageViewer"
     source: viewerPackage.filePath("images", "fabrictexture.png")
     fillMode: Image.Tile
+    state: "browsing"
 
     width: 360
     height: 360
@@ -65,7 +66,7 @@ Image {
                 fullList.currentIndex = i
                 spareDelegate.visible = false
                 fullList.visible = true
-                viewer.scale = 1
+                imageViewer.state = "image"
                 return
             }
             ++i
@@ -75,7 +76,7 @@ Image {
         resourceInstance.uri = path
         spareDelegate.visible = true
         fullList.visible = false
-        viewer.scale = 1
+        imageViewer.state = "image"
     }
 
     Timer {
@@ -107,177 +108,13 @@ Image {
         filterRole: "label"
     }
 
-    Timer {
-       id: queryTimer
-       running: true
-       repeat: false
-       interval: 1000
-       onTriggered: {
-            filterModel.filterRegExp = ".*"+searchBox.searchQuery+".*"
-       }
-    }
 
-
-    PlasmaCore.FrameSvgItem {
+    Toolbar {
         id: toolbar
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-        signal zoomIn()
-        signal zoomOut()
-
-        height: childrenRect.height + margins.bottom
-        imagePath: "widgets/frame"
-        prefix: "raised"
-        enabledBorders: "BottomBorder"
-        z: 9000
-        Behavior on y {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
-
-        QIconItem {
-            icon: QIcon("go-previous")
-            width: 48
-            height: 48
-            opacity: viewer.scale==1?1:0
-            anchors.verticalCenter: parent.verticalCenter
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: viewer.scale = 0
-            }
-        }
-        Text {
-            text: i18n("%1 of %2", fullList.currentIndex+1, fullList.count)
-            anchors.centerIn: parent
-            font.pointSize: 14
-            font.bold: true
-            color: theme.textColor
-            visible: viewer.scale==1
-            style: Text.Raised
-            styleColor: theme.backgroundColor
-        }
-        MobileComponents.ViewSearch {
-            id: searchBox
-            anchors {
-                left: parent.left
-                right:parent.right
-                top:parent.top
-            }
-            onSearchQueryChanged: {
-                queryTimer.running = true
-            }
-            opacity: viewer.scale==1?0:1
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        }
-
-        PlasmaCore.Svg {
-            id: iconsSvg
-            imagePath: "widgets/configuration-icons"
-        }
-        Row {
-            opacity: viewer.scale==1?1:0
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            anchors {
-                verticalCenter: parent.verticalCenter
-                right: parent.right
-            }
-            //TODO: ad hoc icons
-            MobileComponents.ActionButton {
-                svg: iconsSvg
-                elementId: "add"
-                onClicked: {
-                    toolbar.zoomIn()
-                }
-            }
-            MobileComponents.ActionButton {
-                svg: iconsSvg
-                elementId: "remove"
-                onClicked: {
-                    toolbar.zoomOut()
-                }
-            }
-        }
     }
 
-    Rectangle {
-        id: bottomNavigation
-        //FIXME: use the state machine
-        y: toolbar.y==0&&viewer.scale==1?imageViewer.height-bottomNavigation.height:imageViewer.height+20
-        Behavior on y {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
-        z: 9999
-        color: Qt.rgba(1, 1, 1, 0.7)
-
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-
-        height: 65
-        PlasmaCore.DataSource {
-            id: previewSource
-            engine: "org.kde.preview"
-        }
-        ListView {
-            id: bottomThumbnails
-            spacing: 1
-            anchors {
-                fill: parent
-                topMargin: 1
-            }
-            orientation: ListView.Horizontal
-            model: filterModel
-
-            delegate: QImageItem {
-                id: delegate
-                z: index==bottomThumbnails.currentIndex?200:0
-                scale: index==bottomThumbnails.currentIndex?1.4:1
-                Behavior on scale {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-                width: height*1.6
-                height: bottomThumbnails.height
-                image: previewSource.data[url]["thumbnail"]
-                Component.onCompleted: {
-                    previewSource.connectSource(url)
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        bottomThumbnails.currentIndex = index
-                        fullList.positionViewAtIndex(index, ListView.Center)
-                        fullList.currentIndex = index
-                    }
-                }
-            }
-        }
+    QuickBrowserBar {
+        id: quickBrowserBar
     }
 
     MobileComponents.IconGrid {
@@ -312,13 +149,14 @@ Image {
     Rectangle {
         id: viewer
         scale: startupArguments[0].length > 0?1:0
-        //FIXME: use states
-        onScaleChanged: {
-            if (scale == 1) {
-                toolbar.y = -toolbar.height
-            }
+
+        function setCurrentIndex(index)
+        {
+            fullList.positionViewAtIndex(index, ListView.Center)
+            fullList.currentIndex = index
         }
-        color: "#ddd"
+
+        color: "black"
         anchors {
             fill:  parent
         }
@@ -350,11 +188,58 @@ Image {
             onCurrentIndexChanged: {
                 resourceInstance.uri = currentItem.source
                 resourceInstance.title = currentItem.label
-                bottomThumbnails.positionViewAtIndex(currentIndex, ListView.Center)
-                bottomThumbnails.currentIndex = currentIndex
+                quickBrowserBar.setCurrentIndex(currentIndex)
             }
             visible: false
         }
 
     }
+
+    states: [
+        State {
+            name: "browsing"
+            PropertyChanges {
+                target: toolbar
+                y: 0
+            }
+            PropertyChanges {
+                target: quickBrowserBar
+                y: imageViewer.height+20
+            }
+            PropertyChanges {
+                target: viewer
+                scale: 0
+            }
+        },
+        State {
+            name: "image"
+            PropertyChanges {
+                target: toolbar
+                y: -toolbar.height
+            }
+            PropertyChanges {
+                target: quickBrowserBar
+                y: imageViewer.height+20
+            }
+            PropertyChanges {
+                target: viewer
+                scale: 1
+            }
+        },
+        State {
+            name: "image+toolbar"
+            PropertyChanges {
+                target: toolbar
+                y: 0
+            }
+            PropertyChanges {
+                target: quickBrowserBar
+                y: imageViewer.height-quickBrowserBar.height
+            }
+            PropertyChanges {
+                target: viewer
+                scale: 1
+            }
+        }
+    ]
 }

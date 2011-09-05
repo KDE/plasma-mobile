@@ -53,7 +53,7 @@ Flickable {
         }
     }
 
-    Rectangle {
+    Item {
         id: imageMargin
         width: Math.max(mainFlickable.width, mainImage.width*mainImage.scale)
         height: Math.max(mainFlickable.height, mainImage.height*mainImage.scale)
@@ -78,10 +78,10 @@ Flickable {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    if (toolbar.y == 0) {
-                        toolbar.y = -toolbar.height
+                    if (imageViewer.state == "image") {
+                        imageViewer.state = "image+toolbar"
                     } else {
-                        toolbar.y = 0
+                        imageViewer.state = "image"
                     }
                 }
             }
