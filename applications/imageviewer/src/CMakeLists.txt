@@ -22,8 +22,3 @@ target_link_libraries(active-imageviewer
 
 install(TARGETS active-imageviewer ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-# QML-only thing
-install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.imageviewer PATTERN .svn EXCLUDE)
-install(FILES active-image-viewer.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-
-add_subdirectory(icons)

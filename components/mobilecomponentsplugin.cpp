@@ -23,7 +23,7 @@
 
 #include <QtDeclarative/qdeclarative.h>
 
-#include "appletstatuswatcher.h"
+#include "appletcontainer.h"
 #include "categorizedproxymodel.h"
 #include "pagedproxymodel.h"
 #include "fallbackcomponent.h"
@@ -37,13 +37,13 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.mobilecomponents"));
 
     qmlRegisterType<PagedProxyModel>(uri, 0, 1, "PagedProxyModel");
-    qmlRegisterType<AppletStatusWatcher>(uri, 0, 1, "AppletStatusWatcher");
     qmlRegisterType<FallbackComponent>(uri, 0, 1, "FallbackComponent");
     qmlRegisterType<CategorizedProxyModel>(uri, 0, 1, "CategorizedProxyModel");
     qmlRegisterType<MouseEventListener>(uri, 0, 1, "MouseEventListener");
     qmlRegisterType<ResourceInstance>(uri, 0, 1, "ResourceInstance");
     qmlRegisterType<Package>(uri, 0, 1, "Package");
     qmlRegisterType<TextEffects>(uri, 0, 1, "TextEffects");
+    qmlRegisterType<AppletContainer>(uri, 0, 1, "AppletContainer");
 }
 
 

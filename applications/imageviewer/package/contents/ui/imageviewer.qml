@@ -44,6 +44,10 @@ Image {
         id: resourceInstance
     }
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     function loadImage(path)
     {
         if (path.length == 0) {
@@ -152,6 +156,16 @@ Image {
                 onClicked: viewer.scale = 0
             }
         }
+        Text {
+            text: i18n("%1 of %2", fullList.currentIndex+1, fullList.count)
+            anchors.centerIn: parent
+            font.pointSize: 14
+            font.bold: true
+            color: theme.textColor
+            visible: viewer.scale==1
+            style: Text.Raised
+            styleColor: theme.backgroundColor
+        }
         MobileComponents.ViewSearch {
             id: searchBox
             anchors {
@@ -200,6 +214,67 @@ Image {
                 elementId: "remove"
                 onClicked: {
                     toolbar.zoomOut()
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        id: bottomNavigation
+        //FIXME: use the state machine
+        y: toolbar.y==0&&viewer.scale==1?imageViewer.height-bottomNavigation.height:imageViewer.height+20
+        Behavior on y {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+        z: 9999
+        color: Qt.rgba(1, 1, 1, 0.7)
+
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+
+        height: 65
+        PlasmaCore.DataSource {
+            id: previewSource
+            engine: "org.kde.preview"
+        }
+        ListView {
+            id: bottomThumbnails
+            spacing: 1
+            anchors {
+                fill: parent
+                topMargin: 1
+            }
+            orientation: ListView.Horizontal
+            model: filterModel
+
+            delegate: QImageItem {
+                id: delegate
+                z: index==bottomThumbnails.currentIndex?200:0
+                scale: index==bottomThumbnails.currentIndex?1.4:1
+                Behavior on scale {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+                width: height*1.6
+                height: bottomThumbnails.height
+                image: previewSource.data[url]["thumbnail"]
+                Component.onCompleted: {
+                    previewSource.connectSource(url)
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        bottomThumbnails.currentIndex = index
+                        fullList.positionViewAtIndex(index, ListView.Center)
+                        fullList.currentIndex = index
+                    }
                 }
             }
         }
@@ -263,7 +338,7 @@ Image {
         ListView {
             id: fullList
             anchors.fill: parent
-            model: metadataModel
+            model: filterModel
             highlightRangeMode: ListView.StrictlyEnforceRange
             orientation: ListView.Horizontal
             snapMode: ListView.SnapOneItem
@@ -275,13 +350,11 @@ Image {
             onCurrentIndexChanged: {
                 resourceInstance.uri = currentItem.source
                 resourceInstance.title = currentItem.label
+                bottomThumbnails.positionViewAtIndex(currentIndex, ListView.Center)
+                bottomThumbnails.currentIndex = currentIndex
             }
             visible: false
         }
 
-    }
-
-    SlcComponents.SlcMenu {
-        id: contextMenu
     }
 }

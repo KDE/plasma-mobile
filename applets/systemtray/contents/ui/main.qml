@@ -80,19 +80,14 @@ Item {
         var component = Qt.createComponent("PlasmoidContainer.qml")
 
         if (applet.pluginName == "org.kde.sharelikeconnect") {
-            applet.height = tasksRow.height
-            applet.width = 120
-
             var plasmoidContainer = component.createObject(rightPanel);
             plasmoidContainer.parent = rightPanel
             plasmoidContainer.anchors.top = rightPanel.top
             plasmoidContainer.anchors.bottom = rightPanel.bottom
             plasmoidContainer.applet = applet
             return
-        } else if (applet.pluginName == "digital-clock") {
-            applet.height = tasksRow.height
-            applet.width = 120
 
+        } else if (applet.pluginName == "digital-clock") {
             var plasmoidContainer = component.createObject(rightPanel);
             plasmoidContainer.parent = centerPanel
             plasmoidContainer.anchors.top = centerPanel.top
@@ -108,10 +103,10 @@ Item {
             //FIXME: this assumes items are square
             index = pos.x/main.height
         }
-        plasmoidContainer.applet = applet
         tasksRow.insertAt(plasmoidContainer, index)
         plasmoidContainer.anchors.top = tasksRow.top
         plasmoidContainer.anchors.bottom = tasksRow.bottom
+        plasmoidContainer.applet = applet
 
     }
 
@@ -157,6 +152,7 @@ Item {
 
             Row {
                 id: tasksRow
+                spacing: 8
 
                 height: tasksFlickable.height
 
@@ -200,6 +196,7 @@ Item {
                 top: parent.top
                 bottom: parent.bottom
                 right: parent.right
+                rightMargin: 8
             }
         }
     }

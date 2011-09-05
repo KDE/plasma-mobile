@@ -19,49 +19,49 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
 ItemGroup {
-    id: plasmoidContainer
+    id: plasmoidGroup
     scale: plasmoid.scale
     canResizeHeight: true
+    title: applet.name
+    minimumWidth: Math.max(LayoutManager.cellSize.width,
+                           appletContainer.minimumWidth +
+                           plasmoidGroup.contents.anchors.leftMargin +
+                           plasmoidGroup.contents.anchors.rightMargin)
 
-    onHeightChanged: {
-        if (applet) {
-            applet.height = plasmoidContainer.contents.height
+    minimumHeight: Math.max(LayoutManager.cellSize.height,
+                            appletContainer.minimumHeight +
+                            plasmoidGroup.contents.anchors.topMargin +
+                            plasmoidGroup.contents.anchors.bottomMargin)
+
+    property alias applet: appletContainer.applet
+
+
+    MobileComponents.AppletContainer {
+        id: appletContainer
+        anchors.fill: plasmoidGroup.contents
+        onAppletChanged: {
+            applet.appletDestroyed.connect(appletDestroyed)
+            appletTimer.running = true
         }
-    }
-    onWidthChanged: {
-        if (applet) {
-            applet.width = plasmoidContainer.contents.width
+        function appletDestroyed()
+        {
+            LayoutManager.setSpaceAvailable(plasmoidGroup.x, plasmoidGroup.y, plasmoidGroup.width, plasmoidGroup.height, true)
+            plasmoidGroup.destroy()
         }
-    }
-
-    function appletDestroyed()
-    {
-        LayoutManager.setSpaceAvailable(plasmoidContainer.x, plasmoidContainer.y, plasmoidContainer.width, plasmoidContainer.height, true)
-        plasmoidContainer.destroy()
-    }
-
-    property QGraphicsWidget applet
-    onAppletChanged: {
-        applet.appletDestroyed.connect(appletDestroyed)
-        applet.parent = plasmoidContainer
-        plasmoidContainer.title = applet.name
-
-        appletTimer.running = true
-        plasmoidContainer.minimumWidth = Math.max(LayoutManager.cellSize.width, applet.minimumSize.width)
-        plasmoidContainer.minimumHeight = Math.max(LayoutManager.cellSize.height, applet.minimumSize.height)
     }
 
     PlasmaCore.SvgItem {
         svg: configIconsSvg
         elementId: "close"
-        width: Math.max(16, plasmoidContainer.titleHeight - 2)
+        width: Math.max(16, plasmoidGroup.titleHeight - 2)
         height: width
         anchors {
-            right: plasmoidContainer.contents.right
-            bottom: plasmoidContainer.contents.top
+            right: plasmoidGroup.contents.right
+            bottom: plasmoidGroup.contents.top
             bottomMargin: 4
         }
         MouseArea {
@@ -76,11 +76,11 @@ ItemGroup {
     PlasmaCore.SvgItem {
         svg: configIconsSvg
         elementId: "configure"
-        width: Math.max(16, plasmoidContainer.titleHeight - 2)
+        width: Math.max(16, plasmoidGroup.titleHeight - 2)
         height: width
         anchors {
-            left: plasmoidContainer.contents.left
-            bottom: plasmoidContainer.contents.top
+            left: plasmoidGroup.contents.left
+            bottom: plasmoidGroup.contents.top
             bottomMargin: 4
         }
         MouseArea {
@@ -100,16 +100,11 @@ ItemGroup {
         running: false
         onTriggered: {
             if (applet.backgroundHints != 0) {
-                plasmoidContainer.imagePath = "widgets/background"
+                plasmoidGroup.imagePath = "widgets/background"
             } else {
-                plasmoidContainer.imagePath = "widgets/translucentbackground"
+                plasmoidGroup.imagePath = "widgets/translucentbackground"
             }
             applet.backgroundHints = "NoBackground"
-
-            applet.x = plasmoidContainer.contents.x
-            applet.y = plasmoidContainer.contents.y
-            applet.width = plasmoidContainer.contents.width
-            applet.height = plasmoidContainer.contents.height
         }
     }
 }

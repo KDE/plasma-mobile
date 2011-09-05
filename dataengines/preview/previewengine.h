@@ -1,5 +1,6 @@
 /*
     Copyright 2011 Sebastian Kügler <sebas@kde.org>
+    Copyright 2011 Marco Martin <mart@kde.org>
 
     This library is free software; you can redistribute it and/or modify it
     under the terms of the GNU Library General Public License as published by
@@ -31,33 +32,24 @@ using namespace KIO;
 
 class KWebThumbnailer;
 
-class PreviewEnginePrivate;
+class KImageCache;
 
 class PreviewEngine : public Plasma::DataEngine
 {
     Q_OBJECT
 
-    public:
-        PreviewEngine(QObject* parent, const QVariantList& args);
-        ~PreviewEngine();
-        QStringList sources() const;
-        virtual void init();
+public:
+    PreviewEngine(QObject* parent, const QVariantList& args);
+    ~PreviewEngine();
+    virtual void init();
 
-    private Q_SLOTS:
-        void mimetypeRetrieved(KIO::Job* job, const QString &mimetype);
-        void thumbnailerDone(bool success);
-        void previewUpdated(const KFileItem &item, const QPixmap &preview);
-        void previewJobFailed(const KFileItem &item);
-        void previewResult(KJob* job);
+    KImageCache* imageCache() const;
 
-    protected:
-        void setPreview(const QString &source, QImage preview);
-        bool sourceRequestEvent(const QString &name);
-        void updateData(KWebThumbnailer* nailer);
+protected:
+    bool sourceRequestEvent(const QString &name);
 
-        PreviewEnginePrivate* d;
+private:
+    KImageCache* m_imageCache;
 };
-
-K_EXPORT_PLASMA_DATAENGINE(previewengine, PreviewEngine)
 
 #endif

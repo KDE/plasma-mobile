@@ -30,12 +30,12 @@ Item {
 
     PlasmaCore.DataSource {
         id: pmSource
-        engine: "preview"
-       // connectedSources: [ url ]
+        engine: "org.kde.preview"
+
         interval: 0
         Component.onCompleted: {
             pmSource.connectedSources = [url]
-            if (previewFrame.visible = data[url] == undefined) {
+            if (data[url] == undefined) {
                 previewFrame.visible = false
                 return
             }
@@ -44,7 +44,7 @@ Item {
             previewImage.image = data[url]["thumbnail"]
         }
         onDataChanged: {
-            previewFrame.visible = data[url]["status"] == "done"
+            previewFrame.visible = (data[url]["status"] == "done")
             iconItem.visible = !previewFrame.visible
             previewImage.image = data[url]["thumbnail"]
         }
@@ -53,88 +53,58 @@ Item {
     Column {
         anchors.centerIn: parent
 
-        QIconItem {
-            id: iconItem
-            height: 64
-            width: 64
-            anchors.margins: 0
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            function resourceIcon(resourceTypes) {
-                if (mimeType) {
-                    return mimeType.replace("/", "-")
-                }
-                return "nepomuk"
-            }
-
-            Component.onCompleted: {
-                // FIXME: remove this crap, fix icon in metadata data set
-                try {
-                    if (!model["hasSymbol"]) {
-                        icon = decoration
-                        return
-                    }
-                    var _l = hasSymbol.toString().split(",");
-                    if (_l.length == 1) {
-                        icon = QIcon(hasSymbol);
-                    } else if (_l.length > 1) {
-                        // pick the last one
-                        var _i = _l[_l.length-1];
-                        icon = QIcon(_i);
-                    } else {
-                        //print("HHH types" + types.toString());
-                        resourceIcon(types.toString())
-                    }
-                    //print("icon:" + hasSymbol);
-                } catch(e) {
-                    var _i = resourceIcon(className);
-                    print("fallback icon: " + _i + e);
-                    icon = QIcon(_i);
-                    print("icon2:" + _i);
-                }
-            }
-        }
-
-        PlasmaCore.FrameSvgItem {
-            imagePath: "widgets/media-delegate"
-            prefix: "picture"
-            id: previewFrame
-            height: previewImage.height+margins.top+margins.bottom
-            width: previewImage.width+margins.left+margins.right
-            visible: false
-            anchors.centerIn: previewArea
-        }
-
         Item {
-            id: previewArea
-            anchors {
-                left: parent.left
-                right: parent.right
-                top: parent.top
-                bottom: iconItem.bottom
+            id: iconContainer
+            height: resourceItem.height - previewLabel.height - infoLabel.height
+            width: resourceItem.width
 
-                leftMargin: previewFrame.margins.left
-                topMargin: previewFrame.margins.top
-                rightMargin: previewFrame.margins.right
-                bottomMargin: previewFrame.margins.bottom
+            QIconItem {
+                id: iconItem
+                width: 64
+                height: 64
+                anchors.centerIn: parent
+                icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
             }
 
-            QImageItem {
-                id: previewImage
-                anchors.centerIn: parent
+            PlasmaCore.FrameSvgItem {
+                id: previewFrame
+                imagePath: "widgets/media-delegate"
+                prefix: "picture"
 
-                width: {
-                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                        return parent.width
-                    } else {
-                        return parent.height * (nativeWidth/nativeHeight)
-                    }
+                height: previewImage.height+margins.top+margins.bottom
+                width: previewImage.width+margins.left+margins.right
+                visible: false
+                anchors.centerIn: previewArea
+            }
+
+            Item {
+                id: previewArea
+                anchors {
+                    fill: parent
+
+                    leftMargin: previewFrame.margins.left
+                    topMargin: previewFrame.margins.top
+                    rightMargin: previewFrame.margins.right
+                    bottomMargin: previewFrame.margins.bottom
                 }
-                height: {
-                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                        return parent.width / (nativeWidth/nativeHeight)
-                    } else {
-                        return parent.height
+
+                QImageItem {
+                    id: previewImage
+                    anchors.centerIn: parent
+
+                    width: {
+                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
+                            return parent.width
+                        } else {
+                            return parent.height * (nativeWidth/nativeHeight)
+                        }
+                    }
+                    height: {
+                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
+                            return parent.width / (nativeWidth/nativeHeight)
+                        } else {
+                            return parent.height
+                        }
                     }
                 }
             }
@@ -145,10 +115,8 @@ Item {
             text: label
 
             font.pixelSize: 14
-            //wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
-            anchors.top: iconItem.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             width: 130
             style: Text.Outline
@@ -157,16 +125,11 @@ Item {
 
         Text {
             id: infoLabel
-            //image: metadataSource.data[DataEngineSource]["fileName"]
-            //text: "the long and winding road..."
             text: className
             opacity: 0.8
-            //font.pixelSize: font.pixelSize * 1.8
             font.pixelSize: 12
             height: 14
             width: parent.width - iconItem.width
-            //wrapMode: Text.Wrap
-            anchors.top: previewLabel.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             visible: infoLabelVisible
         }

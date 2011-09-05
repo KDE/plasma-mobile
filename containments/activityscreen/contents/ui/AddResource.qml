@@ -282,8 +282,11 @@ Rectangle {
                             }
                             onClicked: {
                                 //already in the model?
+                                //second case, for the apps model
                                 for (var i = 0; i < selectedModel.count; ++i) {
-                                    if (model.resourceUri == selectedModel.get(i).resourceUri) {
+                                    if ((model.resourceUri && model.resourceUri == selectedModel.get(i).resourceUri) ||
+
+                                        (model.entryPath && model.entryPath == selectedModel.get(i).resourceUri)) {
                                         highlightFrame.opacity = 0
                                         selectedModel.remove(i)
                                         return
@@ -397,6 +400,7 @@ Rectangle {
                                     } else {
                                         resultsGrid.model = metadataModel
                                         metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
+
                                         resultsContainer.contentY = 0
                                     }
                                 }

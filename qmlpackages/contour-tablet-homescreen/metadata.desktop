@@ -2,6 +2,7 @@
 Comment=Contour tablet homescreen
 Comment[nl]=Omranding van hoofdscherm van tablet
 Comment[pt]=Ecrã inicial para tabletes do Contour
+Comment[pt_BR]=Tela inicial do Contour para tablets
 Comment[sv]=Kontur hemskärm för surfplatta
 Comment[uk]=Домашня сторінка планшета Contour
 Comment[x-test]=xxContour tablet homescreenxx
@@ -10,6 +11,7 @@ Keywords=
 Name=Tablet homescreen
 Name[nl]=Hoofdscherm van tablet
 Name[pt]=Ecrã inicial de tabletes
+Name[pt_BR]=Tela inicial para tablets
 Name[sv]=Hemskärm för surfplatta
 Name[uk]=Домашня сторінка планшета
 Name[x-test]=xxTablet homescreenxx
