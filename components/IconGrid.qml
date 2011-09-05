@@ -118,8 +118,8 @@ Item {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            bottomMargin: 16
         }
+        height: Math.max( 16, appsView.height - Math.floor(appsView.height/delegateHeight)*delegateHeight)
         Row {
             id: dotsRow
             anchors.centerIn: parent
