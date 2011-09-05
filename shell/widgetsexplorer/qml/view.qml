@@ -24,12 +24,12 @@ import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Rectangle {
-    color: Qt.rgba(0,0,0,0.5)
     id: widgetsExplorer
+
+    color: Qt.rgba(0,0,0,0.5)
     objectName: "widgetsExplorer"
-    state: "horizontal"
-    width:800
-    height:480
+    width: 800
+    height: 480
     opacity: 0
 
     signal addAppletRequested(string plugin)
@@ -89,113 +89,74 @@ Rectangle {
         onClicked: disappearAnimation.running = true
     }
 
-    states: [
-        State {
-            name: "horizontal"
-            PropertyChanges {
-                target: infoPanel;
-                x: parent.width
-                y: 0
-                width: parent.width/4
-                height: parent.height+32
-            }
-            PropertyChanges {
-                target: iconsFrame;
-                anchors.bottom: widgetsExplorer.bottom
-            }
-        },
-        State {
-            name: "vertical"
-            PropertyChanges {
-                target: infoPanel;
-                x: 0
-                y: parent.height
-                width: parent.width+32
-                height: parent.height/4
-            }
-            PropertyChanges {
-                target: iconsFrame;
-                anchors.bottomMargin: infoPanel.height
-                anchors.right: widgetsExplorer.right
-            }
-        }
-    ]
-
-    onWidthChanged : {
-        orientationTimer.running = true
-    }
-
-    Timer {
-        id: orientationTimer
-        running: false
-        repeat: false
-        interval: 200
-        onTriggered: {
-            if (width > height) {
-                state = "horizontal"
-            } else {
-                state = "vertical"
-                infoPanel.height = 200
-            }
-        }
+    ListModel {
+        id: selectedModel
     }
 
 
-    Item {
+    PlasmaCore.FrameSvgItem {
         id: dialog
+
+        state: "hidden"
+        imagePath: "dialogs/background"
+
         anchors.fill: parent
         anchors.margins: 50
-        scale: 0
 
-        PlasmaCore.FrameSvgItem {
-            id: iconsFrame
-
-            state: "hidden"
-            imagePath: "dialogs/background"
-
+        MouseArea {
             anchors.fill: parent
+            //eat mouse events to mot trigger the dialog hide
+            onPressed: mouse.accepted = true
+        }
 
-            MouseArea {
-                anchors.fill: parent
-                //eat mouse events to mot trigger the dialog hide
-                onPressed: mouse.accepted = true
+        MobileComponents.ViewSearch {
+            id: searchField
+
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: parent.top
             }
 
-            MobileComponents.ViewSearch {
-                id: searchField
-
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    top: parent.top
-                }
-
-                onSearchQueryChanged: {
-                    appletsFilter.filterRegExp = ".*"+searchQuery+".*"
-                }
+            onSearchQueryChanged: {
+                appletsFilter.filterRegExp = ".*"+searchQuery+".*"
             }
-            MobileComponents.IconGrid {
-                id: appletsView
-                property string currentPlugin
+        }
+        MobileComponents.IconGrid {
+            id: appletsView
 
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    top: searchField.bottom
-                    bottom: parent.bottom
-                    leftMargin: parent.margins.left
-                    topMargin: parent.margins.top
-                    rightMargin: parent.margins.right
-                    bottomMargin: parent.margins.bottom
-                }
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: searchField.bottom
+                bottom: buttonsRow.top
+                leftMargin: parent.margins.left
+                topMargin: parent.margins.top
+                rightMargin: parent.margins.right
+                bottomMargin: parent.margins.bottom
+            }
 
-                model: PlasmaCore.SortFilterModel {
-                    id: appletsFilter
-                    sourceModel: myModel
-                }
+            model: PlasmaCore.SortFilterModel {
+                id: appletsFilter
+                sourceModel: myModel
+            }
 
 
-                delegate: Component {
+            delegate: Component {
+                Item {
+                    width: appletsView.delegateWidth
+                    height: appletsView.delegateHeight
+                    PlasmaCore.FrameSvgItem {
+                            id: highlightFrame
+                            imagePath: "widgets/viewitem"
+                            prefix: "selected+hover"
+                            opacity: 0
+                            width: appletsView.delegateWidth
+                            height: appletsView.delegateHeight
+                            Behavior on opacity {
+                                NumberAnimation {duration: 250}
+                            }
+                    }
                     MobileComponents.ResourceDelegate {
                         //icon: decoration
                         genericClassName: "FileDataObject"
@@ -204,42 +165,62 @@ Rectangle {
                         height: appletsView.delegateHeight
 
                         onClicked: {
-                            currentPlugin = pluginName
-                            infoPanel.icon = decoration
-                            infoPanel.name = display
-                            infoPanel.version = "Version "+version
-                            infoPanel.description = description
-                            infoPanel.author = "<b>Author:</b> "+author
-                            infoPanel.email = "<b>Email:</b> "+email
-                            infoPanel.license = "<b>License:</b> "+license
-
-                            if (infoPanel.state == "hidden") {
-                                var pos = mapToItem(widgetsExplorer, 0, -infoPanel.height/2)
-                                infoPanel.x = pos.x
-                                infoPanel.y = pos.y
-                                infoPanel.state = "shown"
+                            //already in the model?
+                            //second case, for the apps model
+                            for (var i = 0; i < selectedModel.count; ++i) {
+                                if (model.pluginName == selectedModel.get(i).pluginName) {
+                                    highlightFrame.opacity = 0
+                                    selectedModel.remove(i)
+                                    return
+                                }
                             }
+
+                            var item = new Object
+                            item["pluginName"] = model["pluginName"]
+                            //this is to make AppModel work
+                            if (!item["pluginName"]) {
+                                item["pluginName"] = pluginName
+                            }
+
+                            selectedModel.append(item)
+                            highlightFrame.opacity = 1
                         }
                     }
-                }
-
-                PlasmaWidgets.PushButton {
-                    id: closeButton
-                    width: addButton.width
-                    anchors.bottom: parent.bottom
-                    anchors.right: parent.right
-
-                    text: i18n("Close")
-                    onClicked : disappearAnimation.running = true
                 }
             }
         }
 
+        Row {
+            id: buttonsRow
+            spacing: 8
+            anchors {
+                bottom: parent.bottom
+                horizontalCenter: parent.horizontalCenter
+                bottomMargin: dialog.margins.bottom
+            }
 
-        InfoPanel {
-            id: infoPanel
+            PlasmaWidgets.PushButton {
+                id: okButton
+                //enabled: selectedResourcesList.count>0
+
+                text: i18n("Add items")
+                onClicked : {
+                    for (var i = 0; i < selectedModel.count; ++i) {
+                        widgetsExplorer.addAppletRequested(selectedModel.get(i).pluginName)
+                    }
+
+                    disappearAnimation.running = true
+                }
+            }
+
+            PlasmaWidgets.PushButton {
+                id: cancelButton
+                text: i18n("Cancel")
+
+                onClicked: {
+                    disappearAnimation.running = true
+                }
+            }
         }
     }
-
-
 }
