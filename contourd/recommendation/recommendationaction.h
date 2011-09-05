@@ -33,7 +33,7 @@ struct RECOMMENDATIONSCLIENT_EXPORT RecommendationAction
     QString id;
     QString text;
     QString iconName;
-    qreal relevance;
+    double relevance;
 };
 
 }

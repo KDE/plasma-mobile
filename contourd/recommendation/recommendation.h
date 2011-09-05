@@ -38,7 +38,7 @@ struct RECOMMENDATIONSCLIENT_EXPORT Recommendation
 {
     QString resourceUri;
     QList<RecommendationAction> actions;
-    qreal relevance;
+    double relevance;
 };
 }
 
