@@ -254,7 +254,9 @@ function positionItem(item)
     rect.y = item.y
     rect.width = item.width
     rect.height = item.height
-    itemsConfig[item.category] = rect
-    save()
+    //save only things that actually have a category (exclude the placeholder)
+    if (item.category) {
+        itemsConfig[item.category] = rect
+    }
 }
 
