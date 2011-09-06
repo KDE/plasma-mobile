@@ -115,7 +115,7 @@ function availableSpace(x, y, width, height)
             var free = true
             //using availableSize.width instead of rowsWidth or the result will be 0
             for (var i = row; i < row+availableSize.width; ++i) {
-                if (positions[i][column+h]) {
+                if (positions[i] && positions[i][column+h]) {
                     free = false
                     break
                 }

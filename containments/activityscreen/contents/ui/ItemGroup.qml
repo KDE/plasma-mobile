@@ -208,7 +208,7 @@ PlasmaCore.FrameSvgItem {
 
             mainFlickable.interactive = true
             LayoutManager.positionItem(itemGroup)
-            LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, widthAnimation.to, itemGroup.height, false)
+            LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, widthAnimation.to, heightAnimation.to, false)
             //debugFlow.refresh();
         }
     }
