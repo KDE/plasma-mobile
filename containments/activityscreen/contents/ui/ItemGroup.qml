@@ -106,7 +106,6 @@ PlasmaCore.FrameSvgItem {
             mainFlickable.interactive = true
             scrollTimer.running = false
             placeHolderPaint.opacity = 0
-            itemGroup.z = 0
             animationsEnabled = true
             LayoutManager.positionItem(itemGroup)
             //debugFlow.refresh()
@@ -123,6 +122,11 @@ PlasmaCore.FrameSvgItem {
         NumberAnimation {
             duration: 250
             easing.type: Easing.InOutQuad
+            onRunningChanged: {
+                if (!running) {
+                    itemGroup.z = 0
+                }
+            }
         }
     }
     Behavior on y {
@@ -138,11 +142,17 @@ PlasmaCore.FrameSvgItem {
             id: widthAnimation
             duration: 250
             easing.type: Easing.InOutQuad
+            onRunningChanged: {
+                if (!running) {
+                    itemGroup.z = 0
+                }
+            }
         }
     }
     Behavior on height {
         enabled: animationsEnabled
         NumberAnimation {
+            id: heightAnimation
             duration: 250
             easing.type: Easing.InOutQuad
         }
@@ -176,6 +186,7 @@ PlasmaCore.FrameSvgItem {
         property int startY
 
         onPressed: {
+            itemGroup.z = 999
             mouse.accepted = true
             //FIXME: this shouldn't be necessary
             mainFlickable.interactive = false
