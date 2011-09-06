@@ -1,5 +1,6 @@
 /*
- * Copyright 2011 Marco Martin <mart@kde.org>
+ * Copyright (C) 2011 Marco Martin <mart@kde.org>
+ * Copyright (C) 2011 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Library General Public License version 2 as
@@ -16,21 +17,22 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "recommendationjob.h"
+#include "RecommendationsJob.h"
+#include "RecommendationManager.h"
 
 #include <KDebug>
 
-#include <recommendationsclient.h>
+namespace Contour {
 
-RecommendationJob::RecommendationJob(Contour::RecommendationsClient *client,
-                                     Contour::Recommendation rec,
-                                     const QString &operation,
-                                     QMap<QString, QVariant> &parameters,
+RecommendationJob::RecommendationJob(const QString & operation,
+                                     const QString & engine,
+                                     const QString & id,
+                                     QMap < QString, QVariant > & parameters,
                                      QObject *parent)
-    : ServiceJob(parent->objectName(), operation, parameters, parent),
-      m_recommendationsClient(client),
-      m_rec(rec)
+    : ServiceJob(parent->objectName(), operation, parameters, parent)
 {
+    m_engine = engine;
+    m_id = id;
 }
 
 RecommendationJob::~RecommendationJob()
@@ -39,14 +41,18 @@ RecommendationJob::~RecommendationJob()
 
 void RecommendationJob::start()
 {
-    const QString operation = operationName();
-    if (operation == "executeAction") {
-        QString id = parameters().value("Id").toString();
-        if (id.isEmpty()) {
+    kDebug() << operationName() << parameters() << m_engine;
+
+    if (operationName() == "executeAction") {
+        QString action = parameters().value("Action").toString();
+
+        if (m_id.isEmpty() || m_engine.isEmpty()) {
             setResult(false);
             return;
         }
-        m_recommendationsClient->executeAction(id);
+
+        RecommendationManager::self()->executeAction(m_engine, m_id, action);
+
         setResult(true);
         return;
     }
@@ -54,4 +60,6 @@ void RecommendationJob::start()
     setResult(false);
 }
 
-#include "recommendationjob.moc"
+} // namespace Contour
+
+#include "RecommendationsJob.moc"

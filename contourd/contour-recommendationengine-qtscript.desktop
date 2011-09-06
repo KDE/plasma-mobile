@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=Contour/RecommendationEngine/QtScript
+
+Comment=Scripted recommendation engine for Contour
+
+

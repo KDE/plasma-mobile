@@ -1,5 +1,6 @@
 /*
- *   Copyright 2011 Marco Martin <mart@kde.org>
+ *   Copyright (C) 2011 Marco Martin <mart@kde.org>
+ *   Copyright (C) 2011 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -17,23 +18,32 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "recommendationservice.h"
-#include "recommendationjob.h"
+#ifndef RECOMMENDATION_SERVICE_H
+#define RECOMMENDATION_SERVICE_H
 
-#include <recommendationsclient.h>
+#include "RecommendationsEngine.h"
+#include "RecommendationItem.h"
 
-RecommendationService::RecommendationService(Contour::RecommendationsClient *client, Contour::Recommendation rec, QObject *parent)
-    : Plasma::Service(parent),
-      m_recommendationsClient(client),
-      m_rec(rec)
+#include <Plasma/Service>
+#include <Plasma/ServiceJob>
+
+
+using namespace Plasma;
+
+namespace Contour {
+
+class RecommendationService : public Plasma::Service
 {
-    setName("recommendations");
+    Q_OBJECT
+
+public:
+    RecommendationService(const Contour::RecommendationItem & rec, QObject * parent = 0);
+    ServiceJob * createJob(const QString &operation, QMap < QString, QVariant > & parameters);
+
+private:
+    QString m_engine, m_id;
+};
+
 }
 
-ServiceJob *RecommendationService::createJob(const QString &operation,
-                                             QMap<QString, QVariant> &parameters)
-{
-    return new RecommendationJob(m_recommendationsClient, m_rec, operation, parameters, this);
-}
-
-#include "recommendationservice.moc"
+#endif

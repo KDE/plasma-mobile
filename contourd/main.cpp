@@ -25,7 +25,7 @@
 #include <KCmdLineOptions>
 #include <KLocale>
 
-#include "recommendation/recommendationmanager.h"
+#include "recommendation/RecommendationManager.h"
 
 int main(int argc, char** argv)
 {

@@ -3,7 +3,7 @@
     "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
 <kcfg>
     <group name="executeAction">
-        <entry name="Id" type="String">
+        <entry name="Action" type="String">
             <label>The id of a given recommendation action.</label>
         </entry>
     </group>

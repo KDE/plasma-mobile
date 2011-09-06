@@ -11,23 +11,12 @@
         <method name="executeAction">
             <arg name="engine" type="s" direction="in" />
             <arg name="id" type="s" direction="in" />
-            <arg name="action" type="s" direction="in" />
         </method>
 
-        <method name="executeAction">
-            <arg name="engine" type="s" direction="in" />
-            <arg name="id" type="s" direction="in" />
-        </method>
-
-        <signal name="recommendationsChanged">
-        </signal>
-
-        <!--
         <signal name="recommendationsChanged">
             <arg name="recommendations" type="a(ssdsss)" />
             <annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="QList&lt;Contour::RecommendationItem&gt;" />
         </signal>
-        -->
 
     </interface>
 </node>

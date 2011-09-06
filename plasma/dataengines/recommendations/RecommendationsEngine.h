@@ -1,5 +1,6 @@
 /*
  *   Copyright (C) 2010 Marco Martin <mart@kde.org>
+ *   Copyright (C) 2011 Ivan Cukic <ivan.cukic@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License version 2 as
@@ -19,32 +20,33 @@
 #ifndef RECOMMENDATIONSENGINE_H
 #define RECOMMENDATIONSENGINE_H
 
-#include <plasma/dataengine.h>
+#include <QHash>
+#include <QString>
 
-#include <Nepomuk/Resource>
+#include <Plasma/DataEngine>
+
+#include "RecommendationItem.h"
 
 namespace Contour {
-    class RecommendationsClient;
-    class Recommendation;
-}
 
-class RecommendationsEngine : public Plasma::DataEngine
+class RecommendationsEngine: public Plasma::DataEngine
 {
     Q_OBJECT
 
 public:
-    RecommendationsEngine(QObject* parent, const QVariantList& args);
+    RecommendationsEngine(QObject * parent, const QVariantList & args);
     ~RecommendationsEngine();
 
-    Plasma::Service *serviceForSource(const QString &source);
+    Plasma::Service * serviceForSource(const QString &source);
+    virtual void init();
 
 protected slots:
-    void updateRecommendations(const QList<Contour::Recommendation> &recommendations);
+    void updateRecommendations(const QList < Contour::RecommendationItem > & recommendations);
 
 private:
-    Contour::RecommendationsClient *m_recommendationsClient;
-
-    QHash<QString, Contour::Recommendation> m_recommendations;
+    QHash < QString, Contour::RecommendationItem > m_recommendations;
 };
+
+}
 
 #endif

@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=Pauses the media
+Comment=Shows media player control
+Type=Service
+Icon=
+
+X-KDE-ServiceTypes=Contour/RecommendationEngine/QtScript
+X-KDE-Library=org.kde.contour.mediapause
+X-KDE-PluginInfo-Author=Ivan Cukic
+X-KDE-PluginInfo-Email=ivan.cukic@kde.org
+X-KDE-PluginInfo-Name=org.kde.contour.mediapause
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Language
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
+X-ActivityManager-PluginType=normal
