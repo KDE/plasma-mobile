@@ -99,29 +99,33 @@ function availableSpace(x, y, width, height)
         return availableSize;
     } else if (!positions[row][column]) {
 
-        for (var w=0; w<rowsWidth; w++) {
+        for (var w=0; w < rowsWidth; w++) {
             //occupied?
             var free = true;
-            for (var i = column; i < column+columnsHeight; ++i) {
-                if (positions[row+w] && positions[row+w][i]) {
-                    free = false;
-                    break;
-                }
-            }
-            if (free) {
-                availableSize.width = w+1
-            } else {
+
+            if (positions[row+w] && positions[row+w][column]) {
                 break;
+            } else {
+                availableSize.width = w+1
             }
         }
 
-        for (var h=0; h<columnsHeight; h++) {
+        for (var h=0; h < columnsHeight; h++) {
             //occupied?
-            if (positions[row][column+h]) {
-                //print("occupied"+row+" "+column+" "+h+" "+positions[row][column+h]+" "+availableSize.height)
-                break;
-            } else {
+            var free = true
+            //using availableSize.width instead of rowsWidth or the result will be 0
+            for (var i = row; i < row+availableSize.width; ++i) {
+                if (positions[i][column+h]) {
+                    free = false
+                    break
+                }
+            }
+
+            if (free) {
                 availableSize.height = h+1
+            } else {
+                //print("occupied"+row+" "+column+" "+h+" "+positions[row][column+h]+" "+availableSize.height)
+                break
             }
         }
     }
@@ -185,6 +189,8 @@ function positionItem(item)
                                           Math.max(item.minimumWidth, item.width),
                                           Math.max(item.minimumHeight, item.height))
         print("checking forward "+forwardX/cellSize.width+" "+forwardY/cellSize.height+" "+forwardAvail.width/cellSize.width+" "+forwardAvail.height/cellSize.height)
+
+        print("response: forwardAvail: "+forwardAvail.width+"x"+forwardAvail.height+" minimumSize: "+item.minimumWidth+"x"+item.minimumHeight+"\n\n")
 
         if (forwardAvail.width >= item.minimumWidth &&
             forwardAvail.height >= item.minimumHeight) {
