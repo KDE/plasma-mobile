@@ -183,6 +183,9 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
             parentClass.label() == "Contact") {
             data["genericClassName"] = parentClass.label();
             break;
+        //two cases where the class is 2 levels behind the level of generalization we want
+        } else if (parentClass.label() == "RasterImage") {
+            data["genericClassName"] = "Image";
         } else if (parentClass.label() == "TextDocument") {
             data["genericClassName"] = "Document";
         }

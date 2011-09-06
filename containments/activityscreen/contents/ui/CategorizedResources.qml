@@ -302,6 +302,7 @@ Item {
                             child.enabled = true
                             //debugFlow.refresh();
                         }
+                        LayoutManager.save()
                     }
                 }
                 Component.onCompleted: {
@@ -335,6 +336,7 @@ Item {
                         placeHolder.y = placeHolder.syncItem.y
                         placeHolder.width = placeHolder.syncItem.width
                         placeHolder.height = placeHolder.syncItem.height
+                        //only positionItem here, we don't want to save
                         LayoutManager.positionItem(placeHolder)
                         LayoutManager.setSpaceAvailable(placeHolder.x, placeHolder.y, placeHolder.width, placeHolder.height, true)
                     }

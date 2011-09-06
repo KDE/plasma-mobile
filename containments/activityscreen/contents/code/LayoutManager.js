@@ -70,7 +70,7 @@ function save()
         configString += id + ":" + rect.x + "," + rect.y + "," + rect.width + "," + rect.height + ";"
     }
 
-    print("saving "+configString)
+    //print("saving "+configString)
     plasmoid.writeConfig("ItemsGeometries", configString)
 }
 
@@ -99,29 +99,33 @@ function availableSpace(x, y, width, height)
         return availableSize;
     } else if (!positions[row][column]) {
 
-        for (var w=0; w<rowsWidth; w++) {
+        for (var w=0; w < rowsWidth; w++) {
             //occupied?
             var free = true;
-            for (var i = column; i < column+columnsHeight; ++i) {
-                if (positions[row+w] && positions[row+w][i]) {
-                    free = false;
-                    break;
-                }
-            }
-            if (free) {
-                availableSize.width = w+1
-            } else {
+
+            if (positions[row+w] && positions[row+w][column]) {
                 break;
+            } else {
+                availableSize.width = w+1
             }
         }
 
-        for (var h=0; h<columnsHeight; h++) {
+        for (var h=0; h < columnsHeight; h++) {
             //occupied?
-            if (positions[row][column+h]) {
-                //print("occupied"+row+" "+column+" "+h+" "+positions[row][column+h]+" "+availableSize.height)
-                break;
-            } else {
+            var free = true
+            //using availableSize.width instead of rowsWidth or the result will be 0
+            for (var i = row; i < row+availableSize.width; ++i) {
+                if (positions[i] && positions[i][column+h]) {
+                    free = false
+                    break
+                }
+            }
+
+            if (free) {
                 availableSize.height = h+1
+            } else {
+                //print("occupied"+row+" "+column+" "+h+" "+positions[row][column+h]+" "+availableSize.height)
+                break
             }
         }
     }
@@ -149,7 +153,7 @@ function setSpaceAvailable(x, y, width, height, available)
         }
         for (var j = column; j<column+columnsHeight; ++j) {
             positions[i][j] = !available
-            print("set "+i+" "+j+" "+!available)
+            //print("set "+i+" "+j+" "+!available)
         }
     }
 }
@@ -184,7 +188,9 @@ function positionItem(item)
         var forwardAvail = availableSpace(forwardX, forwardY,
                                           Math.max(item.minimumWidth, item.width),
                                           Math.max(item.minimumHeight, item.height))
-        print("checking forward "+forwardX/cellSize.width+" "+forwardY/cellSize.height+" "+forwardAvail.width/cellSize.width+" "+forwardAvail.height/cellSize.height)
+        //print("checking forward "+forwardX/cellSize.width+" "+forwardY/cellSize.height+" "+forwardAvail.width/cellSize.width+" "+forwardAvail.height/cellSize.height)
+
+        //print("response: forwardAvail: "+forwardAvail.width+"x"+forwardAvail.height+" minimumSize: "+item.minimumWidth+"x"+item.minimumHeight+"\n\n")
 
         if (forwardAvail.width >= item.minimumWidth &&
             forwardAvail.height >= item.minimumHeight) {
@@ -214,7 +220,7 @@ function positionItem(item)
         var backAvail = availableSpace(backX, backY,
                                        Math.max(item.minimumWidth, item.width),
                                        Math.max(item.minimumHeight, item.height))
-        print("checking backwards "+backX/cellSize.width+" "+backY/cellSize.height+" "+backAvail.width/cellSize.width+" "+backAvail.height/cellSize.height)
+        //print("checking backwards "+backX/cellSize.width+" "+backY/cellSize.height+" "+backAvail.width/cellSize.width+" "+backAvail.height/cellSize.height)
 
         if (backAvail.width >= item.minimumWidth &&
             backAvail.height >= item.minimumHeight) {
@@ -248,7 +254,9 @@ function positionItem(item)
     rect.y = item.y
     rect.width = item.width
     rect.height = item.height
-    itemsConfig[item.category] = rect
-    save()
+    //save only things that actually have a category (exclude the placeholder)
+    if (item.category) {
+        itemsConfig[item.category] = rect
+    }
 }
 
