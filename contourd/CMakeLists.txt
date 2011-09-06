@@ -91,6 +91,11 @@ install(FILES
     DESTINATION ${SERVICETYPES_INSTALL_DIR}
     )
 
+install(FILES
+    contour.desktop DESTINATION
+    ${AUTOSTART_INSTALL_DIR}
+    )
+
 install(
     TARGETS contour ${INSTALL_TARGETS_DEFAULT_ARGS}
     )
