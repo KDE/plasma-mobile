@@ -70,7 +70,7 @@ function save()
         configString += id + ":" + rect.x + "," + rect.y + "," + rect.width + "," + rect.height + ";"
     }
 
-    print("saving "+configString)
+    //print("saving "+configString)
     plasmoid.writeConfig("ItemsGeometries", configString)
 }
 
@@ -153,7 +153,7 @@ function setSpaceAvailable(x, y, width, height, available)
         }
         for (var j = column; j<column+columnsHeight; ++j) {
             positions[i][j] = !available
-            print("set "+i+" "+j+" "+!available)
+            //print("set "+i+" "+j+" "+!available)
         }
     }
 }
@@ -220,7 +220,7 @@ function positionItem(item)
         var backAvail = availableSpace(backX, backY,
                                        Math.max(item.minimumWidth, item.width),
                                        Math.max(item.minimumHeight, item.height))
-        print("checking backwards "+backX/cellSize.width+" "+backY/cellSize.height+" "+backAvail.width/cellSize.width+" "+backAvail.height/cellSize.height)
+        //print("checking backwards "+backX/cellSize.width+" "+backY/cellSize.height+" "+backAvail.width/cellSize.width+" "+backAvail.height/cellSize.height)
 
         if (backAvail.width >= item.minimumWidth &&
             backAvail.height >= item.minimumHeight) {
