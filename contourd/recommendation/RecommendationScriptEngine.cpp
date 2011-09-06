@@ -146,7 +146,7 @@ void RecommendationScriptEngine::signalHandlerException(const QScriptValue & exc
 }
 
 void RecommendationScriptEngine::addRecommendation(
-        qreal score,
+        double score,
         const QString & id,
         const QString & title,
         const QString & description,

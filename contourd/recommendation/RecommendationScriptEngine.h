@@ -54,7 +54,7 @@ public Q_SLOTS:
 
 public Q_SLOTS:
     void addRecommendation(
-            qreal score,
+            double score,
             const QString & id,
             const QString & title,
             const QString & description,

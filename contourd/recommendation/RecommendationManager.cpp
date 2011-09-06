@@ -56,7 +56,7 @@ public:
 
     struct EngineInfo {
         QString name;
-        qreal score;
+        /*qreal*/ float score;
     };
 
     QHash < RecommendationEngine *, EngineInfo > engineInfos;
@@ -217,10 +217,10 @@ void RecommendationManager::executeAction(const QString & engine, const QString 
 
     d->engineByName[engine]->activate(id);
 
-    const double learning = 0.2;
+    const qreal learning = 0.2;
     d->engineInfos[d->engineByName[engine]].score += learning;
 
-    double order = 1.0;
+    qreal order = 1.0;
     foreach (const RecommendationItem & recommendation, d->recommendations) {
         d->engineInfos[d->engineByName[recommendation.engine]].score -= ::exp(-order) * learning;
         order += 1.0;

@@ -40,6 +40,8 @@ void RecommendationEngine::init()
 
 void RecommendationEngine::activate(const QString & id, const QString & action)
 {
+    Q_UNUSED(id);
+    Q_UNUSED(action);
 }
 
 } // namespace Contour

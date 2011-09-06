@@ -33,7 +33,7 @@ public:
     RecommendationItem(const RecommendationItem & source);
     RecommendationItem & operator = (const RecommendationItem & source);
 
-    qreal score;
+    double score;
     QString title;
     QString description;
     QString icon;
