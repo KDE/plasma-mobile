@@ -48,11 +48,6 @@ void AppSource::sycocaChanged(const QStringList &changes)
     }
 }
 
-static bool lessThanForServices(KService::Ptr service1, KService::Ptr service2)
-{
-    return QString::localeAwareCompare(service1->name(), service2->name()) < 0;
-}
-
 void AppSource::populate()
 {
     QString query = "exist Exec";
@@ -75,8 +70,6 @@ void AppSource::populate()
 
     kWarning()<<query;
     KService::List services = KServiceTypeTrader::self()->query("Application", query);
-
-    qSort(services.begin(), services.end(), lessThanForServices);
 
     removeAllData();
     Plasma::DataEngine::Data data;
