@@ -19,6 +19,7 @@
 
 
 #include "kdeclarativewebview.h"
+#include "networkaccessmanager.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QEvent>
@@ -296,7 +297,8 @@ void KDeclarativeWebView::init()
     d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
 #ifndef NO_KIO
-    KIO::AccessManager *access = new KIO::AccessManager( this );
+    //KIO::AccessManager *access = new KIO::AccessManager( this );
+    KIO::AccessManager *access = new NetworkAccessManager( this );
     wp->setNetworkAccessManager(access);
 #endif
     KWebPage* kwp = qobject_cast<KWebPage*>(wp);
@@ -322,7 +324,8 @@ void KDeclarativeWebView::componentComplete()
 {
     QDeclarativeItem::componentComplete();
 #ifndef NO_KIO
-    KIO::AccessManager *access = new KIO::AccessManager( this );
+    //KIO::AccessManager *access = new KIO::AccessManager( this );
+    KIO::AccessManager *access = new NetworkAccessManager( this );
     page()->setNetworkAccessManager(access);
 #else
     page()->setNetworkAccessManager(qmlEngine(this)->networkAccessManager());
