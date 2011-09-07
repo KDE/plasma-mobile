@@ -59,6 +59,11 @@ NetworkAccessManager::NetworkAccessManager(QObject *parent)
     m_adBlockManager = new AdBlockManager(this);
 }
 
+NetworkAccessManager::~NetworkAccessManager()
+{
+    kDebug() << "AAAA NMA destroyed";
+}
+
 void NetworkAccessManager::setAdBlockManager(AdBlockManager* adblocker)
 {
     m_adBlockManager = adblocker;

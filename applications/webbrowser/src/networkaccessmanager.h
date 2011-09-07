@@ -44,6 +44,7 @@ class NetworkAccessManager : public KIO::Integration::AccessManager
 
 public:
     NetworkAccessManager(QObject *parent);
+    virtual ~NetworkAccessManager();
     void setAdBlockManager(AdBlockManager *adblocker);
 
 protected:
