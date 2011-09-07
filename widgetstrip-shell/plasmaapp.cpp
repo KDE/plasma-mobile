@@ -152,6 +152,11 @@ bool PlasmaApp::hasComposite()
     return KWindowSystem::compositingActive();
 }
 
+QSize PlasmaApp::defaultScreenSize()
+{
+    return QSize(1366, 768);
+}
+
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
     QAction *addAction = containment->action("add widgets");

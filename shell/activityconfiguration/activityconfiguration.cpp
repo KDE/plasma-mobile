@@ -46,7 +46,7 @@
 #endif
 
 #include "backgroundlistmodel.h"
-#include "../plasmaapp.h"
+#include "plasmaapp.h"
 
 ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     : Plasma::DeclarativeWidget(parent),
