@@ -12,7 +12,7 @@ include(SopranoAddOntology)
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}/ontologies
-    #${CMAKE_CURRENT_SOURCE_DIR}/..
+    ${CMAKE_CURRENT_SOURCE_DIR}/adblock
    )
 
 add_subdirectory(ontologies)
@@ -26,7 +26,21 @@ set(active-webbrowser_SRCS
     completionmodel.cpp
     history.cpp
     view.cpp
+
+    networkaccessmanager.cpp
+    adblock/adblockhostmatcher.cpp
+    adblock/adblockmanager.cpp
+    adblock/adblocknetworkreply.cpp
+    adblock/adblockrule.cpp
+    adblock/adblockrulefallbackimpl.cpp
+    adblock/adblockrulenullimpl.cpp
+    adblock/adblockruletextmatchimpl.cpp
+    #adblock/adblockwidget.cpp
 )
+
+#KDE4_ADD_UI_FILES( active-webbrowser_SRCS
+#    adblock/settings_adblock.ui
+#)
 
 KDE4_ADD_EXECUTABLE(active-webbrowser ${active-webbrowser_SRCS})
 
