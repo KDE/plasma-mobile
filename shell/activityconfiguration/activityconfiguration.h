@@ -79,10 +79,10 @@ Q_SIGNALS:
 
 protected:
     void ensureContainmentExistence();
-    void resizeEvent(QGraphicsSceneResizeEvent *event);
 
 private:
     void ensureContainmentHasWallpaperPlugin(const QString &mimetype = "image/jpeg");
+    QString bestWallpaperPluginAvailable(const QString &wallpaper = "image/jpeg") const;
     KConfigGroup wallpaperConfig();
 
 private Q_SLOTS:
