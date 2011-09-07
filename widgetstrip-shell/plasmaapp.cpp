@@ -147,11 +147,6 @@ Plasma::Corona* PlasmaApp::corona()
     return m_corona;
 }
 
-bool PlasmaApp::hasComposite()
-{
-    return KWindowSystem::compositingActive();
-}
-
 QSize PlasmaApp::defaultScreenSize()
 {
     return QSize(1366, 768);
