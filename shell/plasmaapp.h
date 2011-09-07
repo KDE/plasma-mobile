@@ -56,7 +56,7 @@ public:
     ~PlasmaApp();
 
     static PlasmaApp* self();
-    static bool hasComposite();
+    static QSize defaultScreenSize();
 
     void notifyStartup(bool completed);
     Plasma::Corona* corona();

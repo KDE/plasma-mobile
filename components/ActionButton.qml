@@ -77,13 +77,18 @@ Item {
     Row {
         id: buttonRow
 
-        PlasmaCore.SvgItem {
-            id: buttonItem
-            svg: buttonSvg
-            elementId: "normal"
-            width: shadowItem.width
-            height: shadowItem.height
-            visible: backgroundVisible
+        Item {
+            width: buttonItem.visible?buttonItem.width:iconSize
+            height: buttonItem.visible?buttonItem.height:iconSize
+
+            PlasmaCore.SvgItem {
+                id: buttonItem
+                svg: buttonSvg
+                elementId: "normal"
+                width: shadowItem.width
+                height: shadowItem.height
+                visible: backgroundVisible
+            }
 
             PlasmaCore.SvgItem {
                 id: icon

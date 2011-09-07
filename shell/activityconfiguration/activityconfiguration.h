@@ -82,6 +82,7 @@ protected:
 
 private:
     void ensureContainmentHasWallpaperPlugin(const QString &mimetype = "image/jpeg");
+    QString bestWallpaperPluginAvailable(const QString &wallpaper = "image/jpeg") const;
     KConfigGroup wallpaperConfig();
 
 private Q_SLOTS:

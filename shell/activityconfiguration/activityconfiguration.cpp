@@ -20,7 +20,6 @@
 
 //own
 #include "activityconfiguration.h"
-#include "backgroundlistmodel.h"
 
 //Qt
 #include <QtDeclarative/qdeclarative.h>
@@ -30,6 +29,7 @@
 #include <QTimer>
 #include <QGraphicsView>
 #include <QApplication>
+#include <QGraphicsSceneResizeEvent>
 
 //KDE
 #include <KDebug>
@@ -44,6 +44,9 @@
 #ifndef NO_ACTIVITIES
 #include <Activities/Controller>
 #endif
+
+#include "backgroundlistmodel.h"
+#include "plasmaapp.h"
 
 ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     : Plasma::DeclarativeWidget(parent),
@@ -70,6 +73,19 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
                     this, SLOT(deleteLater()));
         }
     }
+
+
+    Plasma::Wallpaper *wp = Plasma::Wallpaper::load(bestWallpaperPluginAvailable());
+    if (wp) {
+        wp->setParent(this);
+        wp->setTargetSizeHint(PlasmaApp::defaultScreenSize());
+        wp->setResizeMethodHint(Plasma::Wallpaper::ScaledAndCroppedResize);
+    }
+
+    m_model = new BackgroundListModel(wp, this);
+    emit modelChanged();
+    connect(m_model, SIGNAL(countChanged()), this, SLOT(modelCountChanged()));
+    m_model->reload();
 }
 
 ActivityConfiguration::~ActivityConfiguration()
@@ -101,13 +117,10 @@ void ActivityConfiguration::ensureContainmentExistence()
 void ActivityConfiguration::setContainment(Plasma::Containment *cont)
 {
     m_containment = cont;
-    delete m_model;
-    m_model = 0;
 
     if (!m_containment) {
         // we are being setup for containment creation!
         m_newContainment = true;
-        return;
     }
 
     if (m_containment) {
@@ -135,29 +148,28 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
         m_newContainment = false;
     }
 
-    ensureContainmentHasWallpaperPlugin();
-
-    // save the wallpaper config so we can find the proper index later in modelCountChanged
-    Plasma::Wallpaper *wp = m_containment->wallpaper();
-    if (!wp) {
-        // can only happen on a broken system with no wallpapers able to show images
+    if (!m_containment) {
         return;
     }
 
-    KConfigGroup wpConfig = wallpaperConfig();
-    if (wpConfig.isValid()) {
-        wp->save(wpConfig);
-    }
+    ensureContainmentHasWallpaperPlugin();
+    m_model->setTargetSizeHint(m_containment->size().toSize());
 
-    m_model = new BackgroundListModel(wp, this);
-    emit modelChanged();
-    connect(m_model, SIGNAL(countChanged()), this, SLOT(modelCountChanged()));
-    m_model->reload();
+    // save the wallpaper config so we can find the proper index later in modelCountChanged
+    Plasma::Wallpaper *wp = m_containment->wallpaper();
+    if (wp) {
+        // shoulw always be true:
+        // can only be false on a broken system with no wallpapers able to show images
+        KConfigGroup wpConfig = wallpaperConfig();
+        if (wpConfig.isValid()) {
+            wp->save(wpConfig);
+        }
+    }
 }
 
 KConfigGroup ActivityConfiguration::wallpaperConfig()
 {
-    if (!m_containment && m_containment->wallpaper()) {
+    if (!m_containment || !m_containment->wallpaper()) {
         return KConfigGroup();
     }
 
@@ -284,27 +296,29 @@ void ActivityConfiguration::setWallpaperIndex(const int index)
     emit wallpaperIndexChanged();
 }
 
-void ActivityConfiguration::ensureContainmentHasWallpaperPlugin(const QString &mimetype)
+QString ActivityConfiguration::bestWallpaperPluginAvailable(const QString &mimetype) const
 {
-    if (!m_containment ||
-        (m_containment->wallpaper() && m_containment->wallpaper()->supportsMimetype(mimetype))) {
-        return;
+    const KPluginInfo::List wallpaperList = Plasma::Wallpaper::listWallpaperInfoForMimetype(mimetype);
+    if (wallpaperList.isEmpty()) {
+        // this would be a rather broken system
+        return QString();
     }
 
-    KPluginInfo::List wallpaperList = m_containment->wallpaper()->listWallpaperInfoForMimetype(mimetype);
-    KPluginInfo wallpaper;
-    bool image = false;
-    foreach (wallpaper, wallpaperList) {
+    // we look for the image plugin, as that's really the one we want to default to
+    foreach (const KPluginInfo &wallpaper, wallpaperList) {
         if (wallpaper.pluginName() == "image") {
-            image = true;
-            break;
+            return "image";
         }
     }
 
-    if (image) {
-        m_containment->setWallpaper("image");
-    } else {
-        m_containment->setWallpaper(wallpaperList.at(0).name());
+    // "image" doesn't exist, so we just return whatever was first in the list
+    return wallpaperList.at(0).name();
+}
+
+void ActivityConfiguration::ensureContainmentHasWallpaperPlugin(const QString &mimetype)
+{
+    if (m_containment && (!m_containment->wallpaper() || !m_containment->wallpaper()->supportsMimetype(mimetype))) {
+        m_containment->setWallpaper(bestWallpaperPluginAvailable());
     }
 }
 

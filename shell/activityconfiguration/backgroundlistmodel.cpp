@@ -95,7 +95,7 @@ void BackgroundListModel::reload(const QStringList &selected)
 
     const QStringList dirs = KGlobal::dirs()->findDirs("wallpaper", "");
     kDebug() << "going looking in" << dirs;
-    BackgroundFinder *finder = new BackgroundFinder(m_structureParent, dirs);
+    BackgroundFinder *finder = new BackgroundFinder(m_structureParent.data(), dirs);
     connect(finder, SIGNAL(backgroundsFound(QStringList,QString)), this, SLOT(backgroundsFound(QStringList,QString)));
     m_findToken = finder->token();
     finder->start();
@@ -113,7 +113,7 @@ void BackgroundListModel::processPaths(const QStringList &paths)
     QList<Plasma::Package *> newPackages;
     foreach (const QString &file, paths) {
         if (!contains(file) && QFile::exists(file)) {
-            Plasma::PackageStructure::Ptr structure = Plasma::Wallpaper::packageStructure(m_structureParent);
+            Plasma::PackageStructure::Ptr structure = Plasma::Wallpaper::packageStructure(m_structureParent.data());
             Plasma::Package *package  = new Plasma::Package(file, structure);
             if (package->isValid()) {
                 newPackages << package;
@@ -147,7 +147,7 @@ void BackgroundListModel::addBackground(const QString& path)
             m_dirwatch.addFile(path);
         }
         beginInsertRows(QModelIndex(), 0, 0);
-        Plasma::PackageStructure::Ptr structure = Plasma::Wallpaper::packageStructure(m_structureParent);
+        Plasma::PackageStructure::Ptr structure = Plasma::Wallpaper::packageStructure(m_structureParent.data());
         Plasma::Package *pkg = new Plasma::Package(path, structure);
         m_packages.prepend(pkg);
         endInsertRows();
@@ -238,6 +238,13 @@ void BackgroundListModel::setScreenshotSize(const QSize &size)
 QSize BackgroundListModel::screenshotSize() const
 {
     return m_screenshotSize;
+}
+
+void BackgroundListModel::setTargetSizeHint(const QSize &size)
+{
+    if (m_structureParent) {
+        m_structureParent.data()->setTargetSizeHint(size);
+    }
 }
 
 QVariant BackgroundListModel::data(const QModelIndex &index, int role) const
