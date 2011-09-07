@@ -30,12 +30,12 @@
 
 static const char description[] = I18N_NOOP("Web browser for Plasma Active");
 
-static const char version[] = "0.1";
+static const char version[] = "0.2";
 static const char HOME_URL[] = "http://community.kde.org/Plasma/Active";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("internet-web-browser", 0, ki18n("Plasma Active Web Browser"), version, ki18n(description),
+    KAboutData about("active-web-browser", 0, ki18n("Plasma Active Web Browser"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");
                      about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
