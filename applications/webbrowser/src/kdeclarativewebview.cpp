@@ -311,7 +311,7 @@ void KDeclarativeWebView::init()
     wp->setForwardUnsupportedContent(true);
     setPage(wp);
 #ifndef NO_KIO
-    //KIO::AccessManager *access = new KIO::AccessManager( this );
+    //kDebug() << "AAAA INIT" << page();
     KIO::AccessManager *access = new NetworkAccessManager(page());
     wp->setNetworkAccessManager(access);
 #endif
@@ -323,11 +323,7 @@ void KDeclarativeWebView::init()
 void KDeclarativeWebView::componentComplete()
 {
     QDeclarativeItem::componentComplete();
-#ifndef NO_KIO
-    //KIO::AccessManager *access = new KIO::AccessManager( this );
-    KIO::AccessManager *access = new NetworkAccessManager(page());
-    page()->setNetworkAccessManager(access);
-#else
+#ifdef NO_KIO
     page()->setNetworkAccessManager(qmlEngine(this)->networkAccessManager());
 #endif
 
