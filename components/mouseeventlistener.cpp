@@ -37,6 +37,14 @@ MouseEventListener::~MouseEventListener()
 
 void MouseEventListener::mousePressEvent(QGraphicsSceneMouseEvent *me)
 {
+    //FIXME: when a popup window is visible: a click anywhere hides it: but the old qgraphicswidget will continue to think it's under the mouse
+    //doesn't seem to be any good way to properly reset this.
+    //this msolution will still caused a missed click after the popup is gone, but gets the situation unblocked.
+    if (!isUnderMouse()) {
+        me->ignore();
+        return;
+    }
+
     QDeclarativeMouseEvent dme(me->pos().x(), me->pos().y(), me->screenPos().x(), me->screenPos().y(), me->button(), me->buttons(), me->modifiers());
     emit pressed(&dme);
 }
