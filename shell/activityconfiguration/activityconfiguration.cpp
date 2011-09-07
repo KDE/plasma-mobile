@@ -298,7 +298,7 @@ void ActivityConfiguration::setWallpaperIndex(const int index)
 
 QString ActivityConfiguration::bestWallpaperPluginAvailable(const QString &mimetype) const
 {
-    const KPluginInfo::List wallpaperList = m_containment->wallpaper()->listWallpaperInfoForMimetype(mimetype);
+    const KPluginInfo::List wallpaperList = Plasma::Wallpaper::listWallpaperInfoForMimetype(mimetype);
     if (wallpaperList.isEmpty()) {
         // this would be a rather broken system
         return QString();
