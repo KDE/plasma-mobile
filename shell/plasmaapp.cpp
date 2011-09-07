@@ -336,6 +336,11 @@ bool PlasmaApp::hasComposite()
     return KWindowSystem::compositingActive();
 }
 
+QSize PlasmaApp::defaultScreenSize()
+{
+    return QSize(1366, 768);
+}
+
 void PlasmaApp::notifyStartup(bool completed)
 {
     org::kde::KSMServerInterface ksmserver("org.kde.ksmserver",
