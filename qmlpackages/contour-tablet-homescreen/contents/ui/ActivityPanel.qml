@@ -44,6 +44,12 @@ Item {
     Connections {
         target: switcher
         onNewActivityRequested: homeScreen.newActivityRequested()
+        onStateChanged: {
+            print("AAAAAAAAAA"+switcher.state)
+            if (switcher.state == "Passive") {
+                activityPanel.state = "hidden"
+            }
+        }
     }
 
     //Uses a MouseEventListener instead of a MouseArea to not block any mouse event
