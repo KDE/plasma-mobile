@@ -29,7 +29,6 @@
 
 // Self Includes
 #include "adblockmanager.h"
-#include "adblockmanager.moc"
 
 // Local Includes
 #include "adblocknetworkreply.h"
@@ -63,7 +62,7 @@ AdBlockManager::AdBlockManager(QObject *parent)
     , _isHideAdsEnabled(false)
     , _index(0)
 {
-    kDebug() << " AAAAAAA " << "new Adblockmanager.";
+    kDebug() << " AAAA " << "new Adblockmanager.";
     loadSettings();
 }
 
@@ -89,16 +88,13 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
 
     KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
     _config = KConfigGroup(ptr, "adblock");
-    //_isAdblockEnabled = ReKonfig::adBlockEnabled();
     _isAdblockEnabled = _config.readEntry("adBlockEnabled", true);
-    kDebug() << "AAAA ADBLOCK ENABLED = " << _isAdblockEnabled << checkUpdateDate;
 
     // no need to load filters if adblock is not enabled :)
     if (!_isAdblockEnabled)
         return;
 
     // just to be sure..
-    //_isHideAdsEnabled = ReKonfig::hideAdsEnabled();
     _isHideAdsEnabled = _config.readEntry("hideAdsEnabled", true);
 
     // read settings
@@ -108,34 +104,23 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
     rules = rulesGroup.readEntry("local-rules" , QStringList());
     loadRules(rules);
 
-    // ----------------------------------------------------------
-    //kWarning() << "FIXME: updates disabled";
-
+    // Checking wether to update the adblock filters, and doin' it
     QDateTime today = QDateTime::currentDateTime();
-    //QDateTime lastUpdate = ReKonfig::lastUpdate();  //  the day of the implementation.. :)
     QDateTime lastUpdate = _config.readEntry("lastUpdate", QDateTime(QDate(2001, 9, 11)));
-    //QDateTime lastUpdate = QDateTime(QDate(2001, 9, 11));
     int days = _config.readEntry("updateInterval", 7);
-    kDebug() << "AAAA last update: " << lastUpdate;
-
     if (!checkUpdateDate || today > lastUpdate.addDays(days))
     {
-        kDebug() << "AAAA updating" << today;
-        //ReKonfig::setLastUpdate(today);
         _config.writeEntry("lastUpdate", QDateTime::currentDateTime());
         updateNextSubscription();
-
         return;
     }
 
     // else
-    //QStringList titles = ReKonfig::subscriptionTitles();
-    QStringList titles = _config.readEntry("adBlockEnabled", defaultTitles()); // FIXME??
+    QStringList titles = _config.readEntry("adBlockEnabled", defaultTitles());
     foreach(const QString & title, titles)
     {
         rules = rulesGroup.readEntry(title + "-rules" , QStringList());
         loadRules(rules);
-        kDebug() << "AAAA Loading rules " << title+"-rules " << rules.count();
     }
 }
 
@@ -186,13 +171,11 @@ void AdBlockManager::loadRules(const QStringList &rules)
         AdBlockRule rule(stringRule);
         _blackList << rule;
     }
-    kDebug() << "AAAA Loaded rules: " << _blackList.count();
 }
 
 
 QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *page)
 {
-    kDebug() << "AAA " << request.url().toString();
     if (!_isAdblockEnabled)
         return 0;
 
@@ -209,8 +192,8 @@ QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *p
     // check white rules before :)
     if (_hostWhiteList.match(host))
     {
-        kDebug() << "AAA ****ADBLOCK: WHITE RULE (@@) Matched by host matcher: ***********";
-        kDebug() << "AAA UrlString:  " << urlString;
+        //kDebug() << " ****ADBLOCK: WHITE RULE (@@) Matched by host matcher: ***********";
+        //kDebug() << " UrlString:  " << urlString;
         return 0;
     }
 
@@ -218,8 +201,8 @@ QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *p
     {
         if (filter.match(request, urlString, urlStringLowerCase))
         {
-            kDebug() << "AAA ****ADBLOCK: WHITE RULE (@@) Matched: ***********";
-            kDebug() << "AAA UrlString:  " << urlString;
+            //kDebug() << " ****ADBLOCK: WHITE RULE (@@) Matched: ***********";
+            //kDebug() << " UrlString:  " << urlString;
             return 0;
         }
     }
@@ -227,8 +210,8 @@ QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *p
     // then check the black ones :(
     if (_hostBlackList.match(host))
     {
-        kDebug() << "AAA ****ADBLOCK: BLACK RULE Matched by host matcher: ***********";
-        kDebug() << "AAA UrlString:  " << urlString;
+        //kDebug() << " ****ADBLOCK: BLACK RULE Matched by host matcher: ***********";
+        //kDebug() << " UrlString:  " << urlString;
         AdBlockNetworkReply *reply = new AdBlockNetworkReply(request, urlString, this);
         return reply;
     }
@@ -237,8 +220,8 @@ QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *p
     {
         if (filter.match(request, urlString, urlStringLowerCase))
         {
-            kDebug() << "AAA ****ADBLOCK: BLACK RULE Matched: ***********";
-            kDebug() << "AAA UrlString:  " << urlString;
+            //kDebug() << " ****ADBLOCK: BLACK RULE Matched: ***********";
+            //kDebug() << " UrlString:  " << urlString;
 
             QWebElement document = page->mainFrame()->documentElement();
             QWebElementCollection elements = document.findAll("*");
@@ -247,7 +230,7 @@ QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *p
                 const QString srcAttribute = el.attribute("src");
                 if (filter.match(request, srcAttribute, srcAttribute.toLower()))
                 {
-                    kDebug() << "MATCHES ATTRIBUTE!!!!!";
+                    //kDebug() << "MATCHES ATTRIBUTE!!!!!";
                     el.setStyleProperty(QL1S("visibility"), QL1S("hidden"));
                     el.setStyleProperty(QL1S("width"), QL1S("0"));
                     el.setStyleProperty(QL1S("height"), QL1S("0"));
@@ -286,7 +269,7 @@ void AdBlockManager::applyHidingRules(QWebPage *page)
         {
             if (el.isNull())
                 continue;
-            kDebug() << "Hide element: " << el.localName();
+            //kDebug() << "Hide element: " << el.localName();
             el.setStyleProperty(QL1S("visibility"), QL1S("hidden"));
             el.removeFromDocument();
         }
@@ -295,14 +278,11 @@ void AdBlockManager::applyHidingRules(QWebPage *page)
 
 void AdBlockManager::updateNextSubscription()
 {
-    //QStringList locations = ReKonfig::subscriptionLocations();
-    QStringList locations = _config.readEntry("subscriptionLocations", defaultLocations()); // FIXME??
-    kDebug() << "AAAA Locations: " << locations;
+    QStringList locations = _config.readEntry("subscriptionLocations", defaultLocations());
     if (_index < locations.size())
     {
         QString urlString = locations.at(_index);
         KUrl subUrl = KUrl(urlString);
-        kDebug() << "AAAA Updating ... " << urlString;
         KIO::TransferJob* job = KIO::get(subUrl , KIO::Reload , KIO::HideProgressInfo);
         job->metaData().insert("ssl_no_client_cert", "TRUE");
         job->metaData().insert("ssl_no_ui", "TRUE");
@@ -320,14 +300,10 @@ void AdBlockManager::updateNextSubscription()
     _buffer.clear();
 }
 
-void AdBlockManager::slotFinished() {
-    kDebug() << "AAAA job finished ...";
-}
-
 void AdBlockManager::slotResult(KJob *job)
 {
     if (job->error()) {
-        kDebug() << "Fetching rules failed: " << job->errorString();
+        kWarning() << "Fetching rules failed: " << job->errorString();
         return;
     }
 
@@ -336,7 +312,6 @@ void AdBlockManager::slotResult(KJob *job)
     foreach(const QByteArray & ba, list) {
         ruleList << QString(ba);
     }
-    kDebug() << " AAAA Rules: " << ruleList.count();
     loadRules(ruleList);
     saveRules(ruleList);
 
@@ -346,11 +321,9 @@ void AdBlockManager::slotResult(KJob *job)
     updateNextSubscription();
 }
 
-
 void AdBlockManager::subscriptionData(KIO::Job* job, const QByteArray& data)
 {
     Q_UNUSED(job)
-    kDebug() << "data arrived..." << data;
     if (data.isEmpty())
         return;
 
@@ -358,7 +331,6 @@ void AdBlockManager::subscriptionData(KIO::Job* job, const QByteArray& data)
     _buffer.resize(_buffer.size() + data.size());
     memcpy(_buffer.data() + oldSize, data.data(), data.size());
 }
-
 
 void AdBlockManager::saveRules(const QStringList &rules)
 {
@@ -369,27 +341,21 @@ void AdBlockManager::saveRules(const QStringList &rules)
             cleanedRules << r;
     }
 
-    //QStringList titles = ReKonfig::subscriptionTitles();
     QStringList titles = _config.readEntry("subscriptionTitles", defaultTitles());
     QString title = titles.at(_index) + "-rules";
 
     KSharedConfig::Ptr config = KSharedConfig::openConfig("adblock", KConfig::SimpleConfig, "appdata");
     KConfigGroup cg(config , "rules");
     cg.writeEntry(title, cleanedRules);
-    cg.sync();
-    kDebug() << "AAAA Rules written to config " << cleanedRules.count();
 }
-
 
 void AdBlockManager::addSubscription(const QString &title, const QString &location)
 {
-    //QStringList titles = ReKonfig::subscriptionTitles();
-    QStringList titles = _config.readEntry("subscriptionTitles", defaultTitles()); // FIXME??
+    QStringList titles = _config.readEntry("subscriptionTitles", defaultTitles());
     if (titles.contains(title))
         return;
 
-    //QStringList locations = ReKonfig::subscriptionLocations();
-    QStringList locations = _config.readEntry("subscriptionLocations", defaultLocations()); // FIXME
+    QStringList locations = _config.readEntry("subscriptionLocations", defaultLocations());
     if (locations.contains(location))
         return;
 
@@ -398,7 +364,6 @@ void AdBlockManager::addSubscription(const QString &title, const QString &locati
     _config.writeEntry("subscriptionTitles", titles);
     _config.writeEntry("subscriptionLocations", locations);
 }
-
 
 void AdBlockManager::showSettings()
 {
@@ -414,3 +379,5 @@ void AdBlockManager::showSettings()
 
     dialog->deleteLater();
 }
+
+#include "adblockmanager.moc"

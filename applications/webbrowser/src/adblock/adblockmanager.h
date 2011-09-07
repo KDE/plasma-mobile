@@ -141,7 +141,6 @@ public:
 public slots:
     void loadSettings(bool checkUpdateDate = true);
     void showSettings();
-    void slotFinished();
 
 private:
     void updateNextSubscription();
