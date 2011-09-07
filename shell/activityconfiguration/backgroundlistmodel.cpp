@@ -240,6 +240,11 @@ QSize BackgroundListModel::screenshotSize() const
     return m_screenshotSize;
 }
 
+void BackgroundListModel::setTargetSizeHint(const QSize &size)
+{
+    m_structureParent->setTargetSizeHint(size);
+}
+
 QVariant BackgroundListModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {

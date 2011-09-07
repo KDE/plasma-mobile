@@ -30,6 +30,7 @@
 #include <QTimer>
 #include <QGraphicsView>
 #include <QApplication>
+#include <QGraphicsSceneResizeEvent>
 
 //KDE
 #include <KDebug>
@@ -70,6 +71,16 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
                     this, SLOT(deleteLater()));
         }
     }
+
+
+    Plasma::Wallpaper *wp = Plasma::Wallpaper::load("image");
+    wp->setParent(this);
+    wp->setResizeMethodHint(Plasma::Wallpaper::ScaledAndCroppedResize);
+
+    m_model = new BackgroundListModel(wp, this);
+    emit modelChanged();
+    connect(m_model, SIGNAL(countChanged()), this, SLOT(modelCountChanged()));
+    m_model->reload();
 }
 
 ActivityConfiguration::~ActivityConfiguration()
@@ -101,13 +112,10 @@ void ActivityConfiguration::ensureContainmentExistence()
 void ActivityConfiguration::setContainment(Plasma::Containment *cont)
 {
     m_containment = cont;
-    delete m_model;
-    m_model = 0;
 
     if (!m_containment) {
         // we are being setup for containment creation!
         m_newContainment = true;
-        return;
     }
 
     if (m_containment) {
@@ -135,6 +143,10 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
         m_newContainment = false;
     }
 
+    if (!m_containment) {
+        return;
+    }
+
     ensureContainmentHasWallpaperPlugin();
 
     // save the wallpaper config so we can find the proper index later in modelCountChanged
@@ -148,16 +160,11 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
     if (wpConfig.isValid()) {
         wp->save(wpConfig);
     }
-
-    m_model = new BackgroundListModel(wp, this);
-    emit modelChanged();
-    connect(m_model, SIGNAL(countChanged()), this, SLOT(modelCountChanged()));
-    m_model->reload();
 }
 
 KConfigGroup ActivityConfiguration::wallpaperConfig()
 {
-    if (!m_containment && m_containment->wallpaper()) {
+    if (!m_containment || !m_containment->wallpaper()) {
         return KConfigGroup();
     }
 
@@ -318,6 +325,12 @@ void ActivityConfiguration::setScreenshotSize(const QSize &size)
     if (m_model) {
         m_model->setScreenshotSize(size);
     }
+}
+
+void ActivityConfiguration::resizeEvent(QGraphicsSceneResizeEvent *event)
+{
+    m_model->setTargetSizeHint(event->newSize().toSize());
+    Plasma::DeclarativeWidget::resizeEvent(event);
 }
 
 #include "activityconfiguration.moc"

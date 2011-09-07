@@ -72,6 +72,8 @@ public:
     QSize screenshotSize() const;
     int count() const {return m_packages.size();}
 
+    void setTargetSizeHint(const QSize &size);
+
 Q_SIGNALS:
     void countChanged();
 
