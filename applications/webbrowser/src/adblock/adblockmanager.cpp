@@ -32,7 +32,7 @@
 
 // Local Includes
 #include "adblocknetworkreply.h"
-#include "adblockwidget.h"
+//#include "adblockwidget.h"
 //#include "webpage.h"
 
 // KDE Includes
@@ -363,21 +363,6 @@ void AdBlockManager::addSubscription(const QString &title, const QString &locati
     locations << location;
     _config.writeEntry("subscriptionTitles", titles);
     _config.writeEntry("subscriptionLocations", locations);
-}
-
-void AdBlockManager::showSettings()
-{
-    QPointer<KDialog> dialog = new KDialog();
-    dialog->setCaption(i18nc("@title:window", "Ad Block Settings"));
-    dialog->setButtons(KDialog::Ok | KDialog::Cancel);
-
-    AdBlockWidget widget;
-    dialog->setMainWidget(&widget);
-    connect(dialog, SIGNAL(okClicked()), &widget, SLOT(save()));
-    connect(dialog, SIGNAL(okClicked()), this, SLOT(loadSettings()));
-    dialog->exec();
-
-    dialog->deleteLater();
 }
 
 #include "adblockmanager.moc"

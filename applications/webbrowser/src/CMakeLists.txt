@@ -35,12 +35,12 @@ set(active-webbrowser_SRCS
     adblock/adblockrulefallbackimpl.cpp
     adblock/adblockrulenullimpl.cpp
     adblock/adblockruletextmatchimpl.cpp
-    adblock/adblockwidget.cpp
+    #adblock/adblockwidget.cpp
 )
 
-KDE4_ADD_UI_FILES( active-webbrowser_SRCS
-    adblock/settings_adblock.ui
-)
+#KDE4_ADD_UI_FILES( active-webbrowser_SRCS
+#    adblock/settings_adblock.ui
+#)
 
 KDE4_ADD_EXECUTABLE(active-webbrowser ${active-webbrowser_SRCS})
 
