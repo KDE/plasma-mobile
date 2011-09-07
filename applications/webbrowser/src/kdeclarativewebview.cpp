@@ -298,7 +298,6 @@ void KDeclarativeWebView::init()
     QWebPage* wp = new QDeclarativeWebPage(this);
     KWebPage* kwp = qobject_cast<KWebPage*>(wp);
     if (kwp) {
-        kDebug() << "KWebPage found";
         WId wid = KWindowSystem::activeWindow();
         d->wallet = new KWebWallet(this, wid);
         kwp->setWallet(d->wallet);
@@ -311,7 +310,6 @@ void KDeclarativeWebView::init()
     wp->setForwardUnsupportedContent(true);
     setPage(wp);
 #ifndef NO_KIO
-    //kDebug() << "AAAA INIT" << page();
     KIO::AccessManager *access = new NetworkAccessManager(page());
     wp->setNetworkAccessManager(access);
 #endif

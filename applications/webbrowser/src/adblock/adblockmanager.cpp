@@ -1,9 +1,9 @@
 /* ============================================================
 *
-* This file is a part of the rekonq project
+* This file has been kindly borrowed and adapted from the rekonq project
 *
 * Copyright (C) 2010-2011 by Andrea Diamantini <adjam7 at gmail dot com>
-*
+* Copyright 2011 Sebastian Kügler <sebas@kde.org>
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License as
