@@ -78,7 +78,7 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     Plasma::Wallpaper *wp = Plasma::Wallpaper::load(bestWallpaperPluginAvailable());
     if (wp) {
         wp->setParent(this);
-        m_model->setTargetSizeHint(PlasmaApp::defaultScreenSize());
+        wp->setTargetSizeHint(PlasmaApp::defaultScreenSize());
         wp->setResizeMethodHint(Plasma::Wallpaper::ScaledAndCroppedResize);
     }
 
