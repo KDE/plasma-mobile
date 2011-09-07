@@ -61,7 +61,6 @@ NetworkAccessManager::NetworkAccessManager(QObject *parent)
 
 NetworkAccessManager::~NetworkAccessManager()
 {
-    kDebug() << "AAAA NMA destroyed";
 }
 
 void NetworkAccessManager::setAdBlockManager(AdBlockManager* adblocker)
@@ -72,9 +71,7 @@ void NetworkAccessManager::setAdBlockManager(AdBlockManager* adblocker)
 QNetworkReply *NetworkAccessManager::createRequest(QNetworkAccessManager::Operation op, const QNetworkRequest &request, QIODevice *outgoingData)
 {
     QWebPage *parentPage = qobject_cast<QWebPage *>(parent());
-    if (!parentPage) {
-        kDebug() << "Page is empty ...";
-    }
+    Q_ASSERT(parentPage);
     QNetworkReply *reply = 0;
 
     QNetworkRequest req = request;
@@ -111,13 +108,6 @@ QNetworkReply *NetworkAccessManager::createRequest(QNetworkAccessManager::Operat
 
     if (!reply) {
         reply = AccessManager::createRequest(op, req, outgoingData);
-        kDebug() << "AAA request OK";
-    } else {
-        kDebug() << "AAAA request blocked";
     }
-    /*
-    if (parentPage && parentPage->hasNetworkAnalyzerEnabled())
-        emit networkData(op, req, reply);
-    */
     return reply;
 }
