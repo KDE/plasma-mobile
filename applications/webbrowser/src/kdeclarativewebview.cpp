@@ -296,11 +296,6 @@ void KDeclarativeWebView::init()
     d->view = new GraphicsWebView(this);
     d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
-#ifndef NO_KIO
-    //KIO::AccessManager *access = new KIO::AccessManager( this );
-    KIO::AccessManager *access = new NetworkAccessManager( this );
-    wp->setNetworkAccessManager(access);
-#endif
     KWebPage* kwp = qobject_cast<KWebPage*>(wp);
     if (kwp) {
         kDebug() << "KWebPage found";
@@ -315,6 +310,11 @@ void KDeclarativeWebView::init()
 
     wp->setForwardUnsupportedContent(true);
     setPage(wp);
+#ifndef NO_KIO
+    //KIO::AccessManager *access = new KIO::AccessManager( this );
+    KIO::AccessManager *access = new NetworkAccessManager(page());
+    wp->setNetworkAccessManager(access);
+#endif
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
@@ -325,7 +325,7 @@ void KDeclarativeWebView::componentComplete()
     QDeclarativeItem::componentComplete();
 #ifndef NO_KIO
     //KIO::AccessManager *access = new KIO::AccessManager( this );
-    KIO::AccessManager *access = new NetworkAccessManager( this );
+    KIO::AccessManager *access = new NetworkAccessManager(page());
     page()->setNetworkAccessManager(access);
 #else
     page()->setNetworkAccessManager(qmlEngine(this)->networkAccessManager());

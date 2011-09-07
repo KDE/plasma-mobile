@@ -81,7 +81,7 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
     _config = KConfigGroup(ptr, "adblock");
     //_isAdblockEnabled = ReKonfig::adBlockEnabled();
     _isAdblockEnabled = _config.readEntry("adBlockEnabled", true);
-    kDebug() << "ADBLOCK ENABLED = " << _isAdblockEnabled;
+    kDebug() << "AAA ADBLOCK ENABLED = " << _isAdblockEnabled;
 
     // no need to load filters if adblock is not enabled :)
     if (!_isAdblockEnabled)
@@ -99,15 +99,17 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
     loadRules(rules);
 
     // ----------------------------------------------------------
-    kWarning() << "FIXME: updates disabled";
-    
+    //kWarning() << "FIXME: updates disabled";
+
     QDateTime today = QDateTime::currentDateTime();
     //QDateTime lastUpdate = ReKonfig::lastUpdate();  //  the day of the implementation.. :)
-    QDateTime lastUpdate = _config.readEntry("lastUpdate", QDateTime());
+    //QDateTime lastUpdate = _config.readEntry("lastUpdate", QDateTime(QDate(2001, 9, 11)));
+    QDateTime lastUpdate = QDateTime(QDate(2001, 9, 11));
     int days = _config.readEntry("updateInterval", true);
 
     if (!checkUpdateDate || today > lastUpdate.addDays(days))
     {
+        kDebug() << "AAA updating";
         //ReKonfig::setLastUpdate(today);
         _config.writeEntry("lastUpdate", today);
         updateNextSubscription();
@@ -176,6 +178,7 @@ void AdBlockManager::loadRules(const QStringList &rules)
 
 QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *page)
 {
+    kDebug() << "AAA " << request.url().toString();
     if (!_isAdblockEnabled)
         return 0;
 
@@ -192,8 +195,8 @@ QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *p
     // check white rules before :)
     if (_hostWhiteList.match(host))
     {
-        kDebug() << "****ADBLOCK: WHITE RULE (@@) Matched by host matcher: ***********";
-        kDebug() << "UrlString:  " << urlString;
+        kDebug() << "AAA ****ADBLOCK: WHITE RULE (@@) Matched by host matcher: ***********";
+        kDebug() << "AAA UrlString:  " << urlString;
         return 0;
     }
 
@@ -201,8 +204,8 @@ QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *p
     {
         if (filter.match(request, urlString, urlStringLowerCase))
         {
-            kDebug() << "****ADBLOCK: WHITE RULE (@@) Matched: ***********";
-            kDebug() << "UrlString:  " << urlString;
+            kDebug() << "AAA ****ADBLOCK: WHITE RULE (@@) Matched: ***********";
+            kDebug() << "AAA UrlString:  " << urlString;
             return 0;
         }
     }
@@ -210,8 +213,8 @@ QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *p
     // then check the black ones :(
     if (_hostBlackList.match(host))
     {
-        kDebug() << "****ADBLOCK: BLACK RULE Matched by host matcher: ***********";
-        kDebug() << "UrlString:  " << urlString;
+        kDebug() << "AAAA ****ADBLOCK: BLACK RULE Matched by host matcher: ***********";
+        kDebug() << "AAAA UrlString:  " << urlString;
         AdBlockNetworkReply *reply = new AdBlockNetworkReply(request, urlString, this);
         return reply;
     }
@@ -220,8 +223,8 @@ QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *p
     {
         if (filter.match(request, urlString, urlStringLowerCase))
         {
-            kDebug() << "****ADBLOCK: BLACK RULE Matched: ***********";
-            kDebug() << "UrlString:  " << urlString;
+            kDebug() << "AAAA ****ADBLOCK: BLACK RULE Matched: ***********";
+            kDebug() << "AAAA UrlString:  " << urlString;
 
             QWebElement document = page->mainFrame()->documentElement();
             QWebElementCollection elements = document.findAll("*");
@@ -276,11 +279,20 @@ void AdBlockManager::applyHidingRules(QWebPage *page)
     }
 }
 
+QStringList defaultLocations()
+{
+    return QStringList("https://easylist-downloads.adblockplus.org/easylist.txt");
+}
+
+QStringList defaultTitles()
+{
+    return QStringList("EasyList");
+}
 
 void AdBlockManager::updateNextSubscription()
 {
     //QStringList locations = ReKonfig::subscriptionLocations();
-    QStringList locations = _config.readEntry("subscriptionLocations", QStringList()); // FIXME??
+    QStringList locations = _config.readEntry("subscriptionLocations", defaultLocations()); // FIXME??
 
     if (_index < locations.size())
     {
@@ -316,6 +328,7 @@ void AdBlockManager::slotResult(KJob *job)
     {
         ruleList << QString(ba);
     }
+    kDebug() << " AAA Rules: " << ruleList;
     loadRules(ruleList);
     saveRules(ruleList);
 
@@ -349,33 +362,32 @@ void AdBlockManager::saveRules(const QStringList &rules)
     }
 
     //QStringList titles = ReKonfig::subscriptionTitles();
-    QStringList titles = _config.readEntry("subscriptionTitles", QStringList());
+    QStringList titles = _config.readEntry("subscriptionTitles", defaultTitles());
     QString title = titles.at(_index) + "-rules";
 
     KSharedConfig::Ptr config = KSharedConfig::openConfig("adblock", KConfig::SimpleConfig, "appdata");
     KConfigGroup cg(config , "rules");
     cg.writeEntry(title, cleanedRules);
+    kDebug() << "AAAA Rules written to config " << cleanedRules;
 }
 
 
 void AdBlockManager::addSubscription(const QString &title, const QString &location)
 {
     //QStringList titles = ReKonfig::subscriptionTitles();
-    QStringList titles = _config.readEntry("subscriptionTitles", QStringList()); // FIXME??
+    QStringList titles = _config.readEntry("subscriptionTitles", defaultTitles()); // FIXME??
     if (titles.contains(title))
         return;
 
     //QStringList locations = ReKonfig::subscriptionLocations();
-    QStringList locations = _config.readEntry("subscriptionLocations", QStringList()); // FIXME
+    QStringList locations = _config.readEntry("subscriptionLocations", defaultLocations()); // FIXME
     if (locations.contains(location))
         return;
 
     titles << title;
     locations << location;
-    /* FIXME
-    ReKonfig::setSubscriptionTitles(titles);
-    ReKonfig::setSubscriptionLocations(locations);
-    */
+    _config.writeEntry("subscriptionTitles", titles);
+    _config.writeEntry("subscriptionLocations", locations);
 }
 
 
