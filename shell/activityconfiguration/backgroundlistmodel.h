@@ -88,7 +88,7 @@ protected Q_SLOTS:
 private:
     QSize bestSize(Plasma::Package *package) const;
 
-    Plasma::Wallpaper *m_structureParent;
+    QWeakPointer<Plasma::Wallpaper> m_structureParent;
     QList<Plasma::Package *> m_packages;
     QHash<Plasma::Package *, QSize> m_sizeCache;
     QHash<Plasma::Package *, QPixmap> m_previews;
