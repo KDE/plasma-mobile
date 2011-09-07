@@ -76,9 +76,11 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
 
 
     Plasma::Wallpaper *wp = Plasma::Wallpaper::load(bestWallpaperPluginAvailable());
-    wp->setParent(this);
-    m_model->setTargetSizeHint(PlasmaApp::defaultScreenSize());
-    wp->setResizeMethodHint(Plasma::Wallpaper::ScaledAndCroppedResize);
+    if (wp) {
+        wp->setParent(this);
+        m_model->setTargetSizeHint(PlasmaApp::defaultScreenSize());
+        wp->setResizeMethodHint(Plasma::Wallpaper::ScaledAndCroppedResize);
+    }
 
     m_model = new BackgroundListModel(wp, this);
     emit modelChanged();
@@ -155,14 +157,13 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
 
     // save the wallpaper config so we can find the proper index later in modelCountChanged
     Plasma::Wallpaper *wp = m_containment->wallpaper();
-    if (!wp) {
-        // can only happen on a broken system with no wallpapers able to show images
-        return;
-    }
-
-    KConfigGroup wpConfig = wallpaperConfig();
-    if (wpConfig.isValid()) {
-        wp->save(wpConfig);
+    if (wp) {
+        // shoulw always be true:
+        // can only be false on a broken system with no wallpapers able to show images
+        KConfigGroup wpConfig = wallpaperConfig();
+        if (wpConfig.isValid()) {
+            wp->save(wpConfig);
+        }
     }
 }
 
