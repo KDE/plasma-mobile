@@ -56,6 +56,7 @@ NetworkAccessManager::NetworkAccessManager(QObject *parent)
         c.append(QL1S(", en_US"));
 
     _acceptLanguage = c.toLatin1();
+    m_adBlockManager = new AdBlockManager(this);
 }
 
 void NetworkAccessManager::setAdBlockManager(AdBlockManager* adblocker)
@@ -101,8 +102,12 @@ QNetworkReply *NetworkAccessManager::createRequest(QNetworkAccessManager::Operat
         reply = m_adBlockManager->block(req, parentPage);
     }
 
-    if (!reply)
+    if (!reply) {
         reply = AccessManager::createRequest(op, req, outgoingData);
+        kDebug() << "AAA request OK";
+    } else {
+        kDebug() << "AAA request blocked";
+    }
     /*
     if (parentPage && parentPage->hasNetworkAnalyzerEnabled())
         emit networkData(op, req, reply);

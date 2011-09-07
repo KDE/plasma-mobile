@@ -109,6 +109,7 @@
 #include "adblockrule.h"
 
 // KDE Includes
+#include <KConfigGroup>
 #include <KIO/Job>
 
 // Qt Includes
@@ -151,6 +152,7 @@ private slots:
     void subscriptionData(KIO::Job*, const QByteArray&);
 
 private:
+    KConfigGroup _config;
     bool _isAdblockEnabled;
     bool _isHideAdsEnabled;
 

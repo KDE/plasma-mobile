@@ -77,8 +77,10 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
     _blackList.clear();
     _hideList.clear();
 
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+    _config = KConfigGroup(ptr, "adblock");
     //_isAdblockEnabled = ReKonfig::adBlockEnabled();
-    _isAdblockEnabled = true;
+    _isAdblockEnabled = _config.readEntry("adBlockEnabled", true);
     kDebug() << "ADBLOCK ENABLED = " << _isAdblockEnabled;
 
     // no need to load filters if adblock is not enabled :)
@@ -87,7 +89,7 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
 
     // just to be sure..
     //_isHideAdsEnabled = ReKonfig::hideAdsEnabled();
-    _isHideAdsEnabled = true;
+    _isHideAdsEnabled = _config.readEntry("hideAdsEnabled", true);
 
     // read settings
     KSharedConfig::Ptr config = KSharedConfig::openConfig("adblock", KConfig::SimpleConfig, "appdata");
@@ -98,22 +100,23 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
 
     // ----------------------------------------------------------
     kWarning() << "FIXME: updates disabled";
-    /*
+    
     QDateTime today = QDateTime::currentDateTime();
-    QDateTime lastUpdate = ReKonfig::lastUpdate();  //  the day of the implementation.. :)
-    int days = ReKonfig::updateInterval();
+    //QDateTime lastUpdate = ReKonfig::lastUpdate();  //  the day of the implementation.. :)
+    QDateTime lastUpdate = _config.readEntry("lastUpdate", QDateTime());
+    int days = _config.readEntry("updateInterval", true);
 
     if (!checkUpdateDate || today > lastUpdate.addDays(days))
     {
-        ReKonfig::setLastUpdate(today);
-
+        //ReKonfig::setLastUpdate(today);
+        _config.writeEntry("lastUpdate", today);
         updateNextSubscription();
         return;
     }
-    */
+
     // else
     //QStringList titles = ReKonfig::subscriptionTitles();
-    QStringList titles; // FIXME
+    QStringList titles = _config.readEntry("adBlockEnabled", QStringList()); // FIXME??
     foreach(const QString & title, titles)
     {
         rules = rulesGroup.readEntry(title + "-rules" , QStringList());
@@ -277,7 +280,7 @@ void AdBlockManager::applyHidingRules(QWebPage *page)
 void AdBlockManager::updateNextSubscription()
 {
     //QStringList locations = ReKonfig::subscriptionLocations();
-    QStringList locations; // FIXME
+    QStringList locations = _config.readEntry("subscriptionLocations", QStringList()); // FIXME??
 
     if (_index < locations.size())
     {
@@ -346,7 +349,7 @@ void AdBlockManager::saveRules(const QStringList &rules)
     }
 
     //QStringList titles = ReKonfig::subscriptionTitles();
-    QStringList titles;
+    QStringList titles = _config.readEntry("subscriptionTitles", QStringList());
     QString title = titles.at(_index) + "-rules";
 
     KSharedConfig::Ptr config = KSharedConfig::openConfig("adblock", KConfig::SimpleConfig, "appdata");
@@ -358,12 +361,12 @@ void AdBlockManager::saveRules(const QStringList &rules)
 void AdBlockManager::addSubscription(const QString &title, const QString &location)
 {
     //QStringList titles = ReKonfig::subscriptionTitles();
-    QStringList titles; // FIXME
+    QStringList titles = _config.readEntry("subscriptionTitles", QStringList()); // FIXME??
     if (titles.contains(title))
         return;
 
     //QStringList locations = ReKonfig::subscriptionLocations();
-    QStringList locations; // FIXME
+    QStringList locations = _config.readEntry("subscriptionLocations", QStringList()); // FIXME
     if (locations.contains(location))
         return;
 
