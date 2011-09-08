@@ -125,7 +125,7 @@ Plasma::Applet *KeyboardDialog::applet()
 
 Plasma::Location KeyboardDialog::location() const
 {
-    return m_containment->location();
+    return m_location;
 }
 
 Plasma::FormFactor KeyboardDialog::formFactor() const
