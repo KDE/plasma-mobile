@@ -45,7 +45,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
       m_containment(0),
       m_corona(corona),
       m_direction(Plasma::Up),
-      m_location(Plasma::BottomEdge),
+      m_location(Plasma::Floating),
       m_rotation(0)
 {
     m_closeButton = new QPushButton(this);
@@ -99,7 +99,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     setFixedWidth(screenGeom.width());
 
     hide();
-    updateGeometry();
+    setLocation(Plasma::BottomEdge);
 }
 
 KeyboardDialog::~KeyboardDialog()
