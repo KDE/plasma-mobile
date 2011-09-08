@@ -68,7 +68,7 @@ Item {
                 name: model.name
                 description: model.description
                 icon: model.icon
-                actions: model.actions
+                // actions: model.actions
             }
     }
 }

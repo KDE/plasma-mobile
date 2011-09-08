@@ -26,7 +26,7 @@ ListItem {
     property string name
     property string description
     property string icon
-    property variant actions
+    // property variant actions
 
 
     QIconItem {
@@ -36,6 +36,18 @@ ListItem {
         width: 48
         height: 68
         icon: QIcon(listItem.icon)
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                print("#####")
+                var service = recommendationsSource.serviceForSource(DataEngineSource)
+                var operation = service.operationDescription("executeAction")
+                operation.Id = "" //actions[0].actionId
+
+                service.startOperationCall(operation)
+            }
+        }
     }
 
     Column {
@@ -56,9 +68,10 @@ ListItem {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
+                        print("#####")
                         var service = recommendationsSource.serviceForSource(DataEngineSource)
                         var operation = service.operationDescription("executeAction")
-                        operation.Id = actions[0].actionId
+                        operation.Id = "" //actions[0].actionId
 
                         service.startOperationCall(operation)
                     }
@@ -72,6 +85,7 @@ ListItem {
                 visible: listItem.description.length>0
             }
         }
+        /*
         Column {
             id : actionsLayout
             width: parent.width
@@ -110,5 +124,6 @@ ListItem {
                 }
             }
         }
+        */
     }
 }
