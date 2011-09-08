@@ -32,7 +32,6 @@ Item {
         id: background
         anchors.fill:parent
         imagePath: "widgets/panel-background"
-        prefix: "north"
         enabledBorders: "BottomBorder"
     }
 
