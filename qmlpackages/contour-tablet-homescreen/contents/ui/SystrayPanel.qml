@@ -31,7 +31,8 @@ Item {
     PlasmaCore.FrameSvgItem {
         id: background
         anchors.fill:parent
-        imagePath: "dialogs/background"
+        imagePath: "widgets/panel-background"
+        prefix: "north"
         enabledBorders: "BottomBorder"
     }
 
