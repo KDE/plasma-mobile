@@ -104,6 +104,7 @@ PlasmaCore.FrameSvgItem {
         }
         onReleased: {
             scrollTimer.running = false
+            repositionTimer.running = false
             placeHolderPaint.opacity = 0
             animationsEnabled = true
             LayoutManager.positionItem(itemGroup)
