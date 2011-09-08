@@ -37,6 +37,7 @@
 #include <Plasma/PopupApplet>
 #include <Plasma/Corona>
 #include <Plasma/Containment>
+#include <Plasma/WindowEffects>
 
 KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *containment, const QString &pluginName, int appletId, const QVariantList &appletArgs, QWidget *parent)
     : Plasma::Dialog(parent),
@@ -244,6 +245,9 @@ void KeyboardDialog::setLocation(const Plasma::Location location)
     }
 
     updateGeometry();
+    if (isVisible()) {
+        Plasma::WindowEffects::slideWindow(this, m_location);
+    }
 }
 
 void KeyboardDialog::setDirection(const Plasma::Direction direction)
