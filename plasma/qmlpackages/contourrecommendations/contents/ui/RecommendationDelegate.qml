@@ -40,10 +40,9 @@ ListItem {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                print("#####")
                 var service = recommendationsSource.serviceForSource(DataEngineSource)
                 var operation = service.operationDescription("executeAction")
-                operation.Id = "" //actions[0].actionId
+                operation.Action = "" //actions[0].actionId
 
                 service.startOperationCall(operation)
             }
@@ -68,10 +67,9 @@ ListItem {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        print("#####")
                         var service = recommendationsSource.serviceForSource(DataEngineSource)
                         var operation = service.operationDescription("executeAction")
-                        operation.Id = "" //actions[0].actionId
+                        operation.Action = "" //actions[0].actionId
 
                         service.startOperationCall(operation)
                     }
