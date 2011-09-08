@@ -41,6 +41,9 @@ private Q_SLOTS:
     void updateRecommendations();
     void updateRecommendationsFinished(const QDBusMessage & message);
 
+    void serviceRegistered(const QString & service);
+    void serviceUnregistered(const QString & service);
+
 public Q_SLOTS:
     void executeAction(const QString & engine, const QString & id, const QString & action);
 

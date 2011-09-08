@@ -24,8 +24,11 @@
 #include <QDBusInterface>
 #include <QDBusConnection>
 #include <QDBusPendingCall>
+#include <QDBusServiceWatcher>
 
 #include <KDebug>
+
+#define CONTOUR_DBUS_PATH "org.kde.Contour"
 
 namespace Contour {
 
@@ -50,7 +53,7 @@ RecommendationManager::RecommendationManager()
     : d(new Private())
 {
     d->iface = new QDBusInterface(
-            "org.kde.Contour",
+            CONTOUR_DBUS_PATH,
             "/recommendationmanager",
             "org.kde.contour.RecommendationManager",
             QDBusConnection::sessionBus()
@@ -58,6 +61,18 @@ RecommendationManager::RecommendationManager()
 
     connect(d->iface, SIGNAL(recommendationsChanged()),
             this, SLOT(updateRecommendations()));
+
+    QDBusServiceWatcher * watcher = new QDBusServiceWatcher(
+            CONTOUR_DBUS_PATH,
+            QDBusConnection::sessionBus(),
+            QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration,
+            this
+        );
+
+    connect(watcher, SIGNAL(serviceRegistered(QString)),
+            this,    SLOT(serviceRegistered(QString)));
+    connect(watcher, SIGNAL(serviceUnregistered(QString)),
+            this,    SLOT(serviceUnregistered(QString)));
 
     updateRecommendations();
 }
@@ -93,6 +108,21 @@ void RecommendationManager::updateRecommendationsFinished(const QDBusMessage & m
 
         emit recommendationsChanged(recommendations);
     }
+}
+
+void RecommendationManager::serviceRegistered(const QString & service)
+{
+    if (service != CONTOUR_DBUS_PATH) return;
+
+    updateRecommendations();
+}
+
+void RecommendationManager::serviceUnregistered(const QString & service)
+{
+    if (service != CONTOUR_DBUS_PATH) return;
+
+    QList < RecommendationItem > recommendations;
+    emit recommendationsChanged(recommendations);
 }
 
 } // namespace Contour
