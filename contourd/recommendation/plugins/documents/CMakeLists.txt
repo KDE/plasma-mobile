@@ -1,0 +1,40 @@
+project(contour-recommendationengine-documents)
+
+include_directories(
+   ${CMAKE_SOURCE_DIR}
+   ${CMAKE_BINARY_DIR}
+   ${CMAKE_CURRENT_SOURCE_DIR}
+   ${CMAKE_CURRENT_SOURCE_DIR}/../..
+   ${CMAKE_CURRENT_BINARY_DIR}
+   ${CMAKE_CURRENT_BINARY_DIR}/../..
+   ${KDE4_INCLUDES}
+   )
+
+set(
+    contour_recommendationengine_documents_SRCS
+    RankingsClient.cpp
+    Documents.cpp
+    ../../RecommendationEngine.cpp
+    ../../RecommendationItem.cpp
+    )
+
+qt4_add_dbus_adaptor(
+    contour_recommendationengine_documents_SRCS
+    org.kde.ActivityManager.RankingsClient.xml
+    RankingsClient.h RankingsClient
+    )
+
+kde4_add_plugin(
+   contour_recommendationengine_documents
+   ${contour_recommendationengine_documents_SRCS}
+   )
+
+target_link_libraries(
+   contour_recommendationengine_documents
+   ${KDE4_KDECORE_LIBS}
+   )
+
+
+install(FILES contour-recommendationengine-documents.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(TARGETS contour_recommendationengine_documents DESTINATION ${PLUGIN_INSTALL_DIR})
+
