@@ -73,62 +73,38 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    Item {
-        id: lastNotificationClip
-        x: notificationsApplet.width/2
-        width: 420
-        height: parent.height
-        clip: true
-        visible: false
-        PlasmaCore.FrameSvgItem {
-            id: lastNotificationRectangle
-            imagePath: "widgets/frame"
-            prefix: "plain"
-            x: -width
-            width: parent.width
-            height: parent.height
+    Timer {
+        id: lastNotificationTimer
+        interval: 3000
+        repeat: false
+        running: false
+        onTriggered: lastNotificationPopup.visible = false
+    }
+    PlasmaCore.Dialog {
+        id: lastNotificationPopup
+        location: plasmoid.location
+        windowFlags: windowFlags|Qt.WindowStaysOnTopHint
+        mainItem: Item {
+            width: 300
+            height: lastNotificationText.height+50
             Text {
                 id: lastNotificationText
                 anchors {
                     left: parent.left
-                    leftMargin: notificationsApplet.width/2
                     right: parent.right
                     verticalCenter: parent.verticalCenter
                 }
                 //textFormat: Text.PlainText
                 color: theme.textColor
-                wrapMode: Text.NoWrap
-                elide: Text.ElideRight
+                wrapMode: Text.Wrap
             }
-        }
-    }
-
-    SequentialAnimation {
-        id: lastNotificationAnimation
-        PropertyAction {
-            target: lastNotificationClip
-            property: "visible"
-            value: true
-        }
-        NumberAnimation {
-            target: lastNotificationRectangle
-            duration: 300
-            property: "x"
-            to: 0
-        }
-        PauseAnimation {
-            duration: 8000
-        }
-        NumberAnimation {
-            target: lastNotificationRectangle
-            duration: 300
-            property: "x"
-            to: -lastNotificationRectangle.width
-        }
-        PropertyAction {
-            target: lastNotificationClip
-            property: "visible"
-            value: false
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    lastNotificationPopup.visible = false
+                    lastNotificationTimer.running = false
+                }
+            }
         }
     }
 
@@ -207,7 +183,11 @@ Item {
             var i = connectedSources[connectedSources.length-1]
             lastNotificationText.text = String(data[i]["body"]).replace("\n", " ")
 
-            lastNotificationAnimation.running = true
+            var pos = lastNotificationPopup.popupPosition(notificationsApplet, Qt.AlignCenter)
+            lastNotificationPopup.x = pos.x
+            lastNotificationPopup.y = pos.y
+            lastNotificationPopup.visible = true
+            lastNotificationTimer.running = true
         }
     }
 

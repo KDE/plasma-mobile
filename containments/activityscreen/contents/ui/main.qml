@@ -143,7 +143,16 @@ Item {
     Flickable {
         id: mainFlickable
         anchors.fill: main
-        interactive: contentItem.height>height
+        interactive: contentItem.height>mainFlickable.height
+        PropertyAnimation {
+            id: contentScrollTo0Animation
+            target: mainFlickable
+            properties: "contentY"
+            to: 0
+            duration: 250
+            running: false
+        }
+
         contentWidth: contentItem.width
         contentHeight: contentItem.height
 
@@ -151,6 +160,7 @@ Item {
             id: contentItem
             width: mainFlickable.width
             height: childrenRect.height+availScreenRect.y+20
+
             onClicked: {
                 resourceInstance.uri = ""
                 main.currentIndex = -1

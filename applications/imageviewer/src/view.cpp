@@ -21,6 +21,7 @@
 
 #include "view.h"
 #include "dataenginebindings.h"
+#include "dirmodel.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
@@ -60,6 +61,11 @@ AppView::AppView(const QString &url, QWidget *parent)
     // as startupArguments property
     QVariant a = QVariant(QStringList(url));
     rootContext()->setContextProperty("startupArguments", a);
+    m_dirModel = new DirModel(this);
+    if (!url.isEmpty()) {
+        m_dirModel->setUrl(KUrl(url).upUrl().prettyUrl());
+    }
+    rootContext()->setContextProperty("dirModel", m_dirModel);
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), "org.kde.active.imageviewer", structure);
