@@ -17,22 +17,18 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef RANKINGSCLIENT_H_
-#define RANKINGSCLIENT_H_
+#ifndef DOCUMENTS_P_H_
+#define DOCUMENTS_P_H_
 
-#include <QObject>
-#include <QVariantList>
+#include "Documents.h"
+#include "RecommendationItem.h"
 
-/**
- *
- */
-class RankingsClient: public QObject {
+class DocumentsEnginePrivate: public QObject {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.ActivityManager.RankingsClient")
 
 public:
-    RankingsClient();
-    ~RankingsClient();
+    DocumentsEnginePrivate(DocumentsEngine * parent);
+    ~DocumentsEnginePrivate();
 
 public Q_SLOTS:
     void updated(const QVariantList & data);
@@ -40,9 +36,12 @@ public Q_SLOTS:
     void removed(int position);
     void changed(int position, const QVariantList & item);
 
-private:
-    class Private;
-    Private * const d;
+public:
+    QList<Contour::RecommendationItem> recommendations;
+    DocumentsEngine * const q;
+
 };
 
-#endif // RANKINGSCLIENT_H_
+
+#endif // DOCUMENTS_P_H_
+

@@ -25,6 +25,8 @@
 /**
  *
  */
+class DocumentsEnginePrivate;
+
 class DocumentsEngine: public Contour::RecommendationEngine {
 public:
     DocumentsEngine(QObject * parent = 0, const QVariantList & args = QVariantList());
@@ -34,8 +36,8 @@ public:
     virtual void activate(const QString & id, const QString & action = QString());
 
 private:
-    class Private;
-    Private * const d;
+    DocumentsEnginePrivate * const d;
+    friend class DocumentsEnginePrivate;
 };
 
 #endif // DOCUMENTS_H_

@@ -12,7 +12,7 @@ include_directories(
 
 set(
     contour_recommendationengine_documents_SRCS
-    RankingsClient.cpp
+    # RankingsClient.cpp
     Documents.cpp
     ../../RecommendationEngine.cpp
     ../../RecommendationItem.cpp
@@ -21,7 +21,7 @@ set(
 qt4_add_dbus_adaptor(
     contour_recommendationengine_documents_SRCS
     org.kde.ActivityManager.RankingsClient.xml
-    RankingsClient.h RankingsClient
+    Documents_p.h DocumentsEnginePrivate
     )
 
 kde4_add_plugin(

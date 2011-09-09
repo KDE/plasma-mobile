@@ -18,20 +18,66 @@
  */
 
 #include "Documents.h"
+#include "Documents_p.h"
+#include "rankingsclientadaptor.h"
 
 #include <QList>
+#include <QDBusConnection>
+
 #include <KDebug>
 
-#include "RecommendationItem.h"
+// Private
 
-class DocumentsEngine::Private {
-public:
-    QList<Contour::RecommendationItem> recommendations;
+DocumentsEnginePrivate::DocumentsEnginePrivate(DocumentsEngine * parent)
+    : q(parent)
+{
+    QDBusConnection dbus = QDBusConnection::sessionBus();
+    new RankingsClientAdaptor(this);
+    kDebug() << "registering the client" <<
+    dbus.registerObject("/RankingsClient", this);
 
-};
+    QDBusInterface rankingsservice("org.kde.kactivitymanagerd",
+            "/Rankings", "org.kde.ActivityManager.Rankings");
+
+    kDebug() << "calling registerClient" <<
+    rankingsservice.call("registerClient", "org.kde.Contour", QString(), "nao:Document");
+}
+
+DocumentsEnginePrivate::~DocumentsEnginePrivate()
+{
+}
+
+void DocumentsEnginePrivate::updated(const QVariantList & data)
+{
+    kDebug() << "@@@@@@@@@@@@@@@@@@" << data;
+
+//    Contour::RecommendationItem recommendation;
+//
+//    recommendation.score       = 1.0;
+//    recommendation.title       = "Not implemented yet";
+//    recommendation.description = "Stay tuned";
+//    recommendation.icon        = "preferences-activities";
+//    recommendation.id          = "null";
+
+}
+
+void DocumentsEnginePrivate::inserted(int position, const QVariantList & item)
+{
+}
+
+void DocumentsEnginePrivate::removed(int position)
+{
+}
+
+void DocumentsEnginePrivate::changed(int position, const QVariantList & item)
+{
+}
+
+
+// DocumentsEngine
 
 DocumentsEngine::DocumentsEngine(QObject * parent, const QVariantList & args)
-    : Contour::RecommendationEngine(parent), d(new Private())
+    : Contour::RecommendationEngine(parent), d(new DocumentsEnginePrivate(this))
 {
 }
 
