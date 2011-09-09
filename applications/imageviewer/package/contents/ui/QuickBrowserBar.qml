@@ -60,7 +60,7 @@ Rectangle {
         orientation: ListView.Horizontal
         model: filterModel
 
-        delegate: QImageItem {
+        delegate: Item {
             id: delegate
             z: index==thumbnailsView.currentIndex?200:0
             scale: index==thumbnailsView.currentIndex?1.4:1
@@ -72,15 +72,51 @@ Rectangle {
             }
             width: height*1.6
             height: thumbnailsView.height
-            image: previewSource.data[url]["thumbnail"]
-            Component.onCompleted: {
-                previewSource.connectSource(url)
+            Rectangle {
+                width:index==thumbnailsView.currentIndex?thumbnailImage.width+10:thumbnailImage.width
+                height: index==thumbnailsView.currentIndex?thumbnailImage.height+10:thumbnailImage.height
+                anchors.centerIn: parent
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+                Behavior on height {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
             }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    thumbnailsView.currentIndex = index
-                    viewer.setCurrentIndex(index)
+            QImageItem {
+                id: thumbnailImage
+                anchors.centerIn: parent
+                width: {
+                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
+                            return parent.width
+                        } else {
+                            return parent.height * (nativeWidth/nativeHeight)
+                        }
+                    }
+                height: {
+                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
+                        return parent.width / (nativeWidth/nativeHeight)
+                    } else {
+                        return parent.height
+                    }
+                }
+
+                image: previewSource.data[url]["thumbnail"]
+                Component.onCompleted: {
+                    previewSource.connectSource(url)
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        thumbnailsView.currentIndex = index
+                        viewer.setCurrentIndex(index)
+                    }
                 }
             }
         }
