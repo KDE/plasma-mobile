@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=KWin GLES
+Exec=kwin_gles
+TryExec=kwin_gles
+X-KDE-WindowManagerConfigure=systemsettings
+X-KDE-WindowManagerRestartArgument=--replace
