@@ -32,61 +32,71 @@ Item {
     property alias screenshotPixmap: screenshotItem.pixmap
     property alias wallpaperName: nameText.text
 
-    PlasmaCore.FrameSvgItem {
-        imagePath: "widgets/media-delegate"
-        prefix: "picture"
-
-        Behavior on width {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        Behavior on height {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        anchors.centerIn: parent
-        width: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index?parent.width+5:parent.width-16
-
-        height: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index?parent.height+5:parent.height-16
-
-        QPixmapItem {
-            id: screenshotItem
-            pixmap: screenshot
-            anchors {
-                fill: parent
-                leftMargin: parent.margins.left
-                topMargin: parent.margins.top
-                rightMargin: parent.margins.right
-                bottomMargin: parent.margins.bottom
-            }
-            Rectangle {
-                anchors {
-                    bottom: parent.bottom
-                    bottomMargin: 5
-                    horizontalCenter: parent.horizontalCenter
-                }
-
-                color: Qt.rgba(1,1,1,0.6)
-                radius: 4
-                width: nameText.paintedWidth+10
-                height: nameText.paintedHeight
-                Text {
-                    id: nameText
-                    text: display
-                    anchors.centerIn: parent
-                }
-            }
-
+    Item {
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: nameText.top
         }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                wallpapersList.currentIndex = (wallpapersList.currentPage*wallpapersList.pageSize) + index
+        PlasmaCore.FrameSvgItem {
+            imagePath: "widgets/media-delegate"
+            prefix: "picture"
+
+            Behavior on width {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            Behavior on height {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            anchors.centerIn: parent
+            width: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index?parent.width+5:parent.width-16
+
+            height: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index?parent.height+5:parent.height-16
+
+            QPixmapItem {
+                id: screenshotItem
+                pixmap: screenshot
+                anchors {
+                    fill: parent
+                    leftMargin: parent.margins.left
+                    topMargin: parent.margins.top
+                    rightMargin: parent.margins.right
+                    bottomMargin: parent.margins.bottom
+                }
             }
+        }
+    }
+
+    Text {
+        id: nameText
+        text: display
+
+        anchors {
+            left: parent.left
+            right: parent.right
+            rightMargin: 12
+            leftMargin: 12
+            bottom:parent.bottom
+            bottomMargin: 8
+        }
+        font.pixelSize: 14
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideRight
+        style: Text.Outline
+        styleColor: Qt.rgba(1, 1, 1, 0.6)
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            wallpapersList.currentIndex = (wallpapersList.currentPage*wallpapersList.pageSize) + index
         }
     }
 }

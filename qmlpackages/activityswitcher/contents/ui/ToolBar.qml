@@ -57,6 +57,7 @@ PlasmaCore.FrameSvgItem {
             elementId: "add"
 
             onClicked: {
+                activitySwitcher.state = "Passive"
                 activitySwitcher.newActivityRequested()
             }
         }

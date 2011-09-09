@@ -1,5 +1,5 @@
 /*
-* Copyright 2011 Marco Martin.
+ * Copyright 2011 Marco Martin.
  *
  * This program is licensed under the terms and conditions of the
  * Apache License, version 2.0.  The full text of the Apache License is at 
@@ -17,13 +17,21 @@ Item {
     id: main
     property int minimumWidth: 300
     property int minimumHeight: 400
-      NetworkListModel {
-            id: networkListModel
 
-            Component.onCompleted: {
-                networkListModel.requestScan();
+    NetworkListModel {
+        id: networkListModel
+
+        Component.onCompleted: {
+            networkListModel.requestScan();
+        }
+        onStateChanged: {
+            if (state == "online") {
+                plasmoid.popupIcon = QIcon("network-connect")
+            } else {
+                plasmoid.popupIcon = QIcon("network-disconnect")
             }
         }
+    }
 
     ListView {
        anchors.fill:parent

@@ -56,7 +56,7 @@ History::History(QObject *parent)
     d->currentPage = 0;
     // wait 30 sec before saving to history,
     // transient pages aren't interesting enough
-    d->addHistoryTimer.setInterval(10000);
+    d->addHistoryTimer.setInterval(30000);
     connect(&d->addHistoryTimer, SIGNAL(timeout()), SLOT(recordHistory()));
     connect(d->dirWatch, SIGNAL(dirty(const QString&)), SLOT(loadHistory()));
     connect(d->dirWatch, SIGNAL(created(const QString&)), SLOT(loadHistory()));
@@ -100,18 +100,15 @@ void History::loadHistory()
 
 void History::addPage(const QString &url, const QString &title)
 {
+    kDebug() << "XXX Adding page" << title << url;
     if (url.isEmpty() && title.isEmpty()) {
-        return;
-    }
-    if (d->currentPage && d->currentPage->url() == url && d->currentPage->name() == title) {
-        //kDebug() << "XXX nothing changed" << url << title;
         return;
     }
     // Remove entry from earlier in the history: less clutter
     foreach (QObject* i, d->items) {
         CompletionItem* ci = qobject_cast<CompletionItem*>(i);
         if (ci->url() == url) {
-            //kDebug() << "XXXXX Removing " << ci->name() << " ... " << ci->url();
+            kDebug() << "XXXXX Removing " << ci->name() << " ... " << ci->url();
             d->items.removeAll(i);
         }
     }
@@ -119,7 +116,9 @@ void History::addPage(const QString &url, const QString &title)
     CompletionItem* item = new CompletionItem(title, url, d->icon, this);
     item->setIconName("view-history");
     d->items.append(item);
-    emit dataChanged();
+    while (d->items.count() > 256) {
+        d->items.takeLast();
+    }
 }
 
 void History::visitPage(const QString &url, const QString &title)
@@ -135,10 +134,7 @@ void History::recordHistory()
 {
     //kDebug() << "XXX Recording history!";
     d->addHistoryTimer.stop();
-    d->items.insert(0, d->currentPage);
-    while (d->items.count() > 256) {
-        d->items.takeLast();
-    }
+    addPage(d->currentPage->url(), d->currentPage->name());
     emit dataChanged();
     saveHistory();
 }

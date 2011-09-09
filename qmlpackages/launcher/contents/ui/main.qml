@@ -60,10 +60,13 @@ Item {
         connectedSources: ["Apps"]
         interval: 0
     }
-    PlasmaCore.DataModel {
+    PlasmaCore.SortFilterModel {
         id: appsModel
-        keyRoleFilter: ".*"
-        dataSource: appsSource
+        sourceModel: PlasmaCore.DataModel {
+            keyRoleFilter: ".*"
+            dataSource: appsSource
+        }
+        sortRole: "name"
     }
 
     PlasmaCore.DataSource {
@@ -80,6 +83,35 @@ Item {
 
     MobileComponents.ViewSearch {
         id: searchField
+
+        Item {
+            id: everythingButton
+            x: enabled?parent.width/6:-width-10
+            anchors.verticalCenter: parent.verticalCenter
+            width: everythingPushButton.width
+            height: everythingPushButton.height
+            enabled: false
+
+            PlasmaWidgets.PushButton {
+                id: everythingPushButton
+
+                text: i18n("Show everything")
+
+                onEnabledChanged: NumberAnimation {
+                                    duration: 250
+                                    target: everythingButton
+                                    properties: "x"
+                                    easing.type: Easing.InOutQuad
+                                }
+                onClicked: tagCloud.resetStatus()
+            }
+            Behavior on x {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
 
         anchors {
             left: parent.left

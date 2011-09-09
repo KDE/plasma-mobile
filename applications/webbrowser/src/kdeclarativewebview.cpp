@@ -19,6 +19,7 @@
 
 
 #include "kdeclarativewebview.h"
+#include "networkaccessmanager.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QEvent>
@@ -295,13 +296,8 @@ void KDeclarativeWebView::init()
     d->view = new GraphicsWebView(this);
     d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
-#ifndef NO_KIO
-    KIO::AccessManager *access = new KIO::AccessManager( this );
-    wp->setNetworkAccessManager(access);
-#endif
     KWebPage* kwp = qobject_cast<KWebPage*>(wp);
     if (kwp) {
-        kDebug() << "KWebPage found";
         WId wid = KWindowSystem::activeWindow();
         d->wallet = new KWebWallet(this, wid);
         kwp->setWallet(d->wallet);
@@ -313,6 +309,10 @@ void KDeclarativeWebView::init()
 
     wp->setForwardUnsupportedContent(true);
     setPage(wp);
+#ifndef NO_KIO
+    KIO::AccessManager *access = new NetworkAccessManager(page());
+    wp->setNetworkAccessManager(access);
+#endif
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
@@ -321,10 +321,7 @@ void KDeclarativeWebView::init()
 void KDeclarativeWebView::componentComplete()
 {
     QDeclarativeItem::componentComplete();
-#ifndef NO_KIO
-    KIO::AccessManager *access = new KIO::AccessManager( this );
-    page()->setNetworkAccessManager(access);
-#else
+#ifdef NO_KIO
     page()->setNetworkAccessManager(qmlEngine(this)->networkAccessManager());
 #endif
 

@@ -18,6 +18,8 @@
  ***************************************************************************/
 
 #include "declarativepanel.h"
+#include "plasmaapp.h"
+#include "panelshadows.h"
 
 #include <QGraphicsView>
 #include <QDeclarativeItem>
@@ -50,6 +52,7 @@ PanelProxy::PanelProxy(QObject *parent)
     unsigned long state = NET::Sticky | NET::StaysOnTop | NET::KeepAbove | NET::SkipTaskbar | NET::SkipPager;
     KWindowSystem::setState(m_panel->effectiveWinId(), state);
     KWindowSystem::setType(m_panel->effectiveWinId(), NET::Dock);
+    PlasmaApp::self()->panelShadows()->addWindow(m_panel);
 }
 
 PanelProxy::~PanelProxy()

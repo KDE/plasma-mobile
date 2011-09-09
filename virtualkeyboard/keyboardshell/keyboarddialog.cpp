@@ -37,6 +37,7 @@
 #include <Plasma/PopupApplet>
 #include <Plasma/Corona>
 #include <Plasma/Containment>
+#include <Plasma/WindowEffects>
 
 KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *containment, const QString &pluginName, int appletId, const QVariantList &appletArgs, QWidget *parent)
     : Plasma::Dialog(parent),
@@ -44,7 +45,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
       m_containment(0),
       m_corona(corona),
       m_direction(Plasma::Up),
-      m_location(Plasma::BottomEdge),
+      m_location(Plasma::Floating),
       m_rotation(0)
 {
     m_closeButton = new QPushButton(this);
@@ -98,7 +99,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     setFixedWidth(screenGeom.width());
 
     hide();
-    updateGeometry();
+    setLocation(Plasma::BottomEdge);
 }
 
 KeyboardDialog::~KeyboardDialog()
@@ -124,7 +125,7 @@ Plasma::Applet *KeyboardDialog::applet()
 
 Plasma::Location KeyboardDialog::location() const
 {
-    return m_containment->location();
+    return m_location;
 }
 
 Plasma::FormFactor KeyboardDialog::formFactor() const
@@ -244,6 +245,9 @@ void KeyboardDialog::setLocation(const Plasma::Location location)
     }
 
     updateGeometry();
+    if (isVisible()) {
+        Plasma::WindowEffects::slideWindow(this, m_location);
+    }
 }
 
 void KeyboardDialog::setDirection(const Plasma::Direction direction)

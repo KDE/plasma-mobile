@@ -54,43 +54,40 @@ ItemGroup {
         }
     }
 
-    PlasmaCore.SvgItem {
+    MobileComponents.ActionButton {
         svg: configIconsSvg
         elementId: "close"
-        width: Math.max(16, plasmoidGroup.titleHeight - 2)
-        height: width
+        iconSize: Math.max(16, plasmoidGroup.titleHeight - 2)
+        backgroundVisible: false
+        visible: action.enabled
+        action: applet.action("remove")
         anchors {
             right: plasmoidGroup.contents.right
             bottom: plasmoidGroup.contents.top
             bottomMargin: 4
         }
-        MouseArea {
-            anchors.fill: parent
-            anchors.margins: -6
-            onClicked: {
-                applet.action("remove").trigger()
-            }
+        Component.onCompleted: {
+            action.enabled = true
         }
     }
 
-    PlasmaCore.SvgItem {
+    MobileComponents.ActionButton {
         svg: configIconsSvg
         elementId: "configure"
-        width: Math.max(16, plasmoidGroup.titleHeight - 2)
-        height: width
+        iconSize: Math.max(16, plasmoidGroup.titleHeight - 2)
+        backgroundVisible: false
+        visible: action.enabled
+        action: applet.action("configure")
         anchors {
             left: plasmoidGroup.contents.left
             bottom: plasmoidGroup.contents.top
             bottomMargin: 4
         }
-        MouseArea {
-            anchors.fill: parent
-            anchors.margins: -6
-            onClicked: {
-                applet.action("configure").trigger()
-            }
+        Component.onCompleted: {
+            action.enabled = true
         }
     }
+
 
     //FIXME: this delay is becuase backgroundHints gets updated only after a while in qml applets
     Timer {

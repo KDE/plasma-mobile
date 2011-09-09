@@ -30,6 +30,7 @@
 #include "widgetsexplorer/mobilewidgetsexplorer.h"
 #include "activityconfiguration/activityconfiguration.h"
 #include "declarativepanel.h"
+#include "panelshadows.h"
 
 #include <unistd.h>
 
@@ -80,6 +81,7 @@ PlasmaApp::PlasmaApp()
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
+      m_panelShadows(0),
       m_isDesktop(false)
 {
     KGlobal::locale()->insertCatalog("libplasma");
@@ -172,6 +174,15 @@ QList<Plasma::Containment *> PlasmaApp::containments() const
 QList<Plasma::Containment *> PlasmaApp::panelContainments() const
 {
     return m_panelContainments.values();
+}
+
+PanelShadows *PlasmaApp::panelShadows()
+{
+    if (!m_panelShadows) {
+        m_panelShadows = new PanelShadows(this);
+    }
+
+    return m_panelShadows;
 }
 
 void PlasmaApp::cleanup()
@@ -331,9 +342,9 @@ Plasma::Corona* PlasmaApp::corona()
     return m_corona;
 }
 
-bool PlasmaApp::hasComposite()
+QSize PlasmaApp::defaultScreenSize()
 {
-    return KWindowSystem::compositingActive();
+    return QSize(1366, 768);
 }
 
 void PlasmaApp::notifyStartup(bool completed)

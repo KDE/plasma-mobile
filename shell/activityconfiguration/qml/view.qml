@@ -95,10 +95,9 @@ Rectangle {
 
     PlasmaCore.FrameSvgItem {
         id: frame
-        anchors.centerIn: parent
-        //FIXME: why +20?
-        width: parent.width-100
-        height: parent.height/1.4
+        anchors.fill: parent
+        anchors.margins: 50
+
         imagePath: "dialogs/background"
         scale: 0
 
@@ -131,7 +130,7 @@ Rectangle {
             }
 
             property int delegateWidth: 148
-            property int delegateHeight: delegateWidth/1.6
+            property int delegateHeight: 130
             anchors {
                 top: nameRow.bottom
                 left: parent.left

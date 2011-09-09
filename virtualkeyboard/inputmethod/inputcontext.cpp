@@ -38,7 +38,7 @@ InputContext::~InputContext()
 bool InputContext::filterEvent(const QEvent* event)
 {
     if (event->type() == QEvent::RequestSoftwareInputPanel) {
-        qDebug()<<"Show on screen keyboard";
+        //qDebug()<<"Show on screen keyboard";
         m_keyboard->call("show");
         return true;
     } else if (event->type() == QEvent::CloseSoftwareInputPanel) {

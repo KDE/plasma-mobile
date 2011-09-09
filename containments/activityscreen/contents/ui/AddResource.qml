@@ -117,10 +117,13 @@ Rectangle {
         connectedSources: ["Apps"]
         interval: 0
     }
-    PlasmaCore.DataModel {
+    PlasmaCore.SortFilterModel {
         id: appsModel
-        keyRoleFilter: ".*"
-        dataSource: appsSource
+        sourceModel: PlasmaCore.DataModel {
+            keyRoleFilter: ".*"
+            dataSource: appsSource
+        }
+        sortRole: "name"
     }
 
     PlasmaCore.DataSource {

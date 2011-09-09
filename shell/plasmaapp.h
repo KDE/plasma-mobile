@@ -39,6 +39,7 @@ class MobView;
 class MobCorona;
 class MobileWidgetsExplorer;
 class MobPluginLoader;
+class PanelShadows;
 
 namespace Plasma
 {
@@ -56,13 +57,15 @@ public:
     ~PlasmaApp();
 
     static PlasmaApp* self();
-    static bool hasComposite();
+    static QSize defaultScreenSize();
 
     void notifyStartup(bool completed);
     Plasma::Corona* corona();
 
     QList<Plasma::Containment *> containments() const;
     QList<Plasma::Containment *> panelContainments() const;
+
+    PanelShadows *panelShadows();
 
 protected:
     void setIsDesktop(bool isDesktop);
@@ -104,6 +107,7 @@ private:
     QHash<int, Plasma::Containment *> m_panelContainments;
 
     MobPluginLoader *m_pluginLoader;
+    PanelShadows *m_panelShadows;
 
     QString m_homeScreenPath;
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
