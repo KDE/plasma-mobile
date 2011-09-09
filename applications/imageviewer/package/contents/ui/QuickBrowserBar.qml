@@ -24,6 +24,7 @@ import org.kde.qtextracomponents 0.1
 
 Rectangle {
     id: quickBrowserBar
+    property alias model: thumbnailsView.model
 
     function setCurrentIndex(index)
     {
@@ -58,7 +59,6 @@ Rectangle {
             topMargin: 1
         }
         orientation: ListView.Horizontal
-        model: filterModel
 
         delegate: Item {
             id: delegate

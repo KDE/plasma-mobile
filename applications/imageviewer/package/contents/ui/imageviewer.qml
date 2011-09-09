@@ -60,8 +60,11 @@ Image {
             path = "file://"+path
         }
 
+        //is in Nepomuk
         for (prop in metadataSource.data["ResourcesOfType:Image"]) {
             if (metadataSource.data["ResourcesOfType:Image"][prop]["url"] == path) {
+                fullList.model = filterModel
+                quickBrowserBar.model = filterModel
                 fullList.positionViewAtIndex(i, ListView.Center)
                 fullList.currentIndex = i
                 spareDelegate.visible = false
@@ -72,11 +75,16 @@ Image {
             ++i
         }
 
-        spareDelegate.source = path
-        resourceInstance.uri = path
-        spareDelegate.visible = true
-        fullList.visible = false
+        //is in dirModel
+        fullList.model = dirModel
+        quickBrowserBar.model = dirModel
+        var i = dirModel.indexForUrl(path)
+        fullList.positionViewAtIndex(i, ListView.Center)
+        fullList.currentIndex = i
+        spareDelegate.visible = false
+        fullList.visible = true
         imageViewer.state = "image"
+        return
     }
 
     Timer {
@@ -115,6 +123,7 @@ Image {
 
     QuickBrowserBar {
         id: quickBrowserBar
+        model: filterModel
     }
 
     MobileComponents.IconGrid {
