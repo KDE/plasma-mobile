@@ -27,6 +27,7 @@ class DirModel : public KDirModel
 {
     Q_OBJECT
     Q_PROPERTY(QString url READ url WRITE setUrl)
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
     enum Roles {
@@ -41,8 +42,12 @@ public:
     QString url() const;
 
     QVariant data(const QModelIndex &index, int role) const;
+    int count() const {return rowCount();}
 
     Q_INVOKABLE int indexForUrl(const QString &url) const;
+
+Q_SIGNALS:
+    void countChanged();
 
 private:
     QStringList m_mimeTypes;

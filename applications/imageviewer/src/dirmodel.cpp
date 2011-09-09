@@ -41,6 +41,13 @@ DirModel::DirModel(QObject *parent)
     roleNames[UrlRole] = "url";
     roleNames[MimeTypeRole] = "mimetype";
     setRoleNames(roleNames);
+
+    connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+            this, SIGNAL(countChanged()));
+    connect(this, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+            this, SIGNAL(countChanged()));
+    connect(this, SIGNAL(modelReset()),
+            this, SIGNAL(countChanged()));
 }
 
 DirModel::~DirModel()
