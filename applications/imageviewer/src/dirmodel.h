@@ -26,7 +26,7 @@
 class DirModel : public KDirModel
 {
     Q_OBJECT
-    Q_PROPERTY(QString url READ url WRITE setUrl)
+    Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
@@ -48,6 +48,7 @@ public:
 
 Q_SIGNALS:
     void countChanged();
+    void urlChanged();
 
 private:
     QStringList m_mimeTypes;

@@ -38,8 +38,10 @@ DirModel::DirModel(QObject *parent)
     dirLister()->setMimeFilter(m_mimeTypes);
 
     QHash<int, QByteArray>roleNames;
+    roleNames[Qt::DisplayRole] = "display";
+    roleNames[Qt::DecorationRole] = "decoration";
     roleNames[UrlRole] = "url";
-    roleNames[MimeTypeRole] = "mimetype";
+    roleNames[MimeTypeRole] = "mimeType";
     setRoleNames(roleNames);
 
     connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
@@ -61,7 +63,12 @@ QString DirModel::url() const
 
 void DirModel::setUrl(const QString& url)
 {
+    if (dirLister()->url().path() == url) {
+        return;
+    }
+
     dirLister()->openUrl(url);
+    emit urlChanged();
 }
 
 int DirModel::indexForUrl(const QString &url) const

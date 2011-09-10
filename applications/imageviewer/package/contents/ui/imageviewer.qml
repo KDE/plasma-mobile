@@ -140,6 +140,7 @@ Image {
         delegateHeight: 120
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
+            className: model["className"]?model["className"]:"Image"
             width: 130
             height: 120
             infoLabelVisible: false
@@ -150,7 +151,12 @@ Image {
             }
 
             onClicked: {
-                loadImage(model["url"])
+                if (mimeType == "inode/directory") {
+                    dirModel.url = model["url"]
+                    resultsGrid.model = dirModel
+                } else {
+                    loadImage(model["url"])
+                }
             }
         }
     }
