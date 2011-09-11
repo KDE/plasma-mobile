@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=KWin GLES
+Name[pt]=KWin GLES
+Name[sv]=Kwin GLES
+Name[uk]=KWin з GLES
+Name[x-test]=xxKWin GLESxx
 Exec=kwin_gles
 TryExec=kwin_gles
 X-KDE-WindowManagerConfigure=systemsettings
