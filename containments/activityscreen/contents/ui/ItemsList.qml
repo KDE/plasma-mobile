@@ -70,7 +70,12 @@ Item {
             }
 
             onClicked: {
-                plasmoid.openUrl(String(model["url"]))
+                //Contact?
+                if (model["hasEmailAddress"]) {
+                    plasmoid.openUrl(String(model["hasEmailAddress"]))
+                } else {
+                    plasmoid.openUrl(String(model["url"]))
+                }
             }
         }
     }
