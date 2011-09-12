@@ -144,6 +144,7 @@ Image {
             width: 130
             height: 120
             infoLabelVisible: false
+            property string label: model["label"]?model["label"]:model["display"]
 
             onPressed: {
                 resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]

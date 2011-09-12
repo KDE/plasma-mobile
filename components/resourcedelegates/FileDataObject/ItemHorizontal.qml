@@ -86,7 +86,7 @@ Item {
 
         Text {
             id: previewLabel
-            text: model["label"]?model["label"]:model["display"]
+            text: label
 
             font.pixelSize: 14
             //wrapMode: Text.Wrap
