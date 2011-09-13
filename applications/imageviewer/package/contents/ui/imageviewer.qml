@@ -146,7 +146,7 @@ Image {
             infoLabelVisible: false
             property string label: model["label"]?model["label"]:model["display"]
 
-            onPressed: {
+            onPressAndHold: {
                 resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
                 resourceInstance.title = model["label"]
             }

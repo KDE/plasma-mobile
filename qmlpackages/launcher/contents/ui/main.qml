@@ -17,7 +17,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
@@ -134,6 +134,8 @@ Item {
         delegateWidth: 128
         delegateHeight: 100
         model: (searchField.searchQuery == "")?appsModel:runnerModel
+        onCurrentPageChanged: resourceInstance.uri = ""
+
         delegate: Component {
             MobileComponents.ResourceDelegate {
                 width: appGrid.delegateWidth
@@ -142,7 +144,7 @@ Item {
                 genericClassName: "FileDataObject"
                 property string label: model["name"]?model["name"]:model["text"]
                 property string mimeType: model["mimeType"]?model["mimeType"]:"application/x-desktop"
-                onPressed: {
+                onPressAndHold: {
                     resourceInstance.uri = model["resourceUri"]?model["resourceUri"]:model["entryPath"]
                     resourceInstance.title = model["name"]?model["name"]:model["text"]
                 }

@@ -62,7 +62,7 @@ Item {
             height: itemsList.height
             infoLabelVisible: false
 
-            onPressed: {
+            onPressAndHold: {
                 resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
                 resourceInstance.title = model["label"]
                 main.currentIndex = index
