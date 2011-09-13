@@ -60,7 +60,7 @@ Item {
         objectName: "appsView"
         pressDelay: 200
         cacheBuffer: width*2
-
+        highlightMoveDuration: 250
         anchors.fill: parent
 
 
@@ -147,8 +147,11 @@ Item {
                     }
 
                     MouseArea {
-                        width: 20; height: 20
-                        anchors.centerIn: parent
+                        anchors {
+                            fill: parent
+                            margins: -10
+                        }
+
                         onClicked: {
                             //animate only if near
                             if (Math.abs(appsView.currentIndex - index) > 1) {
