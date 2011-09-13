@@ -72,7 +72,7 @@ Item {
         svg: iconsSvg
         iconSize: 22
         elementId: "close"
-        visible: actionClose
+        visible: model["actionClose"]&&(model["className"] != shellName)
 
         anchors {
             top: parent.top
@@ -85,12 +85,5 @@ Item {
 
             service.startOperationCall(operation)
         }
-        Component.onCompleted: {
-            if (model["className"] == shellName) {
-                visible = false;
-                homeScreenThumbnail.visible = true
-            }
-        }
-
     }
 }
