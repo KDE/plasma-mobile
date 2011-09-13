@@ -31,7 +31,10 @@ kde4_add_plugin(
 
 target_link_libraries(
    contour_recommendationengine_documents
+   ${QT_QTGUI_LIBRARY}
    ${KDE4_KDECORE_LIBS}
+   ${NEPOMUK_LIBRARIES}
+   ${SOPRANO_LIBRARIES}
    )
 
 

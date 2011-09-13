@@ -101,3 +101,9 @@ const QDBusArgument & operator >> (const QDBusArgument & arg, Contour::Recommend
 
     return arg;
 }
+
+QDebug operator << (QDebug dbg, const Contour::RecommendationItem & r)
+{
+    dbg << "Recommendation(" << r.score << r.id << r.title << r.description << r.icon << ")";
+    return dbg.space();
+}

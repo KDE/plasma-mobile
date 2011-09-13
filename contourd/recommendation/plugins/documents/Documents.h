@@ -28,12 +28,19 @@
 class DocumentsEnginePrivate;
 
 class DocumentsEngine: public Contour::RecommendationEngine {
+    Q_OBJECT
+
 public:
     DocumentsEngine(QObject * parent = 0, const QVariantList & args = QVariantList());
     virtual ~DocumentsEngine();
 
     virtual void init();
     virtual void activate(const QString & id, const QString & action = QString());
+
+Q_SIGNALS:
+    // note that you need to pass sorted items to
+    // this method
+    void recommendationsUpdated(const QList<Contour::RecommendationItem> & recommendations);
 
 private:
     DocumentsEnginePrivate * const d;

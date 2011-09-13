@@ -23,6 +23,7 @@
 #include <QObject>
 #include <QString>
 #include <QtDBus/QDBusArgument>
+#include <QDebug>
 
 namespace Contour {
 
@@ -49,5 +50,7 @@ Q_DECLARE_METATYPE(QList<Contour::RecommendationItem>)
 
 QDBusArgument & operator << (QDBusArgument & arg, const Contour::RecommendationItem);
 const QDBusArgument & operator >> (const QDBusArgument & arg, Contour::RecommendationItem & rec);
+
+QDebug operator << (QDebug dbg, const Contour::RecommendationItem & r);
 
 #endif // RECOMMENDATION_ITEM_H_

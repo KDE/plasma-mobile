@@ -23,8 +23,12 @@
 
 #include <QList>
 #include <QDBusConnection>
+#include <QDesktopServices>
+
+#include <Nepomuk/Resource>
 
 #include <KDebug>
+#include <KUrl>
 
 // Private
 
@@ -50,14 +54,30 @@ DocumentsEnginePrivate::~DocumentsEnginePrivate()
 void DocumentsEnginePrivate::updated(const QVariantList & data)
 {
     kDebug() << "@@@@@@@@@@@@@@@@@@" << data;
+    recommendations.clear();
 
-//    Contour::RecommendationItem recommendation;
-//
-//    recommendation.score       = 1.0;
-//    recommendation.title       = "Not implemented yet";
-//    recommendation.description = "Stay tuned";
-//    recommendation.icon        = "preferences-activities";
-//    recommendation.id          = "null";
+    double score = 1.0;
+
+    foreach (const QVariant & item, data) {
+        Nepomuk::Resource resource(KUrl(item.toString()));
+
+        Contour::RecommendationItem recommendation;
+
+        recommendation.score       = score;
+        recommendation.id          = item.toString();
+        score /= 2;
+
+        recommendation.title       = resource.genericLabel();
+        recommendation.description = "Stay tuned";
+        recommendation.icon        = "preferences-activities";
+
+        kDebug() << recommendation;
+
+        recommendations << recommendation;
+
+    }
+
+    q->recommendationsUpdated(recommendations);
 
 }
 
@@ -105,6 +125,7 @@ void DocumentsEngine::init()
 
 void DocumentsEngine::activate(const QString & id, const QString & action)
 {
+    QDesktopServices::openUrl(KUrl(id));
 
 }
 
