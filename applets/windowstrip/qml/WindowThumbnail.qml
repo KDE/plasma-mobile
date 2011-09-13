@@ -72,7 +72,7 @@ Item {
         svg: iconsSvg
         iconSize: 22
         elementId: "close"
-        visible: model["actionClose"]&&(model["className"] != shellName)
+        visible: model["actionClose"] && (model["className"] != shellName)
 
         anchors {
             top: parent.top

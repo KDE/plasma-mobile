@@ -87,12 +87,7 @@ Item {
                         bottom: parent.bottom
                     }
                     property int orientation: ListView.Horizontal
-                    move: Transition {
-                        NumberAnimation {
-                            properties: "x,y"
-                            duration: 150
-                        }
-                    }
+
                     Repeater {
                         id: iconRepeater
                         property int columns: Math.min(count, Math.floor(appsView.width/main.delegateWidth))
