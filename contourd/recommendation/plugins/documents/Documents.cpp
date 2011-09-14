@@ -26,9 +26,14 @@
 #include <QDesktopServices>
 
 #include <Nepomuk/Resource>
+#include <Nepomuk/Variant>
 
 #include <KDebug>
 #include <KUrl>
+#include <KFileItem>
+
+#include "nfo.h"
+#include "nie.h"
 
 // Private
 
@@ -61,6 +66,8 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
     foreach (const QVariant & item, data) {
         Nepomuk::Resource resource(KUrl(item.toString()));
 
+        if (!resource.hasType(Nepomuk::Vocabulary::NFO::FileDataObject())) continue;
+
         Contour::RecommendationItem recommendation;
 
         recommendation.score       = score;
@@ -68,12 +75,20 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
         score /= 2;
 
         recommendation.title       = resource.genericLabel();
-        recommendation.description = "Stay tuned";
-        recommendation.icon        = "preferences-activities";
+        recommendation.description = i18n("Open in the current activity");
+        recommendation.icon        = resource.genericIcon();
+
+        if (recommendation.icon.isEmpty()) {
+            KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown,
+                    KUrl(resource.property(Nepomuk::Vocabulary::NIE::url()).toString()));
+            recommendation.icon = fileItem.iconName();
+        }
 
         kDebug() << recommendation;
 
         recommendations << recommendation;
+
+        if (recommendations.size() >= 3) break;
 
     }
 

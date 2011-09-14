@@ -18,6 +18,18 @@ set(
     ../../RecommendationItem.cpp
     )
 
+soprano_add_ontology(
+    contour_recommendationengine_documents_SRCS
+    ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
+    "NFO" "Nepomuk::Vocabulary" "trig"
+    )
+
+soprano_add_ontology(
+    contour_recommendationengine_documents_SRCS
+    ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nie.trig
+    "NIE" "Nepomuk::Vocabulary" "trig"
+    )
+
 qt4_add_dbus_adaptor(
     contour_recommendationengine_documents_SRCS
     org.kde.ActivityManager.RankingsClient.xml
@@ -33,6 +45,7 @@ target_link_libraries(
    contour_recommendationengine_documents
    ${QT_QTGUI_LIBRARY}
    ${KDE4_KDECORE_LIBS}
+   ${KDE4_KFILE_LIBS}
    ${NEPOMUK_LIBRARIES}
    ${SOPRANO_LIBRARIES}
    )
