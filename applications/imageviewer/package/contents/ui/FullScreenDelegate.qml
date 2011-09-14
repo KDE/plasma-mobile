@@ -66,12 +66,76 @@ Flickable {
             Image {
                 id: mainImage
 
+                asynchronous: true
                 anchors.centerIn: parent
-                Component.onCompleted: {
-                    if (sourceSize.width < sourceSize.height) {
-                        mainImage.scale = Math.min(1, mainFlickable.height/sourceSize.height)
-                    } else {
-                        mainImage.scale = Math.min(1, mainFlickable.width/sourceSize.width)
+                onStatusChanged: {
+                    if (status != Image.Ready) {
+                        return
+                    }
+
+                    loadingText.visible = false
+                    mainImage.scale = Math.min(1, mainFlickable.height/(scale*height))
+                    mainImage.scale = Math.min(scale, Math.min(1, mainFlickable.width/(scale*width)))
+ 
+                    if (mainImage.width > mainImage.height && mainImage.width > mainFlickable.width) {
+                        mainImage.sourceSize.width = mainFlickable.width
+                        mainImage.sourceSize.height = 0
+                    }
+                    if (mainImage.height > mainImage.width && mainImage.height > mainFlickable.height) {
+                        mainImage.sourceSize.width = 0
+                        mainImage.sourceSize.height = mainFlickable.height
+                    }
+                }
+            }
+            Text {
+                id: loadingText
+                font.pointSize: 18
+                anchors.centerIn: mainImage
+                text: i18n("Loading...")
+                color: "gray"
+            }
+            Rectangle {
+                color: "gray"
+                width: 10
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                }
+                opacity: (imageViewer.state == "image+toolbar" && mainFlickable.contentWidth <= mainFlickable.width)?0.7:0
+                Rectangle {
+                    width: 8
+                    height: 8
+                    smooth: true
+                    radius: 5
+                    anchors.centerIn: parent
+                }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            }
+            Rectangle {
+                color: "gray"
+                width: 10
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                    right: parent.right
+                }
+                opacity: (imageViewer.state == "image+toolbar" && mainFlickable.contentWidth <= mainFlickable.width)?0.7:0
+                Rectangle {
+                    width: 8
+                    height: 8
+                    smooth: true
+                    radius: 5
+                    anchors.centerIn: parent
+                }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
                     }
                 }
             }
