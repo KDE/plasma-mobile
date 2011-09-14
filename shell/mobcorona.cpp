@@ -92,12 +92,6 @@ void MobCorona::init()
         return;
     }
 
-    Plasma::ContainmentActionsPluginsConfig desktopPlugins;
-    desktopPlugins.addPlugin(Qt::NoModifier, Qt::Vertical, "switchdesktop");
-    desktopPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
-    Plasma::ContainmentActionsPluginsConfig panelPlugins;
-    panelPlugins.addPlugin(Qt::NoModifier, Qt::RightButton, "contextmenu");
-
     KConfigGroup cg(defaultConfig());
     if (cg.isValid()) {
         cg = KConfigGroup(&cg, "ContainmentDefaults");
@@ -107,10 +101,6 @@ void MobCorona::init()
     } else {
         setDefaultContainmentPlugin(DEFAUL_CONTAINMENT);
     }
-
-    setContainmentActionsDefaults(Plasma::Containment::DesktopContainment, desktopPlugins);
-    setContainmentActionsDefaults(Plasma::Containment::PanelContainment, panelPlugins);
-    setContainmentActionsDefaults(Plasma::Containment::CustomPanelContainment, panelPlugins);
 
     enableAction("lock widgets", false);
 
