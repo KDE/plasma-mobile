@@ -33,23 +33,51 @@ Flickable {
     property alias source: mainImage.source
     property string label: model["label"]
 
-    NumberAnimation {
+    ParallelAnimation {
         id: zoomAnim
-        duration: 250
-        easing.type: Easing.InOutQuad
-        target: mainImage
-        property: "scale"
+        function zoom(factor)
+        {
+            if (factor < 1 && mainImage.scale < 0.2) {
+                return
+            } else if (factor > 1 && mainImage.scale > 8) {
+                return
+            }
+
+            contentXAnim.to = Math.max(0, Math.min(mainFlickable.contentWidth-mainFlickable.width, (mainFlickable.contentX * factor)))
+            contentYAnim.to = Math.max(0, Math.min(mainFlickable.contentHeight-mainFlickable.height, (mainFlickable.contentY * factor)))
+            scaleAnim.to = mainImage.scale * factor
+            zoomAnim.running = true
+        }
+        NumberAnimation {
+            id: scaleAnim
+            duration: 250
+            easing.type: Easing.InOutQuad
+            target: mainImage
+            property: "scale"
+        }
+        NumberAnimation {
+            id: contentXAnim
+            duration: 250
+            easing.type: Easing.InOutQuad
+            target: mainFlickable
+            property: "contentX"
+        }
+        NumberAnimation {
+            id: contentYAnim
+            duration: 250
+            easing.type: Easing.InOutQuad
+            target: mainFlickable
+            property: "contentY"
+        }
     }
 
     Connections {
         target: toolbar
         onZoomIn: {
-            zoomAnim.to = mainImage.scale * 1.4
-            zoomAnim.running = true
+            zoomAnim.zoom(1.4)
         }
         onZoomOut: {
-            zoomAnim.to = mainImage.scale * 0.6
-            zoomAnim.running = true
+            zoomAnim.zoom(0.6)
         }
     }
 
