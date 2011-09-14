@@ -37,4 +37,12 @@ MobileComponents.AppletContainer {
     onMinimumWidthChanged: {
         plasmoidContainer.width = Math.max(height, plasmoidContainer.minimumWidth)
     }
+    MouseArea {
+        anchors.fill:parent
+        anchors.margins: -50
+        onClicked: {
+            plasmoidContainer.width = 200//Math.max(height, plasmoidContainer.minimumWidth)
+            applet.width = 200
+        }
+    }
 }

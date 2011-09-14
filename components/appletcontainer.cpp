@@ -55,14 +55,15 @@ void AppletContainer::setApplet(QGraphicsWidget *widget)
         disconnect(m_applet.data(), 0, this, 0);
         m_applet.data()->setParentItem(parentItem());
     }
-    applet->setParentItem(this);
-    applet->setGeometry(0, 0, qMax((qreal)16, width()), qMax((qreal)16, height()));
-    applet->setFlag(QGraphicsItem::ItemIsMovable, false);
+
+    m_applet = applet;
 
     connect(applet, SIGNAL(sizeHintChanged(Qt::SizeHint)), this, SLOT(sizeHintChanged(Qt::SizeHint)));
     connect(applet, SIGNAL(newStatus(Plasma::ItemStatus)), this, SIGNAL(statusChanged()));
 
-    m_applet = applet;
+    applet->setParentItem(this);
+    applet->setGeometry(0, 0, qMax((qreal)16, width()), qMax((qreal)16, height()));
+    applet->setFlag(QGraphicsItem::ItemIsMovable, false);
 
     emit appletChanged(widget);
     emit statusChanged();
