@@ -140,7 +140,9 @@ void DocumentsEngine::init()
 
 void DocumentsEngine::activate(const QString & id, const QString & action)
 {
-    QDesktopServices::openUrl(KUrl(id));
+    // TODO: Add isRelated url -> activity
+
+    QDesktopServices::openUrl(url);
 
 }
 
