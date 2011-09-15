@@ -48,8 +48,7 @@ DocumentsEnginePrivate::DocumentsEnginePrivate(DocumentsEngine * parent)
     QDBusInterface rankingsservice("org.kde.kactivitymanagerd",
             "/Rankings", "org.kde.ActivityManager.Rankings");
 
-    kDebug() << "calling registerClient" <<
-    rankingsservice.call("registerClient", "org.kde.Contour", QString(), "nao:Document");
+    rankingsservice.asyncCall("registerClient", "org.kde.Contour", QString(), "nao:Document");
 }
 
 DocumentsEnginePrivate::~DocumentsEnginePrivate()
