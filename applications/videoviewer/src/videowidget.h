@@ -43,6 +43,12 @@ public Q_SLOTS:
 
     QString PlaybackStatus() const;
 
+protected:
+    void hideEvent(QHideEvent * event);
+
+private Q_SLOTS:
+    void toggleControls();
+
 private:
     VideoWidget();
 

@@ -46,9 +46,9 @@ VideoViewer::VideoViewer(const QString &url)
 
     connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
 
-    // VideoWidget::self()->setParent(this);
-    VideoWidget::self()->move(0, 0);
     VideoWidget::self()->hide();
+    VideoWidget::self()->resize(size());
+    VideoWidget::self()->move(pos());
 }
 
 VideoViewer::~VideoViewer()
@@ -59,6 +59,11 @@ VideoViewer::~VideoViewer()
 void VideoViewer::resizeEvent(QResizeEvent * event)
 {
     VideoWidget::self()->resize(event->size());
+}
+
+void VideoViewer::moveEvent(QMoveEvent * event)
+{
+    VideoWidget::self()->move(event->pos());
 }
 
 KConfigGroup VideoViewer::config(const QString &group)

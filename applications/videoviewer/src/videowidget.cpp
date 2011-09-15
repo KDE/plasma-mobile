@@ -28,6 +28,9 @@
 #include <Phonon/VideoWidget>
 #include <Phonon/AudioOutput>
 
+#include <KWindowSystem>
+#include <Plasma/WindowEffects>
+
 #include "ui_videowindow.h"
 
 class VideoWidget::Private: public Ui::VideoWindowBase {
@@ -81,12 +84,20 @@ VideoWidget::VideoWidget()
             this, SLOT(Stop()));
 
     d->buttonIcon->setIcon(QIcon::fromTheme("active-video-viewer"));
-    d->buttonIcon->setIconSize(QSize(48, 48));
+    d->buttonIcon->setIconSize(QSize(64, 64));
+
+    connect(d->videoWidget, SIGNAL(clicked()),
+            this, SLOT(toggleControls()));
 }
 
 VideoWidget::~VideoWidget()
 {
     delete d;
+}
+
+void VideoWidget::toggleControls()
+{
+    d->panelControls->setVisible(!d->panelControls->isVisible());
 }
 
 void VideoWidget::OpenUri(const QString & uri)
@@ -102,17 +113,29 @@ void VideoWidget::Pause()
 
 void VideoWidget::Play()
 {
-    show();
+    if (!isVisible()) {
+        show();
+
+        if (KWindowSystem::compositingActive()) {
+            Plasma::WindowEffects::slideWindow(this, Plasma::BottomEdge);
+        }
+
+    }
+
     d->mediaObject->play();
 }
 
 void VideoWidget::Stop()
 {
-    d->mediaObject->stop();
     hide();
 }
 
 QString VideoWidget::PlaybackStatus() const
 {
     return QString();
+}
+
+void VideoWidget::hideEvent(QHideEvent * event)
+{
+    d->mediaObject->stop();
 }

@@ -44,6 +44,8 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent * event);
+    void moveEvent(QMoveEvent * event);
+
 
 private:
     AppView *m_widget;
