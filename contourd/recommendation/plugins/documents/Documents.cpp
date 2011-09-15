@@ -123,18 +123,6 @@ DocumentsEngine::~DocumentsEngine()
 
 void DocumentsEngine::init()
 {
-    kDebug() << "We are going to work";
-
-    Contour::RecommendationItem recommendation;
-
-    recommendation.score       = 1.0;
-    recommendation.title       = "Not implemented yet";
-    recommendation.description = "Stay tuned";
-    recommendation.icon        = "preferences-activities";
-    recommendation.id          = "null";
-
-    d->recommendations << recommendation;
-
     emit recommendationsUpdated(d->recommendations);
 }
 
