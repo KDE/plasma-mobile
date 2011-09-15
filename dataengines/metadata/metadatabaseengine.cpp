@@ -23,6 +23,7 @@
 //#include <Nepomuk/Query/QueryParser>
 #include <nepomuk/queryparser.h>
 #include <Nepomuk/Query/ResourceTerm>
+#include <Nepomuk/Query/ComparisonTerm>
 #include <Nepomuk/Tag>
 
 #include <Nepomuk/Query/Query>
@@ -50,6 +51,7 @@
 
 #include "querycontainer.h"
 #include <nepomuk/nfo.h>
+#include <nepomuk/nie.h>
 
 #define RESULT_LIMIT 24
 
@@ -115,8 +117,14 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         //FIXME: more elegant
         if (type == "Contact") {
             query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+type)));
+
+        } else if (type == "Video") {
+            // Strigi doesn't index videos it seems
+            query.setTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("video")));
+
         } else {
             query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+type)));
+
         }
 
     //Simple case.. a single resource
