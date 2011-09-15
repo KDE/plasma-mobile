@@ -49,45 +49,45 @@ Image {
         id: theme
     }
 
-    function loadImage(path)
-    {
-        if (path.length == 0) {
-            return
-        }
+    /*function loadImage(path)*/
+    /*{*/
+    /*    if (path.length == 0) {*/
+    /*        return*/
+    /*    }*/
 
-        var i = 0
-        if (String(path).indexOf("/") === 0) {
-            path = "file://"+path
-        }
+    /*    var i = 0*/
+    /*    if (String(path).indexOf("/") === 0) {*/
+    /*        path = "file://"+path*/
+    /*    }*/
 
-        for (prop in metadataSource.data["ResourcesOfType:Video"]) {
-            if (metadataSource.data["ResourcesOfType:Video"][prop]["url"] == path) {
-                fullList.positionViewAtIndex(i, ListView.Center)
-                fullList.currentIndex = i
-                spareDelegate.visible = false
-                fullList.visible = true
-                imageViewer.state = "image"
-                return
-            }
-            ++i
-        }
+    /*    for (prop in metadataSource.data["ResourcesOfType:Video"]) {*/
+    /*        if (metadataSource.data["ResourcesOfType:Video"][prop]["url"] == path) {*/
+    /*            fullList.positionViewAtIndex(i, ListView.Center)*/
+    /*            fullList.currentIndex = i*/
+    /*            spareDelegate.visible = false*/
+    /*            fullList.visible = true*/
+    /*            imageViewer.state = "image"*/
+    /*            return*/
+    /*        }*/
+    /*        ++i*/
+    /*    }*/
 
-        spareDelegate.source = path
-        resourceInstance.uri = path
-        spareDelegate.visible = true
-        fullList.visible = false
-        imageViewer.state = "image"
-    }
+    /*    spareDelegate.source = path*/
+    /*    resourceInstance.uri = path*/
+    /*    spareDelegate.visible = true*/
+    /*    fullList.visible = false*/
+    /*    imageViewer.state = "image"*/
+    /*}*/
 
-    Timer {
-        id: firstRunTimer
-        interval: 300
-        repeat: false
-        onTriggered: {
-            loadImage(startupArguments[0])
-            imageViewer.firstRun = false
-        }
-    }
+    /*Timer {*/
+    /*    id: firstRunTimer*/
+    /*    interval: 300*/
+    /*    repeat: false*/
+    /*    onTriggered: {*/
+    /*        loadImage(startupArguments[0])*/
+    /*        imageViewer.firstRun = false*/
+    /*    }*/
+    /*}*/
 
     PlasmaCore.DataSource {
         id: metadataSource
@@ -113,10 +113,6 @@ Image {
         id: toolbar
     }
 
-    QuickBrowserBar {
-        id: quickBrowserBar
-    }
-
     MobileComponents.IconGrid {
         id: resultsGrid
         anchors {
@@ -135,13 +131,14 @@ Image {
             height: 120
             infoLabelVisible: false
 
-            onPressed: {
-                resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
-                resourceInstance.title = model["label"]
-            }
+            /*onPressed: {*/
+            /*    resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]*/
+            /*    resourceInstance.title = model["label"]*/
+            /*}*/
 
             onClicked: {
-                loadImage(model["url"])
+                print("Loading film:" + model["url"]);
+                // loadImage(model["url"])
             }
         }
     }
