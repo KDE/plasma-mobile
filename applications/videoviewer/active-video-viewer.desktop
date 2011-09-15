@@ -1,0 +1,31 @@
+[Desktop Entry]
+Name=Images
+Name[nl]=Afbeeldingen
+Name[pt]=Imagens
+Name[pt_BR]=Imagens
+Name[sv]=Bilder
+Name[ug]=سۈرەتلەر
+Name[uk]=Зображення
+Name[x-test]=xxImagesxx
+GenericName=Image viewer
+GenericName[nl]=Afbeeldingenviewer
+GenericName[pt]=Visualizador de imagens
+GenericName[pt_BR]=Visualizador de imagens
+GenericName[sv]=Bildvisare
+GenericName[ug]=رەسىنم كۆرگۈچ
+GenericName[uk]=Переглядач зображень
+GenericName[x-test]=xxImage viewerxx
+Comment=An image viewer for touch tablets
+Comment[nl]=Een afbeeldingenviewer voor aanraaktablets
+Comment[pt]=Um visualizador de imagens para tabletes por toque
+Comment[pt_BR]=Um visualizador de imagem para tabletes por toque
+Comment[sv]=En bildvisare för pekskärmar
+Comment[uk]=Програма для перегляду зображень на сенсорних планшетах
+Comment[x-test]=xxAn image viewer for touch tabletsxx
+
+Exec=active-imageviewer -graphicssystem raster %u
+Terminal=false
+Icon=active-image-viewer
+Type=Application
+Categories=Qt;KDE;Graphics;RasterGraphics;Viewer;Photography;
+MimeType=inode/directory;image/gif;image/jpeg;image/png;image/bmp;image/x-eps;image/x-ico;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-xbitmap;image/x-xpixmap;
