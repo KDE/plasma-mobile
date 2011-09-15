@@ -26,6 +26,7 @@
 #include <Plasma/Theme>
 
 #include "videoviewer.h"
+#include "videowidget.h"
 
 VideoViewer::VideoViewer(const QString &url)
     : KMainWindow()
@@ -44,11 +45,20 @@ VideoViewer::VideoViewer(const QString &url)
     Plasma::Theme::defaultTheme()->setThemeName(themeName);
 
     connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
+
+    // VideoWidget::self()->setParent(this);
+    VideoWidget::self()->move(0, 0);
+    VideoWidget::self()->hide();
 }
 
 VideoViewer::~VideoViewer()
 {
     saveWindowSize(config("Window"));
+}
+
+void VideoViewer::resizeEvent(QResizeEvent * event)
+{
+    VideoWidget::self()->resize(event->size());
 }
 
 KConfigGroup VideoViewer::config(const QString &group)

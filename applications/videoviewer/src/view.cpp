@@ -31,7 +31,8 @@
 #include <KStandardDirs>
 #include <KDebug>
 
-#include  <kdeclarative.h>
+#include <kdeclarative.h>
+#include "videowidget.h"
 
 #include <Plasma/Package>
 
@@ -60,6 +61,8 @@ AppView::AppView(const QString &url, QWidget *parent)
     // as startupArguments property
     QVariant a = QVariant(QStringList(url));
     rootContext()->setContextProperty("startupArguments", a);
+
+    rootContext()->setContextProperty("player", VideoWidget::self());
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), "org.kde.active.videoviewer", structure);

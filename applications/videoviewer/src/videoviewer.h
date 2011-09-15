@@ -26,6 +26,8 @@
 #include "view.h"
 //#include <kxmlguiwindow.h>
 
+#include <QResizeEvent>
+
 
 class VideoViewer : public KMainWindow
 {
@@ -39,6 +41,9 @@ public:
 
     void setUseGL(const bool on);
     bool useGL() const;
+
+protected:
+    void resizeEvent(QResizeEvent * event);
 
 private:
     AppView *m_widget;

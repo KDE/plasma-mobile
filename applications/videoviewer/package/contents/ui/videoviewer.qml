@@ -138,6 +138,7 @@ Image {
 
             onClicked: {
                 print("Loading film:" + model["url"]);
+                player.OpenUri(model["url"]);
                 // loadImage(model["url"])
             }
         }

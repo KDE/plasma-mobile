@@ -29,6 +29,7 @@
 
 // Own
 #include "videoviewer.h"
+#include "videowidget.h"
 
 static const char description[] = I18N_NOOP("Video viewer for Plasma Active");
 
@@ -69,6 +70,7 @@ int main(int argc, char **argv)
     VideoViewer *mainWindow = new VideoViewer(url);
     mainWindow->setUseGL(useGL);
     mainWindow->show();
+
     args->clear();
     return app.exec();
 }
