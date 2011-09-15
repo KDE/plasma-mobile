@@ -35,20 +35,50 @@
 #include "nfo.h"
 #include "nie.h"
 
+#define KAMD_DBUS_ADDRESS "org.kde.kactivitymanagerd"
+
 // Private
 
 DocumentsEnginePrivate::DocumentsEnginePrivate(DocumentsEngine * parent)
     : q(parent)
 {
     QDBusConnection dbus = QDBusConnection::sessionBus();
+
+    // Making us visible on d-bus
     new RankingsClientAdaptor(this);
     kDebug() << "registering the client" <<
     dbus.registerObject("/RankingsClient", this);
 
-    QDBusInterface rankingsservice("org.kde.kactivitymanagerd",
+    if (dbus.interface()->isServiceRegistered(KAMD_DBUS_ADDRESS)) {
+        serviceOnline();
+    }
+
+    QDBusServiceWatcher * watcher = new QDBusServiceWatcher(
+            KAMD_DBUS_ADDRESS, dbus,
+            QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration,
+            this
+        );
+    connect(watcher, SIGNAL(serviceRegistered(QString)),
+            this, SLOT(serviceOnline()));
+    connect(watcher, SIGNAL(serviceUnregistered(QString)),
+            this, SLOT(serviceOffline()));
+}
+
+void DocumentsEnginePrivate::serviceOnline()
+{
+    kDebug() << KAMD_DBUS_ADDRESS << "went online";
+
+    QDBusInterface rankingsservice(KAMD_DBUS_ADDRESS,
             "/Rankings", "org.kde.ActivityManager.Rankings");
 
     rankingsservice.asyncCall("registerClient", "org.kde.Contour", QString(), "nao:Document");
+}
+
+void DocumentsEnginePrivate::serviceOffline()
+{
+    kDebug() << KAMD_DBUS_ADDRESS << "went offline";
+
+    q->recommendationsUpdated(QList<Contour::RecommendationItem>());
 }
 
 DocumentsEnginePrivate::~DocumentsEnginePrivate()

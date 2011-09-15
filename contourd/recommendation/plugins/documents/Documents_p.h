@@ -36,6 +36,9 @@ public Q_SLOTS:
     void removed(int position);
     void changed(int position, const QVariantList & item);
 
+    void serviceOffline();
+    void serviceOnline();
+
 public:
     QList<Contour::RecommendationItem> recommendations;
     DocumentsEngine * const q;
