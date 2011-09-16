@@ -24,147 +24,60 @@
 #include <QtGui/QGraphicsProxyWidget>
 #include <QtGui/QPainter>
 #include <QtGui/QApplication>
-#include <QTimer>
-#include <QGraphicsView>
-#include <QGraphicsSceneMouseEvent>
+
+#include <KWindowSystem>
 
 #include <Plasma/Applet>
-#include <Plasma/Animation>
-#include <Plasma/Animator>
+#include <Plasma/Containment>
 #include <Plasma/Corona>
-#include <Plasma/ScrollWidget>
-
-class ProxyScroller : public Plasma::ScrollWidget
-{
-public:
-    ProxyScroller(QGraphicsItem *parent=0)
-       : Plasma::ScrollWidget(parent)
-    {
-        setFlag(QGraphicsItem::ItemHasNoContents, false);
-        setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    }
-
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget * widget=0)
-    {
-        Q_UNUSED(widget)
-        painter->fillRect(option->rect, QColor(0, 0, 0, 185));
-    }
-
-    void mousePressEvent(QGraphicsSceneMouseEvent *event)
-    {
-        event->accept();
-    }
-};
-
-class WidgetProxy : public QGraphicsProxyWidget
-{
-public:
-    WidgetProxy(QWidget *widget, QGraphicsItem *parent=0)
-      : QGraphicsProxyWidget(parent)
-    {
-        widget->setAttribute(Qt::WA_WindowPropagation, false);
-        widget->setAttribute(Qt::WA_TranslucentBackground);
-
-        QPalette palette = widget->palette();
-        palette.setColor(QPalette::Window, QColor(255,255,255,100));
-        widget->setAttribute(Qt::WA_WindowPropagation);
-        palette.setColor(QPalette::WindowText, Qt::white);
-        palette.setColor(QPalette::ToolTipText, Qt::white);
-        widget->setPalette(palette);
-
-        setWidget(widget);
-    }
-
-    void mousePressEvent(QGraphicsSceneMouseEvent *event)
-    {
-        //hacky way to discover if we clicked on an empty spot
-        QWidget *child = qobject_cast<QWidget *>(widget()->childAt(event->pos().toPoint()));
-
-        if (child && (child->focusPolicy() == Qt::NoFocus)) {
-            QEvent closeEvent(QEvent::CloseSoftwareInputPanel);
-            if (qApp) {
-                QEvent event(QEvent::CloseSoftwareInputPanel);
-                if (QGraphicsView *view = qobject_cast<QGraphicsView*>(qApp->focusWidget())) {
-                    if (view->scene() && view->scene() == scene()) {
-                        QApplication::sendEvent(view, &closeEvent);
-                    }
-                }
-            }
-        }
-
-        QGraphicsProxyWidget::mousePressEvent(event);
-    }
-
-};
-
-
+#include <Plasma/WindowEffects>
 
 MobDialogManager::MobDialogManager(Plasma::Corona *parent)
     : Plasma::AbstractDialogManager(parent),
       m_corona(parent)
 {
-    connect(m_corona, SIGNAL(availableScreenRegionChanged()), this, SLOT(availableScreenRegionChanged()));
 }
 
 MobDialogManager::~MobDialogManager()
 {
 }
 
-void MobDialogManager::availableScreenRegionChanged()
-{
-    QTimer::singleShot(0, this, SLOT(syncScreenGeom()));
-}
-
-void MobDialogManager::syncScreenGeom()
-{
-    Plasma::Containment *containment = m_corona->containmentForScreen(0);
-    if (!containment) {
-        return;
-    }
-
-    foreach (ProxyScroller *scroll, m_managedDialogs) {
-        scroll->setGeometry(containment->mapToScene(containment->boundingRect()).boundingRect());
-        scroll->widget()->setGeometry(QRectF(QPointF(4, 4), scroll->size()-QSizeF(18,18)));
-    }
-}
-
 void MobDialogManager::showDialog(QWidget *widget, Plasma::Applet *applet)
 {
-    ProxyScroller *scroll = m_managedDialogs.value(widget);
-    if (!scroll) {
-        scroll = new ProxyScroller;
-        WidgetProxy *proxy = new WidgetProxy(widget, scroll);
-        scroll->setWidget(proxy);
-        m_managedDialogs.insert(widget, scroll);
-        connect(widget, SIGNAL(destroyed(QObject *)), this, SLOT(dialogDestroyed(QObject *)));
+    Q_UNUSED(applet)
+    if (KWindowSystem::compositingActive()) {
+        widget->setAttribute(Qt::WA_WindowPropagation, false);
+        widget->setAttribute(Qt::WA_TranslucentBackground);
+        widget->setAttribute(Qt::WA_NoSystemBackground, false);
+        widget->setWindowFlags(Qt::FramelessWindowHint);
+        KWindowSystem::setState(widget->effectiveWinId(), NET::MaxVert|NET::MaxHoriz);
+        Plasma::WindowEffects::enableBlurBehind(widget->effectiveWinId(), true);
 
-        m_corona->addItem(scroll);
-        if (applet && applet->containment()) {
-            scroll->setGeometry(scroll->mapFromScene(applet->containment()->mapToScene(applet->containment()->boundingRect())).boundingRect());
-            proxy->setGeometry(QRectF(QPointF(4, 4), applet->containment()->size()-QSizeF(18,18)));
+        QPalette palette = widget->palette();
+        palette.setColor(QPalette::Window, QColor(0,0,0,100));
+        widget->setAttribute(Qt::WA_WindowPropagation);
+        palette.setColor(QPalette::WindowText, Qt::white);
+        palette.setColor(QPalette::ToolTipText, Qt::white);
+        widget->setPalette(palette);
+    }
+
+    Plasma::Containment *containment = applet->containment();
+    if (containment) {
+        Plasma::Corona *corona = containment->corona();
+        if (corona) {
+            QRect r = corona->availableScreenRegion(containment->screen()).boundingRect();
+            //assumption: the panel is 100% wide
+            QRect screenRect = corona->screenGeometry(containment->screen());
+
+            widget->setContentsMargins(r.left() - screenRect.left(),
+                                       r.top() - screenRect.top(),
+                                       screenRect.right() - r.right(),
+                                       screenRect.bottom() - r.bottom());
         }
     }
 
-    Plasma::Animation *fade = Plasma::Animator::create(Plasma::Animator::FadeAnimation, this);
-    fade->setTargetWidget(scroll);
-    fade->setProperty("startOpacity", 0.0);
-    fade->setProperty("targetOpacity", 1.0);
-    scroll->setOpacity(0);
-    scroll->show();
-    fade->start(QAbstractAnimation::DeleteWhenStopped);
+    widget->show();
 }
 
-void MobDialogManager::dialogDestroyed(QObject *object)
-{
-    QWidget *widget = static_cast<QWidget *>(object);
-    Plasma::ScrollWidget *scroll = m_managedDialogs.value(widget);
-
-    if (scroll) {
-        scroll->deleteLater();
-    }
-
-    m_managedDialogs.remove(widget);
-}
 
 #include "mobdialogmanager.moc"

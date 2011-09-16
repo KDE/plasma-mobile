@@ -31,6 +31,7 @@ Item {
     signal clicked(variant mouse)
     signal pressed(variant mouse)
     signal released(variant mouse)
+    signal pressAndHold(variant mouse)
 
     MobileComponents.FallbackComponent {
         id: fallback
@@ -69,6 +70,7 @@ Item {
             onPressed: delegateItem.pressed(mouse)
             onReleased: delegateItem.released(mouse)
             onPressAndHold: {
+                delegateItem.pressAndHold(mouse)
                 if (resourceInstance && contextMenu) {
                     contextMenu.parentItem = delegateItem
                     contextMenu.adjustPosition();

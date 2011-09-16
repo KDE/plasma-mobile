@@ -264,7 +264,7 @@ Rectangle {
                             //those two are to make appModel and runnerModel work
                             property string label: model["label"]?model["label"]:(model["name"]?model["name"]:model["text"])
 
-                            onPressed: {
+                            onPressAndHold: {
                                 //take into account cases for all 3 models
 
                                 if (model["url"]) {

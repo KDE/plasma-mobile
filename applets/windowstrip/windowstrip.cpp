@@ -155,6 +155,7 @@ void WindowStrip::updateFrame()
 
          m_windows[winId] = QRect(windowInfo["x"].value<int>()+offset.x(), windowInfo["y"].value<int>()+offset.y(), windowInfo["width"].value<int>(), windowInfo["height"].value<int>());
     }
+    update();
 }
 
 #include "windowstrip.moc"

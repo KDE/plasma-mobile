@@ -47,35 +47,6 @@ Item {
     }
 
 
-    Item {
-        id: everythingButton
-        x: enabled?parent.width/6:-width-10
-        y: parent.height + 18
-        width: everythingPushButton.width
-        height: everythingPushButton.height
-        enabled: false
-
-        PlasmaWidgets.PushButton {
-            id: everythingPushButton
-
-            text: i18n("Show everything")
-
-            onEnabledChanged: NumberAnimation {
-                                duration: 250
-                                target: everythingButton
-                                properties: "x"
-                                easing.type: Easing.InOutQuad
-                            }
-            onClicked: tagCloudMain.resetStatus()
-        }
-        Behavior on x {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
-    }
-
     Flickable {
         id: tagCloud
         contentWidth: tagFlow.width

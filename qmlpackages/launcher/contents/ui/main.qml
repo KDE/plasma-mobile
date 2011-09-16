@@ -17,7 +17,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
@@ -84,6 +84,35 @@ Item {
     MobileComponents.ViewSearch {
         id: searchField
 
+        Item {
+            id: everythingButton
+            x: enabled?parent.width/6:-width-10
+            anchors.verticalCenter: parent.verticalCenter
+            width: everythingPushButton.width
+            height: everythingPushButton.height
+            enabled: false
+
+            PlasmaWidgets.PushButton {
+                id: everythingPushButton
+
+                text: i18n("Show everything")
+
+                onEnabledChanged: NumberAnimation {
+                                    duration: 250
+                                    target: everythingButton
+                                    properties: "x"
+                                    easing.type: Easing.InOutQuad
+                                }
+                onClicked: tagCloud.resetStatus()
+            }
+            Behavior on x {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+
         anchors {
             left: parent.left
             right: parent.right
@@ -105,6 +134,8 @@ Item {
         delegateWidth: 128
         delegateHeight: 100
         model: (searchField.searchQuery == "")?appsModel:runnerModel
+        onCurrentPageChanged: resourceInstance.uri = ""
+
         delegate: Component {
             MobileComponents.ResourceDelegate {
                 width: appGrid.delegateWidth
@@ -113,7 +144,7 @@ Item {
                 genericClassName: "FileDataObject"
                 property string label: model["name"]?model["name"]:model["text"]
                 property string mimeType: model["mimeType"]?model["mimeType"]:"application/x-desktop"
-                onPressed: {
+                onPressAndHold: {
                     resourceInstance.uri = model["resourceUri"]?model["resourceUri"]:model["entryPath"]
                     resourceInstance.title = model["name"]?model["name"]:model["text"]
                 }

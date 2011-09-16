@@ -32,3 +32,4 @@ X-Plasma-DefaultSize=100,100
 X-Plasma-MainScript=ui/main.qml
 X-Plasma-RemoteLocation=
 X-Plasma-RequiredExtensions=LaunchApp,http,localio,networkio
+X-Plasma-ContainmentCategories=desktop

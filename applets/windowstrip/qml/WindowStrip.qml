@@ -43,6 +43,41 @@ Item {
         Component.onCompleted: {
             connectedSources = sources
         }
+        onDataChanged: {
+            positionsTimer.restart()
+        }
+    }
+
+    function windowProperties(item)
+    {
+        var itemPos = item.mapToItem(mainRow, 0, 0)
+        var properties = new Object()
+
+        properties.winId = item.winId
+        //FIXME: why those hardoced numbers?
+        properties.x = itemPos.x + 10
+        properties.y = itemPos.y + 20
+        properties.width = item.width - 20
+        properties.height = item.height - 40
+        return properties
+    }
+
+    Timer {
+        id: positionsTimer
+        interval: 300
+        repeat: false
+        onTriggered: {
+            var childrenPositions = Array()
+
+            childrenPositions[0] = windowProperties(homeScreenThumbnail)
+            for (var i = 0; i < windowsRow.children.length; i++) {
+                if (!windowsRow.children[i].visible) {
+                    continue
+                }
+                childrenPositions[i+1] = windowProperties(windowsRow.children[i])
+            }
+            windowFlicker.childrenPositions = childrenPositions
+        }
     }
 
     PlasmaCore.Theme {
@@ -64,7 +99,7 @@ Item {
         objectName: "windowFlicker"
 
         interactive: true
-        contentWidth: windowsRow.width
+        contentWidth: mainRow.width
         anchors.fill: parent
         property variant childrenPositions
 
@@ -81,115 +116,39 @@ Item {
         }
 
         Row {
-            id: windowsRow
-            objectName: "windowsRow"
+            id: mainRow
             spacing: 10
-
-            Timer {
-                id: positionsTimer
-                interval: 300
-                repeat: false
-                onTriggered: {
-                    var childrenPositions = Array();
-                    for (var i = 0; i < windowsRow.children.length; i++) {
-                        var winId = windowsRow.children[i].winId
-                        var properties = new Object()
-                        properties.winId = winId
-                        //FIXME: why those hardoced numbers?
-                        properties.x = windowsRow.children[i].x + 10
-                        properties.y = windowsRow.children[i].y + 20
-                        properties.width = windowsRow.children[i].width - 20
-                        properties.height = windowsRow.children[i].height - 40
-                        childrenPositions[i] = properties
-                    }
-                    windowFlicker.childrenPositions = childrenPositions
-                }
+            WindowThumbnail {
+                id: homeScreenThumbnail
+                property variant model
+                visible: false
             }
+            Row {
+                id: windowsRow
+                objectName: "windowsRow"
+                spacing: 10
 
-            onChildrenChanged: {
-                positionsTimer.running = true
-            }
-            // add here: onChildrenChanged:, iterate over it, build a list of rectangles
-            // assign only after list is complete to save updates
+                Repeater {
 
-            Repeater {
-
-                model: PlasmaCore.DataModel {
-                    dataSource: tasksSource
-                }
-
-                onChildrenChanged: {
-                    print(" someone changed something");
-                    for (var ch in children) {
-                        print("Child:" + ch.x)
-                    }
-                }
-
-                Item {
-                    id: windowDelegate
-                    width: height*1.6
-                    height: main.height
-                    onHeightChanged: {
-                        positionsTimer.running = true
-                    }
-                    property string winId: DataEngineSource
-
-                    Rectangle {
-                        opacity: 0
-                        anchors.fill: parent
+                    model: PlasmaCore.DataModel {
+                        dataSource: tasksSource
                     }
 
-                    QIconItem {
-                        anchors.centerIn: parent
-                        width: 64
-                        height: 64
-                        icon: model["icon"]
-                    }
-
-                    Text {
-                        id: windowTitle
-                        anchors.bottom: parent.bottom
-                        anchors.horizontalCenter: parent.horizontalCenter;
-                        text: visibleName
-                        elide: Text.ElideMiddle
-                        color: theme.textColor
-                        width: parent.width
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            print(winId)
-                            var service = tasksSource.serviceForSource(winId)
-                            var operation = service.operationDescription("activate")
-
-                            service.startOperationCall(operation)
+                    onChildrenChanged: {
+                        print(" someone changed something");
+                        for (var ch in children) {
+                            print("Child:" + ch.x)
                         }
                     }
 
-                    MobileComponents.ActionButton {
-                        id: closeButton
-                        svg: iconsSvg
-                        iconSize: 22
-                        elementId: "close"
-                        visible: actionClose
-
-                        anchors {
-                            top: parent.top
-                            right: parent.right
-                        }
-
-                        onClicked: {
-                            var service = tasksSource.serviceForSource(winId)
-                            var operation = service.operationDescription("close")
-
-                            service.startOperationCall(operation)
-                        }
-
+                    delegate: WindowThumbnail {
+                        id: windowThumbnail
                         Component.onCompleted: {
                             if (className == shellName) {
-                                visible = false;
+                                homeScreenThumbnail.visible = true
+                                homeScreenThumbnail.model = model
+                                homeScreenThumbnail.winId = DataEngineSource
+                                windowThumbnail.visible = false
                             }
                         }
                     }

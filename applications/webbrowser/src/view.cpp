@@ -175,6 +175,7 @@ void View::urlFilterChanged()
 {
     QString newFilter = m_urlInput->property("urlFilter").toString();
     //kDebug() << "Filtering completion" << newFilter;
+    m_completionModel->populate();
     m_completionModel->setFilter(newFilter);
 }
 

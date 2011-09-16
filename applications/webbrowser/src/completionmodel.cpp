@@ -55,6 +55,7 @@ public:
     Nepomuk::Query::QueryServiceClient* queryClient;
     History* history;
     QString filter;
+    bool isPopulated;
 };
 
 
@@ -62,7 +63,9 @@ CompletionModel::CompletionModel(QObject *parent)
     : QObject(parent)
 {
     d = new CompletionModelPrivate;
-    populate();
+    d->isPopulated = false;
+    d->history = new History(this);
+    connect(d->history, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
 }
 
 CompletionModel::~CompletionModel()
@@ -118,11 +121,11 @@ void CompletionModel::setFilter(const QString &filter)
 void CompletionModel::populate()
 {
     //kDebug() << "populating model...";
-    d->history = new History(this);
-    connect(d->history, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
-
-    d->history->loadHistory();
-    loadBookmarks();
+    if (!d->isPopulated) {
+        d->isPopulated = true;
+        d->history->loadHistory();
+        loadBookmarks();
+    }
 }
 
 void CompletionModel::loadBookmarks()

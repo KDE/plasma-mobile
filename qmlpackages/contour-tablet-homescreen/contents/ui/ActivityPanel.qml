@@ -45,7 +45,6 @@ Item {
         target: switcher
         onNewActivityRequested: homeScreen.newActivityRequested()
         onStateChanged: {
-            print("AAAAAAAAAA"+switcher.state)
             if (switcher.state == "Passive") {
                 activityPanel.state = "hidden"
             }

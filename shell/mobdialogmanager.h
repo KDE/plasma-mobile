@@ -17,20 +17,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef NET_DIALOGMANAGER_H
-#define NET_DIALOGMANAGER_H
+#ifndef MOB_DIALOGMANAGER_H
+#define MOB_DIALOGMANAGER_H
 
 #include <plasma/abstractdialogmanager.h>
 
 #include <QtCore/QHash>
 
-class WidgetProxy;
-class ProxyScroller;
 
 namespace Plasma
 {
     class Corona;
-    class ScrollWidget;
 }
 
 class MobDialogManager : public Plasma::AbstractDialogManager
@@ -44,14 +41,8 @@ public:
 public Q_SLOTS:
     void showDialog(QWidget *widget, Plasma::Applet *applet);
 
-private Q_SLOTS:
-    void dialogDestroyed(QObject *object);
-    void availableScreenRegionChanged();
-    void syncScreenGeom();
-
 private:
     Plasma::Corona *m_corona;
-    QHash<QWidget *, ProxyScroller *> m_managedDialogs;
 };
 
 #endif

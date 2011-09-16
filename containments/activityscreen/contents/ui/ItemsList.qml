@@ -62,7 +62,7 @@ Item {
             height: itemsList.height
             infoLabelVisible: false
 
-            onPressed: {
+            onPressAndHold: {
                 resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
                 resourceInstance.title = model["label"]
                 main.currentIndex = index
@@ -70,7 +70,12 @@ Item {
             }
 
             onClicked: {
-                plasmoid.openUrl(String(model["url"]))
+                //Contact?
+                if (model["hasEmailAddress"]) {
+                    plasmoid.openUrl(String(model["hasEmailAddress"]))
+                } else {
+                    plasmoid.openUrl(String(model["url"]))
+                }
             }
         }
     }

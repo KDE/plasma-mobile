@@ -32,11 +32,7 @@ Item {
         searchField.text = searchQuery
     }
 
-    anchors {
-        left: parent.left
-        top: parent.top
-        right: parent.right
-    }
+    width: searchField.width
 
     height: 64
     PlasmaWidgets.LineEdit {
