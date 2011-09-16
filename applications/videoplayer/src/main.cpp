@@ -28,17 +28,17 @@
 #include <KToolBar>
 
 // Own
-#include "videoviewer.h"
+#include "videoplayer.h"
 #include "videowidget.h"
 
-static const char description[] = I18N_NOOP("Video viewer for Plasma Active");
+static const char description[] = I18N_NOOP("Video player for Plasma Active");
 
 static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
     // FIXME: selkie icon instead of internet-web-browser
-    KAboutData about("active-video-viewer", 0, ki18n("Active video viewer"), version, ki18n(description),
+    KAboutData about("active-video-player", 0, ki18n("Active video player"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2011 Marco Martin"), KLocalizedString(), 0, "mart@kde.org");
                      about.addAuthor( ki18n("Marco Martin"), KLocalizedString(), "mart@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
         url = args->arg(0);
     }
 
-    VideoViewer *mainWindow = new VideoViewer(url);
+    VideoPlayer *mainWindow = new VideoPlayer(url);
     mainWindow->setUseGL(useGL);
     mainWindow->show();
 

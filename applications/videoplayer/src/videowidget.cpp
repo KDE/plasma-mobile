@@ -88,8 +88,9 @@ VideoWidget::VideoWidget()
     connect(d->buttonStop, SIGNAL(clicked()),
             this, SLOT(Stop()));
 
-    d->buttonIcon->setIcon(QIcon::fromTheme("active-video-viewer"));
+    d->buttonIcon->setIcon(QIcon::fromTheme("active-video-player"));
     d->buttonIcon->setIconSize(QSize(64, 64));
+    d->buttonIcon->hide();
 
     connect(d->videoWidget, SIGNAL(clicked()),
             this, SLOT(toggleControls()));

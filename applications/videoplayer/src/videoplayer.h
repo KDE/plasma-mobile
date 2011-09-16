@@ -20,8 +20,8 @@
  ***************************************************************************/
 
 
-#ifndef VIDEOVIEWER_H
-#define VIDEOVIEWER_H
+#ifndef VIDEOPLAYER_H
+#define VIDEOPLAYER_H
 
 #include "view.h"
 //#include <kxmlguiwindow.h>
@@ -29,12 +29,12 @@
 #include <QResizeEvent>
 
 
-class VideoViewer : public KMainWindow
+class VideoPlayer : public KMainWindow
 {
     Q_OBJECT
 public:
-    VideoViewer(const QString &url);
-    virtual ~VideoViewer();
+    VideoPlayer(const QString &url);
+    virtual ~VideoPlayer();
     QString name();
     QIcon icon();
     KConfigGroup config(const QString &group = "Default");
@@ -51,4 +51,4 @@ private:
     AppView *m_widget;
 };
 
-#endif // VIDEOVIEWER_H
+#endif // VIDEOPLAYER_H

@@ -37,7 +37,7 @@ class QProgressBar;
 class QSignalMapper;
 class Page;
 class ScriptApi;
-class VideoViewer;
+class VideoPlayer;
 
 
 namespace Plasma
@@ -62,7 +62,7 @@ private Q_SLOTS:
     void onStatusChanged(QDeclarativeView::Status status);
 
 private:
-    QDeclarativeItem* m_videoViewer;
+    QDeclarativeItem* m_videoPlayer;
     Plasma::Package *m_package;
     bool m_useGL;
 };

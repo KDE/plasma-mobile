@@ -38,7 +38,7 @@
 
 AppView::AppView(const QString &url, QWidget *parent)
     : QDeclarativeView(parent),
-      m_videoViewer(0),
+      m_videoPlayer(0),
       m_useGL(false)
 {
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
@@ -65,7 +65,7 @@ AppView::AppView(const QString &url, QWidget *parent)
     rootContext()->setContextProperty("player", VideoWidget::self());
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    m_package = new Plasma::Package(QString(), "org.kde.active.videoviewer", structure);
+    m_package = new Plasma::Package(QString(), "org.kde.active.videoplayer", structure);
 
     //kDebug() << "Loading QML File:" << qmlFile;
     setSource(QUrl(m_package->filePath("mainscript")));
@@ -105,14 +105,14 @@ void AppView::onStatusChanged(QDeclarativeView::Status status)
 {
     if (status == QDeclarativeView::Ready) {
 
-        if (!m_videoViewer) {
+        if (!m_videoPlayer) {
             // Note that "webView" is defined as objectName in the QML file
-            m_videoViewer = rootObject()->findChild<QDeclarativeItem*>("videoViewer");
-            if (m_videoViewer) {
-                connect(m_videoViewer, SIGNAL(titleChanged()),
+            m_videoPlayer = rootObject()->findChild<QDeclarativeItem*>("videoPlayer");
+            if (m_videoPlayer) {
+                connect(m_videoPlayer, SIGNAL(titleChanged()),
                         this, SLOT(onTitleChanged()));
             } else {
-                kError() << "videoViewer component not found.";
+                kError() << "videoPlayer component not found.";
             }
         }
     } else if (status == QDeclarativeView::Error) {

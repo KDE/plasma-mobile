@@ -1,28 +1,28 @@
 
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
-set(active-videoviewer_SRCS
+set(active-videoplayer_SRCS
     dataenginebindings.cpp
     main.cpp
-    videoviewer.cpp
+    videoplayer.cpp
     videowidget.cpp
     view.cpp
 )
 
 kde4_add_ui_files(
-    active-videoviewer_SRCS
+    active-videoplayer_SRCS
     videowindow.ui
 )
 
 qt4_add_dbus_adaptor(
-    active-videoviewer_SRCS
+    active-videoplayer_SRCS
     org.mpris.MediaPlayer2.Player.xml
     videowidget.h VideoWidget
 )
 
-KDE4_ADD_EXECUTABLE(active-videoviewer ${active-videoviewer_SRCS})
+KDE4_ADD_EXECUTABLE(active-videoplayer ${active-videoplayer_SRCS})
 
-target_link_libraries(active-videoviewer
+target_link_libraries(active-videoplayer
     ${QT_QTDECLARATIVE_LIBRARY}
     ${QT_QTOPENGL_LIBRARY}
     ${QT_QTSCRIPT_LIBRARY}
@@ -33,5 +33,5 @@ target_link_libraries(active-videoviewer
     kdeclarative
 )
 
-install(TARGETS active-videoviewer ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS active-videoplayer ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

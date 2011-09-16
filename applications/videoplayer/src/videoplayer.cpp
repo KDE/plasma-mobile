@@ -25,10 +25,10 @@
 
 #include <Plasma/Theme>
 
-#include "videoviewer.h"
+#include "videoplayer.h"
 #include "videowidget.h"
 
-VideoViewer::VideoViewer(const QString &url)
+VideoPlayer::VideoPlayer(const QString &url)
     : KMainWindow()
 {
     setAcceptDrops(true);
@@ -51,45 +51,45 @@ VideoViewer::VideoViewer(const QString &url)
     VideoWidget::self()->move(pos());
 }
 
-VideoViewer::~VideoViewer()
+VideoPlayer::~VideoPlayer()
 {
     saveWindowSize(config("Window"));
 }
 
-void VideoViewer::resizeEvent(QResizeEvent * event)
+void VideoPlayer::resizeEvent(QResizeEvent * event)
 {
     VideoWidget::self()->resize(event->size());
 }
 
-void VideoViewer::moveEvent(QMoveEvent * event)
+void VideoPlayer::moveEvent(QMoveEvent * event)
 {
     VideoWidget::self()->move(event->pos());
 }
 
-KConfigGroup VideoViewer::config(const QString &group)
+KConfigGroup VideoPlayer::config(const QString &group)
 {
-    return KConfigGroup(KSharedConfig::openConfig("videoviewerrc"), group);
+    return KConfigGroup(KSharedConfig::openConfig("videoplayerrc"), group);
 }
 
-QString VideoViewer::name()
+QString VideoPlayer::name()
 {
-    return "Active video viewer";
+    return "Active video player";
     //return m_widget->options()->name;
 }
 
-QIcon VideoViewer::icon()
+QIcon VideoPlayer::icon()
 {
     return KIcon("gwenview");
 }
 
-void VideoViewer::setUseGL(const bool on)
+void VideoPlayer::setUseGL(const bool on)
 {
     m_widget->setUseGL(on);
 }
 
-bool VideoViewer::useGL() const
+bool VideoPlayer::useGL() const
 {
     return m_widget->useGL();
 }
 
-#include "videoviewer.moc"
+#include "videoplayer.moc"

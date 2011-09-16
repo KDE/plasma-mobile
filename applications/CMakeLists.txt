@@ -1,3 +1,3 @@
 add_subdirectory(webbrowser)
 add_subdirectory(imageviewer)
-add_subdirectory(videoviewer)
+add_subdirectory(videoplayer)
