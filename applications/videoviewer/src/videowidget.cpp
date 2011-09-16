@@ -32,6 +32,7 @@
 #include <Plasma/WindowEffects>
 
 #include "ui_videowindow.h"
+#include "playeradaptor.h"
 
 class VideoWidget::Private: public Ui::VideoWindowBase {
 public:
@@ -56,6 +57,10 @@ VideoWidget::VideoWidget()
     : d(new Private())
 {
     d->setupUi(this);
+
+    new PlayerAdaptor(this);
+    QDBusConnection::sessionBus().registerService("org.mpris.MediaPlayer2.activevideo");
+    QDBusConnection::sessionBus().registerObject("/org/mpris/MediaPlayer2", this);
 
     d->mediaObject = new Phonon::MediaObject(this);
 
@@ -137,5 +142,5 @@ QString VideoWidget::PlaybackStatus() const
 
 void VideoWidget::hideEvent(QHideEvent * event)
 {
-    d->mediaObject->stop();
+    d->mediaObject->pause();
 }

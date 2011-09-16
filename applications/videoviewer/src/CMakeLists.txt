@@ -14,6 +14,11 @@ kde4_add_ui_files(
     videowindow.ui
 )
 
+qt4_add_dbus_adaptor(
+    active-videoviewer_SRCS
+    org.mpris.MediaPlayer2.Player.xml
+    videowidget.h VideoWidget
+)
 
 KDE4_ADD_EXECUTABLE(active-videoviewer ${active-videoviewer_SRCS})
 

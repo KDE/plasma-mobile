@@ -28,6 +28,7 @@
  */
 class VideoWidget: public QFrame {
     Q_OBJECT
+    Q_PROPERTY(QString PlaybackStatus READ PlaybackStatus)
 
 public:
     virtual ~VideoWidget();
