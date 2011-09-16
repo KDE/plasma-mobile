@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Videos
+GenericName=Video player
+Comment=A video player for touch tablets
+
+Exec=active-videoplayer -graphicssystem raster %u
+Terminal=false
+Icon=active-video-player
+Type=Application
+Categories=Qt;KDE;Multimedia;Viewer;
+MimeType=inode/directory;video/mpeg

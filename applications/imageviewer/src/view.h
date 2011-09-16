@@ -38,6 +38,7 @@ class QSignalMapper;
 class Page;
 class ScriptApi;
 class ImageViewer;
+class DirModel;
 
 
 namespace Plasma
@@ -64,6 +65,7 @@ private Q_SLOTS:
 private:
     QDeclarativeItem* m_imageViewer;
     Plasma::Package *m_package;
+    DirModel *m_dirModel;
     bool m_useGL;
 };
 

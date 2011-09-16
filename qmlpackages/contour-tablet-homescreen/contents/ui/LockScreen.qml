@@ -73,7 +73,6 @@ Rectangle {
             font.italic: theme.font.italic
             font.weight: theme.font.weight
             font.underline: theme.font.underline
-            font.strikeout: theme.font.strikeOut
             font.wordSpacing: theme.font.wordSpacing
             opacity: 0
 
@@ -93,9 +92,9 @@ Rectangle {
         state: "default"
 
         anchors {
-            bottom: lockArea.bottom
+            bottom: lockScreen.bottom
             topMargin: 10
-            horizontalCenter: lockArea.horizontalCenter
+            horizontalCenter: lockScreen.horizontalCenter
         }
 
         MouseArea {
@@ -135,8 +134,8 @@ Rectangle {
                 name: "default"
                 PropertyChanges {
                     target: lockerImage
-                    anchors.bottom: lockArea.bottom
-                    anchors.horizontalCenter: lockArea.horizontalCenter
+                    anchors.bottom: lockScreen.bottom
+                    anchors.horizontalCenter: lockScreen.horizontalCenter
                     source: homeScreenPackage.filePath("images", "unlock-normal.png")
                 }
                 PropertyChanges {

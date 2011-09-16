@@ -17,7 +17,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
@@ -60,7 +60,7 @@ Item {
         objectName: "appsView"
         pressDelay: 200
         cacheBuffer: width*2
-
+        highlightMoveDuration: 250
         anchors.fill: parent
 
 
@@ -87,12 +87,7 @@ Item {
                         bottom: parent.bottom
                     }
                     property int orientation: ListView.Horizontal
-                    move: Transition {
-                        NumberAnimation {
-                            properties: "x,y"
-                            duration: 150
-                        }
-                    }
+
                     Repeater {
                         id: iconRepeater
                         property int columns: Math.min(count, Math.floor(appsView.width/main.delegateWidth))
@@ -152,8 +147,11 @@ Item {
                     }
 
                     MouseArea {
-                        width: 20; height: 20
-                        anchors.centerIn: parent
+                        anchors {
+                            fill: parent
+                            margins: -10
+                        }
+
                         onClicked: {
                             //animate only if near
                             if (Math.abs(appsView.currentIndex - index) > 1) {

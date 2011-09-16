@@ -50,7 +50,6 @@ History::History(QObject *parent)
     d->dirWatch = new KDirWatch(this);
 
     QString configPath = KStandardDirs::locateLocal("config", "active-webbrowserrc");
-    //kDebug() << "XXXXX configPath is " << configPath;
     d->dirWatch->addFile(configPath);
     d->separator = "|X|";
     d->currentPage = 0;
@@ -94,6 +93,7 @@ void History::loadHistory()
         item->setIconName("view-history");
         d->items.append(item);
     }
+
     emit dataChanged();
     //kDebug() << "XXX (Re)loaded history..." << d->items.count();
 }
@@ -115,7 +115,7 @@ void History::addPage(const QString &url, const QString &title)
 
     CompletionItem* item = new CompletionItem(title, url, d->icon, this);
     item->setIconName("view-history");
-    d->items.append(item);
+    d->items.prepend(item);
     while (d->items.count() > 256) {
         d->items.takeLast();
     }
@@ -134,6 +134,9 @@ void History::recordHistory()
 {
     //kDebug() << "XXX Recording history!";
     d->addHistoryTimer.stop();
+    if (d->items.count() == 0) {
+        loadHistory();
+    }
     addPage(d->currentPage->url(), d->currentPage->name());
     emit dataChanged();
     saveHistory();

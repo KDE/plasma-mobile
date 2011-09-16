@@ -43,11 +43,27 @@ PlasmaCore.FrameSvgItem {
         }
     }
 
+    PlasmaCore.DataSource {
+        id: hotplugSource
+        engine: "hotplug"
+        connectedSources: sources
+    }
+    PlasmaCore.DataSource {
+        id: devicesSource
+        engine: "soliddevice"
+        connectedSources: hotplugSource.sources
+    }
+    PlasmaCore.DataModel {
+        id: devicesModel
+        dataSource: hotplugSource
+    }
+
     QIconItem {
+        id: backIcon
         icon: QIcon("go-previous")
         width: 48
         height: 48
-        opacity: viewer.scale==1?1:0
+        opacity: imageViewer.state != "browsing"?1:0
         anchors.verticalCenter: parent.verticalCenter
         Behavior on opacity {
             NumberAnimation {
@@ -60,13 +76,44 @@ PlasmaCore.FrameSvgItem {
             onClicked: imageViewer.state = "browsing"
         }
     }
+    Row {
+        anchors.left: backIcon.right
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: 8
+        opacity: imageViewer.state == "browsing"?1:0
+        MobileComponents.IconButton {
+            icon: QIcon("drive-harddisk")
+            opacity: resultsGrid.model==filterModel?0.2:1
+            width: 48
+            height: 48
+            onClicked: {
+                resultsGrid.model = filterModel
+            }
+        }
+        Repeater {
+            model: devicesModel
+            MobileComponents.IconButton {
+                id: deviceButton
+                icon: QIcon(model["icon"])
+                visible: devicesSource.data[udi]["Icon"] == "drive-removable-media-usb"
+                opacity: dirModel.url==devicesSource.data[udi]["File Path"]&&resultsGrid.model==dirModel?0.2:1
+                width: 48
+                height: 48
+                onClicked: {
+                    dirModel.url = devicesSource.data[udi]["File Path"]
+                    resultsGrid.model = dirModel
+                }
+            }
+        }
+    }
+
     Text {
         text: i18n("%1 of %2", fullList.currentIndex+1, fullList.count)
         anchors.centerIn: parent
         font.pointSize: 14
         font.bold: true
         color: theme.textColor
-        visible: viewer.scale==1
+        visible: imageViewer.state != "browsing"
         style: Text.Raised
         styleColor: theme.backgroundColor
     }
@@ -80,7 +127,7 @@ PlasmaCore.FrameSvgItem {
         onSearchQueryChanged: {
             filterModel.filterRegExp = ".*"+searchBox.searchQuery+".*"
         }
-        opacity: viewer.scale==1?0:1
+        opacity: imageViewer.state != "browsing"?0:1
         Behavior on opacity {
             NumberAnimation {
                 duration: 250
@@ -94,7 +141,7 @@ PlasmaCore.FrameSvgItem {
         imagePath: "widgets/configuration-icons"
     }
     Row {
-        opacity: viewer.scale==1?1:0
+        opacity: imageViewer.state != "browsing"?1:0
         Behavior on opacity {
             NumberAnimation {
                 duration: 250

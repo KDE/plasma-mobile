@@ -119,6 +119,11 @@ int  PlasmaApp::newInstance()
     Plasma::WindowEffects::overrideShadow(dialog->winId(), true);
     dialog->applet()->setBackgroundHints(Plasma::Applet::NoBackground);
 
+    //hide the kwyboard when the active window switches
+    //the situation that brought up the kwyboard isn't valid anymore
+    connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)), 
+            dialog, SLOT(hide()));
+
     // Set window to exist on all desktops
     KWindowSystem::setOnAllDesktops(dialog->winId(), true);
 
