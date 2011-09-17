@@ -72,9 +72,9 @@ Rectangle {
                 to: 0
                 easing.type: "InOutCubic"
             }
-            ScriptAction {
-                script: main.destroy()
-            }
+        }
+        ScriptAction {
+            script: main.destroy()
         }
     }
 
