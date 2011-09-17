@@ -42,6 +42,8 @@
 DocumentsEnginePrivate::DocumentsEnginePrivate(DocumentsEngine * parent)
     : q(parent)
 {
+    activitymanager = new Activities::Consumer(this);
+
     QDBusConnection dbus = QDBusConnection::sessionBus();
 
     // Making us visible on d-bus
@@ -96,6 +98,10 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
         Nepomuk::Resource resource(KUrl(item.toString()));
 
         if (!resource.hasType(Nepomuk::Vocabulary::NFO::FileDataObject())) continue;
+
+        Nepomuk::Resource currentActivityResource("activities://" + activitymanager->currentActivity());
+
+        if (resource.isRelateds().contains(currentActivityResource)) continue;
 
         Contour::RecommendationItem recommendation;
 

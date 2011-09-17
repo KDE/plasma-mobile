@@ -48,6 +48,7 @@ target_link_libraries(
    ${KDE4_KFILE_LIBS}
    ${NEPOMUK_LIBRARIES}
    ${SOPRANO_LIBRARIES}
+   kactivities
    )
 
 
