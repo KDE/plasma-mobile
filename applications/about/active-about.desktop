@@ -1,11 +1,9 @@
 [Desktop Entry]
 Name=About
 GenericName=About Plasma Active
-
 Comment=Informations about Plasma Active
-
 Exec=active-aboutapp -graphicssystem raster
 Terminal=false
 Icon=active-about
 Type=Application
-Categories=Qt;KDE;Graphics;Information;System
+Categories=Qt;KDE;Core;Documentation;Viewer;
