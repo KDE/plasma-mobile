@@ -44,6 +44,7 @@ import QtWebKit 1.0
 
 
 Flickable {
+    id: flickable
     property alias title: webView.title
     property alias icon: webView.icon
     property alias progress: webView.progress
@@ -55,7 +56,7 @@ Flickable {
 
     signal newWindowRequested(string url)
 
-    id: flickable
+
     width: parent.width
     contentWidth: Math.max(parent.width,webView.width)
     contentHeight: Math.max(parent.height,webView.height)
@@ -74,8 +75,14 @@ Flickable {
         id: webView
         objectName: "webViewImplementation"
         transformOrigin: Item.TopLeft
-        settings.pluginsEnabled: true
+        settings.javascriptEnabled: true
         width: flickable.width
+        javaScriptWindowObjects: QtObject {
+            property string activeVersion: runtimeInfoActiveVersion
+            property string kdeVersion: runtimeInfoKdeVersion
+            property string osVersion: runtimeInfoOsVersion
+            WebView.windowObjectName: "runtimeInfo"
+        }
 
         //FIXME: glorious hack just to obtain a signal of the url of the new requested page
         newWindowComponent: Component {

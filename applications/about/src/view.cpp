@@ -20,17 +20,20 @@
  ***************************************************************************/
 
 #include "view.h"
+#include "runtimeinfo.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
 #include <QScriptValue>
 #include <QGLWidget>
+#include <QFile>
 
 #include <KStandardDirs>
 #include <KDebug>
+#include <kdeversion.h>
 
-#include  <kdeclarative.h>
+#include <kdeclarative.h>
 
 #include <Plasma/Package>
 
@@ -95,10 +98,23 @@ void AppView::onStatusChanged(QDeclarativeView::Status status)
 
         if (!m_rootItem) {
             // Note that "webView" is defined as objectName in the QML file
-            m_rootItem = rootObject()->findChild<QDeclarativeItem*>("aboutApp");
+            m_rootItem = rootObject();
+
             if (m_rootItem) {
-                connect(m_rootItem, SIGNAL(titleChanged()),
-                        this, SLOT(onTitleChanged()));
+                //FIXME: find a prettier way
+                QString fn;
+                if (QFile::exists("/etc/image-release")) {
+                    fn = "/etc/image-release";
+                } else {
+                    fn = "/etc/issue";
+                }
+                QFile f(fn);
+                f.open(QIODevice::ReadOnly);
+                const QString osVersion = f.readAll();
+
+                rootContext()->setContextProperty("runtimeInfoActiveVersion", "0.9");
+                rootContext()->setContextProperty("runtimeInfoKdeVersion", KDE::versionString());
+                rootContext()->setContextProperty("runtimeInfoOsVersion", osVersion);
             } else {
                 kError() << "imageViewer component not found.";
             }

@@ -8,10 +8,25 @@
 
 <body>
     <center><img src="logos.png" alt="logos"></center>
+
+    <table>
+        <tr><td>Plasma Active version:</td><td><p id="activeVersionP"></p></td></tr>
+        <tr><td>KDE Frameworks version:</td><td><p id="kdeVersionP"></p></td></tr>
+        <tr><td>Operating system version:</td><td><p id="osVersionP"></p></td></tr>
+    </table>
+        
     <p><a href="http://community.kde.org/Plasma/Active">Plasma Active</a> aims at creating a cross-device user experience for emerging devices such as tablet computers, media centers, smartphones, and more.</p>
 
     <p>Plasma Active uses the Contour User interface - <a href="http://contour.basyskom.com">contour.basyskom.com</a>
     A new and innovative usage paradigm for digital devices.</p>
     <p>The Contour project and its development was initiated and is mainly supported and maintained by basysKom GmbH.</p>
+    <script type="text/javascript">
+        var activeVersionP = document.getElementById("activeVersionP")
+        activeVersionP.innerHTML = window.runtimeInfo.activeVersion
+        var kdeVersionP = document.getElementById("kdeVersionP")
+        kdeVersionP.innerHTML = window.runtimeInfo.kdeVersion
+        var osVersionP = document.getElementById("osVersionP")
+        osVersionP.innerHTML = window.runtimeInfo.osVersion
+    </script>
 </body>
 </html>

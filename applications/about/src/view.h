@@ -51,7 +51,7 @@ private Q_SLOTS:
     void onStatusChanged(QDeclarativeView::Status status);
 
 private:
-    QDeclarativeItem* m_rootItem;
+    QGraphicsObject* m_rootItem;
     Plasma::Package *m_package;
     bool m_useGL;
 };

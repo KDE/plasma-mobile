@@ -29,6 +29,7 @@ Image {
     height: 600
     source: aboutPackage.filePath("images", "background.png")
     fillMode: Image.Tile
+    property QtObject runtimeInfo
 
     Item { id: headerSpace; width: parent.width; height: header.height }
 
@@ -50,7 +51,7 @@ Image {
         id: itemModel
 
         FlickableWebView {
-            id: webView
+            id: webView1
             objectName: "webView"
             url: aboutPackage.filePath("images", "about.html")
             
