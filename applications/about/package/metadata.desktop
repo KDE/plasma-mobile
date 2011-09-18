@@ -1,5 +1,9 @@
 [Desktop Entry]
 Name=About
+Name[pt_BR]=Sobre
+Name[sv]=Om
+Name[uk]=Про програму
+Name[x-test]=xxAboutxx
 
 Encoding=UTF-8
 Type=Service
