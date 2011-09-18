@@ -59,6 +59,7 @@ Item {
         properties.y = itemPos.y + 20
         properties.width = item.width - 20
         properties.height = item.height - 40
+
         return properties
     }
 
@@ -130,8 +131,13 @@ Item {
 
                 Repeater {
 
-                    model: PlasmaCore.DataModel {
-                        dataSource: tasksSource
+                    model: PlasmaCore.SortFilterModel {
+                        sourceModel: PlasmaCore.DataModel {
+                            dataSource: tasksSource
+                        }
+                        filterRole: "onCurrentActivity"
+                        filterRegExp: "true"
+                        onModelReset: positionsTimer.restart()
                     }
 
                     onChildrenChanged: {

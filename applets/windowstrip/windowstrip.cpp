@@ -89,6 +89,7 @@ void WindowStrip::showThumbnails()
     foreach (QRect windowRect, m_windows.values()) {
         translatedWindows << windowRect.translated(m_windowsOffset);
     }
+
     Plasma::WindowEffects::showWindowThumbnails(m_desktop, m_windows.keys(), translatedWindows);
     //kDebug() << "/// all shown" << m_windows.keys() << translatedWindows;
 }
@@ -149,6 +150,7 @@ void WindowStrip::updateFrame()
         offset = v->mapFromScene(m_windowFlicker->mapToScene(0,0));
     }
 
+    m_windows.clear();
     foreach (QVariant windowData, thumbnailsInfo) {
          const QVariantMap windowInfo = windowData.value<QVariantMap>();
          WId winId = windowInfo["winId"].value<QString>().toInt();
