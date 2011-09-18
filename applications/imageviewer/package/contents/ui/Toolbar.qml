@@ -95,7 +95,8 @@ PlasmaCore.FrameSvgItem {
             MobileComponents.IconButton {
                 id: deviceButton
                 icon: QIcon(model["icon"])
-                visible: devicesSource.data[udi]["Icon"] == "drive-removable-media-usb"
+                //FIXME: use the declarative branch in workspace that tells about removable
+                visible: devicesSource.data[udi]["Icon"] == "drive-removable-media-usb" || devicesSource.data[udi]["Icon"] == "media-flash-sd-mmc" || devicesSource.data[udi]["Icon"] == "drive-removable-media-usb-pendrive" || devicesSource.data[udi]["Icon"] == "multimedia-player"
                 opacity: dirModel.url==devicesSource.data[udi]["File Path"]&&resultsGrid.model==dirModel?0.2:1
                 width: 48
                 height: 48
