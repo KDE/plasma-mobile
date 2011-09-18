@@ -96,7 +96,7 @@ int  PlasmaApp::newInstance()
     if (!useGL) {
         //use plasmarc to share this with plasma-windowed
         KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
-        useGL = cg.readEntry("UseOpenGl", true);
+        useGL = cg.readEntry("UseOpenGl", false);
     }
 
 
