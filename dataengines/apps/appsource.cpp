@@ -33,6 +33,9 @@ AppSource::AppSource(const QString &name, QObject *parent)
         m_categories = names.last().split('|');
     }
 
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-blacklistrc");
+    KConfigGroup config = KConfigGroup(ptr, "blacklist");
+    m_blackList = config.readEntry("apps", QStringList());
     populate();
     connect(KSycoca::self(), SIGNAL(databaseChanged(QStringList)), this, SLOT(sycocaChanged(QStringList)));
 }
@@ -68,6 +71,10 @@ void AppSource::populate()
     //openSUSE: exclude YaST modules from the list
     query += " and (not (exist Categories and 'X-SuSE-YaST' in Categories))";
 
+    // Filter out blacklisted apps as to not show too much crap
+    foreach (const QString appName, m_blackList) {
+        query += QString(" and (DesktopEntryName != '%1' )").arg(appName);
+    }
     kWarning()<<query;
     KService::List services = KServiceTypeTrader::self()->query("Application", query);
 

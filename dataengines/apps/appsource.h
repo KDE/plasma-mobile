@@ -46,6 +46,7 @@ private Q_SLOTS:
 
 private:
     QStringList m_categories;
+    QStringList m_blackList;
 };
 
 #endif // APPSOURCE_H
