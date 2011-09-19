@@ -445,8 +445,8 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
 
     CachingEffect *effect = new CachingEffect(containment);
+    effect->setEnabled(false);
     containment->setGraphicsEffect(effect);
-    containment->graphicsEffect()->setEnabled(false);
 
     containment->resize(m_mainView->transformedSize());
 
