@@ -20,7 +20,6 @@
  ***************************************************************************/
 
 #include "view.h"
-#include "runtimeinfo.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
