@@ -195,6 +195,10 @@ PlasmaAppletItemModel::PlasmaAppletItemModel(QObject * parent)
     setRoleNames(newRoleNames);
 
     setSortRole(Qt::DisplayRole);
+
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-blacklistrc");
+    KConfigGroup blacklistconfig = KConfigGroup(ptr, "blacklist");
+    m_blackList = blacklistconfig.readEntry("plasmoids", QStringList());
 }
 
 void PlasmaAppletItemModel::populateModel(const QStringList &whatChanged)
@@ -212,6 +216,9 @@ void PlasmaAppletItemModel::populateModel(const QStringList &whatChanged)
         //kDebug() << info.pluginName() << "NoDisplay" << info.property("NoDisplay").toBool();
         if (info.property("NoDisplay").toBool() || info.category() == i18n("Containments")) {
             // we don't want to show the hidden category
+            continue;
+        }
+        if (m_blackList.contains(info.pluginName())) {
             continue;
         }
         //kDebug() << info.pluginName() << " is the name of the plugin\n";
