@@ -86,7 +86,9 @@ Item {
         }
 
         Column {
+            id: itemColumn
             anchors.fill: parent
+            spacing: 4
 
             PlasmoidContainer {
                 id: menuContainer
@@ -94,7 +96,7 @@ Item {
                     left: parent.left
                     right: parent.right
                 }
-                height: parent.height - systrayContainer.height - windowListContainer.height - 2
+                height: parent.height - (itemColumn.spacing * 3) - systrayContainer.height - windowListContainer.height - 2
                 Image {
                     source: homeScreenPackage.filePath("images", "shadow-top.png")
                     fillMode: Image.TileHorizontally
