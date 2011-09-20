@@ -45,7 +45,7 @@ public:
 
     virtual void init();
     virtual void activate(const QString & id, const QString & action = QString());
-    virtual QString name();
+    virtual QString name() const;
 
     KConfigGroup * config() const;
 

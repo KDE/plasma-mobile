@@ -20,6 +20,7 @@
 #include <RecommendationEngine.h>
 #include <KConfigGroup>
 #include <KConfig>
+#include <KDebug>
 
 namespace Contour {
 
@@ -44,9 +45,9 @@ void RecommendationEngine::init()
 {
 }
 
-QString RecommendationEngine::name()
+QString RecommendationEngine::name() const
 {
-    kDebug() << metaObject->className();
+    kDebug() << metaObject()->className();
     return metaObject()->className();
 }
 
@@ -58,8 +59,9 @@ void RecommendationEngine::activate(const QString & id, const QString & action)
 
 KConfigGroup * RecommendationEngine::config() const
 {
-    d->config = new KConfigGroup(KConfig("contourrc"), name());
+    // d->config = new KConfigGroup(KConfig("contourrc"), name());
 
+    return NULL;
 }
 
 } // namespace Contour

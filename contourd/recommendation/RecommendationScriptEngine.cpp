@@ -114,9 +114,8 @@ void RecommendationScriptEngine::activate(const QString & id, const QString & ac
 }
 
 QString RecommendationScriptEngine::name() const
-
 {
-
+    return d->script;
 }
 
 QScriptValue RecommendationScriptEngine::getSensor(const QString & sensor)
@@ -137,8 +136,9 @@ QScriptValue RecommendationScriptEngine::getSensor(const QString & sensor)
 
 QScriptValue RecommendationScriptEngine::getConfig()
 {
-    d->engine->newQObject(EngineConfig
+    // d->engine->newQObject(EngineConfig
 
+    return d->engine->newQObject(NULL);
 }
 
 QScriptValue RecommendationScriptEngine::getTimer(int msec)
