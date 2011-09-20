@@ -134,7 +134,7 @@ Item {
                 runnerSource.connectedSources = []
             } else {
                 //limit to just some runners
-                runnerSource.connectedSources = [searchQuery+":services|nepomuksearch|recentdocuments|desktopsessions"]
+                runnerSource.connectedSources = [searchQuery+":services|nepomuksearch|recentdocuments|desktopsessions|PowerDevil"]
             }
         }
     }
