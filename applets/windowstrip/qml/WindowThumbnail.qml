@@ -54,7 +54,7 @@ Item {
         text: model["visibleName"]
         elide: Text.ElideRight
         color: theme.textColor
-        width: parent.width
+        width: parent.width - 40
         horizontalAlignment: Text.AlignHCenter
     }
 
