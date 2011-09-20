@@ -189,13 +189,11 @@ Item {
 
                     Component.onCompleted: {
                         items = plasmoid.readConfig("SkipItems")
-                        print("going to check with " + items);
                         if (items != "") {
                             skipItems = "^(?!" + items + ")"
                         } else {
                             skipItems = ""
                         }
-                        print("skipItems is " + skipItems)
                     }
             }
         }
