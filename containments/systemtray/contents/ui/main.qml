@@ -187,14 +187,14 @@ Item {
                 }
 
 
-                    Component.onCompleted: {
-                        items = plasmoid.readConfig("SkipItems")
-                        if (items != "") {
-                            skipItems = "^(?!" + items + ")"
-                        } else {
-                            skipItems = ""
-                        }
+                Component.onCompleted: {
+                    items = plasmoid.readConfig("SkipItems")
+                    if (items != "") {
+                        skipItems = "^(?!" + items + ")"
+                    } else {
+                        skipItems = ""
                     }
+                }
             }
         }
         Row {
