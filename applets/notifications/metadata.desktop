@@ -38,5 +38,5 @@ X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
 X-Plasma-DefaultSize=100,100
-X-Plasma-MainScript=code/Notifications.qml
+X-Plasma-MainScript=ui/Notifications.qml
 
