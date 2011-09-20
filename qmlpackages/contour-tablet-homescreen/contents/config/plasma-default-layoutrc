@@ -58,8 +58,6 @@ geometry=60,0,64,48
 immutability=1
 plugin=org.kde.active.notifications
 
-
-
 [Containments][9][Applets][14]
 geometry=90,4,120,24
 immutability=1
@@ -72,6 +70,9 @@ plugin=digital-clock
 
 [Containments][9][Applets][15][Configuration]
 ShowCalendarPopup=false
+
+[Containments][9][General]
+SkipItems=klipper
 
 [Containments][20]
 activity=Network
