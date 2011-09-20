@@ -9,6 +9,9 @@
     <entry name="AppletsOrder" type="String">
       <label>list of all applets</label>
     </entry>
+    <entry name="SkipItems" type="String">
+      <label>list of all notifier items to skip</label>
+    </entry>
   </group>
 
 </kcfg>

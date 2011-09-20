@@ -170,12 +170,13 @@ Item {
                     LayoutManager.saveOrder()
                 }
 
+                property string skipItems
                 Repeater {
                     id: tasksRepeater
                     model: PlasmaCore.SortFilterModel {
                         id: filteredStatusNotifiers
                         filterRole: "Title"
-                        filterRegExp: "^(?!klipper)"
+                        filterRegExp: tasksRow.skipItems
                         sourceModel: PlasmaCore.DataModel {
                             dataSource: statusNotifierSource
                         }
@@ -184,6 +185,18 @@ Item {
                     delegate: TaskWidget {
                     }
                 }
+
+
+                    Component.onCompleted: {
+                        items = plasmoid.readConfig("SkipItems")
+                        print("going to check with " + items);
+                        if (items != "") {
+                            skipItems = "^(?!" + items + ")"
+                        } else {
+                            skipItems = ""
+                        }
+                        print("skipItems is " + skipItems)
+                    }
             }
         }
         Row {
