@@ -17,9 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include "declarativepanel.h"
-#include "plasmaapp.h"
-#include "panelshadows.h"
+#include "panelproxy.h"
 
 #include <QGraphicsView>
 #include <QDeclarativeItem>
@@ -31,6 +29,9 @@
 #include <KWindowSystem>
 
 #include <Plasma/Corona>
+
+#include "panelshadows.h"
+#include "plasmaapp.h"
 
 uint PanelProxy::s_numItems = 0;
 
@@ -230,5 +231,5 @@ bool PanelProxy::eventFilter(QObject *watched, QEvent *event)
 }
 
 
-#include "declarativepanel.moc"
+#include "panelproxy.moc"
 

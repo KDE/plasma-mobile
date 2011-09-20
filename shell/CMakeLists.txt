@@ -13,7 +13,7 @@ set(plasma-device_SRCS
     plasmaapp.cpp
     mobdialogmanager.cpp
     mobpluginloader.cpp
-    declarativepanel.cpp
+    panelproxy.cpp
     panelshadows.cpp
 
     mobileactivitythumbnails/mobileactivitythumbnails.cpp

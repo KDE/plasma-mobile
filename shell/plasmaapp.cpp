@@ -29,7 +29,7 @@
 #include "mobileactivitythumbnails/mobileactivitythumbnails.h"
 #include "widgetsexplorer/mobilewidgetsexplorer.h"
 #include "activityconfiguration/activityconfiguration.h"
-#include "declarativepanel.h"
+#include "panelproxy.h"
 #include "panelshadows.h"
 
 #include <unistd.h>
