@@ -49,6 +49,8 @@ Item {
         id: windowTitle
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter;
+        anchors.topMargin: 4
+
         text: model["visibleName"]
         elide: Text.ElideRight
         color: theme.textColor
