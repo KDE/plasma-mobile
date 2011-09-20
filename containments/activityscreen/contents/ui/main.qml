@@ -205,7 +205,7 @@ Item {
 
                 MobileComponents.TextEffects {
                     id: titleText
-                    text: (String(plasmoid.activityName).length <= 28) ? model.Name:String(plasmoid.activityName).substr(0,28) + "..."
+                    text: (String(plasmoid.activityName).length <= 28) ? plasmoid.activityName:String(plasmoid.activityName).substr(0,28) + "..."
                     color: "white"
                     horizontalOffset: 1
                     verticalOffset: 1
