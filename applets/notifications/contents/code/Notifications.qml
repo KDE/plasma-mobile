@@ -32,6 +32,7 @@ Item {
     Component.onCompleted: {
         //plasmoid.popupIcon = QIcon("preferences-desktop-notification")
         plasmoid.aspectRatioMode = "ConstrainedSquare"
+        plasmoid.status = PassiveStatus
     }
 
     states: [
@@ -45,6 +46,10 @@ Item {
                 target: countText
                 visible: false
             }
+            PropertyChanges {
+                target: plasmoid
+                status: PassiveStatus
+            }
         },
         State {
             name: "new-notifications"
@@ -55,6 +60,10 @@ Item {
             PropertyChanges {
                 target: countText
                 visible: true
+            }
+            PropertyChanges {
+                target: plasmoid
+                status: ActiveStatus
             }
         }
     ]
