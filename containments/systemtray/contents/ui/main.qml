@@ -152,8 +152,8 @@ Item {
             Row {
                 id: tasksRow
                 spacing: 8
-
                 height: tasksFlickable.height
+                property string skipItems
 
                 function insertAt(item, index)
                 {
@@ -170,7 +170,6 @@ Item {
                     LayoutManager.saveOrder()
                 }
 
-                property string skipItems
                 Repeater {
                     id: tasksRepeater
                     model: PlasmaCore.SortFilterModel {
