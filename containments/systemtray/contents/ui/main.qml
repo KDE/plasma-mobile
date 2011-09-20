@@ -110,7 +110,6 @@ Item {
 
     }
 
-
     PlasmaCore.DataSource {
           id: statusNotifierSource
           engine: "statusnotifieritem"
@@ -121,7 +120,7 @@ Item {
           Component.onCompleted: {
               connectedSources = sources
           }
-      }
+    }
 
     PlasmaCore.Theme {
         id: theme
@@ -173,11 +172,16 @@ Item {
 
                 Repeater {
                     id: tasksRepeater
-                    model:  PlasmaCore.DataModel {
-                        dataSource: statusNotifierSource
+                    model: PlasmaCore.SortFilterModel {
+                        id: filteredStatusNotifiers
+                        filterRole: "Title"
+                        filterRegExp: "^(?!klipper)"
+                        sourceModel: PlasmaCore.DataModel {
+                            dataSource: statusNotifierSource
+                        }
                     }
+
                     delegate: TaskWidget {
-                        
                     }
                 }
             }
