@@ -111,12 +111,6 @@ void MobileActivityThumbnails::snapshot(Plasma::Containment *containment)
         //TODO: load a smaller image for this if available
         p.drawImage(QPoint(0,0), QImage(wallpaperPath));
     }
-    p.setCompositionMode(QPainter::CompositionMode_SourceOver);
-
-    CachingEffect *cache = qobject_cast<CachingEffect *>(containment->graphicsEffect());
-    if (cache) {
-        p.drawPixmap(QPoint(0,0), cache->cachedPixmap());
-    }
 
     p.end();
 
