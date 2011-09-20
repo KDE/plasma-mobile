@@ -50,7 +50,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter;
         text: model["visibleName"]
-        elide: Text.ElideMiddle
+        elide: Text.ElideRight
         color: theme.textColor
         width: parent.width
         horizontalAlignment: Text.AlignHCenter
