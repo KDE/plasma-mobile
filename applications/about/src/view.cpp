@@ -109,7 +109,7 @@ void AppView::onStatusChanged(QDeclarativeView::Status status)
                 }
                 QFile f(fn);
                 f.open(QIODevice::ReadOnly);
-                const QString osVersion = f.readAll();
+                const QString osVersion = f.readLine();
 
                 rootContext()->setContextProperty("runtimeInfoActiveVersion", "0.9");
                 rootContext()->setContextProperty("runtimeInfoKdeVersion", KDE::versionString());
