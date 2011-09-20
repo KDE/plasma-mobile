@@ -34,7 +34,7 @@ Item {
     {
         searchField.searchQuery = ""
         appGrid.currentPage = 0
-        tagCloud.resetStatus()
+        //tagCloud.resetStatus()
     }
 
     MobileComponents.ResourceInstance {
@@ -49,8 +49,18 @@ Item {
         id: theme
     }
 
+    /*
     TagCloud {
         id:tagCloud
+    }*/
+    Item {
+        id: tagCloud
+        height: 200
+        anchors {
+            left: parent.left
+            top: parent.top
+            right: parent.right
+        }
     }
 
 
@@ -103,7 +113,7 @@ Item {
                                     properties: "x"
                                     easing.type: Easing.InOutQuad
                                 }
-                onClicked: tagCloud.resetStatus()
+                //onClicked: tagCloud.resetStatus()
             }
             Behavior on x {
                 NumberAnimation {
