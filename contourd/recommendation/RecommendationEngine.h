@@ -45,6 +45,9 @@ public:
 
     virtual void init();
     virtual void activate(const QString & id, const QString & action = QString());
+    virtual QString name();
+
+    KConfigGroup * config() const;
 
 Q_SIGNALS:
     // note that you need to pass sorted items to

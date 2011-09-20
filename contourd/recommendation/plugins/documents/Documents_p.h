@@ -34,6 +34,8 @@ public:
 
 public Q_SLOTS:
     void updated(const QVariantList & data);
+    void removeRecommendation(const QString & id);
+
     void inserted(int position, const QVariantList & item);
     void removed(int position);
     void changed(int position, const QVariantList & item);

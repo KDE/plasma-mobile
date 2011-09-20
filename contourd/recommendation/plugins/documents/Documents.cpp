@@ -131,6 +131,16 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
 
 }
 
+void DocumentsEnginePrivate::removeRecommendation(const QString & id)
+{
+    for (int i = 0; i < recommendations.size(); i++) {
+        if (recommendations[i].id == id) {
+            recommendations.removeAt(i);
+            break;
+        }
+    }
+}
+
 void DocumentsEnginePrivate::inserted(int position, const QVariantList & item)
 {
 }
@@ -163,9 +173,11 @@ void DocumentsEngine::init()
 
 void DocumentsEngine::activate(const QString & id, const QString & action)
 {
-    const KUrl url(id);
+    KUrl url(id);
 
-    // TODO: Add isRelated url -> activity
+    d->removeRecommendation(id);
+
+    d->activitymanager->linkResourceToActivity(url);
 
     QDesktopServices::openUrl(url);
 

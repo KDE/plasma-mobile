@@ -38,6 +38,9 @@ public:
 
     virtual void init();
     virtual void activate(const QString & id, const QString & action = QString());
+    virtual QString name() const;
+
+    void autoRemoveChosenRecommendation(bool remove = true);
 
 Q_SIGNALS:
     // note that you need to pass sorted items to
@@ -50,6 +53,8 @@ public Q_SLOTS:
     // TODO: These could be removed to some plugins or whatever
     QScriptValue getSensor(const QString & sensor);
     QScriptValue getTimer(int msec);
+    QScriptValue getConfig();
+
     void openUrl(const QString & url);
 
 public Q_SLOTS:

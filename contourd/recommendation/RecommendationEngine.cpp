@@ -18,15 +18,21 @@
  */
 
 #include <RecommendationEngine.h>
+#include <KConfigGroup>
+#include <KConfig>
 
 namespace Contour {
 
 class RecommendationEngine::Private {
+public:
+    KConfigGroup * config;
+    QString name;
 };
 
 RecommendationEngine::RecommendationEngine(QObject * parent)
     : QObject(parent), d(new Private())
 {
+    d->config = NULL;
 }
 
 RecommendationEngine::~RecommendationEngine()
@@ -38,10 +44,22 @@ void RecommendationEngine::init()
 {
 }
 
+QString RecommendationEngine::name()
+{
+    kDebug() << metaObject->className();
+    return metaObject()->className();
+}
+
 void RecommendationEngine::activate(const QString & id, const QString & action)
 {
     Q_UNUSED(id);
     Q_UNUSED(action);
+}
+
+KConfigGroup * RecommendationEngine::config() const
+{
+    d->config = new KConfigGroup(KConfig("contourrc"), name());
+
 }
 
 } // namespace Contour

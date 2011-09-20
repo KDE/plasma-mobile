@@ -43,6 +43,7 @@ namespace Contour {
 class RecommendationScriptEngine::Private {
 public:
     Private()
+        : autoremove(true)
     {
     }
 
@@ -55,6 +56,8 @@ public:
     QList<RecommendationItem> recommendations;
     QString script;
     QTimer delay;
+
+    bool autoremove;
 
 };
 
@@ -104,7 +107,16 @@ void RecommendationScriptEngine::init()
 
 void RecommendationScriptEngine::activate(const QString & id, const QString & action)
 {
+    if (d->autoremove)
+        removeRecommendation(id);
+
     emit activationRequested(id, action);
+}
+
+QString RecommendationScriptEngine::name() const
+
+{
+
 }
 
 QScriptValue RecommendationScriptEngine::getSensor(const QString & sensor)
@@ -121,6 +133,12 @@ QScriptValue RecommendationScriptEngine::getSensor(const QString & sensor)
     }
 
     return d->engine->newQObject(result, QScriptEngine::AutoOwnership);
+}
+
+QScriptValue RecommendationScriptEngine::getConfig()
+{
+    d->engine->newQObject(EngineConfig
+
 }
 
 QScriptValue RecommendationScriptEngine::getTimer(int msec)
