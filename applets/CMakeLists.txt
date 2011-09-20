@@ -4,5 +4,4 @@ installPackage(notifications org.kde.active.notifications)
 installPackage(powerbutton org.kde.active.powerbutton)
 installPackage(resourcelist org.kde.resourcelist)
 
-add_subdirectory(appswitcher)
 add_subdirectory(windowstrip)
