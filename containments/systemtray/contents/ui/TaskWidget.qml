@@ -34,7 +34,7 @@ Item  {
         }
     }
 
-    PlasmaCore.Svg{
+    PlasmaCore.Svg {
         id: iconSvg
         imagePath: "icons/"+String(IconName).split('-')[0]
         Component.onCompleted: {
