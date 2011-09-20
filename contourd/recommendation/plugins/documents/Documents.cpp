@@ -34,8 +34,11 @@
 
 #include "nfo.h"
 #include "nie.h"
+#include "kext.h"
 
 #define KAMD_DBUS_ADDRESS "org.kde.kactivitymanagerd"
+
+using namespace Nepomuk::Vocabulary;
 
 // Private
 
@@ -99,7 +102,7 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
 
         if (!resource.hasType(Nepomuk::Vocabulary::NFO::FileDataObject())) continue;
 
-        Nepomuk::Resource currentActivityResource("activities://" + activitymanager->currentActivity());
+        Nepomuk::Resource currentActivityResource(activitymanager->currentActivity(), KEXT::Activity());
 
         if (resource.isRelateds().contains(currentActivityResource)) continue;
 
