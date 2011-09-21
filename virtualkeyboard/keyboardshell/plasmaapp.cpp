@@ -239,6 +239,7 @@ void PlasmaApp::resetLayout()
 
 void PlasmaApp::show()
 {
+    m_dialog->setWindowFlags(Qt::X11BypassWindowManagerHint);
     Plasma::WindowEffects::slideWindow(m_dialog, m_dialog->location());
     m_dialog->show();
     //if the cursor is outside the keyboard at the first touch event, the current window loses focus and the keyboard will hide
