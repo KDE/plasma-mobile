@@ -6,6 +6,7 @@ include(KDE4Defaults)
 
 set(plasma-device_SRCS
     activity.cpp
+    busywidget.cpp
     main.cpp
     mobcorona.cpp
     mobview.cpp

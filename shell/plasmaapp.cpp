@@ -21,6 +21,7 @@
  ***************************************************************************/
 
 #include "plasmaapp.h"
+#include "busywidget.h"
 
 #include "mobview.h"
 #include "mobcorona.h"
@@ -158,6 +159,18 @@ PlasmaApp::PlasmaApp()
     if (isDesktop) {
         notifyStartup(true);
     }
+
+    m_startupInfo = new KStartupInfo(KStartupInfo::CleanOnCantDetect, this );
+
+    connect(m_startupInfo,
+            SIGNAL(gotNewStartup(const KStartupInfoId&, const KStartupInfoData&)),
+            SLOT(gotStartup(const KStartupInfoId&, const KStartupInfoData&)));
+    connect(m_startupInfo,
+            SIGNAL(gotStartupChange(const KStartupInfoId&, const KStartupInfoData&)),
+            SLOT(gotStartup(const KStartupInfoId&, const KStartupInfoData&)));
+    connect(m_startupInfo,
+            SIGNAL(gotRemoveStartup(const KStartupInfoId&, const KStartupInfoData&)),
+            SLOT(killStartup(const KStartupInfoId&)));
 }
 
 PlasmaApp::~PlasmaApp()
@@ -606,6 +619,35 @@ void PlasmaApp::containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasm
     if (!excludeFromActivities && isScreen >= 0 && (cont->location() == Plasma::Desktop || cont->location() == Plasma::Floating)) {
         changeContainment(cont);
     }
+}
+
+
+void PlasmaApp::gotStartup(const KStartupInfoId &id, const KStartupInfoData &data)
+{
+    Q_UNUSED(id)
+
+    if (!m_busyWidget) {
+        m_busyWidget = new BusyWidget();
+    }
+
+    m_busyWidget.data()->setWindowTitle(data.findName());
+    m_busyWidget.data()->setWindowIcon(KIcon(data.findIcon()));
+
+    KWindowSystem::setState(m_busyWidget.data()->winId(), NET::SkipTaskbar | NET::KeepAbove);
+    m_busyWidget.data()->show();
+    KWindowSystem::activateWindow(m_busyWidget.data()->winId(), 500);
+    KWindowSystem::raiseWindow(m_busyWidget.data()->winId());
+}
+
+void PlasmaApp::killStartup(const KStartupInfoId &id)
+{
+    Q_UNUSED(id)
+
+    if (!m_busyWidget) {
+        return;
+    }
+
+    m_busyWidget.data()->deleteLater();
 }
 
 #include "plasmaapp.moc"
