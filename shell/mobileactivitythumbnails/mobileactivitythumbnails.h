@@ -43,15 +43,11 @@ protected:
     bool sourceRequestEvent(const QString &source);
 
 protected Q_SLOTS:
-    void delayedSnapshotContainment();
     void imageScaled(const QString &activity, const QImage &image);
 
 private:
-    void snapshot(Plasma::Containment *containment);
 
     Activities::Consumer *m_consumer;
-    QTimer *m_saveTimer;
-    QList<QWeakPointer<Plasma::Containment> > m_containmentsToSave;
 };
 
 #endif

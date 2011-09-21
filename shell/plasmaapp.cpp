@@ -22,7 +22,6 @@
 
 #include "plasmaapp.h"
 
-#include "cachingeffect.h"
 #include "mobview.h"
 #include "mobcorona.h"
 #include "mobpluginloader.h"
@@ -36,7 +35,6 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
-#include <QGraphicsEffect>
 #include <QPixmapCache>
 #include <QtDBus/QtDBus>
 
@@ -278,27 +276,6 @@ void PlasmaApp::setupHomeScreen()
                              m_homeScreen->width(), m_homeScreen->height());
 }
 
-void PlasmaApp::containmentsTransformingChanged(bool transforming)
-{
-    if (m_currentContainment && m_currentContainment->graphicsEffect()) {
-        m_currentContainment->graphicsEffect()->setEnabled(transforming);
-    }
-
-    if (m_oldContainment && m_oldContainment.data()->graphicsEffect()) {
-        m_oldContainment.data()->graphicsEffect()->setEnabled(transforming);
-        //take a snapshot of the old one
-        if (transforming && m_pluginLoader->activityThumbnails()) {
-            m_pluginLoader->activityThumbnails()->snapshotContainment(m_oldContainment.data());
-        }
-
-    }
-    foreach (Plasma::Containment *cont, m_alternateContainments) {
-        if (cont->graphicsEffect()) {
-            cont->graphicsEffect()->setEnabled(transforming);
-        }
-    }
-}
-
 
 void PlasmaApp::changeContainment(Plasma::Containment *containment)
 {
@@ -322,7 +299,7 @@ Plasma::Corona* PlasmaApp::corona()
     if (!m_corona) {
         m_corona = new MobCorona(this);
         m_corona->setItemIndexMethod(QGraphicsScene::NoIndex);
-        m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->transformedSize()));
+        m_corona->setScreenGeometry(QRect(QPoint(0,0), m_mainView->size()));
 
         //FIXME libplasma2: qml containments cannot set containmentType before this signal is emitted
         connect(m_corona, SIGNAL(containmentAdded(Plasma::Containment*)),
@@ -443,12 +420,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     connect(containment, SIGNAL(destroyed(QObject *)), this, SLOT(containmentDestroyed(QObject *)));
 
-
-    CachingEffect *effect = new CachingEffect(containment);
-    effect->setEnabled(false);
-    containment->setGraphicsEffect(effect);
-
-    containment->resize(m_mainView->transformedSize());
+    containment->resize(m_mainView->size());
 
     // we need our homescreen to show something!
     // for the alternate screen (such as a launcher) we need a containment setted as excludeFromActivities
@@ -460,8 +432,8 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
         if (alternateSlot) {
             m_alternateContainments << containment;
-            alternateSlot->setProperty("width", m_mainView->transformedSize().width());
-            alternateSlot->setProperty("height", m_mainView->transformedSize().height());
+            alternateSlot->setProperty("width", m_mainView->size().width());
+            alternateSlot->setProperty("height", m_mainView->size().height());
             containment->setParentItem(alternateSlot);
             containment->setParent(alternateSlot);
             containment->setPos(0, 0);
@@ -485,7 +457,7 @@ void PlasmaApp::mainViewGeometryChanged()
 
         //sometimes a geometry change arives very early in the ctor
         corona();
-        m_declarativeWidget->resize(m_mainView->transformedSize());
+        m_declarativeWidget->resize(m_mainView->size());
         //m_declarativeWidget->setPos(m_mainView->mapToScene(QPoint(0,0)));
         m_declarativeWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
 
@@ -497,8 +469,6 @@ void PlasmaApp::mainViewGeometryChanged()
                               (int)availableScreenRectItem->property("y").toReal(),
                               (int)availableScreenRectItem->property("width").toReal(),
                               (int)availableScreenRectItem->property("height").toReal());
-            //are we rotated?
-            availableScreenRect = m_mainView->transformedRect(availableScreenRect);
 
             const int left = availableScreenRectItem->property("leftReserved").toInt();
             const int top = availableScreenRectItem->property("topReserved").toInt();
@@ -507,14 +477,14 @@ void PlasmaApp::mainViewGeometryChanged()
             reserveStruts(left, top, right, bottom);
         }
 
-        m_corona->setScreenGeometry(QRect(QPoint(0, 0), m_mainView->transformedSize()));
+        m_corona->setScreenGeometry(QRect(QPoint(0, 0), m_mainView->size()));
         m_corona->setAvailableScreenRegion(availableScreenRect);
 
         if (m_currentContainment) {
-            m_currentContainment->resize(m_mainView->transformedSize());
+            m_currentContainment->resize(m_mainView->size());
         }
         foreach (Plasma::Containment *cont, m_alternateContainments) {
-            cont->resize(m_mainView->transformedSize());
+            cont->resize(m_mainView->size());
             cont->setPos(0, 0);
         }
         if (m_widgetsExplorer) {
