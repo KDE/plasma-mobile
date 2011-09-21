@@ -65,6 +65,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     m_containment->setLocation(Plasma::BottomEdge);
     KWindowSystem::setType(winId(), NET::Dock);
     setAttribute(Qt::WA_X11DoNotAcceptFocus);
+    setWindowFlags(Qt::X11BypassWindowManagerHint);
     QFileInfo info(pluginName);
     if (!info.isAbsolute()) {
         info = QFileInfo(QDir::currentPath() + "/" + pluginName);
@@ -288,6 +289,7 @@ void KeyboardDialog::showEvent(QShowEvent *event)
     KWindowSystem::setState(winId(), state);
     KWindowSystem::raiseWindow(effectiveWinId());
     Plasma::Dialog::showEvent(event);
+    
 
     //FIXME: this is an hack for the applet disabing itself in panic when doesn't immediately find a view
     Plasma::PopupApplet *pa = qobject_cast<Plasma::PopupApplet *>(m_applet);

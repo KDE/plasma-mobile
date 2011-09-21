@@ -134,7 +134,7 @@ Item {
     }
 
     states:  [
-        /*State {
+        State {
             name: "Full"
             PropertyChanges {
                 target: slidingPanel
@@ -144,7 +144,7 @@ Item {
                 target: slidingPanel
                 acceptsFocus: true
             }
-        },*/
+        },
         State {
             name: "Launcher"
             PropertyChanges {
