@@ -35,7 +35,6 @@ Item {
     signal previousActivityRequested
     signal newActivityRequested
     state : "Normal"
-    signal transformingChanged(bool transforming)
 
     property QtObject activeWallpaper
     onActiveWallpaperChanged: {
@@ -58,8 +57,9 @@ Item {
         activeContainment.size = width + "x" + height
         //view the main containment
         state = "Slide"
-        transformingChanged(true);
+        finishTransition()
     }
+
 
     function finishTransition()
     {
@@ -77,22 +77,11 @@ Item {
         activityPanel.state = "hidden"
 
         state = "Normal"
-        transformingChanged(false);
     }
 
     PlasmaCore.Theme {
         id: theme
     }
-
-    /*Image {
-        //TODO: take scale mode from Wallpaper config
-        asynchronous: true
-        source: activeWallpaper.wallpaperPath
-        width: Math.max(homeScreen.width, sourceSize.width)
-        height: Math.max(homeScreen.height, sourceSize.height)
-        //Parallax: the background moves for is width
-        x: (mainContainments.width-width)*(1-((mainContainments.x+mainContainments.width)/(mainContainments.width*3)))
-    }*/
 
     //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
     Item {
@@ -150,14 +139,6 @@ Item {
     states: [
             State {
                 name: "Normal"
-               /* PropertyChanges {
-                    target: spareSlot;
-                    scale: 0.3;
-                }
-                PropertyChanges {
-                    target: spareSlot;
-                    opacity: 0;
-                }*/
                 PropertyChanges {
                     target: spareSlot;
                     x: homeScreen.width
@@ -173,23 +154,6 @@ Item {
             }
     ]
 
-    transitions: Transition {
-        from: "Normal"
-        to: "Slide"
-        SequentialAnimation {
-
-            NumberAnimation {
-                target: spareSlot;
-                property: "x";
-                easing.type: "OutQuad";
-                duration: 300;
-            }
-
-            ScriptAction {
-                script: finishTransition();
-            }
-        }
-    }
 
     //acceptsFocus property is costly, delay it after the animation
     Timer {
