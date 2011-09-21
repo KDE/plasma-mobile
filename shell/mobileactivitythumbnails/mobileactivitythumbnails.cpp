@@ -18,10 +18,13 @@
  */
 
 #include "mobileactivitythumbnails.h"
+#include "imagescaler.h"
 
 #include <QFile>
 #include <QPainter>
 #include <QTimer>
+#include <QDir>
+#include <QThreadPool>
 
 #include <KStandardDirs>
 
@@ -29,6 +32,7 @@
 #include <Plasma/Context>
 #include <Plasma/DataContainer>
 #include <Plasma/Wallpaper>
+#include <Plasma/Package>
 
 #include <Activities/Consumer>
 
@@ -102,26 +106,52 @@ void MobileActivityThumbnails::snapshot(Plasma::Containment *containment)
     }
 
     QImage activityImage = QImage(containment->size().toSize(), QImage::Format_ARGB32);
-    const QString wallpaperPath = containment->wallpaper()->property("wallpaperPath").toString();
-    QPainter p(&activityImage);
-    //The wallpaper has paths or paints by itself?
-    if (wallpaperPath.isEmpty()) {
-        containment->wallpaper()->paint(&p, containment->wallpaper()->boundingRect());
+
+    KConfigGroup cg = containment->config();
+    cg = KConfigGroup(&cg, "Wallpaper");
+    cg = KConfigGroup(&cg, "image");
+    QString wallpaperPath = cg.readEntry("wallpaper");
+
+    if (QDir::isAbsolutePath(wallpaperPath)) {
+        Plasma::Package b(wallpaperPath, containment->wallpaper()->packageStructure(containment->wallpaper()));
+        wallpaperPath = b.filePath("preferred");
+        //kDebug() << img << wallpaperPath;
+
+        if (wallpaperPath.isEmpty() && QFile::exists(wallpaperPath)) {
+            wallpaperPath = wallpaperPath;
+        }
+
     } else {
-        //TODO: load a smaller image for this if available
-        p.drawImage(QPoint(0,0), QImage(wallpaperPath));
+        //if it's not an absolute path, check if it's just a wallpaper name
+        const QString path = KStandardDirs::locate("wallpaper", wallpaperPath + "/metadata.desktop");
+
+        if (!path.isEmpty()) {
+            QDir dir(path);
+            dir.cdUp();
+
+            Plasma::Package b(dir.path(), containment->wallpaper()->packageStructure(containment->wallpaper()));
+            wallpaperPath = b.filePath("preferred");
+        }
     }
 
-    p.end();
-
     const QString activity = containment->context()->currentActivityId();
+
+    ImageScaler *scaler = new ImageScaler(QImage(wallpaperPath), QSize(300, 200));
+    scaler->setActivity(activity);
+    connect(scaler, SIGNAL(scaled(QString, QImage)), this, SLOT(imageScaled(QString, QImage)));
+    scaler->setAutoDelete(true);
+    QThreadPool::globalInstance()->start(scaler);
+}
+
+void MobileActivityThumbnails::imageScaled(const QString &activity, const QImage &image)
+{
     const QString path = KStandardDirs::locateLocal("data", QString("plasma/activities-screenshots/%1.png").arg(activity));
-    activityImage.save(path, "PNG");
+
     Plasma::DataContainer *container = containerForSource(activity);
     //kDebug() << "setting the thumbnail for" << activity << path << container;
     if (container) {
         container->setData("path", path);
-        container->setData("image", activityImage);
+        container->setData("image", image);
         scheduleSourcesUpdated();
     }
 }
