@@ -35,7 +35,6 @@ BusyWidget::BusyWidget(QWidget *parent)
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
-    KWindowSystem::setState(winId(), NET::MaxVert|NET::MaxHoriz);
 
     m_svg = new Plasma::Svg(this);
     m_svg->setImagePath("widgets/busywidget");

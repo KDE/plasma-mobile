@@ -26,6 +26,7 @@
 #include <QList>
 #include <QtDeclarative>
 
+#include <KStartupInfoData>
 #include <KUniqueApplication>
 #include <plasma/plasma.h>
 
@@ -40,6 +41,8 @@ class MobCorona;
 class MobileWidgetsExplorer;
 class MobPluginLoader;
 class PanelShadows;
+class BusyWidget;
+class KStartupInfo;
 
 namespace Plasma
 {
@@ -86,6 +89,8 @@ private Q_SLOTS:
     void showActivityCreation();
     void mainViewGeometryChanged();
     void containmentWallpaperChanged(Plasma::Containment *containment);
+    void gotStartup(const KStartupInfoId& id, const KStartupInfoData& data);
+    void killStartup(const KStartupInfoId& id);
 
 private:
     MobCorona *m_corona;
@@ -110,6 +115,9 @@ private:
     QWeakPointer<MobileWidgetsExplorer> m_widgetsExplorer;
     QWeakPointer<ActivityConfiguration> m_activityConfiguration;
     bool m_isDesktop;
+
+    KStartupInfo *m_startupInfo;
+    QWeakPointer<BusyWidget> m_busyWidget;
 };
 
 #endif // multiple inclusion guard
