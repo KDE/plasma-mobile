@@ -44,6 +44,7 @@ protected:
 
 protected Q_SLOTS:
     void delayedSnapshotContainment();
+    void imageScaled(const QString &activity, const QImage &image);
 
 private:
     void snapshot(Plasma::Containment *containment);

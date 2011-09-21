@@ -17,6 +17,7 @@ set(plasma-device_SRCS
     panelshadows.cpp
 
     mobileactivitythumbnails/mobileactivitythumbnails.cpp
+    mobileactivitythumbnails/imagescaler.cpp
 
     activityconfiguration/activityconfiguration.cpp
     activityconfiguration/backgroundlistmodel.cpp
