@@ -171,6 +171,8 @@ DocumentsEngine::~DocumentsEngine()
 
 void DocumentsEngine::init()
 {
+    Contour::RecommendationEngine::init();
+
     emit recommendationsUpdated(d->recommendations);
 }
 

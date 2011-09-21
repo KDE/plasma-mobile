@@ -32,13 +32,14 @@ namespace Contour {
  */
 class RecommendationScriptEngine: public RecommendationEngine {
     Q_OBJECT
+    RECOMMENDATION_ENGINE
+
 public:
     RecommendationScriptEngine(QObject * parent, const QString & script);
     virtual ~RecommendationScriptEngine();
 
     virtual void init();
     virtual void activate(const QString & id, const QString & action = QString());
-    virtual QString name() const;
 
     void autoRemoveChosenRecommendation(bool remove = true);
 

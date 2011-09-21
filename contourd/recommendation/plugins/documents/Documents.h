@@ -29,6 +29,7 @@ class DocumentsEnginePrivate;
 
 class DocumentsEngine: public Contour::RecommendationEngine {
     Q_OBJECT
+    RECOMMENDATION_ENGINE
 
 public:
     DocumentsEngine(QObject * parent = 0, const QVariantList & args = QVariantList());

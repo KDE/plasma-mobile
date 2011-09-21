@@ -27,9 +27,11 @@
 #include "RecommendationItem.h"
 
 #define RECOMMENDATION_EXPORT_PLUGIN(ClassName, AboutData)                       \
-    K_PLUGIN_FACTORY(ClassName##Factory, registerPlugin<ClassName>();) \
-    K_EXPORT_PLUGIN(ClassName##Factory("AboutData"))
+    K_PLUGIN_FACTORY(ClassName##Factory, registerPlugin<ClassName>();)           \
+    K_EXPORT_PLUGIN(ClassName##Factory("AboutData"))                             \
+    QString ClassName::name() const { return AboutData; }
 
+#define RECOMMENDATION_ENGINE public: virtual QString name() const;
 
 namespace Contour {
 
@@ -45,7 +47,8 @@ public:
 
     virtual void init();
     virtual void activate(const QString & id, const QString & action = QString());
-    virtual QString name() const;
+
+    virtual QString name() const = 0;
 
     KConfigGroup * config() const;
 

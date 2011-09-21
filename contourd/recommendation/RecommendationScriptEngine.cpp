@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "RecommendationScriptEngine.h"
+#include "RecommendationScriptEngine_p.h"
 
 #include <QScriptEngine>
 #include <QScriptValue>
@@ -37,37 +37,38 @@
 
 namespace Contour {
 
+RecommendationScriptEngineConfig::RecommendationScriptEngineConfig(QObject * parent, KConfigGroup * config)
+    : QObject(parent), m_config(config)
+{
+}
+
+RecommendationScriptEngineConfig::~RecommendationScriptEngineConfig()
+{
+    delete m_config;
+}
+
+#define CREATE_CONFIG_METHODS(TYPE, TYPECASE) \
+    TYPE RecommendationScriptEngineConfig::TYPECASE##Value(const QString & field, TYPE defaultValue) const \
+    { return m_config->readEntry(field, defaultValue); } \
+    void RecommendationScriptEngineConfig::Set##TYPECASE##Value(const QString & field, TYPE newValue) const \
+    { kDebug() << field << newValue; m_config->writeEntry(field, newValue); m_config->sync(); }
+
+    CREATE_CONFIG_METHODS(bool, Bool)
+    CREATE_CONFIG_METHODS(int, Int)
+    CREATE_CONFIG_METHODS(QString, String)
+    CREATE_CONFIG_METHODS(QStringList, StringList)
+#undef CREATE_CONFIG_METHODS
+
+
 /**
  *
  */
-class RecommendationScriptEngine::Private {
-public:
-    Private()
-        : autoremove(true)
-    {
-    }
-
-    ~Private()
-    {
-    }
-
-    QScriptEngine * engine;
-
-    QList<RecommendationItem> recommendations;
-    QString script;
-    QTimer delay;
-
-    bool autoremove;
-
-};
-
 RecommendationScriptEngine::RecommendationScriptEngine(QObject * parent, const QString & script)
     : RecommendationEngine(parent), d(new Private())
 {
-    kDebug() << "RecommendationScriptEngine()" << script;
-    kDebug() << "Available sensors" << QtMobility::QSensor::sensorTypes();
-
     d->script = script;
+
+    kDebug() << "RecommendationScriptEngine()" << script << name();
 
     d->delay.setInterval(300);
     d->delay.setSingleShot(true);
@@ -84,6 +85,8 @@ RecommendationScriptEngine::~RecommendationScriptEngine()
 
 void RecommendationScriptEngine::init()
 {
+    Contour::RecommendationEngine::init();
+
     QFile file(KStandardDirs::locate("data", "contour/scripts/" + d->script + "/main.js"));
     if (!file.open(QIODevice::ReadOnly)) {
         kDebug() << "Failed to open main.js for" << d->script;
@@ -115,6 +118,7 @@ void RecommendationScriptEngine::activate(const QString & id, const QString & ac
 
 QString RecommendationScriptEngine::name() const
 {
+    kDebug() << d->script;
     return d->script;
 }
 
@@ -137,8 +141,9 @@ QScriptValue RecommendationScriptEngine::getSensor(const QString & sensor)
 QScriptValue RecommendationScriptEngine::getConfig()
 {
     // d->engine->newQObject(EngineConfig
+    kDebug() << "######################### Requested the config for" << name();
 
-    return d->engine->newQObject(NULL);
+    return d->engine->newQObject(new RecommendationScriptEngineConfig(this, config()));
 }
 
 QScriptValue RecommendationScriptEngine::getTimer(int msec)
