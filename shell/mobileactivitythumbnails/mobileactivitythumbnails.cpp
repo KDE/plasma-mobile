@@ -36,7 +36,6 @@
 
 #include <Activities/Consumer>
 
-#include "../cachingeffect.h"
 
 MobileActivityThumbnails::MobileActivityThumbnails(QObject *parent, const QVariantList &args)
     : Plasma::DataEngine(parent, args)
@@ -74,12 +73,8 @@ void MobileActivityThumbnails::snapshotContainment(Plasma::Containment *containm
         return;
     }
 
-    if (containment->graphicsEffect()) {
-        containment->graphicsEffect()->update();
-    }
-
     m_containmentsToSave.append(containment);
-    // FIXME: this is ugly. should be connected to the graphics effect being ready.
+    // FIXME: is a thread now, no more necessary?
     m_saveTimer->start(1000);
 }
 

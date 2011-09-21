@@ -22,7 +22,6 @@
 
 #include "plasmaapp.h"
 
-#include "cachingeffect.h"
 #include "mobview.h"
 #include "mobcorona.h"
 #include "mobpluginloader.h"
@@ -36,7 +35,6 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
-#include <QGraphicsEffect>
 #include <QPixmapCache>
 #include <QtDBus/QtDBus>
 
@@ -278,27 +276,6 @@ void PlasmaApp::setupHomeScreen()
                              m_homeScreen->width(), m_homeScreen->height());
 }
 
-void PlasmaApp::containmentsTransformingChanged(bool transforming)
-{
-    if (m_currentContainment && m_currentContainment->graphicsEffect()) {
-        m_currentContainment->graphicsEffect()->setEnabled(transforming);
-    }
-
-    if (m_oldContainment && m_oldContainment.data()->graphicsEffect()) {
-        m_oldContainment.data()->graphicsEffect()->setEnabled(transforming);
-        //take a snapshot of the old one
-        if (transforming && m_pluginLoader->activityThumbnails()) {
-            m_pluginLoader->activityThumbnails()->snapshotContainment(m_oldContainment.data());
-        }
-
-    }
-    foreach (Plasma::Containment *cont, m_alternateContainments) {
-        if (cont->graphicsEffect()) {
-            cont->graphicsEffect()->setEnabled(transforming);
-        }
-    }
-}
-
 
 void PlasmaApp::changeContainment(Plasma::Containment *containment)
 {
@@ -442,11 +419,6 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     m_containments.insert(containment->id(), containment);
 
     connect(containment, SIGNAL(destroyed(QObject *)), this, SLOT(containmentDestroyed(QObject *)));
-
-
-    CachingEffect *effect = new CachingEffect(containment);
-    effect->setEnabled(false);
-    containment->setGraphicsEffect(effect);
 
     containment->resize(m_mainView->transformedSize());
 

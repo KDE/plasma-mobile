@@ -209,7 +209,6 @@ void MobView::setDirection(const Plasma::Direction direction)
 
     m_direction = direction;
 
-    PlasmaApp::self()->containmentsTransformingChanged(true);
     QPropertyAnimation *animation = new QPropertyAnimation(this, "rotation", this);
     animation->setEasingCurve(QEasingCurve::InOutQuad);
     animation->setDuration(300);
@@ -224,8 +223,6 @@ void MobView::setDirection(const Plasma::Direction direction)
 
 void MobView::animationFinished()
 {
-    PlasmaApp::self()->containmentsTransformingChanged(false);
-
     emit geometryChanged();
 }
 

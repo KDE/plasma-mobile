@@ -6,7 +6,6 @@ include(KDE4Defaults)
 
 set(plasma-device_SRCS
     activity.cpp
-    cachingeffect.cpp
     main.cpp
     mobcorona.cpp
     mobview.cpp
