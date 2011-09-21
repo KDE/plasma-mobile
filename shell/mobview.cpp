@@ -42,8 +42,7 @@
 MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     : Plasma::View(containment, uid, parent),
       m_useGL(false),
-      m_direction(Plasma::Up),
-      m_rotation(0)
+      m_direction(Plasma::Up)
 {
     setFocusPolicy(Qt::NoFocus);
     setWindowFlags(windowFlags());
@@ -56,16 +55,6 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     setAttribute(Qt::WA_TranslucentBackground, false);
 
     setTrackContainmentChanges(false);
-
-    QAction *a = new QAction(this);
-    addAction(a);
-    a->setShortcut(QKeySequence("Ctrl+Shift+L"));
-    connect(a, SIGNAL(triggered()), this, SLOT(rotateCounterClockwise()));
-
-    a = new QAction(this);
-    addAction(a);
-    a->setShortcut(QKeySequence("Ctrl+Shift+R"));
-    connect(a, SIGNAL(triggered()), this, SLOT(rotateClockwise()));
 }
 
 MobView::~MobView()
@@ -147,162 +136,6 @@ Plasma::Location MobView::location() const
 Plasma::FormFactor MobView::formFactor() const
 {
     return containment()->formFactor();
-}
-
-void MobView::setRotation(const int degrees)
-{
-    if (degrees == m_rotation) {
-        return;
-    }
-
-    m_rotation = degrees;
-    const double pi = 3.141593;
-
-    const double a    = pi/180 * degrees;
-    const double sina = sin(a);
-    const double cosa = cos(a);
-
-    QTransform rotationTransform(cosa, sina, -sina, cosa, 0, 0);
-    setTransform(rotationTransform);
-}
-
-int MobView::rotation() const
-{
-    return m_rotation;
-}
-
-void MobView::setDirection(const Plasma::Direction direction)
-{
-    if (direction == m_direction) {
-        return;
-    }
-
-    int angle;
-    int start = rotation();
-    QString directionName;
-
-    switch (direction) {
-    case Plasma::Down:
-        angle = 180;
-        directionName = "down";
-        break;
-    case Plasma::Left:
-        if (start < 180) {
-            start = 360;
-        }
-        angle = 270;
-        directionName = "left";
-        break;
-    case Plasma::Right:
-        angle = 90;
-        directionName = "right";
-        break;
-    case Plasma::Up:
-    default:
-        if (start > 180) {
-            start = -90;
-        }
-        angle = 0;
-        directionName = "up";
-        break;
-    }
-
-    m_direction = direction;
-
-    QPropertyAnimation *animation = new QPropertyAnimation(this, "rotation", this);
-    animation->setEasingCurve(QEasingCurve::InOutQuad);
-    animation->setDuration(300);
-    animation->setStartValue(start);
-    animation->setEndValue(angle);
-
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
-
-    connect(animation, SIGNAL(finished()), this, SLOT(animationFinished()));
-//     m_keyboard->call("setDirection", directionName);
-}
-
-void MobView::animationFinished()
-{
-    emit geometryChanged();
-}
-
-Plasma::Direction MobView::direction() const
-{
-    return m_direction;
-}
-
-QSize MobView::transformedSize() const
-{
-    switch (m_direction) {
-    case Plasma::Left:
-    case Plasma::Right:
-        return QSize(size().height(), size().width());
-        break;
-    case Plasma::Down:
-    case Plasma::Up:
-    default:
-        return size();
-        break;
-    }
-}
-
-QRect MobView::transformedRect(const QRect &rect) const
-{
-    switch (m_direction) {
-    case Plasma::Left:
-        return QRect(QPoint(rect.top(), size().width()-rect.width()), QSize(rect.height(), rect.width()));
-        break;
-    case Plasma::Right:
-        return QRect(QPoint(size().height() - rect.height(), rect.left()), QSize(rect.height(), rect.width()));
-        break;
-    case Plasma::Down:
-        return QRect(QPoint(size().width()-rect.width(), size().height() - rect.height()), rect.size());
-        break;
-    case Plasma::Up:
-    default:
-        return rect;
-        break;
-    }
-}
-
-void MobView::rotateCounterClockwise()
-{
-    switch (m_direction) {
-    case Plasma::Down:
-        setDirection(Plasma::Right);
-        break;
-    case Plasma::Left:
-        setDirection(Plasma::Down);
-        break;
-    case Plasma::Right:
-        setDirection(Plasma::Up);
-        break;
-    case Plasma::Up:
-    default:
-        setDirection(Plasma::Left);
-        break;
-    }
-    emit geometryChanged();
-}
-
-void MobView::rotateClockwise()
-{
-    switch (m_direction) {
-    case Plasma::Down:
-        setDirection(Plasma::Left);
-        break;
-    case Plasma::Left:
-        setDirection(Plasma::Up);
-        break;
-    case Plasma::Right:
-        setDirection(Plasma::Down);
-        break;
-    case Plasma::Up:
-    default:
-        setDirection(Plasma::Right);
-        break;
-    }
-    emit geometryChanged();
 }
 
 void MobView::updateGeometry()
