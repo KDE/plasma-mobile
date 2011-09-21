@@ -41,9 +41,6 @@ MobileActivityThumbnails::MobileActivityThumbnails(QObject *parent, const QVaria
     : Plasma::DataEngine(parent, args)
 {
     m_consumer = new Activities::Consumer(this);
-    m_saveTimer = new QTimer(this);
-    m_saveTimer->setSingleShot(true);
-    connect(m_saveTimer, SIGNAL(timeout()), this, SLOT(delayedSnapshotContainment()));
 }
 
 bool MobileActivityThumbnails::sourceRequestEvent(const QString &source)
@@ -69,34 +66,7 @@ bool MobileActivityThumbnails::sourceRequestEvent(const QString &source)
 
 void MobileActivityThumbnails::snapshotContainment(Plasma::Containment *containment)
 {
-    if (!containment) {
-        return;
-    }
-
-    m_containmentsToSave.append(containment);
-    // FIXME: is a thread now, no more necessary?
-    m_saveTimer->start(1000);
-}
-
-void MobileActivityThumbnails::delayedSnapshotContainment()
-{
-    //FIXME: this really all ought to be a thread
-    QSet<Plasma::Containment *> seen;
-    foreach (QWeakPointer<Plasma::Containment> containment, m_containmentsToSave) {
-        if (!containment || seen.contains(containment.data())) {
-            continue;
-        }
-
-        seen.insert(containment.data());
-        snapshot(containment.data());
-    }
-
-    m_containmentsToSave.clear();
-}
-
-void MobileActivityThumbnails::snapshot(Plasma::Containment *containment)
-{
-    if (!containment->wallpaper()) {
+    if (!containment || !containment->wallpaper()) {
         return;
     }
 
