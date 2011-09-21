@@ -17,7 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <RecommendationEngine.h>
+#include "RecommendationEngine.h"
+
 #include <KConfigGroup>
 #include <KConfig>
 #include <KDebug>
@@ -26,14 +27,14 @@ namespace Contour {
 
 class RecommendationEngine::Private {
 public:
-    KConfigGroup * config;
-    QString name;
+    KConfig * mainConfig;
+    KConfigGroup * engineConfig;
 };
 
 RecommendationEngine::RecommendationEngine(QObject * parent)
     : QObject(parent), d(new Private())
 {
-    d->config = NULL;
+    d->mainConfig = NULL;
 }
 
 RecommendationEngine::~RecommendationEngine()
@@ -43,12 +44,7 @@ RecommendationEngine::~RecommendationEngine()
 
 void RecommendationEngine::init()
 {
-}
-
-QString RecommendationEngine::name() const
-{
-    kDebug() << metaObject()->className();
-    return metaObject()->className();
+    kDebug() << name();
 }
 
 void RecommendationEngine::activate(const QString & id, const QString & action)
@@ -59,9 +55,12 @@ void RecommendationEngine::activate(const QString & id, const QString & action)
 
 KConfigGroup * RecommendationEngine::config() const
 {
-    // d->config = new KConfigGroup(KConfig("contourrc"), name());
+    if (!d->mainConfig) {
+        d->mainConfig = new KConfig("contourrc");
+        d->engineConfig = new KConfigGroup(d->mainConfig, "Engine-" + name());
+    }
 
-    return NULL;
+    return d->engineConfig;
 }
 
 } // namespace Contour
