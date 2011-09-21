@@ -115,10 +115,14 @@ Item {
             text: label
 
             font.pixelSize: 14
+            //wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: 130
+            anchors {
+                top: previewImage.bottom
+                horizontalCenter: parent.horizontalCenter - 4
+            }
+            width: resourceItem.width
             style: Text.Outline
             styleColor: Qt.rgba(1, 1, 1, 0.6)
         }

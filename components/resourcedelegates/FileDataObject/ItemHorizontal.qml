@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
@@ -92,9 +92,11 @@ Item {
             //wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
-            anchors.top: previewImage.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: 130
+            anchors {
+                top: previewImage.bottom
+                horizontalCenter: parent.horizontalCenter - 4
+            }
+            width: resourceItem.width
             style: Text.Outline
             styleColor: Qt.rgba(1, 1, 1, 0.6)
         }
