@@ -140,9 +140,6 @@ QScriptValue RecommendationScriptEngine::getSensor(const QString & sensor)
 
 QScriptValue RecommendationScriptEngine::getConfig()
 {
-    // d->engine->newQObject(EngineConfig
-    kDebug() << "######################### Requested the config for" << name();
-
     return d->engine->newQObject(new RecommendationScriptEngineConfig(this, config()));
 }
 
