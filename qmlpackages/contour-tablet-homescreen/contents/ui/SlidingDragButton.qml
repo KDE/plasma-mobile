@@ -98,9 +98,9 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
     onReleased: {
         if (inButton) {
-            stillIinButton = (mouse.y > height - 35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8)
+            stillInButton = (mouse.y > height - 35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8)
             if (stillInButton) {
-                print("Boo yah")
+                homeScreen.focusActivityView()
             }
             return
         }
