@@ -113,6 +113,8 @@ Item {
 
          preferredHighlightBegin: 0.5
          preferredHighlightEnd: 0.5
+         
+         flickDeceleration: 600
 
 
          delegate: ActivityDelegate{}
@@ -123,7 +125,6 @@ Item {
              PathAttribute { name: "itemXTranslate"; value: mainView.delegateWidth/3 }
              PathAttribute { name: "itemYTranslate"; value: 20 }
              PathAttribute { name: "itemScale"; value: 0.3 }
-             PathAttribute { name: "itemOpacity"; value: 0 }
              PathAttribute { name: "z"; value: 0 }
 
 
@@ -135,7 +136,6 @@ Item {
              PathAttribute { name: "itemXTranslate"; value: mainView.delegateWidth/4 }
              PathAttribute { name: "itemYTranslate"; value: -50 }
              PathAttribute { name: "itemScale"; value: 0.5 }
-             PathAttribute { name: "itemOpacity"; value: 0.65 }
              PathAttribute { name: "z"; value: 0 }
 
 
@@ -147,7 +147,6 @@ Item {
              PathAttribute { name: "itemXTranslate"; value: 0 }
              PathAttribute { name: "itemYTranslate"; value: 0 }
              PathAttribute { name: "itemScale"; value: 1 }
-             PathAttribute { name: "itemOpacity"; value: 1 }
              PathAttribute { name: "z"; value: 100 }
 
 
@@ -159,7 +158,6 @@ Item {
              PathAttribute { name: "itemXTranslate"; value: mainView.delegateWidth/4 }
              PathAttribute { name: "itemYTranslate"; value: 50 }
              PathAttribute { name: "itemScale"; value: 0.5 }
-             PathAttribute { name: "itemOpacity"; value: 0.65 }
              PathAttribute { name: "z"; value: 0 }
 
 
@@ -170,7 +168,6 @@ Item {
 
              PathAttribute { name: "itemXTranslate"; value: mainView.delegateWidth/3 }
              PathAttribute { name: "itemScale"; value: 0.3 }
-             PathAttribute { name: "itemOpacity"; value: 0 }
              PathAttribute { name: "z"; value: 0 }
          }
      }
