@@ -32,9 +32,14 @@ Item {
     }
 
     onWidthChanged: {
-        plasmoidContainer.plasmoid.width = plasmoidContainer.width
+        if (plasmoidContainer.plasmoid) {
+            plasmoidContainer.plasmoid.width = plasmoidContainer.width
+        }
     }
+
     onHeightChanged: {
-        plasmoidContainer.plasmoid.height = plasmoidContainer.height
+        if (plasmoidContainer.plasmoid) {
+            plasmoidContainer.plasmoid.height = plasmoidContainer.height
+        }
     }
 }
