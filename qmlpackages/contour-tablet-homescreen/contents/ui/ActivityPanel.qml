@@ -27,8 +27,10 @@ Item {
     id: activityPanel;
     anchors {
         topMargin: 50
-        verticalCenter: parent.verticalCenter
+        top: parent.top
+        bottom: parent.bottom
     }
+
     width: 400
     state: "hidden"
     property Item switcher
