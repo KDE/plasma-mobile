@@ -26,7 +26,7 @@ Item {
     id: systrayPanel
     state: "Hidden"
     width: Math.max(800, homeScreen.width)
-    height: Math.max(480, homeScreen.height-50+background.margins.bottom+200)
+    height: Math.max(480, homeScreen.height - 50 + background.margins.bottom + 200)
     onStateChanged: {
         if (state == "Hidden" || state == "Tasks") {
             menuContainer.plasmoid.resetStatus()
