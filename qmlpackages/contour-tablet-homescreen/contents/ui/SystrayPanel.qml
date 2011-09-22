@@ -28,7 +28,7 @@ Item {
     width: Math.max(800, homeScreen.width)
     height: Math.max(480, homeScreen.height - 50 + background.margins.bottom + 200)
     onStateChanged: {
-        if (state == "Hidden" || state == "Tasks") {
+        if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
             menuContainer.plasmoid.resetStatus()
         }
     }
@@ -47,7 +47,9 @@ Item {
             var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
             menuContainer.plasmoid = component.createObject(menuContainer);
             //assume menuContainer provides a itemLaunched signal
-            menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
+            if (menuContainer.plasmoid) {
+                menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
+            }
         }
     }
 
