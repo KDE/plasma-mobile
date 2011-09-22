@@ -275,6 +275,8 @@ void PlasmaApp::setupHomeScreen()
     connect(m_homeScreen, SIGNAL(transformingChanged(bool)),
             this, SLOT(containmentsTransformingChanged(bool)));
 
+    connect(m_homeScreen, SIGNAL(focusActivityView()),
+            this, SLOT(focusMainView()));
 
     connect(m_homeScreen, SIGNAL(nextActivityRequested()),
             m_corona, SLOT(activateNextActivity()));
@@ -461,6 +463,13 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     KConfigGroup cg = containment->config();
     cg = KConfigGroup(&cg, "General");
+}
+
+void PlasmaApp::focusMainView()
+{
+    if (m_mainView) {
+        KWindowSystem::forceActiveWindow(m_mainView->winId());
+    }
 }
 
 void PlasmaApp::mainViewGeometryChanged()
