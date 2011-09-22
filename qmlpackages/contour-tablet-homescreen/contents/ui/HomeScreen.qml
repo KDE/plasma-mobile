@@ -31,10 +31,12 @@ Item {
     y: 0;
     width: 800;
     height: 480;
+    state : "Normal"
     signal nextActivityRequested
     signal previousActivityRequested
     signal newActivityRequested
-    state : "Normal"
+    signal transformingChanged(bool transforming)
+    signal focusActivityView
 
     property QtObject activeWallpaper
     onActiveWallpaperChanged: {
@@ -125,6 +127,8 @@ Item {
         }
     }
 
+    /*
+    TODO: re-enable for Plasma Active Two
     RecommendationsPanel {
         id: leftEdgePanel
         objectName: "leftEdgePanel"
@@ -135,6 +139,7 @@ Item {
         }
         x: - width
     }
+    */
 
     states: [
             State {
@@ -182,8 +187,6 @@ Item {
 
     ActivityPanel {
         id: activityPanel
-
-        anchors.verticalCenter: parent.verticalCenter
         x: parent.width - width
     }
 

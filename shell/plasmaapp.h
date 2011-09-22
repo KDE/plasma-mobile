@@ -91,6 +91,7 @@ private Q_SLOTS:
     void containmentWallpaperChanged(Plasma::Containment *containment);
     void gotStartup(const KStartupInfoId& id, const KStartupInfoData& data);
     void killStartup(const KStartupInfoId& id);
+    void focusMainView();
 
 private:
     MobCorona *m_corona;

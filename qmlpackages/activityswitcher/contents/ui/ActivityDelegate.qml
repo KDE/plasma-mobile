@@ -153,8 +153,8 @@ Item {
                 svg: iconsSvg
                 elementId: "delete"
                 toggle: true
-                opacity: model["Current"]==true?0.4:1
-                enabled: opacity==1
+                opacity: model["Current"] == true ? 0.4 : 1
+                enabled: opacity == 1
 
                 onClicked: {
                     if (confirmationDialog.scale == 1) {

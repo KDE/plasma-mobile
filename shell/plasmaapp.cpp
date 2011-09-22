@@ -275,6 +275,8 @@ void PlasmaApp::setupHomeScreen()
     connect(m_homeScreen, SIGNAL(transformingChanged(bool)),
             this, SLOT(containmentsTransformingChanged(bool)));
 
+    connect(m_homeScreen, SIGNAL(focusActivityView()),
+            this, SLOT(focusMainView()));
 
     connect(m_homeScreen, SIGNAL(nextActivityRequested()),
             m_corona, SLOT(activateNextActivity()));
@@ -439,8 +441,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     // for the alternate screen (such as a launcher) we need a containment setted as excludeFromActivities
     //FIXME: use only the declarativeSlot key?
     if (containment->config().readEntry("excludeFromActivities", false)) {
-        QString declarativeSlot = containment->config().readEntry("declarativeSlot", "alternateSlot");
-
+        const QString declarativeSlot = containment->config().readEntry("declarativeSlot", "alternateSlot");
         QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>(declarativeSlot);
 
         if (alternateSlot) {
@@ -462,6 +463,13 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     KConfigGroup cg = containment->config();
     cg = KConfigGroup(&cg, "General");
+}
+
+void PlasmaApp::focusMainView()
+{
+    if (m_mainView) {
+        KWindowSystem::forceActiveWindow(m_mainView->winId());
+    }
 }
 
 void PlasmaApp::mainViewGeometryChanged()

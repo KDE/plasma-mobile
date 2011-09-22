@@ -34,13 +34,12 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
     PlasmaCore.Svg {
         id: iconSvg
-        imagePath: "icons/dashboard"
+        imagePath: "icons/contour"
     }
 
     PlasmaCore.SvgItem {
         id: iconItem
         svg: iconSvg
-        elementId: "dashboard-show"
         width: height
         height: 32
         anchors {
@@ -63,12 +62,16 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         startY = mouse.screenY
         startX = mouse.screenX
         lastY = mouse.screenY
-        disableTimer.running = true
+        inButton = (mouse.y > height - 35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8)
+        if (!inButton) {
+            disableTimer.running = true
+        }
     }
     onPositionChanged: {
-        if (!panelDragButton.dragEnabled) {
+        if (!panelDragButton.dragEnabled || inButton) {
             return
         }
+
         //FIXME: why sometimes onPressed doesn't arrive?
         if (startY < 0 || lastY < 0) {
             startY = mouse.screenY
@@ -94,35 +97,33 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     }
 
     onReleased: {
+        if (inButton) {
+            stillInButton = (mouse.y > height - 35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8)
+            if (stillInButton) {
+                homeScreen.focusActivityView()
+            }
+            return
+        }
+
         panelDragButton.dragEnabled = true
         disableTimer.running = false
         dragging = false
         var oldState = systrayPanel.state
         systrayPanel.state = "none"
 
-        //click on the handle area, always switch hidden/full
-        if (mouse.y > height-35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8) {
-            if (oldState == "Hidden") {
-                systrayPanel.state = "Full"
-            } else {
-                systrayPanel.state = "Hidden"
-            }
-
-        //the biggest one, Launcher with tag cloud
-        } else if (slidingPanel.y > -100) {
+        if (slidingPanel.y > -100) {
+            //the biggest one, Launcher with tag cloud
             systrayPanel.state = "Launcher"
-
-        //more than 2/3 of the screen uncovered, full
         } else if (systrayPanel.height+slidingPanel.y > systrayPanel.height/2) {
+            //more than 2/3 of the screen uncovered, full
             systrayPanel.state = "Full"
 
-        //show only the taskbar: require a smaller quantity of the screen uncovered when the previous state is hidden
         } else if ((oldState == "Hidden" && systrayPanel.height+slidingPanel.y > panelDragButton.tasksHeight/2) ||
                    (systrayPanel.height+slidingPanel.y > (panelDragButton.tasksHeight/5)*6)) {
+            //show only the taskbar: require a smaller quantity of the screen uncovered when the previous state is hidden
             systrayPanel.state = "Tasks"
-
-        //Only the small top panel
         } else {
+            //Only the small top panel
             systrayPanel.state = "Hidden"
         }
         startY = -1
