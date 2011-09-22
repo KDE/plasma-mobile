@@ -26,14 +26,17 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Item {
     id: activityPanel;
     anchors {
-        top: parent.top
-        bottom: parent.bottom
         topMargin: 50
+        verticalCenter: parent.verticalCenter
     }
     width: 400
     state: "hidden"
     property Item switcher
     onStateChanged: {
+        if (!switcher) {
+            return
+        }
+
         if (state == "hidden") {
             switcher.state = "Passive"
         } else if (switcher.state == "Passive") {

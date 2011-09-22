@@ -187,8 +187,6 @@ Item {
 
     ActivityPanel {
         id: activityPanel
-
-        anchors.verticalCenter: parent.verticalCenter
         x: parent.width - width
     }
 
