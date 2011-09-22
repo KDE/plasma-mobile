@@ -31,12 +31,6 @@ Rectangle {
     height: 480
     opacity: 0
 
-    PlasmaCore.DataSource {
-        id: activitySource
-        engine: "org.kde.activities"
-        connectedSources: ["Status"]
-    }
-
     MouseArea {
         anchors.fill: parent
         onClicked: {
