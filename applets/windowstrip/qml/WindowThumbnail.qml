@@ -26,7 +26,8 @@ import org.kde.qtextracomponents 0.1
 
 Item {
     id: windowDelegate
-    width: height*1.6
+    //space for the close button
+    width: height*1.6 + 32
     height: main.height
     onHeightChanged: {
         positionsTimer.restart()
@@ -69,23 +70,48 @@ Item {
         }
     }
 
-    MobileComponents.ActionButton {
-        id: closeButton
-        svg: iconsSvg
-        iconSize: 22
-        elementId: "close"
+    PlasmaCore.FrameSvgItem {
+        imagePath: "widgets/button"
+        prefix: "shadow"
+        width: closeButton.width + margins.left + margins.right
+        height: closeButton.height + margins.top + margins.bottom
         visible: model["actionClose"] && (model["className"] != shellName)
-
         anchors {
             top: parent.top
             right: parent.right
+            topMargin: 32
         }
 
-        onClicked: {
-            var service = tasksSource.serviceForSource(winId)
-            var operation = service.operationDescription("close")
+        PlasmaCore.FrameSvgItem {
+            id: closeButton
+            imagePath: "widgets/button"
+            prefix: "normal"
+            //a bit more left margin
+            width: closeButtonSvg.width + margins.left + margins.right + 16
+            height: closeButtonSvg.height + margins.top + margins.bottom
+            x: parent.margins.left
+            y: parent.margins.top
 
-            service.startOperationCall(operation)
+            MobileComponents.ActionButton {
+                id: closeButtonSvg
+                svg: iconsSvg
+                iconSize: 22
+                backgroundVisible: false
+                elementId: "close"
+
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    rightMargin: parent.margins.right
+                }
+
+                onClicked: {
+                    var service = tasksSource.serviceForSource(winId)
+                    var operation = service.operationDescription("close")
+
+                    service.startOperationCall(operation)
+                }
+            }
         }
     }
 }
