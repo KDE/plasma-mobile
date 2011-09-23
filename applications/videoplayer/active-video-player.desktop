@@ -1,17 +1,20 @@
 [Desktop Entry]
 Name=Videos
+Name[nl]=Video's
 Name[pt]=Vídeos
 Name[pt_BR]=Vídeos
 Name[sv]=Videor
 Name[uk]=Відео
 Name[x-test]=xxVideosxx
 GenericName=Video player
+GenericName[nl]=Videospeler
 GenericName[pt]=Leitor de vídeo
 GenericName[pt_BR]=Reprodutor de vídeo
 GenericName[sv]=Videospelare
 GenericName[uk]=Програвач відеофайлів
 GenericName[x-test]=xxVideo playerxx
 Comment=A video player for touch tablets
+Comment[nl]=Een videospeler voor aanraaktablets
 Comment[pt]=Um leitor de vídeo para tabletes por toque
 Comment[pt_BR]=Um reprodutor de vídeo para tablets
 Comment[sv]=En videospelare för pekskärmar
