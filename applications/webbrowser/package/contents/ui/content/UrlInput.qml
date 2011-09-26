@@ -135,14 +135,14 @@ Item {
                 urlText.text = ""
             }
         }
-        width: 48
-        height: 48
+        width: 32
+        height: 32
         opacity: urlText.text == "" ?0: 1
         anchors {
             right: urlText.right
-            rightMargin: -8
+            rightMargin: +4
             verticalCenter: urlText.verticalCenter
-            verticalCenterOffset: -2
+            verticalCenterOffset: -1
         }
         Behavior on opacity {
             NumberAnimation {
