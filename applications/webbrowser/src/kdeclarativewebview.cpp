@@ -17,6 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#define QL1S(x)  QLatin1String(x)
+#define QL1C(x)  QLatin1Char(x)
 
 #include "kdeclarativewebview.h"
 #include "networkaccessmanager.h"
@@ -316,6 +318,9 @@ void KDeclarativeWebView::init()
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
+
+    connect(access, SIGNAL(finished(QNetworkReply*)), page(), SLOT(handleNetworkErrors(QNetworkReply*)));
+
 }
 
 void KDeclarativeWebView::componentComplete()
@@ -1188,6 +1193,9 @@ void QDeclarativeWebPage::downloadUrl(const KUrl &url)
 {
     downloadResource(url, QString(), view());
 }
+
+#include "errorhandling.cpp"
+
 
 QT_END_NAMESPACE
 

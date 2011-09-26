@@ -65,6 +65,7 @@ protected:
 
 protected Q_SLOTS:
     void handleUnsupportedContent(QNetworkReply *);
+    void handleNetworkErrors(QNetworkReply *);
     void downloadRequest(const QNetworkRequest &request);
     void downloadUrl(const KUrl &url);
     void downloadFinished(KJob *job);
@@ -72,6 +73,7 @@ protected Q_SLOTS:
 private:
     bool downloadResource(const KUrl& srcUrl, const QString& suggestedName = QString(),
                           QWidget* parent = 0, const KIO::MetaData& metaData = KIO::MetaData());
+    QString errorPage(QNetworkReply *reply);
     KDeclarativeWebView *viewItem();
     Activities::Consumer *m_activityConsumer;
 };

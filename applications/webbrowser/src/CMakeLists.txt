@@ -58,4 +58,6 @@ target_link_libraries(active-webbrowser
     ontologies
 )
 
+install(FILES infopage.html DESTINATION ${DATA_INSTALL_DIR}/active-webbrowser )
+
 install( TARGETS active-webbrowser ${INSTALL_TARGETS_DEFAULT_ARGS} )
