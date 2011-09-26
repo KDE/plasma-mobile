@@ -437,6 +437,13 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 
     containment->resize(m_mainView->size());
 
+    //FIXME: avoidable all this disk access at startup?
+    QString path = KStandardDirs::locateLocal("data", QString("plasma/activities-screenshots/%1.png").arg(containment->context()->currentActivityId()));
+
+    if (!QFile::exists(path)) {
+        m_pluginLoader->activityThumbnails()->snapshotContainment(containment);
+    }
+
     // we need our homescreen to show something!
     // for the alternate screen (such as a launcher) we need a containment setted as excludeFromActivities
     //FIXME: use only the declarativeSlot key?
