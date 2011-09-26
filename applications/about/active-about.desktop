@@ -1,17 +1,20 @@
 [Desktop Entry]
 Name=About
+Name[nl]=Info over
 Name[pt]=Acerca
 Name[pt_BR]=Sobre
 Name[sv]=Om
 Name[uk]=Про програму
 Name[x-test]=xxAboutxx
 GenericName=About Plasma Active
+GenericName[nl]=Info over Plasma Active
 GenericName[pt]=Acerca do Plasma Active
 GenericName[pt_BR]=Sobre o Plasma Active
 GenericName[sv]=Om Plasma aktiv
 GenericName[uk]=Про Плазму для портативних пристроїв
 GenericName[x-test]=xxAbout Plasma Activexx
 Comment=Informations about Plasma Active
+Comment[nl]=Informatie over Plasma Active
 Comment[pt]=Informações acerca do Plasma Active
 Comment[pt_BR]=Informações sobre o Plasma Active
 Comment[sv]=Information om Plasma aktiv

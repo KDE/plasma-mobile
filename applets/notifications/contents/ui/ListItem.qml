@@ -27,12 +27,27 @@ Item {
     width: parent.width
     height: childrenRect.height+4
     property int implicitHeight
+    property bool topBorderEnabled: y > 0
+    property bool bottomBorderEnabled: true
+    Connections {
+        target: listItem.parent
+        onHeightChanged: bottomBorderEnabled = (listItem.parent.height > listItem.y+listItem.height)
+    }
 
 
     PlasmaCore.FrameSvgItem {
         id : background
         imagePath: "widgets/listitem"
         prefix: "normal"
+        enabledBorders: {
+            if (topBorderEnabled && bottomBorderEnabled) {
+                return "TopBorder|BottomBorder|LeftBorder|RightBorder"
+            } else if (topBorderEnabled) {
+                return "TopBorder|LeftBorder|RightBorder"
+            } else if (bottomBorderEnabled) {
+                return "BottomBorder|LeftBorder|RightBorder"
+            }
+        }
 
         anchors.fill: parent
 
