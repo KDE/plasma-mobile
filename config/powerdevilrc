@@ -2,7 +2,7 @@
 BatteryCriticalAction=1
 
 [General]
-configLockScreen=false
+configLockScreen=true
 
 [Profiles]
 ACProfile=Performance
