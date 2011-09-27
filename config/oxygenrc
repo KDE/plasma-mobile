@@ -13,6 +13,8 @@ UseOuterColor=false
 VerticalOffset=0.2
 
 [Style]
+ScrollBarAddLineButtons=0
+ScrollBarSubLineButtons=0
 ScrollBarWidth=30
 WindowDragEnabled=false
 
