@@ -31,6 +31,7 @@ ShowTabBox=true
 [Windows]
 Placement=Maximizing
 BorderlessMaximizedWindows=true
+FocusStealingPreventionLevel=0
 
 [Plugins]
 kwin4_effect_blurEnabled=false
