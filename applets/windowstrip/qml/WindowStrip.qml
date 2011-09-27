@@ -159,6 +159,11 @@ Item {
                         }
                     }
                 }
+                //purely a spacer
+                Item {
+                    width: height*1.6 + 32
+                    height: main.height
+                }
             }
         }
     }
