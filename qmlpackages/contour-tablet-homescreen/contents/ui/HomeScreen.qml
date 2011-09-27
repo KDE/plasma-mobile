@@ -199,9 +199,4 @@ Item {
         height: homeScreen.height
         property QGraphicsWidget containment
     }
-
-    LockScreen {
-        id: lockScreenItem
-        anchors.fill: parent
-    }
 }
