@@ -55,7 +55,8 @@ ListItem {
             Text {
                 text: body
                 color: theme.textColor
-                width: popupFlickable.width - 24 - 32 - 12
+                width: popupFlickable.width- 24 - 32 - 12
+                wrapMode: Text.Wrap
             }
             PlasmaCore.SvgItem {
                 svg: configIconsSvg

@@ -228,7 +228,7 @@ Item {
         windowFlags: Qt.Popup
         mainItem: Flickable {
             id: popupFlickable
-            width: 400
+            width: Math.max(300, contentsColumn.width)
             height: Math.min(350, contentHeight)
             contentWidth: contentsColumn.width
             contentHeight: contentsColumn.height
