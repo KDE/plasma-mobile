@@ -27,7 +27,7 @@ import org.kde.qtextracomponents 0.1
 Item {
     id: windowDelegate
     //space for the close button
-    width: height*1.6 + 32
+    width: height*1.6 + 48
     height: main.height
     onHeightChanged: {
         positionsTimer.restart()
