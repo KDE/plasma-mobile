@@ -1,0 +1,12 @@
+[Desktop Entry]
+X-SuSE-translate=true
+TryExec=/nowhere
+Exec=krunner
+X-DBUS-StartupType=wait
+Name=KRunner
+Type=Service
+X-KDE-StartupNotify=false
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=0
+
+
