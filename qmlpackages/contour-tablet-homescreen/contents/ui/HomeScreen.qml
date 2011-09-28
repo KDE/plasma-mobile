@@ -109,7 +109,7 @@ Item {
         height: homeScreen.height;
     }
 
-    Item {
+    MobileComponents.MouseEventListener {
         id: mainSlot;
         objectName: "mainSlot"
         x: 0;
@@ -117,6 +117,14 @@ Item {
         width: homeScreen.width
         height: homeScreen.height
         property QGraphicsWidget containment
+        onPressed: {
+            if (mouse.x < activityPanel.x) {
+                activityPanel.state = "hidden"
+            }
+            /*if (mouse.x > leftEdgePanel.x+leftEdgePanel.width) {
+                leftEdgePanel.state = "hidden"
+            }*/
+        }
     }
 
 
