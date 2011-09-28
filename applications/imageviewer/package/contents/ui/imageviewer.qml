@@ -196,6 +196,7 @@ Image {
             highlightRangeMode: ListView.StrictlyEnforceRange
             orientation: ListView.Horizontal
             snapMode: ListView.SnapOneItem
+            cacheBuffer: 40
             //highlightFollowsCurrentItem: true
             delegate: FullScreenDelegate {
                 source: model["url"]
