@@ -30,10 +30,10 @@ namespace Plasma
     class Containment;
     class Applet;
     class Corona;
+    class IconWidget;
 } // namespace Plasma
 
 class KeyboardDialog;
-class QPushButton;
 
 class KeyboardDialog : public Plasma::Dialog
 {
@@ -70,8 +70,9 @@ private:
     Plasma::Containment *m_containment;
     Plasma::Corona *m_corona;
     Plasma::Location m_location;
-    QPushButton *m_closeButton;
-    QPushButton *m_moveButton;
+    Plasma::IconWidget *m_closeButton;
+    Plasma::IconWidget *m_moveButton;
+    QGraphicsWidget *m_graphicsWidget;
 };
 
 #endif // multiple inclusion guard

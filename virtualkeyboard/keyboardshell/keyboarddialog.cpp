@@ -27,6 +27,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QPushButton>
+#include <QGraphicsLinearLayout>
 
 #include <KWindowSystem>
 #include <KIcon>
@@ -37,6 +38,7 @@
 #include <Plasma/PopupApplet>
 #include <Plasma/Corona>
 #include <Plasma/Containment>
+#include <Plasma/IconWidget>
 #include <Plasma/WindowEffects>
 
 KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *containment, const QString &pluginName, int appletId, const QVariantList &appletArgs, QWidget *parent)
@@ -46,19 +48,17 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
       m_corona(corona),
       m_location(Plasma::Floating)
 {
-    m_closeButton = new QPushButton(this);
-    m_closeButton->setFlat(true);
-    m_closeButton->setIcon(KIcon("dialog-close"));
-    m_closeButton->setIconSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
+    setContainment(containment);
+    m_closeButton = new Plasma::IconWidget(m_containment);
+    m_closeButton->setSvg("widgets/configuration-icons", "close");
+    m_closeButton->setMaximumSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
     connect(m_closeButton, SIGNAL(clicked()), this, SLOT(hide()));
 
-    m_moveButton = new QPushButton(this);
-    m_moveButton->setFlat(true);
+    m_moveButton = new Plasma::IconWidget(m_containment);
     m_moveButton->setIcon(KIcon("arrow-up"));
-    m_moveButton->setIconSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
+    m_moveButton->setMaximumSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
     connect(m_moveButton, SIGNAL(clicked()), this, SLOT(swapScreenEdge()));
 
-    setContainment(containment);
     m_containment->setFormFactor(Plasma::Planar);
     m_containment->setLocation(Plasma::BottomEdge);
     KWindowSystem::setType(winId(), NET::Dock);
@@ -81,7 +81,13 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     connect(this, SIGNAL(dialogVisible(bool)), m_applet, SLOT(dialogStatusChanged(bool)));
     m_containment->addApplet(m_applet, QPointF(-1, -1), false);
 
-    setGraphicsWidget(m_applet);
+    QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(m_containment);
+    lay->addItem(m_applet);
+    QGraphicsLinearLayout *vLay = new QGraphicsLinearLayout(Qt::Vertical);
+    lay->addItem(vLay);
+    vLay->addItem(m_closeButton);
+    vLay->addItem(m_moveButton);
+    setGraphicsWidget(m_containment);
 
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
     setWindowTitle(m_applet->name());
@@ -104,6 +110,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 KeyboardDialog::~KeyboardDialog()
 {
     emit storeApplet(m_applet);
+    m_graphicsWidget->deleteLater();
 }
 
 void KeyboardDialog::setContainment(Plasma::Containment *c)
@@ -133,7 +140,7 @@ Plasma::FormFactor KeyboardDialog::formFactor() const
 }
 
 void KeyboardDialog::updateGeometry()
-{
+{return;
     QDesktopWidget *desktop = QApplication::desktop();
     m_containment->setGeometry(QRect(QPoint(0,0), desktop->size()));
     m_corona->setSceneRect(m_containment->geometry());
@@ -158,8 +165,6 @@ void KeyboardDialog::updateGeometry()
         default:
             break;
     }
-    m_closeButton->raise();
-    m_moveButton->raise();
 }
 
 void KeyboardDialog::swapScreenEdge()
