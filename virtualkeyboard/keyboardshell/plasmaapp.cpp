@@ -189,20 +189,6 @@ bool PlasmaApp::hasComposite()
 }
 
 
-void PlasmaApp::setDirection(const QString &direction)
-{
-    Plasma::Direction dir = Plasma::Down;
-    if (direction == "up") {
-        dir = Plasma::Up;
-    } else if (direction == "left") {
-        dir = Plasma::Left;
-    } else if (direction == "right") {
-        dir = Plasma::Right;
-    }
-
-    m_dialog->setDirection(dir);
-}
-
 void PlasmaApp::setLocation(const QString &location)
 {
     Plasma::Location loc = Plasma::BottomEdge;

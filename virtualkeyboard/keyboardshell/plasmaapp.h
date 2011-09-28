@@ -67,7 +67,6 @@ public Q_SLOTS:
     // qdbuscpp2xml plasmaapp.h -o org.kde.PlasmaKeyboardShell.xml
     void show();
     void hide();
-    void setDirection(const QString &direction);
     void setLocation(const QString &direction);
     void requestLayout(const QString &layout);
     void resetLayout();

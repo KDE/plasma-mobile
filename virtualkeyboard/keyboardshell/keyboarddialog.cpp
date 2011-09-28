@@ -44,7 +44,6 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
       m_applet(0),
       m_containment(0),
       m_corona(corona),
-      m_direction(Plasma::Up),
       m_location(Plasma::Floating),
       m_rotation(0)
 {
@@ -251,37 +250,6 @@ void KeyboardDialog::setLocation(const Plasma::Location location)
     }
 }
 
-void KeyboardDialog::setDirection(const Plasma::Direction direction)
-{
-    if (direction == m_direction) {
-        return;
-    }
-
-    m_direction = direction;
-
-    switch (direction) {
-    case Plasma::Down:
-        setRotation(180);
-        break;
-    case Plasma::Left:
-        setRotation(270);
-        break;
-    case Plasma::Right:
-        setRotation(90);
-        break;
-    case Plasma::Up:
-    default:
-        setRotation(0);
-        break;
-    }
-
-}
-
-Plasma::Direction KeyboardDialog::direction() const
-{
-    return m_direction;
-}
-
 void KeyboardDialog::showEvent(QShowEvent *event)
 {
     KWindowSystem::setType(winId(), NET::Dock);
@@ -324,20 +292,6 @@ void KeyboardDialog::resizeEvent(QResizeEvent *event)
     }
 }
 
-QSize KeyboardDialog::transformedSize() const
-{
-    switch (m_direction) {
-    case Plasma::Left:
-    case Plasma::Right:
-        return QSize(size().height(), size().width());
-        break;
-    case Plasma::Down:
-    case Plasma::Up:
-    default:
-        return size();
-        break;
-    }
-}
 
 #include "keyboarddialog.moc"
 
