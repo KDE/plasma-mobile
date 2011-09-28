@@ -219,7 +219,7 @@ Item {
                 id: categoriesTimer
                 repeat: false
                 running: false
-                interval: 2000
+                interval: 0
                 onTriggered: {
                     var component = Qt.createComponent("ItemsListGroup.qml")
                     var existingCategories = Array()
@@ -285,7 +285,7 @@ Item {
                 }
 
 
-                //This is just for event compression when a lot of boxes is created one after the other
+                //This is just for event compression when a lot of boxes are created one after the other
                 Timer {
                     id: layoutTimer
                     repeat: false
