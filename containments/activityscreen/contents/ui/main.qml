@@ -159,7 +159,7 @@ Item {
         MouseArea {
             id: contentItem
             width: mainFlickable.width
-            height: childrenRect.height+availScreenRect.y+20
+            height: childrenRect.y+childrenRect.height+availScreenRect.y+20
 
             onClicked: {
                 resourceInstance.uri = ""
@@ -275,7 +275,7 @@ Item {
                 id: resultsFlow
                 //height: Math.min(300, childrenRect.height)
                 width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
-                height: childrenRect.height
+                height: childrenRect.y+childrenRect.height
                 z: 900
 
                 anchors {
