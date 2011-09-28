@@ -25,6 +25,7 @@
 #include <KDebug>
 #include <KWindowSystem>
 
+#include <Plasma/FrameSvg>
 #include <Plasma/Svg>
 
 BusyWidget::BusyWidget(QWidget *parent)
@@ -40,6 +41,11 @@ BusyWidget::BusyWidget(QWidget *parent)
     m_svg->setImagePath("widgets/busywidget");
     m_svg->setContainsMultipleImages(true);
 
+    m_background = new Plasma::FrameSvg(this);
+    m_background->setImagePath("widgets/background");
+    m_background->setEnabledBorders((Plasma::FrameSvg::EnabledBorders)(Plasma::FrameSvg::AllBorders^Plasma::FrameSvg::BottomBorder));
+    m_background->resizeFrame(size());
+
     m_rotationTimer = new QTimer(this);
     connect(m_rotationTimer, SIGNAL(timeout()), this, SLOT(refreshSpinner()));
     m_rotationTimer->start(40);
@@ -54,6 +60,11 @@ BusyWidget::~BusyWidget()
 {
 }
 
+void BusyWidget::resizeEvent(QResizeEvent *event)
+{
+    m_background->resizeFrame(event->size());
+}
+
 void BusyWidget::refreshSpinner()
 {
 
@@ -65,7 +76,8 @@ void BusyWidget::refreshSpinner()
     }
 
     QRect spinnerRect(QPoint(0, 0), QSize(64, 64));
-    spinnerRect.moveCenter(QRect(QPoint(0,0), size()).center());
+    const int topMargin = m_background->marginSize(Plasma::TopMargin);
+    spinnerRect.moveCenter(QRect(QPoint(0, topMargin), size()-QSize(0, topMargin)).center());
     update(spinnerRect);
 }
 
@@ -73,11 +85,12 @@ void BusyWidget::paintEvent(QPaintEvent *e)
 {
     QPainter p(this);
     p.setCompositionMode(QPainter::CompositionMode_Source);
-    p.fillRect(e->rect(), QColor(0,0,0,95));
+    m_background->paintFrame(&p);
     p.setCompositionMode(QPainter::CompositionMode_SourceOver);
 
     QRectF spinnerRect(QPoint(0, 0), QSize(64, 64));
-    spinnerRect.moveCenter(QRect(QPoint(0,0), size()).center());
+    const int topMargin = m_background->marginSize(Plasma::TopMargin);
+    spinnerRect.moveCenter(QRect(QPoint(0, topMargin), size()-QSize(0, topMargin)).center());
     int intRotation = (int)m_rotation;
 
     if (!m_frames[intRotation]) {

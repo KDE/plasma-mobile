@@ -29,6 +29,7 @@ class BusyWidget;
 
 namespace Plasma
 {
+    class FrameSvg;
     class Svg;
 }
 
@@ -40,13 +41,16 @@ public:
     BusyWidget(QWidget *parent=0);
     ~BusyWidget();
 
+protected:
     void paintEvent(QPaintEvent *e);
+    void resizeEvent(QResizeEvent *event);
 
 protected Q_SLOTS:
     void refreshSpinner();
 
 private:
     Plasma::Svg *m_svg;
+    Plasma::FrameSvg *m_background;
     QHash<int, QPixmap> m_frames;
     QTimer *m_rotationTimer;
     qreal m_rotation;

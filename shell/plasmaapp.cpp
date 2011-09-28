@@ -643,7 +643,7 @@ void PlasmaApp::gotStartup(const KStartupInfoId &id, const KStartupInfoData &dat
         m_busyWidget = new BusyWidget();
     }
 
-    m_busyWidget.data()->setGeometry(m_mainView->geometry().center().x() - 128, m_mainView->geometry().bottom() - 64, 256, 64);
+    m_busyWidget.data()->setGeometry(m_mainView->geometry().center().x() - 128, m_mainView->geometry().bottom() - 78, 256, 78);
 
     KWindowSystem::setState(m_busyWidget.data()->winId(), NET::SkipTaskbar | NET::KeepAbove);
     Plasma::WindowEffects::slideWindow(m_busyWidget.data(), Plasma::BottomEdge);
