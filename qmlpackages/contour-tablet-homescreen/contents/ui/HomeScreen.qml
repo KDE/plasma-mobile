@@ -110,22 +110,15 @@ Item {
     }
 
     Item {
-        id: mainContainments
+        id: mainSlot;
+        objectName: "mainSlot"
+        x: 0;
+        y: 0;
         width: homeScreen.width
         height: homeScreen.height
-        x: 0
-        y: 0
-
-        Item {
-            id: mainSlot;
-            objectName: "mainSlot"
-            x: 0;
-            y: 0;
-            width: homeScreen.width
-            height: homeScreen.height
-            property QGraphicsWidget containment
-        }
+        property QGraphicsWidget containment
     }
+
 
     /*
     TODO: re-enable for Plasma Active Two
