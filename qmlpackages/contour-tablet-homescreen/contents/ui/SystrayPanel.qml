@@ -181,16 +181,10 @@ Item {
     ]
     transitions: [
         Transition {
-            SequentialAnimation {
-                PropertyAction { 
-                    target: slidingPanel
-                    property: "acceptsFocus"
-                }
-                PropertyAnimation {
-                    properties: "y"
-                    duration: 250
-                    easing.type: Easing.OutQuad
-                }
+            PropertyAnimation {
+                properties: "y"
+                duration: 250
+                easing.type: Easing.OutQuad
             }
         }
     ]
