@@ -122,51 +122,7 @@ Flickable {
                 text: i18n("Loading...")
                 color: "gray"
             }
-            Rectangle {
-                color: "gray"
-                width: 10
-                anchors {
-                    top: parent.top
-                    bottom: parent.bottom
-                }
-                opacity: (imageViewer.state == "image+toolbar" && mainFlickable.contentWidth <= mainFlickable.width)?0.7:0
-                Rectangle {
-                    width: 8
-                    height: 8
-                    smooth: true
-                    radius: 5
-                    anchors.centerIn: parent
-                }
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-            Rectangle {
-                color: "gray"
-                width: 10
-                anchors {
-                    top: parent.top
-                    bottom: parent.bottom
-                    right: parent.right
-                }
-                opacity: (imageViewer.state == "image+toolbar" && mainFlickable.contentWidth <= mainFlickable.width)?0.7:0
-                Rectangle {
-                    width: 8
-                    height: 8
-                    smooth: true
-                    radius: 5
-                    anchors.centerIn: parent
-                }
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
+
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
