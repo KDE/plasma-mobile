@@ -84,14 +84,15 @@ void MobView::connectContainment(Plasma::Containment *containment)
         return;
     }
 
-    connect(containment, SIGNAL(activate()), this, SIGNAL(containmentActivated()));
-    connect(this, SIGNAL(sceneRectAboutToChange()), this, SLOT(updateGeometry()));
+    connect(containment, SIGNAL(activate()), this, SIGNAL(containmentActivated()), Qt::UniqueConnection);
+    connect(this, SIGNAL(sceneRectAboutToChange()), this, SLOT(updateGeometry()), Qt::UniqueConnection);
+    setWindowTitle(containment->activity());
 }
 
 void MobView::setContainment(Plasma::Containment *c)
 {
-    if (containment()) {
-        disconnect(containment(), 0, this, 0);
+    if (Plasma::Containment * oldCont = containment()) {
+        disconnect(oldCont, 0, this, 0);
     }
 
     Plasma::View::setContainment(c);
