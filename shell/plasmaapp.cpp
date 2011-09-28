@@ -354,7 +354,6 @@ void PlasmaApp::notifyStartup(bool completed)
 
 void PlasmaApp::mainContainmentActivated()
 {
-    m_mainView->setWindowTitle(m_mainView->containment()->activity());
     const WId id = m_mainView->effectiveWinId();
 
     QWidget * activeWindow = QApplication::activeWindow();
@@ -368,7 +367,6 @@ void PlasmaApp::mainContainmentActivated()
         m_mainView->activateWindow();
     }
 }
-
 
 void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 {
