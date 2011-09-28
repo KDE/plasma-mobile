@@ -48,9 +48,6 @@ public:
     Plasma::Location location() const;
     Plasma::FormFactor formFactor() const;
 
-    void setRotation(const int rotation);
-    int rotation() const;
-
     void setLocation(const Plasma::Location location);
 
 public Q_SLOTS:
@@ -75,7 +72,6 @@ private:
     Plasma::Location m_location;
     QPushButton *m_closeButton;
     QPushButton *m_moveButton;
-    int m_rotation;
 };
 
 #endif // multiple inclusion guard

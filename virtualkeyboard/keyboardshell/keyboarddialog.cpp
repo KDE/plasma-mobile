@@ -44,8 +44,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
       m_applet(0),
       m_containment(0),
       m_corona(corona),
-      m_location(Plasma::Floating),
-      m_rotation(0)
+      m_location(Plasma::Floating)
 {
     m_closeButton = new QPushButton(this);
     m_closeButton->setFlat(true);
@@ -181,28 +180,6 @@ void KeyboardDialog::swapScreenEdge()
     default:
         break;
     }
-}
-
-void KeyboardDialog::setRotation(const int degrees)
-{
-    if (degrees == m_rotation) {
-        return;
-    }
-
-    m_rotation = degrees;
-    const double pi = 3.141593;
-
-    const double a    = pi/180 * degrees;
-    const double sina = sin(a);
-    const double cosa = cos(a);
-
-    QTransform rotationTransform(cosa, sina, -sina, cosa, 0, 0);
-    m_applet->setTransform(rotationTransform);
-}
-
-int KeyboardDialog::rotation() const
-{
-    return m_rotation;
 }
 
 void KeyboardDialog::setLocation(const Plasma::Location location)
