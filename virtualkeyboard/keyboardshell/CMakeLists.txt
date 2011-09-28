@@ -31,3 +31,4 @@ install(TARGETS kdeinit_plasma-keyboardcontainer DESTINATION ${LIB_INSTALL_DIR})
 install(TARGETS plasma-keyboardcontainer ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES plasma-keyboardshell.desktop DESTINATION ${AUTOSTART_INSTALL_DIR})
+install(FILES arrows.svgz DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/air-mobile/keyboardshell/)

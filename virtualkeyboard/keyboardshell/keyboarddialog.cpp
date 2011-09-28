@@ -55,7 +55,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     connect(m_closeButton, SIGNAL(clicked()), this, SLOT(hide()));
 
     m_moveButton = new Plasma::IconWidget(m_containment);
-    m_moveButton->setIcon(KIcon("arrow-up"));
+    m_moveButton->setSvg("keyboardshell/arrows", "up-arrow");
     m_moveButton->setMaximumSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
     connect(m_moveButton, SIGNAL(clicked()), this, SLOT(swapScreenEdge()));
 
@@ -203,22 +203,22 @@ void KeyboardDialog::setLocation(const Plasma::Location location)
     case Plasma::TopEdge:
         setFixedSize(screenGeom.width() - 100, static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
         move(screenGeom.left() + 50, screenGeom.top());
-        m_moveButton->setIcon(KIcon("arrow-down"));
+        m_moveButton->setSvg("keyboardshell/arrows", "down-arrow");
         break;
     case Plasma::RightEdge:
         setFixedSize(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).width(), screenGeom.height() - 100);
         move(screenGeom.right() - width(), screenGeom.top() + 50);
-        m_moveButton->setIcon(KIcon("arrow-left"));
+        m_moveButton->setSvg("keyboardshell/arrows", "left-arrow");
         break;
     case Plasma::LeftEdge:
         setFixedSize(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).width(), screenGeom.height() - 100);
         move(screenGeom.left(), screenGeom.top() + 50);
-        m_moveButton->setIcon(KIcon("arrow-right"));
+        m_moveButton->setSvg("keyboardshell/arrows", "right-arrow");
         break;
     case Plasma::BottomEdge:
         setFixedSize(screenGeom.width() - 100, static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
         move(screenGeom.left() + 50, screenGeom.height() - height());
-        m_moveButton->setIcon(KIcon("arrow-up"));
+        m_moveButton->setSvg("keyboardshell/arrows", "up-arrow");
         break;
     default:
         // we don't support this location, so just revert back
