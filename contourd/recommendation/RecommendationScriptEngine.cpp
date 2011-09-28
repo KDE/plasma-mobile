@@ -74,7 +74,8 @@ RecommendationScriptEngine::RecommendationScriptEngine(QObject * parent, const Q
     d->delay.setSingleShot(true);
 
     connect(&(d->delay), SIGNAL(timeout()),
-            this, SLOT(sendUpdateNotification()));
+            this, SLOT(sendUpdateNotification()),
+            Qt::QueuedConnection);
 
 }
 
@@ -95,7 +96,8 @@ void RecommendationScriptEngine::init()
 
     d->engine = new QScriptEngine(this);
     connect(d->engine, SIGNAL(signalHandlerException(QScriptValue)),
-            this, SLOT(signalHandlerException(QScriptValue)));
+            this, SLOT(signalHandlerException(QScriptValue)),
+            Qt::QueuedConnection);
 
     d->engine->globalObject().setProperty("self",
             d->engine->newQObject(this));

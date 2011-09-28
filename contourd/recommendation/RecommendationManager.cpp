@@ -21,6 +21,8 @@
 #include "RecommendationManager.h"
 
 #include <QList>
+#include <QThread>
+#include <QMutex>
 
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusMetaType>
@@ -54,60 +56,100 @@ public:
 
     RecommendationManager * q;
 
+    void loadEngine(const KService::Ptr & service, bool scripted);
+
+    KConfig * config;
+    KConfigGroup * enginesConfig;
+
+    QList < RecommendationItem > recommendations;
+
+    class RecommendationEngineThread;
+
     struct EngineInfo {
         QString name;
         /*qreal*/ float score;
     };
 
+    QMutex engineInfosLock;
     QHash < RecommendationEngine *, EngineInfo > engineInfos;
     QHash < QString, RecommendationEngine * > engineByName;
-    QList < RecommendationItem > recommendations;
+};
 
-    void loadEngine(const KService::Ptr & service, bool scripted);
+class RecommendationManager::Private::RecommendationEngineThread: public QThread {
+public:
 
-    KConfig * config;
-    KConfigGroup * enginesConfig;
+    RecommendationEngineThread(RecommendationManager * pparent, RecommendationManager::Private * dparent,
+            const QString & service, bool scripted)
+        : QThread(pparent), parent(pparent), d(dparent), _engine(NULL), _service(service), _scripted(scripted)
+    {
+    }
+
+    virtual ~RecommendationEngineThread()
+    {
+        delete _engine;
+    }
+
+    void run()
+    {
+        kDebug() << "Loading engine:"
+            << _service << currentThreadId();
+
+        if (!_scripted) {
+            KPluginFactory * factory = KPluginLoader(_service).factory();
+
+            if (!factory) {
+                kDebug() << "Failed to load engine:" << _service;
+                return;
+            }
+
+            kDebug() << "1r######";
+            _engine = factory->create < RecommendationEngine > (NULL);
+            _engine->moveToThread(this);
+            kDebug() << "2r######";
+
+        } else {
+            kDebug() << "1#######";
+            _engine = new RecommendationScriptEngine(NULL, _service);
+            _engine->moveToThread(this);
+            kDebug() << "2#######";
+
+        }
+
+        if (_engine) {
+            d->engineInfosLock.lock();
+            d->engineInfos[_engine].name = _service;
+            d->engineInfos[_engine].score = d->enginesConfig->readEntry(_service, 1.0);
+            d->engineByName[_service] = _engine;
+            d->engineInfosLock.unlock();
+
+            connect(_engine,  SIGNAL(recommendationsUpdated(QList<Contour::RecommendationItem>)),
+                    parent, SLOT(updateRecommendations(QList<Contour::RecommendationItem>)),
+                    Qt::QueuedConnection);
+
+            _engine->init();
+
+        } else {
+            kDebug() << "Failed to load engine:" << _service;
+        }
+
+        kDebug() << "Entering loop" << currentThreadId();
+        exec();
+    }
+
+private:
+    RecommendationManager * const parent;
+    RecommendationManager::Private * const d;
+    RecommendationEngine * _engine;
+    QString _service;
+    bool _scripted;
+
 };
 
 
 void RecommendationManager::Private::loadEngine(const KService::Ptr & service, bool scripted)
 {
-    kDebug() << "Loading engine:"
-        << service->name() << service->storageId() << service->library();
-
-    RecommendationEngine * engine = NULL;
-
-    if (!scripted) {
-        KPluginFactory * factory = KPluginLoader(service->library()).factory();
-
-        if (!factory) {
-            kDebug() << "Failed to load engine:" << service->name();
-            return;
-        }
-
-        engine = factory->create < RecommendationEngine > (q);
-
-    } else {
-        engine = new RecommendationScriptEngine(q, service->library());
-
-    }
-
-    if (engine) {
-        engineInfos[engine].name = service->library();
-        engineInfos[engine].score = enginesConfig->readEntry(service->name(), 1.0);
-        engineByName[service->library()] = engine;
-
-        connect(engine, SIGNAL(recommendationsUpdated(QList<Contour::RecommendationItem>)),
-                q,      SLOT(updateRecommendations(QList<Contour::RecommendationItem>)),
-                Qt::QueuedConnection);
-
-        engine->init();
-
-    } else {
-        kDebug() << "Failed to load engine:" << service->name();
-    }
-
-
+    RecommendationEngineThread * thread = new RecommendationEngineThread(q, this, service->library(), scripted);
+    thread->start();
 }
 
 RecommendationManager::RecommendationManager(QObject *parent)
@@ -116,68 +158,20 @@ RecommendationManager::RecommendationManager(QObject *parent)
 {
     kDebug() << "Loading engines...";
 
+    // Loading C++ plugins
     KService::List offers = KServiceTypeTrader::self()->query("Contour/RecommendationEngine");
 
-    // Loading C++ plugins
-
     foreach (const KService::Ptr & service, offers) {
-
         d->loadEngine(service, false);
-
-        // kDebug() << "Loading engine:"
-        //     << service->name() << service->storageId() << service->library() << service->serviceTypes();
-
-        // KPluginFactory * factory = KPluginLoader(service->library()).factory();
-
-        // if (!factory) {
-        //     kDebug() << "Failed to load engine:" << service->name();
-        //     continue;
-        // }
-
-        // RecommendationEngine * engine = factory->create < RecommendationEngine > (this);
-
-        // if (engine) {
-        //     d->engineInfos[engine].name = service->library();
-        //     d->engineInfos[engine].score = d->enginesConfig->readEntry(service->name(), 1.0);
-        //     d->engineByName[service->library()] = engine;
-
-        //     connect(engine, SIGNAL(recommendationsUpdated(QList<Contour::RecommendationItem>)),
-        //             this,   SLOT(updateRecommendations(QList<Contour::RecommendationItem>)),
-        //             Qt::QueuedConnection);
-
-        //     engine->init();
-
-        // } else {
-        //     kDebug() << "Failed to load engine:" << service->name();
-        // }
-
     }
 
     // Loading scripted plugins
     kDebug() << "Loading scripted plugins";
 
-    // new RecommendationScriptEngine(this, QString());
-
     offers = KServiceTypeTrader::self()->query("Contour/RecommendationEngine/QtScript");
 
     foreach (const KService::Ptr & service, offers) {
-
         d->loadEngine(service, true);
-
-        // kDebug() << "Loading scripted engine:"
-        //     << service->name() << service->library();
-
-        // RecommendationEngine * engine = new RecommendationScriptEngine(this, service->library());
-
-        // d->engineInfos[engine].name = service->library();
-        // d->engineInfos[engine].score = d->enginesConfig->readEntry(service->name(), 1.0);
-        // d->engineByName[service->library()] = engine;
-
-        // connect(engine, SIGNAL(recommendationsUpdated(QList<Contour::RecommendationItem>)),
-        //         this,   SLOT(updateRecommendations(QList<Contour::RecommendationItem>)),
-        //         Qt::QueuedConnection);
-
-        // engine->init();
     }
 
     // Showing ourselves via the d-bus
@@ -200,9 +194,14 @@ void RecommendationManager::updateRecommendations(const QList < RecommendationIt
 
     RecommendationEngine * engine = dynamic_cast < RecommendationEngine * > (sender());
 
-    if (!engine || !d->engineInfos.contains(engine)) return;
+    d->engineInfosLock.lock();
+    if (!engine || !d->engineInfos.contains(engine)) {
+        d->engineInfosLock.unlock();
+        return;
+    }
 
     const Private::EngineInfo & engineInfo = d->engineInfos[engine];
+    d->engineInfosLock.unlock();
 
     kDebug() << engineInfo.name << "### updated its recommendations";
 
@@ -251,13 +250,13 @@ void RecommendationManager::updateRecommendations(const QList < RecommendationIt
         kDebug() << (++ind) << recommendation.engine << recommendation.title << recommendation.score;
     }
 
-    // emit recommendationsChanged(d->recommendations);
     emit recommendationsChanged();
 }
 
 void RecommendationManager::executeAction(const QString & engine, const QString & id, const QString & action)
 {
     kDebug() << engine << id << action;
+    d->engineInfosLock.lock();
 
     if (!d->engineByName.contains(engine)) return;
 
@@ -277,6 +276,7 @@ void RecommendationManager::executeAction(const QString & engine, const QString 
     }
 
     d->enginesConfig->sync();
+    d->engineInfosLock.unlock();
 }
 
 QList < Contour::RecommendationItem > RecommendationManager::recommendations() const
