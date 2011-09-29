@@ -1178,7 +1178,7 @@ void QDeclarativeWebPage::downloadFinished(KJob *job)
         fileRes.addType(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject"));
         fileRes.addTag(Nepomuk::Tag("Download"));
 
-        Nepomuk::Resource acRes("activities://" + activityId);
+        Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KEXT::Activity());
         acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
     }*/
 }

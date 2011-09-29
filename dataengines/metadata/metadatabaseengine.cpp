@@ -53,6 +53,8 @@
 #include <nepomuk/nfo.h>
 #include <nepomuk/nie.h>
 
+#include "kext.h"
+
 #define RESULT_LIMIT 24
 
 class MetadataBaseEnginePrivate
@@ -161,8 +163,8 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
              activityId = massagedName.split(":").value(1);
          }
 
-         kWarning() << "Asking for resources of activity" << activityId;
-         Nepomuk::Resource acRes("activities://" + activityId);
+         kDebug() << "Asking for resources of activity" << activityId;
+         Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KEXT::Activity());
          Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
          term.setInverted(true);
          query = Nepomuk::Query::Query(term);

@@ -27,6 +27,7 @@
 #include <soprano/vocabulary.h>
 
 #include "bookmark.h"
+#include "kext.h"
 
 #include <kdebug.h>
 
@@ -59,7 +60,7 @@ void MetadataJob::start()
         }
 
         Nepomuk::Resource fileRes(resourceUrl);
-        Nepomuk::Resource acRes("activities://" + activityUrl);
+        Nepomuk::Resource acRes(activityUrl, Nepomuk::Vocabulary::KEXT::Activity());
         QUrl typeUrl;
 
         //Bookmark?
@@ -89,7 +90,7 @@ void MetadataJob::start()
         QString url = parameters()["ResourceUrl"].toString();
 
         Nepomuk::Resource fileRes(resourceUrl);
-        Nepomuk::Resource acRes("activities://" + activityUrl);
+        Nepomuk::Resource acRes(activityUrl, Nepomuk::Vocabulary::KEXT::Activity());
 
         acRes.removeProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
         setResult(true);

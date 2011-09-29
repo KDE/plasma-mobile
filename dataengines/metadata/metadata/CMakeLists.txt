@@ -12,6 +12,19 @@ set(metadataengine_srcs
     metadataengine.cpp
 )
 
+soprano_add_ontology(
+        metadataengine_srcs
+        ${CMAKE_CURRENT_SOURCE_DIR}/../ontologies/kext.trig
+        "KEXT" "Nepomuk::Vocabulary" "trig"
+    )
+
+# nepomuk_add_ontology_classes (metadataengine_srcs
+#                               ONTOLOGIES
+#                               ${CMAKE_SOURCE_DIR}/ontologies/kext.trig
+#                               CLASSES
+#                               "KEXT"
+# )
+
 kde4_add_plugin(plasma_engine_active_metadata ${metadataengine_srcs})
 
 target_link_libraries(plasma_engine_active_metadata

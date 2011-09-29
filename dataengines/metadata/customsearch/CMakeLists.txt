@@ -12,6 +12,12 @@ set(customsearch_srcs
     customsearch.cpp
 )
 
+soprano_add_ontology(
+        customsearch_srcs
+        ${CMAKE_CURRENT_SOURCE_DIR}/../ontologies/kext.trig
+        "KEXT" "Nepomuk::Vocabulary" "trig"
+    )
+
 kde4_add_plugin(plasma_engine_active_customsearch ${customsearch_srcs})
 
 target_link_libraries(plasma_engine_active_customsearch

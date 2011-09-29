@@ -12,6 +12,12 @@ set(bookmarksdataengine_srcs
     bookmarksengine.cpp
 )
 
+soprano_add_ontology(
+        bookmarksdataengine_srcs
+        ${CMAKE_CURRENT_SOURCE_DIR}/../ontologies/kext.trig
+        "KEXT" "Nepomuk::Vocabulary" "trig"
+    )
+
 kde4_add_plugin(plasma_engine_active_bookmarks ${bookmarksdataengine_srcs})
 
 target_link_libraries(plasma_engine_active_bookmarks
