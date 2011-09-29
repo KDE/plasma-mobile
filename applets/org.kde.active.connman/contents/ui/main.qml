@@ -15,7 +15,7 @@ import MeeGo.Connman 0.1
 
 Item {
     id: main
-    property int minimumWidth: 300
+    property int minimumWidth: 450
     property int minimumHeight: 400
 
     NetworkListModel {
@@ -26,9 +26,9 @@ Item {
         }
         onStateChanged: {
             if (state == "online") {
-                plasmoid.popupIcon = QIcon("network-connect")
+                plasmoid.setPopupIconByName("network-wireless-100")
             } else {
-                plasmoid.popupIcon = QIcon("network-disconnect")
+                plasmoid.setPopupIconByName("network-wireless-0")
             }
         }
     }
