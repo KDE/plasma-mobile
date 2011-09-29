@@ -22,3 +22,6 @@ StartDragTime=500
 
 [WM]
 activeFont=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
+
+[Locale]
+TimeFormat=%H:%M:%S

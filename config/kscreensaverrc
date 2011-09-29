@@ -8,4 +8,4 @@ Lock=false
 LockGrace=1000
 PlasmaEnabled=false
 Saver=kblank.desktop
-Timeout=300
+Timeout=600
