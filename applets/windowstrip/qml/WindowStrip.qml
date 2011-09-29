@@ -58,7 +58,7 @@ Item {
         properties.x = itemPos.x + 10
         properties.y = itemPos.y + 20
         properties.width = item.width - 20
-        properties.height = item.height - 40
+        properties.height = item.height - 48
 
         return properties
     }
