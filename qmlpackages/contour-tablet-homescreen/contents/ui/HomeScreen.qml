@@ -128,8 +128,6 @@ Item {
     }
 
 
-    /*
-    TODO: re-enable for Plasma Active Two
     RecommendationsPanel {
         id: leftEdgePanel
         objectName: "leftEdgePanel"
@@ -140,7 +138,6 @@ Item {
         }
         x: - width
     }
-    */
 
     states: [
             State {
