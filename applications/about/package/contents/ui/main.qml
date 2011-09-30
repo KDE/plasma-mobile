@@ -91,10 +91,11 @@ Image {
         model: itemModel
         preferredHighlightBegin: 0
         preferredHighlightEnd: 0
+        highlightMoveDuration: 250
         interactive: false
         highlightRangeMode: ListView.StrictlyEnforceRange
         orientation: ListView.Horizontal
-        snapMode: ListView.SnapOneItem; flickDeceleration: 2000
+        snapMode: ListView.SnapOneItem
         cacheBuffer: 200
         onCurrentIndexChanged: aboutApp.webView = currentItem
     }
