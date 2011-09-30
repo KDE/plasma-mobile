@@ -60,14 +60,14 @@ bool PowerManagementJob::suspend()
                                                       "/org/kde/Solid/PowerManagement",
                                                       "org.kde.Solid.PowerManagement",
                                                       "suspendToRam");
-    QDBusPendingReply< QString > reply = QDBusConnection::sessionBus().asyncCall(msg);
-
+    QDBusConnection::sessionBus().asyncCall(msg);
     return true;
 }
 
 bool PowerManagementJob::requestShutDown()
 {
-    return KWorkSpace::requestShutDown();
+    KWorkSpace::requestShutDown();
+    return true;
 }
 
 #include "powermanagementjob.moc"
