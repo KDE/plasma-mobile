@@ -48,7 +48,7 @@ Item {
             text: i18n("<p>Swipe down the top panel to peek at your running apps. Slide it down further to reveal the app launcher.</p> \
             <p>Your running apps are organized into Activities to keep your working area clean.</p><p>Enjoy high-quality apps such as Kontact Touch, Calligra Active (Beta) and Bangarang on your device.")
             color: theme.textColor
-            style: Text.Sunken
+            //style: Text.Sunken
             styleColor: theme.backgroundColor
         }
         /*
