@@ -99,7 +99,6 @@ Item {
             width: 60
             height: 80
             anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: -25
             imagePath: "widgets/background"
             PlasmaCore.SvgItem {
                 width:22
