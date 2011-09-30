@@ -32,11 +32,16 @@ Item {
     state: "StartPage"
     clip: true
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     Item {
         //anchors.fill: parent
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
+        anchors.bottom: parent.bottom
         id: contentArea
         clip: true
     }
@@ -59,14 +64,10 @@ Item {
         anchors.bottom: parent.bottom
     }
 
-
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     StartPage {
         id: startPage
         width: contentArea.width
+        anchors.fill: contentArea
     }
 
     ActivitiesPage {
@@ -84,16 +85,16 @@ Item {
             name: "StartPage"
             PropertyChanges { target: previousIcon; opacity: 0.0}
             PropertyChanges { target: startPage; opacity: 1.0}
-            PropertyChanges { target: activitiesPage; opacity: 0.2}
-            PropertyChanges { target: appsPage; opacity: 0.2}
+            PropertyChanges { target: activitiesPage; opacity: 0.0}
+            PropertyChanges { target: appsPage; opacity: 0.0}
             PropertyChanges { target: startPage; x: contentArea.x; y: contentArea.y }
             PropertyChanges { target: activitiesPage; x: (contentArea.x + activitiesPage.width); y: contentArea.y }
             PropertyChanges { target: appsPage; x: (contentArea.x + appsPage.width); y: contentArea.y }
         },
         State {
             name: "ActivitiesPage"
-            PropertyChanges { target: startPage; opacity: 0.2}
-            PropertyChanges { target: appsPage; opacity: 0.2}
+            PropertyChanges { target: startPage; opacity: 0.0}
+            PropertyChanges { target: appsPage; opacity: 0.0}
             PropertyChanges { target: activitiesPage; opacity: 1.0}
             PropertyChanges { target: activitiesPage; x: contentArea.x; y: contentArea.y }
             PropertyChanges { target: startPage; x: (contentArea.x - activitiesPage.width); y: contentArea.y }
@@ -102,8 +103,8 @@ Item {
         State {
             name: "AppsPage"
             PropertyChanges { target: nextIcon; opacity: 0.0}
-            PropertyChanges { target: startPage; opacity: 0.2}
-            PropertyChanges { target: activitiesPage; opacity: 0.2}
+            PropertyChanges { target: startPage; opacity: 0.0}
+            PropertyChanges { target: activitiesPage; opacity: 0.0}
             PropertyChanges { target: appsPage; opacity: 1.0}
             PropertyChanges { target: appsPage; x: contentArea.x; y: contentArea.y }
             PropertyChanges { target: startPage; x: (contentArea.x - startPage.width); y: contentArea.y }
