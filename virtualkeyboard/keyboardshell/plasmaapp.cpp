@@ -269,7 +269,9 @@ void PlasmaApp::clearIgnoreNextWindowHide()
 
 void PlasmaApp::hide()
 {
-    m_delayedHideTimer->start();
+    if (m_dialog->isVisible()) {
+        m_delayedHideTimer->start();
+    }
 }
 
 void PlasmaApp::hideKeyboard()
