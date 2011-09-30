@@ -114,18 +114,18 @@ Item {
     transitions: [
         Transition {
             from: "*"; to: "StartPage"
-            NumberAnimation { properties: "x,y"; easing.type: Easing.InOutQuint; duration: 800 }
-            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
+            NumberAnimation { properties: "x,y"; easing.type: Easing.InOutQuint; duration: 500 }
+            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 300 }
         },
         Transition {
             from: "*"; to: "ActivitiesPage"
-            NumberAnimation { properties: "x,y"; easing.type: Easing.InOutQuint; duration: 800 }
-            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
+            NumberAnimation { properties: "x,y"; easing.type: Easing.InOutQuint; duration: 500 }
+            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 300 }
         },
         Transition {
             from: "*"; to: "AppsPage"
-            NumberAnimation { properties: "x,y"; easing.type: Easing.InOutQuint; duration: 800 }
-            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 500 }
+            NumberAnimation { properties: "x,y"; easing.type: Easing.InOutQuint; duration: 500 }
+            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 300 }
         }
     ]
 
