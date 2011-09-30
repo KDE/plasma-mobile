@@ -89,6 +89,9 @@ Item {
         keyRoleFilter: ".*"
         dataSource: runnerSource
     }
+    ListModel {
+        id: emptyModel
+    }
 
 
     MobileComponents.ViewSearch {
@@ -130,11 +133,14 @@ Item {
         }
 
         onSearchQueryChanged: {
-            if (searchQuery == "") {
+            if (searchQuery.length < 3) {
+                appGrid.model = emptyModel
+                appGrid.model = appsModel
                 runnerSource.connectedSources = []
             } else {
                 //limit to just some runners
                 runnerSource.connectedSources = [searchQuery+":services|nepomuksearch|recentdocuments|desktopsessions|PowerDevil"]
+                appGrid.model = runnerModel
             }
         }
     }
@@ -143,7 +149,7 @@ Item {
         id: appGrid
         delegateWidth: 128
         delegateHeight: 100
-        model: (searchField.searchQuery == "")?appsModel:runnerModel
+        model: appsModel
         onCurrentPageChanged: resourceInstance.uri = ""
 
         delegate: Component {
