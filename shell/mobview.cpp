@@ -47,7 +47,7 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     setFocusPolicy(Qt::NoFocus);
     setWindowFlags(windowFlags());
     connectContainment(containment);
-    setOptimizationFlags(QGraphicsView::DontSavePainterState);
+    //setOptimizationFlags(QGraphicsView::DontSavePainterState);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFrameStyle(0);
