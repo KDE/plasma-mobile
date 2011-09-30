@@ -30,8 +30,12 @@ Item {
 
     Column {
         anchors.fill: parent
+        anchors.topMargin: 20
+        spacing: 20
+
         Text {
-            width: parent.width
+            width: parent.width - 40
+            anchors.horizontalCenter: parent.horizontalCenter
             id: title
             text: i18n("<h1>Discover Plasma Active</h1>")
             color: theme.textColor
@@ -41,21 +45,24 @@ Item {
 
         Text {
             id: description
-            width: parent.width
+            width: parent.width - 40
+            anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
-            text: i18n("<p>Plasma Active allows you to browse and interact with the web. Stay in contact with your friends, read the latest news, enjoy your music and movies.</p><p>Get the best out of your device with <i>Plasma Active</i>, download and install many popular and new apps. Stay in control of your data and shape your user experience.</p>")
+            text: i18n("<p>Plasma Active allows you to browse and interact with the web. Stay in contact with your friends, read the latest news, enjoy your music and movies. Stay in control of your data and shape your user experience.</p><p>Plasma Active supports your workflow through Activities. Enjoy high-quality apps to browse the web, read news, watch photos, read your email and documents.")
             color: theme.textColor
             styleColor: theme.backgroundColor
         }
-
+        /*
         QIconItem {
             width: 128
             height: 128
             anchors.bottom: parent.bottom
             anchors.right: parent.right
+            anchors.rightMargin: 20
             icon: QIcon("start-here")
             opacity: 0.4
 
         }
+        */
     }
 }

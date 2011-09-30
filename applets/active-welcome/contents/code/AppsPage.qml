@@ -27,10 +27,14 @@ Item {
 
     Column {
         anchors.fill: parent
+        anchors.topMargin: 20
+        spacing: 20
+
         Text {
-            width: parent.width
+            width: parent.width - 40
+            anchors.horizontalCenter: parent.horizontalCenter
             id: title
-            text: i18n("<h1>Cool and Useful Apps</h1>")
+            text: i18n("<h1>Peek & Launch</h1>")
             color: theme.textColor
             style: Text.Sunken
             styleColor: theme.backgroundColor
@@ -38,14 +42,16 @@ Item {
 
         Text {
             id: description
-            width: parent.width
+            width: parent.width - 40
+            anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
-            text: i18n("<p>Plasma Active comes with a set of apps to make your day to day tasks easier.</p>")
+            text: i18n("<p>Swipe down the top panel to peek at your running apps. Slide it down further to reveal the app launcher.</p> \
+            <p>Your running apps are organized into Activities to keep your working area clean.</p><p>Enjoy high-quality apps such as Kontact Touch, Calligra Active (Beta) and Bangarang on your device.")
             color: theme.textColor
-            //style: Text.Sunken
+            style: Text.Sunken
             styleColor: theme.backgroundColor
         }
-
+        /*
         Image {
             id: exampleImage
             scale: 0.4
@@ -53,5 +59,6 @@ Item {
             anchors.top: description.top
             anchors.right: description.right
         }
+        */
     }
 }

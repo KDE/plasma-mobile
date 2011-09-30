@@ -29,10 +29,13 @@ Item {
 
     Column {
         anchors.fill: parent
+        anchors.topMargin: 20
+        spacing: 20
         Text {
-            width: parent.width
+            width: parent.width - 40
+            anchors.horizontalCenter: parent.horizontalCenter
             id: title
-            text: i18n("<h1>At your Fingertips...</h1>")
+            text: i18n("<h1>Activities</h1>")
             color: theme.textColor
             style: Text.Sunken
             styleColor: theme.backgroundColor
@@ -40,9 +43,11 @@ Item {
 
         Text {
             id: description
-            width: parent.width
+            width: parent.width - 40
+            anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
-            text: i18n("<p>Use the Activity Switcher on the right to organize your tasks and events. Connect documents, locations, websites and much more with each other and never lose track again.</p>")
+            text: i18n("<p>Activities help you to organize your device.</p><p>The Contour shell organizes your apps, bookmarks, media, documents and contacts into Activities. Slide out the Activity switcher from the right hand side to switch between activities, to create new activities, and to remove old ones.</p>\
+            <p>Use the buttons at the top left to personalize your activities by adding items and widgets.</p>")
             color: theme.textColor
             styleColor: theme.backgroundColor
         }
