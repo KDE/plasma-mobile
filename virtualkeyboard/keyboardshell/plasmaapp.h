@@ -79,11 +79,17 @@ private Q_SLOTS:
     void cleanup();
     void syncConfig();
     void storeApplet(Plasma::Applet *applet);
+    void hideKeyboard();
+    void windowChangeHide();
+    void clearIgnoreNextWindowHide();
 
 private:
     Plasma::Corona *m_corona;
     Plasma::Containment *m_containment;
-    KeyboardDialog * m_dialog;
+    KeyboardDialog *m_dialog;
+    QTimer *m_delayedHideTimer;
+    QTimer *m_clearIgnoreNextWindowHideTimer;
+    bool m_ignoreNextWindowHide;
 };
 
 #endif // multiple inclusion guard

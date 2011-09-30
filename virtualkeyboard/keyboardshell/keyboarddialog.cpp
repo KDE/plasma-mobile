@@ -239,7 +239,6 @@ void KeyboardDialog::showEvent(QShowEvent *event)
     KWindowSystem::setState(winId(), state);
     KWindowSystem::raiseWindow(effectiveWinId());
     Plasma::Dialog::showEvent(event);
-    
 
     //FIXME: this is an hack for the applet disabing itself in panic when doesn't immediately find a view
     Plasma::PopupApplet *pa = qobject_cast<Plasma::PopupApplet *>(m_applet);

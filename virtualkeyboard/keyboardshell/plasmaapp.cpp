@@ -61,8 +61,23 @@ PlasmaApp* PlasmaApp::self()
 PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
       m_corona(0),
-      m_dialog(0)
+      m_dialog(0),
+      m_delayedHideTimer(new QTimer(this)),
+      m_clearIgnoreNextWindowHideTimer(new QTimer(this)),
+      m_ignoreNextWindowHide(false)
 {
+    m_delayedHideTimer->setInterval(50);
+    m_delayedHideTimer->setSingleShot(true);
+    connect(m_delayedHideTimer, SIGNAL(timeout()), this, SLOT(hideKeyboard()));
+
+    // this is a bit of a hack to work around the unreliable ordering of events
+    // between being shown and active windows changing; we put in a small delay
+    // before hiding the window on active window change when show() is called
+    m_clearIgnoreNextWindowHideTimer->setInterval(100);
+    m_clearIgnoreNextWindowHideTimer->setSingleShot(true);
+    connect(m_clearIgnoreNextWindowHideTimer, SIGNAL(timeout()), this,
+            SLOT(clearIgnoreNextWindowHide()));
+
     KGlobal::locale()->insertCatalog("plasma-keyboardcontainer");
     KCrash::setFlags(KCrash::AutoRestart);
 
@@ -110,30 +125,27 @@ int  PlasmaApp::newInstance()
     config.copyTo(&actualConfig);
     config.deleteGroup();
 
-    KeyboardDialog *dialog = new KeyboardDialog(m_corona, m_containment, pluginName, 1, QVariantList());
-    dialog->installEventFilter(this);
-    connect(dialog, SIGNAL(storeApplet(Plasma::Applet*)), this, SLOT(storeApplet(Plasma::Applet*)));
+    m_dialog = new KeyboardDialog(m_corona, m_containment, pluginName, 1, QVariantList());
+    m_dialog->installEventFilter(this);
+    connect(m_dialog, SIGNAL(storeApplet(Plasma::Applet*)), this, SLOT(storeApplet(Plasma::Applet*)));
 
-    dialog->setWindowFlags(Qt::FramelessWindowHint);
-    KWindowSystem::setType(dialog->winId(), NET::Dock);
-    Plasma::WindowEffects::overrideShadow(dialog->winId(), true);
-    dialog->applet()->setBackgroundHints(Plasma::Applet::NoBackground);
+    m_dialog->setWindowFlags(Qt::FramelessWindowHint);
+    KWindowSystem::setType(m_dialog->winId(), NET::Dock);
+    Plasma::WindowEffects::overrideShadow(m_dialog->winId(), true);
+    m_dialog->applet()->setBackgroundHints(Plasma::Applet::NoBackground);
 
-    //hide the kwyboard when the active window switches
-    //the situation that brought up the kwyboard isn't valid anymore
+    //hide the keyboard when the active window switches
+    //the situation that brought up the keyboard isn't valid anymore
     connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)), 
-            dialog, SLOT(hide()));
+            this, SLOT(windowChangeHide()));
 
     // Set window to exist on all desktops
-    KWindowSystem::setOnAllDesktops(dialog->winId(), true);
+    KWindowSystem::setOnAllDesktops(m_dialog->winId(), true);
 
     //FIXME: hardcoding to MID for now
-    dialog->applet()->config().writeEntry("layout", "plasmaboard/tablet.xml");
-    dialog->applet()->configChanged();
-
-    dialog->hide();
-
-    m_dialog = dialog;
+    m_dialog->applet()->config().writeEntry("layout", "plasmaboard/tablet.xml");
+    m_dialog->applet()->configChanged();
+    m_dialog->hide();
 
     return 0;
 }
@@ -225,14 +237,42 @@ void PlasmaApp::resetLayout()
 
 void PlasmaApp::show()
 {
-    m_dialog->setWindowFlags(Qt::X11BypassWindowManagerHint);
-    Plasma::WindowEffects::slideWindow(m_dialog, m_dialog->location());
-    m_dialog->show();
-    //if the cursor is outside the keyboard at the first touch event, the current window loses focus and the keyboard will hide
+    m_delayedHideTimer->stop();
+    m_ignoreNextWindowHide = true;
+    m_clearIgnoreNextWindowHideTimer->start();
+
+    if (!m_dialog->isVisible()) {
+        m_dialog->setWindowFlags(Qt::X11BypassWindowManagerHint);
+        Plasma::WindowEffects::slideWindow(m_dialog, m_dialog->location());
+        m_dialog->show();
+    }
+
+    //if the cursor is outside the keyboard at the first touch event,
+    //the current window loses focus and the keyboard will hide
     QCursor::setPos(m_dialog->geometry().center());
 }
 
+void PlasmaApp::windowChangeHide()
+{
+    if (m_ignoreNextWindowHide) {
+        clearIgnoreNextWindowHide();
+        return;
+    }
+
+    hide();
+}
+
+void PlasmaApp::clearIgnoreNextWindowHide()
+{
+    m_ignoreNextWindowHide = false;
+}
+
 void PlasmaApp::hide()
+{
+    m_delayedHideTimer->start();
+}
+
+void PlasmaApp::hideKeyboard()
 {
     Plasma::WindowEffects::slideWindow(m_dialog, m_dialog->location());
     m_dialog->hide();
