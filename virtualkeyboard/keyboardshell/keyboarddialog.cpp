@@ -56,7 +56,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 
     m_moveButton = new Plasma::IconWidget(m_containment);
     m_moveButton->setSvg("keyboardshell/arrows", "up-arrow");
-    m_moveButton->setMaximumSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
+    m_moveButton->setMaximumWidth(KIconLoader::SizeMedium);
     connect(m_moveButton, SIGNAL(clicked()), this, SLOT(swapScreenEdge()));
 
     m_containment->setFormFactor(Plasma::Planar);
