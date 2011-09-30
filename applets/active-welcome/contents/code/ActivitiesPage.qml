@@ -30,7 +30,7 @@ Item {
     Column {
         anchors.fill: parent
         anchors.topMargin: 20
-        spacing: 20
+        spacing: 10
         Text {
             width: parent.width - 40
             anchors.horizontalCenter: parent.horizontalCenter
