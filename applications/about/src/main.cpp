@@ -37,10 +37,10 @@ static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
-    // FIXME: selkie icon instead of internet-web-browser
     KAboutData about("active-aboutapp", 0, ki18n("About Plasma Active"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2011 Marco Martin"), KLocalizedString(), 0, "mart@kde.org");
                      about.addAuthor( ki18n("Marco Martin"), KLocalizedString(), "mart@kde.org" );
+    about.setProgramIconName("active-about");
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;

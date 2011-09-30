@@ -64,7 +64,7 @@ QString AboutApp::name()
 
 QIcon AboutApp::icon()
 {
-    return KIcon("about-plasma-active");
+    return KIcon("active-about");
 }
 
 void AboutApp::setUseGL(const bool on)
