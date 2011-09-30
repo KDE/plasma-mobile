@@ -24,9 +24,11 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
+import QtMultimediaKit 1.1
+
 Item {
     width: 400
-    height: 300
+    height: 400
 
     Column {
         anchors.fill: parent
@@ -52,6 +54,7 @@ Item {
             color: theme.textColor
             styleColor: theme.backgroundColor
         }
+
         /*
         QIconItem {
             width: 128
@@ -64,5 +67,33 @@ Item {
 
         }
         */
-    }
+
+        Item {
+            id: videoItem
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 400
+            height: 300
+
+            Video {
+                id: video
+                width : 400
+                height : 300
+                //source: "video.avi"
+                anchors.fill: parent
+                source: plasmoid.file("data", "video.ogv")
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        video.play()
+                    }
+                }
+
+                focus: true
+                Keys.onSpacePressed: video.paused = !video.paused
+                Keys.onLeftPressed: video.position -= 5000
+                Keys.onRightPressed: video.position += 5000
+            }
+        }
+    } // Column
 }
