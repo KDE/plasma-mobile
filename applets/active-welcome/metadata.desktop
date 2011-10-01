@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=Welcome
+Name[nl]=Welkom
+Name[pt]=Bem-Vindo
+Name[sv]=Välkommen
+Name[uk]=Вітаємо
+Name[x-test]=xxWelcomexx
 Type=Service
 Icon=plasma
 X-KDE-PluginInfo-Author=Sebastian Kügler
