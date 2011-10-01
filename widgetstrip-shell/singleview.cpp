@@ -49,6 +49,9 @@ SingleView::SingleView(Plasma::Corona *corona, QWidget *parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFrameStyle(QFrame::NoFrame);
+
+    connect(this, SIGNAL(geometryChanged()),
+            corona, SIGNAL(availableScreenRegionChanged()));
 }
 
 SingleView::~SingleView()
@@ -80,6 +83,8 @@ void SingleView::resizeEvent(QResizeEvent *event)
     if (containment()) {
         containment()->resize(event->size());
     }
+
+    emit geometryChanged();
 }
 
 #include "singleview.moc"

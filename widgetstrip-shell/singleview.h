@@ -45,6 +45,9 @@ public:
     void setUseGL(const bool on);
     bool useGL() const;
 
+Q_SIGNALS:
+    void geometryChanged();
+
 protected:
     void resizeEvent(QResizeEvent *event);
 

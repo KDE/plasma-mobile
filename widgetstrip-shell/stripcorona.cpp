@@ -73,6 +73,5 @@ void StripCorona::loadDefaultLayout()
     requestConfigSync();
 }
 
-
 #include "stripcorona.moc"
 

@@ -114,6 +114,13 @@ Item {
         anchors.right: parent.right
         //FIXME: assumes a rectangular region
         property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
+        Component.onCompleted: {
+            plasmoid.availableScreenRegionChanged.connect(appletsFlickableParent.availableScreenRegionChanged)
+        }
+        function availableScreenRegionChanged()
+        {
+            availScreenRect = plasmoid.availableScreenRegion(plasmoid.screen)[0]
+        }
 
 
         anchors.leftMargin: availScreenRect.x
