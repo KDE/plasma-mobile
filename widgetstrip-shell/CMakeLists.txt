@@ -28,3 +28,4 @@ target_link_libraries(kdeinit_plasma-widgetstrip ${KDE4_PLASMA_LIBS} kworkspace 
 install(TARGETS kdeinit_plasma-widgetstrip DESTINATION ${LIB_INSTALL_DIR})
 install(TARGETS plasma-widgetstrip ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES widget-strip.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES plasma-default-layoutrc DESTINATION ${DATA_INSTALL_DIR}/plasma-widgetstrip)

@@ -19,6 +19,8 @@
 
 #include "stripcorona.h"
 
+#include <KStandardDirs>
+
 #include <QGraphicsView>
 
 static const char *DEFAULT_CONTAINMENT = "org.kde.appletstrip";
@@ -44,9 +46,19 @@ QRect StripCorona::screenGeometry(int id) const
     return sceneRect().toRect();
 }
 
-
 void StripCorona::loadDefaultLayout()
 {
+    QString defaultConfig = KStandardDirs::locate("appdata", "plasma-default-layoutrc");
+    KConfigGroup cg(new KConfig(defaultConfig), QString());
+
+    if (cg.isValid()) {
+        importLayout(cg);
+        if (!containments().isEmpty()) {
+            containments().first()->setScreen(0);
+        }
+        return;
+    }
+
     Plasma::Containment* c = addContainmentDelayed(DEFAULT_CONTAINMENT);
 
     if (!c) {
