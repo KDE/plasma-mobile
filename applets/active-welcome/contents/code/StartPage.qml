@@ -29,8 +29,11 @@ import QtMultimediaKit 1.1
 Item {
     width: 400
     height: 400
+    id: startPage
+    state: "paused"
 
     Column {
+        id: col
         anchors.fill: parent
         anchors.topMargin: 20
         spacing: 10
@@ -55,37 +58,44 @@ Item {
             styleColor: theme.backgroundColor
         }
 
-        /*
-        QIconItem {
-            width: 128
-            height: 128
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            anchors.rightMargin: 20
-            icon: QIcon("start-here")
-            opacity: 0.4
-
-        }
-        */
 
         Item {
             id: videoItem
             anchors.horizontalCenter: parent.horizontalCenter
             width: 400
-            height: 300
+            height: 280
+
+            Rectangle {
+                id: rect
+                anchors.fill: parent
+                color: "#000"
+            }
 
             Video {
                 id: video
                 width : 400
-                height : 300
-                //source: "video.avi"
+                height : 280
                 anchors.fill: parent
                 source: plasmoid.file("data", "video.ogv")
+
+                onPausedChanged: {
+                    print("Paused Changed..." + paused + playing);
+                    if (paused) {
+                        setPaused();
+                    } else {
+                        setPlaying();
+                    }
+                }
 
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        video.play()
+                        if (startPage.state == "playing") {
+                            setPaused();
+                        } else {
+                            setPlaying();
+                        }
+                        print(" XXX State is now: " + startPage.state + " opacity: " + rect.opacity + " scale: " + videoItem.scale);
                     }
                 }
 
@@ -94,6 +104,66 @@ Item {
                 Keys.onLeftPressed: video.position -= 5000
                 Keys.onRightPressed: video.position += 5000
             }
+            Column {
+                anchors.centerIn: parent
+                spacing: 60
+
+                Text {
+                    id: videoText
+                    text: i18n("<h2>Watch the video!</h2>")
+                    color: "#FFF"
+
+                }
+                QIconItem {
+                    id: pauseButton
+                    width: 48
+                    height: 48
+                    anchors.centerIn: parent
+                    icon: QIcon("media-playback-start")
+
+                }
+            }
         }
     } // Column
+
+    states: [
+        State {
+            name: "paused"
+            PropertyChanges { target: videoItem; scale: 1.0}
+            PropertyChanges { target: pauseButton; opacity: 1.0}
+            PropertyChanges { target: videoText; opacity: 1.0}
+        },
+        State {
+            name: "playing"
+            PropertyChanges { target: videoItem; scale: 2.0}
+            PropertyChanges { target: pauseButton; opacity: 0.0}
+            PropertyChanges { target: videoText; opacity: 0.0}
+        }
+    ]
+
+    transitions: [
+        Transition {
+            from: "paused"; to: "playing"
+            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 300 }
+            NumberAnimation { properties: "scale"; easing.type: Easing.InOutQuint; duration: 500 }
+        },
+        Transition {
+            from: "playing"; to: "paused"
+            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 300 }
+            NumberAnimation { properties: "scale"; easing.type: Easing.InOutQuint; duration: 200 }
+        }
+    ]
+
+    function setPlaying() {
+        welcome.clip = false;
+        video.play()
+        startPage.state = "playing";
+    }
+
+    function setPaused() {
+        welcome.clip = true;
+        video.pause()
+        startPage.state = "paused";
+    }
+
 }
