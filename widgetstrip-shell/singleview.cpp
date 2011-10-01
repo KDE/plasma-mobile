@@ -49,6 +49,8 @@ SingleView::SingleView(Plasma::Corona *corona, QWidget *parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFrameStyle(QFrame::NoFrame);
+    //FIXME: api for send to all activities instead
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
 
     connect(this, SIGNAL(geometryChanged()),
             corona, SIGNAL(availableScreenRegionChanged()));
