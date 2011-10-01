@@ -31,6 +31,6 @@ zvalue=0
 AppletsOrder=:2:3
 
 [Containments][1][Wallpaper][image]
-wallpaper=/opt/kde4/share/wallpapers/Media_Life/
+wallpaper=/usr/share/wallpapers/default_wallpaper.png
 wallpapercolor=0,0,0
 wallpaperposition=0
