@@ -21,7 +21,7 @@ Comment[sv]=En samling grafiska komponenter
 Comment[uk]=Збірка віджетів
 Comment[x-test]=xxA collection of widgetsxx
 
-Exec=appletstrip-shell
+Exec=plasma-widgetstrip
 Terminal=false
 Icon=dashboard-show
 Type=Application
