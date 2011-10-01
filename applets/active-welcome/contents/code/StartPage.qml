@@ -65,17 +65,36 @@ Item {
             width: 400
             height: 280
 
+            /*
             Rectangle {
                 id: rect
                 anchors.fill: parent
-                color: "#000"
+                //color: "#000"
+            }
+            */
+            PlasmaCore.FrameSvgItem {
+                imagePath: "widgets/media-delegate"
+                prefix: "picture"
+                id: frameRect
+                height: width/1.7
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
             }
 
+            
             Video {
                 id: video
-                width : 400
-                height : 280
-                anchors.fill: parent
+                width: frameRect.width - 2
+                height: frameRect.height - 1
+                anchors {
+                    fill: frameRect
+                    leftMargin: frameRect.margins.left
+                    topMargin: frameRect.margins.top
+                    rightMargin: frameRect.margins.right
+                    bottomMargin: frameRect.margins.bottom
+                }
                 source: plasmoid.file("data", "video.ogv")
 
                 onPausedChanged: {
@@ -95,7 +114,7 @@ Item {
                         } else {
                             setPlaying();
                         }
-                        print(" XXX State is now: " + startPage.state + " opacity: " + rect.opacity + " scale: " + videoItem.scale);
+                        print(" XXX State is now: " + startPage.state + " opacity: " + pauseButton.opacity + " scale: " + videoItem.scale);
                     }
                 }
 
