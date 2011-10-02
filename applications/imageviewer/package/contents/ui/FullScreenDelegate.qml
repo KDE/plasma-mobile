@@ -29,9 +29,22 @@ Flickable {
     height: fullList.height
     contentWidth: mainImage.width*mainImage.scale
     contentHeight: mainImage.height*mainImage.scale
-    interactive: contentWidth > width || contentHeight > height
+    onContentHeightChanged: interactiveTimer.restart()
     property alias source: mainImage.source
     property string label: model["label"]
+
+    //defer interactive decision; set interactive when disabled: it will make it spit out an eventual mouse grabber
+    Timer {
+        id: interactiveTimer
+        interval: 200
+        repeat: false
+        running: true
+        onTriggered: {
+            mainFlickable.enabled = false
+            mainFlickable.interactive = contentWidth > width || contentHeight > height
+            mainFlickable.enabled = true
+        }
+    }
 
     ParallelAnimation {
         id: zoomAnim
