@@ -121,9 +121,9 @@ Item {
             if (mouse.x < activityPanel.x) {
                 activityPanel.state = "hidden"
             }
-            /*if (mouse.x > leftEdgePanel.x+leftEdgePanel.width) {
+            if (mouse.x > leftEdgePanel.x+leftEdgePanel.width) {
                 leftEdgePanel.state = "hidden"
-            }*/
+            }
         }
     }
 
