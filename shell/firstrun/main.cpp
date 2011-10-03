@@ -31,36 +31,9 @@ static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
-    /*
-    KAboutData aboutData(argv[0], 0, ki18n("Plasma Active First Run"),
-                         version, ki18n(description), KAboutData::License_GPL,
-                         ki18n("Copyright 2011, Sebastian Kügler"));
-
-    QApplication::setGraphicsSystem("raster");
-    KCmdLineArgs::init(argc, argv, &aboutData);
-    */
     kDebug() << "First run running ...";
     App app(argc, argv);
     int rc = app.exec();
-    //delete app;
     return rc;
-    /*
-    KCmdLineOptions options;
-    options.add("nodesktop", ki18n("Starts as a normal application instead of as the primary user interface"));
-    options.add("screen <geometry>", ki18n("The geometry of the screen"), "800x480");
-#ifndef QT_NO_OPENGL
-    options.add("opengl", ki18n("use a QGLWidget for the viewport"));
-#endif
-    options.add("fullscreen", ki18n("Starts the application in fullscreen"));
-    KCmdLineArgs::addCmdLineOptions(options);
-
-    PlasmaApp *app = PlasmaApp::self();
-
-    QApplication::setWindowIcon(KIcon("plasma"));
-    app->disableSessionManagement(); // autostarted
-    int rc = app->exec();
-    delete app;
-    return rc;
-    */
 }
 

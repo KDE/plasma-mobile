@@ -45,20 +45,20 @@ void FirstRun::init()
     KConfigGroup grp = scfg->group("general");
     bool hasRun = grp.readEntry("hasRun", false);
     delete scfg;
-    kDebug() << "Starting first run ..." << hasRun;
+    kError() << "Starting first run ..." << hasRun;
     if (!hasRun) {
         m_activityController = new KActivityController(this);
         m_currentActivity = m_activityController->currentActivity();
         QStringList activities = m_activityController->listActivities();
         //setData("allActivities", activities);
         foreach (const QString &id, activities) {
-            kDebug() << "Activity: " << id;
+            kError() << "Activity: " << id;
             activityAdded(id);        }
         connect(m_activityController, SIGNAL(activityAdded(QString)), this, SLOT(activityAdded(QString)));
     } else {
-        kDebug() << "Already ran, doing nothing";
+        kError() << "Already ran, doing nothing";
     }
-    kDebug() << "Done.";
+    kError() << "Done.";
     emit done();
     markDone();
 }
@@ -69,10 +69,10 @@ FirstRun::~FirstRun()
 
 void FirstRun::activityAdded(const QString& source)
 {
-    kDebug() << "Source added: " << source;
+    kError() << "Source added: " << source;
     if (!source.isEmpty()) {
         KActivityInfo* info = new KActivityInfo(source);
-        kDebug() << "AAA: " << info->name();
+        kError() << "AAA: " << info->name();
         if (info->name() == "Introduction") {
             connectToActivity("http://en.wikipedia.org/wiki/Berlin", source, "Wikipedia: Berlin");
             connectToActivity("http://wikitravel.org/wiki/Berlin", source, "Wikitravel: Berlin");
@@ -89,12 +89,12 @@ void FirstRun::connectToActivity(const QString &resourceUrl, const QString &acti
 {
     Nepomuk::Resource fileRes(resourceUrl);
     QUrl typeUrl;
-    kDebug() << "Adding resource " << description << " [" << resourceUrl << "] to acivity " << activityId;
+    kError() << "Adding resource " << description << " [" << resourceUrl << "] to acivity " << activityId;
     //Bookmark?
     if (QUrl(resourceUrl).scheme() == "http") {
         typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark");
         fileRes.addType(typeUrl);
-        fileRes.setDescription("Automatically added bookmark");
+        fileRes.setDescription(description);
         fileRes.setProperty(QUrl::fromEncoded("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#bookmarks"), resourceUrl);
     // App?
     } else if (resourceUrl.endsWith(".desktop")) {
@@ -113,7 +113,7 @@ void FirstRun::connectToActivity(const QString &resourceUrl, const QString &acti
 
 void FirstRun::markDone()
 {
-    kDebug() << "Noting in kconfig that we've run once.";
+    kError() << "Noting in kconfig that we've run once.";
     KConfig* scfg = new KConfig("active-firstrunrc");
     KConfigGroup grp = scfg->group("general");
     grp.writeEntry("hasRun", true);
