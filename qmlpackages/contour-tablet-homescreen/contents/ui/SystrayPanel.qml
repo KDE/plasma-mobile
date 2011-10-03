@@ -152,9 +152,6 @@ Item {
             PropertyChanges {
                 target: slidingPanel
                 y: 0
-            }
-            PropertyChanges {
-                target: slidingPanel
                 acceptsFocus: true
             }
         },
@@ -163,9 +160,6 @@ Item {
             PropertyChanges {
                 target: slidingPanel
                 y: -topEdgePanel.height + systrayContainer.height+ background.margins.bottom + 2
-            }
-            PropertyChanges {
-                target: slidingPanel
                 acceptsFocus: false
             }
         },
