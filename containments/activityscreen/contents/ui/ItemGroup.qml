@@ -253,10 +253,15 @@ PlasmaCore.FrameSvgItem {
         Text {
             id: categoryText
             text: itemGroup.title
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
             anchors {
                 top: parent.top
-                horizontalCenter: parent.horizontalCenter
+                left: parent.left
+                right: parent.right
                 topMargin: parent.margins.top
+                leftMargin: height + 2
+                rightMargin: height + 2
             }
         }
     }
