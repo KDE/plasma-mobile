@@ -47,3 +47,5 @@ install(TARGETS plasma-device ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install(DIRECTORY widgetsexplorer/qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma-device/mobilewidgetsexplorer PATTERN .svn EXCLUDE)
 install(DIRECTORY activityconfiguration/qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma-device/activityconfiguration PATTERN .svn EXCLUDE)
+
+add_subdirectory(firstrun)
