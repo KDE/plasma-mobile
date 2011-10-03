@@ -22,6 +22,15 @@ set(firstrun_SRCS
     firstrun.cpp
 )
 
+soprano_add_ontology(
+    firstrun_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/kext.trig
+    "KEXT" "Nepomuk::Vocabulary" "trig"
+)
+
+find_package(Nepomuk REQUIRED)
+find_package(KActivities REQUIRED)
+
 KDE4_ADD_EXECUTABLE(active-firstrun ${firstrun_SRCS})
 
 target_link_libraries(active-firstrun

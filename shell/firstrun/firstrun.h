@@ -21,6 +21,7 @@
 #define FIRSTRUN_H
 
 #include <QObject>
+#include <QStringList>
 #include <QUrl>
 
 namespace Plasma {
@@ -38,20 +39,22 @@ class FirstRun: public QObject
         FirstRun(QObject *parent = 0);
         ~FirstRun();
 
-        void init();
 
     Q_SIGNALS:
         void done();
 
     private Q_SLOTS:
+        void init();
         void activityAdded(const QString& source);
         void markDone();
 
     private:
-        void connectToActivity(const QString &resourceUrl, const QString &activityId, const QString &description = QString());
+        void connectToActivity(const QString &activityId, const QString &resourceUrl, const QString &description = QString());
         //Plasma::DataEngine* m_activityEngine;
         KActivityController *m_activityController;
         QString m_currentActivity;
+        QStringList m_initialActivities;
+        QStringList m_completedActivities;
 
 };
 

@@ -28,8 +28,8 @@ App::App(int argc, char **argv)
     m_firstRun = new FirstRun(this);
     kDebug() << "connecting...";
     connect(m_firstRun, SIGNAL(done()), SLOT(quit()));
-    quit();
-    exit();
+    //quit();
+    //exit();
 }
 
 App::~App()

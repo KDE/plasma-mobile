@@ -18,6 +18,7 @@
  */
 
 #include "firstrun.h"
+#include "kext.h"
 
 #include <kactivitycontroller.h>
 #include <kactivityinfo.h>
@@ -31,36 +32,38 @@
 #include <KConfig>
 #include <soprano/vocabulary.h>
 
+#include <QTimer>
+
 FirstRun::FirstRun(QObject* parent)
     : QObject(parent),
     m_activityController(0)
 {
-    init();
+    m_initialActivities << "Introduction" << "Vacation Planning" << "My First Activity";
+
+    // wait until the system has settled down
+    // yep, hack, but needed to prevent race conditions when nepomuk is no up yet :/
+    QTimer::singleShot(60000, this, SLOT(init()));
 }
 
 void FirstRun::init()
 {
-
     KConfig* scfg = new KConfig("active-firstrunrc");
     KConfigGroup grp = scfg->group("general");
     bool hasRun = grp.readEntry("hasRun", false);
     delete scfg;
-    kError() << "Starting first run ..." << hasRun;
+    kError() << "Starting first run ..." << !hasRun;
     if (!hasRun) {
         m_activityController = new KActivityController(this);
         m_currentActivity = m_activityController->currentActivity();
         QStringList activities = m_activityController->listActivities();
-        //setData("allActivities", activities);
         foreach (const QString &id, activities) {
-            kError() << "Activity: " << id;
-            activityAdded(id);        }
+            activityAdded(id);
+        }
         connect(m_activityController, SIGNAL(activityAdded(QString)), this, SLOT(activityAdded(QString)));
     } else {
         kError() << "Already ran, doing nothing";
+        emit done();
     }
-    kError() << "Done.";
-    emit done();
-    markDone();
 }
 
 FirstRun::~FirstRun()
@@ -69,27 +72,56 @@ FirstRun::~FirstRun()
 
 void FirstRun::activityAdded(const QString& source)
 {
-    kError() << "Source added: " << source;
-    if (!source.isEmpty()) {
-        KActivityInfo* info = new KActivityInfo(source);
-        kError() << "AAA: " << info->name();
-        if (info->name() == "Introduction") {
-            connectToActivity("http://en.wikipedia.org/wiki/Berlin", source, "Wikipedia: Berlin");
-            connectToActivity("http://wikitravel.org/wiki/Berlin", source, "Wikitravel: Berlin");
-            connectToActivity("http://maps.google.com", source);
-        } else if (info->name() == "My First Activity") {
-            connectToActivity("http://vizZzion.org", source, "VizZzion.org");
-        } else if (info->name() == "Vacation Planning") {
-            connectToActivity("http://seashepherd.org", source, "Seashepherd dot Org");
-        }
+    KActivityInfo* info = new KActivityInfo(source);
+    kError() << "------> Source added: " << info->name() << source;
+
+    // Check if it's among the default activities and wether we've configured this actity already
+    if (!m_initialActivities.contains(info->name())) {
+        //kError() << "noinit";
+        return;
+    }
+    if (m_completedActivities.contains(info->name())) {
+        //kError() << "completed";
+        return;
+    }
+    m_completedActivities << info->name();
+    kError() << "------> Source added: " << info->name() << source;
+
+    QString appPath = "/usr/share/applications/kde4/";
+
+    //kError() << "AAA: " << info->name();
+    if (info->name() == "Introduction") {
+        // Bookmarks
+        connectToActivity(source, "http://en.wikipedia.org/wiki/Berlin", "Wikipedia: Berlin");
+        connectToActivity(source, "http://wikitravel.org/en/Berlin", "Wikitravel: Berlin");
+        connectToActivity(source, "http://maps.google.com", "Google Maps");
+
+        // Apps
+        connectToActivity(source, appPath + "active-web-browser.desktop", "Browser");
+    } else if (info->name() == "My First Activity") {
+        connectToActivity(source, "http://vizZzion.org", "VizZzion.org");
+        connectToActivity(source, appPath + "active-news-reader.desktop");
+    } else if (info->name() == "Vacation Planning") {
+        connectToActivity(source, "http://seashepherd.org", "Seashepherd dot Org");
+        connectToActivity(source, appPath + "active-image-viewer.desktop");
+    }
+
+    kError() << "SSS" << m_completedActivities.size() << m_initialActivities.size();
+    if (m_completedActivities.size() == m_initialActivities.size()) {
+        markDone();
+        kError() << "Saved. Quitting.";
+        emit done();
     }
 }
 
-void FirstRun::connectToActivity(const QString &resourceUrl, const QString &activityId, const QString &description)
+void FirstRun::connectToActivity(const QString &activityId, const QString &resourceUrl, const QString &description)
 {
     Nepomuk::Resource fileRes(resourceUrl);
     QUrl typeUrl;
-    kError() << "Adding resource " << description << " [" << resourceUrl << "] to acivity " << activityId;
+
+    KActivityInfo* info = new KActivityInfo(activityId); // FIXME: remove
+
+    //kError() << "   Adding resource " << description << " [" << resourceUrl << "] to acivity " << activityId;
     //Bookmark?
     if (QUrl(resourceUrl).scheme() == "http") {
         typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark");
@@ -107,7 +139,8 @@ void FirstRun::connectToActivity(const QString &resourceUrl, const QString &acti
         }
     }
 
-    Nepomuk::Resource acRes("activities://" + activityId);
+    kError() << "       Added resource " << description << " to " << info->name();
+    Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KEXT::Activity());
     acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
 }
 
