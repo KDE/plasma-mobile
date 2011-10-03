@@ -123,7 +123,8 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         } else if (type == "Video") {
             // Strigi doesn't index videos it seems
             query.setTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("video")));
-
+        } else if (type == "OpenDocumentTextDocument") {
+            query.setTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("vnd.oasis.opendocument.text")));
         } else {
             query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+type)));
 
