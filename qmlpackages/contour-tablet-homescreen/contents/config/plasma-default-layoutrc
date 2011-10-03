@@ -75,7 +75,7 @@ ShowCalendarPopup=false
 SkipItems=klipper
 
 [Containments][20]
-activity=Network
+activity=Introduction
 FirstStartup=false
 desktop=-1
 formfactor=0
@@ -91,12 +91,12 @@ wallpaperpluginmode=SingleImage
 FirstStartup=false
 
 [Containments][20][Wallpaper][image]
-wallpaper=Horos
+wallpaper=/usr/share/wallpapers/default_wallpaper.png
 wallpaperposition=2
 
 
 [Containments][21]
-activity=Grandma's birthday
+activity=Vacation Planning
 FirstStartup=false
 desktop=-1
 formfactor=0
@@ -112,11 +112,11 @@ wallpaperpluginmode=SingleImage
 FirstStartup=false
 
 [Containments][21][Wallpaper][image]
-wallpaper=Blue_Wood
+wallpaper=/usr/share/wallpapers/CarribeanSunset.jpg
 wallpaperposition=2
 
 [Containments][22]
-activity=Managing Photos
+activity=My First Activity
 desktop=-1
 formfactor=0
 geometry=0,0,800,480
@@ -131,81 +131,6 @@ wallpaperpluginmode=SingleImage
 FirstStartup=false
 
 [Containments][22][Wallpaper][image]
-wallpaper=Grass
+wallpaper=/usr/share/wallpapers/Orchid.jpg
 wallpaperposition=2
 
-[Containments][23]
-activity=Diploma thesis
-desktop=-1
-formfactor=0
-geometry=0,0,800,480
-immutability=1
-location=1
-plugin=org.kde.active.activityscreen
-screen=-1
-wallpaperplugin=image
-wallpaperpluginmode=SingleImage
-
-[Containments][23][General]
-FirstStartup=false
-
-[Containments][23][Wallpaper][image]
-wallpaper=Stripes
-wallpaperposition=2
-
-[Containments][24]
-activity=Architecture project
-desktop=-1
-formfactor=0
-geometry=0,0,800,480
-immutability=1
-location=1
-plugin=org.kde.active.activityscreen
-screen=-1
-wallpaperplugin=image
-wallpaperpluginmode=SingleImage
-
-[Containments][24][General]
-FirstStartup=false
-
-[Containments][24][Wallpaper][image]
-wallpaper=Stripes
-wallpaperposition=2
-
-[Containments][25]
-activity=Barcelona trip
-desktop=-1
-formfactor=0
-geometry=0,0,800,480
-immutability=1
-location=1
-plugin=org.kde.active.activityscreen
-screen=-1
-wallpaperplugin=image
-wallpaperpluginmode=SingleImage
-
-[Containments][25][General]
-FirstStartup=false
-
-[Containments][25][Wallpaper][image]
-wallpaper=Stripes
-wallpaperposition=2
-
-[Containments][26]
-activity=My Diary
-desktop=-1
-formfactor=0
-geometry=0,0,800,480
-immutability=1
-location=1
-plugin=org.kde.active.activityscreen
-screen=-1
-wallpaperplugin=image
-wallpaperpluginmode=SingleImage
-
-[Containments][26][General]
-FirstStartup=false
-
-[Containments][26][Wallpaper][image]
-wallpaper=Stripes
-wallpaperposition=2
