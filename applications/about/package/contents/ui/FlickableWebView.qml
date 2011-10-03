@@ -83,6 +83,7 @@ Flickable {
             property string osVersion: runtimeInfoOsVersion
             WebView.windowObjectName: "runtimeInfo"
         }
+        settings.standardFontFamily: "Droid Sans Fallback"
 
         //FIXME: glorious hack just to obtain a signal of the url of the new requested page
         newWindowComponent: Component {
