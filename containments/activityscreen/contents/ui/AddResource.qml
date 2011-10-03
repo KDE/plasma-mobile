@@ -126,6 +126,10 @@ Rectangle {
         sortRole: "name"
     }
 
+    ListModel {
+        id: emptyModel
+    }
+
     PlasmaCore.DataSource {
         id: runnerSource
         engine: "org.kde.runner"
@@ -397,6 +401,8 @@ Rectangle {
                                         main.addAction.trigger()
                                         main.destroy()
                                     } else if (model["className"] == "_Apps") {
+                                        //BUG in MeeGo's Qt: have to assign an empty model before the actual one
+                                        resultsGrid.model = emptyModel
                                         resultsGrid.model = appsModel
 
                                         resultsContainer.contentY = 0
