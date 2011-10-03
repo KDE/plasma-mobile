@@ -87,8 +87,16 @@ screen=0
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
+[Containments][20][Applets][25]
+geometry=0,0,684,572
+immutability=1
+plugin=org.kde.active.welcome
+zvalue=0
+
+
 [Containments][20][General]
 FirstStartup=false
+ItemsGeometries=Applet-25:0,0,712,632;
 
 [Containments][20][Wallpaper][image]
 wallpaper=/usr/share/wallpapers/default_wallpaper.png
