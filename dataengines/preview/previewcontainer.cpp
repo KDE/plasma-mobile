@@ -81,8 +81,8 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
         KIO::Scheduler::publishSlaveOnHold();
     }
 
-    if (mimetype == "text/html") {
-//    if (false) {
+//    if (mimetype == "text/html") {
+    if (false) {
         m_webThumbnailer = new KWebThumbnailer(m_url, m_previewSize, m_url.toString(), this);
 
         connect(m_webThumbnailer, SIGNAL(done(bool)), SLOT(webThumbnailerDone(bool)));
