@@ -48,7 +48,7 @@ PlasmaCore.FrameSvgItem {
             anchors.centerIn: parent
             PlasmaWidgets.TabBar {
                 id: tabBar
-                width: 300
+                width: 500
                 Component.onCompleted: {
                     addTab(i18n("about"))
                     addTab(i18n("authors"))
