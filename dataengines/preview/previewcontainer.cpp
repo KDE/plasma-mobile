@@ -22,6 +22,7 @@
 #include "kwebthumbnailer.h"
 
 #include <KDebug>
+#include <KIcon>
 #include <KImageCache>
 
 
@@ -35,6 +36,7 @@ PreviewContainer::PreviewContainer(const QString &name,
     m_previewSize = QSize(180, 120);
     m_previewEngine = static_cast<PreviewEngine *>(parent);
 
+    // Check if the image is in the cache, if so return it
     QImage preview = QImage(m_previewSize, QImage::Format_ARGB32_Premultiplied);
     if (m_previewEngine->imageCache()->findImage(name, &preview)) {
         // cache hit
@@ -44,6 +46,14 @@ PreviewContainer::PreviewContainer(const QString &name,
         checkForUpdate();
         return;
     }
+
+    // Set fallbackimage while loading
+    m_fallbackImage = KIcon("image-loading").pixmap(QSize(64, 64)).toImage();
+    m_fallbackImage = m_fallbackImage.copy(QRect(QPoint(-120,0), m_previewSize));
+    setData("status", "loading");
+    setData("url", m_url);
+    setData("thumbnail", m_fallbackImage);
+    checkForUpdate();
 
     // It may be a directory or a file, let's stat
     KIO::JobFlags flags = KIO::HideProgressInfo;
@@ -56,13 +66,13 @@ PreviewContainer::~PreviewContainer()
 {
 }
 
-
 void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
 {
     Q_UNUSED(job)
 
     if (mimetype.isEmpty() || m_mimeJob->error()) {
         setData("status", "failed");
+        //kDebug() << "mimejob failed" << m_mimeJob->url();
         return;
     } else {
         // Make job reusable by keeping the connection open:
@@ -72,6 +82,7 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
     }
 
     if (mimetype == "text/html") {
+//    if (false) {
         m_webThumbnailer = new KWebThumbnailer(m_url, m_previewSize, m_url.toString(), this);
 
         connect(m_webThumbnailer, SIGNAL(done(bool)), SLOT(webThumbnailerDone(bool)));
@@ -98,6 +109,7 @@ void PreviewContainer::webThumbnailerDone(bool success)
 {
     if (!success) {
         setData("status", "failed");
+        checkForUpdate();
         return;
     }
 

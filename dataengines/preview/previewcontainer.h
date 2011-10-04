@@ -48,6 +48,7 @@ private Q_SLOTS:
 
 private:
     QSize m_previewSize;
+    QImage m_fallbackImage;
     KIO::PreviewJob *m_job;
     KIO::MimetypeJob *m_mimeJob;
     KWebThumbnailer *m_webThumbnailer;
