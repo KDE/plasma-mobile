@@ -92,24 +92,24 @@ void FirstRun::activityAdded(const QString& source)
     //kError() << "AAA: " << info->name();
     if (info->name() == "Introduction") {
         // Bookmarks
-        connectToActivity(source, "http://en.wikipedia.org/wiki/Berlin", "Wikipedia: Berlin");
-        connectToActivity(source, "http://wikitravel.org/en/Berlin", "Wikitravel: Berlin");
-        connectToActivity(source, "http://maps.google.com", "Google Maps");
+        connectToActivity(source, "http://www.plasma-active.org", "Plasma Active");
+    } else if (info->name() == "My First Activity") {
+        // leaving it empty to invite creativity
+    } else if (info->name() == "Vacation Planning") {
+        // Bookmarks
+        connectToActivity(source, "http://www.deutschebahn.com", "Deutsche Bahn");
+        connectToActivity(source, "http://wikitravel.org/en/Berlin", "Berlin Travel Guide");
+        connectToActivity(source, "http://osm.org/go/0MbEYhO8-", "OpenStreetMap Berlin");
 
         // Apps
-        connectToActivity(source, appPath + "active-web-browser.desktop", "Browser");
-    } else if (info->name() == "My First Activity") {
-        connectToActivity(source, "http://vizZzion.org", "VizZzion.org");
-        connectToActivity(source, appPath + "active-news-reader.desktop");
-    } else if (info->name() == "Vacation Planning") {
-        connectToActivity(source, "http://seashepherd.org", "Seashepherd dot Org");
         connectToActivity(source, appPath + "active-image-viewer.desktop");
+        connectToActivity(source, appPath + "kwrite.desktop");
+        connectToActivity(source, appPath + "korganizer-mobile.desktop");
     }
 
-    kError() << "SSS" << m_completedActivities.size() << m_initialActivities.size();
     if (m_completedActivities.size() == m_initialActivities.size()) {
         markDone();
-        kError() << "Saved. Quitting.";
+        kError() << "All done. Quitting.";
         emit done();
     }
 }
@@ -119,9 +119,6 @@ void FirstRun::connectToActivity(const QString &activityId, const QString &resou
     Nepomuk::Resource fileRes(resourceUrl);
     QUrl typeUrl;
 
-    KActivityInfo* info = new KActivityInfo(activityId); // FIXME: remove
-
-    //kError() << "   Adding resource " << description << " [" << resourceUrl << "] to acivity " << activityId;
     //Bookmark?
     if (QUrl(resourceUrl).scheme() == "http") {
         typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark");
@@ -139,7 +136,7 @@ void FirstRun::connectToActivity(const QString &activityId, const QString &resou
         }
     }
 
-    kError() << "       Added resource " << description << " to " << info->name();
+    kError() << "       Added resource " << description << " to " << activityId;
     Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KEXT::Activity());
     acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
 }
