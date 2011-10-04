@@ -1,7 +1,7 @@
 [Desktop Entry]
 X-SuSE-translate=true
 TryExec=/usr/bin/active-firstrun
-Exec=active-firstrun >> /tmp/active-firstrun.log 2>&1
+Exec=active-firstrun >> /tmp/active-firstrun.log 2>&1 &
 X-DBUS-StartupType=wait
 Name=KRunner
 Type=Service
