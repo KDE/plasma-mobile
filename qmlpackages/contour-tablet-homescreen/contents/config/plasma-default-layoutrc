@@ -116,8 +116,42 @@ screen=-1
 wallpaperplugin=image
 wallpaperpluginmode=SingleImage
 
+[Containments][21][Applets][90]
+geometry=0,0,506,256
+immutability=1
+plugin=weather
+zvalue=0
+
+[Containments][21][Applets][90][Configuration]
+Share=false
+pressureUnit=5008
+source=wettercom|weather|Berlin, Berlin, DE|DE0001020;Berlin
+speedUnit=9001
+temperatureUnit=6001
+updateInterval=30
+visibilityUnit=2007
+
+[Containments][21][Applets][91]
+geometry=0,0,506,414
+immutability=1
+plugin=plasma_applet_notes
+zvalue=0
+
+[Containments][21][Applets][91][Configuration]
+autoSaveHtml=<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">\n<html><head><meta name="qrichtext" content="1" /><style type="text/css">\np, li { white-space: pre-wrap; }\n</style></head><body style=" font-family:'Droid Sans Fallback'; font-size:14pt; font-weight:400; font-style:normal;">\n<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-weight:600; text-decoration: underline;">Checklist</span></p>\n<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000000;">- pack suitcase</span></p>\n<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#000000;">- book tickets</span></p></body></html>
+scrollValue=0
+
 [Containments][21][General]
+ItemsGeometries=Bookmark:7,345,712,158;Applet-90:0,0,553,387;Application:1,474,534,158;Applet-91:714,0,534,474;
 FirstStartup=false
+
+[Containments][21][Wallpaper][image]
+slideTimer=10
+slidepaths=/usr/share/wallpapers/
+userswallpapers=/usr/share/wallpapers/CarribeanSunset.jpg
+wallpaper=/usr/share/wallpapers/CarribeanSunset.jpg
+wallpapercolor=0,0,0
+wallpaperposition=0
 
 [Containments][21][Wallpaper][image]
 wallpaper=/usr/share/wallpapers/CarribeanSunset.jpg
