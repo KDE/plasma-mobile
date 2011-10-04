@@ -29,7 +29,7 @@ namespace Plasma {
 }
 
 class KActivityController;
-
+class QDBusServiceWatcher;
 
 class FirstRun: public QObject
 {
@@ -44,13 +44,14 @@ class FirstRun: public QObject
         void done();
 
     private Q_SLOTS:
+        void serviceRegistered(const QString &service);
         void init();
         void activityAdded(const QString& source);
         void markDone();
 
     private:
         void connectToActivity(const QString &activityId, const QString &resourceUrl, const QString &description = QString());
-        //Plasma::DataEngine* m_activityEngine;
+        QDBusServiceWatcher *m_queryServiceWatcher;
         KActivityController *m_activityController;
         QString m_currentActivity;
         QStringList m_initialActivities;

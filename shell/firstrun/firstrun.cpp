@@ -23,6 +23,7 @@
 #include <kactivitycontroller.h>
 #include <kactivityinfo.h>
 
+#include <Nepomuk/Query/QueryServiceClient>
 #include <Nepomuk/Resource>
 #include <Nepomuk/Variant>
 
@@ -32,6 +33,8 @@
 #include <KConfig>
 #include <soprano/vocabulary.h>
 
+#include <QDBusConnection>
+#include <QDBusServiceWatcher>
 #include <QTimer>
 
 FirstRun::FirstRun(QObject* parent)
@@ -42,7 +45,22 @@ FirstRun::FirstRun(QObject* parent)
 
     // wait until the system has settled down
     // yep, hack, but needed to prevent race conditions when nepomuk is no up yet :/
-    QTimer::singleShot(60000, this, SLOT(init()));
+    if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
+        QTimer::singleShot(5000, this, SLOT(init()));
+    } else {
+        m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
+                            QDBusConnection::sessionBus(),
+                            QDBusServiceWatcher::WatchForRegistration,
+                            this);
+        connect(m_queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
+    }
+}
+
+void FirstRun::serviceRegistered(const QString &service)
+{
+    if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
+        init();
+    }
 }
 
 void FirstRun::init()
