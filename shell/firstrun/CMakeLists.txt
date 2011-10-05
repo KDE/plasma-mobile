@@ -40,3 +40,4 @@ target_link_libraries(active-firstrun
 )
 
 install(TARGETS active-firstrun ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(FILES adjust-time.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
