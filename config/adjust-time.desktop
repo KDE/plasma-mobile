@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=kcmshell4 clock
+Icon=clock
+Name=Adjust date and time
+Type=Application
+X-SuSE-translate=true
+Categories=Qt;KDE;System;Settings
