@@ -35,6 +35,7 @@ KDE4_ADD_EXECUTABLE(active-firstrun ${firstrun_SRCS})
 
 target_link_libraries(active-firstrun
         ${KDE4_PLASMA_LIBS}
+        ${NEPOMUK_LIBRARIES}
         kactivities
 )
 
