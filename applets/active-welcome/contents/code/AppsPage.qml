@@ -45,8 +45,9 @@ Item {
             width: parent.width - 40
             anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
-            text: i18n("<p>Swipe down the top panel to peek at your running apps. Slide it down further to reveal the app launcher.</p> \
-            <p>Your running apps are organized into Activities to keep your working area clean.</p><p>Enjoy high-quality apps such as Kontact Touch, Calligra Active (Beta) and Bangarang on your device.")
+            text: i18n("<p>Swipe down the top panel to peek at live previews of all of your running apps. Pressing on a preview will switch to that app, and you can close an app by pressing on the close button attached to the preview.</p> \
+            <p>Slide the panel down even further to reveal the app launcher, complete with a search bar. Enjoy high-quality apps such as Kontact Touch, Calligra Active (Beta), Bangarang and various games which are pre-installed on your device.</p> \
+            <p>When you launch an app, it is associated with the current Activity for you, which helps keep your working area clear and focused on the task at hand. To return quickly to the Activity view, which is where you are right now, just press the Activities icon in the top right of the panel.</p><p>.")
             color: theme.textColor
             //style: Text.Sunken
             styleColor: theme.backgroundColor

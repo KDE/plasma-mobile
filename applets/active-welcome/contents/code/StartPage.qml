@@ -53,7 +53,7 @@ Item {
             width: parent.width - 40
             anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
-            text: i18n("<p>Plasma Active allows you to browse and interact with the web. Stay in contact with your friends, read the latest news, enjoy your music and movies. Stay in control of your data and shape your user experience.</p><p>Plasma Active supports your workflow through Activities. Enjoy high-quality apps to browse the web, read news, watch photos, read your email and documents.")
+            text: i18n("<p>Stay in control of your data and create a personalized user experience!</p><p>With Plasma Active you can browse and interact with the web, stay in contact with your friends, get the latest news, read and edit documents, enjoy your music and movies, play games and more.</p><p>While using Plasma Active, you can personalize it so that it reflects your needs and interests with the innovative Activities feature. Press the arrow to learn more about Activities.")
             color: theme.textColor
             styleColor: theme.backgroundColor
         }

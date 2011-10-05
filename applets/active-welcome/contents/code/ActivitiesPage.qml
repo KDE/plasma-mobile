@@ -46,8 +46,8 @@ Item {
             width: parent.width - 40
             anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
-            text: i18n("<p>Activities help you to organize your device.</p><p>The Contour shell organizes your apps, bookmarks, media, documents and contacts into Activities. Slide out the Activity switcher from the right hand side to switch between activities, to create new activities, and to remove old ones.</p>\
-            <p>Use the buttons at the top left to personalize your activities by adding items and widgets.</p>")
+            text: i18n("<p>Activities help you to organize your device and its contents to reflect you.</p><p>Activities allow you to collect related apps, bookmarks, media, documents and contacts together into themed groups you create. This text you are reading is in such a themed Activity right now! You can switch between Activities by sliding out the Activity switcher from the right hand side of the screen. The switcher also lets you create new activities and remove old ones.</p>\
+            <p>Use the buttons at the top left to personalize the current activity and add items to it. You can move items around in an Activity by dragging their titles and resize them by dragging the bottom right-hand corner. Items can also be removed and many support configuration by pressing on the appropriate icon in the item's title bar.</p>")
             color: theme.textColor
             styleColor: theme.backgroundColor
         }
