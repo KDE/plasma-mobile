@@ -27,8 +27,8 @@ import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
     id: welcome
-    width: 400
-    height: 300
+    property int minimumWidth: 400
+    property int minimumHeight: 300
     state: "StartPage"
     clip: true
 

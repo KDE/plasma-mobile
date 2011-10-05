@@ -62,8 +62,8 @@ Item {
         Item {
             id: videoItem
             anchors.horizontalCenter: parent.horizontalCenter
-            width: 400
-            height: 280
+            width: 266
+            height: 186
 
             /*
             Rectangle {
@@ -78,50 +78,51 @@ Item {
                 id: frameRect
                 height: width/1.7
                 anchors {
-                    left: parent.left
-                    right: parent.right
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.bottom
                 }
-            }
+
 
             
-            Video {
-                id: video
-                width: frameRect.width - 2
-                height: frameRect.height - 1
-                anchors {
-                    fill: frameRect
-                    leftMargin: frameRect.margins.left
-                    topMargin: frameRect.margins.top
-                    rightMargin: frameRect.margins.right
-                    bottomMargin: frameRect.margins.bottom
-                }
-                source: plasmoid.file("data", "video.ogv")
-
-                onPausedChanged: {
-                    print("Paused Changed..." + paused + playing);
-                    if (paused) {
-                        setPaused();
-                    } else {
-                        setPlaying();
+                Video {
+                    id: video
+                    width: frameRect.width - 2
+                    height: frameRect.height - 1
+                    anchors {
+                        fill: frameRect
+                        leftMargin: frameRect.margins.left
+                        topMargin: frameRect.margins.top
+                        rightMargin: frameRect.margins.right
+                        bottomMargin: frameRect.margins.bottom
                     }
-                }
+                    source: plasmoid.file("data", "video.ogv")
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (startPage.state == "playing") {
+                    onPausedChanged: {
+                        print("Paused Changed..." + paused + playing);
+                        if (paused) {
                             setPaused();
                         } else {
                             setPlaying();
                         }
-                        print(" XXX State is now: " + startPage.state + " opacity: " + pauseButton.opacity + " scale: " + videoItem.scale);
                     }
-                }
 
-                focus: true
-                Keys.onSpacePressed: video.paused = !video.paused
-                Keys.onLeftPressed: video.position -= 5000
-                Keys.onRightPressed: video.position += 5000
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (startPage.state == "playing") {
+                                setPaused();
+                            } else {
+                                setPlaying();
+                            }
+                            print(" XXX State is now: " + startPage.state + " opacity: " + pauseButton.opacity + " scale: " + videoItem.scale);
+                        }
+                    }
+
+                    focus: true
+                    Keys.onSpacePressed: video.paused = !video.paused
+                    Keys.onLeftPressed: video.position -= 5000
+                    Keys.onRightPressed: video.position += 5000
+                }
             }
             Column {
                 anchors.centerIn: parent
@@ -148,13 +149,21 @@ Item {
     states: [
         State {
             name: "paused"
-            PropertyChanges { target: videoItem; scale: 1.0}
+            PropertyChanges {
+                target: frameRect
+                width: 266
+                height: 186
+            }
             PropertyChanges { target: pauseButton; opacity: 1.0}
             PropertyChanges { target: videoText; opacity: 1.0}
         },
         State {
             name: "playing"
-            PropertyChanges { target: videoItem; scale: 2.0}
+            PropertyChanges {
+                target: frameRect
+                width: 600
+                height: 420
+            }
             PropertyChanges { target: pauseButton; opacity: 0.0}
             PropertyChanges { target: videoText; opacity: 0.0}
         }
@@ -164,12 +173,12 @@ Item {
         Transition {
             from: "paused"; to: "playing"
             NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 300 }
-            NumberAnimation { properties: "scale"; easing.type: Easing.InOutQuint; duration: 500 }
+            NumberAnimation { properties: "width,height"; easing.type: Easing.InOutQuint; duration: 500 }
         },
         Transition {
             from: "playing"; to: "paused"
             NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuint; duration: 300 }
-            NumberAnimation { properties: "scale"; easing.type: Easing.InOutQuint; duration: 200 }
+            NumberAnimation { properties: "width,height"; easing.type: Easing.InOutQuint; duration: 200 }
         }
     ]
 
