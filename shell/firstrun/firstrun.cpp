@@ -20,8 +20,8 @@
 #include "firstrun.h"
 #include "kext.h"
 
-#include <kactivitycontroller.h>
-#include <kactivityinfo.h>
+#include <Activities/Controller>
+#include <Activities/Info>
 
 #include <Nepomuk/Query/QueryServiceClient>
 #include <Nepomuk/Resource>
@@ -71,7 +71,7 @@ void FirstRun::init()
     delete scfg;
     kError() << "Starting first run ..." << !hasRun;
     if (!hasRun) {
-        m_activityController = new KActivityController(this);
+        m_activityController = new Activities::Controller(this);
         m_currentActivity = m_activityController->currentActivity();
         QStringList activities = m_activityController->listActivities();
         foreach (const QString &id, activities) {
@@ -90,7 +90,7 @@ FirstRun::~FirstRun()
 
 void FirstRun::activityAdded(const QString& source)
 {
-    KActivityInfo* info = new KActivityInfo(source);
+    Activities::Info* info = new Activities::Info(source);
     kError() << "------> Source added: " << info->name() << source;
 
     // Check if it's among the default activities and wether we've configured this actity already

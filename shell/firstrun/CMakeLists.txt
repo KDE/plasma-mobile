@@ -36,7 +36,6 @@ KDE4_ADD_EXECUTABLE(active-firstrun ${firstrun_SRCS})
 target_link_libraries(active-firstrun
         ${KDE4_PLASMA_LIBS}
         kactivities
-        kworkspace
 )
 
 install(TARGETS active-firstrun ${INSTALL_TARGETS_DEFAULT_ARGS} )
