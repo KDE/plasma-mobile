@@ -111,6 +111,7 @@ void FirstRun::activityAdded(const QString& source)
     if (info->name() == "Introduction") {
         // Bookmarks
         connectToActivity(source, "http://www.plasma-active.org", "Plasma Active");
+        connectToActivity(source, "http://community.kde.org/Plasma/Active/Info/FAQ", "FAQ");
         connectToActivity(source, appPath + "adjust-time.desktop");
     } else if (info->name() == "My First Activity") {
         // leaving it empty to invite creativity
