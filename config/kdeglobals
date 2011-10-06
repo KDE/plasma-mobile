@@ -2,7 +2,7 @@
 update_info=kded.upd:kde3.0,kwin.upd:kde3.2Xinerama,mouse_cursor_theme.upd:kde3.4.99,kaccel.upd:kde3.3/r1
 
 [General]
-BrowserApplication[$d]=active-webbrowser
+BrowserApplication[$e]=!active-webbrowser
 XftAntialias=true
 XftHintStyle=hintmedium
 XftSubPixel=rgb
