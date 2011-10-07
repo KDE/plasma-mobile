@@ -2,5 +2,9 @@
 Exec=kcmshell4 clock
 Icon=clock
 Name=Adjust date and time
+Name[pt]=Ajustar a data e hora
+Name[sv]=Justera datum och tid
+Name[uk]=Коригування дати і часу
+Name[x-test]=xxAdjust date and timexx
 Type=Application
 Categories=Qt;KDE;System;Settings
