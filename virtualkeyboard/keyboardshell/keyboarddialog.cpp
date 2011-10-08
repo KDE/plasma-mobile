@@ -110,7 +110,6 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 KeyboardDialog::~KeyboardDialog()
 {
     emit storeApplet(m_applet);
-    m_graphicsWidget->deleteLater();
 }
 
 void KeyboardDialog::setContainment(Plasma::Containment *c)
