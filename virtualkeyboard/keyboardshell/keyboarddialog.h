@@ -72,7 +72,6 @@ private:
     Plasma::Location m_location;
     Plasma::IconWidget *m_closeButton;
     Plasma::IconWidget *m_moveButton;
-    QGraphicsWidget *m_graphicsWidget;
 };
 
 #endif // multiple inclusion guard
