@@ -1,0 +1,2 @@
+[General]
+disable suspend on powersave=true
