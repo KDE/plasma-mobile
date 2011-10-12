@@ -30,7 +30,8 @@ Item {
     width: parent.width/1.8
     state: "hidden"
     property Item recommendations
-    enabled: recommendations.state == "Passive"?false:true
+    enabled: (!recommendations || recommendations.state == "Passive")?false:true
+    visible: enabled
     onEnabledChanged: {
         if (!enabled) {
             state = "disabled"
