@@ -90,10 +90,15 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
         m_webThumbnailer->start();
     } else {
         // KIO::PreviewJob: http://api.kde.org/4.x-api/kdelibs-apidocs/kio/html/classKIO_1_1PreviewJob.html
+        kDebug() << "WEBCREATOR: starting previewjob for: " << m_url;
         KFileItem kfile = KFileItem(m_url, mimetype, KFileItem::Unknown);
         KFileItemList list;
         list << kfile;
-        m_job = new KIO::PreviewJob(list, m_previewSize, 0);
+        QStringList _en = KIO::PreviewJob::availablePlugins();
+        _en.removeAll("htmlthumbnail");
+        QStringList *enabledPlugins = new QStringList(_en);
+        kDebug() << "======== enabled plugins: " << &enabledPlugins;
+        m_job = new KIO::PreviewJob(list, m_previewSize, enabledPlugins);
 
         connect(m_job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
                 SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
