@@ -38,6 +38,7 @@ PreviewContainer::PreviewContainer(const QString &name,
 
     // Check if the image is in the cache, if so return it
     QImage preview = QImage(m_previewSize, QImage::Format_ARGB32_Premultiplied);
+    /*
     if (m_previewEngine->imageCache()->findImage(name, &preview)) {
         // cache hit
         setData("status", "done");
@@ -46,7 +47,7 @@ PreviewContainer::PreviewContainer(const QString &name,
         checkForUpdate();
         return;
     }
-
+    */
     // Set fallbackimage while loading
     m_fallbackImage = KIcon("image-loading").pixmap(QSize(64, 64)).toImage();
     m_fallbackImage = m_fallbackImage.copy(QRect(QPoint(-120,0), m_previewSize));
