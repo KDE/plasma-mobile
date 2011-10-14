@@ -59,6 +59,35 @@ MetadataModel::MetadataModel(QObject *parent)
 
     m_icons["FileDataObject"] = QString("unknown");
     m_icons["TextDocument"] = QString("text-enriched");
+
+    connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+            this, SIGNAL(countChanged()));
+    connect(this, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+            this, SIGNAL(countChanged()));
+    connect(this, SIGNAL(modelReset()),
+            this, SIGNAL(countChanged()));
+
+    QHash<int, QByteArray> roleNames;
+    roleNames[Label] = "label";
+    roleNames[Description] = "description";
+    roleNames[Types] = "types";
+    roleNames[ClassName] = "className";
+    roleNames[GenericClassName] = "genericClassName";
+    roleNames[HasSymbol] = "hasSymbol";
+    roleNames[Icon] = "icon";
+    roleNames[IsFile] = "isFile";
+    roleNames[Exists] = "exists";
+    roleNames[Rating] = "rating";
+    roleNames[NumericRating] = "numericRating";
+    roleNames[Symbols] = "symbols";
+    roleNames[ResourceUri] = "resourceUri";
+    roleNames[ResourceType] = "resourceType";
+    roleNames[Url] = "url";
+    roleNames[Topics] = "topics";
+    roleNames[TopicsNames] = "topicsNames";
+    roleNames[Tags] = "tags";
+    roleNames[TagsNanes] = "tagsNanes";
+    setRoleNames(roleNames);
 }
 
 MetadataModel::~MetadataModel()

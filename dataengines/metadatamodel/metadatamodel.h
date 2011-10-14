@@ -28,6 +28,7 @@
 class MetadataModel : public QAbstractItemModel
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
     enum Roles {
@@ -65,7 +66,10 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
-    //int count() const {return countItems();}
+    int count() const {return m_resources.count();}
+
+Q_SIGNALS:
+    void countChanged();
 
 protected:
     QString retrieveIconName(const QStringList &types) const;
