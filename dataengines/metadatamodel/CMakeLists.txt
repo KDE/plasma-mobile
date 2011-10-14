@@ -27,7 +27,7 @@ target_link_libraries(datamodelsplugin
         ${KDE4_PLASMA_LIBS}
         kactivities)
 
-install(TARGETS datamodelsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/datamodels)
+install(TARGETS datamodelsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/datamodels)
 
 
-install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/datamodels)
+install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/datamodels)

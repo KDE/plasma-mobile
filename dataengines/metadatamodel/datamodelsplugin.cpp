@@ -25,7 +25,7 @@
 
 void DataModelsPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.datamodels"));
+    Q_ASSERT(uri == QLatin1String("org.kde.datamodels"));
 
     qmlRegisterType<MetadataModel>(uri, 0, 1, "MetadataModel");
 }

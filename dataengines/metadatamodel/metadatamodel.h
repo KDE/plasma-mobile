@@ -38,7 +38,7 @@ class MetadataModel : public QAbstractItemModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(QString queryString READ queryString NOTIFY queryStringChanged)
+    Q_PROPERTY(QString queryString READ queryString WRITE setQueryString NOTIFY queryStringChanged)
 
 public:
     enum Roles {
