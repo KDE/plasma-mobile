@@ -38,7 +38,18 @@ public:
         GenericClassName,
         HasSymbol,
         Icon,
-        IsFile
+        IsFile,
+        Exists,
+        Rating,
+        NumericRating,
+        Symbols,
+        ResourceUri,
+        ResourceType,
+        Url,
+        Topics,
+        TopicsNames,
+        Tags,
+        TagsNanes
     };
 
     MetadataModel(QObject *parent = 0);

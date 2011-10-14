@@ -133,6 +133,53 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     }
     case IsFile:
         return resource.isFile();
+    case Exists:
+        return resource.exists();
+    case Rating:
+        return resource.rating();
+    case NumericRating:
+        return resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#numericRating")).toString();
+    case Symbols:
+        return resource.symbols();
+    case ResourceUri:
+        return resource.resourceUri();
+    case ResourceType:
+        return resource.resourceType();
+    case Url: {
+        if (resource.isFile() && resource.toFile().url().isLocalFile()) {
+            return resource.toFile().url().prettyUrl();
+        } else {
+            return resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
+        }
+    }
+    case Topics: {
+        QStringList topics;
+        foreach (const Nepomuk::Resource &u, resource.topics()) {
+            topics << u.resourceUri().toString();
+        }
+        return topics;
+    }
+    case TopicsNames: {
+        QStringList topicNames;
+        foreach (const Nepomuk::Resource &u, resource.topics()) {
+            topicNames << u.genericLabel();
+        }
+        return topicNames;
+    }
+    case Tags: {
+        QStringList tags;
+        foreach (const Nepomuk::Tag &tag, resource.tags()) {
+            tags << tag.resourceUri().toString();
+        }
+        return tags;
+    }
+    case TagsNanes: {
+        QStringList tagNames;
+        foreach (const Nepomuk::Tag &tag, resource.tags()) {
+            tagNames << tag.genericLabel();
+        }
+        return tagNames;
+    }
     default:
         return QVariant();
     }
