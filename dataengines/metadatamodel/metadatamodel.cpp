@@ -129,8 +129,6 @@ void MetadataModel::doQuery()
     connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
             this, SLOT(entriesRemoved(const QList<QUrl> &)));
 
-    const int limit = m_query.limit();
-
     /*FIXME: safe without limit?
     if (limit > RESULT_LIMIT || limit <= 0) {
         m_query.setLimit(RESULT_LIMIT);
@@ -139,6 +137,52 @@ void MetadataModel::doQuery()
 
     m_queryClient->query(m_query);
 }
+
+void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
+{
+    beginInsertRows(QModelIndex(), m_resources.count(), m_resources.count()+entries.count());
+
+    foreach (Nepomuk::Query::Result res, entries) {
+        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+        //kDebug() << "Result label:" << res.genericLabel();
+        m_uriToResourceIndex[res.resource().resourceUri()] = m_resources.count();
+        m_resources << res.resource();
+    }
+    endInsertRows();
+}
+
+void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
+{
+    int prevIndex = -100;
+    //pack all the stuff to remove in groups, to emit the least possible signals
+    //this assumes urls are in the same order they arrived ion the results
+    //it's a map because we want to remove values from the vector in inverted order to keep indexes valid trough the remove loop
+    QMap<int, int> toRemove;
+    foreach (const QUrl &url, urls) {
+        const int index = m_uriToResourceIndex.value(url);
+        if (index == prevIndex + 1) {
+            toRemove[prevIndex]++;
+        } else {
+            toRemove[index] = 1;
+        }
+        prevIndex = index;
+    }
+
+    QMap<int, int>::const_iterator i = toRemove.constEnd();
+    --i;
+    do {
+        beginRemoveRows(QModelIndex(), i.key(), i.key()+i.value());
+        m_resources.remove(i.key(), i.value());
+        endRemoveRows();
+        --i;
+    } while (i != toRemove.constBegin());
+
+    //another loop, we don't depend to m_uriToResourceIndex in data(), but we take this doublesafety
+    foreach (const QUrl &url, urls) {
+        m_uriToResourceIndex.remove(url);
+    }
+}
+
 
 
 QVariant MetadataModel::data(const QModelIndex &index, int role) const

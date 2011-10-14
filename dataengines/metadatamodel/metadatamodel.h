@@ -83,6 +83,8 @@ Q_SIGNALS:
     void countChanged();
 
 protected Q_SLOTS:
+    void newEntries(const QList< Nepomuk::Query::Result > &entries);
+    void entriesRemoved(const QList<QUrl> &urls);
     void serviceRegistered(const QString &service);
 
 protected:
@@ -94,7 +96,8 @@ private:
     Nepomuk::Query::QueryServiceClient *m_queryClient;
     Nepomuk::ResourceWatcher* m_watcher;
     QDBusServiceWatcher *m_queryServiceWatcher;
-    QList <Nepomuk::Resource> m_resources;
+    QVector<Nepomuk::Resource> m_resources;
+    QHash<QUrl, int> m_uriToResourceIndex;
     QHash<QString, QString> m_icons;
 };
 
