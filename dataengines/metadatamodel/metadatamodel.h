@@ -22,8 +22,17 @@
 
 #include <QAbstractItemModel>
 
+#include <Nepomuk/Query/Query>
+#include <Nepomuk/Query/Result>
+#include <Nepomuk/Query/QueryServiceClient>
 #include <Nepomuk/Resource>
 
+
+namespace Nepomuk {
+    class ResourceWatcher;
+}
+
+class QDBusServiceWatcher;
 
 class MetadataModel : public QAbstractItemModel
 {
@@ -56,6 +65,10 @@ public:
     MetadataModel(QObject *parent = 0);
     ~MetadataModel();
 
+    void setQuery(const Nepomuk::Query::Query &query);
+    int count() const {return m_resources.count();}
+
+
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation,
@@ -66,15 +79,21 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
-    int count() const {return m_resources.count();}
-
 Q_SIGNALS:
     void countChanged();
 
+protected Q_SLOTS:
+    void serviceRegistered(const QString &service);
+
 protected:
     QString retrieveIconName(const QStringList &types) const;
+    void doQuery();
 
 private:
+    Nepomuk::Query::Query m_query;
+    Nepomuk::Query::QueryServiceClient *m_queryClient;
+    Nepomuk::ResourceWatcher* m_watcher;
+    QDBusServiceWatcher *m_queryServiceWatcher;
     QList <Nepomuk::Resource> m_resources;
     QHash<QString, QString> m_icons;
 };

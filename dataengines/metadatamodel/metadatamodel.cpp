@@ -19,6 +19,9 @@
 
 #include "metadatamodel.h"
 
+#include <QDBusServiceWatcher>
+#include <QDBusConnection>
+
 #include <KDebug>
 #include <KMimeType>
 
@@ -88,10 +91,53 @@ MetadataModel::MetadataModel(QObject *parent)
     roleNames[Tags] = "tags";
     roleNames[TagsNanes] = "tagsNanes";
     setRoleNames(roleNames);
+
+    m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
+                        QDBusConnection::sessionBus(),
+                        QDBusServiceWatcher::WatchForRegistration,
+                        this);
+    connect(m_queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
 }
 
 MetadataModel::~MetadataModel()
 {
+}
+
+
+void MetadataModel::serviceRegistered(const QString &service)
+{
+    if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
+        delete m_queryClient; //m_queryClient still doesn't fix itself
+        doQuery();
+    }
+}
+
+void MetadataModel::setQuery(const Nepomuk::Query::Query &query)
+{
+    m_query = query;
+    if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
+        doQuery();
+    }
+}
+
+void MetadataModel::doQuery()
+{
+    m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
+
+    connect(m_queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
+            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
+    connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
+            this, SLOT(entriesRemoved(const QList<QUrl> &)));
+
+    const int limit = m_query.limit();
+
+    /*FIXME: safe without limit?
+    if (limit > RESULT_LIMIT || limit <= 0) {
+        m_query.setLimit(RESULT_LIMIT);
+    }
+    */
+
+    m_queryClient->query(m_query);
 }
 
 
