@@ -171,7 +171,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
     beginInsertRows(QModelIndex(), m_resources.count(), m_resources.count()+entries.count());
 
     foreach (Nepomuk::Query::Result res, entries) {
-        kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
         m_uriToResourceIndex[res.resource().resourceUri()] = m_resources.count();
         m_resources << res.resource();
@@ -347,7 +347,7 @@ QVariant MetadataModel::headerData(int section, Qt::Orientation orientation,
 QModelIndex MetadataModel::index(int row, int column,
                                  const QModelIndex &parent) const
 {
-    if (parent.isValid() || column > 0 || row < 0 || rowCount()) {
+    if (parent.isValid() || column > 0 || row < 0 || row >= rowCount()) {
         return QModelIndex();
     }
 

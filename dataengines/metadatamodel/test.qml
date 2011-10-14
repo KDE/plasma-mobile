@@ -29,6 +29,6 @@ ListView {
     }
 
     delegate: Text {
-        text: label
+        text: model["label"]
     }
 }
