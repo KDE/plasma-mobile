@@ -28,6 +28,7 @@
 #include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
 #include <Nepomuk/File>
+#include <nepomuk/queryparser.h>
 
 MetadataModel::MetadataModel(QObject *parent)
     : QAbstractItemModel(parent)
@@ -118,7 +119,34 @@ void MetadataModel::setQuery(const Nepomuk::Query::Query &query)
     if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
         doQuery();
     }
+
+    beginResetModel();
+    m_resources.clear();
+    m_uriToResourceIndex.clear();
+    endResetModel();
+    emit countChanged();
+    emit queryStringChanged();
 }
+
+Nepomuk::Query::Query MetadataModel::query() const
+{
+    return m_query;
+}
+
+void MetadataModel::setQueryString(const QString &query)
+{
+    if (query == queryString()) {
+        return;
+    }
+
+    setQuery(Nepomuk::Query::QueryParser::parseQuery(query));
+}
+
+QString MetadataModel::queryString() const
+{
+    return m_query.toString();
+}
+
 
 void MetadataModel::doQuery()
 {
@@ -149,6 +177,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         m_resources << res.resource();
     }
     endInsertRows();
+    emit countChanged();
 }
 
 void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
@@ -181,6 +210,7 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
     foreach (const QUrl &url, urls) {
         m_uriToResourceIndex.remove(url);
     }
+    emit countChanged();
 }
 
 

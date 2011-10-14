@@ -38,6 +38,7 @@ class MetadataModel : public QAbstractItemModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(QString queryString READ queryString NOTIFY queryStringChanged)
 
 public:
     enum Roles {
@@ -66,8 +67,12 @@ public:
     ~MetadataModel();
 
     void setQuery(const Nepomuk::Query::Query &query);
+    Nepomuk::Query::Query query() const;
+
     int count() const {return m_resources.count();}
 
+    void setQueryString(const QString &query);
+    QString queryString() const;
 
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
@@ -81,6 +86,7 @@ public:
 
 Q_SIGNALS:
     void countChanged();
+    void queryStringChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
