@@ -31,7 +31,14 @@ class MetadataModel : public QAbstractItemModel
 
 public:
     enum Roles {
-        Label = Qt::UserRole+1
+        Label = Qt::UserRole+1,
+        Description,
+        Types,
+        ClassName,
+        GenericClassName,
+        HasSymbol,
+        Icon,
+        IsFile
     };
 
     MetadataModel(QObject *parent = 0);
@@ -48,8 +55,13 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
     //int count() const {return countItems();}
+
+protected:
+    QString retrieveIconName(const QStringList &types) const;
+
 private:
     QList <Nepomuk::Resource> m_resources;
+    QHash<QString, QString> m_icons;
 };
 
 #endif

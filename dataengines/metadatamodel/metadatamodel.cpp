@@ -20,11 +20,45 @@
 #include "metadatamodel.h"
 
 #include <KDebug>
+#include <KMimeType>
+
+#include <Nepomuk/Tag>
+#include <Nepomuk/Variant>
+#include <Nepomuk/File>
 
 MetadataModel::MetadataModel(QObject *parent)
     : QAbstractItemModel(parent)
 {
-    
+    // Add fallback icons here from generic to specific
+    // The list of types is also sorted in this way, so
+    // we're returning the most specific icon, even with
+    // the hardcoded mapping.
+
+    // Files
+    //m_icons["FileDataObject"] = QString("audio-x-generic");
+
+    // Audio
+    m_icons["Audio"] = QString("audio-x-generic");
+    m_icons["MusicPiece"] = QString("audio-x-generic");
+
+    // Images
+    m_icons["Image"] = QString("image-x-generic");
+    m_icons["RasterImage"] = QString("image-x-generic");
+
+    m_icons["Email"] = QString("internet-mail");
+    m_icons["Document"] = QString("kword");
+    m_icons["PersonContact"] = QString("x-office-contact");
+
+    // Filesystem
+    m_icons["Website"] = QString("text-html");
+
+    // ... add some more
+    // Filesystem
+    m_icons["Bookmark"] = QString("bookmarks");
+    m_icons["BookmarksFolder"] = QString("bookmarks-organize");
+
+    m_icons["FileDataObject"] = QString("unknown");
+    m_icons["TextDocument"] = QString("text-enriched");
 }
 
 MetadataModel::~MetadataModel()
@@ -39,11 +73,66 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const Nepomuk::Resource &res = m_resources[index.row()];
+    const Nepomuk::Resource &resource = m_resources[index.row()];
 
     switch (role) {
     case Label:
-        return res.label();
+        return resource.label();
+    case Description:
+        return resource.description();
+    case Types: {
+        QStringList types;
+        foreach (const QUrl &u, resource.types()) {
+            types << u.toString();
+        }
+        return types;
+    }
+    case ClassName:
+        return resource.className();
+    case GenericClassName: {
+        //FIXME: a more elegant way is needed
+        QString genericClassName = resource.className();
+        Nepomuk::Types::Class resClass(resource.resourceType());
+        foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
+            if (parentClass.label() == "Document" ||
+                parentClass.label() == "Audio" ||
+                parentClass.label() == "Video" ||
+                parentClass.label() == "Image" ||
+                parentClass.label() == "Contact") {
+                genericClassName = parentClass.label();
+                break;
+            //two cases where the class is 2 levels behind the level of generalization we want
+            } else if (parentClass.label() == "RasterImage") {
+                genericClassName = "Image";
+            } else if (parentClass.label() == "TextDocument") {
+                genericClassName = "Document";
+            }
+        }
+        return genericClassName;
+    }
+    case HasSymbol:
+    case Icon: {
+        QString icon = resource.genericIcon();
+        if (icon.isEmpty() && resource.isFile()) {
+            KUrl url = resource.toFile().url();
+            if (!url.isEmpty()) {
+                icon = KMimeType::iconNameForUrl(url);
+            }
+        }
+        if (icon.isEmpty()) {
+            // use resource types to find a suitable icon.
+            //TODO
+            icon = retrieveIconName(QStringList(resource.className()));
+            //kDebug() << "symbol" << icon;
+        }
+        if (icon.split(",").count() > 1) {
+            kDebug() << "More than one icon!" << icon;
+            icon = icon.split(",").last();
+        }
+        return icon;
+    }
+    case IsFile:
+        return resource.isFile();
     default:
         return QVariant();
     }
@@ -95,5 +184,22 @@ int MetadataModel::columnCount(const QModelIndex &parent) const
     return 1;
 }
 
+
+QString MetadataModel::retrieveIconName(const QStringList &types) const
+{
+    // keep searching until the most specific icon is found
+    QString _icon = "nepomuk";
+    foreach(const QString &t, types) {
+        QString shortType = t.split('#').last();
+        if (shortType.isEmpty()) {
+            shortType = t;
+        }
+        if (m_icons.keys().contains(shortType)) {
+            _icon = m_icons[shortType];
+            //kDebug() << "found icon for type" << shortType << _icon;
+        }
+    }
+    return _icon;
+}
 
 #include "metadatamodel.moc"
