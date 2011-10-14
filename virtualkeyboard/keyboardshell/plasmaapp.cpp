@@ -120,10 +120,18 @@ int  PlasmaApp::newInstance()
     KConfigGroup config = storedConfig();
     KConfigGroup actualConfig(m_containment->config());
     actualConfig = KConfigGroup(&actualConfig, "Applets");
-    actualConfig = KConfigGroup(&actualConfig, QString::number(1));
 
-    config.copyTo(&actualConfig);
+    if (config.isValid() && !config.groupList().isEmpty()) {
+        config.copyTo(&actualConfig);
+    }
     config.deleteGroup();
+
+    KConfigGroup appletConfigGroup = KConfigGroup(&actualConfig, QString::number(1));
+    appletConfigGroup = KConfigGroup(&appletConfigGroup, "Configuration");
+    if (!appletConfigGroup.hasKey("layout")) {
+        //FIXME: hardcoding to Tablet for now
+        appletConfigGroup.writeEntry("layout", "plasmaboard/tablet.xml");
+    }
 
     m_dialog = new KeyboardDialog(m_corona, m_containment, pluginName, 1, QVariantList());
     m_dialog->installEventFilter(this);
@@ -142,9 +150,6 @@ int  PlasmaApp::newInstance()
     // Set window to exist on all desktops
     KWindowSystem::setOnAllDesktops(m_dialog->winId(), true);
 
-    //FIXME: hardcoding to MID for now
-    m_dialog->applet()->config().writeEntry("layout", "plasmaboard/tablet.xml");
-    m_dialog->applet()->configChanged();
     m_dialog->hide();
 
     return 0;
