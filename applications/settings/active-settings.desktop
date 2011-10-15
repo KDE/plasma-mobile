@@ -1,10 +1,10 @@
 [Desktop Entry]
 Name=Settings
 GenericName=Settings
-Comment=A web browser reader for touch tablets
+Comment=Settings for Plasma Active
 Exec=active-settings -graphicssystem raster %u
 Terminal=false
 Icon=preferences-desktop
 Type=Application
-Categories=Qt;KDE;Network;WebBrowser;
+Categories=Qt;KDE;Settings;
 X-KDE-PluginInfo-Website=http://plasma-active.org
