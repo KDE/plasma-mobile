@@ -23,6 +23,7 @@
 #include "settingsmodulesmodel.h"
 #include "settingsmodulesitem.h"
 
+#include <KIcon>
 #include <KService>
 #include <KServiceTypeTrader>
 
@@ -110,7 +111,16 @@ void SettingsModulesModel::populate()
         } else if (!service->comment().isEmpty()) {
             description = service->comment();
         }
-        kDebug() << " ---------> FOUND MODULE: " << service->name() << description;
+        SettingsModulesItem* item = new SettingsModulesItem(this);
+
+        item->setName(service->name());
+        item->setDescription(description);
+        item->setIcon(KIcon(service->icon()));
+        item->setIconName(service->icon());
+        item->setModule(service->property("X-KDE-PluginInfo-Name").toString());
+
+        kDebug() << " ---------> FOUND MODULE: " << service->name() << description << item->module();
+        d->items.append(item);
         /*
         data["iconName"] = service->icon();
         data["name"] = service->name();
@@ -122,7 +132,7 @@ void SettingsModulesModel::populate()
         */
     }
 
-    //checkForUpdate();
+    emit dataChanged();
 }
 
 #include "settingsmodulesmodel.moc"

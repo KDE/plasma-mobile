@@ -50,14 +50,14 @@ View::View(const QString &module, QWidget *parent)
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), "org.kde.active.settings", structure);
+    m_settingsModules = new SettingsModulesModel(this);
+    rootContext()->setContextProperty("settingsModulesModel", QVariant::fromValue(m_settingsModules->items()));
 
     setSource(QUrl(m_package->filePath("mainscript")));
     show();
     if (!module.isEmpty()) {
         kDebug() << "load model: " << module;
     }
-    m_settingsModules = new SettingsModulesModel(this);
-
     //onStatusChanged(status());
 
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));

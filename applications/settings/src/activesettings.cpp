@@ -35,8 +35,6 @@ ActiveSettings::ActiveSettings(const KCmdLineArgs *args)
     : KApplication()
 {
     Q_UNUSED(args);
-    //qmlRegisterType<KDeclarativeWebSettings>();
-    //qmlRegisterType<KDeclarativeWebView>("org.kde.kdewebkit", 0, 1, "WebView");
     setStartDragDistance(20);
 }
 
@@ -44,29 +42,10 @@ ActiveSettings::~ActiveSettings()
 {
 }
 
-void ActiveSettings::newWindow(const QString& url)
+void ActiveSettings::newWindow(const QString& module)
 {
-    ActiveSettingsWindow *browserWindow = new ActiveSettingsWindow(url);
-    connect(browserWindow, SIGNAL(newWindow(const QString&)), SLOT(newWindow(const QString&)));
-    browserWindow->show();
+    ActiveSettingsWindow *settingsWindow = new ActiveSettingsWindow(module);
+    settingsWindow->show();
 }
 
-void ActiveSettings::setUseGL(const bool on)
-{
-    /* not switchable at runtime for now, if we want this, we can add
-     * some housekeeping for the windows, let's keep it KISS for now.
-     */
-    m_useGL = on;
-}
-
-bool ActiveSettings::useGL() const
-{
-    return m_useGL;
-}
-/*
-void View::newWindow(const QString &url)
-{
-    KRun::runCommand(QString("active-webbrowser '%1'").arg(url), this);
-}
-*/
 #include "activesettings.moc"

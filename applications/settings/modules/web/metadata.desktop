@@ -1,17 +1,18 @@
 [Desktop Entry]
-Name=Active Settings
-Comment=Touchscreen friendly settings UI for Active
+Name=Web and Browser
+Comment=Settings for history, caching, etc.
 Encoding=UTF-8
 Type=Service
-Icon=preferences-desktop
-X-KDE-ParentApp=
+Icon=preferences-system-network
+X-KDE-ServiceTypes=Active/SettingsModule
 X-KDE-PluginInfo-Author=Sebastian Kügler
 X-KDE-PluginInfo-Email=sebas@kde.org
-X-KDE-PluginInfo-Name=org.kde.active.settings
+X-KDE-PluginInfo-Name=org.kde.active.settings.web
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-Website=http://plasma-active.org
 X-KDE-PluginInfo-Category=Online Services
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
-X-Plasma-MainScript=ui/Settings.qml
+X-Plasma-Package=org.kde.active.settings.web
+X-Plasma-MainScript=ui/Web.qml

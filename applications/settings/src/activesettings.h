@@ -40,14 +40,9 @@ public:
     ActiveSettings(const KCmdLineArgs *args);
     virtual ~ActiveSettings();
 
-    void setUseGL(const bool on);
-    bool useGL() const;
-
 public Q_SLOTS:
-    void newWindow(const QString &url);
+    void newWindow(const QString &module);
 
-private:
-    bool m_useGL;
 };
 
 #endif // ACTIVEWEBBROWSER_H

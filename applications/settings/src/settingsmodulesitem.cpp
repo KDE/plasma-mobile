@@ -26,6 +26,7 @@
 class SettingsModulesItemPrivate {
 public:
     QString name;
+    QString description;
     QString module;
     QString iconName;
     QIcon icon;
@@ -59,6 +60,11 @@ QString SettingsModulesItem::name()
     return d->name;
 }
 
+QString SettingsModulesItem::description()
+{
+    return d->description;
+}
+
 QString SettingsModulesItem::module()
 {
     return d->module;
@@ -77,6 +83,11 @@ QIcon SettingsModulesItem::icon()
 void SettingsModulesItem::setName(const QString &name)
 {
     d->name = name;
+}
+
+void SettingsModulesItem::setDescription(const QString &description)
+{
+    d->description = description;
 }
 
 void SettingsModulesItem::setIconName(const QString &iconName)
