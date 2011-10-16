@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    ActiveWebbrowser app(args);
+    ActiveSettings app(args);
     const QString module = args->count() ? args->arg(0) : QString();
 
     app.newWindow(module);

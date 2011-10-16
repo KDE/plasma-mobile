@@ -31,7 +31,7 @@
 #include "view.h"
 
 
-ActiveWebbrowser::ActiveWebbrowser(const KCmdLineArgs *args)
+ActiveSettings::ActiveSettings(const KCmdLineArgs *args)
     : KApplication()
 {
     Q_UNUSED(args);
@@ -40,18 +40,18 @@ ActiveWebbrowser::ActiveWebbrowser(const KCmdLineArgs *args)
     setStartDragDistance(20);
 }
 
-ActiveWebbrowser::~ActiveWebbrowser()
+ActiveSettings::~ActiveSettings()
 {
 }
 
-void ActiveWebbrowser::newWindow(const QString& url)
+void ActiveSettings::newWindow(const QString& url)
 {
-    ActiveBrowserWindow *browserWindow = new ActiveBrowserWindow(url);
+    ActiveSettingsWindow *browserWindow = new ActiveSettingsWindow(url);
     connect(browserWindow, SIGNAL(newWindow(const QString&)), SLOT(newWindow(const QString&)));
     browserWindow->show();
 }
 
-void ActiveWebbrowser::setUseGL(const bool on)
+void ActiveSettings::setUseGL(const bool on)
 {
     /* not switchable at runtime for now, if we want this, we can add
      * some housekeeping for the windows, let's keep it KISS for now.
@@ -59,7 +59,7 @@ void ActiveWebbrowser::setUseGL(const bool on)
     m_useGL = on;
 }
 
-bool ActiveWebbrowser::useGL() const
+bool ActiveSettings::useGL() const
 {
     return m_useGL;
 }

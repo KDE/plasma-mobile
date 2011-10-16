@@ -31,7 +31,7 @@
 
 #include "view.h"
 
-ActiveBrowserWindow::ActiveBrowserWindow(const QString &url, QWidget *parent)
+ActiveSettingsWindow::ActiveSettingsWindow(const QString &url, QWidget *parent)
     : QMainWindow(parent)
 {
     setAcceptDrops(true);
@@ -56,28 +56,28 @@ ActiveBrowserWindow::ActiveBrowserWindow(const QString &url, QWidget *parent)
     */
 }
 
-ActiveBrowserWindow::~ActiveBrowserWindow()
+ActiveSettingsWindow::~ActiveSettingsWindow()
 {
 }
 
-View* ActiveBrowserWindow::view()
+View* ActiveSettingsWindow::view()
 {
     return m_widget;
 }
 
-void ActiveBrowserWindow::closeEvent(QCloseEvent *)
+void ActiveSettingsWindow::closeEvent(QCloseEvent *)
 {
     KConfigGroup config(KGlobal::config(), "Window");
     config.writeEntry("Geometry", saveGeometry());
 }
 
-QString ActiveBrowserWindow::name()
+QString ActiveSettingsWindow::name()
 {
     return "Settings";
     //return m_widget->options()->name;
 }
 
-QIcon ActiveBrowserWindow::icon()
+QIcon ActiveSettingsWindow::icon()
 {
     return KIcon("preferences-desktop");
 }

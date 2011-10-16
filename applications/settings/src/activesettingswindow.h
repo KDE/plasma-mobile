@@ -33,12 +33,12 @@ class View;
  * @author Sebastian Kügler <sebas@kde.org>
  * @version 0.1
  */
-class ActiveBrowserWindow : public QMainWindow
+class ActiveSettingsWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
-    virtual ~ActiveBrowserWindow();
+    ActiveSettingsWindow(const QString &url, QWidget *parent = 0);
+    virtual ~ActiveSettingsWindow();
     QString name();
     QIcon icon();
 

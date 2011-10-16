@@ -33,12 +33,12 @@ class KCmdLineArgs;
  * @author Sebastian Kügler <sebas@kde.org>
  * @version 0.1
  */
-class ActiveWebbrowser : public KApplication
+class ActiveSettings : public KApplication
 {
     Q_OBJECT
 public:
-    ActiveWebbrowser(const KCmdLineArgs *args);
-    virtual ~ActiveWebbrowser();
+    ActiveSettings(const KCmdLineArgs *args);
+    virtual ~ActiveSettings();
 
     void setUseGL(const bool on);
     bool useGL() const;
