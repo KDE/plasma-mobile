@@ -54,7 +54,7 @@ TimeSettings::TimeSettings(QObject *parent, const QVariantList &list)
 TimeSettings::TimeSettings()
 {
     d = new TimeSettingsPrivate;
-    //d->module = "org.kde.active.settings.time"
+    setModule("org.kde.active.settings.time");
     init();
 
     // Just for testing that data gets through

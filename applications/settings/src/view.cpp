@@ -112,10 +112,11 @@ void View::loadPlugin(const QString &pluginName)
 {
     kDebug() << "Load Plugin Requested from QML. " << pluginName;
     SettingsModuleLoader *loader = new SettingsModuleLoader(this);
-    connect(loader, SIGNAL(pluginLoaded(SettingsModule*)), this, SLOT(addPlugin(SettingsModule*)));
+    //connect(loader, SIGNAL(pluginLoaded(SettingsModule*)), this, SLOT(addPlugin(SettingsModule*)));
     loader->loadAllPlugins(pluginName, rootContext());
 }
 
+/*
 void View::addPlugin(SettingsModule *plugin)
 {
     //m_settings = plugin->settingsObject();
@@ -127,5 +128,5 @@ void View::addPlugin(SettingsModule *plugin)
     kDebug() << "Plugin added!" << plugin->name();
     //guiFactory()->addClient(plugin);
 }
-
+*/
 #include "view.moc"

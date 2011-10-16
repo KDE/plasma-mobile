@@ -60,7 +60,12 @@ QString SettingsModule::name()
 
 void SettingsModule::init()
 {
+    if (module().isEmpty()) {
+        kError() << "Don't know module name. Please call setModule(\"org.kde.active.settings.yourmodule\") first.";
+        return;
+    }
     QString query;
+    query = QString("exist [X-KDE-PluginInfo-Name] and [X-KDE-PluginInfo-Name] == '%1'").arg(module());
     KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
 
     foreach (const KService::Ptr &service, services) {

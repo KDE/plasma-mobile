@@ -28,7 +28,8 @@
 
 SettingsModuleLoader::SettingsModuleLoader(QObject * parent)
   : QObject(parent),
-    m_plugin(0)
+    m_plugin(0),
+    m_pluginName(QString())
 {
 }
 
@@ -40,11 +41,14 @@ void SettingsModuleLoader::loadAllPlugins(const QString &pluginName, QDeclarativ
 {
     QString query;
     if (pluginName.isEmpty() || (m_pluginName == pluginName)) {
-        kDebug() << "Not loading plugin ..." << pluginName;
+        kDebug() << "Not loading plugin ..." << pluginName << m_pluginName;
         return;
     }
     delete m_plugin;
-    query = QString("exist Library and [X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
+    if (ctx) {
+        ctx->setContextProperty("moduleName", pluginName);
+    }
+    query = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
     KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
     //kDebug() << "QUERY: " << offers.count() << query;
     KService::List::const_iterator iter;
@@ -66,8 +70,8 @@ void SettingsModuleLoader::loadAllPlugins(const QString &pluginName, QDeclarativ
             ctx->setContextProperty("moduleDescription", description);
         }
         if (!factory) {
-            kError(5001) << "KPluginFactory could not load the plugin:" << service->name() << service->library();
-            kError(5001) << "That's OK, it's probably a QML only plugin";
+            //kDebug() << "KPluginFactory could not load the plugin:" << service->name() << service->library();
+            //kDebug() << "That's OK, it's probably a QML only plugin";
             continue;
         }
 
@@ -79,6 +83,7 @@ void SettingsModuleLoader::loadAllPlugins(const QString &pluginName, QDeclarativ
         plugin->setName(service->name());
         plugin->setDescription(description);
         plugin->setModule(pluginName);
+        m_pluginName = pluginName;
 
 
        if (plugin) {

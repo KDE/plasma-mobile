@@ -25,7 +25,14 @@
 #include <QVariant>
 
 class SettingsModulePrivate;
-
+/**
+ * @class SettingsModule A class to manage settings from declarative UIs.
+ * This class serves two functions:
+ * - Provide a plugin implementation
+ * - Provide a settings module
+ * This is done from one class in order to simplify the code. You can export
+ * any QObject-based class through qmlRegisterType(), however.
+ */
 class KDE_EXPORT SettingsModule : public QObject
 {
     Q_OBJECT
@@ -40,6 +47,12 @@ class KDE_EXPORT SettingsModule : public QObject
     public:
         SettingsModule(QObject *parent = 0, const QVariantList &v = QVariantList());
         virtual ~SettingsModule();
+        /** @name init Set up the internal metadata for the plugin
+         * This function is called from an implementing class once the object
+         * has been instantiated from QML. It loads the metadata through a KService.
+         * Call this class from the end of your empty constructor, but don't forget
+         * to call setModule(org.kde.active.settings.yourPluginName) first.
+         */
         void init();
 
         /**

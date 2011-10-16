@@ -31,6 +31,13 @@
 
 class TimeSettingsPrivate;
 
+/**
+ * @class A class to manage time and date related settings. This class serves two functions:
+ * - Provide a plugin implementation
+ * - Provide a settings module
+ * This is done from one class in order to simplify the code. You can export any QObject-based
+ * class through qmlRegisterType(), however.
+ */
 class TimeSettings : public SettingsModule
 {
     Q_OBJECT
@@ -39,7 +46,19 @@ class TimeSettings : public SettingsModule
     Q_PROPERTY(QString timezone READ timezone WRITE setTimezone NOTIFY timezoneChanged)
 
     public:
+        /**
+         * @name Plugin Constructor
+         *
+         * @arg parent The parent object
+         * @arg list Arguments, currently unused
+         */
         TimeSettings(QObject *parent, const QVariantList &list = QVariantList());
+        /**
+         * @name Settings Module Constructor
+         *
+         * @arg parent The parent object
+         * @arg list Arguments, currently unused
+         */
         TimeSettings();
         virtual ~TimeSettings();
 

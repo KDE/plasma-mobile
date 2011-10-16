@@ -46,7 +46,7 @@ Q_SIGNALS:
     void titleChanged(const QString&);
 
 private Q_SLOTS:
-    void addPlugin(SettingsModule *plugin);
+    //void addPlugin(SettingsModule *plugin);
     void loadPlugin(const QString &pluginName = QString());
     void onStatusChanged(QDeclarativeView::Status status);
     void updateStatus();
