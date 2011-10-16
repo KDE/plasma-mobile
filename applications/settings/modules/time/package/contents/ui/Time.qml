@@ -51,6 +51,7 @@ Rectangle {
         opacity: 0.2
 
     }
+
     Column {
         anchors.fill: rect
         Text {
@@ -65,6 +66,7 @@ Rectangle {
         }
 
     }
+
     Component.onCompleted: {
         print("Time.qml done loading.");
         print("settingsObject.name" + timeSettings.name);

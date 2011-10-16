@@ -19,8 +19,8 @@
  ***************************************************************************/
 
 
-#ifndef ACTIVEWEBBROWSER_H
-#define ACTIVEWEBBROWSER_H
+#ifndef ACTIVESETTINGS_H
+#define ACTIVESETTINGS_H
 
 #include <KApplication>
 
@@ -45,4 +45,4 @@ public Q_SLOTS:
 
 };
 
-#endif // ACTIVEWEBBROWSER_H
+#endif // ACTIVESETTINGS_H

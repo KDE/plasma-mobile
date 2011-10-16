@@ -25,7 +25,8 @@
 #include <KDebug>
 
 SettingsModuleLoader::SettingsModuleLoader(QObject * parent)
-  : QObject(parent)
+  : QObject(parent),
+    m_plugin(0)
 {
 }
 
@@ -35,13 +36,13 @@ SettingsModuleLoader::~SettingsModuleLoader()
 
 void SettingsModuleLoader::loadAllPlugins(const QString &pluginName)
 {
-    kDebug() << "Load all plugins" << pluginName;
     QString query;
-    if (!pluginName.isEmpty()) {
-        //query = QString("'X-KDE-PluginInfo-Name' == '%1'").arg(pluginName);
-        query = QString("exist Library and [X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
+    if (pluginName.isEmpty() || (m_pluginName == pluginName)) {
+        kDebug() << "Not loading plugin ..." << pluginName;
+        return;
     }
-    // X-KDE-PluginInfo-Name
+    delete m_plugin;
+    query = QString("exist Library and [X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
     KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
     kDebug() << "QUERY: " << offers.count() << query;
     KService::List::const_iterator iter;
@@ -57,14 +58,19 @@ void SettingsModuleLoader::loadAllPlugins(const QString &pluginName)
             continue;
         }
 
-        //SettingsModule *plugin = factory->create<SettingsModule>(this);
-        //SettingsModule *plugin = factory->createInstance<SettingsModule>(0);
         const QString query = QString("exist Library and Library == '%1'").arg(service->library());
         kDebug() << "query: " << query;
         SettingsModule *plugin  = KServiceTypeTrader::createInstanceFromQuery<SettingsModule>("Active/SettingsModule", query, this);
-        //plugin->setName(service->name());
-        //plugin->setDescription(service->description());
+        plugin->setName(service->name());
 
+        QString description;
+        if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
+            description = service->genericName();
+        } else if (!service->comment().isEmpty()) {
+            description = service->comment();
+        }
+
+        plugin->setDescription(description);
 
        if (plugin) {
            kDebug() << "Load plugin:" << service->name();

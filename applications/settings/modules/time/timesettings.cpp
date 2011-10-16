@@ -28,11 +28,11 @@
 #include <QVariant>
 
 #include <kdemacros.h>
-#include "settingsmodule_macros.h"
+#include <KPluginFactory>
+#include <KPluginLoader>
+
 #include <QtDeclarative/qdeclarative.h>
 #include <QtCore/QDate>
-
-//SETTINGSMODULE_PLUGIN_EXPORT("TimeSettings");
 
 K_PLUGIN_FACTORY(TimeSettingsFactory, registerPlugin<TimeSettings>();)
 K_EXPORT_PLUGIN(TimeSettingsFactory("active_settings_time"))
@@ -52,29 +52,24 @@ TimeSettings::TimeSettings(QObject *parent, const QVariantList &list)
 TimeSettings::TimeSettings()
 {
     d = new TimeSettingsPrivate;
-    //d->name = i18n("Date and Time");
-    //d->module = QString();
     init();
-    // Just for making sure that data gets through
+
+    // Just for testing that data gets through
     d->timer = new QTimer(this);
     d->timer->setInterval(1000);
     connect(d->timer, SIGNAL(timeout()), SLOT(timeout()));
     d->timer->start();
-    //kDebug() << " @@@@@@@@@@@@@@@@ Loaded Module Successfully: EMPTY CTOR" << d->name << d->module;
 }
-
 
 TimeSettings::~TimeSettings()
 {
+    kDebug() << "time destroy";
     delete d;
 }
 
 void TimeSettings::timeout()
 {
     setDescription(KGlobal::locale()->formatTime(QTime::currentTime(), true));
-    //kDebug() << "timeout" << d->description;
 }
-
-
 
 #include "timesettings.moc"

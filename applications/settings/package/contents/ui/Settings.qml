@@ -97,7 +97,6 @@ Item {
                         onClicked: {
                             print("module from completer chosen: " + name + " " + description + " : " + module);
                             loadPackage(module);
-                            //urlEntered(url);
                         }
                     }
                 }

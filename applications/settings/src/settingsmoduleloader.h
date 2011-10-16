@@ -18,14 +18,9 @@
  */
 
 
-class SettingsModule;
-
-
 #include <QObject>
 
-#include "settingsmodule_macros.h"
-
-class Plugin;
+class SettingsModule;
 
 class SettingsModuleLoader : public QObject
 {
@@ -38,4 +33,8 @@ class SettingsModuleLoader : public QObject
 
     Q_SIGNALS:
         void pluginLoaded(SettingsModule* plugin);
+
+    private:
+        SettingsModule* m_plugin;
+        QString m_pluginName;
 };

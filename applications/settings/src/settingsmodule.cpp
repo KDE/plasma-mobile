@@ -18,7 +18,6 @@
  */
 
 #include "settingsmodule.h"
-#include "settingsmodule_macros.h"
 
 #include <kdebug.h>
 #include <KIcon>
@@ -45,11 +44,12 @@ public:
 SettingsModule::SettingsModule(QObject *parent, const QVariantList &v) : QObject(parent),
                                   d(new SettingsModulePrivate(this))
 {
-    //setProperty("objectName", QString("settingsObject"));
+    Q_UNUSED(v);
 }
 
 SettingsModule::~SettingsModule()
 {
+    kDebug() << "settings destroy";
     delete d;
 }
 

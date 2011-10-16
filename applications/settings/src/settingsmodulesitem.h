@@ -18,8 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef COMPLETIONITEM_H
-#define COMPLETIONITEM_H
+#ifndef SETTINGSMODULEITEM_H
+#define SETTINGSMODULEITEM_H
 
 #include <QObject>
 #include <QIcon>
@@ -69,4 +69,4 @@ private:
 
 };
 
-#endif // COMPLETIONITEM_H
+#endif // SETTINGSMODULEITEM_H

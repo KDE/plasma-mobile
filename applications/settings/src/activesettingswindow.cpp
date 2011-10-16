@@ -74,7 +74,6 @@ void ActiveSettingsWindow::closeEvent(QCloseEvent *)
 QString ActiveSettingsWindow::name()
 {
     return "Settings";
-    //return m_widget->options()->name;
 }
 
 QIcon ActiveSettingsWindow::icon()

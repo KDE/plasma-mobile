@@ -19,8 +19,8 @@
  ***************************************************************************/
 
 
-#ifndef ACTIVEBROWSERWINDOW_H
-#define ACTIVEBROWSERWINDOW_H
+#ifndef ACTIVESETTINGSWINDOW_H
+#define ACTIVESETTINGSWINDOW_H
 
 #include <QMainWindow>
 
@@ -51,4 +51,4 @@ private:
     View *m_widget;
 };
 
-#endif // REKONQACTIVE_H
+#endif // ACTIVESETTINGSWINDOW_H

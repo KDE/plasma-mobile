@@ -46,6 +46,7 @@ Rectangle {
         opacity: 0.2
 
     }
+
     Text {
         anchors.fill: rect
         color: theme.textColor

@@ -1,5 +1,4 @@
 project( active_settings_time )
-
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})

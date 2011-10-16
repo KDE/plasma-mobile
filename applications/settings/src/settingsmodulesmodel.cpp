@@ -42,7 +42,6 @@ SettingsModulesModel::SettingsModulesModel(QObject *parent)
 {
     d = new SettingsModulesModelPrivate;
     d->isPopulated = false;
-    kDebug() << "New Settings Model, populating...";
     populate();
 }
 
@@ -61,42 +60,13 @@ QList<QObject*> SettingsModulesModel::items()
 
 void SettingsModulesModel::populate()
 {
-    kDebug() << "populating model...";
     if (d->isPopulated) {
-        kDebug() << "already populated.";
+        //kDebug() << "already populated.";
         return;
     }
     d->isPopulated = true;
 
-    //kDebug() << "FIXME: implement";
-    //    X-KDE-PluginInfo-Name=org.kde.active.settings.time
-
     QString query;
-    //query = "exist 'X-KDE-PluginInfo-Name'";
-    //query += "and ('org.kde.active.settings.' ~subin 'X-KDE-PluginInfo-Name')";
-    /*
-    if (!m_categories.isEmpty()) {
-        query += " and (";
-        bool first = true;
-        foreach (const QString &category, m_categories) {
-            if (!first) {
-                query += " or ";
-            }
-            first = false;
-            query += QString(" (exist Categories and '%1' ~subin Categories)").arg(category);
-        }
-        query += ")";
-    }
-    */
-    //openSUSE: exclude YaST modules from the list
-    //query += " and (not (exist Categories and 'X-SuSE-YaST' in Categories))";
-    /*
-    // Filter out blacklisted apps as to not show too much crap
-    foreach (const QString appName, m_blackList) {
-        query += QString(" and (DesktopEntryName != '%1' )").arg(appName);
-    }
-    */
-    kDebug()<<query;
     KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
 
     kDebug() << "Found " << services.count() << " modules";
@@ -119,17 +89,7 @@ void SettingsModulesModel::populate()
         item->setIconName(service->icon());
         item->setModule(service->property("X-KDE-PluginInfo-Name").toString());
 
-        kDebug() << " ---------> FOUND MODULE: " << service->name() << description << item->module();
         d->items.append(item);
-        /*
-        data["iconName"] = service->icon();
-        data["name"] = service->name();
-        data["genericName"] = service->genericName();
-        data["description"] = description;
-        data["storageId"] = service->storageId();
-        data["entryPath"] = service->entryPath();
-        setData(service->storageId(), data);
-        */
     }
 
     emit dataChanged();

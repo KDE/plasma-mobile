@@ -24,7 +24,6 @@
 #include <KAction>
 #include <KCmdLineArgs>
 #include <KIcon>
-#include <KRun>
 #include <KStandardAction>
 
 #include "activesettingswindow.h"
