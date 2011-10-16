@@ -20,6 +20,8 @@
 
 #include "view.h"
 #include "settingsmodulesmodel.h"
+#include "settingsmoduleloader.h"
+#include "settingsmodule.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
@@ -67,10 +69,26 @@ View::View(const QString &module, QWidget *parent)
 
 View::~View()
 {
-
     delete m_package;
 }
 
+QObject* View::settings()
+{
+    return m_settings;
+}
 
+void View::loadPlugins()
+{
+    SettingsModuleLoader *loader = new SettingsModuleLoader(this);
+    connect(loader, SIGNAL(pluginLoaded(Plugin*)), this, SLOT(addPlugin(Plugin*)));
+    loader->loadAllPlugins();
+}
+
+void View::addPlugin(SettingsModule *plugin)
+{
+    m_settings = plugin->settingsObject();
+    kDebug() << "PLugin added!";
+    //guiFactory()->addClient(plugin);
+}
 
 #include "view.moc"

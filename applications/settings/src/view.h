@@ -23,6 +23,7 @@
 #include <QDeclarativeView>
 
 class SettingsModulesModel;
+class SettingsModule;
 
 namespace Plasma
 {
@@ -37,13 +38,19 @@ public:
     View(const QString &url, QWidget *parent = 0 );
     ~View();
 
+    QObject* settings();
+
 Q_SIGNALS:
     void titleChanged(const QString&);
 
+private Q_SLOTS:
+    void addPlugin(SettingsModule *plugin);
+
 private:
+    void loadPlugins();
     Plasma::Package *m_package;
+    QObject *m_settings;
     SettingsModulesModel *m_settingsModules;
-    
 };
 
 #endif // VIEW_H

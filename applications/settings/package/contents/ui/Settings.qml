@@ -104,7 +104,6 @@ Item {
             spacing: 4
             clip: true
             model: settingsModulesModel
-            
             delegate: myDelegate
             highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
         }
