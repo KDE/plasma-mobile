@@ -56,12 +56,18 @@ Rectangle {
         anchors.fill: rect
         Text {
             color: theme.textColor
-            text: timeSettings.name
+            text: "<h1>" + timeSettings.name + "</h1>"
             opacity: 1
         }
         Text {
             color: theme.textColor
-            text: "<h2> " + timeSettings.description + "</h2>"
+            text: timeSettings.description
+            opacity: 1
+        }
+
+        Text {
+            color: theme.textColor
+            text: "<h2> " + timeSettings.currentTime+ "</h2>"
             opacity: 1
         }
 

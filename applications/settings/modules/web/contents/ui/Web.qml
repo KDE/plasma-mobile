@@ -47,13 +47,19 @@ Rectangle {
 
     }
 
-    Text {
+    Column {
         anchors.fill: rect
-        color: theme.textColor
-        text: "<h1>Web</h1>"
-        opacity: 1
+        Text {
+            color: theme.textColor
+            text: "<h1>" + timeSettings.name + "</h1>"
+            opacity: 1
+        }
+        Text {
+            color: theme.textColor
+            text: timeSettings.description
+            opacity: 1
+        }
     }
-
 
     Component.onCompleted: {
         print("Web.qml done loading.");

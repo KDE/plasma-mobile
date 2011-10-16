@@ -39,6 +39,8 @@ K_EXPORT_PLUGIN(TimeSettingsFactory("active_settings_time"))
 
 class TimeSettingsPrivate {
 public:
+    QString timezone;
+    QString currentTime;
     QTimer *timer;
 };
 
@@ -69,7 +71,36 @@ TimeSettings::~TimeSettings()
 
 void TimeSettings::timeout()
 {
-    setDescription(KGlobal::locale()->formatTime(QTime::currentTime(), true));
+    setCurrentTime(KGlobal::locale()->formatTime(QTime::currentTime(), true));
 }
+
+
+QString TimeSettings::currentTime()
+{
+    return d->currentTime;
+}
+
+QString TimeSettings::timezone()
+{
+    return d->timezone;
+}
+
+
+void TimeSettings::setCurrentTime(const QString &currentTime)
+{
+    if (d->currentTime != currentTime) {
+        d->currentTime = currentTime;
+        emit currentTimeChanged();
+    }
+}
+
+void TimeSettings::setTimezone(const QString &timezone)
+{
+    if (d->timezone != timezone) {
+        d->timezone = timezone;
+        emit timezoneChanged();
+    }
+}
+
 
 #include "timesettings.moc"

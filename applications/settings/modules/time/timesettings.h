@@ -35,13 +35,25 @@ class TimeSettings : public SettingsModule
 {
     Q_OBJECT
 
+    Q_PROPERTY(QString currentTime READ currentTime WRITE setCurrentTime NOTIFY currentTimeChanged)
+    Q_PROPERTY(QString timezone READ timezone WRITE setTimezone NOTIFY timezoneChanged)
+
     public:
         TimeSettings(QObject *parent, const QVariantList &list = QVariantList());
         TimeSettings();
         virtual ~TimeSettings();
 
+        QString currentTime();
+        QString timezone();
+
     public Q_SLOTS:
+        void setCurrentTime(const QString &currentTime);
+        void setTimezone(const QString &timezone);
         void timeout();
+
+    Q_SIGNALS:
+        void currentTimeChanged();
+        void timezoneChanged();
 
     private:
         TimeSettingsPrivate* d;
