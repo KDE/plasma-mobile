@@ -17,7 +17,6 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "settingsmodule.h"
 #include "settingsmodule_macros.h"
 
@@ -32,14 +31,22 @@ public:
     QObject *m_settings;
 };
 
-SettingsModule::SettingsModule(QObject *parent) : QObject(parent),
+SettingsModule::SettingsModule(QObject *parent, const QVariantList &v) : QObject(parent),
                                   d(new SettingsModulePrivate(this))
-{}
+{
+    
+}
 
 SettingsModule::~SettingsModule()
 {
     delete d;
 }
+
+QString SettingsModule::name()
+{
+    return "SETTINGS MODULE";
+}
+
 
 QObject* SettingsModule::settingsObject()
 {
@@ -50,3 +57,5 @@ void SettingsModule::setSettingsObject(QObject *settings)
 {
     d->m_settings = settings;
 }
+
+#include "settingsmodule.moc"

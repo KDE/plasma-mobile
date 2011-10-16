@@ -31,11 +31,11 @@ class SettingsModuleLoader : public QObject
 {
     Q_OBJECT
     public:
-        SettingsModuleLoader(QObject * parent);
+        SettingsModuleLoader(QObject* parent);
         virtual ~SettingsModuleLoader();
 
         void loadAllPlugins();
 
-    signals:
-        void pluginLoaded(SettingsModule * plugin);
+    Q_SIGNALS:
+        void pluginLoaded(SettingsModule* plugin);
 };

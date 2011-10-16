@@ -1,13 +1,3 @@
-#add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
-
-
-
-#include_directories(
-#    ${CMAKE_CURRENT_BINARY_DIR}
-    #${CMAKE_CURRENT_BINARY_DIR}/ontologies
-    #${CMAKE_CURRENT_SOURCE_DIR}/adblock
-#   )
-
 
 set(active-settings_SRCS
     main.cpp

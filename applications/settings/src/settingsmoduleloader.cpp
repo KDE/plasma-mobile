@@ -46,11 +46,17 @@ void SettingsModuleLoader::loadAllPlugins()
         KPluginFactory *factory = KPluginLoader(service->library()).factory();
 
         if (!factory) {
-            kError(5001) << "KPluginFactory could not load the plugin:" << service->library();
+            kError(5001) << "KPluginFactory could not load the plugin:" << service->name() << service->library();
+            kError(5001) << "That's OK, it's probably a QML only plugin";
             continue;
         }
 
-       SettingsModule *plugin = factory->create<SettingsModule>(this);
+        //SettingsModule *plugin = factory->create<SettingsModule>(this);
+        //SettingsModule *plugin = factory->createInstance<SettingsModule>(0);
+        const QString query = QString("exist Library and Library == '%1'").arg(service->library());
+        kDebug() << "query: " << query;
+        SettingsModule *plugin  = KServiceTypeTrader::createInstanceFromQuery<SettingsModule>("Active/SettingsModule", query, this);
+
 
        if (plugin) {
            kDebug() << "Load plugin:" << service->name();

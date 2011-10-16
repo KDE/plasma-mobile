@@ -5,6 +5,7 @@ Encoding=UTF-8
 Type=Service
 Icon=preferences-system-time
 X-KDE-ServiceTypes=Active/SettingsModule
+X-KDE-Library=active_settings_time
 X-KDE-PluginInfo-Author=Sebastian Kügler
 X-KDE-PluginInfo-Email=sebas@kde.org
 X-KDE-PluginInfo-Name=org.kde.active.settings.time

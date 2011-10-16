@@ -65,6 +65,7 @@ View::View(const QString &module, QWidget *parent)
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
     //connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
     //        this, SLOT(onStatusChanged(QDeclarativeView::Status)));
+    loadPlugins();
 }
 
 View::~View()
@@ -80,14 +81,14 @@ QObject* View::settings()
 void View::loadPlugins()
 {
     SettingsModuleLoader *loader = new SettingsModuleLoader(this);
-    connect(loader, SIGNAL(pluginLoaded(Plugin*)), this, SLOT(addPlugin(Plugin*)));
+    connect(loader, SIGNAL(pluginLoaded(SettingsModule*)), this, SLOT(addPlugin(SettingsModule*)));
     loader->loadAllPlugins();
 }
 
 void View::addPlugin(SettingsModule *plugin)
 {
     m_settings = plugin->settingsObject();
-    kDebug() << "PLugin added!";
+    kDebug() << "Plugin added!" << plugin->name();
     //guiFactory()->addClient(plugin);
 }
 

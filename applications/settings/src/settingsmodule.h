@@ -17,9 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#ifndef SETTINGSMODULE_H
+#define SETTINGSMODULE_H
 
 #include <kdemacros.h>
 #include <QObject>
+#include <QVariant>
 
 class SettingsModulePrivate;
 
@@ -28,14 +31,16 @@ class KDE_EXPORT SettingsModule : public QObject
     Q_OBJECT
 
     public:
-        SettingsModule(QObject *parent);
+        SettingsModule(QObject *parent, const QVariantList &v);
         virtual ~SettingsModule();
 
         /**
          * @return Settings object exported by the plugin, which is made
          * available to the QML UI parts
          */
-        QObject* settingsObject();
+        virtual QObject* settingsObject();
+
+        QString name();
 
         /**
          * @internal Uses to transfer data and settings between QML package and C++ plugin.
@@ -46,3 +51,5 @@ class KDE_EXPORT SettingsModule : public QObject
         SettingsModulePrivate *d;
 
 };
+
+#endif
