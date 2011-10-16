@@ -14,7 +14,8 @@ set(active-settings_SRCS
     activesettings.cpp
     activesettingswindow.cpp
     view.cpp
-
+    settingsmodulesitem.cpp
+    settingsmodulesmodel.cpp
 )
 
 KDE4_ADD_EXECUTABLE(active-settings ${active-settings_SRCS})
