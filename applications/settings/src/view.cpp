@@ -92,9 +92,6 @@ void View::onStatusChanged(QDeclarativeView::Status status)
     if (status == QDeclarativeView::Ready) {
         if (!m_settingsRoot) {
             m_settingsRoot = rootObject()->findChild<QDeclarativeItem*>("settingsRoot");
-            //m_settingsRoot = rootObject()->findChild<QDeclarativeItem*>("moduleContainer");
-            //m_settingsRoot = rootObject();
-            //onStatusChanged(status());
             if (m_settingsRoot) {
                 connect(m_settingsRoot, SIGNAL(loadPlugin(QString)),
                         this, SLOT(loadPlugin(QString)));
@@ -116,14 +113,16 @@ void View::loadPlugin(const QString &pluginName)
     kDebug() << "Load Plugin Requested from QML. " << pluginName;
     SettingsModuleLoader *loader = new SettingsModuleLoader(this);
     connect(loader, SIGNAL(pluginLoaded(SettingsModule*)), this, SLOT(addPlugin(SettingsModule*)));
-    loader->loadAllPlugins(pluginName);
+    loader->loadAllPlugins(pluginName, rootContext());
 }
 
 void View::addPlugin(SettingsModule *plugin)
 {
-    m_settings = plugin->settingsObject();
-    //rootContext()->setContextProperty("settingsObject", m_settings);
-    rootContext()->setContextObject(m_settings);
+    //m_settings = plugin->settingsObject();
+    rootContext()->setContextProperty("moduleName", plugin->module());
+    rootContext()->setContextProperty("moduleTitle", plugin->name());
+    rootContext()->setContextProperty("moduleDescription", plugin->description());
+    //rootContext()->setContextObject(m_settings);
 
     kDebug() << "Plugin added!" << plugin->name();
     //guiFactory()->addClient(plugin);

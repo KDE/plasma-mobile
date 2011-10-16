@@ -20,6 +20,7 @@
 
 #include <QObject>
 
+class QDeclarativeContext;
 class SettingsModule;
 
 class SettingsModuleLoader : public QObject
@@ -29,7 +30,7 @@ class SettingsModuleLoader : public QObject
         SettingsModuleLoader(QObject* parent);
         virtual ~SettingsModuleLoader();
 
-        void loadAllPlugins(const QString &pluginName = QString());
+        void loadAllPlugins(const QString &pluginName = QString(), QDeclarativeContext* ctx = 0);
 
     Q_SIGNALS:
         void pluginLoaded(SettingsModule* plugin);

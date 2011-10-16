@@ -21,6 +21,8 @@
 #include "settingsmoduleloader.h"
 #include "settingsmodule.h"
 
+#include <QDeclarativeContext>
+
 #include <KServiceTypeTrader>
 #include <KDebug>
 
@@ -34,7 +36,7 @@ SettingsModuleLoader::~SettingsModuleLoader()
 {
 }
 
-void SettingsModuleLoader::loadAllPlugins(const QString &pluginName)
+void SettingsModuleLoader::loadAllPlugins(const QString &pluginName, QDeclarativeContext* ctx)
 {
     QString query;
     if (pluginName.isEmpty() || (m_pluginName == pluginName)) {
@@ -44,7 +46,7 @@ void SettingsModuleLoader::loadAllPlugins(const QString &pluginName)
     delete m_plugin;
     query = QString("exist Library and [X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
     KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
-    kDebug() << "QUERY: " << offers.count() << query;
+    //kDebug() << "QUERY: " << offers.count() << query;
     KService::List::const_iterator iter;
     for(iter = offers.begin(); iter < offers.end(); ++iter) {
        QString error;
@@ -52,6 +54,17 @@ void SettingsModuleLoader::loadAllPlugins(const QString &pluginName)
 
         KPluginFactory *factory = KPluginLoader(service->library()).factory();
 
+        QString description;
+        if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
+            description = service->genericName();
+        } else if (!service->comment().isEmpty()) {
+            description = service->comment();
+        }
+        if (ctx) {
+            ctx->setContextProperty("moduleName", pluginName);
+            ctx->setContextProperty("moduleTitle", service->name());
+            ctx->setContextProperty("moduleDescription", description);
+        }
         if (!factory) {
             kError(5001) << "KPluginFactory could not load the plugin:" << service->name() << service->library();
             kError(5001) << "That's OK, it's probably a QML only plugin";
@@ -59,21 +72,17 @@ void SettingsModuleLoader::loadAllPlugins(const QString &pluginName)
         }
 
         const QString query = QString("exist Library and Library == '%1'").arg(service->library());
-        kDebug() << "query: " << query;
+        //kDebug() << "query: " << query;
         SettingsModule *plugin  = KServiceTypeTrader::createInstanceFromQuery<SettingsModule>("Active/SettingsModule", query, this);
+
+
         plugin->setName(service->name());
-
-        QString description;
-        if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
-            description = service->genericName();
-        } else if (!service->comment().isEmpty()) {
-            description = service->comment();
-        }
-
         plugin->setDescription(description);
+        plugin->setModule(pluginName);
+
 
        if (plugin) {
-           kDebug() << "Load plugin:" << service->name();
+           //kDebug() << "Load plugin:" << service->name();
            emit pluginLoaded(plugin);
        } else {
            kDebug() << error;

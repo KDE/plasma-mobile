@@ -24,6 +24,7 @@
 #include <QDeclarativeView>
 
 class SettingsModulesModel;
+class SettingsModuleLoader;
 class SettingsModule;
 
 namespace Plasma
@@ -54,6 +55,7 @@ private:
     Plasma::Package *m_package;
     QObject *m_settings;
     SettingsModulesModel *m_settingsModules;
+    SettingsModuleLoader *m_settingsModuleLoader;
     QDeclarativeItem* m_settingsRoot;
 };
 

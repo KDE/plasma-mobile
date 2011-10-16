@@ -95,6 +95,7 @@ Item {
                     MouseArea {
                         anchors.fill: delegateItem
                         onClicked: {
+                            listView.highlight = myDelegate
                             print("module from completer chosen: " + name + " " + description + " : " + module);
                             loadPackage(module);
                         }
@@ -103,6 +104,7 @@ Item {
             }
 
             ListView {
+                id: listView
                 anchors {
                     fill: parent
                     leftMargin: frame.margins.left

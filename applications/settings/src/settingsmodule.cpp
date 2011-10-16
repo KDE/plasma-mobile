@@ -49,7 +49,7 @@ SettingsModule::SettingsModule(QObject *parent, const QVariantList &v) : QObject
 
 SettingsModule::~SettingsModule()
 {
-    kDebug() << "settings destroy";
+    //kDebug() << "settings destroy";
     delete d;
 }
 
@@ -61,10 +61,8 @@ QString SettingsModule::name()
 void SettingsModule::init()
 {
     QString query;
-    kDebug()<<query;
     KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
 
-    kDebug() << "Found " << services.count() << " modules";
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
             continue;
