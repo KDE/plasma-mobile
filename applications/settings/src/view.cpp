@@ -27,6 +27,7 @@
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
 #include <QScriptValue>
+#include <QTimer>
 
 #include <KStandardDirs>
 #include "Plasma/Package"
@@ -35,7 +36,8 @@
 
 View::View(const QString &module, QWidget *parent)
     : QDeclarativeView(parent),
-    m_package(0)
+    m_package(0),
+    m_settingsRoot(0)
 {
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
     // Tell the script engine where to find the Plasma Quick components
@@ -60,12 +62,13 @@ View::View(const QString &module, QWidget *parent)
     if (!module.isEmpty()) {
         kDebug() << "load model: " << module;
     }
-    //onStatusChanged(status());
+
+    //QTimer::singleShot(4000, this, SLOT(updateStatus()));
+    onStatusChanged(status());
 
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
-    //connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
-    //        this, SLOT(onStatusChanged(QDeclarativeView::Status)));
-    loadPlugins();
+    connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
+            this, SLOT(onStatusChanged(QDeclarativeView::Status)));
 }
 
 View::~View()
@@ -78,16 +81,49 @@ QObject* View::settings()
     return m_settings;
 }
 
-void View::loadPlugins()
+void View::updateStatus()
 {
+    onStatusChanged(status());
+}
+
+void View::onStatusChanged(QDeclarativeView::Status status)
+{
+    kDebug() << "onStatusChanged";
+    if (status == QDeclarativeView::Ready) {
+        if (!m_settingsRoot) {
+            m_settingsRoot = rootObject()->findChild<QDeclarativeItem*>("settingsRoot");
+            //m_settingsRoot = rootObject()->findChild<QDeclarativeItem*>("moduleContainer");
+            //m_settingsRoot = rootObject();
+            //onStatusChanged(status());
+            if (m_settingsRoot) {
+                connect(m_settingsRoot, SIGNAL(loadPlugin(QString)),
+                        this, SLOT(loadPlugin(QString)));
+            } else {
+                kError() << "settingsRoot component not found. :(";
+            }
+        }
+    } else if (status == QDeclarativeView::Error) {
+        foreach (const QDeclarativeError &e, errors()) {
+            kWarning() << "error in QML: " << e.toString() << e.description();
+        }
+    } else if (status == QDeclarativeView::Loading) {
+        kDebug() << "Loading.";
+    }
+}
+
+void View::loadPlugin(const QString &pluginName)
+{
+    kDebug() << "Load Plugin Requested from QML. " << pluginName;
     SettingsModuleLoader *loader = new SettingsModuleLoader(this);
     connect(loader, SIGNAL(pluginLoaded(SettingsModule*)), this, SLOT(addPlugin(SettingsModule*)));
-    loader->loadAllPlugins();
+    loader->loadAllPlugins(pluginName);
 }
 
 void View::addPlugin(SettingsModule *plugin)
 {
     m_settings = plugin->settingsObject();
+    rootContext()->setContextProperty("settingsModel", m_settings);
+
     kDebug() << "Plugin added!" << plugin->name();
     //guiFactory()->addClient(plugin);
 }

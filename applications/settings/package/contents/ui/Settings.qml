@@ -27,150 +27,156 @@ import org.kde.qtextracomponents 0.1
 Item {
     width: 100
     height: 360
-    objectName: "settingsRoot"
-    id: mainItem
-    state: "expanded"
+    id: rootItem
+    
+    //property alias moduleContainer: settingsRoot.moduleContainer;
 
+    Item {
+        id: settingsRoot
+        objectName: "settingsRoot"
+        state: "expanded"
+        anchors.fill: parent
 
-    PlasmaCore.Theme {
-        id: theme
-    }
+        signal loadPlugin(string module);
 
-    PlasmaCore.FrameSvgItem {
-        id: frame
+        PlasmaCore.Theme {
+            id: theme
+        }
 
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        width: 300
+        PlasmaCore.FrameSvgItem {
+            id: frame
 
-        imagePath: "widgets/frame"
-        prefix: "raised"
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            width: 300
 
-        Component {
-            id: myDelegate
-            Item {
-                id: delegateItem
-                height: 64
-                width: 300
-                //anchors.fill: parent
-                anchors.margins: 20
+            imagePath: "widgets/frame"
+            prefix: "raised"
 
-                QIconItem {
-                    id: iconItem
-                    width: 48
-                    height: 32
-                    icon: QIcon(iconName)
-                    //anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    anchors.left: parent.left
-                    anchors.rightMargin: 8
-                    //image: preview
-                }
+            Component {
+                id: myDelegate
+                Item {
+                    id: delegateItem
+                    height: 64
+                    width: 300
+                    //anchors.fill: parent
+                    anchors.margins: 20
 
-                Text {
-                    height: 32
-                    id: textItem
-                    text: "<strong>" + name + "</strong> <br />" + description
-                    color: theme.textColor
-                    anchors.left: iconItem.right
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    anchors.right: parent.right
-                    anchors.leftMargin: 20
-                }
+                    QIconItem {
+                        id: iconItem
+                        width: 48
+                        height: 32
+                        icon: QIcon(iconName)
+                        //anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.left: parent.left
+                        anchors.rightMargin: 8
+                        //image: preview
+                    }
 
-                MouseArea {
-                    anchors.fill: delegateItem
-                    onClicked: {
-                        print("module from completer chosen: " + name + " " + description + " : " + module);
-                        loadModule(module);
-                        //urlEntered(url);
+                    Text {
+                        height: 32
+                        id: textItem
+                        text: "<strong>" + name + "</strong> <br />" + description
+                        color: theme.textColor
+                        anchors.left: iconItem.right
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.right: parent.right
+                        anchors.leftMargin: 20
+                    }
+
+                    MouseArea {
+                        anchors.fill: delegateItem
+                        onClicked: {
+                            print("module from completer chosen: " + name + " " + description + " : " + module);
+                            loadPackage(module);
+                            //urlEntered(url);
+                        }
                     }
                 }
             }
-        }
 
-        ListView {
-            anchors {
-                fill: parent
-                leftMargin: frame.margins.left
-                rightMargin: frame.margins.right
-                topMargin: frame.margins.top
-                bottomMargin: frame.margins.bottom
+            ListView {
+                anchors {
+                    fill: parent
+                    leftMargin: frame.margins.left
+                    rightMargin: frame.margins.right
+                    topMargin: frame.margins.top
+                    bottomMargin: frame.margins.bottom
+                }
+                y: 16
+                spacing: 4
+                clip: true
+                model: settingsModulesModel
+                delegate: myDelegate
+                highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
             }
-            y: 16
-            spacing: 4
-            clip: true
-            model: settingsModulesModel
-            delegate: myDelegate
-            highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
         }
-    }
 
-    Loader {
-        id: moduleContainer
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.left: frame.right
-        anchors.right: parent.right
+        Loader {
+            id: moduleContainer
+            objectName: "moduleContainer"
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.left: frame.right
+            anchors.right: parent.right
+        }
+
+        Component.onCompleted: {
+            print(" Loading Settings.qml done." + settingsRoot);
+        }
+
+        states: [
+            State {
+                id: expanded
+                name: "expanded";
+                PropertyChanges {
+                    target: settingsRoot
+                    opacity: 1
+                }
+            },
+
+            State {
+                id: collapsed
+                name: "collapsed";
+                PropertyChanges {
+                    target: settingsRoot
+                    opacity: 0
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                PropertyAnimation {
+                    properties: "opacity"
+                    duration: 400;
+                    easing.type: Easing.InOutElastic;
+                    easing.amplitude: 2.0; easing.period: 1.5
+                }
+            }
+        ]
     }
 
     MobileComponents.Package {
         id: switcherPackage
         name: "org.kde.active.settings.time"
         Component.onCompleted: {
-            loadModule(name);
+            //loadModule(name);
         }
 
     }
 
-    function loadModule(module) {
+    function loadPackage(module) {
+        // Load the C++ plugin into our context
+        settingsRoot.loadPlugin(module);
         switcherPackage.name = module
-        print(" Creating package thing: " + switcherPackage.filePath("mainscript"));
+        print(" Loading package: " + switcherPackage.filePath("mainscript"));
         moduleContainer.source = switcherPackage.filePath("mainscript");
-        /*
-        if (typeof(mainItem.moduleItem) != "undefined") {
-            mainItem.moduleItem.destroy();
-        }
-        var component = Qt.createComponent(switcherPackage.filePath("mainscript"));
-        component.createObject(mainItem, {"anchors.fill": moduleContainer, id: "moduleItem"});
-        mainItem.state = "expanded"
-        */
     }
 
 
-    states: [
-        State {
-            id: expanded
-            name: "expanded";
-            PropertyChanges {
-                target: mainItem
-                opacity: 1
-            }
-        },
-
-        State {
-            id: collapsed
-            name: "collapsed";
-            PropertyChanges {
-                target: mainItem
-                opacity: 0
-            }
-        }
-    ]
-
-    transitions: [
-        Transition {
-            PropertyAnimation {
-                properties: "opacity"
-                duration: 400;
-                easing.type: Easing.InOutElastic;
-                easing.amplitude: 2.0; easing.period: 1.5
-            }
-        }
-    ]
-
-    
 }

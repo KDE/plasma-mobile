@@ -33,11 +33,17 @@ SettingsModuleLoader::~SettingsModuleLoader()
 {
 }
 
-void SettingsModuleLoader::loadAllPlugins()
+void SettingsModuleLoader::loadAllPlugins(const QString &pluginName)
 {
-    kDebug() << "Load all plugins";
-    KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule");
-
+    kDebug() << "Load all plugins" << pluginName;
+    QString query;
+    if (!pluginName.isEmpty()) {
+        //query = QString("'X-KDE-PluginInfo-Name' == '%1'").arg(pluginName);
+        query = QString("exist Library and [X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
+    }
+    // X-KDE-PluginInfo-Name
+    KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
+    kDebug() << "QUERY: " << offers.count() << query;
     KService::List::const_iterator iter;
     for(iter = offers.begin(); iter < offers.end(); ++iter) {
        QString error;
@@ -56,6 +62,8 @@ void SettingsModuleLoader::loadAllPlugins()
         const QString query = QString("exist Library and Library == '%1'").arg(service->library());
         kDebug() << "query: " << query;
         SettingsModule *plugin  = KServiceTypeTrader::createInstanceFromQuery<SettingsModule>("Active/SettingsModule", query, this);
+        //plugin->setName(service->name());
+        //plugin->setDescription(service->description());
 
 
        if (plugin) {

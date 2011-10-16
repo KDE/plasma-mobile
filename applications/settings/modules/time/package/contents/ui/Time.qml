@@ -55,6 +55,6 @@ Rectangle {
 
 
     Component.onCompleted: {
-        print("Time.qml done loading.");
+        //print("Time.qml done loading.");
     }
 }

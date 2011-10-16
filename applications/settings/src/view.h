@@ -20,6 +20,7 @@
 
 #ifndef VIEW_H
 #define VIEW_H
+#include <QDeclarativeItem>
 #include <QDeclarativeView>
 
 class SettingsModulesModel;
@@ -45,12 +46,15 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void addPlugin(SettingsModule *plugin);
+    void loadPlugin(const QString &pluginName = QString());
+    void onStatusChanged(QDeclarativeView::Status status);
+    void updateStatus();
 
 private:
-    void loadPlugins();
     Plasma::Package *m_package;
     QObject *m_settings;
     SettingsModulesModel *m_settingsModules;
+    QDeclarativeItem* m_settingsRoot;
 };
 
 #endif // VIEW_H

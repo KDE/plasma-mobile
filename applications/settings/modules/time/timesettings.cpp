@@ -41,22 +41,11 @@ public:
     QIcon icon;
 };
 
-/*
-TimeSettings::TimeSettings(const QString &n, const QString &i, const QString &m, QObject *parent)
-    : SettingsModule(parent, QVariantList())
-{
-    d = new TimeSettingsPrivate;
-    d->name = n;
-    d->module = m;
-    d->icon = KIcon(i);
-    kDebug() << " @@@@@ Loaded Module Successfully: " << d->name << d->module;
-}
-*/
 TimeSettings::TimeSettings(QObject *parent, const QVariantList &list)
     : SettingsModule(parent, list)
 {
     d = new TimeSettingsPrivate;
-    d->name = QString();
+    d->name = QString(" @@@@@@@@@@@@@@@@ TimeSettings");
     d->module = QString();
     kDebug() << " @@@@@@@@@@@@@@@@ Loaded Module Successfully: " << d->name << d->module;
 }

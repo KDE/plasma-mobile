@@ -34,7 +34,7 @@ class SettingsModuleLoader : public QObject
         SettingsModuleLoader(QObject* parent);
         virtual ~SettingsModuleLoader();
 
-        void loadAllPlugins();
+        void loadAllPlugins(const QString &pluginName = QString());
 
     Q_SIGNALS:
         void pluginLoaded(SettingsModule* plugin);
