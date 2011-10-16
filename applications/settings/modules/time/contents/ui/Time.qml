@@ -23,8 +23,8 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Rectangle {
-    id: settingsRoot
-    objectName: "settingsRoot"
+    id: timeModule
+    objectName: "timeModule"
 
     width: 800; height: 500
     color: theme.backgroundColor
@@ -34,23 +34,23 @@ Rectangle {
     }
 
     MobileComponents.Package {
-        id: activeSettings
-        name: "org.kde.active.settings"
-    }
-
-    Text {
-        anchors.fill: parent
-        color: theme.textColor
-        text: "<h1>Active Settings</h1>"
-
+        id: activeSettingsTime
+        name: "org.kde.active.settings.time"
     }
 
     Rectangle {
+        id: rect
         anchors.fill: parent
         anchors.margins: 100
-        color: "green"
+        color: "orange"
         opacity: 0.2
 
+    }
+    Text {
+        anchors.fill: rect
+        color: theme.textColor
+        text: "<h1>Time and Date</h1>"
+        opacity: 1
     }
 
 

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Active Settings Module Plugin
+X-KDE-ServiceType=Active/SettingsModule
+
+Name=Active Settings Module
+Comment=Active Settings Module Plugin
+
+[PropertyDef::X-Plasma-Package]
+Type=QString
