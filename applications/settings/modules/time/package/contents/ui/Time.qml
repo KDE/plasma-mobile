@@ -21,10 +21,15 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.active.settings 0.1
 
 Rectangle {
     id: timeModule
     objectName: "timeModule"
+
+    TimeSettings {
+        id: timeSettings
+    }
 
     width: 800; height: 500
     color: theme.backgroundColor
@@ -41,20 +46,27 @@ Rectangle {
     Rectangle {
         id: rect
         anchors.fill: parent
-        anchors.margins: 100
+        anchors.margins: 10
         color: "orange"
         opacity: 0.2
 
     }
-    Text {
+    Column {
         anchors.fill: rect
-        color: theme.textColor
-        text: "<h1>Time and Date</h1>"
-        opacity: 1
+        Text {
+            color: theme.textColor
+            text: timeSettings.name
+            opacity: 1
+        }
+        Text {
+            color: theme.textColor
+            text: "<h2> " + timeSettings.description + "</h2>"
+            opacity: 1
+        }
+
     }
-
-
     Component.onCompleted: {
-        //print("Time.qml done loading.");
+        print("Time.qml done loading.");
+        print("settingsObject.name" + timeSettings.name);
     }
 }

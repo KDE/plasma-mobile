@@ -13,7 +13,7 @@ set(timesettings_SRCS
 
 
 kde4_add_plugin(active_settings_time ${timesettings_SRCS})
-target_link_libraries(active_settings_time ${KDE4_PLASMA_LIBS})
+target_link_libraries(active_settings_time ${KDE4_PLASMA_LIBS} ${QT_QTDECLARATIVE_LIBRARY})
 install(TARGETS active_settings_time DESTINATION ${PLUGIN_INSTALL_DIR})
 
 # Time and Date

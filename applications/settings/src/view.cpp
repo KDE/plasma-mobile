@@ -122,7 +122,8 @@ void View::loadPlugin(const QString &pluginName)
 void View::addPlugin(SettingsModule *plugin)
 {
     m_settings = plugin->settingsObject();
-    rootContext()->setContextProperty("settingsModel", m_settings);
+    //rootContext()->setContextProperty("settingsObject", m_settings);
+    rootContext()->setContextObject(m_settings);
 
     kDebug() << "Plugin added!" << plugin->name();
     //guiFactory()->addClient(plugin);

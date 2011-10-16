@@ -31,6 +31,10 @@ Item {
     
     //property alias moduleContainer: settingsRoot.moduleContainer;
 
+    PlasmaCore.Theme {
+        id: theme
+    }
+
     Item {
         id: settingsRoot
         objectName: "settingsRoot"
@@ -39,17 +43,13 @@ Item {
 
         signal loadPlugin(string module);
 
-        PlasmaCore.Theme {
-            id: theme
-        }
-
         PlasmaCore.FrameSvgItem {
             id: frame
 
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: parent.left
-            width: 300
+            width: 360
 
             imagePath: "widgets/frame"
             prefix: "raised"
@@ -59,9 +59,10 @@ Item {
                 Item {
                     id: delegateItem
                     height: 64
-                    width: 300
+                    width: 360
                     //anchors.fill: parent
                     anchors.margins: 20
+
 
                     QIconItem {
                         id: iconItem
@@ -80,6 +81,9 @@ Item {
                         height: 32
                         id: textItem
                         text: "<strong>" + name + "</strong> <br />" + description
+                        //./applets/org.kde.active.connman/contents/ui/WifiExpandingBox.qml:474:
+                        //font.pixelSize: theme.fontPixelSizeNormal
+                        elide: Text.ElideRight
                         color: theme.textColor
                         anchors.left: iconItem.right
                         anchors.top: parent.top

@@ -20,12 +20,17 @@
 
 #include "timesettings.h"
 
-#include <KIcon>
 #include <kdebug.h>
+#include <KIcon>
+#include <KLocale>
+
+#include <QTimer>
 #include <QVariant>
 
 #include <kdemacros.h>
 #include "settingsmodule_macros.h"
+#include <QtDeclarative/qdeclarative.h>
+#include <QtCore/QDate>
 
 //SETTINGSMODULE_PLUGIN_EXPORT("TimeSettings");
 
@@ -39,16 +44,30 @@ public:
     QString module;
     QString iconName;
     QIcon icon;
+    QTimer *timer;
 };
 
 TimeSettings::TimeSettings(QObject *parent, const QVariantList &list)
     : SettingsModule(parent, list)
 {
-    d = new TimeSettingsPrivate;
-    d->name = QString(" @@@@@@@@@@@@@@@@ TimeSettings");
-    d->module = QString();
-    kDebug() << " @@@@@@@@@@@@@@@@ Loaded Module Successfully: " << d->name << d->module;
+    qmlRegisterType<TimeSettings>();
+    qmlRegisterType<TimeSettings>("org.kde.active.settings", 0, 1, "TimeSettings");
 }
+
+TimeSettings::TimeSettings()
+{
+    d = new TimeSettingsPrivate;
+    d->name = i18n("Date and Time");
+    d->module = QString();
+
+    // Just for making sure that data gets through
+    d->timer = new QTimer(this);
+    d->timer->setInterval(1000);
+    connect(d->timer, SIGNAL(timeout()), SLOT(timeout()));
+    d->timer->start();
+    //kDebug() << " @@@@@@@@@@@@@@@@ Loaded Module Successfully: EMPTY CTOR" << d->name << d->module;
+}
+
 
 TimeSettings::~TimeSettings()
 {
@@ -59,6 +78,14 @@ QString TimeSettings::name()
 {
     return d->name;
 }
+
+void TimeSettings::timeout()
+{
+    d->description = KGlobal::locale()->formatTime(QTime::currentTime(), true);
+    //kDebug() << "timeout" << d->description;
+    emit descriptionChanged();
+}
+
 
 QString TimeSettings::description()
 {

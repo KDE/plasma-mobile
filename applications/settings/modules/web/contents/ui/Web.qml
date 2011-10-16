@@ -41,7 +41,7 @@ Rectangle {
     Rectangle {
         id: rect
         anchors.fill: parent
-        anchors.margins: 100
+        anchors.margins: 10
         color: "blue"
         opacity: 0.2
 

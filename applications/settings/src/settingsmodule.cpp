@@ -34,7 +34,7 @@ public:
 SettingsModule::SettingsModule(QObject *parent, const QVariantList &v) : QObject(parent),
                                   d(new SettingsModulePrivate(this))
 {
-    
+    setProperty("objectName", QString("settingsObject"));
 }
 
 SettingsModule::~SettingsModule()

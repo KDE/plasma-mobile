@@ -21,6 +21,8 @@
 #ifndef TIMESETTINGS_H
 #define TIMESETTINGS_H
 
+#include <KIconLoader>
+
 #include <QObject>
 #include <QIcon>
 #include <QVariant>
@@ -47,6 +49,7 @@ public:
              QObject *parent = 0 );
              */
     TimeSettings(QObject *parent, const QVariantList &list = QVariantList());
+    TimeSettings();
     virtual ~TimeSettings();
 
     virtual QString name();
@@ -61,6 +64,7 @@ public Q_SLOTS:
     void setModule(const QString &module);
     void setIcon(const QIcon &icon);
     void setIconName(const QString &iconName);
+    void timeout();
 
 Q_SIGNALS:
     void nameChanged();
