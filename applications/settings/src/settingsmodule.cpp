@@ -20,6 +20,12 @@
 #include "settingsmodule.h"
 #include "settingsmodule_macros.h"
 
+#include <kdebug.h>
+#include <KIcon>
+#include <KLocale>
+#include <KService>
+#include <KServiceTypeTrader>
+
 class SettingsModulePrivate {
 
 public:
@@ -27,6 +33,11 @@ public:
                   q(q),
                   m_settings(0){}
 
+    QString name;
+    QString description;
+    QString module;
+    QString iconName;
+    QIcon icon;
     SettingsModule *q;
     QObject *m_settings;
 };
@@ -34,7 +45,7 @@ public:
 SettingsModule::SettingsModule(QObject *parent, const QVariantList &v) : QObject(parent),
                                   d(new SettingsModulePrivate(this))
 {
-    setProperty("objectName", QString("settingsObject"));
+    //setProperty("objectName", QString("settingsObject"));
 }
 
 SettingsModule::~SettingsModule()
@@ -44,9 +55,36 @@ SettingsModule::~SettingsModule()
 
 QString SettingsModule::name()
 {
-    return "SETTINGS MODULE";
+    return d->name;
 }
 
+void SettingsModule::init()
+{
+    QString query;
+    kDebug()<<query;
+    KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
+
+    kDebug() << "Found " << services.count() << " modules";
+    foreach (const KService::Ptr &service, services) {
+        if (service->noDisplay()) {
+            continue;
+        }
+
+        QString description;
+        if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
+            description = service->genericName();
+        } else if (!service->comment().isEmpty()) {
+            description = service->comment();
+        }
+        setName(service->name());
+        setDescription(description);
+        setModule(service->property("X-KDE-PluginInfo-Name").toString());
+        setIconName(service->icon());
+        setIcon(KIcon(service->icon()));
+    }
+
+    emit dataChanged();
+}
 
 QObject* SettingsModule::settingsObject()
 {
@@ -56,6 +94,57 @@ QObject* SettingsModule::settingsObject()
 void SettingsModule::setSettingsObject(QObject *settings)
 {
     d->m_settings = settings;
+}
+
+QString SettingsModule::description()
+{
+    return d->description;
+}
+
+QString SettingsModule::module()
+{
+    return d->module;
+}
+
+QString SettingsModule::iconName()
+{
+    return d->iconName;
+}
+
+QIcon SettingsModule::icon()
+{
+    return d->icon;
+}
+
+void SettingsModule::setName(const QString &name)
+{
+    if (d->name != name) {
+        d->name = name;
+        emit nameChanged();
+    }
+}
+
+void SettingsModule::setDescription(const QString &description)
+{
+    if (d->description != description) {
+        d->description = description;
+        emit descriptionChanged();
+    }
+}
+
+void SettingsModule::setIconName(const QString &iconName)
+{
+    d->iconName = iconName;
+}
+
+void SettingsModule::setModule(const QString &module)
+{
+    d->module = module;
+}
+
+void SettingsModule::setIcon(const QIcon &icon)
+{
+    d->icon = icon;
 }
 
 #include "settingsmodule.moc"

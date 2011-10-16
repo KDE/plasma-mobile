@@ -39,11 +39,6 @@ K_EXPORT_PLUGIN(TimeSettingsFactory("active_settings_time"))
 
 class TimeSettingsPrivate {
 public:
-    QString name;
-    QString description;
-    QString module;
-    QString iconName;
-    QIcon icon;
     QTimer *timer;
 };
 
@@ -57,9 +52,9 @@ TimeSettings::TimeSettings(QObject *parent, const QVariantList &list)
 TimeSettings::TimeSettings()
 {
     d = new TimeSettingsPrivate;
-    d->name = i18n("Date and Time");
-    d->module = QString();
-
+    //d->name = i18n("Date and Time");
+    //d->module = QString();
+    init();
     // Just for making sure that data gets through
     d->timer = new QTimer(this);
     d->timer->setInterval(1000);
@@ -74,62 +69,12 @@ TimeSettings::~TimeSettings()
     delete d;
 }
 
-QString TimeSettings::name()
-{
-    return d->name;
-}
-
 void TimeSettings::timeout()
 {
-    d->description = KGlobal::locale()->formatTime(QTime::currentTime(), true);
+    setDescription(KGlobal::locale()->formatTime(QTime::currentTime(), true));
     //kDebug() << "timeout" << d->description;
-    emit descriptionChanged();
 }
 
 
-QString TimeSettings::description()
-{
-    return d->description;
-}
-
-QString TimeSettings::module()
-{
-    return d->module;
-}
-
-QString TimeSettings::iconName()
-{
-    return d->iconName;
-}
-
-QIcon TimeSettings::icon()
-{
-    return d->icon;
-}
-
-void TimeSettings::setName(const QString &name)
-{
-    d->name = name;
-}
-
-void TimeSettings::setDescription(const QString &description)
-{
-    d->description = description;
-}
-
-void TimeSettings::setIconName(const QString &iconName)
-{
-    d->iconName = iconName;
-}
-
-void TimeSettings::setModule(const QString &module)
-{
-    d->module = module;
-}
-
-void TimeSettings::setIcon(const QIcon &icon)
-{
-    d->icon = icon;
-}
 
 #include "timesettings.moc"

@@ -30,9 +30,17 @@ class KDE_EXPORT SettingsModule : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
+    Q_PROPERTY(QString module READ module WRITE setModule NOTIFY moduleChanged)
+    Q_PROPERTY(QIcon icon READ icon WRITE setIcon NOTIFY iconChanged)
+    Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
+
+
     public:
         SettingsModule(QObject *parent = 0, const QVariantList &v = QVariantList());
         virtual ~SettingsModule();
+        void init();
 
         /**
          * @return Settings object exported by the plugin, which is made
@@ -40,12 +48,32 @@ class KDE_EXPORT SettingsModule : public QObject
          */
         virtual QObject* settingsObject();
 
-        QString name();
-
         /**
          * @internal Uses to transfer data and settings between QML package and C++ plugin.
          */
         void setSettingsObject(QObject *o);
+
+        QString name();
+        QString description();
+        QString iconName();
+        QString module();
+        QIcon icon();
+
+    public Q_SLOTS:
+        void setName(const QString &name);
+        void setDescription(const QString &description);
+        void setModule(const QString &module);
+        void setIcon(const QIcon &icon);
+        void setIconName(const QString &iconName);
+
+    Q_SIGNALS:
+        void dataChanged();
+
+        void nameChanged();
+        void descriptionChanged();
+        void moduleChanged();
+        void iconChanged();
+        void iconNameChanged();
 
     private:
         SettingsModulePrivate *d;

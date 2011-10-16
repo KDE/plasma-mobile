@@ -35,46 +35,16 @@ class TimeSettings : public SettingsModule
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-    Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
-    Q_PROPERTY(QString module READ module WRITE setModule NOTIFY moduleChanged)
-    Q_PROPERTY(QIcon icon READ icon WRITE setIcon NOTIFY iconChanged)
-    Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
+    public:
+        TimeSettings(QObject *parent, const QVariantList &list = QVariantList());
+        TimeSettings();
+        virtual ~TimeSettings();
 
-public:
-    /*
-    TimeSettings(const QString &name = QString(),
-             const QString &iconName = QString(),
-             const QString &module = QString("org.kde.active.settings.EMPTY"),
-             QObject *parent = 0 );
-             */
-    TimeSettings(QObject *parent, const QVariantList &list = QVariantList());
-    TimeSettings();
-    virtual ~TimeSettings();
+    public Q_SLOTS:
+        void timeout();
 
-    virtual QString name();
-    QString description();
-    QString iconName();
-    QString module();
-    QIcon icon();
-
-public Q_SLOTS:
-    void setName(const QString &name);
-    void setDescription(const QString &description);
-    void setModule(const QString &module);
-    void setIcon(const QIcon &icon);
-    void setIconName(const QString &iconName);
-    void timeout();
-
-Q_SIGNALS:
-    void nameChanged();
-    void descriptionChanged();
-    void moduleChanged();
-    void iconChanged();
-    void iconNameChanged();
-
-private:
-    TimeSettingsPrivate* d;
+    private:
+        TimeSettingsPrivate* d;
 
 };
 
