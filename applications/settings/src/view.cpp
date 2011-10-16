@@ -104,13 +104,13 @@ void View::onStatusChanged(QDeclarativeView::Status status)
             kWarning() << "error in QML: " << e.toString() << e.description();
         }
     } else if (status == QDeclarativeView::Loading) {
-        kDebug() << "Loading.";
+        //kDebug() << "Loading.";
     }
 }
 
 void View::loadPlugin(const QString &pluginName)
 {
-    kDebug() << "Load Plugin Requested from QML. " << pluginName;
+    //kDebug() << "Load Plugin Requested from QML. " << pluginName;
     SettingsModuleLoader *loader = new SettingsModuleLoader(this);
     //connect(loader, SIGNAL(pluginLoaded(SettingsModule*)), this, SLOT(addPlugin(SettingsModule*)));
     loader->loadAllPlugins(pluginName, rootContext());

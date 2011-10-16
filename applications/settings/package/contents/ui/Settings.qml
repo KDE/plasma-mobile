@@ -28,14 +28,15 @@ Item {
     width: 100
     height: 360
     id: rootItem
-    
-    //property alias moduleContainer: settingsRoot.moduleContainer;
+    anchors.margins: 8
 
     PlasmaCore.Theme {
         id: theme
     }
 
-    Item {
+    PlasmaCore.FrameSvgItem {
+        imagePath: "widgets/frame"
+        prefix: "raised"
         id: settingsRoot
         objectName: "settingsRoot"
         state: "expanded"
@@ -43,23 +44,20 @@ Item {
 
         signal loadPlugin(string module);
 
-        PlasmaCore.FrameSvgItem {
-            id: frame
+        Item {
+            id: modulesList
 
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             width: 360
 
-            imagePath: "widgets/frame"
-            prefix: "raised"
-
             Component {
                 id: myDelegate
                 Item {
                     id: delegateItem
                     height: 64
-                    width: 360
+                    width: 340
                     //anchors.fill: parent
                     anchors.margins: 20
 
@@ -96,8 +94,7 @@ Item {
                     MouseArea {
                         anchors.fill: delegateItem
                         onClicked: {
-                            listView.highlight = myDelegate
-                            print("module from completer chosen: " + name + " " + description + " : " + module);
+                            listView.currentIndex = index
                             loadPackage(module);
                         }
                     }
@@ -106,28 +103,36 @@ Item {
 
             ListView {
                 id: listView
+                currentIndex: -1
                 anchors {
                     fill: parent
-                    leftMargin: frame.margins.left
-                    rightMargin: frame.margins.right
-                    topMargin: frame.margins.top
-                    bottomMargin: frame.margins.bottom
+                    leftMargin: settingsRoot.margins.left
+                    rightMargin: settingsRoot.margins.right
+                    topMargin: settingsRoot.margins.top
+                    bottomMargin: settingsRoot.margins.bottom
                 }
                 y: 16
                 spacing: 4
                 clip: true
                 model: settingsModulesModel
                 delegate: myDelegate
-                highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
+                //highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
+                highlight: PlasmaCore.FrameSvgItem {
+                    id: highlightFrame
+                    imagePath: "widgets/viewitem"
+                    prefix: "selected+hover"
+                }
+
             }
         }
 
         Loader {
             id: moduleContainer
             objectName: "moduleContainer"
+            anchors.margins: 20
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            anchors.left: frame.right
+            anchors.left: modulesList.right
             anchors.right: parent.right
         }
 
@@ -180,7 +185,7 @@ Item {
         // Load the C++ plugin into our context
         settingsRoot.loadPlugin(module);
         switcherPackage.name = module
-        print(" Loading package: " + switcherPackage.filePath("mainscript"));
+        //print(" Loading package: " + switcherPackage.filePath("mainscript"));
         moduleContainer.source = switcherPackage.filePath("mainscript");
     }
 

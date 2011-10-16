@@ -27,17 +27,17 @@ Rectangle {
     objectName: "webModule"
 
     width: 800; height: 500
-    color: theme.backgroundColor
+    //color: theme.backgroundColor
 
     PlasmaCore.Theme {
         id: theme
     }
 
+    /*
     MobileComponents.Package {
         id: activeSettingsWeb
         name: "org.kde.active.settings.web"
     }
-
     Rectangle {
         id: rect
         anchors.fill: parent
@@ -46,18 +46,20 @@ Rectangle {
         opacity: 0.2
 
     }
-
+    */
     Column {
-        anchors.fill: rect
+        anchors.fill: parent
+        spacing: 8
+
         Text {
             color: theme.textColor
-            text: i18n("<h1>Web Browser</h1>") + moduleTitle
-            opacity: 1
+            text: "<h1>" + moduleTitle + "</h1>"
+            //opacity: 1
         }
         Text {
             color: theme.textColor
             text: moduleDescription
-            opacity: 1
+            //opacity: 1
         }
     }
 

@@ -32,17 +32,18 @@ Rectangle {
     }
 
     width: 800; height: 500
-    color: theme.backgroundColor
+    //color: theme.backgroundColor
 
     PlasmaCore.Theme {
         id: theme
     }
-
+    /*
     MobileComponents.Package {
         id: activeSettingsTime
         name: "org.kde.active.settings.time"
     }
-
+    */
+    /*
     Rectangle {
         id: rect
         anchors.fill: parent
@@ -51,30 +52,32 @@ Rectangle {
         opacity: 0.2
 
     }
-
+    */
     Column {
-        anchors.fill: rect
+        anchors.fill: parent
+        spacing: 8
         Text {
             color: theme.textColor
-            text: "<h1>" + timeSettings.name + "</h1>"
+            text: "<h1>" + moduleTitle + "</h1>"
             opacity: 1
         }
         Text {
             color: theme.textColor
-            text: timeSettings.description
-            opacity: 1
-        }
-
-        Text {
-            color: theme.textColor
-            text: "<h2> " + timeSettings.currentTime+ "</h2>"
-            opacity: 1
+            text: moduleDescription
+            //opacity: 1
         }
 
+
+    }
+    Text {
+        color: theme.textColor
+        anchors.centerIn: parent
+        text: "<h2> " + timeSettings.currentTime+ "</h2>"
+        //opacity: 1
     }
 
     Component.onCompleted: {
         print("Time.qml done loading.");
-        print("settingsObject.name" + timeSettings.name);
+        //print("settingsObject.name" + timeSettings.name);
     }
 }
