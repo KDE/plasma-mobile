@@ -69,9 +69,9 @@ Item {
                         width: 48
                         height: 32
                         icon: QIcon(iconName)
-                        //anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
+                        anchors.verticalCenter: parent.verticalCenter
+                        //anchors.top: parent.top
+                        //anchors.bottom: parent.bottom
                         anchors.left: parent.left
                         anchors.rightMargin: 8
                         //image: preview
@@ -85,11 +85,12 @@ Item {
                         //font.pixelSize: theme.fontPixelSizeNormal
                         elide: Text.ElideRight
                         color: theme.textColor
+                        anchors.verticalCenter: parent.verticalCenter
                         anchors.left: iconItem.right
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
+                        //anchors.top: parent.top
+                        //anchors.bottom: parent.bottom
                         anchors.right: parent.right
-                        anchors.leftMargin: 20
+                        //anchors.leftMargin: 20
                     }
 
                     MouseArea {
@@ -168,7 +169,7 @@ Item {
 
     MobileComponents.Package {
         id: switcherPackage
-        name: "org.kde.active.settings.time"
+        //name: "org.kde.active.settings.time"
         Component.onCompleted: {
             //loadModule(name);
         }
