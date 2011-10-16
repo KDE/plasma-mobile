@@ -51,12 +51,12 @@ Rectangle {
         anchors.fill: rect
         Text {
             color: theme.textColor
-            text: "<h1>" + timeSettings.name + "</h1>"
+            text: i18n("<h1>Web Browser</h1>")
             opacity: 1
         }
         Text {
             color: theme.textColor
-            text: timeSettings.description
+            text: i18n("Cache, Cookies, History, etc.")
             opacity: 1
         }
     }
