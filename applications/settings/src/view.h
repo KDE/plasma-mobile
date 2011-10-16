@@ -22,6 +22,7 @@
 #define VIEW_H
 #include <QDeclarativeView>
 
+class SettingsModulesModel;
 
 namespace Plasma
 {
@@ -41,6 +42,8 @@ Q_SIGNALS:
 
 private:
     Plasma::Package *m_package;
+    SettingsModulesModel *m_settingsModules;
+    
 };
 
 #endif // VIEW_H

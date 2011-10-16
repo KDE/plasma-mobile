@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "view.h"
+#include "settingsmodulesmodel.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
@@ -30,7 +31,7 @@
 
 #include <kdeclarative.h>
 
-View::View(const QString &url, QWidget *parent)
+View::View(const QString &module, QWidget *parent)
     : QDeclarativeView(parent),
     m_package(0)
 {
@@ -52,6 +53,10 @@ View::View(const QString &url, QWidget *parent)
 
     setSource(QUrl(m_package->filePath("mainscript")));
     show();
+    if (!module.isEmpty()) {
+        kDebug() << "load model: " << module;
+    }
+    m_settingsModules = new SettingsModulesModel(this);
 
     //onStatusChanged(status());
 
