@@ -33,8 +33,12 @@ Item {
         }
         tools: Row {
             spacing: 10
-            Label {text: "Type"}
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Type"
+            }
             ButtonRow {
+                spacing: 10
                 RadioButton {
                     text: "Documents"
                     onCheckedChanged: {
@@ -52,8 +56,16 @@ Item {
                     }
                 }
             }
-            Label {text: "Sort"}
+            Item {
+                width: 10
+                height: 10
+            }
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Sort"
+            }
             ButtonRow {
+                spacing: 10
                 RadioButton {
                     text: "Ascending"
                     onCheckedChanged: {
@@ -69,6 +81,22 @@ Item {
                             metadataModel.sortOrder = Qt.DescendingOrder
                         }
                     }
+                }
+            }
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Tags"
+            }
+            ButtonRow {
+                spacing: 10
+                exclusive: false
+                CheckBox {
+                    id: kdeTagCheckbox
+                    text: "kde"
+                }
+                CheckBox {
+                    id: nepomukTagCheckbox
+                    text: "nepomuk"
                 }
             }
         }
@@ -89,7 +117,18 @@ Item {
             //queryString: "pdf"
             resourceType: "Document"
             //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
-            sortBy: "nie#url,nao#lastModified"
+            sortBy: ["nie#url", "nao#lastModified"]
+            tags: {
+                if (kdeTagCheckbox.checked && nepomukTagCheckbox.checked) {
+                    return ["nepomuk", "kde"]
+                } else if (kdeTagCheckbox.checked) {
+                    return ["kde"]
+                } else if (nepomukTagCheckbox.checked) {
+                    return ["nepomuk"]
+                } else {
+                    return []
+                }
+            }
             sortOrder: Qt.AscendingOrder
         }
 

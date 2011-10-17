@@ -199,21 +199,44 @@ QString MetadataModel::activityId() const
     return m_activityId;
 }
 
-
-void MetadataModel::setSortBy(const QString &sortBy)
+void MetadataModel::setTags(const QVariantList &tags)
 {
-    if (m_sortBy.join(QString(',')) == sortBy) {
+    //FIXME: not exactly efficient
+    QStringList stringList = variantToStringList(tags);
+
+    if (m_tags == stringList) {
         return;
     }
 
-    m_sortBy = QString(sortBy).replace(QString(' '), QString()).split(',');
+    m_tags = stringList;
+    m_queryTimer->start(0);
+    emit tagsChanged();
+}
+
+QVariantList MetadataModel::tags() const
+{
+    return stringToVariantList(m_sortBy);
+}
+
+
+
+
+void MetadataModel::setSortBy(const QVariantList &sortBy)
+{
+    QStringList stringList = variantToStringList(sortBy);
+
+    if (m_sortBy == stringList) {
+        return;
+    }
+
+    m_sortBy = stringList;
     m_queryTimer->start(0);
     emit sortByChanged();
 }
 
-QString MetadataModel::sortBy() const
+QVariantList MetadataModel::sortBy() const
 {
-    return m_sortBy.join(QString(','));
+    return stringToVariantList(m_sortBy);
 }
 
 void MetadataModel::setSortOrder(Qt::SortOrder sortOrder)
@@ -267,7 +290,14 @@ void MetadataModel::doQuery()
         rootTerm.addSubTerm(term);
     }
 
-    //TODO: configurable sorting
+    foreach (const QString &tag, m_tags) {
+        Nepomuk::Query::ComparisonTerm term( Soprano::Vocabulary::NAO::hasTag(),
+                                    Nepomuk::Query::LiteralTerm(tag));
+        rootTerm.addSubTerm(term);
+    }
+
+
+
     int weight = m_sortBy.length() + 1;
     foreach (const QString &sortProperty, m_sortBy) {
         Nepomuk::Query::ComparisonTerm sortTerm(propertyUrl(sortProperty), Nepomuk::Query::Term());

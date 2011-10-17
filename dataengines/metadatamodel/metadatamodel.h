@@ -44,8 +44,9 @@ class MetadataModel : public QAbstractItemModel
     Q_PROPERTY(QString queryString READ queryString WRITE setQueryString NOTIFY queryStringChanged)
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
     Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
+    Q_PROPERTY(QVariantList tags READ tags WRITE setTags NOTIFY tagsChanged)
 
-    Q_PROPERTY(QString sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
+    Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
 
 public:
@@ -88,12 +89,13 @@ public:
     void setActivityId(const QString &activityId);
     QString activityId() const;
 
+    void setTags(const QVariantList &tags);
+    QVariantList tags() const;
 
 
-    //FIXME: QStringLists can't be used as properties... wait, WHAT?
-    // and no, QDeclarativeListProperty is pretty useless
-    void setSortBy(const QString &sortBy);
-    QString sortBy() const;
+
+    void setSortBy(const QVariantList &sortBy);
+    QVariantList sortBy() const;
 
     void setSortOrder(Qt::SortOrder sortOrder);
     Qt::SortOrder sortOrder() const;
@@ -114,6 +116,7 @@ Q_SIGNALS:
     void queryStringChanged();
     void resourceTypeChanged();
     void activityIdChanged();
+    void tagsChanged();
 
     void sortByChanged();
     void sortOrderChanged();
@@ -144,6 +147,24 @@ protected:
         }
     }
 
+    static inline QStringList variantToStringList(const QVariantList &list)
+    {
+        QStringList stringList;
+        foreach (const QVariant &val, list) {
+            stringList << val.toString();
+        }
+        return stringList;
+    }
+
+    static inline QVariantList stringToVariantList(const QStringList &list)
+    {
+        QVariantList variantList;
+        foreach (const QString &val, list) {
+            variantList << val;
+        }
+        return variantList;
+    }
+
 private:
     Nepomuk::Query::Query m_query;
     Nepomuk::Query::QueryServiceClient *m_queryClient;
@@ -158,6 +179,7 @@ private:
     QString m_queryString;
     QString m_resourceType;
     QString m_activityId;
+    QStringList m_tags;
 
     QStringList m_sortBy;
     Qt::SortOrder m_sortOrder;
