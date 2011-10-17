@@ -203,6 +203,7 @@ QString MetadataModel::activityId() const
 void MetadataModel::doQuery()
 {
     m_query = Nepomuk::Query::Query();
+    m_query.setQueryFlags(Nepomuk::Query::Query::WithoutFullTextExcerpt);
     Nepomuk::Query::AndTerm rootTerm;
 
     if (!m_queryString.isEmpty()) {
@@ -230,6 +231,11 @@ void MetadataModel::doQuery()
         term.setInverted(true);
         rootTerm.addSubTerm(term);
     }
+
+    //TODO: configurable sorting
+    Nepomuk::Query::ComparisonTerm sortTerm(Soprano::Vocabulary::NAO::lastModified(), Nepomuk::Query::Term());
+    sortTerm.setSortWeight(1, Qt::DescendingOrder);
+    rootTerm.addSubTerm(sortTerm);
 
     m_query.setTerm(rootTerm);
 

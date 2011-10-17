@@ -33,15 +33,15 @@ Item {
             id: metadataModel
             queryString: "pdf"
             resourceType: "Document"
+            //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
         }
 
-        delegate: Text {
-            text: model["url"]
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    print(metadataModel.queryString)
-                }
+        delegate: Column{
+            /*Text {
+                text: model["label"]
+            }*/
+            Text {
+                text: model["url"]
             }
         }
     }
