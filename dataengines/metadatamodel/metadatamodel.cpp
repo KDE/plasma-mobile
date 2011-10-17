@@ -200,6 +200,41 @@ QString MetadataModel::activityId() const
 }
 
 
+void MetadataModel::setSortBy(const QString &sortBy)
+{
+    if (m_sortBy.join(QString(',')) == sortBy) {
+        return;
+    }
+
+    m_sortBy = QString(sortBy).replace(QString(' '), QString()).split(',');
+    m_queryTimer->start(0);
+    emit sortByChanged();
+}
+
+QString MetadataModel::sortBy() const
+{
+    return m_sortBy.join(QString(','));
+}
+
+void MetadataModel::setSortOrder(Qt::SortOrder sortOrder)
+{
+    if (m_sortOrder == sortOrder) {
+        return;
+    }
+
+    m_sortOrder = sortOrder;
+    m_queryTimer->start(0);
+    emit sortOrderChanged();
+}
+
+Qt::SortOrder MetadataModel::sortOrder() const
+{
+    return m_sortOrder;
+}
+
+
+
+
 void MetadataModel::doQuery()
 {
     m_query = Nepomuk::Query::Query();
@@ -233,9 +268,13 @@ void MetadataModel::doQuery()
     }
 
     //TODO: configurable sorting
-    Nepomuk::Query::ComparisonTerm sortTerm(Soprano::Vocabulary::NAO::lastModified(), Nepomuk::Query::Term());
-    sortTerm.setSortWeight(1, Qt::DescendingOrder);
-    rootTerm.addSubTerm(sortTerm);
+    int weight = m_sortBy.length() + 1;
+    foreach (const QString &sortProperty, m_sortBy) {
+        Nepomuk::Query::ComparisonTerm sortTerm(propertyUrl(sortProperty), Nepomuk::Query::Term());
+        sortTerm.setSortWeight(weight, m_sortOrder);
+        rootTerm.addSubTerm(sortTerm);
+        --weight;
+    }
 
     m_query.setTerm(rootTerm);
 

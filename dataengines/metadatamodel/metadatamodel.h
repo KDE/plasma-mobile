@@ -35,6 +35,8 @@ namespace Nepomuk {
 class QDBusServiceWatcher;
 class QTimer;
 
+Q_DECLARE_METATYPE(QStringList)
+
 class MetadataModel : public QAbstractItemModel
 {
     Q_OBJECT
@@ -42,6 +44,9 @@ class MetadataModel : public QAbstractItemModel
     Q_PROPERTY(QString queryString READ queryString WRITE setQueryString NOTIFY queryStringChanged)
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
     Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
+
+    Q_PROPERTY(QString sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
+    Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
 
 public:
     enum Roles {
@@ -85,6 +90,15 @@ public:
 
 
 
+    //FIXME: QStringLists can't be used as properties... wait, WHAT?
+    // and no, QDeclarativeListProperty is pretty useless
+    void setSortBy(const QString &sortBy);
+    QString sortBy() const;
+
+    void setSortOrder(Qt::SortOrder sortOrder);
+    Qt::SortOrder sortOrder() const;
+
+
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation,
@@ -101,6 +115,9 @@ Q_SIGNALS:
     void resourceTypeChanged();
     void activityIdChanged();
 
+    void sortByChanged();
+    void sortOrderChanged();
+
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
@@ -109,6 +126,23 @@ protected Q_SLOTS:
 
 protected:
     QString retrieveIconName(const QStringList &types) const;
+    /* from nie#url
+     * to QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")
+     */
+    inline QUrl propertyUrl(const QString &property)
+    {
+        if (property.startsWith("nie#")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/"+property);
+        } else if (property.startsWith("nao#")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/"+property);
+        } else if (property.startsWith("nco#")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+property);
+        } else if (property.startsWith("nfo#")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+property);
+        } else {
+            return QUrl();
+        }
+    }
 
 private:
     Nepomuk::Query::Query m_query;
@@ -124,6 +158,9 @@ private:
     QString m_queryString;
     QString m_resourceType;
     QString m_activityId;
+
+    QStringList m_sortBy;
+    Qt::SortOrder m_sortOrder;
 };
 
 #endif
