@@ -18,17 +18,32 @@
 */
 
 import QtQuick 1.1
+import org.kde.plasma.components 0.1
 import org.kde.datamodels 0.1
 
-ListView {
+Item {
     width: 800
     height: 480
+    ListView {
+        id: metadataList
+        anchors.fill: parent
 
-    model: MetadataModel {
-        queryString: "linux"
+        model: MetadataModel {
+            queryString: "linux"
+        }
+
+        delegate: Text {
+            text: model["label"]
+        }
     }
 
-    delegate: Text {
-        text: model["label"]
+    ScrollDecorator {
+        flickableItem: metadataList
+        orientation: Qt.Vertical
+        anchors {
+            top:parent.top
+            right:parent.right
+            bottom:parent.bottom
+        }
     }
 }
