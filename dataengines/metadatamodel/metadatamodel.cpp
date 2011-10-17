@@ -19,24 +19,30 @@
 
 #include "metadatamodel.h"
 
-#include <QDBusServiceWatcher>
 #include <QDBusConnection>
+#include <QDBusServiceWatcher>
 #include <QTimer>
 
 #include <KDebug>
 #include <KMimeType>
 
+#include <soprano/vocabulary.h>
+
+#include <Nepomuk/File>
 #include <Nepomuk/Query/AndTerm>
+#include <Nepomuk/Query/ResourceTerm>
 #include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
-#include <Nepomuk/File>
-#include <nepomuk/queryparser.h>
-#include <nepomuk/resourcetypeterm.h>
 #include <nepomuk/comparisonterm.h>
 #include <nepomuk/literalterm.h>
+#include <nepomuk/queryparser.h>
+#include <nepomuk/resourcetypeterm.h>
 
 #include <nepomuk/nfo.h>
 #include <nepomuk/nie.h>
+
+#include "kext.h"
+
 
 MetadataModel::MetadataModel(QObject *parent)
     : QAbstractItemModel(parent),
@@ -152,8 +158,8 @@ void MetadataModel::setQueryString(const QString &query)
     }
 
     m_queryString = query;
-
     m_queryTimer->start(0);
+    emit queryStringChanged();
 }
 
 QString MetadataModel::queryString() const
@@ -168,16 +174,31 @@ void MetadataModel::setResourceType(const QString &type)
     }
 
     m_resourceType = type;
-
-    resourceTypeChanged();
-
     m_queryTimer->start(0);
+    emit resourceTypeChanged();
 }
 
 QString MetadataModel::resourceType() const
 {
     return m_resourceType;
 }
+
+void MetadataModel::setActivityId(const QString &activityId)
+{
+    if (m_activityId == activityId) {
+        return;
+    }
+
+    m_activityId = activityId;
+    m_queryTimer->start(0);
+    emit activityIdChanged();
+}
+
+QString MetadataModel::activityId() const
+{
+    return m_activityId;
+}
+
 
 void MetadataModel::doQuery()
 {
@@ -202,6 +223,13 @@ void MetadataModel::doQuery()
         }
     }
 
+    if (!m_activityId.isEmpty()) {
+        kDebug() << "Asking for resources of activity" << m_activityId;
+        Nepomuk::Resource acRes(m_activityId, Nepomuk::Vocabulary::KEXT::Activity());
+        Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
+        term.setInverted(true);
+        rootTerm.addSubTerm(term);
+    }
 
     m_query.setTerm(rootTerm);
 
@@ -212,7 +240,6 @@ void MetadataModel::doQuery()
     m_uriToResourceIndex.clear();
     endResetModel();
     emit countChanged();
-    emit queryStringChanged();
 
     delete m_queryClient;
     m_queryClient = new Nepomuk::Query::QueryServiceClient(this);

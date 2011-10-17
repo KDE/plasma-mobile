@@ -41,6 +41,7 @@ class MetadataModel : public QAbstractItemModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QString queryString READ queryString WRITE setQueryString NOTIFY queryStringChanged)
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
+    Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
 
 public:
     enum Roles {
@@ -79,6 +80,11 @@ public:
     void setResourceType(const QString &type);
     QString resourceType() const;
 
+    void setActivityId(const QString &activityId);
+    QString activityId() const;
+
+
+
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation,
@@ -93,6 +99,7 @@ Q_SIGNALS:
     void countChanged();
     void queryStringChanged();
     void resourceTypeChanged();
+    void activityIdChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
@@ -116,6 +123,7 @@ private:
     //pieces to build m_query
     QString m_queryString;
     QString m_resourceType;
+    QString m_activityId;
 };
 
 #endif
