@@ -26,6 +26,7 @@
 #include <KDebug>
 #include <KMimeType>
 
+#include <Nepomuk/Query/AndTerm>
 #include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
 #include <Nepomuk/File>
@@ -175,15 +176,18 @@ QString MetadataModel::resourceType() const
 
 void MetadataModel::doQuery()
 {
-    if (m_queryString.isEmpty()) {
-        m_query = Nepomuk::Query::Query();
-    } else {
-        m_query = Nepomuk::Query::QueryParser::parseQuery(m_queryString);
+    m_query = Nepomuk::Query::Query();
+    Nepomuk::Query::AndTerm rootTerm;
+
+    if (!m_queryString.isEmpty()) {
+        rootTerm.addSubTerm(Nepomuk::Query::QueryParser::parseQuery(m_queryString).term());
     }
 
     if (!m_resourceType.isEmpty()) {
-        m_query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+m_resourceType)));
+        rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+m_resourceType)));
     }
+
+    m_query.setTerm(rootTerm);
 
 
 
