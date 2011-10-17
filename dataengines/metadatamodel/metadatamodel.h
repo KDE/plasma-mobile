@@ -33,12 +33,14 @@ namespace Nepomuk {
 }
 
 class QDBusServiceWatcher;
+class QTimer;
 
 class MetadataModel : public QAbstractItemModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QString queryString READ queryString WRITE setQueryString NOTIFY queryStringChanged)
+    Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
 
 public:
     enum Roles {
@@ -74,6 +76,9 @@ public:
     void setQueryString(const QString &query);
     QString queryString() const;
 
+    void setResourceType(const QString &type);
+    QString resourceType() const;
+
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation,
@@ -87,15 +92,16 @@ public:
 Q_SIGNALS:
     void countChanged();
     void queryStringChanged();
+    void resourceTypeChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
     void serviceRegistered(const QString &service);
+    void doQuery();
 
 protected:
     QString retrieveIconName(const QStringList &types) const;
-    void doQuery();
 
 private:
     Nepomuk::Query::Query m_query;
@@ -105,6 +111,11 @@ private:
     QVector<Nepomuk::Resource> m_resources;
     QHash<QUrl, int> m_uriToResourceIndex;
     QHash<QString, QString> m_icons;
+    QTimer *m_queryTimer;
+
+    //pieces to build m_query
+    QString m_queryString;
+    QString m_resourceType;
 };
 
 #endif

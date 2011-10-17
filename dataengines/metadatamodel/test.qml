@@ -24,16 +24,25 @@ import org.kde.datamodels 0.1
 Item {
     width: 800
     height: 480
+
     ListView {
         id: metadataList
         anchors.fill: parent
 
         model: MetadataModel {
-            queryString: "linux"
+            id: metadataModel
+            queryString: "pdf"
+            resourceType: "Document"
         }
 
         delegate: Text {
-            text: model["label"]
+            text: model["url"]
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    print(metadataModel.queryString)
+                }
+            }
         }
     }
 

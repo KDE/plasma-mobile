@@ -21,6 +21,7 @@
 
 #include <QDBusServiceWatcher>
 #include <QDBusConnection>
+#include <QTimer>
 
 #include <KDebug>
 #include <KMimeType>
@@ -29,9 +30,11 @@
 #include <Nepomuk/Variant>
 #include <Nepomuk/File>
 #include <nepomuk/queryparser.h>
+#include <nepomuk/resourcetypeterm.h>
 
 MetadataModel::MetadataModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : QAbstractItemModel(parent),
+      m_queryClient(0)
 {
     // Add fallback icons here from generic to specific
     // The list of types is also sorted in this way, so
@@ -63,6 +66,14 @@ MetadataModel::MetadataModel(QObject *parent)
 
     m_icons["FileDataObject"] = QString("unknown");
     m_icons["TextDocument"] = QString("text-enriched");
+
+
+
+    m_queryTimer = new QTimer(this);
+    m_queryTimer->setSingleShot(true);
+    connect(m_queryTimer, SIGNAL(timeout()),
+            this, SLOT(doQuery()));
+
 
     connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
             this, SIGNAL(countChanged()));
@@ -115,17 +126,12 @@ void MetadataModel::serviceRegistered(const QString &service)
 
 void MetadataModel::setQuery(const Nepomuk::Query::Query &query)
 {
+    m_queryTimer->stop();
     m_query = query;
+
     if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
         doQuery();
     }
-
-    beginResetModel();
-    m_resources.clear();
-    m_uriToResourceIndex.clear();
-    endResetModel();
-    emit countChanged();
-    emit queryStringChanged();
 }
 
 Nepomuk::Query::Query MetadataModel::query() const
@@ -135,21 +141,60 @@ Nepomuk::Query::Query MetadataModel::query() const
 
 void MetadataModel::setQueryString(const QString &query)
 {
-    if (query == queryString()) {
+    if (query == m_queryString) {
         return;
     }
 
-    setQuery(Nepomuk::Query::QueryParser::parseQuery(query));
+    m_queryString = query;
+
+    m_queryTimer->start(0);
 }
 
 QString MetadataModel::queryString() const
 {
-    return m_query.toString();
+    return m_queryString;
 }
 
+void MetadataModel::setResourceType(const QString &type)
+{
+    if (m_resourceType == type) {
+        return;
+    }
+
+    m_resourceType = type;
+
+    resourceTypeChanged();
+
+    m_queryTimer->start(0);
+}
+
+QString MetadataModel::resourceType() const
+{
+    return m_resourceType;
+}
 
 void MetadataModel::doQuery()
 {
+    if (m_queryString.isEmpty()) {
+        m_query = Nepomuk::Query::Query();
+    } else {
+        m_query = Nepomuk::Query::QueryParser::parseQuery(m_queryString);
+    }
+
+    if (!m_resourceType.isEmpty()) {
+        m_query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+m_resourceType)));
+    }
+
+
+
+    beginResetModel();
+    m_resources.clear();
+    m_uriToResourceIndex.clear();
+    endResetModel();
+    emit countChanged();
+    emit queryStringChanged();
+
+    delete m_queryClient;
     m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
 
     connect(m_queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
