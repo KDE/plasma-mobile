@@ -25,13 +25,68 @@ Item {
     width: 800
     height: 480
 
+    ToolBar {
+        id: toolBar
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+        tools: Row {
+            spacing: 10
+            Label {text: "Type"}
+            ButtonRow {
+                RadioButton {
+                    text: "Documents"
+                    onCheckedChanged: {
+                        if (checked) {
+                            metadataModel.resourceType = "Document"
+                        }
+                    }
+                }
+                RadioButton {
+                    text: "Images"
+                    onCheckedChanged: {
+                        if (checked) {
+                            metadataModel.resourceType = "Image"
+                        }
+                    }
+                }
+            }
+            Label {text: "Sort"}
+            ButtonRow {
+                RadioButton {
+                    text: "Ascending"
+                    onCheckedChanged: {
+                        if (checked) {
+                            metadataModel.sortOrder = Qt.AscendingOrder
+                        }
+                    }
+                }
+                RadioButton {
+                    text: "Descending"
+                    onCheckedChanged: {
+                        if (checked) {
+                            metadataModel.sortOrder = Qt.DescendingOrder
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     ListView {
         id: metadataList
-        anchors.fill: parent
+        clip: true
+        anchors {
+            left: parent.left
+            top: toolBar.bottom
+            right: parent.right
+            bottom: parent.bottom
+        }
 
         model: MetadataModel {
             id: metadataModel
-            queryString: "pdf"
+            //queryString: "pdf"
             resourceType: "Document"
             //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
             sortBy: "nie#url,nao#lastModified"
@@ -52,9 +107,9 @@ Item {
         flickableItem: metadataList
         orientation: Qt.Vertical
         anchors {
-            top:parent.top
-            right:parent.right
-            bottom:parent.bottom
+            top:metadataList.top
+            right:metadataList.right
+            bottom:metadataList.bottom
         }
     }
 }
