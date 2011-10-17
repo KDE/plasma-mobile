@@ -21,6 +21,7 @@ target_link_libraries(datamodelsplugin
         ${QT_QTCORE_LIBRARY}
         ${QT_QTDBUS_LIBRARY}
         ${QT_QTDECLARATIVE_LIBRARY}
+        ${SOPRANO_LIBRARIES}
         ${NEPOMUK_LIBRARIES}
         ${NEPOMUK_QUERY_LIBRARIES}
         ${KDE4_KDECORE_LIBRARY}

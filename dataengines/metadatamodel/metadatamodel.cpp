@@ -32,6 +32,11 @@
 #include <Nepomuk/File>
 #include <nepomuk/queryparser.h>
 #include <nepomuk/resourcetypeterm.h>
+#include <nepomuk/comparisonterm.h>
+#include <nepomuk/literalterm.h>
+
+#include <nepomuk/nfo.h>
+#include <nepomuk/nie.h>
 
 MetadataModel::MetadataModel(QObject *parent)
     : QAbstractItemModel(parent),
@@ -184,8 +189,19 @@ void MetadataModel::doQuery()
     }
 
     if (!m_resourceType.isEmpty()) {
-        rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+m_resourceType)));
+        //FIXME: more elegant
+        if (m_resourceType == "Contact") {
+            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+m_resourceType)));
+        } else if (m_resourceType == "Video") {
+            // Strigi doesn't index videos it seems
+            rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("video")));
+        } else if (m_resourceType == "OpenDocumentTextDocument") {
+            rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("vnd.oasis.opendocument.text")));
+        } else {
+            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+m_resourceType)));
+        }
     }
+
 
     m_query.setTerm(rootTerm);
 
