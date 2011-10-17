@@ -55,6 +55,14 @@ Item {
                         }
                     }
                 }
+                RadioButton {
+                    text: "Any"
+                    onCheckedChanged: {
+                        if (checked) {
+                            metadataModel.resourceType = ""
+                        }
+                    }
+                }
             }
             Item {
                 width: 10
