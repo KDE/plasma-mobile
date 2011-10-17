@@ -20,6 +20,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1
 
@@ -55,7 +56,7 @@ Rectangle {
     */
     Column {
         anchors.fill: parent
-        spacing: 8
+        spacing: 12
         Text {
             color: theme.textColor
             text: "<h1>" + moduleTitle + "</h1>"
@@ -65,6 +66,28 @@ Rectangle {
             color: theme.textColor
             text: moduleDescription
             //opacity: 1
+        }
+        Row {
+            spacing: 8
+            anchors.margins: 32
+
+            anchors.verticalCenter: okButton.verticalCenter
+            Text {
+                color: theme.textColor
+                text: i18n("Use 24-hour clock:")
+                //opacity: 1
+            }
+            PlasmaWidgets.PushButton {
+                id: okButton
+                checkable: true
+                checked: timeSettings.twentyFour
+
+                text: timeSettings.twentyFour ? i18n("Enabled") : i18n("Disabled");
+                onClicked : {
+                    //print("24??" + checked);
+                    timeSettings.twentyFour = checked
+                }
+            }
         }
 
 

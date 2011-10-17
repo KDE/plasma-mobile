@@ -69,6 +69,9 @@ View::View(const QString &module, QWidget *parent)
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
     connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
             this, SLOT(onStatusChanged(QDeclarativeView::Status)));
+
+    
+    QTimer::singleShot(1000, this, SLOT(loadPlugin()));
 }
 
 View::~View()
@@ -110,10 +113,14 @@ void View::onStatusChanged(QDeclarativeView::Status status)
 
 void View::loadPlugin(const QString &pluginName)
 {
-    //kDebug() << "Load Plugin Requested from QML. " << pluginName;
     SettingsModuleLoader *loader = new SettingsModuleLoader(this);
-    //connect(loader, SIGNAL(pluginLoaded(SettingsModule*)), this, SLOT(addPlugin(SettingsModule*)));
+    if (pluginName.isEmpty()) {
+        loader->loadAllPlugins("org.kde.active.settings.time", rootContext());
+        return;
+    }
     loader->loadAllPlugins(pluginName, rootContext());
+    //kDebug() << "Load Plugin Requested from QML. " << pluginName;
+    //connect(loader, SIGNAL(pluginLoaded(SettingsModule*)), this, SLOT(addPlugin(SettingsModule*)));
 }
 
 /*

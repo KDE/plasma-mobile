@@ -30,6 +30,9 @@
 #include <kdemacros.h>
 #include <KPluginFactory>
 #include <KPluginLoader>
+#include <KSharedConfig>
+#include <KConfigGroup>
+
 
 #include <QtDeclarative/qdeclarative.h>
 #include <QtCore/QDate>
@@ -37,11 +40,18 @@
 K_PLUGIN_FACTORY(TimeSettingsFactory, registerPlugin<TimeSettings>();)
 K_EXPORT_PLUGIN(TimeSettingsFactory("active_settings_time"))
 
+#define FORMAT24H "%H:%M"
+#define FORMAT12H "%l:%M %p"
+
 class TimeSettingsPrivate {
 public:
+    QString timeFormat;
     QString timezone;
     QString currentTime;
     QTimer *timer;
+
+    KSharedConfigPtr localeConfig;
+    KConfigGroup localeSettings;
 };
 
 TimeSettings::TimeSettings(QObject *parent, const QVariantList &list)
@@ -62,6 +72,12 @@ TimeSettings::TimeSettings()
     d->timer->setInterval(1000);
     connect(d->timer, SIGNAL(timeout()), SLOT(timeout()));
     d->timer->start();
+
+    d->localeConfig = KSharedConfig::openConfig("kcmlocale-default", KConfig::SimpleConfig);
+    d->localeSettings = KConfigGroup(d->localeConfig, "Locale");
+    //setTimeFormat(d->localeSettings.readEntry("TimeFormat", QString(FORMAT24H)));
+    setTimeFormat(d->localeSettings.readEntry("TimeFormat", QString(FORMAT12H)));
+    kDebug() << "TimeSettings plugin loaded.";
 }
 
 TimeSettings::~TimeSettings()
@@ -73,6 +89,7 @@ TimeSettings::~TimeSettings()
 void TimeSettings::timeout()
 {
     setCurrentTime(KGlobal::locale()->formatTime(QTime::currentTime(), true));
+    //setCurrentTime(QTime::currentTime().toString(d->timeFormat));
 }
 
 
@@ -80,12 +97,6 @@ QString TimeSettings::currentTime()
 {
     return d->currentTime;
 }
-
-QString TimeSettings::timezone()
-{
-    return d->timezone;
-}
-
 
 void TimeSettings::setCurrentTime(const QString &currentTime)
 {
@@ -95,11 +106,53 @@ void TimeSettings::setCurrentTime(const QString &currentTime)
     }
 }
 
+QString TimeSettings::timeFormat()
+{
+    return d->timeFormat;
+}
+
+void TimeSettings::setTimeFormat(const QString &timeFormat)
+{
+    if (d->timeFormat != timeFormat) {
+        d->timeFormat = timeFormat;
+        KGlobal::locale()->setTimeFormat(d->timeFormat);
+        kDebug() << "TIME" << KGlobal::locale()->formatTime(QTime::currentTime(), true);
+        emit timeFormatChanged();
+        timeout();
+    }
+}
+
+QString TimeSettings::timezone()
+{
+    return d->timezone;
+}
+
 void TimeSettings::setTimezone(const QString &timezone)
 {
     if (d->timezone != timezone) {
         d->timezone = timezone;
         emit timezoneChanged();
+        timeout();
+    }
+}
+
+bool TimeSettings::twentyFour()
+{
+    return timeFormat() == FORMAT24H;
+}
+
+void TimeSettings::setTwentyFour(bool t)
+{
+    if (twentyFour() != t) {
+        if (t) {
+            setTimeFormat(FORMAT24H);
+        } else {
+            setTimeFormat(FORMAT12H);
+        }
+        kDebug() << "T24 toggled: " << t << d->timeFormat;
+        emit twentyFourChanged();
+        emit currentTimeChanged();
+        timeout();
     }
 }
 

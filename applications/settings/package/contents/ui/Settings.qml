@@ -176,7 +176,7 @@ Item {
         id: switcherPackage
         //name: "org.kde.active.settings.time"
         Component.onCompleted: {
-            //loadModule(name);
+            //loadPackage("org.kde.active.settings.time");
         }
 
     }
