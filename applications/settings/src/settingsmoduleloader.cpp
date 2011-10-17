@@ -37,7 +37,7 @@ SettingsModuleLoader::~SettingsModuleLoader()
 {
 }
 
-void SettingsModuleLoader::loadAllPlugins(const QString &pluginName, QDeclarativeContext* ctx)
+void SettingsModuleLoader::loadPlugin(const QString &pluginName, QDeclarativeContext* ctx)
 {
     QString query;
     if (pluginName.isEmpty() || (m_pluginName == pluginName)) {

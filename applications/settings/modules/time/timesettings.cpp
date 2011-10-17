@@ -40,8 +40,8 @@
 K_PLUGIN_FACTORY(TimeSettingsFactory, registerPlugin<TimeSettings>();)
 K_EXPORT_PLUGIN(TimeSettingsFactory("active_settings_time"))
 
-#define FORMAT24H "%H:%M"
-#define FORMAT12H "%l:%M %p"
+#define FORMAT24H "%H:%M:%S"
+#define FORMAT12H "%l:%M:%S %p"
 
 class TimeSettingsPrivate {
 public:
@@ -89,7 +89,6 @@ TimeSettings::~TimeSettings()
 void TimeSettings::timeout()
 {
     setCurrentTime(KGlobal::locale()->formatTime(QTime::currentTime(), true));
-    //setCurrentTime(QTime::currentTime().toString(d->timeFormat));
 }
 
 
@@ -116,7 +115,7 @@ void TimeSettings::setTimeFormat(const QString &timeFormat)
     if (d->timeFormat != timeFormat) {
         d->timeFormat = timeFormat;
         KGlobal::locale()->setTimeFormat(d->timeFormat);
-        kDebug() << "TIME" << KGlobal::locale()->formatTime(QTime::currentTime(), true);
+        kDebug() << "TIME" << KGlobal::locale()->formatTime(QTime::currentTime(), false);
         emit timeFormatChanged();
         timeout();
     }
