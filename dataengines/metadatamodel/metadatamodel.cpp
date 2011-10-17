@@ -37,6 +37,7 @@
 #include <nepomuk/literalterm.h>
 #include <nepomuk/queryparser.h>
 #include <nepomuk/resourcetypeterm.h>
+#include <nepomuk/standardqueries.h>
 
 #include <nepomuk/nfo.h>
 #include <nepomuk/nie.h>
@@ -218,6 +219,53 @@ QVariantList MetadataModel::tags() const
     return stringToVariantList(m_sortBy);
 }
 
+void MetadataModel::setStartDate(const QDate &date)
+{
+    if (m_startDate == date) {
+        return;
+    }
+
+    m_startDate = date;
+    m_queryTimer->start(0);
+    emit startDateChanged();
+}
+
+QDate MetadataModel::startDate() const
+{
+    return m_startDate;
+}
+
+void MetadataModel::setEndDate(const QDate &date)
+{
+    if (m_endDate == date) {
+        return;
+    }
+
+    m_endDate = date;
+    m_queryTimer->start(0);
+    emit endDateChanged();
+}
+
+QDate MetadataModel::endDate() const
+{
+    return m_endDate;
+}
+
+void MetadataModel::setRating(int rating)
+{
+    if (m_rating == rating) {
+        return;
+    }
+
+    m_rating = rating;
+    m_queryTimer->start(0);
+    emit ratingChanged();
+}
+
+int MetadataModel::rating() const
+{
+    return m_rating;
+}
 
 
 
@@ -296,7 +344,15 @@ void MetadataModel::doQuery()
         rootTerm.addSubTerm(term);
     }
 
+    if (m_startDate.isValid() || m_endDate.isValid()) {
+        rootTerm.addSubTerm(Nepomuk::Query::dateRangeQuery(m_startDate, m_endDate).term());
+    }
 
+    if (m_rating > 0) {
+        const Nepomuk::Query::LiteralTerm rating(m_rating);
+        Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao#numericRating")) > rating;
+        rootTerm.addSubTerm(term);
+    }
 
     int weight = m_sortBy.length() + 1;
     foreach (const QString &sortProperty, m_sortBy) {

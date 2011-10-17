@@ -38,6 +38,7 @@ Item {
                 text: "Type"
             }
             ButtonRow {
+                anchors.verticalCenter: parent.verticalCenter
                 spacing: 10
                 RadioButton {
                     text: "Documents"
@@ -73,6 +74,7 @@ Item {
                 text: "Sort"
             }
             ButtonRow {
+                anchors.verticalCenter: parent.verticalCenter
                 spacing: 10
                 RadioButton {
                     text: "Ascending"
@@ -91,11 +93,16 @@ Item {
                     }
                 }
             }
+            Item {
+                width: 10
+                height: 10
+            }
             Label {
                 anchors.verticalCenter: parent.verticalCenter
                 text: "Tags"
             }
             ButtonRow {
+                anchors.verticalCenter: parent.verticalCenter
                 spacing: 10
                 exclusive: false
                 CheckBox {
@@ -105,6 +112,40 @@ Item {
                 CheckBox {
                     id: nepomukTagCheckbox
                     text: "nepomuk"
+                }
+            }
+            Item {
+                width: 10
+                height: 10
+            }
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Dates"
+            }
+            TextField {
+                anchors.verticalCenter: parent.verticalCenter
+                onTextChanged: {
+                    metadataModel.startDate = text
+                }
+            }
+            TextField {
+                anchors.verticalCenter: parent.verticalCenter
+                onTextChanged: {
+                    metadataModel.endDate = text
+                }
+            }
+            Item {
+                width: 10
+                height: 10
+            }
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Rating"
+            }
+            TextField {
+                anchors.verticalCenter: parent.verticalCenter
+                onTextChanged: {
+                    metadataModel.rating = text
                 }
             }
         }

@@ -21,6 +21,7 @@
 #define METADATAMODEL_H
 
 #include <QAbstractItemModel>
+#include <QDate>
 
 #include <Nepomuk/Query/Query>
 #include <Nepomuk/Query/Result>
@@ -45,6 +46,9 @@ class MetadataModel : public QAbstractItemModel
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
     Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
     Q_PROPERTY(QVariantList tags READ tags WRITE setTags NOTIFY tagsChanged)
+    Q_PROPERTY(QDate startDate READ startDate WRITE setStartDate NOTIFY startDateChanged)
+    Q_PROPERTY(QDate endDate READ endDate WRITE setEndDate NOTIFY endDateChanged)
+    Q_PROPERTY(int rating READ rating WRITE setRating NOTIFY ratingChanged)
 
     Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
@@ -92,6 +96,15 @@ public:
     void setTags(const QVariantList &tags);
     QVariantList tags() const;
 
+    void setStartDate(const QDate &date);
+    QDate startDate() const;
+
+    void setEndDate(const QDate &date);
+    QDate endDate() const;
+
+    void setRating(int rating);
+    int rating() const;
+
 
 
     void setSortBy(const QVariantList &sortBy);
@@ -117,6 +130,9 @@ Q_SIGNALS:
     void resourceTypeChanged();
     void activityIdChanged();
     void tagsChanged();
+    void startDateChanged();
+    void endDateChanged();
+    void ratingChanged();
 
     void sortByChanged();
     void sortOrderChanged();
@@ -180,6 +196,9 @@ private:
     QString m_resourceType;
     QString m_activityId;
     QStringList m_tags;
+    QDate m_startDate;
+    QDate m_endDate;
+    int m_rating;
 
     QStringList m_sortBy;
     Qt::SortOrder m_sortOrder;
