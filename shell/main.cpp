@@ -34,7 +34,7 @@ static const char version[] = "1.0";
 extern "C"
 KDE_EXPORT int kdemain(int argc, char **argv)
 {
-    KAboutData aboutData("plasma-device", 0, ki18n("Plasma Workspace"),
+    KAboutData aboutData(argv[0], 0, ki18n("Plasma Workspace"),
                          version, ki18n(description), KAboutData::License_GPL,
                          ki18n("Copyright 2006-2009, The KDE Team"));
     aboutData.addAuthor(ki18n("Alexis Menard"),
