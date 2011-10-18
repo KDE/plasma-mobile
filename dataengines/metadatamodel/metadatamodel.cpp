@@ -318,7 +318,9 @@ void MetadataModel::doQuery()
 
     if (!m_resourceType.isEmpty()) {
         //FIXME: more elegant
-        if (m_resourceType == "Contact") {
+        if (m_resourceType == "Class") {
+            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.w3.org/2000/01/rdf-schema#Class")));
+        } else if (m_resourceType == "Contact") {
             rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+m_resourceType)));
         } else if (m_resourceType == "Video") {
             // Strigi doesn't index videos it seems
@@ -363,7 +365,7 @@ void MetadataModel::doQuery()
     }
 
     m_query.setTerm(rootTerm);
-
+    //kDebug()<<"Sparql query:"<<m_query.toSparqlQuery();
 
 
     beginResetModel();
@@ -449,9 +451,9 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case Label:
-        return resource.label();
+        return resource.genericLabel();
     case Description:
-        return resource.description();
+        return resource.genericDescription();
     case Types: {
         QStringList types;
         foreach (const QUrl &u, resource.types()) {
