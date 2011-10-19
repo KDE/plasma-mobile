@@ -46,6 +46,9 @@
 #include <Plasma/DeclarativeWidget>
 #include <Plasma/Package>
 
+#include <Nepomuk/Resource>
+#include <Nepomuk/Variant>
+
 #include <Activities/Consumer>
 #include <Activities/Controller>
 
@@ -330,6 +333,10 @@ void MobCorona::checkActivities()
 
     QStringList existingActivities = m_activityController->listActivities();
     foreach (const QString &id, existingActivities) {
+        //ensure the activity resource exists
+        //FIXME: shouldn't be done here
+        Nepomuk::Resource activityResource(id, QUrl("http://nepomuk.kde.org/ontologies/2010/11/29/kext#Activity"));
+        activityResource.setProperty(QUrl("http://nepomuk.kde.org/ontologies/2010/11/29/kext#ActivityIdentifier"), id);
         activityAdded(id);
     }
 
