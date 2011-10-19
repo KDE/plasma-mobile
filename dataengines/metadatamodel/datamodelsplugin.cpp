@@ -22,12 +22,14 @@
 #include <QtDeclarative/qdeclarative.h>
 
 #include "metadatamodel.h"
+#include "metadatacloudmodel.h"
 
 void DataModelsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.datamodels"));
 
     qmlRegisterType<MetadataModel>(uri, 0, 1, "MetadataModel");
+    qmlRegisterType<MetadataCloudModel>(uri, 0, 1, "MetadataCloudModel");
 }
 
 

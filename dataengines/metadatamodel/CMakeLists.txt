@@ -17,6 +17,7 @@ INCLUDE_DIRECTORIES(
 
 set(datamodels_SRCS
     datamodelsplugin.cpp
+    metadatacloudmodel.cpp
     metadatamodel.cpp
    )
 

@@ -365,7 +365,7 @@ void MetadataModel::doQuery()
     }
 
     m_query.setTerm(rootTerm);
-    //kDebug()<<"Sparql query:"<<m_query.toSparqlQuery();
+    kDebug()<<"Sparql query:"<<m_query.toSparqlQuery(Nepomuk::Query::Query::CreateCountQuery);
 
 
     beginResetModel();
