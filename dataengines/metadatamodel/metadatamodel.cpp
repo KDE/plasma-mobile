@@ -136,7 +136,6 @@ MetadataModel::~MetadataModel()
 void MetadataModel::serviceRegistered(const QString &service)
 {
     if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
-        delete m_queryClient; //m_queryClient still doesn't fix itself
         doQuery();
     }
 }
