@@ -87,6 +87,10 @@ MetadataModel::MetadataModel(QObject *parent)
     connect(m_queryTimer, SIGNAL(timeout()),
             this, SLOT(doQuery()));
 
+    m_newEntriesTimer = new QTimer(this);
+    m_newEntriesTimer->setSingleShot(true);
+    connect(m_newEntriesTimer, SIGNAL(timeout()),
+            this, SLOT(newEntriesDelayed()));
 
     connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
             this, SIGNAL(countChanged()));
@@ -393,14 +397,34 @@ void MetadataModel::doQuery()
 
 void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
-    beginInsertRows(QModelIndex(), m_resources.count(), m_resources.count()+entries.count());
 
     foreach (Nepomuk::Query::Result res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
-        m_uriToResourceIndex[res.resource().resourceUri()] = m_resources.count();
-        m_resources << res.resource();
+        m_resourcesToInsert << res.resource();
     }
+
+    if (!m_newEntriesTimer->isActive()) {
+        m_newEntriesTimer->start(200);
+    }
+}
+
+void MetadataModel::newEntriesDelayed()
+{
+    kWarning()<<m_resourcesToInsert.count();
+
+    beginInsertRows(QModelIndex(), m_resources.count(), m_resources.count()+m_resourcesToInsert.count()-1);
+
+
+    foreach (Nepomuk::Resource res, m_resourcesToInsert) {
+        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+        //kDebug() << "Result label:" << res.genericLabel();
+        m_uriToResourceIndex[res.resourceUri()] = m_resources.count();
+        m_resources << res;
+    }
+
+    m_resourcesToInsert.clear();
+
     endInsertRows();
     emit countChanged();
 }

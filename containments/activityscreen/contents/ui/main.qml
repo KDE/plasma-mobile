@@ -24,6 +24,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
+import org.kde.datamodels 0.1 as DataModels
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
@@ -31,6 +32,7 @@ Item {
     id: main
     width: 540
     height: 540
+
 
     property alias urls: metadataSource.connectedSources
 

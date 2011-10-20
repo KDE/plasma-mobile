@@ -142,6 +142,7 @@ protected Q_SLOTS:
     void entriesRemoved(const QList<QUrl> &urls);
     void serviceRegistered(const QString &service);
     void doQuery();
+    void newEntriesDelayed();
 
 protected:
     QString retrieveIconName(const QStringList &types) const;
@@ -187,9 +188,11 @@ private:
     Nepomuk::ResourceWatcher* m_watcher;
     QDBusServiceWatcher *m_queryServiceWatcher;
     QVector<Nepomuk::Resource> m_resources;
+    QList<Nepomuk::Resource> m_resourcesToInsert;
     QHash<QUrl, int> m_uriToResourceIndex;
     QHash<QString, QString> m_icons;
     QTimer *m_queryTimer;
+    QTimer *m_newEntriesTimer;
 
     //pieces to build m_query
     QString m_queryString;
