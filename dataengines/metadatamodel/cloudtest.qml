@@ -39,7 +39,7 @@ Item {
 
         model: MetadataCloudModel {
             id: metadataCloudModel
-            cloudCategory: "nao:hasTag"//"rdf:type"
+            cloudCategory: "rdf:type"//"nao:hasTag"
             //queryString: "pdf"
             //resourceType: "nfo:Document"
             //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"

@@ -179,7 +179,7 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entri
                 label = Nepomuk::Resource(url).genericLabel();
             //TODO: it should convert from ontology url to short form nfo:Document
             } else {
-                label = url.fragment();
+                label = Nepomuk::Types::Property(url).name();
             }
         } else if (rawLabel.canConvert<QString>()) {
             label = rawLabel.toString();
