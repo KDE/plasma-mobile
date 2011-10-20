@@ -201,11 +201,18 @@ void MetadataModel::doQuery()
         rootTerm.addSubTerm(Nepomuk::Query::dateRangeQuery(startDate(), endDate()).term());
     }
 
-    if (rating() > 0) {
-        const Nepomuk::Query::LiteralTerm ratingTerm(rating());
+    if (minimumRating() > 0) {
+        const Nepomuk::Query::LiteralTerm ratingTerm(minimumRating());
         Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao#numericRating")) > ratingTerm;
         rootTerm.addSubTerm(term);
     }
+
+    if (maximumRating() > 0) {
+        const Nepomuk::Query::LiteralTerm ratingTerm(maximumRating());
+        Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao#numericRating")) < ratingTerm;
+        rootTerm.addSubTerm(term);
+    }
+
 
     int weight = m_sortBy.length() + 1;
     foreach (const QString &sortProperty, m_sortBy) {

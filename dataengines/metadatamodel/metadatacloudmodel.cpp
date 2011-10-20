@@ -140,8 +140,12 @@ void MetadataCloudModel::doQuery()
         }
     }
 
-    if (rating() > 0) {
-        query += " . ?r nao:numericRating " + QString::number(rating());
+    if (minimumRating() > 0) {
+        query += " . ?r nao:numericRating >" + QString::number(minimumRating());
+    }
+
+    if (maximumRating() > 0) {
+        query += " . ?r nao:numericRating >" + QString::number(maximumRating());
     }
 
     query +=  " . ?r <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> ?v1 . FILTER(?v1>0) .  } group by ?label order by ?label";

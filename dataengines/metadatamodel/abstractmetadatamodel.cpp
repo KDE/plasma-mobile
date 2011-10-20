@@ -28,7 +28,9 @@
 
 
 AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
-    : QAbstractItemModel(parent)
+    : QAbstractItemModel(parent),
+      m_minimumRating(0),
+      m_maximumRating(0)
 {
     // Add fallback icons here from generic to specific
     // The list of types is also sorted in this way, so
@@ -182,21 +184,38 @@ QDate AbstractMetadataModel::endDate() const
     return m_endDate;
 }
 
-void AbstractMetadataModel::setRating(int rating)
+void AbstractMetadataModel::setMinimumRating(int rating)
 {
-    if (m_rating == rating) {
+    if (m_minimumRating == rating) {
         return;
     }
 
-    m_rating = rating;
+    m_minimumRating = rating;
     m_queryTimer->start(0);
-    emit ratingChanged();
+    emit minimumRatingChanged();
 }
 
-int AbstractMetadataModel::rating() const
+int AbstractMetadataModel::minimumRating() const
 {
-    return m_rating;
+    return m_minimumRating;
 }
+
+void AbstractMetadataModel::setMaximumRating(int rating)
+{
+    if (m_maximumRating == rating) {
+        return;
+    }
+
+    m_maximumRating = rating;
+    m_queryTimer->start(0);
+    emit maximumRatingChanged();
+}
+
+int AbstractMetadataModel::maximumRating() const
+{
+    return m_maximumRating;
+}
+
 
 
 

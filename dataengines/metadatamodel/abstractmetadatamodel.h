@@ -43,7 +43,8 @@ class AbstractMetadataModel : public QAbstractItemModel
     Q_PROPERTY(QVariantList tags READ tags WRITE setTags NOTIFY tagsChanged)
     Q_PROPERTY(QDate startDate READ startDate WRITE setStartDate NOTIFY startDateChanged)
     Q_PROPERTY(QDate endDate READ endDate WRITE setEndDate NOTIFY endDateChanged)
-    Q_PROPERTY(int rating READ rating WRITE setRating NOTIFY ratingChanged)
+    Q_PROPERTY(int minimumRating READ minimumRating WRITE setMinimumRating NOTIFY minimumRatingChanged)
+    Q_PROPERTY(int maximumRating READ maximumRating WRITE setMaximumRating NOTIFY maximumRatingChanged)
 
 public:
     AbstractMetadataModel(QObject *parent = 0);
@@ -66,8 +67,11 @@ public:
     void setEndDate(const QDate &date);
     QDate endDate() const;
 
-    void setRating(int rating);
-    int rating() const;
+    void setMinimumRating(int rating);
+    int minimumRating() const;
+
+    void setMaximumRating(int rating);
+    int maximumRating() const;
 
     //Reimplemented
     QVariant headerData(int section, Qt::Orientation orientation,
@@ -85,7 +89,8 @@ Q_SIGNALS:
     void tagsChanged();
     void startDateChanged();
     void endDateChanged();
-    void ratingChanged();
+    void minimumRatingChanged();
+    void maximumRatingChanged();
 
 protected Q_SLOTS:
     void serviceRegistered(const QString &service);
@@ -141,7 +146,8 @@ private:
     QStringList m_tags;
     QDate m_startDate;
     QDate m_endDate;
-    int m_rating;
+    int m_minimumRating;
+    int m_maximumRating;
 };
 
 #endif
