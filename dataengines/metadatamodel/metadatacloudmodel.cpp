@@ -275,22 +275,29 @@ void MetadataCloudModel::doQuery()
 
     if (!m_activityId.isEmpty()) {
         Nepomuk::Resource acRes(m_activityId, Nepomuk::Vocabulary::KEXT::Activity());
-        query +=  " . <" + acRes.resourceUri().toString() + "> nao:isRelated ?r . ";
+        query +=  " . <" + acRes.resourceUri().toString() + "> nao:isRelated ?r ";
     }
 
     foreach (const QString &tag, m_tags) {
-        
+        query += " ?r nao:hasTag " + tag;
     }
 
     if (m_startDate.isValid() || m_endDate.isValid()) {
-        
+        query += " . { \
+        ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#lastModified> ?v2 . FILTER(?v2>\"" + m_startDate.toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
+        } UNION {\
+        ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#contentCreated> ?v3 . FILTER(?v3>\"" + m_startDate.toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
+        } UNION {\
+        ?v4 <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#involves> ?r .\
+        ?v4 <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#start> ?v5 .\ FILTER(?v5>\"" + m_startDate.toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
+        }";
     }
 
     if (m_rating > 0) {
-        
+        query += " . ?r nao:numericRating ?v2 ";
     }
 
-    query +=  " } group by ?label order by ?label";
+    query +=  " . ?r <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> ?v1 . FILTER(?v1>0) .  } group by ?label order by ?label";
 
 
     beginResetModel();
