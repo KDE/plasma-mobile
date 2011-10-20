@@ -62,6 +62,8 @@
 #include <Plasma/Wallpaper>
 #include <Plasma/WindowEffects>
 
+#include <Nepomuk/ResourceManager>
+
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
 
@@ -87,6 +89,8 @@ PlasmaApp::PlasmaApp()
     KGlobal::locale()->insertCatalog("plasma-device");
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+    Nepomuk::ResourceManager::instance()->init();
 
     qmlRegisterType<PanelProxy>("org.kde.plasma.deviceshell", 0, 1, "DevicePanel");
 
