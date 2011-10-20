@@ -167,17 +167,20 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entri
 {
     QVector<QPair<QString, int> > results;
     foreach (Nepomuk::Query::Result res, entries) {
-        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-        //kDebug() << "Result label:" << res.genericLabel();
-
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
         QVariant rawLabel = res.additionalBinding(QLatin1String("label")).variant();
 
         if (rawLabel.canConvert<Nepomuk::Resource>()) {
             label = rawLabel.value<Nepomuk::Resource>().className();
-        } else if (!rawLabel.value<QUrl>().fragment().isEmpty()) {
-            label = rawLabel.value<QUrl>().fragment();
+        } else if (!rawLabel.value<QUrl>().scheme().isEmpty()) {
+            const QUrl url = rawLabel.value<QUrl>();
+            if (url.scheme() == "nepomuk") {
+                label = Nepomuk::Resource(url).genericLabel();
+            //TODO: it should convert from ontology url to short form nfo:Document
+            } else {
+                label = url.fragment();
+            }
         } else if (rawLabel.canConvert<QString>()) {
             label = rawLabel.toString();
         } else if (rawLabel.canConvert<int>()) {
