@@ -136,6 +136,11 @@ QVariantList AbstractMetadataModel::tags() const
     return stringToVariantList(m_tags);
 }
 
+QStringList AbstractMetadataModel::tagStrings() const
+{
+    return m_tags;
+}
+
 void AbstractMetadataModel::setStartDate(const QDate &date)
 {
     if (m_startDate == date) {
@@ -227,7 +232,7 @@ int AbstractMetadataModel::rowCount(const QModelIndex &parent) const
         return 0;
     }
 
-    return 0;
+    return count();
 }
 
 int AbstractMetadataModel::columnCount(const QModelIndex &parent) const

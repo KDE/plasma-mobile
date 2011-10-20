@@ -34,8 +34,6 @@ namespace Nepomuk {
 class QDBusServiceWatcher;
 class QTimer;
 
-Q_DECLARE_METATYPE(QStringList)
-
 class AbstractMetadataModel : public QAbstractItemModel
 {
     Q_OBJECT
@@ -49,6 +47,8 @@ class AbstractMetadataModel : public QAbstractItemModel
 public:
     AbstractMetadataModel(QObject *parent = 0);
     ~AbstractMetadataModel();
+
+    virtual int count() const = 0;
 
     void setResourceType(const QString &type);
     QString resourceType() const;
@@ -87,7 +87,7 @@ Q_SIGNALS:
 
 protected Q_SLOTS:
     void serviceRegistered(const QString &service);
-    void doQuery();
+    virtual void doQuery();
 
 protected:
     QString retrieveIconName(const QStringList &types) const;
@@ -126,6 +126,8 @@ protected:
         }
         return variantList;
     }
+
+    QStringList tagStrings() const;
 
 private:
     QDBusServiceWatcher *m_queryServiceWatcher;

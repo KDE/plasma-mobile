@@ -46,42 +46,9 @@
 
 
 MetadataModel::MetadataModel(QObject *parent)
-    : QAbstractItemModel(parent),
+    : AbstractMetadataModel(parent),
       m_queryClient(0)
 {
-    // Add fallback icons here from generic to specific
-    // The list of types is also sorted in this way, so
-    // we're returning the most specific icon, even with
-    // the hardcoded mapping.
-
-    // Files
-    //m_icons["FileDataObject"] = QString("audio-x-generic");
-
-    // Audio
-    m_icons["Audio"] = QString("audio-x-generic");
-    m_icons["MusicPiece"] = QString("audio-x-generic");
-
-    // Images
-    m_icons["Image"] = QString("image-x-generic");
-    m_icons["RasterImage"] = QString("image-x-generic");
-
-    m_icons["Email"] = QString("internet-mail");
-    m_icons["Document"] = QString("kword");
-    m_icons["PersonContact"] = QString("x-office-contact");
-
-    // Filesystem
-    m_icons["Website"] = QString("text-html");
-
-    // ... add some more
-    // Filesystem
-    m_icons["Bookmark"] = QString("bookmarks");
-    m_icons["BookmarksFolder"] = QString("bookmarks-organize");
-
-    m_icons["FileDataObject"] = QString("unknown");
-    m_icons["TextDocument"] = QString("text-enriched");
-
-
-
     m_queryTimer = new QTimer(this);
     m_queryTimer->setSingleShot(true);
     connect(m_queryTimer, SIGNAL(timeout()),
@@ -120,25 +87,12 @@ MetadataModel::MetadataModel(QObject *parent)
     roleNames[Tags] = "tags";
     roleNames[TagsNanes] = "tagsNanes";
     setRoleNames(roleNames);
-
-    m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
-                        QDBusConnection::sessionBus(),
-                        QDBusServiceWatcher::WatchForRegistration,
-                        this);
-    connect(m_queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
 }
 
 MetadataModel::~MetadataModel()
 {
 }
 
-
-void MetadataModel::serviceRegistered(const QString &service)
-{
-    if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
-        doQuery();
-    }
-}
 
 void MetadataModel::setQuery(const Nepomuk::Query::Query &query)
 {
@@ -169,105 +123,6 @@ void MetadataModel::setQueryString(const QString &query)
 QString MetadataModel::queryString() const
 {
     return m_queryString;
-}
-
-void MetadataModel::setResourceType(const QString &type)
-{
-    if (m_resourceType == type) {
-        return;
-    }
-
-    m_resourceType = type;
-    m_queryTimer->start(0);
-    emit resourceTypeChanged();
-}
-
-QString MetadataModel::resourceType() const
-{
-    return m_resourceType;
-}
-
-void MetadataModel::setActivityId(const QString &activityId)
-{
-    if (m_activityId == activityId) {
-        return;
-    }
-
-    m_activityId = activityId;
-    m_queryTimer->start(0);
-    emit activityIdChanged();
-}
-
-QString MetadataModel::activityId() const
-{
-    return m_activityId;
-}
-
-void MetadataModel::setTags(const QVariantList &tags)
-{
-    //FIXME: not exactly efficient
-    QStringList stringList = variantToStringList(tags);
-
-    if (m_tags == stringList) {
-        return;
-    }
-
-    m_tags = stringList;
-    m_queryTimer->start(0);
-    emit tagsChanged();
-}
-
-QVariantList MetadataModel::tags() const
-{
-    return stringToVariantList(m_sortBy);
-}
-
-void MetadataModel::setStartDate(const QDate &date)
-{
-    if (m_startDate == date) {
-        return;
-    }
-
-    m_startDate = date;
-    m_queryTimer->start(0);
-    emit startDateChanged();
-}
-
-QDate MetadataModel::startDate() const
-{
-    return m_startDate;
-}
-
-void MetadataModel::setEndDate(const QDate &date)
-{
-    if (m_endDate == date) {
-        return;
-    }
-
-    m_endDate = date;
-    m_queryTimer->start(0);
-    emit endDateChanged();
-}
-
-QDate MetadataModel::endDate() const
-{
-    return m_endDate;
-}
-
-void MetadataModel::setRating(int rating)
-{
-    if (m_rating == rating) {
-        return;
-    }
-
-    m_rating = rating;
-    m_queryTimer->start(0);
-    emit ratingChanged();
-}
-
-int MetadataModel::rating() const
-{
-    return m_rating;
 }
 
 
@@ -319,43 +174,43 @@ void MetadataModel::doQuery()
         rootTerm.addSubTerm(Nepomuk::Query::QueryParser::parseQuery(m_queryString).term());
     }
 
-    if (!m_resourceType.isEmpty()) {
+    if (!resourceType().isEmpty()) {
         //FIXME: more elegant
-        if (m_resourceType == "Class") {
+        if (resourceType() == "Class") {
             rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.w3.org/2000/01/rdf-schema#Class")));
-        } else if (m_resourceType == "Contact") {
-            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+m_resourceType)));
-        } else if (m_resourceType == "Video") {
+        } else if (resourceType() == "Contact") {
+            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+resourceType())));
+        } else if (resourceType() == "Video") {
             // Strigi doesn't index videos it seems
             rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("video")));
-        } else if (m_resourceType == "OpenDocumentTextDocument") {
+        } else if (resourceType() == "OpenDocumentTextDocument") {
             rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("vnd.oasis.opendocument.text")));
         } else {
-            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+m_resourceType)));
+            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+resourceType())));
         }
     }
 
-    if (!m_activityId.isEmpty()) {
-        kDebug() << "Asking for resources of activity" << m_activityId;
-        Nepomuk::Resource acRes(m_activityId, Nepomuk::Vocabulary::KEXT::Activity());
+    if (!activityId().isEmpty()) {
+        kDebug() << "Asking for resources of activity" << activityId();
+        Nepomuk::Resource acRes(activityId(), Nepomuk::Vocabulary::KEXT::Activity());
         Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
         term.setInverted(true);
         rootTerm.addSubTerm(term);
     }
 
-    foreach (const QString &tag, m_tags) {
+    foreach (const QString &tag, tagStrings()) {
         Nepomuk::Query::ComparisonTerm term( Soprano::Vocabulary::NAO::hasTag(),
                                     Nepomuk::Query::LiteralTerm(tag));
         rootTerm.addSubTerm(term);
     }
 
-    if (m_startDate.isValid() || m_endDate.isValid()) {
-        rootTerm.addSubTerm(Nepomuk::Query::dateRangeQuery(m_startDate, m_endDate).term());
+    if (startDate().isValid() || endDate().isValid()) {
+        rootTerm.addSubTerm(Nepomuk::Query::dateRangeQuery(startDate(), endDate()).term());
     }
 
-    if (m_rating > 0) {
-        const Nepomuk::Query::LiteralTerm rating(m_rating);
-        Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao#numericRating")) > rating;
+    if (rating() > 0) {
+        const Nepomuk::Query::LiteralTerm ratingTerm(rating());
+        Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao#numericRating")) > ratingTerm;
         rootTerm.addSubTerm(term);
     }
 
@@ -580,70 +435,6 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     default:
         return QVariant();
     }
-}
-
-QVariant MetadataModel::headerData(int section, Qt::Orientation orientation,
-                                   int role) const
-{
-    Q_UNUSED(section)
-    Q_UNUSED(orientation)
-    Q_UNUSED(role)
-
-    return QVariant();
-}
-
-QModelIndex MetadataModel::index(int row, int column,
-                                 const QModelIndex &parent) const
-{
-    if (parent.isValid() || column > 0 || row < 0 || row >= rowCount()) {
-        return QModelIndex();
-    }
-
-    return createIndex(row, column, 0);
-}
-
-QModelIndex MetadataModel::parent(const QModelIndex &child) const
-{
-    Q_UNUSED(child)
-
-    return QModelIndex();
-}
-
-int MetadataModel::rowCount(const QModelIndex &parent) const
-{
-    if (parent.isValid()) {
-        return 0;
-    }
-
-    return m_resources.count();
-}
-
-int MetadataModel::columnCount(const QModelIndex &parent) const
-{
-    //no trees
-    if (parent.isValid()) {
-        return 0;
-    }
-
-    return 1;
-}
-
-
-QString MetadataModel::retrieveIconName(const QStringList &types) const
-{
-    // keep searching until the most specific icon is found
-    QString _icon = "nepomuk";
-    foreach(const QString &t, types) {
-        QString shortType = t.split('#').last();
-        if (shortType.isEmpty()) {
-            shortType = t;
-        }
-        if (m_icons.keys().contains(shortType)) {
-            _icon = m_icons[shortType];
-            //kDebug() << "found icon for type" << shortType << _icon;
-        }
-    }
-    return _icon;
 }
 
 #include "metadatamodel.moc"
