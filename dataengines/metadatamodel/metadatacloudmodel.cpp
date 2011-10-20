@@ -104,8 +104,12 @@ void MetadataCloudModel::doQuery()
         query +=  " . <" + acRes.resourceUri().toString() + "> nao:isRelated ?r ";
     }
 
+    //this is an AND set of tags.. should be allowed OR as well?
     foreach (const QString &tag, tagStrings()) {
-        query += " ?r nao:hasTag " + tag;
+        query += ". ?r nao:hasTag ?tagSet \
+                  . ?tagSet ?tagLabel ?tag \
+                  . ?tagLabel <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> \
+                  . FILTER(bif:contains(?tag, \"'"+tag+"'\")) ";
     }
 
     if (startDate().isValid() || endDate().isValid()) {
@@ -132,11 +136,11 @@ void MetadataCloudModel::doQuery()
     }
 
     if (minimumRating() > 0) {
-        query += " . ?r nao:numericRating >" + QString::number(minimumRating());
+        query += " . ?r nao:numericRating ?rating filter (?rating >=" + QString::number(minimumRating()) + ") ";
     }
 
     if (maximumRating() > 0) {
-        query += " . ?r nao:numericRating >" + QString::number(maximumRating());
+        query += " . ?r nao:numericRating ?rating filter (?rating <=" + QString::number(maximumRating()) + ") ";
     }
 
     query +=  " . ?r <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> ?v1 . FILTER(?v1>0) .  } group by ?label order by ?label";
