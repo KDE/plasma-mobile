@@ -37,6 +37,7 @@ class QTimer;
 class AbstractMetadataModel : public QAbstractItemModel
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
     Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
     Q_PROPERTY(QVariantList tags READ tags WRITE setTags NOTIFY tagsChanged)
@@ -78,6 +79,7 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
 Q_SIGNALS:
+    void countChanged();
     void resourceTypeChanged();
     void activityIdChanged();
     void tagsChanged();

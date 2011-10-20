@@ -21,6 +21,7 @@
 #define METADATAMODEL_H
 
 #include "abstractmetadatamodel.h"
+
 #include <QDate>
 
 #include <Nepomuk/Query/Query>
@@ -39,7 +40,6 @@ class QTimer;
 class MetadataModel : public AbstractMetadataModel
 {
     Q_OBJECT
-    Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QString queryString READ queryString WRITE setQueryString NOTIFY queryStringChanged)
 
     Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
@@ -74,7 +74,7 @@ public:
     void setQuery(const Nepomuk::Query::Query &query);
     Nepomuk::Query::Query query() const;
 
-    int count() const {return m_resources.count();}
+    virtual int count() const {return m_resources.count();}
 
     void setQueryString(const QString &query);
     QString queryString() const;
@@ -92,7 +92,6 @@ public:
     QVariant data(const QModelIndex &index, int role) const;
 
 Q_SIGNALS:
-    void countChanged();
     void queryStringChanged();
 
     void sortByChanged();

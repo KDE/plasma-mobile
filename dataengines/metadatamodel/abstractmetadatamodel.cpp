@@ -61,6 +61,15 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
     m_icons["FileDataObject"] = QString("unknown");
     m_icons["TextDocument"] = QString("text-enriched");
 
+
+    connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+            this, SIGNAL(countChanged()));
+    connect(this, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+            this, SIGNAL(countChanged()));
+    connect(this, SIGNAL(modelReset()),
+            this, SIGNAL(countChanged()));
+
+
     m_queryTimer = new QTimer(this);
     m_queryTimer->setSingleShot(true);
     connect(m_queryTimer, SIGNAL(timeout()),

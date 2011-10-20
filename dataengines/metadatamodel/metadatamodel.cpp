@@ -59,13 +59,6 @@ MetadataModel::MetadataModel(QObject *parent)
     connect(m_newEntriesTimer, SIGNAL(timeout()),
             this, SLOT(newEntriesDelayed()));
 
-    connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
-            this, SIGNAL(countChanged()));
-    connect(this, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
-            this, SIGNAL(countChanged()));
-    connect(this, SIGNAL(modelReset()),
-            this, SIGNAL(countChanged()));
-
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
     roleNames[Description] = "description";
