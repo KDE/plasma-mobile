@@ -169,17 +169,19 @@ void MetadataModel::doQuery()
 
     if (!resourceType().isEmpty()) {
         //FIXME: more elegant
-        if (resourceType() == "Class") {
+        QString type = resourceType().replace(":", "#");
+        if (resourceType() == "rdf-schema:Class") {
             rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.w3.org/2000/01/rdf-schema#Class")));
-        } else if (resourceType() == "Contact") {
-            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+resourceType())));
-        } else if (resourceType() == "Video") {
+        } else if (resourceType() == "nco:Contact") {
+            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+type)));
+        } else if (resourceType() == "nfo:Video") {
             // Strigi doesn't index videos it seems
             rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("video")));
+//FIXME: query by mimetype
         } else if (resourceType() == "OpenDocumentTextDocument") {
             rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("vnd.oasis.opendocument.text")));
         } else {
-            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+resourceType())));
+            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+type)));
         }
     }
 

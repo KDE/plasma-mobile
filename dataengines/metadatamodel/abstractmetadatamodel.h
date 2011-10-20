@@ -98,19 +98,20 @@ protected Q_SLOTS:
 
 protected:
     QString retrieveIconName(const QStringList &types) const;
-    /* from nie#url
+    /* from nie:url
      * to QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")
      */
-    inline QUrl propertyUrl(const QString &property)
+    inline QUrl propertyUrl(const QString &property) const
     {
-        if (property.startsWith("nie#")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/"+property);
-        } else if (property.startsWith("nao#")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/"+property);
-        } else if (property.startsWith("nco#")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+property);
-        } else if (property.startsWith("nfo#")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+property);
+        const QString prop = QString(property).replace(":", "#");
+        if (property.startsWith("nie:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/"+prop);
+        } else if (property.startsWith("nao:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/"+prop);
+        } else if (property.startsWith("nco:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+prop);
+        } else if (property.startsWith("nfo:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+prop);
         } else {
             return QUrl();
         }
