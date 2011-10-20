@@ -39,22 +39,11 @@ Item {
 
         model: MetadataCloudModel {
             id: metadataCloudModel
-            cloudCategory: MetadataCloudModel.TypeCategory
+            cloudCategory: "kext:Activity"
             //queryString: "pdf"
             //resourceType: "nfo:Document"
-            activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
+            //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
             //sortBy: ["nie#url", "nao#lastModified"]
-            tags: {
-                if (kdeTagCheckbox.checked && nepomukTagCheckbox.checked) {
-                    return ["nepomuk", "kde"]
-                } else if (kdeTagCheckbox.checked) {
-                    return ["kde"]
-                } else if (nepomukTagCheckbox.checked) {
-                    return ["nepomuk"]
-                } else {
-                    return []
-                }
-            }
         }
 
         delegate: Row {

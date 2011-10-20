@@ -41,9 +41,7 @@ class MetadataCloudModel : public AbstractMetadataModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(CloudCategory cloudCategory READ cloudCategory WRITE setCloudCategory NOTIFY cloudCategoryChanged)
-
-    Q_ENUMS(CloudCategory)
+    Q_PROPERTY(QString cloudCategory READ cloudCategory WRITE setCloudCategory NOTIFY cloudCategoryChanged)
 
 public:
     enum Roles {
@@ -51,19 +49,17 @@ public:
         Count
     };
 
-    enum CloudCategory {
-        NoCategory = 0,
-        TypeCategory,
-        RatingCategory
-    };
-
     MetadataCloudModel(QObject *parent = 0);
     ~MetadataCloudModel();
 
     virtual int count() const {return m_results.count();}
 
-    void setCloudCategory(CloudCategory category);
-    CloudCategory cloudCategory() const;
+    /**
+     * rdf:type
+     * nao:numericRating
+     */
+    void setCloudCategory(QString category);
+    QString cloudCategory() const;
 
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
@@ -82,7 +78,7 @@ private:
     QTimer *m_queryTimer;
 
     //pieces to build m_query
-    CloudCategory m_cloudCategory;
+    QString m_cloudCategory;
 };
 
 #endif

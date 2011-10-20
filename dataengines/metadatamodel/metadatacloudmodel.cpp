@@ -47,12 +47,8 @@
 
 MetadataCloudModel::MetadataCloudModel(QObject *parent)
     : AbstractMetadataModel(parent),
-      m_queryClient(0),
-      m_cloudCategory(NoCategory)
+      m_queryClient(0)
 {
-
-
-
     m_queryTimer = new QTimer(this);
     m_queryTimer->setSingleShot(true);
     connect(m_queryTimer, SIGNAL(timeout()),
@@ -70,7 +66,7 @@ MetadataCloudModel::~MetadataCloudModel()
 }
 
 
-void MetadataCloudModel::setCloudCategory(MetadataCloudModel::CloudCategory category)
+void MetadataCloudModel::setCloudCategory(QString category)
 {
     if (m_cloudCategory == category) {
         return;
@@ -81,7 +77,7 @@ void MetadataCloudModel::setCloudCategory(MetadataCloudModel::CloudCategory cate
     emit cloudCategoryChanged();
 }
 
-MetadataCloudModel::CloudCategory MetadataCloudModel::cloudCategory() const
+QString MetadataCloudModel::cloudCategory() const
 {
     return m_cloudCategory;
 }
@@ -92,23 +88,18 @@ void MetadataCloudModel::doQuery()
 {
     QString query = "select distinct ?label count(*) as ?count where { ";
 
-    switch (m_cloudCategory) {
-    case TypeCategory:
-        query += " ?r rdf:type ?label";
-        break;
-    case RatingCategory:
-        query += " ?r nao:numericRating ?label";
-        break;
-    default:
-        return;
+    if (m_cloudCategory == "kext:Activity") {
+        query += " ?activity nao:isRelated ?r . ?activity rdf:type kext:Activity . ?activity kext:activityIdentifier ?label ";
+    } else {
+        query += " ?r " + m_cloudCategory + " ?label";
     }
 
 
-    if (!resourceType().isEmpty() && m_cloudCategory != TypeCategory) {
+    if (!resourceType().isEmpty() && m_cloudCategory != "rdf:type") {
         query += " . ?r rdf:type " + resourceType();
     }
 
-    if (!activityId().isEmpty()) {
+    if (!activityId().isEmpty() && m_cloudCategory != "kext:Activity") {
         Nepomuk::Resource acRes(activityId(), Nepomuk::Vocabulary::KEXT::Activity());
         query +=  " . <" + acRes.resourceUri().toString() + "> nao:isRelated ?r ";
     }
@@ -150,6 +141,7 @@ void MetadataCloudModel::doQuery()
 
     query +=  " . ?r <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> ?v1 . FILTER(?v1>0) .  } group by ?label order by ?label";
 
+    kDebug() << "Performing the Sparql query" << query;
 
     beginResetModel();
     m_results.clear();
@@ -177,9 +169,10 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entri
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
         QVariant rawLabel = res.additionalBinding(QLatin1String("label")).variant();
+
         if (rawLabel.canConvert<Nepomuk::Resource>()) {
             label = rawLabel.value<Nepomuk::Resource>().className();
-        } else if (rawLabel.canConvert<QUrl>()) {
+        } else if (!rawLabel.value<QUrl>().fragment().isEmpty()) {
             label = rawLabel.value<QUrl>().fragment();
         } else if (rawLabel.canConvert<QString>()) {
             label = rawLabel.toString();
