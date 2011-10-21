@@ -181,9 +181,10 @@ void MetadataModel::doQuery()
         } else if (resourceType() == "OpenDocumentTextDocument") {
             rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("vnd.oasis.opendocument.text")));
         } else {
-            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+type)));
+            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(resourceType())));
         }
     }
+
 
     if (!activityId().isEmpty()) {
         kDebug() << "Asking for resources of activity" << activityId();

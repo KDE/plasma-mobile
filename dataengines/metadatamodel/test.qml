@@ -164,7 +164,7 @@ Item {
         model: MetadataModel {
             id: metadataModel
             //queryString: "pdf"
-            resourceType: "nfo:Document"
+            //resourceType: "nfo:Document"
             //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
             sortBy: ["nie:url", "nao:lastModified"]
             tags: {

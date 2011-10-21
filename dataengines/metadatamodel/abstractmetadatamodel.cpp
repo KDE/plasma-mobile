@@ -26,6 +26,7 @@
 #include <KDebug>
 #include <KMimeType>
 
+#include <Nepomuk/ResourceManager>
 
 AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
     : QAbstractItemModel(parent),
@@ -74,6 +75,10 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
 
     m_queryTimer = new QTimer(this);
     m_queryTimer->setSingleShot(true);
+    if (Nepomuk::ResourceManager::instance()->initialized()) {
+        connect(m_queryTimer, SIGNAL(timeout()),
+                this, SLOT(doQuery()));
+    }
 
     m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
                         QDBusConnection::sessionBus(),
