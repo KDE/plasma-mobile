@@ -153,16 +153,6 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
     }
 }
 
-bool MetadataBaseEngine::updateSourceEvent(const QString &source)
-{
-    QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(source));
-    if (container) {
-        prepareSource(source);
-    }
-
-    return false;
-}
-
 
 bool MetadataBaseEngine::prepareSource(const QString &name)
 {

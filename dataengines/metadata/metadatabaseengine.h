@@ -47,7 +47,6 @@ class MetadataBaseEngine : public Plasma::DataEngine
         virtual void init();
 
         Plasma::Service *serviceForSource(const QString &source);
-        bool updateSourceEvent(const QString &source);
 
     protected Q_SLOTS:
         void serviceRegistered(const QString &service);
