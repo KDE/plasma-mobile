@@ -17,6 +17,9 @@
     02110-1301, USA.
 */
 
+#include <QDBusConnection>
+#include <QDBusServiceWatcher>
+
 // Nepomuk
 #include <Nepomuk/Resource>
 #include <Nepomuk/Variant>
@@ -30,6 +33,7 @@
 #include <Nepomuk/Query/FileQuery>
 #include <Nepomuk/Query/QueryServiceClient>
 #include <Nepomuk/Query/Result>
+#include <Nepomuk/ResourceManager>
 
 #include <soprano/queryresultiterator.h>
 #include <soprano/model.h>
@@ -62,6 +66,8 @@ class MetadataBaseEnginePrivate
 public:
     QSize previewSize;
     Activities::Consumer *activityConsumer;
+    QDBusServiceWatcher *queryServiceWatcher;
+    QStringList connectedSources;
 };
 
 
@@ -71,6 +77,14 @@ MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args
     Q_UNUSED(args);
     d = new MetadataBaseEnginePrivate;
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
+
+    d->queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
+                        QDBusConnection::sessionBus(),
+                        QDBusServiceWatcher::WatchForRegistration,
+                        this);
+    connect(d->queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
+
+
     d->activityConsumer = new Activities::Consumer(this);
     //init();
 }
@@ -78,6 +92,16 @@ MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args
 void MetadataBaseEngine::init()
 {
     //kDebug() << "init.";
+}
+
+void MetadataBaseEngine::serviceRegistered(const QString &service)
+{
+    if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
+        foreach (const QString &source, d->connectedSources) {
+            prepareSource(source);
+        }
+    // d->connectedSources.clear();
+    }
 }
 
 MetadataBaseEngine::~MetadataBaseEngine()
@@ -93,6 +117,16 @@ QStringList MetadataBaseEngine::sources() const
 bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
 {
     QString massagedName = name;
+    // if the strings ends with :number it's the limit for the query
+    if (name.contains(QRegExp(".*:\\d+$"))) {
+        QStringList tokens = name.split(":");
+        massagedName = massagedName.mid(0, massagedName.lastIndexOf(":"));
+    }
+
+    if (name.startsWith('/')) {
+        massagedName = "file://" + name;
+    }
+
     foreach (const QString &s, Plasma::DataEngine::sources()) {
         if (s == name) {
             kDebug() << "!!! resource already exists." << name;
@@ -100,6 +134,39 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         }
     }
 
+    if (Nepomuk::ResourceManager::instance()->initialized()) {
+        return prepareSource(name);
+    } else {
+        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(massagedName));
+
+        Nepomuk::Query::Query query;
+        if (container) {
+            container->setQuery(query);
+        } else {
+            container = new QueryContainer(query, this);
+            container->setObjectName(name);
+            addSource(container);
+        }
+
+        d->connectedSources << name;
+        return true;
+    }
+}
+
+bool MetadataBaseEngine::updateSourceEvent(const QString &source)
+{
+    QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(source));
+    if (container) {
+        prepareSource(source);
+    }
+
+    return false;
+}
+
+
+bool MetadataBaseEngine::prepareSource(const QString &name)
+{
+    QString massagedName = name;
     int resultLimit = -1;
     // if the strings ends with :number it's the limit for the query
     if (name.contains(QRegExp(".*:\\d+$"))) {
@@ -144,11 +211,13 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
         //return true;
 
         QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(massagedName));
-         if (!container) {
-             container = new QueryContainer(Nepomuk::Query::Query(), this);
-         }
-         container->setObjectName(massagedName);
-         addSource(container);
+         if (container) {
+            container->setQuery(query);
+        } else {
+            container = new QueryContainer(query, this);
+            container->setObjectName(name);
+            addSource(container);
+        }
          //FIXME: this isn't really pretty
          //TODO: create another type of DataContainer with a common superclass to visualize single resources
          container->addResource(r);
@@ -164,11 +233,11 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
              activityId = massagedName.split(":").value(1);
          }
 
-         kDebug() << "Asking for resources of activity" << activityId;
          Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KEXT::Activity());
          Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
          term.setInverted(true);
          query = Nepomuk::Query::Query(term);
+         kDebug() << "Asking for resources of activity" << activityId << acRes.resourceUri();
 
     // Let's try a literal query ...
     } else {
@@ -185,11 +254,14 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
 
         QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
 
-        if (!container) {
+        if (container) {
+            container->setQuery(query);
+        } else {
             container = new QueryContainer(query, this);
+            container->setObjectName(name);
+            addSource(container);
         }
-        container->setObjectName(name);
-        addSource(container);
+
         return true;
     } else {
         kWarning() << "Query is invalid:" << query;
