@@ -67,7 +67,7 @@ public:
     QSize previewSize;
     Activities::Consumer *activityConsumer;
     QDBusServiceWatcher *queryServiceWatcher;
-    QStringList queuedSources;
+    QStringList connectedSources;
 };
 
 
@@ -97,11 +97,10 @@ void MetadataBaseEngine::init()
 void MetadataBaseEngine::serviceRegistered(const QString &service)
 {
     if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
-kWarning()<<"AAAAAAA"<<d->queuedSources;
-        foreach (const QString &source, d->queuedSources) {
+        foreach (const QString &source, d->connectedSources) {
             prepareSource(source);
         }
-    // d->queuedSources.clear();
+    // d->connectedSources.clear();
     }
 }
 
@@ -149,7 +148,7 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
             addSource(container);
         }
 
-        d->queuedSources << name;
+        d->connectedSources << name;
         return true;
     }
 }

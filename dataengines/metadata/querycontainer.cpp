@@ -41,12 +41,6 @@ QueryContainer::QueryContainer(const Nepomuk::Query::Query &query, QObject *pare
     if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
         doQuery();
     }
-    //FIXME: this will go in queryservicewatcher
-    m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
-                        QDBusConnection::sessionBus(),
-                        QDBusServiceWatcher::WatchForRegistration,
-                        this);
-    connect(m_queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
 
     m_watcher = new Nepomuk::ResourceWatcher(this);
 
@@ -73,13 +67,6 @@ void QueryContainer::setQuery(Nepomuk::Query::Query query)
     doQuery();
 }
 
-void QueryContainer::serviceRegistered(const QString &service)
-{
-    if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
-        delete m_queryClient; //m_queryClient still doesn't fix itself
-        doQuery();
-    }
-}
 
 void QueryContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
 {
@@ -110,7 +97,7 @@ void QueryContainer::doQuery()
 void QueryContainer::newEntries(const QList< Nepomuk::Query::Result >& entries)
 {
     foreach (Nepomuk::Query::Result res, entries) {
-        kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
         m_resourcesToAdd << res.resource();
     }

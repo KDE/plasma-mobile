@@ -32,7 +32,6 @@ namespace Nepomuk {
     class ResourceWatcher;
 }
 
-class QDBusServiceWatcher;
 
 class QueryContainer : public Plasma::DataContainer
 {
@@ -49,7 +48,6 @@ public:
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
-    void serviceRegistered(const QString &service);
     void propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property, QVariant);
     void addWatcherDelayed();
     void addResourcesDelayed();
@@ -64,7 +62,6 @@ private:
     Nepomuk::ResourceWatcher* m_watcher;
     QList<Nepomuk::Resource> m_resourcesToWatch;
     QHash<QString, QString> m_icons;
-    QDBusServiceWatcher *m_queryServiceWatcher;
     QList<Nepomuk::Resource> m_resourcesToAdd;
     QTimer *m_addWatcherTimer;
     QTimer *m_addResourcesTimer;
