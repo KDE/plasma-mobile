@@ -104,7 +104,9 @@ protected:
     inline QUrl propertyUrl(const QString &property) const
     {
         const QString prop = QString(property).replace(":", "#");
-        if (property.startsWith("nie:")) {
+        if (property.startsWith("rdf-schema:")) {
+            return QUrl("http://www.w3.org/2000/01/"+prop);
+        } else if (property.startsWith("nie:")) {
             return QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/"+prop);
         } else if (property.startsWith("nao:")) {
             return QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/"+prop);
@@ -112,9 +114,37 @@ protected:
             return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+prop);
         } else if (property.startsWith("nfo:")) {
             return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+prop);
+        } else if (property.startsWith("ncal:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/04/02/"+prop);
+        } else if (property.startsWith("ndo:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2010/04/30/"+prop);
+        } else if (property.startsWith("nexif:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/05/10/"+prop);
+        } else if (property.startsWith("nid3:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/05/10/"+prop);
+        } else if (property.startsWith("nmm:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2009/02/19/"+prop);
+        } else if (property.startsWith("nmo:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/"+prop);
+        } else if (property.startsWith("nrl:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/"+prop);
+        } else if (property.startsWith("nso:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2009/11/08/"+prop);
+        } else if (property.startsWith("nuao:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2010/01/25/"+prop);
+        } else if (property.startsWith("pimo:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2007/11/01/"+prop);
+        } else if (property.startsWith("tmo:")) {
+            return QUrl("http://www.semanticdesktop.org/ontologies/2008/05/20/"+prop);
         } else {
             return QUrl();
         }
+    }
+
+    inline QString propertyShortName(const QUrl &url)
+    {
+        //http://www.semanticdesktop.org/ontologies/2007/03/22/nfo will become nfo
+        return url.path().split("/").last() + ":" + url.fragment();
     }
 
     static inline QStringList variantToStringList(const QVariantList &list)
