@@ -41,7 +41,7 @@ ListView {
 
     model: DataModels.MetadataModel {
         //queryString: "pdf"
-        activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
+        activityId: plasmoid.activityId
 
         sortOrder: Qt.AscendingOrder
     }

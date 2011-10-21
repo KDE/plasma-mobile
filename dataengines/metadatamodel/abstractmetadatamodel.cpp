@@ -74,8 +74,6 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
 
     m_queryTimer = new QTimer(this);
     m_queryTimer->setSingleShot(true);
-    connect(m_queryTimer, SIGNAL(timeout()),
-            this, SLOT(doQuery()));
 
     m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
                         QDBusConnection::sessionBus(),
@@ -92,6 +90,10 @@ AbstractMetadataModel::~AbstractMetadataModel()
 void AbstractMetadataModel::serviceRegistered(const QString &service)
 {
     if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
+        disconnect(m_queryTimer, SIGNAL(timeout()),
+                this, SLOT(doQuery()));
+        connect(m_queryTimer, SIGNAL(timeout()),
+                this, SLOT(doQuery()));
         doQuery();
     }
 }
