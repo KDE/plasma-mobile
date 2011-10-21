@@ -222,11 +222,12 @@ void MetadataCloudModel::entriesRemoved(const QList<QUrl> &urls)
             QString cat = v.toString();
             if (cat == propName) {
                 index = i;
+                break;
             }
             ++i;
         }
         if (index >= 0) {
-            beginRemoveRows(QModelIndex(), index, 1);
+            beginRemoveRows(QModelIndex(), index, index);
             m_results.remove(index);
             endRemoveRows();
         }
