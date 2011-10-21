@@ -1,7 +1,25 @@
 [Desktop Entry]
 Name=Settings
+Name[nl]=Instellingen
+Name[pt]=Configuração
+Name[pt_BR]=Configurações
+Name[sv]=Inställningar
+Name[uk]=Параметри
+Name[x-test]=xxSettingsxx
 GenericName=Settings
+GenericName[nl]=Instellingen
+GenericName[pt]=Configuração
+GenericName[pt_BR]=Configurações
+GenericName[sv]=Inställningar
+GenericName[uk]=Параметри
+GenericName[x-test]=xxSettingsxx
 Comment=Settings for Plasma Active
+Comment[nl]=Instellingen voor Plasma Active
+Comment[pt]=Configuração do Plasma Active
+Comment[pt_BR]=Configurações do Plasma Active
+Comment[sv]=Inställningar för Plasma aktiv
+Comment[uk]=Параметри Плазми для портативних пристроїв
+Comment[x-test]=xxSettings for Plasma Activexx
 Exec=active-settings -graphicssystem raster %u
 Terminal=false
 Icon=preferences-desktop
