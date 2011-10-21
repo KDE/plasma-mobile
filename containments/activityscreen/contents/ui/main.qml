@@ -33,23 +33,6 @@ Item {
     width: 540
     height: 540
 
-ListView {
-    clip: true
-    anchors {
-        fill:parent
-    }
-
-    model: DataModels.MetadataModel {
-        //queryString: "pdf"
-        activityId: plasmoid.activityId
-
-        sortOrder: Qt.AscendingOrder
-    }
-
-    delegate: Text {
-        text: model["url"]
-    }
-}
 
     property alias urls: metadataSource.connectedSources
 
@@ -101,6 +84,15 @@ ListView {
         connectedSources: ["CurrentActivityResources:"+plasmoid.activityId]
     }
 
+    DataModels.MetadataCloudModel {
+        id: categoryListModel
+        cloudCategory: "rdf:type"
+        activityId: plasmoid.activityId
+        onCategoriesChanged: {
+            categoriesTimer.restart()
+        }
+    }
+
     PlasmaCore.DataModel {
         id: metadataModel
         keyRoleFilter: ".*"
@@ -108,7 +100,7 @@ ListView {
     }
 
     MobileComponents.CategorizedProxyModel {
-        id: categoryListModel
+        //id: categoryListModel
         sourceModel: metadataModel
         categoryRole: "genericClassName"
         onCategoriesChanged: {

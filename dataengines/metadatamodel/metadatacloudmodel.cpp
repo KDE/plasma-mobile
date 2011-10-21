@@ -82,7 +82,10 @@ QString MetadataCloudModel::cloudCategory() const
     return m_cloudCategory;
 }
 
-
+QVariantList MetadataCloudModel::categories() const
+{
+    return m_categories;
+}
 
 void MetadataCloudModel::doQuery()
 {
@@ -166,6 +169,8 @@ void MetadataCloudModel::doQuery()
 void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
     QVector<QPair<QString, int> > results;
+    QVariantList categories;
+
     foreach (Nepomuk::Query::Result res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
@@ -193,18 +198,39 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entri
             continue;
         }
         results << QPair<QString, int>(label, count);
+        categories << label;
     }
     if (results.count() > 0) {
         beginInsertRows(QModelIndex(), m_results.count(), m_results.count()+results.count());
         m_results << results;
+        m_categories << categories;
         endInsertRows();
         emit countChanged();
+        emit categoriesChanged();
     }
 }
 
 void MetadataCloudModel::entriesRemoved(const QList<QUrl> &urls)
 {
-    //TODO
+    //FIXME: optimize
+    kDebug()<<urls;
+    foreach (const QUrl &url, urls) {
+        const QString propName = propertyShortName(url);
+        int i = 0;
+        int index = -1;
+        foreach (const QVariant &v, m_categories) {
+            QString cat = v.toString();
+            if (cat == propName) {
+                index = i;
+            }
+            ++i;
+        }
+        if (index >= 0) {
+            beginRemoveRows(QModelIndex(), index, 1);
+            m_results.remove(index);
+            endRemoveRows();
+        }
+    }
     emit countChanged();
 }
 

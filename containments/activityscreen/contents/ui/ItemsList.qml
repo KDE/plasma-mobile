@@ -23,7 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
-
+import org.kde.datamodels 0.1 as DataModels
 
 Item {
     property alias count: itemsList.count
@@ -44,11 +44,13 @@ Item {
             NumberAnimation {duration: 250}
         }
 
-        model: MobileComponents.CategorizedProxyModel {
-            sourceModel: metadataModel
-            categoryRole: categoryListModel.categoryRole
-            currentCategory: itemGroup.category
+        model: DataModels.MetadataModel {
+            activityId: plasmoid.activityId
+            resourceType: "nfo:"+itemGroup.category
+            sortBy: ["nfo:fileName"]
+            sortOrder: Qt.AscendingOrder
         }
+
 
         highlight: PlasmaCore.FrameSvgItem {
                 id: highlightFrame

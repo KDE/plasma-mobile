@@ -202,13 +202,13 @@ void MetadataModel::doQuery()
 
     if (minimumRating() > 0) {
         const Nepomuk::Query::LiteralTerm ratingTerm(minimumRating());
-        Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao#numericRating")) > ratingTerm;
+        Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao:numericRating")) > ratingTerm;
         rootTerm.addSubTerm(term);
     }
 
     if (maximumRating() > 0) {
         const Nepomuk::Query::LiteralTerm ratingTerm(maximumRating());
-        Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao#numericRating")) < ratingTerm;
+        Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao:numericRating")) < ratingTerm;
         rootTerm.addSubTerm(term);
     }
 
@@ -300,18 +300,24 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
     }
 
     QMap<int, int>::const_iterator i = toRemove.constEnd();
-    --i;
-    do {
+
+    while (i != toRemove.constBegin()) {
+        --i;
         beginRemoveRows(QModelIndex(), i.key(), i.key()+i.value());
         m_resources.remove(i.key(), i.value());
         endRemoveRows();
-        --i;
-    } while (i != toRemove.constBegin());
+    }
 
     //another loop, we don't depend to m_uriToResourceIndex in data(), but we take this doublesafety
     foreach (const QUrl &url, urls) {
         m_uriToResourceIndex.remove(url);
     }
+
+    //FIXME: this loop makes all the optimizations useless, get rid either of it or the optimizations
+    for (int i = 0; i < m_resources.count(); ++i) {
+        m_uriToResourceIndex[m_resources[i].resourceUri()] = i;
+    }
+
     emit countChanged();
 }
 
