@@ -33,6 +33,23 @@ Item {
     width: 540
     height: 540
 
+ListView {
+    clip: true
+    anchors {
+        fill:parent
+    }
+
+    model: DataModels.MetadataModel {
+        //queryString: "pdf"
+        activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
+
+        sortOrder: Qt.AscendingOrder
+    }
+
+    delegate: Text {
+        text: model["url"]
+    }
+}
 
     property alias urls: metadataSource.connectedSources
 
