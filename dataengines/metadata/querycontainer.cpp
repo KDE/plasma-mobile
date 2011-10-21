@@ -67,6 +67,12 @@ QueryContainer::~QueryContainer()
 {
 }
 
+void QueryContainer::setQuery(Nepomuk::Query::Query query)
+{
+    m_query = query;
+    doQuery();
+}
+
 void QueryContainer::serviceRegistered(const QString &service)
 {
     if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
@@ -104,7 +110,7 @@ void QueryContainer::doQuery()
 void QueryContainer::newEntries(const QList< Nepomuk::Query::Result >& entries)
 {
     foreach (Nepomuk::Query::Result res, entries) {
-        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+        kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
         m_resourcesToAdd << res.resource();
     }

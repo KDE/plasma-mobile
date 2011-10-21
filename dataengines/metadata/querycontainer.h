@@ -42,6 +42,7 @@ public:
     QueryContainer(const Nepomuk::Query::Query &query, QObject *parent = 0);
     ~QueryContainer();
 
+    void setQuery(Nepomuk::Query::Query query);
     //FIXME: should be protected
     void addResource(Nepomuk::Resource resource);
 
