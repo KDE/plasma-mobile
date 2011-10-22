@@ -89,14 +89,19 @@ protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
     void timerEvent(QTimerEvent* event);
     bool sceneEvent(QEvent *event);
+    bool flickingEnabled() const;
+    void setFlickingEnabled(bool enabled);
 
 Q_SIGNALS:
     void doubleClick(int clickX, int clickY);
+    void flickingEnabledChanged();
+
 private:
     KDeclarativeWebView *parent;
     QPointF pressPoint;
     QBasicTimer pressTimer;
     int pressTime; // milliseconds before the touch event becomes a "tap and hold"
+    bool flicking;
     friend class KDeclarativeWebView;
 };
 
@@ -116,6 +121,7 @@ class KDeclarativeWebView : public QDeclarativeItem {
     Q_PROPERTY(QString html READ html WRITE setHtml NOTIFY htmlChanged)
 
     Q_PROPERTY(int pressGrabTime READ pressGrabTime WRITE setPressGrabTime NOTIFY pressGrabTimeChanged)
+    Q_PROPERTY(bool flickingEnabled READ flickingEnabled  WRITE setFlickingEnabled NOTIFY flickingEnabledChanged)
 
     Q_PROPERTY(int preferredWidth READ preferredWidth WRITE setPreferredWidth NOTIFY preferredWidthChanged)
     Q_PROPERTY(int preferredHeight READ preferredHeight WRITE setPreferredHeight NOTIFY preferredHeightChanged)
@@ -158,6 +164,9 @@ public:
 
     int pressGrabTime() const;
     void setPressGrabTime(int);
+
+    bool flickingEnabled() const;
+    void setFlickingEnabled(bool enabled);
 
     int preferredWidth() const;
     void setPreferredWidth(int);
@@ -222,6 +231,7 @@ Q_SIGNALS:
     void statusTextChanged();
     void htmlChanged();
     void pressGrabTimeChanged();
+    void flickingEnabledChanged();
     void newWindowComponentChanged();
     void newWindowParentChanged();
     void renderingEnabledChanged();
@@ -251,6 +261,7 @@ private Q_SLOTS:
     void initialLayout();
 
     void updateDeclarativeWebViewSize();
+    void updateFlickingEnabled();
 
     virtual void geometryChanged(const QRectF &newGeometry,
                                  const QRectF &oldGeometry);
