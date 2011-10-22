@@ -19,11 +19,9 @@
 
 #include "previewcontainer.h"
 #include "previewengine.h"
-#include "kwebthumbnailer.h"
 
 #include <KDebug>
 #include <KIcon>
-#include <KImageCache>
 
 
 PreviewContainer::PreviewContainer(const QString &name,
@@ -34,21 +32,7 @@ PreviewContainer::PreviewContainer(const QString &name,
 {
     setObjectName(name);
     m_previewSize = QSize(180, 120);
-    m_previewEngine = static_cast<PreviewEngine *>(parent);
 
-    // Check if the image is in the cache, if so return it
-    QImage preview = QImage(m_previewSize, QImage::Format_ARGB32_Premultiplied);
-    /*
-    if (m_previewEngine->imageCache()->findImage(name, &preview)) {
-        // cache hit
-        setData("status", "done");
-        setData("url", m_url);
-        setData("thumbnail", preview);
-        checkForUpdate();
-        return;
-    }
-    */
-    // Set fallbackimage while loading
     m_fallbackImage = KIcon("image-loading").pixmap(QSize(64, 64)).toImage();
     m_fallbackImage = m_fallbackImage.copy(QRect(QPoint(-120,0), m_previewSize));
     setData("status", "loading");
@@ -82,51 +66,27 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
         KIO::Scheduler::publishSlaveOnHold();
     }
 
-    if (false) {
-        m_webThumbnailer = new KWebThumbnailer(m_url, m_previewSize, m_url.toString(), this);
+    // KIO::PreviewJob: http://api.kde.org/4.x-api/kdelibs-apidocs/kio/html/classKIO_1_1PreviewJob.html
+    kDebug() << "previewengine: starting previewjob for: " << m_url;
+    KFileItem kfile = KFileItem(m_url, mimetype, KFileItem::Unknown);
+    KFileItemList list;
+    list << kfile;
 
-        connect(m_webThumbnailer, SIGNAL(done(bool)), SLOT(webThumbnailerDone(bool)));
+    // Enable all plugins but the html thumbnailer, this ones covered by
+    // the new web creator which also supports remote URLs
+    QStringList _en = KIO::PreviewJob::availablePlugins();
+    _en.removeAll("htmlthumbnail");
+    QStringList *enabledPlugins = new QStringList(_en);
+    m_job = new KIO::PreviewJob(list, m_previewSize, enabledPlugins);
 
-        m_webThumbnailer->start();
-    } else {
-        // KIO::PreviewJob: http://api.kde.org/4.x-api/kdelibs-apidocs/kio/html/classKIO_1_1PreviewJob.html
-        kDebug() << "WEBCREATOR: starting previewjob for: " << m_url;
-        KFileItem kfile = KFileItem(m_url, mimetype, KFileItem::Unknown);
-        KFileItemList list;
-        list << kfile;
+    connect(m_job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
+            SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
+    connect(m_job, SIGNAL(failed(const KFileItem&)),
+            SLOT(previewJobFailed(const KFileItem&)));
+    connect(m_job, SIGNAL(result(KJob*)), SLOT(previewResult(KJob*)));
 
-        // Enable all plugins but the html thumbnailer, this ones covered by
-        // the new web creator which also supports remote URLs
-        QStringList _en = KIO::PreviewJob::availablePlugins();
-        _en.removeAll("htmlthumbnail");
-        QStringList *enabledPlugins = new QStringList(_en);
-        m_job = new KIO::PreviewJob(list, m_previewSize, enabledPlugins);
-
-        connect(m_job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-                SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
-        connect(m_job, SIGNAL(failed(const KFileItem&)),
-                SLOT(previewJobFailed(const KFileItem&)));
-        connect(m_job, SIGNAL(result(KJob*)), SLOT(previewResult(KJob*)));
-
-        m_job->start();
-    }
+    m_job->start();
 }
-
-void PreviewContainer::webThumbnailerDone(bool success)
-{
-    if (!success) {
-        setData("status", "failed");
-        checkForUpdate();
-        return;
-    }
-
-    setData("status", m_webThumbnailer->status());
-    setData("url", m_url);
-    setData("thumbnail", m_webThumbnailer->thumbnail());
-    m_previewEngine->imageCache()->insertImage(objectName(), m_webThumbnailer->thumbnail());
-    checkForUpdate();
-}
-
 
 void PreviewContainer::previewJobFailed(const KFileItem &item)
 {
@@ -149,7 +109,6 @@ void PreviewContainer::previewUpdated(const KFileItem &item, const QPixmap &prev
     setData("status", "done");
     setData("url", m_url);
     setData("thumbnail", preview.toImage());
-    m_previewEngine->imageCache()->insertImage(objectName(), preview.toImage());
     checkForUpdate();
 }
 
