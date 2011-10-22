@@ -82,7 +82,6 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
         KIO::Scheduler::publishSlaveOnHold();
     }
 
-//    if (mimetype == "text/html") {
     if (false) {
         m_webThumbnailer = new KWebThumbnailer(m_url, m_previewSize, m_url.toString(), this);
 
@@ -95,10 +94,12 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
         KFileItem kfile = KFileItem(m_url, mimetype, KFileItem::Unknown);
         KFileItemList list;
         list << kfile;
+
+        // Enable all plugins but the html thumbnailer, this ones covered by
+        // the new web creator which also supports remote URLs
         QStringList _en = KIO::PreviewJob::availablePlugins();
         _en.removeAll("htmlthumbnail");
         QStringList *enabledPlugins = new QStringList(_en);
-        kDebug() << "======== enabled plugins: " << &enabledPlugins;
         m_job = new KIO::PreviewJob(list, m_previewSize, enabledPlugins);
 
         connect(m_job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
