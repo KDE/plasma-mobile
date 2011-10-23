@@ -87,28 +87,39 @@ QList<QObject*> CompletionModel::items()
     return l;
 }
 
-QList<QObject*> CompletionModel::filteredItems()
+QList<QObject*> CompletionModel::filteredBookmarks()
 {
-    QList<QObject*> l;
-    l.append(d->history->items());
-    l.append(d->items);
+    return filteredItems(d->items);
+}
+
+QList<QObject*> CompletionModel::filteredHistory()
+{
+    return filteredItems(d->history->items());
+}
+
+QList<QObject*> CompletionModel::filteredItems(const QList<QObject*> &l)
+{
+    //QList<QObject*> l;
+    //l.append(d->history->items());
+    //l.append(d->items);
     if (d->filter.isEmpty()) {
         return l;
     }
     d->filteredItems.clear();
+    QList<QObject*> filteredItems;
     foreach(QObject* it, l) {
         CompletionItem* ci = qobject_cast<CompletionItem*>(it);
         if (ci) {
             // Matching, pretty basic right now
             if (ci->name().contains(d->filter, Qt::CaseInsensitive)) {
-                d->filteredItems.append(ci);
+                filteredItems.append(ci);
             } else if (ci->url().contains(d->filter, Qt::CaseInsensitive)) {
-                d->filteredItems.append(ci);
+                filteredItems.append(ci);
             }
         }
     }
 
-    return d->filteredItems;
+    return filteredItems;
 }
 
 void CompletionModel::setFilter(const QString &filter)

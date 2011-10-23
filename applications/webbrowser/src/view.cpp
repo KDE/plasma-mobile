@@ -66,9 +66,13 @@ View::View(const QString &url, QWidget *parent)
     // Filter the supplied argument through KUriFilter and then
     // make the resulting url known to the webbrowser component
     // as startupArguments property
+    if (url.isEmpty()) {
+        m_completionModel->populate();
+    }
     QVariant a = QVariant(QStringList(filterUrl(url)));
     rootContext()->setContextProperty("startupArguments", a);
-    rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(m_completionModel->items()));
+    rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(m_completionModel->filteredBookmarks()));
+    rootContext()->setContextProperty("historyModel", QVariant::fromValue(m_completionModel->filteredHistory()));
 
     // Locate the webbrowser QML component in the package
     // Note that this is a bit brittle, since it relies on the package name,
@@ -122,7 +126,8 @@ void View::setBookmarks()
     QDeclarativeItem* popup = rootObject()->findChild<QDeclarativeItem*>("completionPopup");
     if (popup) {
         //QList<QObject*> items = ;
-        rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(m_completionModel->filteredItems()));
+        rootContext()->setContextProperty("bookmarksModel", QVariant::fromValue(m_completionModel->filteredBookmarks()));
+        rootContext()->setContextProperty("historyModel", QVariant::fromValue(m_completionModel->filteredHistory()));
     }
 }
 
@@ -174,7 +179,7 @@ void View::urlChanged()
 void View::urlFilterChanged()
 {
     QString newFilter = m_urlInput->property("urlFilter").toString();
-    //kDebug() << "Filtering completion" << newFilter;
+    kDebug() << "Filtering completion" << newFilter;
     m_completionModel->populate();
     m_completionModel->setFilter(newFilter);
 }
