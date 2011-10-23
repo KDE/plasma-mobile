@@ -30,7 +30,7 @@
 
 static const char description[] = I18N_NOOP("Web browser for Plasma Active");
 
-static const char version[] = "0.2";
+static const char version[] = "1.9";
 static const char HOME_URL[] = "http://community.kde.org/Plasma/Active";
 
 int main(int argc, char **argv)
