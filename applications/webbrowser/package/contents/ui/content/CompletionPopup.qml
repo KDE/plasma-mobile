@@ -52,7 +52,7 @@ Item {
                 id: delegateContainer
                 height: 64
                 //width: ((parent.width / 2) - parent.rightMargin * 2)
-                //width: 380
+                width: 380
                 anchors.topMargin: 8
 
                 QIconItem {
