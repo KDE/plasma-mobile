@@ -43,6 +43,7 @@
 #include <qwebsettings.h>
 
 #include <KUrl>
+#include <KGlobalSettings>
 #include <KIO/Job>
 #include <KIO/CopyJob>
 #include <KIO/AccessManager>
@@ -317,6 +318,7 @@ void KDeclarativeWebView::init()
     d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
     KWebPage* kwp = qobject_cast<KWebPage*>(wp);
+
     if (kwp) {
         WId wid = KWindowSystem::activeWindow();
         d->wallet = new KWebWallet(this, wid);
@@ -328,6 +330,8 @@ void KDeclarativeWebView::init()
     }
 
     wp->setForwardUnsupportedContent(true);
+
+    setFonts();
     setPage(wp);
 #ifndef NO_KIO
     KIO::AccessManager *access = new NetworkAccessManager(page());
@@ -340,6 +344,23 @@ void KDeclarativeWebView::init()
 
     connect(access, SIGNAL(finished(QNetworkReply*)), page(), SLOT(handleNetworkErrors(QNetworkReply*)));
 
+}
+
+void KDeclarativeWebView::setFonts()
+{
+    kDebug() << "Setting up fonts: " << KGlobalSettings::generalFont().family() << KGlobalSettings::generalFont().pointSize();
+    settings()->setFontFamily(QWebSettings::StandardFont,  KGlobalSettings::generalFont().family());
+    settings()->setFontFamily(QWebSettings::SerifFont,  KGlobalSettings::generalFont().family());
+    settings()->setFontFamily(QWebSettings::FixedFont,  KGlobalSettings::generalFont().family());
+    settings()->setFontFamily(QWebSettings::CursiveFont,  KGlobalSettings::generalFont().family());
+    settings()->setFontFamily(QWebSettings::SansSerifFont,  KGlobalSettings::generalFont().family());
+    settings()->setFontFamily(QWebSettings::FantasyFont,  KGlobalSettings::generalFont().family());
+
+    settings()->setFontSize(QWebSettings::DefaultFontSize,  KGlobalSettings::generalFont().pointSize());
+    //settings()->setFontSize(QWebSettings::FontSize, KGlobalSettings::generalFont().pointSize());
+    settings()->setFontSize(QWebSettings::DefaultFixedFontSize,  KGlobalSettings::fixedFont().pointSize());
+    settings()->setFontSize(QWebSettings::MinimumFontSize,  KGlobalSettings::smallestReadableFont().pointSize());
+    settings()->setFontSize(QWebSettings::MinimumLogicalFontSize,  KGlobalSettings::smallestReadableFont().pointSize());
 }
 
 void KDeclarativeWebView::componentComplete()
