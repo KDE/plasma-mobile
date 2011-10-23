@@ -44,6 +44,7 @@ Item {
     property string filteredUrl: ""
     property alias image: bg.source
     property alias url: urlText.text
+    //property alias completionPopup: webBrowser.completionPopup
     property string urlFilter
 
     signal urlEntered(string url)
@@ -119,11 +120,31 @@ Item {
 
     CompletionPopup {
         id: completionPopup
-        height: 200
-        state: "collapsed"
-        anchors.top: urlText.bottom
-        anchors.left: urlText.left
-        anchors.right: urlText.right
+        property double relativeSize: 1.1
+        property int overlap: 40
+        /*
+        width: (webBrowser.width * relativeSize)
+        height: (webBrowser.height * relativeSize)
+        x: (-webBrowser.x + (webBrowser.width * (1.0-relativeSize) / 2))
+        y: (-webBrowser.y + (webBrowser.height * (1.0-relativeSize) / 2))
+        */
+        x: -overlap
+        y: 60
+        width: urlText.width + overlap * 2
+        height: webBrowser.height * 0.666
+        state: "expanded"
+        //anchors.centerIn: parent.parent.parent
+        //anchors.top: urlText.bottom
+        //anchors.left: urlText.left
+        //anchors.right: urlText.right
+
+        Component.onCompleted: {
+            print( " size :   " + relativeSize);
+            print("   width:  " +( webBrowser.width * relativeSize));
+            print("   height: " + (webBrowser.height * relativeSize));
+            print("   x:    : " + -webBrowser.x + (webBrowser.width * (1.0-relativeSize) / 2));
+            print("   y:    : " + -webBrowser.y + (webBrowser.height * (1.0-relativeSize) / 2));
+        }
     }
 
     QIconItem {
