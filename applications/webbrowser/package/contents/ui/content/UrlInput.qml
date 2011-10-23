@@ -187,9 +187,9 @@ Item {
             completionPopup.state = "expanded"
             container.urlChanged();
             print("111 Should load history...");
-            urlFilter = " ";
+            urlFilter = "";
 
-            urlText.text = " ";
+            urlText.text = "";
             urlFilterChanged();
             print("Should load history...");
         }
