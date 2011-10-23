@@ -44,9 +44,12 @@ Item {
         Component {
             id: myDelegate
             Item {
-                height: 48
+                id: delegateContainer
+                height: 64
+                width: (parent.width - parent.rightMargin * 2)
                 //anchors.fill: parent
-                anchors.margins: 20
+                //anchors.margins: 20
+                anchors.topMargin: 8
 
                 QIconItem {
                     id: previewImage
@@ -60,21 +63,28 @@ Item {
                     anchors.rightMargin: 8
                     //image: preview
                 }
-
-                Text {
-                    height: 32
-                    id: labelText
-                    text: "<strong>" + name + "</strong> <br />" + url
-                    color: theme.textColor
+                Column {
                     anchors.left: previewImage.right
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    MouseArea {
-                        anchors.fill: labelText
-                        onClicked: {
-                            print("URL from completer chosen: " + name + " " + url);
-                            urlEntered(url);
-                        }
+                    Text {
+                        height: 20
+                        id: labelText
+                        text: "<strong>" + name + "</strong>"
+                        elide: Text.ElideMiddle
+                        color: theme.textColor
+                        //anchors.left: previewImage.right
+                        //anchors.top: parent.top
+                        //anchors.bottom: parent.bottom
+                    }
+
+                    Text {
+                        height: 20
+                        id: descriptionText
+                        text: url
+                        elide: Text.ElideMiddle
+                        color: theme.textColor
+                        //anchors.left: previewImage.right
+                        //anchors.top: labelText.bottom
+                        //anchors.bottom: parent.bottom
                     }
                 }
 
@@ -89,11 +99,27 @@ Item {
                     anchors.right: parent.right
                     image: preview
                 }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        print("URL from completer chosen: " + name + " " + url);
+                        urlEntered(url);
+                    }
+                }
 
             }
         }
 
-        ListView {
+        Component {
+            id: listHighlight
+            PlasmaCore.FrameSvgItem {
+                id: highlightFrame
+                imagePath: "widgets/viewitem"
+                prefix: "selected+hover"
+            }
+        }
+
+        Row {
             anchors {
                 fill: parent
                 leftMargin: frame.margins.left
@@ -102,11 +128,30 @@ Item {
                 bottomMargin: frame.margins.bottom
             }
             y: 16
-            spacing: 4
-            clip: true
-            model: bookmarksModel
-            delegate: myDelegate
-            highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
+
+            ListView {
+                spacing: 16
+                clip: true
+                width: (parent.width / 2)
+                //orientation: ListView.Vertical
+
+                //anchors.fill: parent
+                height: parent.height
+                model: historyModel
+                delegate: myDelegate
+                highlight: listHighlight
+                //highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
+            }
+
+            ListView {
+                spacing: 4
+                clip: true
+                width: (parent.width / 2)
+                height: parent.height
+                model: bookmarksModel
+                delegate: myDelegate
+                highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
+            }
         }
     }
 
@@ -116,7 +161,8 @@ Item {
             name: "expanded";
             PropertyChanges {
                 target: mainItem
-                opacity: 1
+                opacity: 1.0
+                scale: 1.0
             }
         },
 
@@ -126,17 +172,28 @@ Item {
             PropertyChanges {
                 target: mainItem
                 opacity: 0
+                scale: 0.8
             }
         }
     ]
 
     transitions: [
         Transition {
-            PropertyAnimation {
-                properties: "opacity"
-                duration: 400;
-                easing.type: Easing.InOutElastic;
-                easing.amplitude: 2.0; easing.period: 1.5
+            ParallelAnimation {
+                PropertyAnimation {
+                    properties: "opacity"
+                    duration: 400;
+                    easing.type: Easing.InOutElastic;
+                    easing.amplitude: 2.0; easing.period: 1.5
+                }
+                PropertyAnimation {
+                    properties: "scale"
+                    duration: 250;
+                    //from: 0.8
+                    //to: 1.0
+                    easing.type: Easing.InOutElastic;
+                    easing.amplitude: 2.0; easing.period: 1.5
+                }
             }
         }
     ]

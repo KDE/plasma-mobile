@@ -148,7 +148,7 @@ Rectangle {
         if (typeof startupArguments[0] != "undefined") {
             urlString = startupArguments[0];
         } else {
-            urlString = "http://plasma.kde.org";
+            //urlString = "http://plasma.kde.org";
         }
     }
 }

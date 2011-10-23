@@ -116,35 +116,21 @@ Item {
             leftMargin: 8
             rightMargin: 8
         }
+
+        Component.onCompleted: {
+            focus = true;
+        }
     }
 
     CompletionPopup {
         id: completionPopup
+        state: "collapsed"
         property double relativeSize: 1.1
         property int overlap: 40
-        /*
-        width: (webBrowser.width * relativeSize)
-        height: (webBrowser.height * relativeSize)
-        x: (-webBrowser.x + (webBrowser.width * (1.0-relativeSize) / 2))
-        y: (-webBrowser.y + (webBrowser.height * (1.0-relativeSize) / 2))
-        */
         x: -overlap
         y: 60
         width: urlText.width + overlap * 2
         height: webBrowser.height * 0.666
-        state: "expanded"
-        //anchors.centerIn: parent.parent.parent
-        //anchors.top: urlText.bottom
-        //anchors.left: urlText.left
-        //anchors.right: urlText.right
-
-        Component.onCompleted: {
-            print( " size :   " + relativeSize);
-            print("   width:  " +( webBrowser.width * relativeSize));
-            print("   height: " + (webBrowser.height * relativeSize));
-            print("   x:    : " + -webBrowser.x + (webBrowser.width * (1.0-relativeSize) / 2));
-            print("   y:    : " + -webBrowser.y + (webBrowser.height * (1.0-relativeSize) / 2));
-        }
     }
 
     QIconItem {
@@ -193,6 +179,20 @@ Item {
     onFilteredUrlChanged: {
         // the entered URL has been filtered by KUriFilter, load the result
         loadUrl(filteredUrl);
+    }
+
+    Component.onCompleted: {
+        print(" EXPAND " + urlText.text);
+        if (urlText.text == "") {
+            completionPopup.state = "expanded"
+            container.urlChanged();
+            print("111 Should load history...");
+            urlFilter = " ";
+
+            urlText.text = " ";
+            urlFilterChanged();
+            print("Should load history...");
+        }
     }
 
 }
