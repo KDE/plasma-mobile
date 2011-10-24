@@ -396,21 +396,17 @@ Rectangle {
                                     if (model["resourceType"] == "_PlasmaWidgets") {
                                         main.addAction.trigger()
                                         main.destroy()
+
                                     } else if (model["resourceType"] == "_Apps") {
                                         //BUG in MeeGo's Qt: have to assign an empty model before the actual one
                                         resultsGrid.model = emptyModel
                                         resultsGrid.model = appsModel
 
                                         resultsContainer.contentY = 0
+
                                     } else {
-                                        if (model["resourceType"] == "nfo:Bookmark") {
-                                            metadataModel.sortBy = ["nie:url"]
-                                        } else if (model["resourceType"] == "nco:Contact") {
-                                            metadataModel.sortBy = ["nco:fullname"]
-                                        } else {
-                                            metadataModel.sortBy = ["nfo:fileName"]
-                                        }
                                         metadataModel.resourceType = model["resourceType"]
+                                        metadataModel.sortBy = [userTypes.sortFields[model["resourceType"]]]
                                         resultsGrid.model = metadataModel
 
                                         resultsContainer.contentY = 0

@@ -32,6 +32,7 @@ class MetadataUserTypes : public QObject
     Q_OBJECT
     Q_PROPERTY(QVariantList userTypes READ userTypes CONSTANT)
     Q_PROPERTY(QObject *typeNames READ typeNames CONSTANT)
+    Q_PROPERTY(QObject *sortFields READ sortFields CONSTANT)
 
 public:
 
@@ -41,9 +42,11 @@ public:
 
     QVariantList userTypes() const;
     QObject *typeNames() const;
+    QObject *sortFields() const;
 
 private:
     QDeclarativePropertyMap *m_typeNames;
+    QDeclarativePropertyMap *m_typeSortFields;
     QVariantList m_userTypes;
 };
 
