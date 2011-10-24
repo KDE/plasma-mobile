@@ -69,6 +69,7 @@ public:
         Symbols,
         ResourceUri,
         ResourceType,
+        MimeType,
         Url,
         Topics,
         TopicsNames,
@@ -96,6 +97,12 @@ public:
     Qt::SortOrder sortOrder() const;
 
     Plasma::Service *service();
+
+    /**
+     * searches for a resource in the whole model
+     * @arg resToFind the uri or url of the resource
+     */
+    Q_INVOKABLE int find(const QString &resToFind);
 
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;

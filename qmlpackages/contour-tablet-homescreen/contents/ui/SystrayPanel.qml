@@ -100,14 +100,14 @@ Item {
                 }
                 height: parent.height - (itemColumn.spacing * 3) - systrayContainer.height - windowListContainer.height - 2
                 Image {
-                    source: homeScreenPackage.filePath("images", "shadow-top.png")
-                    fillMode: Image.TileHorizontally
+                    source: homeScreenPackage.filePath("images", "shadow-bottom.png")
+                    fillMode: Image.StretchHorizontally
                     height: sourceSize.height
                     anchors {
                         left: parent.left
                         right: parent.right
                         bottom: parent.bottom
-                        bottomMargin: 8
+                        bottomMargin: -1
                     }
                 }
             }

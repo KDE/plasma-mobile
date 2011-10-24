@@ -76,6 +76,7 @@ MetadataModel::MetadataModel(QObject *parent)
     roleNames[Symbols] = "symbols";
     roleNames[ResourceUri] = "resourceUri";
     roleNames[ResourceType] = "resourceType";
+    roleNames[MimeType] = "mimeType";
     roleNames[Url] = "url";
     roleNames[Topics] = "topics";
     roleNames[TopicsNames] = "topicsNames";
@@ -163,6 +164,23 @@ Plasma::Service *MetadataModel::service()
         m_service = new MetadataService(this);
     }
     return m_service;
+}
+
+int MetadataModel::find(const QString &resourceUri)
+{
+    int index = -1;
+    int i = 0;
+    Nepomuk::Resource resToFind(resourceUri);
+
+    foreach (const Nepomuk::Resource &res, m_resources) {
+        if (res == resToFind) {
+            index = i;
+            break;
+        }
+        ++i;
+    }
+
+    return index;
 }
 
 
@@ -410,6 +428,8 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         return resource.resourceUri();
     case ResourceType:
         return resource.resourceType();
+    case MimeType:
+        return resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#mimeType")).toString();
     case Url: {
         if (resource.isFile() && resource.toFile().url().isLocalFile()) {
             return resource.toFile().url().prettyUrl();
