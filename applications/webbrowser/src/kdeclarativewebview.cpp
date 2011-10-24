@@ -112,6 +112,7 @@ GraphicsWebView::GraphicsWebView(KDeclarativeWebView* parent)
     : QGraphicsWebView(parent)
     , parent(parent)
     , pressTime(400)
+    , flicking(true)
 {
 }
 
@@ -130,6 +131,10 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
     QWebHitTestResult hit = page()->mainFrame()->hitTestContent(pressPoint.toPoint());
     if (hit.isContentEditable())
         parent->forceActiveFocus();
+
+    // Comboboxes and flicking don't go together well,
+    // disable flicking as long as the combo box is open
+    setFlickingEnabled(hit.element().tagName() != "SELECT");
     setFocus();
 }
 
@@ -175,6 +180,19 @@ bool GraphicsWebView::sceneEvent(QEvent *event)
         parent->setKeepMouseGrab(false);
     }
     return rv;
+}
+
+bool GraphicsWebView::flickingEnabled() const
+{
+    return flicking;
+}
+
+void GraphicsWebView::setFlickingEnabled(bool enabled)
+{
+    if (flicking != enabled) {
+        flicking = enabled;
+        emit flickingEnabledChanged();
+    }
 }
 
 /*!
@@ -316,6 +334,7 @@ void KDeclarativeWebView::init()
     wp->setNetworkAccessManager(access);
 #endif
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
+    connect(d->view, SIGNAL(flickingEnabledChanged()), this, SLOT(updateFlickingEnabled()));
     connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
 
@@ -672,6 +691,22 @@ void KDeclarativeWebView::setPressGrabTime(int millis)
         return;
     d->view->pressTime = millis;
     emit pressGrabTimeChanged();
+}
+
+bool KDeclarativeWebView::flickingEnabled() const
+{
+    return d->view->flickingEnabled();
+}
+
+void KDeclarativeWebView::setFlickingEnabled(bool enabled)
+{
+    d->view->setFlickingEnabled(enabled);
+    emit flickingEnabledChanged();
+}
+
+void KDeclarativeWebView::updateFlickingEnabled()
+{
+    setFlickingEnabled(d->view->flickingEnabled());
 }
 
 #ifndef QT_NO_ACTION
@@ -1073,6 +1108,7 @@ QDeclarativeWebPage::~QDeclarativeWebPage()
 QString QDeclarativeWebPage::chooseFile(QWebFrame* originatingFrame, const QString& oldFile)
 {
     // Not supported (it's modal)
+    // FIXME: implement filechooser
     Q_UNUSED(originatingFrame)
     Q_UNUSED(oldFile)
     return oldFile;
@@ -1088,13 +1124,14 @@ QString QDeclarativeWebPage::chooseFile(QWebFrame* originatingFrame, const QStri
 
 void QDeclarativeWebPage::javaScriptAlert(QWebFrame* originatingFrame, const QString& msg)
 {
+    // FIXME: implement alert
     Q_UNUSED(originatingFrame)
     emit viewItem()->alert(msg);
 }
 
 bool QDeclarativeWebPage::javaScriptConfirm(QWebFrame* originatingFrame, const QString& msg)
 {
-    // Not supported (it's modal)
+    // FIXME: Not supported (it's modal)
     Q_UNUSED(originatingFrame)
     Q_UNUSED(msg)
     return false;
@@ -1102,7 +1139,7 @@ bool QDeclarativeWebPage::javaScriptConfirm(QWebFrame* originatingFrame, const Q
 
 bool QDeclarativeWebPage::javaScriptPrompt(QWebFrame* originatingFrame, const QString& msg, const QString& defaultValue, QString* result)
 {
-    // Not supported (it's modal)
+    // FIXME: Not supported (it's modal)
     Q_UNUSED(originatingFrame)
     Q_UNUSED(msg)
     Q_UNUSED(defaultValue)
@@ -1143,11 +1180,11 @@ void QDeclarativeWebPage::handleUnsupportedContent(QNetworkReply *reply)
 bool QDeclarativeWebPage::downloadResource (const KUrl& srcUrl, const QString& suggestedName,
                               QWidget* parent, const KIO::MetaData& metaData)
 {
-    
+
     const QString fileName ((suggestedName.isEmpty() ? srcUrl.fileName() : suggestedName));
     const KUrl &destUrl(QString("file://%1/%2").arg(QDir::homePath()).arg(fileName));
 
-   
+
     if (!destUrl.isValid()) {
         return false;
     }

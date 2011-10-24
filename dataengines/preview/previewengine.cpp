@@ -18,12 +18,8 @@
     02110-1301, USA.
 */
 
-//#include <KFileMetaInfo>
-//#include <KIcon>
-
 #include <KIO/PreviewJob>
 #include <KIcon>
-#include <KImageCache>
 #include <KFileItem>
 #include <KGlobal>
 #include <KStandardDirs>
@@ -32,7 +28,6 @@
 #include <QWidget>
 
 #include "previewengine.h"
-#include "kwebthumbnailer.h"
 #include "previewcontainer.h"
 
 using namespace KIO;
@@ -51,18 +46,11 @@ PreviewEngine::PreviewEngine(QObject* parent, const QVariantList& args)
 
 void PreviewEngine::init()
 {
-    m_imageCache = new KImageCache("plasma_engine_preview", 1048576); // 10 MByte
-
     setData("fallback", "fallbackImage", KIcon("image-loading").pixmap(QSize(180, 120)).toImage());
 }
 
 PreviewEngine::~PreviewEngine()
 {
-}
-
-KImageCache* PreviewEngine::imageCache() const
-{
-    return m_imageCache;
 }
 
 bool PreviewEngine::sourceRequestEvent(const QString &name)
@@ -73,13 +61,6 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
         kWarning() << "Not a URL:" << name;
         return false;
     }
-
-    /*QImage preview = QImage(d->previewSize, QImage::Format_ARGB32_Premultiplied);
-    if (d->cache->findImage(name, &preview)) {
-        // cache hit
-        setPreview(name, preview);
-        return true;
-    }*/
 
     PreviewContainer *container = qobject_cast<PreviewContainer *>(containerForSource(name));
 

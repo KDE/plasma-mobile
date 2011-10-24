@@ -28,7 +28,6 @@
 #include "kio/previewjob.h"
 #include <KFileItem>
 
-class KWebThumbnailer;
 class PreviewEngine;
 
 class PreviewContainer : public Plasma::DataContainer
@@ -41,7 +40,6 @@ public:
 
 private Q_SLOTS:
     void mimetypeRetrieved(KIO::Job* job, const QString &mimetype);
-    void webThumbnailerDone(bool success);
     void previewUpdated(const KFileItem &item, const QPixmap &preview);
     void previewJobFailed(const KFileItem &item);
     void previewResult(KJob* job);
@@ -51,7 +49,6 @@ private:
     QImage m_fallbackImage;
     KIO::PreviewJob *m_job;
     KIO::MimetypeJob *m_mimeJob;
-    KWebThumbnailer *m_webThumbnailer;
     QUrl m_url;
     PreviewEngine *m_previewEngine;
 };

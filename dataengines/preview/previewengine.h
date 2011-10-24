@@ -30,10 +30,6 @@
 
 using namespace KIO;
 
-class KWebThumbnailer;
-
-class KImageCache;
-
 class PreviewEngine : public Plasma::DataEngine
 {
     Q_OBJECT
@@ -43,13 +39,8 @@ public:
     ~PreviewEngine();
     virtual void init();
 
-    KImageCache* imageCache() const;
-
 protected:
     bool sourceRequestEvent(const QString &name);
-
-private:
-    KImageCache* m_imageCache;
 };
 
 #endif

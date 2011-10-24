@@ -59,7 +59,7 @@ Flickable {
     width: parent.width
     contentWidth: Math.max(parent.width,webView.width)
     contentHeight: Math.max(parent.height,webView.height)
-    interactive: (webView.height > height) || (webView.height > height)
+    interactive: (webView.flickingEnabled && ((webView.height > height) || (webView.width > width)))
     anchors.top: headerSpace.bottom
     anchors.bottom: parent.top
     anchors.left: parent.left
@@ -160,14 +160,14 @@ Flickable {
             webBrowser.titleChanged();
         }
         onDoubleClick: {
-                        preferredWidth = flickable.width - 50;
-                        if (!heuristicZoom(clickX,clickY,2.0)) {
-                            var zf = flickable.width / contentsSize.width
-                            if (zf >= contentsScale)
-                                zf = 2.0*contentsScale // zoom in (else zooming out)
-                            doZoom(zf,clickX*zf,clickY*zf)
-                         }
-                       }
+            preferredWidth = flickable.width - 50;
+            if (!heuristicZoom(clickX,clickY,2.0)) {
+                var zf = flickable.width / contentsSize.width
+                if (zf >= contentsScale)
+                    zf = 2.0*contentsScale // zoom in (else zooming out)
+                doZoom(zf,clickX*zf,clickY*zf)
+            }
+        }
 
         SequentialAnimation {
             id: quickZoom
