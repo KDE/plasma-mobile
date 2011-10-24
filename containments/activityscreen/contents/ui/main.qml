@@ -34,8 +34,6 @@ Item {
     height: 540
 
 
-    property alias urls: metadataSource.connectedSources
-
     property Item currentGroup
     property int currentIndex: -1
 
@@ -77,13 +75,6 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        interval: 0
-        connectedSources: ["CurrentActivityResources:"+plasmoid.activityId]
-    }
-
     DataModels.MetadataCloudModel {
         id: categoryListModel
         cloudCategory: "rdf:type"
@@ -96,21 +87,6 @@ Item {
 
     DataModels.MetadataUserTypes {
         id: userTypes
-    }
-
-    PlasmaCore.DataModel {
-        id: metadataModel
-        keyRoleFilter: ".*"
-        dataSource: metadataSource
-    }
-
-    MobileComponents.CategorizedProxyModel {
-        //id: categoryListModel
-        sourceModel: metadataModel
-        categoryRole: "genericClassName"
-        onCategoriesChanged: {
-            categoriesTimer.restart()
-        }
     }
 
     MobileComponents.ResourceInstance {

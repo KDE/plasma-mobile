@@ -46,7 +46,7 @@ Item {
 
         model: DataModels.MetadataModel {
             activityId: plasmoid.activityId
-            resourceType: "nfo:"+itemGroup.category
+            resourceType: itemGroup.category
             sortBy: ["nfo:fileName"]
             sortOrder: Qt.AscendingOrder
         }
