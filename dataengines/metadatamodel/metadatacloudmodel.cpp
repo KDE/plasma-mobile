@@ -211,7 +211,7 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entri
         } else {
             continue;
         }
-kWarning()<<"AAAAAA"<<label;
+
         if (label.isEmpty() ||
             !(m_allowedCategories.isEmpty() || m_allowedCategories.contains(label))) {
             continue;

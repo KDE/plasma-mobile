@@ -49,7 +49,7 @@ QVariantList MetadataUserTypes::userTypes() const
     return m_userTypes;
 }
 
-QDeclarativePropertyMap *MetadataUserTypes::typeNames() const
+QObject *MetadataUserTypes::typeNames() const
 {
     return m_typeNames;
 }

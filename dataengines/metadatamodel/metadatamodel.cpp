@@ -264,8 +264,6 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 
 void MetadataModel::newEntriesDelayed()
 {
-    kWarning()<<m_resourcesToInsert.count();
-
     beginInsertRows(QModelIndex(), m_resources.count(), m_resources.count()+m_resourcesToInsert.count()-1);
 
 

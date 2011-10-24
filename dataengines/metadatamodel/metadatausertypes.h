@@ -31,7 +31,7 @@ class MetadataUserTypes : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QVariantList userTypes READ userTypes CONSTANT)
-    Q_PROPERTY(QDeclarativePropertyMap *typeNames READ typeNames CONSTANT)
+    Q_PROPERTY(QObject *typeNames READ typeNames CONSTANT)
 
 public:
 
@@ -40,7 +40,7 @@ public:
     ~MetadataUserTypes();
 
     QVariantList userTypes() const;
-    QDeclarativePropertyMap *typeNames() const;
+    QObject *typeNames() const;
 
 private:
     QDeclarativePropertyMap *m_typeNames;
