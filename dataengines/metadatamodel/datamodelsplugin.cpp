@@ -21,6 +21,8 @@
 
 #include <QtDeclarative/qdeclarative.h>
 
+#include <Plasma/Service>
+
 #include "metadatamodel.h"
 #include "metadatacloudmodel.h"
 #include "metadatausertypes.h"
@@ -32,6 +34,11 @@ void DataModelsPlugin::registerTypes(const char *uri)
     qmlRegisterType<MetadataModel>(uri, 0, 1, "MetadataModel");
     qmlRegisterType<MetadataCloudModel>(uri, 0, 1, "MetadataCloudModel");
     qmlRegisterType<MetadataUserTypes>(uri, 0, 1, "MetadataUserTypes");
+
+    qmlRegisterInterface<Plasma::Service>("Service");
+    qRegisterMetaType<Plasma::Service*>("Service");
+    qmlRegisterInterface<Plasma::ServiceJob>("ServiceJob");
+    qRegisterMetaType<Plasma::ServiceJob*>("ServiceJob");
 }
 
 

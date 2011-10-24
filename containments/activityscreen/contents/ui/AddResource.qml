@@ -95,12 +95,6 @@ Rectangle {
         allowedCategories: userTypes.userTypes
     }
 
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        interval: 0
-    }
-
     DataModels.MetadataModel {
         id: metadataModel
         sortBy: ["nfo:fileName"]
@@ -409,6 +403,13 @@ Rectangle {
 
                                         resultsContainer.contentY = 0
                                     } else {
+                                        if (model["resourceType"] == "nfo:Bookmark") {
+                                            metadataModel.sortBy = ["nie:url"]
+                                        } else if (model["resourceType"] == "nco:Contact") {
+                                            metadataModel.sortBy = ["nco:fullname"]
+                                        } else {
+                                            metadataModel.sortBy = ["nfo:fileName"]
+                                        }
                                         metadataModel.resourceType = model["resourceType"]
                                         resultsGrid.model = metadataModel
 
@@ -436,7 +437,8 @@ Rectangle {
 
                 text: i18n("Add items")
                 onClicked : {
-                    var service = metadataSource.serviceForSource(metadataSource.connectedSources[0])
+
+                    var service = metadataModel.service
                     var operation = service.operationDescription("connectToActivity")
                     operation["ActivityUrl"] = plasmoid.activityId
 

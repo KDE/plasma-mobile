@@ -18,6 +18,7 @@
 */
 
 #include "metadatamodel.h"
+#include "metadataservice/metadataservice.h"
 
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>
@@ -47,7 +48,8 @@
 
 MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
-      m_queryClient(0)
+      m_queryClient(0),
+      m_service(0)
 {
     m_queryTimer = new QTimer(this);
     m_queryTimer->setSingleShot(true);
@@ -154,6 +156,14 @@ Qt::SortOrder MetadataModel::sortOrder() const
     return m_sortOrder;
 }
 
+
+Plasma::Service *MetadataModel::service()
+{
+    if (!m_service) {
+        m_service = new MetadataService(this);
+    }
+    return m_service;
+}
 
 
 

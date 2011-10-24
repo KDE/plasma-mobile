@@ -19,22 +19,30 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "metadataservice.h"
-#include "metadatajob.h"
+#ifndef METADATASERVICE_H
+#define METADATASERVICE_H
 
-#include <KDE/Activities/Consumer>
 
-MetadataService::MetadataService(const QString &source)
-    : m_id(source)
-{
-    setName("metadataservice");
-    m_activityConsumer = new Activities::Consumer(this);
+#include <Plasma/Service>
+#include <Plasma/ServiceJob>
+
+using namespace Plasma;
+
+namespace Activities {
+    class Consumer;
 }
 
-ServiceJob *MetadataService::createJob(const QString &operation,
-                                           QMap<QString, QVariant> &parameters)
+class MetadataService : public Plasma::Service
 {
-    return new MetadataJob(m_activityConsumer, m_id, operation, parameters, this);
-}
+    Q_OBJECT
 
-#include "metadataservice.moc"
+public:
+    MetadataService(QObject *parent = 0);
+    ServiceJob *createJob(const QString &operation,
+                          QMap<QString, QVariant> &parameters);
+
+private:
+    Activities::Consumer *m_activityConsumer;
+};
+
+#endif // METADATASERVICE_H

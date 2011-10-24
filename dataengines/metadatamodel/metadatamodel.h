@@ -29,13 +29,19 @@
 #include <Nepomuk/Query/QueryServiceClient>
 #include <Nepomuk/Resource>
 
-
 namespace Nepomuk {
     class ResourceWatcher;
 }
 
+namespace Plasma {
+    class Service;
+}
+
+
 class QDBusServiceWatcher;
 class QTimer;
+
+class MetadataService;
 
 class MetadataModel : public AbstractMetadataModel
 {
@@ -44,6 +50,8 @@ class MetadataModel : public AbstractMetadataModel
 
     Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
+
+    Q_PROPERTY(Plasma::Service *service READ service CONSTANT)
 
 public:
     enum Roles {
@@ -87,6 +95,7 @@ public:
     void setSortOrder(Qt::SortOrder sortOrder);
     Qt::SortOrder sortOrder() const;
 
+    Plasma::Service *service();
 
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
@@ -112,6 +121,7 @@ private:
     QHash<QUrl, int> m_uriToResourceIndex;
     QTimer *m_queryTimer;
     QTimer *m_newEntriesTimer;
+    MetadataService *m_service;
 
     //pieces to build m_query
     QString m_queryString;

@@ -11,7 +11,7 @@
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details
+ *   GNU Library General Public License for more details
  *
  *   You should have received a copy of the GNU Library General Public
  *   License along with this program; if not, write to the
@@ -19,31 +19,22 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef METADATASERVICE_H
-#define METADATASERVICE_H
+#include "metadataservice.h"
+#include "metadatajob.h"
 
+#include <KDE/Activities/Consumer>
 
-#include <Plasma/Service>
-#include <Plasma/ServiceJob>
-
-using namespace Plasma;
-
-namespace Activities {
-    class Consumer;
+MetadataService::MetadataService(QObject *parent)
+    : Plasma::Service(parent)
+{
+    setName("metadataservice");
+    m_activityConsumer = new Activities::Consumer(this);
 }
 
-class MetadataService : public Plasma::Service
+ServiceJob *MetadataService::createJob(const QString &operation,
+                                        QMap<QString, QVariant> &parameters)
 {
-    Q_OBJECT
+    return new MetadataJob(m_activityConsumer, operation, parameters, this);
+}
 
-public:
-    MetadataService(const QString &source);
-    ServiceJob *createJob(const QString &operation,
-                          QMap<QString, QVariant> &parameters);
-
-private:
-    QString m_id;
-    Activities::Consumer *m_activityConsumer;
-};
-
-#endif // METADATASERVICE_H
+#include "metadataservice.moc"

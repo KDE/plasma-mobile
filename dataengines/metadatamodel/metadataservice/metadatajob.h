@@ -30,19 +30,17 @@ namespace Activities {
 
 class MetadataJob : public Plasma::ServiceJob
 {
+Q_OBJECT
 
-    Q_OBJECT
+public:
+    MetadataJob(Activities::Consumer *consumer, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent = 0);
+    ~MetadataJob();
 
-    public:
-        MetadataJob(Activities::Consumer *consumer, const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent = 0);
-        ~MetadataJob();
+protected:
+    void start();
 
-    protected:
-        void start();
-
-    private:
-        QString m_id;
-        Activities::Consumer *m_activityConsumer;
+private:
+    Activities::Consumer *m_activityConsumer;
 };
 
-#endif // METADATAOB_H
+#endif // METADATAJOB_H

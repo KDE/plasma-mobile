@@ -21,12 +21,24 @@ set(datamodels_SRCS
     metadatacloudmodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
+
+    metadataservice/metadatajob.cpp
+    metadataservice/metadataservice.cpp
    )
 
 soprano_add_ontology(
     datamodels_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/ontologies/kext.trig
     "KEXT" "Nepomuk::Vocabulary" "trig"
+)
+
+nepomuk_add_ontology_classes (datamodels_SRCS
+                              ONTOLOGIES
+                              ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nie.trig
+                              ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
+                              CLASSES
+                              "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark"
+                              "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#BookmarkFolder"
 )
 
 qt4_automoc(${datamodels_SRCS})
