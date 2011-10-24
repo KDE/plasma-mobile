@@ -20,6 +20,7 @@ set(datamodels_SRCS
     datamodelsplugin.cpp
     metadatacloudmodel.cpp
     metadatamodel.cpp
+    metadatausertypes.cpp
    )
 
 soprano_add_ontology(
