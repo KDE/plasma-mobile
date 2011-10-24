@@ -88,9 +88,14 @@ Item {
         id: categoryListModel
         cloudCategory: "rdf:type"
         activityId: plasmoid.activityId
+        allowedCategories: userTypes.userTypes
         onCategoriesChanged: {
             categoriesTimer.restart()
         }
+    }
+
+    DataModels.MetadataUserTypes {
+        id: userTypes
     }
 
     PlasmaCore.DataModel {

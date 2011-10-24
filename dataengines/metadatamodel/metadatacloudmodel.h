@@ -43,6 +43,7 @@ class MetadataCloudModel : public AbstractMetadataModel
 
     Q_PROPERTY(QString cloudCategory READ cloudCategory WRITE setCloudCategory NOTIFY cloudCategoryChanged)
     Q_PROPERTY(QVariantList categories READ categories NOTIFY categoriesChanged)
+    Q_PROPERTY(QVariantList allowedCategories READ allowedCategories WRITE setAllowedCategories NOTIFY allowedCategoriesChanged)
 
 public:
     enum Roles {
@@ -57,6 +58,9 @@ public:
 
     QVariantList categories() const;
 
+    void setAllowedCategories(const QVariantList &whitelist);
+    QVariantList allowedCategories() const;
+
     /**
      * rdf:type
      * nao:numericRating
@@ -70,6 +74,7 @@ public:
 Q_SIGNALS:
    void cloudCategoryChanged();
    void categoriesChanged();
+   void allowedCategoriesChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
@@ -81,6 +86,7 @@ private:
     QVector<QPair<QString, int> > m_results;
     QVariantList m_categories;
     QTimer *m_queryTimer;
+    QSet<QString> m_allowedCategories;
 
     //pieces to build m_query
     QString m_cloudCategory;

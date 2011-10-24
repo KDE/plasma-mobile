@@ -87,6 +87,24 @@ QVariantList MetadataCloudModel::categories() const
     return m_categories;
 }
 
+void MetadataCloudModel::setAllowedCategories(const QVariantList &whitelist)
+{
+    QSet<QString> set = variantToStringList(whitelist).toSet();
+
+    if (set == m_allowedCategories) {
+        return;
+    }
+
+    m_allowedCategories = set;
+    emit allowedCategoriesChanged();
+}
+
+QVariantList MetadataCloudModel::allowedCategories() const
+{
+    return stringToVariantList(m_allowedCategories.values());
+}
+
+
 void MetadataCloudModel::doQuery()
 {
     QString query = "select distinct ?label count(*) as ?count where { ";
@@ -193,8 +211,9 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entri
         } else {
             continue;
         }
-
-        if (label.isEmpty()) {
+kWarning()<<"AAAAAA"<<label;
+        if (label.isEmpty() ||
+            !(m_allowedCategories.isEmpty() || m_allowedCategories.contains(label))) {
             continue;
         }
         results << QPair<QString, int>(label, count);
