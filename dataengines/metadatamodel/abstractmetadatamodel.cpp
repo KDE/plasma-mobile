@@ -119,6 +119,22 @@ QString AbstractMetadataModel::resourceType() const
     return m_resourceType;
 }
 
+void AbstractMetadataModel::setMimeType(const QString &type)
+{
+    if (m_mimeType == type) {
+        return;
+    }
+
+    m_mimeType = type;
+    m_queryTimer->start(0);
+    emit mimeTypeChanged();
+}
+
+QString AbstractMetadataModel::mimeType() const
+{
+    return m_mimeType;
+}
+
 void AbstractMetadataModel::setActivityId(const QString &activityId)
 {
     if (m_activityId == activityId) {

@@ -39,6 +39,7 @@ class AbstractMetadataModel : public QAbstractItemModel
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
+    Q_PROPERTY(QString mimeType READ resourceType WRITE setMimeType NOTIFY mimeTypeChanged)
     Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
     Q_PROPERTY(QVariantList tags READ tags WRITE setTags NOTIFY tagsChanged)
     Q_PROPERTY(QDate startDate READ startDate WRITE setStartDate NOTIFY startDateChanged)
@@ -54,6 +55,9 @@ public:
 
     void setResourceType(const QString &type);
     QString resourceType() const;
+
+    void setMimeType(const QString &type);
+    QString mimeType() const;
 
     void setActivityId(const QString &activityId);
     QString activityId() const;
@@ -85,6 +89,7 @@ public:
 Q_SIGNALS:
     void countChanged();
     void resourceTypeChanged();
+    void mimeTypeChanged();
     void activityIdChanged();
     void tagsChanged();
     void startDateChanged();
@@ -175,6 +180,7 @@ private:
     QTimer *m_queryTimer;
 
     QString m_resourceType;
+    QString m_mimeType;
     QString m_activityId;
     QStringList m_tags;
     QDate m_startDate;

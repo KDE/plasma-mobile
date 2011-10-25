@@ -204,21 +204,30 @@ void MetadataModel::doQuery()
             type = type.remove(0, 1);
             negation = true;
         }
-        //FIXME: query by mimetype
-        if (type == "nfo:Video") {
-            // Strigi doesn't index videos it seems
-            rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("video")));
-        } else if (type == "OpenDocumentTextDocument") {
-            rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("vnd.oasis.opendocument.text")));
+
+        if (negation) {
+            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type))));
         } else {
-            if (negation) {
-                rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type))));
-            } else {
-                rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type)));
-            }
+            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type)));
         }
     }
 
+    if (!mimeType().isEmpty()) {
+        QString type = mimeType();
+        bool negation = false;
+        if (type.startsWith("!")) {
+            type = type.remove(0, 1);
+            negation = true;
+        }
+
+        Nepomuk::Query::ComparisonTerm term(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm(type));
+
+        if (negation) {
+            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
+        } else {
+            rootTerm.addSubTerm(term);
+        }
+    }
 
     if (!activityId().isEmpty()) {
         QString activity = activityId();

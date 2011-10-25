@@ -130,6 +130,20 @@ void MetadataCloudModel::doQuery()
         }
     }
 
+    if (!resourceType().isEmpty() && m_cloudCategory != "nie:mimeType") {
+        QString type = mimeType();
+        bool negation = false;
+        if (type.startsWith("!")) {
+            type = type.remove(0, 1);
+            negation = true;
+        }
+        if (negation) {
+            query += " . FILTER(!bif:exists((select (1) where { ?r nie:mimeType ?mimeType . FILTER(bif:contains(?mimeType, \"'" + type + "'\")) . }))) ";
+        } else {
+            query += " . ?r nie:mimeType ?mimeType . FILTER(bif:contains(?mimeType, \"'" + type + "'\")) ";
+        }
+    }
+
     if (!activityId().isEmpty() && m_cloudCategory != "kext:Activity") {
         QString activity = activityId();
         bool negation = false;
