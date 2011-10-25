@@ -30,6 +30,7 @@
 
 AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
     : QAbstractItemModel(parent),
+      m_status(Idle),
       m_minimumRating(0),
       m_maximumRating(0)
 {
@@ -177,6 +178,21 @@ QVariantList AbstractMetadataModel::tags() const
 QStringList AbstractMetadataModel::tagStrings() const
 {
     return m_tags;
+}
+
+AbstractMetadataModel::Status AbstractMetadataModel::status() const
+{
+    return m_status;
+}
+
+void AbstractMetadataModel::setStatus(AbstractMetadataModel::Status status)
+{
+    if (status == m_status) {
+        return;
+    }
+
+    m_status = status;
+    emit statusChanged();
 }
 
 void AbstractMetadataModel::setStartDate(const QDate &date)

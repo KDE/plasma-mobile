@@ -188,6 +188,7 @@ int MetadataModel::find(const QString &resourceUri)
 
 void MetadataModel::doQuery()
 {
+    setStatus(Waiting);
     m_query = Nepomuk::Query::Query();
     m_query.setQueryFlags(Nepomuk::Query::Query::WithoutFullTextExcerpt);
     Nepomuk::Query::AndTerm rootTerm;
@@ -326,6 +327,7 @@ void MetadataModel::doQuery()
             this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
     connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
             this, SLOT(entriesRemoved(const QList<QUrl> &)));
+    connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
 
     /*FIXME: safe without limit?
     if (limit > RESULT_LIMIT || limit <= 0) {
@@ -338,7 +340,7 @@ void MetadataModel::doQuery()
 
 void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
-
+    setStatus(Running);
     foreach (Nepomuk::Query::Result res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
@@ -405,6 +407,11 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
     }
 
     emit countChanged();
+}
+
+void MetadataModel::finishedListing()
+{
+    setStatus(Idle);
 }
 
 

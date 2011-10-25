@@ -118,6 +118,7 @@ protected Q_SLOTS:
     void entriesRemoved(const QList<QUrl> &urls);
     virtual void doQuery();
     void newEntriesDelayed();
+    void finishedListing();
 
 private:
     Nepomuk::Query::Query m_query;

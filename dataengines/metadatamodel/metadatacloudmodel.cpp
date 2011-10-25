@@ -107,6 +107,7 @@ QVariantList MetadataCloudModel::allowedCategories() const
 
 void MetadataCloudModel::doQuery()
 {
+    setStatus(Waiting);
     QString query = "select distinct ?label count(*) as ?count where { ";
 
     if (m_cloudCategory == "kext:Activity") {
@@ -248,12 +249,14 @@ void MetadataCloudModel::doQuery()
             this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
     connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
             this, SLOT(entriesRemoved(const QList<QUrl> &)));
+    connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
 
     m_queryClient->sparqlQuery(query);
 }
 
 void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
+    setStatus(Running);
     QVector<QPair<QString, int> > results;
     QVariantList categories;
 
@@ -320,6 +323,11 @@ void MetadataCloudModel::entriesRemoved(const QList<QUrl> &urls)
         }
     }
     emit countChanged();
+}
+
+void MetadataCloudModel::finishedListing()
+{
+    setStatus(Idle);
 }
 
 

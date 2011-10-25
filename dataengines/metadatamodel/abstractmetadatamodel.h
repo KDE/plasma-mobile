@@ -47,8 +47,19 @@ class AbstractMetadataModel : public QAbstractItemModel
     Q_PROPERTY(int minimumRating READ minimumRating WRITE setMinimumRating NOTIFY minimumRatingChanged)
     Q_PROPERTY(int maximumRating READ maximumRating WRITE setMaximumRating NOTIFY maximumRatingChanged)
     Q_PROPERTY(QObject *extraParameters READ extraParameters CONSTANT)
+    Q_PROPERTY(Status status READ status NOTIFY statusChanged)
+    Q_ENUMS(Status)
 
 public:
+    //Idle: the query client is doing nothing
+    //Waiting: the query client is waiting for the first result
+    //Running: some results came, listing not finished
+    enum Status {
+        Idle = 0,
+        Waiting,
+        Running
+    };
+
     AbstractMetadataModel(QObject *parent = 0);
     ~AbstractMetadataModel();
 
@@ -80,6 +91,8 @@ public:
 
     QObject *extraParameters() const;
 
+    Status status() const;
+
     //Reimplemented
     QVariant headerData(int section, Qt::Orientation orientation,
                         int role = Qt::DisplayRole) const;
@@ -99,6 +112,7 @@ Q_SIGNALS:
     void endDateChanged();
     void minimumRatingChanged();
     void maximumRatingChanged();
+    void statusChanged();
 
 protected Q_SLOTS:
     void serviceRegistered(const QString &service);
@@ -176,11 +190,13 @@ protected:
     }
 
     QStringList tagStrings() const;
+    void setStatus(Status status);
 
 private:
     QDBusServiceWatcher *m_queryServiceWatcher;
     QHash<QString, QString> m_icons;
     QTimer *m_queryTimer;
+    Status m_status;
 
     QString m_resourceType;
     QString m_mimeType;
