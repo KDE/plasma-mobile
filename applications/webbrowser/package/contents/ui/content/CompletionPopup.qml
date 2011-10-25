@@ -71,7 +71,7 @@ Item {
                     height: 20
                     width: 320
                     id: labelText
-                    text: "<strong>" + name + "</strong>"
+                    text: name
                     elide: Text.ElideMiddle
                     color: theme.textColor
                     anchors.left: previewImage.right
