@@ -68,29 +68,32 @@ Item {
                         height: 32
                         icon: QIcon(iconName)
                         anchors.verticalCenter: parent.verticalCenter
-                        //anchors.top: parent.top
-                        //anchors.bottom: parent.bottom
                         anchors.left: parent.left
                         anchors.rightMargin: 8
                         //image: preview
                     }
 
                     Text {
-                        height: 32
                         id: textItem
-                        text: "<strong>" + name + "</strong> <br />" + description
-                        //./applets/org.kde.active.connman/contents/ui/WifiExpandingBox.qml:474:
-                        //font.pixelSize: theme.fontPixelSizeNormal
+                        text: name
                         elide: Text.ElideRight
                         color: theme.textColor
-                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.bottom: parent.verticalCenter
                         anchors.left: iconItem.right
-                        //anchors.top: parent.top
-                        //anchors.bottom: parent.bottom
                         anchors.right: parent.right
-                        //anchors.leftMargin: 20
                     }
 
+                    Text {
+                        id: descriptionItem
+                        text: description
+                        opacity: 0.6
+                        elide: Text.ElideRight
+                        color: theme.textColor
+                        anchors.top: parent.verticalCenter
+                        anchors.left: iconItem.right
+                        anchors.right: parent.right
+                    }
+                    
                     MouseArea {
                         anchors.fill: delegateItem
                         onClicked: {
