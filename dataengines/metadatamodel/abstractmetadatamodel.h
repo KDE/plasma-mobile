@@ -24,7 +24,7 @@
 #include <QDate>
 #include <QStringList>
 #include <QUrl>
-
+#include <QDeclarativePropertyMap>
 
 
 namespace Nepomuk {
@@ -46,6 +46,7 @@ class AbstractMetadataModel : public QAbstractItemModel
     Q_PROPERTY(QDate endDate READ endDate WRITE setEndDate NOTIFY endDateChanged)
     Q_PROPERTY(int minimumRating READ minimumRating WRITE setMinimumRating NOTIFY minimumRatingChanged)
     Q_PROPERTY(int maximumRating READ maximumRating WRITE setMaximumRating NOTIFY maximumRatingChanged)
+    Q_PROPERTY(QObject *extraParameters READ extraParameters CONSTANT)
 
 public:
     AbstractMetadataModel(QObject *parent = 0);
@@ -76,6 +77,8 @@ public:
 
     void setMaximumRating(int rating);
     int maximumRating() const;
+
+    QObject *extraParameters() const;
 
     //Reimplemented
     QVariant headerData(int section, Qt::Orientation orientation,
@@ -187,6 +190,7 @@ private:
     QDate m_endDate;
     int m_minimumRating;
     int m_maximumRating;
+    QDeclarativePropertyMap *m_extraParameters;
 };
 
 #endif

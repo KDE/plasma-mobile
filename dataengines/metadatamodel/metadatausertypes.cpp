@@ -54,6 +54,7 @@ MetadataUserTypes::MetadataUserTypes(QObject *parent)
 MetadataUserTypes::~MetadataUserTypes()
 {
     delete m_typeNames;
+    delete m_typeSortFields;
 }
 
 QVariantList MetadataUserTypes::userTypes() const

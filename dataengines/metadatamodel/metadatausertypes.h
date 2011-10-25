@@ -35,8 +35,6 @@ class MetadataUserTypes : public QObject
     Q_PROPERTY(QObject *sortFields READ sortFields CONSTANT)
 
 public:
-
-
     MetadataUserTypes(QObject *parent = 0);
     ~MetadataUserTypes();
 

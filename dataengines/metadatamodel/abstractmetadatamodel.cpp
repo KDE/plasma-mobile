@@ -80,6 +80,9 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
                 this, SLOT(doQuery()));
     }
 
+    m_extraParameters = new QDeclarativePropertyMap;
+    connect (m_extraParameters, SIGNAL(valueChanged(QString, QVariant)), m_queryTimer, SLOT(start()));
+
     m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
                         QDBusConnection::sessionBus(),
                         QDBusServiceWatcher::WatchForRegistration,
@@ -89,6 +92,7 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
 
 AbstractMetadataModel::~AbstractMetadataModel()
 {
+    delete m_extraParameters;
 }
 
 
@@ -239,6 +243,10 @@ int AbstractMetadataModel::maximumRating() const
     return m_maximumRating;
 }
 
+QObject *AbstractMetadataModel::extraParameters() const
+{
+    return m_extraParameters;
+}
 
 
 

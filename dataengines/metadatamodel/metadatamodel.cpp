@@ -229,6 +229,27 @@ void MetadataModel::doQuery()
         }
     }
 
+    QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
+    if (parameters && parameters->size() > 0) {
+        foreach (const QString &key, parameters->keys()) {
+            QString parameter = parameters->value(key).toString();
+            bool negation = false;
+            if (parameter.startsWith("!")) {
+                parameter = parameter.remove(0, 1);
+                negation = true;
+            }
+
+            Nepomuk::Query::ComparisonTerm term(propertyUrl(key), Nepomuk::Query::LiteralTerm(parameter));
+
+            if (negation) {
+                rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
+            } else {
+                rootTerm.addSubTerm(term);
+            }
+        }
+    }
+
+
     if (!activityId().isEmpty()) {
         QString activity = activityId();
         bool negation = false;

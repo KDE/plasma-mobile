@@ -180,6 +180,10 @@ Item {
                 }
             }
             sortOrder: Qt.AscendingOrder
+
+            /*Component.onCompleted: {
+                metadataModel.extraParameters["nie:mimeType"] = "vnd.oasis.opendocument.text"
+            }*/
         }
 
         delegate: Column{

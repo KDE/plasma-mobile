@@ -144,6 +144,24 @@ void MetadataCloudModel::doQuery()
         }
     }
 
+    QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
+    if (parameters && parameters->size() > 0) {
+        foreach (const QString &key, parameters->keys()) {
+            QString parameter = parameters->value(key).toString();
+            bool negation = false;
+            if (parameter.startsWith("!")) {
+                parameter = parameter.remove(0, 1);
+                negation = true;
+            }
+
+            if (negation) {
+                query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " ?mimeType . FILTER(bif:contains(?mimeType, \"'" + parameter + "'\")) . }))) ";
+            } else {
+                query += " . ?r " + key + " ?mimeType . FILTER(bif:contains(?mimeType, \"'" + parameter + "'\")) ";
+            }
+        }
+    }
+
     if (!activityId().isEmpty() && m_cloudCategory != "kext:Activity") {
         QString activity = activityId();
         bool negation = false;
