@@ -117,20 +117,56 @@ void MetadataCloudModel::doQuery()
 
 
     if (!resourceType().isEmpty() && m_cloudCategory != "rdf:type") {
-        query += " . ?r rdf:type " + resourceType();
+        QString type = resourceType();
+        bool negation = false;
+        if (type.startsWith("!")) {
+            type = type.remove(0, 1);
+            negation = true;
+        }
+        if (negation) {
+            query += " . FILTER(!bif:exists((select (1) where { ?r rdf:type " + type + " . }))) ";
+        } else {
+            query += " . ?r rdf:type " + type;
+        }
     }
 
     if (!activityId().isEmpty() && m_cloudCategory != "kext:Activity") {
-        Nepomuk::Resource acRes(activityId(), Nepomuk::Vocabulary::KEXT::Activity());
-        query +=  " . <" + acRes.resourceUri().toString() + "> nao:isRelated ?r ";
+        QString activity = activityId();
+        bool negation = false;
+        if (activity.startsWith("!")) {
+            activity = activity.remove(0, 1);
+            negation = true;
+        }
+        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KEXT::Activity());
+
+        if (negation) {
+            query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.resourceUri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
+        } else {
+            query +=  " . <" + acRes.resourceUri().toString() + "> nao:isRelated ?r ";
+        }
     }
 
     //this is an AND set of tags.. should be allowed OR as well?
     foreach (const QString &tag, tagStrings()) {
-        query += ". ?r nao:hasTag ?tagSet \
-                  . ?tagSet ?tagLabel ?tag \
-                  . ?tagLabel <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> \
-                  . FILTER(bif:contains(?tag, \"'"+tag+"'\")) ";
+        QString individualTag = tag;
+        bool negation = false;
+
+        if (individualTag.startsWith("!")) {
+            individualTag = individualTag.remove(0, 1);
+            negation = true;
+        }
+
+        if (negation) {
+            query += ". FILTER(!bif:exists((select (1) where { ?r nao:hasTag ?tagSet \
+                    . ?tagSet ?tagLabel ?tag \
+                    . ?tagLabel <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> \
+                    . FILTER(bif:contains(?tag, \"'"+individualTag+"'\"))}))) ";
+        } else {
+            query += ". ?r nao:hasTag ?tagSet \
+                    . ?tagSet ?tagLabel ?tag \
+                    . ?tagLabel <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> \
+                    . FILTER(bif:contains(?tag, \"'"+individualTag+"'\")) ";
+        }
     }
 
     if (startDate().isValid() || endDate().isValid()) {

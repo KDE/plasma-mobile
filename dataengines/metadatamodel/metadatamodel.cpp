@@ -31,6 +31,7 @@
 
 #include <Nepomuk/File>
 #include <Nepomuk/Query/AndTerm>
+#include <Nepomuk/Query/NegationTerm>
 #include <Nepomuk/Query/ResourceTerm>
 #include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
@@ -197,31 +198,60 @@ void MetadataModel::doQuery()
 
     if (!resourceType().isEmpty()) {
         //FIXME: more elegant
-        QString type = resourceType().replace(":", "#");
+        QString type = resourceType();
+        bool negation = false;
+        if (type.startsWith("!")) {
+            type = type.remove(0, 1);
+            negation = true;
+        }
         //FIXME: query by mimetype
-        if (resourceType() == "nfo:Video") {
+        if (type == "nfo:Video") {
             // Strigi doesn't index videos it seems
             rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("video")));
-        } else if (resourceType() == "OpenDocumentTextDocument") {
+        } else if (type == "OpenDocumentTextDocument") {
             rootTerm.addSubTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("vnd.oasis.opendocument.text")));
         } else {
-            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(resourceType())));
+            if (negation) {
+                rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type))));
+            } else {
+                rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type)));
+            }
         }
     }
 
 
     if (!activityId().isEmpty()) {
+        QString activity = activityId();
+        bool negation = false;
+        if (activity.startsWith("!")) {
+            activity = activity.remove(0, 1);
+            negation = true;
+        }
         kDebug() << "Asking for resources of activity" << activityId();
-        Nepomuk::Resource acRes(activityId(), Nepomuk::Vocabulary::KEXT::Activity());
+        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KEXT::Activity());
         Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
         term.setInverted(true);
-        rootTerm.addSubTerm(term);
+        if (negation) {
+            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
+        } else {
+            rootTerm.addSubTerm(term);
+        }
     }
 
     foreach (const QString &tag, tagStrings()) {
+        QString individualTag = tag;
+        bool negation = false;
+        if (individualTag.startsWith("!")) {
+            individualTag = individualTag.remove(0, 1);
+            negation = true;
+        }
         Nepomuk::Query::ComparisonTerm term( Soprano::Vocabulary::NAO::hasTag(),
-                                    Nepomuk::Query::LiteralTerm(tag));
-        rootTerm.addSubTerm(term);
+                                    Nepomuk::Query::LiteralTerm(individualTag));
+        if (negation) {
+            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
+        } else {
+            rootTerm.addSubTerm(term);
+        }
     }
 
     if (startDate().isValid() || endDate().isValid()) {

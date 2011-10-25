@@ -45,7 +45,7 @@ Item {
             //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
             //sortBy: ["nie#url", "nao#lastModified"]
             //startDate: "2011-10-10"
-            //tags: ["kde"]
+            tags: ["kde"]
             //minimumRating: 5
         }
 
