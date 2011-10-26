@@ -48,6 +48,10 @@ void MetadataJob::start()
 {
     const QString operation = operationName();
     const QString activityUrl = parameters()["ActivityUrl"].toString();
+    QString resourceUrl = parameters()["ResourceUrl"].toString();
+    if (resourceUrl.isEmpty()) {
+        resourceUrl = m_resourceUrl;
+    }
 
     kDebug() << "starting operation" << operation << "on the resource" << m_resourceUrl << "and activity" << activityUrl;
 
@@ -57,20 +61,20 @@ void MetadataJob::start()
             activityUrl = m_activityConsumer->currentActivity();
         }
 
-        Nepomuk::Resource fileRes(m_resourceUrl);
+        Nepomuk::Resource fileRes(resourceUrl);
         Nepomuk::Resource acRes(activityUrl, Nepomuk::Vocabulary::KEXT::Activity());
         QUrl typeUrl;
 
         //Bookmark?
-        if (QUrl(m_resourceUrl).scheme() == "http") {
+        if (QUrl(resourceUrl).scheme() == "http") {
             typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark");
             fileRes.addType(typeUrl);
-            fileRes.setDescription(m_resourceUrl);
-            fileRes.setProperty(QUrl::fromEncoded("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#bookmarks"), m_resourceUrl);
-        } else if (m_resourceUrl.endsWith(".desktop")) {
+            fileRes.setDescription(resourceUrl);
+            fileRes.setProperty(QUrl::fromEncoded("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#bookmarks"), resourceUrl);
+        } else if (resourceUrl.endsWith(".desktop")) {
             typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Application");
             fileRes.addType(typeUrl);
-            KService::Ptr service = KService::serviceByDesktopPath(QUrl(m_resourceUrl).path());
+            KService::Ptr service = KService::serviceByDesktopPath(QUrl(resourceUrl).path());
             if (service) {
                 fileRes.setLabel(service->name());
                 fileRes.setSymbols(QStringList() << service->icon());
@@ -87,7 +91,7 @@ void MetadataJob::start()
 
         QString url = parameters()["ResourceUrl"].toString();
 
-        Nepomuk::Resource fileRes(m_resourceUrl);
+        Nepomuk::Resource fileRes(resourceUrl);
         Nepomuk::Resource acRes(activityUrl, Nepomuk::Vocabulary::KEXT::Activity());
 
         acRes.removeProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
@@ -96,7 +100,7 @@ void MetadataJob::start()
 
     } else if (operation == "rate") {
         int rating = parameters()["Rating"].toInt();
-        Nepomuk::Resource fileRes(m_resourceUrl);
+        Nepomuk::Resource fileRes(resourceUrl);
         fileRes.setRating(rating);
         setResult(true);
         return;
@@ -115,8 +119,8 @@ void MetadataJob::start()
         return;
 
     } else if (operation == "remove") {
-        Nepomuk::Resource b(m_resourceUrl);
-        kDebug() << "Removing resource TYPE: " << b.resourceType() << "url" << m_resourceUrl;
+        Nepomuk::Resource b(resourceUrl);
+        kDebug() << "Removing resource TYPE: " << b.resourceType() << "url" << resourceUrl;
         b.remove();
         setResult(true);
         return;
