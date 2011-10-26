@@ -1,12 +1,18 @@
 [Desktop Entry]
 Name=Settings
-GenericName=Settings
 Name[nl]=Instellingen
 Name[pt]=Configuração
 Name[pt_BR]=Configurações
 Name[sv]=Inställningar
 Name[uk]=Параметри
 Name[x-test]=xxSettingsxx
+GenericName=Settings
+GenericName[nl]=Instellingen
+GenericName[pt]=Configuração
+GenericName[pt_BR]=Configurações
+GenericName[sv]=Inställningar
+GenericName[uk]=Параметри
+GenericName[x-test]=xxSettingsxx
 GenericName=Settings
 GenericName[nl]=Instellingen
 GenericName[pt]=Configuração
