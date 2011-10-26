@@ -119,6 +119,7 @@ protected Q_SLOTS:
     virtual void doQuery();
     void newEntriesDelayed();
     void finishedListing();
+    void propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val);
 
 private:
     Nepomuk::Query::Query m_query;

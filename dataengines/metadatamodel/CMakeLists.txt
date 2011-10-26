@@ -54,6 +54,7 @@ target_link_libraries(datamodelsplugin
         ${NEPOMUK_QUERY_LIBRARIES}
         ${KDE4_KDECORE_LIBRARY}
         ${KDE4_PLASMA_LIBS}
+        nepomukdatamanagement
         kactivities)
 
 install(TARGETS datamodelsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/datamodels)

@@ -39,6 +39,7 @@
 #include <nepomuk/literalterm.h>
 #include <nepomuk/queryparser.h>
 #include <nepomuk/resourcetypeterm.h>
+#include <nepomuk/resourcewatcher.h>
 #include <nepomuk/standardqueries.h>
 
 #include <nepomuk/nfo.h>
@@ -61,6 +62,15 @@ MetadataModel::MetadataModel(QObject *parent)
     m_newEntriesTimer->setSingleShot(true);
     connect(m_newEntriesTimer, SIGNAL(timeout()),
             this, SLOT(newEntriesDelayed()));
+
+
+
+    m_watcher = new Nepomuk::ResourceWatcher(this);
+
+    m_watcher->addProperty(QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#numericRating"));
+    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)),
+            this, SLOT(propertyChanged(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)));
+
 
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
@@ -356,18 +366,33 @@ void MetadataModel::newEntriesDelayed()
 {
     beginInsertRows(QModelIndex(), m_resources.count(), m_resources.count()+m_resourcesToInsert.count()-1);
 
+    m_watcher->stop();
 
     foreach (Nepomuk::Resource res, m_resourcesToInsert) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
         m_uriToResourceIndex[res.resourceUri()] = m_resources.count();
         m_resources << res;
+        m_watcher->addResource(res);
     }
+
+    m_watcher->start();
 
     m_resourcesToInsert.clear();
 
     endInsertRows();
     emit countChanged();
+}
+
+void MetadataModel::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
+{
+    Q_UNUSED(prop)
+    Q_UNUSED(val)
+
+    const int index = m_uriToResourceIndex.value(res.resourceUri());
+    if (index >= 0) {
+        emit dataChanged(createIndex(index, 0, 0), createIndex(index, 0, 0));
+    }
 }
 
 void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
