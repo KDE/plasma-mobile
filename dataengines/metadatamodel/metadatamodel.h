@@ -59,6 +59,7 @@ public:
         Description,
         Types,
         ClassName,
+        GenericClassName,
         HasSymbol,
         Icon,
         IsFile,
