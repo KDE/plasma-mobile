@@ -58,6 +58,6 @@ class MetadataBaseEngine : public Plasma::DataEngine
         MetadataBaseEnginePrivate* d;
 };
 
-//K_EXPORT_PLASMA_DATAENGINE(metadataengine, MetadataEngine)
+K_EXPORT_PLASMA_DATAENGINE(metadataengine, MetadataBaseEngine)
 
 #endif
