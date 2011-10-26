@@ -44,13 +44,16 @@ Item {
             NumberAnimation {duration: 250}
         }
 
-        model: DataModels.MetadataModel {
-            activityId: plasmoid.activityId
-            resourceType: itemGroup.category
-            sortBy: [userTypes.sortFields[itemGroup.category]]
-            sortOrder: Qt.AscendingOrder
+        model: PlasmaCore.SortFilterModel {
+            sourceModel: DataModels.MetadataModel {
+                activityId: plasmoid.activityId
+                resourceType: itemGroup.category
+                //sortBy is not used becauseitems that arrive after are put in the back
+                //sortBy: [userTypes.sortFields[itemGroup.category]]
+                //sortOrder: Qt.AscendingOrder
+            }
+            sortRole: "label"
         }
-
 
         highlight: PlasmaCore.FrameSvgItem {
                 id: highlightFrame

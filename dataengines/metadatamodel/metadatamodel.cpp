@@ -416,7 +416,7 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
 
     while (i != toRemove.constBegin()) {
         --i;
-        beginRemoveRows(QModelIndex(), i.key(), i.key()+i.value());
+        beginRemoveRows(QModelIndex(), i.key(), i.key()+i.value()-1);
         m_resources.remove(i.key(), i.value());
         endRemoveRows();
     }
