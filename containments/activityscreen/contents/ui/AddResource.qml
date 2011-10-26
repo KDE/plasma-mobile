@@ -406,6 +406,8 @@ Rectangle {
 
                                     } else {
                                         metadataModel.resourceType = model["resourceType"]
+                                        //exclude already connected resources
+                                        metadataModel.activityId = "!"+plasmoid.activityId
                                         metadataModel.sortBy = [userTypes.sortFields[model["resourceType"]]]
                                         resultsGrid.model = metadataModel
 
