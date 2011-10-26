@@ -123,7 +123,7 @@ protected:
     /* from nie:url
      * to QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")
      */
-    inline QUrl propertyUrl(const QString &property) const
+    static inline QUrl propertyUrl(const QString &property)
     {
         const QString prop = QString(property).split(":").last();
         if (property.startsWith("rdf:")) {
@@ -165,7 +165,7 @@ protected:
         }
     }
 
-    inline QString propertyShortName(const QUrl &url)
+    static inline QString propertyShortName(const QUrl &url)
     {
         //http://www.semanticdesktop.org/ontologies/2007/03/22/nfo will become nfo
         return url.path().split("/").last() + ":" + url.fragment();
