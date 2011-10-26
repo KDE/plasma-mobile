@@ -22,6 +22,7 @@
 
 #include <KDebug>
 #include <KIcon>
+#include <KImageCache>
 
 
 PreviewContainer::PreviewContainer(const QString &name,
@@ -33,6 +34,21 @@ PreviewContainer::PreviewContainer(const QString &name,
     setObjectName(name);
     m_previewSize = QSize(180, 120);
 
+    // Check if the image is in the cache, if so return it
+    m_previewEngine = static_cast<PreviewEngine *>(parent);
+    QImage preview = QImage(m_previewSize, QImage::Format_ARGB32_Premultiplied);
+    if (m_previewEngine->imageCache()->findImage(name, &preview)) {
+        // cache hit
+        kDebug() << "Cache hit: " << name;
+        setData("status", "done");
+        setData("url", m_url);
+        setData("thumbnail", preview);
+        checkForUpdate();
+        return;
+    }
+    kDebug() << "Cache miss: " << name;
+
+    // Set fallbackimage while loading
     m_fallbackImage = KIcon("image-loading").pixmap(QSize(64, 64)).toImage();
     m_fallbackImage = m_fallbackImage.copy(QRect(QPoint(-120,0), m_previewSize));
     setData("status", "loading");
@@ -108,8 +124,11 @@ void PreviewContainer::previewUpdated(const KFileItem &item, const QPixmap &prev
 
     setData("status", "done");
     setData("url", m_url);
-    setData("thumbnail", preview.toImage());
+    QImage p = preview.toImage();
+    setData("thumbnail", p);
     checkForUpdate();
+    kDebug() << "Cache insert: " << objectName();
+    m_previewEngine->imageCache()->insertImage(objectName(), p);
 }
 
 #include "previewcontainer.moc"

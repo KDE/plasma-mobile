@@ -20,6 +20,7 @@
 
 #include <KIO/PreviewJob>
 #include <KIcon>
+#include <KImageCache>
 #include <KFileItem>
 #include <KGlobal>
 #include <KStandardDirs>
@@ -46,6 +47,7 @@ PreviewEngine::PreviewEngine(QObject* parent, const QVariantList& args)
 
 void PreviewEngine::init()
 {
+    m_imageCache = new KImageCache("plasma_engine_preview", 1048576); // 10 MByte
     setData("fallback", "fallbackImage", KIcon("image-loading").pixmap(QSize(180, 120)).toImage());
 }
 
@@ -53,13 +55,19 @@ PreviewEngine::~PreviewEngine()
 {
 }
 
+KImageCache* PreviewEngine::imageCache() const
+{
+    return m_imageCache;
+}
+
 bool PreviewEngine::sourceRequestEvent(const QString &name)
 {
     // Check if the url is valid
+    kDebug() << "name: " << name;
     QUrl url = QUrl(name);
     if (!url.isValid()) {
         kWarning() << "Not a URL:" << name;
-        return false;
+        //return false;
     }
 
     PreviewContainer *container = qobject_cast<PreviewContainer *>(containerForSource(name));

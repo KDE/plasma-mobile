@@ -29,6 +29,7 @@
 #include "kio/scheduler.h"
 
 using namespace KIO;
+class KImageCache;
 
 class PreviewEngine : public Plasma::DataEngine
 {
@@ -39,8 +40,13 @@ public:
     ~PreviewEngine();
     virtual void init();
 
+    KImageCache *imageCache() const;
+
 protected:
     bool sourceRequestEvent(const QString &name);
+
+private:
+    KImageCache* m_imageCache;
 };
 
 #endif

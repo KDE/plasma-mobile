@@ -29,7 +29,7 @@ Item {
     anchors.fill: parent
 
     Column {
-        anchors.centerIn: parent
+        anchors.horizontalCenter: parent.horizontalCenter
         QIconItem {
             id: previewImage
             height: 64
@@ -93,8 +93,8 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
             anchors {
-                top: previewImage.bottom
-                horizontalCenter: parent.horizontalCenter - 4
+                //top: previewImage.bottom
+                horizontalCenter: parent.horizontalCenter
             }
             width: resourceItem.width
             style: Text.Outline
@@ -112,7 +112,7 @@ Item {
             height: 14
             width: parent.width - previewImage.width
             //wrapMode: Text.Wrap
-            anchors.top: previewLabel.bottom
+            //anchors.top: previewLabel.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             visible: infoLabelVisible
         }

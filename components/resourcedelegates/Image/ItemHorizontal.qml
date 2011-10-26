@@ -34,6 +34,7 @@ Item {
 
         interval: 0
         Component.onCompleted: {
+            print(" setting URL: " + url);
             pmSource.connectedSources = [url]
             if (data[url] == undefined) {
                 previewFrame.visible = false
@@ -44,6 +45,11 @@ Item {
             previewImage.image = data[url]["thumbnail"]
         }
         onDataChanged: {
+            for (k in data) {
+                print(" Key: " + data);
+            }
+            //print(" dataChanged: NaME" + data[name]);
+            //print(" dataChanged: URL " + data[url]);
             previewFrame.visible = (data[url]["status"] == "done")
             iconItem.visible = !previewFrame.visible
             previewImage.image = data[url]["thumbnail"]

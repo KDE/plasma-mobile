@@ -50,6 +50,7 @@ private:
     KIO::PreviewJob *m_job;
     KIO::MimetypeJob *m_mimeJob;
     QUrl m_url;
+    QString m_name;
     PreviewEngine *m_previewEngine;
 };
 
