@@ -140,10 +140,8 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
         QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(massagedName));
 
         Nepomuk::Query::Query query;
-        if (container) {
-            container->setQuery(query);
-        } else {
-            container = new QueryContainer(query, this);
+        if (!container) {
+            container = new QueryContainer(this);
             container->setObjectName(name);
             addSource(container);
         }
@@ -167,106 +165,31 @@ bool MetadataEngine::updateSourceEvent(const QString &source)
 bool MetadataEngine::prepareSource(const QString &name)
 {
     QString massagedName = name;
-    int resultLimit = -1;
-    // if the strings ends with :number it's the limit for the query
-    if (name.contains(QRegExp(".*:\\d+$"))) {
-        QStringList tokens = name.split(":");
-        resultLimit = tokens.last().toInt();
-        massagedName = massagedName.mid(0, massagedName.lastIndexOf(":"));
-    }
 
     if (name.startsWith('/')) {
         massagedName = "file://" + name;
     }
 
-    Nepomuk::Query::Query query;
-
-    if (massagedName.startsWith("ResourcesOfType") && massagedName.split(":").count() >= 2) {
-        const QString type = massagedName.split(":").value(1);
-        //FIXME: more elegant
-        if (type == "Contact") {
-            query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+type)));
-
-        } else if (type == "Video") {
-            // Strigi doesn't index videos it seems
-            query.setTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("video")));
-        } else if (type == "OpenDocumentTextDocument") {
-            query.setTerm(Nepomuk::Query::ComparisonTerm(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("vnd.oasis.opendocument.text")));
-        } else {
-            query.setTerm(Nepomuk::Query::ResourceTypeTerm(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+type)));
-
-        }
-
-    //Simple case.. a single resource
-    } else if (massagedName.split("://").count() > 1) {
-        // We have a URL here, so we can create the results directly
-        kDebug() << "Valid url ... creating resource synchronously";
-        KUrl u = KUrl(massagedName);
-        Nepomuk::Resource r(u);
-        kDebug() << r.resourceUri();
-        if (!r.exists()) {
-            kDebug() << "Resource " << u << " does not exist.";
-            return false;
-        }
-        //return true;
-
-        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(massagedName));
-         if (container) {
-            container->setQuery(query);
-        } else {
-            container = new QueryContainer(query, this);
-            container->setObjectName(name);
-            addSource(container);
-        }
-         //FIXME: this isn't really pretty
-         //TODO: create another type of DataContainer with a common superclass to visualize single resources
-         container->addResource(r);
-         return true;
-
-    //we want to list all resources liked to the current activity
-    } else if (massagedName.startsWith("CurrentActivityResources")) {
-
-         QString activityId;
-         if (massagedName.split(":").count() < 2) {
-             activityId = d->activityConsumer->currentActivity();
-         } else {
-             activityId = massagedName.split(":").value(1);
-         }
-
-         Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KEXT::Activity());
-         Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
-         term.setInverted(true);
-         query = Nepomuk::Query::Query(term);
-         kDebug() << "Asking for resources of activity" << activityId << acRes.resourceUri();
-
-    // Let's try a literal query ...
-    } else {
-        kDebug() << "async search for query:" << massagedName;
-        query = Nepomuk::Query::QueryParser::parseQuery(massagedName);
-    }
-
-    //query has been constructed at this point
-    if (query.isValid()) {
-        //was the query limited?
-        if (resultLimit > 0) {
-            query.setLimit(resultLimit);
-        }
-
-        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(name));
-
-        if (container) {
-            container->setQuery(query);
-        } else {
-            container = new QueryContainer(query, this);
-            container->setObjectName(name);
-            addSource(container);
-        }
-
-        return true;
-    } else {
-        kWarning() << "Query is invalid:" << query;
+    kDebug() << "Creating resource synchronously";
+    Nepomuk::Resource resource(massagedName);
+    kDebug() << resource.resourceUri();
+    if (!resource.exists()) {
+        kDebug() << "Resource " << massagedName << " does not exist.";
         return false;
     }
+    //return true;
+
+    QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(massagedName));
+    if (container) {
+        container->setResource(resource);
+    } else {
+        container = new QueryContainer(this);
+        container->setResource(resource);
+        container->setObjectName(name);
+        addSource(container);
+    }
+
+    return true;
 }
 
 Plasma::Service *MetadataEngine::serviceForSource(const QString &source)

@@ -38,19 +38,13 @@ class QueryContainer : public Plasma::DataContainer
     Q_OBJECT
 
 public:
-    QueryContainer(const Nepomuk::Query::Query &query, QObject *parent = 0);
+    QueryContainer(QObject *parent = 0);
     ~QueryContainer();
 
-    void setQuery(Nepomuk::Query::Query query);
-    //FIXME: should be protected
-    void addResource(Nepomuk::Resource resource);
+    void setResource(Nepomuk::Resource resource);
 
 protected Q_SLOTS:
-    void newEntries(const QList< Nepomuk::Query::Result > &entries);
-    void entriesRemoved(const QList<QUrl> &urls);
     void propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property, QVariant);
-    void addWatcherDelayed();
-    void addResourcesDelayed();
 
 protected:
     QString icon(const QStringList &types);
@@ -60,12 +54,11 @@ private:
     Nepomuk::Query::Query m_query;
     Nepomuk::Query::QueryServiceClient *m_queryClient;
     Nepomuk::ResourceWatcher* m_watcher;
-    QList<Nepomuk::Resource> m_resourcesToWatch;
+    Nepomuk::Resource m_resource;
     QHash<QString, QString> m_icons;
     QList<Nepomuk::Resource> m_resourcesToAdd;
     QTimer *m_addWatcherTimer;
     QTimer *m_addResourcesTimer;
-    int m_resultLimit;
 };
 
 #endif
