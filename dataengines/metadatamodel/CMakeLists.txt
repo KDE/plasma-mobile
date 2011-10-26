@@ -21,9 +21,6 @@ set(datamodels_SRCS
     metadatacloudmodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
-
-    metadataservice/metadatajob.cpp
-    metadataservice/metadataservice.cpp
    )
 
 soprano_add_ontology(
