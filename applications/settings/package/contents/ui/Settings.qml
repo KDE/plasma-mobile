@@ -70,7 +70,6 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.rightMargin: 8
-                        //image: preview
                     }
 
                     Text {
