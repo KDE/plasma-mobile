@@ -23,9 +23,6 @@
 
 #include <Plasma/DataContainer>
 
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Query/Result>
-#include <Nepomuk/Query/QueryServiceClient>
 #include <Nepomuk/Resource>
 
 namespace Nepomuk {
@@ -51,14 +48,9 @@ protected:
     void doQuery();
 
 private:
-    Nepomuk::Query::Query m_query;
-    Nepomuk::Query::QueryServiceClient *m_queryClient;
     Nepomuk::ResourceWatcher* m_watcher;
     Nepomuk::Resource m_resource;
     QHash<QString, QString> m_icons;
-    QList<Nepomuk::Resource> m_resourcesToAdd;
-    QTimer *m_addWatcherTimer;
-    QTimer *m_addResourcesTimer;
 };
 
 #endif
