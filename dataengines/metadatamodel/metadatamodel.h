@@ -74,7 +74,7 @@ public:
         Topics,
         TopicsNames,
         Tags,
-        TagsNanes
+        TagsNames
     };
 
     MetadataModel(QObject *parent = 0);

@@ -92,7 +92,7 @@ MetadataModel::MetadataModel(QObject *parent)
     roleNames[Topics] = "topics";
     roleNames[TopicsNames] = "topicsNames";
     roleNames[Tags] = "tags";
-    roleNames[TagsNanes] = "tagsNanes";
+    roleNames[TagsNames] = "tagsNames";
     setRoleNames(roleNames);
 }
 
@@ -550,7 +550,7 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         }
         return tags;
     }
-    case TagsNanes: {
+    case TagsNames: {
         QStringList tagNames;
         foreach (const Nepomuk::Tag &tag, resource.tags()) {
             tagNames << tag.genericLabel();
