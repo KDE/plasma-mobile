@@ -26,6 +26,11 @@ MetadataUserTypes::MetadataUserTypes(QObject *parent)
 {
     m_typeNames = new QDeclarativePropertyMap;
     m_typeSortFields = new QDeclarativePropertyMap;
+
+    m_userTypes << "nfo:Application";
+    m_typeNames->insert("nfo:Application", i18n("Apps"));
+    m_typeSortFields->insert("nfo:Application", "nao:prefLabel");
+
     m_userTypes << "nfo:Bookmark";
     m_typeNames->insert("nfo:Bookmark", i18n("Bookmarks"));
     m_typeSortFields->insert("nfo:Bookmark", "nie:url");
