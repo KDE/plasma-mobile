@@ -18,7 +18,7 @@
     02110-1301, USA.
 */
 
-#include "querycontainer.h"
+#include "resourcecontainer.h"
 #include "resourcewatcher.h"
 
 #include <QDBusServiceWatcher>
@@ -30,9 +30,8 @@
 #include <Nepomuk/Variant>
 #include <Nepomuk/File>
 
-#define RESULT_LIMIT 128
 
-QueryContainer::QueryContainer(QObject *parent)
+ResourceContainer::ResourceContainer(QObject *parent)
     : Plasma::DataContainer(parent)
 {
     m_watcher = new Nepomuk::ResourceWatcher(this);
@@ -42,12 +41,12 @@ QueryContainer::QueryContainer(QObject *parent)
             this, SLOT(propertyChanged(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)));
 }
 
-QueryContainer::~QueryContainer()
+ResourceContainer::~ResourceContainer()
 {
 }
 
 
-void QueryContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
+void ResourceContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
 {
     if (res != m_resource) {
         return;
@@ -57,7 +56,7 @@ void QueryContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Prop
     checkForUpdate();
 }
 
-void QueryContainer::setResource(Nepomuk::Resource resource)
+void ResourceContainer::setResource(Nepomuk::Resource resource)
 {
     if (m_resource == resource) {
         return;
@@ -210,7 +209,7 @@ void QueryContainer::setResource(Nepomuk::Resource resource)
     checkForUpdate();
 }
 
-QString QueryContainer::icon(const QStringList &types)
+QString ResourceContainer::icon(const QStringList &types)
 {
     if (!m_icons.size()) {
         // Add fallback icons here from generic to specific
@@ -260,5 +259,5 @@ QString QueryContainer::icon(const QStringList &types)
     return _icon;
 }
 
-#include "querycontainer.moc"
+#include "resourcecontainer.moc"
 

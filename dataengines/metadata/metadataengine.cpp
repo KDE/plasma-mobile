@@ -53,7 +53,7 @@
 //#include "activityservice/activityservice.h"
 #include "metadataservice/metadataservice.h"
 
-#include "querycontainer.h"
+#include "resourcecontainer.h"
 #include <nepomuk/nfo.h>
 #include <nepomuk/nie.h>
 
@@ -137,11 +137,11 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
     if (Nepomuk::ResourceManager::instance()->initialized()) {
         return prepareSource(name);
     } else {
-        QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(massagedName));
+        ResourceContainer *container = qobject_cast<ResourceContainer *>(containerForSource(massagedName));
 
         Nepomuk::Query::Query query;
         if (!container) {
-            container = new QueryContainer(this);
+            container = new ResourceContainer(this);
             container->setObjectName(name);
             addSource(container);
         }
@@ -153,7 +153,7 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
 
 bool MetadataEngine::updateSourceEvent(const QString &source)
 {
-    QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(source));
+    ResourceContainer *container = qobject_cast<ResourceContainer *>(containerForSource(source));
     if (container) {
         prepareSource(source);
     }
@@ -179,11 +179,11 @@ bool MetadataEngine::prepareSource(const QString &name)
     }
     //return true;
 
-    QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(massagedName));
+    ResourceContainer *container = qobject_cast<ResourceContainer *>(containerForSource(massagedName));
     if (container) {
         container->setResource(resource);
     } else {
-        container = new QueryContainer(this);
+        container = new ResourceContainer(this);
         container->setResource(resource);
         container->setObjectName(name);
         addSource(container);

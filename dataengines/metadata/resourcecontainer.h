@@ -18,8 +18,8 @@
     02110-1301, USA.
 */
 
-#ifndef QUERYCONTAINER_H
-#define QUERYCONTAINER_H
+#ifndef RESOURCECONTAINER_H
+#define RESOURCECONTAINER_H
 
 #include <Plasma/DataContainer>
 
@@ -33,13 +33,13 @@ namespace Nepomuk {
 }
 
 
-class QueryContainer : public Plasma::DataContainer
+class ResourceContainer : public Plasma::DataContainer
 {
     Q_OBJECT
 
 public:
-    QueryContainer(QObject *parent = 0);
-    ~QueryContainer();
+    ResourceContainer(QObject *parent = 0);
+    ~ResourceContainer();
 
     void setResource(Nepomuk::Resource resource);
 

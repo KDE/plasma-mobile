@@ -19,7 +19,7 @@ include_directories(
 
 set(metadataengine_SRCS
     metadataengine.cpp
-    querycontainer.cpp
+    resourcecontainer.cpp
     metadataservice/metadatajob.cpp
     metadataservice/metadataservice.cpp
 )
