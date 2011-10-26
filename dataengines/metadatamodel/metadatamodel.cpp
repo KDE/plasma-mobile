@@ -188,6 +188,16 @@ int MetadataModel::find(const QString &resourceUri)
 
 void MetadataModel::doQuery()
 {
+    QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
+
+    //check if really all properties to build the query are null
+    if (m_queryString.isEmpty() && resourceType().isEmpty() &&
+        mimeType().isEmpty() && activityId().isEmpty() &&
+        tagStrings().size() == 0 && !startDate().isValid() &&
+        !endDate().isValid() && minimumRating() <= 0 &&
+        maximumRating() <= 0 && parameters->size() == 0) {
+        return;
+    }
     setStatus(Waiting);
     m_query = Nepomuk::Query::Query();
     m_query.setQueryFlags(Nepomuk::Query::Query::WithoutFullTextExcerpt);
@@ -230,7 +240,7 @@ void MetadataModel::doQuery()
         }
     }
 
-    QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
+
     if (parameters && parameters->size() > 0) {
         foreach (const QString &key, parameters->keys()) {
             QString parameter = parameters->value(key).toString();
