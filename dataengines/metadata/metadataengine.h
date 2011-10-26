@@ -18,8 +18,8 @@
 */
 
 
-#ifndef METADATABASEENGINE_H
-#define METADATABASEENGINE_H
+#ifndef METADATAENGINE_H
+#define METADATAENGINE_H
 
 #include <plasma/dataengine.h>
 
@@ -32,17 +32,17 @@ namespace Nepomuk
     }
 }
 
-class MetadataBaseEnginePrivate;
+class MetadataEnginePrivate;
 
 class KActivityConsumer;
 
-class MetadataBaseEngine : public Plasma::DataEngine
+class MetadataEngine : public Plasma::DataEngine
 {
     Q_OBJECT
 
     public:
-        MetadataBaseEngine(QObject* parent, const QVariantList& args);
-        ~MetadataBaseEngine();
+        MetadataEngine(QObject* parent, const QVariantList& args);
+        ~MetadataEngine();
         QStringList sources() const;
         virtual void init();
 
@@ -55,9 +55,9 @@ class MetadataBaseEngine : public Plasma::DataEngine
     protected:
         bool prepareSource(const QString &name);
         virtual bool sourceRequestEvent(const QString &name);
-        MetadataBaseEnginePrivate* d;
+        MetadataEnginePrivate* d;
 };
 
-K_EXPORT_PLASMA_DATAENGINE(metadataengine, MetadataBaseEngine)
+K_EXPORT_PLASMA_DATAENGINE(metadataengine, MetadataEngine)
 
 #endif

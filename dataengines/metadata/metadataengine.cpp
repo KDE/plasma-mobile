@@ -45,7 +45,7 @@
 #include <nepomuk/literalterm.h>
 #include <nepomuk/resourcetypeterm.h>
 
-#include "metadatabaseengine.h"
+#include "metadataengine.h"
 #include <stdio.h>
 
 #include <KDE/Activities/Consumer>
@@ -61,7 +61,7 @@
 
 #define RESULT_LIMIT 24
 
-class MetadataBaseEnginePrivate
+class MetadataEnginePrivate
 {
 public:
     QSize previewSize;
@@ -71,11 +71,11 @@ public:
 };
 
 
-MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args)
+MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
     : Plasma::DataEngine(parent, args)
 {
     Q_UNUSED(args);
-    d = new MetadataBaseEnginePrivate;
+    d = new MetadataEnginePrivate;
     setMaxSourceCount(RESULT_LIMIT); // Guard against loading too many connections
 
     d->queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
@@ -89,12 +89,12 @@ MetadataBaseEngine::MetadataBaseEngine(QObject* parent, const QVariantList& args
     //init();
 }
 
-void MetadataBaseEngine::init()
+void MetadataEngine::init()
 {
     //kDebug() << "init.";
 }
 
-void MetadataBaseEngine::serviceRegistered(const QString &service)
+void MetadataEngine::serviceRegistered(const QString &service)
 {
     if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
         foreach (const QString &source, d->connectedSources) {
@@ -104,17 +104,17 @@ void MetadataBaseEngine::serviceRegistered(const QString &service)
     }
 }
 
-MetadataBaseEngine::~MetadataBaseEngine()
+MetadataEngine::~MetadataEngine()
 {
     delete d;
 }
 
-QStringList MetadataBaseEngine::sources() const
+QStringList MetadataEngine::sources() const
 {
     return QStringList();
 }
 
-bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
+bool MetadataEngine::sourceRequestEvent(const QString &name)
 {
     QString massagedName = name;
     // if the strings ends with :number it's the limit for the query
@@ -153,7 +153,7 @@ bool MetadataBaseEngine::sourceRequestEvent(const QString &name)
     }
 }
 
-bool MetadataBaseEngine::updateSourceEvent(const QString &source)
+bool MetadataEngine::updateSourceEvent(const QString &source)
 {
     QueryContainer *container = qobject_cast<QueryContainer *>(containerForSource(source));
     if (container) {
@@ -164,7 +164,7 @@ bool MetadataBaseEngine::updateSourceEvent(const QString &source)
 }
 
 
-bool MetadataBaseEngine::prepareSource(const QString &name)
+bool MetadataEngine::prepareSource(const QString &name)
 {
     QString massagedName = name;
     int resultLimit = -1;
@@ -269,7 +269,7 @@ bool MetadataBaseEngine::prepareSource(const QString &name)
     }
 }
 
-Plasma::Service *MetadataBaseEngine::serviceForSource(const QString &source)
+Plasma::Service *MetadataEngine::serviceForSource(const QString &source)
 {
     //FIXME validate the name
     MetadataService *service = new MetadataService(source);
@@ -279,4 +279,4 @@ Plasma::Service *MetadataBaseEngine::serviceForSource(const QString &source)
 
 
 
-#include "metadatabaseengine.moc"
+#include "metadataengine.moc"
