@@ -1,0 +1,35 @@
+[Desktop Entry]
+Name=Active Bookmarks
+Name[et]=Aktiivsed järjehoidjad
+Name[fr]=Signets actifs
+Name[km]=ចំណាំ​សកម្ម
+Name[nl]=Actieve bladwijzers
+Name[pl]=Aktywne zakładki
+Name[pt]=Favoritos Activos
+Name[pt_BR]=Favoritos ativos
+Name[sv]=Bokmärken
+Name[uk]=Активні закладки
+Name[x-test]=xxActive Bookmarksxx
+Comment=Bookmarks from Nepomuk
+Comment[et]=Nepomuki järjehoidjad
+Comment[fr]=Signets issus de Nepomuk
+Comment[km]=ចំណាំ​ពី Nepomuk
+Comment[nl]=Bladwijzers uit Nepomuk
+Comment[pl]=Zakładki dla Nepomuk
+Comment[pt]=Favoritos do Nepomuk
+Comment[pt_BR]=Favoritos do Nepomuk
+Comment[sv]=Bokmärken från Nepomuk
+Comment[uk]=Закладки з Nepomuk
+Comment[x-test]=xxBookmarks from Nepomukxx
+X-KDE-ServiceTypes=Plasma/DataEngine
+Type=Service
+Icon=bookmarks
+X-KDE-Library=plasma_engine_active_bookmarks
+X-KDE-PluginInfo-Author=Sebastian Kügler
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-Name=org.kde.active.bookmarks
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://kde.org
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+

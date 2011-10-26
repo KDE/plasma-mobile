@@ -1,0 +1,145 @@
+#
+# Copyright (c) 2010-2011 Sebastian Trueg <trueg@kde.org>
+# All rights reserved, licensed under either CC-BY or BSD.
+#
+# You are free:
+#  * to Share - to copy, distribute and transmit the work
+#  * to Remix - to adapt the work
+# Under the following conditions:
+#  * Attribution - You must attribute the work in the manner specified by the author
+#    or licensor (but not in any way that suggests that they endorse you or your use
+#    of the work).
+#
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+#  * Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+#  * Redistributions in binary form must reproduce the above copyright notice, this
+#    list of conditions and the following disclaimer in the documentation and/or
+#    other materials provided with the distribution.
+#  * Neither the names of the authors nor the names of contributors may
+#    be used to endorse or promote products derived from this ontology without
+#    specific prior written permission.
+#
+# THIS ONTOLOGY IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+# OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+# THIS ONTOLOGY, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix nao:     <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#> .
+@prefix nrl:     <http://www.semanticdesktop.org/ontologies/2007/08/15/nrl#> .
+@prefix nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix kext:    <http://nepomuk.kde.org/ontologies/2010/11/29/kext#> .
+@prefix nfo:     <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#> .
+
+kext: {
+    kext:unixFileMode
+          a      rdf:Property ;
+          rdfs:label "Unix file mode" ;
+          rdfs:comment "The file mode value as seen on unix file systems." ;
+          rdfs:domain nfo:FileDataObject ;
+          rdfs:range xsd:integer ;
+          nrl:maxCardinality 1 ;
+          nao:userVisible false .
+
+    kext:unixFileOwner
+          a      rdf:Property ;
+          rdfs:label "Unix file owner" ;
+          rdfs:comment "The owner of the file as seen on unix file systems. This is intended as the low-level counterpart to nfo:owner." ;
+          rdfs:domain nfo:FileDataObject ;
+          rdfs:range xsd:string ;
+          nrl:maxCardinality 1 ;
+          nao:userVisible false .
+
+    kext:unixFileGroup
+          a      rdf:Property ;
+          rdfs:label "Unix file group" ;
+          rdfs:comment "The group of the file as seen on unix file systems." ;
+          rdfs:domain nfo:FileDataObject ;
+          rdfs:range xsd:string ;
+          nrl:maxCardinality 1 ;
+          nao:userVisible false .
+
+    kext:Activity
+          a rdfs:Class ;
+          rdfs:subClassOf rdfs:Resource ;
+          rdfs:label "activity" ;
+          rdfs:comment "A Plasma activity." .
+
+    kext:usedActivity
+          a rdf:Property ;
+          rdfs:label "used activity" ;
+          rdfs:comment "The activity that was active when resource was created. This is mostly used for graphs or desktop events." ;
+          rdfs:domain rdfs:Resource ;
+          rdfs:range kext:Activity ;
+          nrl:maxCardinality 1 ;
+          nao:userVisible false .
+
+    kext:activityIdentifier
+          a rdf:Property ;
+          rdfs:subPropertyOf nao:identifier ;
+          rdfs:label "activity identifier" ;
+          rdfs:comment "The unique ID of the activity as used outside of Nepomuk. Typically this is a UUID." ;
+          rdfs:domain kext:Activity ;
+          rdfs:range xsd:string ;
+          nrl:cardinality 1 ;
+          nao:userVisible false .
+
+    kext:ResourceScoreCache
+          a rdfs:Class ;
+          rdfs:subClassOf rdfs:Resource ;
+          rdfs:label "Resource score cache" ;
+          rdfs:comment "For storing the automatically calculated score based on the usage statistics" ;
+          nao:userVisible false .
+
+    kext:targettedResource
+          a rdf:Property ;
+          rdfs:comment "Resource for which the score is calculated." ;
+          rdfs:domain kext:ResourceScoreCache ;
+          rdfs:label "resource" ;
+          rdfs:range rdfs:Resource .
+
+    kext:initiatingAgent
+          a rdf:Property ;
+          rdfs:comment "Relates the score to the agent initiating the events." ;
+          rdfs:domain kext:ResourceScoreCache ;
+          rdfs:label "involved agent" ;
+          rdfs:range nao:Agent .
+
+    kext:cachedScore
+          a rdf:Property ;
+          rdfs:subPropertyOf nao:score ;
+          rdfs:comment "The automatically calculated score" ;
+          rdfs:domain kext:ResourceScoreCache ;
+          rdfs:label "calculated score" ;
+          rdfs:range xsd:float .
+}
+
+<http://nepomuk.kde.org/ontologies/2010/11/29/kext/metadata> {
+    <http://nepomuk.kde.org/ontologies/2010/11/29/kext/metadata>
+          a       nrl:GraphMetadata ;
+          nrl:coreGraphMetadataFor kext: .
+
+
+    kext:
+          a       nrl:Ontology , nrl:DocumentGraph ;
+          nao:prefLabel "KDE Extensions Ontology" ;
+          nao:hasDefaultNamespace "http://nepomuk.kde.org/ontologies/2010/11/29/kext#" ;
+          nao:hasDefaultNamespaceAbbreviation "kext" ;
+          nao:lastModified "2011-06-15T18:09:43Z" ;
+          nao:serializationLanguage "TriG" ;
+          nao:status "Unstable" ;
+          nrl:updatable "0" ;
+          nao:version "2" .
+}
+
