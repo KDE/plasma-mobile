@@ -8,7 +8,7 @@ find_package(Soprano)
   TRUE "${SOPRANO_MIN_VERSION}" "Soprano is needed for Nepomuk")
 
 include(SopranoAddOntology)
-
+add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 INCLUDE_DIRECTORIES(
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_BINARY_DIR}
