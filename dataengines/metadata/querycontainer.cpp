@@ -54,6 +54,7 @@ void QueryContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Prop
     }
 
     setData(prop.name(), val);
+    checkForUpdate();
 }
 
 void QueryContainer::setResource(Nepomuk::Resource resource)
@@ -206,16 +207,7 @@ void QueryContainer::setResource(Nepomuk::Resource resource)
     }
     setData("properties", _properties);
 
-    //if is a property update, force the update of the visualization
-    //FIXME: shouldn't be necessary
-    bool force = false;
-    if (QueryContainer::data().contains(resource.resourceUri().toString())) {
-        force = true;
-    }
-
-    if (force) {
-        forceImmediateUpdate();
-    }
+    checkForUpdate();
 }
 
 QString QueryContainer::icon(const QStringList &types)
