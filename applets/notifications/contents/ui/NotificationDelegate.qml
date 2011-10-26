@@ -63,7 +63,7 @@ ListItem {
                 elementId: "close"
                 width: 24
                 height: 24
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.top : parent.top
                 MouseArea {
                     anchors.fill: parent
                     anchors.margins: -6
