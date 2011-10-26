@@ -77,7 +77,6 @@ MetadataModel::MetadataModel(QObject *parent)
     roleNames[Description] = "description";
     roleNames[Types] = "types";
     roleNames[ClassName] = "className";
-    roleNames[GenericClassName] = "genericClassName";
     roleNames[HasSymbol] = "hasSymbol";
     roleNames[Icon] = "icon";
     roleNames[IsFile] = "isFile";
@@ -464,27 +463,6 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     }
     case ClassName:
         return resource.className();
-    case GenericClassName: {
-        //FIXME: a more elegant way is needed
-        QString genericClassName = resource.className();
-        Nepomuk::Types::Class resClass(resource.resourceType());
-        foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
-            if (parentClass.label() == "Document" ||
-                parentClass.label() == "Audio" ||
-                parentClass.label() == "Video" ||
-                parentClass.label() == "Image" ||
-                parentClass.label() == "Contact") {
-                genericClassName = parentClass.label();
-                break;
-            //two cases where the class is 2 levels behind the level of generalization we want
-            } else if (parentClass.label() == "RasterImage") {
-                genericClassName = "Image";
-            } else if (parentClass.label() == "TextDocument") {
-                genericClassName = "Document";
-            }
-        }
-        return genericClassName;
-    }
     case HasSymbol:
     case Icon: {
         QString icon = resource.genericIcon();
