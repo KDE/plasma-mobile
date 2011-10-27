@@ -53,15 +53,15 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     connect(&m_frameUpdater, SIGNAL(timeout()), SLOT(updateFrame()));
     connect(&m_updateController, SIGNAL(timeout()), &m_frameUpdater, SLOT(stop()));
 
+    // allow the QML to know the name of the shell to compare against the window.
+    if (QDeclarativeContext *context = engine()->rootContext()) {
+        context->setContextProperty("shellName", KGlobal::mainComponent().aboutData()->appName());
+    }
     //setThumbnailRects("Tokamak 5");
     setQmlPath(KStandardDirs::locate("data",
                                      "plasma/plasmoids/org.kde.windowstrip/WindowStrip.qml"));
     m_windowFlicker = rootObject()->findChild<QDeclarativeItem*>("windowFlicker");
 
-    // allow the QML to know the name of the shell to compare against the window.
-    if (QDeclarativeContext *context = engine()->rootContext()) {
-        context->setContextProperty("shellName", KGlobal::mainComponent().aboutData()->appName());
-    }
 
     connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()),
             this, SLOT(scrollChanged()));
