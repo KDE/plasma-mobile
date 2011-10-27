@@ -29,15 +29,17 @@ Item {
     property alias count: itemsList.count
     anchors.fill: itemGroup.contents
 
-    ListView {
+    GridView {
         id: itemsList
         currentIndex: main.currentGroup==itemGroup?main.currentIndex:-1
         pressDelay: 200
         anchors.fill: parent
-        snapMode: ListView.SnapToItem
+        snapMode: GridView.SnapToRow
         clip: true
-        spacing: 32;
-        orientation: Qt.Horizontal
+        //spacing: 32;
+        flow: GridView.TopToBottom 
+        cellWidth: itemsList.width/Math.max(1, Math.floor(itemsList.width/140))
+        cellHeight: itemsList.height/Math.max(1, Math.floor(itemsList.help/128))
 
         Behavior on contentX {
             enabled: !itemsList.moving
@@ -61,25 +63,32 @@ Item {
                 prefix: "selected+hover"
         }
 
-        delegate: MobileComponents.ResourceDelegate {
-            id: resourceDelegate
-            width: 140
-            height: itemsList.height
-            infoLabelVisible: false
+        delegate: Item {
+            width: itemsList.cellWidth
+            height: itemsList.cellHeight
+            MobileComponents.ResourceDelegate {
+                id: resourceDelegate
+                width: 140
+                height: 120
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+                infoLabelVisible: false
 
-            onPressAndHold: {
-                resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
-                resourceInstance.title = model["label"]
-                main.currentIndex = index
-                main.currentGroup = itemGroup
-            }
+                onPressAndHold: {
+                    resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
+                    resourceInstance.title = model["label"]
+                    main.currentIndex = index
+                    main.currentGroup = itemGroup
+                }
 
-            onClicked: {
-                //Contact?
-                if (model["hasEmailAddress"]) {
-                    plasmoid.openUrl(String(model["hasEmailAddress"]))
-                } else {
-                    plasmoid.openUrl(String(model["url"]))
+                onClicked: {
+                    //Contact?
+                    if (model["hasEmailAddress"]) {
+                        plasmoid.openUrl(String(model["hasEmailAddress"]))
+                    } else {
+                        plasmoid.openUrl(String(model["url"]))
+                    }
                 }
             }
         }

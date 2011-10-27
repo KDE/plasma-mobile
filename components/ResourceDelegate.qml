@@ -49,7 +49,10 @@ Item {
             var view = delegateItem.parent
 
             if (view != undefined && view.orientation == undefined) {
-                view = delegateItem.parent.parent
+                view = view.parent
+            }
+            if (view != undefined && view.orientation == undefined) {
+                view = view.parent
             }
 
             if (!delegateItem.parent || !delegateItem.parent.parent || view == undefined || view.orientation == ListView.Horizontal || view.cellHeight != undefined) {

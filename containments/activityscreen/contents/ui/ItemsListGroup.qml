@@ -24,6 +24,7 @@ ItemGroup {
     property alias categoryCount: itemsList.count
     title: i18n("%1 (%2)", userTypes.typeNames[itemGroup.category], itemsList.count)
     scale: itemsList.count>0?1:0
+    canResizeHeight: true
 
     ItemsList {
         id: itemsList
