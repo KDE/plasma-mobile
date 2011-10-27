@@ -18,6 +18,7 @@
 */
 
 #include "metadatamodel.h"
+#include "resourcewatcher.h"
 
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>
@@ -38,7 +39,6 @@
 #include <nepomuk/literalterm.h>
 #include <nepomuk/queryparser.h>
 #include <nepomuk/resourcetypeterm.h>
-#include <nepomuk/resourcewatcher.h>
 #include <nepomuk/standardqueries.h>
 
 #include <nepomuk/nfo.h>
