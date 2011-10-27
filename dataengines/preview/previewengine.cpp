@@ -42,7 +42,6 @@ PreviewEngine::PreviewEngine(QObject* parent, const QVariantList& args)
 {
     Q_UNUSED(args);
     setMaxSourceCount(64); // Guard against loading too many connections
-    init();
 }
 
 void PreviewEngine::init()
@@ -63,10 +62,9 @@ KImageCache* PreviewEngine::imageCache() const
 bool PreviewEngine::sourceRequestEvent(const QString &name)
 {
     // Check if the url is valid
-    kDebug() << "name: " << name;
     QUrl url = QUrl(name);
-    if (!url.isValid()) {
-        kWarning() << "Not a URL:" << name;
+    if (!url.isValid() || url.scheme() == "akonadi") {
+        kWarning() << "Not a useful URL:" << name;
         return false;
     }
 
@@ -77,6 +75,7 @@ bool PreviewEngine::sourceRequestEvent(const QString &name)
         // know the original string encoding given a QUrl
         container = new PreviewContainer(name, url, this);
         addSource(container);
+        container->init();
     }
 
     return true;

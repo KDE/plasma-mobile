@@ -33,20 +33,23 @@ PreviewContainer::PreviewContainer(const QString &name,
 {
     setObjectName(name);
     m_previewSize = QSize(180, 120);
+}
 
+void PreviewContainer::init()
+{
     // Check if the image is in the cache, if so return it
-    m_previewEngine = static_cast<PreviewEngine *>(parent);
+    m_previewEngine = static_cast<PreviewEngine *>(parent());
     QImage preview = QImage(m_previewSize, QImage::Format_ARGB32_Premultiplied);
-    if (m_previewEngine->imageCache()->findImage(name, &preview)) {
+    if (m_previewEngine->imageCache()->findImage(objectName(), &preview)) {
         // cache hit
-        kDebug() << "Cache hit: " << name;
+        //kDebug() << "Cache hit: " << objectName();
         setData("status", "done");
         setData("url", m_url);
         setData("thumbnail", preview);
         checkForUpdate();
         return;
     }
-    kDebug() << "Cache miss: " << name;
+    kDebug() << "Cache miss: " << objectName();
 
     // Set fallbackimage while loading
     m_fallbackImage = KIcon("image-loading").pixmap(QSize(64, 64)).toImage();
@@ -58,7 +61,7 @@ PreviewContainer::PreviewContainer(const QString &name,
 
     // It may be a directory or a file, let's stat
     KIO::JobFlags flags = KIO::HideProgressInfo;
-    m_mimeJob = KIO::mimetype(url, flags);
+    m_mimeJob = KIO::mimetype(m_url, flags);
     connect(m_mimeJob, SIGNAL(mimetype(KIO::Job *, const QString&)),
             this, SLOT(mimetypeRetrieved(KIO::Job *, const QString&)));
 }
@@ -83,7 +86,7 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
     }
 
     // KIO::PreviewJob: http://api.kde.org/4.x-api/kdelibs-apidocs/kio/html/classKIO_1_1PreviewJob.html
-    kDebug() << "previewengine: starting previewjob for: " << m_url;
+    //kDebug() << "previewengine: starting previewjob for: " << m_url;
     KFileItem kfile = KFileItem(m_url, mimetype, KFileItem::Unknown);
     KFileItemList list;
     list << kfile;

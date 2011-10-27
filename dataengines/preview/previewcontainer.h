@@ -37,6 +37,7 @@ class PreviewContainer : public Plasma::DataContainer
 public:
     PreviewContainer(const QString &name, const QUrl &url, QObject *parent = 0);
     ~PreviewContainer();
+    void init();
 
 private Q_SLOTS:
     void mimetypeRetrieved(KIO::Job* job, const QString &mimetype);
