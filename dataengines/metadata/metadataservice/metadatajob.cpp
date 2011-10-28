@@ -33,10 +33,10 @@
 
 #include <KDE/Activities/Consumer>
 
-MetadataJob::MetadataJob(Activities::Consumer *consumer, const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent) :
-    ServiceJob(parent->objectName(), operation, parameters, parent),
-    m_id(id),
-    m_activityConsumer(consumer)
+MetadataJob::MetadataJob(Activities::Consumer *consumer, const QString &resourceUrl, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent)
+    : ServiceJob(parent->objectName(), operation, parameters, parent),
+      m_resourceUrl(resourceUrl),
+      m_activityConsumer(consumer)
 {
 }
 
@@ -47,13 +47,15 @@ MetadataJob::~MetadataJob()
 void MetadataJob::start()
 {
     const QString operation = operationName();
-    const QString resourceUrl = parameters()["ResourceUrl"].toString();
     const QString activityUrl = parameters()["ActivityUrl"].toString();
+    QString resourceUrl = parameters()["ResourceUrl"].toString();
+    if (resourceUrl.isEmpty()) {
+        resourceUrl = m_resourceUrl;
+    }
 
-    kDebug() << "starting operation" << operation << "on the resource" << resourceUrl << "and activity" << activityUrl;
+    kDebug() << "starting operation" << operation << "on the resource" << m_resourceUrl << "and activity" << activityUrl;
 
     if (operation == "connectToActivity") {
-        const QString resourceUrl = parameters()["ResourceUrl"].toString();
         QString activityUrl = parameters()["ActivityUrl"].toString();
         if (activityUrl.isEmpty()) {
             activityUrl = m_activityConsumer->currentActivity();
@@ -82,8 +84,8 @@ void MetadataJob::start()
         acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
         setResult(true);
         return;
+
     } else if (operation == "disconnectFromActivity") {
-        const QString resourceUrl = parameters()["ResourceUrl"].toString();
         QString activityUrl = parameters()["ActivityUrl"].toString();
         activityUrl = m_activityConsumer->currentActivity();
 
@@ -95,18 +97,18 @@ void MetadataJob::start()
         acRes.removeProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
         setResult(true);
         return;
+
     } else if (operation == "rate") {
         int rating = parameters()["Rating"].toInt();
-        kDebug() << "Rating: " << rating << resourceUrl;
         Nepomuk::Resource fileRes(resourceUrl);
         fileRes.setRating(rating);
         setResult(true);
         return;
+
     } else if (operation == "addBookmark") {
         const QString url = parameters()["Url"].toString();
         Nepomuk::Bookmark b(url);
-        b.setLabel("Active Bookmark!");
-        b.setDescription(url);
+
         QUrl u(url);
         if (u.isValid()) {
             b.setBookmarks( url );
@@ -115,10 +117,10 @@ void MetadataJob::start()
             setResult(false);
         }
         return;
+
     } else if (operation == "remove") {
-        const QString url = parameters()["ResourceUrl"].toString();
-        Nepomuk::Resource b(url);
-        kDebug() << "Removing resource TYPE: " << b.resourceType() << "url" << url;
+        Nepomuk::Resource b(resourceUrl);
+        kDebug() << "Removing resource TYPE: " << b.resourceType() << "url" << resourceUrl;
         b.remove();
         setResult(true);
         return;

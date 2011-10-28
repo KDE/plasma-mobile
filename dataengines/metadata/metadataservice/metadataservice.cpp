@@ -24,8 +24,8 @@
 
 #include <KDE/Activities/Consumer>
 
-MetadataService::MetadataService(const QString &source)
-    : m_id(source)
+MetadataService::MetadataService(const QString &resourceUrl)
+    : m_resourceUrl(resourceUrl)
 {
     setName("metadataservice");
     m_activityConsumer = new Activities::Consumer(this);
@@ -34,7 +34,7 @@ MetadataService::MetadataService(const QString &source)
 ServiceJob *MetadataService::createJob(const QString &operation,
                                            QMap<QString, QVariant> &parameters)
 {
-    return new MetadataJob(m_activityConsumer, m_id, operation, parameters, this);
+    return new MetadataJob(m_activityConsumer, m_resourceUrl, operation, parameters, this);
 }
 
 #include "metadataservice.moc"

@@ -54,8 +54,8 @@ target_link_libraries(active-webbrowser
     ${KDE4_PLASMA_LIBS}
     ${KDE4_KDEWEBKIT_LIBRARY}
     ${NEPOMUK_QUERY_LIBRARIES}
+    ${KACTIVITIES_LIBRARY}
     kdeclarative
-    kactivities
     ontologies
 )
 

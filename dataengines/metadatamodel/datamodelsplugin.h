@@ -1,9 +1,9 @@
 /*
- *   Copyright 2011 Marco Martin <mart@kde.org>
- *
+ *   Copyright 2011 by Marco Martin <mart@kde.org>
+
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2 or
+ *   published by the Free Software Foundation; either version 2, or
  *   (at your option) any later version.
  *
  *   This program is distributed in the hope that it will be useful,
@@ -17,16 +17,20 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+#ifndef DATAMODELSPLUGIN_H
+#define DATAMODELSPLUGIN_H
 
-ItemGroup {
-    id: itemGroup
-    property alias categoryCount: itemsList.count
-    title: i18n("%1 (%2)", userTypes.typeNames[itemGroup.category], itemsList.count)
-    scale: itemsList.count>0?1:0
-    canResizeHeight: true
+#include <QDeclarativeExtensionPlugin>
 
-    ItemsList {
-        id: itemsList
-    }
-}
+
+class DataModelsPlugin : public QDeclarativeExtensionPlugin
+{
+    Q_OBJECT
+
+public:
+    void registerTypes(const char *uri);
+};
+
+Q_EXPORT_PLUGIN2(datamodelsplugin, DataModelsPlugin)
+
+#endif

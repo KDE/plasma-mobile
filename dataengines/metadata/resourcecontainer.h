@@ -1,4 +1,5 @@
 /*
+    Copyright 2011 Marco Martin <mart@kde.org>
     Copyright 2011 Sebastian Kügler <sebas@kde.org>
 
     This library is free software; you can redistribute it and/or modify it
@@ -17,32 +18,39 @@
     02110-1301, USA.
 */
 
-// Nepomuk
+#ifndef RESOURCECONTAINER_H
+#define RESOURCECONTAINER_H
+
+#include <Plasma/DataContainer>
+
 #include <Nepomuk/Resource>
-#include <Nepomuk/Variant>
-#include <Nepomuk/Query/ResourceTerm>
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Tag>
 
-// Ontologies
-
-// Query API
-#include <nepomuk/andterm.h>
-#include <nepomuk/orterm.h>
-#include <nepomuk/comparisonterm.h>
-#include <nepomuk/literalterm.h>
-#include <nepomuk/resourcetypeterm.h>
-
-#include "metadataengine.h"
-
-
-MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
-    : MetadataBaseEngine(parent, args)
-{
+namespace Nepomuk {
+    class ResourceWatcher;
 }
 
-MetadataEngine::~MetadataEngine()
-{
-}
 
-#include "metadataengine.moc"
+class ResourceContainer : public Plasma::DataContainer
+{
+    Q_OBJECT
+
+public:
+    ResourceContainer(QObject *parent = 0);
+    ~ResourceContainer();
+
+    void setResource(Nepomuk::Resource resource);
+
+protected Q_SLOTS:
+    void propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property, QVariant);
+
+protected:
+    QString icon(const QStringList &types);
+    void doQuery();
+
+private:
+    Nepomuk::ResourceWatcher* m_watcher;
+    Nepomuk::Resource m_resource;
+    QHash<QString, QString> m_icons;
+};
+
+#endif

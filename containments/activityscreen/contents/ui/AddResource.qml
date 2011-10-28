@@ -23,6 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
+import org.kde.datamodels 0.1 as DataModels
 
 Rectangle {
     id: main
@@ -78,31 +79,31 @@ Rectangle {
         }
     }
 
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.metadata"
+    }
+
     MouseArea {
         anchors.fill: parent
         onClicked: disappearAnimation.running = true
     }
 
 
-
-    //this one is just used to find out what resource types actually exist
-    PlasmaCore.DataSource {
-        id: resourcesStatSource
-        engine: "org.kde.active.metadata"
-        interval: 0
-        connectedSources: ["ResourcesOfType:Bookmark:1", "ResourcesOfType:Contact:1", "ResourcesOfType:Document:1", "ResourcesOfType:Image:1", "ResourcesOfType:Audio:1", "ResourcesOfType:Video:1"]
+    DataModels.MetadataUserTypes {
+        id: userTypes
     }
 
-
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        interval: 0
+    DataModels.MetadataCloudModel {
+        id: cloudModel
+        cloudCategory: "rdf:type"
+        allowedCategories: userTypes.userTypes
     }
-    PlasmaCore.DataModel {
+
+    DataModels.MetadataModel {
         id: metadataModel
-        keyRoleFilter: ".*"
-        dataSource: metadataSource
+        sortBy: ["nfo:fileName"]
+        sortOrder: Qt.AscendingOrder
     }
 
     ListModel {
@@ -245,7 +246,7 @@ Rectangle {
                     height: resultsContainer.height
                     delegateWidth: 130
                     delegateHeight: 120
-                    model: metadataModel
+
                     delegate: Item {
                         width: resultsGrid.delegateWidth
                         height: resultsGrid.delegateHeight
@@ -346,42 +347,42 @@ Rectangle {
                         model: ListModel {
                             ListElement {
                                 name: "Apps"
-                                className: "_Apps"
+                                resourceType: "_Apps"
                                 hasSymbol: "application-x-executable"
                             }
                             ListElement {
                                 name: "Bookmarks"
-                                className: "Bookmark"
+                                resourceType: "nfo:Bookmark"
                                 hasSymbol: "emblem-favorite"
                             }
                             ListElement {
                                 name: "Contacts"
-                                className: "Contact"
+                                resourceType: "nco:Contact"
                                 hasSymbol: "view-pim-contacts"
                             }
                             ListElement {
                                 name: "Documents"
-                                className: "Document"
+                                resourceType: "nfo:Document"
                                 hasSymbol: "application-vnd.oasis.opendocument.text"
                             }
                             ListElement {
                                 name: "Images"
-                                className: "Image"
+                                resourceType: "nfo:Image"
                                 hasSymbol: "image-x-generic"
                             }
                             ListElement {
                                 name: "Music"
-                                className: "Audio"
+                                resourceType: "nfo:Audio"
                                 hasSymbol: "audio-x-generic"
                             }
                             ListElement {
                                 name: "Videos"
-                                className: "Video"
+                                resourceType: "nfo:Video"
                                 hasSymbol: "video-x-generic"
                             }
                             ListElement {
                                 name: "Widgets"
-                                className: "_PlasmaWidgets"
+                                resourceType: "_PlasmaWidgets"
                                 hasSymbol: "dashboard-show"
                             }
                         }
@@ -393,22 +394,27 @@ Rectangle {
                                 genericClassName: "FileDataObject"
                                 property string label: name
                                 property string mimeType: "x"
-                                visible: String(model["className"]).charAt(0) == "_" || (resourcesStatSource.data["ResourcesOfType:"+model["className"]+":1"] != undefined)
+                                visible: String(model["resourceType"]).charAt(0) == "_" || cloudModel.categories.indexOf(model["resourceType"]) != -1
 
                                 onClicked: {
                                     //FIXME: make all of this way cleaner, hardcoding _PlasmaWidgets seems pretty bad
-                                    if (model["className"] == "_PlasmaWidgets") {
+                                    if (model["resourceType"] == "_PlasmaWidgets") {
                                         main.addAction.trigger()
                                         main.destroy()
-                                    } else if (model["className"] == "_Apps") {
+
+                                    } else if (model["resourceType"] == "_Apps") {
                                         //BUG in MeeGo's Qt: have to assign an empty model before the actual one
                                         resultsGrid.model = emptyModel
                                         resultsGrid.model = appsModel
 
                                         resultsContainer.contentY = 0
+
                                     } else {
+                                        metadataModel.resourceType = model["resourceType"]
+                                        //exclude already connected resources
+                                        metadataModel.activityId = "!"+plasmoid.activityId
+                                        metadataModel.sortBy = [userTypes.sortFields[model["resourceType"]]]
                                         resultsGrid.model = metadataModel
-                                        metadataSource.connectedSources = ["ResourcesOfType:"+model["className"]]
 
                                         resultsContainer.contentY = 0
                                     }
@@ -434,11 +440,12 @@ Rectangle {
 
                 text: i18n("Add items")
                 onClicked : {
-                    var service = metadataSource.serviceForSource(metadataSource.connectedSources[0])
+                    var service = metadataSource.serviceForSource("")
                     var operation = service.operationDescription("connectToActivity")
                     operation["ActivityUrl"] = plasmoid.activityId
 
                     for (var i = 0; i < selectedModel.count; ++i) {
+                        var staminchia = metadataSource.serviceForSource("http://www.kde.org")
                         operation["ResourceUrl"] = selectedModel.get(i).resourceUri
                         service.startOperationCall(operation)
                     }

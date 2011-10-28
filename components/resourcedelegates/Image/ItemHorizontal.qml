@@ -23,7 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
- 
+
 Item {
     id: resourceItem
     anchors.fill: parent
@@ -34,6 +34,7 @@ Item {
 
         interval: 0
         Component.onCompleted: {
+            print(" setting URL: " + url);
             pmSource.connectedSources = [url]
             if (data[url] == undefined) {
                 previewFrame.visible = false
@@ -44,6 +45,11 @@ Item {
             previewImage.image = data[url]["thumbnail"]
         }
         onDataChanged: {
+            for (k in data) {
+                print(" Key: " + data);
+            }
+            //print(" dataChanged: NaME" + data[name]);
+            //print(" dataChanged: URL " + data[url]);
             previewFrame.visible = (data[url]["status"] == "done")
             iconItem.visible = !previewFrame.visible
             previewImage.image = data[url]["thumbnail"]
@@ -119,8 +125,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
             anchors {
-                top: previewImage.bottom
-                horizontalCenter: parent.horizontalCenter - 4
+                horizontalCenter: parent.horizontalCenter
             }
             width: resourceItem.width
             style: Text.Outline

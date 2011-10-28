@@ -18,7 +18,7 @@
     02110-1301, USA.
 */
 
-#include "querycontainer.h"
+#include "resourcecontainer.h"
 #include "resourcewatcher.h"
 
 #include <QDBusServiceWatcher>
@@ -30,117 +30,48 @@
 #include <Nepomuk/Variant>
 #include <Nepomuk/File>
 
-#define RESULT_LIMIT 128
 
-QueryContainer::QueryContainer(const Nepomuk::Query::Query &query, QObject *parent)
-    : Plasma::DataContainer(parent),
-      m_query(query),
-      m_queryClient(0),
-      m_resultLimit(RESULT_LIMIT)
+ResourceContainer::ResourceContainer(QObject *parent)
+    : Plasma::DataContainer(parent)
 {
-    if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
-        doQuery();
-    }
-
     m_watcher = new Nepomuk::ResourceWatcher(this);
 
     m_watcher->addProperty(QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#numericRating"));
     connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)),
             this, SLOT(propertyChanged(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)));
-
-    m_addWatcherTimer = new QTimer(this);
-    m_addWatcherTimer->setSingleShot(true);
-    connect(m_addWatcherTimer, SIGNAL(timeout()), this, SLOT(addWatcherDelayed()));
-
-    m_addResourcesTimer = new QTimer(this);
-    m_addResourcesTimer->setSingleShot(true);
-    connect(m_addResourcesTimer, SIGNAL(timeout()), this, SLOT(addResourcesDelayed()));
 }
 
-QueryContainer::~QueryContainer()
+ResourceContainer::~ResourceContainer()
 {
 }
 
-void QueryContainer::setQuery(Nepomuk::Query::Query query)
+
+void ResourceContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
 {
-    m_query = query;
-    doQuery();
-}
-
-
-void QueryContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
-{
-    Q_UNUSED(prop)
-    Q_UNUSED(val)
-
-    addResource(res);
-}
-
-void QueryContainer::doQuery()
-{
-    m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
-
-    connect(m_queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
-            this, SLOT(entriesRemoved(const QList<QUrl> &)));
-
-    const int limit = m_query.limit();
-
-    if (limit > RESULT_LIMIT || limit <= 0) {
-        m_query.setLimit(RESULT_LIMIT);
+    if (res != m_resource) {
+        return;
     }
 
-    m_queryClient->query(m_query);
-}
-
-void QueryContainer::newEntries(const QList< Nepomuk::Query::Result >& entries)
-{
-    foreach (Nepomuk::Query::Result res, entries) {
-        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-        //kDebug() << "Result label:" << res.genericLabel();
-        m_resourcesToAdd << res.resource();
-    }
-    m_addResourcesTimer->start(250);
+    setData(prop.name(), val);
     checkForUpdate();
 }
 
-void QueryContainer::addResourcesDelayed()
+void ResourceContainer::setResource(Nepomuk::Resource resource)
 {
-    foreach (Nepomuk::Resource resource, m_resourcesToAdd) {
-        addResource(resource);
+    if (m_resource == resource) {
+        return;
+    }
+    m_resource = resource;
+
+    //update the resource watcher
+    {
+        m_watcher->stop();
+        QList<Nepomuk::Resource> resources;
+        resources << resource;
+        m_watcher->setResources(resources);
+        m_watcher->start();
     }
 
-    m_resourcesToAdd.clear();
-    checkForUpdate();
-}
-
-void QueryContainer::entriesRemoved(const QList<QUrl> &urls)
-{
-    foreach (const QUrl &url, urls) {
-        setData(url.toString(), QVariant());
-    }
-    checkForUpdate();
-}
-
-void QueryContainer::addWatcherDelayed()
-{
-    m_watcher->stop();
-    foreach (const Nepomuk::Resource &resource, m_resourcesToWatch) {
-        m_watcher->addResource(resource);
-    }
-    m_watcher->start();
-    m_resourcesToWatch.clear();
-}
-
-void QueryContainer::addResource(Nepomuk::Resource resource)
-{
-    QString uri = resource.resourceUri().toString();
-
-    if (!data().contains(uri)) {
-        m_resourcesToWatch << resource;
-        m_addWatcherTimer->start(500);
-    }
 
 
     QString desc = resource.genericDescription();
@@ -152,9 +83,8 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
         label = "Empty label.";
     }
 
-    Plasma::DataEngine::Data data;
-    data["label"] = label;
-    data["description"] = desc;
+    setData("label", label);
+    setData("description", desc);
 
     // Types
     QStringList _types;
@@ -162,25 +92,25 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
         _types << u.toString();
     }
 
-    data["types"] = _types;
+    setData("types", _types);
 
     Nepomuk::Types::Class resClass(resource.resourceType());
 
     //FIXME: a more elegant way is needed
-    data["genericClassName"] = resource.className();
+    setData("genericClassName", resource.className());
     foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
         if (parentClass.label() == "Document" ||
             parentClass.label() == "Audio" ||
             parentClass.label() == "Video" ||
             parentClass.label() == "Image" ||
             parentClass.label() == "Contact") {
-            data["genericClassName"] = parentClass.label();
+            setData("genericClassName", parentClass.label());
             break;
         //two cases where the class is 2 levels behind the level of generalization we want
         } else if (parentClass.label() == "RasterImage") {
-            data["genericClassName"] = "Image";
+            setData("genericClassName", "Image");
         } else if (parentClass.label() == "TextDocument") {
-            data["genericClassName"] = "Document";
+            setData("genericClassName", "Document");
         }
     }
 
@@ -202,20 +132,20 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
         _icon = _icon.split(",").last();
     }
 
-    data["icon"] = _icon;
-    data["hasSymbol"] = _icon;
-    data["isFile"] = resource.isFile();
-    data["exists"] = resource.exists();
-    data["rating"] = resource.rating();
-    data["symbols"] = resource.symbols();
+    setData("icon", _icon);
+    setData("hasSymbol", _icon);
+    setData("isFile", resource.isFile());
+    setData("exists", resource.exists());
+    setData("rating", resource.rating());
+    setData("symbols", resource.symbols());
 
-    data["className"] = resource.className();
-    data["resourceUri"] = resource.resourceUri();
-    data["resourceType"] = resource.resourceType();
-    data["query"] = objectName();
+    setData("className", resource.className());
+    setData("resourceUri", resource.resourceUri());
+    setData("resourceType", resource.resourceType());
+    setData("query", objectName());
 
     if (resource.isFile() && resource.toFile().url().isLocalFile()) {
-        data["url"] = resource.toFile().url().prettyUrl();
+        setData("url", resource.toFile().url().prettyUrl());
     }
 
     // Topics
@@ -224,8 +154,8 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
         _topics << u.resourceUri().toString();
         _topicNames << u.genericLabel();
     }
-    data["topics"] = _topics;
-    data["topicNames"] = _topicNames;
+    setData("topics", _topics);
+    setData("topicNames", _topicNames);
 
     // Tags
     QStringList _tags, _tagNames;
@@ -233,15 +163,15 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
         _tags << tag.resourceUri().toString();
         _tagNames << tag.genericLabel();
     }
-    data["tags"] = _tags;
-    data["tagNames"] = _tagNames;
+    setData("tags", _tags);
+    setData("tagNames", _tagNames);
 
     // Related
     QStringList _relateds;
     foreach (const Nepomuk::Resource &res, resource.isRelateds()) {
         _relateds << res.resourceUri().toString();
     }
-    data["relateds"] = _relateds;
+    setData("relateds", _relateds);
 
     // Dynamic properties
     QStringList _properties;
@@ -264,8 +194,8 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
                 }
             }
             //kDebug() << " ... " << key << propertyUrl << resource.property(propertyUrl).variant();
-            if (key != "plainTextMessageContent" && !data.contains(key)) {
-                data[key] = resource.property(propertyUrl).variant();
+            if (key != "plainTextMessageContent" && !data().contains(key)) {
+                setData(key, resource.property(propertyUrl).variant());
             }
             // More properties
 
@@ -274,22 +204,12 @@ void QueryContainer::addResource(Nepomuk::Resource resource)
             kWarning() << "Could not parse ontology URL, missing '#':" << propertyUrl.toString();
         }
     }
-    data["properties"] = _properties;
+    setData("properties", _properties);
 
-    //if is a property update, force the update of the visualization
-    //FIXME: shouldn't be necessary
-    bool force = false;
-    if (QueryContainer::data().contains(uri)) {
-        force = true;
-    }
-    setData(uri, data);
-
-    if (force) {
-        forceImmediateUpdate();
-    }
+    checkForUpdate();
 }
 
-QString QueryContainer::icon(const QStringList &types)
+QString ResourceContainer::icon(const QStringList &types)
 {
     if (!m_icons.size()) {
         // Add fallback icons here from generic to specific
@@ -339,5 +259,5 @@ QString QueryContainer::icon(const QStringList &types)
     return _icon;
 }
 
-#include "querycontainer.moc"
+#include "resourcecontainer.moc"
 

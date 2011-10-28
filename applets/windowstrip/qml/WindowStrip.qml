@@ -149,6 +149,7 @@ Item {
 
                     delegate: WindowThumbnail {
                         id: windowThumbnail
+
                         Component.onCompleted: {
                             if (className == shellName) {
                                 homeScreenThumbnail.visible = true

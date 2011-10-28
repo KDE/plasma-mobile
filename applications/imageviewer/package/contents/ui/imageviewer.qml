@@ -23,6 +23,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 import Qt.labs.gestures 1.0
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
+import org.kde.datamodels 0.1 as DataModels
+
 
 Image {
     id: imageViewer
@@ -55,25 +57,23 @@ Image {
             return
         }
 
-        var i = 0
         if (String(path).indexOf("/") === 0) {
             path = "file://"+path
         }
 
         //is in Nepomuk
-        for (prop in metadataSource.data["ResourcesOfType:Image"]) {
-            if (metadataSource.data["ResourcesOfType:Image"][prop]["url"] == path) {
-                fullList.model = filterModel
-                quickBrowserBar.model = filterModel
-                fullList.positionViewAtIndex(i, ListView.Center)
-                fullList.currentIndex = i
-                spareDelegate.visible = false
-                fullList.visible = true
-                imageViewer.state = "image"
-                return
-            }
-            ++i
+        var index = metadataModel.find(path);
+        if (index > -1) {
+            fullList.model = filterModel
+            quickBrowserBar.model = filterModel
+            fullList.positionViewAtIndex(index, ListView.Center)
+            fullList.currentIndex = index
+            spareDelegate.visible = false
+            fullList.visible = true
+            imageViewer.state = "image"
+            return
         }
+
 
         //is in dirModel
         fullList.model = dirModel
@@ -97,21 +97,13 @@ Image {
         }
     }
 
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        connectedSources: ["ResourcesOfType:Image"]
-        interval: 0
-        onDataChanged: {
-            firstRunTimer.restart()
-        }
-    }
     PlasmaCore.SortFilterModel {
         id: filterModel
-        sourceModel: PlasmaCore.DataModel {
+        sourceModel: DataModels.MetadataModel {
             id: metadataModel
-            keyRoleFilter: ".*"
-            dataSource: metadataSource
+            resourceType: "nfo:Image"
+            sortBy: [userTypes.sortFields[itemGroup.category]]
+            sortOrder: Qt.AscendingOrder
         }
         filterRole: "label"
     }

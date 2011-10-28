@@ -1,0 +1,8 @@
+[Ontology]
+Version=1.0
+Name=KDE Extensions Ontology
+Comment=The KDE Extensions Ontology contains extensions to the shared-desktop-ontologies that are not generic enough.
+Namespace=http://nepomuk.kde.org/ontologies/2010/11/29/kext#
+Path=${CMAKE_INSTALL_PREFIX}/share/ontology/kde/kext.trig
+MimeType=application/x-trig
+Type=Data

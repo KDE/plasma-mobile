@@ -37,12 +37,12 @@ class MetadataService : public Plasma::Service
     Q_OBJECT
 
 public:
-    MetadataService(const QString &source);
+    MetadataService(const QString &resourceUrl);
     ServiceJob *createJob(const QString &operation,
                           QMap<QString, QVariant> &parameters);
 
 private:
-    QString m_id;
+    QString m_resourceUrl;
     Activities::Consumer *m_activityConsumer;
 };
 
