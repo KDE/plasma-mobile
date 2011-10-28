@@ -45,6 +45,11 @@ Item {
         anchors.fill: parent
         imagePath: "dialogs/background"
 
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+        }
+
         Component {
             id: myDelegate
             Item {
