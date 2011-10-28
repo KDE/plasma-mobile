@@ -48,7 +48,7 @@ Item {
         spacing: 12
         Text {
             color: theme.textColor
-            text: "<h1>" + moduleTitle + "</h1>"
+            text: "<h3>" + moduleTitle + "</h3>"
             opacity: 1
         }
         Text {
@@ -67,6 +67,7 @@ Item {
     }
 
     Item {
+        id: twentyFourItem
         anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: 32; }
 
         Text {
@@ -85,9 +86,14 @@ Item {
 
             onClicked : {
                 timeSettings.twentyFour = checked
+                print(timeSettings.timeZone);
             }
         }
 
+    }
+
+    TimeZonePicker {
+        id: timeZonePicker
     }
 
     Component.onCompleted: {
