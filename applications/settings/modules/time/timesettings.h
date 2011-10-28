@@ -84,7 +84,6 @@ class TimeSettings : public SettingsModule
 
     private:
         TimeSettingsPrivate* d;
-
 };
 
 #endif // TIMESETTINGS_H

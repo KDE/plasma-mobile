@@ -92,7 +92,7 @@ Item {
                         anchors.left: iconItem.right
                         anchors.right: parent.right
                     }
-                    
+
                     MouseArea {
                         anchors.fill: delegateItem
                         onClicked: {
@@ -138,10 +138,6 @@ Item {
             anchors.right: parent.right
         }
 
-        Component.onCompleted: {
-            print(" Loading Settings.qml done." + settingsRoot);
-        }
-
         states: [
             State {
                 id: expanded
@@ -176,11 +172,6 @@ Item {
 
     MobileComponents.Package {
         id: switcherPackage
-        //name: "org.kde.active.settings.time"
-        Component.onCompleted: {
-            //loadPackage("org.kde.active.settings.time");
-        }
-
     }
 
     function loadPackage(module) {
@@ -191,5 +182,9 @@ Item {
         moduleContainer.source = switcherPackage.filePath("mainscript");
     }
 
-
+    Component.onCompleted: {
+        if (typeof(startModule) != "undefined") {
+            loadPackage(startModule);
+        }
+    }
 }
