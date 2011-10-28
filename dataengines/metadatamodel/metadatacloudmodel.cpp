@@ -110,11 +110,7 @@ void MetadataCloudModel::doQuery()
     QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
 
     //check if really all properties to build the query are null
-    if (resourceType().isEmpty() &&
-        mimeType().isEmpty() && activityId().isEmpty() &&
-        tagStrings().size() == 0 && !startDate().isValid() &&
-        !endDate().isValid() && minimumRating() <= 0 &&
-        maximumRating() <= 0 && parameters->size() == 0) {
+    if (m_cloudCategory.isEmpty()) {
         return;
     }
 
