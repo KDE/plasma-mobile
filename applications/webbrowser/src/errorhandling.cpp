@@ -39,6 +39,12 @@ void QDeclarativeWebPage::handleNetworkErrors(QNetworkReply *reply)
     Q_ASSERT(reply);
 
     QWebFrame* frame = qobject_cast<QWebFrame *>(reply->request().originatingObject());
+    if (!frame->url().isEmpty() && frame->url() != reply->url()) {
+        // it's an error for a part of the page, not the page itself; we don't want to
+        // reset the whole page due to this; just let it fail silently
+        return;
+    }
+
     // NOTE: These are not all networkreply errors,
     // but just that supported directly by KIO
     switch (reply->error())
