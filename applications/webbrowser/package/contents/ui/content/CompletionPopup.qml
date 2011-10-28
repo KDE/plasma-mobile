@@ -43,8 +43,7 @@ Item {
         objectName: "frame"
 
         anchors.fill: parent
-        imagePath: "widgets/frame"
-        prefix: "raised"
+        imagePath: "dialogs/background"
 
         Component {
             id: myDelegate
