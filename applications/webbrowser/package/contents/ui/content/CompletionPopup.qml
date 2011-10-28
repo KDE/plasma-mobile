@@ -148,10 +148,13 @@ Item {
             }
             Text {
                 id: topLabel
-                text: "<h3>placeholder</h3>"
+                //text: "<h3>placeholder</h3>"
                 height: 48
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
+                anchors.leftMargin: 100
+                anchors.rightMargin: 100
+                elide: Text.ElideMiddle
 
                 Connections {
                     target: urlInput
@@ -168,6 +171,11 @@ Item {
                     }
                 }
 
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: urlInput.urlEntered(urlInput.url)
+                }
+
             }
             Item {
                 id: history
@@ -178,7 +186,7 @@ Item {
                 anchors.rightMargin: 12
                 Text {
                     id: historyLabel
-                    text: i18n("<h2>Recently visited</h2>")
+                    text: i18n("<h3>Recently visited</h3>")
                     anchors {
                         top: parent.top
                         left: parent.left
@@ -193,15 +201,7 @@ Item {
                     model: historyModel
                     delegate: myDelegate
                     highlight: listHighlight
-                    //highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
                 }
-                /*
-                Rectangle {
-                    //color: "blue"
-                    opacity: 0.2
-                    anchors.fill: historyList
-                }
-                */
             }
 
             Item {
@@ -213,7 +213,7 @@ Item {
                 anchors.leftMargin: 12
                 Text {
                     id: bookmarksLabel
-                    text: i18n("<h2>Bookmarks</h2>")
+                    text: i18n("<h3>Bookmarks</h3>")
                 }
                 ListView {
                     //spacing: 4

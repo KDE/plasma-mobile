@@ -77,7 +77,11 @@ Item {
 
         onTextChanged: {
             container.urlChanged();
-            urlFilter = text;
+            if (text != webView.url) {
+                urlFilter = text;
+            } else {
+                urlFilter = "";
+            }
             urlFilterChanged();
         }
 
