@@ -27,6 +27,7 @@
 #include <KIcon>
 #include <KLocale>
 
+#include <QStringListModel>
 #include <QTimer>
 #include <QVariant>
 
@@ -40,6 +41,7 @@
 #include <KTimeZone>
 
 #include <QtDeclarative/qdeclarative.h>
+#include <QtDeclarative/QDeclarativeItem>
 #include <QtCore/QDate>
 
 K_PLUGIN_FACTORY(TimeSettingsFactory, registerPlugin<TimeSettings>();)
@@ -58,6 +60,8 @@ public:
     TimeSettings *q;
     QString timeFormat;
     QString timezone;
+    QStringListModel *timeZonesModel;
+    QString timeZoneFilter;
     QString currentTime;
     QTimer *timer;
 
@@ -122,16 +126,19 @@ void TimeSettingsPrivate::initTimeZones()
         cities.append(utc.name());
         zonesByCity.insert(utc.name(), utc);
     }
-    kDebug() << " TZ: cities: " << cities;
+    //kDebug() << " TZ: cities: " << cities;
 
     const KTimeZones::ZoneMap zones = timeZones->zones();
 
     QList<QObject*> _zones;
     for ( KTimeZones::ZoneMap::ConstIterator it = zones.begin(); it != zones.end(); ++it ) {
         const KTimeZone zone = it.value();
-        TimeZone *_zone = new TimeZone(zone);
-        _zones.append(_zone);
+        if (timeZoneFilter.isEmpty() || zone.name().contains(timeZoneFilter, Qt::CaseInsensitive)) {
+            TimeZone *_zone = new TimeZone(zone);
+            _zones.append(_zone);
+        }
     }
+    kDebug() << "Found: " << _zones.count() << " timezones.";
     //qSort( cities.begin(), cities.end(), localeLessThan );
     q->setTimeZones(_zones);
 }
@@ -221,6 +228,38 @@ void TimeSettings::setTimeZones(QList<QObject*> timezones)
         d->timezones = timezones;
         emit timeZonesChanged();
     //}
+}
+
+QStringListModel* TimeSettings::timeZonesModel()
+{
+    if (!d->timeZones) {
+        d->initTimeZones();
+    }
+    return d->timeZonesModel;
+}
+
+void TimeSettings::setTimeZonesModel(QStringListModel *timezones)
+{
+    //if (d->timezones != timezones) {
+        d->timeZonesModel = timezones;
+        emit timeZonesModelChanged();
+    //}
+}
+
+void TimeSettings::timeZoneFilterChanged(const QString &filter)
+{
+    kDebug() << "new filter: " << filter;
+    d->timeZoneFilter = filter;
+    d->timeZoneFilter.replace( ' ', '_' );
+    d->initTimeZones();
+    emit timeZonesChanged();
+}
+
+void TimeSettings::saveTimeZone(const QString &newtimezone)
+{
+    kDebug() << "TODO: saving timezone to config: " << newtimezone;
+    setTimeZone(newtimezone);
+    emit timeZoneChanged();
 }
 
 bool TimeSettings::twentyFour()
