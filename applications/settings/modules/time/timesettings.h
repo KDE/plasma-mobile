@@ -45,7 +45,7 @@ class TimeSettings : public SettingsModule
     Q_PROPERTY(QString timeFormat READ timeFormat WRITE setTimeFormat NOTIFY timeFormatChanged)
     Q_PROPERTY(bool twentyFour READ twentyFour WRITE setTwentyFour NOTIFY twentyFourChanged)
     Q_PROPERTY(QString timeZone READ timeZone WRITE setTimeZone NOTIFY timeZoneChanged)
-    Q_PROPERTY(QStringList timeZones READ timeZones WRITE setTimeZones NOTIFY timeZonesChanged)
+    Q_PROPERTY(QList<QObject*> timeZones READ timeZones WRITE setTimeZones NOTIFY timeZonesChanged)
     Q_PROPERTY(QString currentTime READ currentTime WRITE setCurrentTime NOTIFY currentTimeChanged)
 
     public:
@@ -68,13 +68,13 @@ class TimeSettings : public SettingsModule
         QString currentTime();
         QString timeFormat();
         QString timeZone();
-        QStringList timeZones();
+        QList<QObject*> timeZones();
         bool twentyFour();
 
     public Q_SLOTS:
         void setCurrentTime(const QString &currentTime);
         void setTimeZone(const QString &timezone);
-        void setTimeZones(const QStringList &timezones);
+        void setTimeZones(const QList<QObject*> timezones);
         void setTimeFormat(const QString &timeFormat);
         void setTwentyFour(bool t);
         void timeout();

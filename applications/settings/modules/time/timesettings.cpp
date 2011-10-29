@@ -21,6 +21,7 @@
 */
 
 #include "timesettings.h"
+#include "timezone.h"
 
 #include <kdebug.h>
 #include <KIcon>
@@ -68,13 +69,14 @@ public:
     KSharedConfigPtr localeConfig;
     KConfigGroup localeSettings;
     KTimeZones *timeZones;
-    QStringList timezones; // urg
+    QList<QObject*> timezones;
 };
 
 TimeSettings::TimeSettings(QObject *parent, const QVariantList &list)
     : SettingsModule(parent, list)
 {
     qmlRegisterType<TimeSettings>();
+    qmlRegisterType<TimeZone>();
     qmlRegisterType<TimeSettings>("org.kde.active.settings", 0, 1, "TimeSettings");
 }
 
@@ -123,27 +125,15 @@ void TimeSettingsPrivate::initTimeZones()
     kDebug() << " TZ: cities: " << cities;
 
     const KTimeZones::ZoneMap zones = timeZones->zones();
+
+    QList<QObject*> _zones;
     for ( KTimeZones::ZoneMap::ConstIterator it = zones.begin(); it != zones.end(); ++it ) {
         const KTimeZone zone = it.value();
-        const QString continentCity = displayName( zone );
-        const int separator = continentCity.lastIndexOf('/');
-        // Make up the localized key that will be used for sorting.
-        // Example: i18n(Asia/Tokyo) -> key = "i18n(Tokyo)|i18n(Asia)|Asia/Tokyo"
-        // The zone name is appended to ensure unicity even with equal translations (#174918)
-        const QString key = continentCity.mid(separator+1) + '|'
-                    + continentCity.left(separator) + '|' + zone.name();
-        cities.append( key );
-        zonesByCity.insert( key, zone );
+        TimeZone *_zone = new TimeZone(zone);
+        _zones.append(_zone);
     }
-    qSort( cities.begin(), cities.end(), localeLessThan );
-
-    foreach ( const QString &key, cities ) {
-        const KTimeZone zone = zonesByCity.value(key);
-        tz.append(zone.name());
-    }
-    kDebug() << tz.count() << " timezones loaded.";
-    qSort( tz.begin(), tz.end(), localeLessThan );
-    q->setTimeZones(tz);
+    //qSort( cities.begin(), cities.end(), localeLessThan );
+    q->setTimeZones(_zones);
 }
 
 QString TimeSettingsPrivate::displayName( const KTimeZone &zone )
@@ -211,12 +201,13 @@ void TimeSettings::setTimeZone(const QString &timezone)
 {
     if (d->timezone != timezone) {
         d->timezone = timezone;
+        kDebug() << "booyah";
         emit timeZoneChanged();
         timeout();
     }
 }
 
-QStringList TimeSettings::timeZones()
+QList<QObject*> TimeSettings::timeZones()
 {
     if (!d->timeZones) {
         d->initTimeZones();
@@ -224,12 +215,12 @@ QStringList TimeSettings::timeZones()
     return d->timezones;
 }
 
-void TimeSettings::setTimeZones(const QStringList &timezones)
+void TimeSettings::setTimeZones(QList<QObject*> timezones)
 {
-    if (d->timezones != timezones) {
+    //if (d->timezones != timezones) {
         d->timezones = timezones;
         emit timeZonesChanged();
-    }
+    //}
 }
 
 bool TimeSettings::twentyFour()
