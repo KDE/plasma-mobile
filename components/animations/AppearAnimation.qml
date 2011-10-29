@@ -19,13 +19,13 @@
  */
 
 import QtQuick 1.0
-//import org.kde.qtextracomponents 0.1
+import "Animations.js" as Animations
 
 ParallelAnimation {
     id: appearAnimation
     objectName: "appearAnimation"
     property Item targetItem
-    property int duration: 250*2
+    property int duration: Animations.normalDuration
 
 
     PropertyAnimation {
