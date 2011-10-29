@@ -24,9 +24,9 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.active.settings 0.1
 import org.kde.qtextracomponents 0.1
 
-PlasmaCore.FrameSvgItem {
-    imagePath: "widgets/frame"
-    prefix: "raised"
+Item {
+    //imagePath: "widgets/background"
+    //prefix: "raised"
     //id: settingsRoot
     id: timeZonePicker
     objectName: "timeZonePicker"
@@ -35,6 +35,11 @@ PlasmaCore.FrameSvgItem {
     //anchors { top: twentyFourItem.bottom; left: parent.left; right: parent.right; topMargin: 32; }
     height: 300
     width: 400
+
+    PlasmaCore.Svg {
+        id: iconsSvg
+        imagePath: "widgets/configuration-icons"
+    }
 
     Text {
         id: timeZoneLabel
@@ -71,6 +76,7 @@ PlasmaCore.FrameSvgItem {
 
     ListView {
         id: timeZonesList
+        currentIndex: -1
         //height: 500
         width: parent.width
         clip: true
@@ -85,6 +91,12 @@ PlasmaCore.FrameSvgItem {
         model: timeSettings.timeZones
 
         delegate: timeZoneDelegate
+        highlight: PlasmaCore.FrameSvgItem {
+            id: highlightFrame
+            imagePath: "widgets/viewitem"
+            prefix: "selected+hover"
+        }
+
     }
     Component {
         id: timeZoneDelegate
@@ -106,10 +118,11 @@ PlasmaCore.FrameSvgItem {
                 //width: 200
                 anchors.margins: timeZonesList.spacing / -2 +2
                 anchors.fill: tzDelegateContainer
+                onPressed: { print("pressed " + index); listView.currentIndex = index; }
                 onClicked: {
                     print (" save: " + modelData.name);
                     timeSettings.saveTimeZone(modelData.name);
-                    timeZonePicker.visible = false;
+                    dialog.state = "closed";
                 }
             }
             //Rectangle { anchors.fill: theMouse; color: "green"; opacity: 0.2; }
@@ -117,18 +130,5 @@ PlasmaCore.FrameSvgItem {
     }
     //Rectangle { anchors.fill: timeZonePicker; color: "green"; opacity: 0.1; }
     //Rectangle { anchors.fill: timeZonesList; color: "blue"; opacity: 0.1; p
-
-    QIconItem {
-        width: 24
-        height: width
-        icon: QIcon("dialog-close")
-        anchors { top: parent.top; right: parent.right; margins: 8; }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                timeZonePicker.visible = false;
-            }
-        }
-    }
 
 }

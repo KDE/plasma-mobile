@@ -29,10 +29,12 @@
 #include <QScriptValue>
 #include <QTimer>
 
+//#include <KConfigGroup>
 #include <KStandardDirs>
 #include "Plasma/Package"
 
 #include <kdeclarative.h>
+#include "qscriptnonguibookkeeping.cpp"
 
 View::View(const QString &module, QWidget *parent)
     : QDeclarativeView(parent),
@@ -44,7 +46,9 @@ View::View(const QString &module, QWidget *parent)
     QStringList importPathes = KGlobal::dirs()->findDirs("lib", "kde4/imports");
     foreach (const QString &iPath, importPathes) {
         engine()->addImportPath(iPath);
+        kDebug() << " IMPORT: " << iPath;
     }
+    //qmlRegisterType<KConfigGroup>();
 
     KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
@@ -61,6 +65,12 @@ View::View(const QString &module, QWidget *parent)
 
     }
     rootContext()->setContextProperty("settingsModulesModel", QVariant::fromValue(m_settingsModules->items()));
+    const QString qmlFile = m_package->filePath("mainscript");
+    KUrl qurl = KUrl(m_package->filePath("mainscript"));
+    QString packagePath = qurl.path().replace(qurl.fileName(), "");
+    kDebug() << "FP: " << qurl.path().replace(qurl.fileName(), "");
+    kDebug() << "QML File: " << qmlFile << packagePath;
+    engine()->addImportPath(packagePath);
 
     setSource(QUrl(m_package->filePath("mainscript")));
     show();
@@ -103,6 +113,7 @@ void View::onStatusChanged(QDeclarativeView::Status status)
         }
     } else if (status == QDeclarativeView::Error) {
         foreach (const QDeclarativeError &e, errors()) {
+            kDebug() << "EEEE" << e;
             kWarning() << "error in QML: " << e.toString() << e.description();
         }
     } else if (status == QDeclarativeView::Loading) {

@@ -34,7 +34,6 @@ Item {
     }
 
     width: 800; height: 500
-    //color: theme.backgroundColor
 
     PlasmaCore.Theme {
         id: theme
@@ -55,7 +54,7 @@ Item {
             id: descriptionLabel
             color: theme.textColor
             text: moduleDescription
-            //opacity: 1
+            opacity: .4
         }
         Text {
             color: theme.textColor
@@ -100,7 +99,6 @@ Item {
         anchors.topMargin: 24
         text: i18n("Timezone:")
         anchors.rightMargin: 12
-        //opacity: 1
     }
 
     Text {
@@ -111,18 +109,15 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                timeZonePicker.visible = !timeZonePicker.visible;
+                timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
             }
         }
     }
 
-    TimeZonePicker {
+    Dialog {
         id: timeZonePicker
-        height: parent.height * 0.9
-        width: parent.width * 0.8
-        anchors.centerIn: parent
-        visible: false
-
+        anchors.fill: parent
+        anchors.margins: 60
     }
 
     Component.onCompleted: {
