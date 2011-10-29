@@ -19,30 +19,14 @@
  */
 
 import QtQuick 1.0
+import "Animations.js" as Animations
 
 ParallelAnimation {
     id: disappearAnimation
     objectName: "disappearAnimation"
     property Item targetItem
     //property alias target: appearAnimation.targetItem
-    property int duration: 250*2
-    /*
-
-    PropertyAnimation {
-        target: disappearAnimation.targetItem
-        properties: "opacity"
-        from: 0; to: 1.0
-        duration: disappearAnimation.duration;
-        easing.type: Easing.InExpo;
-    }
-    PropertyAnimation {
-        target: disappearAnimation.targetItem
-        properties: "scale"
-        from: 1.0; to: 0.8
-        duration: disappearAnimation.duration;
-        easing.type: Easing.InExpo;
-    }
-    */
+    property int duration: Animations.normalDuration
     PropertyAnimation {
         properties: "opacity"
         duration: disappearAnimation.duration
