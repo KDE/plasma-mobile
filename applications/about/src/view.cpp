@@ -54,6 +54,20 @@ AppView::AppView(QWidget *parent)
     //binds things like kconfig and icons
     kdeclarative.setupBindings();
     QScriptEngine *scriptEngine = kdeclarative.scriptEngine();
+    //FIXME: find a prettier way
+    QString fn;
+    if (QFile::exists("/etc/image-release")) {
+        fn = "/etc/image-release";
+    } else {
+        fn = "/etc/issue";
+    }
+    QFile f(fn);
+    f.open(QIODevice::ReadOnly);
+    const QString osVersion = f.readLine();
+
+    rootContext()->setContextProperty("runtimeInfoActiveVersion", "1.0");
+    rootContext()->setContextProperty("runtimeInfoKdeVersion", KDE::versionString());
+    rootContext()->setContextProperty("runtimeInfoOsVersion", osVersion);
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), "org.kde.active.aboutapp", structure);
@@ -100,20 +114,6 @@ void AppView::onStatusChanged(QDeclarativeView::Status status)
             m_rootItem = rootObject();
 
             if (m_rootItem) {
-                //FIXME: find a prettier way
-                QString fn;
-                if (QFile::exists("/etc/image-release")) {
-                    fn = "/etc/image-release";
-                } else {
-                    fn = "/etc/issue";
-                }
-                QFile f(fn);
-                f.open(QIODevice::ReadOnly);
-                const QString osVersion = f.readLine();
-
-                rootContext()->setContextProperty("runtimeInfoActiveVersion", "1.0");
-                rootContext()->setContextProperty("runtimeInfoKdeVersion", KDE::versionString());
-                rootContext()->setContextProperty("runtimeInfoOsVersion", osVersion);
             } else {
                 kError() << "imageViewer component not found.";
             }
