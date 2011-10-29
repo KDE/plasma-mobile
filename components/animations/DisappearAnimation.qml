@@ -21,23 +21,28 @@
 import QtQuick 1.0
 import "Animations.js" as Animations
 
-ParallelAnimation {
+SequentialAnimation {
     id: disappearAnimation
     objectName: "disappearAnimation"
+
     property Item targetItem
-    //property alias target: appearAnimation.targetItem
     property int duration: Animations.normalDuration
-    PropertyAnimation {
-        properties: "opacity"
-        duration: disappearAnimation.duration
-        target: disappearAnimation.targetItem
-        //duration: 175;
-        easing.type: Easing.OutExpo;
+
+    ScriptAction { script: { targetItem.smooth = false; print(" smooth? " + targetItem.smooth); } }
+
+    ParallelAnimation {
+        PropertyAnimation {
+            properties: "opacity"
+            duration: disappearAnimation.duration
+            target: disappearAnimation.targetItem
+            easing.type: Easing.OutExpo;
+        }
+        PropertyAnimation {
+            properties: "scale"
+            target: disappearAnimation.targetItem
+            duration: disappearAnimation.duration * 0.6
+            easing.type: Easing.OutExpo;
+        }
     }
-    PropertyAnimation {
-        properties: "scale"
-        target: disappearAnimation.targetItem
-        duration: disappearAnimation.duration * 0.6
-        easing.type: Easing.OutExpo;
-    }
+    ScriptAction { script: { targetItem.smooth = true; print(" smooth? " + targetItem.smooth); } }
 }
