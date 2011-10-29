@@ -115,7 +115,7 @@ void AppView::onStatusChanged(QDeclarativeView::Status status)
 
             if (m_rootItem) {
             } else {
-                kError() << "imageViewer component not found.";
+                kError() << "aboutapp component not found.";
             }
         }
     } else if (status == QDeclarativeView::Error) {
