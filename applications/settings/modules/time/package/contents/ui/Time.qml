@@ -92,8 +92,37 @@ Item {
 
     }
 
+    Text {
+        id: timeZoneLabel
+        color: theme.textColor
+        anchors.right: parent.horizontalCenter
+        anchors.top: twentyFourItem.bottom
+        anchors.topMargin: 24
+        text: i18n("Timezone:")
+        anchors.rightMargin: 12
+        //opacity: 1
+    }
+
+    Text {
+        anchors.left: parent.horizontalCenter
+        anchors.verticalCenter: timeZoneLabel.verticalCenter
+        text: timeSettings.timeZone
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                timeZonePicker.visible = !timeZonePicker.visible;
+            }
+        }
+    }
+
     TimeZonePicker {
         id: timeZonePicker
+        height: parent.height * 0.9
+        width: parent.width * 0.8
+        anchors.centerIn: parent
+        visible: false
+
     }
 
     Component.onCompleted: {

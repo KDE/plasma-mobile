@@ -22,13 +22,19 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.active.settings 0.1
+import org.kde.qtextracomponents 0.1
 
-Item {
+PlasmaCore.FrameSvgItem {
+    imagePath: "widgets/frame"
+    prefix: "raised"
+    //id: settingsRoot
     id: timeZonePicker
     objectName: "timeZonePicker"
+    signal filterChanged(string filter)
 
-    anchors { top: twentyFourItem.bottom; left: parent.left; right: parent.right; topMargin: 32; }
+    //anchors { top: twentyFourItem.bottom; left: parent.left; right: parent.right; topMargin: 32; }
     height: 300
+    width: 400
 
     Text {
         id: timeZoneLabel
@@ -48,6 +54,7 @@ Item {
 
     PlasmaComponents.TextField {
         id: tzFilter
+        width: parent.width / 4
         placeholderText: "filter..."
         //Keys.onTabPressed: tf2.forceActiveFocus();
         anchors {
@@ -56,6 +63,10 @@ Item {
             //topMargin: 32;
             //bottom: parent.bottom
         }
+        onTextChanged: {
+            print("update filter");
+            timeSettings.timeZoneFilterChanged(text);
+        }
     }
 
     ListView {
@@ -63,32 +74,61 @@ Item {
         //height: 500
         width: parent.width
         clip: true
+        spacing: 8
         anchors {
             //verticalCenter: parent.verticalCenter
             top: tzFilter.bottom
+            topMargin: spacing
             bottom: parent.bottom
         }
-        /*
-        model: PlasmaCore.SortFilterModel {
-            id: timeZoneFilterModel
-            //filterRole: "name"
-            //filterRegExp: tzFilter.text
-            sourceModel: timeSettings.timeZones
-        }
-        */
-        model: timeSettings.timeZones
-        delegate: Text {
-            height: 24
-            //width: 200
-            text: modelData.name
-            //visible: name == "Europe/Amsterdam"
-        }
 
-        Component.onCompleted: {
-            //print("timezones: " + model.join("\n"));
+        model: timeSettings.timeZones
+
+        delegate: timeZoneDelegate
+    }
+    Component {
+        id: timeZoneDelegate
+        Item {
+            id: tzDelegateContainer
+            height: 24
+            width: timeZonesList.width
+
+            Text {
+                id: tzLabel
+                anchors.fill: parent
+                text: modelData.name
+                color: theme.textColor
+            }
+
+            MouseArea {
+                id: theMouse
+                //height: 24
+                //width: 200
+                anchors.margins: timeZonesList.spacing / -2 +2
+                anchors.fill: tzDelegateContainer
+                onClicked: {
+                    print (" save: " + modelData.name);
+                    timeSettings.saveTimeZone(modelData.name);
+                    timeZonePicker.visible = false;
+                }
+            }
+            //Rectangle { anchors.fill: theMouse; color: "green"; opacity: 0.2; }
         }
     }
     //Rectangle { anchors.fill: timeZonePicker; color: "green"; opacity: 0.1; }
-    //Rectangle { anchors.fill: timeZonesList; color: "blue"; opacity: 0.1; }
+    //Rectangle { anchors.fill: timeZonesList; color: "blue"; opacity: 0.1; p
+
+    QIconItem {
+        width: 24
+        height: width
+        icon: QIcon("dialog-close")
+        anchors { top: parent.top; right: parent.right; margins: 8; }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                timeZonePicker.visible = false;
+            }
+        }
+    }
 
 }

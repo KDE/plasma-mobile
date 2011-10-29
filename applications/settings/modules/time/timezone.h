@@ -35,7 +35,6 @@ class TimeZone : public QObject
 
     public:
         TimeZone(const KTimeZone &zone, QObject *parent = 0);
-        //TimeZone(QObject *parent = 0);
         virtual ~TimeZone();
 
         QString name();

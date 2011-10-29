@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QIcon>
 #include <QVariant>
+#include <QStringListModel>
 
 #include "settingsmodule.h"
 
@@ -46,6 +47,7 @@ class TimeSettings : public SettingsModule
     Q_PROPERTY(bool twentyFour READ twentyFour WRITE setTwentyFour NOTIFY twentyFourChanged)
     Q_PROPERTY(QString timeZone READ timeZone WRITE setTimeZone NOTIFY timeZoneChanged)
     Q_PROPERTY(QList<QObject*> timeZones READ timeZones WRITE setTimeZones NOTIFY timeZonesChanged)
+    Q_PROPERTY(QStringListModel* timeZonesModel READ timeZonesModel WRITE setTimeZonesModel NOTIFY timeZonesModelChanged)
     Q_PROPERTY(QString currentTime READ currentTime WRITE setCurrentTime NOTIFY currentTimeChanged)
 
     public:
@@ -69,15 +71,19 @@ class TimeSettings : public SettingsModule
         QString timeFormat();
         QString timeZone();
         QList<QObject*> timeZones();
+        QStringListModel* timeZonesModel();
         bool twentyFour();
 
     public Q_SLOTS:
         void setCurrentTime(const QString &currentTime);
         void setTimeZone(const QString &timezone);
         void setTimeZones(const QList<QObject*> timezones);
+        void setTimeZonesModel(QStringListModel *timezones);
         void setTimeFormat(const QString &timeFormat);
         void setTwentyFour(bool t);
         void timeout();
+        Q_INVOKABLE void timeZoneFilterChanged(const QString &filter);
+        Q_INVOKABLE void saveTimeZone(const QString &newtimezone);
 
     Q_SIGNALS:
         void currentTimeChanged();
@@ -85,6 +91,7 @@ class TimeSettings : public SettingsModule
         void timeFormatChanged();
         void timeZoneChanged();
         void timeZonesChanged();
+        void timeZonesModelChanged();
 
     private:
         TimeSettingsPrivate* d;
