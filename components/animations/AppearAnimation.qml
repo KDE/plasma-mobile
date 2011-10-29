@@ -25,7 +25,7 @@ ParallelAnimation {
     id: appearAnimation
     objectName: "appearAnimation"
     property Item targetItem
-    property int duration: 250
+    property int duration: 250*2
 
 
     PropertyAnimation {
