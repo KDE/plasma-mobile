@@ -70,9 +70,9 @@ Item {
         }
         /*
         model: PlasmaCore.SortFilterModel {
-            id: feedListFilter
-            //filterRole: "modelData"
-            filterRegExp: tzFilter.text
+            id: timeZoneFilterModel
+            //filterRole: "name"
+            //filterRegExp: tzFilter.text
             sourceModel: timeSettings.timeZones
         }
         */
@@ -80,11 +80,12 @@ Item {
         delegate: Text {
             height: 24
             //width: 200
-            text: modelData
+            text: modelData.name
+            //visible: name == "Europe/Amsterdam"
         }
 
         Component.onCompleted: {
-            //print("timezones: " + model);
+            //print("timezones: " + model.join("\n"));
         }
     }
     //Rectangle { anchors.fill: timeZonePicker; color: "green"; opacity: 0.1; }
