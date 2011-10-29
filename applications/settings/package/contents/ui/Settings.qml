@@ -35,8 +35,8 @@ Item {
     }
 
     PlasmaCore.FrameSvgItem {
-        imagePath: "widgets/frame"
-        prefix: "raised"
+        imagePath: "dialogs/background"
+        //prefix: "raised"
         id: settingsRoot
         objectName: "settingsRoot"
         state: "expanded"
