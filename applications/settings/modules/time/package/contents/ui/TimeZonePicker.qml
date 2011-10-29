@@ -25,21 +25,12 @@ import org.kde.active.settings 0.1
 import org.kde.qtextracomponents 0.1
 
 Item {
-    //imagePath: "widgets/background"
-    //prefix: "raised"
-    //id: settingsRoot
     id: timeZonePicker
     objectName: "timeZonePicker"
-    signal filterChanged(string filter)
-
-    //anchors { top: twentyFourItem.bottom; left: parent.left; right: parent.right; topMargin: 32; }
     height: 300
     width: 400
 
-    PlasmaCore.Svg {
-        id: iconsSvg
-        imagePath: "widgets/configuration-icons"
-    }
+    signal filterChanged(string filter)
 
     Text {
         id: timeZoneLabel
@@ -69,9 +60,27 @@ Item {
             //bottom: parent.bottom
         }
         onTextChanged: {
-            print("update filter");
-            timeSettings.timeZoneFilterChanged(text);
+            print("update filter" + text);
+            //timeSettings.timeZoneFilterChanged(text);
+            filterModel.filterRegExp = ".*"+text+".*"
+
         }
+    }
+    PlasmaCore.SortFilterModel {
+        id: filterModel
+        sourceModel: timeSettings.timeZonesModel
+        filterRole: "display"
+        //filterRegExp: ".*"+tzFilter.text+".*"
+        sortRole: "display"
+        sortOrder: "AscendingOrder"
+
+//         {
+// 
+//             f = "s/" + tzFilter.text + "\.*/g"
+//             print(" New regex: :" + f);
+//             return f
+//         }
+
     }
 
     ListView {
@@ -88,7 +97,7 @@ Item {
             bottom: parent.bottom
         }
 
-        model: timeSettings.timeZones
+        model: filterModel
 
         delegate: timeZoneDelegate
         highlight: PlasmaCore.FrameSvgItem {
@@ -108,7 +117,8 @@ Item {
             Text {
                 id: tzLabel
                 anchors.fill: parent
-                text: modelData.name
+                text: display
+                //text: modelData.name
                 color: theme.textColor
             }
 
@@ -120,8 +130,8 @@ Item {
                 anchors.fill: tzDelegateContainer
                 onPressed: { print("pressed " + index); listView.currentIndex = index; }
                 onClicked: {
-                    print (" save: " + modelData.name);
-                    timeSettings.saveTimeZone(modelData.name);
+                    print (" save: " + dislay);
+                    timeSettings.saveTimeZone(display);
                     dialog.state = "closed";
                 }
             }

@@ -20,22 +20,16 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.active.settings 0.1
-import org.kde.qtextracomponents 0.1
 
 PlasmaCore.FrameSvgItem {
-    imagePath: "dialogs/background"
-    //prefix: "raised"
-    //id: settingsRoot
     id: dialog
     objectName: "timeZonePicker"
+
     signal filterChanged(string filter)
 
-    //anchors { top: twentyFourItem.bottom; left: parent.left; right: parent.right; topMargin: 32; }
-    height: 300
-    width: 400
+    height: 300; width: 400
+    imagePath: "dialogs/background"
     state: "closed"
 
     PlasmaCore.Svg {
@@ -45,43 +39,23 @@ PlasmaCore.FrameSvgItem {
 
     TimeZonePicker {
         id: timeZonePicker
-        height: parent.height -40
-        width: parent.width -40
+        height: parent.height -40; width: parent.width -40
         anchors.centerIn: parent
-        //state: "open"
-
     }
 
-    //Rectangle { anchors.fill: timeZonePicker; color: "green"; opacity: 0.1; }
-    //Rectangle { anchors.fill: timeZonesList; color: "blue"; opacity: 0.1; p
-
     SvgButton {
-        width: 48
-        height: width
+        width: 48; height: width
         targetItem: dialog
         anchors { top: parent.top; right: parent.right; margins: 4; }
     }
     states: [
         State {
-            //id: o_pened
             name: "open";
-
-            PropertyChanges {
-                target: dialog
-                opacity: 1.0
-                scale: 1.0
-            }
+            PropertyChanges { target: dialog; opacity: 1.0; scale: 1.0; }
         },
-
         State {
-            //id: closed
             name: "closed";
-
-            PropertyChanges {
-                target: dialog
-                opacity: 0
-                scale: 0.8
-            }
+            PropertyChanges { target: dialog; opacity: 0; scale: 0.8; }
         }
     ]
     transitions: [

@@ -60,7 +60,7 @@ public:
     TimeSettings *q;
     QString timeFormat;
     QString timezone;
-    QStringListModel *timeZonesModel;
+    QObject *timeZonesModel;
     QString timeZoneFilter;
     QString currentTime;
     QTimer *timer;
@@ -89,6 +89,7 @@ TimeSettings::TimeSettings()
     d = new TimeSettingsPrivate;
     d->q = this;
     d->timeZones = 0;
+    d->timeZonesModel = 0;
     setTimeZone(KSystemTimeZones::local().name());
 
     d->initSettings();
@@ -131,16 +132,19 @@ void TimeSettingsPrivate::initTimeZones()
     const KTimeZones::ZoneMap zones = timeZones->zones();
 
     QList<QObject*> _zones;
+    QStringList _zonesList;
     for ( KTimeZones::ZoneMap::ConstIterator it = zones.begin(); it != zones.end(); ++it ) {
         const KTimeZone zone = it.value();
         if (timeZoneFilter.isEmpty() || zone.name().contains(timeZoneFilter, Qt::CaseInsensitive)) {
             TimeZone *_zone = new TimeZone(zone);
             _zones.append(_zone);
+            _zonesList << _zone->name();
         }
     }
     kDebug() << "Found: " << _zones.count() << " timezones.";
     //qSort( cities.begin(), cities.end(), localeLessThan );
     q->setTimeZones(_zones);
+    q->setTimeZonesModel(new QStringListModel(_zonesList, q));
 }
 
 QString TimeSettingsPrivate::displayName( const KTimeZone &zone )
@@ -230,7 +234,7 @@ void TimeSettings::setTimeZones(QList<QObject*> timezones)
     //}
 }
 
-QStringListModel* TimeSettings::timeZonesModel()
+QObject* TimeSettings::timeZonesModel()
 {
     if (!d->timeZones) {
         d->initTimeZones();
@@ -238,7 +242,7 @@ QStringListModel* TimeSettings::timeZonesModel()
     return d->timeZonesModel;
 }
 
-void TimeSettings::setTimeZonesModel(QStringListModel *timezones)
+void TimeSettings::setTimeZonesModel(QObject* timezones)
 {
     //if (d->timezones != timezones) {
         d->timeZonesModel = timezones;
