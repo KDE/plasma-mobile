@@ -21,6 +21,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.active.settings 0.1 as ActiveSettings
 
 Item {
     id: webModule
@@ -50,13 +51,46 @@ Item {
             text: moduleDescription
             opacity: .4
         }
-        Text {
-            color: theme.textColor
-            font.pixelSize: 32
-            style: Text.Sunken
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: timeSettings.currentTime
+    }
+    ListView {
+        id: configList
+        currentIndex: -1
+        //height: 500
+        width: parent.width
+        clip: true
+        spacing: 8
+        anchors {
+            //verticalCenter: parent.verticalCenter
+            top: titleCol.bottom
+            topMargin: spacing
+            bottom: parent.bottom
         }
+        model: configModel
+
+        delegate: configDelegate
+
+        Rectangle { anchors.fill: parent; color: "green"; opacity: 0.3; }
+    }
+    Component {
+        id: configDelegate
+        Item {
+            id: tzDelegateContainer
+            height: 24
+            width: timeZonesList.width
+
+            Text {
+                id: tzLabel
+                anchors.fill: parent
+                text: display
+                //text: modelData.name
+                color: theme.textColor
+            }
+        }
+    }
+
+    ActiveSettings.ConfigModel {
+        id: configModel
+        configFile: "active-webbrowserrc"
     }
 
     Component.onCompleted: {

@@ -20,8 +20,6 @@
 
 #include "configmodel.h"
 
-#include <QTimer>
-
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDebug>
@@ -37,6 +35,11 @@ public:
     ConfigModel* q;
     int maxRoleId;
     KConfig* config;
+    //KSharedConfigPtr config;
+    QString configFile;
+    QMap<QString, KConfigGroup*> configGroups;
+
+    bool readConfigFile();
 };
 
 
@@ -47,6 +50,7 @@ ConfigModel::ConfigModel(QObject* parent)
     d = new ConfigModelPrivate(this);
     d->config = 0;
     d->maxRoleId = Qt::UserRole+1;
+    kDebug() << "New ConfigModel. " << d->maxRoleId;
 //     //There is one reserved role name: DataEngineSource
 //     m_roleNames[d->maxRoleId] = "DataEngineSource";
 //     m_roleIds["DataEngineSource"] = d->maxRoleId;
@@ -63,33 +67,43 @@ ConfigModel::ConfigModel(QObject* parent)
 
 ConfigModel::~ConfigModel()
 {
-    delete d->config;
+    //delete d->config;
     delete d;
 }
 
+QString ConfigModel::configFile() const
+{
+    return d->configFile;
+}
 
-// void ConfigModel::setSourceFilter(const QString& key)
-// {
-//     if (m_sourceFilter == key) {
-//         return;
-//     }
-// 
-//     m_sourceFilter = key;
-//     m_sourceFilterRE = QRegExp(key);
-//     /*
-//      FIXME: if the user changes the source filter, it won't immediately be reflected in the
-//      available data
-//     if (m_sourceFilterRE.isValid()) {
-//         .. iterate through all items and weed out the ones that don't match ..
-//     }
-//     */
-// }
+void ConfigModel::setConfigFile(const QString& file)
+{
+    if (d->configFile == file) {
+        return;
+    }
+    d->configFile = file;
+    if (!d->config) {
+        d->readConfigFile();
+    }
+    emit configFileChanged();
+}
 
-// QString ConfigModel::sourceFilter() const
-// {
-// //     return m_sourceFilter;
-// }
 
+bool ConfigModelPrivate::readConfigFile()
+{
+    if (configFile.isEmpty()) {
+        return false;
+    }
+    config = new KConfig(configFile);
+    //config = KSharedConfig::openConfig("active-webbrowserrc");
+    //d->items.clear();
+    //QStringList h = config.readEntry("history", QStringList());
+    foreach (const QString &groupname, config->groupList()) {
+        configGroups.insert(groupname, new KConfigGroup(config, groupname));
+    }
+    kDebug() << " Groups read: " << configGroups.keys();
+    return true;
+}
 
 QVariant ConfigModel::data(const QModelIndex &index, int role) const
 {
