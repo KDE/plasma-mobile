@@ -130,7 +130,7 @@ Item {
                 anchors.fill: tzDelegateContainer
                 onPressed: { print("pressed " + index); listView.currentIndex = index; }
                 onClicked: {
-                    print (" save: " + dislay);
+                    print (" save: " + display);
                     timeSettings.saveTimeZone(display);
                     dialog.state = "closed";
                 }

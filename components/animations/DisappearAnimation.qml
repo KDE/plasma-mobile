@@ -28,7 +28,7 @@ SequentialAnimation {
     property Item targetItem
     property int duration: Animations.normalDuration
 
-    ScriptAction { script: { targetItem.smooth = false; print(" smooth? " + targetItem.smooth); } }
+    ScriptAction { script: targetItem.smooth = false; }
 
     ParallelAnimation {
         PropertyAnimation {
@@ -44,5 +44,5 @@ SequentialAnimation {
             easing.type: Easing.OutExpo;
         }
     }
-    ScriptAction { script: { targetItem.smooth = true; print(" smooth? " + targetItem.smooth); } }
+    ScriptAction { script: targetItem.smooth = true; }
 }
