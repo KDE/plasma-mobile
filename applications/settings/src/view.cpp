@@ -47,9 +47,7 @@ View::View(const QString &module, QWidget *parent)
     QStringList importPathes = KGlobal::dirs()->findDirs("lib", "kde4/imports");
     foreach (const QString &iPath, importPathes) {
         engine()->addImportPath(iPath);
-        kDebug() << " IMPORT: " << iPath;
     }
-    //qmlRegisterType<KConfigGroup>();
 
     KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
@@ -70,11 +68,6 @@ View::View(const QString &module, QWidget *parent)
     }
     rootContext()->setContextProperty("settingsModulesModel", QVariant::fromValue(m_settingsModules->items()));
     const QString qmlFile = m_package->filePath("mainscript");
-    KUrl qurl = KUrl(m_package->filePath("mainscript"));
-    QString packagePath = qurl.path().replace(qurl.fileName(), "");
-    kDebug() << "FP: " << qurl.path().replace(qurl.fileName(), "");
-    kDebug() << "QML File: " << qmlFile << packagePath;
-    engine()->addImportPath(packagePath);
 
     setSource(QUrl(m_package->filePath("mainscript")));
     show();
@@ -104,7 +97,7 @@ void View::updateStatus()
 
 void View::onStatusChanged(QDeclarativeView::Status status)
 {
-    kDebug() << "onStatusChanged";
+    //kDebug() << "onStatusChanged";
     if (status == QDeclarativeView::Ready) {
         if (!m_settingsRoot) {
             m_settingsRoot = rootObject()->findChild<QDeclarativeItem*>("settingsRoot");
