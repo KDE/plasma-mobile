@@ -33,33 +33,29 @@ Item {
         id: theme
     }
 
-    /*
-    MobileComponents.Package {
-        id: activeSettingsWeb
-        name: "org.kde.active.settings.web"
-    }
-    Rectangle {
-        id: rect
-        anchors.fill: parent
-        anchors.margins: 10
-        color: "blue"
-        opacity: 0.2
-
-    }
-    */
     Column {
-        anchors.fill: parent
-        spacing: 8
-
+        id: titleCol
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        spacing: 12
         Text {
             color: theme.textColor
-            text: "<h1>" + moduleTitle + "</h1>"
-            //opacity: 1
+            text: "<h3>" + moduleTitle + "</h3>"
+            opacity: 1
+        }
+        Text {
+            id: descriptionLabel
+            color: theme.textColor
+            text: moduleDescription
+            opacity: .4
         }
         Text {
             color: theme.textColor
-            text: moduleDescription
-            //opacity: 1
+            font.pixelSize: 32
+            style: Text.Sunken
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: timeSettings.currentTime
         }
     }
 
