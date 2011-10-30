@@ -15,9 +15,10 @@ KDE4_ADD_EXECUTABLE(active-settings ${active-settings_SRCS})
 
 target_link_libraries(active-settings
     ${QT_QTDECLARATIVE_LIBRARY}
-    ${KDE4_KDEUI_LIBS}
+    #${KDE4_KDEUI_LIBS}
     ${KDE4_PLASMA_LIBS}
     kdeclarative
+     #${KDE4_PLASMA_LIBS} ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY}
     #kactivities
 )
 
