@@ -37,7 +37,7 @@ PlasmaCore.FrameSvgItem {
         imagePath: "widgets/configuration-icons"
     }
 
-    TimeZonePicker {
+    Loader {
         id: timeZonePicker
         height: parent.height -40; width: parent.width -40
         anchors.centerIn: parent
@@ -68,4 +68,11 @@ PlasmaCore.FrameSvgItem {
             MobileComponents.DisappearAnimation { targetItem: dialog }
         }
     ]
+
+    onStateChanged: {
+        if (state == "open") {
+            print("Loading timezones ...");
+            timeZonePicker.source = "TimeZonePicker.qml";
+        }
+    }
 }
