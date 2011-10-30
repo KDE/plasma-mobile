@@ -116,6 +116,7 @@ Item {
 
     Dialog {
         id: timeZonePicker
+        source: "TimeZonePicker.qml"
         anchors.fill: parent
         anchors.margins: 60
     }

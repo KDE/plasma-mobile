@@ -27,6 +27,7 @@ PlasmaCore.FrameSvgItem {
     objectName: "timeZonePicker"
 
     signal filterChanged(string filter)
+    property string source
 
     height: 300; width: 400
     imagePath: "dialogs/background"
@@ -71,7 +72,7 @@ PlasmaCore.FrameSvgItem {
 
     onStateChanged: {
         if (state == "open") {
-            timeZonePicker.source = "TimeZonePicker.qml";
+            timeZonePicker.source = source;
         }
     }
 }
