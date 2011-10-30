@@ -71,7 +71,6 @@ PlasmaCore.FrameSvgItem {
 
     onStateChanged: {
         if (state == "open") {
-            print("Loading timezones ...");
             timeZonePicker.source = "TimeZonePicker.qml";
         }
     }
