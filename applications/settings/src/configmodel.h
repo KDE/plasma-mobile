@@ -34,7 +34,7 @@ class ConfigModelPrivate;
 class ConfigModel : public QAbstractItemModel
 {
     Q_OBJECT
-    //Q_PROPERTY(QString keyRoleFilter READ keyRoleFilter WRITE setKeyRoleFilter)
+    Q_PROPERTY(QString configFile READ configFile WRITE setConfigFile NOTIFY configFileChanged)
     //Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
@@ -53,13 +53,17 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
+    QString configFile() const;
+    void setConfigFile(const QString &file);
+
 //     int count() const {return countItems();}
 
 //protected:
 //     void setItems(const QString &sourceName, const QVariantList &list);
 //      inline int countItems() const;
-// 
-// Q_SIGNALS:
+
+Q_SIGNALS:
+    void configFileChanged();
 //     //void countChanged();
 
 // private Q_SLOTS:
