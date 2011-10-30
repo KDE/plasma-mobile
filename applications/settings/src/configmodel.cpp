@@ -19,7 +19,6 @@
  */
 
 #include "configmodel.h"
-
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDebug>
@@ -34,12 +33,15 @@ public:
                   q(q) {}
     ConfigModel* q;
     int maxRoleId;
-    KConfig* config;
-    //KSharedConfigPtr config;
-    QString configFile;
-    QMap<QString, KConfigGroup*> configGroups;
+    //KConfig* config;
+    KSharedConfigPtr config;
+    KConfigGroup *configGroup;
+    QString file;
+    QString group;
+    QStringList keys;
+    QHash<QString, int> roleIds;
 
-    bool readConfigFile();
+    int countItems() const;
 };
 
 
@@ -47,106 +49,121 @@ ConfigModel::ConfigModel(QObject* parent)
     : QAbstractItemModel(parent),
       d(0)
 {
+    setObjectName("ConfigModel");
     d = new ConfigModelPrivate(this);
     d->config = 0;
     d->maxRoleId = Qt::UserRole+1;
-    kDebug() << "New ConfigModel. " << d->maxRoleId;
-//     //There is one reserved role name: DataEngineSource
-//     m_roleNames[d->maxRoleId] = "DataEngineSource";
-//     m_roleIds["DataEngineSource"] = d->maxRoleId;
-//     ++d->maxRoleId;
-// 
-//     setObjectName("ConfigModel");
-//     connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
-//             this, SIGNAL(countChanged()));
-//     connect(this, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
-//             this, SIGNAL(countChanged()));
-//     connect(this, SIGNAL(modelReset()),
-//             this, SIGNAL(countChanged()));
+
+    QHash<int, QByteArray> roles;
+    // DisplayRole is display in QML, consistent with QAIM
+    roles.insert(Qt::DisplayRole, "display");
+    d->roleIds.insert("display", Qt::DisplayRole);
+
+    roles.insert(d->maxRoleId, "configKey");
+    d->roleIds.insert("configKey", d->maxRoleId);
+    ++d->maxRoleId;
+    roles.insert(d->maxRoleId, "configValue");
+    d->roleIds.insert("configValue", d->maxRoleId);
+    ++d->maxRoleId;
+    setRoleNames(roles);
+    kDebug() << "New ConfigModel. " << d->maxRoleId << d->roleIds;
 }
 
 ConfigModel::~ConfigModel()
 {
-    //delete d->config;
     delete d;
 }
 
-QString ConfigModel::configFile() const
+QString ConfigModel::file() const
 {
-    return d->configFile;
+    return d->file;
 }
 
-void ConfigModel::setConfigFile(const QString& file)
+void ConfigModel::setFile(const QString& filename)
 {
-    if (d->configFile == file) {
+    if (d->file == filename) {
         return;
     }
-    d->configFile = file;
-    if (!d->config) {
-        d->readConfigFile();
-    }
-    emit configFileChanged();
+    d->file = filename;
+    //if (!d->config) {
+        readConfigFile();
+    //}
+    emit fileChanged();
 }
 
-
-bool ConfigModelPrivate::readConfigFile()
+QString ConfigModel::group() const
 {
-    if (configFile.isEmpty()) {
+    return d->group;
+}
+
+void ConfigModel::setGroup(const QString& groupname)
+{
+    if (d->group == groupname) {
+        return;
+    }
+    //readConfigFile();
+    d->group = groupname;
+    emit groupChanged();
+}
+
+bool ConfigModel::readConfigFile()
+{
+    beginResetModel();
+
+    if (d->file.isEmpty()) {
         return false;
     }
-    config = new KConfig(configFile);
-    //config = KSharedConfig::openConfig("active-webbrowserrc");
-    //d->items.clear();
-    //QStringList h = config.readEntry("history", QStringList());
-    foreach (const QString &groupname, config->groupList()) {
-        configGroups.insert(groupname, new KConfigGroup(config, groupname));
+    d->keys.clear();
+    kDebug() << "Reading file: " << d->file << d->group;
+    d->config = KSharedConfig::openConfig(d->file);
+    d->configGroup = new KConfigGroup(d->config, d->group);
+    int r = 0;
+    bool ok = false;
+    foreach (const QString &newkey, d->configGroup->keyList()) {
+        d->keys << newkey;
+        if (setData(index(r, 0, QModelIndex()), QVariant(newkey), Qt::DisplayRole)) {
+            ok = true;
+        };
+        kDebug() << ok << " set data for: " << r << roleNameToId("configKey") << newkey;
+        r++;
     }
-    kDebug() << " Groups read: " << configGroups.keys();
+    if (ok) { // At least one insert has gone well. :-)
+        emit dataChanged(index(0, 0, QModelIndex()),
+                         index(r-1, columnCount()-1, QModelIndex()));
+        kDebug() << " Groups read: " << d->keys << r-1 << columnCount()-1;
+    }
+    endResetModel();
     return true;
 }
 
+int ConfigModelPrivate::countItems() const
+{
+    return keys.count();
+}
+
+
 QVariant ConfigModel::data(const QModelIndex &index, int role) const
 {
-//     if (!index.isValid() || index.column() > 0 ||
-//         index.row() < 0 || index.row() >= countItems()){
-//         return QVariant();
-//     }
-// 
-//     int count = 0;
-//     int actualRow = 0;
-//     QString source;
-//     QMap<QString, QVector<QVariant> >::const_iterator i;
-//     for (i = m_items.constBegin(); i != m_items.constEnd(); ++i) {
-//         const int oldCount = count;
-//         count += i.value().count();
-// 
-//         if (index.row() < count) {
-//             source = i.key();
-//             actualRow = index.row() - oldCount;
-//             break;
-//         }
-//     }
-// 
-//     //is it the reserved role: DataEngineSource ?
-//     //also, if each source is an item DataEngineSource is a role between all the others, otherwise we know it from the role variable
-//     //finally, sub items are some times QVariantHash some times QVariantMaps
-//     if (!m_keyRoleFilter.isEmpty() && m_roleNames.value(role) == "DataEngineSource") {
-//         return source;
-//     } else if (m_items.value(source).value(actualRow).canConvert<QVariantHash>()) {
-//         return m_items.value(source).value(actualRow).value<QVariantHash>().value(m_roleNames.value(role));
-//     } else {
-//         return m_items.value(source).value(actualRow).value<QVariantMap>().value(m_roleNames.value(role));
-//     }
-    return QVariant();
+    //kDebug() << "req'ing" << index.row() << index.column() << role;
+    if (!index.isValid() || index.column() > 0 ||
+        index.row() < 0 || index.row() >= d->countItems()){
+        return QVariant();
+    }
+    const QString &k = d->keys.at(index.row());
+    if (role == d->roleIds.value("configValue")) {
+        return d->configGroup->readEntry(k, QString("Can't read"));
+    } else if (role == Qt::DisplayRole) {
+        return "DisplayRole";
+    }
+    return QVariant(k);
 }
 
 QModelIndex ConfigModel::index(int row, int column, const QModelIndex &parent) const
 {
-//     if (parent.isValid() || column > 0 || row < 0 || row >= countItems()) {
-         return QModelIndex();
-//     }
-// 
-//     return createIndex(row, column, 0);
+    if (parent.isValid() || column > 0 || row < 0 || row >= d->countItems()) {
+        return QModelIndex();
+    }
+    return createIndex(row, column, 0);
 }
 
 QModelIndex ConfigModel::parent(const QModelIndex &child) const
@@ -163,8 +180,7 @@ int ConfigModel::rowCount(const QModelIndex &parent) const
     if (parent.isValid()) {
         return 0;
     }
-    return 0;
-    //return countItems();
+    return d->countItems();
 }
 
 int ConfigModel::columnCount(const QModelIndex &parent) const
@@ -172,17 +188,16 @@ int ConfigModel::columnCount(const QModelIndex &parent) const
     if (parent.isValid()) {
         return 0;
     }
-
-    return 1;
+    return 1; // flat list
 }
 
 int ConfigModel::roleNameToId(const QString &name)
 {
-    //if (!m_roleIds.contains(name)) {
-        return -1;
-    //}
-    //return 0;
-    //return m_roleIds.value(name);
+    //kDebug() << d->roleIds.contains(name) << d->roleIds.value(name);
+    if (!d->roleIds.contains(name)) {
+        return Qt::DisplayRole;
+    }
+    return d->roleIds.value(name);
 }
 
 }

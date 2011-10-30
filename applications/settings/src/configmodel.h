@@ -34,7 +34,8 @@ class ConfigModelPrivate;
 class ConfigModel : public QAbstractItemModel
 {
     Q_OBJECT
-    Q_PROPERTY(QString configFile READ configFile WRITE setConfigFile NOTIFY configFileChanged)
+    Q_PROPERTY(QString file READ file WRITE setFile NOTIFY fileChanged)
+    Q_PROPERTY(QString group READ group WRITE setGroup NOTIFY groupChanged)
     //Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
@@ -53,37 +54,20 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
-    QString configFile() const;
-    void setConfigFile(const QString &file);
-
-//     int count() const {return countItems();}
-
-//protected:
-//     void setItems(const QString &sourceName, const QVariantList &list);
-//      inline int countItems() const;
+    QString file() const;
+    void setFile(const QString &filename);
+    QString group() const;
+    void setGroup(const QString &groupname);
 
 Q_SIGNALS:
-    void configFileChanged();
-//     //void countChanged();
-
-// private Q_SLOTS:
-//     void dataUpdated(const QString &sourceName, const Plasma::DataEngine::Data &data);
-//     void removeSource(const QString &sourceName);
+    void fileChanged();
+    void groupChanged();
 
 private:
     ConfigModelPrivate* d;
 
+    bool readConfigFile();
 };
-
-
-// int ConfigModel::countItems() const
-// {
-//     int count = 0;
-//     foreach (const QVector<QVariant> &v, d->items) {
-//         count += v.count();
-//     }
-//     return count;
-// }
 
 }
 
