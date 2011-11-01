@@ -35,7 +35,6 @@
 #include "Plasma/Package"
 
 #include <kdeclarative.h>
-#include "qscriptnonguibookkeeping.cpp"
 
 View::View(const QString &module, QWidget *parent)
     : QDeclarativeView(parent),
