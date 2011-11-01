@@ -70,18 +70,18 @@ RunnerSource::~RunnerSource()
 
 void RunnerSource::matchesChanged(const QList< Plasma::QueryMatch > &m)
 {
-    QList< Plasma::QueryMatch > matches = m;
-
-    qSort(matches.begin(), matches.end());
+    QList<Plasma::QueryMatch> matches = m;
+    qSort(matches.begin(), matches.end(), qGreater<Plasma::QueryMatch>());
 
     removeAllData();
 
-    while (matches.size()) {
-        Plasma::QueryMatch match = matches.takeLast();
-
+    QListIterator<Plasma::QueryMatch> it(matches);
+    while (it.hasNext()) {
+        const Plasma::QueryMatch &match = it.next();
         QString resourceUri;
         QString mimeType;
-        QMimeData *mimeData = runnerManagerInstance()->mimeDataForMatch(match.id());
+
+        QMimeData *mimeData = runnerManagerInstance()->mimeDataForMatch(match);
         if (mimeData) {
             if (!mimeData->formats().isEmpty()) {
                 mimeType = mimeData->formats().first();
@@ -92,7 +92,6 @@ void RunnerSource::matchesChanged(const QList< Plasma::QueryMatch > &m)
         }
 
         Plasma::DataEngine::Data data;
-
         data["icon"] = match.icon();
         data["text"] = match.text();
         data["subText"] = match.subtext();
