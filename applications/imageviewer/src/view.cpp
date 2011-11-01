@@ -54,6 +54,7 @@ AppView::AppView(const QString &url, QWidget *parent)
     //binds things like kconfig and icons
     kdeclarative.setupBindings();
     QScriptEngine *scriptEngine = kdeclarative.scriptEngine();
+    //TODO: remove this after we depend from KDE 4.8
     registerDataEngineMetaTypes(scriptEngine);
 
     // Filter the supplied argument through KUriFilter and then
