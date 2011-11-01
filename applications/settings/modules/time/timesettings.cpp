@@ -50,10 +50,10 @@ K_EXPORT_PLUGIN(TimeSettingsFactory("active_settings_time"))
 #define FORMAT24H "%H:%M:%S"
 #define FORMAT12H "%l:%M:%S %p"
 
-static bool localeLessThan (const QString &a, const QString &b)
-{
-    return QString::localeAwareCompare(a, b) < 0;
-}
+// static bool localeLessThan (const QString &a, const QString &b)
+// {
+//     return QString::localeAwareCompare(a, b) < 0;
+// }
 
 class TimeSettingsPrivate {
 public:
@@ -108,7 +108,7 @@ TimeSettings::TimeSettings()
 
 TimeSettings::~TimeSettings()
 {
-    //kDebug() << "time destroy";
+    kDebug() << "time destroy";
     delete d;
 }
 

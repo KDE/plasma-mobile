@@ -22,12 +22,13 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 
 Item {
+    id: rootItem
     width: 100
     height: 360
-    id: rootItem
     anchors.margins: 8
 
     PlasmaCore.Theme {
@@ -118,7 +119,6 @@ Item {
                 clip: true
                 model: settingsModulesModel
                 delegate: myDelegate
-                //highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
                 highlight: PlasmaCore.FrameSvgItem {
                     id: highlightFrame
                     imagePath: "widgets/viewitem"
@@ -128,9 +128,11 @@ Item {
             }
         }
 
-        Loader {
+        PlasmaComponents.PageStack {
             id: moduleContainer
             objectName: "moduleContainer"
+            clip: false
+            //width: (parent.width - settingsRoot.width - 40)
             anchors.margins: 20
             anchors.top: parent.top
             anchors.bottom: parent.bottom
@@ -178,8 +180,9 @@ Item {
         // Load the C++ plugin into our context
         settingsRoot.loadPlugin(module);
         switcherPackage.name = module
-        //print(" Loading package: " + switcherPackage.filePath("mainscript"));
-        moduleContainer.source = switcherPackage.filePath("mainscript");
+        print(" Loading package: " + switcherPackage.filePath("mainscript"));
+        //moduleContainer.source = switcherPackage.filePath("mainscript");
+        moduleContainer.replace(switcherPackage.filePath("mainscript"));
     }
 
     Component.onCompleted: {

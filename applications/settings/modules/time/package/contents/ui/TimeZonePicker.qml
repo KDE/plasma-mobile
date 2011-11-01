@@ -66,6 +66,7 @@ Item {
 
         }
     }
+
     PlasmaCore.SortFilterModel {
         id: filterModel
         sourceModel: timeSettings.timeZonesModel
