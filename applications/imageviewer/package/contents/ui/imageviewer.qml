@@ -204,6 +204,10 @@ Image {
 
     }
 
+    SlcComponents.SlcMenu {
+        id: contextMenu
+    }
+
     states: [
         State {
             name: "browsing"
