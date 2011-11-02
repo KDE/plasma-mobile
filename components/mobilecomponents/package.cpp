@@ -53,7 +53,7 @@ void Package::setName(const QString &name)
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     //structure->setPath(path);
     m_package = new Plasma::Package(QString(), m_name, structure);
-    KGlobal::locale()->insertCatalog(name);
+    KGlobal::locale()->insertCatalog("plasma_package_" + name);
 
     emit nameChanged(name);
 }
