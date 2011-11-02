@@ -23,7 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.datamodels 0.1
+import org.kde.metadatamodels 0.1
 
 Item {
     id: bookmarks

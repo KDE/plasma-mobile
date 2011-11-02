@@ -23,7 +23,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 import Qt.labs.gestures 1.0
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
-import org.kde.datamodels 0.1 as DataModels
+import org.kde.metadatamodels 0.1 as MetadataModels
 
 
 Image {
@@ -99,7 +99,7 @@ Image {
 
     PlasmaCore.SortFilterModel {
         id: filterModel
-        sourceModel: DataModels.MetadataModel {
+        sourceModel: MetadataModels.MetadataModel {
             id: metadataModel
             resourceType: "nfo:Image"
             sortBy: [userTypes.sortFields[itemGroup.category]]

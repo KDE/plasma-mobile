@@ -24,7 +24,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
-import org.kde.datamodels 0.1 as DataModels
+import org.kde.metadatamodels 0.1 as MetadataModels
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
@@ -75,7 +75,7 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    DataModels.MetadataCloudModel {
+    MetadataModels.MetadataCloudModel {
         id: categoryListModel
         cloudCategory: "rdf:type"
         activityId: plasmoid.activityId
@@ -85,7 +85,7 @@ Item {
         }
     }
 
-    DataModels.MetadataUserTypes {
+    MetadataModels.MetadataUserTypes {
         id: userTypes
     }
 

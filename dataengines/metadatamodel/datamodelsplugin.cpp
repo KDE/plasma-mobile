@@ -29,7 +29,7 @@
 
 void DataModelsPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.datamodels"));
+    Q_ASSERT(uri == QLatin1String("org.kde.metadatamodels"));
 
     qmlRegisterType<MetadataModel>(uri, 0, 1, "MetadataModel");
     qmlRegisterType<MetadataCloudModel>(uri, 0, 1, "MetadataCloudModel");

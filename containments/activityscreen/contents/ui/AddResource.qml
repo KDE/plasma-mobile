@@ -23,7 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
-import org.kde.datamodels 0.1 as DataModels
+import org.kde.metadatamodels 0.1 as MetadataModels
 
 Rectangle {
     id: main
@@ -90,17 +90,17 @@ Rectangle {
     }
 
 
-    DataModels.MetadataUserTypes {
+    MetadataModels.MetadataUserTypes {
         id: userTypes
     }
 
-    DataModels.MetadataCloudModel {
+    MetadataModels.MetadataCloudModel {
         id: cloudModel
         cloudCategory: "rdf:type"
         allowedCategories: userTypes.userTypes
     }
 
-    DataModels.MetadataModel {
+    MetadataModels.MetadataModel {
         id: metadataModel
         sortBy: ["nfo:fileName"]
         sortOrder: Qt.AscendingOrder

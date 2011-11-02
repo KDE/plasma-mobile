@@ -19,7 +19,7 @@
 
 import QtQuick 1.1
 import org.kde.plasma.components 0.1
-import org.kde.datamodels 0.1
+import org.kde.metadatamodels 0.1
 
 Item {
     width: 800

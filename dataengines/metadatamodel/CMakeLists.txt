@@ -54,7 +54,7 @@ target_link_libraries(datamodelsplugin
         nepomukdatamanagement
         kactivities)
 
-install(TARGETS datamodelsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/datamodels)
+install(TARGETS datamodelsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/metadatamodels)
 
 
-install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/datamodels)
+install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/metadatamodels)

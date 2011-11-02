@@ -23,7 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
-import org.kde.datamodels 0.1 as DataModels
+import org.kde.metadatamodels 0.1 as MetadataModels
 
 Item {
     property alias count: itemsList.count
@@ -47,7 +47,7 @@ Item {
         }
 
         model: PlasmaCore.SortFilterModel {
-            sourceModel: DataModels.MetadataModel {
+            sourceModel: MetadataModels.MetadataModel {
                 activityId: plasmoid.activityId
                 resourceType: itemGroup.category
                 //sortBy is not used becauseitems that arrive after are put in the back

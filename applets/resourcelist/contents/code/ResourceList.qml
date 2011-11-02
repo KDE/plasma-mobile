@@ -23,7 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.datamodels 0.1 as DataModels
+import org.kde.metadatamodels 0.1 as MetadataModels
 
 Item {
     id: bookmarks
@@ -79,10 +79,10 @@ Item {
         orientation: Qt.Vertical
         anchors { top: searchRow.bottom; left:parent.left; right: parent.right; bottom: statusLabel.top }
 
-        model: DataModels.MetadataModel {
+        model: MetadataModels.MetadataModel {
             id: metadataModel
             onStatusChanged: {
-                if (status != DataModels.MetadataModel.Waiting) {
+                if (status != MetadataModels.MetadataModel.Waiting) {
                     statusLabel.text = "";
                     plasmoid.busy = false
                 }
