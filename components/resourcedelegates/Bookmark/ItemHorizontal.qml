@@ -20,8 +20,8 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.qtextracomponents 0.1 as QtExtraComponents
 
 Item {
     id: resourceItem
@@ -30,110 +30,123 @@ Item {
     PlasmaCore.DataSource {
         id: pmSource
         engine: "org.kde.preview"
-        connectedSources: [ description ]
+
         interval: 0
-    }
-
-    PlasmaCore.DataSource {
-        id: bookmarkSource
-        engine: "org.kde.active.bookmarks"
-        interval: 0
-    }
-
-    PlasmaCore.Theme {
-        id: theme
-    }
-
-
-    PlasmaCore.FrameSvgItem {
-        imagePath: "widgets/media-delegate"
-        prefix: "picture"
-        id: frameRect
-        height: width/1.6
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-    }
-
-    QtExtraComponents.QImageItem {
-        id: previewImage
-        //fillMode: Image.PreserveAspectCrop
-        smooth: true
-        width: frameRect.width - 2
-        height: frameRect.height - 2
-        anchors {
-            fill: frameRect
-            leftMargin: frameRect.margins.left
-            topMargin: frameRect.margins.top
-            rightMargin: frameRect.margins.right
-            bottomMargin: frameRect.margins.bottom
-        }
-
-        image: {
-            if (typeof pmSource.data[description] != "undefined") {
-                return pmSource.data[description]["thumbnail"];
+        Component.onCompleted: {
+            print(" setting URL: " + url);
+            pmSource.connectedSources = [url]
+            if (data[url] == undefined) {
+                previewFrame.visible = false
+                return
             }
-            if (typeof pmSource.data["fallback"] != "undefined") {
-                return pmSource.data["fallback"]["fallbackImage"];
+            previewFrame.visible = data[url]["status"] == "done"
+            iconItem.visible = !previewFrame.visible
+            previewImage.image = data[url]["thumbnail"]
+        }
+        onDataChanged: {
+            for (k in data) {
+                print(" Key: " + data);
             }
-            //QImage("file://home/sebas/Documents/wallpaper.png");
-            //var fallback = QImage("file:///home/sebas/Documents/wallpaper.png")
-            //return fallback.pixmap(width, height).toImage(); // FIXME: sensible placeholder image
-            
-            //return fallback;
+            //print(" dataChanged: NaME" + data[name]);
+            //print(" dataChanged: URL " + data[url]);
+            previewFrame.visible = (data[url]["status"] == "done")
+            iconItem.visible = !previewFrame.visible
+            previewImage.image = data[url]["thumbnail"]
         }
     }
 
-    PlasmaCore.FrameSvgItem {
-        id: textRect
-        imagePath: "widgets/translucentbackground"
+    Column {
+        anchors.centerIn: parent
 
-        height: childrenRect.height + margins.top + margins.bottom
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
+        Item {
+            id: iconContainer
+            height: resourceItem.height - previewLabel.height - infoLabel.height
+            width: resourceItem.width
 
-        Column {
-            anchors {
-                top: parent.top
-                left: parent.left
-                topMargin: textRect.margins.top
-                leftMargin: textRect.margins.left
+            QIconItem {
+                id: iconItem
+                width: 64
+                height: 64
+                anchors.centerIn: parent
+                icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("text-html")
             }
-            Text {
-                id: textLabel
-                color: theme.textColor
-                font.pixelSize: 13
-                style: Text.Sunken
-                elide: Text.ElideRight
-                styleColor: theme.backgroundColor
-                horizontalAlignment: Text.AlignCenter
 
-                opacity: 1
-                text: {
-                    var s = description;
-                    s = s.replace("http://", "");
-                    s = s.replace("https://", "");
-                    s = s.replace("www.", "");
-                    return s;
+            PlasmaCore.FrameSvgItem {
+                id: previewFrame
+                imagePath: "widgets/media-delegate"
+                prefix: "picture"
+
+                height: previewImage.height+margins.top+margins.bottom
+                width: previewImage.width+margins.left+margins.right
+                visible: false
+                anchors.centerIn: previewArea
+            }
+
+            Item {
+                id: previewArea
+                visible: previewFrame.visible
+                anchors {
+                    fill: parent
+
+                    leftMargin: previewFrame.margins.left
+                    topMargin: previewFrame.margins.top
+                    rightMargin: previewFrame.margins.right
+                    bottomMargin: previewFrame.margins.bottom
                 }
-                width: parent.width
-                //anchors.margins: 16
+
+                QImageItem {
+                    id: previewImage
+                    anchors.centerIn: parent
+
+                    width: {
+                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
+                            return parent.width
+                        } else {
+                            return parent.height * (nativeWidth/nativeHeight)
+                        }
+                    }
+                    height: {
+                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
+                            return parent.width / (nativeWidth/nativeHeight)
+                        } else {
+                            return parent.height
+                        }
+                    }
+                }
+            }
+        }
+
+        Text {
+            id: previewLabel
+            text: {
+                var s = url;
+                s = s.replace("http://", "");
+                s = s.replace("https://", "");
+                s = s.replace("www.", "");
+                return s;
             }
 
-            MobileComponents.Rating {
-                //color: "green"
-                id: ratingItem
-                score: rating
-                resourceUrl: resourceUrl
-                opacity: 1
-                width: 22*5
-                height: 22
-                visible: resourceItem.height>70
+            font.pixelSize: 14
+            //wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
+            anchors {
+                horizontalCenter: parent.horizontalCenter
             }
+            width: resourceItem.width
+            style: Text.Outline
+            styleColor: Qt.rgba(1, 1, 1, 0.6)
+        }
+
+        Text {
+            id: infoLabel
+            text: className
+            opacity: 0.8
+            font.pixelSize: 12
+            height: 14
+            width: parent.width - iconItem.width
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: infoLabelVisible
         }
     }
 }
