@@ -48,10 +48,10 @@ Item {
         source: {
             var view = delegateItem.parent
 
-            if (view != undefined && view.orientation == undefined) {
+            if (view != undefined && view.orientation == undefined && view.flow == undefined) {
                 view = view.parent
             }
-            if (view != undefined && view.orientation == undefined) {
+            if (view != undefined && view.orientation == undefined && view.flow == undefined) {
                 view = view.parent
             }
 
