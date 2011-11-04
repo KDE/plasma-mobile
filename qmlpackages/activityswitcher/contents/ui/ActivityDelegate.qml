@@ -121,13 +121,8 @@ Item {
             leftMargin: activityBorder.margins.left
         }
         spacing: 8
-        opacity: delegate.scale>0.9?1:0
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
+
+        enabled: delegate.scale>0.9
         Item {
             id: deleteButtonParent
             width: iconSize
