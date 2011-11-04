@@ -140,25 +140,25 @@ Item {
         State {
             name: "Full"
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 y: -200
             }
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 acceptsFocus: true
             }
         },
         State {
             name: "Dragging"
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 y: y
             }
         },
         State {
             name: "Launcher"
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 y: 0
                 acceptsFocus: true
             }
@@ -166,7 +166,7 @@ Item {
         State {
             name: "Hidden"
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 y: -topEdgePanel.height + systrayContainer.height+ background.margins.bottom + 2
                 acceptsFocus: false
             }
@@ -174,7 +174,7 @@ Item {
         State {
             name: "Tasks"
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom
 
                 acceptsFocus: true
