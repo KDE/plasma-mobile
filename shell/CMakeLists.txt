@@ -42,7 +42,7 @@ target_link_libraries(kdeinit_plasma-device
         ${NEPOMUK_LIBRARIES}
         ${X11_LIBRARIES}
         ${QT_QTOPENGL_LIBRARY}
-        kactivities
+        ${KACTIVITIES_LIBRARY}
 )
 
 if(X11_Xrender_FOUND)

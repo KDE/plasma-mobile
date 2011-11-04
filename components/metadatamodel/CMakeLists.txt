@@ -52,7 +52,8 @@ target_link_libraries(datamodelsplugin
         ${KDE4_KDECORE_LIBRARY}
         ${KDE4_PLASMA_LIBS}
         nepomukdatamanagement
-        kactivities)
+        ${KACTIVITIES_LIBRARY}
+        )
 
 install(TARGETS datamodelsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/metadatamodels)
 

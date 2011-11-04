@@ -24,7 +24,7 @@ qt4_automoc(${mobilecomponents_SRCS})
 
 
 kde4_add_library(mobilecomponentsplugin SHARED ${mobilecomponents_SRCS})
-target_link_libraries(mobilecomponentsplugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY}  ${QT_QTGUI_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_PLASMA_LIBS} kactivities)
+target_link_libraries(mobilecomponentsplugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY}  ${QT_QTGUI_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_PLASMA_LIBS} ${KACTIVITIES_LIBRARY})
 
 install(TARGETS mobilecomponentsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 

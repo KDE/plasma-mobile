@@ -28,7 +28,7 @@ target_link_libraries(plasma_engine_active_bookmarks
     ${NEPOMUK_QUERY_LIBRARIES}
     ${SOPRANO_LIBRARIES}
     ${SOPRANO_CLIENT_LIBRARIES}
-    kactivities
+    ${KACTIVITIES_LIBRARY}
     ontologies
     nepomukdatamanagement
 )
