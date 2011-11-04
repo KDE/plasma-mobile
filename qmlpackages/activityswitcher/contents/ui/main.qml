@@ -95,10 +95,15 @@ Item {
 
      PathView {
          id: mainView
-         anchors.fill: parent
-         anchors.bottomMargin: 32
-         anchors.topMargin: 32
-         anchors.leftMargin: 64
+         anchors {
+             left: parent.left
+             right: parent.right
+             verticalCenter: parent.verticalCenter
+             leftMargin: 64
+         }
+         //limit the height if only few items are shown
+         height: (delegateHeight * Math.min(count, pathItemCount)) / 1.5
+
          model: PlasmaCore.SortFilterModel {
             sourceModel: PlasmaCore.DataModel {
                 dataSource: activitySource
