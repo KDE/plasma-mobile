@@ -82,7 +82,7 @@ void ResourceInstance::syncWid()
         delete m_resourceInstance;
 
         kDebug() << "Creating a new instance of the resource" << m_uri << "window id" << wid;
-        m_resourceInstance = new Activities::ResourceInstance(wid, m_uri, m_mimetype, m_title);
+        m_resourceInstance = new KActivities::ResourceInstance(wid, m_uri, m_mimetype, m_title);
     } else {
         kDebug() << "Setting" << m_uri << m_mimetype << "to window" << wid;
         m_resourceInstance->setUri(m_uri);

@@ -53,7 +53,6 @@ AppView::AppView(QWidget *parent)
     kdeclarative.initialize();
     //binds things like kconfig and icons
     kdeclarative.setupBindings();
-    QScriptEngine *scriptEngine = kdeclarative.scriptEngine();
     //FIXME: find a prettier way
     QString fn;
     if (QFile::exists("/etc/image-release")) {

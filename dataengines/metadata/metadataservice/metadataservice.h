@@ -28,7 +28,7 @@
 
 using namespace Plasma;
 
-namespace Activities {
+namespace KActivities {
     class Consumer;
 }
 
@@ -43,7 +43,7 @@ public:
 
 private:
     QString m_resourceUrl;
-    Activities::Consumer *m_activityConsumer;
+    KActivities::Consumer *m_activityConsumer;
 };
 
 #endif // METADATASERVICE_H

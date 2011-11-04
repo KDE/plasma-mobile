@@ -30,7 +30,7 @@ class QString;
 class QPixmap;
 class KConfig;
 
-namespace Activities {
+namespace KActivities {
     class Consumer;
 }
 
@@ -67,7 +67,7 @@ public:
     /**
      * state of the activity
      */
-    Activities::Info::State state();
+    KActivities::Info::State state();
 
     /**
      * save (copy) the activity out to an @p external config
@@ -93,7 +93,7 @@ public:
     /**
      * @returns the info object for this activity
      */
-    const Activities::Info * info() const;
+    const KActivities::Info * info() const;
 
 signals:
     void infoChanged();
@@ -133,7 +133,7 @@ private slots:
     void updateActivityName(Plasma::Context *context);
     void containmentDestroyed(QObject *object);
     void activityChanged();
-    void activityStateChanged(Activities::Info::State);
+    void activityStateChanged(KActivities::Info::State);
     void checkIfCurrent();
 
     void removed();
@@ -150,8 +150,8 @@ private:
     QString m_icon;
     QString m_plugin;
     QHash<QPair<int,int>, Plasma::Containment*> m_containments;
-    Activities::Info *m_info;
-    Activities::Consumer *m_activityConsumer;
+    KActivities::Info *m_info;
+    KActivities::Consumer *m_activityConsumer;
     bool m_current;
 };
 

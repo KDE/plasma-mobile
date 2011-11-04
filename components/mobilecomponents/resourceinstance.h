@@ -22,7 +22,7 @@
 #include <QDeclarativeItem>
 #include <QUrl>
 
-namespace Activities {
+namespace KActivities {
     class ResourceInstance;
 }
 
@@ -84,7 +84,7 @@ public Q_SLOTS:
     void notifyFocusedOut();
 
 private:
-    Activities::ResourceInstance *m_resourceInstance;
+    KActivities::ResourceInstance *m_resourceInstance;
     QUrl m_uri;
     QString m_mimetype;
     QString m_title;

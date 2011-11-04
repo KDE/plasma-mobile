@@ -23,7 +23,7 @@
 #include <Plasma/DataEngine>
 
 class QTimer;
-namespace Activities {
+namespace KActivities {
     class Consumer;
 }
 
@@ -47,7 +47,7 @@ protected Q_SLOTS:
 
 private:
 
-    Activities::Consumer *m_consumer;
+    KActivities::Consumer *m_consumer;
 };
 
 #endif

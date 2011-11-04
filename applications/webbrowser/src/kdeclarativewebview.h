@@ -47,7 +47,7 @@ class QNetworkRequest;
 class KDeclarativeWebView;
 class KDeclarativeWebViewPrivate;
 
-namespace Activities {
+namespace KActivities {
     class Consumer;
 }
 
@@ -75,7 +75,7 @@ private:
                           QWidget* parent = 0, const KIO::MetaData& metaData = KIO::MetaData());
     QString errorPage(QNetworkReply *reply);
     KDeclarativeWebView *viewItem();
-    Activities::Consumer *m_activityConsumer;
+    KActivities::Consumer *m_activityConsumer;
 };
 
 class GraphicsWebView : public QGraphicsWebView {

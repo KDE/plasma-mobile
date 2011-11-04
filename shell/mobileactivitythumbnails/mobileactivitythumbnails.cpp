@@ -40,7 +40,7 @@
 MobileActivityThumbnails::MobileActivityThumbnails(QObject *parent, const QVariantList &args)
     : Plasma::DataEngine(parent, args)
 {
-    m_consumer = new Activities::Consumer(this);
+    m_consumer = new KActivities::Consumer(this);
 }
 
 bool MobileActivityThumbnails::sourceRequestEvent(const QString &source)

@@ -29,7 +29,7 @@ class BackgroundListModel;
 
 #include <KConfigGroup>
 
-namespace Activities
+namespace KActivities
 {
     class Controller;
 }
@@ -92,7 +92,7 @@ private:
     Plasma::Containment *m_containment;
     QDeclarativeItem *m_mainWidget;
     BackgroundListModel *m_model;
-    Activities::Controller *m_activityController;
+    KActivities::Controller *m_activityController;
     QString m_activityName;
     int m_wallpaperIndex;
     bool m_newContainment;

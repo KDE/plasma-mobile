@@ -1119,7 +1119,7 @@ QDeclarativeWebPage::QDeclarativeWebPage(KDeclarativeWebView* parent) :
 {
     connect(this, SIGNAL(unsupportedContent(QNetworkReply *)), this, SLOT(handleUnsupportedContent(QNetworkReply *)));
     //TODO: move this in the webbrowser implementation
-    m_activityConsumer = new Activities::Consumer(this);
+    m_activityConsumer = new KActivities::Consumer(this);
 }
 
 QDeclarativeWebPage::~QDeclarativeWebPage()

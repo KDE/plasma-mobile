@@ -65,7 +65,7 @@ class MetadataEnginePrivate
 {
 public:
     QSize previewSize;
-    Activities::Consumer *activityConsumer;
+    KActivities::Consumer *activityConsumer;
     QDBusServiceWatcher *queryServiceWatcher;
     QStringList connectedSources;
 };
@@ -85,7 +85,7 @@ MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
     connect(d->queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
 
 
-    d->activityConsumer = new Activities::Consumer(this);
+    d->activityConsumer = new KActivities::Consumer(this);
     //init();
 }
 

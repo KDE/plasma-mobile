@@ -28,7 +28,7 @@ MetadataService::MetadataService(const QString &resourceUrl)
     : m_resourceUrl(resourceUrl)
 {
     setName("metadataservice");
-    m_activityConsumer = new Activities::Consumer(this);
+    m_activityConsumer = new KActivities::Consumer(this);
 }
 
 ServiceJob *MetadataService::createJob(const QString &operation,

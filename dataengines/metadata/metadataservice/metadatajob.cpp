@@ -33,7 +33,7 @@
 
 #include <KDE/Activities/Consumer>
 
-MetadataJob::MetadataJob(Activities::Consumer *consumer, const QString &resourceUrl, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent)
+MetadataJob::MetadataJob(KActivities::Consumer *consumer, const QString &resourceUrl, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent)
     : ServiceJob(parent->objectName(), operation, parameters, parent),
       m_resourceUrl(resourceUrl),
       m_activityConsumer(consumer)

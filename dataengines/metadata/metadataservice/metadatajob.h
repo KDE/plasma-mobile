@@ -24,7 +24,7 @@
 // plasma
 #include <Plasma/ServiceJob>
 
-namespace Activities {
+namespace KActivities {
     class Consumer;
 }
 
@@ -33,7 +33,7 @@ class MetadataJob : public Plasma::ServiceJob
 Q_OBJECT
 
 public:
-    MetadataJob(Activities::Consumer *consumer, const QString &resourceUrl, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent = 0);
+    MetadataJob(KActivities::Consumer *consumer, const QString &resourceUrl, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent = 0);
     ~MetadataJob();
 
 protected:
@@ -41,7 +41,7 @@ protected:
 
 private:
     QString m_resourceUrl;
-    Activities::Consumer *m_activityConsumer;
+    KActivities::Consumer *m_activityConsumer;
 };
 
 #endif // METADATAOB_H

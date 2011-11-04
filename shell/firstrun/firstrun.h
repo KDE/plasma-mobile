@@ -28,7 +28,7 @@ namespace Plasma {
     class DataEngine;
 }
 
-namespace Activities {
+namespace KActivities {
     class Controller;
 }
 
@@ -55,7 +55,7 @@ class FirstRun: public QObject
     private:
         void connectToActivity(const QString &activityId, const QString &resourceUrl, const QString &description = QString());
         QDBusServiceWatcher *m_queryServiceWatcher;
-        Activities::Controller *m_activityController;
+        KActivities::Controller *m_activityController;
         QString m_currentActivity;
         QStringList m_initialActivities;
         QStringList m_completedActivities;

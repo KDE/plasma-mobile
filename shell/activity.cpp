@@ -45,15 +45,15 @@ Activity::Activity(const QString &id, QObject *parent)
     : QObject(parent),
       m_id(id),
       m_plugin("default"),
-      m_info(new Activities::Info(id, this)),
-      m_activityConsumer(new Activities::Consumer(this)),
+      m_info(new KActivities::Info(id, this)),
+      m_activityConsumer(new KActivities::Consumer(this)),
       m_current(false)
 {
     m_name = m_info->name();
     m_icon = m_info->icon();
 
     connect(m_info, SIGNAL(infoChanged()), this, SLOT(activityChanged()));
-    connect(m_info, SIGNAL(stateChanged(Activities::Info::State)), this, SLOT(activityStateChanged(Activities::Info::State)));
+    connect(m_info, SIGNAL(stateChanged(KActivities::Info::State)), this, SLOT(activityStateChanged(KActivities::Info::State)));
     connect(m_info, SIGNAL(started()), this, SLOT(opened()));
     connect(m_info, SIGNAL(stopped()), this, SLOT(closed()));
     connect(m_info, SIGNAL(removed()), this, SLOT(removed()));
@@ -83,7 +83,7 @@ void Activity::activityChanged()
     setIcon(m_info->icon());
 }
 
-void Activity::activityStateChanged(Activities::Info::State state)
+void Activity::activityStateChanged(KActivities::Info::State state)
 {
     Q_UNUSED(state)
     emit stateChanged();
@@ -123,14 +123,14 @@ void Activity::checkIfCurrent()
     }
 }
 
-Activities::Info::State Activity::state()
+KActivities::Info::State Activity::state()
 {
     return m_info->state();
 }
 
 void Activity::remove()
 {
-    Activities::Controller().removeActivity(m_id);
+    KActivities::Controller().removeActivity(m_id);
 }
 
 void Activity::removed()
@@ -220,7 +220,7 @@ Plasma::Containment* Activity::containmentForScreen(int screen, int desktop)
 
 void Activity::activate()
 {
-    Activities::Controller().setCurrentActivity(m_id);
+    KActivities::Controller().setCurrentActivity(m_id);
 }
 
 void Activity::ensureActive()
@@ -256,7 +256,7 @@ void Activity::setName(const QString &name)
     }
 
     m_name = name;
-    Activities::Controller().setActivityName(m_id, name);
+    KActivities::Controller().setActivityName(m_id, name);
     emit infoChanged();
 
     foreach (Plasma::Containment *c, m_containments) {
@@ -272,7 +272,7 @@ void Activity::setIcon(const QString &icon)
 
     m_icon = icon;
 
-    Activities::Controller().setActivityIcon(m_id, icon);
+    KActivities::Controller().setActivityIcon(m_id, icon);
     emit infoChanged();
 }
 
@@ -308,7 +308,7 @@ void Activity::save(KConfig &external)
 
 void Activity::close()
 {
-    Activities::Controller().stopActivity(m_id);
+    KActivities::Controller().stopActivity(m_id);
 }
 
 void Activity::closed()
@@ -361,7 +361,7 @@ void Activity::insertContainment(Plasma::Containment* containment, int screen, i
     Plasma::Context *context = containment->context();
     context->setCurrentActivityId(m_id);
     context->setCurrentActivity(m_name);
-    //hack to keep the name in sync while Activities::* are in kdebase
+    //hack to keep the name in sync while KActivities::* are in kdebase
     connect(context, SIGNAL(activityChanged(Plasma::Context*)), this, SLOT(updateActivityName(Plasma::Context*)), Qt::UniqueConnection);
 
     m_containments.insert(QPair<int,int>(screen, desktop), containment);
@@ -385,7 +385,7 @@ void Activity::containmentDestroyed(QObject *object)
 
 void Activity::open()
 {
-    Activities::Controller().startActivity(m_id);
+    KActivities::Controller().startActivity(m_id);
 }
 
 void Activity::opened()
@@ -426,7 +426,7 @@ void Activity::setDefaultPlugin(const QString &plugin)
     //FIXME save&restore this setting
 }
 
-const Activities::Info * Activity::info() const
+const KActivities::Info * Activity::info() const
 {
     return m_info;
 }
