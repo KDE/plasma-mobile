@@ -126,7 +126,7 @@ PlasmaCore.FrameSvgItem {
             top:parent.top
         }
         onSearchQueryChanged: {
-            metadataModel.queryString = searchBox.searchQuery
+            metadataModel.queryString = "*"+searchBox.searchQuery+"*"
         }
         opacity: (imageViewer.state != "browsing") ? 0 : 1
         Behavior on opacity {
