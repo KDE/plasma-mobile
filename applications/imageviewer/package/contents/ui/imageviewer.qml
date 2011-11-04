@@ -70,18 +70,17 @@ Image {
             fullList.visible = true
             imageViewer.state = "image"
             return
+        } else {
+            //is in dirModel
+            fullList.model = dirModel
+            quickBrowserBar.model = dirModel
+            index = dirModel.indexForUrl(path)
+            fullList.positionViewAtIndex(index, ListView.Center)
+            fullList.currentIndex = index
+            spareDelegate.visible = false
+            fullList.visible = true
+            imageViewer.state = "image"
         }
-
-
-        //is in dirModel
-        fullList.model = dirModel
-        quickBrowserBar.model = dirModel
-        index = dirModel.indexForUrl(path)
-        fullList.positionViewAtIndex(index, ListView.Center)
-        fullList.currentIndex = index
-        spareDelegate.visible = false
-        fullList.visible = true
-        imageViewer.state = "image"
     }
 
     Timer {
