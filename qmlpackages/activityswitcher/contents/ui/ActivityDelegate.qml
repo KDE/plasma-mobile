@@ -37,6 +37,12 @@ Item {
             highlightTimer.running = true
         }
     }
+    Component.onCompleted: {
+        if (current == "true") {
+            highlightTimer.pendingIndex = index
+            highlightTimer.running = true
+        }
+    }
 
     width: mainView.delegateWidth
     height: mainView.delegateHeight

@@ -26,7 +26,7 @@ Item {
     anchors.fill: parent
     property int iconSize: 32
     signal newActivityRequested
-    state: "Normal"
+    state: "Passive"
     onStateChanged: {
         if (state == "Passive") {
             highlightTimer.restart()
