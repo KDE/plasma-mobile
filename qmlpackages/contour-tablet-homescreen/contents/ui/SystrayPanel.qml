@@ -31,6 +31,15 @@ Item {
         if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
             menuContainer.plasmoid.resetStatus()
         }
+        //load the launcher package on demand to save boot time
+        if (state != "Hidden" && !menuContainer.plasmoid) {
+            var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
+            menuContainer.plasmoid = component.createObject(menuContainer);
+            //assume menuContainer provides a itemLaunched signal
+            if (menuContainer.plasmoid) {
+                menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
+            }
+        }
     }
 
     PlasmaCore.FrameSvgItem {
@@ -43,14 +52,6 @@ Item {
     MobileComponents.Package {
         id: launcherPackage
         name: "org.kde.active.launcher"
-        Component.onCompleted: {
-            var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
-            menuContainer.plasmoid = component.createObject(menuContainer);
-            //assume menuContainer provides a itemLaunched signal
-            if (menuContainer.plasmoid) {
-                menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
-            }
-        }
     }
 
     function itemLaunched()
@@ -145,6 +146,13 @@ Item {
             PropertyChanges {
                 target: slidingPanel
                 acceptsFocus: true
+            }
+        },
+        State {
+            name: "Dragging"
+            PropertyChanges {
+                target: slidingPanel
+                y: y
             }
         },
         State {

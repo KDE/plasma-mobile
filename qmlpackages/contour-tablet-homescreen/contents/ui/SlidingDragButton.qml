@@ -62,6 +62,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         startY = mouse.screenY
         startX = mouse.screenX
         lastY = mouse.screenY
+        systrayPanel.state = "Dragging"
     }
     onPositionChanged: {
         if (!panelDragButton.dragEnabled ) {
