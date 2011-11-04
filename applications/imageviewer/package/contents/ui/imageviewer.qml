@@ -36,8 +36,6 @@ Image {
     width: 360
     height: 360
 
-    property bool firstRun: true
-
     MobileComponents.Package {
         id: viewerPackage
         name: "org.kde.active.imageviewer"
@@ -78,13 +76,12 @@ Image {
         //is in dirModel
         fullList.model = dirModel
         quickBrowserBar.model = dirModel
-        var i = dirModel.indexForUrl(path)
-        fullList.positionViewAtIndex(i, ListView.Center)
-        fullList.currentIndex = i
+        index = dirModel.indexForUrl(path)
+        fullList.positionViewAtIndex(index, ListView.Center)
+        fullList.currentIndex = index
         spareDelegate.visible = false
         fullList.visible = true
         imageViewer.state = "image"
-        return
     }
 
     Timer {
@@ -93,8 +90,11 @@ Image {
         repeat: false
         onTriggered: {
             loadImage(startupArguments[0])
-            imageViewer.firstRun = false
         }
+    }
+
+    Component.onCompleted: {
+        firstRunTimer.start()
     }
 
     PlasmaCore.SortFilterModel {
@@ -156,7 +156,7 @@ Image {
 
     Rectangle {
         id: viewer
-        scale: startupArguments[0].length > 0?1:0
+        scale: startupArguments[0].length > 0 ? 1 : 0
 
         function setCurrentIndex(index)
         {
