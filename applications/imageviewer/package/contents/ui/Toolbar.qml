@@ -83,11 +83,11 @@ PlasmaCore.FrameSvgItem {
         opacity: (imageViewer.state == "browsing") ? 1 : 0
         MobileComponents.IconButton {
             icon: QIcon("drive-harddisk")
-            opacity: resultsGrid.model == filterModel ? 0.2 : 1
+            opacity: resultsGrid.model == metadataModel ? 0.2 : 1
             width: 48
             height: 48
             onClicked: {
-                resultsGrid.model = filterModel
+                resultsGrid.model = metadataModel
             }
         }
         Repeater {
@@ -126,7 +126,7 @@ PlasmaCore.FrameSvgItem {
             top:parent.top
         }
         onSearchQueryChanged: {
-            filterModel.filterRegExp = ".*"+searchBox.searchQuery+".*"
+            metadataModel.queryString = searchBox.searchQuery
         }
         opacity: (imageViewer.state != "browsing") ? 0 : 1
         Behavior on opacity {

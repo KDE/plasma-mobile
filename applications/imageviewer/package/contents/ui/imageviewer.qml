@@ -62,8 +62,8 @@ Image {
         //is in Nepomuk
         var index = metadataModel.find(path);
         if (index > -1) {
-            fullList.model = filterModel
-            quickBrowserBar.model = filterModel
+            fullList.model = metadataModel
+            quickBrowserBar.model = metadataModel
             fullList.positionViewAtIndex(index, ListView.Center)
             fullList.currentIndex = index
             spareDelegate.visible = false
@@ -97,16 +97,13 @@ Image {
         firstRunTimer.start()
     }
 
-    PlasmaCore.SortFilterModel {
-        id: filterModel
-        sourceModel: MetadataModels.MetadataModel {
-            id: metadataModel
-            resourceType: "nfo:Image"
-            sortBy: [userTypes.sortFields[itemGroup.category]]
-            sortOrder: Qt.AscendingOrder
-        }
-        filterRole: "label"
+    MetadataModels.MetadataModel {
+        id: metadataModel
+        resourceType: "nfo:Image"
+        sortBy: [userTypes.sortFields[itemGroup.category]]
+        sortOrder: Qt.AscendingOrder
     }
+
 
 
     Toolbar {
@@ -115,7 +112,7 @@ Image {
 
     QuickBrowserBar {
         id: quickBrowserBar
-        model: filterModel
+        model: metadataModel
     }
 
     MobileComponents.IconGrid {
@@ -127,7 +124,7 @@ Image {
 
         Component.onCompleted: resultsContainer.contentY = resultsContainer.height
         height: resultsContainer.height
-        model: filterModel
+        model: metadataModel
         delegateWidth: 130
         delegateHeight: 120
         delegate: MobileComponents.ResourceDelegate {
@@ -184,7 +181,7 @@ Image {
         ListView {
             id: fullList
             anchors.fill: parent
-            model: filterModel
+            model: metadataModel
             highlightRangeMode: ListView.StrictlyEnforceRange
             orientation: ListView.Horizontal
             snapMode: ListView.SnapOneItem
