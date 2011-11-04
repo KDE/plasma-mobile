@@ -62,13 +62,9 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         startY = mouse.screenY
         startX = mouse.screenX
         lastY = mouse.screenY
-        inButton = (mouse.y > height - 35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8)
-        if (!inButton) {
-            disableTimer.running = true
-        }
     }
     onPositionChanged: {
-        if (!panelDragButton.dragEnabled || inButton) {
+        if (!panelDragButton.dragEnabled ) {
             return
         }
 
@@ -97,13 +93,6 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
     }
 
     onReleased: {
-        if (inButton) {
-            stillInButton = (mouse.y > height - 35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8)
-            if (stillInButton) {
-                homeScreen.focusActivityView()
-            }
-            return
-        }
 
         panelDragButton.dragEnabled = true
         disableTimer.running = false
