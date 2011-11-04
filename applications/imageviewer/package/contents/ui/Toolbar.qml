@@ -63,7 +63,7 @@ PlasmaCore.FrameSvgItem {
         icon: QIcon("go-previous")
         width: 48
         height: 48
-        opacity: imageViewer.state != "browsing"?1:0
+        opacity: (imageViewer.state != "browsing") ? 1 : 0
         anchors.verticalCenter: parent.verticalCenter
         Behavior on opacity {
             NumberAnimation {
@@ -80,10 +80,10 @@ PlasmaCore.FrameSvgItem {
         anchors.left: backIcon.right
         anchors.verticalCenter: parent.verticalCenter
         spacing: 8
-        opacity: imageViewer.state == "browsing"?1:0
+        opacity: (imageViewer.state == "browsing") ? 1 : 0
         MobileComponents.IconButton {
             icon: QIcon("drive-harddisk")
-            opacity: resultsGrid.model==filterModel?0.2:1
+            opacity: resultsGrid.model == filterModel ? 0.2 : 1
             width: 48
             height: 48
             onClicked: {
@@ -97,7 +97,7 @@ PlasmaCore.FrameSvgItem {
                 icon: QIcon(model["icon"])
                 //FIXME: use the declarative branch in workspace that tells about removable
                 visible: devicesSource.data[udi]["Icon"] == "drive-removable-media-usb" || devicesSource.data[udi]["Icon"] == "media-flash-sd-mmc" || devicesSource.data[udi]["Icon"] == "drive-removable-media-usb-pendrive" || devicesSource.data[udi]["Icon"] == "multimedia-player"
-                opacity: dirModel.url==devicesSource.data[udi]["File Path"]&&resultsGrid.model==dirModel?0.2:1
+                opacity: (dirModel.url == devicesSource.data[udi]["File Path"] && resultsGrid.model == dirModel) ? 1 : 0.2
                 width: 48
                 height: 48
                 onClicked: {
@@ -128,7 +128,7 @@ PlasmaCore.FrameSvgItem {
         onSearchQueryChanged: {
             filterModel.filterRegExp = ".*"+searchBox.searchQuery+".*"
         }
-        opacity: imageViewer.state != "browsing"?0:1
+        opacity: (imageViewer.state != "browsing") ? 0 : 1
         Behavior on opacity {
             NumberAnimation {
                 duration: 250
@@ -142,7 +142,7 @@ PlasmaCore.FrameSvgItem {
         imagePath: "widgets/configuration-icons"
     }
     Row {
-        opacity: imageViewer.state != "browsing"?1:0
+        opacity: (imageViewer.state != "browsing") ? 1 : 0
         Behavior on opacity {
             NumberAnimation {
                 duration: 250
