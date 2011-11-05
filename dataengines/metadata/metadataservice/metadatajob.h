@@ -24,25 +24,24 @@
 // plasma
 #include <Plasma/ServiceJob>
 
-namespace Activities {
+namespace KActivities {
     class Consumer;
 }
 
 class MetadataJob : public Plasma::ServiceJob
 {
+Q_OBJECT
 
-    Q_OBJECT
+public:
+    MetadataJob(KActivities::Consumer *consumer, const QString &resourceUrl, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent = 0);
+    ~MetadataJob();
 
-    public:
-        MetadataJob(Activities::Consumer *consumer, const QString &id, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent = 0);
-        ~MetadataJob();
+protected:
+    void start();
 
-    protected:
-        void start();
-
-    private:
-        QString m_id;
-        Activities::Consumer *m_activityConsumer;
+private:
+    QString m_resourceUrl;
+    KActivities::Consumer *m_activityConsumer;
 };
 
 #endif // METADATAOB_H

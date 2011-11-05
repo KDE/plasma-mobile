@@ -23,6 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.metadatamodels 0.1 as MetadataModels
 
 Item {
     id: bookmarks
@@ -30,33 +31,6 @@ Item {
     height: 150
 
     property alias title: header
-    property alias urls: metadataSource.connectedSources
-
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        interval: 0
-
-        onSourceAdded: {
-            //console.log("source added:" + source);
-            //connectSource(source);
-        }
-
-        onDataChanged: {
-            for (d in data) {
-                //print("  data " + d);
-                //timer.running = false
-                //statusLabel.text = i18n("Searching for %1 finished.", searchBox.text);
-                statusLabel.text = "";
-                plasmoid.busy = false
-            }
-        }
-        Component.onCompleted: {
-            //connectedSources = sources;
-            //connectedSources = [ "KDE" ]
-        }
-
-    }
 
     PlasmaCore.Theme {
         id: theme
@@ -105,9 +79,14 @@ Item {
         orientation: Qt.Vertical
         anchors { top: searchRow.bottom; left:parent.left; right: parent.right; bottom: statusLabel.top }
 
-        model: PlasmaCore.DataModel {
-            dataSource: metadataSource
-            keyRoleFilter: ".*"
+        model: MetadataModels.MetadataModel {
+            id: metadataModel
+            onStatusChanged: {
+                if (status != MetadataModels.MetadataModel.Waiting) {
+                    statusLabel.text = "";
+                    plasmoid.busy = false
+                }
+            }
         }
 
         delegate: MobileComponents.ResourceDelegate {
@@ -130,7 +109,7 @@ Item {
        interval: 2000
        onTriggered: {
             plasmoid.busy = true
-            metadataSource.connectedSources = [searchBox.text]
+            metadataModel.queryString = searchBox.text
             statusLabel.text = i18n("Searching for %1...", searchBox.text);
        }
     }

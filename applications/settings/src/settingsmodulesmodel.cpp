@@ -69,7 +69,7 @@ void SettingsModulesModel::populate()
     QString query;
     KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
 
-    kDebug() << "Found " << services.count() << " modules";
+    //kDebug() << "Found " << services.count() << " modules";
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
             continue;

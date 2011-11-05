@@ -1,3 +1,4 @@
 #! /usr/bin/env bash
-$XGETTEXT `find . -name \*.qml` -L Java -o $podir/org.kde.active.activityscreen.pot
+$EXTRACTRC `find . -name \*.rc -o -name \*.ui -o -name \*.kcfg` >> rc.cpp
+$XGETTEXT `find . -name \*.qml` -L Java -o $podir/plasma_applet_org.kde.active.activityscreen.pot
 rm -f rc.cpp

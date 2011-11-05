@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "view.h"
+#include "configmodel.h"
 #include "settingsmodulesmodel.h"
 #include "settingsmoduleloader.h"
 #include "settingsmodule.h"
@@ -29,6 +30,7 @@
 #include <QScriptValue>
 #include <QTimer>
 
+//#include <KConfigGroup>
 #include <KStandardDirs>
 #include "Plasma/Package"
 
@@ -51,17 +53,23 @@ View::View(const QString &module, QWidget *parent)
     kdeclarative.initialize();
     //binds things like kconfig and icons
     kdeclarative.setupBindings();
+    //qRegisterMetaType<Plasma::ConfigModel>("ConfigModel");
+    //qmlRegisterType<Plasma::ConfigModel*>();
+    qmlRegisterType<Plasma::ConfigModel>("org.kde.active.settings", 0, 1, "ConfigModel");
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), "org.kde.active.settings", structure);
     m_settingsModules = new SettingsModulesModel(this);
+    if (!module.isEmpty()) {
+        loadPlugin(module);
+        rootContext()->setContextProperty("startModule", module);
+
+    }
     rootContext()->setContextProperty("settingsModulesModel", QVariant::fromValue(m_settingsModules->items()));
+    const QString qmlFile = m_package->filePath("mainscript");
 
     setSource(QUrl(m_package->filePath("mainscript")));
     show();
-    if (!module.isEmpty()) {
-        kDebug() << "load model: " << module;
-    }
 
     //QTimer::singleShot(4000, this, SLOT(updateStatus()));
     onStatusChanged(status());
@@ -88,7 +96,7 @@ void View::updateStatus()
 
 void View::onStatusChanged(QDeclarativeView::Status status)
 {
-    kDebug() << "onStatusChanged";
+    //kDebug() << "onStatusChanged";
     if (status == QDeclarativeView::Ready) {
         if (!m_settingsRoot) {
             m_settingsRoot = rootObject()->findChild<QDeclarativeItem*>("settingsRoot");
@@ -101,6 +109,7 @@ void View::onStatusChanged(QDeclarativeView::Status status)
         }
     } else if (status == QDeclarativeView::Error) {
         foreach (const QDeclarativeError &e, errors()) {
+            kDebug() << "EEEE" << e;
             kWarning() << "error in QML: " << e.toString() << e.description();
         }
     } else if (status == QDeclarativeView::Loading) {

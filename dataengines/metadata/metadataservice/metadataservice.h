@@ -28,7 +28,7 @@
 
 using namespace Plasma;
 
-namespace Activities {
+namespace KActivities {
     class Consumer;
 }
 
@@ -37,13 +37,13 @@ class MetadataService : public Plasma::Service
     Q_OBJECT
 
 public:
-    MetadataService(const QString &source);
+    MetadataService(const QString &resourceUrl);
     ServiceJob *createJob(const QString &operation,
                           QMap<QString, QVariant> &parameters);
 
 private:
-    QString m_id;
-    Activities::Consumer *m_activityConsumer;
+    QString m_resourceUrl;
+    KActivities::Consumer *m_activityConsumer;
 };
 
 #endif // METADATASERVICE_H

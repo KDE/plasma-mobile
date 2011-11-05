@@ -37,6 +37,12 @@ Item {
             highlightTimer.running = true
         }
     }
+    Component.onCompleted: {
+        if (current == "true") {
+            highlightTimer.pendingIndex = index
+            highlightTimer.running = true
+        }
+    }
 
     width: mainView.delegateWidth
     height: mainView.delegateHeight
@@ -115,39 +121,37 @@ Item {
             leftMargin: activityBorder.margins.left
         }
         spacing: 8
-        opacity: delegate.scale>0.9?1:0
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
+
+        enabled: delegate.scale>0.9
         Item {
+            id: deleteButtonParent
             width: iconSize
             height: iconSize
             z: 900
             //TODO: load on demand of the qml file
-            ConfirmationDialog {
-                id: confirmationDialog
+            Component {
+                id: confirmationDialogComponent
+                ConfirmationDialog {
+                    anchors {
+                        left: deleteButton.horizontalCenter
+                        bottom: deleteButton.verticalCenter
+                    }
+                    transformOrigin: Item.BottomLeft
+                    question: i18n("Are you sure you want permanently delete this activity?")
+                    onAccepted: {
+                        var service = activitySource.serviceForSource(model["DataEngineSource"])
+                        var operation = service.operationDescription("stop")
+                        service.startOperationCall(operation)
 
-                anchors {
-                    left: deleteButton.horizontalCenter
-                    bottom: deleteButton.verticalCenter
-                }
-                transformOrigin: Item.BottomLeft
-                question: i18n("Are you sure you want permanently delete this activity?")
-                onAccepted: {
-                    var service = activitySource.serviceForSource(model["DataEngineSource"])
-                    var operation = service.operationDescription("stop")
-                    service.startOperationCall(operation)
-
-                    deleteTimer.activityId = model["DataEngineSource"]
-                    deleteTimer.running = true
-                }
-                onDismissed: {
-                    deleteButton.checked = false
+                        deleteTimer.activityId = model["DataEngineSource"]
+                        deleteTimer.running = true
+                    }
+                    onDismissed: {
+                        deleteButton.checked = false
+                    }
                 }
             }
+            property ConfirmationDialog confirmationDialog
             MobileComponents.ActionButton {
                 id: deleteButton
                 svg: iconsSvg
@@ -155,12 +159,16 @@ Item {
                 toggle: true
                 opacity: model["Current"] == true ? 0.4 : 1
                 enabled: opacity == 1
+                z: 800
 
                 onClicked: {
-                    if (confirmationDialog.scale == 1) {
-                        confirmationDialog.scale = 0
+                    if (!deleteButtonParent.confirmationDialog) {
+                        deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
+                    }
+                    if (deleteButtonParent.confirmationDialog.scale == 1) {
+                        deleteButtonParent.confirmationDialog.scale = 0
                     } else {
-                        confirmationDialog.scale = 1
+                        deleteButtonParent.confirmationDialog.scale = 1
                     }
                 }
             }

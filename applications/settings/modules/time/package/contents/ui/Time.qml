@@ -20,11 +20,12 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+//import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
+//import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1
 
-Rectangle {
+Item {
     id: timeModule
     objectName: "timeModule"
 
@@ -33,70 +34,91 @@ Rectangle {
     }
 
     width: 800; height: 500
-    //color: theme.backgroundColor
 
     PlasmaCore.Theme {
         id: theme
     }
-    /*
-    MobileComponents.Package {
-        id: activeSettingsTime
-        name: "org.kde.active.settings.time"
-    }
-    */
-    /*
-    Rectangle {
-        id: rect
-        anchors.fill: parent
-        anchors.margins: 10
-        color: "orange"
-        opacity: 0.2
 
-    }
-    */
     Column {
-        anchors.fill: parent
+        id: titleCol
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
         spacing: 12
         Text {
             color: theme.textColor
-            text: "<h1>" + moduleTitle + "</h1>"
+            text: "<h3>" + moduleTitle + "</h3>"
             opacity: 1
         }
         Text {
+            id: descriptionLabel
             color: theme.textColor
             text: moduleDescription
+            opacity: .4
+        }
+        Text {
+            color: theme.textColor
+            font.pixelSize: 32
+            style: Text.Sunken
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: timeSettings.currentTime
+        }
+    }
+
+    Item {
+        id: twentyFourItem
+        anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: 32; }
+
+        Text {
+            color: theme.textColor
+            anchors.right: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            text: i18n("Use 24-hour clock:")
+            anchors.rightMargin: 12
             //opacity: 1
         }
-        Row {
-            spacing: 8
-            anchors.margins: 32
 
-            anchors.verticalCenter: okButton.verticalCenter
-            Text {
-                color: theme.textColor
-                text: i18n("Use 24-hour clock:")
-                //opacity: 1
-            }
-            PlasmaWidgets.PushButton {
-                id: okButton
-                checkable: true
-                checked: timeSettings.twentyFour
+        PlasmaComponents.Switch {
+            checked: timeSettings.twentyFour
+            anchors.left: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
 
-                text: timeSettings.twentyFour ? i18n("Enabled") : i18n("Disabled");
-                onClicked : {
-                    //print("24??" + checked);
-                    timeSettings.twentyFour = checked
-                }
+            onClicked : {
+                timeSettings.twentyFour = checked
+                print(timeSettings.timeZone);
             }
         }
 
-
     }
+
     Text {
+        id: timeZoneLabel
         color: theme.textColor
-        anchors.centerIn: parent
-        text: "<h2> " + timeSettings.currentTime+ "</h2>"
-        //opacity: 1
+        anchors.right: parent.horizontalCenter
+        anchors.top: twentyFourItem.bottom
+        anchors.topMargin: 24
+        text: i18n("Timezone:")
+        anchors.rightMargin: 12
+    }
+
+    Text {
+        anchors.left: parent.horizontalCenter
+        anchors.verticalCenter: timeZoneLabel.verticalCenter
+        text: timeSettings.timeZone
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
+            }
+        }
+    }
+
+    Dialog {
+        id: timeZonePicker
+        source: "TimeZonePicker.qml"
+        anchors.fill: parent
+        anchors.margins: 60
     }
 
     Component.onCompleted: {

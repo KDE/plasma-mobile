@@ -24,6 +24,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
+import org.kde.metadatamodels 0.1 as MetadataModels
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
@@ -32,7 +33,6 @@ Item {
     width: 540
     height: 540
 
-    property alias urls: metadataSource.connectedSources
 
     property Item currentGroup
     property int currentIndex: -1
@@ -75,26 +75,18 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        interval: 0
-        connectedSources: ["CurrentActivityResources:"+plasmoid.activityId]
-    }
-
-    PlasmaCore.DataModel {
-        id: metadataModel
-        keyRoleFilter: ".*"
-        dataSource: metadataSource
-    }
-
-    MobileComponents.CategorizedProxyModel {
+    MetadataModels.MetadataCloudModel {
         id: categoryListModel
-        sourceModel: metadataModel
-        categoryRole: "genericClassName"
+        cloudCategory: "rdf:type"
+        activityId: plasmoid.activityId
+        allowedCategories: userTypes.userTypes
         onCategoriesChanged: {
             categoriesTimer.restart()
         }
+    }
+
+    MetadataModels.MetadataUserTypes {
+        id: userTypes
     }
 
     MobileComponents.ResourceInstance {

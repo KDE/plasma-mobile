@@ -121,23 +121,12 @@ Item {
             if (mouse.x < activityPanel.x) {
                 activityPanel.state = "hidden"
             }
-            if (mouse.x > leftEdgePanel.x+leftEdgePanel.width) {
-                leftEdgePanel.state = "hidden"
+            if (mouse.x > recommendationsPanel.x+recommendationsPanel.width) {
+                recommendationsPanel.state = "hidden"
             }
         }
     }
 
-
-    RecommendationsPanel {
-        id: leftEdgePanel
-        objectName: "leftEdgePanel"
-
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-        }
-        x: - width
-    }
 
     states: [
             State {
@@ -170,7 +159,7 @@ Item {
     }
 
     DeviceShell.DevicePanel {
-        id: slidingPanel
+        id: topSlidingPanel
         visible: true
         mainItem: SystrayPanel {
             id: topEdgePanel
@@ -183,9 +172,38 @@ Item {
         }
     }
 
-    ActivityPanel {
-        id: activityPanel
-        x: parent.width - width
+    property Item recommendationsPanel
+    property Item activityPanel
+    Timer {
+        id: panelsCreationTimer
+        interval: 2000
+        repeat: false
+        running: true
+        onTriggered: {
+            homeScreen.recommendationsPanel = recommendationsPanelComponent.createObject(homeScreen)
+            homeScreen.activityPanelPanel = activityPanelComponent.createObject(homeScreen)
+        }
+    }
+    Component {
+        id: recommendationsPanelComponent
+        RecommendationsPanel {
+            id: recommendationsPanel
+
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
+            x: - width
+        }
+    }
+
+
+    Component {
+        id: activityPanelComponent
+        ActivityPanel {
+            id: activityPanel
+            x: parent.width - width
+        }
     }
 
     Item {

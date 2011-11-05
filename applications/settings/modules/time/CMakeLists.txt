@@ -7,6 +7,7 @@ include_directories(${KDE4_INCLUDES} ../../src)
 
 set(timesettings_SRCS
     timesettings.cpp
+    timezone.cpp
     ../../src/settingsmodule.cpp
 )
 

@@ -62,8 +62,8 @@ Rectangle {
 
         delegate: Item {
             id: delegate
-            z: index==thumbnailsView.currentIndex?200:0
-            scale: index==thumbnailsView.currentIndex?1.4:1
+            z: index == thumbnailsView.currentIndex ? 200 : 0
+            scale: index == thumbnailsView.currentIndex ? 1.4 : 1
             Behavior on scale {
                 NumberAnimation {
                     duration: 250
@@ -73,8 +73,8 @@ Rectangle {
             width: height*1.6
             height: thumbnailsView.height
             Rectangle {
-                width:index==thumbnailsView.currentIndex?thumbnailImage.width+10:thumbnailImage.width
-                height: index==thumbnailsView.currentIndex?thumbnailImage.height+10:thumbnailImage.height
+                width: (index == thumbnailsView.currentIndex) ? thumbnailImage.width + 10 : thumbnailImage.width
+                height: (index == thumbnailsView.currentIndex) ? thumbnailImage.height + 10 : thumbnailImage.height
                 anchors.centerIn: parent
                 Behavior on width {
                     NumberAnimation {

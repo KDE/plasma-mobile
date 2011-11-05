@@ -34,7 +34,7 @@ namespace Plasma
 } // namespace Plasma
 
 class Activity;
-namespace Activities {
+namespace KActivities {
     class Controller;
 }
 
@@ -82,7 +82,7 @@ private:
     Plasma::Applet *loadDefaultApplet(const QString &pluginName, Plasma::Containment *c);
     QRect m_screenGeometry;
     QRegion m_availableScreenRegion;
-    Activities::Controller *m_activityController;
+    KActivities::Controller *m_activityController;
     QHash<QString, Activity*> m_activities;
     //main homescreen
     Plasma::Package *m_package;

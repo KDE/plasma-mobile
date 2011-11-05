@@ -20,47 +20,119 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.active.settings 0.1 as ActiveSettings
 
-Rectangle {
+Item {
     id: webModule
     objectName: "webModule"
 
     width: 800; height: 500
-    //color: theme.backgroundColor
 
     PlasmaCore.Theme {
         id: theme
     }
 
-    /*
-    MobileComponents.Package {
-        id: activeSettingsWeb
-        name: "org.kde.active.settings.web"
-    }
-    Rectangle {
-        id: rect
-        anchors.fill: parent
-        anchors.margins: 10
-        color: "blue"
-        opacity: 0.2
-
-    }
-    */
     Column {
-        anchors.fill: parent
-        spacing: 8
-
+        id: titleCol
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        spacing: 12
         Text {
             color: theme.textColor
-            text: "<h1>" + moduleTitle + "</h1>"
-            //opacity: 1
+            text: "<h3>" + moduleTitle + "</h3>"
+            opacity: 1
         }
         Text {
+            id: descriptionLabel
             color: theme.textColor
             text: moduleDescription
-            //opacity: 1
+            opacity: .4
         }
+    }
+    Item {
+        id: configInput
+        width: 400
+        height: 32
+        //property alias file
+        anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: height }
+        PlasmaComponents.TextField {
+            width: parent.width/3
+            anchors { top: parent.top; bottom: parent.bottom; left: parent.left }
+            id: fileField
+            text: "active-webbrowserrc"
+        }
+        PlasmaComponents.TextField {
+            width: parent.width/3
+            anchors { top: parent.top; bottom: parent.bottom; left: fileField.right }
+            id: groupField
+            text: "history"
+        }
+        PlasmaComponents.Button {
+            id: loadButton
+            width: groupField.height*3
+            height: groupField.height
+            text: "Load"
+            anchors { top: parent.top; bottom: parent.bottom; left: groupField.right;}
+
+            onClicked: {
+                console.log("Loading File: " + fileField.text + " Group: " + groupField.text);
+                configModel.group = groupField.text
+                configModel.file = fileField.text
+            }
+
+            Keys.onTabPressed: bt2.forceActiveFocus();
+        }
+        PlasmaComponents.Button {
+            id: loadButton2
+            width: groupField.height*3
+            height: groupField.height
+            text: "kwin"
+            anchors { top: parent.top; bottom: parent.bottom; left: loadButton.right; right: parent.right }
+
+            onClicked: {
+                console.log("Loading File: kwinrc Group: Windows");
+                configModel.group = "Windows"
+                configModel.file = "kwinrc"
+            }
+
+            Keys.onTabPressed: bt2.forceActiveFocus();
+        }
+    }
+    ListView {
+        id: configList
+        currentIndex: -1
+        //height: 500
+        width: parent.width
+        clip: true
+        spacing: 8
+        anchors {
+            //verticalCenter: parent.verticalCenter
+            top: configInput.bottom
+            topMargin: spacing*2
+            bottom: parent.bottom
+        }
+        model: configModel
+        delegate: configDelegate
+
+        Rectangle { anchors.fill: configList; color: "white"; opacity: 0.1; }
+    }
+    Component {
+        id: configDelegate
+        Item {
+            height: 24
+            width: configList.width
+            Text { text: "<b>" + configKey + "</b>:   "; anchors.right: parent.horizontalCenter }
+            Text { text: configValue; anchors.left: parent.horizontalCenter }
+        }
+    }
+
+    ActiveSettings.ConfigModel {
+        id: configModel
+        file: "kdeglobals"
+        group: "General"
     }
 
     Component.onCompleted: {

@@ -24,11 +24,15 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.qtextracomponents 0.1
 
 Item {
+    id: mainItem
+    objectName: "completionPopup"
+
+    signal urlFilterChanged()
+
     width: 100
     height: 360
-    objectName: "completionPopup"
-    id: mainItem
     state: "expanded"
+
 
     PlasmaCore.Theme {
         id: theme
@@ -36,17 +40,24 @@ Item {
 
     PlasmaCore.FrameSvgItem {
         id: frame
+        objectName: "frame"
 
         anchors.fill: parent
-        imagePath: "widgets/frame"
-        prefix: "raised"
+        imagePath: "dialogs/background"
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+        }
 
         Component {
             id: myDelegate
             Item {
-                height: 48
-                //anchors.fill: parent
-                anchors.margins: 20
+                id: delegateContainer
+                height: 64
+                //width: ((parent.width / 2) - parent.rightMargin * 2)
+                width: 380
+                anchors.topMargin: 8
 
                 QIconItem {
                     id: previewImage
@@ -60,22 +71,33 @@ Item {
                     anchors.rightMargin: 8
                     //image: preview
                 }
-
                 Text {
-                    height: 32
+                    height: 20
+                    width: 320
                     id: labelText
-                    text: "<strong>" + name + "</strong> <br />" + url
+                    text: name
+                    elide: Text.ElideMiddle
                     color: theme.textColor
                     anchors.left: previewImage.right
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    MouseArea {
-                        anchors.fill: labelText
-                        onClicked: {
-                            print("URL from completer chosen: " + name + " " + url);
-                            urlEntered(url);
-                        }
-                    }
+                    anchors.leftMargin: 12
+                    //anchors.left: previewImage.right
+                    //anchors.top: parent.top
+                    anchors.bottom : parent.verticalCenter
+                }
+
+                Text {
+                    height: 20
+                    id: descriptionText
+                    text: url
+                    opacity: 0.6
+                    elide: Text.ElideMiddle
+                    color: theme.textColor
+                    anchors.left: previewImage.right
+                    anchors.leftMargin: 12
+                    width: 320
+                    //anchors.left: previewImage.right
+                    anchors.top: parent.verticalCenter
+                    //anchors.bottom: parent.bottom
                 }
 
                 QImageItem {
@@ -89,24 +111,122 @@ Item {
                     anchors.right: parent.right
                     image: preview
                 }
+                MouseArea {
+                    anchors.fill: delegateContainer
+                    onClicked: {
+                        print("URL from completer chosen: " + name + " " + url);
+                        urlEntered(url);
+                        mainItem.state = "collapsed"
+                    }
+                }
 
             }
         }
 
-        ListView {
+        Component {
+            id: listHighlight
+
+            PlasmaCore.FrameSvgItem {
+            visible: false
+                //anchors.fill: parent
+                opacity: 0
+                id: highlightFrame
+                imagePath: "widgets/viewitem"
+                prefix: "selected+hover"
+            }
+        }
+
+        Item {
+            id: dashboard
+            objectName: "dashboard"
             anchors {
                 fill: parent
-                leftMargin: frame.margins.left
-                rightMargin: frame.margins.right
-                topMargin: frame.margins.top
-                bottomMargin: frame.margins.bottom
+                leftMargin: frame.margins.left * 2
+                rightMargin: frame.margins.right * 2
+                topMargin: frame.margins.top * 2
+                bottomMargin: frame.margins.bottom * 2
             }
-            y: 16
-            spacing: 4
-            clip: true
-            model: bookmarksModel
-            delegate: myDelegate
-            highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
+            Text {
+                id: topLabel
+                //text: "<h3>placeholder</h3>"
+                height: 48
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.top
+                anchors.leftMargin: 100
+                anchors.rightMargin: 100
+                elide: Text.ElideMiddle
+
+                Connections {
+                    target: urlInput
+                    onUrlFilterChanged: {
+                        var newFilter = urlInput.urlFilter;
+                        print(" New Filter: " + newFilter);
+                        if (newFilter != "") {
+                            print("nonempty");
+                            topLabel.text = i18n("Search for <em>" + newFilter + "</em>...");
+                        } else {
+                            print(" empty");
+                            topLabel.text = i18n("Start typing...");
+                        }
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: urlInput.urlEntered(urlInput.url)
+                }
+
+            }
+            Item {
+                id: history
+                anchors.left: parent.left
+                anchors.right: parent.horizontalCenter
+                anchors.top: topLabel.bottom
+                anchors.bottom: parent.bottom
+                anchors.rightMargin: 12
+                Text {
+                    id: historyLabel
+                    text: i18n("<h3>Recently visited</h3>")
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                    }
+                }
+                ListView {
+                    //spacing: 16
+                    id: historyList
+                    clip: true
+                    anchors.fill: parent
+                    anchors.topMargin: historyLabel.height + 8
+                    model: historyModel
+                    delegate: myDelegate
+                    highlight: listHighlight
+                }
+            }
+
+            Item {
+                id: bookmarks
+                anchors.top: topLabel.bottom
+                anchors.left: parent.horizontalCenter
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.leftMargin: 12
+                Text {
+                    id: bookmarksLabel
+                    text: i18n("<h3>Bookmarks</h3>")
+                }
+                ListView {
+                    //spacing: 4
+                    clip: true
+                    anchors.fill: parent
+                    anchors.topMargin: bookmarksLabel.height + 8
+                    //width: (parent.width / 2)
+                    //height: parent.height
+                    model: bookmarksModel
+                    delegate: myDelegate
+                    highlight: listHighlight
+                }
+            }
         }
     }
 
@@ -116,7 +236,8 @@ Item {
             name: "expanded";
             PropertyChanges {
                 target: mainItem
-                opacity: 1
+                opacity: 1.0
+                scale: 1.0
             }
         },
 
@@ -126,20 +247,41 @@ Item {
             PropertyChanges {
                 target: mainItem
                 opacity: 0
+                scale: 0.9
             }
         }
     ]
 
     transitions: [
         Transition {
-            PropertyAnimation {
-                properties: "opacity"
-                duration: 400;
-                easing.type: Easing.InOutElastic;
-                easing.amplitude: 2.0; easing.period: 1.5
+            from: "collapsed"; to: "expanded"
+            ParallelAnimation {
+                PropertyAnimation {
+                    properties: "opacity"
+                    duration: 175;
+                    easing.type: Easing.InExpo;
+                }
+                PropertyAnimation {
+                    properties: "scale"
+                    duration: 175;
+                    easing.type: Easing.InExpo;
+                }
+            }
+        },
+        Transition {
+            from: "expanded"; to: "collapsed"
+            ParallelAnimation {
+                PropertyAnimation {
+                    properties: "opacity"
+                    duration: 175;
+                    easing.type: Easing.OutExpo;
+                }
+                PropertyAnimation {
+                    properties: "scale"
+                    duration: 100;
+                    easing.type: Easing.OutExpo;
+                }
             }
         }
     ]
-
-    
 }

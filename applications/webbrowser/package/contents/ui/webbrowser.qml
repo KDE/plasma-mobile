@@ -104,6 +104,29 @@ Rectangle {
         width: headerSpace.width
         //height: headerSpace.height
     }
+/*
+    CompletionPopup {
+        id: completionPopup
+        property double relativeSize: 0.9
+        width: (webBrowser.width * relativeSize)
+        height: (webBrowser.height * relativeSize)
+        x: (webBrowser.width * (1.0-relativeSize) / 2)
+        y: (webBrowser.height * (1.0-relativeSize) / 2)
+        state: "collapsed"
+        //anchors.centerIn: webBrowser.
+        //anchors.top: urlText.bottom
+        //anchors.left: urlText.left
+        //anchors.right: urlText.right
+
+        Component.onCompleted: {
+            print( " size :   " + relativeSize);
+            print("   width:  " +( webBrowser.width * relativeSize));
+            print("   height: " + (webBrowser.height * relativeSize));
+            print("   x:    : " + (webBrowser.width * (1.0-relativeSize) / 2));
+            print("   y:    : " + (webBrowser.height * (1.0-relativeSize) / 2));
+        }
+    }
+*/
 
     ScrollBar {
         scrollArea: webView; width: 8
@@ -125,7 +148,7 @@ Rectangle {
         if (typeof startupArguments[0] != "undefined") {
             urlString = startupArguments[0];
         } else {
-            urlString = "http://plasma.kde.org";
+            //urlString = "http://plasma.kde.org";
         }
     }
 }

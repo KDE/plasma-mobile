@@ -42,6 +42,7 @@ function restore()
     for (var i=0; i<itemsStrings.length; i++) {
         //[id, encoded geometry]
         var idConfig = itemsStrings[i].split(":")
+        idConfig[0] = idConfig[0].replace("%3A", ":")
         if (idConfig.length < 2) {
             continue
         }
@@ -67,7 +68,7 @@ function save()
 
     for (id in itemsConfig) {
         var rect = itemsConfig[id]
-        configString += id + ":" + rect.x + "," + rect.y + "," + rect.width + "," + rect.height + ";"
+        configString += id.replace(":", "%3A") + ":" + rect.x + "," + rect.y + "," + rect.width + "," + rect.height + ";"
     }
 
     //print("saving "+configString)

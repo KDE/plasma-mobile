@@ -58,7 +58,7 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
 {
     setQmlPath(KStandardDirs::locate("data", "plasma-device/activityconfiguration/view.qml"));
 #ifndef NO_ACTIVITIES
-    m_activityController = new Activities::Controller(this);
+    m_activityController = new KActivities::Controller(this);
 #endif
 
     if (engine()) {

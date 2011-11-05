@@ -1,0 +1,9 @@
+plugin mobilecomponentsplugin
+ActionButton 0.1 ActionButton.qml
+IconButton 0.1 IconButton.qml
+IconGrid 0.1 IconGrid.qml
+Rating 0.1 Rating.qml
+ResourceDelegate 0.1 ResourceDelegate.qml
+ViewSearch 0.1 ViewSearch.qml
+AppearAnimation 0.1 AppearAnimation.qml
+DisappearAnimation 0.1 DisappearAnimation.qml

@@ -31,6 +31,15 @@ Item {
         if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
             menuContainer.plasmoid.resetStatus()
         }
+        //load the launcher package on demand to save boot time
+        if (state != "Hidden" && !menuContainer.plasmoid) {
+            var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
+            menuContainer.plasmoid = component.createObject(menuContainer);
+            //assume menuContainer provides a itemLaunched signal
+            if (menuContainer.plasmoid) {
+                menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
+            }
+        }
     }
 
     PlasmaCore.FrameSvgItem {
@@ -43,14 +52,6 @@ Item {
     MobileComponents.Package {
         id: launcherPackage
         name: "org.kde.active.launcher"
-        Component.onCompleted: {
-            var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
-            menuContainer.plasmoid = component.createObject(menuContainer);
-            //assume menuContainer provides a itemLaunched signal
-            if (menuContainer.plasmoid) {
-                menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
-            }
-        }
     }
 
     function itemLaunched()
@@ -139,18 +140,25 @@ Item {
         State {
             name: "Full"
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 y: -200
             }
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 acceptsFocus: true
+            }
+        },
+        State {
+            name: "Dragging"
+            PropertyChanges {
+                target: topSlidingPanel
+                y: y
             }
         },
         State {
             name: "Launcher"
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 y: 0
                 acceptsFocus: true
             }
@@ -158,7 +166,7 @@ Item {
         State {
             name: "Hidden"
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 y: -topEdgePanel.height + systrayContainer.height+ background.margins.bottom + 2
                 acceptsFocus: false
             }
@@ -166,7 +174,7 @@ Item {
         State {
             name: "Tasks"
             PropertyChanges {
-                target: slidingPanel
+                target: topSlidingPanel
                 y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom
 
                 acceptsFocus: true

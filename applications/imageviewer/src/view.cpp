@@ -26,9 +26,11 @@
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
 #include <QDeclarativeItem>
+#include <QFileInfo>
 #include <QScriptValue>
 #include <QGLWidget>
 
+#include <KShell>
 #include <KStandardDirs>
 #include <KDebug>
 
@@ -54,16 +56,21 @@ AppView::AppView(const QString &url, QWidget *parent)
     //binds things like kconfig and icons
     kdeclarative.setupBindings();
     QScriptEngine *scriptEngine = kdeclarative.scriptEngine();
+    //TODO: remove this after we depend from KDE 4.8
     registerDataEngineMetaTypes(scriptEngine);
 
     // Filter the supplied argument through KUriFilter and then
     // make the resulting url known to the webbrowser component
     // as startupArguments property
-    QVariant a = QVariant(QStringList(url));
+    KUrl uri(url);
+    QVariant a = QVariant(QStringList(uri.prettyUrl()));
     rootContext()->setContextProperty("startupArguments", a);
     m_dirModel = new DirModel(this);
     if (!url.isEmpty()) {
-        m_dirModel->setUrl(KUrl(url).upUrl().prettyUrl());
+        if (!uri.isLocalFile() || !QFileInfo(uri.toLocalFile()).isDir()) {
+            uri = uri.upUrl();
+        }
+        m_dirModel->setUrl(uri.prettyUrl());
     }
     rootContext()->setContextProperty("dirModel", m_dirModel);
 

@@ -44,6 +44,7 @@ Item {
     property string filteredUrl: ""
     property alias image: bg.source
     property alias url: urlText.text
+    //property alias completionPopup: webBrowser.completionPopup
     property string urlFilter
 
     signal urlEntered(string url)
@@ -76,7 +77,11 @@ Item {
 
         onTextChanged: {
             container.urlChanged();
-            urlFilter = text;
+            if (text != webView.url) {
+                urlFilter = text;
+            } else {
+                urlFilter = "";
+            }
             urlFilterChanged();
         }
 
@@ -115,15 +120,21 @@ Item {
             leftMargin: 8
             rightMargin: 8
         }
+
+        Component.onCompleted: {
+            focus = true;
+        }
     }
 
     CompletionPopup {
         id: completionPopup
-        height: 200
         state: "collapsed"
-        anchors.top: urlText.bottom
-        anchors.left: urlText.left
-        anchors.right: urlText.right
+        property double relativeSize: 1.1
+        property int overlap: 40
+        x: -overlap
+        y: 60
+        width: urlText.width + overlap * 2
+        height: webBrowser.height * 0.666
     }
 
     QIconItem {
@@ -172,6 +183,20 @@ Item {
     onFilteredUrlChanged: {
         // the entered URL has been filtered by KUriFilter, load the result
         loadUrl(filteredUrl);
+    }
+
+    Component.onCompleted: {
+        print(" EXPAND " + urlText.text);
+        if (urlText.text == "") {
+            completionPopup.state = "expanded"
+            container.urlChanged();
+            print("111 Should load history...");
+            urlFilter = "";
+
+            urlText.text = "";
+            urlFilterChanged();
+            print("Should load history...");
+        }
     }
 
 }

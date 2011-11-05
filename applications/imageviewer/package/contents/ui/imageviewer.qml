@@ -23,6 +23,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 import Qt.labs.gestures 1.0
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
+import org.kde.metadatamodels 0.1 as MetadataModels
+
 
 Image {
     id: imageViewer
@@ -33,8 +35,6 @@ Image {
 
     width: 360
     height: 360
-
-    property bool firstRun: true
 
     MobileComponents.Package {
         id: viewerPackage
@@ -55,36 +55,32 @@ Image {
             return
         }
 
-        var i = 0
         if (String(path).indexOf("/") === 0) {
             path = "file://"+path
         }
 
         //is in Nepomuk
-        for (prop in metadataSource.data["ResourcesOfType:Image"]) {
-            if (metadataSource.data["ResourcesOfType:Image"][prop]["url"] == path) {
-                fullList.model = filterModel
-                quickBrowserBar.model = filterModel
-                fullList.positionViewAtIndex(i, ListView.Center)
-                fullList.currentIndex = i
-                spareDelegate.visible = false
-                fullList.visible = true
-                imageViewer.state = "image"
-                return
-            }
-            ++i
+        var index = metadataModel.find(path);
+        if (index > -1) {
+            fullList.model = metadataModel
+            quickBrowserBar.model = metadataModel
+            fullList.positionViewAtIndex(index, ListView.Center)
+            fullList.currentIndex = index
+            spareDelegate.visible = false
+            fullList.visible = true
+            imageViewer.state = "image"
+            return
+        } else {
+            //is in dirModel
+            fullList.model = dirModel
+            quickBrowserBar.model = dirModel
+            index = dirModel.indexForUrl(path)
+            fullList.positionViewAtIndex(index, ListView.Center)
+            fullList.currentIndex = index
+            spareDelegate.visible = false
+            fullList.visible = true
+            imageViewer.state = "image"
         }
-
-        //is in dirModel
-        fullList.model = dirModel
-        quickBrowserBar.model = dirModel
-        var i = dirModel.indexForUrl(path)
-        fullList.positionViewAtIndex(i, ListView.Center)
-        fullList.currentIndex = i
-        spareDelegate.visible = false
-        fullList.visible = true
-        imageViewer.state = "image"
-        return
     }
 
     Timer {
@@ -93,28 +89,20 @@ Image {
         repeat: false
         onTriggered: {
             loadImage(startupArguments[0])
-            imageViewer.firstRun = false
         }
     }
 
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        connectedSources: ["ResourcesOfType:Image"]
-        interval: 0
-        onDataChanged: {
-            firstRunTimer.restart()
-        }
+    Component.onCompleted: {
+        firstRunTimer.start()
     }
-    PlasmaCore.SortFilterModel {
-        id: filterModel
-        sourceModel: PlasmaCore.DataModel {
-            id: metadataModel
-            keyRoleFilter: ".*"
-            dataSource: metadataSource
-        }
-        filterRole: "label"
+
+    MetadataModels.MetadataModel {
+        id: metadataModel
+        resourceType: "nfo:Image"
+        sortBy: [userTypes.sortFields[itemGroup.category]]
+        sortOrder: Qt.AscendingOrder
     }
+
 
 
     Toolbar {
@@ -123,7 +111,7 @@ Image {
 
     QuickBrowserBar {
         id: quickBrowserBar
-        model: filterModel
+        model: metadataModel
     }
 
     MobileComponents.IconGrid {
@@ -135,7 +123,7 @@ Image {
 
         Component.onCompleted: resultsContainer.contentY = resultsContainer.height
         height: resultsContainer.height
-        model: filterModel
+        model: metadataModel
         delegateWidth: 130
         delegateHeight: 120
         delegate: MobileComponents.ResourceDelegate {
@@ -164,7 +152,7 @@ Image {
 
     Rectangle {
         id: viewer
-        scale: startupArguments[0].length > 0?1:0
+        scale: startupArguments[0].length > 0 ? 1 : 0
 
         function setCurrentIndex(index)
         {
@@ -192,7 +180,7 @@ Image {
         ListView {
             id: fullList
             anchors.fill: parent
-            model: filterModel
+            model: metadataModel
             highlightRangeMode: ListView.StrictlyEnforceRange
             orientation: ListView.Horizontal
             snapMode: ListView.SnapOneItem
@@ -210,6 +198,10 @@ Image {
             visible: false
         }
 
+    }
+
+    SlcComponents.SlcMenu {
+        id: contextMenu
     }
 
     states: [

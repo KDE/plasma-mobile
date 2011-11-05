@@ -96,14 +96,15 @@ Flickable {
 
     Item {
         id: imageMargin
-        width: Math.max(mainFlickable.width, mainImage.width*mainImage.scale)
-        height: Math.max(mainFlickable.height, mainImage.height*mainImage.scale)
+        width: Math.max(mainFlickable.width, mainImage.width * mainImage.scale)
+        height: Math.max(mainFlickable.height, mainImage.height * mainImage.scale)
         clip: true
         GestureArea {
             anchors.fill: parent
             onPinch: {
                 mainImage.scale = scaleFactor
             }
+
             Image {
                 id: mainImage
 
@@ -128,6 +129,7 @@ Flickable {
                     }
                 }
             }
+
             Text {
                 id: loadingText
                 font.pointSize: 18

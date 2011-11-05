@@ -62,13 +62,10 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         startY = mouse.screenY
         startX = mouse.screenX
         lastY = mouse.screenY
-        inButton = (mouse.y > height - 35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8)
-        if (!inButton) {
-            disableTimer.running = true
-        }
+        systrayPanel.state = "Dragging"
     }
     onPositionChanged: {
-        if (!panelDragButton.dragEnabled || inButton) {
+        if (!panelDragButton.dragEnabled ) {
             return
         }
 
@@ -91,19 +88,12 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         }
 
         if (dragging) {
-            slidingPanel.y = Math.min(-200, (slidingPanel.y+mouse.screenY - lastY))
+            topSlidingPanel.y = Math.min(-200, (topSlidingPanel.y+mouse.screenY - lastY))
         }
         lastY = mouse.screenY
     }
 
     onReleased: {
-        if (inButton) {
-            stillInButton = (mouse.y > height - 35 && mouse.x > iconItem.x && Math.abs(mouse.screenY - startY) < 8)
-            if (stillInButton) {
-                homeScreen.focusActivityView()
-            }
-            return
-        }
 
         panelDragButton.dragEnabled = true
         disableTimer.running = false
@@ -111,15 +101,15 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         var oldState = systrayPanel.state
         systrayPanel.state = "none"
 
-        if (slidingPanel.y > -100) {
+        if (topSlidingPanel.y > -100) {
             //the biggest one, Launcher with tag cloud
             systrayPanel.state = "Launcher"
-        } else if (systrayPanel.height+slidingPanel.y > systrayPanel.height/2) {
+        } else if (systrayPanel.height+topSlidingPanel.y > systrayPanel.height/2) {
             //more than 2/3 of the screen uncovered, full
             systrayPanel.state = "Full"
 
-        } else if ((oldState == "Hidden" && systrayPanel.height+slidingPanel.y > panelDragButton.tasksHeight/2) ||
-                   (systrayPanel.height+slidingPanel.y > (panelDragButton.tasksHeight/5)*6)) {
+        } else if ((oldState == "Hidden" && systrayPanel.height+topSlidingPanel.y > panelDragButton.tasksHeight/2) ||
+                   (systrayPanel.height+topSlidingPanel.y > (panelDragButton.tasksHeight/5)*6)) {
             //show only the taskbar: require a smaller quantity of the screen uncovered when the previous state is hidden
             systrayPanel.state = "Tasks"
         } else {

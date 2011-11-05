@@ -37,7 +37,8 @@ public:
     ~CompletionModel();
 
     QList<QObject*> items();
-    QList<QObject*> filteredItems();
+    QList<QObject*> filteredBookmarks();
+    QList<QObject*> filteredHistory();
     History* history();
 
 public Q_SLOTS:
@@ -53,6 +54,7 @@ private Q_SLOTS:
     void finishedListing();
 
 private:
+    QList<QObject*> filteredItems(const QList<QObject*> &l);
     CompletionModelPrivate* d;
     void loadBookmarks();
 

@@ -23,6 +23,7 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.metadatamodels 0.1
 
 Item {
     id: bookmarks
@@ -34,7 +35,7 @@ Item {
 
     PlasmaCore.DataSource {
         id: metadataSource
-        engine: "org.kde.active.bookmarks"
+        engine: "org.kde.active.metadata"
         interval: 0
 
         onSourceAdded: {
@@ -76,9 +77,9 @@ Item {
             id: bookmarksModel
             sortRole: "rating"
             sortOrder: "DescendingOrder"
-            sourceModel: PlasmaCore.DataModel {
-                dataSource: metadataSource
-                keyRoleFilter: ".*"
+            sourceModel: MetadataModel {
+                id: metadataModel
+                resourceType: "nfo:Bookmark"
             }
         }
 

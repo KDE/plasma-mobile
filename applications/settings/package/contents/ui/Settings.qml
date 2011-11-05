@@ -22,12 +22,13 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 
 Item {
+    id: rootItem
     width: 100
     height: 360
-    id: rootItem
     anchors.margins: 8
 
     PlasmaCore.Theme {
@@ -35,8 +36,8 @@ Item {
     }
 
     PlasmaCore.FrameSvgItem {
-        imagePath: "widgets/frame"
-        prefix: "raised"
+        imagePath: "dialogs/background"
+        //prefix: "raised"
         id: settingsRoot
         objectName: "settingsRoot"
         state: "expanded"
@@ -68,27 +69,29 @@ Item {
                         height: 32
                         icon: QIcon(iconName)
                         anchors.verticalCenter: parent.verticalCenter
-                        //anchors.top: parent.top
-                        //anchors.bottom: parent.bottom
                         anchors.left: parent.left
                         anchors.rightMargin: 8
-                        //image: preview
                     }
 
                     Text {
-                        height: 32
                         id: textItem
-                        text: "<strong>" + name + "</strong> <br />" + description
-                        //./applets/org.kde.active.connman/contents/ui/WifiExpandingBox.qml:474:
-                        //font.pixelSize: theme.fontPixelSizeNormal
+                        text: name
                         elide: Text.ElideRight
                         color: theme.textColor
-                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.bottom: parent.verticalCenter
                         anchors.left: iconItem.right
-                        //anchors.top: parent.top
-                        //anchors.bottom: parent.bottom
                         anchors.right: parent.right
-                        //anchors.leftMargin: 20
+                    }
+
+                    Text {
+                        id: descriptionItem
+                        text: description
+                        opacity: 0.6
+                        elide: Text.ElideRight
+                        color: theme.textColor
+                        anchors.top: parent.verticalCenter
+                        anchors.left: iconItem.right
+                        anchors.right: parent.right
                     }
 
                     MouseArea {
@@ -116,7 +119,6 @@ Item {
                 clip: true
                 model: settingsModulesModel
                 delegate: myDelegate
-                //highlight: Rectangle { color: theme.textColor; opacity: 0.3 }
                 highlight: PlasmaCore.FrameSvgItem {
                     id: highlightFrame
                     imagePath: "widgets/viewitem"
@@ -126,18 +128,16 @@ Item {
             }
         }
 
-        Loader {
+        PlasmaComponents.PageStack {
             id: moduleContainer
             objectName: "moduleContainer"
+            clip: false
+            //width: (parent.width - settingsRoot.width - 40)
             anchors.margins: 20
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: modulesList.right
             anchors.right: parent.right
-        }
-
-        Component.onCompleted: {
-            print(" Loading Settings.qml done." + settingsRoot);
         }
 
         states: [
@@ -174,20 +174,20 @@ Item {
 
     MobileComponents.Package {
         id: switcherPackage
-        //name: "org.kde.active.settings.time"
-        Component.onCompleted: {
-            //loadPackage("org.kde.active.settings.time");
-        }
-
     }
 
     function loadPackage(module) {
         // Load the C++ plugin into our context
         settingsRoot.loadPlugin(module);
         switcherPackage.name = module
-        //print(" Loading package: " + switcherPackage.filePath("mainscript"));
-        moduleContainer.source = switcherPackage.filePath("mainscript");
+        print(" Loading package: " + switcherPackage.filePath("mainscript"));
+        //moduleContainer.source = switcherPackage.filePath("mainscript");
+        moduleContainer.replace(switcherPackage.filePath("mainscript"));
     }
 
-
+    Component.onCompleted: {
+        if (typeof(startModule) != "undefined") {
+            loadPackage(startModule);
+        }
+    }
 }

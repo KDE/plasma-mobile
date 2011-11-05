@@ -37,7 +37,7 @@ target_link_libraries(active-firstrun
         ${KDE4_PLASMA_LIBS}
         ${NEPOMUK_LIBRARIES}
         ${NEPOMUK_QUERY_LIBRARIES}
-        kactivities
+        ${KACTIVITIES_LIBRARY}
 )
 
 install(TARGETS active-firstrun ${INSTALL_TARGETS_DEFAULT_ARGS} )
