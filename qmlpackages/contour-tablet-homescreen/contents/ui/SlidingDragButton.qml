@@ -34,14 +34,15 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
     PlasmaCore.Svg {
         id: iconSvg
-        imagePath: "icons/contour"
+        imagePath: "icons/start"
     }
 
     PlasmaCore.SvgItem {
         id: iconItem
         svg: iconSvg
+        elementId: "start-here"
         width: height
-        height: 32
+        height: theme.mediumIconSize
         anchors {
             right: parent.right
             bottom:parent.bottom
