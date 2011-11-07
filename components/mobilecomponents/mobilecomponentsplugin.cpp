@@ -36,7 +36,7 @@
 
 void MobileComponentsPlugin::initializeEngine(QDeclarativeEngine *engine, const char *uri)
 {
-    engine->addImageProvider(QLatin1String("appBackground"), new AppBackgroundProvider);
+    engine->addImageProvider(QLatin1String("appbackgrounds"), new AppBackgroundProvider);
 }
 
 void MobileComponentsPlugin::registerTypes(const char *uri)

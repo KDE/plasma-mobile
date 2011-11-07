@@ -28,15 +28,14 @@
 #include <Plasma/Theme>
 
 AppBackgroundProvider::AppBackgroundProvider()
-  : QDeclarativeImageProvider(QDeclarativeImageProvider::Pixmap)
+  : QDeclarativeImageProvider(QDeclarativeImageProvider::Image)
 {
 }
 
 QImage AppBackgroundProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
 {
-    QString search = QLatin1Literal("desktoptheme/") % Plasma::Theme::defaultTheme()->themeName() % QLatin1Char('/') % id % ".png";
+    QString search = QLatin1Literal("desktoptheme/") % Plasma::Theme::defaultTheme()->themeName() % QLatin1Literal("/appbackgrounds/") % id % ".png";
     search =  KStandardDirs::locate("data", search);
-
     return QImage(search);
 }
 

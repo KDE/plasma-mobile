@@ -25,8 +25,11 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 
-Item {
+Image {
     id: rootItem
+    source: "image://appbackgrounds/standard"
+    fillMode: Image.Tile
+    asynchronous: true
     width: 100
     height: 360
     anchors.margins: 8
@@ -35,9 +38,7 @@ Item {
         id: theme
     }
 
-    PlasmaCore.FrameSvgItem {
-        imagePath: "dialogs/background"
-        //prefix: "raised"
+    Item {
         id: settingsRoot
         objectName: "settingsRoot"
         state: "expanded"
@@ -45,13 +46,27 @@ Item {
 
         signal loadPlugin(string module);
 
-        Item {
+        Image {
             id: modulesList
+            source: "image://appbackgrounds/contextarea"
+            fillMode: Image.Tile
+            z: 800
 
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             width: 360
+
+            Image {
+                source: "image://appbackgrounds/shadow-right"
+                fillMode: Image.Tile
+                anchors {
+                    left: parent.right
+                    top: parent.top
+                    bottom: parent.bottom
+                    leftMargin: -1
+                }
+            }
 
             Component {
                 id: myDelegate
