@@ -22,6 +22,7 @@
 #include "mobilecomponentsplugin.h"
 
 #include <QtDeclarative/qdeclarative.h>
+#include <QDeclarativeEngine>
 
 #include "appletcontainer.h"
 #include "categorizedproxymodel.h"
@@ -31,6 +32,12 @@
 #include "resourceinstance.h"
 #include "package.h"
 #include "texteffects.h"
+#include "appbackgroundprovider_p.h"
+
+void MobileComponentsPlugin::initializeEngine(QDeclarativeEngine *engine, const char *uri)
+{
+    engine->addImageProvider(QLatin1String("appBackground"), new AppBackgroundProvider);
+}
 
 void MobileComponentsPlugin::registerTypes(const char *uri)
 {
