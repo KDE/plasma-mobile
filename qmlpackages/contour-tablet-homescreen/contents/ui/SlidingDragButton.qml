@@ -46,6 +46,10 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
             right: parent.right
             bottom:parent.bottom
         }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: homeScreen.focusActivityView()
+        }
     }
 
     Timer {
