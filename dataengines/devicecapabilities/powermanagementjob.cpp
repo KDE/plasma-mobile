@@ -21,7 +21,7 @@
 #include <QDBusPendingReply>
 
 // kde-workspace/libs
-#include <kworkspace/kworkspace.h>
+#include "kworkspace.h"
 
 #include "powermanagementjob.h"
 
@@ -66,7 +66,7 @@ bool PowerManagementJob::suspend()
 
 bool PowerManagementJob::requestShutDown()
 {
-    KWorkSpace::requestShutDown();
+    //KWorkSpace::requestShutDown();
     return true;
 }
 
