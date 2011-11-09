@@ -24,4 +24,4 @@ Exec=active-aboutapp -graphicssystem raster
 Terminal=false
 Icon=active-about
 Type=Application
-Categories=Qt;KDE;Core;Documentation;Viewer;
+Categories=Qt;KDE;Core;Documentation;System;
