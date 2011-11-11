@@ -105,7 +105,14 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
 
         Nepomuk::Resource currentActivityResource(activitymanager->currentActivity(), KEXT::Activity());
 
-        if (resource.isRelateds().contains(currentActivityResource)) continue;
+        // TODO: See ActivityManager.coo
+        // I'd like a resource isRelated activity more than vice-versa
+        // but the active models are checking for the other way round.
+        // It is defined in the ontologies as a symmetric relation, but
+        // Nepomuk doesn't care about that.
+
+        // if (resource.isRelateds().contains(currentActivityResource)) continue;
+        if (currentActivityResource.isRelateds().contains(resource)) continue;
 
         Contour::RecommendationItem recommendation;
 
