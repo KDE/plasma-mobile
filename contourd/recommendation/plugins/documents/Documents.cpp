@@ -45,7 +45,7 @@ using namespace Nepomuk::Vocabulary;
 DocumentsEnginePrivate::DocumentsEnginePrivate(DocumentsEngine * parent)
     : q(parent)
 {
-    activitymanager = new Activities::Consumer(this);
+    activitymanager = new KActivities::Consumer(this);
 
     QDBusConnection dbus = QDBusConnection::sessionBus();
 
@@ -100,7 +100,8 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
     foreach (const QVariant & item, data) {
         Nepomuk::Resource resource(KUrl(item.toString()));
 
-        if (!resource.hasType(Nepomuk::Vocabulary::NFO::FileDataObject())) continue;
+        // The problem is when the resource has no particular type set (web page)
+        // if (!resource.hasType(Nepomuk::Vocabulary::NFO::FileDataObject())) continue;
 
         Nepomuk::Resource currentActivityResource(activitymanager->currentActivity(), KEXT::Activity());
 

@@ -23,7 +23,7 @@
 #include "Documents.h"
 #include "RecommendationItem.h"
 
-#include <Activities/Consumer>
+#include <KActivities/Consumer>
 
 class DocumentsEnginePrivate: public QObject {
     Q_OBJECT
@@ -47,7 +47,7 @@ public:
     QList<Contour::RecommendationItem> recommendations;
     DocumentsEngine * const q;
 
-    Activities::Consumer * activitymanager;
+    KActivities::Consumer * activitymanager;
 
 };
 
