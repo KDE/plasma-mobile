@@ -47,10 +47,6 @@ Item {
 
     property variant scrollArea
     property variant orientation: Qt.Vertical
-    property bool hideDelay
-
-    //property alias topButton: container.topButton
-    opacity: 0
 
     function position()
     {
@@ -86,9 +82,10 @@ Item {
         } else return nh + ny;
     }
 
-//     Item {
-//         id: scrollPainter
-//         anchors.fill: parent
+    Item {
+        id: scrollPainter
+        anchors.fill: parent
+        opacity: 0
         Rectangle { anchors.fill: parent; color: "Black"; opacity: 0.5 }
 
         Rectangle {
@@ -99,54 +96,42 @@ Item {
             y: container.orientation == Qt.Vertical ? position() : 2
             height: container.orientation == Qt.Vertical ? size() : container.height - 4
         }
-//     }
+    }
     QIconItem {
         id: topButton
-        anchors { bottom: parent.verticalCenter; right: parent.left }
+        anchors { top: parent.top; right: parent.left }
         icon: QIcon("go-top")
         width: 48
         height: width
-        // Show the "up" button when we're scrolling up and the header
-        // is outside of the view
-        //visible: (hideDelay || scrollArea.contentY > header.height+500 && scrollArea.verticalVelocity < 0)
-
-//         visible: {
-//             print(" scroll: " + scrollArea.verticalVelocity);
-//             (parent.visible && scrollArea.contentY > header.height && scrollArea.verticalVelocity < 0)
-//         }
-
-        Component.onCompleted: {
-            print(" icon completed..............");
-        }
+        opacity: 0
         MouseArea {
             anchors.fill: parent
-            onClicked: {
-                scrollArea.contentY = 0;
-                scrollArea.contentX = 0;
-                parent.scale = 0.9;
+            onPressed: SequentialAnimation {
+                PropertyAnimation { target: topButton; properties: "scale"; to: 0.8; duration: 50; }
+                PropertyAnimation { target: topButton; properties: "scale"; to: 1; duration: 50; }
+            }
+            onClicked: ParallelAnimation{
+                PropertyAnimation { target: topButton; properties: "opacity"; to: 0; duration: 200; }
+                PropertyAnimation {
+                    target: scrollArea; properties: "contentX,contentY";
+                    to: 0; duration: 400; easing.type: Easing.InOutQuint;
+                }
             }
         }
     }
 
     states: [
-//         State {
-//             name: "hidden"
-//             //when: (scrollArea.verticalVelocity + scrollArea.horizontalVelocity == 0)
-//             PropertyChanges { target: container; opacity: 0.0 }
-//         },
-        State {
-            name: "Scrolling"
-            // check if we're moving, and fast enough
-            when: ( (container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally) &&             scrollArea.verticalVelocity > 10 )
-            PropertyChanges { target: container; opacity: 1.0 }
-            PropertyChanges { target: topButton; opacity: 0.0 }
-        },
         State {
             name: "ScrollingUp"
-            extend: "Scrolling"
-            when: ( (container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally) &&             scrollArea.verticalVelocity < -10 && scrollArea.contentY > header.height+500)
-            //PropertyChanges { target: container; opacity: 1.0 }
+            when: ((container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally) &&             scrollArea.verticalVelocity < -10 && scrollArea.contentY > header.height+2000)
+            PropertyChanges { target: scrollPainter; opacity: 1.0 }
             PropertyChanges { target: topButton; opacity: 1.0 }
+        },
+        State {
+            name: "Scrolling"
+            when: ( (container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally))
+            PropertyChanges { target: scrollPainter; opacity: 1.0 }
+            PropertyChanges { target: topButton; opacity: 0.0 }
         }
     ]
 
@@ -154,73 +139,31 @@ Item {
         Transition {
             to: "ScrollingUp"
             SequentialAnimation {
-                ScriptAction { script: print("transition to ScrollingUp"); }
-                ScriptAction { script: topButton.visible = true; }
-                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 2000 }
-//                 PropertyAnimation {
-//                     target: topButton;
-//                     //to: 1.0;
-//                     property: "opacity";
-//                     duration: 2000
-//                 }
+                PauseAnimation { duration: 400; }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
+            }
+        },
+        Transition {
+            to: "ScrollingUp"
+            SequentialAnimation {
+                PauseAnimation { duration: 400; }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
             }
         },
         Transition {
             from: "ScrollingUp"
-            ParallelAnimation {
-                ScriptAction { script: print("transition from ScrollingUp"); }
-                PropertyAnimation { target: container; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 2000 }
-                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 2000 }
+            SequentialAnimation {
+                PauseAnimation { duration: 1000; }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
             }
         },
         Transition {
             to: ""
-            SequentialAnimation {
-                ScriptAction {
-                    script:  {
-                        print("transition to hidden");
-                        if (state != "ScrollingUp") {
-                            topButton.visible = false;
-                        }
-                    }
-                }
-                PropertyAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 3000 }
-                ScriptAction {
-                    script:  {
-                        print("transition to hidden");
-                        if (state == "ScrollingUp") {
-                            print("animating topButton");
-                            //PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 3000 }
-                        }
-                    }
-                }
-                //NumberAnimation { target: parent; properties: "opacity"; duration: 4000 }
-            }
+            PropertyAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
         },
         Transition {
-            from: ""
-            SequentialAnimation {
-                ScriptAction { script: print("transition from hidden"); }
-                PropertyAnimation { target: container; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 800 }
-            }
-        },
-        Transition {
-            from: "Scrolling"; to: "ScrollingUp"
-            SequentialAnimation {
-                ScriptAction { script: print("transition from hidden"); }
-                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 800 }
-            }
-        },
-        Transition {
-            from: "ScrollingUp"; to: "Scrolling"
-            SequentialAnimation {
-                ScriptAction { script: print("transition from hidden"); }
-                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 800 }
-            }
+            from: ""; to: "Scrolling"
+            PropertyAnimation { target: scrollPainter; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
         }
     ]
-    onStateChanged: {
-         ///print(" State changing to: " + state);
-         //print("  verticalVelocity: " + scrollArea.verticalVelocity);
-    }
 }
