@@ -108,7 +108,7 @@ Item {
         height: width
         // Show the "up" button when we're scrolling up and the header
         // is outside of the view
-        visible: (hideDelay || scrollArea.contentY > header.height+500 && scrollArea.verticalVelocity < 0)
+        //visible: (hideDelay || scrollArea.contentY > header.height+500 && scrollArea.verticalVelocity < 0)
 
 //         visible: {
 //             print(" scroll: " + scrollArea.verticalVelocity);
@@ -128,34 +128,99 @@ Item {
         }
     }
 
-    states: State {
-        name: "visible"
-        when: container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally
-        PropertyChanges { target: container; opacity: 1.0 }
-    }
+    states: [
+//         State {
+//             name: "hidden"
+//             //when: (scrollArea.verticalVelocity + scrollArea.horizontalVelocity == 0)
+//             PropertyChanges { target: container; opacity: 0.0 }
+//         },
+        State {
+            name: "Scrolling"
+            // check if we're moving, and fast enough
+            when: ( (container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally) &&             scrollArea.verticalVelocity > 10 )
+            PropertyChanges { target: container; opacity: 1.0 }
+            PropertyChanges { target: topButton; opacity: 0.0 }
+        },
+        State {
+            name: "ScrollingUp"
+            extend: "Scrolling"
+            when: ( (container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally) &&             scrollArea.verticalVelocity < -10 && scrollArea.contentY > header.height+500)
+            //PropertyChanges { target: container; opacity: 1.0 }
+            PropertyChanges { target: topButton; opacity: 1.0 }
+        }
+    ]
 
     transitions: [
         Transition {
-            from: "visible"; to: ""
-            NumberAnimation { target: scrollPainter; properties: "opacity"; duration: 4000 }
+            to: "ScrollingUp"
             SequentialAnimation {
-                ScriptAction { script: hideDelay = true; }
-                PropertyAnimation { target: topButton; property: "opacity"; to: 0; duration: 4000; easing.type: Easing.OutCirc; }
-                ScriptAction { script: hideDelay = false; }
+                ScriptAction { script: print("transition to ScrollingUp"); }
+                ScriptAction { script: topButton.visible = true; }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 2000 }
+//                 PropertyAnimation {
+//                     target: topButton;
+//                     //to: 1.0;
+//                     property: "opacity";
+//                     duration: 2000
+//                 }
             }
         },
         Transition {
-            from: ""; to: "visible"
+            from: "ScrollingUp"
+            ParallelAnimation {
+                ScriptAction { script: print("transition from ScrollingUp"); }
+                PropertyAnimation { target: container; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 2000 }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 2000 }
+            }
+        },
+        Transition {
+            to: ""
             SequentialAnimation {
-                ScriptAction { script: hideDelay = false; }
-                PropertyAnimation {
-                    target: topButton;
-                    to: 1.0;
-                    property: "opacity";
-                    duration: 400
+                ScriptAction {
+                    script:  {
+                        print("transition to hidden");
+                        if (state != "ScrollingUp") {
+                            topButton.visible = false;
+                        }
+                    }
                 }
-                //ScriptAction { script: hideDelay = false; }
+                PropertyAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 3000 }
+                ScriptAction {
+                    script:  {
+                        print("transition to hidden");
+                        if (state == "ScrollingUp") {
+                            print("animating topButton");
+                            //PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 3000 }
+                        }
+                    }
+                }
+                //NumberAnimation { target: parent; properties: "opacity"; duration: 4000 }
+            }
+        },
+        Transition {
+            from: ""
+            SequentialAnimation {
+                ScriptAction { script: print("transition from hidden"); }
+                PropertyAnimation { target: container; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 800 }
+            }
+        },
+        Transition {
+            from: "Scrolling"; to: "ScrollingUp"
+            SequentialAnimation {
+                ScriptAction { script: print("transition from hidden"); }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 800 }
+            }
+        },
+        Transition {
+            from: "ScrollingUp"; to: "Scrolling"
+            SequentialAnimation {
+                ScriptAction { script: print("transition from hidden"); }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 800 }
             }
         }
     ]
+    onStateChanged: {
+         ///print(" State changing to: " + state);
+         //print("  verticalVelocity: " + scrollArea.verticalVelocity);
+    }
 }
