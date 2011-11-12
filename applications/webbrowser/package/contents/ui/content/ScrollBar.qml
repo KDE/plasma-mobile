@@ -40,13 +40,16 @@
 ****************************************************************************/
 
 import QtQuick 1.0
+import org.kde.qtextracomponents 0.1
 
 Item {
     id: container
 
     property variant scrollArea
     property variant orientation: Qt.Vertical
+    property bool hideDelay
 
+    //property alias topButton: container.topButton
     opacity: 0
 
     function position()
@@ -83,15 +86,46 @@ Item {
         } else return nh + ny;
     }
 
-    Rectangle { anchors.fill: parent; color: "Black"; opacity: 0.5 }
+//     Item {
+//         id: scrollPainter
+//         anchors.fill: parent
+        Rectangle { anchors.fill: parent; color: "Black"; opacity: 0.5 }
 
-    Rectangle {
-        color: "white"
-        radius: 2
-        x: container.orientation == Qt.Vertical ? 2 : position()
-        width: container.orientation == Qt.Vertical ? container.width - 4 : size()
-        y: container.orientation == Qt.Vertical ? position() : 2
-        height: container.orientation == Qt.Vertical ? size() : container.height - 4
+        Rectangle {
+            color: "white"
+            radius: 2
+            x: container.orientation == Qt.Vertical ? 2 : position()
+            width: container.orientation == Qt.Vertical ? container.width - 4 : size()
+            y: container.orientation == Qt.Vertical ? position() : 2
+            height: container.orientation == Qt.Vertical ? size() : container.height - 4
+        }
+//     }
+    QIconItem {
+        id: topButton
+        anchors { bottom: parent.verticalCenter; right: parent.left }
+        icon: QIcon("go-top")
+        width: 48
+        height: width
+        // Show the "up" button when we're scrolling up and the header
+        // is outside of the view
+        visible: (hideDelay || scrollArea.contentY > header.height+500 && scrollArea.verticalVelocity < 0)
+
+//         visible: {
+//             print(" scroll: " + scrollArea.verticalVelocity);
+//             (parent.visible && scrollArea.contentY > header.height && scrollArea.verticalVelocity < 0)
+//         }
+
+        Component.onCompleted: {
+            print(" icon completed..............");
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                scrollArea.contentY = 0;
+                scrollArea.contentX = 0;
+                parent.scale = 0.9;
+            }
+        }
     }
 
     states: State {
@@ -100,8 +134,28 @@ Item {
         PropertyChanges { target: container; opacity: 1.0 }
     }
 
-    transitions: Transition {
-        from: "visible"; to: ""
-        NumberAnimation { properties: "opacity"; duration: 600 }
-    }
+    transitions: [
+        Transition {
+            from: "visible"; to: ""
+            NumberAnimation { target: scrollPainter; properties: "opacity"; duration: 4000 }
+            SequentialAnimation {
+                ScriptAction { script: hideDelay = true; }
+                PropertyAnimation { target: topButton; property: "opacity"; to: 0; duration: 4000; easing.type: Easing.OutCirc; }
+                ScriptAction { script: hideDelay = false; }
+            }
+        },
+        Transition {
+            from: ""; to: "visible"
+            SequentialAnimation {
+                ScriptAction { script: hideDelay = false; }
+                PropertyAnimation {
+                    target: topButton;
+                    to: 1.0;
+                    property: "opacity";
+                    duration: 400
+                }
+                //ScriptAction { script: hideDelay = false; }
+            }
+        }
+    ]
 }
