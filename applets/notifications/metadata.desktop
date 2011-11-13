@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Notifications
 Name[cs]=Oznamování
+Name[de]=Benachrichtigungen
 Name[et]=Märguanded
 Name[fr]=Notifications
 Name[km]=ការ​ជូនដំណឹង
@@ -14,6 +15,7 @@ Name[ug]=ئۇقتۇرۇشلار
 Name[uk]=Сповіщення
 Name[x-test]=xxNotificationsxx
 Comment=Notifications
+Comment[de]=Benachrichtigungen
 Comment[et]=Märguanded
 Comment[fr]=Notifications
 Comment[km]=ការ​ជូនដំណឹង

@@ -9,6 +9,7 @@ Comment[x-test]=xxStart Applicationsxx
 Encoding=UTF-8
 Keywords=
 Name=Launcher
+Name[de]=Programmstarter
 Name[nl]=Programmastarter
 Name[pt]=Lançamento
 Name[pt_BR]=Lançador

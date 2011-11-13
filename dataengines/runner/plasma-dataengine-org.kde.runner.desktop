@@ -8,6 +8,7 @@ Comment[uk]=Опитує KRunner і виконує отриманий резул
 Comment[x-test]=xxQuery KRunner and execute the resultsxx
 Icon=system-run
 Name=KRunner
+Name[de]=KRunner
 Name[nl]=KRunner
 Name[pt]=KRunner
 Name[pt_BR]=KRunner
