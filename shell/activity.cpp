@@ -34,8 +34,8 @@
 #include <Plasma/Context>
 #include <Plasma/Corona>
 
-#include <Activities/Controller>
-#include <Activities/Consumer>
+#include <KActivities/Controller>
+#include <KActivities/Consumer>
 
 #include "plasmaapp.h"
 

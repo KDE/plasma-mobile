@@ -49,8 +49,8 @@
 #include <Nepomuk/Resource>
 #include <Nepomuk/Variant>
 
-#include <Activities/Consumer>
-#include <Activities/Controller>
+#include <KActivities/Consumer>
+#include <KActivities/Controller>
 
 static const char *DEFAUL_CONTAINMENT = "org.kde.active.activityscreen";
 

@@ -34,7 +34,7 @@
 #include <Plasma/Wallpaper>
 #include <Plasma/Package>
 
-#include <Activities/Consumer>
+#include <KActivities/Consumer>
 
 
 MobileActivityThumbnails::MobileActivityThumbnails(QObject *parent, const QVariantList &args)
