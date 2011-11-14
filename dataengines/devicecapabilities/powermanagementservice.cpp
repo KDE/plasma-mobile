@@ -20,7 +20,7 @@
 #include "powermanagementservice.h"
 #include "powermanagementjob.h"
 
-#include <KDE/Activities/Consumer>
+#include <KDE/KActivities/Consumer>
 
 PowerManagementService::PowerManagementService(const QString &source)
     : m_id(source)
