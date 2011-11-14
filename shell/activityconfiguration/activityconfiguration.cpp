@@ -42,7 +42,7 @@
 #include <Plasma/Package>
 
 #ifndef NO_ACTIVITIES
-#include <Activities/Controller>
+#include <KActivities/Controller>
 #endif
 
 #include "backgroundlistmodel.h"
