@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=About
+Name[de]=Über
 Name[nl]=Info over
 Name[pt]=Acerca
 Name[pt_BR]=Sobre
@@ -11,17 +12,17 @@ GenericName[nl]=Info over Plasma Active
 GenericName[pt]=Acerca do Plasma Active
 GenericName[pt_BR]=Sobre o Plasma Active
 GenericName[sv]=Om Plasma aktiv
-GenericName[uk]=Про Плазму для портативних пристроїв
+GenericName[uk]=Про Портативну Плазму
 GenericName[x-test]=xxAbout Plasma Activexx
 Comment=Informations about Plasma Active
 Comment[nl]=Informatie over Plasma Active
 Comment[pt]=Informações acerca do Plasma Active
 Comment[pt_BR]=Informações sobre o Plasma Active
 Comment[sv]=Information om Plasma aktiv
-Comment[uk]=Дані щодо Плазми для портативних пристроїв
+Comment[uk]=Дані щодо Портативної Плазми
 Comment[x-test]=xxInformations about Plasma Activexx
 Exec=active-aboutapp -graphicssystem raster
 Terminal=false
 Icon=active-about
 Type=Application
-Categories=Qt;KDE;Core;Documentation;Viewer;
+Categories=Qt;KDE;Core;Documentation;System;

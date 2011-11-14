@@ -31,15 +31,6 @@ Item {
         if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
             menuContainer.plasmoid.resetStatus()
         }
-        //load the launcher package on demand to save boot time
-        if (state != "Hidden" && !menuContainer.plasmoid) {
-            var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
-            menuContainer.plasmoid = component.createObject(menuContainer);
-            //assume menuContainer provides a itemLaunched signal
-            if (menuContainer.plasmoid) {
-                menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
-            }
-        }
     }
 
     PlasmaCore.FrameSvgItem {
@@ -72,6 +63,17 @@ Item {
         id: slidingDragButton
         panelHeight: 32
         tasksHeight: 150
+        onDraggingChanged: {
+            //load the launcher package on demand to save boot time
+            if (state != "Hidden" && !menuContainer.plasmoid) {
+                var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
+                menuContainer.plasmoid = component.createObject(menuContainer);
+                //assume menuContainer provides a itemLaunched signal
+                if (menuContainer.plasmoid) {
+                    menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
+                }
+            }
+        }
 
         anchors {
             fill: parent
@@ -146,13 +148,6 @@ Item {
             PropertyChanges {
                 target: topSlidingPanel
                 acceptsFocus: true
-            }
-        },
-        State {
-            name: "Dragging"
-            PropertyChanges {
-                target: topSlidingPanel
-                y: y
             }
         },
         State {

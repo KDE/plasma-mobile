@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Preview
+Name[de]=Vorschau
 Name[et]=Eelvaatlus
 Name[fr]=Aperçu
 Name[km]=មើលជាមុន​
@@ -13,6 +14,7 @@ Name[ug]=ئالدىن كۆزەت
 Name[uk]=Перегляд
 Name[x-test]=xxPreviewxx
 Comment=Shows previews for webpages
+Comment[de]=Zeigt Vorschauen von Webseiten an
 Comment[et]=Veebilehtede eelvaatluse näitamine
 Comment[fr]=Affiche un aperçu des pages web
 Comment[km]=បង្ហាញ​ការ​មើល​ជាមុន​សម្រាប់​ទំព័រ​បណ្ដាញ

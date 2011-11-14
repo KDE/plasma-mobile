@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Videos
+Name[de]=Videos
 Name[nl]=Video's
 Name[pt]=Vídeos
 Name[pt_BR]=Vídeos
@@ -26,4 +27,4 @@ Terminal=false
 Icon=active-video-player
 Type=Application
 Categories=Qt;KDE;AudioVideo;Player;
-MimeType=inode/directory;video/mpeg
+MimeType=inode/directory;video/mpeg;

@@ -25,6 +25,8 @@
 #include <KService>
 #include <KConfigGroup>
 
+#include <Plasma/Theme>
+
 // Own
 #include "activesettings.h"
 
@@ -50,6 +52,12 @@ int main(int argc, char **argv)
 
     ActiveSettings app(args);
     const QString module = args->count() ? args->arg(0) : QString();
+
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
+
+    const QString themeName = cg.readEntry("name", "air-mobile");
+    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
+    Plasma::Theme::defaultTheme()->setThemeName(themeName);
 
     app.newWindow(module);
     args->clear();

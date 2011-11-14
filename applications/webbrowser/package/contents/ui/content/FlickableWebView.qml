@@ -52,6 +52,7 @@ Flickable {
     property alias stop: webView.stop
     property alias reload: webView.reload
     property alias forward: webView.forward
+    //property alias top: webView.top
 
     signal newWindowRequested(string url)
 

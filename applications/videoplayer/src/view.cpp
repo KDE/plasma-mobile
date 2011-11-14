@@ -42,11 +42,6 @@ AppView::AppView(const QString &url, QWidget *parent)
       m_useGL(false)
 {
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
-    // Tell the script engine where to find the Plasma Quick components
-    QStringList importPaths = KGlobal::dirs()->findDirs("lib", "kde4/imports");
-    foreach (const QString &iPath, importPaths) {
-        engine()->addImportPath(iPath);
-    }
 
     KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());

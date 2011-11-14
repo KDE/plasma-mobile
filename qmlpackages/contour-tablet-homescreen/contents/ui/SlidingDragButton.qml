@@ -34,17 +34,22 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
     PlasmaCore.Svg {
         id: iconSvg
-        imagePath: "icons/contour"
+        imagePath: "icons/start"
     }
 
     PlasmaCore.SvgItem {
         id: iconItem
         svg: iconSvg
+        elementId: "start-here"
         width: height
-        height: 32
+        height: theme.mediumIconSize
         anchors {
             right: parent.right
             bottom:parent.bottom
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: homeScreen.focusActivityView()
         }
     }
 
@@ -62,7 +67,6 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         startY = mouse.screenY
         startX = mouse.screenX
         lastY = mouse.screenY
-        systrayPanel.state = "Dragging"
     }
     onPositionChanged: {
         if (!panelDragButton.dragEnabled ) {

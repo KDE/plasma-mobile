@@ -48,7 +48,7 @@
 #include "metadataengine.h"
 #include <stdio.h>
 
-#include <KDE/Activities/Consumer>
+#include <KDE/KActivities/Consumer>
 
 //#include "activityservice/activityservice.h"
 #include "metadataservice/metadataservice.h"

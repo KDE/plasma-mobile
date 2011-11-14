@@ -9,4 +9,4 @@ Name[sv]=Justera datum och tid
 Name[uk]=Коригування дати і часу
 Name[x-test]=xxAdjust date and timexx
 Type=Application
-Categories=Qt;KDE;System;Settings
+Categories=Qt;KDE;System;Settings;

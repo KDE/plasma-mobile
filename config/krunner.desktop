@@ -4,6 +4,7 @@ TryExec=/nowhere
 Exec=krunner
 X-DBUS-StartupType=wait
 Name=KRunner
+Name[de]=KRunner
 Name[nl]=KRunner
 Name[pt]=KRunner
 Name[pt_BR]=KRunner
