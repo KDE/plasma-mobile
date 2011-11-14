@@ -24,7 +24,7 @@
 #include <QGraphicsView>
 #include <QTimer>
 
-#include <KDE/Activities/ResourceInstance>
+#include <KDE/KActivities/ResourceInstance>
 #include <KDebug>
 
 
