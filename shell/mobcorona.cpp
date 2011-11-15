@@ -64,17 +64,31 @@ MobCorona::MobCorona(QObject *parent)
 
 MobCorona::~MobCorona()
 {
-    //KConfigGroup cg(config(), "SavedContainments");
+    KConfigGroup cg(config(), "SavedContainments");
 
-    //TODO: it will have an auto-stop activity feature
-    /*foreach (Plasma::Containment *cont, containments()) {
-        if (cont->formFactor() == Plasma::Planar && cont->id() > 2) {
-            QList<Plasma::Containment *> conts;
-            conts.append(cont);
-            KConfigGroup contCg = KConfigGroup(&cg, QString::number(cont->id()));
-            exportLayout(contCg, conts);
+    //stop everything, in order to restore them just on demand at next boot
+    const QString currentActivity = m_activityController->currentActivity();
+
+    QHash<QString, Activity *>::const_iterator i = m_activities.constBegin();
+    while (i != m_activities.constEnd()) {
+        QString file = "activities/"+i.key();
+        KConfig external(file, KConfig::SimpleConfig, "appdata");
+
+        //copy the old config to the new location
+        i.value()->save(external);
+        if (i.key() != currentActivity) {
+            i.value()->close();
         }
-    }*/
+        ++i;
+    }
+
+    //get rid of containments and their config groups
+    foreach (Plasma::Containment *cont, containments()) {
+        if (cont->context()->currentActivityId() != currentActivity && cont->formFactor() == Plasma::Planar) {
+            cont->config().deleteGroup();
+            cont->destroy(false);
+        }
+    }
 }
 
 void MobCorona::init()
