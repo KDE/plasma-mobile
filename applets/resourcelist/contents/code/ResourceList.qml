@@ -19,9 +19,8 @@
  */
 
 import Qt 4.7
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.metadatamodels 0.1 as MetadataModels
 
@@ -36,7 +35,7 @@ Item {
         id: theme
     }
 
-    PlasmaWidgets.Label {
+    PlasmaComponents.Label {
         id: header
         text: i18n("<h2>Search ...</h2>")
         anchors { top: parent.top; left:parent.left; right: parent.right; bottomMargin: 8 }
@@ -47,23 +46,13 @@ Item {
         width: parent.width
         anchors { top: header.bottom; }
 
-        PlasmaWidgets.LineEdit {
+        PlasmaComponents.TextField {
             id: searchBox
             clearButtonShown: true
-            width: parent.width - iconWidget.width - parent.spacing
+            width: parent.width - parent.spacing
             onTextChanged: {
                 timer.running = true
             }
-        }
-        PlasmaWidgets.IconWidget {
-            id: iconWidget
-            onClicked: {
-                timer.running = true
-            }
-        Component.onCompleted: {
-            iconWidget.setIcon("system-search")
-        }
-
         }
 
     }
@@ -95,8 +84,11 @@ Item {
             //resourceType: model.resourceType
         }
     }
+    PlasmaComponents.ScrollBar {
+        flickableItem: webItemList
+    }
 
-    Text {
+    PlasmaComponents.Label {
         id: statusLabel
         text: i18n("Idle.")
         anchors { left:parent.left; right: parent.right; bottom: parent.bottom; }

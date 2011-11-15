@@ -19,7 +19,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 
@@ -74,13 +74,12 @@ ListItem {
                 left: parent.left
                 right: parent.right
             }
-            PlasmaWidgets.Meter {
+            PlasmaComponents.ProgressBar {
                 width: parent.width - 48 - 12
                 height: 16
-                meterType: "BarMeterHorizontal"
-                svg: "widgets/bar_meter_horizontal"
-                minimum: 0
-                maximum: 100
+                orientation: Qt.Horizontal
+                minimumValue: 0
+                maximumValue: 100
                 //percentage doesn't always exist, so doesn't get in the model
                 value: jobsSource.data[modelData]["percentage"]
                 anchors.verticalCenter: pauseButton.verticalCenter
