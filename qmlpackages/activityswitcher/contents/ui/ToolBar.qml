@@ -19,7 +19,7 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 PlasmaCore.FrameSvgItem {
@@ -71,9 +71,10 @@ PlasmaCore.FrameSvgItem {
                     fill: parent
                     rightMargin: iconSize/2
                 }
-                PlasmaWidgets.LineEdit {
+                PlasmaComponents.TextField {
                     id: filterField
                     opacity: 0
+                    width: theme.defaultFont.mSize.width*20
                     anchors.verticalCenter: parent.verticalCenter
                     Behavior on opacity {
                         NumberAnimation {

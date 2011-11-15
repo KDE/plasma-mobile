@@ -18,7 +18,7 @@
 */
 
 import QtQuick 1.0
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
@@ -105,7 +105,7 @@ Item {
             height: everythingPushButton.height
             enabled: false
 
-            PlasmaWidgets.PushButton {
+            PlasmaComponents.Button {
                 id: everythingPushButton
 
                 text: i18n("Show everything")
