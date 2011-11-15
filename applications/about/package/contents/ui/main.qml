@@ -20,6 +20,7 @@
 import QtQuick 1.0
 import QtWebKit 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Image {
@@ -31,7 +32,7 @@ Image {
     fillMode: Image.Tile
     property QtObject runtimeInfo
 
-    Item { id: headerSpace; width: parent.width; height: header.height }
+    Item { id: toolBarSpace; width: parent.width; height: toolBar.height }
 
     property FlickableWebView webView
 
@@ -40,15 +41,29 @@ Image {
         name: "org.kde.active.aboutapp"
     }
 
-    Header {
-        id: header
-        z: 999
-        width: headerSpace.width
-        //height: headerSpace.height
+    PlasmaComponents.ToolBar {
+        id: toolBar
+        tools: Item {
+            width: parent.width
+            height: childrenRect.height
+            PlasmaComponents.TabBar {
+                anchors.horizontalCenter: parent.horizontalCenter
+                PlasmaComponents.TabButton { tab: webView1; text: i18n("About")}
+                PlasmaComponents.TabButton { tab: webView2; text: i18n("Authors")}
+                PlasmaComponents.TabButton { tab: webView3; text: i18n("License")}
+            }
+        }
     }
 
-    VisualItemModel {
-        id: itemModel
+    PlasmaComponents.TabGroup {
+        id: view
+        anchors {
+            top: toolBar.bottom
+            bottom: parent.bottom
+            left:parent.left
+            right: parent.right
+            topMargin: -8
+        }
 
         FlickableWebView {
             id: webView1
@@ -76,56 +91,6 @@ Image {
             width: aboutApp.width
             height: aboutApp.height
         }
-    }
+    }  
 
-    ListView {
-        id: view
-        anchors {
-            top: header.bottom
-            bottom: parent.bottom
-            left:parent.left
-            right: parent.right
-            topMargin: -8
-        }
-
-        model: itemModel
-        preferredHighlightBegin: 0
-        preferredHighlightEnd: 0
-        highlightMoveDuration: 250
-        interactive: false
-        highlightRangeMode: ListView.StrictlyEnforceRange
-        orientation: ListView.Horizontal
-        snapMode: ListView.SnapOneItem
-        cacheBuffer: 200
-        onCurrentIndexChanged: aboutApp.webView = currentItem
-    }
-
-    
-    ScrollBar {
-        scrollArea: webView1; width: 8
-        anchors { right: parent.right; top: header.bottom; bottom: parent.bottom }
-    }
-
-    ScrollBar {
-        scrollArea: webView1; height: 8; orientation: Qt.Horizontal
-        anchors { right: parent.right; rightMargin: 8; left: parent.left; bottom: parent.bottom }
-    }
-    ScrollBar {
-        scrollArea: webView2; width: 8
-        anchors { right: parent.right; top: header.bottom; bottom: parent.bottom }
-    }
-
-    ScrollBar {
-        scrollArea: webView2; height: 8; orientation: Qt.Horizontal
-        anchors { right: parent.right; rightMargin: 8; left: parent.left; bottom: parent.bottom }
-    }
-    ScrollBar {
-        scrollArea: webView3; width: 8
-        anchors { right: parent.right; top: header.bottom; bottom: parent.bottom }
-    }
-
-    ScrollBar {
-        scrollArea: webView3; height: 8; orientation: Qt.Horizontal
-        anchors { right: parent.right; rightMargin: 8; left: parent.left; bottom: parent.bottom }
-    }
 }

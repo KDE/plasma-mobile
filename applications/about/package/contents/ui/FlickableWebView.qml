@@ -41,10 +41,9 @@
 
 import QtQuick 1.0
 import QtWebKit 1.0
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
-
-Flickable {
-    id: flickable
+Item {
     property alias title: webView.title
     property alias icon: webView.icon
     property alias progress: webView.progress
@@ -54,178 +53,192 @@ Flickable {
     property alias reload: webView.reload
     property alias forward: webView.forward
 
-    signal newWindowRequested(string url)
+    Flickable {
+        id: flickable
+        anchors.fill: parent
+        
+
+        signal newWindowRequested(string url)
 
 
-    width: parent.width
-    contentWidth: Math.max(parent.width,webView.width)
-    contentHeight: Math.max(parent.height,webView.height)
-    interactive: (webView.height > height) || (webView.height > height)
+        width: parent.width
+        contentWidth: Math.max(parent.width,webView.width)
+        contentHeight: Math.max(parent.height,webView.height)
+        interactive: (webView.height > height) || (webView.height > height)
 
-    pressDelay: 200
+        pressDelay: 200
 
-    onWidthChanged : {
-        // Expand (but not above 1:1) if otherwise would be smaller that available width.
-        if (width > webView.width*webView.contentsScale && webView.contentsScale < 1.0)
-            webView.contentsScale = width / webView.width * webView.contentsScale;
-    }
-
-
-    WebView {
-        id: webView
-        objectName: "webViewImplementation"
-        transformOrigin: Item.TopLeft
-        settings.javascriptEnabled: true
-        width: flickable.width
-        javaScriptWindowObjects: QtObject {
-            property string activeVersion: runtimeInfoActiveVersion
-            property string kdeVersion: runtimeInfoKdeVersion
-            property string osVersion: runtimeInfoOsVersion
-            WebView.windowObjectName: "runtimeInfo"
+        onWidthChanged : {
+            // Expand (but not above 1:1) if otherwise would be smaller that available width.
+            if (width > webView.width*webView.contentsScale && webView.contentsScale < 1.0)
+                webView.contentsScale = width / webView.width * webView.contentsScale;
         }
-        settings.standardFontFamily: "Droid Sans Fallback"
 
-        //FIXME: glorious hack just to obtain a signal of the url of the new requested page
-        newWindowComponent: Component {
-            Item {
-                id: newPageComponent
 
-                WebView {
-                    id: newWindow
-                    onUrlChanged: {
-                        if (url != "") {
-                            flickable.newWindowRequested(url)
+        WebView {
+            id: webView
+            objectName: "webViewImplementation"
+            transformOrigin: Item.TopLeft
+            settings.javascriptEnabled: true
+            width: flickable.width
+            javaScriptWindowObjects: QtObject {
+                property string activeVersion: runtimeInfoActiveVersion
+                property string kdeVersion: runtimeInfoKdeVersion
+                property string osVersion: runtimeInfoOsVersion
+                WebView.windowObjectName: "runtimeInfo"
+            }
+            settings.standardFontFamily: "Droid Sans Fallback"
 
-                             var newObject = Qt.createQmlObject('import QtQuick 1.0; Item {}', webView);
-                            newPageComponent.parent = newObject
-                            newObject.destroy()
+            //FIXME: glorious hack just to obtain a signal of the url of the new requested page
+            newWindowComponent: Component {
+                Item {
+                    id: newPageComponent
+
+                    WebView {
+                        id: newWindow
+                        onUrlChanged: {
+                            if (url != "") {
+                                flickable.newWindowRequested(url)
+
+                                var newObject = Qt.createQmlObject('import QtQuick 1.0; Item {}', webView);
+                                newPageComponent.parent = newObject
+                                newObject.destroy()
+                            }
                         }
                     }
                 }
             }
-        }
 
-        newWindowParent: webView
+            newWindowParent: webView
 
-        function fixUrl(url)
-        {
-            if (url == "") return url
-            if (url[0] == "/") return "file://"+url
-            if (url.indexOf(":")<0) {
-                if (url.indexOf(".")<0 || url.indexOf(" ")>=0) {
-                    // Fall back to a search engine; hard-code Wikipedia
-                    return "http://en.wikipedia.org/w/index.php?search="+url
-                } else {
-                    return "http://"+url
+            function fixUrl(url)
+            {
+                if (url == "") return url
+                if (url[0] == "/") return "file://"+url
+                if (url.indexOf(":")<0) {
+                    if (url.indexOf(".")<0 || url.indexOf(" ")>=0) {
+                        // Fall back to a search engine; hard-code Wikipedia
+                        return "http://en.wikipedia.org/w/index.php?search="+url
+                    } else {
+                        return "http://"+url
+                    }
+                }
+                return url
+            }
+
+            url: fixUrl(webBrowser.urlString)
+            smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
+            focus: true
+
+            onAlert: console.log(message)
+
+            function doZoom(zoom,centerX,centerY)
+            {
+                if (centerX) {
+                    var sc = zoom*contentsScale;
+                    scaleAnim.to = sc;
+                    flickVX.from = flickable.contentX
+                    flickVX.to = Math.max(0,Math.min(centerX-flickable.width/2,webView.width*sc-flickable.width))
+                    finalX.value = flickVX.to
+                    flickVY.from = flickable.contentY
+                    flickVY.to = Math.max(0,Math.min(centerY-flickable.height/2,webView.height*sc-flickable.height))
+                    finalY.value = flickVY.to
+                    quickZoom.start()
                 }
             }
-            return url
-        }
 
-        url: fixUrl(webBrowser.urlString)
-        smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
-        focus: true
+            Keys.onLeftPressed: webView.contentsScale -= 0.1
+            Keys.onRightPressed: webView.contentsScale += 0.1
 
-        onAlert: console.log(message)
-
-        function doZoom(zoom,centerX,centerY)
-        {
-            if (centerX) {
-                var sc = zoom*contentsScale;
-                scaleAnim.to = sc;
-                flickVX.from = flickable.contentX
-                flickVX.to = Math.max(0,Math.min(centerX-flickable.width/2,webView.width*sc-flickable.width))
-                finalX.value = flickVX.to
-                flickVY.from = flickable.contentY
-                flickVY.to = Math.max(0,Math.min(centerY-flickable.height/2,webView.height*sc-flickable.height))
-                finalY.value = flickVY.to
-                quickZoom.start()
+            preferredWidth: flickable.width
+            preferredHeight: flickable.height
+            contentsScale: 1
+            onContentsSizeChanged: {
+                // zoom out
+                contentsScale = Math.min(1,flickable.width / contentsSize.width)
             }
-        }
-
-        Keys.onLeftPressed: webView.contentsScale -= 0.1
-        Keys.onRightPressed: webView.contentsScale += 0.1
-
-        preferredWidth: flickable.width
-        preferredHeight: flickable.height
-        contentsScale: 1
-        onContentsSizeChanged: {
-            // zoom out
-            contentsScale = Math.min(1,flickable.width / contentsSize.width)
-        }
-        onUrlChanged: {
-            // got to topleft
-            flickable.contentX = 0
-            flickable.contentY = 0
-        }
-
-        onDoubleClick: {
-                        preferredWidth = flickable.width - 50;
-                        if (!heuristicZoom(clickX,clickY,2.0)) {
-                            var zf = flickable.width / contentsSize.width
-                            if (zf >= contentsScale)
-                                zf = 2.0*contentsScale // zoom in (else zooming out)
-                            doZoom(zf,clickX*zf,clickY*zf)
-                         }
-                       }
-
-        SequentialAnimation {
-            id: quickZoom
-
-            PropertyAction {
-                target: webView
-                property: "renderingEnabled"
-                value: false
+            onUrlChanged: {
+                // got to topleft
+                flickable.contentX = 0
+                flickable.contentY = 0
             }
-            ParallelAnimation {
-                NumberAnimation {
-                    id: scaleAnim
+
+            onDoubleClick: {
+                            preferredWidth = flickable.width - 50;
+                            if (!heuristicZoom(clickX,clickY,2.0)) {
+                                var zf = flickable.width / contentsSize.width
+                                if (zf >= contentsScale)
+                                    zf = 2.0*contentsScale // zoom in (else zooming out)
+                                doZoom(zf,clickX*zf,clickY*zf)
+                            }
+                        }
+
+            SequentialAnimation {
+                id: quickZoom
+
+                PropertyAction {
                     target: webView
-                    property: "contentsScale"
-                    // the to property is set before calling
-                    easing.type: Easing.Linear
-                    duration: 200
+                    property: "renderingEnabled"
+                    value: false
                 }
-                NumberAnimation {
-                    id: flickVX
+                ParallelAnimation {
+                    NumberAnimation {
+                        id: scaleAnim
+                        target: webView
+                        property: "contentsScale"
+                        // the to property is set before calling
+                        easing.type: Easing.Linear
+                        duration: 200
+                    }
+                    NumberAnimation {
+                        id: flickVX
+                        target: flickable
+                        property: "contentX"
+                        easing.type: Easing.Linear
+                        duration: 200
+                        from: 0 // set before calling
+                        to: 0 // set before calling
+                    }
+                    NumberAnimation {
+                        id: flickVY
+                        target: flickable
+                        property: "contentY"
+                        easing.type: Easing.Linear
+                        duration: 200
+                        from: 0 // set before calling
+                        to: 0 // set before calling
+                    }
+                }
+                // Have to set the contentXY, since the above 2
+                // size changes may have started a correction if
+                // contentsScale < 1.0.
+                PropertyAction {
+                    id: finalX
                     target: flickable
                     property: "contentX"
-                    easing.type: Easing.Linear
-                    duration: 200
-                    from: 0 // set before calling
-                    to: 0 // set before calling
+                    value: 0 // set before calling
                 }
-                NumberAnimation {
-                    id: flickVY
+                PropertyAction {
+                    id: finalY
                     target: flickable
                     property: "contentY"
-                    easing.type: Easing.Linear
-                    duration: 200
-                    from: 0 // set before calling
-                    to: 0 // set before calling
+                    value: 0 // set before calling
+                }
+                PropertyAction {
+                    target: webView
+                    property: "renderingEnabled"
+                    value: true
                 }
             }
-            // Have to set the contentXY, since the above 2
-            // size changes may have started a correction if
-            // contentsScale < 1.0.
-            PropertyAction {
-                id: finalX
-                target: flickable
-                property: "contentX"
-                value: 0 // set before calling
-            }
-            PropertyAction {
-                id: finalY
-                target: flickable
-                property: "contentY"
-                value: 0 // set before calling
-            }
-            PropertyAction {
-                target: webView
-                property: "renderingEnabled"
-                value: true
-            }
+            onZoomTo: doZoom(zoom,centerX,centerY)
         }
-        onZoomTo: doZoom(zoom,centerX,centerY)
+    }
+    PlasmaComponents.ScrollBar {
+        flickableItem: flickable
+        orientation: Qt.Horizontal
+    }
+    PlasmaComponents.ScrollBar {
+        flickableItem: flickable
+        orientation: Qt.Vertical
     }
 }
