@@ -34,7 +34,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 
 Item {
@@ -61,10 +61,11 @@ Item {
         border { left: 10; top: 10; right: 10; bottom: 10 }
     }
 
-    PlasmaWidgets.LineEdit {
+    PlasmaComponents.TextField {
         id: urlText
+        clearButtonShown: true
         //horizontalAlignment: TextEdit.AlignLeft
-        font.pixelSize: 14;
+        //font.pixelSize: 14;
 
         function updateState() {
             if (text != webView.url) {
@@ -85,10 +86,6 @@ Item {
             urlFilterChanged();
         }
 
-        onReturnPressed: {
-            container.urlEntered(urlText.text)
-            webView.focus = true
-        }
 
         Keys.onEscapePressed: {
             urlText.text = webView.url
@@ -106,8 +103,8 @@ Item {
         }
 
 
-        onFocusChanged: {
-            if (focused) {
+        onActiveFocusChanged: {
+            if (activeFocus) {
                 completionPopup.state = "expanded"
             } else {
                 completionPopup.state = "collapsed"
@@ -135,32 +132,6 @@ Item {
         y: 60
         width: urlText.width + overlap * 2
         height: webBrowser.height * 0.666
-    }
-
-    QIconItem {
-        id: clearButton
-        icon: QIcon("edit-clear-locationbar-rtl")
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                urlText.text = ""
-            }
-        }
-        width: 32
-        height: 32
-        opacity: urlText.text == "" ?0: 1
-        anchors {
-            right: urlText.right
-            rightMargin: +4
-            verticalCenter: urlText.verticalCenter
-            verticalCenterOffset: -1
-        }
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
     }
 
     Rectangle {
