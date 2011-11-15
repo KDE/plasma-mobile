@@ -31,6 +31,13 @@ Rectangle {
     height: 480
     opacity: 0
 
+    function saveConfiguration()
+    {
+        configInterface.activityName = activityNameEdit.text
+        configInterface.wallpaperIndex = wallpapersList.currentIndex
+        disappearAnimation.running = true
+    }
+
     MouseArea {
         anchors.fill: parent
         onClicked: {
@@ -114,6 +121,7 @@ Rectangle {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
                 Component.onCompleted: activityNameEdit.forceActiveFocus()
+                Keys.onReturnPressed: saveConfiguration();
             }
         }
 
@@ -179,11 +187,7 @@ Rectangle {
                 id: okButton
 
                 text: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
-                onClicked : {
-                    configInterface.activityName = activityNameEdit.text
-                    configInterface.wallpaperIndex = wallpapersList.currentIndex
-                    disappearAnimation.running = true
-                }
+                onClicked : saveConfiguration()
             }
 
             PlasmaComponents.Button {
