@@ -37,6 +37,21 @@ Item {
         //tagCloud.resetStatus()
     }
 
+    Image {
+        id: background
+        width: parent.width * 1.5
+        height:parent.height
+        source: "image://appbackgrounds/contextarea"
+        fillMode: Image.Tile
+        x: -((width-parent.width) * (appGrid.currentPage / appGrid.pagesCount))
+        Behavior on x {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
+
     MobileComponents.ResourceInstance {
         id: resourceInstance
     }
