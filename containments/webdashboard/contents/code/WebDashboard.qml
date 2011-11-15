@@ -19,7 +19,6 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
 
@@ -47,11 +46,6 @@ Item {
             style: Text.Sunken;
             styleColor: theme.backgroundColor
         }
-        PlasmaWidgets.Separator {
-            id: separator
-            width: bookmarksLabel.width * 1.1
-            anchors.left: parent.left
-        }
 
         Bookmarks {
             id: bookmarks
@@ -67,10 +61,6 @@ Item {
             font.pointSize: 24
             style: Text.Sunken;
             styleColor: theme.backgroundColor
-        }
-
-        PlasmaWidgets.Separator {
-            width: openPagesLabel.width * 1.1; anchors.left: parent.left
         }
 
         Bookmarks {

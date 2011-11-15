@@ -18,7 +18,7 @@
  */
 
 import Qt 4.7
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
@@ -110,9 +110,10 @@ Rectangle {
                 text: i18n("Activity name:")
                 anchors.verticalCenter: activityNameEdit.verticalCenter
             }
-            PlasmaWidgets.LineEdit {
+            PlasmaComponents.TextField {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
+                Component.onCompleted: activityNameEdit.forceActiveFocus()
             }
         }
 
@@ -174,10 +175,10 @@ Rectangle {
                 bottomMargin: frame.margins.bottom
             }
 
-            PlasmaWidgets.PushButton {
+            PlasmaComponents.Button {
                 id: okButton
 
-                text: configInterface.activityName == ""?i18n("Create activity"):i18n("Save changes")
+                text: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
                 onClicked : {
                     configInterface.activityName = activityNameEdit.text
                     configInterface.wallpaperIndex = wallpapersList.currentIndex
@@ -185,7 +186,7 @@ Rectangle {
                 }
             }
 
-            PlasmaWidgets.PushButton {
+            PlasmaComponents.Button {
                 id: closeButton
 
                 text: i18n("Cancel")
