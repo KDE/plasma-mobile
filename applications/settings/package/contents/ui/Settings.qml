@@ -110,9 +110,14 @@ Image {
 
                     MouseArea {
                         anchors.fill: delegateItem
-                        onClicked: {
-                            listView.currentIndex = index
-                            loadPackage(module);
+                        onClicked: ParallelAnimation {
+                            MobileComponents.ActivateAnimation { targetItem: delegateItem }
+                            ScriptAction {
+                                script: {
+                                    listView.currentIndex = index
+                                    loadPackage(module);
+                                }
+                            }
                         }
                     }
                 }
@@ -121,14 +126,7 @@ Image {
             ListView {
                 id: listView
                 currentIndex: -1
-                anchors {
-                    fill: parent
-                    leftMargin: settingsRoot.margins.left
-                    rightMargin: settingsRoot.margins.right
-                    topMargin: settingsRoot.margins.top
-                    bottomMargin: settingsRoot.margins.bottom
-                }
-                y: 16
+                anchors.fill: parent
                 spacing: 4
                 clip: true
                 model: settingsModulesModel
@@ -142,10 +140,19 @@ Image {
             }
         }
 
+        Component {
+            id: initial_page
+            Rectangle {
+                anchors.fill: parent
+                color: "green"
+            }
+        }
+
         PlasmaComponents.PageStack {
             id: moduleContainer
             objectName: "moduleContainer"
             clip: false
+            initialPage: initial_page
             //width: (parent.width - settingsRoot.width - 40)
             anchors.margins: 20
             anchors.top: parent.top
