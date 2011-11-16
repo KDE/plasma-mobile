@@ -20,6 +20,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as PlasmaComponents
 
@@ -96,7 +97,7 @@ Item {
         mainItem: Item {
             width: 300
             height: lastNotificationText.height+50
-            Text {
+            PlasmaComponents.Label {
                 id: lastNotificationText
                 anchors {
                     left: parent.left
@@ -144,7 +145,7 @@ Item {
             }
         }
 
-        Text {
+        PlasmaComponents.Label {
             id: countText
             text: notificationsRepeater.count+jobsRepeater.count
             anchors.centerIn: parent

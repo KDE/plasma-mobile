@@ -30,7 +30,7 @@ ListItem {
     Column {
         spacing: 8
         width: popupFlickable.width
-        Text {
+        PlasmaComponents.Label {
             text: jobsSource.data[modelData]["appName"]
             font.bold: true
             color: theme.textColor
@@ -45,24 +45,24 @@ ListItem {
             rows: 2
             columns: 2
 
-            Text {
+            PlasmaComponents.Label {
                 id: labelName0Text
                 text: jobsSource.data[modelData]["labelName0"]
                 width: Math.max(paintedWidth, labelName1Text.paintedWidth)
                 horizontalAlignment: Text.AlignRight
             }
-            Text {
+            PlasmaComponents.Label {
                 text: jobsSource.data[modelData]["label0"]
                 width: parent.width - labelName0Text.width
                 elide: Text.ElideMiddle
             }
-            Text {
+            PlasmaComponents.Label {
                 id: labelName1Text
                 text: jobsSource.data[modelData]["labelName1"]
                 width: Math.max(paintedWidth, labelName0Text.paintedWidth)
                 horizontalAlignment: Text.AlignRight
             }
-            Text {
+            PlasmaComponents.Label {
                 text: jobsSource.data[modelData]["label1"]
                 width: parent.width - labelName0Text.width
                 elide: Text.ElideMiddle
@@ -119,12 +119,12 @@ ListItem {
             }
             height: childrenRect.height
             //FIXME: proper localization
-            Text {
+            PlasmaComponents.Label {
                 text: jobsSource.data[modelData]["processedAmount0"]+" "+jobsSource.data[modelData]["processedUnit0"]+"/"+jobsSource.data[modelData]["totalAmount0"]+" "+jobsSource.data[modelData]["totalUnit0"]
                 anchors.left: parent.left
                 color: theme.color
             }
-            Text {
+            PlasmaComponents.Label {
                 text: jobsSource.data[modelData]["speed"]
                 anchors.right: parent.right
                 color: theme.color

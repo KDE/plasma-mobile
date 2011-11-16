@@ -20,6 +20,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 Item {
     width: 400
@@ -29,7 +30,7 @@ Item {
         anchors.fill: parent
         anchors.topMargin: 20
         spacing: 10
-        Text {
+        PlasmaComponents.Label {
             width: parent.width - 40
             anchors.horizontalCenter: parent.horizontalCenter
             id: title
@@ -39,7 +40,7 @@ Item {
             styleColor: theme.backgroundColor
         }
 
-        Text {
+        PlasmaComponents.Label {
             id: description
             width: parent.width - 40
             anchors.horizontalCenter: parent.horizontalCenter

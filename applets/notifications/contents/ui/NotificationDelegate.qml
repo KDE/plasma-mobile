@@ -19,6 +19,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 
 ListItem {
@@ -38,7 +39,7 @@ ListItem {
     Column {
         spacing: 8
         width: popupFlickable.width
-        Text {
+        PlasmaComponents.Label {
             text: appName
             font.bold: true
             color: theme.textColor
@@ -52,7 +53,7 @@ ListItem {
                 height: 32
             }
 
-            Text {
+            PlasmaComponents.Label {
                 text: body
                 color: theme.textColor
                 width: popupFlickable.width- 24 - 32 - 12
