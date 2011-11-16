@@ -52,86 +52,10 @@ Item {
             opacity: .4
         }
     }
-    Item {
-        id: configInput
-        width: 400
-        height: 32
-        //property alias file
-        anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: height }
-        PlasmaComponents.TextField {
-            width: parent.width/3
-            anchors { top: parent.top; bottom: parent.bottom; left: parent.left }
-            id: fileField
-            text: "active-webbrowserrc"
-        }
-        PlasmaComponents.TextField {
-            width: parent.width/3
-            anchors { top: parent.top; bottom: parent.bottom; left: fileField.right }
-            id: groupField
-            text: "history"
-        }
-        PlasmaComponents.Button {
-            id: loadButton
-            width: groupField.height*3
-            height: groupField.height
-            text: "Load"
-            anchors { top: parent.top; bottom: parent.bottom; left: groupField.right;}
-
-            onClicked: {
-                console.log("Loading File: " + fileField.text + " Group: " + groupField.text);
-                configModel.group = groupField.text
-                configModel.file = fileField.text
-            }
-
-            Keys.onTabPressed: bt2.forceActiveFocus();
-        }
-        PlasmaComponents.Button {
-            id: loadButton2
-            width: groupField.height*3
-            height: groupField.height
-            text: "kwin"
-            anchors { top: parent.top; bottom: parent.bottom; left: loadButton.right; right: parent.right }
-
-            onClicked: {
-                console.log("Loading File: kwinrc Group: Windows");
-                configModel.group = "Windows"
-                configModel.file = "kwinrc"
-            }
-
-            Keys.onTabPressed: bt2.forceActiveFocus();
-        }
-    }
-    ListView {
-        id: configList
-        currentIndex: -1
-        //height: 500
-        width: parent.width
-        clip: true
-        spacing: 8
-        anchors {
-            //verticalCenter: parent.verticalCenter
-            top: configInput.bottom
-            topMargin: spacing*2
-            bottom: parent.bottom
-        }
-        model: configModel
-        delegate: configDelegate
-
-        Rectangle { anchors.fill: configList; color: "white"; opacity: 0.1; }
-    }
-    Component {
-        id: configDelegate
-        Item {
-            height: 24
-            width: configList.width
-            Text { text: "<b>" + configKey + "</b>:   "; anchors.right: parent.horizontalCenter }
-            Text { text: configValue; anchors.left: parent.horizontalCenter }
-        }
-    }
 
     ActiveSettings.ConfigModel {
         id: configModel
-        file: "kdeglobals"
+        file: "active-webbrowserrc"
         group: "General"
     }
 
