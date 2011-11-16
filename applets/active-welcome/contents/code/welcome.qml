@@ -44,6 +44,19 @@ Item {
         clip: true
     }
 
+    MouseArea {
+        anchors.fill: parent
+        property int startX
+        onPressed: startX = mouse.x
+        onReleased: {
+            if (mouse.x - startX > 30) {
+                previousPage()
+            } else {
+                nextPage()
+            }
+        }
+    }
+
     IconButton {
         id: previousIcon
         icon: QIcon("go-previous")
