@@ -21,6 +21,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1
 import org.kde.qtextracomponents 0.1
 
@@ -125,15 +126,18 @@ Item {
 
             MouseArea {
                 id: theMouse
-                //height: 24
-                //width: 200
                 anchors.margins: timeZonesList.spacing / -2 +2
                 anchors.fill: tzDelegateContainer
                 onPressed: { print("pressed " + index); listView.currentIndex = index; }
-                onClicked: {
-                    print (" save: " + display);
-                    timeSettings.saveTimeZone(display);
-                    dialog.state = "closed";
+                onClicked: SequentialAnimation {
+                    MobileComponents.ActivateAnimation { targetItem: tzDelegateContainer }
+                    ScriptAction {
+                        script: {
+                            print (" save: " + display);
+                            timeSettings.saveTimeZone(display);
+                            dialog.state = "closed";
+                        }
+                    }
                 }
             }
             //Rectangle { anchors.fill: theMouse; color: "green"; opacity: 0.2; }

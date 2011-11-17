@@ -95,22 +95,15 @@ Item {
         color: theme.textColor
         anchors.right: parent.horizontalCenter
         anchors.top: twentyFourItem.bottom
-        anchors.topMargin: 24
+        anchors.topMargin: 48
         text: i18n("Timezone:")
         anchors.rightMargin: 12
     }
 
-    Text {
-        anchors.left: parent.horizontalCenter
-        anchors.verticalCenter: timeZoneLabel.verticalCenter
+    PlasmaComponents.Button {
+        anchors { verticalCenter: timeZoneLabel.verticalCenter; left: parent.horizontalCenter;}
         text: timeSettings.timeZone
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
-            }
-        }
+        onClicked: timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
     }
 
     Dialog {
