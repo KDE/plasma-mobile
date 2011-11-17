@@ -79,6 +79,10 @@ ConfigModel::ConfigModel(QObject* parent)
 
 ConfigModel::~ConfigModel()
 {
+    if (d->synchTimer->isActive()) {
+        d->synchTimer->stop();
+        d->configGroup->sync();
+    }
     delete d;
 }
 
