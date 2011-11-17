@@ -104,7 +104,7 @@ Item {
             text: i18n("Block ads:")
         }
 
-        PlasmaComponents.CheckBox {
+        PlasmaComponents.Switch {
             checked: true
             anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
             onClicked: adblockConfig.writeEntry("adBlockEnabled", checked);
