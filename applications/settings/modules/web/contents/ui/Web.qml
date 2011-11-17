@@ -59,6 +59,60 @@ Item {
         group: "General"
     }
 
+
+    Item {
+        id: startPageItem
+        anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: 32; }
+
+        Text {
+            color: theme.textColor
+            anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
+            text: i18n("Start page:")
+        }
+
+        PlasmaComponents.TextField {
+            id: startPageText
+            text: "http://plasma-active.org"
+            anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
+            anchors.right: saveStartPage.left
+            Keys.onReturnPressed: configModel.writeSetting("startPage", startPageText.text);
+        }
+        PlasmaComponents.Button {
+            id: saveStartPage
+            height: startPageText.height
+            iconSource: "dialog-ok-apply"
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: configModel.writeSetting("startPage", startPageText.text);
+        }
+
+    }
+
+    Item {
+        id: adblockItem
+        anchors { top: startPageItem.bottom; left: parent.left; right: parent.right; topMargin: 48; }
+
+        Text {
+            color: theme.textColor
+            anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
+            text: i18n("Block ads:")
+        }
+
+        PlasmaComponents.CheckBox {
+            checked: true
+            anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
+            onClicked: configModel.writeSetting("adblock", checked);
+        }
+
+    }
+
+    PlasmaComponents.Button {
+        text: i18n("Clear history")
+        anchors { left: parent.horizontalCenter; top: adblockItem.bottom; topMargin: 32; }
+        //onClicked: configModel.writeSetting("history", ["http://empty.org"]);
+        onClicked: configModel.writeSetting("history", []);
+    }
+
     Component.onCompleted: {
         print("Web.qml done loading.");
     }
