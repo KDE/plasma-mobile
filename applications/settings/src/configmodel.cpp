@@ -19,6 +19,7 @@
  */
 
 #include "configmodel.h"
+#include <QtCore/QTimer>
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDebug>
@@ -37,6 +38,7 @@ public:
     KSharedConfigPtr config;
     KConfigGroup *configGroup;
     QString file;
+    QTimer *synchTimer;
     QString group;
     QStringList keys;
     QHash<QString, int> roleIds;
@@ -66,7 +68,13 @@ ConfigModel::ConfigModel(QObject* parent)
     d->roleIds.insert("configValue", d->maxRoleId);
     ++d->maxRoleId;
     setRoleNames(roles);
-    kDebug() << "New ConfigModel. " << d->maxRoleId << d->roleIds;
+    kDebug() << "New ConfigModel. " << d->file << d->maxRoleId << d->roleIds;
+
+    // Delay and compress everything within 5 seconds into one sync
+    d->synchTimer = new QTimer(this);
+    d->synchTimer->setSingleShot(true);
+    d->synchTimer->setInterval(5000);
+    connect(d->synchTimer, SIGNAL(timeout()), SLOT(sync()));
 }
 
 ConfigModel::~ConfigModel()
@@ -85,9 +93,7 @@ void ConfigModel::setFile(const QString& filename)
         return;
     }
     d->file = filename;
-    //if (!d->config) {
-        readConfigFile();
-    //}
+    readConfigFile();
     emit fileChanged();
 }
 
@@ -202,14 +208,20 @@ int ConfigModel::roleNameToId(const QString &name)
 
 // Bound methods and slots
 
-bool ConfigModel::writeSetting(const QString& key, const QVariant& value)
+bool ConfigModel::writeEntry(const QString& key, const QVariant& value)
 {
     kDebug() << " writing setting: " << key << value;
     d->configGroup->writeEntry(key, value);
-    d->configGroup->sync();
-    return false;
+    d->synchTimer->start();
+    //d->configGroup->sync();
+    return true;
 }
 
+void ConfigModel::sync()
+{
+    kDebug() << "synching config...";
+    d->configGroup->sync();
+}
 
 }
 

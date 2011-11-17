@@ -54,9 +54,15 @@ Item {
     }
 
     ActiveSettings.ConfigModel {
-        id: configModel
+        id: historyConfig
         file: "active-webbrowserrc"
-        group: "General"
+        group: "history"
+    }
+
+    ActiveSettings.ConfigModel {
+        id: adblockConfig
+        file: "active-webbrowserrc"
+        group: "adblock"
     }
 
 
@@ -75,7 +81,7 @@ Item {
             text: "http://plasma-active.org"
             anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
             anchors.right: saveStartPage.left
-            Keys.onReturnPressed: configModel.writeSetting("startPage", startPageText.text);
+            Keys.onReturnPressed: historyConfig.writeEntry("startPage", startPageText.text);
         }
         PlasmaComponents.Button {
             id: saveStartPage
@@ -83,7 +89,7 @@ Item {
             iconSource: "dialog-ok-apply"
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            onClicked: configModel.writeSetting("startPage", startPageText.text);
+            onClicked: historyConfig.writeEntry("startPage", startPageText.text);
         }
 
     }
@@ -101,7 +107,7 @@ Item {
         PlasmaComponents.CheckBox {
             checked: true
             anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
-            onClicked: configModel.writeSetting("adblock", checked);
+            onClicked: adblockConfig.writeEntry("adBlockEnabled", checked);
         }
 
     }
@@ -109,8 +115,7 @@ Item {
     PlasmaComponents.Button {
         text: i18n("Clear history")
         anchors { left: parent.horizontalCenter; top: adblockItem.bottom; topMargin: 32; }
-        //onClicked: configModel.writeSetting("history", ["http://empty.org"]);
-        onClicked: configModel.writeSetting("history", []);
+        onClicked: historyConfig.writeEntry("history", []);
     }
 
     Component.onCompleted: {

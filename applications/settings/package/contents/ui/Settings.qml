@@ -144,7 +144,7 @@ Image {
             id: initial_page
             Rectangle {
                 anchors.fill: parent
-                color: "green"
+                //color: "green"
             }
         }
 

@@ -59,7 +59,7 @@ public:
     QString group() const;
     void setGroup(const QString &groupname);
 
-    Q_INVOKABLE bool writeSetting(const QString &key, const QVariant &value);
+    Q_INVOKABLE bool writeEntry(const QString &key, const QVariant &value);
 
 Q_SIGNALS:
     void fileChanged();
@@ -69,6 +69,9 @@ private:
     ConfigModelPrivate* d;
 
     bool readConfigFile();
+
+private Q_SLOTS:
+    void sync();
 };
 
 }
