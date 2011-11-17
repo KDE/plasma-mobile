@@ -59,6 +59,8 @@ public:
     QString group() const;
     void setGroup(const QString &groupname);
 
+    Q_INVOKABLE bool writeSetting(const QString &key, const QVariant &value);
+
 Q_SIGNALS:
     void fileChanged();
     void groupChanged();

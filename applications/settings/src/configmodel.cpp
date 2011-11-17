@@ -200,6 +200,17 @@ int ConfigModel::roleNameToId(const QString &name)
     return d->roleIds.value(name);
 }
 
+// Bound methods and slots
+
+bool ConfigModel::writeSetting(const QString& key, const QVariant& value)
+{
+    kDebug() << " writing setting: " << key << value;
+    d->configGroup->writeEntry(key, value);
+    d->configGroup->sync();
+    return false;
+}
+
+
 }
 
 #include "configmodel.moc"
