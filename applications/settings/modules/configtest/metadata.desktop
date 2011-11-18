@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=Configuration Test
+Name[pt]=Teste de Configuração
+Name[sv]=Inställningstest
+Name[uk]=Перевірка налаштувань
+Name[x-test]=xxConfiguration Testxx
 Comment=Test Module for the Config Bindings
+Comment[pt]=Módulo de Testes na Interface de Configuração
+Comment[sv]=Testmodul för inställningsbindningar
+Comment[uk]=Модуль перевірки прив’язок налаштувань
+Comment[x-test]=xxTest Module for the Config Bindingsxx
 Encoding=UTF-8
 Type=Service
 Icon=applications-development
