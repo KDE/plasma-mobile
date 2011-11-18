@@ -19,7 +19,7 @@
 
 import Qt 4.7
 import org.kde.qtextracomponents 0.1
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 
 Item {
@@ -41,6 +41,7 @@ Item {
     }
 
     ListView {
+        id: listView
         anchors.fill: parent
         clip: true
 
@@ -60,10 +61,15 @@ Item {
             }
         }
         delegate: RecommendationDelegate {
-                name: model.name
-                description: model.description
-                icon: model.icon
-                // actions: model.actions
-            }
+            name: model.name
+            description: model.description
+            icon: model.icon
+            // actions: model.actions
+        }
+    }
+
+    PlasmaComponents.ScrollBar {
+        flickableItem: listView
+        orientation: Qt.Vertical
     }
 }
