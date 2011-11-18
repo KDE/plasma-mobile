@@ -23,13 +23,13 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 
-ListItem {
+PlasmaComponents.ListItem {
     id: notificationItem
     width: popupFlickable.width
 
     Column {
         spacing: 8
-        width: popupFlickable.width
+        width: parent.width
         PlasmaComponents.Label {
             text: jobsSource.data[modelData]["appName"]
             font.bold: true
@@ -86,8 +86,8 @@ ListItem {
             }
             MobileComponents.IconButton {
                 id: pauseButton
-                width: 22
-                height: 22
+                width: 24
+                height: 24
                 icon: jobsSource.data[modelData]["state"] == "suspended"?QIcon("media-playback-start"):QIcon("media-playback-pause")
                 onClicked: {
                     var operationName = "suspend"
@@ -101,8 +101,8 @@ ListItem {
             }
             MobileComponents.IconButton {
                 id: stopButton
-                width: 22
-                height: 22
+                width: 24
+                height: 24
                 icon: QIcon("media-playback-stop")
                 onClicked: {
                     var service = jobsSource.serviceForSource(modelData)

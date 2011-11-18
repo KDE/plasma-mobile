@@ -226,7 +226,7 @@ Item {
     PlasmaCore.Dialog {
         id: popup
         location: plasmoid.location
-        windowFlags: Qt.Popup
+       // windowFlags: Qt.Popup
         mainItem: Item {
             width: Math.max(400, contentsColumn.width)
             height: Math.min(450, contentsColumn.height)
