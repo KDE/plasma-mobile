@@ -227,41 +227,46 @@ Item {
         id: popup
         location: plasmoid.location
         windowFlags: Qt.Popup
-        mainItem: Flickable {
-            id: popupFlickable
-            width: Math.max(300, contentsColumn.width)
-            height: Math.min(350, contentHeight)
-            contentWidth: contentsColumn.width
-            contentHeight: contentsColumn.height
-            clip: true
+        mainItem: Item {
+            width: Math.max(400, contentsColumn.width)
+            height: Math.min(450, contentsColumn.height)
 
-            Column {
-                id: contentsColumn
-                Repeater {
-                    id: jobsRepeater
-                    model: jobsSource.sources
-                    delegate: JobDelegate {}
-                    onCountChanged: {
-                        if (count+notificationsRepeater.count > 0) {
-                            notificationsApplet.state = "new-notifications"
-                        } else {
-                            notificationsApplet.state = "default"
-                            popup.visible = false
+            Flickable {
+                id: popupFlickable
+                anchors.fill:parent
+                
+                contentWidth: contentsColumn.width
+                contentHeight: contentsColumn.height
+                clip: true
+
+                Column {
+                    id: contentsColumn
+                    Repeater {
+                        id: jobsRepeater
+                        model: jobsSource.sources
+                        delegate: JobDelegate {}
+                        onCountChanged: {
+                            if (count+notificationsRepeater.count > 0) {
+                                notificationsApplet.state = "new-notifications"
+                            } else {
+                                notificationsApplet.state = "default"
+                                popup.visible = false
+                            }
                         }
                     }
-                }
-                Repeater {
-                    id: notificationsRepeater
-                    model: notificationsModel
-                    onCountChanged: {
-                        if (count+jobsRepeater.count > 0) {
-                            notificationsApplet.state = "new-notifications"
-                        } else {
-                            notificationsApplet.state = "default"
-                            popup.visible = false
+                    Repeater {
+                        id: notificationsRepeater
+                        model: notificationsModel
+                        onCountChanged: {
+                            if (count+jobsRepeater.count > 0) {
+                                notificationsApplet.state = "new-notifications"
+                            } else {
+                                notificationsApplet.state = "default"
+                                popup.visible = false
+                            }
                         }
+                        delegate: NotificationDelegate {}
                     }
-                    delegate: NotificationDelegate {}
                 }
             }
         }
