@@ -269,6 +269,11 @@ Item {
                     }
                 }
             }
+
+            PlasmaComponents.ScrollBar {
+                flickableItem: popupFlickable
+                orientation: Qt.Vertical
+            }
         }
     }
 }
