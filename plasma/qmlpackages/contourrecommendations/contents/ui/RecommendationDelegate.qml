@@ -27,101 +27,41 @@ PlasmaComponents.ListItem {
     property string description
     property string icon
     // property variant actions
+    enabled: true
+    onClicked: {
+        var service = recommendationsSource.serviceForSource(DataEngineSource)
+        var operation = service.operationDescription("executeAction")
+        operation.Action = "" //actions[0].actionId
+
+        service.startOperationCall(operation)
+    }
 
 
     QIconItem {
         id: iconItem
         x: y
         anchors.verticalCenter: parent.verticalCenter
-        width: 48
-        height: 68
+        width: theme.largeIconSize
+        height: theme.largeIconSize
         icon: QIcon(listItem.icon)
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                var service = recommendationsSource.serviceForSource(DataEngineSource)
-                var operation = service.operationDescription("executeAction")
-                operation.Action = "" //actions[0].actionId
-
-                service.startOperationCall(operation)
-            }
-        }
     }
 
     Column {
         anchors.left: iconItem.right
         anchors.leftMargin: 8
-        anchors.right: listItem.padding.right
-        anchors.verticalCenter: listItem.verticalCenter
-        Column {
-            id : delegateLayout
-            width: parent.width
-            spacing: 5
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: 5
 
-            Text {
-                width: delegateLayout.width
-                color: theme.textColor
-                font.pixelSize: 15
-                text: listItem.name
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        var service = recommendationsSource.serviceForSource(DataEngineSource)
-                        var operation = service.operationDescription("executeAction")
-                        operation.Action = "" //actions[0].actionId
-
-                        service.startOperationCall(operation)
-                    }
-                }
-            }
-            Text {
-                color: theme.textColor
-                font.pixelSize: 13
-                width: delegateLayout.width
-                text: listItem.description
-                visible: listItem.description.length>0
-            }
+        PlasmaComponents.Label {
+            font.pointSize: theme.defaultFont.pointSize * 1.3
+            text: listItem.name
         }
-        /*
-        Column {
-            id : actionsLayout
-            width: parent.width
-            spacing: 5
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: 8
-            visible: actions.length > 1
-
-            Repeater {
-                model: actions.length
-                MouseArea {
-                    width: actionLayout.width
-                    height: actionLayout.height
-                    onClicked: {
-                        var service = recommendationsSource.serviceForSource(DataEngineSource)
-                        var operation = service.operationDescription("executeAction")
-                        operation.Id = actions[modelData].actionId
-
-                        service.startOperationCall(operation)
-                    }
-                    Row {
-                        id: actionLayout
-                        spacing: 10
-                        QIconItem {
-                            anchors.verticalCenter: parent.verticalCenter
-                            width: 24
-                            height: 24
-                            icon: QIcon(actions[modelData].iconName)
-                        }
-                        Text {
-                            text: actions[modelData].text
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                    }
-                }
-            }
+        PlasmaComponents.Label {
+            font.pointSize: theme.defaultFont.pointSize * 0.9
+            text: listItem.description
+            visible: listItem.description.length>0
         }
-        */
+
     }
 }
