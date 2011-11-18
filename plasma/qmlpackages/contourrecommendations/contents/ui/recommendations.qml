@@ -32,12 +32,7 @@ Item {
         id: recommendationsSource
         engine: "org.kde.recommendations"
         interval: 0
-        onSourceAdded: {
-            connectSource(source)
-        }
-        Component.onCompleted: {
-            connectedSources = sources
-        }
+        connectedSources: sources
     }
 
 

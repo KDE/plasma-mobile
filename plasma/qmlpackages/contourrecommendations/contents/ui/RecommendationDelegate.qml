@@ -16,12 +16,12 @@
  *   Free Software Foundation, Inc.,
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-import Qt 4.7
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import QtQuick 1.0
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 
-ListItem {
+PlasmaComponents.ListItem {
     id: listItem
     property string name
     property string description
