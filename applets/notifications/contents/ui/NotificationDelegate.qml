@@ -22,7 +22,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 
-ListItem {
+PlasmaComponents.ListItem {
     id: notificationItem
     width: popupFlickable.width
 
@@ -43,7 +43,12 @@ ListItem {
             text: appName
             font.bold: true
             color: theme.textColor
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            horizontalAlignment: Text.HCenter
+            elide: Text.ElideRight
         }
         Row {
             spacing: 6
