@@ -59,6 +59,7 @@ public:
     QString group() const;
     void setGroup(const QString &groupname);
 
+    Q_INVOKABLE QVariant readEntry(const QString &key);
     Q_INVOKABLE bool writeEntry(const QString &key, const QVariant &value);
 
 Q_SIGNALS:

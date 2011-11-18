@@ -221,6 +221,14 @@ bool ConfigModel::writeEntry(const QString& key, const QVariant& value)
     return true;
 }
 
+QVariant ConfigModel::readEntry(const QString& key)
+{
+    //const QVariant value = d->configGroup->readEntry(key, QString("dEfAuLt"));
+    const QVariant value = d->configGroup->readEntry(key, QVariant("dEfAuLt"));
+    kDebug() << " reading setting: " << key << value;
+    return value;
+}
+
 void ConfigModel::sync()
 {
     kDebug() << "synching config...";

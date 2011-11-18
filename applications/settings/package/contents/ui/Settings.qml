@@ -110,14 +110,10 @@ Image {
 
                     MouseArea {
                         anchors.fill: delegateItem
-                        onClicked: ParallelAnimation {
-                            MobileComponents.ActivateAnimation { targetItem: delegateItem }
-                            ScriptAction {
-                                script: {
-                                    listView.currentIndex = index
-                                    loadPackage(module);
-                                }
-                            }
+                        onPressed: MobileComponents.ActivateAnimation { targetItem: delegateItem }
+                        onClicked: {
+                            listView.currentIndex = index
+                            loadPackage(module);
                         }
                     }
                 }

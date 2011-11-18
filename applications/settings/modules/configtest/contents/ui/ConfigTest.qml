@@ -52,65 +52,31 @@ Item {
             opacity: .4
         }
     }
-    Item {
-        id: configInput
-        width: 400
-        height: 32
-        //property alias file
-        anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: height }
-        PlasmaComponents.TextField {
-            width: parent.width/3
-            anchors { top: parent.top; bottom: parent.bottom; left: parent.left }
-            id: fileField
-            text: "active-webbrowserrc"
-        }
-        PlasmaComponents.TextField {
-            width: parent.width/3
-            anchors { top: parent.top; bottom: parent.bottom; left: fileField.right }
-            id: groupField
-            text: "history"
-        }
-        PlasmaComponents.Button {
-            id: loadButton
-            width: groupField.height*3
-            height: groupField.height
-            text: "Load"
-            anchors { top: parent.top; bottom: parent.bottom; left: groupField.right;}
 
-            onClicked: {
-                console.log("Loading File: " + fileField.text + " Group: " + groupField.text);
-                configModel.group = groupField.text
-                configModel.file = fileField.text
-            }
-
-            Keys.onTabPressed: bt2.forceActiveFocus();
-        }
-        PlasmaComponents.Button {
-            id: loadButton2
-            width: groupField.height*3
-            height: groupField.height
-            text: "kwin"
-            anchors { top: parent.top; bottom: parent.bottom; left: loadButton.right; right: parent.right }
-
-            onClicked: {
-                console.log("Loading File: kwinrc Group: Windows");
-                configModel.group = "Windows"
-                configModel.file = "kwinrc"
-            }
-
-            Keys.onTabPressed: bt2.forceActiveFocus();
-        }
+    ActiveSettings.ConfigModel {
+        id: configModel
+        file: "active-settings-configtestrc"
+        group: "fakeValues"
     }
+
+    Text {
+        id: configText
+        width: parent.width
+        clip: true
+        anchors { top: titleCol.bottom; topMargin: 8;}
+        text: "second ..."
+    }
+
     ListView {
         id: configList
         currentIndex: -1
-        //height: 500
+        height: 200
         width: parent.width
         clip: true
-        spacing: 8
+        spacing: 4
         anchors {
             //verticalCenter: parent.verticalCenter
-            top: configInput.bottom
+            top: configText.bottom
             topMargin: spacing*2
             bottom: parent.bottom
         }
@@ -129,13 +95,85 @@ Item {
         }
     }
 
-    ActiveSettings.ConfigModel {
-        id: configModel
-        file: "kdeglobals"
-        group: "General"
+    function defaultValues() {
+        // Fill the example config with default values
+
+        // This serves as example how you can write data in a somewhat type-safe manner
+        // into a KConfigGroup
+
+        // String -> QString
+        configModel.writeEntry("fakeString", "Some _fake_ string.");
+
+        // Url -> QUrl (FIXME)
+        configModel.writeEntry("fakeUrl", Url("http://planetkde.org"));
+
+        // bool
+        configModel.writeEntry("fakeBool", true);
+
+        // int
+        configModel.writeEntry("fakeInt", 23);
+
+        // real
+        configModel.writeEntry("fakeReal", 1.87);
+
+        // point, using the QML basic type point
+        configModel.writeEntry("fakePoint", Qt.point(30,40));
+
+        // rect, using the QML basic type rect
+        configModel.writeEntry("fakeRect", Qt.rect(12, 24, 600, 400));
+
+        // Date -> QDateTime
+        configModel.writeEntry("fakeDateTime", new Date(2003, 12, 27, 13, 37, 17));
+        print(" == " + new Date(2003, 9, 27, 13, 37, 17).toUTCString());
+
+        // date -> QDateTime
+        //configModel.writeEntry("fakeDate", Qt.date("2003-09-27"));
+
+        // list<Type> -. QVariantList (FIXME)
+        configModel.writeEntry("fakeList", ["one", "two", "three" ]);
     }
 
+    function convertDate(d) {
+        var splitDate = d.toString().split(',');
+        print(" out of config: " + d.toString());
+        var someday = new Date(splitDate[0], splitDate[1], splitDate[2], splitDate[3], splitDate[4], splitDate[5]);
+        print (" ....." + someday.valueOf());
+        return someday;
+    }
+
+    function testAll() {
+        var out = "<h3>Tests</h3>\n<p>";
+
+        out += runTest("string", configModel.readEntry("fakeString").toString(), "Some _fake_ string.");
+        out += runTest("bool", configModel.readEntry("fakeBool"), true);
+        out += runTest("bool string comparison", configModel.readEntry("fakeBool"), "true");
+        out += runTest("int", configModel.readEntry("fakeInt"), 23);
+        out += runTest("real", configModel.readEntry("fakeReal"), 1.87);
+        out += runTest("point Qt.point comparison", configModel.readEntry("fakePoint"), Qt.point(30,40));
+        out += runTest("point string comparison", configModel.readEntry("fakePoint"), "30,40");
+        var testDate = new Date(2003, 9, 27, 13, 37, 17);
+        print(" These two should be the same date !?! " + Qt.formatDateTime(testDate) + " and " + testDate);
+        out += runTest("Date", convertDate(configModel.readEntry("fakeDateTime")).valueOf(), testDate.valueOf());
+        print(" ..." + Qt.formatDateTime(configModel.readEntry("fakeDateTime")));
+        print(" ..." + convertDate(configModel.readEntry("fakeDateTime")).valueOf());
+        print(" ..." + testDate.valueOf());
+        out += runTest("StringList", configModel.readEntry("fakeList") , ["one", "two", "three"]);
+        return out + "</p>";
+    }
+
+    function runTest(label, condition1, condition2) {
+        var rtxt = "";
+        if (condition1 == condition2) {
+            rtxt += "\n<font color=\"green\"> Success</font> <em>" + label + "</em> : (" + condition1 + ")";
+        } else {
+            rtxt += "\n<font color=\"red\"> Failed</font> <em>" + label + "</em> :(" + condition1 + " != " + condition2 + ")";
+        }
+        rtxt += "<br/>";
+        return rtxt;
+    }
     Component.onCompleted: {
         print("Web.qml done loading.");
+        defaultValues();
+        configText.text = testAll() + "\n<h3>Config Model</h3>";
     }
 }
