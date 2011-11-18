@@ -102,11 +102,11 @@ Item {
         model: filterModel
 
         delegate: timeZoneDelegate
-        highlight: PlasmaCore.FrameSvgItem {
-            id: highlightFrame
-            imagePath: "widgets/viewitem"
-            prefix: "selected+hover"
-        }
+//         highlight: PlasmaCore.FrameSvgItem {
+//             id: highlightFrame
+//             imagePath: "widgets/viewitem"
+//             prefix: "selected+hover"
+//         }
 
     }
     Component {
@@ -128,7 +128,7 @@ Item {
                 id: theMouse
                 anchors.margins: timeZonesList.spacing / -2 +2
                 anchors.fill: tzDelegateContainer
-                onPressed: { print("pressed " + index); listView.currentIndex = index; }
+                onPressed: { print("pressed " + index); timeZonesList.currentIndex = index; }
                 onClicked: SequentialAnimation {
                     MobileComponents.ActivateAnimation { targetItem: tzDelegateContainer }
                     ScriptAction {
