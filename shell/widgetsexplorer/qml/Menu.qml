@@ -76,7 +76,7 @@ Flow {
     }
 
     CategoryButton {
-        component: appsComponent
+        component: widgetsComponent
         text: i18n("Widgets")
         icon: "dashboard-show"
     }
@@ -177,5 +177,10 @@ Flow {
                 resourceType: "nfo:Video"
             }
         }
+    }
+
+    Component {
+        id: widgetsComponent
+        WidgetExplorer {}
     }
 }
