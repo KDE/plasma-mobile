@@ -17,75 +17,28 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-Rectangle {
+Sheet {
     id: widgetsExplorer
-
-    color: Qt.rgba(0,0,0,0.5)
     objectName: "widgetsExplorer"
-    width: 800
-    height: 480
-    opacity: 0
 
     signal addAppletRequested(string plugin)
     signal closeRequested
 
-    Component.onCompleted: {
-        appearAnimation.running = true
-    }
 
-    ParallelAnimation {
-        id: appearAnimation
-        NumberAnimation {
-            targets: widgetsExplorer
-            properties: "opacity"
-            duration: 250
-            to: 1
-            easing.type: "InOutCubic"
-        }
-        NumberAnimation {
-            targets: dialog
-            properties: "scale"
-            duration: 250
-            to: 1
-            easing.type: "InOutCubic"
+    onAccepted: {
+        for (var i = 0; i < selectedModel.count; ++i) {
+            widgetsExplorer.addAppletRequested(selectedModel.get(i).pluginName)
         }
     }
-
-    SequentialAnimation {
-        id: disappearAnimation
-        ParallelAnimation {
-            NumberAnimation {
-                targets: widgetsExplorer
-                properties: "opacity"
-                duration: 250
-                to: 0
-                easing.type: "InOutCubic"
-            }
-            NumberAnimation {
-                targets: dialog
-                properties: "scale"
-                duration: 250
-                to: 0
-                easing.type: "InOutCubic"
-            }
+    onStatusChanged: {
+        if (status == PlasmaComponents.DialogStatus.Closed) {
+            closeRequested()
         }
-        ScriptAction {
-            script: widgetsExplorer.closeRequested()
-        }
-    }
-
-    PlasmaCore.Theme {
-        id: theme
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: disappearAnimation.running = true
     }
 
     ListModel {
@@ -93,21 +46,9 @@ Rectangle {
     }
 
 
-    PlasmaCore.FrameSvgItem {
-        id: dialog
+    Component.onCompleted: open()
 
-        state: "hidden"
-        imagePath: "dialogs/background"
-
-        anchors.fill: parent
-        anchors.margins: 50
-
-        MouseArea {
-            anchors.fill: parent
-            //eat mouse events to mot trigger the dialog hide
-            onPressed: mouse.accepted = true
-        }
-
+    content: [
         MobileComponents.ViewSearch {
             id: searchField
 
@@ -120,7 +61,7 @@ Rectangle {
             onSearchQueryChanged: {
                 appletsFilter.filterRegExp = ".*"+searchQuery+".*"
             }
-        }
+        },
         MobileComponents.IconGrid {
             id: appletsView
 
@@ -128,11 +69,7 @@ Rectangle {
                 left: parent.left
                 right: parent.right
                 top: searchField.bottom
-                bottom: buttonsRow.top
-                leftMargin: parent.margins.left
-                topMargin: parent.margins.top
-                rightMargin: parent.margins.right
-                bottomMargin: parent.margins.bottom
+                bottom: parent.bottom
             }
 
             model: PlasmaCore.SortFilterModel {
@@ -188,38 +125,6 @@ Rectangle {
                 }
             }
         }
+    ]
 
-        Row {
-            id: buttonsRow
-            spacing: 8
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
-                bottomMargin: dialog.margins.bottom
-            }
-
-            PlasmaComponents.Button {
-                id: okButton
-                //enabled: selectedResourcesList.count>0
-
-                text: i18n("Add items")
-                onClicked : {
-                    for (var i = 0; i < selectedModel.count; ++i) {
-                        widgetsExplorer.addAppletRequested(selectedModel.get(i).pluginName)
-                    }
-
-                    disappearAnimation.running = true
-                }
-            }
-
-            PlasmaComponents.Button {
-                id: cancelButton
-                text: i18n("Cancel")
-
-                onClicked: {
-                    disappearAnimation.running = true
-                }
-            }
-        }
-    }
 }

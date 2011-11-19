@@ -105,6 +105,7 @@ void PanelProxy::syncMainItem()
                 if (scene) {
                     scene->addItem(m_mainItem.data());
                     ++s_numItems;
+                    //negative y positive x, in another direction compared to corona offscreen widgets
                     m_mainItem.data()->setY(-10000*s_numItems);
                     m_mainItem.data()->setY(10000*s_numItems);
                     break;
