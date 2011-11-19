@@ -63,7 +63,8 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     m_keyboardLayoutButton->setMaximumSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
     connect(m_keyboardLayoutButton, SIGNAL(clicked()), this, SLOT(nextKeyboardLayout()));
     QDBusConnection dbus = QDBusConnection::sessionBus();
-    dbus.connect("org.kde.keyboard", "/Layouts", "org.kde.KeyboardLayouts", "currentLayoutChanged", this, SLOT(keyboardLayoutChanged()));
+    dbus.connect("org.kde.keyboard", "/Layouts", "org.kde.KeyboardLayouts", "currentLayoutChanged", this, SLOT(currentKeyboardLayoutChanged()));
+    dbus.connect("org.kde.keyboard", "/Layouts", "org.kde.KeyboardLayouts", "layoutListChanged", this, SLOT(refreshKeyboardLayoutInformation()));
 
     m_moveButton = new Plasma::IconWidget(m_containment);
     m_moveButton->setSvg("keyboardshell/arrows", "up-arrow");
@@ -125,6 +126,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 
     hide();
     setLocation(Plasma::BottomEdge);
+    refreshKeyboardLayoutInformation();
 }
 
 KeyboardDialog::~KeyboardDialog()
@@ -197,8 +199,8 @@ void KeyboardDialog::refreshKeyboardLayoutInformation()
     QDBusInterface keyboards("org.kde.keyboard", "/Layouts");
     QDBusPendingReply<QStringList> reply = keyboards.asyncCall("getLayoutsList");
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
-    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-                     this, SLOT(layoutsReceived(QDBusPendingCallWatcher*)));
+    connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+            this, SLOT(layoutsReceived(QDBusPendingCallWatcher*)));
 }
 
 void KeyboardDialog::layoutsReceived(QDBusPendingCallWatcher *watcher)
@@ -206,11 +208,16 @@ void KeyboardDialog::layoutsReceived(QDBusPendingCallWatcher *watcher)
     QDBusReply<QStringList> reply(*watcher);
     if (reply.isValid()) {
         m_keyboardLayouts = reply.value();
-        QDBusInterface keyboards("org.kde.keyboard", "/Layouts");
-        QDBusPendingReply<QString> reply = keyboards.asyncCall("getCurrentLayout");
-        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
-        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-                         this, SLOT(currentLayoutReceived(QDBusPendingCallWatcher*)));
+        if (m_keyboardLayouts.size() < 2) {
+            m_keyboardLayoutButton->hide();
+        } else {
+            m_keyboardLayoutButton->show();
+            QDBusInterface keyboards("org.kde.keyboard", "/Layouts");
+            QDBusPendingReply<QString> reply = keyboards.asyncCall("getCurrentLayout");
+            QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+            connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                    this, SLOT(currentLayoutReceived(QDBusPendingCallWatcher*)));
+        }
     }
     watcher->deleteLater();
 }

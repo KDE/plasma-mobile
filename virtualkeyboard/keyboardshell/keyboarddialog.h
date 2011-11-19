@@ -60,6 +60,7 @@ public Q_SLOTS:
     void currentKeyboardLayoutChanged();
     void layoutsReceived(QDBusPendingCallWatcher *watcher);
     void currentLayoutReceived(QDBusPendingCallWatcher *watcher);
+    void refreshKeyboardLayoutInformation();
 
 Q_SIGNALS:
     void locationChanged(const KeyboardDialog *view);
@@ -70,7 +71,6 @@ Q_SIGNALS:
 protected:
     void resizeEvent(QResizeEvent *event);
     void showEvent(QShowEvent *event);
-    void refreshKeyboardLayoutInformation();
 
 private:
     Plasma::Applet *m_applet;
