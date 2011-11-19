@@ -21,10 +21,12 @@ import QtQuick 1.0
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.metadatamodels 0.1 as MetadataModels
 
 Sheet {
     id: widgetsExplorer
     objectName: "widgetsExplorer"
+    title: i18n("Add items")
 
     signal addAppletRequested(string plugin)
     signal closeRequested
@@ -45,85 +47,52 @@ Sheet {
         id: selectedModel
     }
 
+    MetadataModels.MetadataUserTypes {
+        id: userTypes
+    }
+
+    MetadataModels.MetadataCloudModel {
+        id: cloudModel
+        cloudCategory: "rdf:type"
+        allowedCategories: userTypes.userTypes
+    }
+
 
     Component.onCompleted: open()
 
     content: [
         MobileComponents.ViewSearch {
             id: searchField
+            MobileComponents.IconButton {
+                icon: QIcon("go-previous")
+                width: 32
+                height: 32
+                onClicked: stack.pop()
+                opacity: stack.depth > 1 ? 1 : 0
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            }
 
             anchors {
                 left: parent.left
                 right: parent.right
                 top: parent.top
             }
-
-            onSearchQueryChanged: {
-                appletsFilter.filterRegExp = ".*"+searchQuery+".*"
-            }
         },
-        MobileComponents.IconGrid {
-            id: appletsView
-
+        PlasmaComponents.PageStack {
+            id: stack
+            clip: true
             anchors {
                 left: parent.left
                 right: parent.right
                 top: searchField.bottom
                 bottom: parent.bottom
             }
-
-            model: PlasmaCore.SortFilterModel {
-                id: appletsFilter
-                sourceModel: myModel
-            }
-
-
-            delegate: Component {
-                Item {
-                    width: appletsView.delegateWidth
-                    height: appletsView.delegateHeight
-                    PlasmaCore.FrameSvgItem {
-                            id: highlightFrame
-                            imagePath: "widgets/viewitem"
-                            prefix: "selected+hover"
-                            opacity: 0
-                            width: appletsView.delegateWidth
-                            height: appletsView.delegateHeight
-                            Behavior on opacity {
-                                NumberAnimation {duration: 250}
-                            }
-                    }
-                    MobileComponents.ResourceDelegate {
-                        //icon: decoration
-                        genericClassName: "FileDataObject"
-                        property string label: display
-                        width: appletsView.delegateWidth
-                        height: appletsView.delegateHeight
-
-                        onClicked: {
-                            //already in the model?
-                            //second case, for the apps model
-                            for (var i = 0; i < selectedModel.count; ++i) {
-                                if (model.pluginName == selectedModel.get(i).pluginName) {
-                                    highlightFrame.opacity = 0
-                                    selectedModel.remove(i)
-                                    return
-                                }
-                            }
-
-                            var item = new Object
-                            item["pluginName"] = model["pluginName"]
-                            //this is to make AppModel work
-                            if (!item["pluginName"]) {
-                                item["pluginName"] = pluginName
-                            }
-
-                            selectedModel.append(item)
-                            highlightFrame.opacity = 1
-                        }
-                    }
-                }
-            }
+            initialPage: Qt.createComponent("Menu.qml")
         }
     ]
 

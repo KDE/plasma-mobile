@@ -121,7 +121,6 @@ Item {
             height: titleLabel.height + margins.top + margins.bottom
             PlasmaComponents.Label {
                 id: titleLabel
-                text: "Title"
                 horizontalAlignment: Text.AlignHCenter
                 elide: Text.ElideRight
                 font.pointSize: theme.defaultFont.pointSize * 1.3
