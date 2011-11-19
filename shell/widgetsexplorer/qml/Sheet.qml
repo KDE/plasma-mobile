@@ -124,7 +124,11 @@ Item {
                 text: "Title"
                 horizontalAlignment: Text.AlignHCenter
                 elide: Text.ElideRight
-                font.pointSize: theme.defaultFont.pointSize * 1.2
+                font.pointSize: theme.defaultFont.pointSize * 1.3
+                font.weight: Font.Bold
+                style: Text.Raised
+                styleColor: Qt.rgba(1,1,1,0.8)
+                height: paintedHeight
                 anchors {
                     top: parent.top
                     left: parent.left
