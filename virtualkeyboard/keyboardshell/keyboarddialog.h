@@ -26,6 +26,7 @@
 #include <Plasma/Plasma>
 
 class QDBusPendingCallWatcher;
+class QGraphicsLinearLayout;
 
 namespace Plasma
 {
@@ -80,6 +81,7 @@ private:
     Plasma::IconWidget *m_closeButton;
     Plasma::IconWidget *m_keyboardLayoutButton;
     Plasma::IconWidget *m_moveButton;
+    QGraphicsLinearLayout *m_controlButtonsLayouts;
     QMap<QString, QIcon> m_iconMap;
     QStringList m_keyboardLayouts;
     bool m_switchKeyboardLayoutScheduled;

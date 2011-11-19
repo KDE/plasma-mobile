@@ -96,11 +96,11 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(m_containment);
     lay->addItem(m_applet);
-    QGraphicsLinearLayout *vLay = new QGraphicsLinearLayout(Qt::Vertical);
-    lay->addItem(vLay);
-    vLay->addItem(m_closeButton);
-    vLay->addItem(m_moveButton);
-    vLay->addItem(m_keyboardLayoutButton);
+    m_controlButtonsLayouts = new QGraphicsLinearLayout(Qt::Vertical);
+    lay->addItem(m_controlButtonsLayouts);
+    m_controlButtonsLayouts->addItem(m_closeButton);
+    m_controlButtonsLayouts->addItem(m_moveButton);
+    m_controlButtonsLayouts->addItem(m_keyboardLayoutButton);
     setGraphicsWidget(m_containment);
 
     if (!m_applet) {
@@ -210,8 +210,12 @@ void KeyboardDialog::layoutsReceived(QDBusPendingCallWatcher *watcher)
         m_keyboardLayouts = reply.value();
         if (m_keyboardLayouts.size() < 2) {
             m_keyboardLayoutButton->hide();
+            m_controlButtonsLayouts->removeItem(m_keyboardLayoutButton);
         } else {
-            m_keyboardLayoutButton->show();
+            if (!m_keyboardLayoutButton->isVisible()) {
+                m_keyboardLayoutButton->show();
+                m_controlButtonsLayouts->addItem(m_keyboardLayoutButton);
+            }
             QDBusInterface keyboards("org.kde.keyboard", "/Layouts");
             QDBusPendingReply<QString> reply = keyboards.asyncCall("getCurrentLayout");
             QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
