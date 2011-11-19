@@ -102,6 +102,13 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     vLay->addItem(m_keyboardLayoutButton);
     setGraphicsWidget(m_containment);
 
+    if (!m_applet) {
+#ifndef NDEBUG
+        kWarning() << "Keyboard Plasmoid not found .. failing!";
+#endif
+        exit(1);
+    }
+
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
     setWindowTitle(m_applet->name());
     setWindowIcon(SmallIcon(m_applet->icon()));
