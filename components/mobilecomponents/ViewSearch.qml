@@ -18,8 +18,8 @@
 */
 
 import QtQuick 1.0
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
@@ -35,46 +35,21 @@ Item {
     width: searchField.width
 
     height: 64
-    PlasmaWidgets.LineEdit {
+    PlasmaComponents.TextField {
         id : searchField
 
-        clickMessage: i18n("Search...")
+        placeholderText: i18n("Search...")
+        clearButtonShown: true
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        onTextChanged: {
-            searchTimer.running = true
-        }
+        onTextChanged: searchTimer.restart()
     }
     Timer {
         id: searchTimer
         interval: 1000;
         running: false
         repeat: false
-        onTriggered: {
-            if (searchField.text == "") {
-                clearButton.visible = false
-            } else {
-                clearButton.visible = true
-            }
-            searchQuery = searchField.text
-        }
-    }
-    QIconItem {
-        id: clearButton
-        y: 6
-        anchors.right: searchField.right
-        anchors.rightMargin: -6
-        visible: false
-        width: 48
-        height: 48
-        icon: QIcon("edit-clear-locationbar-rtl")
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                searchField.text = ""
-            }
-        }
+        onTriggered: searchQuery = searchField.text
     }
 }
 

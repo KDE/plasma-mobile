@@ -20,8 +20,8 @@
 #include "firstrun.h"
 #include "kext.h"
 
-#include <Activities/Controller>
-#include <Activities/Info>
+#include <KActivities/Controller>
+#include <KActivities/Info>
 
 #include <Nepomuk/Query/QueryServiceClient>
 #include <Nepomuk/Resource>

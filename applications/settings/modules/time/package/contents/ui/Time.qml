@@ -20,7 +20,6 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-//import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.components 0.1 as PlasmaComponents
 //import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1
@@ -96,22 +95,15 @@ Item {
         color: theme.textColor
         anchors.right: parent.horizontalCenter
         anchors.top: twentyFourItem.bottom
-        anchors.topMargin: 24
+        anchors.topMargin: 48
         text: i18n("Timezone:")
         anchors.rightMargin: 12
     }
 
-    Text {
-        anchors.left: parent.horizontalCenter
-        anchors.verticalCenter: timeZoneLabel.verticalCenter
+    PlasmaComponents.Button {
+        anchors { verticalCenter: timeZoneLabel.verticalCenter; left: parent.horizontalCenter;}
         text: timeSettings.timeZone
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
-            }
-        }
+        onClicked: timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
     }
 
     Dialog {

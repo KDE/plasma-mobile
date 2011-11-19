@@ -21,9 +21,7 @@
 import QtQuick 1.0
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
 
 Item {
     id: welcome
@@ -44,6 +42,19 @@ Item {
         anchors.bottom: parent.bottom
         id: contentArea
         clip: true
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        property int startX
+        onPressed: startX = mouse.x
+        onReleased: {
+            if (mouse.x - startX > 30) {
+                previousPage()
+            } else {
+                nextPage()
+            }
+        }
     }
 
     IconButton {

@@ -7,6 +7,8 @@ find_package(KActivities REQUIRED)
 include(KDE4Defaults)
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
+
 include_directories(
    ${CMAKE_SOURCE_DIR}
    ${CMAKE_BINARY_DIR}

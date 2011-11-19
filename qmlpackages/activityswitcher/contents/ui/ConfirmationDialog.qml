@@ -19,13 +19,13 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 PlasmaCore.FrameSvgItem {
     id: confirmationDialog
     imagePath: "dialogs/background"
     scale: 0
-    width: 200
+    width: theme.defaultFont.mSize.width*24
     height: childrenRect.height+5+margins.top+margins.bottom
     property alias question: confirmationText.text
     signal accepted
@@ -63,17 +63,19 @@ PlasmaCore.FrameSvgItem {
             anchors {
                 horizontalCenter: parent.horizontalCenter
             }
-            PlasmaWidgets.PushButton {
+            PlasmaComponents.Button {
                 id: yesButton
                 text: i18n("Yes")
+                width: theme.defaultFont.mSize.width*8
                 onClicked: {
                     confirmationDialog.accepted()
                 }
             }
 
-            PlasmaWidgets.PushButton {
+            PlasmaComponents.Button {
                 id: noButton
                 text: i18n("No")
+                width: theme.defaultFont.mSize.width*8
                 onClicked: {
                     confirmationDialog.scale = 0
                     confirmationDialog.dismissed()

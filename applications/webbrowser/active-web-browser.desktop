@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Browser
 Name[cs]=Prohlížeč
+Name[de]=Browser
 Name[nl]=Browser
 Name[pt]=Navegador
 Name[pt_BR]=Navegador
@@ -10,6 +11,7 @@ Name[uk]=Переглядач
 Name[x-test]=xxBrowserxx
 GenericName=Web Browser
 GenericName[cs]=Webový prohlížeč
+GenericName[de]=Webbrowser
 GenericName[et]=Veebibrauser
 GenericName[fr]=Navigateur web
 GenericName[km]=កម្មវិធី​រុករក​បណ្ដាញ

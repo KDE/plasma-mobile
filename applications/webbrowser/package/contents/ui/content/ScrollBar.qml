@@ -40,14 +40,13 @@
 ****************************************************************************/
 
 import QtQuick 1.0
+import org.kde.qtextracomponents 0.1
 
 Item {
     id: container
 
     property variant scrollArea
     property variant orientation: Qt.Vertical
-
-    opacity: 0
 
     function position()
     {
@@ -83,25 +82,88 @@ Item {
         } else return nh + ny;
     }
 
-    Rectangle { anchors.fill: parent; color: "Black"; opacity: 0.5 }
+    Item {
+        id: scrollPainter
+        anchors.fill: parent
+        opacity: 0
+        Rectangle { anchors.fill: parent; color: "Black"; opacity: 0.5 }
 
-    Rectangle {
-        color: "white"
-        radius: 2
-        x: container.orientation == Qt.Vertical ? 2 : position()
-        width: container.orientation == Qt.Vertical ? container.width - 4 : size()
-        y: container.orientation == Qt.Vertical ? position() : 2
-        height: container.orientation == Qt.Vertical ? size() : container.height - 4
+        Rectangle {
+            color: "white"
+            radius: 2
+            x: container.orientation == Qt.Vertical ? 2 : position()
+            width: container.orientation == Qt.Vertical ? container.width - 4 : size()
+            y: container.orientation == Qt.Vertical ? position() : 2
+            height: container.orientation == Qt.Vertical ? size() : container.height - 4
+        }
+    }
+    QIconItem {
+        id: topButton
+        anchors { top: parent.top; right: parent.left }
+        icon: QIcon("go-top")
+        width: 48
+        height: width
+        opacity: 0
+        MouseArea {
+            anchors.fill: parent
+            onPressed: SequentialAnimation {
+                PropertyAnimation { target: topButton; properties: "scale"; to: 0.8; duration: 50; }
+                PropertyAnimation { target: topButton; properties: "scale"; to: 1; duration: 50; }
+            }
+            onClicked: ParallelAnimation{
+                PropertyAnimation { target: topButton; properties: "opacity"; to: 0; duration: 200; }
+                PropertyAnimation {
+                    target: scrollArea; properties: "contentX,contentY";
+                    to: 0; duration: 400; easing.type: Easing.InOutQuint;
+                }
+            }
+        }
     }
 
-    states: State {
-        name: "visible"
-        when: container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally
-        PropertyChanges { target: container; opacity: 1.0 }
-    }
+    states: [
+        State {
+            name: "ScrollingUp"
+            when: ((container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally) &&             scrollArea.verticalVelocity < -10 && scrollArea.contentY > header.height+2000)
+            PropertyChanges { target: scrollPainter; opacity: 1.0 }
+            PropertyChanges { target: topButton; opacity: 1.0 }
+        },
+        State {
+            name: "Scrolling"
+            when: ( (container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally))
+            PropertyChanges { target: scrollPainter; opacity: 1.0 }
+            PropertyChanges { target: topButton; opacity: 0.0 }
+        }
+    ]
 
-    transitions: Transition {
-        from: "visible"; to: ""
-        NumberAnimation { properties: "opacity"; duration: 600 }
-    }
+    transitions: [
+        Transition {
+            to: "ScrollingUp"
+            SequentialAnimation {
+                PauseAnimation { duration: 400; }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
+            }
+        },
+        Transition {
+            to: "ScrollingUp"
+            SequentialAnimation {
+                PauseAnimation { duration: 400; }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
+            }
+        },
+        Transition {
+            from: "ScrollingUp"
+            SequentialAnimation {
+                PauseAnimation { duration: 1000; }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
+            }
+        },
+        Transition {
+            to: ""
+            PropertyAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
+        },
+        Transition {
+            from: ""; to: "Scrolling"
+            PropertyAnimation { target: scrollPainter; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
+        }
+    ]
 }

@@ -20,7 +20,6 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
@@ -111,6 +110,7 @@ Image {
 
                     MouseArea {
                         anchors.fill: delegateItem
+                        onPressed: MobileComponents.ActivateAnimation { targetItem: delegateItem }
                         onClicked: {
                             listView.currentIndex = index
                             loadPackage(module);
@@ -122,14 +122,7 @@ Image {
             ListView {
                 id: listView
                 currentIndex: -1
-                anchors {
-                    fill: parent
-                    leftMargin: settingsRoot.margins.left
-                    rightMargin: settingsRoot.margins.right
-                    topMargin: settingsRoot.margins.top
-                    bottomMargin: settingsRoot.margins.bottom
-                }
-                y: 16
+                anchors.fill: parent
                 spacing: 4
                 clip: true
                 model: settingsModulesModel
@@ -143,10 +136,19 @@ Image {
             }
         }
 
+        Component {
+            id: initial_page
+            Rectangle {
+                anchors.fill: parent
+                //color: "green"
+            }
+        }
+
         PlasmaComponents.PageStack {
             id: moduleContainer
             objectName: "moduleContainer"
             clip: false
+            initialPage: initial_page
             //width: (parent.width - settingsRoot.width - 40)
             anchors.margins: 20
             anchors.top: parent.top

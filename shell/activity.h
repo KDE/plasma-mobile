@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QHash>
 
-#include <Activities/Info>
+#include <KActivities/Info>
 
 class QSize;
 class QString;

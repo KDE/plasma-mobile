@@ -31,7 +31,7 @@
 
 #include <kdebug.h>
 
-#include <KDE/Activities/Consumer>
+#include <KDE/KActivities/Consumer>
 
 MetadataJob::MetadataJob(KActivities::Consumer *consumer, const QString &resourceUrl, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent)
     : ServiceJob(parent->objectName(), operation, parameters, parent),

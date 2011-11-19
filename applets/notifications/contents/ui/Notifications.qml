@@ -20,6 +20,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as PlasmaComponents
 
@@ -96,7 +97,7 @@ Item {
         mainItem: Item {
             width: 300
             height: lastNotificationText.height+50
-            Text {
+            PlasmaComponents.Label {
                 id: lastNotificationText
                 anchors {
                     left: parent.left
@@ -144,7 +145,7 @@ Item {
             }
         }
 
-        Text {
+        PlasmaComponents.Label {
             id: countText
             text: notificationsRepeater.count+jobsRepeater.count
             anchors.centerIn: parent
@@ -225,43 +226,53 @@ Item {
     PlasmaCore.Dialog {
         id: popup
         location: plasmoid.location
-        windowFlags: Qt.Popup
-        mainItem: Flickable {
-            id: popupFlickable
-            width: Math.max(300, contentsColumn.width)
-            height: Math.min(350, contentHeight)
-            contentWidth: contentsColumn.width
-            contentHeight: contentsColumn.height
-            clip: true
+       // windowFlags: Qt.Popup
+        mainItem: Item {
+            width: Math.max(400, contentsColumn.width)
+            height: Math.min(450, contentsColumn.height)
 
-            Column {
-                id: contentsColumn
-                Repeater {
-                    id: jobsRepeater
-                    model: jobsSource.sources
-                    delegate: JobDelegate {}
-                    onCountChanged: {
-                        if (count+notificationsRepeater.count > 0) {
-                            notificationsApplet.state = "new-notifications"
-                        } else {
-                            notificationsApplet.state = "default"
-                            popup.visible = false
+            Flickable {
+                id: popupFlickable
+                anchors.fill:parent
+                
+                contentWidth: contentsColumn.width
+                contentHeight: contentsColumn.height
+                clip: true
+
+                Column {
+                    id: contentsColumn
+                    Repeater {
+                        id: jobsRepeater
+                        model: jobsSource.sources
+                        delegate: JobDelegate {}
+                        onCountChanged: {
+                            if (count+notificationsRepeater.count > 0) {
+                                notificationsApplet.state = "new-notifications"
+                            } else {
+                                notificationsApplet.state = "default"
+                                popup.visible = false
+                            }
                         }
                     }
-                }
-                Repeater {
-                    id: notificationsRepeater
-                    model: notificationsModel
-                    onCountChanged: {
-                        if (count+jobsRepeater.count > 0) {
-                            notificationsApplet.state = "new-notifications"
-                        } else {
-                            notificationsApplet.state = "default"
-                            popup.visible = false
+                    Repeater {
+                        id: notificationsRepeater
+                        model: notificationsModel
+                        onCountChanged: {
+                            if (count+jobsRepeater.count > 0) {
+                                notificationsApplet.state = "new-notifications"
+                            } else {
+                                notificationsApplet.state = "default"
+                                popup.visible = false
+                            }
                         }
+                        delegate: NotificationDelegate {}
                     }
-                    delegate: NotificationDelegate {}
                 }
+            }
+
+            PlasmaComponents.ScrollBar {
+                flickableItem: popupFlickable
+                orientation: Qt.Vertical
             }
         }
     }

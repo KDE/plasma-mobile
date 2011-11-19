@@ -22,7 +22,7 @@
 #include "metadataservice.h"
 #include "metadatajob.h"
 
-#include <KDE/Activities/Consumer>
+#include <KDE/KActivities/Consumer>
 
 MetadataService::MetadataService(const QString &resourceUrl)
     : m_resourceUrl(resourceUrl)

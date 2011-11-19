@@ -18,15 +18,18 @@
 */
 
 import QtQuick 1.0
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
 
-Item {
+MouseArea {
     id: main
     width: 400
     height: 150
+
+    //just to hide the keyboard
+    onClicked: main.forceActiveFocus()
 
     signal itemLaunched()
 
@@ -35,6 +38,21 @@ Item {
         searchField.searchQuery = ""
         appGrid.currentPage = 0
         //tagCloud.resetStatus()
+    }
+
+    Image {
+        id: background
+        width: parent.width * 1.5
+        height:parent.height
+        source: "image://appbackgrounds/contextarea"
+        fillMode: Image.Tile
+        x: -((width-parent.width) * (appGrid.currentPage / appGrid.pagesCount))
+        Behavior on x {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 
     MobileComponents.ResourceInstance {
@@ -105,7 +123,7 @@ Item {
             height: everythingPushButton.height
             enabled: false
 
-            PlasmaWidgets.PushButton {
+            PlasmaComponents.Button {
                 id: everythingPushButton
 
                 text: i18n("Show everything")
