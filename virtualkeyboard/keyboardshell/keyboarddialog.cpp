@@ -145,34 +145,6 @@ Plasma::FormFactor KeyboardDialog::formFactor() const
     return m_containment->formFactor();
 }
 
-void KeyboardDialog::updateGeometry()
-{return;
-    QDesktopWidget *desktop = QApplication::desktop();
-    m_containment->setGeometry(QRect(QPoint(0,0), desktop->size()));
-    m_corona->setSceneRect(m_containment->geometry());
-    const int iconSize = KIconLoader::SizeMedium;
-    switch (m_location) {
-        case Plasma::TopEdge:
-            m_closeButton->setGeometry(width() - iconSize, height() - iconSize, iconSize, iconSize);
-            m_moveButton->setGeometry(0, height() - iconSize, iconSize, iconSize);
-            break;
-        case Plasma::RightEdge:
-            m_closeButton->setGeometry(0, 0, iconSize, iconSize);
-            m_moveButton->setGeometry(0, height() - iconSize, iconSize, iconSize);
-            break;
-        case Plasma::LeftEdge:
-            m_closeButton->setGeometry(width() - iconSize, 0, iconSize, iconSize);
-            m_moveButton->setGeometry(width() - iconSize, height() - iconSize, iconSize, iconSize);
-            break;
-        case Plasma::BottomEdge:
-            m_closeButton->setGeometry(width() - iconSize, 0, iconSize, iconSize);
-            m_moveButton->setGeometry(0, 0, iconSize, iconSize);
-            break;
-        default:
-            break;
-    }
-}
-
 void KeyboardDialog::swapScreenEdge()
 {
     switch (m_location) {
@@ -232,7 +204,6 @@ void KeyboardDialog::setLocation(const Plasma::Location location)
         break;
     }
 
-    updateGeometry();
     if (isVisible()) {
         Plasma::WindowEffects::slideWindow(this, m_location);
     }
