@@ -445,7 +445,6 @@ Rectangle {
                     operation["ActivityUrl"] = plasmoid.activityId
 
                     for (var i = 0; i < selectedModel.count; ++i) {
-                        var staminchia = metadataSource.serviceForSource("http://www.kde.org")
                         operation["ResourceUrl"] = selectedModel.get(i).resourceUri
                         service.startOperationCall(operation)
                     }

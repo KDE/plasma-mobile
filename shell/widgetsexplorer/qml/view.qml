@@ -33,9 +33,7 @@ Sheet {
 
 
     onAccepted: {
-        for (var i = 0; i < selectedModel.count; ++i) {
-            widgetsExplorer.addAppletRequested(selectedModel.get(i).pluginName)
-        }
+        stack.currentPage.accept()
     }
     onStatusChanged: {
         if (status == PlasmaComponents.DialogStatus.Closed) {

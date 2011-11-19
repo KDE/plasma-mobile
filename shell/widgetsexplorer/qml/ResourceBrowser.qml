@@ -29,6 +29,19 @@ MobileComponents.IconGrid {
     delegateWidth: 130
     delegateHeight: 120
 
+    function accept()
+    {
+        var service = metadataSource.serviceForSource("")
+        var operation = service.operationDescription("connectToActivity")
+        operation["ActivityUrl"] = plasmoid.activityId
+
+        for (var i = 0; i < selectedModel.count; ++i) {
+            operation["ResourceUrl"] = selectedModel.get(i).resourceUri
+            service.startOperationCall(operation)
+        }
+
+    }
+
     delegate: Item {
         width: resultsGrid.delegateWidth
         height: resultsGrid.delegateHeight
