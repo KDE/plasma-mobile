@@ -25,6 +25,8 @@
 #include <Plasma/Dialog>
 #include <Plasma/Plasma>
 
+class QDBusPendingCallWatcher;
+
 namespace Plasma
 {
     class Containment;
@@ -54,6 +56,10 @@ public Q_SLOTS:
     void setContainment(Plasma::Containment *containment);
     void updateGeometry();
     void swapScreenEdge();
+    void nextKeyboardLayout();
+    void currentKeyboardLayoutChanged();
+    void layoutsReceived(QDBusPendingCallWatcher *watcher);
+    void currentLayoutReceived(QDBusPendingCallWatcher *watcher);
 
 Q_SIGNALS:
     void locationChanged(const KeyboardDialog *view);
@@ -64,6 +70,7 @@ Q_SIGNALS:
 protected:
     void resizeEvent(QResizeEvent *event);
     void showEvent(QShowEvent *event);
+    void refreshKeyboardLayoutInformation();
 
 private:
     Plasma::Applet *m_applet;
@@ -71,7 +78,11 @@ private:
     Plasma::Corona *m_corona;
     Plasma::Location m_location;
     Plasma::IconWidget *m_closeButton;
+    Plasma::IconWidget *m_keyboardLayoutButton;
     Plasma::IconWidget *m_moveButton;
+    QMap<QString, QIcon> m_iconMap;
+    QStringList m_keyboardLayouts;
+    bool m_switchKeyboardLayoutScheduled;
 };
 
 #endif // multiple inclusion guard
