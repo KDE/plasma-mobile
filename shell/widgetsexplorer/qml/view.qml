@@ -23,7 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.metadatamodels 0.1 as MetadataModels
 
-Sheet {
+MobileComponents.Sheet {
     id: widgetsExplorer
     objectName: "widgetsExplorer"
     title: i18n("Add items")

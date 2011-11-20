@@ -8,3 +8,4 @@ ViewSearch 0.1 ViewSearch.qml
 ActivateAnimation 0.1 ActivateAnimation.qml
 AppearAnimation 0.1 AppearAnimation.qml
 DisappearAnimation 0.1 DisappearAnimation.qml
+Sheet 0.1 Sheet.qml

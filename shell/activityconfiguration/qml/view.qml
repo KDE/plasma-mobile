@@ -23,94 +23,38 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-Rectangle {
+MobileComponents.Sheet {
     id: main
     signal closeRequested
-    color: Qt.rgba(0,0,0,0.5)
-    width: 800
-    height: 480
-    opacity: 0
+
+    title: i18n("Activity configuration")
+    acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
+    rejectButtonText: i18n("Cancel")
+
+    Component.onCompleted: open()
+    onStatusChanged: {
+        if (status == PlasmaComponents.DialogStatus.Closed) {
+            closeRequested()
+        }
+    }
 
     function saveConfiguration()
     {
         configInterface.activityName = activityNameEdit.text
         configInterface.wallpaperIndex = wallpapersList.currentIndex
-        disappearAnimation.running = true
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            disappearAnimation.running=true
-        }
+    onAccepted: {
+        saveConfiguration()
     }
 
-    Component.onCompleted: {
-        appearAnimation.running = true
-    }
-
-    ParallelAnimation {
-        id: appearAnimation
-        NumberAnimation {
-            targets: main
-            properties: "opacity"
-            duration: 250
-            to: 1
-            easing.type: "InOutCubic"
-        }
-        NumberAnimation {
-            targets: frame
-            properties: "scale"
-            duration: 250
-            to: 1
-            easing.type: "InOutCubic"
-        }
-    }
-
-    SequentialAnimation {
-        id: disappearAnimation
-        ParallelAnimation {
-            NumberAnimation {
-                targets: main
-                properties: "opacity"
-                duration: 250
-                to: 0
-                easing.type: "InOutCubic"
-            }
-            NumberAnimation {
-                targets: frame
-                properties: "scale"
-                duration: 250
-                to: 0
-                easing.type: "InOutCubic"
-            }
-        }
-        ScriptAction {
-            script: main.closeRequested()
-        }
-    }
-
-    PlasmaCore.Theme {
-        id: theme
-    }
-
-    PlasmaCore.FrameSvgItem {
-        id: frame
-        anchors.fill: parent
-        anchors.margins: 50
-
-        imagePath: "dialogs/background"
-        scale: 0
-
-        MouseArea {
-            anchors.fill: parent
-            onPressed: mouse.accepted = true
-        }
-
+    content: [
         Row {
             id: nameRow
-            anchors.horizontalCenter: parent.horizontalCenter
-            y: frame.margins.top
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.topMargin
+            }
             visible: configInterface.activityNameConfigurable
             Text {
                 color: theme.textColor
@@ -123,7 +67,7 @@ Rectangle {
                 Component.onCompleted: activityNameEdit.forceActiveFocus()
                 Keys.onReturnPressed: saveConfiguration();
             }
-        }
+        },
 
         MobileComponents.IconGrid {
             id: wallpapersList
@@ -137,7 +81,7 @@ Rectangle {
             anchors {
                 top: nameRow.bottom
                 left: parent.left
-                bottom: buttonsRow.top
+                bottom: parent.bottom
                 right: parent.right
                 leftMargin: frame.margins.left
                 topMargin: 6
@@ -147,58 +91,32 @@ Rectangle {
             model: configInterface.wallpaperModel
             delegate: WallpaperDelegate {}
         }
+    ]
 
-        Connections {
-            target: configInterface
-            onModelChanged: {
-                wallpapersList.model =  configInterface.wallpaperModel
-            }
+    Connections {
+        target: configInterface
+        onModelChanged: {
+            wallpapersList.model =  configInterface.wallpaperModel
+        }
 
-            onWallpaperIndexChanged: {
-                if (configInterface.activityName == "" || configInterface.wallpaperIndex < 0) {
-                    var newIndex = Math.random()*wallpapersList.count
-                    wallpapersList.positionViewAtIndex(newIndex)
-                    wallpapersList.currentIndex = newIndex
-                } else {
-                    wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex)
-                    wallpapersList.currentIndex = configInterface.wallpaperIndex
-                }
-            }
-
-            onActivityNameChanged: {
-                if (configInterface.activityName == "") {
-                    activityNameEdit.text = i18n("New Activity")
-                } else {
-                    activityNameEdit.text = configInterface.activityName
-                }
+        onWallpaperIndexChanged: {
+            if (configInterface.activityName == "" || configInterface.wallpaperIndex < 0) {
+                var newIndex = Math.random()*wallpapersList.count
+                wallpapersList.positionViewAtIndex(newIndex)
+                wallpapersList.currentIndex = newIndex
+            } else {
+                wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex)
+                wallpapersList.currentIndex = configInterface.wallpaperIndex
             }
         }
 
-        Row {
-            id: buttonsRow
-            spacing: 8
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
-                bottomMargin: frame.margins.bottom
-            }
-
-            PlasmaComponents.Button {
-                id: okButton
-
-                text: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
-                onClicked : saveConfiguration()
-            }
-
-            PlasmaComponents.Button {
-                id: closeButton
-
-                text: i18n("Cancel")
-
-                onClicked: {
-                    disappearAnimation.running = true
-                }
+        onActivityNameChanged: {
+            if (configInterface.activityName == "") {
+                activityNameEdit.text = i18n("New Activity")
+            } else {
+                activityNameEdit.text = configInterface.activityName
             }
         }
     }
+
 }
