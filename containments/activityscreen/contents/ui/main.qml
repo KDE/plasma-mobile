@@ -62,14 +62,6 @@ Item {
         LayoutManager.itemGroups[plasmoidGroup.category] = plasmoidGroup
     }
 
-    function showAddResource()
-    {
-        var component = Qt.createComponent("AddResource.qml");
-        main.addResource = component.createObject(main);
-        print(component.errorString())
-        addResource.show()
-    }
-
     PlasmaCore.Svg {
         id: iconsSvg
         imagePath: "widgets/configuration-icons"
@@ -177,10 +169,11 @@ Item {
                 MobileComponents.ActionButton {
                     svg: iconsSvg
                     elementId: "add"
-                    onClicked: {
-                        showAddResource()
+                    action: plasmoid.action("add widgets")
+                    //FIXME: WHY?
+                    Component.onCompleted: {
+                        action.enabled = true
                     }
-                    //text: i18n("Add item")
                 }
 
                 MobileComponents.ActionButton {
@@ -188,7 +181,6 @@ Item {
                     svg: iconsSvg
                     elementId: "configure"
                     action: plasmoid.action("configure")
-                    //text: i18n("Configure")
                     //FIXME: WHY?
                     Component.onCompleted: {
                         action.enabled = true
