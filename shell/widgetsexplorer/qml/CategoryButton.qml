@@ -30,7 +30,8 @@ MouseArea {
     property Component component
     property alias text: label.text
     property string icon
-    visible: String(model["resourceType"]).charAt(0) == "_" || cloudModel.categories.indexOf(model["resourceType"]) != -1
+    property string resourceType
+    visible: String(resourceType).charAt(0) == "_" || cloudModel.categories.indexOf(resourceType) != -1
 
     MobileComponents.IconButton {
         id: iconButton

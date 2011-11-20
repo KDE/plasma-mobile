@@ -71,7 +71,10 @@ Sheet {
                 icon: QIcon("go-previous")
                 width: 32
                 height: 32
-                onClicked: stack.pop()
+                onClicked: {
+                    searchField.searchQuery = ""
+                    stack.pop()
+                }
                 opacity: stack.depth > 1 ? 1 : 0
                 Behavior on opacity {
                     NumberAnimation {
@@ -86,11 +89,15 @@ Sheet {
                 right: parent.right
                 top: parent.top
             }
+            onSearchQueryChanged: {
+                if (stack.depth == 1 && searchQuery != "") {
+                    stack.push(globalSearchComponent)
+                }
+            }
         },
         PlasmaComponents.PageStack {
             id: stack
             clip: true
-            onCurrentPageChanged: searchField.searchQuery = ""
             anchors {
                 left: parent.left
                 right: parent.right
@@ -101,4 +108,17 @@ Sheet {
         }
     ]
 
+    Component {
+        id: globalSearchComponent
+        ResourceBrowser {
+            model: PlasmaCore.DataModel {
+                keyRoleFilter: ".*"
+                dataSource: PlasmaCore.DataSource {
+                    engine: "org.kde.runner"
+                    interval: 0
+                    connectedSources: [searchField.searchQuery]
+                }
+            }
+        }
+    }
 }

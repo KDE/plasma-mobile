@@ -36,48 +36,56 @@ Flow {
     CategoryButton {
         component: appsComponent
         text: i18n("Apps")
+        resourceType: "_Apps"
         icon: "application-x-executable"
     }
 
     CategoryButton {
         component: bookmarksComponent
         text: i18n("Bookmarks")
+        resourceType: "nfo:Bookmark"
         icon: "emblem-favorite"
     }
 
     CategoryButton {
         component: contactsComponent
         text: i18n("Contacts")
+        resourceType: "nco:Contact"
         icon: "view-pim-contacts"
     }
 
     CategoryButton {
         component: documentsComponent
         text: i18n("Documents")
+        resourceType: "nfo:Document"
         icon: "application-vnd.oasis.opendocument.text"
     }
 
     CategoryButton {
         component: imagesComponent
         text: i18n("Images")
+        resourceType: "nfo:Image"
         icon: "image-x-generic"
     }
 
     CategoryButton {
         component: musicComponent
         text: i18n("Music")
+        resourceType: "nfo:Audio"
         icon: "audio-x-generic"
     }
 
     CategoryButton {
         component: videoComponent
         text: i18n("Videos")
+        resourceType: "nfo:Video"
         icon: "video-x-generic"
     }
 
     CategoryButton {
         component: widgetsComponent
         text: i18n("Widgets")
+        resourceType: "_Widgets"
         icon: "dashboard-show"
     }
 
