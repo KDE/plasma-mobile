@@ -37,7 +37,7 @@ Item {
             id: title
             text: i18n("<h1>Peek & Launch</h1>")
             color: theme.textColor
-            style: Text.Sunken
+            style: Text.Raised
             styleColor: theme.backgroundColor
         }
 

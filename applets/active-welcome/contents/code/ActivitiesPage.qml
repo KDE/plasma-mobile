@@ -36,7 +36,7 @@ Item {
             id: title
             text: i18n("<h1>Activities</h1>")
             color: theme.textColor
-            style: Text.Sunken
+            style: Text.Raised
             styleColor: theme.backgroundColor
         }
 

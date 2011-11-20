@@ -43,7 +43,8 @@ Item {
             id: title
             text: i18n("<h1>Discover Plasma Active</h1>")
             color: theme.textColor
-            style: Text.Sunken
+            //with black text raised text looks sunken and viceversa: bad api is bad ;)
+            style: Text.Raised
             styleColor: theme.backgroundColor
         }
 
