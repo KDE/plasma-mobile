@@ -32,6 +32,8 @@ Item {
     property alias title: titleLabel.text
     property alias content: contentItem.children
     property int status: PlasmaComponents.DialogStatus.Closed
+    property alias acceptButtonText: acceptButton.text
+    property alias rejectButtonText: rejectButton.text
 
     signal accepted
     signal rejected
@@ -164,13 +166,11 @@ Item {
 
             PlasmaComponents.Button {
                 id: acceptButton
-                text: i18n("Add items")
                 onClicked: accept()
             }
 
             PlasmaComponents.Button {
                 id: rejectButton
-                text: i18n("Cancel")
                 onClicked: reject()
             }
         }
