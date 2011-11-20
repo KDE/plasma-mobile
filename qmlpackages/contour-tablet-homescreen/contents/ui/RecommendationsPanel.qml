@@ -21,7 +21,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
@@ -52,7 +52,7 @@ Item {
         }
     }
 
-    MouseEventListener {
+    MobileComponents.MouseEventListener {
         id: hintregion;
 
         anchors.fill: parent
@@ -148,10 +148,14 @@ Item {
                     topMargin: parent.margins.top
                 }
                 height: titleText.height + margins.top + margins.bottom
-                Text {
+                PlasmaComponents.Label {
                     id: titleText
                     text: i18n("Recommendations")
-                    font.pixelSize: 18
+                    font.pointSize: theme.defaultFont.pointSize * 1.3
+                    font.weight: Font.Bold
+                    style: Text.Raised
+                    styleColor: Qt.rgba(1,1,1,0.8)
+                    height: paintedHeight
                     anchors {
                         top: parent.top
                         horizontalCenter: parent.horizontalCenter
