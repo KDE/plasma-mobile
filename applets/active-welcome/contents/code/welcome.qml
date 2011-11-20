@@ -51,7 +51,7 @@ Item {
         onReleased: {
             if (mouse.x - startX > 30) {
                 previousPage()
-            } else {
+            } else if (mouse.x - startX < -30) {
                 nextPage()
             }
         }
