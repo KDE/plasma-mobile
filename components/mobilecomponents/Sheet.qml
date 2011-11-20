@@ -111,6 +111,7 @@ Item {
             anchors.fill: parent
             //eat mouse events to mot trigger the sheet hide
             onPressed: mouse.accepted = true
+            onClicked: sheet.forceActiveFocus()
         }
 
         PlasmaCore.FrameSvgItem {
