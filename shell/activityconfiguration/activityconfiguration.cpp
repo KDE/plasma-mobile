@@ -42,7 +42,7 @@
 #include <Plasma/Package>
 
 #ifndef NO_ACTIVITIES
-#include <Activities/Controller>
+#include <KActivities/Controller>
 #endif
 
 #include "backgroundlistmodel.h"
@@ -129,21 +129,6 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
     }
 
     if (m_newContainment) {
-        //FIXME: this has to be done in C++ until we have QtComponents
-        // we have a new containment, we now assume it is a new activity, call up the keyboard
-        QGraphicsWidget *activityNameEdit = m_mainWidget->findChild<QGraphicsWidget*>("activityNameEdit");
-        if (activityNameEdit) {
-            activityNameEdit->setFocus(Qt::MouseFocusReason);
-            QEvent openEvent(QEvent::RequestSoftwareInputPanel);
-            if (qApp) {
-                if (QGraphicsView *view = qobject_cast<QGraphicsView*>(qApp->focusWidget())) {
-                    if (view->scene() && view->scene() == scene()) {
-                        QApplication::sendEvent(view, &openEvent);
-                    }
-                }
-            }
-        }
-
         // reset this for the next time this dialog is used
         m_newContainment = false;
     }

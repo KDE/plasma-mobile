@@ -20,9 +20,8 @@
 
 import QtQuick 1.0
 import org.kde.qtextracomponents 0.1
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicslayouts 4.7 as GraphicsLayouts
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 import QtMultimediaKit 1.1
 
@@ -38,7 +37,7 @@ Item {
         anchors.topMargin: 20
         spacing: 10
 
-        Text {
+        PlasmaComponents.Label {
             width: parent.width - 40
             anchors.horizontalCenter: parent.horizontalCenter
             id: title
@@ -48,7 +47,7 @@ Item {
             styleColor: theme.backgroundColor
         }
 
-        Text {
+        PlasmaComponents.Label {
             id: description
             width: parent.width - 40
             anchors.horizontalCenter: parent.horizontalCenter
@@ -56,10 +55,11 @@ Item {
             text: i18n("<p>Stay in control of your data and create a personalized user experience!</p><p>With Plasma Active you can browse and interact with the web, stay in contact with your friends, get the latest news, read and edit documents, enjoy your music and movies, play games and more.</p><p>While using Plasma Active, you can personalize it so that it reflects your needs and interests with the innovative Activities feature. Press the arrow to learn more about Activities.")
             color: theme.textColor
             styleColor: theme.backgroundColor
+            height: paintedHeight
         }
 
 
-        Item {
+        PlasmaComponents.Label {
             id: videoItem
             anchors.horizontalCenter: parent.horizontalCenter
             width: 266

@@ -17,29 +17,26 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
  
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
-QGraphicsWidget {
-    Item {
-      PlasmaCore.DataSource {
-          id: dataSource
-          engine: "org.kde.mobilenetworkengine"
-          connectedSources: ["default"]
-      }
+Item {
+    PlasmaCore.DataSource {
+        id: dataSource
+        engine: "org.kde.mobilenetworkengine"
+        connectedSources: ["default"]
+    }
 
-      PlasmaCore.Svg{
-          id: signalSvg
-          imagePath: "icons/mobilesignal"
-          multipleImages: true
-      }
+    PlasmaCore.Svg {
+        id: signalSvg
+        imagePath: "icons/mobilesignal"
+        multipleImages: true
+    }
 
-      Column {
-        PlasmaWidgets.SvgWidget{
-            svg: signalSvg
-            elementID: dataSource.data["default"]["technology"] + "-" + Math.round(dataSource.data["default"]["signalStrength"] / 20) + "-signal"
-        }
-      }
+    PlasmaCore.SvgItem {
+        anchors.fill: parent
+        svg: signalSvg
+        elementID: dataSource.data["default"]["technology"] + "-" + Math.round(dataSource.data["default"]["signalStrength"] / 20) + "-signal"
     }
 }
+

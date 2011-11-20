@@ -18,7 +18,7 @@
  */
 
 import Qt 4.7
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
@@ -30,6 +30,13 @@ Rectangle {
     width: 800
     height: 480
     opacity: 0
+
+    function saveConfiguration()
+    {
+        configInterface.activityName = activityNameEdit.text
+        configInterface.wallpaperIndex = wallpapersList.currentIndex
+        disappearAnimation.running = true
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -110,9 +117,11 @@ Rectangle {
                 text: i18n("Activity name:")
                 anchors.verticalCenter: activityNameEdit.verticalCenter
             }
-            PlasmaWidgets.LineEdit {
+            PlasmaComponents.TextField {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
+                Component.onCompleted: activityNameEdit.forceActiveFocus()
+                Keys.onReturnPressed: saveConfiguration();
             }
         }
 
@@ -174,18 +183,14 @@ Rectangle {
                 bottomMargin: frame.margins.bottom
             }
 
-            PlasmaWidgets.PushButton {
+            PlasmaComponents.Button {
                 id: okButton
 
-                text: configInterface.activityName == ""?i18n("Create activity"):i18n("Save changes")
-                onClicked : {
-                    configInterface.activityName = activityNameEdit.text
-                    configInterface.wallpaperIndex = wallpapersList.currentIndex
-                    disappearAnimation.running = true
-                }
+                text: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
+                onClicked : saveConfiguration()
             }
 
-            PlasmaWidgets.PushButton {
+            PlasmaComponents.Button {
                 id: closeButton
 
                 text: i18n("Cancel")

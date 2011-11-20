@@ -181,7 +181,7 @@ Item {
         running: true
         onTriggered: {
             homeScreen.recommendationsPanel = recommendationsPanelComponent.createObject(homeScreen)
-            homeScreen.activityPanelPanel = activityPanelComponent.createObject(homeScreen)
+            homeScreen.activityPanel = activityPanelComponent.createObject(homeScreen)
         }
     }
     Component {

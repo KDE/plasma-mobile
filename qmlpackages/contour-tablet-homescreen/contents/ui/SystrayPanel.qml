@@ -80,16 +80,6 @@ Item {
             bottomMargin: background.margins.bottom
         }
 
-        Image {
-            source: homeScreenPackage.filePath("images", "fabrictexture.png")
-            fillMode: Image.Tile
-            height: menuContainer.height-8
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-        }
-
         Column {
             id: itemColumn
             anchors.fill: parent
@@ -106,10 +96,11 @@ Item {
                     source: homeScreenPackage.filePath("images", "shadow-bottom.png")
                     fillMode: Image.StretchHorizontally
                     height: sourceSize.height
+                    z: 800
                     anchors {
                         left: parent.left
                         right: parent.right
-                        bottom: parent.bottom
+                        top: parent.bottom
                         bottomMargin: -1
                     }
                 }

@@ -52,7 +52,6 @@ public:
 
 public Q_SLOTS:
     void setContainment(Plasma::Containment *containment);
-    void updateGeometry();
     void swapScreenEdge();
 
 Q_SIGNALS:

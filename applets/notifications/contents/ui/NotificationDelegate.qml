@@ -19,9 +19,10 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 
-ListItem {
+PlasmaComponents.ListItem {
     id: notificationItem
     width: popupFlickable.width
 
@@ -38,32 +39,38 @@ ListItem {
     Column {
         spacing: 8
         width: popupFlickable.width
-        Text {
-            text: appName
-            font.bold: true
-            color: theme.textColor
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-        Row {
-            spacing: 6
+        Item {
+            width: parent.width
+            height: appNameLabel.height
             QIconItem {
+                id: appIconItem
                 icon: QIcon(appIcon)
-                width: 32
-                height: 32
+                width: theme.mediumIconSize
+                height: theme.mediumIconSize
             }
 
-            Text {
-                text: body
-                color: theme.textColor
-                width: popupFlickable.width- 24 - 32 - 12
-                wrapMode: Text.Wrap
+            PlasmaComponents.Label {
+                id: appNameLabel
+                text: appName
+                font.bold: true
+                height: paintedHeight
+                anchors {
+                    left: appIconItem.right
+                    right: parent.right
+                }
+                horizontalAlignment: Text.AlignHCenter
+                elide: Text.ElideRight
             }
             PlasmaCore.SvgItem {
                 svg: configIconsSvg
                 elementId: "close"
-                width: 24
-                height: 24
-                anchors.top : parent.top
+                width: theme.mediumIconSize
+                height: theme.mediumIconSize
+                anchors {
+                    top: parent.top
+                    right: parent.right
+                    rightMargin: 12
+                }
                 MouseArea {
                     anchors.fill: parent
                     anchors.margins: -6
@@ -72,6 +79,18 @@ ListItem {
                     }
                 }
             }
+        }
+
+        PlasmaComponents.Label {
+            text: body
+            color: theme.textColor
+            anchors {
+                left: parent.left
+                right:parent.right
+                leftMargin: theme.mediumIconSize+6
+                rightMargin: theme.mediumIconSize+6
+            }
+            wrapMode: Text.Wrap
         }
     }
 }
