@@ -33,13 +33,18 @@ MobileComponents.IconGrid {
     {
         var service = metadataSource.serviceForSource("")
         var operation = service.operationDescription("connectToActivity")
-        operation["ActivityUrl"] = plasmoid.activityId
+        operation["ActivityUrl"] = activitySource.data["Status"]["Current"]
 
         for (var i = 0; i < selectedModel.count; ++i) {
             operation["ResourceUrl"] = selectedModel.get(i).resourceUri
             service.startOperationCall(operation)
         }
 
+    }
+
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.metadata"
     }
 
     delegate: Item {

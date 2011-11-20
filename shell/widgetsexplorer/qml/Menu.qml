@@ -81,13 +81,6 @@ Flow {
         icon: "dashboard-show"
     }
 
-    PlasmaCore.DataSource {
-        id: activitySource
-        engine: "org.kde.activities"
-        connectedSources: ["Status"]
-        interval: 0
-    }
-
     Component {
         id: appsComponent
         ResourceBrowser {
