@@ -90,6 +90,7 @@ Sheet {
         PlasmaComponents.PageStack {
             id: stack
             clip: true
+            onCurrentPageChanged: searchField.searchQuery = ""
             anchors {
                 left: parent.left
                 right: parent.right

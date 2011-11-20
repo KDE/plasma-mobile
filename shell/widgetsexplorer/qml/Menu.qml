@@ -96,6 +96,8 @@ Flow {
                     }
                 }
                 sortRole: "name"
+                filterRole: "name"
+                filterRegExp: ".*"+searchField.searchQuery+".*"
             }
         }
     }
@@ -103,11 +105,16 @@ Flow {
     Component {
         id: bookmarksComponent
         ResourceBrowser {
-            model: MetadataModels.MetadataModel {
-                sortOrder: Qt.AscendingOrder
-                activityId: "!"+activitySource.data["Status"]["Current"]
-                sortBy: ["nie:url"]
-                resourceType: "nfo:Bookmark"
+            model: PlasmaCore.SortFilterModel {
+                //FIXME: the url doesn't get indexed?
+                sourceModel: MetadataModels.MetadataModel {
+                    sortOrder: Qt.AscendingOrder
+                    activityId: "!"+activitySource.data["Status"]["Current"]
+                    sortBy: ["nie:url"]
+                    resourceType: "nfo:Bookmark"
+                }
+                filterRole: "url"
+                filterRegExp: ".*"+searchField.searchQuery+".*"
             }
         }
     }
@@ -120,6 +127,7 @@ Flow {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortBy: ["nco:fullname"]
                 resourceType: "nco:Contact"
+                queryString: searchField.searchQuery
             }
         }
     }
@@ -132,6 +140,7 @@ Flow {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Document"
+                queryString: searchField.searchQuery
             }
         }
     }
@@ -144,6 +153,7 @@ Flow {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Image"
+                queryString: searchField.searchQuery
             }
         }
     }
@@ -156,6 +166,7 @@ Flow {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Audio"
+                queryString: searchField.searchQuery
             }
         }
     }
@@ -168,6 +179,7 @@ Flow {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Video"
+                queryString: searchField.searchQuery
             }
         }
     }
