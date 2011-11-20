@@ -34,6 +34,7 @@ Item {
     property int status: PlasmaComponents.DialogStatus.Closed
     property alias acceptButtonText: acceptButton.text
     property alias rejectButtonText: rejectButton.text
+    property Item visualParent
 
     signal accepted
     signal rejected
@@ -54,12 +55,16 @@ Item {
 
     function open()
     {
-        var next = parent;
-        while (next && next.parent) {
-            next = next.parent
-        }
+        if (visualParent) {
+            parent = visualParent
+        } else {
+            var next = parent;
+            while (next && next.parent) {
+                next = next.parent
+            }
 
-        parent = next
+            parent = next
+        }
 
         sheet.state = ""
     }
