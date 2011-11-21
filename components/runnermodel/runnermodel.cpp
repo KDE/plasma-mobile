@@ -43,8 +43,8 @@ RunnerModel::RunnerModel(QObject *parent)
 
 QModelIndex RunnerModel::index(int row, int column, const QModelIndex &index) const
 {
-    //kDebug() << "request for" << row << column << index;
-    if (!index.isValid() && row < m_matches.count() && column < 1) {
+    //kDebug() << "request for" << row << column << !index.isValid();
+    if (!index.isValid() && row >= 0 && row < m_matches.count() && column >= 0 && column < 1) {
         return createIndex(row, column);
     }
 
