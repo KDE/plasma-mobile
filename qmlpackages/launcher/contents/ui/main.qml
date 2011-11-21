@@ -180,11 +180,8 @@ MouseArea {
                         operation["Path"] = model["entryPath"]
                         service.startOperationCall(operation)
                     } else {
-                        var service = runnerSource.serviceForSource(runnerSource.connectedSources[0])
-                        var operation = service.operationDescription("run")
-
-                        operation["id"] = model["id"]
-                        service.startOperationCall(operation)
+                        print("Going to run " + index)
+                        runnerModel.run(index)
                     }
                     resetStatus()
                     itemLaunched()
