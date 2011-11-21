@@ -62,6 +62,11 @@ int RunnerModel::rowCount(const QModelIndex& index) const
     return index.isValid() ? 0 : m_matches.count();
 }
 
+int RunnerModel::count() const
+{
+    return m_matches.count();
+}
+
 int RunnerModel::columnCount(const QModelIndex&) const
 {
     return 1;

@@ -54,9 +54,9 @@ public:
     QModelIndex index(int, int, const QModelIndex&) const;
     QModelIndex parent(const QModelIndex&) const;
     int rowCount(const QModelIndex&) const;
+    int count() const;
     int columnCount(const QModelIndex&) const;
     QVariant data(const QModelIndex&, int) const;
-    int count() const {return rowCount(QModelIndex());}
 
 public Q_SLOTS:
     void startQuery(const QString &query);
