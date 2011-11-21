@@ -77,13 +77,10 @@ void RunnerModel::setRunners(const QStringList &allowedRunners)
 
 QVariant RunnerModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.parent().isValid()) {
+    if (!index.isValid() || index.parent().isValid() ||
+        index.column() > 0 || index.row() < 0 || index.row() >= m_matches.count()) {
         // index requested must be valid, but we have no child items!
         kDebug() << "invalid index requested";
-        return QVariant();
-    }
-
-    if (index.row() >= m_matches.count()) {
         return QVariant();
     }
 
@@ -91,6 +88,18 @@ QVariant RunnerModel::data(const QModelIndex &index, int role) const
         return m_matches.at(index.row()).text();
     } else if (role == Qt::DecorationRole) {
         return m_matches.at(index.row()).icon();
+    } else if (role == Type) {
+        return m_matches.at(index.row()).type();
+    } else if (role == Relevance) {
+        return m_matches.at(index.row()).relevance();
+    } else if (role == Data) {
+        return m_matches.at(index.row()).data();
+    } else if (role == Id) {
+        return m_matches.at(index.row()).id();
+    } else if (role == SubText) {
+        return m_matches.at(index.row()).subtext();
+    } else if (role == Enabled) {
+        return m_matches.at(index.row()).isEnabled();
     }
 
     return QVariant();
