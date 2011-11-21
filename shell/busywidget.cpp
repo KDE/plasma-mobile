@@ -81,7 +81,7 @@ void BusyWidget::refreshSpinner()
     update(spinnerRect);
 }
 
-void BusyWidget::paintEvent(QPaintEvent *e)
+void BusyWidget::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
     p.setCompositionMode(QPainter::CompositionMode_Source);
