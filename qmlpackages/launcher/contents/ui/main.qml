@@ -165,7 +165,7 @@ MouseArea {
                 height: appGrid.delegateHeight
                 className: "FileDataObject"
                 genericClassName: "FileDataObject"
-                property string label: model["name"]?model["name"]:model["text"]
+                property string label: model["name"]?model["name"]:model["label"]
                 //property string mimeType: model["mimeType"]?model["mimeType"]:"application/x-desktop"
                 onPressAndHold: {
                     resourceInstance.uri = model["resourceUri"]?model["resourceUri"]:model["entryPath"]
