@@ -25,6 +25,7 @@
 namespace Plasma
 {
     class RunnerManager;
+    class QueryMatch;
 } // namespace Plasma
 
 class RunnerModel : public QAbstractItemModel
@@ -49,8 +50,12 @@ public Q_SLOTS:
 Q_SIGNALS:
     void queryChanged();
 
+private Q_SLOTS:
+    void matchesChanged(const QList<Plasma::QueryMatch> &matches);
+
 private:
     Plasma::RunnerManager *m_manager;
+    QList<Plasma::QueryMatch> m_matches;
 };
 
 #endif

@@ -19,6 +19,8 @@
 
 #include "runnermodel.h"
 
+#include <KDebug>
+
 #include <Plasma/RunnerManager>
 
 RunnerModel::RunnerModel(QObject *parent)
@@ -27,8 +29,13 @@ RunnerModel::RunnerModel(QObject *parent)
 {
 }
 
-QModelIndex RunnerModel::index(int, int, const QModelIndex&) const
+QModelIndex RunnerModel::index(int row, int column, const QModelIndex &index) const
 {
+    kDebug() << "request for" << row << column << index;
+    if (!index.isValid() && row < m_matches.count() && column < 1) {
+        return createIndex(row, column);
+    }
+
     return QModelIndex();
 }
 
@@ -37,18 +44,30 @@ QModelIndex RunnerModel::parent(const QModelIndex&) const
     return QModelIndex();
 }
 
-int RunnerModel::rowCount(const QModelIndex&) const
+int RunnerModel::rowCount(const QModelIndex& index) const
 {
-    return 0;
+    return index.isValid() ? 0 : m_matches.count();
 }
 
 int RunnerModel::columnCount(const QModelIndex&) const
 {
-    return 0;
+    return 1;
 }
 
-QVariant RunnerModel::data(const QModelIndex&, int) const
+QVariant RunnerModel::data(const QModelIndex &index, int role) const
 {
+    if (!index.isValid() || index.parent().isValid()) {
+        // index requested must be valid, but we have no child items!
+        kDebug() << "invalid index requested";
+        return QVariant();
+    }
+
+    if (role == Qt::DisplayRole) {
+        if (index.row() < m_matches.count()) {
+            return m_matches.at(index.row()).text();
+        }
+    }
+
     return QVariant();
 }
 
@@ -61,12 +80,24 @@ void RunnerModel::startQuery(const QString &query)
 {
     if (!m_manager) {
         m_manager = new Plasma::RunnerManager(this);
+        connect(m_manager, SIGNAL(matchesChanged(QList<Plasma::QueryMatch>)),
+                this, SLOT(matchesChanged(QList<Plasma::QueryMatch>)));
+        //connect(m_manager, SIGNAL(queryFinished()), this, SLOT(queryFinished()));
     }
 
     if (query != m_manager->query()) {
+        kDebug() << "running query" << query;
         m_manager->launchQuery(query);
         emit queryChanged();
     }
+}
+
+void RunnerModel::matchesChanged(const QList<Plasma::QueryMatch> &matches)
+{
+    kDebug() << "got matches:" << matches.count();
+    beginResetModel();
+    m_matches = matches;
+    endResetModel();
 }
 
 #include "runnermodel.moc"

@@ -1,6 +1,5 @@
 set(runnermodeltest_SRCS
     main.cpp
-    #    mainwindow.cpp
     dynamictreemodel.cpp
     modeltest.cpp
     ../runnermodel.cpp
