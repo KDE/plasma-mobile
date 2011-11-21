@@ -141,6 +141,7 @@ void RunnerModel::matchesChanged(const QList<Plasma::QueryMatch> &matches)
     beginResetModel();
     m_matches = matches;
     endResetModel();
+    emit countChanged();
 }
 
 #include "runnermodel.moc"

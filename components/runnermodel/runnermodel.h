@@ -33,6 +33,7 @@ class RunnerModel : public QAbstractItemModel
     Q_OBJECT
     Q_PROPERTY(QString query WRITE startQuery READ currentQuery NOTIFY queryChanged)
     Q_PROPERTY(QStringList runners WRITE setRunners READ runners)
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
     enum Roles {
@@ -55,12 +56,14 @@ public:
     int rowCount(const QModelIndex&) const;
     int columnCount(const QModelIndex&) const;
     QVariant data(const QModelIndex&, int) const;
+    int count() const {return rowCount(QModelIndex());}
 
 public Q_SLOTS:
     void startQuery(const QString &query);
 
 Q_SIGNALS:
     void queryChanged();
+    void countChanged();
 
 private:
     void createManager();
