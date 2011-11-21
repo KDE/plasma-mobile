@@ -11,6 +11,7 @@ import MeeGo.Labs.Components 0.1 as Labs
 import MeeGo.Settings 0.1
 import MeeGo.Connman 0.1
 import MeeGo.Components 0.1 as MeeGo
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 import "helper.js" as WifiHelper
 
@@ -219,7 +220,7 @@ MeeGo.ExpandingBox {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: childrenRect.height
 
-                MeeGo.Button {
+                PlasmaComponents.Button {
                     id: yesDelete
                     text: qsTr("Yes, Delete")
                     width: removeConfirmArea.width / 2 - 20
@@ -231,7 +232,7 @@ MeeGo.ExpandingBox {
                         container.detailsComponent = passwordArea
                     }
                 }
-                MeeGo.Button {
+                PlasmaComponents.Button {
                     id: noSave
                     text: qsTr("No, Save")
                     width: removeConfirmArea.width / 2 - 20
@@ -262,7 +263,7 @@ MeeGo.ExpandingBox {
             property int orientationWidth: parent.width//(settingsGrid.width  / (window.orientation == 1 || window.orientation == 3 ? 3:2)) - settingsGrid.spacing * 2
 
 
-            MeeGo.Button {
+            PlasmaComponents.Button {
                 id: disconnectButton
                 text: qsTr("Disconnect")
                 height: 50
@@ -273,12 +274,11 @@ MeeGo.ExpandingBox {
                 }
             }
 
-            MeeGo.Button {
+            PlasmaComponents.Button {
                 id: removeConnection
                 text: qsTr("Remove connection")
                 height: 50
                 width: orientationWidth
-                elideText: true
                 onClicked: {
                     container.detailsComponent = removeConfirmAreaComponent
                 }
@@ -339,7 +339,7 @@ MeeGo.ExpandingBox {
 				width: orientationWidth
 			}
 
-			MeeGo.TextEntry {
+			PlasmaComponents.TextField {
 				id: ipaddyEdit
 				width: orientationWidth
 				text: container.ipaddy
@@ -364,7 +364,7 @@ MeeGo.ExpandingBox {
 				width: orientationWidth
 			}
 
-			MeeGo.TextEntry {
+			PlasmaComponents.TextField {
 				id: subnetEdit
 				width: orientationWidth
 				text: container.subnet
@@ -388,7 +388,7 @@ MeeGo.ExpandingBox {
 				width: orientationWidth
 			}
 
-			MeeGo.TextEntry {
+			PlasmaComponents.TextField {
 				id: gatewayEdit
 				width: orientationWidth
 				text: container.gateway
@@ -478,10 +478,9 @@ MeeGo.ExpandingBox {
 				text: container.networkItem.strength
 			}
 
-			MeeGo.Button {
+			PlasmaComponents.Button {
 				id: applyButton
 				text: qsTr("Apply")
-				elideText: true
 				height: 50
 				width: orientationWidth
 				onClicked: {
@@ -492,12 +491,11 @@ MeeGo.ExpandingBox {
 				}
 			}
 
-			MeeGo.Button {
+			PlasmaComponents.Button {
 				id: cancelButton
 				text: qsTr("Cancel")
 				height: 50
 				width: orientationWidth
-				elideText: true
 				onClicked: {
 					container.expanded = false
 					dropdown.selectedIndex = networkItem.method == "dhcp" ? 0:1
@@ -528,18 +526,16 @@ MeeGo.ExpandingBox {
                     height: childrenRect.height
                     spacing: 10
 
-                    MeeGo.TextEntry {
+                    PlasmaComponents.TextField {
                         id: passwordTextInput
                         //textInput.echoMode: TextInput.Normal
                         visible: passwordGrid.passwordRequired
                         defaultText: qsTr("Type password here")
                         width: passwordGrid.width / 2
                         text: container.networkItem.passphrase
-                        inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
-
                     }
 
-                    MeeGo.Button {
+                    PlasmaComponents.Button {
                         id: setupButton
                         height: 50
 
@@ -550,12 +546,11 @@ MeeGo.ExpandingBox {
                         }
                     }
 
-                    MeeGo.Button {
+                    PlasmaComponents.Button {
                         id: connectButtonOfAwesome
                         height: 50
                         property bool shouldBeActive: container.statusint != NetworkItemModel.StateAssociation &&
                                                       container.statusint != NetworkItemModel.StateConfiguration
-                        active: shouldBeActive
                         enabled: shouldBeActive
                         text: qsTr("Connect")
                         onClicked: {
