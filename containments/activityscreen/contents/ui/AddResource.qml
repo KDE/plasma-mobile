@@ -24,6 +24,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 import org.kde.metadatamodels 0.1 as MetadataModels
+import org.kde.runnermodel 0.1 as RunnerModels
 
 Rectangle {
     id: main
@@ -131,15 +132,9 @@ Rectangle {
         id: emptyModel
     }
 
-    PlasmaCore.DataSource {
-        id: runnerSource
-        engine: "org.kde.runner"
-        interval: 0
-    }
-    PlasmaCore.DataModel {
+    RunnerModels.RunnerModel {
         id: runnerModel
-        keyRoleFilter: ".*"
-        dataSource: runnerSource
+        runners: [ "services", "nepomuksearch", "recentdocuments" ]
     }
 
 
@@ -190,9 +185,8 @@ Rectangle {
 
             onSearchQueryChanged: {
                 resultsGrid.model = runnerModel
+                runnerModel.query = searchBox.searchQuery
                 if (searchBox.searchQuery) {
-                    //limit to just some runners
-                    runnerSource.connectedSources = [searchBox.searchQuery+":services|nepomuksearch|recentdocuments"]
                     resultsContainer.contentY = 0
                 } else {
                     resultsContainer.contentY = resultsContainer.height
