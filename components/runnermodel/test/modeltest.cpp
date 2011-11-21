@@ -45,8 +45,8 @@
 #include "modeltest.h"
 
 #include <QtTest/QtTest>
-#undef Q_ASSERT
-#define Q_ASSERT  QVERIFY
+//#undef Q_ASSERT
+//#define Q_ASSERT  QVERIFY
 
 Q_DECLARE_METATYPE ( QModelIndex )
 

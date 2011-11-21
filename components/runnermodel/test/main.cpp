@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     QVBoxLayout *layout = new QVBoxLayout(widget);
 
     RunnerModel *runnerModel = new RunnerModel(widget);
-//    new ModelTest(runnerModel, widget);
+    new ModelTest(runnerModel, widget);
 
     QLineEdit *input = new QLineEdit(widget);
     QObject::connect(input, SIGNAL(textChanged(QString)), runnerModel, SLOT(startQuery(QString)));
@@ -33,4 +33,3 @@ int main(int argc, char *argv[])
     widget->show();
     return app.exec();
 }
-
