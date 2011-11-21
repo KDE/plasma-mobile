@@ -36,7 +36,7 @@ Item  {
 
     PlasmaCore.Svg {
         id: iconSvg
-        imagePath: "icons/"+String(IconName).split('-')[0]
+        imagePath: "icons/" + String(IconName).split('-')[0]
         Component.onCompleted: {
             var hasSvg = iconSvg.hasElement(IconName)
             normalIcon.visible = !hasSvg
@@ -59,7 +59,7 @@ Item  {
     MouseArea {
         anchors.fill: taskIcon
         onClicked: {
-            print(iconSvg.hasElement(IconName))
+            //print(iconSvg.hasElement(IconName))
             var service = statusNotifierSource.serviceForSource(DataEngineSource)
             var operation = service.operationDescription("Activate")
             operation.x = parent.x
