@@ -28,6 +28,8 @@ Item {
     id: searchFieldContainer
 
     property string searchQuery
+    property int delay : 1000
+
     onSearchQueryChanged: {
         searchField.text = searchQuery
     }
@@ -44,9 +46,10 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         onTextChanged: searchTimer.restart()
     }
+
     Timer {
         id: searchTimer
-        interval: 1000;
+        interval: delay
         running: false
         repeat: false
         onTriggered: searchQuery = searchField.text
