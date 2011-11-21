@@ -264,13 +264,6 @@ void PlasmaApp::setupHomeScreen()
         return;
     }
 
-    QDeclarativeContext *ctxt = m_declarativeWidget->engine()->rootContext();
-    if (ctxt) {
-        RunnerModel *runnerModel = new RunnerModel(m_declarativeWidget);
-        runnerModel->setRunners(QStringList() << "services" << "nepomuksearch" << "recentdocuments"
-                                              << "desktopsessions" << "PowerDevil" << "calculator");
-        ctxt->setContextProperty("runnerModel", runnerModel);
-    }
     m_homeScreen = qobject_cast<QDeclarativeItem*>(m_declarativeWidget->rootObject());
 
     if (!m_homeScreen) {
