@@ -83,6 +83,13 @@ void RunnerModel::setRunners(const QStringList &allowedRunners)
     m_manager->setAllowedRunners(allowedRunners);
 }
 
+void RunnerModel::run(int index)
+{
+    if (index >= 0 && index < m_matches.count()) {
+        m_manager->run(m_matches.at(index));
+    }
+}
+
 QVariant RunnerModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || index.parent().isValid() ||

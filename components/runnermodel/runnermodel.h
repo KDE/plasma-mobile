@@ -51,6 +51,8 @@ public:
     QStringList runners() const;
     void setRunners(const QStringList &allowedRunners);
 
+    Q_SCRIPTABLE void run(int row);
+
     QModelIndex index(int, int, const QModelIndex&) const;
     QModelIndex parent(const QModelIndex&) const;
     int rowCount(const QModelIndex&) const;
