@@ -88,29 +88,16 @@ MouseArea {
         connectedSources: ["Apps"]
         interval: 0
     }
+
     PlasmaCore.SortFilterModel {
         id: appsModel
         sourceModel: PlasmaCore.DataModel {
             keyRoleFilter: ".*"
             dataSource: appsSource
         }
+
         sortRole: "name"
     }
-
-    PlasmaCore.DataSource {
-        id: runnerSource
-        engine: "org.kde.runner"
-        interval: 0
-    }
-    PlasmaCore.DataModel {
-        id: runnerModel
-        keyRoleFilter: ".*"
-        dataSource: runnerSource
-    }
-    ListModel {
-        id: emptyModel
-    }
-
 
     MobileComponents.ViewSearch {
         id: searchField
@@ -152,14 +139,16 @@ MouseArea {
 
         onSearchQueryChanged: {
             if (searchQuery.length < 3) {
-                appGrid.model = emptyModel
+                runnerModel.query = ""
                 appGrid.model = appsModel
-                runnerSource.connectedSources = []
             } else {
-                //limit to just some runners
-                runnerSource.connectedSources = [searchQuery+":services|nepomuksearch|recentdocuments|desktopsessions|PowerDevil"]
                 appGrid.model = runnerModel
+                runnerModel.query = searchQuery
             }
+        }
+
+        Component.onCompleted: {
+            delay = 10
         }
     }
 
@@ -177,7 +166,7 @@ MouseArea {
                 className: "FileDataObject"
                 genericClassName: "FileDataObject"
                 property string label: model["name"]?model["name"]:model["text"]
-                property string mimeType: model["mimeType"]?model["mimeType"]:"application/x-desktop"
+                //property string mimeType: model["mimeType"]?model["mimeType"]:"application/x-desktop"
                 onPressAndHold: {
                     resourceInstance.uri = model["resourceUri"]?model["resourceUri"]:model["entryPath"]
                     resourceInstance.title = model["name"]?model["name"]:model["text"]
