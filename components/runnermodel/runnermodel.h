@@ -21,6 +21,7 @@
 #define RUNNERMODEL_H
 
 #include <QAbstractItemModel>
+#include <QStringList>
 
 namespace Plasma
 {
@@ -77,6 +78,7 @@ private Q_SLOTS:
 private:
     Plasma::RunnerManager *m_manager;
     QList<Plasma::QueryMatch> m_matches;
+    QStringList m_pendingRunnersList;
 };
 
 #endif

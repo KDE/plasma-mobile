@@ -79,8 +79,11 @@ QStringList RunnerModel::runners() const
 
 void RunnerModel::setRunners(const QStringList &allowedRunners)
 {
-    createManager();
-    m_manager->setAllowedRunners(allowedRunners);
+    if (m_manager) {
+        m_manager->setAllowedRunners(allowedRunners);
+    } else {
+        m_pendingRunnersList = allowedRunners;
+    }
 }
 
 void RunnerModel::run(int index)
@@ -143,6 +146,11 @@ void RunnerModel::createManager()
         m_manager = new Plasma::RunnerManager(this);
         connect(m_manager, SIGNAL(matchesChanged(QList<Plasma::QueryMatch>)),
                 this, SLOT(matchesChanged(QList<Plasma::QueryMatch>)));
+
+        if (!m_pendingRunnersList.isEmpty()) {
+            m_manager->setAllowedRunners(m_pendingRunnersList);
+            m_pendingRunnersList.clear();
+        }
         //connect(m_manager, SIGNAL(queryFinished()), this, SLOT(queryFinished()));
     }
 }
