@@ -44,7 +44,8 @@ public:
         SubText,
         Enabled
     };
-    RunnerModel(QObject *parent);
+
+    RunnerModel(QObject *parent = 0);
 
     QString currentQuery() const;
 
