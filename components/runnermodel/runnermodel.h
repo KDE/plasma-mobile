@@ -34,6 +34,14 @@ class RunnerModel : public QAbstractItemModel
     Q_PROPERTY(QString query WRITE startQuery READ currentQuery NOTIFY queryChanged)
 
 public:
+    enum Roles {
+        Type = Qt::UserRole + 1,
+        Relevance,
+        Data,
+        Id,
+        SubText,
+        Enabled
+    };
     RunnerModel(QObject *parent);
 
     QString currentQuery() const;

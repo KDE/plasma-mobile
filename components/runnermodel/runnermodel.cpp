@@ -19,6 +19,8 @@
 
 #include "runnermodel.h"
 
+#include <QIcon>
+
 #include <KDebug>
 
 #include <Plasma/RunnerManager>
@@ -27,6 +29,14 @@ RunnerModel::RunnerModel(QObject *parent)
     : QAbstractItemModel(parent),
       m_manager(0)
 {
+    QHash<int, QByteArray> roles;
+    roles.insert(Type, "type");
+    roles.insert(Relevance, "relevance");
+    roles.insert(Data, "data");
+    roles.insert(Id, "id");
+    roles.insert(SubText, "subtext");
+    roles.insert(Enabled, "enabled");
+    setRoleNames(roles);
 }
 
 QModelIndex RunnerModel::index(int row, int column, const QModelIndex &index) const
@@ -62,10 +72,14 @@ QVariant RunnerModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
+    if (index.row() >= m_matches.count()) {
+        return QVariant();
+    }
+
     if (role == Qt::DisplayRole) {
-        if (index.row() < m_matches.count()) {
-            return m_matches.at(index.row()).text();
-        }
+        return m_matches.at(index.row()).text();
+    } else if (role == Qt::DecorationRole) {
+        return m_matches.at(index.row()).icon();
     }
 
     return QVariant();
