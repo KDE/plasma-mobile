@@ -30,13 +30,13 @@ RunnerModel::RunnerModel(QObject *parent)
       m_manager(0)
 {
     QHash<int, QByteArray> roles;
-    roles.insert(Qt::DisplayRole, "name");
+    roles.insert(Qt::DisplayRole, "label");
     roles.insert(Qt::DecorationRole, "icon");
     roles.insert(Type, "type");
     roles.insert(Relevance, "relevance");
     roles.insert(Data, "data");
     roles.insert(Id, "id");
-    roles.insert(SubText, "subtext");
+    roles.insert(SubText, "description");
     roles.insert(Enabled, "enabled");
     setRoleNames(roles);
 }
@@ -48,6 +48,7 @@ QModelIndex RunnerModel::index(int row, int column, const QModelIndex &index) co
         return createIndex(row, column);
     }
 
+    //kDebug() << "IIIIIIIIIIIIIINVALID!";
     return QModelIndex();
 }
 
@@ -114,6 +115,7 @@ QString RunnerModel::currentQuery() const
 
 void RunnerModel::startQuery(const QString &query)
 {
+    //kDebug() << "booooooo yah!!!!!!!!!!!!!" << query;
     createManager();
 
     if (query != m_manager->query()) {
