@@ -22,6 +22,7 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
+import org.kde.runnermodel 0.1 as RunnerModels
 
 MouseArea {
     id: main
@@ -97,6 +98,11 @@ MouseArea {
         }
 
         sortRole: "name"
+    }
+
+    RunnerModels.RunnerModel {
+        id: runnerModel
+        runners: [ "services", "nepomuksearch", "recentdocuments", "desktopsessions" , "PowerDevil", "calculator" ]
     }
 
     MobileComponents.ViewSearch {
@@ -180,7 +186,6 @@ MouseArea {
                         operation["Path"] = model["entryPath"]
                         service.startOperationCall(operation)
                     } else {
-                        print("Going to run " + index)
                         runnerModel.run(index)
                     }
                     resetStatus()
