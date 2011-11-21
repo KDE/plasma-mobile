@@ -64,6 +64,17 @@ int RunnerModel::columnCount(const QModelIndex&) const
     return 1;
 }
 
+QStringList RunnerModel::runners() const
+{
+    return m_manager ? m_manager->allowedRunners() : QStringList();
+}
+
+void RunnerModel::setRunners(const QStringList &allowedRunners)
+{
+    createManager();
+    m_manager->setAllowedRunners(allowedRunners);
+}
+
 QVariant RunnerModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || index.parent().isValid()) {
@@ -92,17 +103,22 @@ QString RunnerModel::currentQuery() const
 
 void RunnerModel::startQuery(const QString &query)
 {
-    if (!m_manager) {
-        m_manager = new Plasma::RunnerManager(this);
-        connect(m_manager, SIGNAL(matchesChanged(QList<Plasma::QueryMatch>)),
-                this, SLOT(matchesChanged(QList<Plasma::QueryMatch>)));
-        //connect(m_manager, SIGNAL(queryFinished()), this, SLOT(queryFinished()));
-    }
+    createManager();
 
     if (query != m_manager->query()) {
         kDebug() << "running query" << query;
         m_manager->launchQuery(query);
         emit queryChanged();
+    }
+}
+
+void RunnerModel::createManager()
+{
+    if (!m_manager) {
+        m_manager = new Plasma::RunnerManager(this);
+        connect(m_manager, SIGNAL(matchesChanged(QList<Plasma::QueryMatch>)),
+                this, SLOT(matchesChanged(QList<Plasma::QueryMatch>)));
+        //connect(m_manager, SIGNAL(queryFinished()), this, SLOT(queryFinished()));
     }
 }
 

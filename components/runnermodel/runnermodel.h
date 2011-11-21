@@ -32,6 +32,7 @@ class RunnerModel : public QAbstractItemModel
 {
     Q_OBJECT
     Q_PROPERTY(QString query WRITE startQuery READ currentQuery NOTIFY queryChanged)
+    Q_PROPERTY(QStringList runners WRITE setRunners READ runners)
 
 public:
     enum Roles {
@@ -46,6 +47,9 @@ public:
 
     QString currentQuery() const;
 
+    QStringList runners() const;
+    void setRunners(const QStringList &allowedRunners);
+
     QModelIndex index(int, int, const QModelIndex&) const;
     QModelIndex parent(const QModelIndex&) const;
     int rowCount(const QModelIndex&) const;
@@ -57,6 +61,9 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void queryChanged();
+
+private:
+    void createManager();
 
 private Q_SLOTS:
     void matchesChanged(const QList<Plasma::QueryMatch> &matches);
