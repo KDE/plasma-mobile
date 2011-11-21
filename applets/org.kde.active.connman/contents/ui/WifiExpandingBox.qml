@@ -66,7 +66,7 @@ MeeGo.ExpandingBox {
     }
 
     MeeGo.Theme {
-        id: theme
+        id: meegoTheme
     }
 
     Component.onCompleted: {
@@ -130,8 +130,8 @@ MeeGo.ExpandingBox {
             Text {
                 id: mainText
                 text: status == "" ? ssid:(ssid + " - " + status)
-                font.pixelSize: theme.fontPixelSizeNormal
-                color: theme.fontColorNormal
+                font.pixelSize: meegoTheme.fontPixelSizeNormal
+                color: meegoTheme.fontColorNormal
                 width:  container.width - 40
                 elide: Text.ElideRight
             }
@@ -139,8 +139,8 @@ MeeGo.ExpandingBox {
             Text {
                 id: securityText
                 text: finished ? WifiHelper.connmanSecurityType[container.security] : ""
-                font.pixelSize: theme.fontPixelSizeNormal
-                color: theme.fontColorNormal
+                font.pixelSize: meegoTheme.fontPixelSizeNormal
+                color: meegoTheme.fontColorNormal
                 visible: text != ""
                 width: parent.width
                 elide: Text.ElideRight
@@ -210,8 +210,8 @@ MeeGo.ExpandingBox {
 
             Text {
                 text: qsTr("Do you want to remove %1 ?  This action will forget any passwords and you will no longer be automatically connected to %2").arg(networkItem.name).arg(networkItem.name);
-                font.pixelSize: theme.fontPixelSizeNormal
-                color: theme.fontColorNormal
+                font.pixelSize: meegoTheme.fontPixelSizeNormal
+                color: meegoTheme.fontColorNormal
                 wrapMode: Text.WordWrap
                 width: parent.width
             }
@@ -288,8 +288,8 @@ MeeGo.ExpandingBox {
             Text {
                 id: connectByLabel
                 text: qsTr("Connect by:")
-                font.pixelSize: theme.fontPixelSizeNormal
-                color: theme.fontColorNormal
+                font.pixelSize: meegoTheme.fontPixelSizeNormal
+                color: meegoTheme.fontColorNormal
                 width: orientationWidth
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             }
@@ -317,23 +317,23 @@ MeeGo.ExpandingBox {
 
             Text {
                 width: orientationWidth
-                font.pixelSize: theme.fontPixelSizeNormal
-                color: theme.fontColorNormal
+                font.pixelSize: meegoTheme.fontPixelSizeNormal
+                color: meegoTheme.fontColorNormal
                 text: finished ? WifiHelper.IPv4Type[networkItem.method] : ""
             }
 
 			Text {
 				id: ipaddyLabel
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				text: qsTr("IP Address:")
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
 
 			Text {
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				text: container.ipaddy
 				visible:  !editable
 				width: orientationWidth
@@ -348,8 +348,8 @@ MeeGo.ExpandingBox {
 			}
 
 			Text {
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				id: subnetMaskLabel
 				text: qsTr("Subnet mask:")
 				width: orientationWidth
@@ -357,8 +357,8 @@ MeeGo.ExpandingBox {
 			}
 
 			Text {
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				text: container.subnet
 				visible:  !editable
 				width: orientationWidth
@@ -374,16 +374,16 @@ MeeGo.ExpandingBox {
 			Text {
 				id: gatewayLabel
 				text: qsTr("Gateway")
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
 
 			Text {
 				text: container.gateway
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				visible:  !editable
 				width: orientationWidth
 			}
@@ -397,8 +397,8 @@ MeeGo.ExpandingBox {
 			}
 			Text {
 				id: dnsLabel
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				text: qsTr("DNS:")
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
@@ -413,8 +413,8 @@ MeeGo.ExpandingBox {
 					delegate: Text {
 						width: orientationWidth
 						text: modelData
-						font.pixelSize: theme.fontPixelSizeNormal
-						color: theme.fontColorNormal
+						font.pixelSize: meegoTheme.fontPixelSizeNormal
+						color: meegoTheme.fontColorNormal
 					}
 				}
 
@@ -422,16 +422,16 @@ MeeGo.ExpandingBox {
 			Text {
 				id: hwaddyLabel
 				text: qsTr("Hardware address:")
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				visible: container.networkItem.type != "cellular"
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
 
 			Text {
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				width: orientationWidth
 				text: container.hwaddy
 				visible: container.networkItem.type != "cellular"
@@ -447,8 +447,8 @@ MeeGo.ExpandingBox {
 			Text {
 				id: securityLabel
 				visible: connectionsHacksGconf.value
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				text: qsTr("Security: ")
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
@@ -456,23 +456,23 @@ MeeGo.ExpandingBox {
 			Text {
 				visible: connectionsHacksGconf.value
 				width: orientationWidth
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				text: WifiHelper.connmanSecurityType[container.security]
 			}
 
 			Text {
 				id: strengthLabel
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				visible: connectionsHacksGconf.value
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 				text: qsTr("Strength: ")
 			}
 			Text {
-				font.pixelSize: theme.fontPixelSizeNormal
-				color: theme.fontColorNormal
+				font.pixelSize: meegoTheme.fontPixelSizeNormal
+				color: meegoTheme.fontColorNormal
 				visible: connectionsHacksGconf.value
 				width: orientationWidth
 				text: container.networkItem.strength
@@ -530,7 +530,7 @@ MeeGo.ExpandingBox {
                         id: passwordTextInput
                         //textInput.echoMode: TextInput.Normal
                         visible: passwordGrid.passwordRequired
-                        defaultText: qsTr("Type password here")
+                        placeholderText: qsTr("Type password here")
                         width: passwordGrid.width / 2
                         text: container.networkItem.passphrase
                     }
@@ -568,12 +568,12 @@ MeeGo.ExpandingBox {
                 Row {
                     height: childrenRect.height
                     spacing: 10
-                    MeeGo.CheckBox {
+                    PlasmaComponents.CheckBox {
                         id: showPasswordCheckbox
                         visible: passwordGrid.passwordRequired
-                        isChecked: true
+                        checked: true
                         onIsCheckedChanged: {
-                            if(isChecked) passwordTextInput.textInput.echoMode = TextInput.Normal
+                            if(checked) passwordTextInput.textInput.echoMode = TextInput.Normal
                             else passwordTextInput.textInput.echoMode = TextInput.Password
                         }
                     }
