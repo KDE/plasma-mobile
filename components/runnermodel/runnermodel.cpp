@@ -43,7 +43,7 @@ RunnerModel::RunnerModel(QObject *parent)
 
 QModelIndex RunnerModel::index(int row, int column, const QModelIndex &index) const
 {
-    kDebug() << "request for" << row << column << index;
+    //kDebug() << "request for" << row << column << index;
     if (!index.isValid() && row < m_matches.count() && column < 1) {
         return createIndex(row, column);
     }
@@ -82,7 +82,7 @@ QVariant RunnerModel::data(const QModelIndex &index, int role) const
     if (!index.isValid() || index.parent().isValid() ||
         index.column() > 0 || index.row() < 0 || index.row() >= m_matches.count()) {
         // index requested must be valid, but we have no child items!
-        kDebug() << "invalid index requested";
+        //kDebug() << "invalid index requested";
         return QVariant();
     }
 
@@ -117,7 +117,7 @@ void RunnerModel::startQuery(const QString &query)
     createManager();
 
     if (query != m_manager->query()) {
-        kDebug() << "running query" << query;
+        //kDebug() << "running query" << query;
         m_manager->launchQuery(query);
         emit queryChanged();
     }
@@ -135,7 +135,7 @@ void RunnerModel::createManager()
 
 void RunnerModel::matchesChanged(const QList<Plasma::QueryMatch> &matches)
 {
-    kDebug() << "got matches:" << matches.count();
+    //kDebug() << "got matches:" << matches.count();
     beginResetModel();
     m_matches = matches;
     endResetModel();
