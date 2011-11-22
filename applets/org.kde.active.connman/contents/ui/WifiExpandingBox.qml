@@ -572,7 +572,7 @@ MeeGo.ExpandingBox {
                         id: showPasswordCheckbox
                         visible: passwordGrid.passwordRequired
                         checked: true
-                        onIsCheckedChanged: {
+                        onCheckedChanged: {
                             if(checked) passwordTextInput.textInput.echoMode = TextInput.Normal
                             else passwordTextInput.textInput.echoMode = TextInput.Password
                         }
