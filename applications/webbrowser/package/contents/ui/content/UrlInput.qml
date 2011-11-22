@@ -157,16 +157,13 @@ Item {
     }
 
     Component.onCompleted: {
-        print(" EXPAND " + urlText.text);
         if (urlText.text == "") {
             completionPopup.state = "expanded"
             container.urlChanged();
-            print("111 Should load history...");
             urlFilter = "";
-
             urlText.text = "";
             urlFilterChanged();
-            print("Should load history...");
+            //print("Should load history...");
         }
     }
 
