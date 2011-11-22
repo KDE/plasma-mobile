@@ -1,11 +1,6 @@
 [ScreenSaver]
-ActionBottomLeft=0
-ActionBottomRight=0
-ActionTopLeft=0
-ActionTopRight=0
 Enabled=true
-Lock=false
-LockGrace=1000
-PlasmaEnabled=false
-Saver=kblank.desktop
-Timeout=600
+Lock=true
+LockGrace=30000
+Timeout=300
+GreeterQML=kscreenlocker/lockscreen-active.qml
