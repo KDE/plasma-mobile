@@ -22,6 +22,7 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.metadatamodels 0.1 as MetadataModels
+import org.kde.runnermodel 0.1 as RunnerModels
 
 MobileComponents.Sheet {
     id: widgetsExplorer
@@ -113,13 +114,11 @@ MobileComponents.Sheet {
     Component {
         id: globalSearchComponent
         ResourceBrowser {
-            model: PlasmaCore.DataModel {
-                keyRoleFilter: ".*"
-                dataSource: PlasmaCore.DataSource {
-                    engine: "org.kde.runner"
-                    interval: 0
-                    connectedSources: [searchField.searchQuery]
-                }
+            model: RunnerModels.RunnerModel {
+                id: runnerModel
+                //FIXME: enabling this line causes a crash
+                //runners: [ "services", "nepomuksearch", "recentdocuments" ]
+                query: searchField.searchQuery.length > 3 ? searchField.searchQuery : ""
             }
         }
     }
