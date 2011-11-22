@@ -56,7 +56,7 @@ Item {
     }
 
     Column {
-        anchors.centerIn: parent
+        anchors.horizontalCenter: parent.horizontalCenter
 
         Item {
             id: iconContainer
