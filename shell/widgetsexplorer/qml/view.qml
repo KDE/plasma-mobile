@@ -116,9 +116,8 @@ MobileComponents.Sheet {
         ResourceBrowser {
             model: RunnerModels.RunnerModel {
                 id: runnerModel
-                //FIXME: enabling this line causes a crash
-                //runners: [ "services", "nepomuksearch", "recentdocuments" ]
-                query: searchField.searchQuery.length > 3 ? searchField.searchQuery : ""
+                runners: [ "services", "nepomuksearch", "recentdocuments" ]
+                query: searchField.searchQuery.length > 2 ? searchField.searchQuery : ""
             }
         }
     }
