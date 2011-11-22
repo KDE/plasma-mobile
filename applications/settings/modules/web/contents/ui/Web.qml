@@ -54,6 +54,12 @@ Item {
     }
 
     ActiveSettings.ConfigModel {
+        id: browserConfig
+        file: "active-webbrowserrc"
+        group: "webbrowser"
+    }
+
+    ActiveSettings.ConfigModel {
         id: historyConfig
         file: "active-webbrowserrc"
         group: "history"
@@ -81,7 +87,8 @@ Item {
             text: "http://plasma-active.org"
             anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
             anchors.right: saveStartPage.left
-            Keys.onReturnPressed: historyConfig.writeEntry("startPage", startPageText.text);
+            Keys.onReturnPressed: browserConfig.writeEntry("startPage", startPageText.text);
+            Component.onCompleted: text = browserConfig.readEntry("startPage");
         }
         PlasmaComponents.Button {
             id: saveStartPage
@@ -89,7 +96,7 @@ Item {
             iconSource: "dialog-ok-apply"
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            onClicked: historyConfig.writeEntry("startPage", startPageText.text);
+            onClicked: browserConfig.writeEntry("startPage", startPageText.text);
         }
 
     }
@@ -108,13 +115,40 @@ Item {
             checked: true
             anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
             onClicked: adblockConfig.writeEntry("adBlockEnabled", checked);
+            Component.onCompleted: {
+                checked = adblockConfig.readEntry("adBlockEnabled");
+                print(" adblock checked: " + checked);
+            }
+        }
+
+    }
+
+    Item {
+        id: pluginsItem
+        anchors { top: adblockItem.bottom; left: parent.left; right: parent.right; topMargin: 48; }
+
+        Text {
+            color: theme.textColor
+            anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
+            text: i18n("Enable plugins:")
+        }
+
+        PlasmaComponents.Switch {
+            checked: true
+            property string configKey: "pluginsEnabled"
+            anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
+            onClicked: browserConfig.writeEntry(configKey, checked);
+            Component.onCompleted: {
+                checked = browserConfig.readEntry(configKey);
+                print(" plugins enabled: " + configKey + " :: " + checked);
+            }
         }
 
     }
 
     PlasmaComponents.Button {
         text: i18n("Clear history")
-        anchors { left: parent.horizontalCenter; top: adblockItem.bottom; topMargin: 32; }
+        anchors { left: parent.horizontalCenter; top: pluginsItem.bottom; topMargin: 32; }
         onClicked: historyConfig.writeEntry("history", []);
     }
 
