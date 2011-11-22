@@ -29,10 +29,12 @@ namespace Plasma
     class QueryMatch;
 } // namespace Plasma
 
+class QTimer;
+
 class RunnerModel : public QAbstractItemModel
 {
     Q_OBJECT
-    Q_PROPERTY(QString query WRITE startQuery READ currentQuery NOTIFY queryChanged)
+    Q_PROPERTY(QString query WRITE scheduleQuery READ currentQuery NOTIFY queryChanged)
     Q_PROPERTY(QStringList runners WRITE setRunners READ runners)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
@@ -63,11 +65,14 @@ public:
     QVariant data(const QModelIndex&, int) const;
 
 public Q_SLOTS:
-    void startQuery(const QString &query);
+    void scheduleQuery(const QString &query);
 
 Q_SIGNALS:
     void queryChanged();
     void countChanged();
+
+private Q_SLOTS:
+    void startQuery();
 
 private:
     void createManager();
@@ -79,6 +84,8 @@ private:
     Plasma::RunnerManager *m_manager;
     QList<Plasma::QueryMatch> m_matches;
     QStringList m_pendingRunnersList;
+    QString m_pendingQuery;
+    QTimer *m_startQueryTimer;
 };
 
 #endif

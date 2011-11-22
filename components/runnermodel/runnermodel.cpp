@@ -20,6 +20,7 @@
 #include "runnermodel.h"
 
 #include <QIcon>
+#include <QTimer>
 
 #include <KDebug>
 
@@ -27,7 +28,8 @@
 
 RunnerModel::RunnerModel(QObject *parent)
     : QAbstractItemModel(parent),
-      m_manager(0)
+      m_manager(0),
+      m_startQueryTimer(new QTimer(this))
 {
     QHash<int, QByteArray> roles;
     roles.insert(Qt::DisplayRole, "label");
@@ -39,6 +41,10 @@ RunnerModel::RunnerModel(QObject *parent)
     roles.insert(SubText, "description");
     roles.insert(Enabled, "enabled");
     setRoleNames(roles);
+
+    m_startQueryTimer->setSingleShot(true);
+    m_startQueryTimer->setInterval(10);
+    connect(m_startQueryTimer, SIGNAL(timeout()), this, SLOT(startQuery()));
 }
 
 QModelIndex RunnerModel::index(int row, int column, const QModelIndex &index) const
@@ -128,14 +134,25 @@ QString RunnerModel::currentQuery() const
     return m_manager ? m_manager->query() : QString();
 }
 
-void RunnerModel::startQuery(const QString &query)
+void RunnerModel::scheduleQuery(const QString &query)
 {
+    m_pendingQuery = query;
+    m_startQueryTimer->start();
+}
+
+void RunnerModel::startQuery()
+{
+    if (!m_manager && m_pendingQuery.isEmpty()) {
+        // avoid creating a manager just so we can run nothing
+        return;
+    }
+
     //kDebug() << "booooooo yah!!!!!!!!!!!!!" << query;
     createManager();
 
-    if (query != m_manager->query()) {
+    if (m_pendingQuery != m_manager->query()) {
         //kDebug() << "running query" << query;
-        m_manager->launchQuery(query);
+        m_manager->launchQuery(m_pendingQuery);
         emit queryChanged();
     }
 }
