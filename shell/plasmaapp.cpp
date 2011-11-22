@@ -81,6 +81,7 @@ PlasmaApp* PlasmaApp::self()
 
 PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
+      m_declarativeWidget(0),
       m_corona(0),
       m_mainView(0),
       m_currentContainment(0),
