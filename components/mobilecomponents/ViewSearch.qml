@@ -28,7 +28,7 @@ Item {
     id: searchFieldContainer
 
     property string searchQuery
-    property int delay : 1000
+    property int delay : 100
 
     onSearchQueryChanged: {
         searchField.text = searchQuery
