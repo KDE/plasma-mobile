@@ -25,8 +25,6 @@
 #define QL1S(x)  QLatin1String(x)
 #define QL1C(x)  QLatin1Char(x)
 
-
-
 // Self Includes
 #include "adblockmanager.h"
 
@@ -36,15 +34,17 @@
 //#include "webpage.h"
 
 // KDE Includes
+#include <KDirWatch>
 #include <KSharedConfig>
+#include <KStandardDirs>
 #include <KConfigGroup>
 #include <KIO/TransferJob>
 
 // Qt Includes
-#include <QUrl>
-#include <QWebElement>
-#include <QWebPage>
-#include <QWebFrame>
+#include <QtCore/QUrl>
+#include <QtWebKit/QWebElement>
+#include <QtWebKit/QWebPage>
+#include <QtWebKit/QWebFrame>
 
 QStringList defaultLocations()
 {
@@ -62,6 +62,12 @@ AdBlockManager::AdBlockManager(QObject *parent)
     , _isHideAdsEnabled(false)
     , _index(0)
 {
+    _dirWatch = new KDirWatch(this);
+    QString configPath = KStandardDirs::locateLocal("config", "active-webbrowserrc");
+    _dirWatch->addFile(configPath);
+    connect(_dirWatch, SIGNAL(dirty(const QString&)), SLOT(loadSettings()));
+    connect(_dirWatch, SIGNAL(created(const QString&)), SLOT(loadSettings()));
+
     loadSettings();
 }
 
@@ -86,8 +92,10 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
     _hideList.clear();
 
     KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+    ptr->reparseConfiguration();
     _config = KConfigGroup(ptr, "adblock");
     _isAdblockEnabled = _config.readEntry("adBlockEnabled", true);
+    kDebug() << "Adblock is now " << _isAdblockEnabled;
 
     // no need to load filters if adblock is not enabled :)
     if (!_isAdblockEnabled)
@@ -122,7 +130,6 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
         loadRules(rules);
     }
 }
-
 
 void AdBlockManager::loadRules(const QStringList &rules)
 {

@@ -34,14 +34,15 @@
 #include <QtGui/QKeyEvent>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPen>
-#include <QNetworkReply>
-#include <QDir>
+#include <QtNetwork/QNetworkReply>
+#include <QtCore/QDir>
 
 #include <qwebelement.h>
 #include <qwebframe.h>
 #include <qwebpage.h>
 #include <qwebsettings.h>
 
+#include <KDirWatch>
 #include <KUrl>
 #include <KGlobalSettings>
 #include <KIO/Job>
@@ -49,6 +50,7 @@
 #include <KIO/AccessManager>
 #include <KIO/MetaData>
 #include <KIO/JobUiDelegate>
+#include <KStandardDirs>
 #include <KWebWallet>
 #include <KWindowSystem>
 #include <KDebug>
@@ -107,6 +109,8 @@ public:
     QObjectList windowObjects;
 
     bool rendering;
+
+    KDirWatch* dirWatch;
 };
 
 GraphicsWebView::GraphicsWebView(KDeclarativeWebView* parent)
@@ -331,8 +335,8 @@ void KDeclarativeWebView::init()
 
     wp->setForwardUnsupportedContent(true);
 
-    initSettings();
     setPage(wp);
+    initSettings();
 #ifndef NO_KIO
     KIO::AccessManager *access = new NetworkAccessManager(page());
     wp->setNetworkAccessManager(access);
@@ -344,11 +348,17 @@ void KDeclarativeWebView::init()
 
     connect(access, SIGNAL(finished(QNetworkReply*)), page(), SLOT(handleNetworkErrors(QNetworkReply*)));
 
+
+    d->dirWatch = new KDirWatch(this);
+    QString configPath = KStandardDirs::locateLocal("config", "active-webbrowserrc");
+    d->dirWatch->addFile(configPath);
+    connect(d->dirWatch, SIGNAL(dirty(const QString&)), SLOT(initSettings()));
+    connect(d->dirWatch, SIGNAL(created(const QString&)), SLOT(initSettings()));
 }
 
 void KDeclarativeWebView::initSettings()
 {
-    kDebug() << "Setting up fonts: " << KGlobalSettings::generalFont().family() << KGlobalSettings::generalFont().pointSize();
+    kDebug() << "Settings up fonts and reading settings: " << KGlobalSettings::generalFont().family() << KGlobalSettings::generalFont().pointSize();
     settings()->setFontFamily(QWebSettings::StandardFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::SerifFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::FixedFont,  KGlobalSettings::generalFont().family());
@@ -363,11 +373,14 @@ void KDeclarativeWebView::initSettings()
     settings()->setFontSize(QWebSettings::MinimumLogicalFontSize,  KGlobalSettings::smallestReadableFont().pointSize());
 
     // From configuration
-    KConfigGroup cg(KSharedConfig::openConfig("active-webbrowserrc"), "webbrowser");
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+    ptr->reparseConfiguration();
+    KConfigGroup cg(ptr, "webbrowser");
     bool pluginsEnabled = cg.readEntry("pluginsEnabled", false);
-    kDebug() << "Plugins on? " << pluginsEnabled;
+    kDebug() << " C++ Plugins on? " << pluginsEnabled;
+
     settings()->setAttribute(QWebSettings::PluginsEnabled, pluginsEnabled);
-    //settingsObject()->setPluginsEnabled(cg.readEntry("pluginsEnabled", false));
+    settingsObject()->setPluginsEnabled(pluginsEnabled);
 }
 
 void KDeclarativeWebView::componentComplete()

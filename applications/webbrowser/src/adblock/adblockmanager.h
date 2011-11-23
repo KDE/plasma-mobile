@@ -123,6 +123,8 @@
 class QNetworkRequest;
 class QWebPage;
 
+class KDirWatch;
+
 // Definitions
 typedef QList<AdBlockRule> AdBlockRuleList;
 
@@ -154,6 +156,7 @@ private slots:
 
 private:
     KConfigGroup _config;
+    KDirWatch* _dirWatch;
     bool _isAdblockEnabled;
     bool _isHideAdsEnabled;
 

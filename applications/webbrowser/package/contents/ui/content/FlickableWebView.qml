@@ -155,6 +155,8 @@ Flickable {
             if (url != null) {
                 header.editUrl = url.toString();
             }
+            //settings.pluginsEnabled = true;
+            print(" XXX Plugins on? " + settings.pluginsEnabled);
         }
         onTitleChanged: {
             //print("title changed in flickable " + title);
