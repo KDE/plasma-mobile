@@ -331,7 +331,7 @@ void KDeclarativeWebView::init()
 
     wp->setForwardUnsupportedContent(true);
 
-    setFonts();
+    initSettings();
     setPage(wp);
 #ifndef NO_KIO
     KIO::AccessManager *access = new NetworkAccessManager(page());
@@ -346,7 +346,7 @@ void KDeclarativeWebView::init()
 
 }
 
-void KDeclarativeWebView::setFonts()
+void KDeclarativeWebView::initSettings()
 {
     kDebug() << "Setting up fonts: " << KGlobalSettings::generalFont().family() << KGlobalSettings::generalFont().pointSize();
     settings()->setFontFamily(QWebSettings::StandardFont,  KGlobalSettings::generalFont().family());
@@ -361,6 +361,13 @@ void KDeclarativeWebView::setFonts()
     settings()->setFontSize(QWebSettings::DefaultFixedFontSize,  KGlobalSettings::fixedFont().pointSize());
     settings()->setFontSize(QWebSettings::MinimumFontSize,  KGlobalSettings::smallestReadableFont().pointSize());
     settings()->setFontSize(QWebSettings::MinimumLogicalFontSize,  KGlobalSettings::smallestReadableFont().pointSize());
+
+    // From configuration
+    KConfigGroup cg(KSharedConfig::openConfig("active-webbrowserrc"), "webbrowser");
+    bool pluginsEnabled = cg.readEntry("pluginsEnabled", false);
+    kDebug() << "Plugins on? " << pluginsEnabled;
+    settings()->setAttribute(QWebSettings::PluginsEnabled, pluginsEnabled);
+    //settingsObject()->setPluginsEnabled(cg.readEntry("pluginsEnabled", false));
 }
 
 void KDeclarativeWebView::componentComplete()

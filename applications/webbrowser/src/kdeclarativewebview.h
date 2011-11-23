@@ -259,7 +259,7 @@ private Q_SLOTS:
     void windowObjectCleared();
     void pageUrlChanged();
     void initialLayout();
-    void setFonts();
+    void initSettings();
 
     void updateDeclarativeWebViewSize();
     void updateFlickingEnabled();

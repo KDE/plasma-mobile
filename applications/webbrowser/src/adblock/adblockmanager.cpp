@@ -62,7 +62,6 @@ AdBlockManager::AdBlockManager(QObject *parent)
     , _isHideAdsEnabled(false)
     , _index(0)
 {
-    kDebug() << " AAAA " << "new Adblockmanager.";
     loadSettings();
 }
 

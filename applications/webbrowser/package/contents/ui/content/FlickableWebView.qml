@@ -78,7 +78,7 @@ Flickable {
         id: webView
         objectName: "webViewImplementation"
         transformOrigin: Item.TopLeft
-        settings.pluginsEnabled: true
+        //settings.pluginsEnabled: true
 
         //FIXME: glorious hack just to obtain a signal of the url of the new requested page
         newWindowComponent: Component {
