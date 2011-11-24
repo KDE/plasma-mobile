@@ -127,12 +127,7 @@ Image {
                 clip: true
                 model: settingsModulesModel
                 delegate: myDelegate
-                highlight: PlasmaCore.FrameSvgItem {
-                    id: highlightFrame
-                    imagePath: "widgets/viewitem"
-                    prefix: "selected+hover"
-                }
-
+                highlight: PlasmaComponents.Highlight {}
             }
         }
 
