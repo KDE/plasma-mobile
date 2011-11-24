@@ -47,12 +47,14 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QStack>
 
+#include "../metadatamodel.h"
+
 class ModelTest : public QObject
 {
   Q_OBJECT
 
 public:
-  ModelTest( QAbstractItemModel *model, QObject *parent = 0 );
+  ModelTest( MetadataModel *model, QObject *parent = 0 );
 
 private Q_SLOTS:
   void nonDestructiveBasicTest();
@@ -64,6 +66,8 @@ private Q_SLOTS:
   void data();
 
 protected Q_SLOTS:
+  void setResourceType(const QString type);
+
   void runAllTests();
   void layoutAboutToBeChanged();
   void layoutChanged();
@@ -75,7 +79,7 @@ protected Q_SLOTS:
 private:
   void checkChildren( const QModelIndex &parent, int currentDepth = 0 );
 
-  QAbstractItemModel *model;
+  MetadataModel *model;
 
   struct Changing {
     QModelIndex parent;

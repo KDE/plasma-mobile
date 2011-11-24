@@ -61,4 +61,4 @@ install(TARGETS datamodelsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/meta
 install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/metadatamodels)
 
 
-add_subdirectory(test)
+#add_subdirectory(test)

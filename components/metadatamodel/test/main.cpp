@@ -15,14 +15,15 @@ int main(int argc, char *argv[])
     QVBoxLayout *layout = new QVBoxLayout(widget);
 
     MetadataModel *metadataModel = new MetadataModel(widget);
-    new ModelTest(metadataModel, widget);
+    ModelTest *test = new ModelTest(metadataModel, widget);
 
-    /*QLineEdit *input = new QLineEdit(widget);
-    QObject::connect(input, SIGNAL(textChanged(QString)), metadataModel, SLOT(startQuery(QString)));
-    layout->addWidget(input);*/
+    QLineEdit *input = new QLineEdit(widget);
+    QObject::connect(input, SIGNAL(textChanged(QString)),
+                     test, SLOT(setResourceType(QString)));
+    layout->addWidget(input);
 
     metadataModel->setResourceType("nfo:Application");
-    
+
 
     QTreeView *view = new QTreeView(widget);
     view->setModel(metadataModel);

@@ -53,7 +53,7 @@ Q_DECLARE_METATYPE ( QModelIndex )
 /*!
     Connect to all of the models signals.  Whenever anything happens recheck everything.
 */
-ModelTest::ModelTest ( QAbstractItemModel *_model, QObject *parent ) : QObject ( parent ), model ( _model ), fetchingMore ( false )
+ModelTest::ModelTest ( MetadataModel *_model, QObject *parent ) : QObject ( parent ), model ( _model ), fetchingMore ( false )
 {
     Q_ASSERT ( model );
 
@@ -97,6 +97,11 @@ ModelTest::ModelTest ( QAbstractItemModel *_model, QObject *parent ) : QObject (
               this, SLOT ( rowsRemoved ( const QModelIndex &, int, int ) ) );
 
     runAllTests();
+}
+
+void ModelTest::setResourceType(const QString type)
+{
+    model->setResourceType(type);
 }
 
 void ModelTest::runAllTests()
