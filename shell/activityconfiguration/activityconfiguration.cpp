@@ -56,7 +56,10 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
       m_wallpaperIndex(-1),
       m_newContainment(false)
 {
-    setQmlPath(KStandardDirs::locate("data", "plasma-device/activityconfiguration/view.qml"));
+    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+    m_package = new Plasma::Package(QString(), "org.kde.active.activityconfiguration", structure);
+
+    setQmlPath(m_package->filePath("mainscript"));
 #ifndef NO_ACTIVITIES
     m_activityController = new KActivities::Controller(this);
 #endif

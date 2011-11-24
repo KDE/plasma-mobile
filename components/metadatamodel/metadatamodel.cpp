@@ -25,6 +25,7 @@
 #include <QTimer>
 
 #include <KDebug>
+#include <KIcon>
 #include <KMimeType>
 
 #include <soprano/vocabulary.h>
@@ -443,7 +444,7 @@ void MetadataModel::finishedListing()
 
 QVariant MetadataModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.column() > 0 ||
+    if (!index.isValid() || index.column() != 0 ||
         index.row() < 0 || index.row() >= m_resources.count()){
         return QVariant();
     }
@@ -451,6 +452,7 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     const Nepomuk::Resource &resource = m_resources[index.row()];
 
     switch (role) {
+    case Qt::DisplayRole:
     case Label:
         return resource.genericLabel();
     case Description:
@@ -484,6 +486,26 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
             }
         }
         return genericClassName;
+    }
+    case Qt::DecorationRole: {
+        QString icon = resource.genericIcon();
+        if (icon.isEmpty() && resource.isFile()) {
+            KUrl url = resource.toFile().url();
+            if (!url.isEmpty()) {
+                icon = KMimeType::iconNameForUrl(url);
+            }
+        }
+        if (icon.isEmpty()) {
+            // use resource types to find a suitable icon.
+            //TODO
+            icon = retrieveIconName(QStringList(resource.className()));
+            //kDebug() << "symbol" << icon;
+        }
+        if (icon.split(",").count() > 1) {
+            kDebug() << "More than one icon!" << icon;
+            icon = icon.split(",").last();
+        }
+        return KIcon(icon);
     }
     case HasSymbol:
     case Icon: {

@@ -43,31 +43,27 @@ Item {
                 return "nepomuk"
             }
 
-            Component.onCompleted: {
+            icon: {
                 // FIXME: remove this crap, fix icon in metadata data set
                 try {
                     if (model["iconName"]) {
-                        icon = QIcon(model["iconName"])
-                        return
+                        return QIcon(model["iconName"])
                     //check if model["icon"] is a QIcon
                     } else if (model["icon"] && model["icon"].addPixmap) {
-                        icon = model["icon"]
-                        return
+                        return model["icon"]
                     } else if (model["icon"]) {
-                        icon = QIcon(model["icon"])
-                        return
+                        return QIcon(model["icon"])
                     }
                     if (!model["hasSymbol"] && decoration) {
-                        icon = decoration
-                        return
+                        return decoration
                     }
                     var _l = hasSymbol.toString().split(",");
                     if (_l.length == 1) {
-                        icon = QIcon(hasSymbol);
+                        return QIcon(hasSymbol);
                     } else if (_l.length > 1) {
                         // pick the last one
                         var _i = _l[_l.length-1];
-                        icon = QIcon(_i);
+                        return QIcon(_i);
                     } else {
                         //print("HHH types" + types.toString());
                         resourceIcon(types.toString())
@@ -76,7 +72,7 @@ Item {
                 } catch(e) {
                     var _i = resourceIcon(className);
                     print("fallback icon: " + _i + e);
-                    icon = QIcon(_i);
+                    return QIcon(_i);
                     print("icon2:" + _i);
                 }
             }

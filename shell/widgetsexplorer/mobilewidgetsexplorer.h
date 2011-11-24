@@ -30,6 +30,7 @@ namespace Plasma
 {
     class Containment;
     class DeclarativeWidget;
+    class Package;
 }
 
 class MobileWidgetsExplorer : public QGraphicsWidget
@@ -50,6 +51,7 @@ private:
     Plasma::Containment *m_containment;
     QDeclarativeItem *m_mainWidget;
     Plasma::DeclarativeWidget *m_declarativeWidget;
+    Plasma::Package *m_package;
 
     PlasmaAppletItemModel *m_appletsModel;
 };

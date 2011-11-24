@@ -30,6 +30,7 @@ MobileComponents.Sheet {
     title: i18n("Activity configuration")
     acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
     rejectButtonText: i18n("Cancel")
+    acceptButton.enabled: activityNameEdit.text != "" && activitySource.activityNames.indexOf(activityNameEdit.text) == -1
 
     Component.onCompleted: open()
     onStatusChanged: {
@@ -40,12 +41,41 @@ MobileComponents.Sheet {
 
     function saveConfiguration()
     {
+        if (activityNameEdit.text == "" || activitySource.activityNames.indexOf(activityNameEdit.text) != -1) {
+            return
+        }
         configInterface.activityName = activityNameEdit.text
         configInterface.wallpaperIndex = wallpapersList.currentIndex
     }
 
     onAccepted: {
         saveConfiguration()
+    }
+
+    //this is used to check the same name isn't given two times
+    PlasmaCore.DataSource {
+        id: activitySource
+        property variant activityNames
+        engine: "org.kde.activities"
+        onSourceAdded: {
+            if (source != "Status") {
+                connectSource(source)
+            }
+        }
+        Component.onCompleted: {
+            connectedSources = sources.filter(function(val) {
+                return val != "Status";
+            })
+        }
+        onDataChanged: {
+            var names = new Array
+            for (var i in data) {
+                if (!data[i]["Current"]) {
+                    names.push(data[i]["Name"])
+                }
+            }
+            activitySource.activityNames = names
+        }
     }
 
     content: [
@@ -68,7 +98,20 @@ MobileComponents.Sheet {
                 Keys.onReturnPressed: saveConfiguration();
             }
         },
-
+        PlasmaComponents.Label {
+            anchors {
+                left: nameRow.right
+                verticalCenter: nameRow.verticalCenter
+            }
+            text: i18n("An activity with this name already exists")
+            opacity: activitySource.activityNames.indexOf(activityNameEdit.text) != -1
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        },
         MobileComponents.IconGrid {
             id: wallpapersList
             property int currentIndex: 0
@@ -83,9 +126,7 @@ MobileComponents.Sheet {
                 left: parent.left
                 bottom: parent.bottom
                 right: parent.right
-                leftMargin: frame.margins.left
                 topMargin: 6
-                rightMargin: frame.margins.right
                 bottomMargin: 12
             }
             model: configInterface.wallpaperModel

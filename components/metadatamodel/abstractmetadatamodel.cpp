@@ -287,7 +287,7 @@ QVariant AbstractMetadataModel::headerData(int section, Qt::Orientation orientat
 QModelIndex AbstractMetadataModel::index(int row, int column,
                                  const QModelIndex &parent) const
 {
-    if (parent.isValid() || column > 0 || row < 0 || row >= rowCount()) {
+    if (parent.isValid() || column != 0 || row < 0 || row >= rowCount()) {
         return QModelIndex();
     }
 

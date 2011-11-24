@@ -97,7 +97,7 @@ public:
     Q_INVOKABLE int find(const QString &resToFind);
 
     //Reimplemented
-    QVariant data(const QModelIndex &index, int role) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
 Q_SIGNALS:
     void queryStringChanged();

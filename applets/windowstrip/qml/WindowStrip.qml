@@ -37,7 +37,7 @@ Item {
         engine: "tasks"
         interval: 0
         onSourceAdded: {
-            //print("SOURCE added: " + source);
+            print("SOURCE added: " + source);
             connectSource(source)
         }
         Component.onCompleted: {

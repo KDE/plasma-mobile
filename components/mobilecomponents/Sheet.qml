@@ -34,6 +34,8 @@ Item {
     property int status: PlasmaComponents.DialogStatus.Closed
     property alias acceptButtonText: acceptButton.text
     property alias rejectButtonText: rejectButton.text
+    property alias acceptButton: acceptButton
+    property alias rejectButton: rejectButton
     property Item visualParent
 
     signal accepted

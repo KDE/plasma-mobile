@@ -37,6 +37,7 @@
 //Plasma
 #include <Plasma/Containment>
 #include <Plasma/DeclarativeWidget>
+#include <Plasma/Package>
 
 MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
     : QGraphicsWidget(parent),
@@ -53,7 +54,10 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
     m_appletsModel = new PlasmaAppletItemModel(this);
     m_appletsModel->setApplication(QString());
 
-    m_declarativeWidget->setQmlPath(KStandardDirs::locate("data", "plasma-device/mobilewidgetsexplorer/view.qml"));
+    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
+    m_package = new Plasma::Package(QString(), "org.kde.active.widgetexplorer", structure);
+
+    m_declarativeWidget->setQmlPath(m_package->filePath("mainscript"));
 
     if (m_declarativeWidget->engine()) {
         QDeclarativeContext *ctxt = m_declarativeWidget->engine()->rootContext();
