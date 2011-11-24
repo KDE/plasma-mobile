@@ -31,6 +31,7 @@
 #include <QTimer>
 #include <QVariant>
 
+#include <kauthaction.h>
 #include <kdemacros.h>
 #include <KPluginFactory>
 #include <KPluginLoader>
@@ -62,7 +63,8 @@ public:
     QString timezone;
     QObject *timeZonesModel;
     QString timeZoneFilter;
-    QString currentTime;
+    QString currentTimeText;
+    QTime currentTime;
     QTimer *timer;
 
     void initSettings();
@@ -166,20 +168,90 @@ void TimeSettingsPrivate::initSettings()
 
 void TimeSettings::timeout()
 {
-    setCurrentTime(KGlobal::locale()->formatTime(QTime::currentTime(), true));
+    setCurrentTime(QTime::currentTime());
 }
 
 
-QString TimeSettings::currentTime()
+QString TimeSettings::currentTimeText()
+{
+    return d->currentTimeText;
+}
+
+QTime TimeSettings::currentTime() const
 {
     return d->currentTime;
 }
 
-void TimeSettings::setCurrentTime(const QString &currentTime)
+void TimeSettings::setCurrentTime(const QTime &currentTime)
 {
     if (d->currentTime != currentTime) {
         d->currentTime = currentTime;
+        d->currentTimeText = KGlobal::locale()->formatTime(QTime::currentTime(), true);
         emit currentTimeChanged();
+    }
+}
+
+void TimeSettings::saveTime()
+{
+    kWarning()<<"AAAAA"<<d->currentTime;
+
+    QVariantMap helperargs;
+
+
+    //TODO: enable NTP
+    // Save the order, but don't duplicate!
+    /*QStringList list;
+    if (timeServerList->count() != 0) {
+        list.append(timeServerList->currentText());
+    for (int i=0; i<timeServerList->count();i++) {
+        QString text = timeServerList->itemText(i);
+        if( !list.contains(text) )
+        list.append(text);
+        // Limit so errors can go away and not stored forever
+        if( list.count() == 10)
+        break;
+    }
+
+    helperargs["ntp"] = true;
+    helperargs["ntpServers"] = list;
+    helperargs["ntpEnabled"] = setDateTimeAuto->isChecked();
+    helperargs["ntpUtility"] = ntpUtility;
+
+    if (setDateTimeAuto->isChecked() && !ntpUtility.isEmpty()) {
+        // NTP Time setting - done in helper
+        timeServer = timeServerList->currentText();
+        kDebug() << "Setting date from time server " << timeServer;
+    } else*/ {
+        // User time setting
+        QDateTime dt(QDate::currentDate(), d->currentTime);
+
+        kDebug() << "Set date " << dt;
+
+        helperargs["date"] = true;
+        helperargs["newdate"] = QString::number(dt.toTime_t());
+        helperargs["olddate"] = QString::number(::time(0));
+    }
+
+    /*TODO: enable timeZones
+    QStringList selectedZones(tzonelist->selection());
+
+    if (selectedZones.count() > 0) {
+        QString selectedzone(selectedZones[0]);
+        helperargs["tz"] = true;
+        helperargs["tzone"] = selectedzone;
+    } else {
+        helperargs["tzreset"] = true; // // make the helper reset the timezone
+    }*/
+
+
+
+    KAuth::Action writeAction("org.kde.active.clockconfig.save");
+    writeAction.setHelperID("org.kde.active.clockconfig");
+    writeAction.setArguments(helperargs);
+
+    KAuth::ActionReply reply = writeAction.execute();
+    if (reply.failed()) {
+        kWarning()<< "KAuth returned an error code:" << reply.errorCode();
     }
 }
 

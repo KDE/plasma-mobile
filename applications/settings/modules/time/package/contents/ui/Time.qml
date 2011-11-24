@@ -113,6 +113,74 @@ Item {
         anchors.margins: 60
     }
 
+    PlasmaComponents.TextField {
+        id: timeinputfield
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: timeZonePicker.bottom
+        }
+        Keys.onReturnPressed: {
+            timeSettings.currentTime = text
+            timeSettings.saveTime()
+        }
+    }
+    Row {
+        y: 300
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            //top: timeinputfield.bottom
+        }
+        PathView {
+            width: 24
+            height: 48
+            model: timeSettings.twentyFour ? 24 : 12
+            delegate: PlasmaComponents.Label {
+                text: index
+                font.pointSize: 18
+            }
+            path: Path {
+                startX: 0; startY: 0
+                PathLine { x: 0; y: 48}
+            }
+        }
+        ListView {
+            width: 48
+            height: 64
+            model: 60
+            delegate: PlasmaComponents.Label {
+                text: index
+                font.pointSize: 18
+            }
+        }
+        Rectangle {
+            width: 24
+            height: 48
+            PathView {
+                id: spinnerView
+                width: 24
+                height: 60
+                model: 60
+                //clip: true
+                //pathItemCount: 5
+                dragMargin: 800
+                preferredHighlightBegin: 0.5
+                preferredHighlightEnd: 0.5
+                delegate: PlasmaComponents.Label {
+                    text: index
+                    font.pointSize: 20
+                }
+                currentIndex: {
+                    var date = new Date("January 1, 1971 "+timeSettings.currentTime);
+                    return date.getSeconds()
+                }
+                path: Path {
+                    startX: spinnerView.width/2; startY: -spinnerView.height*spinnerView.count/4
+                    PathLine { x: spinnerView.width/2; y: spinnerView.height*spinnerView.count/4}
+                }
+            }
+        }
+    }
+
     Component.onCompleted: {
         print("Time.qml done loading.");
         //print("settingsObject.name" + timeSettings.name);

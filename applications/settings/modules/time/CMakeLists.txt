@@ -19,3 +19,14 @@ install(TARGETS active_settings_time DESTINATION ${PLUGIN_INSTALL_DIR})
 # Time and Date
 install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.settings.time)
 install(FILES package/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-package-org.kde.active.settings.time.desktop)
+
+
+########### helper ###############
+
+kde4_add_executable(activedatetimehelper helper.cpp ${helper_mocs})
+target_link_libraries(activedatetimehelper ${KDE4_KDECORE_LIBS})
+install(TARGETS activedatetimehelper DESTINATION ${LIBEXEC_INSTALL_DIR})
+
+kde4_install_auth_helper_files(activedatetimehelper org.kde.active.clockconfig root)
+
+kde4_install_auth_actions(org.kde.active.clockconfig clockconfig_actions.actions)
