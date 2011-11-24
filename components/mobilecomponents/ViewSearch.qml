@@ -36,7 +36,7 @@ Item {
 
     width: searchField.width
 
-    height: 64
+    height: searchField.height
     PlasmaComponents.TextField {
         id : searchField
 
