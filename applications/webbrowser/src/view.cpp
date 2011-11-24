@@ -50,6 +50,12 @@ View::View(const QString &url, QWidget *parent)
       m_useGL(false),
       m_completionModel(new CompletionModel(this))
 {
+    // avoid flicker on show
+    setAttribute(Qt::WA_OpaquePaintEvent);
+    setAttribute(Qt::WA_NoSystemBackground);
+    viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
+    viewport()->setAttribute(Qt::WA_NoSystemBackground);
+
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
 
     KDeclarative kdeclarative;
