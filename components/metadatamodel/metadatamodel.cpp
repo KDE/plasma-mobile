@@ -443,7 +443,7 @@ void MetadataModel::finishedListing()
 
 QVariant MetadataModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.column() > 0 ||
+    if (!index.isValid() || index.column() != 0 ||
         index.row() < 0 || index.row() >= m_resources.count()){
         return QVariant();
     }
