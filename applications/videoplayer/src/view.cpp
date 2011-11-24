@@ -41,6 +41,12 @@ AppView::AppView(const QString &url, QWidget *parent)
       m_videoPlayer(0),
       m_useGL(false)
 {
+    // avoid flicker on show
+    setAttribute(Qt::WA_OpaquePaintEvent);
+    setAttribute(Qt::WA_NoSystemBackground);
+    viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
+    viewport()->setAttribute(Qt::WA_NoSystemBackground);
+
     setResizeMode(QDeclarativeView::SizeRootObjectToView);
 
     KDeclarative kdeclarative;
