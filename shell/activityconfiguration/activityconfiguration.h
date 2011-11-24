@@ -37,6 +37,7 @@ namespace KActivities
 namespace Plasma
 {
     class Containment;
+    class Package;
 }
 
 class ActivityConfiguration : public Plasma::DeclarativeWidget
@@ -93,6 +94,7 @@ private:
     QDeclarativeItem *m_mainWidget;
     BackgroundListModel *m_model;
     KActivities::Controller *m_activityController;
+    Plasma::Package *m_package;
     QString m_activityName;
     int m_wallpaperIndex;
     bool m_newContainment;

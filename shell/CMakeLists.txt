@@ -56,6 +56,6 @@ install(TARGETS plasma-device ${INSTALL_TARGETS_DEFAULT_ARGS} )
 #install(FILES plasma-device.desktop DESTINATION ${AUTOSTART_INSTALL_DIR})
 
 install(DIRECTORY widgetsexplorer/qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma-device/mobilewidgetsexplorer PATTERN .svn EXCLUDE)
-install(DIRECTORY activityconfiguration/qml/ DESTINATION ${DATA_INSTALL_DIR}/plasma-device/activityconfiguration PATTERN .svn EXCLUDE)
+install(DIRECTORY activityconfiguration/package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.activityconfiguration PATTERN .svn EXCLUDE PATTERN Messages.sh EXCLUDE)
 
 add_subdirectory(firstrun)
