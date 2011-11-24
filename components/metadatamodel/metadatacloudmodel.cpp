@@ -340,7 +340,7 @@ void MetadataCloudModel::finishedListing()
 
 QVariant MetadataCloudModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.column() > 0 ||
+    if (!index.isValid() || index.column() != 0 ||
         index.row() < 0 || index.row() >= m_results.count()){
         return QVariant();
     }
