@@ -32,16 +32,15 @@ Item {
         engine: "org.kde.preview"
 
         interval: 0
+        connectedSources: [url]
         Component.onCompleted: {
             print(" setting URL: " + url);
-            pmSource.connectedSources = [url]
             if (data[url] == undefined) {
                 previewFrame.visible = false
                 return
             }
             previewFrame.visible = data[url]["status"] == "done"
             iconItem.visible = !previewFrame.visible
-            previewImage.image = data[url]["thumbnail"]
         }
         onDataChanged: {
             for (k in data) {
@@ -51,7 +50,6 @@ Item {
             //print(" dataChanged: URL " + data[url]);
             previewFrame.visible = (data[url]["status"] == "done")
             iconItem.visible = !previewFrame.visible
-            previewImage.image = data[url]["thumbnail"]
         }
     }
 
@@ -97,6 +95,7 @@ Item {
                 QImageItem {
                     id: previewImage
                     anchors.centerIn: parent
+                    image: pmSource.data[url] ? pmSource.data[url]["thumbnail"] : undefined
 
                     width: {
                         if (nativeWidth/nativeHeight >= parent.width/parent.height) {
