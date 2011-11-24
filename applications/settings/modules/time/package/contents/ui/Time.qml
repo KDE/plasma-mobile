@@ -21,7 +21,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-//import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1
 
 Item {
@@ -34,8 +34,9 @@ Item {
 
     width: 800; height: 500
 
-    PlasmaCore.Theme {
-        id: theme
+    MobileComponents.Package {
+        id: timePackage
+        name: "org.kde.active.settings.time"
     }
 
     Column {
@@ -124,24 +125,74 @@ Item {
             timeSettings.saveTime()
         }
     }
-    Row {
+    PlasmaCore.FrameSvgItem {
         y: 300
-        spacing: 3
+        imagePath: timePackage.filePath("images", "throbber.svgz")
         anchors {
             horizontalCenter: parent.horizontalCenter
-            //top: timeinputfield.bottom
         }
-        Digit {
-            model: timeSettings.twentyFour ? 24 : 12
-        }
-        Digit {
-            model: 60
-        }
-        Digit {
-            model: 60
-            currentIndex: {
-                var date = new Date("January 1, 1971 "+timeSettings.currentTime);
-                return date.getSeconds()
+        width: clockRow.width + margins.left + margins.right
+        height: clockRow.height + margins.top + margins.bottom
+
+        Row {
+            id: clockRow
+            spacing: 3
+            x: parent.margins.left
+            y: parent.margins.top
+
+            Digit {
+                model: timeSettings.twentyFour ? 24 : 12
+            }
+            PlasmaCore.SvgItem {
+                svg: PlasmaCore.Svg {imagePath: "widgets/line"}
+                elementId: "vertical-line"
+                width: naturalSize.width
+                anchors {
+                    top: parent.top
+                    bottom:parent.bottom
+                }
+            }
+            Digit {
+                model: 60
+            }
+            PlasmaCore.SvgItem {
+                svg: PlasmaCore.Svg {imagePath: "widgets/line"}
+                elementId: "vertical-line"
+                width: naturalSize.width
+                anchors {
+                    top: parent.top
+                    bottom:parent.bottom
+                }
+            }
+            Digit {
+                model: 60
+                currentIndex: {
+                    var date = new Date("January 1, 1971 "+timeSettings.currentTime);
+                    return date.getSeconds()
+                }
+            }
+            PlasmaCore.SvgItem {
+                svg: PlasmaCore.Svg {imagePath: "widgets/line"}
+                elementId: "vertical-line"
+                width: naturalSize.width
+                anchors {
+                    top: parent.top
+                    bottom:parent.bottom
+                }
+            }
+            Digit {
+                model: ListModel {
+                    ListElement {
+                        meridiae: "AM"
+                    }
+                    ListElement {
+                        meridiae: "PM"
+                    }
+                }
+                delegate: Text {
+                    text: meridiae
+                    font.pointSize: 25
+                }
             }
         }
     }

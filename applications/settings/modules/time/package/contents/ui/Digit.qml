@@ -24,28 +24,29 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.active.settings 0.1
 
 
-Rectangle {
+Item {
     id: root
 
     property alias model: spinnerView.model
     property alias currentIndex: spinnerView.currentIndex
+    property alias delegate: spinnerView.delegate
 
-    width: placeHolder.width*2
+    width: placeHolder.width*1.3
     height: placeHolder.height*3
 
     Text {
         id: placeHolder
         visible: false
         font.pointSize: 25
-        text: "M"
+        text: "00"
     }
 
     PathView {
         id: spinnerView
         anchors.fill: parent
         model: 60
-        //clip: true
-        //pathItemCount: 5
+        clip: true
+        pathItemCount: 5
         dragMargin: 800
         preferredHighlightBegin: 0.5
         preferredHighlightEnd: 0.5
@@ -56,10 +57,10 @@ Rectangle {
 
         path: Path {
             startX: spinnerView.width/2
-            startY: -spinnerView.height*spinnerView.count/4
+            startY: spinnerView.height + 1.5*placeHolder.height
             PathLine { 
                 x: spinnerView.width/2
-                y: spinnerView.height*spinnerView.count/4
+                y: -1.5*placeHolder.height
             }
         }
     }
