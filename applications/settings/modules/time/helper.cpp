@@ -26,6 +26,7 @@
 */
 
 #include "helper.h"
+#include "config.h"
 
 #include <sys/time.h>
 #include <time.h>
@@ -39,8 +40,7 @@
 #include <QFile>
 #include <QDebug>
 
-/* KDE's configuration directory */
-#define KDE_CONFDIR "/opt/kde4/share/config"
+
 
 int ClockHelper::ntp( const QStringList& ntpServers, bool ntpEnabled,
                       const QString& ntpUtility )
