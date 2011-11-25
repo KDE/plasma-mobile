@@ -100,7 +100,7 @@ Item {
         PlasmaComponents.Button {
             id: timeZoneButton
             text: timeSettings.timeZone
-            onClicked: timeZonePicker.open()
+            onClicked: timeZonePickerDialog.open()
         }
     }
 
@@ -114,7 +114,7 @@ Item {
     }
 
     PlasmaComponents.CommonDialog {
-        id: timeZonePicker
+        id: timeZonePickerDialog
         titleText: i18n("Timezones")
         buttonTexts: [i18n("Close")]
         onButtonClicked: close()

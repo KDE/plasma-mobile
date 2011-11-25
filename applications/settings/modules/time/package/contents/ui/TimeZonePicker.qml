@@ -91,12 +91,11 @@ Item {
         //height: 500
         width: parent.width
         clip: true
-        spacing: 8
-        cacheBuffer: 10000
+        cacheBuffer: 90000
         anchors {
             //verticalCenter: parent.verticalCenter
             top: tzFilter.bottom
-            topMargin: spacing
+            topMargin: 8
             bottom: parent.bottom
             left: parent.left
             right: parent.right
@@ -106,10 +105,6 @@ Item {
         section.delegate: PlasmaComponents.ListItem {
             sectionDelegate: true
             PlasmaComponents.Label {
-                anchors {
-                    top: parent.top; topMargin: 4
-                    left: parent.left; leftMargin: 4
-                }
                 text: section
                 horizontalAlignment: Text.AlignLeft
                 font { bold: true; }
@@ -134,36 +129,16 @@ Item {
 
     Component {
         id: timeZoneDelegate
-        Item {
-            id: tzDelegateContainer
-            height: 24
-            width: timeZonesList.width
-
-            Text {
-                id: tzLabel
-                anchors.fill: parent
+        PlasmaComponents.ListItem {
+            PlasmaComponents.Label {
                 text: display
-                //text: modelData.name
-                color: theme.textColor
             }
-
-            MouseArea {
-                id: theMouse
-                anchors.margins: timeZonesList.spacing / -2 +2
-                anchors.fill: tzDelegateContainer
-                onPressed: { print("pressed " + index); timeZonesList.currentIndex = index; }
-                onClicked: SequentialAnimation {
-                    MobileComponents.ActivateAnimation { targetItem: tzDelegateContainer }
-                    ScriptAction {
-                        script: {
-                            print (" save: " + display);
-                            timeSettings.saveTimeZone(display);
-                            dialog.state = "closed";
-                        }
-                    }
-                }
+            enabled: true
+            onClicked: {
+                print (" save: " + display);
+                timeSettings.saveTimeZone(display)
+                timeZonePickerDialog.close()
             }
-            //Rectangle { anchors.fill: theMouse; color: "green"; opacity: 0.2; }
         }
     }
     //Rectangle { anchors.fill: timeZonePicker; color: "green"; opacity: 0.1; }
