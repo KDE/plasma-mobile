@@ -45,7 +45,7 @@ using namespace Nepomuk::Vocabulary;
 DocumentsEnginePrivate::DocumentsEnginePrivate(DocumentsEngine * parent)
     : q(parent)
 {
-    activitymanager = new KActivities::Consumer(this);
+    activitymanager = new Activities::Consumer(this);
 
     QDBusConnection dbus = QDBusConnection::sessionBus();
 
