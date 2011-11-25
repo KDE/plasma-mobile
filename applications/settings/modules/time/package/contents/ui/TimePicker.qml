@@ -25,7 +25,23 @@ import org.kde.active.settings 0.1
 
 
 PlasmaCore.FrameSvgItem {
-    
+    id: root
+
+    Connections {
+        target: timeSettings
+        onCurrentTimeChanged: {
+            var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+            root.hours = date.getHours()
+            root.minutes = date.getMinutes()
+            root.seconds = date.getSeconds()
+        }
+    }
+
+    property int hours
+    property int minutes
+    property int seconds
+
+
     imagePath: timePackage.filePath("images", "throbber.svgz")
     anchors {
         horizontalCenter: parent.horizontalCenter
@@ -41,6 +57,7 @@ PlasmaCore.FrameSvgItem {
 
         Digit {
             model: timeSettings.twentyFour ? 24 : 12
+            currentIndex: timeSettings.twentyFour || hours < 12 ? hours : hours - 12
         }
         PlasmaCore.SvgItem {
             svg: PlasmaCore.Svg {imagePath: "widgets/line"}
@@ -53,6 +70,7 @@ PlasmaCore.FrameSvgItem {
         }
         Digit {
             model: 60
+            currentIndex: minutes
         }
         PlasmaCore.SvgItem {
             svg: PlasmaCore.Svg {imagePath: "widgets/line"}
@@ -65,12 +83,10 @@ PlasmaCore.FrameSvgItem {
         }
         Digit {
             model: 60
-            currentIndex: {
-                var date = new Date("January 1, 1971 "+timeSettings.currentTime);
-                return date.getSeconds()
-            }
+            currentIndex: seconds
         }
         PlasmaCore.SvgItem {
+            visible: !timeSettings.twentyFour
             svg: PlasmaCore.Svg {imagePath: "widgets/line"}
             elementId: "vertical-line"
             width: naturalSize.width
@@ -80,6 +96,7 @@ PlasmaCore.FrameSvgItem {
             }
         }
         Digit {
+            visible: !timeSettings.twentyFour
             model: ListModel {
                 ListElement {
                     meridiae: "AM"
@@ -92,6 +109,7 @@ PlasmaCore.FrameSvgItem {
                 text: meridiae
                 font.pointSize: 25
             }
+            currentIndex: hours > 12 ? 1 : 0
         }
     }
 }
