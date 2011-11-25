@@ -56,13 +56,6 @@ Item {
             text: moduleDescription
             opacity: .4
         }
-        Text {
-            color: theme.textColor
-            font.pixelSize: 32
-            style: Text.Sunken
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: timeSettings.currentTime
-        }
     }
 
     Item {
@@ -107,26 +100,15 @@ Item {
         onClicked: timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
     }
 
+
+    TimePicker {
+        y: 300
+    }
+
     Dialog {
         id: timeZonePicker
         source: "TimeZonePicker.qml"
-        anchors.fill: parent
         anchors.margins: 60
-    }
-
-    PlasmaComponents.TextField {
-        id: timeinputfield
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: timeZonePicker.bottom
-        }
-        Keys.onReturnPressed: {
-            timeSettings.currentTime = text
-            timeSettings.saveTime()
-        }
-    }
-    TimePicker {
-        y: 300
     }
 
     Component.onCompleted: {

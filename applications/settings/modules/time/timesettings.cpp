@@ -193,8 +193,6 @@ void TimeSettings::setCurrentTime(const QTime &currentTime)
 
 void TimeSettings::saveTime()
 {
-    kWarning()<<"AAAAA"<<d->currentTime;
-
     QVariantMap helperargs;
 
 

@@ -30,6 +30,8 @@ Item {
     property alias model: spinnerView.model
     property alias currentIndex: spinnerView.currentIndex
     property alias delegate: spinnerView.delegate
+    property alias moving: spinnerView.moving
+    property int selectedIndex: -1
 
     width: placeHolder.width*1.3
     height: placeHolder.height*3
@@ -51,8 +53,17 @@ Item {
         preferredHighlightBegin: 0.5
         preferredHighlightEnd: 0.5
         delegate: Text {
+            property int ownIndex: index
             text: index < 10 ? "0"+index : index
             font.pointSize: 25
+        }
+
+        onMovingChanged: {
+            userConfiguring = true
+            if (!moving) {
+                userConfiguringTimer.restart()
+                selectedIndex = childAt(width/2, height/2).ownIndex
+            }
         }
 
         path: Path {
