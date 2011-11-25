@@ -202,4 +202,4 @@ Description[wa]=Les politikes do sistinme vos espaitchèt d' schaper les apontia
 Description[x-test]=xxSystem policies prevent you from saving the date/time settings.xx
 Description[zh_CN]=系统安全策略不允许您保存日期/时间设置。
 Description[zh_TW]=系統政策不允許您儲存日期與時間的設定
-Policy=auth_admin
+Policy=yes
