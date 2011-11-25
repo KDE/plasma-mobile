@@ -24,11 +24,16 @@
 #include <QAction>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QDBusInterface>
+#include <QDBusPendingCallWatcher>
+#include <QDBusReply>
 #include <QFileInfo>
 #include <QDir>
 #include <QPushButton>
 #include <QGraphicsLinearLayout>
+#include <QTimer>
 
+#include <KStandardDirs>
 #include <KWindowSystem>
 #include <KIcon>
 #include <KIconLoader>
@@ -46,13 +51,21 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
       m_applet(0),
       m_containment(0),
       m_corona(corona),
-      m_location(Plasma::Floating)
+      m_location(Plasma::Floating),
+      m_switchKeyboardLayoutScheduled(false)
 {
     setContainment(containment);
     m_closeButton = new Plasma::IconWidget(m_containment);
     m_closeButton->setSvg("widgets/configuration-icons", "close");
     m_closeButton->setMaximumSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
     connect(m_closeButton, SIGNAL(clicked()), this, SLOT(hide()));
+
+    m_keyboardLayoutButton = new Plasma::IconWidget(m_containment);
+    m_keyboardLayoutButton->setMaximumSize(QSize(KIconLoader::SizeMedium, KIconLoader::SizeMedium));
+    connect(m_keyboardLayoutButton, SIGNAL(clicked()), this, SLOT(nextKeyboardLayout()));
+    QDBusConnection dbus = QDBusConnection::sessionBus();
+    dbus.connect("org.kde.keyboard", "/Layouts", "org.kde.KeyboardLayouts", "currentLayoutChanged", this, SLOT(currentKeyboardLayoutChanged()));
+    dbus.connect("org.kde.keyboard", "/Layouts", "org.kde.KeyboardLayouts", "layoutListChanged", this, SLOT(refreshKeyboardLayoutInformation()));
 
     m_moveButton = new Plasma::IconWidget(m_containment);
     m_moveButton->setSvg("keyboardshell/arrows", "up-arrow");
@@ -64,6 +77,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     KWindowSystem::setType(winId(), NET::Dock);
     setAttribute(Qt::WA_X11DoNotAcceptFocus);
     setWindowFlags(Qt::X11BypassWindowManagerHint);
+
     QFileInfo info(pluginName);
     if (!info.isAbsolute()) {
         info = QFileInfo(QDir::currentPath() + "/" + pluginName);
@@ -83,10 +97,11 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 
     QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(m_containment);
     lay->addItem(m_applet);
-    QGraphicsLinearLayout *vLay = new QGraphicsLinearLayout(Qt::Vertical);
-    lay->addItem(vLay);
-    vLay->addItem(m_closeButton);
-    vLay->addItem(m_moveButton);
+    m_controlButtonsLayouts = new QGraphicsLinearLayout(Qt::Vertical);
+    lay->addItem(m_controlButtonsLayouts);
+    m_controlButtonsLayouts->addItem(m_closeButton);
+    m_controlButtonsLayouts->addItem(m_moveButton);
+    m_controlButtonsLayouts->addItem(m_keyboardLayoutButton);
     setGraphicsWidget(m_containment);
 
     if (!m_applet) {
@@ -112,6 +127,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 
     hide();
     setLocation(Plasma::BottomEdge);
+    refreshKeyboardLayoutInformation();
 }
 
 KeyboardDialog::~KeyboardDialog()
@@ -143,6 +159,109 @@ Plasma::Location KeyboardDialog::location() const
 Plasma::FormFactor KeyboardDialog::formFactor() const
 {
     return m_containment->formFactor();
+}
+
+void KeyboardDialog::nextKeyboardLayout()
+{
+    m_switchKeyboardLayoutScheduled = true;
+    refreshKeyboardLayoutInformation();
+}
+
+void KeyboardDialog::refreshKeyboardLayoutInformation()
+{
+    QDBusInterface keyboards("org.kde.keyboard", "/Layouts");
+    QDBusPendingReply<QStringList> reply = keyboards.asyncCall("getLayoutsList");
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+    connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+            this, SLOT(layoutsReceived(QDBusPendingCallWatcher*)));
+}
+
+void KeyboardDialog::layoutsReceived(QDBusPendingCallWatcher *watcher)
+{
+    QDBusReply<QStringList> reply(*watcher);
+    QTimer::singleShot(0, watcher, SLOT(deleteLater()));
+    if (!reply.isValid()) {
+        return;
+    }
+
+    m_keyboardLayouts = reply.value();
+    if (m_keyboardLayouts.size() < 2) {
+        m_keyboardLayoutButton->hide();
+        m_controlButtonsLayouts->removeItem(m_keyboardLayoutButton);
+    } else {
+        if (!m_keyboardLayoutButton->isVisible()) {
+            m_keyboardLayoutButton->show();
+            m_controlButtonsLayouts->addItem(m_keyboardLayoutButton);
+        }
+        QDBusInterface keyboards("org.kde.keyboard", "/Layouts");
+        QDBusPendingReply<QString> reply = keyboards.asyncCall("getCurrentLayout");
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+        connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                this, SLOT(currentLayoutReceived(QDBusPendingCallWatcher*)));
+    }
+}
+
+void KeyboardDialog::currentLayoutReceived(QDBusPendingCallWatcher *watcher)
+{
+    QDBusReply<QString> reply(*watcher);
+    QTimer::singleShot(0, watcher, SLOT(deleteLater()));
+    if (!reply.isValid()) {
+        return;
+    }
+
+    const QString layout = reply.value();
+    int index = m_keyboardLayouts.indexOf(layout);
+    if (index == -1) {
+        refreshKeyboardLayoutInformation();
+        return;
+    }
+
+    if (m_switchKeyboardLayoutScheduled) {
+        m_switchKeyboardLayoutScheduled = false;
+        index = (index + 1) % m_keyboardLayouts.count();
+
+        QDBusInterface keyboards("org.kde.keyboard", "/Layouts");
+        keyboards.asyncCall("setLayout", m_keyboardLayouts.at(index));
+        return;
+    }
+
+    QIcon icon;
+    if (m_iconMap.contains(layout)) {
+        icon = m_iconMap[layout];
+    } else {
+        QString file;
+        if (layout == "epo") {
+            file = KStandardDirs::locate("data", "kcmkeyboard/pics/epo.png");
+        } else {
+            QString countryCode;
+            if (countryCode == "nec_vndr/jp") {
+                countryCode = "jp";
+            } else if (layout.length() < 3) {
+                countryCode = layout;
+            }
+
+            file = KStandardDirs::locate("locale", QString("l10n/%1/flag.png").arg(countryCode));
+        }
+
+        if (!file.isEmpty()) {
+            icon.addFile(file);
+        }
+    }
+
+    if (icon.isNull()) {
+        m_keyboardLayoutButton->setIcon(QIcon());
+        m_keyboardLayoutButton->setText(layout);
+        m_iconMap.insert(layout, QIcon());
+    } else {
+        m_iconMap.insert(layout, icon);
+        m_keyboardLayoutButton->setIcon(icon);
+        m_keyboardLayoutButton->setText(QString());
+    }
+}
+
+void KeyboardDialog::currentKeyboardLayoutChanged()
+{
+    refreshKeyboardLayoutInformation();
 }
 
 void KeyboardDialog::swapScreenEdge()
