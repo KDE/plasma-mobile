@@ -88,8 +88,6 @@ Item {
     ListView {
         id: timeZonesList
         currentIndex: -1
-        //height: 500
-        width: parent.width
         clip: true
         cacheBuffer: 90000
         anchors {
@@ -100,14 +98,16 @@ Item {
             left: parent.left
             right: parent.right
         }
-        section.property: "continent"
-        section.criteria: ViewSection.FullString
-        section.delegate: PlasmaComponents.ListItem {
-            sectionDelegate: true
-            PlasmaComponents.Label {
-                text: section
-                horizontalAlignment: Text.AlignLeft
-                font { bold: true; }
+        section {
+            property: "continent"
+            criteria: ViewSection.FullString
+            delegate: PlasmaComponents.ListItem {
+                sectionDelegate: true
+                PlasmaComponents.Label {
+                    text: section
+                    horizontalAlignment: Text.AlignLeft
+                    font { bold: true; }
+                }
             }
         }
 
