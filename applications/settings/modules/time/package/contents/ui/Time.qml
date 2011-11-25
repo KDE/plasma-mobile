@@ -58,23 +58,28 @@ Item {
         }
     }
 
-    Item {
-        id: twentyFourItem
-        anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: 32; }
+    Grid {
+        id: formLayout
+        columns: 2
+        rows: 3
+        spacing: theme.defaultFont.mSize.height
+        anchors {
+            top: titleCol.bottom
+            horizontalCenter: parent.horizontalCenter
+            topMargin: theme.defaultFont.mSize.height*3
+        }
 
-        Text {
-            color: theme.textColor
-            anchors.right: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
+        PlasmaComponents.Label {
             text: i18n("Use 24-hour clock:")
-            anchors.rightMargin: 12
-            //opacity: 1
+            anchors {
+                right: twentyFourSwitch.left
+                rightMargin: theme.defaultFont.mSize.width
+            }
         }
 
         PlasmaComponents.Switch {
+            id: twentyFourSwitch
             checked: timeSettings.twentyFour
-            anchors.left: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
 
             onClicked : {
                 timeSettings.twentyFour = checked
@@ -82,27 +87,30 @@ Item {
             }
         }
 
-    }
 
-    Text {
-        id: timeZoneLabel
-        color: theme.textColor
-        anchors.right: parent.horizontalCenter
-        anchors.top: twentyFourItem.bottom
-        anchors.topMargin: 48
-        text: i18n("Timezone:")
-        anchors.rightMargin: 12
-    }
+        PlasmaComponents.Label {
+            id: timeZoneLabel
+            text: i18n("Timezone:")
+            anchors {
+                right: timeZoneButton.left
+                rightMargin: theme.defaultFont.mSize.width
+            }
+        }
 
-    PlasmaComponents.Button {
-        anchors { verticalCenter: timeZoneLabel.verticalCenter; left: parent.horizontalCenter;}
-        text: timeSettings.timeZone
-        onClicked: timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
+        PlasmaComponents.Button {
+            id: timeZoneButton
+            text: timeSettings.timeZone
+            onClicked: timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
+        }
     }
 
 
     TimePicker {
-        y: 300
+        anchors {
+            top: formLayout.bottom
+            topMargin: theme.defaultFont.mSize.height*3
+            horizontalCenter: parent.horizontalCenter
+        }
     }
 
     Dialog {

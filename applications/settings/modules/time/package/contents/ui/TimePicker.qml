@@ -26,6 +26,7 @@ import org.kde.active.settings 0.1
 
 PlasmaCore.FrameSvgItem {
     id: root
+    clip: true
 
     Connections {
         target: timeSettings
@@ -41,6 +42,12 @@ PlasmaCore.FrameSvgItem {
         }
     }
 
+    Behavior on width {
+        NumberAnimation {
+            duration: 250
+            easing.type: Easing.InOutQuad
+        }
+    }
     property int hours
     property int minutes
     property int seconds
@@ -142,7 +149,7 @@ PlasmaCore.FrameSvgItem {
             }
         }
         PlasmaCore.SvgItem {
-            visible: !timeSettings.twentyFour
+            opacity: timeSettings.twentyFour ? 0 : 1
             svg: PlasmaCore.Svg {imagePath: "widgets/line"}
             elementId: "vertical-line"
             width: naturalSize.width
@@ -150,10 +157,16 @@ PlasmaCore.FrameSvgItem {
                 top: parent.top
                 bottom:parent.bottom
             }
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
         }
         Digit {
             id: meridiaeDigit
-            visible: !timeSettings.twentyFour
+            opacity: timeSettings.twentyFour ? 0 : 1
             property bool isAm: (selectedIndex > -1) ? (selectedIndex < 1) : (currentIndex < 1)
             model: ListModel {
                 ListElement {
@@ -178,6 +191,12 @@ PlasmaCore.FrameSvgItem {
                     } else {
                         hours += 12
                     }
+                }
+            }
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
                 }
             }
         }
