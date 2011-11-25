@@ -21,7 +21,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-//import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1
 
 Item {
@@ -34,8 +34,9 @@ Item {
 
     width: 800; height: 500
 
-    PlasmaCore.Theme {
-        id: theme
+    MobileComponents.Package {
+        id: timePackage
+        name: "org.kde.active.settings.time"
     }
 
     Column {
@@ -55,32 +56,30 @@ Item {
             text: moduleDescription
             opacity: .4
         }
-        Text {
-            color: theme.textColor
-            font.pixelSize: 32
-            style: Text.Sunken
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: timeSettings.currentTime
-        }
     }
 
-    Item {
-        id: twentyFourItem
-        anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: 32; }
+    Grid {
+        id: formLayout
+        columns: 2
+        rows: 3
+        spacing: theme.defaultFont.mSize.height
+        anchors {
+            top: titleCol.bottom
+            horizontalCenter: parent.horizontalCenter
+            topMargin: theme.defaultFont.mSize.height*3
+        }
 
-        Text {
-            color: theme.textColor
-            anchors.right: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
+        PlasmaComponents.Label {
             text: i18n("Use 24-hour clock:")
-            anchors.rightMargin: 12
-            //opacity: 1
+            anchors {
+                right: twentyFourSwitch.left
+                rightMargin: theme.defaultFont.mSize.width
+            }
         }
 
         PlasmaComponents.Switch {
+            id: twentyFourSwitch
             checked: timeSettings.twentyFour
-            anchors.left: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
 
             onClicked : {
                 timeSettings.twentyFour = checked
@@ -88,28 +87,35 @@ Item {
             }
         }
 
+
+        PlasmaComponents.Label {
+            id: timeZoneLabel
+            text: i18n("Timezone:")
+            anchors {
+                right: timeZoneButton.left
+                rightMargin: theme.defaultFont.mSize.width
+            }
+        }
+
+        PlasmaComponents.Button {
+            id: timeZoneButton
+            text: timeSettings.timeZone
+            onClicked: timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
+        }
     }
 
-    Text {
-        id: timeZoneLabel
-        color: theme.textColor
-        anchors.right: parent.horizontalCenter
-        anchors.top: twentyFourItem.bottom
-        anchors.topMargin: 48
-        text: i18n("Timezone:")
-        anchors.rightMargin: 12
-    }
 
-    PlasmaComponents.Button {
-        anchors { verticalCenter: timeZoneLabel.verticalCenter; left: parent.horizontalCenter;}
-        text: timeSettings.timeZone
-        onClicked: timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
+    TimePicker {
+        anchors {
+            top: formLayout.bottom
+            topMargin: theme.defaultFont.mSize.height*3
+            horizontalCenter: parent.horizontalCenter
+        }
     }
 
     Dialog {
         id: timeZonePicker
         source: "TimeZonePicker.qml"
-        anchors.fill: parent
         anchors.margins: 60
     }
 
