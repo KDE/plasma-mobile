@@ -125,76 +125,8 @@ Item {
             timeSettings.saveTime()
         }
     }
-    PlasmaCore.FrameSvgItem {
+    TimePicker {
         y: 300
-        imagePath: timePackage.filePath("images", "throbber.svgz")
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-        }
-        width: clockRow.width + margins.left + margins.right
-        height: clockRow.height + margins.top + margins.bottom
-
-        Row {
-            id: clockRow
-            spacing: 3
-            x: parent.margins.left
-            y: parent.margins.top
-
-            Digit {
-                model: timeSettings.twentyFour ? 24 : 12
-            }
-            PlasmaCore.SvgItem {
-                svg: PlasmaCore.Svg {imagePath: "widgets/line"}
-                elementId: "vertical-line"
-                width: naturalSize.width
-                anchors {
-                    top: parent.top
-                    bottom:parent.bottom
-                }
-            }
-            Digit {
-                model: 60
-            }
-            PlasmaCore.SvgItem {
-                svg: PlasmaCore.Svg {imagePath: "widgets/line"}
-                elementId: "vertical-line"
-                width: naturalSize.width
-                anchors {
-                    top: parent.top
-                    bottom:parent.bottom
-                }
-            }
-            Digit {
-                model: 60
-                currentIndex: {
-                    var date = new Date("January 1, 1971 "+timeSettings.currentTime);
-                    return date.getSeconds()
-                }
-            }
-            PlasmaCore.SvgItem {
-                svg: PlasmaCore.Svg {imagePath: "widgets/line"}
-                elementId: "vertical-line"
-                width: naturalSize.width
-                anchors {
-                    top: parent.top
-                    bottom:parent.bottom
-                }
-            }
-            Digit {
-                model: ListModel {
-                    ListElement {
-                        meridiae: "AM"
-                    }
-                    ListElement {
-                        meridiae: "PM"
-                    }
-                }
-                delegate: Text {
-                    text: meridiae
-                    font.pointSize: 25
-                }
-            }
-        }
     }
 
     Component.onCompleted: {
