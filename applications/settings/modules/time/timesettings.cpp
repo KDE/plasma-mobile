@@ -22,12 +22,13 @@
 
 #include "timesettings.h"
 #include "timezone.h"
+#include "timezonesmodel.h"
 
 #include <kdebug.h>
 #include <KIcon>
 #include <KLocale>
 
-#include <QStringListModel>
+#include <QStandardItemModel>
 #include <QTimer>
 #include <QVariant>
 
@@ -134,19 +135,22 @@ void TimeSettingsPrivate::initTimeZones()
     const KTimeZones::ZoneMap zones = timeZones->zones();
 
     QList<QObject*> _zones;
-    QStringList _zonesList;
+    QStandardItemModel *_zonesModel = new TimeZonesModel(q);
+
     for ( KTimeZones::ZoneMap::ConstIterator it = zones.begin(); it != zones.end(); ++it ) {
         const KTimeZone zone = it.value();
         if (timeZoneFilter.isEmpty() || zone.name().contains(timeZoneFilter, Qt::CaseInsensitive)) {
             TimeZone *_zone = new TimeZone(zone);
             _zones.append(_zone);
-            _zonesList << _zone->name();
+            QStandardItem *item = new QStandardItem(_zone->name());
+            item->setData(_zone->name().split("/").first(), Qt::UserRole+1);
+            _zonesModel->appendRow(item);
         }
     }
     kDebug() << "Found: " << _zones.count() << " timezones.";
     //qSort( cities.begin(), cities.end(), localeLessThan );
     q->setTimeZones(_zones);
-    q->setTimeZonesModel(new QStringListModel(_zonesList, q));
+    q->setTimeZonesModel(_zonesModel);
 }
 
 QString TimeSettingsPrivate::displayName( const KTimeZone &zone )

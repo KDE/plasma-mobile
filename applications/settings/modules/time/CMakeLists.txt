@@ -10,6 +10,7 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
 set(timesettings_SRCS
     timesettings.cpp
     timezone.cpp
+    timezonesmodel.cpp
     ../../src/settingsmodule.cpp
 )
 

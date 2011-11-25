@@ -28,8 +28,7 @@ import org.kde.qtextracomponents 0.1
 Item {
     id: timeZonePicker
     objectName: "timeZonePicker"
-    height: 300
-    width: 400
+    anchors.fill: parent
 
     signal filterChanged(string filter)
 
@@ -51,8 +50,9 @@ Item {
 
     PlasmaComponents.TextField {
         id: tzFilter
-        width: parent.width / 4
+        width: parent.width
         placeholderText: "filter..."
+        clearButtonShown: true
         //Keys.onTabPressed: tf2.forceActiveFocus();
         anchors {
             //verticalCenter: parent.verticalCenter
@@ -92,14 +92,32 @@ Item {
         width: parent.width
         clip: true
         spacing: 8
+        cacheBuffer: 10000
         anchors {
             //verticalCenter: parent.verticalCenter
             top: tzFilter.bottom
             topMargin: spacing
             bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
+        section.property: "continent"
+        section.criteria: ViewSection.FullString
+        section.delegate: PlasmaComponents.ListItem {
+            sectionDelegate: true
+            PlasmaComponents.Label {
+                anchors {
+                    top: parent.top; topMargin: 4
+                    left: parent.left; leftMargin: 4
+                }
+                text: section
+                horizontalAlignment: Text.AlignLeft
+                font { bold: true; }
+            }
         }
 
         model: filterModel
+        //model: timeSettings.timeZonesModel
 
         delegate: timeZoneDelegate
 //         highlight: PlasmaCore.FrameSvgItem {
@@ -109,6 +127,11 @@ Item {
 //         }
 
     }
+    PlasmaComponents.SectionScroller {
+        id: sectionScroller
+        listView: timeZonesList
+    }
+
     Component {
         id: timeZoneDelegate
         Item {

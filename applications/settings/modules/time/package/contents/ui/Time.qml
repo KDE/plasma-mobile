@@ -100,7 +100,7 @@ Item {
         PlasmaComponents.Button {
             id: timeZoneButton
             text: timeSettings.timeZone
-            onClicked: timeZonePicker.state = (timeZonePicker.state == "open") ? "closed" : "open";
+            onClicked: timeZonePicker.open()
         }
     }
 
@@ -113,10 +113,21 @@ Item {
         }
     }
 
-    Dialog {
+    PlasmaComponents.CommonDialog {
         id: timeZonePicker
-        source: "TimeZonePicker.qml"
-        anchors.margins: 60
+        titleText: i18n("Timezones")
+        buttonTexts: [i18n("Close")]
+        onButtonClicked: close()
+        content: Loader {
+            id: timeZonePickerLoader
+            width: theme.defaultFont.mSize.width*22
+            height: theme.defaultFont.mSize.height*25
+        }
+        onStatusChanged: {
+            if (status == PlasmaComponents.DialogStatus.Open) {
+                timeZonePickerLoader.source = "TimeZonePicker.qml"
+            }
+        }
     }
 
     Component.onCompleted: {
