@@ -2,6 +2,10 @@
 Encoding=UTF-8
 Keywords=
 Name=Widget and resources explorer
+Name[pt_BR]=Explorador de recursos e widgets
+Name[sv]=Komponent- och resursutforskare
+Name[uk]=Перегляд віджетів та ресурсів
+Name[x-test]=xxWidget and resources explorerxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/GenericPackage
