@@ -31,17 +31,16 @@ ImageViewer::ImageViewer(const QString &url)
     : KMainWindow()
 {
     setAcceptDrops(true);
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
+    const QString themeName = cg.readEntry("name", "air-mobile");
+    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
+    Plasma::Theme::defaultTheme()->setThemeName(themeName);
     addAction(KStandardAction::close(this, SLOT(close()), this));
     addAction(KStandardAction::quit(this, SLOT(close()), this));
     m_widget = new AppView(url, this);
 
     restoreWindowSize(config("Window"));
     setCentralWidget(m_widget);
-
-    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
-    const QString themeName = cg.readEntry("name", "air-mobile");
-    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
-    Plasma::Theme::defaultTheme()->setThemeName(themeName);
 
     connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
 }

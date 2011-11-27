@@ -28,7 +28,7 @@ import org.kde.metadatamodels 0.1 as MetadataModels
 Image {
     id: imageViewer
     objectName: "imageViewer"
-    source: viewerPackage.filePath("images", "fabrictexture.png")
+    source: "image://appbackgrounds/standard"
     fillMode: Image.Tile
     state: "browsing"
 
