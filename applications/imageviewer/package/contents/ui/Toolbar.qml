@@ -123,7 +123,7 @@ PlasmaCore.FrameSvgItem {
         anchors {
             left: parent.left
             right:parent.right
-            top:parent.top
+            verticalCenter: parent.verticalCenter
         }
         onSearchQueryChanged: {
             metadataModel.queryString = "*"+searchBox.searchQuery+"*"
