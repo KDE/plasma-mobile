@@ -1,8 +1,17 @@
 [Domain]
 Name=Date and Time Control Module
+Name[sv]=Inställningsmodul för datum och tid
+Name[uk]=Модуль керування датою і часом
+Name[x-test]=xxDate and Time Control Modulexx
 Icon=preferences-system-time
 
 [org.kde.active.clockconfig.save]
 Name=Save the date/time settings
+Name[sv]=Spara inställningar av datum och tid
+Name[uk]=Зберегти параметри дати/часу
+Name[x-test]=xxSave the date/time settingsxx
 Description=System policies prevent you from saving the date/time settings.
+Description[sv]=Systemets policy förhindrar att du sparar inställningar av datum och tid.
+Description[uk]=Відповідно до загальносистемних правил, ви не можете зберігати параметри дати/часу.
+Description[x-test]=xxSystem policies prevent you from saving the date/time settings.xx
 Policy=yes
