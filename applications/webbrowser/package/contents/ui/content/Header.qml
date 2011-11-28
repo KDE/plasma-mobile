@@ -96,19 +96,22 @@ PlasmaComponents.ToolBar {
                     leftMargin: 8
                     verticalCenter: parent.verticalCenter
                 }
-                MobileComponents.ActionButton {
+
+                PlasmaComponents.ToolButton {
                     id: backButton
-                    svg: toolbarIconsSvg
-                    elementId: "go-previous"
-                    action: webView.back
-
+                    iconSource: "go-previous"
+                    defaultAction: webView.back
+                    width: theme.largeIconSize
+                    height: width
+                    flat: false
                 }
-
-                MobileComponents.ActionButton {
+                PlasmaComponents.ToolButton {
                     id: nextButton
-                    svg: toolbarIconsSvg
-                    elementId: "go-next"
-                    action: webView.forward
+                    iconSource: "go-next"
+                    defaultAction: webView.forward
+                    width: theme.largeIconSize
+                    height: width
+                    flat: false
                 }
             }
 
@@ -130,20 +133,24 @@ PlasmaComponents.ToolBar {
                     rightMargin: 8
                     verticalCenter: parent.verticalCenter
                 }
-                MobileComponents.ActionButton {
-                    id: reloadButton
-                    svg: toolbarIconsSvg
-                    elementId: "reload"
-                    action: webView.reload
-                    visible: action.enabled
-                }
 
-                MobileComponents.ActionButton {
+                PlasmaComponents.ToolButton {
+                    id: reloadButton
+                    iconSource: "view-refresh"
+                    defaultAction: webView.reload
+                    width: theme.largeIconSize
+                    height: width
+                    flat: false
+                    visible: !stopButton.visible
+                }
+                PlasmaComponents.ToolButton {
                     id: stopButton
-                    svg: toolbarIconsSvg
-                    elementId: "stop"
-                    action: webView.stop
-                    visible: action.enabled
+                    iconSource: "process-stop"
+                    defaultAction: webView.stop
+                    width: theme.largeIconSize
+                    height: width
+                    flat: false
+                    visible: defaultAction.enabled && !webView.reload.enabled
                 }
 
                 QIconItem {

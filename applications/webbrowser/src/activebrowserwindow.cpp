@@ -34,6 +34,11 @@
 ActiveBrowserWindow::ActiveBrowserWindow(const QString &url, QWidget *parent)
     : QMainWindow(parent)
 {
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
+    const QString themeName = cg.readEntry("name", "air-mobile");
+    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
+    Plasma::Theme::defaultTheme()->setThemeName(themeName);
+
     setAcceptDrops(true);
     addAction(KStandardAction::close(this, SLOT(close()), this));
     addAction(KStandardAction::quit(this, SLOT(close()), this));
@@ -49,10 +54,6 @@ ActiveBrowserWindow::ActiveBrowserWindow(const QString &url, QWidget *parent)
     }
     setCentralWidget(m_widget);
 
-    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
-    const QString themeName = cg.readEntry("name", "air-mobile");
-    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
-    Plasma::Theme::defaultTheme()->setThemeName(themeName);
 
     connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
 }
