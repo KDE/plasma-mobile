@@ -61,23 +61,21 @@ PlasmaComponents.ToolBar {
 
     tools: Item {
         height: childrenRect.height
-        QIconItem {
+
+        PlasmaComponents.ToolButton {
             id: backIcon
-            icon: QIcon("go-previous")
-            width: 48
-            height: 48
+            iconSource: "go-previous"
+            width: theme.largeIconSize
+            height: width
+            flat: false
             opacity: (imageViewer.state != "browsing") ? 1 : 0
-            anchors.verticalCenter: parent.verticalCenter
             Behavior on opacity {
                 NumberAnimation {
                     duration: 250
                     easing.type: Easing.InOutQuad
                 }
             }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: imageViewer.state = "browsing"
-            }
+            onClicked: imageViewer.state = "browsing"
         }
         Row {
             anchors.left: backIcon.right
