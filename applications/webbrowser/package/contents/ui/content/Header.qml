@@ -100,7 +100,7 @@ PlasmaComponents.ToolBar {
                 PlasmaComponents.ToolButton {
                     id: backButton
                     iconSource: "go-previous"
-                    defaultAction: webView.back
+                    onClicked: webView.back.trigger()
                     width: theme.largeIconSize
                     height: width
                     flat: false
@@ -108,7 +108,7 @@ PlasmaComponents.ToolBar {
                 PlasmaComponents.ToolButton {
                     id: nextButton
                     iconSource: "go-next"
-                    defaultAction: webView.forward
+                    onClicked: webView.forward.trigger()
                     width: theme.largeIconSize
                     height: width
                     flat: false
@@ -137,7 +137,7 @@ PlasmaComponents.ToolBar {
                 PlasmaComponents.ToolButton {
                     id: reloadButton
                     iconSource: "view-refresh"
-                    defaultAction: webView.reload
+                    onClicked: webView.reload.trigger()
                     width: theme.largeIconSize
                     height: width
                     flat: false
@@ -146,11 +146,11 @@ PlasmaComponents.ToolBar {
                 PlasmaComponents.ToolButton {
                     id: stopButton
                     iconSource: "process-stop"
-                    defaultAction: webView.stop
+                    onClicked: webView.stop.trigger()
                     width: theme.largeIconSize
                     height: width
                     flat: false
-                    visible: defaultAction.enabled && !webView.reload.enabled
+                    visible: !webView.reload.enabled
                 }
 
                 QIconItem {
