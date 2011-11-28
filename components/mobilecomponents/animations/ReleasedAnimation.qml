@@ -22,17 +22,31 @@ import QtQuick 1.0
 import "Animations.js" as Animations
 
 SequentialAnimation {
-    id: activateAnimation
-    objectName: "activateAnimation"
+    id: releasedAnimation
+    objectName: "releasedAnimation"
 
     property Item targetItem
-    property int duration: Animations.normalDuration/5
+    property int duration: Animations.feedbackDuration
 
     // Fast scaling while we're animation == more FPS
     ScriptAction { script: targetItem.smooth = false }
 
-    PressedAnimation { targetItem: activateAnimation.targetItem }
-    ReleasedAnimation  { targetItem: activateAnimation.targetItem }
+    ParallelAnimation {
+        PropertyAnimation {
+            target: targetItem
+            properties: "opacity"
+            from: 0.5; to: 1.0
+            duration: activateAnimation.duration;
+            easing.type: Easing.InExpo;
+        }
+        PropertyAnimation {
+            target: targetItem
+            properties: "scale"
+            from: 0.9; to: 1.0
+            duration: activateAnimation.duration;
+            easing.type: Easing.InExpo;
+        }
+    }
 
     ScriptAction { script: targetItem.smooth = true }
 }
