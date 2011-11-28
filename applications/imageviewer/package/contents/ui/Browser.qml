@@ -27,7 +27,10 @@ import org.kde.qtextracomponents 0.1
 
 
 PlasmaComponents.Page {
-    anchors.fill: parent
+    anchors {
+        fill: parent
+        topMargin: toolBar.height
+    }
 
     tools: Item {
         width: parent.width

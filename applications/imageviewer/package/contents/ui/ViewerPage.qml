@@ -30,6 +30,8 @@ PlasmaComponents.Page {
     id: viewerPage
     anchors.fill: parent
 
+    state: "toolsClosed"
+
     tools: Item {
         height: childrenRect.height
         PlasmaComponents.ToolButton {
@@ -149,11 +151,36 @@ PlasmaComponents.Page {
             }
             visible: false
         }
-
-        QuickBrowserBar {
-            id: quickBrowserBar
-            model: metadataModel
-        }
     }
+
+    QuickBrowserBar {
+        id: quickBrowserBar
+        model: metadataModel
+    }
+
+    states: [
+        State {
+            name: "toolsOpen"
+            PropertyChanges {
+                target: toolBar
+                y: 0
+            }
+            PropertyChanges {
+                target: quickBrowserBar
+                y: imageViewer.height - quickBrowserBar.height
+            }
+        },
+        State {
+            name: "toolsClosed"
+            PropertyChanges {
+                target: toolBar
+                y: -toolBar.height
+            }
+            PropertyChanges {
+                target: quickBrowserBar
+                y: imageViewer.height+20
+            }
+        }
+    ]
 }
 

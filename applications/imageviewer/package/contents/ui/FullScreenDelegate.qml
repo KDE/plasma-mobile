@@ -141,10 +141,10 @@ Flickable {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    if (imageViewer.state == "image") {
-                        imageViewer.state = "image+toolbar"
+                    if (viewerPage.state == "toolsOpen") {
+                        viewerPage.state = "toolsClosed"
                     } else {
-                        imageViewer.state = "image"
+                        viewerPage.state = "toolsOpen"
                     }
                 }
             }

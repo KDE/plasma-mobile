@@ -90,10 +90,7 @@ Image {
         clip: false
         toolBar: toolBar
         initialPage: Qt.createComponent("Browser.qml")
-        anchors {
-            fill: parent
-            topMargin: toolBar.height
-        }
+        anchors.fill: parent
     }
 
  
