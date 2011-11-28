@@ -32,12 +32,6 @@ Rectangle {
         thumbnailsView.currentIndex = index
     }
 
-    Behavior on y {
-        NumberAnimation {
-            duration: 250
-            easing.type: Easing.InOutQuad
-        }
-    }
     z: 9999
     color: Qt.rgba(1, 1, 1, 0.7)
 

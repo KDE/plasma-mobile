@@ -182,5 +182,15 @@ PlasmaComponents.Page {
             }
         }
     ]
+
+    transitions: [
+        Transition {
+            NumberAnimation {
+                properties: "y"
+                easing.type: Easing.InOutQuad
+                duration: 250
+            }
+        }
+    ]
 }
 
