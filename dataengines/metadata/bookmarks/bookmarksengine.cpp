@@ -70,14 +70,14 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
         b.setLabel(url.toString());
         b.setDescription(url.toString());
         b.setBookmarks( url.toString() );
-        kDebug() << "Added Bookmark:" << massagedName;
+        //kDebug() << "Added Bookmark:" << massagedName;
     } else if (name.startsWith("remove:")) {
         //QString massagedName = name;
         QUrl url = QUrl(massagedName.remove("remove:"));
         Nepomuk::Resource b(url);
-        kDebug() << "TYPE: " << b.resourceType();
+        //kDebug() << "TYPE: " << b.resourceType();
         b.remove();
-        kDebug() << "Removed Bookmark:" << massagedName;
+        //kDebug() << "Removed Bookmark:" << massagedName;
     } else {
         Nepomuk::Types::Class bookmarkClass(Nepomuk::Bookmark::resourceTypeUri());
         //Nepomuk::Types::Class bookmarkClass(Nepomuk::PersonContact::resourceTypeUri()); // for testing

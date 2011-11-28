@@ -75,7 +75,7 @@ void AppSource::populate()
     foreach (const QString appName, m_blackList) {
         query += QString(" and (DesktopEntryName != '%1' )").arg(appName);
     }
-    kWarning()<<query;
+    //kWarning()<<query;
     KService::List services = KServiceTypeTrader::self()->query("Application", query);
 
     removeAllData();

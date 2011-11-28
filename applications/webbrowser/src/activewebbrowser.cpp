@@ -65,10 +65,5 @@ bool ActiveWebbrowser::useGL() const
 {
     return m_useGL;
 }
-/*
-void View::newWindow(const QString &url)
-{
-    KRun::runCommand(QString("active-webbrowser '%1'").arg(url), this);
-}
-*/
+
 #include "activewebbrowser.moc"

@@ -53,8 +53,6 @@ ActiveBrowserWindow::ActiveBrowserWindow(const QString &url, QWidget *parent)
         restoreGeometry(geom);
     }
     setCentralWidget(m_widget);
-
-
     connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
 }
 
@@ -76,7 +74,6 @@ void ActiveBrowserWindow::closeEvent(QCloseEvent *)
 QString ActiveBrowserWindow::name()
 {
     return "Active Browser";
-    //return m_widget->options()->name;
 }
 
 QIcon ActiveBrowserWindow::icon()
