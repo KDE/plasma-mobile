@@ -43,17 +43,15 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
-PlasmaCore.FrameSvgItem {
+PlasmaComponents.ToolBar {
     id: header
 
-    height: childrenRect.height + margins.bottom + 8
+   // height: contents.height// + margins.bottom + 8
     property alias editUrl: urlInput.url
     property bool urlChanged: false
 
-    imagePath: "widgets/frame"
-    prefix: "raised"
-    enabledBorders: "BottomBorder"
 
     PlasmaCore.Svg {
         id: toolbarIconsSvg
@@ -69,7 +67,8 @@ PlasmaCore.FrameSvgItem {
             webView.contentY < 0 ? -webView.contentY : webView.contentY > height ? -height : -webView.contentY
         }
     }
-    Column {
+    tools: Column {
+        id: contents
         width: parent.width
 
         Item {
