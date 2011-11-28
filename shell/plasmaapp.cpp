@@ -81,9 +81,9 @@ PlasmaApp* PlasmaApp::self()
 
 PlasmaApp::PlasmaApp()
     : KUniqueApplication(),
-      m_declarativeWidget(0),
       m_corona(0),
       m_mainView(0),
+      m_declarativeWidget(0),
       m_currentContainment(0),
       m_panelShadows(0),
       m_isDesktop(false)
@@ -645,6 +645,7 @@ void PlasmaApp::containmentScreenOwnerChanged(int wasScreen, int isScreen, Plasm
 void PlasmaApp::gotStartup(const KStartupInfoId &id, const KStartupInfoData &data)
 {
     Q_UNUSED(id)
+    Q_UNUSED(data)
 
     if (!m_busyWidget) {
         m_busyWidget = new BusyWidget();
