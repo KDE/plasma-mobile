@@ -85,6 +85,7 @@ PlasmaComponents.ToolBar {
         }
 
         Item {
+            id: buttonRow
             width: parent.width
             height: 32
 
@@ -101,7 +102,7 @@ PlasmaComponents.ToolBar {
                     id: backButton
                     iconSource: "go-previous"
                     onClicked: webView.back.trigger()
-                    width: theme.largeIconSize
+                    width: buttonRow.height
                     height: width
                     flat: false
                     enabled: webView.back.enabled
@@ -110,7 +111,7 @@ PlasmaComponents.ToolBar {
                     id: nextButton
                     iconSource: "go-next"
                     onClicked: webView.forward.trigger()
-                    width: theme.largeIconSize
+                    width: buttonRow.height
                     height: width
                     flat: false
                     enabled: webView.forward.enabled
@@ -140,7 +141,7 @@ PlasmaComponents.ToolBar {
                     id: reloadButton
                     iconSource: "view-refresh"
                     onClicked: webView.reload.trigger()
-                    width: theme.largeIconSize
+                    width: buttonRow.height
                     height: width
                     flat: false
                     visible: !stopButton.visible && (webView.url != "")
@@ -149,7 +150,7 @@ PlasmaComponents.ToolBar {
                     id: stopButton
                     iconSource: "process-stop"
                     onClicked: webView.stop.trigger()
-                    width: theme.largeIconSize
+                    width: buttonRow.height
                     height: width
                     flat: false
                     enabled: webView.stop.enabled
