@@ -37,6 +37,8 @@ Image {
     height: 360
 
 
+    signal zoomIn
+    signal zoomOut
 
 
     MobileComponents.Package {

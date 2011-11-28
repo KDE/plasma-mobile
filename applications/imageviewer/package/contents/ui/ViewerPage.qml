@@ -58,14 +58,14 @@ PlasmaComponents.Page {
                 width: theme.largeIconSize
                 height: width
                 flat: false
-                onClicked: toolbar.zoomIn()
+                onClicked: imageViewer.zoomIn()
             }
             PlasmaComponents.ToolButton {
                 iconSource: "zoom-out"
                 width: theme.largeIconSize
                 height: width
                 flat: false
-                onClicked: toolbar.zoomOut()
+                onClicked: imageViewer.zoomOut()
             }
         }
     }

@@ -85,7 +85,7 @@ Flickable {
     }
 
     Connections {
-        target: toolbar
+        target: imageViewer
         onZoomIn: {
             zoomAnim.zoom(1.4)
         }
