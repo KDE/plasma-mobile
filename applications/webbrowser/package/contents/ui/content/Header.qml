@@ -104,6 +104,7 @@ PlasmaComponents.ToolBar {
                     width: theme.largeIconSize
                     height: width
                     flat: false
+                    enabled: webView.back.enabled
                 }
                 PlasmaComponents.ToolButton {
                     id: nextButton
@@ -112,6 +113,7 @@ PlasmaComponents.ToolBar {
                     width: theme.largeIconSize
                     height: width
                     flat: false
+                    enabled: webView.forward.enabled
                 }
             }
 
@@ -141,7 +143,7 @@ PlasmaComponents.ToolBar {
                     width: theme.largeIconSize
                     height: width
                     flat: false
-                    visible: !stopButton.visible
+                    visible: !stopButton.visible && (webView.url != "")
                 }
                 PlasmaComponents.ToolButton {
                     id: stopButton
@@ -150,6 +152,7 @@ PlasmaComponents.ToolBar {
                     width: theme.largeIconSize
                     height: width
                     flat: false
+                    enabled: webView.stop.enabled
                     visible: !webView.reload.enabled
                 }
 

@@ -52,7 +52,6 @@ Flickable {
     property alias stop: webView.stop
     property alias reload: webView.reload
     property alias forward: webView.forward
-    //property alias top: webView.top
 
     signal newWindowRequested(string url)
 
@@ -91,7 +90,7 @@ Flickable {
                         if (url != "") {
                             flickable.newWindowRequested(url)
 
-                             var newObject = Qt.createQmlObject('import QtQuick 1.0; Item {}', webView);
+                            var newObject = Qt.createQmlObject('import QtQuick 1.0; Item {}', webView);
                             newPageComponent.parent = newObject
                             newObject.destroy()
                         }
@@ -230,5 +229,11 @@ Flickable {
             }
         }
         onZoomTo: doZoom(zoom,centerX,centerY)
+    }
+    Component.onCompleted: {
+        back.enabled = false
+        forward.enabled = false
+        reload.enabled = false
+        stop.enabled = false
     }
 }
