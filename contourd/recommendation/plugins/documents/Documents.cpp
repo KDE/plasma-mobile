@@ -51,7 +51,7 @@ DocumentsEnginePrivate::DocumentsEnginePrivate(DocumentsEngine * parent)
 
     // Making us visible on d-bus
     new RankingsClientAdaptor(this);
-    kDebug() << "registering the client" <<
+    // kDebug() << "registering the client" <<
     dbus.registerObject("/RankingsClient", this);
 
     if (dbus.interface()->isServiceRegistered(KAMD_DBUS_ADDRESS)) {
