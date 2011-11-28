@@ -97,7 +97,7 @@ PlasmaComponents.ToolBar {
                     id: deviceButton
                     icon: QIcon(model["icon"])
                     //FIXME: use the declarative branch in workspace that tells about removable
-                    visible: devicesSource.data[udi]["Icon"] == "drive-removable-media-usb" || devicesSource.data[udi]["Icon"] == "media-flash-sd-mmc" || devicesSource.data[udi]["Icon"] == "drive-removable-media-usb-pendrive" || devicesSource.data[udi]["Icon"] == "multimedia-player"
+                    visible: devicesSource.data[udi]["Removable"] == true
                     opacity: (dirModel.url == devicesSource.data[udi]["File Path"] && resultsGrid.model == dirModel) ? 1 : 0.2
                     width: 48
                     height: 48
