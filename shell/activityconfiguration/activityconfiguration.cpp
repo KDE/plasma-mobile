@@ -64,6 +64,17 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     m_activityController = new KActivities::Controller(this);
 #endif
 
+    Plasma::Wallpaper *wp = Plasma::Wallpaper::load(bestWallpaperPluginAvailable());
+    if (wp) {
+        wp->setParent(this);
+        wp->setTargetSizeHint(PlasmaApp::defaultScreenSize());
+        wp->setResizeMethodHint(Plasma::Wallpaper::ScaledAndCroppedResize);
+    }
+
+    m_model = new BackgroundListModel(wp, this);
+    connect(m_model, SIGNAL(countChanged()), this, SLOT(modelCountChanged()));
+    m_model->reload();
+
     if (engine()) {
         QDeclarativeContext *ctxt = engine()->rootContext();
         m_mainWidget = qobject_cast<QDeclarativeItem *>(rootObject());
@@ -78,17 +89,7 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     }
 
 
-    Plasma::Wallpaper *wp = Plasma::Wallpaper::load(bestWallpaperPluginAvailable());
-    if (wp) {
-        wp->setParent(this);
-        wp->setTargetSizeHint(PlasmaApp::defaultScreenSize());
-        wp->setResizeMethodHint(Plasma::Wallpaper::ScaledAndCroppedResize);
-    }
-
-    m_model = new BackgroundListModel(wp, this);
     emit modelChanged();
-    connect(m_model, SIGNAL(countChanged()), this, SLOT(modelCountChanged()));
-    m_model->reload();
 }
 
 ActivityConfiguration::~ActivityConfiguration()
