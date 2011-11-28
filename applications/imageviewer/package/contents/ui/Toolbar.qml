@@ -20,9 +20,10 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 
-PlasmaCore.FrameSvgItem {
+PlasmaComponents.ToolBar {
     id: toolbar
     anchors {
         left: parent.left
@@ -31,10 +32,10 @@ PlasmaCore.FrameSvgItem {
     signal zoomIn()
     signal zoomOut()
 
-    height: childrenRect.height + margins.bottom
-    imagePath: "widgets/frame"
-    prefix: "raised"
-    enabledBorders: "BottomBorder"
+    //height: childrenRect.height + margins.bottom
+    //imagePath: "widgets/frame"
+    //prefix: "raised"
+    //enabledBorders: "BottomBorder"
     z: 9000
     Behavior on y {
         NumberAnimation {
@@ -58,114 +59,117 @@ PlasmaCore.FrameSvgItem {
         dataSource: hotplugSource
     }
 
-    QIconItem {
-        id: backIcon
-        icon: QIcon("go-previous")
-        width: 48
-        height: 48
-        opacity: (imageViewer.state != "browsing") ? 1 : 0
-        anchors.verticalCenter: parent.verticalCenter
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: imageViewer.state = "browsing"
-        }
-    }
-    Row {
-        anchors.left: backIcon.right
-        anchors.verticalCenter: parent.verticalCenter
-        spacing: 8
-        opacity: (imageViewer.state == "browsing") ? 1 : 0
-        MobileComponents.IconButton {
-            icon: QIcon("drive-harddisk")
-            opacity: resultsGrid.model == metadataModel ? 0.2 : 1
+    tools: Item {
+        height: childrenRect.height
+        QIconItem {
+            id: backIcon
+            icon: QIcon("go-previous")
             width: 48
             height: 48
-            onClicked: {
-                resultsGrid.model = metadataModel
+            opacity: (imageViewer.state != "browsing") ? 1 : 0
+            anchors.verticalCenter: parent.verticalCenter
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: imageViewer.state = "browsing"
             }
         }
-        Repeater {
-            model: devicesModel
+        Row {
+            anchors.left: backIcon.right
+            anchors.verticalCenter: parent.verticalCenter
+            spacing: 8
+            opacity: (imageViewer.state == "browsing") ? 1 : 0
             MobileComponents.IconButton {
-                id: deviceButton
-                icon: QIcon(model["icon"])
-                //FIXME: use the declarative branch in workspace that tells about removable
-                visible: devicesSource.data[udi]["Icon"] == "drive-removable-media-usb" || devicesSource.data[udi]["Icon"] == "media-flash-sd-mmc" || devicesSource.data[udi]["Icon"] == "drive-removable-media-usb-pendrive" || devicesSource.data[udi]["Icon"] == "multimedia-player"
-                opacity: (dirModel.url == devicesSource.data[udi]["File Path"] && resultsGrid.model == dirModel) ? 1 : 0.2
+                icon: QIcon("drive-harddisk")
+                opacity: resultsGrid.model == metadataModel ? 0.2 : 1
                 width: 48
                 height: 48
                 onClicked: {
-                    dirModel.url = devicesSource.data[udi]["File Path"]
-                    resultsGrid.model = dirModel
+                    resultsGrid.model = metadataModel
+                }
+            }
+            Repeater {
+                model: devicesModel
+                MobileComponents.IconButton {
+                    id: deviceButton
+                    icon: QIcon(model["icon"])
+                    //FIXME: use the declarative branch in workspace that tells about removable
+                    visible: devicesSource.data[udi]["Icon"] == "drive-removable-media-usb" || devicesSource.data[udi]["Icon"] == "media-flash-sd-mmc" || devicesSource.data[udi]["Icon"] == "drive-removable-media-usb-pendrive" || devicesSource.data[udi]["Icon"] == "multimedia-player"
+                    opacity: (dirModel.url == devicesSource.data[udi]["File Path"] && resultsGrid.model == dirModel) ? 1 : 0.2
+                    width: 48
+                    height: 48
+                    onClicked: {
+                        dirModel.url = devicesSource.data[udi]["File Path"]
+                        resultsGrid.model = dirModel
+                    }
                 }
             }
         }
-    }
 
-    Text {
-        text: i18n("%1 of %2", fullList.currentIndex+1, fullList.count)
-        anchors.centerIn: parent
-        font.pointSize: 14
-        font.bold: true
-        color: theme.textColor
-        visible: imageViewer.state != "browsing"
-        style: Text.Raised
-        styleColor: theme.backgroundColor
-    }
-    MobileComponents.ViewSearch {
-        id: searchBox
-        anchors {
-            left: parent.left
-            right:parent.right
-            verticalCenter: parent.verticalCenter
+        Text {
+            text: i18n("%1 of %2", fullList.currentIndex+1, fullList.count)
+            anchors.centerIn: parent
+            font.pointSize: 14
+            font.bold: true
+            color: theme.textColor
+            visible: imageViewer.state != "browsing"
+            style: Text.Raised
+            styleColor: theme.backgroundColor
         }
-        onSearchQueryChanged: {
-            metadataModel.queryString = "*"+searchBox.searchQuery+"*"
-        }
-        opacity: (imageViewer.state != "browsing") ? 0 : 1
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
+        MobileComponents.ViewSearch {
+            id: searchBox
+            anchors {
+                left: parent.left
+                right:parent.right
+                verticalCenter: parent.verticalCenter
+            }
+            onSearchQueryChanged: {
+                metadataModel.queryString = "*"+searchBox.searchQuery+"*"
+            }
+            opacity: (imageViewer.state != "browsing") ? 0 : 1
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
             }
         }
-    }
 
-    PlasmaCore.Svg {
-        id: iconsSvg
-        imagePath: "widgets/configuration-icons"
-    }
-    Row {
-        opacity: (imageViewer.state != "browsing") ? 1 : 0
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
+        PlasmaCore.Svg {
+            id: iconsSvg
+            imagePath: "widgets/configuration-icons"
+        }
+        Row {
+            opacity: (imageViewer.state != "browsing") ? 1 : 0
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
             }
-        }
-        anchors {
-            verticalCenter: parent.verticalCenter
-            right: parent.right
-        }
-        //TODO: ad hoc icons
-        MobileComponents.ActionButton {
-            svg: iconsSvg
-            elementId: "add"
-            onClicked: {
-                toolbar.zoomIn()
+            anchors {
+                verticalCenter: parent.verticalCenter
+                right: parent.right
             }
-        }
-        MobileComponents.ActionButton {
-            svg: iconsSvg
-            elementId: "remove"
-            onClicked: {
-                toolbar.zoomOut()
+            //TODO: ad hoc icons
+            MobileComponents.ActionButton {
+                svg: iconsSvg
+                elementId: "add"
+                onClicked: {
+                    toolbar.zoomIn()
+                }
+            }
+            MobileComponents.ActionButton {
+                svg: iconsSvg
+                elementId: "remove"
+                onClicked: {
+                    toolbar.zoomOut()
+                }
             }
         }
     }
