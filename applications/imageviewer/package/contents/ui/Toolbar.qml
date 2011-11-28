@@ -154,20 +154,19 @@ PlasmaComponents.ToolBar {
                 verticalCenter: parent.verticalCenter
                 right: parent.right
             }
-            //TODO: ad hoc icons
-            MobileComponents.ActionButton {
-                svg: iconsSvg
-                elementId: "add"
-                onClicked: {
-                    toolbar.zoomIn()
-                }
+            PlasmaComponents.ToolButton {
+                iconSource: "zoom-in"
+                width: theme.largeIconSize
+                height: width
+                flat: false
+                onClicked: toolbar.zoomIn()
             }
-            MobileComponents.ActionButton {
-                svg: iconsSvg
-                elementId: "remove"
-                onClicked: {
-                    toolbar.zoomOut()
-                }
+            PlasmaComponents.ToolButton {
+                iconSource: "zoom-out"
+                width: theme.largeIconSize
+                height: width
+                flat: false
+                onClicked: toolbar.zoomOut()
             }
         }
     }
