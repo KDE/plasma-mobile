@@ -115,7 +115,7 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         thumbnailsView.currentIndex = index
-                        viewer.setCurrentIndex(index)
+                        viewerPage.setCurrentIndex(index)
                     }
                 }
             }
