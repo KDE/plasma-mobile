@@ -118,6 +118,7 @@ protected Q_SLOTS:
     void propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val);
     void showPreview(const KFileItem &item, const QPixmap &preview);
     void previewFailed(const KFileItem &item);
+    void delayedPreview();
 
 private:
     Nepomuk::Query::Query m_query;
@@ -136,6 +137,8 @@ private:
     Qt::SortOrder m_sortOrder;
 
     //previews
+    QTimer *m_previewTimer;
+    QHash<KUrl, QPersistentModelIndex> m_filesToPreview;
     QSize m_screenshotSize;
     QHash<KUrl, QPersistentModelIndex> m_previewJobs;
     KImageCache* m_imageCache;

@@ -65,6 +65,10 @@ MetadataModel::MetadataModel(QObject *parent)
     connect(m_newEntriesTimer, SIGNAL(timeout()),
             this, SLOT(newEntriesDelayed()));
 
+    m_previewTimer = new QTimer(this);
+    m_previewTimer->setSingleShot(true);
+    connect(m_previewTimer, SIGNAL(timeout()),
+            this, SLOT(delayedPreview()));
 
     //using the same cache of the engine, they index both by url
     m_imageCache = new KImageCache("plasma_engine_preview", 10485760);
@@ -535,32 +539,19 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         }
         return icon;
     }
-    case Thumbnail: {
-        if (!resource.isFile() || !resource.toFile().url().isLocalFile()) {
-            return QVariant();
+    case Thumbnail:
+        if (resource.isFile() && resource.toFile().url().isLocalFile()) {
+            KUrl file(resource.toFile().url());
+            QImage preview = QImage(m_screenshotSize, QImage::Format_ARGB32_Premultiplied);
+
+            if (m_imageCache->findImage(file.prettyUrl(), &preview)) {
+                return preview;
+            }
+
+            m_previewTimer->start(100);
+            const_cast<MetadataModel *>(this)->m_filesToPreview[file] = QPersistentModelIndex(index);
         }
-
-        KUrl file(resource.toFile().url().prettyUrl());
-
-        QImage preview = QImage(m_screenshotSize, QImage::Format_ARGB32_Premultiplied);
-        if (m_imageCache->findImage(file.prettyUrl(), &preview)) {
-            return preview;
-        }
-
-        if (!m_previewJobs.contains(file) && file.isValid()) {
-            KFileItemList list;
-            list.append(KFileItem(file, QString(), 0));
-            KIO::PreviewJob* job = KIO::filePreview(list, m_screenshotSize);
-            job->setIgnoreMaximumSize(true);
-            connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-                    this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
-            connect(job, SIGNAL(failed(const KFileItem&)),
-                    this, SLOT(previewFailed(const KFileItem&)));
-            const_cast<MetadataModel *>(this)->m_previewJobs.insert(file, QPersistentModelIndex(index));
-        }
-
         return QVariant();
-    }
     case IsFile:
         return resource.isFile();
     case Exists:
@@ -615,6 +606,34 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     default:
         return QVariant();
     }
+}
+
+
+void MetadataModel::delayedPreview()
+{
+    QHash<KUrl, QPersistentModelIndex>::const_iterator i = m_filesToPreview.constBegin();
+
+    while (i != m_filesToPreview.constEnd()) {
+        KUrl file = i.key();
+        QPersistentModelIndex index = i.value();
+
+
+        if (!m_previewJobs.contains(file) && file.isValid()) {
+            KFileItemList list;
+            list.append(KFileItem(file, QString(), 0));
+            KIO::PreviewJob* job = KIO::filePreview(list, m_screenshotSize);
+            job->setIgnoreMaximumSize(true);
+            connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
+                    this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
+            connect(job, SIGNAL(failed(const KFileItem&)),
+                    this, SLOT(previewFailed(const KFileItem&)));
+            m_previewJobs.insert(file, QPersistentModelIndex(index));
+        }
+
+        ++i;
+    }
+
+    m_filesToPreview.clear();
 }
 
 void MetadataModel::showPreview(const KFileItem &item, const QPixmap &preview)
