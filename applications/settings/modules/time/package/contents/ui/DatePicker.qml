@@ -36,8 +36,8 @@ PlasmaCore.FrameSvgItem {
             }
 
             var date = new Date(timeSettings.currentDate)
-            root.day = date.getDay()
-            root.month = date.getMonth()
+            root.day = date.getDate()
+            root.month = date.getMonth()+1
             root.year = date.getFullYear()
         }
     }
@@ -47,8 +47,8 @@ PlasmaCore.FrameSvgItem {
         }
 
         var date = new Date(timeSettings.currentDate)
-        root.day = date.getDay()
-        root.month = date.getMonth()
+        root.day = date.getDate()
+        root.month = date.getMonth()+1
         root.year = date.getFullYear()
     }
 
@@ -97,12 +97,20 @@ PlasmaCore.FrameSvgItem {
 
         Digit {
             id: dayDigit
-            model: 31
-            currentIndex: day
+            model: {
+                var dd = new Date(year, month, 0);
+                return dd.getDate()
+            }
+            currentIndex: day-1
             onSelectedIndexChanged: {
                 if (selectedIndex > -1) {
-                    year = selectedIndex
+                    day = selectedIndex+1
                 }
+            }
+            delegate: Text {
+                property int ownIndex: index
+                text: index+1
+                font.pointSize: 25
             }
         }
         PlasmaCore.SvgItem {
@@ -117,11 +125,24 @@ PlasmaCore.FrameSvgItem {
         Digit {
             id: monthDigit
             model: 12
-            currentIndex: month
+            currentIndex: month -1
             onSelectedIndexChanged: {
                 if (selectedIndex > -1) {
-                    month = selectedIndex
+                    month = selectedIndex + 1
                 }
+            }
+            property variant months: Array(i18n("Jan"), i18n("Feb"), i18n("Mar"), i18n("Apr"), i18n("May"), i18n("Jun"), i18n("Jul"), i18n("Aug"), i18n("Sep"), i18n("Oct"), i18n("Nov"), i18n("Dec"))
+            delegate: Text {
+                property int ownIndex: index
+                text: months[index]
+                font.pointSize: 25
+            }
+            width: monthPlaceHolder.width
+            Text {
+                id: monthPlaceHolder
+                visible: false
+                font.pointSize: 25
+                text: "0000"
             }
         }
         PlasmaCore.SvgItem {
@@ -130,12 +151,13 @@ PlasmaCore.FrameSvgItem {
             width: naturalSize.width
             anchors {
                 top: parent.top
-                bottom:parent.bottom
+                bottom: parent.bottom
             }
         }
         Digit {
             id: yearDigit
-            model: year + 100
+            //FIXME: yes, this is a tad lame ;)
+            model: 3000
             currentIndex: year
             onSelectedIndexChanged: {
                 if (selectedIndex > -1) {
