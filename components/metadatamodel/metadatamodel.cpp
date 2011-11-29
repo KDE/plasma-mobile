@@ -26,6 +26,7 @@
 
 #include <KDebug>
 #include <KIcon>
+#include <KImageCache>
 #include <KMimeType>
 #include <KIO/PreviewJob>
 
@@ -65,6 +66,7 @@ MetadataModel::MetadataModel(QObject *parent)
             this, SLOT(newEntriesDelayed()));
 
 
+    m_imageCache = new KImageCache("plasma_engine_preview", 10485760);
 
     m_watcher = new Nepomuk::ResourceWatcher(this);
 
@@ -81,6 +83,7 @@ MetadataModel::MetadataModel(QObject *parent)
     roleNames[GenericClassName] = "genericClassName";
     roleNames[HasSymbol] = "hasSymbol";
     roleNames[Icon] = "icon";
+    roleNames[Thumbnail] = "thumbnail";
     roleNames[IsFile] = "isFile";
     roleNames[Exists] = "exists";
     roleNames[Rating] = "rating";
@@ -99,6 +102,7 @@ MetadataModel::MetadataModel(QObject *parent)
 
 MetadataModel::~MetadataModel()
 {
+    delete m_imageCache;
 }
 
 
@@ -537,8 +541,9 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
 
         KUrl file(resource.toFile().url().prettyUrl());
 
-        if (m_previews.contains(file)) {
-            return m_previews.value(file);
+        QImage preview = QImage(m_screenshotSize, QImage::Format_ARGB32_Premultiplied);
+        if (m_imageCache->findImage(file.prettyUrl(), &preview)) {
+            return preview;
         }
 
         if (!m_previewJobs.contains(file) && file.isValid()) {
@@ -620,7 +625,7 @@ void MetadataModel::showPreview(const KFileItem &item, const QPixmap &preview)
         return;
     }
 
-    m_previews.insert(item.url(), preview);
+    m_imageCache->insertImage(item.url().prettyUrl(), preview.toImage());
     //kDebug() << "preview size:" << preview.size();
     emit dataChanged(index, index);
 }

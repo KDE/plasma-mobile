@@ -40,6 +40,7 @@ namespace Nepomuk {
 class QDBusServiceWatcher;
 class QTimer;
 
+class KImageCache;
 
 class MetadataModel : public AbstractMetadataModel
 {
@@ -136,8 +137,8 @@ private:
 
     //previews
     QSize m_screenshotSize;
-    QHash<KUrl, QPixmap> m_previews;
     QHash<KUrl, QPersistentModelIndex> m_previewJobs;
+    KImageCache* m_imageCache;
 };
 
 #endif
