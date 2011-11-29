@@ -173,20 +173,22 @@ Item {
         titleText: i18n("Pick a time server")
         selectedIndex: -1
         model: timeSettings.availableNtpServers
-        delegate: PlasmaComponents.Label {
-            visible: modelData.search(RegExp(filterField.text, "i")) != -1
-            height: visible ? paintedHeight : 0
-            text: modelData
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    timeSettings.ntpServer = modelData
-                    timeSettings.saveTime()
-                    ntpServerPickerDialog.close()
-                }
+        delegate: PlasmaComponents.ListItem {
+            enabled: true
+            visible: modelData.search(RegExp(filterField.filterText, "i")) != -1
+            height: visible ? label.paintedHeight*2 : 0
+            checked: timeSettings.ntpServer == modelData
+            PlasmaComponents.Label {
+                id: label
+                anchors.verticalCenter: parent.verticalCenter
+                text: modelData
+            }
+            onClicked: {
+                timeSettings.ntpServer = modelData
+                timeSettings.saveTime()
+                ntpServerPickerDialog.close()
             }
         }
-
         onRejected: selectedIndex = -1
     }
 
