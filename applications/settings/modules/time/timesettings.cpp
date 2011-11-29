@@ -171,13 +171,15 @@ void TimeSettingsPrivate::initSettings()
 
     KConfig _config( "kcmclockrc", KConfig::NoGlobals );
     KConfigGroup config(&_config, "NTP");
-    config.readEntry("servers",
-        i18n("Public Time Server (pool.ntp.org),\
-    asia.pool.ntp.org,\
-    europe.pool.ntp.org,\
-    north-america.pool.ntp.org,\
-    oceania.pool.ntp.org")).split(',', QString::SkipEmptyParts);
-    config.readEntry("enabled", false);
+    QStringList servers = config.readEntry("servers",
+        QString()).split(',', QString::SkipEmptyParts);
+    if (!servers.isEmpty()) {
+        ntpServer = servers.first();
+    }
+    //FIXME: why?
+    if (ntpServer.length() < 3) {
+        ntpServer = QString();
+    }
 }
 
 
