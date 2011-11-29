@@ -40,13 +40,6 @@ Item {
         icon: QIcon("system-suspend")
 
         onClicked: {
-            print("suspendbutton triggered");
-            var service = pmSource.serviceForSource("PowerManagement")
-            var operation = service.operationDescription("suspend")
-            service.startOperationCall(operation)
-        }
-
-        onPressAndHold: {
             print("suspendbutton pressAndHold");
             var service = pmSource.serviceForSource("PowerManagement")
             var operation = service.operationDescription("requestShutDown")

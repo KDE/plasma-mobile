@@ -5,7 +5,7 @@ import MeeGo.Settings 0.1
 
 MeeGo.AppPage {
     id: container
-    pageTitle: qsTr("Cellular Settings")
+    pageTitle: i18n("Cellular Settings")
 
     property NetworkItemModel networkItem: null
 
@@ -27,7 +27,7 @@ MeeGo.AppPage {
                 source: "image://themedimage/images/settings/pulldown_box_2"
 
                 Text {
-                    text: qsTr("Manual APN entry")
+                    text: i18n("Manual APN entry")
                     width: 100
                     height: parent.height
                     anchors.left: parent.left
@@ -57,7 +57,7 @@ MeeGo.AppPage {
                 property string apn: cellularSettings.apn;
 
                 Text {
-                    text: qsTr("Country")
+                    text: i18n("Country")
                 }
 
                 MeeGo.DropDown {
@@ -75,7 +75,7 @@ MeeGo.AppPage {
                 }
 
                 Text {
-                    text: qsTr("Provider")
+                    text: i18n("Provider")
                 }
 
                 MeeGo.DropDown {
@@ -92,7 +92,7 @@ MeeGo.AppPage {
                 }
 
                 Text {
-                    text: qsTr("APN")
+                    text: i18n("APN")
                 }
 
                 MeeGo.DropDown {
@@ -117,7 +117,7 @@ MeeGo.AppPage {
                 height: childrenRect.height
                 visible: manualApn.on
                 Text {
-                    text: qsTr("APN")
+                    text: i18n("APN")
                 }
 
                 MeeGo.TextEntry {
@@ -128,7 +128,7 @@ MeeGo.AppPage {
                 }
 
                 Text {
-                    text: qsTr("Username")
+                    text: i18n("Username")
                 }
 
                 MeeGo.TextEntry {
@@ -139,7 +139,7 @@ MeeGo.AppPage {
                 }
 
                 Text {
-                    text: qsTr("Password")
+                    text: i18n("Password")
                 }
 
                 MeeGo.TextEntry {
@@ -151,7 +151,7 @@ MeeGo.AppPage {
                 MeeGo.Button {
                     width: parent.width / 3
                     height: 50
-                    text: qsTr("Apply");
+                    text: i18n("Apply");
                     elideText: true
                     onClicked: {
                         cellularSettings.setApn(apn.text, username.text, password.text)

@@ -26,7 +26,9 @@
 
 #include <KDebug>
 #include <KIcon>
+#include <KImageCache>
 #include <KMimeType>
+#include <KIO/PreviewJob>
 
 #include <soprano/vocabulary.h>
 
@@ -50,7 +52,8 @@
 
 MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
-      m_queryClient(0)
+      m_queryClient(0),
+      m_screenshotSize(180, 120)
 {
     m_queryTimer = new QTimer(this);
     m_queryTimer->setSingleShot(true);
@@ -62,7 +65,13 @@ MetadataModel::MetadataModel(QObject *parent)
     connect(m_newEntriesTimer, SIGNAL(timeout()),
             this, SLOT(newEntriesDelayed()));
 
+    m_previewTimer = new QTimer(this);
+    m_previewTimer->setSingleShot(true);
+    connect(m_previewTimer, SIGNAL(timeout()),
+            this, SLOT(delayedPreview()));
 
+    //using the same cache of the engine, they index both by url
+    m_imageCache = new KImageCache("plasma_engine_preview", 10485760);
 
     m_watcher = new Nepomuk::ResourceWatcher(this);
 
@@ -79,6 +88,7 @@ MetadataModel::MetadataModel(QObject *parent)
     roleNames[GenericClassName] = "genericClassName";
     roleNames[HasSymbol] = "hasSymbol";
     roleNames[Icon] = "icon";
+    roleNames[Thumbnail] = "thumbnail";
     roleNames[IsFile] = "isFile";
     roleNames[Exists] = "exists";
     roleNames[Rating] = "rating";
@@ -97,6 +107,7 @@ MetadataModel::MetadataModel(QObject *parent)
 
 MetadataModel::~MetadataModel()
 {
+    delete m_imageCache;
 }
 
 
@@ -528,6 +539,19 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         }
         return icon;
     }
+    case Thumbnail:
+        if (resource.isFile() && resource.toFile().url().isLocalFile()) {
+            KUrl file(resource.toFile().url());
+            QImage preview = QImage(m_screenshotSize, QImage::Format_ARGB32_Premultiplied);
+
+            if (m_imageCache->findImage(file.prettyUrl(), &preview)) {
+                return preview;
+            }
+
+            m_previewTimer->start(100);
+            const_cast<MetadataModel *>(this)->m_filesToPreview[file] = QPersistentModelIndex(index);
+        }
+        return QVariant();
     case IsFile:
         return resource.isFile();
     case Exists:
@@ -582,6 +606,58 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     default:
         return QVariant();
     }
+}
+
+
+void MetadataModel::delayedPreview()
+{
+    QHash<KUrl, QPersistentModelIndex>::const_iterator i = m_filesToPreview.constBegin();
+
+    KFileItemList list;
+
+    while (i != m_filesToPreview.constEnd()) {
+        KUrl file = i.key();
+        QPersistentModelIndex index = i.value();
+
+
+        if (!m_previewJobs.contains(file) && file.isValid()) {
+            list.append(KFileItem(file, QString(), 0));
+            m_previewJobs.insert(file, QPersistentModelIndex(index));
+        }
+
+        ++i;
+    }
+
+    if (list.size() > 0) {
+        KIO::PreviewJob* job = KIO::filePreview(list, m_screenshotSize);
+        job->setIgnoreMaximumSize(true);
+        kDebug() << "Created job" << job;
+        connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
+                this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
+        connect(job, SIGNAL(failed(const KFileItem&)),
+                this, SLOT(previewFailed(const KFileItem&)));
+    }
+
+    m_filesToPreview.clear();
+}
+
+void MetadataModel::showPreview(const KFileItem &item, const QPixmap &preview)
+{
+    QPersistentModelIndex index = m_previewJobs.value(item.url());
+    m_previewJobs.remove(item.url());
+
+    if (!index.isValid()) {
+        return;
+    }
+
+    m_imageCache->insertImage(item.url().prettyUrl(), preview.toImage());
+    //kDebug() << "preview size:" << preview.size();
+    emit dataChanged(index, index);
+}
+
+void MetadataModel::previewFailed(const KFileItem &item)
+{
+    m_previewJobs.remove(item.url());
 }
 
 #include "metadatamodel.moc"

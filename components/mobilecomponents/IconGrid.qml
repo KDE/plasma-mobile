@@ -58,7 +58,7 @@ Item {
         id: appsView
         objectName: "appsView"
         pressDelay: 200
-        cacheBuffer: width*2
+        cacheBuffer: width
         highlightMoveDuration: 250
         anchors.fill: parent
 
@@ -87,17 +87,28 @@ Item {
                     }
                     property int orientation: ListView.Horizontal
 
+                    MobileComponents.PagedProxyModel {
+                        id: pagedProxyModel
+                        sourceModel: main.model
+                        currentPage: index
+                        pageSize: main.pageSize
+                    }
+                    Timer {
+                        id: loadTimer
+                        repeat: false
+                        interval: 0
+                        onTriggered: iconRepeater.model = pagedProxyModel
+                        Component.onCompleted: {
+                            loadTimer.interval = appsView.moving ? 500 : 0
+                            loadTimer.running = true
+                        }
+                    }
                     Repeater {
                         id: iconRepeater
                         property int columns: Math.min(count, Math.floor(appsView.width/main.delegateWidth))
                         property int suggestedWidth: main.delegateWidth*columns
                         //property int suggestedHeight: main.delegateHeight*Math.floor(count/columns)
 
-                        model: MobileComponents.PagedProxyModel {
-                            sourceModel: main.model
-                            currentPage: index
-                            pageSize: main.pageSize
-                        }
                         delegate: main.delegate
                     }
                 }

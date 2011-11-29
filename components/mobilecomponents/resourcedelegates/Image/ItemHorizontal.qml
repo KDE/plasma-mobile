@@ -27,32 +27,6 @@ Item {
     id: resourceItem
     anchors.fill: parent
 
-    PlasmaCore.DataSource {
-        id: pmSource
-        engine: "org.kde.preview"
-
-        interval: 0
-        connectedSources: [url]
-        Component.onCompleted: {
-            print(" setting URL: " + url);
-            if (data[url] == undefined) {
-                previewFrame.visible = false
-                return
-            }
-            previewFrame.visible = data[url]["status"] == "done"
-            iconItem.visible = !previewFrame.visible
-        }
-        onDataChanged: {
-            for (k in data) {
-                print(" Key: " + data);
-            }
-            //print(" dataChanged: NaME" + data[name]);
-            //print(" dataChanged: URL " + data[url]);
-            previewFrame.visible = (data[url]["status"] == "done")
-            iconItem.visible = !previewFrame.visible
-        }
-    }
-
     Column {
         anchors.horizontalCenter: parent.horizontalCenter
 
@@ -67,6 +41,7 @@ Item {
                 height: 64
                 anchors.centerIn: parent
                 icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
+                visible: !previewFrame.visible
             }
 
             PlasmaCore.FrameSvgItem {
@@ -76,7 +51,7 @@ Item {
 
                 height: previewImage.height+margins.top+margins.bottom
                 width: previewImage.width+margins.left+margins.right
-                visible: false
+                visible: thumbnail != undefined
                 anchors.centerIn: previewArea
             }
 
@@ -95,7 +70,7 @@ Item {
                 QImageItem {
                     id: previewImage
                     anchors.centerIn: parent
-                    image: pmSource.data[url] ? pmSource.data[url]["thumbnail"] : undefined
+                    image: thumbnail == undefined ? null : thumbnail
 
                     width: {
                         if (nativeWidth/nativeHeight >= parent.width/parent.height) {

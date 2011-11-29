@@ -245,8 +245,6 @@ void TimeSettings::saveTime()
         helperargs["tzreset"] = true; // // make the helper reset the timezone
     }*/
 
-
-
     KAuth::Action writeAction("org.kde.active.clockconfig.save");
     writeAction.setHelperID("org.kde.active.clockconfig");
     writeAction.setArguments(helperargs);
@@ -335,7 +333,21 @@ void TimeSettings::timeZoneFilterChanged(const QString &filter)
 
 void TimeSettings::saveTimeZone(const QString &newtimezone)
 {
-    kDebug() << "TODO: saving timezone to config: " << newtimezone;
+    kDebug() << "Saving timezone to config: " << newtimezone;
+
+    QVariantMap helperargs;
+    helperargs["tz"] = true;
+    helperargs["tzone"] = newtimezone;
+
+    KAuth::Action writeAction("org.kde.active.clockconfig.save");
+    writeAction.setHelperID("org.kde.active.clockconfig");
+    writeAction.setArguments(helperargs);
+
+    KAuth::ActionReply reply = writeAction.execute();
+    if (reply.failed()) {
+        kWarning()<< "KAuth returned an error code:" << reply.errorCode();
+    }
+
     setTimeZone(newtimezone);
     emit timeZoneChanged();
 }
