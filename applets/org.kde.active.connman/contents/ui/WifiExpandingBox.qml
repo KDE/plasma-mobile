@@ -70,15 +70,15 @@ MeeGo.ExpandingBox {
     }
 
     Component.onCompleted: {
-        WifiHelper.connmanSecurityType["wpa"] = qsTr("WPA");
-        WifiHelper.connmanSecurityType["rsn"] = qsTr("WPA2");
-        WifiHelper.connmanSecurityType["wep"] = qsTr("WEP");
-        WifiHelper.connmanSecurityType["ieee8021x"] = qsTr("RADIUS");
-        WifiHelper.connmanSecurityType["psk"] = qsTr("WPA2");
+        WifiHelper.connmanSecurityType["wpa"] = i18n("WPA");
+        WifiHelper.connmanSecurityType["rsn"] = i18n("WPA2");
+        WifiHelper.connmanSecurityType["wep"] = i18n("WEP");
+        WifiHelper.connmanSecurityType["ieee8021x"] = i18n("RADIUS");
+        WifiHelper.connmanSecurityType["psk"] = i18n("WPA2");
         WifiHelper.connmanSecurityType["none"] = "";
 
-        WifiHelper.IPv4Type["dhcp"] = qsTr("DHCP")
-        WifiHelper.IPv4Type["static"] = qsTr("Static")
+        WifiHelper.IPv4Type["dhcp"] = i18n("DHCP")
+        WifiHelper.IPv4Type["static"] = i18n("Static")
 
         finished = true;
     }
@@ -158,22 +158,22 @@ MeeGo.ExpandingBox {
 
         }
         else if(statusint == NetworkItemModel.StateFailure) {
-            status = qsTr("Failed to Connect")
+            status = i18n("Failed to Connect")
         }
         else if(statusint == NetworkItemModel.StateAssociation) {
-            status = qsTr("Associating")
+            status = i18n("Associating")
 
         }
         else if(statusint == NetworkItemModel.StateConfiguration) {
-            status = qsTr("Configuring")
+            status = i18n("Configuring")
 
         }
         else if(statusint == NetworkItemModel.StateReady) {
-            status = qsTr("Connected")
+            status = i18n("Connected")
 
         }
         else if(statusint == NetworkItemModel.StateOnline) {
-            status = qsTr("Connected")
+            status = i18n("Connected")
         }
         else {
             console.log("state type: " + statusint + "==" + NetworkItemModel.StateIdle)
@@ -209,7 +209,7 @@ MeeGo.ExpandingBox {
             }
 
             Text {
-                text: qsTr("Do you want to remove %1 ?  This action will forget any passwords and you will no longer be automatically connected to %2").arg(networkItem.name).arg(networkItem.name);
+                text: i18n("Do you want to remove %1 ?  This action will forget any passwords and you will no longer be automatically connected to %2").arg(networkItem.name).arg(networkItem.name);
                 font.pixelSize: meegoTheme.fontPixelSizeNormal
                 color: meegoTheme.fontColorNormal
                 wrapMode: Text.WordWrap
@@ -222,7 +222,7 @@ MeeGo.ExpandingBox {
 
                 PlasmaComponents.Button {
                     id: yesDelete
-                    text: qsTr("Yes, Delete")
+                    text: i18n("Yes, Delete")
                     width: removeConfirmArea.width / 2 - 20
                     height: 50
                     onClicked: {
@@ -234,7 +234,7 @@ MeeGo.ExpandingBox {
                 }
                 PlasmaComponents.Button {
                     id: noSave
-                    text: qsTr("No, Save")
+                    text: i18n("No, Save")
                     width: removeConfirmArea.width / 2 - 20
                     height: 50
                     onClicked: {
@@ -265,7 +265,7 @@ MeeGo.ExpandingBox {
 
             PlasmaComponents.Button {
                 id: disconnectButton
-                text: qsTr("Disconnect")
+                text: i18n("Disconnect")
                 height: 50
                 width: orientationWidth
                 onClicked: {
@@ -276,7 +276,7 @@ MeeGo.ExpandingBox {
 
             PlasmaComponents.Button {
                 id: removeConnection
-                text: qsTr("Remove connection")
+                text: i18n("Remove connection")
                 height: 50
                 width: orientationWidth
                 onClicked: {
@@ -287,7 +287,7 @@ MeeGo.ExpandingBox {
 
             Text {
                 id: connectByLabel
-                text: qsTr("Connect by:")
+                text: i18n("Connect by:")
                 font.pixelSize: meegoTheme.fontPixelSizeNormal
                 color: meegoTheme.fontColorNormal
                 width: orientationWidth
@@ -326,7 +326,7 @@ MeeGo.ExpandingBox {
 				id: ipaddyLabel
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
-				text: qsTr("IP Address:")
+				text: i18n("IP Address:")
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
@@ -351,7 +351,7 @@ MeeGo.ExpandingBox {
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				id: subnetMaskLabel
-				text: qsTr("Subnet mask:")
+				text: i18n("Subnet mask:")
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
@@ -373,7 +373,7 @@ MeeGo.ExpandingBox {
 			}
 			Text {
 				id: gatewayLabel
-				text: qsTr("Gateway")
+				text: i18n("Gateway")
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				width: orientationWidth
@@ -399,7 +399,7 @@ MeeGo.ExpandingBox {
 				id: dnsLabel
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
-				text: qsTr("DNS:")
+				text: i18n("DNS:")
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
@@ -421,7 +421,7 @@ MeeGo.ExpandingBox {
 			}
 			Text {
 				id: hwaddyLabel
-				text: qsTr("Hardware address:")
+				text: i18n("Hardware address:")
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				visible: container.networkItem.type != "cellular"
@@ -449,7 +449,7 @@ MeeGo.ExpandingBox {
 				visible: connectionsHacksGconf.value
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
-				text: qsTr("Security: ")
+				text: i18n("Security: ")
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
@@ -468,7 +468,7 @@ MeeGo.ExpandingBox {
 				visible: connectionsHacksGconf.value
 				width: orientationWidth
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-				text: qsTr("Strength: ")
+				text: i18n("Strength: ")
 			}
 			Text {
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
@@ -480,7 +480,7 @@ MeeGo.ExpandingBox {
 
 			PlasmaComponents.Button {
 				id: applyButton
-				text: qsTr("Apply")
+				text: i18n("Apply")
 				height: 50
 				width: orientationWidth
 				onClicked: {
@@ -493,7 +493,7 @@ MeeGo.ExpandingBox {
 
 			PlasmaComponents.Button {
 				id: cancelButton
-				text: qsTr("Cancel")
+				text: i18n("Cancel")
 				height: 50
 				width: orientationWidth
 				onClicked: {
@@ -530,7 +530,7 @@ MeeGo.ExpandingBox {
                         id: passwordTextInput
                         //textInput.echoMode: TextInput.Normal
                         visible: passwordGrid.passwordRequired
-                        placeholderText: qsTr("Type password here")
+                        placeholderText: i18n("Type password here")
                         width: passwordGrid.width / 2
                         text: container.networkItem.passphrase
                     }
@@ -539,7 +539,7 @@ MeeGo.ExpandingBox {
                         id: setupButton
                         height: 50
 
-                        text:  qsTr("Setup")
+                        text:  i18n("Setup")
                         visible: container.networkItem.type == "cellular"
                         onClicked: {
                            addPage(cellularSettings)
@@ -552,7 +552,7 @@ MeeGo.ExpandingBox {
                         property bool shouldBeActive: container.statusint != NetworkItemModel.StateAssociation &&
                                                       container.statusint != NetworkItemModel.StateConfiguration
                         enabled: shouldBeActive
-                        text: qsTr("Connect")
+                        text: i18n("Connect")
                         onClicked: {
                             if(container.networkItem.type == "wifi") {
                                 container.networkItem.passphrase = passwordTextInput.text;
@@ -580,7 +580,7 @@ MeeGo.ExpandingBox {
 
                     Text {
                         visible: passwordGrid.passwordRequired
-                        text: qsTr("Show password")
+                        text: i18n("Show password")
                         font.pixelSize: 14//theme_fontPixelSizeLarge
                         width: 100
                         height: showPasswordCheckbox.height
