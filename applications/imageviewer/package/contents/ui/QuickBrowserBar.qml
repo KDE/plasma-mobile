@@ -41,10 +41,7 @@ Rectangle {
     }
 
     height: 65
-    PlasmaCore.DataSource {
-        id: previewSource
-        engine: "org.kde.preview"
-    }
+
     ListView {
         id: thumbnailsView
         spacing: 1
@@ -101,10 +98,8 @@ Rectangle {
                     }
                 }
 
-                image: previewSource.data[url]["thumbnail"]
-                Component.onCompleted: {
-                    previewSource.connectSource(url)
-                }
+                image: thumbnail
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
