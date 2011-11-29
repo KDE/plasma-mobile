@@ -114,7 +114,7 @@ Item {
                 MouseArea {
                     anchors.fill: delegateContainer
                     onClicked: {
-                        print("URL from completer chosen: " + name + " " + url);
+                        //print("URL from completer chosen: " + name + " " + url);
                         urlEntered(url);
                         mainItem.state = "collapsed"
                     }
@@ -122,19 +122,6 @@ Item {
                     onReleased: MobileComponents.PressedAnimation { targetItem: delegateContainer }
                 }
 
-            }
-        }
-
-        Component {
-            id: listHighlight
-
-            PlasmaCore.FrameSvgItem {
-            visible: false
-                //anchors.fill: parent
-                opacity: 0
-                id: highlightFrame
-                imagePath: "widgets/viewitem"
-                prefix: "selected+hover"
             }
         }
 
@@ -162,12 +149,10 @@ Item {
                     target: urlInput
                     onUrlFilterChanged: {
                         var newFilter = urlInput.urlFilter;
-                        print(" New Filter: " + newFilter);
+                        //print(" New Filter: " + newFilter);
                         if (newFilter != "") {
-                            print("nonempty");
                             topLabel.text = i18n("Search for <em>" + newFilter + "</em>...");
                         } else {
-                            print(" empty");
                             topLabel.text = i18n("Start typing...");
                         }
                     }
@@ -203,6 +188,8 @@ Item {
                     model: historyModel
                     delegate: myDelegate
                     highlight: PlasmaComponents.Highlight {}
+                    currentIndex: -1
+
                 }
             }
 
@@ -222,11 +209,12 @@ Item {
                     clip: true
                     anchors.fill: parent
                     anchors.topMargin: bookmarksLabel.height + 8
+                    currentIndex: -1
                     //width: (parent.width / 2)
                     //height: parent.height
                     model: bookmarksModel
                     delegate: myDelegate
-                    highlight: listHighlight
+                    highlight: PlasmaComponents.Highlight {}
                 }
             }
         }
@@ -257,33 +245,11 @@ Item {
     transitions: [
         Transition {
             from: "collapsed"; to: "expanded"
-            ParallelAnimation {
-                PropertyAnimation {
-                    properties: "opacity"
-                    duration: 175;
-                    easing.type: Easing.InExpo;
-                }
-                PropertyAnimation {
-                    properties: "scale"
-                    duration: 175;
-                    easing.type: Easing.InExpo;
-                }
-            }
+            MobileComponents.AppearAnimation { targetItem: mainItem }
         },
         Transition {
             from: "expanded"; to: "collapsed"
-            ParallelAnimation {
-                PropertyAnimation {
-                    properties: "opacity"
-                    duration: 175;
-                    easing.type: Easing.OutExpo;
-                }
-                PropertyAnimation {
-                    properties: "scale"
-                    duration: 100;
-                    easing.type: Easing.OutExpo;
-                }
-            }
+            MobileComponents.DisappearAnimation { targetItem: mainItem }
         }
     ]
 }
