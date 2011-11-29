@@ -58,7 +58,7 @@ Item {
         id: appsView
         objectName: "appsView"
         pressDelay: 200
-        cacheBuffer: width*2
+        cacheBuffer: width
         highlightMoveDuration: 250
         anchors.fill: parent
 
