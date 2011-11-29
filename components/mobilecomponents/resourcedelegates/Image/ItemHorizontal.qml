@@ -41,6 +41,7 @@ Item {
                 height: 64
                 anchors.centerIn: parent
                 icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
+                visible: !previewFrame.visible
             }
 
             PlasmaCore.FrameSvgItem {
@@ -69,7 +70,7 @@ Item {
                 QImageItem {
                     id: previewImage
                     anchors.centerIn: parent
-                    image: thumbnail
+                    image: thumbnail == undefined ? null : thumbnail
 
                     width: {
                         if (nativeWidth/nativeHeight >= parent.width/parent.height) {
