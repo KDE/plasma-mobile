@@ -51,6 +51,7 @@ target_link_libraries(datamodelsplugin
         ${NEPOMUK_QUERY_LIBRARIES}
         ${KDE4_KDECORE_LIBRARY}
         ${KDE4_PLASMA_LIBS}
+        ${KDE4_KIO_LIBS}
         nepomukdatamanagement
         ${KACTIVITIES_LIBRARY}
         )

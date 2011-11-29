@@ -24,6 +24,8 @@
 
 #include <QDate>
 
+#include <KFileItem>
+
 #include <Nepomuk/Query/Query>
 #include <Nepomuk/Query/Result>
 #include <Nepomuk/Query/QueryServiceClient>
@@ -56,6 +58,7 @@ public:
         GenericClassName,
         HasSymbol,
         Icon,
+        Thumbnail,
         IsFile,
         Exists,
         Rating,
@@ -112,6 +115,8 @@ protected Q_SLOTS:
     void newEntriesDelayed();
     void finishedListing();
     void propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val);
+    void showPreview(const KFileItem &item, const QPixmap &preview);
+    void previewFailed(const KFileItem &item);
 
 private:
     Nepomuk::Query::Query m_query;
@@ -128,6 +133,11 @@ private:
 
     QStringList m_sortBy;
     Qt::SortOrder m_sortOrder;
+
+    //previews
+    QSize m_screenshotSize;
+    QHash<KUrl, QPixmap> m_previews;
+    QHash<KUrl, QPersistentModelIndex> m_previewJobs;
 };
 
 #endif
