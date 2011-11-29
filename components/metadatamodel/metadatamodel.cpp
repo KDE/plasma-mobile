@@ -66,6 +66,7 @@ MetadataModel::MetadataModel(QObject *parent)
             this, SLOT(newEntriesDelayed()));
 
 
+    //using the same cache of the engine, they index both by url
     m_imageCache = new KImageCache("plasma_engine_preview", 10485760);
 
     m_watcher = new Nepomuk::ResourceWatcher(this);
