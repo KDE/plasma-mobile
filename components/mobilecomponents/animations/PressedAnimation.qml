@@ -22,8 +22,8 @@ import QtQuick 1.0
 import "Animations.js" as Animations
 
 SequentialAnimation {
-    id: activateAnimation
-    objectName: "activateAnimation"
+    id: pressedAnimation
+    objectName: "pressedAnimation"
 
     property Item targetItem
     property int duration: Animations.feedbackDuration
@@ -36,14 +36,14 @@ SequentialAnimation {
             target: targetItem
             properties: "opacity"
             from: 0.5; to: 1.0
-            duration: activateAnimation.duration;
+            duration: pressedAnimation.duration;
             easing.type: Easing.OutExpo;
         }
         PropertyAnimation {
             target: targetItem
             properties: "scale"
             from: 1.0; to: 0.9
-            duration: activateAnimation.duration;
+            duration: pressedAnimation.duration;
             easing.type: Easing.OutExpo;
         }
     }
