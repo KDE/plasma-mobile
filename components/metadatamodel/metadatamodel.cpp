@@ -613,24 +613,29 @@ void MetadataModel::delayedPreview()
 {
     QHash<KUrl, QPersistentModelIndex>::const_iterator i = m_filesToPreview.constBegin();
 
+    KFileItemList list;
+
     while (i != m_filesToPreview.constEnd()) {
         KUrl file = i.key();
         QPersistentModelIndex index = i.value();
 
 
         if (!m_previewJobs.contains(file) && file.isValid()) {
-            KFileItemList list;
             list.append(KFileItem(file, QString(), 0));
-            KIO::PreviewJob* job = KIO::filePreview(list, m_screenshotSize);
-            job->setIgnoreMaximumSize(true);
-            connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-                    this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
-            connect(job, SIGNAL(failed(const KFileItem&)),
-                    this, SLOT(previewFailed(const KFileItem&)));
             m_previewJobs.insert(file, QPersistentModelIndex(index));
         }
 
         ++i;
+    }
+
+    if (list.size() > 0) {
+        KIO::PreviewJob* job = KIO::filePreview(list, m_screenshotSize);
+        job->setIgnoreMaximumSize(true);
+        kDebug() << "Created job" << job;
+        connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
+                this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
+        connect(job, SIGNAL(failed(const KFileItem&)),
+                this, SLOT(previewFailed(const KFileItem&)));
     }
 
     m_filesToPreview.clear();
