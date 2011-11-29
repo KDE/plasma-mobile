@@ -50,6 +50,8 @@ class TimeSettings : public SettingsModule
     Q_PROPERTY(QObject* timeZonesModel READ timeZonesModel WRITE setTimeZonesModel NOTIFY timeZonesModelChanged)
     Q_PROPERTY(QTime currentTime READ currentTime WRITE setCurrentTime NOTIFY currentTimeChanged)
     Q_PROPERTY(QDate currentDate READ currentDate WRITE setCurrentDate NOTIFY currentDateChanged)
+    Q_PROPERTY(QString ntpServer READ ntpServer WRITE setNtpServer NOTIFY ntpServerChanged)
+    Q_PROPERTY(QStringList availableNtpServers READ availableNtpServers CONSTANT)
     Q_PROPERTY(QString currentTimeText READ currentTimeText NOTIFY currentTimeTextChanged)
 
     public:
@@ -75,6 +77,11 @@ class TimeSettings : public SettingsModule
 
         QDate currentDate() const;
         void setCurrentDate(const QDate &date);
+
+        QString ntpServer() const;
+        void setNtpServer(const QString &server);
+
+        QStringList availableNtpServers() const;
 
         QString timeFormat();
         QString timeZone();
@@ -102,6 +109,10 @@ class TimeSettings : public SettingsModule
         void timeZoneChanged();
         void timeZonesChanged();
         void timeZonesModelChanged();
+        void ntpServerChanged();
+
+    protected:
+        QString findNtpUtility();
 
     private:
         TimeSettingsPrivate* d;

@@ -102,6 +102,35 @@ Item {
             text: timeSettings.timeZone
             onClicked: timeZonePickerDialog.open()
         }
+
+        PlasmaComponents.Label {
+            id: ntpLabel
+            text: i18n("Use NTP:")
+            anchors {
+                right: timeZoneButton.left
+                rightMargin: theme.defaultFont.mSize.width
+            }
+        }
+
+        Row {
+            spacing: theme.defaultFont.mSize.width
+            PlasmaComponents.CheckBox {
+                id: ntpCheckBox
+                checked: timeSettings.ntpServer != ""
+                onCheckedChanged: {
+                    if (!checked) {
+                        timeSettings.ntpServer = ""
+                        timeSettings.saveTime()
+                    }
+                }
+            }
+            PlasmaComponents.Button {
+                id: ntpButton
+                text: timeSettings.ntpServer == "" ? i18n("Pick a server") : timeSettings.ntpServer
+                onClicked: ntpServerPickerDialog.open()
+                enabled: ntpCheckBox.checked
+            }
+        }
     }
 
 
@@ -113,9 +142,11 @@ Item {
         }
         spacing: 32
         TimePicker {
+            enabled: !ntpCheckBox.checked
             anchors.horizontalCenter: parent.horizontalCenter
         }
         DatePicker {
+            enabled: !ntpCheckBox.checked
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
@@ -137,8 +168,26 @@ Item {
         }
     }
 
-    Component.onCompleted: {
-        print("Time.qml done loading.");
-        //print("settingsObject.name" + timeSettings.name);
+    PlasmaComponents.SelectionDialog {
+        id: ntpServerPickerDialog
+        titleText: i18n("Pick a time server")
+        selectedIndex: -1
+        model: timeSettings.availableNtpServers
+        delegate: PlasmaComponents.Label {
+            visible: modelData.search(RegExp(filterText, "i")) != -1
+            height: visible ? paintedHeight : 0
+            text: modelData
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    timeSettings.ntpServer = modelData
+                    timeSettings.saveTime()
+                    ntpServerPickerDialog.close()
+                }
+            }
+        }
+
+        onRejected: selectedIndex = -1
     }
+
 }

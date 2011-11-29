@@ -68,6 +68,7 @@ public:
     QTime currentTime;
     QDate currentDate;
     QTimer *timer;
+    QString ntpServer;
 
     void initSettings();
     void initTimeZones();
@@ -167,6 +168,16 @@ void TimeSettingsPrivate::initSettings()
     //setTimeFormat(d->localeSettings.readEntry("TimeFormat", QString(FORMAT24H)));
     //setTimeFormat(d->localeSettings.readEntry("TimeFormat", QString(FORMAT12H)));
     q->setTimeFormat( localeSettings.readEntry( "TimeFormat", QString() ) );
+
+    KConfig _config( "kcmclockrc", KConfig::NoGlobals );
+    KConfigGroup config(&_config, "NTP");
+    config.readEntry("servers",
+        i18n("Public Time Server (pool.ntp.org),\
+    asia.pool.ntp.org,\
+    europe.pool.ntp.org,\
+    north-america.pool.ntp.org,\
+    oceania.pool.ntp.org")).split(',', QString::SkipEmptyParts);
+    config.readEntry("enabled", false);
 }
 
 
@@ -209,6 +220,52 @@ void TimeSettings::setCurrentDate(const QDate &currentDate)
     }
 }
 
+QString TimeSettings::ntpServer() const
+{
+    return d->ntpServer;
+}
+
+void TimeSettings::setNtpServer(const QString &server)
+{
+    if (d->ntpServer != server) {
+        d->ntpServer = server;
+        emit ntpServerChanged();
+    }
+}
+
+QStringList TimeSettings::availableNtpServers() const
+{
+    QStringList servers;
+    servers << "pool.ntp.org" << "asia.pool.ntp.org" << "europe.pool.ntp.org" << "north-america.pool.ntp.org" << "oceania.pool.ntp.org";
+    return servers;
+}
+
+QString TimeSettings::findNtpUtility()
+{
+    QByteArray envpath = qgetenv("PATH");
+    if (!envpath.isEmpty() && envpath[0] == ':') {
+        envpath = envpath.mid(1);
+    }
+
+    QString path = "/sbin:/usr/sbin:";
+    if (!envpath.isEmpty()) {
+        path += QString::fromLocal8Bit(envpath);
+    } else {
+        path += QLatin1String("/bin:/usr/bin");
+    }
+
+    QString ntpUtility;
+    foreach (const QString &possible_ntputility, QStringList() << "ntpdate" << "rdate" ) {
+        if (!((ntpUtility = KStandardDirs::findExe(possible_ntputility, path)).isEmpty())) {
+        kDebug() << "ntpUtility = " << ntpUtility;
+        return ntpUtility;
+        }
+    }
+
+    kDebug() << "ntpUtility not found!";
+    return QString();
+}
+
 void TimeSettings::saveTime()
 {
     QVariantMap helperargs;
@@ -216,28 +273,18 @@ void TimeSettings::saveTime()
 
     //TODO: enable NTP
     // Save the order, but don't duplicate!
-    /*QStringList list;
-    if (timeServerList->count() != 0) {
-        list.append(timeServerList->currentText());
-    for (int i=0; i<timeServerList->count();i++) {
-        QString text = timeServerList->itemText(i);
-        if( !list.contains(text) )
-        list.append(text);
-        // Limit so errors can go away and not stored forever
-        if( list.count() == 10)
-        break;
-    }
-
+    QStringList list;
+    list << d->ntpServer;
     helperargs["ntp"] = true;
     helperargs["ntpServers"] = list;
-    helperargs["ntpEnabled"] = setDateTimeAuto->isChecked();
+    helperargs["ntpEnabled"] = !d->ntpServer.isEmpty();
+    QString ntpUtility = findNtpUtility();
     helperargs["ntpUtility"] = ntpUtility;
 
-    if (setDateTimeAuto->isChecked() && !ntpUtility.isEmpty()) {
+    if (!d->ntpServer.isEmpty() && !ntpUtility.isEmpty()) {
         // NTP Time setting - done in helper
-        timeServer = timeServerList->currentText();
-        kDebug() << "Setting date from time server " << timeServer;
-    } else*/ {
+        kDebug() << "Setting date from time server " << list;
+    } else {
         // User time setting
         QDateTime dt(d->currentDate, d->currentTime);
 
