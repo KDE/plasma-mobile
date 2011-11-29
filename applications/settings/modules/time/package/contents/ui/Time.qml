@@ -174,7 +174,7 @@ Item {
         selectedIndex: -1
         model: timeSettings.availableNtpServers
         delegate: PlasmaComponents.Label {
-            visible: modelData.search(RegExp(filterText, "i")) != -1
+            visible: modelData.search(RegExp(filterField.text, "i")) != -1
             height: visible ? paintedHeight : 0
             text: modelData
             MouseArea {
