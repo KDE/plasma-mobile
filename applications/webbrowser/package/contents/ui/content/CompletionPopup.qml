@@ -55,7 +55,6 @@ Item {
             Item {
                 id: delegateContainer
                 height: 64
-                //width: ((parent.width / 2) - parent.rightMargin * 2)
                 width: 380
                 anchors.topMargin: 8
 
@@ -64,12 +63,10 @@ Item {
                     width: 48
                     height: 32
                     icon: QIcon(iconName)
-                    //anchors.horizontalCenter: parent.horizontalCenter
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.left: parent.left
                     anchors.rightMargin: 8
-                    //image: preview
                 }
                 Text {
                     height: 20
@@ -80,8 +77,6 @@ Item {
                     color: theme.textColor
                     anchors.left: previewImage.right
                     anchors.leftMargin: 12
-                    //anchors.left: previewImage.right
-                    //anchors.top: parent.top
                     anchors.bottom : parent.verticalCenter
                 }
 
@@ -95,17 +90,13 @@ Item {
                     anchors.left: previewImage.right
                     anchors.leftMargin: 12
                     width: 320
-                    //anchors.left: previewImage.right
                     anchors.top: parent.verticalCenter
-                    //anchors.bottom: parent.bottom
                 }
 
                 QImageItem {
                     id: rightPreview
                     width: 32
                     height: 32
-                    //icon: QIcon("view-history")
-                    //anchors.horizontalCenter: parent.horizontalCenter
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.right: parent.right
@@ -137,7 +128,6 @@ Item {
             }
             Text {
                 id: topLabel
-                //text: "<h3>placeholder</h3>"
                 height: 48
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
@@ -180,7 +170,6 @@ Item {
                     }
                 }
                 ListView {
-                    //spacing: 16
                     id: historyList
                     clip: true
                     anchors.fill: parent
@@ -205,13 +194,10 @@ Item {
                     text: i18n("<h3>Bookmarks</h3>")
                 }
                 ListView {
-                    //spacing: 4
                     clip: true
                     anchors.fill: parent
                     anchors.topMargin: bookmarksLabel.height + 8
                     currentIndex: -1
-                    //width: (parent.width / 2)
-                    //height: parent.height
                     model: bookmarksModel
                     delegate: myDelegate
                     highlight: PlasmaComponents.Highlight {}
