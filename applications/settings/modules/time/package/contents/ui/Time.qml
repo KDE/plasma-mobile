@@ -105,11 +105,18 @@ Item {
     }
 
 
-    TimePicker {
+    Column {
         anchors {
             top: formLayout.bottom
             topMargin: theme.defaultFont.mSize.height*3
             horizontalCenter: parent.horizontalCenter
+        }
+        spacing: 32
+        TimePicker {
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        DatePicker {
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 

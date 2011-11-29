@@ -49,6 +49,7 @@ class TimeSettings : public SettingsModule
     Q_PROPERTY(QList<QObject*> timeZones READ timeZones WRITE setTimeZones NOTIFY timeZonesChanged)
     Q_PROPERTY(QObject* timeZonesModel READ timeZonesModel WRITE setTimeZonesModel NOTIFY timeZonesModelChanged)
     Q_PROPERTY(QTime currentTime READ currentTime WRITE setCurrentTime NOTIFY currentTimeChanged)
+    Q_PROPERTY(QDate currentDate READ currentDate WRITE setCurrentDate NOTIFY currentDateChanged)
     Q_PROPERTY(QString currentTimeText READ currentTimeText NOTIFY currentTimeTextChanged)
 
     public:
@@ -72,6 +73,9 @@ class TimeSettings : public SettingsModule
         QTime currentTime() const;
         void setCurrentTime(const QTime &time);
 
+        QDate currentDate() const;
+        void setCurrentDate(const QDate &date);
+
         QString timeFormat();
         QString timeZone();
         QList<QObject*> timeZones();
@@ -92,6 +96,7 @@ class TimeSettings : public SettingsModule
     Q_SIGNALS:
         void currentTimeTextChanged();
         void currentTimeChanged();
+        void currentDateChanged();
         void twentyFourChanged();
         void timeFormatChanged();
         void timeZoneChanged();

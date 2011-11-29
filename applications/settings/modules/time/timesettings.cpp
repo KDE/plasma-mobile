@@ -66,6 +66,7 @@ public:
     QString timeZoneFilter;
     QString currentTimeText;
     QTime currentTime;
+    QDate currentDate;
     QTimer *timer;
 
     void initSettings();
@@ -166,13 +167,13 @@ void TimeSettingsPrivate::initSettings()
     //setTimeFormat(d->localeSettings.readEntry("TimeFormat", QString(FORMAT24H)));
     //setTimeFormat(d->localeSettings.readEntry("TimeFormat", QString(FORMAT12H)));
     q->setTimeFormat( localeSettings.readEntry( "TimeFormat", QString() ) );
-
 }
 
 
 void TimeSettings::timeout()
 {
     setCurrentTime(QTime::currentTime());
+    setCurrentDate(QDate::currentDate());
 }
 
 
@@ -192,6 +193,19 @@ void TimeSettings::setCurrentTime(const QTime &currentTime)
         d->currentTime = currentTime;
         d->currentTimeText = KGlobal::locale()->formatTime(QTime::currentTime(), true);
         emit currentTimeChanged();
+    }
+}
+
+QDate TimeSettings::currentDate() const
+{
+    return d->currentDate;
+}
+
+void TimeSettings::setCurrentDate(const QDate &currentDate)
+{
+    if (d->currentDate != currentDate) {
+        d->currentDate = currentDate;
+        emit currentDateChanged();
     }
 }
 
@@ -225,7 +239,7 @@ void TimeSettings::saveTime()
         kDebug() << "Setting date from time server " << timeServer;
     } else*/ {
         // User time setting
-        QDateTime dt(QDate::currentDate(), d->currentTime);
+        QDateTime dt(d->currentDate, d->currentTime);
 
         kDebug() << "Set date " << dt;
 
