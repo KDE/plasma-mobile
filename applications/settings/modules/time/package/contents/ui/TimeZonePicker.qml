@@ -134,6 +134,7 @@ Item {
                 text: display
             }
             enabled: true
+            checked: timeSettings.timeZone == display
             onClicked: {
                 print (" save: " + display);
                 timeSettings.saveTimeZone(display)
