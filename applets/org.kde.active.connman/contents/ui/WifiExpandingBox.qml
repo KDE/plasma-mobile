@@ -260,7 +260,6 @@ MeeGo.ExpandingBox {
             height: childrenRect.height
 
             property bool editable: container.networkItem.method != "dhcp" && container.networkItem.type != "cellular"
-            property int parent.width: parent.width//(settingsGrid.width  / (window.orientation == 1 || window.orientation == 3 ? 3:2)) - settingsGrid.spacing * 2
 
 
             PlasmaComponents.Button {
