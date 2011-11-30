@@ -179,6 +179,11 @@ Flickable {
                 property: "renderingEnabled"
                 value: false
             }
+            PropertyAction {
+                target: flickable
+                property: "smooth"
+                value: false
+            }
             ParallelAnimation {
                 NumberAnimation {
                     id: scaleAnim
@@ -225,6 +230,11 @@ Flickable {
             PropertyAction {
                 target: webView
                 property: "renderingEnabled"
+                value: true
+            }
+            PropertyAction {
+                target: flickable
+                property: "smooth"
                 value: true
             }
         }
