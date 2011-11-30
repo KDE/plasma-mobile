@@ -252,6 +252,14 @@ void PlasmaApp::show()
         m_dialog->show();
     }
 
+    QTimer::singleShot(200, this, SLOT(delayedMouseReposition()));
+}
+
+void PlasmaApp::delayedMouseReposition()
+{
+    //if the cursor is outside the keyboard at the first touch event,
+    //the current window loses focus and the keyboard will hide
+    QCursor::setPos(m_dialog->geometry().center());
 }
 
 void PlasmaApp::windowChangeHide()
