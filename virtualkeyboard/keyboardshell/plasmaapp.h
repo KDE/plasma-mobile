@@ -82,6 +82,7 @@ private Q_SLOTS:
     void hideKeyboard();
     void windowChangeHide();
     void clearIgnoreNextWindowHide();
+    void delayedMouseReposition();
 
 private:
     Plasma::Corona *m_corona;
