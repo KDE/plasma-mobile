@@ -27,7 +27,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Item {
     id: recommendationsPanel
     height: parent.height/1.2
-    width: parent.width/1.8
+    width: parent.width/2.1
     state: "hidden"
     property Item recommendations
     enabled: (!recommendations || recommendations.state == "Passive")?false:true
