@@ -112,7 +112,7 @@ MouseArea {
             left: parent.left
             right: parent.right
             top: tagCloud.bottom
-            topMargin: theme.defaultFont.mSize.height
+            topMargin: 8
         }
 
         onSearchQueryChanged: {
@@ -172,7 +172,8 @@ MouseArea {
             right: parent.right
             top: searchField.bottom
             bottom: parent.bottom
-            margins: 4
+            topMargin: 6
+            bottomMargin: 4
         }
     }
 }
