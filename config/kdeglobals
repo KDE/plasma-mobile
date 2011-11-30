@@ -6,13 +6,13 @@ BrowserApplication[$e]=!active-webbrowser
 XftAntialias=true
 XftHintStyle=hintmedium
 XftSubPixel=rgb
-desktopFont=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
-fixed=Droid Sans Mono,12,-1,5,50,0,0,0,0,0
-font=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
-menuFont=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
-smallestReadableFont=Droid Sans Fallback,10,-1,5,50,0,0,0,0,0
-taskbarFont=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
-toolBarFont=Droid Sans Fallback,11,-1,5,50,0,0,0,0,0
+desktopFont=Droid Sans Fallback,11,-1,5,50,0,0,0,0,0
+fixed=Droid Sans Mono,11,-1,5,50,0,0,0,0,0
+font=Droid Sans Fallback,11,-1,5,50,0,0,0,0,0
+menuFont=Droid Sans Fallback,11,-1,5,50,0,0,0,0,0
+smallestReadableFont=Droid Sans Fallback,9,-1,5,50,0,0,0,0,0
+taskbarFont=Droid Sans Fallback,11,-1,5,50,0,0,0,0,0
+toolBarFont=Droid Sans Fallback,10,-1,5,50,0,0,0,0,0
 
 [KDE]
 ShowDeleteCommand=false
@@ -21,7 +21,7 @@ StartDragDist=16
 StartDragTime=500
 
 [WM]
-activeFont=Droid Sans Fallback,14,-1,5,50,0,0,0,0,0
+activeFont=Droid Sans Fallback,11,-1,5,50,0,0,0,0,0
 
 [Locale]
 TimeFormat=%H:%M:%S

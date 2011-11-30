@@ -44,7 +44,7 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        spacing: 12
+        spacing: theme.defaultFont.mSize.height
         Text {
             color: theme.textColor
             text: "<h3>" + moduleTitle + "</h3>"
@@ -66,7 +66,7 @@ Item {
         anchors {
             top: titleCol.bottom
             horizontalCenter: parent.horizontalCenter
-            topMargin: theme.defaultFont.mSize.height*3
+            topMargin: theme.defaultFont.mSize.height
         }
 
         PlasmaComponents.Label {
@@ -137,10 +137,10 @@ Item {
     Column {
         anchors {
             top: formLayout.bottom
-            topMargin: theme.defaultFont.mSize.height*3
+            topMargin: theme.defaultFont.mSize.height
             horizontalCenter: parent.horizontalCenter
         }
-        spacing: 32
+        spacing: theme.defaultFont.mSize.height
         TimePicker {
             enabled: !ntpCheckBox.checked
             anchors.horizontalCenter: parent.horizontalCenter

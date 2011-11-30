@@ -194,7 +194,7 @@ Item {
                     horizontalOffset: 1
                     verticalOffset: 1
                     bold: true
-                    pixelSize: 20
+                    pointSize: theme.defaultFont.pointSize * 1.1
                     anchors.verticalCenter: configureButton.verticalCenter
                 }
             }

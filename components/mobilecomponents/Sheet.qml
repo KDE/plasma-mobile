@@ -113,7 +113,10 @@ Item {
             anchors.fill: parent
             //eat mouse events to mot trigger the sheet hide
             onPressed: mouse.accepted = true
-            onClicked: sheet.forceActiveFocus()
+            onClicked: {
+                sheet.forceActiveFocus()
+                focus = false
+            }
         }
 
         PlasmaCore.FrameSvgItem {
@@ -133,7 +136,7 @@ Item {
                 id: titleLabel
                 horizontalAlignment: Text.AlignHCenter
                 elide: Text.ElideRight
-                font.pointSize: theme.defaultFont.pointSize * 1.3
+                font.pointSize: theme.defaultFont.pointSize * 1.1
                 font.weight: Font.Bold
                 style: Text.Raised
                 styleColor: Qt.rgba(1,1,1,0.8)

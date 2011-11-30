@@ -108,6 +108,7 @@ PlasmaCore.FrameSvgItem {
                         filterField.opacity = 1
                         filterField.forceActiveFocus()
                         activitySwitcher.state = "AcceptingInput"
+                        fakeTextInput.openSoftwareInputPanel()
                     }
                     //TODO: should get focus
                 }

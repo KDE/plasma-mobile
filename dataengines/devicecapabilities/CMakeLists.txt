@@ -13,7 +13,6 @@ kde4_add_plugin(plasma_engine_devicecapabilities ${capability_srcs})
 target_link_libraries(plasma_engine_devicecapabilities
     ${KDE4_KDECORE_LIBS}
     ${KDE4_PLASMA_LIBS}
-    kworkspace
 )
 
 # Engine

@@ -97,7 +97,7 @@ PlasmaCore.FrameSvgItem {
             delegate: Text {
                 property int ownIndex: index
                 text: !timeSettings.twentyFour && index == 0 ? "12" : clockRow.twoDigitString(index)
-                font.pointSize: 25
+                font.pointSize: 20
             }
             onSelectedIndexChanged: {
                 if (selectedIndex > -1) {

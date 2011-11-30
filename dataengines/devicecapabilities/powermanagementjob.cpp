@@ -17,6 +17,7 @@
  */
 
 #include <QDBusConnection>
+#include <QDBusInterface>
 #include <QDBusMessage>
 #include <QDBusPendingReply>
 
@@ -66,7 +67,11 @@ bool PowerManagementJob::suspend()
 
 bool PowerManagementJob::requestShutDown()
 {
-    //KWorkSpace::requestShutDown();
+    QDBusInterface ksmserver("org.kde.ksmserver", "/KSMServer");
+    ksmserver.asyncCall("logout",
+                        KWorkSpace::ShutdownConfirmDefault,
+                        KWorkSpace::ShutdownTypeDefault,
+                        KWorkSpace::ShutdownModeDefault);
     return true;
 }
 

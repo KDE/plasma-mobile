@@ -101,7 +101,7 @@ PlasmaCore.FrameSvgItem {
                 var dd = new Date(year, month, 0);
                 return dd.getDate()
             }
-            currentIndex: day-1
+            currentIndex: ((day - 1) < model) ? day-1 : 1
             onSelectedIndexChanged: {
                 if (selectedIndex > -1) {
                     day = selectedIndex+1
@@ -110,7 +110,7 @@ PlasmaCore.FrameSvgItem {
             delegate: Text {
                 property int ownIndex: index
                 text: index+1
-                font.pointSize: 25
+                font.pointSize: 20
             }
         }
         PlasmaCore.SvgItem {
@@ -135,13 +135,13 @@ PlasmaCore.FrameSvgItem {
             delegate: Text {
                 property int ownIndex: index
                 text: months[index]
-                font.pointSize: 25
+                font.pointSize: 20
             }
             width: monthPlaceHolder.width
             Text {
                 id: monthPlaceHolder
                 visible: false
-                font.pointSize: 25
+                font.pointSize: 20
                 text: "0000"
             }
         }
@@ -168,7 +168,7 @@ PlasmaCore.FrameSvgItem {
             Text {
                 id: yearPlaceHolder
                 visible: false
-                font.pointSize: 25
+                font.pointSize: 20
                 text: "0000"
             }
         }

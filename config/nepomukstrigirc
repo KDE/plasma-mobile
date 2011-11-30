@@ -1,2 +1,11 @@
 [General]
 disable suspend on powersave=true
+exclude filters=.*/,.*,*~,*.part
+exclude filters version=2
+folders[$e]=$HOME,/usr/share/contour/demo/contourdemo
+index hidden folders=false
+index newly mounted=false
+
+[RemovableMedia]
+ask user=false
+index newly mounted=false

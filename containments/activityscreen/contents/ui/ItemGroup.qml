@@ -254,6 +254,8 @@ PlasmaCore.FrameSvgItem {
             text: itemGroup.title
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
+            font.pointSize: theme.defaultFont.pointSize
+            color: theme.textColor
             anchors {
                 top: parent.top
                 left: parent.left

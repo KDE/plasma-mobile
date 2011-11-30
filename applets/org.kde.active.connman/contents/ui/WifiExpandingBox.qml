@@ -260,7 +260,6 @@ MeeGo.ExpandingBox {
             height: childrenRect.height
 
             property bool editable: container.networkItem.method != "dhcp" && container.networkItem.type != "cellular"
-            property int parent.width: parent.width//(settingsGrid.width  / (window.orientation == 1 || window.orientation == 3 ? 3:2)) - settingsGrid.spacing * 2
 
 
             PlasmaComponents.Button {
@@ -275,7 +274,7 @@ MeeGo.ExpandingBox {
             }
 
             PlasmaComponents.Button {
-                id: parent.width
+                id: removeConnection
                 text: i18n("Remove connection")
                 height: 50
                 width: parent.width

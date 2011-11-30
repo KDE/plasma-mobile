@@ -27,7 +27,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Item {
     id: recommendationsPanel
     height: parent.height/1.2
-    width: parent.width/1.8
+    width: parent.width/2.1
     state: "hidden"
     property Item recommendations
     enabled: (!recommendations || recommendations.state == "Passive")?false:true
@@ -151,7 +151,7 @@ Item {
                 PlasmaComponents.Label {
                     id: titleText
                     text: i18n("Recommendations")
-                    font.pointSize: theme.defaultFont.pointSize * 1.3
+                    font.pointSize: theme.defaultFont.pointSize * 1.1
                     font.weight: Font.Bold
                     style: Text.Raised
                     styleColor: Qt.rgba(1,1,1,0.8)
