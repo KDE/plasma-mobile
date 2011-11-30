@@ -47,17 +47,20 @@ PlasmaComponents.ListItem {
     }
 
     Column {
-        anchors.left: iconItem.right
-        anchors.leftMargin: 8
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        spacing: 5
+        id: labelColumn
+        anchors {
+            left: iconItem.right
+            //FIXME: why this can't be binded to another property?
+            leftMargin: 10
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+        }
 
         PlasmaComponents.Label {
             text: listItem.name
         }
         PlasmaComponents.Label {
-            font.pointSize: theme.defaultFont.pointSize * 0.9
+            font.pointSize: theme.smallestFont.pointSize
             text: listItem.description
             visible: listItem.description.length>0
         }
