@@ -274,7 +274,7 @@ MeeGo.ExpandingBox {
             }
 
             PlasmaComponents.Button {
-                id: parent.width
+                id: removeConnection
                 text: i18n("Remove connection")
                 height: 50
                 width: parent.width
