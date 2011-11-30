@@ -127,7 +127,6 @@ Image {
 
             ListView {
                 id: listView
-                //currentIndex: settingsRoot.lvindex
                 currentIndex: -1
                 anchors.fill: parent
                 spacing: 4
@@ -141,6 +140,7 @@ Image {
         Component {
             id: initial_page
             Item {
+                visible: startModule == ""
                 anchors { fill: parent; margins: 80; }
                 PlasmaComponents.Label {
                     id: initial_page_label
@@ -154,7 +154,6 @@ Image {
                     width: 256
                     height: width
                 }
-                //color: "green"
             }
         }
 
