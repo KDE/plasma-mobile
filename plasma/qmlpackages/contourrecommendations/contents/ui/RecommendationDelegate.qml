@@ -54,7 +54,6 @@ PlasmaComponents.ListItem {
         spacing: 5
 
         PlasmaComponents.Label {
-            font.pointSize: theme.defaultFont.pointSize * 1.3
             text: listItem.name
         }
         PlasmaComponents.Label {
