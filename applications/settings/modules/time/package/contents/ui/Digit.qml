@@ -39,7 +39,7 @@ Item {
     Text {
         id: placeHolder
         visible: false
-        font.pointSize: 25
+        font.pointSize: 20
         text: "00"
     }
 
@@ -55,7 +55,7 @@ Item {
         delegate: Text {
             property int ownIndex: index
             text: index < 10 ? "0"+index : index
-            font.pointSize: 25
+            font.pointSize: 20
         }
 
         onMovingChanged: {
