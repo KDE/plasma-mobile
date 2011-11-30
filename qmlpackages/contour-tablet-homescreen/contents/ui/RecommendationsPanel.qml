@@ -151,7 +151,7 @@ Item {
                 PlasmaComponents.Label {
                     id: titleText
                     text: i18n("Recommendations")
-                    font.pointSize: theme.defaultFont.pointSize * 1.3
+                    font.pointSize: theme.defaultFont.pointSize * 1.1
                     font.weight: Font.Bold
                     style: Text.Raised
                     styleColor: Qt.rgba(1,1,1,0.8)
