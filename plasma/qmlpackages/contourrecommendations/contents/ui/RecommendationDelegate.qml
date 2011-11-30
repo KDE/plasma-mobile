@@ -58,11 +58,20 @@ PlasmaComponents.ListItem {
 
         PlasmaComponents.Label {
             text: listItem.name
+            elide: Text.ElideRight
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
         }
         PlasmaComponents.Label {
             font.pointSize: theme.smallestFont.pointSize
             text: listItem.description
             visible: listItem.description.length>0
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
         }
 
     }
