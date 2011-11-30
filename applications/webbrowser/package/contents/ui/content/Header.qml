@@ -87,7 +87,7 @@ PlasmaComponents.ToolBar {
         Item {
             id: buttonRow
             width: parent.width
-            height: 32
+            height: leftButtonsRow.height
 
             Row {
                 id: leftButtonsRow
@@ -102,7 +102,7 @@ PlasmaComponents.ToolBar {
                     id: backButton
                     iconSource: "go-previous"
                     onClicked: webView.back.trigger()
-                    width: buttonRow.height
+                    width: theme.largeIconSize
                     height: width
                     flat: false
                     enabled: webView.back.enabled
@@ -111,7 +111,7 @@ PlasmaComponents.ToolBar {
                     id: nextButton
                     iconSource: "go-next"
                     onClicked: webView.forward.trigger()
-                    width: buttonRow.height
+                    width: theme.largeIconSize
                     height: width
                     flat: false
                     enabled: webView.forward.enabled
@@ -141,7 +141,7 @@ PlasmaComponents.ToolBar {
                     id: reloadButton
                     iconSource: "view-refresh"
                     onClicked: webView.reload.trigger()
-                    width: buttonRow.height
+                    width: theme.largeIconSize
                     height: width
                     flat: false
                     visible: !stopButton.visible && (webView.url != "")
@@ -150,7 +150,7 @@ PlasmaComponents.ToolBar {
                     id: stopButton
                     iconSource: "process-stop"
                     onClicked: webView.stop.trigger()
-                    width: buttonRow.height
+                    width: theme.largeIconSize
                     height: width
                     flat: false
                     enabled: webView.stop.enabled
@@ -169,8 +169,8 @@ PlasmaComponents.ToolBar {
                             header.urlChanged = false
                         }
                     }
-                    width: 32
-                    height: 32
+                    width: theme.mediumIconSize
+                    height: theme.mediumIconSize
                     opacity: header.urlChanged?1:0.3
                     anchors.verticalCenter: parent.verticalCenter
                     Behavior on opacity {
