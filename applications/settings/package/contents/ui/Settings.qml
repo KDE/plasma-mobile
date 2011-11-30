@@ -68,14 +68,13 @@ Image {
             }
 
             Component {
-                id: myDelegate
+                id: settingsModuleDelegate
                 Item {
                     id: delegateItem
                     height: 64
                     width: 340
                     //anchors.fill: parent
                     anchors.margins: 20
-
 
                     QIconItem {
                         id: iconItem
@@ -116,25 +115,45 @@ Image {
                             loadPackage(module);
                         }
                     }
+                    Component.onCompleted: {
+                        // mark current module as selected in the list on the left
+                        // FIXME: not sure why this doesn't work???
+                        if (module == startModule) {
+                            listView.currentIndex = index;
+                        }
+                    }
                 }
             }
 
             ListView {
                 id: listView
+                //currentIndex: settingsRoot.lvindex
                 currentIndex: -1
                 anchors.fill: parent
                 spacing: 4
                 clip: true
                 model: settingsModulesModel
-                delegate: myDelegate
+                delegate: settingsModuleDelegate
                 highlight: PlasmaComponents.Highlight {}
             }
         }
 
         Component {
             id: initial_page
-            Rectangle {
-                anchors.fill: parent
+            Item {
+                anchors { fill: parent; margins: 80; }
+                PlasmaComponents.Label {
+                    id: initial_page_label
+                    text: "<h1>Active Settings</h1>";
+                    anchors { top: parent.top; horizontalCenter: parent.horizontalCenter; }
+                }
+                QIconItem {
+                    icon: QIcon("preferences-desktop")
+                    anchors { top: initial_page_label.bottom; right: parent.right; }
+                    opacity: 0.1
+                    width: 256
+                    height: width
+                }
                 //color: "green"
             }
         }
