@@ -101,7 +101,7 @@ PlasmaCore.FrameSvgItem {
                 var dd = new Date(year, month, 0);
                 return dd.getDate()
             }
-            currentIndex: day-1
+            currentIndex: ((day - 1) < model) ? day-1 : 1
             onSelectedIndexChanged: {
                 if (selectedIndex > -1) {
                     day = selectedIndex+1
