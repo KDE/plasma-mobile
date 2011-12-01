@@ -22,6 +22,7 @@
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QDBusPendingCall>
+#include <QDBusServiceWatcher>
 #include <QDeclarativeItem>
 #include <QGraphicsObject>
 #include <QGraphicsView>
@@ -61,6 +62,9 @@ PanelProxy::PanelProxy(QObject *parent)
     m_updateWindowListAreaTimer.setInterval(0);
     m_updateWindowListAreaTimer.setSingleShot(true);
     connect(&m_updateWindowListAreaTimer, SIGNAL(timeout()), this, SLOT(updateWindowListArea()));
+
+    QDBusServiceWatcher *kwinWatch = new QDBusServiceWatcher("org.kde.kwin", QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForRegistration, this);
+    connect(kwinWatch, SIGNAL(serviceRegistered(QString)), this, SLOT(updateWindowListArea()));
 }
 
 PanelProxy::~PanelProxy()
@@ -221,7 +225,11 @@ void PanelProxy::setWindowListArea(const QRectF &rectf)
 
 void PanelProxy::updateWindowListArea()
 {
-    kDebug() << "updating with" << m_windowListArea;
+    //kDebug() << "updating with" << m_windowListArea;
+    if (m_windowListArea.isEmpty()) {
+        return;
+    }
+
     QDBusMessage msg = QDBusMessage::createMethodCall("org.kde.kwin", "/TabBox", "org.kde.kwin", "openEmbedded");
     QList<QVariant> vars;
     vars.append(QVariant::fromValue<qulonglong>(m_panel->winId()));
