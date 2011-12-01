@@ -68,16 +68,16 @@ Image {
         FlickableWebView {
             id: webView1
             objectName: "webView"
-            url: aboutPackage.filePath("images", "about.html")
-            
+            url: aboutPackage.filePath("data", "about.html")
+
             width: aboutApp.width
             height: aboutApp.height
         }
-        
+
         FlickableWebView {
             id: webView2
             objectName: "webView2"
-            url: aboutPackage.filePath("images", "authors.html")
+            url: aboutPackage.filePath("data", "authors.html")
 
             width: aboutApp.width
             height: aboutApp.height
@@ -86,11 +86,11 @@ Image {
         FlickableWebView {
             id: webView3
             objectName: "webView3"
-            url: aboutPackage.filePath("images", "license.html")
+            url: aboutPackage.filePath("data", "license.html")
 
             width: aboutApp.width
             height: aboutApp.height
         }
-    }  
+    }
 
 }
