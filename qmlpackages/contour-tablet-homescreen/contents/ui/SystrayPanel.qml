@@ -26,7 +26,8 @@ Item {
     id: systrayPanel
     state: "Hidden"
     width: Math.max(800, homeScreen.width)
-    height: Math.max(480, homeScreen.height - 50 + background.margins.bottom + 200)
+    height: Math.max(480, homeScreen.height - 50 + background.margins.bottom)
+
     onStateChanged: {
         if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
             menuContainer.plasmoid.resetStatus()
@@ -57,6 +58,11 @@ Item {
         } else if (cont.pluginName == "org.kde.active.systemtray") {
             systrayContainer.plasmoid = cont
         }
+    }
+
+    function setWindowListArea()
+    {
+        topSlidingPanel.windowListArea = Qt.rect(windowListContainer.x, windowListContainer.y, windowListContainer.width, windowListContainer.height)
     }
 
     SlidingDragButton {
@@ -112,7 +118,24 @@ Item {
                     right: parent.right
                 }
                 height: slidingDragButton.tasksHeight
+
+                onXChanged: {
+                    setWindowListArea();
+                }
+
+                onYChanged: {
+                    setWindowListArea();
+                }
+
+                onHeightChanged: {
+                    setWindowListArea();
+                }
+
+                onWidthChanged: {
+                    setWindowListArea();
+                }
             }
+
             Item {
                 width: 2
                 height: 2
@@ -131,17 +154,6 @@ Item {
 
     states:  [
         State {
-            name: "Full"
-            PropertyChanges {
-                target: topSlidingPanel
-                y: -200
-            }
-            PropertyChanges {
-                target: topSlidingPanel
-                acceptsFocus: true
-            }
-        },
-        State {
             name: "Launcher"
             PropertyChanges {
                 target: topSlidingPanel
@@ -153,7 +165,7 @@ Item {
             name: "Hidden"
             PropertyChanges {
                 target: topSlidingPanel
-                y: -topEdgePanel.height + systrayContainer.height+ background.margins.bottom + 2
+                y: -topEdgePanel.height + systrayContainer.height + background.margins.bottom + 2
                 acceptsFocus: false
             }
         },
