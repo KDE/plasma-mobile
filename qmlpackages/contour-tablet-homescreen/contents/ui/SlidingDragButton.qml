@@ -92,7 +92,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
         }
 
         if (dragging) {
-            topSlidingPanel.y = Math.min(-200, (topSlidingPanel.y+mouse.screenY - lastY))
+            topSlidingPanel.y = Math.min(0, (topSlidingPanel.y + mouse.screenY - lastY))
         }
         lastY = mouse.screenY
     }
