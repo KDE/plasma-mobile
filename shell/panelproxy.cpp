@@ -233,7 +233,7 @@ void PanelProxy::updateWindowListArea()
     QDBusMessage msg = QDBusMessage::createMethodCall("org.kde.kwin", "/TabBox", "org.kde.kwin", "openEmbedded");
     QList<QVariant> vars;
     vars.append(QVariant::fromValue<qulonglong>(m_panel->winId()));
-    vars.append(QVariant::fromValue<QPoint>(m_windowListArea.bottomLeft()));
+    vars.append(QVariant::fromValue<QPoint>(QPoint(0, m_panel->size().height()) - m_windowListArea.bottomLeft()));
     vars.append(QVariant::fromValue<QSize>(m_windowListArea.size()));
     vars.append(QVariant::fromValue<int>(Qt::AlignLeft));
     vars.append(QVariant::fromValue<int>(Qt::AlignBottom));
