@@ -112,15 +112,6 @@ PlasmaApp::PlasmaApp()
     m_mainView = new MobView(0, MobView::mainViewId(), 0);
     m_mainView->setWindowTitle(i18n("Home Screen"));
     m_mainView->setUseGL(useGL);
-#ifdef Q_WS_X11
-    Display *dpy = QX11Info::display();
-    Atom atom = XInternAtom(dpy, "_KDE_FIRST_IN_WINDOWLIST", False);
-    QVarLengthArray<long, 1> data(1);
-    data[0] = 1;
-    XChangeProperty(dpy, m_mainView->winId(), atom, atom, 32, PropModeReplace,
-                    reinterpret_cast<unsigned char *>(data.data()), data.size());
-#endif
-
 
     bool isDesktop = args->isSet("desktop");
     if (isDesktop) {

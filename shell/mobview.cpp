@@ -123,6 +123,19 @@ void MobView::resizeEvent(QResizeEvent *event)
     emit geometryChanged();
 }
 
+void MobView::showEvent(QShowEvent *event)
+{
+    Q_UNUSED(event)
+#ifdef Q_WS_X11
+    Display *dpy = QX11Info::display();
+    Atom atom = XInternAtom(dpy, "_KDE_FIRST_IN_WINDOWLIST", False);
+    QVarLengthArray<long, 1> data(1);
+    data[0] = 1;
+    XChangeProperty(dpy, winId(), atom, atom, 32, PropModeReplace,
+                    reinterpret_cast<unsigned char *>(data.data()), data.size());
+#endif
+}
+
 void MobView::closeEvent(QCloseEvent *event)
 {
     Q_UNUSED(event)
