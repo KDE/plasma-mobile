@@ -39,7 +39,7 @@ Item {
         //spacing: 32;
         flow: GridView.TopToBottom 
         cellWidth: itemsList.width/Math.max(1, Math.floor(itemsList.width/140))
-        cellHeight: itemsList.height/Math.max(1, Math.floor(itemsList.help/128))
+        cellHeight: itemsList.height/Math.max(1, Math.floor(itemsList.height/120))
 
         Behavior on contentX {
             enabled: !itemsList.moving
@@ -69,7 +69,7 @@ Item {
             MobileComponents.ResourceDelegate {
                 id: resourceDelegate
                 width: 140
-                height: 120
+                height: itemsList.cellHeight
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
