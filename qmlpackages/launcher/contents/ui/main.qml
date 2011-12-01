@@ -38,7 +38,6 @@ MouseArea {
     {
         searchField.searchQuery = ""
         appGrid.currentPage = 0
-        //tagCloud.resetStatus()
     }
 
     Image {
@@ -68,21 +67,6 @@ MouseArea {
         id: theme
     }
 
-    /*
-    TagCloud {
-        id:tagCloud
-    }*/
-    Item {
-        id: tagCloud
-        height: 200
-        anchors {
-            left: parent.left
-            top: parent.top
-            right: parent.right
-        }
-    }
-
-
     PlasmaCore.DataSource {
         id: appsSource
         engine: "org.kde.active.apps"
@@ -111,7 +95,7 @@ MouseArea {
         anchors {
             left: parent.left
             right: parent.right
-            top: tagCloud.bottom
+            top: parent.top
             topMargin: 8
         }
 
