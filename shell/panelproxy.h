@@ -20,8 +20,10 @@
 #define PANEL_PROXY_P
 
 #include <QObject>
-#include <QWeakPointer>
 #include <QPoint>
+#include <QRect>
+#include <QTimer>
+#include <QWeakPointer>
 
 class QGraphicsObject;
 class QGraphicsView;
@@ -35,6 +37,7 @@ class PanelProxy : public QObject
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
     Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged)
     Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged)
+    Q_PROPERTY(QRectF windowListArea READ windowListArea WRITE setWindowListArea);
     Q_PROPERTY(bool acceptsFocus READ acceptsFocus WRITE setAcceptsFocus NOTIFY acceptsFocusChanged)
     Q_PROPERTY(bool activeWindow READ isActiveWindow NOTIFY activeWindowChanged)
 
@@ -63,6 +66,9 @@ public:
 
     bool isActiveWindow() const;
 
+    QRectF windowListArea() const;
+    void setWindowListArea(const QRectF &rect);
+
 Q_SIGNALS:
     void mainItemChanged();
     void visibleChanged();
@@ -70,9 +76,11 @@ Q_SIGNALS:
     void yChanged();
     void acceptsFocusChanged();
     void activeWindowChanged();
+    void windowListBeingShown();
 
 protected Q_SLOTS:
     void syncMainItem();
+    void updateWindowListArea();
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
@@ -80,6 +88,8 @@ protected:
 private:
     QGraphicsView *m_panel;
     QWeakPointer<QGraphicsObject> m_mainItem;
+    QRect m_windowListArea;
+    QTimer m_updateWindowListAreaTimer;
     bool m_acceptsFocus;
     bool m_activeWindow;
 

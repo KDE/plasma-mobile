@@ -19,12 +19,15 @@
 
 #include "panelproxy.h"
 
-#include <QGraphicsView>
+#include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusPendingCall>
 #include <QDeclarativeItem>
 #include <QGraphicsObject>
+#include <QGraphicsView>
 #include <QGraphicsWidget>
-#include <QTimer>
 #include <QLayout>
+#include <QTimer>
 
 #include <KWindowSystem>
 
@@ -54,6 +57,10 @@ PanelProxy::PanelProxy(QObject *parent)
     KWindowSystem::setState(m_panel->effectiveWinId(), state);
     KWindowSystem::setType(m_panel->effectiveWinId(), NET::Dock);
     PlasmaApp::self()->panelShadows()->addWindow(m_panel);
+
+    m_updateWindowListAreaTimer.setInterval(0);
+    m_updateWindowListAreaTimer.setSingleShot(true);
+    connect(&m_updateWindowListAreaTimer, SIGNAL(timeout()), this, SLOT(updateWindowListArea()));
 }
 
 PanelProxy::~PanelProxy()
@@ -196,6 +203,34 @@ void PanelProxy::setAcceptsFocus(bool accepts)
 bool PanelProxy::isActiveWindow() const
 {
     return m_activeWindow;
+}
+
+QRectF PanelProxy::windowListArea() const
+{
+    return m_windowListArea;
+}
+
+void PanelProxy::setWindowListArea(const QRectF &rectf)
+{
+    const QRect rect = rectf.toRect();
+    if (m_windowListArea != rect) {
+        m_windowListArea = rect;
+        m_updateWindowListAreaTimer.start();
+    }
+}
+
+void PanelProxy::updateWindowListArea()
+{
+    kDebug() << "updating with" << m_windowListArea;
+    QDBusMessage msg = QDBusMessage::createMethodCall("org.kde.kwin", "/TabBox", "org.kde.kwin", "openEmbedded");
+    QList<QVariant> vars;
+    vars.append(QVariant::fromValue<qulonglong>(m_panel->winId()));
+    vars.append(QVariant::fromValue<QPoint>(m_windowListArea.topLeft()));
+    vars.append(QVariant::fromValue<QSize>(m_windowListArea.size()));
+    vars.append(QVariant::fromValue<int>(Qt::AlignLeft));
+    vars.append(QVariant::fromValue<int>(Qt::AlignBottom));
+    msg.setArguments(vars);
+    QDBusConnection::sessionBus().asyncCall(msg);
 }
 
 bool PanelProxy::eventFilter(QObject *watched, QEvent *event)
