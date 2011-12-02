@@ -75,8 +75,10 @@ Item {
         activeContainment.y = 0
 
         //hide the activity switcher
-        activityPanel.x = homeScreen.width
-        activityPanel.state = "hidden"
+        if (activityPanel) {
+            activityPanel.x = homeScreen.width
+            activityPanel.state = "hidden"
+        }
 
         state = "Normal"
     }
@@ -118,7 +120,7 @@ Item {
         height: homeScreen.height
         property QGraphicsWidget containment
         onPressed: {
-            if (mouse.x < activityPanel.x) {
+            if (activityPanel && mouse.x < activityPanel.x) {
                 activityPanel.state = "hidden"
             }
             if (mouse.x > recommendationsPanel.x+recommendationsPanel.width) {
