@@ -42,7 +42,9 @@ uint PanelProxy::s_numItems = 0;
 PanelProxy::PanelProxy(QObject *parent)
     : QObject(parent),
       m_acceptsFocus(false),
-      m_activeWindow(false)
+      m_activeWindow(false),
+      m_windowStrip(false),
+      m_windowSelected(false)
 {
     m_panel = new QGraphicsView();
     m_panel->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -59,12 +61,9 @@ PanelProxy::PanelProxy(QObject *parent)
     KWindowSystem::setType(m_panel->effectiveWinId(), NET::Dock);
     PlasmaApp::self()->panelShadows()->addWindow(m_panel);
 
-    m_updateWindowListAreaTimer.setInterval(0);
-    m_updateWindowListAreaTimer.setSingleShot(true);
-    connect(&m_updateWindowListAreaTimer, SIGNAL(timeout()), this, SLOT(updateWindowListArea()));
-
     QDBusServiceWatcher *kwinWatch = new QDBusServiceWatcher("org.kde.kwin", QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForRegistration, this);
     connect(kwinWatch, SIGNAL(serviceRegistered(QString)), this, SLOT(updateWindowListArea()));
+    connect(this, SIGNAL(windowStripChanged()), SLOT(slotWindowStripChanged()));
 }
 
 PanelProxy::~PanelProxy()
@@ -229,16 +228,6 @@ void PanelProxy::updateWindowListArea()
     if (m_windowListArea.isEmpty()) {
         return;
     }
-
-    QDBusMessage msg = QDBusMessage::createMethodCall("org.kde.kwin", "/TabBox", "org.kde.kwin", "openEmbedded");
-    QList<QVariant> vars;
-    vars.append(QVariant::fromValue<qulonglong>(m_panel->winId()));
-    vars.append(QVariant::fromValue<QPoint>(QPoint(0, m_panel->size().height()) - m_windowListArea.bottomLeft()));
-    vars.append(QVariant::fromValue<QSize>(m_windowListArea.size()));
-    vars.append(QVariant::fromValue<int>(Qt::AlignLeft));
-    vars.append(QVariant::fromValue<int>(Qt::AlignBottom));
-    msg.setArguments(vars);
-    QDBusConnection::sessionBus().asyncCall(msg);
 }
 
 bool PanelProxy::eventFilter(QObject *watched, QEvent *event)
@@ -268,6 +257,44 @@ bool PanelProxy::eventFilter(QObject *watched, QEvent *event)
         syncMainItem();
     }
     return false;
+}
+
+bool PanelProxy::isWindowStripEnabled() const
+{
+    return m_windowStrip;
+}
+
+void PanelProxy::setWindowStripEnabled(bool enable)
+{
+    m_windowStrip = enable;
+    emit windowStripChanged();
+}
+
+void PanelProxy::slotWindowStripChanged()
+{
+    if (m_windowStrip) {
+        m_windowSelected = false;
+        QDBusMessage msg = QDBusMessage::createMethodCall("org.kde.kwin", "/TabBox", "org.kde.kwin", "openEmbedded");
+        QList<QVariant> vars;
+        vars.append(QVariant::fromValue<qulonglong>(m_panel->winId()));
+        vars.append(QVariant::fromValue<QPoint>(QPoint(0, 50)));
+        vars.append(QVariant::fromValue<QSize>(m_windowListArea.size()));
+        vars.append(QVariant::fromValue<int>(Qt::AlignLeft));
+        vars.append(QVariant::fromValue<int>(Qt::AlignBottom));
+        msg.setArguments(vars);
+        QDBusConnection::sessionBus().asyncCall(msg);
+        QDBusConnection::sessionBus().connect("org.kde.kwin", "/TabBox", "org.kde.kwin", "itemSelected", this, SLOT(windowSelected()));
+    } else {
+        QDBusMessage msg = QDBusMessage::createMethodCall("org.kde.kwin", "/TabBox", "org.kde.kwin", m_windowSelected ? "accept" : "reject");
+        QDBusConnection::sessionBus().asyncCall(msg);
+        QDBusConnection::sessionBus().disconnect("org.kde.kwin", "/TabBox", "org.kde.kwin", "itemSelected", this, SLOT(windowSelected()));
+    }
+}
+
+void PanelProxy::windowSelected()
+{
+    m_windowSelected = true;
+    m_mainItem.data()->setProperty("state", "Hidden");
 }
 
 

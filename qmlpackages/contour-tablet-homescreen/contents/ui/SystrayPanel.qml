@@ -27,10 +27,14 @@ Item {
     state: "Hidden"
     width: Math.max(800, homeScreen.width)
     height: Math.max(480, homeScreen.height - 50 + background.margins.bottom)
+    property bool windowStripVisible: false
 
     onStateChanged: {
         if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
             menuContainer.plasmoid.resetStatus()
+        }
+        if (state == "Hidden") {
+            windowStripVisible = false;
         }
     }
 
@@ -78,6 +82,9 @@ Item {
                 if (menuContainer.plasmoid) {
                     menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
                 }
+            }
+            if (systrayPanel.state == "Hidden" && dragging) {
+                systrayPanel.windowStripVisible = true;
             }
         }
 

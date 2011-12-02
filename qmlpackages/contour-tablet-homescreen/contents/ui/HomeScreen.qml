@@ -163,6 +163,7 @@ Item {
     DeviceShell.DevicePanel {
         id: topSlidingPanel
         visible: true
+        windowStripEnabled: topEdgePanel.windowStripVisible
         mainItem: SystrayPanel {
             id: topEdgePanel
             objectName: "topEdgePanel"

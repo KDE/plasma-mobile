@@ -40,6 +40,7 @@ class PanelProxy : public QObject
     Q_PROPERTY(QRectF windowListArea READ windowListArea WRITE setWindowListArea);
     Q_PROPERTY(bool acceptsFocus READ acceptsFocus WRITE setAcceptsFocus NOTIFY acceptsFocusChanged)
     Q_PROPERTY(bool activeWindow READ isActiveWindow NOTIFY activeWindowChanged)
+    Q_PROPERTY(bool windowStripEnabled READ isWindowStripEnabled WRITE setWindowStripEnabled NOTIFY windowStripChanged)
 
 public:
     enum WidgetAttribute {
@@ -69,6 +70,9 @@ public:
     QRectF windowListArea() const;
     void setWindowListArea(const QRectF &rect);
 
+    bool isWindowStripEnabled() const;
+    void setWindowStripEnabled(bool enable);
+
 Q_SIGNALS:
     void mainItemChanged();
     void visibleChanged();
@@ -77,10 +81,13 @@ Q_SIGNALS:
     void acceptsFocusChanged();
     void activeWindowChanged();
     void windowListBeingShown();
+    void windowStripChanged();
 
 protected Q_SLOTS:
     void syncMainItem();
     void updateWindowListArea();
+    void slotWindowStripChanged();
+    void windowSelected();
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
@@ -92,6 +99,8 @@ private:
     QTimer m_updateWindowListAreaTimer;
     bool m_acceptsFocus;
     bool m_activeWindow;
+    bool m_windowStrip;
+    bool m_windowSelected;
 
     static uint s_numItems;
 };
