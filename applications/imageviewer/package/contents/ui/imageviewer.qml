@@ -69,10 +69,6 @@ Image {
         }
     }
 
-    Component.onCompleted: {
-        firstRunTimer.start()
-    }
-
     MetadataModels.MetadataUserTypes {
         id: userTypes
     }
@@ -81,6 +77,14 @@ Image {
         resourceType: "nfo:Image"
         sortBy: [userTypes.sortFields[itemGroup.category]]
         sortOrder: Qt.AscendingOrder
+        property bool starting: true
+        onStatusChanged: {
+            if (status == MetadataModels.MetadataModel.Idle && starting) {
+                loadImage(startupArguments[0])
+                firstRunTimer.running = true
+                starting = false
+            }
+        }
     }
 
 
