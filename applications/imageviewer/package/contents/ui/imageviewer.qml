@@ -73,6 +73,9 @@ Image {
         firstRunTimer.start()
     }
 
+    MetadataModels.MetadataUserTypes {
+        id: userTypes
+    }
     MetadataModels.MetadataModel {
         id: metadataModel
         resourceType: "nfo:Image"

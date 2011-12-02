@@ -100,8 +100,6 @@ PlasmaComponents.Page {
         id: resultsGrid
         anchors.fill: parent
 
-        Component.onCompleted: resultsContainer.contentY = resultsContainer.height
-        height: resultsContainer.height
         model: metadataModel
         delegateWidth: 130
         delegateHeight: 120
