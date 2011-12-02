@@ -176,16 +176,6 @@ Item {
 
     property Item recommendationsPanel
     property Item activityPanel
-    Timer {
-        id: panelsCreationTimer
-        interval: 2000
-        repeat: false
-        running: true
-        onTriggered: {
-            homeScreen.recommendationsPanel = recommendationsPanelComponent.createObject(homeScreen)
-            homeScreen.activityPanel = activityPanelComponent.createObject(homeScreen)
-        }
-    }
     Component {
         id: recommendationsPanelComponent
         RecommendationsPanel {
@@ -216,5 +206,10 @@ Item {
         width: homeScreen.width
         height: homeScreen.height
         property QGraphicsWidget containment
+    }
+
+    Component.onCompleted: {
+        homeScreen.recommendationsPanel = recommendationsPanelComponent.createObject(homeScreen)
+        homeScreen.activityPanel = activityPanelComponent.createObject(homeScreen)
     }
 }
