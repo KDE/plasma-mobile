@@ -16,6 +16,8 @@ include_directories(
 #hack to find qt-mobility includes. TODO: get cmake macro
   ${INCLUDE_INSTALL_DIR}/QtMobility
   ${INCLUDE_INSTALL_DIR}/QtMobility/QtMobility
+  ${QT_INCLUDE_DIR}/QtMobility
+  ${QT_INCLUDE_DIR}/QtMobility/QtMobility
 #this uses the cmake macro
   ${QTMOBILITY_INCLUDE_DIR}
 )
