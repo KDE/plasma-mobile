@@ -35,14 +35,14 @@ SequentialAnimation {
         PropertyAnimation {
             target: targetItem
             properties: "opacity"
-            from: 0.5; to: 1.0
+            from: 0.8; to: 1.0
             duration: releasedAnimation.duration;
             easing.type: Easing.InExpo;
         }
         PropertyAnimation {
             target: targetItem
             properties: "scale"
-            from: 0.9; to: 1.0
+            from: 0.95; to: 1.0
             duration: releasedAnimation.duration;
             easing.type: Easing.InExpo;
         }
