@@ -41,7 +41,11 @@ PlasmaComponents.Page {
             width: theme.largeIconSize
             height: width
             flat: false
-            onClicked: mainStack.pop()
+            onClicked: {
+                //we want to tell the current image was closed
+                resourceInstance.uri = ""
+                mainStack.pop()
+            }
         }
         Text {
             text: i18n("%1 of %2", fullList.currentIndex+1, fullList.count)
