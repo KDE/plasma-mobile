@@ -123,15 +123,20 @@ MouseArea {
 
         delegate: Component {
             MobileComponents.ResourceDelegate {
+                id: launcherDelegate
                 width: appGrid.delegateWidth
                 height: appGrid.delegateHeight
                 className: "FileDataObject"
                 genericClassName: "FileDataObject"
                 property string label: model["name"]?model["name"]:model["label"]
                 //property string mimeType: model["mimeType"]?model["mimeType"]:"application/x-desktop"
-                onPressAndHold: {
-                    resourceInstance.uri = model["resourceUri"]?model["resourceUri"]:model["entryPath"]
-                    resourceInstance.title = model["name"]?model["name"]:model["text"]
+                onPressAndHold: ParallelAnimation {
+                    MobileComponents.ReleasedAnimation { targetItem: launcherDelegate }
+                    ScriptAction { script: {
+                            resourceInstance.uri = model["resourceUri"]?model["resourceUri"]:model["entryPath"]
+                            resourceInstance.title = model["name"]?model["name"]:model["text"]
+                        }
+                    }
                 }
                 onClicked: {
                     //showing apps model?
@@ -147,7 +152,8 @@ MouseArea {
                     resetStatus()
                     itemLaunched()
                 }
-
+                onPressed: MobileComponents.PressedAnimation { targetItem: launcherDelegate }
+                onReleased: MobileComponents.ReleasedAnimation { targetItem: launcherDelegate }
             }
         }
 
