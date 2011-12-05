@@ -118,7 +118,7 @@ Image {
                     Component.onCompleted: {
                         // mark current module as selected in the list on the left
                         // FIXME: not sure why this doesn't work???
-                        if (module == startModule) {
+                        if (typeof(startModule) != "undefined" && module == startModule) {
                             listView.currentIndex = index;
                         }
                     }

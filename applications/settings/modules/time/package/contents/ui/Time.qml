@@ -62,6 +62,7 @@ Item {
         flickableDirection: Flickable.VerticalFlick
         clip: true
         width: timeModule.width
+        interactive: timeContentItem.height > height
         anchors {
             top: titleCol.bottom
             bottom: parent.bottom

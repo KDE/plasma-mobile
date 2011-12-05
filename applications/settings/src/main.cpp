@@ -44,6 +44,7 @@ int main(int argc, char **argv)
 
     KService::Ptr service = KService::serviceByDesktopName("active-settings");
     const QString homeUrl = service ? service->property("X-KDE-PluginInfo-Website", QVariant::String).toString() : HOME_URL;
+    about.setProgramIconName(service ? service->icon() : "preferences-desktop");
     KCmdLineOptions options;
     options.add("+[module]", ki18n( "Settings module to open" ), "startpage");
     KCmdLineArgs::addCmdLineOptions(options);
