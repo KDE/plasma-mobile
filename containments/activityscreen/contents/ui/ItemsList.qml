@@ -41,9 +41,13 @@ Item {
         cellWidth: itemsList.width/Math.max(1, Math.floor(itemsList.width/140))
         cellHeight: itemsList.height/Math.max(1, Math.floor(itemsList.height/120))
 
-        Behavior on contentX {
-            enabled: !itemsList.moving
-            NumberAnimation {duration: 250}
+
+        PropertyAnimation {
+            id: scrollAnimation
+            running: false
+            target: itemsList
+            properties: "contentX"
+            duration: 250
         }
 
         model: PlasmaCore.SortFilterModel {
@@ -121,7 +125,10 @@ Item {
                 fill: parent
                 margins: -5
             }
-            onClicked:  itemsList.contentX = itemsList.contentX-156
+            onClicked: {
+                scrollAnimation.to = itemsList.contentX-itemsList.cellWidth
+                scrollAnimation.running = true
+            }
         }
     }
 
@@ -142,7 +149,10 @@ Item {
                 fill: parent
                 margins: -5
             }
-            onClicked: itemsList.contentX = itemsList.contentX+156
+            onClicked: {
+                scrollAnimation.to = itemsList.contentX+itemsList.cellWidth
+                scrollAnimation.running = true
+            }
         }
     }
 }
