@@ -77,53 +77,69 @@ Item {
                 imagePath: "widgets/media-delegate"
                 prefix: "picture"
                 id: frameRect
+                width: 300
                 height: width/1.7
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     bottom: parent.bottom
                 }
-
-
-            
-                Video {
-                    id: video
-                    width: frameRect.width - 2
-                    height: frameRect.height - 1
+                Rectangle {
+                    color: "black"
                     anchors {
-                        fill: frameRect
+                        fill: parent
                         leftMargin: frameRect.margins.left
                         topMargin: frameRect.margins.top
                         rightMargin: frameRect.margins.right
                         bottomMargin: frameRect.margins.bottom
                     }
-                    source: plasmoid.file("data", "video.ogv")
-
-                    onPausedChanged: {
-                        print("Paused Changed..." + paused + playing);
-                        if (paused) {
-                            setPaused();
-                        } else {
-                            setPlaying();
-                        }
+                    
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        setPlaying()
+                        var pos = videoDialog.popupPosition(0)
+                        videoDialog.x = pos.x
+                        videoDialog.y = pos.y
+                        videoDialog.visible=true
                     }
+                }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            if (startPage.state == "playing") {
+
+                PlasmaCore.Dialog {
+                    id: videoDialog
+                    mainItem: Video {
+                        id: video
+                        width: 800
+                        height: 480
+
+                        source: plasmoid.file("data", "video.ogv")
+
+                        onPausedChanged: {
+                            print("Paused Changed..." + paused + playing);
+                            if (paused) {
                                 setPaused();
                             } else {
                                 setPlaying();
                             }
-                            print(" XXX State is now: " + startPage.state + " opacity: " + pauseButton.opacity + " scale: " + videoItem.scale);
                         }
-                    }
 
-                    focus: true
-                    Keys.onSpacePressed: video.paused = !video.paused
-                    Keys.onLeftPressed: video.position -= 5000
-                    Keys.onRightPressed: video.position += 5000
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                setPaused()
+                                videoDialog.visible = false
+                            }
+                        }
+
+                        focus: true
+                        Keys.onSpacePressed: video.paused = !video.paused
+                        Keys.onLeftPressed: video.position -= 5000
+                        Keys.onRightPressed: video.position += 5000
+                    }
                 }
+            
+                
             }
             Column {
                 anchors.centerIn: parent
@@ -150,21 +166,12 @@ Item {
     states: [
         State {
             name: "paused"
-            PropertyChanges {
-                target: frameRect
-                width: 266
-                height: 186
-            }
             PropertyChanges { target: pauseButton; opacity: 1.0}
             PropertyChanges { target: videoText; opacity: 1.0}
         },
         State {
             name: "playing"
-            PropertyChanges {
-                target: frameRect
-                width: 600
-                height: 420
-            }
+
             PropertyChanges { target: pauseButton; opacity: 0.0}
             PropertyChanges { target: videoText; opacity: 0.0}
         }
@@ -184,15 +191,13 @@ Item {
     ]
 
     function setPlaying() {
-        welcome.clip = false;
+        startPage.state = "playing"
         video.play()
-        startPage.state = "playing";
     }
 
     function setPaused() {
-        welcome.clip = true;
+        startPage.state = "paused"
         video.pause()
-        startPage.state = "paused";
     }
 
 }
