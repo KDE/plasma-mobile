@@ -60,9 +60,6 @@ PlasmaCore.FrameSvgItem {
     property bool userConfiguring: false
 
     imagePath: timePackage.filePath("images", "throbber.svgz")
-    anchors {
-        horizontalCenter: parent.horizontalCenter
-    }
     width: clockRow.width + margins.left + margins.right
     height: clockRow.height + margins.top + margins.bottom
 
