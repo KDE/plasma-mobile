@@ -61,7 +61,7 @@ Item {
     Grid {
         id: formLayout
         columns: 2
-        rows: 3
+        rows: 4
         spacing: theme.defaultFont.mSize.height
         anchors {
             top: titleCol.bottom
@@ -131,23 +131,21 @@ Item {
                 enabled: ntpCheckBox.checked
             }
         }
-    }
 
 
-    Column {
-        anchors {
-            top: formLayout.bottom
-            topMargin: theme.defaultFont.mSize.height
-            horizontalCenter: parent.horizontalCenter
-        }
-        spacing: theme.defaultFont.mSize.height
         TimePicker {
+            id: timePicker
             enabled: !ntpCheckBox.checked
-            anchors.horizontalCenter: parent.horizontalCenter
+
+            anchors {
+                right: datePicker.left
+                rightMargin: theme.defaultFont.mSize.width
+            }
         }
+
         DatePicker {
+            id: datePicker
             enabled: !ntpCheckBox.checked
-            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 
