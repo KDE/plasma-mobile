@@ -108,6 +108,14 @@ Item {
 
                 PlasmaCore.Dialog {
                     id: videoDialog
+                    windowFlags: Qt.Popup
+                    onVisibleChanged: {
+                        if (visible) {
+                            setPlaying()
+                        } else {
+                            setPaused()
+                        }
+                    }
                     mainItem: Video {
                         id: video
                         width: 800
