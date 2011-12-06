@@ -73,7 +73,6 @@ Image {
                     id: delegateItem
                     height: 64
                     width: 340
-                    //anchors.fill: parent
                     anchors.margins: 20
 
                     QIconItem {
@@ -109,10 +108,13 @@ Image {
 
                     MouseArea {
                         anchors.fill: delegateItem
-                        onPressed: MobileComponents.ActivateAnimation { targetItem: delegateItem }
+                        onPressed: MobileComponents.PressedAnimation { targetItem: delegateItem }
+                        onReleased: MobileComponents.ReleasedAnimation { targetItem: delegateItem }
                         onClicked: {
-                            listView.currentIndex = index
-                            loadPackage(module);
+                            if (module != switcherPackage.name) {
+                                listView.currentIndex = index
+                                loadPackage(module);
+                            }
                         }
                     }
                     Component.onCompleted: {
@@ -131,6 +133,7 @@ Image {
                 anchors.fill: parent
                 spacing: 4
                 clip: true
+                interactive: false
                 model: settingsModulesModel
                 delegate: settingsModuleDelegate
                 highlight: PlasmaComponents.Highlight {}
@@ -162,7 +165,6 @@ Image {
             objectName: "moduleContainer"
             clip: false
             initialPage: initial_page
-            //width: (parent.width - settingsRoot.width - 40)
             anchors.margins: 20
             anchors.top: parent.top
             anchors.bottom: parent.bottom
@@ -211,7 +213,6 @@ Image {
         settingsRoot.loadPlugin(module);
         switcherPackage.name = module
         print(" Loading package: " + switcherPackage.filePath("mainscript"));
-        //moduleContainer.source = switcherPackage.filePath("mainscript");
         moduleContainer.replace(switcherPackage.filePath("mainscript"));
     }
 
