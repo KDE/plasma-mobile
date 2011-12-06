@@ -38,8 +38,8 @@ Item {
         clip: true
         //spacing: 32;
         flow: GridView.TopToBottom 
-        cellWidth: itemsList.width/Math.max(1, Math.floor(itemsList.width/140))
-        cellHeight: itemsList.height/Math.max(1, Math.floor(itemsList.height/120))
+        cellWidth: Math.floor(itemsList.width/Math.max(1, Math.floor(itemsList.width/140)))
+        cellHeight: Math.floor(itemsList.height/Math.max(1, Math.floor(itemsList.height/120)))
 
 
         PropertyAnimation {
