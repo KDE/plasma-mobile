@@ -32,7 +32,7 @@ Item {
         id: timeSettings
     }
 
-    width: 540; height: 500
+    width: 800; height: 500
 
     MobileComponents.Package {
         id: timePackage
@@ -58,154 +58,138 @@ Item {
         }
     }
 
-    Flickable {
-        flickableDirection: Flickable.VerticalFlick
-        clip: true
-        width: timeModule.width
-        interactive: timeContentItem.height > height
+    Grid {
+        id: formLayout
+        columns: 2
+        rows: 3
+        spacing: theme.defaultFont.mSize.height
         anchors {
             top: titleCol.bottom
-            bottom: parent.bottom
-            //left: parent.left
-            //right: parent.right
             horizontalCenter: parent.horizontalCenter
             topMargin: theme.defaultFont.mSize.height
         }
-        contentWidth: contentItem.width
-        contentHeight: contentItem.height
 
-        Item {
-            id: timeContentItem
-            width: parent.width
-
-            Grid {
-                id: formLayout
-                columns: 2
-                rows: 3
-                spacing: theme.defaultFont.mSize.height
-                anchors.horizontalCenter: timeContentItem.horizontalCenter
-
-                PlasmaComponents.Label {
-                    text: i18n("Use 24-hour clock:")
-                    anchors {
-                        right: twentyFourSwitch.left
-                        rightMargin: theme.defaultFont.mSize.width
-                    }
-                }
-
-                PlasmaComponents.Switch {
-                    id: twentyFourSwitch
-                    checked: timeSettings.twentyFour
-
-                    onClicked : {
-                        timeSettings.twentyFour = checked
-                        print(timeSettings.timeZone);
-                    }
-                }
-
-
-                PlasmaComponents.Label {
-                    id: timeZoneLabel
-                    text: i18n("Timezone:")
-                    anchors {
-                        right: timeZoneButton.left
-                        rightMargin: theme.defaultFont.mSize.width
-                    }
-                }
-
-                PlasmaComponents.Button {
-                    id: timeZoneButton
-                    text: timeSettings.timeZone
-                    onClicked: timeZonePickerDialog.open()
-                }
-
-                PlasmaComponents.Label {
-                    id: ntpLabel
-                    text: i18n("Use NTP:")
-                    anchors {
-                        right: timeZoneButton.left
-                        rightMargin: theme.defaultFont.mSize.width
-                    }
-                }
-
-                Row {
-                    spacing: theme.defaultFont.mSize.width
-                    PlasmaComponents.CheckBox {
-                        id: ntpCheckBox
-                        checked: timeSettings.ntpServer != ""
-                        onCheckedChanged: {
-                            if (!checked) {
-                                timeSettings.ntpServer = ""
-                                timeSettings.saveTime()
-                            }
-                        }
-                    }
-                    PlasmaComponents.Button {
-                        id: ntpButton
-                        text: timeSettings.ntpServer == "" ? i18n("Pick a server") : timeSettings.ntpServer
-                        onClicked: ntpServerPickerDialog.open()
-                        enabled: ntpCheckBox.checked
-                    }
-                }
+        PlasmaComponents.Label {
+            text: i18n("Use 24-hour clock:")
+            anchors {
+                right: twentyFourSwitch.left
+                rightMargin: theme.defaultFont.mSize.width
             }
+        }
 
-            Column {
-                anchors {
-                    top: formLayout.bottom
-                    topMargin: theme.defaultFont.mSize.height
-                    horizontalCenter: parent.horizontalCenter
-                }
-                spacing: theme.defaultFont.mSize.height
-                TimePicker {
-                    enabled: !ntpCheckBox.checked
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-                DatePicker {
-                    enabled: !ntpCheckBox.checked
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
+        PlasmaComponents.Switch {
+            id: twentyFourSwitch
+            checked: timeSettings.twentyFour
+
+            onClicked : {
+                timeSettings.twentyFour = checked
+                print(timeSettings.timeZone);
             }
+        }
 
-            PlasmaComponents.CommonDialog {
-                id: timeZonePickerDialog
-                titleText: i18n("Timezones")
-                buttonTexts: [i18n("Close")]
-                onButtonClicked: close()
-                content: Loader {
-                    id: timeZonePickerLoader
-                    width: theme.defaultFont.mSize.width*22
-                    height: theme.defaultFont.mSize.height*25
-                }
-                onStatusChanged: {
-                    if (status == PlasmaComponents.DialogStatus.Open) {
-                        timeZonePickerLoader.source = "TimeZonePicker.qml"
-                    }
-                }
+
+        PlasmaComponents.Label {
+            id: timeZoneLabel
+            text: i18n("Timezone:")
+            anchors {
+                right: timeZoneButton.left
+                rightMargin: theme.defaultFont.mSize.width
             }
+        }
 
-            PlasmaComponents.SelectionDialog {
-                id: ntpServerPickerDialog
-                titleText: i18n("Pick a time server")
-                selectedIndex: -1
-                model: timeSettings.availableNtpServers
-                delegate: PlasmaComponents.ListItem {
-                    enabled: true
-                    visible: modelData.search(RegExp(filterField.filterText, "i")) != -1
-                    height: visible ? label.paintedHeight*2 : 0
-                    checked: timeSettings.ntpServer == modelData
-                    PlasmaComponents.Label {
-                        id: label
-                        anchors.verticalCenter: parent.verticalCenter
-                        text: modelData
-                    }
-                    onClicked: {
-                        timeSettings.ntpServer = modelData
+        PlasmaComponents.Button {
+            id: timeZoneButton
+            text: timeSettings.timeZone
+            onClicked: timeZonePickerDialog.open()
+        }
+
+        PlasmaComponents.Label {
+            id: ntpLabel
+            text: i18n("Use NTP:")
+            anchors {
+                right: timeZoneButton.left
+                rightMargin: theme.defaultFont.mSize.width
+            }
+        }
+
+        Row {
+            spacing: theme.defaultFont.mSize.width
+            PlasmaComponents.Switch {
+                id: ntpCheckBox
+                checked: timeSettings.ntpServer != ""
+                onCheckedChanged: {
+                    if (!checked) {
+                        timeSettings.ntpServer = ""
                         timeSettings.saveTime()
-                        ntpServerPickerDialog.close()
                     }
                 }
-                onRejected: selectedIndex = -1
+            }
+            PlasmaComponents.Button {
+                id: ntpButton
+                text: timeSettings.ntpServer == "" ? i18n("Pick a server") : timeSettings.ntpServer
+                onClicked: ntpServerPickerDialog.open()
+                enabled: ntpCheckBox.checked
             }
         }
     }
+
+
+    Column {
+        anchors {
+            top: formLayout.bottom
+            topMargin: theme.defaultFont.mSize.height
+            horizontalCenter: parent.horizontalCenter
+        }
+        spacing: theme.defaultFont.mSize.height
+        TimePicker {
+            enabled: !ntpCheckBox.checked
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        DatePicker {
+            enabled: !ntpCheckBox.checked
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
+
+    PlasmaComponents.CommonDialog {
+        id: timeZonePickerDialog
+        titleText: i18n("Timezones")
+        buttonTexts: [i18n("Close")]
+        onButtonClicked: close()
+        content: Loader {
+            id: timeZonePickerLoader
+            width: theme.defaultFont.mSize.width*22
+            height: theme.defaultFont.mSize.height*25
+        }
+        onStatusChanged: {
+            if (status == PlasmaComponents.DialogStatus.Open) {
+                timeZonePickerLoader.source = "TimeZonePicker.qml"
+            }
+        }
+    }
+
+    PlasmaComponents.SelectionDialog {
+        id: ntpServerPickerDialog
+        titleText: i18n("Pick a time server")
+        selectedIndex: -1
+        model: timeSettings.availableNtpServers
+        delegate: PlasmaComponents.ListItem {
+            enabled: true
+            visible: modelData.search(RegExp(filterField.filterText, "i")) != -1
+            height: visible ? label.paintedHeight*2 : 0
+            checked: timeSettings.ntpServer == modelData
+            PlasmaComponents.Label {
+                id: label
+                anchors.verticalCenter: parent.verticalCenter
+                text: modelData
+            }
+            onClicked: {
+                timeSettings.ntpServer = modelData
+                timeSettings.saveTime()
+                ntpServerPickerDialog.close()
+            }
+        }
+        onRejected: selectedIndex = -1
+    }
+
 }
