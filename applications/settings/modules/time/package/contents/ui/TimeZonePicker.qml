@@ -51,7 +51,7 @@ Item {
     PlasmaComponents.TextField {
         id: tzFilter
         width: parent.width
-        placeholderText: "filter..."
+        placeholderText: "Filter..."
         clearButtonShown: true
         //Keys.onTabPressed: tf2.forceActiveFocus();
         anchors {
