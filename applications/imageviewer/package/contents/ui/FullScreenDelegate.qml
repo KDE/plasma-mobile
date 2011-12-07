@@ -111,13 +111,18 @@ Flickable {
                 asynchronous: true
                 anchors.centerIn: parent
                 onStatusChanged: {
-		    // do not try to load an empty mainImage.source or it will mess up with mainImage.scale
-		    // and make the next valid url fail to load.
-                    if (status != Image.Ready || fullList.width < 1 || fullList.height < 1) {
+                    if (status != Image.Ready) {
                         return
                     }
 
                     loadingText.visible = false
+
+                    // do not try to load an empty mainImage.source or it will mess up with mainImage.scale
+                    // and make the next valid url fail to load.
+                    if (fullList.width < 1 || fullList.height < 1) {
+                        return
+                    }
+
                     mainImage.scale = Math.min(1, mainFlickable.height/(scale*height))
                     mainImage.scale = Math.min(scale, Math.min(1, mainFlickable.width/(scale*width)))
  
