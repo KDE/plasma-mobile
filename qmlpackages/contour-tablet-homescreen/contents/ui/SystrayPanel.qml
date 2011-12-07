@@ -75,7 +75,7 @@ Item {
         tasksHeight: 150
         onDraggingChanged: {
             //load the launcher package on demand to save boot time
-            if (systrayPanel.state != "Hidden" && !menuContainer.plasmoid) {
+            if (!menuContainer.plasmoid && dragging) {
                 var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
                 menuContainer.plasmoid = component.createObject(menuContainer);
                 //assume menuContainer provides a itemLaunched signal
