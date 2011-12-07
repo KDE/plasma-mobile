@@ -95,7 +95,10 @@ MobileComponents.Sheet {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
                 Component.onCompleted: activityNameEdit.forceActiveFocus()
-                Keys.onReturnPressed: saveConfiguration();
+                Keys.onReturnPressed: {
+                    saveConfiguration()
+                    accept()
+                }
             }
         },
         PlasmaComponents.Label {
