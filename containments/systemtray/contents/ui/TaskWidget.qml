@@ -36,9 +36,9 @@ Item  {
 
     PlasmaCore.Svg {
         id: iconSvg
-        imagePath: "icons/" + String(IconName).split('-')[0]
+        imagePath: IconName ? "icons/" + String(IconName).split('-')[0] : ''
         Component.onCompleted: {
-            var hasSvg = iconSvg.hasElement(IconName)
+            var hasSvg = IconName ? iconSvg.hasElement(IconName) : false
             normalIcon.visible = !hasSvg
             svgItemIcon.visible = hasSvg
         }
@@ -53,7 +53,7 @@ Item  {
         id: svgItemIcon
         anchors.fill: parent
         svg: iconSvg
-        elementId: IconName
+        elementId: IconName ? IconName : ''
     }
 
     MouseArea {
