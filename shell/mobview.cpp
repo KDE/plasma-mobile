@@ -50,6 +50,10 @@ MobView::MobView(Plasma::Containment *containment, int uid, QWidget *parent)
     //setOptimizationFlags(QGraphicsView::DontSavePainterState);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setAttribute(Qt::WA_OpaquePaintEvent);
+    setAttribute(Qt::WA_NoSystemBackground);
+    viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
+    viewport()->setAttribute(Qt::WA_NoSystemBackground);
     setFrameStyle(0);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     setAttribute(Qt::WA_TranslucentBackground, false);
