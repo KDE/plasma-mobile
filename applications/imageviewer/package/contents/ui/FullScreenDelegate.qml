@@ -111,7 +111,9 @@ Flickable {
                 asynchronous: true
                 anchors.centerIn: parent
                 onStatusChanged: {
-                    if (status != Image.Ready) {
+		    // do not try to load an empty mainImage.source or it will mess up with mainImage.scale
+		    // and make the next valid url fail to load.
+                    if (status != Image.Ready || fullList.width < 1 || fullList.height < 1) {
                         return
                     }
 
