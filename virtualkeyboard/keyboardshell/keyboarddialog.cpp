@@ -91,6 +91,13 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
         m_applet = Plasma::Applet::load(pluginName, appletId, appletArgs);
     }
 
+    if (!m_applet) {
+#ifndef NDEBUG
+        kWarning() << "Keyboard Plasmoid not found .. failing!";
+#endif
+        exit(1);
+    }
+
     // ensure that the keyboard knows when to reset itself
     connect(this, SIGNAL(dialogVisible(bool)), m_applet, SLOT(dialogStatusChanged(bool)));
     m_containment->addApplet(m_applet, QPointF(-1, -1), false);
@@ -103,13 +110,6 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
     m_controlButtonsLayouts->addItem(m_moveButton);
     m_controlButtonsLayouts->addItem(m_keyboardLayoutButton);
     setGraphicsWidget(m_containment);
-
-    if (!m_applet) {
-#ifndef NDEBUG
-        kWarning() << "Keyboard Plasmoid not found .. failing!";
-#endif
-        exit(1);
-    }
 
     m_applet->setFlag(QGraphicsItem::ItemIsMovable, false);
     setWindowTitle(m_applet->name());
