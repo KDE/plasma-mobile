@@ -34,6 +34,11 @@ MobileComponents.Sheet {
     signal addAppletRequested(string plugin)
     signal closeRequested
 
+    Binding {
+        target: acceptButton
+        property: "enabled"
+        value: selectedModel.count > 0
+    }
 
     onAccepted: {
         stack.currentPage.accept()
