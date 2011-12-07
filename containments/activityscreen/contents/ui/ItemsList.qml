@@ -73,7 +73,7 @@ Item {
             MobileComponents.ResourceDelegate {
                 id: resourceDelegate
                 width: 140
-                height: itemsList.cellHeight
+                height: 120
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
