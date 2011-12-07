@@ -100,6 +100,8 @@ MouseArea {
 
         onSearchQueryChanged: {
             if (searchQuery.length < 3) {
+                //HACK: assigning null makes the view really discard the old model and assign the new one
+                appGrid.model = null
                 appGrid.model = appsModel
                 runnerModel.query = ""
             } else {
