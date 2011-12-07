@@ -32,7 +32,7 @@ MouseArea {
     //just to hide the keyboard
     onClicked: main.forceActiveFocus()
 
-    signal itemLaunched()
+    signal itemLaunched
 
     function resetStatus()
     {
@@ -71,7 +71,6 @@ MouseArea {
         id: appsSource
         engine: "org.kde.active.apps"
         connectedSources: ["Apps"]
-        interval: 0
     }
 
     PlasmaCore.SortFilterModel {
@@ -101,8 +100,8 @@ MouseArea {
 
         onSearchQueryChanged: {
             if (searchQuery.length < 3) {
-                runnerModel.query = ""
                 appGrid.model = appsModel
+                runnerModel.query = ""
             } else {
                 appGrid.model = runnerModel
                 runnerModel.query = searchQuery
@@ -128,13 +127,13 @@ MouseArea {
                 height: appGrid.delegateHeight
                 className: "FileDataObject"
                 genericClassName: "FileDataObject"
-                property string label: model["name"]?model["name"]:model["label"]
-                //property string mimeType: model["mimeType"]?model["mimeType"]:"application/x-desktop"
+                property string label: model["name"] ? model["name"] : model["label"]
+                //property string mimeType: model["mimeType"] ? model["mimeType"] : "application/x-desktop"
                 onPressAndHold: ParallelAnimation {
                     MobileComponents.ReleasedAnimation { targetItem: launcherDelegate }
                     ScriptAction { script: {
-                            resourceInstance.uri = model["resourceUri"]?model["resourceUri"]:model["entryPath"]
-                            resourceInstance.title = model["name"]?model["name"]:model["text"]
+                            resourceInstance.uri = model["resourceUri"] ? model["resourceUri"] : model["entryPath"]
+                            resourceInstance.title = model["name"] ? model["name"] : model["text"]
                         }
                     }
                 }
