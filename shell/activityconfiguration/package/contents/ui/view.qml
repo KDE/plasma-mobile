@@ -29,7 +29,7 @@ MobileComponents.Sheet {
 
     title: i18n("Activity configuration")
     acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
-    rejectButtonText: i18n("Cancel")
+    rejectButtonText: i18n("Close")
     acceptButton.enabled: activityNameEdit.text != "" && activitySource.activityNames.indexOf(activityNameEdit.text) == -1
 
     Component.onCompleted: open()

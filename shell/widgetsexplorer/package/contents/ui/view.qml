@@ -29,7 +29,7 @@ MobileComponents.Sheet {
     objectName: "widgetsExplorer"
     title: i18n("Add items")
     acceptButtonText: i18n("Add items")
-    rejectButtonText: i18n("Cancel")
+    rejectButtonText: i18n("Close")
 
     signal addAppletRequested(string plugin)
     signal closeRequested
