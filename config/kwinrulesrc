@@ -1,0 +1,23 @@
+[1]
+Description=(Default) Disable focus stealing prevention for XV
+fsplevel=0
+fsplevelrule=2
+wmclass=^xv .*
+wmclasscomplete=true
+wmclassmatch=3
+
+[2]
+Description=No fullscreen
+fullscreen=false
+fullscreenrule=2
+wmclass=
+wmclasscomplete=false
+wmclassmatch=0
+
+[Directories]
+dir_html[$d]
+dir_locale[$d]
+prefixes[$d]
+
+[General]
+count=2
