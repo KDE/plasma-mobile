@@ -121,7 +121,7 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
         score /= 2;
 
         recommendation.title       = resource.genericLabel();
-        recommendation.description = i18n("Open in the current activity");
+        recommendation.description = i18n("Open and add to the current activity");
         recommendation.icon        = resource.genericIcon();
 
         if (recommendation.icon.isEmpty()) {
