@@ -98,7 +98,7 @@ MobileComponents.Sheet {
                 top: parent.top
             }
             onSearchQueryChanged: {
-                if (stack.depth == 1 && searchQuery != "") {
+                if (stack.depth == 1 && searchQuery.length > 3) {
                     stack.push(globalSearchComponent)
                 }
             }
@@ -122,7 +122,12 @@ MobileComponents.Sheet {
             model: RunnerModels.RunnerModel {
                 id: runnerModel
                 runners: [ "services", "nepomuksearch", "recentdocuments" ]
-                query: searchField.searchQuery.length > 2 ? searchField.searchQuery : ""
+                query: searchField.searchQuery.length > 3 ? searchField.searchQuery : ""
+                onQueryChanged: {
+                    if (searchField.searchQuery.length <= 3) {
+                        stack.pop()
+                    }
+                }
             }
         }
     }

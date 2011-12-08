@@ -59,7 +59,8 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), "org.kde.active.activityconfiguration", structure);
 
-    setQmlPath(m_package->filePath("mainscript"));
+    //setInitializationDelayed(true);
+    //setQmlPath(m_package->filePath("mainscript"));
 #ifndef NO_ACTIVITIES
     m_activityController = new KActivities::Controller(this);
 #endif
@@ -77,10 +78,13 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
 
     if (engine()) {
         QDeclarativeContext *ctxt = engine()->rootContext();
-        m_mainWidget = qobject_cast<QDeclarativeItem *>(rootObject());
+
         if (ctxt) {
             ctxt->setContextProperty("configInterface", this);
         }
+
+        setQmlPath(m_package->filePath("mainscript"));
+        m_mainWidget = qobject_cast<QDeclarativeItem *>(rootObject());
 
         if (m_mainWidget) {
             connect(m_mainWidget, SIGNAL(closeRequested()),
