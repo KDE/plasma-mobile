@@ -30,7 +30,7 @@ MobileComponents.Sheet {
     title: i18n("Activity configuration")
     acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
     rejectButtonText: i18n("Close")
-    acceptButton.enabled: activityNameEdit.text != "" && activitySource.activityNames.indexOf(activityNameEdit.text) == -1
+    acceptButton.enabled: activityNameEdit.text != "" &&  activitySource.activityNames != undefined && activitySource.activityNames.indexOf(activityNameEdit.text) == -1
 
     Component.onCompleted: open()
     onStatusChanged: {
@@ -56,6 +56,7 @@ MobileComponents.Sheet {
     PlasmaCore.DataSource {
         id: activitySource
         property variant activityNames
+        property string currentActivity
         engine: "org.kde.activities"
         onSourceAdded: {
             if (source != "Status") {
@@ -70,12 +71,27 @@ MobileComponents.Sheet {
         onDataChanged: {
             var names = new Array
             for (var i in data) {
-                if (!data[i]["Current"]) {
-                    names.push(data[i]["Name"])
+                print("AAA"+configInterface.activityName)
+                if (data[i]["Current"]) {
+                    currentActivity = data[i]["Name"]
                 }
+               // if (1||!data[i]["Current"]) {
+                    names.push(data[i]["Name"])
+                //}
             }
             activitySource.activityNames = names
         }
+    }
+
+    function nameExists()
+    {
+        /*empty configInterface activityname we are creating*/
+        if (configInterface.activityName != "" && (activitySource.currentActivity == activityNameEdit.text)) {
+            return false
+        }
+
+        return activitySource.activityNames.indexOf(activityNameEdit.text) != -1
+
     }
 
     content: [
@@ -107,7 +123,7 @@ MobileComponents.Sheet {
                 verticalCenter: nameRow.verticalCenter
             }
             text: i18n("An activity with this name already exists")
-            opacity: activitySource.activityNames.indexOf(activityNameEdit.text) != -1
+            opacity: nameExists() ? 1 : 0
             Behavior on opacity {
                 NumberAnimation {
                     duration: 250
