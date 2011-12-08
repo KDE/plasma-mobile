@@ -121,7 +121,7 @@ Item {
                         width: 800
                         height: 480
 
-                        source: "/usr/share/kde4/apps/plasma/plasma-active-one-intro.ogv"
+                        source: plasmoid.file("data", "video.ogv")
 
                         onPausedChanged: {
                             print("Paused Changed..." + paused + playing);
