@@ -91,7 +91,7 @@ PlasmaComponents.Page {
                 verticalCenter: parent.verticalCenter
             }
             onSearchQueryChanged: {
-                metadataModel.queryString = "*"+searchBox.searchQuery+"*"
+                metadataModel.extraParameters["nfo:fileName"] = searchBox.searchQuery
             }
         }
     }
