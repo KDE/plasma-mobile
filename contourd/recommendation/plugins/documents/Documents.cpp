@@ -134,7 +134,7 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
 
         recommendations << recommendation;
 
-        if (recommendations.size() >= 3) break;
+        if (recommendations.size() >= 10) break;
 
     }
 
