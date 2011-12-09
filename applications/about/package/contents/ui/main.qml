@@ -28,7 +28,7 @@ Image {
     objectName: "aboutApp"
     width: 800
     height: 600
-    source: aboutPackage.filePath("images", "background.png")
+    source: "image://appbackgrounds/standard"
     fillMode: Image.Tile
     property QtObject runtimeInfo
 
