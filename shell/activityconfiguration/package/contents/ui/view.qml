@@ -30,7 +30,7 @@ MobileComponents.Sheet {
     title: i18n("Activity configuration")
     acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
     rejectButtonText: i18n("Close")
-    acceptButton.enabled: activityNameEdit.text != "" &&  activitySource.activityNames != undefined && activitySource.activityNames.indexOf(activityNameEdit.text) == -1
+    acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
 
     Component.onCompleted: open()
     onStatusChanged: {
@@ -41,7 +41,7 @@ MobileComponents.Sheet {
 
     function saveConfiguration()
     {
-        if (activityNameEdit.text == "" || activitySource.activityNames.indexOf(activityNameEdit.text) != -1) {
+        if (activityNameEdit.text == "" || nameExists()) {
             return
         }
         configInterface.activityName = activityNameEdit.text
