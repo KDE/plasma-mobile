@@ -29,7 +29,7 @@ soprano_add_ontology(
 )
 
 find_package(Nepomuk REQUIRED)
-find_package(KActivities REQUIRED)
+#find_package(KActivities REQUIRED)
 
 KDE4_ADD_EXECUTABLE(active-firstrun ${firstrun_SRCS})
 
