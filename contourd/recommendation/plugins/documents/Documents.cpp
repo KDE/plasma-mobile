@@ -130,7 +130,12 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
             recommendation.icon = fileItem.iconName();
         }
 
-        kDebug() << recommendation;
+        kDebug()
+            << "score:" << recommendation.score
+            << "id:" << recommendation.id
+            << "title:" << recommendation.title
+            << "description:" << recommendation.description
+            ;
 
         recommendations << recommendation;
 
@@ -144,9 +149,13 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
 
 void DocumentsEnginePrivate::removeRecommendation(const QString & id)
 {
+    // kDebug() << "removing" << id;
+
     for (int i = 0; i < recommendations.size(); i++) {
         if (recommendations[i].id == id) {
+            // kDebug() << "before removal:" << recommendations;
             recommendations.removeAt(i);
+            // kDebug() << "after removal:" << recommendations;
             break;
         }
     }
@@ -194,6 +203,7 @@ void DocumentsEngine::activate(const QString & id, const QString & action)
 
     QDesktopServices::openUrl(url);
 
+    recommendationsUpdated(d->recommendations);
 }
 
 RECOMMENDATION_EXPORT_PLUGIN(DocumentsEngine, "contour_recommendationengine_documents")
