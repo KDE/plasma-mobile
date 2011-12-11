@@ -118,6 +118,14 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
 
         recommendation.score       = score;
         recommendation.id          = item.toString();
+
+        if (recommendation.id.startsWith("nepomuk:")) {
+            if (!resource.hasProperty(NIE::url()))
+                continue;
+
+            recommendation.id = resource.property(NIE::url()).toString();
+        }
+
         score /= 2;
 
         recommendation.title       = resource.genericLabel();
@@ -126,7 +134,7 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
 
         if (recommendation.icon.isEmpty()) {
             KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown,
-                    KUrl(resource.property(Nepomuk::Vocabulary::NIE::url()).toString()));
+                    KUrl(recommendation.id));
             recommendation.icon = fileItem.iconName();
         }
 
