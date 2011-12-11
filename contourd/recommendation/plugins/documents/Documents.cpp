@@ -207,6 +207,20 @@ void DocumentsEngine::activate(const QString & id, const QString & action)
 
     d->removeRecommendation(id);
 
+    // I *really* don't like this - handling http stuff as bookmarks, no matter
+    // what they are...
+    if (id.startsWith("http")) {
+        // Evil handling of the resources - making bookmarks
+
+        Nepomuk::Resource bookmark(url);
+        QList <QUrl> types;
+        types << NFO::Bookmark();
+
+        bookmark.setTypes(types);
+
+    }
+
+    // Proper handling of the resources
     d->activitymanager->linkResourceToActivity(url);
 
     QDesktopServices::openUrl(url);
