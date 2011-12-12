@@ -206,7 +206,7 @@ void DocumentsEngine::activate(const QString & id, const QString & action)
     KUrl url(id);
 
     d->removeRecommendation(id);
-
+/*
     // I *really* don't like this - handling http stuff as bookmarks, no matter
     // what they are...
     if (id.startsWith("http")) {
@@ -219,7 +219,7 @@ void DocumentsEngine::activate(const QString & id, const QString & action)
         bookmark.setTypes(types);
 
     }
-
+*/
     // Proper handling of the resources
     d->activitymanager->linkResourceToActivity(url);
 
