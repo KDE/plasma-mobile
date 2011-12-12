@@ -25,6 +25,10 @@ ItemGroup {
     title: i18n("%1 (%2)", userTypes.typeNames[itemGroup.category], itemsList.count)
     scale: itemsList.count>0?1:0
     canResizeHeight: true
+    enabled: itemsList.count>0
+    onEnabledChanged: {
+        layoutTimer.restart()
+    }
 
     ItemsList {
         id: itemsList

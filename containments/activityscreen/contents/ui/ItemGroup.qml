@@ -232,7 +232,6 @@ PlasmaCore.FrameSvgItem {
         //width = Math.min(470, 32+itemsList.count*140)
         layoutTimer.running = true
         layoutTimer.restart()
-        enabled = false
         visible = false
     }
 
