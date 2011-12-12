@@ -80,7 +80,6 @@ Image {
         property bool starting: true
         onStatusChanged: {
             if (status == MetadataModels.MetadataModel.Idle && starting) {
-                loadImage(startupArguments[0])
                 firstRunTimer.running = true
                 starting = false
             }
