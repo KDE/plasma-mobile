@@ -232,6 +232,10 @@ void MetadataModel::doQuery()
             rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type))));
         } else {
             rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type)));
+            if (QString::compare("nfo:bookmark", type, Qt::CaseInsensitive) == 0) {
+                //FIXME: remove bookmarks if not explicitly asked for
+                rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl("nfo:bookmark"))));
+            }
         }
     }
 
