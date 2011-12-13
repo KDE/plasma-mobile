@@ -222,7 +222,6 @@ void PanelProxy::setWindowListArea(const QRectF &rectf)
     const QRect rect = rectf.toRect();
     if (m_windowListArea != rect) {
         m_windowListArea = rect;
-        m_updateWindowListAreaTimer.start();
     }
 }
 
