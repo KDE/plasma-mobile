@@ -206,20 +206,26 @@ void DocumentsEngine::activate(const QString & id, const QString & action)
     KUrl url(id);
 
     d->removeRecommendation(id);
-/*
+
     // I *really* don't like this - handling http stuff as bookmarks, no matter
     // what they are...
     if (id.startsWith("http")) {
         // Evil handling of the resources - making bookmarks
 
         Nepomuk::Resource bookmark(url);
-        QList <QUrl> types;
-        types << NFO::Bookmark();
 
-        bookmark.setTypes(types);
+        // QList <QUrl> types;
+        // types << NFO::Bookmark();
+
+        // bookmark.setTypes(types);
+
+        // We don't need the removal of other types since the
+        // metadata model now filters bookmarks from normal document
+        // types
+        bookmark.addType(NFO::Bookmark());
 
     }
-*/
+
     // Proper handling of the resources
     d->activitymanager->linkResourceToActivity(url);
 
