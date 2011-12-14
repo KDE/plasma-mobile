@@ -266,7 +266,6 @@ MeeGo.ExpandingBox {
                 id: disconnectButton
                 text: i18n("Disconnect")
                 height: 50
-                width: parent.width
                 onClicked: {
                     networkItem.disconnectService();
                     container.expanded = false;
@@ -277,7 +276,6 @@ MeeGo.ExpandingBox {
                 id: removeConnection
                 text: i18n("Remove connection")
                 height: 50
-                width: parent.width
                 onClicked: {
                     container.detailsComponent = removeConfirmAreaComponent
                 }
@@ -289,13 +287,11 @@ MeeGo.ExpandingBox {
                 text: i18n("Connect by:")
                 font.pixelSize: meegoTheme.fontPixelSizeNormal
                 color: meegoTheme.fontColorNormal
-                width: parent.width
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
             }
 
             /*MeeGo.DropDown {
                 id: dropdown
-                width: parent.width
                 property string method
                 visible: container.networkItem.type != "cellular"
                 model: finished ? [ WifiHelper.IPv4Type["dhcp"], WifiHelper.IPv4Type["static"] ]: []
@@ -315,7 +311,6 @@ MeeGo.ExpandingBox {
             }*/
 
             Text {
-                width: parent.width
                 font.pixelSize: meegoTheme.fontPixelSizeNormal
                 color: meegoTheme.fontColorNormal
                 text: finished ? WifiHelper.IPv4Type[networkItem.method] : ""
@@ -326,7 +321,6 @@ MeeGo.ExpandingBox {
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				text: i18n("IP Address:")
-				width: parent.width
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
 
@@ -335,12 +329,10 @@ MeeGo.ExpandingBox {
 				color: meegoTheme.fontColorNormal
 				text: container.ipaddy
 				visible:  !editable
-				width: parent.width
 			}
 
 			PlasmaComponents.TextField {
 				id: ipaddyEdit
-				width: parent.width
 				text: container.ipaddy
 				visible: editable
 				//textInput.inputMask: "000.000.000.000;_"
@@ -351,7 +343,6 @@ MeeGo.ExpandingBox {
 				color: meegoTheme.fontColorNormal
 				id: subnetMaskLabel
 				text: i18n("Subnet mask:")
-				width: parent.width
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
 
@@ -360,12 +351,10 @@ MeeGo.ExpandingBox {
 				color: meegoTheme.fontColorNormal
 				text: container.subnet
 				visible:  !editable
-				width: parent.width
 			}
 
 			PlasmaComponents.TextField {
 				id: subnetEdit
-				width: parent.width
 				text: container.subnet
 				visible: editable
 				//textInput.inputMask: "000.000.000.000;_"
@@ -375,7 +364,6 @@ MeeGo.ExpandingBox {
 				text: i18n("Gateway")
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
-				width: parent.width
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
 
@@ -384,12 +372,10 @@ MeeGo.ExpandingBox {
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				visible:  !editable
-				width: parent.width
 			}
 
 			PlasmaComponents.TextField {
 				id: gatewayEdit
-				width: parent.width
 				text: container.gateway
 				visible: editable
 				//textInput.inputMask: "000.000.000.000;_"
@@ -399,18 +385,15 @@ MeeGo.ExpandingBox {
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				text: i18n("DNS:")
-				width: parent.width
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
 			Grid {
 				id: nameserverstextedit
-				width: parent.width
 				//height: 20
 				columns: 2
 				Repeater {
 					model: container.nameservers
 					delegate: Text {
-						width: parent.width
 						text: modelData
 						font.pixelSize: meegoTheme.fontPixelSizeNormal
 						color: meegoTheme.fontColorNormal
@@ -424,14 +407,12 @@ MeeGo.ExpandingBox {
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				visible: container.networkItem.type != "cellular"
-				width: parent.width
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
 
 			Text {
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
-				width: parent.width
 				text: container.hwaddy
 				visible: container.networkItem.type != "cellular"
 			}
@@ -449,12 +430,10 @@ MeeGo.ExpandingBox {
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				text: i18n("Security: ")
-				width: parent.width
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 			}
 			Text {
 				visible: connectionsHacksGconf.value
-				width: parent.width
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				text: WifiHelper.connmanSecurityType[container.security]
@@ -465,7 +444,6 @@ MeeGo.ExpandingBox {
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				visible: connectionsHacksGconf.value
-				width: parent.width
 				wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 				text: i18n("Strength: ")
 			}
@@ -473,7 +451,6 @@ MeeGo.ExpandingBox {
 				font.pixelSize: meegoTheme.fontPixelSizeNormal
 				color: meegoTheme.fontColorNormal
 				visible: connectionsHacksGconf.value
-				width: parent.width
 				text: container.networkItem.strength
 			}
 
@@ -481,7 +458,6 @@ MeeGo.ExpandingBox {
 				id: applyButton
 				text: i18n("Apply")
 				height: 50
-				width: parent.width
 				onClicked: {
 					networkItem.method = dropdown.method
 					networkItem.ipaddress = ipaddyEdit.text
@@ -494,7 +470,6 @@ MeeGo.ExpandingBox {
 				id: cancelButton
 				text: i18n("Cancel")
 				height: 50
-				width: parent.width
 				onClicked: {
 					container.expanded = false
 					dropdown.selectedIndex = networkItem.method == "dhcp" ? 0:1
