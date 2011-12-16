@@ -39,6 +39,7 @@
 #include <KSharedConfig>
 #include <KStandardDirs>
 #include <KConfigGroup>
+#include <KGlobalSettings>
 #include <KSystemTimeZone>
 #include <KTimeZone>
 
@@ -332,6 +333,7 @@ void TimeSettings::setTimeFormat(const QString &timeFormat)
         d->localeConfig->sync();
 
         KGlobal::locale()->setTimeFormat(d->timeFormat);
+        KGlobalSettings::self()->emitChange(KGlobalSettings::SettingsChanged);
         kDebug() << "TIME" << KGlobal::locale()->formatTime(QTime::currentTime(), false);
         emit timeFormatChanged();
         timeout();
