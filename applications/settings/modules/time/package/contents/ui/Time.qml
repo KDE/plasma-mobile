@@ -105,7 +105,7 @@ Item {
 
         PlasmaComponents.Label {
             id: ntpLabel
-            text: i18n("Use NTP:")
+            text: i18n("Set time automatically:")
             anchors {
                 right: timeZoneButton.left
                 rightMargin: theme.defaultFont.mSize.width
