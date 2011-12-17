@@ -109,8 +109,7 @@ Item {
                         urlEntered(url);
                         mainItem.state = "collapsed"
                     }
-                    onPressed: MobileComponents.PressedAnimation { targetItem: delegateContainer }
-                    onReleased: MobileComponents.PressedAnimation { targetItem: delegateContainer }
+                    onPressed: MobileComponents.ActivateAnimation { targetItem: delegateContainer }
                 }
 
             }
