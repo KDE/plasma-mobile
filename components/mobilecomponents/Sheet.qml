@@ -68,14 +68,19 @@ Item {
             parent = next
         }
 
-        sheet.state = ""
+        delayOpenTimer.restart()
     }
 
     function close()
     {
         sheet.state = "closed"
     }
-
+Timer {
+    id: delayOpenTimer
+    running: false
+    interval: 0
+    onTriggered: sheet.state = ""
+}
 
 
     Rectangle {
