@@ -27,6 +27,9 @@ CustomButtonPositions=true
 [TabBox]
 ListMode=0
 ShowTabBox=true
+LayoutName=window_strip
+HighlightWindows=false
+ShowOutline=false
 
 [Windows]
 Placement=Maximizing
