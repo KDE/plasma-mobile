@@ -27,7 +27,7 @@ MobileComponents.Sheet {
     id: main
     signal closeRequested
 
-    title: i18n("Activity configuration")
+    title: (configInterface.activityName == "") ? i18n("Create new activity") : i18n("Activity configuration")
     acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
     rejectButtonText: i18n("Close")
     acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
