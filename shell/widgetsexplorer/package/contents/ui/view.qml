@@ -103,13 +103,52 @@ MobileComponents.Sheet {
                 }
             }
         },
+        PlasmaComponents.TabBar {
+            id: tabBar
+            anchors {
+                top: searchField.bottom
+                topMargin: 8
+                left: parent.left
+                right:parent.right
+                leftMargin: 50
+                rightMargin: 50
+            }
+
+            PlasmaComponents.TabButton {
+                text: i18n("Top")
+            }
+            PlasmaComponents.TabButton {
+                text: i18n("Apps")
+            }
+            PlasmaComponents.TabButton {
+                text: i18n("Bookmarks")
+            }
+            PlasmaComponents.TabButton {
+                text: i18n("Contacts")
+            }
+            PlasmaComponents.TabButton {
+                text: i18n("Documents")
+            }
+            PlasmaComponents.TabButton {
+                text: i18n("Images")
+            }
+            PlasmaComponents.TabButton {
+                text: i18n("Music")
+            }
+            PlasmaComponents.TabButton {
+                text: i18n("Videos")
+            }
+            PlasmaComponents.TabButton {
+                text: i18n("Widgets")
+            }
+        },
         PlasmaComponents.PageStack {
             id: stack
             clip: true
             anchors {
                 left: parent.left
                 right: parent.right
-                top: searchField.bottom
+                top: tabBar.bottom
                 bottom: parent.bottom
             }
             initialPage: Qt.createComponent("Menu.qml")
