@@ -80,6 +80,7 @@ ConfigModel::ConfigModel(QObject* parent)
 ConfigModel::~ConfigModel()
 {
     if (d->synchTimer->isActive()) {
+        kDebug() << "SYNC......";
         d->synchTimer->stop();
         d->configGroup->sync();
     }

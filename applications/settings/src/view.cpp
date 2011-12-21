@@ -39,7 +39,8 @@
 View::View(const QString &module, QWidget *parent)
     : QDeclarativeView(parent),
     m_package(0),
-    m_settingsRoot(0)
+    m_settingsRoot(0),
+    m_settingsModuleLoader(0)
 {
     // avoid flicker on show
     setAttribute(Qt::WA_OpaquePaintEvent);
@@ -61,6 +62,8 @@ View::View(const QString &module, QWidget *parent)
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), "org.kde.active.settings", structure);
     m_settingsModules = new SettingsModulesModel(this);
+    m_settingsModuleLoader = new SettingsModuleLoader(this);
+
     if (!module.isEmpty()) {
         loadPlugin(module);
         rootContext()->setContextProperty("startModule", module);
@@ -120,8 +123,8 @@ void View::onStatusChanged(QDeclarativeView::Status status)
 
 void View::loadPlugin(const QString &pluginName)
 {
-    SettingsModuleLoader *loader = new SettingsModuleLoader(this);
-    loader->loadPlugin(pluginName, rootContext());
+    //SettingsModuleLoader *loader = new SettingsModuleLoader(this);
+    m_settingsModuleLoader->loadPlugin(pluginName, rootContext());
 }
 
 #include "view.moc"

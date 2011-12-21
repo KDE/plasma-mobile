@@ -114,7 +114,7 @@ TimeSettings::TimeSettings()
 
 TimeSettings::~TimeSettings()
 {
-    kDebug() << "time destroy";
+    kDebug() << "========================== time destroy";
     delete d;
 }
 
