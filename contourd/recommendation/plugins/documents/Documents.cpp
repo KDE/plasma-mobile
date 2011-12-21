@@ -129,6 +129,11 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
         score /= 2;
 
         recommendation.title       = resource.genericLabel();
+
+        if (recommendation.title.isEmpty()) {
+            recommendation.title = recommendation.id;
+        }
+
         recommendation.description = i18n("Open and add to the current activity");
         recommendation.icon        = resource.genericIcon();
 
