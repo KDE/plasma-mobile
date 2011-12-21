@@ -46,6 +46,7 @@ public:
 
 protected Q_SLOTS:
     void addApplet(const QString &plugin);
+    void doExit();
 
 private:
     Plasma::Containment *m_containment;

@@ -30,6 +30,8 @@
 #include <QGraphicsView>
 #include <QApplication>
 #include <QGraphicsSceneResizeEvent>
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusPendingCall>
 
 //KDE
 #include <KDebug>
@@ -87,8 +89,7 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
         m_mainWidget = qobject_cast<QDeclarativeItem *>(rootObject());
 
         if (m_mainWidget) {
-            connect(m_mainWidget, SIGNAL(closeRequested()),
-                    this, SLOT(deleteLater()));
+            connect(m_mainWidget, SIGNAL(closeRequested()), SLOT(doExit()));
         }
     }
 
@@ -98,6 +99,16 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
 
 ActivityConfiguration::~ActivityConfiguration()
 {
+}
+
+void ActivityConfiguration::doExit()
+{
+    QDBusMessage call = QDBusMessage::createMethodCall("org.kde.plasma-keyboardcontainer",
+                                                       "/MainApplication",
+                                                       "org.kde.plasma.VirtualKeyboard",
+                                                       "hide");
+    QDBusConnection::sessionBus().asyncCall(call);
+    deleteLater();
 }
 
 void ActivityConfiguration::ensureContainmentExistence()
