@@ -20,6 +20,6 @@ install(TARGETS plasma_engine_devicecapabilities DESTINATION ${PLUGIN_INSTALL_DI
 install(FILES plasma-engine-devicecapabilities.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 # Services
-install(FILES powermanagementservice.operations
-        DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
+#install(FILES powermanagementservice.operations
+#        DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
 

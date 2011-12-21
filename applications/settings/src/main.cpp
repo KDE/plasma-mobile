@@ -18,12 +18,16 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+// std
+#include <iostream>
+
 // KDE
 #include <KAboutData>
 #include <KCmdLineArgs>
+#include <KConfigGroup>
 #include <KDebug>
 #include <KService>
-#include <KConfigGroup>
+#include <KServiceTypeTrader>
 
 #include <Plasma/Theme>
 
@@ -32,7 +36,7 @@
 
 static const char description[] = I18N_NOOP("Plasma Active Settings");
 
-static const char version[] = "0.2";
+static const char version[] = "2.0";
 static const char HOME_URL[] = "http://plasma-active.org";
 
 int main(int argc, char **argv)
@@ -43,13 +47,37 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &about);
 
     KService::Ptr service = KService::serviceByDesktopName("active-settings");
-    const QString homeUrl = service ? service->property("X-KDE-PluginInfo-Website", QVariant::String).toString() : HOME_URL;
     about.setProgramIconName(service ? service->icon() : "preferences-desktop");
     KCmdLineOptions options;
     options.add("+[module]", ki18n( "Settings module to open" ), "startpage");
+    options.add("list", ki18n("Displays a list of known modules"));
+
     KCmdLineArgs::addCmdLineOptions(options);
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+    if (args->isSet("list")) {
+        //listPlugins(Plasma::Applet::listAppletInfo());
+        //kDebug() << "Available modules are:";
+        QString query;
+        KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
+
+        //kDebug() << "Found " << services.count() << " modules";
+        foreach (const KService::Ptr &service, services) {
+            if (service->noDisplay()) {
+                continue;
+            }
+            QString description;
+            if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
+                description = service->genericName();
+            } else if (!service->comment().isEmpty()) {
+                description = service->comment();
+            }
+            //kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
+            std::cout << service->property("X-KDE-PluginInfo-Name").toString().toLocal8Bit().data() << "\t\t" << description.toLocal8Bit().data() << std::endl;
+        }
+        return 0;
+    }
 
     ActiveSettings app(args);
     const QString module = args->count() ? args->arg(0) : QString();
