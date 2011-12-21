@@ -29,6 +29,8 @@
 #include <QtDeclarative/QDeclarativeItem>
 #include <QtGui/QGraphicsLinearLayout>
 #include <QStandardItemModel>
+#include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusPendingCall>
 
 //KDE
 #include <KDebug>
@@ -68,13 +70,23 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
 
         if (m_mainWidget) {
             connect(m_mainWidget, SIGNAL(addAppletRequested(const QString &)), this, SLOT(addApplet(const QString &)));
-            connect(m_mainWidget, SIGNAL(closeRequested()), this, SLOT(deleteLater()));
+            connect(m_mainWidget, SIGNAL(closeRequested()), SLOT(doExit()));
         }
     }
 }
 
 MobileWidgetsExplorer::~MobileWidgetsExplorer()
 {
+}
+
+void MobileWidgetsExplorer::doExit()
+{
+    QDBusMessage call = QDBusMessage::createMethodCall("org.kde.plasma-keyboardcontainer",
+                                                       "/MainApplication",
+                                                       "org.kde.plasma.VirtualKeyboard",
+                                                       "hide");
+    QDBusConnection::sessionBus().asyncCall(call);
+    deleteLater();
 }
 
 void MobileWidgetsExplorer::setContainment(Plasma::Containment *cont)

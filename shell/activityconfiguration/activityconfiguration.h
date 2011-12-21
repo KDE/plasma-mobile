@@ -88,6 +88,7 @@ private:
 
 private Q_SLOTS:
     void modelCountChanged();
+    void doExit();
 
 private:
     Plasma::Containment *m_containment;
