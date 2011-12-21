@@ -96,7 +96,6 @@ private:
     QGraphicsView *m_panel;
     QWeakPointer<QGraphicsObject> m_mainItem;
     QRect m_windowListArea;
-    QTimer m_updateWindowListAreaTimer;
     bool m_acceptsFocus;
     bool m_activeWindow;
     bool m_windowStrip;

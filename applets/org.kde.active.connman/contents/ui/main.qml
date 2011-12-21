@@ -40,7 +40,6 @@ Item {
         id: availableNetworkItem
         WifiExpandingBox {
             listModel: networkListModel
-            page: container
             width: main.width
             ssid: name
             networkItem: model.networkitemmodel
@@ -54,6 +53,23 @@ Item {
             method: model.method
             nameservers: model.nameservers
             defaultRoute:  model.defaultRoute
+
+            // This signal is emmited before the expanded size
+            // has been updated.
+            onExpandedChanged: {
+                updateSizeTimer.running = true
+            }
+
+            Timer {
+                id: updateSizeTimer
+                repeat: false
+                running: false
+                interval: 100
+
+                onTriggered: {
+                    main.minimumHeight = height
+                }
+            }
          }
         }
 

@@ -161,6 +161,11 @@ Item {
                 // got to topleft
                 flickable.contentX = 0
                 flickable.contentY = 0
+
+                if (String(url).substr(0, 6) != "file:/") {
+                    Qt.openUrlExternally(url)
+                    webView.back.trigger()
+                }
             }
 
             onDoubleClick: {

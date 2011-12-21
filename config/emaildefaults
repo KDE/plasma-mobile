@@ -1,0 +1,2 @@
+[Defaults]
+EmailClient=kmail-mobile -t %t -s %s -c %c -b %b -B %B -A %A

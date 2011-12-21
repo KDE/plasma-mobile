@@ -63,10 +63,12 @@ WindowStrip::WindowStrip(QGraphicsWidget *parent)
     m_windowFlicker = rootObject()->findChild<QDeclarativeItem*>("windowFlicker");
 
 
-    connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()),
-            this, SLOT(scrollChanged()));
-    connect(m_windowFlicker, SIGNAL(contentXChanged()),
-            this, SLOT(scrollChanged()));
+    if (m_windowFlicker) {
+        connect(m_windowFlicker, SIGNAL(childrenPositionsChanged()),
+                this, SLOT(scrollChanged()));
+        connect(m_windowFlicker, SIGNAL(contentXChanged()),
+                this, SLOT(scrollChanged()));
+    }
 
     scrollChanged();
 }
@@ -120,6 +122,10 @@ void WindowStrip::scrollChanged()
 
 void WindowStrip::updateWindows()
 {
+    if (!m_windowFlicker) {
+        return;
+    }
+
     QVariant dataX = m_windowFlicker->property("contentX");
     QVariant dataY = m_windowFlicker->property("contentY");
     //kWarning()<<"new X"<<data;
@@ -140,6 +146,10 @@ void WindowStrip::updateWindows()
 
 void WindowStrip::updateFrame()
 {
+    if (!m_windowFlicker) {
+        return;
+    }
+
     QVariant data = m_windowFlicker->property("childrenPositions");
     QList<QVariant> thumbnailsInfo = data.value<QList<QVariant> >();
     //kDebug() << "window positions" << thumbnailsInfo;

@@ -120,7 +120,7 @@ PlasmaComponents.Page {
                 if (mimeType == "inode/directory") {
                     dirModel.url = model["url"]
                     resultsGrid.model = dirModel
-                } else {
+                } else if (!mainStack.busy) {
                     loadImage(model["url"])
                 }
             }

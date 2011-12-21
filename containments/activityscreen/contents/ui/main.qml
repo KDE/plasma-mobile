@@ -279,21 +279,24 @@ Item {
                         LayoutManager.resetPositions()
                         for (var i=0; i<resultsFlow.children.length; ++i) {
                             child = resultsFlow.children[i]
-                            if (LayoutManager.itemsConfig[child.category]) {
-                                var rect = LayoutManager.itemsConfig[child.category]
-                                child.x = rect.x
-                                child.y = rect.y
-                                child.width = rect.width
-                                child.height = rect.height
-                            } else {
-                                child.x = 0
-                                child.y = 0
-                                child.width = Math.min(470, 32+child.categoryCount*140)
-                            }
+                            if (child.enabled) {
+                                if (LayoutManager.itemsConfig[child.category]) {
+                                    var rect = LayoutManager.itemsConfig[child.category]
+                                    child.x = rect.x
+                                    child.y = rect.y
+                                    child.width = rect.width
+                                    child.height = rect.height
+                                } else {
+                                    child.x = 0
+                                    child.y = 0
+                                    child.width = Math.min(470, 32+child.categoryCount*140)
+                                }
 
-                            child.visible = true
-                            LayoutManager.positionItem(child)
-                            child.enabled = true
+                                child.visible = true
+                                LayoutManager.positionItem(child)
+                            } else {
+                                child.visible = false
+                            }
                             //debugFlow.refresh();
                         }
                         LayoutManager.save()

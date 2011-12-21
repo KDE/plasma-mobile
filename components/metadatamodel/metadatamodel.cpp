@@ -232,6 +232,10 @@ void MetadataModel::doQuery()
             rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type))));
         } else {
             rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type)));
+            if (type != "nfo:Bookmark") {
+                //FIXME: remove bookmarks if not explicitly asked for
+                rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl("nfo:Bookmark"))));
+            }
         }
     }
 
@@ -481,6 +485,10 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     case GenericClassName: {
         //FIXME: a more elegant way is needed
         QString genericClassName = resource.className();
+        //FIXME: most bookmarks are Document too, so Bookmark wins
+        if (resource.types().contains(QUrl::fromEncoded("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark"))) {
+            return "Bookmark";
+        }
         Nepomuk::Types::Class resClass(resource.resourceType());
         foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
             if (parentClass.label() == "Document" ||

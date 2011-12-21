@@ -136,6 +136,11 @@ void MetadataCloudModel::doQuery()
         } else {
             query += " . ?r rdf:type " + type;
         }
+
+        if (type != "nfo:Bookmark") {
+            //FIXME: remove bookmarks if not explicitly asked for
+            query += " . FILTER(!bif:exists((select (1) where { ?r a <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark> . }))) ";
+        }
     }
 
     if (!resourceType().isEmpty() && m_cloudCategory != "nie:mimeType") {

@@ -31,6 +31,7 @@ static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
+    return 0;
     kDebug() << "First run running ...";
     App app(argc, argv);
     int rc = app.exec();
