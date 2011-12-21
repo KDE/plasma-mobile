@@ -85,6 +85,7 @@ Item {
             }
 
             MobileComponents.TextEffects {
+                id: activityName
                 anchors {
                     top: parent.top
                     left: parent.left
@@ -122,7 +123,7 @@ Item {
         }
         spacing: 8
 
-        enabled: delegate.scale>0.9
+        enabled: delegate.scale > 0.4
         Item {
             id: deleteButtonParent
             width: iconSize
@@ -132,12 +133,13 @@ Item {
             Component {
                 id: confirmationDialogComponent
                 ConfirmationDialog {
+                    enabled: true
                     anchors {
-                        left: deleteButton.horizontalCenter
-                        bottom: deleteButton.verticalCenter
+                        bottom: deleteButton.top
+                        right: parent.right
                     }
                     transformOrigin: Item.BottomLeft
-                    question: i18n("Are you sure you want permanently delete this activity?")
+                    question: i18n("Do you want to permanently delete activity '%1'?", activityName.text)
                     onAccepted: {
                         var service = activitySource.serviceForSource(model["DataEngineSource"])
                         var operation = service.operationDescription("stop")
@@ -165,10 +167,10 @@ Item {
                     if (!deleteButtonParent.confirmationDialog) {
                         deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
                     }
-                    if (deleteButtonParent.confirmationDialog.scale == 1) {
+                    if (deleteButtonParent.confirmationDialog.scale >= 1) {
                         deleteButtonParent.confirmationDialog.scale = 0
                     } else {
-                        deleteButtonParent.confirmationDialog.scale = 1
+                        deleteButtonParent.confirmationDialog.scale = 1 / delegate.scale
                     }
                 }
             }
