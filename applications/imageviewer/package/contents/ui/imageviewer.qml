@@ -75,7 +75,7 @@ Image {
     MetadataModels.MetadataModel {
         id: metadataModel
         resourceType: "nfo:Image"
-        sortBy: [userTypes.sortFields[itemGroup.category]]
+        sortBy: [userTypes.sortFields[resourceType]]
         sortOrder: Qt.AscendingOrder
         property bool starting: true
         onStatusChanged: {
