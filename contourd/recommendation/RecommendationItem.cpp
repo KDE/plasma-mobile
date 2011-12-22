@@ -54,7 +54,7 @@ RecommendationItem::RecommendationItem(const RecommendationItem & source)
 
 RecommendationItem & RecommendationItem::operator = (const RecommendationItem & source)
 {
-    if (&source == this) {
+    if (&source != this) {
         score       = source.score;
         title       = source.title;
         description = source.description;
