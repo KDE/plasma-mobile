@@ -103,56 +103,8 @@ MobileComponents.Sheet {
                 }
             }
         },
-        PlasmaComponents.TabBar {
+        MenuTabBar {
             id: tabBar
-            anchors {
-                top: searchField.bottom
-                topMargin: 8
-                horizontalCenter: parent.horizontalCenter
-            }
-            width: Math.min(implicitWidth, parent.width - 100)
-
-            PlasmaComponents.TabButton {
-                text: i18n("Top")
-            }
-            PlasmaComponents.TabButton {
-                text: i18n("Apps")
-                component: appsComponent
-            }
-            PlasmaComponents.TabButton {
-                text: i18n("Bookmarks")
-                resourceType: "nfo:Bookmark"
-                component: bookmarksComponent
-            }
-            PlasmaComponents.TabButton {
-                text: i18n("Contacts")
-                resourceType: "nfo:Contact"
-                component: contactsComponent
-            }
-            PlasmaComponents.TabButton {
-                text: i18n("Documents")
-                resourceType: "nfo:Document"
-                component: documentsComponent
-            }
-            PlasmaComponents.TabButton {
-                text: i18n("Images")
-                resourceType: "nfo:Image"
-                component: imagesComponent
-            }
-            PlasmaComponents.TabButton {
-                text: i18n("Music")
-                resourceType: "nfo:Audio"
-                component: musicComponent
-            }
-            PlasmaComponents.TabButton {
-                text: i18n("Videos")
-                resourceType: "nfo:Video"
-                component: videoComponent
-            }
-            PlasmaComponents.TabButton {
-                text: i18n("Widgets")
-                component: widgetsComponent
-            }
         },
         PlasmaComponents.PageStack {
             id: stack
