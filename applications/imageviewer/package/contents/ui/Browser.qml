@@ -100,7 +100,12 @@ PlasmaComponents.Page {
         id: resultsGrid
         anchors.fill: parent
 
-        model: metadataModel
+        model: PlasmaCore.SortFilterModel {
+            sourceModel: metadataModel
+            sortRole: "label"
+            sortOrder: "AscendingOrder"
+        }
+
         delegateWidth: 130
         delegateHeight: 120
         delegate: MobileComponents.ResourceDelegate {
