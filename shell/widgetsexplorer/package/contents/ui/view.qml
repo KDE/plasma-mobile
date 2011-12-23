@@ -117,39 +117,41 @@ MobileComponents.Sheet {
             }
             PlasmaComponents.TabButton {
                 text: i18n("Apps")
+                component: appsComponent
             }
             PlasmaComponents.TabButton {
                 text: i18n("Bookmarks")
-                property string resourceType: "nfo:Bookmark"
-                visible: String(resourceType).charAt(0) == "_" || cloudModel.categories.indexOf(resourceType) != -1
+                resourceType: "nfo:Bookmark"
+                component: bookmarksComponent
             }
             PlasmaComponents.TabButton {
                 text: i18n("Contacts")
-                property string resourceType: "nfo:Bookmark"
-                visible: String(resourceType).charAt(0) == "_" || cloudModel.categories.indexOf(resourceType) != -1
+                resourceType: "nfo:Contact"
+                component: contactsComponent
             }
             PlasmaComponents.TabButton {
                 text: i18n("Documents")
-                property string resourceType: "nfo:Document"
-                visible: String(resourceType).charAt(0) == "_" || cloudModel.categories.indexOf(resourceType) != -1
+                resourceType: "nfo:Document"
+                component: documentsComponent
             }
             PlasmaComponents.TabButton {
                 text: i18n("Images")
-                property string resourceType: "nfo:Image"
-                visible: String(resourceType).charAt(0) == "_" || cloudModel.categories.indexOf(resourceType) != -1
+                resourceType: "nfo:Image"
+                component: imagesComponent
             }
             PlasmaComponents.TabButton {
                 text: i18n("Music")
-                property string resourceType: "nfo:Audio"
-                visible: String(resourceType).charAt(0) == "_" || cloudModel.categories.indexOf(resourceType) != -1
+                resourceType: "nfo:Audio"
+                component: musicComponent
             }
             PlasmaComponents.TabButton {
                 text: i18n("Videos")
-                property string resourceType: "nfo:Video"
-                visible: String(resourceType).charAt(0) == "_" || cloudModel.categories.indexOf(resourceType) != -1
+                resourceType: "nfo:Video"
+                component: videoComponent
             }
             PlasmaComponents.TabButton {
                 text: i18n("Widgets")
+                component: widgetsComponent
             }
         },
         PlasmaComponents.PageStack {
