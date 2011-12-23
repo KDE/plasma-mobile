@@ -4,6 +4,8 @@ set(settings_SRCS
     settingsmoduleloader.cpp
     settingsplugin.cpp
     settingsmodule.cpp
+    settingsmodulesmodel.cpp
+    settingsmodulesitem.cpp
     )
 
 qt4_automoc(${settings_SRCS})
