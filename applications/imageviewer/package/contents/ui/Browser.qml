@@ -104,6 +104,7 @@ PlasmaComponents.Page {
             sourceModel: metadataModel
             sortRole: "label"
             sortOrder: "AscendingOrder"
+            sortCaseSensitivity: Qt.CaseInsensitive
         }
 
         delegateWidth: 130

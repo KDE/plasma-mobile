@@ -66,6 +66,10 @@ Image {
         repeat: false
         onTriggered: {
             loadImage(startupArguments[0])
+
+            // sort by column 0 (called "label" in metadatamodel.cpp),
+            // that is, the file name.
+            metadataModel.sort(0)
         }
     }
 

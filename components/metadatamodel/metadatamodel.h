@@ -103,6 +103,14 @@ public:
     //Reimplemented
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
+    /**
+     * Reimplemented
+     * Just signal QSortFilterProxyModel to do the real sorting.
+     * Use this class as parameter to QSortFilterProxyModel->setSourceModel (C++) or
+     * PlasmaCore.SortFilterModel.sourceModel (QML) to get the real sorting.
+     */
+    Q_INVOKABLE void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
+
 Q_SIGNALS:
     void queryStringChanged();
 
