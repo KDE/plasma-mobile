@@ -21,7 +21,9 @@
 //#define KDE_DEPRECATED 1
 
 #include "settingsmodulesmodel.h"
-#include "settingsmodulesitem.h"
+
+#include <QDeclarativeContext>
+#include <QDeclarativeEngine>
 
 #include <KIcon>
 #include <KService>
@@ -33,16 +35,25 @@ class SettingsModulesModelPrivate {
 
 public:
     QList<QObject*> items;
+    QList<SettingsModulesItem*> settingsModulesItems;
     bool isPopulated;
 };
 
 
-SettingsModulesModel::SettingsModulesModel(QObject *parent)
-    : QObject(parent)
+SettingsModulesModel::SettingsModulesModel(QDeclarativeComponent *parent)
+    : QDeclarativeComponent(parent)
 {
+    kDebug() << "Creating SettingsModel";
     d = new SettingsModulesModelPrivate;
     d->isPopulated = false;
     populate();
+
+    QDeclarativeContext* ctx = creationContext();
+    if (ctx) {
+        kDebug() << "SET CONTEXT PROPERTY settingsModules";
+        creationContext()->setContextProperty("settingsModules", QVariant::fromValue(items()));
+    }
+
 }
 
 SettingsModulesModel::~SettingsModulesModel()
@@ -56,6 +67,14 @@ QList<QObject*> SettingsModulesModel::items()
     l.append(d->items);
 
     return l;
+}
+
+QDeclarativeListProperty<SettingsModulesItem> SettingsModulesModel::settingsModulesItems()
+{
+//     QList<SettingsModulesItem*> l;
+//     l.append(d->settingsModulesItems);
+
+    return QDeclarativeListProperty<SettingsModulesItem>(this, d->settingsModulesItems);
 }
 
 void SettingsModulesModel::populate()
@@ -88,11 +107,13 @@ void SettingsModulesModel::populate()
         item->setIcon(KIcon(service->icon()));
         item->setIconName(service->icon());
         item->setModule(service->property("X-KDE-PluginInfo-Name").toString());
-
+        kDebug() << " appending: " << item->name();
         d->items.append(item);
+        d->settingsModulesItems.append(item);
     }
-
+    emit itemsChanged();
     emit dataChanged();
+    emit settingsModulesItemsChanged();
 }
 
 #include "settingsmodulesmodel.moc"

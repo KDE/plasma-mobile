@@ -69,7 +69,7 @@ View::View(const QString &module, QWidget *parent)
         rootContext()->setContextProperty("startModule", module);
 
     }
-    rootContext()->setContextProperty("settingsModulesModel", QVariant::fromValue(m_settingsModules->items()));
+    //rootContext()->setContextProperty("settingsModulesModel", QVariant::fromValue(m_settingsModules->items()));
     const QString qmlFile = m_package->filePath("mainscript");
 
     setSource(QUrl(m_package->filePath("mainscript")));

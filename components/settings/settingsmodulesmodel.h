@@ -21,28 +21,35 @@
 #ifndef COMPLETIONMODEL_H
 #define COMPLETIONMODEL_H
 
+#include <QDeclarativeComponent>
 #include <QObject>
 #include <QImage>
 #include <Nepomuk/Query/Result>
 
+#include "settingsmodulesitem.h"
+
 class History;
 class SettingsModulesModelPrivate;
 
-class SettingsModulesModel : public QObject
+class SettingsModulesModel : public QDeclarativeComponent
 {
     Q_OBJECT
-
+    Q_PROPERTY(QList<QObject*> items READ items NOTIFY itemsChanged)
+    Q_PROPERTY(QDeclarativeListProperty<SettingsModulesItem> settingsModulesItems READ settingsModulesItems NOTIFY settingsModulesItemsChanged)
+//Q_PROPERTY(QDeclarativeListProperty<Person> guests READ guests)
 public:
-    SettingsModulesModel(QObject *parent = 0 );
+    SettingsModulesModel(QDeclarativeComponent* parent = 0 );
     ~SettingsModulesModel();
 
     QList<QObject*> items();
+    QDeclarativeListProperty<SettingsModulesItem> settingsModulesItems();
 
 public Q_SLOTS:
     void populate();
 Q_SIGNALS:
     void dataChanged();
-
+    void itemsChanged();
+    void settingsModulesItemsChanged();
 
 private:
     SettingsModulesModelPrivate* d;

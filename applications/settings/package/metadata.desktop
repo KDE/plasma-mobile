@@ -26,4 +26,4 @@ X-KDE-PluginInfo-Category=Online Services
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
-X-Plasma-MainScript=ui/Settings.qml
+X-Plasma-MainScript=ui/ActiveSettings.qml

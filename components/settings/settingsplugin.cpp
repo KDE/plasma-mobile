@@ -23,12 +23,15 @@
 #include <QtDeclarative/qdeclarative.h>
 
 #include "settingsmoduleloader.h"
+#include "settingsmodulesmodel.h"
 
 void SettingsPlugin::registerTypes(const char *uri)
 {
     //Q_ASSERT(uri == QLatin1String("org.kde.runnermodel"));
-    kDebug() << " SettingsModulePlugin: " << uri;
+    kDebug() << " ======================== SettingsModulePlugin: " << uri;
     qmlRegisterType<SettingsModuleLoader>(uri, 0, 1, "Settings");
+    qmlRegisterType<SettingsModulesModel>(uri, 0, 1, "SettingsModulesModel");
+    qmlRegisterType<SettingsModulesItem>(uri, 0, 1, "SettingsModulesItem");
 }
 
 #include "settingsplugin.moc"
