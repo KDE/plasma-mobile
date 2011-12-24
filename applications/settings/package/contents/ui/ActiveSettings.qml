@@ -112,10 +112,11 @@ Image {
                         onPressed: MobileComponents.PressedAnimation { targetItem: delegateItem }
                         onReleased: MobileComponents.ReleasedAnimation { targetItem: delegateItem }
                         onClicked: {
-                            if (module != switcherPackage.name) {
+                            //if (module != switcherPackage.name) {
                                 listView.currentIndex = index
-                                loadPackage(module);
-                            }
+                                //settingsComponent.loadPackage(module);
+                                settingsComponent.module = module;
+                            //}
                         }
                     }
                     Component.onCompleted: {
@@ -216,6 +217,10 @@ Image {
         ]
     }
 
+    ActiveSettings.SettingsComponent {
+        id: settingsComponent
+    }
+    /*
     MobileComponents.Package {
         id: switcherPackage
     }
@@ -233,4 +238,5 @@ Image {
             loadPackage(startModule);
         }
     }
+    */
 }

@@ -28,7 +28,7 @@
 
 void SettingsPlugin::registerTypes(const char *uri)
 {
-    //Q_ASSERT(uri == QLatin1String("org.kde.runnermodel"));
+    Q_ASSERT(uri == QLatin1String("org.kde.active.settings"));
     kDebug() << " ======================== SettingsModulePlugin: " << uri;
     qmlRegisterType<SettingsModuleLoader>(uri, 0, 1, "Settings");
     qmlRegisterType<SettingsModulesModel>(uri, 0, 1, "SettingsModulesModel");
