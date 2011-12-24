@@ -24,6 +24,7 @@
 
 #include "settingsmoduleloader.h"
 #include "settingsmodulesmodel.h"
+#include "settingscomponent.h"
 
 void SettingsPlugin::registerTypes(const char *uri)
 {
@@ -32,6 +33,7 @@ void SettingsPlugin::registerTypes(const char *uri)
     qmlRegisterType<SettingsModuleLoader>(uri, 0, 1, "Settings");
     qmlRegisterType<SettingsModulesModel>(uri, 0, 1, "SettingsModulesModel");
     qmlRegisterType<SettingsModulesItem>(uri, 0, 1, "SettingsModulesItem");
+    qmlRegisterType<SettingsComponent>(uri, 0, 1, "SettingsComponent");
 }
 
 #include "settingsplugin.moc"

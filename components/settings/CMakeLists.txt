@@ -6,6 +6,7 @@ set(settings_SRCS
     settingsmodule.cpp
     settingsmodulesmodel.cpp
     settingsmodulesitem.cpp
+    settingscomponent.cpp
     )
 
 qt4_automoc(${settings_SRCS})
@@ -17,5 +18,5 @@ target_link_libraries(settingsplugin
         ${KDE4_PLASMA_LIBS}
         )
 
-install(TARGETS settingsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/settings)
-install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/settings)
+install(TARGETS settingsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/active/settings)
+install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/active/settings)

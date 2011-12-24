@@ -34,26 +34,22 @@ class SettingsModulesModelPrivate;
 class SettingsModulesModel : public QDeclarativeComponent
 {
     Q_OBJECT
-    Q_PROPERTY(QList<QObject*> items READ items NOTIFY itemsChanged)
     Q_PROPERTY(QDeclarativeListProperty<SettingsModulesItem> settingsModulesItems READ settingsModulesItems NOTIFY settingsModulesItemsChanged)
-//Q_PROPERTY(QDeclarativeListProperty<Person> guests READ guests)
+
 public:
     SettingsModulesModel(QDeclarativeComponent* parent = 0 );
     ~SettingsModulesModel();
 
-    QList<QObject*> items();
     QDeclarativeListProperty<SettingsModulesItem> settingsModulesItems();
 
 public Q_SLOTS:
     void populate();
 Q_SIGNALS:
     void dataChanged();
-    void itemsChanged();
     void settingsModulesItemsChanged();
 
 private:
     SettingsModulesModelPrivate* d;
-
 };
 
 #endif // COMPLETIONMODEL_H
