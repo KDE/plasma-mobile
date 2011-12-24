@@ -669,4 +669,14 @@ void MetadataModel::previewFailed(const KFileItem &item)
     m_previewJobs.remove(item.url());
 }
 
+// Just signal QSortFilterProxyModel to do the real sorting.
+void MetadataModel::sort(int column, Qt::SortOrder order)
+{
+    Q_UNUSED(column);
+    Q_UNUSED(order);
+
+    beginResetModel();
+    endResetModel();
+}
+
 #include "metadatamodel.moc"
