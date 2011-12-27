@@ -333,7 +333,7 @@ void TimeSettings::setTimeFormat(const QString &timeFormat)
         d->localeConfig->sync();
 
         KGlobal::locale()->setTimeFormat(d->timeFormat);
-        KGlobalSettings::self()->emitChange(KGlobalSettings::SettingsChanged);
+        KGlobalSettings::self()->emitChange(KGlobalSettings::SettingsChanged, KGlobalSettings::SETTINGS_LOCALE);
         kDebug() << "TIME" << KGlobal::locale()->formatTime(QTime::currentTime(), false);
         emit timeFormatChanged();
         timeout();
