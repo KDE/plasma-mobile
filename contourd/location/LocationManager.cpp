@@ -24,10 +24,12 @@
 
 #include <KConfig>
 #include <KConfigGroup>
+#include <QDebug>
 
-/**
- *
- */
+#include "network-engines/NetworkNotifier.h"
+
+namespace Contour {
+
 class LocationManager::Private {
 public:
     Private()
@@ -50,11 +52,15 @@ public:
 };
 
 LocationManager::LocationManager(QObject * parent)
-    : d(new Private())
+    : QObject(parent), d(new Private())
 {
+    qDebug() << "Starting the location manager";
+
     foreach (const QString & id, d->locationsConfig.keyList()) {
         d->knownLocations[id] = d->locationsConfig.readEntry(id, QString());
     }
+
+    NetworkNotifierLoader::self()->init();
 }
 
 LocationManager::~LocationManager()
@@ -134,3 +140,4 @@ void LocationManager::resetCurrentLocation()
     setCurrentLocation(QString());
 }
 
+} // namespace Contour

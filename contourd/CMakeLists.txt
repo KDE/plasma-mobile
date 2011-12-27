@@ -33,6 +33,8 @@ set(recommendationmanager_SRC
   recommendation/sensors/dbus/DBusSensor.cpp
 
   location/LocationManager.cpp
+  location/network-engines/NetworkNotifier.cpp
+
   main.cpp
 )
 
@@ -63,6 +65,21 @@ soprano_add_ontology(recommendationmanager_SRC
     "NCO" "Nepomuk::Vocabulary" "trig"
     )
 
+########################################################################
+set(ADDITIONAL_LINK_LIBRARIES)
+
+set(recommendationmanager_SRC
+    ${recommendationmanager_SRC}
+    location/network-engines/SolidNetworkNotifier.cpp
+    )
+
+set(ADDITIONAL_LINK_LIBRARIES
+    ${ADDITIONAL_LINK_LIBRARIES}
+    ${KDE4_SOLID_LIBS}
+    )
+
+message(${recommendationmanager_SRC})
+########################################################################
 
 kde4_add_executable(contour
   ${recommendationmanager_SRC}
@@ -77,7 +94,10 @@ target_link_libraries(
   ${SOPRANO_LIBRARIES}
   ${NEPOMUK_LIBRARIES}
   ${NEPOMUK_QUERY_LIBRARIES}
+  ${ADDITIONAL_LINK_LIBRARIES}
   kworkspace
+  solidcontrol
+  solidcontrolifaces
   QtLocation
   QtContacts
   QtSensors

@@ -24,6 +24,8 @@
 #include <QString>
 #include <QStringList>
 
+namespace Contour {
+
 /**
  * LocationManager
  */
@@ -103,6 +105,8 @@ private:
     class Private;
     Private * const d;
 };
+
+} // namespace Contour
 
 #endif // LOCATION_MANAGER_H_
 
