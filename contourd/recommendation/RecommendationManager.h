@@ -31,6 +31,7 @@ namespace Contour {
 class RecommendationManager : public QObject
 {
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "org.kde.contour.RecommendationManager")
 
 public:
     RecommendationManager(QObject* parent = 0);

@@ -32,7 +32,7 @@ set(recommendationmanager_SRC
 
   recommendation/sensors/dbus/DBusSensor.cpp
 
-  location/locationmanager.cpp
+  location/LocationManager.cpp
   main.cpp
 )
 
