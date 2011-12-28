@@ -19,10 +19,6 @@
  ***************************************************************************/
 
 #include "view.h"
-//#include "configmodel.h"
-#include "settingsmodulesmodel.h"
-#include "settingsmoduleloader.h"
-#include "settingsmodule.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
@@ -39,8 +35,7 @@
 View::View(const QString &module, QWidget *parent)
     : QDeclarativeView(parent),
     m_package(0),
-    m_settingsRoot(0),
-    m_settingsModuleLoader(0)
+    m_settingsRoot(0)
 {
     // avoid flicker on show
     setAttribute(Qt::WA_OpaquePaintEvent);
@@ -55,27 +50,18 @@ View::View(const QString &module, QWidget *parent)
     kdeclarative.initialize();
     //binds things like kconfig and icons
     kdeclarative.setupBindings();
-    //qRegisterMetaType<Plasma::ConfigModel>("ConfigModel");
-    //qmlRegisterType<Plasma::ConfigModel*>();
-//     qmlRegisterType<Plasma::ConfigModel>("org.kde.active.settings", 0, 1, "ConfigModel");
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), "org.kde.active.settings", structure);
-    m_settingsModules = new SettingsModulesModel(this);
-    m_settingsModuleLoader = new SettingsModuleLoader(this);
 
     if (!module.isEmpty()) {
-        loadPlugin(module);
         rootContext()->setContextProperty("startModule", module);
-
     }
-    //rootContext()->setContextProperty("settingsModulesModel", QVariant::fromValue(m_settingsModules->items()));
-    const QString qmlFile = m_package->filePath("mainscript");
 
-    setSource(QUrl(m_package->filePath("mainscript")));
+    const QString qmlFile = m_package->filePath("mainscript");
+    setSource(QUrl::fromLocalFile(m_package->filePath("mainscript")));
     show();
 
-    //QTimer::singleShot(4000, this, SLOT(updateStatus()));
     onStatusChanged(status());
 
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
@@ -86,11 +72,6 @@ View::View(const QString &module, QWidget *parent)
 View::~View()
 {
     delete m_package;
-}
-
-QObject* View::settings()
-{
-    return m_settings;
 }
 
 void View::updateStatus()
@@ -104,27 +85,17 @@ void View::onStatusChanged(QDeclarativeView::Status status)
     if (status == QDeclarativeView::Ready) {
         if (!m_settingsRoot) {
             m_settingsRoot = rootObject()->findChild<QDeclarativeItem*>("settingsRoot");
-            if (m_settingsRoot) {
-                connect(m_settingsRoot, SIGNAL(loadPlugin(QString)),
-                        this, SLOT(loadPlugin(QString)));
-            } else {
+            if (!m_settingsRoot) {
                 kError() << "settingsRoot component not found. :(";
             }
         }
     } else if (status == QDeclarativeView::Error) {
         foreach (const QDeclarativeError &e, errors()) {
-            kDebug() << "EEEE" << e;
             kWarning() << "error in QML: " << e.toString() << e.description();
         }
     } else if (status == QDeclarativeView::Loading) {
         //kDebug() << "Loading.";
     }
-}
-
-void View::loadPlugin(const QString &pluginName)
-{
-    //SettingsModuleLoader *loader = new SettingsModuleLoader(this);
-    m_settingsModuleLoader->loadPlugin(pluginName, rootContext());
 }
 
 #include "view.moc"

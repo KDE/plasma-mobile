@@ -23,10 +23,6 @@
 #include <QDeclarativeItem>
 #include <QDeclarativeView>
 
-class SettingsModulesModel;
-class SettingsModuleLoader;
-class SettingsModule;
-
 namespace Plasma
 {
     class Package;
@@ -40,22 +36,15 @@ public:
     View(const QString &url, QWidget *parent = 0 );
     ~View();
 
-    QObject* settings();
-
 Q_SIGNALS:
     void titleChanged(const QString&);
 
 private Q_SLOTS:
-    //void addPlugin(SettingsModule *plugin);
-    void loadPlugin(const QString &pluginName = QString());
     void onStatusChanged(QDeclarativeView::Status status);
     void updateStatus();
 
 private:
     Plasma::Package *m_package;
-    QObject *m_settings;
-    SettingsModulesModel *m_settingsModules;
-    SettingsModuleLoader *m_settingsModuleLoader;
     QDeclarativeItem* m_settingsRoot;
 };
 
