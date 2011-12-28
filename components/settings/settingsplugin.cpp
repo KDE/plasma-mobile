@@ -33,7 +33,7 @@ void SettingsPlugin::registerTypes(const char *uri)
     const int major = 0;
     const int minor = 1;
     qmlRegisterType<SettingsModulesModel>(uri, major, minor, "SettingsModulesModel");
-    qmlRegisterType<SettingsModulesItem>(uri, major, minor, "SettingsModulesItem");
+    qmlRegisterType<SettingsModule>(uri, major, minor, "SettingsModule");
     qmlRegisterType<SettingsComponent>(uri, major, minor, "SettingsComponent");
     qmlRegisterType<Plasma::ConfigModel>(uri, major, minor, "ConfigModel");
 }

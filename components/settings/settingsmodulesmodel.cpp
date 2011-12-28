@@ -35,7 +35,7 @@ class SettingsModulesModelPrivate {
 
 public:
 //     QList<QObject*> items;
-    QList<SettingsModulesItem*> settingsModulesItems;
+    QList<SettingsModule*> settingsModules;
     bool isPopulated;
 };
 
@@ -54,9 +54,9 @@ SettingsModulesModel::~SettingsModulesModel()
     delete d;
 }
 
-QDeclarativeListProperty<SettingsModulesItem> SettingsModulesModel::settingsModulesItems()
+QDeclarativeListProperty<SettingsModule> SettingsModulesModel::settingsModules()
 {
-    return QDeclarativeListProperty<SettingsModulesItem>(this, d->settingsModulesItems);
+    return QDeclarativeListProperty<SettingsModule>(this, d->settingsModules);
 }
 
 void SettingsModulesModel::populate()
@@ -82,17 +82,17 @@ void SettingsModulesModel::populate()
         } else if (!service->comment().isEmpty()) {
             description = service->comment();
         }
-        SettingsModulesItem* item = new SettingsModulesItem(this);
+        SettingsModule* item = new SettingsModule(this);
 
         item->setName(service->name());
         item->setDescription(description);
         item->setIcon(KIcon(service->icon()));
         item->setIconName(service->icon());
         item->setModule(service->property("X-KDE-PluginInfo-Name").toString());
-        d->settingsModulesItems.append(item);
+        d->settingsModules.append(item);
     }
     //emit dataChanged();
-    emit settingsModulesItemsChanged();
+    emit settingsModulesChanged();
 }
 
 #include "settingsmodulesmodel.moc"

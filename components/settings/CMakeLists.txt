@@ -5,7 +5,6 @@ set(settings_SRCS
     settingsplugin.cpp
     settingsmodule.cpp
     settingsmodulesmodel.cpp
-    settingsmodulesitem.cpp
     settingscomponent.cpp
     configmodel.cpp
     )

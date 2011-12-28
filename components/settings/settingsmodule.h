@@ -62,8 +62,6 @@ class KDE_EXPORT SettingsModule : public QObject
         void setIconName(const QString &iconName);
 
     Q_SIGNALS:
-        void dataChanged();
-
         void nameChanged();
         void descriptionChanged();
         void moduleChanged();

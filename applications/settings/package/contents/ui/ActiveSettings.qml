@@ -147,7 +147,7 @@ Image {
                 spacing: 4
                 clip: true
                 interactive: false
-                model: settingsModulesModel.settingsModulesItems
+                model: settingsModulesModel.settingsModules
                 delegate: settingsModuleDelegate
                 highlight: PlasmaComponents.Highlight {}
             }

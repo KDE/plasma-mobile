@@ -26,7 +26,7 @@
 #include <QImage>
 #include <Nepomuk/Query/Result>
 
-#include "settingsmodulesitem.h"
+#include "settingsmodule.h"
 
 class History;
 class SettingsModulesModelPrivate;
@@ -34,19 +34,19 @@ class SettingsModulesModelPrivate;
 class SettingsModulesModel : public QDeclarativeComponent
 {
     Q_OBJECT
-    Q_PROPERTY(QDeclarativeListProperty<SettingsModulesItem> settingsModulesItems READ settingsModulesItems NOTIFY settingsModulesItemsChanged)
+    Q_PROPERTY(QDeclarativeListProperty<SettingsModule> settingsModules READ settingsModules NOTIFY settingsModulesChanged)
 
 public:
     SettingsModulesModel(QDeclarativeComponent* parent = 0 );
     ~SettingsModulesModel();
 
-    QDeclarativeListProperty<SettingsModulesItem> settingsModulesItems();
+    QDeclarativeListProperty<SettingsModule> settingsModules();
 
 public Q_SLOTS:
     void populate();
 Q_SIGNALS:
     void dataChanged();
-    void settingsModulesItemsChanged();
+    void settingsModulesChanged();
 
 private:
     SettingsModulesModelPrivate* d;
