@@ -65,6 +65,7 @@ TimeSettingsPlugin::TimeSettingsPlugin(QObject *parent, const QVariantList &list
 
 TimeSettingsPlugin::~TimeSettingsPlugin()
 {
+    kDebug() << "ts plugin del'ed";
 }
 
 
