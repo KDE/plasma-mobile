@@ -47,13 +47,13 @@ Item {
         spacing: theme.defaultFont.mSize.height
         Text {
             color: theme.textColor
-            text: "<h3>" + moduleTitle + "</h3>"
+            text: "<h3>" + settingsComponent.name + "</h3>"
             opacity: 1
         }
         Text {
             id: descriptionLabel
             color: theme.textColor
-            text: moduleDescription
+            text: settingsComponent.description
             opacity: .4
         }
     }

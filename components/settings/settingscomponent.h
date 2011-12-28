@@ -27,24 +27,29 @@ class SettingsComponentPrivate;
 class SettingsComponent : public QDeclarativeItem
 {
     Q_OBJECT
+    Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
     Q_PROPERTY(QString module READ module WRITE setModule NOTIFY moduleChanged)
-    Q_PROPERTY(QUrl mainScript READ mainScript WRITE setMainScript NOTIFY mainScriptChanged)
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 
 public:
     SettingsComponent(QDeclarativeItem *parent = 0);
     ~SettingsComponent();
 
-    QString module() const;
-    void setModule(const QString &module);
+    QString description() const;
 
-    QUrl mainScript() const;
-    void setMainScript(const QUrl &mainScript);
+    QString module() const;
+    QString name() const;
 
 Q_SIGNALS:
+    void descriptionChanged();
     void moduleChanged();
-    void mainScriptChanged();
+    void nameChanged();
 
 public Q_SLOTS:
+    void setModule(const QString &module);
+    void setDescription(const QString &description);
+    void setName(const QString &name);
+
     void loadModule(const QString &name);
 
 private:

@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "view.h"
-#include "configmodel.h"
+//#include "configmodel.h"
 #include "settingsmodulesmodel.h"
 #include "settingsmoduleloader.h"
 #include "settingsmodule.h"
@@ -57,7 +57,7 @@ View::View(const QString &module, QWidget *parent)
     kdeclarative.setupBindings();
     //qRegisterMetaType<Plasma::ConfigModel>("ConfigModel");
     //qmlRegisterType<Plasma::ConfigModel*>();
-    qmlRegisterType<Plasma::ConfigModel>("org.kde.active.settings", 0, 1, "ConfigModel");
+//     qmlRegisterType<Plasma::ConfigModel>("org.kde.active.settings", 0, 1, "ConfigModel");
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), "org.kde.active.settings", structure);

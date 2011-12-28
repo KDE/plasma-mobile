@@ -25,6 +25,7 @@
 #include "settingsmoduleloader.h"
 #include "settingsmodulesmodel.h"
 #include "settingscomponent.h"
+#include "configmodel.h"
 
 void SettingsPlugin::registerTypes(const char *uri)
 {
@@ -34,6 +35,7 @@ void SettingsPlugin::registerTypes(const char *uri)
     qmlRegisterType<SettingsModulesModel>(uri, 0, 1, "SettingsModulesModel");
     qmlRegisterType<SettingsModulesItem>(uri, 0, 1, "SettingsModulesItem");
     qmlRegisterType<SettingsComponent>(uri, 0, 1, "SettingsComponent");
+    qmlRegisterType<Plasma::ConfigModel>("org.kde.active.settings", 0, 1, "ConfigModel");
 }
 
 #include "settingsplugin.moc"

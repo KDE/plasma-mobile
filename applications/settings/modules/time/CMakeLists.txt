@@ -3,7 +3,7 @@ find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 
-include_directories(${KDE4_INCLUDES} ../../src)
+include_directories(${KDE4_INCLUDES} ../../../../components/settings)
 
 configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
 
@@ -11,7 +11,7 @@ set(timesettings_SRCS
     timesettings.cpp
     timezone.cpp
     timezonesmodel.cpp
-    ../../src/settingsmodule.cpp
+    ../../../../components/settings/settingsmodule.cpp
 )
 
 

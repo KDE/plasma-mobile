@@ -8,7 +8,6 @@ set(active-settings_SRCS
     settingsmodulesmodel.cpp
     settingsmodule.cpp
     settingsmoduleloader.cpp
-    configmodel.cpp
 )
 
 KDE4_ADD_EXECUTABLE(active-settings ${active-settings_SRCS})

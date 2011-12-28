@@ -221,7 +221,7 @@ Image {
         id: settingsComponent
 
         onModuleChanged: {
-            print("mainscriptChanged:: " + mainScript);
+            //print("mainscriptChanged:: " + mainScript);
             //moduleContainer.replace(mainScript);
             switcherPackage.name = module
             print(" Loading package: " + switcherPackage.filePath("mainscript"));
