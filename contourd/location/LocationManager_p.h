@@ -41,6 +41,15 @@ public:
     Private();
     virtual ~Private();
 
+    void addNetworkToLocation(const QString & location, const QString & network);
+    QString networkRoot(const QString & name);
+
+    struct LocationInfo {
+        QString name;
+        QSet <QString> networks;
+        QSet <QString> networkRoots;
+    };
+
 public Q_SLOTS:
     void scheduleConfigSync();
     void configSync();
@@ -48,12 +57,16 @@ public Q_SLOTS:
 public:
     QTimer configSyncTimer;
 
-    QHash <QString, QString> knownLocations;
+    QHash <QString, LocationInfo> knownLocationInfos;
+    QHash <QString, QString>      knownLocationIds;
 
     KConfig config;
-    KConfigGroup locationsConfig;
+    KConfigGroup locationNames;
+    KConfigGroup locationNetworks;
+    KConfigGroup locationNetworkRoots;
 
     QString currentLocationId;
+    QString currentNetworkName;
 };
 
 
