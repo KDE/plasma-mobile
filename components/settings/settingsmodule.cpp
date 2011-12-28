@@ -29,16 +29,13 @@ class SettingsModulePrivate {
 
 public:
     SettingsModulePrivate(SettingsModule *q):
-                  q(q),
-                  m_settings(0){ kDebug() << "SettingsModulePrivate created"; }
+                  q(q) { kDebug() << "SettingsModulePrivate created"; }
 
     QString name;
     QString description;
     QString module;
     QString iconName;
-    QIcon icon;
     SettingsModule *q;
-    QObject *m_settings;
 };
 
 SettingsModule::SettingsModule(QObject *parent, const QVariantList &v) : QObject(parent),
@@ -75,11 +72,6 @@ QString SettingsModule::iconName()
     return d->iconName;
 }
 
-QIcon SettingsModule::icon()
-{
-    return d->icon;
-}
-
 void SettingsModule::setName(const QString &name)
 {
     if (d->name != name) {
@@ -98,17 +90,18 @@ void SettingsModule::setDescription(const QString &description)
 
 void SettingsModule::setIconName(const QString &iconName)
 {
-    d->iconName = iconName;
+    if (d->iconName != iconName) {
+        d->iconName = iconName;
+        emit iconNameChanged();
+    }
 }
 
 void SettingsModule::setModule(const QString &module)
 {
-    d->module = module;
-}
-
-void SettingsModule::setIcon(const QIcon &icon)
-{
-    d->icon = icon;
+    if (d->module != module) {
+        d->module = module;
+        emit moduleChanged();
+    }
 }
 
 #include "settingsmodule.moc"

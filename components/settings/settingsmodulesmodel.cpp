@@ -86,7 +86,6 @@ void SettingsModulesModel::populate()
 
         item->setName(service->name());
         item->setDescription(description);
-        item->setIcon(KIcon(service->icon()));
         item->setIconName(service->icon());
         item->setModule(service->property("X-KDE-PluginInfo-Name").toString());
         d->settingsModules.append(item);

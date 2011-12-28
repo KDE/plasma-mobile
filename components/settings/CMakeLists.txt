@@ -1,7 +1,6 @@
 project(settings)
 
 set(settings_SRCS
-    #settingsmoduleloader.cpp
     settingsplugin.cpp
     settingsmodule.cpp
     settingsmodulesmodel.cpp

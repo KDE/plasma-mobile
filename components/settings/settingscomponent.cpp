@@ -33,7 +33,6 @@
 class SettingsComponentPrivate {
 
 public:
-//     QList<QObject*> items;
     QString module;
     SettingsModule *settingsModule;
     Plasma::Package* package;
