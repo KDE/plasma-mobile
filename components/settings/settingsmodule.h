@@ -47,24 +47,6 @@ class KDE_EXPORT SettingsModule : public QObject
     public:
         SettingsModule(QObject *parent = 0, const QVariantList &v = QVariantList());
         virtual ~SettingsModule();
-        /** @name init Set up the internal metadata for the plugin
-         * This function is called from an implementing class once the object
-         * has been instantiated from QML. It loads the metadata through a KService.
-         * Call this class from the end of your empty constructor, but don't forget
-         * to call setModule(org.kde.active.settings.yourPluginName) first.
-         */
-        void init();
-
-        /**
-         * @return Settings object exported by the plugin, which is made
-         * available to the QML UI parts
-         */
-        virtual QObject* settingsObject();
-
-        /**
-         * @internal Uses to transfer data and settings between QML package and C++ plugin.
-         */
-        void setSettingsObject(QObject *o);
 
         QString name();
         QString description();

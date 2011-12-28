@@ -60,46 +60,6 @@ QString SettingsModule::name()
     return d->name;
 }
 
-void SettingsModule::init()
-{
-    if (module().isEmpty()) {
-        kError() << "Don't know module name. Please call setModule(\"org.kde.active.settings.yourmodule\") first.";
-        return;
-    }
-    QString query = QString("exist [X-KDE-PluginInfo-Name] and [X-KDE-PluginInfo-Name] == '%1'").arg(module());
-    KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
-
-    foreach (const KService::Ptr &service, services) {
-        if (service->noDisplay()) {
-            continue;
-        }
-
-        QString description;
-        if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
-            description = service->genericName();
-        } else if (!service->comment().isEmpty()) {
-            description = service->comment();
-        }
-        setName(service->name());
-        setDescription(description);
-        setModule(service->property("X-KDE-PluginInfo-Name").toString());
-        setIconName(service->icon());
-        setIcon(KIcon(service->icon()));
-    }
-
-    emit dataChanged();
-}
-
-QObject* SettingsModule::settingsObject()
-{
-    return d->m_settings;
-}
-
-void SettingsModule::setSettingsObject(QObject *settings)
-{
-    d->m_settings = settings;
-}
-
 QString SettingsModule::description()
 {
     return d->description;

@@ -36,10 +36,7 @@ public:
 //     QList<QObject*> items;
     QString module;
     SettingsModule *settingsModule;
-//     QDeclarativeEngine *engine;
-//     QDeclarativeComponent *component;
     Plasma::Package* package;
-    QUrl mainScript;
 };
 
 
@@ -49,10 +46,6 @@ SettingsComponent::SettingsComponent(QDeclarativeItem *parent)
     d = new SettingsComponentPrivate;
     d->package = 0;
     d->settingsModule = 0;
-//     d->engine = new QDeclarativeEngine(this);
-//     kDebug() << "Creating settings component";
-//     d->component = new QDeclarativeComponent(d->engine, this);
-    //QObject *myObject = component->create();
 }
 
 SettingsComponent::~SettingsComponent()
@@ -63,28 +56,19 @@ void SettingsComponent::loadModule(const QString &name)
 {
 
     delete d->package;
-    //delete d->settingsModule;
+    delete d->settingsModule;
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    //structure->setPath(path);
     d->package = new Plasma::Package(QString(), name, structure);
     KGlobal::locale()->insertCatalog("plasma_package_" + name);
-    //setMainScript(QUrl::fromLocalFile(d->package->filePath("mainscript")));
-    //kDebug() << "QML FILE: " << d->mainScript;
-    //d->component->loadUrl(qmlFile);
     QString pluginName = name;
     QString query;
     if (pluginName.isEmpty()) {
-        kDebug() << "Not loading plugin ..." << pluginName;
+        //kDebug() << "Not loading plugin ..." << pluginName;
         return;
     }
-//     delete m_plugin;
-//     if (ctx) {
-//         ctx->setContextProperty("moduleName", pluginName);
-//     }
     query = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
     KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
-    kDebug() << "QUERY: " << offers.count() << query;
     KService::List::const_iterator iter;
     for(iter = offers.begin(); iter < offers.end(); ++iter) {
        QString error;
@@ -98,16 +82,11 @@ void SettingsComponent::loadModule(const QString &name)
         } else if (!service->comment().isEmpty()) {
             description = service->comment();
         }
-//         if (ctx) {
-//             ctx->setContextProperty("moduleName", pluginName);
-//             ctx->setContextProperty("moduleTitle", service->name());
-//             ctx->setContextProperty("moduleDescription", description);
-//         }
         d->settingsModule = new SettingsModule(this);
         if (factory) {
             // Load binary plugin
             const QString query = QString("exist Library and Library == '%1'").arg(service->library());
-            kDebug() << "loading binary plugin from query: " << query;
+            kDebug() << "loading binary plugin from query: " << service->name();
             QObject *p  = KServiceTypeTrader::createInstanceFromQuery<QObject>("Active/SettingsModule", query, this);
         } else {
             kDebug() << "QML only plugin";
