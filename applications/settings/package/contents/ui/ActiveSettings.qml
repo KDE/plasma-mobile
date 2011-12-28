@@ -219,11 +219,20 @@ Image {
 
     ActiveSettings.SettingsComponent {
         id: settingsComponent
+
+        onModuleChanged: {
+            print("mainscriptChanged:: " + mainScript);
+            //moduleContainer.replace(mainScript);
+            switcherPackage.name = module
+            print(" Loading package: " + switcherPackage.filePath("mainscript"));
+            moduleContainer.replace(switcherPackage.filePath("mainscript"));
+        }
     }
-    /*
+
     MobileComponents.Package {
         id: switcherPackage
     }
+    /*
 
     function loadPackage(module) {
         // Load the C++ plugin into our context

@@ -18,10 +18,16 @@
 */
 
 #include "settingscomponent.h"
+#include "settingsmodule.h"
 
 
 #include <QDeclarativeEngine>
+#include <QDeclarativeComponent>
+
+#include <KService>
+#include <KServiceTypeTrader>
 #include <KDebug>
+
 #include <Plasma/Package>
 
 class SettingsComponentPrivate {
@@ -29,28 +35,26 @@ class SettingsComponentPrivate {
 public:
 //     QList<QObject*> items;
     QString module;
-    QDeclarativeEngine *engine;
+//     QDeclarativeEngine *engine;
+//     QDeclarativeComponent *component;
     Plasma::Package* package;
+    QUrl mainScript;
 };
 
 
-SettingsComponent::SettingsComponent(QDeclarativeEngine *engine, QObject *parent)
-    : QDeclarativeComponent(engine, parent)
+SettingsComponent::SettingsComponent(QDeclarativeItem *parent)
+    : QDeclarativeItem(parent)
 {
     d = new SettingsComponentPrivate;
     d->package = 0;
-    d->engine = new QDeclarativeEngine;
-    kDebug() << "Creating settings component";
+//     d->engine = new QDeclarativeEngine(this);
+//     kDebug() << "Creating settings component";
+//     d->component = new QDeclarativeComponent(d->engine, this);
+    //QObject *myObject = component->create();
 }
 
 SettingsComponent::~SettingsComponent()
 {
-}
-
-
-QString SettingsComponent::module() const
-{
-    return d->module;
 }
 
 void SettingsComponent::loadModule(const QString &name)
@@ -61,10 +65,70 @@ void SettingsComponent::loadModule(const QString &name)
     //structure->setPath(path);
     d->package = new Plasma::Package(QString(), name, structure);
     KGlobal::locale()->insertCatalog("plasma_package_" + name);
-    const QUrl qmlFile = QUrl::fromLocalFile(d->package->filePath("mainscript"));
-    kDebug() << "QML FILE: " << qmlFile;
-    loadUrl(qmlFile);
+    setMainScript(QUrl::fromLocalFile(d->package->filePath("mainscript")));
+    kDebug() << "QML FILE: " << d->mainScript;
+    //d->component->loadUrl(qmlFile);
+    QString pluginName = name;
+    QString query;
+    if (pluginName.isEmpty()) {
+        kDebug() << "Not loading plugin ..." << pluginName;
+        return;
+    }
+//     delete m_plugin;
+//     if (ctx) {
+//         ctx->setContextProperty("moduleName", pluginName);
+//     }
+    query = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
+    KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
+    //kDebug() << "QUERY: " << offers.count() << query;
+    KService::List::const_iterator iter;
+    for(iter = offers.begin(); iter < offers.end(); ++iter) {
+       QString error;
+       KService::Ptr service = *iter;
 
+        KPluginFactory *factory = KPluginLoader(service->library()).factory();
+
+        QString description;
+        if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
+            description = service->genericName();
+        } else if (!service->comment().isEmpty()) {
+            description = service->comment();
+        }
+//         if (ctx) {
+//             ctx->setContextProperty("moduleName", pluginName);
+//             ctx->setContextProperty("moduleTitle", service->name());
+//             ctx->setContextProperty("moduleDescription", description);
+//         }
+        if (!factory) {
+            //kDebug() << "KPluginFactory could not load the plugin:" << service->name() << service->library();
+            //kDebug() << "That's OK, it's probably a QML only plugin";
+            continue;
+        }
+
+        const QString query = QString("exist Library and Library == '%1'").arg(service->library());
+        //kDebug() << "query: " << query;
+        SettingsModule *plugin  = KServiceTypeTrader::createInstanceFromQuery<SettingsModule>("Active/SettingsModule", query, this);
+
+
+        plugin->setName(service->name());
+        plugin->setDescription(description);
+        plugin->setModule(pluginName);
+        //m_pluginName = pluginName;
+
+
+       if (plugin) {
+           kDebug() << "Successfully loaded plugin:" << service->name();
+           //emit pluginLoaded(plugin);
+       } else {
+           kDebug() << error;
+       }
+    }
+
+}
+
+QString SettingsComponent::module() const
+{
+    return d->module;
 }
 
 void SettingsComponent::setModule(const QString &module)
@@ -74,6 +138,22 @@ void SettingsComponent::setModule(const QString &module)
         d->module = module;
         loadModule(module);
         emit moduleChanged();
+    }
+}
+
+
+QUrl SettingsComponent::mainScript() const
+{
+    return d->mainScript;
+}
+
+void SettingsComponent::setMainScript(const QUrl &mainScript)
+{
+    kDebug() << "setMainScript" << mainScript;
+    if (d->mainScript != mainScript) {
+        d->mainScript = mainScript;
+        //loadModule(module);
+        emit mainScriptChanged();
     }
 }
 

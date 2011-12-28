@@ -20,24 +20,29 @@
 #ifndef SETTINGSCOMPONENT_H
 #define SETTINGSCOMPONENT_H
 
-#include <QDeclarativeComponent>
+#include <QDeclarativeItem>
 
 class SettingsComponentPrivate;
 
-class SettingsComponent : public QDeclarativeComponent
+class SettingsComponent : public QDeclarativeItem
 {
     Q_OBJECT
     Q_PROPERTY(QString module READ module WRITE setModule NOTIFY moduleChanged)
+    Q_PROPERTY(QUrl mainScript READ mainScript WRITE setMainScript NOTIFY mainScriptChanged)
 
 public:
-    SettingsComponent(QDeclarativeEngine *engine = 0, QObject *parent=0);
+    SettingsComponent(QDeclarativeItem *parent = 0);
     ~SettingsComponent();
 
     QString module() const;
     void setModule(const QString &module);
 
+    QUrl mainScript() const;
+    void setMainScript(const QUrl &mainScript);
+
 Q_SIGNALS:
     void moduleChanged();
+    void mainScriptChanged();
 
 public Q_SLOTS:
     void loadModule(const QString &name);
