@@ -101,6 +101,9 @@ Q_SIGNALS:
      */
     void currentLocationChanged(const QString & id, const QString & name);
 
+protected Q_SLOTS:
+    void setActiveAccessPoint(const QString & accessPoint, const QString & backend);
+
 private:
     class Private;
     Private * const d;

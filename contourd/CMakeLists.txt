@@ -34,6 +34,7 @@ set(recommendationmanager_SRC
 
   location/LocationManager.cpp
   location/network-engines/NetworkNotifier.cpp
+  location/network-engines/DummyNetworkNotifier.cpp
 
   main.cpp
 )
@@ -41,6 +42,16 @@ set(recommendationmanager_SRC
 qt4_add_dbus_adaptor(
   recommendationmanager_SRC recommendation/org.kde.contour.RecommendationManager.xml
   recommendation/RecommendationManager.h Contour::RecommendationManager
+)
+
+qt4_add_dbus_adaptor(
+  recommendationmanager_SRC location/org.kde.contour.LocationManager.xml
+  location/LocationManager.h Contour::LocationManager
+)
+
+qt4_add_dbus_adaptor(
+  recommendationmanager_SRC location/network-engines/org.kde.contour.LocationManager.DummyNetworkNotifier.xml
+  location/network-engines/DummyNetworkNotifier.h DummyNetworkNotifier
 )
 
 find_file(kext_onto_src kext.trig PATH_SUFFIXES "ontology/kde" PATHS ${CMAKE_INSTALL_PREFIX}/share ENV XDG_DATA_DIRS)

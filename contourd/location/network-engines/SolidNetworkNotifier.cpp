@@ -57,8 +57,8 @@ void SolidNetworkNotifier::init()
 
         d->interfaces[wlan->interfaceName()] = wlan;
 
-        connect(wlan, SIGNAL(accessPointChanged(QString)),
-                this, SLOT(setSsid(QString)));
+        connect(wlan, SIGNAL(activeAccessPointChanged(QString)),
+                this, SLOT(setActiveAccessPoint(QString)));
 
     }
 }

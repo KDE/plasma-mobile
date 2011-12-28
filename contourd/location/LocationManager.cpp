@@ -18,47 +18,36 @@
  */
 
 #include "LocationManager.h"
+#include "LocationManager_p.h"
 
 #include <QHash>
 #include <QUuid>
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <QDebug>
+#include <KDebug>
 
 #include "network-engines/NetworkNotifier.h"
+#include "locationmanageradaptor.h"
 
 namespace Contour {
-
-class LocationManager::Private {
-public:
-    Private()
-        : config("contourrc"),
-          locationsConfig(&config, "LocationManager-Locations"),
-          currentLocationId()
-    {
-    }
-
-    virtual ~Private()
-    {
-    }
-
-    QHash <QString, QString> knownLocations;
-
-    KConfig config;
-    KConfigGroup locationsConfig;
-
-    QString currentLocationId;
-};
 
 LocationManager::LocationManager(QObject * parent)
     : QObject(parent), d(new Private())
 {
-    qDebug() << "Starting the location manager";
+    kDebug() << "Starting the location manager";
+
+    (void) new LocationManagerAdaptor(this);
+    QDBusConnection::sessionBus().registerObject(
+            QLatin1String("/locationmanager"), this);
+
 
     foreach (const QString & id, d->locationsConfig.keyList()) {
         d->knownLocations[id] = d->locationsConfig.readEntry(id, QString());
     }
+
+    connect(NetworkNotifierLoader::self(), SIGNAL(activeAccessPointChanged(QString, QString)),
+            this, SLOT(setActiveAccessPoint(QString, QString)));
 
     NetworkNotifierLoader::self()->init();
 }
@@ -86,7 +75,9 @@ QString LocationManager::addLocation(const QString & name)
 
         id = QUuid::createUuid();
 
+        d->knownLocations[id] = name;
         d->locationsConfig.writeEntry(id, name);
+        d->scheduleConfigSync();
     }
 
     return id;
@@ -107,6 +98,12 @@ QString LocationManager::currentLocationName() const
 
 QString LocationManager::setCurrentLocation(const QString & location)
 {
+    if (location.isEmpty()) {
+        d->currentLocationId = QString();
+        emit currentLocationChanged(d->currentLocationId, d->currentLocationId);
+        return d->currentLocationId;
+    }
+
     if (QUuid(location).isNull()) {
         // We got a name for the location
 
@@ -139,5 +136,42 @@ void LocationManager::resetCurrentLocation()
 {
     setCurrentLocation(QString());
 }
+
+void LocationManager::setActiveAccessPoint(const QString & accessPoint, const QString & backend)
+{
+    kDebug() << accessPoint << backend;
+}
+
+LocationManager::Private::Private()
+    : config("contourrc"),
+      locationsConfig(&config, "LocationManager-Locations"),
+      currentLocationId()
+{
+    // Config syncing
+    connect(&configSyncTimer, SIGNAL(timeout()),
+            this, SLOT(configSync()));
+
+    configSyncTimer.setSingleShot(true);
+    configSyncTimer.setInterval(2 * /*60 **/ 1000);
+}
+
+LocationManager::Private::~Private()
+{
+    configSync();
+}
+
+void LocationManager::Private::scheduleConfigSync()
+{
+    if (!configSyncTimer.isActive()) {
+        configSyncTimer.start();
+    }
+}
+
+void LocationManager::Private::configSync()
+{
+    configSyncTimer.stop();
+    config.sync();
+}
+
 
 } // namespace Contour

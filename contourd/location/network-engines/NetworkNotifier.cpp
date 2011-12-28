@@ -31,9 +31,9 @@ NetworkNotifier::~NetworkNotifier()
 {
 }
 
-void NetworkNotifier::setSsid(const QString & ssid)
+void NetworkNotifier::setActiveAccessPoint(const QString & ssid)
 {
-    emit ssidChanged(ssid);
+    emit activeAccessPointChanged(ssid);
 }
 
 // NetworkNotifierLoader
@@ -67,6 +67,9 @@ NetworkNotifierLoader::~NetworkNotifierLoader()
 void NetworkNotifierLoader::registerNetworkNotifier(const QString & name, NetworkNotifier * nn)
 {
     d->notifiers[name] = nn;
+
+    connect(nn, SIGNAL(activeAccessPointChanged(QString)),
+            this, SLOT(setActiveAccessPoint(QString)));
 }
 
 void NetworkNotifierLoader::init()
@@ -74,4 +77,11 @@ void NetworkNotifierLoader::init()
     foreach (NetworkNotifier * nn, d->notifiers.values()) {
         nn->init();
     }
+}
+
+void NetworkNotifierLoader::setActiveAccessPoint(const QString & accessPoint)
+{
+    NetworkNotifier * nn = static_cast < NetworkNotifier * > (sender());
+
+    emit activeAccessPointChanged(accessPoint, d->notifiers.key(nn));
 }

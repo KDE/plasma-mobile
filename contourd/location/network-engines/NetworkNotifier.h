@@ -30,22 +30,30 @@ public:
     virtual ~NetworkNotifier();
 
 Q_SIGNALS:
-    void ssidChanged(const QString & ssid);
+    void activeAccessPointChanged(const QString & ssid);
 
 protected Q_SLOTS:
-    void setSsid(const QString & ssid);
+    void setActiveAccessPoint(const QString & ssid);
 
     virtual void init() = 0;
 
     friend class NetworkNotifierLoader;
 };
 
-class NetworkNotifierLoader {
+class NetworkNotifierLoader: public QObject {
+    Q_OBJECT
+
 public:
     static NetworkNotifierLoader * self();
 
     void registerNetworkNotifier(const QString & name, NetworkNotifier * nn);
     void init();
+
+Q_SIGNALS:
+    void activeAccessPointChanged(const QString & accessPoint, const QString & backend);
+
+protected Q_SLOTS:
+    void setActiveAccessPoint(const QString & accessPoint);
 
 private:
     NetworkNotifierLoader();
@@ -59,9 +67,9 @@ private:
 };
 
 #define REGISTER_NETWORK_NOTIFIER(Name) \
-    class Name##StaticInit { public:    \
+    static class Name##StaticInit { public:    \
             Name##StaticInit() { NetworkNotifierLoader::self()->registerNetworkNotifier(#Name, new Name()); } \
-    } s_init;
+    } Name##_static_init;
 
 #endif // NETWORK_NOTIFIER_H_
 
