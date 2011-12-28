@@ -12,7 +12,6 @@ set(timesettings_SRCS
     timesettings.cpp
     timezone.cpp
     timezonesmodel.cpp
-    #    ../../../../components/settings/settingsmodule.cpp
 )
 
 
