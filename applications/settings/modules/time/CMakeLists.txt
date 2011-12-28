@@ -8,10 +8,11 @@ include_directories(${KDE4_INCLUDES} ../../../../components/settings)
 configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
 
 set(timesettings_SRCS
+    timesettingsplugin.cpp
     timesettings.cpp
     timezone.cpp
     timezonesmodel.cpp
-    ../../../../components/settings/settingsmodule.cpp
+    #    ../../../../components/settings/settingsmodule.cpp
 )
 
 

@@ -103,16 +103,14 @@ void SettingsComponent::loadModule(const QString &name)
 //             ctx->setContextProperty("moduleTitle", service->name());
 //             ctx->setContextProperty("moduleDescription", description);
 //         }
+        d->settingsModule = new SettingsModule(this);
         if (factory) {
             // Load binary plugin
             const QString query = QString("exist Library and Library == '%1'").arg(service->library());
-            //kDebug() << "query: " << query;
-            d->settingsModule  = KServiceTypeTrader::createInstanceFromQuery<SettingsModule>("Active/SettingsModule", query, this);
+            kDebug() << "loading binary plugin from query: " << query;
+            QObject *p  = KServiceTypeTrader::createInstanceFromQuery<QObject>("Active/SettingsModule", query, this);
         } else {
-            d->settingsModule = new SettingsModule(this);
-            //kDebug() << "KPluginFactory could not load the plugin:" << service->name() << service->library();
-            //kDebug() << "That's OK, it's probably a QML only plugin";
-            //continue;
+            kDebug() << "QML only plugin";
         }
 
 

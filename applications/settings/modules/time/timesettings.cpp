@@ -47,16 +47,8 @@
 #include <QtDeclarative/QDeclarativeItem>
 #include <QtCore/QDate>
 
-K_PLUGIN_FACTORY(TimeSettingsFactory, registerPlugin<TimeSettings>();)
-K_EXPORT_PLUGIN(TimeSettingsFactory("active_settings_time"))
-
 #define FORMAT24H "%H:%M:%S"
 #define FORMAT12H "%l:%M:%S %p"
-
-// static bool localeLessThan (const QString &a, const QString &b)
-// {
-//     return QString::localeAwareCompare(a, b) < 0;
-// }
 
 class TimeSettingsPrivate {
 public:
@@ -82,14 +74,6 @@ public:
     QList<QObject*> timezones;
 };
 
-TimeSettings::TimeSettings(QObject *parent, const QVariantList &list)
-    : SettingsModule(parent, list)
-{
-    qmlRegisterType<TimeSettings>();
-    qmlRegisterType<TimeZone>();
-    qmlRegisterType<TimeSettings>("org.kde.active.settings", 0, 1, "TimeSettings");
-}
-
 TimeSettings::TimeSettings()
 {
     d = new TimeSettingsPrivate;
@@ -99,9 +83,6 @@ TimeSettings::TimeSettings()
     setTimeZone(KSystemTimeZones::local().name());
 
     d->initSettings();
-    //d->initTimeZones();
-    setModule("org.kde.active.settings.time");
-    init();
 
     // Just for testing that data gets through
     d->timer = new QTimer(this);
@@ -114,7 +95,7 @@ TimeSettings::TimeSettings()
 
 TimeSettings::~TimeSettings()
 {
-    kDebug() << "========================== time destroy";
+    kDebug() << "========================== timesettings destroy";
     delete d;
 }
 
