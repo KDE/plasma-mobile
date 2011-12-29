@@ -20,7 +20,7 @@
 #ifndef DUMMY_NETWORK_NOTIFIER_H_
 #define DUMMY_NETWORK_NOTIFIER_H_
 
-#include "NetworkNotifier.h"
+#include "../NetworkNotifier.h"
 
 /**
  * DummyNetworkNotifier

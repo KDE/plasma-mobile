@@ -81,9 +81,7 @@ QString LocationManager::addLocation(const QString & name)
         id = QUuid::createUuid();
 
         d->knownLocationIds[name] = id;
-
-        d->knownLocationInfos[id].name         = name;
-
+        d->knownLocationInfos[id].name = name;
         d->locationNames.writeEntry(id, name);
 
         d->scheduleConfigSync();

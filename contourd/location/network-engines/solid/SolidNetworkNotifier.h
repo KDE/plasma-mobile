@@ -20,7 +20,7 @@
 #ifndef SOLID_NETWORK_NOTIFIER_H_
 #define SOLID_NETWORK_NOTIFIER_H_
 
-#include "NetworkNotifier.h"
+#include "../NetworkNotifier.h"
 
 /**
  * SolidNetworkNotifier

@@ -34,7 +34,7 @@ set(recommendationmanager_SRC
 
   location/LocationManager.cpp
   location/network-engines/NetworkNotifier.cpp
-  location/network-engines/DummyNetworkNotifier.cpp
+  location/network-engines/dummy/DummyNetworkNotifier.cpp
 
   main.cpp
 )
@@ -50,8 +50,8 @@ qt4_add_dbus_adaptor(
 )
 
 qt4_add_dbus_adaptor(
-  recommendationmanager_SRC location/network-engines/org.kde.contour.LocationManager.DummyNetworkNotifier.xml
-  location/network-engines/DummyNetworkNotifier.h DummyNetworkNotifier
+  recommendationmanager_SRC location/network-engines/dummy/org.kde.contour.LocationManager.DummyNetworkNotifier.xml
+  location/network-engines/dummy/DummyNetworkNotifier.h DummyNetworkNotifier
 )
 
 find_file(kext_onto_src kext.trig PATH_SUFFIXES "ontology/kde" PATHS ${CMAKE_INSTALL_PREFIX}/share ENV XDG_DATA_DIRS)
@@ -81,7 +81,7 @@ set(ADDITIONAL_LINK_LIBRARIES)
 
 set(recommendationmanager_SRC
     ${recommendationmanager_SRC}
-    location/network-engines/SolidNetworkNotifier.cpp
+    location/network-engines/solid/SolidNetworkNotifier.cpp
     )
 
 set(ADDITIONAL_LINK_LIBRARIES
@@ -89,7 +89,6 @@ set(ADDITIONAL_LINK_LIBRARIES
     ${KDE4_SOLID_LIBS}
     )
 
-message(${recommendationmanager_SRC})
 ########################################################################
 
 kde4_add_executable(contour
