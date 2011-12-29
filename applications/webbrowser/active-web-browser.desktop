@@ -2,6 +2,7 @@
 Name=Browser
 Name[cs]=Prohlížeč
 Name[de]=Browser
+Name[ga]=Brabhsálaí
 Name[nl]=Browser
 Name[pt]=Navegador
 Name[pt_BR]=Navegador
@@ -14,6 +15,7 @@ GenericName[cs]=Webový prohlížeč
 GenericName[de]=Webbrowser
 GenericName[et]=Veebibrauser
 GenericName[fr]=Navigateur web
+GenericName[ga]=Brabhsálaí Gréasáin
 GenericName[km]=កម្មវិធី​រុករក​បណ្ដាញ
 GenericName[nl]=Webbrowser
 GenericName[pl]=Przeglądarka internetowa
