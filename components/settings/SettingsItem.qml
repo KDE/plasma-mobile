@@ -24,18 +24,13 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
-Item {
+PlasmaComponents.PageStack {
 
     property alias module: settingsComponent.module
-    property alias initialPage: moduleContainer.initialPage
-    
-    PlasmaComponents.PageStack {
-        id: moduleContainer
-        objectName: "moduleContainer"
-        clip: false
-        //initialPage: initial_page
-        anchors.fill: parent
-    }
+
+    id: moduleContainer
+    objectName: "moduleContainer"
+    clip: true
 
     states: [
         State {
@@ -74,9 +69,11 @@ Item {
         onModuleChanged: {
             //print("mainscriptChanged:: " + mainScript);
             //moduleContainer.replace(mainScript);
-            switcherPackage.name = module
-            print(" Loading package: " + switcherPackage.filePath("mainscript"));
-            moduleContainer.replace(switcherPackage.filePath("mainscript"));
+            if (module != "") {
+                switcherPackage.name = module
+                print(" Loading package: " + switcherPackage.filePath("mainscript"));
+                moduleContainer.replace(switcherPackage.filePath("mainscript"));
+            }
         }
     }
 

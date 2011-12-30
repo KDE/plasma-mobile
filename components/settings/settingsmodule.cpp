@@ -29,7 +29,7 @@ class SettingsModulePrivate {
 
 public:
     SettingsModulePrivate(SettingsModule *q):
-                  q(q) { kDebug() << "SettingsModulePrivate created"; }
+                  q(q) {}
 
     QString name;
     QString description;
@@ -41,14 +41,12 @@ public:
 SettingsModule::SettingsModule(QObject *parent, const QVariantList &v) : QObject(parent),
                                   d(new SettingsModulePrivate(this))
 {
-    kDebug() << "SettingsModule ctor";
     d = new SettingsModulePrivate(this);
     Q_UNUSED(v);
 }
 
 SettingsModule::~SettingsModule()
 {
-    kDebug() << "deleting SettingsModule" << d->name;
     delete d;
 }
 

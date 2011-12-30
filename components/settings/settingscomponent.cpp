@@ -56,6 +56,7 @@ void SettingsComponent::loadModule(const QString &name)
 
     delete d->package;
     delete d->settingsModule;
+    d->settingsModule = 0;
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     d->package = new Plasma::Package(QString(), name, structure);
