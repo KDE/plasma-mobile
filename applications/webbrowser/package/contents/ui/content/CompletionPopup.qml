@@ -22,6 +22,7 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.active.settings 0.1 as ActiveSettings
 import org.kde.qtextracomponents 0.1
 
 Item {
@@ -115,9 +116,9 @@ Item {
             }
         }
 
-        Item {
-            id: dashboard
-            objectName: "dashboard"
+        ActiveSettings.SettingsItem {
+            id: settingsItem
+            initialPage: dashboard
             anchors {
                 fill: parent
                 leftMargin: frame.margins.left * 2
@@ -125,6 +126,37 @@ Item {
                 topMargin: frame.margins.top * 2
                 bottomMargin: frame.margins.bottom * 2
             }
+        }
+
+        PlasmaCore.Svg {
+            id: iconsSvg
+            imagePath: "widgets/configuration-icons"
+        }
+
+        MobileComponents.ActionButton {
+            svg: iconsSvg
+            width: 48
+            height: width
+            anchors.top: settingsItem.top
+            anchors.right: settingsItem.right
+            elementId: "configure"
+            onClicked: {
+                var webModule = "org.kde.active.settings.web";
+                if (settingsItem.module != webModule) {
+                    settingsItem.module = webModule;
+                    elementId = "close";
+                } else {
+                    settingsItem.module = ""
+                    settingsItem.replace(dashboard);
+                    elementId = "configure"
+                }
+            }
+        }
+
+        PlasmaComponents.Page {
+            id: dashboard
+            objectName: "dashboard"
+            anchors.fill: parent
             Text {
                 id: topLabel
                 height: 48
