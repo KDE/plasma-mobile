@@ -115,7 +115,7 @@ Image {
                             //if (module != switcherPackage.name) {
                                 listView.currentIndex = index
                                 //settingsComponent.loadPackage(module);
-                                settingsComponent.module = module;
+                                settingsItem.module = module;
                             //}
                         }
                     }
@@ -173,64 +173,17 @@ Image {
             }
         }
 
-        PlasmaComponents.PageStack {
-            id: moduleContainer
-            objectName: "moduleContainer"
-            clip: false
+        ActiveSettings.SettingsItem {
+            id: settingsItem
             initialPage: initial_page
-            anchors.margins: 20
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.left: modulesList.right
-            anchors.right: parent.right
-        }
-
-        states: [
-            State {
-                id: expanded
-                name: "expanded";
-                PropertyChanges {
-                    target: settingsRoot
-                    opacity: 1
-                }
-            },
-
-            State {
-                id: collapsed
-                name: "collapsed";
-                PropertyChanges {
-                    target: settingsRoot
-                    opacity: 0
-                }
+            anchors {
+                margins: 20
+                top: parent.top
+                bottom: parent.bottom
+                left: modulesList.right
+                right: parent.right
             }
-        ]
-
-        transitions: [
-            Transition {
-                PropertyAnimation {
-                    properties: "opacity"
-                    duration: 400;
-                    easing.type: Easing.InOutElastic;
-                    easing.amplitude: 2.0; easing.period: 1.5
-                }
-            }
-        ]
-    }
-
-    ActiveSettings.SettingsComponent {
-        id: settingsComponent
-
-        onModuleChanged: {
-            //print("mainscriptChanged:: " + mainScript);
-            //moduleContainer.replace(mainScript);
-            switcherPackage.name = module
-            print(" Loading package: " + switcherPackage.filePath("mainscript"));
-            moduleContainer.replace(switcherPackage.filePath("mainscript"));
         }
-    }
-
-    MobileComponents.Package {
-        id: switcherPackage
     }
     /*
 
@@ -241,11 +194,10 @@ Image {
         print(" Loading package: " + switcherPackage.filePath("mainscript"));
         moduleContainer.replace(switcherPackage.filePath("mainscript"));
     }
-
+    */
     Component.onCompleted: {
         if (typeof(startModule) != "undefined") {
-            loadPackage(startModule);
+            settingsItem.module = startModule;
         }
     }
-    */
 }
