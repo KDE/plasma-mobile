@@ -108,7 +108,7 @@ Item {
                     onClicked: {
                         //print("URL from completer chosen: " + name + " " + url);
                         urlEntered(url);
-                        mainItem.state = "collapsed"
+                        mainItem.state = "collapsed";
                     }
                     onPressed: MobileComponents.ActivateAnimation { targetItem: delegateContainer }
                 }
@@ -142,13 +142,13 @@ Item {
                 var webModule = "org.kde.active.settings.web";
                 if (settingsItem.module != webModule) {
                     settingsItem.module = webModule;
-                    svg = arrowSvg
+                    svg = arrowSvg;
                     elementId = "left-arrow";
                 } else {
-                    settingsItem.module = ""
+                    settingsItem.module = "";
                     settingsItem.replace(dashboard);
-                    svg = configSvg
-                    elementId = "configure"
+                    svg = configSvg;
+                    elementId = "configure";
                 }
             }
         }
@@ -209,7 +209,6 @@ Item {
                     delegate: myDelegate
                     highlight: PlasmaComponents.Highlight {}
                     currentIndex: -1
-
                 }
             }
 
@@ -247,7 +246,6 @@ Item {
                 scale: 1.0
             }
         },
-
         State {
             id: collapsed
             name: "collapsed";
