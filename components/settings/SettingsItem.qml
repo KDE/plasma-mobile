@@ -1,6 +1,6 @@
 // -*- coding: iso-8859-1 -*-
 /*
- *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
+ *   Copyright 2011-2012 Sebastian Kügler <sebas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -19,10 +19,9 @@
  */
 
 import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
-import org.kde.plasma.components 0.1 as PlasmaComponents
 
 PlasmaComponents.PageStack {
 
@@ -32,43 +31,10 @@ PlasmaComponents.PageStack {
     objectName: "moduleContainer"
     clip: true
 
-    states: [
-        State {
-            id: expanded
-            name: "expanded";
-            PropertyChanges {
-                target: settingsRoot
-                opacity: 1
-            }
-        },
-
-        State {
-            id: collapsed
-            name: "collapsed";
-            PropertyChanges {
-                target: settingsRoot
-                opacity: 0
-            }
-        }
-    ]
-
-    transitions: [
-        Transition {
-            PropertyAnimation {
-                properties: "opacity"
-                duration: 400;
-                easing.type: Easing.InOutElastic;
-                easing.amplitude: 2.0; easing.period: 1.5
-            }
-        }
-    ]
-
     ActiveSettings.SettingsComponent {
         id: settingsComponent
 
         onModuleChanged: {
-            //print("mainscriptChanged:: " + mainScript);
-            //moduleContainer.replace(mainScript);
             if (module != "") {
                 switcherPackage.name = module
                 print(" Loading package: " + switcherPackage.filePath("mainscript"));
