@@ -128,13 +128,11 @@ Item {
             }
         }
 
-        PlasmaCore.Svg {
-            id: iconsSvg
-            imagePath: "widgets/configuration-icons"
-        }
+        PlasmaCore.Svg { id: configSvg; imagePath: "widgets/configuration-icons"; }
+        PlasmaCore.Svg { id: arrowSvg; imagePath: "widgets/arrows"; }
 
         MobileComponents.ActionButton {
-            svg: iconsSvg
+            svg: configSvg
             width: 48
             height: width
             anchors.top: settingsItem.top
@@ -144,10 +142,12 @@ Item {
                 var webModule = "org.kde.active.settings.web";
                 if (settingsItem.module != webModule) {
                     settingsItem.module = webModule;
-                    elementId = "close";
+                    svg = arrowSvg
+                    elementId = "left-arrow";
                 } else {
                     settingsItem.module = ""
                     settingsItem.replace(dashboard);
+                    svg = configSvg
                     elementId = "configure"
                 }
             }
