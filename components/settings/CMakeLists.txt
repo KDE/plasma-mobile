@@ -6,6 +6,7 @@ set(settings_SRCS
     settingsmodulesmodel.cpp
     settingscomponent.cpp
     configmodel.cpp
+    configgroup.cpp
     )
 
 qt4_automoc(${settings_SRCS})

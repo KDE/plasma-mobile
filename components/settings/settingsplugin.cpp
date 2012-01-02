@@ -1,5 +1,5 @@
 /*
- *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
+ *   Copyright 2011-2012 Sebastian Kügler <sebas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -26,6 +26,7 @@
 #include "settingsmodulesmodel.h"
 #include "settingscomponent.h"
 #include "configmodel.h"
+#include "configgroup.h"
 
 void SettingsPlugin::registerTypes(const char *uri)
 {
@@ -35,6 +36,7 @@ void SettingsPlugin::registerTypes(const char *uri)
     qmlRegisterType<SettingsModulesModel>(uri, major, minor, "SettingsModulesModel");
     qmlRegisterType<SettingsModule>(uri, major, minor, "SettingsModule");
     qmlRegisterType<SettingsComponent>(uri, major, minor, "SettingsComponent");
+    qmlRegisterType<Plasma::ConfigGroup>(uri, major, minor, "ConfigGroup");
     qmlRegisterType<Plasma::ConfigModel>(uri, major, minor, "ConfigModel");
 }
 
