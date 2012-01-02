@@ -26,6 +26,9 @@ import org.kde.runnermodel 0.1 as RunnerModels
 
 PlasmaComponents.TabBar {
     id: tabBar
+
+    property Component startComponent: topComponent
+
     anchors {
         top: searchField.bottom
         topMargin: 8

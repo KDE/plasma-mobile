@@ -115,7 +115,7 @@ MobileComponents.Sheet {
                 top: tabBar.bottom
                 bottom: parent.bottom
             }
-            initialPage: Qt.createComponent("Menu.qml")
+            initialPage: tabBar.startComponent
         }
     ]
 
