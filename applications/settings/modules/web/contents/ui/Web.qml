@@ -53,19 +53,19 @@ Item {
         }
     }
 
-    ActiveSettings.ConfigModel {
+    ActiveSettings.ConfigGroup {
         id: browserConfig
         file: "active-webbrowserrc"
         group: "webbrowser"
     }
 
-    ActiveSettings.ConfigModel {
+    ActiveSettings.ConfigGroup {
         id: historyConfig
         file: "active-webbrowserrc"
         group: "history"
     }
 
-    ActiveSettings.ConfigModel {
+    ActiveSettings.ConfigGroup {
         id: adblockConfig
         file: "active-webbrowserrc"
         group: "adblock"
