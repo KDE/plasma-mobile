@@ -49,6 +49,7 @@ class MetadataModel : public AbstractMetadataModel
 
     Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
+    Q_PROPERTY(int limit READ limit WRITE setLimit NOTIFY limitChanged)
 
 public:
     enum Roles {
@@ -94,6 +95,9 @@ public:
     void setSortOrder(Qt::SortOrder sortOrder);
     Qt::SortOrder sortOrder() const;
 
+    void setLimit(int limit);
+    int limit() const;
+
     /**
      * searches for a resource in the whole model
      * @arg resToFind the uri or url of the resource
@@ -108,6 +112,7 @@ Q_SIGNALS:
 
     void sortByChanged();
     void sortOrderChanged();
+    void limitChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
@@ -132,6 +137,7 @@ private:
 
     //pieces to build m_query
     QString m_queryString;
+    int m_limit;
 
     QStringList m_sortBy;
     Qt::SortOrder m_sortOrder;

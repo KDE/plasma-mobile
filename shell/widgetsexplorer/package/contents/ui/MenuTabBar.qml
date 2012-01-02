@@ -35,6 +35,7 @@ PlasmaComponents.TabBar {
 
     CategoryTab {
         text: i18n("Top")
+        component: topComponent
         resourceType: "_top"
     }
     CategoryTab {
@@ -76,6 +77,25 @@ PlasmaComponents.TabBar {
         text: i18n("Widgets")
         component: widgetsComponent
         resourceType: "_Widgets"
+    }
+
+    Component {
+        id: topComponent
+        ResourceBrowser {
+            model: PlasmaCore.SortFilterModel {
+                id: appsModel
+                sourceModel: MetadataModels.MetadataModel {
+                    sortOrder: Qt.DescendingOrder
+                    activityId: "!"+activitySource.data["Status"]["Current"]
+                    sortBy: ["nao:numericRating"]
+                    limit: 20
+                    queryString: searchField.searchQuery
+                }
+                sortRole: "name"
+                filterRole: "name"
+                filterRegExp: ".*"+searchField.searchQuery+".*"
+            }
+        }
     }
 
     Component {

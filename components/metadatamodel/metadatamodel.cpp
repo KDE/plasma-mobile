@@ -53,6 +53,7 @@
 MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
       m_queryClient(0),
+      m_limit(0),
       m_screenshotSize(180, 120)
 {
     m_queryTimer = new QTimer(this);
@@ -140,6 +141,22 @@ void MetadataModel::setQueryString(const QString &query)
 QString MetadataModel::queryString() const
 {
     return m_queryString;
+}
+
+void MetadataModel::setLimit(int limit)
+{
+    if (limit == m_limit) {
+        return;
+    }
+
+    m_limit = limit;
+    m_queryTimer->start(0);
+    emit limitChanged();
+}
+
+int MetadataModel::limit() const
+{
+    return m_limit;
 }
 
 
@@ -356,11 +373,10 @@ void MetadataModel::doQuery()
             this, SLOT(entriesRemoved(const QList<QUrl> &)));
     connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
 
-    /*FIXME: safe without limit?
-    if (limit > RESULT_LIMIT || limit <= 0) {
-        m_query.setLimit(RESULT_LIMIT);
+    //FIXME: safe usually without limit?
+    if (m_limit > 0) {
+        m_query.setLimit(m_limit);
     }
-    */
 
     m_queryClient->query(m_query);
 }
