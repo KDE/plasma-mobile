@@ -1,5 +1,5 @@
 /*
- *   Copyright 2010 Marco Martin <notmart@gmail.com>
+ *   Copyright 2011 Marco Martin <notmart@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -19,33 +19,11 @@
 
 import QtQuick 1.0
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-
-MouseArea {
-    id: root
-    width: 140
-    height: 120
-    property Component component
-    property alias text: label.text
-    property string icon
+PlasmaComponents.TabButton {
     property string resourceType
+    property Component component
     visible: String(resourceType).charAt(0) == "_" || cloudModel.categories.indexOf(resourceType) != -1
 
-    MobileComponents.IconButton {
-        id: iconButton
-        icon: root.icon
-        onClicked: {
-            stack.push(component)
-        }
-    }
-    PlasmaComponents.Label {
-        id: label
-        anchors {
-            top: iconButton.bottom
-            horizontalCenter: iconButton.horizontalCenter
-        }
-    }
+    onClicked: stack.replace(component)
 }
-

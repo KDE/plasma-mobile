@@ -71,7 +71,6 @@ MobileComponents.Sheet {
         onDataChanged: {
             var names = new Array
             for (var i in data) {
-                print("AAA"+configInterface.activityName)
                 if (data[i]["Current"]) {
                     currentActivity = data[i]["Name"]
                 }
