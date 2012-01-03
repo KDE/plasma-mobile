@@ -96,6 +96,21 @@ void ConfigGroup::setGroup(const QString& groupname)
     emit groupChanged();
 }
 
+QStringList ConfigGroup::keyList() const
+{
+    return d->keys;
+}
+
+void ConfigGroup::setKeyList(const QStringList& keys)
+{
+    if (d->keys == keys) {
+        return;
+    }
+    //readConfigFile();
+    d->keys = keys;
+    emit keyListChanged();
+}
+
 bool ConfigGroup::readConfigFile()
 {
     if (d->file.isEmpty()) {
