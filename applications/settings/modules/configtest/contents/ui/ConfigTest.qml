@@ -53,8 +53,8 @@ Item {
         }
     }
 
-    ActiveSettings.ConfigModel {
-        id: configModel
+    ActiveSettings.ConfigGroup {
+        id: configGroup
         file: "active-settings-configtestrc"
         group: "fakeValues"
     }
@@ -80,7 +80,7 @@ Item {
             topMargin: spacing*2
             bottom: parent.bottom
         }
-        model: configModel
+        model: configGroup.keyList
         delegate: configDelegate
 
         Rectangle { anchors.fill: configList; color: "white"; opacity: 0.1; }
@@ -90,8 +90,8 @@ Item {
         Item {
             height: 24
             width: configList.width
-            Text { text: "<b>" + configKey + "</b>:   "; anchors.right: parent.horizontalCenter }
-            Text { text: configValue; anchors.left: parent.horizontalCenter }
+            Text { text: "<b>" + modelData + "</b>:   "; anchors.right: parent.horizontalCenter }
+            Text { text: configGroup.readEntry(modelData, "default value"); anchors.left: parent.horizontalCenter }
         }
     }
 
@@ -102,35 +102,35 @@ Item {
         // into a KConfigGroup
 
         // String -> QString
-        configModel.writeEntry("fakeString", "Some _fake_ string.");
+        configGroup.writeEntry("fakeString", "Some _fake_ string.");
 
         // Url -> QUrl (FIXME)
-        configModel.writeEntry("fakeUrl", Url("http://planetkde.org"));
+        configGroup.writeEntry("fakeUrl", Url("http://planetkde.org"));
 
         // bool
-        configModel.writeEntry("fakeBool", true);
+        configGroup.writeEntry("fakeBool", true);
 
         // int
-        configModel.writeEntry("fakeInt", 23);
+        configGroup.writeEntry("fakeInt", 23);
 
         // real
-        configModel.writeEntry("fakeReal", 1.87);
+        configGroup.writeEntry("fakeReal", 1.87);
 
         // point, using the QML basic type point
-        configModel.writeEntry("fakePoint", Qt.point(30,40));
+        configGroup.writeEntry("fakePoint", Qt.point(30,40));
 
         // rect, using the QML basic type rect
-        configModel.writeEntry("fakeRect", Qt.rect(12, 24, 600, 400));
+        configGroup.writeEntry("fakeRect", Qt.rect(12, 24, 600, 400));
 
         // Date -> QDateTime
-        configModel.writeEntry("fakeDateTime", new Date(2003, 12, 27, 13, 37, 17));
+        configGroup.writeEntry("fakeDateTime", new Date(2003, 12, 27, 13, 37, 17));
         print(" == " + new Date(2003, 9, 27, 13, 37, 17).toUTCString());
 
         // date -> QDateTime
-        //configModel.writeEntry("fakeDate", Qt.date("2003-09-27"));
+        //configGroup.writeEntry("fakeDate", Qt.date("2003-09-27"));
 
         // list<Type> -. QVariantList (FIXME)
-        configModel.writeEntry("fakeList", ["one", "two", "three" ]);
+        configGroup.writeEntry("fakeList", ["one", "two", "three" ]);
     }
 
     function convertDate(d) {
@@ -144,20 +144,20 @@ Item {
     function testAll() {
         var out = "<h3>Tests</h3>\n<p>";
 
-        out += runTest("string", configModel.readEntry("fakeString").toString(), "Some _fake_ string.");
-        out += runTest("bool", configModel.readEntry("fakeBool"), true);
-        out += runTest("bool string comparison", configModel.readEntry("fakeBool"), "true");
-        out += runTest("int", configModel.readEntry("fakeInt"), 23);
-        out += runTest("real", configModel.readEntry("fakeReal"), 1.87);
-        out += runTest("point Qt.point comparison", configModel.readEntry("fakePoint"), Qt.point(30,40));
-        out += runTest("point string comparison", configModel.readEntry("fakePoint"), "30,40");
+        out += runTest("string", configGroup.readEntry("fakeString").toString(), "Some _fake_ string.");
+        out += runTest("bool", configGroup.readEntry("fakeBool"), true);
+        out += runTest("bool string comparison", configGroup.readEntry("fakeBool"), "true");
+        out += runTest("int", configGroup.readEntry("fakeInt"), 23);
+        out += runTest("real", configGroup.readEntry("fakeReal"), 1.87);
+        out += runTest("point Qt.point comparison", configGroup.readEntry("fakePoint"), Qt.point(30,40));
+        out += runTest("point string comparison", configGroup.readEntry("fakePoint"), "30,40");
         var testDate = new Date(2003, 9, 27, 13, 37, 17);
         print(" These two should be the same date !?! " + Qt.formatDateTime(testDate) + " and " + testDate);
-        out += runTest("Date", convertDate(configModel.readEntry("fakeDateTime")).valueOf(), testDate.valueOf());
-        print(" ..." + Qt.formatDateTime(configModel.readEntry("fakeDateTime")));
-        print(" ..." + convertDate(configModel.readEntry("fakeDateTime")).valueOf());
+        out += runTest("Date", convertDate(configGroup.readEntry("fakeDateTime")).valueOf(), testDate.valueOf());
+        print(" ..." + Qt.formatDateTime(configGroup.readEntry("fakeDateTime")));
+        print(" ..." + convertDate(configGroup.readEntry("fakeDateTime")).valueOf());
         print(" ..." + testDate.valueOf());
-        out += runTest("StringList", configModel.readEntry("fakeList") , ["one", "two", "three"]);
+        out += runTest("StringList", configGroup.readEntry("fakeList") , ["one", "two", "three"]);
         return out + "</p>";
     }
 
