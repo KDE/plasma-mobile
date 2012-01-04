@@ -26,6 +26,7 @@
 #include "kdeclarativeview.h"
 #include <KMainWindow>
 
+class DirModel;
 
 class ImageViewer : public KMainWindow
 {
@@ -42,6 +43,7 @@ public:
 
 private:
     KDeclarativeView *m_widget;
+    DirModel *m_dirModel;
 };
 
 #endif // IMAGEVIEWER_H

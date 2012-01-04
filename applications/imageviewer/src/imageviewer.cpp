@@ -19,6 +19,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "imageviewer.h"
+#include "dirmodel.h"
+
+#include <QDeclarativeContext>
+#include <QFileInfo>
+
 #include <KAction>
 #include <KIcon>
 #include <KStandardAction>
@@ -26,7 +32,6 @@
 
 #include <Plasma/Theme>
 
-#include "imageviewer.h"
 
 ImageViewer::ImageViewer(const QString &url)
     : KMainWindow()
@@ -40,6 +45,21 @@ ImageViewer::ImageViewer(const QString &url)
     addAction(KStandardAction::quit(this, SLOT(close()), this));
     m_widget = new KDeclarativeView(this);
     m_widget->setPackageName("org.kde.active.imageviewer");
+
+    // Filter the supplied argument through KUriFilter and then
+    // make the resulting url known to the webbrowser component
+    // as startupArguments property
+    KUrl uri(url);
+    QVariant a = QVariant(QStringList(uri.prettyUrl()));
+    m_widget->rootContext()->setContextProperty("startupArguments", a);
+    m_dirModel = new DirModel(this);
+    if (!url.isEmpty()) {
+        if (!uri.isLocalFile() || !QFileInfo(uri.toLocalFile()).isDir()) {
+            uri = uri.upUrl();
+        }
+        m_dirModel->setUrl(uri.prettyUrl());
+    }
+    m_widget->rootContext()->setContextProperty("dirModel", m_dirModel);
 
     restoreWindowSize(config("Window"));
     setCentralWidget(m_widget);
