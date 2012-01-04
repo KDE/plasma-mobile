@@ -23,8 +23,8 @@
 #ifndef IMAGEVIEWER_H
 #define IMAGEVIEWER_H
 
-#include "view.h"
-//#include <kxmlguiwindow.h>
+#include "kdeclarativeview.h"
+#include <KMainWindow>
 
 
 class ImageViewer : public KMainWindow
@@ -41,7 +41,7 @@ public:
     bool useGL() const;
 
 private:
-    AppView *m_widget;
+    KDeclarativeView *m_widget;
 };
 
 #endif // IMAGEVIEWER_H

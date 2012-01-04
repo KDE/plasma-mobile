@@ -22,6 +22,7 @@
 #include <KAction>
 #include <KIcon>
 #include <KStandardAction>
+#include <KConfigGroup>
 
 #include <Plasma/Theme>
 
@@ -37,7 +38,8 @@ ImageViewer::ImageViewer(const QString &url)
     Plasma::Theme::defaultTheme()->setThemeName(themeName);
     addAction(KStandardAction::close(this, SLOT(close()), this));
     addAction(KStandardAction::quit(this, SLOT(close()), this));
-    m_widget = new AppView(url, this);
+    m_widget = new KDeclarativeView(this);
+    m_widget->setPackageName("org.kde.active.imageviewer");
 
     restoreWindowSize(config("Window"));
     setCentralWidget(m_widget);

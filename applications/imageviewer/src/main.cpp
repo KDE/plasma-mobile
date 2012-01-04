@@ -26,6 +26,7 @@
 #include <KDebug>
 #include <KDE/KLocale>
 #include <KToolBar>
+#include <KConfigGroup>
 
 // Own
 #include "imageviewer.h"
