@@ -103,16 +103,19 @@ MobileComponents.Sheet {
                 }
             }
         },
+        MenuTabBar {
+            id: tabBar
+        },
         PlasmaComponents.PageStack {
             id: stack
             clip: true
             anchors {
                 left: parent.left
                 right: parent.right
-                top: searchField.bottom
+                top: tabBar.bottom
                 bottom: parent.bottom
             }
-            initialPage: Qt.createComponent("Menu.qml")
+            initialPage: tabBar.startComponent
         }
     ]
 
