@@ -6,7 +6,6 @@ set(active-imageviewer_SRCS
     main.cpp
     dirmodel.cpp
     imageviewer.cpp
-    view.cpp
     kdeclarativeview.cpp
 )
 
