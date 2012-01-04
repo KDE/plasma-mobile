@@ -7,6 +7,7 @@ set(active-imageviewer_SRCS
     dirmodel.cpp
     imageviewer.cpp
     view.cpp
+    kdeclarativeview.cpp
 )
 
 KDE4_ADD_EXECUTABLE(active-imageviewer ${active-imageviewer_SRCS})
