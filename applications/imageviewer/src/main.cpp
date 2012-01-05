@@ -53,14 +53,6 @@ int main(int argc, char **argv)
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    bool useGL = args->isSet("opengl");
-
-    if (!useGL) {
-        //use plasmarc to share this with plasma-windowed
-        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
-        useGL = cg.readEntry("UseOpenGl", true);
-    }
-
     //kDebug() << "ARGS:" << args << args->count();
     QString url;
     if (args->count() > 0) {
@@ -68,7 +60,6 @@ int main(int argc, char **argv)
     }
 
     ImageViewer *mainWindow = new ImageViewer(url);
-    mainWindow->setUseGL(useGL);
     mainWindow->show();
     args->clear();
     return app.exec();
