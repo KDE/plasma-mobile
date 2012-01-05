@@ -33,6 +33,7 @@ class KDeclarativeMainWindowPrivate;
 class KDeclarativeMainWindow : public KMainWindow
 {
     Q_OBJECT
+    Q_PROPERTY(QStringList startupArguments READ startupArguments CONSTANT)
 
 public:
     KDeclarativeMainWindow();
@@ -46,6 +47,9 @@ public:
 
     void setUseGL(const bool on);
     bool useGL() const;
+
+    QStringList startupArguments() const;
+    Q_INVOKABLE QString startupOption(const QString &option) const;
 
 private:
     KDeclarativeMainWindowPrivate * const d;

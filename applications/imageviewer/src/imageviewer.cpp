@@ -27,9 +27,10 @@
 #include <QFileInfo>
 
 #include <KAction>
+#include <KCmdLineArgs>
+#include <KConfigGroup>
 #include <KIcon>
 #include <KStandardAction>
-#include <KConfigGroup>
 
 #include <Plasma/Theme>
 
@@ -52,6 +53,7 @@ ImageViewer::ImageViewer(const QString &url)
         }
         m_dirModel->setUrl(uri.prettyUrl());
     }
+
     declarativeView()->rootContext()->setContextProperty("dirModel", m_dirModel);
 }
 

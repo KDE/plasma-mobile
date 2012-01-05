@@ -26,6 +26,7 @@
 #include <QDeclarativeContext>
 
 #include <KAction>
+#include <KCmdLineArgs>
 #include <KStandardAction>
 
 #include <Plasma/Theme>
@@ -36,6 +37,8 @@ class KDeclarativeMainWindowPrivate
 {
 public:
     KDeclarativeView *view;
+    KCmdLineArgs *args;
+    QStringList arguments;
 };
 
 
@@ -55,6 +58,11 @@ KDeclarativeMainWindow::KDeclarativeMainWindow()
 
     restoreWindowSize(config("Window"));
     setCentralWidget(d->view);
+
+    d->args = KCmdLineArgs::parsedArgs();
+    for (int i = 0; i < d->args->count(); i++) {
+        d->arguments << d->args->arg(i);
+    }
 
     connect(d->view, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
 }
@@ -83,6 +91,16 @@ void KDeclarativeMainWindow::setUseGL(const bool on)
 bool KDeclarativeMainWindow::useGL() const
 {
     return d->view->useGL();
+}
+
+QStringList KDeclarativeMainWindow::startupArguments() const
+{
+    return d->arguments;
+}
+
+QString KDeclarativeMainWindow::startupOption(const QString &option) const
+{
+    return d->args->getOption(option.toLatin1());
 }
 
 #include "kdeclarativemainwindow.moc"
