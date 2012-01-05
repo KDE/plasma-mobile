@@ -73,10 +73,10 @@ KDeclarativeMainWindow::KDeclarativeMainWindow()
     d->view = new KDeclarativeView(this);
     connect(d->view, SIGNAL(statusChanged(QDeclarativeView::Status)), this, SLOT(statusChanged(QDeclarativeView::Status)));
 
-    restoreWindowSize(config("Window"));
     setCentralWidget(d->view);
+    restoreWindowSize(config("Window"));
 
-    setCaption(KCmdLineArgs::aboutData()->programName());
+    setWindowIcon(KIcon(KCmdLineArgs::aboutData()->programIconName()));
 
     d->args = KCmdLineArgs::parsedArgs();
     for (int i = 0; i < d->args->count(); i++) {

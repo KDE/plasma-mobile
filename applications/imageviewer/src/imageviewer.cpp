@@ -59,13 +59,6 @@ ImageViewer::ImageViewer(const QString &url)
 
 ImageViewer::~ImageViewer()
 {
-    saveWindowSize(config("Window"));
-}
-
-
-QIcon ImageViewer::icon()
-{
-    return KIcon("gwenview");
 }
 
 
