@@ -36,7 +36,7 @@
 #include "nie.h"
 #include "kext.h"
 
-#define KAMD_DBUS_ADDRESS "org.kde.kactivitymanagerd"
+#define KAMD_DBUS_ADDRESS "org.kde.ActivityManager"
 
 using namespace Nepomuk::Vocabulary;
 
