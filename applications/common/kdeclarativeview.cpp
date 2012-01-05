@@ -20,7 +20,7 @@
  ***************************************************************************/
 
 #include "kdeclarativeview.h"
-#include "dataenginebindings.h"
+#include "dataenginebindings_p.h"
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
