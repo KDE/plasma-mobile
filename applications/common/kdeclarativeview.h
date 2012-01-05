@@ -50,10 +50,28 @@ public:
      */
     bool useGL() const;
 
+    /**
+     * Sets the package from where load the application QML UI
+     * The package must be of the type "Generic package"
+     * it must provide a qml file as "mainscript"
+     * @arg QString packageName the plugin name of the package
+     */
     void setPackageName(const QString &packageName);
+    /**
+     * @returns the plugin name of the package
+     */
     QString packageName() const;
 
+    /**
+     * Sets the package used for the application QML UI.
+     * You usually don't need to use this, rather use setPackageName
+     * @see setPackageName
+     */
+    //FIXME: remove this function?
     void setPackage(Plasma::Package *package);
+    /**
+     * @returns the plugin name of the package that holds the application QML UI
+     */
     Plasma::Package *package() const;
 
 private:
