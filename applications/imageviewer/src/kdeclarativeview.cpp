@@ -76,7 +76,6 @@ KDeclarativeView::~KDeclarativeView()
 }
 
 
-
 void KDeclarativeView::setPackageName(const QString &packageName)
 {
     d->package = new Plasma::Package(QString(), packageName, d->structure);

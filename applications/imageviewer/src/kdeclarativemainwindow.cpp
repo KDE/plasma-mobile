@@ -65,6 +65,11 @@ KDeclarativeMainWindow::~KDeclarativeMainWindow()
 }
 
 
+KDeclarativeView *KDeclarativeMainWindow::declarativeView() const
+{
+    return d->view;
+}
+
 KConfigGroup KDeclarativeMainWindow::config(const QString &group)
 {
     return KConfigGroup(KSharedConfig::openConfig(qApp->applicationName() + "rc"), group);

@@ -23,12 +23,11 @@
 #ifndef IMAGEVIEWER_H
 #define IMAGEVIEWER_H
 
-#include "kdeclarativeview.h"
-#include <KMainWindow>
+#include "kdeclarativemainwindow.h"
 
 class DirModel;
 
-class ImageViewer : public KMainWindow
+class ImageViewer : public KDeclarativeMainWindow
 {
     Q_OBJECT
 public:
@@ -36,13 +35,8 @@ public:
     virtual ~ImageViewer();
     QString name();
     QIcon icon();
-    KConfigGroup config(const QString &group = "Default");
-
-    void setUseGL(const bool on);
-    bool useGL() const;
 
 private:
-    KDeclarativeView *m_widget;
     DirModel *m_dirModel;
 };
 
