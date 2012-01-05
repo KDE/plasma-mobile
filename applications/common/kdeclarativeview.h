@@ -40,7 +40,14 @@ public:
     KDeclarativeView(QWidget *parent = 0);
     ~KDeclarativeView();
 
+    /**
+     * Sets wether the application uses opengl
+     * @arg bool on if true the declarative view will use opengl for its viewport()
+     */
     void setUseGL(const bool on);
+    /**
+     * @returns true if the declarative view uses opengl
+     */
     bool useGL() const;
 
     void setPackageName(const QString &packageName);

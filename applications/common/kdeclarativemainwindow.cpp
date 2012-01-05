@@ -89,7 +89,7 @@ KDeclarativeMainWindow::KDeclarativeMainWindow()
         KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
         useGL = cg.readEntry("UseOpenGl", true);
     }
-    setUseGL(useGL);
+    d->view->setUseGL(useGL);
 
     connect(d->view, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
 }
@@ -108,16 +108,6 @@ KDeclarativeView *KDeclarativeMainWindow::declarativeView() const
 KConfigGroup KDeclarativeMainWindow::config(const QString &group)
 {
     return KConfigGroup(KSharedConfig::openConfig(qApp->applicationName() + "rc"), group);
-}
-
-void KDeclarativeMainWindow::setUseGL(const bool on)
-{
-    d->view->setUseGL(on);
-}
-
-bool KDeclarativeMainWindow::useGL() const
-{
-    return d->view->useGL();
 }
 
 QStringList KDeclarativeMainWindow::startupArguments() const

@@ -62,16 +62,6 @@ public:
      */
     KDeclarativeView *declarativeView() const;
 
-    /**
-     * Sets wether the application uses opengl
-     * @arg bool on if true the declarative view will use opengl for its viewport()
-     */
-    void setUseGL(const bool on);
-    /**
-     * @returns true if the declarative view uses opengl
-     */
-    bool useGL() const;
-
     //propertyies & methods for QML
     QStringList startupArguments() const;
 
