@@ -63,12 +63,6 @@ ImageViewer::~ImageViewer()
 }
 
 
-QString ImageViewer::name()
-{
-    return "Active image viewer";
-    //return declarativeView()->options()->name;
-}
-
 QIcon ImageViewer::icon()
 {
     return KIcon("gwenview");

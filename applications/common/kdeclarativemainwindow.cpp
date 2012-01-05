@@ -36,15 +36,31 @@
 class KDeclarativeMainWindowPrivate
 {
 public:
+    KDeclarativeMainWindowPrivate(KDeclarativeMainWindow *window)
+        : q(window)
+    {}
+
+    void statusChanged(QDeclarativeView::Status status);
+
+    KDeclarativeMainWindow *q;
     KDeclarativeView *view;
     KCmdLineArgs *args;
     QStringList arguments;
+    QString caption;
 };
+
+void KDeclarativeMainWindowPrivate::statusChanged(QDeclarativeView::Status status)
+{
+    if (status == QDeclarativeView::Ready) {
+        view->rootContext()->setContextProperty("application", q);
+    }
+}
+
 
 
 KDeclarativeMainWindow::KDeclarativeMainWindow()
     : KMainWindow(),
-      d(new KDeclarativeMainWindowPrivate())
+      d(new KDeclarativeMainWindowPrivate(this))
 {
     setAcceptDrops(true);
     KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
@@ -55,9 +71,12 @@ KDeclarativeMainWindow::KDeclarativeMainWindow()
     addAction(KStandardAction::quit(this, SLOT(close()), this));
 
     d->view = new KDeclarativeView(this);
+    connect(d->view, SIGNAL(statusChanged(QDeclarativeView::Status)), this, SLOT(statusChanged(QDeclarativeView::Status)));
 
     restoreWindowSize(config("Window"));
     setCentralWidget(d->view);
+
+    setCaption(KCmdLineArgs::aboutData()->programName());
 
     d->args = KCmdLineArgs::parsedArgs();
     for (int i = 0; i < d->args->count(); i++) {
@@ -101,6 +120,35 @@ QStringList KDeclarativeMainWindow::startupArguments() const
 QString KDeclarativeMainWindow::startupOption(const QString &option) const
 {
     return d->args->getOption(option.toLatin1());
+}
+
+QString KDeclarativeMainWindow::caption() const
+{
+    return d->caption;
+}
+
+void KDeclarativeMainWindow::setCaption(const QString &caption)
+{
+    if (d->caption == caption) {
+        return;
+    }
+
+    d->caption = caption;
+    emit captionChanged();
+    KMainWindow::setCaption(caption);
+}
+
+void KDeclarativeMainWindow::setCaption(const QString &caption, bool modified)
+{
+    Q_UNUSED(modified)
+
+    if (d->caption == caption) {
+        return;
+    }
+
+    d->caption = caption;
+    emit captionChanged();
+    KMainWindow::setCaption(caption, true);
 }
 
 #include "kdeclarativemainwindow.moc"

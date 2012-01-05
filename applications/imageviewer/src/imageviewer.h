@@ -33,7 +33,6 @@ class ImageViewer : public KDeclarativeMainWindow
 public:
     ImageViewer(const QString &url);
     virtual ~ImageViewer();
-    QString name();
     QIcon icon();
 
 private:

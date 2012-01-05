@@ -34,6 +34,7 @@ class KDeclarativeMainWindow : public KMainWindow
 {
     Q_OBJECT
     Q_PROPERTY(QStringList startupArguments READ startupArguments CONSTANT)
+    Q_PROPERTY(QString caption READ caption WRITE setCaption NOTIFY captionChanged)
 
 public:
     KDeclarativeMainWindow();
@@ -48,11 +49,24 @@ public:
     void setUseGL(const bool on);
     bool useGL() const;
 
+    //propertyies & methods for QML
     QStringList startupArguments() const;
+
+    QString caption() const;
+
     Q_INVOKABLE QString startupOption(const QString &option) const;
+
+public Q_SLOTS:
+    void setCaption(const QString &caption);
+    //FIXME: this exists only to not hide the superclass method
+    void setCaption(const QString &caption, bool modified);
+
+Q_SIGNALS:
+    void captionChanged();
 
 private:
     KDeclarativeMainWindowPrivate * const d;
+    Q_PRIVATE_SLOT(d, void statusChanged(QDeclarativeView::Status))
 };
 
 #endif // KDECLARATIVEMAINWINDOW_H
