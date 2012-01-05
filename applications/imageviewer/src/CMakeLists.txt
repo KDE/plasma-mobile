@@ -1,13 +1,14 @@
 
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../../common)
 
 set(active-imageviewer_SRCS
-    dataenginebindings.cpp
     main.cpp
     dirmodel.cpp
     imageviewer.cpp
-    kdeclarativeview.cpp
-    kdeclarativemainwindow.cpp
+
+    ../../common/dataenginebindings.cpp
+    ../../common/kdeclarativeview.cpp
+    ../../common/kdeclarativemainwindow.cpp
 )
 
 KDE4_ADD_EXECUTABLE(active-imageviewer ${active-imageviewer_SRCS})
