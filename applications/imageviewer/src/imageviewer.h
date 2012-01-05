@@ -31,7 +31,7 @@ class ImageViewer : public KDeclarativeMainWindow
 {
     Q_OBJECT
 public:
-    ImageViewer(const QString &url);
+    ImageViewer();
     virtual ~ImageViewer();
 
 private:

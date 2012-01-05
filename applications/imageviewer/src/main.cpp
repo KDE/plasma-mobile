@@ -54,12 +54,8 @@ int main(int argc, char **argv)
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
     //kDebug() << "ARGS:" << args << args->count();
-    QString url;
-    if (args->count() > 0) {
-        url = args->arg(0);
-    }
 
-    ImageViewer *mainWindow = new ImageViewer(url);
+    ImageViewer *mainWindow = new ImageViewer();
     mainWindow->show();
     args->clear();
     return app.exec();

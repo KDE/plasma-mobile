@@ -35,7 +35,7 @@
 #include <Plasma/Theme>
 
 
-ImageViewer::ImageViewer(const QString &url)
+ImageViewer::ImageViewer()
     : KDeclarativeMainWindow()
 {
     declarativeView()->setPackageName("org.kde.active.imageviewer");
@@ -46,7 +46,7 @@ ImageViewer::ImageViewer(const QString &url)
     KUrl uri(startupArguments()[0]);
     QVariant a = QVariant(QStringList(uri.prettyUrl()));
     m_dirModel = new DirModel(this);
-    if (!url.isEmpty()) {
+    if (!uri.prettyUrl().isEmpty()) {
         if (!uri.isLocalFile() || !QFileInfo(uri.toLocalFile()).isDir()) {
             uri = uri.upUrl();
         }
