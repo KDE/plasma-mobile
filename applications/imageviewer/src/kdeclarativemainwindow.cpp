@@ -22,6 +22,7 @@
 #include "kdeclarativemainwindow.h"
 #include "kdeclarativeview.h"
 
+#include <QApplication>
 #include <QDeclarativeContext>
 
 #include <KAction>
@@ -66,7 +67,7 @@ KDeclarativeMainWindow::~KDeclarativeMainWindow()
 
 KConfigGroup KDeclarativeMainWindow::config(const QString &group)
 {
-    return KConfigGroup(KSharedConfig::openConfig("imageviewerrc"), group);
+    return KConfigGroup(KSharedConfig::openConfig(qApp->applicationName() + "rc"), group);
 }
 
 void KDeclarativeMainWindow::setUseGL(const bool on)
