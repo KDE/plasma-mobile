@@ -54,7 +54,7 @@ RecommendationManager::RecommendationManager()
 {
     d->iface = new QDBusInterface(
             CONTOUR_DBUS_PATH,
-            "/recommendationmanager",
+            "/RecommendationManager",
             "org.kde.contour.RecommendationManager",
             QDBusConnection::sessionBus()
         );

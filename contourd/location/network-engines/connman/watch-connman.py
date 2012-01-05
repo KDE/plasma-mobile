@@ -20,7 +20,7 @@ props = main_obj.GetProperties(dbus_interface='net.connman.Manager')
 def notify_contour(networkName):
     global bus
 
-    contour_obj = bus.get_object('org.kde.Contour', '/dummynn')
+    contour_obj = bus.get_object('org.kde.LocationManager', '/dummynn')
     props = main_obj.setWifiName(networkName)
 
 

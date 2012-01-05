@@ -185,7 +185,7 @@ RecommendationManager::RecommendationManager(QObject *parent)
     qDBusRegisterMetaType < QList < Contour::RecommendationItem > > ();
     (void) new RecommendationManagerAdaptor(this);
     QDBusConnection::sessionBus().registerObject(
-            QLatin1String("/recommendationmanager"), this);
+            QLatin1String("/RecommendationManager"), this);
 
 }
 

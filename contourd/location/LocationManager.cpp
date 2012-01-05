@@ -39,7 +39,8 @@ LocationManager::LocationManager(QObject * parent)
 
     (void) new LocationManagerAdaptor(this);
     QDBusConnection::sessionBus().registerObject(
-            QLatin1String("/locationmanager"), this);
+            QLatin1String("/LocationManager"), this);
+    QDBusConnection::sessionBus().registerService("org.kde.LocationManager");
 
 
     foreach (const QString & id, d->locationNames.keyList()) {
