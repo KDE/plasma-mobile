@@ -27,16 +27,6 @@ Item {
         anchors { top: parent.top; left: parent.left; right: parent.right; }
 
         PlasmaComponents.TabButton {
-            text: "Types"
-            onClicked: stack.replace(typesComponent);
-        }
-
-        Component {
-            id: typesComponent
-            TypeTest { }
-        }
-
-        PlasmaComponents.TabButton {
             text: "Nesting"
             onClicked: stack.replace(nestingComponent);
         }
@@ -47,6 +37,17 @@ Item {
         }
 
         PlasmaComponents.TabButton {
+            text: "Types"
+            onClicked: stack.replace(typesComponent);
+        }
+
+        Component {
+            id: typesComponent
+            TypeTest { }
+        }
+
+/*
+        PlasmaComponents.TabButton {
             text: "Config List"
             onClicked: stack.replace(listComponent);
         }
@@ -54,11 +55,11 @@ Item {
         Component {
             id: listComponent
             ConfigList {}
-        }
+        }*/
     }
     PlasmaComponents.PageStack {
         id: stack
         anchors { top: tabs.bottom; left: parent.left; right: parent.right; bottom: parent.bottom; }
-        Component.onCompleted: replace(typesComponent);
+        Component.onCompleted: replace(nestingComponent);
     }
 }

@@ -24,17 +24,17 @@ import org.kde.active.settings 0.1 as ActiveSettings
 import "testhelper.js" as TestHelper
 
 
-Flickable {
-    id: configTestModule
-    objectName: "configTestModule"
-    interactive: true
-    //anchors.fill: parent
-    contentWidth: 800; contentHeight: 1000
+ActiveSettings.ConfigGroup {
+
+    id: levelZero
+    anchors.fill: parent
+    file: "active-settings-configtestrc"
+    group: "LevelZero"
 
     ActiveSettings.ConfigGroup {
-        id: configGroup
+        id: levelOne
         file: "active-settings-configtestrc"
-        group: "fakeValues"
+        group: "LevelOne0"
     }
 
 
@@ -53,11 +53,33 @@ Flickable {
         anchors { top: nestingHeader.bottom; topMargin: 8;}
     }
 
-    function testAll() {
-        var out = "";
+    ListView {
+        anchors { top: nestingText.bottom; topMargin: 8; bottom: parent.bottom}
+        id: configList
+        currentIndex: -1
+        //height: 200
+        width: parent.width-200
+        clip: true
+        spacing: 4
+        model: levelOne.keyList
+        delegate: configDelegate
+    }
+    Component {
+        id: configDelegate
+        Item {
+            height: 24
+            width: configList.width
+            Text { text: "<b>" + modelData + "</b>:   "; anchors.right: parent.horizontalCenter }
+            Text { text: levelOne.readEntry(modelData, "default value"); anchors.left: parent.horizontalCenter }
+        }
+    }
 
-        out += TestHelper.runTest("string", configGroup.readEntry("fakeString").toString(), "Some _fake_ string.");
-        return out + "</p>";
+    function testAll() {
+        var out = " test. ";
+        out += groupList;
+
+        //out += TestHelper.runTest("string", configGroup.readEntry("fakeString").toString(), "Some _fake_ string.");
+        return out;
     }
 
     Component.onCompleted: {

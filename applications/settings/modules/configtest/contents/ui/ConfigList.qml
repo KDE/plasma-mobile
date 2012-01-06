@@ -24,11 +24,7 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
 
-Flickable {
-    id: configTestModule
-    objectName: "configTestModule"
-    interactive: true
-    contentWidth: 800; contentHeight: 1000
+Item {
 
     ActiveSettings.ConfigGroup {
         id: configGroup
@@ -44,7 +40,6 @@ Flickable {
         clip: true
         spacing: 4
         anchors {
-            //verticalCenter: parent.verticalCenter
             top: parent.top
             topMargin: spacing*2
             bottom: parent.bottom
@@ -53,8 +48,6 @@ Flickable {
         }
         model: configGroup.keyList
         delegate: configDelegate
-
-        //Rectangle { anchors.fill: configList; color: "white"; opacity: 0.1; }
     }
     Component {
         id: configDelegate
