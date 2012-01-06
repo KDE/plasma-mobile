@@ -19,9 +19,7 @@
  */
 
 import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
 import "testhelper.js" as TestHelper
 
@@ -53,19 +51,16 @@ Flickable {
         width: parent.width
         clip: true
         anchors { top: nestingHeader.bottom; topMargin: 8;}
-        text: "second ..."
     }
 
     function testAll() {
-        var out = "<h3>Tests</h3>\n<p>";
+        var out = "";
 
         out += TestHelper.runTest("string", configGroup.readEntry("fakeString").toString(), "Some _fake_ string.");
         return out + "</p>";
     }
 
     Component.onCompleted: {
-        print("Web.qml done loading.");
-        defaultValues();
-        configText.text = testAll() + "\n<h3>Config Model</h3>";
+       nestingText.text = testAll();
     }
 }
