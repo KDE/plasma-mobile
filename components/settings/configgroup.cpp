@@ -96,9 +96,11 @@ void ConfigGroup::setGroup(const QString& groupname)
     if (d->group == groupname) {
         return;
     }
-    //readConfigFile();
+    kDebug() << "Setting group... " << groupname;
+    readConfigFile();
     d->group = groupname;
     emit groupChanged();
+    emit keyListChanged();
 }
 
 QStringList ConfigGroup::keyList() const
