@@ -34,7 +34,8 @@ class ConfigGroup : public QObject
     Q_OBJECT
     Q_PROPERTY(QString file READ file WRITE setFile NOTIFY fileChanged)
     Q_PROPERTY(QString group READ group WRITE setGroup NOTIFY groupChanged)
-    Q_PROPERTY(QStringList keyList READ keyList WRITE setKeyList NOTIFY keyListChanged)
+    Q_PROPERTY(QStringList keyList READ keyList NOTIFY keyListChanged)
+    Q_PROPERTY(QStringList groupList READ groupList NOTIFY groupListChanged)
 
 public:
     ConfigGroup(QObject* parent=0);
@@ -45,7 +46,7 @@ public:
     QString group() const;
     void setGroup(const QString &groupname);
     QStringList keyList() const;
-    void setKeyList(const QStringList &keys);
+    QStringList groupList() const;
 
     Q_INVOKABLE QVariant readEntry(const QString &key);
     Q_INVOKABLE bool writeEntry(const QString &key, const QVariant &value);
@@ -54,6 +55,7 @@ Q_SIGNALS:
     void fileChanged();
     void groupChanged();
     void keyListChanged();
+    void groupListChanged();
 
 private:
     ConfigGroupPrivate* d;

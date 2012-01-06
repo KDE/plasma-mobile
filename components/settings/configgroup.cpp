@@ -37,7 +37,7 @@ public:
     QString file;
     QTimer *synchTimer;
     QString group;
-    QStringList keys;
+    //QStringList keys;
 };
 
 
@@ -98,17 +98,15 @@ void ConfigGroup::setGroup(const QString& groupname)
 
 QStringList ConfigGroup::keyList() const
 {
-    return d->keys;
+    if (!d->configGroup) {
+        return QStringList();
+    }
+    return d->configGroup->keyList();
 }
 
-void ConfigGroup::setKeyList(const QStringList& keys)
+QStringList ConfigGroup::groupList() const
 {
-    if (d->keys == keys) {
-        return;
-    }
-    //readConfigFile();
-    d->keys = keys;
-    emit keyListChanged();
+    return d->configGroup->groupList();
 }
 
 bool ConfigGroup::readConfigFile()
@@ -116,11 +114,11 @@ bool ConfigGroup::readConfigFile()
     if (d->file.isEmpty()) {
         return false;
     }
-    d->keys.clear();
+    //d->keys.clear();
     kDebug() << "Reading file: " << d->file << d->group;
     d->config = KSharedConfig::openConfig(d->file);
     d->configGroup = new KConfigGroup(d->config, d->group);
-    d->keys = d->configGroup->keyList();
+    //d->keys = d->configGroup->keyList();
     return true;
 }
 
@@ -128,6 +126,9 @@ bool ConfigGroup::readConfigFile()
 
 bool ConfigGroup::writeEntry(const QString& key, const QVariant& value)
 {
+    if (!d->configGroup) {
+        return false;
+    }
     kDebug() << " writing setting: " << key << value;
     d->configGroup->writeEntry(key, value);
     d->synchTimer->start();
@@ -137,6 +138,9 @@ bool ConfigGroup::writeEntry(const QString& key, const QVariant& value)
 
 QVariant ConfigGroup::readEntry(const QString& key)
 {
+    if (!d->configGroup) {
+        return QVariant();
+    }
     //const QVariant value = d->configGroup->readEntry(key, QString("dEfAuLt"));
     const QVariant value = d->configGroup->readEntry(key, QVariant("dEfAuLt"));
     kDebug() << " reading setting: " << key << value;
@@ -145,8 +149,10 @@ QVariant ConfigGroup::readEntry(const QString& key)
 
 void ConfigGroup::sync()
 {
-    kDebug() << "synching config...";
-    d->configGroup->sync();
+    if (d->configGroup) {
+        kDebug() << "synching config...";
+        d->configGroup->sync();
+    }
 }
 
 }
