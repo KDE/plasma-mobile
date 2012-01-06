@@ -41,8 +41,8 @@ public:
 };
 
 
-ConfigGroup::ConfigGroup(QObject* parent)
-    : QObject(parent),
+ConfigGroup::ConfigGroup(QDeclarativeItem* parent)
+    : QDeclarativeItem(parent),
       d(0)
 {
     setObjectName("ConfigModel");
@@ -64,6 +64,11 @@ ConfigGroup::~ConfigGroup()
         d->configGroup->sync();
     }
     delete d;
+}
+
+KConfigGroup* ConfigGroup::configGroup()
+{
+    return d->configGroup;
 }
 
 QString ConfigGroup::file() const
@@ -115,11 +120,18 @@ bool ConfigGroup::readConfigFile()
         return false;
     }
     //d->keys.clear();
-    kDebug() << "Reading file: " << d->file << d->group;
-    d->config = KSharedConfig::openConfig(d->file);
-    d->configGroup = new KConfigGroup(d->config, d->group);
-    //d->keys = d->configGroup->keyList();
-    return true;
+    ConfigGroup* parentGroup = dynamic_cast<ConfigGroup*>(parent());
+    if (parentGroup) {
+        d->configGroup = new KConfigGroup(parentGroup->configGroup(), d->group);
+        kDebug() << "XXXXX This is a nested config" << parentGroup->group() << d->group << d->configGroup->keyList();
+        return true;
+    } else {
+        kDebug() << "Reading file: " << d->file << d->group;
+        d->config = KSharedConfig::openConfig(d->file);
+        d->configGroup = new KConfigGroup(d->config, d->group);
+        //d->keys = d->configGroup->keyList();
+        return true;
+    }
 }
 
 // Bound methods and slots
@@ -129,7 +141,7 @@ bool ConfigGroup::writeEntry(const QString& key, const QVariant& value)
     if (!d->configGroup) {
         return false;
     }
-    kDebug() << " writing setting: " << key << value;
+    //kDebug() << " writing setting: " << key << value;
     d->configGroup->writeEntry(key, value);
     d->synchTimer->start();
     //d->configGroup->sync();
@@ -142,8 +154,8 @@ QVariant ConfigGroup::readEntry(const QString& key)
         return QVariant();
     }
     //const QVariant value = d->configGroup->readEntry(key, QString("dEfAuLt"));
-    const QVariant value = d->configGroup->readEntry(key, QVariant("dEfAuLt"));
-    kDebug() << " reading setting: " << key << value;
+    const QVariant value = d->configGroup->readEntry(key, QVariant(""));
+    //kDebug() << " reading setting: " << key << value;
     return value;
 }
 

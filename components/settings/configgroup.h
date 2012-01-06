@@ -21,15 +21,17 @@
 #define CONFIGGROUP_H
 
 #include <QObject>
+#include <QDeclarativeItem>
 #include <QVariant>
 
+class KConfigGroup;
 
 namespace Plasma
 {
 
 class ConfigGroupPrivate;
 
-class ConfigGroup : public QObject
+class ConfigGroup : public QDeclarativeItem
 {
     Q_OBJECT
     Q_PROPERTY(QString file READ file WRITE setFile NOTIFY fileChanged)
@@ -38,8 +40,10 @@ class ConfigGroup : public QObject
     Q_PROPERTY(QStringList groupList READ groupList NOTIFY groupListChanged)
 
 public:
-    ConfigGroup(QObject* parent=0);
+    ConfigGroup(QDeclarativeItem* parent=0);
     ~ConfigGroup();
+
+    KConfigGroup* configGroup();
 
     QString file() const;
     void setFile(const QString &filename);
