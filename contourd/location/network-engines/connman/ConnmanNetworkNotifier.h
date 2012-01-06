@@ -17,24 +17,27 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef CONNMAN_NETWORK_NOTIFIER_H_
-#define CONNMAN_NETWORK_NOTIFIER_H_
+#ifndef DUMMY_NETWORK_NOTIFIER_H_
+#define DUMMY_NETWORK_NOTIFIER_H_
 
 #include "../NetworkNotifier.h"
 
 /**
- * DummyNetworkNotifier
+ * ConnmanNetworkNotifier
  */
-class DummyNetworkNotifier: public NetworkNotifier {
+class ConnmanNetworkNotifier: public NetworkNotifier {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.LocationManager.DummyNetworkNotifier")
+    Q_CLASSINFO("D-Bus Interface", "org.kde.LocationManager.ConnmanNetworkNotifier")
 
 public:
-    DummyNetworkNotifier(QObject * parent = NULL);
-    virtual ~DummyNetworkNotifier();
+    ConnmanNetworkNotifier(QObject * parent = NULL);
+    virtual ~ConnmanNetworkNotifier();
 
 public Q_SLOTS:
     void setWifiName(const QString & accessPoint);
+
+protected Q_SLOTS:
+    void enable();
 
 protected:
     void init();
@@ -44,5 +47,5 @@ private:
     Private * const d;
 };
 
-#endif // CONNMANNETWORK_NOTIFIER_H_
+#endif // DUMMYNETWORK_NOTIFIER_H_
 

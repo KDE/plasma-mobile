@@ -22,6 +22,11 @@ include_directories(
   ${QTMOBILITY_INCLUDE_DIR}
 )
 
+configure_file(
+  config-features.h.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/config-features.h
+)
+
 add_subdirectory(recommendation/plugins)
 
 set(recommendationmanager_SRC
@@ -35,6 +40,7 @@ set(recommendationmanager_SRC
   location/LocationManager.cpp
   location/network-engines/NetworkNotifier.cpp
   location/network-engines/dummy/DummyNetworkNotifier.cpp
+  location/network-engines/connman/ConnmanNetworkNotifier.cpp
 
   main.cpp
 )
@@ -50,8 +56,13 @@ qt4_add_dbus_adaptor(
 )
 
 qt4_add_dbus_adaptor(
-  recommendationmanager_SRC location/network-engines/dummy/org.kde.contour.LocationManager.DummyNetworkNotifier.xml
+  recommendationmanager_SRC location/network-engines/dummy/org.kde.LocationManager.DummyNetworkNotifier.xml
   location/network-engines/dummy/DummyNetworkNotifier.h DummyNetworkNotifier
+)
+
+qt4_add_dbus_adaptor(
+  recommendationmanager_SRC location/network-engines/connman/org.kde.LocationManager.ConnmanNetworkNotifier.xml
+  location/network-engines/connman/ConnmanNetworkNotifier.h ConnmanNetworkNotifier
 )
 
 find_file(kext_onto_src kext.trig PATH_SUFFIXES "ontology/kde" PATHS ${CMAKE_INSTALL_PREFIX}/share ENV XDG_DATA_DIRS)
@@ -128,8 +139,22 @@ install(FILES
     ${AUTOSTART_INSTALL_DIR}
     )
 
-install(
-    TARGETS contour ${INSTALL_TARGETS_DEFAULT_ARGS}
+install(TARGETS
+    contour
+    ${INSTALL_TARGETS_DEFAULT_ARGS}
     )
 
+message("AAAAAAAA ${DATA_INSTALL_DIR}")
+
+install(FILES
+    location/network-engines/connman/org.kde.LocationManager.ConnmanWatcher.py
+
+    DESTINATION
+    ${DATA_INSTALL_DIR}/locationmanager/
+
+    PERMISSIONS
+    OWNER_READ OWNER_WRITE OWNER_EXECUTE
+    GROUP_READ GROUP_EXECUTE
+    WORLD_READ WORLD_EXECUTE
+    )
 
