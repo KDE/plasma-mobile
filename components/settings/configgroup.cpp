@@ -97,8 +97,8 @@ void ConfigGroup::setGroup(const QString& groupname)
         return;
     }
     kDebug() << "Setting group... " << groupname;
-    readConfigFile();
     d->group = groupname;
+    readConfigFile();
     emit groupChanged();
     emit keyListChanged();
 }

@@ -33,7 +33,7 @@ ActiveSettings.ConfigGroup {
 
     ActiveSettings.ConfigGroup {
         id: levelOne
-        file: "active-settings-configtestrc"
+        file: levelZero.file
         group: "LevelOne0"
     }
 
@@ -42,7 +42,7 @@ ActiveSettings.ConfigGroup {
         id: nestingHeader
         width: parent.width
         clip: true
-        anchors { top: parent.top; topMargin: 8;}
+        anchors { top: parent.top; topMargin: 24;}
         text: "<h3>Nested Config</h3>"
     }
 
@@ -50,15 +50,15 @@ ActiveSettings.ConfigGroup {
         id: nestingText
         width: parent.width
         clip: true
-        anchors { top: nestingHeader.bottom; topMargin: 8;}
+        anchors { top: nestingHeader.bottom; topMargin: 24;}
     }
 
     ListView {
-        anchors { top: nestingText.bottom; topMargin: 8; }
+        anchors { top: nestingText.bottom; topMargin: 24; }
         id: groupsList
         currentIndex: -1
-        height: 40
-        width: parent.width-200
+        height: 48
+        width: parent.width
         clip: true
         orientation: Qt.Horizontal
         spacing: 4
@@ -69,7 +69,7 @@ ActiveSettings.ConfigGroup {
         id: groupDelegate
         PlasmaComponents.Button {
             width: 100
-            height: 36
+            height: groupsList.height
             checked: levelOne.group == modelData
             text: modelData
             onClicked: levelOne.group = modelData
@@ -77,28 +77,29 @@ ActiveSettings.ConfigGroup {
     }
 
     ListView {
-        anchors { top: groupsList.bottom; topMargin: 8; bottom: parent.bottom}
+        anchors { top: groupsList.bottom; topMargin: 24; bottom: parent.bottom; left: parent.left; leftMargin: 40}
         id: configList
         currentIndex: -1
         //height: 200
-        width: parent.width-200
+        width: parent.width
         clip: true
         spacing: 12
         model: levelOne.keyList
         delegate: configDelegate
     }
+
     Component {
         id: configDelegate
         Item {
-            height: 24
-            width: configList.width
-            Text { text: "<b>" + modelData + "</b>:   "; anchors.right: parent.horizontalCenter }
+            height: txt.height
+            width: configList.width - 300
+            Text { id: txt; text: "<b>" + modelData + "</b>:   "; anchors.right: parent.horizontalCenter }
             Text { text: levelOne.readEntry(modelData, "default value"); anchors.left: parent.horizontalCenter }
         }
     }
 
     function testAll() {
-        var out = " test. ";
+        var out = "<b>Groups in " + file + " [" + group + "]:</b> ";
         out += groupList;
 
         //out += TestHelper.runTest("string", configGroup.readEntry("fakeString").toString(), "Some _fake_ string.");
