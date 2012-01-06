@@ -1,6 +1,6 @@
 // -*- coding: iso-8859-1 -*-
 /*
- *   Copyright 2011 Sebastian Kügler <mart@kde.org>
+ *   Copyright 2011-2012 Sebastian Kügler <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -19,9 +19,6 @@
  */
 
 import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
 import "testhelper.js" as TestHelper
 

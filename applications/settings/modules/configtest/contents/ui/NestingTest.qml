@@ -1,6 +1,6 @@
 // -*- coding: iso-8859-1 -*-
 /*
- *   Copyright 2011 Sebastian Kügler <mart@kde.org>
+ *   Copyright 2012 Sebastian Kügler <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -54,13 +54,36 @@ ActiveSettings.ConfigGroup {
     }
 
     ListView {
-        anchors { top: nestingText.bottom; topMargin: 8; bottom: parent.bottom}
+        anchors { top: nestingText.bottom; topMargin: 8; }
+        id: groupsList
+        currentIndex: -1
+        height: 40
+        width: parent.width-200
+        clip: true
+        orientation: Qt.Horizontal
+        spacing: 4
+        model: groupList
+        delegate: groupDelegate
+    }
+    Component {
+        id: groupDelegate
+        PlasmaComponents.Button {
+            width: 100
+            height: 36
+            checked: levelOne.group == modelData
+            text: modelData
+            onClicked: levelOne.group = modelData
+        }
+    }
+
+    ListView {
+        anchors { top: groupsList.bottom; topMargin: 8; bottom: parent.bottom}
         id: configList
         currentIndex: -1
         //height: 200
         width: parent.width-200
         clip: true
-        spacing: 4
+        spacing: 12
         model: levelOne.keyList
         delegate: configDelegate
     }

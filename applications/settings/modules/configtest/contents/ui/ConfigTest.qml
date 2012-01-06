@@ -45,17 +45,6 @@ Item {
             id: typesComponent
             TypeTest { }
         }
-
-/*
-        PlasmaComponents.TabButton {
-            text: "Config List"
-            onClicked: stack.replace(listComponent);
-        }
-
-        Component {
-            id: listComponent
-            ConfigList {}
-        }*/
     }
     PlasmaComponents.PageStack {
         id: stack
