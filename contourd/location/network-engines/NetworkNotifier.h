@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef NETWORK_NOTIFIER_H_
-#define NETWORK_NOTIFIER_H_
+#ifndef NETWORK_NOTIFIER_H
+#define NETWORK_NOTIFIER_H
 
 #include <QObject>
 
@@ -71,5 +71,5 @@ private:
             Name##StaticInit() { NetworkNotifierLoader::self()->registerNetworkNotifier(#Name, new Name()); } \
     } Name##_static_init;
 
-#endif // NETWORK_NOTIFIER_H_
+#endif // NETWORK_NOTIFIER_H
 

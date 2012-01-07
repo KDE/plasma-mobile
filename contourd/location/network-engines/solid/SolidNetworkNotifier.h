@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef SOLID_NETWORK_NOTIFIER_H_
-#define SOLID_NETWORK_NOTIFIER_H_
+#ifndef SOLID_NETWORK_NOTIFIER_H
+#define SOLID_NETWORK_NOTIFIER_H
 
 #include "../NetworkNotifier.h"
 
@@ -40,5 +40,5 @@ private:
     Private * const d;
 };
 
-#endif // SOLIDNETWORK_NOTIFIER_H_
+#endif // SOLIDNETWORK_NOTIFIER_H
 

@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef CONNMAN_NETWORK_NOTIFIER_H_
-#define CONNMAN_NETWORK_NOTIFIER_H_
+#ifndef DUMMY_NETWORK_NOTIFIER_H
+#define DUMMY_NETWORK_NOTIFIER_H
 
 #include "../NetworkNotifier.h"
 
@@ -44,5 +44,5 @@ private:
     Private * const d;
 };
 
-#endif // CONNMANNETWORK_NOTIFIER_H_
+#endif // DUMMY_NETWORK_NOTIFIER_H
 

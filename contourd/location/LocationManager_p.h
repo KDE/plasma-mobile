@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef LOCATION_MANAGER_P_H_
-#define LOCATION_MANAGER_P_H_
+#ifndef LOCATION_MANAGER_P_H
+#define LOCATION_MANAGER_P_H
 
 #include "LocationManager.h"
 
@@ -72,4 +72,4 @@ public:
 
 } // namespace Contour
 
-#endif // LOCATION_MANAGER_P_H_
+#endif // LOCATION_MANAGER_P_H

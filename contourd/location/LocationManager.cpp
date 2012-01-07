@@ -52,8 +52,8 @@ LocationManager::LocationManager(QObject * parent)
         d->knownLocationInfos[id].networkRoots = d->locationNetworkRoots.readEntry(id, QStringList()).toSet();
     }
 
-    connect(NetworkNotifierLoader::self(), SIGNAL(activeAccessPointChanged(QString, QString)),
-            this, SLOT(setActiveAccessPoint(QString, QString)));
+    connect(NetworkNotifierLoader::self(), SIGNAL(activeAccessPointChanged(QString,QString)),
+            this, SLOT(setActiveAccessPoint(QString,QString)));
 
     NetworkNotifierLoader::self()->init();
 }
@@ -107,7 +107,7 @@ QString LocationManager::currentLocationName() const
 QString LocationManager::setCurrentLocation(const QString & location)
 {
     if (location.isEmpty()) {
-        d->currentLocationId = QString();
+        d->currentLocationId.clear();
         emit currentLocationChanged(d->currentLocationId, d->currentLocationId);
         return d->currentLocationId;
     }
@@ -125,7 +125,7 @@ QString LocationManager::setCurrentLocation(const QString & location)
             d->currentLocationId = location;
 
         } else {
-            d->currentLocationId = QString();
+            d->currentLocationId.clear();
         }
     }
 
