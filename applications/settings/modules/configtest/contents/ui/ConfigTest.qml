@@ -27,6 +27,16 @@ Item {
         anchors { top: parent.top; left: parent.left; right: parent.right; }
 
         PlasmaComponents.TabButton {
+            text: "Browser"
+            onClicked: stack.replace(browserComponent);
+        }
+
+        Component {
+            id: browserComponent
+            ConfigBrowser { }
+        }
+
+        PlasmaComponents.TabButton {
             text: "Nesting"
             onClicked: stack.replace(nestingComponent);
         }
@@ -49,6 +59,6 @@ Item {
     PlasmaComponents.PageStack {
         id: stack
         anchors { top: tabs.bottom; left: parent.left; right: parent.right; bottom: parent.bottom; }
-        Component.onCompleted: replace(nestingComponent);
+        Component.onCompleted: replace(browserComponent);
     }
 }

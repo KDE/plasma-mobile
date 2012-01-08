@@ -136,7 +136,7 @@ Image {
                 Component.onCompleted: {
                     //print(" EINS +++ "  + items.count );
                     //print(" ZWEI +++ "  + settingsModulesItems.count );
-                    print(" Model completed.");
+                    //print(" Model completed.");
                 }
             }
 
