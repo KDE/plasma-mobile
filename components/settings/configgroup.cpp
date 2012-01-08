@@ -37,7 +37,6 @@ public:
     QString file;
     QTimer *synchTimer;
     QString group;
-    //QStringList keys;
 };
 
 
@@ -97,7 +96,6 @@ void ConfigGroup::setGroup(const QString& groupname)
     if (d->group == groupname) {
         return;
     }
-    //kDebug() << "Setting group... " << groupname;
     d->group = groupname;
     readConfigFile();
     emit groupChanged();
@@ -125,24 +123,20 @@ bool ConfigGroup::readConfigFile()
     while (current) {
         parentGroup = dynamic_cast<ConfigGroup*>(current);
         if (parentGroup) {
-            //kDebug() << "Found a ConfigModel!!!!";
             break;
         }
         current = current->parent();
     }
     if (parentGroup) {
         d->configGroup = new KConfigGroup(parentGroup->configGroup(), d->group);
-        //kDebug() << "This is a nested config" << parentGroup->group() << d->group << d->configGroup->keyList();
         return true;
     } else {
-        //kDebug() << "Reading file: " << d->file << d->group;
         if (d->file.isEmpty()) {
             kWarning() << "Could not find KConfig Parent: specify a file or parent to another ConfigGroup";
             return false;
         }
         d->config = KSharedConfig::openConfig(d->file);
         d->configGroup = new KConfigGroup(d->config, d->group);
-        //d->keys = d->configGroup->keyList();
         return true;
     }
 }
@@ -157,7 +151,6 @@ bool ConfigGroup::writeEntry(const QString& key, const QVariant& value)
     //kDebug() << " writing setting: " << key << value;
     d->configGroup->writeEntry(key, value);
     d->synchTimer->start();
-    //d->configGroup->sync();
     return true;
 }
 
@@ -166,7 +159,6 @@ QVariant ConfigGroup::readEntry(const QString& key)
     if (!d->configGroup) {
         return QVariant();
     }
-    //const QVariant value = d->configGroup->readEntry(key, QString("dEfAuLt"));
     const QVariant value = d->configGroup->readEntry(key, QVariant(""));
     //kDebug() << " reading setting: " << key << value;
     return value;
@@ -175,7 +167,7 @@ QVariant ConfigGroup::readEntry(const QString& key)
 void ConfigGroup::sync()
 {
     if (d->configGroup) {
-        kDebug() << "synching config...";
+        //kDebug() << "synching config...";
         d->configGroup->sync();
     }
 }
