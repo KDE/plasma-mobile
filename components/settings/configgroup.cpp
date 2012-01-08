@@ -48,6 +48,7 @@ ConfigGroup::ConfigGroup(QDeclarativeItem* parent)
     setObjectName("ConfigModel");
     d = new ConfigGroupPrivate(this);
     d->config = 0;
+    d->configGroup = 0;
 
     // Delay and compress everything within 5 seconds into one sync
     d->synchTimer = new QTimer(this);
