@@ -41,6 +41,8 @@ set(recommendationmanager_SRC
   location/network-engines/NetworkNotifier.cpp
   location/network-engines/dummy/DummyNetworkNotifier.cpp
   location/network-engines/connman/ConnmanNetworkNotifier.cpp
+  location/network-engines/connman/connman-manager.cpp
+  location/network-engines/connman/connman-service.cpp
 
   main.cpp
 )

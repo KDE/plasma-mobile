@@ -38,6 +38,7 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
     void enable();
+    void propertyChanged(const QString &name, const QDBusVariant &value);
 
 protected:
     void init();

@@ -17,30 +17,28 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "connman-manager.h"
+#include "connman-service.h"
+
 #include "ConnmanNetworkNotifier.h"
 #include "connmannetworknotifieradaptor.h"
 #include <config-features.h>
 
-#include <QProcess>
-#include <QDBusServiceWatcher>
-#include <QDBusConnection>
-
 #include <KDebug>
 
-#define CONNMAN_WATCHER_EXEC DATA_INSTALL_DIR"/locationmanager/org.kde.LocationManager.ConnmanWatcher.py"
-// #define CONNMAN_DBUS_ADDRESS "org.moblin.connman"
-#define CONNMAN_DBUS_ADDRESS "net.connman"
+// #define CONNMAN_DBUS_SERVICE "org.moblin.connman"
+#define CONNMAN_DBUS_SERVICE "net.connman"
 
 REGISTER_NETWORK_NOTIFIER(ConnmanNetworkNotifier)
 
 class ConnmanNetworkNotifier::Private {
 public:
     Private()
-        : watcher(NULL), process(NULL)
+        : iface(0), watcher(0)
     {}
 
+    NetConnmanManagerInterface * iface;
     QDBusServiceWatcher * watcher;
-    QProcess * process;
 };
 
 
@@ -49,18 +47,21 @@ ConnmanNetworkNotifier::ConnmanNetworkNotifier(QObject * parent)
 {
 }
 
+ConnmanNetworkNotifier::~ConnmanNetworkNotifier()
+{
+    delete d;
+}
+
 void ConnmanNetworkNotifier::init()
 {
-    kDebug() << "EXECUTABLE:" << CONNMAN_WATCHER_EXEC;
-
     // Hmh, connman doesn't show up when registered. Lets hope it will be online
     // before the location manager is started
 
-    if (!QDBusConnection::systemBus().interface()->isServiceRegistered(CONNMAN_DBUS_ADDRESS)) {
-        kDebug() << "Watching for" << CONNMAN_DBUS_ADDRESS << "to arrive";
+    if (!QDBusConnection::systemBus().interface()->isServiceRegistered(CONNMAN_DBUS_SERVICE)) {
+        kDebug() << "Watching for" << CONNMAN_DBUS_SERVICE << "to arrive";
 
         d->watcher = new QDBusServiceWatcher(
-                CONNMAN_DBUS_ADDRESS,
+                CONNMAN_DBUS_SERVICE,
                 QDBusConnection::systemBus(),
                 QDBusServiceWatcher::WatchForRegistration |
                     QDBusServiceWatcher::WatchForUnregistration |
@@ -73,7 +74,6 @@ void ConnmanNetworkNotifier::init()
                 this, SLOT(enable()));
     } else {
         enable();
-
     }
 }
 
@@ -85,14 +85,71 @@ void ConnmanNetworkNotifier::enable()
     QDBusConnection::sessionBus().registerObject(
             QLatin1String("/ConnmanInterface"), this);
 
-    d->process = new QProcess(this);
-    d->process->setProcessChannelMode(QProcess::ForwardedChannels);
-    d->process->start(CONNMAN_WATCHER_EXEC);
+    delete d->iface;
+    d->iface = new NetConnmanManagerInterface(CONNMAN_DBUS_SERVICE, QLatin1String("/"), QDBusConnection::systemBus(), this);
+    connect(d->iface, SIGNAL(PropertyChanged(QString,QDBusVariant)), SLOT(propertyChanged(QString,QDBusVariant)));
+
+    QDBusReply<QVariantMap> reply = d->iface->GetProperties();
+    if (!reply.isValid()) {
+        return;
+    }
+    QVariantMap properties = reply.value();
+    //kDebug() << "Initial state: " << properties["State"].toString();
+    propertyChanged("State", QDBusVariant(properties["State"]));
 }
 
-ConnmanNetworkNotifier::~ConnmanNetworkNotifier()
+// monitor when connman connects to a network, or disconnects from it.
+// On those events, this method passes the info to the locationmanager daemon
+// via the dummy network notifier.
+void ConnmanNetworkNotifier::propertyChanged(const QString &name, const QDBusVariant &value)
 {
-    delete d;
+    //kDebug() << name << ": " << value.variant().toString();
+    if (name != QLatin1String("State")) {
+        return;
+    }
+
+    // we are offline
+    if (value.variant().toString() != QLatin1String("online")) {
+        kDebug() << "OFFLINE";
+        setWifiName("");
+        return;
+    }
+
+    QDBusReply<QVariantMap> reply = d->iface->GetProperties();
+    if (!reply.isValid()) {
+        kDebug() << reply.error().message();
+        return;
+    }
+
+    QVariantMap properties = reply.value();
+    //kDebug() << "got properties:" << properties.count();
+    //kDebug() << "Services ==" << properties["Services"];
+    QList<QDBusObjectPath> services = qdbus_cast<QList<QDBusObjectPath> >(properties["Services"]);
+    //kDebug() << services.count() << "services";
+
+    // searching for active wifi info
+    foreach (const QDBusObjectPath &s, services) {
+        //kDebug() << "testing service" << s.path();
+        NetConnmanServiceInterface service(CONNMAN_DBUS_SERVICE, s.path(), QDBusConnection::systemBus());
+
+        if (!service.isValid()) {
+            continue;
+        }
+        //kDebug() << "testing service" << s.path() << "getting properties";
+
+        QDBusReply<QVariantMap> reply = service.GetProperties();
+        if (!reply.isValid()) {
+            continue;
+        }
+        //kDebug() << "testing service" << s.path() << "testing state";
+
+        QVariantMap serviceProperties = reply.value();
+        if (serviceProperties["State"].toString() == QLatin1String("ready")) {
+            kDebug() << "CONNECTED TO:" << serviceProperties["Name"];
+            setWifiName(serviceProperties["Name"].toString());
+            return;
+        }
+    }
 }
 
 void ConnmanNetworkNotifier::setWifiName(const QString & accessPoint)
