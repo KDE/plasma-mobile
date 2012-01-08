@@ -97,7 +97,7 @@ void ConfigGroup::setGroup(const QString& groupname)
     if (d->group == groupname) {
         return;
     }
-    kDebug() << "Setting group... " << groupname;
+    //kDebug() << "Setting group... " << groupname;
     d->group = groupname;
     readConfigFile();
     emit groupChanged();
@@ -119,17 +119,27 @@ QStringList ConfigGroup::groupList() const
 
 bool ConfigGroup::readConfigFile()
 {
-    if (d->file.isEmpty()) {
-        return false;
+    // Find parent ConfigGroup
+    ConfigGroup* parentGroup = 0;
+    QObject* current = parent();
+    while (current) {
+        parentGroup = dynamic_cast<ConfigGroup*>(current);
+        if (parentGroup) {
+            //kDebug() << "Found a ConfigModel!!!!";
+            break;
+        }
+        current = current->parent();
     }
-    //d->keys.clear();
-    ConfigGroup* parentGroup = dynamic_cast<ConfigGroup*>(parent());
     if (parentGroup) {
         d->configGroup = new KConfigGroup(parentGroup->configGroup(), d->group);
-        kDebug() << "XXXXX This is a nested config" << parentGroup->group() << d->group << d->configGroup->keyList();
+        //kDebug() << "This is a nested config" << parentGroup->group() << d->group << d->configGroup->keyList();
         return true;
     } else {
-        kDebug() << "Reading file: " << d->file << d->group;
+        //kDebug() << "Reading file: " << d->file << d->group;
+        if (d->file.isEmpty()) {
+            kWarning() << "Could not find KConfig Parent: specify a file or parent to another ConfigGroup";
+            return false;
+        }
         d->config = KSharedConfig::openConfig(d->file);
         d->configGroup = new KConfigGroup(d->config, d->group);
         //d->keys = d->configGroup->keyList();
