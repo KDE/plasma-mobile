@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Device Capabilities
 Name[nl]=Mogelijkheden van het apparaat
+Name[pl]=Możliwości urządzenia
 Name[pt]=Capacidades do Dispositivo
 Name[pt_BR]=Capacidades do dispositivo
 Name[sv]=Enhetsfunktioner
@@ -8,6 +9,7 @@ Name[uk]=Можливості пристрою
 Name[x-test]=xxDevice Capabilitiesxx
 Comment=Provides information and services for device-specific aspects
 Comment[nl]=Levert informatie en services voor apparaatspecifieke aspecten
+Comment[pl]=Dostarcza informacji i usług dla aspektów charakterystycznych dla urządzenia
 Comment[pt]=Fornece informações e serviços sobre aspectos específicos dos dispositivos
 Comment[pt_BR]=Fornece informações e serviços sobre aspectos específicos dos dispositivos
 Comment[sv]=Tillhandahåller information om och tjänster för enhetsspecifika funktioner

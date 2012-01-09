@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=Time and Date
 Name[de]=Zeit und Datum
+Name[es]=Fecha y hora
 Name[ga]=Am agus Dáta
 Name[nl]=Datum en tijd
+Name[pl]=Czas i data
 Name[pt]=Hora e Data
 Name[pt_BR]=Data e hora
 Name[sv]=Tid och datum
@@ -11,6 +13,7 @@ Name[uk]=Час і дата
 Name[x-test]=xxTime and Datexx
 Comment=Settings for timezone and date display
 Comment[nl]=Instellingen voor weergave van tijdzone en datum
+Comment[pl]=Ustawienie dal strefy czasowej i wyświetlanie daty
 Comment[pt]=Configuração da visualização dos fusos-horários e datas
 Comment[pt_BR]=Configurações de exibição de fuso horário e data
 Comment[sv]=Inställningar av tidszon och datumvisning
