@@ -44,7 +44,7 @@ ImageViewer::ImageViewer()
     // make the resulting url known to the webbrowser component
     // as startupArguments property
     m_dirModel = new DirModel(this);
-    if (startupArguments().count())
+    if (startupArguments().count()) {
         KUrl uri(startupArguments()[0]);
         QVariant a = QVariant(QStringList(uri.prettyUrl()));
         if (!uri.prettyUrl().isEmpty()) {
