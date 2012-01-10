@@ -19,61 +19,47 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include "imageviewer.h"
+#include "dirmodel.h"
+#include "kdeclarativeview.h"
+
+#include <QDeclarativeContext>
+#include <QFileInfo>
+
 #include <KAction>
+#include <KCmdLineArgs>
+#include <KConfigGroup>
 #include <KIcon>
 #include <KStandardAction>
 
 #include <Plasma/Theme>
 
-#include "imageviewer.h"
 
-ImageViewer::ImageViewer(const QString &url)
-    : KMainWindow()
+ImageViewer::ImageViewer()
+    : KDeclarativeMainWindow()
 {
-    setAcceptDrops(true);
-    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
-    const QString themeName = cg.readEntry("name", "air-mobile");
-    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
-    Plasma::Theme::defaultTheme()->setThemeName(themeName);
-    addAction(KStandardAction::close(this, SLOT(close()), this));
-    addAction(KStandardAction::quit(this, SLOT(close()), this));
-    m_widget = new AppView(url, this);
+    declarativeView()->setPackageName("org.kde.active.imageviewer");
 
-    restoreWindowSize(config("Window"));
-    setCentralWidget(m_widget);
-
-    connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
+    // Filter the supplied argument through KUriFilter and then
+    // make the resulting url known to the webbrowser component
+    // as startupArguments property
+    m_dirModel = new DirModel(this);
+    if (startupArguments().count()) {
+        KUrl uri(startupArguments()[0]);
+        QVariant a = QVariant(QStringList(uri.prettyUrl()));
+        if (!uri.prettyUrl().isEmpty()) {
+            if (!uri.isLocalFile() || !QFileInfo(uri.toLocalFile()).isDir()) {
+                uri = uri.upUrl();
+            }
+            m_dirModel->setUrl(uri.prettyUrl());
+        }
+    }
+    declarativeView()->rootContext()->setContextProperty("dirModel", m_dirModel);
 }
 
 ImageViewer::~ImageViewer()
 {
-    saveWindowSize(config("Window"));
 }
 
-KConfigGroup ImageViewer::config(const QString &group)
-{
-    return KConfigGroup(KSharedConfig::openConfig("imageviewerrc"), group);
-}
-
-QString ImageViewer::name()
-{
-    return "Active image viewer";
-    //return m_widget->options()->name;
-}
-
-QIcon ImageViewer::icon()
-{
-    return KIcon("gwenview");
-}
-
-void ImageViewer::setUseGL(const bool on)
-{
-    m_widget->setUseGL(on);
-}
-
-bool ImageViewer::useGL() const
-{
-    return m_widget->useGL();
-}
 
 #include "imageviewer.moc"

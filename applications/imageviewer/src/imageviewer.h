@@ -23,25 +23,19 @@
 #ifndef IMAGEVIEWER_H
 #define IMAGEVIEWER_H
 
-#include "view.h"
-//#include <kxmlguiwindow.h>
+#include "kdeclarativemainwindow.h"
 
+class DirModel;
 
-class ImageViewer : public KMainWindow
+class ImageViewer : public KDeclarativeMainWindow
 {
     Q_OBJECT
 public:
-    ImageViewer(const QString &url);
+    ImageViewer();
     virtual ~ImageViewer();
-    QString name();
-    QIcon icon();
-    KConfigGroup config(const QString &group = "Default");
-
-    void setUseGL(const bool on);
-    bool useGL() const;
 
 private:
-    AppView *m_widget;
+    DirModel *m_dirModel;
 };
 
 #endif // IMAGEVIEWER_H

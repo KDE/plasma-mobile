@@ -26,6 +26,7 @@
 #include <KDebug>
 #include <KDE/KLocale>
 #include <KToolBar>
+#include <KConfigGroup>
 
 // Own
 #include "imageviewer.h"
@@ -52,22 +53,9 @@ int main(int argc, char **argv)
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    bool useGL = args->isSet("opengl");
-
-    if (!useGL) {
-        //use plasmarc to share this with plasma-windowed
-        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
-        useGL = cg.readEntry("UseOpenGl", true);
-    }
-
     //kDebug() << "ARGS:" << args << args->count();
-    QString url;
-    if (args->count() > 0) {
-        url = args->arg(0);
-    }
 
-    ImageViewer *mainWindow = new ImageViewer(url);
-    mainWindow->setUseGL(useGL);
+    ImageViewer *mainWindow = new ImageViewer();
     mainWindow->show();
     args->clear();
     return app.exec();

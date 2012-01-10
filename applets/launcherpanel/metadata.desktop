@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Launcher panel
+Name[es]=Panel de lanzamiento
 Name[et]=Käivitamispaneel
 Name[fr]=Tableau de bord de lancement
 Name[km]=កម្មវិធី​បើក​ដំណើរការបន្ទះ
@@ -12,6 +13,7 @@ Name[sv]=Startpanel
 Name[uk]=Панель запуску
 Name[x-test]=xxLauncher panelxx
 Comment=Panel with some launcher icons
+Comment[es]=Panel con algunos iconos de lanzamiento
 Comment[et]=Paneel mõningate käivitamisikoonidega
 Comment[fr]=Tableau de bord comportant quelques icônes de lancement
 Comment[km]=បន្ទះ​ដែល​មាន​រូប​ដំណាង​កម្មវិធី​បើក​ដំណើរការ​

@@ -1,7 +1,9 @@
 [Desktop Entry]
 Name=Power Button
 Name[de]=Netzschalter
+Name[es]=Botón de encendido
 Name[nl]=Aan/Uit-knop
+Name[pl]=Przycisk zasilania
 Name[pt]=Botão de Energia
 Name[pt_BR]=Botão de energia
 Name[sv]=Strömknapp
@@ -9,7 +11,9 @@ Name[ug]=توك مەنبە توپچىسى
 Name[uk]=Кнопка живлення
 Name[x-test]=xxPower Buttonxx
 Comment=Suspends the device
+Comment[es]=Suspende el dispositivo
 Comment[nl]=Apparaat onderbreken
+Comment[pl]=Wstrzymuje urządzenie
 Comment[pt]=Suspende o dispositivo
 Comment[pt_BR]=Suspende o dispositivo
 Comment[sv]=Placerar enheten i viloläge
@@ -17,6 +21,7 @@ Comment[uk]=Призупиняє роботу пристрою
 Comment[x-test]=xxSuspends the devicexx
 Encoding=UTF-8
 Keywords=Power Management, Battery, System, Energy
+Keywords[es]=Gestión de energía, Batería, Sistema, Energía
 Keywords[et]=Toitehaldus, aku, süsteem, energia
 Keywords[fr]=Gestion de l'alimentation, batterie, système, énergie
 Keywords[km]=ការ​គ្រប់គ្រង​ថាមពល ថ្ម ប្រព័ន្ធ កម្លាំង
