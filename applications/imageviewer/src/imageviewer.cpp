@@ -43,16 +43,17 @@ ImageViewer::ImageViewer()
     // Filter the supplied argument through KUriFilter and then
     // make the resulting url known to the webbrowser component
     // as startupArguments property
-    KUrl uri(startupArguments()[0]);
-    QVariant a = QVariant(QStringList(uri.prettyUrl()));
     m_dirModel = new DirModel(this);
-    if (!uri.prettyUrl().isEmpty()) {
-        if (!uri.isLocalFile() || !QFileInfo(uri.toLocalFile()).isDir()) {
-            uri = uri.upUrl();
+    if (startupArguments().count())
+        KUrl uri(startupArguments()[0]);
+        QVariant a = QVariant(QStringList(uri.prettyUrl()));
+        if (!uri.prettyUrl().isEmpty()) {
+            if (!uri.isLocalFile() || !QFileInfo(uri.toLocalFile()).isDir()) {
+                uri = uri.upUrl();
+            }
+            m_dirModel->setUrl(uri.prettyUrl());
         }
-        m_dirModel->setUrl(uri.prettyUrl());
     }
-
     declarativeView()->rootContext()->setContextProperty("dirModel", m_dirModel);
 }
 
