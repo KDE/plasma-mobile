@@ -114,9 +114,6 @@ ActiveSettings.ConfigGroup {
             if (component.status == Component.Ready) {
                 print(" ++++++++++ ... Creating new group [" + group + "][" + modelData + "]");
                 var cfgItem = component.createObject(groupListView, { "group": modelData });
-                //cfgItem.group = modelData;
-                //cftItem.height =
-                //cfgItem.anchors.fill = parent;
             }
         }
         
