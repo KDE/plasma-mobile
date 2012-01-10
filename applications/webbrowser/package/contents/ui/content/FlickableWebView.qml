@@ -41,6 +41,7 @@
 
 import QtQuick 1.0
 import org.kde.kdewebkit 0.1
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 
 Flickable {
@@ -120,7 +121,11 @@ Flickable {
         smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
         focus: true
 
-        onAlert: console.log(message)
+        onAlert: {
+            console.log(message);
+            alertDialog.text = message;
+            alertDialog.open();
+        }
 
         function doZoom(zoom,centerX,centerY)
         {
@@ -240,6 +245,20 @@ Flickable {
         }
         onZoomTo: doZoom(zoom,centerX,centerY)
     }
+
+    PlasmaComponents.CommonDialog {
+        id: alertDialog
+        titleText: i18n("JavaScript Alert")
+
+        property alias text: alertLabel.text
+
+        content: PlasmaComponents.Label {
+            id: alertLabel
+            anchors.fill: alertDialog
+            text: "Here goes the alert message."
+        }
+    }
+
     Component.onCompleted: {
         back.enabled = false
         forward.enabled = false
