@@ -143,6 +143,30 @@ Flickable {
             }
         }
 
+        function handleLinkPressed(linkRect)
+        {
+            print("link pressed: " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
+            highlightRect.x = linkRect.x;
+            highlightRect.y = linkRect.y;
+            highlightRect.width = linkRect.width;
+            highlightRect.height = linkRect.height;
+        }
+
+        function handleLinkPressAndHold(linkRect)
+        {
+            print("... and hold: " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
+            highlightRect.x = linkRect.x;
+            highlightRect.y = linkRect.y;
+            highlightRect.width = linkRect.width;
+            highlightRect.height = linkRect.height;
+        }
+
+        Rectangle {
+            id: highlightRect
+            color: "orange"
+            opacity: 0.5
+        }
+        
         Keys.onLeftPressed: webView.contentsScale -= 0.1
         Keys.onRightPressed: webView.contentsScale += 0.1
 
@@ -245,18 +269,21 @@ Flickable {
             }
         }
         onZoomTo: doZoom(zoom,centerX,centerY)
+        onLinkPressed: handleLinkPressed(linkRect)
+        onLinkPressAndHold: handleLinkPressAndHold(linkRect)
     }
 
     PlasmaComponents.CommonDialog {
         id: alertDialog
         titleText: i18n("JavaScript Alert")
+        buttonTexts: [i18n("Close")]
+        onButtonClicked: close()
 
         property alias text: alertLabel.text
 
         content: PlasmaComponents.Label {
+            anchors.margins: 12
             id: alertLabel
-            anchors.fill: alertDialog
-            text: "Here goes the alert message."
         }
     }
 

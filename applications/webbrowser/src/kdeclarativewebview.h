@@ -95,6 +95,8 @@ protected:
 Q_SIGNALS:
     void doubleClick(int clickX, int clickY);
     void flickingEnabledChanged();
+    void linkPressed(const QRect &linkRect);
+    void linkPressAndHold(const QRect &linkRect);
 
 private:
     KDeclarativeWebView *parent;
@@ -247,6 +249,8 @@ Q_SIGNALS:
     void loadFailed();
 
     void doubleClick(int clickX, int clickY);
+    void linkPressed(const QRect &linkRect);
+    void linkPressAndHold(const QRect &linkRect);
 
     void zoomTo(qreal zoom, int centerX, int centerY);
 
