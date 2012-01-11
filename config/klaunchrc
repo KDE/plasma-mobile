@@ -1,0 +1,6 @@
+[BusyCursorSettings]
+Blinking=false
+Bouncing=false
+
+[FeedbackStyle]
+BusyCursor=false
