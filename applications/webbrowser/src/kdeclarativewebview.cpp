@@ -147,6 +147,8 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
         kDebug() << "XXXXXXXXXX link pressed. .. ";
         emit linkPressed(hit.linkUrl(), hit.linkElement().geometry());
     }
+    QMouseEvent* me = new QMouseEvent(QEvent::MouseButtonDblClick, (event->pos() / parent->contentsScale()).toPoint(), event->button(), event->buttons(), 0);
+    emit click(event->pos().x(), event->pos().y());
     setFocus();
 }
 
@@ -356,6 +358,7 @@ void KDeclarativeWebView::init()
 #endif
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(flickingEnabledChanged()), this, SLOT(updateFlickingEnabled()));
+    connect(d->view, SIGNAL(click(int, int)), this, SIGNAL(click(int, int)));
     connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
     connect(d->view, SIGNAL(linkPressed(const QUrl&, const QRect&)),
             this, SIGNAL(linkPressed(const QUrl&, const QRect&)));

@@ -93,6 +93,7 @@ protected:
     void setFlickingEnabled(bool enabled);
 
 Q_SIGNALS:
+    void click(int clickX, int clickY);
     void doubleClick(int clickX, int clickY);
     void flickingEnabledChanged();
     void linkPressed(const QUrl&, const QRect &linkRect);
@@ -248,6 +249,7 @@ Q_SIGNALS:
     void loadFinished();
     void loadFailed();
 
+    void click(int clickX, int clickY);
     void doubleClick(int clickX, int clickY);
     void linkPressed(const QUrl &linkUrl, const QRect &linkRect);
     void linkPressAndHold(const QUrl &linkUrl, const QRect &linkRect);

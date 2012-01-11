@@ -42,6 +42,7 @@
 import QtQuick 1.0
 import org.kde.kdewebkit 0.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import "LinkPopup.js" as LinkPopupHelper
 
 
 Flickable {
@@ -159,6 +160,10 @@ Flickable {
             highlightRect.y = linkRect.y;
             highlightRect.width = linkRect.width;
             highlightRect.height = linkRect.height;
+            LinkPopupHelper.placeLinkPopup(linkRect);
+            linkPopup.url = linkUrl
+            linkPopup.state  = "expanded";
+
         }
 
         Rectangle {
@@ -166,7 +171,9 @@ Flickable {
             color: "orange"
             opacity: 0.5
         }
-        
+
+        LinkPopup { id: linkPopup; iconSize: 32 }
+
         Keys.onLeftPressed: webView.contentsScale -= 0.1
         Keys.onRightPressed: webView.contentsScale += 0.1
 
@@ -269,6 +276,7 @@ Flickable {
             }
         }
         onZoomTo: doZoom(zoom,centerX,centerY)
+        onClick: linkPopup.state = "collapsed"
         onLinkPressed: handleLinkPressed(linkUrl, linkRect)
         onLinkPressAndHold: handleLinkPressAndHold(linkUrl, linkRect)
     }
