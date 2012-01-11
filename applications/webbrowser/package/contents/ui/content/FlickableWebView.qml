@@ -143,18 +143,18 @@ Flickable {
             }
         }
 
-        function handleLinkPressed(linkRect)
+        function handleLinkPressed(linkUrl, linkRect)
         {
-            print("link pressed: " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
+            print("link pressed: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
             highlightRect.x = linkRect.x;
             highlightRect.y = linkRect.y;
             highlightRect.width = linkRect.width;
             highlightRect.height = linkRect.height;
         }
 
-        function handleLinkPressAndHold(linkRect)
+        function handleLinkPressAndHold(linkUrl, linkRect)
         {
-            print("... and hold: " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
+            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
             highlightRect.x = linkRect.x;
             highlightRect.y = linkRect.y;
             highlightRect.width = linkRect.width;
@@ -269,8 +269,8 @@ Flickable {
             }
         }
         onZoomTo: doZoom(zoom,centerX,centerY)
-        onLinkPressed: handleLinkPressed(linkRect)
-        onLinkPressAndHold: handleLinkPressAndHold(linkRect)
+        onLinkPressed: handleLinkPressed(linkUrl, linkRect)
+        onLinkPressAndHold: handleLinkPressAndHold(linkUrl, linkRect)
     }
 
     PlasmaComponents.CommonDialog {

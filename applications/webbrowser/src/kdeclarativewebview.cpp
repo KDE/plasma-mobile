@@ -145,7 +145,7 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
     kDebug() << " - - >  Hit element: " << hit.element().tagName() << hit.linkElement().geometry();
     if (!hit.linkElement().geometry().isNull()) {
         kDebug() << "XXXXXXXXXX link pressed. .. ";
-        emit linkPressed(hit.linkElement().geometry());
+        emit linkPressed(hit.linkUrl(), hit.linkElement().geometry());
     }
     setFocus();
 }
@@ -175,7 +175,7 @@ void GraphicsWebView::timerEvent(QTimerEvent* event)
         QWebHitTestResult hit = page()->mainFrame()->hitTestContent(pressPoint.toPoint());
         if (!hit.linkElement().geometry().isNull()) {
             kDebug() << "XXXXXXXXXX link pressed AND HOLD. .. ";
-            emit linkPressAndHold(hit.linkElement().geometry());
+            emit linkPressAndHold(hit.linkUrl(), hit.linkElement().geometry());
         }
     }
 }
@@ -357,8 +357,10 @@ void KDeclarativeWebView::init()
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(flickingEnabledChanged()), this, SLOT(updateFlickingEnabled()));
     connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
-    connect(d->view, SIGNAL(linkPressed(const QRect&)), this, SIGNAL(linkPressed(const QRect&)));
-    connect(d->view, SIGNAL(linkPressAndHold(const QRect&)), this, SIGNAL(linkPressAndHold(const QRect&)));
+    connect(d->view, SIGNAL(linkPressed(const QUrl&, const QRect&)),
+            this, SIGNAL(linkPressed(const QUrl&, const QRect&)));
+    connect(d->view, SIGNAL(linkPressAndHold(const QUrl&, const QRect&)),
+            this, SIGNAL(linkPressAndHold(const QUrl&, const QRect&)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
 
     connect(access, SIGNAL(finished(QNetworkReply*)), page(), SLOT(handleNetworkErrors(QNetworkReply*)));
