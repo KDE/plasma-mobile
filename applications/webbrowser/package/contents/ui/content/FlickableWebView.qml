@@ -156,13 +156,10 @@ Flickable {
         function handleLinkPressAndHold(linkUrl, linkRect)
         {
             print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
-            highlightRect.x = linkRect.x;
-            highlightRect.y = linkRect.y;
-            highlightRect.width = linkRect.width;
-            highlightRect.height = linkRect.height;
-            //var component = Qt.createComponent("LinkPopup.qml");
-            //if (component.status == Component.Ready) {
-            //    var linkPopup= component.createObject(webView);
+//             highlightRect.x = linkRect.x;
+//             highlightRect.y = linkRect.y;
+//             highlightRect.width = linkRect.width;
+//             highlightRect.height = linkRect.height;
             linkPopupLoader.source = "LinkPopup.qml";
             var linkPopup = linkPopupLoader.item;
             linkPopup.url = linkUrl
@@ -172,11 +169,6 @@ Flickable {
             linkPopup.linkRect.height = linkRect.height
             linkPopup.state  = "expanded";
             print(" type: " + typeof(linkRect));
-            //linkPopup.x = linkRect.x;
-            //linkPopup.y = linkRect.y;
-            //LinkPopupHelper.placeLinkPopup(linkRect);
-            //}
-
         }
 
         Rectangle {
@@ -289,7 +281,9 @@ Flickable {
             }
         }
         onZoomTo: doZoom(zoom,centerX,centerY)
-        onClick: linkPopupLoader.item.state = "collapsed"
+        onClick: {
+            if (linkPopupLoader.status == Loader.Ready) linkPopupLoader.item.state = "collapsed";
+        }
         onLinkPressed: handleLinkPressed(linkUrl, linkRect)
         onLinkPressAndHold: handleLinkPressAndHold(linkUrl, linkRect)
     }
