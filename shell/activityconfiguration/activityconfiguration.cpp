@@ -52,7 +52,6 @@
 
 ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
     : Plasma::DeclarativeWidget(parent),
-      m_containment(0),
       m_mainWidget(0),
       m_model(0),
       m_wallpaperIndex(-1),
@@ -143,7 +142,7 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
     }
 
     if (m_containment) {
-        m_activityName = m_containment->activity();
+        m_activityName = m_containment.data()->activity();
         emit activityNameChanged();
     }
 
@@ -157,10 +156,10 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
     }
 
     ensureContainmentHasWallpaperPlugin();
-    m_model->setTargetSizeHint(m_containment->size().toSize());
+    m_model->setTargetSizeHint(m_containment.data()->size().toSize());
 
     // save the wallpaper config so we can find the proper index later in modelCountChanged
-    Plasma::Wallpaper *wp = m_containment->wallpaper();
+    Plasma::Wallpaper *wp = m_containment.data()->wallpaper();
     if (wp) {
         // shoulw always be true:
         // can only be false on a broken system with no wallpapers able to show images
@@ -173,13 +172,13 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
 
 KConfigGroup ActivityConfiguration::wallpaperConfig()
 {
-    if (!m_containment || !m_containment->wallpaper()) {
+    if (!m_containment || !m_containment.data()->wallpaper()) {
         return KConfigGroup();
     }
 
-    KConfigGroup wpConfig = m_containment->config();
+    KConfigGroup wpConfig = m_containment.data()->config();
     wpConfig = KConfigGroup(&wpConfig, "Wallpaper");
-    wpConfig = KConfigGroup(&wpConfig, m_containment->wallpaper()->pluginName());
+    wpConfig = KConfigGroup(&wpConfig, m_containment.data()->wallpaper()->pluginName());
     return wpConfig;
 }
 
@@ -200,7 +199,7 @@ void ActivityConfiguration::modelCountChanged()
 
 Plasma::Containment *ActivityConfiguration::containment() const
 {
-    return m_containment;
+    return m_containment.data();
 }
 
 void ActivityConfiguration::setActivityName(const QString &name)
@@ -217,7 +216,7 @@ void ActivityConfiguration::setActivityName(const QString &name)
         return;
     }
 
-    m_containment->setActivity(name);
+    m_containment.data()->setActivity(name);
     emit activityNameChanged();
 }
 
@@ -232,7 +231,7 @@ QString ActivityConfiguration::activityId() const
         return QString();
     }
 
-    return m_containment->context()->currentActivityId();
+    return m_containment.data()->context()->currentActivityId();
 }
 
 bool ActivityConfiguration::isActivityNameConfigurable() const
@@ -282,20 +281,20 @@ void ActivityConfiguration::setWallpaperIndex(const int index)
 
     kDebug()<<"Setting new wallpaper path:"<<wallpaper;
 
-    if (!m_containment->wallpaper()) {
+    if (!m_containment.data()->wallpaper()) {
         const QString mimetype = KMimeType::findByUrl(wallpaper).data()->name();
         ensureContainmentHasWallpaperPlugin(mimetype);
     }
 
-    if (m_containment->wallpaper()) {
-        m_containment->wallpaper()->setUrls(KUrl::List() << wallpaper);
+    if (m_containment.data()->wallpaper()) {
+        m_containment.data()->wallpaper()->setUrls(KUrl::List() << wallpaper);
         KConfigGroup wpConfig = wallpaperConfig();
         if (wpConfig.isValid()) {
             wpConfig.writeEntry("wallpaper", wallpaper);
-            //m_containment->wallpaper()->save(wpConfig);
+            //m_containment.data()->wallpaper()->save(wpConfig);
         }
 
-        emit containmentWallpaperChanged(m_containment);
+        emit containmentWallpaperChanged(m_containment.data());
     }
 
     emit wallpaperIndexChanged();
@@ -322,8 +321,8 @@ QString ActivityConfiguration::bestWallpaperPluginAvailable(const QString &mimet
 
 void ActivityConfiguration::ensureContainmentHasWallpaperPlugin(const QString &mimetype)
 {
-    if (m_containment && (!m_containment->wallpaper() || !m_containment->wallpaper()->supportsMimetype(mimetype))) {
-        m_containment->setWallpaper(bestWallpaperPluginAvailable());
+    if (m_containment && (!m_containment.data()->wallpaper() || !m_containment.data()->wallpaper()->supportsMimetype(mimetype))) {
+        m_containment.data()->setWallpaper(bestWallpaperPluginAvailable());
     }
 }
 

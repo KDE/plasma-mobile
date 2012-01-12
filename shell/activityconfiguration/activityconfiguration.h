@@ -91,7 +91,7 @@ private Q_SLOTS:
     void doExit();
 
 private:
-    Plasma::Containment *m_containment;
+    QWeakPointer<Plasma::Containment> m_containment;
     QDeclarativeItem *m_mainWidget;
     BackgroundListModel *m_model;
     KActivities::Controller *m_activityController;
