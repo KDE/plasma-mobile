@@ -160,9 +160,22 @@ Flickable {
             highlightRect.y = linkRect.y;
             highlightRect.width = linkRect.width;
             highlightRect.height = linkRect.height;
-            LinkPopupHelper.placeLinkPopup(linkRect);
+            //var component = Qt.createComponent("LinkPopup.qml");
+            //if (component.status == Component.Ready) {
+            //    var linkPopup= component.createObject(webView);
+            linkPopupLoader.source = "LinkPopup.qml";
+            var linkPopup = linkPopupLoader.item;
             linkPopup.url = linkUrl
+            linkPopup.linkRect.x = linkRect.x
+            linkPopup.linkRect.y = linkRect.y
+            linkPopup.linkRect.width = linkRect.width
+            linkPopup.linkRect.height = linkRect.height
             linkPopup.state  = "expanded";
+            print(" type: " + typeof(linkRect));
+            //linkPopup.x = linkRect.x;
+            //linkPopup.y = linkRect.y;
+            //LinkPopupHelper.placeLinkPopup(linkRect);
+            //}
 
         }
 
@@ -172,7 +185,7 @@ Flickable {
             opacity: 0.5
         }
 
-        LinkPopup { id: linkPopup; iconSize: 32 }
+        Loader { id: linkPopupLoader }
 
         Keys.onLeftPressed: webView.contentsScale -= 0.1
         Keys.onRightPressed: webView.contentsScale += 0.1
@@ -276,7 +289,7 @@ Flickable {
             }
         }
         onZoomTo: doZoom(zoom,centerX,centerY)
-        onClick: linkPopup.state = "collapsed"
+        onClick: linkPopupLoader.item.state = "collapsed"
         onLinkPressed: handleLinkPressed(linkUrl, linkRect)
         onLinkPressAndHold: handleLinkPressAndHold(linkUrl, linkRect)
     }

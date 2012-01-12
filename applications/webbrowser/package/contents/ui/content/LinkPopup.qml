@@ -26,13 +26,14 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 PlasmaCore.FrameSvgItem {
     id: linkPopup
     objectName: "linkPopup"
-    property int iconSize: 48;
+    property Item linkRect: Item {}
+    property int iconSize: 32
     property int space: 12
     property string url
 
     imagePath: "dialogs/background"
     //width: (iconSize*2) + iconSize
-    width: space*20
+    width: space*30
     height: space*10
     //height: iconSize*2
     //width: childrenRect.width
@@ -45,9 +46,9 @@ PlasmaCore.FrameSvgItem {
     // state controlled externally
     state: "collapsed"
 
-    Column {
+    Item {
         id: buttonRow
-        spacing: space
+        //spacing: space
         //anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter; margins: 8; }
         anchors.fill: parent
         anchors.margins: space*2
@@ -57,6 +58,7 @@ PlasmaCore.FrameSvgItem {
             icon: QIcon("edit-paste")
             width: linkPopup.iconSize
             height: linkPopup.iconSize
+            anchors { top: parent.top; left: parent.left; }
             //enabled: textInput.canPaste
             MouseArea {
                 anchors.fill: parent;
@@ -79,6 +81,7 @@ PlasmaCore.FrameSvgItem {
             icon: QIcon("edit-copy")
             width: linkPopup.iconSize
             height: linkPopup.iconSize
+            anchors { top: pasteIcon.bottom; left: parent.left; topMargin: space; }
             //enabled: textInput.selectedText != ""
             MouseArea {
                 anchors.fill: parent;
@@ -90,6 +93,12 @@ PlasmaCore.FrameSvgItem {
                                                 from: 0.9; to: 1.0;
                                                 duration: 175; easing.type: Easing.OutExpo; }
             }
+        }
+        PlasmaComponents.Label {
+            id: copyLabel
+            anchors { verticalCenter: copyIcon.verticalCenter; left: copyIcon.right; right: parent.right; leftMargin: space }
+            text: i18n("Copy link");
+            elide: Text.ElideMiddle
         }
     }
     states: [
@@ -109,6 +118,9 @@ PlasmaCore.FrameSvgItem {
         Transition {
             from: "collapsed"; to: "expanded"
             ParallelAnimation {
+                ScriptAction {
+                    script: placePopup();
+                }
                 PropertyAnimation { properties: "opacity"; duration: 175; easing.type: Easing.InExpo; }
                 PropertyAnimation { properties: "scale"; duration: 175; easing.type: Easing.InExpo; }
             }
@@ -121,4 +133,30 @@ PlasmaCore.FrameSvgItem {
             }
         }
     ]
+
+    function placePopup () {
+        var rootItem = parent;
+        while (rootItem.parent) {
+            rootItem = rootItem.parent;
+        }
+        var mouse = linkRect;
+        var distanceToTop = webView.mapToItem(rootItem, mouse.x, mouse.y);
+        //var distanceToTop = mouse;
+        print( "   distanceToTop: " + distanceToTop.x);
+        print( " mouse: x: " + mouse.x + " y: " + mouse.y);
+        if (distanceToTop.x < linkPopup.width/2) {
+            print(" hitting the left edge " + distanceToTop.x);
+            //linkPopup.x = mouse.x
+
+        } else {
+            linkPopup.x = mouse.x-(linkPopup.width/2)
+        }
+        if (distanceToTop.y > linkPopup.height + header.height) {
+            print(" placing at mouse.y : " + mouse.y + " " + linkPopup.height)
+            linkPopup.y = mouse.y - linkPopup.height;
+        } else {
+            //linkPopup.y = mouse.y-(linkPopup.width/2)
+        }
+    }
+
 }

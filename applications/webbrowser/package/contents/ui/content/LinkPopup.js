@@ -6,16 +6,19 @@ function placeLinkPopup(mouse) {
         rootItem = rootItem.parent;
     }
     var distanceToTop = webView.mapToItem(rootItem, mouse.x, mouse.y);
+    //var distanceToTop = mouse;
     print( "   distanceToTop: " + distanceToTop.x);
+    print( " mouse: x: " + mouse.x + " y: " + mouse.y);
     if (distanceToTop.x < linkPopup.width/2) {
-        // hitting the left edge
+        print(" hitting the left edge " + distanceToTop.x);
         //linkPopup.x = mouse.x
 
     } else {
         linkPopup.x = mouse.x-(linkPopup.width/2)
     }
-    if (distanceToTop.y > linkPopup.height + header.height*2) {
-        linkPopup.y = mouse.y-linkPopup.height
+    if (distanceToTop.y > linkPopup.height + header.height) {
+        print(" placing at mouse.y : " + mouse.y + " " + linkPopup.height)
+        linkPopup.y = mouse.y;
     } else {
         //linkPopup.y = mouse.y-(linkPopup.width/2)
     }
