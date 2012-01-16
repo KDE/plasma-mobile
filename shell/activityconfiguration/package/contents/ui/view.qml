@@ -46,6 +46,11 @@ MobileComponents.Sheet {
         }
         configInterface.activityName = activityNameEdit.text
         configInterface.wallpaperIndex = wallpapersList.currentIndex
+
+        var service = activitySource.serviceForSource(configInterface.activityId)
+        var operation = service.operationDescription("setEncrypted")
+        operation["Encrypted"] = encryptedSwitch.checked
+        service.startOperationCall(operation)
     }
 
     onAccepted: {
@@ -73,6 +78,7 @@ MobileComponents.Sheet {
             for (var i in data) {
                 if (data[i]["Current"]) {
                     currentActivity = data[i]["Name"]
+                    encryptedSwitch.checked = activitySource.data[i]["Encrypted"]
                 }
                // if (1||!data[i]["Current"]) {
                     names.push(data[i]["Name"])
@@ -94,17 +100,20 @@ MobileComponents.Sheet {
     }
 
     content: [
-        Row {
+        Grid {
             id: nameRow
+            columns: 2
+            rows: 2
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.topMargin
             }
             visible: configInterface.activityNameConfigurable
-            Text {
+            PlasmaComponents.Label {
                 color: theme.textColor
                 text: i18n("Activity name:")
                 anchors.verticalCenter: activityNameEdit.verticalCenter
+                anchors.right: activityNameEdit.left
             }
             PlasmaComponents.TextField {
                 id: activityNameEdit
@@ -114,6 +123,14 @@ MobileComponents.Sheet {
                     saveConfiguration()
                     accept()
                 }
+            }
+            PlasmaComponents.Label {
+                color: theme.textColor
+                text: i18n("Encrypted:")
+                anchors.right: encryptedSwitch.left
+            }
+            PlasmaComponents.Switch {
+                id: encryptedSwitch
             }
         },
         PlasmaComponents.Label {
