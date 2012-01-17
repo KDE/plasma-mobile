@@ -101,11 +101,16 @@
 
 import Qt 4.7
 import MeeGo.Ux.Kernel 0.1
-import MeeGo.Ux.Gestures 0.1
 import MeeGo.Ux.Components.Common 0.1
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
-Item {
+PlasmaComponents.ListItem {
     id: expandingBox
+    enabled: true
+
+    checked: expanded
+    onClicked: expanded = !expanded
 
     property bool expanded: false
     property alias titleText: titleText.text
@@ -160,10 +165,7 @@ Item {
         expandingBox.expandingChanged( expanded )
     }
 
-    Theme { id: theme }
-
-    // the border image is the background graphic for the header and the content
-    ThemeImage {
+    Item {
         id: pulldownImage
 
         property bool componentCompleted: false
@@ -173,8 +175,7 @@ Item {
 
         height: expandingBox.height
         width: expandingBox.width
-        source: expandingBox.expanded ? "image://themedimage/widgets/common/expandobox/expandobox-background-active"
-                                      : "image://themedimage/widgets/common/expandobox/expandobox-background"
+
 
         // the header item contains the title, the image for the button which indicates
         // the expanded state and a GestreuArea to change the expanded state on click
@@ -195,11 +196,9 @@ Item {
                 spacing: anchors.margins
             }
 
-            Text {
+            PlasmaComponents.Label {
                 id: titleText
 
-                font.pixelSize: theme.fontPixelSizeLarge
-                color: theme.fontColorHighlight
                 elide: Text.ElideRight
                 anchors.left: iconArea.right
                 anchors.right: expandButton.left
@@ -219,26 +218,19 @@ Item {
                 clip: true
             }
 
-            ThemeImage {
+            PlasmaCore.SvgItem {
                 id: expandButton
 
-                rotation: ( expandingBox.orientation == "horizontal" ) ? 0 : -90
 
                 x: ( expandingBox.orientation == "horizontal" ) ? expandingBox.width - width - 6 :  (header.width - width) / 2
                 y: ( expandingBox.orientation == "horizontal" ) ? (header.height - height) / 2 :  expandingBox.height - height - 6
-                source:expandingBox.expanded ? "image://themedimage/images/settings/pulldown_arrow_up" : "image://themedimage/images/settings/pulldown_arrow_dn"
-            }
 
-            GestureArea {
-                anchors.fill: parent
-                
-                // This should be false, but the property i broken now
-                // (https://bugs.meego.com/show_bug.cgi?id=20327)
-                acceptUnhandledEvents: true
-
-                Tap {
-                    onFinished: { expanded = !expanded }
-        		}
+                svg: PlasmaCore.Svg {
+                    imagePath: "widgets/arrows"
+                }
+                width: naturalSize.width
+                height: naturalSize.height
+                elementId: expandingBox.expanded ? "up-arrow" : "down-arrow"
             }
         }
 
