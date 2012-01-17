@@ -85,7 +85,7 @@ ExpandingBox {
     Row {
         id: headerArea
         spacing: 8
-        anchors.top:  parent.top       
+        anchors.top:  parent.top
         height: container.containerHeight
         anchors.left: parent.left
         anchors.leftMargin: 20
@@ -213,7 +213,6 @@ ExpandingBox {
                     id: yesDelete
                     text: i18n("Yes, Delete")
                     width: removeConfirmArea.width / 2 - 20
-                    height: 50
                     onClicked: {
                         networkItem.passphrase=""
                         networkItem.removeService();
@@ -225,7 +224,6 @@ ExpandingBox {
                     id: noSave
                     text: i18n("No, Save")
                     width: removeConfirmArea.width / 2 - 20
-                    height: 50
                     onClicked: {
                         container.expanded = false;
                         container.detailsComponent = detailsArea
@@ -254,7 +252,6 @@ ExpandingBox {
             PlasmaComponents.Button {
                 id: disconnectButton
                 text: i18n("Disconnect")
-                height: 50
                 width: parent.width / 2
                 onClicked: {
                     networkItem.disconnectService();
@@ -265,7 +262,6 @@ ExpandingBox {
             PlasmaComponents.Button {
                 id: removeConnection
                 text: i18n("Remove connection")
-                height: 50
                 width: parent.width / 2
                 onClicked: {
                     container.detailsComponent = removeConfirmAreaComponent
@@ -355,7 +351,6 @@ ExpandingBox {
 			Grid {
 				id: nameserverstextedit
 				width: parent.width / 2
-				//height: 20
 				columns: 2
 				Repeater {
 					model: container.nameservers
@@ -416,7 +411,6 @@ ExpandingBox {
 			PlasmaComponents.Button {
 				id: applyButton
 				text: i18n("Apply")
-				height: 50
 				width: parent.width / 2
 				onClicked: {
 					networkItem.method = dropdown.method
@@ -429,7 +423,6 @@ ExpandingBox {
 			PlasmaComponents.Button {
 				id: cancelButton
 				text: i18n("Cancel")
-				height: 50
 				width: parent.width / 2
 				onClicked: {
 					container.expanded = false
@@ -472,7 +465,6 @@ ExpandingBox {
 
                     PlasmaComponents.Button {
                         id: setupButton
-                        height: 50
 
                         text:  i18n("Setup")
                         visible: container.networkItem.type == "cellular"
