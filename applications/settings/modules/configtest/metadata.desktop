@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Configuration Test
+Name[et]=Seadistuste test
 Name[nl]=Test van instellingen
 Name[pl]=Test konfiguracji
 Name[pt]=Teste de Configuração
@@ -8,6 +9,7 @@ Name[sv]=Inställningstest
 Name[uk]=Перевірка налаштувань
 Name[x-test]=xxConfiguration Testxx
 Comment=Test Module for the Config Bindings
+Comment[et]=Seadistuste testmoodul
 Comment[nl]=Testmodule voor de instellingenbindingen
 Comment[pl]=Moduł testowy dla powiązań konfiguracji
 Comment[pt]=Módulo de Testes na Interface de Configuração

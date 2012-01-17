@@ -3,6 +3,7 @@ Exec=active-settings org.kde.active.settings.time
 Icon=clock
 Name=Adjust date and time
 Name[es]=Ajustar fecha y hora
+Name[et]=Kuupäeva ja kellaaja kohandamine
 Name[nl]=Datum en tijd aanpassen
 Name[pl]=Dostosuj datę i czas
 Name[pt]=Ajustar a data e hora

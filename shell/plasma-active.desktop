@@ -2,6 +2,7 @@
 Exec=plasma-device
 X-DBUS-StartupType=wait
 Name=Plasma device shell
+Name[et]=Plasma seadmekest
 Name[nl]=Plasma-apparaatshell
 Name[pl]=Powłoka urządzenia Plazma
 Name[pt]=Consola de Plasma do dispositivo
@@ -10,6 +11,7 @@ Name[sv]=Plasma enhetsskal
 Name[uk]=Портативна оболонка Плазми
 Name[x-test]=xxPlasma device shellxx
 Comment=Workspace shell for a wide spectrum of portable devices.
+Comment[et]=Töötsoonikest laiale hulgale mobiilsetele seadmetele.
 Comment[nl]=Werkruimte-shell voor een breed spectrum van mobiele apparaten.
 Comment[pl]=Powłoka przestrzeni roboczej dla szerokiego spektrum urządzeń przenośnych.
 Comment[pt]=Área de trabalho para um grande espectro de dispositivos móveis.
