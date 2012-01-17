@@ -134,10 +134,6 @@ Item {
                 id: confirmationDialogComponent
                 ConfirmationDialog {
                     enabled: true
-                    anchors {
-                        bottom: deleteButton.top
-                        right: parent.right
-                    }
                     transformOrigin: Item.BottomLeft
                     question: i18n("Do you want to permanently delete activity '%1'?", activityName.text)
                     onAccepted: {
@@ -167,10 +163,20 @@ Item {
                     if (!deleteButtonParent.confirmationDialog) {
                         deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
                     }
+
                     if (deleteButtonParent.confirmationDialog.scale >= 1) {
                         deleteButtonParent.confirmationDialog.scale = 0
                     } else {
                         deleteButtonParent.confirmationDialog.scale = 1 / delegate.scale
+
+                        // scale does not change dialog's width so we need to anchor the confirmationDialog's center manually.
+                        deleteButtonParent.confirmationDialog.x = deleteButton.x + deleteButton.width / 2 - deleteButtonParent.confirmationDialog.width * (1 / delegate.scale) / 2
+
+                        if (delegate.PathView.itemScale == 1) { // activity at PathView's center, not necessary the current activity.
+                            deleteButtonParent.confirmationDialog.anchors.bottom = deleteButton.top
+                        } else {
+                            deleteButtonParent.confirmationDialog.y = deleteButton.y - (deleteButtonParent.confirmationDialog.height - deleteButton.height)* (1 / delegate.scale) / 2
+                        }
                     }
                 }
             }
