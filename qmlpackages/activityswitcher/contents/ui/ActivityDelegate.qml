@@ -158,15 +158,18 @@ Item {
                 opacity: model["Current"] == true ? 0.4 : 1
                 enabled: opacity == 1
                 z: 800
+                property double oldOpacity: delegate.PathView.itemOpacity
 
                 onClicked: {
-                    if (!deleteButtonParent.confirmationDialog) {
-                        deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
+                    // always recreate the dialog because on a second launch it moves upper a little bit.
+                    if (deleteButtonParent.confirmationDialog) {
+                        deleteButtonParent.confirmationDialog.scale = 0
+                        deleteButtonParent.confirmationDialog.destroy()
+                        deleteButtonParent.confirmationDialog = null
                     }
 
-                    if (deleteButtonParent.confirmationDialog.scale >= 1) {
-                        deleteButtonParent.confirmationDialog.scale = 0
-                    } else {
+                    if (toggle) {
+                        deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
                         deleteButtonParent.confirmationDialog.scale = 1 / delegate.scale
 
                         // scale does not change dialog's width so we need to anchor the confirmationDialog's center manually.
@@ -175,8 +178,18 @@ Item {
                         if (delegate.PathView.itemScale == 1) { // activity at PathView's center, not necessary the current activity.
                             deleteButtonParent.confirmationDialog.anchors.bottom = deleteButton.top
                         } else {
-                            deleteButtonParent.confirmationDialog.y = deleteButton.y - (deleteButtonParent.confirmationDialog.height - deleteButton.height)* (1 / delegate.scale) / 2
+                            deleteButtonParent.confirmationDialog.y = deleteButton.y - deleteButton.height / (3/2) * (1 / delegate.scale)
                         }
+                    }
+                }
+
+                onCheckedChanged: {
+                    // makes dialog and activity thumbnail fully opaque only when dialog is opened.
+                    if (checked) {
+                        oldOpacity = delegate.PathView.itemOpacity
+                        delegate.PathView.itemOpacity = 1
+                    } else {
+                        delegate.PathView.itemOpacity = oldOpacity
                     }
                 }
             }
