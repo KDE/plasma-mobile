@@ -53,7 +53,7 @@ qt4_add_dbus_adaptor(
 )
 
 qt4_add_dbus_adaptor(
-  recommendationmanager_SRC location/org.kde.contour.LocationManager.xml
+  recommendationmanager_SRC location/org.kde.LocationManager.xml
   location/LocationManager.h Contour::LocationManager
 )
 

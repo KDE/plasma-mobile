@@ -1,6 +1,6 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
-  <interface name="org.kde.contour.LocationManager.DummyNetworkNotifier">
+  <interface name="org.kde.LocationManager.DummyNetworkNotifier">
     <method name="setWifiName">
       <arg name="accessPoint" type="s" direction="in"/>
     </method>
