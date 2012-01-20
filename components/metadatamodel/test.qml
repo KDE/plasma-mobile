@@ -196,7 +196,7 @@ Item {
         }
     }
 
-    ScrollDecorator {
+    ScrollBar {
         flickableItem: metadataList
         orientation: Qt.Vertical
         anchors {

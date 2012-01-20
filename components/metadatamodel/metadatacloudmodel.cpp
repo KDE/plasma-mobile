@@ -143,7 +143,7 @@ void MetadataCloudModel::doQuery()
         }
     }
 
-    if (!resourceType().isEmpty() && m_cloudCategory != "nie:mimeType") {
+    if (!mimeType().isEmpty() && m_cloudCategory != "nie:mimeType") {
         QString type = mimeType();
         bool negation = false;
         if (type.startsWith("!")) {
