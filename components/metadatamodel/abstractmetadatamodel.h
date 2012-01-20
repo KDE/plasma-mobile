@@ -39,7 +39,7 @@ class AbstractMetadataModel : public QAbstractItemModel
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
-    Q_PROPERTY(QString mimeType READ resourceType WRITE setMimeType NOTIFY mimeTypeChanged)
+    Q_PROPERTY(QString mimeType READ mimeType WRITE setMimeType NOTIFY mimeTypeChanged)
     Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
     Q_PROPERTY(QVariantList tags READ tags WRITE setTags NOTIFY tagsChanged)
     Q_PROPERTY(QDate startDate READ startDate WRITE setStartDate NOTIFY startDateChanged)

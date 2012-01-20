@@ -43,51 +43,30 @@ Image {
 
     MobileComponents.Package {
         id: viewerPackage
-        name: "org.kde.active.imageviewer"
+        name: "org.kde.active.filebrowser"
     }
 
     MobileComponents.ResourceInstance {
         id: resourceInstance
     }
 
-    function loadImage(path)
-    {
-        if (path.length == 0) {
-            return
-        }
 
-        var viewerItem = mainStack.push(Qt.createComponent("ViewerPage.qml"))
-        viewerItem.loadImage(path)
-    }
-
-    Timer {
-        id: firstRunTimer
-        interval: 300
-        repeat: false
-        onTriggered: {
-            loadImage(application.startupArguments[0])
-
-            // sort by column 0 (called "label" in metadatamodel.cpp),
-            // that is, the file name.
-            metadataModel.sort(0)
-        }
-    }
 
     MetadataModels.MetadataUserTypes {
         id: userTypes
     }
     MetadataModels.MetadataModel {
         id: metadataModel
-        resourceType: "nfo:Image"
-        sortBy: [userTypes.sortFields[resourceType]]
-        sortOrder: Qt.AscendingOrder
-        property bool starting: true
-        onStatusChanged: {
-            if (status == MetadataModels.MetadataModel.Idle && starting) {
-                firstRunTimer.running = true
-                starting = false
-            }
-        }
+        //sortBy: ["nao:numericRating"]
+        //sortOrder: Qt.DescendingOrder
+        //queryString: "pdf"
+        //limit: 20
+    }
+    MetadataModels.MetadataCloudModel {
+        id: typesCloudModel
+        cloudCategory: "rdf:type"
+        resourceType: "nfo:FileDataObject"
+        allowedCategories: userTypes.userTypes
     }
 
 
@@ -100,9 +79,89 @@ Image {
         clip: false
         toolBar: toolBar
         initialPage: Qt.createComponent("Browser.qml")
-        anchors.fill: parent
+        anchors {
+            right: sideBar.left
+            top: parent.top
+            bottom: parent.bottom
+            left: parent.left
+        }
     }
 
+    Image {
+        id: sideBar
+        source: "image://appbackgrounds/contextarea"
+        fillMode: Image.Tile
+
+        width: parent.width/4
+        anchors {
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+        }
+        Image {
+            source: "image://appbackgrounds/shadow-right"
+            fillMode: Image.TileVertically
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
+            }
+        }
+
+        Column {
+            anchors {
+                fill: parent
+                topMargin: toolBar.height + theme.defaultFont.mSize.width
+                leftMargin: theme.defaultFont.mSize.width * 2
+                margins: theme.defaultFont.mSize.width
+            }
+            spacing: 4
+            PlasmaComponents.Label {
+                text: "<b>"+i18n("File types")+"</b>"
+            }
+            PlasmaComponents.ButtonColumn {
+                spacing: 4
+                anchors {
+                    left: parent.left
+                    leftMargin: theme.defaultFont.mSize.width
+                }
+
+                Repeater {
+                    model: typesCloudModel
+                    delegate: PlasmaComponents.RadioButton {
+                            text: i18n("%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
+                            visible: model["label"] != undefined
+                            onCheckedChanged: {
+                                if (checked) {
+                                    metadataModel.resourceType = model["label"]
+                                }
+                            }
+                        }
+                }
+            }
+
+
+            PlasmaComponents.Label {
+                text: "<b>"+i18n("Tags")+"</b>"
+            }
+            Column {
+                spacing: 4
+                anchors {
+                    left: parent.left
+                    leftMargin: theme.defaultFont.mSize.width
+                }
+                Repeater {
+                    model: MetadataModels.MetadataCloudModel {
+                        cloudCategory: "nao:hasTag"
+                    }
+                    delegate: PlasmaComponents.CheckBox {
+                        text: i18n("%1 (%2)", model["label"], model["count"])
+                        visible: model["label"] != undefined
+                    }
+                }
+            }
+        }
+    }
  
     SlcComponents.SlcMenu {
         id: contextMenu
