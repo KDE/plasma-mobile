@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Files
+GenericName=File browser
+Comment=A simple file browser/manager
+
+
+Exec=active-filebrowser -graphicssystem raster %u
+Terminal=false
+Icon=system-file-manager
+Type=Application
+Categories=Qt;KDE;Filemanagement;
+MimeType=inode/directory;
+InitialPreference=9
