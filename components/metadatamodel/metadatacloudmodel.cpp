@@ -124,7 +124,7 @@ void MetadataCloudModel::doQuery()
     }
 
 
-    if (!resourceType().isEmpty() && m_cloudCategory != "rdf:type") {
+    if (!resourceType().isEmpty()) {
         QString type = resourceType();
         bool negation = false;
         if (type.startsWith("!")) {
@@ -143,7 +143,7 @@ void MetadataCloudModel::doQuery()
         }
     }
 
-    if (!mimeType().isEmpty() && m_cloudCategory != "nie:mimeType") {
+    if (!mimeType().isEmpty()) {
         QString type = mimeType();
         bool negation = false;
         if (type.startsWith("!")) {
@@ -174,7 +174,7 @@ void MetadataCloudModel::doQuery()
         }
     }
 
-    if (!activityId().isEmpty() && m_cloudCategory != "kext:Activity") {
+    if (!activityId().isEmpty()) {
         QString activity = activityId();
         bool negation = false;
         if (activity.startsWith("!")) {
