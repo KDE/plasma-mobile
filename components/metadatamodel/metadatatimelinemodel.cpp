@@ -102,7 +102,7 @@ void MetadataTimelineModel::doQuery()
         monthQuery = "0";
     }
     if (m_level >= Day) {
-        dayQuery = "bif:day(?label)";
+        dayQuery = "bif:dayofmonth(?label)";
     } else {
         dayQuery = "0";
     }
@@ -238,7 +238,7 @@ void MetadataTimelineModel::doQuery()
         query += " bif:month(?label) ";
     }
     if (m_level >= Day) {
-        query += " bif:day(?label) ";
+        query += " bif:dayofmonth(?label) ";
     }
     query += " order by ?year ?month ?day ";
 
