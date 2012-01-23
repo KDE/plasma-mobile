@@ -25,6 +25,7 @@
 
 #include "metadatamodel.h"
 #include "metadatacloudmodel.h"
+#include "metadatatimelinemodel.h"
 #include "metadatausertypes.h"
 
 void DataModelsPlugin::registerTypes(const char *uri)
@@ -33,6 +34,7 @@ void DataModelsPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<MetadataModel>(uri, 0, 1, "MetadataModel");
     qmlRegisterType<MetadataCloudModel>(uri, 0, 1, "MetadataCloudModel");
+    qmlRegisterType<MetadataTimelineModel>(uri, 0, 1, "MetadataTimelineModel");
     qmlRegisterType<MetadataUserTypes>(uri, 0, 1, "MetadataUserTypes");
 
     qmlRegisterInterface<Plasma::Service>("Service");
