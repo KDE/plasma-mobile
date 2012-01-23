@@ -53,8 +53,12 @@ Item {
         onReleased: {
             var star = iconRow.childAt(mouse.x, mouse.y);
             if (star && star.baseRating) {
-                print("released with rating " + star.baseRating + " Item: " + resourceUrl);
-                rateResource(resourceUrl, star.baseRating);
+                if (resourceUrl) {
+                    print("released with rating " + star.baseRating + " Item: " + resourceUrl);
+                    rateResource(resourceUrl, star.baseRating);
+                } else {
+                    score = star.baseRating
+                }
             } else{
                 print("released but could not figure out rating" + star);
             }
@@ -63,7 +67,7 @@ Item {
 
 
     function rateResource(resourceUrl, rating) {
-        print("MMM Rating " + resourceUrl + " *****: " + rating )
+        print("New Rating " + resourceUrl + " *****: " + rating )
         if (resourceUrl == "") {
             print("url empty.");
             return;
