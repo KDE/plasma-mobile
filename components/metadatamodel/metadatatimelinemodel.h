@@ -42,6 +42,7 @@ class MetadataTimelineModel : public AbstractMetadataModel
     Q_OBJECT
 
     Q_PROPERTY(Level level READ level WRITE setLevel NOTIFY levelChanged)
+    Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
 
 public:
     enum Roles {
@@ -63,16 +64,17 @@ public:
 
     virtual int count() const {return m_results.count();}
 
-
     void setLevel(Level level);
     Level level() const;
 
+    int totalCount() const {return m_totalCount;}
 
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
 
 Q_SIGNALS:
    void levelChanged();
+   void totalCountChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
@@ -86,6 +88,7 @@ private:
     QVariantList m_categories;
     QTimer *m_queryTimer;
     Level m_level;
+    int m_totalCount;
 };
 
 #endif
