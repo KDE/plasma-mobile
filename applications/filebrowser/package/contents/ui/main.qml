@@ -144,6 +144,18 @@ Image {
 
 
             PlasmaComponents.Label {
+                text: "<b>"+i18n("Rating")+"</b>"
+            }
+
+            MobileComponents.Rating {
+                anchors.horizontalCenter: parent.horizontalCenter
+                onScoreChanged: metadataModel.minimumRating = score
+            }
+
+
+
+
+            PlasmaComponents.Label {
                 text: "<b>"+i18n("Tags")+"</b>"
                 visible: tagCloud.count > 0
             }
