@@ -36,7 +36,7 @@ Item {
             left: parent.left
             top: parent.top
             right: parent.right
-            bottom: parent.bottom
+            bottom: timeline.top
         }
 
         model: MetadataTimelineModel {
@@ -62,6 +62,62 @@ Item {
             }
         }
     }
+
+    Item {
+        id: timeline
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: contents.height
+
+        Flickable {
+            id: timelineFlickable
+            anchors.fill: parent
+
+            contentWidth: contents.width
+            contentHeight: contents.height
+
+            Item {
+                id: contents
+                width: childrenRect.width
+                height: childrenRect.height
+
+                Rectangle {
+                    color: "black"
+                    height: 12
+                    width: timelineRow.width + 32
+                    anchors.verticalCenter: timelineRow.verticalCenter
+                }
+                Row {
+                    id: timelineRow
+                    spacing: 40
+                    x: 16
+                    Repeater {
+                        model: metadataTimelineModel
+                        delegate: Rectangle {
+                            color: "black"
+                            width: 14 + 300 * (model.count / metadataTimelineModel.totalCount)
+                            height: width
+                            radius: width/2
+                            anchors.verticalCenter: parent.verticalCenter
+                            Text {
+                                text: model.year
+                                color: "white"
+                                anchors.centerIn: parent
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        ScrollBar {
+            flickableItem: timelineFlickable
+            orientation: Qt.Horizontal
+        }
+    }
+
 
     ScrollBar {
         flickableItem: metadataList

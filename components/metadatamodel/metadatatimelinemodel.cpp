@@ -45,7 +45,8 @@
 
 MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
     : AbstractMetadataModel(parent),
-      m_queryClient(0)
+      m_queryClient(0),
+      m_totalCount(0)
 {
     m_queryTimer = new QTimer(this);
     m_queryTimer->setSingleShot(true);
@@ -89,6 +90,7 @@ void MetadataTimelineModel::doQuery()
 {
     QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
 
+    m_totalCount = 0;
 
     setStatus(Waiting);
     QString monthQuery;
@@ -246,6 +248,7 @@ void MetadataTimelineModel::doQuery()
     m_results.clear();
     endResetModel();
     emit countChanged();
+    emit totalCountChanged();
 
     delete m_queryClient;
     m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
@@ -277,6 +280,7 @@ void MetadataTimelineModel::newEntries(const QList< Nepomuk::Query::Result > &en
         res[MonthRole] = month;
         res[DayRole] = day;
         res[CountRole] = count;
+        m_totalCount += count;
         results << res;
     }
 
@@ -286,13 +290,17 @@ void MetadataTimelineModel::newEntries(const QList< Nepomuk::Query::Result > &en
         m_categories << categories;
         endInsertRows();
         emit countChanged();
+        emit totalCountChanged();
     }
 }
 
 void MetadataTimelineModel::entriesRemoved(const QList<QUrl> &urls)
 {
     //FIXME: we don't have urls here
+    return;
+
     emit countChanged();
+    emit totalCountChanged();
 }
 
 void MetadataTimelineModel::finishedListing()
