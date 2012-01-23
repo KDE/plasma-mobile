@@ -127,7 +127,7 @@ PlasmaComponents.Page {
                     dirModel.url = model["url"]
                     resultsGrid.model = dirModel
                 } else if (!mainStack.busy) {
-                    loadImage(model["url"])
+                    Qt.openUrlExternally(model["url"])
                 }
             }
         }
