@@ -59,6 +59,7 @@ MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
     roleNames[DayRole] = "month";
     roleNames[CountRole] = "count";
     setRoleNames(roleNames);
+    m_queryTimer->start(100);
 }
 
 MetadataTimelineModel::~MetadataTimelineModel()
@@ -104,7 +105,7 @@ void MetadataTimelineModel::doQuery()
         dayQuery = "0";
     }
 
-    QString query = QString("select distinct bif:year(?label) as ?year %1 as ?month %2 as ?day count(*) as ?count where { ").arg(monthQuery).arg(dayQuery);
+    QString query = QString("select distinct bif:year(?label) as ?year %1 as ?month %2 as ?day count(*) as ?count where { ?r nie:lastModified ?label  ").arg(monthQuery).arg(dayQuery);
 
 
     if (!resourceType().isEmpty()) {
