@@ -130,7 +130,8 @@ Image {
                     }
                     delegate: PlasmaComponents.RadioButton {
                             text: i18n("%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
-                            visible: model["label"] != undefined
+                            //FIXME: more elegant way to remove applications?
+                            visible: model["label"] != undefined && model["label"] != "nfo:Application"
                             onCheckedChanged: {
                                 if (checked) {
                                     metadataModel.resourceType = model["label"]
@@ -139,6 +140,7 @@ Image {
                         }
                 }
             }
+
 
 
             PlasmaComponents.Label {
