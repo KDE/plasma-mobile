@@ -41,13 +41,13 @@ Item {
 
         model: MetadataTimelineModel {
             id: metadataTimelineModel
-            level: MetadataTimelineModel.Day
+            level: MetadataTimelineModel.Month
             //queryString: "pdf"
             //resourceType: "nfo:Document"
             //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
             //sortBy: ["nie#url", "nao#lastModified"]
             startDate: "2011-01-01"
-            endDate: "2012-05-01"
+            endDate: "2011-12-31"
             //tags: ["kde"]
             //minimumRating: 5
             //allowedCategories: userTypes.userTypes
@@ -56,7 +56,7 @@ Item {
         delegate: Row {
             spacing: 10
             Text {
-                text: model["year"]
+                text: model["year"] + "-" + model["month"] + "-" + model["day"]
             }
             Text {
                 text: model["count"]
@@ -105,7 +105,7 @@ Item {
                             radius: width/2
                             anchors.verticalCenter: parent.verticalCenter
                             Text {
-                                text: model.year
+                                text: model.label
                                 color: "white"
                                 anchors.centerIn: parent
                             }

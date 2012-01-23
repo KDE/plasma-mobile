@@ -46,10 +46,11 @@ class MetadataTimelineModel : public AbstractMetadataModel
 
 public:
     enum Roles {
-        YearRole = Qt::UserRole + 1,
-        MonthRole = Qt::UserRole + 2,
-        DayRole = Qt::UserRole + 3,
-        CountRole = Qt::UserRole + 4
+        LabelRole = Qt::UserRole + 1,
+        YearRole = Qt::UserRole + 2,
+        MonthRole = Qt::UserRole + 3,
+        DayRole = Qt::UserRole + 4,
+        CountRole = Qt::UserRole + 5
     };
 
     enum Level {
