@@ -41,12 +41,13 @@ Item {
 
         model: MetadataTimelineModel {
             id: metadataTimelineModel
-            level: MetadataTimelineModel.Year
+            level: MetadataTimelineModel.Day
             //queryString: "pdf"
             //resourceType: "nfo:Document"
             //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
             //sortBy: ["nie#url", "nao#lastModified"]
-            //startDate: "2011-10-10"
+            startDate: "2011-01-01"
+            endDate: "2012-05-01"
             //tags: ["kde"]
             //minimumRating: 5
             //allowedCategories: userTypes.userTypes
@@ -95,6 +96,7 @@ Item {
                     spacing: 40
                     x: 16
                     Repeater {
+                        id: timelineRepeater
                         model: metadataTimelineModel
                         delegate: Rectangle {
                             color: "black"
