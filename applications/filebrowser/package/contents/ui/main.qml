@@ -143,6 +143,7 @@ Image {
 
             PlasmaComponents.Label {
                 text: "<b>"+i18n("Tags")+"</b>"
+                visible: tagCloud.count > 0
             }
             Column {
                 spacing: 4
@@ -152,11 +153,28 @@ Image {
                 }
                 Repeater {
                     model: MetadataModels.MetadataCloudModel {
+                        id: tagCloud
                         cloudCategory: "nao:hasTag"
+                        resourceType: metadataModel.resourceType
                     }
                     delegate: PlasmaComponents.CheckBox {
                         text: i18n("%1 (%2)", model["label"], model["count"])
                         visible: model["label"] != undefined
+                        onCheckedChanged: {
+                            var tags = metadataModel.tags
+                            if (checked) {
+                                tags[tags.length] = model["label"];
+                                metadataModel.tags = tags
+                            } else {
+                                for (var i = 0; i < tags.length; ++i) {
+                                    if (tags[i] == model["label"]) {
+                                        tags.splice(i, 1);
+                                        metadataModel.tags = tags
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
