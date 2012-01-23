@@ -23,6 +23,7 @@
 
 #include <KDebug>
 #include <KMimeType>
+#include <KCalendarSystem>
 
 #include <soprano/vocabulary.h>
 
@@ -55,9 +56,10 @@ MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
 
 
     QHash<int, QByteArray> roleNames;
+    roleNames[LabelRole] = "label";
     roleNames[YearRole] = "year";
     roleNames[MonthRole] = "month";
-    roleNames[DayRole] = "month";
+    roleNames[DayRole] = "day";
     roleNames[CountRole] = "count";
     setRoleNames(roleNames);
     m_queryTimer->start(100);
@@ -273,13 +275,14 @@ void MetadataTimelineModel::newEntries(const QList< Nepomuk::Query::Result > &en
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
         int year = res.additionalBinding(QLatin1String("year")).variant().toInt();
         int month = res.additionalBinding(QLatin1String("month")).variant().toInt();
-        int day = res.additionalBinding(QLatin1String("month")).variant().toInt();
+        int day = res.additionalBinding(QLatin1String("day")).variant().toInt();
 
         QHash<Roles, int> res;
         res[YearRole] = year;
         res[MonthRole] = month;
         res[DayRole] = day;
         res[CountRole] = count;
+
         m_totalCount += count;
         results << res;
     }
@@ -319,6 +322,17 @@ QVariant MetadataTimelineModel::data(const QModelIndex &index, int role) const
 
     const QHash<Roles, int> row = m_results[index.row()];
 
+    if (role == LabelRole && m_level == Month) {
+        switch(m_level) {
+        case Year:
+            return row.value(YearRole);
+        case Month:
+            return KGlobal::locale()->calendar()->monthName(row.value(MonthRole),  row.value(YearRole), KCalendarSystem::LongName);
+        case Day:
+        default:
+            return row.value(DayRole);
+        }
+    }
     return row.value((Roles)role);
 }
 
