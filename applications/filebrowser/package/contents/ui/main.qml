@@ -62,12 +62,7 @@ Image {
         //queryString: "pdf"
         //limit: 20
     }
-    MetadataModels.MetadataCloudModel {
-        id: typesCloudModel
-        cloudCategory: "rdf:type"
-        resourceType: "nfo:FileDataObject"
-        allowedCategories: userTypes.userTypes
-    }
+
 
 
     PlasmaComponents.ToolBar {
@@ -127,7 +122,12 @@ Image {
                 }
 
                 Repeater {
-                    model: typesCloudModel
+                    model: MetadataModels.MetadataCloudModel {
+                        id: typesCloudModel
+                        cloudCategory: "rdf:type"
+                        resourceType: "nfo:FileDataObject"
+                        allowedCategories: userTypes.userTypes
+                    }
                     delegate: PlasmaComponents.RadioButton {
                             text: i18n("%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
                             visible: model["label"] != undefined
