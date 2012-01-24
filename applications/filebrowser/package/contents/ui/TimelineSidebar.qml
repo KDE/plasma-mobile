@@ -32,6 +32,27 @@ Item {
         margins: theme.defaultFont.mSize.width
     }
 
+    property int currentYear: 0
+    property int currentMonth: 0
+    property Item currentItem
+
+    function buildDate(year, month, day)
+    {
+        var strMonth = month
+        var strDay = day
+
+        if (month < 10) {
+            strMonth = "0" + month
+        }
+        if (day < 10) {
+            strDay = "0" + day
+        }
+
+        return year + "-" + strMonth + "-" + strDay
+    }
+
+
+
     Rectangle {
         color: theme.textColor
         width: 6
@@ -54,6 +75,13 @@ Item {
             bottomMargin: 10
         }
 
+        PlasmaComponents.Highlight {
+            visible: currentItem != null
+            width: timeline.width
+            height: currentItem.height
+            x: 0
+            y: currentItem.y - timelineFlickable.contentY
+        }
         Flickable {
             id: timelineFlickable
             anchors.fill: parent
@@ -80,6 +108,7 @@ Item {
                     }
 
                     delegate: Rectangle {
+                        id: dateDelegate
                         color: theme.textColor
                         width: 14 + 100 * (model.count / metadataTimelineModel.totalCount)
                         height: width
@@ -99,8 +128,32 @@ Item {
                                 rightMargin: - timelineFlickable.width + parent.width
                             }
                             onClicked: {
-                                metadataModel.startDate = model.year + "-" + "01" + "-" + "01"
-                                metadataModel.endDate = model.year + "-" + "12" + "-" + "31"
+                                switch (metadataTimelineModel.level) {
+                                case MetadataModels.MetadataTimelineModel.Year:
+                                    metadataModel.startDate = buildDate(model.year, 1, 1)
+                                    metadataModel.endDate = buildDate(model.year, 12, 31)
+
+                                    currentMonth = 0
+                                    currentYear = model.year
+                                    break
+                                case MetadataModels.MetadataTimelineModel.Month:
+                                    metadataModel.startDate = buildDate(model.year, model.month, 1)
+                                    metadataModel.endDate = buildDate(model.year, model.month, 31)
+
+                                    currentMonth = model.month
+                                    currentYear = model.year
+                                    break
+                                case MetadataModels.MetadataTimelineModel.Day:
+                                default:
+                                    metadataModel.startDate = buildDate(model.year, model.month, model.day)
+                                    metadataModel.endDate = buildDate(model.year, model.month, model.day)
+
+                                    currentMonth = model.month
+                                    currentYear = model.year
+                                    break
+                                }
+
+                                currentItem = dateDelegate
                             }
                         }
                     }
@@ -113,6 +166,57 @@ Item {
         }
     }
 
+
+    Column {
+        anchors {
+            top: parent.top
+            right: parent.right
+        }
+        PlasmaComponents.ToolButton {
+            iconSource: "zoom-in"
+            width: theme.largeIconSize
+            height: width
+            flat: false
+            enabled: metadataTimelineModel.level != MetadataModels.MetadataTimelineModel.Day
+            onClicked: {
+                switch (metadataTimelineModel.level) {
+                case MetadataModels.MetadataTimelineModel.Year:
+                    metadataTimelineModel.startDate = buildDate(currentYear, 1, 1)
+                    metadataTimelineModel.endDate = buildDate(currentYear, 12, 31)
+                    metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Month
+                    break
+                case MetadataModels.MetadataTimelineModel.Month:
+                    metadataTimelineModel.startDate = buildDate(currentYear, currentMonth, 1)
+                    metadataTimelineModel.endDate = buildDate(currentYear, currentMonth, 31)
+                    metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Day
+                    break
+                }
+                currentItem = null
+            }
+        }
+        PlasmaComponents.ToolButton {
+            iconSource: "zoom-out"
+            width: theme.largeIconSize
+            height: width
+            flat: false
+            enabled: metadataTimelineModel.level != MetadataModels.MetadataTimelineModel.Year
+            onClicked: {
+                switch (metadataTimelineModel.level) {
+                case MetadataModels.MetadataTimelineModel.Day:
+                    metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Month
+                    metadataTimelineModel.startDate = buildDate(currentYear, 1, 1)
+                    metadataTimelineModel.endDate = buildDate(currentYear, 12, 31)
+                    break
+                case MetadataModels.MetadataTimelineModel.Month:
+                    metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Year
+                    metadataTimelineModel.startDate = null
+                    metadataTimelineModel.endDate = null
+                    break
+                }
+                currentItem = null
+            }
+        }
+    }
 
     PlasmaComponents.Button {
         id: backButton
