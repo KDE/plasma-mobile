@@ -308,7 +308,7 @@ QVariant MetadataTimelineModel::data(const QModelIndex &index, int role) const
 
     const QHash<Roles, int> row = m_results[index.row()];
 
-    if (role == LabelRole && m_level == Month) {
+    if (role == LabelRole) {
         switch(m_level) {
         case Year:
             return row.value(YearRole);
