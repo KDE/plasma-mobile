@@ -93,6 +93,16 @@ Item {
                                 verticalCenter: parent.verticalCenter
                             }
                         }
+                        MouseArea {
+                            anchors {
+                                fill: parent
+                                rightMargin: - timelineFlickable.width + parent.width
+                            }
+                            onClicked: {
+                                metadataModel.startDate = model.year + "-" + "01" + "-" + "01"
+                                metadataModel.endDate = model.year + "-" + "12" + "-" + "31"
+                            }
+                        }
                     }
                 }
             }
