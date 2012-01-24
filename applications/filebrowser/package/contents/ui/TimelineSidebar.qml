@@ -209,8 +209,9 @@ Item {
                     break
                 case MetadataModels.MetadataTimelineModel.Month:
                     metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Year
-                    metadataTimelineModel.startDate = null
-                    metadataTimelineModel.endDate = null
+                    var dat = new Date()
+                    metadataTimelineModel.startDate = ""
+                    metadataTimelineModel.endDate = ""
                     break
                 }
                 currentItem = null

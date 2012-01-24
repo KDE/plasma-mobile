@@ -42,8 +42,9 @@ class AbstractMetadataModel : public QAbstractItemModel
     Q_PROPERTY(QString mimeType READ mimeType WRITE setMimeType NOTIFY mimeTypeChanged)
     Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
     Q_PROPERTY(QVariantList tags READ tags WRITE setTags NOTIFY tagsChanged)
-    Q_PROPERTY(QDate startDate READ startDate WRITE setStartDate NOTIFY startDateChanged)
-    Q_PROPERTY(QDate endDate READ endDate WRITE setEndDate NOTIFY endDateChanged)
+    //HACK: should be a qdate, but the qml management of qdates is horrible++
+    Q_PROPERTY(QString startDate READ startDateString WRITE setStartDateString NOTIFY startDateChanged)
+    Q_PROPERTY(QString endDate READ endDateString WRITE setEndDateString NOTIFY endDateChanged)
     Q_PROPERTY(int minimumRating READ minimumRating WRITE setMinimumRating NOTIFY minimumRatingChanged)
     Q_PROPERTY(int maximumRating READ maximumRating WRITE setMaximumRating NOTIFY maximumRatingChanged)
     Q_PROPERTY(QObject *extraParameters READ extraParameters CONSTANT)
@@ -77,12 +78,23 @@ public:
     void setTags(const QVariantList &tags);
     QVariantList tags() const;
 
+
+
+    //HACK: normal getters and setters still presents, the one with strings are mapped to QML
     void setStartDate(const QDate &date);
     QDate startDate() const;
 
     void setEndDate(const QDate &date);
     QDate endDate() const;
 
+    void setStartDateString(const QString &date);
+    QString startDateString() const;
+
+    void setEndDateString(const QString &date);
+    QString endDateString() const;
+
+
+ 
     void setMinimumRating(int rating);
     int minimumRating() const;
 
