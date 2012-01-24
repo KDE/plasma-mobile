@@ -25,12 +25,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 
 Item {
-    anchors {
-        fill: parent
-        topMargin: toolBar.height + theme.defaultFont.mSize.width
-        leftMargin: theme.defaultFont.mSize.width * 2
-        margins: theme.defaultFont.mSize.width
-    }
+    anchors.fill: parent
+
 
     Column {
         id: toolsColumn
