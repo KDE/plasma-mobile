@@ -255,7 +255,6 @@ void MetadataTimelineModel::newEntries(const QList< Nepomuk::Query::Result > &en
     setStatus(Running);
     QVector<QHash<Roles, int> > results;
     QVariantList categories;
-
     foreach (Nepomuk::Query::Result res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();

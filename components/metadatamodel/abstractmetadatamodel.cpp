@@ -195,6 +195,42 @@ void AbstractMetadataModel::setStatus(AbstractMetadataModel::Status status)
     emit statusChanged();
 }
 
+void AbstractMetadataModel::setStartDateString(const QString &date)
+{
+    QDate newDate = QDate::fromString(date, "yyyy-MM-dd");
+
+    if (m_startDate == newDate) {
+        return;
+    }
+
+    m_startDate = newDate;
+    m_queryTimer->start(0);
+    emit startDateChanged();
+}
+
+QString AbstractMetadataModel::startDateString() const
+{
+    return m_startDate.toString("yyyy-MM-dd");
+}
+
+void AbstractMetadataModel::setEndDateString(const QString &date)
+{
+    QDate newDate = QDate::fromString(date, "yyyy-MM-dd");
+
+    if (m_endDate == newDate) {
+        return;
+    }
+
+    m_endDate = newDate;
+    m_queryTimer->start(0);
+    emit endDateChanged();
+}
+
+QString AbstractMetadataModel::endDateString() const
+{
+    return m_endDate.toString("yyyy-MM-dd");
+}
+
 void AbstractMetadataModel::setStartDate(const QDate &date)
 {
     if (m_startDate == date) {
