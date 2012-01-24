@@ -70,13 +70,12 @@ Item {
                             id: metadataTimelineModel
                             level: MetadataModels.MetadataTimelineModel.Year
                             //queryString: "pdf"
-                            //resourceType: "nfo:Document"
+                            resourceType: metadataModel.resourceType
+                            tags: metadataModel.tags
+                            minimumRating: metadataModel.minimumRating
                             //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
                             //startDate: "2011-01-01"
                             //endDate: "2011-12-31"
-                            //tags: ["kde"]
-                            //minimumRating: 5
-                            //allowedCategories: userTypes.userTypes
                         }
 
                         delegate: Rectangle {
