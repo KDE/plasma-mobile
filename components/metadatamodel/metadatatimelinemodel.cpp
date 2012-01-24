@@ -87,6 +87,24 @@ MetadataTimelineModel::Level MetadataTimelineModel::level() const
 }
 
 
+QString MetadataTimelineModel::description() const
+{
+    if (m_results.isEmpty()) {
+        return QString();
+    }
+
+    //TODO: manage cases where start and enddate cover more than one year/month
+    switch (m_level) {
+    case Year:
+        return i18n("All years");
+    case Month:
+        return KGlobal::locale()->calendar()->yearString(startDate(), KCalendarSystem::LongFormat);
+    case Day:
+    default:
+        return i18nc("Month and year, such as March 2007", "%1 %2", KGlobal::locale()->calendar()->monthName(startDate(), KCalendarSystem::LongName), KGlobal::locale()->calendar()->yearString(startDate(), KCalendarSystem::LongFormat));
+    }
+}
+
 
 void MetadataTimelineModel::doQuery()
 {
@@ -237,6 +255,7 @@ void MetadataTimelineModel::doQuery()
     endResetModel();
     emit countChanged();
     emit totalCountChanged();
+    emit descriptionChanged();
 
     delete m_queryClient;
     m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
@@ -279,6 +298,7 @@ void MetadataTimelineModel::newEntries(const QList< Nepomuk::Query::Result > &en
         endInsertRows();
         emit countChanged();
         emit totalCountChanged();
+        emit descriptionChanged();
     }
 }
 

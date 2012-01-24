@@ -64,9 +64,9 @@ PlasmaComponents.Page {
         id: highlight
         visible: currentItem != null
         width: root.width
-        height: currentItem.height
+        height: Math.max(currentItem.height, theme.largeIconSize + 8)
         x: 0
-        y: currentItem.y - timelineFlickable.contentY
+        y: currentItem.y - timelineFlickable.contentY + timelineFlickable.y
     }
     PlasmaComponents.ToolButton {
         iconSource: "zoom-in"
@@ -99,10 +99,20 @@ PlasmaComponents.Page {
     }
 
 
+    PlasmaComponents.Label {
+        id: titleLabel
+        anchors {
+            right: parent.right
+            rightMargin: theme.defaultFont.mSize.width
+        }
+        text: "<b>" + metadataTimelineModel.description + "</b>"
+    }
+
     Flickable {
         id: timelineFlickable
         anchors {
             fill: parent
+            top: titleLabel.bottom
             topMargin: 20
         }
         interactive: true
