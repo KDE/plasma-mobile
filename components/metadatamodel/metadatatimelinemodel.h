@@ -43,6 +43,10 @@ class MetadataTimelineModel : public AbstractMetadataModel
 
     Q_PROPERTY(Level level READ level WRITE setLevel NOTIFY levelChanged)
     Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
+    /**
+     * An user-readable description of the results shown, such as "All years", "Year 2011" or "March 2007"
+     */
+    Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
 
 public:
     enum Roles {
@@ -70,12 +74,15 @@ public:
 
     int totalCount() const {return m_totalCount;}
 
+    QString description() const;
+
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
 
 Q_SIGNALS:
    void levelChanged();
    void totalCountChanged();
+   void descriptionChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
