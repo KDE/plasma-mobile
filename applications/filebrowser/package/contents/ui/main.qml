@@ -104,6 +104,8 @@ Image {
         }
 
         PlasmaComponents.PageStack {
+            id: sidebarStack
+            clip: true
             initialPage: Qt.createComponent("CategorySidebar.qml")
         }
     }
