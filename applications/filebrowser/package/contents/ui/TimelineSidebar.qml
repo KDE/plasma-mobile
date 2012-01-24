@@ -32,6 +32,17 @@ Item {
         margins: theme.defaultFont.mSize.width
     }
 
+    Rectangle {
+        color: theme.textColor
+        width: 6
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            topMargin: -parent.anchors.topMargin
+            bottomMargin: -theme.defaultFont.mSize.width
+        }
+        x: timelineColumn.width/2 - 4
+    }
 
     Item {
         id: timeline
@@ -39,57 +50,47 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
+            bottom: backButton.top
+            bottomMargin: 10
         }
 
         Flickable {
             id: timelineFlickable
             anchors.fill: parent
 
-            contentWidth: contents.width
-            contentHeight: contents.height
+            contentWidth: width
+            contentHeight: timelineColumn.height
 
-            Item {
-                id: contents
-                width: childrenRect.width
-                height: childrenRect.height
 
-                Rectangle {
-                    color: theme.textColor
-                    width: 5
-                    height: timelineColumn.height + 32
-                    anchors.horizontalCenter: timelineColumn.horizontalCenter
-                }
-                Column {
-                    id: timelineColumn
-                    spacing: 40
-                    y: 16
-                    Repeater {
-                        id: timelineRepeater
-                        model: MetadataModels.MetadataTimelineModel {
-                            id: metadataTimelineModel
-                            level: MetadataModels.MetadataTimelineModel.Year
-                            //queryString: "pdf"
-                            resourceType: metadataModel.resourceType
-                            tags: metadataModel.tags
-                            minimumRating: metadataModel.minimumRating
-                            //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
-                            //startDate: "2011-01-01"
-                            //endDate: "2011-12-31"
-                        }
+            Column {
+                id: timelineColumn
+                spacing: 40
+                Repeater {
+                    id: timelineRepeater
+                    model: MetadataModels.MetadataTimelineModel {
+                        id: metadataTimelineModel
+                        level: MetadataModels.MetadataTimelineModel.Year
+                        //queryString: "pdf"
+                        resourceType: metadataModel.resourceType
+                        tags: metadataModel.tags
+                        minimumRating: metadataModel.minimumRating
+                        //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
+                        //startDate: "2011-01-01"
+                        //endDate: "2011-12-31"
+                    }
 
-                        delegate: Rectangle {
-                            color: theme.textColor
-                            width: 14 + 100 * (model.count / metadataTimelineModel.totalCount)
-                            height: width
-                            radius: width/2
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            PlasmaComponents.Label {
-                                text: model.label
-                                anchors {
-                                    left: parent.right
-                                    verticalCenter: parent.verticalCenter
-                                }
+                    delegate: Rectangle {
+                        color: theme.textColor
+                        width: 14 + 100 * (model.count / metadataTimelineModel.totalCount)
+                        height: width
+                        radius: width/2
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        PlasmaComponents.Label {
+                            text: model.label
+                            anchors {
+                                left: parent.horizontalCenter
+                                leftMargin: timelineColumn.width/2
+                                verticalCenter: parent.verticalCenter
                             }
                         }
                     }
@@ -104,6 +105,7 @@ Item {
 
 
     PlasmaComponents.Button {
+        id: backButton
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
