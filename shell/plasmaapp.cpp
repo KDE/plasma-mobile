@@ -374,54 +374,24 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     connect(containment, SIGNAL(configureRequested(Plasma::Containment*)),
             this, SLOT(showActivityConfiguration(Plasma::Containment*)));
 
-    //Is it a panel?
-    //put it into the main scene:
-    //if it's on an edge find a qml element propely named
-    //otherwise delete it
-    QString containmentPanelName;
-
-    switch (containment->location()) {
-    case Plasma::LeftEdge:
-        containmentPanelName = "leftEdgePanel";
-        break;
-    case Plasma::TopEdge:
-        containmentPanelName = "topEdgePanel";
-        break;
-    case Plasma::RightEdge:
-        containmentPanelName = "rightEdgePanel";
-        break;
-    case Plasma::BottomEdge:
-        containmentPanelName = "bottomEdgePanel";
-        break;
-    default:
-        break;
-    }
 
     //is it a panel?
-    if (!containmentPanelName.isEmpty()) {
-        QDeclarativeItem *containmentPanel = m_homeScreen->findChild<QDeclarativeItem*>(containmentPanelName);
+    if (containment->location() == Plasma::LeftEdge ||
+        containment->location() == Plasma::TopEdge ||
+        containment->location() == Plasma::RightEdge ||
+        containment->location() == Plasma::BottomEdge) {
 
-        if (containmentPanel) {
-            containment->setParentItem(containmentPanel);
-            containment->setParent(containmentPanel);
 
-            containmentPanel->metaObject()->invokeMethod(containmentPanel, "addContainment", Q_ARG(QVariant, QVariant::fromValue<QGraphicsWidget *>(containment)));
+        m_panelContainments.insert(containment->id(), containment);
 
-            m_panelContainments.insert(containment->id(), containment);
+        //add the panel into the QML homescreen
+        m_homeScreen->metaObject()->invokeMethod(m_homeScreen, "addPanel", 
+                                                    Q_ARG(QVariant, QVariant::fromValue<QGraphicsWidget *>(containment)),
+                                                    Q_ARG(QVariant, containment->formFactor()),
+                                                    Q_ARG(QVariant, containment->location()));
 
-            //add the panel into the QML homescreen
-            m_homeScreen->metaObject()->invokeMethod(m_homeScreen, "addPanel", 
-                                                     Q_ARG(QVariant, QVariant::fromValue<QGraphicsWidget *>(containment)),
-                                                     Q_ARG(QVariant, containment->formFactor()),
-                                                     Q_ARG(QVariant, containment->location()));
-
-            //done, don't need further management
-            return;
-        } else {
-            //no panel? discard the containment
-            containment->deleteLater();
-            return;
-        }
+        //done, don't need further management
+        return;
     }
 
 
