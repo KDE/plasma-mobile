@@ -98,7 +98,7 @@ Item {
         activeContainment.size = width + "x" + height
         //view the main containment
         state = "Slide"
-        finishTransition()
+        internal.finishTransition()
     }
 
     /*position a new panel in this home screen. the final position can depend from the panel formfactor or location*/
@@ -124,6 +124,29 @@ Item {
     height: 480
     state : "Normal"
 
+    QtObject {
+        id: internal
+
+        function finishTransition()
+        {
+            //spareSlot.containment = undefined
+            if (mainSlot.containment) {
+                mainSlot.containment.visible = false
+            }
+            mainSlot.containment = activeContainment
+            activeContainment.parent = mainSlot
+            activeContainment.x = 0
+            activeContainment.y = 0
+
+            //hide the activity switcher
+            if (activityPanel) {
+                activityPanel.x = homeScreen.width
+                activityPanel.state = "hidden"
+            }
+
+            state = "Normal"
+        }
+    }
 
     MobileComponents.Package {
         id: homeScreenPackage
@@ -131,26 +154,6 @@ Item {
     }
 
 
-
-    function finishTransition()
-    {
-        //spareSlot.containment = undefined
-        if (mainSlot.containment) {
-            mainSlot.containment.visible = false
-        }
-        mainSlot.containment = activeContainment
-        activeContainment.parent = mainSlot
-        activeContainment.x = 0
-        activeContainment.y = 0
-
-        //hide the activity switcher
-        if (activityPanel) {
-            activityPanel.x = homeScreen.width
-            activityPanel.state = "hidden"
-        }
-
-        state = "Normal"
-    }
 
     PlasmaCore.Theme {
         id: theme
