@@ -97,7 +97,7 @@ Item {
         activeContainment.y = 0
         activeContainment.size = width + "x" + height
         //view the main containment
-        state = "Slide"
+        internal.state = "Slide"
         internal.finishTransition()
     }
 
@@ -122,10 +122,11 @@ Item {
     y: 0
     width: 800
     height: 480
-    state : "Normal"
 
-    QtObject {
+
+    Item {
         id: internal
+        state : "Normal"
 
         function finishTransition()
         {
@@ -146,6 +147,24 @@ Item {
 
             state = "Normal"
         }
+
+        states: [
+            State {
+                name: "Normal"
+                PropertyChanges {
+                    target: spareSlot;
+                    x: homeScreen.width
+                }
+
+            },
+            State {
+                name: "Slide"
+                PropertyChanges {
+                    target: spareSlot;
+                    x: 0
+                }
+            }
+        ]
     }
 
     MobileComponents.Package {
@@ -153,11 +172,6 @@ Item {
         name: "org.kde.active.contour-tablet-homescreen"
     }
 
-
-
-    PlasmaCore.Theme {
-        id: theme
-    }
 
     MobileComponents.MouseEventListener {
         id: mainSlot;
@@ -175,25 +189,6 @@ Item {
             }
         }
     }
-
-
-    states: [
-            State {
-                name: "Normal"
-                PropertyChanges {
-                    target: spareSlot;
-                    x: homeScreen.width
-                }
-
-            },
-            State {
-                name: "Slide"
-                PropertyChanges {
-                    target: spareSlot;
-                    x: 0
-                }
-            }
-    ]
 
 
     //acceptsFocus property is costly, delay it after the animation
