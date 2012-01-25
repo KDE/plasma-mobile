@@ -60,10 +60,6 @@ Item {
     height: 480
     state : "Normal"
 
-    property QtObject activeWallpaper
-    onActiveWallpaperChanged: {
-        print("Current wallpaper path"+activeWallpaper.wallpaperPath);
-    }
 
     MobileComponents.Package {
         id: homeScreenPackage

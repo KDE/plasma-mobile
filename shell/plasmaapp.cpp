@@ -297,13 +297,6 @@ void PlasmaApp::changeContainment(Plasma::Containment *containment)
 
     m_oldContainment = m_currentContainment;
 
-    //FIXME: it should be possible to access containment.wallpaper
-    //expose the current wallpaper into the corona QML
-    if (containment->wallpaper()) {
-        QDeclarativeProperty containmentProperty(m_homeScreen, "activeWallpaper");
-        containmentProperty.write(QVariant::fromValue(static_cast<QObject*>(containment->wallpaper())));
-    }
-
     m_currentContainment = containment;
 }
 
