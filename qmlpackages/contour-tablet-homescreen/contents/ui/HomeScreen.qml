@@ -109,7 +109,6 @@ Item {
         name: "org.kde.active.contour-tablet-homescreen"
     }
 
-    
 
 
     function finishTransition()
@@ -134,15 +133,6 @@ Item {
 
     PlasmaCore.Theme {
         id: theme
-    }
-
-    Item {
-        id: alternateSlot;
-        objectName: "alternateSlot";
-        x: -width
-        y: 0
-        width: homeScreen.width;
-        height: homeScreen.height;
     }
 
     MobileComponents.MouseEventListener {

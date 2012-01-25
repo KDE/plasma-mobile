@@ -434,22 +434,9 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     }
 
     // we need our homescreen to show something!
-    // for the alternate screen (such as a launcher) we need a containment setted as excludeFromActivities
-    //FIXME: use only the declarativeSlot key?
     if (containment->config().readEntry("excludeFromActivities", false)) {
-        const QString declarativeSlot = containment->config().readEntry("declarativeSlot", "alternateSlot");
-        QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>(declarativeSlot);
-
-        if (alternateSlot) {
-            m_alternateContainments << containment;
-            alternateSlot->setProperty("width", m_mainView->size().width());
-            alternateSlot->setProperty("height", m_mainView->size().height());
-            containment->setParentItem(alternateSlot);
-            containment->setParent(alternateSlot);
-            containment->setPos(0, 0);
-            containment->setVisible(true);
-            return;
-        }
+        //Do nothing!
+        //Don't remove this empty branch
     } else if (containment->screen() > -1) {
         changeContainment(containment);
     } else {
@@ -502,10 +489,7 @@ void PlasmaApp::mainViewGeometryChanged()
         if (m_currentContainment) {
             m_currentContainment->resize(m_mainView->size());
         }
-        foreach (Plasma::Containment *cont, m_alternateContainments) {
-            cont->resize(m_mainView->size());
-            cont->setPos(0, 0);
-        }
+
         if (m_widgetsExplorer) {
             m_widgetsExplorer.data()->setGeometry(m_declarativeWidget->geometry());
         }
