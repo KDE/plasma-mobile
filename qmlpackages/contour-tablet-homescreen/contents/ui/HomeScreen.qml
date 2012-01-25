@@ -35,7 +35,6 @@ Item {
     signal nextActivityRequested
     signal previousActivityRequested
     signal newActivityRequested
-    signal transformingChanged(bool transforming)
     signal focusActivityView
 
     property QtObject activeWallpaper

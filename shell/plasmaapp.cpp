@@ -279,9 +279,6 @@ void PlasmaApp::setupHomeScreen()
     connect(m_mainView, SIGNAL(containmentActivated()),
             this, SLOT(mainContainmentActivated()));
 
-    connect(m_homeScreen, SIGNAL(transformingChanged(bool)),
-            this, SLOT(containmentsTransformingChanged(bool)));
-
     connect(m_homeScreen, SIGNAL(focusActivityView()),
             this, SLOT(focusMainView()));
 
