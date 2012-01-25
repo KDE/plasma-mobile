@@ -46,6 +46,7 @@ Item {
                     id: typesCloudModel
                     cloudCategory: "rdf:type"
                     resourceType: "nfo:FileDataObject"
+                    minimumRating: metadataModel.minimumRating
                     allowedCategories: userTypes.userTypes
                 }
                 delegate: PlasmaComponents.RadioButton {
@@ -90,6 +91,7 @@ Item {
                     id: tagCloud
                     cloudCategory: "nao:hasTag"
                     resourceType: metadataModel.resourceType
+                    minimumRating: metadataModel.minimumRating
                 }
                 delegate: PlasmaComponents.CheckBox {
                     text: i18n("%1 (%2)", model["label"], model["count"])
