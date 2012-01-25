@@ -34,6 +34,10 @@ Description:
         This is the main component of the Plasma Active tablet shell.
         It manages the look and feel on how the main containment is shown, and how panels and extra ui pieces (outside containments, such as activity switcher) are loaded and shown.
 
+Properties:
+        QGraphicsWidget activeContainment:
+            It's a pointer to the containment that owns the screen and is set by the plasma shell (the qml part must not write it). The qml part should make sure activeContainment is disaplayed in a prominent place, e.g. filling the whole screen.
+
 Signals:
         newActivityRequested():
             Ask the shell to show the user interface to create a new activity
