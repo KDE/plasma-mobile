@@ -19,21 +19,46 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+
+/**Documented API
+Inherits:
+        Item
+
+Imports:
+        QtQuick 1.0
+        org.kde.plasma.core 0.1
+        org.kde.plasma.deviceshell 0.1
+        org.kde.plasma.mobilecomponents 0.1
+
+Description:
+        This is the main component of the Plasma Active tablet shell.
+        It manages the look and feel on how the main containment is shown, and how panels and extra ui pieces (outside containments, such as activity switcher) are loaded and shown.
+
+Signals:
+        newActivityRequested():
+            Ask the shell to show the user interface to create a new activity
+
+        focusActivityView():
+            Ask the shell to show the main activity screen, even if it was covered by some application, by raising and focusing its window.
+**/
+
+
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.deviceshell 0.1 as DeviceShell
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
-    id: homeScreen;
-    objectName: "homeScreen";
-    x: 0;
-    y: 0;
-    width: 800;
-    height: 480;
-    state : "Normal"
+    id: homeScreen
+
     signal newActivityRequested
     signal focusActivityView
+
+    x: 0
+    y: 0
+    width: 800
+    height: 480
+    state : "Normal"
 
     property QtObject activeWallpaper
     onActiveWallpaperChanged: {
