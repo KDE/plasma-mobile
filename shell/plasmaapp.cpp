@@ -282,12 +282,6 @@ void PlasmaApp::setupHomeScreen()
     connect(m_homeScreen, SIGNAL(focusActivityView()),
             this, SLOT(focusMainView()));
 
-    connect(m_homeScreen, SIGNAL(nextActivityRequested()),
-            m_corona, SLOT(activateNextActivity()));
-
-    connect(m_homeScreen, SIGNAL(previousActivityRequested()),
-            m_corona, SLOT(activatePreviousActivity()));
-
     connect(m_homeScreen, SIGNAL(newActivityRequested()),
             this, SLOT(showActivityCreation()));
 

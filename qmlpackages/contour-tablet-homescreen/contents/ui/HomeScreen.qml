@@ -32,8 +32,6 @@ Item {
     width: 800;
     height: 480;
     state : "Normal"
-    signal nextActivityRequested
-    signal previousActivityRequested
     signal newActivityRequested
     signal focusActivityView
 
