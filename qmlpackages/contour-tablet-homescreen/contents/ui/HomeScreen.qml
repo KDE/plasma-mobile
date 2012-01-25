@@ -44,6 +44,13 @@ Properties:
         QGraphicsWidget activeContainment:
             It's a pointer to the containment that owns the screen and is set by the plasma shell (the qml part must not write it). The qml part should make sure activeContainment is disaplayed in a prominent place, e.g. filling the whole screen.
 
+Methods:
+        void addPanel(panel, formFactor, location)
+            panel: pointer to the containment
+            formFactor: formFactor of the panel
+            location: location of the panel
+            Position a new panel in this home screen. The final position can depend from the panel formfactor or location
+
 Signals:
         newActivityRequested():
             Ask the shell to show the user interface to create a new activity
@@ -94,6 +101,20 @@ Item {
         finishTransition()
     }
 
+    /*position a new panel in this home screen. the final position can depend from the panel formfactor or location*/
+    function addPanel(panel, formFactor, location)
+    {
+        //formFactor is not used in this implementation
+        print("Adding a new panel: "+panel+" Formfactor: "+formFactor +" Location: "+location)
+        switch (location) {
+        case DeviceShell.ContainmentProperties.TopEdge:
+            topEdgePanel.containment = panel
+            break
+        default:
+            print("On this homescreen only top panels are supported")
+            break
+        }
+    }
 
 
     /*************Implementation***************/
@@ -137,7 +158,6 @@ Item {
 
     MobileComponents.MouseEventListener {
         id: mainSlot;
-        objectName: "mainSlot"
         x: 0;
         y: 0;
         width: homeScreen.width
@@ -190,7 +210,6 @@ Item {
         windowStripEnabled: topEdgePanel.windowStripVisible
         mainItem: SystrayPanel {
             id: topEdgePanel
-            objectName: "topEdgePanel"
         }
         onActiveWindowChanged: {
             if (acceptsFocus && !activeWindow) {
@@ -225,7 +244,6 @@ Item {
 
     Item {
         id : spareSlot
-        objectName: "spareSlot"
         x: 0
         y: 0
         width: homeScreen.width

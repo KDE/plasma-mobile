@@ -96,6 +96,7 @@ PlasmaApp::PlasmaApp()
     Nepomuk::ResourceManager::instance()->init();
 
     qmlRegisterType<PanelProxy>("org.kde.plasma.deviceshell", 0, 1, "DevicePanel");
+    qmlRegisterUncreatableType<ContainmentProperties>("org.kde.plasma.deviceshell", 0, 1, "ContainmentProperties", "ContainmentProperties is just a type holder");
 
     //FIXME: why does not work?
     //qmlRegisterInterface<Plasma::Wallpaper>("Wallpaper");
@@ -407,6 +408,12 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
             containmentPanel->metaObject()->invokeMethod(containmentPanel, "addContainment", Q_ARG(QVariant, QVariant::fromValue<QGraphicsWidget *>(containment)));
 
             m_panelContainments.insert(containment->id(), containment);
+
+            //add the panel into the QML homescreen
+            m_homeScreen->metaObject()->invokeMethod(m_homeScreen, "addPanel", 
+                                                     Q_ARG(QVariant, QVariant::fromValue<QGraphicsWidget *>(containment)),
+                                                     Q_ARG(QVariant, containment->formFactor()),
+                                                     Q_ARG(QVariant, containment->location()));
 
             //done, don't need further management
             return;
