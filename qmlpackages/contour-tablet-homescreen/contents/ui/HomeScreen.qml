@@ -35,6 +35,12 @@ Description:
         It manages the look and feel on how the main containment is shown, and how panels and extra ui pieces (outside containments, such as activity switcher) are loaded and shown.
 
 Properties:
+        Item availableScreenRect: an item as big as the usable area of the main containment, make it smaller to prevent the containment to lay out items out of the availableScreenRect geometry. The item can offer four additional properties:
+            - int leftReserved: space reserved at the left edge of the screen. a maximized window will not go over this area of the screen.
+            - int topReserved: space reserved at the top edge of the screen. a maximized window will not go over this area of the screen.
+            - int rightReserved: space reserved at the right edge of the screen.
+            - int bottomReserved: space reserved at the bottom edge of the screen.
+
         QGraphicsWidget activeContainment:
             It's a pointer to the containment that owns the screen and is set by the plasma shell (the qml part must not write it). The qml part should make sure activeContainment is disaplayed in a prominent place, e.g. filling the whole screen.
 
@@ -55,19 +61,23 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Item {
     id: homeScreen
 
+    /***** API ************************/
+
     signal newActivityRequested
     signal focusActivityView
 
-    x: 0
-    y: 0
-    width: 800
-    height: 480
-    state : "Normal"
+    //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
+    property Item availableScreenRect: Item {
+        parent: homeScreen
+        anchors.fill: parent
+        anchors.topMargin: 38
+        anchors.bottomMargin: 12
 
-
-    MobileComponents.Package {
-        id: homeScreenPackage
-        name: "org.kde.active.contour-tablet-homescreen"
+        //those properties will define "structs" for reserved screen of the panels
+        property int leftReserved: 0
+        property int topReserved: anchors.topMargin
+        property int rightReserved: 0
+        property int bottomReserved: 0
     }
 
     property QGraphicsWidget activeContainment
@@ -83,6 +93,23 @@ Item {
         state = "Slide"
         finishTransition()
     }
+
+
+
+    /*************Implementation***************/
+    x: 0
+    y: 0
+    width: 800
+    height: 480
+    state : "Normal"
+
+
+    MobileComponents.Package {
+        id: homeScreenPackage
+        name: "org.kde.active.contour-tablet-homescreen"
+    }
+
+    
 
 
     function finishTransition()
@@ -107,21 +134,6 @@ Item {
 
     PlasmaCore.Theme {
         id: theme
-    }
-
-    //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
-    Item {
-        id: availableScreenRect
-        objectName: "availableScreenRect"
-        anchors.fill: parent
-        anchors.topMargin: 38
-        anchors.bottomMargin: 12
-
-        //this properties will define "structs" for reserved screen of the panels
-        property int leftReserved: 0
-        property int topReserved: anchors.topMargin
-        property int rightReserved: 0
-        property int bottomReserved: 0
     }
 
     Item {

@@ -479,7 +479,9 @@ void PlasmaApp::mainViewGeometryChanged()
         m_declarativeWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
 
         QRect availableScreenRect(QPoint(0,0), m_mainView->size());
-        QDeclarativeItem *availableScreenRectItem = m_homeScreen->findChild<QDeclarativeItem*>("availableScreenRect");
+
+        QDeclarativeItem *availableScreenRectItem = m_homeScreen->property("availableScreenRect").value<QDeclarativeItem*>();
+
         //is there an item that defines the screen geometry?
         if (availableScreenRectItem) {
             availableScreenRect = QRect((int)availableScreenRectItem->property("x").toReal(),
