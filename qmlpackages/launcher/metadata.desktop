@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Start Applications
 Comment[es]=Iniciar aplicaciones
+Comment[et]=Rakenduste käivitaja
 Comment[nl]=Toepassingen starten
 Comment[pl]=Uruchom programy
 Comment[pt]=Iniciar as Aplicações
@@ -13,6 +14,7 @@ Keywords=
 Name=Launcher
 Name[de]=Programmstarter
 Name[es]=Lanzador
+Name[et]=Käivitaja
 Name[nl]=Programmastarter
 Name[pl]=Aktywator
 Name[pt]=Lançamento

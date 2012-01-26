@@ -32,6 +32,18 @@ Item {
 
     signal filterChanged(string filter)
 
+    function focusTextInput()
+    {
+        focusTimer.running = true
+    }
+
+    Timer {
+        id: focusTimer
+        interval: 100
+        onTriggered: {
+            tzFilter.forceActiveFocus()
+        }
+    }
     Text {
         id: timeZoneLabel
         color: theme.textColor

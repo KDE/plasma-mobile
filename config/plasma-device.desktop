@@ -3,6 +3,7 @@ X-SuSE-translate=true
 Exec=sleep 3 ; plasma-device
 X-DBUS-StartupType=wait
 Name=Plasma Active Contour Shell
+Name[et]=Plasma Active'i Contouri kest
 Name[nl]=Plasma-shell met actieve omtrek
 Name[pl]=Powłoka Plazma Active Contour
 Name[pt]=Consola Active Contour do Plasma

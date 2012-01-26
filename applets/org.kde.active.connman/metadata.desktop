@@ -5,6 +5,7 @@ Icon=network-connect
 Keywords=
 Name=Network connections (connman)
 Name[es]=Conexiones de red (connman)
+Name[et]=Võrguühendused (connman)
 Name[nl]=Netwerkverbindingen (connman)
 Name[pl]=Połączenia sieciowe (connman)
 Name[pt]=Ligações de rede (connman)

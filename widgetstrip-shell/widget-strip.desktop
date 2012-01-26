@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Widget Strip
 Name[es]=Banda de elementos gráficos
+Name[et]=Vidinariba
 Name[nl]=Widget-strip
 Name[pl]=Pasek elementu interfejsu
 Name[pt]=Barra de Elementos
@@ -10,6 +11,7 @@ Name[uk]=Стрічка віджетів
 Name[x-test]=xxWidget Stripxx
 GenericName=Widget Strip
 GenericName[es]=Banda de elementos gráficos
+GenericName[et]=Vidinariba
 GenericName[nl]=Widget-strip
 GenericName[pl]=Pasek elementu interfejsu
 GenericName[pt]=Barra de Elementos
@@ -19,6 +21,7 @@ GenericName[uk]=Стрічка віджетів
 GenericName[x-test]=xxWidget Stripxx
 Comment=A collection of widgets
 Comment[es]=Una colección de elementos gráficos
+Comment[et]=Vidinakogu
 Comment[nl]=Een verzameling widgets
 Comment[pl]=Kolekcja elementów interfejsu
 Comment[pt]=Uma colecção de elementos

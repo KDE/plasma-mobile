@@ -162,6 +162,7 @@ Item {
         onStatusChanged: {
             if (status == PlasmaComponents.DialogStatus.Open) {
                 timeZonePickerLoader.source = "TimeZonePicker.qml"
+                timeZonePickerLoader.item.focusTextInput()
             }
         }
     }

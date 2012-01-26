@@ -2,6 +2,7 @@
 Name=Power Button
 Name[de]=Netzschalter
 Name[es]=Botón de encendido
+Name[et]=Toitenupp
 Name[nl]=Aan/Uit-knop
 Name[pl]=Przycisk zasilania
 Name[pt]=Botão de Energia
@@ -12,6 +13,7 @@ Name[uk]=Кнопка живлення
 Name[x-test]=xxPower Buttonxx
 Comment=Suspends the device
 Comment[es]=Suspende el dispositivo
+Comment[et]=Seadme viimine uneseisundisse
 Comment[nl]=Apparaat onderbreken
 Comment[pl]=Wstrzymuje urządzenie
 Comment[pt]=Suspende o dispositivo

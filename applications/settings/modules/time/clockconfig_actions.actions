@@ -1,6 +1,7 @@
 [Domain]
 Name=Date and Time Control Module
 Name[es]=Módulo de control de fecha y hora
+Name[et]=Kuupäeva ja kellaaja juhtimismoodul
 Name[ga]=Modúl Rialaithe Dáta agus Am
 Name[nl]=Controlemodule van datum en tijd
 Name[pl]=Moduł kontrolny daty i czasu
@@ -15,6 +16,7 @@ Icon=preferences-system-time
 [org.kde.active.clockconfig.save]
 Name=Save the date/time settings
 Name[es]=Guardar preferencias de fecha y hora
+Name[et]=Kuupäeva ja kellaaja seadistuste salvestamine
 Name[ga]=Sábháil na socruithe dáta/ama
 Name[nl]=Datum- en tijdinstellingen opslaan
 Name[pl]=Zapisz ustawienia daty/czasu
@@ -25,6 +27,7 @@ Name[ug]=چېسلا/ۋاقىت تەڭشىكىنى ساقلايدۇ
 Name[uk]=Зберегти параметри дати/часу
 Name[x-test]=xxSave the date/time settingsxx
 Description=System policies prevent you from saving the date/time settings.
+Description[et]=Süsteemi reeglid takistavad kuupäeva ja kellaaja seadistuste salvestamist.
 Description[ga]=De bharr polasaí an chórais, níl cead agat socruithe an dáta/ama a shábháil.
 Description[nl]=Systeembeleid voorkwam dat u de datum- en tijdinstellingen kon opslaan.
 Description[pl]=Polityka systemu nie pozwala ci na zapisanie ustawień daty/czasu.
