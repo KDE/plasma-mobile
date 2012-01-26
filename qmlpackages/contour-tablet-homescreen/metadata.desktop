@@ -26,7 +26,7 @@ X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Category=
 X-KDE-PluginInfo-Email=mart@kde.org
-X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-License=GPLv2+
 #FIXME: will be called org.kde.active.contour-homescreen or just be merged in tablet
 X-KDE-PluginInfo-Name=org.kde.active.contour-tablet-homescreen
 X-KDE-PluginInfo-Version=
