@@ -50,7 +50,7 @@ PlasmaComponents.Page {
 
 
     Rectangle {
-        color: theme.textColor
+        color: Qt.tint(theme.textColor, Qt.rgba(1,1,1,0.7))
         width: 6
         anchors {
             top: parent.top
@@ -62,12 +62,25 @@ PlasmaComponents.Page {
 
     PlasmaComponents.Highlight {
         id: highlight
-        visible: currentItem != null
+        opacity: currentItem != null ? 1 : 0
         width: root.width
         height: Math.max(currentItem.height, theme.largeIconSize + 8)
         x: 0
-        y: currentItem.y - timelineFlickable.contentY + timelineFlickable.y
+        y: currentItem.y - timelineFlickable.contentY + timelineFlickable.y - (height/2 - currentItem.height/2)
+        Behavior on y {
+            NumberAnimation {
+                duration: 250
+                easing.type: "InOutCubic"
+            }
+        }
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+                easing.type: "OutCubic"
+            }
+        }
     }
+
     PlasmaComponents.ToolButton {
         iconSource: "zoom-in"
         z: 900
@@ -77,7 +90,7 @@ PlasmaComponents.Page {
             rightMargin: 8
         }
         width: theme.largeIconSize
-        visible: highlight.visible
+        opacity: highlight.opacity
         height: width
         flat: false
         enabled: metadataTimelineModel.level != MetadataModels.MetadataTimelineModel.Day
@@ -140,8 +153,8 @@ PlasmaComponents.Page {
 
                 delegate: Rectangle {
                     id: dateDelegate
-                    color: theme.textColor
-                    width: 14 + 100 * (model.count / metadataTimelineModel.totalCount)
+                    color: currentItem == dateDelegate ? theme.highlightColor : theme.textColor
+                    width: Math.round(14 + 100 * (model.count / metadataTimelineModel.totalCount))
                     height: width
                     radius: width/2
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -149,7 +162,7 @@ PlasmaComponents.Page {
                         text: model.label
                         anchors {
                             left: parent.horizontalCenter
-                            leftMargin: timelineColumn.width/2
+                            leftMargin: timelineColumn.width/2 + theme.defaultFont.mSize.width
                             verticalCenter: parent.verticalCenter
                         }
                     }
