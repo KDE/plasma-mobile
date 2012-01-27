@@ -117,6 +117,7 @@ PlasmaComponents.Page {
                 }
                 width: theme.largeIconSize
                 opacity: highlight.opacity
+                visible: metadataTimelineModel.level != MetadataModels.MetadataTimelineModel.Day
                 height: width
                 flat: false
                 enabled: metadataTimelineModel.level != MetadataModels.MetadataTimelineModel.Day
@@ -226,7 +227,14 @@ PlasmaComponents.Page {
             width: theme.largeIconSize
             height: width
             flat: false
-            onClicked: sidebarStack.pop()
+            onClicked: {
+                metadataModel.startDate = ""
+                metadataModel.endDate = ""
+
+                currentMonth = 0
+                currentYear = 0
+                sidebarStack.pop()
+            }
         }
         PlasmaComponents.ToolButton {
             iconSource: "zoom-out"
