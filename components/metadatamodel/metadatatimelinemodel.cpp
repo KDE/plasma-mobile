@@ -257,6 +257,9 @@ void MetadataTimelineModel::doQuery()
     emit totalCountChanged();
     emit descriptionChanged();
 
+    if (m_queryClient) {
+        m_queryClient->close();
+    }
     delete m_queryClient;
     m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
 
