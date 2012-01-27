@@ -28,6 +28,7 @@ Item {
     width: Math.max(800, homeScreen.width)
     height: Math.max(480, homeScreen.height - 50 + background.margins.bottom)
     property bool windowStripVisible: false
+    property alias containment: systrayContainer.plasmoid
 
     onStateChanged: {
         if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
@@ -53,15 +54,6 @@ Item {
     function itemLaunched()
     {
         systrayPanel.state = "Hidden"
-    }
-
-    function addContainment(cont)
-    {
-        if (cont.pluginName == "org.kde.windowstrip") {
-            windowListContainer.plasmoid = cont
-        } else if (cont.pluginName == "org.kde.active.systemtray") {
-            systrayContainer.plasmoid = cont
-        }
     }
 
     function setWindowListArea()
@@ -118,7 +110,7 @@ Item {
                     }
                 }
             }
-            PlasmoidContainer {
+            Item {
                 id: windowListContainer
                 anchors {
                     left: parent.left

@@ -96,6 +96,7 @@ PlasmaApp::PlasmaApp()
     Nepomuk::ResourceManager::instance()->init();
 
     qmlRegisterType<PanelProxy>("org.kde.plasma.deviceshell", 0, 1, "DevicePanel");
+    qmlRegisterUncreatableType<ContainmentProperties>("org.kde.plasma.deviceshell", 0, 1, "ContainmentProperties", "ContainmentProperties is just a type holder");
 
     //FIXME: why does not work?
     //qmlRegisterInterface<Plasma::Wallpaper>("Wallpaper");
@@ -279,17 +280,8 @@ void PlasmaApp::setupHomeScreen()
     connect(m_mainView, SIGNAL(containmentActivated()),
             this, SLOT(mainContainmentActivated()));
 
-    connect(m_homeScreen, SIGNAL(transformingChanged(bool)),
-            this, SLOT(containmentsTransformingChanged(bool)));
-
     connect(m_homeScreen, SIGNAL(focusActivityView()),
             this, SLOT(focusMainView()));
-
-    connect(m_homeScreen, SIGNAL(nextActivityRequested()),
-            m_corona, SLOT(activateNextActivity()));
-
-    connect(m_homeScreen, SIGNAL(previousActivityRequested()),
-            m_corona, SLOT(activatePreviousActivity()));
 
     connect(m_homeScreen, SIGNAL(newActivityRequested()),
             this, SLOT(showActivityCreation()));
@@ -305,13 +297,6 @@ void PlasmaApp::changeContainment(Plasma::Containment *containment)
     containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
 
     m_oldContainment = m_currentContainment;
-
-    //FIXME: it should be possible to access containment.wallpaper
-    //expose the current wallpaper into the corona QML
-    if (containment->wallpaper()) {
-        QDeclarativeProperty containmentProperty(m_homeScreen, "activeWallpaper");
-        containmentProperty.write(QVariant::fromValue(static_cast<QObject*>(containment->wallpaper())));
-    }
 
     m_currentContainment = containment;
 }
@@ -389,48 +374,24 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     connect(containment, SIGNAL(configureRequested(Plasma::Containment*)),
             this, SLOT(showActivityConfiguration(Plasma::Containment*)));
 
-    //Is it a panel?
-    //put it into the main scene:
-    //if it's on an edge find a qml element propely named
-    //otherwise delete it
-    QString containmentPanelName;
-
-    switch (containment->location()) {
-    case Plasma::LeftEdge:
-        containmentPanelName = "leftEdgePanel";
-        break;
-    case Plasma::TopEdge:
-        containmentPanelName = "topEdgePanel";
-        break;
-    case Plasma::RightEdge:
-        containmentPanelName = "rightEdgePanel";
-        break;
-    case Plasma::BottomEdge:
-        containmentPanelName = "bottomEdgePanel";
-        break;
-    default:
-        break;
-    }
 
     //is it a panel?
-    if (!containmentPanelName.isEmpty()) {
-        QDeclarativeItem *containmentPanel = m_homeScreen->findChild<QDeclarativeItem*>(containmentPanelName);
+    if (containment->location() == Plasma::LeftEdge ||
+        containment->location() == Plasma::TopEdge ||
+        containment->location() == Plasma::RightEdge ||
+        containment->location() == Plasma::BottomEdge) {
 
-        if (containmentPanel) {
-            containment->setParentItem(containmentPanel);
-            containment->setParent(containmentPanel);
 
-            containmentPanel->metaObject()->invokeMethod(containmentPanel, "addContainment", Q_ARG(QVariant, QVariant::fromValue<QGraphicsWidget *>(containment)));
+        m_panelContainments.insert(containment->id(), containment);
 
-            m_panelContainments.insert(containment->id(), containment);
+        //add the panel into the QML homescreen
+        m_homeScreen->metaObject()->invokeMethod(m_homeScreen, "addPanel", 
+                                                    Q_ARG(QVariant, QVariant::fromValue<QGraphicsWidget *>(containment)),
+                                                    Q_ARG(QVariant, containment->formFactor()),
+                                                    Q_ARG(QVariant, containment->location()));
 
-            //done, don't need further management
-            return;
-        } else {
-            //no panel? discard the containment
-            containment->deleteLater();
-            return;
-        }
+        //done, don't need further management
+        return;
     }
 
 
@@ -450,22 +411,9 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     }
 
     // we need our homescreen to show something!
-    // for the alternate screen (such as a launcher) we need a containment setted as excludeFromActivities
-    //FIXME: use only the declarativeSlot key?
     if (containment->config().readEntry("excludeFromActivities", false)) {
-        const QString declarativeSlot = containment->config().readEntry("declarativeSlot", "alternateSlot");
-        QDeclarativeItem *alternateSlot = m_homeScreen->findChild<QDeclarativeItem*>(declarativeSlot);
-
-        if (alternateSlot) {
-            m_alternateContainments << containment;
-            alternateSlot->setProperty("width", m_mainView->size().width());
-            alternateSlot->setProperty("height", m_mainView->size().height());
-            containment->setParentItem(alternateSlot);
-            containment->setParent(alternateSlot);
-            containment->setPos(0, 0);
-            containment->setVisible(true);
-            return;
-        }
+        //Do nothing!
+        //Don't remove this empty branch
     } else if (containment->screen() > -1) {
         changeContainment(containment);
     } else {
@@ -495,7 +443,9 @@ void PlasmaApp::mainViewGeometryChanged()
         m_declarativeWidget->setGeometry(m_mainView->mapToScene(QRect(QPoint(0,0), m_mainView->size())).boundingRect());
 
         QRect availableScreenRect(QPoint(0,0), m_mainView->size());
-        QDeclarativeItem *availableScreenRectItem = m_homeScreen->findChild<QDeclarativeItem*>("availableScreenRect");
+
+        QDeclarativeItem *availableScreenRectItem = m_homeScreen->property("availableScreenRect").value<QDeclarativeItem*>();
+
         //is there an item that defines the screen geometry?
         if (availableScreenRectItem) {
             availableScreenRect = QRect((int)availableScreenRectItem->property("x").toReal(),
@@ -516,10 +466,7 @@ void PlasmaApp::mainViewGeometryChanged()
         if (m_currentContainment) {
             m_currentContainment->resize(m_mainView->size());
         }
-        foreach (Plasma::Containment *cont, m_alternateContainments) {
-            cont->resize(m_mainView->size());
-            cont->setPos(0, 0);
-        }
+
         if (m_widgetsExplorer) {
             m_widgetsExplorer.data()->setGeometry(m_declarativeWidget->geometry());
         }
