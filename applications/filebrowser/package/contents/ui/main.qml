@@ -63,7 +63,11 @@ Image {
         //limit: 20
     }
 
-
+    PlasmaComponents.BusyIndicator {
+        anchors.centerIn: mainStack
+        visible: metadataModel.status == MetadataModels.MetadataModel.Running
+        running: visible
+    }
 
     PlasmaComponents.ToolBar {
         id: toolBar

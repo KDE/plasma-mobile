@@ -30,11 +30,8 @@ Item {
     Column {
         id: toolsColumn
         spacing: 4
-        TypeFilter {
-            
-        }
 
-
+        TypeFilter { }
 
 
         PlasmaComponents.Label {
