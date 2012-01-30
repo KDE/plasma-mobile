@@ -37,14 +37,13 @@ static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
-    // FIXME: selkie icon instead of internet-web-browser
     KAboutData about("active-filebrowser", 0, ki18n("Active file browser"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2012 Marco Martin"), KLocalizedString(), 0, "mart@kde.org");
                      about.addAuthor( ki18n("Marco Martin"), KLocalizedString(), "mart@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
-    options.add("+[url]", ki18n( "URL of the image to open" ));
+    options.add("+[url]", ki18n( "URL of the file to open" ));
 #ifndef QT_NO_OPENGL
     options.add("opengl", ki18n("use a QGLWidget for the viewport"));
 #endif
