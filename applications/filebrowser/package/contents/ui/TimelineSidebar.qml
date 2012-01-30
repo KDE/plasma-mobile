@@ -180,6 +180,35 @@ PlasmaComponents.Page {
                                 rightMargin: - timelineFlickable.width + parent.width
                             }
                             onClicked: {
+                                if (currentItem == dateDelegate) {
+                                    switch (metadataTimelineModel.level) {
+                                    case MetadataModels.MetadataTimelineModel.Year:
+                                        metadataModel.startDate = ""
+                                        metadataModel.endDate = ""
+
+                                        currentMonth = 0
+                                        currentYear = 0
+                                        break
+                                    case MetadataModels.MetadataTimelineModel.Month:
+                                        metadataModel.startDate = buildDate(model.year, 1, 1)
+                                        metadataModel.endDate = buildDate(model.year, 12, 31)
+
+                                        currentMonth = 0
+                                        currentYear = model.year
+                                        break
+                                    case MetadataModels.MetadataTimelineModel.Day:
+                                    default:
+                                        metadataModel.startDate = buildDate(model.year, model.month, 1)
+                                        metadataModel.endDate = buildDate(model.year, model.month, 31)
+
+                                        currentMonth = model.month
+                                        currentYear = model.year
+                                        break
+                                    }
+                                    currentItem = null
+                                    return
+                                }
+
                                 switch (metadataTimelineModel.level) {
                                 case MetadataModels.MetadataTimelineModel.Year:
                                     metadataModel.startDate = buildDate(model.year, 1, 1)
