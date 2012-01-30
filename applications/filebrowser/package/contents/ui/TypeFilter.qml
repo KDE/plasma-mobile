@@ -27,6 +27,24 @@ Column {
 
     property string currentType
 
+    PlasmaCore.SortFilterModel {
+        id: sortFilterModel
+        sourceModel: MetadataModels.MetadataCloudModel {
+            id: typesCloudModel
+            cloudCategory: "rdf:type"
+            resourceType: "nfo:FileDataObject"
+            minimumRating: metadataModel.minimumRating
+            allowedCategories: userTypes.userTypes
+        }
+        sortRole: "count"
+        sortOrder: Qt.DescendingOrder
+    }
+
+    //FIXME: seems the only way to make the proper item be autoselected at start
+    Timer {
+        running: true
+        onTriggered: categoryRepeater.model = sortFilterModel
+    }
 
     PlasmaComponents.Label {
         text: "<b>"+i18n("File types")+"</b>"
@@ -39,18 +57,7 @@ Column {
         }
 
         Repeater {
-            model: PlasmaCore.SortFilterModel {
-                id:sortmod
-                sourceModel: MetadataModels.MetadataCloudModel {
-                    id: typesCloudModel
-                    cloudCategory: "rdf:type"
-                    resourceType: "nfo:FileDataObject"
-                    minimumRating: metadataModel.minimumRating
-                    allowedCategories: userTypes.userTypes
-                }
-                sortRole: "count"
-                sortOrder: Qt.DescendingOrder
-            }
+            id: categoryRepeater
             delegate: PlasmaComponents.RadioButton {
                 text: i18n("%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
                 //FIXME: more elegant way to remove applications?
@@ -72,10 +79,6 @@ Column {
                         }
                     }
                 }
-            }
-            Component.onCompleted: {
-                children[0].checked = true
-                currentType = children[0].model["label"]
             }
         }
     }
