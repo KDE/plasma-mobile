@@ -27,40 +27,13 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Item {
     anchors.fill: parent
 
-
     Column {
         id: toolsColumn
         spacing: 4
-        PlasmaComponents.Label {
-            text: "<b>"+i18n("File types")+"</b>"
+        TypeFilter {
+            
         }
-        PlasmaComponents.ButtonColumn {
-            spacing: 4
-            anchors {
-                left: parent.left
-                leftMargin: theme.defaultFont.mSize.width
-            }
 
-            Repeater {
-                model: MetadataModels.MetadataCloudModel {
-                    id: typesCloudModel
-                    cloudCategory: "rdf:type"
-                    resourceType: "nfo:FileDataObject"
-                    minimumRating: metadataModel.minimumRating
-                    allowedCategories: userTypes.userTypes
-                }
-                delegate: PlasmaComponents.RadioButton {
-                        text: i18n("%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
-                        //FIXME: more elegant way to remove applications?
-                        visible: model["label"] != undefined && model["label"] != "nfo:Application"
-                        onCheckedChanged: {
-                            if (checked) {
-                                metadataModel.resourceType = model["label"]
-                            }
-                        }
-                    }
-            }
-        }
 
 
 
