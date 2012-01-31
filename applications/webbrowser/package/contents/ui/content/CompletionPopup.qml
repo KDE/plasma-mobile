@@ -154,6 +154,50 @@ Item {
             id: dashboard
             objectName: "dashboard"
             anchors.fill: parent
+            QIconItem {
+                id: rssButton
+                height: 32
+                width: height
+                visible: {
+                    print("Feeds are: " + webView.rssFeeds);
+                    return webView.rssFeeds.length != 0
+                }
+                anchors { top: parent.top; left: parent.left; topMargin: 0; leftMargin: 0; }
+                icon: "application-rss+xml"
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: MobileComponents.ActivateAnimation { targetItem: rssButton }
+                    onClicked: SequentialAnimation {
+                        ScriptAction { script: {
+                                // We use a hiddene TextInput to borrow its clipboard handling
+                                clipBoardHelper.text = webView.rssFeeds[0];
+                                clipBoardHelper.selectAll();
+                                clipBoardHelper.copy();
+                                disappearTimer.running = true;
+                            }
+                        }
+                        MobileComponents.AppearAnimation { targetItem: rssActionLabel }
+                    }
+                }
+                TextInput { id: clipBoardHelper; visible: false }
+                Timer {
+                    id: disappearTimer
+                    repeat: false
+                    interval: 8000
+                    running: false
+                    onTriggered:MobileComponents.DisappearAnimation { targetItem: rssActionLabel }
+                }
+
+
+            }
+            PlasmaComponents.Label {
+                id: rssActionLabel
+                width: 400
+                text: i18n("Link copied to clipboard")
+                visible: false
+                anchors { top: rssButton.top; bottom: rssButton.bottom; left: rssButton.right; leftMargin: 8 }
+            }
+
             PlasmaComponents.Label {
                 id: topLabel
                 height: 48

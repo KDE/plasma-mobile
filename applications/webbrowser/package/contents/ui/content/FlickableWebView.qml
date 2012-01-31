@@ -49,6 +49,7 @@ Flickable {
     property alias icon: webView.icon
     property alias progress: webView.progress
     property alias url: webView.url
+    property alias rssFeeds: webView.rssFeeds
     property alias back: webView.back
     property alias stop: webView.stop
     property alias reload: webView.reload

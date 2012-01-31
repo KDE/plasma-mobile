@@ -95,6 +95,7 @@ public:
     QUrl pendingUrl;
     QString pendingString;
     QByteArray pendingData;
+    QStringList rssFeeds;
     mutable KDeclarativeWebSettings settings;
     QDeclarativeComponent* newWindowComponent;
     QDeclarativeItem* newWindowParent;
@@ -431,6 +432,7 @@ void KDeclarativeWebView::doLoadStarted()
         d->status = Loading;
         emit statusChanged(d->status);
     }
+    setRssFeeds(QStringList());
     emit loadStarted();
 }
 
@@ -464,6 +466,16 @@ void KDeclarativeWebView::doLoadFinished(bool ok)
         if (d->status == Ready) {
             if (d->wallet) {
                 d->wallet->fillFormData(page()->mainFrame());
+            }
+
+            foreach (const QWebElement &el, page()->mainFrame()->findAllElements("LINK")) {
+                if (el.attribute("type").contains("application/rss+xml")) {
+                    kDebug() << "Found feed!" << el.attribute("title") << el.attribute("href");
+                    d->rssFeeds << el.attribute("href");
+                }
+            }
+            if (!rssFeeds().isEmpty()) {
+                emit rssFeedsChanged();
             }
         }
     } else {
@@ -509,6 +521,19 @@ void KDeclarativeWebView::setUrl(const QUrl& url)
         d->pending = d->PendingUrl;
         d->pendingUrl = url;
     }
+}
+
+QStringList KDeclarativeWebView::rssFeeds() const
+{
+    return d->rssFeeds;
+}
+
+void KDeclarativeWebView::setRssFeeds(const QStringList &feeds)
+{
+    if (d->rssFeeds != feeds) {
+        d->rssFeeds = feeds;
+        emit rssFeedsChanged();
+    };
 }
 
 /*!
