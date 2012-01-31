@@ -158,10 +158,7 @@ Item {
                 id: rssButton
                 height: 32
                 width: height
-                visible: {
-                    print("Feeds are: " + webView.rssFeeds);
-                    return webView.rssFeeds.length != 0
-                }
+                visible: (webView.rssFeeds.length != 0)
                 anchors { top: parent.top; left: parent.left; topMargin: 0; leftMargin: 0; }
                 icon: "application-rss+xml"
                 MouseArea {

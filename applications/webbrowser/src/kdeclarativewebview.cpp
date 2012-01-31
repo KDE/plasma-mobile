@@ -359,7 +359,7 @@ void KDeclarativeWebView::init()
 
 void KDeclarativeWebView::initSettings()
 {
-    kDebug() << "Settings up fonts and reading settings: " << KGlobalSettings::generalFont().family() << KGlobalSettings::generalFont().pointSize();
+    //kDebug() << "Settings up fonts and reading settings: " << KGlobalSettings::generalFont().family() << KGlobalSettings::generalFont().pointSize();
     settings()->setFontFamily(QWebSettings::StandardFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::SerifFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::FixedFont,  KGlobalSettings::generalFont().family());
@@ -378,7 +378,7 @@ void KDeclarativeWebView::initSettings()
     ptr->reparseConfiguration();
     KConfigGroup cg(ptr, "webbrowser");
     bool pluginsEnabled = cg.readEntry("pluginsEnabled", false);
-    kDebug() << " C++ Plugins on? " << pluginsEnabled;
+    //kDebug() << " C++ Plugins on? " << pluginsEnabled;
 
     settings()->setAttribute(QWebSettings::PluginsEnabled, pluginsEnabled);
     settingsObject()->setPluginsEnabled(pluginsEnabled);
@@ -470,7 +470,6 @@ void KDeclarativeWebView::doLoadFinished(bool ok)
 
             foreach (const QWebElement &el, page()->mainFrame()->findAllElements("LINK")) {
                 if (el.attribute("type").contains("application/rss+xml")) {
-                    kDebug() << "Found feed!" << el.attribute("title") << el.attribute("href");
                     d->rssFeeds << el.attribute("href");
                 }
             }
