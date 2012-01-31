@@ -69,25 +69,23 @@ Item {
                     anchors.left: parent.left
                     anchors.rightMargin: 8
                 }
-                Text {
+                PlasmaComponents.Label {
                     height: 20
                     width: 320
                     id: labelText
                     text: name
                     elide: Text.ElideMiddle
-                    color: theme.textColor
                     anchors.left: previewImage.right
                     anchors.leftMargin: 12
                     anchors.bottom : parent.verticalCenter
                 }
 
-                Text {
+                PlasmaComponents.Label {
                     height: 20
                     id: descriptionText
                     text: url
                     opacity: 0.6
                     elide: Text.ElideMiddle
-                    color: theme.textColor
                     anchors.left: previewImage.right
                     anchors.leftMargin: 12
                     width: 320
@@ -110,7 +108,6 @@ Item {
                         urlEntered(url);
                         mainItem.state = "collapsed";
                     }
-                    onPressed: MobileComponents.ActivateAnimation { targetItem: delegateContainer }
                 }
 
             }
@@ -157,7 +154,7 @@ Item {
             id: dashboard
             objectName: "dashboard"
             anchors.fill: parent
-            Text {
+            PlasmaComponents.Label {
                 id: topLabel
                 height: 48
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -192,9 +189,10 @@ Item {
                 anchors.top: topLabel.bottom
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 12
-                Text {
+                PlasmaComponents.Label {
                     id: historyLabel
-                    text: i18n("<h3>Recently visited</h3>")
+                    text: i18n("Recently visited")
+                    font.pointSize: theme.defaultFont.pointSize+8
                     anchors {
                         top: parent.top
                         left: parent.left
@@ -219,9 +217,10 @@ Item {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.leftMargin: 12
-                Text {
+                PlasmaComponents.Label {
                     id: bookmarksLabel
-                    text: i18n("<h3>Bookmarks</h3>")
+                    font.pointSize: theme.defaultFont.pointSize+8
+                    text: i18n("Bookmarks")
                 }
                 ListView {
                     clip: true
