@@ -169,11 +169,12 @@ Item {
                     onPressed: MobileComponents.ActivateAnimation { targetItem: rssButton }
                     onClicked: SequentialAnimation {
                         ScriptAction { script: {
-                                // We use a hiddene TextInput to borrow its clipboard handling
+                                // We use a hidden TextInput to borrow its clipboard handling
                                 clipBoardHelper.text = webView.rssFeeds[0];
                                 clipBoardHelper.selectAll();
                                 clipBoardHelper.copy();
                                 disappearTimer.running = true;
+                                clipBoardHelper.text = ""
                             }
                         }
                         MobileComponents.AppearAnimation { targetItem: rssActionLabel }
@@ -187,8 +188,6 @@ Item {
                     running: false
                     onTriggered:MobileComponents.DisappearAnimation { targetItem: rssActionLabel }
                 }
-
-
             }
             PlasmaComponents.Label {
                 id: rssActionLabel
