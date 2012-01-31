@@ -63,6 +63,18 @@ Item {
             }
         }
     }
+    Button {
+        text: (metadataTimelineModel.startDate == "2009-10-10") ? "2011-12-31" : "2009-10-10"
+        onClicked: {
+            if (metadataTimelineModel.startDate == "2009-10-10") {
+                metadataTimelineModel.startDate = "2011-01-01"
+                metadataTimelineModel.endDate =  "2011-12-31"
+            } else {
+                metadataTimelineModel.startDate = "2009-10-10"
+                metadataTimelineModel.endDate =  "2011-12-31"
+            }
+        }
+    }
 
     Item {
         id: timeline

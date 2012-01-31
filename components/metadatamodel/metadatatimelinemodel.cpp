@@ -19,7 +19,6 @@
 
 #include "metadatatimelinemodel.h"
 
-#include <QTimer>
 
 #include <KDebug>
 #include <KMimeType>
@@ -49,12 +48,6 @@ MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
       m_queryClient(0),
       m_totalCount(0)
 {
-    m_queryTimer = new QTimer(this);
-    m_queryTimer->setSingleShot(true);
-    connect(m_queryTimer, SIGNAL(timeout()),
-            this, SLOT(doQuery()));
-
-
     QHash<int, QByteArray> roleNames;
     roleNames[LabelRole] = "label";
     roleNames[YearRole] = "year";
@@ -62,7 +55,7 @@ MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
     roleNames[DayRole] = "day";
     roleNames[CountRole] = "count";
     setRoleNames(roleNames);
-    m_queryTimer->start(100);
+    askRefresh();
 }
 
 MetadataTimelineModel::~MetadataTimelineModel()
@@ -77,7 +70,7 @@ void MetadataTimelineModel::setLevel(MetadataTimelineModel::Level level)
     }
 
     m_level = level;
-    m_queryTimer->start(0);
+    askRefresh();
     emit levelChanged();
 }
 

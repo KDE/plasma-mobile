@@ -195,6 +195,11 @@ void AbstractMetadataModel::setStatus(AbstractMetadataModel::Status status)
     emit statusChanged();
 }
 
+void AbstractMetadataModel::askRefresh()
+{
+    m_queryTimer->start(0);
+}
+
 void AbstractMetadataModel::setStartDateString(const QString &date)
 {
     QDate newDate = QDate::fromString(date, "yyyy-MM-dd");

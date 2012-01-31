@@ -37,7 +37,6 @@ namespace Nepomuk {
 
 
 
-class QDBusServiceWatcher;
 class QTimer;
 
 class KImageCache;
@@ -140,7 +139,6 @@ private:
     QVector<Nepomuk::Resource> m_resources;
     QList<Nepomuk::Resource> m_resourcesToInsert;
     QHash<QUrl, int> m_uriToResourceIndex;
-    QTimer *m_queryTimer;
     QTimer *m_newEntriesTimer;
 
     //pieces to build m_query

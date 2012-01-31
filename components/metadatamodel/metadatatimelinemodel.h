@@ -34,9 +34,6 @@ namespace Nepomuk {
     class ResourceWatcher;
 }
 
-class QDBusServiceWatcher;
-class QTimer;
-
 class MetadataTimelineModel : public AbstractMetadataModel
 {
     Q_OBJECT
@@ -94,7 +91,6 @@ private:
     Nepomuk::Query::QueryServiceClient *m_queryClient;
     QVector<QHash<Roles, int> > m_results;
     QVariantList m_categories;
-    QTimer *m_queryTimer;
     Level m_level;
     int m_totalCount;
 };

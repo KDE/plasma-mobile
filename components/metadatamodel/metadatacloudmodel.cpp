@@ -21,7 +21,6 @@
 
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>
-#include <QTimer>
 
 #include <KDebug>
 #include <KMimeType>
@@ -49,12 +48,6 @@ MetadataCloudModel::MetadataCloudModel(QObject *parent)
     : AbstractMetadataModel(parent),
       m_queryClient(0)
 {
-    m_queryTimer = new QTimer(this);
-    m_queryTimer->setSingleShot(true);
-    connect(m_queryTimer, SIGNAL(timeout()),
-            this, SLOT(doQuery()));
-
-
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
     roleNames[Count] = "count";
@@ -73,7 +66,7 @@ void MetadataCloudModel::setCloudCategory(QString category)
     }
 
     m_cloudCategory = category;
-    m_queryTimer->start(0);
+    askRefresh();
     emit cloudCategoryChanged();
 }
 

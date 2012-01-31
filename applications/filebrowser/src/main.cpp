@@ -41,6 +41,7 @@ int main(int argc, char **argv)
                      KAboutData::License_GPL, ki18n("Copyright 2012 Marco Martin"), KLocalizedString(), 0, "mart@kde.org");
                      about.addAuthor( ki18n("Marco Martin"), KLocalizedString(), "mart@kde.org" );
     about.setProgramIconName("system-file-manager");
+
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
