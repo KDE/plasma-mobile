@@ -34,9 +34,6 @@ namespace Nepomuk {
     class ResourceWatcher;
 }
 
-class QDBusServiceWatcher;
-class QTimer;
-
 class MetadataCloudModel : public AbstractMetadataModel
 {
     Q_OBJECT
@@ -86,7 +83,6 @@ private:
     Nepomuk::Query::QueryServiceClient *m_queryClient;
     QVector<QPair<QString, int> > m_results;
     QVariantList m_categories;
-    QTimer *m_queryTimer;
     QSet<QString> m_allowedCategories;
 
     //pieces to build m_query
