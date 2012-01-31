@@ -73,7 +73,7 @@ void MetadataCloudModel::setCloudCategory(QString category)
     }
 
     m_cloudCategory = category;
-    m_queryTimer->start(0);
+    askRefresh();
     emit cloudCategoryChanged();
 }
 

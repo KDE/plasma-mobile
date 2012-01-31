@@ -77,7 +77,7 @@ void MetadataTimelineModel::setLevel(MetadataTimelineModel::Level level)
     }
 
     m_level = level;
-    m_queryTimer->start(0);
+    askRefresh();
     emit levelChanged();
 }
 

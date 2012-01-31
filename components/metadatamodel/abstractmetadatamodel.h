@@ -203,6 +203,7 @@ protected:
 
     QStringList tagStrings() const;
     void setStatus(Status status);
+    void askRefresh();
 
 private:
     QDBusServiceWatcher *m_queryServiceWatcher;
