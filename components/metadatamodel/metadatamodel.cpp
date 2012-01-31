@@ -56,11 +56,6 @@ MetadataModel::MetadataModel(QObject *parent)
       m_limit(0),
       m_screenshotSize(180, 120)
 {
-    m_queryTimer = new QTimer(this);
-    m_queryTimer->setSingleShot(true);
-    connect(m_queryTimer, SIGNAL(timeout()),
-            this, SLOT(doQuery()));
-
     m_newEntriesTimer = new QTimer(this);
     m_newEntriesTimer->setSingleShot(true);
     connect(m_newEntriesTimer, SIGNAL(timeout()),
@@ -114,11 +109,10 @@ MetadataModel::~MetadataModel()
 
 void MetadataModel::setQuery(const Nepomuk::Query::Query &query)
 {
-    m_queryTimer->stop();
     m_query = query;
 
     if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
-        doQuery();
+        askRefresh();
     }
 }
 
@@ -134,7 +128,7 @@ void MetadataModel::setQueryString(const QString &query)
     }
 
     m_queryString = query;
-    m_queryTimer->start(0);
+    askRefresh();
     emit queryStringChanged();
 }
 
@@ -150,7 +144,7 @@ void MetadataModel::setLimit(int limit)
     }
 
     m_limit = limit;
-    m_queryTimer->start(0);
+    askRefresh();
     emit limitChanged();
 }
 
@@ -170,7 +164,7 @@ void MetadataModel::setSortBy(const QVariantList &sortBy)
     }
 
     m_sortBy = stringList;
-    m_queryTimer->start(0);
+    askRefresh();
     emit sortByChanged();
 }
 
@@ -186,7 +180,7 @@ void MetadataModel::setSortOrder(Qt::SortOrder sortOrder)
     }
 
     m_sortOrder = sortOrder;
-    m_queryTimer->start(0);
+    askRefresh();
     emit sortOrderChanged();
 }
 
