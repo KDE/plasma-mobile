@@ -44,15 +44,13 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        spacing: theme.defaultFont.mSize.height
-        Text {
-            color: theme.textColor
-            text: "<h3>" + settingsComponent.name + "</h3>"
+        PlasmaComponents.Label {
+            text: settingsComponent.name
+            font.pointSize: theme.defaultFont.pointSize+8
             opacity: 1
         }
-        Text {
+        PlasmaComponents.Label {
             id: descriptionLabel
-            color: theme.textColor
             text: settingsComponent.description
             opacity: .4
         }

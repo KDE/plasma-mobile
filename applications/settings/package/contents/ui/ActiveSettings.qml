@@ -160,7 +160,8 @@ Image {
                 anchors { fill: parent; margins: 80; }
                 PlasmaComponents.Label {
                     id: initial_page_label
-                    text: "<h1>Active Settings</h1>";
+                    text: i18n("Active Settings")
+                    font.pointSize: theme.defaultFont.pointSize*2
                     anchors { top: parent.top; horizontalCenter: parent.horizontalCenter; }
                 }
                 QIconItem {
