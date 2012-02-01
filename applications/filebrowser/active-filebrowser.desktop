@@ -1,7 +1,16 @@
 [Desktop Entry]
 Name=Files
+Name[pt_BR]=Arquivos
+Name[uk]=Файли
+Name[x-test]=xxFilesxx
 GenericName=File browser
+GenericName[pt_BR]=Navegador de arquivos
+GenericName[uk]=Керування файлами
+GenericName[x-test]=xxFile browserxx
 Comment=A simple file browser/manager
+Comment[pt_BR]=Um navegador/gerenciador de arquivos simples
+Comment[uk]=Проста програма для перегляду і керування файловою системою
+Comment[x-test]=xxA simple file browser/managerxx
 
 
 Exec=active-filebrowser -graphicssystem raster %u
