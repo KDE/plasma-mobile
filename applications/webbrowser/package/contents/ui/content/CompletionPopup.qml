@@ -222,14 +222,19 @@ Item {
                 }
 
             }
-            Item {
-                id: history
-                anchors.left: parent.left
-                anchors.right: parent.horizontalCenter
-                anchors.top: topLabel.bottom
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 12
-                PlasmaComponents.Label {
+            ListView {
+                id: historyList
+                clip: true
+            anchors.left: parent.left
+            anchors.right: parent.horizontalCenter
+            anchors.top: topLabel.bottom
+            anchors.bottom: parent.bottom
+            anchors.rightMargin: 12
+                model: historyModel
+                delegate: myDelegate
+                highlight: PlasmaComponents.Highlight {}
+                currentIndex: -1
+                header: PlasmaComponents.Label {
                     id: historyLabel
                     text: i18n("Recently visited")
                     font.pointSize: theme.defaultFont.pointSize+8
@@ -238,38 +243,22 @@ Item {
                         left: parent.left
                     }
                 }
-                ListView {
-                    id: historyList
-                    clip: true
-                    anchors.fill: parent
-                    anchors.topMargin: historyLabel.height + 8
-                    model: historyModel
-                    delegate: myDelegate
-                    highlight: PlasmaComponents.Highlight {}
-                    currentIndex: -1
-                }
             }
-
-            Item {
-                id: bookmarks
+            ListView {
+                clip: true
                 anchors.top: topLabel.bottom
                 anchors.left: parent.horizontalCenter
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.leftMargin: 12
-                PlasmaComponents.Label {
+                currentIndex: -1
+                model: bookmarksModel
+                delegate: myDelegate
+                highlight: PlasmaComponents.Highlight {}
+                header: PlasmaComponents.Label {
                     id: bookmarksLabel
                     font.pointSize: theme.defaultFont.pointSize+8
                     text: i18n("Bookmarks")
-                }
-                ListView {
-                    clip: true
-                    anchors.fill: parent
-                    anchors.topMargin: bookmarksLabel.height + 8
-                    currentIndex: -1
-                    model: bookmarksModel
-                    delegate: myDelegate
-                    highlight: PlasmaComponents.Highlight {}
                 }
             }
         }
