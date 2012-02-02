@@ -399,6 +399,11 @@ void MobCorona::checkActivities()
                 newCurrentActivity = id;
             }
             kDebug() << "migrated" << context->currentActivityId() << context->currentActivity();
+
+            QString activityIcon = cont->config().readEntry("activityIcon", QString());
+            if (!activityIcon.isEmpty()) {
+                m_activityController->setActivityIcon(id, activityIcon);
+            }
         }
     }
 
