@@ -34,9 +34,6 @@ Item {
         if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
             menuContainer.plasmoid.resetStatus()
         }
-        if (state == "Hidden") {
-            windowStripVisible = false;
-        }
     }
 
     PlasmaCore.FrameSvgItem {
@@ -75,7 +72,7 @@ Item {
                     menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
                 }
             }
-            if (systrayPanel.state == "Hidden" && dragging) {
+            if (dragging) {
                 systrayPanel.windowStripVisible = true;
             }
         }
@@ -180,10 +177,19 @@ Item {
     ]
     transitions: [
         Transition {
-            PropertyAnimation {
-                properties: "y"
-                duration: 250
-                easing.type: Easing.OutQuad
+            SequentialAnimation {
+                PropertyAnimation {
+                    properties: "y"
+                    duration: 250
+                    easing.type: Easing.OutQuad
+                }
+                ScriptAction {
+                    script: {
+                        if (state == "Hidden") {
+                            systrayPanel.windowStripVisible = false
+                        }
+                    }
+                }
             }
         }
     ]
