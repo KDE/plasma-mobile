@@ -42,6 +42,7 @@
 #include <qwebpage.h>
 #include <qwebsettings.h>
 
+#include <KActivities/Info>
 #include <KDirWatch>
 #include <KUrl>
 #include <KGlobalSettings>
@@ -61,7 +62,6 @@
 #include <Nepomuk/Resource>
 #include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
-
 
 QT_BEGIN_NAMESPACE
 
@@ -1249,7 +1249,6 @@ bool QDeclarativeWebPage::downloadResource (const KUrl& srcUrl, const QString& s
     const QString fileName ((suggestedName.isEmpty() ? srcUrl.fileName() : suggestedName));
     const KUrl &destUrl(QString("file://%1/%2").arg(QDir::homePath()).arg(fileName));
 
-
     if (!destUrl.isValid()) {
         return false;
     }
@@ -1271,18 +1270,31 @@ bool QDeclarativeWebPage::downloadResource (const KUrl& srcUrl, const QString& s
 
 void QDeclarativeWebPage::downloadFinished(KJob *job)
 {
-    //FIXME: this breaks all resources currently connected to the current activity
-    //reactivate as soon as the nepomuk bug is fixed
-    /*KIO::CopyJob *cj = qobject_cast<KIO::CopyJob *>(job);
+    KIO::CopyJob *cj = qobject_cast<KIO::CopyJob*>(job);
     if (cj && job->error() == KJob::NoError) {
-        QString activityId = m_activityConsumer->currentActivity();
+
+        // Create a FileDataObject Nepomuk Resource ...
         Nepomuk::Resource fileRes(cj->destUrl());
         fileRes.addType(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject"));
+
+        // ... tag it as "Download"
         fileRes.addTag(Nepomuk::Tag("Download"));
 
-        Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KEXT::Activity());
-        acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
-    }*/
+        // ... add source URLs, there might be more than one, but common case is just one
+        QString u;
+        foreach (const KUrl &_u, cj->srcUrls()) {
+            u.append(_u.pathOrUrl() + " ");
+        }
+        fileRes.setDescription(i18n("Downloaded from %1", u));
+
+        // And link it to the currently active Activity
+        QString activityId = m_activityConsumer->currentActivity();
+        KActivities::Info aInfo(activityId);
+        aInfo.linkResource(cj->destUrl());
+    } else {
+        // TODO: handle download errors.
+        kError() << "Error downloading file: " << job->errorString();
+    }
 }
 
 void QDeclarativeWebPage::downloadRequest(const QNetworkRequest &request)
