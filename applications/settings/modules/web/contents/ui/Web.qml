@@ -39,15 +39,13 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        spacing: 12
-        Text {
-            color: theme.textColor
-            text: "<h3>" + settingsComponent.name + "</h3>"
+        PlasmaComponents.Label {
+            text: settingsComponent.name
+            font.pointSize: theme.defaultFont.pointSize+8
             opacity: 1
         }
-        Text {
+        PlasmaComponents.Label {
             id: descriptionLabel
-            color: theme.textColor
             text: settingsComponent.description
             opacity: .4
         }
@@ -76,8 +74,7 @@ Item {
         id: startPageItem
         anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: 32; }
 
-        Text {
-            color: theme.textColor
+        PlasmaComponents.Label {
             anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
             text: i18n("Start page:")
         }
@@ -105,8 +102,7 @@ Item {
         id: adblockItem
         anchors { top: startPageItem.bottom; left: parent.left; right: parent.right; topMargin: 48; }
 
-        Text {
-            color: theme.textColor
+        PlasmaComponents.Label {
             anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
             text: i18n("Block ads:")
         }
@@ -127,8 +123,7 @@ Item {
         id: pluginsItem
         anchors { top: adblockItem.bottom; left: parent.left; right: parent.right; topMargin: 48; }
 
-        Text {
-            color: theme.textColor
+        PlasmaComponents.Label {
             anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
             text: i18n("Enable plugins:")
         }

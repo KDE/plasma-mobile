@@ -33,6 +33,7 @@ MobileComponents.Sheet {
     acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
 
     Component.onCompleted: open()
+
     onStatusChanged: {
         if (status == PlasmaComponents.DialogStatus.Closed) {
             closeRequested()
@@ -99,6 +100,18 @@ MobileComponents.Sheet {
 
     }
 
+    function syncWallpaperIndex()
+    {
+        if (configInterface.activityName == "" || configInterface.wallpaperIndex < 0) {
+            var newIndex = Math.random()*wallpapersList.count
+            wallpapersList.positionViewAtIndex(newIndex)
+            wallpapersList.currentIndex = newIndex
+        } else {
+            wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex)
+            wallpapersList.currentIndex = configInterface.wallpaperIndex
+        }
+    }
+
     content: [
         Grid {
             id: nameRow
@@ -126,7 +139,7 @@ MobileComponents.Sheet {
             }
             PlasmaComponents.Label {
                 color: theme.textColor
-                text: i18n("Encrypted:")
+                text: i18n("Private:")
                 anchors.right: encryptedSwitch.left
             }
             PlasmaComponents.Switch {
@@ -173,18 +186,10 @@ MobileComponents.Sheet {
         target: configInterface
         onModelChanged: {
             wallpapersList.model =  configInterface.wallpaperModel
+            syncWallpaperIndex()
         }
 
-        onWallpaperIndexChanged: {
-            if (configInterface.activityName == "" || configInterface.wallpaperIndex < 0) {
-                var newIndex = Math.random()*wallpapersList.count
-                wallpapersList.positionViewAtIndex(newIndex)
-                wallpapersList.currentIndex = newIndex
-            } else {
-                wallpapersList.positionViewAtIndex(configInterface.wallpaperIndex)
-                wallpapersList.currentIndex = configInterface.wallpaperIndex
-            }
-        }
+        onWallpaperIndexChanged: syncWallpaperIndex()
 
         onActivityNameChanged: {
             if (configInterface.activityName == "") {
@@ -193,6 +198,11 @@ MobileComponents.Sheet {
                 activityNameEdit.text = configInterface.activityName
             }
         }
+    }
+    Timer {
+        running: true
+        interval: 200
+        onTriggered: syncWallpaperIndex()
     }
 
 }

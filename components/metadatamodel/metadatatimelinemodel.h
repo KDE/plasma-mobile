@@ -1,5 +1,5 @@
 /*
-    Copyright 2011 Marco Martin <notmart@gmail.com>
+    Copyright 2012 Marco Martin <notmart@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -17,8 +17,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef METADATACLOUDMODEL_H
-#define METADATACLOUDMODEL_H
+#ifndef METADATATIMELINEMODEL_H
+#define METADATATIMELINEMODEL_H
 
 #include "abstractmetadatamodel.h"
 
@@ -34,44 +34,52 @@ namespace Nepomuk {
     class ResourceWatcher;
 }
 
-class MetadataCloudModel : public AbstractMetadataModel
+class MetadataTimelineModel : public AbstractMetadataModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString cloudCategory READ cloudCategory WRITE setCloudCategory NOTIFY cloudCategoryChanged)
-    Q_PROPERTY(QVariantList categories READ categories NOTIFY categoriesChanged)
-    Q_PROPERTY(QVariantList allowedCategories READ allowedCategories WRITE setAllowedCategories NOTIFY allowedCategoriesChanged)
+    Q_PROPERTY(Level level READ level WRITE setLevel NOTIFY levelChanged)
+    Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
+    /**
+     * An user-readable description of the results shown, such as "All years", "Year 2011" or "March 2007"
+     */
+    Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
 
 public:
     enum Roles {
-        Label = Qt::UserRole+1,
-        Count
+        LabelRole = Qt::UserRole + 1,
+        YearRole = Qt::UserRole + 2,
+        MonthRole = Qt::UserRole + 3,
+        DayRole = Qt::UserRole + 4,
+        CountRole = Qt::UserRole + 5
     };
 
-    MetadataCloudModel(QObject *parent = 0);
-    ~MetadataCloudModel();
+    enum Level {
+        Year = 0,
+        Month,
+        Day
+    };
+    Q_ENUMS(Level)
+
+    MetadataTimelineModel(QObject *parent = 0);
+    ~MetadataTimelineModel();
 
     virtual int count() const {return m_results.count();}
 
-    QVariantList categories() const;
+    void setLevel(Level level);
+    Level level() const;
 
-    void setAllowedCategories(const QVariantList &whitelist);
-    QVariantList allowedCategories() const;
+    int totalCount() const {return m_totalCount;}
 
-    /**
-     * rdf:type
-     * nao:numericRating
-     */
-    void setCloudCategory(QString category);
-    QString cloudCategory() const;
+    QString description() const;
 
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
 
 Q_SIGNALS:
-   void cloudCategoryChanged();
-   void categoriesChanged();
-   void allowedCategoriesChanged();
+   void levelChanged();
+   void totalCountChanged();
+   void descriptionChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
@@ -81,12 +89,10 @@ protected Q_SLOTS:
 
 private:
     Nepomuk::Query::QueryServiceClient *m_queryClient;
-    QVector<QPair<QString, int> > m_results;
+    QVector<QHash<Roles, int> > m_results;
     QVariantList m_categories;
-    QSet<QString> m_allowedCategories;
-
-    //pieces to build m_query
-    QString m_cloudCategory;
+    Level m_level;
+    int m_totalCount;
 };
 
 #endif

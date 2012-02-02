@@ -1,0 +1,27 @@
+[Desktop Entry]
+Name=Files
+Name[pt]=Ficheiros
+Name[pt_BR]=Arquivos
+Name[ug]=ھۆججەتلەر
+Name[uk]=Файли
+Name[x-test]=xxFilesxx
+GenericName=File browser
+GenericName[cs]=Prohlížeč souborů
+GenericName[pt]=Navegador de ficheiros
+GenericName[pt_BR]=Navegador de arquivos
+GenericName[uk]=Керування файлами
+GenericName[x-test]=xxFile browserxx
+Comment=A simple file browser/manager
+Comment[pt]=Um navegador/gestor de ficheiros simples
+Comment[pt_BR]=Um navegador/gerenciador de arquivos simples
+Comment[uk]=Проста програма для перегляду і керування файловою системою
+Comment[x-test]=xxA simple file browser/managerxx
+
+
+Exec=active-filebrowser -graphicssystem raster %u
+Terminal=false
+Icon=system-file-manager
+Type=Application
+Categories=Qt;KDE;System;Filemanagement;
+MimeType=inode/directory;
+InitialPreference=9

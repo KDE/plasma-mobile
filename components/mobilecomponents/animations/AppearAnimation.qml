@@ -29,7 +29,7 @@ SequentialAnimation {
     property int duration: Animations.normalDuration
 
     // Fast scaling while we're animation == more FPS
-    ScriptAction { script: targetItem.smooth = false }
+    ScriptAction { script: { targetItem.smooth = false; targetItem.visible = true; } }
 
     ParallelAnimation {
         PropertyAnimation {

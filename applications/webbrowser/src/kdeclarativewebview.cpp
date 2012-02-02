@@ -95,6 +95,7 @@ public:
     QUrl pendingUrl;
     QString pendingString;
     QByteArray pendingData;
+    QStringList rssFeeds;
     mutable KDeclarativeWebSettings settings;
     QDeclarativeComponent* newWindowComponent;
     QDeclarativeItem* newWindowParent;
@@ -358,7 +359,7 @@ void KDeclarativeWebView::init()
 
 void KDeclarativeWebView::initSettings()
 {
-    kDebug() << "Settings up fonts and reading settings: " << KGlobalSettings::generalFont().family() << KGlobalSettings::generalFont().pointSize();
+    //kDebug() << "Settings up fonts and reading settings: " << KGlobalSettings::generalFont().family() << KGlobalSettings::generalFont().pointSize();
     settings()->setFontFamily(QWebSettings::StandardFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::SerifFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::FixedFont,  KGlobalSettings::generalFont().family());
@@ -377,7 +378,7 @@ void KDeclarativeWebView::initSettings()
     ptr->reparseConfiguration();
     KConfigGroup cg(ptr, "webbrowser");
     bool pluginsEnabled = cg.readEntry("pluginsEnabled", false);
-    kDebug() << " C++ Plugins on? " << pluginsEnabled;
+    //kDebug() << " C++ Plugins on? " << pluginsEnabled;
 
     settings()->setAttribute(QWebSettings::PluginsEnabled, pluginsEnabled);
     settingsObject()->setPluginsEnabled(pluginsEnabled);
@@ -431,6 +432,7 @@ void KDeclarativeWebView::doLoadStarted()
         d->status = Loading;
         emit statusChanged(d->status);
     }
+    setRssFeeds(QStringList());
     emit loadStarted();
 }
 
@@ -464,6 +466,15 @@ void KDeclarativeWebView::doLoadFinished(bool ok)
         if (d->status == Ready) {
             if (d->wallet) {
                 d->wallet->fillFormData(page()->mainFrame());
+            }
+
+            foreach (const QWebElement &el, page()->mainFrame()->findAllElements("LINK")) {
+                if (el.attribute("type").contains("application/rss+xml")) {
+                    d->rssFeeds << el.attribute("href");
+                }
+            }
+            if (!rssFeeds().isEmpty()) {
+                emit rssFeedsChanged();
             }
         }
     } else {
@@ -509,6 +520,19 @@ void KDeclarativeWebView::setUrl(const QUrl& url)
         d->pending = d->PendingUrl;
         d->pendingUrl = url;
     }
+}
+
+QStringList KDeclarativeWebView::rssFeeds() const
+{
+    return d->rssFeeds;
+}
+
+void KDeclarativeWebView::setRssFeeds(const QStringList &feeds)
+{
+    if (d->rssFeeds != feeds) {
+        d->rssFeeds = feeds;
+        emit rssFeedsChanged();
+    };
 }
 
 /*!

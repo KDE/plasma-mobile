@@ -107,7 +107,8 @@ void ActivityConfiguration::doExit()
                                                        "org.kde.plasma.VirtualKeyboard",
                                                        "hide");
     QDBusConnection::sessionBus().asyncCall(call);
-    deleteLater();
+    //FIXME: should be enough any delay that will cause it to be exectued at least two loops after in the event loop
+    QTimer::singleShot(100, this, SLOT(deleteLater()));
 }
 
 void ActivityConfiguration::ensureContainmentExistence()

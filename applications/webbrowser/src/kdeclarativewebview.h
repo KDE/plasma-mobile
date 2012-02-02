@@ -126,6 +126,7 @@ class KDeclarativeWebView : public QDeclarativeItem {
     Q_PROPERTY(int preferredWidth READ preferredWidth WRITE setPreferredWidth NOTIFY preferredWidthChanged)
     Q_PROPERTY(int preferredHeight READ preferredHeight WRITE setPreferredHeight NOTIFY preferredHeightChanged)
     Q_PROPERTY(QUrl url READ url WRITE setUrl NOTIFY urlChanged)
+    Q_PROPERTY(QStringList rssFeeds READ rssFeeds NOTIFY rssFeedsChanged)
     Q_PROPERTY(qreal progress READ progress NOTIFY progressChanged)
     Q_PROPERTY(Status status READ status NOTIFY statusChanged)
 
@@ -158,6 +159,8 @@ public:
     QString title() const;
 
     QPixmap icon() const;
+    QStringList rssFeeds() const;
+    void setRssFeeds(const QStringList &feeds);
 
     Q_INVOKABLE bool heuristicZoom(int clickX, int clickY, qreal maxzoom);
     QRect elementAreaAt(int x, int y, int minwidth, int minheight) const;
@@ -228,6 +231,7 @@ Q_SIGNALS:
     void statusChanged(Status);
     void titleChanged(const QString&);
     void iconChanged();
+    void rssFeedsChanged();
     void statusTextChanged();
     void htmlChanged();
     void pressGrabTimeChanged();

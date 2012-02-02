@@ -94,12 +94,10 @@ void History::loadHistory()
     }
 
     emit dataChanged();
-    //kDebug() << "XXX (Re)loaded history..." << d->items.count();
 }
 
 void History::addPage(const QString &url, const QString &title)
 {
-    kDebug() << "XXX Adding page" << title << url;
     if (url.isEmpty() && title.isEmpty()) {
         return;
     }
@@ -107,7 +105,6 @@ void History::addPage(const QString &url, const QString &title)
     foreach (QObject* i, d->items) {
         CompletionItem* ci = qobject_cast<CompletionItem*>(i);
         if (ci->url() == url) {
-            kDebug() << "XXXXX Removing " << ci->name() << " ... " << ci->url();
             d->items.removeAll(i);
         }
     }
@@ -122,10 +119,8 @@ void History::addPage(const QString &url, const QString &title)
 
 void History::visitPage(const QString &url, const QString &title)
 {
-    //kDebug() << "XXXX Visiting page" << title << url;
     d->currentPage = new CompletionItem(title, url, d->icon, this);
     d->currentPage->setIconName("view-history");
-    //kDebug() << "XXX starting timer";
     d->addHistoryTimer.start();
 }
 

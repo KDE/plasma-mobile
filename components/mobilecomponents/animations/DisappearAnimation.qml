@@ -44,5 +44,10 @@ SequentialAnimation {
             easing.type: Easing.OutExpo;
         }
     }
-    ScriptAction { script: targetItem.smooth = true; }
+    ScriptAction {
+        script: {
+            targetItem.smooth = true;
+            targetItem.visible = false;
+        }
+    }
 }

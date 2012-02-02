@@ -48,22 +48,34 @@ Item {
 
 
     MouseArea {
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            leftMargin: -22
+        }
 
         onReleased: {
-            var star = iconRow.childAt(mouse.x, mouse.y);
+            var star = iconRow.childAt(mouse.x-22, mouse.y);
             if (star && star.baseRating) {
-                print("released with rating " + star.baseRating + " Item: " + resourceUrl);
-                rateResource(resourceUrl, star.baseRating);
+                if (resourceUrl) {
+                    print("released with rating " + star.baseRating + " Item: " + resourceUrl);
+                    rateResource(resourceUrl, star.baseRating);
+                } else {
+                    score = star.baseRating
+                }
             } else{
-                print("released but could not figure out rating" + star);
+                if (resourceUrl) {
+                    print("released with rating 0 Item: " + resourceUrl)
+                    rateResource(resourceUrl, 0)
+                } else {
+                    score = 0
+                }
             }
         }
     }
 
 
     function rateResource(resourceUrl, rating) {
-        print("MMM Rating " + resourceUrl + " *****: " + rating )
+        print("New Rating " + resourceUrl + " *****: " + rating )
         if (resourceUrl == "") {
             print("url empty.");
             return;

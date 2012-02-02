@@ -69,25 +69,23 @@ Item {
                     anchors.left: parent.left
                     anchors.rightMargin: 8
                 }
-                Text {
+                PlasmaComponents.Label {
                     height: 20
                     width: 320
                     id: labelText
                     text: name
                     elide: Text.ElideMiddle
-                    color: theme.textColor
                     anchors.left: previewImage.right
                     anchors.leftMargin: 12
                     anchors.bottom : parent.verticalCenter
                 }
 
-                Text {
+                PlasmaComponents.Label {
                     height: 20
                     id: descriptionText
                     text: url
                     opacity: 0.6
                     elide: Text.ElideMiddle
-                    color: theme.textColor
                     anchors.left: previewImage.right
                     anchors.leftMargin: 12
                     width: 320
@@ -110,7 +108,6 @@ Item {
                         urlEntered(url);
                         mainItem.state = "collapsed";
                     }
-                    onPressed: MobileComponents.ActivateAnimation { targetItem: delegateContainer }
                 }
 
             }
@@ -157,7 +154,47 @@ Item {
             id: dashboard
             objectName: "dashboard"
             anchors.fill: parent
-            Text {
+            QIconItem {
+                id: rssButton
+                height: 32
+                width: height
+                visible: (webView.rssFeeds.length != 0)
+                anchors { top: parent.top; left: parent.left; topMargin: 0; leftMargin: 0; }
+                icon: "application-rss+xml"
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: MobileComponents.ActivateAnimation { targetItem: rssButton }
+                    onClicked: SequentialAnimation {
+                        ScriptAction { script: {
+                                // We use a hidden TextInput to borrow its clipboard handling
+                                clipBoardHelper.text = webView.rssFeeds[0];
+                                clipBoardHelper.selectAll();
+                                clipBoardHelper.copy();
+                                disappearTimer.running = true;
+                                clipBoardHelper.text = ""
+                            }
+                        }
+                        MobileComponents.AppearAnimation { targetItem: rssActionLabel }
+                    }
+                }
+                TextInput { id: clipBoardHelper; visible: false }
+                Timer {
+                    id: disappearTimer
+                    repeat: false
+                    interval: 8000
+                    running: false
+                    onTriggered:MobileComponents.DisappearAnimation { targetItem: rssActionLabel }
+                }
+            }
+            PlasmaComponents.Label {
+                id: rssActionLabel
+                width: 400
+                text: i18n("Link copied to clipboard")
+                visible: false
+                anchors { top: rssButton.top; bottom: rssButton.bottom; left: rssButton.right; leftMargin: 8 }
+            }
+
+            PlasmaComponents.Label {
                 id: topLabel
                 height: 48
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -185,52 +222,43 @@ Item {
                 }
 
             }
-            Item {
-                id: history
-                anchors.left: parent.left
-                anchors.right: parent.horizontalCenter
-                anchors.top: topLabel.bottom
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 12
-                Text {
+            ListView {
+                id: historyList
+                clip: true
+            anchors.left: parent.left
+            anchors.right: parent.horizontalCenter
+            anchors.top: topLabel.bottom
+            anchors.bottom: parent.bottom
+            anchors.rightMargin: 12
+                model: historyModel
+                delegate: myDelegate
+                highlight: PlasmaComponents.Highlight {}
+                currentIndex: -1
+                header: PlasmaComponents.Label {
                     id: historyLabel
-                    text: i18n("<h3>Recently visited</h3>")
+                    text: i18n("Recently visited")
+                    font.pointSize: theme.defaultFont.pointSize+8
                     anchors {
                         top: parent.top
                         left: parent.left
                     }
                 }
-                ListView {
-                    id: historyList
-                    clip: true
-                    anchors.fill: parent
-                    anchors.topMargin: historyLabel.height + 8
-                    model: historyModel
-                    delegate: myDelegate
-                    highlight: PlasmaComponents.Highlight {}
-                    currentIndex: -1
-                }
             }
-
-            Item {
-                id: bookmarks
+            ListView {
+                clip: true
                 anchors.top: topLabel.bottom
                 anchors.left: parent.horizontalCenter
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.leftMargin: 12
-                Text {
+                currentIndex: -1
+                model: bookmarksModel
+                delegate: myDelegate
+                highlight: PlasmaComponents.Highlight {}
+                header: PlasmaComponents.Label {
                     id: bookmarksLabel
-                    text: i18n("<h3>Bookmarks</h3>")
-                }
-                ListView {
-                    clip: true
-                    anchors.fill: parent
-                    anchors.topMargin: bookmarksLabel.height + 8
-                    currentIndex: -1
-                    model: bookmarksModel
-                    delegate: myDelegate
-                    highlight: PlasmaComponents.Highlight {}
+                    font.pointSize: theme.defaultFont.pointSize+8
+                    text: i18n("Bookmarks")
                 }
             }
         }

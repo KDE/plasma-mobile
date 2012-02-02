@@ -17,13 +17,12 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "metadatacloudmodel.h"
+#include "metadatatimelinemodel.h"
 
-#include <QDBusConnection>
-#include <QDBusServiceWatcher>
 
 #include <KDebug>
 #include <KMimeType>
+#include <KCalendarSystem>
 
 #include <soprano/vocabulary.h>
 
@@ -44,77 +43,84 @@
 #include "kext.h"
 
 
-MetadataCloudModel::MetadataCloudModel(QObject *parent)
+MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
     : AbstractMetadataModel(parent),
-      m_queryClient(0)
+      m_queryClient(0),
+      m_totalCount(0)
 {
     QHash<int, QByteArray> roleNames;
-    roleNames[Label] = "label";
-    roleNames[Count] = "count";
+    roleNames[LabelRole] = "label";
+    roleNames[YearRole] = "year";
+    roleNames[MonthRole] = "month";
+    roleNames[DayRole] = "day";
+    roleNames[CountRole] = "count";
     setRoleNames(roleNames);
-}
-
-MetadataCloudModel::~MetadataCloudModel()
-{
-}
-
-
-void MetadataCloudModel::setCloudCategory(QString category)
-{
-    if (m_cloudCategory == category) {
-        return;
-    }
-
-    m_cloudCategory = category;
     askRefresh();
-    emit cloudCategoryChanged();
 }
 
-QString MetadataCloudModel::cloudCategory() const
+MetadataTimelineModel::~MetadataTimelineModel()
 {
-    return m_cloudCategory;
 }
 
-QVariantList MetadataCloudModel::categories() const
-{
-    return m_categories;
-}
 
-void MetadataCloudModel::setAllowedCategories(const QVariantList &whitelist)
+void MetadataTimelineModel::setLevel(MetadataTimelineModel::Level level)
 {
-    QSet<QString> set = variantToStringList(whitelist).toSet();
-
-    if (set == m_allowedCategories) {
+    if (m_level == level) {
         return;
     }
 
-    m_allowedCategories = set;
-    emit allowedCategoriesChanged();
+    m_level = level;
+    askRefresh();
+    emit levelChanged();
 }
 
-QVariantList MetadataCloudModel::allowedCategories() const
+MetadataTimelineModel::Level MetadataTimelineModel::level() const
 {
-    return stringToVariantList(m_allowedCategories.values());
+    return m_level;
 }
 
 
-void MetadataCloudModel::doQuery()
+QString MetadataTimelineModel::description() const
+{
+    if (m_results.isEmpty()) {
+        return QString();
+    }
+
+    //TODO: manage cases where start and enddate cover more than one year/month
+    switch (m_level) {
+    case Year:
+        return i18n("All years");
+    case Month:
+        return KGlobal::locale()->calendar()->yearString(startDate(), KCalendarSystem::LongFormat);
+    case Day:
+    default:
+        return i18nc("Month and year, such as March 2007", "%1 %2", KGlobal::locale()->calendar()->monthName(startDate(), KCalendarSystem::LongName), KGlobal::locale()->calendar()->yearString(startDate(), KCalendarSystem::LongFormat));
+    }
+}
+
+
+void MetadataTimelineModel::doQuery()
 {
     QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
 
-    //check if really all properties to build the query are null
-    if (m_cloudCategory.isEmpty()) {
-        return;
-    }
+    m_totalCount = 0;
 
     setStatus(Waiting);
-    QString query = "select distinct ?label count(*) as ?count where { ";
+    QString monthQuery;
+    QString dayQuery;
 
-    if (m_cloudCategory == "kext:Activity") {
-        query += " ?activity nao:isRelated ?r . ?activity rdf:type kext:Activity . ?activity kext:activityIdentifier ?label ";
+    if (m_level >= Month) {
+        monthQuery = "bif:month(?label)";
     } else {
-        query += " ?r " + m_cloudCategory + " ?label";
+        monthQuery = "0";
     }
+    if (m_level >= Day) {
+        dayQuery = "bif:dayofmonth(?label)";
+    } else {
+        dayQuery = "0";
+    }
+
+    QString query = QString("select distinct bif:year(?label) as ?year %1 as ?month %2 as ?day count(*) as ?count where { ?r nie:lastModified ?label  ").arg(monthQuery).arg(dayQuery);
 
 
     if (!resourceType().isEmpty()) {
@@ -208,24 +214,10 @@ void MetadataCloudModel::doQuery()
 
     if (startDate().isValid() || endDate().isValid()) {
         if (startDate().isValid()) {
-            query += " . { \
-            ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#lastModified> ?v2 . FILTER(?v2>\"" + startDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            } UNION {\
-            ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#contentCreated> ?v3 . FILTER(?v3>\"" + startDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            } UNION {\
-            ?v4 <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#involves> ?r .\
-            ?v4 <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#start> ?v5 .\ FILTER(?v5>\"" + startDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            }";
+            query += ". ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#lastModified> ?v2 . FILTER(?v2>\"" + startDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) ";
         }
         if (endDate().isValid()) {
-            query += " . { \
-            ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#lastModified> ?v2 . FILTER(?v2<\"" + endDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            } UNION {\
-            ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#contentCreated> ?v3 . FILTER(?v3<\"" + endDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            } UNION {\
-            ?v4 <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#involves> ?r .\
-            ?v4 <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#start> ?v5 .\ FILTER(?v5<\"" + endDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            }";
+            query += ". ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#lastModified> ?v2 . FILTER(?v2<\"" + endDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) ";
         }
     }
 
@@ -237,7 +229,17 @@ void MetadataCloudModel::doQuery()
         query += " . ?r nao:numericRating ?rating filter (?rating <=" + QString::number(maximumRating()) + ") ";
     }
 
-    query +=  " . ?r <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> ?v1 . FILTER(?v1>0) .  } group by ?label order by ?label";
+    query +=  " . ?r <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> ?v1 . FILTER(?v1>0) .  } ";
+
+    //Group by construction
+    query += " group by bif:year(?label) ";
+    if (m_level >= Month) {
+        query += " bif:month(?label) ";
+    }
+    if (m_level >= Day) {
+        query += " bif:dayofmonth(?label) ";
+    }
+    query += " order by ?year ?month ?day ";
 
     kDebug() << "Performing the Sparql query" << query;
 
@@ -245,7 +247,12 @@ void MetadataCloudModel::doQuery()
     m_results.clear();
     endResetModel();
     emit countChanged();
+    emit totalCountChanged();
+    emit descriptionChanged();
 
+    if (m_queryClient) {
+        m_queryClient->close();
+    }
     delete m_queryClient;
     m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
 
@@ -258,101 +265,76 @@ void MetadataCloudModel::doQuery()
     m_queryClient->sparqlQuery(query);
 }
 
-void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
+void MetadataTimelineModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
     setStatus(Running);
-    QVector<QPair<QString, int> > results;
+    QVector<QHash<Roles, int> > results;
     QVariantList categories;
-
     foreach (Nepomuk::Query::Result res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
-        QVariant rawLabel = res.additionalBinding(QLatin1String("label")).variant();
+        int year = res.additionalBinding(QLatin1String("year")).variant().toInt();
+        int month = res.additionalBinding(QLatin1String("month")).variant().toInt();
+        int day = res.additionalBinding(QLatin1String("day")).variant().toInt();
 
-        if (rawLabel.canConvert<Nepomuk::Resource>()) {
-            label = rawLabel.value<Nepomuk::Resource>().className();
-        } else if (!rawLabel.value<QUrl>().scheme().isEmpty()) {
-            const QUrl url = rawLabel.value<QUrl>();
-            if (url.scheme() == "nepomuk") {
-                label = Nepomuk::Resource(url).genericLabel();
-            //TODO: it should convert from ontology url to short form nfo:Document
-            } else {
-                label = propertyShortName(url);
-            }
-        } else if (rawLabel.canConvert<QString>()) {
-            label = rawLabel.toString();
-        } else if (rawLabel.canConvert<int>()) {
-            label = QString::number(rawLabel.toInt());
-        } else {
-            continue;
-        }
+        QHash<Roles, int> res;
+        res[YearRole] = year;
+        res[MonthRole] = month;
+        res[DayRole] = day;
+        res[CountRole] = count;
 
-        if (label.isEmpty() ||
-            !(m_allowedCategories.isEmpty() || m_allowedCategories.contains(label))) {
-            continue;
-        }
-        results << QPair<QString, int>(label, count);
-        categories << label;
+        m_totalCount += count;
+        results << res;
     }
+
     if (results.count() > 0) {
         beginInsertRows(QModelIndex(), m_results.count(), m_results.count()+results.count());
         m_results << results;
         m_categories << categories;
         endInsertRows();
         emit countChanged();
-        emit categoriesChanged();
+        emit totalCountChanged();
+        emit descriptionChanged();
     }
 }
 
-void MetadataCloudModel::entriesRemoved(const QList<QUrl> &urls)
+void MetadataTimelineModel::entriesRemoved(const QList<QUrl> &urls)
 {
-    //FIXME: optimize
-    kDebug()<<urls;
-    foreach (const QUrl &url, urls) {
-        const QString propName = propertyShortName(url);
-        int i = 0;
-        int index = -1;
-        foreach (const QVariant &v, m_categories) {
-            QString cat = v.toString();
-            if (cat == propName) {
-                index = i;
-                break;
-            }
-            ++i;
-        }
-        if (index >= 0) {
-            beginRemoveRows(QModelIndex(), index, index);
-            m_results.remove(index);
-            endRemoveRows();
-        }
-    }
+    //FIXME: we don't have urls here
+    return;
+
     emit countChanged();
+    emit totalCountChanged();
 }
 
-void MetadataCloudModel::finishedListing()
+void MetadataTimelineModel::finishedListing()
 {
     setStatus(Idle);
 }
 
 
 
-QVariant MetadataCloudModel::data(const QModelIndex &index, int role) const
+QVariant MetadataTimelineModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || index.column() != 0 ||
         index.row() < 0 || index.row() >= m_results.count()){
         return QVariant();
     }
 
-    const QPair<QString, int> row = m_results[index.row()];
+    const QHash<Roles, int> row = m_results[index.row()];
 
-    switch (role) {
-    case Label:
-        return row.first;
-    case Count:
-        return row.second;
-    default:
-        return QVariant();
+    if (role == LabelRole) {
+        switch(m_level) {
+        case Year:
+            return row.value(YearRole);
+        case Month:
+            return KGlobal::locale()->calendar()->monthName(row.value(MonthRole),  row.value(YearRole), KCalendarSystem::LongName);
+        case Day:
+        default:
+            return row.value(DayRole);
+        }
     }
+    return row.value((Roles)role);
 }
 
-#include "metadatacloudmodel.moc"
+#include "metadatatimelinemodel.moc"
