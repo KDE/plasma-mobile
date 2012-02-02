@@ -139,7 +139,7 @@ MobileComponents.Sheet {
             }
             PlasmaComponents.Label {
                 color: theme.textColor
-                text: i18n("Encrypted:")
+                text: i18n("Private:")
                 anchors.right: encryptedSwitch.left
             }
             PlasmaComponents.Switch {
