@@ -28,11 +28,22 @@ MobileComponents.Sheet {
     signal closeRequested
 
     title: (configInterface.activityName == "") ? i18n("Create new activity") : i18n("Activity configuration")
-    acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
+    acceptButtonText: {
+        if (!encryptedSwitch.checked || encryptedSwitch.checked == internal.activityEncrypted) {
+            (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
+        } else {
+            i18n("Enter password")
+        }
+    }
     rejectButtonText: i18n("Close")
     acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
 
     Component.onCompleted: open()
+
+    QtObject {
+        id: internal
+        property bool activityEncrypted
+    }
 
     onStatusChanged: {
         if (status == PlasmaComponents.DialogStatus.Closed) {
@@ -80,10 +91,9 @@ MobileComponents.Sheet {
                 if (data[i]["Current"]) {
                     currentActivity = data[i]["Name"]
                     encryptedSwitch.checked = activitySource.data[i]["Encrypted"]
+                    internal.activityEncrypted = activitySource.data[i]["Encrypted"]
                 }
-               // if (1||!data[i]["Current"]) {
-                    names.push(data[i]["Name"])
-                //}
+                names.push(data[i]["Name"])
             }
             activitySource.activityNames = names
         }
@@ -137,14 +147,6 @@ MobileComponents.Sheet {
                     accept()
                 }
             }
-            PlasmaComponents.Label {
-                color: theme.textColor
-                text: i18n("Private:")
-                anchors.right: encryptedSwitch.left
-            }
-            PlasmaComponents.Switch {
-                id: encryptedSwitch
-            }
         },
         PlasmaComponents.Label {
             anchors {
@@ -172,13 +174,30 @@ MobileComponents.Sheet {
             anchors {
                 top: nameRow.bottom
                 left: parent.left
-                bottom: parent.bottom
+                bottom: encryptRow.top
                 right: parent.right
                 topMargin: 6
                 bottomMargin: 12
             }
             model: configInterface.wallpaperModel
             delegate: WallpaperDelegate {}
+        },
+        Row {
+            id: encryptRow
+            anchors {
+                bottom: parent.bottom
+                horizontalCenter: parent.horizontalCenter
+            }
+
+            PlasmaComponents.Label {
+                id: encryptLabel
+                color: theme.textColor
+                text: i18n("Lock as private:")
+                anchors.right: encryptedSwitch.left
+            }
+            PlasmaComponents.Switch {
+                id: encryptedSwitch
+            }
         }
     ]
 
