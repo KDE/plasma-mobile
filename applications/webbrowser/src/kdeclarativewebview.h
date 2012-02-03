@@ -82,6 +82,10 @@ class GraphicsWebView : public QGraphicsWebView {
     Q_OBJECT
 public:
     GraphicsWebView(KDeclarativeWebView* parent = 0);
+
+public Q_SLOTS:
+    void handleLinkClicked(const QUrl &link);
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
@@ -98,6 +102,7 @@ Q_SIGNALS:
     void flickingEnabledChanged();
     void linkPressed(const QUrl&, const QRect &linkRect);
     void linkPressAndHold(const QUrl&, const QRect &linkRect);
+    void linkClicked(const QUrl&, const QRect &linkRect);
 
 private:
     KDeclarativeWebView *parent;
@@ -253,6 +258,7 @@ Q_SIGNALS:
     void doubleClick(int clickX, int clickY);
     void linkPressed(const QUrl &linkUrl, const QRect &linkRect);
     void linkPressAndHold(const QUrl &linkUrl, const QRect &linkRect);
+    void linkClicked(const QUrl &linkUrl, const QRect &linkRect);
 
     void zoomTo(qreal zoom, int centerX, int centerY);
 

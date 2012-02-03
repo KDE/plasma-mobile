@@ -55,6 +55,7 @@ Flickable {
     property alias stop: webView.stop
     property alias reload: webView.reload
     property alias forward: webView.forward
+    property bool interactiveSuspended: false
 
     signal newWindowRequested(string url)
 
@@ -62,7 +63,12 @@ Flickable {
     width: parent.width
     contentWidth: Math.max(parent.width,webView.width)
     contentHeight: Math.max(parent.height,webView.height)
-    interactive: (webView.flickingEnabled && ((webView.height > height) || (webView.width > width)))
+    interactive: {
+        (webView.flickingEnabled &&
+         !interactiveSuspended &&
+         ((webView.height > height) ||
+         (webView.width > width)))
+    }
     anchors.top: headerSpace.bottom
     anchors.bottom: parent.top
     anchors.left: parent.left
@@ -83,6 +89,7 @@ Flickable {
         //settings.pluginsEnabled: true
 
         //FIXME: glorious hack just to obtain a signal of the url of the new requested page
+        // Should be replaced with signal from KDeclarativeWebView
         newWindowComponent: Component {
             Item {
                 id: newPageComponent
@@ -147,20 +154,23 @@ Flickable {
         function handleLinkPressed(linkUrl, linkRect)
         {
             print("link pressed: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
-            highlightRect.x = linkRect.x;
-            highlightRect.y = linkRect.y;
-            highlightRect.width = linkRect.width;
-            highlightRect.height = linkRect.height;
-        }
-
-        function handleLinkPressAndHold(linkUrl, linkRect)
-        {
-            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
+            flickable.interactiveSuspended = true;
 //             highlightRect.x = linkRect.x;
 //             highlightRect.y = linkRect.y;
 //             highlightRect.width = linkRect.width;
 //             highlightRect.height = linkRect.height;
-            linkPopupLoader.source = "LinkPopup.qml";
+        }
+
+        function handleLinkPressAndHold(linkUrl, linkRect)
+        {
+            
+            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
+            flickable.interactiveSuspended = true;
+//             highlightRect.x = linkRect.x;
+//             highlightRect.y = linkRect.y;
+//             highlightRect.width = linkRect.width;
+//             highlightRect.height = linkRect.height;
+//             linkPopupLoader.source = "LinkPopup.qml";
             var linkPopup = linkPopupLoader.item;
             linkPopup.url = linkUrl
             linkPopup.linkRect.x = linkRect.x
@@ -177,7 +187,7 @@ Flickable {
             opacity: 0.5
         }
 
-        Loader { id: linkPopupLoader }
+        Loader { id: linkPopupLoader; source: "LinkPopup.qml";  }
 
         Keys.onLeftPressed: webView.contentsScale -= 0.1
         Keys.onRightPressed: webView.contentsScale += 0.1
@@ -282,7 +292,8 @@ Flickable {
         }
         onZoomTo: doZoom(zoom,centerX,centerY)
         onClick: {
-            if (linkPopupLoader.status == Loader.Ready) linkPopupLoader.item.state = "collapsed";
+            //print("fickable click");
+            //if (linkPopupLoader.status == Loader.Ready) linkPopupLoader.item.state = "collapsed";
         }
         onLinkPressed: handleLinkPressed(linkUrl, linkRect)
         onLinkPressAndHold: handleLinkPressAndHold(linkUrl, linkRect)

@@ -147,7 +147,7 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
         kDebug() << "XXXXXXXXXX link pressed. .. ";
         emit linkPressed(hit.linkUrl(), hit.linkElement().geometry());
     }
-    QMouseEvent* me = new QMouseEvent(QEvent::MouseButtonDblClick, (event->pos() / parent->contentsScale()).toPoint(), event->button(), event->buttons(), 0);
+    //QMouseEvent* me = new QMouseEvent(QEvent::MouseButtonDblClick, (event->pos() / parent->contentsScale()).toPoint(), event->button(), event->buttons(), 0);
     emit click(event->pos().x(), event->pos().y());
     setFocus();
 }
@@ -165,6 +165,17 @@ void GraphicsWebView::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
     QMouseEvent* me = new QMouseEvent(QEvent::MouseButtonDblClick, (event->pos() / parent->contentsScale()).toPoint(), event->button(), event->buttons(), 0);
     emit doubleClick(event->pos().x(), event->pos().y());
     delete me;
+}
+
+void GraphicsWebView::handleLinkClicked(const QUrl &link)
+{
+    QUrl u(link);
+    if (pressTimer.isActive()) {
+        kDebug() << "timer is running, loading URL" << link;
+        page()->mainFrame()->load(u);
+    } else {
+        kDebug() << "timer is not running, not loading url" << link;
+    }
 }
 
 void GraphicsWebView::timerEvent(QTimerEvent* event)
@@ -360,6 +371,8 @@ void KDeclarativeWebView::init()
     connect(d->view, SIGNAL(flickingEnabledChanged()), this, SLOT(updateFlickingEnabled()));
     connect(d->view, SIGNAL(click(int, int)), this, SIGNAL(click(int, int)));
     connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
+    
+    //connect(d->view, SIGNAL(loadLink(const QUrl&, const QRect&)), SIGNAL(linkClicked(const QUrl&, const QRect&)));
     connect(d->view, SIGNAL(linkPressed(const QUrl&, const QRect&)),
             this, SIGNAL(linkPressed(const QUrl&, const QRect&)));
     connect(d->view, SIGNAL(linkPressAndHold(const QUrl&, const QRect&)),
@@ -367,6 +380,9 @@ void KDeclarativeWebView::init()
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
 
     connect(access, SIGNAL(finished(QNetworkReply*)), page(), SLOT(handleNetworkErrors(QNetworkReply*)));
+
+    wp->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+    connect(wp, SIGNAL(linkClicked(const QUrl&)), d->view, SLOT(handleLinkClicked(const QUrl&)));
 
 
     d->dirWatch = new KDirWatch(this);

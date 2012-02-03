@@ -39,66 +39,86 @@ PlasmaCore.FrameSvgItem {
     //width: childrenRect.width
     //height: childrenRect.height
     z: 100000
-    //anchors { top: parent.bottom; right: parent.right; topMargin: -(iconSize/4); }
-
-    // fully dynamic show / hide
-    //state: (textInput.activeFocus && (textInput.selectedText != "" || textInput.canPaste)) ? "expanded" : "collapsed";
-    // state controlled externally
     state: "collapsed"
+
+    MouseArea {
+        id: hidePopup
+        //anchors.fill: flickable
+        x: -flickable.width; y: -flickable.height; width: flickable.width*2; height: flickable.height*2
+        onClicked: linkPopup.state = "collapsed"
+        visible: linkPopup.state == "expanded"
+        //Rectangle {color: "green"; opacity: 0.2; anchors.fill: parent; }
+    }
 
     Item {
         id: buttonRow
-        //spacing: space
-        //anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter; margins: 8; }
         anchors.fill: parent
         anchors.margins: space*2
-        //height: linkPopup.iconSize
         QIconItem {
-            id: pasteIcon
-            icon: QIcon("edit-paste")
+            id: newWindowIcon
+            icon: QIcon("window-new")
             width: linkPopup.iconSize
-            height: linkPopup.iconSize
+            height: width
             anchors { top: parent.top; left: parent.left; }
-            //enabled: textInput.canPaste
             MouseArea {
                 anchors.fill: parent;
-                onClicked: { textField.paste(); linkPopup.state = "collapsed"; }
-                onPressed: PropertyAnimation {  target: pasteIcon; properties: "scale";
-                                                from: 1.0; to: 0.9;
-                                                duration: 175; easing.type: Easing.OutExpo; }
-                onReleased: PropertyAnimation { target: pasteIcon; properties: "scale";
-                                                from: 0.9; to: 1.0;
-                                                duration: 175; easing.type: Easing.OutExpo; }
             }
         }
         PlasmaComponents.Label {
-            anchors { verticalCenter: pasteIcon.verticalCenter; left: pasteIcon.right; right: parent.right; leftMargin: space }
-            text: "Url: " + url
+            id: newWindowLabel
+            anchors { verticalCenter: newWindowIcon.verticalCenter; left: newWindowIcon.right; right: parent.right; leftMargin: space }
+            text: i18n("Open link in new window")
             elide: Text.ElideMiddle
+        }
+        MouseArea {
+            anchors { top: newWindowIcon.top; bottom: newWindowIcon.bottom; left: parent.left; right: parent.right; }
+            onClicked: {
+                flickable.newWindowRequested(url);
+                print("open in new window " + url);
+                linkPopup.state = "collapsed"; 
+            }
+            onPressed: PropertyAnimation {  target: newWindowIcon; properties: "scale";
+                                            from: 1.0; to: 0.75;
+                                            duration: 175; easing.type: Easing.OutExpo; }
+            onReleased: PropertyAnimation { target: newWindowIcon; properties: "scale";
+                                            from: 0.75; to: 1.0;
+                                            duration: 175; easing.type: Easing.OutExpo; }
         }
         QIconItem {
             id: copyIcon
             icon: QIcon("edit-copy")
             width: linkPopup.iconSize
             height: linkPopup.iconSize
-            anchors { top: pasteIcon.bottom; left: parent.left; topMargin: space; }
+            anchors { top: newWindowIcon.bottom; left: parent.left; topMargin: space; }
             //enabled: textInput.selectedText != ""
-            MouseArea {
-                anchors.fill: parent;
-                onClicked: { textField.copy(); linkPopup.state = "collapsed"; }
-                onPressed: PropertyAnimation {  target: copyIcon; properties: "scale";
-                                                from: 1.0; to: 0.9;
-                                                duration: 175; easing.type: Easing.OutExpo; }
-                onReleased: PropertyAnimation { target: copyIcon; properties: "scale";
-                                                from: 0.9; to: 1.0;
-                                                duration: 175; easing.type: Easing.OutExpo; }
-            }
+//             MouseArea {
+//                 anchors.fill: parent;
+//             }
+            TextInput { id: textField; visible: false }
         }
         PlasmaComponents.Label {
             id: copyLabel
             anchors { verticalCenter: copyIcon.verticalCenter; left: copyIcon.right; right: parent.right; leftMargin: space }
             text: i18n("Copy link");
             elide: Text.ElideMiddle
+        }
+        MouseArea {
+            anchors { top: copyIcon.top; bottom: copyIcon.bottom; left: parent.left; right: parent.right; }
+            onClicked: {
+                textField.text = url;
+                textField.selectAll();
+                textField.copy();
+                textField.text = ""
+
+                linkPopup.state = "collapsed";
+
+            }
+            onPressed: PropertyAnimation {  target: copyIcon; properties: "scale";
+                                            from: 1.0; to: 0.75;
+                                            duration: 175; easing.type: Easing.OutExpo; }
+            onReleased: PropertyAnimation { target: copyIcon; properties: "scale";
+                                            from: 0.75; to: 1.0;
+                                            duration: 175; easing.type: Easing.OutExpo; }
         }
     }
     states: [
@@ -119,7 +139,10 @@ PlasmaCore.FrameSvgItem {
             from: "collapsed"; to: "expanded"
             ParallelAnimation {
                 ScriptAction {
-                    script: placePopup();
+                    script: {
+                        placePopup();
+                        flickable.interactiveSuspended = true;
+                    }
                 }
                 PropertyAnimation { properties: "opacity"; duration: 175; easing.type: Easing.InExpo; }
                 PropertyAnimation { properties: "scale"; duration: 175; easing.type: Easing.InExpo; }
@@ -128,6 +151,11 @@ PlasmaCore.FrameSvgItem {
         Transition {
             from: "expanded"; to: "collapsed"
             ParallelAnimation {
+                ScriptAction {
+                    script: {
+                        flickable.interactiveSuspended = false;
+                    }
+                }
                 PropertyAnimation { properties: "opacity"; duration: 175; easing.type: Easing.OutExpo; }
                 PropertyAnimation { properties: "scale"; duration: 100; easing.type: Easing.OutExpo; }
             }
