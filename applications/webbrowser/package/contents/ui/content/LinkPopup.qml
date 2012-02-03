@@ -99,7 +99,7 @@ PlasmaCore.FrameSvgItem {
         PlasmaComponents.Label {
             id: copyLabel
             anchors { verticalCenter: copyIcon.verticalCenter; left: copyIcon.right; right: parent.right; leftMargin: space }
-            text: i18n("Copy link");
+            text: i18n("Copy link to clipboard");
             elide: Text.ElideMiddle
         }
         MouseArea {
@@ -170,17 +170,17 @@ PlasmaCore.FrameSvgItem {
         var mouse = linkRect;
         var distanceToTop = webView.mapToItem(rootItem, mouse.x, mouse.y);
         //var distanceToTop = mouse;
-        print( "   distanceToTop: " + distanceToTop.x);
-        print( " mouse: x: " + mouse.x + " y: " + mouse.y);
+//         print( "   distanceToTop: " + distanceToTop.x);
+//         print( " mouse: x: " + mouse.x + " y: " + mouse.y);
         if (distanceToTop.x < linkPopup.width/2) {
-            print(" hitting the left edge " + distanceToTop.x);
+//             print(" hitting the left edge " + distanceToTop.x);
             //linkPopup.x = mouse.x
 
         } else {
             linkPopup.x = mouse.x-(linkPopup.width/2)
         }
         if (distanceToTop.y > linkPopup.height + header.height) {
-            print(" placing at mouse.y : " + mouse.y + " " + linkPopup.height)
+//             print(" placing at mouse.y : " + mouse.y + " " + linkPopup.height)
             linkPopup.y = mouse.y - linkPopup.height;
         } else {
             //linkPopup.y = mouse.y-(linkPopup.width/2)

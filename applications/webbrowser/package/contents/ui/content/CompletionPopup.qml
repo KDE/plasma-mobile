@@ -189,7 +189,7 @@ Item {
             PlasmaComponents.Label {
                 id: rssActionLabel
                 width: 400
-                text: i18n("Link copied to clipboard")
+                text: i18n("Feed link copied to clipboard")
                 visible: false
                 anchors { top: rssButton.top; bottom: rssButton.bottom; left: rssButton.right; leftMargin: 8 }
             }
