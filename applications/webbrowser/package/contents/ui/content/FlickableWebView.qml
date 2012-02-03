@@ -171,6 +171,7 @@ Flickable {
 //             highlightRect.width = linkRect.width;
 //             highlightRect.height = linkRect.height;
 //             linkPopupLoader.source = "LinkPopup.qml";
+            linkPopupLoader.source = "LinkPopup.qml";
             var linkPopup = linkPopupLoader.item;
             linkPopup.url = linkUrl
             linkPopup.linkRect.x = linkRect.x
@@ -187,7 +188,7 @@ Flickable {
             opacity: 0.5
         }
 
-        Loader { id: linkPopupLoader; source: "LinkPopup.qml";  }
+        Loader { id: linkPopupLoader }
 
         Keys.onLeftPressed: webView.contentsScale -= 0.1
         Keys.onRightPressed: webView.contentsScale += 0.1
