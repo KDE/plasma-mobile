@@ -154,7 +154,7 @@ Flickable {
         function handleLinkPressed(linkUrl, linkRect)
         {
             print("link pressed: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
-            flickable.interactiveSuspended = true;
+//            flickable.interactiveSuspended = true;
 //             highlightRect.x = linkRect.x;
 //             highlightRect.y = linkRect.y;
 //             highlightRect.width = linkRect.width;
@@ -163,29 +163,31 @@ Flickable {
 
         function handleLinkPressAndHold(linkUrl, linkRect)
         {
-            
-            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
-            flickable.interactiveSuspended = true;
-//             highlightRect.x = linkRect.x;
-//             highlightRect.y = linkRect.y;
-//             highlightRect.width = linkRect.width;
-//             highlightRect.height = linkRect.height;
-//             linkPopupLoader.source = "LinkPopup.qml";
+//            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
             linkPopupLoader.source = "LinkPopup.qml";
-            var linkPopup = linkPopupLoader.item;
-            linkPopup.url = linkUrl
-            linkPopup.linkRect.x = linkRect.x
-            linkPopup.linkRect.y = linkRect.y
-            linkPopup.linkRect.width = linkRect.width
-            linkPopup.linkRect.height = linkRect.height
-            linkPopup.state  = "expanded";
-            print(" type: " + typeof(linkRect));
+            if (linkPopupLoader.status == Loader.Ready) {
+                flickable.interactiveSuspended = true;
+                highlightRect.x = linkRect.x;
+                highlightRect.y = linkRect.y;
+                highlightRect.width = linkRect.width;
+                highlightRect.height = linkRect.height;
+
+                var linkPopup = linkPopupLoader.item;
+                linkPopup.url = linkUrl
+                linkPopup.linkRect.x = linkRect.x
+                linkPopup.linkRect.y = linkRect.y
+                linkPopup.linkRect.width = linkRect.width
+                linkPopup.linkRect.height = linkRect.height
+                linkPopup.state  = "expanded";
+                //print(" type: " + typeof(linkRect));
+            }
         }
 
         Rectangle {
             id: highlightRect
-            color: "orange"
-            opacity: 0.5
+            color: theme.highlightColor
+            opacity: 0.2
+            visible: (linkPopupLoader.source != "" && linkPopupLoader.item.state == "expanded")
         }
 
         Loader { id: linkPopupLoader }
