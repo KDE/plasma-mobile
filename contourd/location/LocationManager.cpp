@@ -52,6 +52,10 @@ LocationManager::LocationManager(QObject * parent)
         d->knownLocationInfos[id].networkRoots = d->locationNetworkRoots.readEntry(id, QStringList()).toSet();
     }
 
+    d->knownLocationInfos[QString()] = d->knownLocationInfos["unknown"];
+    d->knownLocationInfos.remove("unknown");
+    d->knownLocationIds.remove(d->knownLocationInfos[QString()].name);
+
     connect(NetworkNotifierLoader::self(), SIGNAL(activeAccessPointChanged(QString,QString)),
             this, SLOT(setActiveAccessPoint(QString,QString)));
 
@@ -202,9 +206,9 @@ void LocationManager::setActiveAccessPoint(const QString & accessPoint, const QS
 
 LocationManager::Private::Private(LocationManager * parent)
     : config("locationmanagerrc"),
-      locationNames(&config, "LocationManager-Location-Names"),
-      locationNetworks(&config, "LocationManager-Location-Networks"),
-      locationNetworkRoots(&config, "LocationManager-Location-NetworkRoots"),
+      locationNames(&config, "Names"),
+      locationNetworks(&config, "Networks"),
+      locationNetworkRoots(&config, "NetworkRoots"),
       currentLocationId(),
       q(parent)
 {
@@ -238,8 +242,52 @@ void LocationManager::Private::addNetworkToLocation(const QString & location, co
 {
     if (!knownLocationInfos.contains(location) || network.isEmpty()) return;
 
-    knownLocationInfos[location].networks     << network;
-    knownLocationInfos[location].networkRoots << networkRoot(network);
+    // we first need to test whether there is already a network
+    // with the same root/name. If yes, we need to remove it and set
+    // the root/name as unknown location (aka empty)
+
+    const QString & root = networkRoot(network);
+    bool nameAlreadyRegistered = false;
+    bool rootAlreadyRegistered = false;
+
+    QMutableHashIterator <QString, Private::LocationInfo> item(knownLocationInfos);
+    while (item.hasNext()) {
+        item.next();
+
+        const QString & testLocation = item.key();
+
+        if (testLocation == location) continue;
+
+        Private::LocationInfo & info = item.value();
+
+        kDebug() << testLocation << "has networks" << info.networks << info.networkRoots;
+
+        if (info.networks.contains(network)) {
+            info.networks.remove(network);
+            locationNetworks.writeEntry(testLocation, info.networks.toList());
+            nameAlreadyRegistered = true;
+        }
+
+        if (info.networkRoots.contains(root)) {
+            info.networkRoots.remove(root);
+            locationNetworkRoots.writeEntry(testLocation, info.networkRoots.toList());
+            rootAlreadyRegistered = true;
+        }
+    }
+
+    if (!nameAlreadyRegistered) {
+        knownLocationInfos[location].networks     << network;
+    } else {
+        knownLocationInfos[QString()].networks    << network;
+        locationNetworks.writeEntry("unknown", knownLocationInfos[QString()].networks.toList());
+    }
+
+    if (!rootAlreadyRegistered) {
+        knownLocationInfos[location].networkRoots << root;
+    } else {
+        knownLocationInfos[QString()].networkRoots << root;
+        locationNetworkRoots.writeEntry("unknown", knownLocationInfos[QString()].networks.toList());
+    }
 
     kDebug()
         << "Setting networks for"
