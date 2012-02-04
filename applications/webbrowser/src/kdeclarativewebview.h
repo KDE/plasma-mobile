@@ -157,6 +157,8 @@ class KDeclarativeWebView : public QDeclarativeItem {
     Q_PROPERTY(QSize contentsSize READ contentsSize NOTIFY contentsSizeChanged)
     Q_PROPERTY(qreal contentsScale READ contentsScale WRITE setContentsScale NOTIFY contentsScaleChanged)
 
+    Q_PROPERTY(QPointF contentsPosition READ contentsPosition WRITE setContentsPosition)
+
 public:
     KDeclarativeWebView(QDeclarativeItem *parent = 0);
     ~KDeclarativeWebView();
@@ -230,6 +232,9 @@ public:
 
     void setContentsScale(qreal scale);
     qreal contentsScale() const;
+
+    QPointF contentsPosition();
+    void setContentsPosition(QPointF contentsPosition);
 
 Q_SIGNALS:
     void preferredWidthChanged();

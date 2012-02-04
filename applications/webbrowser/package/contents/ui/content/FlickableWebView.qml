@@ -62,12 +62,12 @@ Flickable {
     id: flickable
     width: parent.width
     contentWidth: Math.max(parent.width,webView.width)
-    contentHeight: Math.max(parent.height,webView.height)
+    contentHeight: Math.max(parent.height,webView.contentsSize.height)
     interactive: {
         (webView.flickingEnabled &&
          !interactiveSuspended &&
-         ((webView.height > height) ||
-         (webView.width > width)))
+         ((webView.contentsSize.height > height) ||
+         (webView.contentsSize.width > width)))
     }
     anchors.top: headerSpace.bottom
     anchors.bottom: parent.top
@@ -82,224 +82,234 @@ Flickable {
     }
 
 
-    WebView {
-        id: webView
-        objectName: "webViewImplementation"
-        transformOrigin: Item.TopLeft
-        //settings.pluginsEnabled: true
+    Item {
+        width: webView.contentsSize.width
+        height: webView.contentsSize.height
+        WebView {
+            id: webView
+            objectName: "webViewImplementation"
+            transformOrigin: Item.TopLeft
+            //settings.pluginsEnabled: true
 
-        //FIXME: glorious hack just to obtain a signal of the url of the new requested page
-        // Should be replaced with signal from KDeclarativeWebView
-        newWindowComponent: Component {
-            Item {
-                id: newPageComponent
+            x: flickable.contentX
+            y: flickable.contentY
+            width: flickable.width
+            height: flickable.height
+            contentsPosition: Qt.point(flickable.contentX, flickable.contentY)
 
-                WebView {
-                    id: newWindow
-                    onUrlChanged: {
-                        if (url != "") {
-                            flickable.newWindowRequested(url)
+            //FIXME: glorious hack just to obtain a signal of the url of the new requested page
+            // Should be replaced with signal from KDeclarativeWebView
+            newWindowComponent: Component {
+                Item {
+                    id: newPageComponent
 
-                            var newObject = Qt.createQmlObject('import QtQuick 1.0; Item {}', webView);
-                            newPageComponent.parent = newObject
-                            newObject.destroy()
+                    WebView {
+                        id: newWindow
+                        onUrlChanged: {
+                            if (url != "") {
+                                flickable.newWindowRequested(url)
+
+                                var newObject = Qt.createQmlObject('import QtQuick 1.0; Item {}', webView);
+                                newPageComponent.parent = newObject
+                                newObject.destroy()
+                            }
                         }
                     }
                 }
             }
-        }
 
-        newWindowParent: webView
+            newWindowParent: webView
 
-        function fixUrl(url)
-        {
-            if (url == "") return url
-            if (url[0] == "/") return "file://"+url
-            if (url.indexOf(":")<0) {
-                if (url.indexOf(".")<0 || url.indexOf(" ")>=0) {
-                    // Fall back to a search engine; hard-code Wikipedia
-                    return "http://en.wikipedia.org/w/index.php?search="+url
-                } else {
-                    return "http://"+url
+            function fixUrl(url)
+            {
+                if (url == "") return url
+                if (url[0] == "/") return "file://"+url
+                if (url.indexOf(":")<0) {
+                    if (url.indexOf(".")<0 || url.indexOf(" ")>=0) {
+                        // Fall back to a search engine; hard-code Wikipedia
+                        return "http://en.wikipedia.org/w/index.php?search="+url
+                    } else {
+                        return "http://"+url
+                    }
+                }
+                return url
+            }
+
+            url: fixUrl(webBrowser.urlString)
+            smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
+            focus: true
+
+            onAlert: {
+                console.log(message);
+                alertDialog.text = message;
+                alertDialog.open();
+            }
+
+            function doZoom(zoom,centerX,centerY)
+            {
+                if (centerX) {
+                    var sc = zoom*contentsScale;
+                    scaleAnim.to = sc;
+                    flickVX.from = flickable.contentX
+                    flickVX.to = Math.max(0,Math.min(centerX-flickable.width/2,webView.width*sc-flickable.width))
+                    finalX.value = flickVX.to
+                    flickVY.from = flickable.contentY
+                    flickVY.to = Math.max(0,Math.min(centerY-flickable.height/2,webView.height*sc-flickable.height))
+                    finalY.value = flickVY.to
+                    quickZoom.start()
                 }
             }
-            return url
-        }
 
-        url: fixUrl(webBrowser.urlString)
-        smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
-        focus: true
-
-        onAlert: {
-            console.log(message);
-            alertDialog.text = message;
-            alertDialog.open();
-        }
-
-        function doZoom(zoom,centerX,centerY)
-        {
-            if (centerX) {
-                var sc = zoom*contentsScale;
-                scaleAnim.to = sc;
-                flickVX.from = flickable.contentX
-                flickVX.to = Math.max(0,Math.min(centerX-flickable.width/2,webView.width*sc-flickable.width))
-                finalX.value = flickVX.to
-                flickVY.from = flickable.contentY
-                flickVY.to = Math.max(0,Math.min(centerY-flickable.height/2,webView.height*sc-flickable.height))
-                finalY.value = flickVY.to
-                quickZoom.start()
+            function handleLinkPressed(linkUrl, linkRect)
+            {
+                print("link pressed: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
+    //            flickable.interactiveSuspended = true;
+    //             highlightRect.x = linkRect.x;
+    //             highlightRect.y = linkRect.y;
+    //             highlightRect.width = linkRect.width;
+    //             highlightRect.height = linkRect.height;
             }
-        }
 
-        function handleLinkPressed(linkUrl, linkRect)
-        {
-            print("link pressed: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
-//            flickable.interactiveSuspended = true;
-//             highlightRect.x = linkRect.x;
-//             highlightRect.y = linkRect.y;
-//             highlightRect.width = linkRect.width;
-//             highlightRect.height = linkRect.height;
-        }
+            function handleLinkPressAndHold(linkUrl, linkRect)
+            {
+    //            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
+                linkPopupLoader.source = "LinkPopup.qml";
+                if (linkPopupLoader.status == Loader.Ready) {
+                    flickable.interactiveSuspended = true;
+                    highlightRect.x = linkRect.x;
+                    highlightRect.y = linkRect.y;
+                    highlightRect.width = linkRect.width;
+                    highlightRect.height = linkRect.height;
 
-        function handleLinkPressAndHold(linkUrl, linkRect)
-        {
-//            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
-            linkPopupLoader.source = "LinkPopup.qml";
-            if (linkPopupLoader.status == Loader.Ready) {
-                flickable.interactiveSuspended = true;
-                highlightRect.x = linkRect.x;
-                highlightRect.y = linkRect.y;
-                highlightRect.width = linkRect.width;
-                highlightRect.height = linkRect.height;
-
-                var linkPopup = linkPopupLoader.item;
-                linkPopup.url = linkUrl
-                linkPopup.linkRect.x = linkRect.x
-                linkPopup.linkRect.y = linkRect.y
-                linkPopup.linkRect.width = linkRect.width
-                linkPopup.linkRect.height = linkRect.height
-                linkPopup.state  = "expanded";
-                //print(" type: " + typeof(linkRect));
+                    var linkPopup = linkPopupLoader.item;
+                    linkPopup.url = linkUrl
+                    linkPopup.linkRect.x = linkRect.x
+                    linkPopup.linkRect.y = linkRect.y
+                    linkPopup.linkRect.width = linkRect.width
+                    linkPopup.linkRect.height = linkRect.height
+                    linkPopup.state  = "expanded";
+                    //print(" type: " + typeof(linkRect));
+                }
             }
-        }
 
-        Rectangle {
-            id: highlightRect
-            color: theme.highlightColor
-            opacity: 0.2
-            visible: (linkPopupLoader.source != "" && linkPopupLoader.item.state == "expanded")
-        }
-
-        Loader { id: linkPopupLoader }
-
-        Keys.onLeftPressed: webView.contentsScale -= 0.1
-        Keys.onRightPressed: webView.contentsScale += 0.1
-
-        preferredWidth: flickable.width
-        preferredHeight: flickable.height
-        contentsScale: 1
-        onContentsSizeChanged: {
-            // zoom out
-            contentsScale = Math.min(1,flickable.width / contentsSize.width)
-        }
-        onUrlChanged: {
-            // got to topleft
-            flickable.contentX = 0
-            flickable.contentY = 0
-            if (url != null) {
-                header.editUrl = url.toString();
+            Rectangle {
+                id: highlightRect
+                color: theme.highlightColor
+                opacity: 0.2
+                visible: (linkPopupLoader.source != "" && linkPopupLoader.item.state == "expanded")
             }
-            //settings.pluginsEnabled = true;
-            print(" XXX Plugins on? " + settings.pluginsEnabled);
-        }
-        onTitleChanged: {
-            //print("title changed in flickable " + title);
-            webBrowser.titleChanged();
-        }
-        onDoubleClick: {
-            preferredWidth = flickable.width - 50;
-            if (!heuristicZoom(clickX,clickY,2.0)) {
-                var zf = flickable.width / contentsSize.width
-                if (zf >= contentsScale)
-                    zf = 2.0*contentsScale // zoom in (else zooming out)
-                doZoom(zf,clickX*zf,clickY*zf)
-            }
-        }
 
-        SequentialAnimation {
-            id: quickZoom
+            Loader { id: linkPopupLoader }
 
-            PropertyAction {
-                target: webView
-                property: "renderingEnabled"
-                value: false
+            Keys.onLeftPressed: webView.contentsScale -= 0.1
+            Keys.onRightPressed: webView.contentsScale += 0.1
+
+            preferredWidth: flickable.width
+            preferredHeight: flickable.height
+            contentsScale: 1
+            onContentsSizeChanged: {
+                // zoom out
+                contentsScale = Math.min(1,flickable.width / contentsSize.width)
             }
-            PropertyAction {
-                target: flickable
-                property: "smooth"
-                value: false
+            onUrlChanged: {
+                // got to topleft
+                flickable.contentX = 0
+                flickable.contentY = 0
+                if (url != null) {
+                    header.editUrl = url.toString();
+                }
+                //settings.pluginsEnabled = true;
+                print(" XXX Plugins on? " + settings.pluginsEnabled);
             }
-            ParallelAnimation {
-                NumberAnimation {
-                    id: scaleAnim
+            onTitleChanged: {
+                //print("title changed in flickable " + title);
+                webBrowser.titleChanged();
+            }
+            onDoubleClick: {
+                preferredWidth = flickable.width - 50;
+                if (!heuristicZoom(clickX,clickY,2.0)) {
+                    var zf = flickable.width / contentsSize.width
+                    if (zf >= contentsScale)
+                        zf = 2.0*contentsScale // zoom in (else zooming out)
+                    doZoom(zf,clickX*zf,clickY*zf)
+                }
+            }
+
+            SequentialAnimation {
+                id: quickZoom
+
+                PropertyAction {
                     target: webView
-                    property: "contentsScale"
-                    // the to property is set before calling
-                    easing.type: Easing.Linear
-                    duration: 200
+                    property: "renderingEnabled"
+                    value: false
                 }
-                NumberAnimation {
-                    id: flickVX
+                PropertyAction {
+                    target: flickable
+                    property: "smooth"
+                    value: false
+                }
+                ParallelAnimation {
+                    NumberAnimation {
+                        id: scaleAnim
+                        target: webView
+                        property: "contentsScale"
+                        // the to property is set before calling
+                        easing.type: Easing.Linear
+                        duration: 200
+                    }
+                    NumberAnimation {
+                        id: flickVX
+                        target: flickable
+                        property: "contentX"
+                        easing.type: Easing.Linear
+                        duration: 200
+                        from: 0 // set before calling
+                        to: 0 // set before calling
+                    }
+                    NumberAnimation {
+                        id: flickVY
+                        target: flickable
+                        property: "contentY"
+                        easing.type: Easing.Linear
+                        duration: 200
+                        from: 0 // set before calling
+                        to: 0 // set before calling
+                    }
+                }
+                // Have to set the contentXY, since the above 2
+                // size changes may have started a correction if
+                // contentsScale < 1.0.
+                PropertyAction {
+                    id: finalX
                     target: flickable
                     property: "contentX"
-                    easing.type: Easing.Linear
-                    duration: 200
-                    from: 0 // set before calling
-                    to: 0 // set before calling
+                    value: 0 // set before calling
                 }
-                NumberAnimation {
-                    id: flickVY
+                PropertyAction {
+                    id: finalY
                     target: flickable
                     property: "contentY"
-                    easing.type: Easing.Linear
-                    duration: 200
-                    from: 0 // set before calling
-                    to: 0 // set before calling
+                    value: 0 // set before calling
+                }
+                PropertyAction {
+                    target: webView
+                    property: "renderingEnabled"
+                    value: true
+                }
+                PropertyAction {
+                    target: flickable
+                    property: "smooth"
+                    value: true
                 }
             }
-            // Have to set the contentXY, since the above 2
-            // size changes may have started a correction if
-            // contentsScale < 1.0.
-            PropertyAction {
-                id: finalX
-                target: flickable
-                property: "contentX"
-                value: 0 // set before calling
+            onZoomTo: doZoom(zoom,centerX,centerY)
+            onClick: {
+                //print("fickable click");
+                //if (linkPopupLoader.status == Loader.Ready) linkPopupLoader.item.state = "collapsed";
             }
-            PropertyAction {
-                id: finalY
-                target: flickable
-                property: "contentY"
-                value: 0 // set before calling
-            }
-            PropertyAction {
-                target: webView
-                property: "renderingEnabled"
-                value: true
-            }
-            PropertyAction {
-                target: flickable
-                property: "smooth"
-                value: true
-            }
+            onLinkPressed: handleLinkPressed(linkUrl, linkRect)
+            onLinkPressAndHold: handleLinkPressAndHold(linkUrl, linkRect)
         }
-        onZoomTo: doZoom(zoom,centerX,centerY)
-        onClick: {
-            //print("fickable click");
-            //if (linkPopupLoader.status == Loader.Ready) linkPopupLoader.item.state = "collapsed";
-        }
-        onLinkPressed: handleLinkPressed(linkUrl, linkRect)
-        onLinkPressAndHold: handleLinkPressAndHold(linkUrl, linkRect)
     }
 
     PlasmaComponents.CommonDialog {

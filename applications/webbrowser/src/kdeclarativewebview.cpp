@@ -345,7 +345,7 @@ void KDeclarativeWebView::init()
     setClip(true);
 
     d->view = new GraphicsWebView(this);
-    d->view->setResizesToContents(true);
+    //d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
     KWebPage* kwp = qobject_cast<KWebPage*>(wp);
 
@@ -390,6 +390,16 @@ void KDeclarativeWebView::init()
     d->dirWatch->addFile(configPath);
     connect(d->dirWatch, SIGNAL(dirty(const QString&)), SLOT(initSettings()));
     connect(d->dirWatch, SIGNAL(created(const QString&)), SLOT(initSettings()));
+}
+
+QPointF KDeclarativeWebView::contentsPosition()
+{
+    return d->view->page()->mainFrame()->scrollPosition();
+}
+
+void KDeclarativeWebView::setContentsPosition(QPointF contentsPosition)
+{
+    d->view->page()->mainFrame()->setScrollPosition(contentsPosition.toPoint());
 }
 
 void KDeclarativeWebView::initSettings()
@@ -651,6 +661,7 @@ void KDeclarativeWebView::geometryChanged(const QRectF& newGeometry, const QRect
             contentSize.setWidth(width());
         if (heightValid())
             contentSize.setHeight(height());
+        d->view->resize(contentSize);
         if (contentSize != webPage->preferredContentsSize())
             webPage->setPreferredContentsSize(contentSize);
     }
