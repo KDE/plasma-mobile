@@ -38,7 +38,7 @@ class LocationManager::Private: public QObject {
     Q_OBJECT
 
 public:
-    Private();
+    Private(LocationManager * parent);
     virtual ~Private();
 
     void addNetworkToLocation(const QString & location, const QString & network);
@@ -53,6 +53,7 @@ public:
 public Q_SLOTS:
     void scheduleConfigSync();
     void configSync();
+    void setCurrentLocation(const QString & id);
 
 public:
     QTimer configSyncTimer;
@@ -67,6 +68,9 @@ public:
 
     QString currentLocationId;
     QString currentNetworkName;
+
+private:
+    LocationManager * const q;
 };
 
 

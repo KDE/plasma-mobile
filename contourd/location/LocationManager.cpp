@@ -33,7 +33,7 @@
 namespace Contour {
 
 LocationManager::LocationManager(QObject * parent)
-    : QObject(parent), d(new Private())
+    : QObject(parent), d(new Private(this))
 {
     kDebug() << "Starting the location manager";
 
@@ -104,12 +104,22 @@ QString LocationManager::currentLocationName() const
     return d->knownLocationInfos[d->currentLocationId].name;
 }
 
-QString LocationManager::setCurrentLocation(const QString & location)
+void LocationManager::setCurrentLocation(const QString & location)
+{
+    QMetaObject::invokeMethod(
+            d,
+            "setCurrentLocation",
+            Qt::QueuedConnection,
+            Q_ARG(QString, location)
+        );
+}
+
+void LocationManager::Private::setCurrentLocation(const QString & location)
 {
     if (location.isEmpty()) {
-        d->currentLocationId.clear();
-        emit currentLocationChanged(d->currentLocationId, d->currentLocationId);
-        return d->currentLocationId;
+        currentLocationId.clear();
+        emit q->currentLocationChanged(currentLocationId, currentLocationId);
+        return;
     }
 
     kDebug() << "Setting the current location to" << location;
@@ -117,25 +127,24 @@ QString LocationManager::setCurrentLocation(const QString & location)
     if (QUuid(location).isNull()) {
         // We got passed a name for the location, not an id
         // addLocation will not create a new location if already exists:
-        d->currentLocationId = addLocation(location);
+        currentLocationId = q->addLocation(location);
 
     } else {
         // We got an UUID
-        if (d->knownLocationInfos.contains(location)) {
-            d->currentLocationId = location;
+        if (knownLocationInfos.contains(location)) {
+            currentLocationId = location;
 
         } else {
-            d->currentLocationId.clear();
+            currentLocationId.clear();
         }
     }
 
-    if (!d->currentNetworkName.isEmpty()) {
-        kDebug() << "Current network name is" << d->currentNetworkName;
-        d->addNetworkToLocation(d->currentLocationId, d->currentNetworkName);
+    if (!currentNetworkName.isEmpty()) {
+        kDebug() << "Current network name is" << currentNetworkName;
+        addNetworkToLocation(currentLocationId, currentNetworkName);
     }
 
-    emit currentLocationChanged(d->currentLocationId, d->knownLocationInfos[d->currentLocationId].name);
-    return d->currentLocationId;
+    emit q->currentLocationChanged(currentLocationId, knownLocationInfos[currentLocationId].name);
 }
 
 QStringList LocationManager::knownLocations() const
@@ -191,12 +200,13 @@ void LocationManager::setActiveAccessPoint(const QString & accessPoint, const QS
     resetCurrentLocation();
 }
 
-LocationManager::Private::Private()
+LocationManager::Private::Private(LocationManager * parent)
     : config("contourrc"),
       locationNames(&config, "LocationManager-Location-Names"),
       locationNetworks(&config, "LocationManager-Location-Networks"),
       locationNetworkRoots(&config, "LocationManager-Location-NetworkRoots"),
-      currentLocationId()
+      currentLocationId(),
+      q(parent)
 {
     // Config syncing
     connect(&configSyncTimer, SIGNAL(timeout()),

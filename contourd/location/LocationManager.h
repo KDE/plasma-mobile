@@ -70,7 +70,7 @@ public Q_SLOTS:
      * @param id or the name of the location
      * @returns the id of the location
      */
-    QString setCurrentLocation(const QString & id);
+    void setCurrentLocation(const QString & id);
 
     /**
      * Sets the location to unknown.
@@ -106,6 +106,7 @@ protected Q_SLOTS:
 
 private:
     class Private;
+    friend class Private;
     Private * const d;
 };
 

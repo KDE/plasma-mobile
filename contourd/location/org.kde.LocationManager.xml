@@ -13,7 +13,6 @@
       <arg name="name" type="s" direction="in"/>
     </method>
     <method name="setCurrentLocation">
-      <arg type="s" direction="out"/>
       <arg name="id" type="s" direction="in"/>
     </method>
     <method name="resetCurrentLocation">
