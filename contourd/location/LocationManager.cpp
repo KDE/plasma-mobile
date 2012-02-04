@@ -201,7 +201,7 @@ void LocationManager::setActiveAccessPoint(const QString & accessPoint, const QS
 }
 
 LocationManager::Private::Private(LocationManager * parent)
-    : config("contourrc"),
+    : config("locationmanagerrc"),
       locationNames(&config, "LocationManager-Location-Names"),
       locationNetworks(&config, "LocationManager-Location-Networks"),
       locationNetworkRoots(&config, "LocationManager-Location-NetworkRoots"),
