@@ -53,6 +53,19 @@ public Q_SLOTS:
     QString addLocation(const QString & name);
 
     /**
+     * Removes the location
+     * @param id id of the location
+     */
+    void removeLocation(const QString & id);
+
+    /**
+     * Sets the name of the location
+     * @param id id of the location
+     * @param name new name
+     */
+    void setLocationName(const QString & id, const QString & name);
+
+    /**
      * Sets the current location.
      *
      * If the function is invoked with an UUID, and the location
@@ -100,6 +113,19 @@ Q_SIGNALS:
      * @param name the name of the new location. Empty if the location is not set.
      */
     void currentLocationChanged(const QString & id, const QString & name);
+
+    /**
+     * Emitted when a new location has been registered
+     * @param id id of the registered location
+     * @param name name of the registered location
+     */
+    void locationAdded(const QString & id, const QString & name);
+
+    /**
+     * Emitted when a new location has been unregistered
+     * @param id id of the unregistered location
+     */
+    void locationRemoved(const QString & id);
 
 protected Q_SLOTS:
     void setActiveAccessPoint(const QString & accessPoint, const QString & backend);

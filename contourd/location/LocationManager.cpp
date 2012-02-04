@@ -95,6 +95,34 @@ QString LocationManager::addLocation(const QString & name)
     return id;
 }
 
+void LocationManager::removeLocation(const QString & id)
+{
+    if (!d->knownLocationInfos.contains(id)) return;
+
+    d->knownLocationIds.remove(d->knownLocationInfos[id].name);
+    d->knownLocationInfos.remove(id);
+
+    d->locationNetworks.deleteEntry(id);
+    d->locationNetworkRoots.deleteEntry(id);
+    d->locationNames.deleteEntry(id);
+
+    d->scheduleConfigSync();
+}
+
+void LocationManager::setLocationName(const QString & id, const QString & name)
+{
+    if (!d->knownLocationInfos.contains(id)) return;
+
+    d->knownLocationIds.remove(d->knownLocationInfos[id].name);
+    d->knownLocationInfos[id].name = name;
+    d->knownLocationIds[name] = id;
+
+    d->locationNames.writeEntry(id, name);
+
+    d->scheduleConfigSync();
+}
+
+
 QString LocationManager::currentLocationId() const
 {
     return d->currentLocationId;

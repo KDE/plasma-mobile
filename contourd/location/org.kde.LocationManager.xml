@@ -5,11 +5,25 @@
       <arg name="id" type="s" direction="out"/>
       <arg name="name" type="s" direction="out"/>
     </signal>
+    <signal name="locationAdded">
+      <arg name="id" type="s" direction="out"/>
+      <arg name="name" type="s" direction="out"/>
+    </signal>
+    <signal name="locationRemoved">
+      <arg name="id" type="s" direction="out"/>
+    </signal>
     <method name="knownLocations">
       <arg type="as" direction="out"/>
     </method>
     <method name="addLocation">
       <arg type="s" direction="out"/>
+      <arg name="name" type="s" direction="in"/>
+    </method>
+    <method name="removeLocation">
+      <arg name="id" type="s" direction="in"/>
+    </method>
+    <method name="setLocationName">
+      <arg name="id" type="s" direction="in"/>
       <arg name="name" type="s" direction="in"/>
     </method>
     <method name="setCurrentLocation">
