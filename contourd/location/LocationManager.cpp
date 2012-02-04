@@ -274,17 +274,22 @@ QString LocationManager::Private::networkRoot(const QString & name)
         }
     }
 
-    if (lastLetter == name.size() - 1) {
+    lastLetter++;
+
+    if (lastLetter == name.size()) {
         // Letters are till the end of the name
 
-        if (lastDash > name.size() / 2) {
-            // The last dash is in the second half of the name,
+        if (lastDash > name.size() / 2 || lastDash > 5) {
+            // The last dash is in the second half of the name, or the
+            // main name is longer than 5 characters
             // considering it and the rest of the name as a suffix
+            kDebug() << "Returning (1) " << result.left(lastDash);
             return result.left(lastDash);
 
         } else {
             // The letters are going to the end of the name, and
             // there are no dashes or we are ignoring them
+            kDebug() << "Returning (2) " << result;
             return result;
 
         }
@@ -292,16 +297,18 @@ QString LocationManager::Private::networkRoot(const QString & name)
     } else {
         // We want to remove the end of the name
 
-        int last = qMin(lastDash, lastLetter);
+        int last = lastDash;
 
-        if (last <= name.size()) {
-            last = qMax(lastDash, lastLetter);
+        if (last <= 0) {
+            last = lastLetter;
         }
 
-        if (last > name.size() / 2) {
+        if (last >= name.size() / 2) {
+            kDebug() << "Returning (3) " << result.left(last);
             return result.left(last);
         }
 
+        kDebug() << "Returning (4) " << result;
         return result;
     }
 }
