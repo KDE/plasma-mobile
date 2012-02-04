@@ -91,6 +91,7 @@ Flickable {
             transformOrigin: Item.TopLeft
             //settings.pluginsEnabled: true
 
+            pressGrabTime: flickable.interactive ? 400 : 0
             x: flickable.contentX
             y: flickable.contentY
             width: flickable.width
