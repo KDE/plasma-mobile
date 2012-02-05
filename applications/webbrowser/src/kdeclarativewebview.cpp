@@ -1354,6 +1354,7 @@ void QDeclarativeWebPage::downloadUrl(const KUrl &url)
     downloadResource(url, QString(), view());
 }
 
+
 #include "errorhandling.cpp"
 
 

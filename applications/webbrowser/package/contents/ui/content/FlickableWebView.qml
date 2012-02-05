@@ -93,10 +93,10 @@ Flickable {
 
             pressGrabTime: flickable.interactive ? 400 : 0
             x: flickable.contentX
-            y: flickable.contentY
+            y: Math.max(0, flickable.contentY - headerSpace.height)//Math.max(0, flickable.contentY)
             width: flickable.width
-            height: flickable.height
-            contentsPosition: Qt.point(flickable.contentX, flickable.contentY)
+            height: flickable.height + headerSpace.height + Math.min(0, contentsSize.height - flickable.contentY - flickable.height)
+            contentsPosition: Qt.point(flickable.contentX, Math.max(0, flickable.contentY - headerSpace.height))
 
             //FIXME: glorious hack just to obtain a signal of the url of the new requested page
             // Should be replaced with signal from KDeclarativeWebView
