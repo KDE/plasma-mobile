@@ -119,24 +119,36 @@ void PagedProxyModel::sourceRowsAboutToBeInserted( const QModelIndex & parentIdx
     const int pageStart = (m_currentPage*m_pageSize);
     const int pageEnd = (m_currentPage*m_pageSize + m_pageSize);
 
-    if (start > pageEnd || end < pageStart) {
+    //if we insert a row before the page, we have ro rewrite the whole page anyways
+    if (start <= pageStart) {
+        beginResetModel();
         return;
+    } else if (start > pageEnd) {
+        return;
+    //start > pageStart
+    //some old items will go because they overflow the page size
+    } else if (end - start > m_pageSize - rowCount()) {
+        beginRemoveRows(parentIdx, m_pageSize, (end - start - rowCount()));
     }
 
     int newStart = qMin(m_pageSize, qMax(0, start - pageStart));
     int newEnd = qMin(m_pageSize, qMax(0, end - pageStart));
 
     beginInsertRows(parentIdx, newStart, newEnd );
-
 }
 
 
 void PagedProxyModel::sourceRowsInserted( const QModelIndex& parentIdx, int start, int end )
 {
     Q_UNUSED( parentIdx );
-    Q_UNUSED( start );
     Q_UNUSED( end );
-    endInsertRows();
+    const int pageStart = (m_currentPage*m_pageSize);
+    if (start <= pageStart) {
+        endResetModel();
+    } else {
+        endInsertRows();
+    }
+    endRemoveRows();
 }
 
 
@@ -145,7 +157,11 @@ void PagedProxyModel::sourceRowsAboutToBeRemoved( const QModelIndex & parentIdx,
     const int pageStart = (m_currentPage*m_pageSize);
     const int pageEnd = (m_currentPage*m_pageSize + m_pageSize);
 
-    if (start > pageEnd || end < pageStart) {
+    //if we remove a row before the page, we have to rewrite the whole page anyways
+    if (start <= pageStart) {
+        beginResetModel();
+        return;
+    } else if (start > pageEnd) {
         return;
     }
 
@@ -153,15 +169,27 @@ void PagedProxyModel::sourceRowsAboutToBeRemoved( const QModelIndex & parentIdx,
     int newEnd = qMin(m_pageSize, qMax(0, end - pageStart));
 
     beginRemoveRows(parentIdx, newStart, newEnd );
+
+     //how many rows remain that can be put back i the page?
+    if (sourceModel()->rowCount() - (end - start) - pageStart > 0) {
+        beginInsertRows(parentIdx, newStart,
+                        qMin(newEnd,
+                         (sourceModel()->rowCount() - (end - start) - pageStart)));
+    }
 }
 
 
 void PagedProxyModel::sourceRowsRemoved( const QModelIndex& parentIdx, int start, int end )
 {
     Q_UNUSED( parentIdx );
-    Q_UNUSED( start );
     Q_UNUSED( end );
-    endRemoveRows();
+    const int pageStart = (m_currentPage*m_pageSize);
+    if (start <= pageStart) {
+        endResetModel();
+    } else {
+        endRemoveRows();
+        endInsertRows();
+    }
 }
 
 int PagedProxyModel::rowCount(const QModelIndex &parent) const
