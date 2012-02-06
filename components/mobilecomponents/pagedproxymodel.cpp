@@ -116,7 +116,18 @@ void PagedProxyModel::sourceDataChanged(const QModelIndex &from, const QModelInd
 
 void PagedProxyModel::sourceRowsAboutToBeInserted( const QModelIndex & parentIdx, int start, int end )
 {
-    beginInsertRows(parentIdx, start, end );
+    const int pageStart = (m_currentPage*m_pageSize);
+    const int pageEnd = (m_currentPage*m_pageSize + m_pageSize);
+
+    if (start > pageEnd || end < pageStart) {
+        return;
+    }
+
+    int newStart = qMin(m_pageSize, qMax(0, start - pageStart));
+    int newEnd = qMin(m_pageSize, qMax(0, end - pageStart));
+
+    beginInsertRows(parentIdx, newStart, newEnd );
+
 }
 
 
@@ -131,7 +142,17 @@ void PagedProxyModel::sourceRowsInserted( const QModelIndex& parentIdx, int star
 
 void PagedProxyModel::sourceRowsAboutToBeRemoved( const QModelIndex & parentIdx, int start, int end )
 {
-    beginRemoveRows(parentIdx, start, end );
+    const int pageStart = (m_currentPage*m_pageSize);
+    const int pageEnd = (m_currentPage*m_pageSize + m_pageSize);
+
+    if (start > pageEnd || end < pageStart) {
+        return;
+    }
+
+    int newStart = qMin(m_pageSize, qMax(0, start - pageStart));
+    int newEnd = qMin(m_pageSize, qMax(0, end - pageStart));
+
+    beginRemoveRows(parentIdx, newStart, newEnd );
 }
 
 
