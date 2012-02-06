@@ -57,7 +57,7 @@ Image {
     }
     MetadataModels.MetadataModel {
         id: metadataModel
-        //sortBy: ["nie:title"]
+        sortBy: [userTypes.sortFields[metadataModel.resourceType]]
         //sortOrder: Qt.DescendingOrder
         //queryString: "pdf"
         //limit: 20
