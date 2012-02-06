@@ -85,18 +85,12 @@ PlasmaComponents.TabBar {
     Component {
         id: topComponent
         ResourceBrowser {
-            model: PlasmaCore.SortFilterModel {
-                id: appsModel
-                sourceModel: MetadataModels.MetadataModel {
-                    sortOrder: Qt.DescendingOrder
-                    activityId: "!"+activitySource.data["Status"]["Current"]
-                    sortBy: ["nao:numericRating"]
-                    limit: 20
-                    queryString: searchField.searchQuery
-                }
-                sortRole: "name"
-                filterRole: "name"
-                filterRegExp: ".*"+searchField.searchQuery+".*"
+            model: MetadataModels.MetadataModel {
+                sortOrder: Qt.DescendingOrder
+                activityId: "!"+activitySource.data["Status"]["Current"]
+                sortBy: ["nao:numericRating"]
+                limit: 20
+                queryString: searchField.searchQuery
             }
         }
     }
@@ -125,16 +119,11 @@ PlasmaComponents.TabBar {
     Component {
         id: bookmarksComponent
         ResourceBrowser {
-            model: PlasmaCore.SortFilterModel {
-                //FIXME: the url doesn't get indexed?
-                sourceModel: MetadataModels.MetadataModel {
-                    sortOrder: Qt.AscendingOrder
-                    activityId: "!"+activitySource.data["Status"]["Current"]
-                    sortBy: ["nie:url"]
-                    resourceType: "nfo:Bookmark"
-                }
-                filterRole: "url"
-                filterRegExp: ".*"+searchField.searchQuery+".*"
+            model: MetadataModels.MetadataModel {
+                sortOrder: Qt.AscendingOrder
+                activityId: "!"+activitySource.data["Status"]["Current"]
+                sortBy: ["nie:url"]
+                resourceType: "nfo:Bookmark"
             }
         }
     }
@@ -182,7 +171,7 @@ PlasmaComponents.TabBar {
         id: musicComponent
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
-                sortBy: ["nfo:fileName"]
+                sortBy: ["nie:title"]
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Audio"
