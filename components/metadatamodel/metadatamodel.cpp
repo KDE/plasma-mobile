@@ -123,7 +123,7 @@ Nepomuk::Query::Query MetadataModel::query() const
 
 void MetadataModel::setQueryString(const QString &query)
 {
-    if (query == m_queryString) {
+    if (query == m_queryString || query == "nepomuk") {
         return;
     }
 
@@ -381,16 +381,24 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
     foreach (Nepomuk::Query::Result res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
-        m_resourcesToInsert << res.resource();
+        Nepomuk::Resource resource = res.resource();
+        if (!resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).isValid()) {
+            continue;
+        }
+        m_resourcesToInsert << resource;
     }
 
-    if (!m_newEntriesTimer->isActive()) {
+    if (!m_newEntriesTimer->isActive() && !m_resourcesToInsert.isEmpty()) {
         m_newEntriesTimer->start(200);
     }
 }
 
 void MetadataModel::newEntriesDelayed()
 {
+    if (m_resourcesToInsert.isEmpty()) {
+        return;
+    }
+
     beginInsertRows(QModelIndex(), m_resources.count(), m_resources.count()+m_resourcesToInsert.count()-1);
 
     m_watcher->stop();
