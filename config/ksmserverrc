@@ -1,4 +1,2 @@
 [General]
-windowManager=kwin_gles
-loginMode=default
-
+theme=contour
