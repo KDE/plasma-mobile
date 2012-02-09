@@ -17,18 +17,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
-import Qt.labs.gestures 1.0
 
 Flickable {
     id: mainFlickable
     width: fullList.width
     height: fullList.height
-    contentWidth: mainImage.width*mainImage.scale
-    contentHeight: mainImage.height*mainImage.scale
+    contentWidth: mainImage.width
+    contentHeight: mainImage.height
     onContentHeightChanged: interactiveTimer.restart()
     property alias source: mainImage.source
     property string label: model["label"]
@@ -46,41 +45,55 @@ Flickable {
         }
     }
 
-    ParallelAnimation {
+    SequentialAnimation {
         id: zoomAnim
         function zoom(factor)
         {
-            if (factor < 1 && mainImage.scale < 0.2) {
+            if (factor < 1 && mainFlickable.contentWidth < mainFlickable.width && mainFlickable.contentHeight < mainFlickable.height) {
                 return
-            } else if (factor > 1 && mainImage.scale > 8) {
+            } else if (factor > 1 && (mainFlickable.contentWidth > mainFlickable.width*8 && mainFlickable.contentHeight > mainFlickable.height*8)) {
                 return
             }
 
             contentXAnim.to = Math.max(0, Math.min(mainFlickable.contentWidth-mainFlickable.width, (mainFlickable.contentX * factor)))
             contentYAnim.to = Math.max(0, Math.min(mainFlickable.contentHeight-mainFlickable.height, (mainFlickable.contentY * factor)))
-            scaleAnim.to = mainImage.scale * factor
+            contentWidthAnim.to = mainFlickable.contentWidth * factor
+            contentHeightAnim.to = mainFlickable.contentHeight * factor
             zoomAnim.running = true
         }
-        NumberAnimation {
-            id: scaleAnim
-            duration: 250
-            easing.type: Easing.InOutQuad
-            target: mainImage
-            property: "scale"
+
+        ParallelAnimation {
+            NumberAnimation {
+                id: contentWidthAnim
+                duration: 250
+                easing.type: Easing.InOutQuad
+                target: mainFlickable
+                property: "contentWidth"
+            }
+            NumberAnimation {
+                id: contentHeightAnim
+                duration: 250
+                easing.type: Easing.InOutQuad
+                target: mainFlickable
+                property: "contentHeight"
+            }
+            NumberAnimation {
+                id: contentXAnim
+                duration: 250
+                easing.type: Easing.InOutQuad
+                target: mainFlickable
+                property: "contentX"
+            }
+            NumberAnimation {
+                id: contentYAnim
+                duration: 250
+                easing.type: Easing.InOutQuad
+                target: mainFlickable
+                property: "contentY"
+            }
         }
-        NumberAnimation {
-            id: contentXAnim
-            duration: 250
-            easing.type: Easing.InOutQuad
-            target: mainFlickable
-            property: "contentX"
-        }
-        NumberAnimation {
-            id: contentYAnim
-            duration: 250
-            easing.type: Easing.InOutQuad
-            target: mainFlickable
-            property: "contentY"
+        ScriptAction {
+            script: mainFlickable.returnToBounds()
         }
     }
 
@@ -96,14 +109,24 @@ Flickable {
 
     Rectangle {
         id: imageMargin
-        width: Math.max(mainFlickable.width, mainImage.width * mainImage.scale)
-        height: Math.max(mainFlickable.height, mainImage.height * mainImage.scale)
-        clip: true
         color: "black"
-        GestureArea {
+        width: Math.max(mainFlickable.width, mainImage.width)
+        height: Math.max(mainFlickable.height, mainImage.height)
+        clip: true
+        PinchArea {
             anchors.fill: parent
-            onPinch: {
-                mainImage.scale = scaleFactor
+            property real initialWidth
+            property real initialHeight
+            onPinchStarted: {
+                initialWidth = contentWidth
+                initialHeight = contentHeight
+             }
+            onPinchUpdated: {
+                contentX += pinch.previousCenter.x - pinch.center.x
+                contentY += pinch.previousCenter.y - pinch.center.y
+                
+                // resize content
+                mainFlickable.resizeContent(initialWidth * pinch.scale, initialHeight * pinch.scale, Qt.point(pinch.center.x-mainImage.x, pinch.center.y-mainImage.y))
             }
 
             Image {
@@ -111,6 +134,8 @@ Flickable {
 
                 asynchronous: true
                 anchors.centerIn: parent
+                width: mainFlickable.contentWidth
+                height: mainFlickable.contentHeight
                 onStatusChanged: {
                     if (status != Image.Ready) {
                         return
@@ -124,15 +149,20 @@ Flickable {
                         return
                     }
 
-                    mainImage.scale = Math.min(1, mainFlickable.height/(scale*height))
-                    mainImage.scale = Math.min(scale, Math.min(1, mainFlickable.width/(scale*width)))
- 
-                    if (mainImage.width > mainImage.height && mainImage.width > mainFlickable.width) {
-                        mainImage.sourceSize.width = mainFlickable.width
-                        mainImage.sourceSize.height = 0
+                    var ratio = sourceSize.width/sourceSize.height
+                    if (sourceSize.width > sourceSize.height) {
+                        mainFlickable.contentWidth = Math.min(mainFlickable.width, sourceSize.width)
+                        mainFlickable.contentHeight = mainFlickable.contentWidth / ratio
+                    } else {
+                        mainFlickable.contentHeight = Math.min(mainFlickable.height, sourceSize.height)
+                        mainFlickable.contentWidth = mainFlickable.contentHeight * ratio
                     }
-                    if (mainImage.height > mainImage.width && mainImage.height > mainFlickable.height) {
-                        mainImage.sourceSize.width = 0
+ 
+                    if (mainImage.sourceSize.width > mainImage.sourceSize.height && mainImage.sourceSize.width > mainFlickable.width) {
+                        mainImage.sourceSize.width = mainFlickable.width
+                        mainImage.sourceSize.height = mainImage.sourceSize.width / ratio
+                    } else if (mainImage.sourceSize.height > mainImage.sourceSize.width && mainImage.sourceSize.height > mainFlickable.height) {
+                        mainImage.sourceSize.width = mainFlickable.height * ratio
                         mainImage.sourceSize.height = mainFlickable.height
                     }
                 }
