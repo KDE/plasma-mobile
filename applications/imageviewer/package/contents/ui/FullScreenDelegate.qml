@@ -94,11 +94,12 @@ Flickable {
         }
     }
 
-    Item {
+    Rectangle {
         id: imageMargin
         width: Math.max(mainFlickable.width, mainImage.width * mainImage.scale)
         height: Math.max(mainFlickable.height, mainImage.height * mainImage.scale)
         clip: true
+        color: "black"
         GestureArea {
             anchors.fill: parent
             onPinch: {
