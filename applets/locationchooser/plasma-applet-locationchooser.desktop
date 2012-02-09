@@ -1,0 +1,21 @@
+[Desktop Entry]
+Icon=location
+
+Name=Location
+Comment=Location chooser
+
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-Library=plasma_applet_locationchooser
+X-KDE-PluginInfo-Author=Ivan Čukić
+X-KDE-PluginInfo-Email=ivan.cukic(at)kde.org
+X-KDE-PluginInfo-Name=locationchooser
+X-KDE-PluginInfo-Version=1.5
+X-KDE-PluginInfo-Website=http://www.kde.org/
+X-KDE-PluginInfo-Category=Miscellaneous
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
+X-Plasma-NotificationArea=true
