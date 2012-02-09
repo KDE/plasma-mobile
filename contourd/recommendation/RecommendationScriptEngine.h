@@ -41,8 +41,6 @@ public:
     virtual void init();
     virtual void activate(const QString & id, const QString & action = QString());
 
-    void autoRemoveChosenRecommendation(bool remove = true);
-
 Q_SIGNALS:
     // note that you need to pass sorted items to
     // this method (sorted by the score)
@@ -51,6 +49,8 @@ Q_SIGNALS:
     void activationRequested(const QString & id, const QString & action);
 
 public Q_SLOTS:
+    void setAutoRemoveChosenRecommendation(bool remove = true);
+
     // TODO: These could be removed to some plugins or whatever
     QScriptValue getSensor(const QString & sensor);
     QScriptValue getTimer(int msec);

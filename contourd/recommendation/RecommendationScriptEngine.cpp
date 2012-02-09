@@ -73,6 +73,8 @@ RecommendationScriptEngine::RecommendationScriptEngine(QObject * parent, const Q
     d->delay.setInterval(300);
     d->delay.setSingleShot(true);
 
+    d->autoremove = config()->readEntry("autoRemoveChosenRecommendation", true);
+
     connect(&(d->delay), SIGNAL(timeout()),
             this, SLOT(sendUpdateNotification()));
 
@@ -114,6 +116,14 @@ void RecommendationScriptEngine::activate(const QString & id, const QString & ac
         removeRecommendation(id);
 
     emit activationRequested(id, action);
+}
+
+void RecommendationScriptEngine::setAutoRemoveChosenRecommendation(bool remove)
+{
+    d->autoremove = remove;
+    KConfigGroup * cg = config();
+    cg->writeEntry("autoRemoveChosenRecommendation", d->autoremove);
+    cg->sync();
 }
 
 QString RecommendationScriptEngine::name() const
