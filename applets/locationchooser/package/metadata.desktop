@@ -1,7 +1,15 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Location
+Name[nl]=Locatie
+Name[pt_BR]=Localização
+Name[uk]=Розташування
+Name[x-test]=xxLocationxx
 Comment=Applet to tell the system where you are
+Comment[nl]=Een applet om het systeem te laten weten waar u bent
+Comment[pt_BR]=Miniaplicativo para dizer ao sistema aonde você está
+Comment[uk]=Аплет, який повідомлятиме системі про те, де ви перебуваєте
+Comment[x-test]=xxApplet to tell the system where you arexx
 
 Type=Service
 Icon=location

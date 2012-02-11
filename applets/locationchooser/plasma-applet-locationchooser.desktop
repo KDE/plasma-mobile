@@ -2,7 +2,15 @@
 Icon=location
 
 Name=Location
+Name[nl]=Locatie
+Name[pt_BR]=Localização
+Name[uk]=Розташування
+Name[x-test]=xxLocationxx
 Comment=Location chooser
+Comment[nl]=Locatiekiezer
+Comment[pt_BR]=Seletor de localização
+Comment[uk]=Вибір розташування
+Comment[x-test]=xxLocation chooserxx
 
 Type=Service
 
