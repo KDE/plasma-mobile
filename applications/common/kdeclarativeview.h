@@ -74,6 +74,8 @@ public:
      */
     Plasma::Package *package() const;
 
+    QSize sizeHint() const;
+
 private:
     KDeclarativeViewPrivate *const d;
 };
