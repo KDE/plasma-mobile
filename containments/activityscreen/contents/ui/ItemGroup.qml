@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
@@ -52,7 +52,28 @@ PlasmaCore.FrameSvgItem {
         }
     }
 
-    MouseArea {
+    PinchArea {
+        anchors.fill: parent
+        property variant globalLastPoint1
+        property variant globalLastPoint2
+        onPinchStarted: {
+            globalLastPoint1 = mapToItem(main, pinch.point1.x, pinch.point1.y)
+            globalLastPoint2 = mapToItem(main, pinch.point2.x, pinch.point2.y)
+        }
+        onPinchUpdated: {
+            var globalPoint1 = mapToItem(main, pinch.point1.x, pinch.point1.y)
+            var globalPoint2 = mapToItem(main, pinch.point2.x, pinch.point2.y)
+            itemGroup.x -= (pinch.startPoint2.x > pinch.startPoint1.x) ? globalLastPoint1.x - globalPoint1.x : globalLastPoint2.x - globalPoint2.x
+            itemGroup.y -= (pinch.startPoint2.y > pinch.startPoint1.y) ? globalLastPoint1.y - globalPoint1.y : globalLastPoint2.y - globalPoint2.y
+
+            itemGroup.width = Math.max(itemGroup.minimumWidth, itemGroup.width - (pinch.startPoint2.x>pinch.startPoint1.x ? 1 : -1)*((globalPoint1.x - globalPoint2.x) - (globalLastPoint1.x - globalLastPoint2.x)))
+            itemGroup.height = Math.max(itemGroup.minimumHeight, itemGroup.height - (pinch.startPoint2.y>pinch.startPoint1.y ? 1 : -1)*((globalPoint1.y - globalPoint2.y) - (globalLastPoint1.y - globalLastPoint2.y)))
+
+            globalLastPoint1 = globalPoint1
+            globalLastPoint2 = globalPoint2
+        }
+    }
+    /*MouseArea {
         anchors.fill: parent
         property int lastX
         property int lastY
@@ -110,7 +131,8 @@ PlasmaCore.FrameSvgItem {
             LayoutManager.save()
             //debugFlow.refresh()
         }
-    }
+    }*/
+
     Behavior on scale {
         NumberAnimation {
             duration: 250
@@ -213,7 +235,6 @@ PlasmaCore.FrameSvgItem {
             //debugFlow.refresh();
         }
         onPositionChanged: {
-            //TODO: height as well if it's going to become a grid view
             itemGroup.width = Math.max(itemGroup.minimumWidth, itemGroup.width + mouse.x-startX)
             if (itemGroup.canResizeHeight) {
                 itemGroup.height = Math.max(itemGroup.minimumHeight, itemGroup.height + mouse.y-startY)
