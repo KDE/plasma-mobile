@@ -57,6 +57,7 @@ PanelProxy::PanelProxy(QObject *parent)
     m_panel->setAttribute(Qt::WA_NoSystemBackground);
     m_panel->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
     m_panel->viewport()->setAttribute(Qt::WA_NoSystemBackground);
+    m_panel->viewport()->setAttribute(Qt::WA_TranslucentBackground);
     m_panel->setWindowFlags(m_panel->windowFlags() | Qt::FramelessWindowHint | Qt::CustomizeWindowHint);
     m_panel->setFrameShape(QFrame::NoFrame);
     KWindowSystem::setOnAllDesktops(m_panel->winId(), true);
