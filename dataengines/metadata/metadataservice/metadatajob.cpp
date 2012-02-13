@@ -62,7 +62,7 @@ void MetadataJob::start()
         }
 
         Nepomuk::Resource fileRes(resourceUrl);
-        Nepomuk::Resource acRes(activityUrl, Nepomuk::Vocabulary::KEXT::Activity());
+        KActivities::Info *info = new KActivities::Info(activityUrl);
         QUrl typeUrl;
 
         //Bookmark?
@@ -81,7 +81,8 @@ void MetadataJob::start()
             }
         }
 
-        acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
+        info->linkResource(resourceUrl);
+        info->deleteLater();
         setResult(true);
         return;
 
@@ -89,12 +90,12 @@ void MetadataJob::start()
         QString activityUrl = parameters()["ActivityUrl"].toString();
         activityUrl = m_activityConsumer->currentActivity();
 
-        QString url = parameters()["ResourceUrl"].toString();
+        QString resourceUrl = parameters()["ResourceUrl"].toString();
 
-        Nepomuk::Resource fileRes(resourceUrl);
-        Nepomuk::Resource acRes(activityUrl, Nepomuk::Vocabulary::KEXT::Activity());
+        KActivities::Info *info = new KActivities::Info(activityUrl);
+        info->unlinkResource(resourceUrl);
+        info->deleteLater();
 
-        acRes.removeProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
         setResult(true);
         return;
 
