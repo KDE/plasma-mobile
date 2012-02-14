@@ -100,12 +100,7 @@ PlasmaComponents.Page {
         id: resultsGrid
         anchors.fill: parent
 
-        model: PlasmaCore.SortFilterModel {
-            sourceModel: metadataModel
-            sortRole: "label"
-            sortOrder: "AscendingOrder"
-            sortCaseSensitivity: Qt.CaseInsensitive
-        }
+        model: metadataModel
 
         delegateWidth: 130
         delegateHeight: 120

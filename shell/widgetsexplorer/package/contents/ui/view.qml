@@ -122,11 +122,10 @@ MobileComponents.Sheet {
     Component {
         id: globalSearchComponent
         ResourceBrowser {
-            model: RunnerModels.RunnerModel {
+            model: MetadataModels.MetadataModel {
                 id: runnerModel
-                runners: [ "services", "nepomuksearch", "recentdocuments" ]
-                query: searchField.searchQuery.length > 3 ? searchField.searchQuery : ""
-                onQueryChanged: {
+                queryString: searchField.searchQuery.length > 3 ? searchField.searchQuery : ""
+                onQueryStringChanged: {
                     if (searchField.searchQuery.length <= 3) {
                         stack.pop()
                     }

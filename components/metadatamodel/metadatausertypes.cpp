@@ -49,7 +49,7 @@ MetadataUserTypes::MetadataUserTypes(QObject *parent)
 
     m_userTypes << "nfo:Audio";
     m_typeNames->insert("nfo:Audio", i18n("Music"));
-    m_typeSortFields->insert("nfo:Audio", "nfo:fileName");
+    m_typeSortFields->insert("nfo:Audio", "nie:title");
 
     m_userTypes << "nfo:Video";
     m_typeNames->insert("nfo:Video", i18n("Videos"));

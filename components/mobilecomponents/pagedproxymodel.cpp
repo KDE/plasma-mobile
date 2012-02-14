@@ -95,6 +95,9 @@ void PagedProxyModel::setSourceModelObject(QObject *source)
     connect(model,  SIGNAL(rowsRemoved(QModelIndex, int,int)),
             this, SLOT(sourceRowsRemoved(QModelIndex,int,int)) );
 
+    connect(model, SIGNAL(rowsMoved(QModelIndex, int, int, const QModelIndex, int)),
+            this, SLOT(sourceRowsMoved(QModelIndex, int, int, const QModelIndex, int)));
+
     connect(model, SIGNAL(modelAboutToBeReset()),
                this, SIGNAL(modelAboutToBeReset()));
     connect(model, SIGNAL(modelReset()),
@@ -114,33 +117,119 @@ void PagedProxyModel::sourceDataChanged(const QModelIndex &from, const QModelInd
     emit dataChanged(mapFromSource(from), mapFromSource(to));
 }
 
+void PagedProxyModel::sourceRowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd, const QModelIndex &destinationParent, int destinationRow)
+{
+    const int pageStart = (m_currentPage*m_pageSize);
+    int newStart = qMin(m_pageSize, qMax(0, sourceStart - pageStart));
+    int newEnd = qMin(m_pageSize, newStart + (sourceEnd - sourceStart));
+    int newDestinationRow = qMin(m_pageSize, qMax(0, destinationRow - pageStart));
+
+    emit beginMoveRows(sourceParent, newStart, newEnd, destinationParent, newDestinationRow);
+    endMoveRows();
+}
+
 void PagedProxyModel::sourceRowsAboutToBeInserted( const QModelIndex & parentIdx, int start, int end )
 {
-    beginInsertRows(parentIdx, start, end );
+    const int pageStart = (m_currentPage*m_pageSize);
+    const int pageEnd = (m_currentPage*m_pageSize + m_pageSize);
+
+    //insert in pages bigger than us, not interested
+    if (start > pageEnd) {
+        return;
+    }
+
+    //FIXME: proper indexes should be calculated
+    beginResetModel();
+    return;
+
+    int newStart = qMin(m_pageSize, qMax(0, start - pageStart));
+    int newEnd = qMin(m_pageSize, newStart + (end - start));
+
+    m_oldRowCount = rowCount();
+    //insert only the ones that are beyond the count
+    if (newEnd > m_oldRowCount) {
+        beginInsertRows(parentIdx, rowCount() - newEnd, newEnd );
+    }
 }
 
 
 void PagedProxyModel::sourceRowsInserted( const QModelIndex& parentIdx, int start, int end )
 {
     Q_UNUSED( parentIdx );
-    Q_UNUSED( start );
-    Q_UNUSED( end );
-    endInsertRows();
+
+    const int pageStart = (m_currentPage*m_pageSize);
+    const int pageEnd = (m_currentPage*m_pageSize + m_pageSize);
+
+    if (start > pageEnd) {
+        return;
+    }
+
+    //FIXME: proper mapped indexes should be calculated
+    endResetModel();
+    return;
+
+    if (rowCount() > m_oldRowCount) {
+        endInsertRows();
+    }
+    int newStart = qMin(m_pageSize, qMax(0, start - pageStart));
+    int newEnd = qMin(m_pageSize, newStart + (end - start));
+
+    if (newStart <= m_oldRowCount) {
+        emit dataChanged(PagedProxyModel::index(newStart, 0),
+                         PagedProxyModel::index(qMin(newEnd, m_oldRowCount), 0));
+    }
 }
 
 
 void PagedProxyModel::sourceRowsAboutToBeRemoved( const QModelIndex & parentIdx, int start, int end )
 {
-    beginRemoveRows(parentIdx, start, end );
+    const int pageStart = (m_currentPage*m_pageSize);
+    const int pageEnd = (m_currentPage*m_pageSize + m_pageSize);
+
+    if (start > pageEnd) {
+        return;
+    }
+
+    //FIXME: proper mapped indexes should be calculated
+    beginResetModel();
+    return;
+
+    int newStart = qMin(m_pageSize, qMax(0, start - pageStart));
+    int newEnd = qMin(m_pageSize, qMax(0, end - pageStart));
+
+    m_oldRowCount = rowCount();
+    //insert only the ones that are beyond the count
+    if (newEnd < m_oldRowCount) {
+        beginRemoveRows(parentIdx, newStart, newEnd );
+    }
 }
 
 
 void PagedProxyModel::sourceRowsRemoved( const QModelIndex& parentIdx, int start, int end )
 {
     Q_UNUSED( parentIdx );
-    Q_UNUSED( start );
-    Q_UNUSED( end );
-    endRemoveRows();
+
+    const int pageStart = (m_currentPage*m_pageSize);
+    const int pageEnd = (m_currentPage*m_pageSize + m_pageSize);
+
+    if (start > pageEnd) {
+        return;
+    }
+
+    //FIXME: proper mapped indexes should be calculated
+    endResetModel();
+    return;
+
+    if (rowCount() < m_oldRowCount) {
+        endRemoveRows();
+    }
+    int newStart = qMin(m_pageSize, qMax(0, start - pageStart));
+    int newEnd = qMin(m_pageSize, newStart + (end - start));
+
+    if (sourceModel()->rowCount() - pageStart > rowCount()) {
+        emit dataChanged(PagedProxyModel::index(newStart, 0),
+                         PagedProxyModel::index(qMin((sourceModel()->rowCount() - pageStart), qMin(newEnd, m_oldRowCount)), 0));
+    }
 }
 
 int PagedProxyModel::rowCount(const QModelIndex &parent) const
@@ -172,6 +261,7 @@ QModelIndex PagedProxyModel::index(int row, int column, const QModelIndex &paren
 
 QModelIndex PagedProxyModel::parent(const QModelIndex &index) const
 {
+    Q_UNUSED(index)
     return QModelIndex();
 }
 

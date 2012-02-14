@@ -121,4 +121,9 @@ bool KDeclarativeView::useGL() const
     return d->useGL;
 }
 
+QSize KDeclarativeView::sizeHint() const
+{
+    return QSize(800, 600);
+}
+
 #include "kdeclarativeview.moc"

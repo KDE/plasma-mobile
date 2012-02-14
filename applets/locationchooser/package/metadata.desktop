@@ -1,0 +1,33 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Location
+Name[nl]=Locatie
+Name[pt]=Localização
+Name[pt_BR]=Localização
+Name[uk]=Розташування
+Name[x-test]=xxLocationxx
+Comment=Applet to tell the system where you are
+Comment[nl]=Een applet om het systeem te laten weten waar u bent
+Comment[pt]='Applet' para indicar ao sistema onde se encontra
+Comment[pt_BR]=Miniaplicativo para dizer ao sistema aonde você está
+Comment[uk]=Аплет, який повідомлятиме системі про те, де ви перебуваєте
+Comment[x-test]=xxApplet to tell the system where you arexx
+
+Type=Service
+Icon=location
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Ivan Cukic
+# X-KDE-PluginInfo-Category=Miscellaneous
+X-KDE-PluginInfo-Email=ivan.cukic@kde.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.locationchooser
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+# X-KDE-ServiceTypes=Plasma/Applet,Plasma/PopupApplet
+# X-Plasma-API=declarativeappletscript
+# X-Plasma-DefaultSize=290,340
+X-Plasma-MainScript=ui/LocationChooser.qml
+
+# X-KDE-PluginInfo-EnabledByDefault=true
+# X-Plasma-NotificationArea=true
+

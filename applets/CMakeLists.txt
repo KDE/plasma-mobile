@@ -5,3 +5,4 @@ installPackage(powerbutton org.kde.active.powerbutton)
 installPackage(resourcelist org.kde.resourcelist)
 
 add_subdirectory(windowstrip)
+add_subdirectory(locationchooser)

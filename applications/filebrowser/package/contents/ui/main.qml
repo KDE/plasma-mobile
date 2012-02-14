@@ -57,7 +57,7 @@ Image {
     }
     MetadataModels.MetadataModel {
         id: metadataModel
-        //sortBy: ["nao:numericRating"]
+        sortBy: [userTypes.sortFields[metadataModel.resourceType]]
         //sortOrder: Qt.DescendingOrder
         //queryString: "pdf"
         //limit: 20

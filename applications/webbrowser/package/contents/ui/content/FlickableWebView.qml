@@ -39,7 +39,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.kdewebkit 0.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import "LinkPopup.js" as LinkPopupHelper
@@ -59,6 +59,7 @@ Flickable {
 
     signal newWindowRequested(string url)
 
+    
     id: flickable
     width: parent.width
     contentWidth: Math.max(parent.width,webView.width)
@@ -82,14 +83,35 @@ Flickable {
     }
 
 
-    Item {
-        width: webView.contentsSize.width
-        height: webView.contentsSize.height
+    PinchArea {
+        width:webView.width
+        height: webView.height
+        property real startScale
+        onPinchStarted: {
+            startScale = webView.contentsScale
+            webView.renderingEnabled = false
+            flickable.smooth = false
+        }
+        onPinchUpdated: {
+                flickable.contentY += pinch.previousCenter.y - pinch.center.y + flickable.contentY*(pinch.scale - pinch.previousScale)
+                flickable.contentX += pinch.previousCenter.x - pinch.center.x + flickable.contentX*(pinch.scale - pinch.previousScale)
+                webView.contentsScale = startScale * pinch.scale
+                
+                return
+                flickable.contentX = Math.max(0,Math.min(pinch.center.x-flickable.width/2,webView.width*webView.contentsScale-flickable.width))
+                flickable.contentY = Math.max(0,Math.min(pinch.center.y-flickable.height/2,webView.height-flickable.height))
+            }
+        onPinchFinished: {
+            webView.renderingEnabled = true
+            flickable.smooth = true
+        }
+
         WebView {
             id: webView
             objectName: "webViewImplementation"
             transformOrigin: Item.TopLeft
             //settings.pluginsEnabled: true
+
 
             pressGrabTime: flickable.interactive ? 400 : 0
             x: flickable.contentX
@@ -277,6 +299,7 @@ Flickable {
                         to: 0 // set before calling
                     }
                 }
+
                 // Have to set the contentXY, since the above 2
                 // size changes may have started a correction if
                 // contentsScale < 1.0.

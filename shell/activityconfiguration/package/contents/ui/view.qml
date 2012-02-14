@@ -32,7 +32,7 @@ MobileComponents.Sheet {
         if (!encryptedSwitch.checked || encryptedSwitch.checked == internal.activityEncrypted) {
             (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
         } else {
-            i18n("Enter password")
+            (configInterface.activityName == "") ? i18n("Enter password and create activity") : i18n("Enter password and save changes")
         }
     }
     rejectButtonText: i18n("Close")

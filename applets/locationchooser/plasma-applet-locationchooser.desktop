@@ -1,0 +1,31 @@
+[Desktop Entry]
+Icon=marble
+
+Name=Location
+Name[nl]=Locatie
+Name[pt]=Localização
+Name[pt_BR]=Localização
+Name[uk]=Розташування
+Name[x-test]=xxLocationxx
+Comment=Location chooser
+Comment[nl]=Locatiekiezer
+Comment[pt]=Selector da localização
+Comment[pt_BR]=Seletor de localização
+Comment[uk]=Вибір розташування
+Comment[x-test]=xxLocation chooserxx
+
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/Applet
+X-KDE-Library=plasma_applet_locationchooser
+X-KDE-PluginInfo-Author=Ivan Čukić
+X-KDE-PluginInfo-Email=ivan.cukic(at)kde.org
+X-KDE-PluginInfo-Name=org.kde.locationchooser
+X-KDE-PluginInfo-Version=1.5
+X-KDE-PluginInfo-Website=http://www.kde.org/
+X-KDE-PluginInfo-Category=Miscellaneous
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+
+X-Plasma-NotificationArea=true
