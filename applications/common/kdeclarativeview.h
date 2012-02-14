@@ -30,6 +30,7 @@ namespace Plasma
     class Package;
 }
 
+class QScriptEngine;
 class KDeclarativeViewPrivate;
 
 class KDeclarativeView : public QDeclarativeView
@@ -75,6 +76,8 @@ public:
     Plasma::Package *package() const;
 
     QSize sizeHint() const;
+
+    QScriptEngine *scriptEngine() const;
 
 private:
     KDeclarativeViewPrivate *const d;
