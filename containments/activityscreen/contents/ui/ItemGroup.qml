@@ -57,8 +57,10 @@ PlasmaCore.FrameSvgItem {
         property variant globalLastPoint1
         property variant globalLastPoint2
         onPinchStarted: {
+            LayoutManager.setSpaceAvailable(x, y, parent.width, parent.height, true)
             globalLastPoint1 = mapToItem(main, pinch.point1.x, pinch.point1.y)
             globalLastPoint2 = mapToItem(main, pinch.point2.x, pinch.point2.y)
+            dragMouseArea.enabled = false
         }
         onPinchUpdated: {
             var globalPoint1 = mapToItem(main, pinch.point1.x, pinch.point1.y)
@@ -71,9 +73,15 @@ PlasmaCore.FrameSvgItem {
 
             globalLastPoint1 = globalPoint1
             globalLastPoint2 = globalPoint2
+            placeHolder.syncWithItem(parent)
+        }
+        onPinchFinished: {
+            dragMouseArea.enabled = true
+            dragMouseArea.dragEnded()
         }
     }
-    /*MouseArea {
+    MouseArea {
+        id: dragMouseArea
         anchors.fill: parent
         property int lastX
         property int lastY
@@ -122,7 +130,9 @@ PlasmaCore.FrameSvgItem {
                 scrollTimer.running = false
             }
         }
-        onReleased: {
+        onReleased: dragEnded()
+        function dragEnded()
+        {
             scrollTimer.running = false
             repositionTimer.running = false
             placeHolderPaint.opacity = 0
@@ -131,7 +141,7 @@ PlasmaCore.FrameSvgItem {
             LayoutManager.save()
             //debugFlow.refresh()
         }
-    }*/
+    }
 
     Behavior on scale {
         NumberAnimation {
