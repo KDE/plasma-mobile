@@ -47,7 +47,7 @@ Engine::Engine(Plasma::PopupApplet * parent)
 
 void Engine::setIcon(const QString & icon)
 {
-    d->parent->setPopupIcon(icon);
+    d->parent->setPopupIcon("plasmaapplet-" + icon);
 }
 
 QString Engine::currentLocationId() const
