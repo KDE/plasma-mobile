@@ -44,7 +44,6 @@ LocationChooser::LocationChooser(QObject * parent, const QVariantList &args)
 {
     kDebug() << "Location ###";
 
-    setPopupIcon("plasmaapplet-location");
     d->initialized = false;
 
     // init();
@@ -61,6 +60,7 @@ void LocationChooser::init()
 {
     if (d->initialized) return;
 
+    setPopupIcon("plasmaapplet-location");
     d->initialized = true;
 
     d->root = new Plasma::DeclarativeWidget();
