@@ -85,7 +85,7 @@ void LocationChooser::currentLocationChanged(const QString & id, const QString &
 void LocationChooser::popupEvent(bool show)
 {
     d->engine->requestUiReset();
-    setPopupIcon("location");
+    setPopupIcon("plasmaapplet-location");
     Plasma::PopupApplet::popupEvent(show);
 }
 
