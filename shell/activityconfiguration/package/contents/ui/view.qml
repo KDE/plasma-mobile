@@ -58,11 +58,7 @@ MobileComponents.Sheet {
         }
         configInterface.activityName = activityNameEdit.text
         configInterface.wallpaperIndex = wallpapersList.currentIndex
-
-        var service = activitySource.serviceForSource(configInterface.activityId)
-        var operation = service.operationDescription("setEncrypted")
-        operation["Encrypted"] = encryptedSwitch.checked
-        service.startOperationCall(operation)
+        configInterface.encrypted = encryptedSwitch.checked
     }
 
     onAccepted: {
@@ -90,8 +86,6 @@ MobileComponents.Sheet {
             for (var i in data) {
                 if (data[i]["Current"]) {
                     currentActivity = data[i]["Name"]
-                    encryptedSwitch.checked = activitySource.data[i]["Encrypted"]
-                    internal.activityEncrypted = activitySource.data[i]["Encrypted"]
                 }
                 names.push(data[i]["Name"])
             }
@@ -197,6 +191,7 @@ MobileComponents.Sheet {
             }
             PlasmaComponents.Switch {
                 id: encryptedSwitch
+                checked: configInterface.encrypted
             }
         }
     ]
