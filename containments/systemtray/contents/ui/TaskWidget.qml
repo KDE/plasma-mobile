@@ -25,7 +25,8 @@ Item  {
     id: taskIcon
     width: Math.min(main.width, main.height)
     height: width
-    opacity: (main.state == "active" || Status != "Passive")?1:0
+    //hide application status icons
+    opacity: (Category != "ApplicationStatus" && (main.state == "active" || Status != "Passive")) ? 1 : 0
 
     Behavior on opacity {
         NumberAnimation {
