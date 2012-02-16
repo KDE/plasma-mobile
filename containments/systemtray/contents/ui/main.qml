@@ -126,13 +126,6 @@ Item {
         id: theme
     }
 
-    PlasmaCore.DataSource {
-        id: timeEngine
-        engine: "time"
-        interval: 30000
-        connectedSources: ["Local"]
-    }
-
     Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
