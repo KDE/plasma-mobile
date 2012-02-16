@@ -20,6 +20,7 @@
 #include "runnermodel.h"
 
 #include <QIcon>
+#include <QAction>
 #include <QTimer>
 
 #include <KDebug>
@@ -27,7 +28,7 @@
 #include <Plasma/RunnerManager>
 
 RunnerModel::RunnerModel(QObject *parent)
-    : QAbstractItemModel(parent),
+    : QAbstractListModel(parent),
       m_manager(0),
       m_startQueryTimer(new QTimer(this))
 {
@@ -40,27 +41,14 @@ RunnerModel::RunnerModel(QObject *parent)
     roles.insert(Id, "id");
     roles.insert(SubText, "description");
     roles.insert(Enabled, "enabled");
+    roles.insert(RunnerId, "runnerid");
+    roles.insert(RunnerName, "runnerName");
+    roles.insert(Actions, "actions");
     setRoleNames(roles);
 
     m_startQueryTimer->setSingleShot(true);
     m_startQueryTimer->setInterval(10);
     connect(m_startQueryTimer, SIGNAL(timeout()), this, SLOT(startQuery()));
-}
-
-QModelIndex RunnerModel::index(int row, int column, const QModelIndex &index) const
-{
-    //kDebug() << "request for" << row << column << !index.isValid();
-    if (!index.isValid() && row >= 0 && row < m_matches.count() && column >= 0 && column < 1) {
-        return createIndex(row, column);
-    }
-
-    //kDebug() << "IIIIIIIIIIIIIINVALID!";
-    return QModelIndex();
-}
-
-QModelIndex RunnerModel::parent(const QModelIndex&) const
-{
-    return QModelIndex();
 }
 
 int RunnerModel::rowCount(const QModelIndex& index) const
@@ -73,11 +61,6 @@ int RunnerModel::count() const
     return m_matches.count();
 }
 
-int RunnerModel::columnCount(const QModelIndex&) const
-{
-    return 1;
-}
-
 QStringList RunnerModel::runners() const
 {
     return m_manager ? m_manager->allowedRunners() : QStringList();
@@ -87,6 +70,7 @@ void RunnerModel::setRunners(const QStringList &allowedRunners)
 {
     if (m_manager) {
         m_manager->setAllowedRunners(allowedRunners);
+        emit runnersChanged();
     } else {
         m_pendingRunnersList = allowedRunners;
     }
@@ -124,6 +108,18 @@ QVariant RunnerModel::data(const QModelIndex &index, int role) const
         return m_matches.at(index.row()).subtext();
     } else if (role == Enabled) {
         return m_matches.at(index.row()).isEnabled();
+    } else if (role == RunnerId) {
+        return m_matches.at(index.row()).runner()->id();
+    } else if (role == RunnerName) {
+        return m_matches.at(index.row()).runner()->name();
+    } else if (role == Actions) {
+        QVariantList actions;
+        Plasma::QueryMatch amatch = m_matches.at(index.row());
+        QList<QAction*> theactions = m_manager->actionsForMatch(amatch);
+        foreach(QAction* action, theactions) {
+            actions += qVariantFromValue<QObject*>(action);
+        }
+        return actions;
     }
 
     return QVariant();

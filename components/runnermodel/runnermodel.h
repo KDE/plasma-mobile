@@ -20,7 +20,7 @@
 #ifndef RUNNERMODEL_H
 #define RUNNERMODEL_H
 
-#include <QAbstractItemModel>
+#include <QAbstractListModel>
 #include <QStringList>
 
 namespace Plasma
@@ -31,11 +31,11 @@ namespace Plasma
 
 class QTimer;
 
-class RunnerModel : public QAbstractItemModel
+class RunnerModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(QString query WRITE scheduleQuery READ currentQuery NOTIFY queryChanged)
-    Q_PROPERTY(QStringList runners WRITE setRunners READ runners)
+    Q_PROPERTY(QStringList runners WRITE setRunners READ runners NOTIFY runnersChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
@@ -45,7 +45,10 @@ public:
         Data,
         Id,
         SubText,
-        Enabled
+        Enabled,
+        RunnerId,
+        RunnerName,
+        Actions
     };
 
     RunnerModel(QObject *parent = 0);
@@ -57,11 +60,8 @@ public:
 
     Q_SCRIPTABLE void run(int row);
 
-    QModelIndex index(int, int, const QModelIndex&) const;
-    QModelIndex parent(const QModelIndex&) const;
     int rowCount(const QModelIndex&) const;
     int count() const;
-    int columnCount(const QModelIndex&) const;
     QVariant data(const QModelIndex&, int) const;
 
 public Q_SLOTS:
@@ -70,6 +70,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void queryChanged();
     void countChanged();
+    void runnersChanged();
 
 private Q_SLOTS:
     void startQuery();
