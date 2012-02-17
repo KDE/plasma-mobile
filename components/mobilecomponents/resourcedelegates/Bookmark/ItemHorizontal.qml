@@ -29,7 +29,7 @@ Column {
 
     Item {
         id: iconContainer
-        height: resourceItem.height - previewLabel.height - infoLabel.height
+        height: roundToStandardSize(delegateItem.height - previewLabel.height)
         width: resourceItem.width
 
         PlasmaCore.DataSource {
@@ -62,9 +62,12 @@ Column {
 
         QIconItem {
             id: iconItem
-            width: 64
-            height: 64
-            anchors.centerIn: parent
+            width: height
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                bottom: parent.bottom
+            }
             icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("text-html")
         }
 
@@ -95,20 +98,8 @@ Column {
                 id: previewImage
                 anchors.centerIn: parent
 
-                width: {
-                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                        return parent.width
-                    } else {
-                        return parent.height * (nativeWidth/nativeHeight)
-                    }
-                }
-                height: {
-                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                        return parent.width / (nativeWidth/nativeHeight)
-                    } else {
-                        return parent.height
-                    }
-                }
+                width: parent.height * (nativeWidth/nativeHeight)
+                height: iconContainer.height - previewFrame.margins.top - previewFrame.margins.bottom
             }
         }
     }
