@@ -39,22 +39,6 @@ FileBrowser::FileBrowser()
     : KDeclarativeMainWindow()
 {
     declarativeView()->setPackageName("org.kde.active.filebrowser");
-
-    // Filter the supplied argument through KUriFilter and then
-    // make the resulting url known to the webbrowser component
-    // as startupArguments property
-    m_dirModel = new DirModel(this);
-    if (startupArguments().count()) {
-        KUrl uri(startupArguments()[0]);
-        QVariant a = QVariant(QStringList(uri.prettyUrl()));
-        if (!uri.prettyUrl().isEmpty()) {
-            if (!uri.isLocalFile() || !QFileInfo(uri.toLocalFile()).isDir()) {
-                uri = uri.upUrl();
-            }
-            m_dirModel->setUrl(uri.prettyUrl());
-        }
-    }
-    declarativeView()->rootContext()->setContextProperty("dirModel", m_dirModel);
 }
 
 FileBrowser::~FileBrowser()

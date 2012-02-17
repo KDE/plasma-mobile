@@ -24,6 +24,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
 import org.kde.qtextracomponents 0.1
+import org.kde.dirmodel 0.1
 
 
 PlasmaComponents.Page {
@@ -50,38 +51,66 @@ PlasmaComponents.Page {
             id: devicesModel
             dataSource: hotplugSource
         }
+        DirModel {
+            id: dirModel
+        }
 
-        Row {
-            anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: 8
-            opacity: (imageViewer.state == "browsing") ? 1 : 0
-            MobileComponents.IconButton {
-                icon: QIcon("drive-harddisk")
-                opacity: resultsGrid.model == metadataModel ? 0.2 : 1
-                width: 48
-                height: 48
-                onClicked: {
-                    resultsGrid.model = metadataModel
+        PlasmaComponents.TabBar {
+            id: devicesTabBar
+            height: theme.largeIconSize
+            width: height * tabCount
+            property int tabCount: 1
+
+            function updateSize()
+            {
+                var visibleChildCount = devicesTabBar.layout.children.length
+
+                for (var i = 0; i < devicesTabBar.layout.children.length; ++i) {
+                    if (!devicesTabBar.layout.children[i].visible || devicesTabBar.layout.children[i].text == undefined) {
+                        --visibleChildCount
+                    }
+                }
+                devicesTabBar.tabCount = visibleChildCount
+            }
+
+            opacity: tabCount > 1 ? 1 : 0
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            PlasmaComponents.TabButton {
+                id: localButton
+                height: width
+                property bool current: devicesTabBar.currentTab == localButton
+                iconSource: "drive-harddisk"
+                onCurrentChanged: {
+                    if (current) {
+                        resultsGrid.model = metadataModel
+                    }
                 }
             }
             Repeater {
+                id: devicesRepeater
                 model: devicesModel
-                MobileComponents.IconButton {
-                    id: deviceButton
-                    icon: QIcon(model["icon"])
-                    //FIXME: use the declarative branch in workspace that tells about removable
+
+                delegate: PlasmaComponents.TabButton {
+                    id: removableButton
                     visible: devicesSource.data[udi]["Removable"] == true
-                    opacity: (dirModel.url == devicesSource.data[udi]["File Path"] && resultsGrid.model == dirModel) ? 1 : 0.2
-                    width: 48
-                    height: 48
-                    onClicked: {
-                        dirModel.url = devicesSource.data[udi]["File Path"]
-                        resultsGrid.model = dirModel
+                    onVisibleChanged: devicesTabBar.updateSize()
+                    iconSource: model["icon"]
+                    property bool current: devicesTabBar.currentTab == removableButton
+                    onCurrentChanged: {
+                        if (current) {
+                            dirModel.url = devicesSource.data[udi]["File Path"]
+                            resultsGrid.model = dirModel
+                        }
                     }
                 }
             }
         }
+
 
         MobileComponents.ViewSearch {
             id: searchBox
