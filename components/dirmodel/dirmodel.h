@@ -22,6 +22,9 @@
 
 #include <KDirModel>
 
+class QTimer;
+
+class KImageCache;
 
 class DirModel : public KDirModel
 {
@@ -32,7 +35,8 @@ class DirModel : public KDirModel
 public:
     enum Roles {
         UrlRole = Qt::UserRole + 1,
-        MimeTypeRole = Qt::UserRole + 2
+        MimeTypeRole = Qt::UserRole + 2,
+        Thumbnail  = Qt::UserRole + 3
     };
 
     DirModel(QObject* parent=0);
@@ -46,12 +50,24 @@ public:
 
     Q_INVOKABLE int indexForUrl(const QString &url) const;
 
+protected Q_SLOTS:
+    void showPreview(const KFileItem &item, const QPixmap &preview);
+    void previewFailed(const KFileItem &item);
+    void delayedPreview();
+
 Q_SIGNALS:
     void countChanged();
     void urlChanged();
 
 private:
     QStringList m_mimeTypes;
+
+    //previews
+    QTimer *m_previewTimer;
+    QHash<KUrl, QPersistentModelIndex> m_filesToPreview;
+    QSize m_screenshotSize;
+    QHash<KUrl, QPersistentModelIndex> m_previewJobs;
+    KImageCache* m_imageCache;
 };
 
 #endif // DIRMODEL_H
