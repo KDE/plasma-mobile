@@ -18,103 +18,100 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-Item {
+Column {
     id: resourceItem
-    anchors.fill: parent
+    anchors.horizontalCenter: parent.horizontalCenter
 
-    Column {
-        anchors.horizontalCenter: parent.horizontalCenter
+    Item {
+        id: iconContainer
+        height: resourceItem.height - previewLabel.height - infoLabel.height
+        width: resourceItem.width
+
+        QIconItem {
+            id: iconItem
+            width: 64
+            height: width
+            anchors.centerIn: parent
+            icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
+            visible: !previewFrame.visible
+        }
+
+        PlasmaCore.FrameSvgItem {
+            id: previewFrame
+            imagePath: "widgets/media-delegate"
+            prefix: "picture"
+
+            height: previewImage.height+margins.top+margins.bottom
+            width: previewImage.width+margins.left+margins.right
+            visible: thumbnail != undefined
+            anchors.centerIn: previewArea
+        }
 
         Item {
-            id: iconContainer
-            height: resourceItem.height - previewLabel.height - infoLabel.height
-            width: resourceItem.width
-
-            QIconItem {
-                id: iconItem
-                width: 64
-                height: 64
-                anchors.centerIn: parent
-                icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
-                visible: !previewFrame.visible
-            }
-
-            PlasmaCore.FrameSvgItem {
-                id: previewFrame
-                imagePath: "widgets/media-delegate"
-                prefix: "picture"
-
-                height: previewImage.height+margins.top+margins.bottom
-                width: previewImage.width+margins.left+margins.right
-                visible: thumbnail != undefined
-                anchors.centerIn: previewArea
-            }
-
-            Item {
-                id: previewArea
-                visible: previewFrame.visible
-                anchors {
-                    fill: parent
-
-                    leftMargin: previewFrame.margins.left
-                    topMargin: previewFrame.margins.top
-                    rightMargin: previewFrame.margins.right
-                    bottomMargin: previewFrame.margins.bottom
-                }
-
-                QImageItem {
-                    id: previewImage
-                    anchors.centerIn: parent
-                    image: thumbnail == undefined ? null : thumbnail
-
-                    width: {
-                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                            return parent.width
-                        } else {
-                            return parent.height * (nativeWidth/nativeHeight)
-                        }
-                    }
-                    height: {
-                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                            return parent.width / (nativeWidth/nativeHeight)
-                        } else {
-                            return parent.height
-                        }
-                    }
-                }
-            }
-        }
-
-        Text {
-            id: previewLabel
-            text: label
-
-            font.pixelSize: 14
-            //wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
-            elide: Text.ElideRight
+            id: previewArea
+            visible: previewFrame.visible
             anchors {
-                horizontalCenter: parent.horizontalCenter
-            }
-            width: resourceItem.width
-            style: Text.Outline
-            styleColor: Qt.rgba(1, 1, 1, 0.6)
-        }
+                fill: parent
 
-        Text {
-            id: infoLabel
-            text: className
-            opacity: 0.8
-            font.pixelSize: 12
-            height: 14
-            width: parent.width - iconItem.width
-            anchors.horizontalCenter: parent.horizontalCenter
-            visible: infoLabelVisible
+                leftMargin: previewFrame.margins.left
+                topMargin: previewFrame.margins.top
+                rightMargin: previewFrame.margins.right
+                bottomMargin: previewFrame.margins.bottom
+            }
+
+            QImageItem {
+                id: previewImage
+                anchors.centerIn: parent
+                image: thumbnail == undefined ? null : thumbnail
+
+                width: {
+                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
+                        return parent.width
+                    } else {
+                        return parent.height * (nativeWidth/nativeHeight)
+                    }
+                }
+                height: {
+                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
+                        return parent.width / (nativeWidth/nativeHeight)
+                    } else {
+                        return parent.height
+                    }
+                }
+            }
         }
     }
+
+    Text {
+        id: previewLabel
+        text: label
+
+        font.pixelSize: 14
+        //wrapMode: Text.Wrap
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideRight
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+        }
+        width: resourceItem.width
+        style: Text.Outline
+        styleColor: Qt.rgba(1, 1, 1, 0.6)
+    }
+
+    Text {
+        id: infoLabel
+        text: className
+        opacity: 0.8
+        font.pixelSize: 12
+        height: 14
+        width: parent.width - iconItem.width
+        anchors.horizontalCenter: parent.horizontalCenter
+        visible: infoLabelVisible
+    }
 }
+

@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
@@ -26,8 +26,8 @@ Item {
     property string genericClassName: model["genericClassName"] ? model["genericClassName"] : "FileDataObject"
 
     property bool infoLabelVisible
-//    property int implicitWidth: itemLoader.item.implicitWidth
-  //  property int implicitHeight: itemLoader.item.implicitHeight
+    implicitWidth: itemLoader.item.implicitWidth
+    implicitHeight: itemLoader.item.implicitHeight
 
     signal clicked(variant mouse)
     signal pressed(variant mouse)
