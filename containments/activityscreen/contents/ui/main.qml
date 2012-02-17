@@ -41,7 +41,16 @@ Item {
 
     property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
 
+    property int iconWidth: theme.defaultFont.mSize.width * 15
+    property int iconHeight: theme.hugeIconSize + theme.defaultFont.mSize.height
+
     Component.onCompleted: {
+        //do it here since theme is not accessible in LayoutManager
+        //TODO: icon size from the configuration
+        //TODO: remove hardcoded sizes, use framesvg boders
+        LayoutManager.cellSize.width = main.iconWidth + borderSvg.elementSize("left").width + borderSvg.elementSize("right").width
+        LayoutManager.cellSize.height = main.iconHeight + theme.defaultFont.mSize.height + borderSvg.elementSize("top").height + borderSvg.elementSize("bottom").height + draggerSvg.elementSize("root-top").height + draggerSvg.elementSize("root-bottom").height
+
         plasmoid.containmentType = "CustomContainment"
         plasmoid.appletAdded.connect(addApplet)
         LayoutManager.restore()
@@ -65,6 +74,17 @@ Item {
     PlasmaCore.Svg {
         id: iconsSvg
         imagePath: "widgets/configuration-icons"
+    }
+
+    //those two are used only for sizes, not painted ever
+    //FIXME: way to avoid instantiating them?
+    PlasmaCore.Svg {
+        id: borderSvg
+        imagePath: "widgets/background"
+    }
+    PlasmaCore.Svg {
+        id: draggerSvg
+        imagePath: "widgets/extender-dragger"
     }
 
     MetadataModels.MetadataCloudModel {

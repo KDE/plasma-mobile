@@ -22,6 +22,7 @@ import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 Column {
     id: resourceItem
@@ -99,7 +100,7 @@ Column {
         }
     }
 
-    Text {
+    PlasmaComponents.Label {
         id: previewLabel
         text: {
             var s = url;
@@ -109,7 +110,7 @@ Column {
             return s;
         }
 
-        font.pixelSize: 14
+        height: paintedHeight
         //wrapMode: Text.Wrap
         horizontalAlignment: Text.AlignHCenter
         elide: Text.ElideRight

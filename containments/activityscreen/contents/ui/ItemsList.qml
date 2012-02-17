@@ -38,8 +38,8 @@ Item {
         clip: true
         //spacing: 32;
         flow: GridView.TopToBottom 
-        cellWidth: Math.floor(itemsList.width/Math.max(1, Math.floor(itemsList.width/140)))
-        cellHeight: Math.floor(itemsList.height/Math.max(1, Math.floor(itemsList.height/120)))
+        cellWidth: Math.floor(itemsList.width/Math.max(1, Math.floor(itemsList.width/main.iconWidth)))
+        cellHeight: Math.floor(itemsList.height/Math.max(1, Math.floor(itemsList.height/main.iconHeight)))
 
 
         PropertyAnimation {
@@ -72,8 +72,8 @@ Item {
             height: itemsList.cellHeight
             MobileComponents.ResourceDelegate {
                 id: resourceDelegate
-                width: 140
-                height: 120
+                width: main.iconWidth
+                height: main.iconHeight
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
