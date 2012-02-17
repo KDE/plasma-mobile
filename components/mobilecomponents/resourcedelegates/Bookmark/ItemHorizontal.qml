@@ -83,10 +83,10 @@ Column {
             anchors {
                 fill: parent
 
-                leftMargin: previewFrame.margins.left
-                topMargin: previewFrame.margins.top
-                rightMargin: previewFrame.margins.right
-                bottomMargin: previewFrame.margins.bottom
+                leftMargin: Math.round(Math.min(previewFrame.margins.left, parent.height/6))
+                topMargin: Math.round(Math.min(previewFrame.margins.top, parent.height/6))
+                rightMargin: Math.round(Math.min(previewFrame.margins.right, parent.height/6))
+                bottomMargin: Math.round(Math.min(previewFrame.margins.bottom, parent.height/6))
             }
 
             QImageItem {
@@ -94,7 +94,7 @@ Column {
                 anchors.centerIn: parent
 
                 width: parent.height * (nativeWidth/nativeHeight)
-                height: iconContainer.height - previewFrame.margins.top - previewFrame.margins.bottom
+                height: parent.height
             }
         }
     }

@@ -49,8 +49,8 @@ Column {
             imagePath: "widgets/media-delegate"
             prefix: "picture"
 
-            height: previewImage.height+margins.top+margins.bottom
-            width: previewImage.width+margins.left+margins.right
+            height: previewImage.height + previewArea.anchors.topMargin + previewArea.anchors.bottomMargin
+            width: previewImage.width + previewArea.anchors.leftMargin + previewArea.anchors.rightMargin
             visible: thumbnail != undefined
             anchors.centerIn: previewArea
         }
@@ -61,10 +61,10 @@ Column {
             anchors {
                 fill: parent
 
-                leftMargin: previewFrame.margins.left
-                topMargin: previewFrame.margins.top
-                rightMargin: previewFrame.margins.right
-                bottomMargin: previewFrame.margins.bottom
+                leftMargin: Math.round(Math.min(previewFrame.margins.left, parent.height/6))
+                topMargin: Math.round(Math.min(previewFrame.margins.top, parent.height/6))
+                rightMargin: Math.round(Math.min(previewFrame.margins.right, parent.height/6))
+                bottomMargin: Math.round(Math.min(previewFrame.margins.bottom, parent.height/6))
             }
 
             QImageItem {
@@ -73,7 +73,7 @@ Column {
                 image: thumbnail == undefined ? null : thumbnail
 
                 width: parent.height * (nativeWidth/nativeHeight)
-                height: iconContainer.height - previewFrame.margins.top - previewFrame.margins.bottom
+                height: parent.height
             }
         }
     }
