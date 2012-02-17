@@ -26,9 +26,10 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 Column {
     id: resourceItem
     anchors.horizontalCenter: parent.horizontalCenter
+
     QIconItem {
         id: previewImage
-        height: 64
+        height: roundToStandardSize(delegateItem.height - previewLabel.height)
         width: height
         anchors.margins: 0
         anchors.horizontalCenter: parent.horizontalCenter

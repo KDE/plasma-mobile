@@ -26,9 +26,6 @@ MobileComponents.IconGrid {
     id: resultsGrid
     anchors.fill: parent
 
-    delegateWidth: 130
-    delegateHeight: 120
-
     function accept()
     {
         var service = metadataSource.serviceForSource("")
