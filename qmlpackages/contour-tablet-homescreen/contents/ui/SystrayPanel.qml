@@ -61,7 +61,7 @@ Item {
     SlidingDragButton {
         id: slidingDragButton
         panelHeight: 32
-        tasksHeight: 150
+        tasksHeight: homeScreen.height/4.5
         onDraggingChanged: {
             //load the launcher package on demand to save boot time
             if (!menuContainer.plasmoid && dragging) {
