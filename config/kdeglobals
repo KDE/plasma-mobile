@@ -14,6 +14,25 @@ smallestReadableFont=Droid Sans Fallback,9,-1,5,50,0,0,0,0,0
 taskbarFont=Droid Sans Fallback,11,-1,5,50,0,0,0,0,0
 toolBarFont=Droid Sans Fallback,10,-1,5,50,0,0,0,0,0
 
+[DesktopIcons]
+ActiveColor=169,156,255
+ActiveColor2=0,0,0
+ActiveEffect=togamma
+ActiveSemiTransparent=false
+ActiveValue=0.7
+Animated=true
+DefaultColor=144,128,248
+DefaultColor2=0,0,0
+DefaultEffect=none
+DefaultSemiTransparent=false
+DefaultValue=1
+DisabledColor=34,202,0
+DisabledColor2=0,0,0
+DisabledEffect=togray
+DisabledSemiTransparent=true
+DisabledValue=1
+Size=64
+
 [KDE]
 ShowDeleteCommand=false
 SingleClick=true
