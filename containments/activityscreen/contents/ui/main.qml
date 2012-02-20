@@ -42,14 +42,21 @@ Item {
     property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
 
     property int iconWidth: theme.defaultFont.mSize.width * 15
-    property int iconHeight: theme.hugeIconSize + theme.defaultFont.mSize.height
+    property int iconHeight: theme.defaultIconSize + theme.defaultFont.mSize.height
+    onIconHeightChanged: updateGridSize()
+
+    function updateGridSize()
+    {
+        LayoutManager.cellSize.width = main.iconWidth + borderSvg.elementSize("left").width + borderSvg.elementSize("right").width
+        LayoutManager.cellSize.height = main.iconHeight + theme.defaultFont.mSize.height + borderSvg.elementSize("top").height + borderSvg.elementSize("bottom").height + draggerSvg.elementSize("root-top").height + draggerSvg.elementSize("root-bottom").height
+        layoutTimer.restart()
+    }
 
     Component.onCompleted: {
         //do it here since theme is not accessible in LayoutManager
         //TODO: icon size from the configuration
         //TODO: remove hardcoded sizes, use framesvg boders
-        LayoutManager.cellSize.width = main.iconWidth + borderSvg.elementSize("left").width + borderSvg.elementSize("right").width
-        LayoutManager.cellSize.height = main.iconHeight + theme.defaultFont.mSize.height + borderSvg.elementSize("top").height + borderSvg.elementSize("bottom").height + draggerSvg.elementSize("root-top").height + draggerSvg.elementSize("root-bottom").height
+        updateGridSize()
 
         plasmoid.containmentType = "CustomContainment"
         plasmoid.appletAdded.connect(addApplet)

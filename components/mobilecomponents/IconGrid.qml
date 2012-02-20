@@ -29,7 +29,7 @@ Item {
     property QtObject model
     property int pageSize: Math.floor(appsView.width/delegateWidth)*Math.floor(appsView.height/delegateHeight)
     property int delegateWidth: theme.defaultFont.mSize.width * 15
-    property int delegateHeight: theme.hugeIconSize + theme.defaultFont.mSize.height + 8
+    property int delegateHeight: theme.defaultIconSize + theme.defaultFont.mSize.height + 8
     property alias currentPage: appsView.currentIndex
     property int pagesCount: Math.ceil(model.count/pageSize)
     property int count: model.count
