@@ -6,12 +6,14 @@ Name[cs]=Umístění
 Name[nl]=Locatie
 Name[pt]=Localização
 Name[pt_BR]=Localização
+Name[sv]=Plats
 Name[uk]=Розташування
 Name[x-test]=xxLocationxx
 Comment=Location chooser
 Comment[nl]=Locatiekiezer
 Comment[pt]=Selector da localização
 Comment[pt_BR]=Seletor de localização
+Comment[sv]=Platsinställning
 Comment[uk]=Вибір розташування
 Comment[x-test]=xxLocation chooserxx
 
