@@ -66,6 +66,11 @@ public Q_SLOTS:
     void setLocationName(const QString & id, const QString & name);
 
     /**
+     * @returns the name of the location
+     */
+    QString locationName(const QString & id) const;
+
+    /**
      * Sets the current location.
      *
      * If the function is invoked with an UUID, and the location
@@ -115,6 +120,11 @@ Q_SIGNALS:
     void currentLocationChanged(const QString & id, const QString & name);
 
     /**
+     * Emitted when the name of a location is changed
+     */
+    void locationNameChanged(const QString & id, const QString & oldname, const QString & newname);
+
+    /**
      * Emitted when a new location has been registered
      * @param id id of the registered location
      * @param name name of the registered location
@@ -125,7 +135,7 @@ Q_SIGNALS:
      * Emitted when a new location has been unregistered
      * @param id id of the unregistered location
      */
-    void locationRemoved(const QString & id);
+    void locationRemoved(const QString & id, const QString & name);
 
 protected Q_SLOTS:
     void setActiveAccessPoint(const QString & accessPoint, const QString & backend);

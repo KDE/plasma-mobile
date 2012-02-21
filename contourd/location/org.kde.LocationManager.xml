@@ -9,8 +9,14 @@
       <arg name="id" type="s" direction="out"/>
       <arg name="name" type="s" direction="out"/>
     </signal>
+    <signal name="locationNameChanged">
+      <arg name="id" type="s" direction="out"/>
+      <arg name="oldname" type="s" direction="out"/>
+      <arg name="newname" type="s" direction="out"/>
+    </signal>
     <signal name="locationRemoved">
       <arg name="id" type="s" direction="out"/>
+      <arg name="name" type="s" direction="out"/>
     </signal>
     <method name="knownLocations">
       <arg type="as" direction="out"/>
@@ -35,6 +41,10 @@
       <arg type="s" direction="out"/>
     </method>
     <method name="currentLocationName">
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="locationName">
+      <arg name="id" type="s" direction="in"/>
       <arg type="s" direction="out"/>
     </method>
   </interface>
