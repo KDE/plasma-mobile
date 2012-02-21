@@ -65,6 +65,11 @@ PlasmaComponents.Page {
 
         PlasmaComponents.TabBar {
             id: devicesTabBar
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+                rightMargin: y
+            }
             height: theme.largeIconSize
             width: height * tabCount
             property int tabCount: 1
