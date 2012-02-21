@@ -103,6 +103,10 @@ PlasmaComponents.Page {
                     property bool current: devicesTabBar.currentTab == removableButton
                     onCurrentChanged: {
                         if (current) {
+                            var service = devicesSource.serviceForSource(udi);
+                            var operation = service.operationDescription("mount");
+                            service.startOperationCall(operation);
+
                             dirModel.url = devicesSource.data[udi]["File Path"]
                             resultsGrid.model = dirModel
                         }
