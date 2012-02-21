@@ -38,7 +38,8 @@ DirModel::DirModel(QObject *parent)
         }
     }
 
-    dirLister()->setMimeFilter(m_mimeTypes);
+    //TODO: configurable mime filter
+    //dirLister()->setMimeFilter(m_mimeTypes);
 
     QHash<int, QByteArray>roleNames;
     roleNames[Qt::DisplayRole] = "display";

@@ -3,7 +3,6 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../../common)
 
 set(active-filebrowser_SRCS
     main.cpp
-    dirmodel.cpp
     filebrowser.cpp
 
     ../../common/dataenginebindings.cpp
