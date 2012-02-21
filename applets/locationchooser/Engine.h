@@ -27,6 +27,7 @@ class Engine: public QObject {
 
     Q_PROPERTY(QString currentLocationId READ currentLocationId NOTIFY currentLocationIdChanged)
     Q_PROPERTY(QString currentLocationName READ currentLocationName NOTIFY currentLocationNameChanged)
+    Q_PROPERTY(QStringList knownLocations READ knownLocations NOTIFY knownLocationsChanged)
 
 public:
     Engine(Plasma::PopupApplet * parent);
@@ -37,17 +38,25 @@ public Q_SLOTS:
 
     QString currentLocationId() const;
     QString currentLocationName() const;
+    QStringList knownLocations() const;
 
     void requestUiReset();
+
+    void setState(const QString & state);
+    void setListItemHeight(qreal height);
 
 Q_SIGNALS:
     void currentLocationIdChanged(const QString & id);
     void currentLocationNameChanged(const QString & name);
+    void knownLocationsChanged(const QStringList & names);
 
     void resetUiRequested();
 
 private Q_SLOTS:
     void onCurrentLocationChanged(const QString & id, const QString & name);
+    void onLocationAdded(const QString & id, const QString & name);
+    void onLocationRemoved(const QString & id, const QString & name);
+    void onLocationNameChanged(const QString & id, const QString & oldname, const QString & newname);
 
 private:
     class Private;

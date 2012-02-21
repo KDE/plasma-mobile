@@ -23,16 +23,14 @@ import QtQuick 1.0 as QML
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
-QML.Item {
+PlasmaComponents.ListItem {
     id: main
 
     /* property declarations --------------------------{{{ */
-    property alias location: textLocation.text
-    property alias locationModel: listLocations.model
+    property alias title: label.text
     /* }}} */
 
     /* signal declarations ----------------------------{{{ */
-    signal requestChange(string location)
     /* }}} */
 
     /* JavaScript functions ---------------------------{{{ */
@@ -42,52 +40,24 @@ QML.Item {
     /* }}} */
 
     /* child objects ----------------------------------{{{ */
-
-        PlasmaComponents.TextField {
-            id: textLocation
-
-            anchors {
-                bottom: parent.bottom
-                top: buttonSet.top
-                right: buttonSet.left
-                left: parent.left
-            }
+    PlasmaComponents.Label {
+        id: label
+        anchors {
+            fill: parent
+            leftMargin: 8
+            rightMargin: 8
         }
+    }
 
-        PlasmaComponents.Button {
-            id: buttonSet
-            text: "Set"
+    QML.MouseArea {
+        anchors.fill: parent
 
-            width: parent.width / 3
+        onClicked: main.clicked()
 
-            onClicked: main.requestChange(textLocation.text)
-
-            anchors {
-                bottom: parent.bottom
-                right: parent.right
-            }
+        onPressAndHold: {
+            // show actions...
         }
-
-        QML.ListView {
-            id: listLocations
-            clip: true
-
-            delegate: LocationDelegate {
-                title:     model.modelData
-                onClicked: {
-                    print ("clicked")
-                    main.requestChange(model.modelData)
-                }
-            }
-
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                bottom: buttonSet.top
-            }
-        }
-
+    }
     /* }}} */
 
     /* states -----------------------------------------{{{ */

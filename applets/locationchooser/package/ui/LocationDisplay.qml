@@ -27,12 +27,14 @@ QML.Item {
     id: main
 
     /* property declarations --------------------------{{{ */
-    property alias location: textLocation.text
-    property alias locationModel: listLocations.model
+    property alias location: labelLocation.text
+
+    property int minimumWidth: buttonChange.width * 3
+    property int minimumHeight: buttonChange.height
     /* }}} */
 
     /* signal declarations ----------------------------{{{ */
-    signal requestChange(string location)
+    signal requestChange
     /* }}} */
 
     /* JavaScript functions ---------------------------{{{ */
@@ -42,52 +44,41 @@ QML.Item {
     /* }}} */
 
     /* child objects ----------------------------------{{{ */
+    PlasmaComponents.Label {
+        id: labelLocation
 
-        PlasmaComponents.TextField {
-            id: textLocation
-
-            anchors {
-                bottom: parent.bottom
-                top: buttonSet.top
-                right: buttonSet.left
-                left: parent.left
-            }
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: buttonChange.left
         }
 
-        PlasmaComponents.Button {
-            id: buttonSet
-            text: "Set"
+        PlasmaComponents.Label {
+            visible: labelLocation.text == ""
+            opacity: 0.5
+            text:    "Unknown"
 
-            width: parent.width / 3
-
-            onClicked: main.requestChange(textLocation.text)
-
-            anchors {
-                bottom: parent.bottom
-                right: parent.right
-            }
+            anchors.fill: parent
         }
 
-        QML.ListView {
-            id: listLocations
-            clip: true
+        QML.MouseArea {
+            anchors.fill: parent
+            onClicked: main.requestChange()
+        }
+    }
 
-            delegate: LocationDelegate {
-                title:     model.modelData
-                onClicked: {
-                    print ("clicked")
-                    main.requestChange(model.modelData)
-                }
-            }
+    PlasmaComponents.Button {
+        id: buttonChange
+        text: "Change"
+        width: parent.width / 3
 
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                bottom: buttonSet.top
-            }
+        anchors {
+            top: parent.top
+            right: parent.right
         }
 
+        onClicked: main.requestChange()
+    }
     /* }}} */
 
     /* states -----------------------------------------{{{ */
