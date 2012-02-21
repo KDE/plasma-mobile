@@ -28,7 +28,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 
-#include <QtSensors/QSensor>
+// #include <QtSensors/QSensor>
 
 #include <KDebug>
 #include <KStandardDirs>
@@ -142,7 +142,7 @@ QScriptValue RecommendationScriptEngine::getSensor(const QString & sensor)
         kDebug() << "Returning the D-Bus sensor. This is not in QtMobility";
         result = new DBusSensor();
     } else {
-        result = new QtMobility::QSensor(sensor.toAscii());
+        // result = new QtMobility::QSensor(sensor.toAscii());
     }
 
     return d->engine->newQObject(result, QScriptEngine::AutoOwnership);

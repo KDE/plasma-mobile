@@ -1,7 +1,7 @@
 project(contourd)
 
 # This should be REQUIRED once we get rid of the hack below
-find_package(QtMobility)
+# find_package(QtMobility)
 
 # build stuff
 # ===============================================================================================
@@ -13,13 +13,15 @@ include_directories(
   ${KDE4_INCLUDES}
   ${NEPOMUK_INCLUDE_DIR}
   ${SOPRANO_INCLUDE_DIR}
-#hack to find qt-mobility includes. TODO: get cmake macro
-  ${INCLUDE_INSTALL_DIR}/QtMobility
-  ${INCLUDE_INSTALL_DIR}/QtMobility/QtMobility
-  ${QT_INCLUDE_DIR}/QtMobility
-  ${QT_INCLUDE_DIR}/QtMobility/QtMobility
-#this uses the cmake macro
-  ${QTMOBILITY_INCLUDE_DIR}
+
+  # QtMobility doesn't work for us anyway:
+  #hack to find qt-mobility includes. TODO: get cmake macro
+  # ${INCLUDE_INSTALL_DIR}/QtMobility
+  # ${INCLUDE_INSTALL_DIR}/QtMobility/QtMobility
+  # ${QT_INCLUDE_DIR}/QtMobility
+  # ${QT_INCLUDE_DIR}/QtMobility/QtMobility
+  # this uses the cmake macro
+  # ${QTMOBILITY_INCLUDE_DIR}
 )
 
 configure_file(
@@ -121,9 +123,9 @@ target_link_libraries(
   kworkspace
   solidcontrol
   solidcontrolifaces
-  QtLocation
-  QtContacts
-  QtSensors
+  # QtLocation
+  # QtContacts
+  # QtSensors
 )
 
 install(FILES
