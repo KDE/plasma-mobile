@@ -20,7 +20,6 @@
  ***************************************************************************/
 
 #include "filebrowser.h"
-#include "dirmodel.h"
 #include "kdeclarativeview.h"
 
 #include <QDeclarativeContext>

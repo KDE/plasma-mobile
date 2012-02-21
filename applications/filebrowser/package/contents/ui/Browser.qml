@@ -46,6 +46,14 @@ PlasmaComponents.Page {
             id: devicesSource
             engine: "soliddevice"
             connectedSources: hotplugSource.sources
+            onDataChanged: {
+                //access it here due to the async nature of the dataengine
+                if (resultsGrid.model != dirModel && devicesSource.data[devicesTabBar.currentUdi]["File Path"] != "") {
+                    dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"]
+
+                    resultsGrid.model = dirModel
+                }
+            }
         }
         PlasmaCore.DataModel {
             id: devicesModel
@@ -57,9 +65,15 @@ PlasmaComponents.Page {
 
         PlasmaComponents.TabBar {
             id: devicesTabBar
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+                rightMargin: y
+            }
             height: theme.largeIconSize
             width: height * tabCount
             property int tabCount: 1
+            property string currentUdi
 
             function updateSize()
             {
@@ -88,9 +102,12 @@ PlasmaComponents.Page {
                 onCurrentChanged: {
                     if (current) {
                         resultsGrid.model = metadataModel
+                        //nepomuk db, not filesystem
+                        devicesTabBar.currentUdi = ""
                     }
                 }
             }
+
             Repeater {
                 id: devicesRepeater
                 model: devicesModel
@@ -103,14 +120,22 @@ PlasmaComponents.Page {
                     property bool current: devicesTabBar.currentTab == removableButton
                     onCurrentChanged: {
                         if (current) {
-                            dirModel.url = devicesSource.data[udi]["File Path"]
-                            resultsGrid.model = dirModel
+                            devicesTabBar.currentUdi = udi
+
+                            if (devicesSource.data[udi]["Accessible"]) {
+                                dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"]
+
+                                resultsGrid.model = dirModel
+                            } else {
+                                var service = devicesSource.serviceForSource(udi);
+                                var operation = service.operationDescription("mount");
+                                service.startOperationCall(operation);
+                            }
                         }
                     }
                 }
             }
         }
-
 
         MobileComponents.ViewSearch {
             id: searchBox
