@@ -28,7 +28,7 @@ QML.Item {
 
     /* property: declarations --------------------------{{{ */
     property int minimumWidth: 312
-    property int minimumHeight: locationDisplay.minimumHeight * 2
+    property int minimumHeight: locationDisplay.minimumHeight * 2.5
     /* }}} */
 
     /* signal declarations ----------------------------{{{ */
@@ -59,6 +59,20 @@ QML.Item {
             rightMargin: 8
             topMargin: 8
         }
+    }
+
+    PlasmaComponents.Label {
+        id: labelError
+        text: "Error: Location manager is not running."
+
+        anchors.fill: parent
+        anchors {
+            leftMargin: 8
+            rightMargin: 8
+            topMargin: 8
+            bottomMargin: 8
+        }
+        visible: !labelTitle.visible
     }
 
     LocationDisplay {
@@ -112,11 +126,19 @@ QML.Item {
             name: "Showing"
             QML.PropertyChanges { target: locationDisplay; visible: true }
             QML.PropertyChanges { target: locationChooser; visible: false }
+            QML.PropertyChanges { target: labelTitle; visible: true }
         },
         QML.State {
             name: "Querying"
             QML.PropertyChanges { target: locationDisplay; visible: false }
             QML.PropertyChanges { target: locationChooser; visible: true }
+            QML.PropertyChanges { target: labelTitle; visible: true }
+        },
+        QML.State {
+            name: "Error"
+            QML.PropertyChanges { target: locationDisplay; visible: false }
+            QML.PropertyChanges { target: locationChooser; visible: false }
+            QML.PropertyChanges { target: labelTitle; visible: false }
         }
     ]
     /* }}} */
@@ -145,7 +167,11 @@ QML.Item {
             locationChooser.location = ""
             locationDisplay.location = locationManager.currentLocationName
 
-            main.state = "Showing"
+            if (locationManager.locationManagerPresent) {
+                main.state = "Showing"
+            } else {
+                main.state = "Error"
+            }
         }
     }
     /* }}} */
