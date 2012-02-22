@@ -61,8 +61,24 @@ PlasmaComponents.Page {
         }
         DirModel {
             id: dirModel
+            onUrlChanged: {
+                breadCrumb.path = url.substr(devicesSource.data[devicesTabBar.currentUdi]["File Path"].length)
+            }
         }
 
+        Breadcrumb {
+            id: breadCrumb
+
+            onPathChanged: {
+                dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"] + path
+            }
+            anchors {
+                left: parent.left
+                right: searchBox.left
+                verticalCenter: parent.verticalCenter
+                leftMargin: y
+            }
+        }
         PlasmaComponents.TabBar {
             id: devicesTabBar
             anchors {
@@ -139,11 +155,8 @@ PlasmaComponents.Page {
 
         MobileComponents.ViewSearch {
             id: searchBox
-            anchors {
-                left: parent.left
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-            }
+            anchors.centerIn: parent
+
             onSearchQueryChanged: {
                 metadataModel.extraParameters["nfo:fileName"] = searchBox.searchQuery
             }
