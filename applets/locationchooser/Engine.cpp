@@ -185,9 +185,12 @@ void Engine::setState(const QString & state)
         d->regularSize = d->parent->graphicsWidget()->size();
 
         QSizeF bigSize(d->regularSize);
-        bigSize.setHeight(
-                bigSize.height() + d->locations.size() * (4 + d->listItemHeight)
-                );
+        qreal height = bigSize.height() + d->locations.size() * (4 + d->listItemHeight);
+        if (height > 400) {
+            height = 400;
+        }
+
+        bigSize.setHeight(height);
         d->parent->graphicsWidget()->resize(bigSize);
     }
 }
