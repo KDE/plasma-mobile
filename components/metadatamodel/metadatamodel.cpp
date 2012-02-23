@@ -448,24 +448,25 @@ void MetadataModel::newEntriesDelayed()
 
         m_watcher->stop();
 
-        int j = 0;
-        while (m_resources[i.key()*m_pageSize + j].isValid() && j < m_pageSize) {
-            ++j;
+        const int pageStart = i.key() * m_pageSize;
+        int offset = 0;
+        while (m_resources[pageStart + offset].isValid() && offset < m_pageSize) {
+            ++offset;
         }
-        const int startJ = j;
+        const int startOffset = offset;
         foreach (Nepomuk::Resource res, resourcesToInsert) {
             kDebug() << "Result!!!" << res.genericLabel() << res.type();
-            kDebug() << "Page:" << i.key() << "Index:"<< i.key()*m_pageSize + j;
+            kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
             //kDebug() << "Result label:" << res.genericLabel();
-            m_uriToResourceIndex[res.resourceUri()] = i.key()*m_pageSize + j;
-            m_resources[i.key()*m_pageSize + j] = res;
+            m_uriToResourceIndex[res.resourceUri()] = pageStart + offset;
+            m_resources[pageStart + offset] = res;
             m_watcher->addResource(res);
-            ++j;
+            ++offset;
         }
 
         m_watcher->start();
 
-        emit dataChanged(createIndex(i.key()*m_pageSize + startJ, 0), createIndex(i.key()*m_pageSize + startJ + resourcesToInsert.count()-1, 0));
+        emit dataChanged(createIndex(pageStart + startOffset, 0), createIndex(pageStart + startOffset + resourcesToInsert.count()-1, 0));
     }
     m_resourcesToInsert.clear();
     emit countChanged();
