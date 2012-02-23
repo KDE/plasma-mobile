@@ -70,7 +70,7 @@ void SettingsComponent::loadModule(const QString &name)
     query = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
     KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
     KService::List::const_iterator iter;
-    for(iter = offers.begin(); iter < offers.end(); ++iter) {
+    for(iter = offers.constBegin(); iter < offers.constEnd(); ++iter) {
        QString error;
        KService::Ptr service = *iter;
 
