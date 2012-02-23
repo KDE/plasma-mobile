@@ -57,7 +57,7 @@ MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
       m_countQueryClient(0),
       m_limit(0),
-      m_pageSize(30),
+      m_pageSize(50),
       m_screenshotSize(180, 120)
 {
     m_newEntriesTimer = new QTimer(this);
@@ -368,25 +368,34 @@ void MetadataModel::doQuery()
         delete client;
     }
     m_queryClients.clear();
-    m_pagesForclient.clear();
+    m_pagesForClient.clear();
+    m_validIndexForPage.clear();
     m_countQueryClient = new Nepomuk::Query::QueryServiceClient(this);
 
     connect(m_countQueryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
             this, SLOT(countQueryResult(const QList<Nepomuk::Query::Result> &)));
 
     m_countQueryClient->sparqlQuery(m_query.toSparqlQuery(Nepomuk::Query::Query::CreateCountQuery));
+
+    //if page size is invalid, fetch all
+    if (m_pageSize < 1) {
+        fetchResultsPage(0);
+    }
 }
 
-void MetadataModel::askResultsPage(int page)
+void MetadataModel::fetchResultsPage(int page)
 {
     Nepomuk::Query::QueryServiceClient *client = new Nepomuk::Query::QueryServiceClient(this);
 
     m_queryClients[page] = client;
-    m_pagesForclient[client] = page;
+    m_pagesForClient[client] = page;
+    m_validIndexForPage[page] = 0;
 
     Nepomuk::Query::Query pageQuery(m_query);
-    pageQuery.setOffset(m_pageSize*page);
-    pageQuery.setLimit(m_pageSize);
+    if (m_pageSize > 0) {
+        pageQuery.setOffset(m_pageSize*page);
+        pageQuery.setLimit(m_pageSize);
+    }
 
     client->query(pageQuery);
 
@@ -419,7 +428,7 @@ void MetadataModel::countQueryResult(const QList< Nepomuk::Query::Result > &entr
 void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
     setStatus(Running);
-    const int page = m_pagesForclient.value(qobject_cast<Nepomuk::Query::QueryServiceClient *>(sender()));
+    const int page = m_pagesForClient.value(qobject_cast<Nepomuk::Query::QueryServiceClient *>(sender()));
 
     foreach (Nepomuk::Query::Result res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
@@ -448,27 +457,30 @@ void MetadataModel::newEntriesDelayed()
 
         m_watcher->stop();
 
-        const int pageStart = i.key() * m_pageSize;
-        int offset = 0;
-        while (m_resources[pageStart + offset].isValid() && offset < m_pageSize) {
-            ++offset;
+        int pageStart = 0;
+        if (m_pageSize > 0) {
+            pageStart = i.key() * m_pageSize;
         }
-        const int startOffset = offset;
+        const int startOffset = m_validIndexForPage.value(i.key());
+        int offset = startOffset;
+
         foreach (Nepomuk::Resource res, resourcesToInsert) {
-            kDebug() << "Result!!!" << res.genericLabel() << res.type();
-            kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
-            //kDebug() << "Result label:" << res.genericLabel();
+            //kDebug() << "Result!!!" << res.genericLabel() << res.type();
+            //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
             m_uriToResourceIndex[res.resourceUri()] = pageStart + offset;
             m_resources[pageStart + offset] = res;
             m_watcher->addResource(res);
             ++offset;
         }
 
+        m_validIndexForPage[i.key()] = offset;
+
         m_watcher->start();
 
         emit dataChanged(createIndex(pageStart + startOffset, 0), createIndex(pageStart + startOffset + resourcesToInsert.count()-1, 0));
     }
     m_resourcesToInsert.clear();
+
     emit countChanged();
 }
 
@@ -537,11 +549,18 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     }
 
     const Nepomuk::Resource &resource = m_resources[index.row()];
-    if (!resource.isValid() && !m_queryClients.contains(floor(index.row()/m_pageSize))) {
+
+
+    if (!resource.isValid() && m_pageSize > 0 && !m_queryClients.contains(floor(index.row()/m_pageSize))) {
         //HACK
-        const_cast<MetadataModel *>(this)->askResultsPage(floor(index.row()/m_pageSize));
+        const_cast<MetadataModel *>(this)->fetchResultsPage(floor(index.row()/m_pageSize));
         return QVariant();
-    }
+    //m_pageSize <= 0, means fetch all
+    } else if (!resource.isValid() && !m_queryClients.contains(0)) {
+        //HACK
+        const_cast<MetadataModel *>(this)->fetchResultsPage(0);
+        return QVariant();
+    } 
 
     switch (role) {
     case Qt::DisplayRole:

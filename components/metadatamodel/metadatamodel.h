@@ -134,12 +134,17 @@ protected Q_SLOTS:
     void delayedPreview();
 
 protected:
-    void askResultsPage(int page);
+    void fetchResultsPage(int page);
 
 private:
     Nepomuk::Query::Query m_query;
+    //mapping page->query client
     QHash<int, Nepomuk::Query::QueryServiceClient *>m_queryClients;
-    QHash<Nepomuk::Query::QueryServiceClient *, int>m_pagesForclient;
+    //mapping query client->page
+    QHash<Nepomuk::Query::QueryServiceClient *, int>m_pagesForClient;
+    //where is the last valid (already populated) index for a given page
+    QHash<int, int> m_validIndexForPage;
+
     Nepomuk::Query::QueryServiceClient *m_countQueryClient;
     Nepomuk::ResourceWatcher* m_watcher;
     QVector<Nepomuk::Resource> m_resources;
