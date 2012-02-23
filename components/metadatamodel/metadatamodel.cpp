@@ -449,10 +449,15 @@ void MetadataModel::newEntriesDelayed()
         m_watcher->stop();
 
         int j = 0;
+        while (m_resources[i.key()*m_pageSize + j].isValid() && j < m_pageSize) {
+            ++j;
+        }
+        const int startJ = j;
         foreach (Nepomuk::Resource res, resourcesToInsert) {
-            //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+            kDebug() << "Result!!!" << res.genericLabel() << res.type();
+            kDebug() << "Page:" << i.key() << "Index:"<< i.key()*m_pageSize + j;
             //kDebug() << "Result label:" << res.genericLabel();
-            m_uriToResourceIndex[res.resourceUri()] = m_resources.count();
+            m_uriToResourceIndex[res.resourceUri()] = i.key()*m_pageSize + j;
             m_resources[i.key()*m_pageSize + j] = res;
             m_watcher->addResource(res);
             ++j;
@@ -460,7 +465,7 @@ void MetadataModel::newEntriesDelayed()
 
         m_watcher->start();
 
-        emit dataChanged(createIndex(i.key()*m_pageSize, 0), createIndex(i.key()*m_pageSize + resourcesToInsert.count()-1, 0));
+        emit dataChanged(createIndex(i.key()*m_pageSize + startJ, 0), createIndex(i.key()*m_pageSize + startJ + resourcesToInsert.count()-1, 0));
     }
     m_resourcesToInsert.clear();
     emit countChanged();
