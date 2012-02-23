@@ -56,7 +56,6 @@
 MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
       m_countQueryClient(0),
-      m_limit(0),
       m_pageSize(50),
       m_screenshotSize(180, 120)
 {
@@ -141,20 +140,22 @@ QString MetadataModel::queryString() const
     return m_queryString;
 }
 
-void MetadataModel::setLimit(int limit)
+void MetadataModel::setLazyLoading(bool lazy)
 {
-    if (limit == m_limit) {
+    //lazy loading depends from the page zise, that is not directly user controllable
+    if (lazy == (m_pageSize > 0)) {
         return;
     }
 
-    m_limit = limit;
+    //TODO: a way to control this? maybe from the available memory?
+    m_pageSize = lazy ? 50 : -1;
     askRefresh();
-    emit limitChanged();
+    emit lazyLoadingChanged();
 }
 
-int MetadataModel::limit() const
+bool MetadataModel::lazyLoading() const
 {
-    return m_limit;
+    return (m_pageSize > 0);
 }
 
 

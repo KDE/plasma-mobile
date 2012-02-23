@@ -48,7 +48,11 @@ class MetadataModel : public AbstractMetadataModel
 
     Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
-    Q_PROPERTY(int limit READ limit WRITE setLimit NOTIFY limitChanged)
+    /**
+     * load as less resources as possible from Nepomuk (only load when asked from the view)
+     * default is true, you shouldn't need to change it
+     */
+    Q_PROPERTY(bool lazyLoading READ lazyLoading WRITE setLazyLoading NOTIFY lazyLoadingChanged)
 
 public:
     enum Roles {
@@ -94,8 +98,8 @@ public:
     void setSortOrder(Qt::SortOrder sortOrder);
     Qt::SortOrder sortOrder() const;
 
-    void setLimit(int limit);
-    int limit() const;
+    void setLazyLoading(bool size);
+    bool lazyLoading() const;
 
     /**
      * searches for a resource in the whole model
@@ -119,7 +123,7 @@ Q_SIGNALS:
 
     void sortByChanged();
     void sortOrderChanged();
-    void limitChanged();
+    void lazyLoadingChanged();
 
 protected Q_SLOTS:
     void countQueryResult(const QList< Nepomuk::Query::Result > &entries);
@@ -154,7 +158,6 @@ private:
 
     //pieces to build m_query
     QString m_queryString;
-    int m_limit;
     int m_pageSize;
 
     QStringList m_sortBy;
