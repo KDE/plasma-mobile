@@ -133,6 +133,7 @@ protected Q_SLOTS:
     void previewFailed(const KFileItem &item);
     void delayedPreview();
 
+protected:
     void askResultsPage(int page);
 
 private:

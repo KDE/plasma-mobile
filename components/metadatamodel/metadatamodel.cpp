@@ -57,7 +57,7 @@ MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
       m_countQueryClient(0),
       m_limit(0),
-      m_pageSize(30),
+      m_pageSize(10),
       m_screenshotSize(180, 120)
 {
     m_newEntriesTimer = new QTimer(this);
@@ -460,7 +460,7 @@ void MetadataModel::newEntriesDelayed()
 
         m_watcher->start();
 
-        emit dataChanged(createIndex(i.key()*m_pageSize, 0), createIndex(i.key()*m_pageSize + resourcesToInsert.count(), 0));
+        emit dataChanged(createIndex(i.key()*m_pageSize, 0), createIndex(i.key()*m_pageSize + resourcesToInsert.count()-1, 0));
     }
     m_resourcesToInsert.clear();
     emit countChanged();
@@ -532,8 +532,8 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
 
     const Nepomuk::Resource &resource = m_resources[index.row()];
     if (!resource.isValid() && !m_queryClients.contains(floor(index.row()/m_pageSize))) {
-        metaObject()->invokeMethod(const_cast<MetadataModel *>(this), "askResultsPage", Qt::DirectConnection, Q_ARG(int, floor(index.row()/m_pageSize)));
-        //askResultsPage(floor(index.row()/m_pageSize));
+        //HACK
+        const_cast<MetadataModel *>(this)->askResultsPage(floor(index.row()/m_pageSize));
     }
 
     switch (role) {
