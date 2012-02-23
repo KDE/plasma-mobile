@@ -57,6 +57,7 @@ MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
       m_countQueryClient(0),
       m_pageSize(50),
+      m_limit(0),
       m_screenshotSize(180, 120)
 {
     m_newEntriesTimer = new QTimer(this);
@@ -138,6 +139,22 @@ void MetadataModel::setQueryString(const QString &query)
 QString MetadataModel::queryString() const
 {
     return m_queryString;
+}
+
+void MetadataModel::setLimit(int limit)
+{
+    if (limit == m_limit) {
+        return;
+    }
+
+    m_limit = limit;
+    askRefresh();
+    emit limitChanged();
+}
+
+int MetadataModel::limit() const
+{
+    return m_limit;
 }
 
 void MetadataModel::setLazyLoading(bool lazy)
@@ -375,6 +392,10 @@ void MetadataModel::doQuery()
 
     connect(m_countQueryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
             this, SLOT(countQueryResult(const QList<Nepomuk::Query::Result> &)));
+
+    if (m_limit > 0) {
+        m_query.setLimit(m_limit);
+    }
 
     m_countQueryClient->sparqlQuery(m_query.toSparqlQuery(Nepomuk::Query::Query::CreateCountQuery));
 
