@@ -57,7 +57,7 @@ MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
       m_countQueryClient(0),
       m_limit(0),
-      m_pageSize(10),
+      m_pageSize(30),
       m_screenshotSize(180, 120)
 {
     m_newEntriesTimer = new QTimer(this);
