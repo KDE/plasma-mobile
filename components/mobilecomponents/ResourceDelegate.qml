@@ -47,6 +47,9 @@ Item {
 
         //FIXME: assuming the view is parent.parent is bad, it should have the view attached property (it appears it doesnt, why?)
         source: {
+            if (!className && !genericClassName) {
+                return ""
+            }
             var view = delegateItem.parent
 
             if (view != undefined && view.orientation == undefined && view.flow == undefined) {

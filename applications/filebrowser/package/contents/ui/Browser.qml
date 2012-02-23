@@ -173,7 +173,8 @@ PlasmaComponents.Page {
         delegateHeight: 120
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
-            className: model["className"]?model["className"]:"Image"
+            className: model["className"] ? model["className"] : ""
+            genericClassName: model["genericClassName"] ? model["genericClassName"] : ""
             width: 130
             height: 120
             infoLabelVisible: false
