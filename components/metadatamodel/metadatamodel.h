@@ -122,6 +122,7 @@ Q_SIGNALS:
     void limitChanged();
 
 protected Q_SLOTS:
+    void countQueryResult(const QList< Nepomuk::Query::Result > &entries);
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
     virtual void doQuery();
@@ -132,18 +133,23 @@ protected Q_SLOTS:
     void previewFailed(const KFileItem &item);
     void delayedPreview();
 
+    void askResultsPage(int page);
+
 private:
     Nepomuk::Query::Query m_query;
-    Nepomuk::Query::QueryServiceClient *m_queryClient;
+    QHash<int, Nepomuk::Query::QueryServiceClient *>m_queryClients;
+    QHash<Nepomuk::Query::QueryServiceClient *, int>m_pagesForclient;
+    Nepomuk::Query::QueryServiceClient *m_countQueryClient;
     Nepomuk::ResourceWatcher* m_watcher;
     QVector<Nepomuk::Resource> m_resources;
-    QList<Nepomuk::Resource> m_resourcesToInsert;
+    QHash<int, QList<Nepomuk::Resource> > m_resourcesToInsert;
     QHash<QUrl, int> m_uriToResourceIndex;
     QTimer *m_newEntriesTimer;
 
     //pieces to build m_query
     QString m_queryString;
     int m_limit;
+    int m_pageSize;
 
     QStringList m_sortBy;
     Qt::SortOrder m_sortOrder;

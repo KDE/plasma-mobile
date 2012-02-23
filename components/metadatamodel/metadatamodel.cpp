@@ -20,6 +20,8 @@
 #include "metadatamodel.h"
 #include "resourcewatcher.h"
 
+#include <cmath>
+
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>
 #include <QTimer>
@@ -53,8 +55,9 @@
 
 MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
-      m_queryClient(0),
+      m_countQueryClient(0),
       m_limit(0),
+      m_pageSize(30),
       m_screenshotSize(180, 120)
 {
     m_newEntriesTimer = new QTimer(this);
@@ -361,26 +364,28 @@ void MetadataModel::doQuery()
 
     delete m_countQueryClient;
     //qDeleteAll is broken in 4.8
-    foreach (Nepomuk::QueryCLient * client, m_queryClients) {
+    foreach (Nepomuk::Query::QueryServiceClient *client, m_queryClients) {
         delete client;
     }
-    m_queryClients.clear;
+    m_queryClients.clear();
+    m_pagesForclient.clear();
     m_countQueryClient = new Nepomuk::Query::QueryServiceClient(this);
 
-    connect(m_queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
+    connect(m_countQueryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
+            this, SLOT(countQueryResult(const QList<Nepomuk::Query::Result> &)));
 
-    m_countQueryClient->query(m_query, Nepomuk::Query::CreateCountQuery);
+    m_countQueryClient->sparqlQuery(m_query.toSparqlQuery(Nepomuk::Query::Query::CreateCountQuery));
 }
 
 void MetadataModel::askResultsPage(int page)
 {
-    Nepomuk::Query::QueryServiceClient *client = Nepomuk::Query::QueryServiceClient(this);
+    Nepomuk::Query::QueryServiceClient *client = new Nepomuk::Query::QueryServiceClient(this);
 
-    m_queryClients[page] = client;m_pageSize
+    m_queryClients[page] = client;
+    m_pagesForclient[client] = page;
 
-    Nepomuk::Query pageQuery(m_query);
-    pageQuery.setOffset(page);
+    Nepomuk::Query::Query pageQuery(m_query);
+    pageQuery.setOffset(m_pageSize*page);
     pageQuery.setLimit(m_pageSize);
 
     client->query(pageQuery);
@@ -399,23 +404,23 @@ void MetadataModel::countQueryResult(const QList< Nepomuk::Query::Result > &entr
     foreach (Nepomuk::Query::Result res, entries) {
         int count = res.additionalBinding(QLatin1String("cnt")).variant().toInt();
 
-        m_results.resize(count);
-
-        if (count < m_count) {
-            beginRemoveRows(QModelIndex(), count, m_count);
+        if (count < m_resources.size()) {
+            beginRemoveRows(QModelIndex(), count, m_resources.size());
+            m_resources.resize(count);
             endRemoveRows();
-        } else if (count > m_count) {
-            beginInsertRows(QModelIndex(), count, m_count);
+        } else if (count > m_resources.size()) {
+            beginInsertRows(QModelIndex(), m_resources.size(), count);
+            m_resources.resize(count);
             endInsertRows();
         }
-
-        m_count = count;
     }
 }
 
 void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
     setStatus(Running);
+    const int page = m_pagesForclient.value(qobject_cast<Nepomuk::Query::QueryServiceClient *>(sender()));
+
     foreach (Nepomuk::Query::Result res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
@@ -423,10 +428,10 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         if (!resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).isValid()) {
             continue;
         }
-        resourcesToInsert << resource;
+        m_resourcesToInsert[page] << resource;
     }
 
-    if (!m_newEntriesTimer->isActive() && !m_resourcesToInsert.isEmpty()) {
+    if (!m_newEntriesTimer->isActive() && !m_resourcesToInsert[page].isEmpty()) {
         m_newEntriesTimer->start(200);
     }
 }
@@ -437,23 +442,27 @@ void MetadataModel::newEntriesDelayed()
         return;
     }
 
-    beginInsertRows(QModelIndex(), m_resources.count(), m_resources.count()+m_resourcesToInsert.count()-1);
+    QHash<int, QList<Nepomuk::Resource> >::const_iterator i;
+    for (i = m_resourcesToInsert.constBegin(); i != m_resourcesToInsert.constEnd(); ++i) {
+        const QList<Nepomuk::Resource> resourcesToInsert = i.value();
 
-    m_watcher->stop();
+        m_watcher->stop();
 
-    foreach (Nepomuk::Resource res, m_resourcesToInsert) {
-        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-        //kDebug() << "Result label:" << res.genericLabel();
-        m_uriToResourceIndex[res.resourceUri()] = m_resources.count();
-        m_resources << res;
-        m_watcher->addResource(res);
+        int j = 0;
+        foreach (Nepomuk::Resource res, resourcesToInsert) {
+            //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+            //kDebug() << "Result label:" << res.genericLabel();
+            m_uriToResourceIndex[res.resourceUri()] = m_resources.count();
+            m_resources[i.key()*m_pageSize + j] = res;
+            m_watcher->addResource(res);
+            ++j;
+        }
+
+        m_watcher->start();
+
+        emit dataChanged(createIndex(i.key()*m_pageSize, 0), createIndex(i.key()*m_pageSize + resourcesToInsert.count(), 0));
     }
-
-    m_watcher->start();
-
     m_resourcesToInsert.clear();
-
-    endInsertRows();
     emit countChanged();
 }
 
@@ -522,6 +531,10 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     }
 
     const Nepomuk::Resource &resource = m_resources[index.row()];
+    if (!resource.isValid() && !m_queryClients.contains(floor(index.row()/m_pageSize))) {
+        metaObject()->invokeMethod(const_cast<MetadataModel *>(this), "askResultsPage", Qt::DirectConnection, Q_ARG(int, floor(index.row()/m_pageSize)));
+        //askResultsPage(floor(index.row()/m_pageSize));
+    }
 
     switch (role) {
     case Qt::DisplayRole:
