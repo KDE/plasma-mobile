@@ -77,7 +77,7 @@ void MetadataJob::start()
             KService::Ptr service = KService::serviceByDesktopPath(QUrl(resourceUrl).path());
             if (service) {
                 fileRes.setLabel(service->name());
-                fileRes.setSymbols(QStringList() << service->icon());
+                fileRes.addSymbol(service->icon());
             }
         }
 
