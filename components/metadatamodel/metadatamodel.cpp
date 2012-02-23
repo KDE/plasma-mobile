@@ -534,6 +534,7 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     if (!resource.isValid() && !m_queryClients.contains(floor(index.row()/m_pageSize))) {
         //HACK
         const_cast<MetadataModel *>(this)->askResultsPage(floor(index.row()/m_pageSize));
+        return QVariant();
     }
 
     switch (role) {
