@@ -436,11 +436,11 @@ void MetadataModel::countQueryResult(const QList< Nepomuk::Query::Result > &entr
         int count = res.additionalBinding(QLatin1String("cnt")).variant().toInt();
 
         if (count < m_resources.size()) {
-            beginRemoveRows(QModelIndex(), count, m_resources.size());
+            beginRemoveRows(QModelIndex(), count-1, m_resources.size()-1);
             m_resources.resize(count);
             endRemoveRows();
         } else if (count > m_resources.size()) {
-            beginInsertRows(QModelIndex(), m_resources.size(), count);
+            beginInsertRows(QModelIndex(), m_resources.size(), count-1);
             m_resources.resize(count);
             endInsertRows();
         }
@@ -489,6 +489,7 @@ void MetadataModel::newEntriesDelayed()
         foreach (Nepomuk::Resource res, resourcesToInsert) {
             //kDebug() << "Result!!!" << res.genericLabel() << res.type();
             //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
+
             m_uriToResourceIndex[res.resourceUri()] = pageStart + offset;
             m_resources[pageStart + offset] = res;
             m_watcher->addResource(res);
@@ -498,12 +499,10 @@ void MetadataModel::newEntriesDelayed()
         m_validIndexForPage[i.key()] = offset;
 
         m_watcher->start();
-
-        emit dataChanged(createIndex(pageStart + startOffset, 0), createIndex(pageStart + startOffset + resourcesToInsert.count()-1, 0));
+        emit dataChanged(createIndex(pageStart + startOffset, 0),
+                         createIndex(pageStart + startOffset + resourcesToInsert.count()-1, 0));
     }
     m_resourcesToInsert.clear();
-
-    emit countChanged();
 }
 
 void MetadataModel::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
