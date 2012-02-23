@@ -75,6 +75,8 @@ void LocationChooser::init()
     d->root->engine()->rootContext()->setContextProperty("locationManager", d->engine);
 
     d->root->setQmlPath(LOCATION_CHOOSER_PACKAGE_DIR + d->desktop->desktopGroup().readEntry("X-Plasma-MainScript"));
+
+    d->engine->init();
 }
 
 void LocationChooser::currentLocationChanged(const QString & id, const QString & name)
@@ -85,7 +87,6 @@ void LocationChooser::currentLocationChanged(const QString & id, const QString &
 void LocationChooser::popupEvent(bool show)
 {
     d->engine->requestUiReset();
-    setPopupIcon("plasmaapplet-location");
     Plasma::PopupApplet::popupEvent(show);
 }
 

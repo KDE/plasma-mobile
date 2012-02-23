@@ -33,17 +33,42 @@ public:
     QSizeF regularSize;
     QStringList locations;
     qreal listItemHeight;
+    QDBusServiceWatcher * watcher;
 };
 
 Engine::Engine(Plasma::PopupApplet * parent)
     : QObject(parent), d(new Private())
 {
+    d->locationManager = NULL;
+    d->parent = parent;
+}
+
+void Engine::init()
+{
+    d->watcher = new QDBusServiceWatcher(QLatin1String(LOCATION_MANAGER_DBUS_PATH),
+                        QDBusConnection::sessionBus(),
+                        QDBusServiceWatcher::WatchForRegistration |
+                        QDBusServiceWatcher::WatchForUnregistration,
+                        this);
+    connect(d->watcher, SIGNAL(serviceRegistered(QString)), this, SLOT(onServiceRegistered()));
+    connect(d->watcher, SIGNAL(serviceUnregistered(QString)), this, SLOT(onServiceUnregistered()));
+
+    bool servicePresent = QDBusConnection::sessionBus().interface()->isServiceRegistered(LOCATION_MANAGER_DBUS_PATH);
+
+    if (servicePresent) {
+        onServiceRegistered();
+    } else {
+        onServiceUnregistered();
+    }
+}
+
+void Engine::onServiceRegistered()
+{
     d->locationManager = new org::kde::LocationManager(
             LOCATION_MANAGER_DBUS_PATH,
             LOCATION_MANAGER_DBUS_OBJECT,
             QDBusConnection::sessionBus(),
-            this),
-    d->parent = parent;
+            this);
 
     // This would be so much nicer as a .\ in C++11
     // Heck, it would be nicer even with boost::bind
@@ -62,8 +87,6 @@ Engine::Engine(Plasma::PopupApplet * parent)
 
                 d->locations << d->locationManager->locationName(id);
             }
-
-            kDebug() << d->locations <<
 
             QMetaObject::invokeMethod(parent, "knownLocationsChanged",
                     Qt::QueuedConnection, Q_ARG(QStringList, d->locations));
@@ -87,23 +110,49 @@ Engine::Engine(Plasma::PopupApplet * parent)
     connect(d->locationManager, SIGNAL(locationNameChanged(QString, QString, QString)),
             this, SLOT(onLocationNameChanged(QString, QString, QString)));
 
-    kDebug() << "Starting the async getter";
+    // Starting the async getter
     (new GetLocations(this, d))->start();
+
+    emit locationManagerPresenceChanged();
+
+    setIcon("location");
+}
+
+void Engine::onServiceUnregistered()
+{
+    delete d->locationManager;
+    d->locationManager = NULL;
+
+    setState("Error");
+
+    emit locationManagerPresenceChanged();
+
+    d->parent->setPopupIcon("application-exit");
 }
 
 void Engine::setIcon(const QString & icon)
 {
-    d->parent->setPopupIcon("plasmaapplet-" + icon);
+    if (d->locationManager) {
+        d->parent->setPopupIcon("plasmaapplet-" + icon);
+    } else {
+        d->parent->setPopupIcon("application-exit");
+    }
 }
 
 QString Engine::currentLocationId() const
 {
-    return d->locationManager->currentLocationId();
+    if (d->locationManager)
+        return d->locationManager->currentLocationId();
+    else
+        return i18n("The location manager is not running");
 }
 
 QString Engine::currentLocationName() const
 {
-    return d->locationManager->currentLocationName();
+    if (d->locationManager)
+        return d->locationManager->currentLocationName();
+    else
+        return i18n("The location manager is not running");
 }
 
 void Engine::onCurrentLocationChanged(const QString & id, const QString & name)
@@ -114,34 +163,40 @@ void Engine::onCurrentLocationChanged(const QString & id, const QString & name)
 
 void Engine::setCurrentLocation(const QString & location)
 {
-    d->locationManager->setCurrentLocation(location);
+    if (d->locationManager) {
+        d->locationManager->setCurrentLocation(location);
+    }
+
     d->parent->hidePopup();
 }
 
 void Engine::requestUiReset()
 {
+    setIcon("location");
     emit resetUiRequested();
 }
 
 void Engine::setState(const QString & state)
 {
-    if (state == "Showing") {
+    if (state == "Showing" || state == "Error") {
         d->parent->graphicsWidget()->resize(d->regularSize);
 
     } else if (state == "Querying") {
         d->regularSize = d->parent->graphicsWidget()->size();
 
         QSizeF bigSize(d->regularSize);
-        bigSize.setHeight(
-                bigSize.height() + d->locations.size() * (4 + d->listItemHeight)
-                );
+        qreal height = bigSize.height() + d->locations.size() * (4 + d->listItemHeight);
+        if (height > 400) {
+            height = 400;
+        }
+
+        bigSize.setHeight(height);
         d->parent->graphicsWidget()->resize(bigSize);
     }
 }
 
 void Engine::setListItemHeight(qreal height)
 {
-    kDebug() << height;
     d->listItemHeight = height;
 }
 
@@ -153,7 +208,6 @@ QStringList Engine::knownLocations() const
 void Engine::onLocationAdded(const QString & id, const QString & name)
 {
     Q_UNUSED(id)
-    kDebug() << id << name;
     d->locations << name;
     emit knownLocationsChanged(d->locations);
 }
@@ -161,7 +215,6 @@ void Engine::onLocationAdded(const QString & id, const QString & name)
 void Engine::onLocationRemoved(const QString & id, const QString & name)
 {
     Q_UNUSED(id)
-    kDebug() << id << name;
     d->locations.removeAll(name);
     emit knownLocationsChanged(d->locations);
 }
@@ -174,3 +227,7 @@ void Engine::onLocationNameChanged(const QString & id, const QString & oldname, 
     emit knownLocationsChanged(d->locations);
 }
 
+bool Engine::locationManagerPresent() const
+{
+    return (d->locationManager != NULL);
+}

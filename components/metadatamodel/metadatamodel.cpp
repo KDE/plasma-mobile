@@ -28,6 +28,7 @@
 #include <KIcon>
 #include <KImageCache>
 #include <KMimeType>
+#include <KService>
 #include <KIO/PreviewJob>
 
 #include <soprano/vocabulary.h>
@@ -567,6 +568,14 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         if (icon.isEmpty() && resource.isFile()) {
             KUrl url = resource.toFile().url();
             if (!url.isEmpty()) {
+                //if it's an application, fetch the icon from the desktop file
+                Nepomuk::Types::Class resClass(resource.resourceType());
+                if (resClass.label() == "Application") {
+                    KService::Ptr serv = KService::serviceByDesktopPath(url.path());
+                    if (serv) {
+                        return serv->icon();
+                    }
+                }
                 icon = KMimeType::iconNameForUrl(url);
             }
         }
@@ -588,6 +597,14 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         if (icon.isEmpty() && resource.isFile()) {
             KUrl url = resource.toFile().url();
             if (!url.isEmpty()) {
+                //if it's an application, fetch the icon from the desktop file
+                Nepomuk::Types::Class resClass(resource.resourceType());
+                if (resClass.label() == "Application") {
+                    KService::Ptr serv = KService::serviceByDesktopPath(url.path());
+                    if (serv) {
+                        return serv->icon();
+                    }
+                }
                 icon = KMimeType::iconNameForUrl(url);
             }
         }
