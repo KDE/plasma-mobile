@@ -358,21 +358,58 @@ void MetadataModel::doQuery()
     endResetModel();
     emit countChanged();
 
-    delete m_queryClient;
-    m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
+    delete m_countQueryClient;
+    //qDeleteAll is broken in 4.8
+    foreach (Nepomuk::QueryCLient * client, m_queryClients) {
+        delete client;
+    }
+    m_queryClients.clear;
+    m_countQueryClient = new Nepomuk::Query::QueryServiceClient(this);
 
     connect(m_queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
             this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
+
+    m_countQueryClient->query(m_query, Nepomuk::Query::CreateCountQuery);
+}
+
+void MetadataModel::askResultsPage(int page)
+{
+    Nepomuk::Query::QueryServiceClient *client = Nepomuk::Query::QueryServiceClient(this);
+
+    m_queryClients[page] = client;m_pageSize
+
+    Nepomuk::Query pageQuery(m_query);
+    pageQuery.setOffset(page);
+    pageQuery.setLimit(m_pageSize);
+
+    client->query(pageQuery);
+
+    connect(client, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
+            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
+    connect(client, SIGNAL(entriesRemoved(const QList<QUrl> &)),
             this, SLOT(entriesRemoved(const QList<QUrl> &)));
-    connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
+    connect(client, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
+}
 
-    //FIXME: safe usually without limit?
-    if (m_limit > 0) {
-        m_query.setLimit(m_limit);
+void MetadataModel::countQueryResult(const QList< Nepomuk::Query::Result > &entries)
+{
+    setStatus(Running);
+    //this should be always 1
+    foreach (Nepomuk::Query::Result res, entries) {
+        int count = res.additionalBinding(QLatin1String("cnt")).variant().toInt();
+
+        m_results.resize(count);
+
+        if (count < m_count) {
+            beginRemoveRows(QModelIndex(), count, m_count);
+            endRemoveRows();
+        } else if (count > m_count) {
+            beginInsertRows(QModelIndex(), count, m_count);
+            endInsertRows();
+        }
+
+        m_count = count;
     }
-
-    m_queryClient->query(m_query);
 }
 
 void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
@@ -385,7 +422,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         if (!resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).isValid()) {
             continue;
         }
-        m_resourcesToInsert << resource;
+        resourcesToInsert << resource;
     }
 
     if (!m_newEntriesTimer->isActive() && !m_resourcesToInsert.isEmpty()) {
