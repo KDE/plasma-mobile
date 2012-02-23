@@ -96,7 +96,7 @@ PlasmaComponents.Page {
                 var visibleChildCount = devicesTabBar.layout.children.length
 
                 for (var i = 0; i < devicesTabBar.layout.children.length; ++i) {
-                    if (!devicesTabBar.layout.children[i].visible || devicesTabBar.layout.children[i].text == undefined) {
+                    if (!devicesTabBar.layout.children[i].visible || devicesTabBar.layout.children[i].text === undefined) {
                         --visibleChildCount
                     }
                 }
@@ -127,6 +127,7 @@ PlasmaComponents.Page {
             Repeater {
                 id: devicesRepeater
                 model: devicesModel
+                onCountChanged: devicesTabBar.updateSize()
 
                 delegate: PlasmaComponents.TabButton {
                     id: removableButton
@@ -174,7 +175,7 @@ PlasmaComponents.Page {
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
             className: model["className"] ? model["className"] : ""
-            genericClassName: model["genericClassName"] ? model["genericClassName"] : ""
+            genericClassName: model["genericClassName"] ? model["genericClassName"] : "FileDataObject"
             width: 130
             height: 120
             infoLabelVisible: false
