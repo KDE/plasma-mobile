@@ -581,7 +581,9 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         //HACK
         const_cast<MetadataModel *>(this)->fetchResultsPage(0);
         return QVariant();
-    } 
+    } else if (!resource.isValid()) {
+        return QVariant();
+    }
 
     switch (role) {
     case Qt::DisplayRole:

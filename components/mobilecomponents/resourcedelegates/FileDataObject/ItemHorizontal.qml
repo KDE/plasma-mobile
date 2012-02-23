@@ -40,7 +40,7 @@ Item {
                 if (mimeType) {
                     return mimeType.replace("/", "-")
                 }
-                return "nepomuk"
+                return "application-x-zerosize"
             }
 
             icon: {
