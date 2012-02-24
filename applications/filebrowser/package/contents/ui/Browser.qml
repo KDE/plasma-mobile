@@ -175,11 +175,11 @@ PlasmaComponents.Page {
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
             className: model["className"] ? model["className"] : ""
-            genericClassName: model["genericClassName"] ? model["genericClassName"] : "FileDataObject"
+            genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
             width: 130
             height: 120
             infoLabelVisible: false
-            property string label: model["label"]?model["label"]:model["display"]
+            property string label: model["label"] ? model["label"] : (model["display"] ? model["display"] : "")
 
             onPressAndHold: {
                 resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
