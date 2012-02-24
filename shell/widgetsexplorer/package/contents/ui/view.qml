@@ -34,6 +34,29 @@ MobileComponents.Sheet {
     signal addAppletRequested(string plugin)
     signal closeRequested
 
+    function addItems()
+    {
+        var service = metadataSource.serviceForSource("")
+        var operation = service.operationDescription("connectToActivity")
+        operation["ActivityUrl"] = activitySource.data["Status"]["Current"]
+
+        for (var i = 0; i < selectedModel.count; ++i) {
+            var item = selectedModel.get(i)
+            if (item.resourceUri) {
+                operation["ResourceUrl"] = item.resourceUri
+                service.startOperationCall(operation)
+            } else if (item.pluginName) {
+                widgetsExplorer.addAppletRequested(item.pluginName)
+            }
+        }
+
+    }
+
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.metadata"
+    }
+
     Binding {
         target: acceptButton
         property: "enabled"
@@ -41,7 +64,7 @@ MobileComponents.Sheet {
     }
 
     onAccepted: {
-        stack.currentPage.accept()
+        widgetsExplorer.addItems()
     }
     onStatusChanged: {
         if (status == PlasmaComponents.DialogStatus.Closed) {

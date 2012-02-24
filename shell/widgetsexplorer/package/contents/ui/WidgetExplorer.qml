@@ -28,13 +28,6 @@ MobileComponents.IconGrid {
 
     anchors.fill: parent
 
-    function accept()
-    {
-        for (var i = 0; i < selectedModel.count; ++i) {
-            widgetsExplorer.addAppletRequested(selectedModel.get(i).pluginName)
-        }
-    }
-
     model: PlasmaCore.SortFilterModel {
         id: appletsFilter
         sourceModel: myModel
