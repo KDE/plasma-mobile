@@ -117,7 +117,8 @@ Item {
     }
 
 
-    Item {
+    Loader {
+        id: scrollArea
         visible: main.model && Math.ceil(main.model.count/main.pageSize) > 1
         anchors {
             left: parent.left
@@ -125,49 +126,111 @@ Item {
             bottom: parent.bottom
         }
         height: Math.max( 16, appsView.height - Math.floor(appsView.height/delegateHeight)*delegateHeight)
-        Row {
-            id: dotsRow
-            anchors.centerIn: parent
-            spacing: 20
 
-            Repeater {
-                model: main.model?Math.ceil(main.model.count/main.pageSize):0
+        property int pageCount: main.model ? Math.ceil(main.model.count/main.pageSize) : 0
 
-
+        sourceComponent: pageCount > 1 ? ((pageCount * 20 > width) ? scrollDotComponent : dotsRow) : undefined
+        function setViewIndex(index)
+        {
+            //animate only if near
+            if (Math.abs(appsView.currentIndex - index) > 1) {
+                appsView.positionViewAtIndex(index, ListView.Beginning)
+            } else {
+                appsView.currentIndex = index
+            }
+        }
+        Component {
+            id: scrollDotComponent
+            MouseArea {
+                anchors.fill: parent
+                property int pendingIndex: 0
                 Rectangle {
-                    width: 6
-                    height: 6
-                    scale: appsView.currentIndex == index ? 1.5 : 1
-                    radius: 5
-                    smooth: true
-                    opacity: appsView.currentIndex == index ? 0.8: 0.4
+                    id: barRectangle
                     color: theme.textColor
-
-                    Behavior on scale {
+                    opacity: 0.25
+                    height: 4
+                    radius: 2
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                        leftMargin: (parent.width/pageCount/2)
+                        rightMargin: (parent.width/pageCount/2)
+                    }
+                }
+                Rectangle {
+                    color: theme.textColor
+                    height: 8
+                    width: height
+                    radius: 4
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: parent.width/(pageCount/(appsView.currentIndex+1)) - (parent.width/pageCount/2) - 4
+                    Behavior on x {
                         NumberAnimation {
                             duration: 250
                             easing.type: Easing.InOutQuad
                         }
                     }
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 250
-                            easing.type: Easing.InOutQuad
-                        }
-                    }
+                }
+                function setViewIndexFromMouse(x)
+                {
+                    pendingIndex = Math.min(pageCount,
+                                            Math.round(pageCount / (barRectangle.width / Math.max(x - barRectangle.x, 1))))
+                    viewPositionTimer.restart()
+                }
+                onPressed: setViewIndexFromMouse(mouse.x)
+                onPositionChanged: setViewIndexFromMouse(mouse.x)
 
-                    MouseArea {
-                        anchors {
-                            fill: parent
-                            margins: -10
-                        }
+                Timer {
+                    id: viewPositionTimer
+                    interval: 200
+                    onTriggered: setViewIndex(pendingIndex)
+                }
+            }
+        }
+        Component {
+            id: dotsRow
 
-                        onClicked: {
-                            //animate only if near
-                            if (Math.abs(appsView.currentIndex - index) > 1) {
-                                appsView.positionViewAtIndex(index, ListView.Beginning)
-                            } else {
-                                appsView.currentIndex = index
+            Item {
+                Row {
+                    anchors.centerIn: parent
+                    spacing: 20
+
+                    Repeater {
+                        model: scrollArea.pageCount
+
+
+                        Rectangle {
+                            width: 6
+                            height: 6
+                            scale: appsView.currentIndex == index ? 1.5 : 1
+                            radius: 5
+                            smooth: true
+                            opacity: appsView.currentIndex == index ? 0.8: 0.4
+                            color: theme.textColor
+
+                            Behavior on scale {
+                                NumberAnimation {
+                                    duration: 250
+                                    easing.type: Easing.InOutQuad
+                                }
+                            }
+                            Behavior on opacity {
+                                NumberAnimation {
+                                    duration: 250
+                                    easing.type: Easing.InOutQuad
+                                }
+                            }
+
+                            MouseArea {
+                                anchors {
+                                    fill: parent
+                                    margins: -10
+                                }
+
+                                onClicked: {
+                                    setViewIndex(index)
+                                }
                             }
                         }
                     }
