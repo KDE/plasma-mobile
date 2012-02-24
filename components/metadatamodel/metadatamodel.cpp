@@ -491,9 +491,19 @@ void MetadataModel::newEntriesDelayed()
             //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
 
             m_uriToResourceIndex[res.resourceUri()] = pageStart + offset;
-            m_resources[pageStart + offset] = res;
-            m_watcher->addResource(res);
-            ++offset;
+            //there can be new results before the count query gets updated
+            if (pageStart + offset < m_resources.size()) {
+                m_resources[pageStart + offset] = res;
+                m_watcher->addResource(res);
+                ++offset;
+            } else {
+                beginInsertRows(QModelIndex(), m_resources.size(), pageStart + offset);
+                m_resources.resize(pageStart + offset + 1);
+                m_resources[pageStart + offset] = res;
+                m_watcher->addResource(res);
+                ++offset;
+                endInsertRows();
+            }
         }
 
         m_validIndexForPage[i.key()] = offset;
