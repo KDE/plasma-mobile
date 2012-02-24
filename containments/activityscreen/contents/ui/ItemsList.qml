@@ -80,9 +80,11 @@ Item {
                     horizontalCenter: parent.horizontalCenter
                 }
                 infoLabelVisible: false
+                className: model["className"] ? model["className"] : ""
+                genericClassName: model["genericClassName"] ? model["genericClassName"] : ""
 
                 onPressAndHold: {
-                    resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
+                    resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
                     resourceInstance.title = model["label"]
                     main.currentIndex = index
                     main.currentGroup = itemGroup
