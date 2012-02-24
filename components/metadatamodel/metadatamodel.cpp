@@ -486,9 +486,11 @@ void MetadataModel::newEntriesDelayed()
         int startOffset = m_validIndexForPage.value(i.key());
         int offset = startOffset;
         //this happens only when m_validIndexForPage has been invalidate by row removal
-        while (startOffset < m_resources.size() && m_resources[startOffset].isValid()) {
-            ++startOffset;
-            ++offset;
+        if (!m_validIndexForPage.contains(i.key()) && m_resources[pageStart + startOffset].isValid()) {
+            while (startOffset < m_resources.size() && m_resources[pageStart + startOffset].isValid()) {
+                ++startOffset;
+                ++offset;
+            }
         }
 
         foreach (Nepomuk::Resource res, resourcesToInsert) {
