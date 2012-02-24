@@ -483,8 +483,13 @@ void MetadataModel::newEntriesDelayed()
         if (m_pageSize > 0) {
             pageStart = i.key() * m_pageSize;
         }
-        const int startOffset = m_validIndexForPage.value(i.key());
+        int startOffset = m_validIndexForPage.value(i.key());
         int offset = startOffset;
+        //this happens only when m_validIndexForPage has been invalidate by row removal
+        while (startOffset < m_resources.size() && m_resources[startOffset].isValid()) {
+            ++startOffset;
+            ++offset;
+        }
 
         foreach (Nepomuk::Resource res, resourcesToInsert) {
             //kDebug() << "Result!!!" << res.genericLabel() << res.type();
@@ -542,6 +547,9 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
         }
         prevIndex = index;
     }
+
+    //all the page indexes may be invalid now
+    m_validIndexForPage.clear();
 
     QMap<int, int>::const_iterator i = toRemove.constEnd();
 
