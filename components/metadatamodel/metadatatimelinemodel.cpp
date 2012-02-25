@@ -277,14 +277,14 @@ void MetadataTimelineModel::newEntries(const QList< Nepomuk::Query::Result > &en
         int month = res.additionalBinding(QLatin1String("month")).variant().toInt();
         int day = res.additionalBinding(QLatin1String("day")).variant().toInt();
 
-        QHash<Roles, int> res;
-        res[YearRole] = year;
-        res[MonthRole] = month;
-        res[DayRole] = day;
-        res[CountRole] = count;
+        QHash<Roles, int> resHash;
+        resHash[YearRole] = year;
+        resHash[MonthRole] = month;
+        resHash[DayRole] = day;
+        resHash[CountRole] = count;
 
         m_totalCount += count;
-        results << res;
+        results << resHash;
     }
 
     if (results.count() > 0) {
