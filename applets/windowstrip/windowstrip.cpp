@@ -163,7 +163,7 @@ void WindowStrip::updateFrame()
     m_windows.clear();
     foreach (QVariant windowData, thumbnailsInfo) {
          const QVariantMap windowInfo = windowData.value<QVariantMap>();
-         WId winId = windowInfo["winId"].value<QString>().toInt();
+         WId winId = (WId)windowInfo["winId"].value<QString>().toInt();
 
          m_windows[winId] = QRect(windowInfo["x"].value<int>()+offset.x(), windowInfo["y"].value<int>()+offset.y(), windowInfo["width"].value<int>(), windowInfo["height"].value<int>());
     }
