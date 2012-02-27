@@ -18,98 +18,98 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
- 
-Item {
+import org.kde.plasma.components 0.1 as PlasmaComponents
+
+
+Column {
     id: resourceItem
-    anchors.fill: parent
+    anchors.horizontalCenter: parent.horizontalCenter
 
-    Column {
+    QIconItem {
+        id: previewImage
+        height: roundToStandardSize(delegateItem.height - previewLabel.height)
+        width: height
+        anchors.margins: 0
         anchors.horizontalCenter: parent.horizontalCenter
-        QIconItem {
-            id: previewImage
-            height: 64
-            width: 64
-            anchors.margins: 0
-            anchors.horizontalCenter: parent.horizontalCenter
 
-            function resourceIcon(resourceTypes) {
-                if (mimeType) {
-                    return mimeType.replace("/", "-")
-                }
-                return "nepomuk"
+        function resourceIcon(resourceTypes) {
+            if (mimeType) {
+                return mimeType.replace("/", "-")
             }
+            return "nepomuk"
+        }
 
-            icon: {
-                // FIXME: remove this crap, fix icon in metadata data set
-                try {
-                    if (model["iconName"]) {
-                        return QIcon(model["iconName"])
-                    //check if model["icon"] is a QIcon
-                    } else if (model["icon"] && model["icon"].addPixmap) {
-                        return model["icon"]
-                    } else if (model["icon"]) {
-                        return QIcon(model["icon"])
-                    }
-                    if (!model["hasSymbol"] && decoration) {
-                        return decoration
-                    }
-                    var _l = hasSymbol.toString().split(",");
-                    if (_l.length == 1) {
-                        return QIcon(hasSymbol);
-                    } else if (_l.length > 1) {
-                        // pick the last one
-                        var _i = _l[_l.length-1];
-                        return QIcon(_i);
-                    } else {
-                        //print("HHH types" + types.toString());
-                        resourceIcon(types.toString())
-                    }
-                    //print("icon:" + hasSymbol);
-                } catch(e) {
-                    var _i = resourceIcon(className);
-                    print("fallback icon: " + _i + e);
+        icon: {
+            // FIXME: remove this crap, fix icon in metadata data set
+            try {
+                if (model["iconName"]) {
+                    return QIcon(model["iconName"])
+                //check if model["icon"] is a QIcon
+                } else if (model["icon"] && model["icon"].addPixmap) {
+                    return model["icon"]
+                } else if (model["icon"]) {
+                    return QIcon(model["icon"])
+                }
+                if (!model["hasSymbol"] && decoration) {
+                    return decoration
+                }
+                var _l = hasSymbol.toString().split(",");
+                if (_l.length == 1) {
+                    return QIcon(hasSymbol);
+                } else if (_l.length > 1) {
+                    // pick the last one
+                    var _i = _l[_l.length-1];
                     return QIcon(_i);
-                    print("icon2:" + _i);
+                } else {
+                    //print("HHH types" + types.toString());
+                    resourceIcon(types.toString())
                 }
+                //print("icon:" + hasSymbol);
+            } catch(e) {
+                var _i = resourceIcon(className);
+                print("fallback icon: " + _i + e);
+                return QIcon(_i);
+                print("icon2:" + _i);
             }
-        }
-
-
-        Text {
-            id: previewLabel
-            text: label
-
-            font.pixelSize: 14
-            //wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
-            elide: Text.ElideRight
-            anchors {
-                //top: previewImage.bottom
-                horizontalCenter: parent.horizontalCenter
-            }
-            width: resourceItem.width
-            style: Text.Outline
-            styleColor: Qt.rgba(1, 1, 1, 0.6)
-        }
-
-        Text {
-            id: infoLabel
-            //image: metadataSource.data[DataEngineSource]["fileName"]
-            //text: "the long and winding road..."
-            text: className
-            opacity: 0.8
-            //font.pixelSize: font.pixelSize * 1.8
-            font.pixelSize: 12
-            height: 14
-            width: parent.width - previewImage.width
-            //wrapMode: Text.Wrap
-            //anchors.top: previewLabel.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            visible: infoLabelVisible
         }
     }
+
+
+    PlasmaComponents.Label {
+        id: previewLabel
+        text: label
+        height: paintedHeight
+
+        //wrapMode: Text.Wrap
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideRight
+        anchors {
+            //top: previewImage.bottom
+            horizontalCenter: parent.horizontalCenter
+        }
+        width: resourceItem.width
+        style: Text.Outline
+        styleColor: Qt.rgba(1, 1, 1, 0.6)
+    }
+
+    Text {
+        id: infoLabel
+        //image: metadataSource.data[DataEngineSource]["fileName"]
+        //text: "the long and winding road..."
+        text: className
+        opacity: 0.8
+        //font.pixelSize: font.pixelSize * 1.8
+        font.pixelSize: 12
+        height: 14
+        width: parent.width - previewImage.width
+        //wrapMode: Text.Wrap
+        //anchors.top: previewLabel.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        visible: infoLabelVisible
+    }
 }
+

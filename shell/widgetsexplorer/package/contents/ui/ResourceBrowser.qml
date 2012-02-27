@@ -26,9 +26,6 @@ MobileComponents.IconGrid {
     id: resultsGrid
     anchors.fill: parent
 
-    delegateWidth: 130
-    delegateHeight: 120
-
     delegate: Item {
         width: resultsGrid.delegateWidth
         height: resultsGrid.delegateHeight
@@ -45,8 +42,8 @@ MobileComponents.IconGrid {
         }
         MobileComponents.ResourceDelegate {
             id: resourceDelegate
-            width: 130
-            height: 120
+            width: resultsGrid.delegateWidth
+            height: resultsGrid.delegateHeight
             infoLabelVisible: false
             //those two are to make appModel and runnerModel work
             property string label: model["label"]?model["label"]:(model["name"]?model["name"]:model["text"])

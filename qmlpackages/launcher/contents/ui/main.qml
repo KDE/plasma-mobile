@@ -117,8 +117,6 @@ MouseArea {
 
     MobileComponents.IconGrid {
         id: appGrid
-        delegateWidth: 128
-        delegateHeight: 100
         model: appsModel
         onCurrentPageChanged: resourceInstance.uri = ""
 

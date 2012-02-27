@@ -18,135 +18,118 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
-Item {
+Column {
     id: resourceItem
-    anchors.fill: parent
+    anchors.horizontalCenter: parent.horizontalCenter
 
-    PlasmaCore.DataSource {
-        id: pmSource
-        engine: "org.kde.preview"
+    Item {
+        id: iconContainer
+        height: roundToStandardSize(delegateItem.height - previewLabel.height)
+        width: resourceItem.width
 
-        interval: 0
-        Component.onCompleted: {
-            print(" setting URL: " + url);
-            pmSource.connectedSources = [url]
-            if (data[url] == undefined) {
-                previewFrame.visible = false
-                return
+        PlasmaCore.DataSource {
+            id: pmSource
+            engine: "org.kde.preview"
+
+            interval: 0
+            Component.onCompleted: {
+                print(" setting URL: " + url);
+                pmSource.connectedSources = [url]
+                if (data[url] == undefined) {
+                    previewFrame.visible = false
+                    return
+                }
+                previewFrame.visible = data[url]["status"] == "done"
+                iconItem.visible = !previewFrame.visible
+                previewImage.image = data[url]["thumbnail"]
             }
-            previewFrame.visible = data[url]["status"] == "done"
-            iconItem.visible = !previewFrame.visible
-            previewImage.image = data[url]["thumbnail"]
+            onDataChanged: {
+                previewFrame.visible = (data[url]["status"] == "done")
+                iconItem.visible = !previewFrame.visible
+                previewImage.image = data[url]["thumbnail"]
+            }
         }
-        onDataChanged: {
-            for (k in data) {
-                print(" Key: " + data);
+
+        QIconItem {
+            id: iconItem
+            width: height
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                bottom: parent.bottom
             }
-            //print(" dataChanged: NaME" + data[name]);
-            //print(" dataChanged: URL " + data[url]);
-            previewFrame.visible = (data[url]["status"] == "done")
-            iconItem.visible = !previewFrame.visible
-            previewImage.image = data[url]["thumbnail"]
+            icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("text-html")
+        }
+
+        PlasmaCore.FrameSvgItem {
+            id: previewFrame
+            imagePath: "widgets/media-delegate"
+            prefix: "picture"
+
+            height: previewImage.height+margins.top+margins.bottom
+            width: previewImage.width+margins.left+margins.right
+            visible: false
+            anchors.centerIn: previewArea
+        }
+
+        Item {
+            id: previewArea
+            visible: previewFrame.visible
+            anchors {
+                fill: parent
+
+                leftMargin: Math.round(Math.min(previewFrame.margins.left, parent.height/6))
+                topMargin: Math.round(Math.min(previewFrame.margins.top, parent.height/6))
+                rightMargin: Math.round(Math.min(previewFrame.margins.right, parent.height/6))
+                bottomMargin: Math.round(Math.min(previewFrame.margins.bottom, parent.height/6))
+            }
+
+            QImageItem {
+                id: previewImage
+                anchors.centerIn: parent
+
+                width: parent.height * (nativeWidth/nativeHeight)
+                height: parent.height
+            }
         }
     }
 
-    Column {
+    PlasmaComponents.Label {
+        id: previewLabel
+        text: {
+            var s = url;
+            s = s.replace("http://", "");
+            s = s.replace("https://", "");
+            s = s.replace("www.", "");
+            return s;
+        }
+
+        height: paintedHeight
+        //wrapMode: Text.Wrap
+        horizontalAlignment: Text.AlignHCenter
+        elide: Text.ElideRight
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+        }
+        width: resourceItem.width
+        style: Text.Outline
+        styleColor: Qt.rgba(1, 1, 1, 0.6)
+    }
+
+    Text {
+        id: infoLabel
+        text: className
+        opacity: 0.8
+        font.pixelSize: 12
+        height: 14
+        width: parent.width - iconItem.width
         anchors.horizontalCenter: parent.horizontalCenter
-
-        Item {
-            id: iconContainer
-            height: resourceItem.height - previewLabel.height - infoLabel.height
-            width: resourceItem.width
-
-            QIconItem {
-                id: iconItem
-                width: 64
-                height: 64
-                anchors.centerIn: parent
-                icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("text-html")
-            }
-
-            PlasmaCore.FrameSvgItem {
-                id: previewFrame
-                imagePath: "widgets/media-delegate"
-                prefix: "picture"
-
-                height: previewImage.height+margins.top+margins.bottom
-                width: previewImage.width+margins.left+margins.right
-                visible: false
-                anchors.centerIn: previewArea
-            }
-
-            Item {
-                id: previewArea
-                visible: previewFrame.visible
-                anchors {
-                    fill: parent
-
-                    leftMargin: previewFrame.margins.left
-                    topMargin: previewFrame.margins.top
-                    rightMargin: previewFrame.margins.right
-                    bottomMargin: previewFrame.margins.bottom
-                }
-
-                QImageItem {
-                    id: previewImage
-                    anchors.centerIn: parent
-
-                    width: {
-                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                            return parent.width
-                        } else {
-                            return parent.height * (nativeWidth/nativeHeight)
-                        }
-                    }
-                    height: {
-                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                            return parent.width / (nativeWidth/nativeHeight)
-                        } else {
-                            return parent.height
-                        }
-                    }
-                }
-            }
-        }
-
-        Text {
-            id: previewLabel
-            text: {
-                var s = url;
-                s = s.replace("http://", "");
-                s = s.replace("https://", "");
-                s = s.replace("www.", "");
-                return s;
-            }
-
-            font.pixelSize: 14
-            //wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
-            elide: Text.ElideRight
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-            }
-            width: resourceItem.width
-            style: Text.Outline
-            styleColor: Qt.rgba(1, 1, 1, 0.6)
-        }
-
-        Text {
-            id: infoLabel
-            text: className
-            opacity: 0.8
-            font.pixelSize: 12
-            height: 14
-            width: parent.width - iconItem.width
-            anchors.horizontalCenter: parent.horizontalCenter
-            visible: infoLabelVisible
-        }
+        visible: infoLabelVisible
     }
 }
