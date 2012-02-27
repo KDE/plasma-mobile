@@ -58,7 +58,7 @@ MetadataModel::MetadataModel(QObject *parent)
       m_runningClients(0),
       m_countQueryClient(0),
       m_limit(0),
-      m_pageSize(50),
+      m_pageSize(30),
       m_screenshotSize(180, 120)
 {
     m_newEntriesTimer = new QTimer(this);
@@ -166,7 +166,7 @@ void MetadataModel::setLazyLoading(bool lazy)
     }
 
     //TODO: a way to control this? maybe from the available memory?
-    m_pageSize = lazy ? 50 : -1;
+    m_pageSize = lazy ? 30 : -1;
     askRefresh();
     emit lazyLoadingChanged();
 }
