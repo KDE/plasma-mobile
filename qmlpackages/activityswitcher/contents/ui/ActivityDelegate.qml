@@ -29,6 +29,20 @@ Item {
 
     z: PathView.z
     property string current: model["Current"]
+    property int deleteDialogOpenedAtIndex: mainView.deleteDialogOpenedAtIndex
+    property int delegateIndex: index
+
+    onDeleteDialogOpenedAtIndexChanged: {
+        // if necessary close this ActivityDelegate's deleteDialog if a deleteDialog from another ActivityDelegate has been opened.
+        if (deleteDialogOpenedAtIndex != index && deleteButtonParent.confirmationDialog != null) {
+            deleteButtonParent.confirmationDialog.scale = 0
+            deleteButtonParent.confirmationDialog.destroy()
+            deleteButtonParent.confirmationDialog = null
+
+            // restore this ActivityDelegate's opacity to the value before this ActivityDelegate's deleteDialog had been opened.
+            deleteButton.checked = false
+        }
+    }
 
     onCurrentChanged: {
         //avoid to restart the timer if the current index is already correct
@@ -51,7 +65,6 @@ Item {
         x: delegate.PathView.itemXTranslate
         y: delegate.PathView.itemYTranslate
     }
-
 
     PlasmaCore.FrameSvgItem {
         id: activityBorder
@@ -169,17 +182,19 @@ Item {
                     }
 
                     if (toggle) {
+                        // make dialog fully opaque if it is not already.
+                        checked = true
+
+                        // closes all other deleteDialogs from other ActivityDelegates.
+                        delegate.parent.deleteDialogOpenedAtIndex = delegate.delegateIndex
+
                         deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
                         deleteButtonParent.confirmationDialog.scale = 1 / delegate.scale
 
                         // scale does not change dialog's width so we need to anchor the confirmationDialog's center manually.
                         deleteButtonParent.confirmationDialog.x = deleteButton.x + deleteButton.width / 2 - deleteButtonParent.confirmationDialog.width * (1 / delegate.scale) / 2
 
-                        if (delegate.PathView.itemScale == 1) { // activity at PathView's center, not necessary the current activity.
-                            deleteButtonParent.confirmationDialog.anchors.bottom = deleteButton.top
-                        } else {
-                            deleteButtonParent.confirmationDialog.y = deleteButton.y - deleteButton.height / (3/2) * (1 / delegate.scale)
-                        }
+                        deleteButtonParent.confirmationDialog.anchors.bottom = deleteButton.top
                     }
                 }
 

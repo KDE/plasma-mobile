@@ -84,6 +84,9 @@ Item {
         onTriggered:  {
             if (activitySwitcher.state == "Passive") {
                 mainView.currentIndex = pendingIndex
+
+                // close all opened deleteDialogs since ActivitySwitcher panel is now hidden.
+                mainView.deleteDialogOpenedAtIndex = -1
             }
         }
     }
@@ -121,7 +124,7 @@ Item {
 
          flickDeceleration: 600
 
-
+         property int deleteDialogOpenedAtIndex: -1
          delegate: ActivityDelegate{}
 
          path: Path {
@@ -154,7 +157,7 @@ Item {
              PathAttribute { name: "itemXTranslate"; value: 0 }
              PathAttribute { name: "itemYTranslate"; value: 0 }
              PathAttribute { name: "itemScale"; value: 1 }
-             PathAttribute { name: "z"; value: 100 }
+             PathAttribute { name: "z"; value: 0 }
 
 
              PathLine {
