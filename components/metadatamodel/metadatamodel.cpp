@@ -56,8 +56,8 @@
 MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
       m_countQueryClient(0),
-      m_pageSize(50),
       m_limit(0),
+      m_pageSize(50),
       m_screenshotSize(180, 120)
 {
     m_newEntriesTimer = new QTimer(this);
@@ -485,6 +485,13 @@ void MetadataModel::newEntriesDelayed()
         }
         int startOffset = m_validIndexForPage.value(i.key());
         int offset = startOffset;
+
+        //if new result arrive on an already running query, they may arrive before countQueryResult
+        if (m_resources.size() < pageStart + startOffset + 1) {
+            beginInsertRows(QModelIndex(), m_resources.size(), pageStart + startOffset);
+            m_resources.resize(pageStart + startOffset + 1);
+            endInsertRows();
+        }
         //this happens only when m_validIndexForPage has been invalidate by row removal
         if (!m_validIndexForPage.contains(i.key()) && m_resources[pageStart + startOffset].isValid()) {
             while (startOffset < m_resources.size() && m_resources[pageStart + startOffset].isValid()) {
