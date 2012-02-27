@@ -55,6 +55,7 @@
 
 MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
+      m_runningClients(0),
       m_countQueryClient(0),
       m_limit(0),
       m_pageSize(50),
@@ -388,6 +389,7 @@ void MetadataModel::doQuery()
     m_queryClients.clear();
     m_pagesForClient.clear();
     m_validIndexForPage.clear();
+    m_queryClientsHistory.clear();
     m_countQueryClient = new Nepomuk::Query::QueryServiceClient(this);
 
     connect(m_countQueryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
@@ -426,6 +428,9 @@ void MetadataModel::fetchResultsPage(int page)
     connect(client, SIGNAL(entriesRemoved(const QList<QUrl> &)),
             this, SLOT(entriesRemoved(const QList<QUrl> &)));
     connect(client, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
+
+    m_queryClientsHistory << client;
+    ++m_runningClients;
 }
 
 void MetadataModel::countQueryResult(const QList< Nepomuk::Query::Result > &entries)
@@ -584,7 +589,23 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
 
 void MetadataModel::finishedListing()
 {
-    setStatus(Idle);
+    --m_runningClients;
+
+    if (m_runningClients <= 0) {
+        setStatus(Idle);
+
+        if (m_queryClientsHistory.count() > 10) {
+            for (int i = 0; i < m_queryClientsHistory.count() - 10; ++i) {
+                Nepomuk::Query::QueryServiceClient *client = m_queryClientsHistory.first();
+                m_queryClientsHistory.pop_front();
+
+                int page = m_pagesForClient.value(client);
+                m_queryClients.remove(page);
+                m_pagesForClient.remove(client);
+                delete client;
+            }
+        }
+    }
 }
 
 
