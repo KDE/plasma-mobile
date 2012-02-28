@@ -60,7 +60,6 @@ Image {
         sortBy: [userTypes.sortFields[metadataModel.resourceType]]
         //sortOrder: Qt.DescendingOrder
         //queryString: "pdf"
-        //limit: 20
     }
 
     PlasmaComponents.BusyIndicator {

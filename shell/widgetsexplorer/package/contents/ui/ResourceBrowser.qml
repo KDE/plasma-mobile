@@ -46,7 +46,9 @@ MobileComponents.IconGrid {
             height: resultsGrid.delegateHeight
             infoLabelVisible: false
             //those two are to make appModel and runnerModel work
-            property string label: model["label"]?model["label"]:(model["name"]?model["name"]:model["text"])
+            property string label: model["label"] ? model["label"] : (model["name"] ? model["name"] : model["text"])
+            className: model["className"] ? model["className"] : ""
+            genericClassName: model["genericClassName"] ? model["genericClassName"] : ""
 
             onPressAndHold: {
                 //take into account cases for all 3 models

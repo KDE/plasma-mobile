@@ -54,6 +54,8 @@ Item {
             sourceModel: MetadataModels.MetadataModel {
                 activityId: plasmoid.activityId
                 resourceType: itemGroup.category
+                //here there will just few items so is more efficient to just load everything for now
+                lazyLoading: false
                 //sortBy is not used becauseitems that arrive after are put in the back
                 //sortBy: [userTypes.sortFields[itemGroup.category]]
                 //sortOrder: Qt.AscendingOrder
@@ -78,9 +80,11 @@ Item {
                     horizontalCenter: parent.horizontalCenter
                 }
                 infoLabelVisible: false
+                className: model["className"] ? model["className"] : ""
+                genericClassName: model["genericClassName"] ? model["genericClassName"] : ""
 
                 onPressAndHold: {
-                    resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
+                    resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
                     resourceInstance.title = model["label"]
                     main.currentIndex = index
                     main.currentGroup = itemGroup

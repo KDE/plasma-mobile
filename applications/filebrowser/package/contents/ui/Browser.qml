@@ -96,7 +96,7 @@ PlasmaComponents.Page {
                 var visibleChildCount = devicesTabBar.layout.children.length
 
                 for (var i = 0; i < devicesTabBar.layout.children.length; ++i) {
-                    if (!devicesTabBar.layout.children[i].visible || devicesTabBar.layout.children[i].text == undefined) {
+                    if (!devicesTabBar.layout.children[i].visible || devicesTabBar.layout.children[i].text === undefined) {
                         --visibleChildCount
                     }
                 }
@@ -127,6 +127,7 @@ PlasmaComponents.Page {
             Repeater {
                 id: devicesRepeater
                 model: devicesModel
+                onCountChanged: devicesTabBar.updateSize()
 
                 delegate: PlasmaComponents.TabButton {
                     id: removableButton
@@ -173,11 +174,12 @@ PlasmaComponents.Page {
         delegateHeight: 120
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
-            className: model["className"]?model["className"]:"Image"
+            className: model["className"] ? model["className"] : ""
+            genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
             width: 130
             height: 120
             infoLabelVisible: false
-            property string label: model["label"]?model["label"]:model["display"]
+            property string label: model["label"] ? model["label"] : (model["display"] ? model["display"] : "")
 
             onPressAndHold: {
                 resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]

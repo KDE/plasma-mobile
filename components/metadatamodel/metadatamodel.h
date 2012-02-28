@@ -49,6 +49,11 @@ class MetadataModel : public AbstractMetadataModel
     Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
     Q_PROPERTY(int limit READ limit WRITE setLimit NOTIFY limitChanged)
+    /**
+     * load as less resources as possible from Nepomuk (only load when asked from the view)
+     * default is true, you shouldn't need to change it
+     */
+    Q_PROPERTY(bool lazyLoading READ lazyLoading WRITE setLazyLoading NOTIFY lazyLoadingChanged)
 
 public:
     enum Roles {
@@ -94,6 +99,9 @@ public:
     void setSortOrder(Qt::SortOrder sortOrder);
     Qt::SortOrder sortOrder() const;
 
+    void setLazyLoading(bool size);
+    bool lazyLoading() const;
+
     void setLimit(int limit);
     int limit() const;
 
@@ -120,8 +128,10 @@ Q_SIGNALS:
     void sortByChanged();
     void sortOrderChanged();
     void limitChanged();
+    void lazyLoadingChanged();
 
 protected Q_SLOTS:
+    void countQueryResult(const QList< Nepomuk::Query::Result > &entries);
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
     virtual void doQuery();
@@ -132,18 +142,34 @@ protected Q_SLOTS:
     void previewFailed(const KFileItem &item);
     void delayedPreview();
 
+protected:
+    void fetchResultsPage(int page);
+
 private:
     Nepomuk::Query::Query m_query;
-    Nepomuk::Query::QueryServiceClient *m_queryClient;
+    //mapping page->query client
+    QHash<int, Nepomuk::Query::QueryServiceClient *> m_queryClients;
+    //mapping query client->page
+    QHash<Nepomuk::Query::QueryServiceClient *, int> m_pagesForClient;
+    //where is the last valid (already populated) index for a given page
+    QHash<int, int> m_validIndexForPage;
+    //keep always running at most 10 clients, get rid of the old ones
+    //won't be possible to monitor forresources going away, but is too heavy
+    QList<Nepomuk::Query::QueryServiceClient *> m_queryClientsHistory;
+    //how many service clients are running now?
+    int m_runningClients;
+
+    Nepomuk::Query::QueryServiceClient *m_countQueryClient;
     Nepomuk::ResourceWatcher* m_watcher;
     QVector<Nepomuk::Resource> m_resources;
-    QList<Nepomuk::Resource> m_resourcesToInsert;
+    QHash<int, QList<Nepomuk::Resource> > m_resourcesToInsert;
     QHash<QUrl, int> m_uriToResourceIndex;
     QTimer *m_newEntriesTimer;
 
     //pieces to build m_query
     QString m_queryString;
     int m_limit;
+    int m_pageSize;
 
     QStringList m_sortBy;
     Qt::SortOrder m_sortOrder;
