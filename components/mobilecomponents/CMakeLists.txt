@@ -9,7 +9,6 @@ appbackgroundprovider.cpp
     pagedproxymodel.cpp
     fallbackcomponent.cpp
     categorizedproxymodel.cpp
-    mouseeventlistener.cpp
     package.cpp
     resourceinstance.cpp
     texteffects.cpp
