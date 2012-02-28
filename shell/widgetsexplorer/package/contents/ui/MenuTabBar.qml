@@ -98,6 +98,7 @@ PlasmaComponents.TabBar {
     Component {
         id: appsComponent
         ResourceBrowser {
+            defaultClassName: "FileDataObject"
             model: PlasmaCore.SortFilterModel {
                 id: appsModel
                 sourceModel: PlasmaCore.DataModel {

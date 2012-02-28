@@ -25,6 +25,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 MobileComponents.IconGrid {
     id: resultsGrid
     anchors.fill: parent
+    property string defaultClassName: ""
 
     delegate: Item {
         width: resultsGrid.delegateWidth
@@ -47,8 +48,8 @@ MobileComponents.IconGrid {
             infoLabelVisible: false
             //those two are to make appModel and runnerModel work
             property string label: model["label"] ? model["label"] : (model["name"] ? model["name"] : model["text"])
-            className: model["className"] ? model["className"] : ""
-            genericClassName: model["genericClassName"] ? model["genericClassName"] : ""
+            className: model["className"] ? model["className"] : defaultClassName
+            genericClassName: model["genericClassName"] ? model["genericClassName"] : defaultClassName
 
             onPressAndHold: {
                 //take into account cases for all 3 models
