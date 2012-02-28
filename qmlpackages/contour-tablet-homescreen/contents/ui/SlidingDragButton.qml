@@ -20,8 +20,9 @@
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.qtextracomponents 0.1
 
- MobileComponents.MouseEventListener {
+ MouseEventListener {
     id: panelDragButton
 
     property int startY

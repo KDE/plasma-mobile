@@ -64,6 +64,7 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.deviceshell 0.1 as DeviceShell
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.qtextracomponents 0.1
 
 Item {
     id: homeScreen
@@ -173,7 +174,7 @@ Item {
     }
 
 
-    MobileComponents.MouseEventListener {
+    MouseEventListener {
         id: mainSlot;
         x: 0;
         y: 0;

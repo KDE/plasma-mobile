@@ -19,6 +19,7 @@
 
 import QtQuick 1.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.qtextracomponents 0.1
 
 Item {
     id: delegateItem
@@ -85,7 +86,7 @@ Item {
     }
 
     //FIXME: this mess is due to mousearea not having screen coordinates
-    MobileComponents.MouseEventListener {
+    MouseEventListener {
         anchors.fill: parent
         MouseArea {
             anchors.fill: parent
