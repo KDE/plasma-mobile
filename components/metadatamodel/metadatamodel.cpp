@@ -390,6 +390,7 @@ void MetadataModel::doQuery()
     m_pagesForClient.clear();
     m_validIndexForPage.clear();
     m_queryClientsHistory.clear();
+    m_runningClients = 0;
     m_countQueryClient = new Nepomuk::Query::QueryServiceClient(this);
 
     connect(m_countQueryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
