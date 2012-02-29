@@ -35,8 +35,8 @@ MobileComponents.IconGrid {
                 imagePath: "widgets/viewitem"
                 prefix: "selected+hover"
                 opacity: 0
-                width: 130
-                height: 120
+                width: resultsGrid.delegateWidth
+                height: resultsGrid.delegateHeight
                 Behavior on opacity {
                     NumberAnimation {duration: 250}
                 }

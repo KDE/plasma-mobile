@@ -106,4 +106,4 @@ TabBoxAlternative=false
 
 
 [Effect-BoxSwitch]
-TabBox=true
+TabBox=false
