@@ -65,11 +65,15 @@ PlasmaCore.FrameSvgItem {
         onPinchUpdated: {
             var globalPoint1 = mapToItem(main, pinch.point1.x, pinch.point1.y)
             var globalPoint2 = mapToItem(main, pinch.point2.x, pinch.point2.y)
+
             itemGroup.x -= (pinch.startPoint2.x > pinch.startPoint1.x) ? globalLastPoint1.x - globalPoint1.x : globalLastPoint2.x - globalPoint2.x
             itemGroup.y -= (pinch.startPoint2.y > pinch.startPoint1.y) ? globalLastPoint1.y - globalPoint1.y : globalLastPoint2.y - globalPoint2.y
 
-            itemGroup.width = Math.max(itemGroup.minimumWidth, itemGroup.width - (pinch.startPoint2.x>pinch.startPoint1.x ? 1 : -1)*((globalPoint1.x - globalPoint2.x) - (globalLastPoint1.x - globalLastPoint2.x)))
-            itemGroup.height = Math.max(itemGroup.minimumHeight, itemGroup.height - (pinch.startPoint2.y>pinch.startPoint1.y ? 1 : -1)*((globalPoint1.y - globalPoint2.y) - (globalLastPoint1.y - globalLastPoint2.y)))
+            //this happen when there is only one point, don't resize
+            if (globalPoint1.x != globalPoint2.x) {
+                itemGroup.width = Math.max(itemGroup.minimumWidth, itemGroup.width - (pinch.startPoint2.x>pinch.startPoint1.x ? 1 : -1)*((globalPoint1.x - globalPoint2.x) - (globalLastPoint1.x - globalLastPoint2.x)))
+                itemGroup.height = Math.max(itemGroup.minimumHeight, itemGroup.height - (pinch.startPoint2.y>pinch.startPoint1.y ? 1 : -1)*((globalPoint1.y - globalPoint2.y) - (globalLastPoint1.y - globalLastPoint2.y)))
+            }
 
             globalLastPoint1 = globalPoint1
             globalLastPoint2 = globalPoint2
