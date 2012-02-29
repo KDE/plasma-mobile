@@ -1,5 +1,5 @@
 [$Version]
-update_info=kwin_focus2.upd:kwin_focus2,kwin_on_off.upd:kwin_on_off,kwin_focus1.upd:kwin_focus1,kwin.upd:kde3.0r1,kwin.upd:kde3.2Xinerama,kwin3_plugin.upd:kde3.2
+update_info=kwin_update_tabbox_qml_settings.upd:kwin_update_tabbox_qml_settings,kwin_update_tabbox_settings.upd,kwin_update_tabbox_settings,kwin_focus2.upd:kwin_focus2,kwin_on_off.upd:kwin_on_off,kwin_focus1.upd:kwin_focus1,kwin.upd:kde3.0r1,kwin.upd:kde3.2Xinerama,kwin3_plugin.upd:kde3.2
 
 [Compositing]
 AnimationSpeed=3
