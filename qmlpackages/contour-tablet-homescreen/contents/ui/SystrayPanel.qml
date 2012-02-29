@@ -22,7 +22,9 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-Item {
+Image {
+    source: "image://appbackgrounds/standard"
+    fillMode: Image.Tile
     id: systrayPanel
     state: "Hidden"
     width: Math.max(800, homeScreen.width)
@@ -38,7 +40,12 @@ Item {
 
     PlasmaCore.FrameSvgItem {
         id: background
-        anchors.fill:parent
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: systrayContainer.height + margins.bottom
         imagePath: "widgets/panel-background"
         enabledBorders: "BottomBorder"
     }
@@ -95,7 +102,7 @@ Item {
                 }
                 height: parent.height - (itemColumn.spacing * 3) - systrayContainer.height - windowListContainer.height - 2
                 Image {
-                    source: homeScreenPackage.filePath("images", "shadow-bottom.png")
+                    source: "image://appbackgrounds/shadow-bottom"
                     fillMode: Image.StretchHorizontally
                     height: sourceSize.height
                     z: 800
