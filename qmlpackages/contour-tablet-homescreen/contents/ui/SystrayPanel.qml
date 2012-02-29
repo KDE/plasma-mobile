@@ -102,14 +102,14 @@ Image {
                 }
                 height: parent.height - (itemColumn.spacing * 3) - systrayContainer.height - windowListContainer.height - 2
                 Image {
-                    source: "image://appbackgrounds/shadow-bottom"
+                    source: "image://appbackgrounds/shadow-top"
                     fillMode: Image.StretchHorizontally
                     height: sourceSize.height
                     z: 800
                     anchors {
                         left: parent.left
                         right: parent.right
-                        top: parent.bottom
+                        bottom: parent.bottom
                         bottomMargin: -1
                     }
                 }
