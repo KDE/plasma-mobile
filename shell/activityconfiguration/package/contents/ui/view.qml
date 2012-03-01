@@ -23,7 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-MobileComponents.Sheet {
+PlasmaComponents.Sheet {
     id: main
     signal closeRequested
 
@@ -38,7 +38,11 @@ MobileComponents.Sheet {
     rejectButtonText: i18n("Close")
     acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
 
-    Component.onCompleted: open()
+    Timer {
+        running: true
+        interval: 100
+        onTriggered: open()
+    }
 
     QtObject {
         id: internal
