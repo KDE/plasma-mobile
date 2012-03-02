@@ -31,9 +31,6 @@ Item {
         id: toolsColumn
         spacing: 4
 
-        TypeFilter { }
-
-
         PlasmaComponents.Label {
             text: "<b>"+i18n("Rating")+"</b>"
         }
@@ -43,6 +40,8 @@ Item {
             onScoreChanged: metadataModel.minimumRating = score
         }
 
+
+        TypeFilter { }
 
 
 
