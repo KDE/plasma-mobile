@@ -56,23 +56,11 @@
 #include <KWindowSystem>
 #include <KDebug>
 #include <klocalizedstring.h>
-#include <kactivities/consumer.h>
 
 #include <soprano/vocabulary.h>
 #include <Nepomuk/Resource>
 #include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
-
-#include <nepomuk/simpleresource.h>
-#include <nepomuk/simpleresourcegraph.h>
-#include <nepomuk/storeresourcesjob.h>
-#include <nepomuk/datamanagement.h>
-
-#include <Nepomuk/Vocabulary/NDO>
-#include <Nepomuk/Vocabulary/NFO>
-#include <Nepomuk/Vocabulary/NIE>
-#include <Nepomuk/Vocabulary/NUAO>
-
 
 QT_BEGIN_NAMESPACE
 
@@ -1208,8 +1196,8 @@ QDeclarativeWebPage::QDeclarativeWebPage(KDeclarativeWebView* parent) :
     KWebPage(parent, KWalletIntegration)
 {
     connect(this, SIGNAL(unsupportedContent(QNetworkReply *)), this, SLOT(handleUnsupportedContent(QNetworkReply *)));
-    //TODO: move this in the webbrowser implementation
-    m_activityConsumer = new KActivities::Consumer(this);
+//     //TODO: move this in the webbrowser implementation
+    m_nepomukHelper = new NepomukHelper(this);
 }
 
 QDeclarativeWebPage::~QDeclarativeWebPage()
@@ -1319,75 +1307,18 @@ void QDeclarativeWebPage::downloadFinished(KJob *job)
     KIO::CopyJob *cj = qobject_cast<KIO::CopyJob*>(job);
     if (cj && job->error() == KJob::NoError) {
 
-        // Create a FileDataObject Nepomuk Resource ...
-        //Nepomuk::Resource fileRes(cj->destUrl());
-        //fileRes.addType(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject"));
-
-        // ... tag it as "Download"
-        //fileRes.addTag(Nepomuk::Tag("Download"));
-
-        // ... add source URLs, there might be more than one, but common case is just one
-        //QString u = cj->destUrl().toEncoded();
         KUrl localUrl = cj->destUrl();
         KUrl remoteUrl;
         foreach (const KUrl &_u, cj->srcUrls()) {
             remoteUrl = _u;
         }
-        //fileRes.setDescription(i18n("Downloaded from %1", u));
+        // add file to current activity, store remote url as metadata
+        m_nepomukHelper->storeDownloadMetaData(remoteUrl, localUrl);
 
-        Nepomuk::SimpleResource remoteFile;
-        remoteFile.addType(Nepomuk::Vocabulary::NFO::RemoteDataObject());
-        remoteFile.addType(Nepomuk::Vocabulary::NFO::WebDataObject());
-        remoteFile.addProperty(Nepomuk::Vocabulary::NIE::url(), localUrl);
-
-        Nepomuk::SimpleResource file(localUrl);
-        file.addType(Nepomuk::Vocabulary::NFO::FileDataObject());
-        file.addProperty(Nepomuk::Vocabulary::NIE::url(), localUrl);
-        file.addProperty(Nepomuk::Vocabulary::NDO::copiedFrom(), remoteFile);
-
-        Nepomuk::SimpleResource website;
-        website.addType(Nepomuk::Vocabulary::NFO::HtmlDocument());
-        website.addType(Nepomuk::Vocabulary::NFO::WebDataObject());
-        website.addProperty(Nepomuk::Vocabulary::NIE::url(), remoteUrl);
-
-        QDateTime dt = QDateTime::currentDateTime();
-        Nepomuk::SimpleResource event;
-        event.addType(Nepomuk::Vocabulary::NDO::DownloadEvent());
-        event.addProperty(Nepomuk::Vocabulary::NUAO::start(), dt);
-        event.addProperty(Nepomuk::Vocabulary::NUAO::end(), dt);
-        event.addProperty(Nepomuk::Vocabulary::NUAO::involves(), file);
-        event.addProperty(Nepomuk::Vocabulary::NDO::referrer(), website);
-
-        kDebug() << "Nepomuk stuff done: " << localUrl << "  " << remoteUrl;
-
-        Nepomuk::SimpleResourceGraph graph;
-        graph << remoteFile << file << website << event;
-
-        KJob* job = Nepomuk::storeResources(graph);
-        connect(job, SIGNAL(finished(KJob*)), this, SLOT(storeResourcesFinished(KJob*)));
-
-
-
-        // And link it to the currently active Activity
-        QString activityId = m_activityConsumer->currentActivity();
-        KActivities::Info aInfo(activityId);
-        aInfo.linkResource(cj->destUrl());
     } else {
         // TODO: handle download errors.
         kError() << "Error downloading file: " << job->errorString();
     }
-}
-
-void QDeclarativeWebPage::storeResourcesFinished(KJob* job)
-{
-    if( job->error() ) {
-        kWarning() << job->errorString();
-       // exit(1);
-        return;
-    }
-
-    kDebug() << "Sucessfully pushed the data";
-    //exit(0);
 }
 
 void QDeclarativeWebPage::downloadRequest(const QNetworkRequest &request)

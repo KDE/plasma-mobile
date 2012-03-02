@@ -32,6 +32,7 @@
 #include <KIO/MetaData>
 
 #include "kwebpage.h"
+#include "nepomukhelper.h"
 
 QT_BEGIN_HEADER
 
@@ -69,13 +70,13 @@ protected Q_SLOTS:
     void downloadRequest(const QNetworkRequest &request);
     void downloadUrl(const KUrl &url);
     void downloadFinished(KJob *job);
-    void storeResourcesFinished(KJob* job);
+
 private:
     bool downloadResource(const KUrl& srcUrl, const QString& suggestedName = QString(),
                           QWidget* parent = 0, const KIO::MetaData& metaData = KIO::MetaData());
     QString errorPage(QNetworkReply *reply);
     KDeclarativeWebView *viewItem();
-    KActivities::Consumer *m_activityConsumer;
+    NepomukHelper *m_nepomukHelper;
 };
 
 class GraphicsWebView : public QGraphicsWebView {
