@@ -53,7 +53,6 @@ NepomukHelper::NepomukHelper(QObject *parent)
 
 }
 
-
 NepomukHelper::~NepomukHelper()
 {
     delete d;
@@ -89,7 +88,7 @@ void NepomukHelper::storeDownloadMetaData(const KUrl &remoteUrl, const KUrl &loc
     event.addProperty(Nepomuk::Vocabulary::NUAO::involves(), file);
     event.addProperty(Nepomuk::Vocabulary::NDO::referrer(), website);
 
-    kDebug() << "storing Nepomuk meta: " << d->remoteUrl << "  " << d->localUrl;
+    //kDebug() << "storing Nepomuk meta: " << d->remoteUrl << "  " << d->localUrl;
     // Store these resources
     Nepomuk::SimpleResourceGraph graph;
     graph << remoteFile << file << website << event;
@@ -109,7 +108,7 @@ void NepomukHelper::storeResourcesFinished(KJob *job)
         return;
     }
 
-    kDebug() << "Sucessfully pushed the data";
+    //kDebug() << "Sucessfully pushed the data";
 }
 
 #include "nepomukhelper.moc"
