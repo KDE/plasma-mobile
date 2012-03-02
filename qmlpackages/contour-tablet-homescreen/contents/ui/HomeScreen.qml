@@ -79,7 +79,9 @@ Item {
         parent: homeScreen
         anchors.fill: parent
         anchors.topMargin: 38
-        anchors.bottomMargin: 12
+        anchors.bottomMargin: 4
+        anchors.leftMargin: 32
+        anchors.rightMargin: 32
 
         //those properties will define "structs" for reserved screen of the panels
         property int leftReserved: 0

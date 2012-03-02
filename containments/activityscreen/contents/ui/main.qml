@@ -41,7 +41,7 @@ Item {
 
     property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
 
-    property int iconWidth: theme.defaultFont.mSize.width * 15
+    property int iconWidth: theme.defaultFont.mSize.width * 14
     property int iconHeight: theme.defaultIconSize + theme.defaultFont.mSize.height
     onIconHeightChanged: updateGridSize()
 
@@ -153,7 +153,11 @@ Item {
 
     Flickable {
         id: mainFlickable
-        anchors.fill: main
+        anchors {
+            fill: main
+            leftMargin: availScreenRect.x
+            rightMargin: parent.width - availScreenRect.x - availScreenRect.width
+        }
         interactive: contentItem.height>mainFlickable.height
         PropertyAnimation {
             id: contentScrollTo0Animation
@@ -285,7 +289,7 @@ Item {
             Item {
                 id: resultsFlow
                 //height: Math.min(300, childrenRect.height)
-                width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
+                width: Math.floor(parent.width/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
                 height: childrenRect.y+childrenRect.height
                 z: 900
 
