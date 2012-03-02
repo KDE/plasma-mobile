@@ -39,6 +39,18 @@ set(active-webbrowser_SRCS
     #adblock/adblockwidget.cpp
 )
 
+soprano_add_ontology( webbrowser_SRCS
+  "${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/nuao.trig"
+  "NUAO"
+  "Nepomuk::Vocabulary"
+  "trig")
+
+soprano_add_ontology( SRCS
+  "${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/ndo.trig"
+  "NDO"
+  "Nepomuk::Vocabulary"
+  "trig")
+
 #KDE4_ADD_UI_FILES( active-webbrowser_SRCS
 #    adblock/settings_adblock.ui
 #)
@@ -58,6 +70,7 @@ target_link_libraries(active-webbrowser
     ${KACTIVITIES_LIBRARY}
     kdeclarative
     ontologies
+    nepomukdatamanagement # enable if we want to ue SimpleResource instead of Resource
 )
 
 install(FILES infopage.html DESTINATION ${DATA_INSTALL_DIR}/active-webbrowser )
