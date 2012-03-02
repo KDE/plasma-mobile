@@ -1338,12 +1338,12 @@ void QDeclarativeWebPage::downloadFinished(KJob *job)
         Nepomuk::SimpleResource remoteFile;
         remoteFile.addType(Nepomuk::Vocabulary::NFO::RemoteDataObject());
         remoteFile.addType(Nepomuk::Vocabulary::NFO::WebDataObject());
-        //remoteFile.addProperty(Nepomuk::Vocabulary::NIE::url(), localUrl);
+        remoteFile.addProperty(Nepomuk::Vocabulary::NIE::url(), localUrl);
 
         Nepomuk::SimpleResource file(localUrl);
         file.addType(Nepomuk::Vocabulary::NFO::FileDataObject());
         file.addProperty(Nepomuk::Vocabulary::NIE::url(), localUrl);
-        file.addProperty(Nepomuk::Vocabulary::NDO::copiedFrom(), remoteUrl);
+        file.addProperty(Nepomuk::Vocabulary::NDO::copiedFrom(), remoteFile);
 
         Nepomuk::SimpleResource website;
         website.addType(Nepomuk::Vocabulary::NFO::HtmlDocument());
