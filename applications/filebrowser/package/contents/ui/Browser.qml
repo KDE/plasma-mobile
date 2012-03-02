@@ -23,6 +23,7 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
+import org.kde.draganddrop 1.0
 import org.kde.qtextracomponents 0.1
 import org.kde.dirmodel 0.1
 
@@ -170,28 +171,55 @@ PlasmaComponents.Page {
 
         model: metadataModel
 
-        delegateWidth: 130
-        delegateHeight: 120
+        /*delegateWidth: 130
+        delegateHeight: 120*/
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
             className: model["className"] ? model["className"] : ""
             genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
-            width: 130
-            height: 120
+
+            width: resultsGrid.delegateWidth
+            height: resultsGrid.delegateHeight
             infoLabelVisible: false
             property string label: model["label"] ? model["label"] : (model["display"] ? model["display"] : "")
 
-            onPressAndHold: {
-                resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
-                resourceInstance.title = model["label"]
-            }
+            DragArea {
+                anchors.fill: parent
+                startDragDistance: 50
+                delegateImage: thumbnail !== undefined ? thumbnail : QIcon(icon)
+                mimeData {
+                    source: parent
+                    url: model.url
+                }
 
-            onClicked: {
-                if (mimeType == "inode/directory") {
-                    dirModel.url = model["url"]
-                    resultsGrid.model = dirModel
-                } else if (!mainStack.busy) {
-                    Qt.openUrlExternally(model["url"])
+                MouseArea {
+                    anchors.fill: parent
+                    drag.target: resourceDelegate
+                    property int startX
+                    property int startY
+
+                    onPressed: {
+                        startX = resourceDelegate.x
+                        startY = resourceDelegate.y
+                        resourceDelegate.z = 900
+                    }
+                    onReleased: resourceDelegate.z = 0
+                    onCanceled: {
+                        resourceDelegate.x = startX
+                        resourceDelegate.y = startY
+                    }
+                    onPressAndHold: {
+                        resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
+                        resourceInstance.title = model["label"]
+                    }
+                    onClicked: {
+                        if (mimeType == "inode/directory") {
+                            dirModel.url = model["url"]
+                            resultsGrid.model = dirModel
+                        } else if (!mainStack.busy) {
+                            Qt.openUrlExternally(model["url"])
+                        }
+                    }
                 }
             }
         }

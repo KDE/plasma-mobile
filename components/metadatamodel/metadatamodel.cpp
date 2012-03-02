@@ -82,6 +82,8 @@ MetadataModel::MetadataModel(QObject *parent)
 
 
     QHash<int, QByteArray> roleNames;
+    roleNames[Qt::DisplayRole] = "display";
+    roleNames[Qt::DecorationRole] = "decoration";
     roleNames[Label] = "label";
     roleNames[Description] = "description";
     roleNames[Types] = "types";
