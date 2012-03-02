@@ -76,12 +76,21 @@ Image {
         id: mainStack
         clip: false
         toolBar: toolBar
-        initialPage: Qt.createComponent("Browser.qml")
+        //initialPage: Qt.createComponent("Browser.qml")
         anchors {
             right: sideBar.left
             top: parent.top
             bottom: parent.bottom
             left: parent.left
+        }
+    }
+
+    Timer {
+        interval: 1000
+        running: true
+        onTriggered: {
+            mainStack.push(Qt.createComponent("Browser.qml"))
+            sidebarStack.push(Qt.createComponent("CategorySidebar.qml"))
         }
     }
 
@@ -110,7 +119,7 @@ Image {
 
         PlasmaComponents.PageStack {
             id: sidebarStack
-            initialPage: Qt.createComponent("CategorySidebar.qml")
+            //initialPage: Qt.createComponent("CategorySidebar.qml")
             toolBar: sidebarToolbar
             anchors {
                 fill: parent
