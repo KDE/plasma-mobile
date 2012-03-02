@@ -221,8 +221,10 @@ PlasmaComponents.Page {
                         if (startX < 0) {
                             return
                         }
-                        resourceDelegate.x = startX
-                        resourceDelegate.y = startY
+                        positionAnim.target = resourceDelegate
+                        positionAnim.x = startX
+                        positionAnim.y = startY
+                        positionAnim.running = true
                         startX = -1
                         startY = -1
                     }
@@ -231,8 +233,11 @@ PlasmaComponents.Page {
                         if (startX < 0) {
                             return
                         }
-                        resourceDelegate.x = startX
-                        resourceDelegate.y = startY
+
+                        positionAnim.target = resourceDelegate
+                        positionAnim.x = startX
+                        positionAnim.y = startY
+                        positionAnim.running = true
                         startX = -1
                         startY = -1
                     }
@@ -248,9 +253,30 @@ PlasmaComponents.Page {
                             Qt.openUrlExternally(model["url"])
                         }
                     }
-                    
                 }
             }
+        }
+    }
+    ParallelAnimation {
+        id: positionAnim
+        property Item target
+        property int x
+        property int y
+        NumberAnimation {
+            target: positionAnim.target
+            to: positionAnim.y
+            properties: "y"
+
+            duration: 250
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: positionAnim.target
+            to: positionAnim.x
+            properties: "x"
+
+            duration: 250
+            easing.type: Easing.InOutQuad
         }
     }
 }
