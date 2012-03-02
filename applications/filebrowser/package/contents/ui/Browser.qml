@@ -171,8 +171,6 @@ PlasmaComponents.Page {
 
         model: metadataModel
 
-        /*delegateWidth: 130
-        delegateHeight: 120*/
         delegate: MobileComponents.ResourceDelegate {
             id: resourceDelegate
             className: model["className"] ? model["className"] : ""
@@ -185,7 +183,7 @@ PlasmaComponents.Page {
 
             DragArea {
                 anchors.fill: parent
-                startDragDistance: 50
+                startDragDistance: 100
                 delegateImage: thumbnail !== undefined ? thumbnail : QIcon(icon)
                 mimeData {
                     source: parent
@@ -194,19 +192,49 @@ PlasmaComponents.Page {
 
                 MouseArea {
                     anchors.fill: parent
-                    drag.target: resourceDelegate
+                    //drag.target: resourceDelegate
                     property int startX
                     property int startY
+                    property int lastX
+                    property int lastY
 
                     onPressed: {
                         startX = resourceDelegate.x
                         startY = resourceDelegate.y
+                        var pos = mapToItem(resultsGrid, mouse.x, mouse.y)
+                        lastX = pos.x
+                        lastY = pos.y
                         resourceDelegate.z = 900
                     }
-                    onReleased: resourceDelegate.z = 0
-                    onCanceled: {
+                    onPositionChanged: {
+                        if (startX < 0) {
+                            return
+                        }
+                        var pos = mapToItem(resultsGrid, mouse.x, mouse.y)
+                        resourceDelegate.x += (pos.x - lastX)
+                        resourceDelegate.y += (pos.y - lastY)
+                        lastX = pos.x
+                        lastY = pos.y
+                    }
+                    onReleased: {
+                        resourceDelegate.z = 0
+                        if (startX < 0) {
+                            return
+                        }
                         resourceDelegate.x = startX
                         resourceDelegate.y = startY
+                        startX = -1
+                        startY = -1
+                    }
+                    onCanceled: {
+                        resourceDelegate.z = 0
+                        if (startX < 0) {
+                            return
+                        }
+                        resourceDelegate.x = startX
+                        resourceDelegate.y = startY
+                        startX = -1
+                        startY = -1
                     }
                     onPressAndHold: {
                         resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
@@ -220,6 +248,7 @@ PlasmaComponents.Page {
                             Qt.openUrlExternally(model["url"])
                         }
                     }
+                    
                 }
             }
         }
