@@ -481,6 +481,7 @@ void MetadataModel::newEntriesDelayed()
         return;
     }
 
+    m_elapsedTime.start();
     QHash<int, QList<Nepomuk::Resource> >::const_iterator i;
     for (i = m_resourcesToInsert.constBegin(); i != m_resourcesToInsert.constEnd(); ++i) {
         const QList<Nepomuk::Resource> resourcesToInsert = i.value();
@@ -534,6 +535,7 @@ void MetadataModel::newEntriesDelayed()
         emit dataChanged(createIndex(pageStart + startOffset, 0),
                          createIndex(pageStart + startOffset + resourcesToInsert.count()-1, 0));
     }
+    kDebug() << "Elapsed time populating the model" << m_elapsedTime.elapsed();
     m_resourcesToInsert.clear();
 }
 

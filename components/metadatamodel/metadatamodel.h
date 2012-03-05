@@ -165,6 +165,7 @@ private:
     QHash<int, QList<Nepomuk::Resource> > m_resourcesToInsert;
     QHash<QUrl, int> m_uriToResourceIndex;
     QTimer *m_newEntriesTimer;
+    QTime m_elapsedTime;
 
     //pieces to build m_query
     QString m_queryString;
