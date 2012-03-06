@@ -38,12 +38,21 @@ import org.kde.qtextracomponents 0.1
         imagePath: "icons/start"
     }
 
+    PlasmaCore.DataSource {
+        id: deviceCapabilitiesSource
+        engine: "org.kde.devicecapabilities"
+        interval: 0
+        connectedSources: ["Input"]
+    }
+
     PlasmaCore.SvgItem {
+        property bool shown: !deviceCapabilitiesSource.data["Input"]["hasHomeButton"]
         id: iconItem
         svg: iconSvg
         elementId: "start-here"
-        width: height
+        width: shown ? height : 0
         height: theme.mediumIconSize
+        visible: shown
         anchors {
             right: parent.right
             bottom:parent.bottom

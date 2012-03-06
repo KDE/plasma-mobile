@@ -43,6 +43,9 @@ QStringList CapabilitiesEngine::sources() const
 bool CapabilitiesEngine::sourceRequestEvent(const QString &name)
 {
     if (name == "Input") {
+        kDebug() << "##############################################################";
+        kDebug() << "Device Capabilities";
+        kDebug() << "##############################################################";
         KSharedConfigPtr ptr = KSharedConfig::openConfig("device-capabilitiesrc");
         KConfigGroup config = KConfigGroup(ptr, "Input");
         bool hasHomeButton = config.readEntry("hasHomeButton", false);
