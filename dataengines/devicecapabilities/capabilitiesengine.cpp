@@ -43,7 +43,17 @@ QStringList CapabilitiesEngine::sources() const
 bool CapabilitiesEngine::sourceRequestEvent(const QString &name)
 {
     if (name == "Input") {
-        setData(name, Plasma::DataEngine::Data());
+        KSharedConfigPtr ptr = KSharedConfig::openConfig("device-capabilitiesrc");
+        KConfigGroup config = KConfigGroup(ptr, "Input");
+        bool hasHomeButton = config.readEntry("hasHomeButton", false);
+        setData(name, "hasHomeButton", hasHomeButton);
+        bool hasBackButton = config.readEntry("hasBackButton", false);
+        setData(name, "hasBackButton", hasBackButton);
+        bool hasMenuButton = config.readEntry("hasMenuButton", false);
+        setData(name, "hasMenuButton", hasMenuButton);
+        bool hasSearchButton = config.readEntry("hasSearchButton", false);
+        setData(name, "hasSearchButton", hasSearchButton);
+
     } else if (name == "PowerManagement") {
         setData(name, Plasma::DataEngine::Data());
     } else if (name == "Screen") {
