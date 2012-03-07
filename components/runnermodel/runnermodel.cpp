@@ -70,6 +70,9 @@ void RunnerModel::setRunners(const QStringList &allowedRunners)
 {
     if (m_manager) {
         m_manager->setAllowedRunners(allowedRunners);
+
+        //automagically enter single runner mode if there's only 1 allowed runner
+        m_manager->setSingleMode(allowedRunners.count() == 1);
         emit runnersChanged();
     } else {
         m_pendingRunnersList = allowedRunners;
@@ -146,11 +149,11 @@ void RunnerModel::startQuery()
     //kDebug() << "booooooo yah!!!!!!!!!!!!!" << query;
     createManager();
 
-    if (m_pendingQuery != m_manager->query()) {
+//    if (m_pendingQuery != m_manager->query()) {
         //kDebug() << "running query" << query;
         m_manager->launchQuery(m_pendingQuery);
         emit queryChanged();
-    }
+ //   }
 }
 
 void RunnerModel::createManager()
@@ -162,6 +165,7 @@ void RunnerModel::createManager()
 
         if (!m_pendingRunnersList.isEmpty()) {
             m_manager->setAllowedRunners(m_pendingRunnersList);
+            m_manager->setSingleMode(m_pendingRunnersList.count() == 1);
             m_pendingRunnersList.clear();
         }
         //connect(m_manager, SIGNAL(queryFinished()), this, SLOT(queryFinished()));
