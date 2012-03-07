@@ -303,8 +303,7 @@ void MetadataModel::doQuery()
             }
 
             //FIXME: Contains should work, but doesn't match for file names
-            Nepomuk::Query::ComparisonTerm term(propertyUrl(key), Nepomuk::Query::LiteralTerm(parameter), Nepomuk::Query::ComparisonTerm::Regexp);
-
+            Nepomuk::Query::ComparisonTerm term(propertyUrl(key), Nepomuk::Query::LiteralTerm(parameter));
             if (negation) {
                 rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
             } else {
