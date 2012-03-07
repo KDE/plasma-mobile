@@ -174,7 +174,7 @@ Item {
         MouseArea {
             id: contentItem
             width: mainFlickable.width
-            height: childrenRect.y+childrenRect.height+availScreenRect.y+20
+            height: childrenRect.y+childrenRect.height
 
             onClicked: {
                 resourceInstance.uri = ""

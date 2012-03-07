@@ -44,6 +44,7 @@
 
 #include <KActivities/Info>
 #include <KDirWatch>
+#include <KFileDialog>
 #include <KUrl>
 #include <KGlobalSettings>
 #include <KIO/Job>
@@ -1206,11 +1207,9 @@ QDeclarativeWebPage::~QDeclarativeWebPage()
 
 QString QDeclarativeWebPage::chooseFile(QWebFrame* originatingFrame, const QString& oldFile)
 {
-    // Not supported (it's modal)
-    // FIXME: implement filechooser
     Q_UNUSED(originatingFrame)
     Q_UNUSED(oldFile)
-    return oldFile;
+    return KFileDialog::getOpenFileName();
 }
 
 /*!

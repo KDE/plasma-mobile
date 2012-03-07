@@ -147,6 +147,7 @@ Item {
                 id: confirmationDialogComponent
                 ConfirmationDialog {
                     enabled: true
+                    z: 700
                     transformOrigin: Item.BottomLeft
                     question: i18n("Do you want to permanently delete activity '%1'?", activityName.text)
                     onAccepted: {

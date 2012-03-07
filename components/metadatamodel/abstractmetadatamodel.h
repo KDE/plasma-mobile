@@ -26,6 +26,21 @@
 #include <QUrl>
 #include <QDeclarativePropertyMap>
 
+#include "nso.h"
+#include <Nepomuk/Vocabulary/NIE>
+#include <Nepomuk/Vocabulary/NFO>
+#include <Nepomuk/Vocabulary/NCO>
+#include <Nepomuk/Vocabulary/NMO>
+#include <Nepomuk/Vocabulary/NDO>
+#include <Nepomuk/Vocabulary/NCAL>
+#include <Nepomuk/Vocabulary/NEXIF>
+#include <Nepomuk/Vocabulary/NUAO>
+#include <Nepomuk/Vocabulary/PIMO>
+#include <Nepomuk/Vocabulary/NMM>
+#include <Nepomuk/Vocabulary/TMO>
+#include <Soprano/Vocabulary/RDF>
+#include <Soprano/Vocabulary/RDFS>
+#include <Soprano/Vocabulary/NRL>
 
 namespace Nepomuk {
     class ResourceWatcher;
@@ -137,48 +152,44 @@ protected:
      */
     static inline QUrl propertyUrl(const QString &property)
     {
-        const QString prop = QString(property).split(":").last();
-        if (property.startsWith("rdf:")) {
-            return QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#"+prop);
-        } else if (property.startsWith("rdf-schema:")) {
-            return QUrl("http://www.w3.org/2000/01/rdf-schema#"+prop);
-        } else if (property.startsWith("nie:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#"+prop);
-        } else if (property.startsWith("nao:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#"+prop);
-        } else if (property.startsWith("nco:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+prop);
-        } else if (property.startsWith("nfo:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+prop);
-        } else if (property.startsWith("ncal:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#"+prop);
-        } else if (property.startsWith("ndo:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2010/04/30/ndo#"+prop);
-        } else if (property.startsWith("nexif:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/05/10/nexif#"+prop);
-        } else if (property.startsWith("nid3:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/05/10/nid3#"+prop);
-        } else if (property.startsWith("nmm:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2009/02/19/nmm#"+prop);
-        } else if (property.startsWith("nmo:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nmo#"+prop);
-        } else if (property.startsWith("nrl:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nrl#"+prop);
-        } else if (property.startsWith("nso:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2009/11/08/nso#"+prop);
-        } else if (property.startsWith("nuao:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#"+prop);
-        } else if (property.startsWith("pimo:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/11/01/pimo#"+prop);
-        } else if (property.startsWith("tmo:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2008/05/20/tmo#"+prop);
-        } else {
-            return QUrl();
+        static QHash<QString, QUrl> namespaceResolution;
+        if( namespaceResolution.isEmpty() ) {
+            using namespace Nepomuk::Vocabulary;
+            using namespace Soprano::Vocabulary;
+
+            namespaceResolution.insert(QLatin1String("rdf"), RDF::rdfNamespace());
+            namespaceResolution.insert(QLatin1String("rdf-schema"), RDFS::rdfsNamespace());
+            namespaceResolution.insert(QLatin1String("nie"), NIE::nieNamespace());
+            namespaceResolution.insert(QLatin1String("nfo"), NFO::nfoNamespace());
+            namespaceResolution.insert(QLatin1String("nco"), NCO::ncoNamespace());
+            namespaceResolution.insert(QLatin1String("ncal"), NCAL::ncalNamespace());
+            namespaceResolution.insert(QLatin1String("ndo"), NDO::ndoNamespace());
+            namespaceResolution.insert(QLatin1String("nmm"), NMM::nmmNamespace());
+            namespaceResolution.insert(QLatin1String("nmo"), NMO::nmoNamespace());
+            namespaceResolution.insert(QLatin1String("nmo"), NMO::nmoNamespace());
+            namespaceResolution.insert(QLatin1String("nrl"), NRL::nrlNamespace());
+            namespaceResolution.insert(QLatin1String("nso"), NSO::nsoNamespace());
+            namespaceResolution.insert(QLatin1String("nrl"), NRL::nrlNamespace());
+            namespaceResolution.insert(QLatin1String("nuao"), NUAO::nuaoNamespace());
+            namespaceResolution.insert(QLatin1String("tmo"), TMO::tmoNamespace());
+            namespaceResolution.insert(QLatin1String("pimo"), PIMO::pimoNamespace());
+            namespaceResolution.insert(QLatin1String("nexif"), NEXIF::nexifNamespace());
+            //namespaceResolution.insert(QLatin1String("nid3"), NID3::nid3Namespace());
         }
+        int colonPosition = property.indexOf(QChar::fromAscii(':'));
+        if( colonPosition == -1 )
+            return QUrl();
+
+        QHash<QString, QUrl>::const_iterator it = namespaceResolution.constFind( property.mid(0, colonPosition) );
+        if( it == namespaceResolution.constEnd() )
+            return QUrl();
+
+        return it.value().toString() + property.mid(colonPosition+1);
     }
 
     static inline QString propertyShortName(const QUrl &url)
     {
+        //vHanda: not always, again store all the ontologies and use a hash map
         //http://www.semanticdesktop.org/ontologies/2007/03/22/nfo will become nfo
         return url.path().split("/").last() + ":" + url.fragment();
     }

@@ -30,6 +30,12 @@ soprano_add_ontology(
     "KEXT" "Nepomuk::Vocabulary" "trig"
 )
 
+soprano_add_ontology(
+    datamodels_SRCS
+    ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/nso.trig
+    "NSO" "Nepomuk::Vocabulary" "trig"
+)
+
 nepomuk_add_ontology_classes (datamodels_SRCS
                               ONTOLOGIES
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nie.trig
