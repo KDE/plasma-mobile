@@ -36,22 +36,22 @@
 #include <soprano/vocabulary.h>
 
 #include <Nepomuk/File>
+#include <Nepomuk/Tag>
+#include <Nepomuk/Variant>
+
 #include <Nepomuk/Query/AndTerm>
 #include <Nepomuk/Query/NegationTerm>
 #include <Nepomuk/Query/ResourceTerm>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
-#include <nepomuk/comparisonterm.h>
-#include <nepomuk/literalterm.h>
-#include <nepomuk/queryparser.h>
-#include <nepomuk/resourcetypeterm.h>
-#include <nepomuk/standardqueries.h>
-
-#include <nepomuk/nfo.h>
-#include <nepomuk/nie.h>
+#include <Nepomuk/Query/ComparisonTerm>
+#include <Nepomuk/Query/LiteralTerm>
+#include <Nepomuk/Query/QueryParser>
+#include <Nepomuk/Query/ResourceTypeTerm>
+#include <Nepomuk/Query/StandardQuery>
 
 #include "kext.h"
 
+using namespace Nepomuk::Vocabulary;
+using namespace Soprano::Vocabulary;
 
 MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
@@ -76,7 +76,7 @@ MetadataModel::MetadataModel(QObject *parent)
 
     m_watcher = new Nepomuk::ResourceWatcher(this);
 
-    m_watcher->addProperty(QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#numericRating"));
+    m_watcher->addProperty(NAO::numericRating());
     connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)),
             this, SLOT(propertyChanged(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)));
 
@@ -219,7 +219,7 @@ int MetadataModel::find(const QString &resourceUri)
 {
     int index = -1;
     int i = 0;
-    Nepomuk::Resource resToFind(resourceUri);
+    Nepomuk::Resource resToFind = Nepomuk::Resource::fromResourceUri(resourceUri);
 
     foreach (const Nepomuk::Resource &res, m_resources) {
         if (res == resToFind) {
@@ -464,7 +464,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
         Nepomuk::Resource resource = res.resource();
-        if (!resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).isValid()) {
+        if (!resource.property(NIE::url()).isValid()) {
             continue;
         }
         m_resourcesToInsert[page] << resource;
@@ -657,7 +657,7 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         //FIXME: a more elegant way is needed
         QString genericClassName = resource.className();
         //FIXME: most bookmarks are Document too, so Bookmark wins
-        if (resource.types().contains(QUrl::fromEncoded("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark"))) {
+        if (resource.types().contains(NFO::Bookmark())) {
             return "Bookmark";
         }
         Nepomuk::Types::Class resClass(resource.resourceType());
@@ -755,7 +755,7 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     case Rating:
         return resource.rating();
     case NumericRating:
-        return resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#numericRating")).toString();
+        return resource.property(NAO::numericRating()).toString();
     case Symbols:
         return resource.symbols();
     case ResourceUri:
@@ -763,12 +763,12 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     case ResourceType:
         return resource.resourceType();
     case MimeType:
-        return resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#mimeType")).toString();
+        return resource.property(NIE::mimeType()).toString();
     case Url: {
         if (resource.isFile() && resource.toFile().url().isLocalFile()) {
             return resource.toFile().url().prettyUrl();
         } else {
-            return resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
+            return resource.property(NIE::url()).toString();
         }
     }
     case Topics: {

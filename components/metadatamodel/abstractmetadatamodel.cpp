@@ -99,7 +99,7 @@ AbstractMetadataModel::~AbstractMetadataModel()
 
 void AbstractMetadataModel::serviceRegistered(const QString &service)
 {
-    if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
+    if (service == QLatin1String("org.kde.nepomuk.services.nepomukqueryservice")) {
         disconnect(m_queryTimer, SIGNAL(timeout()),
                 this, SLOT(doQuery()));
         connect(m_queryTimer, SIGNAL(timeout()),
