@@ -24,7 +24,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.runnermodel 0.1 as RunnerModels
 
-PlasmaComponents.Sheet {
+MobileComponents.Sheet {
     id: widgetsExplorer
     objectName: "widgetsExplorer"
     title: i18n("Add items")
@@ -93,11 +93,12 @@ PlasmaComponents.Sheet {
         interval: 0
     }
 
-    Timer {
+    Component.onCompleted: open()
+    /*Timer {
         running: true
         interval: 100
         onTriggered: open()
-    }
+    }*/
 
     content: [
         MobileComponents.ViewSearch {
