@@ -27,7 +27,6 @@
 #include <soprano/vocabulary.h>
 
 #include "bookmark.h"
-#include "kext.h"
 
 #include <kdebug.h>
 

@@ -23,6 +23,7 @@
 #include "mobcorona.h"
 #include "mobdialogmanager.h"
 #include "activity.h"
+#include "kao.h"
 
 #include <QApplication>
 #include <QDesktopWidget>
@@ -349,8 +350,8 @@ void MobCorona::checkActivities()
     foreach (const QString &id, existingActivities) {
         //ensure the activity resource exists
         //FIXME: shouldn't be done here
-        Nepomuk::Resource activityResource(id, QUrl("http://nepomuk.kde.org/ontologies/2010/11/29/kext#Activity"));
-        activityResource.setProperty(QUrl("http://nepomuk.kde.org/ontologies/2010/11/29/kext#ActivityIdentifier"), id);
+        Nepomuk::Resource activityResource(id, Nepomuk::Vocabulary::KAO::Activity());
+        activityResource.setProperty(Nepomuk::Vocabulary::KAO::activityIdentifier(), id);
         activityAdded(id);
     }
 

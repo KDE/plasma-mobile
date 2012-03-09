@@ -2,13 +2,6 @@ project(datamodels)
 
 include(KDE4Defaults)
 
-find_package(Nepomuk REQUIRED)
-find_package(Soprano)
-  macro_log_feature(Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net"
-  TRUE "${SOPRANO_MIN_VERSION}" "Soprano is needed for Nepomuk")
-
-include(SopranoAddOntology)
-add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 INCLUDE_DIRECTORIES(
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_BINARY_DIR}
@@ -24,11 +17,7 @@ set(datamodels_SRCS
     metadatausertypes.cpp
    )
 
-soprano_add_ontology(
-    datamodels_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/ontologies/kext.trig
-    "KEXT" "Nepomuk::Vocabulary" "trig"
-)
+add_kao_ontology(datamodels_SRCS)
 
 soprano_add_ontology(
     datamodels_SRCS
@@ -49,7 +38,7 @@ qt4_automoc(${datamodels_SRCS})
 
 
 kde4_add_library(datamodelsplugin SHARED ${datamodels_SRCS})
-target_link_libraries(datamodelsplugin 
+target_link_libraries(datamodelsplugin
         ${QT_QTCORE_LIBRARY}
         ${QT_QTDBUS_LIBRARY}
         ${QT_QTDECLARATIVE_LIBRARY}

@@ -48,7 +48,7 @@
 #include <Nepomuk/Query/ResourceTypeTerm>
 #include <Nepomuk/Query/StandardQuery>
 
-#include "kext.h"
+#include "kao.h"
 
 using namespace Nepomuk::Vocabulary;
 using namespace Soprano::Vocabulary;
@@ -321,7 +321,7 @@ void MetadataModel::doQuery()
             negation = true;
         }
         kDebug() << "Asking for resources of activity" << activityId();
-        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KEXT::Activity());
+        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KAO::Activity());
         Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
         term.setInverted(true);
         if (negation) {

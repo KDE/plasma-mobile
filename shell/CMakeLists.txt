@@ -1,4 +1,4 @@
-include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs 
+include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs
                     ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kworkspace)
 
 include(KDE4Defaults)
@@ -27,6 +27,8 @@ set(plasma-device_SRCS
     widgetsexplorer/kcategorizeditemsviewmodels.cpp
     widgetsexplorer/plasmaappletitemmodel.cpp
 )
+
+add_kao_ontology(plasma-device_SRCS)
 
 #set(ksmserver_xml ${KDEBASE_WORKSPACE_SOURCE_DIR}/ksmserver/org.kde.KSMServerInterface.xml)
 set(ksmserver_xml ${KDE4_DBUS_INTERFACES_DIR}/org.kde.KSMServerInterface.xml)

@@ -57,8 +57,6 @@
 #include <nepomuk/nfo.h>
 #include <nepomuk/nie.h>
 
-#include "kext.h"
-
 #define RESULT_LIMIT 24
 
 class MetadataEnginePrivate

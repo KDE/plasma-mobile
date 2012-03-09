@@ -6,11 +6,7 @@ set(metadatamodeltest_SRCS
     ../abstractmetadatamodel.cpp
     )
 
-soprano_add_ontology(
-    metadatamodeltest_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/../ontologies/kext.trig
-    "KEXT" "Nepomuk::Vocabulary" "trig"
-)
+add_kao_ontology(metadatamodeltest_SRCS)
 
 nepomuk_add_ontology_classes (metadatamodeltest_SRCS
                               ONTOLOGIES

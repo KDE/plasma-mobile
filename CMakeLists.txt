@@ -9,6 +9,17 @@ include(KDE4Defaults)
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 
+find_package(Nepomuk REQUIRED)
+find_package(Soprano)
+
+macro_log_feature(
+   Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net"
+   TRUE "${SOPRANO_MIN_VERSION}" "Soprano is needed for Nepomuk"
+   )
+
+include(SopranoAddOntology)
+add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
+
 include_directories(
    ${CMAKE_SOURCE_DIR}
    ${CMAKE_BINARY_DIR}
@@ -24,6 +35,14 @@ MACRO(installPackage dir component)
     install(DIRECTORY ${dir}/ DESTINATION ${DATA_INSTALL_DIR}/${root}/${component} PATTERN Messages.sh EXCLUDE)
     install(FILES ${dir}/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-applet-${component}.desktop)
 ENDMACRO(installPackage)
+
+MACRO(add_kao_ontology var)
+   soprano_add_ontology(
+      ${var}
+      ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/kde/kao.trig
+      "KAO" "Nepomuk::Vocabulary" "trig"
+   )
+ENDMACRO(add_kao_ontology)
 
 add_subdirectory(applets)
 add_subdirectory(applications)

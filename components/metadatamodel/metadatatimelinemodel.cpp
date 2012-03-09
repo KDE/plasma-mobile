@@ -40,7 +40,7 @@
 #include <nepomuk/nfo.h>
 #include <nepomuk/nie.h>
 
-#include "kext.h"
+#include "kao.h"
 
 
 MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
@@ -180,7 +180,7 @@ void MetadataTimelineModel::doQuery()
             activity = activity.remove(0, 1);
             negation = true;
         }
-        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KEXT::Activity());
+        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KAO::Activity());
 
         if (negation) {
             query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.resourceUri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";

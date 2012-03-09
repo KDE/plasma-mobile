@@ -18,7 +18,7 @@
  */
 
 #include "firstrun.h"
-#include "kext.h"
+#include "kao.h"
 
 #include <KActivities/Controller>
 #include <KActivities/Info>
@@ -157,7 +157,7 @@ void FirstRun::connectToActivity(const QString &activityId, const QString &resou
     }
 
     kError() << "       Added resource " << description << " to " << activityId;
-    Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KEXT::Activity());
+    Nepomuk::Resource acRes(activityId, Nepomuk::Vocabulary::KAO::Activity());
     acRes.addProperty(Soprano::Vocabulary::NAO::isRelated(), fileRes);
 }
 

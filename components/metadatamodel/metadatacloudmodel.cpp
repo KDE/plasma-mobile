@@ -41,7 +41,7 @@
 #include <nepomuk/nfo.h>
 #include <nepomuk/nie.h>
 
-#include "kext.h"
+#include <kao.h>
 
 
 MetadataCloudModel::MetadataCloudModel(QObject *parent)
@@ -110,8 +110,8 @@ void MetadataCloudModel::doQuery()
     setStatus(Waiting);
     QString query = "select distinct ?label count(*) as ?count where { ";
 
-    if (m_cloudCategory == "kext:Activity") {
-        query += " ?activity nao:isRelated ?r . ?activity rdf:type kext:Activity . ?activity kext:activityIdentifier ?label ";
+    if (m_cloudCategory == "kao:Activity") {
+        query += " ?activity nao:isRelated ?r . ?activity rdf:type kao:Activity . ?activity kao:activityIdentifier ?label ";
     } else {
         query += " ?r " + m_cloudCategory + " ?label";
     }
@@ -174,7 +174,7 @@ void MetadataCloudModel::doQuery()
             activity = activity.remove(0, 1);
             negation = true;
         }
-        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KEXT::Activity());
+        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KAO::Activity());
 
         if (negation) {
             query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.resourceUri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
