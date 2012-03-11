@@ -21,8 +21,8 @@ set(
 find_file(kext_onto_src kext.trig PATH_SUFFIXES "ontology/kde" PATHS ${CMAKE_INSTALL_PREFIX}/share ENV XDG_DATA_DIRS)
 
 soprano_add_ontology(contour_recommendationengine_documents_SRCS
-    ${kext_onto_src}
-    "KEXT" "Nepomuk::Vocabulary" "trig"
+    ${kao_onto_src}
+    "KAO" "Nepomuk::Vocabulary" "trig"
     )
 
 soprano_add_ontology(

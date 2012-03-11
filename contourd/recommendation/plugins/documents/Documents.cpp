@@ -34,7 +34,7 @@
 
 #include "nfo.h"
 #include "nie.h"
-#include "kext.h"
+#include "kao.h"
 
 #define KAMD_DBUS_ADDRESS "org.kde.ActivityManager"
 
@@ -103,7 +103,7 @@ void DocumentsEnginePrivate::updated(const QVariantList & data)
         // The problem is when the resource has no particular type set (web page)
         // if (!resource.hasType(Nepomuk::Vocabulary::NFO::FileDataObject())) continue;
 
-        Nepomuk::Resource currentActivityResource(activitymanager->currentActivity(), KEXT::Activity());
+        Nepomuk::Resource currentActivityResource(activitymanager->currentActivity(), KAO::Activity());
 
         // TODO: See ActivityManager.coo
         // I'd like a resource isRelated activity more than vice-versa
