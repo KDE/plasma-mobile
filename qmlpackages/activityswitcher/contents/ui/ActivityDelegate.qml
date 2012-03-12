@@ -113,6 +113,16 @@ Item {
                 pixelSize: 25
                 bold: true
             }
+
+            MobileComponents.Rating {
+                enabled: false
+                score: 5 * (model.Score/activitySwitcher.maxScore)
+                anchors {
+                    bottom: parent.bottom
+                    right: parent.right
+                    margins: 2
+                }
+            }
         }
     }
 

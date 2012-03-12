@@ -27,6 +27,8 @@ Item {
     property int iconSize: 32
     signal newActivityRequested
     state: "Passive"
+    property real maxScore: 0
+
     onStateChanged: {
         if (state == "Passive") {
             highlightTimer.restart()
@@ -71,6 +73,13 @@ Item {
             connectedSources = sources.filter(function(val) {
                 return val != "Status";
             })
+        }
+        onDataChanged: {
+            var max = 0
+            for (i in data) {
+                max = Math.max(data[i]["Score"], max)
+            }
+            maxScore = max
         }
     }
 
