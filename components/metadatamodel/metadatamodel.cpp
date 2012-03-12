@@ -59,6 +59,7 @@ MetadataModel::MetadataModel(QObject *parent)
       m_countQueryClient(0),
       m_limit(0),
       m_pageSize(30),
+      m_scoreResources(false),
       m_screenshotSize(180, 120)
 {
     m_newEntriesTimer = new QTimer(this);
@@ -158,6 +159,22 @@ void MetadataModel::setLimit(int limit)
 int MetadataModel::limit() const
 {
     return m_limit;
+}
+
+void MetadataModel::setScoreResources(bool score)
+{
+    if (m_scoreResources == score) {
+        return;
+    }
+
+    m_scoreResources = score;
+    askRefresh();
+    emit scoreResourcesChanged();
+}
+
+bool MetadataModel::scoreResources() const
+{
+    return m_scoreResources;
 }
 
 void MetadataModel::setLazyLoading(bool lazy)
@@ -363,6 +380,34 @@ void MetadataModel::doQuery()
         rootTerm.addSubTerm(term);
     }
 
+    if (m_scoreResources) {
+        QString activity = activityId();
+        if (activity.startsWith("!")) {
+            activity = activity.remove(0, 1);
+        }
+
+        Nepomuk::Query::ComparisonTerm term = Nepomuk::Query::ComparisonTerm(propertyUrl("kao:targettedResource"), Nepomuk::Query::Term());
+        term.setVariableName("c");
+        term.setInverted(true);
+
+        Nepomuk::Query::AndTerm andTerm = Nepomuk::Query::AndTerm();
+        Nepomuk::Query::ResourceTypeTerm typeTerm(KAO::ResourceScoreCache());
+        andTerm.addSubTerm(typeTerm);
+        if (!activity.isEmpty()) {
+            Nepomuk::Query::ComparisonTerm usedActivityTerm(propertyUrl("kao:usedActivity"),
+                                        Nepomuk::Query::ResourceTerm(Nepomuk::Resource(activity, Nepomuk::Vocabulary::KAO::Activity()))
+                                                           );
+            andTerm.addSubTerm(usedActivityTerm);
+        }
+        Nepomuk::Query::ComparisonTerm cachedScoreTerm(propertyUrl("kao:cachedScore"),
+                                        Nepomuk::Query::Term());
+        cachedScoreTerm.setVariableName("score");
+        cachedScoreTerm.setSortWeight(1, Qt::DescendingOrder);
+        andTerm.addSubTerm(cachedScoreTerm);
+
+        term.setSubTerm(andTerm);
+        rootTerm.addSubTerm(term);
+    }
 
     int weight = m_sortBy.length() + 1;
     foreach (const QString &sortProperty, m_sortBy) {

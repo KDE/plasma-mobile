@@ -88,8 +88,7 @@ PlasmaComponents.TabBar {
             model: MetadataModels.MetadataModel {
                 sortOrder: Qt.DescendingOrder
                 activityId: "!"+activitySource.data["Status"]["Current"]
-                sortBy: ["nao:numericRating"]
-                limit: 20
+                scoreResources: true
                 queryString: searchField.searchQuery
             }
         }

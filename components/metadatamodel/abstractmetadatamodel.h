@@ -27,6 +27,7 @@
 #include <QDeclarativePropertyMap>
 
 #include "nso.h"
+#include "kao.h"
 #include <Nepomuk/Vocabulary/NIE>
 #include <Nepomuk/Vocabulary/NFO>
 #include <Nepomuk/Vocabulary/NCO>
@@ -158,6 +159,7 @@ protected:
             using namespace Soprano::Vocabulary;
 
             namespaceResolution.insert(QLatin1String("rdf"), RDF::rdfNamespace());
+            namespaceResolution.insert(QLatin1String("kao"), KAO::kaoNamespace());
             namespaceResolution.insert(QLatin1String("rdf-schema"), RDFS::rdfsNamespace());
             namespaceResolution.insert(QLatin1String("nie"), NIE::nieNamespace());
             namespaceResolution.insert(QLatin1String("nfo"), NFO::nfoNamespace());

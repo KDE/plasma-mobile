@@ -49,9 +49,16 @@ class MetadataModel : public AbstractMetadataModel
     Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
     Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
     Q_PROPERTY(int limit READ limit WRITE setLimit NOTIFY limitChanged)
+
+    /**
+     * If true the resources will be filtered and sorted by the most relevant as a whole or in relation to the activity indicated in the activityId property
+     */
+    Q_PROPERTY(bool scoreResources READ scoreResources WRITE setScoreResources NOTIFY scoreResourcesChanged)
+
     /**
      * load as less resources as possible from Nepomuk (only load when asked from the view)
-     * default is true, you shouldn't need to change it
+     * default is true, you shouldn't need to change it.
+     * if lazyLoading is false the results are live-updating, but will take a lot more system resources
      */
     Q_PROPERTY(bool lazyLoading READ lazyLoading WRITE setLazyLoading NOTIFY lazyLoadingChanged)
 
@@ -105,6 +112,9 @@ public:
     void setLimit(int limit);
     int limit() const;
 
+    void setScoreResources(bool score);
+    bool scoreResources() const;
+
     /**
      * searches for a resource in the whole model
      * @arg resToFind the uri or url of the resource
@@ -129,6 +139,7 @@ Q_SIGNALS:
     void sortOrderChanged();
     void limitChanged();
     void lazyLoadingChanged();
+    void scoreResourcesChanged();
 
 protected Q_SLOTS:
     void countQueryResult(const QList< Nepomuk::Query::Result > &entries);
@@ -171,6 +182,7 @@ private:
     QString m_queryString;
     int m_limit;
     int m_pageSize;
+    bool m_scoreResources;
 
     QStringList m_sortBy;
     Qt::SortOrder m_sortOrder;
