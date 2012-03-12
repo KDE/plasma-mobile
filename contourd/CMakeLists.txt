@@ -29,6 +29,8 @@ configure_file(
   ${CMAKE_CURRENT_BINARY_DIR}/config-features.h
 )
 
+find_file(kao_onto_src kao.trig PATH_SUFFIXES "ontology/kde" PATHS ${CMAKE_INSTALL_PREFIX}/share ENV XDG_DATA_DIRS)
+
 add_subdirectory(recommendation/plugins)
 
 set(recommendationmanager_SRC
@@ -68,8 +70,6 @@ qt4_add_dbus_adaptor(
   recommendationmanager_SRC location/network-engines/connman/org.kde.LocationManager.ConnmanNetworkNotifier.xml
   location/network-engines/connman/ConnmanNetworkNotifier.h ConnmanNetworkNotifier
 )
-
-find_file(kao_onto_src kao.trig PATH_SUFFIXES "ontology/kde" PATHS ${CMAKE_INSTALL_PREFIX}/share ENV XDG_DATA_DIRS)
 # find_file(kext_onto_src kext.trig PATH_SUFFIXES "ontology/kde" PATHS ${CMAKE_INSTALL_PREFIX}/share ENV XDG_DATA_DIRS)
 
 # soprano_add_ontology(recommendationmanager_SRC
@@ -148,8 +148,6 @@ install(TARGETS
     contour
     ${INSTALL_TARGETS_DEFAULT_ARGS}
     )
-
-message("AAAAAAAA ${DATA_INSTALL_DIR}")
 
 # install(FILES
 #     location/network-engines/connman/org.kde.LocationManager.ConnmanWatcher.py
