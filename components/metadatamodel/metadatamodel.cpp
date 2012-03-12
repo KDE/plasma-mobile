@@ -60,7 +60,7 @@ MetadataModel::MetadataModel(QObject *parent)
       m_limit(0),
       m_pageSize(30),
       m_scoreResources(false),
-      m_screenshotSize(180, 120)
+      m_thumbnailSize(180, 120)
 {
     m_newEntriesTimer = new QTimer(this);
     m_newEntriesTimer->setSingleShot(true);
@@ -782,7 +782,7 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     case Thumbnail:
         if (resource.isFile() && resource.toFile().url().isLocalFile()) {
             KUrl file(resource.toFile().url());
-            QImage preview = QImage(m_screenshotSize, QImage::Format_ARGB32_Premultiplied);
+            QImage preview = QImage(m_thumbnailSize, QImage::Format_ARGB32_Premultiplied);
 
             if (m_imageCache->findImage(file.prettyUrl(), &preview)) {
                 return preview;
@@ -869,7 +869,10 @@ void MetadataModel::delayedPreview()
     }
 
     if (list.size() > 0) {
-        KIO::PreviewJob* job = KIO::filePreview(list, m_screenshotSize);
+        QStringList* plugins = new QStringList;
+        *plugins = KIO::PreviewJob::availablePlugins();
+
+        KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, plugins);
         job->setIgnoreMaximumSize(true);
         kDebug() << "Created job" << job;
         connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
@@ -908,6 +911,17 @@ void MetadataModel::sort(int column, Qt::SortOrder order)
 
     beginResetModel();
     endResetModel();
+}
+
+void MetadataModel::setThumbnailSize(const QSize& size)
+{
+    m_thumbnailSize = size;
+    emit thumbnailSizeChanged();
+}
+
+QSize MetadataModel::thumbnailSize() const
+{
+    return m_thumbnailSize;
 }
 
 #include "metadatamodel.moc"

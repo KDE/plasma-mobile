@@ -62,6 +62,11 @@ class MetadataModel : public AbstractMetadataModel
      */
     Q_PROPERTY(bool lazyLoading READ lazyLoading WRITE setLazyLoading NOTIFY lazyLoadingChanged)
 
+    /**
+     * Use this property to specify the size of thumbnail which the model should attempt to generate for the thumbnail role.
+     */
+    Q_PROPERTY(QSize thumbnailSize READ thumbnailSize WRITE setThumbnailSize NOTIFY thumbnailSizeChanged)
+
 public:
     enum Roles {
         Label = Qt::UserRole+1,
@@ -115,6 +120,9 @@ public:
     void setScoreResources(bool score);
     bool scoreResources() const;
 
+    void setThumbnailSize(const QSize &size);
+    QSize thumbnailSize() const;
+
     /**
      * searches for a resource in the whole model
      * @arg resToFind the uri or url of the resource
@@ -140,6 +148,7 @@ Q_SIGNALS:
     void limitChanged();
     void lazyLoadingChanged();
     void scoreResourcesChanged();
+    void thumbnailSizeChanged();
 
 protected Q_SLOTS:
     void countQueryResult(const QList< Nepomuk::Query::Result > &entries);
@@ -190,7 +199,7 @@ private:
     //previews
     QTimer *m_previewTimer;
     QHash<KUrl, QPersistentModelIndex> m_filesToPreview;
-    QSize m_screenshotSize;
+    QSize m_thumbnailSize;
     QHash<KUrl, QPersistentModelIndex> m_previewJobs;
     KImageCache* m_imageCache;
 };
