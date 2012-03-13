@@ -869,11 +869,11 @@ void MetadataModel::delayedPreview()
     }
 
     if (list.size() > 0) {
-        QStringList* plugins = new QStringList;
-        *plugins = KIO::PreviewJob::availablePlugins();
+        /*QStringList* plugins = new QStringList;
+        *plugins = KIO::PreviewJob::availablePlugins();*/
 
-        KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, plugins);
-        job->setIgnoreMaximumSize(true);
+        KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize/*, plugins*/);
+        //job->setIgnoreMaximumSize(true);
         kDebug() << "Created job" << job;
         connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
                 this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
