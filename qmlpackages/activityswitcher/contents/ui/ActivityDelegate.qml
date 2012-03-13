@@ -158,7 +158,7 @@ Item {
                 ConfirmationDialog {
                     enabled: true
                     z: 700
-                    transformOrigin: Item.BottomLeft
+                    transformOrigin: Item.Bottom
                     question: i18n("Do you want to permanently delete activity '%1'?", activityName.text)
                     onAccepted: {
                         var service = activitySource.serviceForSource(model["DataEngineSource"])
@@ -184,38 +184,28 @@ Item {
                 z: 800
                 property double oldOpacity: delegate.PathView.itemOpacity
 
-                onClicked: {
-                    // always recreate the dialog because on a second launch it moves upper a little bit.
-                    if (deleteButtonParent.confirmationDialog) {
-                        deleteButtonParent.confirmationDialog.scale = 0
-                        deleteButtonParent.confirmationDialog.destroy()
-                        deleteButtonParent.confirmationDialog = null
-                    }
-
-                    if (toggle) {
-                        // make dialog fully opaque if it is not already.
-                        checked = true
+                onCheckedChanged: {
+                    if (checked) {
+                        oldOpacity = delegate.PathView.itemOpacity
+                        delegate.PathView.itemOpacity = 1
 
                         // closes all other deleteDialogs from other ActivityDelegates.
                         delegate.parent.deleteDialogOpenedAtIndex = delegate.delegateIndex
 
-                        deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
+                        if (!deleteButtonParent.confirmationDialog) {
+                            deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
+                        }
+
                         deleteButtonParent.confirmationDialog.scale = 1 / delegate.scale
+
 
                         // scale does not change dialog's width so we need to anchor the confirmationDialog's center manually.
                         deleteButtonParent.confirmationDialog.x = deleteButton.x + deleteButton.width / 2 - deleteButtonParent.confirmationDialog.width * (1 / delegate.scale) / 2
 
                         deleteButtonParent.confirmationDialog.anchors.bottom = deleteButton.top
-                    }
-                }
-
-                onCheckedChanged: {
-                    // makes dialog and activity thumbnail fully opaque only when dialog is opened.
-                    if (checked) {
-                        oldOpacity = delegate.PathView.itemOpacity
-                        delegate.PathView.itemOpacity = 1
                     } else {
                         delegate.PathView.itemOpacity = oldOpacity
+                        deleteButtonParent.confirmationDialog.scale = 0
                     }
                 }
             }
