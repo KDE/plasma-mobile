@@ -265,6 +265,10 @@ QRegion MobCorona::availableScreenRegion(int id) const
 
 void MobCorona::currentActivityChanged(const QString &newActivity)
 {
+    if (newActivity.isEmpty()) {
+        return;
+    }
+
     kDebug() << newActivity;
     Activity *act =activity(newActivity);
     if (act) {
