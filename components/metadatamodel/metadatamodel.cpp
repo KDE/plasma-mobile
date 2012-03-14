@@ -721,10 +721,10 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     }
 
     switch (role) {
-    /*case Qt::DisplayRole:
+    case Qt::DisplayRole:
     case Label:
-        return resource.genericLabel();
-    case Description:
+        return m_cachedResources.value(resource).value(Label);
+    /*case Description:
         return resource.genericDescription();
     case Types: {
         QStringList types;
@@ -732,9 +732,7 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
             types << u.toString();
         }
         return types;
-    }
-    case ClassName:
-        return resource.className();*/
+    }*/
     case GenericClassName: {
         //FIXME: a more elegant way is needed
         QString genericClassName = m_cachedResources.value(resource).value(ClassName).toString();
