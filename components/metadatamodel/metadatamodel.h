@@ -203,6 +203,7 @@ private:
     QSize m_thumbnailSize;
     QHash<KUrl, QPersistentModelIndex> m_previewJobs;
     KImageCache* m_imageCache;
+    QStringList* m_thumbnailerPlugins;
 
     QHash<Nepomuk::Resource, QHash<int, QVariant> > m_cachedResources;
 };

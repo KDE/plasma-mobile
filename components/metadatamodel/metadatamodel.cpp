@@ -60,7 +60,8 @@ MetadataModel::MetadataModel(QObject *parent)
       m_limit(0),
       m_pageSize(30),
       m_scoreResources(false),
-      m_thumbnailSize(180, 120)
+      m_thumbnailSize(180, 120),
+      m_thumbnailerPlugins(new QStringList(KIO::PreviewJob::availablePlugins()))
 {
     m_newEntriesTimer = new QTimer(this);
     m_newEntriesTimer->setSingleShot(true);
@@ -841,10 +842,9 @@ void MetadataModel::delayedPreview()
     }
 
     if (list.size() > 0) {
-        QStringList* plugins = new QStringList;
-        *plugins = KIO::PreviewJob::availablePlugins();
 
-        KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, plugins);
+
+        KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, m_thumbnailerPlugins);
         //job->setIgnoreMaximumSize(true);
         kDebug() << "Created job" << job;
         connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
