@@ -409,6 +409,16 @@ void MetadataModel::doQuery()
         rootTerm.addSubTerm(term);
     }
 
+    //bind directly some properties, to avoid calling hyper inefficient resource::property
+    /*{
+        Nepomuk::Query::ComparisonTerm term = Nepomuk::Query::ComparisonTerm(NIE::url(), Nepomuk::Query::Term());
+        term.setVariableName("url");
+        rootTerm.addSubTerm(term);
+    }*/
+    {
+        m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NIE::url()));
+    }
+
     int weight = m_sortBy.length() + 1;
     foreach (const QString &sortProperty, m_sortBy) {
         Nepomuk::Query::ComparisonTerm sortTerm(propertyUrl(sortProperty), Nepomuk::Query::Term());
@@ -436,6 +446,7 @@ void MetadataModel::doQuery()
     m_pagesForClient.clear();
     m_validIndexForPage.clear();
     m_queryClientsHistory.clear();
+    m_cachedResources.clear();
     m_runningClients = 0;
     m_countQueryClient = new Nepomuk::Query::QueryServiceClient(this);
 
@@ -512,6 +523,9 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
             continue;
         }
         m_resourcesToInsert[page] << resource;
+
+        m_cachedResources[resource][ClassName] = res.requestProperties().value(propertyUrl("nie:url")).toString();
+        m_cachedResources[resource][Url] = res.requestProperties().value(propertyUrl("nie:url")).toString();
     }
 
     if (!m_newEntriesTimer->isActive() && !m_resourcesToInsert[page].isEmpty()) {
@@ -682,6 +696,11 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
+    //We're lucky: was cached
+    if (m_cachedResources.value(resource).contains(role)) {
+        return m_cachedResources.value(resource).value(role);
+    }
+
     switch (role) {
     case Qt::DisplayRole:
     case Label:
@@ -780,8 +799,8 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         return icon;
     }
     case Thumbnail:
-        if (resource.isFile() && resource.toFile().url().isLocalFile()) {
-            KUrl file(resource.toFile().url());
+        if (resource.isFile() && m_cachedResources.value(resource).value(Url).toUrl().isLocalFile()) {
+            KUrl file(m_cachedResources.value(resource).value(Url).toString());
             QImage preview = QImage(m_thumbnailSize, QImage::Format_ARGB32_Premultiplied);
 
             if (m_imageCache->findImage(file.prettyUrl(), &preview)) {

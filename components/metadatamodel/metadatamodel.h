@@ -30,6 +30,7 @@
 #include <Nepomuk/Query/Result>
 #include <Nepomuk/Query/QueryServiceClient>
 #include <Nepomuk/Resource>
+#include <Nepomuk/Variant>
 
 namespace Nepomuk {
     class ResourceWatcher;
@@ -202,6 +203,8 @@ private:
     QSize m_thumbnailSize;
     QHash<KUrl, QPersistentModelIndex> m_previewJobs;
     KImageCache* m_imageCache;
+
+    QHash<Nepomuk::Resource, QHash<int, QVariant> > m_cachedResources;
 };
 
 #endif
