@@ -765,19 +765,20 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     case HasSymbol:
     case Icon:
         return m_cachedResources.value(resource).value(Icon).toString();
-    case Thumbnail:
-        if (m_cachedResources.value(resource).value(IsFile).toBool() && m_cachedResources.value(resource).value(Url).toUrl().isLocalFile()) {
-            KUrl file(m_cachedResources.value(resource).value(Url).toString());
+    case Thumbnail: {
+        KUrl url(m_cachedResources.value(resource).value(Url).toString());
+        if (m_cachedResources.value(resource).value(IsFile).toBool() && url.isLocalFile()) {
             QImage preview = QImage(m_thumbnailSize, QImage::Format_ARGB32_Premultiplied);
 
-            if (m_imageCache->findImage(file.prettyUrl(), &preview)) {
+            if (m_imageCache->findImage(url.prettyUrl(), &preview)) {
                 return preview;
             }
 
             m_previewTimer->start(100);
-            const_cast<MetadataModel *>(this)->m_filesToPreview[file] = QPersistentModelIndex(index);
+            const_cast<MetadataModel *>(this)->m_filesToPreview[url] = QPersistentModelIndex(index);
         }
         return QVariant();
+    }
     case Exists:
         return resource.exists();
     case Rating:
