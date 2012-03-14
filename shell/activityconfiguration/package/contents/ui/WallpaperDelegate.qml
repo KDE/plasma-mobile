@@ -40,7 +40,7 @@ Item {
         }
         PlasmaCore.FrameSvgItem {
             imagePath: "widgets/media-delegate"
-            prefix: "picture"
+            prefix: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index ? "picture-selected" : "picture"
 
             Behavior on width {
                     NumberAnimation {
@@ -55,9 +55,9 @@ Item {
                     }
                 }
             anchors.centerIn: parent
-            width: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index?parent.width+5:parent.width-16
+            width: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index ? parent.width+5 : parent.width-16
 
-            height: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index?parent.height+5:parent.height-16
+            height: (wallpapersList.currentIndex - (wallpapersList.currentPage*wallpapersList.pageSize)) == index ? parent.height+5 : parent.height-16
 
             QPixmapItem {
                 id: screenshotItem

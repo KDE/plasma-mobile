@@ -69,7 +69,7 @@ Item {
     PlasmaCore.FrameSvgItem {
         id: activityBorder
         imagePath: "widgets/media-delegate"
-        prefix: "picture"
+        prefix: model["Current"] == true ? "picture-selected" : "picture"
 
         anchors.fill:parent
         anchors.rightMargin: 100
