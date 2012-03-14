@@ -30,6 +30,7 @@ public:
     QString url;
     QString iconName;
     QImage preview;
+    QUrl resourceUri;
 };
 
 
@@ -64,9 +65,13 @@ void CompletionItem::setResource(Nepomuk::Resource resource)
     //kDebug() << "Bookmark: " << d->name << d->url;
     d->iconName = "bookmarks";
     //d->url = resource.property(resour).toString();
-    
+    d->resourceUri = resource.resourceUri();
 }
 
+QUrl CompletionItem::resourceUri()
+{
+    return d->resourceUri;
+}
 
 CompletionItem::~CompletionItem()
 {

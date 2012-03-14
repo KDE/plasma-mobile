@@ -50,6 +50,7 @@ public:
     QString iconName();
     QString url();
     QImage preview();
+    QUrl resourceUri();
 
 public Q_SLOTS:
     void setName(const QString &name);
