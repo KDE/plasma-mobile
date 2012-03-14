@@ -168,23 +168,27 @@ PlasmaCore.FrameSvgItem {
             rootItem = rootItem.parent;
         }
         var mouse = linkRect;
-        var distanceToTop = webView.mapToItem(rootItem, mouse.x, mouse.y);
-        //var distanceToTop = mouse;
-//         print( "   distanceToTop: " + distanceToTop.x);
-//         print( " mouse: x: " + mouse.x + " y: " + mouse.y);
+        var distanceToTop = linkRect;
+        // Check if we need to shift vertically
         if (distanceToTop.x < linkPopup.width/2) {
-//             print(" hitting the left edge " + distanceToTop.x);
-            //linkPopup.x = mouse.x
-
+            linkPopup.x = mouse.x + mouse.width/2;
         } else {
-            linkPopup.x = mouse.x-(linkPopup.width/2)
+            print("Rootitem.width " + rootItem.width + " " + mouse.x + linkPopup.width);
+            if (rootItem.width < mouse.x + linkPopup.width ) {
+                // hitting the right edge
+                linkPopup.x = rootItem.width - linkPopup.width
+            } else {
+                linkPopup.x = mouse.x-(linkPopup.width/2)+mouse.width/2
+            }
         }
-        if (distanceToTop.y > linkPopup.height + header.height) {
-//             print(" placing at mouse.y : " + mouse.y + " " + linkPopup.height)
-            linkPopup.y = mouse.y - linkPopup.height;
+
+        // Check wether we need to reposition horizontally
+        if (distanceToTop.y < linkPopup.height) {
+            // move down under mouse point
+            print(" moving down: " + mouse.y + " " + mouse.height + " " + linkPopup.height)
+            linkPopup.y = mouse.y + mouse.height;
         } else {
-            //linkPopup.y = mouse.y-(linkPopup.width/2)
+            linkPopup.y = mouse.y - linkPopup.height;
         }
     }
-
 }
