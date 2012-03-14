@@ -417,6 +417,9 @@ void MetadataModel::doQuery()
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(RDFS::label()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NFO::fileName()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NIE::mimeType()));
+        m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NAO::description()));
+        m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(Xesam::description()));
+        m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(RDFS::comment()));
     }
 
     int weight = m_sortBy.length() + 1;
@@ -530,6 +533,17 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
             label = res.requestProperties().value(NFO::fileName()).toString();
         }
         m_cachedResources[resource][Label] = label;
+
+        QString description = res.requestProperties().value(NAO::description()).toString();
+        if (description.isEmpty()) {
+            description = res.requestProperties().value(Xesam::description()).toString();
+        }
+        if (description.isEmpty()) {
+            description = res.requestProperties().value(RDFS::comment()).toString();
+        }
+        if (!description.isEmpty()) {
+            m_cachedResources[resource][Url] = description;
+        }
 
         m_cachedResources[resource][Url] = res.requestProperties().value(propertyUrl("nie:url")).toString();
 
@@ -725,15 +739,13 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
     case Label:
         return m_cachedResources.value(resource).value(Label);
-    /*case Description:
-        return resource.genericDescription();
     case Types: {
         QStringList types;
         foreach (const QUrl &u, resource.types()) {
             types << u.toString();
         }
         return types;
-    }*/
+    }
     case GenericClassName: {
         //FIXME: a more elegant way is needed
         QString genericClassName = m_cachedResources.value(resource).value(ClassName).toString();
