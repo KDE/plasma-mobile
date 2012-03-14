@@ -237,6 +237,9 @@ void MetadataCloudModel::doQuery()
         query += " . ?r nao:numericRating ?rating filter (?rating <=" + QString::number(maximumRating()) + ") ";
     }
 
+    //Exclude who doesn't have url
+    query += " . FILTER(bif:exists((select (1) where { ?r nie:url ?h . }))) ";
+
     query +=  " . ?r <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> ?v1 . FILTER(?v1>0) .  } group by ?label order by ?label";
 
     kDebug() << "Performing the Sparql query" << query;
