@@ -410,13 +410,12 @@ void MetadataModel::doQuery()
     }
 
     //bind directly some properties, to avoid calling hyper inefficient resource::property
-    /*{
-        Nepomuk::Query::ComparisonTerm term = Nepomuk::Query::ComparisonTerm(NIE::url(), Nepomuk::Query::Term());
-        term.setVariableName("url");
-        rootTerm.addSubTerm(term);
-    }*/
     {
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NIE::url()));
+        m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NAO::hasSymbol()));
+        m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(RDFS::label()));
+        m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NFO::fileName()));
+        m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NIE::mimeType()));
     }
 
     int weight = m_sortBy.length() + 1;
@@ -524,8 +523,28 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         }
         m_resourcesToInsert[page] << resource;
 
-        m_cachedResources[resource][ClassName] = res.requestProperties().value(propertyUrl("nie:url")).toString();
+        //pre-popuplating of the cache to avoid accessing properties directly
+        QString label = res.requestProperties().value(RDFS::label()).toString();
+        if (label.isEmpty()) {
+            label = res.requestProperties().value(NFO::fileName()).toString();
+        }
+        m_cachedResources[resource][Label] = label;
+
         m_cachedResources[resource][Url] = res.requestProperties().value(propertyUrl("nie:url")).toString();
+
+        Soprano::Node symbol = res.requestProperties().value(NAO::hasSymbol());
+        if (!symbol.toString().isEmpty()) {
+            m_cachedResources[resource][Icon] = symbol.toString();
+        } else {
+            m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
+        }
+
+        //those seems to not be possible avoiding to access the resource
+        m_cachedResources[resource][ClassName] = resource.className();
+        m_cachedResources[resource][ResourceType] = resource.resourceType();
+        m_cachedResources[resource][IsFile] = resource.isFile();
+        m_cachedResources[resource][HasSymbol] = res.requestProperties().value(NAO::hasSymbol()).toString();
+        m_cachedResources[resource][MimeType] = res.requestProperties().value(NIE::mimeType()).toString();
     }
 
     if (!m_newEntriesTimer->isActive() && !m_resourcesToInsert[page].isEmpty()) {
@@ -702,7 +721,7 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     }
 
     switch (role) {
-    case Qt::DisplayRole:
+    /*case Qt::DisplayRole:
     case Label:
         return resource.genericLabel();
     case Description:
@@ -715,10 +734,10 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         return types;
     }
     case ClassName:
-        return resource.className();
+        return resource.className();*/
     case GenericClassName: {
         //FIXME: a more elegant way is needed
-        QString genericClassName = resource.className();
+        QString genericClassName = m_cachedResources.value(resource).value(ClassName).toString();
         //FIXME: most bookmarks are Document too, so Bookmark wins
         if (resource.types().contains(NFO::Bookmark())) {
             return "Bookmark";
@@ -741,65 +760,13 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         }
         return genericClassName;
     }
-    case Qt::DecorationRole: {
-        QString icon = resource.genericIcon();
-        if (icon.isEmpty() && resource.isFile()) {
-            KUrl url = resource.toFile().url();
-            if (!url.isEmpty()) {
-                //if it's an application, fetch the icon from the desktop file
-                Nepomuk::Types::Class resClass(resource.resourceType());
-                if (resClass.label() == "Application") {
-                    KService::Ptr serv = KService::serviceByDesktopPath(url.path());
-                    if (serv) {
-                        return serv->icon();
-                    }
-                }
-                icon = KMimeType::iconNameForUrl(url);
-            }
-        }
-        if (icon.isEmpty()) {
-            // use resource types to find a suitable icon.
-            //TODO
-            icon = retrieveIconName(QStringList(resource.className()));
-            //kDebug() << "symbol" << icon;
-        }
-        if (icon.split(",").count() > 1) {
-            kDebug() << "More than one icon!" << icon;
-            icon = icon.split(",").last();
-        }
-        return KIcon(icon);
-    }
+    case Qt::DecorationRole: 
+        return KIcon(m_cachedResources.value(resource).value(Icon).toString());
     case HasSymbol:
-    case Icon: {
-        QString icon = resource.genericIcon();
-        if (icon.isEmpty() && resource.isFile()) {
-            KUrl url = resource.toFile().url();
-            if (!url.isEmpty()) {
-                //if it's an application, fetch the icon from the desktop file
-                Nepomuk::Types::Class resClass(resource.resourceType());
-                if (resClass.label() == "Application") {
-                    KService::Ptr serv = KService::serviceByDesktopPath(url.path());
-                    if (serv) {
-                        return serv->icon();
-                    }
-                }
-                icon = KMimeType::iconNameForUrl(url);
-            }
-        }
-        if (icon.isEmpty()) {
-            // use resource types to find a suitable icon.
-            //TODO
-            icon = retrieveIconName(QStringList(resource.className()));
-            //kDebug() << "symbol" << icon;
-        }
-        if (icon.split(",").count() > 1) {
-            kDebug() << "More than one icon!" << icon;
-            icon = icon.split(",").last();
-        }
-        return icon;
-    }
+    case Icon:
+        return m_cachedResources.value(resource).value(Icon).toString();
     case Thumbnail:
-        if (resource.isFile() && m_cachedResources.value(resource).value(Url).toUrl().isLocalFile()) {
+        if (m_cachedResources.value(resource).value(IsFile).toBool() && m_cachedResources.value(resource).value(Url).toUrl().isLocalFile()) {
             KUrl file(m_cachedResources.value(resource).value(Url).toString());
             QImage preview = QImage(m_thumbnailSize, QImage::Format_ARGB32_Premultiplied);
 
@@ -811,8 +778,6 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
             const_cast<MetadataModel *>(this)->m_filesToPreview[file] = QPersistentModelIndex(index);
         }
         return QVariant();
-    case IsFile:
-        return resource.isFile();
     case Exists:
         return resource.exists();
     case Rating:
@@ -823,17 +788,6 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         return resource.symbols();
     case ResourceUri:
         return resource.resourceUri();
-    case ResourceType:
-        return resource.resourceType();
-    case MimeType:
-        return resource.property(NIE::mimeType()).toString();
-    case Url: {
-        if (resource.isFile() && resource.toFile().url().isLocalFile()) {
-            return resource.toFile().url().prettyUrl();
-        } else {
-            return resource.property(NIE::url()).toString();
-        }
-    }
     case Topics: {
         QStringList topics;
         foreach (const Nepomuk::Resource &u, resource.topics()) {
