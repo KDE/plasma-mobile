@@ -30,12 +30,6 @@
 #include "fallbackcomponent.h"
 #include "package.h"
 #include "texteffects.h"
-#include "appbackgroundprovider_p.h"
-
-void MobileComponentsPlugin::initializeEngine(QDeclarativeEngine *engine, const char *uri)
-{
-    engine->addImageProvider(QLatin1String("appbackgrounds"), new AppBackgroundProvider);
-}
 
 void MobileComponentsPlugin::registerTypes(const char *uri)
 {

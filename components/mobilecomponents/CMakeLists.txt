@@ -3,7 +3,6 @@ project(mobilecomponents)
 include(KDE4Defaults)
 
 set(mobilecomponents_SRCS
-appbackgroundprovider.cpp
     appletcontainer.cpp
     mobilecomponentsplugin.cpp
     pagedproxymodel.cpp
