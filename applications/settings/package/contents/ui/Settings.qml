@@ -22,7 +22,7 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.qtextracomponents 0.1
 
 Image {
@@ -146,7 +146,7 @@ Image {
             Item {
                 visible: startModule == ""
                 anchors { fill: parent; margins: 80; }
-                PlasmaExtraComponents.Title {
+                PlasmaExtras.Title {
                     id: initial_page_label
                     text: i18n("Active Settings")
                     anchors { top: parent.top; horizontalCenter: parent.horizontalCenter; }
