@@ -136,6 +136,22 @@ Image {
                 }
             }
         }
+        function uncheckAll()
+        {
+            emptyTab.checked = true
+        }
+        //FIXME: hack to make no item selected
+        Item {
+            id: emptyTab
+            property bool checked: false
+            onCheckedChanged: {
+                if (checked) {
+                    while (sidebarStack.depth > 1) {
+                        sidebarStack.pop()
+                    }
+                }
+            }
+        }
     }
     Image {
         id: sideBar
@@ -143,7 +159,7 @@ Image {
         fillMode: Image.Tile
         clip: true
 
-        width: parent.width/4
+        width: emptyTab.checked ? 0 : parent.width/4
         anchors {
             right: parent.right
             top: parent.top

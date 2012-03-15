@@ -49,7 +49,13 @@ Item {
         }
         MouseArea {
             anchors.fill: parent
-            onClicked: root.checked = true
+            onClicked: {
+                if (root.checked) {
+                    root.parent.uncheckAll()
+                } else {
+                    root.checked = true
+                }
+            }
         }
     }
 }
