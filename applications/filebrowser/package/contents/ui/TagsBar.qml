@@ -22,6 +22,7 @@ import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.draganddrop 1.0
 
 
 PlasmaComponents.Page {
@@ -29,6 +30,12 @@ PlasmaComponents.Page {
     anchors.fill: parent
 
     property Item currentItem
+
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.metadata"
+        //connectedSources: []
+    }
 
     Flickable {
         id: mainFlickable
@@ -54,12 +61,24 @@ PlasmaComponents.Page {
                         anchors.horizontalCenter: parent.horizontalCenter
                         property bool checked: false
 
-                        Rectangle {
-                            color: parent.checked ? theme.highlightColor : theme.textColor
-                            radius: width/2
-                            anchors.centerIn: parent
-                            width: Math.min(parent.width, 10 * model.count)
-                            height: width
+                        DropArea {
+                            anchors.fill: parent
+                            onDrop: {
+                                var service = metadataSource.serviceForSource("")
+                                print(service);
+                                var operation = service.operationDescription("tagResources")
+                                operation["ResourceUrls"] = event.mimeData.urls
+                                operation["Tag"] = model["label"]
+                                service.startOperationCall(operation)
+                            }
+
+                            Rectangle {
+                                color: parent.parent.checked ? theme.highlightColor : theme.textColor
+                                radius: width/2
+                                anchors.centerIn: parent
+                                width: Math.min(parent.width, 10 * model.count)
+                                height: width
+                            }
                         }
                         onClicked: checked = !checked
                         onCheckedChanged: {

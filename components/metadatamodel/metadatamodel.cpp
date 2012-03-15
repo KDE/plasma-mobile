@@ -357,7 +357,7 @@ void MetadataModel::doQuery()
             negation = true;
         }
         Nepomuk::Query::ComparisonTerm term( Soprano::Vocabulary::NAO::hasTag(),
-                                    Nepomuk::Query::LiteralTerm(individualTag));
+                                    Nepomuk::Query::ResourceTerm(Nepomuk::Tag(individualTag)));
         if (negation) {
             rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
         } else {
