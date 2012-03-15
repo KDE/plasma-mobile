@@ -39,13 +39,13 @@ PlasmaComponents.Page {
 
     Flickable {
         id: mainFlickable
-        contentWidth: mainRow.width
-        contentHeight: mainRow.height
+        contentWidth: mainColumn.width
+        contentHeight: mainColumn.height
 
         anchors.fill: parent
 
-        Row {
-            id: mainRow
+        Column {
+            id: mainColumn
             Repeater {
                 model: MetadataModels.MetadataCloudModel {
                     id: tagCloud
@@ -54,11 +54,10 @@ PlasmaComponents.Page {
                     minimumRating: metadataModel.minimumRating
                 }
 
-                Column {
+                Row {
                     MouseArea {
-                        height: root.height - tagLabel.height
-                        width: height
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: root.width/2
+                        height: width
                         property bool checked: false
 
                         DropArea {
@@ -100,7 +99,7 @@ PlasmaComponents.Page {
                     PlasmaComponents.Label {
                         id: tagLabel
                         text: model.label
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
                     }
                 }
             }

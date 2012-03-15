@@ -94,6 +94,48 @@ Image {
         }
     }
 
+    PlasmaComponents.ButtonColumn {
+        anchors {
+            right: sideBar.left
+            verticalCenter: sideBar.verticalCenter
+            rightMargin: -1
+        }
+        SidebarTab {
+            text: i18n("Type")
+            onCheckedChanged: {
+                if (checked) {
+                    while (sidebarStack.depth > 1) {
+                        sidebarStack.pop()
+                    }
+                }
+            }
+        }
+        SidebarTab {
+            text: i18n("Time")
+            onCheckedChanged: {
+                if (checked) {
+                    if (sidebarStack.depth > 1) {
+                        sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
+                    } else {
+                        sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
+                    }
+                }
+            }
+        }
+        SidebarTab {
+            text: i18n("Tags")
+            onCheckedChanged: {
+                print(checked)
+                if (checked) {
+                    if (sidebarStack.depth > 1) {
+                        sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
+                    } else {
+                        sidebarStack.push(Qt.createComponent("TagsBar.qml"))
+                    }
+                }
+            }
+        }
+    }
     Image {
         id: sideBar
         source: "image://appbackgrounds/contextarea"
@@ -136,20 +178,6 @@ Image {
                 top: undefined
                 bottom: parent.bottom
             }
-        }
-    }
-
-    Rectangle {
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-        height: parent.height/5
-        z: 11000
-        PlasmaComponents.PageStack {
-            anchors.fill: parent
-            initialPage: Qt.createComponent("TagsBar.qml")
         }
     }
 
