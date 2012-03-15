@@ -72,16 +72,29 @@ Image {
         id: toolBar
     }
 
-    PlasmaComponents.PageStack {
-        id: mainStack
-        clip: false
-        toolBar: toolBar
-        //initialPage: Qt.createComponent("Browser.qml")
+    Item {
         anchors {
             right: sideBar.left
             top: parent.top
             bottom: parent.bottom
             left: parent.left
+        }
+        onWidthChanged: mainStackSyncTimer.restart()
+        Timer {
+            id: mainStackSyncTimer
+            interval: 200
+            onTriggered: mainStack.width = parent.width
+        }
+        PlasmaComponents.PageStack {
+            id: mainStack
+            clip: false
+            toolBar: toolBar
+            //initialPage: Qt.createComponent("Browser.qml")
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                left: parent.left
+            }
         }
     }
 
@@ -102,7 +115,7 @@ Image {
             rightMargin: -1
         }
         SidebarTab {
-            text: i18n("Type")
+            text: i18n("Main")
             onCheckedChanged: {
                 if (checked) {
                     while (sidebarStack.depth > 1) {
@@ -160,6 +173,12 @@ Image {
         clip: true
 
         width: emptyTab.checked ? 0 : parent.width/4
+        Behavior on width {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
         anchors {
             right: parent.right
             top: parent.top
@@ -178,9 +197,12 @@ Image {
 
         PlasmaComponents.PageStack {
             id: sidebarStack
+            width: imageViewer.width/4 - theme.defaultFont.mSize.width * 2
             //initialPage: Qt.createComponent("CategorySidebar.qml")
             anchors {
-                fill: parent
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
                 bottomMargin: Math.max(10, sidebarToolbar.height)
                 topMargin: toolBar.height
                 leftMargin: theme.defaultFont.mSize.width * 2
