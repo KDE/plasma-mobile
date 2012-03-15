@@ -10,7 +10,6 @@ appbackgroundprovider.cpp
     fallbackcomponent.cpp
     categorizedproxymodel.cpp
     package.cpp
-    resourceinstance.cpp
     texteffects.cpp
     )
 
