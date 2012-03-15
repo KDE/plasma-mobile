@@ -22,6 +22,7 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1
 import org.kde.qtextracomponents 0.1
 import org.kde.active.settings 0.1 as ActiveSettings
 
@@ -158,10 +159,9 @@ Image {
             Item {
                 visible: startModule == ""
                 anchors { fill: parent; margins: 80; }
-                PlasmaComponents.Label {
+                Title {
                     id: initial_page_label
                     text: i18n("Active Settings")
-                    font.pointSize: theme.defaultFont.pointSize*2
                     anchors { top: parent.top; horizontalCenter: parent.horizontalCenter; }
                 }
                 QIconItem {

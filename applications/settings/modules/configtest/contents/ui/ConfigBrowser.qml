@@ -20,6 +20,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1
 import org.kde.active.settings 0.1 as ActiveSettings
 
 Flickable {
@@ -30,9 +31,9 @@ Flickable {
         group: "LevelZero"
     }
 
-    PlasmaComponents.Label {
+    Title {
         id: lbl
-        text: "<h1>ConfigGroup Browser</h1>"
+        text: "ConfigGroup Browser"
 
     }
 
