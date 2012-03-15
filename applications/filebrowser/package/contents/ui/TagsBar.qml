@@ -31,6 +31,14 @@ PlasmaComponents.Page {
 
     property Item currentItem
 
+    PlasmaComponents.Label {
+        anchors {
+            top: parent.top
+            right: parent.right
+        }
+        font.pointSize: theme.defaultFont.pointSize * 2
+        text: i18n("Tags")
+    }
     PlasmaCore.DataSource {
         id: metadataSource
         engine: "org.kde.active.metadata"
@@ -42,10 +50,14 @@ PlasmaComponents.Page {
         contentWidth: mainColumn.width
         contentHeight: mainColumn.height
 
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            margins: 8
+        }
 
         Column {
             id: mainColumn
+            spacing: 8
             Repeater {
                 model: MetadataModels.MetadataCloudModel {
                     id: tagCloud
@@ -55,8 +67,9 @@ PlasmaComponents.Page {
                 }
 
                 Row {
+                    spacing: 8
                     MouseArea {
-                        width: root.width/2
+                        width: theme.defaultFont.mSize.width * 10
                         height: width
                         property bool checked: false
 
@@ -71,6 +84,12 @@ PlasmaComponents.Page {
                                 service.startOperationCall(operation)
                             }
 
+                            Rectangle {
+                                color: theme.textColor
+                                anchors.fill: parent
+                                radius: width/2
+                                opacity: 0.02
+                            }
                             Rectangle {
                                 color: parent.parent.checked ? theme.highlightColor : theme.textColor
                                 radius: width/2
