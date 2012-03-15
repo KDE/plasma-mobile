@@ -25,7 +25,6 @@
 #include <QDeclarativeEngine>
 
 #include "appletcontainer.h"
-#include "categorizedproxymodel.h"
 #include "pagedproxymodel.h"
 #include "fallbackcomponent.h"
 #include "package.h"
@@ -43,7 +42,6 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<PagedProxyModel>(uri, 0, 1, "PagedProxyModel");
     qmlRegisterType<FallbackComponent>(uri, 0, 1, "FallbackComponent");
-    qmlRegisterType<CategorizedProxyModel>(uri, 0, 1, "CategorizedProxyModel");
     qmlRegisterType<Package>(uri, 0, 1, "Package");
     qmlRegisterType<TextEffects>(uri, 0, 1, "TextEffects");
     qmlRegisterType<AppletContainer>(uri, 0, 1, "AppletContainer");

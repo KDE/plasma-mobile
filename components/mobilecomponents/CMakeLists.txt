@@ -8,7 +8,6 @@ appbackgroundprovider.cpp
     mobilecomponentsplugin.cpp
     pagedproxymodel.cpp
     fallbackcomponent.cpp
-    categorizedproxymodel.cpp
     package.cpp
     texteffects.cpp
     )
