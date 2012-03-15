@@ -84,12 +84,4 @@ Item {
             }
         }
     }
-    PlasmaComponents.Button {
-        anchors {
-            bottom: parent.bottom
-            horizontalCenter: parent.horizontalCenter
-        }
-        text: i18n("Timeline")
-        onClicked: sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
-    }
 }

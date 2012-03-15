@@ -162,21 +162,12 @@ Image {
         PlasmaComponents.PageStack {
             id: sidebarStack
             //initialPage: Qt.createComponent("CategorySidebar.qml")
-            toolBar: sidebarToolbar
             anchors {
                 fill: parent
                 bottomMargin: Math.max(10, sidebarToolbar.height)
                 topMargin: toolBar.height
                 leftMargin: theme.defaultFont.mSize.width * 2
                 margins: theme.defaultFont.mSize.width
-            }
-        }
-        PlasmaComponents.ToolBar {
-            id: sidebarToolbar
-            z: 0
-            anchors {
-                top: undefined
-                bottom: parent.bottom
             }
         }
     }
