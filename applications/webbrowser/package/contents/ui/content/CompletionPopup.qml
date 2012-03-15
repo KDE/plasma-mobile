@@ -21,6 +21,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
 import org.kde.qtextracomponents 0.1
@@ -234,10 +235,9 @@ Item {
                 delegate: myDelegate
                 highlight: PlasmaComponents.Highlight {}
                 currentIndex: -1
-                header: PlasmaComponents.Label {
+                header: Title {
                     id: historyLabel
                     text: i18n("Recently visited")
-                    font.pointSize: theme.defaultFont.pointSize+8
                     anchors {
                         top: parent.top
                         left: parent.left
@@ -255,9 +255,8 @@ Item {
                 model: bookmarksModel
                 delegate: myDelegate
                 highlight: PlasmaComponents.Highlight {}
-                header: PlasmaComponents.Label {
+                header: Title {
                     id: bookmarksLabel
-                    font.pointSize: theme.defaultFont.pointSize+8
                     text: i18n("Bookmarks")
                 }
             }
