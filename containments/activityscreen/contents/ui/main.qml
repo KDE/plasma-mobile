@@ -21,6 +21,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.extra 0.1 as PlasmaExtra
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
@@ -108,7 +109,7 @@ Item {
         id: userTypes
     }
 
-    MobileComponents.ResourceInstance {
+    PlasmaExtra.ResourceInstance {
         id: resourceInstance
     }
 
