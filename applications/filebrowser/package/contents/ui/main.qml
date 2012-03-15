@@ -138,7 +138,21 @@ Image {
             }
         }
     }
- 
+
+    Rectangle {
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: parent.height/5
+        z: 11000
+        PlasmaComponents.PageStack {
+            anchors.fill: parent
+            initialPage: Qt.createComponent("TagsBar.qml")
+        }
+    }
+
     SlcComponents.SlcMenu {
         id: contextMenu
     }
