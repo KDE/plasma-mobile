@@ -72,16 +72,29 @@ Image {
         id: toolBar
     }
 
-    PlasmaComponents.PageStack {
-        id: mainStack
-        clip: false
-        toolBar: toolBar
-        //initialPage: Qt.createComponent("Browser.qml")
+    Item {
         anchors {
             right: sideBar.left
             top: parent.top
             bottom: parent.bottom
             left: parent.left
+        }
+        onWidthChanged: mainStackSyncTimer.restart()
+        Timer {
+            id: mainStackSyncTimer
+            interval: 200
+            onTriggered: mainStack.width = parent.width
+        }
+        PlasmaComponents.PageStack {
+            id: mainStack
+            clip: false
+            toolBar: toolBar
+            //initialPage: Qt.createComponent("Browser.qml")
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                left: parent.left
+            }
         }
     }
 
@@ -94,13 +107,78 @@ Image {
         }
     }
 
+    PlasmaComponents.ButtonColumn {
+        z: 900
+        anchors {
+            right: sideBar.left
+            verticalCenter: sideBar.verticalCenter
+            rightMargin: -1
+        }
+        SidebarTab {
+            text: i18n("Main")
+            onCheckedChanged: {
+                if (checked) {
+                    while (sidebarStack.depth > 1) {
+                        sidebarStack.pop()
+                    }
+                }
+            }
+        }
+        SidebarTab {
+            text: i18n("Time")
+            onCheckedChanged: {
+                if (checked) {
+                    if (sidebarStack.depth > 1) {
+                        sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
+                    } else {
+                        sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
+                    }
+                }
+            }
+        }
+        SidebarTab {
+            text: i18n("Tags")
+            onCheckedChanged: {
+                print(checked)
+                if (checked) {
+                    if (sidebarStack.depth > 1) {
+                        sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
+                    } else {
+                        sidebarStack.push(Qt.createComponent("TagsBar.qml"))
+                    }
+                }
+            }
+        }
+        function uncheckAll()
+        {
+            emptyTab.checked = true
+        }
+        //FIXME: hack to make no item selected
+        Item {
+            id: emptyTab
+            property bool checked: false
+            onCheckedChanged: {
+                if (checked) {
+                    while (sidebarStack.depth > 1) {
+                        sidebarStack.pop()
+                    }
+                }
+            }
+        }
+    }
     Image {
         id: sideBar
         source: "image://appbackgrounds/contextarea"
         fillMode: Image.Tile
         clip: true
 
-        width: parent.width/4
+        width: emptyTab.checked ? 0 : parent.width/4
+        Behavior on width {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
         anchors {
             right: parent.right
             top: parent.top
@@ -119,26 +197,20 @@ Image {
 
         PlasmaComponents.PageStack {
             id: sidebarStack
+            width: imageViewer.width/4 - theme.defaultFont.mSize.width * 2
             //initialPage: Qt.createComponent("CategorySidebar.qml")
-            toolBar: sidebarToolbar
             anchors {
-                fill: parent
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
                 bottomMargin: Math.max(10, sidebarToolbar.height)
                 topMargin: toolBar.height
                 leftMargin: theme.defaultFont.mSize.width * 2
                 margins: theme.defaultFont.mSize.width
             }
         }
-        PlasmaComponents.ToolBar {
-            id: sidebarToolbar
-            z: 0
-            anchors {
-                top: undefined
-                bottom: parent.bottom
-            }
-        }
     }
- 
+
     SlcComponents.SlcMenu {
         id: contextMenu
     }

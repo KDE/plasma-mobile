@@ -18,31 +18,44 @@
  */
 
 import QtQuick 1.1
-import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 
 Item {
-    anchors.fill: parent
+    id: root
+    property bool checked: false
+    property alias text: tabLabel.text
+    width: tabLabel.height + frame.margins.left + frame.margins.right
+    height: tabLabel.width + frame.margins.top + frame.margins.bottom
 
-    Column {
-        id: toolsColumn
-        spacing: 4
+    PlasmaCore.FrameSvgItem {
+        id: frame
+        imagePath: "dialogs/background"
+        enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+        anchors {
+            fill: parent
+            leftMargin: checked? -10 : 0
+        }
 
         PlasmaComponents.Label {
-            text: "<b>"+i18n("Rating")+"</b>"
+            id: tabLabel
+            x: parent.margins.left
+            y: parent.margins.top + width
+            transformOrigin: Item.Center
+            transform: Rotation {
+                angle: -90
+            }
         }
-
-        MobileComponents.Rating {
-            anchors.horizontalCenter: parent.horizontalCenter
-            onScoreChanged: metadataModel.minimumRating = score
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if (root.checked) {
+                    root.parent.uncheckAll()
+                } else {
+                    root.checked = true
+                }
+            }
         }
-
-
-        TypeFilter { }
-
-
     }
 }

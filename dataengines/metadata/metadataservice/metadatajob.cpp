@@ -22,6 +22,7 @@
 
 #include <Nepomuk/Query/Query>
 #include <Nepomuk/Resource>
+#include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
 
 #include <soprano/vocabulary.h>
@@ -124,6 +125,14 @@ void MetadataJob::start()
         b.remove();
         setResult(true);
         return;
+    } else if (operation == "tagResources") {
+        const QStringList resourceUrls = parameters()["ResourceUrls"].toStringList();
+        const Nepomuk::Tag tag( parameters()["Tag"].toString() );
+
+        foreach (const QString &resUrl, resourceUrls) {
+            Nepomuk::Resource r(resUrl);
+            r.addTag(tag);
+        }
     }
 
     setResult(false);
