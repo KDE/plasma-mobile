@@ -26,8 +26,8 @@ Item {
     id: root
     property bool checked: false
     property alias text: tabLabel.text
-    width: tabLabel.width + frame.margins.left + frame.margins.right
-    height: tabLabel.height + frame.margins.top + frame.margins.bottom
+    width: tabLabel.height + frame.margins.left + frame.margins.right
+    height: tabLabel.width + frame.margins.top + frame.margins.bottom
 
     PlasmaCore.FrameSvgItem {
         id: frame
@@ -41,7 +41,11 @@ Item {
         PlasmaComponents.Label {
             id: tabLabel
             x: parent.margins.left
-            y: parent.margins.top
+            y: parent.margins.top + width
+            transformOrigin: Item.Center
+            transform: Rotation {
+                angle: -90
+            }
         }
         MouseArea {
             anchors.fill: parent

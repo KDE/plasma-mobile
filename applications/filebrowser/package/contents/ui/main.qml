@@ -95,6 +95,7 @@ Image {
     }
 
     PlasmaComponents.ButtonColumn {
+        z: 900
         anchors {
             right: sideBar.left
             verticalCenter: sideBar.verticalCenter
