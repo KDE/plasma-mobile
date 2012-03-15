@@ -42,7 +42,7 @@
 import QtQuick 1.0
 import org.kde.kdewebkit 0.1
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.extra 0.1 as PlasmaExtra
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 import "content"
@@ -67,7 +67,7 @@ Rectangle {
         name: "org.kde.active.webbrowser"
     }
 
-    PlasmaExtra.ResourceInstance {
+    PlasmaExtras.ResourceInstance {
         id: resourceInstance
         uri: webBrowser.url
         mimetype: "text/x-html"
