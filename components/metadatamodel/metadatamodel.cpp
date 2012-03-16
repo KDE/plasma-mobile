@@ -522,7 +522,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
         Nepomuk::Resource resource = res.resource();
-        if (!resource.property(NIE::url()).isValid()) {
+        if (res.requestProperties().value(propertyUrl("nie:url")).toString().isEmpty()) {
             continue;
         }
         m_resourcesToInsert[page] << resource;
@@ -542,10 +542,16 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
             description = res.requestProperties().value(RDFS::comment()).toString();
         }
         if (!description.isEmpty()) {
-            m_cachedResources[resource][Url] = description;
+            m_cachedResources[resource][Description] = description;
         }
 
         m_cachedResources[resource][Url] = res.requestProperties().value(propertyUrl("nie:url")).toString();
+
+        QStringList types;
+        foreach (const QUrl &u, resource.types()) {
+            types << u.toString();
+        }
+        m_cachedResources[resource][Types] = types;
 
         Soprano::Node symbol = res.requestProperties().value(NAO::hasSymbol());
         if (!symbol.toString().isEmpty()) {
@@ -739,28 +745,22 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
     case Label:
         return m_cachedResources.value(resource).value(Label);
-    case Types: {
-        QStringList types;
-        foreach (const QUrl &u, resource.types()) {
-            types << u.toString();
-        }
-        return types;
-    }
     case GenericClassName: {
         //FIXME: a more elegant way is needed
         QString genericClassName = m_cachedResources.value(resource).value(ClassName).toString();
         //FIXME: most bookmarks are Document too, so Bookmark wins
-        if (resource.types().contains(NFO::Bookmark())) {
+        if (m_cachedResources.value(resource).value(Label).value<QList<QUrl> >().contains(NFO::Bookmark())) {
             return "Bookmark";
         }
         Nepomuk::Types::Class resClass(resource.resourceType());
         foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
-            if (parentClass.label() == "Document" ||
-                parentClass.label() == "Audio" ||
-                parentClass.label() == "Video" ||
-                parentClass.label() == "Image" ||
-                parentClass.label() == "Contact") {
-                genericClassName = parentClass.label();
+            const QString label = parentClass.label();
+            if (label == "Document" ||
+                label == "Audio" ||
+                label == "Video" ||
+                label == "Image" ||
+                label == "Contact") {
+                genericClassName = label;
                 break;
             //two cases where the class is 2 levels behind the level of generalization we want
             } else if (parentClass.label() == "RasterImage") {
