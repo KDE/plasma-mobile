@@ -206,7 +206,6 @@ PlasmaComponents.Page {
                 width: resultsGrid.delegateWidth
                 height: resultsGrid.delegateHeight
                 infoLabelVisible: false
-                property string label: model["label"] ? model["label"] : (model["display"] ? model["display"] : "")
 
                 //TODO: replace with prettier
                 Rectangle {
@@ -236,71 +235,6 @@ PlasmaComponents.Page {
                     mimeData {
                         source: parent
                         url: model.url
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        //drag.target: resourceDelegate
-                        property int startX
-                        property int startY
-                        property int lastX
-                        property int lastY
-
-                        onPressed: {
-                            startX = resourceDelegate.x
-                            startY = resourceDelegate.y
-                            var pos = mapToItem(resultsGrid, mouse.x, mouse.y)
-                            lastX = pos.x
-                            lastY = pos.y
-                            resourceDelegate.z = 900
-                        }
-                        onPositionChanged: {
-                            if (startX < 0) {
-                                return
-                            }
-                            var pos = mapToItem(resultsGrid, mouse.x, mouse.y)
-                            resourceDelegate.x += (pos.x - lastX)
-                            resourceDelegate.y += (pos.y - lastY)
-                            lastX = pos.x
-                            lastY = pos.y
-                        }
-                        onReleased: {
-                            resourceDelegate.z = 0
-                            if (startX < 0) {
-                                return
-                            }
-                            positionAnim.target = resourceDelegate
-                            positionAnim.x = startX
-                            positionAnim.y = startY
-                            positionAnim.running = true
-                            startX = -1
-                            startY = -1
-                        }
-                        onCanceled: {
-                            resourceDelegate.z = 0
-                            if (startX < 0) {
-                                return
-                            }
-
-                            positionAnim.target = resourceDelegate
-                            positionAnim.x = startX
-                            positionAnim.y = startY
-                            positionAnim.running = true
-                            startX = -1
-                            startY = -1
-                        }
-                        onPressAndHold: {
-                            resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
-                            resourceInstance.title = model["label"]
-                        }
-                        onClicked: {
-                            if (mimeType == "inode/directory") {
-                                dirModel.url = model["url"]
-                                resultsGrid.model = dirModel
-                            } else if (!mainStack.busy) {
-                                Qt.openUrlExternally(model["url"])
-                            }
-                        }
                     }
                 }
             }
