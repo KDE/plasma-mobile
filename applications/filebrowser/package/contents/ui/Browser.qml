@@ -167,17 +167,16 @@ PlasmaComponents.Page {
 
     ListModel {
         id: selectedModel
-        property variant urls
     }
     //For some reason onCountChanged doesn't get binded directly in ListModel
     Connections {
         target: selectedModel
         onCountChanged: {
-            var newUrls = newArray()
+            var newUrls = new Array()
             for (var i = 0; i < selectedModel.count; ++i) {
-              newUrls += selectedModel.get(i).url
+              newUrls[i] = selectedModel.get(i).url
             }
-            selectedModel.urls = newUrls
+            dragArea.mimeData.urls = newUrls
         }
     }
 
@@ -206,12 +205,12 @@ PlasmaComponents.Page {
         onPinchFinished: selecting = false
         anchors.fill: parent
         DragArea {
+            id: dragArea
             anchors.fill: parent
             //startDragDistance: 200
             enabled: false
             mimeData {
                 source: parent
-                urls: selectedModel.urls
             }
             onDrop: enabled = false
             MouseEventListener {
