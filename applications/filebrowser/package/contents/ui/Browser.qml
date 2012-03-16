@@ -167,8 +167,17 @@ PlasmaComponents.Page {
 
     ListModel {
         id: selectedModel
+        proeprty variant urls
+        onCountChanged: {
+            var newUrls = newArray()
+            for (var i = 0; i < selectedModel.count; ++i) {
+              urls += selectedModel.get(i).url
+            }
+            urls = newUrls
+        }
     }
 
+    //This pinch area is for selection
     PinchArea {
         id: pinchArea
         property bool selecting: false
@@ -192,49 +201,59 @@ PlasmaComponents.Page {
         }
         onPinchFinished: selecting = false
         anchors.fill: parent
-        MobileComponents.IconGrid {
-            id: resultsGrid
+        DragArea {
             anchors.fill: parent
-
-            model: metadataModel
-
-            delegate: MobileComponents.ResourceDelegate {
-                id: resourceDelegate
-                className: model["className"] ? model["className"] : ""
-                genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
-
-                width: resultsGrid.delegateWidth
-                height: resultsGrid.delegateHeight
-                infoLabelVisible: false
-
-                //TODO: replace with prettier
-                Rectangle {
-                    width:20
-                    height:width
-                    property bool contains: (pinchArea.selectingX > resourceDelegate.x && pinchArea.selectingX < resourceDelegate.x + resourceDelegate.width) && (pinchArea.selectingY > resourceDelegate.y && pinchArea.selectingY < resourceDelegate.y + resourceDelegate.height)
-                    visible: false
-                    onContainsChanged: {
-                        if (contains) {
-                            for (var i = 0; i < selectedModel.count; ++i) {
-                                if ((model.url && model.url == selectedModel.get(i).url)) {
-                                    visible = false
-                                    selectedModel.remove(i)
-                                    return
-                                }
-                            }
-
-                            selectedModel.append({"url": model.url})
-                            visible = true
-                        }
+            //startDragDistance: 200
+            enabled: false
+            mimeData {
+                source: parent
+                urls: selectedModel.urls
+            }
+            onDrop: enabled = false
+            MouseEventListener {
+                anchors.fill: parent
+                onPressed: startY = mouse.y
+                onPositionChanged: {
+                    if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
+                        parent.enabled = true
                     }
                 }
-                DragArea {
+                MobileComponents.IconGrid {
+                    id: resultsGrid
                     anchors.fill: parent
-                    startDragDistance: 100
-                    delegateImage: thumbnail !== undefined ? thumbnail : QIcon(icon)
-                    mimeData {
-                        source: parent
-                        url: model.url
+
+                    model: metadataModel
+
+                    delegate: MobileComponents.ResourceDelegate {
+                        id: resourceDelegate
+                        className: model["className"] ? model["className"] : ""
+                        genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
+
+                        width: resultsGrid.delegateWidth
+                        height: resultsGrid.delegateHeight
+                        infoLabelVisible: false
+
+                        //TODO: replace with prettier
+                        Rectangle {
+                            width:20
+                            height:width
+                            property bool contains: (pinchArea.selectingX > resourceDelegate.x && pinchArea.selectingX < resourceDelegate.x + resourceDelegate.width) && (pinchArea.selectingY > resourceDelegate.y && pinchArea.selectingY < resourceDelegate.y + resourceDelegate.height)
+                            visible: false
+                            onContainsChanged: {
+                                if (contains) {
+                                    for (var i = 0; i < selectedModel.count; ++i) {
+                                        if ((model.url && model.url == selectedModel.get(i).url)) {
+                                            visible = false
+                                            selectedModel.remove(i)
+                                            return
+                                        }
+                                    }
+
+                                    selectedModel.append({"url": model.url})
+                                    visible = true
+                                }
+                            }
+                        }
                     }
                 }
             }
