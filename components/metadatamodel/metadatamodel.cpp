@@ -414,8 +414,6 @@ void MetadataModel::doQuery()
     {
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NIE::url()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NAO::hasSymbol()));
-        m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(RDFS::label()));
-        m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NFO::fileName()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NIE::mimeType()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NAO::description()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(Xesam::description()));
@@ -528,11 +526,8 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         m_resourcesToInsert[page] << resource;
 
         //pre-popuplating of the cache to avoid accessing properties directly
-        QString label = res.requestProperties().value(RDFS::label()).toString();
-        if (label.isEmpty()) {
-            label = res.requestProperties().value(NFO::fileName()).toString();
-        }
-        m_cachedResources[resource][Label] = label;
+        //label is a bit too complex to take from query
+        m_cachedResources[resource][Label] = resource.genericLabel();
 
         QString description = res.requestProperties().value(NAO::description()).toString();
         if (description.isEmpty()) {
