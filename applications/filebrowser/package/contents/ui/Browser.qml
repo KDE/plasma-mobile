@@ -227,35 +227,44 @@ PlasmaComponents.Page {
 
                     model: metadataModel
 
-                    delegate: MobileComponents.ResourceDelegate {
-                        id: resourceDelegate
-                        className: model["className"] ? model["className"] : ""
-                        genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
-
+                    delegate: Item {
                         width: resultsGrid.delegateWidth
                         height: resultsGrid.delegateHeight
-                        infoLabelVisible: false
 
-                        //TODO: replace with prettier
-                        Rectangle {
-                            width:20
-                            height:width
+                        PlasmaCore.FrameSvgItem {
+                            id: highlightFrame
+                            imagePath: "widgets/viewitem"
+                            prefix: "selected+hover"
+                            anchors.fill: parent
+
                             property bool contains: (pinchArea.selectingX > resourceDelegate.x && pinchArea.selectingX < resourceDelegate.x + resourceDelegate.width) && (pinchArea.selectingY > resourceDelegate.y && pinchArea.selectingY < resourceDelegate.y + resourceDelegate.height)
-                            visible: false
+                            opacity: 0
+                            Behavior on opacity {
+                                NumberAnimation {duration: 250}
+                            }
                             onContainsChanged: {
                                 if (contains) {
                                     for (var i = 0; i < selectedModel.count; ++i) {
                                         if ((model.url && model.url == selectedModel.get(i).url)) {
-                                            visible = false
+                                            opacity = 0
                                             selectedModel.remove(i)
                                             return
                                         }
                                     }
 
                                     selectedModel.append({"url": model.url})
-                                    visible = true
+                                    opacity = 1
                                 }
                             }
+                        }
+                        MobileComponents.ResourceDelegate {
+                            id: resourceDelegate
+                            className: model["className"] ? model["className"] : ""
+                            genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
+
+                            width: resultsGrid.delegateWidth
+                            height: resultsGrid.delegateHeight
+                            infoLabelVisible: false
                         }
                     }
                 }
