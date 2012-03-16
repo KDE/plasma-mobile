@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
@@ -165,92 +165,109 @@ PlasmaComponents.Page {
         }
     }
 
-    MobileComponents.IconGrid {
-        id: resultsGrid
+    PinchArea {
+        property bool selecting: false
+        onPinchStarted: {
+            //hotspot to start select procedures
+            if (pinch.point1.x < 20 && pinch.point1.y < 20) {
+                print("Selecting")
+                selecting = true
+            }
+        }
+        onPinchUpdated: {
+            if (selecting) {
+                print("Selected" + resultsGrid.childAt(pinch.point2.x, pinch.point2.y))
+            }
+        }
+        onPinchFinished: selecting = false
         anchors.fill: parent
+        MobileComponents.IconGrid {
+            id: resultsGrid
+            anchors.fill: parent
 
-        model: metadataModel
+            model: metadataModel
 
-        delegate: MobileComponents.ResourceDelegate {
-            id: resourceDelegate
-            className: model["className"] ? model["className"] : ""
-            genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
+            delegate: MobileComponents.ResourceDelegate {
+                id: resourceDelegate
+                className: model["className"] ? model["className"] : ""
+                genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
 
-            width: resultsGrid.delegateWidth
-            height: resultsGrid.delegateHeight
-            infoLabelVisible: false
-            property string label: model["label"] ? model["label"] : (model["display"] ? model["display"] : "")
+                width: resultsGrid.delegateWidth
+                height: resultsGrid.delegateHeight
+                infoLabelVisible: false
+                property string label: model["label"] ? model["label"] : (model["display"] ? model["display"] : "")
 
-            DragArea {
-                anchors.fill: parent
-                startDragDistance: 100
-                delegateImage: thumbnail !== undefined ? thumbnail : QIcon(icon)
-                mimeData {
-                    source: parent
-                    url: model.url
-                }
-
-                MouseArea {
+                DragArea {
                     anchors.fill: parent
-                    //drag.target: resourceDelegate
-                    property int startX
-                    property int startY
-                    property int lastX
-                    property int lastY
+                    startDragDistance: 100
+                    delegateImage: thumbnail !== undefined ? thumbnail : QIcon(icon)
+                    mimeData {
+                        source: parent
+                        url: model.url
+                    }
 
-                    onPressed: {
-                        startX = resourceDelegate.x
-                        startY = resourceDelegate.y
-                        var pos = mapToItem(resultsGrid, mouse.x, mouse.y)
-                        lastX = pos.x
-                        lastY = pos.y
-                        resourceDelegate.z = 900
-                    }
-                    onPositionChanged: {
-                        if (startX < 0) {
-                            return
-                        }
-                        var pos = mapToItem(resultsGrid, mouse.x, mouse.y)
-                        resourceDelegate.x += (pos.x - lastX)
-                        resourceDelegate.y += (pos.y - lastY)
-                        lastX = pos.x
-                        lastY = pos.y
-                    }
-                    onReleased: {
-                        resourceDelegate.z = 0
-                        if (startX < 0) {
-                            return
-                        }
-                        positionAnim.target = resourceDelegate
-                        positionAnim.x = startX
-                        positionAnim.y = startY
-                        positionAnim.running = true
-                        startX = -1
-                        startY = -1
-                    }
-                    onCanceled: {
-                        resourceDelegate.z = 0
-                        if (startX < 0) {
-                            return
-                        }
+                    MouseArea {
+                        anchors.fill: parent
+                        //drag.target: resourceDelegate
+                        property int startX
+                        property int startY
+                        property int lastX
+                        property int lastY
 
-                        positionAnim.target = resourceDelegate
-                        positionAnim.x = startX
-                        positionAnim.y = startY
-                        positionAnim.running = true
-                        startX = -1
-                        startY = -1
-                    }
-                    onPressAndHold: {
-                        resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
-                        resourceInstance.title = model["label"]
-                    }
-                    onClicked: {
-                        if (mimeType == "inode/directory") {
-                            dirModel.url = model["url"]
-                            resultsGrid.model = dirModel
-                        } else if (!mainStack.busy) {
-                            Qt.openUrlExternally(model["url"])
+                        onPressed: {
+                            startX = resourceDelegate.x
+                            startY = resourceDelegate.y
+                            var pos = mapToItem(resultsGrid, mouse.x, mouse.y)
+                            lastX = pos.x
+                            lastY = pos.y
+                            resourceDelegate.z = 900
+                        }
+                        onPositionChanged: {
+                            if (startX < 0) {
+                                return
+                            }
+                            var pos = mapToItem(resultsGrid, mouse.x, mouse.y)
+                            resourceDelegate.x += (pos.x - lastX)
+                            resourceDelegate.y += (pos.y - lastY)
+                            lastX = pos.x
+                            lastY = pos.y
+                        }
+                        onReleased: {
+                            resourceDelegate.z = 0
+                            if (startX < 0) {
+                                return
+                            }
+                            positionAnim.target = resourceDelegate
+                            positionAnim.x = startX
+                            positionAnim.y = startY
+                            positionAnim.running = true
+                            startX = -1
+                            startY = -1
+                        }
+                        onCanceled: {
+                            resourceDelegate.z = 0
+                            if (startX < 0) {
+                                return
+                            }
+
+                            positionAnim.target = resourceDelegate
+                            positionAnim.x = startX
+                            positionAnim.y = startY
+                            positionAnim.running = true
+                            startX = -1
+                            startY = -1
+                        }
+                        onPressAndHold: {
+                            resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
+                            resourceInstance.title = model["label"]
+                        }
+                        onClicked: {
+                            if (mimeType == "inode/directory") {
+                                dirModel.url = model["url"]
+                                resultsGrid.model = dirModel
+                            } else if (!mainStack.busy) {
+                                Qt.openUrlExternally(model["url"])
+                            }
                         }
                     }
                 }
