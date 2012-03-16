@@ -228,6 +228,7 @@ PlasmaComponents.Page {
                     model: metadataModel
 
                     delegate: Item {
+                        id: resourceDelegate
                         width: resultsGrid.delegateWidth
                         height: resultsGrid.delegateHeight
 
@@ -258,7 +259,6 @@ PlasmaComponents.Page {
                             }
                         }
                         MobileComponents.ResourceDelegate {
-                            id: resourceDelegate
                             className: model["className"] ? model["className"] : ""
                             genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
 
