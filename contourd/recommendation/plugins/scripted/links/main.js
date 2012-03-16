@@ -9,7 +9,7 @@ function add(url, title, description, icon)
 }
 
 add("http://www.kde.org/", "KDE community", "The people behind Plasma Active", "kde");
-add("http://plasma.kde.org/active/help", "Usage manual", "How to use Plasma Active", "help-about");
+add("http://community.kde.org/Plasma/Active/Info#FAQ", "Usage manual", "How to use Plasma Active", "help-about");
 
 self.activationRequested.connect(function fn(id, action) {
     self.openUrl(id);
