@@ -566,6 +566,36 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         m_cachedResources[resource][IsFile] = resource.isFile();
         m_cachedResources[resource][HasSymbol] = res.requestProperties().value(NAO::hasSymbol()).toString();
         m_cachedResources[resource][MimeType] = res.requestProperties().value(NIE::mimeType()).toString();
+
+        //FIXME: The most complicated of all, this should really be simplified
+        {
+            //FIXME: a more elegant way is needed
+            QString genericClassName = m_cachedResources.value(resource).value(ClassName).toString();
+            //FIXME: most bookmarks are Document too, so Bookmark wins
+            if (m_cachedResources.value(resource).value(Label).value<QList<QUrl> >().contains(NFO::Bookmark())) {
+                m_cachedResources[resource][GenericClassName] = "Bookmark";
+
+            } else {
+                Nepomuk::Types::Class resClass(resource.resourceType());
+                foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
+                    const QString label = parentClass.label();
+                    if (label == "Document" ||
+                        label == "Audio" ||
+                        label == "Video" ||
+                        label == "Image" ||
+                        label == "Contact") {
+                        genericClassName = label;
+                        break;
+                    //two cases where the class is 2 levels behind the level of generalization we want
+                    } else if (parentClass.label() == "RasterImage") {
+                        genericClassName = "Image";
+                    } else if (parentClass.label() == "TextDocument") {
+                        genericClassName = "Document";
+                    }
+                }
+                m_cachedResources[resource][GenericClassName] = genericClassName;
+            }
+        }
     }
 
     if (!m_newEntriesTimer->isActive() && !m_resourcesToInsert[page].isEmpty()) {
@@ -745,32 +775,6 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
     case Label:
         return m_cachedResources.value(resource).value(Label);
-    case GenericClassName: {
-        //FIXME: a more elegant way is needed
-        QString genericClassName = m_cachedResources.value(resource).value(ClassName).toString();
-        //FIXME: most bookmarks are Document too, so Bookmark wins
-        if (m_cachedResources.value(resource).value(Label).value<QList<QUrl> >().contains(NFO::Bookmark())) {
-            return "Bookmark";
-        }
-        Nepomuk::Types::Class resClass(resource.resourceType());
-        foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
-            const QString label = parentClass.label();
-            if (label == "Document" ||
-                label == "Audio" ||
-                label == "Video" ||
-                label == "Image" ||
-                label == "Contact") {
-                genericClassName = label;
-                break;
-            //two cases where the class is 2 levels behind the level of generalization we want
-            } else if (parentClass.label() == "RasterImage") {
-                genericClassName = "Image";
-            } else if (parentClass.label() == "TextDocument") {
-                genericClassName = "Document";
-            }
-        }
-        return genericClassName;
-    }
     case Qt::DecorationRole: 
         return KIcon(m_cachedResources.value(resource).value(Icon).toString());
     case HasSymbol:
