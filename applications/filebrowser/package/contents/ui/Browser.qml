@@ -179,6 +179,10 @@ PlasmaComponents.Page {
             dragArea.mimeData.urls = newUrls
         }
     }
+    Connections {
+        target: metadataModel
+        onModelReset: selectedModel.clear()
+    }
 
     //This pinch area is for selection
     PinchArea {
