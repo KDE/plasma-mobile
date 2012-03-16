@@ -79,6 +79,7 @@ PlasmaComponents.Page {
                             onDragEnter: underDrag = true
                             onDragLeave: underDrag = false
                             onDrop: {
+                                underDrag = false
                                 var service = metadataSource.serviceForSource("")
                                 print(service);
                                 var operation = service.operationDescription("tagResources")
@@ -144,6 +145,7 @@ PlasmaComponents.Page {
                         onDragEnter: underDrag = true
                         onDragLeave: underDrag = false
                         onDrop: {
+                            underDrag = false
                             newTagDialog.resourceUrls = event.mimeData.urls
                             newTagDialog.open()
                         }
@@ -192,6 +194,55 @@ PlasmaComponents.Page {
                     id: tagLabel
                     text: i18n("New Tag")
                     anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+        }
+    }
+    PlasmaComponents.ScrollBar {
+        flickableItem: mainFlickable
+        orientation: Qt.Vertical
+    }
+    DropArea {
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
+        height: 20
+        onDragEnter: {
+            scrollTimer.down = false
+            scrollTimer.running = true
+        }
+        onDragLeave: scrollTimer.running = false
+        onDrop: scrollTimer.running = false
+    }
+    DropArea {
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: 20
+        onDragEnter: {
+            scrollTimer.down = true
+            scrollTimer.running = true
+        }
+        onDragLeave: scrollTimer.running = false
+        onDrop: scrollTimer.running = false
+    }
+    Timer {
+        id: scrollTimer
+        property bool down: true
+        interval: 25
+        repeat: true
+        onTriggered: {
+            if (down) {
+                if (!mainFlickable.atYEnd) {
+                    mainFlickable.contentY += 10
+                }
+            } else {
+                if (!mainFlickable.atYBeginning) {
+                    mainFlickable.contentY -= 10
                 }
             }
         }
