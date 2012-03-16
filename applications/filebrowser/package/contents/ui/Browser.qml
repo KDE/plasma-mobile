@@ -165,18 +165,29 @@ PlasmaComponents.Page {
         }
     }
 
+    ListModel {
+        id: selectedModel
+    }
+
     PinchArea {
+        id: pinchArea
         property bool selecting: false
+        property int selectingX
+        property int selectingY
+        pinch.target: parent
         onPinchStarted: {
             //hotspot to start select procedures
-            if (pinch.point1.x < 20 && pinch.point1.y < 20) {
-                print("Selecting")
-                selecting = true
-            }
+            print("point1: " + pinch.point1.x + " " + pinch.point1.y)
+            print("Selecting")
+            selecting = true
+            selectingX = pinch.point2.x
+            selectingY = pinch.point2.y
         }
         onPinchUpdated: {
             if (selecting) {
                 print("Selected" + resultsGrid.childAt(pinch.point2.x, pinch.point2.y))
+                selectingX = pinch.point2.x
+                selectingY = pinch.point2.y
             }
         }
         onPinchFinished: selecting = false
@@ -197,6 +208,27 @@ PlasmaComponents.Page {
                 infoLabelVisible: false
                 property string label: model["label"] ? model["label"] : (model["display"] ? model["display"] : "")
 
+                //TODO: replace with prettier
+                Rectangle {
+                    width:20
+                    height:width
+                    property bool contains: (pinchArea.selectingX > resourceDelegate.x && pinchArea.selectingX < resourceDelegate.x + resourceDelegate.width) && (pinchArea.selectingY > resourceDelegate.y && pinchArea.selectingY < resourceDelegate.y + resourceDelegate.height)
+                    visible: false
+                    onContainsChanged: {
+                        if (contains) {
+                            for (var i = 0; i < selectedModel.count; ++i) {
+                                if ((model.url && model.url == selectedModel.get(i).url)) {
+                                    visible = false
+                                    selectedModel.remove(i)
+                                    return
+                                }
+                            }
+
+                            selectedModel.append({"url": model.url})
+                            visible = true
+                        }
+                    }
+                }
                 DragArea {
                     anchors.fill: parent
                     startDragDistance: 100
