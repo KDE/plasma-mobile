@@ -167,13 +167,17 @@ PlasmaComponents.Page {
 
     ListModel {
         id: selectedModel
-        proeprty variant urls
+        property variant urls
+    }
+    //For some reason onCountChanged doesn't get binded directly in ListModel
+    Connections {
+        target: selectedModel
         onCountChanged: {
             var newUrls = newArray()
             for (var i = 0; i < selectedModel.count; ++i) {
-              urls += selectedModel.get(i).url
+              newUrls += selectedModel.get(i).url
             }
-            urls = newUrls
+            selectedModel.urls = newUrls
         }
     }
 
