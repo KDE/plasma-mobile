@@ -298,7 +298,7 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entri
         categories << label;
     }
     if (results.count() > 0) {
-        beginInsertRows(QModelIndex(), m_results.count(), m_results.count()+results.count());
+        beginInsertRows(QModelIndex(), m_results.count(), m_results.count()+results.count()-1);
         m_results << results;
         m_categories << categories;
         endInsertRows();
