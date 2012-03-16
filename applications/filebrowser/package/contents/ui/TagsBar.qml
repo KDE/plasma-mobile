@@ -45,13 +45,6 @@ PlasmaComponents.Page {
         //connectedSources: []
     }
 
-    MetadataModels.MetadataCloudModel {
-        id: tagCloud
-        cloudCategory: "nao:hasTag"
-        resourceType: metadataModel.resourceType
-        minimumRating: metadataModel.minimumRating
-    }
-
     Flickable {
         id: mainFlickable
         contentWidth: mainColumn.width
@@ -67,7 +60,16 @@ PlasmaComponents.Page {
             spacing: 8
             Repeater {
                 id: tagRepeater
-                model: tagCloud
+                model: PlasmaCore.SortFilterModel {
+                    id: sortFilterModel
+                    sourceModel: MetadataModels.MetadataCloudModel {
+                        id: tagCloud
+                        cloudCategory: "nao:hasTag"
+                        resourceType: metadataModel.resourceType
+                        minimumRating: metadataModel.minimumRating
+                    }
+                    sortRole: "label"
+                }
 
                 delegate: Row {
                     spacing: 8
