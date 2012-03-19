@@ -165,6 +165,24 @@ PlasmaComponents.Page {
         }
     }
 
+    function openFile(url, mimeType)
+    {
+        if (mimeType == "inode/directory") {
+            dirModel.url = url
+            resultsGrid.model = dirModel
+        } else if (!mainStack.busy) {
+            var packageName = application.packageForMimeType(mimeType)
+            print("Package for mimetype " + mimeType + " " + packageName)
+            if (packageName) {
+                partPackage.name = packageName
+                var part = mainStack.push(partPackage.filePath("mainscript"))
+                part.loadFile(url)
+            } else {
+                Qt.openUrlExternally(url)
+            }
+        }
+    }
+
     ListModel {
         id: selectedModel
     }
@@ -269,22 +287,7 @@ PlasmaComponents.Page {
                             width: resultsGrid.delegateWidth
                             height: resultsGrid.delegateHeight
                             infoLabelVisible: false
-                            onClicked: {
-                                if (mimeType == "inode/directory") {
-                                    dirModel.url = model["url"]
-                                    resultsGrid.model = dirModel
-                                } else if (!mainStack.busy) {
-                                    var packageName = application.packageForMimeType(mimeType)
-                                    print("Package for mimetype " + mimeType + " " + packageName)
-                                    if (packageName) {
-                                        partPackage.name = packageName
-                                        var part = mainStack.push(partPackage.filePath("mainscript"))
-                                        part.loadFile(model["url"])
-                                    } else {
-                                        Qt.openUrlExternally(model["url"])
-                                    }
-                                }
-                            }
+                            onClicked: openFile(model["url"], mimeType)
                         }
                     }
                 }
