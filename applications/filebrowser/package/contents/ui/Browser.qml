@@ -165,24 +165,6 @@ PlasmaComponents.Page {
         }
     }
 
-    function openFile(url, mimeType)
-    {
-        if (mimeType == "inode/directory") {
-            dirModel.url = url
-            resultsGrid.model = dirModel
-        } else if (!mainStack.busy) {
-            var packageName = application.packageForMimeType(mimeType)
-            print("Package for mimetype " + mimeType + " " + packageName)
-            if (packageName) {
-                partPackage.name = packageName
-                var part = mainStack.push(partPackage.filePath("mainscript"))
-                part.loadFile(url)
-            } else {
-                Qt.openUrlExternally(url)
-            }
-        }
-    }
-
     ListModel {
         id: selectedModel
     }
