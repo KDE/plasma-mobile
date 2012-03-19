@@ -42,14 +42,17 @@ Image {
 
 
     MobileComponents.Package {
-        id: viewerPackage
-        name: "org.kde.active.filebrowser"
+        id: partPackage
     }
 
     MobileComponents.ResourceInstance {
         id: resourceInstance
     }
 
+    MobileComponents.Package {
+        id: homeScreenPackage
+        name: "org.kde.active.contour-tablet-homescreen"
+    }
 
 
     MetadataModels.MetadataUserTypes {

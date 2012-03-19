@@ -274,8 +274,14 @@ PlasmaComponents.Page {
                                     dirModel.url = model["url"]
                                     resultsGrid.model = dirModel
                                 } else if (!mainStack.busy) {
-                                    print("Package for mimetype " + mimeType + " " + application.packageForMimeType(mimeType))
-                                    Qt.openUrlExternally(model["url"])
+                                    var packageName = application.packageForMimeType(mimeType)
+                                    print("Package for mimetype " + mimeType + " " + packageName)
+                                    if (packageName) {
+                                        partPackage.name = packageName
+                                        mainStack.push(partPackage.filePath("mainscript"))
+                                    } else {
+                                        Qt.openUrlExternally(model["url"])
+                                    }
                                 }
                             }
                         }
