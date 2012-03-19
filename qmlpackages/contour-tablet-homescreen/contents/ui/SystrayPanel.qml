@@ -148,7 +148,7 @@ Image {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    rightMargin: 32
+                    rightMargin: slidingDragButton.homeButtonShown ? 32 : 0
                 }
                 height: slidingDragButton.panelHeight
             }
