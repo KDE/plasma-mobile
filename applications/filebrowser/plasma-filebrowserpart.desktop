@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=Active/FileBrowserPart
+
+Comment=Plasma package to load a particular mimetype directly in the file browser
+
+[PropertyDef::MimeTypes]
+Type=QStringList

@@ -30,6 +30,7 @@
 #include <KConfigGroup>
 #include <KIcon>
 #include <KStandardAction>
+#include <KServiceTypeTrader>
 
 #include <Plasma/Theme>
 
@@ -48,5 +49,26 @@ FileBrowser::~FileBrowser()
 {
 }
 
+QString FileBrowser::packageForMimeType(const QString &mimeType)
+{
+     KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("'%1' in MimeTypes").arg(mimeType));
+
+     foreach (const KService::Ptr &service, services) {
+        if (service->noDisplay()) {
+            continue;
+        }
+        QString description;
+        if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
+            description = service->genericName();
+        } else if (!service->comment().isEmpty()) {
+            description = service->comment();
+        }
+        //kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
+        kDebug() << service->property("X-KDE-PluginInfo-Name") << "\t\t" << description.toLocal8Bit().data();
+        kDebug() << service->property("MimeTypes");
+        return service->property("X-KDE-PluginInfo-Name").toString();
+    }
+    return QString();
+}
 
 #include "filebrowser.moc"

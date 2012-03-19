@@ -269,6 +269,15 @@ PlasmaComponents.Page {
                             width: resultsGrid.delegateWidth
                             height: resultsGrid.delegateHeight
                             infoLabelVisible: false
+                            onClicked: {
+                                if (mimeType == "inode/directory") {
+                                    dirModel.url = model["url"]
+                                    resultsGrid.model = dirModel
+                                } else if (!mainStack.busy) {
+                                    print("Package for mimetype " + mimeType + " " + application.packageForMimeType(mimeType))
+                                    Qt.openUrlExternally(model["url"])
+                                }
+                            }
                         }
                     }
                 }

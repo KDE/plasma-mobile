@@ -34,6 +34,8 @@ public:
     FileBrowser();
     virtual ~FileBrowser();
 
+    Q_INVOKABLE QString packageForMimeType(const QString &mimeType);
+
 private:
     DirModel *m_dirModel;
 };
