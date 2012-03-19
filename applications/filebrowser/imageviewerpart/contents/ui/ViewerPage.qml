@@ -92,24 +92,23 @@ PlasmaComponents.Page {
         var index = metadataModel.find(path);
         if (index > -1) {
             fullList.model = metadataModel
-            quickBrowserBar.model = metadataModel
             fullList.positionViewAtIndex(index, ListView.Center)
             fullList.currentIndex = index
-            spareDelegate.visible = false
+            //spareDelegate.visible = false
             fullList.visible = true
-            root.state = "image"
+            fileBrowserRoot.state = "image"
             return
         } else {
             //is in dirModel
             fullList.model = dirModel
-            quickBrowserBar.model = dirModel
             index = dirModel.indexForUrl(path)
             fullList.positionViewAtIndex(index, ListView.Center)
             fullList.currentIndex = index
-            spareDelegate.visible = false
+            //spareDelegate.visible = false
             fullList.visible = true
-            root.state = "image"
+            fileBrowserRoot.state = "image"
         }
+        spareDelegate.source = path
     }
 
     function setCurrentIndex(index)
@@ -124,13 +123,6 @@ PlasmaComponents.Page {
         color: "black"
         anchors.fill:  parent
 
-        FullScreenDelegate {
-            id: spareDelegate
-            anchors {
-                fill:  parent
-            }
-            visible: false
-        }
         ListView {
             id: fullList
             anchors.fill: parent
@@ -153,9 +145,28 @@ PlasmaComponents.Page {
         }
     }
 
+    MouseEventListener {
+        width: parent.width
+        height: parent.height
+
+        property int lastX
+        onPressed: lastX = mouse.screenX
+        onPositionChanged: {
+            x += (mouse.screenX - lastX)
+            lastX = mouse.screenX
+        }
+        FullScreenDelegate {
+            id: spareDelegate
+            anchors {
+                fill:  parent
+            }
+            //visible: false
+        }
+    }
+
     QuickBrowserBar {
         id: quickBrowserBar
-        model: metadataModel
+        model: fileBrowserRoot.model
     }
 
     states: [
@@ -167,7 +178,7 @@ PlasmaComponents.Page {
             }
             PropertyChanges {
                 target: quickBrowserBar
-                y: root.height - quickBrowserBar.height
+                y: fileBrowserRoot.height - quickBrowserBar.height
             }
         },
         State {
@@ -178,7 +189,7 @@ PlasmaComponents.Page {
             }
             PropertyChanges {
                 target: quickBrowserBar
-                y: root.height+20
+                y: fileBrowserRoot.height+20
             }
         }
     ]

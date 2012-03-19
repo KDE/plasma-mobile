@@ -51,7 +51,7 @@ PlasmaComponents.Page {
                 if (resultsGrid.model != dirModel && devicesSource.data[devicesTabBar.currentUdi]["File Path"] != "") {
                     dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"]
 
-                    root.model = dirModel
+                    fileBrowserRoot.model = dirModel
                 }
             }
         }
@@ -109,7 +109,7 @@ PlasmaComponents.Page {
                 iconSource: "drive-harddisk"
                 onCurrentChanged: {
                     if (current) {
-                        root.model = metadataModel
+                        fileBrowserRoot.model = metadataModel
                         //nepomuk db, not filesystem
                         devicesTabBar.currentUdi = ""
                     }
@@ -134,7 +134,7 @@ PlasmaComponents.Page {
                             if (devicesSource.data[udi]["Accessible"]) {
                                 dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"]
 
-                                root.model = dirModel
+                                fileBrowserRoot.model = dirModel
                             } else {
                                 var service = devicesSource.serviceForSource(udi);
                                 var operation = service.operationDescription("mount");
@@ -220,7 +220,7 @@ PlasmaComponents.Page {
                     id: resultsGrid
                     anchors.fill: parent
 
-                    model: root.model
+                    model: fileBrowserRoot.model
 
                     delegate: Item {
                         id: resourceDelegate

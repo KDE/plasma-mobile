@@ -28,8 +28,8 @@ import org.kde.dirmodel 0.1
 
 
 Image {
-    id: root
-    objectName: "root"
+    id: fileBrowserRoot
+    objectName: "fileBrowserRoot"
     source: "image://appbackgrounds/standard"
     fillMode: Image.Tile
     state: "browsing"
@@ -128,12 +128,12 @@ Image {
 
             emptyTab.checked = (exclusiveResourceType !== "")
 
-            /*if (application.startupArguments.length > 0) {
+            if (application.startupArguments.length > 0) {
                 openFile(application.startupArguments[0])
-            }*/
+            }
         }
     }
-    Timer {
+    /*Timer {
         interval: 5000
         running: true
         onTriggered: {
@@ -141,7 +141,7 @@ Image {
                 openFile(application.startupArguments[0])
             }
         }
-    }
+    }*/
 
     PlasmaComponents.ButtonColumn {
         z: 900
@@ -233,7 +233,7 @@ Image {
 
         PlasmaComponents.PageStack {
             id: sidebarStack
-            width: root.width/4 - theme.defaultFont.mSize.width * 2
+            width: fileBrowserRoot.width/4 - theme.defaultFont.mSize.width * 2
             //initialPage: Qt.createComponent("CategorySidebar.qml")
             anchors {
                 left: parent.left
