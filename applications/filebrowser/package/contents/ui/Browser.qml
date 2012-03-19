@@ -278,7 +278,8 @@ PlasmaComponents.Page {
                                     print("Package for mimetype " + mimeType + " " + packageName)
                                     if (packageName) {
                                         partPackage.name = packageName
-                                        mainStack.push(partPackage.filePath("mainscript"))
+                                        var part = mainStack.push(partPackage.filePath("mainscript"))
+                                        part.loadFile(model["url"])
                                     } else {
                                         Qt.openUrlExternally(model["url"])
                                     }

@@ -65,7 +65,6 @@ QString FileBrowser::packageForMimeType(const QString &mimeType)
         }
         //kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
         kDebug() << service->property("X-KDE-PluginInfo-Name") << "\t\t" << description.toLocal8Bit().data();
-        kDebug() << service->property("MimeTypes");
         return service->property("X-KDE-PluginInfo-Name").toString();
     }
     return QString();

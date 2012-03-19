@@ -76,12 +76,12 @@ PlasmaComponents.Page {
         }
     }
 
-    function loadImage(path)
+    function loadFile(path)
     {
         if (path.length == 0) {
             return
         }
-
+print("AAAA")
         if (String(path).indexOf("/") === 0) {
             path = "file://"+path
         }
