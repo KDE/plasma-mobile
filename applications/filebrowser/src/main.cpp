@@ -46,6 +46,7 @@ int main(int argc, char **argv)
 
     KCmdLineOptions options;
     options.add("+[url]", ki18n( "URL of the file to open" ));
+    options.add("t").add("resourceType <type>", ki18n( "resource type to restrict the browser, such as Image or Document" ));
 #ifndef QT_NO_OPENGL
     options.add("opengl", ki18n("use a QGLWidget for the viewport"));
 #endif

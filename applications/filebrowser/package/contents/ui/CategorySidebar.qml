@@ -40,8 +40,18 @@ Item {
             onScoreChanged: metadataModel.minimumRating = score
         }
 
+        Component.onCompleted: {
+            if (exclusiveResourceType) {
+                metadataModel.resourceType = exclusiveResourceType
+            } else {
+                typeFilterLoader.source = "TypeFilter.qml"
+            }
+        }
 
-        TypeFilter { }
+        Loader {
+            id: typeFilterLoader
+            //sourceComponent: TypeFilter { }
+        }
 
 
     }

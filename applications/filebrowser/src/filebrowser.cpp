@@ -37,7 +37,11 @@
 FileBrowser::FileBrowser()
     : KDeclarativeMainWindow()
 {
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
     declarativeView()->setPackageName("org.kde.active.filebrowser");
+
+    declarativeView()->rootContext()->setContextProperty("exclusiveResourceType", args->getOption("resourceType"));
 }
 
 FileBrowser::~FileBrowser()

@@ -104,6 +104,8 @@ Image {
         onTriggered: {
             mainStack.push(Qt.createComponent("Browser.qml"))
             sidebarStack.push(Qt.createComponent("CategorySidebar.qml"))
+
+            emptyTab.checked = (exclusiveResourceType !== "")
         }
     }
 

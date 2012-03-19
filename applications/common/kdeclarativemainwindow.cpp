@@ -115,11 +115,6 @@ QStringList KDeclarativeMainWindow::startupArguments() const
     return d->arguments;
 }
 
-QString KDeclarativeMainWindow::startupOption(const QString &option) const
-{
-    return d->args->getOption(option.toLatin1());
-}
-
 QString KDeclarativeMainWindow::caption() const
 {
     return d->caption;
