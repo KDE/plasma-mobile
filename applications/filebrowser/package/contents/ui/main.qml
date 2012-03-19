@@ -104,6 +104,8 @@ Image {
         onTriggered: {
             mainStack.push(Qt.createComponent("Browser.qml"))
             sidebarStack.push(Qt.createComponent("CategorySidebar.qml"))
+
+            emptyTab.checked = (exclusiveResourceType !== "")
         }
     }
 
@@ -203,10 +205,10 @@ Image {
                 left: parent.left
                 top: parent.top
                 bottom: parent.bottom
-                bottomMargin: Math.max(10, sidebarToolbar.height)
+                bottomMargin: 0
                 topMargin: toolBar.height
                 leftMargin: theme.defaultFont.mSize.width * 2
-                margins: theme.defaultFont.mSize.width
+                rightMargin: theme.defaultFont.mSize.width
             }
         }
     }

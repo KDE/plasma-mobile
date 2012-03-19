@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
@@ -165,92 +165,110 @@ PlasmaComponents.Page {
         }
     }
 
-    MobileComponents.IconGrid {
-        id: resultsGrid
+    ListModel {
+        id: selectedModel
+    }
+    //For some reason onCountChanged doesn't get binded directly in ListModel
+    Connections {
+        target: selectedModel
+        onCountChanged: {
+            var newUrls = new Array()
+            for (var i = 0; i < selectedModel.count; ++i) {
+              newUrls[i] = selectedModel.get(i).url
+            }
+            dragArea.mimeData.urls = newUrls
+        }
+    }
+    Connections {
+        target: metadataModel
+        onModelReset: selectedModel.clear()
+    }
+
+    //This pinch area is for selection
+    PinchArea {
+        id: pinchArea
+        property bool selecting: false
+        property int selectingX
+        property int selectingY
+        pinch.target: parent
+        onPinchStarted: {
+            //hotspot to start select procedures
+            print("point1: " + pinch.point1.x + " " + pinch.point1.y)
+            print("Selecting")
+            selecting = true
+            selectingX = pinch.point2.x
+            selectingY = pinch.point2.y
+        }
+        onPinchUpdated: {
+            if (selecting) {
+                print("Selected" + resultsGrid.childAt(pinch.point2.x, pinch.point2.y))
+                selectingX = pinch.point2.x
+                selectingY = pinch.point2.y
+            }
+        }
+        onPinchFinished: selecting = false
         anchors.fill: parent
-
-        model: metadataModel
-
-        delegate: MobileComponents.ResourceDelegate {
-            id: resourceDelegate
-            className: model["className"] ? model["className"] : ""
-            genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
-
-            width: resultsGrid.delegateWidth
-            height: resultsGrid.delegateHeight
-            infoLabelVisible: false
-            property string label: model["label"] ? model["label"] : (model["display"] ? model["display"] : "")
-
-            DragArea {
+        DragArea {
+            id: dragArea
+            anchors.fill: parent
+            //startDragDistance: 200
+            enabled: false
+            mimeData {
+                source: parent
+            }
+            onDrop: enabled = false
+            MouseEventListener {
                 anchors.fill: parent
-                startDragDistance: 100
-                delegateImage: thumbnail !== undefined ? thumbnail : QIcon(icon)
-                mimeData {
-                    source: parent
-                    url: model.url
+                onPressed: startY = mouse.y
+                onPositionChanged: {
+                    if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
+                        parent.enabled = true
+                    }
                 }
-
-                MouseArea {
+                MobileComponents.IconGrid {
+                    id: resultsGrid
                     anchors.fill: parent
-                    //drag.target: resourceDelegate
-                    property int startX
-                    property int startY
-                    property int lastX
-                    property int lastY
 
-                    onPressed: {
-                        startX = resourceDelegate.x
-                        startY = resourceDelegate.y
-                        var pos = mapToItem(resultsGrid, mouse.x, mouse.y)
-                        lastX = pos.x
-                        lastY = pos.y
-                        resourceDelegate.z = 900
-                    }
-                    onPositionChanged: {
-                        if (startX < 0) {
-                            return
-                        }
-                        var pos = mapToItem(resultsGrid, mouse.x, mouse.y)
-                        resourceDelegate.x += (pos.x - lastX)
-                        resourceDelegate.y += (pos.y - lastY)
-                        lastX = pos.x
-                        lastY = pos.y
-                    }
-                    onReleased: {
-                        resourceDelegate.z = 0
-                        if (startX < 0) {
-                            return
-                        }
-                        positionAnim.target = resourceDelegate
-                        positionAnim.x = startX
-                        positionAnim.y = startY
-                        positionAnim.running = true
-                        startX = -1
-                        startY = -1
-                    }
-                    onCanceled: {
-                        resourceDelegate.z = 0
-                        if (startX < 0) {
-                            return
-                        }
+                    model: metadataModel
 
-                        positionAnim.target = resourceDelegate
-                        positionAnim.x = startX
-                        positionAnim.y = startY
-                        positionAnim.running = true
-                        startX = -1
-                        startY = -1
-                    }
-                    onPressAndHold: {
-                        resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]
-                        resourceInstance.title = model["label"]
-                    }
-                    onClicked: {
-                        if (mimeType == "inode/directory") {
-                            dirModel.url = model["url"]
-                            resultsGrid.model = dirModel
-                        } else if (!mainStack.busy) {
-                            Qt.openUrlExternally(model["url"])
+                    delegate: Item {
+                        id: resourceDelegate
+                        width: resultsGrid.delegateWidth
+                        height: resultsGrid.delegateHeight
+
+                        PlasmaCore.FrameSvgItem {
+                            id: highlightFrame
+                            imagePath: "widgets/viewitem"
+                            prefix: "selected+hover"
+                            anchors.fill: parent
+
+                            property bool contains: (pinchArea.selectingX > resourceDelegate.x && pinchArea.selectingX < resourceDelegate.x + resourceDelegate.width) && (pinchArea.selectingY > resourceDelegate.y && pinchArea.selectingY < resourceDelegate.y + resourceDelegate.height)
+                            opacity: 0
+                            Behavior on opacity {
+                                NumberAnimation {duration: 250}
+                            }
+                            onContainsChanged: {
+                                if (contains) {
+                                    for (var i = 0; i < selectedModel.count; ++i) {
+                                        if ((model.url && model.url == selectedModel.get(i).url)) {
+                                            opacity = 0
+                                            selectedModel.remove(i)
+                                            return
+                                        }
+                                    }
+
+                                    selectedModel.append({"url": model.url})
+                                    opacity = 1
+                                }
+                            }
+                        }
+                        MobileComponents.ResourceDelegate {
+                            className: model["className"] ? model["className"] : ""
+                            genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
+
+                            width: resultsGrid.delegateWidth
+                            height: resultsGrid.delegateHeight
+                            infoLabelVisible: false
                         }
                     }
                 }

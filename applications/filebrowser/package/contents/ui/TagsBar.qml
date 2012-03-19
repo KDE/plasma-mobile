@@ -59,14 +59,19 @@ PlasmaComponents.Page {
             id: mainColumn
             spacing: 8
             Repeater {
-                model: MetadataModels.MetadataCloudModel {
-                    id: tagCloud
-                    cloudCategory: "nao:hasTag"
-                    resourceType: metadataModel.resourceType
-                    minimumRating: metadataModel.minimumRating
+                id: tagRepeater
+                model: PlasmaCore.SortFilterModel {
+                    id: sortFilterModel
+                    sourceModel: MetadataModels.MetadataCloudModel {
+                        id: tagCloud
+                        cloudCategory: "nao:hasTag"
+                        resourceType: metadataModel.resourceType
+                        minimumRating: metadataModel.minimumRating
+                    }
+                    sortRole: "label"
                 }
 
-                Row {
+                delegate: Row {
                     spacing: 8
                     MouseArea {
                         width: theme.defaultFont.mSize.width * 10
@@ -75,7 +80,11 @@ PlasmaComponents.Page {
 
                         DropArea {
                             anchors.fill: parent
+                            property bool underDrag: false
+                            onDragEnter: underDrag = true
+                            onDragLeave: underDrag = false
                             onDrop: {
+                                underDrag = false
                                 var service = metadataSource.serviceForSource("")
                                 print(service);
                                 var operation = service.operationDescription("tagResources")
@@ -88,7 +97,13 @@ PlasmaComponents.Page {
                                 color: theme.textColor
                                 anchors.fill: parent
                                 radius: width/2
-                                opacity: 0.02
+                                opacity: parent.underDrag ? 0.6 : 0.02
+                                Behavior on opacity {
+                                    NumberAnimation {
+                                        duration: 250
+                                        easing.type: Easing.InOutQuad
+                                    }
+                                }
                             }
                             Rectangle {
                                 color: parent.parent.checked ? theme.highlightColor : theme.textColor
@@ -121,6 +136,151 @@ PlasmaComponents.Page {
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }
+            }
+
+            Row {
+                spacing: 8
+                MouseArea {
+                    width: theme.defaultFont.mSize.width * 10
+                    height: width
+
+                    DropArea {
+                        anchors.fill: parent
+                        property bool underDrag: false
+                        onDragEnter: underDrag = true
+                        onDragLeave: underDrag = false
+                        onDrop: {
+                            underDrag = false
+                            newTagDialog.resourceUrls = event.mimeData.urls
+                            newTagDialog.open()
+                        }
+
+                        Item {
+                            anchors.fill: parent
+                            Rectangle {
+                                color: theme.textColor
+                                anchors.fill: parent
+
+                                radius: width/2
+                                opacity: parent.parent.underDrag ? 0.6 : 0.02
+                                Behavior on opacity {
+                                    NumberAnimation {
+                                        duration: 250
+                                        easing.type: Easing.InOutQuad
+                                    }
+                                }
+                            }
+                            Rectangle {
+                                id: newDragBackground
+                                color: theme.textColor
+                                anchors {
+                                    fill: parent
+                                    margins: 20
+                                }
+                                radius: width/2
+                                opacity: 0.5
+                            }
+                            Rectangle {
+                                color: theme.backgroundColor
+                                anchors.centerIn:parent
+                                width: 4
+                                height: parent.height/3
+                            }
+                            Rectangle {
+                                color: theme.backgroundColor
+                                anchors.centerIn:parent
+                                height: 4
+                                width: parent.height/3
+                            }
+                        }
+                    }
+                }
+                PlasmaComponents.Label {
+                    id: tagLabel
+                    text: i18n("New Tag")
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+        }
+    }
+    PlasmaComponents.ScrollBar {
+        flickableItem: mainFlickable
+        orientation: Qt.Vertical
+    }
+    DropArea {
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+        }
+        height: 20
+        onDragEnter: {
+            scrollTimer.down = false
+            scrollTimer.running = true
+        }
+        onDragLeave: scrollTimer.running = false
+        onDrop: scrollTimer.running = false
+    }
+    DropArea {
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: 20
+        onDragEnter: {
+            scrollTimer.down = true
+            scrollTimer.running = true
+        }
+        onDragLeave: scrollTimer.running = false
+        onDrop: scrollTimer.running = false
+    }
+    Timer {
+        id: scrollTimer
+        property bool down: true
+        interval: 25
+        repeat: true
+        onTriggered: {
+            if (down) {
+                if (!mainFlickable.atYEnd) {
+                    mainFlickable.contentY += 10
+                }
+            } else {
+                if (!mainFlickable.atYBeginning) {
+                    mainFlickable.contentY -= 10
+                }
+            }
+        }
+    }
+    PlasmaComponents.CommonDialog {
+        id: newTagDialog
+
+        property variant resourceUrls
+
+        titleText: i18n("New tag name")
+        buttonTexts: [i18n("Ok"), i18n("Cancel")]
+        content: PlasmaComponents.TextField {
+            id: tagField
+            width: theme.defaultFont.mSize.width * 30
+            Keys.onEnterPressed: newTagDialog.accept()
+            Keys.onReturnPressed: newTagDialog.accept()
+            Component.onCompleted: tagField.forceActiveFocus()
+        }
+        onAccepted: {
+            if (!tagField.text) {
+                return
+            }
+            var service = metadataSource.serviceForSource("")
+            var operation = service.operationDescription("tagResources")
+            operation["ResourceUrls"] = resourceUrls
+            operation["Tag"] = tagField.text
+            service.startOperationCall(operation)
+        }
+        onButtonClicked: {
+            if (index == 0) {
+                accept()
+            } else {
+                reject()
             }
         }
     }
