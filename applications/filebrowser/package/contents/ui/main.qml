@@ -24,22 +24,19 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
 import org.kde.qtextracomponents 0.1
+import org.kde.dirmodel 0.1
 
 
 Image {
-    id: imageViewer
-    objectName: "imageViewer"
+    id: root
+    objectName: "root"
     source: "image://appbackgrounds/standard"
     fillMode: Image.Tile
     state: "browsing"
+    property QtObject model: metadataModel
 
     width: 360
     height: 360
-
-
-    signal zoomIn
-    signal zoomOut
-
 
     MobileComponents.Package {
         id: partPackage
@@ -64,6 +61,9 @@ Image {
         //sortOrder: Qt.DescendingOrder
         //queryString: "pdf"
     }
+    DirModel {
+        id: dirModel
+    }
 
     PlasmaComponents.BusyIndicator {
         anchors.centerIn: mainStack
@@ -79,7 +79,7 @@ Image {
     {
         if (mimeType == "inode/directory") {
             dirModel.url = url
-            resultsGrid.model = dirModel
+            model = dirModel
         } else if (!mainStack.busy) {
             var packageName = application.packageForMimeType(mimeType)
             print("Package for mimetype " + mimeType + " " + packageName)
@@ -127,6 +127,19 @@ Image {
             sidebarStack.push(Qt.createComponent("CategorySidebar.qml"))
 
             emptyTab.checked = (exclusiveResourceType !== "")
+
+            /*if (application.startupArguments.length > 0) {
+                openFile(application.startupArguments[0])
+            }*/
+        }
+    }
+    Timer {
+        interval: 5000
+        running: true
+        onTriggered: {
+            if (application.startupArguments.length > 0) {
+                openFile(application.startupArguments[0])
+            }
         }
     }
 
@@ -220,7 +233,7 @@ Image {
 
         PlasmaComponents.PageStack {
             id: sidebarStack
-            width: imageViewer.width/4 - theme.defaultFont.mSize.width * 2
+            width: root.width/4 - theme.defaultFont.mSize.width * 2
             //initialPage: Qt.createComponent("CategorySidebar.qml")
             anchors {
                 left: parent.left

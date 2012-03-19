@@ -25,7 +25,6 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
 import org.kde.draganddrop 1.0
 import org.kde.qtextracomponents 0.1
-import org.kde.dirmodel 0.1
 
 
 PlasmaComponents.Page {
@@ -52,7 +51,7 @@ PlasmaComponents.Page {
                 if (resultsGrid.model != dirModel && devicesSource.data[devicesTabBar.currentUdi]["File Path"] != "") {
                     dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"]
 
-                    resultsGrid.model = dirModel
+                    root.model = dirModel
                 }
             }
         }
@@ -60,19 +59,11 @@ PlasmaComponents.Page {
             id: devicesModel
             dataSource: hotplugSource
         }
-        DirModel {
-            id: dirModel
-            onUrlChanged: {
-                breadCrumb.path = url.substr(devicesSource.data[devicesTabBar.currentUdi]["File Path"].length)
-            }
-        }
 
         Breadcrumb {
             id: breadCrumb
 
-            onPathChanged: {
-                dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"] + path
-            }
+            path: dirModel.url.substr(devicesSource.data[devicesTabBar.currentUdi]["File Path"].length)
             anchors {
                 left: parent.left
                 right: searchBox.left
@@ -118,7 +109,7 @@ PlasmaComponents.Page {
                 iconSource: "drive-harddisk"
                 onCurrentChanged: {
                     if (current) {
-                        resultsGrid.model = metadataModel
+                        root.model = metadataModel
                         //nepomuk db, not filesystem
                         devicesTabBar.currentUdi = ""
                     }
@@ -143,7 +134,7 @@ PlasmaComponents.Page {
                             if (devicesSource.data[udi]["Accessible"]) {
                                 dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"]
 
-                                resultsGrid.model = dirModel
+                                root.model = dirModel
                             } else {
                                 var service = devicesSource.serviceForSource(udi);
                                 var operation = service.operationDescription("mount");
@@ -229,7 +220,7 @@ PlasmaComponents.Page {
                     id: resultsGrid
                     anchors.fill: parent
 
-                    model: metadataModel
+                    model: root.model
 
                     delegate: Item {
                         id: resourceDelegate

@@ -32,6 +32,9 @@ PlasmaComponents.Page {
 
     state: "toolsClosed"
 
+    signal zoomIn
+    signal zoomOut
+
     tools: Item {
         height: childrenRect.height
         PlasmaComponents.ToolButton {
@@ -53,7 +56,6 @@ PlasmaComponents.Page {
             font.pointSize: 14
             font.bold: true
             color: theme.textColor
-            visible: imageViewer.state != "browsing"
             style: Text.Raised
             styleColor: theme.backgroundColor
         }
@@ -64,14 +66,14 @@ PlasmaComponents.Page {
                 width: theme.largeIconSize
                 height: width
                 flat: false
-                onClicked: imageViewer.zoomIn()
+                onClicked: viewerPage.zoomIn()
             }
             PlasmaComponents.ToolButton {
                 iconSource: "zoom-out"
                 width: theme.largeIconSize
                 height: width
                 flat: false
-                onClicked: imageViewer.zoomOut()
+                onClicked: viewerPage.zoomOut()
             }
         }
     }
@@ -81,7 +83,7 @@ PlasmaComponents.Page {
         if (path.length == 0) {
             return
         }
-print("AAAA")
+
         if (String(path).indexOf("/") === 0) {
             path = "file://"+path
         }
@@ -95,7 +97,7 @@ print("AAAA")
             fullList.currentIndex = index
             spareDelegate.visible = false
             fullList.visible = true
-            imageViewer.state = "image"
+            root.state = "image"
             return
         } else {
             //is in dirModel
@@ -106,7 +108,7 @@ print("AAAA")
             fullList.currentIndex = index
             spareDelegate.visible = false
             fullList.visible = true
-            imageViewer.state = "image"
+            root.state = "image"
         }
     }
 
@@ -122,12 +124,6 @@ print("AAAA")
         color: "black"
         anchors.fill:  parent
 
-        Behavior on scale {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
         FullScreenDelegate {
             id: spareDelegate
             anchors {
@@ -171,7 +167,7 @@ print("AAAA")
             }
             PropertyChanges {
                 target: quickBrowserBar
-                y: imageViewer.height - quickBrowserBar.height
+                y: root.height - quickBrowserBar.height
             }
         },
         State {
@@ -182,7 +178,7 @@ print("AAAA")
             }
             PropertyChanges {
                 target: quickBrowserBar
-                y: imageViewer.height+20
+                y: root.height+20
             }
         }
     ]

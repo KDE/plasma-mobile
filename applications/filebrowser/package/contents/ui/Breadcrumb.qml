@@ -34,7 +34,7 @@ ListView {
     height: theme.defaultFont.mSize.height * 1.7
 
 
-    property string path: "/"
+    property string path: dirModel.path
     onPathChanged: {
         var pieces = path.replace(/^[\/]+/, '').split("/")
         pathModel.clear()
@@ -89,7 +89,7 @@ ListView {
                     item = pathModel.get(i)
                     path += "/" + item.title
                 }
-                root.path = path
+                dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"] + path
             }
 
             Behavior on opacity {

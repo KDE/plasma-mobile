@@ -98,7 +98,7 @@ Flickable {
     }
 
     Connections {
-        target: imageViewer
+        target: viewerPage
         onZoomIn: {
             zoomAnim.zoom(1.4)
         }
