@@ -103,6 +103,21 @@ PlasmaComponents.Page {
                 }
             }
             PlasmaComponents.TabButton {
+                id: customButton
+                height: width
+                //FIXME: better way to find it's not coming from a removable
+                visible: fileBrowserRoot.model == dirModel && dirModel.path.indexOf("/media") != -1
+                onVisibleChanged: devicesTabBar.updateSize()
+                property bool current: devicesTabBar.currentTab == customButton
+                iconSource: "folder"
+                onCurrentChanged: {
+                    if (current) {
+                        devicesTabBar.currentUdi = ""
+                    }
+                }
+            }
+
+            PlasmaComponents.TabButton {
                 id: localButton
                 height: width
                 property bool current: devicesTabBar.currentTab == localButton
@@ -115,6 +130,7 @@ PlasmaComponents.Page {
                     }
                 }
             }
+
 
             Repeater {
                 id: devicesRepeater
@@ -218,6 +234,7 @@ PlasmaComponents.Page {
                 anchors.fill: parent
                 onPressed: startY = mouse.y
                 onPositionChanged: {
+                    print(fileBrowserRoot.model)
                     if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
                         parent.enabled = true
                     }

@@ -82,7 +82,7 @@ Image {
     {
         if (mimeType == "inode/directory") {
             dirModel.url = url
-            model = dirModel
+            fileBrowserRoot.model = dirModel
         } else if (!mainStack.busy) {
             var packageName = application.packageForMimeType(mimeType)
             print("Package for mimetype " + mimeType + " " + packageName)
@@ -116,10 +116,6 @@ Image {
                 return
             }
             mainStack.push(Qt.createComponent("Browser.qml"))
-
-            if (application.startupArguments.length > 0) {
-                openFile(application.startupArguments[0])
-            }
         }
     }
     Timer {
@@ -127,7 +123,14 @@ Image {
         running: true
         onTriggered: {
             if (application.startupArguments.length > 0) {
-                openFile(application.startupArguments[0])
+                var path = application.startupArguments[0]
+                var mimeType = ""
+                //very weak heuristic to see if the passed argument is a folder
+                //FIXME: use kmimetype from C++ side?
+                if (path.indexOf(".") == -1) {
+                    mimeType = "inode/directory"
+                }
+                openFile(path, mimeType)
             }
         }
     }
