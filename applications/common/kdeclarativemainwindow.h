@@ -37,10 +37,17 @@ class KDeclarativeMainWindow : public KMainWindow
      * the list of all startup arguments, such as urls to open
      */
     Q_PROPERTY(QStringList startupArguments READ startupArguments CONSTANT)
+
     /**
      * The caption of the main window. Do not include the application name in this string. It will be added automatically according to the KDE standard.
      */
     Q_PROPERTY(QString caption READ caption WRITE setCaption NOTIFY captionChanged)
+
+    /**
+     * The icon for the main window. by default comes from KAboutData, Change it only if strictly necessary.
+     * Can be a QIcon or a QString
+     */
+    Q_PROPERTY(QVariant icon READ icon WRITE setIcon NOTIFY iconChanged)
 
 public:
     KDeclarativeMainWindow();
@@ -67,6 +74,9 @@ public:
 
     QString caption() const;
 
+    QVariant icon() const;
+    void setIcon(const QVariant &icon);
+
 public Q_SLOTS:
     void setCaption(const QString &caption);
     //FIXME: this exists only to not hide the superclass method
@@ -74,6 +84,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void captionChanged();
+    void iconChanged();
 
 private:
     KDeclarativeMainWindowPrivate * const d;
