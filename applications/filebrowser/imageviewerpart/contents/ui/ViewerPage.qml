@@ -90,7 +90,7 @@ PlasmaComponents.Page {
 
         //is in Nepomuk
         var index = metadataModel.find(path);
-        if (index > -1) {
+        /*if (index > -1) {
             fileBrowserRoot.model = metadataModel
             quickBrowserBar.currentIndex = index
             fileBrowserRoot.state = "image"
@@ -100,9 +100,8 @@ PlasmaComponents.Page {
             fileBrowserRoot.model = dirModel
             index = dirModel.indexForUrl(path)
             quickBrowserBar.currentIndex = index
-            //fullList.visible = true
             fileBrowserRoot.state = "image"
-        }
+        }*/
         imageArea.delegate.source = path
     }
 
@@ -139,7 +138,7 @@ PlasmaComponents.Page {
             if (incrementing) {
                 oldDelegate.source = fileBrowserRoot.model.get(quickBrowserBar.currentIndex + 1).url
             } else {
-                fileBrowserRoot.model.get(quickBrowserBar.currentIndex - 1).url
+                oldDelegate.source =  fileBrowserRoot.model.get(quickBrowserBar.currentIndex - 1).url
             }
         }
         onReleased: {

@@ -26,6 +26,7 @@ Rectangle {
     id: quickBrowserBar
     property alias model: thumbnailsView.model
     property alias currentIndex: thumbnailsView.currentIndex
+    property alias count: thumbnailsView.count
 
     function setCurrentIndex(index)
     {
@@ -105,7 +106,6 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         thumbnailsView.currentIndex = index
-                        viewerPage.setCurrentIndex(index)
                     }
                 }
             }
