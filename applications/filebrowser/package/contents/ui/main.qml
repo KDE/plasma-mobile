@@ -46,12 +46,6 @@ Image {
         id: resourceInstance
     }
 
-    MobileComponents.Package {
-        id: homeScreenPackage
-        name: "org.kde.active.contour-tablet-homescreen"
-    }
-
-
     MetadataModels.MetadataUserTypes {
         id: userTypes
     }
@@ -95,7 +89,7 @@ Image {
 
     Item {
         anchors {
-            right: sideBar.left
+            right: parent.right
             top: parent.top
             bottom: parent.bottom
             left: parent.left
@@ -124,7 +118,7 @@ Image {
         running: true
         onTriggered: {
             mainStack.push(Qt.createComponent("Browser.qml"))
-            sidebarStack.push(Qt.createComponent("CategorySidebar.qml"))
+            //sidebarStack.push(Qt.createComponent("CategorySidebar.qml"))
 
             emptyTab.checked = (exclusiveResourceType !== "")
 
@@ -134,7 +128,7 @@ Image {
         }
     }
     /*Timer {
-        interval: 5000
+        interval: 0
         running: true
         onTriggered: {
             if (application.startupArguments.length > 0) {
@@ -143,109 +137,7 @@ Image {
         }
     }*/
 
-    PlasmaComponents.ButtonColumn {
-        z: 900
-        anchors {
-            right: sideBar.left
-            verticalCenter: sideBar.verticalCenter
-            rightMargin: -1
-        }
-        SidebarTab {
-            text: i18n("Main")
-            onCheckedChanged: {
-                if (checked) {
-                    while (sidebarStack.depth > 1) {
-                        sidebarStack.pop()
-                    }
-                }
-            }
-        }
-        SidebarTab {
-            text: i18n("Time")
-            onCheckedChanged: {
-                if (checked) {
-                    if (sidebarStack.depth > 1) {
-                        sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
-                    } else {
-                        sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
-                    }
-                }
-            }
-        }
-        SidebarTab {
-            text: i18n("Tags")
-            onCheckedChanged: {
-                print(checked)
-                if (checked) {
-                    if (sidebarStack.depth > 1) {
-                        sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
-                    } else {
-                        sidebarStack.push(Qt.createComponent("TagsBar.qml"))
-                    }
-                }
-            }
-        }
-        function uncheckAll()
-        {
-            emptyTab.checked = true
-        }
-        //FIXME: hack to make no item selected
-        Item {
-            id: emptyTab
-            property bool checked: false
-            onCheckedChanged: {
-                if (checked) {
-                    while (sidebarStack.depth > 1) {
-                        sidebarStack.pop()
-                    }
-                }
-            }
-        }
-    }
-    Image {
-        id: sideBar
-        source: "image://appbackgrounds/contextarea"
-        fillMode: Image.Tile
-        clip: true
-
-        width: emptyTab.checked ? 0 : parent.width/4
-        Behavior on width {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
-        anchors {
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
-        }
-        Image {
-            z: 800
-            source: "image://appbackgrounds/shadow-right"
-            fillMode: Image.TileVertically
-            anchors {
-                left: parent.left
-                top: parent.top
-                bottom: parent.bottom
-            }
-        }
-
-        PlasmaComponents.PageStack {
-            id: sidebarStack
-            width: fileBrowserRoot.width/4 - theme.defaultFont.mSize.width * 2
-            //initialPage: Qt.createComponent("CategorySidebar.qml")
-            anchors {
-                left: parent.left
-                top: parent.top
-                bottom: parent.bottom
-                bottomMargin: 0
-                topMargin: toolBar.height
-                leftMargin: theme.defaultFont.mSize.width * 2
-                rightMargin: theme.defaultFont.mSize.width
-            }
-        }
-    }
+    
 
     SlcComponents.SlcMenu {
         id: contextMenu

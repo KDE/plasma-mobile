@@ -178,6 +178,12 @@ PlasmaComponents.Page {
     //This pinch area is for selection
     PinchArea {
         id: pinchArea
+        anchors {
+            left: parent.left
+            top: parent.top
+            right: sideBar.left
+            bottom: parent.bottom
+        }
         property bool selecting: false
         property int selectingX
         property int selectingY
@@ -198,7 +204,7 @@ PlasmaComponents.Page {
             }
         }
         onPinchFinished: selecting = false
-        anchors.fill: parent
+
         DragArea {
             id: dragArea
             anchors.fill: parent
@@ -263,6 +269,115 @@ PlasmaComponents.Page {
                             onClicked: openFile(model["url"], mimeType)
                         }
                     }
+                }
+            }
+        }
+    }
+
+    Image {
+        id: sideBar
+        source: "image://appbackgrounds/contextarea"
+        fillMode: Image.Tile
+
+        width: emptyTab.checked ? 0 : parent.width/4
+        Behavior on width {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+        anchors {
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+        }
+
+        PlasmaComponents.ButtonColumn {
+            z: 900
+            anchors {
+                right: parent.left
+                verticalCenter: parent.verticalCenter
+                rightMargin: -1
+            }
+            SidebarTab {
+                text: i18n("Main")
+                onCheckedChanged: {
+                    if (checked) {
+                        while (sidebarStack.depth > 1) {
+                            sidebarStack.pop()
+                        }
+                    }
+                }
+            }
+            SidebarTab {
+                text: i18n("Time")
+                onCheckedChanged: {
+                    if (checked) {
+                        if (sidebarStack.depth > 1) {
+                            sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
+                        } else {
+                            sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
+                        }
+                    }
+                }
+            }
+            SidebarTab {
+                text: i18n("Tags")
+                onCheckedChanged: {
+                    print(checked)
+                    if (checked) {
+                        if (sidebarStack.depth > 1) {
+                            sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
+                        } else {
+                            sidebarStack.push(Qt.createComponent("TagsBar.qml"))
+                        }
+                    }
+                }
+            }
+            function uncheckAll()
+            {
+                emptyTab.checked = true
+            }
+            //FIXME: hack to make no item selected
+            Item {
+                id: emptyTab
+                property bool checked: false
+                onCheckedChanged: {
+                    if (checked) {
+                        while (sidebarStack.depth > 1) {
+                            sidebarStack.pop()
+                        }
+                    }
+                }
+            }
+        }
+
+        Image {
+            z: 800
+            source: "image://appbackgrounds/shadow-right"
+            fillMode: Image.TileVertically
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
+            }
+        }
+
+        Item {
+            anchors.fill: parent
+            clip: true
+            PlasmaComponents.PageStack {
+                id: sidebarStack
+                width: fileBrowserRoot.width/4 - theme.defaultFont.mSize.width * 2
+                initialPage: Qt.createComponent("CategorySidebar.qml")
+                anchors {
+                    left: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                    bottomMargin: 0
+                    topMargin: toolBar.height
+                    leftMargin: theme.defaultFont.mSize.width * 2
+                    rightMargin: theme.defaultFont.mSize.width
                 }
             }
         }
