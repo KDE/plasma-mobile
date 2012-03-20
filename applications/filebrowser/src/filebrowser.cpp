@@ -43,6 +43,12 @@ FileBrowser::FileBrowser()
     declarativeView()->setPackageName("org.kde.active.filebrowser");
 
     declarativeView()->rootContext()->setContextProperty("exclusiveResourceType", args->getOption("resourceType"));
+
+    //FIXME: need more elegant and pluggable way
+    if (args->getOption("resourceType") == "nfo:Image") {
+        setWindowIcon(KIcon("active-image-viewer"));
+        setPlainCaption(i18n("Images"));
+    }
 }
 
 FileBrowser::~FileBrowser()
