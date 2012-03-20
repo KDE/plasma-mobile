@@ -192,9 +192,9 @@ Item {
                 spacing: 16
                 anchors {
                     top: parent.top
-                    left: parent.left
+                    left: resultsFlow.left
                     topMargin: availScreenRect.y+20
-                    leftMargin: 72
+                    leftMargin: 4
                 }
 
                 MobileComponents.ActionButton {
