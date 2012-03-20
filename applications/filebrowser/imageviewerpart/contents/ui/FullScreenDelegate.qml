@@ -24,8 +24,8 @@ import org.kde.qtextracomponents 0.1
 
 Flickable {
     id: mainFlickable
-    width: fullList.width
-    height: fullList.height
+    width: parent.width
+    height: parent.height
     contentWidth: mainImage.width
     contentHeight: mainImage.height
     onContentHeightChanged: interactiveTimer.restart()
@@ -145,7 +145,7 @@ Flickable {
 
                     // do not try to load an empty mainImage.source or it will mess up with mainImage.scale
                     // and make the next valid url fail to load.
-                    if (fullList.width < 1 || fullList.height < 1) {
+                    if (mainFlickable.parent.width < 1 || mainFlickable.parent.height < 1) {
                         return
                     }
 
@@ -174,17 +174,6 @@ Flickable {
                 anchors.centerIn: mainImage
                 text: i18n("Loading...")
                 color: "gray"
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (viewerPage.state == "toolsOpen") {
-                        viewerPage.state = "toolsClosed"
-                    } else {
-                        viewerPage.state = "toolsOpen"
-                    }
-                }
             }
         }
     }

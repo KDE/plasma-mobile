@@ -51,7 +51,7 @@ PlasmaComponents.Page {
             }
         }
         Text {
-            text: i18n("%1 of %2", fullList.currentIndex+1, fullList.count)
+            text: i18n("%1 of %2", quickBrowserBar.currentIndex+1, quickBrowserBar.count)
             anchors.centerIn: parent
             font.pointSize: 14
             font.bold: true
@@ -91,23 +91,16 @@ PlasmaComponents.Page {
         //is in Nepomuk
         var index = metadataModel.find(path);
         if (index > -1) {
-            fullList.model = metadataModel
-            fullList.positionViewAtIndex(index, ListView.Center)
-            fullList.currentIndex = index
+            fileBrowserRoot.model = metadataModel
             quickBrowserBar.currentIndex = index
-            //delegate1.visible = false
-            fullList.visible = true
             fileBrowserRoot.state = "image"
             return
         } else {
             //is in dirModel
-            fullList.model = dirModel
+            fileBrowserRoot.model = dirModel
             index = dirModel.indexForUrl(path)
-            fullList.positionViewAtIndex(index, ListView.Center)
-            fullList.currentIndex = index
             quickBrowserBar.currentIndex = index
-            //delegate1.visible = false
-            fullList.visible = true
+            //fullList.visible = true
             fileBrowserRoot.state = "image"
         }
         imageArea.delegate.source = path
@@ -115,8 +108,7 @@ PlasmaComponents.Page {
 
     function setCurrentIndex(index)
     {
-        fullList.positionViewAtIndex(index, ListView.Center)
-        fullList.currentIndex = index
+        quickBrowserBar.currentIndex = index
     }
 
     Rectangle {
@@ -124,61 +116,89 @@ PlasmaComponents.Page {
 
         color: "black"
         anchors.fill:  parent
-
-        ListView {
-            id: fullList
-            anchors.fill: parent
-            model: metadataModel
-            highlightRangeMode: ListView.StrictlyEnforceRange
-            orientation: ListView.Horizontal
-            snapMode: ListView.SnapOneItem
-            cacheBuffer: 40
-            //highlightFollowsCurrentItem: true
-            delegate: FullScreenDelegate {
-                source: model["url"]
-            }
-
-            onCurrentIndexChanged: {
-                resourceInstance.uri = currentItem.source
-                resourceInstance.title = currentItem.label
-                quickBrowserBar.setCurrentIndex(currentIndex)
-            }
-            visible: false
-        }
     }
 
     MouseEventListener {
         id: imageArea
         anchors.fill: parent
-        enabled: !delegate.interactive
+        //enabled: !delegate.interactive
         property Item delegate: delegate1
+        property Item oldDelegate: delegate2
+        property bool incrementing: true
 
         property int lastX
-        onPressed: lastX = mouse.screenX
+        property int startX
+        onPressed: lastX = startX = mouse.screenX
         onPositionChanged: {
-            print(delegate.x+" "+(mouse.screenX - lastX))
+            if (delegate.interactive) {
+                return
+            }
             delegate.x += (mouse.screenX - lastX)
             lastX = mouse.screenX
+            incrementing = delegate.x < 0
+            if (incrementing) {
+                oldDelegate.source = fileBrowserRoot.model.get(quickBrowserBar.currentIndex + 1).url
+            } else {
+                fileBrowserRoot.model.get(quickBrowserBar.currentIndex - 1).url
+            }
         }
         onReleased: {
-            if (delegate.x > delegate.width/2 || delegate.x < -delegate.width/2) {
-                var oldDelegate = delegate
-                delegate = (delegate == delegate1) ? delegate2 : delegate1
-                oldDelegate.z = 0
-                delegate.z = 10
+            if (Math.abs(lastX - startX) < 20) {
+                if (viewerPage.state == "toolsOpen") {
+                    viewerPage.state = "toolsClosed"
+                } else {
+                    viewerPage.state = "toolsOpen"
+                }
+            } else if (!delegate.interactive) { 
+                if (delegate.x > delegate.width/2 || delegate.x < -delegate.width/2) {
+                    oldDelegate = delegate
+                    delegate = (delegate == delegate1) ? delegate2 : delegate1
+                    switchAnimation.running = true
+                } else {
+                    resetAnimation.running = true
+                }
             }
         }
         FullScreenDelegate {
             id: delegate2
             width: parent.width
             height: parent.height
-            //visible: false
         }
         FullScreenDelegate {
             id: delegate1
             width: parent.width
             height: parent.height
-            //visible: false
+        }
+        SequentialAnimation {
+            id: switchAnimation
+            NumberAnimation {
+                target: imageArea.oldDelegate
+                properties: "x"
+                to: imageArea.incrementing ? -imageArea.oldDelegate.width : imageArea.oldDelegate.width
+                easing.type: Easing.InQuad
+                duration: 250
+            }
+            ScriptAction {
+                script: {
+                    if (imageArea.incrementing) {
+                        quickBrowserBar.currentIndex += 1
+                    } else {
+                        quickBrowserBar.currentIndex -= 1
+                    }
+                    imageArea.oldDelegate.z = 0
+                    imageArea.delegate.z = 10
+                    imageArea.oldDelegate.x = 0
+                    imageArea.delegate.x = 0
+                }
+            }
+        }
+        NumberAnimation {
+            id: resetAnimation
+            target: imageArea.delegate
+            properties: "x"
+            to: 0
+            easing.type: Easing.InOutQuad
+            duration: 250
         }
     }
 
