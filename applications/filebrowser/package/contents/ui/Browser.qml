@@ -299,7 +299,24 @@ PlasmaComponents.Page {
                 verticalCenter: parent.verticalCenter
                 rightMargin: -1
             }
+            function uncheckAll()
+            {
+                emptyTab.checked = true
+            }
+            //FIXME: hack to make no item selected
+            Item {
+                id: emptyTab
+                property bool checked: false
+                onCheckedChanged: {
+                    if (checked) {
+                        while (sidebarStack.depth > 1) {
+                            sidebarStack.pop()
+                        }
+                    }
+                }
+            }
             SidebarTab {
+                id: mainTab
                 text: i18n("Main")
                 onCheckedChanged: {
                     if (checked) {
@@ -334,20 +351,12 @@ PlasmaComponents.Page {
                     }
                 }
             }
-            function uncheckAll()
-            {
-                emptyTab.checked = true
-            }
-            //FIXME: hack to make no item selected
-            Item {
-                id: emptyTab
-                property bool checked: false
-                onCheckedChanged: {
-                    if (checked) {
-                        while (sidebarStack.depth > 1) {
-                            sidebarStack.pop()
-                        }
-                    }
+
+            Timer {
+                interval: 100
+                running: true
+                onTriggered: {
+                    mainTab.checked = (exclusiveResourceType === "")
                 }
             }
         }

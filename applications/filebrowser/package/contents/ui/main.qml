@@ -58,6 +58,14 @@ Image {
     DirModel {
         id: dirModel
     }
+    function goBack()
+    {
+        if (mainStack.depth == 1) {
+            mainStack.replace(Qt.createComponent("Browser.qml"))
+        } else {
+            mainStack.pop()
+        }
+    }
 
     PlasmaComponents.BusyIndicator {
         anchors.centerIn: mainStack
@@ -87,29 +95,15 @@ Image {
         }
     }
 
-    Item {
+    PlasmaComponents.PageStack {
+        id: mainStack
+        clip: false
+        toolBar: toolBar
+        //initialPage: Qt.createComponent("Browser.qml")
         anchors {
-            right: parent.right
             top: parent.top
             bottom: parent.bottom
             left: parent.left
-        }
-        onWidthChanged: mainStackSyncTimer.restart()
-        Timer {
-            id: mainStackSyncTimer
-            interval: 200
-            onTriggered: mainStack.width = parent.width
-        }
-        PlasmaComponents.PageStack {
-            id: mainStack
-            clip: false
-            toolBar: toolBar
-            //initialPage: Qt.createComponent("Browser.qml")
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: parent.left
-            }
         }
     }
 
@@ -117,27 +111,26 @@ Image {
         interval: 1000
         running: true
         onTriggered: {
+            if (mainStack.depth > 0) {
+                return
+            }
             mainStack.push(Qt.createComponent("Browser.qml"))
-            //sidebarStack.push(Qt.createComponent("CategorySidebar.qml"))
-
-            emptyTab.checked = (exclusiveResourceType !== "")
 
             if (application.startupArguments.length > 0) {
                 openFile(application.startupArguments[0])
             }
         }
     }
-    /*Timer {
-        interval: 0
+    Timer {
+        interval: 100
         running: true
         onTriggered: {
             if (application.startupArguments.length > 0) {
                 openFile(application.startupArguments[0])
             }
         }
-    }*/
+    }
 
-    
 
     SlcComponents.SlcMenu {
         id: contextMenu

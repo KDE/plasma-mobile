@@ -47,7 +47,7 @@ PlasmaComponents.Page {
             onClicked: {
                 //we want to tell the current image was closed
                 resourceInstance.uri = ""
-                mainStack.pop()
+                fileBrowserRoot.goBack()
             }
         }
         Text {
