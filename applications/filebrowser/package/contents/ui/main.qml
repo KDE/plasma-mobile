@@ -131,9 +131,4 @@ Image {
             }
         }
     }
-
-
-    SlcComponents.SlcMenu {
-        id: contextMenu
-    }
 }

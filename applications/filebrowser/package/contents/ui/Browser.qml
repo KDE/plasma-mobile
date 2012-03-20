@@ -266,6 +266,10 @@ PlasmaComponents.Page {
                             width: resultsGrid.delegateWidth
                             height: resultsGrid.delegateHeight
                             infoLabelVisible: false
+                            onPressAndHold: {
+                                resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
+                                resourceInstance.title = model["label"]
+                            }
                             onClicked: openFile(model["url"], mimeType)
                         }
                     }
@@ -412,6 +416,9 @@ PlasmaComponents.Page {
             duration: 250
             easing.type: Easing.InOutQuad
         }
+    }
+    SlcComponents.SlcMenu {
+        id: contextMenu
     }
 }
 
