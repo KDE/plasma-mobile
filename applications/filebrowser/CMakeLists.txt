@@ -17,5 +17,5 @@ install(FILES
    DESTINATION ${SERVICETYPES_INSTALL_DIR})
 
 install(FILES active-filebrowser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-
+install(FILES active-imageviewer.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 
