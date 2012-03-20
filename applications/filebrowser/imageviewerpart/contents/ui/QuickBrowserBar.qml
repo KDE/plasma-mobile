@@ -25,6 +25,7 @@ import org.kde.qtextracomponents 0.1
 Rectangle {
     id: quickBrowserBar
     property alias model: thumbnailsView.model
+    property alias currentIndex: thumbnailsView.currentIndex
 
     function setCurrentIndex(index)
     {

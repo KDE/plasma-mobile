@@ -94,7 +94,8 @@ PlasmaComponents.Page {
             fullList.model = metadataModel
             fullList.positionViewAtIndex(index, ListView.Center)
             fullList.currentIndex = index
-            //spareDelegate.visible = false
+            quickBrowserBar.currentIndex = index
+            //delegate1.visible = false
             fullList.visible = true
             fileBrowserRoot.state = "image"
             return
@@ -104,11 +105,12 @@ PlasmaComponents.Page {
             index = dirModel.indexForUrl(path)
             fullList.positionViewAtIndex(index, ListView.Center)
             fullList.currentIndex = index
-            //spareDelegate.visible = false
+            quickBrowserBar.currentIndex = index
+            //delegate1.visible = false
             fullList.visible = true
             fileBrowserRoot.state = "image"
         }
-        spareDelegate.source = path
+        imageArea.delegate.source = path
     }
 
     function setCurrentIndex(index)
@@ -146,20 +148,36 @@ PlasmaComponents.Page {
     }
 
     MouseEventListener {
-        width: parent.width
-        height: parent.height
+        id: imageArea
+        anchors.fill: parent
+        enabled: !delegate.interactive
+        property Item delegate: delegate1
 
         property int lastX
         onPressed: lastX = mouse.screenX
         onPositionChanged: {
-            x += (mouse.screenX - lastX)
+            print(delegate.x+" "+(mouse.screenX - lastX))
+            delegate.x += (mouse.screenX - lastX)
             lastX = mouse.screenX
         }
-        FullScreenDelegate {
-            id: spareDelegate
-            anchors {
-                fill:  parent
+        onReleased: {
+            if (delegate.x > delegate.width/2 || delegate.x < -delegate.width/2) {
+                var oldDelegate = delegate
+                delegate = (delegate == delegate1) ? delegate2 : delegate1
+                oldDelegate.z = 0
+                delegate.z = 10
             }
+        }
+        FullScreenDelegate {
+            id: delegate2
+            width: parent.width
+            height: parent.height
+            //visible: false
+        }
+        FullScreenDelegate {
+            id: delegate1
+            width: parent.width
+            height: parent.height
             //visible: false
         }
     }
@@ -167,6 +185,9 @@ PlasmaComponents.Page {
     QuickBrowserBar {
         id: quickBrowserBar
         model: fileBrowserRoot.model
+        onCurrentIndexChanged: {
+            imageArea.delegate.source = fileBrowserRoot.model.get(currentIndex).url
+        }
     }
 
     states: [
