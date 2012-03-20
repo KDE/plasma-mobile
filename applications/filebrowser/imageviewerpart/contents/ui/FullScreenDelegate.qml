@@ -112,7 +112,6 @@ Flickable {
         color: "black"
         width: Math.max(mainFlickable.width, mainImage.width)
         height: Math.max(mainFlickable.height, mainImage.height)
-        clip: true
         PinchArea {
             anchors.fill: parent
             property real initialWidth
@@ -174,6 +173,28 @@ Flickable {
                 anchors.centerIn: mainImage
                 text: i18n("Loading...")
                 color: "gray"
+            }
+        }
+        Image {
+            z: -1
+            source: "image://appbackgrounds/shadow-left"
+            fillMode: Image.TileVertically
+            anchors {
+                right: parent.left
+                top: parent.top
+                bottom: parent.bottom
+                rightMargin: -1
+            }
+        }
+        Image {
+            z: -1
+            source: "image://appbackgrounds/shadow-right"
+            fillMode: Image.TileVertically
+            anchors {
+                left: parent.right
+                top: parent.top
+                bottom: parent.bottom
+                leftMargin: -1
             }
         }
     }
