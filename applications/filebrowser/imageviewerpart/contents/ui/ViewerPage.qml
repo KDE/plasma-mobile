@@ -29,6 +29,7 @@ import org.kde.qtextracomponents 0.1
 PlasmaComponents.Page {
     id: viewerPage
     anchors.fill: parent
+    property string path
 
     state: "toolsClosed"
 
@@ -88,26 +89,31 @@ PlasmaComponents.Page {
             path = "file://"+path
         }
 
+        viewerPage.path = path
         //is in Nepomuk
         var index = metadataModel.find(path);
-        /*if (index > -1) {
+        if (index > -1) {
             fileBrowserRoot.model = metadataModel
             quickBrowserBar.currentIndex = index
-            fileBrowserRoot.state = "image"
             return
         } else {
-            //is in dirModel
-            fileBrowserRoot.model = dirModel
             index = dirModel.indexForUrl(path)
-            quickBrowserBar.currentIndex = index
-            fileBrowserRoot.state = "image"
-        }*/
-        imageArea.delegate.source = path
+            if (index > -1) {
+                //is in dirModel
+                fileBrowserRoot.model = dirModel
+                quickBrowserBar.currentIndex = index
+            //don't know where it is, just load
+            } else {
+                imageArea.delegate.source = path
+            }
+        }
     }
 
-    function setCurrentIndex(index)
-    {
-        quickBrowserBar.currentIndex = index
+    Connections {
+        target: metadataModel
+        onStatusChanged: {
+            viewerPage.loadFile(viewerPage.path)
+        }
     }
 
     Rectangle {
@@ -205,7 +211,9 @@ PlasmaComponents.Page {
         id: quickBrowserBar
         model: fileBrowserRoot.model
         onCurrentIndexChanged: {
-            imageArea.delegate.source = fileBrowserRoot.model.get(currentIndex).url
+            var path = fileBrowserRoot.model.get(currentIndex).url
+            imageArea.delegate.source = path
+            viewerPage.path = path
         }
     }
 

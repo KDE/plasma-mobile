@@ -41,9 +41,7 @@ Item {
         }
 
         Component.onCompleted: {
-            if (exclusiveResourceType) {
-                metadataModel.resourceType = exclusiveResourceType
-            } else {
+            if (!exclusiveResourceType) {
                 typeFilterLoader.source = "TypeFilter.qml"
             }
         }

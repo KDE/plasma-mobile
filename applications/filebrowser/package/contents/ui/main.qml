@@ -54,6 +54,7 @@ Image {
         sortBy: [userTypes.sortFields[metadataModel.resourceType]]
         //sortOrder: Qt.DescendingOrder
         //queryString: "pdf"
+        resourceType: exclusiveResourceType
     }
     DirModel {
         id: dirModel
