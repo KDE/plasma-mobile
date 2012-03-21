@@ -129,7 +129,6 @@ Image {
             id: resourceDelegate
             width: 130
             height: 120
-            infoLabelVisible: false
 
             /*onPressed: {*/
             /*    resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]*/

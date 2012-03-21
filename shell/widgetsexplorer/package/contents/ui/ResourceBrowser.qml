@@ -45,7 +45,6 @@ MobileComponents.IconGrid {
             id: resourceDelegate
             width: resultsGrid.delegateWidth
             height: resultsGrid.delegateHeight
-            infoLabelVisible: false
             //those two are to make appModel and runnerModel work
             property string label: model["label"] ? model["label"] : (model["name"] ? model["name"] : model["text"])
             className: model["className"] ? model["className"] : defaultClassName

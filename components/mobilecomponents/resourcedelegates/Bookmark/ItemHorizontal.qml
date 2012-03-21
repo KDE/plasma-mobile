@@ -121,15 +121,4 @@ Column {
         style: Text.Outline
         styleColor: Qt.rgba(1, 1, 1, 0.6)
     }
-
-    Text {
-        id: infoLabel
-        text: className
-        opacity: 0.8
-        font.pixelSize: 12
-        height: 14
-        width: parent.width - iconItem.width
-        anchors.horizontalCenter: parent.horizontalCenter
-        visible: infoLabelVisible
-    }
 }

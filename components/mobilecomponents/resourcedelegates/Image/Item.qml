@@ -115,7 +115,6 @@ Item {
             wrapMode: Text.Wrap
             color: theme.textColor
             anchors.top: itemFrame.top
-            //anchors.bottom: infoLabel.top;
             anchors.left: previewImage.right
             anchors.right: itemFrame.right
             anchors.margins: 8

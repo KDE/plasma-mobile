@@ -109,7 +109,6 @@ PlasmaComponents.Page {
             className: model["className"]?model["className"]:"Image"
             width: 130
             height: 120
-            infoLabelVisible: false
             property string label: model["label"]?model["label"]:model["display"]
 
             onPressAndHold: {
