@@ -137,7 +137,6 @@ Item {
             anchors.bottom: itemFrame.bottom
             anchors.left: previewImage.right
             anchors.margins: 8
-            visible: infoLabelVisible
         }
     }
 }
