@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2011 Ivan Cukic <ivan.cukic(at)kde.org>
+ *   Copyright (C) 2011, 2012 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
@@ -91,6 +91,7 @@ void ConnmanNetworkNotifier::enable()
 
     QDBusReply<QVariantMap> reply = d->iface->GetProperties();
     if (!reply.isValid()) {
+        kDebug() << "GetProperties reply was invalid";
         return;
     }
     QVariantMap properties = reply.value();
@@ -105,6 +106,7 @@ void ConnmanNetworkNotifier::propertyChanged(const QString &name, const QDBusVar
 {
     //kDebug() << name << ": " << value.variant().toString();
     if (name != QLatin1String("State")) {
+        kDebug() << "Property" << name << "ignored";
         return;
     }
 
@@ -117,7 +119,7 @@ void ConnmanNetworkNotifier::propertyChanged(const QString &name, const QDBusVar
 
     QDBusReply<QVariantMap> reply = d->iface->GetProperties();
     if (!reply.isValid()) {
-        kDebug() << reply.error().message();
+        kDebug() << "GetProperties failed" << reply.error().message();
         return;
     }
 
@@ -129,19 +131,20 @@ void ConnmanNetworkNotifier::propertyChanged(const QString &name, const QDBusVar
 
     // searching for active wifi info
     foreach (const QDBusObjectPath &s, services) {
-        //kDebug() << "testing service" << s.path();
+        kDebug() << "testing service" << s.path();
+
         NetConnmanServiceInterface service(CONNMAN_DBUS_SERVICE, s.path(), QDBusConnection::systemBus());
 
         if (!service.isValid()) {
+            kDebug() << "Service" << s.path() << "is not valid";
             continue;
         }
-        //kDebug() << "testing service" << s.path() << "getting properties";
 
         QDBusReply<QVariantMap> reply = service.GetProperties();
         if (!reply.isValid()) {
+            kDebug() << "GetProperties failed for";
             continue;
         }
-        //kDebug() << "testing service" << s.path() << "testing state";
 
         QVariantMap serviceProperties = reply.value();
         if (serviceProperties["State"].toString() == QLatin1String("ready")) {
