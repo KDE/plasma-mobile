@@ -46,6 +46,7 @@ QML.Item {
     /* child objects ----------------------------------{{{ */
     PlasmaComponents.Label {
         id: labelLocation
+        elide: QML.Text.ElideRight
 
         anchors {
             top: parent.top

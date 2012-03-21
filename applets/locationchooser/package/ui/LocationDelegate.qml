@@ -42,6 +42,8 @@ PlasmaComponents.ListItem {
     /* child objects ----------------------------------{{{ */
     PlasmaComponents.Label {
         id: label
+
+        elide: QML.Text.ElideRight
         anchors {
             fill: parent
             leftMargin: 8
