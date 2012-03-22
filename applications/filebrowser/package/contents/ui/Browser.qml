@@ -269,6 +269,7 @@ PlasmaComponents.Page {
                             width: resultsGrid.delegateWidth
                             height: resultsGrid.delegateHeight
                             infoLabelVisible: false
+                            onClicked: Qt.openUrlExternally(model.url)
                         }
                     }
                 }
