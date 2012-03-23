@@ -147,7 +147,7 @@ void ConnmanNetworkNotifier::propertyChanged(const QString &name, const QDBusVar
         }
 
         QVariantMap serviceProperties = reply.value();
-        if (serviceProperties["State"].toString() == QLatin1String("ready")) {
+        if (serviceProperties["State"].toString() == QLatin1String("online")) {
             kDebug() << "CONNECTED TO:" << serviceProperties["Name"];
             setWifiName(serviceProperties["Name"].toString());
             return;
