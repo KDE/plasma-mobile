@@ -30,7 +30,7 @@ DirModel::DirModel(QObject *parent)
 
     m_mimeTypes << "inode/directory";
     foreach (KMimeType::Ptr mime, mimeList) {
-        if (mime->name().startsWith("image/")) {
+        if (mime->name().startsWith(QLatin1String("image/"))) {
             m_mimeTypes << mime->name();
         }
     }

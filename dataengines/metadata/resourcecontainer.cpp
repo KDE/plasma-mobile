@@ -188,7 +188,7 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
                 foreach (const QVariant &vu, tl) {
                     //kDebug() << vu.toString().startsWith("nepomuk:") << vu.toString().startsWith("akonadi:") << vu.toString();
                     if (vu.canConvert(QVariant::Url) &&
-                        (vu.toString().startsWith("nepomuk:") || vu.toString().startsWith("akonadi:"))) {
+                        (vu.toString().startsWith(QLatin1String("nepomuk:")) || vu.toString().startsWith(QLatin1String("akonadi:")))) {
                         kDebug() <<  "HHH This is a list.!!!" << key << vu.toString();
                     }
                 }
