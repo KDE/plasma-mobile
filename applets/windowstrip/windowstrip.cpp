@@ -88,7 +88,7 @@ void WindowStrip::init()
 void WindowStrip::showThumbnails()
 {
     QList<QRect> translatedWindows;
-    foreach (QRect windowRect, m_windows.values()) {
+    foreach (const QRect &windowRect, m_windows) {
         translatedWindows << windowRect.translated(m_windowsOffset);
     }
 
@@ -161,7 +161,7 @@ void WindowStrip::updateFrame()
     }
 
     m_windows.clear();
-    foreach (QVariant windowData, thumbnailsInfo) {
+    foreach (const QVariant &windowData, thumbnailsInfo) {
          const QVariantMap windowInfo = windowData.value<QVariantMap>();
          WId winId = (WId)windowInfo["winId"].value<QString>().toInt();
 

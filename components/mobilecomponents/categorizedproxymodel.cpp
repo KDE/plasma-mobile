@@ -115,7 +115,7 @@ QVariant CategorizedProxyModel::data(const QModelIndex &index, int role) const
     }
 
     int offset = 0;
-    foreach (QString cat, m_categories) {
+    foreach (const QString &cat, m_categories) {
         if (cat == m_currentCategory) {
             break;
         }

@@ -72,7 +72,7 @@ void AppSource::populate()
     query += " and (not (exist Categories and 'X-SuSE-YaST' in Categories))";
 
     // Filter out blacklisted apps as to not show too much crap
-    foreach (const QString appName, m_blackList) {
+    foreach (const QString &appName, m_blackList) {
         query += QString(" and (DesktopEntryName != '%1' )").arg(appName);
     }
     //kWarning()<<query;

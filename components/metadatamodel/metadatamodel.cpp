@@ -496,7 +496,7 @@ void MetadataModel::countQueryResult(const QList< Nepomuk::Query::Result > &entr
 {
     setStatus(Running);
     //this should be always 1
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk::Query::Result &res, entries) {
         int count = res.additionalBinding(QLatin1String("cnt")).variant().toInt();
 
         if (count < m_resources.size()) {
@@ -516,7 +516,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
     setStatus(Running);
     const int page = m_pagesForClient.value(qobject_cast<Nepomuk::Query::QueryServiceClient *>(sender()));
 
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
         Nepomuk::Resource resource = res.resource();
@@ -572,7 +572,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 
             } else {
                 Nepomuk::Types::Class resClass(resource.resourceType());
-                foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
+                foreach (const Nepomuk::Types::Class &parentClass, resClass.parentClasses()) {
                     const QString label = parentClass.label();
                     if (label == "Document" ||
                         label == "Audio" ||
@@ -632,7 +632,7 @@ void MetadataModel::newEntriesDelayed()
             }
         }
 
-        foreach (Nepomuk::Resource res, resourcesToInsert) {
+        foreach (const Nepomuk::Resource &res, resourcesToInsert) {
             //kDebug() << "Result!!!" << res.genericLabel() << res.type();
             //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
 

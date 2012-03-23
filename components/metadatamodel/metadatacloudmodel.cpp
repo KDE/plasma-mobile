@@ -267,7 +267,7 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entri
     QVector<QPair<QString, int> > results;
     QVariantList categories;
 
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk::Query::Result &res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
         QVariant rawLabel = res.additionalBinding(QLatin1String("label")).variant();

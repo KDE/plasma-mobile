@@ -98,7 +98,7 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
 
     //FIXME: a more elegant way is needed
     setData("genericClassName", resource.className());
-    foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
+    foreach (const Nepomuk::Types::Class &parentClass, resClass.parentClasses()) {
         if (parentClass.label() == "Document" ||
             parentClass.label() == "Audio" ||
             parentClass.label() == "Video" ||
@@ -185,7 +185,7 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
             //QString from = dynamic_cast<QList<QUrl>();
             if (resource.property(propertyUrl).variant().canConvert(QVariant::List)) {
                 QVariantList tl = resource.property(propertyUrl).variant().toList();
-                foreach (QVariant vu, tl) {
+                foreach (const QVariant &vu, tl) {
                     //kDebug() << vu.toString().startsWith("nepomuk:") << vu.toString().startsWith("akonadi:") << vu.toString();
                     if (vu.canConvert(QVariant::Url) &&
                         (vu.toString().startsWith("nepomuk:") || vu.toString().startsWith("akonadi:"))) {
