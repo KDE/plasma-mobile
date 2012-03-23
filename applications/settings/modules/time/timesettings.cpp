@@ -160,7 +160,7 @@ void TimeSettingsPrivate::initSettings()
     }
     //FIXME: why?
     if (ntpServer.length() < 3) {
-        ntpServer = QString();
+        ntpServer.clear();
     }
 }
 

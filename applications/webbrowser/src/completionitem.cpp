@@ -47,8 +47,8 @@ CompletionItem::CompletionItem(QObject *parent)
     : QObject(parent)
 {
     d = new CompletionItemPrivate;
-    d->name = QString();
-    d->url = QString();
+    d->name.clear();
+    d->url.clear();
     d->preview = QImage();
 }
 
