@@ -252,10 +252,10 @@ void MetadataCloudModel::doQuery()
     delete m_queryClient;
     m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
 
-    connect(m_queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
-            this, SLOT(entriesRemoved(const QList<QUrl> &)));
+    connect(m_queryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
+            this, SLOT(newEntries(QList<Nepomuk::Query::Result>)));
+    connect(m_queryClient, SIGNAL(entriesRemoved(QList<QUrl>)),
+            this, SLOT(entriesRemoved(QList<QUrl>)));
     connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
 
     m_queryClient->sparqlQuery(query);

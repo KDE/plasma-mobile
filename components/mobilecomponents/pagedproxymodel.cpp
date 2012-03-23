@@ -86,17 +86,17 @@ void PagedProxyModel::setSourceModelObject(QObject *source)
     connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(sourceDataChanged(QModelIndex,QModelIndex)));
 
-    connect(model,  SIGNAL(rowsAboutToBeInserted(QModelIndex, int,int)),
+    connect(model,  SIGNAL(rowsAboutToBeInserted(QModelIndex,int,int)),
             this, SLOT(sourceRowsAboutToBeInserted(QModelIndex,int,int)) );
-    connect(model,  SIGNAL(rowsInserted(QModelIndex, int,int)),
+    connect(model,  SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SLOT(sourceRowsInserted(QModelIndex,int,int)) );
-    connect(model,  SIGNAL(rowsAboutToBeRemoved(QModelIndex, int,int)),
+    connect(model,  SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
             this, SLOT(sourceRowsAboutToBeRemoved(QModelIndex,int,int)) );
-    connect(model,  SIGNAL(rowsRemoved(QModelIndex, int,int)),
+    connect(model,  SIGNAL(rowsRemoved(QModelIndex,int,int)),
             this, SLOT(sourceRowsRemoved(QModelIndex,int,int)) );
 
-    connect(model, SIGNAL(rowsMoved(QModelIndex, int, int, const QModelIndex, int)),
-            this, SLOT(sourceRowsMoved(QModelIndex, int, int, const QModelIndex, int)));
+    connect(model, SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)),
+            this, SLOT(sourceRowsMoved(QModelIndex,int,int,QModelIndex,int)));
 
     connect(model, SIGNAL(modelAboutToBeReset()),
                this, SIGNAL(modelAboutToBeReset()));

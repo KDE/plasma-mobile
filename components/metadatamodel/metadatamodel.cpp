@@ -79,8 +79,8 @@ MetadataModel::MetadataModel(QObject *parent)
     m_watcher = new Nepomuk::ResourceWatcher(this);
 
     m_watcher->addProperty(NAO::numericRating());
-    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)),
-            this, SLOT(propertyChanged(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)));
+    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource,Nepomuk::Types::Property,QVariant)),
+            this, SLOT(propertyChanged(Nepomuk::Resource,Nepomuk::Types::Property,QVariant)));
 
 
     QHash<int, QByteArray> roleNames;
@@ -451,8 +451,8 @@ void MetadataModel::doQuery()
     m_runningClients = 0;
     m_countQueryClient = new Nepomuk::Query::QueryServiceClient(this);
 
-    connect(m_countQueryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(countQueryResult(const QList<Nepomuk::Query::Result> &)));
+    connect(m_countQueryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
+            this, SLOT(countQueryResult(QList<Nepomuk::Query::Result>)));
 
     if (m_limit > 0) {
         m_query.setLimit(m_limit);
@@ -482,10 +482,10 @@ void MetadataModel::fetchResultsPage(int page)
 
     client->query(pageQuery);
 
-    connect(client, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(client, SIGNAL(entriesRemoved(const QList<QUrl> &)),
-            this, SLOT(entriesRemoved(const QList<QUrl> &)));
+    connect(client, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
+            this, SLOT(newEntries(QList<Nepomuk::Query::Result>)));
+    connect(client, SIGNAL(entriesRemoved(QList<QUrl>)),
+            this, SLOT(entriesRemoved(QList<QUrl>)));
     connect(client, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
 
     m_queryClientsHistory << client;
@@ -858,10 +858,10 @@ void MetadataModel::delayedPreview()
         KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, m_thumbnailerPlugins);
         //job->setIgnoreMaximumSize(true);
         kDebug() << "Created job" << job;
-        connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-                this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
-        connect(job, SIGNAL(failed(const KFileItem&)),
-                this, SLOT(previewFailed(const KFileItem&)));
+        connect(job, SIGNAL(gotPreview(KFileItem,QPixmap)),
+                this, SLOT(showPreview(KFileItem,QPixmap)));
+        connect(job, SIGNAL(failed(KFileItem)),
+                this, SLOT(previewFailed(KFileItem)));
     }
 
     m_filesToPreview.clear();

@@ -355,8 +355,8 @@ void KDeclarativeWebView::init()
         kwp->setWallet(d->wallet);
         // TODO: hook in some dialog wether the user wants to save the form data
         // happens unconditionally right now for every form filled in
-        connect(d->wallet, SIGNAL(saveFormDataRequested(const QString &, const QUrl &)),
-            d->wallet, SLOT(acceptSaveFormDataRequest(const QString &)), Qt::UniqueConnection);
+        connect(d->wallet, SIGNAL(saveFormDataRequested(QString,QUrl)),
+            d->wallet, SLOT(acceptSaveFormDataRequest(QString)), Qt::UniqueConnection);
     }
 
     wp->setForwardUnsupportedContent(true);
@@ -369,27 +369,27 @@ void KDeclarativeWebView::init()
 #endif
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(flickingEnabledChanged()), this, SLOT(updateFlickingEnabled()));
-    connect(d->view, SIGNAL(click(int, int)), this, SIGNAL(click(int, int)));
-    connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
+    connect(d->view, SIGNAL(click(int,int)), this, SIGNAL(click(int,int)));
+    connect(d->view, SIGNAL(doubleClick(int,int)), this, SIGNAL(doubleClick(int,int)));
     
-    //connect(d->view, SIGNAL(loadLink(const QUrl&, const QRect&)), SIGNAL(linkClicked(const QUrl&, const QRect&)));
-    connect(d->view, SIGNAL(linkPressed(const QUrl&, const QRect&)),
-            this, SIGNAL(linkPressed(const QUrl&, const QRect&)));
-    connect(d->view, SIGNAL(linkPressAndHold(const QUrl&, const QRect&)),
-            this, SIGNAL(linkPressAndHold(const QUrl&, const QRect&)));
+    //connect(d->view, SIGNAL(loadLink(QUrl,QRect)), SIGNAL(linkClicked(QUrl,QRect)));
+    connect(d->view, SIGNAL(linkPressed(QUrl,QRect)),
+            this, SIGNAL(linkPressed(QUrl,QRect)));
+    connect(d->view, SIGNAL(linkPressAndHold(QUrl,QRect)),
+            this, SIGNAL(linkPressAndHold(QUrl,QRect)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
 
     connect(access, SIGNAL(finished(QNetworkReply*)), page(), SLOT(handleNetworkErrors(QNetworkReply*)));
 
     wp->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-    connect(wp, SIGNAL(linkClicked(const QUrl&)), d->view, SLOT(handleLinkClicked(const QUrl&)));
+    connect(wp, SIGNAL(linkClicked(QUrl)), d->view, SLOT(handleLinkClicked(QUrl)));
 
 
     d->dirWatch = new KDirWatch(this);
     QString configPath = KStandardDirs::locateLocal("config", "active-webbrowserrc");
     d->dirWatch->addFile(configPath);
-    connect(d->dirWatch, SIGNAL(dirty(const QString&)), SLOT(initSettings()));
-    connect(d->dirWatch, SIGNAL(created(const QString&)), SLOT(initSettings()));
+    connect(d->dirWatch, SIGNAL(dirty(QString)), SLOT(initSettings()));
+    connect(d->dirWatch, SIGNAL(created(QString)), SLOT(initSettings()));
 }
 
 void KDeclarativeWebView::initSettings()
@@ -1196,7 +1196,7 @@ QRect KDeclarativeWebView::elementAreaAt(int x, int y, int maxWidth, int maxHeig
 QDeclarativeWebPage::QDeclarativeWebPage(KDeclarativeWebView* parent) :
     KWebPage(parent, KWalletIntegration)
 {
-    connect(this, SIGNAL(unsupportedContent(QNetworkReply *)), this, SLOT(handleUnsupportedContent(QNetworkReply *)));
+    connect(this, SIGNAL(unsupportedContent(QNetworkReply*)), this, SLOT(handleUnsupportedContent(QNetworkReply*)));
 //     //TODO: move this in the webbrowser implementation
     m_nepomukHelper = new NepomukHelper(this);
 }
@@ -1297,7 +1297,7 @@ bool QDeclarativeWebPage::downloadResource (const KUrl& srcUrl, const QString& s
     job->addMetaData(QLatin1String("cache"), QLatin1String("cache")); // Use entry from cache if available.
     job->ui()->setWindow((parent ? parent->window() : 0));
     job->ui()->setAutoErrorHandlingEnabled(true);
-    connect(job, SIGNAL(result(KJob *)), this, SLOT(downloadFinished(KJob *)));
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(downloadFinished(KJob*)));
     return true;
 }
 

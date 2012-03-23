@@ -172,14 +172,14 @@ PlasmaApp::PlasmaApp()
     m_startupInfo = new KStartupInfo(KStartupInfo::CleanOnCantDetect, this );
 
     connect(m_startupInfo,
-            SIGNAL(gotNewStartup(const KStartupInfoId&, const KStartupInfoData&)),
-            SLOT(gotStartup(const KStartupInfoId&, const KStartupInfoData&)));
+            SIGNAL(gotNewStartup(KStartupInfoId,KStartupInfoData)),
+            SLOT(gotStartup(KStartupInfoId,KStartupInfoData)));
     connect(m_startupInfo,
-            SIGNAL(gotStartupChange(const KStartupInfoId&, const KStartupInfoData&)),
-            SLOT(gotStartup(const KStartupInfoId&, const KStartupInfoData&)));
+            SIGNAL(gotStartupChange(KStartupInfoId,KStartupInfoData)),
+            SLOT(gotStartup(KStartupInfoId,KStartupInfoData)));
     connect(m_startupInfo,
-            SIGNAL(gotRemoveStartup(const KStartupInfoId&, const KStartupInfoData&)),
-            SLOT(killStartup(const KStartupInfoId&)));
+            SIGNAL(gotRemoveStartup(KStartupInfoId,KStartupInfoData)),
+            SLOT(killStartup(KStartupInfoId)));
 }
 
 PlasmaApp::~PlasmaApp()
@@ -322,7 +322,7 @@ Plasma::Corona* PlasmaApp::corona()
         connect(m_corona, SIGNAL(containmentAdded(Plasma::Containment*)),
                 this, SLOT(manageNewContainment(Plasma::Containment*)), Qt::QueuedConnection);
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
-        connect(m_corona, SIGNAL(screenOwnerChanged(int, int, Plasma::Containment *)), this, SLOT(containmentScreenOwnerChanged(int,int,Plasma::Containment*)));
+        connect(m_corona, SIGNAL(screenOwnerChanged(int,int,Plasma::Containment*)), this, SLOT(containmentScreenOwnerChanged(int,int,Plasma::Containment*)));
 
 
         // setup our QML home screen;
@@ -409,7 +409,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     // to retrieve it later.
     m_containments.insert(containment->id(), containment);
 
-    connect(containment, SIGNAL(destroyed(QObject *)), this, SLOT(containmentDestroyed(QObject *)));
+    connect(containment, SIGNAL(destroyed(QObject*)), this, SLOT(containmentDestroyed(QObject*)));
 
     containment->resize(m_mainView->size());
 

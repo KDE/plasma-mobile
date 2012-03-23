@@ -49,7 +49,7 @@ void ActiveWebbrowser::newWindow(const QString& url)
 {
     ActiveBrowserWindow *browserWindow = new ActiveBrowserWindow(url);
     browserWindow->setUseGL(m_useGL);
-    connect(browserWindow, SIGNAL(newWindow(const QString&)), SLOT(newWindow(const QString&)));
+    connect(browserWindow, SIGNAL(newWindow(QString)), SLOT(newWindow(QString)));
     browserWindow->show();
 }
 

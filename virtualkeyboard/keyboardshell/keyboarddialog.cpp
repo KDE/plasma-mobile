@@ -117,7 +117,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 
     connect(this, SIGNAL(sceneRectAboutToChange()), this, SLOT(updateGeometry()));
     QDesktopWidget *desktop = QApplication::desktop();
-    connect(desktop, SIGNAL(resized(int )), this, SLOT(updateGeometry()));
+    connect(desktop, SIGNAL(resized(int)), this, SLOT(updateGeometry()));
 
     setFixedHeight(static_cast<Plasma::PopupApplet *>(applet())->graphicsWidget()->effectiveSizeHint(Qt::PreferredSize).height());
 

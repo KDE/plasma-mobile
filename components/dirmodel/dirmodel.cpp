@@ -57,9 +57,9 @@ DirModel::DirModel(QObject *parent)
     //using the same cache of the engine, they index both by url
     m_imageCache = new KImageCache("plasma_engine_preview", 10485760);
 
-    connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+    connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SIGNAL(countChanged()));
-    connect(this, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+    connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)),
             this, SIGNAL(countChanged()));
     connect(this, SIGNAL(modelReset()),
             this, SIGNAL(countChanged()));
@@ -148,10 +148,10 @@ void DirModel::delayedPreview()
         KIO::PreviewJob* job = KIO::filePreview(list, m_screenshotSize);
         job->setIgnoreMaximumSize(true);
         kDebug() << "Created job" << job;
-        connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-                this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
-        connect(job, SIGNAL(failed(const KFileItem&)),
-                this, SLOT(previewFailed(const KFileItem&)));
+        connect(job, SIGNAL(gotPreview(KFileItem,QPixmap)),
+                this, SLOT(showPreview(KFileItem,QPixmap)));
+        connect(job, SIGNAL(failed(KFileItem)),
+                this, SLOT(previewFailed(KFileItem)));
     }
 
     m_filesToPreview.clear();

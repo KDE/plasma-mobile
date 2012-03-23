@@ -43,7 +43,7 @@ ActiveBrowserWindow::ActiveBrowserWindow(const QString &url, QWidget *parent)
     addAction(KStandardAction::close(this, SLOT(close()), this));
     addAction(KStandardAction::quit(this, SLOT(close()), this));
     m_widget = new View(url, this);
-    connect(m_widget, SIGNAL(newWindow(const QString&)), SIGNAL(newWindow(const QString&)));
+    connect(m_widget, SIGNAL(newWindow(QString)), SIGNAL(newWindow(QString)));
 
     KConfigGroup config(KGlobal::config(), "Window");
     const QByteArray geom = config.readEntry("Geometry", QByteArray());

@@ -37,8 +37,8 @@ ResourceContainer::ResourceContainer(QObject *parent)
     m_watcher = new Nepomuk::ResourceWatcher(this);
 
     m_watcher->addProperty(QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#numericRating"));
-    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)),
-            this, SLOT(propertyChanged(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)));
+    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource,Nepomuk::Types::Property,QVariant)),
+            this, SLOT(propertyChanged(Nepomuk::Resource,Nepomuk::Types::Property,QVariant)));
 }
 
 ResourceContainer::~ResourceContainer()

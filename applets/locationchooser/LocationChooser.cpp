@@ -67,8 +67,8 @@ void LocationChooser::init()
     d->desktop = new KDesktopFile(LOCATION_CHOOSER_PACKAGE_DIR + "metadata.desktop");
     d->engine = new Engine(this);
 
-    // connect(d->engine, SIGNAL(currentLocationChanged(QString, QString)),
-    //         this, SLOT(currentLocationChanged(QString, QString)));
+    // connect(d->engine, SIGNAL(currentLocationChanged(QString,QString)),
+    //         this, SLOT(currentLocationChanged(QString,QString)));
 
     setGraphicsWidget(d->root);
     d->root->setInitializationDelayed(true);
