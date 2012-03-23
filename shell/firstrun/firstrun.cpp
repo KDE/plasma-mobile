@@ -93,7 +93,7 @@ void FirstRun::activityAdded(const QString& source)
     KActivities::Info* info = new KActivities::Info(source);
     kError() << "------> Source added: " << info->name() << source;
 
-    // Check if it's among the default activities and wether we've configured this actity already
+    // Check if it's among the default activities and whether we've configured this actity already
     if (!m_initialActivities.contains(info->name())) {
         //kError() << "noinit";
         return;

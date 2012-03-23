@@ -63,7 +63,7 @@ Item {
             margins: 4
         }
 
-        //FIXME: assuming the view is parent.parent is bad, it should have the view attached property (it appears it doesnt, why?)
+        //FIXME: assuming the view is parent.parent is bad, it should have the view attached property (it appears it doesn't, why?)
         source: {
             if (!className && !genericClassName) {
                 return ""

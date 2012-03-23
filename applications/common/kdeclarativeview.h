@@ -42,7 +42,7 @@ public:
     ~KDeclarativeView();
 
     /**
-     * Sets wether the application uses opengl
+     * Sets whether the application uses opengl
      * @arg bool on if true the declarative view will use opengl for its viewport()
      */
     void setUseGL(const bool on);

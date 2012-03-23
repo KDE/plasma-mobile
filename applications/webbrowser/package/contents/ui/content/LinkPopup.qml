@@ -182,7 +182,7 @@ PlasmaCore.FrameSvgItem {
             }
         }
 
-        // Check wether we need to reposition horizontally
+        // Check whether we need to reposition horizontally
         if (linkRect.y < linkPopup.height) {
             // move down under linkRect point
             linkPopup.y = linkRect.y + linkRect.height;

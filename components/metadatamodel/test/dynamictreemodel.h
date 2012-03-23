@@ -168,7 +168,7 @@ class ModelResetCommand : public ModelMoveCommand
 {
   Q_OBJECT
 public:
-  explicity ModelResetCommand(DynamicTreeModel* model, QObject* parent = 0);
+  explicit ModelResetCommand(DynamicTreeModel* model, QObject* parent = 0);
 
   virtual ~ModelResetCommand();
 

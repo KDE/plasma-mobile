@@ -111,7 +111,7 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
     rules = rulesGroup.readEntry("local-rules" , QStringList());
     loadRules(rules);
 
-    // Checking wether to update the adblock filters, and doin' it
+    // Checking whether to update the adblock filters, and doin' it
     QDateTime today = QDateTime::currentDateTime();
     QDateTime lastUpdate = _config.readEntry("lastUpdate", QDateTime(QDate(2001, 9, 11)));
     int days = _config.readEntry("updateInterval", 7);

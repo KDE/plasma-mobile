@@ -191,7 +191,7 @@ void MobCorona::loadDefaultLayout()
 
 void MobCorona::layoutContainments()
 {
-    // we dont need any layout for this as we are going to bind the position
+    // we don't need any layout for this as we are going to bind the position
     // of the containments to QML items to animate them. As soon as we don't
     // need the containment anymore we can just let it stay wherever it is as
     // long as it's offscreen (the view is not 'looking' at it).
