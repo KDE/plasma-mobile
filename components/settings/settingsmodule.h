@@ -44,7 +44,7 @@ class KDE_EXPORT SettingsModule : public QObject
 
 
     public:
-        SettingsModule(QObject *parent = 0, const QVariantList &v = QVariantList());
+        explicit SettingsModule(QObject *parent = 0, const QVariantList &v = QVariantList());
         virtual ~SettingsModule();
 
         QString name();

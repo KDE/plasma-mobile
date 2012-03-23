@@ -54,7 +54,7 @@ class ModelTest : public QObject
   Q_OBJECT
 
 public:
-  ModelTest( MetadataModel *model, QObject *parent = 0 );
+  explicit ModelTest( MetadataModel *model, QObject *parent = 0 );
 
 private Q_SLOTS:
   void nonDestructiveBasicTest();

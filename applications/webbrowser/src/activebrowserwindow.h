@@ -37,7 +37,7 @@ class ActiveBrowserWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
+    explicit ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
     virtual ~ActiveBrowserWindow();
     QString name();
     QIcon icon();
