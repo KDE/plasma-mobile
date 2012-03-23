@@ -319,16 +319,10 @@ void LocationManager::Private::addNetworkToLocation(const QString & location, co
 
     if (!nameAlreadyRegistered) {
         knownLocationInfos[location].networks     << network;
-    } else {
-        knownLocationInfos[QString()].networks    << network;
-        locationNetworks.writeEntry("unknown", knownLocationInfos[QString()].networks.toList());
     }
 
     if (!rootAlreadyRegistered) {
         knownLocationInfos[location].networkRoots << root;
-    } else {
-        knownLocationInfos[QString()].networkRoots << root;
-        locationNetworkRoots.writeEntry("unknown", knownLocationInfos[QString()].networks.toList());
     }
 
     kDebug()
