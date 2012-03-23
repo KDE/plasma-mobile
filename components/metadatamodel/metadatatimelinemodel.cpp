@@ -112,12 +112,12 @@ void MetadataTimelineModel::doQuery()
     if (m_level >= Month) {
         monthQuery = "bif:month(?label)";
     } else {
-        monthQuery = "0";
+        monthQuery = '0';
     }
     if (m_level >= Day) {
         dayQuery = "bif:dayofmonth(?label)";
     } else {
-        dayQuery = "0";
+        dayQuery = '0';
     }
 
     QString query = QString("select distinct bif:year(?label) as ?year %1 as ?month %2 as ?day count(*) as ?count where { ?r nie:lastModified ?label  ").arg(monthQuery).arg(dayQuery);
@@ -126,7 +126,7 @@ void MetadataTimelineModel::doQuery()
     if (!resourceType().isEmpty()) {
         QString type = resourceType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -145,7 +145,7 @@ void MetadataTimelineModel::doQuery()
     if (!mimeType().isEmpty()) {
         QString type = mimeType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -160,7 +160,7 @@ void MetadataTimelineModel::doQuery()
         foreach (const QString &key, parameters->keys()) {
             QString parameter = parameters->value(key).toString();
             bool negation = false;
-            if (parameter.startsWith("!")) {
+            if (parameter.startsWith('!')) {
                 parameter = parameter.remove(0, 1);
                 negation = true;
             }
@@ -176,7 +176,7 @@ void MetadataTimelineModel::doQuery()
     if (!activityId().isEmpty()) {
         QString activity = activityId();
         bool negation = false;
-        if (activity.startsWith("!")) {
+        if (activity.startsWith('!')) {
             activity = activity.remove(0, 1);
             negation = true;
         }
@@ -194,7 +194,7 @@ void MetadataTimelineModel::doQuery()
         QString individualTag = tag;
         bool negation = false;
 
-        if (individualTag.startsWith("!")) {
+        if (individualTag.startsWith('!')) {
             individualTag = individualTag.remove(0, 1);
             negation = true;
         }

@@ -34,7 +34,7 @@ GroupSource::GroupSource(const QString &name, QObject *parent)
     }
 
     if (m_group.isEmpty()) {
-        m_group = "/";
+        m_group = '/';
     }
 
     populate();

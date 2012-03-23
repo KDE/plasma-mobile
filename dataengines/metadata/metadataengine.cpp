@@ -122,7 +122,7 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
     QString massagedName = name;
     // if the strings ends with :number it's the limit for the query
     if (name.contains(QRegExp(".*:\\d+$"))) {
-        QStringList tokens = name.split(":");
+        QStringList tokens = name.split(':');
         massagedName = massagedName.mid(0, massagedName.lastIndexOf(":"));
     }
 

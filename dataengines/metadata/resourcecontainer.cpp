@@ -127,9 +127,9 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
         _icon = icon(QStringList(resource.className()));
         //kDebug() << "symbol" << _icon;
     }
-    if (_icon.split(",").count() > 1) {
+    if (_icon.split(',').count() > 1) {
         kDebug() << "More than one icon!" << _icon;
-        _icon = _icon.split(",").last();
+        _icon = _icon.split(',').last();
     }
 
     setData("icon", _icon);

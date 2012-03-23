@@ -65,7 +65,7 @@ void AppSource::populate()
             first = false;
             query += QString(" (exist Categories and '%1' ~subin Categories)").arg(category);
         }
-        query += ")";
+        query += ')';
     }
 
     //openSUSE: exclude YaST modules from the list

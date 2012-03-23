@@ -80,7 +80,7 @@ KeyboardDialog::KeyboardDialog(Plasma::Corona *corona, Plasma::Containment *cont
 
     QFileInfo info(pluginName);
     if (!info.isAbsolute()) {
-        info = QFileInfo(QDir::currentPath() + "/" + pluginName);
+        info = QFileInfo(QDir::currentPath() + '/' + pluginName);
     }
 
     if (info.exists()) {

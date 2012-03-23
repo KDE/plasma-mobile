@@ -120,7 +120,7 @@ void MetadataCloudModel::doQuery()
     if (!resourceType().isEmpty()) {
         QString type = resourceType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -139,7 +139,7 @@ void MetadataCloudModel::doQuery()
     if (!mimeType().isEmpty()) {
         QString type = mimeType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -154,7 +154,7 @@ void MetadataCloudModel::doQuery()
         foreach (const QString &key, parameters->keys()) {
             QString parameter = parameters->value(key).toString();
             bool negation = false;
-            if (parameter.startsWith("!")) {
+            if (parameter.startsWith('!')) {
                 parameter = parameter.remove(0, 1);
                 negation = true;
             }
@@ -170,7 +170,7 @@ void MetadataCloudModel::doQuery()
     if (!activityId().isEmpty()) {
         QString activity = activityId();
         bool negation = false;
-        if (activity.startsWith("!")) {
+        if (activity.startsWith('!')) {
             activity = activity.remove(0, 1);
             negation = true;
         }
@@ -188,7 +188,7 @@ void MetadataCloudModel::doQuery()
         QString individualTag = tag;
         bool negation = false;
 
-        if (individualTag.startsWith("!")) {
+        if (individualTag.startsWith('!')) {
             individualTag = individualTag.remove(0, 1);
             negation = true;
         }
