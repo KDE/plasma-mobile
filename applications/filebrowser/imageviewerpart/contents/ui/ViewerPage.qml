@@ -52,7 +52,7 @@ PlasmaComponents.Page {
             }
         }
         Text {
-            text: i18n("%1 of %2", quickBrowserBar.currentIndex+1, quickBrowserBar.count)
+            text: i18n("%1 (%2 of %3)", fullList.currentItem.label, fullList.currentIndex+1, fullList.count)
             anchors.centerIn: parent
             font.pointSize: 14
             font.bold: true
