@@ -67,7 +67,7 @@ void GroupSource::loadGroup(KServiceGroup::Ptr group)
         KServiceGroup::List list = group->entries();
 
         for( KServiceGroup::List::ConstIterator it = list.constBegin();
-             it != list.constEnd(); it++) {
+             it != list.constEnd(); ++it) {
             const KSycocaEntry::Ptr p = (*it);
 
             if (p->isType(KST_KService)) {
