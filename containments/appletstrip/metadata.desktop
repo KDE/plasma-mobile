@@ -1,17 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Applets strip
-Name[es]=Banda de miniaplicaciones
-Name[et]=Apletiriba
-Name[fr]=Bandeau d'applets
-Name[km]=ឆ្នូត​អាប់ភ្លេត
-Name[nl]=Strip met applets
-Name[pl]=Pas apletów
-Name[pt]=Barra de 'applets'
-Name[pt_BR]=Barra de miniaplicativos
-Name[sv]=Rensa miniprogram
-Name[uk]=Усування аплетів
-Name[x-test]=xxApplets stripxx
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

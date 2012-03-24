@@ -1,22 +1,6 @@
 [Desktop Entry]
 Name=Device Capabilities
-Name[et]=Seadme omadused
-Name[nl]=Mogelijkheden van het apparaat
-Name[pl]=Możliwości urządzenia
-Name[pt]=Capacidades do Dispositivo
-Name[pt_BR]=Capacidades do dispositivo
-Name[sv]=Enhetsfunktioner
-Name[uk]=Можливості пристрою
-Name[x-test]=xxDevice Capabilitiesxx
 Comment=Provides information and services for device-specific aspects
-Comment[et]=Seadmespetsiifilise teabe ja teenuste esitamine
-Comment[nl]=Levert informatie en services voor apparaatspecifieke aspecten
-Comment[pl]=Dostarcza informacji i usług dla aspektów charakterystycznych dla urządzenia
-Comment[pt]=Fornece informações e serviços sobre aspectos específicos dos dispositivos
-Comment[pt_BR]=Fornece informações e serviços sobre aspectos específicos dos dispositivos
-Comment[sv]=Tillhandahåller information om och tjänster för enhetsspecifika funktioner
-Comment[uk]=Надає дані та служби керування специфічними параметрами пристрою
-Comment[x-test]=xxProvides information and services for device-specific aspectsxx
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=phone

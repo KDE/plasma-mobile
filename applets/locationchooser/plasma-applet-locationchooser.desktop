@@ -2,22 +2,7 @@
 Icon=plasmaapplet-location
 
 Name=Location
-Name[cs]=Umístění
-Name[nl]=Locatie
-Name[pl]=Położenie
-Name[pt]=Localização
-Name[pt_BR]=Localização
-Name[sv]=Plats
-Name[uk]=Розташування
-Name[x-test]=xxLocationxx
 Comment=Location chooser
-Comment[nl]=Locatiekiezer
-Comment[pl]=Wybieranie położenia
-Comment[pt]=Selector da localização
-Comment[pt_BR]=Seletor de localização
-Comment[sv]=Platsinställning
-Comment[uk]=Вибір розташування
-Comment[x-test]=xxLocation chooserxx
 
 Type=Service
 

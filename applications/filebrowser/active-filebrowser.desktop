@@ -1,31 +1,7 @@
 [Desktop Entry]
 Name=Files
-Name[nl]=Bestanden
-Name[pl]=Pliki
-Name[pt]=Ficheiros
-Name[pt_BR]=Arquivos
-Name[sk]=Súbory
-Name[sv]=Filer
-Name[ug]=ھۆججەتلەر
-Name[uk]=Файли
-Name[x-test]=xxFilesxx
 GenericName=File browser
-GenericName[cs]=Prohlížeč souborů
-GenericName[nl]=Bestandsbrowser
-GenericName[pl]=Przeglądarka plików
-GenericName[pt]=Navegador de ficheiros
-GenericName[pt_BR]=Navegador de arquivos
-GenericName[sv]=Filbläddrare
-GenericName[uk]=Керування файлами
-GenericName[x-test]=xxFile browserxx
 Comment=A simple file browser/manager
-Comment[nl]=Een eenvoudige bestandsbrowser/beheerder
-Comment[pl]=Prosta przeglądarka/menadżer plików
-Comment[pt]=Um navegador/gestor de ficheiros simples
-Comment[pt_BR]=Um navegador/gerenciador de arquivos simples
-Comment[sv]=En enkel filbläddrare och filhanterare
-Comment[uk]=Проста програма для перегляду і керування файловою системою
-Comment[x-test]=xxA simple file browser/managerxx
 
 
 Exec=active-filebrowser -graphicssystem raster %u

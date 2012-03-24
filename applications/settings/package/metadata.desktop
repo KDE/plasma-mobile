@@ -1,22 +1,6 @@
 [Desktop Entry]
 Name=Active Settings
-Name[et]=Active'i seadistused
-Name[nl]=Instellingen van Active
-Name[pl]=Ustawienia aktywne
-Name[pt]=Configuração do Active
-Name[pt_BR]=Configurações do Active
-Name[sv]=Aktiv inställningar
-Name[uk]=Параметри для сенсорного екрана
-Name[x-test]=xxActive Settingsxx
 Comment=Touchscreen friendly settings UI for Active
-Comment[et]=Puuteekraanisõbralik Active'i seadistuste kasutajaliides
-Comment[nl]=Instellingen voor UI voor Active, vriendelijk voor aanraakscherm
-Comment[pl]=Ustawienia interfejsu użytkownika dla Active przyjazne ekranom dotykowym
-Comment[pt]=Interface de configuração amigável por toque para o Active
-Comment[pt_BR]=Interface de configuração amigável por toque para o Active
-Comment[sv]=Grafiskt användargränssnitt för inställning av Aktiv bra för pekskärmar
-Comment[uk]=Зручні для користування сенсорним пристроєм параметри
-Comment[x-test]=xxTouchscreen friendly settings UI for Activexx
 Encoding=UTF-8
 Type=Service
 Icon=preferences-desktop

@@ -1,28 +1,8 @@
 [Desktop Entry]
 Comment=Start Applications
-Comment[es]=Iniciar aplicaciones
-Comment[et]=Rakenduste käivitaja
-Comment[nl]=Toepassingen starten
-Comment[pl]=Uruchom programy
-Comment[pt]=Iniciar as Aplicações
-Comment[pt_BR]=Iniciar aplicativos
-Comment[sv]=Starta program
-Comment[uk]=Запуск програм
-Comment[x-test]=xxStart Applicationsxx
 Encoding=UTF-8
 Keywords=
 Name=Launcher
-Name[de]=Programmstarter
-Name[es]=Lanzador
-Name[et]=Käivitaja
-Name[nl]=Programmastarter
-Name[pl]=Aktywator
-Name[pt]=Lançamento
-Name[pt_BR]=Lançador
-Name[sv]=Startprogram
-Name[ug]=ئىجراچى
-Name[uk]=Інструмент запуску
-Name[x-test]=xxLauncherxx
 Type=Service
 Icon=start-here-kde
 
