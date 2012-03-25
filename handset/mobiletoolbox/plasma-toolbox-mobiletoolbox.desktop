@@ -1,7 +1,11 @@
 [Desktop Entry]
 Comment=Default toolbox for the mobile shell
+Comment[uk]=Типовий набір інструментів для мобільної оболонки
+Comment[x-test]=xxDefault toolbox for the mobile shellxx
 Icon=plasma
 Name=Mobile toolbox
+Name[uk]=Набір інструментів для мобільного
+Name[x-test]=xxMobile toolboxxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/ToolBox

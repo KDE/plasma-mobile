@@ -1,7 +1,13 @@
 [Desktop Entry]
 Name=Videos
+Name[uk]=Відео
+Name[x-test]=xxVideosxx
 GenericName=Video player
+GenericName[uk]=Програвач відеофайлів
+GenericName[x-test]=xxVideo playerxx
 Comment=A video player for touch tablets
+Comment[uk]=Програма для перегляду відео на сенсорних планшетах
+Comment[x-test]=xxA video player for touch tabletsxx
 
 Exec=active-videoplayer -graphicssystem raster %u
 Terminal=false

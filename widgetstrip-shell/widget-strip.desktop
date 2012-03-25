@@ -1,7 +1,13 @@
 [Desktop Entry]
 Name=Widget Strip
+Name[uk]=Стрічка віджетів
+Name[x-test]=xxWidget Stripxx
 GenericName=Widget Strip
+GenericName[uk]=Стрічка віджетів
+GenericName[x-test]=xxWidget Stripxx
 Comment=A collection of widgets
+Comment[uk]=Збірка віджетів
+Comment[x-test]=xxA collection of widgetsxx
 
 Exec=plasma-widgetstrip
 Terminal=false

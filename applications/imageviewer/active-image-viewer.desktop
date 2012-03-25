@@ -1,7 +1,13 @@
 [Desktop Entry]
 Name=Images
+Name[uk]=Зображення
+Name[x-test]=xxImagesxx
 GenericName=Image viewer
+GenericName[uk]=Переглядач зображень
+GenericName[x-test]=xxImage viewerxx
 Comment=An image viewer for touch tablets
+Comment[uk]=Програма для перегляду зображень на сенсорних планшетах
+Comment[x-test]=xxAn image viewer for touch tabletsxx
 
 Exec=active-imageviewer -graphicssystem raster %u
 Terminal=false

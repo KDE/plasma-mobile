@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=Oxygen for Mobile
+Name[uk]=«Oxygen» для мобільного
+Name[x-test]=xxOxygen for Mobilexx
 Comment=A breath of fresh air
+Comment[uk]=Ковток свіжого повітря
+Comment[x-test]=xxA breath of fresh airxx
 
 
 X-KDE-PluginInfo-Author=The Oxygen Project

@@ -1,6 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Mobile Network Operator
+Name[uk]=Оператор мобільної мережі
+Name[x-test]=xxMobile Network Operatorxx
 
 Type=Service
 ServiceTypes=Plasma/Applet

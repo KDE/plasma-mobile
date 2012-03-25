@@ -1,8 +1,12 @@
 [Desktop Entry]
 Comment=Start Applications
+Comment[uk]=Запуск програм
+Comment[x-test]=xxStart Applicationsxx
 Encoding=UTF-8
 Keywords=
 Name=Launcher
+Name[uk]=Інструмент запуску
+Name[x-test]=xxLauncherxx
 Type=Service
 Icon=start-here-kde
 

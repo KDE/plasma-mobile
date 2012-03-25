@@ -2,6 +2,8 @@
 Exec=plasma-keyboardcontainer
 X-DBUS-StartupType=wait
 Name=Plasma Desktop Workspace
+Name[uk]=Робочий простір стільниці Плазми
+Name[x-test]=xxPlasma Desktop Workspacexx
 
 Type=Service
 X-KDE-StartupNotify=false

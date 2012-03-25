@@ -2,5 +2,7 @@
 Exec=active-settings org.kde.active.settings.time
 Icon=clock
 Name=Adjust date and time
+Name[uk]=Коригування дати і часу
+Name[x-test]=xxAdjust date and timexx
 Type=Application
 Categories=Qt;KDE;System;Settings;

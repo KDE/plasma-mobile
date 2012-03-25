@@ -1,8 +1,14 @@
 [Desktop Entry]
 Comment=Testing display of Nepomuk Resources
+Comment[uk]=Тестовий показ ресурсів Nepomuk
+Comment[x-test]=xxTesting display of Nepomuk Resourcesxx
 Encoding=UTF-8
 Keywords=Online Services, Web
+Keywords[uk]=Служби мережі, інтернет
+Keywords[x-test]=xxOnline Services, Webxx
 Name=Resources List
+Name[uk]=Список ресурсів
+Name[x-test]=xxResources Listxx
 Type=Service
 Icon=nepomuk
 X-KDE-ParentApp=

@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=Mobile Network Engine
+Name[uk]=Рушій мобільних мереж
+Name[x-test]=xxMobile Network Enginexx
 Comment=Mobile network engine
+Comment[uk]=Рушій мобільних мереж
+Comment[x-test]=xxMobile network enginexx
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service

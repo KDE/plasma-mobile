@@ -1,7 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Mobile System Tray
+Name[uk]=Мобільний у системному лотку
+Name[x-test]=xxMobile System Trayxx
 Comment=A system tray applet for mobile shell
+Comment[uk]=Аплет системного лотка для командної оболонки керування мобільним телефоном
+Comment[x-test]=xxA system tray applet for mobile shellxx
 Icon=preferences-desktop-notification
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

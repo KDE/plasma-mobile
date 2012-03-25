@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=Preview
+Name[uk]=Перегляд
+Name[x-test]=xxPreviewxx
 Comment=Shows previews for webpages
+Comment[uk]=Показує мініатюри сторінок інтернету
+Comment[x-test]=xxShows previews for webpagesxx
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=image-x-generic

@@ -1,8 +1,12 @@
 [Desktop Entry]
 Comment=Contour tablet homescreen
+Comment[uk]=Домашня сторінка планшета Contour
+Comment[x-test]=xxContour tablet homescreenxx
 Encoding=UTF-8
 Keywords=
 Name=Tablet homescreen
+Name[uk]=Домашня сторінка планшета
+Name[x-test]=xxTablet homescreenxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/GenericPackage

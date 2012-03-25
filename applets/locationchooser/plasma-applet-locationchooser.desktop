@@ -2,7 +2,11 @@
 Icon=plasmaapplet-location
 
 Name=Location
+Name[uk]=Розташування
+Name[x-test]=xxLocationxx
 Comment=Location chooser
+Comment[uk]=Вибір розташування
+Comment[x-test]=xxLocation chooserxx
 
 Type=Service
 

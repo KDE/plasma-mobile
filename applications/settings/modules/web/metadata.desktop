@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=Web and Browser
+Name[uk]=Інтернет і перегляд інтернету
+Name[x-test]=xxWeb and Browserxx
 Comment=Settings for history, caching, etc.
+Comment[uk]=Параметри журналу, кешування тощо
+Comment[x-test]=xxSettings for history, caching, etc.xx
 Encoding=UTF-8
 Type=Service
 Icon=preferences-system-network

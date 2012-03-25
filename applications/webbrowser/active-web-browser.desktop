@@ -1,7 +1,13 @@
 [Desktop Entry]
 Name=Browser
+Name[uk]=Переглядач
+Name[x-test]=xxBrowserxx
 GenericName=Web Browser
+GenericName[uk]=Переглядач інтернету
+GenericName[x-test]=xxWeb Browserxx
 Comment=A web browser reader for touch tablets
+Comment[uk]=Програма для перегляду інтернету для сенсорних планшетів
+Comment[x-test]=xxA web browser reader for touch tabletsxx
 Exec=active-webbrowser -graphicssystem raster %u
 Terminal=false
 Icon=active-web-browser

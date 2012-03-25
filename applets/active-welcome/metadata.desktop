@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=Welcome
+Name[uk]=Вітаємо
+Name[x-test]=xxWelcomexx
 Type=Service
 Icon=plasma
 X-KDE-PluginInfo-Author=Sebastian Kügler

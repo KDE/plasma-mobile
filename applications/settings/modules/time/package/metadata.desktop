@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=Time and Date
+Name[uk]=Час і дата
+Name[x-test]=xxTime and Datexx
 Comment=Settings for timezone and date display
+Comment[uk]=Параметри показу часового поясу і дати
+Comment[x-test]=xxSettings for timezone and date displayxx
 Encoding=UTF-8
 Type=Service
 Icon=preferences-system-time

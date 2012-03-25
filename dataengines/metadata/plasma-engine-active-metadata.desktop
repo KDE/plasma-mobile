@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=Active Metadata
+Name[uk]=Активні метадані
+Name[x-test]=xxActive Metadataxx
 Comment=Provides metadata for semantic resources
+Comment[uk]=Надає метадані для семантичних ресурсів
+Comment[x-test]=xxProvides metadata for semantic resourcesxx
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=nepomuk

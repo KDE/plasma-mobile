@@ -1,7 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Notifications
+Name[uk]=Сповіщення
+Name[x-test]=xxNotificationsxx
 Comment=Notifications
+Comment[uk]=Сповіщення
+Comment[x-test]=xxNotificationsxx
 
 Type=Service
 Icon=preferences-desktop-notification

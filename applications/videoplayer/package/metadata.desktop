@@ -1,6 +1,10 @@
 [Desktop Entry]
 Name=Video Player
+Name[uk]=Програвач відеофайлів
+Name[x-test]=xxVideo Playerxx
 Comment=Touchscreen friendly simple video player
+Comment[uk]=Проста сенсорна програма для перегляду відео
+Comment[x-test]=xxTouchscreen friendly simple video playerxx
 Encoding=UTF-8
 Type=Service
 Icon=active-video-player

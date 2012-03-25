@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=Mobile Fiber
+Name[uk]=Мобільне волокно
+Name[x-test]=xxMobile Fiberxx
 X-KDE-PluginInfo-Name=Fiber
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Email=mart@kde.org
