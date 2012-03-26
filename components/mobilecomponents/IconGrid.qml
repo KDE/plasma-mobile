@@ -27,7 +27,7 @@ Item {
 
     property Component delegate
     property QtObject model
-    property int pageSize: Math.floor(appsView.width/delegateWidth)*Math.floor(appsView.height/delegateHeight)
+    property int pageSize: Math.floor(appsView.width/main.delegateWidth)*Math.floor(appsView.height/main.delegateHeight)
     property int delegateWidth: theme.defaultFont.mSize.width * 15
     property int delegateHeight: theme.defaultIconSize + theme.defaultFont.mSize.height + 8
     property alias currentPage: appsView.currentIndex
@@ -54,16 +54,27 @@ Item {
     }
 
 
+    Timer {
+        id: resizeTimer
+        running: true
+        interval: 100
+        onTriggered: {
+            main.pageSize = Math.floor(appsView.width/main.delegateWidth)*Math.floor(appsView.height/main.delegateHeight)
+            appsView.currentItem.width = appsView.width
+            appsView.currentItem.height = appsView.height
+        }
+    }
     ListView {
         id: appsView
         objectName: "appsView"
         pressDelay: 200
-        cacheBuffer: width
+        cacheBuffer: 100
         highlightMoveDuration: 250
         anchors.fill: parent
+        onWidthChanged: resizeTimer.restart()
+        onHeightChanged: resizeTimer.restart()
 
-
-        model: main.model?Math.ceil(main.model.count/main.pageSize):0
+        model: main.model ? Math.ceil(main.model.count/main.pageSize) : 0
         highlightRangeMode: ListView.StrictlyEnforceRange
         orientation: ListView.Horizontal
         snapMode: ListView.SnapOneItem
@@ -74,8 +85,14 @@ Item {
 
         delegate: Component {
             Item {
-                width: appsView.width
-                height: appsView.height
+                id: delegatePage
+                //Explicitly *not* bind the properties for performance reasons
+                Component.onCompleted: {
+                    width = appsView.width
+                    height = appsView.height
+                    //appsView.cacheBuffer = appsView.width
+                }
+
                 Flow {
                     id: iconFlow
                     width: iconRepeater.suggestedWidth
@@ -105,7 +122,7 @@ Item {
                     }
                     Repeater {
                         id: iconRepeater
-                        property int columns: Math.min(count, Math.floor(appsView.width/main.delegateWidth))
+                        property int columns: Math.min(count, Math.floor(delegatePage.width/main.delegateWidth))
                         property int suggestedWidth: main.delegateWidth*columns
                         //property int suggestedHeight: main.delegateHeight*Math.floor(count/columns)
 
