@@ -98,7 +98,7 @@ PlasmaComponents.Page {
                                 color: theme.textColor
                                 anchors.fill: parent
                                 radius: width/2
-                                opacity: parent.underDrag ? 0.6 : 0.02
+                                opacity: parent.underDrag ? 0.6 : 0.04
                                 Behavior on opacity {
                                     NumberAnimation {
                                         duration: 250
