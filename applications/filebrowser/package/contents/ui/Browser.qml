@@ -37,24 +37,6 @@ PlasmaComponents.Page {
         width: parent.width
         height: childrenRect.height
 
-        PlasmaCore.DataSource {
-            id: hotplugSource
-            engine: "hotplug"
-            connectedSources: sources
-        }
-        PlasmaCore.DataSource {
-            id: devicesSource
-            engine: "soliddevice"
-            connectedSources: hotplugSource.sources
-            onDataChanged: {
-                //access it here due to the async nature of the dataengine
-                if (resultsGrid.model != dirModel && devicesSource.data[devicesTabBar.currentUdi]["File Path"] != "") {
-                    dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"]
-
-                    fileBrowserRoot.model = dirModel
-                }
-            }
-        }
         PlasmaCore.DataModel {
             id: devicesModel
             dataSource: hotplugSource
@@ -69,96 +51,6 @@ PlasmaComponents.Page {
                 right: searchBox.left
                 verticalCenter: parent.verticalCenter
                 leftMargin: y
-            }
-        }
-        PlasmaComponents.TabBar {
-            id: devicesTabBar
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-                rightMargin: y
-            }
-            height: theme.largeIconSize
-            width: height * tabCount
-            property int tabCount: 1
-            property string currentUdi
-
-            function updateSize()
-            {
-                var visibleChildCount = devicesTabBar.layout.children.length
-
-                for (var i = 0; i < devicesTabBar.layout.children.length; ++i) {
-                    if (!devicesTabBar.layout.children[i].visible || devicesTabBar.layout.children[i].text === undefined) {
-                        --visibleChildCount
-                    }
-                }
-                devicesTabBar.tabCount = visibleChildCount
-            }
-
-            opacity: tabCount > 1 ? 1 : 0
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            PlasmaComponents.TabButton {
-                id: customButton
-                height: width
-                //FIXME: better way to find it's not coming from a removable
-                visible: fileBrowserRoot.model == dirModel && dirModel.path.indexOf("/media") != -1
-                onVisibleChanged: devicesTabBar.updateSize()
-                property bool current: devicesTabBar.currentTab == customButton
-                iconSource: "folder"
-                onCurrentChanged: {
-                    if (current) {
-                        devicesTabBar.currentUdi = ""
-                    }
-                }
-            }
-
-            PlasmaComponents.TabButton {
-                id: localButton
-                height: width
-                property bool current: devicesTabBar.currentTab == localButton
-                iconSource: "drive-harddisk"
-                onCurrentChanged: {
-                    if (current) {
-                        fileBrowserRoot.model = metadataModel
-                        //nepomuk db, not filesystem
-                        devicesTabBar.currentUdi = ""
-                    }
-                }
-            }
-
-
-            Repeater {
-                id: devicesRepeater
-                model: devicesModel
-                onCountChanged: devicesTabBar.updateSize()
-
-                delegate: PlasmaComponents.TabButton {
-                    id: removableButton
-                    visible: devicesSource.data[udi]["Removable"] == true
-                    onVisibleChanged: devicesTabBar.updateSize()
-                    iconSource: model["icon"]
-                    property bool current: devicesTabBar.currentTab == removableButton
-                    onCurrentChanged: {
-                        if (current) {
-                            devicesTabBar.currentUdi = udi
-
-                            if (devicesSource.data[udi]["Accessible"]) {
-                                dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"]
-
-                                fileBrowserRoot.model = dirModel
-                            } else {
-                                var service = devicesSource.serviceForSource(udi);
-                                var operation = service.operationDescription("mount");
-                                service.startOperationCall(operation);
-                            }
-                        }
-                    }
-                }
             }
         }
 
