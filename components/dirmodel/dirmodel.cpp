@@ -84,7 +84,9 @@ void DirModel::setUrl(const QString& url)
         return;
     }
 
+    beginResetModel();
     dirLister()->openUrl(url);
+    endResetModel();
     emit urlChanged();
 }
 
