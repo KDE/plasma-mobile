@@ -33,6 +33,7 @@
 #include <KStandardDirs>
 #include <KServiceTypeTrader>
 
+#include <kio/copyjob.h>
 #include <Plasma/Theme>
 
 
@@ -104,5 +105,22 @@ void FileBrowser::emptyFinished(int exitCode, QProcess::ExitStatus exitStatus)
     m_emptyProcess = 0;
 }
 
+void FileBrowser::copy(const QVariantList &src, const QString &dest)
+{
+    KUrl::List urls;
+    foreach (const QVariant &var, src) {
+        urls << var.toUrl();
+    }
+    KIO::copy(urls, KUrl(dest));
+}
+
+void FileBrowser::trash(const QVariantList &files)
+{
+    KUrl::List urls;
+    foreach (const QVariant &var, files) {
+        urls << var.toUrl();
+    }
+    KIO::trash(urls);
+}
 
 #include "filebrowser.moc"

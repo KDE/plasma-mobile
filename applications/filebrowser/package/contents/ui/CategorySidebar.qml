@@ -104,8 +104,8 @@ Item {
                 onDragEnter: parent.flat = false
                 onDragLeave: parent.flat = true
                 onDrop: {
-                    print("Drop!" + event.mimeData.urls)
                     parent.flat = true
+                    application.copy(event.mimeData.urls, "~")
                 }
             }
         }
@@ -133,7 +133,7 @@ Item {
                         resourceBrowser.currentUdi = udi
 
                         if (devicesSource.data[udi]["Accessible"]) {
-                            dirModel.url = devicesSource.data[resourceBrowser.currentUdi]["File Path"]
+                            dirModel.url = devicesSource.data[udi]["File Path"]
 
                             fileBrowserRoot.model = dirModel
                         } else {
@@ -149,7 +149,7 @@ Item {
                     onDragEnter: parent.flat = false
                     onDragLeave: parent.flat = true
                     onDrop: {
-                        print("Drop!" + event.mimeData.urls)
+                        application.copy(event.mimeData.urls, devicesSource.data[udi]["File Path"])
                         parent.flat = true
                     }
                 }
@@ -184,8 +184,8 @@ Item {
                 onDragEnter: parent.flat = false
                 onDragLeave: parent.flat = true
                 onDrop: {
-                    print("Drop!" + event.mimeData.urls)
                     parent.flat = true
+                    application.trash(event.mimeData.urls)
                 }
             }
         }
