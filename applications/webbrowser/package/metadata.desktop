@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=Touch Browser
+Name[pt]=Navegador por Toque
 Name[uk]=Сенсорний переглядач
 Name[x-test]=xxTouch Browserxx
 Comment=Touchscreen friendly simple web browser
+Comment[pt]=Navegador Web simples e amigável por toque
 Comment[uk]=Проста сенсорна програма для перегляду інтернету
 Comment[x-test]=xxTouchscreen friendly simple web browserxx
 Encoding=UTF-8

@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=Active Settings
+Name[pt]=Configuração do Active
 Name[uk]=Параметри для сенсорного екрана
 Name[x-test]=xxActive Settingsxx
 Comment=Touchscreen friendly settings UI for Active
+Comment[pt]=Interface de configuração amigável por toque para o Active
 Comment[uk]=Зручні для користування сенсорним пристроєм параметри
 Comment[x-test]=xxTouchscreen friendly settings UI for Activexx
 Encoding=UTF-8

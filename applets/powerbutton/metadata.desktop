@@ -1,12 +1,16 @@
 [Desktop Entry]
 Name=Power Button
+Name[pt]=Botão de Energia
+Name[sk]=Tlačidlo napájania
 Name[uk]=Кнопка живлення
 Name[x-test]=xxPower Buttonxx
 Comment=Suspends the device
+Comment[pt]=Suspende o dispositivo
 Comment[uk]=Призупиняє роботу пристрою
 Comment[x-test]=xxSuspends the devicexx
 Encoding=UTF-8
 Keywords=Power Management, Battery, System, Energy
+Keywords[pt]=Gestão de Energia, Bateria, Sistema, Energia
 Keywords[uk]=Керування живленням, акумулятор, система, енергія
 Keywords[x-test]=xxPower Management, Battery, System, Energyxx
 Type=Service

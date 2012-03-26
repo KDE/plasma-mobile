@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Service
 Name=Image (mobile)
+Name[pt]=Imagem (móvel)
 Name[uk]=Зображення (мобільний)
 Name[x-test]=xxImage (mobile)xx
 Icon=image-jpeg

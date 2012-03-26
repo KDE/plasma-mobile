@@ -1,8 +1,11 @@
 [Desktop Entry]
 Name=Preview
+Name[pt]=Antevisão
+Name[sk]=Náhľad
 Name[uk]=Перегляд
 Name[x-test]=xxPreviewxx
 Comment=Shows previews for webpages
+Comment[pt]=Mostra antevisões das páginas Web
 Comment[uk]=Показує мініатюри сторінок інтернету
 Comment[x-test]=xxShows previews for webpagesxx
 X-KDE-ServiceTypes=Plasma/DataEngine

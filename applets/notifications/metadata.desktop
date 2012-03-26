@@ -1,9 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Notifications
+Name[pt]=Notificações
+Name[sk]=Upozornenia
 Name[uk]=Сповіщення
 Name[x-test]=xxNotificationsxx
 Comment=Notifications
+Comment[pt]=Notificações
+Comment[sk]=Upozornenia
 Comment[uk]=Сповіщення
 Comment[x-test]=xxNotificationsxx
 

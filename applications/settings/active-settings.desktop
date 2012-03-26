@@ -1,11 +1,16 @@
 [Desktop Entry]
 Name=Settings
+Name[pt]=Configuração
+Name[sk]=Nastavenie
 Name[uk]=Параметри
 Name[x-test]=xxSettingsxx
 GenericName=Settings
+GenericName[pt]=Configuração
+GenericName[sk]=Nastavenie
 GenericName[uk]=Параметри
 GenericName[x-test]=xxSettingsxx
 Comment=Settings for Plasma Active
+Comment[pt]=Configuração do Plasma Active
 Comment[uk]=Параметри Портативної Плазми
 Comment[x-test]=xxSettings for Plasma Activexx
 Exec=active-settings -graphicssystem raster %u

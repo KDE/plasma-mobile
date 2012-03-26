@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=Contour activity screen
+Name[pt]=Ecrã de actividade do Contour
 Name[uk]=Сторінка простору дій Contour
 Name[x-test]=xxContour activity screenxx
 Comment=Categorized resources and widgets
+Comment[pt]=Recursos e elementos categorizados
 Comment[uk]=Категоризований список ресурсів та віджетів
 Comment[x-test]=xxCategorized resources and widgetsxx
 Encoding=UTF-8

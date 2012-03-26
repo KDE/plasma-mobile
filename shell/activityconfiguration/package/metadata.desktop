@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Keywords=
 Name=Activity configuration
+Name[pt]=Configuração da actividade
 Name[uk]=Налаштування просторів дій
 Name[x-test]=xxActivity configurationxx
 Type=Service

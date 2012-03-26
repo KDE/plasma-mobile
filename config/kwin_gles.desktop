@@ -1,5 +1,7 @@
 [Desktop Entry]
 Name=KWin GLES
+Name[pt]=KWin GLES
+Name[sk]=KWin GLES
 Name[uk]=KWin з GLES
 Name[x-test]=xxKWin GLESxx
 Exec=kwin_gles

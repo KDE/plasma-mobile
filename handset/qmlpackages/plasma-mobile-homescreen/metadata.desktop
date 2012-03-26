@@ -3,6 +3,7 @@ Comment=
 Encoding=UTF-8
 Keywords=
 Name=plasma-mobile-homescreen
+Name[pt]=plasma-mobile-homescreen
 Name[uk]=мобільна-домівка-плазми
 Name[x-test]=xxplasma-mobile-homescreenxx
 Type=Service

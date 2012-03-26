@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=Device Capabilities
+Name[pt]=Capacidades do Dispositivo
 Name[uk]=Можливості пристрою
 Name[x-test]=xxDevice Capabilitiesxx
 Comment=Provides information and services for device-specific aspects
+Comment[pt]=Fornece informações e serviços sobre aspectos específicos dos dispositivos
 Comment[uk]=Надає дані та служби керування специфічними параметрами пристрою
 Comment[x-test]=xxProvides information and services for device-specific aspectsxx
 X-KDE-ServiceTypes=Plasma/DataEngine

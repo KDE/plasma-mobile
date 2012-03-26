@@ -1,11 +1,15 @@
 [Desktop Entry]
 Name=About
+Name[pt]=Acerca
+Name[sk]=O programe
 Name[uk]=Про програму
 Name[x-test]=xxAboutxx
 GenericName=About Plasma Active
+GenericName[pt]=Acerca do Plasma Active
 GenericName[uk]=Про Портативну Плазму
 GenericName[x-test]=xxAbout Plasma Activexx
 Comment=Information about Plasma Active
+Comment[pt]=Informações acerca do Plasma Active
 Comment[uk]=Інформація щодо Портативної Плазми
 Comment[x-test]=xxInformation about Plasma Activexx
 Exec=active-aboutapp -graphicssystem raster

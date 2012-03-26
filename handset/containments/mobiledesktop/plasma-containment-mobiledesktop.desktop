@@ -1,9 +1,11 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=MobileDesktop
+Name[pt]=Ecrã Móvel
 Name[uk]=Мобільна стільниця
 Name[x-test]=xxMobileDesktopxx
 Comment=Default desktop containment
+Comment[pt]=Contentor do ambiente de trabalho predefinido
 Comment[uk]=Типовий контейнер стільниці
 Comment[x-test]=xxDefault desktop containmentxx
 Icon=user-desktop
