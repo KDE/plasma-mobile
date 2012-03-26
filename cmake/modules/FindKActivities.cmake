@@ -11,36 +11,30 @@
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
-if (KACTIVITIES_INCLUDE_DIR AND KACTIVITIES_LIBS)
-   # Already in cache, be silent
-   # This probably means that libKActivities is a part of the current
-   # build or that this script was already invoked
+# Kinda stupid those are not set to QUIET and REQUIRED so i could just forward them.
+set(_find_package_args)
 
-   set(KActivities_FIND_QUIETLY TRUE)
-   message("KActivities variables already set")
-endif (KACTIVITIES_INCLUDE_DIR AND KACTIVITIES_LIBS)
+if(${KActivities_FIND_QUIET})
+    list(APPEND _find_package_args QUIET)
+endif()
 
-if (NOT KActivities_FIND_QUIETLY)
-   message("Searching for KActivities")
+if(${KActivities_FIND_EXACT})
+    list(APPEND _find_package_args EXACT)
+endif()
 
-   find_path(KACTIVITIES_INCLUDE_DIR NAMES kactivities/consumer.h
-      PATHS
-      ${KDE4_INCLUDE_DIR}
-      ${INCLUDE_INSTALL_DIR}
-   )
+if(${KActivities_FIND_REQUIRED})
+    list(APPEND _find_package_args REQUIRED)
+endif()
 
-   find_library(KACTIVITIES_LIBS NAMES kactivities
-      PATHS
-      ${KDE4_LIB_DIR}
-      ${LIB_INSTALL_DIR}
-   )
+find_package(
+    KActivities
+    ${KActivities_FIND_VERSION}
+    ${_find_package_args}
+    NO_MODULE)
 
-   include(FindPackageHandleStandardArgs)
-   FIND_PACKAGE_HANDLE_STANDARD_ARGS(i
-       KActivities DEFAULT_MSG KACTIVITIES_LIBS KACTIVITIES_INCLUDE_DIR )
+find_package_handle_standard_args(
+    KActivities
+    REQUIRED_VARS KACTIVITIES_INCLUDE_DIRS
+    VERSION_VAR   COFIG_MODE)
 
-   mark_as_advanced(KACTIVITIES_INCLUDE_DIR KACTIVITIES_LIBS)
-endif (NOT KActivities_FIND_QUIETLY)
 
-message("-- Found KActivities include dir: ${KACTIVITIES_INCLUDE_DIR}")
-message("-- Found KActivities lib: ${KACTIVITIES_LIBS}")
