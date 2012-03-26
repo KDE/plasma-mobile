@@ -32,9 +32,9 @@ find_package(
     ${_find_package_args}
     NO_MODULE)
 
-find_package_handle_standard_args(
-    KActivities
-    REQUIRED_VARS KACTIVITIES_INCLUDE_DIRS
-    VERSION_VAR   COFIG_MODE)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(
+        KActivities
+        REQUIRED_VARS KACTIVITIES_INCLUDE_DIRS KACTIVITIES_LIBRARIES
+        VERSION_VAR   KACTIVITIES_VERSION)
 
 
