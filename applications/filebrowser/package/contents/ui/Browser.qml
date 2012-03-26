@@ -94,7 +94,7 @@ PlasmaComponents.Page {
             }
             visible: fileBrowserRoot.model == dirModel && dirModel.url == "trash:/"
             iconSource: "trash-empty"
-            onClicked: print("Empty trash")
+            onClicked: application.emptyTrash()
         }
     }
 

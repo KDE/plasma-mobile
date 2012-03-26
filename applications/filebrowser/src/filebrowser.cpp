@@ -30,13 +30,15 @@
 #include <KConfigGroup>
 #include <KIcon>
 #include <KStandardAction>
+#include <KStandardDirs>
 #include <KServiceTypeTrader>
 
 #include <Plasma/Theme>
 
 
 FileBrowser::FileBrowser()
-    : KDeclarativeMainWindow()
+    : KDeclarativeMainWindow(),
+      m_emptyProcess(0)
 {
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
@@ -75,5 +77,32 @@ QString FileBrowser::packageForMimeType(const QString &mimeType)
     }
     return QString();
 }
+
+void FileBrowser::emptyTrash()
+{
+    // We can't use KonqOperations here. To avoid duplicating its code (small, though),
+    // we can simply call ktrash.
+
+    if (m_emptyProcess) {
+        return;
+    }
+
+    m_emptyProcess = new KProcess(this);
+    connect(m_emptyProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
+            this, SLOT(emptyFinished(int,QProcess::ExitStatus)));
+    (*m_emptyProcess) << KStandardDirs::findExe("ktrash") << "--empty";
+    m_emptyProcess->start();
+}
+
+void FileBrowser::emptyFinished(int exitCode, QProcess::ExitStatus exitStatus)
+{
+    Q_UNUSED(exitCode)
+    Q_UNUSED(exitStatus)
+
+    //TODO: check the exit status and let the user know if it fails
+    delete m_emptyProcess;
+    m_emptyProcess = 0;
+}
+
 
 #include "filebrowser.moc"

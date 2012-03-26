@@ -25,7 +25,10 @@
 
 #include "kdeclarativemainwindow.h"
 
+#include <KProcess>
+
 class DirModel;
+
 
 class FileBrowser : public KDeclarativeMainWindow
 {
@@ -35,9 +38,13 @@ public:
     virtual ~FileBrowser();
 
     Q_INVOKABLE QString packageForMimeType(const QString &mimeType);
+    Q_INVOKABLE void emptyTrash();
+
+protected Q_SLOTS:
+    void emptyFinished(int exitCode, QProcess::ExitStatus exitStatus);
 
 private:
-    DirModel *m_dirModel;
+    KProcess *m_emptyProcess;
 };
 
 #endif // FILEBROWSER_H
