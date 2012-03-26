@@ -66,7 +66,7 @@ PlasmaComponents.Page {
         Breadcrumb {
             id: breadCrumb
 
-            path: dirModel.url.substr(devicesSource.data[resourceBrowser.currentUdi]["File Path"].length)
+            path: dirModel.url.substr(devicesSource.data[resourceBrowser.currentUdi]["File Path"].length + String("file://").length)
             anchors {
                 left: parent.left
                 right: searchBox.left
@@ -84,7 +84,18 @@ PlasmaComponents.Page {
             }
         }
 
-
+        PlasmaComponents.ToolButton {
+            width: theme.largeIconSize
+            height: width
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+                rightMargin: y
+            }
+            visible: fileBrowserRoot.model == dirModel && dirModel.url == "trash:/"
+            iconSource: "trash-empty"
+            onClicked: print("Empty trash")
+        }
     }
 
     ListModel {
