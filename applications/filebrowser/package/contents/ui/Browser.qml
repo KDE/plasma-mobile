@@ -83,6 +83,8 @@ PlasmaComponents.Page {
                 metadataModel.extraParameters["nfo:fileName"] = searchBox.searchQuery
             }
         }
+
+
     }
 
     ListModel {

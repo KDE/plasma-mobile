@@ -22,6 +22,7 @@ import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.draganddrop 1.0
 
 
 Item {
@@ -74,7 +75,7 @@ Item {
 
         PlasmaComponents.ToolButton {
             id: localButton
-            width: theme.hugeIconSize
+            width: theme.hugeIconSize + 10
             height: width
             iconSource: "drive-harddisk"
             checked: fileBrowserRoot.model == metadataModel
@@ -97,6 +98,16 @@ Item {
                     resourceBrowser.currentUdi = ""
                 }
             }
+            DropArea {
+                enabled: !parent.checked
+                anchors.fill: parent
+                onDragEnter: parent.flat = false
+                onDragLeave: parent.flat = true
+                onDrop: {
+                    print("Drop!" + event.mimeData.urls)
+                    parent.flat = true
+                }
+            }
         }
 
 
@@ -106,7 +117,7 @@ Item {
 
             delegate: PlasmaComponents.ToolButton {
                 id: removableButton
-                width: theme.hugeIconSize
+                width: theme.hugeIconSize + 10
                 height: width
                 visible: devicesSource.data[udi]["Removable"] == true
                 iconSource: model["icon"]
@@ -132,12 +143,22 @@ Item {
                         }
                     }
                 }
+                DropArea {
+                    enabled: !parent.checked
+                    anchors.fill: parent
+                    onDragEnter: parent.flat = false
+                    onDragLeave: parent.flat = true
+                    onDrop: {
+                        print("Drop!" + event.mimeData.urls)
+                        parent.flat = true
+                    }
+                }
             }
         }
 
         PlasmaComponents.ToolButton {
             id: trashButton
-            width: theme.hugeIconSize
+            width: theme.hugeIconSize + 10
             height: width
             parent: devicesFlow
             iconSource: "user-trash"
@@ -155,6 +176,16 @@ Item {
                     dirModel.url = "trash:/"
 
                     fileBrowserRoot.model = dirModel
+                }
+            }
+            DropArea {
+                enabled: !parent.checked
+                anchors.fill: parent
+                onDragEnter: parent.flat = false
+                onDragLeave: parent.flat = true
+                onDrop: {
+                    print("Drop!" + event.mimeData.urls)
+                    parent.flat = true
                 }
             }
         }
