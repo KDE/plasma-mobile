@@ -30,6 +30,8 @@ Item {
     Column {
         id: toolsColumn
         spacing: 4
+        enabled: fileBrowserRoot.model == metadataModel
+        opacity: enabled ? 1 : 0.6
 
         PlasmaComponents.Label {
             text: "<b>"+i18n("Rating")+"</b>"
@@ -52,24 +54,7 @@ Item {
         }
     }
 
-    PlasmaCore.DataSource {
-        id: hotplugSource
-        engine: "hotplug"
-        connectedSources: sources
-    }
-    PlasmaCore.DataSource {
-        id: devicesSource
-        engine: "soliddevice"
-        connectedSources: hotplugSource.sources
-        onDataChanged: {
-            //access it here due to the async nature of the dataengine
-            if (resultsGrid.model != dirModel && devicesSource.data[devicesFlow.currentUdi]["File Path"] != "") {
-                dirModel.url = devicesSource.data[devicesFlow.currentUdi]["File Path"]
 
-                fileBrowserRoot.model = dirModel
-            }
-        }
-    }
     PlasmaCore.DataModel {
         id: devicesModel
         dataSource: hotplugSource
@@ -86,15 +71,6 @@ Item {
 
         property int itemCount: 1
         property string currentUdi
-
-
-        /*opacity: itemCount > 1 ? 1 : 0
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }*/
 
         PlasmaComponents.ToolButton {
             id: localButton
@@ -118,7 +94,7 @@ Item {
                     }
                     fileBrowserRoot.model = metadataModel
                     //nepomuk db, not filesystem
-                    devicesFlow.currentUdi = ""
+                    resourceBrowser.currentUdi = ""
                 }
             }
         }
@@ -143,10 +119,10 @@ Item {
                                 child.checked = false
                             }
                         }
-                        devicesFlow.currentUdi = udi
+                        resourceBrowser.currentUdi = udi
 
                         if (devicesSource.data[udi]["Accessible"]) {
-                            dirModel.url = devicesSource.data[devicesFlow.currentUdi]["File Path"]
+                            dirModel.url = devicesSource.data[resourceBrowser.currentUdi]["File Path"]
 
                             fileBrowserRoot.model = dirModel
                         } else {
@@ -174,7 +150,7 @@ Item {
                             child.checked = false
                         }
                     }
-                    devicesFlow.currentUdi = ""
+                    resourceBrowser.currentUdi = ""
 
                     dirModel.url = "trash:/"
 

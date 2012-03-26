@@ -28,9 +28,30 @@ import org.kde.qtextracomponents 0.1
 
 
 PlasmaComponents.Page {
+    id: resourceBrowser
+    property string currentUdi
     anchors {
         fill: parent
         topMargin: toolBar.height
+    }
+
+    PlasmaCore.DataSource {
+        id: hotplugSource
+        engine: "hotplug"
+        connectedSources: sources
+    }
+    PlasmaCore.DataSource {
+        id: devicesSource
+        engine: "soliddevice"
+        connectedSources: hotplugSource.sources
+        onDataChanged: {
+            //access it here due to the async nature of the dataengine
+            if (resultsGrid.model != dirModel && devicesSource.data[resourceBrowser.currentUdi]["File Path"] != "") {
+                dirModel.url = devicesSource.data[resourceBrowser.currentUdi]["File Path"]
+
+                fileBrowserRoot.model = dirModel
+            }
+        }
     }
 
     tools: Item {
@@ -45,7 +66,7 @@ PlasmaComponents.Page {
         Breadcrumb {
             id: breadCrumb
 
-            path: dirModel.url.substr(devicesSource.data[devicesTabBar.currentUdi]["File Path"].length)
+            path: dirModel.url.substr(devicesSource.data[resourceBrowser.currentUdi]["File Path"].length)
             anchors {
                 left: parent.left
                 right: searchBox.left
@@ -231,7 +252,7 @@ PlasmaComponents.Page {
             }
             SidebarTab {
                 id: mainTab
-                text: i18n("Main")
+                text: i18n("Tools")
                 onCheckedChanged: {
                     if (checked) {
                         while (sidebarStack.depth > 1) {
@@ -242,6 +263,8 @@ PlasmaComponents.Page {
             }
             SidebarTab {
                 text: i18n("Time")
+                enabled: fileBrowserRoot.model == metadataModel
+                opacity: enabled ? 1 : 0.6
                 onCheckedChanged: {
                     if (checked) {
                         if (sidebarStack.depth > 1) {
@@ -254,6 +277,8 @@ PlasmaComponents.Page {
             }
             SidebarTab {
                 text: i18n("Tags")
+                enabled: fileBrowserRoot.model == metadataModel
+                opacity: enabled ? 1 : 0.6
                 onCheckedChanged: {
                     print(checked)
                     if (checked) {

@@ -89,7 +89,7 @@ ListView {
                     item = pathModel.get(i)
                     path += "/" + item.title
                 }
-                dirModel.url = devicesSource.data[devicesTabBar.currentUdi]["File Path"] + path
+                dirModel.url = devicesSource.data[resourceBrowser.currentUdi]["File Path"] + path
             }
 
             Behavior on opacity {
