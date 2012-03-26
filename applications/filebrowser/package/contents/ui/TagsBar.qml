@@ -20,6 +20,7 @@
 import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.draganddrop 1.0
@@ -31,12 +32,12 @@ PlasmaComponents.Page {
 
     property Item currentItem
 
-    PlasmaComponents.Label {
+    PlasmaExtraComponents.Heading {
         anchors {
             top: parent.top
             right: parent.right
+            rightMargin: theme.defaultFont.mSize.width
         }
-        font.pointSize: theme.defaultFont.pointSize * 2
         text: i18n("Tags")
     }
     PlasmaCore.DataSource {

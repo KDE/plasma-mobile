@@ -20,6 +20,7 @@
 import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.draganddrop 1.0
@@ -33,13 +34,25 @@ Item {
         spacing: 4
         enabled: fileBrowserRoot.model == metadataModel
         opacity: enabled ? 1 : 0.6
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
 
-        PlasmaComponents.Label {
-            text: "<b>"+i18n("Rating")+"</b>"
+        PlasmaExtraComponents.Heading {
+            text: i18n("Rating")
+            anchors {
+                top: parent.top
+                right: parent.right
+                rightMargin: theme.defaultFont.mSize.width
+            }
         }
 
         MobileComponents.Rating {
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors {
+                left: parent.left
+                leftMargin: theme.defaultFont.mSize.width
+            }
             onScoreChanged: metadataModel.minimumRating = score
         }
 
@@ -49,8 +62,16 @@ Item {
             }
         }
 
+        Item {
+            width: 1
+            height: theme.defaultFont.mSize.height
+        }
         Loader {
             id: typeFilterLoader
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             //sourceComponent: TypeFilter { }
         }
     }

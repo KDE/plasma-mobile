@@ -20,12 +20,18 @@
 import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Column {
 
     property string currentType
+
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
 
     PlasmaCore.SortFilterModel {
         id: sortFilterModel
@@ -46,8 +52,13 @@ Column {
         onTriggered: categoryRepeater.model = sortFilterModel
     }
 
-    PlasmaComponents.Label {
-        text: "<b>"+i18n("File types")+"</b>"
+    PlasmaExtraComponents.Heading {
+        text: i18n("File types")
+        anchors {
+            top: parent.top
+            right: parent.right
+            rightMargin: theme.defaultFont.mSize.width
+        }
     }
     PlasmaComponents.ButtonColumn {
         spacing: 4
