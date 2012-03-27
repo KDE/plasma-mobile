@@ -287,7 +287,7 @@ void PlasmaApp::setupHomeScreen()
     KAction *focusHomeAction = new KAction(this);
     focusHomeAction->setObjectName("Focus Homescreen");
     focusHomeAction->setGlobalShortcut(
-        KShortcut(QKeySequence(Qt::Key_Home)),
+        KShortcut(QKeySequence(Qt::Key_HomePage)),
         KAction::ShortcutTypes(KAction::ActiveShortcut | KAction::DefaultShortcut),
         KAction::NoAutoloading);
     connect(focusHomeAction, SIGNAL(triggered()),
