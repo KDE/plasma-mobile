@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Images
+Name[cs]=Obrázky
 Name[pt]=Imagens
 Name[sk]=Obrázky
 Name[uk]=Зображення
 Name[x-test]=xxImagesxx
 GenericName=Image viewer
+GenericName[cs]=Prohlížeč obrázků
 GenericName[pt]=Visualizador de imagens
 GenericName[sk]=Prehliadač obrázkov
 GenericName[uk]=Переглядач зображень

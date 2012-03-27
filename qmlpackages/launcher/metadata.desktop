@@ -6,6 +6,7 @@ Comment[x-test]=xxStart Applicationsxx
 Encoding=UTF-8
 Keywords=
 Name=Launcher
+Name[cs]=Spouštěč
 Name[pt]=Lançamento
 Name[sk]=Spúšťač
 Name[uk]=Інструмент запуску

@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Browser
+Name[cs]=Prohlížeč
 Name[pt]=Navegador
 Name[sk]=Prehliadač
 Name[uk]=Переглядач
 Name[x-test]=xxBrowserxx
 GenericName=Web Browser
+GenericName[cs]=Webový prohlížeč
 GenericName[pt]=Navegador Web
 GenericName[uk]=Переглядач інтернету
 GenericName[x-test]=xxWeb Browserxx

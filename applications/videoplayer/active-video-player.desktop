@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Videos
+Name[cs]=Videa
 Name[pt]=Vídeos
 Name[sk]=Videá
 Name[uk]=Відео
 Name[x-test]=xxVideosxx
 GenericName=Video player
+GenericName[cs]=Video přehrávač
 GenericName[pt]=Leitor de vídeo
 GenericName[uk]=Програвач відеофайлів
 GenericName[x-test]=xxVideo playerxx
