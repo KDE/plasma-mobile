@@ -552,7 +552,16 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         if (!symbol.toString().isEmpty()) {
             m_cachedResources[resource][Icon] = symbol.toString();
         } else {
-            m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
+            //if it's an application, fetch the icon from the desktop file
+            Nepomuk::Types::Class resClass(resource.resourceType());
+            if (resClass.label() == "Application") {
+                KService::Ptr serv = KService::serviceByDesktopPath(m_cachedResources[resource][Url].toUrl().path());
+                if (serv) {
+                    m_cachedResources[resource][Icon] = serv->icon();
+                }
+            } else {
+                m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
+            }
         }
 
         //those seems to not be possible avoiding to access the resource
