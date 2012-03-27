@@ -65,13 +65,12 @@ Image {
         topSlidingPanel.windowListArea = Qt.rect(windowListContainer.x, windowListContainer.y, windowListContainer.width, windowListContainer.height)
     }
 
-    SlidingDragButton {
-        id: slidingDragButton
-        panelHeight: 32
-        tasksHeight: homeScreen.height/4.5
-        onDraggingChanged: {
-            //load the launcher package on demand to save boot time
-            if (!menuContainer.plasmoid && dragging) {
+    //The launcher package is created after some time to not slow boot time
+    Timer {
+        running: true
+        interval: 3000
+        onTriggered: {
+            if (!menuContainer.plasmoid) {
                 var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
                 menuContainer.plasmoid = component.createObject(menuContainer);
                 //assume menuContainer provides a itemLaunched signal
@@ -79,6 +78,13 @@ Image {
                     menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
                 }
             }
+        }
+    }
+    SlidingDragButton {
+        id: slidingDragButton
+        panelHeight: 32
+        tasksHeight: homeScreen.height/4.5
+        onDraggingChanged: {
             if (dragging) {
                 systrayPanel.windowStripVisible = true;
             }
@@ -194,6 +200,8 @@ Image {
                     script: {
                         if (state == "Hidden") {
                             systrayPanel.windowStripVisible = false
+                        } else {
+                            systrayPanel.windowStripVisible = true
                         }
                     }
                 }

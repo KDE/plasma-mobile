@@ -293,6 +293,15 @@ void PlasmaApp::setupHomeScreen()
     connect(focusHomeAction, SIGNAL(triggered()),
             this, SLOT(focusMainView()));
 
+    KAction *togglePanelAction = new KAction(this);
+    togglePanelAction->setObjectName("Toggle Panel");
+    togglePanelAction->setGlobalShortcut(
+        KShortcut(QKeySequence(Qt::Key_Menu)),
+        KAction::ShortcutTypes(KAction::ActiveShortcut | KAction::DefaultShortcut),
+        KAction::NoAutoloading);
+    connect(togglePanelAction, SIGNAL(triggered()),
+            m_homeScreen, SLOT(togglePanel()));
+
     connect(m_homeScreen, SIGNAL(newActivityRequested()),
             this, SLOT(showActivityCreation()));
 
