@@ -1,17 +1,20 @@
 [Desktop Entry]
 Name=Images
 Name[cs]=Obrázky
+Name[es]=Imágenes
 Name[pt]=Imagens
 Name[sk]=Obrázky
 Name[uk]=Зображення
 Name[x-test]=xxImagesxx
 GenericName=Image viewer
 GenericName[cs]=Prohlížeč obrázků
+GenericName[es]=Visor de imágenes
 GenericName[pt]=Visualizador de imagens
 GenericName[sk]=Prehliadač obrázkov
 GenericName[uk]=Переглядач зображень
 GenericName[x-test]=xxImage viewerxx
 Comment=An image viewer for touch tablets
+Comment[es]=Un visor de imágenes para tabletas táctiles
 Comment[pt]=Um visualizador de imagens para tabletes por toque
 Comment[uk]=Програма для перегляду зображень на сенсорних планшетах
 Comment[x-test]=xxAn image viewer for touch tabletsxx

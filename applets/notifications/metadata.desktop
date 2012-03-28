@@ -2,12 +2,14 @@
 Encoding=UTF-8
 Name=Notifications
 Name[cs]=Oznamování
+Name[es]=Notificaciones
 Name[pt]=Notificações
 Name[sk]=Upozornenia
 Name[uk]=Сповіщення
 Name[x-test]=xxNotificationsxx
 Comment=Notifications
 Comment[cs]=Oznamování
+Comment[es]=Notificaciones
 Comment[pt]=Notificações
 Comment[sk]=Upozornenia
 Comment[uk]=Сповіщення

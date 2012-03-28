@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=Preview
 Name[cs]=Náhled
+Name[es]=Vista previa
 Name[pt]=Antevisão
 Name[sk]=Náhľad
 Name[uk]=Перегляд
 Name[x-test]=xxPreviewxx
 Comment=Shows previews for webpages
+Comment[es]=Muestra vistas previas de páginas web
 Comment[pt]=Mostra antevisões das páginas Web
 Comment[uk]=Показує мініатюри сторінок інтернету
 Comment[x-test]=xxShows previews for webpagesxx

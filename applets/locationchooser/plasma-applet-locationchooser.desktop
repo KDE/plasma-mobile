@@ -3,11 +3,13 @@ Icon=plasmaapplet-location
 
 Name=Location
 Name[cs]=Umístění
+Name[es]=Posición
 Name[pt]=Localização
 Name[sk]=Umiestnenie
 Name[uk]=Розташування
 Name[x-test]=xxLocationxx
 Comment=Location chooser
+Comment[es]=Selector de posición
 Comment[pt]=Selector da localização
 Comment[uk]=Вибір розташування
 Comment[x-test]=xxLocation chooserxx
