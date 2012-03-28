@@ -25,6 +25,7 @@
 #include <QMainWindow>
 
 class View;
+class KActionCollection;
 
 /**
  * This class serves as the main window for the Active Webbrowser.
@@ -46,6 +47,8 @@ public:
     bool useGL() const;
     View* view();
 
+    Q_INVOKABLE QAction *action(const QString &name);
+
 Q_SIGNALS:
     void newWindow(const QString &url);
 
@@ -57,6 +60,7 @@ protected:
 
 private:
     View *m_widget;
+    KActionCollection *m_actions;
 };
 
 #endif // REKONQACTIVE_H

@@ -42,6 +42,7 @@ public:
     {
         actions = new KActionCollection(q);
         actions->setConfigGroup("Shortcuts");
+        actions->addAssociatedWidget(q);
     }
 
     void statusChanged(QDeclarativeView::Status status);

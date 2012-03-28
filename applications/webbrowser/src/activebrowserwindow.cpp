@@ -22,8 +22,10 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QDeclarativeContext>
 
 #include <KAction>
+#include <KActionCollection>
 #include <KIcon>
 #include <KStandardAction>
 
@@ -54,6 +56,15 @@ ActiveBrowserWindow::ActiveBrowserWindow(const QString &url, QWidget *parent)
     }
     setCentralWidget(m_widget);
     connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
+
+    m_actions = new KActionCollection(this);
+    m_actions->setConfigGroup("Shortcuts");
+    m_actions->addAssociatedWidget(this);
+    KAction *backAction = m_actions->addAction("back");
+    backAction->setAutoRepeat(false);
+    backAction->setShortcut(Qt::Key_Back);
+
+    m_widget->rootContext()->setContextProperty("application", this);
 }
 
 ActiveBrowserWindow::~ActiveBrowserWindow()
@@ -94,6 +105,11 @@ bool ActiveBrowserWindow::useGL() const
 void ActiveBrowserWindow::setCaption(const QString &caption)
 {
     setWindowTitle(caption);
+}
+
+QAction *ActiveBrowserWindow::action(const QString &name)
+{
+    return m_actions->action(name);
 }
 
 #include "activebrowserwindow.moc"
