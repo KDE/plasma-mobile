@@ -23,7 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-MobileComponents.Sheet {
+PlasmaComponents.Sheet {
     id: main
     signal closeRequested
 
@@ -38,12 +38,11 @@ MobileComponents.Sheet {
     rejectButtonText: i18n("Close")
     acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
 
-    Component.onCompleted: open()
-    /*Timer {
+    Timer {
         running: true
         interval: 100
         onTriggered: open()
-    }*/
+    }
 
     //used only toexplicitly close the keyboard
     TextInput { id: inputPanelController; width:0; height:0}
