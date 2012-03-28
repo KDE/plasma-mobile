@@ -23,6 +23,7 @@ import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
+    id: root
     width: wallpapersList.delegateWidth
     height: wallpapersList.delegateHeight
 
@@ -95,6 +96,8 @@ Item {
     MouseArea {
         anchors.fill: parent
         onClicked: {
+            inputPanelController.forceActiveFocus()
+            inputPanelController.closeSoftwareInputPanel()
             wallpapersList.currentIndex = (wallpapersList.currentPage*wallpapersList.pageSize) + index
         }
     }
