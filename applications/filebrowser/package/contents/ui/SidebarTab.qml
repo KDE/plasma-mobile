@@ -27,7 +27,7 @@ Item {
     property bool checked: false
     property alias text: tabLabel.text
     width: tabLabel.width + frame.margins.left + frame.margins.right
-    height: tabLabel.height + frame.margins.top + frame.margins.bottom
+    height: tabLabel.height + frame.margins.top + frame.margins.bottom + 6
 
     PlasmaCore.FrameSvgItem {
         id: frame
@@ -35,14 +35,13 @@ Item {
         enabledBorders: "LeftBorder|TopBorder|RightBorder"
         anchors {
             fill: parent
-            topMargin: checked? -6 : 0
+            topMargin: checked? 0 : 6
         }
 
         PlasmaComponents.Label {
             id: tabLabel
             x: parent.margins.left
             y: parent.margins.top
-            transformOrigin: Item.Center
         }
         MouseArea {
             anchors.fill: parent

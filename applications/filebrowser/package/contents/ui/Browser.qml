@@ -84,52 +84,62 @@ PlasmaComponents.Page {
             }
         }
 
-        PlasmaComponents.ButtonRow {
-            z: 900
-            visible: sideBar.open
+        Item {
+            width: childrenRect.width
+            height: childrenRect.height
+            clip: true
             anchors {
                 right: emptyTrashButton.left
                 bottom: parent.bottom
                 bottomMargin: -8
                 rightMargin: 4
             }
-
-            SidebarTab {
-                id: mainTab
-                text: i18n("Tools")
-                onCheckedChanged: {
-                    if (checked) {
-                        while (sidebarStack.depth > 1) {
-                            sidebarStack.pop()
+            PlasmaComponents.ButtonRow {
+                z: 900
+                y: sidebar.open ? 0 : height
+                Behavior on y {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+                SidebarTab {
+                    id: mainTab
+                    text: i18n("Tools")
+                    onCheckedChanged: {
+                        if (checked) {
+                            while (sidebarStack.depth > 1) {
+                                sidebarStack.pop()
+                            }
                         }
                     }
                 }
-            }
-            SidebarTab {
-                text: i18n("Time")
-                enabled: fileBrowserRoot.model == metadataModel
-                opacity: enabled ? 1 : 0.6
-                onCheckedChanged: {
-                    if (checked) {
-                        if (sidebarStack.depth > 1) {
-                            sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
-                        } else {
-                            sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
+                SidebarTab {
+                    text: i18n("Time")
+                    enabled: fileBrowserRoot.model == metadataModel
+                    opacity: enabled ? 1 : 0.6
+                    onCheckedChanged: {
+                        if (checked) {
+                            if (sidebarStack.depth > 1) {
+                                sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
+                            } else {
+                                sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
+                            }
                         }
                     }
                 }
-            }
-            SidebarTab {
-                text: i18n("Tags")
-                enabled: fileBrowserRoot.model == metadataModel
-                opacity: enabled ? 1 : 0.6
-                onCheckedChanged: {
-                    print(checked)
-                    if (checked) {
-                        if (sidebarStack.depth > 1) {
-                            sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
-                        } else {
-                            sidebarStack.push(Qt.createComponent("TagsBar.qml"))
+                SidebarTab {
+                    text: i18n("Tags")
+                    enabled: fileBrowserRoot.model == metadataModel
+                    opacity: enabled ? 1 : 0.6
+                    onCheckedChanged: {
+                        print(checked)
+                        if (checked) {
+                            if (sidebarStack.depth > 1) {
+                                sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
+                            } else {
+                                sidebarStack.push(Qt.createComponent("TagsBar.qml"))
+                            }
                         }
                     }
                 }
@@ -177,7 +187,7 @@ PlasmaComponents.Page {
         anchors {
             left: parent.left
             top: parent.top
-            right: sideBar.left
+            right: sidebarPlaceHolder.left
             bottom: parent.bottom
         }
         property bool selecting: false
@@ -276,13 +286,23 @@ PlasmaComponents.Page {
         }
     }
 
+    Item {
+        id: sidebarPlaceHolder
+        width: sidebar.open ? parent.width/4 : 0
+        anchors {
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+        }
+    }
     Image {
-        id: sideBar
+        id: sidebar
         source: "image://appbackgrounds/contextarea"
         fillMode: Image.Tile
         property bool open: true
 
-        width: open ? parent.width/4 : 0
+        width: parent.width/4
+        x: parent.width - width
         Behavior on width {
             NumberAnimation {
                 duration: 250
@@ -290,11 +310,51 @@ PlasmaComponents.Page {
             }
         }
         anchors {
-            right: parent.right
             top: parent.top
             bottom: parent.bottom
         }
 
+        PlasmaCore.FrameSvgItem {
+            imagePath: "dialogs/background"
+            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+            width: handleIcon.width + margins.left + margins.right
+            height: handleIcon.height + margins.top + margins.bottom
+            anchors {
+                right: parent.left
+                verticalCenter: sidebar.verticalCenter
+                rightMargin: -1
+            }
+
+            //TODO: an icon
+            Item {
+                id: handleIcon
+                x: parent.margins.left
+                y: parent.margins.top
+                width: theme.smallMediumIconSize
+                height: width * 1.6
+            }
+            MouseArea {
+                anchors.fill: parent
+                drag {
+                    target: sidebar
+                    axis: Drag.XAxis
+                    minimumX: resourceBrowser.width - sidebar.width
+                    maximumX: resourceBrowser.width
+                }
+                onReleased: {
+                    sidebar.open = (sidebar.x < resourceBrowser.width - sidebar.width/2)
+                    sidebarSlideAnimation.to = sidebar.open ? resourceBrowser.width - sidebar.width : resourceBrowser.width
+                    sidebarSlideAnimation.running = true
+                }
+            }
+        }
+        NumberAnimation {
+            id: sidebarSlideAnimation
+            target: sidebar
+            properties: "x"
+            duration: 250
+            easing.type: Easing.InOutQuad
+        }
         Image {
             z: 800
             source: "image://appbackgrounds/shadow-right"
