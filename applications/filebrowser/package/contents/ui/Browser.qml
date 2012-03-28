@@ -84,7 +84,60 @@ PlasmaComponents.Page {
             }
         }
 
+        PlasmaComponents.ButtonRow {
+            z: 900
+            visible: sideBar.open
+            anchors {
+                right: emptyTrashButton.left
+                bottom: parent.bottom
+                bottomMargin: -8
+                rightMargin: 4
+            }
+
+            SidebarTab {
+                id: mainTab
+                text: i18n("Tools")
+                onCheckedChanged: {
+                    if (checked) {
+                        while (sidebarStack.depth > 1) {
+                            sidebarStack.pop()
+                        }
+                    }
+                }
+            }
+            SidebarTab {
+                text: i18n("Time")
+                enabled: fileBrowserRoot.model == metadataModel
+                opacity: enabled ? 1 : 0.6
+                onCheckedChanged: {
+                    if (checked) {
+                        if (sidebarStack.depth > 1) {
+                            sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
+                        } else {
+                            sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
+                        }
+                    }
+                }
+            }
+            SidebarTab {
+                text: i18n("Tags")
+                enabled: fileBrowserRoot.model == metadataModel
+                opacity: enabled ? 1 : 0.6
+                onCheckedChanged: {
+                    print(checked)
+                    if (checked) {
+                        if (sidebarStack.depth > 1) {
+                            sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
+                        } else {
+                            sidebarStack.push(Qt.createComponent("TagsBar.qml"))
+                        }
+                    }
+                }
+            }
+        }
+
         PlasmaComponents.ToolButton {
+            id: emptyTrashButton
             width: theme.largeIconSize
             height: width
             anchors {
@@ -227,8 +280,9 @@ PlasmaComponents.Page {
         id: sideBar
         source: "image://appbackgrounds/contextarea"
         fillMode: Image.Tile
+        property bool open: true
 
-        width: emptyTab.checked ? 0 : parent.width/4
+        width: open ? parent.width/4 : 0
         Behavior on width {
             NumberAnimation {
                 duration: 250
@@ -239,79 +293,6 @@ PlasmaComponents.Page {
             right: parent.right
             top: parent.top
             bottom: parent.bottom
-        }
-
-        PlasmaComponents.ButtonColumn {
-            z: 900
-            anchors {
-                right: parent.left
-                verticalCenter: parent.verticalCenter
-                rightMargin: -1
-            }
-            function uncheckAll()
-            {
-                emptyTab.checked = true
-            }
-            //FIXME: hack to make no item selected
-            Item {
-                id: emptyTab
-                property bool checked: false
-                onCheckedChanged: {
-                    if (checked) {
-                        while (sidebarStack.depth > 1) {
-                            sidebarStack.pop()
-                        }
-                    }
-                }
-            }
-            SidebarTab {
-                id: mainTab
-                text: i18n("Tools")
-                onCheckedChanged: {
-                    if (checked) {
-                        while (sidebarStack.depth > 1) {
-                            sidebarStack.pop()
-                        }
-                    }
-                }
-            }
-            SidebarTab {
-                text: i18n("Time")
-                enabled: fileBrowserRoot.model == metadataModel
-                opacity: enabled ? 1 : 0.6
-                onCheckedChanged: {
-                    if (checked) {
-                        if (sidebarStack.depth > 1) {
-                            sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
-                        } else {
-                            sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
-                        }
-                    }
-                }
-            }
-            SidebarTab {
-                text: i18n("Tags")
-                enabled: fileBrowserRoot.model == metadataModel
-                opacity: enabled ? 1 : 0.6
-                onCheckedChanged: {
-                    print(checked)
-                    if (checked) {
-                        if (sidebarStack.depth > 1) {
-                            sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
-                        } else {
-                            sidebarStack.push(Qt.createComponent("TagsBar.qml"))
-                        }
-                    }
-                }
-            }
-
-            Timer {
-                interval: 100
-                running: true
-                onTriggered: {
-                    mainTab.checked = (exclusiveResourceType === "")
-                }
-            }
         }
 
         Image {

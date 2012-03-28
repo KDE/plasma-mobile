@@ -26,36 +26,27 @@ Item {
     id: root
     property bool checked: false
     property alias text: tabLabel.text
-    width: tabLabel.height + frame.margins.left + frame.margins.right
-    height: tabLabel.width + frame.margins.top + frame.margins.bottom
+    width: tabLabel.width + frame.margins.left + frame.margins.right
+    height: tabLabel.height + frame.margins.top + frame.margins.bottom
 
     PlasmaCore.FrameSvgItem {
         id: frame
         imagePath: "dialogs/background"
-        enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+        enabledBorders: "LeftBorder|TopBorder|RightBorder"
         anchors {
             fill: parent
-            leftMargin: checked? -10 : 0
+            topMargin: checked? -6 : 0
         }
 
         PlasmaComponents.Label {
             id: tabLabel
             x: parent.margins.left
-            y: parent.margins.top + width
+            y: parent.margins.top
             transformOrigin: Item.Center
-            transform: Rotation {
-                angle: -90
-            }
         }
         MouseArea {
             anchors.fill: parent
-            onClicked: {
-                if (root.checked) {
-                    root.parent.uncheckAll()
-                } else {
-                    root.checked = true
-                }
-            }
+            onClicked: root.checked = true
         }
     }
 }
