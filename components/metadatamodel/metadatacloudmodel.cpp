@@ -120,7 +120,7 @@ void MetadataCloudModel::doQuery()
     if (!resourceType().isEmpty()) {
         QString type = resourceType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -139,7 +139,7 @@ void MetadataCloudModel::doQuery()
     if (!mimeType().isEmpty()) {
         QString type = mimeType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -154,7 +154,7 @@ void MetadataCloudModel::doQuery()
         foreach (const QString &key, parameters->keys()) {
             QString parameter = parameters->value(key).toString();
             bool negation = false;
-            if (parameter.startsWith("!")) {
+            if (parameter.startsWith('!')) {
                 parameter = parameter.remove(0, 1);
                 negation = true;
             }
@@ -170,7 +170,7 @@ void MetadataCloudModel::doQuery()
     if (!activityId().isEmpty()) {
         QString activity = activityId();
         bool negation = false;
-        if (activity.startsWith("!")) {
+        if (activity.startsWith('!')) {
             activity = activity.remove(0, 1);
             negation = true;
         }
@@ -188,7 +188,7 @@ void MetadataCloudModel::doQuery()
         QString individualTag = tag;
         bool negation = false;
 
-        if (individualTag.startsWith("!")) {
+        if (individualTag.startsWith('!')) {
             individualTag = individualTag.remove(0, 1);
             negation = true;
         }
@@ -252,10 +252,10 @@ void MetadataCloudModel::doQuery()
     delete m_queryClient;
     m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
 
-    connect(m_queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
-            this, SLOT(entriesRemoved(const QList<QUrl> &)));
+    connect(m_queryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
+            this, SLOT(newEntries(QList<Nepomuk::Query::Result>)));
+    connect(m_queryClient, SIGNAL(entriesRemoved(QList<QUrl>)),
+            this, SLOT(entriesRemoved(QList<QUrl>)));
     connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
 
     m_queryClient->sparqlQuery(query);
@@ -267,7 +267,7 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entri
     QVector<QPair<QString, int> > results;
     QVariantList categories;
 
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk::Query::Result &res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
         QVariant rawLabel = res.additionalBinding(QLatin1String("label")).variant();

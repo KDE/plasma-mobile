@@ -79,8 +79,8 @@ MetadataModel::MetadataModel(QObject *parent)
     m_watcher = new Nepomuk::ResourceWatcher(this);
 
     m_watcher->addProperty(NAO::numericRating());
-    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)),
-            this, SLOT(propertyChanged(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)));
+    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource,Nepomuk::Types::Property,QVariant)),
+            this, SLOT(propertyChanged(Nepomuk::Resource,Nepomuk::Types::Property,QVariant)));
 
 
     QHash<int, QByteArray> roleNames;
@@ -277,7 +277,7 @@ void MetadataModel::doQuery()
         //FIXME: more elegant
         QString type = resourceType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -296,7 +296,7 @@ void MetadataModel::doQuery()
     if (!mimeType().isEmpty()) {
         QString type = mimeType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -315,7 +315,7 @@ void MetadataModel::doQuery()
         foreach (const QString &key, parameters->keys()) {
             QString parameter = parameters->value(key).toString();
             bool negation = false;
-            if (parameter.startsWith("!")) {
+            if (parameter.startsWith('!')) {
                 parameter = parameter.remove(0, 1);
                 negation = true;
             }
@@ -334,7 +334,7 @@ void MetadataModel::doQuery()
     if (!activityId().isEmpty()) {
         QString activity = activityId();
         bool negation = false;
-        if (activity.startsWith("!")) {
+        if (activity.startsWith('!')) {
             activity = activity.remove(0, 1);
             negation = true;
         }
@@ -352,7 +352,7 @@ void MetadataModel::doQuery()
     foreach (const QString &tag, tagStrings()) {
         QString individualTag = tag;
         bool negation = false;
-        if (individualTag.startsWith("!")) {
+        if (individualTag.startsWith('!')) {
             individualTag = individualTag.remove(0, 1);
             negation = true;
         }
@@ -383,7 +383,7 @@ void MetadataModel::doQuery()
 
     if (m_scoreResources) {
         QString activity = activityId();
-        if (activity.startsWith("!")) {
+        if (activity.startsWith('!')) {
             activity = activity.remove(0, 1);
         }
 
@@ -451,8 +451,8 @@ void MetadataModel::doQuery()
     m_runningClients = 0;
     m_countQueryClient = new Nepomuk::Query::QueryServiceClient(this);
 
-    connect(m_countQueryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(countQueryResult(const QList<Nepomuk::Query::Result> &)));
+    connect(m_countQueryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
+            this, SLOT(countQueryResult(QList<Nepomuk::Query::Result>)));
 
     if (m_limit > 0) {
         m_query.setLimit(m_limit);
@@ -482,10 +482,10 @@ void MetadataModel::fetchResultsPage(int page)
 
     client->query(pageQuery);
 
-    connect(client, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(client, SIGNAL(entriesRemoved(const QList<QUrl> &)),
-            this, SLOT(entriesRemoved(const QList<QUrl> &)));
+    connect(client, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
+            this, SLOT(newEntries(QList<Nepomuk::Query::Result>)));
+    connect(client, SIGNAL(entriesRemoved(QList<QUrl>)),
+            this, SLOT(entriesRemoved(QList<QUrl>)));
     connect(client, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
 
     m_queryClientsHistory << client;
@@ -496,7 +496,7 @@ void MetadataModel::countQueryResult(const QList< Nepomuk::Query::Result > &entr
 {
     setStatus(Running);
     //this should be always 1
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk::Query::Result &res, entries) {
         int count = res.additionalBinding(QLatin1String("cnt")).variant().toInt();
 
         if (count < m_resources.size()) {
@@ -516,7 +516,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
     setStatus(Running);
     const int page = m_pagesForClient.value(qobject_cast<Nepomuk::Query::QueryServiceClient *>(sender()));
 
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
         Nepomuk::Resource resource = res.resource();
@@ -552,7 +552,16 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         if (!symbol.toString().isEmpty()) {
             m_cachedResources[resource][Icon] = symbol.toString();
         } else {
-            m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
+            //if it's an application, fetch the icon from the desktop file
+            Nepomuk::Types::Class resClass(resource.resourceType());
+            if (resClass.label() == "Application") {
+                KService::Ptr serv = KService::serviceByDesktopPath(m_cachedResources[resource][Url].toUrl().path());
+                if (serv) {
+                    m_cachedResources[resource][Icon] = serv->icon();
+                }
+            } else {
+                m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
+            }
         }
 
         //those seems to not be possible avoiding to access the resource
@@ -572,7 +581,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 
             } else {
                 Nepomuk::Types::Class resClass(resource.resourceType());
-                foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
+                foreach (const Nepomuk::Types::Class &parentClass, resClass.parentClasses()) {
                     const QString label = parentClass.label();
                     if (label == "Document" ||
                         label == "Audio" ||
@@ -632,7 +641,7 @@ void MetadataModel::newEntriesDelayed()
             }
         }
 
-        foreach (Nepomuk::Resource res, resourcesToInsert) {
+        foreach (const Nepomuk::Resource &res, resourcesToInsert) {
             //kDebug() << "Result!!!" << res.genericLabel() << res.type();
             //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
 
@@ -870,10 +879,10 @@ void MetadataModel::delayedPreview()
         KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, m_thumbnailerPlugins);
         //job->setIgnoreMaximumSize(true);
         kDebug() << "Created job" << job;
-        connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-                this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
-        connect(job, SIGNAL(failed(const KFileItem&)),
-                this, SLOT(previewFailed(const KFileItem&)));
+        connect(job, SIGNAL(gotPreview(KFileItem,QPixmap)),
+                this, SLOT(showPreview(KFileItem,QPixmap)));
+        connect(job, SIGNAL(failed(KFileItem)),
+                this, SLOT(previewFailed(KFileItem)));
     }
 
     m_filesToPreview.clear();

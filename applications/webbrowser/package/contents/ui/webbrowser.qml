@@ -73,6 +73,18 @@ Rectangle {
         title: webView.title
     }
 
+    //FIXME: this will have to be removed
+    Timer {
+        interval: 100
+        running: true
+        onTriggered: backConnection.target = application.action("back")
+    }
+    Connections {
+        id: backConnection
+        target: application.action("back")
+        onTriggered: webView.back.trigger()
+    }
+
     FlickableWebView {
         id: webView
         objectName: "webView"

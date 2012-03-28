@@ -32,7 +32,7 @@ class ImageSizeFinder : public QObject, public QRunnable
 {
     Q_OBJECT
     public:
-        ImageSizeFinder(const QString &path, QObject *parent = 0);
+        explicit ImageSizeFinder(const QString &path, QObject *parent = 0);
         void run();
 
     Q_SIGNALS:

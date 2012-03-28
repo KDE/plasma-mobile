@@ -66,8 +66,6 @@ public:
     KActivities::Consumer *activityConsumer;
     QDBusServiceWatcher *queryServiceWatcher;
     QStringList connectedSources;
-    QStringList requestedSources;
-    QTimer *preparesourcesTimer;
 };
 
 
@@ -86,10 +84,7 @@ MetadataEngine::MetadataEngine(QObject* parent, const QVariantList& args)
 
 
     d->activityConsumer = new KActivities::Consumer(this);
-
-    d->preparesourcesTimer = new QTimer(this);
-    d->preparesourcesTimer->setSingleShot(true);
-    connect(d->preparesourcesTimer, SIGNAL(timeout()), this, SLOT(prepareSources()));
+    //init();
 }
 
 void MetadataEngine::init()
@@ -122,7 +117,7 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
     QString massagedName = name;
     // if the strings ends with :number it's the limit for the query
     if (name.contains(QRegExp(".*:\\d+$"))) {
-        QStringList tokens = name.split(":");
+        QStringList tokens = name.split(':');
         massagedName = massagedName.mid(0, massagedName.lastIndexOf(":"));
     }
 
@@ -138,10 +133,7 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
     }
 
     if (Nepomuk::ResourceManager::instance()->initialized()) {
-        d->requestedSources << name;
-        d->preparesourcesTimer->start(100);
-        return true;
-        //return prepareSource(name);
+        return prepareSource(name);
     } else {
         ResourceContainer *container = qobject_cast<ResourceContainer *>(containerForSource(massagedName));
 
@@ -167,13 +159,6 @@ bool MetadataEngine::updateSourceEvent(const QString &source)
     return false;
 }
 
-void MetadataEngine::prepareSources()
-{
-    foreach (const QString &source, d->requestedSources) {
-        prepareSource(source);
-    }
-    d->requestedSources.clear();
-}
 
 bool MetadataEngine::prepareSource(const QString &name)
 {

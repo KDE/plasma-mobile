@@ -71,11 +71,14 @@ public:
 
     //propertyies & methods for QML
     QStringList startupArguments() const;
-
     QString caption() const;
 
     QVariant icon() const;
     void setIcon(const QVariant &icon);
+
+    //methods
+    Q_INVOKABLE QAction *action(const QString &name);
+    Q_INVOKABLE void addAction(const QString &name, const QString &string);
 
 public Q_SLOTS:
     void setCaption(const QString &caption);

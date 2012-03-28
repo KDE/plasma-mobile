@@ -82,10 +82,10 @@ void CategorizedProxyModel::setModel(QObject *source)
     m_fillCategoriesTimer->start(0);
 
     // TODO disconnect old model
-    connect(model, SIGNAL(rowsInserted(QModelIndex, int, int)),
-            SLOT(slotInsertRows(QModelIndex, int, int)), Qt::QueuedConnection);
-    connect(model, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int)),
-            SLOT(slotRemoveRows(QModelIndex, int, int)));
+    connect(model, SIGNAL(rowsInserted(QModelIndex,int,int)),
+            SLOT(slotInsertRows(QModelIndex,int,int)), Qt::QueuedConnection);
+    connect(model, SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
+            SLOT(slotRemoveRows(QModelIndex,int,int)));
     connect(model, SIGNAL(modelReset()), this, SLOT(fillCategories()), Qt::QueuedConnection);
 
     setRoleNames(model->roleNames());
@@ -115,7 +115,7 @@ QVariant CategorizedProxyModel::data(const QModelIndex &index, int role) const
     }
 
     int offset = 0;
-    foreach (QString cat, m_categories) {
+    foreach (const QString &cat, m_categories) {
         if (cat == m_currentCategory) {
             break;
         }

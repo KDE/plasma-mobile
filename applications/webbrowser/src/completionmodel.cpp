@@ -173,7 +173,7 @@ void CompletionModel::finishedListing()
 
 void CompletionModel::newEntries(const QList< Nepomuk::Query::Result >& entries)
 {
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         CompletionItem* item = new CompletionItem(this);
         item->setResource(res.resource());

@@ -32,6 +32,7 @@ import org.kde.qtextracomponents 0.1
     property bool dragEnabled: true
     property int panelHeight
     property int tasksHeight
+    property bool homeButtonShown: !deviceCapabilitiesSource.data["Input"]["hasHomeButton"]
 
     PlasmaCore.Svg {
         id: iconSvg
@@ -46,13 +47,12 @@ import org.kde.qtextracomponents 0.1
     }
 
     PlasmaCore.SvgItem {
-        property bool shown: !deviceCapabilitiesSource.data["Input"]["hasHomeButton"]
         id: iconItem
         svg: iconSvg
         elementId: "start-here"
-        width: shown ? height : 0
+        width: homeButtonShown ? height : 0
         height: theme.mediumIconSize
-        visible: shown
+        visible: homeButtonShown
         anchors {
             right: parent.right
             bottom:parent.bottom

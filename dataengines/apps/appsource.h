@@ -34,7 +34,7 @@ class AppSource : public Plasma::DataContainer
     Q_OBJECT
 
 public:
-    AppSource(const QString &name, QObject *parent = 0);
+    explicit AppSource(const QString &name, QObject *parent = 0);
     ~AppSource();
 
 protected:

@@ -1,14 +1,8 @@
 [Desktop Entry]
 Type=Service
 Name=Image (mobile)
-Name[et]=Pilt (mobiilis)
-Name[fr]=Image (mobile)
-Name[km]=រូបភាព (ចល័ត)
-Name[nl]=Afbeelding (mobiel)
-Name[pl]=Obraz (mobile)
+Name[es]=Imagen (móvil)
 Name[pt]=Imagem (móvel)
-Name[pt_BR]=Imagem (móvel)
-Name[sv]=Bild (mobil)
 Name[uk]=Зображення (мобільний)
 Name[x-test]=xxImage (mobile)xx
 Icon=image-jpeg

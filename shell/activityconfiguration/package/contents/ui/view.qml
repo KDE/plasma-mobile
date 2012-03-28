@@ -45,6 +45,8 @@ MobileComponents.Sheet {
         onTriggered: open()
     }*/
 
+    //used only toexplicitly close the keyboard
+    TextInput { id: inputPanelController; width:0; height:0}
     QtObject {
         id: internal
         property bool activityEncrypted

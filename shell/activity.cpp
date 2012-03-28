@@ -365,7 +365,7 @@ void Activity::insertContainment(Plasma::Containment* containment, int screen, i
     connect(context, SIGNAL(activityChanged(Plasma::Context*)), this, SLOT(updateActivityName(Plasma::Context*)), Qt::UniqueConnection);
 
     m_containments.insert(QPair<int,int>(screen, desktop), containment);
-    connect(containment, SIGNAL(destroyed(QObject *)), this, SLOT(containmentDestroyed(QObject *)));
+    connect(containment, SIGNAL(destroyed(QObject*)), this, SLOT(containmentDestroyed(QObject*)));
 }
 
 void Activity::containmentDestroyed(QObject *object)

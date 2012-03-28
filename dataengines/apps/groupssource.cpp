@@ -40,7 +40,7 @@ GroupsSource::GroupsSource(const QString &name, QObject *parent)
     }
 
     if (m_group.isEmpty()) {
-        m_group = "/";
+        m_group = '/';
     }
 
     populate();
@@ -79,7 +79,7 @@ void GroupsSource::loadGroup(KServiceGroup::Ptr group)
         KServiceGroup::List list = group->entries();
 
         for( KServiceGroup::List::ConstIterator it = list.constBegin();
-             it != list.constEnd(); it++) {
+             it != list.constEnd(); ++it) {
             const KSycocaEntry::Ptr p = (*it);
 
             if (p->isType(KST_KServiceGroup)) {

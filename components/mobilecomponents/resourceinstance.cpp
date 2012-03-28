@@ -85,7 +85,7 @@ void ResourceInstance::syncWid()
         m_resourceInstance = new KActivities::ResourceInstance(wid, m_uri, m_mimetype, m_title);
     } else {
 
-        if (m_uri.scheme().startsWith("http") && !m_uri.hasQuery() && m_uri.path().endsWith('/')) {
+        if (m_uri.scheme().startsWith(QLatin1String("http")) && !m_uri.hasQuery() && m_uri.path().endsWith('/')) {
             const QString & oldPath = m_uri.path();
             m_uri.setPath(oldPath.left(oldPath.length() - 1));
 

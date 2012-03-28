@@ -132,7 +132,7 @@ void MobileImage::setSingleImage()
         }
     }
 
-    kDebug() << "OOOOOOOOOOOOOOOOOOOOO" << img << m_wallpaper;
+    //kDebug() << "OOOOOOOOOOOOOOOOOOOOO" << img << m_wallpaper;
     m_wallpaperPath = img;
     emit wallpaperPathChanged();
 }

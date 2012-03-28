@@ -65,14 +65,14 @@ void AppSource::populate()
             first = false;
             query += QString(" (exist Categories and '%1' ~subin Categories)").arg(category);
         }
-        query += ")";
+        query += ')';
     }
 
     //openSUSE: exclude YaST modules from the list
     query += " and (not (exist Categories and 'X-SuSE-YaST' in Categories))";
 
     // Filter out blacklisted apps as to not show too much crap
-    foreach (const QString appName, m_blackList) {
+    foreach (const QString &appName, m_blackList) {
         query += QString(" and (DesktopEntryName != '%1' )").arg(appName);
     }
     //kWarning()<<query;

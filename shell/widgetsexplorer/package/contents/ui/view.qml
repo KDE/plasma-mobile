@@ -52,6 +52,9 @@ MobileComponents.Sheet {
 
     }
 
+    //used only toexplicitly close the keyboard
+    TextInput { id: inputPanelController; width:0; height:0}
+
     PlasmaCore.DataSource {
         id: metadataSource
         engine: "org.kde.active.metadata"

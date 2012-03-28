@@ -37,7 +37,7 @@ class CompletionItem : public QObject
     Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
 
 public:
-    CompletionItem(const QString &name = QString(),
+    explicit CompletionItem(const QString &name = QString(),
              const QString &url = QString(),
              const QImage &i = QImage(),
              QObject *parent = 0 );

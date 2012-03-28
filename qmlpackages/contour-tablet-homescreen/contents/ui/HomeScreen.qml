@@ -119,6 +119,14 @@ Item {
         }
     }
 
+    function togglePanel()
+    {
+        if (topEdgePanel.state == "Hidden") {
+            topEdgePanel.state = "Launcher"
+        } else {
+            topEdgePanel.state = "Hidden"
+        }
+    }
 
     /*************Implementation***************/
     x: 0

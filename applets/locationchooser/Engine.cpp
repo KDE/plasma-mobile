@@ -100,15 +100,15 @@ void Engine::onServiceRegistered()
 
     };
 
-    connect(d->locationManager, SIGNAL(currentLocationChanged(QString, QString)),
-            this, SLOT(onCurrentLocationChanged(QString, QString)));
+    connect(d->locationManager, SIGNAL(currentLocationChanged(QString,QString)),
+            this, SLOT(onCurrentLocationChanged(QString,QString)));
 
-    connect(d->locationManager, SIGNAL(locationAdded(QString, QString)),
-            this, SLOT(onLocationAdded(QString, QString)));
-    connect(d->locationManager, SIGNAL(locationRemoved(QString, QString)),
-            this, SLOT(onLocationRemoved(QString, QString)));
-    connect(d->locationManager, SIGNAL(locationNameChanged(QString, QString, QString)),
-            this, SLOT(onLocationNameChanged(QString, QString, QString)));
+    connect(d->locationManager, SIGNAL(locationAdded(QString,QString)),
+            this, SLOT(onLocationAdded(QString,QString)));
+    connect(d->locationManager, SIGNAL(locationRemoved(QString,QString)),
+            this, SLOT(onLocationRemoved(QString,QString)));
+    connect(d->locationManager, SIGNAL(locationNameChanged(QString,QString,QString)),
+            this, SLOT(onLocationNameChanged(QString,QString,QString)));
 
     // Starting the async getter
     (new GetLocations(this, d))->start();

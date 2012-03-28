@@ -70,6 +70,8 @@ MobileComponents.IconGrid {
                 }
             }
             onClicked: {
+                inputPanelController.forceActiveFocus()
+                inputPanelController.closeSoftwareInputPanel()
                 //already in the model?
                 //second case, for the apps model
                 for (var i = 0; i < selectedModel.count; ++i) {

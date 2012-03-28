@@ -57,6 +57,8 @@ K_EXPORT_PLUGIN(TimeSettingsFactory("active_settings_time"))
 TimeSettingsPlugin::TimeSettingsPlugin(QObject *parent, const QVariantList &list)
     : QObject(parent)
 {
+    Q_UNUSED(list)
+
     kDebug() << "TimeSettingsPlugin created:)";
     qmlRegisterType<TimeSettings>();
     qmlRegisterType<TimeZone>();

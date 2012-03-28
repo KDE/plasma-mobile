@@ -63,7 +63,7 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
         setData("fallbackImage", "fallbackImage", im);
     }
     QString massagedName = name;
-    if (name.startsWith("add:")) {
+    if (name.startsWith(QLatin1String("add:"))) {
         //QString massagedName = name;
         QUrl url = QUrl(massagedName.remove("add:"));
         Nepomuk::Bookmark b(url);
@@ -71,7 +71,7 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
         b.setDescription(url.toString());
         b.setBookmarks( url.toString() );
         //kDebug() << "Added Bookmark:" << massagedName;
-    } else if (name.startsWith("remove:")) {
+    } else if (name.startsWith(QLatin1String("remove:"))) {
         //QString massagedName = name;
         QUrl url = QUrl(massagedName.remove("remove:"));
         Nepomuk::Resource b(url);
