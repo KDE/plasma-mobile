@@ -65,8 +65,8 @@ AdBlockManager::AdBlockManager(QObject *parent)
     _dirWatch = new KDirWatch(this);
     QString configPath = KStandardDirs::locateLocal("config", "active-webbrowserrc");
     _dirWatch->addFile(configPath);
-    connect(_dirWatch, SIGNAL(dirty(const QString&)), SLOT(loadSettings()));
-    connect(_dirWatch, SIGNAL(created(const QString&)), SLOT(loadSettings()));
+    connect(_dirWatch, SIGNAL(dirty(QString)), SLOT(loadSettings()));
+    connect(_dirWatch, SIGNAL(created(QString)), SLOT(loadSettings()));
 
     loadSettings();
 }
@@ -111,7 +111,7 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
     rules = rulesGroup.readEntry("local-rules" , QStringList());
     loadRules(rules);
 
-    // Checking wether to update the adblock filters, and doin' it
+    // Checking whether to update the adblock filters, and doin' it
     QDateTime today = QDateTime::currentDateTime();
     QDateTime lastUpdate = _config.readEntry("lastUpdate", QDateTime(QDate(2001, 9, 11)));
     int days = _config.readEntry("updateInterval", 7);
@@ -296,9 +296,9 @@ void AdBlockManager::updateNextSubscription()
         job->metaData().insert("cookies", "none");
         job->metaData().insert("no-auth", "true");
 
-        connect(job, SIGNAL(data(KIO::Job*, const QByteArray&)), this, SLOT(subscriptionData(KIO::Job*, const QByteArray&)));
+        connect(job, SIGNAL(data(KIO::Job*,QByteArray)), this, SLOT(subscriptionData(KIO::Job*,QByteArray)));
         connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-        connect(job, SIGNAL(finished(KJob *job)), this, SLOT(slotFinished()));
+        connect(job, SIGNAL(finished(KJob*job)), this, SLOT(slotFinished()));
         return;
     }
 

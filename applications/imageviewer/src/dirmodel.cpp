@@ -30,7 +30,7 @@ DirModel::DirModel(QObject *parent)
 
     m_mimeTypes << "inode/directory";
     foreach (KMimeType::Ptr mime, mimeList) {
-        if (mime->name().startsWith("image/")) {
+        if (mime->name().startsWith(QLatin1String("image/"))) {
             m_mimeTypes << mime->name();
         }
     }
@@ -44,9 +44,9 @@ DirModel::DirModel(QObject *parent)
     roleNames[MimeTypeRole] = "mimeType";
     setRoleNames(roleNames);
 
-    connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+    connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SIGNAL(countChanged()));
-    connect(this, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+    connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)),
             this, SIGNAL(countChanged()));
     connect(this, SIGNAL(modelReset()),
             this, SIGNAL(countChanged()));

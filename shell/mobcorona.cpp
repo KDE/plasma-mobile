@@ -126,8 +126,8 @@ void MobCorona::init()
     setDialogManager(new MobDialogManager(this));
 
     connect(m_activityController, SIGNAL(currentActivityChanged(QString)), this, SLOT(currentActivityChanged(QString)));
-    connect(m_activityController, SIGNAL(activityAdded(const QString &)), this, SLOT(activityAdded(const QString &)));
-    connect(m_activityController, SIGNAL(activityRemoved(const QString &)), this, SLOT(activityRemoved(const QString &)));
+    connect(m_activityController, SIGNAL(activityAdded(QString)), this, SLOT(activityAdded(QString)));
+    connect(m_activityController, SIGNAL(activityRemoved(QString)), this, SLOT(activityRemoved(QString)));
 }
 
 KConfigGroup MobCorona::defaultConfig() const
@@ -191,7 +191,7 @@ void MobCorona::loadDefaultLayout()
 
 void MobCorona::layoutContainments()
 {
-    // we dont need any layout for this as we are going to bind the position
+    // we don't need any layout for this as we are going to bind the position
     // of the containments to QML items to animate them. As soon as we don't
     // need the containment anymore we can just let it stay wherever it is as
     // long as it's offscreen (the view is not 'looking' at it).

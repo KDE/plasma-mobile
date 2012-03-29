@@ -39,7 +39,7 @@ class SingleView : public Plasma::View
     Q_OBJECT
 
 public:
-    SingleView(Plasma::Corona *corona, QWidget *parent=0);
+    explicit SingleView(Plasma::Corona *corona, QWidget *parent=0);
     ~SingleView();
 
     void setUseGL(const bool on);

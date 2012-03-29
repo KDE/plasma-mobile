@@ -93,7 +93,7 @@ void FirstRun::activityAdded(const QString& source)
     KActivities::Info* info = new KActivities::Info(source);
     kError() << "------> Source added: " << info->name() << source;
 
-    // Check if it's among the default activities and wether we've configured this actity already
+    // Check if it's among the default activities and whether we've configured this actity already
     if (!m_initialActivities.contains(info->name())) {
         //kError() << "noinit";
         return;
@@ -146,7 +146,7 @@ void FirstRun::connectToActivity(const QString &activityId, const QString &resou
         fileRes.setDescription(description);
         fileRes.setProperty(QUrl::fromEncoded("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#bookmarks"), resourceUrl);
     // App?
-    } else if (resourceUrl.endsWith(".desktop")) {
+    } else if (resourceUrl.endsWith(QLatin1String(".desktop"))) {
         typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Application");
         fileRes.addType(typeUrl);
         KService::Ptr service = KService::serviceByDesktopPath(QUrl(resourceUrl).path());

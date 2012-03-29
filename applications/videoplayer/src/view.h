@@ -50,7 +50,7 @@ class AppView : public QDeclarativeView
     Q_OBJECT
 
 public:
-    AppView(const QString &url, QWidget *parent = 0 );
+    explicit AppView(const QString &url, QWidget *parent = 0 );
     ~AppView();
 
     QString name() const;

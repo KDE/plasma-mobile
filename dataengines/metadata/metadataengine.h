@@ -51,7 +51,6 @@ class MetadataEngine : public Plasma::DataEngine
 
     protected Q_SLOTS:
         void serviceRegistered(const QString &service);
-        void prepareSources();
 
     protected:
         bool prepareSource(const QString &name);

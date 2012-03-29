@@ -34,7 +34,7 @@ class CategoriesSource : public Plasma::DataContainer
     Q_OBJECT
 
 public:
-    CategoriesSource(const QString &name, QObject *parent = 0);
+    explicit CategoriesSource(const QString &name, QObject *parent = 0);
     ~CategoriesSource();
 
 protected:

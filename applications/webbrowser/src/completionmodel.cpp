@@ -155,10 +155,10 @@ void CompletionModel::loadBookmarks()
 
     connect(d->queryClient, SIGNAL(finishedListing()),
             this, SLOT(finishedListing()));
-    connect(d->queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(d->queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
-            this, SLOT(entriesRemoved(const QList<QUrl> &)));
+    connect(d->queryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
+            this, SLOT(newEntries(QList<Nepomuk::Query::Result>)));
+    connect(d->queryClient, SIGNAL(entriesRemoved(QList<QUrl>)),
+            this, SLOT(entriesRemoved(QList<QUrl>)));
 
     d->query.setLimit(64);
     d->queryClient->query(d->query);
@@ -173,7 +173,7 @@ void CompletionModel::finishedListing()
 
 void CompletionModel::newEntries(const QList< Nepomuk::Query::Result >& entries)
 {
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         CompletionItem* item = new CompletionItem(this);
         item->setResource(res.resource());
@@ -185,8 +185,23 @@ void CompletionModel::newEntries(const QList< Nepomuk::Query::Result >& entries)
 
 void CompletionModel::entriesRemoved(const QList< QUrl >& urls)
 {
-    Q_UNUSED( urls );
-    // TODO: implement me
+    // not efficient but I do think users will have thousands of bookmarks to make this cause any lag.
+    // Also in the common case urls.size() == 1, so there will be only one iteration through the
+    // bookmarks list.
+    QMutableListIterator<QObject*> i(d->items);
+    foreach (const QUrl &u, urls) {
+        while (i.hasNext()) {
+            CompletionItem * cItem = static_cast<CompletionItem *>(i.next());
+            if (cItem && cItem->resourceUri() == u) {
+                //kDebug() << "Removing" << u << cItem->url();
+                i.remove();
+                cItem->deleteLater();
+                break;
+            }
+        }
+        i.toFront();
+    }
+    emit dataChanged();
 }
 
 #include "completionmodel.moc"

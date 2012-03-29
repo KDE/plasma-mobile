@@ -66,9 +66,9 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
     m_icons["TextDocument"] = QString("text-enriched");
 
 
-    connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+    connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SIGNAL(countChanged()));
-    connect(this, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+    connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)),
             this, SIGNAL(countChanged()));
     connect(this, SIGNAL(modelReset()),
             this, SIGNAL(countChanged()));
@@ -82,7 +82,7 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
     }
 
     m_extraParameters = new QDeclarativePropertyMap;
-    connect (m_extraParameters, SIGNAL(valueChanged(QString, QVariant)), m_queryTimer, SLOT(start()));
+    connect (m_extraParameters, SIGNAL(valueChanged(QString,QVariant)), m_queryTimer, SLOT(start()));
 
     m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
                         QDBusConnection::sessionBus(),

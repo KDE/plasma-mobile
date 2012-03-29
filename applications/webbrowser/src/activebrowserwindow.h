@@ -25,6 +25,7 @@
 #include <QMainWindow>
 
 class View;
+class KActionCollection;
 
 /**
  * This class serves as the main window for the Active Webbrowser.
@@ -37,7 +38,7 @@ class ActiveBrowserWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
+    explicit ActiveBrowserWindow(const QString &url, QWidget *parent = 0);
     virtual ~ActiveBrowserWindow();
     QString name();
     QIcon icon();
@@ -45,6 +46,8 @@ public:
     void setUseGL(const bool on);
     bool useGL() const;
     View* view();
+
+    Q_INVOKABLE QAction *action(const QString &name);
 
 Q_SIGNALS:
     void newWindow(const QString &url);
@@ -57,6 +60,7 @@ protected:
 
 private:
     View *m_widget;
+    KActionCollection *m_actions;
 };
 
 #endif // REKONQACTIVE_H

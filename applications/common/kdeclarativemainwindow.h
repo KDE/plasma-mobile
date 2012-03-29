@@ -64,20 +64,11 @@ public:
 
     //propertyies & methods for QML
     QStringList startupArguments() const;
-
     QString caption() const;
 
-    /**
-     * Read out a string option.
-     * The option must have a corresponding KCmdLineOptions entry of the form:
-        <code>
-         options.add("option <argument>", ki18n("Description"), "default");
-        </code>
-     * You cannot test for the presence of an alias - you must always test for the full option.
-     * @arg QString option  The name of the option without '-'.
-     * @returns The value of the option. If the option was not present on the command line the default is returned. If the option was present more than once, the value of the last occurrence is used.
-     */
-    Q_INVOKABLE QString startupOption(const QString &option) const;
+    //methods
+    Q_INVOKABLE QAction *action(const QString &name);
+    Q_INVOKABLE void addAction(const QString &name, const QString &string);
 
 public Q_SLOTS:
     void setCaption(const QString &caption);

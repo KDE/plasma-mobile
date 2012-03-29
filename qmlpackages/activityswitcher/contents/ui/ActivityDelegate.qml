@@ -116,7 +116,7 @@ Item {
 
             MobileComponents.Rating {
                 enabled: false
-                score: 5 * (model.Score/activitySwitcher.maxScore)
+                score: 10 * (model.Score/activitySwitcher.maxScore)
                 anchors {
                     bottom: parent.bottom
                     right: parent.right

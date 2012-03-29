@@ -1,8 +1,10 @@
 project(plasma-mobile)
 cmake_minimum_required (VERSION 2.8)
 
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
+
 find_package(KDE4 REQUIRED)
-find_package(KActivities REQUIRED)
+find_package(KActivities 6.0.0 REQUIRED)
 
 include(KDE4Defaults)
 
@@ -39,7 +41,7 @@ ENDMACRO(installPackage)
 MACRO(add_kao_ontology var)
    soprano_add_ontology(
       ${var}
-      ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/kde/kao.trig
+      ${KACTIVITIES_ONTOLOGIES_DIR}/kao.trig
       "KAO" "Nepomuk::Vocabulary" "trig"
    )
 ENDMACRO(add_kao_ontology)

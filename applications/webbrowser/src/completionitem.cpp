@@ -30,6 +30,7 @@ public:
     QString url;
     QString iconName;
     QImage preview;
+    QUrl resourceUri;
 };
 
 
@@ -46,8 +47,8 @@ CompletionItem::CompletionItem(QObject *parent)
     : QObject(parent)
 {
     d = new CompletionItemPrivate;
-    d->name = QString();
-    d->url = QString();
+    d->name.clear();
+    d->url.clear();
     d->preview = QImage();
 }
 
@@ -64,9 +65,13 @@ void CompletionItem::setResource(Nepomuk::Resource resource)
     //kDebug() << "Bookmark: " << d->name << d->url;
     d->iconName = "bookmarks";
     //d->url = resource.property(resour).toString();
-    
+    d->resourceUri = resource.resourceUri();
 }
 
+QUrl CompletionItem::resourceUri()
+{
+    return d->resourceUri;
+}
 
 CompletionItem::~CompletionItem()
 {

@@ -1,27 +1,11 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=MobileDesktop
-Name[es]=MobileDesktop
-Name[et]=Mobiilne töölaud
-Name[fr]=MobileDesktop
-Name[km]=MobileDesktop
-Name[nl]=MobielBureaublad
-Name[pl]=Pulpit Mobile
 Name[pt]=Ecrã Móvel
-Name[pt_BR]=Área de trabalho móvel
-Name[sv]=Mobilt skrivbord
 Name[uk]=Мобільна стільниця
 Name[x-test]=xxMobileDesktopxx
 Comment=Default desktop containment
-Comment[es]=Contenedor de escritorio por omisión
-Comment[et]=Vaikimisi töölauakonteiner
-Comment[fr]=Conteneur de bureau par défaut
-Comment[km]=មាន​ផ្ទៃតុ​លំនាំដើម
-Comment[nl]=Standaard bureaubladcontainer
-Comment[pl]=Domyślna izolacja pulpitu
 Comment[pt]=Contentor do ambiente de trabalho predefinido
-Comment[pt_BR]=Contêiner da área de trabalho padrão
-Comment[sv]=Skrivbordets standardomgivning
 Comment[uk]=Типовий контейнер стільниці
 Comment[x-test]=xxDefault desktop containmentxx
 Icon=user-desktop

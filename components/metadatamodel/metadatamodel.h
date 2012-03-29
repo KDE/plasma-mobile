@@ -138,6 +138,10 @@ public:
      * Just signal QSortFilterProxyModel to do the real sorting.
      * Use this class as parameter to QSortFilterProxyModel->setSourceModel (C++) or
      * PlasmaCore.SortFilterModel.sourceModel (QML) to get the real sorting.
+     * WARNING: avoid putting this model into SortFilterModel if possible:
+     * it would cause loading every single item of the model,
+     * while for big models we want lazy loading.
+     * rely on its internal sorting feature instead.
      */
     Q_INVOKABLE void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 

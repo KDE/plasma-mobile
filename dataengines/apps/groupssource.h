@@ -34,7 +34,7 @@ class GroupsSource : public Plasma::DataContainer
     Q_OBJECT
 
 public:
-    GroupsSource(const QString &name, QObject *parent = 0);
+    explicit GroupsSource(const QString &name, QObject *parent = 0);
     ~GroupsSource();
 
 protected:

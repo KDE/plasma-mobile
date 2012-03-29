@@ -22,6 +22,7 @@
 
 #include <Nepomuk/Query/Query>
 #include <Nepomuk/Resource>
+#include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
 
 #include <soprano/vocabulary.h>
@@ -70,7 +71,7 @@ void MetadataJob::start()
             fileRes.addType(typeUrl);
             fileRes.setDescription(resourceUrl);
             fileRes.setProperty(QUrl::fromEncoded("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#bookmarks"), resourceUrl);
-        } else if (resourceUrl.endsWith(".desktop")) {
+        } else if (resourceUrl.endsWith(QLatin1String(".desktop"))) {
             typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Application");
             fileRes.addType(typeUrl);
             KService::Ptr service = KService::serviceByDesktopPath(QUrl(resourceUrl).path());
@@ -124,6 +125,14 @@ void MetadataJob::start()
         b.remove();
         setResult(true);
         return;
+    } else if (operation == "tagResources") {
+        const QStringList resourceUrls = parameters()["ResourceUrls"].toStringList();
+        const Nepomuk::Tag tag( parameters()["Tag"].toString() );
+
+        foreach (const QString &resUrl, resourceUrls) {
+            Nepomuk::Resource r(resUrl);
+            r.addTag(tag);
+        }
     }
 
     setResult(false);

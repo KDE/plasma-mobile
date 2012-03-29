@@ -87,7 +87,7 @@ void SettingsComponent::loadModule(const QString &name)
             // Load binary plugin
             const QString query = QString("exist Library and Library == '%1'").arg(service->library());
             kDebug() << "loading binary plugin from query: " << service->name();
-            QObject *p  = KServiceTypeTrader::createInstanceFromQuery<QObject>("Active/SettingsModule", query, d->settingsModule);
+            KServiceTypeTrader::createInstanceFromQuery<QObject>("Active/SettingsModule", query, d->settingsModule);
         } else {
             kDebug() << "QML only plugin";
         }

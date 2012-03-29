@@ -56,7 +56,7 @@ Image {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: parent.left
-            width: 360
+            width: parent.width/4
 
             Image {
                 source: "image://appbackgrounds/shadow-right"

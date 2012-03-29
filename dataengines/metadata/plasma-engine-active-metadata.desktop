@@ -1,24 +1,11 @@
 [Desktop Entry]
 Name=Active Metadata
-Name[et]=Aktiivsed metaandmed
-Name[fr]=Métadonnées actives
-Name[km]=ទិន្នន័យ​មេតា​សកម្ម
-Name[nl]=Actieve metagegevens
-Name[pl]=Aktywne metadane
 Name[pt]=Meta-Dados Activos
-Name[pt_BR]=Meta-dados ativos
-Name[sv]=Metadata
 Name[uk]=Активні метадані
 Name[x-test]=xxActive Metadataxx
 Comment=Provides metadata for semantic resources
-Comment[et]=Semantiliste ressursside metaandmed
-Comment[fr]=Fournit des métadonnées pour les ressources sémantiques
-Comment[km]=ផ្ដល់​ទិន្នន័យ​មេតា​សម្រាប់​ប្រភព​ស៊ីមែនទិក
-Comment[nl]=Levert metagegevens voor semantische hulpbronnen
-Comment[pl]=Dostarcza metadane dla semantycznych zasobów
+Comment[es]=Proporciona metadatos para recursos semánticos
 Comment[pt]=Fornece meta-dados para os recursos semânticos
-Comment[pt_BR]=Fornece meta-dados para os recursos semânticos
-Comment[sv]=Tillhandahåller metadata för semantiska resurser
 Comment[uk]=Надає метадані для семантичних ресурсів
 Comment[x-test]=xxProvides metadata for semantic resourcesxx
 X-KDE-ServiceTypes=Plasma/DataEngine

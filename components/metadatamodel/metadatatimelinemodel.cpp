@@ -112,12 +112,12 @@ void MetadataTimelineModel::doQuery()
     if (m_level >= Month) {
         monthQuery = "bif:month(?label)";
     } else {
-        monthQuery = "0";
+        monthQuery = '0';
     }
     if (m_level >= Day) {
         dayQuery = "bif:dayofmonth(?label)";
     } else {
-        dayQuery = "0";
+        dayQuery = '0';
     }
 
     QString query = QString("select distinct bif:year(?label) as ?year %1 as ?month %2 as ?day count(*) as ?count where { ?r nie:lastModified ?label  ").arg(monthQuery).arg(dayQuery);
@@ -126,7 +126,7 @@ void MetadataTimelineModel::doQuery()
     if (!resourceType().isEmpty()) {
         QString type = resourceType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -145,7 +145,7 @@ void MetadataTimelineModel::doQuery()
     if (!mimeType().isEmpty()) {
         QString type = mimeType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -160,7 +160,7 @@ void MetadataTimelineModel::doQuery()
         foreach (const QString &key, parameters->keys()) {
             QString parameter = parameters->value(key).toString();
             bool negation = false;
-            if (parameter.startsWith("!")) {
+            if (parameter.startsWith('!')) {
                 parameter = parameter.remove(0, 1);
                 negation = true;
             }
@@ -176,7 +176,7 @@ void MetadataTimelineModel::doQuery()
     if (!activityId().isEmpty()) {
         QString activity = activityId();
         bool negation = false;
-        if (activity.startsWith("!")) {
+        if (activity.startsWith('!')) {
             activity = activity.remove(0, 1);
             negation = true;
         }
@@ -194,7 +194,7 @@ void MetadataTimelineModel::doQuery()
         QString individualTag = tag;
         bool negation = false;
 
-        if (individualTag.startsWith("!")) {
+        if (individualTag.startsWith('!')) {
             individualTag = individualTag.remove(0, 1);
             negation = true;
         }
@@ -256,10 +256,10 @@ void MetadataTimelineModel::doQuery()
     delete m_queryClient;
     m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
 
-    connect(m_queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
-            this, SLOT(entriesRemoved(const QList<QUrl> &)));
+    connect(m_queryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
+            this, SLOT(newEntries(QList<Nepomuk::Query::Result>)));
+    connect(m_queryClient, SIGNAL(entriesRemoved(QList<QUrl>)),
+            this, SLOT(entriesRemoved(QList<QUrl>)));
     connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
 
     m_queryClient->sparqlQuery(query);
@@ -270,7 +270,7 @@ void MetadataTimelineModel::newEntries(const QList< Nepomuk::Query::Result > &en
     setStatus(Running);
     QVector<QHash<Roles, int> > results;
     QVariantList categories;
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk::Query::Result &res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
         int year = res.additionalBinding(QLatin1String("year")).variant().toInt();

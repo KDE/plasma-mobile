@@ -108,7 +108,7 @@ void NepomukHelper::storeResourcesFinished(KJob *job)
         return;
     }
 
-    //kDebug() << "Sucessfully pushed the data";
+    //kDebug() << "Successfully pushed the data";
 }
 
 #include "nepomukhelper.moc"

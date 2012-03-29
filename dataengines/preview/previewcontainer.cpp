@@ -62,8 +62,8 @@ void PreviewContainer::init()
     // It may be a directory or a file, let's stat
     KIO::JobFlags flags = KIO::HideProgressInfo;
     m_mimeJob = KIO::mimetype(m_url, flags);
-    connect(m_mimeJob, SIGNAL(mimetype(KIO::Job *, const QString&)),
-            this, SLOT(mimetypeRetrieved(KIO::Job *, const QString&)));
+    connect(m_mimeJob, SIGNAL(mimetype(KIO::Job*,QString)),
+            this, SLOT(mimetypeRetrieved(KIO::Job*,QString)));
 }
 
 PreviewContainer::~PreviewContainer()
@@ -98,10 +98,10 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
     QStringList *enabledPlugins = new QStringList(_en);
     m_job = new KIO::PreviewJob(list, m_previewSize, enabledPlugins);
 
-    connect(m_job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-            SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
-    connect(m_job, SIGNAL(failed(const KFileItem&)),
-            SLOT(previewJobFailed(const KFileItem&)));
+    connect(m_job, SIGNAL(gotPreview(KFileItem,QPixmap)),
+            SLOT(previewUpdated(KFileItem,QPixmap)));
+    connect(m_job, SIGNAL(failed(KFileItem)),
+            SLOT(previewJobFailed(KFileItem)));
     connect(m_job, SIGNAL(result(KJob*)), SLOT(previewResult(KJob*)));
 
     m_job->start();

@@ -64,7 +64,7 @@ Column {
                 top: parent.top
                 bottom: parent.bottom
             }
-            icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("text-html")
+            icon: "text-html"
         }
 
         PlasmaCore.FrameSvgItem {
@@ -120,16 +120,5 @@ Column {
         width: resourceItem.width
         style: Text.Outline
         styleColor: Qt.rgba(1, 1, 1, 0.6)
-    }
-
-    Text {
-        id: infoLabel
-        text: className
-        opacity: 0.8
-        font.pixelSize: 12
-        height: 14
-        width: parent.width - iconItem.width
-        anchors.horizontalCenter: parent.horizontalCenter
-        visible: infoLabelVisible
     }
 }
