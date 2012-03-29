@@ -107,7 +107,7 @@ PlasmaComponents.Page {
             anchors {
                 right: emptyTrashButton.left
                 bottom: parent.bottom
-                bottomMargin: -8
+                bottomMargin: -4
                 rightMargin: 4
             }
             PlasmaComponents.ButtonRow {
