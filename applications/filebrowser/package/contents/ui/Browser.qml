@@ -197,125 +197,209 @@ PlasmaComponents.Page {
         onModelReset: selectedModel.clear()
     }
 
-    //This pinch area is for selection
-    PinchArea {
-        id: pinchArea
+    Image {
+        id: browserFrame
+        z: 100
+        source: "image://appbackgrounds/standard"
+        fillMode: Image.Tile
         anchors {
-            left: parent.left
             top: parent.top
-            right: sidebarPlaceHolder.left
             bottom: parent.bottom
         }
-        property bool selecting: false
-        property int selectingX
-        property int selectingY
-        pinch.target: parent
-        onPinchStarted: {
-            //hotspot to start select procedures
-            print("point1: " + pinch.point1.x + " " + pinch.point1.y)
-            print("Selecting")
-            selecting = true
-            selectingX = pinch.point2.x
-            selectingY = pinch.point2.y
-        }
-        onPinchUpdated: {
-            if (selecting) {
-                print("Selected" + resultsGrid.childAt(pinch.point2.x, pinch.point2.y))
+        width: parent.width
+        x: 0
+
+        //This pinch area is for selection
+        PinchArea {
+            id: pinchArea
+            anchors {
+                fill: parent
+                leftMargin: 0
+            }
+            property bool selecting: false
+            property int selectingX
+            property int selectingY
+            pinch.target: parent
+            onPinchStarted: {
+                //hotspot to start select procedures
+                print("point1: " + pinch.point1.x + " " + pinch.point1.y)
+                print("Selecting")
+                selecting = true
                 selectingX = pinch.point2.x
                 selectingY = pinch.point2.y
             }
-        }
-        onPinchFinished: selecting = false
-
-        DragArea {
-            id: dragArea
-            anchors.fill: parent
-            //startDragDistance: 200
-            enabled: false
-            mimeData {
-                source: parent
-            }
-            onDrop: enabled = false
-            MouseEventListener {
-                anchors.fill: parent
-                onPressed: startY = mouse.y
-                onPositionChanged: {
-                    print(fileBrowserRoot.model)
-                    if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
-                        parent.enabled = true
-                    }
+            onPinchUpdated: {
+                if (selecting) {
+                    print("Selected" + resultsGrid.childAt(pinch.point2.x, pinch.point2.y))
+                    selectingX = pinch.point2.x
+                    selectingY = pinch.point2.y
                 }
-                MobileComponents.IconGrid {
-                    id: resultsGrid
+            }
+            onPinchFinished: selecting = false
+
+            DragArea {
+                id: dragArea
+                anchors.fill: parent
+                //startDragDistance: 200
+                enabled: false
+                mimeData {
+                    source: parent
+                }
+                onDrop: enabled = false
+                MouseEventListener {
                     anchors.fill: parent
-
-                    model: fileBrowserRoot.model
-
-                    delegate: Item {
-                        id: resourceDelegate
-                        width: resultsGrid.delegateWidth
-                        height: resultsGrid.delegateHeight
-
-                        PlasmaCore.FrameSvgItem {
-                            id: highlightFrame
-                            imagePath: "widgets/viewitem"
-                            prefix: "selected+hover"
-                            anchors.fill: parent
-
-                            property bool contains: (pinchArea.selectingX > resourceDelegate.x && pinchArea.selectingX < resourceDelegate.x + resourceDelegate.width) && (pinchArea.selectingY > resourceDelegate.y && pinchArea.selectingY < resourceDelegate.y + resourceDelegate.height)
-                            opacity: 0
-                            Behavior on opacity {
-                                NumberAnimation {duration: 250}
-                            }
-                            onContainsChanged: {
-                                if (contains) {
-                                    for (var i = 0; i < selectedModel.count; ++i) {
-                                        if ((model.url && model.url == selectedModel.get(i).url)) {
-                                            opacity = 0
-                                            selectedModel.remove(i)
-                                            return
-                                        }
-                                    }
-
-                                    selectedModel.append({"url": model.url})
-                                    opacity = 1
-                                }
-                            }
+                    onPressed: startY = mouse.y
+                    onPositionChanged: {
+                        print(fileBrowserRoot.model)
+                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
+                            parent.enabled = true
                         }
-                        MobileComponents.ResourceDelegate {
-                            className: model["className"] ? model["className"] : ""
-                            genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
+                    }
+                    MobileComponents.IconGrid {
+                        id: resultsGrid
+                        anchors.fill: parent
 
-                            property string label: model.label ? model.label : model.display
+                        model: fileBrowserRoot.model
 
+                        delegate: Item {
+                            id: resourceDelegate
                             width: resultsGrid.delegateWidth
                             height: resultsGrid.delegateHeight
-                            onPressAndHold: {
-                                resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
-                                resourceInstance.title = model["label"]
+
+                            PlasmaCore.FrameSvgItem {
+                                id: highlightFrame
+                                imagePath: "widgets/viewitem"
+                                prefix: "selected+hover"
+                                anchors.fill: parent
+
+                                property bool contains: (pinchArea.selectingX > resourceDelegate.x && pinchArea.selectingX < resourceDelegate.x + resourceDelegate.width) && (pinchArea.selectingY > resourceDelegate.y && pinchArea.selectingY < resourceDelegate.y + resourceDelegate.height)
+                                opacity: 0
+                                Behavior on opacity {
+                                    NumberAnimation {duration: 250}
+                                }
+                                onContainsChanged: {
+                                    if (contains) {
+                                        for (var i = 0; i < selectedModel.count; ++i) {
+                                            if ((model.url && model.url == selectedModel.get(i).url)) {
+                                                opacity = 0
+                                                selectedModel.remove(i)
+                                                return
+                                            }
+                                        }
+
+                                        selectedModel.append({"url": model.url})
+                                        opacity = 1
+                                    }
+                                }
                             }
-                            onClicked: openFile(model["url"], mimeType)
+                            MobileComponents.ResourceDelegate {
+                                className: model["className"] ? model["className"] : ""
+                                genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
+
+                                property string label: model.label ? model.label : model.display
+
+                                width: resultsGrid.delegateWidth
+                                height: resultsGrid.delegateHeight
+                                onPressAndHold: {
+                                    resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
+                                    resourceInstance.title = model["label"]
+                                }
+                                onClicked: openFile(model["url"], mimeType)
+                            }
                         }
                     }
                 }
+            }
+        }
+        Image {
+            source: "image://appbackgrounds/shadow-right"
+            fillMode: Image.TileVertically
+            anchors {
+                left: parent.right
+                top: parent.top
+                bottom: parent.bottom
+            }
+        }
+        PlasmaCore.FrameSvgItem {
+            id: handleGraphics
+            imagePath: "dialogs/background"
+            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+            width: handleIcon.width + margins.left + margins.right + 4
+            height: handleIcon.width * 1.6 + margins.top + margins.bottom + 4
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+                rightMargin: -1
+            }
+
+            //TODO: an icon
+            PlasmaCore.SvgItem {
+                id: handleIcon
+                svg: PlasmaCore.Svg {imagePath: "toolbar-icons/show"}
+                elementId: "show-menu"
+                x: parent.margins.left
+                y: parent.margins.top
+                width: theme.smallMediumIconSize
+                height: width
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+        MouseArea {
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                left: handleGraphics.left
+                right: handleGraphics.right
+            }
+            drag {
+                target: browserFrame
+                axis: Drag.XAxis
+                //-50, an overshoot to make it look smooter
+                minimumX: -sidebar.width - 50
+                maximumX: 0
+            }
+            property int startX
+            property bool toggle: true
+            onPressed: {
+                startX = browserFrame.x
+                toggle = true
+            }
+            onPositionChanged: {
+                if (Math.abs(browserFrame.x - startX) > 20) {
+                    toggle = false
+                }
+            }
+            onReleased: {
+                if (toggle) {
+                    sidebar.open = !sidebar.open
+                } else {
+                    sidebar.open = (browserFrame.x < -sidebar.width/2)
+                }
+                sidebarSlideAnimation.to = sidebar.open ? -sidebar.width : 0
+                sidebarSlideAnimation.running = true
+            }
+        }
+        //FIXME: use a state machine
+        SequentialAnimation {
+            id: sidebarSlideAnimation
+            property alias to: actualSlideAnimation.to
+            NumberAnimation {
+                id: actualSlideAnimation
+                target: browserFrame
+                properties: "x"
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+            ScriptAction {
+                script: pinchArea.anchors.leftMargin = -browserFrame.x
             }
         }
     }
 
     Item {
-        id: sidebarPlaceHolder
-        width: sidebar.open ? parent.width/4 : 0
-        anchors {
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
-        }
-    }
-    Image {
         id: sidebar
-        source: "image://appbackgrounds/contextarea"
-        fillMode: Image.Tile
-        property bool open: true
+
+        property bool open: false
 
         width: parent.width/4
         x: parent.width - width
@@ -328,58 +412,6 @@ PlasmaComponents.Page {
         anchors {
             top: parent.top
             bottom: parent.bottom
-        }
-
-        PlasmaCore.FrameSvgItem {
-            imagePath: "dialogs/background"
-            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-            width: handleIcon.width + margins.left + margins.right
-            height: handleIcon.height + margins.top + margins.bottom
-            anchors {
-                right: parent.left
-                verticalCenter: sidebar.verticalCenter
-                rightMargin: -1
-            }
-
-            //TODO: an icon
-            Item {
-                id: handleIcon
-                x: parent.margins.left
-                y: parent.margins.top
-                width: theme.smallMediumIconSize
-                height: width * 1.6
-            }
-            MouseArea {
-                anchors.fill: parent
-                drag {
-                    target: sidebar
-                    axis: Drag.XAxis
-                    minimumX: resourceBrowser.width - sidebar.width
-                    maximumX: resourceBrowser.width
-                }
-                onReleased: {
-                    sidebar.open = (sidebar.x < resourceBrowser.width - sidebar.width/2)
-                    sidebarSlideAnimation.to = sidebar.open ? resourceBrowser.width - sidebar.width : resourceBrowser.width
-                    sidebarSlideAnimation.running = true
-                }
-            }
-        }
-        NumberAnimation {
-            id: sidebarSlideAnimation
-            target: sidebar
-            properties: "x"
-            duration: 250
-            easing.type: Easing.InOutQuad
-        }
-        Image {
-            z: 800
-            source: "image://appbackgrounds/shadow-right"
-            fillMode: Image.TileVertically
-            anchors {
-                left: parent.left
-                top: parent.top
-                bottom: parent.bottom
-            }
         }
 
         Item {

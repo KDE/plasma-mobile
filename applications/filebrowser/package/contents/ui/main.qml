@@ -30,7 +30,7 @@ import org.kde.dirmodel 0.1
 Image {
     id: fileBrowserRoot
     objectName: "fileBrowserRoot"
-    source: "image://appbackgrounds/standard"
+    source: "image://appbackgrounds/contextarea"
     fillMode: Image.Tile
     state: "browsing"
     property QtObject model: metadataModel
