@@ -21,6 +21,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.extras 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
@@ -164,7 +165,7 @@ Item {
                 icon: "application-rss+xml"
                 MouseArea {
                     anchors.fill: parent
-                    onPressed: MobileComponents.ActivateAnimation { targetItem: rssButton }
+                    onPressed: PlasmaExtras.ActivateAnimation { targetItem: rssButton }
                     onClicked: SequentialAnimation {
                         ScriptAction { script: {
                                 // We use a hidden TextInput to borrow its clipboard handling
@@ -175,7 +176,7 @@ Item {
                                 clipBoardHelper.text = ""
                             }
                         }
-                        MobileComponents.AppearAnimation { targetItem: rssActionLabel }
+                        PlasmaExtras.AppearAnimation { targetItem: rssActionLabel }
                     }
                 }
                 TextInput { id: clipBoardHelper; visible: false }
@@ -184,7 +185,7 @@ Item {
                     repeat: false
                     interval: 8000
                     running: false
-                    onTriggered:MobileComponents.DisappearAnimation { targetItem: rssActionLabel }
+                    onTriggered:PlasmaExtras.DisappearAnimation { targetItem: rssActionLabel }
                 }
             }
             PlasmaComponents.Label {
@@ -287,11 +288,11 @@ Item {
     transitions: [
         Transition {
             from: "collapsed"; to: "expanded"
-            MobileComponents.AppearAnimation { targetItem: mainItem }
+            PlasmaExtras.AppearAnimation { targetItem: mainItem }
         },
         Transition {
             from: "expanded"; to: "collapsed"
-            MobileComponents.DisappearAnimation { targetItem: mainItem }
+            PlasmaExtras.DisappearAnimation { targetItem: mainItem }
         }
     ]
 }

@@ -19,6 +19,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
@@ -131,7 +132,7 @@ MouseArea {
                 property string label: model["name"] ? model["name"] : model["label"]
                 //property string mimeType: model["mimeType"] ? model["mimeType"] : "application/x-desktop"
                 onPressAndHold: ParallelAnimation {
-                    MobileComponents.ReleasedAnimation { targetItem: launcherDelegate }
+                    PlasmaExtras.ReleasedAnimation { targetItem: launcherDelegate }
                     ScriptAction { script: {
                             resourceInstance.uri = model["resourceUri"] ? model["resourceUri"] : model["entryPath"]
                             resourceInstance.title = model["name"] ? model["name"] : model["text"]
@@ -152,8 +153,8 @@ MouseArea {
                     resetStatus()
                     itemLaunched()
                 }
-                onPressed: MobileComponents.PressedAnimation { targetItem: launcherDelegate }
-                onReleased: MobileComponents.ReleasedAnimation { targetItem: launcherDelegate }
+                onPressed: PlasmaExtras.PressedAnimation { targetItem: launcherDelegate }
+                onReleased: PlasmaExtras.ReleasedAnimation { targetItem: launcherDelegate }
             }
         }
 

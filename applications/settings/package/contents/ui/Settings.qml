@@ -22,6 +22,7 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.components 0.1 as PlasmaExtras
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.qtextracomponents 0.1
 
@@ -109,8 +110,8 @@ Image {
 
                     MouseArea {
                         anchors.fill: delegateItem
-                        onPressed: MobileComponents.PressedAnimation { targetItem: delegateItem }
-                        onReleased: MobileComponents.ReleasedAnimation { targetItem: delegateItem }
+                        onPressed: PlasmaExtras.PressedAnimation { targetItem: delegateItem }
+                        onReleased: PlasmaExtras.ReleasedAnimation { targetItem: delegateItem }
                         onClicked: {
                             if (module != switcherPackage.name) {
                                 listView.currentIndex = index
