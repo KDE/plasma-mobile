@@ -64,7 +64,7 @@ Column {
                 top: parent.top
                 bottom: parent.bottom
             }
-            icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("text-html")
+            icon: "text-html"
         }
 
         PlasmaCore.FrameSvgItem {
