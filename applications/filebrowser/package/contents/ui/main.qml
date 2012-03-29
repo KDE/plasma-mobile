@@ -61,6 +61,11 @@ Image {
     }
     function goBack()
     {
+        toolBar.y = 0
+        //don't go more back than the browser
+        if (mainStack.currentPage.objectName == "resourceBrowser") {
+            return
+        }
         if (mainStack.depth == 1) {
             mainStack.replace(Qt.createComponent("Browser.qml"))
         } else {

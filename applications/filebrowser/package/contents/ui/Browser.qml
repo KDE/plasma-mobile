@@ -29,6 +29,7 @@ import org.kde.qtextracomponents 0.1
 
 PlasmaComponents.Page {
     id: resourceBrowser
+    objectName: "resourceBrowser"
     property string currentUdi
     anchors {
         fill: parent
@@ -51,6 +52,21 @@ PlasmaComponents.Page {
 
                 fileBrowserRoot.model = dirModel
             }
+        }
+    }
+
+    //FIXME: this will have to be removed
+    Timer {
+        interval: 100
+        running: true
+        onTriggered: backConnection.target = application.action("back")
+    }
+    Connections {
+        id: backConnection
+        target: application.action("back")
+        onTriggered: {
+            resourceInstance.uri = ""
+            fileBrowserRoot.goBack()
         }
     }
 
