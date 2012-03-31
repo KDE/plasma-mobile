@@ -1,17 +1,20 @@
 [Desktop Entry]
 Comment=Simple battery monitor
 Comment[es]=Monitor de batería sencillo
+Comment[nl]=Eenvoudige monitor voor accu
 Comment[pt]=Monitor de bateria simples
 Comment[uk]=Простий засіб спостереження за акумуляторами
 Comment[x-test]=xxSimple battery monitorxx
 Encoding=UTF-8
 Keywords=Power Management, Battery, System, Energy
 Keywords[es]=Gestión de energía, batería, sistema, energía
+Keywords[nl]=Energiebeheer, accu, systeem, energie
 Keywords[pt]=Gestão de Energia, Bateria, Sistema, Energia
 Keywords[uk]=Керування живленням, акумулятор, система, енергія
 Keywords[x-test]=xxPower Management, Battery, System, Energyxx
 Name=Simple Battery
 Name[es]=Batería sencilla
+Name[nl]=Eenvoudige accu
 Name[pt]=Bateria Simples
 Name[uk]=Простий акумулятор
 Name[x-test]=xxSimple Batteryxx

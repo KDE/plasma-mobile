@@ -2,11 +2,13 @@
 Name=Image Viewer
 Name[cs]=Prohlížeč obrázků
 Name[es]=Visor de imágenes
+Name[nl]=Afbeeldingenviewer
 Name[pt]=Visualizador de Imagens
 Name[sk]=Prehliadač obrázkov
 Name[uk]=Переглядач зображень
 Name[x-test]=xxImage Viewerxx
 Comment=Touchscreen friendly simple image viewer
+Comment[nl]=Eenvoudige afbeeldingenviewer vriendelijk voor aanraakscherm
 Comment[pt]=Visualizador de imagens simples e amigável por toque
 Comment[uk]=Проста сенсорна програма для перегляду зображень
 Comment[x-test]=xxTouchscreen friendly simple image viewerxx

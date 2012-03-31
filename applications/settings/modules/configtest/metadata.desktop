@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Configuration Test
 Name[es]=Prueba de configuración
+Name[nl]=Test van instellingen
 Name[pt]=Teste de Configuração
 Name[uk]=Перевірка налаштувань
 Name[x-test]=xxConfiguration Testxx
 Comment=Test Module for the Config Bindings
+Comment[nl]=Testmodule voor de instellingenbindingen
 Comment[pt]=Módulo de Testes na Interface de Configuração
 Comment[uk]=Модуль перевірки прив’язок налаштувань
 Comment[x-test]=xxTest Module for the Config Bindingsxx
