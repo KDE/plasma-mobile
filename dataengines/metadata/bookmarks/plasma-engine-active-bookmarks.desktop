@@ -2,12 +2,14 @@
 Name=Active Bookmarks
 Name[nl]=Actieve bladwijzers
 Name[pt]=Favoritos Activos
+Name[sv]=Active bokmärken
 Name[uk]=Активні закладки
 Name[x-test]=xxActive Bookmarksxx
 Comment=Bookmarks from Nepomuk
 Comment[es]=Marcadores de Nepomuk
 Comment[nl]=Bladwijzers uit Nepomuk
 Comment[pt]=Favoritos do Nepomuk
+Comment[sv]=Bokmärken från Nepomuk
 Comment[uk]=Закладки з Nepomuk
 Comment[x-test]=xxBookmarks from Nepomukxx
 X-KDE-ServiceTypes=Plasma/DataEngine

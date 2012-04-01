@@ -12,6 +12,7 @@ Name=Save the date/time settings
 Name[cs]=Uložit nastavení data a času
 Name[nl]=Datum- en tijdinstellingen opslaan
 Name[pt]=Mudar a configuração da data/hora
+Name[sv]=Spara datum- och tidsinställningar
 Name[uk]=Зберегти параметри дати/часу
 Name[x-test]=xxSave the date/time settingsxx
 Description=System policies prevent you from saving the date/time settings.
