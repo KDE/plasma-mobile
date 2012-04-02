@@ -40,8 +40,22 @@ PlasmaComponents.TabBar {
         text: i18n("Top")
         component: topComponent
         resourceType: "_top"
+        visible: topPageExistenceModel.count >=1
+        onVisibleChanged: {
+            if (!visible) {
+                tabBar.currentTab = appsTab
+                stack.replace(appsComponent)
+            }
+        }
+        MetadataModels.MetadataModel {
+            id: topPageExistenceModel
+            activityId: "!"+activitySource.data["Status"]["Current"]
+            scoreResources: true
+            limit: 1
+        }
     }
     CategoryTab {
+        id: appsTab
         text: i18n("Apps")
         component: appsComponent
         resourceType: "_Apps"
