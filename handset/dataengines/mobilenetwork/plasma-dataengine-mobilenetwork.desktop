@@ -2,13 +2,17 @@
 Name=Mobile Network Engine
 Name[es]=Motor de red móvil
 Name[nl]=Engine voor mobiele netwerk
+Name[pl]=Silnik sieci dla Mobile
 Name[pt]=Motor de Rede Móvel
+Name[pt_BR]=Mecanismo de rede móvel
 Name[uk]=Рушій мобільних мереж
 Name[x-test]=xxMobile Network Enginexx
 Comment=Mobile network engine
 Comment[es]=Motor de red móvil
 Comment[nl]=Engine voor mobiele netwerk
+Comment[pl]=Silnik sieci dla Mobile
 Comment[pt]=Motor de rede móvel
+Comment[pt_BR]=Mecanismo de rede móvel
 Comment[uk]=Рушій мобільних мереж
 Comment[x-test]=xxMobile network enginexx
 
