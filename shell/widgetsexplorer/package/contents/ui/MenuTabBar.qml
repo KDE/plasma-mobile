@@ -37,14 +37,20 @@ PlasmaComponents.TabBar {
     width: Math.min(implicitWidth, parent.width - 100)
 
     CategoryTab {
+        id: topTab
         text: i18n("Top")
         component: topComponent
         resourceType: "_top"
-        visible: topPageExistenceModel.count >=1
-        onVisibleChanged: {
-            if (!visible) {
-                tabBar.currentTab = appsTab
-                stack.replace(appsComponent)
+
+        Timer {
+            id: switchPageTimer
+            interval: 100
+            onTriggered: {
+                topTab.visible = (topPageExistenceModel.count >= 1)
+                if (!topTab.visible) {
+                    tabBar.currentTab = appsTab
+                    stack.replace(appsComponent)
+                }
             }
         }
         MetadataModels.MetadataModel {
@@ -52,6 +58,12 @@ PlasmaComponents.TabBar {
             activityId: "!"+activitySource.data["Status"]["Current"]
             scoreResources: true
             limit: 1
+            onStatusChanged: {
+                if (status == MetadataModels.MetadataModel.Running) {
+                    switchPageTimer.running = true
+                }
+            }
+            onCountChanged: switchPageTimer.running = true
         }
     }
     CategoryTab {
