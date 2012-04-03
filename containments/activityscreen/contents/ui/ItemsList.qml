@@ -79,7 +79,6 @@ Item {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
-                infoLabelVisible: false
                 className: model["className"] ? model["className"] : ""
                 genericClassName: model["genericClassName"] ? model["genericClassName"] : ""
 

@@ -37,7 +37,7 @@ static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("active-filebrowser", 0, ki18n("Active file browser"), version, ki18n(description),
+    KAboutData about("active-filebrowser", 0, ki18n("Files"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2012 Marco Martin"), KLocalizedString(), 0, "mart@kde.org");
                      about.addAuthor( ki18n("Marco Martin"), KLocalizedString(), "mart@kde.org" );
     about.setProgramIconName("system-file-manager");

@@ -25,33 +25,27 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
 import org.kde.qtextracomponents 0.1
+import org.kde.dirmodel 0.1
 
 
 Image {
-    id: imageViewer
-    objectName: "imageViewer"
-    source: "image://appbackgrounds/standard"
+    id: fileBrowserRoot
+    objectName: "fileBrowserRoot"
+    source: "image://appbackgrounds/contextarea"
     fillMode: Image.Tile
     state: "browsing"
+    property QtObject model: metadataModel
 
     width: 360
     height: 360
 
-
-    signal zoomIn
-    signal zoomOut
-
-
     MobileComponents.Package {
-        id: viewerPackage
-        name: "org.kde.active.filebrowser"
+        id: partPackage
     }
 
     PlasmaExtras.ResourceInstance {
         id: resourceInstance
     }
-
-
 
     MetadataModels.MetadataUserTypes {
         id: userTypes
@@ -61,6 +55,23 @@ Image {
         sortBy: [userTypes.sortFields[metadataModel.resourceType]]
         //sortOrder: Qt.DescendingOrder
         //queryString: "pdf"
+        resourceType: exclusiveResourceType
+    }
+    DirModel {
+        id: dirModel
+    }
+    function goBack()
+    {
+        toolBar.y = 0
+        //don't go more back than the browser
+        if (mainStack.currentPage.objectName == "resourceBrowser") {
+            return
+        }
+        if (mainStack.depth == 1) {
+            mainStack.replace(Qt.createComponent("Browser.qml"))
+        } else {
+            mainStack.pop()
+        }
     }
 
     PlasmaComponents.BusyIndicator {
@@ -71,31 +82,36 @@ Image {
 
     PlasmaComponents.ToolBar {
         id: toolBar
+        height: tools ? theme.hugeIconSize : 0
     }
 
-    Item {
+    function openFile(url, mimeType)
+    {
+        if (mimeType == "inode/directory") {
+            dirModel.url = url
+            fileBrowserRoot.model = dirModel
+        } else if (!mainStack.busy) {
+            var packageName = application.packageForMimeType(mimeType)
+            print("Package for mimetype " + mimeType + " " + packageName)
+            if (packageName) {
+                partPackage.name = packageName
+                var part = mainStack.push(partPackage.filePath("mainscript"))
+                part.loadFile(url)
+            } else {
+                Qt.openUrlExternally(url)
+            }
+        }
+    }
+
+    PlasmaComponents.PageStack {
+        id: mainStack
+        clip: false
+        toolBar: toolBar
+        //initialPage: Qt.createComponent("Browser.qml")
         anchors {
-            right: sideBar.left
             top: parent.top
             bottom: parent.bottom
             left: parent.left
-        }
-        onWidthChanged: mainStackSyncTimer.restart()
-        Timer {
-            id: mainStackSyncTimer
-            interval: 200
-            onTriggered: mainStack.width = parent.width
-        }
-        PlasmaComponents.PageStack {
-            id: mainStack
-            clip: false
-            toolBar: toolBar
-            //initialPage: Qt.createComponent("Browser.qml")
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: parent.left
-            }
         }
     }
 
@@ -103,118 +119,27 @@ Image {
         interval: 1000
         running: true
         onTriggered: {
+            if (mainStack.depth > 0) {
+                return
+            }
             mainStack.push(Qt.createComponent("Browser.qml"))
-            sidebarStack.push(Qt.createComponent("CategorySidebar.qml"))
-
-            emptyTab.checked = (exclusiveResourceType !== "")
         }
     }
-
-    PlasmaComponents.ButtonColumn {
-        z: 900
-        anchors {
-            right: sideBar.left
-            verticalCenter: sideBar.verticalCenter
-            rightMargin: -1
-        }
-        SidebarTab {
-            text: i18n("Main")
-            onCheckedChanged: {
-                if (checked) {
-                    while (sidebarStack.depth > 1) {
-                        sidebarStack.pop()
-                    }
+    //FIXME: this is due to global vars being binded after the parse is done, do the 2 steps parsing
+    Timer {
+        interval: 100
+        running: true
+        onTriggered: {
+            if (application.startupArguments.length > 0) {
+                var path = application.startupArguments[0]
+                var mimeType = ""
+                //very weak heuristic to see if the passed argument is a folder
+                //FIXME: use kmimetype from C++ side?
+                if (path.indexOf(".") == -1) {
+                    mimeType = "inode/directory"
                 }
+                openFile(path, mimeType)
             }
         }
-        SidebarTab {
-            text: i18n("Time")
-            onCheckedChanged: {
-                if (checked) {
-                    if (sidebarStack.depth > 1) {
-                        sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
-                    } else {
-                        sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
-                    }
-                }
-            }
-        }
-        SidebarTab {
-            text: i18n("Tags")
-            onCheckedChanged: {
-                print(checked)
-                if (checked) {
-                    if (sidebarStack.depth > 1) {
-                        sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
-                    } else {
-                        sidebarStack.push(Qt.createComponent("TagsBar.qml"))
-                    }
-                }
-            }
-        }
-        function uncheckAll()
-        {
-            emptyTab.checked = true
-        }
-        //FIXME: hack to make no item selected
-        Item {
-            id: emptyTab
-            property bool checked: false
-            onCheckedChanged: {
-                if (checked) {
-                    while (sidebarStack.depth > 1) {
-                        sidebarStack.pop()
-                    }
-                }
-            }
-        }
-    }
-    Image {
-        id: sideBar
-        source: "image://appbackgrounds/contextarea"
-        fillMode: Image.Tile
-        clip: true
-
-        width: emptyTab.checked ? 0 : parent.width/4
-        Behavior on width {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
-        anchors {
-            right: parent.right
-            top: parent.top
-            bottom: parent.bottom
-        }
-        Image {
-            z: 800
-            source: "image://appbackgrounds/shadow-right"
-            fillMode: Image.TileVertically
-            anchors {
-                left: parent.left
-                top: parent.top
-                bottom: parent.bottom
-            }
-        }
-
-        PlasmaComponents.PageStack {
-            id: sidebarStack
-            width: imageViewer.width/4 - theme.defaultFont.mSize.width * 2
-            //initialPage: Qt.createComponent("CategorySidebar.qml")
-            anchors {
-                left: parent.left
-                top: parent.top
-                bottom: parent.bottom
-                bottomMargin: 0
-                topMargin: toolBar.height
-                leftMargin: theme.defaultFont.mSize.width * 2
-                rightMargin: theme.defaultFont.mSize.width
-            }
-        }
-    }
-
-    SlcComponents.SlcMenu {
-        id: contextMenu
     }
 }

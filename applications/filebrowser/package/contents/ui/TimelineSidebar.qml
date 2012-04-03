@@ -20,6 +20,7 @@
 import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
@@ -59,14 +60,13 @@ PlasmaComponents.Page {
         x: timelineColumn.width/2 - 4
     }
 
-
-    PlasmaComponents.Label {
+    PlasmaExtraComponents.Heading {
         id: titleLabel
         anchors {
             right: parent.right
             rightMargin: theme.defaultFont.mSize.width
         }
-        text: "<b>" + metadataTimelineModel.description + "</b>"
+        text: metadataTimelineModel.description
     }
 
     Flickable {

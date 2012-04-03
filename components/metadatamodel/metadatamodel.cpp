@@ -845,6 +845,18 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     }
 }
 
+QVariantHash MetadataModel::get(int row) const
+{
+    QModelIndex idx = index(row, 0);
+    QVariantHash hash;
+
+    QHash<int, QByteArray>::const_iterator i;
+    for (i = roleNames().constBegin(); i != roleNames().constEnd(); ++i) {
+        hash[i.value()] = data(idx, i.key());
+    }
+
+    return hash;
+}
 
 void MetadataModel::delayedPreview()
 {

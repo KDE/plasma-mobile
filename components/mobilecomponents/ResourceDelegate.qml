@@ -26,7 +26,6 @@ Item {
     property string className: model["className"] ? model["className"] : "FileDataObject"
     property string genericClassName: model["genericClassName"] ? model["genericClassName"] : "FileDataObject"
 
-    property bool infoLabelVisible
     implicitWidth: itemLoader.item.implicitWidth
     implicitHeight: itemLoader.item.implicitHeight
 

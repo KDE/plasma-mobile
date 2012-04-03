@@ -71,7 +71,7 @@ DirModel::~DirModel()
 
 QString DirModel::url() const
 {
-    return dirLister()->url().path();
+    return dirLister()->url().prettyUrl();
 }
 
 void DirModel::setUrl(const QString& url)
@@ -84,7 +84,9 @@ void DirModel::setUrl(const QString& url)
         return;
     }
 
+    beginResetModel();
     dirLister()->openUrl(url);
+    endResetModel();
     emit urlChanged();
 }
 

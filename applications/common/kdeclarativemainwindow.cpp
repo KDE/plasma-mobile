@@ -52,6 +52,7 @@ public:
     KCmdLineArgs *args;
     QStringList arguments;
     QString caption;
+    QVariant icon;
     KActionCollection *actions;
 };
 
@@ -152,6 +153,28 @@ void KDeclarativeMainWindow::setCaption(const QString &caption, bool modified)
     d->caption = caption;
     emit captionChanged();
     KMainWindow::setCaption(caption, true);
+}
+
+
+QVariant KDeclarativeMainWindow::icon() const
+{
+    return d->icon;
+}
+
+void KDeclarativeMainWindow::setIcon(const QVariant &icon)
+{
+    if (d->icon == icon || (icon.canConvert<QString>() && icon.canConvert<QIcon>())) {
+        return;
+    }
+
+    d->icon = icon;
+    if (icon.canConvert<QString>()) {
+        setWindowIcon(KIcon(icon.toString()));
+    } else {
+        setWindowIcon(icon.value<QIcon>());
+    }
+
+    emit iconChanged();
 }
 
 QAction *KDeclarativeMainWindow::action(const QString &name)

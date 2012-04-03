@@ -145,6 +145,11 @@ public:
      */
     Q_INVOKABLE void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 
+    /**
+     * Compatibility with ListModel
+     */
+    Q_INVOKABLE QVariantHash get(int row) const;
+
 Q_SIGNALS:
     void queryStringChanged();
 

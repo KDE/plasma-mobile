@@ -95,21 +95,5 @@ Column {
         style: Text.Outline
         styleColor: Qt.rgba(1, 1, 1, 0.6)
     }
-
-    Text {
-        id: infoLabel
-        //image: metadataSource.data[DataEngineSource]["fileName"]
-        //text: "the long and winding road..."
-        text: className
-        opacity: 0.8
-        //font.pixelSize: font.pixelSize * 1.8
-        font.pixelSize: 12
-        height: 14
-        width: parent.width - previewImage.width
-        //wrapMode: Text.Wrap
-        //anchors.top: previewLabel.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        visible: infoLabelVisible
-    }
 }
 
