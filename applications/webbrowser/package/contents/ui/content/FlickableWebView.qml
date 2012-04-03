@@ -84,23 +84,26 @@ Flickable {
 
 
     PinchArea {
+        id: pinchArea
         width:webView.width
         height: webView.height
         property real startScale
+        property real startY
+        property real startX
         onPinchStarted: {
             startScale = webView.contentsScale
             webView.renderingEnabled = false
             flickable.smooth = false
+            startY = pinch.center.y
+            startX = pinch.center.x
         }
         onPinchUpdated: {
-                flickable.contentY += pinch.previousCenter.y - pinch.center.y + flickable.contentY*(pinch.scale - pinch.previousScale)
-                flickable.contentX += pinch.previousCenter.x - pinch.center.x + flickable.contentX*(pinch.scale - pinch.previousScale)
-                webView.contentsScale = startScale * pinch.scale
-                
-                return
-                flickable.contentX = Math.max(0,Math.min(pinch.center.x-flickable.width/2,webView.width*webView.contentsScale-flickable.width))
-                flickable.contentY = Math.max(0,Math.min(pinch.center.y-flickable.height/2,webView.height-flickable.height))
-            }
+            webView.contentsScale = startScale * pinch.scale
+
+            flickable.contentY += pinch.previousCenter.y - pinch.center.y + startY * (pinch.scale - pinch.previousScale)
+
+            flickable.contentX += pinch.previousCenter.x - pinch.center.x + startX * (pinch.scale - pinch.previousScale)
+        }
         onPinchFinished: {
             webView.renderingEnabled = true
             flickable.smooth = true
