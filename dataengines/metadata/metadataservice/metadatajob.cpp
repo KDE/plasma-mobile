@@ -53,7 +53,7 @@ void MetadataJob::start()
         resourceUrl = m_resourceUrl;
     }
 
-    kDebug() << "starting operation" << operation << "on the resource" << m_resourceUrl << "and activity" << activityUrl;
+    kDebug() << "starting operation" << operation << "on the resource" << resourceUrl << "and activity" << activityUrl;
 
     if (operation == "connectToActivity") {
         QString activityUrl = parameters()["ActivityUrl"].toString();
