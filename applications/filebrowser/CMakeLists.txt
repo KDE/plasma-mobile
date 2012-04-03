@@ -19,3 +19,4 @@ install(FILES
 install(FILES active-filebrowser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES active-imageviewer.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 
+add_subdirectory(icons)
