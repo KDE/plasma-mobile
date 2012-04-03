@@ -161,6 +161,7 @@ PlasmaComponents.Page {
 
             onSearchQueryChanged: {
                 metadataModel.extraParameters["nfo:fileName"] = searchBox.searchQuery
+                busy = (searchBox.searchQuery.length > 0)
             }
         }
     }
@@ -182,6 +183,7 @@ PlasmaComponents.Page {
     Connections {
         target: metadataModel
         onModelReset: selectedModel.clear()
+        onCountChanged: { searchBox.restartBusyTimer() }
     }
 
     //This pinch area is for selection
