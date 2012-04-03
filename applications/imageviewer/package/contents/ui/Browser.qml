@@ -92,8 +92,14 @@ PlasmaComponents.Page {
             }
             onSearchQueryChanged: {
                 metadataModel.extraParameters["nfo:fileName"] = searchBox.searchQuery
+                busy = (searchBox.searchQuery.length > 0)
             }
         }
+    }
+
+    Connections {
+        target: metadataModel
+        onCountChanged: { searchBox.restartBusyTimer() }
     }
 
     MobileComponents.IconGrid {

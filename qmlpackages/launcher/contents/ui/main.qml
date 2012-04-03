@@ -86,6 +86,7 @@ MouseArea {
     RunnerModels.RunnerModel {
         id: runnerModel
         runners: [ "services", "nepomuksearch", "recentdocuments", "desktopsessions" , "PowerDevil", "calculator" ]
+        onCountChanged: { searchField.restartBusyTimer() }
     }
 
     MobileComponents.ViewSearch {
@@ -104,9 +105,11 @@ MouseArea {
                 appGrid.model = null
                 appGrid.model = appsModel
                 runnerModel.query = ""
+                busy = false
             } else {
                 appGrid.model = runnerModel
                 runnerModel.query = searchQuery
+                busy = true
             }
         }
 

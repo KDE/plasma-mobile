@@ -29,6 +29,7 @@ Item {
 
     property string searchQuery
     property int delay : 100
+    property bool busy: false
 
     onSearchQueryChanged: {
         searchField.text = searchQuery
@@ -45,6 +46,28 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         onTextChanged: searchTimer.restart()
+    }
+
+    PlasmaComponents.BusyIndicator {
+        anchors.verticalCenter: searchField.verticalCenter
+        anchors.right: searchField.right
+        anchors.rightMargin: searchFieldContainer.height
+        height: searchField.height
+        width: searchField.height
+        visible: searchFieldContainer.busy
+        running: searchFieldContainer.busy
+    }
+
+    function restartBusyTimer() {
+        busyTimer.restart()
+    }
+
+    Timer {
+        id: busyTimer
+        repeat: false
+        interval: 1000
+        running: false
+        onTriggered: { searchFieldContainer.busy = false }
     }
 
     Timer {
