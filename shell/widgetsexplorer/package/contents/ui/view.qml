@@ -131,6 +131,9 @@ MobileComponents.Sheet {
             onSearchQueryChanged: {
                 if (stack.depth == 1 && searchQuery.length > 3) {
                     stack.push(globalSearchComponent)
+                    busy = true
+                } else {
+                    busy = false
                 }
             }
         },
@@ -161,6 +164,7 @@ MobileComponents.Sheet {
                         stack.pop()
                     }
                 }
+                onCountChanged: { searchField.restartBusyTimer() }
             }
         }
     }

@@ -1,17 +1,27 @@
 [Desktop Entry]
 Name=Widget Strip
 Name[es]=Tira de elementos gráficos
+Name[nl]=Widget-strip
+Name[pl]=Pas elementów interfejsu
 Name[pt]=Barra de Elementos
+Name[pt_BR]=Barra de widgets
 Name[uk]=Стрічка віджетів
 Name[x-test]=xxWidget Stripxx
 GenericName=Widget Strip
 GenericName[es]=Tira de elementos gráficos
+GenericName[nl]=Widget-strip
+GenericName[pl]=Pas elementów interfejsu
 GenericName[pt]=Barra de Elementos
+GenericName[pt_BR]=Barra de widgets
 GenericName[uk]=Стрічка віджетів
 GenericName[x-test]=xxWidget Stripxx
 Comment=A collection of widgets
 Comment[es]=Una colección de elementos gráficos
+Comment[nl]=Een verzameling widgets
+Comment[pl]=Kolekcja elementów interfejsu
 Comment[pt]=Uma colecção de elementos
+Comment[pt_BR]=Coleção de widgets
+Comment[sv]=En samling grafiska komponenter
 Comment[uk]=Збірка віджетів
 Comment[x-test]=xxA collection of widgetsxx
 

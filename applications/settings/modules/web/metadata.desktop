@@ -1,11 +1,19 @@
 [Desktop Entry]
 Name=Web and Browser
 Name[cs]=Web a prohlížeč
+Name[nl]=Web en browser
+Name[pl]=Sieć i przeglądarka
 Name[pt]=Web e Navegação
+Name[pt_BR]=Web e Navegador
+Name[sv]=Webb och webbläsare
 Name[uk]=Інтернет і перегляд інтернету
 Name[x-test]=xxWeb and Browserxx
 Comment=Settings for history, caching, etc.
+Comment[nl]=Instellingen voor geschiedenis, caching, etc.
+Comment[pl]=Ustawienia dla historii, pamięci podręcznej, itp.
 Comment[pt]=Configuração do histórico, 'cache', etc.
+Comment[pt_BR]=Configurações para histórico, caching, etc.
+Comment[sv]=Inställningar av historik, lokal lagring, etc.
 Comment[uk]=Параметри журналу, кешування тощо
 Comment[x-test]=xxSettings for history, caching, etc.xx
 Encoding=UTF-8

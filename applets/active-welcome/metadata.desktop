@@ -2,8 +2,12 @@
 Name=Welcome
 Name[cs]=Vítejte
 Name[es]=Bienvenido
+Name[nl]=Welkom
+Name[pl]=Witaj
 Name[pt]=Bem-Vindo
+Name[pt_BR]=Bem-vindo
 Name[sk]=Vitajte
+Name[sv]=Välkommen
 Name[uk]=Вітаємо
 Name[x-test]=xxWelcomexx
 Type=Service

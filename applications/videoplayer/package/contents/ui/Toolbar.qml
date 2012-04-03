@@ -79,6 +79,11 @@ PlasmaCore.FrameSvgItem {
         }
         onSearchQueryChanged: {
             filterModel.filterRegExp = ".*"+searchBox.searchQuery+".*"
+            busy = (searchBox.searchQuery.length > 0)
+        }
+        Connections {
+            target: filterModel
+            onCountChanged: { searchBox.restartBusyTimer() }
         }
         opacity: viewer.scale==1?0:1
         Behavior on opacity {

@@ -2,7 +2,10 @@
 Encoding=UTF-8
 Name=Mobile Network Status
 Name[es]=Estado de red móvil
+Name[nl]=Status mobiele netwerk
+Name[pl]=Stan sieci dla Mobile
 Name[pt]=Estado da Rede Móvel
+Name[pt_BR]=Status da rede móvel
 Name[uk]=Стан мобільної мережі
 Name[x-test]=xxMobile Network Statusxx
 

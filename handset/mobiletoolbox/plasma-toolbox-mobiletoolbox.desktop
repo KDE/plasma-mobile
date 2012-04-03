@@ -1,12 +1,18 @@
 [Desktop Entry]
 Comment=Default toolbox for the mobile shell
+Comment[nl]=Standaard hulpmiddelen voor de mobiel-shell
+Comment[pl]=Domyślny przybornik dla powłoki Mobile
 Comment[pt]=Área de ferramentas predefinidas para a área de trabalho móvel
+Comment[pt_BR]=A barra padrão para a área de trabalho móvel
 Comment[uk]=Типовий набір інструментів для мобільної оболонки
 Comment[x-test]=xxDefault toolbox for the mobile shellxx
 Icon=plasma
 Name=Mobile toolbox
 Name[es]=Caja de herramientas móvil
+Name[nl]=Hulpmiddelen voor mobiel
+Name[pl]=Przybornik dla Mobile
 Name[pt]=Área de ferramentas móvel
+Name[pt_BR]=Caixa de ferramentas móvel
 Name[uk]=Набір інструментів для мобільного
 Name[x-test]=xxMobile toolboxxx
 Type=Service

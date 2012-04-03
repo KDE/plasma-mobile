@@ -1,7 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Window Strip
+Name[nl]=Vensterstrook
+Name[pl]=Pas okna
 Name[pt]=Barra da Janela
+Name[pt_BR]=Barra da janela
+Name[sv]=Fönsterremsa
 Name[uk]=Стрічка-вікно
 Name[x-test]=xxWindow Stripxx
 Icon=window

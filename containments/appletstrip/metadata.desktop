@@ -1,7 +1,10 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Applets strip
+Name[nl]=Strip met applets
+Name[pl]=Pas apletów
 Name[pt]=Barra de 'applets'
+Name[pt_BR]=Barra de miniaplicativos
 Name[uk]=Усування аплетів
 Name[x-test]=xxApplets stripxx
 Icon=user-desktop
