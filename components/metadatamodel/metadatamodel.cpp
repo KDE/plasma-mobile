@@ -554,7 +554,8 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 
         Soprano::Node symbol = res.requestProperties().value(NAO::hasSymbol());
         if (!symbol.toString().isEmpty()) {
-            m_cachedResources[resource][Icon] = symbol.toString();
+            Nepomuk::Resource symbolRes(symbol.uri());
+            m_cachedResources[resource][Icon] = symbolRes.genericLabel();
         } else {
             //if it's an application, fetch the icon from the desktop file
             Nepomuk::Types::Class resClass(resource.resourceType());
@@ -562,6 +563,8 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
                 KService::Ptr serv = KService::serviceByDesktopPath(m_cachedResources[resource][Url].toUrl().path());
                 if (serv) {
                     m_cachedResources[resource][Icon] = serv->icon();
+                } else {
+                    m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
                 }
             } else {
                 m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
