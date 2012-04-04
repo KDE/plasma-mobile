@@ -26,6 +26,7 @@ import org.kde.qtextracomponents 0.1
 Item {
     property int score
     property string resourceUrl
+    property alias interactive: mouseArea.enabled
     height: 22
     width: 22*5
 
@@ -48,6 +49,7 @@ Item {
 
 
     MouseArea {
+        id: mouseArea
         anchors {
             fill: parent
             leftMargin: -22
@@ -76,6 +78,9 @@ Item {
 
     function rateResource(resourceUrl, rating) {
         print("New Rating " + resourceUrl + " *****: " + rating )
+        if (!metadataSource) {
+            return
+        }
         if (resourceUrl == "") {
             print("url empty.");
             return;
