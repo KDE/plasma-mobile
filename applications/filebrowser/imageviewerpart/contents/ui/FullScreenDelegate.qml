@@ -64,25 +64,25 @@ Item {
 
             contentXAnim.to = Math.max(0, Math.min(mainFlickable.contentWidth-mainFlickable.width, (mainFlickable.contentX * factor)))
             contentYAnim.to = Math.max(0, Math.min(mainFlickable.contentHeight-mainFlickable.height, (mainFlickable.contentY * factor)))
-            contentWidthAnim.to = mainFlickable.contentWidth * factor
-            contentHeightAnim.to = mainFlickable.contentHeight * factor
+            imageWidthAnim.to = mainImage.width * factor
+            imageHeightAnim.to = mainImage.height * factor
             zoomAnim.running = true
         }
 
         ParallelAnimation {
             NumberAnimation {
-                id: contentWidthAnim
+                id: imageWidthAnim
                 duration: 250
                 easing.type: Easing.InOutQuad
-                target: mainFlickable
-                property: "contentWidth"
+                target: mainImage
+                property: "width"
             }
             NumberAnimation {
-                id: contentHeightAnim
+                id: imageHeightAnim
                 duration: 250
                 easing.type: Easing.InOutQuad
-                target: mainFlickable
-                property: "contentHeight"
+                target: mainImage
+                property: "height"
             }
             NumberAnimation {
                 id: contentXAnim
@@ -164,6 +164,7 @@ Item {
                     anchors.centerIn: parent
                     width: mainFlickable.contentWidth
                     height: mainFlickable.contentHeight
+                    onSourceChanged: sourceSize = undefined
                     onStatusChanged: {
                         if (status != Image.Ready) {
                             return
@@ -178,14 +179,14 @@ Item {
                         }
 
                         var ratio = sourceSize.width/sourceSize.height
-                        /*if (sourceSize.width > sourceSize.height) {
-                            mainFlickable.contentWidth = Math.min(mainFlickable.width + 1, sourceSize.width)
-                            mainFlickable.contentHeight = mainFlickable.contentWidth / ratio
+
+                        if (sourceSize.width > sourceSize.height) {
+                            mainImage.width = Math.min(mainFlickable.width + 1, sourceSize.width)
+                            mainImage.height = mainImage.width / ratio
                         } else {
-                            mainFlickable.contentHeight = Math.min(mainFlickable.height, sourceSize.height)
-                            mainFlickable.contentWidth = mainFlickable.contentHeight * ratio
-                        }*/
-    
+                            mainImage.height = Math.min(mainFlickable.height, sourceSize.height)
+                            mainImage.width = mainImage.height * ratio
+                        }
                         if (mainImage.sourceSize.width > mainImage.sourceSize.height && mainImage.sourceSize.width > mainFlickable.width) {
                             mainImage.sourceSize.width = mainFlickable.width
                             mainImage.sourceSize.height = mainImage.sourceSize.width / ratio
