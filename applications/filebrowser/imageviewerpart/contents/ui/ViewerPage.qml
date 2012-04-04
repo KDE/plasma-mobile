@@ -129,39 +129,32 @@ PlasmaComponents.Page {
         //enabled: !delegate.interactive
         property Item delegate: delegate1
         property Item oldDelegate: delegate2
-        property bool incrementing: true
-
-        property int lastX
-        property int startX
-        onPressed: lastX = startX = mouse.screenX
-        onPositionChanged: {
-            if (delegate.interactive) {
-                return
-            }
-            delegate.x += (mouse.screenX - lastX)
-            lastX = mouse.screenX
-            incrementing = delegate.x < 0
-            if (incrementing) {
-                oldDelegate.source = fileBrowserRoot.model.get(quickBrowserBar.currentIndex + 1).url
-            } else {
-                oldDelegate.source =  fileBrowserRoot.model.get(quickBrowserBar.currentIndex - 1).url
+        property bool incrementing: delegate.delta > 0
+        Connections {
+            target: imageArea.delegate
+            onDeltaChanged: {
+                imageArea.oldDelegate.delta = imageArea.delegate.delta
+                if (imageArea.delegate.delta > 0) {
+                    imageArea.oldDelegate.source = fileBrowserRoot.model.get(quickBrowserBar.currentIndex + 1).url
+                } else if (imageArea.delegate.delta < 0) {
+                    imageArea.oldDelegate.source =  fileBrowserRoot.model.get(quickBrowserBar.currentIndex - 1).url
+                }
             }
         }
+
+        property int startX
+        onPressed: startX = mouse.screenX
         onReleased: {
-            if (Math.abs(lastX - startX) < 20) {
+            if (Math.abs(mouse.screenX - startX) < 20) {
                 if (viewerPage.state == "toolsOpen") {
                     viewerPage.state = "toolsClosed"
                 } else {
                     viewerPage.state = "toolsOpen"
                 }
-            } else if (!delegate.interactive) { 
-                if (delegate.x > delegate.width/2 || delegate.x < -delegate.width/2) {
-                    oldDelegate = delegate
-                    delegate = (delegate == delegate1) ? delegate2 : delegate1
-                    switchAnimation.running = true
-                } else {
-                    resetAnimation.running = true
-                }
+            } else if (delegate.delta != 0 && delegate.doSwitch) {
+                oldDelegate = delegate
+                delegate = (delegate == delegate1) ? delegate2 : delegate1
+                switchAnimation.running = true
             }
         }
         FullScreenDelegate {
@@ -196,14 +189,9 @@ PlasmaComponents.Page {
                     imageArea.delegate.x = 0
                 }
             }
-        }
-        NumberAnimation {
-            id: resetAnimation
-            target: imageArea.delegate
-            properties: "x"
-            to: 0
-            easing.type: Easing.InOutQuad
-            duration: 250
+            ScriptAction {
+                script: delegate1.delta = delegate2.delta = 0
+            }
         }
     }
 

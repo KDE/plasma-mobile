@@ -23,13 +23,15 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 
-Flickable {
-    id: mainFlickable
-    width: parent.width
-    height: parent.height
-    contentWidth: mainImage.width
-    contentHeight: mainImage.height
-    onContentHeightChanged: interactiveTimer.restart()
+Item {
+    id: root
+    //+1: switch to next image on mouse release
+    //-1: switch to previous image on mouse release
+    //0: do nothing
+    property int delta
+    //if true when released will switch the delegate
+    property bool doSwitch: false
+
     property alias source: mainImage.source
     property string label: model["label"]
 
@@ -40,8 +42,12 @@ Flickable {
         repeat: false
         running: true
         onTriggered: {
+            mainFlickable.enabled = true
+            mainFlickable.interactive = true
+            return
+            
             mainFlickable.enabled = false
-            mainFlickable.interactive = contentWidth > width || contentHeight > height
+            mainFlickable.interactive = mainFlickable.contentWidth > width || mainFlickable.contentHeight > height
             mainFlickable.enabled = true
         }
     }
@@ -108,93 +114,116 @@ Flickable {
         }
     }
 
-    Rectangle {
-        id: imageMargin
-        color: "black"
-        width: Math.max(mainFlickable.width, mainImage.width)
-        height: Math.max(mainFlickable.height, mainImage.height)
-        PinchArea {
-            anchors.fill: parent
-            property real initialWidth
-            property real initialHeight
-            onPinchStarted: {
-                initialWidth = contentWidth
-                initialHeight = contentHeight
-             }
-            onPinchUpdated: {
-                contentX += pinch.previousCenter.x - pinch.center.x
-                contentY += pinch.previousCenter.y - pinch.center.y
-                
-                // resize content
-                mainFlickable.resizeContent(initialWidth * pinch.scale, initialHeight * pinch.scale, Qt.point(pinch.center.x-mainImage.x, pinch.center.y-mainImage.y))
+    Flickable {
+        id: mainFlickable
+        anchors.fill: parent
+        width: parent.width
+        height: parent.height
+        contentWidth: imageMargin.width
+        contentHeight: imageMargin.height
+        onContentHeightChanged: interactiveTimer.restart()
+
+        onContentXChanged: {
+            if (atXBeginning && contentX < 0) {
+                root.delta = -1
+                root.doSwitch = (contentX < -mainFlickable.width/3)
+            } else if (atXEnd) {
+                root.delta = +1
+                root.doSwitch = (contentX + mainFlickable.width - contentWidth > mainFlickable.width/3)
+            } else {
+                root.delta = 0
+                root.doSwitch = false
             }
+        }
 
-            Image {
-                id: mainImage
+        Rectangle {
+            id: imageMargin
+            color: "black"
+            width: Math.max(mainFlickable.width+1, mainImage.width)
+            height: Math.max(mainFlickable.height, mainImage.height)
+            PinchArea {
+                anchors.fill: parent
+                property real initialWidth
+                property real initialHeight
+                onPinchStarted: {
+                    initialWidth = contentWidth
+                    initialHeight = contentHeight
+                }
+                onPinchUpdated: {
+                    contentX += pinch.previousCenter.x - pinch.center.x
+                    contentY += pinch.previousCenter.y - pinch.center.y
+                    
+                    // resize content
+                    mainFlickable.resizeContent(initialWidth * pinch.scale, initialHeight * pinch.scale, Qt.point(pinch.center.x-mainImage.x, pinch.center.y-mainImage.y))
+                }
 
-                asynchronous: true
-                anchors.centerIn: parent
-                width: mainFlickable.contentWidth
-                height: mainFlickable.contentHeight
-                onStatusChanged: {
-                    if (status != Image.Ready) {
-                        return
-                    }
+                Image {
+                    id: mainImage
 
-                    loadingText.visible = false
+                    asynchronous: true
+                    anchors.centerIn: parent
+                    width: mainFlickable.contentWidth
+                    height: mainFlickable.contentHeight
+                    onStatusChanged: {
+                        if (status != Image.Ready) {
+                            return
+                        }
 
-                    // do not try to load an empty mainImage.source or it will mess up with mainImage.scale
-                    // and make the next valid url fail to load.
-                    if (mainFlickable.parent.width < 1 || mainFlickable.parent.height < 1) {
-                        return
-                    }
+                        loadingText.visible = false
 
-                    var ratio = sourceSize.width/sourceSize.height
-                    if (sourceSize.width > sourceSize.height) {
-                        mainFlickable.contentWidth = Math.min(mainFlickable.width, sourceSize.width)
-                        mainFlickable.contentHeight = mainFlickable.contentWidth / ratio
-                    } else {
-                        mainFlickable.contentHeight = Math.min(mainFlickable.height, sourceSize.height)
-                        mainFlickable.contentWidth = mainFlickable.contentHeight * ratio
-                    }
- 
-                    if (mainImage.sourceSize.width > mainImage.sourceSize.height && mainImage.sourceSize.width > mainFlickable.width) {
-                        mainImage.sourceSize.width = mainFlickable.width
-                        mainImage.sourceSize.height = mainImage.sourceSize.width / ratio
-                    } else if (mainImage.sourceSize.height > mainImage.sourceSize.width && mainImage.sourceSize.height > mainFlickable.height) {
-                        mainImage.sourceSize.width = mainFlickable.height * ratio
-                        mainImage.sourceSize.height = mainFlickable.height
+                        // do not try to load an empty mainImage.source or it will mess up with mainImage.scale
+                        // and make the next valid url fail to load.
+                        if (mainFlickable.parent.width < 1 || mainFlickable.parent.height < 1) {
+                            return
+                        }
+
+                        var ratio = sourceSize.width/sourceSize.height
+                        /*if (sourceSize.width > sourceSize.height) {
+                            mainFlickable.contentWidth = Math.min(mainFlickable.width + 1, sourceSize.width)
+                            mainFlickable.contentHeight = mainFlickable.contentWidth / ratio
+                        } else {
+                            mainFlickable.contentHeight = Math.min(mainFlickable.height, sourceSize.height)
+                            mainFlickable.contentWidth = mainFlickable.contentHeight * ratio
+                        }*/
+    
+                        if (mainImage.sourceSize.width > mainImage.sourceSize.height && mainImage.sourceSize.width > mainFlickable.width) {
+                            mainImage.sourceSize.width = mainFlickable.width
+                            mainImage.sourceSize.height = mainImage.sourceSize.width / ratio
+                        } else if (mainImage.sourceSize.height > mainImage.sourceSize.width && mainImage.sourceSize.height > mainFlickable.height) {
+                            mainImage.sourceSize.width = mainFlickable.height * ratio
+                            mainImage.sourceSize.height = mainFlickable.height
+                        }
                     }
                 }
-            }
 
-            PlasmaExtras.Title {
-                id: loadingText
-                anchors.centerIn: mainImage
-                text: i18n("Loading...")
-                color: "gray"
+                PlasmaExtras.Title {
+                    id: loadingText
+                    anchors.centerIn: mainImage
+                    text: i18n("Loading...")
+                    color: "gray"
+                }
             }
-        }
-        Image {
-            z: -1
-            source: "image://appbackgrounds/shadow-left"
-            fillMode: Image.TileVertically
-            anchors {
-                right: parent.left
-                top: parent.top
-                bottom: parent.bottom
-                rightMargin: -1
+            Image {
+                z: -1
+                source: "image://appbackgrounds/shadow-left"
+                fillMode: Image.TileVertically
+                anchors {
+                    right: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                    rightMargin: -1
+                }
             }
-        }
-        Image {
-            z: -1
-            source: "image://appbackgrounds/shadow-right"
-            fillMode: Image.TileVertically
-            anchors {
-                left: parent.right
-                top: parent.top
-                bottom: parent.bottom
-                leftMargin: -1
+            Image {
+                z: -1
+                source: "image://appbackgrounds/shadow-right"
+                fillMode: Image.TileVertically
+                anchors {
+                    left: parent.right
+                    top: parent.top
+                    bottom: parent.bottom
+                    leftMargin: -1
+                }
             }
         }
     }
