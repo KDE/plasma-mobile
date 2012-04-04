@@ -125,18 +125,24 @@ Item {
             height: Math.max(mainFlickable.height, mainImage.height)
             PinchArea {
                 anchors.fill: parent
-                property real initialWidth
-                property real initialHeight
+
+                property real startWidth
+                property real startHeight
+                property real startY
+                property real startX
                 onPinchStarted: {
-                    initialWidth = contentWidth
-                    initialHeight = contentHeight
+                    startWidth = mainImage.width
+                    startHeight = mainImage.height
+                    startY = pinch.center.y
+                    startX = pinch.center.x
                 }
                 onPinchUpdated: {
-                    contentX += pinch.previousCenter.x - pinch.center.x
-                    contentY += pinch.previousCenter.y - pinch.center.y
-                    
-                    // resize content
-                    mainFlickable.resizeContent(initialWidth * pinch.scale, initialHeight * pinch.scale, Qt.point(pinch.center.x-mainImage.x, pinch.center.y-mainImage.y))
+                    image.width = startWidth * pinch.scale
+                    image.height = startHeight * pinch.scale
+
+                    contentY += pinch.previousCenter.y - pinch.center.y + startY * (pinch.scale - pinch.previousScale)
+
+                    contentX += pinch.previousCenter.x - pinch.center.x + startX * (pinch.scale - pinch.previousScale)
                 }
 
                 Image {
