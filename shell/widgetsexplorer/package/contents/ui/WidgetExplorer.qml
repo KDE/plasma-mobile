@@ -57,7 +57,6 @@ MobileComponents.IconGrid {
                 height: appletsView.delegateHeight
 
                 onClicked: {
-                    inputPanelController.forceActiveFocus()
                     inputPanelController.closeSoftwareInputPanel()
 
                     //already in the model?

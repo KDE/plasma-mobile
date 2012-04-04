@@ -71,7 +71,6 @@ MobileComponents.IconGrid {
                 }
             }
             onClicked: {
-                inputPanelController.forceActiveFocus()
                 inputPanelController.closeSoftwareInputPanel()
                 //already in the model?
                 //second case, for the apps model
