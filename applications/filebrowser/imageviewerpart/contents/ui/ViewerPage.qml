@@ -143,9 +143,14 @@ PlasmaComponents.Page {
         }
 
         property int startX
-        onPressed: startX = mouse.screenX
+        property int starty
+        onPressed: {
+            startX = mouse.screenX
+            startY = mouse.screenY
+        }
         onReleased: {
-            if (Math.abs(mouse.screenX - startX) < 20) {
+            if (Math.abs(mouse.screenX - startX) < 20 &&
+                Math.abs(mouse.screenY - startY) < 20) {
                 if (viewerPage.state == "toolsOpen") {
                     viewerPage.state = "toolsClosed"
                 } else {

@@ -35,23 +35,6 @@ Item {
     property alias source: mainImage.source
     property string label: model["label"]
 
-    //defer interactive decision; set interactive when disabled: it will make it spit out an eventual mouse grabber
-    Timer {
-        id: interactiveTimer
-        interval: 200
-        repeat: false
-        running: true
-        onTriggered: {
-            mainFlickable.enabled = true
-            mainFlickable.interactive = true
-            return
-            
-            mainFlickable.enabled = false
-            mainFlickable.interactive = mainFlickable.contentWidth > width || mainFlickable.contentHeight > height
-            mainFlickable.enabled = true
-        }
-    }
-
     SequentialAnimation {
         id: zoomAnim
         function zoom(factor)
@@ -121,7 +104,6 @@ Item {
         height: parent.height
         contentWidth: imageMargin.width
         contentHeight: imageMargin.height
-        onContentHeightChanged: interactiveTimer.restart()
 
         onContentXChanged: {
             if (atXBeginning && contentX < 0) {
