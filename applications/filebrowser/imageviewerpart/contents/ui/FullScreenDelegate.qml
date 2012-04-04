@@ -137,12 +137,14 @@ Item {
                     startX = pinch.center.x
                 }
                 onPinchUpdated: {
-                    image.width = startWidth * pinch.scale
-                    image.height = startHeight * pinch.scale
+                    var deltaWidth = mainImage.width < imageMargin.width ? ((startWidth * pinch.scale) - mainImage.width) : 0
+                    var deltaHeight = mainImage.height < imageMargin.height ? ((startHeight * pinch.scale) - mainImage.height) : 0
+                    mainImage.width = startWidth * pinch.scale
+                    mainImage.height = startHeight * pinch.scale
 
-                    contentY += pinch.previousCenter.y - pinch.center.y + startY * (pinch.scale - pinch.previousScale)
+                    mainFlickable.contentY += pinch.previousCenter.y - pinch.center.y + startY * (pinch.scale - pinch.previousScale) - deltaHeight
 
-                    contentX += pinch.previousCenter.x - pinch.center.x + startX * (pinch.scale - pinch.previousScale)
+                    mainFlickable.contentX += pinch.previousCenter.x - pinch.center.x + startX * (pinch.scale - pinch.previousScale) - deltaWidth
                 }
 
                 Image {
