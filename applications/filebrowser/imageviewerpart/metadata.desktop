@@ -1,23 +1,21 @@
 [Desktop Entry]
 Name=Image Viewer
-Name[de]=Bildbetrachter
+Name[cs]=Prohlížeč obrázků
 Name[es]=Visor de imágenes
-Name[et]=Pildinäitaja
 Name[nl]=Afbeeldingenviewer
 Name[pl]=Przeglądarka obrazów
 Name[pt]=Visualizador de Imagens
 Name[pt_BR]=Visualizador de imagens
+Name[sk]=Prehliadač obrázkov
 Name[sv]=Bildvisare
-Name[ug]=سۈرەت كۆرگۈ
 Name[uk]=Переглядач зображень
 Name[x-test]=xxImage Viewerxx
 Comment=Touchscreen friendly simple image viewer
-Comment[et]=Puuteekraanisõbralik lihtne pildinäitaja
 Comment[nl]=Eenvoudige afbeeldingenviewer vriendelijk voor aanraakscherm
 Comment[pl]=Prosta przeglądarka obrazów przyjazna ekranom dotykowym
 Comment[pt]=Visualizador de imagens simples e amigável por toque
-Comment[pt_BR]=Visualizador de imagem simples e amigável por toque
-Comment[sv]=Enkel bildvisare bra för pekskärmar
+Comment[pt_BR]=Visualizador de imagens simples e amigável por toque
+Comment[sv]=Enkel pekskärmsvänlig bildvisare
 Comment[uk]=Проста сенсорна програма для перегляду зображень
 Comment[x-test]=xxTouchscreen friendly simple image viewerxx
 Encoding=UTF-8
