@@ -24,6 +24,7 @@ import org.kde.qtextracomponents 0.1
 
 PlasmaComponents.ListItem {
     id: notificationItem
+    opacity: 1-Math.abs(x)/width
     width: popupFlickable.width
 
     Timer {

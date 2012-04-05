@@ -18,13 +18,16 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0 as QML
+import QtQuick 1.1 as QML
 
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
 PlasmaComponents.ListItem {
     id: main
+    enabled: true
+    opacity: 1-Math.abs(x)/width
+    signal removeAsked
 
     /* property declarations --------------------------{{{ */
     property alias title: label.text
@@ -50,7 +53,6 @@ PlasmaComponents.ListItem {
             rightMargin: 8
         }
     }
-
     QML.MouseArea {
         anchors.fill: parent
 
@@ -58,6 +60,70 @@ PlasmaComponents.ListItem {
 
         onPressAndHold: {
             // show actions...
+        }
+        drag {
+            target: main
+            axis: QML.Drag.XAxis
+        }
+        onReleased: {
+            if (main.x < -main.width/2) {
+                removeAnimation.exitFromRight = false
+                removeAnimation.running = true
+            } else if (main.x > main.width/2 ) {
+                removeAnimation.exitFromRight = true
+                removeAnimation.running = true
+            } else {
+                resetAnimation.running = true
+            }
+        }
+    }
+    PlasmaCore.SvgItem {
+        svg: configIconsSvg
+        elementId: "close"
+        width: theme.mediumIconSize
+        height: theme.mediumIconSize
+        anchors {
+            top: parent.top
+            right: parent.right
+            rightMargin: 12
+        }
+        QML.MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                removeAnimation.running = true
+            }
+        }
+    }
+
+    QML.SequentialAnimation {
+        id: removeAnimation
+        property bool exitFromRight: true
+        QML.NumberAnimation {
+            target: main
+            properties: "x"
+            to: removeAnimation.exitFromRight ? main.width : -main.width
+            duration: 250
+            easing.type: QML.Easing.InQuad
+        }
+        QML.NumberAnimation {
+            target: main
+            properties: "height"
+            to: 0
+            duration: 250
+            easing.type: QML.Easing.InOutQuad
+        }
+        QML.ScriptAction {
+            script: removeAsked()
+        }
+    }
+    QML.SequentialAnimation {
+        id: resetAnimation
+        QML.NumberAnimation {
+            target: main
+            properties: "x"
+            to: 0
+            duration: 250
+            easing.type: QML.Easing.InOutQuad
         }
     }
     /* }}} */

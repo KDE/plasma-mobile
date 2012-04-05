@@ -68,16 +68,21 @@ QML.Item {
             }
         }
 
+        PlasmaCore.Svg {
+            id: configIconsSvg
+            imagePath: "widgets/configuration-icons"
+        }
         QML.ListView {
             id: listLocations
             clip: true
 
             delegate: LocationDelegate {
-                title:     model.modelData
+                title:     model.modelData.name
                 onClicked: {
                     print ("clicked")
-                    main.requestChange(model.modelData)
+                    main.requestChange(model.modelData.name)
                 }
+                onRemoveAsked: locationManager.removeLocation(model.modelData.id)
             }
 
             anchors {
