@@ -27,7 +27,7 @@ class Engine: public QObject {
 
     Q_PROPERTY(QString currentLocationId READ currentLocationId NOTIFY currentLocationIdChanged)
     Q_PROPERTY(QString currentLocationName READ currentLocationName NOTIFY currentLocationNameChanged)
-    Q_PROPERTY(QStringList knownLocations READ knownLocations NOTIFY knownLocationsChanged)
+    Q_PROPERTY(QVariantList knownLocations READ knownLocations NOTIFY knownLocationsChanged)
     Q_PROPERTY(bool    locationManagerPresent READ locationManagerPresent NOTIFY locationManagerPresenceChanged)
 
 public:
@@ -38,9 +38,11 @@ public Q_SLOTS:
     void setIcon(const QString & icon);
     void setCurrentLocation(const QString & location);
 
+    void removeLocation(const QString & location);
+
     QString currentLocationId() const;
     QString currentLocationName() const;
-    QStringList knownLocations() const;
+    QVariantList knownLocations() const;
     bool locationManagerPresent() const;
 
     void requestUiReset();
@@ -51,7 +53,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void currentLocationIdChanged(const QString & id);
     void currentLocationNameChanged(const QString & name);
-    void knownLocationsChanged(const QStringList & names);
+    void knownLocationsChanged(const QVariantList & names);
     void locationManagerPresenceChanged();
 
     void resetUiRequested();

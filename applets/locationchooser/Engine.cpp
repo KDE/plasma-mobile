@@ -31,7 +31,7 @@ public:
     org::kde::LocationManager * locationManager;
     Plasma::PopupApplet * parent;
     QSizeF regularSize;
-    QStringList locations;
+    QVariantHash locations;
     qreal listItemHeight;
     QDBusServiceWatcher * watcher;
 };
@@ -85,11 +85,14 @@ void Engine::onServiceRegistered()
             foreach (const QString & id, d->locationManager->knownLocations().value()) {
                 if (id.isEmpty()) continue;
 
-                d->locations << d->locationManager->locationName(id);
+                QVariantHash loc;
+                loc["id"] = id;
+                loc["name"] = QString(d->locationManager->locationName(id));
+                d->locations[id] = loc;
             }
 
             QMetaObject::invokeMethod(parent, "knownLocationsChanged",
-                    Qt::QueuedConnection, Q_ARG(QStringList, d->locations));
+                    Qt::QueuedConnection, Q_ARG(QVariantList, d->locations.values()));
 
             deleteLater();
         }
@@ -170,6 +173,13 @@ void Engine::setCurrentLocation(const QString & location)
     d->parent->hidePopup();
 }
 
+void Engine::removeLocation(const QString & location)
+{
+    if (d->locationManager) {
+        d->locationManager->removeLocation(location);
+    }
+}
+
 void Engine::requestUiReset()
 {
     setIcon("location");
@@ -200,31 +210,36 @@ void Engine::setListItemHeight(qreal height)
     d->listItemHeight = height;
 }
 
-QStringList Engine::knownLocations() const
+QVariantList Engine::knownLocations() const
 {
-    return d->locations;
+    return d->locations.values();
 }
 
 void Engine::onLocationAdded(const QString & id, const QString & name)
 {
     Q_UNUSED(id)
-    d->locations << name;
-    emit knownLocationsChanged(d->locations);
+    QVariantHash location;
+    location["id"] = id;
+    location["name"] = name;
+    d->locations[id] = location;
+    emit knownLocationsChanged(d->locations.values());
 }
 
 void Engine::onLocationRemoved(const QString & id, const QString & name)
 {
     Q_UNUSED(id)
-    d->locations.removeAll(name);
-    emit knownLocationsChanged(d->locations);
+    d->locations.remove(id);
+    emit knownLocationsChanged(d->locations.values());
 }
 
 void Engine::onLocationNameChanged(const QString & id, const QString & oldname, const QString & newname)
 {
     Q_UNUSED(id)
-    d->locations.removeAll(oldname);
-    d->locations << newname;
-    emit knownLocationsChanged(d->locations);
+    QVariantHash location;
+    location["id"] = id;
+    location["name"] = newname;
+    d->locations[id] = location;
+    emit knownLocationsChanged(d->locations.values());
 }
 
 bool Engine::locationManagerPresent() const
