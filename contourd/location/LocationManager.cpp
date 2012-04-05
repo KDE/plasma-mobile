@@ -101,7 +101,9 @@ void LocationManager::removeLocation(const QString & id)
 {
     if (!d->knownLocationInfos.contains(id)) return;
 
-    emit locationRemoved(id, d->knownLocationInfos[id].name);
+    if (id == d->currentLocationId) {
+        d->setCurrentLocation(QString());
+    }
 
     d->knownLocationIds.remove(d->knownLocationInfos[id].name);
     d->knownLocationInfos.remove(id);
@@ -111,6 +113,8 @@ void LocationManager::removeLocation(const QString & id)
     d->locationNames.deleteEntry(id);
 
     d->scheduleConfigSync();
+
+    emit locationRemoved(id, d->knownLocationInfos[id].name);
 }
 
 void LocationManager::setLocationName(const QString & id, const QString & name)
