@@ -27,6 +27,7 @@
 #include <Nepomuk/Resource>
 
 #include <QtDBus/QDBusVariant>
+#include <QtCore/QVariant>
 
 #include "nepomukdatamanagement_export.h"
 
@@ -249,6 +250,25 @@ namespace Nepomuk {
                               const Nepomuk::Types::Property & property,
                               const QVariant & value );
 
+        /**
+         * \brief This signal is emitted when a property value is changed.
+         *
+         * This signal cannot be emitted for all changes. It doesn't work if a property is first
+         * removed and then set, cause the Data Mangement Service does not maintain an internal
+         * cache for the purpose of emitting the propertyChanged signal.
+         *
+         * Specially, since one could theoretically take forever between the removal and the
+         * setting of the property.
+         *
+         * \param resource The changed resource.
+         * \param property The property which was changed.
+         * \param oldValue The removed property value.
+         */
+        void propertyChanged( const Nepomuk::Resource & resource,
+                              const Nepomuk::Types::Property & property,
+                              const QVariantList & oldValue,
+                              const QVariantList & newValue );
+
     private Q_SLOTS:
         void slotResourceCreated(const QString& res, const QStringList& types);
         void slotResourceRemoved(const QString& res, const QStringList& types);
@@ -256,7 +276,9 @@ namespace Nepomuk {
         void slotResourceTypeRemoved(const QString& res, const QString& type);
         void slotPropertyAdded(const QString& res, const QString& prop, const QDBusVariant& object);
         void slotPropertyRemoved(const QString& res, const QString& prop, const QDBusVariant& object);
-
+        void slotPropertyChanged(const QString& res, const QString& prop,
+                                 const QVariantList & oldObjs,
+                                 const QVariantList & newObjs);
     private:
         class Private;
         Private * d;
