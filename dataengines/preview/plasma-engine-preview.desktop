@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Preview
 Name[cs]=Náhled
+Name[da]=Forhåndsvisning
 Name[es]=Vista previa
 Name[nl]=Voorbeeld
 Name[pl]=Podgląd
@@ -11,6 +12,7 @@ Name[sv]=Förhandsgranskning
 Name[uk]=Перегляд
 Name[x-test]=xxPreviewxx
 Comment=Shows previews for webpages
+Comment[da]=Forhåndsviser websider
 Comment[es]=Muestra vistas previas de páginas web
 Comment[nl]=Toont voorbeelden van webpagina's
 Comment[pl]=Pokazuje podglądy dla stron internetowych

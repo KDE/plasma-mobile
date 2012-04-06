@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Power Button
 Name[cs]=Vypínací tlačítko
+Name[da]=Tænd-/sluk-knap
 Name[es]=Botón de encendido
 Name[nl]=Aan/Uit-knop
 Name[pl]=Przycisk zasilania
@@ -11,6 +12,7 @@ Name[sv]=Strömknapp
 Name[uk]=Кнопка живлення
 Name[x-test]=xxPower Buttonxx
 Comment=Suspends the device
+Comment[da]=Suspenderer enheden
 Comment[es]=Suspende el dispositivo
 Comment[nl]=Apparaat onderbreken
 Comment[pl]=Wstrzymuje urządzenie
@@ -21,6 +23,7 @@ Comment[uk]=Призупиняє роботу пристрою
 Comment[x-test]=xxSuspends the devicexx
 Encoding=UTF-8
 Keywords=Power Management, Battery, System, Energy
+Keywords[da]=Strømstyring, battery, system, energi
 Keywords[es]=Gestión de energía, batería, sistema, energía
 Keywords[nl]=Energiebeheer, accu, systeem, energie
 Keywords[pl]=Zarządzanie energią, baterią, systemem

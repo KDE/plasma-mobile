@@ -1,18 +1,22 @@
 [Desktop Entry]
 Comment=Contour tablet homescreen
+Comment[da]=startskærm for Contour tablet
 Comment[nl]=Omranding van hoofdscherm van tablet
 Comment[pl]=Ekran domowy tabletu Contour
 Comment[pt]=Ecrã inicial para tabletes do Contour
 Comment[pt_BR]=Tela inicial do Contour para tablets
+Comment[sv]=Contour hemskärm för läsplatta
 Comment[uk]=Домашня сторінка планшета Contour
 Comment[x-test]=xxContour tablet homescreenxx
 Encoding=UTF-8
 Keywords=
 Name=Tablet homescreen
+Name[da]=startskærm for tablet
 Name[nl]=Hoofdscherm van tablet
 Name[pl]=Ekran domowy tabletu
 Name[pt]=Ecrã inicial de tabletes
 Name[pt_BR]=Tela inicial para tablets
+Name[sv]=Hemskärm för läsplatta
 Name[uk]=Домашня сторінка планшета
 Name[x-test]=xxTablet homescreenxx
 Type=Service

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=About
 Name[cs]=O aplikaci
+Name[da]=Om
 Name[es]=Acerca de
 Name[nl]=Info over
 Name[pl]=O programie
@@ -11,6 +12,7 @@ Name[sv]=Om
 Name[uk]=Про програму
 Name[x-test]=xxAboutxx
 GenericName=About Plasma Active
+GenericName[da]=Om Plasma Active
 GenericName[es]=Acerca de Plasma Active
 GenericName[nl]=Info over Plasma Active
 GenericName[pl]=O Plazma Active
@@ -20,6 +22,7 @@ GenericName[sv]=Om Plasma Active
 GenericName[uk]=Про Портативну Плазму
 GenericName[x-test]=xxAbout Plasma Activexx
 Comment=Information about Plasma Active
+Comment[da]=Information om Plasma Active
 Comment[es]=Información sobre Plasma Active
 Comment[nl]=Informatie over Plasma Active
 Comment[pl]=Informacje o Plazma Active

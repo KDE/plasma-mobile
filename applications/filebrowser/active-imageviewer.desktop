@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Images
 Name[cs]=Obrázky
+Name[da]=Billeder
 Name[es]=Imágenes
 Name[nl]=Afbeeldingen
 Name[pl]=Obrazy
@@ -12,6 +13,7 @@ Name[uk]=Зображення
 Name[x-test]=xxImagesxx
 GenericName=Image viewer
 GenericName[cs]=Prohlížeč obrázků
+GenericName[da]=Billedfremviser
 GenericName[es]=Visor de imágenes
 GenericName[nl]=Afbeeldingenviewer
 GenericName[pl]=Przeglądarka obrazów
@@ -22,6 +24,7 @@ GenericName[sv]=Bildvisare
 GenericName[uk]=Переглядач зображень
 GenericName[x-test]=xxImage viewerxx
 Comment=An image viewer for touch tablets
+Comment[da]=En billedfremviser til tablet-pc'er med touchskærm
 Comment[es]=Un visor de imágenes para tabletas táctiles
 Comment[nl]=Een afbeeldingenviewer voor aanraaktablets
 Comment[pl]=Przeglądarka obrazów dla tabletów dotykowych

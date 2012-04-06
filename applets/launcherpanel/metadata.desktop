@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Launcher panel
+Name[da]=Panel til programstart
 Name[es]=Panel de lanzamiento
 Name[nl]=Startpaneel
 Name[pl]=Panel uruchamiania
@@ -10,6 +11,7 @@ Name[sv]=Programstartpanel
 Name[uk]=Панель запуску
 Name[x-test]=xxLauncher panelxx
 Comment=Panel with some launcher icons
+Comment[da]=Panel med programgenveje
 Comment[es]=Panel con algunos iconos de lanzamiento
 Comment[nl]=Paneel met pictogrammen om iets te starten
 Comment[pl]=Panel z pewnymi ikonami aktywatorów programów

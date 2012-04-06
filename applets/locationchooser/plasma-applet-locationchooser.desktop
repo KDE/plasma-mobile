@@ -3,6 +3,7 @@ Icon=plasmaapplet-location
 
 Name=Location
 Name[cs]=Umístění
+Name[da]=Sted
 Name[es]=Posición
 Name[nl]=Locatie
 Name[pl]=Położenie
@@ -13,6 +14,7 @@ Name[sv]=Plats
 Name[uk]=Розташування
 Name[x-test]=xxLocationxx
 Comment=Location chooser
+Comment[da]=Stedvælger
 Comment[es]=Selector de posición
 Comment[nl]=Locatiekiezer
 Comment[pl]=Wybieranie położenia

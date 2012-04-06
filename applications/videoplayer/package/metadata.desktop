@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Video Player
 Name[cs]=Přehrávač videa
+Name[da]=Videoafspiller
 Name[es]=Reproductor de vídeo
 Name[nl]=Videospeler
 Name[pl]=Odtwarzacz filmów
@@ -10,10 +11,12 @@ Name[sv]=Videospelare
 Name[uk]=Програвач відеофайлів
 Name[x-test]=xxVideo Playerxx
 Comment=Touchscreen friendly simple video player
+Comment[da]=Simpel touchskærm-venlig videoafspiller
 Comment[nl]=Eenvoudige videospeler vriendelijk voor aanraakschermen
 Comment[pl]=Prosty odtwarzacz filmów przyjazny ekranom dotykowym
 Comment[pt]=Leitor de vídeo simples e amigável por toque
 Comment[pt_BR]=Reprodutor de vídeo simples e amigável por toque
+Comment[sv]=Pekskärmsvänlig enkel videospelare
 Comment[uk]=Проста сенсорна програма для перегляду відео
 Comment[x-test]=xxTouchscreen friendly simple video playerxx
 Encoding=UTF-8

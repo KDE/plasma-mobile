@@ -4,6 +4,7 @@ Encoding=UTF-8
 Icon=network-connect
 Keywords=
 Name=Network connections (connman)
+Name[da]=Netværksforbindelser (connman)
 Name[es]=Conexiones de red (connman)
 Name[nl]=Netwerkverbindingen (connman)
 Name[pl]=Połączenia sieciowe (connman)

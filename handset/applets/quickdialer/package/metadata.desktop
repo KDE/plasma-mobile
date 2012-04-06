@@ -1,10 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Quick Dialer (QML)
+Name[da]=Hurtigopringning (QML)
 Name[nl]=Snelle kiezer (QML)
 Name[pl]=Szybki Dialer (QML)
 Name[pt]=Marcador Rápido (QML)
 Name[pt_BR]=Discador rápido (QML)
+Name[sv]=Snabbuppringning (QML)
 Name[uk]=Швидкий набір (QML)
 Name[x-test]=xxQuick Dialer (QML)xx
 Type=Service

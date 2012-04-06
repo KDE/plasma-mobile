@@ -1,17 +1,21 @@
 [Desktop Entry]
 Name=Touch Browser
+Name[da]=Touchbrowser
 Name[es]=Navegador táctil
 Name[nl]=Aanraakbrowser
 Name[pl]=Przeglądarka dotykowa
 Name[pt]=Navegador por Toque
 Name[pt_BR]=Navegador por toque
+Name[sv]=Pekbläddrare
 Name[uk]=Сенсорний переглядач
 Name[x-test]=xxTouch Browserxx
 Comment=Touchscreen friendly simple web browser
+Comment[da]=Simpel touchskærm-venlig webbrowser
 Comment[nl]=Eenvoudige webbrowser vriendelijk voor aanraken
 Comment[pl]=Prosta przeglądarka internetowa, przyjazna ekranom dotykowym
 Comment[pt]=Navegador Web simples e amigável por toque
 Comment[pt_BR]=Navegador Web simples e amigável por toque
+Comment[sv]=Pekskärmsvänlig enkel webbläsare
 Comment[uk]=Проста сенсорна програма для перегляду інтернету
 Comment[x-test]=xxTouchscreen friendly simple web browserxx
 Encoding=UTF-8

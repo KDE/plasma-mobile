@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Files
+Name[da]=Filer
 Name[es]=Archivos
 Name[nl]=Bestanden
 Name[pl]=Pliki
@@ -11,6 +12,7 @@ Name[uk]=Файли
 Name[x-test]=xxFilesxx
 GenericName=File browser
 GenericName[cs]=Prohlížeč souborů
+GenericName[da]=Filbrowser
 GenericName[es]=Navegador de archivos
 GenericName[nl]=Bestandsbrowser
 GenericName[pl]=Przeglądarka plików
@@ -20,6 +22,7 @@ GenericName[sv]=Filbläddrare
 GenericName[uk]=Керування файлами
 GenericName[x-test]=xxFile browserxx
 Comment=A simple file browser/manager
+Comment[da]=Simpel filbrowser/-håndtering
 Comment[es]=Un sencillo navegador/gestor de archivos
 Comment[nl]=Een eenvoudige bestandsbrowser/beheerder
 Comment[pl]=Prosta przeglądarka/menadżer plików

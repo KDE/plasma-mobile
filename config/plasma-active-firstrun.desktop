@@ -4,6 +4,7 @@ TryExec=/usr/bin/active-firstrun
 Exec=active-firstrun >> /tmp/active-firstrun.log 2>&1 &
 X-DBUS-StartupType=wait
 Name=KRunner
+Name[da]=KRunner
 Name[es]=KRunner
 Name[nl]=KRunner
 Name[pl]=KRunner

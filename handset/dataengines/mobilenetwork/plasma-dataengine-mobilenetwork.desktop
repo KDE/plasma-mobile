@@ -1,18 +1,22 @@
 [Desktop Entry]
 Name=Mobile Network Engine
+Name[da]=Netværksmotor til Mobile
 Name[es]=Motor de red móvil
 Name[nl]=Engine voor mobiele netwerk
 Name[pl]=Silnik sieci dla Mobile
 Name[pt]=Motor de Rede Móvel
 Name[pt_BR]=Mecanismo de rede móvel
+Name[sv]=Mobilt nätverksgränssnitt
 Name[uk]=Рушій мобільних мереж
 Name[x-test]=xxMobile Network Enginexx
 Comment=Mobile network engine
+Comment[da]=Netværksmotor til Mobile
 Comment[es]=Motor de red móvil
 Comment[nl]=Engine voor mobiele netwerk
 Comment[pl]=Silnik sieci dla Mobile
 Comment[pt]=Motor de rede móvel
 Comment[pt_BR]=Mecanismo de rede móvel
+Comment[sv]=Mobilt nätverksgränssnitt
 Comment[uk]=Рушій мобільних мереж
 Comment[x-test]=xxMobile network enginexx
 

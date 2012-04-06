@@ -1,10 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Web Dashboard
+Name[da]=Web-instrumentbræt
 Name[nl]=Web-dashboard
 Name[pl]=Tablica sieciowa
 Name[pt]=Painel da Web
 Name[pt_BR]=Painel da Web
+Name[sv]=Webbinstrumentpanel
 Name[uk]=Інтернет-панель
 Name[x-test]=xxWeb Dashboardxx
 Icon=user-desktop

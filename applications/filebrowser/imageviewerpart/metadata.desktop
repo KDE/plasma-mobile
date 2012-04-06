@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Image Viewer
 Name[cs]=Prohlížeč obrázků
+Name[da]=Billedfremviser
 Name[es]=Visor de imágenes
 Name[nl]=Afbeeldingenviewer
 Name[pl]=Przeglądarka obrazów
@@ -11,6 +12,7 @@ Name[sv]=Bildvisare
 Name[uk]=Переглядач зображень
 Name[x-test]=xxImage Viewerxx
 Comment=Touchscreen friendly simple image viewer
+Comment[da]=Simpel touchskærm-venlig billedfremviser
 Comment[nl]=Eenvoudige afbeeldingenviewer vriendelijk voor aanraakscherm
 Comment[pl]=Prosta przeglądarka obrazów przyjazna ekranom dotykowym
 Comment[pt]=Visualizador de imagens simples e amigável por toque

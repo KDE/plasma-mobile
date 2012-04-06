@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Active Settings
+Name[da]=Indstillinger for Active
 Name[nl]=Instellingen van Active
 Name[pl]=Ustawienia Active
 Name[pt]=Configuração do Active
@@ -8,10 +9,12 @@ Name[sv]=Active inställningar
 Name[uk]=Параметри для сенсорного екрана
 Name[x-test]=xxActive Settingsxx
 Comment=Touchscreen friendly settings UI for Active
+Comment[da]=Touchskærm-venlig konfigurationsbrugerflade til Active
 Comment[nl]=Instellingen voor UI voor Active, vriendelijk voor aanraakscherm
 Comment[pl]=Ustawienia interfejsu użytkownika dla Active przyjazne ekranom dotykowym
 Comment[pt]=Interface de configuração amigável por toque para o Active
 Comment[pt_BR]=Interface de configuração amigável por toque para o Active
+Comment[sv]=Pekskärmsvänliga inställningar av användargränssnitt för Active
 Comment[uk]=Зручні для користування сенсорним пристроєм параметри
 Comment[x-test]=xxTouchscreen friendly settings UI for Activexx
 Encoding=UTF-8

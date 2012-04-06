@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=Active/SettingsModule
 
 Name=Active Settings Module
+Name[da]=Indstillingsmodul til Active
 Name[nl]=Module voor instellingen van Active
 Name[pl]=Moduł ustawień Active
 Name[pt]=Módulo de Configuração do Active
@@ -11,6 +12,7 @@ Name[sv]=Active inställningsmodul
 Name[uk]=Модуль параметрів для портативних пристроїв
 Name[x-test]=xxActive Settings Modulexx
 Comment=Active Settings Module Plugin
+Comment[da]=Plugin til indstillingsmodul til Active
 Comment[nl]=Plug-in voor module voor instellingen van Active
 Comment[pl]=Wtyczka moduł ustawień Active
 Comment[pt]='Plugin' do Módulo de Configuração do Active

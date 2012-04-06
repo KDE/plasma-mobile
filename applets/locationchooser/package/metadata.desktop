@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Location
 Name[cs]=Umístění
+Name[da]=Sted
 Name[es]=Posición
 Name[nl]=Locatie
 Name[pl]=Położenie
@@ -12,6 +13,7 @@ Name[sv]=Plats
 Name[uk]=Розташування
 Name[x-test]=xxLocationxx
 Comment=Applet to tell the system where you are
+Comment[da]=Applet som fortæller systemet hvor du er
 Comment[es]=Miniaplicación para indicarle al sistema dónde está usted
 Comment[nl]=Een applet om het systeem te laten weten waar u bent
 Comment[pl]=Aplet mówiący systemowi gdzie jesteś

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Videos
 Name[cs]=Videa
+Name[da]=Videoer
 Name[es]=Vídeos
 Name[nl]=Video's
 Name[pl]=Filmy
@@ -12,6 +13,7 @@ Name[uk]=Відео
 Name[x-test]=xxVideosxx
 GenericName=Video player
 GenericName[cs]=Video přehrávač
+GenericName[da]=Videoafspiller
 GenericName[es]=Reproductor de vídeo
 GenericName[nl]=Videospeler
 GenericName[pl]=Odtwarzacz filmów
@@ -21,6 +23,7 @@ GenericName[sv]=Videospelare
 GenericName[uk]=Програвач відеофайлів
 GenericName[x-test]=xxVideo playerxx
 Comment=A video player for touch tablets
+Comment[da]=En videoafspiller til tablet-pc'er med touchskærm
 Comment[es]=Un reproductor de vídeo para tabletas táctiles
 Comment[nl]=Een videospeler voor aanraaktablets
 Comment[pl]=Odtwarzacz filmów dla tabletów dotykowych

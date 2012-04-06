@@ -3,6 +3,11 @@ Type=ServiceType
 X-KDE-ServiceType=Active/FileBrowserPart
 
 Comment=Plasma package to load a particular mimetype directly in the file browser
+Comment[da]=Plasma-pakke til at indlæse en bestemt MIME-type direkte i filbrowseren
+Comment[pt]=Pacote do Plasma para carregar um tipo MIME em particular no gestor de ficheiros
+Comment[sv]=Plasma-paket för att läsa in en viss Mime-typ direkt i filbläddraren
+Comment[uk]=Пакунок Плазми для завантаження даних певного типу MIME безпосередньо з вікна програми для перегляду файлів
+Comment[x-test]=xxPlasma package to load a particular mimetype directly in the file browserxx
 
 [PropertyDef::MimeTypes]
 Type=QStringList
