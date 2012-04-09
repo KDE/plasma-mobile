@@ -531,7 +531,12 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 
         //pre-popuplating of the cache to avoid accessing properties directly
         //label is a bit too complex to take from query
-        m_cachedResources[resource][Label] = resource.genericLabel();
+        if (resource.hasType(Nepomuk::Vocabulary::NFO::PaginatedTextDocument())) { // pdf files
+            m_cachedResources[resource][Label] = resource.property(Nepomuk::Vocabulary::NFO::fileName()).toString();
+            //kDebug() << "Using label" << m_cachedResources[resource][Label] << "instead of" << resource.genericLabel();
+        } else {
+            m_cachedResources[resource][Label] = resource.genericLabel();
+        }
 
         QString description = res.requestProperties().value(NAO::description()).toString();
         if (description.isEmpty()) {
