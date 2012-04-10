@@ -174,7 +174,7 @@ PlasmaComponents.Sheet {
             anchors {
                 top: nameRow.bottom
                 left: parent.left
-                bottom: encryptRow.top
+                bottom: encryptRow.visible ? encryptRow.top : parent.bottom
                 right: parent.right
                 topMargin: 6
                 bottomMargin: 12
@@ -184,16 +184,18 @@ PlasmaComponents.Sheet {
         },
         Row {
             id: encryptRow
+            spacing: 8
+            visible: true
             anchors {
                 bottom: parent.bottom
                 horizontalCenter: parent.horizontalCenter
+                bottomMargin: 6
             }
 
             PlasmaComponents.Label {
                 id: encryptLabel
                 color: theme.textColor
                 text: i18n("Lock as private:")
-                anchors.right: encryptedSwitch.left
             }
             PlasmaComponents.Switch {
                 id: encryptedSwitch
