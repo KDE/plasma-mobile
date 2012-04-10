@@ -185,7 +185,7 @@ PlasmaComponents.Sheet {
         Row {
             id: encryptRow
             spacing: 8
-            visible: true
+            visible: false
             anchors {
                 bottom: parent.bottom
                 horizontalCenter: parent.horizontalCenter
