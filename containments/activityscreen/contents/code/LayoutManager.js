@@ -95,7 +95,7 @@ function availableSpace(x, y, width, height)
     if (x < 0 || y < 0) {
         return availableSize;
     } else if (positions[row] == undefined) {
-        availableSize.width = width
+        availableSize.width = width - Math.max(0, (x + width) - resultsFlow.width)
         availableSize.height = height
         return availableSize;
     } else if (!positions[row][column]) {

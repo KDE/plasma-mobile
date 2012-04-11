@@ -262,6 +262,7 @@ Item {
                             LayoutManager.itemGroups[category] = itemGroup
                         }
                         existingCategories[existingCategories.length] = category
+                        layoutTimer.restart()
                     }
                 }
             }
