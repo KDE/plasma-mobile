@@ -20,6 +20,8 @@
 #ifndef LOCATION_MANAGER_P_H
 #define LOCATION_MANAGER_P_H
 
+// #define RUN_LOCATION_TESTS
+
 #include "LocationManager.h"
 
 #include <QHash>
@@ -68,6 +70,10 @@ public:
 
     QString currentLocationId;
     QString currentNetworkName;
+
+#ifdef RUN_LOCATION_TESTS
+    void testRootFinding();
+#endif
 
 private:
     LocationManager * const q;

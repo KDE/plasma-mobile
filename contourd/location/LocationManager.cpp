@@ -44,6 +44,8 @@ LocationManager::LocationManager(QObject * parent)
 
 
     foreach (const QString & id, d->locationNames.keyList()) {
+        if (id.isEmpty()) continue;
+
         const QString & name = d->locationNames.readEntry(id, QString());
         d->knownLocationIds[name] = id;
 
@@ -52,14 +54,14 @@ LocationManager::LocationManager(QObject * parent)
         d->knownLocationInfos[id].networkRoots = d->locationNetworkRoots.readEntry(id, QStringList()).toSet();
     }
 
-    d->knownLocationInfos[QString()] = d->knownLocationInfos["unknown"];
-    d->knownLocationInfos.remove("unknown");
-    d->knownLocationIds.remove(d->knownLocationInfos[QString()].name);
-
     connect(NetworkNotifierLoader::self(), SIGNAL(activeAccessPointChanged(QString,QString)),
             this, SLOT(setActiveAccessPoint(QString,QString)));
 
     NetworkNotifierLoader::self()->init();
+
+#ifdef RUN_LOCATION_TESTS
+    d->testRootFinding();
+#endif
 }
 
 LocationManager::~LocationManager()
@@ -293,7 +295,6 @@ void LocationManager::Private::addNetworkToLocation(const QString & location, co
     // the root/name as unknown location (aka empty)
 
     const QString & root = networkRoot(network);
-    bool nameAlreadyRegistered = false;
     bool rootAlreadyRegistered = false;
 
     QMutableHashIterator <QString, Private::LocationInfo> item(knownLocationInfos);
@@ -311,21 +312,21 @@ void LocationManager::Private::addNetworkToLocation(const QString & location, co
         if (info.networks.contains(network)) {
             info.networks.remove(network);
             locationNetworks.writeEntry(testLocation, info.networks.toList());
-            nameAlreadyRegistered = true;
+            kDebug() << "Name is already registered";
         }
 
         if (info.networkRoots.contains(root)) {
             info.networkRoots.remove(root);
             locationNetworkRoots.writeEntry(testLocation, info.networkRoots.toList());
             rootAlreadyRegistered = true;
+            kDebug() << "Root is already registered";
         }
     }
 
-    if (!nameAlreadyRegistered) {
-        knownLocationInfos[location].networks     << network;
-    }
+    knownLocationInfos[location].networks     << network;
 
     if (!rootAlreadyRegistered) {
+        kDebug() << "Root was not registered";
         knownLocationInfos[location].networkRoots << root;
     }
 
@@ -400,6 +401,29 @@ QString LocationManager::Private::networkRoot(const QString & name)
         return result;
     }
 }
+
+
+#ifdef RUN_LOCATION_TESTS
+void LocationManager::Private::testRootFinding()
+{
+    foreach (const QString & network,
+            QStringList()
+                << "kde"
+                << "kde3"
+                << "kde4.2"
+                << "kde-4.3"
+                << "kde-4b"
+                << "kde-12"
+                << "kdesc-42"
+                << "kdesc-35"
+                << "kdesc"
+    ) {
+        kDebug()
+            << "Network" << network
+            << "root is" << networkRoot(network);
+    }
+}
+#endif
 
 
 } // namespace Contour
