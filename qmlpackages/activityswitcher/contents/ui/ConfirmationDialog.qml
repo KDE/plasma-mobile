@@ -21,12 +21,13 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
-PlasmaCore.FrameSvgItem {
+Item {
     id: confirmationDialog
-    imagePath: "dialogs/background"
     scale: 0
-    width: theme.defaultFont.mSize.width*24
-    height: childrenRect.height+5+margins.top+margins.bottom
+    width: childrenRect.width
+    height: childrenRect.height
+    x: deleteButton.x + deleteButton.width / 2 - deleteButtonParent.confirmationDialog.width * (1 / delegate.scale) / 2
+
     property alias question: confirmationText.text
     signal accepted
     signal dismissed
@@ -37,48 +38,58 @@ PlasmaCore.FrameSvgItem {
             easing.type: Easing.InOutQuad
         }
     }
+    PlasmaCore.FrameSvgItem {
+        id: frame
+        imagePath: "dialogs/background"
+        scale: 1 / delegate.scale
+        transformOrigin: Item.Bottom
+        width: theme.defaultFont.mSize.width*24
+        height: childrenRect.height+5+margins.top+margins.bottom
 
-    Column {
-        spacing: 8
-        anchors {
-            left: parent.left
-            top: parent.top
-            right:parent.right
-            leftMargin: confirmationDialog.margins.left
-            rightMargin: confirmationDialog.margins.right
-            topMargin: confirmationDialog.margins.top
-        }
-        Text {
-            id: confirmationText
-            wrapMode: Text.Wrap
+
+        Column {
+            spacing: 8
             anchors {
                 left: parent.left
-                right: parent.right
+                top: parent.top
+                right:parent.right
+                leftMargin: frame.margins.left
+                rightMargin: frame.margins.right
+                topMargin: frame.margins.top
             }
-        }
-
-        Row {
-            id: buttons
-            spacing: 16
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-            }
-            PlasmaComponents.Button {
-                id: yesButton
-                text: i18n("Yes")
-                width: theme.defaultFont.mSize.width*8
-                onClicked: {
-                    confirmationDialog.accepted()
+            Text {
+                id: confirmationText
+                wrapMode: Text.Wrap
+                anchors {
+                    left: parent.left
+                    right: parent.right
                 }
             }
 
-            PlasmaComponents.Button {
-                id: noButton
-                text: i18n("No")
-                width: theme.defaultFont.mSize.width*8
-                onClicked: {
-                    confirmationDialog.scale = 0
-                    confirmationDialog.dismissed()
+            Row {
+                id: buttons
+                spacing: 16
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+                PlasmaComponents.Button {
+                    id: yesButton
+                    text: i18n("Yes")
+                    width: theme.defaultFont.mSize.width*8
+                    onClicked: {
+                        confirmationDialog.scale = 0
+                        confirmationDialog.accepted()
+                    }
+                }
+
+                PlasmaComponents.Button {
+                    id: noButton
+                    text: i18n("No")
+                    width: theme.defaultFont.mSize.width*8
+                    onClicked: {
+                        confirmationDialog.scale = 0
+                        confirmationDialog.dismissed()
+                    }
                 }
             }
         }
