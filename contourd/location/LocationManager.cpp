@@ -242,6 +242,8 @@ void LocationManager::setActiveAccessPoint(const QString & accessPoint, const QS
     while (item.hasNext()) {
         item.next();
 
+        kDebug() << item.key() << "has roots" << item.value().networkRoots;
+
         if (item.value().networkRoots.contains(accessPointRoot)) {
             setCurrentLocation(item.key());
             return;
@@ -316,8 +318,6 @@ void LocationManager::Private::addNetworkToLocation(const QString & location, co
         }
 
         if (info.networkRoots.contains(root)) {
-            info.networkRoots.remove(root);
-            locationNetworkRoots.writeEntry(testLocation, info.networkRoots.toList());
             rootAlreadyRegistered = true;
             kDebug() << "Root is already registered";
         }
