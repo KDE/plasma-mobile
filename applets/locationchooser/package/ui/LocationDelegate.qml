@@ -50,9 +50,10 @@ PlasmaComponents.ListItem {
         anchors {
             fill: parent
             leftMargin: 8
-            rightMargin: 8
+            rightMargin: 8 + iconClose.width
         }
     }
+
     QML.MouseArea {
         anchors.fill: parent
 
@@ -77,7 +78,10 @@ PlasmaComponents.ListItem {
             }
         }
     }
+
     PlasmaCore.SvgItem {
+        id: iconClose
+
         svg: configIconsSvg
         elementId: "close"
         width: theme.mediumIconSize
