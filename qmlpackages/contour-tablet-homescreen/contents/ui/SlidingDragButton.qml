@@ -115,7 +115,8 @@ import org.kde.qtextracomponents 0.1
         var oldState = systrayPanel.state
         systrayPanel.state = "none"
 
-        if (topSlidingPanel.y > -100) {
+        // if more than half of pick & launch panel is visible then make it totally visible.
+        if ((topSlidingPanel.y > -(systrayPanel.height - topSlidingPanel.windowListArea.height)/2) ) {
             //the biggest one, Launcher
             systrayPanel.state = "Launcher"
         } else if ((oldState == "Hidden" && systrayPanel.height + topSlidingPanel.y > panelDragButton.tasksHeight/2) ||
