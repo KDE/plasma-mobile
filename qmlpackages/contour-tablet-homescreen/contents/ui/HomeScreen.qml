@@ -78,7 +78,7 @@ Item {
     property Item availableScreenRect: Item {
         parent: homeScreen
         anchors.fill: parent
-        anchors.topMargin: 38
+        anchors.topMargin: topEdgePanel.panelHeight
         anchors.bottomMargin: 4
         anchors.leftMargin: 32
         anchors.rightMargin: 32

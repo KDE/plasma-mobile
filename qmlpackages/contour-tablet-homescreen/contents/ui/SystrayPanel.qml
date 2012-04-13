@@ -32,6 +32,7 @@ Image {
     height: Math.max(480+systrayContainer.height+8, homeScreen.height - 50 + background.margins.bottom)
     property bool windowStripVisible: false
     property alias containment: systrayContainer.plasmoid
+    property int panelHeight: systrayContainer.height + background.margins.bottom*2
 
     onStateChanged: {
         if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
@@ -83,7 +84,7 @@ Image {
     }
     SlidingDragButton {
         id: slidingDragButton
-        panelHeight: 32
+        panelHeight: theme.defaultFont.mSize.height * 2
         tasksHeight: homeScreen.height/4.5
         onDraggingChanged: {
             if (dragging) {
@@ -97,7 +98,7 @@ Image {
             id: itemColumn
             anchors {
                 fill: parent
-                bottomMargin: background.margins.bottom - 2
+                bottomMargin: background.margins.bottom
             }
             spacing: 4
 
@@ -175,7 +176,7 @@ Image {
             name: "Hidden"
             PropertyChanges {
                 target: topSlidingPanel
-                y: -topEdgePanel.height + systrayContainer.height + background.margins.bottom + 2
+                y: -topEdgePanel.height + systrayContainer.height + background.margins.bottom*2
                 acceptsFocus: false
             }
         },
@@ -183,7 +184,7 @@ Image {
             name: "Tasks"
             PropertyChanges {
                 target: topSlidingPanel
-                y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom
+                y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom*2
 
                 acceptsFocus: true
             }
