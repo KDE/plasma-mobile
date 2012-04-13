@@ -176,7 +176,7 @@ Image {
             name: "Hidden"
             PropertyChanges {
                 target: topSlidingPanel
-                y: -topEdgePanel.height + systrayContainer.height + background.margins.bottom*2
+                y: -topEdgePanel.height + background.height
                 acceptsFocus: false
             }
         },
@@ -184,7 +184,7 @@ Image {
             name: "Tasks"
             PropertyChanges {
                 target: topSlidingPanel
-                y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom*2
+                y: -topEdgePanel.height + background.height + background.margins.bottom + windowListContainer.height
 
                 acceptsFocus: true
             }
