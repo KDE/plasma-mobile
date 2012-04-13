@@ -143,7 +143,6 @@ PlasmaComponents.Sheet {
                 objectName: "activityNameEdit"
                 Component.onCompleted: activityNameEdit.forceActiveFocus()
                 Keys.onReturnPressed: {
-                    saveConfiguration()
                     accept()
                 }
             }
