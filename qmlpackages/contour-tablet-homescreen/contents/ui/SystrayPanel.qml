@@ -97,7 +97,7 @@ Image {
             id: itemColumn
             anchors {
                 fill: parent
-                bottomMargin: background.margins.bottom
+                bottomMargin: background.margins.bottom - 2
             }
             spacing: 4
 
