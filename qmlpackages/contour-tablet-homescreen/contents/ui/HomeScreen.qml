@@ -74,6 +74,8 @@ Item {
     signal newActivityRequested
     signal focusActivityView
 
+    property bool windowActive: false
+
     //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
     property Item availableScreenRect: Item {
         parent: homeScreen
