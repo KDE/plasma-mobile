@@ -47,7 +47,7 @@ Image {
             right: parent.right
             bottom: parent.bottom
         }
-        height: systrayContainer.height + margins.bottom
+        height: systrayContainer.height + margins.bottom*2
         imagePath: "widgets/panel-background"
         enabledBorders: "BottomBorder"
     }
