@@ -165,6 +165,9 @@ PlasmaApp::PlasmaApp()
     corona();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
 
+    connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)),
+            this, SLOT(activeWindowChanged(WId)));
+
     if (isDesktop) {
         notifyStartup(true);
     }
@@ -449,6 +452,11 @@ void PlasmaApp::focusMainView()
     if (m_mainView) {
         KWindowSystem::forceActiveWindow(m_mainView->winId());
     }
+}
+
+void PlasmaApp::activeWindowChanged(WId id)
+{
+    m_homeScreen->setProperty("windowActive", (id == m_mainView->winId()));
 }
 
 void PlasmaApp::mainViewGeometryChanged()

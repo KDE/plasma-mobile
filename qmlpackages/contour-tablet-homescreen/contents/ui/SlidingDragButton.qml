@@ -53,6 +53,8 @@ import org.kde.qtextracomponents 0.1
         width: homeButtonShown ? height : 0
         height: theme.mediumIconSize
         visible: homeButtonShown
+        enabled: !homeScreen.windowActive
+        opacity: enabled ? 1 : 0.3
         anchors {
             right: parent.right
             bottom: parent.bottom
