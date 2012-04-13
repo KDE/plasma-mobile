@@ -271,10 +271,16 @@ PlasmaComponents.Page {
                     anchors.fill: parent
                     onPressed: startY = mouse.y
                     onPositionChanged: {
-                        print(fileBrowserRoot.model)
                         if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
                             parent.enabled = true
                         }
+                    }
+                    onReleased: {
+                        selectedModel.clear()
+                        selectionRect.x = -1
+                        selectionRect.y = -1
+                        selectionRect.width = 0
+                        selectionRect.height = 0
                     }
                     MobileComponents.IconGrid {
                         id: resultsGrid
