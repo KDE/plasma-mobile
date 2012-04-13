@@ -90,14 +90,14 @@ Image {
             }
         }
 
-        anchors {
-            fill: parent
-            bottomMargin: background.margins.bottom
-        }
+        anchors.fill: parent
 
         Column {
             id: itemColumn
-            anchors.fill: parent
+            anchors {
+                fill: parent
+                bottomMargin: background.margins.bottom
+            }
             spacing: 4
 
             PlasmoidContainer {

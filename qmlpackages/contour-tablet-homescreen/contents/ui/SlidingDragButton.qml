@@ -55,7 +55,8 @@ import org.kde.qtextracomponents 0.1
         visible: homeButtonShown
         anchors {
             right: parent.right
-            bottom:parent.bottom
+            bottom: parent.bottom
+            bottomMargin: background.margins.bottom
         }
         MouseArea {
             anchors.fill: parent
