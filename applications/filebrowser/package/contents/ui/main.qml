@@ -68,7 +68,7 @@ Image {
             return
         }
         if (mainStack.depth == 1) {
-            mainStack.replace(Qt.createComponent("Browser.qml"))
+            mainStack.replace(Qt.createComponent("Intro.qml"))
         } else {
             mainStack.pop()
         }
@@ -122,7 +122,7 @@ Image {
             if (mainStack.depth > 0) {
                 return
             }
-            mainStack.push(Qt.createComponent("Browser.qml"))
+            mainStack.push(Qt.createComponent("Intro.qml"))
         }
     }
     //FIXME: this is due to global vars being binded after the parse is done, do the 2 steps parsing
