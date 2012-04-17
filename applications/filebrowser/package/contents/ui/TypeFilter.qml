@@ -56,7 +56,7 @@ Column {
     }
     Timer {
         id: categoryCheckedTimer
-       // interval: 5000
+        interval: 5000
         running: true
         onTriggered: {
             print("AAA")

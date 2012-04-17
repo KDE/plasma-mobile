@@ -30,6 +30,23 @@ import org.kde.qtextracomponents 0.1
 PlasmaComponents.Page {
     id: introPage
     objectName: "introPage"
+
+    tools: Item {
+        width: parent.width
+        height: childrenRect.height
+
+        MobileComponents.ViewSearch {
+            id: searchBox
+            anchors.centerIn: parent
+
+            onSearchQueryChanged: {
+                metadataModel.extraParameters["nfo:fileName"] = searchBox.searchQuery
+                busy = (searchBox.searchQuery.length > 0)
+                push("")
+            }
+        }
+    }
+
     anchors {
         fill: parent
         topMargin: toolBar.height
@@ -39,6 +56,25 @@ PlasmaComponents.Page {
     {
         var page = mainStack.push(Qt.createComponent("Browser.qml"))
         metadataModel.resourceType = category
+    }
+
+    function iconFor(category)
+    {
+        switch (category) {
+        case "nfo:Bookmark":
+            return "folder-bookmark"
+        case "nfo:Audio":
+            return "folder-sound"
+        case "nco:Contact":
+            return "folder-image-people"
+        case "nfo:Document":
+            return "folder-documents"
+        case "nfo:Image":
+            return "folder-image"
+        case "nfo:Video":
+            return "folder-video"
+            break;
+        }
     }
 
     Image {
@@ -61,8 +97,9 @@ PlasmaComponents.Page {
 
             delegate: MobileComponents.ResourceDelegate {
                 visible: model["label"] != undefined && model["label"] != "nfo:Application"
-                className: model["className"] ? model["className"] : ""
-                genericClassName: (introGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
+                className: "FileDataObject"
+                genericClassName: "FileDataObject"
+                property string decoration: iconFor(model["label"])
 
                 property string label: i18n("%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
 

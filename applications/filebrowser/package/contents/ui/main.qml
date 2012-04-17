@@ -68,7 +68,11 @@ Image {
             return
         }
         if (mainStack.depth == 1) {
-            mainStack.replace(Qt.createComponent("Intro.qml"))
+            if (exclusiveResourceType) {
+                mainStack.replace(Qt.createComponent("Browser.qml"))
+            } else {
+                mainStack.replace(Qt.createComponent("Intro.qml"))
+            }
         } else {
             mainStack.pop()
         }
@@ -116,13 +120,17 @@ Image {
     }
 
     Timer {
-        interval: 1000
+        interval: 500
         running: true
         onTriggered: {
             if (mainStack.depth > 0) {
                 return
             }
-            mainStack.push(Qt.createComponent("Intro.qml"))
+            if (exclusiveResourceType) {
+                mainStack.push(Qt.createComponent("Browser.qml"))
+            } else {
+                mainStack.push(Qt.createComponent("Intro.qml"))
+            }
         }
     }
     //FIXME: this is due to global vars being binded after the parse is done, do the 2 steps parsing
