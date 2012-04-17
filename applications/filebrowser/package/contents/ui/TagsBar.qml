@@ -265,7 +265,6 @@ PlasmaComponents.Page {
             width: theme.defaultFont.mSize.width * 30
             Keys.onEnterPressed: newTagDialog.accept()
             Keys.onReturnPressed: newTagDialog.accept()
-            Component.onCompleted: tagField.forceActiveFocus()
         }
         onAccepted: {
             if (!tagField.text) {
