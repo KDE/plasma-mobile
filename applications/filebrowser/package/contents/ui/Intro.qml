@@ -92,11 +92,12 @@ PlasmaComponents.Page {
                 cloudCategory: "rdf:type"
                 resourceType: "nfo:FileDataObject"
                 minimumRating: metadataModel.minimumRating
-                allowedCategories: userTypes.userTypes
+                allowedCategories: userTypes.userTypes.filter(function(val) {
+                    return val != "nfo:Application";
+                })
             }
 
             delegate: MobileComponents.ResourceDelegate {
-                visible: model["label"] != undefined && model["label"] != "nfo:Application"
                 className: "FileDataObject"
                 genericClassName: "FileDataObject"
                 property string decoration: iconFor(model["label"])
