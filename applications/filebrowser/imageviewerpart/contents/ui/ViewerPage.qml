@@ -215,6 +215,7 @@ PlasmaComponents.Page {
             var path = fileBrowserRoot.model.get(currentIndex).url
             imageArea.delegate.source = path
             viewerPage.path = path
+            resourceInstance.uri = path
         }
     }
 
