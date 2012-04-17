@@ -114,6 +114,7 @@ PlasmaComponents.Page {
             PlasmaComponents.ButtonRow {
                 z: 900
                 y: sidebar.open ? 0 : height
+                exclusive: true
                 Behavior on y {
                     NumberAnimation {
                         duration: 250

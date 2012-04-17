@@ -56,7 +56,6 @@ Column {
     }
     Timer {
         id: categoryCheckedTimer
-        interval: 5000
         running: true
         onTriggered: {
             buttonColumn.exclusive = true
@@ -75,6 +74,7 @@ Column {
             id: categoryRepeater
             model: sortFilterModel
             delegate: PlasmaComponents.RadioButton {
+                id: delegateItem
                 text: i18nc("Resource type, how many entries of this resource", "%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
                 //FIXME: more elegant way to remove applications?
                 visible: model["label"] != undefined && model["label"] != "nfo:Application"
@@ -84,17 +84,6 @@ Column {
                         metadataModel.resourceType = model["label"]
                     }
                 }
-                //FIXME: is there a better way that a timer?
-                /*Timer {
-                    id: categoryCheckedTimer
-                    running: true
-                    onTriggered: {
-                        if (currentType == model["label"] || !currentType) {
-                            checked = true
-                            metadataModel.resourceType = model["label"]
-                        }
-                    }
-                }*/
             }
         }
     }
