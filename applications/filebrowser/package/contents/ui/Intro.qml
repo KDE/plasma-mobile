@@ -60,6 +60,7 @@ PlasmaComponents.Page {
             }
 
             delegate: MobileComponents.ResourceDelegate {
+                visible: model["label"] != undefined && model["label"] != "nfo:Application"
                 className: model["className"] ? model["className"] : ""
                 genericClassName: (introGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
 

@@ -54,18 +54,19 @@ Column {
             rightMargin: theme.defaultFont.mSize.width
         }
     }
-    /*Timer {
+    Timer {
         id: categoryCheckedTimer
+       // interval: 5000
         running: true
         onTriggered: {
             print("AAA")
             buttonColumn.exclusive = true
         }
-    }*/
+    }
     PlasmaComponents.ButtonColumn {
         id: buttonColumn
         spacing: 4
-        exclusive: true
+        exclusive: false
         anchors {
             left: parent.left
             leftMargin: theme.defaultFont.mSize.width
