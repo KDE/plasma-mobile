@@ -59,7 +59,6 @@ Column {
         interval: 5000
         running: true
         onTriggered: {
-            print("AAA")
             buttonColumn.exclusive = true
         }
     }
