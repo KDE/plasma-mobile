@@ -233,6 +233,10 @@ PlasmaComponents.Page {
                 selectionRect.opacity = 0.4
             }
             onPinchUpdated: {
+                //only one point
+                if (pinch.point1.x == pinch.point2.x) {
+                    return
+                }
                 selectionRect.x = Math.min(pinch.point1.x, pinch.point2.x)
                 selectionRect.y = Math.min(pinch.point1.y, pinch.point2.y)
                 selectionRect.width = Math.abs(pinch.point2.x - pinch.point1.x)
