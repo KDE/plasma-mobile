@@ -184,7 +184,15 @@ PlasmaComponents.Page {
         id: selectedModel
         signal modelCleared
     }
-    //For some reason onCountChanged doesn't get binded directly in ListModel
+    Connections {
+        target: metadataModel
+        onModelReset: {
+            selectedModel.clear()
+            selectedModel.modelCleared()
+        }
+    }
+
+    //BUG: For some reason onCountChanged doesn't get binded directly in ListModel
     Connections {
         target: selectedModel
         onCountChanged: {
