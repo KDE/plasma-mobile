@@ -9,6 +9,7 @@ Name[pl]=Moduł ustawień Active
 Name[pt]=Módulo de Configuração do Active
 Name[pt_BR]=Módulo de configurações do Active
 Name[sv]=Active inställningsmodul
+Name[tr]=Active Ayarlar Modülü
 Name[uk]=Модуль параметрів для портативних пристроїв
 Name[x-test]=xxActive Settings Modulexx
 Comment=Active Settings Module Plugin
@@ -18,6 +19,7 @@ Comment[pl]=Wtyczka moduł ustawień Active
 Comment[pt]='Plugin' do Módulo de Configuração do Active
 Comment[pt_BR]=Plugin do módulo de configurações do Active
 Comment[sv]=Insticksmodul för Active inställningar
+Comment[tr]=Active Ayarlar Modülü Eklentisi
 Comment[uk]=Додаток модуля параметрів для портативних пристроїв
 Comment[x-test]=xxActive Settings Module Pluginxx
 

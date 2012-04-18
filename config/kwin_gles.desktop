@@ -8,6 +8,7 @@ Name[pt]=KWin GLES
 Name[pt_BR]=KWin GLES
 Name[sk]=KWin GLES
 Name[sv]=Kwin GLES
+Name[tr]=KWin GLES
 Name[uk]=KWin з GLES
 Name[x-test]=xxKWin GLESxx
 Exec=kwin_gles

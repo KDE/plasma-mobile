@@ -11,6 +11,7 @@ Name[pt]=Localização
 Name[pt_BR]=Localização
 Name[sk]=Umiestnenie
 Name[sv]=Plats
+Name[tr]=Konum
 Name[uk]=Розташування
 Name[x-test]=xxLocationxx
 Comment=Location chooser
@@ -21,6 +22,7 @@ Comment[pl]=Wybieranie położenia
 Comment[pt]=Selector da localização
 Comment[pt_BR]=Seletor de localização
 Comment[sv]=Platsväljare
+Comment[tr]=Konum seçici
 Comment[uk]=Вибір розташування
 Comment[x-test]=xxLocation chooserxx
 
