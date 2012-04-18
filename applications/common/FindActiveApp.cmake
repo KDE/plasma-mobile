@@ -31,7 +31,8 @@ else (ACTIVEAPP_INCLUDE_DIR AND ACTIVEAPP_LIBRARIES)
 
   find_path (ACTIVEAPP_INCLUDE_DIR
     NAMES
-    session.h
+    kdeclarativeview.h
+    kdeclarativemainwindow.h
     PATH_SUFFIXES
     activeapp
     PATHS
