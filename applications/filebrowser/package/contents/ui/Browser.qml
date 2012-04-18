@@ -276,7 +276,7 @@ PlasmaComponents.Page {
                     anchors.fill: parent
                     onPressed: startY = mouse.y
                     onPositionChanged: {
-                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
+                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200 && !contextMenu.visible) {
                             parent.enabled = true
                         }
                     }
@@ -335,6 +335,18 @@ PlasmaComponents.Page {
                                 onPressAndHold: {
                                     resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
                                     resourceInstance.title = model["label"]
+                                    if (highlightFrame.opacity == 1) {
+                                        for (var i = 0; i < selectedModel.count; ++i) {
+                                            if ((model.url && model.url == selectedModel.get(i).url)) {
+                                                opacity = 0
+                                                selectedModel.remove(i)
+                                                return
+                                            }
+                                        }
+                                    } else {
+                                        highlightFrame.opacity = 1
+                                        selectedModel.append({"url": model.url})
+                                    }
                                 }
                                 onClicked: openFile(model["url"], mimeType)
                             }
