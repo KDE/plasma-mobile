@@ -35,4 +35,9 @@ set_target_properties(activeapp PROPERTIES VERSION ${KDE_NON_GENERIC_LIB_VERSION
 
 install(FILES ${activeApp_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/ COMPONENT Devel)
 
+INSTALL(
+    FILES FindActiveApp.cmake
+    DESTINATION ${LIB_INSTALL_DIR}/cmake/ActiveApp
+)
+
 install(TARGETS activeapp EXPORT activeappLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
