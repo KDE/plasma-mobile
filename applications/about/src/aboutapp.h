@@ -24,25 +24,17 @@
 #define ABOUTAPP_H
 
 #include <KMainWindow>
-#include "view.h"
+#include "kdeclarativemainwindow.h"
 //#include <kxmlguiwindow.h>
 
 
-class AboutApp : public KMainWindow
+class AboutApp : public KDeclarativeMainWindow
 {
     Q_OBJECT
 public:
     AboutApp();
     virtual ~AboutApp();
-    QString name();
-    QIcon icon();
-    KConfigGroup config(const QString &group = "Default");
 
-    void setUseGL(const bool on);
-    bool useGL() const;
-
-private:
-    AppView *m_widget;
 };
 
 #endif // ABOUTAPP_H

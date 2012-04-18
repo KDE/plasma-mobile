@@ -26,55 +26,17 @@
 #include <Plasma/Theme>
 
 #include "aboutapp.h"
+#include "kdeclarativeview.h"
 
 AboutApp::AboutApp()
-    : KMainWindow()
+    : KDeclarativeMainWindow()
 {
-    setAcceptDrops(true);
-    addAction(KStandardAction::close(this, SLOT(close()), this));
-    addAction(KStandardAction::quit(this, SLOT(close()), this));
-    m_widget = new AppView(this);
-
-    restoreWindowSize(config("Window"));
-    setCentralWidget(m_widget);
-
-    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
-    const QString themeName = cg.readEntry("name", "air-mobile");
-    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
-    Plasma::Theme::defaultTheme()->setThemeName(themeName);
-
-    connect(m_widget, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
+    declarativeView()->setPackageName("org.kde.active.aboutapp");
 }
 
 AboutApp::~AboutApp()
 {
     saveWindowSize(config("Window"));
-}
-
-KConfigGroup AboutApp::config(const QString &group)
-{
-    return KConfigGroup(KSharedConfig::openConfig("active-aboutapprc"), group);
-}
-
-QString AboutApp::name()
-{
-    return "About Plasma Active";
-    //return m_widget->options()->name;
-}
-
-QIcon AboutApp::icon()
-{
-    return KIcon("active-about");
-}
-
-void AboutApp::setUseGL(const bool on)
-{
-    m_widget->setUseGL(on);
-}
-
-bool AboutApp::useGL() const
-{
-    return m_widget->useGL();
 }
 
 #include "aboutapp.moc"

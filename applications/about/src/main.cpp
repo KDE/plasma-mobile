@@ -62,7 +62,6 @@ int main(int argc, char **argv)
 
 
     AboutApp *mainWindow = new AboutApp();
-    mainWindow->setUseGL(useGL);
     mainWindow->show();
     args->clear();
     return app.exec();
