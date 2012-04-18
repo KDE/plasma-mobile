@@ -182,6 +182,7 @@ PlasmaComponents.Page {
 
     ListModel {
         id: selectedModel
+        signal modelCleared
     }
     //For some reason onCountChanged doesn't get binded directly in ListModel
     Connections {
@@ -281,6 +282,7 @@ PlasmaComponents.Page {
                         }
                     }
                     onReleased: {
+                        selectedModel.modelCleared()
                         selectedModel.clear()
                         selectionRect.x = -1
                         selectionRect.y = -1
@@ -323,6 +325,10 @@ PlasmaComponents.Page {
                                         }
                                     }
                                 }
+                            }
+                            Connections {
+                                target: selectedModel
+                                onModelCleared: highlightFrame.opacity = 0
                             }
                             MobileComponents.ResourceDelegate {
                                 className: model["className"] ? model["className"] : ""
