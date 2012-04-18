@@ -8,7 +8,7 @@ set(active-filebrowser_SRCS
 
 KDE4_ADD_EXECUTABLE(active-filebrowser ${active-filebrowser_SRCS})
 
-find_package(ActiveApp REQUIRED)
+#find_package(ActiveApp REQUIRED)
 
 target_link_libraries(active-filebrowser
     ${QT_QTDECLARATIVE_LIBRARY}
@@ -18,7 +18,7 @@ target_link_libraries(active-filebrowser
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
     kdeclarative
-    ${ACTIVEAPP_LIBRARIES}
+    activeapp
 )
 
 install(TARGETS active-filebrowser ${INSTALL_TARGETS_DEFAULT_ARGS} )
