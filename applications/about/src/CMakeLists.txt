@@ -4,7 +4,6 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../../common )
 set(active-aboutapp_SRCS
     main.cpp
     aboutapp.cpp
-    view.cpp
 )
 
 KDE4_ADD_EXECUTABLE(active-aboutapp ${active-aboutapp_SRCS})

@@ -19,6 +19,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
+#include <QDeclarativeContext>
+#include <QFile>
+
 #include <KAction>
 #include <KIcon>
 #include <KStandardAction>
@@ -32,6 +35,21 @@ AboutApp::AboutApp()
     : KDeclarativeMainWindow()
 {
     declarativeView()->setPackageName("org.kde.active.aboutapp");
+    
+    //FIXME: find a prettier way
+    QString fn;
+    if (QFile::exists("/etc/image-release")) {
+        fn = "/etc/image-release";
+    } else {
+        fn = "/etc/issue";
+    }
+    QFile f(fn);
+    f.open(QIODevice::ReadOnly);
+    const QString osVersion = f.readLine();
+
+    declarativeView()->rootContext()->setContextProperty("runtimeInfoActiveVersion", "2.0");
+    declarativeView()->rootContext()->setContextProperty("runtimeInfoKdeVersion", KDE::versionString());
+    declarativeView()->rootContext()->setContextProperty("runtimeInfoOsVersion", osVersion);
 }
 
 AboutApp::~AboutApp()
