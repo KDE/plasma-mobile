@@ -316,9 +316,9 @@ PlasmaComponents.Page {
 
                                 property bool contains: resourceDelegate.x+resourceDelegate.width > selectionRect.x && resourceDelegate.y+resourceDelegate.height > selectionRect.y && resourceDelegate.x < selectionRect.x+selectionRect.width && resourceDelegate.y < selectionRect.y+selectionRect.height
                                 opacity: 0
-                                Behavior on opacity {
+                                /*Behavior on opacity {
                                     NumberAnimation {duration: 250}
-                                }
+                                }*/
                                 onContainsChanged: {
                                     if (contains) {
                                         selectedModel.append({"url": model.url})
