@@ -24,6 +24,7 @@
 
 #include <QDeclarativeView>
 
+#include "activeapp_export.h"
 
 namespace Plasma
 {
@@ -33,7 +34,7 @@ namespace Plasma
 class QScriptEngine;
 class KDeclarativeViewPrivate;
 
-class KDeclarativeView : public QDeclarativeView
+class ACTIVEAPP_EXPORT KDeclarativeView : public QDeclarativeView
 {
     Q_OBJECT
 

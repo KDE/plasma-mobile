@@ -11,6 +11,7 @@ include_directories(
    )
 
 set (activeApp_HEADERS
+     activeapp_export.h
      kdeclarativemainwindow.h
      #maybe not to be installed
      #kdeclarativeview.h
