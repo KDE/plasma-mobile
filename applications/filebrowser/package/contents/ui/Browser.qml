@@ -352,7 +352,7 @@ PlasmaComponents.Page {
                                     if (highlightFrame.opacity == 1) {
                                         for (var i = 0; i < selectedModel.count; ++i) {
                                             if ((model.url && model.url == selectedModel.get(i).url)) {
-                                                opacity = 0
+                                                highlightFrame.opacity = 0
                                                 selectedModel.remove(i)
                                                 return
                                             }
@@ -363,6 +363,14 @@ PlasmaComponents.Page {
                                     }
                                 }
                                 onClicked: openFile(model["url"], mimeType)
+                            }
+                            Component.onCompleted: {
+                                for (var i = 0; i < selectedModel.count; ++i) {
+                                    if ((model.url && model.url == selectedModel.get(i).url)) {
+                                        highlightFrame.opacity = 1
+                                        return
+                                    }
+                                }
                             }
                         }
                     }
