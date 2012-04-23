@@ -161,11 +161,13 @@ public:
      * it would cause loading every single item of the model,
      * while for big models we want lazy loading.
      * rely on its internal sorting feature instead.
+     * @see sortBy
      */
     Q_INVOKABLE void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 
     /**
      * Compatibility with ListModel
+     * @returns an Object that represents the item with all roles as properties
      */
     Q_INVOKABLE QVariantHash get(int row) const;
 
