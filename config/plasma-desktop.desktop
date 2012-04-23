@@ -15,6 +15,7 @@ Name[sv]=Plasma skrivbordsarbetsyta
 Name[tr]=Plasma Masaüstü Çalışma Alanı
 Name[uk]=Робочий простір стільниці Плазми
 Name[x-test]=xxPlasma Desktop Workspacexx
+Name[zh_CN]=Plasma 桌面工作空间
 Type=Service
 X-KDE-StartupNotify=false
 OnlyShowIn=KDE;

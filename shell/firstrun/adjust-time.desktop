@@ -13,5 +13,6 @@ Name[sv]=Justera datum och tid
 Name[tr]=Tarihi ve saati ayarla
 Name[uk]=Коригування дати і часу
 Name[x-test]=xxAdjust date and timexx
+Name[zh_CN]=调整日期和时间
 Type=Application
 Categories=Qt;KDE;System;Settings;

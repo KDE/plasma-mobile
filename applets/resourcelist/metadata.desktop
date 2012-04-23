@@ -32,6 +32,7 @@ Name[sv]=Resurslista
 Name[tr]=Kaynaklar Listesi
 Name[uk]=Список ресурсів
 Name[x-test]=xxResources Listxx
+Name[zh_CN]=资源列表
 Type=Service
 Icon=nepomuk
 X-KDE-ParentApp=

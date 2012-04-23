@@ -15,6 +15,7 @@ Name[sv]=Kör program
 Name[tr]=KRunner
 Name[uk]=KRunner
 Name[x-test]=xxKRunnerxx
+Name[zh_CN]=KRunner
 Type=Service
 X-KDE-StartupNotify=false
 OnlyShowIn=KDE;

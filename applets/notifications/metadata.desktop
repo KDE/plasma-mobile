@@ -14,6 +14,7 @@ Name[sv]=Underrättelser
 Name[tr]=Bildirimler
 Name[uk]=Сповіщення
 Name[x-test]=xxNotificationsxx
+Name[zh_CN]=通知
 Comment=Notifications
 Comment[cs]=Oznamování
 Comment[da]=Bekendtgørelser
@@ -28,6 +29,7 @@ Comment[sv]=Underrättelser
 Comment[tr]=Bildirimler
 Comment[uk]=Сповіщення
 Comment[x-test]=xxNotificationsxx
+Comment[zh_CN]=通知
 
 Type=Service
 Icon=preferences-desktop-notification

@@ -13,6 +13,7 @@ Name[sv]=Bilder
 Name[tr]=Resimler
 Name[uk]=Зображення
 Name[x-test]=xxImagesxx
+Name[zh_CN]=图像
 GenericName=Image viewer
 GenericName[cs]=Prohlížeč obrázků
 GenericName[da]=Billedfremviser
@@ -27,6 +28,7 @@ GenericName[sv]=Bildvisare
 GenericName[tr]=Resim gösterici
 GenericName[uk]=Переглядач зображень
 GenericName[x-test]=xxImage viewerxx
+GenericName[zh_CN]=图像查看器
 Comment=An image viewer for touch tablets
 Comment[da]=En billedfremviser til tablet-pc'er med touchskærm
 Comment[es]=Un visor de imágenes para tabletas táctiles
@@ -38,6 +40,7 @@ Comment[sv]=En bildvisare för läsplattor
 Comment[tr]=Dokunmatik tabletler için bir resim gösterici
 Comment[uk]=Програма для перегляду зображень на сенсорних планшетах
 Comment[x-test]=xxAn image viewer for touch tabletsxx
+Comment[zh_CN]=触摸屏使用的图像浏览器
 
 Exec=active-filebrowser --resourceType=nfo:Image -graphicssystem raster %u
 Terminal=false

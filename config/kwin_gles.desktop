@@ -11,6 +11,7 @@ Name[sv]=Kwin GLES
 Name[tr]=KWin GLES
 Name[uk]=KWin з GLES
 Name[x-test]=xxKWin GLESxx
+Name[zh_CN]=KWin GLES
 Exec=kwin_gles
 TryExec=kwin_gles
 X-KDE-WindowManagerConfigure=systemsettings
