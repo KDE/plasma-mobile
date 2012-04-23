@@ -63,12 +63,25 @@ MobileComponents.Sheet {
         if (activityNameEdit.text == "" || nameExists()) {
             return
         }
+        //console.log("Creating activity " + activityNameEdit.text)
         configInterface.activityName = activityNameEdit.text
         configInterface.wallpaperIndex = wallpapersList.currentIndex
         configInterface.encrypted = encryptedSwitch.checked
     }
 
+    // Virtual keyboard can emit the accepted signal several times.
+    // For example, try pressing the RETURN key several times as fast as you can when creating one activity.
+    Item {
+        id: privateItem
+        property bool creatingActivity: false
+    }
+
     onAccepted: {
+        if (privateItem.creatingActivity) {
+            //console.log("Already creating activity")
+            return;
+        }
+        privateItem.creatingActivity = true
         saveConfiguration()
     }
 
@@ -217,6 +230,7 @@ MobileComponents.Sheet {
             } else {
                 activityNameEdit.text = configInterface.activityName
             }
+            privateItem.creatingActivity = false
         }
     }
     Timer {
