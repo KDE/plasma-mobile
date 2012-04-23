@@ -34,14 +34,28 @@ namespace Nepomuk {
     class ResourceWatcher;
 }
 
+/**
+ * This model given a query built by assigning its properties such as queryString, resourceType, startDate etc, constructs a timeline that groups pairs of period of time/number of items.
+ * It can group by Year, Month, or Day.
+ *
+ * @author Marco Martin <mart@kde.org>
+ */
 class MetadataTimelineModel : public AbstractMetadataModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(Level level READ level WRITE setLevel NOTIFY levelChanged)
-    Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
     /**
-     * An user-readable description of the results shown, such as "All years", "Year 2011" or "March 2007"
+     * @property Level The level of the categorization, may be Year, Month or Day
+     */
+    Q_PROPERTY(Level level READ level WRITE setLevel NOTIFY levelChanged)
+
+    /**
+     * @property int Total count of resource items: this is not the number of rows of the result, but the aggregate of how many items there are for each separate item.
+     */
+    Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
+
+    /**
+     * @property string An user-readable description of the results shown, such as "All years", "Year 2011" or "March 2007"
      */
     Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
 
@@ -54,6 +68,9 @@ public:
         CountRole = Qt::UserRole + 5
     };
 
+    /**
+     * @enum Level the detail of the categorization: show years, months or days
+     */
     enum Level {
         Year = 0,
         Month,
