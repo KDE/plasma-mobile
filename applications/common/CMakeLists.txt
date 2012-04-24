@@ -36,7 +36,7 @@ install(FILES ${activeApp_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/ COMPONENT
 
 INSTALL(
     FILES FindActiveApp.cmake
-    DESTINATION ${LIB_INSTALL_DIR}/cmake/ActiveApp
+    DESTINATION ${DATA_INSTALL_DIR}/cmake/modules
 )
 
 install(TARGETS activeapp EXPORT activeappLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
