@@ -1,0 +1,11 @@
+[Desktop Entry]
+X-KDE-Solid-Predicate=[ StorageVolume.ignored == false AND StorageVolume.usage == 'FileSystem' ]
+Type=Service
+Actions=open;
+
+[Desktop Action open]
+# %f gives StorageAccess.filePath, %d gives Block.device, %i gives UDI
+Exec=active-filebrowser -graphicssystem raster %f
+Icon=system-file-manager
+Name=Browse files
+

@@ -42,6 +42,7 @@ Comment[x-test]=xxA simple file browser/managerxx
 Comment[zh_CN]=示例文件浏览管理工具
 
 
+X-KDE-Solid-Predicate=[ StorageVolume.ignored == false AND StorageVolume.usage == 'FileSystem' ]
 Exec=active-filebrowser -graphicssystem raster %u
 Terminal=false
 Icon=system-file-manager
