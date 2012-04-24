@@ -145,6 +145,9 @@ Image {
                 //FIXME: use kmimetype from C++ side?
                 if (path.indexOf(".") == -1) {
                     mimeType = "inode/directory"
+                    if (mainStack.depth == 0) {
+                        mainStack.push(Qt.createComponent("Browser.qml"))
+                    }
                 }
                 openFile(path, mimeType)
             }
