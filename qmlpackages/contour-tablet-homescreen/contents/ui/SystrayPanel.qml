@@ -84,7 +84,22 @@ Image {
     }
     SlidingDragButton {
         id: slidingDragButton
-        panelHeight: theme.defaultFont.mSize.height * 2
+        panelHeight: {
+            var height = theme.defaultFont.mSize.height * 1.6
+            if (height < theme.smallIconSize) {
+                theme.smallIconSize
+            } else if (height < theme.smallMediumIconSize) {
+                theme.smallMediumIconSize
+            } else if (height < theme.mediumIconSize) {
+                theme.mediumIconSize
+            } else if (height < theme.largeIconSize) {
+                theme.largeIconSize
+            } else if (height < theme.hugeIconSize) {
+                theme.hugeIconSize
+            } else {
+                theme.enormousIconSize
+            }
+        }
         tasksHeight: homeScreen.height/4.5
         onDraggingChanged: {
             if (dragging) {
@@ -156,7 +171,7 @@ Image {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    rightMargin: slidingDragButton.homeButtonShown ? 32 : 0
+                    rightMargin: slidingDragButton.homeButtonShown ? slidingDragButton.panelHeight : 0
                 }
                 height: slidingDragButton.panelHeight
             }
