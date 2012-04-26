@@ -164,6 +164,11 @@ QVariant ConfigGroup::readEntry(const QString& key)
     return value;
 }
 
+void ConfigGroup::deleteEntry(const QString& key)
+{
+    d->configGroup->deleteEntry(key);
+}
+
 void ConfigGroup::sync()
 {
     if (d->configGroup) {

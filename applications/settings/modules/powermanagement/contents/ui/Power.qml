@@ -57,6 +57,15 @@ Item {
         group: "ScreenSaver"
     }
 
+    ActiveSettings.ConfigGroup {
+        id: batteryConfig
+        file: "powermanagementprofilesrc"
+        group: "Battery"
+        ActiveSettings.ConfigGroup {
+            id: dpmsConfig
+            group: "DPMSControl"
+        }
+    }
 
     Column {
         anchors.centerIn: parent
@@ -68,22 +77,54 @@ Item {
         Row {
             spacing: theme.defaultFont.mSize.width
             PlasmaComponents.Switch {
-                id: screensaverEnabledLock
+                id: screensaverEnabledSwitch
                 onCheckedChanged: screensaverConfig.writeEntry("Enabled", checked ? "true" : "false")
                 Component.onCompleted: checked = screensaverConfig.readEntry("Enabled") == "true"
             }
             PlasmaComponents.Slider {
                 id: screensaverTimeSlider
-                enabled: screensaverEnabledLock.checked
+                enabled: screensaverEnabledSwitch.checked
                 minimumValue: 1
                 maximumValue: 60
-                onValueChanged: {print(value);screensaverConfig.writeEntry("Timeout", Math.round(value)*60)}
+                onValueChanged: screensaverConfig.writeEntry("Timeout", Math.round(value)*60)
                 Component.onCompleted: value = screensaverConfig.readEntry("Timeout")/60
             }
             PlasmaComponents.Label {
-                enabled: screensaverEnabledLock.checked
+                enabled: screensaverEnabledSwitch.checked
                 opacity: enabled ? 1 : 0.6
                 text: i18np("%1 minute", "%1 minutes", screensaverTimeSlider.value)
+            }
+        }
+
+        PlasmaExtras.Heading {
+            text: i18n("Turn off the screen")
+            level: 2
+        }
+        Row {
+            spacing: theme.defaultFont.mSize.width
+            PlasmaComponents.Switch {
+                id: dpmsSwitch
+                onCheckedChanged: {
+                    if (checked) {
+                        dpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60)
+                    } else {
+                        dpmsConfig.deleteEntry("idleTime")
+                    }
+                }
+                Component.onCompleted: checked = dpmsConfig.readEntry("idleTime") > 0
+            }
+            PlasmaComponents.Slider {
+                id: dpmsTimeSlider
+                enabled: dpmsSwitch.checked
+                minimumValue: 1
+                maximumValue: 60
+                onValueChanged: if (dpmsSwitch.checked) dpmsConfig.writeEntry("idleTime", Math.round(value)*60)
+                Component.onCompleted: value = dpmsConfig.readEntry("idleTime")/60
+            }
+            PlasmaComponents.Label {
+                enabled: dpmsTimeSlider.checked
+                opacity: enabled ? 1 : 0.6
+                text: i18np("%1 minute", "%1 minutes", dpmsTimeSlider.value)
             }
         }
     }
