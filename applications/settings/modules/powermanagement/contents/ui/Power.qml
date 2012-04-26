@@ -62,7 +62,27 @@ Item {
         file: "powermanagementprofilesrc"
         group: "Battery"
         ActiveSettings.ConfigGroup {
-            id: dpmsConfig
+            id: batteryDpmsConfig
+            group: "DPMSControl"
+        }
+    }
+
+    ActiveSettings.ConfigGroup {
+        id: acConfig
+        file: "powermanagementprofilesrc"
+        group: "AC"
+        ActiveSettings.ConfigGroup {
+            id: acDpmsConfig
+            group: "DPMSControl"
+        }
+    }
+
+    ActiveSettings.ConfigGroup {
+        id: lowBatteryConfig
+        file: "powermanagementprofilesrc"
+        group: "LowBattery"
+        ActiveSettings.ConfigGroup {
+            id: lowBatteryDpmsConfig
             group: "DPMSControl"
         }
     }
@@ -106,20 +126,30 @@ Item {
                 id: dpmsSwitch
                 onCheckedChanged: {
                     if (checked) {
-                        dpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60)
+                        batteryDpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60)
+                        lowBatteryDpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60)
+                        acDpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60)
                     } else {
-                        dpmsConfig.deleteEntry("idleTime")
+                        batteryDpmsConfig.deleteEntry("idleTime")
+                        lowBatteryDpmsConfig.deleteEntry("idleTime")
+                        acDpmsConfig.deleteEntry("idleTime")
                     }
                 }
-                Component.onCompleted: checked = dpmsConfig.readEntry("idleTime") > 0
+                Component.onCompleted: checked = batteryDpmsConfig.readEntry("idleTime") > 0
             }
             PlasmaComponents.Slider {
                 id: dpmsTimeSlider
                 enabled: dpmsSwitch.checked
                 minimumValue: 1
                 maximumValue: 60
-                onValueChanged: if (dpmsSwitch.checked) dpmsConfig.writeEntry("idleTime", Math.round(value)*60)
-                Component.onCompleted: value = dpmsConfig.readEntry("idleTime")/60
+                onValueChanged: {
+                    if (dpmsSwitch.checked) {
+                        batteryDpmsConfig.writeEntry("idleTime", Math.round(value)*60)
+                        lowBatteryDpmsConfig.writeEntry("idleTime", Math.round(value)*60)
+                        acDpmsConfig.writeEntry("idleTime", Math.round(value)*60)
+                    }
+                }
+                Component.onCompleted: value = batteryDpmsConfig.readEntry("idleTime")/60
             }
             PlasmaComponents.Label {
                 enabled: dpmsTimeSlider.checked
