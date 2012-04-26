@@ -402,11 +402,14 @@ void KDeclarativeWebView::initSettings()
     settings()->setFontFamily(QWebSettings::SansSerifFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::FantasyFont,  KGlobalSettings::generalFont().family());
 
-    settings()->setFontSize(QWebSettings::DefaultFontSize,  KGlobalSettings::generalFont().pointSize());
-    //settings()->setFontSize(QWebSettings::FontSize, KGlobalSettings::generalFont().pointSize());
-    settings()->setFontSize(QWebSettings::DefaultFixedFontSize,  KGlobalSettings::fixedFont().pointSize());
-    settings()->setFontSize(QWebSettings::MinimumFontSize,  KGlobalSettings::smallestReadableFont().pointSize());
-    settings()->setFontSize(QWebSettings::MinimumLogicalFontSize,  KGlobalSettings::smallestReadableFont().pointSize());
+    // WebKit renders the fonts too small, so we add a few points to make them readable
+    const int fontSizeCorrection = 4;
+    settings()->setFontSize(QWebSettings::DefaultFontSize,  KGlobalSettings::generalFont().pointSize()+fontSizeCorrection);
+    //settings()->setFontSize(QWebSettings::FontSize, KGlobalSettings::generalFont().pointSize()+fontSizeCorrection);
+    settings()->setFontSize(QWebSettings::DefaultFixedFontSize,  KGlobalSettings::fixedFont().pointSize()+fontSizeCorrection);
+    settings()->setFontSize(QWebSettings::MinimumFontSize,  KGlobalSettings::smallestReadableFont().pointSize()+fontSizeCorrection);
+    settings()->setFontSize(QWebSettings::MinimumLogicalFontSize,  KGlobalSettings::smallestReadableFont().pointSize()+fontSizeCorrection);
+    //     kDebug() << "Fonts: ===========" << KGlobalSettings::generalFont().pixelSize() << KGlobalSettings::generalFont().pointSize();
 
     // From configuration
     KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
