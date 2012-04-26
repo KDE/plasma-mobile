@@ -58,6 +58,8 @@ bool CapabilitiesEngine::sourceRequestEvent(const QString &name)
         setData(name, "hasSearchButton", hasSearchButton);
         bool hasPowerButton = config.readEntry("hasPowerButton", true);
         setData(name, "hasPowerButton", hasPowerButton);
+        bool hasMultiTouch = config.readEntry("hasMultiTouch", false);
+        setData(name, "hasMultiTouch", hasMultiTouch);
 
     } else if (name == "PowerManagement") {
         setData(name, Plasma::DataEngine::Data());

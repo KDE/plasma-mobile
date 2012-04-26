@@ -114,6 +114,7 @@ PlasmaComponents.Page {
             PlasmaComponents.ButtonRow {
                 z: 900
                 y: sidebar.open ? 0 : height
+                exclusive: true
                 Behavior on y {
                     NumberAnimation {
                         duration: 250
@@ -181,8 +182,17 @@ PlasmaComponents.Page {
 
     ListModel {
         id: selectedModel
+        signal modelCleared
     }
-    //For some reason onCountChanged doesn't get binded directly in ListModel
+    Connections {
+        target: metadataModel
+        onModelReset: {
+            selectedModel.clear()
+            selectedModel.modelCleared()
+        }
+    }
+
+    //BUG: For some reason onCountChanged doesn't get binded directly in ListModel
     Connections {
         target: selectedModel
         onCountChanged: {
@@ -229,16 +239,39 @@ PlasmaComponents.Page {
                 selecting = true
                 selectingX = pinch.point2.x
                 selectingY = pinch.point2.y
+                selectionRect.opacity = 0.4
             }
             onPinchUpdated: {
+                //only one point
+                if (pinch.point1.x == pinch.point2.x) {
+                    return
+                }
+                selectionRect.x = Math.min(pinch.point1.x, pinch.point2.x)
+                selectionRect.y = Math.min(pinch.point1.y, pinch.point2.y)
+                selectionRect.width = Math.abs(pinch.point2.x - pinch.point1.x)
+                selectionRect.height = Math.abs(pinch.point2.y - pinch.point1.y)
                 if (selecting) {
                     print("Selected" + resultsGrid.childAt(pinch.point2.x, pinch.point2.y))
                     selectingX = pinch.point2.x
                     selectingY = pinch.point2.y
                 }
             }
-            onPinchFinished: selecting = false
+            onPinchFinished: {
+                selectionRect.opacity = 0
+                selecting = false
+            }
 
+            Rectangle {
+                id: selectionRect
+                color: theme.highlightColor
+                opacity: 0.4
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            }
             DragArea {
                 id: dragArea
                 anchors.fill: parent
@@ -252,10 +285,17 @@ PlasmaComponents.Page {
                     anchors.fill: parent
                     onPressed: startY = mouse.y
                     onPositionChanged: {
-                        print(fileBrowserRoot.model)
-                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
+                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200 && !contextMenu.visible) {
                             parent.enabled = true
                         }
+                    }
+                    onReleased: {
+                        selectedModel.modelCleared()
+                        selectedModel.clear()
+                        selectionRect.x = -1
+                        selectionRect.y = -1
+                        selectionRect.width = 0
+                        selectionRect.height = 0
                     }
                     MobileComponents.IconGrid {
                         id: resultsGrid
@@ -274,13 +314,16 @@ PlasmaComponents.Page {
                                 prefix: "selected+hover"
                                 anchors.fill: parent
 
-                                property bool contains: (pinchArea.selectingX > resourceDelegate.x && pinchArea.selectingX < resourceDelegate.x + resourceDelegate.width) && (pinchArea.selectingY > resourceDelegate.y && pinchArea.selectingY < resourceDelegate.y + resourceDelegate.height)
+                                property bool contains: resourceDelegate.x+resourceDelegate.width > selectionRect.x && resourceDelegate.y+resourceDelegate.height > selectionRect.y && resourceDelegate.x < selectionRect.x+selectionRect.width && resourceDelegate.y < selectionRect.y+selectionRect.height
                                 opacity: 0
-                                Behavior on opacity {
+                                /*Behavior on opacity {
                                     NumberAnimation {duration: 250}
-                                }
+                                }*/
                                 onContainsChanged: {
                                     if (contains) {
+                                        selectedModel.append({"url": model.url})
+                                        opacity = 1
+                                    } else {
                                         for (var i = 0; i < selectedModel.count; ++i) {
                                             if ((model.url && model.url == selectedModel.get(i).url)) {
                                                 opacity = 0
@@ -288,11 +331,12 @@ PlasmaComponents.Page {
                                                 return
                                             }
                                         }
-
-                                        selectedModel.append({"url": model.url})
-                                        opacity = 1
                                     }
                                 }
+                            }
+                            Connections {
+                                target: selectedModel
+                                onModelCleared: highlightFrame.opacity = 0
                             }
                             MobileComponents.ResourceDelegate {
                                 className: model["className"] ? model["className"] : ""
@@ -305,8 +349,28 @@ PlasmaComponents.Page {
                                 onPressAndHold: {
                                     resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
                                     resourceInstance.title = model["label"]
+                                    if (highlightFrame.opacity == 1) {
+                                        for (var i = 0; i < selectedModel.count; ++i) {
+                                            if ((model.url && model.url == selectedModel.get(i).url)) {
+                                                highlightFrame.opacity = 0
+                                                selectedModel.remove(i)
+                                                return
+                                            }
+                                        }
+                                    } else {
+                                        highlightFrame.opacity = 1
+                                        selectedModel.append({"url": model.url})
+                                    }
                                 }
                                 onClicked: openFile(model["url"], mimeType)
+                            }
+                            Component.onCompleted: {
+                                for (var i = 0; i < selectedModel.count; ++i) {
+                                    if ((model.url && model.url == selectedModel.get(i).url)) {
+                                        highlightFrame.opacity = 1
+                                        return
+                                    }
+                                }
                             }
                         }
                     }

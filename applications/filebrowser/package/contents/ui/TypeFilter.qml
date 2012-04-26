@@ -46,12 +46,6 @@ Column {
         sortOrder: Qt.DescendingOrder
     }
 
-    //FIXME: seems the only way to make the proper item be autoselected at start
-    Timer {
-        running: true
-        onTriggered: categoryRepeater.model = sortFilterModel
-    }
-
     PlasmaExtraComponents.Heading {
         text: i18n("File types")
         anchors {
@@ -60,8 +54,17 @@ Column {
             rightMargin: theme.defaultFont.mSize.width
         }
     }
+    Timer {
+        id: categoryCheckedTimer
+        running: true
+        onTriggered: {
+            buttonColumn.exclusive = true
+        }
+    }
     PlasmaComponents.ButtonColumn {
+        id: buttonColumn
         spacing: 4
+        exclusive: false
         anchors {
             left: parent.left
             leftMargin: theme.defaultFont.mSize.width
@@ -69,25 +72,16 @@ Column {
 
         Repeater {
             id: categoryRepeater
+            model: sortFilterModel
             delegate: PlasmaComponents.RadioButton {
-                text: i18n("%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
+                id: delegateItem
+                text: i18nc("Resource type, how many entries of this resource", "%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
                 //FIXME: more elegant way to remove applications?
                 visible: model["label"] != undefined && model["label"] != "nfo:Application"
+                checked: metadataModel.resourceType == model["label"]
                 onCheckedChanged: {
                     if (checked) {
-                        categoryCheckedTimer.restart()
-                    }
-                }
-                onClicked: currentType = model["label"]
-                //FIXME: is there a better way that a timer?
-                Timer {
-                    id: categoryCheckedTimer
-                    running: true
-                    onTriggered: {
-                        if (currentType == model["label"] || !currentType) {
-                            checked = true
-                            metadataModel.resourceType = model["label"]
-                        }
+                        metadataModel.resourceType = model["label"]
                     }
                 }
             }

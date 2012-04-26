@@ -50,27 +50,84 @@ namespace Nepomuk {
 class QDBusServiceWatcher;
 class QTimer;
 
+/**
+ * This is the base class for the Nepomuk metadata models: all its properties, signals and slots are available in MetadataModel, MetadataCloudModel and MetadataTimelineModel
+ *
+ * The properties of this class will be used to build a query.
+ * The string properties can have a ! as prefix to negate the match.
+ *
+ * @author Marco Martin <mart@kde.org>
+ */
 class AbstractMetadataModel : public QAbstractItemModel
 {
     Q_OBJECT
+
+    /**
+     * @property int the total number of rows in this model
+     */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+
+    /**
+     * @property string restrict results to just this resource type such as nfo:Document
+     */
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
+
+    /**
+     * @property string restrict results to just this mime type, such as image/jpeg
+     */
     Q_PROPERTY(QString mimeType READ mimeType WRITE setMimeType NOTIFY mimeTypeChanged)
+
+    /**
+     * @property string only resources that are related to this activity id. It's the numerical id of the activity that is unique, not the activity name.
+     */
     Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
+
+    /**
+     * @property Array Only resources that have all of those tags.
+     */
     Q_PROPERTY(QVariantList tags READ tags WRITE setTags NOTIFY tagsChanged)
+
     //HACK: should be a qdate, but the qml management of qdates is horrible++
+    /**
+     * @property string Only resources that have a creation date equal or more recent than this date, in the format YYYY-MM-DD
+     */
     Q_PROPERTY(QString startDate READ startDateString WRITE setStartDateString NOTIFY startDateChanged)
+
+    /**
+     * @property string Only resources that have a creation date more recent or equal to this date, in the format YYYY-MM-DD
+     */
     Q_PROPERTY(QString endDate READ endDateString WRITE setEndDateString NOTIFY endDateChanged)
+
+
+    /**
+     * @property int Only resources that have a rating equal or more than this
+     */
     Q_PROPERTY(int minimumRating READ minimumRating WRITE setMinimumRating NOTIFY minimumRatingChanged)
+
+    /**
+     * @property int Only resources that have a rating less or equal than this
+     */
     Q_PROPERTY(int maximumRating READ maximumRating WRITE setMaximumRating NOTIFY maximumRatingChanged)
+
+    /**
+     * @property Object An associative array of extra properties to match: the array key is the property name, such as nie:mimeType and the property value is the value we want to match, such as image/jpeg.
+     * a ! as prefix negates the property, so matches only resources that don't have said property
+     */
     Q_PROPERTY(QObject *extraParameters READ extraParameters CONSTANT)
+
+    /**
+     * @property Status the satus of the query underlying the model, may be idle, waiting or running
+     */
     Q_PROPERTY(Status status READ status NOTIFY statusChanged)
     Q_ENUMS(Status)
 
 public:
-    //Idle: the query client is doing nothing
-    //Waiting: the query client is waiting for the first result
-    //Running: some results came, listing not finished
+    /**
+     * @enum status of the query associated to this model
+     * * Idle: the query client is doing nothing
+     * * Waiting: the query client is waiting for the first result
+     * * Running: some results came, listing not finished
+     */
     enum Status {
         Idle = 0,
         Waiting,

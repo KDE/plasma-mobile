@@ -6,6 +6,7 @@ Name[pl]=Oxygen dla Mobile
 Name[pt]=Oxygen Móvel
 Name[pt_BR]=Oxygen móvel
 Name[sv]=Oxygen för mobiler
+Name[tr]=Cep telefonları için Oxygen
 Name[uk]=«Oxygen» для мобільного
 Name[x-test]=xxOxygen for Mobilexx
 Comment=A breath of fresh air
@@ -16,8 +17,10 @@ Comment[pl]=Trochę świeżego powietrza
 Comment[pt]=Uma brisa de ar fresco
 Comment[pt_BR]=Uma brisa de ar fresco
 Comment[sv]=En frisk fläkt
+Comment[tr]=Temiz havadan bir nefes
 Comment[uk]=Ковток свіжого повітря
 Comment[x-test]=xxA breath of fresh airxx
+Comment[zh_CN]=呼吸清新空气
 
 
 X-KDE-PluginInfo-Author=The Oxygen Project

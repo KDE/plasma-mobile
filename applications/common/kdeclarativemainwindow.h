@@ -25,12 +25,13 @@
 
 #include <KMainWindow>
 
+#include "activeapp_export.h"
 
 class KDeclarativeView;
 
 class KDeclarativeMainWindowPrivate;
 
-class KDeclarativeMainWindow : public KMainWindow
+class ACTIVEAPP_EXPORT KDeclarativeMainWindow : public KMainWindow
 {
     Q_OBJECT
     /**

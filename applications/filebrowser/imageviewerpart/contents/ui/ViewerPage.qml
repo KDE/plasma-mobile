@@ -61,6 +61,7 @@ PlasmaComponents.Page {
             styleColor: theme.backgroundColor
         }
         Row {
+            visible: !deviceCapabilitiesSource.data["Input"]["hasMultiTouch"]
             anchors.right: parent.right
             PlasmaComponents.ToolButton {
                 iconSource: "zoom-in"
@@ -107,6 +108,13 @@ PlasmaComponents.Page {
                 imageArea.delegate.source = path
             }
         }
+    }
+
+    PlasmaCore.DataSource {
+        id: deviceCapabilitiesSource
+        engine: "org.kde.devicecapabilities"
+        interval: 0
+        connectedSources: ["Input"]
     }
 
     Connections {
@@ -207,6 +215,7 @@ PlasmaComponents.Page {
             var path = fileBrowserRoot.model.get(currentIndex).url
             imageArea.delegate.source = path
             viewerPage.path = path
+            resourceInstance.uri = path
         }
     }
 

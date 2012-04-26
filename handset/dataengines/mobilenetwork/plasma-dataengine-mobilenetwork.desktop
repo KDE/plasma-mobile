@@ -7,6 +7,7 @@ Name[pl]=Silnik sieci dla Mobile
 Name[pt]=Motor de Rede Móvel
 Name[pt_BR]=Mecanismo de rede móvel
 Name[sv]=Mobilt nätverksgränssnitt
+Name[tr]=Cep Telefonu Ağ Motoru
 Name[uk]=Рушій мобільних мереж
 Name[x-test]=xxMobile Network Enginexx
 Comment=Mobile network engine
@@ -17,6 +18,7 @@ Comment[pl]=Silnik sieci dla Mobile
 Comment[pt]=Motor de rede móvel
 Comment[pt_BR]=Mecanismo de rede móvel
 Comment[sv]=Mobilt nätverksgränssnitt
+Comment[tr]=Cep telefonu ağ motoru
 Comment[uk]=Рушій мобільних мереж
 Comment[x-test]=xxMobile network enginexx
 

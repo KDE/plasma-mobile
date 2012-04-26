@@ -31,14 +31,34 @@ namespace Plasma
 
 class QTimer;
 
+/**
+ * This model provides bindings to use KRunner from QML
+ *
+ * @author Aaron Seigo <aseigo@kde.org>
+ */
 class RunnerModel : public QAbstractListModel
 {
     Q_OBJECT
+
+    /**
+     * @property string set the KRunner query
+     */
     Q_PROPERTY(QString query WRITE scheduleQuery READ currentQuery NOTIFY queryChanged)
+
+    /**
+     * @property Array The list of all allowed runner plugins that will be executed
+     */
     Q_PROPERTY(QStringList runners WRITE setRunners READ runners NOTIFY runnersChanged)
+
+    /**
+     * @property int The number of rows of the model
+     */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
+    /**
+     * @enum Roles of the model, they will be accessible from delegates
+     */
     enum Roles {
         Type = Qt::UserRole + 1,
         Relevance,

@@ -96,9 +96,7 @@ Item {
             onPressAndHold: {
                 delegateItem.pressAndHold(mouse)
                 if (resourceInstance && contextMenu) {
-                    contextMenu.parentItem = delegateItem
-                    contextMenu.adjustPosition();
-                    contextMenu.visible = true
+                    contextMenu.open(delegateItem)
                 }
             }
         }
