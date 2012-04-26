@@ -8,4 +8,8 @@ Actions=open;
 Exec=active-filebrowser -graphicssystem raster %f
 Icon=system-file-manager
 Name=Browse files
+Name[nl]=Door bestanden bladeren
+Name[pt]=Navegar pelos ficheiros
+Name[uk]=Перегляд файлів
+Name[x-test]=xxBrowse filesxx
 
