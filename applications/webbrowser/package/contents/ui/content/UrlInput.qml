@@ -64,6 +64,7 @@ Item {
     PlasmaComponents.TextField {
         id: urlText
         clearButtonShown: true
+        z: 2
         //horizontalAlignment: TextEdit.AlignLeft
         //font.pixelSize: 14;
 

@@ -82,7 +82,7 @@ Item {
         PlasmaComponents.Slider {
             id: fontSizeSlider
             minimumValue: -4
-            maximumValue: 4
+            maximumValue: 6
             stepSize: 1
             anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
             anchors.right: saveStartPage.left

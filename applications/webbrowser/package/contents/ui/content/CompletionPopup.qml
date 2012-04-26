@@ -27,7 +27,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
 import org.kde.qtextracomponents 0.1
 
-Item {
+FocusScope {
     id: mainItem
     objectName: "completionPopup"
 
@@ -39,6 +39,16 @@ Item {
 
     PlasmaCore.Theme {
         id: theme
+    }
+
+    MouseArea {
+        anchors.fill: webView
+        //z: 10
+        x: -1000
+        y: -1000
+        width: 3000
+        height: 3000
+        onClicked: mainItem.state = "collapsed"
     }
 
     PlasmaCore.FrameSvgItem {
