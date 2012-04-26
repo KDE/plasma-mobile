@@ -394,6 +394,14 @@ void KDeclarativeWebView::init()
 
 void KDeclarativeWebView::initSettings()
 {
+    // From configuration
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+    ptr->reparseConfiguration();
+    KConfigGroup cg(ptr, "webbrowser");
+
+    // WebKit renders the fonts too small, so we add a few points to make them readable
+    const int fontSizeCorrection = cg.readEntry("fontSizeCorrection", 0) + 4;
+//     kDebug() << "Font size correction is: " << fontSizeCorrection;
     //kDebug() << "Settings up fonts and reading settings: " << KGlobalSettings::generalFont().family() << KGlobalSettings::generalFont().pointSize();
     settings()->setFontFamily(QWebSettings::StandardFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::SerifFont,  KGlobalSettings::generalFont().family());
@@ -402,8 +410,7 @@ void KDeclarativeWebView::initSettings()
     settings()->setFontFamily(QWebSettings::SansSerifFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::FantasyFont,  KGlobalSettings::generalFont().family());
 
-    // WebKit renders the fonts too small, so we add a few points to make them readable
-    const int fontSizeCorrection = 4;
+    //const int fontSizeCorrection = 4;
     settings()->setFontSize(QWebSettings::DefaultFontSize,  KGlobalSettings::generalFont().pointSize()+fontSizeCorrection);
     //settings()->setFontSize(QWebSettings::FontSize, KGlobalSettings::generalFont().pointSize()+fontSizeCorrection);
     settings()->setFontSize(QWebSettings::DefaultFixedFontSize,  KGlobalSettings::fixedFont().pointSize()+fontSizeCorrection);
@@ -411,10 +418,6 @@ void KDeclarativeWebView::initSettings()
     settings()->setFontSize(QWebSettings::MinimumLogicalFontSize,  KGlobalSettings::smallestReadableFont().pointSize()+fontSizeCorrection);
     //     kDebug() << "Fonts: ===========" << KGlobalSettings::generalFont().pixelSize() << KGlobalSettings::generalFont().pointSize();
 
-    // From configuration
-    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
-    ptr->reparseConfiguration();
-    KConfigGroup cg(ptr, "webbrowser");
     bool pluginsEnabled = cg.readEntry("pluginsEnabled", false);
     //kDebug() << " C++ Plugins on? " << pluginsEnabled;
 

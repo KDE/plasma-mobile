@@ -71,8 +71,32 @@ Item {
 
 
     Item {
-        id: startPageItem
+        id: fontSizeItem
         anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: 32; }
+
+        PlasmaComponents.Label {
+            anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
+            text: i18n("Text size:")
+        }
+
+        PlasmaComponents.Slider {
+            id: fontSizeSlider
+            minimumValue: -4
+            maximumValue: 4
+            stepSize: 1
+            anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
+            anchors.right: saveStartPage.left
+            //Keys.onReturnPressed: browserConfig.writeEntry("startPage", startPageText.text);
+            Component.onCompleted: value = browserConfig.readEntry("fontSizeCorrection");
+            onValueChanged: {
+                browserConfig.writeEntry("fontSizeCorrection", fontSizeSlider.value);
+            }
+        }
+    }
+
+    Item {
+        id: startPageItem
+        anchors { top: fontSizeItem.bottom; left: parent.left; right: parent.right; topMargin: 48; }
 
         PlasmaComponents.Label {
             anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }

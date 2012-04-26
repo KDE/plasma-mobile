@@ -51,6 +51,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
+            onClicked: event.accept = true;
         }
 
         Component {
@@ -109,6 +110,7 @@ Item {
                         //print("URL from completer chosen: " + name + " " + url);
                         urlEntered(url);
                         mainItem.state = "collapsed";
+                        clipBoardHelper.closeSoftwareInputPanel();
                     }
                 }
 
