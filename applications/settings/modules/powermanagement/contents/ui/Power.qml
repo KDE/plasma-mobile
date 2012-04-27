@@ -87,9 +87,45 @@ Item {
         }
     }
 
+    property QtObject pmSource: PlasmaCore.DataSource {
+        id: pmSource
+        engine: "powermanagement"
+        connectedSources: ["PowerDevil"]
+    }
+
     Column {
         anchors.centerIn: parent
         spacing: theme.defaultFont.mSize.height
+
+        /**TODO: this needs the QML battery plasmoid branch merged in workspace
+        PlasmaExtras.Heading {
+            text: i18n("Brightness")
+            level: 2
+        }
+        Row {
+            spacing: theme.defaultFont.mSize.width
+            PlasmaComponents.Label {
+                width: screensaverEnabledSwitch.width
+                text: i18n("0%")
+            }
+            property int brightness: pmSource.data["PowerDevil"]["Screen Brightness"]
+            onBrightnessChanged: brightnessSlider.value = brightness
+            
+            PlasmaComponents.Slider {
+                id: brightnessSlider
+                onValueChanged: {
+                    var service = pmSource.serviceForSource("PowerDevil");
+                    var operation = service.operationDescription("setBrightness");
+                    operation.brightness = value;
+                    service.startOperationCall(operation);
+                }
+            }
+            PlasmaComponents.Label {
+                text: i18n("100%")
+            }
+        }
+        */
+
         PlasmaExtras.Heading {
             text: i18n("Lock screen")
             level: 2
