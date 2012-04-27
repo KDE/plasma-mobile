@@ -44,6 +44,7 @@ Item {
     property string filteredUrl: ""
     property alias image: bg.source
     property alias url: urlText.text
+    //property alias urlFocus: urlText.activeFocus
     //property alias completionPopup: webBrowser.completionPopup
     property string urlFilter
 
@@ -108,7 +109,7 @@ Item {
             if (activeFocus) {
                 completionPopup.state = "expanded"
             } else {
-                completionPopup.state = "collapsed"
+                //completionPopup.state = "collapsed"
             }
         }
 

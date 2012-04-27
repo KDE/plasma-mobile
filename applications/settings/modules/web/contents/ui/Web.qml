@@ -77,11 +77,12 @@ Item {
         PlasmaComponents.Label {
             anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
             text: i18n("Text size:")
+            font.pointSize: theme.defaultFont.pointSize + fontSizeSlider.value
         }
 
         PlasmaComponents.Slider {
             id: fontSizeSlider
-            minimumValue: -4
+            minimumValue: -6
             maximumValue: 6
             stepSize: 1
             anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
@@ -89,7 +90,10 @@ Item {
             //Keys.onReturnPressed: browserConfig.writeEntry("startPage", startPageText.text);
             Component.onCompleted: value = browserConfig.readEntry("fontSizeCorrection");
             onValueChanged: {
+                var s = theme.defaultFont.pointSize + fontSizeSlider.value;
+                print(" new font size: " + s);
                 browserConfig.writeEntry("fontSizeCorrection", fontSizeSlider.value);
+                //font.pointSize = theme.defaultFont.pointSize() + fontSizeSlider.value;
             }
         }
     }

@@ -94,7 +94,7 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
     // Enable all plugins but the html thumbnailer, this ones covered by
     // the new web creator which also supports remote URLs
     QStringList _en = KIO::PreviewJob::availablePlugins();
-    _en.removeAll("htmlthumbnail");
+    //_en.removeAll("htmlthumbnail");
     QStringList *enabledPlugins = new QStringList(_en);
     m_job = new KIO::PreviewJob(list, m_previewSize, enabledPlugins);
 

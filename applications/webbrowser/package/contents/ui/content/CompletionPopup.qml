@@ -48,7 +48,10 @@ FocusScope {
         y: -1000
         width: 3000
         height: 3000
-        onClicked: mainItem.state = "collapsed"
+        onClicked: {
+            mainItem.state = "collapsed";
+            clipBoardHelper.forceActiveFocus();
+        }
     }
 
     PlasmaCore.FrameSvgItem {
@@ -57,12 +60,6 @@ FocusScope {
 
         anchors.fill: parent
         imagePath: "dialogs/background"
-
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-            onClicked: event.accept = true;
-        }
 
         Component {
             id: myDelegate
