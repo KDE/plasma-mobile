@@ -10,6 +10,8 @@ Icon=system-file-manager
 Name=Browse files
 Name[nl]=Door bestanden bladeren
 Name[pt]=Navegar pelos ficheiros
+Name[pt_BR]=Navegar pelos arquivos
+Name[sv]=Bläddra bland filer
 Name[uk]=Перегляд файлів
 Name[x-test]=xxBrowse filesxx
 
