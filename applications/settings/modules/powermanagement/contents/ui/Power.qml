@@ -154,7 +154,11 @@ Item {
                 enabled: screensaverEnabledSwitch.checked
                 minimumValue: 1
                 maximumValue: 60
-                onValueChanged: screensaverConfig.writeEntry("Timeout", Math.round(value)*60)
+                onValueChanged: {
+                    if (screensaverEnabledSwitch.checked) {
+                        screensaverConfig.writeEntry("Timeout", Math.round(value)*60)
+                    }
+                }
                 Component.onCompleted: value = screensaverConfig.readEntry("Timeout")/60
             }
             PlasmaComponents.Label {
