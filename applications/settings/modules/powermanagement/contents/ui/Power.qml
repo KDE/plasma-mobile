@@ -65,6 +65,10 @@ Item {
             id: batteryDpmsConfig
             group: "DPMSControl"
         }
+        ActiveSettings.ConfigGroup {
+            id: batterySuspendConfig
+            group: "SuspendSession"
+        }
     }
 
     ActiveSettings.ConfigGroup {
@@ -75,6 +79,10 @@ Item {
             id: acDpmsConfig
             group: "DPMSControl"
         }
+        ActiveSettings.ConfigGroup {
+            id: acSuspendConfig
+            group: "SuspendSession"
+        }
     }
 
     ActiveSettings.ConfigGroup {
@@ -84,6 +92,10 @@ Item {
         ActiveSettings.ConfigGroup {
             id: lowBatteryDpmsConfig
             group: "DPMSControl"
+        }
+        ActiveSettings.ConfigGroup {
+            id: lowBatterySuspendConfig
+            group: "SuspendSession"
         }
     }
 
@@ -191,6 +203,49 @@ Item {
                 enabled: dpmsTimeSlider.checked
                 opacity: enabled ? 1 : 0.6
                 text: i18np("%1 minute", "%1 minutes", dpmsTimeSlider.value)
+            }
+        }
+
+
+        PlasmaExtras.Heading {
+            text: i18n("Sleep")
+            level: 2
+        }
+        Row {
+            spacing: theme.defaultFont.mSize.width
+            PlasmaComponents.Switch {
+                id: suspendSwitch
+                onCheckedChanged: {
+                    if (checked) {
+                        batterySuspendConfig.writeEntry("idleTime", Math.round(suspendTimeSlider.value)*60)
+                        lowBatterySuspendConfig.writeEntry("idleTime", Math.round(suspendTimeSlider.value)*60)
+                        acSuspendConfig.writeEntry("idleTime", Math.round(suspendTimeSlider.value)*60)
+                    } else {
+                        batterySuspendConfig.deleteEntry("idleTime")
+                        lowBatterySuspendConfig.deleteEntry("idleTime")
+                        acSuspendConfig.deleteEntry("idleTime")
+                    }
+                }
+                Component.onCompleted: checked = batterySuspendConfig.readEntry("idleTime") > 0
+            }
+            PlasmaComponents.Slider {
+                id: suspendTimeSlider
+                enabled: suspendSwitch.checked
+                minimumValue: 1
+                maximumValue: 60
+                onValueChanged: {
+                    if (suspendSwitch.checked) {
+                        batterySuspendConfig.writeEntry("idleTime", Math.round(value)*60)
+                        lowBatterySuspendConfig.writeEntry("idleTime", Math.round(value)*60)
+                        acSuspendConfig.writeEntry("idleTime", Math.round(value)*60)
+                    }
+                }
+                Component.onCompleted: value = batterySuspendConfig.readEntry("idleTime")/60
+            }
+            PlasmaComponents.Label {
+                enabled: suspendTimeSlider.checked
+                opacity: enabled ? 1 : 0.6
+                text: i18np("%1 minute", "%1 minutes", suspendTimeSlider.value)
             }
         }
     }
