@@ -77,7 +77,35 @@ Item {
         PlasmaComponents.Label {
             anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
             text: i18n("Text size:")
-            font.pointSize: theme.defaultFont.pointSize + fontSizeSlider.value
+        }
+
+        PlasmaCore.FrameSvgItem {
+            id: fontPreviewFrame
+            height: 56
+            opacity: 0
+            anchors { bottom: fontSizeSlider.top; left: fontSizeSlider.left; right: fontSizeSlider.right; }
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            imagePath: "dialogs/background"
+            PlasmaComponents.Label {
+                anchors { fill: parent; leftMargin: 12; rightMargin: 12; }
+                id: fontPreviewLabel
+                text: i18n("Example text...");
+                font.pointSize: theme.defaultFont.pointSize + fontSizeSlider.value
+            }
+        }
+
+        Timer {
+            id: fontPreviewTimer
+            interval: 2000
+            running: false
+            repeat: false
+            onTriggered: fontPreviewFrame.opacity = 0
+
         }
 
         PlasmaComponents.Slider {
@@ -86,14 +114,19 @@ Item {
             maximumValue: 6
             stepSize: 1
             anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
-            anchors.right: saveStartPage.left
-            //Keys.onReturnPressed: browserConfig.writeEntry("startPage", startPageText.text);
             Component.onCompleted: value = browserConfig.readEntry("fontSizeCorrection");
             onValueChanged: {
                 var s = theme.defaultFont.pointSize + fontSizeSlider.value;
-                print(" new font size: " + s);
                 browserConfig.writeEntry("fontSizeCorrection", fontSizeSlider.value);
-                //font.pointSize = theme.defaultFont.pointSize() + fontSizeSlider.value;
+                fontPreviewTimer.restart();
+            }
+            onPressedChanged: {
+                if (!pressed) {
+                    fontPreviewTimer.running = true;
+                } else {
+                    fontPreviewFrame.opacity = 1;
+                }
+                fontPreviewTimer.restart();
             }
         }
     }
