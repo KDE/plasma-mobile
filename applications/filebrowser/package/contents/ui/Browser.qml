@@ -96,7 +96,8 @@ PlasmaComponents.Page {
             anchors.centerIn: parent
 
             onSearchQueryChanged: {
-                metadataModel.extraParameters["nfo:fileName"] = searchBox.searchQuery
+                // the "*" are needed for substring match.
+                metadataModel.extraParameters["nfo:fileName"] = "*" + searchBox.searchQuery + "*"
                 busy = (searchBox.searchQuery.length > 0)
             }
         }
