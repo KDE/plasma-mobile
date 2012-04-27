@@ -108,7 +108,7 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
     KSharedConfig::Ptr config = KSharedConfig::openConfig("adblock", KConfig::SimpleConfig, "appdata");
     KConfigGroup rulesGroup(config, "rules");
     QStringList rules;
-    rules = rulesGroup.readEntry("local-rules" , QStringList());
+    rules = rulesGroup.readEntry(defaultTitles().at(_index)+"-rules" , QStringList());
     loadRules(rules);
 
     // Checking whether to update the adblock filters, and doin' it
