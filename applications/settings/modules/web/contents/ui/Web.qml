@@ -136,7 +136,6 @@ Item {
                     }
                 }
                 if (!pressed || (pressed && fontPreviewTimer.running)) {
-                    print("restarting timer.");
                     fontPreviewTimer.restart();
                 }
             }

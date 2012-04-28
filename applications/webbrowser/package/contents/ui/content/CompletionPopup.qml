@@ -42,8 +42,6 @@ FocusScope {
     }
 
     MouseArea {
-        anchors.fill: webView
-        //z: 10
         x: -1000
         y: -1000
         width: 3000

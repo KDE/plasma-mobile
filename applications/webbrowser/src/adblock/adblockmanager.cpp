@@ -95,7 +95,7 @@ void AdBlockManager::loadSettings(bool checkUpdateDate)
     ptr->reparseConfiguration();
     _config = KConfigGroup(ptr, "adblock");
     _isAdblockEnabled = _config.readEntry("adBlockEnabled", true);
-    kDebug() << "Adblock is now " << _isAdblockEnabled;
+    //kDebug() << "Adblock is now " << _isAdblockEnabled;
 
     // no need to load filters if adblock is not enabled :)
     if (!_isAdblockEnabled)
@@ -182,12 +182,14 @@ void AdBlockManager::loadRules(const QStringList &rules)
 
 QNetworkReply *AdBlockManager::block(const QNetworkRequest &request, QWebPage *page)
 {
-    if (!_isAdblockEnabled)
+    if (!_isAdblockEnabled) {
         return 0;
+    }
 
     // we (ad)block just http traffic
-    if (request.url().scheme() != QL1S("http"))
+    if (request.url().scheme() != QL1S("http")) {
         return 0;
+    }
 
     QString urlString = request.url().toString();
     // We compute a lowercase version of the URL so each rule does not
