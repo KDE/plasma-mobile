@@ -61,6 +61,10 @@ FocusScope {
         anchors.fill: parent
         imagePath: "dialogs/background"
 
+        MouseArea {
+            anchors.fill: parent
+        }
+
         Component {
             id: myDelegate
             Item {
@@ -162,7 +166,6 @@ FocusScope {
                     svg = configSvg;
                     elementId = "configure";
                 }
-                settingsItem.clip = false;
             }
         }
 

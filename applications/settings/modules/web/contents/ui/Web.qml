@@ -129,6 +129,11 @@ Item {
                 } else {
                     fontPreviewFrame.opacity = 1;
                     fontPreviewTimer.running = false;
+                    if (settingsItem) { 
+                        // when running in the webbrowser, we want to prevent clipping
+                        // of the pagestack, but only as long as the preview is shown.
+                        settingsItem.clip = false;
+                    }
                 }
                 if (!pressed || (pressed && fontPreviewTimer.running)) {
                     print("restarting timer.");
