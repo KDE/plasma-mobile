@@ -97,7 +97,7 @@ Item {
                 z: 100
                 anchors { centerIn: parent; leftMargin: 12; rightMargin: 12; }
                 id: fontPreviewLabel
-                text: i18n("Ceci n'est pas une exemple.");
+                text: i18n("Ceci n'est pas un exemple.");
                 font.pointSize: theme.defaultFont.pointSize + fontSizeSlider.value
             }
         }
