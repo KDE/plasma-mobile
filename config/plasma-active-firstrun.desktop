@@ -16,6 +16,7 @@ Name[tr]=KRunner
 Name[uk]=KRunner
 Name[x-test]=xxKRunnerxx
 Name[zh_CN]=KRunner
+Name[zh_TW]=KRunner
 Type=Service
 X-KDE-StartupNotify=false
 OnlyShowIn=KDE;

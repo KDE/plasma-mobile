@@ -11,6 +11,7 @@ Name[tr]=Tarih ve Saat Denetim Modülü
 Name[uk]=Модуль керування датою і часом
 Name[x-test]=xxDate and Time Control Modulexx
 Name[zh_CN]=日期和时间控制模块
+Name[zh_TW]=日期與時間控制模組
 Icon=preferences-system-time
 
 [org.kde.active.clockconfig.save]
@@ -26,6 +27,7 @@ Name[tr]=Tarih ve saat ayarlarını kaydet
 Name[uk]=Зберегти параметри дати/часу
 Name[x-test]=xxSave the date/time settingsxx
 Name[zh_CN]=保存日期和时间设置
+Name[zh_TW]=儲存日期和時間設定值
 Description=System policies prevent you from saving the date/time settings.
 Description[cs]=Nastavení systému vám znemožňuje uložit datum/čas.
 Description[da]=Systempolitikker forhindrer dig i at gemme dato- og tidsindstillinger.
@@ -38,4 +40,5 @@ Description[tr]=Sistem politikaları tarih saat ayarlarını kaydetmenizi engell
 Description[uk]=Відповідно до загальносистемних правил, ви не можете зберігати параметри дати/часу.
 Description[x-test]=xxSystem policies prevent you from saving the date/time settings.xx
 Description[zh_CN]=系统安全策略不允许您保存日期/时间设置。
+Description[zh_TW]=系統政策不允許您儲存日期與時間的設定
 Policy=yes

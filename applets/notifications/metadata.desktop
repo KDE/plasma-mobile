@@ -15,6 +15,7 @@ Name[tr]=Bildirimler
 Name[uk]=Сповіщення
 Name[x-test]=xxNotificationsxx
 Name[zh_CN]=通知
+Name[zh_TW]=通知
 Comment=Notifications
 Comment[cs]=Oznamování
 Comment[da]=Bekendtgørelser
@@ -30,6 +31,7 @@ Comment[tr]=Bildirimler
 Comment[uk]=Сповіщення
 Comment[x-test]=xxNotificationsxx
 Comment[zh_CN]=通知
+Comment[zh_TW]=通知
 
 Type=Service
 Icon=preferences-desktop-notification

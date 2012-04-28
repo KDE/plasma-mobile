@@ -14,6 +14,7 @@ Name[tr]=Konum
 Name[uk]=Розташування
 Name[x-test]=xxLocationxx
 Name[zh_CN]=位置
+Name[zh_TW]=位置
 Comment=Applet to tell the system where you are
 Comment[da]=Applet som fortæller systemet hvor du er
 Comment[es]=Miniaplicación para indicarle al sistema dónde está usted
@@ -26,6 +27,7 @@ Comment[tr]=Sisteme nerede olduğunuzu bildiren gereç
 Comment[uk]=Аплет, який повідомлятиме системі про те, де ви перебуваєте
 Comment[x-test]=xxApplet to tell the system where you arexx
 Comment[zh_CN]=告诉系统当前位置的小程序
+Comment[zh_TW]=告訴系統您在哪裡的小程式
 
 Type=Service
 Icon=location

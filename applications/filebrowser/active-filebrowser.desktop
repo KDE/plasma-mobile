@@ -13,6 +13,7 @@ Name[tr]=Dosyalar
 Name[uk]=Файли
 Name[x-test]=xxFilesxx
 Name[zh_CN]=文件
+Name[zh_TW]=檔案
 GenericName=File browser
 GenericName[cs]=Prohlížeč souborů
 GenericName[da]=Filbrowser
@@ -27,6 +28,7 @@ GenericName[tr]=Dosya tarayıcısı
 GenericName[uk]=Керування файлами
 GenericName[x-test]=xxFile browserxx
 GenericName[zh_CN]=文件浏览器
+GenericName[zh_TW]=檔案瀏覽器
 Comment=A simple file browser/manager
 Comment[da]=Simpel filbrowser/-håndtering
 Comment[de]=Ein einfacher Dateibrowser
@@ -40,6 +42,7 @@ Comment[tr]=Basit bir dosya tarayıcı/yönetici
 Comment[uk]=Проста програма для перегляду і керування файловою системою
 Comment[x-test]=xxA simple file browser/managerxx
 Comment[zh_CN]=示例文件浏览管理工具
+Comment[zh_TW]=簡單的檔案瀏覽器
 
 
 X-KDE-Solid-Predicate=[ StorageVolume.ignored == false AND StorageVolume.usage == 'FileSystem' ]

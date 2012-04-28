@@ -13,6 +13,7 @@ Name[tr]=Active Ayarlar Modülü
 Name[uk]=Модуль параметрів для портативних пристроїв
 Name[x-test]=xxActive Settings Modulexx
 Name[zh_CN]=Active 设置模块
+Name[zh_TW]=Active 設定模組
 Comment=Active Settings Module Plugin
 Comment[da]=Plugin til indstillingsmodul til Active
 Comment[nl]=Plug-in voor module voor instellingen van Active
@@ -23,6 +24,7 @@ Comment[sv]=Insticksmodul för Active inställningar
 Comment[tr]=Active Ayarlar Modülü Eklentisi
 Comment[uk]=Додаток модуля параметрів для портативних пристроїв
 Comment[x-test]=xxActive Settings Module Pluginxx
+Comment[zh_TW]=Active 設定模組外掛程式
 
 #[PropertyDef::X-KDE-PluginInfo-Name]
 #Type=QString

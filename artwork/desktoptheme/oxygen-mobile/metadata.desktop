@@ -9,6 +9,7 @@ Name[sv]=Oxygen för mobiler
 Name[tr]=Cep telefonları için Oxygen
 Name[uk]=«Oxygen» для мобільного
 Name[x-test]=xxOxygen for Mobilexx
+Name[zh_TW]=行動裝置上的 Oxygen 主題
 Comment=A breath of fresh air
 Comment[cs]=Závan čerstvého vzduchu
 Comment[da]=En mundfuld frisk luft
@@ -21,6 +22,7 @@ Comment[tr]=Temiz havadan bir nefes
 Comment[uk]=Ковток свіжого повітря
 Comment[x-test]=xxA breath of fresh airxx
 Comment[zh_CN]=呼吸清新空气
+Comment[zh_TW]=吸一口新鮮空氣
 
 
 X-KDE-PluginInfo-Author=The Oxygen Project

@@ -12,6 +12,7 @@ Name[tr]=Uygulama Bilgileri
 Name[uk]=Відомості щодо програм
 Name[x-test]=xxApplication Informationxx
 Name[zh_CN]=程序信息
+Name[zh_TW]=應用程式資訊
 Comment=Information and launching of all applications in the app menu.
 Comment[cs]=Informace a spouštění všech aplikací v menu aplikací.
 Comment[da]=Information om og opstart af alle programmer i programmenuen.
@@ -25,6 +26,7 @@ Comment[tr]=Uygulama menüsündeki tüm uygulamalar hakkında bilgiler ve uygula
 Comment[uk]=Відомості і запуск всіх програма з меню програм.
 Comment[x-test]=xxInformation and launching of all applications in the app menu.xx
 Comment[zh_CN]=显示信息或启动菜单中的所有应用程序。
+Comment[zh_TW]=列出資訊或啟動選單中所有應用程式
 Type=Service
 Icon=user-desktop
 

@@ -16,6 +16,7 @@ Name[tr]=Ağ Bağlantıları (connman)
 Name[uk]=Мережні з’єднання (connman)
 Name[x-test]=xxNetwork connections (connman)xx
 Name[zh_CN]=网络连接 (connman)
+Name[zh_TW]=網路連線（connman）
 Type=Service
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Marco Martin

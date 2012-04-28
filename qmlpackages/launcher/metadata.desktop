@@ -24,6 +24,7 @@ Name[sv]=Startprogram
 Name[tr]=Başlatıcı
 Name[uk]=Інструмент запуску
 Name[x-test]=xxLauncherxx
+Name[zh_TW]=啟動器
 Type=Service
 Icon=start-here-kde
 

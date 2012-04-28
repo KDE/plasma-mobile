@@ -15,6 +15,7 @@ Name[tr]=Konum
 Name[uk]=Розташування
 Name[x-test]=xxLocationxx
 Name[zh_CN]=位置
+Name[zh_TW]=位置
 Comment=Location chooser
 Comment[da]=Stedvælger
 Comment[es]=Selector de posición
@@ -27,6 +28,7 @@ Comment[tr]=Konum seçici
 Comment[uk]=Вибір розташування
 Comment[x-test]=xxLocation chooserxx
 Comment[zh_CN]=位置选择器
+Comment[zh_TW]=位置選擇器
 
 Type=Service
 
