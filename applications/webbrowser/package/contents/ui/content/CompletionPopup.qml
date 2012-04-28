@@ -127,6 +127,9 @@ FocusScope {
         ActiveSettings.SettingsItem {
             id: settingsItem
             initialPage: dashboard
+            z: 99
+
+            clip: false
             anchors {
                 fill: parent
                 leftMargin: frame.margins.left * 2
@@ -147,6 +150,7 @@ FocusScope {
             anchors.right: settingsItem.right
             elementId: "configure"
             onClicked: {
+                settingsItem.clip = true;
                 var webModule = "org.kde.active.settings.web";
                 if (settingsItem.module != webModule) {
                     settingsItem.module = webModule;
@@ -158,6 +162,7 @@ FocusScope {
                     svg = configSvg;
                     elementId = "configure";
                 }
+                settingsItem.clip = false;
             }
         }
 

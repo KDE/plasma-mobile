@@ -81,9 +81,11 @@ Item {
 
         PlasmaCore.FrameSvgItem {
             id: fontPreviewFrame
-            height: 56
+            z: 100
+            height: fontPreviewLabel.paintedHeight+24
+            width: fontPreviewLabel.paintedWidth+54
             opacity: 0
-            anchors { bottom: fontSizeSlider.top; left: fontSizeSlider.left; right: fontSizeSlider.right; }
+            anchors { bottom: fontSizeSlider.top; horizontalCenter: fontSizeSlider.horizontalCenter; }
             Behavior on opacity {
                 NumberAnimation {
                     duration: 250
@@ -92,16 +94,17 @@ Item {
             }
             imagePath: "dialogs/background"
             PlasmaComponents.Label {
-                anchors { fill: parent; leftMargin: 12; rightMargin: 12; }
+                z: 100
+                anchors { centerIn: parent; leftMargin: 12; rightMargin: 12; }
                 id: fontPreviewLabel
-                text: i18n("Example text...");
+                text: i18n("Ceci n'est pas une exemple.");
                 font.pointSize: theme.defaultFont.pointSize + fontSizeSlider.value
             }
         }
 
         Timer {
             id: fontPreviewTimer
-            interval: 2000
+            interval: 2500
             running: false
             repeat: false
             onTriggered: fontPreviewFrame.opacity = 0
@@ -111,22 +114,26 @@ Item {
         PlasmaComponents.Slider {
             id: fontSizeSlider
             minimumValue: -6
-            maximumValue: 6
+            maximumValue: 24
             stepSize: 1
-            anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
+            anchors { left: parent.horizontalCenter; right: parent.right; verticalCenter: parent.verticalCenter; }
             Component.onCompleted: value = browserConfig.readEntry("fontSizeCorrection");
             onValueChanged: {
                 var s = theme.defaultFont.pointSize + fontSizeSlider.value;
                 browserConfig.writeEntry("fontSizeCorrection", fontSizeSlider.value);
-                fontPreviewTimer.restart();
+                //fontPreviewTimer.restart();
             }
             onPressedChanged: {
                 if (!pressed) {
                     fontPreviewTimer.running = true;
                 } else {
                     fontPreviewFrame.opacity = 1;
+                    fontPreviewTimer.running = false;
                 }
-                fontPreviewTimer.restart();
+                if (!pressed || (pressed && fontPreviewTimer.running)) {
+                    print("restarting timer.");
+                    fontPreviewTimer.restart();
+                }
             }
         }
     }

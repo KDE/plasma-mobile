@@ -52,7 +52,7 @@ ConfigGroup::ConfigGroup(QDeclarativeItem* parent)
     // Delay and compress everything within 5 seconds into one sync
     d->synchTimer = new QTimer(this);
     d->synchTimer->setSingleShot(true);
-    d->synchTimer->setInterval(5000);
+    d->synchTimer->setInterval(1500);
     connect(d->synchTimer, SIGNAL(timeout()), SLOT(sync()));
 }
 

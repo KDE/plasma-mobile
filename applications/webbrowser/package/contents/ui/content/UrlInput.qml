@@ -97,11 +97,15 @@ Item {
         Keys.onEnterPressed: {
             container.urlEntered(urlText.text)
             webView.focus = true
+            completionPopup.state = "collapsed"
+            urlText.closeSoftwareInputPanel();
         }
 
         Keys.onReturnPressed: {
             container.urlEntered(urlText.text)
             webView.focus = true
+            completionPopup.state = "collapsed"
+            urlText.closeSoftwareInputPanel();
         }
 
 
