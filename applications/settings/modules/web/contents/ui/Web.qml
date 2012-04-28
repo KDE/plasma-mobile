@@ -153,21 +153,21 @@ Item {
 
         PlasmaComponents.TextField {
             id: startPageText
+            clearButtonShown: true
+            placeholderText: i18n("Show dashboard")
             text: "http://plasma-active.org"
-            anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
-            anchors.right: saveStartPage.left
-            Keys.onReturnPressed: browserConfig.writeEntry("startPage", startPageText.text);
+            anchors { left: parent.horizontalCenter; right: parent.right; verticalCenter: parent.verticalCenter; }
+            Keys.onReturnPressed: closeSoftwareInputPanel()
             Component.onCompleted: text = browserConfig.readEntry("startPage");
+            onTextChanged: startPageTimer.restart()
+            Timer {
+                id: startPageTimer
+                interval: 1000
+                running: false
+                repeat: false
+                onTriggered: { print("sv"); browserConfig.writeEntry("startPage", startPageText.text); }
+            }
         }
-        PlasmaComponents.Button {
-            id: saveStartPage
-            height: startPageText.height
-            iconSource: "dialog-ok-apply"
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            onClicked: browserConfig.writeEntry("startPage", startPageText.text);
-        }
-
     }
 
     Item {

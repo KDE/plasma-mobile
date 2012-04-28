@@ -41,8 +41,11 @@ int main(int argc, char **argv)
                      about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
 
-    KService::Ptr service = KService::serviceByDesktopName("active-web-browser");
-    const QString homeUrl = service ? service->property("X-KDE-PluginInfo-Website", QVariant::String).toString() : HOME_URL;
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+    ptr->reparseConfiguration();
+    KConfigGroup _config = KConfigGroup(ptr, "webbrowser");
+    const QString homeUrl = _config.readEntry("startPage", QString());
+
     KCmdLineOptions options;
     options.add("+[url]", ki18n( "URL to open" ), homeUrl.toLocal8Bit());
 #ifndef QT_NO_OPENGL

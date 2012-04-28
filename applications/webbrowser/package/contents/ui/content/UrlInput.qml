@@ -145,6 +145,7 @@ Item {
         x: urlText.x + 2
         height: 6
         radius: 4
+        z: 2
         color: theme.highlightColor
         width: (bg.width - 20) * webView.progress
         opacity: webView.progress == 1.0 ? 0.0 : 0.7
