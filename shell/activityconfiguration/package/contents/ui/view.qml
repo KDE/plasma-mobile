@@ -160,6 +160,34 @@ PlasmaComponents.Sheet {
                 }
             }
         },
+        Row {
+            id: encryptRow
+            spacing: 8
+            visible: true
+            anchors {
+                top: nameRow.bottom
+                horizontalCenter: parent.horizontalCenter
+                bottomMargin: 6
+            }
+
+            PlasmaCore.SvgItem {
+                svg: PlasmaCore.Svg {imagePath: "toolbar-icons/document"}
+                elementId: "document-decrypt"
+                width: naturalSize.width
+                height: naturalSize.height
+            }
+            PlasmaComponents.Switch {
+                id: encryptedSwitch
+                checked: configInterface.encrypted
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            PlasmaCore.SvgItem {
+                svg: PlasmaCore.Svg {imagePath: "toolbar-icons/document"}
+                elementId: "document-encrypt"
+                width: naturalSize.width
+                height: naturalSize.height
+            }
+        },
         PlasmaComponents.Label {
             anchors {
                 left: nameRow.right
@@ -184,35 +212,15 @@ PlasmaComponents.Sheet {
             property int delegateWidth: 148
             property int delegateHeight: 130
             anchors {
-                top: nameRow.bottom
+                top: encryptRow.bottom
                 left: parent.left
-                bottom: encryptRow.visible ? encryptRow.top : parent.bottom
+                bottom: parent.bottom
                 right: parent.right
                 topMargin: 6
                 bottomMargin: 12
             }
             model: configInterface.wallpaperModel
             delegate: WallpaperDelegate {}
-        },
-        Row {
-            id: encryptRow
-            spacing: 8
-            visible: true
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
-                bottomMargin: 6
-            }
-
-            PlasmaComponents.Label {
-                id: encryptLabel
-                color: theme.textColor
-                text: i18n("Lock as private:")
-            }
-            PlasmaComponents.Switch {
-                id: encryptedSwitch
-                checked: configInterface.encrypted
-            }
         }
     ]
 
