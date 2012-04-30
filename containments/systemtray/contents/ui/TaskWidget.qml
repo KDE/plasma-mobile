@@ -23,8 +23,8 @@ import org.kde.qtextracomponents 0.1 as QtExtra
 
 Item  {
     id: taskIcon
-    width: Math.min(main.width, main.height)
-    height: width
+    width: main.itemWidth
+    height: main.itemHeight
     //hide application status icons
     opacity: (Category != "ApplicationStatus" && (main.state == "active" || Status != "Passive")) ? 1 : 0
 
@@ -52,7 +52,9 @@ Item  {
     }
     PlasmaCore.SvgItem {
         id: svgItemIcon
-        anchors.fill: parent
+        anchors.centerIn: parent
+        width: Math.min(parent.width, parent.height)
+        height: width
         svg: iconSvg
         elementId: IconName ? IconName : ''
     }

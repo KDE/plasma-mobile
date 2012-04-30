@@ -28,6 +28,9 @@ Item {
     signal shrinkRequested
     state: height>48?"active":"passive"
 
+    property int itemWidth: main.height*1.4
+    property int itemHeight: height
+
     Component.onCompleted: {
         plasmoid.drawWallpaper = false
         plasmoid.containmentType = "CustomContainment"
@@ -144,9 +147,20 @@ Item {
 
             Row {
                 id: tasksRow
-                spacing: 8
+                spacing: 4
                 height: tasksFlickable.height
                 property string skipItems
+
+                //depends on this to be precise to not make a resize loop
+                onWidthChanged: {
+                    var visibleCount = 0
+                    for (var i = 0; i < tasksRow.children.length; ++i) {
+                        if (tasksRow.children[i].opacity > 0 && tasksRow.children[i].visible) {
+                            ++visibleCount
+                        }
+                    }
+                    main.itemWidth = Math.min(main.height*1.4, centerPanel.x/visibleCount)
+                }
 
                 function insertAt(item, index)
                 {
