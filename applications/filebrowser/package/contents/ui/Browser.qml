@@ -385,6 +385,7 @@ PlasmaComponents.Page {
                 left: parent.right
                 top: parent.top
                 bottom: parent.bottom
+                leftMargin: -1
             }
         }
         PlasmaCore.FrameSvgItem {
@@ -396,7 +397,6 @@ PlasmaComponents.Page {
             anchors {
                 right: parent.right
                 verticalCenter: parent.verticalCenter
-                rightMargin: -1
             }
 
             //TODO: an icon
