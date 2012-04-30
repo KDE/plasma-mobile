@@ -170,6 +170,8 @@ void AppletContainer::afterWidthChanged()
     }
 
     m_applet.data()->resize(width(), height());
+    m_applet.data()->setPos(width()/2 - m_applet.data()->size().width()/2,
+                            height()/2 - m_applet.data()->size().height()/2);
     emit minimumWidthChanged(minimumWidth());
     emit preferredWidthChanged(preferredWidth());
     emit maximumWidthChanged(maximumWidth());
