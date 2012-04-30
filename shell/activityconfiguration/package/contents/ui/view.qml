@@ -136,24 +136,17 @@ PlasmaComponents.Sheet {
     }
 
     content: [
-        Grid {
+        Row {
             id: nameRow
-            columns: 2
-            rows: 2
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.topMargin
             }
             visible: configInterface.activityNameConfigurable
-            PlasmaComponents.Label {
-                color: theme.textColor
-                text: i18n("Activity name:")
-                anchors.verticalCenter: activityNameEdit.verticalCenter
-                anchors.right: activityNameEdit.left
-            }
             PlasmaComponents.TextField {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
+                placeholderText: i18n("Name")
                 Component.onCompleted: activityNameEdit.forceActiveFocus()
                 Keys.onReturnPressed: {
                     accept()
