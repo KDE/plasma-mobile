@@ -100,7 +100,7 @@ Item {
             width: 60
             height: 80
             anchors.verticalCenter: parent.verticalCenter
-            imagePath: "widgets/background"
+            imagePath: "dialogs/background"
             PlasmaCore.SvgItem {
                 width:22
                 height:22
