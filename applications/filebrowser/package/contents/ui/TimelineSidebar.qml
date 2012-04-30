@@ -130,7 +130,7 @@ PlasmaComponents.Page {
                         break
                     case MetadataModels.MetadataTimelineModel.Month:
                         metadataTimelineModel.startDate = buildDate(currentYear, currentMonth, 1)
-                        metadataTimelineModel.endDate = buildDate(currentYear, currentMonth, 31)
+                        metadataTimelineModel.endDate = buildDate(currentYear, currentMonth+1, 1)
                         metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Day
                         break
                     }
@@ -199,7 +199,7 @@ PlasmaComponents.Page {
                                     case MetadataModels.MetadataTimelineModel.Day:
                                     default:
                                         metadataModel.startDate = buildDate(model.year, model.month, 1)
-                                        metadataModel.endDate = buildDate(model.year, model.month, 31)
+                                        metadataModel.endDate = buildDate(model.year, model.month+1, 1)
 
                                         currentMonth = model.month
                                         currentYear = model.year
@@ -219,7 +219,7 @@ PlasmaComponents.Page {
                                     break
                                 case MetadataModels.MetadataTimelineModel.Month:
                                     metadataModel.startDate = buildDate(model.year, model.month, 1)
-                                    metadataModel.endDate = buildDate(model.year, model.month, 31)
+                                    metadataModel.endDate = buildDate(model.year, model.month+1, 1)
 
                                     currentMonth = model.month
                                     currentYear = model.year
