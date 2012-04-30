@@ -162,7 +162,7 @@ PlasmaComponents.Sheet {
         },
         Row {
             id: encryptRow
-            spacing: 8
+            spacing: 4
             visible: true
             anchors {
                 top: nameRow.bottom
@@ -170,22 +170,22 @@ PlasmaComponents.Sheet {
                 bottomMargin: 6
             }
 
-            PlasmaCore.SvgItem {
-                svg: PlasmaCore.Svg {imagePath: "toolbar-icons/document"}
-                elementId: "document-decrypt"
-                width: naturalSize.width
-                height: naturalSize.height
+            PlasmaComponents.ToolButton {
+                iconSource: "document-decrypt"
+                width: theme.mediumIconSize+5
+                height: width
+                onClicked: encryptedSwitch.checked = false
             }
             PlasmaComponents.Switch {
                 id: encryptedSwitch
                 checked: configInterface.encrypted
                 anchors.verticalCenter: parent.verticalCenter
             }
-            PlasmaCore.SvgItem {
-                svg: PlasmaCore.Svg {imagePath: "toolbar-icons/document"}
-                elementId: "document-encrypt"
-                width: naturalSize.width
-                height: naturalSize.height
+            PlasmaComponents.ToolButton {
+                iconSource: "document-encrypt"
+                width: theme.mediumIconSize+5
+                height: width
+                onClicked: encryptedSwitch.checked = true
             }
         },
         PlasmaComponents.Label {
