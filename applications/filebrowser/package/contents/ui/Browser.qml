@@ -499,6 +499,17 @@ PlasmaComponents.Page {
                 }
             }
         }
+        Image {
+            source: "image://appbackgrounds/shadow-bottom"
+            fillMode: Image.TileHorizontally
+            opacity: 0.8
+            anchors {
+                left: parent.left
+                top: toolBar.bottom
+                right: parent.right
+                topMargin: -2
+            }
+        }
     }
     ParallelAnimation {
         id: positionAnim
