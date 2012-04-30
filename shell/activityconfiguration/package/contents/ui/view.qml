@@ -133,6 +133,7 @@ PlasmaComponents.Sheet {
     content: [
         Row {
             id: nameRow
+            spacing: 8
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.topMargin
@@ -143,37 +144,33 @@ PlasmaComponents.Sheet {
                 objectName: "activityNameEdit"
                 placeholderText: i18n("Name")
                 Component.onCompleted: activityNameEdit.forceActiveFocus()
+                anchors.verticalCenter: parent.verticalCenter
                 Keys.onReturnPressed: {
                     accept()
                 }
             }
-        },
-        Row {
-            id: encryptRow
-            spacing: 4
-            visible: true
-            anchors {
-                top: nameRow.bottom
-                horizontalCenter: parent.horizontalCenter
-                bottomMargin: 6
-            }
+            Row {
+                id: encryptRow
+                spacing: 2
+                visible: true
 
-            PlasmaComponents.ToolButton {
-                iconSource: "document-decrypt"
-                width: theme.mediumIconSize+5
-                height: width
-                onClicked: encryptedSwitch.checked = false
-            }
-            PlasmaComponents.Switch {
-                id: encryptedSwitch
-                checked: configInterface.encrypted
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            PlasmaComponents.ToolButton {
-                iconSource: "document-encrypt"
-                width: theme.mediumIconSize+5
-                height: width
-                onClicked: encryptedSwitch.checked = true
+                PlasmaComponents.ToolButton {
+                    iconSource: "document-decrypt"
+                    width: theme.mediumIconSize+5
+                    height: width
+                    onClicked: encryptedSwitch.checked = false
+                }
+                PlasmaComponents.Switch {
+                    id: encryptedSwitch
+                    checked: configInterface.encrypted
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                PlasmaComponents.ToolButton {
+                    iconSource: "document-encrypt"
+                    width: theme.mediumIconSize+5
+                    height: width
+                    onClicked: encryptedSwitch.checked = true
+                }
             }
         },
         PlasmaComponents.Label {
@@ -200,7 +197,7 @@ PlasmaComponents.Sheet {
             property int delegateWidth: 148
             property int delegateHeight: 130
             anchors {
-                top: encryptRow.bottom
+                top: nameRow.bottom
                 left: parent.left
                 bottom: parent.bottom
                 right: parent.right
