@@ -27,10 +27,10 @@ PlasmaComponents.Sheet {
     id: main
     signal closeRequested
 
-    title: (configInterface.activityName == "") ? i18n("Create new activity") : i18n("Edit activity")
-    acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
+    title: (configInterface.activityName == "") ? i18n("Create New Activity") : i18n("Edit Activity")
+    acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save Changes")
 
-    rejectButtonText: i18n("Close")
+    rejectButtonText: i18n("Cancel")
     acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
 
     Timer {

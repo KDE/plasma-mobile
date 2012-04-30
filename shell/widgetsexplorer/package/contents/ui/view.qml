@@ -27,9 +27,9 @@ import org.kde.runnermodel 0.1 as RunnerModels
 PlasmaComponents.Sheet {
     id: widgetsExplorer
     objectName: "widgetsExplorer"
-    title: i18n("Add items")
-    acceptButtonText: i18n("Add items")
-    rejectButtonText: i18n("Close")
+    title: i18n("Add Items")
+    acceptButtonText: i18n("Add Items")
+    rejectButtonText: i18n("Cancel")
 
     signal addAppletRequested(string plugin)
     signal closeRequested
