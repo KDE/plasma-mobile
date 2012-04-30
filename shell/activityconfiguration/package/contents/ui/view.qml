@@ -28,13 +28,8 @@ PlasmaComponents.Sheet {
     signal closeRequested
 
     title: (configInterface.activityName == "") ? i18n("Create new activity") : i18n("Activity configuration")
-    acceptButtonText: {
-        if (!encryptedSwitch.checked || encryptedSwitch.checked == internal.activityEncrypted) {
-            (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
-        } else {
-            (configInterface.activityName == "") ? i18n("Enter password and create activity") : i18n("Enter password and save changes")
-        }
-    }
+    acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
+
     rejectButtonText: i18n("Close")
     acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
 
