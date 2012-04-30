@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
@@ -133,12 +133,20 @@ PlasmaComponents.Sheet {
     content: [
         Row {
             id: nameRow
-            spacing: 8
+            spacing: 2
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.topMargin
             }
             visible: configInterface.activityNameConfigurable
+            property int sideWidth: Math.max(activityNameLabel.paintedWidth, encryptRow.implicitWidth)
+            PlasmaComponents.Label {
+                id: activityNameLabel
+                width: nameRow.sideWidth
+                text: i18n("Activity name:")
+                horizontalAlignment: Text.AlignRight
+                anchors.verticalCenter: parent.verticalCenter
+            }
             PlasmaComponents.TextField {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
@@ -151,9 +159,15 @@ PlasmaComponents.Sheet {
             }
             Row {
                 id: encryptRow
+                width: nameRow.sideWidth
                 spacing: 2
                 visible: true
 
+                //spacer
+                Item {
+                    width: 4
+                    height: 4
+                }
                 PlasmaComponents.ToolButton {
                     iconSource: "document-decrypt"
                     width: theme.mediumIconSize+5
