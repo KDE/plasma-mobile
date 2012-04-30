@@ -143,14 +143,13 @@ PlasmaComponents.Sheet {
             PlasmaComponents.Label {
                 id: activityNameLabel
                 width: nameRow.sideWidth
-                text: i18n("Activity name:")
+                text: i18n("Name:")
                 horizontalAlignment: Text.AlignRight
                 anchors.verticalCenter: parent.verticalCenter
             }
             PlasmaComponents.TextField {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
-                placeholderText: i18n("Name")
                 Component.onCompleted: activityNameEdit.forceActiveFocus()
                 anchors.verticalCenter: parent.verticalCenter
                 Keys.onReturnPressed: {
