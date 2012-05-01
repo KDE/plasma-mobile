@@ -1,6 +1,20 @@
 [Desktop Entry]
 Name=Screen
+Name[da]=Skærm
+Name[nl]=Scherm
+Name[pt]=Ecrã
+Name[pt_BR]=Tela
+Name[sv]=Bildskärm
+Name[uk]=Екран
+Name[x-test]=xxScreenxx
 Comment=Power management settings for the screen
+Comment[da]=Indstilling af strømstyring for skærmen
+Comment[nl]=Instellingen voor energiebeheer van het scherm
+Comment[pt]=Configuração da gestão de energia do ecrã
+Comment[pt_BR]=Configurações do gerenciamento de energia da tela
+Comment[sv]=Strömhanteringsinställningar för bildskärmen
+Comment[uk]=Параметри керування яскравістю екрана
+Comment[x-test]=xxPower management settings for the screenxx
 
 Encoding=UTF-8
 Type=Service

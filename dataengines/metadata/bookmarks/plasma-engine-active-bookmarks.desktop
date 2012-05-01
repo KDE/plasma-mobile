@@ -1,6 +1,9 @@
 [Desktop Entry]
 Name=Active Bookmarks
 Name[da]=Active-bogmærker
+Name[et]=Aktiivsed järjehoidjad
+Name[fr]=Signets pour Active
+Name[km]=ចំណាំ​សកម្ម
 Name[nl]=Actieve bladwijzers
 Name[pl]=Zakładki Active
 Name[pt]=Favoritos Activos
@@ -12,6 +15,9 @@ Name[x-test]=xxActive Bookmarksxx
 Comment=Bookmarks from Nepomuk
 Comment[da]=Bogmærker fra Nepomuk
 Comment[es]=Marcadores de Nepomuk
+Comment[et]=Nepomuki järjehoidjad
+Comment[fr]=Signets issus de Nepomuk
+Comment[km]=ចំណាំ​ពី Nepomuk
 Comment[nl]=Bladwijzers uit Nepomuk
 Comment[pl]=Zakładki z Nepomuk
 Comment[pt]=Favoritos do Nepomuk

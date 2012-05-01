@@ -2,6 +2,8 @@
 Name=Web and Browser
 Name[cs]=Web a prohlížeč
 Name[da]=Web og browser
+Name[et]=Veebibrauser
+Name[fr]=Web et Navigateur
 Name[nl]=Web en browser
 Name[pl]=Sieć i przeglądarka
 Name[pt]=Web e Navegação
@@ -14,6 +16,8 @@ Name[zh_CN]=网络和浏览
 Name[zh_TW]=網頁與瀏覽器
 Comment=Settings for history, caching, etc.
 Comment[da]=Indstillinger for historik, cache osv.
+Comment[et]=Ajaloo, puhvri jms. seadistused
+Comment[fr]=Paramètres d'historique, de mise en cache, etc.
 Comment[nl]=Instellingen voor geschiedenis, caching, etc.
 Comment[pl]=Ustawienia dla historii, pamięci podręcznej, itp.
 Comment[pt]=Configuração do histórico, 'cache', etc.

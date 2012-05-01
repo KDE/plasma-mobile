@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Device Capabilities
 Name[da]=Enhedskapabiliteter
+Name[et]=Seadme omadused
+Name[fr]=Fonctionnalités du périphérique
 Name[nl]=Mogelijkheden van het apparaat
 Name[pl]=Możliwości urządzenia
 Name[pt]=Capacidades do Dispositivo
@@ -11,6 +13,8 @@ Name[uk]=Можливості пристрою
 Name[x-test]=xxDevice Capabilitiesxx
 Comment=Provides information and services for device-specific aspects
 Comment[da]=Giver information og tjenester til enhedsspecifikke aspekter
+Comment[et]=Seadmespetsiifilise teabe ja teenuste esitamine
+Comment[fr]=Fournit des informations et des services pour les aspects spécifiques à un périphérique
 Comment[nl]=Levert informatie en services voor apparaatspecifieke aspecten
 Comment[pl]=Dostarcza informacji i usług dla aspektów charakterystycznych dla urządzenia
 Comment[pt]=Fornece informações e serviços sobre aspectos específicos dos dispositivos

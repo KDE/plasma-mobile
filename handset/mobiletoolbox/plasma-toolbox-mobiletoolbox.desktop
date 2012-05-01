@@ -1,6 +1,9 @@
 [Desktop Entry]
 Comment=Default toolbox for the mobile shell
 Comment[da]=Standard værktøjskasse til mobil-skallen
+Comment[et]=Mobiili vaikimisi tööriistakast
+Comment[fr]=Boîte à outils par défaut pour la console mobile
+Comment[km]=ប្រអប់​ឧបករណ៍​លំនាំដើម​សម្រាប់​សែល​ចល័ត
 Comment[nl]=Standaard hulpmiddelen voor de mobiel-shell
 Comment[pl]=Domyślny przybornik dla powłoki Mobile
 Comment[pt]=Área de ferramentas predefinidas para a área de trabalho móvel
@@ -12,6 +15,9 @@ Icon=plasma
 Name=Mobile toolbox
 Name[da]=Værktøjskasse til Mobile
 Name[es]=Caja de herramientas móvil
+Name[et]=Mobiili tööriistakast
+Name[fr]=Boîte à outils pour mobile
+Name[km]=ប្រអប់​ឧបករណ៍​ចល័ត
 Name[nl]=Hulpmiddelen voor mobiel
 Name[pl]=Przybornik dla Mobile
 Name[pt]=Área de ferramentas móvel
