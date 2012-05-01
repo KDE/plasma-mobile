@@ -157,7 +157,7 @@ PlasmaComponents.Sheet {
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
                 id: runnerModel
-                queryString: searchField.searchQuery.length > 3 ? searchField.searchQuery : ""
+                queryString: searchField.searchQuery.length > 3 ? "*" + searchField.searchQuery + "*" : ""
                 onQueryStringChanged: {
                     if (searchField.searchQuery.length <= 3) {
                         stack.pop()
