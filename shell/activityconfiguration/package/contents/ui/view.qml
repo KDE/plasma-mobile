@@ -217,11 +217,11 @@ PlasmaComponents.Sheet {
                 y: parent.margins.top
                 text: i18n("An activity with this name already exists")
                 opacity: nameExists() ? 1 : 0
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: Easing.InOutQuad
-                    }
+            }
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
                 }
             }
         },
