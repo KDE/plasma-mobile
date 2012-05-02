@@ -186,17 +186,42 @@ PlasmaComponents.Sheet {
                 }
             }
         },
-        PlasmaComponents.Label {
+        PlasmaCore.FrameSvgItem {
+            z: 9999
             anchors {
-                left: nameRow.right
-                verticalCenter: nameRow.verticalCenter
+                horizontalCenter: nameRow.horizontalCenter
+                top: nameRow.bottom
             }
-            text: i18n("An activity with this name already exists")
             opacity: nameExists() ? 1 : 0
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
+            imagePath: "dialogs/background"
+            width: errorLabel.width + margins.left + margins.right
+            height: errorLabel.height + margins.top + margins.bottom
+            PlasmaCore.SvgItem {
+                svg: PlasmaCore.Svg {
+                    id: backgroundSvg
+                    imagePath: "dialogs/background"
+                }
+                elementId: "baloon-tip-top"
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.top
+                    bottomMargin: -backgroundSvg.elementSize("hint-top-shadow").height
+
+                }
+                width: naturalSize.width
+                height: naturalSize.height
+            }
+            PlasmaComponents.Label {
+                id: errorLabel
+                x: parent.margins.left
+                y: parent.margins.top
+                text: i18n("An activity with this name already exists")
+                opacity: nameExists() ? 1 : 0
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
         },
