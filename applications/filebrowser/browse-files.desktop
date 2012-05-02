@@ -9,6 +9,7 @@ Exec=active-filebrowser -graphicssystem raster %f
 Icon=system-file-manager
 Name=Browse files
 Name[da]=Gennemse filer
+Name[es]=Explorar archivos
 Name[nl]=Door bestanden bladeren
 Name[pt]=Navegar pelos ficheiros
 Name[pt_BR]=Navegar pelos arquivos
