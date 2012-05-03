@@ -16,7 +16,6 @@ set(plasma-device_SRCS
     panelproxy.cpp
     panelshadows.cpp
 
-    ../components/runnermodel/runnermodel.cpp
     mobileactivitythumbnails/mobileactivitythumbnails.cpp
     mobileactivitythumbnails/imagescaler.cpp
 

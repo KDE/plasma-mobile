@@ -64,8 +64,6 @@
 
 #include <Nepomuk/ResourceManager>
 
-#include "../components/runnermodel/runnermodel.h"
-
 #ifdef Q_WS_X11
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
