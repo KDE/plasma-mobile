@@ -13,6 +13,7 @@ Name[sv]=Mobilt nätverksgränssnitt
 Name[tr]=Cep Telefonu Ağ Motoru
 Name[uk]=Рушій мобільних мереж
 Name[x-test]=xxMobile Network Enginexx
+Name[zh_TW]=行動網路引擎
 Comment=Mobile network engine
 Comment[da]=Netværksmotor til Mobile
 Comment[es]=Motor de red móvil
@@ -27,6 +28,7 @@ Comment[sv]=Mobilt nätverksgränssnitt
 Comment[tr]=Cep telefonu ağ motoru
 Comment[uk]=Рушій мобільних мереж
 Comment[x-test]=xxMobile network enginexx
+Comment[zh_TW]=行動網路引擎
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service

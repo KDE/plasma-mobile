@@ -13,6 +13,7 @@ Name[pt_BR]=plasma-mobile-homescreen
 Name[sv]=Plasma mobil hemskärm
 Name[uk]=мобільна-домівка-плазми
 Name[x-test]=xxplasma-mobile-homescreenxx
+Name[zh_TW]=plasma-mobile-homescreen
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/GenericPackage

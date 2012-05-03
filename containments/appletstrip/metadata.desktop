@@ -12,6 +12,7 @@ Name[pt_BR]=Barra de miniaplicativos
 Name[sv]=Miniprogramrad
 Name[uk]=Усування аплетів
 Name[x-test]=xxApplets stripxx
+Name[zh_TW]=小程式帶
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

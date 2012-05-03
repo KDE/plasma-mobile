@@ -10,6 +10,7 @@ Name[pt_BR]=Tela de atividade do Contour
 Name[sv]=Contour aktivitetsskärm
 Name[uk]=Сторінка простору дій Contour
 Name[x-test]=xxContour activity screenxx
+Name[zh_TW]=Contour 活動螢幕
 Comment=Categorized resources and widgets
 Comment[da]=Kategoriserede ressourcer og widgets
 Comment[et]=Kategoriseeritud ressursid ja vidinad
@@ -22,6 +23,7 @@ Comment[sv]=Kategoriserade resurser och grafiska komponenter
 Comment[tr]=Kategorilendirilmiş kaynaklar ve gereçler
 Comment[uk]=Категоризований список ресурсів та віджетів
 Comment[x-test]=xxCategorized resources and widgetsxx
+Comment[zh_TW]=分類的資源與元件
 Encoding=UTF-8
 
 

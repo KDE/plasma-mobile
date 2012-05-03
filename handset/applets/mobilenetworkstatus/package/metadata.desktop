@@ -13,6 +13,7 @@ Name[pt_BR]=Status da rede móvel
 Name[sv]=Mobil nätverksstatus
 Name[uk]=Стан мобільної мережі
 Name[x-test]=xxMobile Network Statusxx
+Name[zh_TW]=行動網路狀態
 
 Type=Service
 ServiceTypes=Plasma/Applet

@@ -8,6 +8,7 @@ Name[pt_BR]=Tela
 Name[sv]=Bildskärm
 Name[uk]=Екран
 Name[x-test]=xxScreenxx
+Name[zh_TW]=螢幕
 Comment=Power management settings for the screen
 Comment[da]=Indstilling af strømstyring for skærmen
 Comment[nl]=Instellingen voor energiebeheer van het scherm
@@ -16,6 +17,7 @@ Comment[pt_BR]=Configurações do gerenciamento de energia da tela
 Comment[sv]=Strömhanteringsinställningar för bildskärmen
 Comment[uk]=Параметри керування яскравістю екрана
 Comment[x-test]=xxPower management settings for the screenxx
+Comment[zh_TW]=螢幕電源管理設定
 
 Encoding=UTF-8
 Type=Service

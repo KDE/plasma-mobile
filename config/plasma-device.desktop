@@ -13,6 +13,7 @@ Name[pt_BR]=Shell do Plasma Active Contour
 Name[sv]=Plasma Active Contour-skal
 Name[uk]=Оболонка Контур Портативної Плазми
 Name[x-test]=xxPlasma Active Contour Shellxx
+Name[zh_TW]=Plasma Active Contour Shell
 Type=Service
 X-KDE-StartupNotify=false
 OnlyShowIn=KDE;

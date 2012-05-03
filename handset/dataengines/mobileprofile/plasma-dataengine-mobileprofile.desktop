@@ -12,6 +12,7 @@ Name[pt_BR]=Mecanismo de perfis móveis
 Name[sv]=Mobilt profilgränssnitt
 Name[uk]=Рушій мобільних профілів
 Name[x-test]=xxMobile Profile Enginexx
+Name[zh_TW]=行動設定檔引擎
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service

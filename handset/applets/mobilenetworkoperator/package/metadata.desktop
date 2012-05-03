@@ -14,6 +14,7 @@ Name[sv]=Mobil nätverksoperatör
 Name[tr]=Cep Telefonu Ağ Sağlayıcısı
 Name[uk]=Оператор мобільної мережі
 Name[x-test]=xxMobile Network Operatorxx
+Name[zh_TW]=行動網路操作程式
 
 Type=Service
 ServiceTypes=Plasma/Applet
