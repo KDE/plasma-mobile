@@ -207,7 +207,7 @@ PlasmaComponents.Page {
     Connections {
         target: metadataModel
         onModelReset: selectedModel.clear()
-        onCountChanged: { searchBox.restartBusyTimer() }
+        onFinishedListingChanged: { searchBox.setIdle() }
     }
 
     Image {

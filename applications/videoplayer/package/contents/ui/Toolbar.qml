@@ -83,7 +83,7 @@ PlasmaCore.FrameSvgItem {
         }
         Connections {
             target: filterModel
-            onCountChanged: { searchBox.restartBusyTimer() }
+            onFinishedListingChanged: { searchBox.setIdle() }
         }
         opacity: viewer.scale==1?0:1
         Behavior on opacity {

@@ -130,9 +130,6 @@ PlasmaComponents.Sheet {
             onSearchQueryChanged: {
                 if (stack.depth == 1 && searchQuery.length > 3) {
                     stack.push(globalSearchComponent)
-                    busy = true
-                } else {
-                    busy = false
                 }
             }
         },
@@ -163,7 +160,9 @@ PlasmaComponents.Sheet {
                         stack.pop()
                     }
                 }
-                onCountChanged: { searchField.restartBusyTimer() }
+                Component.onCompleted: {
+                    runnerModel.finishedListingChanged.connect(searchField.setIdle)
+                }
             }
         }
     }

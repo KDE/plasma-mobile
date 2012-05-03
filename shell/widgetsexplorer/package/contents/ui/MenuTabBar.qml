@@ -112,10 +112,15 @@ PlasmaComponents.TabBar {
         id: topComponent
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
+                id: topModel
                 sortOrder: Qt.DescendingOrder
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 scoreResources: true
                 queryString: "*" + searchField.searchQuery + "*"
+
+                Component.onCompleted: {
+                    topModel.finishedListingChanged.connect(searchField.setIdle)
+                }
             }
         }
     }
@@ -138,6 +143,10 @@ PlasmaComponents.TabBar {
                 sortRole: "name"
                 filterRole: "name"
                 filterRegExp: ".*"+searchField.searchQuery+".*"
+
+                Component.onCompleted: {
+                    appsModel.finishedListingChanged.connect(searchField.setIdle)
+                }
             }
         }
     }
@@ -146,10 +155,15 @@ PlasmaComponents.TabBar {
         id: bookmarksComponent
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
+                id: bookmarksModel
                 sortOrder: Qt.AscendingOrder
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortBy: ["nie:url"]
                 resourceType: "nfo:Bookmark"
+
+                Component.onCompleted: {
+                    bookmarksModel.finishedListingChanged.connect(searchField.setIdle)
+                }
             }
         }
     }
@@ -158,11 +172,16 @@ PlasmaComponents.TabBar {
         id: contactsComponent
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
+                id: contactsModel
                 sortOrder: Qt.AscendingOrder
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortBy: ["nco:fullname"]
                 resourceType: "nco:Contact"
                 queryString: "*" + searchField.searchQuery + "*"
+
+                Component.onCompleted: {
+                    contactsModel.finishedListingChanged.connect(searchField.setIdle)
+                }
             }
         }
     }
@@ -171,11 +190,16 @@ PlasmaComponents.TabBar {
         id: documentsComponent
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
+                id: documentsModel
                 sortBy: ["nfo:fileName"]
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Document"
                 queryString: "*" + searchField.searchQuery + "*"
+
+                Component.onCompleted: {
+                    documentsModel.finishedListingChanged.connect(searchField.setIdle)
+                }
             }
         }
     }
@@ -184,11 +208,16 @@ PlasmaComponents.TabBar {
         id: imagesComponent
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
+                id: imagesModel
                 sortBy: ["nfo:fileName"]
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Image"
                 queryString: "*" + searchField.searchQuery + "*"
+
+                Component.onCompleted: {
+                    imagesModel.finishedListingChanged.connect(searchField.setIdle)
+                }
             }
         }
     }
@@ -197,11 +226,16 @@ PlasmaComponents.TabBar {
         id: musicComponent
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
+                id: musicModel
                 sortBy: ["nie:title"]
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Audio"
                 queryString: "*" + searchField.searchQuery + "*"
+
+                Component.onCompleted: {
+                    musicModel.finishedListingChanged.connect(searchField.setIdle)
+                }
             }
         }
     }
@@ -210,11 +244,16 @@ PlasmaComponents.TabBar {
         id: videoComponent
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
+                id: videoModel
                 sortBy: ["nfo:fileName"]
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Video"
                 queryString: "*" + searchField.searchQuery + "*"
+
+                Component.onCompleted: {
+                    videoModel.finishedListingChanged.connect(searchField.setIdle)
+                }
             }
         }
     }

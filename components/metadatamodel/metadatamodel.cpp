@@ -327,7 +327,6 @@ void MetadataModel::doQuery()
             // we must prepend and append "*" to the file name for the default Nepomuk match type (Contains) really work.
             Nepomuk::Query::ComparisonTerm term(propertyUrl(key), Nepomuk::Query::LiteralTerm(parameter));
 
-
             if (negation) {
                 rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
             } else {
@@ -470,6 +469,9 @@ void MetadataModel::doQuery()
     if (m_pageSize < 1) {
         fetchResultsPage(0);
     }
+
+    // Nepomuk::Query::QueryServiceClient does not emit finishedListing signal when there is no new entries (no matches).
+    QTimer::singleShot(5000, this, SIGNAL(finishedListingChanged()));
 }
 
 void MetadataModel::fetchResultsPage(int page)
@@ -757,6 +759,8 @@ void MetadataModel::finishedListing()
             }
         }
     }
+
+    emit finishedListingChanged();
 }
 
 

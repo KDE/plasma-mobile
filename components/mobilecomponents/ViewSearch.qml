@@ -31,8 +31,16 @@ Item {
     property int delay : 100
     property bool busy: false
 
+    // hide busy indicator after busyTimeout miliseconds.
+    property alias busyTimeout: busyTimer.interval
+
     onSearchQueryChanged: {
         searchField.text = searchQuery
+        busy = true
+
+        if (busyTimeout > 0) {
+            busyTimer.restart()
+        }
     }
 
     width: searchField.width
@@ -55,17 +63,17 @@ Item {
         height: searchField.height
         width: searchField.height
         visible: searchFieldContainer.busy
-        running: searchFieldContainer.busy
+        running: visible
     }
 
-    function restartBusyTimer() {
-        busyTimer.restart()
+    function setIdle() {
+        searchFieldContainer.busy = false
     }
 
     Timer {
         id: busyTimer
         repeat: false
-        interval: 1000
+        interval: 0
         running: false
         onTriggered: { searchFieldContainer.busy = false }
     }
