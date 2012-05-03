@@ -35,7 +35,8 @@ static const char description[] = I18N_NOOP("File browser for Plasma Active");
 
 static const char version[] = "0.1";
 
-int main(int argc, char **argv)
+extern "C"
+KDE_EXPORT int kdemain(int argc, char **argv)
 {
     KAboutData about("active-filebrowser", 0, ki18n("Files"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2012 Marco Martin"), KLocalizedString(), 0, "mart@kde.org");

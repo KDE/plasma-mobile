@@ -39,7 +39,8 @@ static const char description[] = I18N_NOOP("Plasma Active Settings");
 static const char version[] = "2.0";
 static const char HOME_URL[] = "http://plasma-active.org";
 
-int main(int argc, char **argv)
+extern "C"
+KDE_EXPORT int kdemain(int argc, char **argv)
 {
     KAboutData about("active-settings", 0, ki18n("Plasma Active Settings"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");

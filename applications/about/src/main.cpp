@@ -35,7 +35,8 @@ static const char description[] = I18N_NOOP("About Plasma Active");
 
 static const char version[] = "2.0";
 
-int main(int argc, char **argv)
+extern "C"
+KDE_EXPORT int kdemain(int argc, char **argv)
 {
     KAboutData about("active-aboutapp", 0, ki18n("About Plasma Active"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2011 Marco Martin"), KLocalizedString(), 0, "mart@kde.org");

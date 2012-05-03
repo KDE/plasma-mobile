@@ -34,7 +34,8 @@ static const char version[] = "1.9";
 //static const char HOME_URL[] = "http://community.kde.org/Plasma/Active";
 static const char HOME_URL[] = "";
 
-int main(int argc, char **argv)
+extern "C"
+KDE_EXPORT int kdemain(int argc, char **argv)
 {
     KAboutData about("active-web-browser", 0, ki18n("Plasma Active Web Browser"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");

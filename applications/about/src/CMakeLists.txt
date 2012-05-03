@@ -6,11 +6,11 @@ set(active-aboutapp_SRCS
     aboutapp.cpp
 )
 
-KDE4_ADD_EXECUTABLE(active-aboutapp ${active-aboutapp_SRCS})
+kde4_add_kdeinit_executable(active-aboutapp ${active-aboutapp_SRCS})
 
 #find_package(ActiveApp REQUIRED)
 
-target_link_libraries(active-aboutapp
+target_link_libraries(kdeinit_active-aboutapp
     ${QT_QTDECLARATIVE_LIBRARY}
     ${QT_QTOPENGL_LIBRARY}
     ${QT_QTSCRIPT_LIBRARY}
@@ -21,5 +21,6 @@ target_link_libraries(active-aboutapp
     activeapp
 )
 
+install(TARGETS kdeinit_active-aboutapp ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install(TARGETS active-aboutapp ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
