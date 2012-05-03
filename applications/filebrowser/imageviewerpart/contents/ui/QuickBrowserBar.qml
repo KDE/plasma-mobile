@@ -26,6 +26,7 @@ Rectangle {
     id: quickBrowserBar
     property alias model: thumbnailsView.model
     property alias currentIndex: thumbnailsView.currentIndex
+    property alias currentItem: thumbnailsView.currentItem
     property alias count: thumbnailsView.count
 
     function setCurrentIndex(index)
@@ -57,6 +58,7 @@ Rectangle {
             id: delegate
             z: index == thumbnailsView.currentIndex ? 200 : 0
             scale: index == thumbnailsView.currentIndex ? 1.4 : 1
+            property string name: label
             Behavior on scale {
                 NumberAnimation {
                     duration: 250
