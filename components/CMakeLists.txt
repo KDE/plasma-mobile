@@ -1,5 +1,4 @@
 add_subdirectory(metadatamodel)
 add_subdirectory(mobilecomponents)
-add_subdirectory(runnermodel)
 add_subdirectory(dirmodel)
 add_subdirectory(settings)
