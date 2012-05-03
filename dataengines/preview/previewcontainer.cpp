@@ -1,6 +1,6 @@
 /*
  * Copyright 2011 Marco Martin <mart@kde.org>
- * Copyright 2011 Sebastian Kügler <sebas@kde.org>
+ * Copyright 2011,2012 Sebastian Kügler <sebas@kde.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Library General Public License version 2 as
@@ -19,6 +19,8 @@
 
 #include "previewcontainer.h"
 #include "previewengine.h"
+
+#include <QPainter>
 
 #include <KDebug>
 #include <KIcon>
@@ -42,14 +44,12 @@ void PreviewContainer::init()
     QImage preview = QImage(m_previewSize, QImage::Format_ARGB32_Premultiplied);
     if (m_previewEngine->imageCache()->findImage(objectName(), &preview)) {
         // cache hit
-        //kDebug() << "Cache hit: " << objectName();
         setData("status", "done");
         setData("url", m_url);
         setData("thumbnail", preview);
         checkForUpdate();
         return;
     }
-    kDebug() << "Cache miss: " << objectName();
 
     // Set fallbackimage while loading
     m_fallbackImage = KIcon("image-loading").pixmap(QSize(64, 64)).toImage();
@@ -91,12 +91,13 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
     KFileItemList list;
     list << kfile;
 
-    // Enable all plugins but the html thumbnailer, this ones covered by
-    // the new web creator which also supports remote URLs
-    QStringList _en = KIO::PreviewJob::availablePlugins();
-    //_en.removeAll("htmlthumbnail");
-    QStringList *enabledPlugins = new QStringList(_en);
-    m_job = new KIO::PreviewJob(list, m_previewSize, enabledPlugins);
+    // Enable all plugins
+    QSize previewSize = m_previewSize;
+    if (!QUrl(m_url).isLocalFile()) {
+        previewSize = QSize(256, 256); // might come from cache with normalized size
+    }
+    m_job = new KIO::PreviewJob(list, previewSize,
+                                new QStringList(KIO::PreviewJob::availablePlugins()));
 
     connect(m_job, SIGNAL(gotPreview(KFileItem,QPixmap)),
             SLOT(previewUpdated(KFileItem,QPixmap)));
@@ -127,11 +128,24 @@ void PreviewContainer::previewUpdated(const KFileItem &item, const QPixmap &prev
 
     setData("status", "done");
     setData("url", m_url);
-    QImage p = preview.toImage();
-    setData("thumbnail", p);
+    const QRect s(QPoint(0, 0), m_previewSize);
+    QImage img(s.size(), QImage::Format_ARGB32_Premultiplied);
+    img.fill(Qt::transparent);
+    QImage i = preview.toImage();
+    if (!item.url().isLocalFile()) {
+        // cut out a top-left piece for web previews
+        const QSize ss = s.size();
+        QRect s1 = QRect(QPoint(0, 0), ss*1.2);
+        QRect s2 = QRect(QPoint(0, 0), ss*0.8);
+        QPainter p(&img);
+        p.drawImage(s1, i, s2);
+    } else {
+        img = i;
+    }
+    setData("thumbnail", img);
     checkForUpdate();
-    kDebug() << "Cache insert: " << objectName();
-    m_previewEngine->imageCache()->insertImage(objectName(), p);
+    kDebug() << "Cache insert: " << objectName() << img.size();
+    m_previewEngine->imageCache()->insertImage(objectName(), img);
 }
 
 #include "previewcontainer.moc"
