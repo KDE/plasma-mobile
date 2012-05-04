@@ -93,7 +93,9 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
 
     // Enable all plugins
     QSize previewSize = m_previewSize;
-    if (!QUrl(m_url).isLocalFile()) {
+    // FIXME: enable once we depend on Qt 4.8
+    //if (!QUrl(m_url).isLocalFile()) {
+    if (m_url.toString().startsWith("http")) {
         previewSize = QSize(256, 256); // might come from cache with normalized size
     }
     m_job = new KIO::PreviewJob(list, previewSize,
