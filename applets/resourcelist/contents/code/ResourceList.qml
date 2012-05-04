@@ -71,7 +71,7 @@ Item {
         model: MetadataModels.MetadataModel {
             id: metadataModel
             onRunningChanged: {
-                if (!runnung) {
+                if (!running) {
                     statusLabel.text = "";
                     plasmoid.busy = false
                 }
