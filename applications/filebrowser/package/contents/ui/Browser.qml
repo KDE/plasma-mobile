@@ -96,10 +96,14 @@ PlasmaComponents.Page {
             anchors.centerIn: parent
 
             onSearchQueryChanged: {
-                // the "*" are needed for substring match.
-                metadataModel.extraParameters["nfo:fileName"] = "*" + searchBox.searchQuery + "*"
-                busy = (searchBox.searchQuery.length > 0)
+                if (searchQuery.length > 3) {
+                    // the "*" are needed for substring match.
+                    metadataModel.extraParameters["nfo:fileName"] = "*" + searchBox.searchQuery + "*"
+                } else {
+                    metadataModel.extraParameters["nfo:fileName"] = ""
+                }
             }
+            busy: metadataModel.running
         }
 
         Item {
@@ -207,7 +211,6 @@ PlasmaComponents.Page {
     Connections {
         target: metadataModel
         onModelReset: selectedModel.clear()
-        onFinishedListingChanged: { searchBox.setIdle() }
     }
 
     Image {

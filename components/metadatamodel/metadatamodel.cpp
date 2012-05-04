@@ -264,7 +264,6 @@ void MetadataModel::doQuery()
         maximumRating() <= 0 && parameters->size() == 0) {
         return;
     }
-    setStatus(Waiting);
     m_query = Nepomuk::Query::Query();
     m_query.setQueryFlags(Nepomuk::Query::Query::WithoutFullTextExcerpt);
     Nepomuk::Query::AndTerm rootTerm;
@@ -470,8 +469,9 @@ void MetadataModel::doQuery()
         fetchResultsPage(0);
     }
 
+    //FIXME
     // Nepomuk::Query::QueryServiceClient does not emit finishedListing signal when there is no new entries (no matches).
-    QTimer::singleShot(5000, this, SIGNAL(finishedListingChanged()));
+    QTimer::singleShot(5000, this, SLOT(finishedListing()));
 }
 
 void MetadataModel::fetchResultsPage(int page)
@@ -502,7 +502,7 @@ void MetadataModel::fetchResultsPage(int page)
 
 void MetadataModel::countQueryResult(const QList< Nepomuk::Query::Result > &entries)
 {
-    setStatus(Running);
+    setRunning(true);
     //this should be always 1
     foreach (const Nepomuk::Query::Result &res, entries) {
         int count = res.additionalBinding(QLatin1String("cnt")).variant().toInt();
@@ -521,7 +521,6 @@ void MetadataModel::countQueryResult(const QList< Nepomuk::Query::Result > &entr
 
 void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
-    setStatus(Running);
     const int page = m_pagesForClient.value(qobject_cast<Nepomuk::Query::QueryServiceClient *>(sender()));
 
     foreach (const Nepomuk::Query::Result &res, entries) {
@@ -742,10 +741,10 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
 
 void MetadataModel::finishedListing()
 {
-    --m_runningClients;
+    m_runningClients = qMax(m_runningClients - 1, 0);
 
     if (m_runningClients <= 0) {
-        setStatus(Idle);
+        setRunning(false);
 
         if (m_queryClientsHistory.count() > 10) {
             for (int i = 0; i < m_queryClientsHistory.count() - 10; ++i) {
@@ -759,8 +758,6 @@ void MetadataModel::finishedListing()
             }
         }
     }
-
-    emit finishedListingChanged();
 }
 
 

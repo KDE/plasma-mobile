@@ -88,10 +88,6 @@ MouseArea {
     RunnerModels.RunnerModel {
         id: runnerModel
         runners: [ "services", "nepomuksearch", "recentdocuments", "desktopsessions" , "PowerDevil", "calculator" ]
-
-        Component.onCompleted: {
-            runnerModel.finishedListingChanged.connect(searchField.setIdle)
-        }
     }
 
     MobileComponents.ViewSearch {
@@ -113,12 +109,12 @@ MouseArea {
                 appGrid.model = null
                 appGrid.model = appsModel
                 runnerModel.query = ""
-                busy = false
             } else {
                 appGrid.model = runnerModel
                 runnerModel.query = searchQuery
             }
         }
+        busy: runnerModel.running && (searchQuery.length >= 3)
 
         Component.onCompleted: {
             delay = 10

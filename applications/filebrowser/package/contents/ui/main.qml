@@ -77,7 +77,7 @@ Image {
 
     PlasmaComponents.BusyIndicator {
         anchors.centerIn: mainStack
-        visible: metadataModel.status == MetadataModels.MetadataModel.Running
+        visible: metadataModel.running
         running: visible
     }
 

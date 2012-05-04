@@ -117,10 +117,13 @@ PlasmaComponents.Page {
         connectedSources: ["Input"]
     }
 
+    //FIXME: HACK
     Connections {
         target: metadataModel
-        onStatusChanged: {
-            viewerPage.loadFile(viewerPage.path)
+        onRunningChanged: {
+            if (!running) {
+                viewerPage.loadFile(viewerPage.path)
+            }
         }
     }
 

@@ -121,16 +121,18 @@ PlasmaComponents.Sheet {
                     }
                 }
             }
+            busy: {
+                if (stack.currentPage.model && stack.currentPage.model.running !== undefined) {
+                    stack.currentPage.model.running
+                } else {
+                    false
+                }
+            }
 
             anchors {
                 left: parent.left
                 right: parent.right
                 top: parent.top
-            }
-            onSearchQueryChanged: {
-                if (stack.depth == 1 && searchQuery.length > 3) {
-                    stack.push(globalSearchComponent)
-                }
             }
         },
         MenuTabBar {

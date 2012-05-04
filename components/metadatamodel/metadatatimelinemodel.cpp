@@ -105,7 +105,7 @@ void MetadataTimelineModel::doQuery()
 
     m_totalCount = 0;
 
-    setStatus(Waiting);
+    setRunning(true);
     QString monthQuery;
     QString dayQuery;
 
@@ -267,7 +267,6 @@ void MetadataTimelineModel::doQuery()
 
 void MetadataTimelineModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
-    setStatus(Running);
     QVector<QHash<Roles, int> > results;
     QVariantList categories;
     foreach (const Nepomuk::Query::Result &res, entries) {
@@ -309,7 +308,7 @@ void MetadataTimelineModel::entriesRemoved(const QList<QUrl> &urls)
 
 void MetadataTimelineModel::finishedListing()
 {
-    setStatus(Idle);
+    setRunning(false);
 }
 
 

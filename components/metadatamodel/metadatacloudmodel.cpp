@@ -107,7 +107,7 @@ void MetadataCloudModel::doQuery()
         return;
     }
 
-    setStatus(Waiting);
+    setRunning(true);
     QString query = "select distinct ?label count(*) as ?count where { ";
 
     if (m_cloudCategory == "kao:Activity") {
@@ -263,7 +263,6 @@ void MetadataCloudModel::doQuery()
 
 void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
-    setStatus(Running);
     QVector<QPair<QString, int> > results;
     QVariantList categories;
 
@@ -334,7 +333,7 @@ void MetadataCloudModel::entriesRemoved(const QList<QUrl> &urls)
 
 void MetadataCloudModel::finishedListing()
 {
-    setStatus(Idle);
+    setRunning(false);
 }
 
 

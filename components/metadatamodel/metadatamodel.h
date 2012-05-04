@@ -180,7 +180,6 @@ Q_SIGNALS:
     void lazyLoadingChanged();
     void scoreResourcesChanged();
     void thumbnailSizeChanged();
-    void finishedListingChanged();
 
 protected Q_SLOTS:
     void countQueryResult(const QList< Nepomuk::Query::Result > &entries);

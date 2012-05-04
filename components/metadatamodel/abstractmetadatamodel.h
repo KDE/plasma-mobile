@@ -116,24 +116,11 @@ class AbstractMetadataModel : public QAbstractItemModel
     Q_PROPERTY(QObject *extraParameters READ extraParameters CONSTANT)
 
     /**
-     * @property Status the satus of the query underlying the model, may be idle, waiting or running
+     * @property bool running: true when queries are in execution
      */
-    Q_PROPERTY(Status status READ status NOTIFY statusChanged)
-    Q_ENUMS(Status)
+    Q_PROPERTY(bool running READ isRunning NOTIFY runningChanged)
 
 public:
-    /**
-     * @enum status of the query associated to this model
-     * * Idle: the query client is doing nothing
-     * * Waiting: the query client is waiting for the first result
-     * * Running: some results came, listing not finished
-     */
-    enum Status {
-        Idle = 0,
-        Waiting,
-        Running
-    };
-
     AbstractMetadataModel(QObject *parent = 0);
     ~AbstractMetadataModel();
 
@@ -176,7 +163,7 @@ public:
 
     QObject *extraParameters() const;
 
-    Status status() const;
+    bool isRunning() const;
 
     //Reimplemented
     QVariant headerData(int section, Qt::Orientation orientation,
@@ -197,11 +184,13 @@ Q_SIGNALS:
     void endDateChanged();
     void minimumRatingChanged();
     void maximumRatingChanged();
-    void statusChanged();
+    void runningChanged(bool running);
 
 protected Q_SLOTS:
-    void serviceRegistered(const QString &service);
     virtual void doQuery();
+
+private Q_SLOTS:
+    void serviceRegistered(const QString &service);
 
 protected:
     QString retrieveIconName(const QStringList &types) const;
@@ -272,14 +261,14 @@ protected:
     }
 
     QStringList tagStrings() const;
-    void setStatus(Status status);
+    void setRunning(bool running);
     void askRefresh();
 
 private:
     QDBusServiceWatcher *m_queryServiceWatcher;
     QHash<QString, QString> m_icons;
     QTimer *m_queryTimer;
-    Status m_status;
+    bool m_running;
 
     QString m_resourceType;
     QString m_mimeType;
