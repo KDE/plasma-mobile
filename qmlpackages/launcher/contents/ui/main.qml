@@ -93,9 +93,6 @@ MouseArea {
     MobileComponents.ViewSearch {
         id: searchField
 
-        // set the timeout for the busy indicator.
-        busyTimeout: 1000
-
         anchors {
             left: parent.left
             right: parent.right
