@@ -1,6 +1,7 @@
 # Install the packages, also make it known to the system
 
 add_subdirectory(time)
+add_subdirectory(locale)
 
 # Web
 install(DIRECTORY web/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.settings.web)
