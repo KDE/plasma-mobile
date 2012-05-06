@@ -74,7 +74,7 @@ Image {
                 Item {
                     id: delegateItem
                     height: 64
-                    width: 340
+                    width: parent.width
                     anchors.margins: 20
 
                     QIconItem {
