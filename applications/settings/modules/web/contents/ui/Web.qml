@@ -100,6 +100,21 @@ Item {
                 text: i18n("Ceci n'est pas un exemple.");
                 font.pointSize: theme.defaultFont.pointSize + fontSizeSlider.value
             }
+            PlasmaCore.SvgItem {
+                svg: PlasmaCore.Svg {
+                    id: backgroundSvg
+                    imagePath: "dialogs/background"
+                }
+                elementId: "baloon-tip-bottom"
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    top: parent.bottom
+                    topMargin: -backgroundSvg.elementSize("hint-bottom-shadow").height
+
+                }
+                width: naturalSize.width
+                height: naturalSize.height
+            }
         }
 
         Timer {
