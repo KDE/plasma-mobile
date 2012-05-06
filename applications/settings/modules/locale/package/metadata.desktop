@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Locale
-Comment=Settings for locale
+Name=Language
+Comment=Locale settings
 Encoding=UTF-8
 Type=Service
 Icon=preferences-desktop-locale
