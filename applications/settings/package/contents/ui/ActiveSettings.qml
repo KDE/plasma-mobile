@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2011,2012 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,9 +18,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.qtextracomponents 0.1
@@ -71,11 +70,13 @@ Image {
 
             Component {
                 id: settingsModuleDelegate
-                Item {
+                PlasmaComponents.ListItem {
                     id: delegateItem
                     height: 64
                     width: parent.width
                     anchors.margins: 20
+                    enabled: true
+                    checked: listView.currentIndex == index
 
                     QIconItem {
                         id: iconItem
@@ -87,38 +88,34 @@ Image {
                         anchors.rightMargin: 8
                     }
 
-                    Text {
+                    PlasmaExtras.Heading {
                         id: textItem
                         text: name
+                        level: 4
                         elide: Text.ElideRight
-                        color: theme.textColor
                         anchors.bottom: parent.verticalCenter
                         anchors.left: iconItem.right
                         anchors.right: parent.right
                     }
 
-                    Text {
+                    PlasmaComponents.Label {
                         id: descriptionItem
                         text: description
+                        font.pointSize: theme.defaultFont.pointSize -1
                         opacity: 0.6
                         elide: Text.ElideRight
-                        color: theme.textColor
                         anchors.top: parent.verticalCenter
                         anchors.left: iconItem.right
                         anchors.right: parent.right
                     }
 
-                    MouseArea {
-                        anchors.fill: delegateItem
-                        onPressed: PlasmaExtras.PressedAnimation { targetItem: delegateItem }
-                        onReleased: PlasmaExtras.ReleasedAnimation { targetItem: delegateItem }
-                        onClicked: {
-                            //if (module != switcherPackage.name) {
-                                listView.currentIndex = index
-                                //settingsComponent.loadPackage(module);
-                                settingsItem.module = module;
-                            //}
-                        }
+                    onClicked: {
+                        listView.currentIndex = index
+                        settingsItem.module = module;
+                    }
+                    onPressAndHold: {
+                        listView.currentIndex = index
+                        settingsItem.module = module;
                     }
                     Component.onCompleted: {
                         // mark current module as selected in the list on the left
@@ -132,25 +129,16 @@ Image {
 
             ActiveSettings.SettingsModulesModel {
                 id: settingsModulesModel
-                //parent: settingsRoot
-
-                Component.onCompleted: {
-                    //print(" EINS +++ "  + items.count );
-                    //print(" ZWEI +++ "  + settingsModulesItems.count );
-                    //print(" Model completed.");
-                }
             }
 
             ListView {
                 id: listView
                 currentIndex: -1
                 anchors.fill: parent
-                spacing: 4
                 clip: true
                 interactive: false
                 model: settingsModulesModel.settingsModules
                 delegate: settingsModuleDelegate
-                highlight: PlasmaComponents.Highlight {}
             }
         }
 
