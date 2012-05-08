@@ -59,7 +59,7 @@ import org.kde.qtextracomponents 0.1
             right: parent.right
             bottom: parent.bottom
             bottomMargin: background.margins.bottom
-            rightMargin: height * 1.4 - height
+            rightMargin: homeButtonShown ? height * 1.4 - height : 0
         }
         MouseArea {
             anchors.fill: parent
