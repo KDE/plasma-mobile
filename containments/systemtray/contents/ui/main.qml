@@ -139,7 +139,7 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: parent.left
-            anchors.leftMargin: (height * 1.4 - height) / 2
+            anchors.leftMargin: (height * 1.4 - height) / 1.5
             interactive:true
             contentWidth: tasksRow.width
             contentHeight: tasksRow.height
