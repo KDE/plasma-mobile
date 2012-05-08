@@ -160,7 +160,7 @@ PlasmaComponents.Sheet {
                 id: encryptRow
                 width: nameRow.sideWidth
                 spacing: 2
-                visible: true
+                visible: false
 
                 //spacer
                 Item {
