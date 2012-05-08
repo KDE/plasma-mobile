@@ -32,6 +32,7 @@ Image {
     height: Math.max(480+systrayContainer.height+8, homeScreen.height - 50 + background.margins.bottom)
     property bool windowStripVisible: false
     property alias containment: systrayContainer.plasmoid
+    property int panelHeight: systrayContainer.height + background.margins.bottom*2
 
     onStateChanged: {
         if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
@@ -46,7 +47,7 @@ Image {
             right: parent.right
             bottom: parent.bottom
         }
-        height: systrayContainer.height + margins.bottom
+        height: systrayContainer.height + margins.bottom*2
         imagePath: "widgets/panel-background"
         enabledBorders: "BottomBorder"
     }
@@ -83,7 +84,22 @@ Image {
     }
     SlidingDragButton {
         id: slidingDragButton
-        panelHeight: 32
+        panelHeight: {
+            var height = theme.defaultFont.mSize.height * 1.6
+            if (height < theme.smallIconSize) {
+                theme.smallIconSize
+            } else if (height < theme.smallMediumIconSize) {
+                theme.smallMediumIconSize
+            } else if (height < theme.mediumIconSize) {
+                theme.mediumIconSize
+            } else if (height < theme.largeIconSize) {
+                theme.largeIconSize
+            } else if (height < theme.hugeIconSize) {
+                theme.hugeIconSize
+            } else {
+                theme.enormousIconSize
+            }
+        }
         tasksHeight: homeScreen.height/4.5
         onDraggingChanged: {
             if (dragging) {
@@ -91,14 +107,14 @@ Image {
             }
         }
 
-        anchors {
-            fill: parent
-            bottomMargin: background.margins.bottom
-        }
+        anchors.fill: parent
 
         Column {
             id: itemColumn
-            anchors.fill: parent
+            anchors {
+                fill: parent
+                bottomMargin: background.margins.bottom
+            }
             spacing: 4
 
             PlasmoidContainer {
@@ -155,7 +171,7 @@ Image {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    rightMargin: slidingDragButton.homeButtonShown ? 32 : 0
+                    rightMargin: slidingDragButton.homeButtonShown ? slidingDragButton.panelHeight : 0
                 }
                 height: slidingDragButton.panelHeight
             }
@@ -175,7 +191,7 @@ Image {
             name: "Hidden"
             PropertyChanges {
                 target: topSlidingPanel
-                y: -topEdgePanel.height + systrayContainer.height + background.margins.bottom + 2
+                y: -topEdgePanel.height + background.height
                 acceptsFocus: false
             }
         },
@@ -183,7 +199,7 @@ Image {
             name: "Tasks"
             PropertyChanges {
                 target: topSlidingPanel
-                y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom
+                y: -topEdgePanel.height + background.height + background.margins.bottom + windowListContainer.height
 
                 acceptsFocus: true
             }

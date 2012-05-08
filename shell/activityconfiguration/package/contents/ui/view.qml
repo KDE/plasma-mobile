@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
@@ -27,15 +27,10 @@ PlasmaComponents.Sheet {
     id: main
     signal closeRequested
 
-    title: (configInterface.activityName == "") ? i18n("Create new activity") : i18n("Activity configuration")
-    acceptButtonText: {
-        if (!encryptedSwitch.checked || encryptedSwitch.checked == internal.activityEncrypted) {
-            (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
-        } else {
-            (configInterface.activityName == "") ? i18n("Enter password and create activity") : i18n("Enter password and save changes")
-        }
-    }
-    rejectButtonText: i18n("Close")
+    title: (configInterface.activityName == "") ? i18n("Create New Activity") : i18n("Edit Activity")
+    acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save Changes")
+
+    rejectButtonText: i18n("Cancel")
     acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
 
     Timer {
@@ -62,12 +57,25 @@ PlasmaComponents.Sheet {
         if (activityNameEdit.text == "" || nameExists()) {
             return
         }
+        //console.log("Creating activity " + activityNameEdit.text)
         configInterface.activityName = activityNameEdit.text
         configInterface.wallpaperIndex = wallpapersList.currentIndex
         configInterface.encrypted = encryptedSwitch.checked
     }
 
+    // Virtual keyboard can emit the accepted signal several times.
+    // For example, try pressing the RETURN key several times as fast as you can when creating one activity.
+    Item {
+        id: privateItem
+        property bool creatingActivity: false
+    }
+
     onAccepted: {
+        if (privateItem.creatingActivity) {
+            //console.log("Already creating activity")
+            return;
+        }
+        privateItem.creatingActivity = true
         saveConfiguration()
     }
 
@@ -123,38 +131,93 @@ PlasmaComponents.Sheet {
     }
 
     content: [
-        Grid {
+        Row {
             id: nameRow
-            columns: 2
-            rows: 2
+            spacing: 2
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.topMargin
             }
             visible: configInterface.activityNameConfigurable
+            property int sideWidth: Math.max(activityNameLabel.paintedWidth, encryptRow.implicitWidth)
             PlasmaComponents.Label {
-                color: theme.textColor
-                text: i18n("Activity name:")
-                anchors.verticalCenter: activityNameEdit.verticalCenter
-                anchors.right: activityNameEdit.left
+                id: activityNameLabel
+                width: nameRow.sideWidth
+                text: i18n("Name:")
+                horizontalAlignment: Text.AlignRight
+                anchors.verticalCenter: parent.verticalCenter
             }
             PlasmaComponents.TextField {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
                 Component.onCompleted: activityNameEdit.forceActiveFocus()
+                anchors.verticalCenter: parent.verticalCenter
                 Keys.onReturnPressed: {
-                    saveConfiguration()
                     accept()
                 }
             }
-        },
-        PlasmaComponents.Label {
-            anchors {
-                left: nameRow.right
-                verticalCenter: nameRow.verticalCenter
+            Row {
+                id: encryptRow
+                width: nameRow.sideWidth
+                spacing: 2
+                visible: true
+
+                //spacer
+                Item {
+                    width: 4
+                    height: 4
+                }
+                PlasmaComponents.ToolButton {
+                    iconSource: "document-decrypt"
+                    width: theme.mediumIconSize+5
+                    height: width
+                    onClicked: encryptedSwitch.checked = false
+                }
+                PlasmaComponents.Switch {
+                    id: encryptedSwitch
+                    checked: configInterface.encrypted
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                PlasmaComponents.ToolButton {
+                    iconSource: "document-encrypt"
+                    width: theme.mediumIconSize+5
+                    height: width
+                    onClicked: encryptedSwitch.checked = true
+                }
             }
-            text: i18n("An activity with this name already exists")
+        },
+        PlasmaCore.FrameSvgItem {
+            z: 9999
+            anchors {
+                horizontalCenter: nameRow.horizontalCenter
+                top: nameRow.bottom
+            }
             opacity: nameExists() ? 1 : 0
+            imagePath: "dialogs/background"
+            width: errorLabel.width + margins.left + margins.right
+            height: errorLabel.height + margins.top + margins.bottom
+            PlasmaCore.SvgItem {
+                svg: PlasmaCore.Svg {
+                    id: backgroundSvg
+                    imagePath: "dialogs/background"
+                }
+                elementId: "baloon-tip-top"
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.top
+                    bottomMargin: -backgroundSvg.elementSize("hint-top-shadow").height
+
+                }
+                width: naturalSize.width
+                height: naturalSize.height
+            }
+            PlasmaComponents.Label {
+                id: errorLabel
+                x: parent.margins.left
+                y: parent.margins.top
+                text: i18n("An activity with this name already exists")
+                opacity: nameExists() ? 1 : 0
+            }
             Behavior on opacity {
                 NumberAnimation {
                     duration: 250
@@ -174,33 +237,13 @@ PlasmaComponents.Sheet {
             anchors {
                 top: nameRow.bottom
                 left: parent.left
-                bottom: encryptRow.visible ? encryptRow.top : parent.bottom
+                bottom: parent.bottom
                 right: parent.right
                 topMargin: 6
                 bottomMargin: 12
             }
             model: configInterface.wallpaperModel
             delegate: WallpaperDelegate {}
-        },
-        Row {
-            id: encryptRow
-            spacing: 8
-            visible: true
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
-                bottomMargin: 6
-            }
-
-            PlasmaComponents.Label {
-                id: encryptLabel
-                color: theme.textColor
-                text: i18n("Lock as private:")
-            }
-            PlasmaComponents.Switch {
-                id: encryptedSwitch
-                checked: configInterface.encrypted
-            }
         }
     ]
 
@@ -219,6 +262,7 @@ PlasmaComponents.Sheet {
             } else {
                 activityNameEdit.text = configInterface.activityName
             }
+            privateItem.creatingActivity = false
         }
     }
     Timer {

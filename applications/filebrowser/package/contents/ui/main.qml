@@ -17,14 +17,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.plasma.slccomponents 0.1 as SlcComponents
-import org.kde.qtextracomponents 0.1
 import org.kde.dirmodel 0.1
 
 
@@ -68,7 +65,11 @@ Image {
             return
         }
         if (mainStack.depth == 1) {
-            mainStack.replace(Qt.createComponent("Browser.qml"))
+            if (exclusiveResourceType) {
+                mainStack.replace(Qt.createComponent("Browser.qml"))
+            } else {
+                mainStack.replace(Qt.createComponent("Intro.qml"))
+            }
         } else {
             mainStack.pop()
         }
@@ -76,7 +77,7 @@ Image {
 
     PlasmaComponents.BusyIndicator {
         anchors.centerIn: mainStack
-        visible: metadataModel.status == MetadataModels.MetadataModel.Running
+        visible: metadataModel.running
         running: visible
     }
 
@@ -116,13 +117,17 @@ Image {
     }
 
     Timer {
-        interval: 1000
+        interval: 500
         running: true
         onTriggered: {
             if (mainStack.depth > 0) {
                 return
             }
-            mainStack.push(Qt.createComponent("Browser.qml"))
+            if (exclusiveResourceType) {
+                mainStack.push(Qt.createComponent("Browser.qml"))
+            } else {
+                mainStack.push(Qt.createComponent("Intro.qml"))
+            }
         }
     }
     //FIXME: this is due to global vars being binded after the parse is done, do the 2 steps parsing
@@ -137,6 +142,9 @@ Image {
                 //FIXME: use kmimetype from C++ side?
                 if (path.indexOf(".") == -1) {
                     mimeType = "inode/directory"
+                    if (mainStack.depth == 0) {
+                        mainStack.push(Qt.createComponent("Browser.qml"))
+                    }
                 }
                 openFile(path, mimeType)
             }

@@ -3,6 +3,9 @@ Encoding=UTF-8
 Name=Mobile Network Status
 Name[da]=Netværksstatus til Mobile
 Name[es]=Estado de red móvil
+Name[et]=Mobiilivõrgu olek
+Name[fr]=État du réseau mobile
+Name[km]=ស្ថានភាព​បណ្ដាញ​ចល័ត
 Name[nl]=Status mobiele netwerk
 Name[pl]=Stan sieci dla Mobile
 Name[pt]=Estado da Rede Móvel
@@ -10,6 +13,7 @@ Name[pt_BR]=Status da rede móvel
 Name[sv]=Mobil nätverksstatus
 Name[uk]=Стан мобільної мережі
 Name[x-test]=xxMobile Network Statusxx
+Name[zh_TW]=行動網路狀態
 
 Type=Service
 ServiceTypes=Plasma/Applet

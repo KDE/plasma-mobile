@@ -71,8 +71,95 @@ Item {
 
 
     Item {
-        id: startPageItem
+        id: fontSizeItem
         anchors { top: titleCol.bottom; left: parent.left; right: parent.right; topMargin: 32; }
+
+        PlasmaComponents.Label {
+            anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
+            text: i18n("Text size:")
+        }
+
+        PlasmaCore.FrameSvgItem {
+            id: fontPreviewFrame
+            z: 100
+            height: fontPreviewLabel.paintedHeight+24
+            width: fontPreviewLabel.paintedWidth+54
+            opacity: 0
+            anchors { bottom: fontSizeSlider.top; horizontalCenter: fontSizeSlider.horizontalCenter; }
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            imagePath: "dialogs/background"
+            PlasmaComponents.Label {
+                z: 100
+                anchors { centerIn: parent; leftMargin: 12; rightMargin: 12; }
+                id: fontPreviewLabel
+                text: i18n("Ceci n'est pas un exemple.");
+                font.pointSize: theme.defaultFont.pointSize + fontSizeSlider.value
+            }
+            PlasmaCore.SvgItem {
+                svg: PlasmaCore.Svg {
+                    id: backgroundSvg
+                    imagePath: "dialogs/background"
+                }
+                elementId: "baloon-tip-bottom"
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    top: parent.bottom
+                    topMargin: -backgroundSvg.elementSize("hint-bottom-shadow").height
+
+                }
+                width: naturalSize.width
+                height: naturalSize.height
+            }
+        }
+
+        Timer {
+            id: fontPreviewTimer
+            interval: 2500
+            running: false
+            repeat: false
+            onTriggered: fontPreviewFrame.opacity = 0
+
+        }
+
+        PlasmaComponents.Slider {
+            id: fontSizeSlider
+            minimumValue: -6
+            maximumValue: 24
+            stepSize: 1
+            anchors { left: parent.horizontalCenter; right: parent.right; verticalCenter: parent.verticalCenter; }
+            Component.onCompleted: value = browserConfig.readEntry("fontSizeCorrection");
+            onValueChanged: {
+                var s = theme.defaultFont.pointSize + fontSizeSlider.value;
+                browserConfig.writeEntry("fontSizeCorrection", fontSizeSlider.value);
+                //fontPreviewTimer.restart();
+            }
+            onPressedChanged: {
+                if (!pressed) {
+                    fontPreviewTimer.running = true;
+                } else {
+                    fontPreviewFrame.opacity = 1;
+                    fontPreviewTimer.running = false;
+                    if (settingsItem) { 
+                        // when running in the webbrowser, we want to prevent clipping
+                        // of the pagestack, but only as long as the preview is shown.
+                        settingsItem.clip = false;
+                    }
+                }
+                if (!pressed || (pressed && fontPreviewTimer.running)) {
+                    fontPreviewTimer.restart();
+                }
+            }
+        }
+    }
+
+    Item {
+        id: startPageItem
+        anchors { top: fontSizeItem.bottom; left: parent.left; right: parent.right; topMargin: 48; }
 
         PlasmaComponents.Label {
             anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
@@ -81,21 +168,21 @@ Item {
 
         PlasmaComponents.TextField {
             id: startPageText
+            clearButtonShown: true
+            placeholderText: i18n("Show dashboard")
             text: "http://plasma-active.org"
-            anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
-            anchors.right: saveStartPage.left
-            Keys.onReturnPressed: browserConfig.writeEntry("startPage", startPageText.text);
+            anchors { left: parent.horizontalCenter; right: parent.right; verticalCenter: parent.verticalCenter; }
+            Keys.onReturnPressed: closeSoftwareInputPanel()
             Component.onCompleted: text = browserConfig.readEntry("startPage");
+            onTextChanged: startPageTimer.restart()
+            Timer {
+                id: startPageTimer
+                interval: 1000
+                running: false
+                repeat: false
+                onTriggered: { print("sv"); browserConfig.writeEntry("startPage", startPageText.text); }
+            }
         }
-        PlasmaComponents.Button {
-            id: saveStartPage
-            height: startPageText.height
-            iconSource: "dialog-ok-apply"
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            onClicked: browserConfig.writeEntry("startPage", startPageText.text);
-        }
-
     }
 
     Item {

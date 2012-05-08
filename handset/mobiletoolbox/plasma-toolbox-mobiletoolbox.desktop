@@ -1,6 +1,9 @@
 [Desktop Entry]
 Comment=Default toolbox for the mobile shell
 Comment[da]=Standard værktøjskasse til mobil-skallen
+Comment[et]=Mobiili vaikimisi tööriistakast
+Comment[fr]=Boîte à outils par défaut pour la console mobile
+Comment[km]=ប្រអប់​ឧបករណ៍​លំនាំដើម​សម្រាប់​សែល​ចល័ត
 Comment[nl]=Standaard hulpmiddelen voor de mobiel-shell
 Comment[pl]=Domyślny przybornik dla powłoki Mobile
 Comment[pt]=Área de ferramentas predefinidas para a área de trabalho móvel
@@ -8,10 +11,14 @@ Comment[pt_BR]=A barra padrão para a área de trabalho móvel
 Comment[sv]=Standardverktygslåda för mobilskalet
 Comment[uk]=Типовий набір інструментів для мобільної оболонки
 Comment[x-test]=xxDefault toolbox for the mobile shellxx
+Comment[zh_TW]=Mobile shell 的預設工具盒
 Icon=plasma
 Name=Mobile toolbox
 Name[da]=Værktøjskasse til Mobile
 Name[es]=Caja de herramientas móvil
+Name[et]=Mobiili tööriistakast
+Name[fr]=Boîte à outils pour mobile
+Name[km]=ប្រអប់​ឧបករណ៍​ចល័ត
 Name[nl]=Hulpmiddelen voor mobiel
 Name[pl]=Przybornik dla Mobile
 Name[pt]=Área de ferramentas móvel
@@ -19,6 +26,7 @@ Name[pt_BR]=Caixa de ferramentas móvel
 Name[sv]=Mobil verktygslåda
 Name[uk]=Набір інструментів для мобільного
 Name[x-test]=xxMobile toolboxxx
+Name[zh_TW]=行動工具盒
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/ToolBox

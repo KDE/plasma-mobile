@@ -64,8 +64,6 @@
 
 #include <Nepomuk/ResourceManager>
 
-#include "../components/runnermodel/runnermodel.h"
-
 #ifdef Q_WS_X11
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
@@ -164,6 +162,9 @@ PlasmaApp::PlasmaApp()
     // this line initializes the corona and setups the main qml homescreen
     corona();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
+
+    connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)),
+            this, SLOT(activeWindowChanged(WId)));
 
     if (isDesktop) {
         notifyStartup(true);
@@ -449,6 +450,11 @@ void PlasmaApp::focusMainView()
     if (m_mainView) {
         KWindowSystem::forceActiveWindow(m_mainView->winId());
     }
+}
+
+void PlasmaApp::activeWindowChanged(WId id)
+{
+    m_homeScreen->setProperty("windowActive", (id == m_mainView->winId()));
 }
 
 void PlasmaApp::mainViewGeometryChanged()

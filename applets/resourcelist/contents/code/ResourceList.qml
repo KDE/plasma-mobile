@@ -70,8 +70,8 @@ Item {
 
         model: MetadataModels.MetadataModel {
             id: metadataModel
-            onStatusChanged: {
-                if (status != MetadataModels.MetadataModel.Waiting) {
+            onRunningChanged: {
+                if (!running) {
                     statusLabel.text = "";
                     plasmoid.busy = false
                 }

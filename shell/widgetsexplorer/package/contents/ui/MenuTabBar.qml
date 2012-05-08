@@ -58,8 +58,8 @@ PlasmaComponents.TabBar {
             activityId: "!"+activitySource.data["Status"]["Current"]
             scoreResources: true
             limit: 1
-            onStatusChanged: {
-                if (status == MetadataModels.MetadataModel.Running) {
+            onRunningChanged: {
+                if (running) {
                     switchPageTimer.running = true
                 }
             }
@@ -115,7 +115,7 @@ PlasmaComponents.TabBar {
                 sortOrder: Qt.DescendingOrder
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 scoreResources: true
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }
@@ -125,7 +125,6 @@ PlasmaComponents.TabBar {
         ResourceBrowser {
             defaultClassName: "FileDataObject"
             model: PlasmaCore.SortFilterModel {
-                id: appsModel
                 sourceModel: PlasmaCore.DataModel {
                     keyRoleFilter: ".*"
                     dataSource: PlasmaCore.DataSource {
@@ -146,6 +145,7 @@ PlasmaComponents.TabBar {
         id: bookmarksComponent
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
+                id: bookmarksModel
                 sortOrder: Qt.AscendingOrder
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortBy: ["nie:url"]
@@ -162,7 +162,7 @@ PlasmaComponents.TabBar {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortBy: ["nco:fullname"]
                 resourceType: "nco:Contact"
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }
@@ -175,7 +175,7 @@ PlasmaComponents.TabBar {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Document"
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }
@@ -188,7 +188,7 @@ PlasmaComponents.TabBar {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Image"
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }
@@ -201,7 +201,7 @@ PlasmaComponents.TabBar {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Audio"
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }
@@ -214,7 +214,7 @@ PlasmaComponents.TabBar {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Video"
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }

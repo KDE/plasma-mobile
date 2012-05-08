@@ -42,13 +42,32 @@ class QTimer;
 
 class KImageCache;
 
+/**
+ * This is the main class of the Nepomuk model bindings: given a query built by assigning its properties such as queryString, resourceType, startDate etc, it constructs a model with a resource per row, with direct access of its main properties as roles.
+ *
+ * @author Marco Martin <mart@kde.org>
+ */
 class MetadataModel : public AbstractMetadataModel
 {
     Q_OBJECT
+    /**
+     * @property string a free form query in the Nepomuk desktop query language
+     */
     Q_PROPERTY(QString queryString READ queryString WRITE setQueryString NOTIFY queryStringChanged)
 
+    /**
+     * @property Array list of fields the results will be sorted: their order is the priority in sorting
+     */
     Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
+
+    /**
+     * @property SortOrder Qt.Ascending or Qt.Descending
+     */
     Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
+
+    /**
+     * @property int optional limit to cut off the results
+     */
     Q_PROPERTY(int limit READ limit WRITE setLimit NOTIFY limitChanged)
 
     /**
@@ -142,11 +161,13 @@ public:
      * it would cause loading every single item of the model,
      * while for big models we want lazy loading.
      * rely on its internal sorting feature instead.
+     * @see sortBy
      */
     Q_INVOKABLE void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 
     /**
      * Compatibility with ListModel
+     * @returns an Object that represents the item with all roles as properties
      */
     Q_INVOKABLE QVariantHash get(int row) const;
 

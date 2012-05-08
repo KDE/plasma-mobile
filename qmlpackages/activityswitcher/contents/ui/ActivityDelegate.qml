@@ -197,11 +197,7 @@ Item {
                             deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
                         }
 
-                        deleteButtonParent.confirmationDialog.scale = 1 / delegate.scale
-
-
-                        // scale does not change dialog's width so we need to anchor the confirmationDialog's center manually.
-                        deleteButtonParent.confirmationDialog.x = deleteButton.x + deleteButton.width / 2 - deleteButtonParent.confirmationDialog.width * (1 / delegate.scale) / 2
+                        deleteButtonParent.confirmationDialog.scale = 1
 
                         deleteButtonParent.confirmationDialog.anchors.bottom = deleteButton.top
                     } else {

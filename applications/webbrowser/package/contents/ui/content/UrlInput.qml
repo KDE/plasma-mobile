@@ -44,6 +44,7 @@ Item {
     property string filteredUrl: ""
     property alias image: bg.source
     property alias url: urlText.text
+    //property alias urlFocus: urlText.activeFocus
     //property alias completionPopup: webBrowser.completionPopup
     property string urlFilter
 
@@ -64,6 +65,7 @@ Item {
     PlasmaComponents.TextField {
         id: urlText
         clearButtonShown: true
+        z: 2
         //horizontalAlignment: TextEdit.AlignLeft
         //font.pixelSize: 14;
 
@@ -95,11 +97,15 @@ Item {
         Keys.onEnterPressed: {
             container.urlEntered(urlText.text)
             webView.focus = true
+            completionPopup.state = "collapsed"
+            urlText.closeSoftwareInputPanel();
         }
 
         Keys.onReturnPressed: {
             container.urlEntered(urlText.text)
             webView.focus = true
+            completionPopup.state = "collapsed"
+            urlText.closeSoftwareInputPanel();
         }
 
 
@@ -107,7 +113,7 @@ Item {
             if (activeFocus) {
                 completionPopup.state = "expanded"
             } else {
-                completionPopup.state = "collapsed"
+                //completionPopup.state = "collapsed"
             }
         }
 
@@ -139,6 +145,7 @@ Item {
         x: urlText.x + 2
         height: 6
         radius: 4
+        z: 2
         color: theme.highlightColor
         width: (bg.width - 20) * webView.progress
         opacity: webView.progress == 1.0 ? 0.0 : 0.7

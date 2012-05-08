@@ -52,7 +52,7 @@ ConfigGroup::ConfigGroup(QDeclarativeItem* parent)
     // Delay and compress everything within 5 seconds into one sync
     d->synchTimer = new QTimer(this);
     d->synchTimer->setSingleShot(true);
-    d->synchTimer->setInterval(5000);
+    d->synchTimer->setInterval(1500);
     connect(d->synchTimer, SIGNAL(timeout()), SLOT(sync()));
 }
 
@@ -162,6 +162,11 @@ QVariant ConfigGroup::readEntry(const QString& key)
     const QVariant value = d->configGroup->readEntry(key, QVariant(""));
     //kDebug() << " reading setting: " << key << value;
     return value;
+}
+
+void ConfigGroup::deleteEntry(const QString& key)
+{
+    d->configGroup->deleteEntry(key);
 }
 
 void ConfigGroup::sync()

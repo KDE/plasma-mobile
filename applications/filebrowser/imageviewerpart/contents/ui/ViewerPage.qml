@@ -52,7 +52,7 @@ PlasmaComponents.Page {
             }
         }
         Text {
-            text: i18n("%1 (%2 of %3)", fullList.currentItem.label, fullList.currentIndex+1, fullList.count)
+            text: i18n("%1 (%2 of %3)", quickBrowserBar.currentItem.name, quickBrowserBar.currentIndex+1, quickBrowserBar.count)
             anchors.centerIn: parent
             font.pointSize: 14
             font.bold: true
@@ -61,6 +61,7 @@ PlasmaComponents.Page {
             styleColor: theme.backgroundColor
         }
         Row {
+            visible: !deviceCapabilitiesSource.data["Input"]["hasMultiTouch"]
             anchors.right: parent.right
             PlasmaComponents.ToolButton {
                 iconSource: "zoom-in"
@@ -109,10 +110,20 @@ PlasmaComponents.Page {
         }
     }
 
+    PlasmaCore.DataSource {
+        id: deviceCapabilitiesSource
+        engine: "org.kde.devicecapabilities"
+        interval: 0
+        connectedSources: ["Input"]
+    }
+
+    //FIXME: HACK
     Connections {
         target: metadataModel
-        onStatusChanged: {
-            viewerPage.loadFile(viewerPage.path)
+        onRunningChanged: {
+            if (!running) {
+                viewerPage.loadFile(viewerPage.path)
+            }
         }
     }
 
@@ -207,6 +218,7 @@ PlasmaComponents.Page {
             var path = fileBrowserRoot.model.get(currentIndex).url
             imageArea.delegate.source = path
             viewerPage.path = path
+            resourceInstance.uri = path
         }
     }
 

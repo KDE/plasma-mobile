@@ -26,12 +26,25 @@
 
 /**
  * class that contains all nepomuk types considered to be user friendly and presentable to the user, complete with a localized name
+ *
+ * @author Marco Martin <mart@kde.org>
  */
 class MetadataUserTypes : public QObject
 {
     Q_OBJECT
+    /**
+     * @property Array of the types that are considered to be presentable to the user, in a form such as nfo:Application
+     */
     Q_PROPERTY(QVariantList userTypes READ userTypes CONSTANT)
+
+    /**
+     * @property Object Associative array that maps from types to their localized, user facing name
+     */
     Q_PROPERTY(QObject *typeNames READ typeNames CONSTANT)
+
+    /**
+     * @property Object Associative array that maps from type to the property that should be used to sort the results of a query
+     */
     Q_PROPERTY(QObject *sortFields READ sortFields CONSTANT)
 
 public:

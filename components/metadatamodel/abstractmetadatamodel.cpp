@@ -30,7 +30,7 @@
 
 AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
     : QAbstractItemModel(parent),
-      m_status(Idle),
+      m_running(false),
       m_minimumRating(0),
       m_maximumRating(0)
 {
@@ -180,19 +180,19 @@ QStringList AbstractMetadataModel::tagStrings() const
     return m_tags;
 }
 
-AbstractMetadataModel::Status AbstractMetadataModel::status() const
+bool AbstractMetadataModel::isRunning() const
 {
-    return m_status;
+    return m_running;
 }
 
-void AbstractMetadataModel::setStatus(AbstractMetadataModel::Status status)
+void AbstractMetadataModel::setRunning(bool running)
 {
-    if (status == m_status) {
+    if (running == m_running) {
         return;
     }
 
-    m_status = status;
-    emit statusChanged();
+    m_running = running;
+    emit runningChanged(running);
 }
 
 void AbstractMetadataModel::askRefresh()

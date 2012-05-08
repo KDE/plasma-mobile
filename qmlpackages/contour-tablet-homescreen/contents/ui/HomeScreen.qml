@@ -74,11 +74,13 @@ Item {
     signal newActivityRequested
     signal focusActivityView
 
+    property bool windowActive: false
+
     //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
     property Item availableScreenRect: Item {
         parent: homeScreen
         anchors.fill: parent
-        anchors.topMargin: 38
+        anchors.topMargin: topEdgePanel.panelHeight
         anchors.bottomMargin: 4
         anchors.leftMargin: 32
         anchors.rightMargin: 32

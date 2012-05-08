@@ -27,7 +27,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
 import org.kde.qtextracomponents 0.1
 
-Item {
+FocusScope {
     id: mainItem
     objectName: "completionPopup"
 
@@ -41,6 +41,17 @@ Item {
         id: theme
     }
 
+    MouseArea {
+        x: -1000
+        y: -1000
+        width: 3000
+        height: 3000
+        onClicked: {
+            mainItem.state = "collapsed";
+            clipBoardHelper.forceActiveFocus();
+        }
+    }
+
     PlasmaCore.FrameSvgItem {
         id: frame
         objectName: "frame"
@@ -50,7 +61,6 @@ Item {
 
         MouseArea {
             anchors.fill: parent
-            hoverEnabled: true
         }
 
         Component {
@@ -109,6 +119,7 @@ Item {
                         //print("URL from completer chosen: " + name + " " + url);
                         urlEntered(url);
                         mainItem.state = "collapsed";
+                        clipBoardHelper.closeSoftwareInputPanel();
                     }
                 }
 
@@ -118,6 +129,9 @@ Item {
         ActiveSettings.SettingsItem {
             id: settingsItem
             initialPage: dashboard
+            z: 99
+
+            clip: false
             anchors {
                 fill: parent
                 leftMargin: frame.margins.left * 2
@@ -138,6 +152,7 @@ Item {
             anchors.right: settingsItem.right
             elementId: "configure"
             onClicked: {
+                settingsItem.clip = true;
                 var webModule = "org.kde.active.settings.web";
                 if (settingsItem.module != webModule) {
                     settingsItem.module = webModule;

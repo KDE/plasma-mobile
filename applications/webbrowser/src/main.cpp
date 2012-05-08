@@ -34,17 +34,17 @@ static const char version[] = "1.9";
 //static const char HOME_URL[] = "http://community.kde.org/Plasma/Active";
 static const char HOME_URL[] = "";
 
-int main(int argc, char **argv)
+extern "C"
+KDE_EXPORT int kdemain(int argc, char **argv)
 {
     KAboutData about("active-web-browser", 0, ki18n("Plasma Active Web Browser"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");
                      about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
 
-    KService::Ptr service = KService::serviceByDesktopName("active-web-browser");
-    const QString homeUrl = service ? service->property("X-KDE-PluginInfo-Website", QVariant::String).toString() : HOME_URL;
+
     KCmdLineOptions options;
-    options.add("+[url]", ki18n( "URL to open" ), homeUrl.toLocal8Bit());
+    options.add("+[url]", ki18n( "URL to open" ), QByteArray());
 #ifndef QT_NO_OPENGL
     options.add("opengl", ki18n("use a QGLWidget for the viewport"));
 #endif
@@ -61,7 +61,14 @@ int main(int argc, char **argv)
         KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
         useGL = cg.readEntry("UseOpenGl", true);
     }
-    const QString url = args->count() ? args->arg(0) : homeUrl;
+    QString url;
+    if (args->count()) {
+        url = args->arg(0);
+    } else {
+        KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+        KConfigGroup _config = KConfigGroup(ptr, "webbrowser");
+        url = _config.readEntry("startPage", QString());
+    }
 
     app.setUseGL(useGL);
     app.newWindow(url);

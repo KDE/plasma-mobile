@@ -1,0 +1,35 @@
+[Desktop Entry]
+Name=Screen
+Name[da]=Skærm
+Name[es]=Pantalla
+Name[nl]=Scherm
+Name[pt]=Ecrã
+Name[pt_BR]=Tela
+Name[sv]=Bildskärm
+Name[uk]=Екран
+Name[x-test]=xxScreenxx
+Name[zh_TW]=螢幕
+Comment=Lock, Sleep, Timeout
+Comment[da]=Indstilling af strømstyring for skærmen
+Comment[nl]=Instellingen voor energiebeheer van het scherm
+Comment[pt]=Configuração da gestão de energia do ecrã
+Comment[pt_BR]=Configurações do gerenciamento de energia da tela
+Comment[sv]=Strömhanteringsinställningar för bildskärmen
+Comment[uk]=Параметри керування яскравістю екрана
+Comment[x-test]=xxPower management settings for the screenxx
+Comment[zh_TW]=螢幕電源管理設定
+
+Encoding=UTF-8
+Type=Service
+Icon=preferences-system-power-management
+X-KDE-ServiceTypes=Active/SettingsModule
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=mart@kde.org
+X-KDE-PluginInfo-Name=org.kde.active.settings.powermanagement
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma-active.org
+X-KDE-PluginInfo-Category=Power management
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-MainScript=ui/Power.qml

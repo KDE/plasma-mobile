@@ -27,9 +27,9 @@ import org.kde.runnermodel 0.1 as RunnerModels
 PlasmaComponents.Sheet {
     id: widgetsExplorer
     objectName: "widgetsExplorer"
-    title: i18n("Add items")
-    acceptButtonText: i18n("Add items")
-    rejectButtonText: i18n("Close")
+    title: i18n("Add Items")
+    acceptButtonText: i18n("Add Items")
+    rejectButtonText: i18n("Cancel")
 
     signal addAppletRequested(string plugin)
     signal closeRequested
@@ -121,19 +121,18 @@ PlasmaComponents.Sheet {
                     }
                 }
             }
+            busy: {
+                if (stack.currentPage.model && stack.currentPage.model.running !== undefined) {
+                    stack.currentPage.model.running
+                } else {
+                    false
+                }
+            }
 
             anchors {
                 left: parent.left
                 right: parent.right
                 top: parent.top
-            }
-            onSearchQueryChanged: {
-                if (stack.depth == 1 && searchQuery.length > 3) {
-                    stack.push(globalSearchComponent)
-                    busy = true
-                } else {
-                    busy = false
-                }
             }
         },
         MenuTabBar {
@@ -157,13 +156,15 @@ PlasmaComponents.Sheet {
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
                 id: runnerModel
-                queryString: searchField.searchQuery.length > 3 ? searchField.searchQuery : ""
+                queryString: searchField.searchQuery.length > 3 ? "*" + searchField.searchQuery + "*" : ""
                 onQueryStringChanged: {
                     if (searchField.searchQuery.length <= 3) {
                         stack.pop()
                     }
                 }
-                onCountChanged: { searchField.restartBusyTimer() }
+                Component.onCompleted: {
+                    runnerModel.finishedListingChanged.connect(searchField.setIdle)
+                }
             }
         }
     }

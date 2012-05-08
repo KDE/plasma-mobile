@@ -51,11 +51,14 @@ import org.kde.qtextracomponents 0.1
         svg: iconSvg
         elementId: "start-here"
         width: homeButtonShown ? height : 0
-        height: theme.mediumIconSize
+        height: parent.panelHeight
         visible: homeButtonShown
+        enabled: !homeScreen.windowActive
+        opacity: enabled ? 1 : 0.3
         anchors {
             right: parent.right
-            bottom:parent.bottom
+            bottom: parent.bottom
+            bottomMargin: background.margins.bottom
         }
         MouseArea {
             anchors.fill: parent
@@ -115,7 +118,8 @@ import org.kde.qtextracomponents 0.1
         var oldState = systrayPanel.state
         systrayPanel.state = "none"
 
-        if (topSlidingPanel.y > -100) {
+        // if more than half of pick & launch panel is visible then make it totally visible.
+        if ((topSlidingPanel.y > -(systrayPanel.height - topSlidingPanel.windowListArea.height)/2) ) {
             //the biggest one, Launcher
             systrayPanel.state = "Launcher"
         } else if ((oldState == "Hidden" && systrayPanel.height + topSlidingPanel.y > panelDragButton.tasksHeight/2) ||
