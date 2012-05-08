@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=Language
+Name[nl]=Taal
+Name[pt]=Linguagem
+Name[pt_BR]=Linguagem
+Name[uk]=Мова
+Name[x-test]=xxLanguagexx
 Comment=Locale settings
+Comment[nl]=Taalregio-instellingen
+Comment[pt]=Configuração regional
+Comment[pt_BR]=Configuração regional
+Comment[uk]=Параметри локалі
+Comment[x-test]=xxLocale settingsxx
 Encoding=UTF-8
 Type=Service
 Icon=preferences-desktop-locale
