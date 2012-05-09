@@ -1,23 +1,5 @@
 [Desktop Entry]
 Name=Welcome
-Name[cs]=Vítejte
-Name[da]=Velkommen
-Name[de]=Willkommen
-Name[es]=Bienvenido
-Name[et]=Tere tulemast!
-Name[fr]=Bienvenue
-Name[nl]=Welkom
-Name[pl]=Witaj
-Name[pt]=Bem-Vindo
-Name[pt_BR]=Bem-vindo
-Name[sk]=Vitajte
-Name[sv]=Välkommen
-Name[tr]=Hoş Geldiniz
-Name[ug]=مەرھابا
-Name[uk]=Вітаємо
-Name[x-test]=xxWelcomexx
-Name[zh_CN]=欢迎
-Name[zh_TW]=歡迎
 Type=Service
 Icon=plasma
 X-KDE-PluginInfo-Author=Sebastian Kügler

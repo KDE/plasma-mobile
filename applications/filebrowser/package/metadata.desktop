@@ -1,20 +1,5 @@
 [Desktop Entry]
 Name=File browser
-Name[cs]=Prohlížeč souborů
-Name[da]=Filbrowser
-Name[de]=Dateiverwaltung
-Name[es]=Navegador de archivos
-Name[fr]=Explorateur de fichiers
-Name[nl]=Bestandsbrowser
-Name[pl]=Przeglądarka plików
-Name[pt]=Navegador de ficheiros
-Name[pt_BR]=Navegador de arquivos
-Name[sv]=Filbläddrare
-Name[tr]=Dosya tarayıcı
-Name[uk]=Керування файлами
-Name[x-test]=xxFile browserxx
-Name[zh_CN]=文件浏览器
-Name[zh_TW]=檔案瀏覽器
 Encoding=UTF-8
 Type=Service
 Icon=system-file-manager
