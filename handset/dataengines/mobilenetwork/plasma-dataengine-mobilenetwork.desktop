@@ -1,6 +1,34 @@
 [Desktop Entry]
 Name=Mobile Network Engine
+Name[da]=Netværksmotor til Mobile
+Name[es]=Motor de red móvil
+Name[et]=Mobiilivõrgu mootor
+Name[fr]=Moteur de réseau mobile
+Name[km]=ម៉ាស៊ីន​បណ្ដាញ​ចល័ត
+Name[nl]=Engine voor mobiele netwerk
+Name[pl]=Silnik sieci dla Mobile
+Name[pt]=Motor de Rede Móvel
+Name[pt_BR]=Mecanismo de rede móvel
+Name[sv]=Mobilt nätverksgränssnitt
+Name[tr]=Cep Telefonu Ağ Motoru
+Name[uk]=Рушій мобільних мереж
+Name[x-test]=xxMobile Network Enginexx
+Name[zh_TW]=行動網路引擎
 Comment=Mobile network engine
+Comment[da]=Netværksmotor til Mobile
+Comment[es]=Motor de red móvil
+Comment[et]=Mobiilivõrgu mootor
+Comment[fr]=Moteur de réseau mobile
+Comment[km]=ម៉ាស៊ីន​បណ្ដាញ​ចល័ត
+Comment[nl]=Engine voor mobiele netwerk
+Comment[pl]=Silnik sieci dla Mobile
+Comment[pt]=Motor de rede móvel
+Comment[pt_BR]=Mecanismo de rede móvel
+Comment[sv]=Mobilt nätverksgränssnitt
+Comment[tr]=Cep telefonu ağ motoru
+Comment[uk]=Рушій мобільних мереж
+Comment[x-test]=xxMobile network enginexx
+Comment[zh_TW]=行動網路引擎
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service

@@ -1,6 +1,18 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Window Strip
+Name[da]=Vinduesstribe
+Name[et]=Aknariba
+Name[fr]=Bandeau de fenêtres
+Name[km]=ឆ្នូត​បង្អួច
+Name[nl]=Vensterstrook
+Name[pl]=Pas okna
+Name[pt]=Barra da Janela
+Name[pt_BR]=Barra da janela
+Name[sv]=Fönsterremsa
+Name[uk]=Стрічка-вікно
+Name[x-test]=xxWindow Stripxx
+Name[zh_TW]=視窗帶
 Icon=window
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

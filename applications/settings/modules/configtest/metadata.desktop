@@ -1,6 +1,24 @@
 [Desktop Entry]
 Name=Configuration Test
+Name[da]=Konfigurationstest
+Name[es]=Prueba de configuración
+Name[et]=Seadistuste test
+Name[fr]=Test de configuration
+Name[nl]=Test van instellingen
+Name[pl]=Test konfiguracji
+Name[pt]=Teste de Configuração
+Name[pt_BR]=Teste de configuração
+Name[sv]=Inställningstest
+Name[tr]=Yapılandırma Testi
+Name[uk]=Перевірка налаштувань
+Name[x-test]=xxConfiguration Testxx
+Name[zh_TW]=設定測試
 Comment=Config QML Bindings
+Comment[nl]=QML-bindingen instellen
+Comment[pt]=Configuração as Interfaces de QML
+Comment[pt_BR]=Configuração as Interfaces de QML
+Comment[uk]=Налаштування прив’язок QML
+Comment[x-test]=xxConfig QML Bindingsxx
 Encoding=UTF-8
 Type=Service
 Icon=applications-development

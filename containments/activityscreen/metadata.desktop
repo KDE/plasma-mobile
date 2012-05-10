@@ -1,6 +1,29 @@
 [Desktop Entry]
 Name=Contour activity screen
+Name[da]=Contour aktivitetsbillede
+Name[et]=Contouri tegevuste ekraan
+Name[fr]=Écran de l'activité Contour
+Name[nl]=Omranding van activiteiten scherm
+Name[pl]=Ekran działania Contour 
+Name[pt]=Ecrã de actividade do Contour
+Name[pt_BR]=Tela de atividade do Contour
+Name[sv]=Contour aktivitetsskärm
+Name[uk]=Сторінка простору дій Contour
+Name[x-test]=xxContour activity screenxx
+Name[zh_TW]=Contour 活動螢幕
 Comment=Categorized resources and widgets
+Comment[da]=Kategoriserede ressourcer og widgets
+Comment[et]=Kategoriseeritud ressursid ja vidinad
+Comment[fr]=Ressources et composants graphiques classés par catégories
+Comment[nl]=Lijst met hulpbronnen in categorieën en widgets
+Comment[pl]=Kategoryzowane zasoby i elementy interfejsu
+Comment[pt]=Recursos e elementos categorizados
+Comment[pt_BR]=Recursos e widgets categorizados
+Comment[sv]=Kategoriserade resurser och grafiska komponenter
+Comment[tr]=Kategorilendirilmiş kaynaklar ve gereçler
+Comment[uk]=Категоризований список ресурсів та віджетів
+Comment[x-test]=xxCategorized resources and widgetsxx
+Comment[zh_TW]=分類的資源與元件
 Encoding=UTF-8
 
 

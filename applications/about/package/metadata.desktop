@@ -1,5 +1,23 @@
 [Desktop Entry]
 Name=About
+Name[cs]=O aplikaci
+Name[da]=Om
+Name[de]=Über
+Name[es]=Acerca de
+Name[et]=Teave
+Name[fr]=À propos
+Name[nl]=Info over
+Name[pl]=O programie
+Name[pt]=Acerca
+Name[pt_BR]=Sobre
+Name[sk]=O programe
+Name[sv]=Om
+Name[tr]=Hakkında
+Name[ug]=ھەققىدە
+Name[uk]=Про програму
+Name[x-test]=xxAboutxx
+Name[zh_CN]=关于
+Name[zh_TW]=關於
 
 Encoding=UTF-8
 Type=Service

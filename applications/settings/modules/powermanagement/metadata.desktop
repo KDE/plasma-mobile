@@ -1,6 +1,20 @@
 [Desktop Entry]
 Name=Screen
+Name[da]=Skærm
+Name[es]=Pantalla
+Name[nl]=Scherm
+Name[pt]=Ecrã
+Name[pt_BR]=Tela
+Name[sv]=Bildskärm
+Name[uk]=Екран
+Name[x-test]=xxScreenxx
+Name[zh_TW]=螢幕
 Comment=Lock, Sleep, Timeout
+Comment[nl]=Vergrendelen, slapen, tijdsoverschrijding
+Comment[pt]=Bloquear, Suspender, Tempo-Limite
+Comment[pt_BR]=Bloquear, Suspender, Tempo-Limite
+Comment[uk]=Блокування, присипляння, час очікування
+Comment[x-test]=xxLock, Sleep, Timeoutxx
 
 Encoding=UTF-8
 Type=Service

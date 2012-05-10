@@ -3,6 +3,17 @@ Comment=
 Encoding=UTF-8
 Keywords=
 Name=plasma-mobile-homescreen
+Name[da]=plasma-mobile-startskærm
+Name[et]=Plasma mobiilis koduekraan
+Name[fr]=plasma-mobile-homescreen
+Name[nl]=plasma-mobile-homescreen
+Name[pl]=ekrandomowy-plazma-mobile
+Name[pt]=plasma-mobile-homescreen
+Name[pt_BR]=plasma-mobile-homescreen
+Name[sv]=Plasma mobil hemskärm
+Name[uk]=мобільна-домівка-плазми
+Name[x-test]=xxplasma-mobile-homescreenxx
+Name[zh_TW]=plasma-mobile-homescreen
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/GenericPackage

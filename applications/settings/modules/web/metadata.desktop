@@ -1,6 +1,26 @@
 [Desktop Entry]
 Name=Web and Browser
+Name[cs]=Web a prohlížeč
+Name[da]=Web og browser
+Name[es]=Web y navegador
+Name[et]=Veebibrauser
+Name[fr]=Web et Navigateur
+Name[nl]=Web en browser
+Name[pl]=Sieć i przeglądarka
+Name[pt]=Web e Navegação
+Name[pt_BR]=Web e Navegador
+Name[sv]=Webb och webbläsare
+Name[tr]=Web ve Tarayıcı
+Name[uk]=Інтернет і перегляд інтернету
+Name[x-test]=xxWeb and Browserxx
+Name[zh_CN]=网络和浏览
+Name[zh_TW]=網頁與瀏覽器
 Comment=Text Size, History, Adblock, Homepage
+Comment[nl]=Tekstgrootte, geschiedenis, Adblock, homepagina
+Comment[pt]=Tamanho do Texto, Histórico, Bloqueio, Página Inicial
+Comment[pt_BR]=Tamanho do Texto, Histórico, Bloqueio, Página Inicial
+Comment[uk]=Розмір тексту, журнал, блокування реклами, домашня сторінка
+Comment[x-test]=xxText Size, History, Adblock, Homepagexx
 Encoding=UTF-8
 Type=Service
 Icon=preferences-system-network
