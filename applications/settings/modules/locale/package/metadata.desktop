@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Language
+Name[et]=Keel
 Name[nl]=Taal
 Name[pl]=Język
 Name[pt]=Linguagem
@@ -7,8 +8,10 @@ Name[pt_BR]=Linguagem
 Name[tr]=Dil
 Name[uk]=Мова
 Name[x-test]=xxLanguagexx
+Name[zh_TW]=語言
 Comment=Locale settings
 Comment[cs]=Jazyková nastavení
+Comment[et]=Lokaadi seadistused
 Comment[nl]=Taalregio-instellingen
 Comment[pl]=Ustawienia regionalne
 Comment[pt]=Configuração regional
@@ -16,6 +19,7 @@ Comment[pt_BR]=Configuração regional
 Comment[tr]=Yerel ayarları
 Comment[uk]=Параметри локалі
 Comment[x-test]=xxLocale settingsxx
+Comment[zh_TW]=區域化設定
 Encoding=UTF-8
 Type=Service
 Icon=preferences-desktop-locale

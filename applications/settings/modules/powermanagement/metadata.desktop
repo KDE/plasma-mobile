@@ -2,6 +2,7 @@
 Name=Screen
 Name[da]=Skærm
 Name[es]=Pantalla
+Name[et]=Ekraan
 Name[nl]=Scherm
 Name[pl]=Ekran
 Name[pt]=Ecrã
@@ -12,6 +13,7 @@ Name[uk]=Екран
 Name[x-test]=xxScreenxx
 Name[zh_TW]=螢幕
 Comment=Lock, Sleep, Timeout
+Comment[et]=Lukustus, uni, ajaületus
 Comment[nl]=Vergrendelen, slapen, tijdsoverschrijding
 Comment[pl]=Zablokuj, Uśpij, Czas oczekiwania
 Comment[pt]=Bloquear, Suspender, Tempo-Limite
@@ -19,6 +21,7 @@ Comment[pt_BR]=Bloquear, Suspender, Tempo-Limite
 Comment[tr]=Kilitle, Uyku Kipi, Zamanaşımı
 Comment[uk]=Блокування, присипляння, час очікування
 Comment[x-test]=xxLock, Sleep, Timeoutxx
+Comment[zh_TW]=鎖定，休眠，逾時
 
 Encoding=UTF-8
 Type=Service
