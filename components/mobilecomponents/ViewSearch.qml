@@ -54,7 +54,7 @@ Item {
 
     Timer {
         id: searchTimer
-        interval: 100
+        interval: 500
         running: false
         repeat: false
         onTriggered: searchQuery = searchField.text
