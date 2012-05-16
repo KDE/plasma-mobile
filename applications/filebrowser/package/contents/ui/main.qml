@@ -18,11 +18,12 @@
  */
 
 import QtQuick 1.1
+import org.kde.dirmodel 0.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.dirmodel 0.1
+import org.kde.plasma.slccomponents 0.1 as SlcComponents
 
 
 Image {
@@ -149,5 +150,8 @@ Image {
                 openFile(path, mimeType)
             }
         }
+    }
+    SlcComponents.SlcMenu {
+        id: contextMenu
     }
 }

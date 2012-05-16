@@ -22,7 +22,6 @@ import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.plasma.slccomponents 0.1 as SlcComponents
 import org.kde.draganddrop 1.0
 import org.kde.qtextracomponents 0.1
 
@@ -537,9 +536,6 @@ PlasmaComponents.Page {
             duration: 250
             easing.type: Easing.InOutQuad
         }
-    }
-    SlcComponents.SlcMenu {
-        id: contextMenu
     }
 }
 
