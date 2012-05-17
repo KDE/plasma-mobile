@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Language
+Name[el]=Γλώσσα
 Name[et]=Keel
 Name[nl]=Taal
 Name[pl]=Język
@@ -11,6 +12,7 @@ Name[x-test]=xxLanguagexx
 Name[zh_TW]=語言
 Comment=Locale settings
 Comment[cs]=Jazyková nastavení
+Comment[el]=Ρυθμίσεις εντοπιότητας
 Comment[et]=Lokaadi seadistused
 Comment[nl]=Taalregio-instellingen
 Comment[pl]=Ustawienia regionalne

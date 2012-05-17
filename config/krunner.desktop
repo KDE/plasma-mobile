@@ -5,6 +5,7 @@ Exec=krunner
 X-DBUS-StartupType=wait
 Name=KRunner
 Name[da]=KRunner
+Name[el]=KRunner
 Name[es]=KRunner
 Name[et]=KRunner
 Name[fr]=KRunner

@@ -5,6 +5,7 @@ Exec=active-firstrun >> /tmp/active-firstrun.log 2>&1 &
 X-DBUS-StartupType=wait
 Name=KRunner
 Name[da]=KRunner
+Name[el]=KRunner
 Name[es]=KRunner
 Name[et]=KRunner
 Name[fr]=KRunner

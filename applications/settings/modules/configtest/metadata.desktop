@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Configuration Test
 Name[da]=Konfigurationstest
+Name[el]=Δοκιμή διαμόρφωσης
 Name[es]=Prueba de configuración
 Name[et]=Seadistuste test
 Name[fr]=Test de configuration
@@ -14,6 +15,7 @@ Name[uk]=Перевірка налаштувань
 Name[x-test]=xxConfiguration Testxx
 Name[zh_TW]=設定測試
 Comment=Config QML Bindings
+Comment[el]=Διαμόρφωση QML δεσμεύσεων
 Comment[et]=QML-i seoste seadistamine
 Comment[nl]=QML-bindingen instellen
 Comment[pl]=Konfiguruj powiązania QML

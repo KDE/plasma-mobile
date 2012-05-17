@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Screen
 Name[da]=Skærm
+Name[el]=Οθόνη
 Name[es]=Pantalla
 Name[et]=Ekraan
 Name[nl]=Scherm
@@ -13,6 +14,7 @@ Name[uk]=Екран
 Name[x-test]=xxScreenxx
 Name[zh_TW]=螢幕
 Comment=Lock, Sleep, Timeout
+Comment[el]=Κλείδωμα, ύπνωση, τέλος χρόνου
 Comment[et]=Lukustus, uni, ajaületus
 Comment[nl]=Vergrendelen, slapen, tijdsoverschrijding
 Comment[pl]=Zablokuj, Uśpij, Czas oczekiwania

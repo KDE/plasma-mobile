@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Contour tablet homescreen
 Comment[da]=startskærm for Contour tablet
+Comment[el]=Contour tablet homescreen
 Comment[et]=Contouri tahvelarvuti koduekraan
 Comment[fr]=Écran d'accueil Contour pour tablette
 Comment[nl]=Omranding van hoofdscherm van tablet
@@ -15,6 +16,7 @@ Encoding=UTF-8
 Keywords=
 Name=Tablet homescreen
 Name[da]=startskærm for tablet
+Name[el]=Αρχική οθόνη πινακίου
 Name[et]=Tahvelarvuti koduekraan
 Name[fr]=Écran d'accueil pour tablette
 Name[nl]=Hoofdscherm van tablet

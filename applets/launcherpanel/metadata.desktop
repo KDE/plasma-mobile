@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Launcher panel
 Name[da]=Panel til programstart
+Name[el]=Πίνακας εκτελεστή
 Name[es]=Panel de lanzamiento
 Name[et]=Käivitamispaneel
 Name[fr]=Tableau de bord de lancement
@@ -18,6 +19,7 @@ Name[zh_CN]=启动器面板
 Name[zh_TW]=啟動器面板
 Comment=Panel with some launcher icons
 Comment[da]=Panel med programgenveje
+Comment[el]=Πίνακας με μερικά εικονίδια εκτελεστή
 Comment[es]=Panel con algunos iconos de lanzamiento
 Comment[et]=Paneel mõningate käivitamisikoonidega
 Comment[fr]=Tableau de bord comportant quelques icônes de lancement

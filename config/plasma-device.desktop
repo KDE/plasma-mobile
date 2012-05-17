@@ -4,6 +4,7 @@ Exec=sleep 3 ; plasma-device
 X-DBUS-StartupType=wait
 Name=Plasma Active Contour Shell
 Name[da]=Plasma Active Contour Shell
+Name[el]=Plasma Active Contour Shell
 Name[et]=Plasma Active'i Contouri kest
 Name[fr]=Console Contour pour Plasma Active
 Name[nl]=Plasma-shell met actieve omtrek

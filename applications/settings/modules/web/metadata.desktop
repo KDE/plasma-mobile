@@ -2,6 +2,7 @@
 Name=Web and Browser
 Name[cs]=Web a prohlížeč
 Name[da]=Web og browser
+Name[el]=Ιστός και περιηγητής
 Name[es]=Web y navegador
 Name[et]=Veebibrauser
 Name[fr]=Web et Navigateur
@@ -16,6 +17,7 @@ Name[x-test]=xxWeb and Browserxx
 Name[zh_CN]=网络和浏览
 Name[zh_TW]=網頁與瀏覽器
 Comment=Text Size, History, Adblock, Homepage
+Comment[el]=Μέγεθος κειμένου, ιστορικό, adblock, αρχική
 Comment[et]=Teksti suurus, ajalugu, AdBlock, kodulehekülg
 Comment[nl]=Tekstgrootte, geschiedenis, Adblock, homepagina
 Comment[pl]=Rozmiar tekstu, Historia, Adblock, Strona domowa

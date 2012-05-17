@@ -2,6 +2,7 @@
 Name=Preview
 Name[cs]=Náhled
 Name[da]=Forhåndsvisning
+Name[el]=Προεπισκόπηση
 Name[es]=Vista previa
 Name[et]=Eelvaatlus
 Name[fr]=Aperçu
@@ -21,6 +22,7 @@ Name[zh_CN]=预览
 Name[zh_TW]=預覽
 Comment=Shows previews for webpages
 Comment[da]=Forhåndsviser websider
+Comment[el]=Εμφανίζει προεπισκοπήσεις για ιστοσελίδες
 Comment[es]=Muestra vistas previas de páginas web
 Comment[et]=Veebilehtede eelvaatluse näitamine
 Comment[fr]=Affiche un aperçu des pages web
