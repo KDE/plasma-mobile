@@ -17,7 +17,7 @@ target_link_libraries(kdeinit_active-aboutapp
     ${KDE4_KDEUI_LIBS}
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
-    kdeclarative
+    ${KDECLARATIVE_LIBRARIES}
     activeapp
 )
 

@@ -19,6 +19,13 @@ macro_log_feature(
    TRUE "${SOPRANO_MIN_VERSION}" "Soprano is needed for Nepomuk"
    )
 
+find_package(KDeclarative REQUIRED)
+
+macro_log_feature(
+    KDeclarative_FOUND "libkdeclarative" "KDE Declarative (QML) support from kdelibs" "http://www.kde.org"
+    TRUE "" ""
+    )
+
 include(SopranoAddOntology)
 add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 
@@ -27,6 +34,7 @@ include_directories(
    ${CMAKE_BINARY_DIR}
    ${CMAKE_BINARY_DIR}/inputmethod
    ${KDE4_INCLUDES}
+   ${KDECLARATIVE_INCLUDE_DIR}
    )
 
 MACRO(installPackage dir component)

@@ -58,7 +58,7 @@ target_link_libraries(kdeinit_active-webbrowser
     ${NEPOMUK_LIBRARIES}
     ${NEPOMUK_QUERY_LIBRARIES}
     ${KACTIVITIES_LIBRARY}
-    kdeclarative
+    ${KDECLARATIVE_LIBRARIES}
     ontologies
     nepomukdatamanagement # enable if we want to ue SimpleResource instead of Resource
 )
