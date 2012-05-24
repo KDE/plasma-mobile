@@ -93,6 +93,7 @@ PlasmaComponents.Page {
         MobileComponents.ViewSearch {
             id: searchBox
             anchors.centerIn: parent
+            visible: fileBrowserRoot.model == metadataModel
 
             onSearchQueryChanged: {
                 if (searchQuery.length > 3) {
