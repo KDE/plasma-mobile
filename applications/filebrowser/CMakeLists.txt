@@ -18,6 +18,7 @@ install(FILES
 
 install(FILES active-filebrowser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES active-imageviewer.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES active-books.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES browse-files.desktop DESTINATION ${DATA_INSTALL_DIR}/solid/actions/)
 
 add_subdirectory(icons)
