@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Books
+GenericName=Nook collection
+Comment=All books installed on the device
+
+
+Exec=active-filebrowser --mimeTypes=application/epub+zip,application/pdf -graphicssystem raster %u
+Terminal=false
+Icon=application-epub+zip
+Type=Application
+Categories=Qt;KDE;Office;
+InitialPreference=9

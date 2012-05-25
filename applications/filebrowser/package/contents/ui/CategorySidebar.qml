@@ -57,7 +57,7 @@ Item {
         }
 
         Component.onCompleted: {
-            if (!exclusiveResourceType) {
+            if (!exclusiveResourceType && !exclusiveMimeTypes) {
                 typeFilterLoader.source = "TypeFilter.qml"
             }
         }

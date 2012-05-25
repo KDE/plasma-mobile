@@ -142,18 +142,26 @@ void MetadataTimelineModel::doQuery()
         }
     }
 
-    if (!mimeType().isEmpty()) {
-        QString type = mimeType();
-        bool negation = false;
-        if (type.startsWith('!')) {
-            type = type.remove(0, 1);
-            negation = true;
+    if (!mimeTypeStrings().isEmpty()) {
+        query += " { ";
+        bool first = true;
+        foreach (QString type, mimeTypeStrings()) {
+            bool negation = false;
+            if (!first) {
+                query += " UNION ";
+            }
+            first = false;
+            if (type.startsWith('!')) {
+                type = type.remove(0, 1);
+                negation = true;
+            }
+            if (negation) {
+                query += " { . FILTER(!bif:exists((select (1) where { ?r nie:mimeType \"" + type + "\"^^<http://www.w3.org/2001/XMLSchema#string> . }))) } ";
+            } else {
+                query += " { ?r nie:mimeType \"" + type + "\"^^<http://www.w3.org/2001/XMLSchema#string> . } ";
+            }
         }
-        if (negation) {
-            query += " . FILTER(!bif:exists((select (1) where { ?r nie:mimeType ?mimeType . FILTER(bif:contains(?mimeType, \"'" + type + "'\")) . }))) ";
-        } else {
-            query += " . ?r nie:mimeType ?mimeType . FILTER(bif:contains(?mimeType, \"'" + type + "'\")) ";
-        }
+        query += " } ";
     }
 
     if (parameters && parameters->size() > 0) {

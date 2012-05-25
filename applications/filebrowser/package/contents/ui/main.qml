@@ -54,6 +54,7 @@ Image {
         //sortOrder: Qt.DescendingOrder
         //queryString: "pdf"
         resourceType: exclusiveResourceType
+        mimeTypes: exclusiveMimeTypes
     }
     DirModel {
         id: dirModel
@@ -66,7 +67,7 @@ Image {
             return
         }
         if (mainStack.depth == 1) {
-            if (exclusiveResourceType) {
+            if (exclusiveResourceType || exclusiveMimeTypes) {
                 mainStack.replace(Qt.createComponent("Browser.qml"))
             } else {
                 mainStack.replace(Qt.createComponent("Intro.qml"))
@@ -124,7 +125,7 @@ Image {
             if (mainStack.depth > 0) {
                 return
             }
-            if (exclusiveResourceType) {
+            if (exclusiveResourceType || exclusiveMimeTypes) {
                 mainStack.push(Qt.createComponent("Browser.qml"))
             } else {
                 mainStack.push(Qt.createComponent("Intro.qml"))
