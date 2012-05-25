@@ -18,7 +18,7 @@
 */
 
 #include "metadatamodel.h"
-#include "resourcewatcher.h"
+#include "../../nepomuklegacy/resourcewatcher.h"
 
 #include <cmath>
 

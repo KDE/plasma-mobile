@@ -15,17 +15,17 @@ set(datamodels_SRCS
     metadatatimelinemodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
-    resourcewatcher.cpp
+     ${CMAKE_SOURCE_DIR}/nepomuklegacy/resourcewatcher.cpp
    )
 
 add_kao_ontology(datamodels_SRCS)
 
 qt4_add_dbus_interface(datamodels_SRCS
-  org.kde.nepomuk.ResourceWatcherConnection.xml
+  ${CMAKE_SOURCE_DIR}/nepomuklegacy/org.kde.nepomuk.ResourceWatcherConnection.xml
   resourcewatcherconnectioninterface)
 
 qt4_add_dbus_interface(datamodels_SRCS
-  org.kde.nepomuk.ResourceWatcher.xml
+   ${CMAKE_SOURCE_DIR}/nepomuklegacy/org.kde.nepomuk.ResourceWatcher.xml
   resourcewatchermanagerinterface)
 
 soprano_add_ontology(
