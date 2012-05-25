@@ -25,8 +25,9 @@
 #include <Nepomuk/Tag>
 #include <Nepomuk/Variant>
 
-#include <nepomuk/simpleresource.h>
-#include <nepomuk/simpleresourcegraph.h>
+//TODO: re-enable as soon we migrate to nepomuk2
+//#include <nepomuk/simpleresource.h>
+//#include <nepomuk/simpleresourcegraph.h>
 #include <nepomuk/storeresourcesjob.h>
 #include <nepomuk/datamanagement.h>
 
