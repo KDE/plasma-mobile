@@ -61,6 +61,8 @@ PlasmaComponents.Page {
             return "folder-bookmark"
         case "nfo:Audio":
             return "folder-sound"
+        case "nfo:Archive":
+            return "folder-tar"
         case "nco:Contact":
             return "folder-image-people"
         case "nfo:Document":

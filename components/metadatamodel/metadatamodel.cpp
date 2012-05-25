@@ -290,6 +290,11 @@ void MetadataModel::doQuery()
                 rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl("nfo:Bookmark"))));
             }
         }
+        if (resourceType() == "nfo:Archive") {
+            Nepomuk::Query::ComparisonTerm term(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("application/epub+zip"));
+
+            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
+        }
     }
 
     if (!mimeType().isEmpty()) {
