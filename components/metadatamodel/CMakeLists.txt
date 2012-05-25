@@ -15,7 +15,7 @@ set(datamodels_SRCS
     metadatatimelinemodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
-     ${CMAKE_SOURCE_DIR}/nepomuklegacy/resourcewatcher.cpp
+    ${CMAKE_SOURCE_DIR}/nepomuklegacy/resourcewatcher.cpp
    )
 
 add_kao_ontology(datamodels_SRCS)
