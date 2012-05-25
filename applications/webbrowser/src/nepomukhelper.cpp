@@ -31,7 +31,7 @@
 //#include <nepomuk/simpleresource.h>
 //#include <nepomuk/simpleresourcegraph.h>
 //#include <nepomuk/storeresourcesjob.h>
-#include <nepomuk/datamanagement.h>
+//#include <nepomuk/datamanagement.h>
 
 #include <Nepomuk/Vocabulary/NDO>
 #include <Nepomuk/Vocabulary/NFO>
