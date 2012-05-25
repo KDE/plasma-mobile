@@ -64,24 +64,25 @@ void NepomukHelper::storeDownloadMetaData(const KUrl &remoteUrl, const KUrl &loc
     d->remoteUrl = remoteUrl;
 
     // Create resources for the remote and local file and website
-    Nepomuk::SimpleResource remoteFile;
+    //TODO: use Resource again as soon migrated to Nepomuk2
+    Nepomuk::Resource remoteFile;
     remoteFile.addType(Nepomuk::Vocabulary::NFO::RemoteDataObject());
     remoteFile.addType(Nepomuk::Vocabulary::NFO::WebDataObject());
     remoteFile.addProperty(Nepomuk::Vocabulary::NIE::url(), d->remoteUrl);
 
-    Nepomuk::SimpleResource file;
+    Nepomuk::Resource file;
     file.addType(Nepomuk::Vocabulary::NFO::FileDataObject());
     file.addProperty(Nepomuk::Vocabulary::NIE::url(), d->localUrl);
     file.addProperty(Nepomuk::Vocabulary::NDO::copiedFrom(), remoteFile);
 
-    Nepomuk::SimpleResource website;
+    Nepomuk::Resource website;
     website.addType(Nepomuk::Vocabulary::NFO::HtmlDocument());
     website.addType(Nepomuk::Vocabulary::NFO::WebDataObject());
     website.addProperty(Nepomuk::Vocabulary::NIE::url(), d->remoteUrl);
 
     // Record the download as event
     QDateTime dt = QDateTime::currentDateTime();
-    Nepomuk::SimpleResource event;
+    Nepomuk::Resource event;
     event.addType(Nepomuk::Vocabulary::NDO::DownloadEvent());
     event.addProperty(Nepomuk::Vocabulary::NUAO::start(), dt);
     event.addProperty(Nepomuk::Vocabulary::NUAO::end(), dt);
@@ -90,10 +91,10 @@ void NepomukHelper::storeDownloadMetaData(const KUrl &remoteUrl, const KUrl &loc
 
     //kDebug() << "storing Nepomuk meta: " << d->remoteUrl << "  " << d->localUrl;
     // Store these resources
-    Nepomuk::SimpleResourceGraph graph;
+/*    Nepomuk::ResourceGraph graph;
     graph << remoteFile << file << website << event;
     KJob* job = Nepomuk::storeResources(graph);
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(storeResourcesFinished(KJob*)));
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(storeResourcesFinished(KJob*)));*/
 
     // And link the downloaded file to the currently active Activity
     QString activityId = d->activityConsumer->currentActivity();

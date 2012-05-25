@@ -60,7 +60,6 @@ target_link_libraries(kdeinit_active-webbrowser
     ${KACTIVITIES_LIBRARY}
     ${KDECLARATIVE_LIBRARIES}
     ontologies
-    nepomukdatamanagement # enable if we want to ue SimpleResource instead of Resource
 )
 
 install(FILES infopage.html DESTINATION ${DATA_INSTALL_DIR}/active-webbrowser )
