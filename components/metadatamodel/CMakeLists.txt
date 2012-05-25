@@ -15,9 +15,18 @@ set(datamodels_SRCS
     metadatatimelinemodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
+    resourcewatcher.cpp
    )
 
 add_kao_ontology(datamodels_SRCS)
+
+qt4_add_dbus_interface(datamodels_SRCS
+  org.kde.nepomuk.ResourceWatcherConnection.xml
+  resourcewatcherconnectioninterface)
+
+qt4_add_dbus_interface(datamodels_SRCS
+  org.kde.nepomuk.ResourceWatcher.xml
+  resourcewatchermanagerinterface)
 
 soprano_add_ontology(
     datamodels_SRCS
@@ -48,7 +57,6 @@ target_link_libraries(datamodelsplugin
         ${KDE4_KDECORE_LIBRARY}
         ${KDE4_PLASMA_LIBS}
         ${KDE4_KIO_LIBS}
-        nepomukdatamanagement
         ${KACTIVITIES_LIBRARY}
         )
 
