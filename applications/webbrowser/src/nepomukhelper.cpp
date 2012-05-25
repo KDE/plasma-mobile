@@ -20,6 +20,8 @@
 
 #include "nepomukhelper.h"
 
+#include <KJob>
+
 #include <soprano/vocabulary.h>
 #include <Nepomuk/Resource>
 #include <Nepomuk/Tag>
@@ -28,7 +30,7 @@
 //TODO: re-enable as soon we migrate to nepomuk2
 //#include <nepomuk/simpleresource.h>
 //#include <nepomuk/simpleresourcegraph.h>
-#include <nepomuk/storeresourcesjob.h>
+//#include <nepomuk/storeresourcesjob.h>
 #include <nepomuk/datamanagement.h>
 
 #include <Nepomuk/Vocabulary/NDO>
