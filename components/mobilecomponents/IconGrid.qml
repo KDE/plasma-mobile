@@ -27,10 +27,10 @@ Item {
 
     property Component delegate
     property QtObject model
-    property int pageSize: Math.floor(appsView.width/main.delegateWidth)*Math.floor(appsView.height/main.delegateHeight)
+    property int pageSize: Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
     property int delegateWidth: theme.defaultFont.mSize.width * 15
     property int delegateHeight: theme.defaultIconSize + theme.defaultFont.mSize.height + 8
-    property alias currentPage: appsView.currentIndex
+    property alias currentPage: iconView.currentIndex
     property int pagesCount: Math.ceil(model.count/pageSize)
     property int count: model.count
 
@@ -41,12 +41,12 @@ Item {
 
     function positionViewAtIndex(index)
     {
-        appsView.positionViewAtIndex(index / pageSize, ListView.Beginning)
+        iconView.positionViewAtIndex(index / pageSize, ListView.Beginning)
     }
 
     function positionViewAtPage(page)
     {
-        appsView.positionViewAtIndex(page, ListView.Beginning)
+        iconView.positionViewAtIndex(page, ListView.Beginning)
     }
 
     PlasmaCore.Theme {
@@ -59,14 +59,16 @@ Item {
         running: true
         interval: 100
         onTriggered: {
-            main.pageSize = Math.floor(appsView.width/main.delegateWidth)*Math.floor(appsView.height/main.delegateHeight)
-            appsView.currentItem.width = appsView.width
-            appsView.currentItem.height = appsView.height
+            main.pageSize = Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
+            if (iconView.currentItem) {
+                iconView.currentItem.width = iconView.width
+                iconView.currentItem.height = iconView.height
+            }
         }
     }
     ListView {
-        id: appsView
-        objectName: "appsView"
+        id: iconView
+        objectName: "iconView"
         pressDelay: 200
         cacheBuffer: 100
         highlightMoveDuration: 250
@@ -88,9 +90,9 @@ Item {
                 id: delegatePage
                 //Explicitly *not* bind the properties for performance reasons
                 Component.onCompleted: {
-                    width = appsView.width
-                    height = appsView.height
-                    //appsView.cacheBuffer = appsView.width
+                    width = iconView.width
+                    height = iconView.height
+                    //iconView.cacheBuffer = iconView.width
                 }
 
                 Flow {
@@ -116,7 +118,7 @@ Item {
                         interval: 0
                         onTriggered: iconRepeater.model = pagedProxyModel
                         Component.onCompleted: {
-                            loadTimer.interval = appsView.moving ? 500 : 0
+                            loadTimer.interval = iconView.moving ? 500 : 0
                             loadTimer.running = true
                         }
                     }
@@ -142,7 +144,7 @@ Item {
             right: parent.right
             bottom: parent.bottom
         }
-        height: Math.max( 16, appsView.height - Math.floor(appsView.height/delegateHeight)*delegateHeight)
+        height: Math.max( 16, iconView.height - Math.floor(iconView.height/delegateHeight)*delegateHeight)
 
         property int pageCount: main.model ? Math.ceil(main.model.count/main.pageSize) : 0
 
@@ -150,10 +152,10 @@ Item {
         function setViewIndex(index)
         {
             //animate only if near
-            if (Math.abs(appsView.currentIndex - index) > 1) {
-                appsView.positionViewAtIndex(index, ListView.Beginning)
+            if (Math.abs(iconView.currentIndex - index) > 1) {
+                iconView.positionViewAtIndex(index, ListView.Beginning)
             } else {
-                appsView.currentIndex = index
+                iconView.currentIndex = index
             }
         }
         Component {
@@ -181,7 +183,7 @@ Item {
                     width: height
                     radius: 4
                     anchors.verticalCenter: parent.verticalCenter
-                    x: parent.width/(pageCount/(appsView.currentIndex+1)) - (parent.width/pageCount/2) - 4
+                    x: parent.width/(pageCount/(iconView.currentIndex+1)) - (parent.width/pageCount/2) - 4
                     Behavior on x {
                         NumberAnimation {
                             duration: 250
@@ -220,10 +222,10 @@ Item {
                         Rectangle {
                             width: 6
                             height: 6
-                            scale: appsView.currentIndex == index ? 1.5 : 1
+                            scale: iconView.currentIndex == index ? 1.5 : 1
                             radius: 5
                             smooth: true
-                            opacity: appsView.currentIndex == index ? 0.8: 0.4
+                            opacity: iconView.currentIndex == index ? 0.8: 0.4
                             color: theme.textColor
 
                             Behavior on scale {
