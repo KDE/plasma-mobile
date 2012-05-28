@@ -85,10 +85,11 @@ MobileComponents.IconGrid {
 
                 var item = new Object
                 item["resourceUri"] = model["resourceUri"]
-                //this is to make AppModel work
+                //this is to make the app runner work
                 if (!item["resourceUri"]) {
-                    item["resourceUri"] = model["entryPath"]
+                    item["resourceUri"] = model["id"]
                 }
+
 
                 selectedModel.append(item)
                 highlightFrame.opacity = 1
