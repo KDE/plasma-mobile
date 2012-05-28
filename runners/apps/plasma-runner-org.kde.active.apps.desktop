@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Plasma Active App Lister
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+Icon=applications-other
+X-KDE-Library=krunner_activeapps
+X-Plasma-RunnerPhase=first
+X-KDE-PluginInfo-Author=Plasma Team
+X-KDE-PluginInfo-Email=plasma-devel@kde.org
+X-KDE-PluginInfo-Name=org.kde.active.apps
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-AdvertiseSingleRunnerQueryMode=true

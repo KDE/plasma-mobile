@@ -69,29 +69,17 @@ MouseArea {
         id: theme
     }
 
-    PlasmaCore.DataSource {
-        id: appsSource
-        engine: "org.kde.active.apps"
-        connectedSources: ["Apps"]
-    }
-
-    PlasmaCore.SortFilterModel {
-        id: appsModel
-        sourceModel: PlasmaCore.DataModel {
-            keyRoleFilter: ".*"
-            dataSource: appsSource
-        }
-
-        sortRole: "name"
-    }
-
     RunnerModels.RunnerModel {
         id: runnerModel
-        runners: [ "services", "nepomuksearch", "recentdocuments", "desktopsessions" , "PowerDevil", "calculator" ]
+        runners: [ "org.kde.active.apps" ]
     }
 
     MobileComponents.ViewSearch {
         id: searchField
+        // we have this property because RunnerManager does a fair amount of
+        // bookeeping when setting runners; normally not a big issues, but this
+        // lets us avoid it as much as possible
+        property bool listingApps: true
 
         anchors {
             left: parent.left
@@ -102,12 +90,18 @@ MouseArea {
 
         onSearchQueryChanged: {
             if (searchQuery.length < 3) {
-                //HACK: assigning null makes the view really discard the old model and assign the new one
-                appGrid.model = null
-                appGrid.model = appsModel
-                runnerModel.query = ""
+                if (!listingApps) {
+                    runnerModel.runners = [ "org.kde.active.apps" ]
+                    listingApps = true;
+                }
+
+                runnerModel.query = '';
             } else {
-                appGrid.model = runnerModel
+                if (listingApps) {
+                    runnerModel.runners = [ "org.kde.active.apps", "nepomuksearch", "recentdocuments", "desktopsessions" , "PowerDevil", "calculator" ]
+                    listingApps = false;
+                }
+
                 runnerModel.query = searchQuery
             }
         }
@@ -120,7 +114,7 @@ MouseArea {
 
     MobileComponents.IconGrid {
         id: appGrid
-        model: appsModel
+        model: runnerModel
         onCurrentPageChanged: resourceInstance.uri = ""
 
         delegate: Component {
@@ -141,16 +135,7 @@ MouseArea {
                     }
                 }
                 onClicked: {
-                    //showing apps model?
-                    if (searchField.searchQuery == "") {
-                        var service = appsSource.serviceForSource(appsSource.connectedSources[0])
-                        var operation = service.operationDescription("launch")
-
-                        operation["Path"] = model["entryPath"]
-                        service.startOperationCall(operation)
-                    } else {
-                        runnerModel.run(index)
-                    }
+                    runnerModel.run(index)
                     resetStatus()
                     itemLaunched()
                 }
