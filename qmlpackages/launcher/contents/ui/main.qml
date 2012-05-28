@@ -71,7 +71,6 @@ MouseArea {
 
     RunnerModels.RunnerModel {
         id: runnerModel
-        runners: [ "org.kde.active.apps" ]
     }
 
     MobileComponents.ViewSearch {
@@ -153,6 +152,8 @@ MouseArea {
             bottomMargin: 4
         }
     }
+
+    Component.onCompleted: { runnerModel.runners =  [ "org.kde.active.apps" ] }
 }
 
 
