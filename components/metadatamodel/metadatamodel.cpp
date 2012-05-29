@@ -301,6 +301,9 @@ void MetadataModel::doQuery()
     if (!mimeTypeStrings().isEmpty()) {
         Nepomuk::Query::OrTerm mimeTerm;
         foreach (QString type, mimeTypeStrings()) {
+            if (type.isEmpty()) {
+                continue;
+            }
             bool negation = false;
             if (type.startsWith('!')) {
                 type = type.remove(0, 1);
