@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Books
+Name[et]=Raamatud
 Name[nl]=Boeken
 Name[pt]=Livros
 Name[pt_BR]=Livros
@@ -7,13 +8,8 @@ Name[sv]=Böcker
 Name[uk]=Книги
 Name[x-test]=xxBooksxx
 GenericName=Book collection
-GenericName[nl]=Nook-verzameling
-GenericName[pt]=Colecção do Nook
-GenericName[pt_BR]=Coleção do Nook
-GenericName[sv]=Samling i Nook
-GenericName[uk]=Збірка на Nook
-GenericName[x-test]=xxNook collectionxx
 Comment=All books installed on the device
+Comment[et]=Kõik seadmesse paigaldatud raamatud
 Comment[nl]=Alle op het apparaat geïnstalleerde boeken 
 Comment[pt]=Todos os livros instalados no dispositivo
 Comment[pt_BR]=Todos os livros instalados no dispositivo
