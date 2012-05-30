@@ -30,7 +30,7 @@ target_link_libraries(active-videoplayer
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4_PHONON_LIBRARY}
-    kdeclarative
+    ${KDECLARATIVE_LIBRARIES}
 )
 
 install(TARGETS active-videoplayer ${INSTALL_TARGETS_DEFAULT_ARGS} )

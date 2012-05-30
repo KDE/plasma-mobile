@@ -27,7 +27,7 @@ set (activeApp_SRCS
 qt4_automoc(${activeApp_SRCS})
 
 kde4_add_library (activeapp SHARED ${activeApp_SRCS})
-target_link_libraries(activeapp  ${KDE4_KDECORE_LIBS} ${QT_QTOPENGL_LIBRARY} ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTDECLARATIVE_LIBRARY} ${QT_QTSCRIPT_LIBRARY} kdeclarative)
+target_link_libraries(activeapp  ${KDE4_KDECORE_LIBS} ${QT_QTOPENGL_LIBRARY} ${KDE4_PLASMA_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTDECLARATIVE_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${KDECLARATIVE_LIBRARIES})
 
 
 set_target_properties(activeapp PROPERTIES VERSION 0.1 SOVERSION 0)

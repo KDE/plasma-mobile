@@ -18,11 +18,12 @@
  */
 
 import QtQuick 1.1
+import org.kde.dirmodel 0.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.dirmodel 0.1
+import org.kde.plasma.slccomponents 0.1 as SlcComponents
 
 
 Image {
@@ -53,6 +54,7 @@ Image {
         //sortOrder: Qt.DescendingOrder
         //queryString: "pdf"
         resourceType: exclusiveResourceType
+        mimeTypes: exclusiveMimeTypes
     }
     DirModel {
         id: dirModel
@@ -65,7 +67,7 @@ Image {
             return
         }
         if (mainStack.depth == 1) {
-            if (exclusiveResourceType) {
+            if (exclusiveResourceType || exclusiveMimeTypes) {
                 mainStack.replace(Qt.createComponent("Browser.qml"))
             } else {
                 mainStack.replace(Qt.createComponent("Intro.qml"))
@@ -123,7 +125,7 @@ Image {
             if (mainStack.depth > 0) {
                 return
             }
-            if (exclusiveResourceType) {
+            if (exclusiveResourceType || exclusiveMimeTypes) {
                 mainStack.push(Qt.createComponent("Browser.qml"))
             } else {
                 mainStack.push(Qt.createComponent("Intro.qml"))
@@ -149,5 +151,8 @@ Image {
                 openFile(path, mimeType)
             }
         }
+    }
+    SlcComponents.SlcMenu {
+        id: contextMenu
     }
 }

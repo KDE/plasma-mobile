@@ -18,7 +18,7 @@
 */
 
 #include "metadatamodel.h"
-#include "resourcewatcher.h"
+#include "../../nepomuklegacy/resourcewatcher.h"
 
 #include <cmath>
 
@@ -40,6 +40,7 @@
 #include <Nepomuk/Variant>
 
 #include <Nepomuk/Query/AndTerm>
+#include <Nepomuk/Query/OrTerm>
 #include <Nepomuk/Query/NegationTerm>
 #include <Nepomuk/Query/ResourceTerm>
 #include <Nepomuk/Query/ComparisonTerm>
@@ -258,7 +259,7 @@ void MetadataModel::doQuery()
 
     //check if really all properties to build the query are null
     if (m_queryString.isEmpty() && resourceType().isEmpty() &&
-        mimeType().isEmpty() && activityId().isEmpty() &&
+        mimeTypeStrings().isEmpty() && activityId().isEmpty() &&
         tagStrings().size() == 0 && !startDate().isValid() &&
         !endDate().isValid() && minimumRating() <= 0 &&
         maximumRating() <= 0 && parameters->size() == 0) {
@@ -290,23 +291,34 @@ void MetadataModel::doQuery()
                 rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl("nfo:Bookmark"))));
             }
         }
+        if (resourceType() == "nfo:Archive") {
+            Nepomuk::Query::ComparisonTerm term(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("application/epub+zip"));
+
+            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
+        }
     }
 
-    if (!mimeType().isEmpty()) {
-        QString type = mimeType();
-        bool negation = false;
-        if (type.startsWith('!')) {
-            type = type.remove(0, 1);
-            negation = true;
-        }
+    if (!mimeTypeStrings().isEmpty()) {
+        Nepomuk::Query::OrTerm mimeTerm;
+        foreach (QString type, mimeTypeStrings()) {
+            if (type.isEmpty()) {
+                continue;
+            }
+            bool negation = false;
+            if (type.startsWith('!')) {
+                type = type.remove(0, 1);
+                negation = true;
+            }
 
-        Nepomuk::Query::ComparisonTerm term(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm(type));
+            Nepomuk::Query::ComparisonTerm term(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm(type), Nepomuk::Query::ComparisonTerm::Equal);
 
-        if (negation) {
-            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
-        } else {
-            rootTerm.addSubTerm(term);
+            if (negation) {
+                mimeTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
+            } else {
+                mimeTerm.addSubTerm(term);
+            }
         }
+        rootTerm.addSubTerm(mimeTerm);
     }
 
 
@@ -426,6 +438,9 @@ void MetadataModel::doQuery()
 
     int weight = m_sortBy.length() + 1;
     foreach (const QString &sortProperty, m_sortBy) {
+        if (sortProperty.isEmpty()) {
+            continue;
+        }
         Nepomuk::Query::ComparisonTerm sortTerm(propertyUrl(sortProperty), Nepomuk::Query::Term());
         sortTerm.setSortWeight(weight, m_sortOrder);
         rootTerm.addSubTerm(sortTerm);

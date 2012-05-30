@@ -124,20 +124,23 @@ QString AbstractMetadataModel::resourceType() const
     return m_resourceType;
 }
 
-void AbstractMetadataModel::setMimeType(const QString &type)
+void AbstractMetadataModel::setMimeTypesList(const QVariantList &types)
 {
-    if (m_mimeType == type) {
+    //FIXME: not exactly efficient
+    QStringList stringList = variantToStringList(types);
+
+    if (m_mimeTypes == stringList) {
         return;
     }
 
-    m_mimeType = type;
+    m_mimeTypes = stringList;
     m_queryTimer->start(0);
-    emit mimeTypeChanged();
+    emit mimeTypesChanged();
 }
 
-QString AbstractMetadataModel::mimeType() const
+QVariantList AbstractMetadataModel::mimeTypesList() const
 {
-    return m_mimeType;
+    return stringToVariantList(m_mimeTypes);
 }
 
 void AbstractMetadataModel::setActivityId(const QString &activityId)
@@ -178,6 +181,11 @@ QVariantList AbstractMetadataModel::tags() const
 QStringList AbstractMetadataModel::tagStrings() const
 {
     return m_tags;
+}
+
+QStringList AbstractMetadataModel::mimeTypeStrings() const
+{
+    return m_mimeTypes;
 }
 
 bool AbstractMetadataModel::isRunning() const

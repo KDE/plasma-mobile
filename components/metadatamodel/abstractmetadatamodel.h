@@ -73,9 +73,9 @@ class AbstractMetadataModel : public QAbstractItemModel
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
 
     /**
-     * @property string restrict results to just this mime type, such as image/jpeg
+     * @property string restrict results to just this mime types in OR, such as image/jpeg
      */
-    Q_PROPERTY(QString mimeType READ mimeType WRITE setMimeType NOTIFY mimeTypeChanged)
+    Q_PROPERTY(QVariantList mimeTypes READ mimeTypesList WRITE setMimeTypesList NOTIFY mimeTypesChanged)
 
     /**
      * @property string only resources that are related to this activity id. It's the numerical id of the activity that is unique, not the activity name.
@@ -129,8 +129,8 @@ public:
     void setResourceType(const QString &type);
     QString resourceType() const;
 
-    void setMimeType(const QString &type);
-    QString mimeType() const;
+    void setMimeTypesList(const QVariantList &type);
+    QVariantList mimeTypesList() const;
 
     void setActivityId(const QString &activityId);
     QString activityId() const;
@@ -177,7 +177,7 @@ public:
 Q_SIGNALS:
     void countChanged();
     void resourceTypeChanged();
-    void mimeTypeChanged();
+    void mimeTypesChanged();
     void activityIdChanged();
     void tagsChanged();
     void startDateChanged();
@@ -261,6 +261,7 @@ protected:
     }
 
     QStringList tagStrings() const;
+    QStringList mimeTypeStrings() const;
     void setRunning(bool running);
     void askRefresh();
 
@@ -271,7 +272,7 @@ private:
     bool m_running;
 
     QString m_resourceType;
-    QString m_mimeType;
+    QStringList m_mimeTypes;
     QString m_activityId;
     QStringList m_tags;
     QDate m_startDate;

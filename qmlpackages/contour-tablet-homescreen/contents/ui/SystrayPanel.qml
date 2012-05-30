@@ -69,9 +69,14 @@ Image {
 
     //The launcher package is created after some time to not slow boot time
     Timer {
+        id: delayedLoadTimer
         running: true
         interval: 3000
         onTriggered: {
+            loadMenuContainer();
+        }
+
+        function loadMenuContainer() {
             if (!menuContainer.plasmoid) {
                 var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
                 menuContainer.plasmoid = component.createObject(menuContainer);
@@ -103,6 +108,10 @@ Image {
         tasksHeight: homeScreen.height/4.5
         onDraggingChanged: {
             if (dragging) {
+                if (delayedLoadTimer.running) {
+                    delayedLoadTimer.running = false;
+                    delayedLoadTimer.loadMenuContainer();
+                }
                 systrayPanel.windowStripVisible = true;
             }
         }

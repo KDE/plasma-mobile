@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Applets strip
 Name[da]=Applet-stribe
+Name[el]=Σειρά μικροεφαρμογών
 Name[et]=Apletiriba
 Name[fr]=Bandeau d'applets
 Name[km]=ឆ្នូត​អាប់ភ្លេត
@@ -10,6 +11,7 @@ Name[pl]=Pas apletów
 Name[pt]=Barra de 'applets'
 Name[pt_BR]=Barra de miniaplicativos
 Name[sv]=Miniprogramrad
+Name[tr]=Gereç dilimleri
 Name[uk]=Усування аплетів
 Name[x-test]=xxApplets stripxx
 Name[zh_TW]=小程式帶

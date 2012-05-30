@@ -125,18 +125,12 @@ PlasmaComponents.TabBar {
         ResourceBrowser {
             defaultClassName: "FileDataObject"
             model: PlasmaCore.SortFilterModel {
-                sourceModel: PlasmaCore.DataModel {
-                    keyRoleFilter: ".*"
-                    dataSource: PlasmaCore.DataSource {
-                        id: appsSource
-                        engine: "org.kde.active.apps"
-                        connectedSources: ["Apps"]
-                        interval: 0
-                    }
+                sourceModel: RunnerModels.RunnerModel {
+                    id: runnerModel
+                    runners: [ "org.kde.active.apps" ]
+                    query: searchField.searchQuery
                 }
                 sortRole: "name"
-                filterRole: "name"
-                filterRegExp: ".*"+searchField.searchQuery+".*"
             }
         }
     }

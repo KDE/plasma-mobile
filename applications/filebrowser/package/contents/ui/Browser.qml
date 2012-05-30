@@ -22,7 +22,6 @@ import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.plasma.slccomponents 0.1 as SlcComponents
 import org.kde.draganddrop 1.0
 import org.kde.qtextracomponents 0.1
 
@@ -47,7 +46,20 @@ PlasmaComponents.Page {
         connectedSources: hotplugSource.sources
         onDataChanged: {
             //access it here due to the async nature of the dataengine
-            if (resultsGrid.model != dirModel && devicesSource.data[resourceBrowser.currentUdi]["File Path"] != "") {
+            if (resultsGrid.model == dirModel) {
+                var udi
+                var path
+
+                for (var i in devicesSource.connectedSources) {
+                    udi = devicesSource.connectedSources[i]
+                    path = devicesSource.data[udi]["File Path"]
+                    print(udi+dirModel.url.indexOf(udi))
+                    if (dirModel.url.indexOf(path) > 2) {
+                        resourceBrowser.currentUdi = udi
+                        break
+                    }
+                }
+            } else if (resultsGrid.model != dirModel && devicesSource.data[resourceBrowser.currentUdi]["File Path"] != "") {
                 dirModel.url = devicesSource.data[resourceBrowser.currentUdi]["File Path"]
 
                 fileBrowserRoot.model = dirModel
@@ -94,6 +106,7 @@ PlasmaComponents.Page {
         MobileComponents.ViewSearch {
             id: searchBox
             anchors.centerIn: parent
+            visible: fileBrowserRoot.model == metadataModel
 
             onSearchQueryChanged: {
                 if (searchQuery.length > 3) {
@@ -537,9 +550,6 @@ PlasmaComponents.Page {
             duration: 250
             easing.type: Easing.InOutQuad
         }
-    }
-    SlcComponents.SlcMenu {
-        id: contextMenu
     }
 }
 

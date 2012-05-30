@@ -43,9 +43,11 @@ Item {
     }
 
     PlasmaComponents.BusyIndicator {
-        anchors.verticalCenter: searchField.verticalCenter
-        anchors.right: searchField.right
-        anchors.rightMargin: searchFieldContainer.height
+        anchors {
+            verticalCenter: searchField.verticalCenter
+            left: searchField.right
+            rightMargin: 4
+        }
         height: searchField.height
         width: searchField.height
         visible: searchFieldContainer.busy
@@ -54,7 +56,7 @@ Item {
 
     Timer {
         id: searchTimer
-        interval: 100
+        interval: 500
         running: false
         repeat: false
         onTriggered: searchQuery = searchField.text

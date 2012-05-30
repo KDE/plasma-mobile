@@ -4,6 +4,7 @@ X-KDE-ServiceType=Active/SettingsModule
 
 Name=Active Settings Module
 Name[da]=Indstillingsmodul til Active
+Name[el]=Άρθρωμα ενεργών ρυθμίσεων
 Name[et]=Active'i seadistusmoodul
 Name[fr]=Module de configuration pour Active
 Name[nl]=Module voor instellingen van Active
@@ -18,6 +19,7 @@ Name[zh_CN]=Active 设置模块
 Name[zh_TW]=Active 設定模組
 Comment=Active Settings Module Plugin
 Comment[da]=Plugin til indstillingsmodul til Active
+Comment[el]=Πρόσθετο αρθρώματος ενεργών ρυθμίσεων
 Comment[et]=Active'i seadistusmooduli plugin
 Comment[fr]=Module externe de paramètres pour Active
 Comment[nl]=Plug-in voor module voor instellingen van Active

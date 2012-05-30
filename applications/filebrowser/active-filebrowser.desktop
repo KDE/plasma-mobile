@@ -2,7 +2,9 @@
 Name=Files
 Name[da]=Filer
 Name[de]=Dateien
+Name[el]=Αρχεία
 Name[es]=Archivos
+Name[et]=Failid
 Name[fr]=Fichiers
 Name[nl]=Bestanden
 Name[pl]=Pliki
@@ -20,14 +22,16 @@ GenericName=File browser
 GenericName[cs]=Prohlížeč souborů
 GenericName[da]=Filbrowser
 GenericName[de]=Dateiverwaltung
+GenericName[el]=Περιηγητής αρχείων
 GenericName[es]=Navegador de archivos
+GenericName[et]=Failibrauser
 GenericName[fr]=Explorateur de fichiers
 GenericName[nl]=Bestandsbrowser
 GenericName[pl]=Przeglądarka plików
 GenericName[pt]=Navegador de ficheiros
 GenericName[pt_BR]=Navegador de arquivos
 GenericName[sv]=Filbläddrare
-GenericName[tr]=Dosya tarayıcısı
+GenericName[tr]=Dosya tarayıcı
 GenericName[uk]=Керування файлами
 GenericName[x-test]=xxFile browserxx
 GenericName[zh_CN]=文件浏览器
@@ -35,7 +39,9 @@ GenericName[zh_TW]=檔案瀏覽器
 Comment=A simple file browser/manager
 Comment[da]=Simpel filbrowser/-håndtering
 Comment[de]=Ein einfacher Dateibrowser
+Comment[el]=Ένας απλός περιηγητής/διαχειριστής αρχείων
 Comment[es]=Un sencillo navegador/gestor de archivos
+Comment[et]=Lihtne failibrauser/haldur
 Comment[fr]=Un gestionnaire / explorateur de fichiers simple
 Comment[nl]=Een eenvoudige bestandsbrowser/beheerder
 Comment[pl]=Prosta przeglądarka/menadżer plików
@@ -50,7 +56,10 @@ Comment[zh_TW]=簡單的檔案瀏覽器
 
 
 X-KDE-Solid-Predicate=[ StorageVolume.ignored == false AND StorageVolume.usage == 'FileSystem' ]
-Exec=active-filebrowser -graphicssystem raster %u
+
+# TODO: fix crash when using the line below. See https://bugs.kde.org/show_bug.cgi?id=300095
+#Exec=active-filebrowser -graphicssystem raster %u
+Exec=/bin/true; exec active-filebrowser -graphicssystem raster %u
 Terminal=false
 Icon=system-file-manager
 Type=Application

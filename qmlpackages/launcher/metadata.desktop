@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Start Applications
 Comment[da]=Start programmer
+Comment[el]=Έναρξη εφαρμογών
 Comment[et]=Rakenduste käivitaja
 Comment[fr]=Démarrage des applications
 Comment[nl]=Toepassingen starten
@@ -17,6 +18,7 @@ Keywords=
 Name=Launcher
 Name[cs]=Spouštěč
 Name[da]=Programgenvej
+Name[el]=Εκτελεστής
 Name[es]=Lanzador
 Name[et]=Käivitaja
 Name[fr]=Lanceur

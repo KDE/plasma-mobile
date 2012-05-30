@@ -47,6 +47,9 @@ FileBrowser::FileBrowser()
 
     declarativeView()->rootContext()->setContextProperty("exclusiveResourceType", args->getOption("resourceType"));
 
+    QStringList mimeTypes = args->getOption("mimeTypes").split(',');
+    declarativeView()->rootContext()->setContextProperty("exclusiveMimeTypes", mimeTypes);
+
     //FIXME: need more elegant and pluggable way
     if (args->getOption("resourceType") == "nfo:Image") {
         setWindowIcon(KIcon("active-image-viewer"));

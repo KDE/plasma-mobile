@@ -2,6 +2,7 @@
 # ctxt: plasma containment
 Name=MobileDesktop
 Name[da]=MobileDesktop
+Name[el]=MobileDesktop
 Name[et]=Mobiilne töölaud
 Name[fr]=MobileDesktop
 Name[km]=MobileDesktop
@@ -16,6 +17,7 @@ Name[x-test]=xxMobileDesktopxx
 Name[zh_TW]=行動桌面
 Comment=Default desktop containment
 Comment[da]=Standard skrivebordsbeholder
+Comment[el]=Προκαθορισμένος υποδοχέας επιφάνειας εργασίας
 Comment[et]=Vaikimisi töölauakonteiner
 Comment[fr]=Conteneur de bureau par défaut
 Comment[km]=មាន​ផ្ទៃតុ​លំនាំដើម

@@ -48,6 +48,7 @@ KDE_EXPORT int kdemain(int argc, char **argv)
     KCmdLineOptions options;
     options.add("+[url]", ki18n( "URL of the file to open" ));
     options.add("t").add("resourceType <type>", ki18n( "resource type to restrict the browser, such as Image or Document" ));
+    options.add("m").add("mimeTypes <type,type>", ki18n( "comma separatedlist of mime types to restrict the browser" ));
 #ifndef QT_NO_OPENGL
     options.add("opengl", ki18n("use a QGLWidget for the viewport"));
 #endif

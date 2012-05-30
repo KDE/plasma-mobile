@@ -10,9 +10,18 @@ set(metadataengine_SRCS
     resourcecontainer.cpp
     metadataservice/metadatajob.cpp
     metadataservice/metadataservice.cpp
+    ${CMAKE_SOURCE_DIR}/nepomuklegacy/resourcewatcher.cpp
 )
 
 add_kao_ontology(metadataengine_SRCS)
+
+qt4_add_dbus_interface(metadataengine_SRCS
+  ${CMAKE_SOURCE_DIR}/nepomuklegacy/org.kde.nepomuk.ResourceWatcherConnection.xml
+  resourcewatcherconnectioninterface)
+
+qt4_add_dbus_interface(metadataengine_SRCS
+   ${CMAKE_SOURCE_DIR}/nepomuklegacy/org.kde.nepomuk.ResourceWatcher.xml
+  resourcewatchermanagerinterface)
 
 nepomuk_add_ontology_classes (metadataengine_SRCS
     ONTOLOGIES
@@ -34,7 +43,6 @@ target_link_libraries(plasma_engine_active_metadata
     ${SOPRANO_CLIENT_LIBRARIES}
     ${KACTIVITIES_LIBRARY}
     ontologies
-    nepomukdatamanagement
 )
 
 install(TARGETS plasma_engine_active_metadata DESTINATION ${PLUGIN_INSTALL_DIR})

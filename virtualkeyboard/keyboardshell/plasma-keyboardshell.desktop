@@ -4,6 +4,7 @@ X-DBUS-StartupType=wait
 Name=Plasma Desktop Workspace
 Name[cs]=Pracovní plocha Plasma
 Name[da]=Plasma Desktop Arbejdsområde
+Name[el]=Χώρος εργασίας επιφάνειας plasma
 Name[es]=Espacio de trabajo Plasma
 Name[et]=Plasma töölaua töötsoon
 Name[fr]=Espace de travail du bureau Plasma

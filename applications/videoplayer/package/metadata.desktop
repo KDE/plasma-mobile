@@ -2,6 +2,7 @@
 Name=Video Player
 Name[cs]=Přehrávač videa
 Name[da]=Videoafspiller
+Name[el]=Αναπαραγωγέας βίντεο
 Name[es]=Reproductor de vídeo
 Name[et]=Videomängija
 Name[fr]=Lecteur vidéo
@@ -18,6 +19,7 @@ Name[zh_CN]=视频播放器
 Name[zh_TW]=影像播放器
 Comment=Touchscreen friendly simple video player
 Comment[da]=Simpel touchskærm-venlig videoafspiller
+Comment[el]=Φιλικός σε οθόνες αφής απλός αναπαραγωγέας βίντεο
 Comment[et]=Puuteekraanisõbralik lihtne videomängija
 Comment[fr]=Lecteur vidéo simple et convivial avec écran tactile
 Comment[nl]=Eenvoudige videospeler vriendelijk voor aanraakschermen

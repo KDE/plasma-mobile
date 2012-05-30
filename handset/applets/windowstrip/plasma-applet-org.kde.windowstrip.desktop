@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Window Strip
 Name[da]=Vinduesstribe
+Name[el]=Σειρά παραθύρων
 Name[et]=Aknariba
 Name[fr]=Bandeau de fenêtres
 Name[km]=ឆ្នូត​បង្អួច
@@ -10,6 +11,7 @@ Name[pl]=Pas okna
 Name[pt]=Barra da Janela
 Name[pt_BR]=Barra da janela
 Name[sv]=Fönsterremsa
+Name[tr]=Pencere Dilimi
 Name[uk]=Стрічка-вікно
 Name[x-test]=xxWindow Stripxx
 Name[zh_TW]=視窗帶

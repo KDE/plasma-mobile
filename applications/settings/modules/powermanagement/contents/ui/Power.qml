@@ -178,9 +178,9 @@ Item {
                 id: dpmsSwitch
                 onCheckedChanged: {
                     if (checked) {
-                        batteryDpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60)
-                        lowBatteryDpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60)
-                        acDpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60)
+                        batteryDpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60*100)
+                        lowBatteryDpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60*100)
+                        acDpmsConfig.writeEntry("idleTime", Math.round(dpmsTimeSlider.value)*60*100)
                     } else {
                         batteryDpmsConfig.deleteEntry("idleTime")
                         lowBatteryDpmsConfig.deleteEntry("idleTime")
@@ -196,12 +196,12 @@ Item {
                 maximumValue: 60
                 onValueChanged: {
                     if (dpmsSwitch.checked) {
-                        batteryDpmsConfig.writeEntry("idleTime", Math.round(value)*60)
-                        lowBatteryDpmsConfig.writeEntry("idleTime", Math.round(value)*60)
-                        acDpmsConfig.writeEntry("idleTime", Math.round(value)*60)
+                        batteryDpmsConfig.writeEntry("idleTime", Math.round(value)*60*100)
+                        lowBatteryDpmsConfig.writeEntry("idleTime", Math.round(value)*60*100)
+                        acDpmsConfig.writeEntry("idleTime", Math.round(value)*60*100)
                     }
                 }
-                Component.onCompleted: value = batteryDpmsConfig.readEntry("idleTime")/60
+                Component.onCompleted: value = batteryDpmsConfig.readEntry("idleTime")/60/100
             }
             PlasmaComponents.Label {
                 enabled: dpmsTimeSlider.checked
@@ -221,8 +221,8 @@ Item {
                 id: suspendSwitch
                 onCheckedChanged: {
                     if (checked) {
-                        batterySuspendConfig.writeEntry("idleTime", Math.round(suspendTimeSlider.value)*60)
-                        lowBatterySuspendConfig.writeEntry("idleTime", Math.round(suspendTimeSlider.value)*60)
+                        batterySuspendConfig.writeEntry("idleTime", Math.round(suspendTimeSlider.value)*60*100)
+                        lowBatterySuspendConfig.writeEntry("idleTime", Math.round(suspendTimeSlider.value)*60*100)
                         acSuspendConfig.writeEntry("idleTime", Math.round(suspendTimeSlider.value)*60)
                     } else {
                         batterySuspendConfig.deleteEntry("idleTime")
@@ -239,12 +239,12 @@ Item {
                 maximumValue: 60
                 onValueChanged: {
                     if (suspendSwitch.checked) {
-                        batterySuspendConfig.writeEntry("idleTime", Math.round(value)*60)
-                        lowBatterySuspendConfig.writeEntry("idleTime", Math.round(value)*60)
-                        acSuspendConfig.writeEntry("idleTime", Math.round(value)*60)
+                        batterySuspendConfig.writeEntry("idleTime", Math.round(value)*60*100)
+                        lowBatterySuspendConfig.writeEntry("idleTime", Math.round(value)*60*100)
+                        acSuspendConfig.writeEntry("idleTime", Math.round(value)*60*100)
                     }
                 }
-                Component.onCompleted: value = batterySuspendConfig.readEntry("idleTime")/60
+                Component.onCompleted: value = batterySuspendConfig.readEntry("idleTime")/60/100
             }
             PlasmaComponents.Label {
                 enabled: suspendTimeSlider.checked

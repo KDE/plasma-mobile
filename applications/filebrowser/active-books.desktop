@@ -1,0 +1,26 @@
+[Desktop Entry]
+Name=Books
+Name[et]=Raamatud
+Name[nl]=Boeken
+Name[pt]=Livros
+Name[pt_BR]=Livros
+Name[sv]=Böcker
+Name[uk]=Книги
+Name[x-test]=xxBooksxx
+GenericName=Book collection
+Comment=All books installed on the device
+Comment[et]=Kõik seadmesse paigaldatud raamatud
+Comment[nl]=Alle op het apparaat geïnstalleerde boeken 
+Comment[pt]=Todos os livros instalados no dispositivo
+Comment[pt_BR]=Todos os livros instalados no dispositivo
+Comment[sv]=Alla böcker installerade på enheten
+Comment[uk]=Всі книги, встановлені на пристрої
+Comment[x-test]=xxAll books installed on the devicexx
+
+
+Exec=active-filebrowser --mimeTypes=application/epub+zip,application/pdf -graphicssystem raster %u
+Terminal=false
+Icon=application-epub+zip
+Type=Application
+Categories=Qt;KDE;Office;
+InitialPreference=9
