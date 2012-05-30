@@ -25,9 +25,7 @@ Comment[sv]=Alla böcker installerade på enheten
 Comment[uk]=Всі книги, встановлені на пристрої
 Comment[x-test]=xxAll books installed on the devicexx
 
-# TODO: fix crash when using the line below. See https://bugs.kde.org/show_bug.cgi?id=300095
-#Exec=active-filebrowser --mimeTypes=application/epub+zip,application/pdf -graphicssystem raster %u
-Exec=/bin/true; exec active-filebrowser --mimeTypes=application/epub+zip,application/pdf -graphicssystem raster %u
+Exec=active-filebrowser --mimeTypes=application/epub+zip,application/pdf -graphicssystem raster %u
 Terminal=false
 Icon=application-epub+zip
 Type=Application
