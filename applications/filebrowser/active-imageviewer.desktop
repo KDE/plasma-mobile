@@ -56,9 +56,7 @@ Comment[x-test]=xxAn image viewer for touch tabletsxx
 Comment[zh_CN]=触摸屏使用的图像浏览器
 Comment[zh_TW]=觸控面板的影像檢視器
 
-# TODO: fix crash when using the line below. See https://bugs.kde.org/show_bug.cgi?id=300095
-#Exec=active-filebrowser --resourceType=nfo:Image -graphicssystem raster %u
-Exec=/bin/true; exec active-filebrowser --resourceType=nfo:Image -graphicssystem raster %u
+Exec=active-filebrowser --resourceType=nfo:Image -graphicssystem raster %u
 Terminal=false
 Icon=active-image-viewer
 Type=Application

@@ -6,11 +6,11 @@ set(active-filebrowser_SRCS
     filebrowser.cpp
 )
 
-kde4_add_kdeinit_executable(active-filebrowser ${active-filebrowser_SRCS})
+kde4_add_executable(active-filebrowser ${active-filebrowser_SRCS})
 
 #find_package(ActiveApp REQUIRED)
 
-target_link_libraries(kdeinit_active-filebrowser
+target_link_libraries(active-filebrowser
     ${QT_QTDECLARATIVE_LIBRARY}
     ${QT_QTOPENGL_LIBRARY}
     ${QT_QTSCRIPT_LIBRARY}
@@ -22,5 +22,4 @@ target_link_libraries(kdeinit_active-filebrowser
 )
 
 install(TARGETS active-filebrowser ${INSTALL_TARGETS_DEFAULT_ARGS} )
-install(TARGETS kdeinit_active-filebrowser ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

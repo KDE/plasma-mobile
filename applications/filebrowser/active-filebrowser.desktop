@@ -57,9 +57,7 @@ Comment[zh_TW]=簡單的檔案瀏覽器
 
 X-KDE-Solid-Predicate=[ StorageVolume.ignored == false AND StorageVolume.usage == 'FileSystem' ]
 
-# TODO: fix crash when using the line below. See https://bugs.kde.org/show_bug.cgi?id=300095
-#Exec=active-filebrowser -graphicssystem raster %u
-Exec=/bin/true; exec active-filebrowser -graphicssystem raster %u
+Exec=active-filebrowser -graphicssystem raster %u
 Terminal=false
 Icon=system-file-manager
 Type=Application
