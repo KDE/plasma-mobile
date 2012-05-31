@@ -3,6 +3,7 @@ Name=Plasma Active App Lister
 Name[nl]=Programma voor het tonen van actieve toepassingen van Plasma
 Name[pt]=Lista de Aplicações do Plasma Active
 Name[sv]=Plasma Active programlista
+Name[tr]=Plasma Active Uygulama Listeleyici
 Name[uk]=Список програм Портативної Плазми
 Name[x-test]=xxPlasma Active App Listerxx
 X-KDE-ServiceTypes=Plasma/Runner
