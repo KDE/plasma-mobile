@@ -259,7 +259,7 @@ void MetadataModel::doQuery()
 
     //check if really all properties to build the query are null
     if (m_queryString.isEmpty() && resourceType().isEmpty() &&
-        mimeTypeStrings().first().isEmpty() && activityId().isEmpty() &&
+        mimeTypeStrings().isEmpty() && activityId().isEmpty() &&
         tagStrings().size() == 0 && !startDate().isValid() &&
         !endDate().isValid() && minimumRating() <= 0 &&
         maximumRating() <= 0 && parameters->size() == 0) {
