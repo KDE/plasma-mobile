@@ -47,8 +47,13 @@ FileBrowser::FileBrowser()
 
     declarativeView()->rootContext()->setContextProperty("exclusiveResourceType", args->getOption("resourceType"));
 
-    QStringList mimeTypes = args->getOption("mimeTypes").split(',');
-    declarativeView()->rootContext()->setContextProperty("exclusiveMimeTypes", mimeTypes);
+    QString mimeString = args->getOption("mimeTypes");
+    if (mimeString.isEmpty()) {
+        declarativeView()->rootContext()->setContextProperty("exclusiveMimeTypes", QStringList());
+    } else {
+        QStringList mimeTypes = mimeString.split(',');
+        declarativeView()->rootContext()->setContextProperty("exclusiveMimeTypes", mimeTypes);
+    }
 
     //FIXME: need more elegant and pluggable way
     if (args->getOption("resourceType") == "nfo:Image") {

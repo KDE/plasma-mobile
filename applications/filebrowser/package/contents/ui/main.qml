@@ -67,7 +67,7 @@ Image {
             return
         }
         if (mainStack.depth == 1) {
-            if (exclusiveResourceType || exclusiveMimeTypes) {
+            if (exclusiveResourceType || exclusiveMimeTypes.length > 0) {
                 mainStack.replace(Qt.createComponent("Browser.qml"))
             } else {
                 mainStack.replace(Qt.createComponent("Intro.qml"))
@@ -125,7 +125,7 @@ Image {
             if (mainStack.depth > 0) {
                 return
             }
-            if (exclusiveResourceType || exclusiveMimeTypes) {
+            if (exclusiveResourceType || exclusiveMimeTypes.length > 0) {
                 mainStack.push(Qt.createComponent("Browser.qml"))
             } else {
                 mainStack.push(Qt.createComponent("Intro.qml"))

@@ -245,8 +245,12 @@ protected:
     static inline QStringList variantToStringList(const QVariantList &list)
     {
         QStringList stringList;
+        QString str;
         foreach (const QVariant &val, list) {
-            stringList << val.toString();
+            str = val.toString().trimmed();
+            if (!str.isEmpty()) {
+                stringList << str;
+            }
         }
         return stringList;
     }

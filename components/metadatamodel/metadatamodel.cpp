@@ -259,7 +259,7 @@ void MetadataModel::doQuery()
 
     //check if really all properties to build the query are null
     if (m_queryString.isEmpty() && resourceType().isEmpty() &&
-        mimeTypeStrings().isEmpty() && activityId().isEmpty() &&
+        mimeTypeStrings().first().isEmpty() && activityId().isEmpty() &&
         tagStrings().size() == 0 && !startDate().isValid() &&
         !endDate().isValid() && minimumRating() <= 0 &&
         maximumRating() <= 0 && parameters->size() == 0) {
@@ -286,10 +286,10 @@ void MetadataModel::doQuery()
             rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type))));
         } else {
             rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type)));
-            if (type != "nfo:Bookmark") {
+            /*if (type != "nfo:Bookmark") {
                 //FIXME: remove bookmarks if not explicitly asked for
                 rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl("nfo:Bookmark"))));
-            }
+            }*/
         }
         if (resourceType() == "nfo:Archive") {
             Nepomuk::Query::ComparisonTerm term(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm("application/epub+zip"));
@@ -541,6 +541,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
     foreach (const Nepomuk::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
+
         Nepomuk::Resource resource = res.resource();
         if (res.requestProperties().value(propertyUrl("nie:url")).toString().isEmpty()) {
             continue;
