@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Books
+Name[da]=Bøger
 Name[el]=Βιβλία
 Name[et]=Raamatud
 Name[nl]=Boeken
@@ -10,6 +11,7 @@ Name[tr]=Kitaplar
 Name[uk]=Книги
 Name[x-test]=xxBooksxx
 GenericName=Book collection
+GenericName[da]=Bogsamling
 GenericName[el]=Συλλογή βιβλίων
 GenericName[nl]=Boekenverzameling
 GenericName[pt]=Colecção de livros
@@ -19,6 +21,7 @@ GenericName[tr]=Kitap koleksiyonu
 GenericName[uk]=Збірка книг
 GenericName[x-test]=xxBook collectionxx
 Comment=All books installed on the device
+Comment[da]=Alle bøger installeret på enheden
 Comment[el]=Όλα τα εγκατεστημένα βιβλία στη συσκευή
 Comment[et]=Kõik seadmesse paigaldatud raamatud
 Comment[nl]=Alle op het apparaat geïnstalleerde boeken 
