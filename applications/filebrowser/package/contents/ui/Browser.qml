@@ -249,6 +249,17 @@ PlasmaComponents.Page {
             property int selectingX
             property int selectingY
             pinch.target: parent
+
+            function resetSelection()
+            {
+                selectedModel.modelCleared()
+                selectedModel.clear()
+                selectionRect.x = -1
+                selectionRect.y = -1
+                selectionRect.width = 0
+                selectionRect.height = 0
+            }
+
             onPinchStarted: {
                 //hotspot to start select procedures
                 print("point1: " + pinch.point1.x + " " + pinch.point1.y)
@@ -306,19 +317,19 @@ PlasmaComponents.Page {
                             parent.enabled = true
                         }
                     }
-                    onReleased: {
-                        selectedModel.modelCleared()
-                        selectedModel.clear()
-                        selectionRect.x = -1
-                        selectionRect.y = -1
-                        selectionRect.width = 0
-                        selectionRect.height = 0
+                    onReleased: pinchArea.resetSelection()
+
+                    Connections {
+                        target: fileBrowserRoot.model
+                        onCountChanged: pinchArea.resetSelection()
+                        onModelReset: pinchArea.resetSelection()
                     }
                     MobileComponents.IconGrid {
                         id: resultsGrid
                         anchors.fill: parent
 
                         model: fileBrowserRoot.model
+                        onCurrentPageChanged: pinchArea.resetSelection()
 
                         delegate: Item {
                             id: resourceDelegate
