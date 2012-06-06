@@ -266,7 +266,7 @@ void MetadataModel::doQuery()
         return;
     }
     m_query = Nepomuk::Query::Query();
-    m_query.setQueryFlags(Nepomuk::Query::Query::WithoutFullTextExcerpt);
+    m_query.setQueryFlags(Nepomuk::Query::Query::WithoutFullTextExcerpt|Nepomuk::Query::Query::NoResultRestrictions);
     Nepomuk::Query::AndTerm rootTerm;
 
     if (!m_queryString.isEmpty()) {
@@ -427,14 +427,14 @@ void MetadataModel::doQuery()
     }
 
     //bind directly some properties, to avoid calling hyper inefficient resource::property
-    {
+    /*{
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NIE::url()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NAO::hasSymbol()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NIE::mimeType()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(NAO::description()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(Xesam::description()));
         m_query.addRequestProperty(Nepomuk::Query::Query::RequestProperty(RDFS::comment()));
-    }
+    }*/
 
     int weight = m_sortBy.length() + 1;
     foreach (const QString &sortProperty, m_sortBy) {
@@ -543,7 +543,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         //kDebug() << "Result label:" << res.genericLabel();
 
         Nepomuk::Resource resource = res.resource();
-        if (res.requestProperties().value(propertyUrl("nie:url")).toString().isEmpty()) {
+        if (resource.property(propertyUrl("nie:url")).toString().isEmpty()) {
             continue;
         }
         m_resourcesToInsert[page] << resource;
@@ -557,18 +557,9 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
             m_cachedResources[resource][Label] = resource.genericLabel();
         }
 
-        QString description = res.requestProperties().value(NAO::description()).toString();
-        if (description.isEmpty()) {
-            description = res.requestProperties().value(Xesam::description()).toString();
-        }
-        if (description.isEmpty()) {
-            description = res.requestProperties().value(RDFS::comment()).toString();
-        }
-        if (!description.isEmpty()) {
-            m_cachedResources[resource][Description] = description;
-        }
+        m_cachedResources[resource][Description] = resource.description();
 
-        m_cachedResources[resource][Url] = res.requestProperties().value(propertyUrl("nie:url")).toString();
+        m_cachedResources[resource][Url] = resource.property(propertyUrl("nie:url")).toString();
 
         QStringList types;
         foreach (const QUrl &u, resource.types()) {
@@ -576,10 +567,8 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         }
         m_cachedResources[resource][Types] = types;
 
-        Soprano::Node symbol = res.requestProperties().value(NAO::hasSymbol());
-        if (!symbol.toString().isEmpty()) {
-            Nepomuk::Resource symbolRes(symbol.uri());
-            m_cachedResources[resource][Icon] = symbolRes.genericLabel();
+        if (!resource.symbols().isEmpty()) {
+            m_cachedResources[resource][Icon] = resource.symbols().first();
         } else {
             //if it's an application, fetch the icon from the desktop file
             Nepomuk::Types::Class resClass(resource.resourceType());
@@ -599,8 +588,8 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         m_cachedResources[resource][ClassName] = resource.className();
         m_cachedResources[resource][ResourceType] = resource.resourceType();
         m_cachedResources[resource][IsFile] = resource.isFile();
-        m_cachedResources[resource][HasSymbol] = res.requestProperties().value(NAO::hasSymbol()).toString();
-        m_cachedResources[resource][MimeType] = res.requestProperties().value(NIE::mimeType()).toString();
+       // m_cachedResources[resource][MimeType] = resource.mimeType();
+        m_cachedResources[resource][MimeType] = resource.property(propertyUrl("nfo:mimeType")).toString();
 
         //FIXME: The most complicated of all, this should really be simplified
         {
