@@ -10,6 +10,7 @@ Name[sv]=Böcker
 Name[tr]=Kitaplar
 Name[uk]=Книги
 Name[x-test]=xxBooksxx
+Name[zh_TW]=書籍
 GenericName=Book collection
 GenericName[da]=Bogsamling
 GenericName[el]=Συλλογή βιβλίων
@@ -21,6 +22,7 @@ GenericName[sv]=Boksamling
 GenericName[tr]=Kitap koleksiyonu
 GenericName[uk]=Збірка книг
 GenericName[x-test]=xxBook collectionxx
+GenericName[zh_TW]=書籍收藏
 Comment=All books installed on the device
 Comment[da]=Alle bøger installeret på enheden
 Comment[el]=Όλα τα εγκατεστημένα βιβλία στη συσκευή
@@ -32,6 +34,7 @@ Comment[sv]=Alla böcker installerade på enheten
 Comment[tr]=Aygıt üzerindeki tüm kitaplar
 Comment[uk]=Всі книги, встановлені на пристрої
 Comment[x-test]=xxAll books installed on the devicexx
+Comment[zh_TW]=所有安裝在此裝置上的書籍
 
 Exec=active-filebrowser --mimeTypes=application/epub+zip,application/pdf -graphicssystem raster %u
 Terminal=false

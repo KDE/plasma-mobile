@@ -10,6 +10,7 @@ Name[sv]=Plasma Active programlista
 Name[tr]=Plasma Active Uygulama Listeleyici
 Name[uk]=Список програм Портативної Плазми
 Name[x-test]=xxPlasma Active App Listerxx
+Name[zh_TW]=Plasma Active App Lister
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=applications-other
