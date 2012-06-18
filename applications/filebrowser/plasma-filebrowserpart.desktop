@@ -6,6 +6,7 @@ Comment=Plasma package to load a particular mimetype directly in the file browse
 Comment[da]=Plasma-pakke til at indlæse en bestemt MIME-type direkte i filbrowseren
 Comment[el]=Πακέτο plasma για φόρτωση ενός συγκεκριμένου τύπου mime απευθείας στον περιηγητή αρχείων
 Comment[et]=Plasma pakett konkreetse MIME tüübi laadimiseks otse failibrauseris
+Comment[hu]=Plasma csomag MIME-típus közvetlen betöltésére a fájlböngészőben
 Comment[km]=កញ្ចប់​ប្លាស្មា​ដែល​ត្រូវ​ផ្ទុក mimetype ជាក់លាក់​ដោយ​ផ្ទាល់​ទៅ​ក្នុង​កម្មវិធី​រក​ឯកសារ
 Comment[nl]=Plasma-pakket voor het laden van een speciaal mimetype direct in bestandsbrowser
 Comment[pl]=Pakiet Plazmy do wczytywania poszczególnych typów mime bezpośrednio w przeglądarce plików
@@ -14,6 +15,7 @@ Comment[pt_BR]=Pacote do Plasma para carregar um tipo MIME em particular no gere
 Comment[sv]=Plasma-paket för att läsa in en viss Mime-typ direkt i filbläddraren
 Comment[tr]=Dosya tipini doğrudan dosya tarayıcısı ile tüklemek için Plasma paketi
 Comment[uk]=Пакунок Плазми для завантаження даних певного типу MIME безпосередньо з вікна програми для перегляду файлів
+Comment[wa]=Pacaedje plasma po tcherdjî ene sôre mime dinêye direk do foyteu des fitchîs
 Comment[x-test]=xxPlasma package to load a particular mimetype directly in the file browserxx
 Comment[zh_TW]=直接在檔案瀏覽器直接載入特別的 MIME 型態的 Plasma 套件
 
