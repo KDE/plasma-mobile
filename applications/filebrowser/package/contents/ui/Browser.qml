@@ -141,7 +141,7 @@ PlasmaComponents.Page {
                 }
                 SidebarTab {
                     id: mainTab
-                    text: i18n("Tools")
+                    text: i18n("Filters")
                     onCheckedChanged: {
                         if (checked) {
                             while (sidebarStack.depth > 1) {
