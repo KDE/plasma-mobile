@@ -1,5 +1,21 @@
 [Desktop Entry]
 Name=Plasma Active App Lister
+Name[da]=Plasma Active app-liste
+Name[el]=Plasma Active App Lister
+Name[et]=Plasma Active'i rakendusteloend
+Name[hu]=Plasma Active alkalmazáslistázó
+Name[km]=Plasma Active App Lister
+Name[nl]=Programma voor het tonen van actieve toepassingen van Plasma
+Name[pa]=ਪਲਾਜ਼ਮਾ ਐਕਟਿਵ ਐਪਲ ਲਿਸਟਰ
+Name[pl]=Wykaz programów Plazmy Active
+Name[pt]=Lista de Aplicações do Plasma Active
+Name[pt_BR]=Lista de aplicativos do Plasma Active
+Name[sv]=Plasma Active programlista
+Name[tr]=Plasma Active Uygulama Listeleyici
+Name[uk]=Список програм Портативної Плазми
+Name[wa]=Fijheu di lisse di programes di Plasma Active
+Name[x-test]=xxPlasma Active App Listerxx
+Name[zh_TW]=Plasma Active App Lister
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service
 Icon=applications-other

@@ -45,9 +45,9 @@ soprano_add_ontology( SRCS
 #    adblock/settings_adblock.ui
 #)
 
-kde4_add_kdeinit_executable(active-webbrowser ${active-webbrowser_SRCS})
+kde4_add_executable(active-webbrowser ${active-webbrowser_SRCS})
 
-target_link_libraries(kdeinit_active-webbrowser
+target_link_libraries(active-webbrowser
     ${QT_QTWEBKIT_LIBRARY}
     ${QT_QTDECLARATIVE_LIBRARY}
     ${QT_QTOPENGL_LIBRARY}
@@ -65,4 +65,3 @@ target_link_libraries(kdeinit_active-webbrowser
 install(FILES infopage.html DESTINATION ${DATA_INSTALL_DIR}/active-webbrowser )
 
 install( TARGETS active-webbrowser ${INSTALL_TARGETS_DEFAULT_ARGS} )
-install( TARGETS kdeinit_active-webbrowser ${INSTALL_TARGETS_DEFAULT_ARGS} )

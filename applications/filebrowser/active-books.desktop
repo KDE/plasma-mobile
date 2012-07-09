@@ -1,22 +1,53 @@
 [Desktop Entry]
 Name=Books
+Name[da]=Bøger
+Name[el]=Βιβλία
 Name[et]=Raamatud
+Name[hu]=Könyvek
+Name[km]=សៀវភៅ
 Name[nl]=Boeken
+Name[pa]=ਕਿਤਾਬਾਂ
+Name[pl]=Książki
 Name[pt]=Livros
 Name[pt_BR]=Livros
 Name[sv]=Böcker
+Name[tr]=Kitaplar
 Name[uk]=Книги
+Name[wa]=Lives
 Name[x-test]=xxBooksxx
+Name[zh_TW]=書籍
 GenericName=Book collection
+GenericName[da]=Bogsamling
+GenericName[el]=Συλλογή βιβλίων
+GenericName[et]=Raamatukogu
+GenericName[hu]=Könyvgyűjtemény
+GenericName[km]=សម្រាំង​សៀវភៅ
+GenericName[nl]=Boekenverzameling
+GenericName[pl]=Kolekcja książek
+GenericName[pt]=Colecção de livros
+GenericName[pt_BR]=Coleção de livros
+GenericName[sv]=Boksamling
+GenericName[tr]=Kitap koleksiyonu
+GenericName[uk]=Збірка книг
+GenericName[wa]=Ramexhnêye di lives
+GenericName[x-test]=xxBook collectionxx
+GenericName[zh_TW]=書籍收藏
 Comment=All books installed on the device
+Comment[da]=Alle bøger installeret på enheden
+Comment[el]=Όλα τα εγκατεστημένα βιβλία στη συσκευή
 Comment[et]=Kõik seadmesse paigaldatud raamatud
+Comment[hu]=Az eszközön található összes könyv
+Comment[km]=បាន​ដំឡើង​សៀវភៅ​ទាំងអស់​នៅ​លើ​ឧបករណ៍
 Comment[nl]=Alle op het apparaat geïnstalleerde boeken 
+Comment[pl]=Wszystkie książki zainstalowane na urządzeniu
 Comment[pt]=Todos os livros instalados no dispositivo
 Comment[pt_BR]=Todos os livros instalados no dispositivo
 Comment[sv]=Alla böcker installerade på enheten
+Comment[tr]=Aygıt üzerindeki tüm kitaplar
 Comment[uk]=Всі книги, встановлені на пристрої
+Comment[wa]=Toss les lives astalés so l' éndjin
 Comment[x-test]=xxAll books installed on the devicexx
-
+Comment[zh_TW]=所有安裝在此裝置上的書籍
 
 Exec=active-filebrowser --mimeTypes=application/epub+zip,application/pdf -graphicssystem raster %u
 Terminal=false
