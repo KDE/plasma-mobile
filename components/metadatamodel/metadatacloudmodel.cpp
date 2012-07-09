@@ -248,7 +248,10 @@ void MetadataCloudModel::doQuery()
     //Exclude who doesn't have url
     query += " . FILTER(bif:exists((select (1) where { ?r nie:url ?h . }))) ";
 
-    query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) } group by ?label order by ?label";
+    //User visibility filter doesn't seem acceptable
+    //query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) } group by ?label order by ?label";
+
+    query +=  " } group by ?label order by ?label";
 
     kDebug() << "Performing the Sparql query" << query;
 
