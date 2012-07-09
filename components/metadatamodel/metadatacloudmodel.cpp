@@ -27,19 +27,19 @@
 
 #include <soprano/vocabulary.h>
 
-#include <Nepomuk/File>
-#include <Nepomuk/Query/AndTerm>
-#include <Nepomuk/Query/ResourceTerm>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
-#include <nepomuk/comparisonterm.h>
-#include <nepomuk/literalterm.h>
-#include <nepomuk/queryparser.h>
-#include <nepomuk/resourcetypeterm.h>
-#include <nepomuk/standardqueries.h>
+#include <Nepomuk2/File>
+#include <Nepomuk2/Query/AndTerm>
+#include <Nepomuk2/Query/ResourceTerm>
+#include <Nepomuk2/Tag>
+#include <Nepomuk2/Variant>
+#include <nepomuk2/comparisonterm.h>
+#include <nepomuk2/literalterm.h>
+#include <nepomuk2/queryparser.h>
+#include <nepomuk2/resourcetypeterm.h>
+#include <nepomuk2/standardqueries.h>
 
-#include <nepomuk/nfo.h>
-#include <nepomuk/nie.h>
+#include <nepomuk2/nfo.h>
+#include <nepomuk2/nie.h>
 
 #include <kao.h>
 
@@ -182,7 +182,7 @@ void MetadataCloudModel::doQuery()
             activity = activity.remove(0, 1);
             negation = true;
         }
-        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KAO::Activity());
+        Nepomuk2::Resource acRes(activity, Nepomuk2::Vocabulary::KAO::Activity());
 
         if (negation) {
             query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.resourceUri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
@@ -261,10 +261,10 @@ void MetadataCloudModel::doQuery()
     emit countChanged();
 
     delete m_queryClient;
-    m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
+    m_queryClient = new Nepomuk2::Query::QueryServiceClient(this);
 
-    connect(m_queryClient, SIGNAL(newEntries(QList<Nepomuk::Query::Result>)),
-            this, SLOT(newEntries(QList<Nepomuk::Query::Result>)));
+    connect(m_queryClient, SIGNAL(newEntries(QList<Nepomuk2::Query::Result>)),
+            this, SLOT(newEntries(QList<Nepomuk2::Query::Result>)));
     connect(m_queryClient, SIGNAL(entriesRemoved(QList<QUrl>)),
             this, SLOT(entriesRemoved(QList<QUrl>)));
     connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
@@ -272,22 +272,22 @@ void MetadataCloudModel::doQuery()
     m_queryClient->sparqlQuery(query);
 }
 
-void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
+void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entries)
 {
     QVector<QPair<QString, int> > results;
     QVariantList categories;
 
-    foreach (const Nepomuk::Query::Result &res, entries) {
+    foreach (const Nepomuk2::Query::Result &res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
         QVariant rawLabel = res.additionalBinding(QLatin1String("label")).variant();
 
-        if (rawLabel.canConvert<Nepomuk::Resource>()) {
-            label = rawLabel.value<Nepomuk::Resource>().className();
+        if (rawLabel.canConvert<Nepomuk2::Resource>()) {
+            label = rawLabel.value<Nepomuk2::Resource>().resourceType().toString().section( QRegExp( "[#:]" ), -1 );
         } else if (!rawLabel.value<QUrl>().scheme().isEmpty()) {
             const QUrl url = rawLabel.value<QUrl>();
             if (url.scheme() == "nepomuk") {
-                label = Nepomuk::Resource(url).genericLabel();
+                label = Nepomuk2::Resource(url).genericLabel();
             //TODO: it should convert from ontology url to short form nfo:Document
             } else {
                 label = propertyShortName(url);

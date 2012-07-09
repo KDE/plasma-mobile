@@ -24,19 +24,19 @@
 
 #include <QDate>
 
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Query/Result>
-#include <Nepomuk/Query/QueryServiceClient>
-#include <Nepomuk/Resource>
+#include <Nepomuk2/Query/Query>
+#include <Nepomuk2/Query/Result>
+#include <Nepomuk2/Query/QueryServiceClient>
+#include <Nepomuk2/Resource>
 
 
-namespace Nepomuk {
+namespace Nepomuk2 {
     class ResourceWatcher;
 }
 
 /**
  * This model shows aggregates of results and their count, to build things such as a tag cloud: pairs of tag name/count of items in the cloud.
- * Besides seriving as a tag cloud it can group by any other Nepomuk Resource property, such as date, name, file type etc.
+ * Besides seriving as a tag cloud it can group by any other Nepomuk2 Resource property, such as date, name, file type etc.
  * @author Marco MArtin <mart@kde.org>
  */
 class MetadataCloudModel : public AbstractMetadataModel
@@ -91,13 +91,13 @@ Q_SIGNALS:
    void allowedCategoriesChanged();
 
 protected Q_SLOTS:
-    void newEntries(const QList< Nepomuk::Query::Result > &entries);
+    void newEntries(const QList< Nepomuk2::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
     virtual void doQuery();
     void finishedListing();
 
 private:
-    Nepomuk::Query::QueryServiceClient *m_queryClient;
+    Nepomuk2::Query::QueryServiceClient *m_queryClient;
     QVector<QPair<QString, int> > m_results;
     QVariantList m_categories;
     QSet<QString> m_allowedCategories;

@@ -50,7 +50,7 @@ MACRO(add_kao_ontology var)
    soprano_add_ontology(
       ${var}
       ${KACTIVITIES_ONTOLOGIES_DIR}/kao.trig
-      "KAO" "Nepomuk::Vocabulary" "trig"
+      "KAO" "Nepomuk2::Vocabulary" "trig"
    )
 ENDMACRO(add_kao_ontology)
 

@@ -8,6 +8,8 @@ INCLUDE_DIRECTORIES(
     ${KDE4_INCLUDES}
 )
 
+find_package(NepomukCore REQUIRED)
+
 set(datamodels_SRCS
     abstractmetadatamodel.cpp
     datamodelsplugin.cpp
@@ -15,26 +17,20 @@ set(datamodels_SRCS
     metadatatimelinemodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
-    ${CMAKE_SOURCE_DIR}/nepomuklegacy/resourcewatcher.cpp
    )
 
 add_kao_ontology(datamodels_SRCS)
 
-qt4_add_dbus_interface(datamodels_SRCS
-  ${CMAKE_SOURCE_DIR}/nepomuklegacy/org.kde.nepomuk.ResourceWatcherConnection.xml
-  resourcewatcherconnectioninterface)
 
-qt4_add_dbus_interface(datamodels_SRCS
-   ${CMAKE_SOURCE_DIR}/nepomuklegacy/org.kde.nepomuk.ResourceWatcher.xml
-  resourcewatchermanagerinterface)
 
 soprano_add_ontology(
     datamodels_SRCS
     ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/nso.trig
-    "NSO" "Nepomuk::Vocabulary" "trig"
+    "NSO" "Nepomuk2::Vocabulary" "trig"
 )
 
 nepomuk_add_ontology_classes (datamodels_SRCS
+                              NEPOMUK2
                               ONTOLOGIES
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nie.trig
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
@@ -52,7 +48,7 @@ target_link_libraries(datamodelsplugin
         ${QT_QTDBUS_LIBRARY}
         ${QT_QTDECLARATIVE_LIBRARY}
         ${SOPRANO_LIBRARIES}
-        ${NEPOMUK_LIBRARIES}
+        ${NEPOMUK_CORE_LIBRARY}
         ${NEPOMUK_QUERY_LIBRARIES}
         ${KDE4_KDECORE_LIBRARY}
         ${KDE4_PLASMA_LIBS}

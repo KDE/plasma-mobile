@@ -24,13 +24,13 @@
 
 #include <QDate>
 
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Query/Result>
-#include <Nepomuk/Query/QueryServiceClient>
-#include <Nepomuk/Resource>
+#include <Nepomuk2/Query/Query>
+#include <Nepomuk2/Query/Result>
+#include <Nepomuk2/Query/QueryServiceClient>
+#include <Nepomuk2/Resource>
 
 
-namespace Nepomuk {
+namespace Nepomuk2 {
     class ResourceWatcher;
 }
 
@@ -99,13 +99,13 @@ Q_SIGNALS:
    void descriptionChanged();
 
 protected Q_SLOTS:
-    void newEntries(const QList< Nepomuk::Query::Result > &entries);
+    void newEntries(const QList< Nepomuk2::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
     virtual void doQuery();
     void finishedListing();
 
 private:
-    Nepomuk::Query::QueryServiceClient *m_queryClient;
+    Nepomuk2::Query::QueryServiceClient *m_queryClient;
     QVector<QHash<Roles, int> > m_results;
     QVariantList m_categories;
     Level m_level;
