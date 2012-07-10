@@ -1,3 +1,4 @@
+
 set(metadatamodeltest_SRCS
     main.cpp
     dynamictreemodel.cpp
@@ -6,9 +7,17 @@ set(metadatamodeltest_SRCS
     ../abstractmetadatamodel.cpp
     )
 
+
 add_kao_ontology(metadatamodeltest_SRCS)
 
+soprano_add_ontology(
+    metadatamodeltest_SRCS
+    ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/nso.trig
+    "NSO" "Nepomuk2::Vocabulary" "trig"
+)
+
 nepomuk_add_ontology_classes (metadatamodeltest_SRCS
+                              NEPOMUK2
                               ONTOLOGIES
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nie.trig
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
