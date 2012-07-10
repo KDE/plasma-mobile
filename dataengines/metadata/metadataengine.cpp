@@ -21,29 +21,30 @@
 #include <QDBusServiceWatcher>
 
 // Nepomuk
-#include <Nepomuk/Resource>
-#include <Nepomuk/Variant>
-//#include <Nepomuk/Query/QueryParser>
-#include <nepomuk/queryparser.h>
-#include <Nepomuk/Query/ResourceTerm>
-#include <Nepomuk/Query/ComparisonTerm>
-#include <Nepomuk/Tag>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Variant>
+//#include <Nepomuk2/Query/QueryParser>
+#include <nepomuk2/queryparser.h>
+#include <Nepomuk2/Query/ResourceTerm>
+#include <Nepomuk2/Query/ComparisonTerm>
+#include <Nepomuk2/Tag>
 
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Query/FileQuery>
-#include <Nepomuk/Query/QueryServiceClient>
-#include <Nepomuk/Query/Result>
-#include <Nepomuk/ResourceManager>
+#include <Nepomuk2/Query/Query>
+#include <Nepomuk2/Query/FileQuery>
+#include <Nepomuk2/Query/QueryServiceClient>
+#include <Nepomuk2/Query/Result>
+#include <Nepomuk2/ResourceManager>
+#include <Nepomuk2/ResourceWatcher>
 
 #include <soprano/queryresultiterator.h>
 #include <soprano/model.h>
 #include <soprano/vocabulary.h>
 
-#include <nepomuk/andterm.h>
-#include <nepomuk/orterm.h>
-#include <nepomuk/comparisonterm.h>
-#include <nepomuk/literalterm.h>
-#include <nepomuk/resourcetypeterm.h>
+#include <nepomuk2/andterm.h>
+#include <nepomuk2/orterm.h>
+#include <nepomuk2/comparisonterm.h>
+#include <nepomuk2/literalterm.h>
+#include <nepomuk2/resourcetypeterm.h>
 
 #include "metadataengine.h"
 #include <stdio.h>
@@ -54,8 +55,8 @@
 #include "metadataservice/metadataservice.h"
 
 #include "resourcecontainer.h"
-#include <nepomuk/nfo.h>
-#include <nepomuk/nie.h>
+#include <nepomuk2/nfo.h>
+#include <nepomuk2/nie.h>
 
 #define RESULT_LIMIT 24
 
@@ -132,12 +133,12 @@ bool MetadataEngine::sourceRequestEvent(const QString &name)
         }
     }
 
-    if (Nepomuk::ResourceManager::instance()->initialized()) {
+    if (Nepomuk2::ResourceManager::instance()->initialized()) {
         return prepareSource(name);
     } else {
         ResourceContainer *container = qobject_cast<ResourceContainer *>(containerForSource(massagedName));
 
-        Nepomuk::Query::Query query;
+        Nepomuk2::Query::Query query;
         if (!container) {
             container = new ResourceContainer(this);
             container->setObjectName(name);
@@ -169,7 +170,7 @@ bool MetadataEngine::prepareSource(const QString &name)
     }
 
     kDebug() << "Creating resource synchronously";
-    Nepomuk::Resource resource(massagedName);
+    Nepomuk2::Resource resource(massagedName);
     kDebug() << resource.resourceUri();
     if (!resource.exists()) {
         kDebug() << "Resource " << massagedName << " does not exist.";

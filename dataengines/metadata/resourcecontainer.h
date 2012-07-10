@@ -23,7 +23,8 @@
 
 #include <Plasma/DataContainer>
 
-#include <Nepomuk/Resource>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/ResourceWatcher>
 
 namespace Nepomuk {
     class ResourceWatcher;
@@ -38,18 +39,18 @@ public:
     ResourceContainer(QObject *parent = 0);
     ~ResourceContainer();
 
-    void setResource(Nepomuk::Resource resource);
+    void setResource(Nepomuk2::Resource resource);
 
 protected Q_SLOTS:
-    void propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property, QVariant);
+    void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property, QVariant);
 
 protected:
     QString icon(const QStringList &types);
     void doQuery();
 
 private:
-    Nepomuk::ResourceWatcher* m_watcher;
-    Nepomuk::Resource m_resource;
+    Nepomuk2::ResourceWatcher* m_watcher;
+    Nepomuk2::Resource m_resource;
     QHash<QString, QString> m_icons;
 };
 

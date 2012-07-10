@@ -20,10 +20,10 @@
 
 #include "metadatajob.h"
 
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Resource>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
+#include <Nepomuk2/Query/Query>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Tag>
+#include <Nepomuk2/Variant>
 
 #include <soprano/vocabulary.h>
 
@@ -61,7 +61,7 @@ void MetadataJob::start()
             activityUrl = m_activityConsumer->currentActivity();
         }
 
-        Nepomuk::Resource fileRes(resourceUrl);
+        Nepomuk2::Resource fileRes(resourceUrl);
         KActivities::Info *info = new KActivities::Info(activityUrl);
         QUrl typeUrl;
 
@@ -77,7 +77,7 @@ void MetadataJob::start()
             KService::Ptr service = KService::serviceByDesktopPath(QUrl(resourceUrl).path());
             if (service) {
                 fileRes.setLabel(service->name());
-                fileRes.addSymbol(service->icon());
+                fileRes.setProperty(Soprano::Vocabulary::NAO::hasSymbol(), Nepomuk2::Variant(QStringList() << service->icon()));
             }
         }
 
@@ -101,14 +101,14 @@ void MetadataJob::start()
 
     } else if (operation == "rate") {
         int rating = parameters()["Rating"].toInt();
-        Nepomuk::Resource fileRes(resourceUrl);
+        Nepomuk2::Resource fileRes(resourceUrl);
         fileRes.setRating(rating);
         setResult(true);
         return;
 
     } else if (operation == "addBookmark") {
         const QString url = parameters()["Url"].toString();
-        Nepomuk::Bookmark b(url);
+        Nepomuk2::Bookmark b(url);
 
         QUrl u(url);
         if (u.isValid()) {
@@ -120,17 +120,17 @@ void MetadataJob::start()
         return;
 
     } else if (operation == "remove") {
-        Nepomuk::Resource b(resourceUrl);
+        Nepomuk2::Resource b(resourceUrl);
         kDebug() << "Removing resource TYPE: " << b.resourceType() << "url" << resourceUrl;
         b.remove();
         setResult(true);
         return;
     } else if (operation == "tagResources") {
         const QStringList resourceUrls = parameters()["ResourceUrls"].toStringList();
-        const Nepomuk::Tag tag( parameters()["Tag"].toString() );
+        const Nepomuk2::Tag tag( parameters()["Tag"].toString() );
 
         foreach (const QString &resUrl, resourceUrls) {
-            Nepomuk::Resource r(resUrl);
+            Nepomuk2::Resource r(resUrl);
             r.addTag(tag);
         }
     }

@@ -25,18 +25,18 @@
 #include <KIcon>
 
 // Nepomuk
-#include <Nepomuk/Resource>
-#include <Nepomuk/Variant>
-#include <Nepomuk/Query/ResourceTerm>
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Tag>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Variant>
+#include <Nepomuk2/Query/ResourceTerm>
+#include <Nepomuk2/Query/Query>
+#include <Nepomuk2/Tag>
 
 // Query API
-#include <nepomuk/andterm.h>
-#include <nepomuk/orterm.h>
-#include <nepomuk/comparisonterm.h>
-#include <nepomuk/literalterm.h>
-#include <nepomuk/resourcetypeterm.h>
+#include <nepomuk2/andterm.h>
+#include <nepomuk2/orterm.h>
+#include <nepomuk2/comparisonterm.h>
+#include <nepomuk2/literalterm.h>
+#include <nepomuk2/resourcetypeterm.h>
 
 // Own stuff
 #include "bookmarksengine.h"
@@ -66,7 +66,7 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
     if (name.startsWith(QLatin1String("add:"))) {
         //QString massagedName = name;
         QUrl url = QUrl(massagedName.remove("add:"));
-        Nepomuk::Bookmark b(url);
+        Nepomuk2::Bookmark b(url);
         b.setLabel(url.toString());
         b.setDescription(url.toString());
         b.setBookmarks( url.toString() );
@@ -74,16 +74,16 @@ bool BookmarksEngine::sourceRequestEvent(const QString &name)
     } else if (name.startsWith(QLatin1String("remove:"))) {
         //QString massagedName = name;
         QUrl url = QUrl(massagedName.remove("remove:"));
-        Nepomuk::Resource b(url);
+        Nepomuk2::Resource b(url);
         //kDebug() << "TYPE: " << b.resourceType();
         b.remove();
         //kDebug() << "Removed Bookmark:" << massagedName;
     } else {
-        Nepomuk::Types::Class bookmarkClass(Nepomuk::Bookmark::resourceTypeUri());
-        //Nepomuk::Types::Class bookmarkClass(Nepomuk::PersonContact::resourceTypeUri()); // for testing
-        Nepomuk::Query::ResourceTypeTerm rtt(bookmarkClass);
+        Nepomuk2::Types::Class bookmarkClass(Nepomuk2::Bookmark::resourceTypeUri());
+        //Nepomuk2::Types::Class bookmarkClass(Nepomuk2::PersonContact::resourceTypeUri()); // for testing
+        Nepomuk2::Query::ResourceTypeTerm rtt(bookmarkClass);
 
-        Nepomuk::Query::Query bookmarkQuery;
+        Nepomuk2::Query::Query bookmarkQuery;
         bookmarkQuery.setTerm(rtt);
 
         //kDebug() << "Query:" << bookmarkQuery.toSparqlQuery();

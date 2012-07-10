@@ -5,6 +5,8 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/ontologies
 )
 
+find_package(NepomukCore REQUIRED)
+
 set(metadataengine_SRCS
     metadataengine.cpp
     resourcecontainer.cpp
@@ -38,7 +40,7 @@ target_link_libraries(plasma_engine_active_metadata
     ${KDE4_KDECORE_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4_KIO_LIBS}
-    ${NEPOMUK_LIBRARIES}
+    ${NEPOMUK_CORE_LIBRARY}
     ${NEPOMUK_QUERY_LIBRARIES}
     ${SOPRANO_LIBRARIES}
     ${SOPRANO_CLIENT_LIBRARIES}
