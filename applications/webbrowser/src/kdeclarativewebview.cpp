@@ -59,9 +59,9 @@
 #include <klocalizedstring.h>
 
 #include <soprano/vocabulary.h>
-#include <Nepomuk/Resource>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Tag>
+#include <Nepomuk2/Variant>
 
 QT_BEGIN_NAMESPACE
 

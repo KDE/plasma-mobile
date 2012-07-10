@@ -5,6 +5,7 @@
 
 nepomuk_add_ontology_classes (ontologies_SRCS
                               ONTOLOGIES
+                              NEPOMUK2
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nie.trig
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
                               CLASSES

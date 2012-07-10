@@ -23,7 +23,7 @@
 
 #include <QObject>
 #include <QImage>
-#include <Nepomuk/Resource>
+#include <Nepomuk2/Resource>
 
 class CompletionItemPrivate;
 
@@ -42,9 +42,9 @@ public:
              const QImage &i = QImage(),
              QObject *parent = 0 );
     CompletionItem(QObject *parent);
-    //CompletionItem(Nepomuk::Resource resource, QObject *parent = 0);
+    //CompletionItem(Nepomuk2::Resource resource, QObject *parent = 0);
     ~CompletionItem();
-    void setResource(Nepomuk::Resource resource);
+    void setResource(Nepomuk2::Resource resource);
 
     QString name();
     QString iconName();

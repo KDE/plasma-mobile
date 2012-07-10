@@ -22,7 +22,7 @@
 #include "bookmark.h"
 
 #include <kdebug.h>
-#include <Nepomuk/Variant>
+#include <Nepomuk2/Variant>
 
 class CompletionItemPrivate {
 public:
@@ -52,14 +52,14 @@ CompletionItem::CompletionItem(QObject *parent)
     d->preview = QImage();
 }
 
-void CompletionItem::setResource(Nepomuk::Resource resource)
+void CompletionItem::setResource(Nepomuk2::Resource resource)
 {
     //d->url = resource.
     //kDebug() << "!!!!! res props: " << resource.properties().keys();
     //kDebug() << "SET RESOURCE" << resource.resourceUri();
     d->name = resource.genericDescription();
     //d->url = resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
-    //d->url = resource.property(Nepomuk::Bookmark::bookmarksUri()).toString();
+    //d->url = resource.property(Nepomuk2::Bookmark::bookmarksUri()).toString();
     d->url = resource.description();
     d->name.remove("http://");
     //kDebug() << "Bookmark: " << d->name << d->url;

@@ -23,20 +23,20 @@
 #include <KJob>
 
 #include <soprano/vocabulary.h>
-#include <Nepomuk/Resource>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Tag>
+#include <Nepomuk2/Variant>
 
 //TODO: re-enable as soon we migrate to nepomuk2
-//#include <nepomuk/simpleresource.h>
-//#include <nepomuk/simpleresourcegraph.h>
-//#include <nepomuk/storeresourcesjob.h>
-//#include <nepomuk/datamanagement.h>
+//#include <nepomuk2/simpleresource.h>
+//#include <nepomuk2/simpleresourcegraph.h>
+//#include <nepomuk2/storeresourcesjob.h>
+//#include <nepomuk2/datamanagement.h>
 
-#include <Nepomuk/Vocabulary/NDO>
-#include <Nepomuk/Vocabulary/NFO>
-#include <Nepomuk/Vocabulary/NIE>
-#include <Nepomuk/Vocabulary/NUAO>
+#include <Nepomuk2/Vocabulary/NDO>
+#include <Nepomuk2/Vocabulary/NFO>
+#include <Nepomuk2/Vocabulary/NIE>
+#include <Nepomuk2/Vocabulary/NUAO>
 
 #include <kactivities/consumer.h>
 #include <kdebug.h>
@@ -68,35 +68,35 @@ void NepomukHelper::storeDownloadMetaData(const KUrl &remoteUrl, const KUrl &loc
 
     // Create resources for the remote and local file and website
     //TODO: use Resource again as soon migrated to Nepomuk2
-    Nepomuk::Resource remoteFile;
-    remoteFile.addType(Nepomuk::Vocabulary::NFO::RemoteDataObject());
-    remoteFile.addType(Nepomuk::Vocabulary::NFO::WebDataObject());
-    remoteFile.addProperty(Nepomuk::Vocabulary::NIE::url(), d->remoteUrl);
+    Nepomuk2::Resource remoteFile;
+    remoteFile.addType(Nepomuk2::Vocabulary::NFO::RemoteDataObject());
+    remoteFile.addType(Nepomuk2::Vocabulary::NFO::WebDataObject());
+    remoteFile.addProperty(Nepomuk2::Vocabulary::NIE::url(), d->remoteUrl);
 
-    Nepomuk::Resource file;
-    file.addType(Nepomuk::Vocabulary::NFO::FileDataObject());
-    file.addProperty(Nepomuk::Vocabulary::NIE::url(), d->localUrl);
-    file.addProperty(Nepomuk::Vocabulary::NDO::copiedFrom(), remoteFile);
+    Nepomuk2::Resource file;
+    file.addType(Nepomuk2::Vocabulary::NFO::FileDataObject());
+    file.addProperty(Nepomuk2::Vocabulary::NIE::url(), d->localUrl);
+    file.addProperty(Nepomuk2::Vocabulary::NDO::copiedFrom(), remoteFile);
 
-    Nepomuk::Resource website;
-    website.addType(Nepomuk::Vocabulary::NFO::HtmlDocument());
-    website.addType(Nepomuk::Vocabulary::NFO::WebDataObject());
-    website.addProperty(Nepomuk::Vocabulary::NIE::url(), d->remoteUrl);
+    Nepomuk2::Resource website;
+    website.addType(Nepomuk2::Vocabulary::NFO::HtmlDocument());
+    website.addType(Nepomuk2::Vocabulary::NFO::WebDataObject());
+    website.addProperty(Nepomuk2::Vocabulary::NIE::url(), d->remoteUrl);
 
     // Record the download as event
     QDateTime dt = QDateTime::currentDateTime();
-    Nepomuk::Resource event;
-    event.addType(Nepomuk::Vocabulary::NDO::DownloadEvent());
-    event.addProperty(Nepomuk::Vocabulary::NUAO::start(), dt);
-    event.addProperty(Nepomuk::Vocabulary::NUAO::end(), dt);
-    event.addProperty(Nepomuk::Vocabulary::NUAO::involves(), file);
-    event.addProperty(Nepomuk::Vocabulary::NDO::referrer(), website);
+    Nepomuk2::Resource event;
+    event.addType(Nepomuk2::Vocabulary::NDO::DownloadEvent());
+    event.addProperty(Nepomuk2::Vocabulary::NUAO::start(), dt);
+    event.addProperty(Nepomuk2::Vocabulary::NUAO::end(), dt);
+    event.addProperty(Nepomuk2::Vocabulary::NUAO::involves(), file);
+    event.addProperty(Nepomuk2::Vocabulary::NDO::referrer(), website);
 
     //kDebug() << "storing Nepomuk meta: " << d->remoteUrl << "  " << d->localUrl;
     // Store these resources
-/*    Nepomuk::ResourceGraph graph;
+/*    Nepomuk2::ResourceGraph graph;
     graph << remoteFile << file << website << event;
-    KJob* job = Nepomuk::storeResources(graph);
+    KJob* job = Nepomuk2::storeResources(graph);
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(storeResourcesFinished(KJob*)));*/
 
     // And link the downloaded file to the currently active Activity
