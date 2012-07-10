@@ -4,7 +4,6 @@ set(metadatamodeltest_SRCS
     modeltest.cpp
     ../metadatamodel.cpp
     ../abstractmetadatamodel.cpp
-    ${CMAKE_SOURCE_DIR}/nepomuklegacy/
     )
 
 add_kao_ontology(metadatamodeltest_SRCS)
@@ -22,6 +21,6 @@ qt4_automoc(${metadatamodeltest_SRCS})
 #kde4_add_library(datamodelsplugin SHARED ${datamodels_SRCS})
 kde4_add_executable(metadatamodeltest ${metadatamodeltest_SRCS})
 target_link_libraries(metadatamodeltest ${QT_QTTEST_LIBRARY} ${KDE4_PLASMA_LIBS} ${SOPRANO_LIBRARIES}
-        ${NEPOMUK_LIBRARIES}
+        ${NEPOMUK_CORE_LIBRARY}
         ${NEPOMUK_QUERY_LIBRARIES})
 

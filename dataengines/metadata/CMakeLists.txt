@@ -12,18 +12,9 @@ set(metadataengine_SRCS
     resourcecontainer.cpp
     metadataservice/metadatajob.cpp
     metadataservice/metadataservice.cpp
-    ${CMAKE_SOURCE_DIR}/nepomuklegacy/resourcewatcher.cpp
 )
 
 add_kao_ontology(metadataengine_SRCS)
-
-qt4_add_dbus_interface(metadataengine_SRCS
-  ${CMAKE_SOURCE_DIR}/nepomuklegacy/org.kde.nepomuk.ResourceWatcherConnection.xml
-  resourcewatcherconnectioninterface)
-
-qt4_add_dbus_interface(metadataengine_SRCS
-   ${CMAKE_SOURCE_DIR}/nepomuklegacy/org.kde.nepomuk.ResourceWatcher.xml
-  resourcewatchermanagerinterface)
 
 nepomuk_add_ontology_classes (metadataengine_SRCS
     ONTOLOGIES
