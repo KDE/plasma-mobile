@@ -28,10 +28,9 @@
 #include <Nepomuk2/Variant>
 
 //TODO: re-enable as soon we migrate to nepomuk2
-//#include <nepomuk2/simpleresource.h>
-//#include <nepomuk2/simpleresourcegraph.h>
-//#include <nepomuk2/storeresourcesjob.h>
-//#include <nepomuk2/datamanagement.h>
+#include <nepomuk2/simpleresource.h>
+#include <nepomuk2/simpleresourcegraph.h>
+#include <nepomuk2/storeresourcesjob.h>
 
 #include <Nepomuk2/Vocabulary/NDO>
 #include <Nepomuk2/Vocabulary/NFO>
@@ -68,24 +67,24 @@ void NepomukHelper::storeDownloadMetaData(const KUrl &remoteUrl, const KUrl &loc
 
     // Create resources for the remote and local file and website
     //TODO: use Resource again as soon migrated to Nepomuk2
-    Nepomuk2::Resource remoteFile;
+    Nepomuk2::SimpleResource remoteFile;
     remoteFile.addType(Nepomuk2::Vocabulary::NFO::RemoteDataObject());
     remoteFile.addType(Nepomuk2::Vocabulary::NFO::WebDataObject());
     remoteFile.addProperty(Nepomuk2::Vocabulary::NIE::url(), d->remoteUrl);
 
-    Nepomuk2::Resource file;
+    Nepomuk2::SimpleResource file;
     file.addType(Nepomuk2::Vocabulary::NFO::FileDataObject());
     file.addProperty(Nepomuk2::Vocabulary::NIE::url(), d->localUrl);
     file.addProperty(Nepomuk2::Vocabulary::NDO::copiedFrom(), remoteFile);
 
-    Nepomuk2::Resource website;
+    Nepomuk2::SimpleResource website;
     website.addType(Nepomuk2::Vocabulary::NFO::HtmlDocument());
     website.addType(Nepomuk2::Vocabulary::NFO::WebDataObject());
     website.addProperty(Nepomuk2::Vocabulary::NIE::url(), d->remoteUrl);
 
     // Record the download as event
     QDateTime dt = QDateTime::currentDateTime();
-    Nepomuk2::Resource event;
+    Nepomuk2::SimpleResource event;
     event.addType(Nepomuk2::Vocabulary::NDO::DownloadEvent());
     event.addProperty(Nepomuk2::Vocabulary::NUAO::start(), dt);
     event.addProperty(Nepomuk2::Vocabulary::NUAO::end(), dt);
@@ -94,10 +93,10 @@ void NepomukHelper::storeDownloadMetaData(const KUrl &remoteUrl, const KUrl &loc
 
     //kDebug() << "storing Nepomuk meta: " << d->remoteUrl << "  " << d->localUrl;
     // Store these resources
-/*    Nepomuk2::ResourceGraph graph;
+    Nepomuk2::SimpleResourceGraph graph;
     graph << remoteFile << file << website << event;
     KJob* job = Nepomuk2::storeResources(graph);
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(storeResourcesFinished(KJob*)));*/
+    connect(job, SIGNAL(finished(KJob*)), this, SLOT(storeResourcesFinished(KJob*)));
 
     // And link the downloaded file to the currently active Activity
     QString activityId = d->activityConsumer->currentActivity();
