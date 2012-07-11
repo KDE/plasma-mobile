@@ -447,11 +447,10 @@ PlasmaComponents.Page {
                     anchors.fill: parent
                     onPressed: startY = mouse.y
                     onPositionChanged: {
-                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200 && !contextMenu.visible) {
-                            parent.enabled = true
+                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
+                            dragArea.enabled = true
                         }
                     }
-                    onReleased: pinchArea.resetSelection()
 
                     Connections {
                         target: fileBrowserRoot.model
