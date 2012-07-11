@@ -67,7 +67,7 @@ PlasmaComponents.Page {
                     sourceModel: MetadataModels.MetadataCloudModel {
                         id: tagCloud
                         cloudCategory: "nao:hasTag"
-                        //categoryType: "nao:Tag"
+                        showEmptyCategories: true
                         resourceType: metadataModel.resourceType
                         minimumRating: metadataModel.minimumRating
                     }

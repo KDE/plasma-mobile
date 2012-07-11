@@ -46,7 +46,8 @@
 
 MetadataCloudModel::MetadataCloudModel(QObject *parent)
     : AbstractMetadataModel(parent),
-      m_queryClient(0)
+      m_queryClient(0),
+      m_showEmptyCategories(false)
 {
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
@@ -99,20 +100,20 @@ QVariantList MetadataCloudModel::allowedCategories() const
     return stringToVariantList(m_allowedCategories.values());
 }
 
-void MetadataCloudModel::setCategoryType(const QString &type)
+void MetadataCloudModel::setShowEmptyCategories(bool show)
 {
-    if (type == m_categoryType) {
+    if (show == m_showEmptyCategories) {
         return;
     }
 
-    m_categoryType = type;
+    m_showEmptyCategories = show;
     askRefresh();
-    emit categoryTypeChanged();
+    emit showEmptyCategoriesChanged();
 }
 
-QString MetadataCloudModel::categoryType() const
+bool MetadataCloudModel::showEmptyCategories() const
 {
-    return m_categoryType;
+    return m_showEmptyCategories;
 }
 
 
@@ -126,7 +127,12 @@ void MetadataCloudModel::doQuery()
     }
 
     setRunning(true);
-    QString query = "select distinct ?label "
+    QString query;
+
+    if (!m_showEmptyCategories) {
+        query += "select * where { filter(?count != 0) { ";
+    }
+    query += "select distinct ?label "
           "sum(?localWeight) as ?count "
           "sum(?globalWeight) as ?totalCount "
         "where {  ?r nie:url ?h . "
@@ -285,6 +291,10 @@ void MetadataCloudModel::doQuery()
                 "?r nie:url ?h . }}";
 
     query +=  " } group by ?label order by ?label";
+
+    if (!m_showEmptyCategories) {
+        query +=  " }} ";
+    }
 
     kDebug() << "Performing the Sparql query" << query;
 
