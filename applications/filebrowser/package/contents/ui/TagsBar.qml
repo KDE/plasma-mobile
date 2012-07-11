@@ -48,7 +48,7 @@ PlasmaComponents.Page {
 
     Flickable {
         id: mainFlickable
-        contentWidth: mainColumn.width
+        contentWidth: width
         contentHeight: mainColumn.height
 
         anchors {
@@ -59,6 +59,7 @@ PlasmaComponents.Page {
         Column {
             id: mainColumn
             spacing: 8
+            width: parent.width
             Repeater {
                 id: tagRepeater
                 model: PlasmaCore.SortFilterModel {
