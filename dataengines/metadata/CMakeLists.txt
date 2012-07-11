@@ -16,9 +16,8 @@ set(metadataengine_SRCS
 
 add_kao_ontology(metadataengine_SRCS)
 
-nepomuk_add_ontology_classes (metadataengine_SRCS
+nepomuk2_add_ontology_classes (metadataengine_SRCS
     ONTOLOGIES
-    NEPOMUK2
     ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
     CLASSES
     "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark"

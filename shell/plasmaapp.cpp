@@ -62,7 +62,7 @@
 #include <Plasma/Wallpaper>
 #include <Plasma/WindowEffects>
 
-#include <Nepomuk/ResourceManager>
+#include <Nepomuk2/ResourceManager>
 
 #ifdef Q_WS_X11
 #include <X11/Xlib.h>
@@ -92,7 +92,7 @@ PlasmaApp::PlasmaApp()
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    Nepomuk::ResourceManager::instance()->init();
+    Nepomuk2::ResourceManager::instance()->init();
 
     qmlRegisterType<PanelProxy>("org.kde.plasma.deviceshell", 0, 1, "DevicePanel");
     qmlRegisterUncreatableType<ContainmentProperties>("org.kde.plasma.deviceshell", 0, 1, "ContainmentProperties", "ContainmentProperties is just a type holder");

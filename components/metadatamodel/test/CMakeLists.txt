@@ -16,8 +16,7 @@ soprano_add_ontology(
     "NSO" "Nepomuk2::Vocabulary" "trig"
 )
 
-nepomuk_add_ontology_classes (metadatamodeltest_SRCS
-                              NEPOMUK2
+nepomuk2_add_ontology_classes (metadatamodeltest_SRCS
                               ONTOLOGIES
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nie.trig
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
