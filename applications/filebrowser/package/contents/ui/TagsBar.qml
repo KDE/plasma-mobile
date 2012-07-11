@@ -67,7 +67,7 @@ PlasmaComponents.Page {
                     sourceModel: MetadataModels.MetadataCloudModel {
                         id: tagCloud
                         cloudCategory: "nao:hasTag"
-                        categoryType: "nao:Tag"
+                        //categoryType: "nao:Tag"
                         resourceType: metadataModel.resourceType
                         minimumRating: metadataModel.minimumRating
                     }
@@ -118,6 +118,14 @@ PlasmaComponents.Page {
                                 radius: width/2
                                 color: "white"
                                 opacity: 0.3
+                            }
+                            Rectangle {
+                                color: parent.parent.checked ? theme.highlightColor : theme.textColor
+                                opacity: 0.1
+                                radius: width/2
+                                anchors.centerIn: parent
+                                width: Math.min(parent.width, 10 * model.totalCount)
+                                height: width
                             }
                             Rectangle {
                                 color: parent.parent.checked ? theme.highlightColor : theme.textColor

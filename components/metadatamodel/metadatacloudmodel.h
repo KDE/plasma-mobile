@@ -70,7 +70,8 @@ class MetadataCloudModel : public AbstractMetadataModel
 public:
     enum Roles {
         Label = Qt::UserRole+1,
-        Count
+        Count,
+        TotalCount
     };
 
     MetadataCloudModel(QObject *parent = 0);
@@ -110,7 +111,7 @@ protected Q_SLOTS:
 
 private:
     Nepomuk::Query::QueryServiceClient *m_queryClient;
-    QVector<QPair<QString, int> > m_results;
+    QVector<QHash<int, QVariant> > m_results;
     QVariantList m_categories;
     QSet<QString> m_allowedCategories;
 

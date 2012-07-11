@@ -51,6 +51,7 @@ MetadataCloudModel::MetadataCloudModel(QObject *parent)
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
     roleNames[Count] = "count";
+    roleNames[TotalCount] = "totalCount";
     setRoleNames(roleNames);
 }
 
@@ -125,12 +126,14 @@ void MetadataCloudModel::doQuery()
     }
 
     setRunning(true);
-    QString query;
-    if (m_categoryType.isEmpty()) {
-        query = "select distinct ?label count(*) as ?count where { { ";
-    } else {
-        query = "select distinct ?label (count(*)-1) as ?count where { { ";
-    }
+    QString query = "select distinct ?label "
+          "sum(?localWeight) as ?count "
+          "sum(?globalWeight) as ?totalCount "
+        "where {  ?r nie:url ?h . "
+        "{ select distinct ?r ?label "
+           "1 as ?localWeight "
+           "0 as ?globalWeight "
+          "where {";
 
     if (m_cloudCategory == "kao:Activity") {
         query += " ?activity nao:isRelated ?r . ?activity rdf:type kao:Activity . ?activity kao:activityIdentifier ?label ";
@@ -268,16 +271,20 @@ void MetadataCloudModel::doQuery()
     }
 
     //Exclude who doesn't have url
-    query += " . FILTER(bif:exists((select (1) where { ?r nie:url ?h . }))) ";
+    query += " . ?r nie:url ?h . ";
 
     //User visibility filter doesn't seem to have an acceptable speed
     //query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) } group by ?label order by ?label";
 
-    if (!m_categoryType.isEmpty()) {
-        query += "} UNION {  ?label rdf:type " + m_categoryType;
-    }
+    query += "}} UNION { "
+              "select distinct ?r ?label "
+                "0 as ?localWeight "
+                "1 as ?globalWeight "
+              "where { "
+                "?r " + m_cloudCategory + " ?label . "
+                "?r nie:url ?h . }}";
 
-    query +=  " } } group by ?label order by ?label";
+    query +=  " } group by ?label order by ?label";
 
     kDebug() << "Performing the Sparql query" << query;
 
@@ -300,12 +307,13 @@ void MetadataCloudModel::doQuery()
 
 void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
 {
-    QVector<QPair<QString, int> > results;
+    QVector<QHash<int, QVariant> > results;
     QVariantList categories;
 
     foreach (const Nepomuk::Query::Result &res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
+        int totalCount = res.additionalBinding(QLatin1String("totalCount")).variant().toInt();
         QVariant rawLabel = res.additionalBinding(QLatin1String("label")).variant();
 
         if (rawLabel.canConvert<Nepomuk::Resource>()) {
@@ -330,7 +338,11 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk::Query::Result > &entri
             !(m_allowedCategories.isEmpty() || m_allowedCategories.contains(label))) {
             continue;
         }
-        results << QPair<QString, int>(label, count);
+        QHash<int, QVariant> res;
+        res[Label] = label;
+        res[Count] = count;
+        res[TotalCount] = totalCount;
+        results << res;
         categories << label;
     }
     if (results.count() > 0) {
@@ -382,16 +394,8 @@ QVariant MetadataCloudModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const QPair<QString, int> row = m_results[index.row()];
+    return m_results[index.row()].value(role);
 
-    switch (role) {
-    case Label:
-        return row.first;
-    case Count:
-        return row.second;
-    default:
-        return QVariant();
-    }
 }
 
 #include "metadatacloudmodel.moc"
