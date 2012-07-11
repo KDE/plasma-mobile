@@ -59,10 +59,17 @@ class MetadataCloudModel : public AbstractMetadataModel
      */
     Q_PROPERTY(QVariantList allowedCategories READ allowedCategories WRITE setAllowedCategories NOTIFY allowedCategoriesChanged)
 
+    /**
+     * @property bool if true empty categories will be shown.
+     * Default: false
+     */
+    Q_PROPERTY(bool showEmptyCategories READ showEmptyCategories WRITE setShowEmptyCategories NOTIFY showEmptyCategoriesChanged)
+
 public:
     enum Roles {
         Label = Qt::UserRole+1,
-        Count
+        Count,
+        TotalCount
     };
 
     MetadataCloudModel(QObject *parent = 0);
@@ -74,6 +81,9 @@ public:
 
     void setAllowedCategories(const QVariantList &whitelist);
     QVariantList allowedCategories() const;
+
+    void setShowEmptyCategories(bool show);
+    bool showEmptyCategories() const;
 
     /**
      * rdf:type
@@ -89,6 +99,7 @@ Q_SIGNALS:
    void cloudCategoryChanged();
    void categoriesChanged();
    void allowedCategoriesChanged();
+   void showEmptyCategoriesChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk2::Query::Result > &entries);
@@ -98,12 +109,13 @@ protected Q_SLOTS:
 
 private:
     Nepomuk2::Query::QueryServiceClient *m_queryClient;
-    QVector<QPair<QString, int> > m_results;
+    QVector<QHash<int, QVariant> > m_results;
     QVariantList m_categories;
     QSet<QString> m_allowedCategories;
 
     //pieces to build m_query
     QString m_cloudCategory;
+    bool m_showEmptyCategories;
 };
 
 #endif

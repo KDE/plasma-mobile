@@ -152,7 +152,7 @@ Image {
             }
         }
     }
-    SlcComponents.SlcMenu {
+    /*SlcComponents.SlcMenu {
         id: contextMenu
-    }
+    }*/
 }

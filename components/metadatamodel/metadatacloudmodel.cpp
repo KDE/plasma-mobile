@@ -46,11 +46,13 @@
 
 MetadataCloudModel::MetadataCloudModel(QObject *parent)
     : AbstractMetadataModel(parent),
-      m_queryClient(0)
+      m_queryClient(0),
+      m_showEmptyCategories(false)
 {
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
     roleNames[Count] = "count";
+    roleNames[TotalCount] = "totalCount";
     setRoleNames(roleNames);
 }
 
@@ -89,12 +91,29 @@ void MetadataCloudModel::setAllowedCategories(const QVariantList &whitelist)
     }
 
     m_allowedCategories = set;
+    askRefresh();
     emit allowedCategoriesChanged();
 }
 
 QVariantList MetadataCloudModel::allowedCategories() const
 {
     return stringToVariantList(m_allowedCategories.values());
+}
+
+void MetadataCloudModel::setShowEmptyCategories(bool show)
+{
+    if (show == m_showEmptyCategories) {
+        return;
+    }
+
+    m_showEmptyCategories = show;
+    askRefresh();
+    emit showEmptyCategoriesChanged();
+}
+
+bool MetadataCloudModel::showEmptyCategories() const
+{
+    return m_showEmptyCategories;
 }
 
 
@@ -108,7 +127,19 @@ void MetadataCloudModel::doQuery()
     }
 
     setRunning(true);
-    QString query = "select distinct ?label count(*) as ?count where { ";
+    QString query;
+
+    if (!m_showEmptyCategories) {
+        query += "select * where { filter(?count != 0) { ";
+    }
+    query += "select distinct ?label "
+          "sum(?localWeight) as ?count "
+          "sum(?globalWeight) as ?totalCount "
+        "where {  ?r nie:url ?h . "
+        "{ select distinct ?r ?label "
+           "1 as ?localWeight "
+           "0 as ?globalWeight "
+          "where {";
 
     if (m_cloudCategory == "kao:Activity") {
         query += " ?activity nao:isRelated ?r . ?activity rdf:type kao:Activity . ?activity kao:activityIdentifier ?label ";
@@ -246,12 +277,24 @@ void MetadataCloudModel::doQuery()
     }
 
     //Exclude who doesn't have url
-    query += " . FILTER(bif:exists((select (1) where { ?r nie:url ?h . }))) ";
+    query += " . ?r nie:url ?h . ";
 
-    //User visibility filter doesn't seem acceptable
+    //User visibility filter doesn't seem to have an acceptable speed
     //query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) } group by ?label order by ?label";
 
+    query += "}} UNION { "
+              "select distinct ?r ?label "
+                "0 as ?localWeight "
+                "1 as ?globalWeight "
+              "where { "
+                "?r " + m_cloudCategory + " ?label . "
+                "?r nie:url ?h . }}";
+
     query +=  " } group by ?label order by ?label";
+
+    if (!m_showEmptyCategories) {
+        query +=  " }} ";
+    }
 
     kDebug() << "Performing the Sparql query" << query;
 
@@ -274,12 +317,13 @@ void MetadataCloudModel::doQuery()
 
 void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entries)
 {
-    QVector<QPair<QString, int> > results;
+    QVector<QHash<int, QVariant> > results;
     QVariantList categories;
 
     foreach (const Nepomuk2::Query::Result &res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
+        int totalCount = res.additionalBinding(QLatin1String("totalCount")).variant().toInt();
         QVariant rawLabel = res.additionalBinding(QLatin1String("label")).variant();
 
         if (rawLabel.canConvert<Nepomuk2::Resource>()) {
@@ -304,7 +348,11 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
             !(m_allowedCategories.isEmpty() || m_allowedCategories.contains(label))) {
             continue;
         }
-        results << QPair<QString, int>(label, count);
+        QHash<int, QVariant> res;
+        res[Label] = label;
+        res[Count] = count;
+        res[TotalCount] = totalCount;
+        results << res;
         categories << label;
     }
     if (results.count() > 0) {
@@ -356,16 +404,8 @@ QVariant MetadataCloudModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const QPair<QString, int> row = m_results[index.row()];
+    return m_results[index.row()].value(role);
 
-    switch (role) {
-    case Label:
-        return row.first;
-    case Count:
-        return row.second;
-    default:
-        return QVariant();
-    }
 }
 
 #include "metadatacloudmodel.moc"

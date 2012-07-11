@@ -48,7 +48,7 @@ PlasmaComponents.Page {
 
     Flickable {
         id: mainFlickable
-        contentWidth: mainColumn.width
+        contentWidth: width
         contentHeight: mainColumn.height
 
         anchors {
@@ -59,6 +59,7 @@ PlasmaComponents.Page {
         Column {
             id: mainColumn
             spacing: 8
+            width: parent.width
             Repeater {
                 id: tagRepeater
                 model: PlasmaCore.SortFilterModel {
@@ -66,6 +67,7 @@ PlasmaComponents.Page {
                     sourceModel: MetadataModels.MetadataCloudModel {
                         id: tagCloud
                         cloudCategory: "nao:hasTag"
+                        showEmptyCategories: true
                         resourceType: metadataModel.resourceType
                         minimumRating: metadataModel.minimumRating
                     }
@@ -95,16 +97,35 @@ PlasmaComponents.Page {
                             }
 
                             Rectangle {
+                                id: background
                                 color: theme.textColor
                                 anchors.fill: parent
                                 radius: width/2
-                                opacity: parent.underDrag ? 0.6 : 0.04
+                                opacity: parent.underDrag ? 0.6 : 0.1
                                 Behavior on opacity {
                                     NumberAnimation {
                                         duration: 250
                                         easing.type: Easing.InOutQuad
                                     }
                                 }
+                            }
+                            Rectangle {
+                                anchors {
+                                    fill: background
+                                    topMargin: 1
+                                    bottomMargin: -1
+                                }
+                                radius: width/2
+                                color: "white"
+                                opacity: 0.3
+                            }
+                            Rectangle {
+                                color: parent.parent.checked ? theme.highlightColor : theme.textColor
+                                opacity: 0.1
+                                radius: width/2
+                                anchors.centerIn: parent
+                                width: Math.min(parent.width, 10 * model.totalCount)
+                                height: width
                             }
                             Rectangle {
                                 color: parent.parent.checked ? theme.highlightColor : theme.textColor
@@ -159,11 +180,12 @@ PlasmaComponents.Page {
                         Item {
                             anchors.fill: parent
                             Rectangle {
+                                id: newDragBackground
                                 color: theme.textColor
                                 anchors.fill: parent
 
                                 radius: width/2
-                                opacity: parent.parent.underDrag ? 0.6 : 0.02
+                                opacity: parent.parent.underDrag ? 0.6 : 0.1
                                 Behavior on opacity {
                                     NumberAnimation {
                                         duration: 250
@@ -172,7 +194,16 @@ PlasmaComponents.Page {
                                 }
                             }
                             Rectangle {
-                                id: newDragBackground
+                                anchors {
+                                    fill: newDragBackground
+                                    topMargin: 1
+                                    bottomMargin: -1
+                                }
+                                radius: width/2
+                                color: "white"
+                                opacity: 0.3
+                            }
+                            Rectangle {
                                 color: theme.textColor
                                 anchors {
                                     fill: parent

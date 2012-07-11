@@ -95,7 +95,7 @@ KDeclarativeMainWindow::KDeclarativeMainWindow()
     }
 
     bool useGL = d->args->isSet("opengl");
-    if (!useGL) {
+    if (useGL) {
         //use plasmarc to share this with plasma-windowed
         KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
         useGL = cg.readEntry("UseOpenGl", true);
