@@ -59,6 +59,14 @@ class MetadataCloudModel : public AbstractMetadataModel
      */
     Q_PROPERTY(QVariantList allowedCategories READ allowedCategories WRITE setAllowedCategories NOTIFY allowedCategoriesChanged)
 
+    /**
+     * @property string A resource type. If set all categories properties must be of this type.
+     * For instance hasTag can be restricted to only show a grouping of what is actually nao:Tag, or rdf:Type may show only a
+     * grouping of stuff that has nfo:Document as type.
+     * If this is set eventual empty categories will be shown.
+     */
+    Q_PROPERTY(QString categoryType READ categoryType WRITE setCategoryType NOTIFY categoryTypeChanged)
+
 public:
     enum Roles {
         Label = Qt::UserRole+1,
@@ -75,6 +83,9 @@ public:
     void setAllowedCategories(const QVariantList &whitelist);
     QVariantList allowedCategories() const;
 
+    void setCategoryType(const QString &type);
+    QString categoryType() const;
+
     /**
      * rdf:type
      * nao:numericRating
@@ -89,6 +100,7 @@ Q_SIGNALS:
    void cloudCategoryChanged();
    void categoriesChanged();
    void allowedCategoriesChanged();
+   void categoryTypeChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk::Query::Result > &entries);
@@ -104,6 +116,7 @@ private:
 
     //pieces to build m_query
     QString m_cloudCategory;
+    QString m_categoryType;
 };
 
 #endif

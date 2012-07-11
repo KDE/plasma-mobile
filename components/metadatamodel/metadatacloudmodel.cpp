@@ -89,12 +89,29 @@ void MetadataCloudModel::setAllowedCategories(const QVariantList &whitelist)
     }
 
     m_allowedCategories = set;
+    askRefresh();
     emit allowedCategoriesChanged();
 }
 
 QVariantList MetadataCloudModel::allowedCategories() const
 {
     return stringToVariantList(m_allowedCategories.values());
+}
+
+void MetadataCloudModel::setCategoryType(const QString &type)
+{
+    if (type == m_categoryType) {
+        return;
+    }
+
+    m_categoryType = type;
+    askRefresh();
+    emit categoryTypeChanged();
+}
+
+QString MetadataCloudModel::categoryType() const
+{
+    return m_categoryType;
 }
 
 
@@ -108,7 +125,12 @@ void MetadataCloudModel::doQuery()
     }
 
     setRunning(true);
-    QString query = "select distinct ?label count(*) as ?count where { ";
+    QString query;
+    if (m_categoryType.isEmpty()) {
+        query = "select distinct ?label count(*) as ?count where { { ";
+    } else {
+        query = "select distinct ?label (count(*)-1) as ?count where { { ";
+    }
 
     if (m_cloudCategory == "kao:Activity") {
         query += " ?activity nao:isRelated ?r . ?activity rdf:type kao:Activity . ?activity kao:activityIdentifier ?label ";
@@ -248,10 +270,14 @@ void MetadataCloudModel::doQuery()
     //Exclude who doesn't have url
     query += " . FILTER(bif:exists((select (1) where { ?r nie:url ?h . }))) ";
 
-    //User visibility filter doesn't seem acceptable
+    //User visibility filter doesn't seem to have an acceptable speed
     //query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) } group by ?label order by ?label";
 
-    query +=  " } group by ?label order by ?label";
+    if (!m_categoryType.isEmpty()) {
+        query += "} UNION {  ?label rdf:type " + m_categoryType;
+    }
+
+    query +=  " } } group by ?label order by ?label";
 
     kDebug() << "Performing the Sparql query" << query;
 
