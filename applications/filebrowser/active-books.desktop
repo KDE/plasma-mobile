@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Books
 Name[da]=Bøger
+Name[de]=Bücher
 Name[el]=Βιβλία
 Name[et]=Raamatud
 Name[fr]=Livres
@@ -19,6 +20,7 @@ Name[x-test]=xxBooksxx
 Name[zh_TW]=書籍
 GenericName=Book collection
 GenericName[da]=Bogsamling
+GenericName[de]=Bücher-Sammlung
 GenericName[el]=Συλλογή βιβλίων
 GenericName[et]=Raamatukogu
 GenericName[fr]=Collection de livres

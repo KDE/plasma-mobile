@@ -2,6 +2,7 @@
 Name=Application Information
 Name[cs]=Informace o aplikaci
 Name[da]=Programinformation
+Name[de]=Anwendungsinformationen
 Name[el]=Πληροφορίες εφαρμογής
 Name[es]=Información de la aplicación
 Name[et]=Rakenduse teave
@@ -25,6 +26,7 @@ Name[zh_TW]=應用程式資訊
 Comment=Information and launching of all applications in the app menu.
 Comment[cs]=Informace a spouštění všech aplikací v menu aplikací.
 Comment[da]=Information om og opstart af alle programmer i programmenuen.
+Comment[de]=Informationen und Starten aller Anwendungen im Programmmenü.
 Comment[el]=Πληροφορίες και εκτέλεση όλων των εφαρμογών στο μενού.
 Comment[es]=Información y lanzamiento de todas las aplicaciones del menú.
 Comment[et]=Kõigi rakenduste menüü rakenduste teave ja käivitamine.

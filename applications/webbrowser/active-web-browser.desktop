@@ -2,6 +2,7 @@
 Name=Browser
 Name[cs]=Prohlížeč
 Name[da]=Browser
+Name[de]=Browser
 Name[el]=Περιηγητής
 Name[es]=Navegador
 Name[et]=Veebibrauser
@@ -27,6 +28,7 @@ Name[zh_TW]=瀏覽器
 GenericName=Web Browser
 GenericName[cs]=Webový prohlížeč
 GenericName[da]=Webbrowser
+GenericName[de]=Webbrowser
 GenericName[el]=Περιηγητής ιστού
 GenericName[es]=Navegador web
 GenericName[et]=Veebibrauser

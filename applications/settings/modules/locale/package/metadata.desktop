@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Language
 Name[da]=Sprog
+Name[de]=Sprache
 Name[el]=Γλώσσα
 Name[et]=Keel
 Name[fi]=Kieli
@@ -21,6 +22,7 @@ Name[zh_TW]=語言
 Comment=Locale settings
 Comment[cs]=Jazyková nastavení
 Comment[da]=Lokalitetsindstillinger
+Comment[de]=Regionaleinstellungen
 Comment[el]=Ρυθμίσεις εντοπιότητας
 Comment[et]=Lokaadi seadistused
 Comment[fr]=Configuration des paramètres régionaux

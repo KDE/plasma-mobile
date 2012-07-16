@@ -2,6 +2,7 @@
 Name=Videos
 Name[cs]=Videa
 Name[da]=Videoer
+Name[de]=Videos
 Name[el]=Βίντεο
 Name[es]=Vídeos
 Name[et]=Videod
@@ -26,6 +27,7 @@ Name[zh_TW]=影片
 GenericName=Video player
 GenericName[cs]=Video přehrávač
 GenericName[da]=Videoafspiller
+GenericName[de]=Video-Wiedergabe
 GenericName[el]=Αναπαραγωγέας βίντεο
 GenericName[es]=Reproductor de vídeo
 GenericName[et]=Videomängija
