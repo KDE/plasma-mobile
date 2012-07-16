@@ -74,7 +74,7 @@ void ResourceContainer::setResource(Nepomuk2::Resource resource)
 
 
 
-    const QString className = resource.resourceType().toString().section( QRegExp( "[#:]" ), -1 );
+    const QString className = resource.type().toString().section( QRegExp( "[#:]" ), -1 );
     QString desc = resource.genericDescription();
     if (desc.isEmpty()) {
         desc = className;
@@ -95,7 +95,7 @@ void ResourceContainer::setResource(Nepomuk2::Resource resource)
 
     setData("types", _types);
 
-    Nepomuk2::Types::Class resClass(resource.resourceType());
+    Nepomuk2::Types::Class resClass(resource.type());
 
     //FIXME: a more elegant way is needed
     setData("genericClassName", className);
@@ -140,8 +140,8 @@ void ResourceContainer::setResource(Nepomuk2::Resource resource)
     setData("rating", resource.rating());
 
     setData("className", className);
-    setData("resourceUri", resource.resourceUri());
-    setData("resourceType", resource.resourceType());
+    setData("resourceUri", resource.uri());
+    setData("resourceType", resource.type());
     setData("query", objectName());
 
     if (resource.isFile() && resource.toFile().url().isLocalFile()) {
@@ -151,7 +151,7 @@ void ResourceContainer::setResource(Nepomuk2::Resource resource)
     // Tags
     QStringList _tags, _tagNames;
     foreach (const Nepomuk2::Tag &tag, resource.tags()) {
-        _tags << tag.resourceUri().toString();
+        _tags << tag.uri().toString();
         _tagNames << tag.genericLabel();
     }
     setData("tags", _tags);
@@ -160,7 +160,7 @@ void ResourceContainer::setResource(Nepomuk2::Resource resource)
     // Related
     QStringList _relateds;
     foreach (const Nepomuk2::Resource &res, resource.isRelateds()) {
-        _relateds << res.resourceUri().toString();
+        _relateds << res.uri().toString();
     }
     setData("relateds", _relateds);
 

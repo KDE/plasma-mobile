@@ -77,7 +77,7 @@ void MetadataJob::start()
             KService::Ptr service = KService::serviceByDesktopPath(QUrl(resourceUrl).path());
             if (service) {
                 fileRes.setLabel(service->name());
-                fileRes.setProperty(Soprano::Vocabulary::NAO::hasSymbol(), Nepomuk2::Variant(QStringList() << service->icon()));
+                fileRes.addSymbol(service->icon());
             }
         }
 
@@ -121,7 +121,7 @@ void MetadataJob::start()
 
     } else if (operation == "remove") {
         Nepomuk2::Resource b(resourceUrl);
-        kDebug() << "Removing resource TYPE: " << b.resourceType() << "url" << resourceUrl;
+        kDebug() << "Removing resource TYPE: " << b.type() << "url" << resourceUrl;
         b.remove();
         setResult(true);
         return;

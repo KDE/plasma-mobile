@@ -191,9 +191,9 @@ void MetadataTimelineModel::doQuery()
         Nepomuk2::Resource acRes(activity, Nepomuk2::Vocabulary::KAO::Activity());
 
         if (negation) {
-            query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.resourceUri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
+            query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.uri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
         } else {
-            query +=  " . <" + acRes.resourceUri().toString() + "> nao:isRelated ?r ";
+            query +=  " . <" + acRes.uri().toString() + "> nao:isRelated ?r ";
         }
     }
 

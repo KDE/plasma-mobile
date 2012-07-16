@@ -216,9 +216,9 @@ void MetadataCloudModel::doQuery()
         Nepomuk2::Resource acRes(activity, Nepomuk2::Vocabulary::KAO::Activity());
 
         if (negation) {
-            query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.resourceUri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
+            query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.uri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
         } else {
-            query +=  " . <" + acRes.resourceUri().toString() + "> nao:isRelated ?r ";
+            query +=  " . <" + acRes.uri().toString() + "> nao:isRelated ?r ";
         }
     }
 
@@ -327,7 +327,7 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
         QVariant rawLabel = res.additionalBinding(QLatin1String("label")).variant();
 
         if (rawLabel.canConvert<Nepomuk2::Resource>()) {
-            label = rawLabel.value<Nepomuk2::Resource>().resourceType().toString().section( QRegExp( "[#:]" ), -1 );
+            label = rawLabel.value<Nepomuk2::Resource>().type().toString().section( QRegExp( "[#:]" ), -1 );
         } else if (!rawLabel.value<QUrl>().scheme().isEmpty()) {
             const QUrl url = rawLabel.value<QUrl>();
             if (url.scheme() == "nepomuk") {

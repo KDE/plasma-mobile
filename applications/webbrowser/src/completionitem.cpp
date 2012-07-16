@@ -56,7 +56,7 @@ void CompletionItem::setResource(Nepomuk2::Resource resource)
 {
     //d->url = resource.
     //kDebug() << "!!!!! res props: " << resource.properties().keys();
-    //kDebug() << "SET RESOURCE" << resource.resourceUri();
+    //kDebug() << "SET RESOURCE" << resource.uri();
     d->name = resource.genericDescription();
     //d->url = resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
     //d->url = resource.property(Nepomuk2::Bookmark::bookmarksUri()).toString();
@@ -65,7 +65,7 @@ void CompletionItem::setResource(Nepomuk2::Resource resource)
     //kDebug() << "Bookmark: " << d->name << d->url;
     d->iconName = "bookmarks";
     //d->url = resource.property(resour).toString();
-    d->resourceUri = resource.resourceUri();
+    d->resourceUri = resource.uri();
 }
 
 QUrl CompletionItem::resourceUri()

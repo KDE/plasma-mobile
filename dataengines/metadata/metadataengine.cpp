@@ -171,7 +171,7 @@ bool MetadataEngine::prepareSource(const QString &name)
 
     kDebug() << "Creating resource synchronously";
     Nepomuk2::Resource resource(massagedName);
-    kDebug() << resource.resourceUri();
+    kDebug() << resource.uri();
     if (!resource.exists()) {
         kDebug() << "Resource " << massagedName << " does not exist.";
         return false;

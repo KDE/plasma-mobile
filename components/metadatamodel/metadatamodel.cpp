@@ -568,7 +568,7 @@ void MetadataModel::newEntries(const QList< Nepomuk2::Query::Result > &entries)
             m_cachedResources[resource][Icon] = resource.genericIcon();
         } else {
             //if it's an application, fetch the icon from the desktop file
-            Nepomuk2::Types::Class resClass(resource.resourceType());
+            Nepomuk2::Types::Class resClass(resource.type());
             if (resClass.label() == "Application") {
                 KService::Ptr serv = KService::serviceByDesktopPath(m_cachedResources[resource][Url].toUrl().path());
                 if (serv) {
@@ -582,8 +582,8 @@ void MetadataModel::newEntries(const QList< Nepomuk2::Query::Result > &entries)
         }
 
         //those seems to not be possible avoiding to access the resource
-        m_cachedResources[resource][ClassName] = resource.resourceType().toString().section( QRegExp( "[#:]" ), -1 );
-        m_cachedResources[resource][ResourceType] = resource.resourceType();
+        m_cachedResources[resource][ClassName] = resource.type().toString().section( QRegExp( "[#:]" ), -1 );
+        m_cachedResources[resource][ResourceType] = resource.type();
         m_cachedResources[resource][IsFile] = resource.isFile();
        // m_cachedResources[resource][MimeType] = resource.mimeType();
         m_cachedResources[resource][MimeType] = resource.property(propertyUrl("nfo:mimeType")).toString();
@@ -597,7 +597,7 @@ void MetadataModel::newEntries(const QList< Nepomuk2::Query::Result > &entries)
                 m_cachedResources[resource][GenericClassName] = "Bookmark";
 
             } else {
-                Nepomuk2::Types::Class resClass(resource.resourceType());
+                Nepomuk2::Types::Class resClass(resource.type());
                 foreach (const Nepomuk2::Types::Class &parentClass, resClass.parentClasses()) {
                     const QString label = parentClass.label();
                     if (label == "Document" ||
@@ -662,7 +662,7 @@ void MetadataModel::newEntriesDelayed()
             //kDebug() << "Result!!!" << res.genericLabel() << res.type();
             //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
 
-            m_uriToResourceIndex[res.resourceUri()] = pageStart + offset;
+            m_uriToResourceIndex[res.uri()] = pageStart + offset;
             //there can be new results before the count query gets updated
             if (pageStart + offset < m_resources.size()) {
                 m_resources[pageStart + offset] = res;
@@ -693,7 +693,7 @@ void MetadataModel::propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Pro
     Q_UNUSED(prop)
     Q_UNUSED(val)
 
-    const int index = m_uriToResourceIndex.value(res.resourceUri());
+    const int index = m_uriToResourceIndex.value(res.uri());
     if (index >= 0) {
         emit dataChanged(createIndex(index, 0, 0), createIndex(index, 0, 0));
     }
@@ -735,7 +735,7 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
 
     //FIXME: this loop makes all the optimizations useless, get rid either of it or the optimizations
     for (int i = 0; i < m_resources.count(); ++i) {
-        m_uriToResourceIndex[m_resources[i].resourceUri()] = i;
+        m_uriToResourceIndex[m_resources[i].uri()] = i;
     }
 
     emit countChanged();
@@ -822,11 +822,11 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     case NumericRating:
         return resource.property(NAO::numericRating()).toString();
     case ResourceUri:
-        return resource.resourceUri();
+        return resource.uri();
     case Tags: {
         QStringList tags;
         foreach (const Nepomuk2::Tag &tag, resource.tags()) {
-            tags << tag.resourceUri().toString();
+            tags << tag.uri().toString();
         }
         return tags;
     }
