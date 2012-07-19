@@ -134,7 +134,7 @@ MouseArea {
                     }
                 }
                 onClicked: {
-                    runnerModel.run(index)
+                    runnerModel.run(appGrid.currentPage*appGrid.pageSize+index)
                     resetStatus()
                     itemLaunched()
                 }
