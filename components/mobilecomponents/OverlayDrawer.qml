@@ -30,6 +30,7 @@ PlasmaComponents.Page {
 
     default property alias page: mainPage.data
     property alias drawer: drawerPage.data
+    property alias open: browserFrame.open
 
 
     MouseEventListener {
@@ -55,6 +56,7 @@ PlasmaComponents.Page {
         }
         width: parent.width - handleGraphics.width
         state: "Hidden"
+        property bool open: state == "Open"
 
 
         Image {

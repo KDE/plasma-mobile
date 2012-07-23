@@ -33,7 +33,8 @@ PlasmaComponents.Page {
     }
 
     default property alias page: mainPage.data
-    property alias panel: panelPage.data
+    property alias drawer: panelPage.data
+    property alias open: sidebar.open
 
     Image {
         id: browserFrame
@@ -51,7 +52,7 @@ PlasmaComponents.Page {
             id: mainPage
             anchors {
                 fill: parent
-                rightMargin: handleGraphics.width
+                //rightMargin: handleGraphics.width
             }
         }
 

@@ -26,60 +26,13 @@ import org.kde.draganddrop 1.0
 import org.kde.qtextracomponents 0.1
 
 
-PlasmaComponents.Page {
+MobileComponents.SplitDrawer {
     id: resourceBrowser
     objectName: "resourceBrowser"
     property string currentUdi
     anchors {
         fill: parent
         topMargin: toolBar.height
-    }
-
-    PlasmaCore.DataSource {
-        id: hotplugSource
-        engine: "hotplug"
-        connectedSources: sources
-    }
-    PlasmaCore.DataSource {
-        id: devicesSource
-        engine: "soliddevice"
-        connectedSources: hotplugSource.sources
-        onDataChanged: {
-            //access it here due to the async nature of the dataengine
-            if (resultsGrid.model == dirModel) {
-                var udi
-                var path
-
-                for (var i in devicesSource.connectedSources) {
-                    udi = devicesSource.connectedSources[i]
-                    path = devicesSource.data[udi]["File Path"]
-                    print(udi+dirModel.url.indexOf(udi))
-                    if (dirModel.url.indexOf(path) > 2) {
-                        resourceBrowser.currentUdi = udi
-                        break
-                    }
-                }
-            } else if (resultsGrid.model != dirModel && devicesSource.data[resourceBrowser.currentUdi]["File Path"] != "") {
-                dirModel.url = devicesSource.data[resourceBrowser.currentUdi]["File Path"]
-
-                fileBrowserRoot.model = dirModel
-            }
-        }
-    }
-
-    //FIXME: this will have to be removed
-    Timer {
-        interval: 100
-        running: true
-        onTriggered: backConnection.target = application.action("back")
-    }
-    Connections {
-        id: backConnection
-        target: application.action("back")
-        onTriggered: {
-            resourceInstance.uri = ""
-            fileBrowserRoot.goBack()
-        }
     }
 
     tools: Item {
@@ -265,7 +218,7 @@ PlasmaComponents.Page {
             }
             PlasmaComponents.ButtonRow {
                 z: 900
-                y: sidebar.open ? 0 : height
+                y: resourceBrowser.open ? 0 : height
                 exclusive: true
                 Behavior on y {
                     NumberAnimation {
@@ -332,45 +285,84 @@ PlasmaComponents.Page {
         }
     }
 
-    ListModel {
-        id: selectedModel
-        signal modelCleared
-    }
-    Connections {
-        target: metadataModel
-        onModelReset: {
-            selectedModel.clear()
-            selectedModel.modelCleared()
-        }
-    }
-
-    //BUG: For some reason onCountChanged doesn't get binded directly in ListModel
-    Connections {
-        target: selectedModel
-        onCountChanged: {
-            var newUrls = new Array()
-            for (var i = 0; i < selectedModel.count; ++i) {
-              newUrls[i] = selectedModel.get(i).url
-            }
-            dragArea.mimeData.urls = newUrls
-        }
-    }
-    Connections {
-        target: metadataModel
-        onModelReset: selectedModel.clear()
-    }
-
-    Image {
+    Item {
         id: browserFrame
-        z: 100
-        source: "image://appbackgrounds/standard"
-        fillMode: Image.Tile
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
+        anchors.fill: parent
+
+        PlasmaCore.DataSource {
+            id: hotplugSource
+            engine: "hotplug"
+            connectedSources: sources
         }
-        width: parent.width
-        x: 0
+        PlasmaCore.DataSource {
+            id: devicesSource
+            engine: "soliddevice"
+            connectedSources: hotplugSource.sources
+            onDataChanged: {
+                //access it here due to the async nature of the dataengine
+                if (resultsGrid.model == dirModel) {
+                    var udi
+                    var path
+
+                    for (var i in devicesSource.connectedSources) {
+                        udi = devicesSource.connectedSources[i]
+                        path = devicesSource.data[udi]["File Path"]
+                        print(udi+dirModel.url.indexOf(udi))
+                        if (dirModel.url.indexOf(path) > 2) {
+                            resourceBrowser.currentUdi = udi
+                            break
+                        }
+                    }
+                } else if (resultsGrid.model != dirModel && devicesSource.data[resourceBrowser.currentUdi]["File Path"] != "") {
+                    dirModel.url = devicesSource.data[resourceBrowser.currentUdi]["File Path"]
+
+                    fileBrowserRoot.model = dirModel
+                }
+            }
+        }
+
+        //FIXME: this will have to be removed
+        Timer {
+            interval: 100
+            running: true
+            onTriggered: backConnection.target = application.action("back")
+        }
+        Connections {
+            id: backConnection
+            target: application.action("back")
+            onTriggered: {
+                resourceInstance.uri = ""
+                fileBrowserRoot.goBack()
+            }
+        }
+
+        ListModel {
+            id: selectedModel
+            signal modelCleared
+        }
+        Connections {
+            target: metadataModel
+            onModelReset: {
+                selectedModel.clear()
+                selectedModel.modelCleared()
+            }
+        }
+
+        //BUG: For some reason onCountChanged doesn't get binded directly in ListModel
+        Connections {
+            target: selectedModel
+            onCountChanged: {
+                var newUrls = new Array()
+                for (var i = 0; i < selectedModel.count; ++i) {
+                newUrls[i] = selectedModel.get(i).url
+                }
+                dragArea.mimeData.urls = newUrls
+            }
+        }
+        Connections {
+            target: metadataModel
+            onModelReset: selectedModel.clear()
+        }
 
         //This pinch area is for selection
         PinchArea {
@@ -538,108 +530,12 @@ PlasmaComponents.Page {
                 }
             }
         }
-        Image {
-            source: "image://appbackgrounds/shadow-right"
-            fillMode: Image.TileVertically
-            anchors {
-                left: parent.right
-                top: parent.top
-                bottom: parent.bottom
-                leftMargin: -1
-            }
-        }
-        PlasmaCore.FrameSvgItem {
-            id: handleGraphics
-            imagePath: "dialogs/background"
-            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-            width: handleIcon.width + margins.left + margins.right + 4
-            height: handleIcon.width * 1.6 + margins.top + margins.bottom + 4
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-            }
-
-            //TODO: an icon
-            PlasmaCore.SvgItem {
-                id: handleIcon
-                svg: PlasmaCore.Svg {imagePath: "toolbar-icons/show"}
-                elementId: "show-menu"
-                x: parent.margins.left
-                y: parent.margins.top
-                width: theme.smallMediumIconSize
-                height: width
-                anchors.verticalCenter: parent.verticalCenter
-            }
-        }
-        MouseArea {
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: handleGraphics.left
-                right: handleGraphics.right
-            }
-            drag {
-                target: browserFrame
-                axis: Drag.XAxis
-                //-50, an overshoot to make it look smooter
-                minimumX: -sidebar.width - 50
-                maximumX: 0
-            }
-            property int startX
-            property bool toggle: true
-            onPressed: {
-                startX = browserFrame.x
-                toggle = true
-            }
-            onPositionChanged: {
-                if (Math.abs(browserFrame.x - startX) > 20) {
-                    toggle = false
-                }
-            }
-            onReleased: {
-                if (toggle) {
-                    sidebar.open = !sidebar.open
-                } else {
-                    sidebar.open = (browserFrame.x < -sidebar.width/2)
-                }
-                sidebarSlideAnimation.to = sidebar.open ? -sidebar.width : 0
-                sidebarSlideAnimation.running = true
-            }
-        }
-        //FIXME: use a state machine
-        SequentialAnimation {
-            id: sidebarSlideAnimation
-            property alias to: actualSlideAnimation.to
-            NumberAnimation {
-                id: actualSlideAnimation
-                target: browserFrame
-                properties: "x"
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-            ScriptAction {
-                script: pinchArea.anchors.leftMargin = -browserFrame.x
-            }
-        }
     }
 
-    Item {
+    drawer: Item {
         id: sidebar
 
-        property bool open: false
-
-        width: parent.width/4
-        x: parent.width - width
-        Behavior on width {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-        }
+        anchors.fill: parent
 
         Item {
             anchors.fill: parent
@@ -658,41 +554,6 @@ PlasmaComponents.Page {
                     rightMargin: theme.defaultFont.mSize.width
                 }
             }
-        }
-    }
-
-    Image {
-        source: "image://appbackgrounds/shadow-bottom"
-        fillMode: Image.TileHorizontally
-        opacity: 0.8
-        anchors {
-            left: parent.left
-            top: toolBar.bottom
-            right: parent.right
-            topMargin: -2
-        }
-    }
-
-    ParallelAnimation {
-        id: positionAnim
-        property Item target
-        property int x
-        property int y
-        NumberAnimation {
-            target: positionAnim.target
-            to: positionAnim.y
-            properties: "y"
-
-            duration: 250
-            easing.type: Easing.InOutQuad
-        }
-        NumberAnimation {
-            target: positionAnim.target
-            to: positionAnim.x
-            properties: "x"
-
-            duration: 250
-            easing.type: Easing.InOutQuad
         }
     }
 }
