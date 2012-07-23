@@ -1,0 +1,198 @@
+/*
+ *   Copyright 2012 Marco Martin <mart@kde.org>
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Library General Public License as
+ *   published by the Free Software Foundation; either version 2, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Library General Public License for more details
+ *
+ *   You should have received a copy of the GNU Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+import QtQuick 1.1
+import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
+import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.qtextracomponents 0.1
+
+
+PlasmaComponents.Page {
+    id: root
+    anchors.fill: parent
+
+    default property alias page: mainPage.data
+    property alias drawer: drawerPage.data
+
+
+    MouseEventListener {
+        id: mainPage
+        onReleased: {
+            if (browserFrame.state != "Hidden") {
+                browserFrame.state = "Hidden"
+            } else {
+                browserFrame.state = "Closed"
+            }
+        }
+        anchors.fill: parent
+    }
+
+    Image {
+        id: browserFrame
+        z: 100
+        source: "image://appbackgrounds/standard"
+        fillMode: Image.Tile
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+        }
+        width: parent.width - handleGraphics.width
+        state: "Hidden"
+
+
+        Image {
+            source: "image://appbackgrounds/shadow-left"
+            fillMode: Image.TileVertically
+            anchors {
+                right: parent.left
+                top: parent.top
+                bottom: parent.bottom
+                rightMargin: -1
+            }
+        }
+        PlasmaCore.FrameSvgItem {
+            id: handleGraphics
+            imagePath: "dialogs/background"
+            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
+            width: handleIcon.width + margins.left + margins.right + 4
+            height: handleIcon.width * 1.6 + margins.top + margins.bottom + 4
+            anchors {
+                right: parent.left
+                verticalCenter: parent.verticalCenter
+            }
+
+            PlasmaCore.SvgItem {
+                id: handleIcon
+                svg: PlasmaCore.Svg {imagePath: "toolbar-icons/show"}
+                elementId: "show-menu"
+                x: parent.margins.left
+                y: parent.margins.top
+                width: theme.smallMediumIconSize
+                height: width
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+
+        MouseEventListener {
+            id: mouseEventListener
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                left: handleGraphics.left
+                right: parent.right
+            }
+
+            property int startBrowserFrameX
+            property real oldMouseScreenX
+            property bool toggle: true
+            property bool startDragging: false
+            property string startState
+
+            onPressed: {
+                startBrowserFrameX = browserFrame.x
+                oldMouseScreenX = mouse.screenX
+                startMouseScreenX = mouse.screenX
+                toggle = (mouse.x < handleGraphics.width)
+                startDragging = false
+                startState = browserFrame.state
+                browserFrame.state = "Dragging"
+            }
+            onPositionChanged: {
+                //mouse over handle and didn't move much
+                if (mouse.x > handleGraphics.width ||
+                    Math.abs(mouse.screenX - startMouseScreenX) > 20) {
+                    toggle = false
+                }
+
+                if (mouse.x < handleGraphics.width ||
+                    Math.abs(mouse.screenX - startMouseScreenX) > root.width / 5) {
+                    startDragging = true
+                }
+                if (startDragging) {
+                    browserFrame.x = Math.max(root.width - browserFrame.width, browserFrame.x + mouse.screenX - oldMouseScreenX)
+                }
+                oldMouseScreenX = mouse.screenX
+            }
+            onReleased: {
+                //If one condition for toggle is satisfied toggle, otherwise do an animation that resets the original position
+                if (toggle || Math.abs(browserFrame.x - startBrowserFrameX) > root.width / 3) {
+                    browserFrame.state = startState == "Open" ? "Closed" : "Open"
+                } else {
+                    browserFrame.state = startState
+                }
+            }
+
+            Item {
+                id: drawerPage
+                anchors {
+                    fill: parent
+                    leftMargin: handleGraphics.width + 10
+                }
+            }
+        }
+
+        states: [
+            State {
+                name: "Open"
+                PropertyChanges {
+                    target: browserFrame
+                    x: handleGraphics.width
+                }
+
+            },
+            State {
+                name: "Dragging"
+                //workaround for a quirkiness of the state machine
+                //if no x binding gets defined in this state x will be set to whatever last x it had last time it was in this state
+                PropertyChanges {
+                    target: browserFrame
+                    x: mouseEventListener.startBrowserFrameX
+                }
+            },
+            State {
+                name: "Closed"
+                PropertyChanges {
+                    target: browserFrame
+                    x: root.width
+                }
+            },
+            State {
+                name: "Hidden"
+                PropertyChanges {
+                    target: browserFrame
+                    x: root.width + handleGraphics.width
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                //Exclude Dragging
+                to: "Open,Closed,Hidden"
+                NumberAnimation {
+                    properties: "x"
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        ]
+    }
+}
+
