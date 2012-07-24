@@ -2,6 +2,7 @@
 Comment=Contour tablet homescreen
 Comment[da]=startskærm for Contour tablet
 Comment[el]=Contour tablet homescreen
+Comment[es]=Pantalla de inicio Contour para tabletas
 Comment[et]=Contouri tahvelarvuti koduekraan
 Comment[fr]=Écran d'accueil Contour pour tablette
 Comment[hu]=Countour tablet kezdőképernyő
@@ -21,6 +22,7 @@ Keywords=
 Name=Tablet homescreen
 Name[da]=startskærm for tablet
 Name[el]=Αρχική οθόνη πινακίου
+Name[es]=Pantalla de inicio para tabletas
 Name[et]=Tahvelarvuti koduekraan
 Name[fr]=Écran d'accueil pour tablette
 Name[hu]=Tablet kezdőképernyő
