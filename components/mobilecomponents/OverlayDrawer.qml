@@ -19,11 +19,31 @@
 
 import QtQuick 1.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1
 
 
+/**Documented API
+Inherits:
+        Page from org.kde.plasmacomponents
+
+Imports:
+        org.kde.plasma.core
+        org.kde.plasma.components
+        QtQuick 1.1
+
+Description:
+        Overlay Drawers are used to expose additional UI elements needed for small secondary tasks for which the main UI elements are not needed. For example in Okular Active, an Overlay Drawer is used to display thumbnails of all pages within a document along with a search field. This is used for the distinct task of navigating to another page.
+
+Properties:
+        bool open:
+        If true the drawer is open showing the contents of the "drawer" component.
+
+        Item page:
+        It's the default property. it's the main content of the drawer page, the part that is always shown
+
+        Item drawer:
+        It's the part that can be pulled in and out, will act as a sidebar.
+**/
 PlasmaComponents.Page {
     id: root
     anchors.fill: parent

@@ -18,14 +18,31 @@
  */
 
 import QtQuick 1.1
-import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.draganddrop 1.0
-import org.kde.qtextracomponents 0.1
 
+/**Documented API
+Inherits:
+        Page from org.kde.plasmacomponents
 
+Imports:
+        org.kde.plasma.core
+        org.kde.plasma.components
+        QtQuick 1.1
+
+Description:
+        Split Drawers are used to expose additional UI elements which are optional and can be used in conjunction with the main UI elements. For example the Resource Browser uses a Split Drawer to select different kinds of filters for the main view.
+
+Properties:
+        bool open:
+        If true the drawer is open showing the contents of the "drawer" component.
+
+        Item page:
+        It's the default property. it's the main content of the drawer page, the part that is always shown
+
+        Item drawer:
+        It's the part that can be pulled in and out, will act as a sidebar.
+**/
 PlasmaComponents.Page {
     id: root
     anchors {
