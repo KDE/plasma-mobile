@@ -3,6 +3,7 @@
 Name=MobileDesktop
 Name[da]=MobileDesktop
 Name[el]=MobileDesktop
+Name[es]=MobileDesktop
 Name[et]=Mobiilne töölaud
 Name[fr]=MobileDesktop
 Name[hu]=Mobil asztal
@@ -21,6 +22,7 @@ Name[zh_TW]=行動桌面
 Comment=Default desktop containment
 Comment[da]=Standard skrivebordsbeholder
 Comment[el]=Προκαθορισμένος υποδοχέας επιφάνειας εργασίας
+Comment[es]=Contenedor por omisión para el escritorio
 Comment[et]=Vaikimisi töölauakonteiner
 Comment[fr]=Conteneur de bureau par défaut
 Comment[hu]=Alapértelmezett asztali tartóelem

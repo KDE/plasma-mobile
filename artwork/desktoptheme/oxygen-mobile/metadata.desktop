@@ -2,6 +2,7 @@
 Name=Oxygen for Mobile
 Name[da]=Oxygen til Mobile
 Name[el]=Oxygen for Mobile
+Name[es]=Oxígeno para Mobile
 Name[et]=Oxygen mobiilsetele seadmetele
 Name[fr]=Oxygen pour Mobile
 Name[hu]=Oxygen téma mobilokra
@@ -20,7 +21,9 @@ Name[zh_TW]=行動裝置上的 Oxygen 主題
 Comment=A breath of fresh air
 Comment[cs]=Závan čerstvého vzduchu
 Comment[da]=En mundfuld frisk luft
+Comment[de]=Ein Atemzug frische Luft
 Comment[el]=Μια ανάσα φρέσκου αέρα
+Comment[es]=Una bocanada de aire fresco
 Comment[et]=Värskendav tuulepuhang
 Comment[fr]=Un souffle d'air frais
 Comment[ga]=Béalán den aer cumhra

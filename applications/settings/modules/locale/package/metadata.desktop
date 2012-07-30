@@ -1,9 +1,12 @@
 [Desktop Entry]
 Name=Language
 Name[da]=Sprog
+Name[de]=Sprache
 Name[el]=Γλώσσα
+Name[es]=Idioma
 Name[et]=Keel
 Name[fi]=Kieli
+Name[fr]=Langue
 Name[hu]=Nyelv
 Name[km]=ភាសា
 Name[nl]=Taal
@@ -20,8 +23,12 @@ Name[zh_TW]=語言
 Comment=Locale settings
 Comment[cs]=Jazyková nastavení
 Comment[da]=Lokalitetsindstillinger
+Comment[de]=Regionaleinstellungen
 Comment[el]=Ρυθμίσεις εντοπιότητας
+Comment[es]=Preferencias locales
 Comment[et]=Lokaadi seadistused
+Comment[fi]=Alueasetukset
+Comment[fr]=Configuration des paramètres régionaux
 Comment[hu]=Nyelvi beállítások
 Comment[km]=ការ​កំណត់​មូលដ្ឋាន
 Comment[nl]=Taalregio-instellingen

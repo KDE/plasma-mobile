@@ -348,11 +348,11 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
             !(m_allowedCategories.isEmpty() || m_allowedCategories.contains(label))) {
             continue;
         }
-        QHash<int, QVariant> res;
-        res[Label] = label;
-        res[Count] = count;
-        res[TotalCount] = totalCount;
-        results << res;
+        QHash<int, QVariant> result;
+        result[Label] = label;
+        result[Count] = count;
+        result[TotalCount] = totalCount;
+        results << result;
         categories << label;
     }
     if (results.count() > 0) {

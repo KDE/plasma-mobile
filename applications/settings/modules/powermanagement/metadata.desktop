@@ -1,9 +1,11 @@
 [Desktop Entry]
 Name=Screen
 Name[da]=Skærm
+Name[de]=Bildschirm
 Name[el]=Οθόνη
 Name[es]=Pantalla
 Name[et]=Ekraan
+Name[fr]=Écran
 Name[hu]=Képernyő
 Name[km]=អេក្រង់
 Name[nl]=Scherm
@@ -20,7 +22,9 @@ Name[zh_TW]=螢幕
 Comment=Lock, Sleep, Timeout
 Comment[da]=Lås, slumre, tidsudløb
 Comment[el]=Κλείδωμα, ύπνωση, τέλος χρόνου
+Comment[es]=Bloquear, Dormir, Tiempo de espera
 Comment[et]=Lukustus, uni, ajaületus
+Comment[fr]=Verrou, mise en sommeil, temps imparti
 Comment[hu]=Zárolás, Felfüggesztés, Várakozási idő
 Comment[km]=ចាក់សោ ដេក អស់​ពេល
 Comment[nl]=Vergrendelen, slapen, tijdsoverschrijding

@@ -2,6 +2,7 @@
 Name=Contour activity screen
 Name[da]=Contour aktivitetsbillede
 Name[el]=Οθόνη δραστηριότητας contour
+Name[es]=Pantalla de actividad para Contour
 Name[et]=Contouri tegevuste ekraan
 Name[fr]=Écran de l'activité Contour
 Name[hu]=Contour aktivitás-képernyő
@@ -19,6 +20,7 @@ Name[zh_TW]=Contour 活動螢幕
 Comment=Categorized resources and widgets
 Comment[da]=Kategoriserede ressourcer og widgets
 Comment[el]=Ταξινομημένοι πόροι και συστατικά
+Comment[es]=Recursos y elementos gráficos por categorías
 Comment[et]=Kategoriseeritud ressursid ja vidinad
 Comment[fr]=Ressources et composants graphiques classés par catégories
 Comment[hu]=Kategorizált erőforrások és widgetek

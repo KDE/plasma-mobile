@@ -5,4 +5,5 @@ IconGrid 0.1 IconGrid.qml
 Rating 0.1 Rating.qml
 ResourceDelegate 0.1 ResourceDelegate.qml
 ViewSearch 0.1 ViewSearch.qml
-Sheet 0.1 Sheet.qml
+OverlayDrawer 0.1 OverlayDrawer.qml
+SplitDrawer 0.1 SplitDrawer.qml
