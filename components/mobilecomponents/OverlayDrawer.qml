@@ -87,7 +87,15 @@ PlasmaComponents.Page {
         }
         width: parent.width - handleGraphics.width
         state: "Hidden"
-        property bool open: state == "Open"
+        onStateChanged: open = (state == "Open")
+        property bool open: false
+        onOpenChanged: {
+            if (open) {
+                state = "Open"
+            } else if (state == "Open") {
+                state = "Closed"
+            }
+        }
 
 
         Image {
