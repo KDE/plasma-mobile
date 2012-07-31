@@ -56,7 +56,17 @@ PlasmaComponents.Page {
 
     MouseEventListener {
         id: mainPage
+        property int startMouseScreenX: 0
+        property int startMouseScreenY: 0
+        onPressed: {
+            startMouseScreenX = mouse.screenX
+            startMouseScreenY = mouse.screenY
+        }
         onReleased: {
+            if (Math.abs(mouse.screenX - startMouseScreenX) > 20 ||
+                Math.abs(mouse.screenY - startMouseScreenY) > 20) {
+                return
+            }
             if (browserFrame.state != "Hidden") {
                 browserFrame.state = "Hidden"
             } else {
