@@ -85,6 +85,7 @@ PlasmaComponents.Page {
             top: parent.top
             bottom: parent.bottom
         }
+
         width: parent.width - handleGraphics.width
         state: "Hidden"
         onStateChanged: open = (state == "Open")
@@ -184,8 +185,9 @@ PlasmaComponents.Page {
                 id: drawerPage
                 anchors {
                     fill: parent
-                    leftMargin: handleGraphics.width + 10
+                    leftMargin: handleGraphics.width
                 }
+                clip: true
             }
         }
 
