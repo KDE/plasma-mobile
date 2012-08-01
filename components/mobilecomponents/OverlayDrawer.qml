@@ -88,13 +88,19 @@ PlasmaComponents.Page {
 
         width: parent.width - handleGraphics.width
         state: "Hidden"
-        onStateChanged: open = (state == "Open")
+        onStateChanged: open = (state == "Open" || mouseEventListener.startState == "Open")
         property bool open: false
-        onOpenChanged: {
-            if (open) {
-                state = "Open"
-            } else if (state == "Open") {
-                state = "Closed"
+        onOpenChanged: openChangedTimer.restart()
+
+        Timer {
+            id: openChangedTimer
+            interval: 0
+            onTriggered: {
+                if (open) {
+                    browserFrame.state = "Open"
+                } else {
+                    browserFrame.state = "Closed"
+                }
             }
         }
 
@@ -143,7 +149,7 @@ PlasmaComponents.Page {
 
             property int startBrowserFrameX
             property real oldMouseScreenX
-            property bool toggle: true
+            property bool toggle: false
             property bool startDragging: false
             property string startState
 
@@ -155,6 +161,7 @@ PlasmaComponents.Page {
                 startDragging = false
                 startState = browserFrame.state
                 browserFrame.state = "Dragging"
+                toggle = mouse.x < handleGraphics.width
             }
             onPositionChanged: {
                 //mouse over handle and didn't move much
@@ -162,7 +169,6 @@ PlasmaComponents.Page {
                     Math.abs(mouse.screenX - startMouseScreenX) > 20) {
                     toggle = false
                 }
-
                 if (mouse.x < handleGraphics.width ||
                     Math.abs(mouse.screenX - startMouseScreenX) > root.width / 5) {
                     startDragging = true
