@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Alarms
+Comment=List and set Akonadi Alarms
+X-KDE-ServiceTypes=Plasma/DataEngine
+Type=Service
+Icon=kalarm
+X-KDE-Library=plasma_engine_alarms
+
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=mart@kde.org
+X-KDE-PluginInfo-Name=org.kde.alarms
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://kde.org
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+
