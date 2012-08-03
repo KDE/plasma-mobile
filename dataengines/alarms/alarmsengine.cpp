@@ -161,7 +161,9 @@ void AlarmsEngine::createContainer(const KAlarmCal::KAEvent &event)
 
     AlarmContainer *container = qobject_cast<AlarmContainer *>(containerForSource(name));
 
-    if (!container) {
+    if (container) {
+        container->setAlarm(event);
+    } else {
         // the name and the url are separate because is not possible to
         // know the original string encoding given a QUrl
         container = new AlarmContainer(name, event, this);

@@ -43,11 +43,13 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
 
     setData("id", alarm.itemId());
     setData("time", alarm.firstAlarm().time());
+    setData("date", alarm.firstAlarm().date());
     setData("enabled", alarm.enabled());
     setData("message", alarm.message());
     setData("audioFile", alarm.audioFile());
     setData("recurs", alarm.recurs());
-    
+
+    checkForUpdate();
 }
 
 KAlarmCal::KAEvent AlarmContainer::alarm() const

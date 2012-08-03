@@ -20,6 +20,7 @@
 #define ALARMSJOB_H
 
 #include <Akonadi/Collection>
+#include <Akonadi/Item>
 
 // plasma
 #include <Plasma/ServiceJob>
@@ -40,9 +41,11 @@ protected:
 
 protected Q_SLOTS:
     void itemJobDone(KJob *job);
+    void itemFetchJobDone(KJob*);
 
 private:
     Akonadi::Collection m_collection;
+    QHash<Akonadi::Item::Id, QMap<QString, QVariant> > m_pendingModificationsParameters;
 };
 
 #endif

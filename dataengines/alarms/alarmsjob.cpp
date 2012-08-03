@@ -26,6 +26,9 @@
 
 #include <Akonadi/ItemCreateJob>
 #include <Akonadi/ItemDeleteJob>
+#include <Akonadi/ItemFetchJob>
+#include <Akonadi/ItemFetchScope>
+#include <Akonadi/ItemModifyJob>
 
 #include <kalarmcal/kaevent.h>
 
@@ -62,7 +65,7 @@ void AlarmsJob::start()
             return;
         }
 
-        QString message = parameters()["Message"].toString();
+        const QString message = parameters()["Message"].toString();
 
 
         KAlarmCal::KAEvent kae;
@@ -88,14 +91,76 @@ void AlarmsJob::start()
         Akonadi::ItemDeleteJob* job = new Akonadi::ItemDeleteJob(item);
         connect(job, SIGNAL(result(KJob*)), SLOT(itemJobDone(KJob*)));
         return;
+
+    } else if (operation == "modify") {
+        Akonadi::Item::Id id = parameters()["Id"].toLongLong();
+        Akonadi::Item item(id);
+
+        m_pendingModificationsParameters[id] = parameters();
+        Akonadi::ItemFetchJob* job = new Akonadi::ItemFetchJob(item);
+        job->fetchScope().fetchFullPayload();
+        connect(job, SIGNAL(result(KJob*)),
+                SLOT(itemFetchJobDone(KJob*)));
+        return;
     }
     setResult(false);
 }
 
 void AlarmsJob::itemJobDone(KJob *job)
 {
-    Akonadi::ItemCreateJob *createJob = static_cast<Akonadi::ItemCreateJob *>(job);
-
-    setResult(createJob->error() == 0);
+    setResult(job->error() == 0);
 }
+
+void AlarmsJob::itemFetchJobDone(KJob *job)
+{
+    if ( job->error() ) {
+        setResult(false);
+        return;
+    }
+
+    //this list should always be only one item
+    Akonadi::Item::List items = static_cast<Akonadi::ItemFetchJob*>( job )->items();
+    foreach ( Akonadi::Item item, items ) {
+        if (item.hasPayload<KAlarmCal::KAEvent>()) {
+            KAlarmCal::KAEvent event = item.payload<KAlarmCal::KAEvent>();
+            kWarning() << "Item is a KAEvent" << event.firstAlarm().time();
+
+            QTime time = QTime::fromString(parameters()["Time"].toString(), "hh:mm:ss");
+            QDate date = QDate::fromString(parameters()["Date"].toString(), "yyyy-MM-dd");
+
+            if (!time.isValid()) {
+                kDebug() << "Invalid time";
+                setResult(false);
+                return;
+            }
+            if (!date.isValid()) {
+                kDebug() << "Invalid date";
+                setResult(false);
+                return;
+            }
+
+            const QString message = parameters()["Message"].toString();
+
+            event.setTime(KDateTime(date, time));
+
+            event.set(KDateTime(date, time), message, qApp->palette().base().color(), qApp->palette().text().color(), QFont(), KAlarmCal::KAEvent::MESSAGE, 0, 0, false);
+
+            if (!event.setItemPayload(item, m_collection.contentMimeTypes())) {
+                kWarning() << "Invalid mime type for collection";
+                setResult(false);
+                return;
+            }
+
+            event.setItemId(item.id());
+            item.setPayload(event);
+
+            Akonadi::ItemModifyJob *job = new Akonadi::ItemModifyJob(item, this);
+            //job->disableRevisionCheck();
+            connect(job, SIGNAL(result(KJob*)),
+                    SLOT(itemJobDone(KJob*)));
+            return;
+        }
+    }
+}
+
 #include "alarmsjob.moc"
