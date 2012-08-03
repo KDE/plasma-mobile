@@ -178,9 +178,10 @@ Plasma::Service *AlarmsEngine::serviceForSource(const QString &source)
         return 0;
     }
 
-    //TODO: keep only one instance
-    AlarmsService *service = new AlarmsService(m_collection, this);
-    return service;
+    if (!m_service) {
+        m_service = new AlarmsService(m_collection, this);
+    }
+    return m_service.data();
 }
 
 #include "alarmsengine.moc"

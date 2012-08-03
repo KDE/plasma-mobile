@@ -47,7 +47,7 @@ protected:
 protected Q_SLOTS:
     void collectionChanged(Akonadi::Collection,QSet<QByteArray>);
     void collectionRemoved(Akonadi::Collection);
-    void itemAdded(Akonadi::Item,Akonadi::Collection);
+    void itemAdded(Akonadi::Item, Akonadi::Collection);
     void itemChanged(Akonadi::Item item,QSet<QByteArray>);
     void itemRemoved(Akonadi::Item item);
     void fetchAlarmsCollectionsDone(KJob* job);
@@ -55,6 +55,7 @@ protected Q_SLOTS:
 
 private:
     Akonadi::Collection m_collection;
+    QWeakPointer<Plasma::Service> m_service;
 };
 
 #endif
