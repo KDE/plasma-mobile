@@ -41,7 +41,8 @@ protected:
 
 protected Q_SLOTS:
     void itemJobDone(KJob *job);
-    void itemFetchJobDone(KJob*);
+    void itemFetchJobForModifyDone(KJob*);
+    void itemFetchJobForDeleteDone(KJob*);
 
 private:
     Akonadi::Collection m_collection;

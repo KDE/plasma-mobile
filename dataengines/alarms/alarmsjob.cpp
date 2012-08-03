@@ -88,8 +88,11 @@ void AlarmsJob::start()
         Akonadi::Item::Id id = parameters()["Id"].toLongLong();
         Akonadi::Item item(id);
 
-        Akonadi::ItemDeleteJob* job = new Akonadi::ItemDeleteJob(item);
-        connect(job, SIGNAL(result(KJob*)), SLOT(itemJobDone(KJob*)));
+        //we don't want to delete random item, check that is an alarm before
+        Akonadi::ItemFetchJob* job = new Akonadi::ItemFetchJob(item);
+        job->fetchScope().fetchFullPayload();
+        connect(job, SIGNAL(result(KJob*)),
+                SLOT(itemFetchJobForDeleteDone(KJob*)));
         return;
 
     } else if (operation == "modify") {
@@ -100,7 +103,7 @@ void AlarmsJob::start()
         Akonadi::ItemFetchJob* job = new Akonadi::ItemFetchJob(item);
         job->fetchScope().fetchFullPayload();
         connect(job, SIGNAL(result(KJob*)),
-                SLOT(itemFetchJobDone(KJob*)));
+                SLOT(itemFetchJobForModifyDone(KJob*)));
         return;
     }
     setResult(false);
@@ -111,7 +114,7 @@ void AlarmsJob::itemJobDone(KJob *job)
     setResult(job->error() == 0);
 }
 
-void AlarmsJob::itemFetchJobDone(KJob *job)
+void AlarmsJob::itemFetchJobForModifyDone(KJob *job)
 {
     if ( job->error() ) {
         setResult(false);
@@ -155,12 +158,34 @@ void AlarmsJob::itemFetchJobDone(KJob *job)
             item.setPayload(event);
 
             Akonadi::ItemModifyJob *job = new Akonadi::ItemModifyJob(item, this);
-            //job->disableRevisionCheck();
+            connect(job, SIGNAL(result(KJob*)),
+                    SLOT(itemJobDone(KJob*)));
+
+            m_pendingModificationsParameters.remove(item.id());
+            return;
+        }
+    }
+    setResult(false);
+}
+
+void AlarmsJob::itemFetchJobForDeleteDone(KJob *job)
+{
+    if ( job->error() ) {
+        setResult(false);
+        return;
+    }
+
+    //this list should always be only one item
+    Akonadi::Item::List items = static_cast<Akonadi::ItemFetchJob*>( job )->items();
+    foreach (const Akonadi::Item &item, items ) {
+        if (item.hasPayload<KAlarmCal::KAEvent>()) {
+            Akonadi::ItemDeleteJob *job = new Akonadi::ItemDeleteJob(item);
             connect(job, SIGNAL(result(KJob*)),
                     SLOT(itemJobDone(KJob*)));
             return;
         }
     }
+    setResult(false);
 }
 
 #include "alarmsjob.moc"
