@@ -69,8 +69,10 @@ void AlarmsJob::start()
 
 
         KAlarmCal::KAEvent kae;
+
         kae.set(KDateTime(date, time), message, qApp->palette().base().color(), qApp->palette().text().color(), QFont(), KAlarmCal::KAEvent::MESSAGE, 0, 0, false);
 
+        kae.setEventId(KAlarmCal::CalEvent::uid(KCalCore::CalFormat::createUniqueId(), KAlarmCal::CalEvent::ACTIVE ));
 
         Akonadi::Item item;
         if (!kae.setItemPayload(item, m_collection.contentMimeTypes())) {
