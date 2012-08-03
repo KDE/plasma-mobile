@@ -19,6 +19,7 @@
 
 #include "alarmsengine.h"
 #include "alarmcontainer.h"
+#include "alarmsservice.h"
 
 #include <KJob>
 
@@ -125,6 +126,7 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
         //normally this loop should be a single one
         foreach( const Akonadi::Collection &collection, cjob->collections() ) {
             if (collection.contentMimeTypes().contains(KAlarmCal::MIME_ACTIVE)) {
+                m_collection = collection;
                 //fetch all alarm items
                 Akonadi::ItemFetchJob *itemFetch = new Akonadi::ItemFetchJob(collection, this);
                 itemFetch->fetchScope().fetchFullPayload();
@@ -165,6 +167,18 @@ void AlarmsEngine::createContainer(const KAlarmCal::KAEvent &event)
         container = new AlarmContainer(name, event, this);
         addSource(container);
     }
+}
+
+Plasma::Service *AlarmsEngine::serviceForSource(const QString &source)
+{
+    //since ids change when modifying an alarm we can't attach anything to a source
+    if (!source.isEmpty()) {
+        return 0;
+    }
+
+    //TODO: keep only one instance
+    AlarmsService *service = new AlarmsService(m_collection, this);
+    return service;
 }
 
 #include "alarmsengine.moc"

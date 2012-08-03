@@ -22,6 +22,7 @@
 #define ALARMSENGINE_H
 
 #include <plasma/dataengine.h>
+#include <plasma/service.h>
 
 #include <Akonadi/Collection>
 #include <Akonadi/Item>
@@ -38,6 +39,8 @@ public:
     AlarmsEngine(QObject* parent, const QVariantList& args);
     ~AlarmsEngine();
 
+    Plasma::Service *serviceForSource(const QString &source);
+
 protected:
     void createContainer(const KAlarmCal::KAEvent &event);
 
@@ -51,7 +54,7 @@ protected Q_SLOTS:
     void fetchAlarmsCollectionDone(KJob* job);
 
 private:
-    
+    Akonadi::Collection m_collection;
 };
 
 #endif

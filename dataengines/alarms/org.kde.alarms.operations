@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM
+    "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+<kcfg>
+    <group name="add">
+        <entry name="Date" type="String">
+            <label>The date the alarm will trigger, in format yyyy-MM-dd.</label>
+        </entry>
+        <entry name="Time" type="String">
+            <label>The time the alarm will trigger, in format hh:mm:ss.</label>
+        </entry>
+        <entry name="Message" type="String">
+            <label>The text message of this alarm.</label>
+        </entry>
+    </group>
+</kcfg>
