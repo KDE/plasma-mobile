@@ -39,7 +39,7 @@ protected:
     void start();
 
 protected Q_SLOTS:
-    void createItemDone(KJob *job);
+    void itemJobDone(KJob *job);
 
 private:
     Akonadi::Collection m_collection;

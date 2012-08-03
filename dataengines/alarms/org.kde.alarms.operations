@@ -13,4 +13,9 @@
             <label>The text message of this alarm.</label>
         </entry>
     </group>
+    <group name="delete">
+        <entry name="Id" type="Int">
+            <label>The id of the event to delete.</label>
+        </entry>
+    </group>
 </kcfg>

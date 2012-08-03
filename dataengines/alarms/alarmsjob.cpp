@@ -25,6 +25,7 @@
 #include <KDebug>
 
 #include <Akonadi/ItemCreateJob>
+#include <Akonadi/ItemDeleteJob>
 
 #include <kalarmcal/kaevent.h>
 
@@ -77,13 +78,21 @@ void AlarmsJob::start()
         kae.setItemId(item.id());
 
         Akonadi::ItemCreateJob *job = new Akonadi::ItemCreateJob(item, m_collection);
-        connect(job, SIGNAL(result(KJob*)), SLOT(createItemDone(KJob*)));
+        connect(job, SIGNAL(result(KJob*)), SLOT(itemJobDone(KJob*)));
+        return;
+
+    } else if (operation == "delete") {
+        Akonadi::Item::Id id = parameters()["Id"].toLongLong();
+        Akonadi::Item item(id);
+
+        Akonadi::ItemDeleteJob* job = new Akonadi::ItemDeleteJob(item);
+        connect(job, SIGNAL(result(KJob*)), SLOT(itemJobDone(KJob*)));
         return;
     }
     setResult(false);
 }
 
-void AlarmsJob::createItemDone(KJob *job)
+void AlarmsJob::itemJobDone(KJob *job)
 {
     Akonadi::ItemCreateJob *createJob = static_cast<Akonadi::ItemCreateJob *>(job);
 
