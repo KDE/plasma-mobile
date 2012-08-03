@@ -26,6 +26,8 @@
 #include <Akonadi/Collection>
 #include <Akonadi/Item>
 
+#include <kalarmcal/kaevent.h>
+
 class KJob;
 
 class AlarmsEngine : public Plasma::DataEngine
@@ -38,12 +40,14 @@ public:
 
 protected:
     bool sourceRequestEvent(const QString &name);
+    void createContainer(const KAlarmCal::KAEvent &event);
 
 protected Q_SLOTS:
     void collectionChanged(Akonadi::Collection,QSet<QByteArray>);
     void collectionRemoved(Akonadi::Collection);
     void itemAdded(Akonadi::Item,Akonadi::Collection);
     void itemChanged(Akonadi::Item item,QSet<QByteArray>);
+    void itemRemoved(Akonadi::Item item);
     void fetchAlarmsCollectionsDone(KJob* job);
     void fetchAlarmsCollectionDone(KJob* job);
 

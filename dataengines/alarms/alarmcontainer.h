@@ -37,6 +37,9 @@ public:
                    QObject *parent = 0);
     ~AlarmContainer();
 
+    void setAlarm(const KAlarmCal::KAEvent &alarm);
+    KAlarmCal::KAEvent alarm() const;
+
 private:
     KAlarmCal::KAEvent m_alarmEvent;
 };

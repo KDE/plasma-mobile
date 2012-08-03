@@ -28,6 +28,7 @@ AlarmContainer::AlarmContainer(const QString &name,
       m_alarmEvent(alarm)
 {
     setObjectName(name);
+    setAlarm(alarm);
 }
 
 
@@ -36,7 +37,17 @@ AlarmContainer::~AlarmContainer()
 {
 }
 
+void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
+{
+    m_alarmEvent = alarm;
 
+    setData("id", alarm.itemId());
+    setData("time", alarm.firstAlarm().time());
+}
 
+KAlarmCal::KAEvent AlarmContainer::alarm() const
+{
+    return m_alarmEvent;
+}
 
 #include "alarmcontainer.moc"

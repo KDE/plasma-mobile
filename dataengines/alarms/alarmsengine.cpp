@@ -18,6 +18,7 @@
 */
 
 #include "alarmsengine.h"
+#include "alarmcontainer.h"
 
 #include <KJob>
 
@@ -61,6 +62,8 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
             SLOT(itemAdded(Akonadi::Item,Akonadi::Collection)) );
     connect(monitor, SIGNAL(itemChanged(Akonadi::Item,QSet<QByteArray>)),
             SLOT(itemChanged(Akonadi::Item,QSet<QByteArray>)) );
+    connect(monitor, SIGNAL(itemRemoved(Akonadi::Item)),
+            SLOT(itemRemoved(Akonadi::Item)) );
 
 
     Akonadi::Collection alarmCollection(Akonadi::Collection::root());
@@ -91,6 +94,7 @@ void AlarmsEngine::itemAdded(Akonadi::Item item,Akonadi::Collection)
     if (item.hasPayload<KAlarmCal::KAEvent>()) {
         const KAlarmCal::KAEvent event = item.payload<KAlarmCal::KAEvent>();
         kWarning() << "Item is a KAEvent" << event.firstAlarm().time();
+        createContainer(event);
     }
 }
 
@@ -100,7 +104,14 @@ void AlarmsEngine::itemChanged(Akonadi::Item item,QSet<QByteArray>)
     if (item.hasPayload<KAlarmCal::KAEvent>()) {
         const KAlarmCal::KAEvent event = item.payload<KAlarmCal::KAEvent>();
         kWarning() << "Item is a KAEvent" << event.firstAlarm().time();
+        createContainer(event);
     }
+}
+
+void AlarmsEngine::itemRemoved(Akonadi::Item item)
+{
+    kDebug() << "Removed an item" << item.id();
+    removeSource(QString("Alarm-%1").arg(item.id()));
 }
 
 void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
@@ -137,7 +148,22 @@ void AlarmsEngine::fetchAlarmsCollectionDone(KJob* job)
         if (item.hasPayload<KAlarmCal::KAEvent>()) {
             const KAlarmCal::KAEvent event = item.payload<KAlarmCal::KAEvent>();
             kWarning() << "Item is a KAEvent" << event.firstAlarm().time();
+            createContainer(event);
         }
+    }
+}
+
+void AlarmsEngine::createContainer(const KAlarmCal::KAEvent &event)
+{
+    const QString name = QString("Alarm-%1").arg(event.itemId());
+
+    AlarmContainer *container = qobject_cast<AlarmContainer *>(containerForSource(name));
+
+    if (!container) {
+        // the name and the url are separate because is not possible to
+        // know the original string encoding given a QUrl
+        container = new AlarmContainer(name, event, this);
+        addSource(container);
     }
 }
 
