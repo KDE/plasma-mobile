@@ -39,7 +39,6 @@ public:
     ~AlarmsEngine();
 
 protected:
-    bool sourceRequestEvent(const QString &name);
     void createContainer(const KAlarmCal::KAEvent &event);
 
 protected Q_SLOTS:

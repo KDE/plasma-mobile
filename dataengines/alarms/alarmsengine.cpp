@@ -167,27 +167,4 @@ void AlarmsEngine::createContainer(const KAlarmCal::KAEvent &event)
     }
 }
 
-bool AlarmsEngine::sourceRequestEvent(const QString &name)
-{
-    /*
-    // Check if the url is valid
-    QUrl url = QUrl(name);
-    if (!url.isValid() || url.scheme() == "akonadi") {
-        kWarning() << "Not a useful URL:" << name;
-        return false;
-    }
-
-    AlarmContainer *container = qobject_cast<AlarmContainer *>(containerForSource(name));
-
-    if (!container) {
-        // the name and the url are separate because is not possible to
-        // know the original string encoding given a QUrl
-        container = new AlarmContainer(name, url, this);
-        addSource(container);
-        container->init();
-    }
-*/
-    return true;
-}
-
 #include "alarmsengine.moc"
