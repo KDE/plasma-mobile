@@ -45,23 +45,13 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
 {
     Q_UNUSED(args);
 
-    //Akonadi::Session *session = new Akonadi::Session("PlasmaAlarmsEngine", this);
-    Akonadi::ChangeRecorder* monitor = new Akonadi::ChangeRecorder(this);
-
-    // Restrict monitoring to collections containing the KAlarm mime types
-    //monitor->setSession(session);
-    monitor->setCollectionMonitored(Akonadi::Collection::root());
-    monitor->setResourceMonitored("akonadi_kalarm_resource");
-    monitor->setResourceMonitored("akonadi_kalarm_dir_resource");
+    //Monitor the collection for changes
+    Akonadi::Monitor * monitor = new Akonadi::Monitor( this );
     monitor->setMimeTypeMonitored(KAlarmCal::MIME_ACTIVE);
-    monitor->setMimeTypeMonitored(KAlarmCal::MIME_ARCHIVED);
-    monitor->setMimeTypeMonitored(KAlarmCal::MIME_TEMPLATE);
+
     monitor->itemFetchScope().fetchFullPayload(true);
     monitor->itemFetchScope().fetchAttribute<KAlarmCal::EventAttribute>();
 
-    Akonadi::AttributeFactory::registerAttribute<KAlarmCal::CollectionAttribute>();
-    Akonadi::AttributeFactory::registerAttribute<KAlarmCal::CompatibilityAttribute>();
-    Akonadi::AttributeFactory::registerAttribute<KAlarmCal::EventAttribute>();
 
     connect(monitor, SIGNAL(collectionChanged(Akonadi::Collection,QSet<QByteArray>)),
             SLOT(collectionChanged(Akonadi::Collection,QSet<QByteArray>)));
@@ -72,16 +62,13 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
             SLOT(itemAdded(Akonadi::Item,Akonadi::Collection)) );
     connect(monitor, SIGNAL(itemChanged(Akonadi::Item,QSet<QByteArray>)),
             SLOT(itemChanged(Akonadi::Item,QSet<QByteArray>)) );
-    
+
+
     Akonadi::Collection alarmCollection(Akonadi::Collection::root());
-    alarmCollection.setContentMimeTypes(QStringList() << KAlarmCal::MIME_ACTIVE << KAlarmCal::MIME_ARCHIVED << KAlarmCal::MIME_TEMPLATE);
+    alarmCollection.setContentMimeTypes(QStringList() << KAlarmCal::MIME_ACTIVE);
 
     Akonadi::CollectionFetchJob* fetch = new Akonadi::CollectionFetchJob( alarmCollection, Akonadi::CollectionFetchJob::Recursive);
     connect( fetch, SIGNAL(result(KJob*)), SLOT(fetchAlarmsCollectionsDone(KJob*)) );
-    
-    Akonadi::ItemFetchJob *itemFetch = new Akonadi::ItemFetchJob( Akonadi::Collection( 175 ), this );
-    itemFetch->fetchScope().fetchFullPayload();
-    connect( itemFetch, SIGNAL(result(KJob*)), SLOT(fetchAlarmsCollectionDone(KJob*)) );
 }
 
 
@@ -104,7 +91,7 @@ void AlarmsEngine::itemAdded(Akonadi::Item item,Akonadi::Collection)
     kDebug() << "Got an item";
     if (item.hasPayload<KAlarmCal::KAEvent>()) {
         const KAlarmCal::KAEvent event = item.payload<KAlarmCal::KAEvent>();
-        
+        kWarning() << "Item is a KAEvent" << event.firstAlarm().time();
     }
 }
 
@@ -113,7 +100,7 @@ void AlarmsEngine::itemChanged(Akonadi::Item item,QSet<QByteArray>)
     kDebug() << "Item changed";
     if (item.hasPayload<KAlarmCal::KAEvent>()) {
         const KAlarmCal::KAEvent event = item.payload<KAlarmCal::KAEvent>();
-        
+        kWarning() << "Item is a KAEvent" << event.firstAlarm().time();
     }
 }
 
@@ -125,15 +112,17 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
     } else {
         Akonadi::CollectionFetchJob* cjob = static_cast<Akonadi::CollectionFetchJob*>( job );
         int i = 0;
+        //normally this loop should be a single one
         foreach( const Akonadi::Collection &collection, cjob->collections() ) {
-            
             if (collection.contentMimeTypes().contains(KAlarmCal::MIME_ACTIVE)) {
-                kDebug() << "ContactCollection setting data:" << collection.id() << collection.name() << collection.url() << collection.contentMimeTypes();
-                i++;
-                setData("ContactCollections", QString("ContactCollection-%1").arg(collection.id()), collection.name());
+                //fetch all alarm items
+                Akonadi::ItemFetchJob *itemFetch = new Akonadi::ItemFetchJob(collection, this);
+                itemFetch->fetchScope().fetchFullPayload();
+                connect(itemFetch, SIGNAL(result(KJob*)),
+                        SLOT(fetchAlarmsCollectionDone(KJob*)));
             }
         }
-        kDebug() << i << "Contact collections are in now";
+        kDebug() << i << "Alarm collections are in now";
         scheduleSourcesUpdated();
     }
 }
