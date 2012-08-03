@@ -1,5 +1,4 @@
 /*
-    Copyright 2011 Sebastian Kügler <sebas@kde.org>
     Copyright 2012 Marco Martin <mart@kde.org>
 
     This library is free software; you can redistribute it and/or modify it

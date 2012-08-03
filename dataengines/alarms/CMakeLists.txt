@@ -9,7 +9,7 @@ add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS} ${A
 
 set(alarmsengine_srcs
     alarmsengine.cpp
-    #alarmcontainer.cpp
+    alarmcontainer.cpp
 )
 
 kde4_add_plugin(plasma_engine_alarms ${alarmsengine_srcs})
