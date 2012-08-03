@@ -76,12 +76,17 @@ void AlarmsJob::start()
         }
         kae.setItemId(item.id());
 
-        Akonadi::ItemCreateJob* job = new Akonadi::ItemCreateJob(item, m_collection);
+        Akonadi::ItemCreateJob *job = new Akonadi::ItemCreateJob(item, m_collection);
         connect(job, SIGNAL(result(KJob*)), SLOT(createItemDone(KJob*)));
-        setResult(true);
         return;
     }
     setResult(false);
 }
 
+void AlarmsJob::createItemDone(KJob *job)
+{
+    Akonadi::ItemCreateJob *createJob = static_cast<Akonadi::ItemCreateJob *>(job);
+
+    setResult(createJob->error() == 0);
+}
 #include "alarmsjob.moc"
