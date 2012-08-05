@@ -42,6 +42,7 @@ GenericName[x-test]=xxBook collectionxx
 GenericName[zh_TW]=書籍收藏
 Comment=All books installed on the device
 Comment[da]=Alle bøger installeret på enheden
+Comment[de]=Alle auf dem Gerät installierten Bücher
 Comment[el]=Όλα τα εγκατεστημένα βιβλία στη συσκευή
 Comment[es]=Todos los libros instalados en el dispositivo
 Comment[et]=Kõik seadmesse paigaldatud raamatud
