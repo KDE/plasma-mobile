@@ -182,16 +182,33 @@ void AlarmsJob::start()
 
         const KDateTime nextAlarmTime(dt.kDateTime());
 
-        if ((!container->alarm().recurrence() || container->alarm().recurrence()->type() != KAlarmCal::KARecurrence::DAILY) &&
-            (nextAlarmTime <= now)) {
+        if ((container->alarm().recurrence() && container->alarm().recurrence()->type() == KAlarmCal::KARecurrence::DAILY) ||
+            (nextAlarmTime > now)) {
+
+            KAlarmCal::KAEvent newEvent(container->alarm());
+            newEvent.setItemId(id);
+            Akonadi::Item item(id);
+
+            newEvent.setArchive();
+            if (!newEvent.setItemPayload(item, m_collection.contentMimeTypes())) {
+                kWarning() << "Invalid mime type for collection";
+                setResult(false);
+                return;
+            }
+
+            item.setPayload(newEvent);
+
+            Akonadi::ItemModifyJob *job = new Akonadi::ItemModifyJob(item, this);
+            connect(job, SIGNAL(result(KJob*)),
+                    SLOT(itemJobDone(KJob*)));
+
+            container->setActive(false);
+        } else {
             Akonadi::Item item(id);
 
             Akonadi::ItemDeleteJob *job = new Akonadi::ItemDeleteJob(item);
                 connect(job, SIGNAL(result(KJob*)),
                         SLOT(itemJobDone(KJob*)));
-        } else {
-            container->setActive(false);
-            setResult(true);
         }
         return;
     }

@@ -75,13 +75,12 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
     setData("deferMinutes", alarm.deferDefaultMinutes());
     setData("lateCancelMinutes", alarm.lateCancel());
 
-
-
     //Is it daily and has been triggered today?
     if (alarm.recurrence() && alarm.recurrence()->type() == KAlarmCal::KARecurrence::DAILY) {
         //has been triggered today?
         if (previousAlarmTime.date() == now.date() &&
             previousAlarmTime.time() <= now.time() &&
+            !alarm.toBeArchived() &&
             (alarm.lateCancel() == (uint)0 ||
                 (now.toTime_t() - nextAlarmTime.toTime_t())/(uint)60 <= (uint)alarm.lateCancel())) {
 
