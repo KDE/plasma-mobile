@@ -17,6 +17,8 @@
  */
 
 #include "alarmsjob.h"
+#include "alarmcontainer.h"
+#include "alarmsengine.h"
 
 #include <QApplication>
 #include <QPalette>
@@ -41,6 +43,7 @@ AlarmsJob::AlarmsJob(const Akonadi::Collection &collection, const QString &opera
     : ServiceJob(parent->objectName(), operation, parameters, parent),
       m_collection(collection)
 {
+    m_dataengine = static_cast<AlarmsEngine *>(parent->parent());
 }
 
 AlarmsJob::~AlarmsJob()
@@ -86,26 +89,89 @@ void AlarmsJob::start()
         connect(job, SIGNAL(result(KJob*)), SLOT(itemJobDone(KJob*)));
         return;
 
-    } else if (operation == "delete") {
-        Akonadi::Item::Id id = parameters()["Id"].toLongLong();
+    }
+
+
+
+    //All this operations require an id
+    Akonadi::Item::Id id = parameters()["Id"].toLongLong();
+    AlarmContainer *container = 0;
+
+    if (id) {
+        container = qobject_cast<AlarmContainer *>(m_dataengine->containerForSource(QString("Alarm-%1").arg(id)));
+    }
+
+    if (!id || !container) {
+        setResult(false);
+        return;
+    }
+
+    if (operation == "delete") {
         Akonadi::Item item(id);
 
-        //we don't want to delete random item, check that is an alarm before
-        Akonadi::ItemFetchJob* job = new Akonadi::ItemFetchJob(item);
-        job->fetchScope().fetchFullPayload();
-        connect(job, SIGNAL(result(KJob*)),
-                SLOT(itemFetchJobForDeleteDone(KJob*)));
+        Akonadi::ItemDeleteJob *job = new Akonadi::ItemDeleteJob(item);
+            connect(job, SIGNAL(result(KJob*)),
+                    SLOT(itemJobDone(KJob*)));
         return;
 
     } else if (operation == "modify") {
-        Akonadi::Item::Id id = parameters()["Id"].toLongLong();
+        Akonadi::Item item(id);
+        KAlarmCal::KAEvent event = container->alarm();
+
+        QTime time = QTime::fromString(parameters()["Time"].toString(), "hh:mm:ss");
+        QDate date = QDate::fromString(parameters()["Date"].toString(), "yyyy-MM-dd");
+
+        if (!time.isValid()) {
+            kDebug() << "Invalid time";
+            setResult(false);
+            return;
+        }
+        if (!date.isValid()) {
+            kDebug() << "Invalid date";
+            setResult(false);
+            return;
+        }
+
+        const QString message = parameters()["Message"].toString();
+
+        event.setTime(KDateTime(date, time));
+
+        event.set(KDateTime(date, time), message, qApp->palette().base().color(), qApp->palette().text().color(), QFont(), KAlarmCal::KAEvent::MESSAGE, 0, 0, false);
+
+        if (!event.setItemPayload(item, m_collection.contentMimeTypes())) {
+            kWarning() << "Invalid mime type for collection";
+            setResult(false);
+            return;
+        }
+
+        event.setItemId(item.id());
+        item.setPayload(event);
+
+        Akonadi::ItemModifyJob *job = new Akonadi::ItemModifyJob(item, this);
+        connect(job, SIGNAL(result(KJob*)),
+                SLOT(itemJobDone(KJob*)));
+
+
+    } else if (operation == "defer") {
+        KAlarmCal::KAEvent newEvent(container->alarm());
+        newEvent.setItemId(id);
         Akonadi::Item item(id);
 
-        m_pendingModificationsParameters[id] = parameters();
-        Akonadi::ItemFetchJob* job = new Akonadi::ItemFetchJob(item);
-        job->fetchScope().fetchFullPayload();
+        KAlarmCal::DateTime dateTime = newEvent.firstAlarm().dateTime();
+        dateTime.addMins(parameters()["Minutes"].toInt());
+        //event.defer(dateTime, (event.firstAlarm().type() & KAlarmCal::KAAlarm::REMINDER_ALARM), true);
+        newEvent.setDeferDefaultMinutes(parameters()["Minutes"].toInt());
+        if (!newEvent.setItemPayload(item, m_collection.contentMimeTypes())) {
+            kWarning() << "Invalid mime type for collection";
+            setResult(false);
+            return;
+        }
+
+        item.setPayload(newEvent);
+
+        Akonadi::ItemModifyJob *job = new Akonadi::ItemModifyJob(item, this);
         connect(job, SIGNAL(result(KJob*)),
-                SLOT(itemFetchJobForModifyDone(KJob*)));
+                SLOT(itemJobDone(KJob*)));
         return;
     }
     setResult(false);
@@ -116,78 +182,5 @@ void AlarmsJob::itemJobDone(KJob *job)
     setResult(job->error() == 0);
 }
 
-void AlarmsJob::itemFetchJobForModifyDone(KJob *job)
-{
-    if ( job->error() ) {
-        setResult(false);
-        return;
-    }
-
-    //this list should always be only one item
-    Akonadi::Item::List items = static_cast<Akonadi::ItemFetchJob*>( job )->items();
-    foreach ( Akonadi::Item item, items ) {
-        if (item.hasPayload<KAlarmCal::KAEvent>()) {
-            KAlarmCal::KAEvent event = item.payload<KAlarmCal::KAEvent>();
-            kWarning() << "Item is a KAEvent" << event.firstAlarm().time();
-
-            QTime time = QTime::fromString(parameters()["Time"].toString(), "hh:mm:ss");
-            QDate date = QDate::fromString(parameters()["Date"].toString(), "yyyy-MM-dd");
-
-            if (!time.isValid()) {
-                kDebug() << "Invalid time";
-                setResult(false);
-                return;
-            }
-            if (!date.isValid()) {
-                kDebug() << "Invalid date";
-                setResult(false);
-                return;
-            }
-
-            const QString message = parameters()["Message"].toString();
-
-            event.setTime(KDateTime(date, time));
-
-            event.set(KDateTime(date, time), message, qApp->palette().base().color(), qApp->palette().text().color(), QFont(), KAlarmCal::KAEvent::MESSAGE, 0, 0, false);
-
-            if (!event.setItemPayload(item, m_collection.contentMimeTypes())) {
-                kWarning() << "Invalid mime type for collection";
-                setResult(false);
-                return;
-            }
-
-            event.setItemId(item.id());
-            item.setPayload(event);
-
-            Akonadi::ItemModifyJob *job = new Akonadi::ItemModifyJob(item, this);
-            connect(job, SIGNAL(result(KJob*)),
-                    SLOT(itemJobDone(KJob*)));
-
-            m_pendingModificationsParameters.remove(item.id());
-            return;
-        }
-    }
-    setResult(false);
-}
-
-void AlarmsJob::itemFetchJobForDeleteDone(KJob *job)
-{
-    if ( job->error() ) {
-        setResult(false);
-        return;
-    }
-
-    //this list should always be only one item
-    Akonadi::Item::List items = static_cast<Akonadi::ItemFetchJob*>( job )->items();
-    foreach (const Akonadi::Item &item, items ) {
-        if (item.hasPayload<KAlarmCal::KAEvent>()) {
-            Akonadi::ItemDeleteJob *job = new Akonadi::ItemDeleteJob(item);
-            connect(job, SIGNAL(result(KJob*)),
-                    SLOT(itemJobDone(KJob*)));
-            return;
-        }
-    }
-    setResult(false);
-}
 
 #include "alarmsjob.moc"

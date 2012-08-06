@@ -32,4 +32,12 @@
             <label>The text message of this alarm.</label>
         </entry>
     </group>
+    <group name="defer">
+        <entry name="Id" type="Int">
+            <label>The id of the event to defer(snooze).</label>
+        </entry>
+        <entry name="Minutes" type="Int">
+            <label>How many minutes defer the alarm.</label>
+        </entry>
+    </group>
 </kcfg>

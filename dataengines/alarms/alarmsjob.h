@@ -26,6 +26,7 @@
 #include <Plasma/ServiceJob>
 
 
+class AlarmsEngine;
 
 class AlarmsJob : public Plasma::ServiceJob
 {
@@ -41,12 +42,11 @@ protected:
 
 protected Q_SLOTS:
     void itemJobDone(KJob *job);
-    void itemFetchJobForModifyDone(KJob*);
-    void itemFetchJobForDeleteDone(KJob*);
 
 private:
     Akonadi::Collection m_collection;
     QHash<Akonadi::Item::Id, QMap<QString, QVariant> > m_pendingModificationsParameters;
+    AlarmsEngine *m_dataengine;
 };
 
 #endif

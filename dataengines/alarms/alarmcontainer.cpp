@@ -48,6 +48,7 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
     setData("message", alarm.message());
     setData("audioFile", alarm.audioFile());
     setData("recurs", alarm.recurs());
+    setData("deferMinutes", alarm.deferDefaultMinutes());
 
     checkForUpdate();
 }
