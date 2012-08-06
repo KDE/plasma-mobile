@@ -66,11 +66,17 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
 
     //Is the alarm in the past?
     if (alarmTime <= KDateTime::currentLocalDateTime()) {
+        //Is this timer to be deleted?
+        bool toDelete = true;
+
         m_timer->stop();
+
         //Does the alarm have a lateCancel time? is it expired?
         if (alarm.lateCancel() == (uint)0 ||
         (KDateTime::currentLocalDateTime().toTime_t() - alarmTime.toTime_t())/(uint)60 <= (uint)alarm.lateCancel()) {
+            //Trigger the alarm
             setData("active", true);
+            toDelete = false;
         } else {
             setData("active", false);
         }
@@ -94,16 +100,11 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
 
             new Akonadi::ItemModifyJob(item, this);
             setData("active", false);
-
-
-        //Does the alarm have a lateCancel time? is it expired?
-        } else if (alarm.lateCancel() == (uint)0 ||
-                   (KDateTime::currentLocalDateTime().toTime_t() - alarmTime.toTime_t())/(uint)60 <= (uint)alarm.lateCancel()) {
-            //Trigger the alarm
-            setData("active", true);
+            toDelete = false;
+        }
 
         //Kill the expired timer
-        } else {
+        if (toDelete) {
             Akonadi::Item item(m_alarmEvent.itemId());
 
             new Akonadi::ItemDeleteJob(item, this);
