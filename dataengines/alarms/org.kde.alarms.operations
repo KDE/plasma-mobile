@@ -40,4 +40,9 @@
             <label>How many minutes defer the alarm.</label>
         </entry>
     </group>
+    <group name="dismiss">
+        <entry name="Id" type="Int">
+            <label>The id of the event to dismiss (stop and eventually delete if not recurrent).</label>
+        </entry>
+    </group>
 </kcfg>

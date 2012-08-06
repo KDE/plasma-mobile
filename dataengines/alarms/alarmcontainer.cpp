@@ -77,23 +77,22 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
 
 
 
-alarm.previousOccurrence(now, dt);
-kWarning() << "AAAAAA"<< dt.kDateTime()<<startAlarmTime<<nextAlarmTime<<alarm.expired()<<alarm.mainExpired()<<previousAlarmTime;
-
     //Is it daily and has been triggered today?
     if (alarm.recurrence() && alarm.recurrence()->type() == KAlarmCal::KARecurrence::DAILY) {
-        if (previousAlarmTime.date() < now.date() &&
+        //has been triggered today?
+        if (previousAlarmTime.date() == now.date() &&
+            previousAlarmTime.time() <= now.time() &&
             (alarm.lateCancel() == (uint)0 ||
                 (now.toTime_t() - nextAlarmTime.toTime_t())/(uint)60 <= (uint)alarm.lateCancel())) {
 
             setData("active", true);
         } else {
             setData("active", false);
-            m_timer->start((nextAlarmTime.toTime_t() - now.toTime_t()) * 1000);
         }
+        m_timer->start((nextAlarmTime.toTime_t() - now.toTime_t()) * 1000);
 
     //Is the alarm in the past?
-    } else if (nextAlarmTime <= now) {
+    } else if (!nextAlarmTime.isValid() || nextAlarmTime <= now) {
 
         m_timer->stop();
 
@@ -124,12 +123,28 @@ KAlarmCal::KAEvent AlarmContainer::alarm() const
     return m_alarmEvent;
 }
 
+void AlarmContainer::setActive(bool active)
+{
+    setData("active", active);
+    checkForUpdate();
+}
+
+bool AlarmContainer::active() const
+{
+    return data().value("active").toBool();
+}
 
 void AlarmContainer::alarmActivated()
 {
     kDebug() << "Alarm triggered";
-    setData("active", true);
-    checkForUpdate();
+
+    KAlarmCal::DateTime dt;
+    m_alarmEvent.nextOccurrence(KDateTime::currentLocalDateTime(), dt);
+
+    const KDateTime nextAlarmTime(dt.kDateTime());
+    setData("time", nextAlarmTime.time());
+    setData("date", nextAlarmTime.date());
+    setActive(true);
 }
 
 #include "alarmcontainer.moc"

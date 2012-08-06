@@ -41,6 +41,9 @@ public:
     void setAlarm(const KAlarmCal::KAEvent &alarm);
     KAlarmCal::KAEvent alarm() const;
 
+    void setActive(bool active);
+    bool active() const;
+
 protected Q_SLOTS:
     void alarmActivated();
 

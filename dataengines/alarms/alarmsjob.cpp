@@ -176,30 +176,24 @@ void AlarmsJob::start()
 
     //Dismissing an alarm will delete it if expired and not recurrent
     } else if (operation == "dismiss") {
-        //Is it expired but daily?
-        if (container->alarm().recurrence()->type() == KAlarmCal::KARecurrence::DAILY) {
-            KAlarmCal::KAEvent newEvent(container->alarm());
-            newEvent.setItemId(id);
+        const KDateTime now(KDateTime::currentLocalDateTime());
+        KAlarmCal::DateTime dt;
+        container->alarm().nextOccurrence(now, dt);
+
+        const KDateTime nextAlarmTime(dt.kDateTime());
+
+        if ((!container->alarm().recurrence() || container->alarm().recurrence()->type() != KAlarmCal::KARecurrence::DAILY) &&
+            (nextAlarmTime <= now)) {
             Akonadi::Item item(id);
 
-            //delay one day
-            KDateTime dateTime = newEvent.firstAlarm().dateTime().kDateTime();
-            newEvent.setTime(dateTime.addDays(1));
-
-            if (!newEvent.setItemPayload(item, m_collection.contentMimeTypes())) {
-                kWarning() << "Invalid mime type for collection";
-                setResult(false);
-                return;
-            }
-
-            item.setPayload(newEvent);
-
-            Akonadi::ItemModifyJob *job = new Akonadi::ItemModifyJob(item, this);
-            connect(job, SIGNAL(result(KJob*)),
-                SLOT(itemJobDone(KJob*)));
-        } else if (container->alarm().firstAlarm().dateTime().kDateTime() <= KDateTime::currentLocalDateTime()) {
-            
+            Akonadi::ItemDeleteJob *job = new Akonadi::ItemDeleteJob(item);
+                connect(job, SIGNAL(result(KJob*)),
+                        SLOT(itemJobDone(KJob*)));
+        } else {
+            container->setActive(false);
+            setResult(true);
         }
+        return;
     }
 
     setResult(false);
