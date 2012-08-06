@@ -94,7 +94,7 @@ void AlarmsEngine::itemAdded(Akonadi::Item item,Akonadi::Collection)
     kDebug() << "Got an item";
     if (item.hasPayload<KAlarmCal::KAEvent>()) {
         const KAlarmCal::KAEvent event = item.payload<KAlarmCal::KAEvent>();
-        kWarning() << "Item is a KAEvent" << event.firstAlarm().time();
+        kWarning() << "Item is a KAEvent" << event.firstAlarm().date() << event.firstAlarm().time();
         createContainer(event);
     }
 }
@@ -104,7 +104,7 @@ void AlarmsEngine::itemChanged(Akonadi::Item item,QSet<QByteArray>)
     kDebug() << "Item changed";
     if (item.hasPayload<KAlarmCal::KAEvent>()) {
         const KAlarmCal::KAEvent event = item.payload<KAlarmCal::KAEvent>();
-        kWarning() << "Item is a KAEvent" << event.firstAlarm().time();
+        kWarning() << "Item is a KAEvent" << event.firstAlarm().date() << event.firstAlarm().time();
         createContainer(event);
     }
 }
@@ -149,7 +149,7 @@ void AlarmsEngine::fetchAlarmsCollectionDone(KJob* job)
         kWarning() << "new item";
         if (item.hasPayload<KAlarmCal::KAEvent>()) {
             const KAlarmCal::KAEvent event = item.payload<KAlarmCal::KAEvent>();
-            kWarning() << "Item is a KAEvent" << event.firstAlarm().time();
+            kWarning() << "Item is a KAEvent" << event.firstAlarm().date() << event.firstAlarm().time();
             createContainer(event);
         }
     }
@@ -166,7 +166,7 @@ void AlarmsEngine::createContainer(const KAlarmCal::KAEvent &event)
     } else {
         // the name and the url are separate because is not possible to
         // know the original string encoding given a QUrl
-        container = new AlarmContainer(name, event, this);
+        container = new AlarmContainer(name, event, m_collection, this);
         addSource(container);
     }
 }

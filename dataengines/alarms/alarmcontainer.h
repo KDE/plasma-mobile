@@ -25,7 +25,7 @@
 // KAlarmCal
 #include <kalarmcal/kaevent.h>
 
-
+class QTimer;
 
 class AlarmContainer : public Plasma::DataContainer
 {
@@ -34,14 +34,20 @@ class AlarmContainer : public Plasma::DataContainer
 public:
     AlarmContainer(const QString &name,
                    const KAlarmCal::KAEvent &alarm,
+                   const Akonadi::Collection &collection,
                    QObject *parent = 0);
     ~AlarmContainer();
 
     void setAlarm(const KAlarmCal::KAEvent &alarm);
     KAlarmCal::KAEvent alarm() const;
 
+protected Q_SLOTS:
+    void alarmActivated();
+
 private:
     KAlarmCal::KAEvent m_alarmEvent;
+    Akonadi::Collection m_collection;
+    QTimer *m_timer;
 };
 
 #endif // ALARMCONTAINER_H

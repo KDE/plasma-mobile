@@ -19,15 +19,26 @@
 #include "alarmcontainer.h"
 #include "alarmsengine.h"
 
+#include <Akonadi/ItemDeleteJob>
+#include <Akonadi/ItemModifyJob>
+
+#include <kalarmcal/datetime.h>
 
 
 AlarmContainer::AlarmContainer(const QString &name,
                                const KAlarmCal::KAEvent &alarm,
+                               const Akonadi::Collection &collection,
                                QObject *parent)
     : Plasma::DataContainer(parent),
-      m_alarmEvent(alarm)
+      m_alarmEvent(alarm),
+      m_collection(collection)
 {
     setObjectName(name);
+    m_timer = new QTimer(this);
+    m_timer->setSingleShot(true);
+    connect(m_timer, SIGNAL(timeout()),
+            this, SLOT(alarmActivated()));
+
     setAlarm(alarm);
 }
 
@@ -49,6 +60,61 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
     setData("audioFile", alarm.audioFile());
     setData("recurs", alarm.recurs());
     setData("deferMinutes", alarm.deferDefaultMinutes());
+    setData("lateCancelMinutes", alarm.lateCancel());
+
+    KDateTime alarmTime(alarm.firstAlarm().date(), alarm.firstAlarm().time());
+
+    //Is the alarm in the past?
+    if (alarmTime <= KDateTime::currentLocalDateTime()) {
+        m_timer->stop();
+        //Does the alarm have a lateCancel time? is it expired?
+        if (alarm.lateCancel() == (uint)0 ||
+        (KDateTime::currentLocalDateTime().toTime_t() - alarmTime.toTime_t())/(uint)60 <= (uint)alarm.lateCancel()) {
+            setData("active", true);
+        } else {
+            setData("active", false);
+        }
+
+        //Is it expired but daily?
+        if (alarm.recurrence()->type() == KAlarmCal::KARecurrence::DAILY) {
+            KAlarmCal::KAEvent newEvent(m_alarmEvent);
+            newEvent.setItemId(m_alarmEvent.itemId());
+            Akonadi::Item item(m_alarmEvent.itemId());
+
+            KDateTime dateTime = newEvent.firstAlarm().dateTime().kDateTime();
+            newEvent.setTime(dateTime.addDays(1));
+
+            if (!newEvent.setItemPayload(item, m_collection.contentMimeTypes())) {
+                kWarning() << "Invalid mime type for collection";
+                checkForUpdate();
+                return;
+            }
+
+            item.setPayload(newEvent);
+
+            new Akonadi::ItemModifyJob(item, this);
+            setData("active", false);
+
+
+        //Does the alarm have a lateCancel time? is it expired?
+        } else if (alarm.lateCancel() == (uint)0 ||
+                   (KDateTime::currentLocalDateTime().toTime_t() - alarmTime.toTime_t())/(uint)60 <= (uint)alarm.lateCancel()) {
+            //Trigger the alarm
+            setData("active", true);
+
+        //Kill the expired timer
+        } else {
+            Akonadi::Item item(m_alarmEvent.itemId());
+
+            new Akonadi::ItemDeleteJob(item, this);
+            setData("active", false);
+        }
+
+    //Is the alarm in the future?
+    } else {
+        m_timer->start((alarmTime.toTime_t() - KDateTime::currentLocalDateTime().toTime_t()) * 1000);
+        setData("active", false);
+    }
 
     checkForUpdate();
 }
@@ -56,6 +122,14 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
 KAlarmCal::KAEvent AlarmContainer::alarm() const
 {
     return m_alarmEvent;
+}
+
+
+void AlarmContainer::alarmActivated()
+{
+    kDebug() << "Alarm triggered";
+    setData("active", true);
+    checkForUpdate();
 }
 
 #include "alarmcontainer.moc"
