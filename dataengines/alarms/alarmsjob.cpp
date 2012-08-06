@@ -173,7 +173,35 @@ void AlarmsJob::start()
         connect(job, SIGNAL(result(KJob*)),
                 SLOT(itemJobDone(KJob*)));
         return;
+
+    //Dismissing an alarm will delete it if expired and not recurrent
+    } else if (operation == "dismiss") {
+        //Is it expired but daily?
+        if (container->alarm().recurrence()->type() == KAlarmCal::KARecurrence::DAILY) {
+            KAlarmCal::KAEvent newEvent(container->alarm());
+            newEvent.setItemId(id);
+            Akonadi::Item item(id);
+
+            //delay one day
+            KDateTime dateTime = newEvent.firstAlarm().dateTime().kDateTime();
+            newEvent.setTime(dateTime.addDays(1));
+
+            if (!newEvent.setItemPayload(item, m_collection.contentMimeTypes())) {
+                kWarning() << "Invalid mime type for collection";
+                setResult(false);
+                return;
+            }
+
+            item.setPayload(newEvent);
+
+            Akonadi::ItemModifyJob *job = new Akonadi::ItemModifyJob(item, this);
+            connect(job, SIGNAL(result(KJob*)),
+                SLOT(itemJobDone(KJob*)));
+        } else if (container->alarm().firstAlarm().dateTime().kDateTime() <= KDateTime::currentLocalDateTime()) {
+            
+        }
     }
+
     setResult(false);
 }
 

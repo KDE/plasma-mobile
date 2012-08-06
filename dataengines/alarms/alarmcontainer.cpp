@@ -52,9 +52,22 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
 {
     m_alarmEvent = alarm;
 
+    const KDateTime now(KDateTime::currentLocalDateTime());
+    const KDateTime startAlarmTime(alarm.startDateTime().kDateTime());
+
+    KAlarmCal::DateTime dt;
+    alarm.nextOccurrence(now, dt);
+
+    const KDateTime nextAlarmTime(dt.kDateTime());
+    alarm.previousOccurrence(now, dt);
+    const KDateTime previousAlarmTime(dt.kDateTime());
+
+
     setData("id", alarm.itemId());
-    setData("time", alarm.firstAlarm().time());
-    setData("date", alarm.firstAlarm().date());
+    setData("time", nextAlarmTime.time());
+    setData("date", nextAlarmTime.date());
+    setData("startTime", startAlarmTime.time());
+    setData("startDate", startAlarmTime.date());
     setData("enabled", alarm.enabled());
     setData("message", alarm.message());
     setData("audioFile", alarm.audioFile());
@@ -62,58 +75,44 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
     setData("deferMinutes", alarm.deferDefaultMinutes());
     setData("lateCancelMinutes", alarm.lateCancel());
 
-    KDateTime alarmTime(alarm.firstAlarm().date(), alarm.firstAlarm().time());
+
+
+alarm.previousOccurrence(now, dt);
+kWarning() << "AAAAAA"<< dt.kDateTime()<<startAlarmTime<<nextAlarmTime<<alarm.expired()<<alarm.mainExpired()<<previousAlarmTime;
+
+    //Is it daily and has been triggered today?
+    if (alarm.recurrence() && alarm.recurrence()->type() == KAlarmCal::KARecurrence::DAILY) {
+        if (previousAlarmTime.date() < now.date() &&
+            (alarm.lateCancel() == (uint)0 ||
+                (now.toTime_t() - nextAlarmTime.toTime_t())/(uint)60 <= (uint)alarm.lateCancel())) {
+
+            setData("active", true);
+        } else {
+            setData("active", false);
+            m_timer->start((nextAlarmTime.toTime_t() - now.toTime_t()) * 1000);
+        }
 
     //Is the alarm in the past?
-    if (alarmTime <= KDateTime::currentLocalDateTime()) {
-        //Is this timer to be deleted?
-        bool toDelete = true;
+    } else if (nextAlarmTime <= now) {
 
         m_timer->stop();
 
         //Does the alarm have a lateCancel time? is it expired?
         if (alarm.lateCancel() == (uint)0 ||
-        (KDateTime::currentLocalDateTime().toTime_t() - alarmTime.toTime_t())/(uint)60 <= (uint)alarm.lateCancel()) {
+        (now.toTime_t() - nextAlarmTime.toTime_t())/(uint)60 <= (uint)alarm.lateCancel()) {
             //Trigger the alarm
             setData("active", true);
-            toDelete = false;
         } else {
             setData("active", false);
-        }
-
-        //Is it expired but daily?
-        if (alarm.recurrence()->type() == KAlarmCal::KARecurrence::DAILY) {
-            KAlarmCal::KAEvent newEvent(m_alarmEvent);
-            newEvent.setItemId(m_alarmEvent.itemId());
             Akonadi::Item item(m_alarmEvent.itemId());
 
-            KDateTime dateTime = newEvent.firstAlarm().dateTime().kDateTime();
-            newEvent.setTime(dateTime.addDays(1));
-
-            if (!newEvent.setItemPayload(item, m_collection.contentMimeTypes())) {
-                kWarning() << "Invalid mime type for collection";
-                checkForUpdate();
-                return;
-            }
-
-            item.setPayload(newEvent);
-
-            new Akonadi::ItemModifyJob(item, this);
-            setData("active", false);
-            toDelete = false;
-        }
-
-        //Kill the expired timer
-        if (toDelete) {
-            Akonadi::Item item(m_alarmEvent.itemId());
-
+            //Kill the expired timer
             new Akonadi::ItemDeleteJob(item, this);
-            setData("active", false);
         }
 
     //Is the alarm in the future?
     } else {
-        m_timer->start((alarmTime.toTime_t() - KDateTime::currentLocalDateTime().toTime_t()) * 1000);
+        m_timer->start((nextAlarmTime.toTime_t() - now.toTime_t()) * 1000);
         setData("active", false);
     }
 
