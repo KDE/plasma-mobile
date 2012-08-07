@@ -34,6 +34,14 @@ Item {
         spacing: 8
         anchors.centerIn: parent
 
+        DatePicker {
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        TimePicker {
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
         Grid {
             spacing: 8
             anchors.horizontalCenter: parent.horizontalCenter
@@ -51,7 +59,7 @@ Item {
                 id: messageArea
                 width: alarmEditRoot.width / 2
                 height: theme.defaultFont.mSize.height * 5
-                
+
                 text: alarmId > 0 ? alarmsSource.data["Alarm-"+alarmId].message : ""
             }
 
