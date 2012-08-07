@@ -46,18 +46,79 @@ Item {
         id: configIconsSvg
         imagePath: "widgets/configuration-icons"
     }
+    PlasmaCore.Svg {
+        id: separatorSvg
+        imagePath: "widgets/line"
+    }
 
     KLocale.Locale {
         id: locale
     }
 
+    //FIXME: should be prettier
+    PlasmaCore.SvgItem {
+        svg: separatorSvg
+        elementId: "vertical-line"
+        width: naturalSize.width
+        anchors {
+            top: alarmListScroll.top
+            bottom: alarmListScroll.bottom
+        }
+        x: alarmListScroll.width / 4 - 5
+    }
+    PlasmaCore.SvgItem {
+        svg: separatorSvg
+        elementId: "vertical-line"
+        width: naturalSize.width
+        anchors {
+            top: alarmListScroll.top
+            bottom: alarmListScroll.bottom
+        }
+        x: (alarmListScroll.width / 4) * 2 - 5
+    }
+    PlasmaCore.SvgItem {
+        svg: separatorSvg
+        elementId: "vertical-line"
+        width: naturalSize.width
+        anchors {
+            top: alarmListScroll.top
+            bottom: alarmListScroll.bottom
+        }
+        x: (alarmListScroll.width / 4) * 3 - 5
+    }
     PlasmaExtras.ScrollArea {
+        id: alarmListScroll
         anchors.fill: parent
         clip: true
 
         ListView {
             model: PlasmaCore.DataModel {
                 dataSource: alarmsSource
+            }
+            header: PlasmaComponents.ListItem {
+                sectionDelegate: true
+                Row {
+                    spacing: 8
+                    width: parent.width - theme.mediumIconSize
+
+                    PlasmaComponents.Label {
+                        width: parent.width/4
+                        text: i18n("Time")
+                    }
+
+                    PlasmaComponents.Label {
+                        width: parent.width/4
+                        text: i18n("Message")
+                    }
+                    PlasmaComponents.Label {
+                        width: parent.width/4
+                        text: i18n("Recurrence")
+                    }
+                    PlasmaComponents.Label {
+                        width: parent.width/4
+                        text: i18n("Audio")
+                    }
+                }
             }
             delegate: AlarmDelegate {
                 
