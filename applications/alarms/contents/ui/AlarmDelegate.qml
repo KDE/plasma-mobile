@@ -95,14 +95,20 @@ PlasmaComponents.ListItem {
                 }
             }
             PlasmaComponents.Label {
+                anchors.verticalCenter: parent.verticalCenter
+                horizontalAlignment: Text.AlignHCenter
                 width: parent.width/4
                 text: message
             }
             PlasmaComponents.Label {
+                anchors.verticalCenter: parent.verticalCenter
+                horizontalAlignment: Text.AlignHCenter
                 width: parent.width/4
                 text: recurs ? i18n("Every day") : i18n("Once")
             }
             PlasmaComponents.Label {
+                anchors.verticalCenter: parent.verticalCenter
+                horizontalAlignment: Text.AlignHCenter
                 width: parent.width/4
                 text: audioFile ? i18n("Audio") : ""
             }

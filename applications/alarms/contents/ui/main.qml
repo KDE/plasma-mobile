@@ -114,14 +114,17 @@ Item {
                     }
 
                     PlasmaComponents.Label {
+                        horizontalAlignment: Text.AlignHCenter
                         width: parent.width/4
                         text: i18n("Message")
                     }
                     PlasmaComponents.Label {
+                        horizontalAlignment: Text.AlignHCenter
                         width: parent.width/4
                         text: i18n("Recurrence")
                     }
                     PlasmaComponents.Label {
+                        horizontalAlignment: Text.AlignHCenter
                         width: parent.width/4
                         text: i18n("Audio")
                     }
