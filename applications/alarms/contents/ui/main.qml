@@ -42,12 +42,9 @@ Item {
 
     function editAlarm(id)
     {
-        if (id > 0) {
-            
-        }
-        setupLoader.source = "AlarmEdit.qml"
-        
-        setupLoader.item.alarmId = id
+        pageRow.pop(alarmList)
+        pageRow.push(Qt.createComponent("AlarmEdit.qml"))
+        pageRow.currentPage.alarmId = id
     }
 
 
@@ -71,135 +68,11 @@ Item {
         id: locale
     }
 
-    PlasmaExtras.ScrollArea {
-        id: alarmListScroll
-        anchors {
-            left: parent.left
-            top: parent.top
-            bottom: parent.bottom
-            right: setupLoader.left
-        }
-        clip: true
-
-        ListView {
+    PlasmaExtras.PageRow {
+        id: pageRow
+        anchors.fill: parent
+        initialPage: AlarmList {
             id: alarmList
-            model: PlasmaCore.DataModel {
-                dataSource: alarmsSource
-            }
-            header: PlasmaComponents.ListItem {
-                sectionDelegate: true
-                Row {
-                    visible: alarmsSource.sources.length > 0
-                    spacing: 8
-                    width: parent.width - theme.mediumIconSize
-
-                    PlasmaComponents.Label {
-                        width: parent.width/4
-                        text: i18n("Time")
-                    }
-
-                    PlasmaComponents.Label {
-                        horizontalAlignment: Text.AlignHCenter
-                        width: parent.width/4
-                        text: i18n("Message")
-                    }
-                    PlasmaComponents.Label {
-                        horizontalAlignment: Text.AlignHCenter
-                        width: parent.width/4
-                        text: i18n("Recurrence")
-                    }
-                    PlasmaComponents.Label {
-                        horizontalAlignment: Text.AlignHCenter
-                        width: parent.width/4
-                        text: i18n("Audio")
-                    }
-                }
-                PlasmaComponents.Label {
-                    visible: alarmsSource.sources.length == 0
-                    anchors.centerIn: parent
-                    text: i18n("No alarms yet")
-                }
-            }
-            delegate: AlarmDelegate {
-                
-            }
-            footer: PlasmaComponents.ListItem {
-                enabled: true
-                Item {
-                    width: parent.width
-                    height: theme.defaultFont.mSize.height * 3
-                    Row {
-                        anchors.centerIn: parent
-                        QIconItem {
-                            anchors.verticalCenter: parent.verticalCenter
-                            icon: "list-add"
-                            width: theme.mediumIconSize
-                            height: width
-                        }
-                        PlasmaComponents.Label {
-                            anchors.verticalCenter: parent.verticalCenter
-                            text: i18n("New Alarm")
-                        }
-                    }
-                }
-                onClicked: root.editAlarm(-1)
-            }
-        }
-
-        children: [
-            //FIXME: should be prettier
-            Item {
-                y: -alarmList.contentY
-                width: alarmListScroll.width
-                height: alarmList.contentHeight + theme.defaultFont.mSize.height * 2
-                PlasmaCore.SvgItem {
-                    svg: separatorSvg
-                    elementId: "vertical-line"
-                    width: naturalSize.width
-                    anchors {
-                        top: parent.top
-                        bottom: parent.bottom
-                    }
-
-                    x: alarmListScroll.width / 4 - 5
-                }
-                PlasmaCore.SvgItem {
-                    svg: separatorSvg
-                    elementId: "vertical-line"
-                    width: naturalSize.width
-                    anchors {
-                        top: parent.top
-                        bottom: parent.bottom
-                    }
-                    x: (alarmListScroll.width / 4) * 2 - 5
-                }
-                PlasmaCore.SvgItem {
-                    svg: separatorSvg
-                    elementId: "vertical-line"
-                    width: naturalSize.width
-                    anchors {
-                        top: parent.top
-                        bottom: parent.bottom
-                    }
-                    x: (alarmListScroll.width / 4) * 3 - 5
-                }
-            }
-        ]
-    }
-
-    Loader {
-        id: setupLoader
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            right: parent.right
-        }
-        width: item ? parent.width / 2 : 0
-        Behavior on width {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
         }
     }
 }

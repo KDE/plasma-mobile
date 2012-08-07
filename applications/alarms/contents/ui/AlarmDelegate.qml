@@ -27,7 +27,7 @@ PlasmaComponents.ListItem {
     id: alarmItem
     opacity: 1-Math.abs(x)/width
 
-    onClicked: root.editAlarm(id)
+    onClicked: editAlarm(id)
 
     MouseArea {
         width: alarmItem.width
@@ -69,7 +69,7 @@ PlasmaComponents.ListItem {
                 easing.type: Easing.InOutQuad
             }
             ScriptAction {
-                script: root.removeAlarm(id);
+                script: removeAlarm(id);
             }
         }
         SequentialAnimation {

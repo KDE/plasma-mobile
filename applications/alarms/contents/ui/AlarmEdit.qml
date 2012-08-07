@@ -131,10 +131,15 @@ Item {
                     operation["RecursDaily"] = repeatSwitch.checked
 
                     service.startOperationCall(operation)
+                    pageRow.pop(alarmList)
                 }
             }
             PlasmaComponents.Button {
                 text: i18n("Cancel")
+                onClicked: {
+                    pageRow.pop(alarmList)
+                    //pageRow.push(Qt.createComponent("AlarmEdit.qml"))
+                }
             }
         }
     }
