@@ -1,5 +1,5 @@
 /*
- *   Copyright 2011 Marco Martin <mart@kde.org>
+ *   Copyright 2012 Marco Martin <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -27,13 +27,22 @@ import org.kde.qtextracomponents 0.1
 
 Item {
     id: root
-    width: 100
-    height: 100
+    width: 500
+    height: 500
 
     function removeAlarm(id)
     {
         print("Asked removal of " + id);
     }
+
+    function editAlarm(id)
+    {
+        if (id > 0) {
+            
+        }
+        setupLoader.source = "AlarmEdit.qml"
+    }
+
 
     PlasmaCore.DataSource {
         id: alarmsSource
@@ -126,6 +135,7 @@ Item {
                         }
                     }
                 }
+                onClicked: root.editAlarm(-1)
             }
         }
 

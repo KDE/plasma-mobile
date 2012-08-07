@@ -27,6 +27,7 @@ PlasmaComponents.ListItem {
     id: alarmItem
     opacity: 1-Math.abs(x)/width
 
+    onClicked: root.editAlarm(id)
 
     MouseArea {
         width: alarmItem.width
