@@ -20,12 +20,12 @@
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.locale 0.1 as KLocale
 import org.kde.qtextracomponents 0.1
 
 PlasmaComponents.ListItem {
     id: alarmItem
     opacity: 1-Math.abs(x)/width
-    //width: parent.width
 
 
     MouseArea {
@@ -81,9 +81,14 @@ PlasmaComponents.ListItem {
             spacing: 8
             width: alarmItem.width - closeButton.width
 
-            PlasmaComponents.Label {
-                width: parent.width/2
-                text: date + " " + time
+            Column {
+                width: parent.width/4
+                PlasmaComponents.Label {
+                    text: locale.formatDate(date, KLocale.Locale.FancyShortDate)
+                }
+                PlasmaComponents.Label {
+                    text: locale.formatLocaleTime(time)
+                }
             }
             PlasmaComponents.Label {
                 width: parent.width/4
@@ -91,7 +96,7 @@ PlasmaComponents.ListItem {
             }
             PlasmaComponents.Label {
                 width: parent.width/8
-                text: recurs ? i18n("Every day") : ""
+                text: recurs ? i18n("Every day") : i18n("Once")
             }
             PlasmaComponents.Label {
                 width: parent.width/8

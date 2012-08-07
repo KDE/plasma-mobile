@@ -68,7 +68,7 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
     kDebug() << "Next occurrence:" << nextAlarmTime << "type:" << nextOccurType << alarm.deferDateTime().kDateTime();
 
     setData("audioFile", alarm.audioFile());
-    setData("date", nextAlarmTime.date());
+    setData("date", nextAlarmTime.isValid() ? nextAlarmTime.date() : startAlarmTime.date());
     setData("enabled", alarm.enabled());
     setData("id", alarm.itemId());
     setData("lateCancelMinutes", alarm.lateCancel());
@@ -76,7 +76,7 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
     setData("recurs", alarm.recurs());
     setData("startDate", startAlarmTime.date());
     setData("startTime", startAlarmTime.time());
-    setData("time", nextAlarmTime.time());
+    setData("time", nextAlarmTime.isValid() ? nextAlarmTime.time() : startAlarmTime.time());
 
 
 
