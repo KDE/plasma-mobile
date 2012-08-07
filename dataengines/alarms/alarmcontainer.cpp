@@ -58,23 +58,25 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
     KAlarmCal::DateTime dt;
     KAlarmCal::KAEvent::OccurType nextOccurType = alarm.nextOccurrence(now, dt, KAlarmCal::KAEvent::ALLOW_FOR_REPETITION);
 
-    const KDateTime nextAlarmTime(dt.kDateTime());
+    KDateTime nextAlarmTime(alarm.deferDateTime().kDateTime());
+    if (!nextAlarmTime.isValid()) {
+        nextAlarmTime = dt.kDateTime();
+    }
     alarm.previousOccurrence(now, dt, true);
     const KDateTime previousAlarmTime(dt.kDateTime());
 
-    kDebug() << "Next occurrence:" << nextAlarmTime << "type:" << nextOccurType;
+    kDebug() << "Next occurrence:" << nextAlarmTime << "type:" << nextOccurType << alarm.deferDateTime().kDateTime();
 
-    setData("id", alarm.itemId());
-    setData("time", nextAlarmTime.time());
-    setData("date", nextAlarmTime.date());
-    setData("startTime", startAlarmTime.time());
-    setData("startDate", startAlarmTime.date());
-    setData("enabled", alarm.enabled());
-    setData("message", alarm.message());
     setData("audioFile", alarm.audioFile());
-    setData("recurs", alarm.recurs());
-    setData("deferMinutes", alarm.deferDefaultMinutes());
+    setData("date", nextAlarmTime.date());
+    setData("enabled", alarm.enabled());
+    setData("id", alarm.itemId());
     setData("lateCancelMinutes", alarm.lateCancel());
+    setData("message", alarm.message());
+    setData("recurs", alarm.recurs());
+    setData("startDate", startAlarmTime.date());
+    setData("startTime", startAlarmTime.time());
+    setData("time", nextAlarmTime.time());
 
 
 
