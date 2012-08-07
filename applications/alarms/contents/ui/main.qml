@@ -32,7 +32,12 @@ Item {
 
     function removeAlarm(id)
     {
-        print("Asked removal of " + id);
+        var service = alarmsSource.serviceForSource("")
+        var operation = service.operationDescription("delete")
+
+        operation["Id"] = id
+
+        service.startOperationCall(operation)
     }
 
     function editAlarm(id)
