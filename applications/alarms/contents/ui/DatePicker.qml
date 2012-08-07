@@ -34,6 +34,7 @@ PlasmaCore.FrameSvgItem {
 
     property bool userConfiguring: false
 
+    property string isoDate: year + "-" + clockRow.twoDigitString(month) + "-" + clockRow.twoDigitString(day)
 
 
     Connections {

@@ -36,6 +36,7 @@ PlasmaCore.FrameSvgItem {
 
     property bool twentyFour: false
 
+    property string timeString: clockRow.twoDigitString(hours) + ":" + clockRow.twoDigitString(minutes) + ":" +  clockRow.twoDigitString(seconds)
 
     Connections {
         target: root

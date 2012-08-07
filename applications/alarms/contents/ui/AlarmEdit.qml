@@ -53,6 +53,7 @@ Item {
         anchors.centerIn: parent
 
         DatePicker {
+            id: datePicker
             anchors.horizontalCenter: parent.horizontalCenter
             day: currentDate.getDate()
             month: currentDate.getMonth() + 1
@@ -60,6 +61,7 @@ Item {
         }
 
         TimePicker {
+            id: timePicker
             anchors.horizontalCenter: parent.horizontalCenter
             hours: currentDate.getHours()
             minutes: currentDate.getMinutes()
@@ -116,6 +118,20 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             PlasmaComponents.Button {
                 text: i18n("Save")
+                onClicked: {
+                    var service = alarmsSource.serviceForSource("")
+                    var operation = service.operationDescription(alarmId > 0 ? "modify" : "add")
+
+                    if (alarmId > 0) {
+                        operation["Id"] = alarmId
+                    }
+                    operation["Date"] = datePicker.isoDate
+                    operation["Time"] = timePicker.timeString
+                    operation["Message"] = messageArea.text
+                    operation["RecursDaily"] = repeatSwitch.checked
+
+                    service.startOperationCall(operation)
+                }
             }
             PlasmaComponents.Button {
                 text: i18n("Cancel")
