@@ -56,35 +56,41 @@ Item {
     }
 
     //FIXME: should be prettier
-    PlasmaCore.SvgItem {
-        svg: separatorSvg
-        elementId: "vertical-line"
-        width: naturalSize.width
-        anchors {
-            top: alarmListScroll.top
-            bottom: alarmListScroll.bottom
+    Item {
+        y: -alarmList.contentY
+        width: alarmListScroll.width
+        height: alarmList.contentHeight + theme.defaultFont.mSize.height * 2
+        PlasmaCore.SvgItem {
+            svg: separatorSvg
+            elementId: "vertical-line"
+            width: naturalSize.width
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
+
+            x: alarmListScroll.width / 4 - 5
         }
-        x: alarmListScroll.width / 4 - 5
-    }
-    PlasmaCore.SvgItem {
-        svg: separatorSvg
-        elementId: "vertical-line"
-        width: naturalSize.width
-        anchors {
-            top: alarmListScroll.top
-            bottom: alarmListScroll.bottom
+        PlasmaCore.SvgItem {
+            svg: separatorSvg
+            elementId: "vertical-line"
+            width: naturalSize.width
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
+            x: (alarmListScroll.width / 4) * 2 - 5
         }
-        x: (alarmListScroll.width / 4) * 2 - 5
-    }
-    PlasmaCore.SvgItem {
-        svg: separatorSvg
-        elementId: "vertical-line"
-        width: naturalSize.width
-        anchors {
-            top: alarmListScroll.top
-            bottom: alarmListScroll.bottom
+        PlasmaCore.SvgItem {
+            svg: separatorSvg
+            elementId: "vertical-line"
+            width: naturalSize.width
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
+            x: (alarmListScroll.width / 4) * 3 - 5
         }
-        x: (alarmListScroll.width / 4) * 3 - 5
     }
     PlasmaExtras.ScrollArea {
         id: alarmListScroll
@@ -92,6 +98,7 @@ Item {
         clip: true
 
         ListView {
+            id: alarmList
             model: PlasmaCore.DataModel {
                 dataSource: alarmsSource
             }
@@ -122,6 +129,26 @@ Item {
             }
             delegate: AlarmDelegate {
                 
+            }
+            footer: PlasmaComponents.ListItem {
+                enabled: true
+                Item {
+                    width: parent.width
+                    height: theme.defaultFont.mSize.height * 3
+                    Row {
+                        anchors.centerIn: parent
+                        QIconItem {
+                            anchors.verticalCenter: parent.verticalCenter
+                            icon: "list-add"
+                            width: theme.mediumIconSize
+                            height: width
+                        }
+                        PlasmaComponents.Label {
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: i18n("New Alarm")
+                        }
+                    }
+                }
             }
         }
     }
