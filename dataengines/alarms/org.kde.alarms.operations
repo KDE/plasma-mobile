@@ -12,6 +12,12 @@
         <entry name="Message" type="String">
             <label>The text message of this alarm.</label>
         </entry>
+        <entry name="RecursDaily" type="Bool">
+            <label>True if this alarm should be repeated every day.</label>
+        </entry>
+        <entry name="AudioFile" type="String">
+            <label>Path of an audio file to play during the alarm.</label>
+        </entry>
     </group>
     <group name="delete">
         <entry name="Id" type="Int">
@@ -30,6 +36,12 @@
         </entry>
         <entry name="Message" type="String">
             <label>The text message of this alarm.</label>
+        </entry>
+        <entry name="RecursDaily" type="Bool">
+            <label>True if this alarm should be repeated every day.</label>
+        </entry>
+        <entry name="AudioFile" type="String">
+            <label>Path of an audio file to play during the alarm.</label>
         </entry>
     </group>
     <group name="defer">

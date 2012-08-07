@@ -75,6 +75,16 @@ void AlarmsJob::start()
 
         kae.set(KDateTime(date, time), message, qApp->palette().base().color(), qApp->palette().text().color(), QFont(), KAlarmCal::KAEvent::MESSAGE, 0, 0, false);
 
+        if (parameters()["RecursDaily"].toBool()) {
+            QBitArray days(6);
+            days.fill(true);
+            kae.setRecurDaily(1, days, -1, QDate());
+        } else {
+            kae.setNoRecur();
+        }
+
+        kae.setAudioFile(parameters()["AudioFile"].toString(), -1, -1, -1);
+
         kae.setEventId(KAlarmCal::CalEvent::uid(KCalCore::CalFormat::createUniqueId(), KAlarmCal::CalEvent::ACTIVE ));
 
         Akonadi::Item item;
@@ -138,6 +148,16 @@ void AlarmsJob::start()
 
         event.set(KDateTime(date, time), message, qApp->palette().base().color(), qApp->palette().text().color(), QFont(), KAlarmCal::KAEvent::MESSAGE, 0, 0, false);
 
+        if (parameters()["RecursDaily"].toBool()) {
+            QBitArray days(6);
+            days.fill(true);
+            event.setRecurDaily(1, days, -1, QDate());
+        } else {
+            event.setNoRecur();
+        }
+
+        event.setAudioFile(parameters()["AudioFile"].toString(), -1, -1, -1);
+
         if (!event.setItemPayload(item, m_collection.contentMimeTypes())) {
             kWarning() << "Invalid mime type for collection";
             setResult(false);
@@ -150,6 +170,7 @@ void AlarmsJob::start()
         Akonadi::ItemModifyJob *job = new Akonadi::ItemModifyJob(item, this);
         connect(job, SIGNAL(result(KJob*)),
                 SLOT(itemJobDone(KJob*)));
+        return;
 
 
     } else if (operation == "defer") {
