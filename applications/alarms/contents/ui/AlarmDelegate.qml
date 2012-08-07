@@ -79,22 +79,27 @@ PlasmaComponents.ListItem {
         }
         Row {
             spacing: 8
-            width: alarmItem.width
+            width: alarmItem.width - closeButton.width
 
             PlasmaComponents.Label {
+                width: parent.width/2
                 text: date + " " + time
             }
             PlasmaComponents.Label {
+                width: parent.width/4
                 text: message
             }
             PlasmaComponents.Label {
+                width: parent.width/8
                 text: recurs ? i18n("Every day") : ""
             }
             PlasmaComponents.Label {
+                width: parent.width/8
                 text: audioFile ? i18n("Audio") : ""
             }
         }
         PlasmaCore.SvgItem {
+            id: closeButton
             svg: configIconsSvg
             elementId: "close"
             width: theme.mediumIconSize

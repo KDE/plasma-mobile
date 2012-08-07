@@ -48,6 +48,7 @@ Item {
 
     PlasmaExtras.ScrollArea {
         anchors.fill: parent
+        clip: true
 
         ListView {
             model: PlasmaCore.DataModel {
