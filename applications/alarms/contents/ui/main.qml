@@ -57,7 +57,12 @@ Item {
 
     PlasmaExtras.ScrollArea {
         id: alarmListScroll
-        anchors.fill: parent
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+            right: setupLoader.left
+        }
         clip: true
 
         ListView {
@@ -163,5 +168,21 @@ Item {
                 }
             }
         ]
+    }
+
+    Loader {
+        id: setupLoader
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            right: parent.right
+        }
+        width: item ? parent.width / 2 : 0
+        Behavior on width {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 }
