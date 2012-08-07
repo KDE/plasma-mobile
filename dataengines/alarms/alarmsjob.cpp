@@ -158,9 +158,10 @@ void AlarmsJob::start()
         Akonadi::Item item(id);
 
         KAlarmCal::DateTime dateTime = newEvent.firstAlarm().dateTime();
-        dateTime.addMins(parameters()["Minutes"].toInt());
-        //event.defer(dateTime, (event.firstAlarm().type() & KAlarmCal::KAAlarm::REMINDER_ALARM), true);
-        newEvent.setDeferDefaultMinutes(parameters()["Minutes"].toInt());
+        dateTime = dateTime.addMins(parameters()["Minutes"].toInt());
+
+        newEvent.defer(dateTime, (newEvent.firstAlarm().type() & KAlarmCal::KAAlarm::REMINDER_ALARM), true);
+        //newEvent.setDeferDefaultMinutes(parameters()["Minutes"].toInt());
         if (!newEvent.setItemPayload(item, m_collection.contentMimeTypes())) {
             kWarning() << "Invalid mime type for collection";
             setResult(false);

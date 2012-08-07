@@ -56,12 +56,13 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
     const KDateTime startAlarmTime(alarm.startDateTime().kDateTime());
 
     KAlarmCal::DateTime dt;
-    alarm.nextOccurrence(now, dt);
+    KAlarmCal::KAEvent::OccurType nextOccurType = alarm.nextOccurrence(now, dt, KAlarmCal::KAEvent::ALLOW_FOR_REPETITION);
 
     const KDateTime nextAlarmTime(dt.kDateTime());
-    alarm.previousOccurrence(now, dt);
+    alarm.previousOccurrence(now, dt, true);
     const KDateTime previousAlarmTime(dt.kDateTime());
 
+    kDebug() << "Next occurrence:" << nextAlarmTime << "type:" << nextOccurType;
 
     setData("id", alarm.itemId());
     setData("time", nextAlarmTime.time());
@@ -74,6 +75,8 @@ void AlarmContainer::setAlarm(const KAlarmCal::KAEvent &alarm)
     setData("recurs", alarm.recurs());
     setData("deferMinutes", alarm.deferDefaultMinutes());
     setData("lateCancelMinutes", alarm.lateCancel());
+
+
 
     //Is it daily and has been triggered today?
     if (alarm.recurrence() && alarm.recurrence()->type() == KAlarmCal::KARecurrence::DAILY) {
