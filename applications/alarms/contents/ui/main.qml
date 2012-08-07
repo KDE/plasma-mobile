@@ -41,6 +41,8 @@ Item {
             
         }
         setupLoader.source = "AlarmEdit.qml"
+        
+        setupLoader.item.alarmId = id
     }
 
 

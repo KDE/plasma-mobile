@@ -28,6 +28,8 @@ import org.kde.qtextracomponents 0.1
 Item {
     id: alarmEditRoot
 
+    property int alarmId: 0
+
     Column {
         spacing: 8
         anchors.centerIn: parent
@@ -49,6 +51,8 @@ Item {
                 id: messageArea
                 width: alarmEditRoot.width / 2
                 height: theme.defaultFont.mSize.height * 5
+                
+                text: alarmId > 0 ? alarmsSource.data["Alarm-"+alarmId].message : ""
             }
 
             PlasmaComponents.Label {
@@ -60,6 +64,7 @@ Item {
             }
             PlasmaComponents.Switch {
                 id: repeatSwitch
+                checked: alarmId > 0 ? alarmsSource.data["Alarm-"+alarmId].recurs : false
             }
 
             PlasmaComponents.Label {
@@ -71,7 +76,7 @@ Item {
             }
             PlasmaComponents.Switch {
                 id: audioSwitch
-                checked: true
+                checked: alarmId > 0 ? alarmsSource.data["Alarm-"+alarmId].audioFile : true
             }
         }
         Row {
