@@ -30,16 +30,27 @@ Item {
 
     property int alarmId: 0
 
+    property variant currentDate
+    Component.onCompleted: {
+        currentDate = new Date()
+    }
+
     Column {
         spacing: 8
         anchors.centerIn: parent
 
         DatePicker {
             anchors.horizontalCenter: parent.horizontalCenter
+            day: currentDate.getDate()
+            month: currentDate.getMonth() + 1
+            year: currentDate.getFullYear()
         }
 
         TimePicker {
             anchors.horizontalCenter: parent.horizontalCenter
+            hours: currentDate.getHours()
+            minutes: currentDate.getMinutes()
+            seconds: currentDate.getSeconds()
         }
 
         Grid {

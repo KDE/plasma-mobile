@@ -88,6 +88,8 @@ PlasmaCore.FrameSvgItem {
             model: root.twentyFour ? 24 : 12
             currentIndex: root.twentyFour || hours < 12 ? hours : hours - 12
             delegate: Text {
+                horizontalAlignment: Text.AlignHCenter
+                width: hoursDigit.width
                 property int ownIndex: index
                 text: !root.twentyFour && index == 0 ? "12" : clockRow.twoDigitString(index)
                 font.pointSize: 20
@@ -170,9 +172,11 @@ PlasmaCore.FrameSvgItem {
                 }
             }
             delegate: Text {
+                width: meridiaeDigit.width
+                horizontalAlignment: Text.AlignHCenter
                 property int ownIndex: index
                 text: meridiae
-                font.pointSize: 25
+                font.pointSize: 20
             }
             currentIndex: hours > 12 ? 1 : 0
             onSelectedIndexChanged: {
@@ -185,6 +189,13 @@ PlasmaCore.FrameSvgItem {
                         hours += 12
                     }
                 }
+            }
+            width: meridiaePlaceHolder.width*1.3
+            Text {
+                id: meridiaePlaceHolder
+                visible: false
+                font.pointSize: 20
+                text: "0000"
             }
             Behavior on opacity {
                 NumberAnimation {

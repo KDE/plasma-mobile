@@ -53,6 +53,8 @@ Item {
         preferredHighlightBegin: 0.5
         preferredHighlightEnd: 0.5
         delegate: Text {
+            horizontalAlignment: Text.AlignHCenter
+            width: spinnerView.width
             property int ownIndex: index
             text: index < 10 ? "0"+index : index
             font.pointSize: 20

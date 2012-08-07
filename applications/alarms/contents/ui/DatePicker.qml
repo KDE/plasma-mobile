@@ -89,6 +89,8 @@ PlasmaCore.FrameSvgItem {
                 }
             }
             delegate: Text {
+                horizontalAlignment: Text.AlignHCenter
+                width: dayDigit.width
                 property int ownIndex: index
                 text: index+1
                 font.pointSize: 20
@@ -114,6 +116,8 @@ PlasmaCore.FrameSvgItem {
             }
             property variant months: Array(i18n("Jan"), i18n("Feb"), i18n("Mar"), i18n("Apr"), i18n("May"), i18n("Jun"), i18n("Jul"), i18n("Aug"), i18n("Sep"), i18n("Oct"), i18n("Nov"), i18n("Dec"))
             delegate: Text {
+                horizontalAlignment: Text.AlignHCenter
+                width: monthDigit.width
                 property int ownIndex: index
                 text: months[index]
                 font.pointSize: 20
@@ -145,12 +149,12 @@ PlasmaCore.FrameSvgItem {
                     year = selectedIndex
                 }
             }
-            width: yearPlaceHolder.width*1.1
+            width: yearPlaceHolder.width*1.3
             Text {
                 id: yearPlaceHolder
                 visible: false
                 font.pointSize: 20
-                text: "0000"
+                text: "00000"
             }
         }
     }
