@@ -55,43 +55,6 @@ Item {
         id: locale
     }
 
-    //FIXME: should be prettier
-    Item {
-        y: -alarmList.contentY
-        width: alarmListScroll.width
-        height: alarmList.contentHeight + theme.defaultFont.mSize.height * 2
-        PlasmaCore.SvgItem {
-            svg: separatorSvg
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-
-            x: alarmListScroll.width / 4 - 5
-        }
-        PlasmaCore.SvgItem {
-            svg: separatorSvg
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            x: (alarmListScroll.width / 4) * 2 - 5
-        }
-        PlasmaCore.SvgItem {
-            svg: separatorSvg
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            x: (alarmListScroll.width / 4) * 3 - 5
-        }
-    }
     PlasmaExtras.ScrollArea {
         id: alarmListScroll
         anchors.fill: parent
@@ -105,6 +68,7 @@ Item {
             header: PlasmaComponents.ListItem {
                 sectionDelegate: true
                 Row {
+                    visible: alarmsSource.sources.length > 0
                     spacing: 8
                     width: parent.width - theme.mediumIconSize
 
@@ -128,6 +92,11 @@ Item {
                         width: parent.width/4
                         text: i18n("Audio")
                     }
+                }
+                PlasmaComponents.Label {
+                    visible: alarmsSource.sources.length == 0
+                    anchors.centerIn: parent
+                    text: i18n("No alarms yet")
                 }
             }
             delegate: AlarmDelegate {
@@ -154,5 +123,45 @@ Item {
                 }
             }
         }
+
+        children: [
+            //FIXME: should be prettier
+            Item {
+                y: -alarmList.contentY
+                width: alarmListScroll.width
+                height: alarmList.contentHeight + theme.defaultFont.mSize.height * 2
+                PlasmaCore.SvgItem {
+                    svg: separatorSvg
+                    elementId: "vertical-line"
+                    width: naturalSize.width
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+
+                    x: alarmListScroll.width / 4 - 5
+                }
+                PlasmaCore.SvgItem {
+                    svg: separatorSvg
+                    elementId: "vertical-line"
+                    width: naturalSize.width
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    x: (alarmListScroll.width / 4) * 2 - 5
+                }
+                PlasmaCore.SvgItem {
+                    svg: separatorSvg
+                    elementId: "vertical-line"
+                    width: naturalSize.width
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    x: (alarmListScroll.width / 4) * 3 - 5
+                }
+            }
+        ]
     }
 }
