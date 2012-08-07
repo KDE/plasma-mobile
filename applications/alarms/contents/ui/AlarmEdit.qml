@@ -29,10 +29,23 @@ Item {
     id: alarmEditRoot
 
     property int alarmId: 0
+    onAlarmIdChanged: {
+        if (alarmId > 0) {
+            var dt = new Date(alarmsSource.data["Alarm-"+alarmId].dateTime)
+
+            currentDate = new Date(alarmsSource.data["Alarm-"+alarmId].dateTime)
+        } else {
+            currentDate = new Date()
+        }
+    }
 
     property variant currentDate
     Component.onCompleted: {
-        currentDate = new Date()
+        if (alarmId > 0) {
+            currentDate = new Date(alarmsSource.data["Alarm-"+alarmId].date)
+        } else {
+            currentDate = new Date()
+        }
     }
 
     Column {

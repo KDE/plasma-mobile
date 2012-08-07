@@ -89,10 +89,10 @@ PlasmaComponents.ListItem {
             Column {
                 width: parent.width/4
                 PlasmaComponents.Label {
-                    text: locale.formatDate(date, KLocale.Locale.FancyShortDate)
+                    text: locale.formatDate(dateTime, KLocale.Locale.FancyShortDate)
                 }
                 PlasmaComponents.Label {
-                    text: locale.formatLocaleTime(time)
+                    text: locale.formatLocaleTime(dateTime)
                 }
             }
             PlasmaComponents.Label {
