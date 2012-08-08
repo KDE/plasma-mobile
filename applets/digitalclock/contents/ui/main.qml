@@ -23,10 +23,15 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
     id: root
-    property int minimumWidth: row.implicitWidth
+    property int minimumWidth: row.implicitWidth + 4
     property int minimumHeight: theme.smallMediumIconSize
 
     property variant dateTime
+
+    function twoDigitString(number)
+    {
+        return number < 10 ? "0"+number : number
+    }
 
     PlasmaCore.DataSource {
         id: clockSource
@@ -52,13 +57,13 @@ Item {
     Row {
         id: row
         anchors.centerIn: parent
-        height: parent.height
+        height: parent.height - 8
         MobileComponents.TextEffects {
             id: clockText
             effect: MobileComponents.TextEffects.TexturedText
-            pixelSize: root.height
+            pixelSize: parent.height
             anchors.verticalCenter: parent.verticalCenter
-            text: dateTime.getHours() + ":" + dateTime.getMinutes()
+            text: twoDigitString(dateTime.getHours()) + ":" + twoDigitString(dateTime.getMinutes())
         }
         PlasmaCore.SvgItem {
             id: alarmIcon
