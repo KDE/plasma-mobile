@@ -31,7 +31,6 @@ PlasmaComponents.Page {
 
     PlasmaExtras.ScrollArea {
         id: alarmListScroll
-        z: 100
         anchors.fill: parent
 
         ListView {
@@ -97,44 +96,6 @@ PlasmaComponents.Page {
                 }
                 onClicked: editAlarm(-1)
             }
-        }
-    }
-
-    //FIXME: should be prettier
-    Item {
-        y: -alarmList.contentY
-        width: alarmListScroll.width
-        height: alarmList.contentHeight + theme.defaultFont.mSize.height * 2
-        PlasmaCore.SvgItem {
-            svg: separatorSvg
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-
-            x: alarmListScroll.width / 4 - 5
-        }
-        PlasmaCore.SvgItem {
-            svg: separatorSvg
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            x: (alarmListScroll.width / 4) * 2 - 5
-        }
-        PlasmaCore.SvgItem {
-            svg: separatorSvg
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            x: (alarmListScroll.width / 4) * 3 - 5
         }
     }
 }

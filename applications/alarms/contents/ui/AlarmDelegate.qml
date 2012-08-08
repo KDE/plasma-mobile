@@ -90,9 +90,11 @@ PlasmaComponents.ListItem {
                 width: parent.width/4
                 PlasmaComponents.Label {
                     text: locale.formatDate(dateTime, KLocale.Locale.FancyShortDate)
+                    elide: Text.ElideRight
                 }
                 PlasmaComponents.Label {
                     text: locale.formatLocaleTime(dateTime)
+                    elide: Text.ElideRight
                 }
             }
             PlasmaComponents.Label {
@@ -100,18 +102,22 @@ PlasmaComponents.ListItem {
                 horizontalAlignment: Text.AlignHCenter
                 width: parent.width/4
                 text: message
+                elide: Text.ElideRight
+                maximumLineCount: 3
             }
             PlasmaComponents.Label {
                 anchors.verticalCenter: parent.verticalCenter
                 horizontalAlignment: Text.AlignHCenter
                 width: parent.width/4
                 text: recurs ? i18n("Every day") : i18n("Once")
+                elide: Text.ElideRight
             }
             PlasmaComponents.Label {
                 anchors.verticalCenter: parent.verticalCenter
                 horizontalAlignment: Text.AlignHCenter
                 width: parent.width/4
                 text: audioFile ? i18n("Audio") : ""
+                elide: Text.ElideRight
             }
         }
         PlasmaCore.SvgItem {

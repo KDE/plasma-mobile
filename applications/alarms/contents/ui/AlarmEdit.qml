@@ -25,7 +25,7 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.locale 0.1 as KLocale
 import org.kde.qtextracomponents 0.1
 
-Item {
+PlasmaComponents.Page {
     id: alarmEditRoot
 
     property int alarmId: 0
@@ -48,97 +48,111 @@ Item {
         }
     }
 
-    Column {
-        spacing: 8
-        anchors.centerIn: parent
+    PlasmaExtras.ScrollArea {
+        anchors.fill: parent
+        Flickable {
+            id: mainFlickable
+            contentWidth: contentColumn.width
+            contentHeight: contentColumn.height
+            clip: true
+            Item {
+                height: Math.max(childrenRect.height, mainFlickable.height)
+                width: Math.max(childrenRect.width, mainFlickable.width)
+                Column {
+                    id: contentColumn
+                    spacing: 8
+                    anchors.centerIn: parent
 
-        DatePicker {
-            id: datePicker
-            anchors.horizontalCenter: parent.horizontalCenter
-            day: currentDate.getDate()
-            month: currentDate.getMonth() + 1
-            year: currentDate.getFullYear()
-        }
-
-        TimePicker {
-            id: timePicker
-            anchors.horizontalCenter: parent.horizontalCenter
-            hours: currentDate.getHours()
-            minutes: currentDate.getMinutes()
-            seconds: currentDate.getSeconds()
-        }
-
-        Grid {
-            spacing: 8
-            anchors.horizontalCenter: parent.horizontalCenter
-            rows: 3
-            columns: 2
-
-            PlasmaComponents.Label {
-                anchors {
-                    right: messageArea.left
-                    rightMargin: 4
-                }
-                text: i18n("Message:")
-            }
-            PlasmaComponents.TextArea {
-                id: messageArea
-                width: alarmEditRoot.width / 2
-                height: theme.defaultFont.mSize.height * 5
-
-                text: alarmId > 0 ? alarmsSource.data["Alarm-"+alarmId].message : ""
-            }
-
-            PlasmaComponents.Label {
-                anchors {
-                    right: repeatSwitch.left
-                    rightMargin: 4
-                }
-                text: i18n("Repeat daily:")
-            }
-            PlasmaComponents.Switch {
-                id: repeatSwitch
-                checked: alarmId > 0 ? alarmsSource.data["Alarm-"+alarmId].recurs : false
-            }
-
-            PlasmaComponents.Label {
-                anchors {
-                    right: audioSwitch.left
-                    rightMargin: 4
-                }
-                text: i18n("Audio:")
-            }
-            PlasmaComponents.Switch {
-                id: audioSwitch
-                checked: alarmId > 0 ? alarmsSource.data["Alarm-"+alarmId].audioFile : true
-            }
-        }
-        Row {
-            spacing: 8
-            anchors.horizontalCenter: parent.horizontalCenter
-            PlasmaComponents.Button {
-                text: i18n("Save")
-                onClicked: {
-                    var service = alarmsSource.serviceForSource("")
-                    var operation = service.operationDescription(alarmId > 0 ? "modify" : "add")
-
-                    if (alarmId > 0) {
-                        operation["Id"] = alarmId
+                    DatePicker {
+                        id: datePicker
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        day: currentDate.getDate()
+                        month: currentDate.getMonth() + 1
+                        year: currentDate.getFullYear()
                     }
-                    operation["Date"] = datePicker.isoDate
-                    operation["Time"] = timePicker.timeString
-                    operation["Message"] = messageArea.text
-                    operation["RecursDaily"] = repeatSwitch.checked
 
-                    service.startOperationCall(operation)
-                    pageRow.pop(alarmList)
-                }
-            }
-            PlasmaComponents.Button {
-                text: i18n("Cancel")
-                onClicked: {
-                    pageRow.pop(alarmList)
-                    //pageRow.push(Qt.createComponent("AlarmEdit.qml"))
+                    TimePicker {
+                        id: timePicker
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        hours: currentDate.getHours()
+                        minutes: currentDate.getMinutes()
+                        seconds: currentDate.getSeconds()
+                    }
+
+                    Grid {
+                        spacing: 8
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        rows: 3
+                        columns: 2
+
+                        PlasmaComponents.Label {
+                            anchors {
+                                right: messageArea.left
+                                rightMargin: 4
+                            }
+                            text: i18n("Message:")
+                        }
+                        PlasmaComponents.TextArea {
+                            id: messageArea
+                            width: alarmEditRoot.width / 2
+                            height: theme.defaultFont.mSize.height * 5
+
+                            text: alarmId > 0 ? alarmsSource.data["Alarm-"+alarmId].message : ""
+                        }
+
+                        PlasmaComponents.Label {
+                            anchors {
+                                right: repeatSwitch.left
+                                rightMargin: 4
+                            }
+                            text: i18n("Repeat daily:")
+                        }
+                        PlasmaComponents.Switch {
+                            id: repeatSwitch
+                            checked: alarmId > 0 ? alarmsSource.data["Alarm-"+alarmId].recurs : false
+                        }
+
+                        PlasmaComponents.Label {
+                            anchors {
+                                right: audioSwitch.left
+                                rightMargin: 4
+                            }
+                            text: i18n("Audio:")
+                        }
+                        PlasmaComponents.Switch {
+                            id: audioSwitch
+                            checked: alarmId > 0 ? alarmsSource.data["Alarm-"+alarmId].audioFile : true
+                        }
+                    }
+                    Row {
+                        spacing: 8
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        PlasmaComponents.Button {
+                            text: i18n("Save")
+                            onClicked: {
+                                var service = alarmsSource.serviceForSource("")
+                                var operation = service.operationDescription(alarmId > 0 ? "modify" : "add")
+
+                                if (alarmId > 0) {
+                                    operation["Id"] = alarmId
+                                }
+                                operation["Date"] = datePicker.isoDate
+                                operation["Time"] = timePicker.timeString
+                                operation["Message"] = messageArea.text
+                                operation["RecursDaily"] = repeatSwitch.checked
+
+                                service.startOperationCall(operation)
+                                pageRow.pop(alarmList)
+                            }
+                        }
+                        PlasmaComponents.Button {
+                            text: i18n("Cancel")
+                            onClicked: {
+                                pageRow.pop(alarmList)
+                                //pageRow.push(Qt.createComponent("AlarmEdit.qml"))
+                            }
+                        }
+                    }
                 }
             }
         }
