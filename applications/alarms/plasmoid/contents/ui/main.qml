@@ -78,6 +78,9 @@ Item {
     PlasmaExtras.PageRow {
         id: pageRow
         anchors.fill: parent
+
+        columnWidth: (width/2 > theme.defaultFont.mSize.width*30) ? width/2 : width
+
         initialPage: AlarmList {
             id: alarmList
         }
