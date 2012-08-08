@@ -27,8 +27,8 @@ import org.kde.qtextracomponents 0.1
 
 Item {
     id: root
-    width: 500
-    height: 500
+    property int minimumWidth: 300
+    property int minimumHeight: 500
 
     function removeAlarm(id)
     {

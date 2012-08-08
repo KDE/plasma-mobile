@@ -1,5 +1,6 @@
 add_subdirectory(common)
 
+add_subdirectory(alarms)
 add_subdirectory(about)
 #add_subdirectory(imageviewer)
 add_subdirectory(settings)
