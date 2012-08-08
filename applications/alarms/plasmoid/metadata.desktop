@@ -15,6 +15,6 @@ X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 X-Plasma-API=declarativeappletscript
-X-Plasma-DefaultSize=100,100
+X-Plasma-DefaultSize=300,500
 X-Plasma-MainScript=ui/main.qml
 
