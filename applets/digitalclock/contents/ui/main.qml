@@ -23,7 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 Item {
     id: root
     property int minimumWidth: row.implicitWidth
-    property int minimumHeight: row.implicitHeight
+    property int minimumHeight: theme.smallMediumIconSize
 
     property variant dateTime
 
@@ -51,13 +51,18 @@ Item {
     Row {
         id: row
         anchors.centerIn: parent
+        height: parent.height
         Text {
             id: clockText
+            anchors.verticalCenter: parent.verticalCenter
             text: dateTime.getHours() + ":" + dateTime.getMinutes()
         }
-        Text {
+        PlasmaCore.SvgItem {
             id: alarmIcon
-            text: "Alarm!"
+            svg: PlasmaCore.Svg {imagePath: "icons/korgac"}
+            elementId: "korgac"
+            height: parent.height
+            width: height
             visible: alarmsSource.sources.length > 0
         }
     }
