@@ -1,0 +1,20 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Digital clock
+Comment=Time displayed in a digital format
+
+Type=Service
+Icon=clock
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Category=Date and Time
+X-KDE-PluginInfo-Email=mart@kde.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.digitalclock
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-DefaultSize=100,32
+X-Plasma-MainScript=ui/main.qml
+
