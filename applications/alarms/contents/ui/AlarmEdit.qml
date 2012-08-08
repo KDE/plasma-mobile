@@ -140,6 +140,9 @@ PlasmaComponents.Page {
                                 operation["Time"] = timePicker.timeString
                                 operation["Message"] = messageArea.text
                                 operation["RecursDaily"] = repeatSwitch.checked
+                                if (audioSwitch.checked) {
+                                    operation["AudioFile"] = plasmoid.file("data", "ring.ogg")
+                                }
 
                                 service.startOperationCall(operation)
                                 pageRow.pop(alarmList)
