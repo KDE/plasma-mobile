@@ -19,6 +19,8 @@
 
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.locale 0.1 as KLocale
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Item {
@@ -26,11 +28,16 @@ Item {
     property int minimumWidth: row.implicitWidth + 4
     property int minimumHeight: theme.smallMediumIconSize
 
+    property Item dialog
     property variant dateTime
 
     function twoDigitString(number)
     {
         return number < 10 ? "0"+number : number
+    }
+
+    KLocale.Locale {
+        id: locale
     }
 
     PlasmaCore.DataSource {
@@ -45,7 +52,62 @@ Item {
         id: alarmsSource
         engine: "org.kde.alarms"
         interval: 0
-        //connectedSources: sources
+        connectedSources: sources
+        onNewData: {
+            //ringing?
+            if (data.active) {
+                if (!dialog) {
+                    dialog = dialogComponent.createObject(root)
+                }
+                dialog.alarmData = data
+                dialog.open()
+            }
+        }
+    }
+
+    Component {
+        id: dialogComponent
+        PlasmaComponents.CommonDialog {
+            id: dialog
+            property variant alarmData
+            titleText: i18n("Alarm")
+            content: Column {
+                width: theme.defaultFont.mSize.width * 30
+                PlasmaComponents.Label {
+                    text: dialog.alarmData["message"]
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                PlasmaComponents.Label {
+                    text: i18n("Alarm for %1", locale.formatDateTime(dialog.alarmData["dateTime"]))
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+            buttonTexts: ["Dismiss", "Snooze"]
+
+            function performAlarmAction(operationName, id) {
+                var service = alarmsSource.serviceForSource("")
+                var operation = service.operationDescription(operationName)
+
+                operation["Id"] = id
+                if (operationName == "defer") {
+                    operation["Minutes"] = 5
+                }
+
+                service.startOperationCall(operation)
+            }
+            onButtonClicked: {
+                if (index == 0) {
+                    performAlarmAction("dismiss", dialog.alarmData["id"])
+                } else if (index == 1) {
+                    performAlarmAction("defer", dialog.alarmData["id"])
+                }
+            }
+            onClickedOutside: performAlarmAction("defer", dialog.alarmData["id"])
+        }
     }
 
     PlasmaCore.Svg {
