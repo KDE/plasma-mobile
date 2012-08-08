@@ -155,7 +155,7 @@ PlasmaCore.FrameSvgItem {
                 id: yearPlaceHolder
                 visible: false
                 font.pointSize: 20
-                text: "00000"
+                text: "0000"
             }
         }
     }

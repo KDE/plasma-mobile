@@ -196,7 +196,7 @@ PlasmaCore.FrameSvgItem {
                 id: meridiaePlaceHolder
                 visible: false
                 font.pointSize: 20
-                text: "0000"
+                text: "00"
             }
             Behavior on opacity {
                 NumberAnimation {
