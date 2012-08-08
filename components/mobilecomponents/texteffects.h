@@ -25,6 +25,10 @@
 #include <QFont>
 #include <QPixmap>
 
+namespace Plasma {
+    class Svg;
+}
+
 class TextEffects : public QDeclarativeItem
 {
     Q_OBJECT
@@ -36,8 +40,15 @@ class TextEffects : public QDeclarativeItem
     Q_PROPERTY(int horizontalOffset READ horizontalOffset WRITE setHorizontalOffset NOTIFY horizontalOffsetChanged)
     Q_PROPERTY(int verticalOffset READ verticalOffset WRITE setVerticalOffset NOTIFY verticalOffsetChanged)
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
+    Q_PROPERTY(Effect effect READ effect WRITE setEffect NOTIFY effectChanged)
 
 public:
+    enum Effect {
+        ShadowedText,
+        TexturedText
+    };
+    Q_ENUMS(Effect)
+
     TextEffects(QDeclarativeItem *parent = 0);
     ~TextEffects();
 
@@ -63,6 +74,9 @@ public:
     QColor color() const;
     void setColor(const QColor &color);
 
+    Effect effect() const;
+    void setEffect(Effect effect);
+
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 private:
@@ -77,6 +91,7 @@ Q_SIGNALS:
     void horizontalOffsetChanged(int horizontalOffset);
     void verticalOffsetChanged(int verticalOffset);
     void colorChanged(const QColor &color);
+    void effectChanged(Effect effect);
 
 private:
     QString m_text;
@@ -86,6 +101,8 @@ private:
     int m_horizontalOffset;
     int m_verticalOffset;
     QColor m_color;
+    Effect m_effect;
+    Plasma::Svg *m_texture;
 };
 
 #endif
