@@ -149,7 +149,6 @@ PlasmaComponents.Page {
                             text: i18n("Cancel")
                             onClicked: {
                                 pageRow.pop(alarmList)
-                                //pageRow.push(Qt.createComponent("AlarmEdit.qml"))
                             }
                         }
                     }
