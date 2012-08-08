@@ -20,7 +20,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-//import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.locale 0.1 as KLocale
 import org.kde.active.settings 0.1
 
 
@@ -34,7 +34,7 @@ PlasmaCore.FrameSvgItem {
 
     property bool userConfiguring: false
 
-    property bool twentyFour: false
+    property bool twentyFour: locale.timeFormat.indexOf("%p") == -1
 
     property string timeString: clockRow.twoDigitString(hours) + ":" + clockRow.twoDigitString(minutes) + ":" +  clockRow.twoDigitString(seconds)
 
@@ -50,6 +50,10 @@ PlasmaCore.FrameSvgItem {
             duration: 250
             easing.type: Easing.InOutQuad
         }
+    }
+
+    KLocale.Locale {
+        id: locale
     }
 
     imagePath: plasmoid.file("images", "throbber.svgz")

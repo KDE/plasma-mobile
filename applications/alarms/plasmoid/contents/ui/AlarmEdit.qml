@@ -82,7 +82,6 @@ PlasmaComponents.Page {
                         hours: currentDate.getHours()
                         minutes: currentDate.getMinutes()
                         seconds: currentDate.getSeconds()
-                        twentyFour: locale.timeFormat.indexOf("%p") == -1
                     }
 
                     Grid {
