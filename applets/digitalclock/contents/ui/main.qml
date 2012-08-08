@@ -133,24 +133,31 @@ Item {
     }
 
 
-    Row {
-        id: row
-        anchors.centerIn: parent
-        height: parent.height - 8
-        MobileComponents.TextEffects {
-            id: clockText
-            effect: MobileComponents.TextEffects.TexturedText
-            pixelSize: parent.height
-            anchors.verticalCenter: parent.verticalCenter
-            text: twoDigitString(dateTime.getHours()) + ":" + twoDigitString(dateTime.getMinutes())
-        }
-        PlasmaCore.SvgItem {
-            id: alarmIcon
-            svg: PlasmaCore.Svg {imagePath: "icons/korgac"}
-            elementId: "korgac"
-            height: parent.height
-            width: height
-            visible: alarmsSource.sources.length > 0
+    MouseArea {
+        anchors.fill: parent
+        enabled: alarmsSource.sources.length > 0
+
+        onClicked: plasmoid.runApplication("active-alarms")
+
+        Row {
+            id: row
+            anchors.centerIn: parent
+            height: parent.height - 8
+            MobileComponents.TextEffects {
+                id: clockText
+                effect: MobileComponents.TextEffects.TexturedText
+                pixelSize: parent.height
+                anchors.verticalCenter: parent.verticalCenter
+                text: twoDigitString(dateTime.getHours()) + ":" + twoDigitString(dateTime.getMinutes())
+            }
+            PlasmaCore.SvgItem {
+                id: alarmIcon
+                svg: PlasmaCore.Svg {imagePath: "icons/korgac"}
+                elementId: "korgac"
+                height: parent.height
+                width: height
+                visible: alarmsSource.sources.length > 0
+            }
         }
     }
 }

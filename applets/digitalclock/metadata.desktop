@@ -17,4 +17,5 @@ X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
 X-Plasma-DefaultSize=100,32
 X-Plasma-MainScript=ui/main.qml
+X-Plasma-RequiredExtensions=LaunchApp
 
