@@ -86,7 +86,7 @@ Item {
                     verticalAlignment: Text.AlignVCenter
                 }
             }
-            buttonTexts: ["Dismiss", "Snooze"]
+            buttonTexts: [i18n("Dismiss"), i18n("Snooze")]
 
             function performAlarmAction(operationName, id) {
                 var service = alarmsSource.serviceForSource("")
