@@ -29,14 +29,16 @@ PlasmaComponents.ListItem {
 
     onClicked: editAlarm(id)
 
+    checked: mainArea.pressed || pageRow.currentPage.alarmId == id
+
     MouseArea {
+        id: mainArea
         width: alarmItem.width
         height: childrenRect.height
         drag {
             target: alarmItem
             axis: Drag.XAxis
         }
-        onPressed: alarmItem.checked = true
         onReleased: {
             if (alarmItem.x < -alarmItem.width/2) {
                 removeAnimation.exitFromRight = false
@@ -47,9 +49,7 @@ PlasmaComponents.ListItem {
             } else {
                 resetAnimation.running = true
             }
-            alarmItem.checked = false
         }
-        onPositionChanged: alarmItem.checked = false
         onClicked: alarmItem.clicked()
         SequentialAnimation {
             id: removeAnimation

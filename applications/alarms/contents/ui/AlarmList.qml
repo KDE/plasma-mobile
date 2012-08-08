@@ -84,9 +84,11 @@ PlasmaComponents.Page {
             }
             footer: PlasmaComponents.ListItem {
                 enabled: true
+                checked: pageRow.currentPage.alarmId <= 0
                 Item {
                     width: parent.width
                     height: theme.defaultFont.mSize.height * 3
+
                     Row {
                         anchors.centerIn: parent
                         QIconItem {
