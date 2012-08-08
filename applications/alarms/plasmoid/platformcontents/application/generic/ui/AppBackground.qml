@@ -25,4 +25,16 @@ Image {
     anchors.fill: parent
     source: "image://appbackgrounds/contextarea"
     fillMode: Image.Tile
+    Item {
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            right: parent.right
+        }
+        width: parent.width/2
+        Image {
+            source: "background-logo.png"
+            anchors.centerIn: parent
+        }
+    }
 }
