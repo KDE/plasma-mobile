@@ -28,7 +28,6 @@ Item {
     property int minimumWidth: row.implicitWidth + 4
     property int minimumHeight: theme.smallMediumIconSize
 
-    property Item dialog
     property variant dateTime
 
     function twoDigitString(number)
@@ -56,9 +55,7 @@ Item {
         onNewData: {
             //ringing?
             if (data.active) {
-                if (!dialog) {
-                    dialog = dialogComponent.createObject(root)
-                }
+                var dialog = dialogComponent.createObject(root)
                 dialog.alarmData = data
                 dialog.open()
             }
@@ -105,8 +102,12 @@ Item {
                 } else if (index == 1) {
                     performAlarmAction("defer", dialog.alarmData["id"])
                 }
+                destroy()
             }
-            onClickedOutside: performAlarmAction("defer", dialog.alarmData["id"])
+            onClickedOutside: {
+                performAlarmAction("defer", dialog.alarmData["id"])
+                destroy()
+            }
         }
     }
 
