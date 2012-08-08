@@ -39,33 +39,40 @@ PlasmaComponents.Page {
                 dataSource: alarmsSource
             }
             header: PlasmaComponents.ListItem {
+                id: headerItem
                 sectionDelegate: true
+
                 Row {
                     visible: alarmsSource.sources.length > 0
                     spacing: 8
-                    width: parent.width - theme.mediumIconSize
+                    width: headerItem.width - theme.mediumIconSize - spacing*3
 
                     PlasmaComponents.Label {
                         width: parent.width/4
                         text: i18n("Time")
+                        elide: Text.ElideRight
                     }
 
                     PlasmaComponents.Label {
                         horizontalAlignment: Text.AlignHCenter
                         width: parent.width/4
                         text: i18n("Message")
+                        elide: Text.ElideRight
                     }
                     PlasmaComponents.Label {
                         horizontalAlignment: Text.AlignHCenter
                         width: parent.width/4
-                        text: i18n("Recurrence")
+                        text: i18n("Repeat")
+                        elide: Text.ElideRight
                     }
                     PlasmaComponents.Label {
                         horizontalAlignment: Text.AlignHCenter
                         width: parent.width/4
                         text: i18n("Audio")
+                        elide: Text.ElideRight
                     }
                 }
+
                 PlasmaComponents.Label {
                     visible: alarmsSource.sources.length == 0
                     anchors.centerIn: parent

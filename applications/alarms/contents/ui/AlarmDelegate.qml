@@ -84,7 +84,7 @@ PlasmaComponents.ListItem {
         }
         Row {
             spacing: 8
-            width: alarmItem.width - closeButton.width
+            width: alarmItem.width - closeButton.width - spacing*3
 
             Column {
                 width: parent.width/4
