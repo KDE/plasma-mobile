@@ -22,6 +22,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.locale 0.1 as KLocale
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import QtMultimediaKit 1.1
 
 Item {
     id: root
@@ -62,11 +63,22 @@ Item {
         }
     }
 
+    Audio {
+        id: audio
+        onStopped: play()
+    }
     Component {
         id: dialogComponent
         PlasmaComponents.CommonDialog {
             id: dialog
             property variant alarmData
+            onAlarmDataChanged: {
+                audio.source = alarmData["audioFile"]
+                if (alarmData["audioFile"] != "") {
+                    audio.play()
+                }
+            }
+
             titleText: i18n("Alarm")
             content: Column {
                 width: theme.defaultFont.mSize.width * 30
@@ -102,10 +114,14 @@ Item {
                 } else if (index == 1) {
                     performAlarmAction("defer", dialog.alarmData["id"])
                 }
+                audio.source = ""
+                audio.stop()
                 destroy()
             }
             onClickedOutside: {
                 performAlarmAction("defer", dialog.alarmData["id"])
+                audio.source = ""
+                audio.stop()
                 destroy()
             }
         }
