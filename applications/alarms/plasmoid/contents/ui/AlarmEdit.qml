@@ -35,11 +35,14 @@ PlasmaComponents.Page {
 
             currentDate = new Date(alarmsSource.data["Alarm-"+alarmId].dateTime)
         } else {
-            currentDate = new Date()
+            var date = new Date()
+            date.setSeconds(60)
+            currentDate = date
         }
     }
 
     property variant currentDate
+
     Component.onCompleted: {
         var component = Qt.createComponent(plasmoid.file("ui", "PanelBackground.qml"))
         if (component) {
