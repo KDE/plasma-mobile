@@ -30,6 +30,13 @@ Item {
     property int minimumWidth: 300
     property int minimumHeight: 500
 
+    Component.onCompleted: {
+        var component = Qt.createComponent(plasmoid.file("ui", "AppBackground.qml"))
+        if (component) {
+            component.createObject(root)
+        }
+    }
+
     function removeAlarm(id)
     {
         var service = alarmsSource.serviceForSource("")

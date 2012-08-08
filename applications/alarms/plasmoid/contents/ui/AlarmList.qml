@@ -29,6 +29,13 @@ PlasmaComponents.Page {
     id: root
     clip: true
 
+    Component.onCompleted: {
+        var component = Qt.createComponent(plasmoid.file("ui", "PanelBackground.qml"))
+        if (component) {
+            component.createObject(root)
+        }
+    }
+
     PlasmaExtras.ScrollArea {
         id: alarmListScroll
         anchors.fill: parent
