@@ -139,6 +139,12 @@ Item {
                 right: datePicker.left
                 rightMargin: theme.defaultFont.mSize.width
             }
+            Component.onCompleted: {
+                var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+                timePicker.hours = date.getHours()
+                timePicker.minutes = date.getMinutes()
+                timePicker.seconds = date.getSeconds()
+            }
             Connections {
                 target: timeSettings
                 onCurrentTimeChanged: {
@@ -153,15 +159,39 @@ Item {
                 }
             }
             onUserConfiguringChanged: {
-                var date = new Date(1971, 1, 1, hours, minutes, seconds, 0)
                 timeSettings.currentTime = timeString
                 timeSettings.saveTime()
             }
         }
 
-        DatePicker {
+        MobileComponents.DatePicker {
             id: datePicker
             enabled: !ntpCheckBox.checked
+            Component.onCompleted: {
+                var date = new Date(timeSettings.currentDate)
+                datePicker.day = date.getDate()
+                datePicker.month = date.getMonth()+1
+                datePicker.year = date.getFullYear()
+            }
+            Connections {
+                target: timeSettings
+                onCurrentDateChanged: {
+                    if (datePicker.userConfiguring) {
+                        return
+                    }
+
+                    var date = new Date(timeSettings.currentDate)
+
+                    datePicker.day = date.getDate()
+                    datePicker.month = date.getMonth()+1
+                    datePicker.year = date.getFullYear()
+                }
+            }
+            onUserConfiguringChanged: {
+                timeSettings.currentDate = isoDate
+
+                timeSettings.saveTime()
+            }
         }
     }
 
