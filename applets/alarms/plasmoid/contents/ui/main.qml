@@ -25,6 +25,8 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.locale 0.1 as KLocale
 import org.kde.qtextracomponents 0.1
 
+import "kde-runtime-4.10"
+
 Item {
     id: root
     property int minimumWidth: 200
@@ -75,7 +77,7 @@ Item {
         id: locale
     }
 
-    PlasmaExtras.PageRow {
+    PageRow {
         id: pageRow
         anchors.fill: parent
 
