@@ -20,14 +20,15 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-//import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1
 
 
+//FIXME: shouldn't be a FrameSvgItem
 PlasmaCore.FrameSvgItem {
     id: root
     clip: true
 
+    //////// API
     property int day
     property int month
     property int year
@@ -37,6 +38,7 @@ PlasmaCore.FrameSvgItem {
     property string isoDate: year + "-" + clockRow.twoDigitString(month) + "-" + clockRow.twoDigitString(day)
 
 
+    /////// Implementation
     Connections {
         target: root
         onDayChanged: clockRow.day = root.day

@@ -24,10 +24,12 @@ import org.kde.locale 0.1 as KLocale
 import org.kde.active.settings 0.1
 
 
+//FIXME: shouldn't be a FrameSvgItem
 PlasmaCore.FrameSvgItem {
     id: root
     clip: true
 
+    //////// API
     property int hours
     property int minutes
     property int seconds
@@ -38,6 +40,8 @@ PlasmaCore.FrameSvgItem {
 
     property string timeString: clockRow.twoDigitString(hours) + ":" + clockRow.twoDigitString(minutes) + ":" +  clockRow.twoDigitString(seconds)
 
+
+    /////// Implementation
     Connections {
         target: root
         onHoursChanged: clockRow.hours = root.hours
