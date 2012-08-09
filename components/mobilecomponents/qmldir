@@ -7,3 +7,5 @@ ResourceDelegate 0.1 ResourceDelegate.qml
 ViewSearch 0.1 ViewSearch.qml
 OverlayDrawer 0.1 OverlayDrawer.qml
 SplitDrawer 0.1 SplitDrawer.qml
+DatePicker 0.1 DatePicker.qml
+TimePicker 0.1 TimePicker.qml

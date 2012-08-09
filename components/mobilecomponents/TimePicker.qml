@@ -20,26 +20,34 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-//import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.locale 0.1 as KLocale
 import org.kde.active.settings 0.1
+import "private"
 
 
+//FIXME: shouldn't be a FrameSvgItem
 PlasmaCore.FrameSvgItem {
     id: root
     clip: true
 
-    Connections {
-        target: timeSettings
-        onCurrentTimeChanged: {
-            if (userConfiguring) {
-                return
-            }
+    //////// API
+    property int hours
+    property int minutes
+    property int seconds
 
-            var date = new Date("January 1, 1971 "+timeSettings.currentTime)
-            root.hours = date.getHours()
-            root.minutes = date.getMinutes()
-            root.seconds = date.getSeconds()
-        }
+    property bool userConfiguring: false
+
+    property bool twentyFour: locale.timeFormat.indexOf("%p") == -1
+
+    property string timeString: clockRow.twoDigitString(hours) + ":" + clockRow.twoDigitString(minutes) + ":" +  clockRow.twoDigitString(seconds)
+
+
+    /////// Implementation
+    Connections {
+        target: root
+        onHoursChanged: clockRow.hours = root.hours
+        onMinutesChanged: clockRow.minutes = root.minutes
+        onSecondsChanged: clockRow.seconds = root.seconds
     }
 
     Behavior on width {
@@ -48,13 +56,12 @@ PlasmaCore.FrameSvgItem {
             easing.type: Easing.InOutQuad
         }
     }
-    property int hours
-    property int minutes
-    property int seconds
 
-    property bool userConfiguring: false
+    KLocale.Locale {
+        id: locale
+    }
 
-    imagePath: timePackage.filePath("images", "throbber.svgz")
+    imagePath: "widgets/throbber"
     width: clockRow.width + margins.left + margins.right
     height: clockRow.height + margins.top + margins.bottom
 
@@ -65,14 +72,10 @@ PlasmaCore.FrameSvgItem {
         interval: 1500
         running: false
         onTriggered: {
-            var date = new Date(1971, 1, 1, hours, minutes, seconds, 0)
-            timeSettings.currentTime = clockRow.twoDigitString(hours)+":"+clockRow.twoDigitString(minutes)+":"+clockRow.twoDigitString(seconds)
-
-            timeSettings.saveTime()
+            root.hours = clockRow.hours
+            root.minutes = clockRow.minutes
+            root.seconds = clockRow.seconds
             userConfiguring = false
-            hoursDigit.selectedIndex = -1
-            minutesDigit.selectedIndex = -1
-            secondsDigit.selectedIndex = -1
         }
     }
 
@@ -82,6 +85,10 @@ PlasmaCore.FrameSvgItem {
         x: parent.margins.left
         y: parent.margins.top
 
+        property int hours
+        property int minutes
+        property int seconds
+
         function twoDigitString(number)
         {
             return number < 10 ? "0"+number : number
@@ -89,16 +96,18 @@ PlasmaCore.FrameSvgItem {
 
         Digit {
             id: hoursDigit
-            model: timeSettings.twentyFour ? 24 : 12
-            currentIndex: timeSettings.twentyFour || hours < 12 ? hours : hours - 12
+            model: root.twentyFour ? 24 : 12
+            currentIndex: root.twentyFour || hours < 12 ? hours : hours - 12
             delegate: Text {
+                horizontalAlignment: Text.AlignHCenter
+                width: hoursDigit.width
                 property int ownIndex: index
-                text: !timeSettings.twentyFour && index == 0 ? "12" : clockRow.twoDigitString(index)
+                text: !root.twentyFour && index == 0 ? "12" : clockRow.twoDigitString(index)
                 font.pointSize: 20
             }
             onSelectedIndexChanged: {
                 if (selectedIndex > -1) {
-                    if (timeSettings.twentyFour ||
+                    if (root.twentyFour ||
                         meridiaeDigit.isAm) {
                         hours = selectedIndex
                     } else {
@@ -146,7 +155,7 @@ PlasmaCore.FrameSvgItem {
             }
         }
         PlasmaCore.SvgItem {
-            opacity: timeSettings.twentyFour ? 0 : 1
+            opacity: root.twentyFour ? 0 : 1
             svg: PlasmaCore.Svg {imagePath: "widgets/line"}
             elementId: "vertical-line"
             width: naturalSize.width
@@ -163,7 +172,7 @@ PlasmaCore.FrameSvgItem {
         }
         Digit {
             id: meridiaeDigit
-            opacity: timeSettings.twentyFour ? 0 : 1
+            opacity: root.twentyFour ? 0 : 1
             property bool isAm: (selectedIndex > -1) ? (selectedIndex < 1) : (currentIndex < 1)
             model: ListModel {
                 ListElement {
@@ -174,9 +183,11 @@ PlasmaCore.FrameSvgItem {
                 }
             }
             delegate: Text {
+                width: meridiaeDigit.width
+                horizontalAlignment: Text.AlignHCenter
                 property int ownIndex: index
                 text: meridiae
-                font.pointSize: 25
+                font.pointSize: 20
             }
             currentIndex: hours > 12 ? 1 : 0
             onSelectedIndexChanged: {
@@ -189,6 +200,13 @@ PlasmaCore.FrameSvgItem {
                         hours += 12
                     }
                 }
+            }
+            width: meridiaePlaceHolder.width*1.3
+            Text {
+                id: meridiaePlaceHolder
+                visible: false
+                font.pointSize: 20
+                text: "00"
             }
             Behavior on opacity {
                 NumberAnimation {

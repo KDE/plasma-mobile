@@ -17,49 +17,37 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-//import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1
+import "private"
 
-
+//FIXME: shouldn't be a FrameSvgItem
 PlasmaCore.FrameSvgItem {
     id: root
     clip: true
 
-    Connections {
-        target: timeSettings
-        onCurrentDateChanged: {
-            if (userConfiguring) {
-                return
-            }
-
-            var date = new Date(timeSettings.currentDate)
-            root.day = date.getDate()
-            root.month = date.getMonth()+1
-            root.year = date.getFullYear()
-        }
-    }
-    Component.onCompleted: {
-        if (userConfiguring) {
-            return
-        }
-
-        var date = new Date(timeSettings.currentDate)
-        root.day = date.getDate()
-        root.month = date.getMonth()+1
-        root.year = date.getFullYear()
-    }
-
-
+    //////// API
     property int day
     property int month
     property int year
 
     property bool userConfiguring: false
 
-    imagePath: timePackage.filePath("images", "throbber.svgz")
+    property string isoDate: year + "-" + clockRow.twoDigitString(month) + "-" + clockRow.twoDigitString(day)
+
+
+    /////// Implementation
+    Connections {
+        target: root
+        onDayChanged: clockRow.day = root.day
+        onMonthChanged: clockRow.month = root.month
+        onYearChanged: clockRow.year = root.year
+    }
+
+
+    imagePath: "widgets/throbber"
     width: clockRow.width + margins.left + margins.right
     height: clockRow.height + margins.top + margins.bottom
 
@@ -70,14 +58,10 @@ PlasmaCore.FrameSvgItem {
         interval: 1500
         running: false
         onTriggered: {
-            var date = new Date(year, month, day, 0, 0, 0, 0)
-            timeSettings.currentDate = year+"-"+clockRow.twoDigitString(month)+"-"+clockRow.twoDigitString(day)
-
-            timeSettings.saveTime()
+            root.day = clockRow.day
+            root.month = clockRow.month
+            root.year = clockRow.year
             userConfiguring = false
-            yearDigit.selectedIndex = -1
-            monthDigit.selectedIndex = -1
-            dayDigit.selectedIndex = -1
         }
     }
 
@@ -86,6 +70,10 @@ PlasmaCore.FrameSvgItem {
         spacing: 3
         x: parent.margins.left
         y: parent.margins.top
+
+        property int day
+        property int month
+        property int year
 
         function twoDigitString(number)
         {
@@ -105,6 +93,8 @@ PlasmaCore.FrameSvgItem {
                 }
             }
             delegate: Text {
+                horizontalAlignment: Text.AlignHCenter
+                width: dayDigit.width
                 property int ownIndex: index
                 text: index+1
                 font.pointSize: 20
@@ -130,6 +120,8 @@ PlasmaCore.FrameSvgItem {
             }
             property variant months: Array(i18n("Jan"), i18n("Feb"), i18n("Mar"), i18n("Apr"), i18n("May"), i18n("Jun"), i18n("Jul"), i18n("Aug"), i18n("Sep"), i18n("Oct"), i18n("Nov"), i18n("Dec"))
             delegate: Text {
+                horizontalAlignment: Text.AlignHCenter
+                width: monthDigit.width
                 property int ownIndex: index
                 text: months[index]
                 font.pointSize: 20
@@ -161,7 +153,7 @@ PlasmaCore.FrameSvgItem {
                     year = selectedIndex
                 }
             }
-            width: yearPlaceHolder.width*1.1
+            width: yearPlaceHolder.width*1.3
             Text {
                 id: yearPlaceHolder
                 visible: false
