@@ -57,6 +57,14 @@ Item {
         pageRow.currentPage.alarmId = id
     }
 
+    property bool alarmsPresent: alarmsSource.sources.length > 0
+    onAlarmsPresentChanged: {
+        if (alarmsPresent) {
+            plasmoid.status = "ActiveStatus"
+        } else {
+            plasmoid.status = "PassiveStatus"
+        }
+    }
 
     PlasmaCore.DataSource {
         id: alarmsSource
