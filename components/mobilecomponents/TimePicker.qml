@@ -22,6 +22,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.locale 0.1 as KLocale
 import org.kde.active.settings 0.1
+import "private"
 
 
 //FIXME: shouldn't be a FrameSvgItem
@@ -60,7 +61,7 @@ PlasmaCore.FrameSvgItem {
         id: locale
     }
 
-    imagePath: plasmoid.file("images", "throbber.svgz")
+    imagePath: "widgets/throbber"
     width: clockRow.width + margins.left + margins.right
     height: clockRow.height + margins.top + margins.bottom
 

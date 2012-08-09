@@ -72,7 +72,7 @@ PlasmaComponents.Page {
                     spacing: 8
                     anchors.centerIn: parent
 
-                    DatePicker {
+                    MobileComponents.DatePicker {
                         id: datePicker
                         anchors.horizontalCenter: parent.horizontalCenter
                         day: currentDate.getDate()
@@ -80,7 +80,7 @@ PlasmaComponents.Page {
                         year: currentDate.getFullYear()
                     }
 
-                    TimePicker {
+                    MobileComponents.TimePicker {
                         id: timePicker
                         anchors.horizontalCenter: parent.horizontalCenter
                         hours: currentDate.getHours()
