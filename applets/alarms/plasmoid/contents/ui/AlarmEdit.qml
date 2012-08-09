@@ -63,7 +63,6 @@ PlasmaComponents.Page {
             anchors.fill: parent
             contentWidth: contentColumn.width
             contentHeight: contentColumn.height
-            flickableDirection: Flickable.VerticalFlick
 
             Item {
                 height: Math.max(childrenRect.height, mainFlickable.height)
