@@ -27,8 +27,8 @@ import org.kde.qtextracomponents 0.1
 
 Item {
     id: root
-    property int minimumWidth: 300
-    property int minimumHeight: 500
+    property int minimumWidth: 200
+    property int minimumHeight: 350
 
     Component.onCompleted: {
         var component = Qt.createComponent(plasmoid.file("ui", "AppBackground.qml"))
