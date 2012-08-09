@@ -131,13 +131,31 @@ Item {
         }
 
 
-        TimePicker {
+        MobileComponents.TimePicker {
             id: timePicker
             enabled: !ntpCheckBox.checked
 
             anchors {
                 right: datePicker.left
                 rightMargin: theme.defaultFont.mSize.width
+            }
+            Connections {
+                target: timeSettings
+                onCurrentTimeChanged: {
+                    if (timePicker.userConfiguring) {
+                        return
+                    }
+
+                    var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+                    timePicker.hours = date.getHours()
+                    timePicker.minutes = date.getMinutes()
+                    timePicker.seconds = date.getSeconds()
+                }
+            }
+            onUserConfiguringChanged: {
+                var date = new Date(1971, 1, 1, hours, minutes, seconds, 0)
+                timeSettings.currentTime = timeString
+                timeSettings.saveTime()
             }
         }
 

@@ -61,6 +61,7 @@ PlasmaCore.FrameSvgItem {
             root.day = clockRow.day
             root.month = clockRow.month
             root.year = clockRow.year
+            userConfiguring = false
         }
     }
 

@@ -75,6 +75,7 @@ PlasmaCore.FrameSvgItem {
             root.hours = clockRow.hours
             root.minutes = clockRow.minutes
             root.seconds = clockRow.seconds
+            userConfiguring = false
         }
     }
 
