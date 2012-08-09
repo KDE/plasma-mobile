@@ -25,6 +25,7 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.locale 0.1 as KLocale
 import org.kde.qtextracomponents 0.1
 
+//FIXME: remove this folder as soon PA3 is branched
 import "kde-runtime-4.10"
 
 Item {
@@ -77,6 +78,7 @@ Item {
         id: locale
     }
 
+    //FIXME: as soon as PA3 is branched, this should become PlasmaExtras.PageRow
     PageRow {
         id: pageRow
         anchors.fill: parent
