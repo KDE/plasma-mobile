@@ -150,7 +150,6 @@ PlasmaComponents.Sheet {
             PlasmaComponents.TextField {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
-                Component.onCompleted: activityNameEdit.forceActiveFocus()
                 anchors.verticalCenter: parent.verticalCenter
                 Keys.onReturnPressed: {
                     accept()
