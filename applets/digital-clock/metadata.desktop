@@ -1,7 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Digital clock
+Name[pt_BR]=Relógio digital
+Name[uk]=Цифровий годинник
+Name[x-test]=xxDigital clockxx
 Comment=Time displayed in a digital format
+Comment[pt]=A hora apresentada num formato digital
+Comment[pt_BR]=Hora exibida em formato digital
+Comment[uk]=Час, показаний у цифровому форматі
+Comment[x-test]=xxTime displayed in a digital formatxx
 
 Type=Service
 Icon=clock
