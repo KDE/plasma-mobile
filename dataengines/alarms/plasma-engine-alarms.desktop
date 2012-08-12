@@ -1,10 +1,14 @@
 [Desktop Entry]
 Name=Alarms
+Name[da]=Alarmer
+Name[nl]=Herinneringen
 Name[pt]=Alarmes
 Name[pt_BR]=Alarmes
 Name[uk]=Нагадування
 Name[x-test]=xxAlarmsxx
 Comment=List and set Akonadi Alarms
+Comment[da]=Oplist og sæt Akonadi-alarmer
+Comment[nl]=Maak een lijst van Akonadi herinneringen en stel deze in
 Comment[pt_BR]=Lista e define alarmes do Akonadi
 Comment[uk]=Показ списку і внесення змін до нагадувань Akonadi
 Comment[x-test]=xxList and set Akonadi Alarmsxx

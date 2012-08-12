@@ -1,10 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Digital clock
+Name[da]=Digitalt ur
+Name[nl]=Digitale klok
 Name[pt_BR]=Relógio digital
 Name[uk]=Цифровий годинник
 Name[x-test]=xxDigital clockxx
 Comment=Time displayed in a digital format
+Comment[da]=Tiden vist i et digitalt format
+Comment[nl]=Tijd weergegeven in een digitale opmaak
 Comment[pt]=A hora apresentada num formato digital
 Comment[pt_BR]=Hora exibida em formato digital
 Comment[uk]=Час, показаний у цифровому форматі

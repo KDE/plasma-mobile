@@ -1,11 +1,15 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Alarms
+Name[da]=Alarmer
+Name[nl]=Herinneringen
 Name[pt]=Alarmes
 Name[pt_BR]=Alarmes
 Name[uk]=Нагадування
 Name[x-test]=xxAlarmsxx
 Comment=Alarms setup tool
+Comment[da]=Opsætningsværktøj til alarmer
+Comment[nl]=Hulpmiddel voor instellen van herinneringen
 Comment[pt_BR]=Ferramenta de configuração de alarmes
 Comment[uk]=Програма для налаштовування нагадувань
 Comment[x-test]=xxAlarms setup toolxx
