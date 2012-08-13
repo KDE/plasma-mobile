@@ -90,7 +90,7 @@ Item {
             plasmoidContainer.applet = applet
             return
 
-        } else if (applet.pluginName == "digital-clock") {
+        } else if (applet.pluginName == "org.kde.digital-clock" || applet.pluginName == "digital-clock") {
             var plasmoidContainer = component.createObject(rightPanel);
             plasmoidContainer.parent = centerPanel
             plasmoidContainer.anchors.top = centerPanel.top
