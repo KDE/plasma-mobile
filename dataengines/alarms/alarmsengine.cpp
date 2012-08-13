@@ -20,9 +20,12 @@
 #include "alarmsengine.h"
 #include "alarmcontainer.h"
 #include "alarmsservice.h"
+#include "calendarcreator.h"
 
 #include <KJob>
 
+#include <Akonadi/AgentInstance>
+#include <Akonadi/AgentManager>
 #include <Akonadi/AttributeFactory>
 #include <Akonadi/ChangeRecorder>
 #include <Akonadi/Session>
@@ -67,16 +70,46 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
             SLOT(itemRemoved(Akonadi::Item)) );
 
 
-    Akonadi::Collection alarmCollection(Akonadi::Collection::root());
-    alarmCollection.setContentMimeTypes(QStringList() << KAlarmCal::MIME_ACTIVE);
+    //TODO: be really sure what alarm collections are missing
+    bool agentFound = false;
+    Akonadi::AgentInstance::List agents = Akonadi::AgentManager::self()->instances();
+    foreach (const Akonadi::AgentInstance& agent, agents)
+    {
+        QString type = agent.type().identifier();
+        if (type == QLatin1String("akonadi_kalarm_resource")
+        ||  type == QLatin1String("akonadi_kalarm_dir_resource")) {
+            agentFound = true;
+        }
+    }
 
-    Akonadi::CollectionFetchJob* fetch = new Akonadi::CollectionFetchJob( alarmCollection, Akonadi::CollectionFetchJob::Recursive);
-    connect( fetch, SIGNAL(result(KJob*)), SLOT(fetchAlarmsCollectionsDone(KJob*)) );
+    //need to create the agent
+    if (agentFound) {
+        Akonadi::Collection alarmCollection(Akonadi::Collection::root());
+        alarmCollection.setContentMimeTypes(QStringList() << KAlarmCal::MIME_ACTIVE);
+
+        Akonadi::CollectionFetchJob* fetch = new Akonadi::CollectionFetchJob( alarmCollection, Akonadi::CollectionFetchJob::Recursive);
+        connect( fetch, SIGNAL(result(KJob*)), SLOT(fetchAlarmsCollectionsDone(KJob*)) );
+
+    } else {
+        CalendarCreator *creator = new CalendarCreator(CalEvent::ACTIVE, QLatin1String("calendar.ics"), i18nc("@info/plain", "Active Alarms"));
+        connect(creator, SIGNAL(finished(CalendarCreator*)), SLOT(calendarCreated(CalendarCreator*)));
+        //connect(creator, SIGNAL(creating(QString)), SLOT(creatingCalendar(QString)));
+        creator->createAgent(QLatin1String("akonadi_kalarm_resource"), this);
+    }
 }
 
 
 AlarmsEngine::~AlarmsEngine()
 {
+}
+
+void AlarmsEngine::calendarCreated(CalendarCreator *creator)
+{
+    Akonadi::Collection alarmCollection(Akonadi::Collection::root());
+    alarmCollection.setContentMimeTypes(QStringList() << KAlarmCal::MIME_ACTIVE);
+
+    Akonadi::CollectionFetchJob* fetch = new Akonadi::CollectionFetchJob( alarmCollection, Akonadi::CollectionFetchJob::Recursive);
+    connect( fetch, SIGNAL(result(KJob*)), SLOT(fetchAlarmsCollectionsDone(KJob*)) );
 }
 
 void AlarmsEngine::collectionChanged(Akonadi::Collection,QSet<QByteArray>)
@@ -123,6 +156,7 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
     } else {
         Akonadi::CollectionFetchJob* cjob = static_cast<Akonadi::CollectionFetchJob*>( job );
         int i = 0;
+
         //normally this loop should be a single one
         foreach( const Akonadi::Collection &collection, cjob->collections() ) {
             if (collection.contentMimeTypes().contains(KAlarmCal::MIME_ACTIVE)) {

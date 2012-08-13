@@ -12,7 +12,12 @@ set(alarmsengine_srcs
     alarmsengine.cpp
     alarmsjob.cpp
     alarmsservice.cpp
+    calendarcreator.cpp
 )
+
+#kcfg_generate_dbus_interface(${CMAKE_CURRENT_SOURCE_DIR}/kalarmresource.kcfg org.kde.Akonadi.KAlarm.Settings)
+qt4_add_dbus_interface(alarmsengine_srcs org.kde.Akonadi.KAlarm.Settings.xml kalarmsettings KAlarmSettings)
+qt4_add_dbus_interface(alarmsengine_srcs org.kde.Akonadi.KAlarmDir.Settings.xml kalarmdirsettings KAlarmDirSettings)
 
 kde4_add_plugin(plasma_engine_alarms ${alarmsengine_srcs})
 

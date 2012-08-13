@@ -29,6 +29,8 @@
 
 #include <kalarmcal/kaevent.h>
 
+class CalendarCreator;
+
 class KJob;
 
 class AlarmsEngine : public Plasma::DataEngine
@@ -45,6 +47,7 @@ protected:
     void createContainer(const KAlarmCal::KAEvent &event);
 
 protected Q_SLOTS:
+    void calendarCreated(CalendarCreator *creator);
     void collectionChanged(Akonadi::Collection,QSet<QByteArray>);
     void collectionRemoved(Akonadi::Collection);
     void itemAdded(Akonadi::Item, Akonadi::Collection);
