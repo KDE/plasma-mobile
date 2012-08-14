@@ -82,6 +82,7 @@ Item {
             titleText: i18n("Alarm")
             content: Column {
                 width: theme.defaultFont.mSize.width * 30
+                height: Math.max(implicitHeight, theme.defaultFont.mSize.height * 8)
                 PlasmaComponents.Label {
                     text: dialog.alarmData["message"]
                     width: parent.width
