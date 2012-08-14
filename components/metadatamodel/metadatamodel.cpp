@@ -589,7 +589,7 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         m_cachedResources[resource][ResourceType] = resource.resourceType();
         m_cachedResources[resource][IsFile] = resource.isFile();
        // m_cachedResources[resource][MimeType] = resource.mimeType();
-        m_cachedResources[resource][MimeType] = resource.property(propertyUrl("nfo:mimeType")).toString();
+        m_cachedResources[resource][MimeType] = resource.property(propertyUrl("nie:mimeType")).toString();
 
         //FIXME: The most complicated of all, this should really be simplified
         {

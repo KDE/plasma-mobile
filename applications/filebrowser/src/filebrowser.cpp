@@ -68,9 +68,13 @@ FileBrowser::~FileBrowser()
 
 QString FileBrowser::packageForMimeType(const QString &mimeType)
 {
-     KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("'%1' in MimeTypes").arg(mimeType));
+    if (mimeType.isEmpty()) {
+        return QString();
+    }
 
-     foreach (const KService::Ptr &service, services) {
+    KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("'%1' in MimeTypes").arg(mimeType));
+
+    foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
             continue;
         }
