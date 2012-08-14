@@ -16,7 +16,7 @@ Comment[uk]=Програма для налаштовування нагадув�
 Comment[x-test]=xxAlarms setup toolxx
 
 Type=Service
-Icon=kalarm
+Icon=kalarm-active
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Category=Tasks

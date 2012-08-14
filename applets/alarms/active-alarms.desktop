@@ -16,6 +16,6 @@ Comment[x-test]=xxA tool to setup visual and audio alarms for tabletsxx
 
 Exec=export PLASMA_CUSTOM_PREFIX_PATHS=platformcontents/application/generic/:platformcontents/application/tablet/:contents/ && plasma-windowed -graphicssystem raster org.kde.active.alarms
 Terminal=false
-Icon=kalarm
+Icon=kalarm-active
 Type=Application
 Categories=Qt;KDE;Utility;X-KDE-Utilities-PIM;
