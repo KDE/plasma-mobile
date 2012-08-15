@@ -5,6 +5,7 @@ Name[da]=Digitalt ur
 Name[nl]=Digitale klok
 Name[pt]=Relógio digital
 Name[pt_BR]=Relógio digital
+Name[sv]=Digitalklocka
 Name[uk]=Цифровий годинник
 Name[x-test]=xxDigital clockxx
 Comment=Time displayed in a digital format
@@ -12,6 +13,7 @@ Comment[da]=Tiden vist i et digitalt format
 Comment[nl]=Tijd weergegeven in een digitale opmaak
 Comment[pt]=A hora apresentada num formato digital
 Comment[pt_BR]=Hora exibida em formato digital
+Comment[sv]=Tid visat med ett digitalt format
 Comment[uk]=Час, показаний у цифровому форматі
 Comment[x-test]=xxTime displayed in a digital formatxx
 
