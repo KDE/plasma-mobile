@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Alarms
 Name[da]=Alarmer
+Name[it]=Avvisi
 Name[nl]=Herinneringen
 Name[pt]=Alarmes
 Name[pt_BR]=Alarmes
@@ -9,6 +10,7 @@ Name[uk]=Нагадування
 Name[x-test]=xxAlarmsxx
 Comment=List and set Akonadi Alarms
 Comment[da]=Oplist og sæt Akonadi-alarmer
+Comment[it]=Elenca ed imposta gli avvisi di Akonadi
 Comment[nl]=Maak een lijst van Akonadi herinneringen en stel deze in
 Comment[pt]=Apresenta e configura os alarmes do Akonadi
 Comment[pt_BR]=Lista e define alarmes do Akonadi
