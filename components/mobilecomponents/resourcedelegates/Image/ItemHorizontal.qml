@@ -25,26 +25,17 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
 
-Column {
+Item {
     id: resourceItem
     anchors.horizontalCenter: parent.horizontalCenter
 
-    Item {
-        id: iconContainer
-        height: roundToStandardSize(delegateItem.height - previewLabel.height)
-        width: resourceItem.width
 
-        QIconItem {
-            id: iconItem
-            width: height
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-                bottom: parent.bottom
-            }
-            icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
-            visible: !previewFrame.visible
+    Item {
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
         }
+        width: Math.min(resourceItem.width, height * 1.6)
 
         PlasmaCore.FrameSvgItem {
             id: previewFrame
@@ -61,7 +52,8 @@ Column {
             id: previewImage
             visible: previewFrame.visible
             image: thumbnail == undefined ? null : thumbnail
-                fillMode: QImageItem.PreserveAspectCrop
+            fillMode: QImageItem.PreserveAspectCrop
+
             anchors {
                 fill: parent
 
@@ -73,20 +65,37 @@ Column {
         }
     }
 
-    PlasmaComponents.Label {
-        id: previewLabel
-        text: label
-        height: paintedHeight
 
-        //wrapMode: Text.Wrap
-        horizontalAlignment: Text.AlignHCenter
-        elide: Text.ElideRight
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-        }
+    Column {
+        anchors.centerIn: parent
         width: resourceItem.width
-        style: Text.Outline
-        styleColor: Qt.rgba(1, 1, 1, 0.6)
+        visible: !previewFrame.visible
+
+        QIconItem {
+            id: iconItem
+            height: roundToStandardSize(delegateItem.height - previewLabel.height)
+            width: height
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+            }
+            icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
+        }
+
+        PlasmaComponents.Label {
+            id: previewLabel
+            text: label
+            height: paintedHeight
+
+            //wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+            }
+            width: resourceItem.width
+            style: Text.Outline
+            styleColor: Qt.rgba(1, 1, 1, 0.6)
+        }
     }
 }
 
