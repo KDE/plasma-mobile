@@ -88,20 +88,6 @@ Rectangle {
                 id: thumbnailImage
                 anchors.fill: parent
                 fillMode: QImageItem.PreserveAspectCrop
-                width: {
-                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                            return parent.width
-                        } else {
-                            return parent.height * (nativeWidth/nativeHeight)
-                        }
-                    }
-                height: {
-                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                        return parent.width / (nativeWidth/nativeHeight)
-                    } else {
-                        return parent.height
-                    }
-                }
 
                 image: thumbnail
 
