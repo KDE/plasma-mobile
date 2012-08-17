@@ -51,15 +51,17 @@ Column {
             imagePath: "widgets/media-delegate"
             prefix: "picture"
 
-            height: previewImage.height + previewArea.anchors.topMargin + previewArea.anchors.bottomMargin
-            width: previewImage.width + previewArea.anchors.leftMargin + previewArea.anchors.rightMargin
+            height: previewImage.height + previewImage.anchors.topMargin + previewImage.anchors.bottomMargin
+            width: previewImage.width + previewImage.anchors.leftMargin + previewImage.anchors.rightMargin
             visible: thumbnail != undefined
-            anchors.centerIn: previewArea
+            anchors.centerIn: previewImage
         }
 
-        Item {
-            id: previewArea
+        QImageItem {
+            id: previewImage
             visible: previewFrame.visible
+            image: thumbnail == undefined ? null : thumbnail
+                fillMode: QImageItem.PreserveAspectCrop
             anchors {
                 fill: parent
 
@@ -67,15 +69,6 @@ Column {
                 topMargin: Math.round(Math.min(previewFrame.margins.top, parent.height/6))
                 rightMargin: Math.round(Math.min(previewFrame.margins.right, parent.height/6))
                 bottomMargin: Math.round(Math.min(previewFrame.margins.bottom, parent.height/6))
-            }
-
-            QImageItem {
-                id: previewImage
-                anchors.centerIn: parent
-                image: thumbnail == undefined ? null : thumbnail
-
-                width: parent.height * (nativeWidth/nativeHeight)
-                height: parent.height
             }
         }
     }
