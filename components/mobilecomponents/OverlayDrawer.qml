@@ -20,6 +20,7 @@
 import QtQuick 1.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.qtextracomponents 0.1
 
 
 /**Documented API
@@ -55,7 +56,17 @@ PlasmaComponents.Page {
 
     MouseEventListener {
         id: mainPage
+        property int startMouseScreenX: 0
+        property int startMouseScreenY: 0
+        onPressed: {
+            startMouseScreenX = mouse.screenX
+            startMouseScreenY = mouse.screenY
+        }
         onReleased: {
+            if (Math.abs(mouse.screenX - startMouseScreenX) > 20 ||
+                Math.abs(mouse.screenY - startMouseScreenY) > 20) {
+                return
+            }
             if (browserFrame.state != "Hidden") {
                 browserFrame.state = "Hidden"
             } else {
@@ -74,9 +85,24 @@ PlasmaComponents.Page {
             top: parent.top
             bottom: parent.bottom
         }
+
         width: parent.width - handleGraphics.width
         state: "Hidden"
-        property bool open: state == "Open"
+        onStateChanged: open = (state == "Open" || mouseEventListener.startState == "Open")
+        property bool open: false
+        onOpenChanged: openChangedTimer.restart()
+
+        Timer {
+            id: openChangedTimer
+            interval: 0
+            onTriggered: {
+                if (open) {
+                    browserFrame.state = "Open"
+                } else {
+                    browserFrame.state = "Closed"
+                }
+            }
+        }
 
 
         Image {
@@ -123,7 +149,7 @@ PlasmaComponents.Page {
 
             property int startBrowserFrameX
             property real oldMouseScreenX
-            property bool toggle: true
+            property bool toggle: false
             property bool startDragging: false
             property string startState
 
@@ -135,6 +161,7 @@ PlasmaComponents.Page {
                 startDragging = false
                 startState = browserFrame.state
                 browserFrame.state = "Dragging"
+                toggle = mouse.x < handleGraphics.width
             }
             onPositionChanged: {
                 //mouse over handle and didn't move much
@@ -142,7 +169,6 @@ PlasmaComponents.Page {
                     Math.abs(mouse.screenX - startMouseScreenX) > 20) {
                     toggle = false
                 }
-
                 if (mouse.x < handleGraphics.width ||
                     Math.abs(mouse.screenX - startMouseScreenX) > root.width / 5) {
                     startDragging = true
@@ -165,8 +191,9 @@ PlasmaComponents.Page {
                 id: drawerPage
                 anchors {
                     fill: parent
-                    leftMargin: handleGraphics.width + 10
+                    leftMargin: handleGraphics.width
                 }
+                clip: true
             }
         }
 

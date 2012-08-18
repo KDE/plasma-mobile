@@ -150,7 +150,6 @@ PlasmaComponents.Sheet {
             PlasmaComponents.TextField {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
-                Component.onCompleted: activityNameEdit.forceActiveFocus()
                 anchors.verticalCenter: parent.verticalCenter
                 Keys.onReturnPressed: {
                     accept()
@@ -232,8 +231,8 @@ PlasmaComponents.Sheet {
                 currentPage = Math.max(0, Math.floor(currentIndex/pageSize))
             }
 
-            property int delegateWidth: 148
-            property int delegateHeight: 130
+            property int delegateWidth: theme.defaultFont.mSize.width * 20
+            property int delegateHeight: delegateWidth/1.6 + theme.defaultFont.mSize.height*2
             anchors {
                 top: nameRow.bottom
                 left: parent.left

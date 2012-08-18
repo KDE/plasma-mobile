@@ -131,7 +131,7 @@ Item {
         }
 
 
-        TimePicker {
+        MobileComponents.TimePicker {
             id: timePicker
             enabled: !ntpCheckBox.checked
 
@@ -139,11 +139,59 @@ Item {
                 right: datePicker.left
                 rightMargin: theme.defaultFont.mSize.width
             }
+            Component.onCompleted: {
+                var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+                timePicker.hours = date.getHours()
+                timePicker.minutes = date.getMinutes()
+                timePicker.seconds = date.getSeconds()
+            }
+            Connections {
+                target: timeSettings
+                onCurrentTimeChanged: {
+                    if (timePicker.userConfiguring) {
+                        return
+                    }
+
+                    var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+                    timePicker.hours = date.getHours()
+                    timePicker.minutes = date.getMinutes()
+                    timePicker.seconds = date.getSeconds()
+                }
+            }
+            onUserConfiguringChanged: {
+                timeSettings.currentTime = timeString
+                timeSettings.saveTime()
+            }
         }
 
-        DatePicker {
+        MobileComponents.DatePicker {
             id: datePicker
             enabled: !ntpCheckBox.checked
+            Component.onCompleted: {
+                var date = new Date(timeSettings.currentDate)
+                datePicker.day = date.getDate()
+                datePicker.month = date.getMonth()+1
+                datePicker.year = date.getFullYear()
+            }
+            Connections {
+                target: timeSettings
+                onCurrentDateChanged: {
+                    if (datePicker.userConfiguring) {
+                        return
+                    }
+
+                    var date = new Date(timeSettings.currentDate)
+
+                    datePicker.day = date.getDate()
+                    datePicker.month = date.getMonth()+1
+                    datePicker.year = date.getFullYear()
+                }
+            }
+            onUserConfiguringChanged: {
+                timeSettings.currentDate = isoDate
+
+                timeSettings.saveTime()
+            }
         }
     }
 

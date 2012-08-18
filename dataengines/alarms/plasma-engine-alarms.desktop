@@ -1,0 +1,32 @@
+[Desktop Entry]
+Name=Alarms
+Name[da]=Alarmer
+Name[it]=Avvisi
+Name[nl]=Herinneringen
+Name[pt]=Alarmes
+Name[pt_BR]=Alarmes
+Name[sv]=Alarm
+Name[uk]=Нагадування
+Name[x-test]=xxAlarmsxx
+Comment=List and set Akonadi Alarms
+Comment[da]=Oplist og sæt Akonadi-alarmer
+Comment[it]=Elenca ed imposta gli avvisi di Akonadi
+Comment[nl]=Maak een lijst van Akonadi herinneringen en stel deze in
+Comment[pt]=Apresenta e configura os alarmes do Akonadi
+Comment[pt_BR]=Lista e define alarmes do Akonadi
+Comment[sv]=Lista och ställ in Akonadi-alarm
+Comment[uk]=Показ списку і внесення змін до нагадувань Akonadi
+Comment[x-test]=xxList and set Akonadi Alarmsxx
+X-KDE-ServiceTypes=Plasma/DataEngine
+Type=Service
+Icon=kalarm
+X-KDE-Library=plasma_engine_alarms
+
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=mart@kde.org
+X-KDE-PluginInfo-Name=org.kde.alarms
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://kde.org
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+

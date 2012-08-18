@@ -381,7 +381,7 @@ void MetadataCloudModel::entriesRemoved(const QList<QUrl> &urls)
             }
             ++i;
         }
-        if (index >= 0) {
+        if (index >= 0 && index < m_results.size()) {
             beginRemoveRows(QModelIndex(), index, index);
             m_results.remove(index);
             endRemoveRows();

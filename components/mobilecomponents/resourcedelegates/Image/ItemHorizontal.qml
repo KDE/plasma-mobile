@@ -25,41 +25,35 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
 
-Column {
+Item {
     id: resourceItem
     anchors.horizontalCenter: parent.horizontalCenter
 
-    Item {
-        id: iconContainer
-        height: roundToStandardSize(delegateItem.height - previewLabel.height)
-        width: resourceItem.width
 
-        QIconItem {
-            id: iconItem
-            width: height
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-                bottom: parent.bottom
-            }
-            icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
-            visible: !previewFrame.visible
+    Item {
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
         }
+        width: Math.min(resourceItem.width, height * 1.6)
 
         PlasmaCore.FrameSvgItem {
             id: previewFrame
             imagePath: "widgets/media-delegate"
             prefix: "picture"
 
-            height: previewImage.height + previewArea.anchors.topMargin + previewArea.anchors.bottomMargin
-            width: previewImage.width + previewArea.anchors.leftMargin + previewArea.anchors.rightMargin
+            height: previewImage.height + previewImage.anchors.topMargin + previewImage.anchors.bottomMargin
+            width: previewImage.width + previewImage.anchors.leftMargin + previewImage.anchors.rightMargin
             visible: thumbnail != undefined
-            anchors.centerIn: previewArea
+            anchors.centerIn: previewImage
         }
 
-        Item {
-            id: previewArea
+        QImageItem {
+            id: previewImage
             visible: previewFrame.visible
+            image: thumbnail == undefined ? null : thumbnail
+            fillMode: QImageItem.PreserveAspectCrop
+
             anchors {
                 fill: parent
 
@@ -68,32 +62,40 @@ Column {
                 rightMargin: Math.round(Math.min(previewFrame.margins.right, parent.height/6))
                 bottomMargin: Math.round(Math.min(previewFrame.margins.bottom, parent.height/6))
             }
-
-            QImageItem {
-                id: previewImage
-                anchors.centerIn: parent
-                image: thumbnail == undefined ? null : thumbnail
-
-                width: parent.height * (nativeWidth/nativeHeight)
-                height: parent.height
-            }
         }
     }
 
-    PlasmaComponents.Label {
-        id: previewLabel
-        text: label
-        height: paintedHeight
 
-        //wrapMode: Text.Wrap
-        horizontalAlignment: Text.AlignHCenter
-        elide: Text.ElideRight
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-        }
+    Column {
+        anchors.centerIn: parent
         width: resourceItem.width
-        style: Text.Outline
-        styleColor: Qt.rgba(1, 1, 1, 0.6)
+        visible: !previewFrame.visible
+
+        QIconItem {
+            id: iconItem
+            height: roundToStandardSize(delegateItem.height - previewLabel.height)
+            width: height
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+            }
+            icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
+        }
+
+        PlasmaComponents.Label {
+            id: previewLabel
+            text: label
+            height: paintedHeight
+
+            //wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideRight
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+            }
+            width: resourceItem.width
+            style: Text.Outline
+            styleColor: Qt.rgba(1, 1, 1, 0.6)
+        }
     }
 }
 

@@ -109,7 +109,6 @@ Item {
         anchors.centerIn: parent
         spacing: theme.defaultFont.mSize.height
 
-        /**TODO: this needs the QML battery plasmoid branch merged in workspace
         PlasmaExtras.Heading {
             text: i18n("Brightness")
             level: 2
@@ -122,13 +121,14 @@ Item {
             }
             property int brightness: pmSource.data["PowerDevil"]["Screen Brightness"]
             onBrightnessChanged: brightnessSlider.value = brightness
-            
+
             PlasmaComponents.Slider {
                 id: brightnessSlider
                 onValueChanged: {
                     var service = pmSource.serviceForSource("PowerDevil");
                     var operation = service.operationDescription("setBrightness");
-                    operation.brightness = value;
+
+                    operation.brightness = Math.round(value*100);
                     service.startOperationCall(operation);
                 }
             }
@@ -136,7 +136,7 @@ Item {
                 text: i18n("100%")
             }
         }
-        */
+
 
         PlasmaExtras.Heading {
             text: i18n("Lock screen")

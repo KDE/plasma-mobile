@@ -87,10 +87,12 @@ MobileComponents.IconGrid {
                 item["resourceUri"] = model["resourceUri"]
                 //this is to make the app runner work
                 if (!item["resourceUri"]) {
-                    item["resourceUri"] = model["id"]
+                    item["resourceUri"] = model["data"]
                 }
 
-
+for (i in model) {
+    print("AAAAAAA"+i+" "+model[i])
+}
                 selectedModel.append(item)
                 highlightFrame.opacity = 1
             }

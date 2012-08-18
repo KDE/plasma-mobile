@@ -65,7 +65,7 @@ Rectangle {
                     easing.type: Easing.InOutQuad
                 }
             }
-            width: height*1.6
+            width: height
             height: thumbnailsView.height
             Rectangle {
                 width: (index == thumbnailsView.currentIndex) ? thumbnailImage.width + 10 : thumbnailImage.width
@@ -86,21 +86,8 @@ Rectangle {
             }
             QImageItem {
                 id: thumbnailImage
-                anchors.centerIn: parent
-                width: {
-                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                            return parent.width
-                        } else {
-                            return parent.height * (nativeWidth/nativeHeight)
-                        }
-                    }
-                height: {
-                    if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                        return parent.width / (nativeWidth/nativeHeight)
-                    } else {
-                        return parent.height
-                    }
-                }
+                anchors.fill: parent
+                fillMode: QImageItem.PreserveAspectCrop
 
                 image: thumbnail
 

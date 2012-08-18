@@ -1,0 +1,37 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Digital clock
+Name[da]=Digitalt ur
+Name[it]=Orologio digitale
+Name[nl]=Digitale klok
+Name[pt]=Relógio digital
+Name[pt_BR]=Relógio digital
+Name[sv]=Digitalklocka
+Name[uk]=Цифровий годинник
+Name[x-test]=xxDigital clockxx
+Comment=Time displayed in a digital format
+Comment[da]=Tiden vist i et digitalt format
+Comment[it]=Ora indicata in formato digitale
+Comment[nl]=Tijd weergegeven in een digitale opmaak
+Comment[pt]=A hora apresentada num formato digital
+Comment[pt_BR]=Hora exibida em formato digital
+Comment[sv]=Tid visat med ett digitalt format
+Comment[uk]=Час, показаний у цифровому форматі
+Comment[x-test]=xxTime displayed in a digital formatxx
+
+Type=Service
+Icon=clock
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Category=Date and Time
+X-KDE-PluginInfo-Email=mart@kde.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.digital-clock
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-DefaultSize=100,32
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-RequiredExtensions=LaunchApp
+
