@@ -90,9 +90,6 @@ MobileComponents.IconGrid {
                     item["resourceUri"] = model["data"]
                 }
 
-for (i in model) {
-    print("AAAAAAA"+i+" "+model[i])
-}
                 selectedModel.append(item)
                 highlightFrame.opacity = 1
             }
