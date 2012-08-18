@@ -72,16 +72,17 @@ void MetadataJob::start()
             fileRes.setDescription(resourceUrl);
             fileRes.setProperty(QUrl::fromEncoded("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#bookmarks"), resourceUrl);
         } else if (resourceUrl.endsWith(QLatin1String(".desktop"))) {
-            typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Application");
-            fileRes.addType(typeUrl);
-            KService::Ptr service = KService::serviceByDesktopPath(QUrl(resourceUrl).path());
+            KService::Ptr service = KService::serviceByStorageId(resourceUrl);
             if (service) {
+                fileRes = Nepomuk::Resource(service->entryPath());
+                typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Application");
+                fileRes.addType(typeUrl);
                 fileRes.setLabel(service->name());
                 fileRes.addSymbol(service->icon());
             }
         }
 
-        info->linkResource(resourceUrl);
+        info->linkResource(fileRes.uri());
         info->deleteLater();
         setResult(true);
         return;
