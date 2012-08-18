@@ -82,7 +82,7 @@ void MetadataJob::start()
             }
         }
 
-        info->linkResource(fileRes.uri());
+        info->linkResource(fileRes.resourceUri());
         info->deleteLater();
         setResult(true);
         return;
