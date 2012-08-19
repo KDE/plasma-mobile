@@ -197,6 +197,7 @@ MobileComponents.Sheet {
         },
         Row {
             id: encryptRow
+            visible: false
             anchors {
                 bottom: parent.bottom
                 horizontalCenter: parent.horizontalCenter
