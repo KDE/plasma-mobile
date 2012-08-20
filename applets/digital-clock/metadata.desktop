@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Digital clock
 Name[da]=Digitalt ur
+Name[fr]=Horloge numérique
 Name[it]=Orologio digitale
 Name[nl]=Digitale klok
 Name[pt]=Relógio digital
@@ -11,6 +12,7 @@ Name[uk]=Цифровий годинник
 Name[x-test]=xxDigital clockxx
 Comment=Time displayed in a digital format
 Comment[da]=Tiden vist i et digitalt format
+Comment[fr]=Heure affichée dans un format numérique
 Comment[it]=Ora indicata in formato digitale
 Comment[nl]=Tijd weergegeven in een digitale opmaak
 Comment[pt]=A hora apresentada num formato digital

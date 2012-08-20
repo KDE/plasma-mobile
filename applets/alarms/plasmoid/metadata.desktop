@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Alarms
 Name[da]=Alarmer
+Name[fr]=Alarmes
 Name[it]=Avvisi
 Name[nl]=Herinneringen
 Name[pt]=Alarmes
@@ -11,6 +12,7 @@ Name[uk]=Нагадування
 Name[x-test]=xxAlarmsxx
 Comment=Alarms setup tool
 Comment[da]=Opsætningsværktøj til alarmer
+Comment[fr]=Outil de configuration d'alarmes
 Comment[it]=Strumento per impostare allarmi
 Comment[nl]=Hulpmiddel voor instellen van herinneringen
 Comment[pt]=Ferramenta de configuração de alarmes
