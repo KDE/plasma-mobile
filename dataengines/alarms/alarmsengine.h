@@ -59,6 +59,7 @@ protected Q_SLOTS:
 private:
     Akonadi::Collection m_collection;
     QWeakPointer<Plasma::Service> m_service;
+    int m_collectionJobs;
 };
 
 #endif
