@@ -82,30 +82,55 @@ PlasmaComponents.Page {
         fillMode: Image.Tile
         anchors.fill: parent
 
-        MobileComponents.IconGrid {
-            id: introGrid
-            anchors.fill: parent
+        Flow {
+            id: introFlow
+            anchors.centerIn: parent
+            width: Math.min(parent.width, delegateWidth*children.length)
 
-            model: MetadataModels.MetadataCloudModel {
-                cloudCategory: "rdf:type"
-                resourceType: "nfo:FileDataObject"
-                minimumRating: metadataModel.minimumRating
-                allowedCategories: userTypes.userTypes.filter(function(val) {
-                    return val != "nfo:Application";
-                })
+            property int orientation: ListView.Horizontal
+            property int delegateWidth: theme.defaultFont.mSize.width * 15
+            property int delegateHeight: theme.defaultIconSize + theme.defaultFont.mSize.height + 8
+
+            Repeater {
+
+                model: MetadataModels.MetadataCloudModel {
+                    cloudCategory: "rdf:type"
+                    resourceType: "nfo:FileDataObject"
+                    minimumRating: metadataModel.minimumRating
+                    allowedCategories: userTypes.userTypes.filter(function(val) {
+                        return val != "nfo:Application";
+                    })
+                }
+
+                delegate: MobileComponents.ResourceDelegate {
+                    className: "FileDataObject"
+                    genericClassName: "FileDataObject"
+                    property string decoration: iconFor(model["label"])
+
+                    property string label: i18n("%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
+
+                    width: introFlow.delegateWidth
+                    height: introFlow.delegateHeight
+
+                    onClicked: push(model["label"])
+                }
             }
 
-            delegate: MobileComponents.ResourceDelegate {
+            MobileComponents.ResourceDelegate {
                 className: "FileDataObject"
                 genericClassName: "FileDataObject"
-                property string decoration: iconFor(model["label"])
+                property string decoration: "preferences-activities"
 
-                property string label: i18n("%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
+                property string label: i18n("Current activity")
 
-                width: introGrid.delegateWidth
-                height: introGrid.delegateHeight
+                width: introFlow.delegateWidth
+                height: introFlow.delegateHeight
 
-                onClicked: push(model["label"])
+                onClicked: {
+                    var page = mainStack.push(Qt.createComponent("Browser.qml"))
+                    metadataModel.resourceType = "nfo:FileDataObject"
+                    metadataModel.activityId = activitySource.data.Status.Current
+                }
             }
         }
     }

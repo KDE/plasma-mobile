@@ -20,6 +20,7 @@
 import QtQuick 1.1
 import org.kde.dirmodel 0.1
 import org.kde.metadatamodels 0.1 as MetadataModels
+import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
@@ -55,6 +56,11 @@ Image {
         //queryString: "pdf"
         resourceType: exclusiveResourceType
         mimeTypes: exclusiveMimeTypes
+    }
+    PlasmaCore.DataSource {
+        id: activitySource
+        engine: "org.kde.activities"
+        connectedSources: ["Status"]
     }
     DirModel {
         id: dirModel

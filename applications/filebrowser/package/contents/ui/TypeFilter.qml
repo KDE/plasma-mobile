@@ -61,6 +61,7 @@ Column {
             buttonColumn.exclusive = true
         }
     }
+
     PlasmaComponents.ButtonColumn {
         id: buttonColumn
         spacing: 4
@@ -83,6 +84,25 @@ Column {
                     if (checked) {
                         metadataModel.resourceType = model["label"]
                     }
+                }
+            }
+        }
+        PlasmaExtraComponents.Heading {
+            text: i18n("Activity")
+            anchors {
+                right: parent.right
+                rightMargin: -(parent.parent.width - parent.width) + theme.defaultFont.mSize.width*2
+            }
+        }
+        PlasmaComponents.RadioButton {
+            text: i18n("Current activity")
+            checked: metadataModel.activityId == activitySource.data.Status.Current
+            onCheckedChanged: {
+                if (checked) {
+                    metadataModel.resourceType = "nfo:FileDataObject"
+                    metadataModel.activityId = activitySource.data.Status.Current
+                } else {
+                    metadataModel.activityId = ""
                 }
             }
         }
