@@ -1,7 +1,9 @@
 [Desktop Entry]
 Name=Alarms
+Name[cs]=Alarmy
 Name[da]=Alarmer
 Name[fr]=Alarmes
+Name[hu]=Riasztások
 Name[it]=Avvisi
 Name[nl]=Herinneringen
 Name[pt]=Alarmes
@@ -13,6 +15,7 @@ Name[x-test]=xxAlarmsxx
 Comment=A tool to setup visual and audio alarms for tablets
 Comment[da]=Et værktøj til at sætte visuelle og lydalarmer op til tablet-pc'er
 Comment[fr]=Un outil pour configurer des alarmes audio et vidéo pour les tablettes
+Comment[hu]=Egy eszköz látható és hangriasztások beállításához tabletekhez
 Comment[it]=Uno strumento per impostare allarmi, visivi e audio, per tablet
 Comment[nl]=Een hulpmiddel om visuele en geluidsherinneringen voor tablets in te stellen
 Comment[pt]=Uma ferramenta para configurar alarmes visuais e sonoros nas tabletes

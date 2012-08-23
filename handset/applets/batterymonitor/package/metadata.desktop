@@ -24,6 +24,7 @@ Comment[x-test]=xxSimple battery monitorxx
 Comment[zh_TW]=簡單電池監視器
 Encoding=UTF-8
 Keywords=Power Management, Battery, System, Energy
+Keywords[cs]=Správa napájení, Baterie, Systém, Energie
 Keywords[da]=Strømstyring, battery, system, energi
 Keywords[de]=Energieverwaltungssystem,Akku,System,Energie
 Keywords[el]=Διαχείριση τροφοδοσίας, μπαταρία, σύστημα, ενέργεια
