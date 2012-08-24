@@ -82,7 +82,15 @@ void MetadataJob::start()
             }
         }
 
-        info->linkResource(fileRes.resourceUri());
+        Nepomuk::Variant urlProp = fileRes.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url"));
+
+        kDebug() << "Linking Resource, uri:" << fileRes.resourceUri() << "has an url:" << urlProp.isUrl() << "value:" << urlProp.toUrl();
+
+        if (urlProp.isUrl()) {
+            info->linkResource(urlProp.toUrl());
+        } else {
+            info->linkResource(fileRes.resourceUri());
+        }
         info->deleteLater();
         setResult(true);
         return;
