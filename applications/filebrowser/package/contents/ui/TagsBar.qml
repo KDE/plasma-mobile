@@ -291,11 +291,17 @@ PlasmaComponents.Page {
 
         titleText: i18n("New tag name")
         buttonTexts: [i18n("Ok"), i18n("Cancel")]
-        content: PlasmaComponents.TextField {
-            id: tagField
-            width: theme.defaultFont.mSize.width * 30
-            Keys.onEnterPressed: newTagDialog.accept()
-            Keys.onReturnPressed: newTagDialog.accept()
+        content: Item {
+            width: childrenRect.width + theme.defaultFont.mSize.width * 4
+            height: childrenRect.height + theme.defaultFont.mSize.height * 2
+            anchors.centerIn: parent
+            PlasmaComponents.TextField {
+                id: tagField
+                anchors.centerIn: parent
+                width: theme.defaultFont.mSize.width * 30
+                Keys.onEnterPressed: newTagDialog.accept()
+                Keys.onReturnPressed: newTagDialog.accept()
+            }
         }
         onAccepted: {
             if (!tagField.text) {
