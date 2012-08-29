@@ -47,16 +47,17 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 import "content"
 
-Rectangle {
+Image {
     id: webBrowser
     objectName: "webBrowser"
+    source: "image://appbackgrounds/contextarea"
+    fillMode: Image.Tile
 
     property string urlString : ""
     property alias url: webView.url
     property alias title: webView.title
 
     width: 800; height: 600
-    color: theme.backgroundColor
 
     PlasmaCore.Theme {
         id: theme

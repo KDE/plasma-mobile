@@ -155,6 +155,7 @@ Flickable {
             url: fixUrl(webBrowser.urlString)
             smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
             focus: true
+            clip: false
 
             onAlert: {
                 console.log(message);
@@ -249,6 +250,91 @@ Flickable {
                     if (zf >= contentsScale)
                         zf = 2.0*contentsScale // zoom in (else zooming out)
                     doZoom(zf,clickX*zf,clickY*zf)
+                }
+            }
+
+            Image {
+                source: "image://appbackgrounds/shadow-left"
+                fillMode: Image.TileVertically
+                anchors {
+                    top: parent.top
+                    right: parent.left
+                    rightMargin: -1
+                    bottom: parent.bottom
+                    topMargin: 1
+                    bottomMargin: 1
+                }
+            }
+            Image {
+                source: "image://appbackgrounds/shadow-top"
+                fillMode: Image.TileHorizontally
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottomMargin: -1
+                    bottom: parent.top
+                    leftMargin: 1
+                    rightMargin: 1
+                }
+            }
+            Image {
+                source: "image://appbackgrounds/shadow-right"
+                fillMode: Image.TileVertically
+                anchors {
+                    top: parent.top
+                    left: parent.right
+                    leftMargin: -1
+                    bottom: parent.bottom
+                    topMargin: 1
+                    bottomMargin: 1
+                }
+            }
+            Image {
+                source: "image://appbackgrounds/shadow-bottom"
+                fillMode: Image.TileHorizontally
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    topMargin: -1
+                    top: parent.bottom
+                    leftMargin: 1
+                    rightMargin: 1
+                }
+            }
+            Image {
+                source: "image://appbackgrounds/shadow-topleft"
+                anchors {
+                    right: parent.left
+                    bottomMargin: -1
+                    rightMargin: -1
+                    bottom: parent.top
+                }
+            }
+            Image {
+                source: "image://appbackgrounds/shadow-topright"
+                anchors {
+                    left: parent.right
+                    bottomMargin: -1
+                    leftMargin: -1
+                    bottom: parent.top
+                }
+            }
+            Image {
+                source: "image://appbackgrounds/shadow-bottomleft"
+                anchors {
+                    right: parent.left
+                    topMargin: -1
+                    rightMargin: -1
+                    top: parent.bottom
+                }
+            }
+            Image {
+                source: "image://appbackgrounds/shadow-bottomright"
+                anchors {
+                    left: parent.right
+                    topMargin: -1
+                    leftMargin: -1
+                    top: parent.bottom
                 }
             }
 
