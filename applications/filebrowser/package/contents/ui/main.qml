@@ -145,16 +145,13 @@ Image {
         onTriggered: {
             if (application.startupArguments.length > 0) {
                 var path = application.startupArguments[0]
-                var mimeType = ""
-                //very weak heuristic to see if the passed argument is a folder
-                //FIXME: use kmimetype from C++ side?
-                if (path.indexOf(".") == -1) {
-                    mimeType = "inode/directory"
+
+                if (startupMimeType == "inode/directory") {
                     if (mainStack.depth == 0) {
                         mainStack.push(Qt.createComponent("Browser.qml"))
                     }
                 }
-                openFile(path, mimeType)
+                openFile(path, startupMimeType)
             }
         }
     }

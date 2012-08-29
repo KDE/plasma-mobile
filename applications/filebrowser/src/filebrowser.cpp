@@ -32,6 +32,7 @@
 #include <KStandardAction>
 #include <KStandardDirs>
 #include <KServiceTypeTrader>
+#include <KMimeType>
 
 #include <kio/copyjob.h>
 #include <Plasma/Theme>
@@ -59,6 +60,11 @@ FileBrowser::FileBrowser()
     if (args->getOption("resourceType") == "nfo:Image") {
         setWindowIcon(KIcon("active-image-viewer"));
         setPlainCaption(i18n("Images"));
+    }
+
+    if (!startupArguments().isEmpty()) {
+        KMimeType::Ptr t = KMimeType::findByUrl(startupArguments().first());
+        declarativeView()->rootContext()->setContextProperty("startupMimeType", t->name());
     }
 }
 
