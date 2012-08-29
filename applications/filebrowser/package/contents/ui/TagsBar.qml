@@ -320,5 +320,6 @@ PlasmaComponents.Page {
                 reject()
             }
         }
+        Component.onCompleted: tagField.forceActiveFocus()
     }
 }
