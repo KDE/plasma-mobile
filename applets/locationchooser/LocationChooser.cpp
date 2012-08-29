@@ -64,7 +64,7 @@ void LocationChooser::init()
     d->initialized = true;
 
     d->root = new Plasma::DeclarativeWidget(this);
-    d->root->setWindowFlags(Qt::Window);
+    d->root->setWindowFlags(Qt::Dialog);
     d->desktop = new KDesktopFile(LOCATION_CHOOSER_PACKAGE_DIR + "metadata.desktop");
     d->engine = new Engine(this);
 
