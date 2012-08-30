@@ -320,6 +320,10 @@ PlasmaComponents.Page {
                 reject()
             }
         }
-        Component.onCompleted: tagField.forceActiveFocus()
+        onStatusChanged: {
+            if (status == PlasmaComponents.DialogStatus.Open) {
+                tagField.forceActiveFocus()
+            }
+        }
     }
 }
