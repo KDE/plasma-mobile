@@ -323,6 +323,8 @@ PlasmaComponents.Page {
         onStatusChanged: {
             if (status == PlasmaComponents.DialogStatus.Open) {
                 tagField.forceActiveFocus()
+            } else if (status == PlasmaComponents.DialogStatus.Closed) {
+                tagField.closeSoftwareInputPanel()
             }
         }
     }
