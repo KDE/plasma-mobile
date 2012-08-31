@@ -29,6 +29,11 @@ Item {
     property bool busy: false
 
 
+    onFocusChanged: {
+        if (focus) {
+            searchField.forceActiveFocus()
+        }
+    }
     width: searchField.width
 
     height: searchField.height
