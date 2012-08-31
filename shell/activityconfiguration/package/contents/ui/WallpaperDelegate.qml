@@ -96,7 +96,6 @@ Item {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            inputPanelController.forceActiveFocus()
             inputPanelController.closeSoftwareInputPanel()
             wallpapersList.currentIndex = (wallpapersList.currentPage*wallpapersList.pageSize) + index
         }

@@ -33,6 +33,10 @@ PlasmaComponents.Sheet {
     rejectButtonText: i18n("Cancel")
     acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
 
+    Component.onCompleted: {
+        activityNameEdit.forceActiveFocus()
+    }
+
     Timer {
         running: true
         interval: 100
@@ -49,6 +53,7 @@ PlasmaComponents.Sheet {
     onStatusChanged: {
         if (status == PlasmaComponents.DialogStatus.Closed) {
             closeRequested()
+            inputPanelController.closeSoftwareInputPanel()
         }
     }
 
