@@ -56,6 +56,6 @@ install(TARGETS plasma-device ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 #install(FILES plasma-device.desktop DESTINATION ${AUTOSTART_INSTALL_DIR})
 
-install(DIRECTORY widgetsexplorer/package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.widgetexplorer PATTERN .svn EXCLUDE PATTERN Messages.sh EXCLUDE)
+install(DIRECTORY widgetsexplorer/package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.addresources PATTERN .svn EXCLUDE PATTERN Messages.sh EXCLUDE)
 install(DIRECTORY activityconfiguration/package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.activityconfiguration PATTERN .svn EXCLUDE PATTERN Messages.sh EXCLUDE)
 

@@ -26,7 +26,6 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 MobileComponents.IconGrid {
     id: appletsView
 
-    anchors.fill: parent
 
     model: PlasmaCore.SortFilterModel {
         id: appletsFilter

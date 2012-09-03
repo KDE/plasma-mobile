@@ -38,7 +38,7 @@ class MobileWidgetsExplorer : public QGraphicsWidget
     Q_OBJECT
 
 public:
-    MobileWidgetsExplorer(QGraphicsItem *parent);
+    MobileWidgetsExplorer(const QString &uiPackage = "org.kde.active.addresources", QGraphicsItem *parent = 0);
     ~MobileWidgetsExplorer();
 
     void setContainment(Plasma::Containment *cont);

@@ -167,7 +167,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
 void PlasmaApp::showWidgetsExplorer()
 {
     if (!m_widgetsExplorer) {
-        m_widgetsExplorer = new MobileWidgetsExplorer(0);
+        m_widgetsExplorer = new MobileWidgetsExplorer("org.kde.active.widgetsexplorer");
         m_widgetsExplorer.data()->setZValue(1000);
         m_corona->addItem(m_widgetsExplorer.data());
     }

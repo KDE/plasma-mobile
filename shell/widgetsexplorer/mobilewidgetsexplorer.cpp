@@ -41,7 +41,7 @@
 #include <Plasma/DeclarativeWidget>
 #include <Plasma/Package>
 
-MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
+MobileWidgetsExplorer::MobileWidgetsExplorer(const QString &uiPackage, QGraphicsItem *parent)
     : QGraphicsWidget(parent),
       m_containment(0),
       m_mainWidget(0)
@@ -57,7 +57,7 @@ MobileWidgetsExplorer::MobileWidgetsExplorer(QGraphicsItem *parent)
     m_appletsModel->setApplication(QString());
 
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    m_package = new Plasma::Package(QString(), "org.kde.active.widgetexplorer", structure);
+    m_package = new Plasma::Package(QString(), uiPackage, structure);
 
     m_declarativeWidget->setQmlPath(m_package->filePath("mainscript"));
 
