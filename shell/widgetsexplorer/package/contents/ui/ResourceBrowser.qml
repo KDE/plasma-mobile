@@ -76,7 +76,7 @@ MobileComponents.IconGrid {
                 for (var i = 0; i < selectedModel.count; ++i) {
                     if ((model.resourceUri && model.resourceUri == selectedModel.get(i).resourceUri) ||
 
-                        (model.entryPath && model.entryPath == selectedModel.get(i).resourceUri)) {
+                        (model.data && model.data == selectedModel.get(i).resourceUri)) {
                         highlightFrame.opacity = 0
                         selectedModel.remove(i)
                         return
