@@ -18,11 +18,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
-import org.kde.plasma.mobilecomponents 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
     id: notificationsApplet
@@ -227,7 +227,7 @@ Item {
         id: popup
         location: plasmoid.location
         windowFlags: Qt.Popup
-        mainItem: Item {
+        mainItem: PlasmaExtras.ScrollArea {
             width: Math.max(400, contentsColumn.width)
             height: Math.min(450, contentsColumn.height)
 
@@ -268,11 +268,6 @@ Item {
                         delegate: NotificationDelegate {}
                     }
                 }
-            }
-
-            PlasmaComponents.ScrollBar {
-                flickableItem: popupFlickable
-                orientation: Qt.Vertical
             }
         }
     }
