@@ -24,7 +24,7 @@ zvalue=0
 [Containments][1][Applets][3]
 geometry=0,0,560,700
 immutability=1
-plugin=org.kde.analogclock
+plugin=weatherstation
 zvalue=0
 
 [Containments][1][General]
