@@ -239,41 +239,49 @@ FocusScope {
                 }
 
             }
-            ListView {
-                id: historyList
-                clip: true
-            anchors.left: parent.left
-            anchors.right: parent.horizontalCenter
-            anchors.top: topLabel.bottom
-            anchors.bottom: parent.bottom
-            anchors.rightMargin: 12
-                model: historyModel
-                delegate: myDelegate
-                highlight: PlasmaComponents.Highlight {}
-                currentIndex: -1
-                header: Title {
-                    id: historyLabel
-                    text: i18n("Recently visited")
-                    anchors {
-                        top: parent.top
-                        left: parent.left
+            PlasmaExtras.ScrollArea {
+                anchors {
+                    left: parent.left
+                    right: parent.horizontalCenter
+                    top: topLabel.bottom
+                    bottom: parent.bottom
+                    rightMargin: 12
+                }
+                ListView {
+                    id: historyList
+                    clip: true
+                    model: historyModel
+                    delegate: myDelegate
+                    highlight: PlasmaComponents.Highlight {}
+                    currentIndex: -1
+                    header: Title {
+                        id: historyLabel
+                        text: i18n("Recently visited")
+                        anchors {
+                            top: parent.top
+                            left: parent.left
+                        }
                     }
                 }
             }
-            ListView {
-                clip: true
-                anchors.top: topLabel.bottom
-                anchors.left: parent.horizontalCenter
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.leftMargin: 12
-                currentIndex: -1
-                model: bookmarksModel
-                delegate: myDelegate
-                highlight: PlasmaComponents.Highlight {}
-                header: Title {
-                    id: bookmarksLabel
-                    text: i18n("Bookmarks")
+            PlasmaExtras.ScrollArea {
+                anchors {
+                    top: topLabel.bottom
+                    left: parent.horizontalCenter
+                    right: parent.right
+                    bottom: parent.bottom
+                    leftMargin: 12
+                }
+                ListView {
+                    
+                    currentIndex: -1
+                    model: bookmarksModel
+                    delegate: myDelegate
+                    highlight: PlasmaComponents.Highlight {}
+                    header: Title {
+                        id: bookmarksLabel
+                        text: i18n("Bookmarks")
+                    }
                 }
             }
         }
