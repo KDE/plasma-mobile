@@ -2,6 +2,7 @@
 Name=Alarms
 Name[cs]=Alarmy
 Name[da]=Alarmer
+Name[el]=Συναγερμοί
 Name[fr]=Alarmes
 Name[hu]=Riasztások
 Name[it]=Avvisi
@@ -14,6 +15,7 @@ Name[uk]=Нагадування
 Name[x-test]=xxAlarmsxx
 Comment=List and set Akonadi Alarms
 Comment[da]=Oplist og sæt Akonadi-alarmer
+Comment[el]=Λίστα και ρύθμιση συναγερμών Akonadi
 Comment[fr]=Lister et définir les alarmes pour Akonadi
 Comment[hu]=Akonadi riasztások listázása és beállítása
 Comment[it]=Elenca ed imposta gli avvisi di Akonadi

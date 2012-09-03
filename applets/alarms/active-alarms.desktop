@@ -2,6 +2,7 @@
 Name=Alarms
 Name[cs]=Alarmy
 Name[da]=Alarmer
+Name[el]=Συναγερμοί
 Name[fr]=Alarmes
 Name[hu]=Riasztások
 Name[it]=Avvisi
@@ -14,6 +15,7 @@ Name[uk]=Нагадування
 Name[x-test]=xxAlarmsxx
 Comment=A tool to setup visual and audio alarms for tablets
 Comment[da]=Et værktøj til at sætte visuelle og lydalarmer op til tablet-pc'er
+Comment[el]=Εργαλείο για τη ρύθμιση οπτικών και ηχητικών συναγερμών για πινάκια
 Comment[fr]=Un outil pour configurer des alarmes audio et vidéo pour les tablettes
 Comment[hu]=Egy eszköz látható és hangriasztások beállításához tabletekhez
 Comment[it]=Uno strumento per impostare allarmi, visivi e audio, per tablet
