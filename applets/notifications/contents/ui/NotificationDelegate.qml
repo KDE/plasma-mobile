@@ -101,7 +101,7 @@ PlasmaComponents.ListItem {
 
                 PlasmaComponents.Label {
                     id: appNameLabel
-                    text: appName
+                    text: summary
                     font.bold: true
                     height: paintedHeight
                     anchors {

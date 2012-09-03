@@ -31,7 +31,7 @@ PlasmaComponents.ListItem {
         spacing: 8
         width: parent.width
         PlasmaComponents.Label {
-            text: jobsSource.data[modelData]["appName"]
+            text: jobsSource.data[modelData]["infoMessage"]
             font.bold: true
             color: theme.textColor
             anchors.horizontalCenter: parent.horizontalCenter
@@ -47,7 +47,7 @@ PlasmaComponents.ListItem {
 
             PlasmaComponents.Label {
                 id: labelName0Text
-                text: jobsSource.data[modelData]["labelName0"]
+                text: i18n("%1:", jobsSource.data[modelData]["labelName0"])
                 width: Math.max(paintedWidth, labelName1Text.paintedWidth)
                 horizontalAlignment: Text.AlignRight
             }
@@ -58,7 +58,7 @@ PlasmaComponents.ListItem {
             }
             PlasmaComponents.Label {
                 id: labelName1Text
-                text: jobsSource.data[modelData]["labelName1"]
+                text: i18n("%1:", jobsSource.data[modelData]["labelName1"])
                 width: Math.max(paintedWidth, labelName0Text.paintedWidth)
                 horizontalAlignment: Text.AlignRight
             }

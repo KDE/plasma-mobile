@@ -92,6 +92,18 @@ Item {
     }
     PlasmaCore.Dialog {
         id: lastNotificationPopup
+
+        function popup(text)
+        {
+            lastNotificationText.text = text
+
+            var pos = lastNotificationPopup.popupPosition(notificationsApplet, Qt.AlignCenter)
+            lastNotificationPopup.x = pos.x
+            lastNotificationPopup.y = pos.y
+            lastNotificationPopup.visible = true
+            lastNotificationTimer.running = true
+        }
+
         location: plasmoid.location
         windowFlags: windowFlags|Qt.WindowStaysOnTopHint
         mainItem: Item {
@@ -191,13 +203,7 @@ Item {
 
         onDataChanged: {
             var i = connectedSources[connectedSources.length-1]
-            lastNotificationText.text = String(data[i]["body"]).replace("\n", " ")
-
-            var pos = lastNotificationPopup.popupPosition(notificationsApplet, Qt.AlignCenter)
-            lastNotificationPopup.x = pos.x
-            lastNotificationPopup.y = pos.y
-            lastNotificationPopup.visible = true
-            lastNotificationTimer.running = true
+            lastNotificationPopup.popup(String(data[i]["body"]).replace("\n", " "))
         }
     }
 
@@ -209,8 +215,26 @@ Item {
         onSourceAdded: {
             connectSource(source);
         }
+        property variant runningJobs
+
+        onSourceRemoved: {
+            notificationsModel.append({"appIcon" : runningJobs[source]["appIcon"],
+                                "appName" : runningJobs[source]["appName"],
+                                "summary" : i18n("%1 [Finished]", runningJobs[source]["infoMessage"]),
+                                "body" : runningJobs[source]["label1"],
+                                "expireTimeout" :0,
+                                "urgency": 0});
+            lastNotificationPopup.popup(runningJobs[source]["label1"])
+            delete runningJobs[source]
+        }
         Component.onCompleted: {
+            jobsSource.runningJobs = new Object
             connectedSources = sources
+        }
+        onNewData: {
+            var jobs = runningJobs
+            jobs[sourceName] = data
+            runningJobs = jobs
         }
         onDataChanged: {
             var total = 0
