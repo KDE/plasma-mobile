@@ -31,7 +31,7 @@ PlasmaComponents.Sheet {
     acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save Changes")
 
     rejectButtonText: i18n("Cancel")
-    acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
+    acceptButton.enabled: !activityNameEdit.visible || (activityNameEdit.text != "" && !nameExists())
 
     Timer {
         running: true
@@ -57,12 +57,13 @@ PlasmaComponents.Sheet {
 
     function saveConfiguration()
     {
+        configInterface.wallpaperIndex = wallpapersList.currentIndex
+
         if (activityNameEdit.text == "" || nameExists()) {
             return
         }
         //console.log("Creating activity " + activityNameEdit.text)
         configInterface.activityName = activityNameEdit.text
-        configInterface.wallpaperIndex = wallpapersList.currentIndex
         configInterface.encrypted = encryptedSwitch.checked
     }
 
@@ -194,7 +195,7 @@ PlasmaComponents.Sheet {
                 horizontalCenter: nameRow.horizontalCenter
                 top: nameRow.bottom
             }
-            opacity: nameExists() ? 1 : 0
+            opacity: (nameExists() && activityNameEdit.visible) ? 1 : 0
             imagePath: "dialogs/background"
             width: errorLabel.width + margins.left + margins.right
             height: errorLabel.height + margins.top + margins.bottom
