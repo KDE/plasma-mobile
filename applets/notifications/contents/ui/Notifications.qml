@@ -34,6 +34,8 @@ Item {
 
     property real globalProgress: 0
 
+    property Item iconItem
+
     Component.onCompleted: {
         //plasmoid.popupIcon = QIcon("preferences-desktop-notification")
         plasmoid.aspectRatioMode = "ConstrainedSquare"
@@ -63,7 +65,7 @@ Item {
         {
             lastNotificationText.text = text
 
-            var pos = lastNotificationPopup.popupPosition(notificationsApplet, Qt.AlignCenter)
+            var pos = lastNotificationPopup.popupPosition(iconItem, Qt.AlignCenter)
             lastNotificationPopup.x = pos.x
             lastNotificationPopup.y = pos.y
             lastNotificationPopup.visible = true
@@ -103,6 +105,9 @@ Item {
             elementId: "notification-disabled"
             anchors.fill: parent
             state: notificationsApplet.state
+
+            Component.onCompleted: iconItem = notificationSvgItem
+
             PlasmaCore.Svg {
                 id: notificationSvg
                 imagePath: "icons/notification"
