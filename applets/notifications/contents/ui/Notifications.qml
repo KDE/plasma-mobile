@@ -134,6 +134,11 @@ Item {
                     width: notificationSvgItem.width
                 }
             }
+            PlasmaComponents.BusyIndicator {
+                anchors.fill: parent
+                visible: jobsSource.sources.length > 0
+                running: visible
+            }
 
             PlasmaComponents.Label {
                 id: countText
