@@ -29,49 +29,15 @@ Item {
     state: "default"
     width: 32
     height: 32
+    property int minimumWidth: mainScrollArea.implicitWidth
+    property int minimumHeight: mainScrollArea.implicitHeight
+
+    property real globalProgress: 0
 
     Component.onCompleted: {
         //plasmoid.popupIcon = QIcon("preferences-desktop-notification")
         plasmoid.aspectRatioMode = "ConstrainedSquare"
         plasmoid.status = PassiveStatus
-    }
-
-    states: [
-        State {
-            name: "default"
-            PropertyChanges {
-                target: notificationSvgItem
-                elementId: "notification-disabled"
-            }
-            PropertyChanges {
-                target: countText
-                visible: false
-            }
-            PropertyChanges {
-                target: plasmoid
-                status: PassiveStatus
-            }
-        },
-        State {
-            name: "new-notifications"
-            PropertyChanges {
-                target: notificationSvgItem
-                elementId: "notification-empty"
-            }
-            PropertyChanges {
-                target: countText
-                visible: true
-            }
-            PropertyChanges {
-                target: plasmoid
-                status: ActiveStatus
-            }
-        }
-    ]
-
-    PlasmaCore.Svg {
-        id: notificationSvg
-        imagePath: "icons/notification"
     }
 
     PlasmaCore.Theme {
@@ -130,51 +96,88 @@ Item {
         }
     }
 
-    PlasmaCore.SvgItem {
-        id: notificationSvgItem
-        svg: notificationSvg
-        elementId: "notification-disabled"
-        anchors.fill: parent
-        Item {
-            id: jobProgressItem
-            width: 0
-            clip: true
-            visible: jobsSource.sources.length > 0
-            anchors {
-                left: parent.left
-                top: parent.top
-                bottom: parent.bottom
+    property Component compactRepresentation: Component {
+        PlasmaCore.SvgItem {
+            id: notificationSvgItem
+            svg: notificationSvg
+            elementId: "notification-disabled"
+            anchors.fill: parent
+            state: notificationsApplet.state
+            PlasmaCore.Svg {
+                id: notificationSvg
+                imagePath: "icons/notification"
             }
-            PlasmaCore.SvgItem {
-                svg: notificationSvg
-                elementId: "notification-progress-active"
+
+            Item {
+                id: jobProgressItem
+                width: notificationSvgItem.width * globalProgress
+                clip: true
+                visible: jobsSource.sources.length > 0
                 anchors {
                     left: parent.left
                     top: parent.top
                     bottom: parent.bottom
                 }
-                width: notificationSvgItem.width
-            }
-        }
-
-        PlasmaComponents.Label {
-            id: countText
-            text: notificationsRepeater.count+jobsRepeater.count
-            anchors.centerIn: parent
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                if (popup.visible) {
-                    popup.visible = false
-                } else if (notificationsRepeater.count+jobsRepeater.count > 0) {
-                    var pos = popup.popupPosition(notificationsApplet, Qt.AlignCenter)
-                    popup.x = pos.x
-                    popup.y = pos.y
-                    popup.visible = true
+                PlasmaCore.SvgItem {
+                    svg: notificationSvg
+                    elementId: "notification-progress-active"
+                    anchors {
+                        left: parent.left
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    width: notificationSvgItem.width
                 }
             }
+
+            PlasmaComponents.Label {
+                id: countText
+                text: notificationsRepeater.count+jobsRepeater.count
+                anchors.centerIn: parent
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (notificationsRepeater.count + jobsRepeater.count > 0) {
+                        plasmoid.togglePopup()
+                    } else {
+                        plasmoid.hidePopup()
+                    }
+                }
+            }
+            states: [
+                State {
+                    name: "default"
+                    PropertyChanges {
+                        target: notificationSvgItem
+                        elementId: "notification-disabled"
+                    }
+                    PropertyChanges {
+                        target: countText
+                        visible: false
+                    }
+                    PropertyChanges {
+                        target: plasmoid
+                        status: PassiveStatus
+                    }
+                },
+                State {
+                    name: "new-notifications"
+                    PropertyChanges {
+                        target: notificationSvgItem
+                        elementId: "notification-empty"
+                    }
+                    PropertyChanges {
+                        target: countText
+                        visible: true
+                    }
+                    PropertyChanges {
+                        target: plasmoid
+                        status: ActiveStatus
+                    }
+                }
+            ]
         }
     }
 
@@ -243,54 +246,51 @@ Item {
             }
 
             total /= sources.length
-            jobProgressItem.width = notificationSvgItem.width * (total/100)
+            globalProgress = total/100
         }
     }
 
-    PlasmaCore.Dialog {
-        id: popup
-        location: plasmoid.location
-        windowFlags: Qt.Popup
-        mainItem: PlasmaExtras.ScrollArea {
-            width: Math.max(400, contentsColumn.width)
-            height: Math.min(450, contentsColumn.height)
+    PlasmaExtras.ScrollArea {
+        id: mainScrollArea
+        anchors.fill: parent
+        implicitWidth: Math.max(400, contentsColumn.width)
+        implicitHeight: Math.max(250, Math.min(450, contentsColumn.height))
 
-            Flickable {
-                id: popupFlickable
-                anchors.fill:parent
-                
-                contentWidth: contentsColumn.width
-                contentHeight: contentsColumn.height
-                clip: true
+        Flickable {
+            id: popupFlickable
+            anchors.fill:parent
 
-                Column {
-                    id: contentsColumn
-                    Repeater {
-                        id: jobsRepeater
-                        model: jobsSource.sources
-                        delegate: JobDelegate {}
-                        onCountChanged: {
-                            if (count+notificationsRepeater.count > 0) {
-                                notificationsApplet.state = "new-notifications"
-                            } else {
-                                notificationsApplet.state = "default"
-                                popup.visible = false
-                            }
+            contentWidth: contentsColumn.width
+            contentHeight: contentsColumn.height
+            clip: true
+
+            Column {
+                id: contentsColumn
+                Repeater {
+                    id: jobsRepeater
+                    model: jobsSource.sources
+                    delegate: JobDelegate {}
+                    onCountChanged: {
+                        if (count+notificationsRepeater.count > 0) {
+                            notificationsApplet.state = "new-notifications"
+                        } else {
+                            notificationsApplet.state = "default"
+                            plasmoid.hidePopup()
                         }
                     }
-                    Repeater {
-                        id: notificationsRepeater
-                        model: notificationsModel
-                        onCountChanged: {
-                            if (count+jobsRepeater.count > 0) {
-                                notificationsApplet.state = "new-notifications"
-                            } else {
-                                notificationsApplet.state = "default"
-                                popup.visible = false
-                            }
+                }
+                Repeater {
+                    id: notificationsRepeater
+                    model: notificationsModel
+                    onCountChanged: {
+                        if (count+jobsRepeater.count > 0) {
+                            notificationsApplet.state = "new-notifications"
+                        } else {
+                            notificationsApplet.state = "default"
+                            plasmoid.hidePopup()
                         }
-                        delegate: NotificationDelegate {}
                     }
+                    delegate: NotificationDelegate {}
                 }
             }
         }
