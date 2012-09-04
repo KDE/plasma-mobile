@@ -91,21 +91,15 @@ PlasmaComponents.ListItem {
             width: popupFlickable.width
             Item {
                 width: parent.width
-                height: appNameLabel.height
-                QIconItem {
-                    id: appIconItem
-                    icon: QIcon(appIcon)
-                    width: theme.mediumIconSize
-                    height: theme.mediumIconSize
-                }
+                height: summaryLabel.height
 
                 PlasmaComponents.Label {
-                    id: appNameLabel
+                    id: summaryLabel
                     text: summary
                     font.bold: true
                     height: paintedHeight
                     anchors {
-                        left: appIconItem.right
+                        left: parent.left
                         right: parent.right
                     }
                     horizontalAlignment: Text.AlignHCenter
@@ -131,16 +125,31 @@ PlasmaComponents.ListItem {
                 }
             }
 
-            PlasmaComponents.Label {
-                text: body
-                color: theme.textColor
-                anchors {
-                    left: parent.left
-                    right:parent.right
-                    leftMargin: theme.mediumIconSize+6
-                    rightMargin: theme.mediumIconSize+6
+            Item {
+                height: childrenRect.height
+                width: parent.width
+                QIconItem {
+                    id: appIconItem
+                    icon: QIcon(appIcon)
+                    width: theme.largeIconSize
+                    height: theme.largeIconSize
+                    anchors {
+                        left: parent.left
+                        verticalCenter: parent.verticalCenter
+                    }
                 }
-                wrapMode: Text.Wrap
+                PlasmaComponents.Label {
+                    text: body
+                    color: theme.textColor
+                    anchors {
+                        left: appIconItem.right
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                        leftMargin: 6
+                        rightMargin: 6
+                    }
+                    wrapMode: Text.Wrap
+                }
             }
         }
     }
