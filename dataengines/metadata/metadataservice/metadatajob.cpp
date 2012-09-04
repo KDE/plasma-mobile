@@ -140,7 +140,13 @@ void MetadataJob::start()
 
         foreach (const QString &resUrl, resourceUrls) {
             Nepomuk::Resource r(resUrl);
-            r.addTag(tag);
+            QList<Nepomuk::Tag> tags = r.tags();
+            if (tags.contains(tag)) {
+                tags.removeAll(tag);
+                r.setTags(tags);
+            } else {
+                r.addTag(tag);
+            }
         }
     }
 
