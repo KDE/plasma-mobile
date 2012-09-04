@@ -61,9 +61,10 @@ Item {
     PlasmaCore.Dialog {
         id: lastNotificationPopup
 
-        function popup(text)
+        function popup(icon, text)
         {
             lastNotificationText.text = text
+            appIconItem.icon = icon
 
             var pos = lastNotificationPopup.popupPosition(iconItem, Qt.AlignCenter)
             lastNotificationPopup.x = pos.x
@@ -76,13 +77,23 @@ Item {
         windowFlags: windowFlags|Qt.WindowStaysOnTopHint
         mainItem: Item {
             width: 300
-            height: lastNotificationText.height+50
+            height: childrenRect.height
+            QIconItem {
+                id: appIconItem
+                width: theme.largeIconSize
+                height: theme.largeIconSize
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                }
+            }
             PlasmaComponents.Label {
                 id: lastNotificationText
                 anchors {
-                    left: parent.left
+                    left: appIconItem.right
                     right: parent.right
                     verticalCenter: parent.verticalCenter
+                    leftMargin: 6
                 }
                 //textFormat: Text.PlainText
                 color: theme.textColor
@@ -261,7 +272,7 @@ Item {
 
         onDataChanged: {
             var i = connectedSources[connectedSources.length-1]
-            lastNotificationPopup.popup(String(data[i]["body"]).replace("\n", " "))
+            lastNotificationPopup.popup(data[i]["appIcon"], String(data[i]["body"]).replace("\n", " "))
         }
     }
 
@@ -282,7 +293,7 @@ Item {
                                 "body" : runningJobs[source]["label1"],
                                 "expireTimeout" :0,
                                 "urgency": 0});
-            lastNotificationPopup.popup(runningJobs[source]["label1"])
+            lastNotificationPopup.popup(runningJobs[source]["appIcon"], runningJobs[source]["label1"])
             delete runningJobs[source]
         }
         Component.onCompleted: {
