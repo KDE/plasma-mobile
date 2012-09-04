@@ -253,19 +253,24 @@ Item {
     PlasmaExtras.ScrollArea {
         id: mainScrollArea
         anchors.fill: parent
-        implicitWidth: Math.max(400, contentsColumn.width)
+        implicitWidth: 400
         implicitHeight: Math.max(250, Math.min(450, contentsColumn.height))
 
         Flickable {
             id: popupFlickable
             anchors.fill:parent
 
-            contentWidth: contentsColumn.width
+            contentWidth: width
             contentHeight: contentsColumn.height
             clip: true
 
             Column {
                 id: contentsColumn
+                width: popupFlickable.width
+                Title {
+                    visible: jobsRepeater.count > 0
+                    text: i18n("Transfers")
+                }
                 Repeater {
                     id: jobsRepeater
                     model: jobsSource.sources
@@ -277,6 +282,18 @@ Item {
                             notificationsApplet.state = "default"
                             plasmoid.hidePopup()
                         }
+                    }
+                }
+                Title {
+                    visible: notificationsRepeater.count > 0
+                    text: i18n("Notifications")
+                    PlasmaComponents.ToolButton {
+                        iconSource: "window-close"
+                        anchors {
+                            right: parent.right
+                            verticalCenter: parent.verticalCenter
+                        }
+                        onClicked: notificationsModel.clear()
                     }
                 }
                 Repeater {
