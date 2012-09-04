@@ -99,95 +99,140 @@ Item {
     }
 
     property Component compactRepresentation: Component {
-        PlasmaCore.SvgItem {
-            id: notificationSvgItem
-            svg: notificationSvg
-            elementId: "notification-disabled"
-            anchors.fill: parent
-            state: notificationsApplet.state
+        Item {
+            PlasmaCore.SvgItem {
+                id: notificationSvgItem
+                svg: notificationSvg
+                elementId: "notification-disabled"
+                anchors.centerIn: parent
+                width: Math.min(parent.width, parent.height)
+                height: width
+                state: notificationsApplet.state
 
-            Component.onCompleted: iconItem = notificationSvgItem
+                Component.onCompleted: iconItem = notificationSvgItem
 
-            PlasmaCore.Svg {
-                id: notificationSvg
-                imagePath: "icons/notification"
-            }
-
-            Item {
-                id: jobProgressItem
-                width: notificationSvgItem.width * globalProgress
-                clip: true
-                visible: jobsSource.sources.length > 0
-                anchors {
-                    left: parent.left
-                    top: parent.top
-                    bottom: parent.bottom
+                PlasmaCore.Svg {
+                    id: notificationSvg
+                    imagePath: "icons/notification"
                 }
-                PlasmaCore.SvgItem {
-                    svg: notificationSvg
-                    elementId: "notification-progress-active"
+
+                Item {
+                    id: jobProgressItem
+                    width: notificationSvgItem.width * globalProgress
+                    clip: true
+                    visible: jobsSource.sources.length > 0
                     anchors {
                         left: parent.left
                         top: parent.top
                         bottom: parent.bottom
                     }
-                    width: notificationSvgItem.width
+                    PlasmaCore.SvgItem {
+                        svg: notificationSvg
+                        elementId: "notification-progress-active"
+                        anchors {
+                            left: parent.left
+                            top: parent.top
+                            bottom: parent.bottom
+                        }
+                        width: notificationSvgItem.width
+                    }
                 }
-            }
-            PlasmaComponents.BusyIndicator {
-                anchors.fill: parent
-                visible: jobsSource.sources.length > 0
-                running: visible
-            }
+                PlasmaComponents.BusyIndicator {
+                    anchors.fill: parent
+                    visible: jobsSource.sources.length > 0
+                    running: visible
+                }
 
-            PlasmaComponents.Label {
-                id: countText
-                text: notificationsRepeater.count+jobsRepeater.count
-                anchors.centerIn: parent
-            }
+                PlasmaComponents.Label {
+                    id: countText
+                    text: notificationsRepeater.count+jobsRepeater.count
+                    anchors.centerIn: parent
+                    onTextChanged: {
+                        if (text != "0") {
+                            notificationAnimation.running = true
+                        }
+                    }
+                }
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (notificationsRepeater.count + jobsRepeater.count > 0) {
-                        plasmoid.togglePopup()
-                    } else {
-                        plasmoid.hidePopup()
+                PlasmaCore.SvgItem {
+                    id: notificationAnimatedItem
+                    anchors.fill: parent
+                    svg: notificationSvg
+                    elementId: "notification-active"
+                    opacity: 0
+                    scale: 2
+
+                    SequentialAnimation {
+                        id: notificationAnimation
+                        NumberAnimation {
+                            target: notificationAnimatedItem
+                            duration: 250
+                            properties: "opacity, scale"
+                            to: 1
+                            easing.type: Easing.InOutQuad
+                        }
+                        PauseAnimation { duration: 500 }
+                        ParallelAnimation {
+                            NumberAnimation {
+                                target: notificationAnimatedItem
+                                duration: 250
+                                properties: "opacity"
+                                to: 0
+                                easing.type: Easing.InOutQuad
+                            }
+                            NumberAnimation {
+                                target: notificationAnimatedItem
+                                duration: 250
+                                properties: "scale"
+                                to: 2
+                                easing.type: Easing.InOutQuad
+                            }
+                        }
                     }
                 }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (notificationsRepeater.count + jobsRepeater.count > 0) {
+                            plasmoid.togglePopup()
+                        } else {
+                            plasmoid.hidePopup()
+                        }
+                    }
+                }
+                states: [
+                    State {
+                        name: "default"
+                        PropertyChanges {
+                            target: notificationSvgItem
+                            elementId: "notification-disabled"
+                        }
+                        PropertyChanges {
+                            target: countText
+                            visible: false
+                        }
+                        PropertyChanges {
+                            target: plasmoid
+                            status: PassiveStatus
+                        }
+                    },
+                    State {
+                        name: "new-notifications"
+                        PropertyChanges {
+                            target: notificationSvgItem
+                            elementId: "notification-empty"
+                        }
+                        PropertyChanges {
+                            target: countText
+                            visible: true
+                        }
+                        PropertyChanges {
+                            target: plasmoid
+                            status: ActiveStatus
+                        }
+                    }
+                ]
             }
-            states: [
-                State {
-                    name: "default"
-                    PropertyChanges {
-                        target: notificationSvgItem
-                        elementId: "notification-disabled"
-                    }
-                    PropertyChanges {
-                        target: countText
-                        visible: false
-                    }
-                    PropertyChanges {
-                        target: plasmoid
-                        status: PassiveStatus
-                    }
-                },
-                State {
-                    name: "new-notifications"
-                    PropertyChanges {
-                        target: notificationSvgItem
-                        elementId: "notification-empty"
-                    }
-                    PropertyChanges {
-                        target: countText
-                        visible: true
-                    }
-                    PropertyChanges {
-                        target: plasmoid
-                        status: ActiveStatus
-                    }
-                }
-            ]
         }
     }
 
