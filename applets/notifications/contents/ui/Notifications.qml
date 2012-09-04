@@ -262,7 +262,7 @@ Item {
         }
 
         onNewData: {
-            notificationsModel.append({"appIcon" : notificationsSource.data[sourceName]["appIcon"],
+            notificationsModel.insert(0, {"appIcon" : notificationsSource.data[sourceName]["appIcon"],
                                 "appName" : notificationsSource.data[sourceName]["appName"],
                                 "summary" : notificationsSource.data[sourceName]["summary"],
                                 "body" : notificationsSource.data[sourceName]["body"],
@@ -287,13 +287,13 @@ Item {
         property variant runningJobs
 
         onSourceRemoved: {
-            notificationsModel.append({"appIcon" : runningJobs[source]["appIcon"],
+            notificationsModel.insert(0, {"appIcon" : runningJobs[source]["appIconName"],
                                 "appName" : runningJobs[source]["appName"],
                                 "summary" : i18n("%1 [Finished]", runningJobs[source]["infoMessage"]),
                                 "body" : runningJobs[source]["label1"],
                                 "expireTimeout" :0,
                                 "urgency": 0});
-            lastNotificationPopup.popup(runningJobs[source]["appIcon"], runningJobs[source]["label1"])
+            lastNotificationPopup.popup(runningJobs[source]["appIconName"], runningJobs[source]["label1"])
             delete runningJobs[source]
         }
         Component.onCompleted: {
