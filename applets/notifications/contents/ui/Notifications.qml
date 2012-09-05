@@ -110,13 +110,14 @@ Item {
         property variant runningJobs
 
         onSourceRemoved: {
+            var message = runningJobs[source]["label1"] ? runningJobs[source]["label1"] : runningJobs[source]["label0"]
             notificationsModel.insert(0, {"appIcon" : runningJobs[source]["appIconName"],
                                 "appName" : runningJobs[source]["appName"],
                                 "summary" : i18n("%1 [Finished]", runningJobs[source]["infoMessage"]),
-                                "body" : runningJobs[source]["label1"],
+                                "body" : message,
                                 "expireTimeout" :0,
                                 "urgency": 0});
-            lastNotificationPopup.popup(runningJobs[source]["appIconName"], runningJobs[source]["label1"])
+            lastNotificationPopup.popup(runningJobs[source]["appIconName"], message)
             delete runningJobs[source]
         }
         Component.onCompleted: {
