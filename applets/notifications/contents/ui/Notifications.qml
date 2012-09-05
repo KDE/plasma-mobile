@@ -95,6 +95,7 @@ Item {
                 if (item.name == name) {
                     if (item.count <= 1) {
                         remove(i)
+                        appTabBar.currentTab = allAppsTab
                         return
                     }
                     setProperty(i, "count", item.count - 1)
