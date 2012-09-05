@@ -48,10 +48,6 @@ class QNetworkRequest;
 class KDeclarativeWebView;
 class KDeclarativeWebViewPrivate;
 
-namespace KActivities {
-    class Consumer;
-}
-
 class QDeclarativeWebPage : public KWebPage {
     Q_OBJECT
 public:
