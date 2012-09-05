@@ -156,12 +156,15 @@ Item {
 
                 PlasmaComponents.Label {
                     id: countText
-                    text: notificationsRepeater.count+jobsRepeater.count
+                    property int totalCount: notificationsRepeater.count + jobsRepeater.count
+                    text: totalCount
                     anchors.centerIn: parent
-                    onTextChanged: {
-                        if (text != "0") {
+                    property int oldTotalCount: 0
+                    onTotalCountChanged: {
+                        if (totalCount > oldTotalCount) {
                             notificationAnimation.running = true
                         }
+                        oldTotalCount = totalCount
                     }
                 }
 
