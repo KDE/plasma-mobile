@@ -47,7 +47,7 @@ QString FallbackComponent::resolvePath(const QString &component, const QStringLi
             }
         }
 
-        resolved = KStandardDirs::locate("data", "plasma/" + component + '/' + path);
+        resolved = KStandardDirs::locate("data", "plasma/" + key);
         m_paths.insert(key, new QString(resolved));
         if (!resolved.isEmpty()) {
             break;
