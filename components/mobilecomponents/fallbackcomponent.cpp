@@ -34,16 +34,27 @@ FallbackComponent::FallbackComponent(QObject *parent)
 
 QString FallbackComponent::resolvePath(const QString &component, const QStringList &paths)
 {
+    QString resolved;
     foreach (const QString &path, paths) {
         //kDebug() << "Searching for" << path;
-        //TODO: cache this, to prevent too much disk access
-        const QString resolved = KStandardDirs::locate("data", "plasma/" + component + '/' + path);
+        const QString key = component + '/' + path;
+        if (m_paths.contains(key)) {
+            resolved = *m_paths.object(key);
+            if (!resolved.isEmpty()) {
+                break;
+            } else {
+                continue;
+            }
+        }
+
+        resolved = KStandardDirs::locate("data", "plasma/" + component + '/' + path);
+        m_paths.insert(key, new QString(resolved));
         if (!resolved.isEmpty()) {
-            return resolved;
+            break;
         }
     }
 
-    return QString();
+    return resolved;
 }
 
 #include "fallbackcomponent.moc"
