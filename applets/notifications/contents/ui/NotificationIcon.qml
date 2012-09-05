@@ -67,17 +67,49 @@ Item {
             running: visible
         }
 
-        PlasmaComponents.Label {
-            id: countText
-            property int totalCount: notificationsRepeater.count + jobsRepeater.count
-            text: totalCount
+        Column {
+            id: countColumn
+            visible: false
             anchors.centerIn: parent
-            property int oldTotalCount: 0
-            onTotalCountChanged: {
-                if (totalCount > oldTotalCount) {
-                    notificationAnimation.running = true
+            PlasmaCore.SvgItem {
+                svg: notificationSvg
+                function updateElementId() {
+                    switch (plasmoid.location) {
+                    case TopEdge:
+                        elementId = "expander-top"
+                        break
+                    case LeftEdge:
+                        elementId = "expander-left"
+                        break
+                    case RightEdge:
+                        elementId = "expander-right"
+                        break
+                    default:
+                        elementId = "expander-bottom"
+                        break
+                    }
                 }
-                oldTotalCount = totalCount
+                width: naturalSize.width
+                height: naturalSize.height
+                anchors.horizontalCenter: parent.horizontalCenter
+                Component.onCompleted: {
+                    plasmoid.locationChanged.connect(updateElementId)
+                    updateElementId()
+                }
+            }
+            PlasmaComponents.Label {
+                property int totalCount: notificationsRepeater.count + jobsRepeater.count
+                text: totalCount
+
+                property int oldTotalCount: 0
+                font.pointSize: theme.smallestFont.pointSize
+                height: paintedHeight - 3
+                onTotalCountChanged: {
+                    if (totalCount > oldTotalCount) {
+                        notificationAnimation.running = true
+                    }
+                    oldTotalCount = totalCount
+                }
             }
         }
 
@@ -135,7 +167,7 @@ Item {
                     elementId: "notification-disabled"
                 }
                 PropertyChanges {
-                    target: countText
+                    target: countColumn
                     visible: false
                 }
                 PropertyChanges {
@@ -147,10 +179,10 @@ Item {
                 name: "new-notifications"
                 PropertyChanges {
                     target: notificationSvgItem
-                    elementId: "notification-empty"
+                    elementId: jobsSource.sources.length > 0 ? "notification-progress-inactive" : "notification-empty"
                 }
                 PropertyChanges {
-                    target: countText
+                    target: countColumn
                     visible: true
                 }
                 PropertyChanges {
