@@ -120,7 +120,11 @@ PlasmaComponents.ListItem {
             height: childrenRect.height
             //FIXME: proper localization
             PlasmaComponents.Label {
-                text: jobsSource.data[modelData]["processedAmount0"]+" "+jobsSource.data[modelData]["processedUnit0"]+"/"+jobsSource.data[modelData]["totalAmount0"]+" "+jobsSource.data[modelData]["totalUnit0"]
+                //FIXME: assumes they are always bytes, is this correct?
+                text: i18nc("How much many bytes (or whether unit in the locale has been copied over total", "%1 of %2",
+                            locale.formatByteSize(jobsSource.data[modelData]["processedAmount0"]),
+                            locale.formatByteSize(jobsSource.data[modelData]["totalAmount0"]))
+
                 anchors.left: parent.left
                 color: theme.color
             }

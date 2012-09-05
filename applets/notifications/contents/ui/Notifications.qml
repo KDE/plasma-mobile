@@ -23,6 +23,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.extras 0.1 as PlasmaExtras
+import org.kde.locale 0.1 as KLocale
 
 Item {
     id: notificationsApplet
@@ -43,8 +44,8 @@ Item {
         allApplications = new Object
     }
 
-    PlasmaCore.Theme {
-        id: theme
+    KLocale.Locale {
+        id: locale
     }
 
     PlasmaCore.Svg {
