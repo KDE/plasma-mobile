@@ -61,7 +61,7 @@ PlasmaComponents.ListItem {
             NumberAnimation {
                 target: notificationItem
                 properties: "x"
-                to: removeAnimation.exitFromRight ? notificationItem.width : -notificationItem.width
+                to: removeAnimation.exitFromRight ? notificationItem.width-1 : 1-notificationItem.width
                 duration: 250
                 easing.type: Easing.InOutQuad
             }
