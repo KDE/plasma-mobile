@@ -31,9 +31,11 @@ PlasmaComponents.ListItem {
 
     Component.onCompleted: {
         allApplicationsModel.addApplication(appIcon, appName)
+        mainScrollArea.height = mainScrollArea.implicitHeight
     }
     Component.onDestruction: {
         allApplicationsModel.removeApplication(model.appName)
+        mainScrollArea.height = mainScrollArea.implicitHeight
     }
     Timer {
         interval: 30*60*1000
