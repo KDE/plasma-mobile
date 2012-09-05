@@ -27,6 +27,14 @@ PlasmaComponents.ListItem {
     opacity: 1-Math.abs(x)/width
     width: popupFlickable.width
 
+    visible: appTabBar.currentTab == allAppsTab || appTabBar.currentTab.text == appName
+
+    Component.onCompleted: {
+        allApplicationsModel.addApplication(appIcon, appName)
+    }
+    Component.onDestruction: {
+        allApplicationsModel.removeApplication(model.appName)
+    }
     Timer {
         interval: 30*60*1000
         repeat: false

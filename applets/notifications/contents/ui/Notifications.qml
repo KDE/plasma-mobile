@@ -40,6 +40,7 @@ Item {
         //plasmoid.popupIcon = QIcon("preferences-desktop-notification")
         plasmoid.aspectRatioMode = "ConstrainedSquare"
         plasmoid.status = PassiveStatus
+        allApplications = new Object
     }
 
     PlasmaCore.Theme {
@@ -73,6 +74,34 @@ Item {
 
     ListModel {
         id: notificationsModel
+    }
+    ListModel {
+        id: allApplicationsModel
+        function addApplication(icon, name)
+        {
+            for (var i = 0; i < count; ++i) {
+                var item = get(i)
+                if (item.name == name) {
+                    setProperty(i, "count", item.count + 1)
+                    return
+                }
+            }
+            append({"icon": icon, "name": name, "count": 1})
+        }
+        function removeApplication(name)
+        {
+            for (var i = 0; i < count; ++i) {
+                var item = get(i)
+                if (item.name == name) {
+                    if (item.count <= 1) {
+                        remove(i)
+                        return
+                    }
+                    setProperty(i, "count", item.count - 1)
+                    return
+                }
+            }
+        }
     }
 
     PlasmaCore.DataSource {
@@ -184,6 +213,24 @@ Item {
                             verticalCenter: parent.verticalCenter
                         }
                         onClicked: notificationsModel.clear()
+                    }
+                }
+                PlasmaComponents.TabBar {
+                    id: appTabBar
+                    visible: allApplicationsModel.count > 1
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: Math.min(implicitWidth, parent.width-8)
+                    PlasmaComponents.TabButton {
+                        id: allAppsTab
+                        text: i18n("All")
+                        iconSource: "dialog-information"
+                    }
+                    Repeater {
+                        model: allApplicationsModel
+                        PlasmaComponents.TabButton {
+                            text: name
+                            iconSource: icon
+                        }
                     }
                 }
                 Repeater {
