@@ -34,7 +34,7 @@ Item {
 
     property real globalProgress: 0
 
-    property Item iconItem
+    property Item notificationIcon
 
     Component.onCompleted: {
         //plasmoid.popupIcon = QIcon("preferences-desktop-notification")
@@ -58,195 +58,15 @@ Item {
         running: false
         onTriggered: lastNotificationPopup.visible = false
     }
-    PlasmaCore.Dialog {
+    LastNotificationPopup {
         id: lastNotificationPopup
-
-        function popup(icon, text)
-        {
-            lastNotificationText.text = text
-            appIconItem.icon = icon
-
-            var pos = lastNotificationPopup.popupPosition(iconItem, Qt.AlignCenter)
-            lastNotificationPopup.x = pos.x
-            lastNotificationPopup.y = pos.y
-            lastNotificationPopup.visible = true
-            lastNotificationTimer.running = true
-        }
-
-        location: plasmoid.location
-        windowFlags: windowFlags|Qt.WindowStaysOnTopHint
-        mainItem: Item {
-            width: 300
-            height: childrenRect.height
-            QIconItem {
-                id: appIconItem
-                width: theme.largeIconSize
-                height: theme.largeIconSize
-                anchors {
-                    left: parent.left
-                    verticalCenter: parent.verticalCenter
-                }
-            }
-            PlasmaComponents.Label {
-                id: lastNotificationText
-                anchors {
-                    left: appIconItem.right
-                    right: parent.right
-                    verticalCenter: parent.verticalCenter
-                    leftMargin: 6
-                }
-                //textFormat: Text.PlainText
-                color: theme.textColor
-                wrapMode: Text.Wrap
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    lastNotificationPopup.visible = false
-                    lastNotificationTimer.running = false
-                }
-            }
-        }
     }
 
+
     property Component compactRepresentation: Component {
-        Item {
-            PlasmaCore.SvgItem {
-                id: notificationSvgItem
-                svg: notificationSvg
-                elementId: "notification-disabled"
-                anchors.centerIn: parent
-                width: Math.min(parent.width, parent.height)
-                height: width
-                state: notificationsApplet.state
-
-                Component.onCompleted: iconItem = notificationSvgItem
-
-                PlasmaCore.Svg {
-                    id: notificationSvg
-                    imagePath: "icons/notification"
-                }
-
-                Item {
-                    id: jobProgressItem
-                    width: notificationSvgItem.width * globalProgress
-                    clip: true
-                    visible: jobsSource.sources.length > 0
-                    anchors {
-                        left: parent.left
-                        top: parent.top
-                        bottom: parent.bottom
-                    }
-                    PlasmaCore.SvgItem {
-                        svg: notificationSvg
-                        elementId: "notification-progress-active"
-                        anchors {
-                            left: parent.left
-                            top: parent.top
-                            bottom: parent.bottom
-                        }
-                        width: notificationSvgItem.width
-                    }
-                }
-                PlasmaComponents.BusyIndicator {
-                    anchors.fill: parent
-                    visible: jobsSource.sources.length > 0
-                    running: visible
-                }
-
-                PlasmaComponents.Label {
-                    id: countText
-                    property int totalCount: notificationsRepeater.count + jobsRepeater.count
-                    text: totalCount
-                    anchors.centerIn: parent
-                    property int oldTotalCount: 0
-                    onTotalCountChanged: {
-                        if (totalCount > oldTotalCount) {
-                            notificationAnimation.running = true
-                        }
-                        oldTotalCount = totalCount
-                    }
-                }
-
-                PlasmaCore.SvgItem {
-                    id: notificationAnimatedItem
-                    anchors.fill: parent
-                    svg: notificationSvg
-                    elementId: "notification-active"
-                    opacity: 0
-                    scale: 2
-
-                    SequentialAnimation {
-                        id: notificationAnimation
-                        NumberAnimation {
-                            target: notificationAnimatedItem
-                            duration: 250
-                            properties: "opacity, scale"
-                            to: 1
-                            easing.type: Easing.InOutQuad
-                        }
-                        PauseAnimation { duration: 500 }
-                        ParallelAnimation {
-                            NumberAnimation {
-                                target: notificationAnimatedItem
-                                duration: 250
-                                properties: "opacity"
-                                to: 0
-                                easing.type: Easing.InOutQuad
-                            }
-                            NumberAnimation {
-                                target: notificationAnimatedItem
-                                duration: 250
-                                properties: "scale"
-                                to: 2
-                                easing.type: Easing.InOutQuad
-                            }
-                        }
-                    }
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (notificationsRepeater.count + jobsRepeater.count > 0) {
-                            plasmoid.togglePopup()
-                        } else {
-                            plasmoid.hidePopup()
-                        }
-                    }
-                }
-                states: [
-                    State {
-                        name: "default"
-                        PropertyChanges {
-                            target: notificationSvgItem
-                            elementId: "notification-disabled"
-                        }
-                        PropertyChanges {
-                            target: countText
-                            visible: false
-                        }
-                        PropertyChanges {
-                            target: plasmoid
-                            status: PassiveStatus
-                        }
-                    },
-                    State {
-                        name: "new-notifications"
-                        PropertyChanges {
-                            target: notificationSvgItem
-                            elementId: "notification-empty"
-                        }
-                        PropertyChanges {
-                            target: countText
-                            visible: true
-                        }
-                        PropertyChanges {
-                            target: plasmoid
-                            status: ActiveStatus
-                        }
-                    }
-                ]
-            }
+        NotificationIcon {
+            id: notificationIcon
+            Component.onCompleted: notificationsApplet.notificationIcon = notificationIcon
         }
     }
 
