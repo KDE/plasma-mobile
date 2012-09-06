@@ -75,7 +75,7 @@ PlasmaComponents.ListItem {
                 right: parent.right
             }
             PlasmaComponents.ProgressBar {
-                width: parent.width - 48 - 12
+                width: parent.width - pauseButton.width*2 - 12
                 height: 16
                 orientation: Qt.Horizontal
                 minimumValue: 0
@@ -84,11 +84,12 @@ PlasmaComponents.ListItem {
                 value: jobsSource.data[modelData]["percentage"]
                 anchors.verticalCenter: pauseButton.verticalCenter
             }
-            MobileComponents.IconButton {
+            PlasmaComponents.ToolButton {
                 id: pauseButton
-                width: 24
-                height: 24
-                icon: jobsSource.data[modelData]["state"] == "suspended"?QIcon("media-playback-start"):QIcon("media-playback-pause")
+                width: 38
+                height: width
+                iconSource: jobsSource.data[modelData]["state"] == "suspended" ? "media-playback-start" : "media-playback-pause"
+                flat: false
                 onClicked: {
                     var operationName = "suspend"
                     if (jobsSource.data[modelData]["state"] == "suspended") {
@@ -99,11 +100,12 @@ PlasmaComponents.ListItem {
                     service.startOperationCall(operation)
                 }
             }
-            MobileComponents.IconButton {
+            PlasmaComponents.ToolButton {
                 id: stopButton
-                width: 24
-                height: 24
-                icon: QIcon("media-playback-stop")
+                width: 38
+                height: width
+                iconSource: "media-playback-stop"
+                flat: false
                 onClicked: {
                     var service = jobsSource.serviceForSource(modelData)
                     var operation = service.operationDescription("stop")
