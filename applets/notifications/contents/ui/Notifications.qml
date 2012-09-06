@@ -53,13 +53,6 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    Timer {
-        id: lastNotificationTimer
-        interval: 3000
-        repeat: false
-        running: false
-        onTriggered: lastNotificationPopup.visible = false
-    }
     LastNotificationPopup {
         id: lastNotificationPopup
     }

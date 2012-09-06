@@ -41,10 +41,23 @@ PlasmaCore.Dialog {
     }
 
     location: plasmoid.location
-    windowFlags: windowFlags|Qt.WindowStaysOnTopHint
+    windowFlags: Qt.WindowStaysOnTopHint
+    Component.onCompleted: {
+        setAttribute(Qt.WA_X11NetWmWindowTypeDock, true)
+    }
+
     mainItem: Item {
-        width: 300
-        height: childrenRect.height
+        width: theme.defaultFont.mSize.width * 30
+        height: theme.defaultFont.mSize.width * 10
+
+        Timer {
+            id: lastNotificationTimer
+            interval: 4000
+            repeat: false
+            running: false
+            onTriggered: lastNotificationPopup.visible = false
+        }
+
         QIconItem {
             id: appIconItem
             width: theme.largeIconSize
@@ -59,12 +72,16 @@ PlasmaCore.Dialog {
             anchors {
                 left: appIconItem.right
                 right: parent.right
-                verticalCenter: parent.verticalCenter
+                top: parent.top
+                bottom: parent.bottom
                 leftMargin: 6
+                rightMargin: 6
             }
             //textFormat: Text.PlainText
+            verticalAlignment: Text.AlignVCenter
             color: theme.textColor
             wrapMode: Text.Wrap
+            text: Text.ElideRight
         }
         MouseArea {
             anchors.fill: parent
