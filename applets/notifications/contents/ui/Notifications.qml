@@ -41,6 +41,7 @@ Item {
         //plasmoid.popupIcon = QIcon("preferences-desktop-notification")
         plasmoid.aspectRatioMode = "ConstrainedSquare"
         plasmoid.status = PassiveStatus
+        plasmoid.passivePopup = true
         allApplications = new Object
     }
 
