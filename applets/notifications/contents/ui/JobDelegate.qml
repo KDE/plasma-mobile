@@ -41,6 +41,7 @@ PlasmaComponents.ListItem {
             anchors {
                 left: parent.left
                 right: parent.right
+                rightMargin: 6
             }
             spacing: 6
             rows: 4
@@ -80,7 +81,7 @@ PlasmaComponents.ListItem {
             }
             Item {
                 id: progressItem
-                width: parent.width - x
+                width: parent.width - labelName0Text.width
                 height: childrenRect.height
                 PlasmaComponents.ProgressBar {
                     width: parent.width - pauseButton.width*2 - theme.largeIconSize - 6*3
