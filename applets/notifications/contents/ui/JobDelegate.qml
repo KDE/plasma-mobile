@@ -20,6 +20,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 
@@ -28,7 +29,7 @@ PlasmaComponents.ListItem {
     width: popupFlickable.width
 
     Column {
-        spacing: 8
+        spacing: 6
         width: parent.width
         PlasmaComponents.Label {
             text: jobsSource.data[modelData]["infoMessage"]
@@ -42,7 +43,7 @@ PlasmaComponents.ListItem {
                 right: parent.right
             }
             spacing: 6
-            rows: 2
+            rows: 4
             columns: 2
 
             PlasmaComponents.Label {
@@ -67,74 +68,211 @@ PlasmaComponents.ListItem {
                 width: parent.width - labelName0Text.width
                 elide: Text.ElideMiddle
             }
-        }
-        Row {
-            spacing: 6
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-            PlasmaComponents.ProgressBar {
-                width: parent.width - pauseButton.width*2 - 12
-                height: 16
-                orientation: Qt.Horizontal
-                minimumValue: 0
-                maximumValue: 100
-                //percentage doesn't always exist, so doesn't get in the model
-                value: jobsSource.data[modelData]["percentage"]
-                anchors.verticalCenter: pauseButton.verticalCenter
-            }
-            PlasmaComponents.ToolButton {
-                id: pauseButton
-                width: 38
+            QIconItem {
+                icon: jobsSource.data[modelData]["appIconName"]
+                width: theme.mediumIconSize
                 height: width
-                iconSource: jobsSource.data[modelData]["state"] == "suspended" ? "media-playback-start" : "media-playback-pause"
-                flat: false
-                onClicked: {
-                    var operationName = "suspend"
-                    if (jobsSource.data[modelData]["state"] == "suspended") {
-                        operationName = "resume"
+                anchors {
+                    verticalCenter: progressItem.verticalCenter
+                    right: progressItem.left
+                    rightMargin: 6
+                }
+            }
+            Item {
+                id: progressItem
+                width: parent.width - x
+                height: childrenRect.height
+                PlasmaComponents.ProgressBar {
+                    width: parent.width - pauseButton.width*2 - theme.largeIconSize - 6*3
+                    height: 16
+                    orientation: Qt.Horizontal
+                    minimumValue: 0
+                    maximumValue: 100
+                    //percentage doesn't always exist, so doesn't get in the model
+                    value: jobsSource.data[modelData]["percentage"] ? jobsSource.data[modelData]["percentage"] : 0
+
+                    anchors {
+                        left: parent.left
+                        right: buttonsRow.left
+                        verticalCenter: parent.verticalCenter
+                        rightMargin: 6
                     }
-                    var service = jobsSource.serviceForSource(modelData)
-                    var operation = service.operationDescription(operationName)
-                    service.startOperationCall(operation)
+                }
+                Row {
+                    id: buttonsRow
+                    spacing: 6
+                    anchors.right: parent.right
+                    PlasmaComponents.ToolButton {
+                        id: pauseButton
+                        width: theme.mediumIconSize
+                        height: width
+                        iconSource: jobsSource.data[modelData]["state"] == "suspended" ? "media-playback-start" : "media-playback-pause"
+                        flat: false
+                        onClicked: {
+                            var operationName = "suspend"
+                            if (jobsSource.data[modelData]["state"] == "suspended") {
+                                operationName = "resume"
+                            }
+                            var service = jobsSource.serviceForSource(modelData)
+                            var operation = service.operationDescription(operationName)
+                            service.startOperationCall(operation)
+                        }
+                    }
+                    PlasmaComponents.ToolButton {
+                        id: stopButton
+                        width: theme.mediumIconSize
+                        height: width
+                        iconSource: "media-playback-stop"
+                        flat: false
+                        onClicked: {
+                            var service = jobsSource.serviceForSource(modelData)
+                            var operation = service.operationDescription("stop")
+                            service.startOperationCall(operation)
+                        }
+                    }
                 }
             }
             PlasmaComponents.ToolButton {
-                id: stopButton
-                width: 38
+                id: expandButton
+                width: theme.mediumIconSize
                 height: width
-                iconSource: "media-playback-stop"
                 flat: false
-                onClicked: {
-                    var service = jobsSource.serviceForSource(modelData)
-                    var operation = service.operationDescription("stop")
-                    service.startOperationCall(operation)
+                iconSource: checked ? "list-remove" : "list-add"
+                checkable: true
+                anchors {
+                    right: speedLabel.left
+                    rightMargin: 6
+                    verticalCenter: speedLabel.verticalCenter
                 }
             }
+            PlasmaComponents.Label {
+                id: speedLabel
+                text: jobsSource.data[modelData]["eta"] > 0 ? i18nc("Speed and estimated time to completition", "%1 (%2 remaining)", jobsSource.data[modelData]["speed"], locale.prettyFormatDuration(jobsSource.data[modelData]["eta"])) : jobsSource.data[modelData]["speed"]
+            }
         }
+
 
         Item {
+            id: detailsItem
+            state: expandButton.checked ? "expanded" : "collapsed"
             anchors {
                 left: parent.left
                 right: parent.right
+                leftMargin: speedLabel.x
             }
-            height: childrenRect.height
-            //FIXME: proper localization
-            PlasmaComponents.Label {
-                //FIXME: assumes they are always bytes, is this correct?
-                text: i18nc("How much many bytes (or whether unit in the locale has been copied over total", "%1 of %2",
-                            locale.formatByteSize(jobsSource.data[modelData]["processedAmount0"]),
-                            locale.formatByteSize(jobsSource.data[modelData]["totalAmount0"]))
+            property Item contentsItem
+            Component {
+                id: detailsComponent
+                Column {
+                    id: detailsColumn
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
 
-                anchors.left: parent.left
-                color: theme.color
+                    function localizeProcessedAmount(id) {
+                        //if bytes localise the unit
+                        if (jobsSource.data[modelData]["processedUnit"+id] == "bytes") {
+                            return i18nc("How much many bytes (or whether unit in the locale has been copied over total", "%1 of %2",
+                                    locale.formatByteSize(jobsSource.data[modelData]["processedAmount"+id]),
+                                    locale.formatByteSize(jobsSource.data[modelData]["totalAmount"+id]))
+                        //else print something only if is interesting data (ie more than one file/directory etc to copy
+                        } else if (jobsSource.data[modelData]["totalAmount"+id] > 1) {
+                            return i18n( "%1 of %2 %3",
+                                    jobsSource.data[modelData]["processedAmount"+id],
+                                    jobsSource.data[modelData]["totalAmount"+id],
+                                    jobsSource.data[modelData]["processedUnit"+id])
+                        } else {
+                            return ""
+                        }
+                    }
+                    PlasmaComponents.Label {
+                        text: jobsSource.data[modelData] ? detailsColumn.localizeProcessedAmount(0) : ""
+                        anchors.left: parent.left
+                        visible: text != ""
+                    }
+                    PlasmaComponents.Label {
+                        text: jobsSource.data[modelData] ? detailsColumn.localizeProcessedAmount(1) : ""
+                        anchors.left: parent.left
+                        visible: text != ""
+                    }
+                    PlasmaComponents.Label {
+                        text: jobsSource.data[modelData] ? detailsColumn.localizeProcessedAmount(2) : ""
+                        anchors.left: parent.left
+                        visible: text != ""
+                    }
+                    PlasmaWidgets.SignalPlotter {
+                        id: plotter
+                        width: parent.width
+                        useAutoRange: true
+                        showVerticalLines: false
+                        unit: i18n("KiB/s")
+                        height: theme.defaultFont.mSize.height * 5
+                        Component.onCompleted: plotter.addPlot(theme.highlightColor)
+                    }
+                    Connections {
+                        target: jobsSource
+                        onDataChanged: {
+                            plotter.addSample([jobsSource.data[modelData]["numericSpeed"]/1000])
+                        }
+                    }
+                }
             }
-            PlasmaComponents.Label {
-                text: jobsSource.data[modelData]["speed"]
-                anchors.right: parent.right
-                color: theme.color
-            }
+
+            states: [
+                State {
+                    name: "expanded"
+                    PropertyChanges {
+                        target: detailsItem
+                        height: detailsItem.childrenRect.height
+                    }
+                },
+                State {
+                    name: "collapsed"
+                    PropertyChanges {
+                        target: detailsItem
+                        height: 0
+                    }
+                }
+            ]
+            transitions : [
+                Transition {
+                    from: "collapsed"
+                    to: "expanded"
+                    SequentialAnimation {
+                        ScriptAction {
+                            script: {
+                                detailsItem.visible = true
+                                detailsItem.clip = true
+                                //create the contents if they don't exist yet
+                                if (!detailsItem.contentsItem) {
+                                    detailsItem.contentsItem = detailsComponent.createObject(detailsItem)
+                                }
+                            }
+                        }
+                        NumberAnimation {
+                            duration: 250
+                            properties: "height"
+                            easing: PropertyAnimation.EaseInOut
+                        }
+                        ScriptAction {script: detailsItem.clip = false}
+                    }
+                },
+                Transition {
+                    from: "expanded"
+                    to: "collapsed"
+                    SequentialAnimation {
+                        ScriptAction {script: detailsItem.clip = true}
+                        NumberAnimation {
+                            duration: 250
+                            properties: "height"
+                            easing: PropertyAnimation.EaseInOut
+                        }
+                        //TODO: delete the details?
+                        ScriptAction {script: detailsItem.visible = false}
+                    }
+                }
+            ]
         }
     }
 }
