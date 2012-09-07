@@ -210,21 +210,23 @@ Item {
                         onClicked: notificationsModel.clear()
                     }
                 }
-                PlasmaComponents.TabBar {
-                    id: appTabBar
+                PlasmaComponents.ListItem {
                     visible: allApplicationsModel.count > 1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: Math.min(implicitWidth, parent.width-8)
-                    PlasmaComponents.TabButton {
-                        id: allAppsTab
-                        text: i18n("All")
-                        iconSource: "dialog-information"
-                    }
-                    Repeater {
-                        model: allApplicationsModel
+                    PlasmaComponents.TabBar {
+                        id: appTabBar
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: Math.min(implicitWidth, parent.width-8)
                         PlasmaComponents.TabButton {
-                            text: name
-                            iconSource: icon
+                            id: allAppsTab
+                            text: i18n("All")
+                            iconSource: "dialog-information"
+                        }
+                        Repeater {
+                            model: allApplicationsModel
+                            PlasmaComponents.TabButton {
+                                text: name
+                                iconSource: icon
+                            }
                         }
                     }
                 }

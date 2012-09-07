@@ -25,8 +25,8 @@ PlasmaCore.FrameSvgItem {
     id: root
     property alias text: titleLabel.text
 
-    imagePath: "widgets/extender-dragger"
-    prefix: y == 0 ? "root" : ""
+    imagePath: "widgets/listitem"
+    prefix: "section"
 
     anchors {
         left: parent.left
@@ -42,7 +42,7 @@ PlasmaCore.FrameSvgItem {
             left: parent.left
             right: parent.right
             //FIXME: why?
-            topMargin: parent.margins.top + 5
+            topMargin: parent.margins.top
             leftMargin: parent.margins.left
             rightMargin: parent.margins.right
         }
