@@ -34,6 +34,16 @@ Item {
     property int minimumHeight: mainScrollArea.implicitHeight
 
     property real globalProgress: 0
+    //notifications + jobs
+    property int totalCount: notifications.count + jobs.count
+    onTotalCountChanged: {
+        if (totalCount > 0) {
+            state = "new-notifications"
+        } else {
+            state = "default"
+            plasmoid.hidePopup()
+        }
+    }
 
     property Item notificationIcon
 
@@ -67,104 +77,6 @@ Item {
     }
 
 
-    ListModel {
-        id: notificationsModel
-    }
-    ListModel {
-        id: allApplicationsModel
-        function addApplication(icon, name)
-        {
-            for (var i = 0; i < count; ++i) {
-                var item = get(i)
-                if (item.name == name) {
-                    setProperty(i, "count", item.count + 1)
-                    return
-                }
-            }
-            append({"icon": icon, "name": name, "count": 1})
-        }
-        function removeApplication(name)
-        {
-            for (var i = 0; i < count; ++i) {
-                var item = get(i)
-                if (item.name == name) {
-                    if (item.count <= 1) {
-                        remove(i)
-                        appTabBar.currentTab = allAppsTab
-                        return
-                    }
-                    setProperty(i, "count", item.count - 1)
-                    return
-                }
-            }
-        }
-    }
-
-    PlasmaCore.DataSource {
-        id: notificationsSource
-        engine: "notifications"
-        interval: 0
-
-        onSourceAdded: {
-            connectSource(source);
-        }
-
-        onNewData: {
-            notificationsModel.insert(0, {"appIcon" : notificationsSource.data[sourceName]["appIcon"],
-                                "appName" : notificationsSource.data[sourceName]["appName"],
-                                "summary" : notificationsSource.data[sourceName]["summary"],
-                                "body" : notificationsSource.data[sourceName]["body"],
-                                "expireTimeout" : notificationsSource.data[sourceName]["expireTimeout"],
-                                "urgency": notificationsSource.data[sourceName]["urgency"]});
-        }
-
-        onDataChanged: {
-            var i = connectedSources[connectedSources.length-1]
-            lastNotificationPopup.popup(data[i]["appIcon"], String(data[i]["body"]).replace("\n", " "))
-        }
-    }
-
-    PlasmaCore.DataSource {
-        id: jobsSource
-        engine: "applicationjobs"
-        interval: 0
-
-        onSourceAdded: {
-            connectSource(source);
-        }
-        property variant runningJobs
-
-        onSourceRemoved: {
-            var message = runningJobs[source]["label1"] ? runningJobs[source]["label1"] : runningJobs[source]["label0"]
-            notificationsModel.insert(0, {"appIcon" : runningJobs[source]["appIconName"],
-                                "appName" : runningJobs[source]["appName"],
-                                "summary" : i18n("%1 [Finished]", runningJobs[source]["infoMessage"]),
-                                "body" : message,
-                                "expireTimeout" :0,
-                                "urgency": 0});
-            lastNotificationPopup.popup(runningJobs[source]["appIconName"], message)
-            delete runningJobs[source]
-        }
-        Component.onCompleted: {
-            jobsSource.runningJobs = new Object
-            connectedSources = sources
-        }
-        onNewData: {
-            var jobs = runningJobs
-            jobs[sourceName] = data
-            runningJobs = jobs
-        }
-        onDataChanged: {
-            var total = 0
-            for (var i = 0; i < sources.length; ++i) {
-                total += jobsSource.data[sources[i]]["percentage"]
-            }
-
-            total /= sources.length
-            globalProgress = total/100
-        }
-    }
-
     PlasmaExtras.ScrollArea {
         id: mainScrollArea
         anchors.fill: parent
@@ -182,67 +94,13 @@ Item {
             Column {
                 id: contentsColumn
                 width: popupFlickable.width
-                Title {
-                    visible: jobsRepeater.count > 0
-                    text: i18n("Transfers")
+
+                //TODO: load those on demand based on configuration
+                Jobs {
+                    id: jobs
                 }
-                Repeater {
-                    id: jobsRepeater
-                    model: jobsSource.sources
-                    delegate: JobDelegate {}
-                    onCountChanged: {
-                        if (count+notificationsRepeater.count > 0) {
-                            notificationsApplet.state = "new-notifications"
-                        } else {
-                            notificationsApplet.state = "default"
-                            plasmoid.hidePopup()
-                        }
-                    }
-                }
-                Title {
-                    visible: notificationsRepeater.count > 0
-                    text: i18n("Notifications")
-                    PlasmaComponents.ToolButton {
-                        iconSource: "window-close"
-                        anchors {
-                            right: parent.right
-                            verticalCenter: parent.verticalCenter
-                        }
-                        onClicked: notificationsModel.clear()
-                    }
-                }
-                PlasmaComponents.ListItem {
-                    visible: allApplicationsModel.count > 1
-                    PlasmaComponents.TabBar {
-                        id: appTabBar
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        width: Math.min(implicitWidth, parent.width-8)
-                        PlasmaComponents.TabButton {
-                            id: allAppsTab
-                            text: i18n("All")
-                            iconSource: "dialog-information"
-                        }
-                        Repeater {
-                            model: allApplicationsModel
-                            PlasmaComponents.TabButton {
-                                text: name
-                                iconSource: icon
-                            }
-                        }
-                    }
-                }
-                Repeater {
-                    id: notificationsRepeater
-                    model: notificationsModel
-                    onCountChanged: {
-                        if (count+jobsRepeater.count > 0) {
-                            notificationsApplet.state = "new-notifications"
-                        } else {
-                            notificationsApplet.state = "default"
-                            plasmoid.hidePopup()
-                        }
-                    }
-                    delegate: NotificationDelegate {}
+                Notifications {
+                    id: notifications
                 }
             }
         }

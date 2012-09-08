@@ -44,7 +44,7 @@ Item {
             id: jobProgressItem
             width: notificationSvgItem.width * globalProgress
             clip: true
-            visible: jobsSource.sources.length > 0
+            visible: jobs.count > 0
             anchors {
                 left: parent.left
                 top: parent.top
@@ -63,7 +63,7 @@ Item {
         }
         PlasmaComponents.BusyIndicator {
             anchors.fill: parent
-            visible: jobsSource.sources.length > 0
+            visible: jobs.count > 0
             running: visible
         }
 
@@ -98,7 +98,7 @@ Item {
                 }
             }
             PlasmaComponents.Label {
-                property int totalCount: notificationsRepeater.count + jobsRepeater.count
+                property int totalCount: notificationsApplet.totalCount
                 text: totalCount
 
                 property int oldTotalCount: 0
@@ -152,7 +152,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                if (notificationsRepeater.count + jobsRepeater.count > 0) {
+                if (notificationsApplet.totalCount > 0) {
                     plasmoid.togglePopup()
                 } else {
                     plasmoid.hidePopup()
@@ -179,7 +179,7 @@ Item {
                 name: "new-notifications"
                 PropertyChanges {
                     target: notificationSvgItem
-                    elementId: jobsSource.sources.length > 0 ? "notification-progress-inactive" : "notification-empty"
+                    elementId: jobs.count > 0 ? "notification-progress-inactive" : "notification-empty"
                 }
                 PropertyChanges {
                     target: countColumn
