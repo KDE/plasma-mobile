@@ -57,17 +57,32 @@ Column {
         onDataChanged: {
             var total = 0
             for (var i = 0; i < sources.length; ++i) {
-                total += jobsSource.data[sources[i]]["percentage"]
+                if (jobsSource.data[sources[i]]["percentage"]) {
+                    total += jobsSource.data[sources[i]]["percentage"]
+                }
             }
 
             total /= sources.length
-            globalProgress = total/100
+            notificationsApplet.globalProgress = total/100
         }
     }
 
     Title {
         visible: jobsRepeater.count > 0
         text: i18n("Transfers")
+    }
+    PlasmaComponents.ListItem {
+        visible: jobsRepeater.count > 1
+        PlasmaComponents.ProgressBar {
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                right: parent.right
+            }
+            minimumValue: 0
+            maximumValue: 100
+            value: notificationsApplet.globalProgress * 100
+        }
     }
     Repeater {
         id: jobsRepeater
