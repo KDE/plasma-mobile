@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Widget Strip
 Name[da]=Widget-stribe
-Name[el]=Σειρά συστατικών
+Name[el]=Σειρά γραφικών συστατικών
 Name[es]=Tira de elementos gráficos
 Name[et]=Vidinariba
 Name[fr]=Bandeau de fenêtre
@@ -22,7 +22,7 @@ Name[x-test]=xxWidget Stripxx
 Name[zh_TW]=元件帶
 GenericName=Widget Strip
 GenericName[da]=Widget-stribe
-GenericName[el]=Σειρά συστατικών
+GenericName[el]=Σειρά γραφικών συστατικών
 GenericName[es]=Tira de elementos gráficos
 GenericName[et]=Vidinariba
 GenericName[fr]=Bandeau de fenêtre
@@ -43,7 +43,7 @@ GenericName[x-test]=xxWidget Stripxx
 GenericName[zh_TW]=元件帶
 Comment=A collection of widgets
 Comment[da]=En samling af widgets
-Comment[el]=Συλλογή συστατικών
+Comment[el]=Συλλογή γραφικών συστατικών
 Comment[es]=Una colección de elementos gráficos
 Comment[et]=Vidinakogu
 Comment[fi]=Kokoelma sovelmia
