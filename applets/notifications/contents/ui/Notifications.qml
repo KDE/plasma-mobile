@@ -41,7 +41,7 @@ Column {
                 "expireTimeout": expireTimeout,
                 "urgency" : urgency,
                 "actions" : actions});
-        lastNotificationPopup.popup(appIcon, body)
+        lastNotificationPopup.popup()
     }
 
     function executeAction(source, id) {
@@ -56,6 +56,10 @@ Column {
         } else if (source.indexOf("Job") !== -1) {
             plasmoid.openUrl(id)
         }
+    }
+
+    LastNotificationPopup {
+        id: lastNotificationPopup
     }
 
     ListModel {

@@ -64,11 +64,6 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
-    LastNotificationPopup {
-        id: lastNotificationPopup
-    }
-
-
     property Component compactRepresentation: Component {
         NotificationIcon {
             id: notificationIcon

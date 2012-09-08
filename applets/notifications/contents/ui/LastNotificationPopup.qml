@@ -28,15 +28,16 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 PlasmaCore.Dialog {
     id: lastNotificationPopup
 
-    function popup(icon, text)
+    function popup()
     {
-        lastNotificationText.text = text
-        appIconItem.icon = icon
+
+        notificationsView.positionViewAtBeginning()
 
         var pos = lastNotificationPopup.popupPosition(notificationIcon, Qt.AlignCenter)
         lastNotificationPopup.x = pos.x
         lastNotificationPopup.y = pos.y
         lastNotificationPopup.visible = true
+        lastNotificationTimer.interval = Math.max(4000, Math.min(60*1000, notificationsModel.get(0).expireTimeout))
         lastNotificationTimer.running = true
     }
 
@@ -47,8 +48,10 @@ PlasmaCore.Dialog {
     }
 
     mainItem: Item {
+        id: mainItem
         width: theme.defaultFont.mSize.width * 30
         height: theme.defaultFont.mSize.width * 10
+
 
         Timer {
             id: lastNotificationTimer
@@ -58,36 +61,67 @@ PlasmaCore.Dialog {
             onTriggered: lastNotificationPopup.visible = false
         }
 
-        QIconItem {
-            id: appIconItem
-            width: theme.largeIconSize
-            height: theme.largeIconSize
-            anchors {
-                left: parent.left
-                verticalCenter: parent.verticalCenter
-            }
-        }
-        PlasmaComponents.Label {
-            id: lastNotificationText
-            anchors {
-                left: appIconItem.right
-                right: parent.right
-                top: parent.top
-                bottom: parent.bottom
-                leftMargin: 6
-                rightMargin: 6
-            }
-            //textFormat: Text.PlainText
-            verticalAlignment: Text.AlignVCenter
-            color: theme.textColor
-            wrapMode: Text.Wrap
-            text: Text.ElideRight
-        }
-        MouseArea {
+        ListView {
+            id: notificationsView
+            snapMode: ListView.SnapOneItem
             anchors.fill: parent
-            onClicked: {
-                lastNotificationPopup.visible = false
-                lastNotificationTimer.running = false
+            model: notificationsModel
+            delegate: MouseArea {
+                width: mainItem.width
+                height: mainItem.height
+                onClicked: {
+                    lastNotificationPopup.visible = false
+                    lastNotificationTimer.running = false
+                }
+                QIconItem {
+                    id: appIconItem
+                    icon: model.appIcon
+                    width: theme.largeIconSize
+                    height: theme.largeIconSize
+                    anchors {
+                        left: parent.left
+                        verticalCenter: parent.verticalCenter
+                    }
+                }
+                PlasmaComponents.Label {
+                    id: lastNotificationText
+                    text: model.body
+                    anchors {
+                        left: appIconItem.right
+                        right: actionsColumn.left
+                        top: parent.top
+                        bottom: parent.bottom
+                        leftMargin: 6
+                        rightMargin: 6
+                    }
+                    //textFormat: Text.PlainText
+                    verticalAlignment: Text.AlignVCenter
+                    color: theme.textColor
+                    wrapMode: Text.Wrap
+                    elide: Text.ElideRight
+                }
+                Column {
+                    id: actionsColumn
+                    spacing: 6
+                    anchors {
+                        right: parent.right
+                        rightMargin: 6
+                        verticalCenter: parent.verticalCenter
+                    }
+                    Repeater {
+                        model: actions
+                        PlasmaComponents.Button {
+                            text: model.text
+                            width: theme.defaultFont.mSize.width * 8
+                            height: theme.defaultFont.mSize.width * 2
+                            onClicked: {
+                                print("AAAAAAAAA"+source+model.id)
+                                executeAction(source, model.id)
+                                actionsColumn.visible = false
+                            }
+                        }
+                    }
+                }
             }
         }
     }
