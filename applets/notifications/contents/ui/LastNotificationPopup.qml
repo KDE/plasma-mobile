@@ -78,10 +78,18 @@ PlasmaCore.Dialog {
                     icon: model.appIcon
                     width: theme.largeIconSize
                     height: theme.largeIconSize
+                    visible: !imageItem.visible
                     anchors {
                         left: parent.left
                         verticalCenter: parent.verticalCenter
                     }
+                }
+                QImageItem {
+                    id: imageItem
+                    anchors.fill: appIconItem
+                    smooth: true
+                    image: model.image
+                    visible: nativeWidth > 0
                 }
                 PlasmaComponents.Label {
                     id: lastNotificationText

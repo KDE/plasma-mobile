@@ -25,7 +25,7 @@ Column {
     id: notificationsRoot
     property alias count: notificationsRepeater.count
 
-    function addNotification(source, appIcon, appName, summary, body, expireTimeout, urgency, actions) {
+    function addNotification(source, appIcon, image, appName, summary, body, expireTimeout, urgency, actions) {
         for (var i = 0; i < notificationsModel.count; ++i) {
             if (notificationsModel.get(i).source == source) {
                 notificationsModel.remove(i)
@@ -35,6 +35,7 @@ Column {
         notificationsModel.insert(0,
                {"source"  : source,
                 "appIcon" : appIcon,
+                "image"   : image,
                 "appName" : appName,
                 "summary" : summary,
                 "body"    : body,
@@ -117,6 +118,7 @@ Column {
             notificationsRoot.addNotification(
                     sourceName,
                     notificationsSource.data[sourceName]["appIcon"],
+                    notificationsSource.data[sourceName]["image"],
                     notificationsSource.data[sourceName]["appName"],
                     notificationsSource.data[sourceName]["summary"],
                     notificationsSource.data[sourceName]["body"],

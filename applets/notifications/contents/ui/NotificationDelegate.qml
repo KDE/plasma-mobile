@@ -143,10 +143,18 @@ PlasmaComponents.ListItem {
                     icon: QIcon(appIcon)
                     width: theme.largeIconSize
                     height: theme.largeIconSize
+                    visible: !imageItem.visible
                     anchors {
                         left: parent.left
                         verticalCenter: parent.verticalCenter
                     }
+                }
+                QImageItem {
+                    id: imageItem
+                    anchors.fill: appIconItem
+                    image: model.image
+                    smooth: true
+                    visible: nativeWidth > 0
                 }
                 PlasmaComponents.Label {
                     text: body
