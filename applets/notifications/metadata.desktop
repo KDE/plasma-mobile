@@ -70,5 +70,5 @@ X-KDE-ServiceTypes=Plasma/PopupApplet,Plasma/Applet
 X-Plasma-API=declarativeappletscript
 X-Plasma-DefaultSize=100,100
 X-Plasma-MainScript=ui/main.qml
-
+X-Plasma-RequiredExtensions=LaunchApp
 X-Plasma-NotificationArea=true

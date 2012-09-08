@@ -153,12 +153,33 @@ PlasmaComponents.ListItem {
                     color: theme.textColor
                     anchors {
                         left: appIconItem.right
-                        right: parent.right
+                        right: actionsColumn.left
                         verticalCenter: parent.verticalCenter
                         leftMargin: 6
                         rightMargin: 6
                     }
                     wrapMode: Text.Wrap
+                }
+                Column {
+                    id: actionsColumn
+                    spacing: 6
+                    anchors {
+                        right: parent.right
+                        rightMargin: 6
+                        verticalCenter: parent.verticalCenter
+                    }
+                    Repeater {
+                        model: actions
+                        PlasmaComponents.Button {
+                            text: model.text
+                            width: theme.defaultFont.mSize.width * 8
+                            height: theme.defaultFont.mSize.width * 2
+                            onClicked: {
+                                executeAction(source, model.id)
+                                actionsColumn.visible = false
+                            }
+                        }
+                    }
                 }
             }
         }

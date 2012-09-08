@@ -25,15 +25,37 @@ Column {
     id: notificationsRoot
     property alias count: notificationsRepeater.count
 
-    function addNotification(appIcon, appName, summary, body, expireTimeout, urgency) {
+    function addNotification(source, appIcon, appName, summary, body, expireTimeout, urgency, actions) {
+        for (var i = 0; i < notificationsModel.count; ++i) {
+            if (notificationsModel.get(i).source == source) {
+                notificationsModel.remove(i)
+                break
+            }
+        }
         notificationsModel.insert(0,
-               {"appIcon" : appIcon,
+               {"source"  : source,
+                "appIcon" : appIcon,
                 "appName" : appName,
                 "summary" : summary,
-                "body": body,
+                "body"    : body,
                 "expireTimeout": expireTimeout,
-                "urgency": urgency});
+                "urgency" : urgency,
+                "actions" : actions});
         lastNotificationPopup.popup(appIcon, body)
+    }
+
+    function executeAction(source, id) {
+        //try to use the service
+        if (source.indexOf("notification") !== -1) {
+            var service = notificationsSource.serviceForSource(source)
+            var op = service.operationDescription("invokeAction")
+            op["actionId"] = id
+
+            service.startOperationCall(op)
+        //try to open the id as url
+        } else if (source.indexOf("Job") !== -1) {
+            plasmoid.openUrl(id)
+        }
     }
 
     ListModel {
@@ -79,13 +101,24 @@ Column {
         }
 
         onNewData: {
+            var actions = new Array()
+            if (notificationsSource.data[sourceName]["actions"].length%2 == 0) {
+                for (var i = 0; i < notificationsSource.data[sourceName]["actions"].length; i += 2) {
+                    var action = new Object()
+                    action["id"] = notificationsSource.data[sourceName]["actions"][i]
+                    action["text"] = notificationsSource.data[sourceName]["actions"][i+1]
+                    actions.push(action)
+                }
+            }
             notificationsRoot.addNotification(
+                    sourceName,
                     notificationsSource.data[sourceName]["appIcon"],
                     notificationsSource.data[sourceName]["appName"],
                     notificationsSource.data[sourceName]["summary"],
                     notificationsSource.data[sourceName]["body"],
                     notificationsSource.data[sourceName]["expireTimeout"],
-                    notificationsSource.data[sourceName]["urgency"])
+                    notificationsSource.data[sourceName]["urgency"],
+                    actions)
         }
 
         onDataChanged: {

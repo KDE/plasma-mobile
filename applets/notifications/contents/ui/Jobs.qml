@@ -36,13 +36,16 @@ Column {
         property variant runningJobs
 
         onSourceRemoved: {
+            var message = runningJobs[source]["label1"] ? runningJobs[source]["label1"] : runningJobs[source]["label0"]
             notifications.addNotification(
+                source,
                 runningJobs[source]["appIconName"],
                 runningJobs[source]["appName"],
                 i18n("%1 [Finished]", runningJobs[source]["infoMessage"]),
-                runningJobs[source]["label1"] ? runningJobs[source]["label1"] : runningJobs[source]["label0"],
+                message,
                 0,
-                0)
+                0,
+                [{"id": message, "text": i18n("Open")}])
             delete runningJobs[source]
         }
         Component.onCompleted: {
