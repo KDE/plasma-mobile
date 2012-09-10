@@ -123,7 +123,6 @@ PlasmaCore.Dialog {
                             width: theme.defaultFont.mSize.width * 8
                             height: theme.defaultFont.mSize.width * 2
                             onClicked: {
-                                print("AAAAAAAAA"+source+model.id)
                                 executeAction(source, model.id)
                                 actionsColumn.visible = false
                             }
