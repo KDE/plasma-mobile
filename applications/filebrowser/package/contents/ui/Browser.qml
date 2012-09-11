@@ -480,6 +480,13 @@ MobileComponents.SplitDrawer {
                         }
                     }
 
+                    onReleased: {
+                        //are we outside the listview area?
+                        if (resultsGrid.childAt(mouse.x, mouse.y).delegate === undefined && selectionRect.width == 0) {
+                            selectedModel.clear()
+                            selectedModel.modelCleared()
+                        }
+                    }
                     Connections {
                         target: fileBrowserRoot.model
                         onCountChanged: pinchArea.resetSelection()
