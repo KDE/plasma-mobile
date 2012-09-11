@@ -101,7 +101,7 @@ PlasmaComponents.Page {
                                 color: theme.textColor
                                 anchors.fill: parent
                                 radius: width/2
-                                opacity: parent.underDrag ? 0.6 : 0.1
+                                opacity: parent.underDrag ? 0.6 : 0.2
                                 Behavior on opacity {
                                     NumberAnimation {
                                         duration: 250
@@ -112,12 +112,12 @@ PlasmaComponents.Page {
                             Rectangle {
                                 anchors {
                                     fill: background
-                                    topMargin: 1
-                                    bottomMargin: -1
+                                    topMargin: 2
+                                    bottomMargin: -2
                                 }
                                 radius: width/2
                                 color: "white"
-                                opacity: 0.3
+                                opacity: 0.6
                             }
                             Rectangle {
                                 color: parent.parent.checked ? theme.highlightColor : theme.textColor
@@ -185,7 +185,7 @@ PlasmaComponents.Page {
                                 anchors.fill: parent
 
                                 radius: width/2
-                                opacity: parent.parent.underDrag ? 0.6 : 0.1
+                                opacity: parent.parent.underDrag ? 0.6 : 0.2
                                 Behavior on opacity {
                                     NumberAnimation {
                                         duration: 250
@@ -196,12 +196,12 @@ PlasmaComponents.Page {
                             Rectangle {
                                 anchors {
                                     fill: newDragBackground
-                                    topMargin: 1
-                                    bottomMargin: -1
+                                    topMargin: 2
+                                    bottomMargin: -2
                                 }
                                 radius: width/2
                                 color: "white"
-                                opacity: 0.3
+                                opacity: 0.6
                             }
                             Rectangle {
                                 color: theme.textColor
@@ -210,7 +210,7 @@ PlasmaComponents.Page {
                                     margins: 20
                                 }
                                 radius: width/2
-                                opacity: 0.5
+                                opacity: 0.6
                             }
                             Rectangle {
                                 color: theme.backgroundColor
