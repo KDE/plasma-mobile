@@ -452,6 +452,7 @@ MobileComponents.SplitDrawer {
                 delegate: Item {
                     width: 250
                     height: 250
+                    opacity: 0.7
 
                     Repeater {
                         model: Math.min(4, dragArea.labels.length)
@@ -474,8 +475,9 @@ MobileComponents.SplitDrawer {
                 MouseEventListener {
                     anchors.fill: parent
                     onPressed: startY = mouse.y
+
                     onPositionChanged: {
-                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
+                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 100) {
                             dragArea.enabled = true
                         }
                     }
@@ -486,6 +488,7 @@ MobileComponents.SplitDrawer {
                             selectedModel.clear()
                             selectedModel.modelCleared()
                         }
+                        dragArea.enabled = false
                     }
                     Connections {
                         target: fileBrowserRoot.model
@@ -542,6 +545,12 @@ MobileComponents.SplitDrawer {
 
                                 width: resultsGrid.delegateWidth
                                 height: resultsGrid.delegateHeight
+                                onPressed: {
+                                    if (selectedModel.count > 0 && 
+                                        highlightFrame.opacity > 0) {
+                                        dragArea.enabled = true
+                                    }
+                                }
                                 onPressAndHold: {
                                     resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
                                     resourceInstance.title = model["label"]
