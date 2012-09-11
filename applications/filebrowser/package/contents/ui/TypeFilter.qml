@@ -23,6 +23,7 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.draganddrop 1.0
 
 Column {
 
@@ -103,6 +104,34 @@ Column {
                     metadataModel.activityId = activitySource.data.Status.Current
                 } else {
                     metadataModel.activityId = ""
+                }
+            }
+            Rectangle {
+                anchors {
+                    fill: parent
+                    margins: -5
+                }
+                visible: activityDrop.underDrag
+                radius: 4
+                color: theme.textColor
+                opacity: 0.4
+            }
+            DropArea {
+                id: activityDrop
+                anchors.fill: parent
+                property bool underDrag: false
+                onDragEnter: underDrag = true
+                onDragLeave: underDrag = false
+                onDrop: {
+                    underDrag = false
+                    var service = metadataSource.serviceForSource("")
+                    var operation = service.operationDescription("connectToActivity")
+                    operation["ActivityUrl"] = activitySource.data["Status"]["Current"]
+
+                    for (var i = 0; i < event.mimeData.urls.length; ++i) {
+                        operation["ResourceUrl"] = event.mimeData.urls[i]
+                        service.startOperationCall(operation)
+                    }
                 }
             }
         }

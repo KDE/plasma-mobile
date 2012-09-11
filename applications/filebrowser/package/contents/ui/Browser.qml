@@ -35,6 +35,12 @@ MobileComponents.SplitDrawer {
         topMargin: toolBar.height
     }
 
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.metadata"
+        //connectedSources: []
+    }
+
     tools: Item {
         width: parent.width
         height: childrenRect.height

@@ -40,11 +40,6 @@ PlasmaComponents.Page {
         }
         text: i18n("Tags")
     }
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        //connectedSources: []
-    }
 
     Flickable {
         id: mainFlickable
