@@ -78,7 +78,9 @@ void MetadataJob::start()
                 typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Application");
                 fileRes.addType(typeUrl);
                 fileRes.setLabel(service->name());
-                fileRes.addSymbol(service->icon());
+                if (!service->icon().isEmpty()) {
+                    fileRes.addSymbol(service->icon());
+                }
             }
         }
 
