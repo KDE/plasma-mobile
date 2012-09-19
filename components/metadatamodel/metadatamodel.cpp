@@ -567,7 +567,9 @@ void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
         }
         m_cachedResources[resource][Types] = types;
 
-        if (!resource.symbols().isEmpty()) {
+        //FIXME: symbols seems broken on Mer
+        //indagate after PA3
+        if (0&&!resource.symbols().isEmpty()) {
             m_cachedResources[resource][Icon] = resource.symbols().first();
         } else {
             //if it's an application, fetch the icon from the desktop file
