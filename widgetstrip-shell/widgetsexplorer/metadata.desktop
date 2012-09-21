@@ -12,6 +12,7 @@ Name[sl]=Raziskovalnik gradnikov
 Name[sv]=Komponentutforskare
 Name[uk]=Перегляд віджетів
 Name[x-test]=xxWidget explorerxx
+Name[zh_TW]=元件瀏覽器
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/GenericPackage

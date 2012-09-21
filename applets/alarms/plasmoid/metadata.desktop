@@ -14,6 +14,7 @@ Name[sl]=Alarmi
 Name[sv]=Alarm
 Name[uk]=Нагадування
 Name[x-test]=xxAlarmsxx
+Name[zh_TW]=鬧鐘
 Comment=Alarms setup tool
 Comment[da]=Opsætningsværktøj til alarmer
 Comment[el]=Εργαλείο ρύθμισης συναγερμών
@@ -27,6 +28,7 @@ Comment[sl]=Orodje za nastavitev alarmov
 Comment[sv]=Verktyg för alarminställning
 Comment[uk]=Програма для налаштовування нагадувань
 Comment[x-test]=xxAlarms setup toolxx
+Comment[zh_TW]=鬧鐘設定工具
 
 Type=Service
 Icon=kalarm-active

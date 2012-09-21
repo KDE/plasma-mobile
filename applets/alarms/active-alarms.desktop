@@ -13,6 +13,7 @@ Name[sl]=Alarmi
 Name[sv]=Alarm
 Name[uk]=Нагадування
 Name[x-test]=xxAlarmsxx
+Name[zh_TW]=鬧鐘
 Comment=A tool to setup visual and audio alarms for tablets
 Comment[da]=Et værktøj til at sætte visuelle og lydalarmer op til tablet-pc'er
 Comment[el]=Εργαλείο για τη ρύθμιση οπτικών και ηχητικών συναγερμών για πινάκια
@@ -26,6 +27,7 @@ Comment[sl]=Orodje za nastavitev vidnih in zvočnih alarmov za tablice
 Comment[sv]=Ett verktyg för att ställa in synliga och hörbara alarm för läsplattor
 Comment[uk]=Програма для налаштовування візуальних та звукових нагадувань для планшетів
 Comment[x-test]=xxA tool to setup visual and audio alarms for tabletsxx
+Comment[zh_TW]=在平板裝置上設定視覺與音效鬧鐘的工具
 
 Exec=export PLASMA_CUSTOM_PREFIX_PATHS=platformcontents/application/generic/:platformcontents/application/tablet/:contents/ && plasma-windowed -graphicssystem raster org.kde.active.alarms
 Terminal=false
