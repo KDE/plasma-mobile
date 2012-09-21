@@ -30,6 +30,7 @@
 #include <Akonadi/ChangeRecorder>
 #include <Akonadi/CollectionFetchScope>
 #include <Akonadi/Session>
+#include <Akonadi/Control>
 #include <Akonadi/Collection>
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/ItemFetchJob>
@@ -50,6 +51,11 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
       m_collectionJobs(0)
 {
     Q_UNUSED(args);
+
+    if ( !Akonadi::Control::start() ) {
+        kWarning() << "ERROR: unable to start Akonadi server, this engine won't work";
+        return;
+    }
 
     //Monitor the collection for changes
     Akonadi::Monitor * monitor = new Akonadi::Monitor( this );

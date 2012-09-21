@@ -16,4 +16,3 @@ install( FILES ${toolbar-icons} DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/air
 FILE(GLOB appbackgrounds appbackgrounds/*.png)
 install( FILES ${appbackgrounds} DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/air-mobile/appbackgrounds/ )
 
-
