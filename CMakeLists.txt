@@ -63,7 +63,6 @@ add_subdirectory(dataengines)
 add_subdirectory(qmlpackages)
 add_subdirectory(runners)
 add_subdirectory(shell)
-add_subdirectory(virtualkeyboard)
 add_subdirectory(wallpapers)
 add_subdirectory(widgetstrip-shell)
 
