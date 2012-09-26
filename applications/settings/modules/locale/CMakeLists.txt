@@ -17,4 +17,4 @@ install(TARGETS active_settings_locale DESTINATION ${PLUGIN_INSTALL_DIR})
 
 # Locale
 install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.settings.locale)
-install(FILES package/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-package-org.kde.active.settings.locale.desktop)
+install(FILES package/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME org.kde.active.settings.locale.desktop)
