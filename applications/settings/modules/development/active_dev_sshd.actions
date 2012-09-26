@@ -1,0 +1,11 @@
+[Domain]
+Name=SSH Remote Access
+Icon=utilities-terminal
+
+[org.kde.active.sshdcontrol.start]
+Name=Activate sshd
+Policy=yes
+
+[org.kde.active.sshdcontrol.stop]
+Name=Deactivate sshd
+Policy=yes
