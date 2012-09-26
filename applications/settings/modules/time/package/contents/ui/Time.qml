@@ -237,9 +237,4 @@ Item {
         }
         onRejected: selectedIndex = -1
     }
-
-    Component.onCompleted: {
-        print("Loaded Time.qml successfully.");
-    }
-
 }
