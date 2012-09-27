@@ -132,7 +132,12 @@ Item {
             maximumValue: 24
             stepSize: 1
             anchors { left: parent.horizontalCenter; right: parent.right; verticalCenter: parent.verticalCenter; }
-            Component.onCompleted: value = browserConfig.readEntry("fontSizeCorrection");
+            Component.onCompleted: {
+                var fontSizeCorrection = parseFloat(browserConfig.readEntry("fontSizeCorrection"));
+                if (fontSizeCorrection > 0) {
+                    value = fontSizeCorrection;
+                }
+            }
             onValueChanged: {
                 var s = theme.defaultFont.pointSize + fontSizeSlider.value;
                 browserConfig.writeEntry("fontSizeCorrection", fontSizeSlider.value);
