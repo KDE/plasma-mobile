@@ -23,23 +23,31 @@
 #include <QTimer>
 
 #include <KAuth/Action>
+#include <KConfig>
+#include <KConfigGroup>
 #include <KDebug>
+#include <KGlobal>
 #include <KPluginFactory>
-
-#include "legacycursorbitmaps.h"
+#include <KService>
 
 //FIXME: hardcoded strings! *groan*
 const QByteArray visibleCursorTheme("Oxygen_White");
 const QByteArray noCursorTheme("plasmamobilemouse");
-
+const QString terminalApp("");
 DevelSettings::DevelSettings(QObject *parent)
     : QObject(parent)
 {
     m_cursorVisible = (cursorTheme() != noCursorTheme);
-    // FIXME: should probably not rely on systemctl, but be put into a platform specific backend?
-    int rv = QProcess::execute("systemctl is-enabled sshd.service");
+
+    // TODO: should probably not rely on systemctl, but be put into a platform specific backend?
+    const int rv = QProcess::execute("systemctl is-enabled sshd.service");
     m_sshEnabled = rv == 0;
-    // TODO: read settings for terminal
+
+    m_konsoleShown = false;
+    KConfigGroup confGroup(KGlobal::config(), "General");
+    const QString terminal = confGroup.readPathEntry("TerminalApplication", QString::fromLatin1("konsole"));
+    KService::Ptr service = KService::serviceByStorageId(terminal);
+    m_konsoleShown = service && !service->noDisplay();
 }
 
 bool DevelSettings::sshEnabled() const
@@ -49,12 +57,11 @@ bool DevelSettings::sshEnabled() const
 
 void DevelSettings::enableSsh(bool enable)
 {
-    kDebug() << enable;
     if (m_sshEnabled != enable) {
         const bool was = m_sshEnabled;
         m_sshEnabled = enable;
 
-        //FIXME: this really should be non-blocking ...
+        //TODO: this really should be non-blocking ...
         KAuth::Action action(m_sshEnabled ? "org.kde.active.sshdcontrol.start"
                                           : "org.kde.active.sshdcontrol.stop");
         action.setHelperID("org.kde.active.sshdcontrol");
