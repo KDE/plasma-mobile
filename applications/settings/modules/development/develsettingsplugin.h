@@ -26,7 +26,7 @@ class DevelSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool sshEnabled READ sshEnabled WRITE enableSsh NOTIFY enableSshChanged)
-    Q_PROPERTY(bool showTerminal READ konsoleShown WRITE setShowTerminal NOTIFY showTerminalChanged)
+    Q_PROPERTY(bool showTerminal READ terminalShown WRITE setShowTerminal NOTIFY showTerminalChanged)
     Q_PROPERTY(bool visibleCursor READ isCursorVisible WRITE setCursorVisible NOTIFY cursorVisibleChanged)
 
 public:
@@ -35,7 +35,7 @@ public:
     bool sshEnabled() const;
     void enableSsh(bool enable);
 
-    bool konsoleShown() const;
+    bool terminalShown() const;
     void setShowTerminal(bool show);
 
     bool isCursorVisible() const;
@@ -52,7 +52,7 @@ private:
     QString cursorTheme() const;
 
     bool m_sshEnabled;
-    bool m_konsoleShown;
+    bool m_terminalShown;
     bool m_cursorVisible;
 };
 
