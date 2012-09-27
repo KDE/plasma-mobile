@@ -24,7 +24,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.active.settings 0.1
+import org.kde.active.settings 0.1 as ActiveSettings
 
 Item {
     id: develModule
@@ -32,7 +32,7 @@ Item {
 
     width: 800; height: 500
 
-    DevelSettings {
+    ActiveSettings.DevelSettings {
         id: settings
     }
 
@@ -91,7 +91,11 @@ Item {
         PlasmaComponents.Switch {
             id: ssh
             checked: settings.sshEnabled
-            onClicked: settings.sshEnabled = checked
+            onClicked: {
+                settings.sshEnabled = checked;
+                // we have to check to se if it failed
+                checked = settings.sshEnabled;
+            }
         }
 
         PlasmaComponents.Label {

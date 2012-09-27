@@ -19,6 +19,8 @@
 #include "develsettingsplugin.h"
 
 #include <QtDeclarative/QDeclarativeItem>
+#include <QProcess>
+#include <QTimer>
 
 #include <KAuth/Action>
 #include <KDebug>
@@ -34,7 +36,10 @@ DevelSettings::DevelSettings(QObject *parent)
     : QObject(parent)
 {
     m_cursorVisible = (cursorTheme() != noCursorTheme);
-    // TODO: read settings for terminal and ssh
+    // FIXME: should probably not rely on systemctl, but be put into a platform specific backend?
+    int rv = QProcess::execute("systemctl is-enabled sshd.service");
+    m_sshEnabled = rv == 0;
+    // TODO: read settings for terminal
 }
 
 bool DevelSettings::sshEnabled() const
@@ -46,8 +51,8 @@ void DevelSettings::enableSsh(bool enable)
 {
     kDebug() << enable;
     if (m_sshEnabled != enable) {
+        const bool was = m_sshEnabled;
         m_sshEnabled = enable;
-        emit enableSshChanged(m_sshEnabled);
 
         //FIXME: this really should be non-blocking ...
         KAuth::Action action(m_sshEnabled ? "org.kde.active.sshdcontrol.start"
@@ -57,8 +62,11 @@ void DevelSettings::enableSsh(bool enable)
         KAuth::ActionReply reply = action.execute();
         if (reply.failed()) {
             m_sshEnabled = !m_sshEnabled;
+            kWarning()<< "KAuth returned an error code:" << reply.errorCode() << m_sshEnabled;
+        }
+
+        if (was != m_sshEnabled) {
             emit enableSshChanged(m_sshEnabled);
-            kWarning()<< "KAuth returned an error code:" << reply.errorCode();
         }
     }
 }
