@@ -24,10 +24,17 @@
 #include <KDebug>
 #include <KPluginFactory>
 
+#include "legacycursorbitmaps.h"
+
+//FIXME: hardcoded strings! *groan*
+const QByteArray visibleCursorTheme("Oxygen_White");
+const QByteArray noCursorTheme("plasmamobilemouse");
+
 DevelSettings::DevelSettings(QObject *parent)
     : QObject(parent)
 {
-    // TODO: read settings
+    m_cursorVisible = (cursorTheme() != noCursorTheme);
+    // TODO: read settings for terminal and ssh
 }
 
 bool DevelSettings::sshEnabled() const
@@ -82,7 +89,7 @@ void DevelSettings::setCursorVisible(bool visible)
     kDebug() << visible;
     if (m_cursorVisible != visible) {
         m_cursorVisible = visible;
-        //TODO save setting
+        applyCursorTheme(m_cursorVisible ? visibleCursorTheme : noCursorTheme);
         emit cursorVisibleChanged(m_cursorVisible);
     }
 }
