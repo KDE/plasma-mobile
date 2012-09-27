@@ -47,6 +47,10 @@ Q_SIGNALS:
     void cursorVisibleChanged(bool visible);
 
 private:
+    // platform specific
+    void applyCursorTheme(const QByteArray &themeName);
+    QString cursorTheme() const;
+
     bool m_sshEnabled;
     bool m_konsoleShown;
     bool m_cursorVisible;
