@@ -23,9 +23,9 @@
 #include <QDebug>
 
 static const QLatin1String startCommand("systemctl start sshd.service");
-static const QLatin1String startAtBootCommand("systemctl enabled sshd.service");
+static const QLatin1String startAtBootCommand("systemctl enable sshd.service");
 static const QLatin1String stopCommand("systemctl stop sshd.service");
-static const QLatin1String stopAtBootCommand("systemctl disabled sshd.service");
+static const QLatin1String stopAtBootCommand("systemctl disable sshd.service");
 
 SshdHelper::SshdHelper(QObject *parent)
     : QObject(parent)
