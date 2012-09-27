@@ -9,9 +9,9 @@ set(developmentsettings_SRCS
     develsettingsplugin.cpp
 )
 
-kde4_add_plugin(active_settings_development ${developmentsettings_SRCS})
-target_link_libraries(active_settings_development ${KDE4_PLASMA_LIBS} ${QT_QTDECLARATIVE_LIBRARY})
-install(TARGETS active_settings_development DESTINATION ${PLUGIN_INSTALL_DIR})
+kde4_add_plugin(active_settings_devel ${developmentsettings_SRCS})
+target_link_libraries(active_settings_devel ${KDE4_PLASMA_LIBS} ${QT_QTDECLARATIVE_LIBRARY})
+install(TARGETS active_settings_devel DESTINATION ${PLUGIN_INSTALL_DIR})
 
 install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.settings.development)
 install(FILES package/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME org.kde.active.settings.development.desktop)
