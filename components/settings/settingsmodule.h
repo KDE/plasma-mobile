@@ -41,32 +41,34 @@ class KDE_EXPORT SettingsModule : public QObject
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
     Q_PROPERTY(QString module READ module WRITE setModule NOTIFY moduleChanged)
     Q_PROPERTY(QString iconName READ iconName WRITE setIconName NOTIFY iconNameChanged)
-
+    Q_PROPERTY(QString category READ category WRITE setCategory NOTIFY categoryChanged)
 
     public:
         explicit SettingsModule(QObject *parent = 0, const QVariantList &v = QVariantList());
         virtual ~SettingsModule();
 
-        QString name();
-        QString description();
-        QString iconName();
-        QString module();
+        QString name() const;
+        QString description() const;
+        QString iconName() const;
+        QString module() const;
+        QString category() const;
 
     public Q_SLOTS:
         void setName(const QString &name);
         void setDescription(const QString &description);
         void setModule(const QString &module);
         void setIconName(const QString &iconName);
+        void setCategory(const QString &category);
 
     Q_SIGNALS:
         void nameChanged();
         void descriptionChanged();
         void moduleChanged();
         void iconNameChanged();
+        void categoryChanged();
 
     private:
         SettingsModulePrivate *d;
-
 };
 
 #endif
