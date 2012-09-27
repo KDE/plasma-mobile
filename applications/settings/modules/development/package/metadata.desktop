@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=Development
+Comment=Settings for developers
+Encoding=UTF-8
+Type=Service
+Icon=applications-development
+X-KDE-ServiceTypes=Active/SettingsModule
+X-KDE-Library=active_settings_development
+X-KDE-PluginInfo-Author=Aaron Seigo
+X-KDE-PluginInfo-Email=aseigo@kde.org
+X-KDE-PluginInfo-Name=org.kde.active.settings.development
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://plasma-active.org
+X-KDE-PluginInfo-Category=Development
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-Package=org.kde.active.settings.development
+X-Plasma-MainScript=ui/Devel.qml

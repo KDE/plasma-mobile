@@ -1,5 +1,6 @@
 # Install the packages, also make it known to the system
 
+add_subdirectory(development)
 add_subdirectory(time)
 #add_subdirectory(locale)
 
