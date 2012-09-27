@@ -24,5 +24,4 @@ target_link_libraries(active-sshd-helper ${KDE4_KDECORE_LIBS})
 install(TARGETS active-sshd-helper DESTINATION ${LIBEXEC_INSTALL_DIR})
 
 kde4_install_auth_helper_files(active-sshd-helper org.kde.active.sshdcontrol root)
-
 kde4_install_auth_actions(org.kde.active.sshdcontrol active_dev_sshd.actions)

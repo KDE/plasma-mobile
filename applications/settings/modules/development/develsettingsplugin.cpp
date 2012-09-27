@@ -27,7 +27,6 @@
 DevelSettings::DevelSettings(QObject *parent)
     : QObject(parent)
 {
-    kDebug() << "*************************************";
     // TODO: read settings
 }
 
