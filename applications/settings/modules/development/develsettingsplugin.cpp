@@ -43,11 +43,11 @@ DevelSettings::DevelSettings(QObject *parent)
     const int rv = QProcess::execute("systemctl is-enabled sshd.service");
     m_sshEnabled = rv == 0;
 
-    m_konsoleShown = false;
+    m_terminalShown = false;
     KConfigGroup confGroup(KGlobal::config(), "General");
     const QString terminal = confGroup.readPathEntry("TerminalApplication", QString::fromLatin1("konsole"));
     KService::Ptr service = KService::serviceByStorageId(terminal);
-    m_konsoleShown = service && !service->noDisplay();
+    m_terminalShown = service && !service->noDisplay();
 }
 
 bool DevelSettings::sshEnabled() const
@@ -78,19 +78,19 @@ void DevelSettings::enableSsh(bool enable)
     }
 }
 
-bool DevelSettings::konsoleShown() const
+bool DevelSettings::terminalShown() const
 {
-    return m_konsoleShown;
+    return m_terminalShown;
 }
 
 void DevelSettings::setShowTerminal(bool show)
 {
     kDebug() << show;
-    if (m_konsoleShown != show) {
-        m_konsoleShown = show;
+    if (m_terminalShown != show) {
+        m_terminalShown = show;
         //TODO save setting
         //TODO: if not installed, install it
-        emit showTerminalChanged(m_konsoleShown);
+        emit showTerminalChanged(m_terminalShown);
     }
 }
 
