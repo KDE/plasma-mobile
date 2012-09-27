@@ -147,11 +147,6 @@ Image {
             Item {
                 visible: startModule == ""
                 anchors { fill: parent; margins: 80; }
-                PlasmaExtras.Title {
-                    id: initial_page_label
-                    text: i18n("Active Settings")
-                    anchors { top: parent.top; horizontalCenter: parent.horizontalCenter; }
-                }
                 QIconItem {
                     icon: QIcon("preferences-desktop")
                     anchors { top: initial_page_label.bottom; right: parent.right; }
