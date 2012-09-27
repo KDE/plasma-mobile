@@ -26,6 +26,7 @@
 #include <QDeclarativeEngine>
 
 #include <KIcon>
+#include <KPluginInfo>
 #include <KService>
 #include <KServiceTypeTrader>
 
@@ -59,6 +60,46 @@ QDeclarativeListProperty<SettingsModule> SettingsModulesModel::settingsModules()
     return QDeclarativeListProperty<SettingsModule>(this, d->settingsModules);
 }
 
+bool compareModules(const SettingsModule *l, const SettingsModule *r)
+{
+    if (l == r) {
+        return false;
+    }
+
+    if (!l) {
+        return false;
+    } else if (!r) {
+        return true;
+    }
+
+    // base it on the category weighting; if neither has a category weight the compare
+    // strings
+    KConfigGroup orderConfig(KGlobal::config(), "SettingsCategoryWeights");
+    const int lG = orderConfig.readEntry(l->category(), -1);
+    const int rG = orderConfig.readEntry(r->category(), -1);
+    //kDebug() << l->name() << l->category() << lG << " vs " << r->name() << r->category() << rG;
+
+    if (lG < 0) {
+        if (rG > 0) {
+            return false;
+        }
+
+        int rv = l->category().compare(r->category(), Qt::CaseInsensitive);
+        if (rv == 0) {
+            rv = l->name().compare(r->name(), Qt::CaseInsensitive);
+        }
+        return rv < 0;
+    } else if (rG < 0) {
+        return true;
+    }
+
+    if (lG == rG) {
+        return l->name().compare(r->name(), Qt::CaseInsensitive) < 0;
+    }
+
+    return lG > rG;
+}
+
 void SettingsModulesModel::populate()
 {
     if (d->isPopulated) {
@@ -69,7 +110,6 @@ void SettingsModulesModel::populate()
 
     QString query;
     KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
-
     //kDebug() << "Found " << services.count() << " modules";
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
@@ -87,9 +127,13 @@ void SettingsModulesModel::populate()
         item->setName(service->name());
         item->setDescription(description);
         item->setIconName(service->icon());
-        item->setModule(service->property("X-KDE-PluginInfo-Name").toString());
+        KPluginInfo info(service);
+        item->setModule(info.pluginName());
+        item->setCategory(info.category());
         d->settingsModules.append(item);
     }
+
+    qStableSort(d->settingsModules.begin(), d->settingsModules.end(), compareModules);
     //emit dataChanged();
     emit settingsModulesChanged();
 }
