@@ -18,17 +18,21 @@
 
 #include "develsettingsplugin.h"
 
-#include <QtDeclarative/QDeclarativeItem>
+#include <QDBusInterface>
+#include <QFile>
 #include <QProcess>
+#include <QtDeclarative/QDeclarativeItem>
 #include <QTimer>
 
 #include <KAuth/Action>
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDebug>
+#include <KDesktopFile>
 #include <KGlobal>
 #include <KPluginFactory>
 #include <KService>
+#include <KSycoca>
 
 //FIXME: hardcoded strings! *groan*
 const QByteArray visibleCursorTheme("Oxygen_White");
@@ -45,8 +49,9 @@ DevelSettings::DevelSettings(QObject *parent)
 
     m_terminalShown = false;
     KConfigGroup confGroup(KGlobal::config(), "General");
-    const QString terminal = confGroup.readPathEntry("TerminalApplication", QString::fromLatin1("konsole"));
-    KService::Ptr service = KService::serviceByStorageId(terminal);
+    m_terminalApp = confGroup.readPathEntry("TerminalApplication", QString::fromLatin1("konsole"));
+    KService::Ptr service = KService::serviceByStorageId(m_terminalApp);
+    kDebug() << "showing?" << service->noDisplay();
     m_terminalShown = service && !service->noDisplay();
 }
 
@@ -85,11 +90,28 @@ bool DevelSettings::terminalShown() const
 
 void DevelSettings::setShowTerminal(bool show)
 {
-    kDebug() << show;
     if (m_terminalShown != show) {
         m_terminalShown = show;
-        //TODO save setting
-        //TODO: if not installed, install it
+        KService::Ptr service = KService::serviceByStorageId(m_terminalApp);
+        if (!service) {
+            //TODO: if not installed, install it
+            return;
+        }
+
+        if (show) {
+            QFile::remove(service->locateLocal());
+        } else {
+            KDesktopFile file(service->locateLocal());
+            KConfigGroup dg = file.desktopGroup();
+            dg.writeEntry("Exec", m_terminalApp);
+            dg.writeEntry("NoDisplay", !show);
+        }
+
+        if (KSycoca::isAvailable()) {
+            QDBusInterface dbus("org.kde.kded", "/kbuildsycoca", "org.kde.kbuildsycoca");
+            dbus.call(QDBus::NoBlock, "recreate");
+        }
+
         emit showTerminalChanged(m_terminalShown);
     }
 }
@@ -101,7 +123,6 @@ bool DevelSettings::isCursorVisible() const
 
 void DevelSettings::setCursorVisible(bool visible)
 {
-    kDebug() << visible;
     if (m_cursorVisible != visible) {
         m_cursorVisible = visible;
         applyCursorTheme(m_cursorVisible ? visibleCursorTheme : noCursorTheme);

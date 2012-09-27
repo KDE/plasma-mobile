@@ -54,6 +54,7 @@ private:
     bool m_sshEnabled;
     bool m_terminalShown;
     bool m_cursorVisible;
+    QString m_terminalApp;
 };
 
 class DevelSettingsPlugin : public QObject
