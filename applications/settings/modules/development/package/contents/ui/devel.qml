@@ -1,6 +1,7 @@
 // -*- coding: iso-8859-1 -*-
 /*
  *   Copyright 2012 Aaron Seigo <aseigo@kde.org>
+ *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -31,6 +32,10 @@ Item {
 
     width: 800; height: 500
 
+    DevelSettings {
+        id: settings
+    }
+
     Column {
         id: titleCol
         anchors.top: parent.top
@@ -50,7 +55,7 @@ Item {
     Grid {
         id: formLayout
         columns: 2
-        rows: 4
+        rows: 3
         spacing: theme.defaultFont.mSize.height
         anchors {
             top: titleCol.bottom
@@ -59,65 +64,48 @@ Item {
         }
 
         PlasmaComponents.Label {
-            text: i18n("Use 24-hour clock:")
+            text: i18n("Visible mouse cursor:")
             anchors {
-                right: twentyFourSwitch.left
+                right: visibleCursor.left
                 rightMargin: theme.defaultFont.mSize.width
             }
         }
 
         PlasmaComponents.Switch {
-            id: twentyFourSwitch
-            checked: timeSettings.twentyFour
+            id: visibleCursor
+            checked: settings.visibleCursor
 
-            onClicked : {
-                timeSettings.twentyFour = checked
-                print(timeSettings.timeZone);
-            }
+            onClicked: settings.visibleCursor = checked
         }
 
 
         PlasmaComponents.Label {
             id: timeZoneLabel
-            text: i18n("Timezone:")
+            text: i18n("Remote SSH access:")
             anchors {
-                right: timeZoneButton.left
+                right: ssh.left
                 rightMargin: theme.defaultFont.mSize.width
             }
         }
 
-        PlasmaComponents.Button {
-            id: timeZoneButton
-            text: timeSettings.timeZone
-            onClicked: timeZonePickerDialog.open()
+        PlasmaComponents.Switch {
+            id: ssh
+            checked: settings.sshEnabled
+            onClicked: settings.sshEnabled = checked
         }
 
         PlasmaComponents.Label {
-            id: ntpLabel
-            text: i18n("Set time automatically:")
+            text: i18n("Show terminal app:")
             anchors {
-                right: timeZoneButton.left
+                right: terminal.left
                 rightMargin: theme.defaultFont.mSize.width
             }
         }
 
-        Row {
-            spacing: theme.defaultFont.mSize.width
-            PlasmaComponents.Switch {
-                id: ntpCheckBox
-                checked: timeSettings.ntpServer != ""
-                onCheckedChanged: {
-                    if (!checked) {
-                        timeSettings.ntpServer = ""
-                        timeSettings.saveTime()
-                    }
-                }
-            }
-            PlasmaComponents.Button {
-                id: ntpButton
-                text: timeSettings.ntpServer == "" ? i18n("Pick a server") : timeSettings.ntpServer
-                onClicked: ntpServerPickerDialog.open()
-                enabled: ntpCheckBox.checked
-            }
+        PlasmaComponents.Switch {
+            id: terminal
+            checked: settings.showTerminal
+            onClicked: settings.showTerminal = checked
         }
+    }
 }

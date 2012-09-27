@@ -27,7 +27,8 @@
 DevelSettings::DevelSettings(QObject *parent)
     : QObject(parent)
 {
-    // read settings
+    kDebug() << "*************************************";
+    // TODO: read settings
 }
 
 bool DevelSettings::sshEnabled() const
@@ -37,6 +38,7 @@ bool DevelSettings::sshEnabled() const
 
 void DevelSettings::enableSsh(bool enable)
 {
+    kDebug() << enable;
     if (m_sshEnabled != enable) {
         m_sshEnabled = enable;
         emit enableSshChanged(m_sshEnabled);
@@ -60,12 +62,14 @@ bool DevelSettings::konsoleShown() const
     return m_konsoleShown;
 }
 
-void DevelSettings::setShowKonsole(bool show)
+void DevelSettings::setShowTerminal(bool show)
 {
+    kDebug() << show;
     if (m_konsoleShown != show) {
         m_konsoleShown = show;
         //TODO save setting
-        emit showKonsoleChanged(m_konsoleShown);
+        //TODO: if not installed, install it
+        emit showTerminalChanged(m_konsoleShown);
     }
 }
 
@@ -76,6 +80,7 @@ bool DevelSettings::isCursorVisible() const
 
 void DevelSettings::setCursorVisible(bool visible)
 {
+    kDebug() << visible;
     if (m_cursorVisible != visible) {
         m_cursorVisible = visible;
         //TODO save setting
