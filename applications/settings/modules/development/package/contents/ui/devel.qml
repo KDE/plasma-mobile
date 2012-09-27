@@ -64,7 +64,7 @@ Item {
         }
 
         PlasmaComponents.Label {
-            text: i18n("Visible mouse cursor:")
+            text: i18n("Visible pointer:")
             anchors {
                 right: visibleCursor.left
                 rightMargin: theme.defaultFont.mSize.width
@@ -81,7 +81,7 @@ Item {
 
         PlasmaComponents.Label {
             id: timeZoneLabel
-            text: i18n("Remote SSH access:")
+            text: i18n("Allow remote SSH access:")
             anchors {
                 right: ssh.left
                 rightMargin: theme.defaultFont.mSize.width
