@@ -34,6 +34,7 @@ SshdHelper::SshdHelper(QObject *parent)
 
 ActionReply SshdHelper::start(const QVariantMap &args)
 {
+    Q_UNUSED(args)
     int rv = QProcess::execute(startCommand);
 
     if (rv == 0) {
@@ -51,6 +52,7 @@ ActionReply SshdHelper::start(const QVariantMap &args)
 
 ActionReply SshdHelper::stop(const QVariantMap &args)
 {
+    Q_UNUSED(args)
     int rv = QProcess::execute(stopCommand);
 
     if (rv == 0) {
