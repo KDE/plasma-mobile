@@ -6,7 +6,7 @@ add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
 include_directories(${KDE4_INCLUDES} ../../../../components/settings)
 
 set(developmentsettings_SRCS
-    developmentsettingsplugin.cpp
+    develsettingsplugin.cpp
 )
 
 kde4_add_plugin(active_settings_development ${developmentsettings_SRCS})
