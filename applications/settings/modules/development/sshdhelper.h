@@ -27,12 +27,12 @@ class SshdHelper : public QObject
 {
     Q_OBJECT
 
-    public:
-        SshdHelper(QObject *parent = 0);
+public:
+    SshdHelper(QObject *parent = 0);
 
-    public slots:
-        ActionReply start(const QVariantMap &map);
-        ActionReply stop(const QVariantMap &map);
+public slots:
+    ActionReply start(const QVariantMap &map);
+    ActionReply stop(const QVariantMap &map);
 };
 
 #endif // SSHD_HELPER_H
