@@ -44,8 +44,8 @@ Item {
                  mainImage.height < mainFlickable.height)) {
                 return
             } else if (factor > 1 &&
-                (mainImage.width > mainFlickable.width*8 && 
-                 mainImage.height > mainFlickable.height*8)) {
+                (mainImage.width > mainFlickable.width*4 && 
+                 mainImage.height > mainFlickable.height*4)) {
                 return
             }
 
@@ -170,12 +170,12 @@ Item {
                 }
                 onPinchUpdated: {
                     if (pinch.scale < 1 &&
-                        (mainImage.width < mainFlickable.width &&
-                        mainImage.height < mainFlickable.height)) {
+                        (mainImage.width < Math.min(mainImage.originalSourceSize.width, mainFlickable.width) - 100 &&
+                        mainImage.height < Math.min(mainImage.originalSourceSize.height, mainFlickable.height) - 100)) {
                         return
                     } else if (pinch.scale > 1 &&
-                        (mainImage.width > mainFlickable.width*8 && 
-                        mainImage.height > mainFlickable.height*8)) {
+                        (mainImage.width > mainFlickable.width*4 + 100 &&
+                        mainImage.height > mainFlickable.height*4 + 100)) {
                         return
                     }
 
@@ -189,9 +189,39 @@ Item {
                     mainFlickable.contentX = Math.min(mainFlickable.contentWidth-mainFlickable.width, Math.max(0, mainFlickable.contentX + pinch.previousCenter.x - pinch.center.x + startX * (pinch.scale - pinch.previousScale) - deltaWidth))
                 }
 
+                onPinchFinished: {
+                    if (mainImage.width < mainFlickable.width &&
+                        mainImage.height < mainFlickable.height) {
+
+                        if (mainImage.originalSourceSize.width < mainFlickable.width &&
+                            mainImage.originalSourceSize.height < mainFlickable.height) {
+                            if (mainImage.width > mainImage.height) {
+                                zoomAnim.zoom(mainImage.originalSourceSize.width/mainImage.width)
+                            } else {
+                                zoomAnim.zoom(mainImage.originalSourceSize.height/mainImage.height)
+                            }
+                        } else {
+                            if (mainImage.width > mainImage.height) {
+                                zoomAnim.zoom(mainFlickable.width/mainImage.width)
+                            } else {
+                                zoomAnim.zoom(mainFlickable.height/mainImage.height)
+                            }
+                        }
+
+                    } else if (mainImage.width > mainFlickable.width*4 && 
+                        mainImage.height > mainFlickable.height*4) {
+                        if (mainImage.width > mainImage.height) {
+                            zoomAnim.zoom(mainFlickable.width*4/mainImage.width)
+                        } else {
+                            zoomAnim.zoom(mainFlickable.height*4/mainImage.height)
+                        }
+                    }
+                }
+
                 Image {
                     id: mainImage
 
+                    property variant originalSourceSize
                     asynchronous: true
                     anchors.centerIn: parent
                     width: mainFlickable.contentWidth
@@ -210,6 +240,7 @@ Item {
                             return
                         }
 
+                        originalSourceSize = sourceSize
                         var ratio = sourceSize.width/sourceSize.height
 
                         if (sourceSize.width > sourceSize.height) {
