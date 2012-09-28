@@ -56,24 +56,28 @@ PlasmaCore.FrameSvgItem {
         anchors.fill: parent
         property variant globalLastPoint1
         property variant globalLastPoint2
+        property variant globalStartPoint1
+        property variant globalStartPoint2
         onPinchStarted: {
-            LayoutManager.setSpaceAvailable(x, y, parent.width, parent.height, true)
+            LayoutManager.setSpaceAvailable(itemGroup.x, itemGroup.y, parent.width, parent.height, true)
             globalLastPoint1 = mapToItem(main, pinch.point1.x, pinch.point1.y)
             globalLastPoint2 = mapToItem(main, pinch.point2.x, pinch.point2.y)
+            globalStartPoint1 = globalLastPoint1
+            globalStartPoint2 = globalLastPoint2 
             dragMouseArea.enabled = false
         }
         onPinchUpdated: {
             var globalPoint1 = mapToItem(main, pinch.point1.x, pinch.point1.y)
             var globalPoint2 = mapToItem(main, pinch.point2.x, pinch.point2.y)
-
-            itemGroup.x -= (pinch.startPoint2.x > pinch.startPoint1.x) ? globalLastPoint1.x - globalPoint1.x : globalLastPoint2.x - globalPoint2.x
-            itemGroup.y -= (pinch.startPoint2.y > pinch.startPoint1.y) ? globalLastPoint1.y - globalPoint1.y : globalLastPoint2.y - globalPoint2.y
-
-            //this happen when there is only one point, don't resize
-            if (globalPoint1.x != globalPoint2.x) {
-                itemGroup.width = Math.max(itemGroup.minimumWidth, itemGroup.width - (pinch.startPoint2.x>pinch.startPoint1.x ? 1 : -1)*((globalPoint1.x - globalPoint2.x) - (globalLastPoint1.x - globalLastPoint2.x)))
-                itemGroup.height = Math.max(itemGroup.minimumHeight, itemGroup.height - (pinch.startPoint2.y>pinch.startPoint1.y ? 1 : -1)*((globalPoint1.y - globalPoint2.y) - (globalLastPoint1.y - globalLastPoint2.y)))
+            
+            if (globalPoint1.x == globalPoint2.x) {
+                return
             }
+            itemGroup.x -= (globalStartPoint2.x > globalStartPoint1.x) ? globalLastPoint1.x - globalPoint1.x : globalLastPoint2.x - globalPoint2.x
+            itemGroup.y -= (globalStartPoint2.y > globalStartPoint1.y) ? globalLastPoint1.y - globalPoint1.y : globalLastPoint2.y - globalPoint2.y
+print(itemGroup.x+" "+itemGroup.y)
+            itemGroup.width = Math.max(itemGroup.minimumWidth, itemGroup.width - (globalStartPoint2.x > globalStartPoint1.x ? 1 : -1)*((globalPoint1.x - globalPoint2.x) - (globalLastPoint1.x - globalLastPoint2.x)))
+            itemGroup.height = Math.max(itemGroup.minimumHeight, itemGroup.height - (globalStartPoint2.y > globalStartPoint1.y ? 1 : -1)*((globalPoint1.y - globalPoint2.y) - (globalLastPoint1.y - globalLastPoint2.y)))
 
             globalLastPoint1 = globalPoint1
             globalLastPoint2 = globalPoint2
