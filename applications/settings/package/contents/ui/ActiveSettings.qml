@@ -169,16 +169,7 @@ Image {
             }
         }
     }
-    /*
 
-    function loadPackage(module) {
-        // Load the C++ plugin into our context
-        settingsRoot.loadPlugin(module);
-        switcherPackage.name = module
-        print(" Loading package: " + switcherPackage.filePath("mainscript"));
-        moduleContainer.replace(switcherPackage.filePath("mainscript"));
-    }
-    */
     Component.onCompleted: {
         if (typeof(startModule) != "undefined") {
             settingsItem.module = startModule;
