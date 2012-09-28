@@ -110,12 +110,19 @@ void SettingsModulesModel::populate()
 
     QString query;
     KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
+    QSet<QString> seen;
     //kDebug() << "Found " << services.count() << " modules";
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
             continue;
         }
 
+        KPluginInfo info(service);
+        if (seen.contains(info.pluginName())) {
+            continue;
+        }
+
+        seen.insert(info.pluginName());
         QString description;
         if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
             description = service->genericName();
@@ -127,7 +134,6 @@ void SettingsModulesModel::populate()
         item->setName(service->name());
         item->setDescription(description);
         item->setIconName(service->icon());
-        KPluginInfo info(service);
         item->setModule(info.pluginName());
         item->setCategory(info.category());
         d->settingsModules.append(item);
