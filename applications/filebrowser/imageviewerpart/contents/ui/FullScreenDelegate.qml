@@ -141,10 +141,10 @@ Item {
         onContentXChanged: {
             if (atXBeginning && contentX < 0) {
                 root.delta = -1
-                root.doSwitch = (contentX < -mainFlickable.width/3)
+                root.doSwitch = (contentX < -theme.defaultFont.mSize.width * 10)
             } else if (atXEnd) {
                 root.delta = +1
-                root.doSwitch = (contentX + mainFlickable.width - contentWidth > mainFlickable.width/3)
+                root.doSwitch = (contentX + mainFlickable.width - contentWidth > theme.defaultFont.mSize.width * 10)
             } else {
                 root.delta = 0
                 root.doSwitch = false
