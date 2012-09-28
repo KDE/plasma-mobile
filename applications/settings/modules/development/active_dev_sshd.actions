@@ -4,8 +4,10 @@ Icon=utilities-terminal
 
 [org.kde.active.sshdcontrol.start]
 Name=Activate sshd
+Description=Starts sshd on device
 Policy=yes
 
 [org.kde.active.sshdcontrol.stop]
 Name=Deactivate sshd
+Description=Stops sshd on device
 Policy=yes
