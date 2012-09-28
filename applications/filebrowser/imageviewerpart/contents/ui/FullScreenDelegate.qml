@@ -39,9 +39,13 @@ Item {
         id: zoomAnim
         function zoom(factor)
         {
-            if (factor < 1 && mainFlickable.contentWidth < mainFlickable.width && mainFlickable.contentHeight < mainFlickable.height) {
+            if (factor < 1 &&
+                (mainImage.width < mainFlickable.width &&
+                 mainImage.height < mainFlickable.height)) {
                 return
-            } else if (factor > 1 && (mainFlickable.contentWidth > mainFlickable.width*8 && mainFlickable.contentHeight > mainFlickable.height*8)) {
+            } else if (factor > 1 &&
+                (mainImage.width > mainFlickable.width*8 && 
+                 mainImage.height > mainFlickable.height*8)) {
                 return
             }
 
@@ -165,14 +169,24 @@ Item {
                     startX = pinch.center.x
                 }
                 onPinchUpdated: {
+                    if (pinch.scale < 1 &&
+                        (mainImage.width < mainFlickable.width &&
+                        mainImage.height < mainFlickable.height)) {
+                        return
+                    } else if (pinch.scale > 1 &&
+                        (mainImage.width > mainFlickable.width*8 && 
+                        mainImage.height > mainFlickable.height*8)) {
+                        return
+                    }
+
                     var deltaWidth = mainImage.width < imageMargin.width ? ((startWidth * pinch.scale) - mainImage.width) : 0
                     var deltaHeight = mainImage.height < imageMargin.height ? ((startHeight * pinch.scale) - mainImage.height) : 0
                     mainImage.width = startWidth * pinch.scale
                     mainImage.height = startHeight * pinch.scale
 
-                    mainFlickable.contentY += pinch.previousCenter.y - pinch.center.y + startY * (pinch.scale - pinch.previousScale) - deltaHeight
+                    mainFlickable.contentY = Math.min(mainFlickable.contentHeight-mainFlickable.height, Math.max(0, mainFlickable.contentY + pinch.previousCenter.y - pinch.center.y + startY * (pinch.scale - pinch.previousScale) - deltaHeight))
 
-                    mainFlickable.contentX += pinch.previousCenter.x - pinch.center.x + startX * (pinch.scale - pinch.previousScale) - deltaWidth
+                    mainFlickable.contentX = Math.min(mainFlickable.contentWidth-mainFlickable.width, Math.max(0, mainFlickable.contentX + pinch.previousCenter.x - pinch.center.x + startX * (pinch.scale - pinch.previousScale) - deltaWidth))
                 }
 
                 Image {
