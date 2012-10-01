@@ -127,9 +127,12 @@ void FileBrowser::copy(const QVariantList &src, const QString &dest)
 {
     KUrl::List urls;
     foreach (const QVariant &var, src) {
-        urls << var.toUrl();
+        KUrl url(var.toString());
+        urls << url;
     }
-    KIO::copy(urls, KUrl(dest));
+
+    KUrl destination(dest);
+    KIO::copy(urls, destination);
 }
 
 void FileBrowser::trash(const QVariantList &files)
