@@ -157,6 +157,7 @@ PlasmaComponents.Sheet {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
                 anchors.verticalCenter: parent.verticalCenter
+                clearButtonShown: true
                 Keys.onReturnPressed: {
                     accept()
                 }
