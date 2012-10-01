@@ -57,13 +57,15 @@ PlasmaComponents.Sheet {
 
     function saveConfiguration()
     {
-        configInterface.wallpaperIndex = wallpapersList.currentIndex
-
         if (activityNameEdit.text == "" || nameExists()) {
             return
         }
+
         //console.log("Creating activity " + activityNameEdit.text)
+
         configInterface.activityName = activityNameEdit.text
+        configInterface.wallpaperIndex = wallpapersList.currentIndex
+
         configInterface.encrypted = encryptedSwitch.checked
     }
 
