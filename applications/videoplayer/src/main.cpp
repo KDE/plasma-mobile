@@ -45,9 +45,7 @@ int main(int argc, char **argv)
 
     KCmdLineOptions options;
     options.add("+[url]", ki18n( "URL of the video to open" ));
-#ifndef QT_NO_OPENGL
-    options.add("opengl", ki18n("use a QGLWidget for the viewport"));
-#endif
+
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
