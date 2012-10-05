@@ -96,6 +96,15 @@ int DirModel::indexForUrl(const QString &url) const
     return index.row();
 }
 
+QString DirModel::pathForIndex(int i) const
+{
+    qDebug("Entering pathForIndex...");
+    QModelIndex modelIndex = index(i, 0);
+    qDebug("Row: %d", modelIndex.row());
+    QString path = itemForIndex(modelIndex).url().path();
+    return path;
+}
+
 QVariant DirModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {

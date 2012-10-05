@@ -215,7 +215,14 @@ PlasmaComponents.Page {
         id: quickBrowserBar
         model: fileBrowserRoot.model
         onCurrentIndexChanged: {
-            var path = fileBrowserRoot.model.get(currentIndex).url
+            if (fileBrowserRoot.model.get) {
+                var path = fileBrowserRoot.model.get(currentIndex).url
+            } else {
+                console.log("No get method in model found. Assuming we are dealing with a DirModel...")
+                console.log(fileBrowserRoot.model)
+                var path = fileBrowserRoot.model.pathForIndex(currentIndex)
+                console.log("Path: " + path)
+            }
             imageArea.delegate.source = path
             viewerPage.path = path
             resourceInstance.uri = path
