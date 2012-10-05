@@ -27,7 +27,7 @@ Item {
     property string searchQuery
     property alias delay : searchTimer.interval
     property bool busy: false
-
+    property alias text : searchField.text
 
     onFocusChanged: {
         if (focus) {
