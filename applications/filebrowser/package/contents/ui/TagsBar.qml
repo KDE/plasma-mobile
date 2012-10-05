@@ -314,6 +314,8 @@ PlasmaComponents.Page {
             } else {
                 reject()
             }
+
+            tagField.text = ''
         }
         onStatusChanged: {
             if (status == PlasmaComponents.DialogStatus.Open) {
