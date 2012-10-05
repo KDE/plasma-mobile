@@ -104,6 +104,11 @@ Image {
             print("Package for mimetype " + mimeType + " " + packageName)
             if (packageName) {
                 partPackage.name = packageName
+                if (partPackage.visibleName && partPackage.visibleName != '') {
+                    application.caption = partPackage.visibleName
+                } else {
+                    application.caption = i18n('Files')
+                }
                 var part = mainStack.push(partPackage.filePath("mainscript"))
                 part.loadFile(url)
             } else {
