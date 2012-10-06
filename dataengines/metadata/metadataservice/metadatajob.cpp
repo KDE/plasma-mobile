@@ -74,7 +74,7 @@ void MetadataJob::start()
         } else if (resourceUrl.endsWith(QLatin1String(".desktop"))) {
             KService::Ptr service = KService::serviceByStorageId(resourceUrl);
             if (service) {
-                fileRes = Nepomuk::Resource(service->entryPath());
+                fileRes = Nepomuk2::Resource(service->entryPath());
                 typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Application");
                 fileRes.addType(typeUrl);
                 fileRes.setLabel(service->name());
@@ -84,14 +84,14 @@ void MetadataJob::start()
             }
         }
 
-        Nepomuk::Variant urlProp = fileRes.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url"));
+        Nepomuk2::Variant urlProp = fileRes.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url"));
 
-        kDebug() << "Linking Resource, uri:" << fileRes.resourceUri() << "has an url:" << urlProp.isUrl() << "value:" << urlProp.toUrl();
+        kDebug() << "Linking Resource, uri:" << fileRes.uri() << "has an url:" << urlProp.isUrl() << "value:" << urlProp.toUrl();
 
         if (urlProp.isUrl()) {
             info->linkResource(urlProp.toUrl());
         } else {
-            info->linkResource(fileRes.resourceUri());
+            info->linkResource(fileRes.uri());
         }
         info->deleteLater();
         setResult(true);
@@ -142,7 +142,7 @@ void MetadataJob::start()
 
         foreach (const QString &resUrl, resourceUrls) {
             Nepomuk2::Resource r(resUrl);
-            QList<Nepomuk::Tag> tags = r.tags();
+            QList<Nepomuk2::Tag> tags = r.tags();
             if (tags.contains(tag)) {
                 tags.removeAll(tag);
                 r.setTags(tags);

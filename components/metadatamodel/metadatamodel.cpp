@@ -263,7 +263,7 @@ void MetadataModel::doQuery()
         return;
     }
     m_query = Nepomuk2::Query::Query();
-    m_query.setQueryFlags(Nepomuk2::Query::Query::WithoutFullTextExcerpt|Nepomuk2::Query::Query::NoResultRestrictions);
+    m_query.setQueryFlags(Nepomuk2::Query::Query::NoResultRestrictions);
     Nepomuk2::Query::AndTerm rootTerm;
 
     if (!m_queryString.isEmpty()) {
