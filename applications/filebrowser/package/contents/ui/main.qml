@@ -20,6 +20,7 @@
 import QtQuick 1.1
 import org.kde.dirmodel 0.1
 import org.kde.metadatamodels 0.1 as MetadataModels
+import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
@@ -55,6 +56,11 @@ Image {
         //queryString: "pdf"
         resourceType: exclusiveResourceType
         mimeTypes: exclusiveMimeTypes
+    }
+    PlasmaCore.DataSource {
+        id: activitySource
+        engine: "org.kde.activities"
+        connectedSources: ["Status"]
     }
     DirModel {
         id: dirModel
@@ -98,6 +104,11 @@ Image {
             print("Package for mimetype " + mimeType + " " + packageName)
             if (packageName) {
                 partPackage.name = packageName
+                if (partPackage.visibleName && partPackage.visibleName != '') {
+                    application.caption = partPackage.visibleName
+                } else {
+                    application.caption = i18n('Files')
+                }
                 var part = mainStack.push(partPackage.filePath("mainscript"))
                 part.loadFile(url)
             } else {
@@ -139,16 +150,13 @@ Image {
         onTriggered: {
             if (application.startupArguments.length > 0) {
                 var path = application.startupArguments[0]
-                var mimeType = ""
-                //very weak heuristic to see if the passed argument is a folder
-                //FIXME: use kmimetype from C++ side?
-                if (path.indexOf(".") == -1) {
-                    mimeType = "inode/directory"
+
+                if (startupMimeType == "inode/directory") {
                     if (mainStack.depth == 0) {
                         mainStack.push(Qt.createComponent("Browser.qml"))
                     }
                 }
-                openFile(path, mimeType)
+                openFile(path, startupMimeType)
             }
         }
     }

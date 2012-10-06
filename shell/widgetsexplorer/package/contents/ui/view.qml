@@ -70,8 +70,11 @@ PlasmaComponents.Sheet {
         widgetsExplorer.addItems()
     }
     onStatusChanged: {
-        if (status == PlasmaComponents.DialogStatus.Closed) {
+        if (status == PlasmaComponents.DialogStatus.Open) {
+            searchField.forceActiveFocus()
+        } else if (status == PlasmaComponents.DialogStatus.Closed) {
             closeRequested()
+            inputPanelController.closeSoftwareInputPanel()
         }
     }
 

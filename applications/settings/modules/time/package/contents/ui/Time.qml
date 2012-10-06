@@ -134,6 +134,7 @@ Item {
         MobileComponents.TimePicker {
             id: timePicker
             enabled: !ntpCheckBox.checked
+            twentyFour: twentyFourSwitch.checked
 
             anchors {
                 right: datePicker.left

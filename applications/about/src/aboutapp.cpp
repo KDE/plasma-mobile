@@ -47,7 +47,7 @@ AboutApp::AboutApp()
     f.open(QIODevice::ReadOnly);
     const QString osVersion = f.readLine();
 
-    declarativeView()->rootContext()->setContextProperty("runtimeInfoActiveVersion", "2.0");
+    declarativeView()->rootContext()->setContextProperty("runtimeInfoActiveVersion", "3.0");
     declarativeView()->rootContext()->setContextProperty("runtimeInfoKdeVersion", KDE::versionString());
     declarativeView()->rootContext()->setContextProperty("runtimeInfoOsVersion", osVersion);
 }

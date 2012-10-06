@@ -25,5 +25,8 @@ PlasmaComponents.TabButton {
     property Component component
     visible: String(resourceType).charAt(0) == "_" || cloudModel.categories.indexOf(resourceType) != -1
 
-    onClicked: stack.replace(component)
+    onClicked: {
+        stack.replace(component)
+        searchField.text = ''
+    }
 }

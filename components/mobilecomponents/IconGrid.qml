@@ -112,18 +112,9 @@ Item {
                         currentPage: index
                         pageSize: main.pageSize
                     }
-                    Timer {
-                        id: loadTimer
-                        repeat: false
-                        interval: 0
-                        onTriggered: iconRepeater.model = pagedProxyModel
-                        Component.onCompleted: {
-                            loadTimer.interval = iconView.moving ? 500 : 0
-                            loadTimer.running = true
-                        }
-                    }
                     Repeater {
                         id: iconRepeater
+                        model: pagedProxyModel
                         property int columns: Math.min(count, Math.floor(delegatePage.width/main.delegateWidth))
                         property int suggestedWidth: main.delegateWidth*columns
                         //property int suggestedHeight: main.delegateHeight*Math.floor(count/columns)

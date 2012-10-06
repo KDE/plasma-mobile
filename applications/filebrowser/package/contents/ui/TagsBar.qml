@@ -40,11 +40,6 @@ PlasmaComponents.Page {
         }
         text: i18n("Tags")
     }
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        //connectedSources: []
-    }
 
     Flickable {
         id: mainFlickable
@@ -101,7 +96,7 @@ PlasmaComponents.Page {
                                 color: theme.textColor
                                 anchors.fill: parent
                                 radius: width/2
-                                opacity: parent.underDrag ? 0.6 : 0.1
+                                opacity: parent.underDrag ? 0.6 : 0.2
                                 Behavior on opacity {
                                     NumberAnimation {
                                         duration: 250
@@ -112,12 +107,12 @@ PlasmaComponents.Page {
                             Rectangle {
                                 anchors {
                                     fill: background
-                                    topMargin: 1
-                                    bottomMargin: -1
+                                    topMargin: 2
+                                    bottomMargin: -2
                                 }
                                 radius: width/2
                                 color: "white"
-                                opacity: 0.3
+                                opacity: 0.6
                             }
                             Rectangle {
                                 color: parent.parent.checked ? theme.highlightColor : theme.textColor
@@ -185,7 +180,7 @@ PlasmaComponents.Page {
                                 anchors.fill: parent
 
                                 radius: width/2
-                                opacity: parent.parent.underDrag ? 0.6 : 0.1
+                                opacity: parent.parent.underDrag ? 0.6 : 0.2
                                 Behavior on opacity {
                                     NumberAnimation {
                                         duration: 250
@@ -196,12 +191,12 @@ PlasmaComponents.Page {
                             Rectangle {
                                 anchors {
                                     fill: newDragBackground
-                                    topMargin: 1
-                                    bottomMargin: -1
+                                    topMargin: 2
+                                    bottomMargin: -2
                                 }
                                 radius: width/2
                                 color: "white"
-                                opacity: 0.3
+                                opacity: 0.6
                             }
                             Rectangle {
                                 color: theme.textColor
@@ -210,7 +205,7 @@ PlasmaComponents.Page {
                                     margins: 20
                                 }
                                 radius: width/2
-                                opacity: 0.5
+                                opacity: 0.6
                             }
                             Rectangle {
                                 color: theme.backgroundColor
@@ -291,11 +286,17 @@ PlasmaComponents.Page {
 
         titleText: i18n("New tag name")
         buttonTexts: [i18n("Ok"), i18n("Cancel")]
-        content: PlasmaComponents.TextField {
-            id: tagField
-            width: theme.defaultFont.mSize.width * 30
-            Keys.onEnterPressed: newTagDialog.accept()
-            Keys.onReturnPressed: newTagDialog.accept()
+        content: Item {
+            width: childrenRect.width + theme.defaultFont.mSize.width * 4
+            height: childrenRect.height + theme.defaultFont.mSize.height * 2
+            anchors.centerIn: parent
+            PlasmaComponents.TextField {
+                id: tagField
+                anchors.centerIn: parent
+                width: theme.defaultFont.mSize.width * 30
+                Keys.onEnterPressed: newTagDialog.accept()
+                Keys.onReturnPressed: newTagDialog.accept()
+            }
         }
         onAccepted: {
             if (!tagField.text) {
@@ -312,6 +313,15 @@ PlasmaComponents.Page {
                 accept()
             } else {
                 reject()
+            }
+
+            tagField.text = ''
+        }
+        onStatusChanged: {
+            if (status == PlasmaComponents.DialogStatus.Open) {
+                tagField.forceActiveFocus()
+            } else if (status == PlasmaComponents.DialogStatus.Closed) {
+                tagField.closeSoftwareInputPanel()
             }
         }
     }

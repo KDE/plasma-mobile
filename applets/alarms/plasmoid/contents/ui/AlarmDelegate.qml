@@ -102,6 +102,7 @@ PlasmaComponents.ListItem {
                 horizontalAlignment: Text.AlignHCenter
                 width: parent.width/4
                 text: message
+                wrapMode: Text.Wrap
                 elide: Text.ElideRight
                 maximumLineCount: 3
             }

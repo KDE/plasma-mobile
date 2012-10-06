@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Screen
+Name[cs]=Obrazovka
 Name[da]=Skærm
 Name[de]=Bildschirm
 Name[el]=Οθόνη
@@ -14,6 +15,8 @@ Name[pa]=ਸਕਰੀਨ
 Name[pl]=Ekran
 Name[pt]=Ecrã
 Name[pt_BR]=Tela
+Name[sk]=Obrazovka
+Name[sl]=Zaslon
 Name[sv]=Bildskärm
 Name[tr]=Ekran
 Name[uk]=Екран
@@ -33,6 +36,7 @@ Comment[nl]=Vergrendelen, slapen, tijdsoverschrijding
 Comment[pl]=Zablokuj, Uśpij, Czas oczekiwania
 Comment[pt]=Bloquear, Suspender, Tempo-Limite
 Comment[pt_BR]=Bloquear, Suspender, Tempo-Limite
+Comment[sl]=Zaklep, spanje, zakasnitev
 Comment[sv]=Lås, viloläge, tidsgräns
 Comment[tr]=Kilitle, Uyku Kipi, Zamanaşımı
 Comment[uk]=Блокування, присипляння, час очікування

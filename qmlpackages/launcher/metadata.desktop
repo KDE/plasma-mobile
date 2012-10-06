@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Start Applications
 Comment[da]=Start programmer
+Comment[de]=Startet Anwendungen
 Comment[el]=Έναρξη εφαρμογών
 Comment[es]=Iniciar aplicaciones
 Comment[et]=Rakenduste käivitaja
@@ -14,6 +15,7 @@ Comment[pa]=ਐਪਲੀਕੇਸ਼ਨ ਸ਼ੁਰੂ
 Comment[pl]=Uruchom programy
 Comment[pt]=Iniciar as Aplicações
 Comment[pt_BR]=Iniciar aplicativos
+Comment[sl]=Zagon programov
 Comment[sv]=Starta program
 Comment[tr]=Uygulamaları Başlat
 Comment[uk]=Запуск програм
@@ -40,6 +42,7 @@ Name[pl]=Aktywator
 Name[pt]=Lançamento
 Name[pt_BR]=Lançador
 Name[sk]=Spúšťač
+Name[sl]=Zaganjalnik
 Name[sv]=Startprogram
 Name[tr]=Başlatıcı
 Name[ug]=ئىجراچى

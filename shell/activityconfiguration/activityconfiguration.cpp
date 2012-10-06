@@ -103,11 +103,6 @@ ActivityConfiguration::~ActivityConfiguration()
 
 void ActivityConfiguration::doExit()
 {
-    QDBusMessage call = QDBusMessage::createMethodCall("org.kde.plasma-keyboardcontainer",
-                                                       "/MainApplication",
-                                                       "org.kde.plasma.VirtualKeyboard",
-                                                       "hide");
-    QDBusConnection::sessionBus().asyncCall(call);
     //FIXME: should be enough any delay that will cause it to be exectued at least two loops after in the event loop
     QTimer::singleShot(100, this, SLOT(deleteLater()));
 }

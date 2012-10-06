@@ -34,6 +34,7 @@ class Package : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString visibleName READ visibleName NOTIFY visibleNameChanged)
 
 public:
     Package(QObject *parent = 0);
@@ -45,8 +46,11 @@ public:
     Q_INVOKABLE QString filePath(const QString &fileType, const QString &filename) const;
     Q_INVOKABLE QString filePath(const QString &fileType) const;
 
+    QString visibleName() const;
+
 Q_SIGNALS:
     void nameChanged(const QString &);
+    void visibleNameChanged();
 
 private:
     QString m_name;

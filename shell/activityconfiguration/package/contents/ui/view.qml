@@ -31,7 +31,7 @@ PlasmaComponents.Sheet {
     acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save Changes")
 
     rejectButtonText: i18n("Cancel")
-    acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
+    acceptButton.enabled: !activityNameEdit.visible || (activityNameEdit.text != "" && !nameExists())
 
     Timer {
         running: true
@@ -47,8 +47,11 @@ PlasmaComponents.Sheet {
     }
 
     onStatusChanged: {
-        if (status == PlasmaComponents.DialogStatus.Closed) {
+        if (status == PlasmaComponents.DialogStatus.Open) {
+            activityNameEdit.forceActiveFocus()
+        } else if (status == PlasmaComponents.DialogStatus.Closed) {
             closeRequested()
+            inputPanelController.closeSoftwareInputPanel()
         }
     }
 
@@ -57,9 +60,12 @@ PlasmaComponents.Sheet {
         if (activityNameEdit.text == "" || nameExists()) {
             return
         }
+
         //console.log("Creating activity " + activityNameEdit.text)
+
         configInterface.activityName = activityNameEdit.text
         configInterface.wallpaperIndex = wallpapersList.currentIndex
+
         configInterface.encrypted = encryptedSwitch.checked
     }
 
@@ -151,6 +157,7 @@ PlasmaComponents.Sheet {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
                 anchors.verticalCenter: parent.verticalCenter
+                clearButtonShown: true
                 Keys.onReturnPressed: {
                     accept()
                 }
@@ -159,7 +166,7 @@ PlasmaComponents.Sheet {
                 id: encryptRow
                 width: nameRow.sideWidth
                 spacing: 2
-                visible: true
+                visible: false
 
                 //spacer
                 Item {
@@ -191,7 +198,7 @@ PlasmaComponents.Sheet {
                 horizontalCenter: nameRow.horizontalCenter
                 top: nameRow.bottom
             }
-            opacity: nameExists() ? 1 : 0
+            opacity: (nameExists() && activityNameEdit.visible) ? 1 : 0
             imagePath: "dialogs/background"
             width: errorLabel.width + margins.left + margins.right
             height: errorLabel.height + margins.top + margins.bottom

@@ -28,20 +28,17 @@
 class SettingsModulePrivate {
 
 public:
-    SettingsModulePrivate(SettingsModule *q):
-                  q(q) {}
-
     QString name;
     QString description;
     QString module;
     QString iconName;
-    SettingsModule *q;
+    QString category;
 };
 
-SettingsModule::SettingsModule(QObject *parent, const QVariantList &v) : QObject(parent),
-                                  d(new SettingsModulePrivate(this))
+SettingsModule::SettingsModule(QObject *parent, const QVariantList &v)
+    : QObject(parent),
+      d(new SettingsModulePrivate)
 {
-    d = new SettingsModulePrivate(this);
     Q_UNUSED(v);
 }
 

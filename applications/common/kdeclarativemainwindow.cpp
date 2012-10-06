@@ -94,12 +94,9 @@ KDeclarativeMainWindow::KDeclarativeMainWindow()
         d->arguments << d->args->arg(i);
     }
 
-    bool useGL = d->args->isSet("opengl");
-    if (useGL) {
-        //use plasmarc to share this with plasma-windowed
-        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
-        useGL = cg.readEntry("UseOpenGl", true);
-    }
+    cg = KConfigGroup(KSharedConfig::openConfig("plasmarc"), "General");
+    bool useGL = cg.readEntry("UseOpenGl", true);
+
     d->view->setUseGL(useGL);
 
     connect(d->view, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));

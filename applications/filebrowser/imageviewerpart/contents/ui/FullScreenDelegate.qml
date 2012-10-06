@@ -39,9 +39,13 @@ Item {
         id: zoomAnim
         function zoom(factor)
         {
-            if (factor < 1 && mainFlickable.contentWidth < mainFlickable.width && mainFlickable.contentHeight < mainFlickable.height) {
+            if (factor < 1 &&
+                (mainImage.width < mainFlickable.width &&
+                 mainImage.height < mainFlickable.height)) {
                 return
-            } else if (factor > 1 && (mainFlickable.contentWidth > mainFlickable.width*8 && mainFlickable.contentHeight > mainFlickable.height*8)) {
+            } else if (factor > 1 &&
+                (mainImage.width > mainFlickable.width*4 && 
+                 mainImage.height > mainFlickable.height*4)) {
                 return
             }
 
@@ -97,6 +101,35 @@ Item {
         }
     }
 
+    Rectangle {
+        color: "black"
+        width: mainFlickable.contentWidth
+        height: parent.height
+        x: -mainFlickable.contentX
+        Image {
+            z: -1
+            source: "image://appbackgrounds/shadow-left"
+            fillMode: Image.TileVertically
+            anchors {
+                right: parent.left
+                top: parent.top
+                bottom: parent.bottom
+                rightMargin: -1
+            }
+        }
+        Image {
+            z: -1
+            source: "image://appbackgrounds/shadow-right"
+            fillMode: Image.TileVertically
+            anchors {
+                left: parent.right
+                top: parent.top
+                bottom: parent.bottom
+                leftMargin: -1
+            }
+        }
+    }
+
     Flickable {
         id: mainFlickable
         anchors.fill: parent
@@ -108,19 +141,18 @@ Item {
         onContentXChanged: {
             if (atXBeginning && contentX < 0) {
                 root.delta = -1
-                root.doSwitch = (contentX < -mainFlickable.width/3)
+                root.doSwitch = (contentX < -theme.defaultFont.mSize.width * 10)
             } else if (atXEnd) {
                 root.delta = +1
-                root.doSwitch = (contentX + mainFlickable.width - contentWidth > mainFlickable.width/3)
+                root.doSwitch = (contentX + mainFlickable.width - contentWidth > theme.defaultFont.mSize.width * 10)
             } else {
                 root.delta = 0
                 root.doSwitch = false
             }
         }
 
-        Rectangle {
+        Item {
             id: imageMargin
-            color: "black"
             width: Math.max(mainFlickable.width+1, mainImage.width)
             height: Math.max(mainFlickable.height, mainImage.height)
             PinchArea {
@@ -137,19 +169,59 @@ Item {
                     startX = pinch.center.x
                 }
                 onPinchUpdated: {
+                    if (pinch.scale < 1 &&
+                        (mainImage.width < Math.min(mainImage.originalSourceSize.width, mainFlickable.width) - 100 &&
+                        mainImage.height < Math.min(mainImage.originalSourceSize.height, mainFlickable.height) - 100)) {
+                        return
+                    } else if (pinch.scale > 1 &&
+                        (mainImage.width > mainFlickable.width*4 + 100 &&
+                        mainImage.height > mainFlickable.height*4 + 100)) {
+                        return
+                    }
+
                     var deltaWidth = mainImage.width < imageMargin.width ? ((startWidth * pinch.scale) - mainImage.width) : 0
                     var deltaHeight = mainImage.height < imageMargin.height ? ((startHeight * pinch.scale) - mainImage.height) : 0
                     mainImage.width = startWidth * pinch.scale
                     mainImage.height = startHeight * pinch.scale
 
-                    mainFlickable.contentY += pinch.previousCenter.y - pinch.center.y + startY * (pinch.scale - pinch.previousScale) - deltaHeight
+                    mainFlickable.contentY = Math.min(mainFlickable.contentHeight-mainFlickable.height, Math.max(0, mainFlickable.contentY + pinch.previousCenter.y - pinch.center.y + startY * (pinch.scale - pinch.previousScale) - deltaHeight))
 
-                    mainFlickable.contentX += pinch.previousCenter.x - pinch.center.x + startX * (pinch.scale - pinch.previousScale) - deltaWidth
+                    mainFlickable.contentX = Math.min(mainFlickable.contentWidth-mainFlickable.width, Math.max(0, mainFlickable.contentX + pinch.previousCenter.x - pinch.center.x + startX * (pinch.scale - pinch.previousScale) - deltaWidth))
+                }
+
+                onPinchFinished: {
+                    if (mainImage.width < mainFlickable.width &&
+                        mainImage.height < mainFlickable.height) {
+
+                        if (mainImage.originalSourceSize.width < mainFlickable.width &&
+                            mainImage.originalSourceSize.height < mainFlickable.height) {
+                            if (mainImage.width > mainImage.height) {
+                                zoomAnim.zoom(mainImage.originalSourceSize.width/mainImage.width)
+                            } else {
+                                zoomAnim.zoom(mainImage.originalSourceSize.height/mainImage.height)
+                            }
+                        } else {
+                            if (mainImage.width > mainImage.height) {
+                                zoomAnim.zoom(mainFlickable.width/mainImage.width)
+                            } else {
+                                zoomAnim.zoom(mainFlickable.height/mainImage.height)
+                            }
+                        }
+
+                    } else if (mainImage.width > mainFlickable.width*4 && 
+                        mainImage.height > mainFlickable.height*4) {
+                        if (mainImage.width > mainImage.height) {
+                            zoomAnim.zoom(mainFlickable.width*4/mainImage.width)
+                        } else {
+                            zoomAnim.zoom(mainFlickable.height*4/mainImage.height)
+                        }
+                    }
                 }
 
                 Image {
                     id: mainImage
 
+                    property variant originalSourceSize
                     asynchronous: true
                     anchors.centerIn: parent
                     width: mainFlickable.contentWidth
@@ -168,6 +240,7 @@ Item {
                             return
                         }
 
+                        originalSourceSize = sourceSize
                         var ratio = sourceSize.width/sourceSize.height
 
                         if (sourceSize.width > sourceSize.height) {
@@ -192,28 +265,6 @@ Item {
                     anchors.centerIn: mainImage
                     text: i18n("Loading...")
                     color: "gray"
-                }
-            }
-            Image {
-                z: -1
-                source: "image://appbackgrounds/shadow-left"
-                fillMode: Image.TileVertically
-                anchors {
-                    right: parent.left
-                    top: parent.top
-                    bottom: parent.bottom
-                    rightMargin: -1
-                }
-            }
-            Image {
-                z: -1
-                source: "image://appbackgrounds/shadow-right"
-                fillMode: Image.TileVertically
-                anchors {
-                    left: parent.right
-                    top: parent.top
-                    bottom: parent.bottom
-                    leftMargin: -1
                 }
             }
         }

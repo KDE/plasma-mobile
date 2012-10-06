@@ -35,6 +35,12 @@ MobileComponents.SplitDrawer {
         topMargin: toolBar.height
     }
 
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.metadata"
+        //connectedSources: []
+    }
+
     tools: Item {
         width: parent.width
         height: childrenRect.height
@@ -352,11 +358,22 @@ MobileComponents.SplitDrawer {
         Connections {
             target: selectedModel
             onCountChanged: {
+                var thumbnails = new Array()
+                var labels = new Array()
+                var mimeTypes = new Array()
+
                 var newUrls = new Array()
                 for (var i = 0; i < selectedModel.count; ++i) {
-                newUrls[i] = selectedModel.get(i).url
+                    newUrls[i] = selectedModel.get(i).url
+
+                    thumbnails[i] = selectedModel.get(i).thumbnail
+                    labels[i] = selectedModel.get(i).label
+                    mimeTypes[i] = selectedModel.get(i).mimeType
                 }
                 dragArea.mimeData.urls = newUrls
+                dragArea.mimeTypes = mimeTypes
+                dragArea.thumbnails = thumbnails
+                dragArea.labels = labels
             }
         }
         Connections {
@@ -429,21 +446,56 @@ MobileComponents.SplitDrawer {
             DragArea {
                 id: dragArea
                 anchors.fill: parent
+                property variant labels
+                property variant thumbnails
+                property variant mimeTypes
                 //startDragDistance: 200
                 enabled: false
                 mimeData {
                     source: parent
                 }
                 onDrop: enabled = false
+                delegate: Item {
+                    width: 250
+                    height: 250
+                    opacity: 0.7
+
+                    Repeater {
+                        model: Math.min(4, dragArea.labels.length)
+                        MobileComponents.ResourceDelegate {
+                            className: mimeType.indexOf("image") !== -1 ? "Image" : "FileDataObject"
+                            property string mimeType: dragArea.mimeTypes[index]
+                            property string label: dragArea.labels.length == 1 ? dragArea.labels[index] : ""
+                            property variant thumbnail: dragArea.thumbnails[index]
+
+                            anchors.centerIn: parent
+                            width: 200
+                            height: 200/1.6
+                           transformOrigin: Item.Bottom
+                            rotation: (dragArea.labels.length > 1 ? 20 : 0) -20*index
+                            z: -index
+                            smooth: true
+                        }
+                    }
+                }
                 MouseEventListener {
                     anchors.fill: parent
                     onPressed: startY = mouse.y
+
                     onPositionChanged: {
-                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 200) {
+                        if (selectedModel.count > 0 && Math.abs(mouse.y - startY) > 100) {
                             dragArea.enabled = true
                         }
                     }
 
+                    onReleased: {
+                        //are we outside the listview area?
+                        if (resultsGrid.childAt(mouse.x, mouse.y).delegate === undefined && selectionRect.width == 0) {
+                            selectedModel.clear()
+                            selectedModel.modelCleared()
+                        }
+                        dragArea.enabled = false
+                    }
                     Connections {
                         target: fileBrowserRoot.model
                         onCountChanged: pinchArea.resetSelection()
@@ -474,7 +526,7 @@ MobileComponents.SplitDrawer {
                                 }*/
                                 onContainsChanged: {
                                     if (contains) {
-                                        selectedModel.append({"url": model.url})
+                                        selectedModel.append(model)
                                         opacity = 1
                                     } else {
                                         for (var i = 0; i < selectedModel.count; ++i) {
@@ -499,6 +551,12 @@ MobileComponents.SplitDrawer {
 
                                 width: resultsGrid.delegateWidth
                                 height: resultsGrid.delegateHeight
+                                onPressed: {
+                                    if (selectedModel.count > 0 && 
+                                        highlightFrame.opacity > 0) {
+                                        dragArea.enabled = true
+                                    }
+                                }
                                 onPressAndHold: {
                                     resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
                                     resourceInstance.title = model["label"]
@@ -512,7 +570,7 @@ MobileComponents.SplitDrawer {
                                         }
                                     } else {
                                         highlightFrame.opacity = 1
-                                        selectedModel.append({"url": model.url})
+                                        selectedModel.append(model)
                                     }
                                 }
                                 onClicked: openFile(model["url"], mimeType)

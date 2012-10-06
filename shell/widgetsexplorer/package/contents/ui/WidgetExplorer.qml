@@ -31,7 +31,7 @@ MobileComponents.IconGrid {
     model: PlasmaCore.SortFilterModel {
         id: appletsFilter
         sourceModel: myModel
-        filterRegExp: ".*"+searchField.searchQuery+".*"
+        filterRegExp: searchField.searchQuery ? ".*"+searchField.searchQuery+".*" : ""
     }
 
     delegate: Component {

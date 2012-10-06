@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Window Strip
+Name[cs]=Pruh oken
 Name[da]=Vinduesstribe
 Name[el]=Σειρά παραθύρων
 Name[es]=Tira de ventanas
@@ -14,6 +15,8 @@ Name[pa]=ਵਿੰਡੋ ਸਟਰੈਪ
 Name[pl]=Pas okna
 Name[pt]=Barra da Janela
 Name[pt_BR]=Barra da janela
+Name[sk]=Pás okna
+Name[sl]=Pas z okni
 Name[sv]=Fönsterremsa
 Name[tr]=Pencere Dilimi
 Name[uk]=Стрічка-вікно

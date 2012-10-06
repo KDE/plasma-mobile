@@ -56,6 +56,16 @@ void Package::setName(const QString &name)
     KGlobal::locale()->insertCatalog("plasma_package_" + name);
 
     emit nameChanged(name);
+    emit visibleNameChanged();
+}
+
+QString Package::visibleName() const
+{
+    if (!m_package) {
+        return QString();
+    }
+
+    return m_package->metadata().name();
 }
 
 QString Package::filePath(const QString &fileType, const QString &fileName) const

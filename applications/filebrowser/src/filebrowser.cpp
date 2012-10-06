@@ -32,6 +32,7 @@
 #include <KStandardAction>
 #include <KStandardDirs>
 #include <KServiceTypeTrader>
+#include <KMimeType>
 
 #include <kio/copyjob.h>
 #include <Plasma/Theme>
@@ -59,6 +60,11 @@ FileBrowser::FileBrowser()
     if (args->getOption("resourceType") == "nfo:Image") {
         setWindowIcon(KIcon("active-image-viewer"));
         setPlainCaption(i18n("Images"));
+    }
+
+    if (!startupArguments().isEmpty()) {
+        KMimeType::Ptr t = KMimeType::findByUrl(startupArguments().first());
+        declarativeView()->rootContext()->setContextProperty("startupMimeType", t->name());
     }
 }
 
@@ -121,9 +127,12 @@ void FileBrowser::copy(const QVariantList &src, const QString &dest)
 {
     KUrl::List urls;
     foreach (const QVariant &var, src) {
-        urls << var.toUrl();
+        KUrl url(var.toString());
+        urls << url;
     }
-    KIO::copy(urls, KUrl(dest));
+
+    KUrl destination(dest);
+    KIO::copy(urls, destination);
 }
 
 void FileBrowser::trash(const QVariantList &files)

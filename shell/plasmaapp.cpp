@@ -90,6 +90,7 @@ PlasmaApp::PlasmaApp()
     KGlobal::locale()->insertCatalog("libplasma");
     KGlobal::locale()->insertCatalog("plasma-device");
 
+    setenv("PLASMA_CUSTOM_PREFIX_PATHS", "platformcontents/widget/tablet/:platformcontents/widget/touch/:platformcontents/widget/generic/:contents/", 1);
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
     Nepomuk2::ResourceManager::instance()->init();
@@ -552,7 +553,7 @@ void PlasmaApp::reserveStruts(const int left, const int top, const int right, co
 void PlasmaApp::showWidgetsExplorer()
 {
     if (!m_widgetsExplorer) {
-        m_widgetsExplorer = new MobileWidgetsExplorer(0);
+        m_widgetsExplorer = new MobileWidgetsExplorer();
         m_widgetsExplorer.data()->setZValue(1000);
         m_corona->addItem(m_widgetsExplorer.data());
     }

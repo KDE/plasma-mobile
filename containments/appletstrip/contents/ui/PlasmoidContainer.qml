@@ -25,20 +25,34 @@ PlasmaCore.FrameSvgItem {
     id: plasmoidContainer
     anchors.top: appletsRow.top
     anchors.bottom: appletsRow.bottom
+    width: main.width/appletColumns
 
     //FIXME: this is due to the disappear anim managed by the applet itslef
     scale: applet.scale
 
-    property QGraphicsWidget applet
+    property alias applet: appletContainer.applet
 
     onAppletChanged: {
         applet.appletDestroyed.connect(appletDestroyed)
-        applet.parent = plasmoidContainer
-
         appletTimer.running = true
     }
 
-    //FIXME: this delay is because backgroundHints gets updated only after a while in qml applets
+    MobileComponents.AppletContainer {
+        id: appletContainer
+
+        anchors {
+            fill: parent
+            leftMargin: parent.margins.left
+            rightMargin: parent.margins.right
+            topMargin: parent.margins.top
+            bottomMargin: parent.margins.bottom + runButton.height
+        }
+        onAppletChanged: {
+            appletTimer.running = true
+        }
+    }
+
+
     Timer {
         id: appletTimer
         interval: 250
@@ -48,18 +62,12 @@ PlasmaCore.FrameSvgItem {
             if (applet.backgroundHints != 0) {
                 plasmoidContainer.imagePath = "widgets/background"
             } else {
-                plasmoidContainer.imagePath = "invalid"
+                plasmoidContainer.imagePath = "widgets/translucentbackground"
             }
             applet.backgroundHints = "NoBackground"
-
-            applet.x = plasmoidContainer.margins.left
-            applet.y = plasmoidContainer.margins.top
-            height = appletsRow.height
-            width = Math.max(main.width/appletColumns, applet.minimumSize.width + plasmoidContainer.margins.left + plasmoidContainer.margins.right)
-            applet.width = width - plasmoidContainer.margins.left - plasmoidContainer.margins.right
-            applet.height = height - plasmoidContainer.margins.top - plasmoidContainer.margins.bottom - runButton.height
         }
     }
+
 
     function appletDestroyed()
     {
@@ -103,14 +111,5 @@ PlasmaCore.FrameSvgItem {
             bottomMargin: plasmoidContainer.margins.bottom
         }
         z: applet.z + 1
-    }
-
-    onHeightChanged: {
-        if (applet) {
-            applet.height = height
-            var ratio = applet.preferredSize.width/applet.preferredSize.height
-            applet.width = main.width/appletColumns
-            width = applet.width
-        }
     }
 }

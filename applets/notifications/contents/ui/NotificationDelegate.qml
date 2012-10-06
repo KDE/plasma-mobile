@@ -27,6 +27,16 @@ PlasmaComponents.ListItem {
     opacity: 1-Math.abs(x)/width
     width: popupFlickable.width
 
+    visible: appTabBar.currentTab == allAppsTab || appTabBar.currentTab.text == appName
+
+    Component.onCompleted: {
+        allApplicationsModel.addApplication(appIcon, appName)
+        mainScrollArea.height = mainScrollArea.implicitHeight
+    }
+    Component.onDestruction: {
+        allApplicationsModel.removeApplication(model.appName)
+        mainScrollArea.height = mainScrollArea.implicitHeight
+    }
     Timer {
         interval: 30*60*1000
         repeat: false
@@ -61,7 +71,7 @@ PlasmaComponents.ListItem {
             NumberAnimation {
                 target: notificationItem
                 properties: "x"
-                to: removeAnimation.exitFromRight ? notificationItem.width : -notificationItem.width
+                to: removeAnimation.exitFromRight ? notificationItem.width-1 : 1-notificationItem.width
                 duration: 250
                 easing.type: Easing.InOutQuad
             }
@@ -91,21 +101,15 @@ PlasmaComponents.ListItem {
             width: popupFlickable.width
             Item {
                 width: parent.width
-                height: appNameLabel.height
-                QIconItem {
-                    id: appIconItem
-                    icon: QIcon(appIcon)
-                    width: theme.mediumIconSize
-                    height: theme.mediumIconSize
-                }
+                height: summaryLabel.height
 
                 PlasmaComponents.Label {
-                    id: appNameLabel
-                    text: appName
+                    id: summaryLabel
+                    text: summary
                     font.bold: true
                     height: paintedHeight
                     anchors {
-                        left: appIconItem.right
+                        left: parent.left
                         right: parent.right
                     }
                     horizontalAlignment: Text.AlignHCenter
@@ -131,16 +135,60 @@ PlasmaComponents.ListItem {
                 }
             }
 
-            PlasmaComponents.Label {
-                text: body
-                color: theme.textColor
-                anchors {
-                    left: parent.left
-                    right:parent.right
-                    leftMargin: theme.mediumIconSize+6
-                    rightMargin: theme.mediumIconSize+6
+            Item {
+                height: childrenRect.height
+                width: parent.width
+                QIconItem {
+                    id: appIconItem
+                    icon: QIcon(appIcon)
+                    width: theme.largeIconSize
+                    height: theme.largeIconSize
+                    visible: !imageItem.visible
+                    anchors {
+                        left: parent.left
+                        verticalCenter: parent.verticalCenter
+                    }
                 }
-                wrapMode: Text.Wrap
+                QImageItem {
+                    id: imageItem
+                    anchors.fill: appIconItem
+                    image: model.image
+                    smooth: true
+                    visible: nativeWidth > 0
+                }
+                PlasmaComponents.Label {
+                    text: body
+                    color: theme.textColor
+                    anchors {
+                        left: appIconItem.right
+                        right: actionsColumn.left
+                        verticalCenter: parent.verticalCenter
+                        leftMargin: 6
+                        rightMargin: 6
+                    }
+                    wrapMode: Text.Wrap
+                }
+                Column {
+                    id: actionsColumn
+                    spacing: 6
+                    anchors {
+                        right: parent.right
+                        rightMargin: 6
+                        verticalCenter: parent.verticalCenter
+                    }
+                    Repeater {
+                        model: actions
+                        PlasmaComponents.Button {
+                            text: model.text
+                            width: theme.defaultFont.mSize.width * 8
+                            height: theme.defaultFont.mSize.width * 2
+                            onClicked: {
+                                executeAction(source, model.id)
+                                actionsColumn.visible = false
+                            }
+                        }
+                    }
+                }
             }
         }
     }
