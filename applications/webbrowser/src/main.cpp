@@ -51,13 +51,11 @@ int main(int argc, char **argv)
 
     ActiveWebbrowser app(args);
 
-    bool useGL = args->isSet("opengl");
 
-    if (!useGL) {
-        //use plasmarc to share this with plasma-windowed
-        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
-        useGL = cg.readEntry("UseOpenGl", true);
-    }
+    //use plasmarc to share this with plasma-windowed
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
+    bool useGL = cg.readEntry("UseOpenGl", true);
+
     QString url;
     if (args->count()) {
         url = args->arg(0);
