@@ -53,11 +53,15 @@ ActiveAppsRunner::~ActiveAppsRunner()
 
 void ActiveAppsRunner::match(Plasma::RunnerContext &context)
 {
-    if (context.query() != "__activeappslist") {
+    if (context.query() == "__activeappslist") {
+        allApps(context);
+    } else {
         serviceMatches(context);
-        return;
     }
+}
 
+void ActiveAppsRunner::allApps(Plasma::RunnerContext &context)
+{
     // Search for applications which are executable and case-insensitively match the search term
     // See http://techbase.kde.org/Development/Tutorials/Services/Traders#The_KTrader_Query_Language
     // if the following is unclear to you.
@@ -75,7 +79,11 @@ void ActiveAppsRunner::match(Plasma::RunnerContext &context)
             Plasma::QueryMatch match(this);
             match.setType(Plasma::QueryMatch::ExactMatch);
             setupMatch(service, match);
-            match.setRelevance(1);
+            if (service->categories().contains("ActiveCore")) {
+                match.setRelevance(1.0);
+            } else {
+                match.setRelevance(0.9);
+            }
             matches << match;
         }
     }
