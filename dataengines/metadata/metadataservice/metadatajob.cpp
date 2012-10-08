@@ -147,8 +147,7 @@ void MetadataJob::start()
                 tags.removeAll(tag);
                 r.setTags(tags);
             } else {
-                tags << tag;
-                r.setTags(tags);
+                r.addTag(tag);
             }
         }
     }
