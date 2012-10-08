@@ -73,6 +73,13 @@ MouseArea {
         id: runnerModel
     }
 
+    PlasmaCore.SortFilterModel {
+        id: sortedRunnerModel
+        sourceModel: runnerModel
+        sortRole: "relevance"
+        sortOrder: Qt.DescendingOrder
+    }
+
     MobileComponents.ViewSearch {
         id: searchField
         // we have this property because RunnerManager does a fair amount of
@@ -113,7 +120,7 @@ MouseArea {
 
     MobileComponents.IconGrid {
         id: appGrid
-        model: runnerModel
+        model: sortedRunnerModel
         onCurrentPageChanged: resourceInstance.uri = ""
 
         delegate: Component {
@@ -123,7 +130,7 @@ MouseArea {
                 height: appGrid.delegateHeight
                 className: "FileDataObject"
                 genericClassName: "FileDataObject"
-                property string label: model["name"] ? model["name"] : model["label"]
+                property string label: model["label"]
                 //property string mimeType: model["mimeType"] ? model["mimeType"] : "application/x-desktop"
                 onPressAndHold: ParallelAnimation {
                     PlasmaExtras.ReleasedAnimation { targetItem: launcherDelegate }
