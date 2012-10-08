@@ -81,6 +81,6 @@ Exec=active-filebrowser -graphicssystem raster %u
 Terminal=false
 Icon=system-file-manager
 Type=Application
-Categories=Qt;KDE;System;FileManager;
+Categories=Qt;KDE;System;FileManager;ActiveCore
 MimeType=inode/directory;
 InitialPreference=9

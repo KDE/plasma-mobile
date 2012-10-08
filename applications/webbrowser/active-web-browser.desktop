@@ -78,6 +78,6 @@ Exec=active-webbrowser -graphicssystem raster %u
 Terminal=false
 Icon=active-web-browser
 Type=Application
-Categories=Qt;KDE;Network;WebBrowser;
+Categories=Qt;KDE;Network;WebBrowser;ActiveCore;
 X-KDE-PluginInfo-Website=
 MimeType=text/html;text/xml;application/xhtml+xml;
