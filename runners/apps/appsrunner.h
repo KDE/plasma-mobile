@@ -42,6 +42,7 @@ protected slots:
 
 private:
     void setupMatch(const KService::Ptr &service, Plasma::QueryMatch &action);
+    void allApps(Plasma::RunnerContext &context);
     void serviceMatches(Plasma::RunnerContext &context);
 
 private:
