@@ -76,11 +76,15 @@ int PagedProxyModel::pageSize() const
 void PagedProxyModel::setSourceModelObject(QObject *source)
 {
     QAbstractItemModel *model = qobject_cast<QAbstractItemModel *>(source);
-    if (!model) {
+    if (!model || model == sourceModel()) {
         return;
     }
+
+    bool reset = false;
     if (sourceModel()) {
+        reset = true;
         disconnect(sourceModel(), 0, this, 0);
+        beginResetModel();
     }
 
     connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
@@ -98,12 +102,15 @@ void PagedProxyModel::setSourceModelObject(QObject *source)
     connect(model, SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)),
             this, SLOT(sourceRowsMoved(QModelIndex,int,int,QModelIndex,int)));
 
-    connect(model, SIGNAL(modelAboutToBeReset()),
-               this, SIGNAL(modelAboutToBeReset()));
-    connect(model, SIGNAL(modelReset()),
-               this, SIGNAL(modelReset()));
-    setRoleNames(model->roleNames());
+    connect(model, SIGNAL(modelAboutToBeReset()), this, SIGNAL(modelAboutToBeReset()));
+    connect(model, SIGNAL(modelReset()), this, SIGNAL(modelReset()));
+    connect(model, SIGNAL(layoutChanged()), this, SIGNAL(modelReset()));
+
     setSourceModel(model);
+
+    if (reset) {
+        endResetModel();
+    }
 }
 
 QObject *PagedProxyModel::sourceModelObject() const
