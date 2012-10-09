@@ -21,6 +21,7 @@
 
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>
+#include <QDBusConnectionInterface>
 #include <QTimer>
 
 #include <KDebug>
@@ -76,10 +77,6 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
 
     m_queryTimer = new QTimer(this);
     m_queryTimer->setSingleShot(true);
-    if (Nepomuk2::ResourceManager::instance()->initialized()) {
-        connect(m_queryTimer, SIGNAL(timeout()),
-                this, SLOT(doQuery()));
-    }
 
     m_extraParameters = new QDeclarativePropertyMap;
     connect (m_extraParameters, SIGNAL(valueChanged(QString,QVariant)), m_queryTimer, SLOT(start()));
@@ -89,6 +86,14 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
                         QDBusServiceWatcher::WatchForRegistration,
                         this);
     connect(m_queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
+
+
+    QDBusConnectionInterface* interface = m_queryServiceWatcher->connection().interface();
+
+    if (interface->isServiceRegistered("org.kde.nepomuk.services.nepomukqueryservice")) {
+        connect(m_queryTimer, SIGNAL(timeout()),
+                this, SLOT(doQuery()));
+    }
 }
 
 AbstractMetadataModel::~AbstractMetadataModel()
