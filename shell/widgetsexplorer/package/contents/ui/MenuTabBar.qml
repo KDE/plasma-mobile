@@ -124,12 +124,6 @@ PlasmaComponents.TabBar {
         id: appsComponent
         ResourceBrowser {
             defaultClassName: "FileDataObject"
-            model: RunnerModels.RunnerModel {
-                id: runnerModel
-                runners: [ "org.kde.active.apps" ]
-                query: searchField.searchQuery
-            }
-            /*FIXME:
              model: PlasmaCore.SortFilterModel {
                 sourceModel: RunnerModels.RunnerModel {
                     id: runnerModel
@@ -138,7 +132,6 @@ PlasmaComponents.TabBar {
                 }
                 sortRole: "name"
             }
-             */
         }
     }
 
