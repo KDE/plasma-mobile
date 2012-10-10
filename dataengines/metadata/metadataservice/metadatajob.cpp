@@ -139,6 +139,8 @@ void MetadataJob::start()
     } else if (operation == "tagResources") {
         const QStringList resourceUrls = parameters()["ResourceUrls"].toStringList();
         const Nepomuk::Tag tag( parameters()["Tag"].toString() );
+        //FIXME: work around a nepomuk datamanager bug
+        tag.resourceUri();
 
         foreach (const QString &resUrl, resourceUrls) {
             Nepomuk::Resource r(resUrl);
