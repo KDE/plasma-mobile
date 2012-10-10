@@ -128,6 +128,7 @@ Item {
             id: titleFrame
             imagePath: "widgets/extender-dragger"
             prefix: "root"
+
             anchors {
                 left: parent.left
                 right: parent.right
@@ -136,31 +137,67 @@ Item {
                 rightMargin: parent.margins.right
                 topMargin: parent.margins.top
             }
-            height: titleLabel.height + margins.top + margins.bottom
-            PlasmaComponents.Label {
-                id: titleLabel
-                horizontalAlignment: Text.AlignHCenter
-                elide: Text.ElideRight
-                font.pointSize: theme.defaultFont.pointSize * 1.1
-                font.weight: Font.Bold
-                style: Text.Raised
-                styleColor: Qt.rgba(1,1,1,0.8)
-                height: paintedHeight
+
+            //FIXME: +5 because of Plasma::Dialog margins
+            height: Math.max(titleLabel.paintedHeight, acceptButton.height) + margins.top + margins.bottom
+
+            Item {
+                id: titleLayoutHelper
+
                 anchors {
-                    top: parent.top
-                    left: parent.left
                     right: parent.right
+                    left: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                    leftMargin: parent.margins.left
+                    rightMargin: parent.margins.right
                     topMargin: parent.margins.top
-                    leftMargin: height + 2
-                    rightMargin: height + 2
+                    bottomMargin: parent.margins.bottom
+                }
+
+                PlasmaComponents.Button {
+                    id: acceptButton
+                    onClicked: accept()
+                    visible: text !== ""
+                    anchors {
+                        left: parent.left
+                        verticalCenter: parent.verticalCenter
+                    }
+                }
+                PlasmaComponents.Label {
+                    id: titleLabel
+                    elide: Text.ElideRight
+                    height: paintedHeight
+                    font.pointSize: theme.defaultFont.pointSize * 1.1
+                    font.weight: Font.Bold
+                    style: Text.Raised
+                    styleColor: Qt.rgba(1,1,1,0.8)
+                    anchors {
+                        left: acceptButton.visible ? acceptButton.right : parent.left
+                        //still depends from acceptButton to make text more centered
+                        right: acceptButton.visible ? rejectButton.left : parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                PlasmaComponents.Button {
+                    id: rejectButton
+                    onClicked: reject()
+                    visible: text !== ""
+                    anchors {
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
                 }
             }
         }
+
         Item {
             id: contentItem
             anchors {
                 top: titleFrame.bottom
-                bottom: buttonsRow.top
+                bottom: parent.bottom
                 left: parent.left
                 right: parent.right
                 leftMargin: sheet.margins.left
@@ -170,26 +207,6 @@ Item {
             }
         }
 
-        Row {
-            id: buttonsRow
-            spacing: 8
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
-                //the bottom margin is disabled but we want it anyways
-                bottomMargin: theme.defaultFont.mSize.height*0.6
-            }
-
-            PlasmaComponents.Button {
-                id: acceptButton
-                onClicked: accept()
-            }
-
-            PlasmaComponents.Button {
-                id: rejectButton
-                onClicked: reject()
-            }
-        }
 
 
         states: [
