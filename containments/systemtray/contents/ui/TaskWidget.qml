@@ -21,7 +21,7 @@ import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1 as QtExtra
 
-Item  {
+Item {
     id: taskIcon
     width: main.itemWidth
     height: main.itemHeight
@@ -35,16 +35,21 @@ Item  {
         }
     }
 
+    //FIXME: sometimes doesn't get mapped in roles
+    property string iconName: statusNotifierSource.data[DataEngineSource]["IconName"]
+    onIconNameChanged: iconSvg.updateVisibility()
     PlasmaCore.Svg {
         id: iconSvg
-        imagePath: IconName ? "icons/" + String(IconName).split('-')[0] : ''
-        Component.onCompleted: {
-            var hasSvg = IconName ? iconSvg.hasElement(IconName) : false
+        imagePath: iconName ? "icons/" + String(iconName).split('-')[0] : ''
+        onRepaintNeeded: updateVisibility()
+        Component.onCompleted: updateVisibility()
+
+        function updateVisibility() {
+            var hasSvg = iconName ? iconSvg.hasElement(iconName) : false
             normalIcon.visible = !hasSvg
             svgItemIcon.visible = hasSvg
         }
     }
-
     QtExtra.QIconItem {
         id: normalIcon
         anchors.fill: parent
@@ -53,7 +58,7 @@ Item  {
     PlasmaCore.SvgItem {
         id: svgItemIcon
         anchors.centerIn: parent
-        width: Math.min(parent.width, parent.height)
+        width: Math.max(16, Math.min(parent.width, parent.height))
         height: width
         svg: iconSvg
         elementId: IconName ? IconName : ''
