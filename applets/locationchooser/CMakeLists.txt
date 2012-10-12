@@ -1,7 +1,5 @@
 project(LocationChooser)
 
-add_subdirectory(package/icons)
-
 installPackage(package org.kde.locationchooser)
 
 include_directories(
@@ -48,4 +46,11 @@ install(
    FILES plasma-applet-locationchooser.desktop
    DESTINATION ${SERVICES_INSTALL_DIR}
    )
+
+kde4_install_icons( ${ICON_INSTALL_DIR} )
+
+install( FILES package/icons/location.svgz
+               package/icons/location-changed.svgz
+               package/icons/location-unknown.svgz
+         DESTINATION ${DATA_INSTALL_DIR}/desktoptheme/default/icons/ )
 
