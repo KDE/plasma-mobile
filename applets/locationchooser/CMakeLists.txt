@@ -47,8 +47,7 @@ install(
    DESTINATION ${SERVICES_INSTALL_DIR}
    )
 
-kde4_install_icons( ${ICON_INSTALL_DIR} )
-
+add_subdirectory(icons)
 install( FILES package/icons/location.svgz
                package/icons/location-changed.svgz
                package/icons/location-unknown.svgz
