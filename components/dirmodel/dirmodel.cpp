@@ -96,13 +96,19 @@ int DirModel::indexForUrl(const QString &url) const
     return index.row();
 }
 
-QString DirModel::pathForIndex(int i) const
+QVariantMap DirModel::get(int i) const
 {
-    qDebug("Entering pathForIndex...");
     QModelIndex modelIndex = index(i, 0);
-    qDebug("Row: %d", modelIndex.row());
-    QString path = itemForIndex(modelIndex).url().path();
-    return path;
+
+    KFileItem item = itemForIndex(modelIndex);
+    QString url = item.url().prettyUrl();
+    QString mimeType = item.mimetype();
+
+    QVariantMap ret;
+    ret.insert("url", QVariant(url));
+    ret.insert("mimeType", QVariant(mimeType));
+
+    return ret;
 }
 
 QVariant DirModel::data(const QModelIndex &index, int role) const

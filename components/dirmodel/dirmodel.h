@@ -21,6 +21,7 @@
 #define DIRMODEL_H
 
 #include <KDirModel>
+#include <QVariant>
 
 class QTimer;
 
@@ -64,7 +65,7 @@ public:
 
     Q_INVOKABLE int indexForUrl(const QString &url) const;
 
-    Q_INVOKABLE QString pathForIndex(int index) const;
+    Q_INVOKABLE QVariantMap get(int index) const;
 
 protected Q_SLOTS:
     void showPreview(const KFileItem &item, const QPixmap &preview);
