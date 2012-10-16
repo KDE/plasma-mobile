@@ -224,6 +224,7 @@ Item {
                     property variant originalSourceSize
                     asynchronous: true
                     anchors.centerIn: parent
+                    fillMode: Image.PreserveAspectFit
                     width: mainFlickable.contentWidth
                     height: mainFlickable.contentHeight
                     onSourceChanged: sourceSize = undefined
@@ -241,22 +242,6 @@ Item {
                         }
 
                         originalSourceSize = sourceSize
-                        var ratio = sourceSize.width/sourceSize.height
-
-                        if (sourceSize.width > sourceSize.height) {
-                            mainImage.width = Math.min(mainFlickable.width + 1, sourceSize.width)
-                            mainImage.height = mainImage.width / ratio
-                        } else {
-                            mainImage.height = Math.min(mainFlickable.height, sourceSize.height)
-                            mainImage.width = mainImage.height * ratio
-                        }
-                        if (mainImage.sourceSize.width > mainImage.sourceSize.height && mainImage.sourceSize.width > mainFlickable.width) {
-                            mainImage.sourceSize.width = mainFlickable.width
-                            mainImage.sourceSize.height = mainImage.sourceSize.width / ratio
-                        } else if (mainImage.sourceSize.height > mainImage.sourceSize.width && mainImage.sourceSize.height > mainFlickable.height) {
-                            mainImage.sourceSize.width = mainFlickable.height * ratio
-                            mainImage.sourceSize.height = mainFlickable.height
-                        }
                     }
                 }
 
