@@ -24,6 +24,7 @@
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
+#include <QTimer>
 
 #include <KIcon>
 #include <KPluginInfo>
@@ -35,19 +36,27 @@
 class SettingsModulesModelPrivate {
 
 public:
-//     QList<QObject*> items;
-    QList<SettingsModule*> settingsModules;
+    SettingsModulesModelPrivate(SettingsModulesModel *parent)
+        : isPopulated(false),
+          populateTimer(new QTimer(parent))
+    {}
+
     bool isPopulated;
+    QList<SettingsModule*> settingsModules;
+    QTimer *populateTimer;
+    QString appName;
 };
 
 
 SettingsModulesModel::SettingsModulesModel(QDeclarativeComponent *parent)
-    : QDeclarativeComponent(parent)
+    : QDeclarativeComponent(parent),
+      d(new SettingsModulesModelPrivate(this))
 {
     kDebug() << "Creating SettingsModel";
-    d = new SettingsModulesModelPrivate;
-    d->isPopulated = false;
-    populate();
+    d->populateTimer->setInterval(0);
+    d->populateTimer->setSingleShot(true);
+    connect(d->populateTimer, SIGNAL(timeout()), this, SLOT(populate()));
+    d->populateTimer->start();
 }
 
 SettingsModulesModel::~SettingsModulesModel()
@@ -58,6 +67,24 @@ SettingsModulesModel::~SettingsModulesModel()
 QDeclarativeListProperty<SettingsModule> SettingsModulesModel::settingsModules()
 {
     return QDeclarativeListProperty<SettingsModule>(this, d->settingsModules);
+}
+
+QString SettingsModulesModel::application() const
+{
+    return d->appName;
+}
+
+void SettingsModulesModel::setApplication(const QString &appName)
+{
+    kDebug() << "setting application to" << appName;
+    if (d->appName != appName) {
+        d->appName = appName;
+        emit applicationChanged();
+        d->settingsModules.clear();
+        emit settingsModulesChanged();
+        d->isPopulated = false;
+        d->populateTimer->start();
+    }
 }
 
 bool compareModules(const SettingsModule *l, const SettingsModule *r)
@@ -103,13 +130,20 @@ bool compareModules(const SettingsModule *l, const SettingsModule *r)
 void SettingsModulesModel::populate()
 {
     if (d->isPopulated) {
-        //kDebug() << "already populated.";
+        kDebug() << "already populated.";
         return;
     }
+
     d->isPopulated = true;
 
-    QString query;
-    KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
+    QString constraint;
+    if (d->appName.isEmpty()) {
+        constraint.append("not exist [X-KDE-ParentApp]");
+    } else {
+        constraint.append("[X-KDE-ParentApp] == '").append(d->appName).append("'");
+    }
+
+    KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", constraint);
     QSet<QString> seen;
     //kDebug() << "Found " << services.count() << " modules";
     foreach (const KService::Ptr &service, services) {

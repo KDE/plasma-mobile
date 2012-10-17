@@ -35,21 +35,27 @@ class SettingsModulesModel : public QDeclarativeComponent
 {
     Q_OBJECT
     Q_PROPERTY(QDeclarativeListProperty<SettingsModule> settingsModules READ settingsModules NOTIFY settingsModulesChanged)
+    Q_PROPERTY(QString application READ application WRITE setApplication NOTIFY applicationChanged)
 
 public:
-    SettingsModulesModel(QDeclarativeComponent* parent = 0 );
+    SettingsModulesModel(QDeclarativeComponent* parent = 0);
     ~SettingsModulesModel();
 
     QDeclarativeListProperty<SettingsModule> settingsModules();
 
+    QString application() const;
+    void setApplication(const QString &appname);
+
 public Q_SLOTS:
     void populate();
+
 Q_SIGNALS:
     void dataChanged();
     void settingsModulesChanged();
+    void applicationChanged();
 
 private:
-    SettingsModulesModelPrivate* d;
+    SettingsModulesModelPrivate * const d;
 };
 
 #endif // COMPLETIONMODEL_H
