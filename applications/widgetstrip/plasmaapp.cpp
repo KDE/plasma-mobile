@@ -19,8 +19,8 @@
  */
 
 #include "plasmaapp.h"
-#include "../shell/widgetsexplorer/mobilewidgetsexplorer.h"
-#include "../shell/activityconfiguration/activityconfiguration.h"
+#include "widgetsexplorer/mobilewidgetsexplorer.h"
+#include "activityconfiguration/activityconfiguration.h"
 
 #include <unistd.h>
 
