@@ -27,7 +27,7 @@ import org.kde.runnermodel 0.1 as RunnerModels
 PlasmaComponents.TabBar {
     id: tabBar
 
-    property Component startComponent: topComponent
+    property Component startComponent: appsComponent
 
     anchors {
         top: searchField.bottom
@@ -36,36 +36,6 @@ PlasmaComponents.TabBar {
     }
     width: Math.min(implicitWidth, parent.width - 100)
 
-    CategoryTab {
-        id: topTab
-        text: i18n("Top")
-        component: topComponent
-        resourceType: "_top"
-
-        Timer {
-            id: switchPageTimer
-            interval: 100
-            onTriggered: {
-                topTab.visible = (topPageExistenceModel.count >= 1)
-                if (!topTab.visible) {
-                    tabBar.currentTab = appsTab
-                    stack.replace(appsComponent)
-                }
-            }
-        }
-        MetadataModels.MetadataModel {
-            id: topPageExistenceModel
-            activityId: "!"+activitySource.data["Status"]["Current"]
-            scoreResources: true
-            limit: 1
-            onRunningChanged: {
-                if (running) {
-                    switchPageTimer.running = true
-                }
-            }
-            onCountChanged: switchPageTimer.running = true
-        }
-    }
     CategoryTab {
         id: appsTab
         text: i18n("Apps")
@@ -106,18 +76,6 @@ PlasmaComponents.TabBar {
         text: i18n("Widgets")
         component: widgetsComponent
         resourceType: "_Widgets"
-    }
-
-    Component {
-        id: topComponent
-        ResourceBrowser {
-            model: MetadataModels.MetadataModel {
-                sortOrder: Qt.DescendingOrder
-                activityId: "!"+activitySource.data["Status"]["Current"]
-                scoreResources: true
-                queryString: "*" + searchField.searchQuery + "*"
-            }
-        }
     }
 
     Component {
