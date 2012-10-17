@@ -1,5 +1,7 @@
-include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs
-                    ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kworkspace)
+find_package(KDE4Workspace REQUIRED)
+
+include_directories(${KDE4WORKSPACE_INCLUDE_DIR}
+                    ${KDE4WORKSPACE_INCLUDE_DIR}/kworkspace)
 
 include(KDE4Defaults)
 
@@ -29,8 +31,7 @@ set(plasma-device_SRCS
 
 add_kao_ontology(plasma-device_SRCS)
 
-#set(ksmserver_xml ${KDEBASE_WORKSPACE_SOURCE_DIR}/ksmserver/org.kde.KSMServerInterface.xml)
-set(ksmserver_xml ${KDE4_DBUS_INTERFACES_DIR}/org.kde.KSMServerInterface.xml)
+set(ksmserver_xml ${KDE4WORKSPACE_DBUS_INTERFACES_DIR}/org.kde.KSMServerInterface.xml)
 qt4_add_dbus_interface(plasma-device_SRCS ${ksmserver_xml} ksmserver_interface)
 
 

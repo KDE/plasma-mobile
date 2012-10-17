@@ -1,9 +1,9 @@
 project(alarmsengine)
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR} ${KDE4_INCLUDES} ${KDEPIMLIBS_INCLUDE_DIRS} ${QT_INCLUDES} )
-
 find_package(Akonadi REQUIRED)
 find_package (KdepimLibs REQUIRED)
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR} ${KDE4_INCLUDES} ${KDEPIMLIBS_INCLUDE_DIRS} ${QT_INCLUDES} )
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS} ${KDEPIM_DEFINITIONS} ${AKONADI_DEFINITIONS})
 

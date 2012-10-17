@@ -35,6 +35,8 @@ include_directories(
    ${CMAKE_BINARY_DIR}/inputmethod
    ${KDE4_INCLUDES}
    ${KDECLARATIVE_INCLUDE_DIR}
+   ${KACTIVITIES_INCLUDE_DIRS}
+   ${SOPRANO_INCLUDE_DIR}
    )
 
 MACRO(installPackage dir component)
