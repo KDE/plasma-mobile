@@ -73,7 +73,7 @@ Image {
                 PlasmaComponents.ListItem {
                     id: delegateItem
                     height: 64
-                    width: parent.width
+                    width: parent ? parent.width : 100
                     anchors.margins: 20
                     enabled: true
                     checked: listView.currentIndex == index
