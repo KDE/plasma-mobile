@@ -20,6 +20,7 @@
 
 // std
 #include <iostream>
+#include <iomanip>
 
 // KDE
 #include <KAboutData>
@@ -63,10 +64,29 @@ int main(int argc, char **argv)
         KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
 
         //kDebug() << "Found " << services.count() << " modules";
+        int nameWidth = 0;
+        foreach (const KService::Ptr &service, services) {
+            KPluginInfo info(service);
+            const int len = info.pluginName().length();
+            if (len > nameWidth) {
+                nameWidth = len;
+            }
+        }
+
+        QSet<QString> seen;
+        std::cout << std::setfill('.');
+
         foreach (const KService::Ptr &service, services) {
             if (service->noDisplay()) {
                 continue;
             }
+
+            KPluginInfo info(service);
+            if (seen.contains(info.pluginName())) {
+                continue;
+            }
+            seen.insert(info.pluginName());
+
             QString description;
             if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
                 description = service->genericName();
@@ -74,7 +94,11 @@ int main(int argc, char **argv)
                 description = service->comment();
             }
             //kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
-            std::cout << service->property("X-KDE-PluginInfo-Name").toString().toLocal8Bit().data() << "\t\t" << description.toLocal8Bit().data() << std::endl;
+            std::cout << info.pluginName().toLocal8Bit().data()
+                      << ' '
+                      << std::setw(nameWidth - info.pluginName().length() + 2)
+                      << '.' << ' '
+                      << description.toLocal8Bit().data() << std::endl;
         }
         return 0;
     }
