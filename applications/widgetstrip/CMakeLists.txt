@@ -9,12 +9,12 @@ set(plasma-widgetstrip_SRCS
     plasmaapp.cpp
     stripcorona.cpp
 
-    ../shell/activityconfiguration/activityconfiguration.cpp
-    ../shell/activityconfiguration/backgroundlistmodel.cpp
+    ${CMAKE_SOURCE_DIR}/shell/activityconfiguration/activityconfiguration.cpp
+    ${CMAKE_SOURCE_DIR}/shell/activityconfiguration/backgroundlistmodel.cpp
 
-    ../shell/widgetsexplorer/mobilewidgetsexplorer.cpp
-    ../shell/widgetsexplorer/kcategorizeditemsviewmodels.cpp
-    ../shell/widgetsexplorer/plasmaappletitemmodel.cpp
+    ${CMAKE_SOURCE_DIR}/shell/widgetsexplorer/mobilewidgetsexplorer.cpp
+    ${CMAKE_SOURCE_DIR}/shell/widgetsexplorer/kcategorizeditemsviewmodels.cpp
+    ${CMAKE_SOURCE_DIR}/shell/widgetsexplorer/plasmaappletitemmodel.cpp
 
     ${appletbrowserdialog_SRCS}
 )
