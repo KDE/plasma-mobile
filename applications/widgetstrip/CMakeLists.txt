@@ -1,4 +1,4 @@
-include_directories(${KDEBASE_WORKSPACE_SOURCE_DIR}/libs ${KDEBASE_WORKSPACE_SOURCE_DIR}/libs/kworkspace ${CMAKE_SOURCE_DIR}/shell)
+include_directories(${CMAKE_SOURCE_DIR}/shell)
 
 
 ADD_DEFINITIONS(-DNO_ACTIVITIES)
