@@ -111,24 +111,41 @@ Image {
 
                     onClicked: {
                         listView.currentIndex = index
-                        settingsItem.module = module;
+                        settingsItem.module = module
                     }
+
                     onPressAndHold: {
                         listView.currentIndex = index
-                        settingsItem.module = module;
-                    }
-                    Component.onCompleted: {
-                        // mark current module as selected in the list on the left
-                        // FIXME: not sure why this doesn't work???
-                        if (typeof(startModule) != "undefined" && module == startModule) {
-                            listView.currentIndex = index;
-                        }
+                        settingsItem.module = module
                     }
                 }
             }
 
             ActiveSettings.SettingsModulesModel {
                 id: settingsModulesModel
+                onSettingsModulesChanged: {
+                    // when the modules are loaded, we need to ensure that
+                    // the list has the correct item loaded
+                    var module;
+                    if (settingsItem.module) {
+                        module = settingsItem.module
+                    } else if (typeof(startModule) != "undefined") {
+                        module = startModule
+                    }
+
+                    if (module) {
+                        var index = 0;
+                        var numModules = settingsModules.length
+                        var i = 0
+                        while (i < numModules) {
+                            if (settingsModules[i].module == module) {
+                                listView.currentIndex = i;
+                                break
+                            }
+                            ++i
+                        }
+                    }
+                }
             }
 
             ListView {
