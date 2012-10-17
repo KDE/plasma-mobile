@@ -149,7 +149,7 @@ Image {
                 anchors { fill: parent; margins: 80; }
                 QIconItem {
                     icon: QIcon("preferences-desktop")
-                    anchors { top: initial_page_label.bottom; right: parent.right; }
+                    anchors { top: parent.top; right: parent.right; }
                     opacity: 0.1
                     width: 256
                     height: width
