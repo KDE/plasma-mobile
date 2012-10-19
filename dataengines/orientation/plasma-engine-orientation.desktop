@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Orientation
+Comment=Adjusts screen orientation
+X-KDE-ServiceTypes=Plasma/DataEngine
+Type=Service
+Icon=transform-rotate
+X-KDE-Library=plasma_engine_orientation
+
+X-KDE-PluginInfo-Author=Jeremy Whiting
+X-KDE-PluginInfo-Email=jpwhiting@kde.org
+X-KDE-PluginInfo-Name=orientation
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=http://kde.org
+X-KDE-PluginInfo-Category=Utilities
+X-KDE-PluginInfo-Depends=
+

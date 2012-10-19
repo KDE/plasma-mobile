@@ -13,6 +13,7 @@ add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 
 find_package(Nepomuk REQUIRED)
 find_package(Soprano)
+find_package(QtMobility)
 
 macro_log_feature(
    Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net"
@@ -25,6 +26,10 @@ macro_log_feature(
     KDeclarative_FOUND "libkdeclarative" "KDE Declarative (QML) support from kdelibs" "http://www.kde.org"
     TRUE "" ""
     )
+
+if(NOT X11_Xinput_FOUND)
+  macro_log_feature(X11_Xinput_FOUND "libXi" "X11 input management library" "http://xorg.freedesktop.org" FALSE "" "Needed for orientation dataengine.")
+endif(NOT X11_Xinput_FOUND)
 
 include(SopranoAddOntology)
 add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
