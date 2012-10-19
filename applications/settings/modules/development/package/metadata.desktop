@@ -1,6 +1,22 @@
 [Desktop Entry]
 Name=Development
+Name[da]=Udvikling
+Name[et]=Arendus
+Name[hu]=Fejlesztés
+Name[nl]=Ontwikkeling
+Name[pt]=Desenvolvimento
+Name[pt_BR]=Desenvolvimento
+Name[uk]=Розробка
+Name[x-test]=xxDevelopmentxx
 Comment=Settings for developers
+Comment[da]=Indstillinger for udviklere
+Comment[et]=Seadistused arendajatele
+Comment[hu]=Beállítások fejlesztőknek
+Comment[nl]=Instellingen voor ontwikkelaars
+Comment[pt]=Configuração dos programadores
+Comment[pt_BR]=Configurações para desenvolvedores
+Comment[uk]=Параметри для розробників
+Comment[x-test]=xxSettings for developersxx
 Encoding=UTF-8
 Type=Service
 Icon=applications-development

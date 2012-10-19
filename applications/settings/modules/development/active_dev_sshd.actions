@@ -1,13 +1,55 @@
 [Domain]
 Name=SSH Remote Access
+Name[da]=Ekstern adgang via SSH
+Name[et]=SSH kaugligipääs
+Name[hu]=SSH távoli hozzáférés
+Name[nl]=Toegang op afstand met SSH
+Name[pt]=Acesso Remoto por SSH
+Name[pt_BR]=Acesso remoto SSH
+Name[uk]=Віддалений доступ SSH
+Name[x-test]=xxSSH Remote Accessxx
 Icon=utilities-terminal
 
 [org.kde.active.sshdcontrol.start]
 Name=Activate sshd
+Name[cs]=Aktivovat sshd
+Name[da]=Aktivér sshd
+Name[et]=Sshd aktiveerimine
+Name[hu]=sshd aktiválása
+Name[nl]=sshd activeren
+Name[pt]=Activar o 'sshd'
+Name[pt_BR]=Ativar sshd
+Name[uk]=Вмикання sshd
+Name[x-test]=xxActivate sshdxx
 Description=Starts sshd on device
+Description[da]=Starter sshd på enheden
+Description[et]=Sshd käivitamine seadmes
+Description[hu]=Elindítja az sshd-t az eszközön
+Description[nl]=Start sshd op apparaat
+Description[pt]=Inicia o 'sshd' no dispositivo
+Description[pt_BR]=Iniciar o sshd no dispositivo
+Description[uk]=Запускає sshd на пристрої
+Description[x-test]=xxStarts sshd on devicexx
 Policy=yes
 
 [org.kde.active.sshdcontrol.stop]
 Name=Deactivate sshd
+Name[cs]=Deaktivovat sshd
+Name[da]=Deaktivér sshd
+Name[et]=Sshd deaktiveerimine
+Name[hu]=sshd kikapcsolása
+Name[nl]=sshd deactiveren
+Name[pt]=Desactivar o 'sshd'
+Name[pt_BR]=Desativar sshd
+Name[uk]=Вимикання sshd
+Name[x-test]=xxDeactivate sshdxx
 Description=Stops sshd on device
+Description[da]=Stopper sshd på enheden
+Description[et]=Sshd peatamine seadmes
+Description[hu]=Leállítja az sshd-t az eszközön
+Description[nl]=Stopt sshd op apparaat
+Description[pt]=Pára o 'sshd' no dispositivo
+Description[pt_BR]=Interrompe o sshd no dispositivo
+Description[uk]=Зупиняє роботу sshd на пристрої
+Description[x-test]=xxStops sshd on devicexx
 Policy=yes
