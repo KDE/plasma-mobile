@@ -141,7 +141,7 @@ void MetadataJob::start()
 
         const Nepomuk2::Tag tag( parameters()["Tag"].toString() );
         //FIXME: work around a nepomuk datamanager bug
-        tag.resourceUri();
+        tag.uri();
 
         foreach (const QString &resUrl, resourceUrls) {
             Nepomuk2::Resource r(resUrl);
