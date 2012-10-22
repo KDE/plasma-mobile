@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Development
 Name[da]=Udvikling
+Name[el]=Ανάπτυξη
 Name[et]=Arendus
 Name[hu]=Fejlesztés
 Name[nl]=Ontwikkeling
@@ -14,6 +15,7 @@ Name[x-test]=xxDevelopmentxx
 Name[zh_TW]=開發
 Comment=Settings for developers
 Comment[da]=Indstillinger for udviklere
+Comment[el]=Ρυθμίσεις για προγραμματιστές
 Comment[et]=Seadistused arendajatele
 Comment[hu]=Beállítások fejlesztőknek
 Comment[nl]=Instellingen voor ontwikkelaars
