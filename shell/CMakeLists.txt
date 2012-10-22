@@ -5,6 +5,7 @@ include_directories(${KDE4WORKSPACE_INCLUDE_DIR}
 
 include(KDE4Defaults)
 
+find_package(NepomukCore REQUIRED)
 
 set(plasma-device_SRCS
     activity.cpp
@@ -42,7 +43,7 @@ target_link_libraries(kdeinit_plasma-device
         ${KDE4_KDEUI_LIBS}
         ${QT_QTDECLARATIVE_LIBRARY}
         ${KDE4_KIO_LIBS}
-        ${NEPOMUK_LIBRARIES}
+        ${NEPOMUK_CORE_LIBRARY}
         ${X11_LIBRARIES}
         ${QT_QTOPENGL_LIBRARY}
         ${KACTIVITIES_LIBRARY}

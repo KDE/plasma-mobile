@@ -26,13 +26,13 @@
 
 #include <KFileItem>
 
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Query/Result>
-#include <Nepomuk/Query/QueryServiceClient>
-#include <Nepomuk/Resource>
-#include <Nepomuk/Variant>
+#include <Nepomuk2/Query/Query>
+#include <Nepomuk2/Query/Result>
+#include <Nepomuk2/Query/QueryServiceClient>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Variant>
 
-namespace Nepomuk {
+namespace Nepomuk2 {
     class ResourceWatcher;
 }
 
@@ -101,13 +101,10 @@ public:
         Exists,
         Rating,
         NumericRating,
-        Symbols,
         ResourceUri,
         ResourceType,
         MimeType,
         Url,
-        Topics,
-        TopicsNames,
         Tags,
         TagsNames
     };
@@ -115,8 +112,8 @@ public:
     MetadataModel(QObject *parent = 0);
     ~MetadataModel();
 
-    void setQuery(const Nepomuk::Query::Query &query);
-    Nepomuk::Query::Query query() const;
+    void setQuery(const Nepomuk2::Query::Query &query);
+    Nepomuk2::Query::Query query() const;
 
     virtual int count() const {return m_resources.count();}
 
@@ -182,13 +179,13 @@ Q_SIGNALS:
     void thumbnailSizeChanged();
 
 protected Q_SLOTS:
-    void countQueryResult(const QList< Nepomuk::Query::Result > &entries);
-    void newEntries(const QList< Nepomuk::Query::Result > &entries);
+    void countQueryResult(const QList< Nepomuk2::Query::Result > &entries);
+    void newEntries(const QList< Nepomuk2::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
     virtual void doQuery();
     void newEntriesDelayed();
     void finishedListing();
-    void propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val);
+    void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val);
     void showPreview(const KFileItem &item, const QPixmap &preview);
     void previewFailed(const KFileItem &item);
     void delayedPreview();
@@ -197,23 +194,23 @@ protected:
     void fetchResultsPage(int page);
 
 private:
-    Nepomuk::Query::Query m_query;
+    Nepomuk2::Query::Query m_query;
     //mapping page->query client
-    QHash<int, Nepomuk::Query::QueryServiceClient *> m_queryClients;
+    QHash<int, Nepomuk2::Query::QueryServiceClient *> m_queryClients;
     //mapping query client->page
-    QHash<Nepomuk::Query::QueryServiceClient *, int> m_pagesForClient;
+    QHash<Nepomuk2::Query::QueryServiceClient *, int> m_pagesForClient;
     //where is the last valid (already populated) index for a given page
     QHash<int, int> m_validIndexForPage;
     //keep always running at most 10 clients, get rid of the old ones
     //won't be possible to monitor forresources going away, but is too heavy
-    QList<Nepomuk::Query::QueryServiceClient *> m_queryClientsHistory;
+    QList<Nepomuk2::Query::QueryServiceClient *> m_queryClientsHistory;
     //how many service clients are running now?
     int m_runningClients;
 
-    Nepomuk::Query::QueryServiceClient *m_countQueryClient;
-    Nepomuk::ResourceWatcher* m_watcher;
-    QVector<Nepomuk::Resource> m_resources;
-    QHash<int, QList<Nepomuk::Resource> > m_resourcesToInsert;
+    Nepomuk2::Query::QueryServiceClient *m_countQueryClient;
+    Nepomuk2::ResourceWatcher* m_watcher;
+    QVector<Nepomuk2::Resource> m_resources;
+    QHash<int, QList<Nepomuk2::Resource> > m_resourcesToInsert;
     QHash<QUrl, int> m_uriToResourceIndex;
     QTimer *m_newEntriesTimer;
     QTime m_elapsedTime;
@@ -235,7 +232,7 @@ private:
     KImageCache* m_imageCache;
     QStringList* m_thumbnailerPlugins;
 
-    QHash<Nepomuk::Resource, QHash<int, QVariant> > m_cachedResources;
+    QHash<Nepomuk2::Resource, QHash<int, QVariant> > m_cachedResources;
 };
 
 #endif

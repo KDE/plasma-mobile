@@ -23,7 +23,7 @@
 
 #include <QObject>
 #include <QImage>
-#include <Nepomuk/Query/Result>
+#include <Nepomuk2/Query/Result>
 
 class History;
 class CompletionModelPrivate;
@@ -49,7 +49,7 @@ Q_SIGNALS:
     void dataChanged();
 
 private Q_SLOTS:
-    void newEntries(const QList< Nepomuk::Query::Result > &entries);
+    void newEntries(const QList< Nepomuk2::Query::Result > &entries);
     void entriesRemoved(const QList<QUrl> &urls);
     void finishedListing();
 

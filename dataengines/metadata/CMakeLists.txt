@@ -5,25 +5,18 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/ontologies
 )
 
+find_package(NepomukCore REQUIRED)
+
 set(metadataengine_SRCS
     metadataengine.cpp
     resourcecontainer.cpp
     metadataservice/metadatajob.cpp
     metadataservice/metadataservice.cpp
-    ${CMAKE_SOURCE_DIR}/nepomuklegacy/resourcewatcher.cpp
 )
 
 add_kao_ontology(metadataengine_SRCS)
 
-qt4_add_dbus_interface(metadataengine_SRCS
-  ${CMAKE_SOURCE_DIR}/nepomuklegacy/org.kde.nepomuk.ResourceWatcherConnection.xml
-  resourcewatcherconnectioninterface)
-
-qt4_add_dbus_interface(metadataengine_SRCS
-   ${CMAKE_SOURCE_DIR}/nepomuklegacy/org.kde.nepomuk.ResourceWatcher.xml
-  resourcewatchermanagerinterface)
-
-nepomuk_add_ontology_classes (metadataengine_SRCS
+nepomuk2_add_ontology_classes (metadataengine_SRCS
     ONTOLOGIES
     ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
     CLASSES
@@ -37,7 +30,7 @@ target_link_libraries(plasma_engine_active_metadata
     ${KDE4_KDECORE_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4_KIO_LIBS}
-    ${NEPOMUK_LIBRARIES}
+    ${NEPOMUK_CORE_LIBRARY}
     ${NEPOMUK_QUERY_LIBRARIES}
     ${SOPRANO_LIBRARIES}
     ${SOPRANO_CLIENT_LIBRARIES}

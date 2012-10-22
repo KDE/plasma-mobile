@@ -47,8 +47,8 @@
 #include <Plasma/DeclarativeWidget>
 #include <Plasma/Package>
 
-#include <Nepomuk/Resource>
-#include <Nepomuk/Variant>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Variant>
 
 #include <KActivities/Consumer>
 #include <KActivities/Controller>
@@ -354,8 +354,8 @@ void MobCorona::checkActivities()
     foreach (const QString &id, existingActivities) {
         //ensure the activity resource exists
         //FIXME: shouldn't be done here
-        Nepomuk::Resource activityResource(id, Nepomuk::Vocabulary::KAO::Activity());
-        activityResource.setProperty(Nepomuk::Vocabulary::KAO::activityIdentifier(), id);
+        Nepomuk2::Resource activityResource(id, Nepomuk2::Vocabulary::KAO::Activity());
+        activityResource.setProperty(Nepomuk2::Vocabulary::KAO::activityIdentifier(), id);
         activityAdded(id);
     }
 

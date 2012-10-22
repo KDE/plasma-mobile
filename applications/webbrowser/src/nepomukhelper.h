@@ -22,7 +22,7 @@
 #define NEPOMUKHELPER_H
 
 #include <QObject>
-#include <Nepomuk/Resource>
+#include <Nepomuk2/Resource>
 class KJob;
 
 class NepomukHelperPrivate;
@@ -33,7 +33,7 @@ class NepomukHelper : public QObject
 
 public:
     NepomukHelper(QObject *parent);
-    //NepomukHelper(Nepomuk::Resource resource, QObject *parent = 0);
+    //NepomukHelper(Nepomuk2::Resource resource, QObject *parent = 0);
     ~NepomukHelper();
 
 public Q_SLOTS:

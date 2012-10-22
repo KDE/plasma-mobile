@@ -28,22 +28,22 @@
 
 #include "nso.h"
 #include "kao.h"
-#include <Nepomuk/Vocabulary/NIE>
-#include <Nepomuk/Vocabulary/NFO>
-#include <Nepomuk/Vocabulary/NCO>
-#include <Nepomuk/Vocabulary/NMO>
-#include <Nepomuk/Vocabulary/NDO>
-#include <Nepomuk/Vocabulary/NCAL>
-#include <Nepomuk/Vocabulary/NEXIF>
-#include <Nepomuk/Vocabulary/NUAO>
-#include <Nepomuk/Vocabulary/PIMO>
-#include <Nepomuk/Vocabulary/NMM>
-#include <Nepomuk/Vocabulary/TMO>
+#include <Nepomuk2/Vocabulary/NIE>
+#include <Nepomuk2/Vocabulary/NFO>
+#include <Nepomuk2/Vocabulary/NCO>
+#include <Nepomuk2/Vocabulary/NMO>
+#include <Nepomuk2/Vocabulary/NDO>
+#include <Nepomuk2/Vocabulary/NCAL>
+#include <Nepomuk2/Vocabulary/NEXIF>
+#include <Nepomuk2/Vocabulary/NUAO>
+#include <Nepomuk2/Vocabulary/PIMO>
+#include <Nepomuk2/Vocabulary/NMM>
+#include <Nepomuk2/Vocabulary/TMO>
 #include <Soprano/Vocabulary/RDF>
 #include <Soprano/Vocabulary/RDFS>
 #include <Soprano/Vocabulary/NRL>
 
-namespace Nepomuk {
+namespace Nepomuk2 {
     class ResourceWatcher;
 }
 
@@ -201,7 +201,7 @@ protected:
     {
         static QHash<QString, QUrl> namespaceResolution;
         if( namespaceResolution.isEmpty() ) {
-            using namespace Nepomuk::Vocabulary;
+            using namespace Nepomuk2::Vocabulary;
             using namespace Soprano::Vocabulary;
 
             namespaceResolution.insert(QLatin1String("rdf"), RDF::rdfNamespace());

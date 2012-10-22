@@ -20,10 +20,10 @@
 
 #include "metadatajob.h"
 
-#include <Nepomuk/Query/Query>
-#include <Nepomuk/Resource>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
+#include <Nepomuk2/Query/Query>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Tag>
+#include <Nepomuk2/Variant>
 
 #include <soprano/vocabulary.h>
 
@@ -61,7 +61,7 @@ void MetadataJob::start()
             activityUrl = m_activityConsumer->currentActivity();
         }
 
-        Nepomuk::Resource fileRes(resourceUrl);
+        Nepomuk2::Resource fileRes(resourceUrl);
         KActivities::Info *info = new KActivities::Info(activityUrl);
         QUrl typeUrl;
 
@@ -74,7 +74,7 @@ void MetadataJob::start()
         } else if (resourceUrl.endsWith(QLatin1String(".desktop"))) {
             KService::Ptr service = KService::serviceByStorageId(resourceUrl);
             if (service) {
-                fileRes = Nepomuk::Resource(service->entryPath());
+                fileRes = Nepomuk2::Resource(service->entryPath());
                 typeUrl = QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Application");
                 fileRes.addType(typeUrl);
                 fileRes.setLabel(service->name());
@@ -84,14 +84,14 @@ void MetadataJob::start()
             }
         }
 
-        Nepomuk::Variant urlProp = fileRes.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url"));
+        Nepomuk2::Variant urlProp = fileRes.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url"));
 
-        kDebug() << "Linking Resource, uri:" << fileRes.resourceUri() << "has an url:" << urlProp.isUrl() << "value:" << urlProp.toUrl();
+        kDebug() << "Linking Resource, uri:" << fileRes.uri() << "has an url:" << urlProp.isUrl() << "value:" << urlProp.toUrl();
 
         if (urlProp.isUrl()) {
             info->linkResource(urlProp.toUrl());
         } else {
-            info->linkResource(fileRes.resourceUri());
+            info->linkResource(fileRes.uri());
         }
         info->deleteLater();
         setResult(true);
@@ -112,18 +112,18 @@ void MetadataJob::start()
 
     } else if (operation == "rate") {
         int rating = parameters()["Rating"].toInt();
-        Nepomuk::Resource fileRes(resourceUrl);
+        Nepomuk2::Resource fileRes(resourceUrl);
         fileRes.setRating(rating);
         setResult(true);
         return;
 
     } else if (operation == "addBookmark") {
         const QString url = parameters()["Url"].toString();
-        Nepomuk::Bookmark b(url);
+        Nepomuk2::Bookmark b(url);
 
         QUrl u(url);
         if (u.isValid()) {
-            b.setBookmarkses( QList<Nepomuk::Resource>() << url );
+            b.setBookmarkses( QList<Nepomuk2::Resource>() << url );
             setResult(true);
         } else {
             setResult(false);
@@ -131,20 +131,21 @@ void MetadataJob::start()
         return;
 
     } else if (operation == "remove") {
-        Nepomuk::Resource b(resourceUrl);
-        kDebug() << "Removing resource TYPE: " << b.resourceType() << "url" << resourceUrl;
+        Nepomuk2::Resource b(resourceUrl);
+        kDebug() << "Removing resource TYPE: " << b.type() << "url" << resourceUrl;
         b.remove();
         setResult(true);
         return;
     } else if (operation == "tagResources") {
         const QStringList resourceUrls = parameters()["ResourceUrls"].toStringList();
-        const Nepomuk::Tag tag( parameters()["Tag"].toString() );
+
+        const Nepomuk2::Tag tag( parameters()["Tag"].toString() );
         //FIXME: work around a nepomuk datamanager bug
         tag.resourceUri();
 
         foreach (const QString &resUrl, resourceUrls) {
-            Nepomuk::Resource r(resUrl);
-            QList<Nepomuk::Tag> tags = r.tags();
+            Nepomuk2::Resource r(resUrl);
+            QList<Nepomuk2::Tag> tags = r.tags();
             if (tags.contains(tag)) {
                 tags.removeAll(tag);
                 r.setTags(tags);
