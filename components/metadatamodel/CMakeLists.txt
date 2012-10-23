@@ -2,13 +2,14 @@ project(datamodels)
 
 include(KDE4Defaults)
 
+find_package(NepomukCore REQUIRED)
+
 INCLUDE_DIRECTORIES(
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_BINARY_DIR}
     ${KDE4_INCLUDES}
+    ${NEPOMUK_CORE_INCLUDE_DIR}
 )
-
-find_package(NepomukCore REQUIRED)
 
 set(datamodels_SRCS
     abstractmetadatamodel.cpp

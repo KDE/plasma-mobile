@@ -1,13 +1,14 @@
+find_package(NepomukCore REQUIRED)
+
 include_directories(
     ${CMAKE_BINARY_DIR}/dataengines/metadata/ontologies
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}/ontologies
     ${CMAKE_CURRENT_SOURCE_DIR}/adblock
+    ${NEPOMUK_CORE_INCLUDE_DIR}
    )
 
 add_subdirectory(ontologies)
-
-find_package(NepomukCore REQUIRED)
 
 set(active-webbrowser_SRCS
     main.cpp
