@@ -55,6 +55,7 @@ PlasmaComponents.Page {
 
     Image {
         id: browserFrame
+        visible: mainPage.children.length > 0
         z: 100
         source: "image://appbackgrounds/standard"
         fillMode: Image.Tile
@@ -65,6 +66,15 @@ PlasmaComponents.Page {
         width: parent.width
         x: 0
 
+        transform: Translate {
+            x: mainPage.children.length > 0 ? 0 : -browserFrame.width
+            Behavior on x {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
         Item {
             id: mainPage
             anchors {
@@ -137,8 +147,7 @@ PlasmaComponents.Page {
                 } else {
                     sidebar.open = (browserFrame.x < -sidebar.width/2)
                 }
-                sidebarSlideAnimation.to = sidebar.open ? -sidebar.width : 0
-                sidebarSlideAnimation.running = true
+                
             }
         }
         //FIXME: use a state machine
@@ -162,6 +171,10 @@ PlasmaComponents.Page {
         id: sidebar
 
         property bool open: false
+        onOpenChanged: {
+            sidebarSlideAnimation.to = sidebar.open ? -sidebar.width : 0
+            sidebarSlideAnimation.running = true
+        }
 
         width: parent.width/4
         x: parent.width - width
