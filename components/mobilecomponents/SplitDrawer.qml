@@ -147,7 +147,8 @@ PlasmaComponents.Page {
                 } else {
                     sidebar.open = (browserFrame.x < -sidebar.width/2)
                 }
-                
+                sidebarSlideAnimation.to = sidebar.open ? -sidebar.width : 0
+                sidebarSlideAnimation.running = true
             }
         }
         //FIXME: use a state machine
@@ -178,12 +179,7 @@ PlasmaComponents.Page {
 
         width: parent.width/4
         x: parent.width - width
-        Behavior on width {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
+
         anchors {
             top: parent.top
             bottom: parent.bottom
@@ -205,29 +201,6 @@ PlasmaComponents.Page {
             top: toolBar.bottom
             right: parent.right
             topMargin: -2
-        }
-    }
-
-    ParallelAnimation {
-        id: positionAnim
-        property Item target
-        property int x
-        property int y
-        NumberAnimation {
-            target: positionAnim.target
-            to: positionAnim.y
-            properties: "y"
-
-            duration: 250
-            easing.type: Easing.InOutQuad
-        }
-        NumberAnimation {
-            target: positionAnim.target
-            to: positionAnim.x
-            properties: "x"
-
-            duration: 250
-            easing.type: Easing.InOutQuad
         }
     }
 }
