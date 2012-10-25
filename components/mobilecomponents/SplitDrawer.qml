@@ -55,7 +55,7 @@ PlasmaComponents.Page {
 
     Image {
         id: browserFrame
-        visible: mainPage.children.length > 0
+        //visible: mainPage.children.length > 0
         z: 100
         source: "image://appbackgrounds/standard"
         fillMode: Image.Tile
@@ -64,10 +64,9 @@ PlasmaComponents.Page {
             bottom: parent.bottom
         }
         width: parent.width
-        x: 0
 
         transform: Translate {
-            x: mainPage.children.length > 0 ? 0 : -browserFrame.width
+            x: mainPage.children.length > 0 && mainPage.children[0].visible ? 0 : -browserFrame.width
             Behavior on x {
                 NumberAnimation {
                     duration: 250
@@ -155,6 +154,7 @@ PlasmaComponents.Page {
         SequentialAnimation {
             id: sidebarSlideAnimation
             property alias to: actualSlideAnimation.to
+
             NumberAnimation {
                 id: actualSlideAnimation
                 target: browserFrame
@@ -173,11 +173,18 @@ PlasmaComponents.Page {
 
         property bool open: false
         onOpenChanged: {
-            sidebarSlideAnimation.to = sidebar.open ? -sidebar.width : 0
+            if (width == 0) {
+                return
+            }
+            sidebarSlideAnimation.to = open ? -sidebar.width : 0
             sidebarSlideAnimation.running = true
         }
 
         width: parent.width/4
+        onWidthChanged: {
+            browserFrame.x = sidebar.open ? -sidebar.width : 0
+            mainPage.anchors.leftMargin = -browserFrame.x
+        }
         x: parent.width - width
 
         anchors {
