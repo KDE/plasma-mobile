@@ -59,7 +59,7 @@ Column {
         id: categoryCheckedTimer
         running: true
         onTriggered: {
-            buttonColumn.exclusive = true
+            //buttonColumn.exclusive = true
         }
     }
 
@@ -67,6 +67,9 @@ Column {
         id: buttonColumn
         spacing: 4
         exclusive: false
+        onCheckedButtonChanged: {
+            resourceBrowser.ensureBrowserVisible()
+        }
         anchors {
             left: parent.left
             leftMargin: theme.defaultFont.mSize.width
@@ -80,9 +83,10 @@ Column {
                 text: i18nc("Resource type, how many entries of this resource", "%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
                 //FIXME: more elegant way to remove applications?
                 visible: model["label"] != undefined && model["label"] != "nfo:Application"
-                checked: metadataModel.resourceType == model["label"]
+                //checked: metadataModel.resourceType == model["label"]
                 onCheckedChanged: {
                     if (checked) {
+                        buttonColumn.exclusive = true
                         metadataModel.resourceType = model["label"]
                     }
                 }
@@ -97,9 +101,10 @@ Column {
         }
         PlasmaComponents.RadioButton {
             text: i18n("Current activity")
-            checked: metadataModel.activityId == activitySource.data.Status.Current
+            //checked: metadataModel.activityId == activitySource.data.Status.Current
             onCheckedChanged: {
                 if (checked) {
+                    buttonColumn.exclusive = true
                     metadataModel.resourceType = "nfo:FileDataObject"
                     metadataModel.activityId = activitySource.data.Status.Current
                 } else {
