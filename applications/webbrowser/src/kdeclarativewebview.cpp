@@ -364,7 +364,7 @@ void KDeclarativeWebView::init()
     setPage(wp);
     initSettings();
 #ifndef NO_KIO
-    KIO::AccessManager *access = new NetworkAccessManager(page());
+    NetworkAccessManager *access = new NetworkAccessManager(page());
     wp->setNetworkAccessManager(access);
 #endif
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));

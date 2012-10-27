@@ -19,6 +19,7 @@ set(active-webbrowser_SRCS
     nepomukhelper.cpp
     history.cpp
     view.cpp
+    networkaccessmanager.cpp
 
     networkaccessmanager.cpp
     adblock/adblockhostmatcher.cpp
