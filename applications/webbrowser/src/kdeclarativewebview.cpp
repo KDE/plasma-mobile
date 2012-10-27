@@ -746,6 +746,14 @@ void KDeclarativeWebView::setRenderingEnabled(bool enabled)
     d->rendering = enabled;
     emit renderingEnabledChanged();
     d->view->setTiledBackingStoreFrozen(!enabled);
+
+    if (enabled) {
+        d->view->page()->mainFrame()->setZoomFactor(d->view->scale());
+        d->view->setScale(1);
+    } else {
+        d->view->setScale(d->view->page()->mainFrame()->zoomFactor());
+        d->view->page()->mainFrame()->setZoomFactor(1);
+    }
 }
 
 /*!
@@ -1164,19 +1172,29 @@ void KDeclarativeWebView::setNewWindowParent(QDeclarativeItem* parent)
 
 QSize KDeclarativeWebView::contentsSize() const
 {
-    return page()->mainFrame()->contentsSize() * contentsScale();
+    return page()->mainFrame()->contentsSize();
 }
 
 qreal KDeclarativeWebView::contentsScale() const
 {
-    return d->view->scale();
+    if (renderingEnabled()) {
+        return d->view->page()->mainFrame()->zoomFactor();
+    } else {
+        return d->view->scale();
+    }
 }
 
 void KDeclarativeWebView::setContentsScale(qreal scale)
 {
-    if (scale == d->view->scale())
+    if (scale == contentsScale())
         return;
-    d->view->setScale(scale);
+
+    if (renderingEnabled()) {
+        d->view->page()->mainFrame()->setZoomFactor(scale);
+    } else {
+        d->view->setScale(scale);
+    }
+
     updateDeclarativeWebViewSize();
     emit contentsScaleChanged();
 }

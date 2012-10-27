@@ -85,7 +85,8 @@ MouseEventListener {
         if (!interactive) {
             return
         }
-        contentY += lastY - mouse.y
+        contentY += (lastY - mouse.y)
+        contentX += (lastX - mouse.x)
         lastY = mouse.y
         lastX = mouse.x
     }
@@ -106,10 +107,10 @@ MouseEventListener {
     property int contentWidth: webView.contentsSize.width
     property int contentHeight: webView.contentsSize.height
     property QtObject visibleArea: QtObject {
-        property real yPosition: flickable.contentY / webView.contentsSize.height
-        property real xPosition: flickable.contentX / webView.contentsSize.width
-        property real heightRatio: webView.height / webView.contentsSize.height
-        property real widthRatio: webView.width / webView.contentsSize.width
+        property real yPosition: flickable.contentY / contentHeight
+        property real xPosition: flickable.contentX / contentWidth
+        property real heightRatio: webView.height / contentHeight
+        property real widthRatio: webView.width / contentWidth
     }
     property bool movingVertically: false
     property bool movingHorizontally: false
@@ -177,7 +178,7 @@ MouseEventListener {
     onWidthChanged : {
         // Expand (but not above 1:1) if otherwise would be smaller that available width.
         if (width > webView.width*webView.contentsScale && webView.contentsScale < 1.0)
-            webView.contentsScale = width / webView.width * webView.contentsScale;
+            webView.contentsScale = width / webView.width;
     }
 
 
@@ -216,10 +217,10 @@ MouseEventListener {
 
             
             pressGrabTime: flickable.interactive ? 400 : 0
-            x:Math.max(0, -flickable.contentX)
+            x: Math.max(0, -flickable.contentX)
             y: Math.max(-headerSpace.height, -flickable.contentY)
             width: flickable.width
-            height: flickable.height + headerSpace.height + Math.min(0, contentsSize.height - flickable.contentY - flickable.height)
+            height: flickable.height + headerSpace.height + Math.min(0, flickable.contentHeight - flickable.contentY - flickable.height)
             contentsPosition: Qt.point(flickable.contentX, Math.max(0, flickable.contentY - headerSpace.height))
 
             //FIXME: glorious hack just to obtain a signal of the url of the new requested page
@@ -333,10 +334,7 @@ MouseEventListener {
             preferredWidth: flickable.width
             preferredHeight: flickable.height
             contentsScale: 1
-            onContentsSizeChanged: {
-                // zoom out
-                contentsScale = Math.min(1,flickable.width / contentsSize.width)
-            }
+
             onUrlChanged: {
                 // got to topleft
                 flickable.contentX = 0
