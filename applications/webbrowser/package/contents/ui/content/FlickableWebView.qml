@@ -104,7 +104,31 @@ MouseEventListener {
     property int lastContentY: 0
     property int lastContentX: 0
     property int contentWidth: webView.contentsSize.width
-    property int contentHeight:webView.contentsSize.height
+    property int contentHeight: webView.contentsSize.height
+    property QtObject visibleArea: QtObject {
+        property real yPosition: flickable.contentY / webView.contentsSize.height
+        property real xPosition: flickable.contentX / webView.contentsSize.width
+        property real heightRatio: webView.height / webView.contentsSize.height
+        property real widthRatio: webView.width / webView.contentsSize.width
+    }
+    property bool movingVertically: false
+    property bool movingHorizontally: false
+    onContentXChanged: {
+        movingHorizontally = true
+        movingTimer.restart()
+    }
+    onContentYChanged: {
+        movingVertically = true
+        movingTimer.restart()
+    }
+    Timer {
+        id: movingTimer
+        interval: 500
+        onTriggered: {
+            flickable.movingHorizontally = false
+            flickable.movingVertically = false
+        }
+    }
 
     Timer {
         id: speedSampleTimer
