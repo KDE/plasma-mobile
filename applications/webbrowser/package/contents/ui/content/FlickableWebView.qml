@@ -43,9 +43,17 @@ import QtQuick 1.1
 import org.kde.kdewebkit 0.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import "LinkPopup.js" as LinkPopupHelper
+import org.kde.qtextracomponents 0.1
 
+MouseEventListener {
+    id: flickable
+    width: parent.width
 
-Flickable {
+    anchors.top: headerSpace.bottom
+    anchors.bottom: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+
     property alias title: webView.title
     property alias icon: webView.icon
     property alias progress: webView.progress
@@ -56,25 +64,91 @@ Flickable {
     property alias reload: webView.reload
     property alias forward: webView.forward
     property bool interactiveSuspended: false
+    property bool interactive: (webView.contentsSize.height > webView.height || webView.contentsSize.width > webView.width) && !interactiveSuspended
 
     signal newWindowRequested(string url)
 
-    
-    id: flickable
-    width: parent.width
-    contentWidth: Math.max(parent.width,webView.width)
-    contentHeight: Math.max(parent.height,webView.contentsSize.height)
-    interactive: {
-        (webView.flickingEnabled &&
-         !interactiveSuspended &&
-         ((webView.contentsSize.height > height) ||
-         (webView.contentsSize.width > width)))
+    property real lastX
+    property real lastY
+    property real speedX
+    property real speedY
+    onPressed: {
+        if (!interactive) {
+            return
+        }
+        lastY = mouse.y
+        lastX = mouse.x
+        scrollAnim.running = false
+        speedSampleTimer.running = true
     }
-    anchors.top: headerSpace.bottom
-    anchors.bottom: parent.top
-    anchors.left: parent.left
-    anchors.right: parent.right
-    pressDelay: 200
+    onPositionChanged: {
+        if (!interactive) {
+            return
+        }
+        contentY += lastY - mouse.y
+        lastY = mouse.y
+        lastX = mouse.x
+    }
+    onReleased: {
+        if (!interactive) {
+            return
+        }
+        speedSampleTimer.running = false
+        scrollAnimX.to = Math.min(Math.max(0, contentX + speedX*4), webView.contentsSize.width - flickable.width)
+        scrollAnimY.to = Math.min(Math.max(0, contentY + speedY*4), webView.contentsSize.height - flickable.height)
+
+        scrollAnim.running = true
+    }
+    property int contentX: 0
+    property int contentY: 0
+    property int lastContentY: 0
+    property int lastContentX: 0
+    property int contentWidth: webView.contentsSize.width
+    property int contentHeight:webView.contentsSize.height
+
+    Timer {
+        id: speedSampleTimer
+        repeat: true
+        interval: 250
+        onRunningChanged: {
+            if (running) {
+                flickable.lastContentY = flickable.contentY
+                speedX = speedY = 0
+            } else {
+                speedX = flickable.contentX - flickable.lastContentX
+                flickable.lastContentX = flickable.contentX
+                speedY = flickable.contentY - flickable.lastContentY
+                flickable.lastContentY = flickable.contentY
+            }
+        }
+        onTriggered: {
+            speedX = flickable.contentX - flickable.lastContentX
+            flickable.lastContentX = flickable.contentX
+            speedY = flickable.contentY - flickable.lastContentY
+            flickable.lastContentY = flickable.contentY
+        }
+    }
+
+    SequentialAnimation {
+        id: scrollAnim
+        ParallelAnimation {
+            NumberAnimation {
+                id: scrollAnimX
+                target: flickable
+                property: "contentX"
+                easing.type: Easing.OutQuad
+                duration: 500
+            }
+            NumberAnimation {
+                id: scrollAnimY
+                target: flickable
+                property: "contentY"
+                easing.type: Easing.OutQuad
+                duration: 500
+            }
+        }
+    }
+    //pressDelay: 200
 
     onWidthChanged : {
         // Expand (but not above 1:1) if otherwise would be smaller that available width.
@@ -116,9 +190,10 @@ Flickable {
             //settings.pluginsEnabled: true
 
 
+            
             pressGrabTime: flickable.interactive ? 400 : 0
-            x: flickable.contentX
-            y: Math.max(0, flickable.contentY - headerSpace.height)//Math.max(0, flickable.contentY)
+            x:Math.max(0, -flickable.contentX)
+            y: Math.max(-headerSpace.height, -flickable.contentY)
             width: flickable.width
             height: flickable.height + headerSpace.height + Math.min(0, contentsSize.height - flickable.contentY - flickable.height)
             contentsPosition: Qt.point(flickable.contentX, Math.max(0, flickable.contentY - headerSpace.height))

@@ -982,7 +982,7 @@ void KDeclarativeWebView::setPage(QWebPage* page)
 
     connect(page->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(windowObjectCleared()));
 
-    page->settings()->setAttribute(QWebSettings::TiledBackingStoreEnabled, true);
+    page->settings()->setAttribute(QWebSettings::TiledBackingStoreEnabled, false);
 
 }
 
