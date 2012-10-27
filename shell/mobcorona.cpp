@@ -23,6 +23,7 @@
 #include "mobcorona.h"
 #include "mobdialogmanager.h"
 #include "activity.h"
+#include "kao.h"
 
 #include <QApplication>
 #include <QDesktopWidget>
@@ -46,8 +47,8 @@
 #include <Plasma/DeclarativeWidget>
 #include <Plasma/Package>
 
-#include <Nepomuk/Resource>
-#include <Nepomuk/Variant>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Variant>
 
 #include <KActivities/Consumer>
 #include <KActivities/Controller>
@@ -125,8 +126,8 @@ void MobCorona::init()
     setDialogManager(new MobDialogManager(this));
 
     connect(m_activityController, SIGNAL(currentActivityChanged(QString)), this, SLOT(currentActivityChanged(QString)));
-    connect(m_activityController, SIGNAL(activityAdded(const QString &)), this, SLOT(activityAdded(const QString &)));
-    connect(m_activityController, SIGNAL(activityRemoved(const QString &)), this, SLOT(activityRemoved(const QString &)));
+    connect(m_activityController, SIGNAL(activityAdded(QString)), this, SLOT(activityAdded(QString)));
+    connect(m_activityController, SIGNAL(activityRemoved(QString)), this, SLOT(activityRemoved(QString)));
 }
 
 KConfigGroup MobCorona::defaultConfig() const
@@ -190,7 +191,7 @@ void MobCorona::loadDefaultLayout()
 
 void MobCorona::layoutContainments()
 {
-    // we dont need any layout for this as we are going to bind the position
+    // we don't need any layout for this as we are going to bind the position
     // of the containments to QML items to animate them. As soon as we don't
     // need the containment anymore we can just let it stay wherever it is as
     // long as it's offscreen (the view is not 'looking' at it).
@@ -264,6 +265,10 @@ QRegion MobCorona::availableScreenRegion(int id) const
 
 void MobCorona::currentActivityChanged(const QString &newActivity)
 {
+    if (newActivity.isEmpty()) {
+        return;
+    }
+
     kDebug() << newActivity;
     Activity *act =activity(newActivity);
     if (act) {
@@ -349,8 +354,8 @@ void MobCorona::checkActivities()
     foreach (const QString &id, existingActivities) {
         //ensure the activity resource exists
         //FIXME: shouldn't be done here
-        Nepomuk::Resource activityResource(id, QUrl("http://nepomuk.kde.org/ontologies/2010/11/29/kext#Activity"));
-        activityResource.setProperty(QUrl("http://nepomuk.kde.org/ontologies/2010/11/29/kext#ActivityIdentifier"), id);
+        Nepomuk2::Resource activityResource(id, Nepomuk2::Vocabulary::KAO::Activity());
+        activityResource.setProperty(Nepomuk2::Vocabulary::KAO::activityIdentifier(), id);
         activityAdded(id);
     }
 

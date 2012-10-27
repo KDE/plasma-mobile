@@ -18,83 +18,74 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.plasma.components 0.1 as PlasmaComponents
+
 
 Item {
     id: resourceItem
-    anchors.fill: parent
+    anchors.horizontalCenter: parent.horizontalCenter
 
-    Column {
-        anchors.horizontalCenter: parent.horizontalCenter
 
-        Item {
-            id: iconContainer
-            height: resourceItem.height - previewLabel.height - infoLabel.height
-            width: resourceItem.width
+    Item {
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+        }
+        width: Math.min(resourceItem.width, height * 1.6)
 
-            QIconItem {
-                id: iconItem
-                width: 64
-                height: 64
-                anchors.centerIn: parent
-                icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
-                visible: !previewFrame.visible
-            }
+        PlasmaCore.FrameSvgItem {
+            id: previewFrame
+            imagePath: "widgets/media-delegate"
+            prefix: "picture"
 
-            PlasmaCore.FrameSvgItem {
-                id: previewFrame
-                imagePath: "widgets/media-delegate"
-                prefix: "picture"
-
-                height: previewImage.height+margins.top+margins.bottom
-                width: previewImage.width+margins.left+margins.right
-                visible: thumbnail != undefined
-                anchors.centerIn: previewArea
-            }
-
-            Item {
-                id: previewArea
-                visible: previewFrame.visible
-                anchors {
-                    fill: parent
-
-                    leftMargin: previewFrame.margins.left
-                    topMargin: previewFrame.margins.top
-                    rightMargin: previewFrame.margins.right
-                    bottomMargin: previewFrame.margins.bottom
-                }
-
-                QImageItem {
-                    id: previewImage
-                    anchors.centerIn: parent
-                    image: thumbnail == undefined ? null : thumbnail
-
-                    width: {
-                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                            return parent.width
-                        } else {
-                            return parent.height * (nativeWidth/nativeHeight)
-                        }
-                    }
-                    height: {
-                        if (nativeWidth/nativeHeight >= parent.width/parent.height) {
-                            return parent.width / (nativeWidth/nativeHeight)
-                        } else {
-                            return parent.height
-                        }
-                    }
-                }
-            }
+            height: previewImage.height + previewImage.anchors.topMargin + previewImage.anchors.bottomMargin
+            width: previewImage.width + previewImage.anchors.leftMargin + previewImage.anchors.rightMargin
+            visible: thumbnail != undefined
+            anchors.centerIn: previewImage
         }
 
-        Text {
+        QImageItem {
+            id: previewImage
+            visible: previewFrame.visible
+            image: thumbnail == undefined ? null : thumbnail
+            fillMode: QImageItem.PreserveAspectCrop
+
+            anchors {
+                fill: parent
+
+                leftMargin: Math.round(Math.min(previewFrame.margins.left, parent.height/6))
+                topMargin: Math.round(Math.min(previewFrame.margins.top, parent.height/6))
+                rightMargin: Math.round(Math.min(previewFrame.margins.right, parent.height/6))
+                bottomMargin: Math.round(Math.min(previewFrame.margins.bottom, parent.height/6))
+            }
+        }
+    }
+
+
+    Column {
+        anchors.centerIn: parent
+        width: resourceItem.width
+        visible: !previewFrame.visible
+
+        QIconItem {
+            id: iconItem
+            height: roundToStandardSize(delegateItem.height - previewLabel.height)
+            width: height
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+            }
+            icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
+        }
+
+        PlasmaComponents.Label {
             id: previewLabel
             text: label
+            height: paintedHeight
 
-            font.pixelSize: 14
             //wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
@@ -105,16 +96,6 @@ Item {
             style: Text.Outline
             styleColor: Qt.rgba(1, 1, 1, 0.6)
         }
-
-        Text {
-            id: infoLabel
-            text: className
-            opacity: 0.8
-            font.pixelSize: 12
-            height: 14
-            width: parent.width - iconItem.width
-            anchors.horizontalCenter: parent.horizontalCenter
-            visible: infoLabelVisible
-        }
     }
 }
+

@@ -57,8 +57,8 @@ History::History(QObject *parent)
     // transient pages aren't interesting enough
     d->addHistoryTimer.setInterval(30000);
     connect(&d->addHistoryTimer, SIGNAL(timeout()), SLOT(recordHistory()));
-    connect(d->dirWatch, SIGNAL(dirty(const QString&)), SLOT(loadHistory()));
-    connect(d->dirWatch, SIGNAL(created(const QString&)), SLOT(loadHistory()));
+    connect(d->dirWatch, SIGNAL(dirty(QString)), SLOT(loadHistory()));
+    connect(d->dirWatch, SIGNAL(created(QString)), SLOT(loadHistory()));
 }
 
 History::~History()

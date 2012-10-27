@@ -63,8 +63,8 @@ int ClockHelper::ntp( const QStringList& ntpServers, bool ntpEnabled,
     // NTP Time setting
     QString timeServer = ntpServers.first();
     if( timeServer.indexOf( QRegExp(".*\\(.*\\)$") ) != -1 ) {
-      timeServer.replace( QRegExp(".*\\("), "" );
-      timeServer.replace( QRegExp("\\).*"), "" );
+      timeServer.remove( QRegExp(".*\\(") );
+      timeServer.remove( QRegExp("\\).*") );
       // Would this be better?: s/^.*\(([^)]*)\).*$/\1/
     }
 
@@ -86,10 +86,13 @@ int ClockHelper::date( const QString& newdate, const QString& olddate )
 
     tv.tv_sec = newdate.toULong() - olddate.toULong() + time(0);
     tv.tv_usec = 0;
+#ifndef Q_OS_WIN32
     if (settimeofday(&tv, 0)) {
         return DateError;
     }
-
+#else
+    return DateError;
+#endif
     if (!KStandardDirs::findExe("hwclock").isEmpty()) {
         KProcess::execute("hwclock", QStringList() << "--systohc");
     }

@@ -22,12 +22,15 @@
 #define TIMESETTINGSPLUGIN_H
 
 #include "timesettingsplugin.h"
-#include "settingsmodule.h"
+#include <QtCore/QObject>
+#include <QtCore/QVariantList>
 
 class TimeSettingsPlugin : public QObject
 {
+    Q_OBJECT
+
     public:
-        TimeSettingsPlugin(QObject *parent, const QVariantList &list = QVariantList());
+        explicit TimeSettingsPlugin(QObject *parent, const QVariantList &list = QVariantList());
         virtual ~TimeSettingsPlugin();
 
 };

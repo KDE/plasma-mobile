@@ -141,6 +141,7 @@ private Q_SLOTS:
     void gotStartup(const KStartupInfoId& id, const KStartupInfoData& data);
     void killStartup(const KStartupInfoId& id);
     void focusMainView();
+    void activeWindowChanged(WId id);
 
 private:
     MobCorona *m_corona;

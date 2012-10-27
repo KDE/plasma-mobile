@@ -76,34 +76,41 @@ int PagedProxyModel::pageSize() const
 void PagedProxyModel::setSourceModelObject(QObject *source)
 {
     QAbstractItemModel *model = qobject_cast<QAbstractItemModel *>(source);
-    if (!model) {
+    if (!model || model == sourceModel()) {
         return;
     }
+
+    bool reset = false;
     if (sourceModel()) {
+        reset = true;
         disconnect(sourceModel(), 0, this, 0);
+        beginResetModel();
     }
 
     connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
             this, SLOT(sourceDataChanged(QModelIndex,QModelIndex)));
 
-    connect(model,  SIGNAL(rowsAboutToBeInserted(QModelIndex, int,int)),
+    connect(model,  SIGNAL(rowsAboutToBeInserted(QModelIndex,int,int)),
             this, SLOT(sourceRowsAboutToBeInserted(QModelIndex,int,int)) );
-    connect(model,  SIGNAL(rowsInserted(QModelIndex, int,int)),
+    connect(model,  SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SLOT(sourceRowsInserted(QModelIndex,int,int)) );
-    connect(model,  SIGNAL(rowsAboutToBeRemoved(QModelIndex, int,int)),
+    connect(model,  SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
             this, SLOT(sourceRowsAboutToBeRemoved(QModelIndex,int,int)) );
-    connect(model,  SIGNAL(rowsRemoved(QModelIndex, int,int)),
+    connect(model,  SIGNAL(rowsRemoved(QModelIndex,int,int)),
             this, SLOT(sourceRowsRemoved(QModelIndex,int,int)) );
 
-    connect(model, SIGNAL(rowsMoved(QModelIndex, int, int, const QModelIndex, int)),
-            this, SLOT(sourceRowsMoved(QModelIndex, int, int, const QModelIndex, int)));
+    connect(model, SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)),
+            this, SLOT(sourceRowsMoved(QModelIndex,int,int,QModelIndex,int)));
 
-    connect(model, SIGNAL(modelAboutToBeReset()),
-               this, SIGNAL(modelAboutToBeReset()));
-    connect(model, SIGNAL(modelReset()),
-               this, SIGNAL(modelReset()));
-    setRoleNames(model->roleNames());
+    connect(model, SIGNAL(modelAboutToBeReset()), this, SIGNAL(modelAboutToBeReset()));
+    connect(model, SIGNAL(modelReset()), this, SIGNAL(modelReset()));
+    connect(model, SIGNAL(layoutChanged()), this, SIGNAL(modelReset()));
+
     setSourceModel(model);
+
+    if (reset) {
+        endResetModel();
+    }
 }
 
 QObject *PagedProxyModel::sourceModelObject() const

@@ -24,12 +24,15 @@
 #include <KDebug>
 
 #include <Plasma/PaintUtils>
+#include <Plasma/Svg>
 
 TextEffects::TextEffects(QDeclarativeItem *parent)
     : QDeclarativeItem(parent),
       m_radius(3),
       m_horizontalOffset(0),
-      m_verticalOffset(0)
+      m_verticalOffset(0),
+      m_effect(TextEffects::ShadowedText),
+      m_texture(0)
 {
     setFlag(QGraphicsItem::ItemHasNoContents, false);
     m_font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DesktopFont);
@@ -191,10 +194,46 @@ void TextEffects::setColor(const QColor &color)
     update();
 }
 
+TextEffects::Effect TextEffects::effect() const
+{
+    return m_effect;
+}
+
+void TextEffects::setEffect(TextEffects::Effect effect)
+{
+    if (m_effect == effect) {
+        return;
+    }
+
+    if (effect == TexturedText) {
+        m_texture = new Plasma::Svg(this);
+        m_texture->setImagePath("widgets/labeltexture");
+        m_texture->setContainsMultipleImages(true);
+    } else {
+        delete m_texture;
+        m_texture = 0;
+    }
+
+    m_effect = effect;
+    refreshPixmap();
+    emit effectChanged(effect);
+    update();
+}
+
 void TextEffects::refreshPixmap()
 {
-    QColor shadowColor = qGray(m_color.red(), m_color.green(), m_color.blue()) > 120?Qt::black:Qt::white;
-    m_pixmap = Plasma::PaintUtils::shadowText(m_text, m_font, m_color, shadowColor, QPoint(m_horizontalOffset, m_verticalOffset), m_radius);
+    switch (m_effect) {
+    case TexturedText:
+        if (m_texture) {
+            m_pixmap = Plasma::PaintUtils::texturedText(m_text, m_font, m_texture);
+        }
+        break;
+    case ShadowedText:
+    default:
+        QColor shadowColor = qGray(m_color.red(), m_color.green(), m_color.blue()) > 120?Qt::black:Qt::white;
+        m_pixmap = Plasma::PaintUtils::shadowText(m_text, m_font, m_color, shadowColor, QPoint(m_horizontalOffset, m_verticalOffset), m_radius);
+        break;
+    }
 }
 
 void TextEffects::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

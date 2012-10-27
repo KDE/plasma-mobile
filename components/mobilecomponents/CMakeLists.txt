@@ -3,15 +3,11 @@ project(mobilecomponents)
 include(KDE4Defaults)
 
 set(mobilecomponents_SRCS
-appbackgroundprovider.cpp
     appletcontainer.cpp
     mobilecomponentsplugin.cpp
     pagedproxymodel.cpp
     fallbackcomponent.cpp
-    categorizedproxymodel.cpp
-    mouseeventlistener.cpp
     package.cpp
-    resourceinstance.cpp
     texteffects.cpp
     )
 
@@ -34,11 +30,14 @@ install(FILES Rating.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobil
 install(FILES IconButton.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES IconGrid.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES ResourceDelegate.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES Sheet.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES ViewSearch.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(DIRECTORY animations/ DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-#install(FILES DisappearAnimation.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES OverlayDrawer.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES SplitDrawer.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES DatePicker.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES TimePicker.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
 install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
 install(DIRECTORY resourcedelegates/ DESTINATION ${DATA_INSTALL_DIR}/plasma/resourcedelegates/)
+
+install(DIRECTORY private DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)

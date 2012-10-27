@@ -54,6 +54,10 @@ MetadataUserTypes::MetadataUserTypes(QObject *parent)
     m_userTypes << "nfo:Video";
     m_typeNames->insert("nfo:Video", i18n("Videos"));
     m_typeSortFields->insert("nfo:Video", "nfo:fileName");
+
+    m_userTypes << "nfo:Archive";
+    m_typeNames->insert("nfo:Archive", i18n("Archives"));
+    m_typeSortFields->insert("nfo:Archive", "nfo:fileName");
 }
 
 MetadataUserTypes::~MetadataUserTypes()

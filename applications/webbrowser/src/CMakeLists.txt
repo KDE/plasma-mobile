@@ -1,14 +1,3 @@
-add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
-
-
-find_package(Nepomuk REQUIRED)
-
-find_package(Soprano)
-  macro_log_feature(Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net"
-  TRUE "${SOPRANO_MIN_VERSION}" "Soprano is needed for Nepomuk")
-
-include(SopranoAddOntology)
-
 include_directories(
     ${CMAKE_BINARY_DIR}/dataengines/metadata/ontologies
     ${CMAKE_CURRENT_BINARY_DIR}
@@ -18,6 +7,8 @@ include_directories(
 
 add_subdirectory(ontologies)
 
+find_package(NepomukCore REQUIRED)
+
 set(active-webbrowser_SRCS
     main.cpp
     activewebbrowser.cpp
@@ -25,6 +16,7 @@ set(active-webbrowser_SRCS
     kdeclarativewebview.cpp
     completionitem.cpp
     completionmodel.cpp
+    nepomukhelper.cpp
     history.cpp
     view.cpp
 
@@ -39,11 +31,23 @@ set(active-webbrowser_SRCS
     #adblock/adblockwidget.cpp
 )
 
+soprano_add_ontology( webbrowser_SRCS
+  "${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/nuao.trig"
+  "NUAO"
+  "Nepomuk2::Vocabulary"
+  "trig")
+
+soprano_add_ontology( SRCS
+  "${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/ndo.trig"
+  "NDO"
+  "Nepomuk2::Vocabulary"
+  "trig")
+
 #KDE4_ADD_UI_FILES( active-webbrowser_SRCS
 #    adblock/settings_adblock.ui
 #)
 
-KDE4_ADD_EXECUTABLE(active-webbrowser ${active-webbrowser_SRCS})
+kde4_add_executable(active-webbrowser ${active-webbrowser_SRCS})
 
 target_link_libraries(active-webbrowser
     ${QT_QTWEBKIT_LIBRARY}
@@ -53,10 +57,10 @@ target_link_libraries(active-webbrowser
     ${KDE4_KIO_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4_KDEWEBKIT_LIBRARY}
-    ${NEPOMUK_LIBRARIES}
+    ${NEPOMUK_CORE_LIBRARY}
     ${NEPOMUK_QUERY_LIBRARIES}
     ${KACTIVITIES_LIBRARY}
-    kdeclarative
+    ${KDECLARATIVE_LIBRARIES}
     ontologies
 )
 

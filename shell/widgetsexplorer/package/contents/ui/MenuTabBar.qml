@@ -27,7 +27,7 @@ import org.kde.runnermodel 0.1 as RunnerModels
 PlasmaComponents.TabBar {
     id: tabBar
 
-    property Component startComponent: topComponent
+    property Component startComponent: appsComponent
 
     anchors {
         top: searchField.bottom
@@ -37,11 +37,7 @@ PlasmaComponents.TabBar {
     width: Math.min(implicitWidth, parent.width - 100)
 
     CategoryTab {
-        text: i18n("Top")
-        component: topComponent
-        resourceType: "_top"
-    }
-    CategoryTab {
+        id: appsTab
         text: i18n("Apps")
         component: appsComponent
         resourceType: "_Apps"
@@ -83,35 +79,16 @@ PlasmaComponents.TabBar {
     }
 
     Component {
-        id: topComponent
-        ResourceBrowser {
-            model: MetadataModels.MetadataModel {
-                sortOrder: Qt.DescendingOrder
-                activityId: "!"+activitySource.data["Status"]["Current"]
-                sortBy: ["nao:numericRating"]
-                limit: 20
-                queryString: searchField.searchQuery
-            }
-        }
-    }
-
-    Component {
         id: appsComponent
         ResourceBrowser {
-            model: PlasmaCore.SortFilterModel {
-                id: appsModel
-                sourceModel: PlasmaCore.DataModel {
-                    keyRoleFilter: ".*"
-                    dataSource: PlasmaCore.DataSource {
-                        id: appsSource
-                        engine: "org.kde.active.apps"
-                        connectedSources: ["Apps"]
-                        interval: 0
-                    }
+            defaultClassName: "FileDataObject"
+             model: PlasmaCore.SortFilterModel {
+                sourceModel: RunnerModels.RunnerModel {
+                    id: runnerModel
+                    runners: [ "org.kde.active.apps" ]
+                    query: searchField.searchQuery
                 }
                 sortRole: "name"
-                filterRole: "name"
-                filterRegExp: ".*"+searchField.searchQuery+".*"
             }
         }
     }
@@ -120,6 +97,7 @@ PlasmaComponents.TabBar {
         id: bookmarksComponent
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
+                id: bookmarksModel
                 sortOrder: Qt.AscendingOrder
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortBy: ["nie:url"]
@@ -136,7 +114,7 @@ PlasmaComponents.TabBar {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortBy: ["nco:fullname"]
                 resourceType: "nco:Contact"
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }
@@ -149,7 +127,7 @@ PlasmaComponents.TabBar {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Document"
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }
@@ -162,7 +140,7 @@ PlasmaComponents.TabBar {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Image"
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }
@@ -175,7 +153,7 @@ PlasmaComponents.TabBar {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Audio"
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }
@@ -188,7 +166,7 @@ PlasmaComponents.TabBar {
                 activityId: "!"+activitySource.data["Status"]["Current"]
                 sortOrder: Qt.AscendingOrder
                 resourceType: "nfo:Video"
-                queryString: searchField.searchQuery
+                queryString: "*" + searchField.searchQuery + "*"
             }
         }
     }

@@ -34,7 +34,7 @@ class TimeZone : public QObject
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 
     public:
-        TimeZone(const KTimeZone &zone, QObject *parent = 0);
+        explicit TimeZone(const KTimeZone &zone, QObject *parent = 0);
         virtual ~TimeZone();
 
         QString name();

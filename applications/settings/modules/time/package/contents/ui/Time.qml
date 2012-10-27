@@ -1,6 +1,6 @@
 // -*- coding: iso-8859-1 -*-
 /*
- *   Copyright 2011 Sebastian Kügler <mart@kde.org>
+ *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -21,6 +21,7 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1
 
@@ -44,9 +45,8 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        PlasmaComponents.Label {
+        PlasmaExtras.Title {
             text: settingsComponent.name
-            font.pointSize: theme.defaultFont.pointSize+8
             opacity: 1
         }
         PlasmaComponents.Label {
@@ -131,19 +131,68 @@ Item {
         }
 
 
-        TimePicker {
+        MobileComponents.TimePicker {
             id: timePicker
             enabled: !ntpCheckBox.checked
+            twentyFour: twentyFourSwitch.checked
 
             anchors {
                 right: datePicker.left
                 rightMargin: theme.defaultFont.mSize.width
             }
+            Component.onCompleted: {
+                var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+                timePicker.hours = date.getHours()
+                timePicker.minutes = date.getMinutes()
+                timePicker.seconds = date.getSeconds()
+            }
+            Connections {
+                target: timeSettings
+                onCurrentTimeChanged: {
+                    if (timePicker.userConfiguring) {
+                        return
+                    }
+
+                    var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+                    timePicker.hours = date.getHours()
+                    timePicker.minutes = date.getMinutes()
+                    timePicker.seconds = date.getSeconds()
+                }
+            }
+            onUserConfiguringChanged: {
+                timeSettings.currentTime = timeString
+                timeSettings.saveTime()
+            }
         }
 
-        DatePicker {
+        MobileComponents.DatePicker {
             id: datePicker
             enabled: !ntpCheckBox.checked
+            Component.onCompleted: {
+                var date = new Date(timeSettings.currentDate)
+                datePicker.day = date.getDate()
+                datePicker.month = date.getMonth()+1
+                datePicker.year = date.getFullYear()
+            }
+            Connections {
+                target: timeSettings
+                onCurrentDateChanged: {
+                    if (datePicker.userConfiguring) {
+                        return
+                    }
+
+                    var date = new Date(timeSettings.currentDate)
+
+                    datePicker.day = date.getDate()
+                    datePicker.month = date.getMonth()+1
+                    datePicker.year = date.getFullYear()
+                }
+            }
+            onUserConfiguringChanged: {
+                timeSettings.currentDate = isoDate
+
+                timeSettings.saveTime()
+            }
         }
     }
 
@@ -188,9 +237,4 @@ Item {
         }
         onRejected: selectedIndex = -1
     }
-
-    Component.onCompleted: {
-        print("Loaded Time.qml successfully.");
-    }
-
 }

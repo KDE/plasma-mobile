@@ -17,22 +17,39 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.qtextracomponents 0.1
 
 Item {
     id: delegateItem
     property string className: model["className"] ? model["className"] : "FileDataObject"
     property string genericClassName: model["genericClassName"] ? model["genericClassName"] : "FileDataObject"
 
-    property bool infoLabelVisible
-//    property int implicitWidth: itemLoader.item.implicitWidth
-  //  property int implicitHeight: itemLoader.item.implicitHeight
+    implicitWidth: itemLoader.item.implicitWidth
+    implicitHeight: itemLoader.item.implicitHeight
 
     signal clicked(variant mouse)
     signal pressed(variant mouse)
     signal released(variant mouse)
     signal pressAndHold(variant mouse)
+
+    function roundToStandardSize(size)
+    {
+        if (size >= theme.enormousIconSize) {
+            return theme.enormousIconSize
+        } else if (size >= theme.hugeIconSize) {
+            return theme.hugeIconSize
+        } else if (size >= theme.largeIconSize) {
+            return theme.largeIconSize
+        } else if (size >= theme.mediumIconSize) {
+            return theme.mediumIconSize
+        } else if (size >= theme.smallMediumIconSize) {
+            return theme.smallMediumIconSize
+        } else {
+            return theme.smallIconSize
+        }
+    }
 
     MobileComponents.FallbackComponent {
         id: fallback
@@ -45,8 +62,11 @@ Item {
             margins: 4
         }
 
-        //FIXME: assuming the view is parent.parent is bad, it should have the view attached property (it appears it doesnt, why?)
+        //FIXME: assuming the view is parent.parent is bad, it should have the view attached property (it appears it doesn't, why?)
         source: {
+            if (!className && !genericClassName) {
+                return ""
+            }
             var view = delegateItem.parent
 
             if (view != undefined && view.orientation == undefined && view.flow == undefined) {
@@ -65,7 +85,7 @@ Item {
     }
 
     //FIXME: this mess is due to mousearea not having screen coordinates
-    MobileComponents.MouseEventListener {
+    MouseEventListener {
         anchors.fill: parent
         MouseArea {
             anchors.fill: parent
@@ -76,9 +96,7 @@ Item {
             onPressAndHold: {
                 delegateItem.pressAndHold(mouse)
                 if (resourceInstance && contextMenu) {
-                    contextMenu.parentItem = delegateItem
-                    contextMenu.adjustPosition();
-                    contextMenu.visible = true
+                    contextMenu.open(delegateItem)
                 }
             }
         }

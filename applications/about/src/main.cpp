@@ -33,7 +33,7 @@
 
 static const char description[] = I18N_NOOP("About Plasma Active");
 
-static const char version[] = "2.0";
+static const char version[] = "3.0";
 
 int main(int argc, char **argv)
 {
@@ -44,25 +44,18 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
-#ifndef QT_NO_OPENGL
-    options.add("opengl", ki18n("use a QGLWidget for the viewport"));
-#endif
+
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    bool useGL = args->isSet("opengl");
-
-    if (!useGL) {
-        //use plasmarc to share this with plasma-windowed
-        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
-        useGL = cg.readEntry("UseOpenGl", true);
-    }
-
+    //use plasmarc to share this with plasma-windowed
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
+    bool useGL = cg.readEntry("UseOpenGl", true);
+ 
 
     AboutApp *mainWindow = new AboutApp();
-    mainWindow->setUseGL(useGL);
     mainWindow->show();
     args->clear();
     return app.exec();

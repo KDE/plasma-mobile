@@ -41,19 +41,19 @@ bool AppsEngine::sourceRequestEvent(const QString &name)
         return true;
     }
 
-    if (name.startsWith("Apps")) {
+    if (name.startsWith(QLatin1String("Apps"))) {
         AppSource *appSource = new AppSource(name, this);
         addSource(appSource);
         return true;
-    } else if (name.startsWith("Categories")) {
+    } else if (name.startsWith(QLatin1String("Categories"))) {
         CategoriesSource *catSource = new CategoriesSource(name, this);
         addSource(catSource);
         return true;
-    } else if (name.startsWith("Groups")) {
+    } else if (name.startsWith(QLatin1String("Groups"))) {
         GroupsSource *grpsSource = new GroupsSource(name, this);
         addSource(grpsSource);
         return true;
-    } else if (name.startsWith("Group")) {
+    } else if (name.startsWith(QLatin1String("Group"))) {
         GroupSource *grpSource = new GroupSource(name, this);
         addSource(grpSource);
         return true;

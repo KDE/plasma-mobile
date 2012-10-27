@@ -1,17 +1,25 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Quick Dialer (QML)
+Name[da]=Hurtigopringning (QML)
+Name[el]=Άμεση κλήση (QML)
 Name[es]=Marcador rápido (QML)
 Name[et]=Kiirvalija (QML)
 Name[fr]=Numéroteur rapide (QML)
+Name[hu]=Gyors hívó (QML)
+Name[it]=Chiamata rapida (QML)
 Name[km]=អ្នក​ហៅ​រហ័ស (QML)
 Name[nl]=Snelle kiezer (QML)
 Name[pl]=Szybki Dialer (QML)
 Name[pt]=Marcador Rápido (QML)
 Name[pt_BR]=Discador rápido (QML)
+Name[sl]=Hitro klicanje (QML)
 Name[sv]=Snabbuppringning (QML)
+Name[tr]=Hızlı Numara Çevirici (QML)
 Name[uk]=Швидкий набір (QML)
+Name[wa]=Fé abeye on limero (QML)
 Name[x-test]=xxQuick Dialer (QML)xx
+Name[zh_TW]=快速撥號（QML）
 Type=Service
 ServiceTypes=Plasma/Applet
 Icon=internet-telephony

@@ -62,13 +62,12 @@
 #include <Plasma/Wallpaper>
 #include <Plasma/WindowEffects>
 
-#include <Nepomuk/ResourceManager>
+#include <Nepomuk2/ResourceManager>
 
-#include "../components/runnermodel/runnermodel.h"
-
+#ifdef Q_WS_X11
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
-
+#endif
 
 PlasmaApp* PlasmaApp::self()
 {
@@ -91,9 +90,10 @@ PlasmaApp::PlasmaApp()
     KGlobal::locale()->insertCatalog("libplasma");
     KGlobal::locale()->insertCatalog("plasma-device");
 
+    setenv("PLASMA_CUSTOM_PREFIX_PATHS", "platformcontents/widget/tablet/:platformcontents/widget/touch/:platformcontents/widget/generic/:contents/", 1);
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    Nepomuk::ResourceManager::instance()->init();
+    Nepomuk2::ResourceManager::instance()->init();
 
     qmlRegisterType<PanelProxy>("org.kde.plasma.deviceshell", 0, 1, "DevicePanel");
     qmlRegisterUncreatableType<ContainmentProperties>("org.kde.plasma.deviceshell", 0, 1, "ContainmentProperties", "ContainmentProperties is just a type holder");
@@ -164,6 +164,9 @@ PlasmaApp::PlasmaApp()
     corona();
     connect(this, SIGNAL(aboutToQuit()), this, SLOT(cleanup()));
 
+    connect(KWindowSystem::self(), SIGNAL(activeWindowChanged(WId)),
+            this, SLOT(activeWindowChanged(WId)));
+
     if (isDesktop) {
         notifyStartup(true);
     }
@@ -171,14 +174,14 @@ PlasmaApp::PlasmaApp()
     m_startupInfo = new KStartupInfo(KStartupInfo::CleanOnCantDetect, this );
 
     connect(m_startupInfo,
-            SIGNAL(gotNewStartup(const KStartupInfoId&, const KStartupInfoData&)),
-            SLOT(gotStartup(const KStartupInfoId&, const KStartupInfoData&)));
+            SIGNAL(gotNewStartup(KStartupInfoId,KStartupInfoData)),
+            SLOT(gotStartup(KStartupInfoId,KStartupInfoData)));
     connect(m_startupInfo,
-            SIGNAL(gotStartupChange(const KStartupInfoId&, const KStartupInfoData&)),
-            SLOT(gotStartup(const KStartupInfoId&, const KStartupInfoData&)));
+            SIGNAL(gotStartupChange(KStartupInfoId,KStartupInfoData)),
+            SLOT(gotStartup(KStartupInfoId,KStartupInfoData)));
     connect(m_startupInfo,
-            SIGNAL(gotRemoveStartup(const KStartupInfoId&, const KStartupInfoData&)),
-            SLOT(killStartup(const KStartupInfoId&)));
+            SIGNAL(gotRemoveStartup(KStartupInfoId,KStartupInfoData)),
+            SLOT(killStartup(KStartupInfoId)));
 }
 
 PlasmaApp::~PlasmaApp()
@@ -283,6 +286,24 @@ void PlasmaApp::setupHomeScreen()
     connect(m_homeScreen, SIGNAL(focusActivityView()),
             this, SLOT(focusMainView()));
 
+    KAction *focusHomeAction = new KAction(this);
+    focusHomeAction->setObjectName("Focus Homescreen");
+    focusHomeAction->setGlobalShortcut(
+        KShortcut(QKeySequence(Qt::Key_HomePage)),
+        KAction::ShortcutTypes(KAction::ActiveShortcut | KAction::DefaultShortcut),
+        KAction::NoAutoloading);
+    connect(focusHomeAction, SIGNAL(triggered()),
+            this, SLOT(focusMainView()));
+
+    KAction *togglePanelAction = new KAction(this);
+    togglePanelAction->setObjectName("Toggle Panel");
+    togglePanelAction->setGlobalShortcut(
+        KShortcut(QKeySequence(Qt::Key_Menu)),
+        KAction::ShortcutTypes(KAction::ActiveShortcut | KAction::DefaultShortcut),
+        KAction::NoAutoloading);
+    connect(togglePanelAction, SIGNAL(triggered()),
+            m_homeScreen, SLOT(togglePanel()));
+
     connect(m_homeScreen, SIGNAL(newActivityRequested()),
             this, SLOT(showActivityCreation()));
 
@@ -312,7 +333,7 @@ Plasma::Corona* PlasmaApp::corona()
         connect(m_corona, SIGNAL(containmentAdded(Plasma::Containment*)),
                 this, SLOT(manageNewContainment(Plasma::Containment*)), Qt::QueuedConnection);
         connect(m_corona, SIGNAL(configSynced()), this, SLOT(syncConfig()));
-        connect(m_corona, SIGNAL(screenOwnerChanged(int, int, Plasma::Containment *)), this, SLOT(containmentScreenOwnerChanged(int,int,Plasma::Containment*)));
+        connect(m_corona, SIGNAL(screenOwnerChanged(int,int,Plasma::Containment*)), this, SLOT(containmentScreenOwnerChanged(int,int,Plasma::Containment*)));
 
 
         // setup our QML home screen;
@@ -399,7 +420,7 @@ void PlasmaApp::manageNewContainment(Plasma::Containment *containment)
     // to retrieve it later.
     m_containments.insert(containment->id(), containment);
 
-    connect(containment, SIGNAL(destroyed(QObject *)), this, SLOT(containmentDestroyed(QObject *)));
+    connect(containment, SIGNAL(destroyed(QObject*)), this, SLOT(containmentDestroyed(QObject*)));
 
     containment->resize(m_mainView->size());
 
@@ -430,6 +451,11 @@ void PlasmaApp::focusMainView()
     if (m_mainView) {
         KWindowSystem::forceActiveWindow(m_mainView->winId());
     }
+}
+
+void PlasmaApp::activeWindowChanged(WId id)
+{
+    m_homeScreen->setProperty("windowActive", (id == m_mainView->winId()));
 }
 
 void PlasmaApp::mainViewGeometryChanged()
@@ -527,7 +553,7 @@ void PlasmaApp::reserveStruts(const int left, const int top, const int right, co
 void PlasmaApp::showWidgetsExplorer()
 {
     if (!m_widgetsExplorer) {
-        m_widgetsExplorer = new MobileWidgetsExplorer(0);
+        m_widgetsExplorer = new MobileWidgetsExplorer();
         m_widgetsExplorer.data()->setZValue(1000);
         m_corona->addItem(m_widgetsExplorer.data());
     }

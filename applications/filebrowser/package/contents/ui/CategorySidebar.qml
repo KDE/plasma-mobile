@@ -20,8 +20,10 @@
 import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.draganddrop 1.0
 
 
 Item {
@@ -30,67 +32,55 @@ Item {
     Column {
         id: toolsColumn
         spacing: 4
+        enabled: fileBrowserRoot.model == metadataModel
+        opacity: enabled ? 1 : 0.6
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
 
-        TypeFilter { }
-
-
-        PlasmaComponents.Label {
-            text: "<b>"+i18n("Rating")+"</b>"
+        PlasmaExtraComponents.Heading {
+            text: i18n("Rating")
+            anchors {
+                top: parent.top
+                right: parent.right
+                rightMargin: theme.defaultFont.mSize.width
+            }
         }
 
         MobileComponents.Rating {
-            anchors.horizontalCenter: parent.horizontalCenter
-            onScoreChanged: metadataModel.minimumRating = score
-        }
-
-
-
-
-        PlasmaComponents.Label {
-            text: "<b>"+i18n("Tags")+"</b>"
-            visible: tagCloud.count > 0
-        }
-        Column {
-            spacing: 4
             anchors {
                 left: parent.left
                 leftMargin: theme.defaultFont.mSize.width
             }
-            Repeater {
-                model: MetadataModels.MetadataCloudModel {
-                    id: tagCloud
-                    cloudCategory: "nao:hasTag"
-                    resourceType: metadataModel.resourceType
-                    minimumRating: metadataModel.minimumRating
-                }
-                delegate: PlasmaComponents.CheckBox {
-                    text: i18n("%1 (%2)", model["label"], model["count"])
-                    visible: model["label"] != undefined
-                    onCheckedChanged: {
-                        var tags = metadataModel.tags
-                        if (checked) {
-                            tags[tags.length] = model["label"];
-                            metadataModel.tags = tags
-                        } else {
-                            for (var i = 0; i < tags.length; ++i) {
-                                if (tags[i] == model["label"]) {
-                                    tags.splice(i, 1);
-                                    metadataModel.tags = tags
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
+            onScoreChanged: metadataModel.minimumRating = score
+        }
+
+        Component.onCompleted: {
+            if (!exclusiveResourceType && exclusiveMimeTypes.length == 0) {
+                typeFilterLoader.source = "TypeFilter.qml"
             }
         }
-    }
-    PlasmaComponents.Button {
-        anchors {
-            bottom: parent.bottom
-            horizontalCenter: parent.horizontalCenter
+
+        Item {
+            width: 1
+            height: theme.defaultFont.mSize.height
         }
-        text: i18n("Timeline")
-        onClicked: sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
+        Loader {
+            id: typeFilterLoader
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            //sourceComponent: TypeFilter { }
+        }
     }
+
+
+    PlasmaCore.DataModel {
+        id: devicesModel
+        dataSource: hotplugSource
+    }
+
+    
 }

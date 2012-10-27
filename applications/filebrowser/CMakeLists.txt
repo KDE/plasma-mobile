@@ -6,5 +6,19 @@ add_subdirectory(src)
 
 # QML-only thing
 install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.filebrowser)
-install(FILES active-filebrowser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 
+install(DIRECTORY imageviewerpart/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.imageviewerpart)
+
+install(FILES imageviewerpart/metadata.desktop
+        DESTINATION ${SERVICES_INSTALL_DIR} RENAME org.kde.active.imageviewerpart.desktop)
+
+install(FILES
+   plasma-filebrowserpart.desktop
+   DESTINATION ${SERVICETYPES_INSTALL_DIR})
+
+install(FILES active-filebrowser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES active-imageviewer.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES active-books.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES browse-files.desktop DESTINATION ${DATA_INSTALL_DIR}/solid/actions/)
+
+add_subdirectory(icons)

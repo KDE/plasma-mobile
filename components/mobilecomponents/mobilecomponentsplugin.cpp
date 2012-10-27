@@ -25,19 +25,10 @@
 #include <QDeclarativeEngine>
 
 #include "appletcontainer.h"
-#include "categorizedproxymodel.h"
 #include "pagedproxymodel.h"
 #include "fallbackcomponent.h"
-#include "mouseeventlistener.h"
-#include "resourceinstance.h"
 #include "package.h"
 #include "texteffects.h"
-#include "appbackgroundprovider_p.h"
-
-void MobileComponentsPlugin::initializeEngine(QDeclarativeEngine *engine, const char *uri)
-{
-    engine->addImageProvider(QLatin1String("appbackgrounds"), new AppBackgroundProvider);
-}
 
 void MobileComponentsPlugin::registerTypes(const char *uri)
 {
@@ -45,9 +36,6 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<PagedProxyModel>(uri, 0, 1, "PagedProxyModel");
     qmlRegisterType<FallbackComponent>(uri, 0, 1, "FallbackComponent");
-    qmlRegisterType<CategorizedProxyModel>(uri, 0, 1, "CategorizedProxyModel");
-    qmlRegisterType<MouseEventListener>(uri, 0, 1, "MouseEventListener");
-    qmlRegisterType<ResourceInstance>(uri, 0, 1, "ResourceInstance");
     qmlRegisterType<Package>(uri, 0, 1, "Package");
     qmlRegisterType<TextEffects>(uri, 0, 1, "TextEffects");
     qmlRegisterType<AppletContainer>(uri, 0, 1, "AppletContainer");

@@ -1,17 +1,26 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Web Dashboard
+Name[da]=Web-instrumentbræt
+Name[el]=Πίνακας ελέγχου ιστού
 Name[es]=Tablero de mandos Web
 Name[et]=Veebi-vidinavaade
-Name[fr]=Dashboard web
+Name[fr]=Tableau de bord web
+Name[hu]=Webáttekintő
+Name[it]=Web Dashboard
 Name[km]=ផ្ទាំង​គ្រប់គ្រង​បណ្ដាញ
 Name[nl]=Web-dashboard
+Name[pa]=ਵੈੱਬ ਡੈਸ਼ਬੋਰਡ
 Name[pl]=Tablica sieciowa
 Name[pt]=Painel da Web
 Name[pt_BR]=Painel da Web
+Name[sl]=Spletna nadzorna plošča
 Name[sv]=Webbinstrumentpanel
+Name[tr]=Web Kontrol Paneli
 Name[uk]=Інтернет-панель
+Name[wa]=Tåvlea d' boird waibe
 Name[x-test]=xxWeb Dashboardxx
+Name[zh_TW]=網頁資訊看板
 Icon=user-desktop
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

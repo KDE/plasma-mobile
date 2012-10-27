@@ -24,15 +24,41 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.runnermodel 0.1 as RunnerModels
 
-MobileComponents.Sheet {
+PlasmaComponents.Sheet {
     id: widgetsExplorer
     objectName: "widgetsExplorer"
-    title: i18n("Add items")
-    acceptButtonText: i18n("Add items")
-    rejectButtonText: i18n("Close")
+    title: i18n("Add Items")
+    acceptButtonText: i18n("Add Items")
+    rejectButtonText: i18n("Cancel")
 
     signal addAppletRequested(string plugin)
     signal closeRequested
+
+    function addItems()
+    {
+        var service = metadataSource.serviceForSource("")
+        var operation = service.operationDescription("connectToActivity")
+        operation["ActivityUrl"] = activitySource.data["Status"]["Current"]
+
+        for (var i = 0; i < selectedModel.count; ++i) {
+            var item = selectedModel.get(i)
+            if (item.resourceUri) {
+                operation["ResourceUrl"] = item.resourceUri
+                service.startOperationCall(operation)
+            } else if (item.pluginName) {
+                widgetsExplorer.addAppletRequested(item.pluginName)
+            }
+        }
+
+    }
+
+    //used only toexplicitly close the keyboard
+    TextInput { id: inputPanelController; width:0; height:0}
+
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.metadata"
+    }
 
     Binding {
         target: acceptButton
@@ -41,11 +67,14 @@ MobileComponents.Sheet {
     }
 
     onAccepted: {
-        stack.currentPage.accept()
+        widgetsExplorer.addItems()
     }
     onStatusChanged: {
-        if (status == PlasmaComponents.DialogStatus.Closed) {
+        if (status == PlasmaComponents.DialogStatus.Open) {
+            searchField.forceActiveFocus()
+        } else if (status == PlasmaComponents.DialogStatus.Closed) {
             closeRequested()
+            inputPanelController.closeSoftwareInputPanel()
         }
     }
 
@@ -70,7 +99,11 @@ MobileComponents.Sheet {
         interval: 0
     }
 
-    Component.onCompleted: open()
+    Timer {
+        running: true
+        interval: 100
+        onTriggered: open()
+    }
 
     content: [
         MobileComponents.ViewSearch {
@@ -91,16 +124,18 @@ MobileComponents.Sheet {
                     }
                 }
             }
+            busy: {
+                if (stack.currentPage.model && stack.currentPage.model.running !== undefined) {
+                    stack.currentPage.model.running
+                } else {
+                    false
+                }
+            }
 
             anchors {
                 left: parent.left
                 right: parent.right
                 top: parent.top
-            }
-            onSearchQueryChanged: {
-                if (stack.depth == 1 && searchQuery.length > 3) {
-                    stack.push(globalSearchComponent)
-                }
             }
         },
         MenuTabBar {
@@ -124,11 +159,14 @@ MobileComponents.Sheet {
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
                 id: runnerModel
-                queryString: searchField.searchQuery.length > 3 ? searchField.searchQuery : ""
+                queryString: searchField.searchQuery.length > 3 ? "*" + searchField.searchQuery + "*" : ""
                 onQueryStringChanged: {
                     if (searchField.searchQuery.length <= 3) {
                         stack.pop()
                     }
+                }
+                Component.onCompleted: {
+                    runnerModel.finishedListingChanged.connect(searchField.setIdle)
                 }
             }
         }

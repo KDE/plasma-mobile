@@ -20,6 +20,7 @@
 import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
@@ -59,14 +60,13 @@ PlasmaComponents.Page {
         x: timelineColumn.width/2 - 4
     }
 
-
-    PlasmaComponents.Label {
+    PlasmaExtraComponents.Heading {
         id: titleLabel
         anchors {
             right: parent.right
             rightMargin: theme.defaultFont.mSize.width
         }
-        text: "<b>" + metadataTimelineModel.description + "</b>"
+        text: metadataTimelineModel.description
     }
 
     Flickable {
@@ -130,7 +130,7 @@ PlasmaComponents.Page {
                         break
                     case MetadataModels.MetadataTimelineModel.Month:
                         metadataTimelineModel.startDate = buildDate(currentYear, currentMonth, 1)
-                        metadataTimelineModel.endDate = buildDate(currentYear, currentMonth, 31)
+                        metadataTimelineModel.endDate = buildDate(currentYear, currentMonth+1, 1)
                         metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Day
                         break
                     }
@@ -199,7 +199,7 @@ PlasmaComponents.Page {
                                     case MetadataModels.MetadataTimelineModel.Day:
                                     default:
                                         metadataModel.startDate = buildDate(model.year, model.month, 1)
-                                        metadataModel.endDate = buildDate(model.year, model.month, 31)
+                                        metadataModel.endDate = buildDate(model.year, model.month+1, 1)
 
                                         currentMonth = model.month
                                         currentYear = model.year
@@ -219,7 +219,7 @@ PlasmaComponents.Page {
                                     break
                                 case MetadataModels.MetadataTimelineModel.Month:
                                     metadataModel.startDate = buildDate(model.year, model.month, 1)
-                                    metadataModel.endDate = buildDate(model.year, model.month, 31)
+                                    metadataModel.endDate = buildDate(model.year, model.month+1, 1)
 
                                     currentMonth = model.month
                                     currentYear = model.year
@@ -248,45 +248,32 @@ PlasmaComponents.Page {
     }
 
 
-
-    tools: PlasmaComponents.ToolBarLayout {
-        PlasmaComponents.ToolButton {
-            id: backButton
-            iconSource: "go-previous"
-            width: theme.largeIconSize
-            height: width
-            flat: false
-            onClicked: {
-                metadataModel.startDate = ""
-                metadataModel.endDate = ""
-
-                currentMonth = 0
-                currentYear = 0
-                sidebarStack.pop()
-            }
+    PlasmaComponents.ToolButton {
+        iconSource: "zoom-out"
+        width: theme.largeIconSize
+        height: width
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            margins: 8
         }
-        PlasmaComponents.ToolButton {
-            iconSource: "zoom-out"
-            width: theme.largeIconSize
-            height: width
-            flat: false
-            enabled: metadataTimelineModel.level != MetadataModels.MetadataTimelineModel.Year
-            onClicked: {
-                switch (metadataTimelineModel.level) {
-                case MetadataModels.MetadataTimelineModel.Day:
-                    metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Month
-                    metadataTimelineModel.startDate = buildDate(currentYear, 1, 1)
-                    metadataTimelineModel.endDate = buildDate(currentYear, 12, 31)
-                    break
-                case MetadataModels.MetadataTimelineModel.Month:
-                    metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Year
-                    var dat = new Date()
-                    metadataTimelineModel.startDate = ""
-                    metadataTimelineModel.endDate = ""
-                    break
-                }
-                currentItem = null
+        flat: false
+        enabled: metadataTimelineModel.level != MetadataModels.MetadataTimelineModel.Year
+        onClicked: {
+            switch (metadataTimelineModel.level) {
+            case MetadataModels.MetadataTimelineModel.Day:
+                metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Month
+                metadataTimelineModel.startDate = buildDate(currentYear, 1, 1)
+                metadataTimelineModel.endDate = buildDate(currentYear, 12, 31)
+                break
+            case MetadataModels.MetadataTimelineModel.Month:
+                metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Year
+                var dat = new Date()
+                metadataTimelineModel.startDate = ""
+                metadataTimelineModel.endDate = ""
+                break
             }
+            currentItem = null
         }
     }
 }

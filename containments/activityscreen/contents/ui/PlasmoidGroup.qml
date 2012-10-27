@@ -89,7 +89,7 @@ ItemGroup {
     }
 
 
-    //FIXME: this delay is becuase backgroundHints gets updated only after a while in qml applets
+    //FIXME: this delay is because backgroundHints gets updated only after a while in qml applets
     Timer {
         id: appletTimer
         interval: 250

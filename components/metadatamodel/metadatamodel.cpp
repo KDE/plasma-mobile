@@ -18,7 +18,8 @@
 */
 
 #include "metadatamodel.h"
-#include "resourcewatcher.h"
+
+#include <cmath>
 
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>
@@ -28,33 +29,40 @@
 #include <KIcon>
 #include <KImageCache>
 #include <KMimeType>
+#include <KService>
 #include <KIO/PreviewJob>
 
 #include <soprano/vocabulary.h>
 
-#include <Nepomuk/File>
-#include <Nepomuk/Query/AndTerm>
-#include <Nepomuk/Query/NegationTerm>
-#include <Nepomuk/Query/ResourceTerm>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
-#include <nepomuk/comparisonterm.h>
-#include <nepomuk/literalterm.h>
-#include <nepomuk/queryparser.h>
-#include <nepomuk/resourcetypeterm.h>
-#include <nepomuk/standardqueries.h>
+#include <Nepomuk2/File>
+#include <Nepomuk2/Tag>
+#include <Nepomuk2/Variant>
 
-#include <nepomuk/nfo.h>
-#include <nepomuk/nie.h>
+#include <Nepomuk2/Query/AndTerm>
+#include <Nepomuk2/Query/OrTerm>
+#include <Nepomuk2/Query/NegationTerm>
+#include <Nepomuk2/Query/ResourceTerm>
+#include <Nepomuk2/Query/ComparisonTerm>
+#include <Nepomuk2/Query/LiteralTerm>
+#include <Nepomuk2/Query/QueryParser>
+#include <Nepomuk2/Query/ResourceTypeTerm>
+#include <Nepomuk2/Query/StandardQuery>
+#include <Nepomuk2/ResourceWatcher>
 
-#include "kext.h"
+#include "kao.h"
 
+using namespace Nepomuk2::Vocabulary;
+using namespace Soprano::Vocabulary;
 
 MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
-      m_queryClient(0),
+      m_runningClients(0),
+      m_countQueryClient(0),
       m_limit(0),
-      m_screenshotSize(180, 120)
+      m_pageSize(30),
+      m_scoreResources(false),
+      m_thumbnailSize(180, 120),
+      m_thumbnailerPlugins(new QStringList(KIO::PreviewJob::availablePlugins()))
 {
     m_newEntriesTimer = new QTimer(this);
     m_newEntriesTimer->setSingleShot(true);
@@ -69,14 +77,16 @@ MetadataModel::MetadataModel(QObject *parent)
     //using the same cache of the engine, they index both by url
     m_imageCache = new KImageCache("plasma_engine_preview", 10485760);
 
-    m_watcher = new Nepomuk::ResourceWatcher(this);
+    m_watcher = new Nepomuk2::ResourceWatcher(this);
 
-    m_watcher->addProperty(QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#numericRating"));
-    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)),
-            this, SLOT(propertyChanged(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)));
+    m_watcher->addProperty(NAO::numericRating());
+    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk2::Resource,Nepomuk2::Types::Property,QVariant)),
+            this, SLOT(propertyChanged(Nepomuk2::Resource,Nepomuk2::Types::Property,QVariant)));
 
 
     QHash<int, QByteArray> roleNames;
+    roleNames[Qt::DisplayRole] = "display";
+    roleNames[Qt::DecorationRole] = "decoration";
     roleNames[Label] = "label";
     roleNames[Description] = "description";
     roleNames[Types] = "types";
@@ -89,13 +99,10 @@ MetadataModel::MetadataModel(QObject *parent)
     roleNames[Exists] = "exists";
     roleNames[Rating] = "rating";
     roleNames[NumericRating] = "numericRating";
-    roleNames[Symbols] = "symbols";
     roleNames[ResourceUri] = "resourceUri";
     roleNames[ResourceType] = "resourceType";
     roleNames[MimeType] = "mimeType";
     roleNames[Url] = "url";
-    roleNames[Topics] = "topics";
-    roleNames[TopicsNames] = "topicsNames";
     roleNames[Tags] = "tags";
     roleNames[TagsNames] = "tagsNames";
     setRoleNames(roleNames);
@@ -107,16 +114,16 @@ MetadataModel::~MetadataModel()
 }
 
 
-void MetadataModel::setQuery(const Nepomuk::Query::Query &query)
+void MetadataModel::setQuery(const Nepomuk2::Query::Query &query)
 {
     m_query = query;
 
-    if (Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
+    if (Nepomuk2::Query::QueryServiceClient::serviceAvailable()) {
         askRefresh();
     }
 }
 
-Nepomuk::Query::Query MetadataModel::query() const
+Nepomuk2::Query::Query MetadataModel::query() const
 {
     return m_query;
 }
@@ -151,6 +158,40 @@ void MetadataModel::setLimit(int limit)
 int MetadataModel::limit() const
 {
     return m_limit;
+}
+
+void MetadataModel::setScoreResources(bool score)
+{
+    if (m_scoreResources == score) {
+        return;
+    }
+
+    m_scoreResources = score;
+    askRefresh();
+    emit scoreResourcesChanged();
+}
+
+bool MetadataModel::scoreResources() const
+{
+    return m_scoreResources;
+}
+
+void MetadataModel::setLazyLoading(bool lazy)
+{
+    //lazy loading depends from the page zise, that is not directly user controllable
+    if (lazy == (m_pageSize > 0)) {
+        return;
+    }
+
+    //TODO: a way to control this? maybe from the available memory?
+    m_pageSize = lazy ? 30 : -1;
+    askRefresh();
+    emit lazyLoadingChanged();
+}
+
+bool MetadataModel::lazyLoading() const
+{
+    return (m_pageSize > 0);
 }
 
 
@@ -194,9 +235,9 @@ int MetadataModel::find(const QString &resourceUri)
 {
     int index = -1;
     int i = 0;
-    Nepomuk::Resource resToFind(resourceUri);
+    Nepomuk2::Resource resToFind = Nepomuk2::Resource::fromResourceUri(resourceUri);
 
-    foreach (const Nepomuk::Resource &res, m_resources) {
+    foreach (const Nepomuk2::Resource &res, m_resources) {
         if (res == resToFind) {
             index = i;
             break;
@@ -215,73 +256,87 @@ void MetadataModel::doQuery()
 
     //check if really all properties to build the query are null
     if (m_queryString.isEmpty() && resourceType().isEmpty() &&
-        mimeType().isEmpty() && activityId().isEmpty() &&
+        mimeTypeStrings().isEmpty() && activityId().isEmpty() &&
         tagStrings().size() == 0 && !startDate().isValid() &&
         !endDate().isValid() && minimumRating() <= 0 &&
         maximumRating() <= 0 && parameters->size() == 0) {
         return;
     }
-    setStatus(Waiting);
-    m_query = Nepomuk::Query::Query();
-    m_query.setQueryFlags(Nepomuk::Query::Query::WithoutFullTextExcerpt);
-    Nepomuk::Query::AndTerm rootTerm;
+    m_query = Nepomuk2::Query::Query();
+    m_query.setQueryFlags(Nepomuk2::Query::Query::NoResultRestrictions);
+    Nepomuk2::Query::AndTerm rootTerm;
 
     if (!m_queryString.isEmpty()) {
-        rootTerm.addSubTerm(Nepomuk::Query::QueryParser::parseQuery(m_queryString).term());
+        rootTerm.addSubTerm(Nepomuk2::Query::QueryParser::parseQuery(m_queryString).term());
     }
 
     if (!resourceType().isEmpty()) {
         //FIXME: more elegant
         QString type = resourceType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
 
         if (negation) {
-            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type))));
+            rootTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(Nepomuk2::Query::ResourceTypeTerm(propertyUrl(type))));
         } else {
-            rootTerm.addSubTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl(type)));
-            if (type != "nfo:Bookmark") {
+            rootTerm.addSubTerm(Nepomuk2::Query::ResourceTypeTerm(propertyUrl(type)));
+            /*if (type != "nfo:Bookmark") {
                 //FIXME: remove bookmarks if not explicitly asked for
-                rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(Nepomuk::Query::ResourceTypeTerm(propertyUrl("nfo:Bookmark"))));
-            }
+                rootTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(Nepomuk2::Query::ResourceTypeTerm(propertyUrl("nfo:Bookmark"))));
+            }*/
+        }
+        if (resourceType() == "nfo:Archive") {
+            Nepomuk2::Query::ComparisonTerm term(Nepomuk2::Vocabulary::NIE::mimeType(), Nepomuk2::Query::LiteralTerm("application/epub+zip"));
+
+            rootTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(term));
         }
     }
 
-    if (!mimeType().isEmpty()) {
-        QString type = mimeType();
-        bool negation = false;
-        if (type.startsWith("!")) {
-            type = type.remove(0, 1);
-            negation = true;
-        }
+    if (!mimeTypeStrings().isEmpty()) {
+        Nepomuk2::Query::OrTerm mimeTerm;
+        foreach (QString type, mimeTypeStrings()) {
+            if (type.isEmpty()) {
+                continue;
+            }
+            bool negation = false;
+            if (type.startsWith('!')) {
+                type = type.remove(0, 1);
+                negation = true;
+            }
 
-        Nepomuk::Query::ComparisonTerm term(Nepomuk::Vocabulary::NIE::mimeType(), Nepomuk::Query::LiteralTerm(type));
+            Nepomuk2::Query::ComparisonTerm term(Nepomuk2::Vocabulary::NIE::mimeType(), Nepomuk2::Query::LiteralTerm(type), Nepomuk2::Query::ComparisonTerm::Equal);
 
-        if (negation) {
-            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
-        } else {
-            rootTerm.addSubTerm(term);
+            if (negation) {
+                mimeTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(term));
+            } else {
+                mimeTerm.addSubTerm(term);
+            }
         }
+        rootTerm.addSubTerm(mimeTerm);
     }
 
 
     if (parameters && parameters->size() > 0) {
         foreach (const QString &key, parameters->keys()) {
             QString parameter = parameters->value(key).toString();
+            if (parameter.isEmpty()) {
+                continue;
+            }
             bool negation = false;
-            if (parameter.startsWith("!")) {
+            if (parameter.startsWith('!')) {
                 parameter = parameter.remove(0, 1);
                 negation = true;
             }
 
             //FIXME: Contains should work, but doesn't match for file names
-            Nepomuk::Query::ComparisonTerm term(propertyUrl(key), Nepomuk::Query::LiteralTerm(parameter), Nepomuk::Query::ComparisonTerm::Regexp);
+            // we must prepend and append "*" to the file name for the default Nepomuk match type (Contains) really work.
+            Nepomuk2::Query::ComparisonTerm term(propertyUrl(key), Nepomuk2::Query::LiteralTerm(parameter));
 
             if (negation) {
-                rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
+                rootTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(term));
             } else {
                 rootTerm.addSubTerm(term);
             }
@@ -292,16 +347,16 @@ void MetadataModel::doQuery()
     if (!activityId().isEmpty()) {
         QString activity = activityId();
         bool negation = false;
-        if (activity.startsWith("!")) {
+        if (activity.startsWith('!')) {
             activity = activity.remove(0, 1);
             negation = true;
         }
         kDebug() << "Asking for resources of activity" << activityId();
-        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KEXT::Activity());
-        Nepomuk::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk::Query::ResourceTerm(acRes));
+        Nepomuk2::Resource acRes(activity, Nepomuk2::Vocabulary::KAO::Activity());
+        Nepomuk2::Query::ComparisonTerm term(Soprano::Vocabulary::NAO::isRelated(), Nepomuk2::Query::ResourceTerm(acRes));
         term.setInverted(true);
         if (negation) {
-            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
+            rootTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(term));
         } else {
             rootTerm.addSubTerm(term);
         }
@@ -310,39 +365,80 @@ void MetadataModel::doQuery()
     foreach (const QString &tag, tagStrings()) {
         QString individualTag = tag;
         bool negation = false;
-        if (individualTag.startsWith("!")) {
+        if (individualTag.startsWith('!')) {
             individualTag = individualTag.remove(0, 1);
             negation = true;
         }
-        Nepomuk::Query::ComparisonTerm term( Soprano::Vocabulary::NAO::hasTag(),
-                                    Nepomuk::Query::LiteralTerm(individualTag));
+        Nepomuk2::Query::ComparisonTerm term( Soprano::Vocabulary::NAO::hasTag(),
+                                    Nepomuk2::Query::ResourceTerm(Nepomuk2::Tag(individualTag)));
         if (negation) {
-            rootTerm.addSubTerm(Nepomuk::Query::NegationTerm::negateTerm(term));
+            rootTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(term));
         } else {
             rootTerm.addSubTerm(term);
         }
     }
 
     if (startDate().isValid() || endDate().isValid()) {
-        rootTerm.addSubTerm(Nepomuk::Query::dateRangeQuery(startDate(), endDate()).term());
+        rootTerm.addSubTerm(Nepomuk2::Query::dateRangeQuery(startDate(), endDate()).term());
     }
 
     if (minimumRating() > 0) {
-        const Nepomuk::Query::LiteralTerm ratingTerm(minimumRating());
-        Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao:numericRating")) > ratingTerm;
+        const Nepomuk2::Query::LiteralTerm ratingTerm(minimumRating());
+        Nepomuk2::Query::ComparisonTerm term = Nepomuk2::Types::Property(propertyUrl("nao:numericRating")) > ratingTerm;
         rootTerm.addSubTerm(term);
     }
 
     if (maximumRating() > 0) {
-        const Nepomuk::Query::LiteralTerm ratingTerm(maximumRating());
-        Nepomuk::Query::ComparisonTerm term = Nepomuk::Types::Property(propertyUrl("nao:numericRating")) < ratingTerm;
+        const Nepomuk2::Query::LiteralTerm ratingTerm(maximumRating());
+        Nepomuk2::Query::ComparisonTerm term = Nepomuk2::Types::Property(propertyUrl("nao:numericRating")) < ratingTerm;
         rootTerm.addSubTerm(term);
     }
 
+    if (m_scoreResources) {
+        QString activity = activityId();
+        if (activity.startsWith('!')) {
+            activity = activity.remove(0, 1);
+        }
+
+        Nepomuk2::Query::ComparisonTerm term = Nepomuk2::Query::ComparisonTerm(propertyUrl("kao:targettedResource"), Nepomuk2::Query::Term());
+        term.setVariableName("c");
+        term.setInverted(true);
+
+        Nepomuk2::Query::AndTerm andTerm = Nepomuk2::Query::AndTerm();
+        Nepomuk2::Query::ResourceTypeTerm typeTerm(KAO::ResourceScoreCache());
+        andTerm.addSubTerm(typeTerm);
+        if (!activity.isEmpty()) {
+            Nepomuk2::Query::ComparisonTerm usedActivityTerm(propertyUrl("kao:usedActivity"),
+                                        Nepomuk2::Query::ResourceTerm(Nepomuk2::Resource(activity, Nepomuk2::Vocabulary::KAO::Activity()))
+                                                           );
+            andTerm.addSubTerm(usedActivityTerm);
+        }
+        Nepomuk2::Query::ComparisonTerm cachedScoreTerm(propertyUrl("kao:cachedScore"),
+                                        Nepomuk2::Query::Term());
+        cachedScoreTerm.setVariableName("score");
+        cachedScoreTerm.setSortWeight(1, Qt::DescendingOrder);
+        andTerm.addSubTerm(cachedScoreTerm);
+
+        term.setSubTerm(andTerm);
+        rootTerm.addSubTerm(term);
+    }
+
+    //bind directly some properties, to avoid calling hyper inefficient resource::property
+    /*{
+        m_query.addRequestProperty(Nepomuk2::Query::Query::RequestProperty(NIE::url()));
+        m_query.addRequestProperty(Nepomuk2::Query::Query::RequestProperty(NAO::hasSymbol()));
+        m_query.addRequestProperty(Nepomuk2::Query::Query::RequestProperty(NIE::mimeType()));
+        m_query.addRequestProperty(Nepomuk2::Query::Query::RequestProperty(NAO::description()));
+        m_query.addRequestProperty(Nepomuk2::Query::Query::RequestProperty(Xesam::description()));
+        m_query.addRequestProperty(Nepomuk2::Query::Query::RequestProperty(RDFS::comment()));
+    }*/
 
     int weight = m_sortBy.length() + 1;
     foreach (const QString &sortProperty, m_sortBy) {
-        Nepomuk::Query::ComparisonTerm sortTerm(propertyUrl(sortProperty), Nepomuk::Query::Term());
+        if (sortProperty.isEmpty()) {
+            continue;
+        }
+        Nepomuk2::Query::ComparisonTerm sortTerm(propertyUrl(sortProperty), Nepomuk2::Query::Term());
         sortTerm.setSortWeight(weight, m_sortOrder);
         rootTerm.addSubTerm(sortTerm);
         --weight;
@@ -358,37 +454,174 @@ void MetadataModel::doQuery()
     endResetModel();
     emit countChanged();
 
-    delete m_queryClient;
-    m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
+    delete m_countQueryClient;
+    //qDeleteAll is broken in 4.8
+    foreach (Nepomuk2::Query::QueryServiceClient *client, m_queryClients) {
+        delete client;
+    }
+    m_queryClients.clear();
+    m_pagesForClient.clear();
+    m_validIndexForPage.clear();
+    m_queryClientsHistory.clear();
+    m_cachedResources.clear();
+    m_runningClients = 0;
+    m_countQueryClient = new Nepomuk2::Query::QueryServiceClient(this);
 
-    connect(m_queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
-            this, SLOT(entriesRemoved(const QList<QUrl> &)));
-    connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
+    connect(m_countQueryClient, SIGNAL(newEntries(QList<Nepomuk2::Query::Result>)),
+            this, SLOT(countQueryResult(QList<Nepomuk2::Query::Result>)));
 
-    //FIXME: safe usually without limit?
     if (m_limit > 0) {
         m_query.setLimit(m_limit);
     }
 
-    m_queryClient->query(m_query);
-}
+    m_countQueryClient->sparqlQuery(m_query.toSparqlQuery(Nepomuk2::Query::Query::CreateCountQuery));
 
-void MetadataModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
-{
-    setStatus(Running);
-    foreach (Nepomuk::Query::Result res, entries) {
-        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-        //kDebug() << "Result label:" << res.genericLabel();
-        Nepomuk::Resource resource = res.resource();
-        if (!resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).isValid()) {
-            continue;
-        }
-        m_resourcesToInsert << resource;
+    //if page size is invalid, fetch all
+    if (m_pageSize < 1) {
+        fetchResultsPage(0);
     }
 
-    if (!m_newEntriesTimer->isActive() && !m_resourcesToInsert.isEmpty()) {
+    //FIXME
+    // Nepomuk2::Query::QueryServiceClient does not emit finishedListing signal when there is no new entries (no matches).
+    QTimer::singleShot(5000, this, SLOT(finishedListing()));
+}
+
+void MetadataModel::fetchResultsPage(int page)
+{
+    Nepomuk2::Query::QueryServiceClient *client = new Nepomuk2::Query::QueryServiceClient(this);
+
+    m_queryClients[page] = client;
+    m_pagesForClient[client] = page;
+    m_validIndexForPage[page] = 0;
+
+    Nepomuk2::Query::Query pageQuery(m_query);
+    if (m_pageSize > 0) {
+        pageQuery.setOffset(m_pageSize*page);
+        pageQuery.setLimit(m_pageSize);
+    }
+
+    client->query(pageQuery);
+
+    connect(client, SIGNAL(newEntries(QList<Nepomuk2::Query::Result>)),
+            this, SLOT(newEntries(QList<Nepomuk2::Query::Result>)));
+    connect(client, SIGNAL(entriesRemoved(QList<QUrl>)),
+            this, SLOT(entriesRemoved(QList<QUrl>)));
+    connect(client, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
+
+    m_queryClientsHistory << client;
+    ++m_runningClients;
+}
+
+void MetadataModel::countQueryResult(const QList< Nepomuk2::Query::Result > &entries)
+{
+    setRunning(true);
+    //this should be always 1
+    foreach (const Nepomuk2::Query::Result &res, entries) {
+        int count = res.additionalBinding(QLatin1String("cnt")).variant().toInt();
+
+        if (count < m_resources.size()) {
+            beginRemoveRows(QModelIndex(), count-1, m_resources.size()-1);
+            m_resources.resize(count);
+            endRemoveRows();
+        } else if (count > m_resources.size()) {
+            beginInsertRows(QModelIndex(), m_resources.size(), count-1);
+            m_resources.resize(count);
+            endInsertRows();
+        }
+    }
+}
+
+void MetadataModel::newEntries(const QList< Nepomuk2::Query::Result > &entries)
+{
+    const int page = m_pagesForClient.value(qobject_cast<Nepomuk2::Query::QueryServiceClient *>(sender()));
+
+    foreach (const Nepomuk2::Query::Result &res, entries) {
+        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+        //kDebug() << "Result label:" << res.genericLabel();
+
+        Nepomuk2::Resource resource = res.resource();
+        if (resource.property(propertyUrl("nie:url")).toString().isEmpty()) {
+            continue;
+        }
+        m_resourcesToInsert[page] << resource;
+
+        //pre-popuplating of the cache to avoid accessing properties directly
+        //label is a bit too complex to take from query
+        if (resource.hasType(Nepomuk2::Vocabulary::NFO::PaginatedTextDocument())) { // pdf files
+            m_cachedResources[resource][Label] = resource.property(Nepomuk2::Vocabulary::NFO::fileName()).toString();
+            //kDebug() << "Using label" << m_cachedResources[resource][Label] << "instead of" << resource.genericLabel();
+        } else {
+            m_cachedResources[resource][Label] = resource.genericLabel();
+        }
+
+        m_cachedResources[resource][Description] = resource.description();
+
+        m_cachedResources[resource][Url] = resource.property(propertyUrl("nie:url")).toString();
+
+        QStringList types;
+        foreach (const QUrl &u, resource.types()) {
+            types << u.toString();
+        }
+        m_cachedResources[resource][Types] = types;
+
+        //FIXME: symbols seems broken on Mer
+        //indagate after PA3
+        if (0&&!resource.symbols().isEmpty()) {
+            m_cachedResources[resource][Icon] = resource.symbols().first();
+        } else {
+            //if it's an application, fetch the icon from the desktop file
+            Nepomuk2::Types::Class resClass(resource.type());
+            if (resClass.label() == "Application") {
+                KService::Ptr serv = KService::serviceByDesktopPath(m_cachedResources[resource][Url].toUrl().path());
+                if (serv) {
+                    m_cachedResources[resource][Icon] = serv->icon();
+                } else {
+                    m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
+                }
+            } else {
+                m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
+            }
+        }
+
+        //those seems to not be possible avoiding to access the resource
+        m_cachedResources[resource][ClassName] = resource.type().toString().section( QRegExp( "[#:]" ), -1 );
+        m_cachedResources[resource][ResourceType] = resource.type();
+        m_cachedResources[resource][IsFile] = resource.isFile();
+       // m_cachedResources[resource][MimeType] = resource.mimeType();
+        m_cachedResources[resource][MimeType] = resource.property(propertyUrl("nie:mimeType")).toString();
+
+        //FIXME: The most complicated of all, this should really be simplified
+        {
+            //FIXME: a more elegant way is needed
+            QString genericClassName = m_cachedResources.value(resource).value(ClassName).toString();
+            //FIXME: most bookmarks are Document too, so Bookmark wins
+            if (m_cachedResources.value(resource).value(Label).value<QList<QUrl> >().contains(NFO::Bookmark())) {
+                m_cachedResources[resource][GenericClassName] = "Bookmark";
+
+            } else {
+                Nepomuk2::Types::Class resClass(resource.type());
+                foreach (const Nepomuk2::Types::Class &parentClass, resClass.parentClasses()) {
+                    const QString label = parentClass.label();
+                    if (label == "Document" ||
+                        label == "Audio" ||
+                        label == "Video" ||
+                        label == "Image" ||
+                        label == "Contact") {
+                        genericClassName = label;
+                        break;
+                    //two cases where the class is 2 levels behind the level of generalization we want
+                    } else if (parentClass.label() == "RasterImage") {
+                        genericClassName = "Image";
+                    } else if (parentClass.label() == "TextDocument") {
+                        genericClassName = "Document";
+                    }
+                }
+                m_cachedResources[resource][GenericClassName] = genericClassName;
+            }
+        }
+    }
+
+    if (!m_newEntriesTimer->isActive() && !m_resourcesToInsert[page].isEmpty()) {
         m_newEntriesTimer->start(200);
     }
 }
@@ -399,32 +632,70 @@ void MetadataModel::newEntriesDelayed()
         return;
     }
 
-    beginInsertRows(QModelIndex(), m_resources.count(), m_resources.count()+m_resourcesToInsert.count()-1);
+    m_elapsedTime.start();
+    QHash<int, QList<Nepomuk2::Resource> >::const_iterator i;
+    for (i = m_resourcesToInsert.constBegin(); i != m_resourcesToInsert.constEnd(); ++i) {
+        const QList<Nepomuk2::Resource> resourcesToInsert = i.value();
 
-    m_watcher->stop();
+        m_watcher->stop();
 
-    foreach (Nepomuk::Resource res, m_resourcesToInsert) {
-        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-        //kDebug() << "Result label:" << res.genericLabel();
-        m_uriToResourceIndex[res.resourceUri()] = m_resources.count();
-        m_resources << res;
-        m_watcher->addResource(res);
+        int pageStart = 0;
+        if (m_pageSize > 0) {
+            pageStart = i.key() * m_pageSize;
+        }
+        int startOffset = m_validIndexForPage.value(i.key());
+        int offset = startOffset;
+
+        //if new result arrive on an already running query, they may arrive before countQueryResult
+        if (m_resources.size() < pageStart + startOffset + 1) {
+            beginInsertRows(QModelIndex(), m_resources.size(), pageStart + startOffset);
+            m_resources.resize(pageStart + startOffset + 1);
+            endInsertRows();
+        }
+        //this happens only when m_validIndexForPage has been invalidate by row removal
+        if (!m_validIndexForPage.contains(i.key()) && m_resources[pageStart + startOffset].isValid()) {
+            while (startOffset < m_resources.size() && m_resources[pageStart + startOffset].isValid()) {
+                ++startOffset;
+                ++offset;
+            }
+        }
+
+        foreach (const Nepomuk2::Resource &res, resourcesToInsert) {
+            //kDebug() << "Result!!!" << res.genericLabel() << res.type();
+            //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
+
+            m_uriToResourceIndex[res.uri()] = pageStart + offset;
+            //there can be new results before the count query gets updated
+            if (pageStart + offset < m_resources.size()) {
+                m_resources[pageStart + offset] = res;
+                m_watcher->addResource(res);
+                ++offset;
+            } else {
+                beginInsertRows(QModelIndex(), m_resources.size(), pageStart + offset);
+                m_resources.resize(pageStart + offset + 1);
+                m_resources[pageStart + offset] = res;
+                m_watcher->addResource(res);
+                ++offset;
+                endInsertRows();
+            }
+        }
+
+        m_validIndexForPage[i.key()] = offset;
+
+        m_watcher->start();
+        emit dataChanged(createIndex(pageStart + startOffset, 0),
+                         createIndex(pageStart + startOffset + resourcesToInsert.count()-1, 0));
     }
-
-    m_watcher->start();
-
+    kDebug() << "Elapsed time populating the model" << m_elapsedTime.elapsed();
     m_resourcesToInsert.clear();
-
-    endInsertRows();
-    emit countChanged();
 }
 
-void MetadataModel::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
+void MetadataModel::propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val)
 {
     Q_UNUSED(prop)
     Q_UNUSED(val)
 
-    const int index = m_uriToResourceIndex.value(res.resourceUri());
+    const int index = m_uriToResourceIndex.value(res.uri());
     if (index >= 0) {
         emit dataChanged(createIndex(index, 0, 0), createIndex(index, 0, 0));
     }
@@ -447,6 +718,9 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
         prevIndex = index;
     }
 
+    //all the page indexes may be invalid now
+    m_validIndexForPage.clear();
+
     QMap<int, int>::const_iterator i = toRemove.constEnd();
 
     while (i != toRemove.constBegin()) {
@@ -463,7 +737,7 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
 
     //FIXME: this loop makes all the optimizations useless, get rid either of it or the optimizations
     for (int i = 0; i < m_resources.count(); ++i) {
-        m_uriToResourceIndex[m_resources[i].resourceUri()] = i;
+        m_uriToResourceIndex[m_resources[i].uri()] = i;
     }
 
     emit countChanged();
@@ -471,7 +745,23 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
 
 void MetadataModel::finishedListing()
 {
-    setStatus(Idle);
+    m_runningClients = qMax(m_runningClients - 1, 0);
+
+    if (m_runningClients <= 0) {
+        setRunning(false);
+
+        if (m_queryClientsHistory.count() > 10) {
+            for (int i = 0; i < m_queryClientsHistory.count() - 10; ++i) {
+                Nepomuk2::Query::QueryServiceClient *client = m_queryClientsHistory.first();
+                m_queryClientsHistory.pop_front();
+
+                int page = m_pagesForClient.value(client);
+                m_queryClients.remove(page);
+                m_pagesForClient.remove(client);
+                delete client;
+            }
+        }
+    }
 }
 
 
@@ -483,149 +773,68 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const Nepomuk::Resource &resource = m_resources[index.row()];
+    const Nepomuk2::Resource &resource = m_resources[index.row()];
+
+
+    if (!resource.isValid() && m_pageSize > 0 && !m_queryClients.contains(floor(index.row()/m_pageSize))) {
+        //HACK
+        const_cast<MetadataModel *>(this)->fetchResultsPage(floor(index.row()/m_pageSize));
+        return QVariant();
+    //m_pageSize <= 0, means fetch all
+    } else if (!resource.isValid() && !m_queryClients.contains(0)) {
+        //HACK
+        const_cast<MetadataModel *>(this)->fetchResultsPage(0);
+        return QVariant();
+    } else if (!resource.isValid()) {
+        return QVariant();
+    }
+
+    //We're lucky: was cached
+    if (m_cachedResources.value(resource).contains(role)) {
+        return m_cachedResources.value(resource).value(role);
+    }
 
     switch (role) {
     case Qt::DisplayRole:
     case Label:
-        return resource.genericLabel();
-    case Description:
-        return resource.genericDescription();
-    case Types: {
-        QStringList types;
-        foreach (const QUrl &u, resource.types()) {
-            types << u.toString();
-        }
-        return types;
-    }
-    case ClassName:
-        return resource.className();
-    case GenericClassName: {
-        //FIXME: a more elegant way is needed
-        QString genericClassName = resource.className();
-        //FIXME: most bookmarks are Document too, so Bookmark wins
-        if (resource.types().contains(QUrl::fromEncoded("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark"))) {
-            return "Bookmark";
-        }
-        Nepomuk::Types::Class resClass(resource.resourceType());
-        foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
-            if (parentClass.label() == "Document" ||
-                parentClass.label() == "Audio" ||
-                parentClass.label() == "Video" ||
-                parentClass.label() == "Image" ||
-                parentClass.label() == "Contact") {
-                genericClassName = parentClass.label();
-                break;
-            //two cases where the class is 2 levels behind the level of generalization we want
-            } else if (parentClass.label() == "RasterImage") {
-                genericClassName = "Image";
-            } else if (parentClass.label() == "TextDocument") {
-                genericClassName = "Document";
-            }
-        }
-        return genericClassName;
-    }
-    case Qt::DecorationRole: {
-        QString icon = resource.genericIcon();
-        if (icon.isEmpty() && resource.isFile()) {
-            KUrl url = resource.toFile().url();
-            if (!url.isEmpty()) {
-                icon = KMimeType::iconNameForUrl(url);
-            }
-        }
-        if (icon.isEmpty()) {
-            // use resource types to find a suitable icon.
-            //TODO
-            icon = retrieveIconName(QStringList(resource.className()));
-            //kDebug() << "symbol" << icon;
-        }
-        if (icon.split(",").count() > 1) {
-            kDebug() << "More than one icon!" << icon;
-            icon = icon.split(",").last();
-        }
-        return KIcon(icon);
-    }
+        return m_cachedResources.value(resource).value(Label);
+    case Qt::DecorationRole: 
+        return KIcon(m_cachedResources.value(resource).value(Icon).toString());
     case HasSymbol:
-    case Icon: {
-        QString icon = resource.genericIcon();
-        if (icon.isEmpty() && resource.isFile()) {
-            KUrl url = resource.toFile().url();
-            if (!url.isEmpty()) {
-                icon = KMimeType::iconNameForUrl(url);
-            }
-        }
-        if (icon.isEmpty()) {
-            // use resource types to find a suitable icon.
-            //TODO
-            icon = retrieveIconName(QStringList(resource.className()));
-            //kDebug() << "symbol" << icon;
-        }
-        if (icon.split(",").count() > 1) {
-            kDebug() << "More than one icon!" << icon;
-            icon = icon.split(",").last();
-        }
-        return icon;
-    }
-    case Thumbnail:
-        if (resource.isFile() && resource.toFile().url().isLocalFile()) {
-            KUrl file(resource.toFile().url());
-            QImage preview = QImage(m_screenshotSize, QImage::Format_ARGB32_Premultiplied);
+    case Icon:
+        return m_cachedResources.value(resource).value(Icon).toString();
+    case Thumbnail: {
+        KUrl url(m_cachedResources.value(resource).value(Url).toString());
+        if (m_cachedResources.value(resource).value(IsFile).toBool() && url.isLocalFile()) {
+            QImage preview = QImage(m_thumbnailSize, QImage::Format_ARGB32_Premultiplied);
 
-            if (m_imageCache->findImage(file.prettyUrl(), &preview)) {
+            if (m_imageCache->findImage(url.prettyUrl(), &preview)) {
                 return preview;
             }
 
             m_previewTimer->start(100);
-            const_cast<MetadataModel *>(this)->m_filesToPreview[file] = QPersistentModelIndex(index);
+            const_cast<MetadataModel *>(this)->m_filesToPreview[url] = QPersistentModelIndex(index);
         }
         return QVariant();
-    case IsFile:
-        return resource.isFile();
+    }
     case Exists:
         return resource.exists();
     case Rating:
         return resource.rating();
     case NumericRating:
-        return resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#numericRating")).toString();
-    case Symbols:
-        return resource.symbols();
+        return resource.property(NAO::numericRating()).toString();
     case ResourceUri:
-        return resource.resourceUri();
-    case ResourceType:
-        return resource.resourceType();
-    case MimeType:
-        return resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#mimeType")).toString();
-    case Url: {
-        if (resource.isFile() && resource.toFile().url().isLocalFile()) {
-            return resource.toFile().url().prettyUrl();
-        } else {
-            return resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
-        }
-    }
-    case Topics: {
-        QStringList topics;
-        foreach (const Nepomuk::Resource &u, resource.topics()) {
-            topics << u.resourceUri().toString();
-        }
-        return topics;
-    }
-    case TopicsNames: {
-        QStringList topicNames;
-        foreach (const Nepomuk::Resource &u, resource.topics()) {
-            topicNames << u.genericLabel();
-        }
-        return topicNames;
-    }
+        return resource.uri();
     case Tags: {
         QStringList tags;
-        foreach (const Nepomuk::Tag &tag, resource.tags()) {
-            tags << tag.resourceUri().toString();
+        foreach (const Nepomuk2::Tag &tag, resource.tags()) {
+            tags << tag.uri().toString();
         }
         return tags;
     }
     case TagsNames: {
         QStringList tagNames;
-        foreach (const Nepomuk::Tag &tag, resource.tags()) {
+        foreach (const Nepomuk2::Tag &tag, resource.tags()) {
             tagNames << tag.genericLabel();
         }
         return tagNames;
@@ -635,6 +844,18 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     }
 }
 
+QVariantHash MetadataModel::get(int row) const
+{
+    QModelIndex idx = index(row, 0);
+    QVariantHash hash;
+
+    QHash<int, QByteArray>::const_iterator i;
+    for (i = roleNames().constBegin(); i != roleNames().constEnd(); ++i) {
+        hash[i.value()] = data(idx, i.key());
+    }
+
+    return hash;
+}
 
 void MetadataModel::delayedPreview()
 {
@@ -656,13 +877,15 @@ void MetadataModel::delayedPreview()
     }
 
     if (list.size() > 0) {
-        KIO::PreviewJob* job = KIO::filePreview(list, m_screenshotSize);
-        job->setIgnoreMaximumSize(true);
+
+
+        KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, m_thumbnailerPlugins);
+        //job->setIgnoreMaximumSize(true);
         kDebug() << "Created job" << job;
-        connect(job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-                this, SLOT(showPreview(const KFileItem&, const QPixmap&)));
-        connect(job, SIGNAL(failed(const KFileItem&)),
-                this, SLOT(previewFailed(const KFileItem&)));
+        connect(job, SIGNAL(gotPreview(KFileItem,QPixmap)),
+                this, SLOT(showPreview(KFileItem,QPixmap)));
+        connect(job, SIGNAL(failed(KFileItem)),
+                this, SLOT(previewFailed(KFileItem)));
     }
 
     m_filesToPreview.clear();
@@ -695,6 +918,17 @@ void MetadataModel::sort(int column, Qt::SortOrder order)
 
     beginResetModel();
     endResetModel();
+}
+
+void MetadataModel::setThumbnailSize(const QSize& size)
+{
+    m_thumbnailSize = size;
+    emit thumbnailSizeChanged();
+}
+
+QSize MetadataModel::thumbnailSize() const
+{
+    return m_thumbnailSize;
 }
 
 #include "metadatamodel.moc"

@@ -1,21 +1,11 @@
 project(metadataengine)
 
-# disable deprecated libnepomuk stuff for less compiler warnings
-add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
-
-find_package(Nepomuk REQUIRED)
-
-find_package(Soprano)
-    macro_log_feature(Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net"
-    TRUE "${SOPRANO_MIN_VERSION}" "Soprano is needed for Nepomuk"
-)
-
-include(SopranoAddOntology)
-
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}/ontologies
 )
+
+find_package(NepomukCore REQUIRED)
 
 set(metadataengine_SRCS
     metadataengine.cpp
@@ -24,13 +14,9 @@ set(metadataengine_SRCS
     metadataservice/metadataservice.cpp
 )
 
-soprano_add_ontology(
-    metadataengine_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/ontologies/kext.trig
-    "KEXT" "Nepomuk::Vocabulary" "trig"
-)
+add_kao_ontology(metadataengine_SRCS)
 
-nepomuk_add_ontology_classes (metadataengine_SRCS
+nepomuk2_add_ontology_classes (metadataengine_SRCS
     ONTOLOGIES
     ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
     CLASSES
@@ -44,13 +30,12 @@ target_link_libraries(plasma_engine_active_metadata
     ${KDE4_KDECORE_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4_KIO_LIBS}
-    ${NEPOMUK_LIBRARIES}
+    ${NEPOMUK_CORE_LIBRARY}
     ${NEPOMUK_QUERY_LIBRARIES}
     ${SOPRANO_LIBRARIES}
     ${SOPRANO_CLIENT_LIBRARIES}
     ${KACTIVITIES_LIBRARY}
     ontologies
-    nepomukdatamanagement
 )
 
 install(TARGETS plasma_engine_active_metadata DESTINATION ${PLUGIN_INSTALL_DIR})

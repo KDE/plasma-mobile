@@ -42,20 +42,22 @@
 import QtQuick 1.0
 import org.kde.kdewebkit 0.1
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 import "content"
 
-Rectangle {
+Image {
     id: webBrowser
     objectName: "webBrowser"
+    source: "image://appbackgrounds/contextarea"
+    fillMode: Image.Tile
 
     property string urlString : ""
     property alias url: webView.url
     property alias title: webView.title
 
     width: 800; height: 600
-    color: theme.backgroundColor
 
     PlasmaCore.Theme {
         id: theme
@@ -66,11 +68,23 @@ Rectangle {
         name: "org.kde.active.webbrowser"
     }
 
-    MobileComponents.ResourceInstance {
+    PlasmaExtras.ResourceInstance {
         id: resourceInstance
         uri: webBrowser.url
         mimetype: "text/x-html"
         title: webView.title
+    }
+
+    //FIXME: this will have to be removed
+    Timer {
+        interval: 100
+        running: true
+        onTriggered: backConnection.target = application.action("back")
+    }
+    Connections {
+        id: backConnection
+        target: application.action("back")
+        onTriggered: webView.back.trigger()
     }
 
     FlickableWebView {

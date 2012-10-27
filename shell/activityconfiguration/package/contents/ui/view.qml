@@ -17,37 +17,41 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.qtextracomponents 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-MobileComponents.Sheet {
+PlasmaComponents.Sheet {
     id: main
     signal closeRequested
 
-    title: (configInterface.activityName == "") ? i18n("Create new activity") : i18n("Activity configuration")
-    acceptButtonText: {
-        if (!encryptedSwitch.checked || encryptedSwitch.checked == internal.activityEncrypted) {
-            (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save changes")
-        } else {
-            (configInterface.activityName == "") ? i18n("Enter password and create activity") : i18n("Enter password and save changes")
-        }
+    title: (configInterface.activityName == "") ? i18n("Create New Activity") : i18n("Edit Activity")
+    acceptButtonText: (configInterface.activityName == "") ? i18n("Create activity") : i18n("Save Changes")
+
+    rejectButtonText: i18n("Cancel")
+    acceptButton.enabled: !activityNameEdit.visible || (activityNameEdit.text != "" && !nameExists())
+
+    Timer {
+        running: true
+        interval: 100
+        onTriggered: open()
     }
-    rejectButtonText: i18n("Close")
-    acceptButton.enabled: activityNameEdit.text != "" && !nameExists()
 
-    Component.onCompleted: open()
-
+    //used only toexplicitly close the keyboard
+    TextInput { id: inputPanelController; width:0; height:0}
     QtObject {
         id: internal
         property bool activityEncrypted
     }
 
     onStatusChanged: {
-        if (status == PlasmaComponents.DialogStatus.Closed) {
+        if (status == PlasmaComponents.DialogStatus.Open) {
+            activityNameEdit.forceActiveFocus()
+        } else if (status == PlasmaComponents.DialogStatus.Closed) {
             closeRequested()
+            inputPanelController.closeSoftwareInputPanel()
         }
     }
 
@@ -56,16 +60,28 @@ MobileComponents.Sheet {
         if (activityNameEdit.text == "" || nameExists()) {
             return
         }
+
+        //console.log("Creating activity " + activityNameEdit.text)
+
         configInterface.activityName = activityNameEdit.text
         configInterface.wallpaperIndex = wallpapersList.currentIndex
 
-        var service = activitySource.serviceForSource(configInterface.activityId)
-        var operation = service.operationDescription("setEncrypted")
-        operation["Encrypted"] = encryptedSwitch.checked
-        service.startOperationCall(operation)
+        configInterface.encrypted = encryptedSwitch.checked
+    }
+
+    // Virtual keyboard can emit the accepted signal several times.
+    // For example, try pressing the RETURN key several times as fast as you can when creating one activity.
+    Item {
+        id: privateItem
+        property bool creatingActivity: false
     }
 
     onAccepted: {
+        if (privateItem.creatingActivity) {
+            //console.log("Already creating activity")
+            return;
+        }
+        privateItem.creatingActivity = true
         saveConfiguration()
     }
 
@@ -90,8 +106,6 @@ MobileComponents.Sheet {
             for (var i in data) {
                 if (data[i]["Current"]) {
                     currentActivity = data[i]["Name"]
-                    encryptedSwitch.checked = activitySource.data[i]["Encrypted"]
-                    internal.activityEncrypted = activitySource.data[i]["Encrypted"]
                 }
                 names.push(data[i]["Name"])
             }
@@ -123,38 +137,93 @@ MobileComponents.Sheet {
     }
 
     content: [
-        Grid {
+        Row {
             id: nameRow
-            columns: 2
-            rows: 2
+            spacing: 2
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.topMargin
             }
             visible: configInterface.activityNameConfigurable
+            property int sideWidth: Math.max(activityNameLabel.paintedWidth, encryptRow.implicitWidth)
             PlasmaComponents.Label {
-                color: theme.textColor
-                text: i18n("Activity name:")
-                anchors.verticalCenter: activityNameEdit.verticalCenter
-                anchors.right: activityNameEdit.left
+                id: activityNameLabel
+                width: nameRow.sideWidth
+                text: i18n("Name:")
+                horizontalAlignment: Text.AlignRight
+                anchors.verticalCenter: parent.verticalCenter
             }
             PlasmaComponents.TextField {
                 id: activityNameEdit
                 objectName: "activityNameEdit"
-                Component.onCompleted: activityNameEdit.forceActiveFocus()
+                anchors.verticalCenter: parent.verticalCenter
+                clearButtonShown: true
                 Keys.onReturnPressed: {
-                    saveConfiguration()
                     accept()
                 }
             }
-        },
-        PlasmaComponents.Label {
-            anchors {
-                left: nameRow.right
-                verticalCenter: nameRow.verticalCenter
+            Row {
+                id: encryptRow
+                width: nameRow.sideWidth
+                spacing: 2
+                visible: false
+
+                //spacer
+                Item {
+                    width: 4
+                    height: 4
+                }
+                PlasmaComponents.ToolButton {
+                    iconSource: "document-decrypt"
+                    width: theme.mediumIconSize+5
+                    height: width
+                    onClicked: encryptedSwitch.checked = false
+                }
+                PlasmaComponents.Switch {
+                    id: encryptedSwitch
+                    checked: configInterface.encrypted
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                PlasmaComponents.ToolButton {
+                    iconSource: "document-encrypt"
+                    width: theme.mediumIconSize+5
+                    height: width
+                    onClicked: encryptedSwitch.checked = true
+                }
             }
-            text: i18n("An activity with this name already exists")
-            opacity: nameExists() ? 1 : 0
+        },
+        PlasmaCore.FrameSvgItem {
+            z: 9999
+            anchors {
+                horizontalCenter: nameRow.horizontalCenter
+                top: nameRow.bottom
+            }
+            opacity: (nameExists() && activityNameEdit.visible) ? 1 : 0
+            imagePath: "dialogs/background"
+            width: errorLabel.width + margins.left + margins.right
+            height: errorLabel.height + margins.top + margins.bottom
+            PlasmaCore.SvgItem {
+                svg: PlasmaCore.Svg {
+                    id: backgroundSvg
+                    imagePath: "dialogs/background"
+                }
+                elementId: "baloon-tip-top"
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.top
+                    bottomMargin: -backgroundSvg.elementSize("hint-top-shadow").height
+
+                }
+                width: naturalSize.width
+                height: naturalSize.height
+            }
+            PlasmaComponents.Label {
+                id: errorLabel
+                x: parent.margins.left
+                y: parent.margins.top
+                text: i18n("An activity with this name already exists")
+                opacity: nameExists() ? 1 : 0
+            }
             Behavior on opacity {
                 NumberAnimation {
                     duration: 250
@@ -169,35 +238,18 @@ MobileComponents.Sheet {
                 currentPage = Math.max(0, Math.floor(currentIndex/pageSize))
             }
 
-            property int delegateWidth: 148
-            property int delegateHeight: 130
+            property int delegateWidth: theme.defaultFont.mSize.width * 20
+            property int delegateHeight: delegateWidth/1.6 + theme.defaultFont.mSize.height*2
             anchors {
                 top: nameRow.bottom
                 left: parent.left
-                bottom: encryptRow.top
+                bottom: parent.bottom
                 right: parent.right
                 topMargin: 6
                 bottomMargin: 12
             }
             model: configInterface.wallpaperModel
             delegate: WallpaperDelegate {}
-        },
-        Row {
-            id: encryptRow
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
-            }
-
-            PlasmaComponents.Label {
-                id: encryptLabel
-                color: theme.textColor
-                text: i18n("Lock as private:")
-                anchors.right: encryptedSwitch.left
-            }
-            PlasmaComponents.Switch {
-                id: encryptedSwitch
-            }
         }
     ]
 
@@ -216,6 +268,7 @@ MobileComponents.Sheet {
             } else {
                 activityNameEdit.text = configInterface.activityName
             }
+            privateItem.creatingActivity = false
         }
     }
     Timer {

@@ -41,27 +41,29 @@ int main(int argc, char **argv)
                      about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
 
-    KService::Ptr service = KService::serviceByDesktopName("active-web-browser");
-    const QString homeUrl = service ? service->property("X-KDE-PluginInfo-Website", QVariant::String).toString() : HOME_URL;
+
     KCmdLineOptions options;
-    options.add("+[url]", ki18n( "URL to open" ), homeUrl.toLocal8Bit());
-#ifndef QT_NO_OPENGL
-    options.add("opengl", ki18n("use a QGLWidget for the viewport"));
-#endif
+    options.add("+[url]", ki18n( "URL to open" ), QByteArray());
+
     KCmdLineArgs::addCmdLineOptions(options);
 
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
     ActiveWebbrowser app(args);
 
-    bool useGL = args->isSet("opengl");
 
-    if (!useGL) {
-        //use plasmarc to share this with plasma-windowed
-        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
-        useGL = cg.readEntry("UseOpenGl", true);
+    //use plasmarc to share this with plasma-windowed
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
+    bool useGL = cg.readEntry("UseOpenGl", true);
+
+    QString url;
+    if (args->count()) {
+        url = args->arg(0);
+    } else {
+        KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+        KConfigGroup _config = KConfigGroup(ptr, "webbrowser");
+        url = _config.readEntry("startPage", QString());
     }
-    const QString url = args->count() ? args->arg(0) : homeUrl;
 
     app.setUseGL(useGL);
     app.newWindow(url);

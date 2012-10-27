@@ -29,6 +29,20 @@ Item {
 
     z: PathView.z
     property string current: model["Current"]
+    property int deleteDialogOpenedAtIndex: mainView.deleteDialogOpenedAtIndex
+    property int delegateIndex: index
+
+    onDeleteDialogOpenedAtIndexChanged: {
+        // if necessary close this ActivityDelegate's deleteDialog if a deleteDialog from another ActivityDelegate has been opened.
+        if (deleteDialogOpenedAtIndex != index && deleteButtonParent.confirmationDialog != null) {
+            deleteButtonParent.confirmationDialog.scale = 0
+            deleteButtonParent.confirmationDialog.destroy()
+            deleteButtonParent.confirmationDialog = null
+
+            // restore this ActivityDelegate's opacity to the value before this ActivityDelegate's deleteDialog had been opened.
+            deleteButton.checked = false
+        }
+    }
 
     onCurrentChanged: {
         //avoid to restart the timer if the current index is already correct
@@ -52,11 +66,10 @@ Item {
         y: delegate.PathView.itemYTranslate
     }
 
-
     PlasmaCore.FrameSvgItem {
         id: activityBorder
         imagePath: "widgets/media-delegate"
-        prefix: "picture"
+        prefix: model["Current"] == true ? "picture-selected" : "picture"
 
         anchors.fill:parent
         anchors.rightMargin: 100
@@ -100,6 +113,17 @@ Item {
                 pixelSize: 25
                 bold: true
             }
+
+            MobileComponents.Rating {
+                id: ratingWidget
+                interactive: false
+                score: 10 * (model.Score/activitySwitcher.maxScore)
+                anchors {
+                    bottom: parent.bottom
+                    right: parent.right
+                    margins: 2
+                }
+            }
         }
     }
 
@@ -134,7 +158,8 @@ Item {
                 id: confirmationDialogComponent
                 ConfirmationDialog {
                     enabled: true
-                    transformOrigin: Item.BottomLeft
+                    z: 700
+                    transformOrigin: Item.Bottom
                     question: i18n("Do you want to permanently delete activity '%1'?", activityName.text)
                     onAccepted: {
                         var service = activitySource.serviceForSource(model["DataEngineSource"])
@@ -160,36 +185,24 @@ Item {
                 z: 800
                 property double oldOpacity: delegate.PathView.itemOpacity
 
-                onClicked: {
-                    // always recreate the dialog because on a second launch it moves upper a little bit.
-                    if (deleteButtonParent.confirmationDialog) {
-                        deleteButtonParent.confirmationDialog.scale = 0
-                        deleteButtonParent.confirmationDialog.destroy()
-                        deleteButtonParent.confirmationDialog = null
-                    }
-
-                    if (toggle) {
-                        deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
-                        deleteButtonParent.confirmationDialog.scale = 1 / delegate.scale
-
-                        // scale does not change dialog's width so we need to anchor the confirmationDialog's center manually.
-                        deleteButtonParent.confirmationDialog.x = deleteButton.x + deleteButton.width / 2 - deleteButtonParent.confirmationDialog.width * (1 / delegate.scale) / 2
-
-                        if (delegate.PathView.itemScale == 1) { // activity at PathView's center, not necessary the current activity.
-                            deleteButtonParent.confirmationDialog.anchors.bottom = deleteButton.top
-                        } else {
-                            deleteButtonParent.confirmationDialog.y = deleteButton.y - deleteButton.height / (3/2) * (1 / delegate.scale)
-                        }
-                    }
-                }
-
                 onCheckedChanged: {
-                    // makes dialog and activity thumbnail fully opaque only when dialog is opened.
                     if (checked) {
                         oldOpacity = delegate.PathView.itemOpacity
                         delegate.PathView.itemOpacity = 1
+
+                        // closes all other deleteDialogs from other ActivityDelegates.
+                        delegate.parent.deleteDialogOpenedAtIndex = delegate.delegateIndex
+
+                        if (!deleteButtonParent.confirmationDialog) {
+                            deleteButtonParent.confirmationDialog = confirmationDialogComponent.createObject(deleteButtonParent)
+                        }
+
+                        deleteButtonParent.confirmationDialog.scale = 1
+
+                        deleteButtonParent.confirmationDialog.anchors.bottom = deleteButton.top
                     } else {
                         delegate.PathView.itemOpacity = oldOpacity
+                        deleteButtonParent.confirmationDialog.scale = 0
                     }
                 }
             }

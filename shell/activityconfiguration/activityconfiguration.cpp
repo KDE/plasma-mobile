@@ -55,7 +55,8 @@ ActivityConfiguration::ActivityConfiguration(QGraphicsWidget *parent)
       m_mainWidget(0),
       m_model(0),
       m_wallpaperIndex(-1),
-      m_newContainment(false)
+      m_newContainment(false),
+      m_encrypted(false)
 {
     Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
     m_package = new Plasma::Package(QString(), "org.kde.active.activityconfiguration", structure);
@@ -102,11 +103,6 @@ ActivityConfiguration::~ActivityConfiguration()
 
 void ActivityConfiguration::doExit()
 {
-    QDBusMessage call = QDBusMessage::createMethodCall("org.kde.plasma-keyboardcontainer",
-                                                       "/MainApplication",
-                                                       "org.kde.plasma.VirtualKeyboard",
-                                                       "hide");
-    QDBusConnection::sessionBus().asyncCall(call);
     //FIXME: should be enough any delay that will cause it to be exectued at least two loops after in the event loop
     QTimer::singleShot(100, this, SLOT(deleteLater()));
 }
@@ -117,8 +113,9 @@ void ActivityConfiguration::ensureContainmentExistence()
         return;
     }
 
+    QString id;
 #ifndef NO_ACTIVITIES
-    const QString id = m_activityController->addActivity(m_activityName);
+    id = m_activityController->addActivity(m_activityName);
     m_activityController->setCurrentActivity(id);
 #endif
     Plasma::Corona *corona = qobject_cast<Plasma::Corona *>(scene());
@@ -130,6 +127,9 @@ void ActivityConfiguration::ensureContainmentExistence()
 
     if (corona) {
         setContainment(corona->containmentForScreen(0));
+#ifndef NO_ACTIVITIES
+        m_activityController->setActivityEncrypted(id, m_encrypted);
+#endif
     }
 }
 
@@ -145,6 +145,14 @@ void ActivityConfiguration::setContainment(Plasma::Containment *cont)
     if (m_containment) {
         m_activityName = m_containment.data()->activity();
         emit activityNameChanged();
+#ifndef NO_ACTIVITIES
+        KActivities::Info *info = new KActivities::Info(m_containment.data()->context()->currentActivityId());
+        if (m_encrypted != info->isEncrypted()) {
+            m_encrypted = info->isEncrypted();
+            emit encryptedChanged();
+        }
+        delete info;
+#endif
     }
 
     if (m_newContainment) {
@@ -225,6 +233,26 @@ QString ActivityConfiguration::activityName() const
 {
     return m_activityName;
 }
+
+bool ActivityConfiguration::isEncrypted() const
+{
+    return m_encrypted;
+}
+
+void ActivityConfiguration::setEncrypted(bool encrypted)
+{
+    if (m_encrypted == encrypted) {
+        return;
+    }
+#ifndef NO_ACTIVITIES
+    if (m_containment) {
+        m_activityController->setActivityEncrypted(activityId(), encrypted);
+    }
+#endif
+    m_encrypted = encrypted;
+    emit encryptedChanged();
+}
+
 
 QString ActivityConfiguration::activityId() const
 {

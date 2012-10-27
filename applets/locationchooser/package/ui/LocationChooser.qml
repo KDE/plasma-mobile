@@ -1,122 +1,104 @@
-/*
- *   Copyright 2012 Ivan Cukic <ivan.cukic at kde.org>
+/*   vim:set foldenable foldmethod=marker:
+ *
+ *   Copyright (C) 2012 Ivan Cukic <ivan.cukic(at)kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2 or
- *   (at your option) any later version.
+ *   it under the terms of the GNU General Public License version 2,
+ *   or (at your option) any later version, as published by the Free
+ *   Software Foundation
  *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU General Public License for more details
  *
- *   You should have received a copy of the GNU Library General Public
+ *   You should have received a copy of the GNU General Public
  *   License along with this program; if not, write to the
  *   Free Software Foundation, Inc.,
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
+import QtQuick 1.0 as QML
+
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
-Item {
-    id: locationUi
-    // property int minimumWidth: 290
-    property int minimumWidth: buttonChange.width * 3
-    property int minimumHeight: 64
+QML.Item {
+    id: main
 
-    PlasmaCore.Theme {
-        id: theme
-    }
+    /* property declarations --------------------------{{{ */
+    property alias location: textLocation.text
+    property alias locationModel: listLocations.model
+    /* }}} */
 
-    PlasmaComponents.Label {
-        id: labelLocation
+    /* signal declarations ----------------------------{{{ */
+    signal requestChange(string location)
+    /* }}} */
 
-        text: "Current location:"
+    /* JavaScript functions ---------------------------{{{ */
+    /* }}} */
 
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-    }
+    /* object properties ------------------------------{{{ */
+    /* }}} */
 
-    Item {
-        id: input
-
-        anchors {
-            top: labelLocation.bottom
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-
-        PlasmaComponents.Button {
-            id: buttonChange
-            text: textLocation.visible ? "Set" : "Change"
-
-            anchors {
-                top: parent.top
-                right: parent.right
-            }
-
-            onClicked: {
-                if (textLocation.visible == true) {
-                    locationManager.setCurrentLocation(textLocation.text)
-                    textLocation.visible = false
-                } else {
-                    textLocation.visible = true
-                }
-            }
-        }
+    /* child objects ----------------------------------{{{ */
 
         PlasmaComponents.TextField {
             id: textLocation
-            text: locationManager.currentLocationName
+
+            anchors {
+                bottom: parent.bottom
+                top: buttonSet.top
+                right: buttonSet.left
+                left: parent.left
+            }
+        }
+
+        PlasmaComponents.Button {
+            id: buttonSet
+            text: "Set"
+
+            width: parent.width / 3
+
+            onClicked: main.requestChange(textLocation.text)
+
+            anchors {
+                bottom: parent.bottom
+                right: parent.right
+            }
+        }
+
+        PlasmaCore.Svg {
+            id: configIconsSvg
+            imagePath: "widgets/configuration-icons"
+        }
+        QML.ListView {
+            id: listLocations
+            clip: true
+
+            delegate: LocationDelegate {
+                title:     model.modelData.name
+                onClicked: {
+                    print ("clicked")
+                    main.requestChange(model.modelData.name)
+                }
+                onRemoveAsked: locationManager.removeLocation(model.modelData.id)
+            }
 
             anchors {
                 top: parent.top
-                bottom: buttonChange.bottom
-                right: buttonChange.left
                 left: parent.left
-            }
-
-            visible: false
-        }
-
-        PlasmaComponents.Label {
-            id: textLocationRO
-            text: (textLocation.text == "") ? "Unkown" : textLocation.text
-
-            anchors.fill: textLocation
-            visible: !textLocation.visible
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: textLocation.visible = true
+                right: parent.right
+                bottom: buttonSet.top
             }
         }
 
-        Connections {
-            target: locationManager
-            onCurrentLocationNameChanged: {
-                if (textLocation.text == name) return;
+    /* }}} */
 
-                textLocation.text = name
+    /* states -----------------------------------------{{{ */
+    /* }}} */
 
-                if (name == "") {
-                    locationManager.setIcon("location-unknown")
-                } else {
-                    locationManager.setIcon("location-changed")
-                }
-            }
-
-            onResetUiRequested: {
-                textLocation.text    = locationManager.currentLocationName
-                textLocation.visible = false
-            }
-        }
-    }
+    /* transitions ------------------------------------{{{ */
+    /* }}} */
 }
+

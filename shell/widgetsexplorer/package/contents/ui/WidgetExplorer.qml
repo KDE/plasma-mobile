@@ -28,17 +28,10 @@ MobileComponents.IconGrid {
 
     anchors.fill: parent
 
-    function accept()
-    {
-        for (var i = 0; i < selectedModel.count; ++i) {
-            widgetsExplorer.addAppletRequested(selectedModel.get(i).pluginName)
-        }
-    }
-
     model: PlasmaCore.SortFilterModel {
         id: appletsFilter
         sourceModel: myModel
-        filterRegExp: ".*"+searchField.searchQuery+".*"
+        filterRegExp: searchField.searchQuery ? ".*"+searchField.searchQuery+".*" : ""
     }
 
     delegate: Component {
@@ -64,6 +57,8 @@ MobileComponents.IconGrid {
                 height: appletsView.delegateHeight
 
                 onClicked: {
+                    inputPanelController.closeSoftwareInputPanel()
+
                     //already in the model?
                     //second case, for the apps model
                     for (var i = 0; i < selectedModel.count; ++i) {

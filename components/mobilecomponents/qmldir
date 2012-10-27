@@ -5,9 +5,7 @@ IconGrid 0.1 IconGrid.qml
 Rating 0.1 Rating.qml
 ResourceDelegate 0.1 ResourceDelegate.qml
 ViewSearch 0.1 ViewSearch.qml
-ActivateAnimation 0.1 ActivateAnimation.qml
-AppearAnimation 0.1 AppearAnimation.qml
-DisappearAnimation 0.1 DisappearAnimation.qml
-PressedAnimation 0.1 PressedAnimation.qml
-ReleasedAnimation 0.1 ReleasedAnimation.qml
-Sheet 0.1 Sheet.qml
+OverlayDrawer 0.1 OverlayDrawer.qml
+SplitDrawer 0.1 SplitDrawer.qml
+DatePicker 0.1 DatePicker.qml
+TimePicker 0.1 TimePicker.qml

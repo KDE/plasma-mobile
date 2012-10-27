@@ -12,11 +12,8 @@ set(bookmarksdataengine_srcs
     bookmarksengine.cpp
 )
 
-soprano_add_ontology(
-        bookmarksdataengine_srcs
-        ${CMAKE_CURRENT_SOURCE_DIR}/../ontologies/kext.trig
-        "KEXT" "Nepomuk::Vocabulary" "trig"
-    )
+add_kao_ontology(bookmarksdataengine_srcs)
+
 
 kde4_add_plugin(plasma_engine_active_bookmarks ${bookmarksdataengine_srcs})
 
@@ -24,13 +21,11 @@ target_link_libraries(plasma_engine_active_bookmarks
     ${KDE4_KDECORE_LIBS}
     ${KDE4_PLASMA_LIBS}
     ${KDE4_KIO_LIBS}
-    ${NEPOMUK_LIBRARIES}
     ${NEPOMUK_QUERY_LIBRARIES}
     ${SOPRANO_LIBRARIES}
     ${SOPRANO_CLIENT_LIBRARIES}
     ${KACTIVITIES_LIBRARY}
     ontologies
-    nepomukdatamanagement
 )
 
 install(TARGETS plasma_engine_active_bookmarks DESTINATION ${PLUGIN_INSTALL_DIR})

@@ -24,15 +24,17 @@
 
 #include <QDeclarativeView>
 
+#include "activeapp_export.h"
 
 namespace Plasma
 {
     class Package;
 }
 
+class QScriptEngine;
 class KDeclarativeViewPrivate;
 
-class KDeclarativeView : public QDeclarativeView
+class ACTIVEAPP_EXPORT KDeclarativeView : public QDeclarativeView
 {
     Q_OBJECT
 
@@ -41,7 +43,7 @@ public:
     ~KDeclarativeView();
 
     /**
-     * Sets wether the application uses opengl
+     * Sets whether the application uses opengl
      * @arg bool on if true the declarative view will use opengl for its viewport()
      */
     void setUseGL(const bool on);
@@ -75,6 +77,8 @@ public:
     Plasma::Package *package() const;
 
     QSize sizeHint() const;
+
+    QScriptEngine *scriptEngine() const;
 
 private:
     KDeclarativeViewPrivate *const d;

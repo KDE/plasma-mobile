@@ -19,6 +19,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 import Qt.labs.gestures 1.0
@@ -41,7 +42,7 @@ Image {
         name: "org.kde.active.videoviewer"
     }
 
-    MobileComponents.ResourceInstance {
+    PlasmaExtras.ResourceInstance {
         id: resourceInstance
     }
 
@@ -129,7 +130,6 @@ Image {
             id: resourceDelegate
             width: 130
             height: 120
-            infoLabelVisible: false
 
             /*onPressed: {*/
             /*    resourceInstance.uri = model["url"]?model["url"]:model["resourceUri"]*/

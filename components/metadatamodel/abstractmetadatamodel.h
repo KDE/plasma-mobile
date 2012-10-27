@@ -26,41 +26,101 @@
 #include <QUrl>
 #include <QDeclarativePropertyMap>
 
+#include "nso.h"
+#include "kao.h"
+#include <Nepomuk2/Vocabulary/NIE>
+#include <Nepomuk2/Vocabulary/NFO>
+#include <Nepomuk2/Vocabulary/NCO>
+#include <Nepomuk2/Vocabulary/NMO>
+#include <Nepomuk2/Vocabulary/NDO>
+#include <Nepomuk2/Vocabulary/NCAL>
+#include <Nepomuk2/Vocabulary/NEXIF>
+#include <Nepomuk2/Vocabulary/NUAO>
+#include <Nepomuk2/Vocabulary/PIMO>
+#include <Nepomuk2/Vocabulary/NMM>
+#include <Nepomuk2/Vocabulary/TMO>
+#include <Soprano/Vocabulary/RDF>
+#include <Soprano/Vocabulary/RDFS>
+#include <Soprano/Vocabulary/NRL>
 
-namespace Nepomuk {
+namespace Nepomuk2 {
     class ResourceWatcher;
 }
 
 class QDBusServiceWatcher;
 class QTimer;
 
+/**
+ * This is the base class for the Nepomuk metadata models: all its properties, signals and slots are available in MetadataModel, MetadataCloudModel and MetadataTimelineModel
+ *
+ * The properties of this class will be used to build a query.
+ * The string properties can have a ! as prefix to negate the match.
+ *
+ * @author Marco Martin <mart@kde.org>
+ */
 class AbstractMetadataModel : public QAbstractItemModel
 {
     Q_OBJECT
+
+    /**
+     * @property int the total number of rows in this model
+     */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+
+    /**
+     * @property string restrict results to just this resource type such as nfo:Document
+     */
     Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
-    Q_PROPERTY(QString mimeType READ mimeType WRITE setMimeType NOTIFY mimeTypeChanged)
+
+    /**
+     * @property string restrict results to just this mime types in OR, such as image/jpeg
+     */
+    Q_PROPERTY(QVariantList mimeTypes READ mimeTypesList WRITE setMimeTypesList NOTIFY mimeTypesChanged)
+
+    /**
+     * @property string only resources that are related to this activity id. It's the numerical id of the activity that is unique, not the activity name.
+     */
     Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
+
+    /**
+     * @property Array Only resources that have all of those tags.
+     */
     Q_PROPERTY(QVariantList tags READ tags WRITE setTags NOTIFY tagsChanged)
+
     //HACK: should be a qdate, but the qml management of qdates is horrible++
+    /**
+     * @property string Only resources that have a creation date equal or more recent than this date, in the format YYYY-MM-DD
+     */
     Q_PROPERTY(QString startDate READ startDateString WRITE setStartDateString NOTIFY startDateChanged)
+
+    /**
+     * @property string Only resources that have a creation date more recent or equal to this date, in the format YYYY-MM-DD
+     */
     Q_PROPERTY(QString endDate READ endDateString WRITE setEndDateString NOTIFY endDateChanged)
+
+
+    /**
+     * @property int Only resources that have a rating equal or more than this
+     */
     Q_PROPERTY(int minimumRating READ minimumRating WRITE setMinimumRating NOTIFY minimumRatingChanged)
+
+    /**
+     * @property int Only resources that have a rating less or equal than this
+     */
     Q_PROPERTY(int maximumRating READ maximumRating WRITE setMaximumRating NOTIFY maximumRatingChanged)
+
+    /**
+     * @property Object An associative array of extra properties to match: the array key is the property name, such as nie:mimeType and the property value is the value we want to match, such as image/jpeg.
+     * a ! as prefix negates the property, so matches only resources that don't have said property
+     */
     Q_PROPERTY(QObject *extraParameters READ extraParameters CONSTANT)
-    Q_PROPERTY(Status status READ status NOTIFY statusChanged)
-    Q_ENUMS(Status)
+
+    /**
+     * @property bool running: true when queries are in execution
+     */
+    Q_PROPERTY(bool running READ isRunning NOTIFY runningChanged)
 
 public:
-    //Idle: the query client is doing nothing
-    //Waiting: the query client is waiting for the first result
-    //Running: some results came, listing not finished
-    enum Status {
-        Idle = 0,
-        Waiting,
-        Running
-    };
-
     AbstractMetadataModel(QObject *parent = 0);
     ~AbstractMetadataModel();
 
@@ -69,8 +129,8 @@ public:
     void setResourceType(const QString &type);
     QString resourceType() const;
 
-    void setMimeType(const QString &type);
-    QString mimeType() const;
+    void setMimeTypesList(const QVariantList &type);
+    QVariantList mimeTypesList() const;
 
     void setActivityId(const QString &activityId);
     QString activityId() const;
@@ -103,7 +163,7 @@ public:
 
     QObject *extraParameters() const;
 
-    Status status() const;
+    bool isRunning() const;
 
     //Reimplemented
     QVariant headerData(int section, Qt::Orientation orientation,
@@ -117,18 +177,20 @@ public:
 Q_SIGNALS:
     void countChanged();
     void resourceTypeChanged();
-    void mimeTypeChanged();
+    void mimeTypesChanged();
     void activityIdChanged();
     void tagsChanged();
     void startDateChanged();
     void endDateChanged();
     void minimumRatingChanged();
     void maximumRatingChanged();
-    void statusChanged();
+    void runningChanged(bool running);
 
 protected Q_SLOTS:
-    void serviceRegistered(const QString &service);
     virtual void doQuery();
+
+private Q_SLOTS:
+    void serviceRegistered(const QString &service);
 
 protected:
     QString retrieveIconName(const QStringList &types) const;
@@ -137,48 +199,45 @@ protected:
      */
     static inline QUrl propertyUrl(const QString &property)
     {
-        const QString prop = QString(property).split(":").last();
-        if (property.startsWith("rdf:")) {
-            return QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#"+prop);
-        } else if (property.startsWith("rdf-schema:")) {
-            return QUrl("http://www.w3.org/2000/01/rdf-schema#"+prop);
-        } else if (property.startsWith("nie:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#"+prop);
-        } else if (property.startsWith("nao:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#"+prop);
-        } else if (property.startsWith("nco:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"+prop);
-        } else if (property.startsWith("nfo:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"+prop);
-        } else if (property.startsWith("ncal:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/04/02/ncal#"+prop);
-        } else if (property.startsWith("ndo:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2010/04/30/ndo#"+prop);
-        } else if (property.startsWith("nexif:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/05/10/nexif#"+prop);
-        } else if (property.startsWith("nid3:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/05/10/nid3#"+prop);
-        } else if (property.startsWith("nmm:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2009/02/19/nmm#"+prop);
-        } else if (property.startsWith("nmo:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nmo#"+prop);
-        } else if (property.startsWith("nrl:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nrl#"+prop);
-        } else if (property.startsWith("nso:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2009/11/08/nso#"+prop);
-        } else if (property.startsWith("nuao:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#"+prop);
-        } else if (property.startsWith("pimo:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2007/11/01/pimo#"+prop);
-        } else if (property.startsWith("tmo:")) {
-            return QUrl("http://www.semanticdesktop.org/ontologies/2008/05/20/tmo#"+prop);
-        } else {
-            return QUrl();
+        static QHash<QString, QUrl> namespaceResolution;
+        if( namespaceResolution.isEmpty() ) {
+            using namespace Nepomuk2::Vocabulary;
+            using namespace Soprano::Vocabulary;
+
+            namespaceResolution.insert(QLatin1String("rdf"), RDF::rdfNamespace());
+            namespaceResolution.insert(QLatin1String("kao"), KAO::kaoNamespace());
+            namespaceResolution.insert(QLatin1String("rdf-schema"), RDFS::rdfsNamespace());
+            namespaceResolution.insert(QLatin1String("nie"), NIE::nieNamespace());
+            namespaceResolution.insert(QLatin1String("nfo"), NFO::nfoNamespace());
+            namespaceResolution.insert(QLatin1String("nco"), NCO::ncoNamespace());
+            namespaceResolution.insert(QLatin1String("ncal"), NCAL::ncalNamespace());
+            namespaceResolution.insert(QLatin1String("ndo"), NDO::ndoNamespace());
+            namespaceResolution.insert(QLatin1String("nmm"), NMM::nmmNamespace());
+            namespaceResolution.insert(QLatin1String("nmo"), NMO::nmoNamespace());
+            namespaceResolution.insert(QLatin1String("nmo"), NMO::nmoNamespace());
+            namespaceResolution.insert(QLatin1String("nrl"), NRL::nrlNamespace());
+            namespaceResolution.insert(QLatin1String("nso"), NSO::nsoNamespace());
+            namespaceResolution.insert(QLatin1String("nrl"), NRL::nrlNamespace());
+            namespaceResolution.insert(QLatin1String("nuao"), NUAO::nuaoNamespace());
+            namespaceResolution.insert(QLatin1String("tmo"), TMO::tmoNamespace());
+            namespaceResolution.insert(QLatin1String("pimo"), PIMO::pimoNamespace());
+            namespaceResolution.insert(QLatin1String("nexif"), NEXIF::nexifNamespace());
+            //namespaceResolution.insert(QLatin1String("nid3"), NID3::nid3Namespace());
         }
+        int colonPosition = property.indexOf(QChar::fromAscii(':'));
+        if( colonPosition == -1 )
+            return QUrl();
+
+        QHash<QString, QUrl>::const_iterator it = namespaceResolution.constFind( property.mid(0, colonPosition) );
+        if( it == namespaceResolution.constEnd() )
+            return QUrl();
+
+        return it.value().toString() + property.mid(colonPosition+1);
     }
 
     static inline QString propertyShortName(const QUrl &url)
     {
+        //vHanda: not always, again store all the ontologies and use a hash map
         //http://www.semanticdesktop.org/ontologies/2007/03/22/nfo will become nfo
         return url.path().split("/").last() + ":" + url.fragment();
     }
@@ -186,8 +245,12 @@ protected:
     static inline QStringList variantToStringList(const QVariantList &list)
     {
         QStringList stringList;
+        QString str;
         foreach (const QVariant &val, list) {
-            stringList << val.toString();
+            str = val.toString().trimmed();
+            if (!str.isEmpty()) {
+                stringList << str;
+            }
         }
         return stringList;
     }
@@ -202,17 +265,18 @@ protected:
     }
 
     QStringList tagStrings() const;
-    void setStatus(Status status);
+    QStringList mimeTypeStrings() const;
+    void setRunning(bool running);
     void askRefresh();
 
 private:
     QDBusServiceWatcher *m_queryServiceWatcher;
     QHash<QString, QString> m_icons;
     QTimer *m_queryTimer;
-    Status m_status;
+    bool m_running;
 
     QString m_resourceType;
-    QString m_mimeType;
+    QStringList m_mimeTypes;
     QString m_activityId;
     QStringList m_tags;
     QDate m_startDate;

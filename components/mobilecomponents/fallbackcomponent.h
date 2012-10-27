@@ -22,6 +22,7 @@
 
 
 #include <QObject>
+#include <QCache>
 
 
 class FallbackComponent : public QObject
@@ -32,6 +33,9 @@ public:
     FallbackComponent(QObject *parent = 0);
 
     Q_INVOKABLE QString resolvePath(const QString &component, const QStringList &paths);
+
+private:
+    QCache<QString, QString> m_paths;
 };
 
 #endif

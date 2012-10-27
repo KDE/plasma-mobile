@@ -21,16 +21,17 @@
 
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>
+#include <QDBusConnectionInterface>
 #include <QTimer>
 
 #include <KDebug>
 #include <KMimeType>
 
-#include <Nepomuk/ResourceManager>
+#include <Nepomuk2/ResourceManager>
 
 AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
     : QAbstractItemModel(parent),
-      m_status(Idle),
+      m_running(false),
       m_minimumRating(0),
       m_maximumRating(0)
 {
@@ -66,9 +67,9 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
     m_icons["TextDocument"] = QString("text-enriched");
 
 
-    connect(this, SIGNAL(rowsInserted(const QModelIndex &, int, int)),
+    connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SIGNAL(countChanged()));
-    connect(this, SIGNAL(rowsRemoved(const QModelIndex &, int, int)),
+    connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)),
             this, SIGNAL(countChanged()));
     connect(this, SIGNAL(modelReset()),
             this, SIGNAL(countChanged()));
@@ -76,19 +77,23 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
 
     m_queryTimer = new QTimer(this);
     m_queryTimer->setSingleShot(true);
-    if (Nepomuk::ResourceManager::instance()->initialized()) {
-        connect(m_queryTimer, SIGNAL(timeout()),
-                this, SLOT(doQuery()));
-    }
 
     m_extraParameters = new QDeclarativePropertyMap;
-    connect (m_extraParameters, SIGNAL(valueChanged(QString, QVariant)), m_queryTimer, SLOT(start()));
+    connect (m_extraParameters, SIGNAL(valueChanged(QString,QVariant)), m_queryTimer, SLOT(start()));
 
     m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
                         QDBusConnection::sessionBus(),
                         QDBusServiceWatcher::WatchForRegistration,
                         this);
     connect(m_queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
+
+
+    QDBusConnectionInterface* interface = m_queryServiceWatcher->connection().interface();
+
+    if (interface->isServiceRegistered("org.kde.nepomuk.services.nepomukqueryservice")) {
+        connect(m_queryTimer, SIGNAL(timeout()),
+                this, SLOT(doQuery()));
+    }
 }
 
 AbstractMetadataModel::~AbstractMetadataModel()
@@ -99,7 +104,7 @@ AbstractMetadataModel::~AbstractMetadataModel()
 
 void AbstractMetadataModel::serviceRegistered(const QString &service)
 {
-    if (service == "org.kde.nepomuk.services.nepomukqueryservice") {
+    if (service == QLatin1String("org.kde.nepomuk.services.nepomukqueryservice")) {
         disconnect(m_queryTimer, SIGNAL(timeout()),
                 this, SLOT(doQuery()));
         connect(m_queryTimer, SIGNAL(timeout()),
@@ -124,20 +129,23 @@ QString AbstractMetadataModel::resourceType() const
     return m_resourceType;
 }
 
-void AbstractMetadataModel::setMimeType(const QString &type)
+void AbstractMetadataModel::setMimeTypesList(const QVariantList &types)
 {
-    if (m_mimeType == type) {
+    //FIXME: not exactly efficient
+    QStringList stringList = variantToStringList(types);
+
+    if (m_mimeTypes == stringList) {
         return;
     }
 
-    m_mimeType = type;
+    m_mimeTypes = stringList;
     m_queryTimer->start(0);
-    emit mimeTypeChanged();
+    emit mimeTypesChanged();
 }
 
-QString AbstractMetadataModel::mimeType() const
+QVariantList AbstractMetadataModel::mimeTypesList() const
 {
-    return m_mimeType;
+    return stringToVariantList(m_mimeTypes);
 }
 
 void AbstractMetadataModel::setActivityId(const QString &activityId)
@@ -180,19 +188,24 @@ QStringList AbstractMetadataModel::tagStrings() const
     return m_tags;
 }
 
-AbstractMetadataModel::Status AbstractMetadataModel::status() const
+QStringList AbstractMetadataModel::mimeTypeStrings() const
 {
-    return m_status;
+    return m_mimeTypes;
 }
 
-void AbstractMetadataModel::setStatus(AbstractMetadataModel::Status status)
+bool AbstractMetadataModel::isRunning() const
 {
-    if (status == m_status) {
+    return m_running;
+}
+
+void AbstractMetadataModel::setRunning(bool running)
+{
+    if (running == m_running) {
         return;
     }
 
-    m_status = status;
-    emit statusChanged();
+    m_running = running;
+    emit runningChanged(running);
 }
 
 void AbstractMetadataModel::askRefresh()

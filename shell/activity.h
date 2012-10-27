@@ -53,7 +53,7 @@ class Activity : public QObject
 {
     Q_OBJECT
 public:
-    Activity(const QString &id, QObject *parent = 0);
+    explicit Activity(const QString &id, QObject *parent = 0);
     ~Activity();
 
     QString id();

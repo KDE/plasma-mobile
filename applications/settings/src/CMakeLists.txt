@@ -6,12 +6,12 @@ set(active-settings_SRCS
     view.cpp
 )
 
-KDE4_ADD_EXECUTABLE(active-settings ${active-settings_SRCS})
+kde4_add_executable(active-settings ${active-settings_SRCS})
 
 target_link_libraries(active-settings
     ${QT_QTDECLARATIVE_LIBRARY}
     ${KDE4_PLASMA_LIBS}
-    kdeclarative
+    ${KDECLARATIVE_LIBRARIES}
 )
 
 install( TARGETS active-settings ${INSTALL_TARGETS_DEFAULT_ARGS} )

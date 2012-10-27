@@ -44,6 +44,7 @@
 
 #include <KActivities/Info>
 #include <KDirWatch>
+#include <KFileDialog>
 #include <KUrl>
 #include <KGlobalSettings>
 #include <KIO/Job>
@@ -56,12 +57,11 @@
 #include <KWindowSystem>
 #include <KDebug>
 #include <klocalizedstring.h>
-#include <kactivities/consumer.h>
 
 #include <soprano/vocabulary.h>
-#include <Nepomuk/Resource>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Tag>
+#include <Nepomuk2/Variant>
 
 QT_BEGIN_NAMESPACE
 
@@ -353,10 +353,10 @@ void KDeclarativeWebView::init()
         WId wid = KWindowSystem::activeWindow();
         d->wallet = new KWebWallet(this, wid);
         kwp->setWallet(d->wallet);
-        // TODO: hook in some dialog wether the user wants to save the form data
+        // TODO: hook in some dialog whether the user wants to save the form data
         // happens unconditionally right now for every form filled in
-        connect(d->wallet, SIGNAL(saveFormDataRequested(const QString &, const QUrl &)),
-            d->wallet, SLOT(acceptSaveFormDataRequest(const QString &)), Qt::UniqueConnection);
+        connect(d->wallet, SIGNAL(saveFormDataRequested(QString,QUrl)),
+            d->wallet, SLOT(acceptSaveFormDataRequest(QString)), Qt::UniqueConnection);
     }
 
     wp->setForwardUnsupportedContent(true);
@@ -369,27 +369,27 @@ void KDeclarativeWebView::init()
 #endif
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(flickingEnabledChanged()), this, SLOT(updateFlickingEnabled()));
-    connect(d->view, SIGNAL(click(int, int)), this, SIGNAL(click(int, int)));
-    connect(d->view, SIGNAL(doubleClick(int, int)), this, SIGNAL(doubleClick(int, int)));
+    connect(d->view, SIGNAL(click(int,int)), this, SIGNAL(click(int,int)));
+    connect(d->view, SIGNAL(doubleClick(int,int)), this, SIGNAL(doubleClick(int,int)));
     
-    //connect(d->view, SIGNAL(loadLink(const QUrl&, const QRect&)), SIGNAL(linkClicked(const QUrl&, const QRect&)));
-    connect(d->view, SIGNAL(linkPressed(const QUrl&, const QRect&)),
-            this, SIGNAL(linkPressed(const QUrl&, const QRect&)));
-    connect(d->view, SIGNAL(linkPressAndHold(const QUrl&, const QRect&)),
-            this, SIGNAL(linkPressAndHold(const QUrl&, const QRect&)));
+    //connect(d->view, SIGNAL(loadLink(QUrl,QRect)), SIGNAL(linkClicked(QUrl,QRect)));
+    connect(d->view, SIGNAL(linkPressed(QUrl,QRect)),
+            this, SIGNAL(linkPressed(QUrl,QRect)));
+    connect(d->view, SIGNAL(linkPressAndHold(QUrl,QRect)),
+            this, SIGNAL(linkPressAndHold(QUrl,QRect)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
 
     connect(access, SIGNAL(finished(QNetworkReply*)), page(), SLOT(handleNetworkErrors(QNetworkReply*)));
 
     wp->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-    connect(wp, SIGNAL(linkClicked(const QUrl&)), d->view, SLOT(handleLinkClicked(const QUrl&)));
+    connect(wp, SIGNAL(linkClicked(QUrl)), d->view, SLOT(handleLinkClicked(QUrl)));
 
 
     d->dirWatch = new KDirWatch(this);
     QString configPath = KStandardDirs::locateLocal("config", "active-webbrowserrc");
     d->dirWatch->addFile(configPath);
-    connect(d->dirWatch, SIGNAL(dirty(const QString&)), SLOT(initSettings()));
-    connect(d->dirWatch, SIGNAL(created(const QString&)), SLOT(initSettings()));
+    connect(d->dirWatch, SIGNAL(dirty(QString)), SLOT(initSettings()));
+    connect(d->dirWatch, SIGNAL(created(QString)), SLOT(initSettings()));
 }
 
 QPointF KDeclarativeWebView::contentsPosition()
@@ -404,6 +404,14 @@ void KDeclarativeWebView::setContentsPosition(QPointF contentsPosition)
 
 void KDeclarativeWebView::initSettings()
 {
+    // From configuration
+    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
+    ptr->reparseConfiguration();
+    KConfigGroup cg(ptr, "webbrowser");
+
+    // WebKit renders the fonts too small, so we add a few points to make them readable
+    const int fontSizeCorrection = cg.readEntry("fontSizeCorrection", 0) + 4;
+//     kDebug() << "Font size correction is: " << fontSizeCorrection;
     //kDebug() << "Settings up fonts and reading settings: " << KGlobalSettings::generalFont().family() << KGlobalSettings::generalFont().pointSize();
     settings()->setFontFamily(QWebSettings::StandardFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::SerifFont,  KGlobalSettings::generalFont().family());
@@ -412,16 +420,14 @@ void KDeclarativeWebView::initSettings()
     settings()->setFontFamily(QWebSettings::SansSerifFont,  KGlobalSettings::generalFont().family());
     settings()->setFontFamily(QWebSettings::FantasyFont,  KGlobalSettings::generalFont().family());
 
-    settings()->setFontSize(QWebSettings::DefaultFontSize,  KGlobalSettings::generalFont().pointSize());
-    //settings()->setFontSize(QWebSettings::FontSize, KGlobalSettings::generalFont().pointSize());
-    settings()->setFontSize(QWebSettings::DefaultFixedFontSize,  KGlobalSettings::fixedFont().pointSize());
-    settings()->setFontSize(QWebSettings::MinimumFontSize,  KGlobalSettings::smallestReadableFont().pointSize());
-    settings()->setFontSize(QWebSettings::MinimumLogicalFontSize,  KGlobalSettings::smallestReadableFont().pointSize());
+    //const int fontSizeCorrection = 4;
+    settings()->setFontSize(QWebSettings::DefaultFontSize,  KGlobalSettings::generalFont().pointSize()+fontSizeCorrection);
+    //settings()->setFontSize(QWebSettings::FontSize, KGlobalSettings::generalFont().pointSize()+fontSizeCorrection);
+    settings()->setFontSize(QWebSettings::DefaultFixedFontSize,  KGlobalSettings::fixedFont().pointSize()+fontSizeCorrection);
+    settings()->setFontSize(QWebSettings::MinimumFontSize,  KGlobalSettings::smallestReadableFont().pointSize()+fontSizeCorrection);
+    settings()->setFontSize(QWebSettings::MinimumLogicalFontSize,  KGlobalSettings::smallestReadableFont().pointSize()+fontSizeCorrection);
+    //     kDebug() << "Fonts: ===========" << KGlobalSettings::generalFont().pixelSize() << KGlobalSettings::generalFont().pointSize();
 
-    // From configuration
-    KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
-    ptr->reparseConfiguration();
-    KConfigGroup cg(ptr, "webbrowser");
     bool pluginsEnabled = cg.readEntry("pluginsEnabled", false);
     //kDebug() << " C++ Plugins on? " << pluginsEnabled;
 
@@ -1207,9 +1213,9 @@ QRect KDeclarativeWebView::elementAreaAt(int x, int y, int maxWidth, int maxHeig
 QDeclarativeWebPage::QDeclarativeWebPage(KDeclarativeWebView* parent) :
     KWebPage(parent, KWalletIntegration)
 {
-    connect(this, SIGNAL(unsupportedContent(QNetworkReply *)), this, SLOT(handleUnsupportedContent(QNetworkReply *)));
-    //TODO: move this in the webbrowser implementation
-    m_activityConsumer = new KActivities::Consumer(this);
+    connect(this, SIGNAL(unsupportedContent(QNetworkReply*)), this, SLOT(handleUnsupportedContent(QNetworkReply*)));
+//     //TODO: move this in the webbrowser implementation
+    m_nepomukHelper = new NepomukHelper(this);
 }
 
 QDeclarativeWebPage::~QDeclarativeWebPage()
@@ -1218,11 +1224,9 @@ QDeclarativeWebPage::~QDeclarativeWebPage()
 
 QString QDeclarativeWebPage::chooseFile(QWebFrame* originatingFrame, const QString& oldFile)
 {
-    // Not supported (it's modal)
-    // FIXME: implement filechooser
     Q_UNUSED(originatingFrame)
     Q_UNUSED(oldFile)
-    return oldFile;
+    return KFileDialog::getOpenFileName();
 }
 
 /*!
@@ -1310,7 +1314,7 @@ bool QDeclarativeWebPage::downloadResource (const KUrl& srcUrl, const QString& s
     job->addMetaData(QLatin1String("cache"), QLatin1String("cache")); // Use entry from cache if available.
     job->ui()->setWindow((parent ? parent->window() : 0));
     job->ui()->setAutoErrorHandlingEnabled(true);
-    connect(job, SIGNAL(result(KJob *)), this, SLOT(downloadFinished(KJob *)));
+    connect(job, SIGNAL(result(KJob*)), this, SLOT(downloadFinished(KJob*)));
     return true;
 }
 
@@ -1319,24 +1323,14 @@ void QDeclarativeWebPage::downloadFinished(KJob *job)
     KIO::CopyJob *cj = qobject_cast<KIO::CopyJob*>(job);
     if (cj && job->error() == KJob::NoError) {
 
-        // Create a FileDataObject Nepomuk Resource ...
-        Nepomuk::Resource fileRes(cj->destUrl());
-        fileRes.addType(QUrl("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject"));
-
-        // ... tag it as "Download"
-        fileRes.addTag(Nepomuk::Tag("Download"));
-
-        // ... add source URLs, there might be more than one, but common case is just one
-        QString u;
+        KUrl localUrl = cj->destUrl();
+        KUrl remoteUrl;
         foreach (const KUrl &_u, cj->srcUrls()) {
-            u.append(_u.pathOrUrl() + " ");
+            remoteUrl = _u;
         }
-        fileRes.setDescription(i18n("Downloaded from %1", u));
+        // add file to current activity, store remote url as metadata
+        m_nepomukHelper->storeDownloadMetaData(remoteUrl, localUrl);
 
-        // And link it to the currently active Activity
-        QString activityId = m_activityConsumer->currentActivity();
-        KActivities::Info aInfo(activityId);
-        aInfo.linkResource(cj->destUrl());
     } else {
         // TODO: handle download errors.
         kError() << "Error downloading file: " << job->errorString();

@@ -32,6 +32,7 @@
 #include <KIO/MetaData>
 
 #include "kwebpage.h"
+#include "nepomukhelper.h"
 
 QT_BEGIN_HEADER
 
@@ -46,10 +47,6 @@ class KDeclarativeWebViewPrivate;
 class QNetworkRequest;
 class KDeclarativeWebView;
 class KDeclarativeWebViewPrivate;
-
-namespace KActivities {
-    class Consumer;
-}
 
 class QDeclarativeWebPage : public KWebPage {
     Q_OBJECT
@@ -75,7 +72,7 @@ private:
                           QWidget* parent = 0, const KIO::MetaData& metaData = KIO::MetaData());
     QString errorPage(QNetworkReply *reply);
     KDeclarativeWebView *viewItem();
-    KActivities::Consumer *m_activityConsumer;
+    NepomukHelper *m_nepomukHelper;
 };
 
 class GraphicsWebView : public QGraphicsWebView {

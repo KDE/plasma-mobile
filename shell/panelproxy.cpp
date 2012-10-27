@@ -278,7 +278,7 @@ void PanelProxy::slotWindowStripChanged()
         m_windowSelected = false;
         QDBusMessage msg = QDBusMessage::createMethodCall("org.kde.kwin", "/TabBox", "org.kde.kwin", "openEmbedded");
         QList<QVariant> vars;
-        vars.append(QVariant::fromValue<qulonglong>(m_panel->winId()));
+        vars.append(QVariant::fromValue<qulonglong>((qulonglong)m_panel->winId()));
         vars.append(QVariant::fromValue<QPoint>(QPoint(0, 50)));
         vars.append(QVariant::fromValue<QSize>(m_windowListArea.size()));
         vars.append(QVariant::fromValue<int>(Qt::AlignLeft));

@@ -25,27 +25,7 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 MobileComponents.IconGrid {
     id: resultsGrid
     anchors.fill: parent
-
-    delegateWidth: 130
-    delegateHeight: 120
-
-    function accept()
-    {
-        var service = metadataSource.serviceForSource("")
-        var operation = service.operationDescription("connectToActivity")
-        operation["ActivityUrl"] = activitySource.data["Status"]["Current"]
-
-        for (var i = 0; i < selectedModel.count; ++i) {
-            operation["ResourceUrl"] = selectedModel.get(i).resourceUri
-            service.startOperationCall(operation)
-        }
-
-    }
-
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-    }
+    property string defaultClassName: ""
 
     delegate: Item {
         width: resultsGrid.delegateWidth
@@ -55,19 +35,20 @@ MobileComponents.IconGrid {
                 imagePath: "widgets/viewitem"
                 prefix: "selected+hover"
                 opacity: 0
-                width: 130
-                height: 120
+                width: resultsGrid.delegateWidth
+                height: resultsGrid.delegateHeight
                 Behavior on opacity {
                     NumberAnimation {duration: 250}
                 }
         }
         MobileComponents.ResourceDelegate {
             id: resourceDelegate
-            width: 130
-            height: 120
-            infoLabelVisible: false
+            width: resultsGrid.delegateWidth
+            height: resultsGrid.delegateHeight
             //those two are to make appModel and runnerModel work
-            property string label: model["label"]?model["label"]:(model["name"]?model["name"]:model["text"])
+            property string label: model["label"] ? model["label"] : (model["name"] ? model["name"] : model["text"])
+            className: model["className"] ? model["className"] : defaultClassName
+            genericClassName: model["genericClassName"] ? model["genericClassName"] : defaultClassName
 
             onPressAndHold: {
                 //take into account cases for all 3 models
@@ -89,12 +70,13 @@ MobileComponents.IconGrid {
                 }
             }
             onClicked: {
+                inputPanelController.closeSoftwareInputPanel()
                 //already in the model?
                 //second case, for the apps model
                 for (var i = 0; i < selectedModel.count; ++i) {
                     if ((model.resourceUri && model.resourceUri == selectedModel.get(i).resourceUri) ||
 
-                        (model.entryPath && model.entryPath == selectedModel.get(i).resourceUri)) {
+                        (model.data && model.data == selectedModel.get(i).resourceUri)) {
                         highlightFrame.opacity = 0
                         selectedModel.remove(i)
                         return
@@ -103,9 +85,9 @@ MobileComponents.IconGrid {
 
                 var item = new Object
                 item["resourceUri"] = model["resourceUri"]
-                //this is to make AppModel work
+                //this is to make the app runner work
                 if (!item["resourceUri"]) {
-                    item["resourceUri"] = model["entryPath"]
+                    item["resourceUri"] = model["data"]
                 }
 
                 selectedModel.append(item)

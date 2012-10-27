@@ -17,23 +17,23 @@
     Boston, MA 02110-1301, USA.
 */
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 1.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.qtextracomponents 0.1
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 
 Item {
     id: searchFieldContainer
 
     property string searchQuery
-    property int delay : 100
+    property alias delay : searchTimer.interval
+    property bool busy: false
+    property alias text : searchField.text
 
-    onSearchQueryChanged: {
-        searchField.text = searchQuery
+    onFocusChanged: {
+        if (focus) {
+            searchField.forceActiveFocus()
+        }
     }
-
     width: searchField.width
 
     height: searchField.height
@@ -47,9 +47,21 @@ Item {
         onTextChanged: searchTimer.restart()
     }
 
+    PlasmaComponents.BusyIndicator {
+        anchors {
+            verticalCenter: searchField.verticalCenter
+            left: searchField.right
+            rightMargin: 4
+        }
+        height: searchField.height
+        width: searchField.height
+        visible: searchFieldContainer.busy
+        running: visible
+    }
+
     Timer {
         id: searchTimer
-        interval: delay
+        interval: 500
         running: false
         repeat: false
         onTriggered: searchQuery = searchField.text

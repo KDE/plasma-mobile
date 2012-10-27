@@ -27,10 +27,10 @@ Item {
 
     property Component delegate
     property QtObject model
-    property int pageSize: Math.floor(appsView.width/delegateWidth)*Math.floor(appsView.height/delegateHeight)
-    property int delegateWidth: 120
-    property int delegateHeight: 120
-    property alias currentPage: appsView.currentIndex
+    property int pageSize: Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
+    property int delegateWidth: theme.defaultFont.mSize.width * 15
+    property int delegateHeight: theme.defaultIconSize + theme.defaultFont.mSize.height + 8
+    property alias currentPage: iconView.currentIndex
     property int pagesCount: Math.ceil(model.count/pageSize)
     property int count: model.count
 
@@ -41,12 +41,12 @@ Item {
 
     function positionViewAtIndex(index)
     {
-        appsView.positionViewAtIndex(index / pageSize, ListView.Beginning)
+        iconView.positionViewAtIndex(index / pageSize, ListView.Beginning)
     }
 
     function positionViewAtPage(page)
     {
-        appsView.positionViewAtIndex(page, ListView.Beginning)
+        iconView.positionViewAtIndex(page, ListView.Beginning)
     }
 
     PlasmaCore.Theme {
@@ -54,16 +54,29 @@ Item {
     }
 
 
+    Timer {
+        id: resizeTimer
+        running: true
+        interval: 100
+        onTriggered: {
+            main.pageSize = Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
+            if (iconView.currentItem) {
+                iconView.currentItem.width = iconView.width
+                iconView.currentItem.height = iconView.height
+            }
+        }
+    }
     ListView {
-        id: appsView
-        objectName: "appsView"
+        id: iconView
+        objectName: "iconView"
         pressDelay: 200
-        cacheBuffer: width
+        cacheBuffer: 100
         highlightMoveDuration: 250
         anchors.fill: parent
+        onWidthChanged: resizeTimer.restart()
+        onHeightChanged: resizeTimer.restart()
 
-
-        model: main.model?Math.ceil(main.model.count/main.pageSize):0
+        model: main.model ? Math.ceil(main.model.count/main.pageSize) : 0
         highlightRangeMode: ListView.StrictlyEnforceRange
         orientation: ListView.Horizontal
         snapMode: ListView.SnapOneItem
@@ -74,8 +87,14 @@ Item {
 
         delegate: Component {
             Item {
-                width: appsView.width
-                height: appsView.height
+                id: delegatePage
+                //Explicitly *not* bind the properties for performance reasons
+                Component.onCompleted: {
+                    width = iconView.width
+                    height = iconView.height
+                    //iconView.cacheBuffer = iconView.width
+                }
+
                 Flow {
                     id: iconFlow
                     width: iconRepeater.suggestedWidth
@@ -93,19 +112,10 @@ Item {
                         currentPage: index
                         pageSize: main.pageSize
                     }
-                    Timer {
-                        id: loadTimer
-                        repeat: false
-                        interval: 0
-                        onTriggered: iconRepeater.model = pagedProxyModel
-                        Component.onCompleted: {
-                            loadTimer.interval = appsView.moving ? 500 : 0
-                            loadTimer.running = true
-                        }
-                    }
                     Repeater {
                         id: iconRepeater
-                        property int columns: Math.min(count, Math.floor(appsView.width/main.delegateWidth))
+                        model: pagedProxyModel
+                        property int columns: Math.min(count, Math.floor(delegatePage.width/main.delegateWidth))
                         property int suggestedWidth: main.delegateWidth*columns
                         //property int suggestedHeight: main.delegateHeight*Math.floor(count/columns)
 
@@ -117,57 +127,120 @@ Item {
     }
 
 
-    Item {
+    Loader {
+        id: scrollArea
         visible: main.model && Math.ceil(main.model.count/main.pageSize) > 1
         anchors {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
         }
-        height: Math.max( 16, appsView.height - Math.floor(appsView.height/delegateHeight)*delegateHeight)
-        Row {
-            id: dotsRow
-            anchors.centerIn: parent
-            spacing: 20
+        height: Math.max( 16, iconView.height - Math.floor(iconView.height/delegateHeight)*delegateHeight)
 
-            Repeater {
-                model: main.model?Math.ceil(main.model.count/main.pageSize):0
+        property int pageCount: main.model ? Math.ceil(main.model.count/main.pageSize) : 0
 
-
+        sourceComponent: pageCount > 1 ? ((pageCount * 20 > width) ? scrollDotComponent : dotsRow) : undefined
+        function setViewIndex(index)
+        {
+            //animate only if near
+            if (Math.abs(iconView.currentIndex - index) > 1) {
+                iconView.positionViewAtIndex(index, ListView.Beginning)
+            } else {
+                iconView.currentIndex = index
+            }
+        }
+        Component {
+            id: scrollDotComponent
+            MouseArea {
+                anchors.fill: parent
+                property int pendingIndex: 0
                 Rectangle {
-                    width: 6
-                    height: 6
-                    scale: appsView.currentIndex == index ? 1.5 : 1
-                    radius: 5
-                    smooth: true
-                    opacity: appsView.currentIndex == index ? 0.8: 0.4
+                    id: barRectangle
                     color: theme.textColor
-
-                    Behavior on scale {
+                    opacity: 0.25
+                    height: 4
+                    radius: 2
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                        leftMargin: (parent.width/pageCount/2)
+                        rightMargin: (parent.width/pageCount/2)
+                    }
+                }
+                Rectangle {
+                    color: theme.textColor
+                    height: 8
+                    width: height
+                    radius: 4
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: parent.width/(pageCount/(iconView.currentIndex+1)) - (parent.width/pageCount/2) - 4
+                    Behavior on x {
                         NumberAnimation {
                             duration: 250
                             easing.type: Easing.InOutQuad
                         }
                     }
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 250
-                            easing.type: Easing.InOutQuad
-                        }
-                    }
+                }
+                function setViewIndexFromMouse(x)
+                {
+                    pendingIndex = Math.min(pageCount,
+                                            Math.round(pageCount / (barRectangle.width / Math.max(x - barRectangle.x, 1))))
+                    viewPositionTimer.restart()
+                }
+                onPressed: setViewIndexFromMouse(mouse.x)
+                onPositionChanged: setViewIndexFromMouse(mouse.x)
 
-                    MouseArea {
-                        anchors {
-                            fill: parent
-                            margins: -10
-                        }
+                Timer {
+                    id: viewPositionTimer
+                    interval: 200
+                    onTriggered: setViewIndex(pendingIndex)
+                }
+            }
+        }
+        Component {
+            id: dotsRow
 
-                        onClicked: {
-                            //animate only if near
-                            if (Math.abs(appsView.currentIndex - index) > 1) {
-                                appsView.positionViewAtIndex(index, ListView.Beginning)
-                            } else {
-                                appsView.currentIndex = index
+            Item {
+                Row {
+                    anchors.centerIn: parent
+                    spacing: 20
+
+                    Repeater {
+                        model: scrollArea.pageCount
+
+
+                        Rectangle {
+                            width: 6
+                            height: 6
+                            scale: iconView.currentIndex == index ? 1.5 : 1
+                            radius: 5
+                            smooth: true
+                            opacity: iconView.currentIndex == index ? 0.8: 0.4
+                            color: theme.textColor
+
+                            Behavior on scale {
+                                NumberAnimation {
+                                    duration: 250
+                                    easing.type: Easing.InOutQuad
+                                }
+                            }
+                            Behavior on opacity {
+                                NumberAnimation {
+                                    duration: 250
+                                    easing.type: Easing.InOutQuad
+                                }
+                            }
+
+                            MouseArea {
+                                anchors {
+                                    fill: parent
+                                    margins: -10
+                                }
+
+                                onClicked: {
+                                    setViewIndex(index)
+                                }
                             }
                         }
                     }

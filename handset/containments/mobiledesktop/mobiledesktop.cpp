@@ -62,8 +62,8 @@ void MobileDesktop::init()
     m_appletsView->setAppletsContainer(m_container);
     lay->addItem(m_appletsView);
 
-    connect(this, SIGNAL(appletAdded(Plasma::Applet*, QPointF)),
-            m_container, SLOT(layoutApplet(Plasma::Applet*, QPointF)));
+    connect(this, SIGNAL(appletAdded(Plasma::Applet*,QPointF)),
+            m_container, SLOT(layoutApplet(Plasma::Applet*,QPointF)));
     connect(this, SIGNAL(appletRemoved(Plasma::Applet*)),
             m_container, SLOT(appletRemoved(Plasma::Applet*)));
 

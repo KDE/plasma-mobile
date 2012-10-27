@@ -33,7 +33,7 @@ class View : public QDeclarativeView
     Q_OBJECT
 
 public:
-    View(const QString &url, QWidget *parent = 0 );
+    explicit View(const QString &url, QWidget *parent = 0 );
     ~View();
 
 Q_SIGNALS:

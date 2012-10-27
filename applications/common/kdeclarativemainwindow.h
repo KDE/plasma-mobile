@@ -25,22 +25,30 @@
 
 #include <KMainWindow>
 
+#include "activeapp_export.h"
 
 class KDeclarativeView;
 
 class KDeclarativeMainWindowPrivate;
 
-class KDeclarativeMainWindow : public KMainWindow
+class ACTIVEAPP_EXPORT KDeclarativeMainWindow : public KMainWindow
 {
     Q_OBJECT
     /**
      * the list of all startup arguments, such as urls to open
      */
     Q_PROPERTY(QStringList startupArguments READ startupArguments CONSTANT)
+
     /**
      * The caption of the main window. Do not include the application name in this string. It will be added automatically according to the KDE standard.
      */
     Q_PROPERTY(QString caption READ caption WRITE setCaption NOTIFY captionChanged)
+
+    /**
+     * The icon for the main window. by default comes from KAboutData, Change it only if strictly necessary.
+     * Can be a QIcon or a QString
+     */
+    Q_PROPERTY(QVariant icon READ icon WRITE setIcon NOTIFY iconChanged)
 
 public:
     KDeclarativeMainWindow();
@@ -64,20 +72,14 @@ public:
 
     //propertyies & methods for QML
     QStringList startupArguments() const;
-
     QString caption() const;
 
-    /**
-     * Read out a string option.
-     * The option must have a corresponding KCmdLineOptions entry of the form:
-        <code>
-         options.add("option <argument>", ki18n("Description"), "default");
-        </code>
-     * You cannot test for the presence of an alias - you must always test for the full option.
-     * @arg QString option  The name of the option without '-'.
-     * @returns The value of the option. If the option was not present on the command line the default is returned. If the option was present more than once, the value of the last occurrence is used.
-     */
-    Q_INVOKABLE QString startupOption(const QString &option) const;
+    QVariant icon() const;
+    void setIcon(const QVariant &icon);
+
+    //methods
+    Q_INVOKABLE QAction *action(const QString &name);
+    Q_INVOKABLE void addAction(const QString &name, const QString &string);
 
 public Q_SLOTS:
     void setCaption(const QString &caption);
@@ -86,6 +88,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void captionChanged();
+    void iconChanged();
 
 private:
     KDeclarativeMainWindowPrivate * const d;

@@ -69,7 +69,7 @@ void CategoriesSource::populate()
 
     QMap<QString, int>::const_iterator i = categoryWeights.constBegin();
     while (i != categoryWeights.constEnd()) {
-        if (i.key().startsWith("X-") || i.key() == "KDE" || i.key() == "GNOME" || i.key() == "GTK" || i.key() == "Qt") {
+        if (i.key().startsWith(QLatin1String("X-")) || i.key() == "KDE" || i.key() == "GNOME" || i.key() == "GTK" || i.key() == "Qt") {
             ++i;
             continue;
         }

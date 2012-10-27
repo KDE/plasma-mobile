@@ -70,7 +70,7 @@ void SettingsComponent::loadModule(const QString &name)
     query = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
     KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
     KService::List::const_iterator iter;
-    for(iter = offers.begin(); iter < offers.end(); ++iter) {
+    for(iter = offers.constBegin(); iter < offers.constEnd(); ++iter) {
        QString error;
        KService::Ptr service = *iter;
 
@@ -87,7 +87,7 @@ void SettingsComponent::loadModule(const QString &name)
             // Load binary plugin
             const QString query = QString("exist Library and Library == '%1'").arg(service->library());
             kDebug() << "loading binary plugin from query: " << service->name();
-            QObject *p  = KServiceTypeTrader::createInstanceFromQuery<QObject>("Active/SettingsModule", query, d->settingsModule);
+            KServiceTypeTrader::createInstanceFromQuery<QObject>("Active/SettingsModule", query, d->settingsModule);
         } else {
             kDebug() << "QML only plugin";
         }

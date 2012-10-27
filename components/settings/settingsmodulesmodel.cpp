@@ -24,8 +24,10 @@
 
 #include <QDeclarativeContext>
 #include <QDeclarativeEngine>
+#include <QTimer>
 
 #include <KIcon>
+#include <KPluginInfo>
 #include <KService>
 #include <KServiceTypeTrader>
 
@@ -34,19 +36,27 @@
 class SettingsModulesModelPrivate {
 
 public:
-//     QList<QObject*> items;
-    QList<SettingsModule*> settingsModules;
+    SettingsModulesModelPrivate(SettingsModulesModel *parent)
+        : isPopulated(false),
+          populateTimer(new QTimer(parent))
+    {}
+
     bool isPopulated;
+    QList<SettingsModule*> settingsModules;
+    QTimer *populateTimer;
+    QString appName;
 };
 
 
 SettingsModulesModel::SettingsModulesModel(QDeclarativeComponent *parent)
-    : QDeclarativeComponent(parent)
+    : QDeclarativeComponent(parent),
+      d(new SettingsModulesModelPrivate(this))
 {
     kDebug() << "Creating SettingsModel";
-    d = new SettingsModulesModelPrivate;
-    d->isPopulated = false;
-    populate();
+    d->populateTimer->setInterval(0);
+    d->populateTimer->setSingleShot(true);
+    connect(d->populateTimer, SIGNAL(timeout()), this, SLOT(populate()));
+    d->populateTimer->start();
 }
 
 SettingsModulesModel::~SettingsModulesModel()
@@ -59,23 +69,94 @@ QDeclarativeListProperty<SettingsModule> SettingsModulesModel::settingsModules()
     return QDeclarativeListProperty<SettingsModule>(this, d->settingsModules);
 }
 
+QString SettingsModulesModel::application() const
+{
+    return d->appName;
+}
+
+void SettingsModulesModel::setApplication(const QString &appName)
+{
+    kDebug() << "setting application to" << appName;
+    if (d->appName != appName) {
+        d->appName = appName;
+        emit applicationChanged();
+        d->settingsModules.clear();
+        emit settingsModulesChanged();
+        d->isPopulated = false;
+        d->populateTimer->start();
+    }
+}
+
+bool compareModules(const SettingsModule *l, const SettingsModule *r)
+{
+    if (l == r) {
+        return false;
+    }
+
+    if (!l) {
+        return false;
+    } else if (!r) {
+        return true;
+    }
+
+    // base it on the category weighting; if neither has a category weight the compare
+    // strings
+    KConfigGroup orderConfig(KGlobal::config(), "SettingsCategoryWeights");
+    const int lG = orderConfig.readEntry(l->category(), -1);
+    const int rG = orderConfig.readEntry(r->category(), -1);
+    //kDebug() << l->name() << l->category() << lG << " vs " << r->name() << r->category() << rG;
+
+    if (lG < 0) {
+        if (rG > 0) {
+            return false;
+        }
+
+        int rv = l->category().compare(r->category(), Qt::CaseInsensitive);
+        if (rv == 0) {
+            rv = l->name().compare(r->name(), Qt::CaseInsensitive);
+        }
+        return rv < 0;
+    } else if (rG < 0) {
+        return true;
+    }
+
+    if (lG == rG) {
+        return l->name().compare(r->name(), Qt::CaseInsensitive) < 0;
+    }
+
+    return lG > rG;
+}
+
 void SettingsModulesModel::populate()
 {
     if (d->isPopulated) {
-        //kDebug() << "already populated.";
+        kDebug() << "already populated.";
         return;
     }
+
     d->isPopulated = true;
 
-    QString query;
-    KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
+    QString constraint;
+    if (d->appName.isEmpty()) {
+        constraint.append("not exist [X-KDE-ParentApp]");
+    } else {
+        constraint.append("[X-KDE-ParentApp] == '").append(d->appName).append("'");
+    }
 
+    KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", constraint);
+    QSet<QString> seen;
     //kDebug() << "Found " << services.count() << " modules";
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
             continue;
         }
 
+        KPluginInfo info(service);
+        if (seen.contains(info.pluginName())) {
+            continue;
+        }
+
+        seen.insert(info.pluginName());
         QString description;
         if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
             description = service->genericName();
@@ -87,9 +168,12 @@ void SettingsModulesModel::populate()
         item->setName(service->name());
         item->setDescription(description);
         item->setIconName(service->icon());
-        item->setModule(service->property("X-KDE-PluginInfo-Name").toString());
+        item->setModule(info.pluginName());
+        item->setCategory(info.category());
         d->settingsModules.append(item);
     }
+
+    qStableSort(d->settingsModules.begin(), d->settingsModules.end(), compareModules);
     //emit dataChanged();
     emit settingsModulesChanged();
 }

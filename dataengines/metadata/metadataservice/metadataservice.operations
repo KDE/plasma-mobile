@@ -36,4 +36,12 @@
             <label>The url of the bookmark</label>
         </entry>
     </group>
+    <group name="tagResources">
+        <entry name="ResourceUrls" type="StringList">
+            <label>the urls of all resources</label>
+        </entry>
+        <entry name="Tag" type="String">
+            <label>The name of the tag</label>
+        </entry>
+    </group>
 </kcfg>

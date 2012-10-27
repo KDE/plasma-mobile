@@ -19,7 +19,9 @@
 
 import QtQuick 1.0
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
 import org.kde.runnermodel 0.1 as RunnerModels
@@ -55,7 +57,7 @@ MouseArea {
         }
     }
 
-    MobileComponents.ResourceInstance {
+    PlasmaExtras.ResourceInstance {
         id: resourceInstance
     }
 
@@ -67,29 +69,23 @@ MouseArea {
         id: theme
     }
 
-    PlasmaCore.DataSource {
-        id: appsSource
-        engine: "org.kde.active.apps"
-        connectedSources: ["Apps"]
+    RunnerModels.RunnerModel {
+        id: runnerModel
     }
 
     PlasmaCore.SortFilterModel {
-        id: appsModel
-        sourceModel: PlasmaCore.DataModel {
-            keyRoleFilter: ".*"
-            dataSource: appsSource
-        }
-
-        sortRole: "name"
-    }
-
-    RunnerModels.RunnerModel {
-        id: runnerModel
-        runners: [ "services", "nepomuksearch", "recentdocuments", "desktopsessions" , "PowerDevil", "calculator" ]
+        id: sortedRunnerModel
+        sourceModel: runnerModel
+        sortRole: "relevance"
+        sortOrder: Qt.DescendingOrder
     }
 
     MobileComponents.ViewSearch {
         id: searchField
+        // we have this property because RunnerManager does a fair amount of
+        // bookeeping when setting runners; normally not a big issues, but this
+        // lets us avoid it as much as possible
+        property bool listingApps: true
 
         anchors {
             left: parent.left
@@ -100,15 +96,22 @@ MouseArea {
 
         onSearchQueryChanged: {
             if (searchQuery.length < 3) {
-                //HACK: assigning null makes the view really discard the old model and assign the new one
-                appGrid.model = null
-                appGrid.model = appsModel
-                runnerModel.query = ""
+                if (!listingApps) {
+                    runnerModel.runners = [ "org.kde.active.apps" ]
+                    listingApps = true;
+                }
+
+                runnerModel.query = '';
             } else {
-                appGrid.model = runnerModel
+                if (listingApps) {
+                    runnerModel.runners = [ "org.kde.active.apps", "nepomuksearch", "recentdocuments", "desktopsessions" , "PowerDevil", "calculator" ]
+                    listingApps = false;
+                }
+
                 runnerModel.query = searchQuery
             }
         }
+        busy: runnerModel.running && (searchQuery.length >= 3)
 
         Component.onCompleted: {
             delay = 10
@@ -117,9 +120,7 @@ MouseArea {
 
     MobileComponents.IconGrid {
         id: appGrid
-        delegateWidth: 128
-        delegateHeight: 100
-        model: appsModel
+        model: sortedRunnerModel
         onCurrentPageChanged: resourceInstance.uri = ""
 
         delegate: Component {
@@ -129,10 +130,10 @@ MouseArea {
                 height: appGrid.delegateHeight
                 className: "FileDataObject"
                 genericClassName: "FileDataObject"
-                property string label: model["name"] ? model["name"] : model["label"]
+                property string label: model["label"]
                 //property string mimeType: model["mimeType"] ? model["mimeType"] : "application/x-desktop"
                 onPressAndHold: ParallelAnimation {
-                    MobileComponents.ReleasedAnimation { targetItem: launcherDelegate }
+                    PlasmaExtras.ReleasedAnimation { targetItem: launcherDelegate }
                     ScriptAction { script: {
                             resourceInstance.uri = model["resourceUri"] ? model["resourceUri"] : model["entryPath"]
                             resourceInstance.title = model["name"] ? model["name"] : model["text"]
@@ -140,21 +141,12 @@ MouseArea {
                     }
                 }
                 onClicked: {
-                    //showing apps model?
-                    if (searchField.searchQuery == "") {
-                        var service = appsSource.serviceForSource(appsSource.connectedSources[0])
-                        var operation = service.operationDescription("launch")
-
-                        operation["Path"] = model["entryPath"]
-                        service.startOperationCall(operation)
-                    } else {
-                        runnerModel.run(index)
-                    }
+                    runnerModel.run(sortedRunnerModel.mapRowToSource((appGrid.currentPage * appGrid.pageSize) + index))
                     resetStatus()
                     itemLaunched()
                 }
-                onPressed: MobileComponents.PressedAnimation { targetItem: launcherDelegate }
-                onReleased: MobileComponents.ReleasedAnimation { targetItem: launcherDelegate }
+                onPressed: PlasmaExtras.PressedAnimation { targetItem: launcherDelegate }
+                onReleased: PlasmaExtras.ReleasedAnimation { targetItem: launcherDelegate }
             }
         }
 
@@ -167,6 +159,8 @@ MouseArea {
             bottomMargin: 4
         }
     }
+
+    Component.onCompleted: { runnerModel.runners =  [ "org.kde.active.apps" ] }
 }
 
 

@@ -54,6 +54,7 @@ public:
 
     Q_INVOKABLE QVariant readEntry(const QString &key);
     Q_INVOKABLE bool writeEntry(const QString &key, const QVariant &value);
+    Q_INVOKABLE void deleteEntry(const QString& key);
 
 Q_SIGNALS:
     void fileChanged();

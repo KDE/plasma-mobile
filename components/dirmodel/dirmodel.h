@@ -21,18 +21,37 @@
 #define DIRMODEL_H
 
 #include <KDirModel>
+#include <QVariant>
 
+class QTimer;
 
+class KImageCache;
+
+/**
+ * This class provides a QML binding to KDirModel
+ * Provides an easy way to navigate a filesystem from within QML
+ *
+ * @author Marco Martin <mart@kde.org>
+ */
 class DirModel : public KDirModel
 {
     Q_OBJECT
+
+    /**
+     * @property string The url we want to browse. it may be an absolute path or a correct url of any protocol KIO supports
+     */
     Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
+
+    /**
+     * @property count Total number of rows
+     */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
     enum Roles {
         UrlRole = Qt::UserRole + 1,
-        MimeTypeRole = Qt::UserRole + 2
+        MimeTypeRole = Qt::UserRole + 2,
+        Thumbnail  = Qt::UserRole + 3
     };
 
     DirModel(QObject* parent=0);
@@ -46,12 +65,26 @@ public:
 
     Q_INVOKABLE int indexForUrl(const QString &url) const;
 
+    Q_INVOKABLE QVariantMap get(int index) const;
+
+protected Q_SLOTS:
+    void showPreview(const KFileItem &item, const QPixmap &preview);
+    void previewFailed(const KFileItem &item);
+    void delayedPreview();
+
 Q_SIGNALS:
     void countChanged();
     void urlChanged();
 
 private:
     QStringList m_mimeTypes;
+
+    //previews
+    QTimer *m_previewTimer;
+    QHash<KUrl, QPersistentModelIndex> m_filesToPreview;
+    QSize m_screenshotSize;
+    QHash<KUrl, QPersistentModelIndex> m_previewJobs;
+    KImageCache* m_imageCache;
 };
 
 #endif // DIRMODEL_H

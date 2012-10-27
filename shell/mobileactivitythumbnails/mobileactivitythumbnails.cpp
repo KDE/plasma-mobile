@@ -103,7 +103,7 @@ void MobileActivityThumbnails::snapshotContainment(Plasma::Containment *containm
 
     ImageScaler *scaler = new ImageScaler(QImage(wallpaperPath), QSize(300, 200));
     scaler->setActivity(activity);
-    connect(scaler, SIGNAL(scaled(QString, QImage)), this, SLOT(imageScaled(QString, QImage)));
+    connect(scaler, SIGNAL(scaled(QString,QImage)), this, SLOT(imageScaled(QString,QImage)));
     scaler->setAutoDelete(true);
     QThreadPool::globalInstance()->start(scaler);
 }

@@ -28,20 +28,17 @@
 class SettingsModulePrivate {
 
 public:
-    SettingsModulePrivate(SettingsModule *q):
-                  q(q) {}
-
     QString name;
     QString description;
     QString module;
     QString iconName;
-    SettingsModule *q;
+    QString category;
 };
 
-SettingsModule::SettingsModule(QObject *parent, const QVariantList &v) : QObject(parent),
-                                  d(new SettingsModulePrivate(this))
+SettingsModule::SettingsModule(QObject *parent, const QVariantList &v)
+    : QObject(parent),
+      d(new SettingsModulePrivate)
 {
-    d = new SettingsModulePrivate(this);
     Q_UNUSED(v);
 }
 
@@ -50,24 +47,29 @@ SettingsModule::~SettingsModule()
     delete d;
 }
 
-QString SettingsModule::name()
+QString SettingsModule::name() const
 {
     return d->name;
 }
 
-QString SettingsModule::description()
+QString SettingsModule::description() const
 {
     return d->description;
 }
 
-QString SettingsModule::module()
+QString SettingsModule::module() const
 {
     return d->module;
 }
 
-QString SettingsModule::iconName()
+QString SettingsModule::iconName() const
 {
     return d->iconName;
+}
+
+QString SettingsModule::category() const
+{
+    return d->category;
 }
 
 void SettingsModule::setName(const QString &name)
@@ -99,6 +101,14 @@ void SettingsModule::setModule(const QString &module)
     if (d->module != module) {
         d->module = module;
         emit moduleChanged();
+    }
+}
+
+void SettingsModule::setCategory(const QString &category)
+{
+    if (d->category != category) {
+        d->category = category;
+        emit categoryChanged();
     }
 }
 

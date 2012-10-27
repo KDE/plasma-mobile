@@ -44,7 +44,6 @@ LocationChooser::LocationChooser(QObject * parent, const QVariantList &args)
 {
     kDebug() << "Location ###";
 
-    setPopupIcon("location");
     d->initialized = false;
 
     // init();
@@ -61,20 +60,24 @@ void LocationChooser::init()
 {
     if (d->initialized) return;
 
+    setPopupIcon("plasmaapplet-location");
     d->initialized = true;
 
-    d->root = new Plasma::DeclarativeWidget();
+    d->root = new Plasma::DeclarativeWidget(this);
+    d->root->setWindowFlags(Qt::Dialog);
     d->desktop = new KDesktopFile(LOCATION_CHOOSER_PACKAGE_DIR + "metadata.desktop");
     d->engine = new Engine(this);
 
-    // connect(d->engine, SIGNAL(currentLocationChanged(QString, QString)),
-    //         this, SLOT(currentLocationChanged(QString, QString)));
+    // connect(d->engine, SIGNAL(currentLocationChanged(QString,QString)),
+    //         this, SLOT(currentLocationChanged(QString,QString)));
 
     setGraphicsWidget(d->root);
     d->root->setInitializationDelayed(true);
     d->root->engine()->rootContext()->setContextProperty("locationManager", d->engine);
 
     d->root->setQmlPath(LOCATION_CHOOSER_PACKAGE_DIR + d->desktop->desktopGroup().readEntry("X-Plasma-MainScript"));
+
+    d->engine->init();
 }
 
 void LocationChooser::currentLocationChanged(const QString & id, const QString & name)
@@ -85,7 +88,7 @@ void LocationChooser::currentLocationChanged(const QString & id, const QString &
 void LocationChooser::popupEvent(bool show)
 {
     d->engine->requestUiReset();
-    setPopupIcon("plasmaapplet-location");
+
     Plasma::PopupApplet::popupEvent(show);
 }
 

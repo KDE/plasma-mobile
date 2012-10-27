@@ -37,7 +37,7 @@ static const char version[] = "0.1";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("active-filebrowser", 0, ki18n("Active file browser"), version, ki18n(description),
+    KAboutData about("active-filebrowser", 0, ki18n("Files"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2012 Marco Martin"), KLocalizedString(), 0, "mart@kde.org");
                      about.addAuthor( ki18n("Marco Martin"), KLocalizedString(), "mart@kde.org" );
     about.setProgramIconName("system-file-manager");
@@ -46,9 +46,8 @@ int main(int argc, char **argv)
 
     KCmdLineOptions options;
     options.add("+[url]", ki18n( "URL of the file to open" ));
-#ifndef QT_NO_OPENGL
-    options.add("opengl", ki18n("use a QGLWidget for the viewport"));
-#endif
+    options.add("t").add("resourceType <type>", ki18n( "resource type to restrict the browser, such as Image or Document" ));
+    options.add("m").add("mimeTypes <type,type>", ki18n( "comma separatedlist of mime types to restrict the browser" ));
     KCmdLineArgs::addCmdLineOptions(options);
     KApplication app;
 

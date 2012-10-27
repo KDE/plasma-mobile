@@ -153,8 +153,8 @@ void View::onStatusChanged(QDeclarativeView::Status status)
             // Note that "urlInput" is defined as objectName in the QML file
             m_urlInput = rootObject()->findChild<QDeclarativeItem*>("urlInput");
             if (m_urlInput) {
-                connect(m_urlInput, SIGNAL(urlEntered(const QString&)),
-                        this, SLOT(onUrlEntered(const QString&)));
+                connect(m_urlInput, SIGNAL(urlEntered(QString)),
+                        this, SLOT(onUrlEntered(QString)));
                 connect(m_urlInput, SIGNAL(urlFilterChanged()),
                         this, SLOT(urlFilterChanged()));
             } else {

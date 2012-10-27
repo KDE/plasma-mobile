@@ -21,6 +21,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.plasma.slccomponents 0.1 as SlcComponents
@@ -41,7 +42,23 @@ Item {
 
     property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
 
+    property int iconWidth: theme.defaultFont.mSize.width * 14
+    property int iconHeight: theme.defaultIconSize + theme.defaultFont.mSize.height
+    onIconHeightChanged: updateGridSize()
+
+    function updateGridSize()
+    {
+        LayoutManager.cellSize.width = main.iconWidth + borderSvg.elementSize("left").width + borderSvg.elementSize("right").width
+        LayoutManager.cellSize.height = main.iconHeight + theme.defaultFont.mSize.height + borderSvg.elementSize("top").height + borderSvg.elementSize("bottom").height + draggerSvg.elementSize("root-top").height + draggerSvg.elementSize("root-bottom").height
+        layoutTimer.restart()
+    }
+
     Component.onCompleted: {
+        //do it here since theme is not accessible in LayoutManager
+        //TODO: icon size from the configuration
+        //TODO: remove hardcoded sizes, use framesvg boders
+        updateGridSize()
+
         plasmoid.containmentType = "CustomContainment"
         plasmoid.appletAdded.connect(addApplet)
         LayoutManager.restore()
@@ -67,6 +84,17 @@ Item {
         imagePath: "widgets/configuration-icons"
     }
 
+    //those two are used only for sizes, not painted ever
+    //FIXME: way to avoid instantiating them?
+    PlasmaCore.Svg {
+        id: borderSvg
+        imagePath: "widgets/background"
+    }
+    PlasmaCore.Svg {
+        id: draggerSvg
+        imagePath: "widgets/extender-dragger"
+    }
+
     MetadataModels.MetadataCloudModel {
         id: categoryListModel
         cloudCategory: "rdf:type"
@@ -81,7 +109,7 @@ Item {
         id: userTypes
     }
 
-    MobileComponents.ResourceInstance {
+    PlasmaExtras.ResourceInstance {
         id: resourceInstance
     }
 
@@ -126,7 +154,11 @@ Item {
 
     Flickable {
         id: mainFlickable
-        anchors.fill: main
+        anchors {
+            fill: main
+            leftMargin: availScreenRect.x
+            rightMargin: parent.width - availScreenRect.x - availScreenRect.width
+        }
         interactive: contentItem.height>mainFlickable.height
         PropertyAnimation {
             id: contentScrollTo0Animation
@@ -143,7 +175,7 @@ Item {
         MouseArea {
             id: contentItem
             width: mainFlickable.width
-            height: childrenRect.y+childrenRect.height+availScreenRect.y+20
+            height: childrenRect.y+childrenRect.height
 
             onClicked: {
                 resourceInstance.uri = ""
@@ -161,9 +193,9 @@ Item {
                 spacing: 16
                 anchors {
                     top: parent.top
-                    left: parent.left
+                    left: resultsFlow.left
                     topMargin: availScreenRect.y+20
-                    leftMargin: 72
+                    leftMargin: 4
                 }
 
                 MobileComponents.ActionButton {
@@ -230,6 +262,7 @@ Item {
                             LayoutManager.itemGroups[category] = itemGroup
                         }
                         existingCategories[existingCategories.length] = category
+                        layoutTimer.restart()
                     }
                 }
             }
@@ -258,7 +291,7 @@ Item {
             Item {
                 id: resultsFlow
                 //height: Math.min(300, childrenRect.height)
-                width: Math.round((parent.width-64)/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
+                width: Math.floor(parent.width/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
                 height: childrenRect.y+childrenRect.height
                 z: 900
 

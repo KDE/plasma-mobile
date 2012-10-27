@@ -163,28 +163,32 @@ PlasmaCore.FrameSvgItem {
     ]
 
     function placePopup () {
-        var rootItem = parent;
-        while (rootItem.parent) {
-            rootItem = rootItem.parent;
-        }
-        var mouse = linkRect;
-        var distanceToTop = webView.mapToItem(rootItem, mouse.x, mouse.y);
-        //var distanceToTop = mouse;
-//         print( "   distanceToTop: " + distanceToTop.x);
-//         print( " mouse: x: " + mouse.x + " y: " + mouse.y);
-        if (distanceToTop.x < linkPopup.width/2) {
-//             print(" hitting the left edge " + distanceToTop.x);
-            //linkPopup.x = mouse.x
+        // Smart placement of link popup. The popup sits on top horizontally
+        // centered on the actived link or item in the webpage, never covering
+        // it. If it doesn't fit within the webview, it's moved under or aligned
+        // to the edges.
 
+        // Check if we need to shift vertically
+        if (linkRect.x < linkPopup.width/2) {
+            // hitting the left edge, anchor to left border
+            linkPopup.x = 0;
         } else {
-            linkPopup.x = mouse.x-(linkPopup.width/2)
+            if (webView.width < linkRect.x + linkPopup.width ) {
+                // hitting the right edge, anchoring right
+                linkPopup.x = webView.width - linkPopup.width
+            } else {
+                // Not hitting any edge, align horizontally centered with link rect
+                linkPopup.x = linkRect.x-(linkPopup.width/2)+linkRect.width/2
+            }
         }
-        if (distanceToTop.y > linkPopup.height + header.height) {
-//             print(" placing at mouse.y : " + mouse.y + " " + linkPopup.height)
-            linkPopup.y = mouse.y - linkPopup.height;
+
+        // Check whether we need to reposition horizontally
+        if (linkRect.y < linkPopup.height) {
+            // move down under linkRect point
+            linkPopup.y = linkRect.y + linkRect.height;
         } else {
-            //linkPopup.y = mouse.y-(linkPopup.width/2)
+            // Normally, the popup sits above the link rectangle
+            linkPopup.y = linkRect.y - linkPopup.height;
         }
     }
-
 }

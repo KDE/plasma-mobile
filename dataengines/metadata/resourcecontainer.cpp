@@ -26,19 +26,19 @@
 
 #include <KMimeType>
 
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
-#include <Nepomuk/File>
+#include <Nepomuk2/Tag>
+#include <Nepomuk2/Variant>
+#include <Nepomuk2/File>
 
 
 ResourceContainer::ResourceContainer(QObject *parent)
     : Plasma::DataContainer(parent)
 {
-    m_watcher = new Nepomuk::ResourceWatcher(this);
+    m_watcher = new Nepomuk2::ResourceWatcher(this);
 
     m_watcher->addProperty(QUrl("http://www.semanticdesktop.org/ontologies/2007/08/15/nao#numericRating"));
-    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)),
-            this, SLOT(propertyChanged(Nepomuk::Resource, Nepomuk::Types::Property, QVariant)));
+    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk2::Resource,Nepomuk2::Types::Property,QVariant)),
+            this, SLOT(propertyChanged(Nepomuk2::Resource,Nepomuk2::Types::Property,QVariant)));
 }
 
 ResourceContainer::~ResourceContainer()
@@ -46,7 +46,7 @@ ResourceContainer::~ResourceContainer()
 }
 
 
-void ResourceContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::Property prop, QVariant val)
+void ResourceContainer::propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val)
 {
     if (res != m_resource) {
         return;
@@ -56,7 +56,7 @@ void ResourceContainer::propertyChanged(Nepomuk::Resource res, Nepomuk::Types::P
     checkForUpdate();
 }
 
-void ResourceContainer::setResource(Nepomuk::Resource resource)
+void ResourceContainer::setResource(Nepomuk2::Resource resource)
 {
     if (m_resource == resource) {
         return;
@@ -66,7 +66,7 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
     //update the resource watcher
     {
         m_watcher->stop();
-        QList<Nepomuk::Resource> resources;
+        QList<Nepomuk2::Resource> resources;
         resources << resource;
         m_watcher->setResources(resources);
         m_watcher->start();
@@ -74,9 +74,10 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
 
 
 
+    const QString className = resource.type().toString().section( QRegExp( "[#:]" ), -1 );
     QString desc = resource.genericDescription();
     if (desc.isEmpty()) {
-        desc = resource.className();
+        desc = className;
     }
     QString label = resource.genericLabel();
     if (label.isEmpty()) {
@@ -94,11 +95,11 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
 
     setData("types", _types);
 
-    Nepomuk::Types::Class resClass(resource.resourceType());
+    Nepomuk2::Types::Class resClass(resource.type());
 
     //FIXME: a more elegant way is needed
-    setData("genericClassName", resource.className());
-    foreach (Nepomuk::Types::Class parentClass, resClass.parentClasses()) {
+    setData("genericClassName", className);
+    foreach (const Nepomuk2::Types::Class &parentClass, resClass.parentClasses()) {
         if (parentClass.label() == "Document" ||
             parentClass.label() == "Audio" ||
             parentClass.label() == "Video" ||
@@ -124,12 +125,12 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
     if (_icon.isEmpty()) {
         // use resource types to find a suitable icon.
         //TODO
-        _icon = icon(QStringList(resource.className()));
+        _icon = icon(QStringList(className));
         //kDebug() << "symbol" << _icon;
     }
-    if (_icon.split(",").count() > 1) {
+    if (_icon.split(',').count() > 1) {
         kDebug() << "More than one icon!" << _icon;
-        _icon = _icon.split(",").last();
+        _icon = _icon.split(',').last();
     }
 
     setData("icon", _icon);
@@ -137,30 +138,20 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
     setData("isFile", resource.isFile());
     setData("exists", resource.exists());
     setData("rating", resource.rating());
-    setData("symbols", resource.symbols());
 
-    setData("className", resource.className());
-    setData("resourceUri", resource.resourceUri());
-    setData("resourceType", resource.resourceType());
+    setData("className", className);
+    setData("resourceUri", resource.uri());
+    setData("resourceType", resource.type());
     setData("query", objectName());
 
     if (resource.isFile() && resource.toFile().url().isLocalFile()) {
         setData("url", resource.toFile().url().prettyUrl());
     }
 
-    // Topics
-    QStringList _topics, _topicNames;
-    foreach (const Nepomuk::Resource &u, resource.topics()) {
-        _topics << u.resourceUri().toString();
-        _topicNames << u.genericLabel();
-    }
-    setData("topics", _topics);
-    setData("topicNames", _topicNames);
-
     // Tags
     QStringList _tags, _tagNames;
-    foreach (const Nepomuk::Tag &tag, resource.tags()) {
-        _tags << tag.resourceUri().toString();
+    foreach (const Nepomuk2::Tag &tag, resource.tags()) {
+        _tags << tag.uri().toString();
         _tagNames << tag.genericLabel();
     }
     setData("tags", _tags);
@@ -168,14 +159,14 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
 
     // Related
     QStringList _relateds;
-    foreach (const Nepomuk::Resource &res, resource.isRelateds()) {
-        _relateds << res.resourceUri().toString();
+    foreach (const Nepomuk2::Resource &res, resource.isRelateds()) {
+        _relateds << res.uri().toString();
     }
     setData("relateds", _relateds);
 
     // Dynamic properties
     QStringList _properties;
-    QHash<QUrl, Nepomuk::Variant> props = resource.properties();
+    QHash<QUrl, Nepomuk2::Variant> props = resource.properties();
     foreach(const QUrl &propertyUrl, props.keys()) {
 
         QStringList _l = propertyUrl.toString().split('#');
@@ -185,10 +176,10 @@ void ResourceContainer::setResource(Nepomuk::Resource resource)
             //QString from = dynamic_cast<QList<QUrl>();
             if (resource.property(propertyUrl).variant().canConvert(QVariant::List)) {
                 QVariantList tl = resource.property(propertyUrl).variant().toList();
-                foreach (QVariant vu, tl) {
+                foreach (const QVariant &vu, tl) {
                     //kDebug() << vu.toString().startsWith("nepomuk:") << vu.toString().startsWith("akonadi:") << vu.toString();
                     if (vu.canConvert(QVariant::Url) &&
-                        (vu.toString().startsWith("nepomuk:") || vu.toString().startsWith("akonadi:"))) {
+                        (vu.toString().startsWith(QLatin1String("nepomuk:")) || vu.toString().startsWith(QLatin1String("akonadi:")))) {
                         kDebug() <<  "HHH This is a list.!!!" << key << vu.toString();
                     }
                 }

@@ -49,6 +49,7 @@ class ActivityConfiguration : public Plasma::DeclarativeWidget
     Q_PROPERTY(int wallpaperIndex READ wallpaperIndex WRITE setWallpaperIndex NOTIFY wallpaperIndexChanged)
     Q_PROPERTY(QSize screenshotSize READ screenshotSize WRITE setScreenshotSize)
     Q_PROPERTY(bool activityNameConfigurable READ isActivityNameConfigurable)
+    Q_PROPERTY(bool encrypted READ isEncrypted WRITE setEncrypted NOTIFY encryptedChanged)
 
 public:
     ActivityConfiguration(QGraphicsWidget *parent = 0);
@@ -60,6 +61,9 @@ public:
     void setActivityName(const QString &name);
     QString activityName() const;
     QString activityId() const;
+
+    bool isEncrypted() const;
+    void setEncrypted(bool encrypted);
 
     QObject *wallpaperModel();
 
@@ -77,6 +81,7 @@ Q_SIGNALS:
     void activityNameChanged();
     void containmentAvailable();
     void containmentWallpaperChanged(Plasma::Containment *containment);
+    void encryptedChanged();
 
 protected:
     void ensureContainmentExistence();
@@ -99,6 +104,7 @@ private:
     QString m_activityName;
     int m_wallpaperIndex;
     bool m_newContainment;
+    bool m_encrypted;
 };
 
 #endif //PLASMA_ACTIVITYCONFIG_H

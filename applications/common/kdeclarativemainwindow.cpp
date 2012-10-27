@@ -26,6 +26,7 @@
 #include <QDeclarativeContext>
 
 #include <KAction>
+#include <KActionCollection>
 #include <KCmdLineArgs>
 #include <KStandardAction>
 
@@ -38,7 +39,11 @@ class KDeclarativeMainWindowPrivate
 public:
     KDeclarativeMainWindowPrivate(KDeclarativeMainWindow *window)
         : q(window)
-    {}
+    {
+        actions = new KActionCollection(q);
+        actions->setConfigGroup("Shortcuts");
+        actions->addAssociatedWidget(q);
+    }
 
     void statusChanged(QDeclarativeView::Status status);
 
@@ -47,6 +52,8 @@ public:
     KCmdLineArgs *args;
     QStringList arguments;
     QString caption;
+    QVariant icon;
+    KActionCollection *actions;
 };
 
 void KDeclarativeMainWindowPrivate::statusChanged(QDeclarativeView::Status status)
@@ -67,8 +74,12 @@ KDeclarativeMainWindow::KDeclarativeMainWindow()
     const QString themeName = cg.readEntry("name", "air-mobile");
     Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
     Plasma::Theme::defaultTheme()->setThemeName(themeName);
-    addAction(KStandardAction::close(this, SLOT(close()), this));
-    addAction(KStandardAction::quit(this, SLOT(close()), this));
+    KMainWindow::addAction(KStandardAction::close(this, SLOT(close()), this));
+    KMainWindow::addAction(KStandardAction::quit(this, SLOT(close()), this));
+
+    KAction *backAction = d->actions->addAction("back");
+    backAction->setAutoRepeat(false);
+    backAction->setShortcut(KShortcut(QKeySequence(Qt::Key_Back)));
 
     d->view = new KDeclarativeView(this);
     connect(d->view, SIGNAL(statusChanged(QDeclarativeView::Status)), this, SLOT(statusChanged(QDeclarativeView::Status)));
@@ -83,12 +94,9 @@ KDeclarativeMainWindow::KDeclarativeMainWindow()
         d->arguments << d->args->arg(i);
     }
 
-    bool useGL = d->args->isSet("opengl");
-    if (!useGL) {
-        //use plasmarc to share this with plasma-windowed
-        KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
-        useGL = cg.readEntry("UseOpenGl", true);
-    }
+    cg = KConfigGroup(KSharedConfig::openConfig("plasmarc"), "General");
+    bool useGL = cg.readEntry("UseOpenGl", true);
+
     d->view->setUseGL(useGL);
 
     connect(d->view, SIGNAL(titleChanged(QString)), SLOT(setCaption(QString)));
@@ -113,11 +121,6 @@ KConfigGroup KDeclarativeMainWindow::config(const QString &group)
 QStringList KDeclarativeMainWindow::startupArguments() const
 {
     return d->arguments;
-}
-
-QString KDeclarativeMainWindow::startupOption(const QString &option) const
-{
-    return d->args->getOption(option.toLatin1());
 }
 
 QString KDeclarativeMainWindow::caption() const
@@ -147,6 +150,40 @@ void KDeclarativeMainWindow::setCaption(const QString &caption, bool modified)
     d->caption = caption;
     emit captionChanged();
     KMainWindow::setCaption(caption, true);
+}
+
+
+QVariant KDeclarativeMainWindow::icon() const
+{
+    return d->icon;
+}
+
+void KDeclarativeMainWindow::setIcon(const QVariant &icon)
+{
+    if (d->icon == icon || (icon.canConvert<QString>() && icon.canConvert<QIcon>())) {
+        return;
+    }
+
+    d->icon = icon;
+    if (icon.canConvert<QString>()) {
+        setWindowIcon(KIcon(icon.toString()));
+    } else {
+        setWindowIcon(icon.value<QIcon>());
+    }
+
+    emit iconChanged();
+}
+
+QAction *KDeclarativeMainWindow::action(const QString &name)
+{
+    return d->actions->action(name);
+}
+
+void KDeclarativeMainWindow::addAction(const QString &name, const QString &string)
+{
+    KAction *action = d->actions->addAction(name);
+    action->setAutoRepeat(false);
+    action->setText(string);
 }
 
 #include "kdeclarativemainwindow.moc"

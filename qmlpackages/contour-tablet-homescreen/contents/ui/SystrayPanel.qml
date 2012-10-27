@@ -20,15 +20,19 @@
 
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-Item {
+Image {
+    source: "image://appbackgrounds/standard"
+    fillMode: Image.Tile
     id: systrayPanel
     state: "Hidden"
     width: Math.max(800, homeScreen.width)
     height: Math.max(480+systrayContainer.height+8, homeScreen.height - 50 + background.margins.bottom)
     property bool windowStripVisible: false
     property alias containment: systrayContainer.plasmoid
+    property int panelHeight: systrayContainer.height + background.margins.bottom*2
 
     onStateChanged: {
         if (menuContainer.plasmoid && (state == "Hidden" || state == "Tasks")) {
@@ -38,7 +42,12 @@ Item {
 
     PlasmaCore.FrameSvgItem {
         id: background
-        anchors.fill:parent
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: systrayContainer.height + margins.bottom*2
         imagePath: "widgets/panel-background"
         enabledBorders: "BottomBorder"
     }
@@ -58,13 +67,17 @@ Item {
         topSlidingPanel.windowListArea = Qt.rect(windowListContainer.x, windowListContainer.y, windowListContainer.width, windowListContainer.height)
     }
 
-    SlidingDragButton {
-        id: slidingDragButton
-        panelHeight: 32
-        tasksHeight: 150
-        onDraggingChanged: {
-            //load the launcher package on demand to save boot time
-            if (!menuContainer.plasmoid && dragging) {
+    //The launcher package is created after some time to not slow boot time
+    Timer {
+        id: delayedLoadTimer
+        running: true
+        interval: 3000
+        onTriggered: {
+            loadMenuContainer();
+        }
+
+        function loadMenuContainer() {
+            if (!menuContainer.plasmoid) {
                 var component = Qt.createComponent(launcherPackage.filePath("mainscript"));
                 menuContainer.plasmoid = component.createObject(menuContainer);
                 //assume menuContainer provides a itemLaunched signal
@@ -72,19 +85,45 @@ Item {
                     menuContainer.plasmoid.itemLaunched.connect(systrayPanel.itemLaunched)
                 }
             }
+        }
+    }
+    SlidingDragButton {
+        id: slidingDragButton
+        panelHeight: {
+            var height = theme.defaultFont.mSize.height * 1.6
+            if (height < theme.smallIconSize) {
+                theme.smallIconSize
+            } else if (height < theme.smallMediumIconSize) {
+                theme.smallMediumIconSize
+            } else if (height < theme.mediumIconSize) {
+                theme.mediumIconSize
+            } else if (height < theme.largeIconSize) {
+                theme.largeIconSize
+            } else if (height < theme.hugeIconSize) {
+                theme.hugeIconSize
+            } else {
+                theme.enormousIconSize
+            }
+        }
+        tasksHeight: homeScreen.height/4.5
+        onDraggingChanged: {
             if (dragging) {
+                if (delayedLoadTimer.running) {
+                    delayedLoadTimer.running = false;
+                    delayedLoadTimer.loadMenuContainer();
+                }
                 systrayPanel.windowStripVisible = true;
             }
         }
 
-        anchors {
-            fill: parent
-            bottomMargin: background.margins.bottom
-        }
+        anchors.fill: parent
 
         Column {
             id: itemColumn
-            anchors.fill: parent
+            anchors {
+                fill: parent
+                bottomMargin: background.margins.bottom
+            }
             spacing: 4
 
             PlasmoidContainer {
@@ -95,14 +134,14 @@ Item {
                 }
                 height: parent.height - (itemColumn.spacing * 3) - systrayContainer.height - windowListContainer.height - 2
                 Image {
-                    source: homeScreenPackage.filePath("images", "shadow-bottom.png")
+                    source: "image://appbackgrounds/shadow-top"
                     fillMode: Image.StretchHorizontally
                     height: sourceSize.height
                     z: 800
                     anchors {
                         left: parent.left
                         right: parent.right
-                        top: parent.bottom
+                        bottom: parent.bottom
                         bottomMargin: -1
                     }
                 }
@@ -141,7 +180,7 @@ Item {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    rightMargin: 32
+                    rightMargin: slidingDragButton.homeButtonShown ? slidingDragButton.panelHeight : 0
                 }
                 height: slidingDragButton.panelHeight
             }
@@ -161,7 +200,7 @@ Item {
             name: "Hidden"
             PropertyChanges {
                 target: topSlidingPanel
-                y: -topEdgePanel.height + systrayContainer.height + background.margins.bottom + 2
+                y: -topEdgePanel.height + background.height
                 acceptsFocus: false
             }
         },
@@ -169,7 +208,7 @@ Item {
             name: "Tasks"
             PropertyChanges {
                 target: topSlidingPanel
-                y: -topEdgePanel.height + systrayContainer.height + windowListContainer.height + background.margins.bottom
+                y: -topEdgePanel.height + background.height + background.margins.bottom + windowListContainer.height
 
                 acceptsFocus: true
             }
@@ -187,6 +226,8 @@ Item {
                     script: {
                         if (state == "Hidden") {
                             systrayPanel.windowStripVisible = false
+                        } else {
+                            systrayPanel.windowStripVisible = true
                         }
                     }
                 }

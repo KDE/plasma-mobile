@@ -200,7 +200,7 @@ ExpandingBox {
             }
 
             PlasmaComponents.Label {
-                text: i18n("Do you want to remove %1 ?  This action will forget any passwords and you will no longer be automatically connected to %2").arg(networkItem.name).arg(networkItem.name);
+                text: i18n("Do you want to remove %1? This action will forget any passwords and you will no longer be automatically connected to %2").arg(networkItem.name).arg(networkItem.name);
                 wrapMode: Text.WordWrap
                 width: parent.width
             }

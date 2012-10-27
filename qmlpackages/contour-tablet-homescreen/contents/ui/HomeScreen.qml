@@ -64,6 +64,7 @@ import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.deviceshell 0.1 as DeviceShell
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.qtextracomponents 0.1
 
 Item {
     id: homeScreen
@@ -73,12 +74,16 @@ Item {
     signal newActivityRequested
     signal focusActivityView
 
+    property bool windowActive: false
+
     //this item will define Corona::availableScreenRegion() for simplicity made by a single rectangle
     property Item availableScreenRect: Item {
         parent: homeScreen
         anchors.fill: parent
-        anchors.topMargin: 38
-        anchors.bottomMargin: 12
+        anchors.topMargin: topEdgePanel.panelHeight
+        anchors.bottomMargin: 4
+        anchors.leftMargin: 32
+        anchors.rightMargin: 32
 
         //those properties will define "structs" for reserved screen of the panels
         property int leftReserved: 0
@@ -116,6 +121,14 @@ Item {
         }
     }
 
+    function togglePanel()
+    {
+        if (topEdgePanel.state == "Hidden") {
+            topEdgePanel.state = "Launcher"
+        } else {
+            topEdgePanel.state = "Hidden"
+        }
+    }
 
     /*************Implementation***************/
     x: 0
@@ -173,7 +186,7 @@ Item {
     }
 
 
-    MobileComponents.MouseEventListener {
+    MouseEventListener {
         id: mainSlot;
         x: 0;
         y: 0;

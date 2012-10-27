@@ -126,4 +126,9 @@ QSize KDeclarativeView::sizeHint() const
     return QSize(800, 600);
 }
 
+QScriptEngine *KDeclarativeView::scriptEngine() const
+{
+    return d->kdeclarative.scriptEngine();
+}
+
 #include "kdeclarativeview.moc"

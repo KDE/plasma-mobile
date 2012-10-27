@@ -29,6 +29,7 @@ ItemGroup {
     onEnabledChanged: {
         layoutTimer.restart()
     }
+    imagePath: "widgets/translucentbackground"
 
     ItemsList {
         id: itemsList

@@ -1,6 +1,6 @@
 /*
  * Copyright 2011 Marco Martin <mart@kde.org>
- * Copyright 2011 Sebastian Kügler <sebas@kde.org>
+ * Copyright 2011,2012 Sebastian Kügler <sebas@kde.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Library General Public License version 2 as
@@ -19,6 +19,8 @@
 
 #include "previewcontainer.h"
 #include "previewengine.h"
+
+#include <QPainter>
 
 #include <KDebug>
 #include <KIcon>
@@ -42,14 +44,12 @@ void PreviewContainer::init()
     QImage preview = QImage(m_previewSize, QImage::Format_ARGB32_Premultiplied);
     if (m_previewEngine->imageCache()->findImage(objectName(), &preview)) {
         // cache hit
-        //kDebug() << "Cache hit: " << objectName();
         setData("status", "done");
         setData("url", m_url);
         setData("thumbnail", preview);
         checkForUpdate();
         return;
     }
-    kDebug() << "Cache miss: " << objectName();
 
     // Set fallbackimage while loading
     m_fallbackImage = KIcon("image-loading").pixmap(QSize(64, 64)).toImage();
@@ -62,8 +62,8 @@ void PreviewContainer::init()
     // It may be a directory or a file, let's stat
     KIO::JobFlags flags = KIO::HideProgressInfo;
     m_mimeJob = KIO::mimetype(m_url, flags);
-    connect(m_mimeJob, SIGNAL(mimetype(KIO::Job *, const QString&)),
-            this, SLOT(mimetypeRetrieved(KIO::Job *, const QString&)));
+    connect(m_mimeJob, SIGNAL(mimetype(KIO::Job*,QString)),
+            this, SLOT(mimetypeRetrieved(KIO::Job*,QString)));
 }
 
 PreviewContainer::~PreviewContainer()
@@ -91,17 +91,20 @@ void PreviewContainer::mimetypeRetrieved(KIO::Job* job, const QString &mimetype)
     KFileItemList list;
     list << kfile;
 
-    // Enable all plugins but the html thumbnailer, this ones covered by
-    // the new web creator which also supports remote URLs
-    QStringList _en = KIO::PreviewJob::availablePlugins();
-    _en.removeAll("htmlthumbnail");
-    QStringList *enabledPlugins = new QStringList(_en);
-    m_job = new KIO::PreviewJob(list, m_previewSize, enabledPlugins);
+    // Enable all plugins
+    QSize previewSize = m_previewSize;
+    // FIXME: enable once we depend on Qt 4.8
+    //if (!QUrl(m_url).isLocalFile()) {
+    if (m_url.toString().startsWith("http")) {
+        previewSize = QSize(256, 256); // might come from cache with normalized size
+    }
+    m_job = new KIO::PreviewJob(list, previewSize,
+                                new QStringList(KIO::PreviewJob::availablePlugins()));
 
-    connect(m_job, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-            SLOT(previewUpdated(const KFileItem&, const QPixmap&)));
-    connect(m_job, SIGNAL(failed(const KFileItem&)),
-            SLOT(previewJobFailed(const KFileItem&)));
+    connect(m_job, SIGNAL(gotPreview(KFileItem,QPixmap)),
+            SLOT(previewUpdated(KFileItem,QPixmap)));
+    connect(m_job, SIGNAL(failed(KFileItem)),
+            SLOT(previewJobFailed(KFileItem)));
     connect(m_job, SIGNAL(result(KJob*)), SLOT(previewResult(KJob*)));
 
     m_job->start();
@@ -127,11 +130,24 @@ void PreviewContainer::previewUpdated(const KFileItem &item, const QPixmap &prev
 
     setData("status", "done");
     setData("url", m_url);
-    QImage p = preview.toImage();
-    setData("thumbnail", p);
+    const QRect s(QPoint(0, 0), m_previewSize);
+    QImage img(s.size(), QImage::Format_ARGB32_Premultiplied);
+    img.fill(Qt::transparent);
+    QImage i = preview.toImage();
+    if (!item.url().isLocalFile()) {
+        // cut out a top-left piece for web previews
+        const QSize ss = s.size();
+        QRect s1 = QRect(QPoint(0, 0), ss*1.2);
+        QRect s2 = QRect(QPoint(0, 0), ss*0.8);
+        QPainter p(&img);
+        p.drawImage(s1, i, s2);
+    } else {
+        img = i;
+    }
+    setData("thumbnail", img);
     checkForUpdate();
-    kDebug() << "Cache insert: " << objectName();
-    m_previewEngine->imageCache()->insertImage(objectName(), p);
+    kDebug() << "Cache insert: " << objectName() << img.size();
+    m_previewEngine->imageCache()->insertImage(objectName(), img);
 }
 
 #include "previewcontainer.moc"

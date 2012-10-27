@@ -20,6 +20,7 @@
 
 import QtQuick 1.0
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1
 import org.kde.active.settings 0.1 as ActiveSettings
 import "testhelper.js" as TestHelper
 
@@ -38,12 +39,12 @@ ActiveSettings.ConfigGroup {
     }
 
 
-    Text {
+    Title {
         id: nestingHeader
         width: parent.width
         clip: true
         anchors { top: parent.top; topMargin: 24;}
-        text: "<h3>Nested Config</h3>"
+        text: "Nested Config"
     }
 
     Text {

@@ -25,24 +25,24 @@
 #include "history.h"
 
 // Nepomuk
-#include <Nepomuk/Resource>
-#include <Nepomuk/Variant>
-//#include <nepomuk/queryparser.h>
-#include <Nepomuk/Query/ResourceTerm>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Variant>
+//#include <nepomuk2/queryparser.h>
+#include <Nepomuk2/Query/ResourceTerm>
 #include "bookmark.h"
 
-#include <Nepomuk/Query/Query>
-//#include <Nepomuk/Query/FileQuery>
-#include <Nepomuk/Query/QueryServiceClient>
-#include <Nepomuk/Query/Result>
+#include <Nepomuk2/Query/Query>
+//#include <Nepomuk2/Query/FileQuery>
+#include <Nepomuk2/Query/QueryServiceClient>
+#include <Nepomuk2/Query/Result>
 
 //#include <soprano/vocabulary.h>
 
-#include <nepomuk/andterm.h>
-#include <nepomuk/orterm.h>
-#include <nepomuk/comparisonterm.h>
-#include <nepomuk/literalterm.h>
-#include <nepomuk/resourcetypeterm.h>
+#include <nepomuk2/andterm.h>
+#include <nepomuk2/orterm.h>
+#include <nepomuk2/comparisonterm.h>
+#include <nepomuk2/literalterm.h>
+#include <nepomuk2/resourcetypeterm.h>
 
 #include "kdebug.h"
 
@@ -51,8 +51,8 @@ class CompletionModelPrivate {
 public:
     QList<QObject*> items;
     QList<QObject*> filteredItems;
-    Nepomuk::Query::Query query;
-    Nepomuk::Query::QueryServiceClient* queryClient;
+    Nepomuk2::Query::Query query;
+    Nepomuk2::Query::QueryServiceClient* queryClient;
     History* history;
     QString filter;
     bool isPopulated;
@@ -141,24 +141,24 @@ void CompletionModel::populate()
 
 void CompletionModel::loadBookmarks()
 {
-    if (!Nepomuk::Query::QueryServiceClient::serviceAvailable()) {
+    if (!Nepomuk2::Query::QueryServiceClient::serviceAvailable()) {
         return;
     }
 
     kDebug() << "Loading bookmarks...";
-    Nepomuk::Types::Class bookmarkClass(Nepomuk::Bookmark::resourceTypeUri());
-    Nepomuk::Query::ResourceTypeTerm rtt(bookmarkClass);
+    Nepomuk2::Types::Class bookmarkClass(Nepomuk2::Bookmark::resourceTypeUri());
+    Nepomuk2::Query::ResourceTypeTerm rtt(bookmarkClass);
 
     d->query.setTerm(rtt);
 
-    d->queryClient = new Nepomuk::Query::QueryServiceClient(this);
+    d->queryClient = new Nepomuk2::Query::QueryServiceClient(this);
 
     connect(d->queryClient, SIGNAL(finishedListing()),
             this, SLOT(finishedListing()));
-    connect(d->queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(d->queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
-            this, SLOT(entriesRemoved(const QList<QUrl> &)));
+    connect(d->queryClient, SIGNAL(newEntries(QList<Nepomuk2::Query::Result>)),
+            this, SLOT(newEntries(QList<Nepomuk2::Query::Result>)));
+    connect(d->queryClient, SIGNAL(entriesRemoved(QList<QUrl>)),
+            this, SLOT(entriesRemoved(QList<QUrl>)));
 
     d->query.setLimit(64);
     d->queryClient->query(d->query);
@@ -171,9 +171,9 @@ void CompletionModel::finishedListing()
 
 
 
-void CompletionModel::newEntries(const QList< Nepomuk::Query::Result >& entries)
+void CompletionModel::newEntries(const QList< Nepomuk2::Query::Result >& entries)
 {
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk2::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         CompletionItem* item = new CompletionItem(this);
         item->setResource(res.resource());
@@ -185,8 +185,23 @@ void CompletionModel::newEntries(const QList< Nepomuk::Query::Result >& entries)
 
 void CompletionModel::entriesRemoved(const QList< QUrl >& urls)
 {
-    Q_UNUSED( urls );
-    // TODO: implement me
+    // not efficient but I do think users will have thousands of bookmarks to make this cause any lag.
+    // Also in the common case urls.size() == 1, so there will be only one iteration through the
+    // bookmarks list.
+    QMutableListIterator<QObject*> i(d->items);
+    foreach (const QUrl &u, urls) {
+        while (i.hasNext()) {
+            CompletionItem * cItem = static_cast<CompletionItem *>(i.next());
+            if (cItem && cItem->resourceUri() == u) {
+                //kDebug() << "Removing" << u << cItem->url();
+                i.remove();
+                cItem->deleteLater();
+                break;
+            }
+        }
+        i.toFront();
+    }
+    emit dataChanged();
 }
 
 #include "completionmodel.moc"

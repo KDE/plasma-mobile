@@ -20,7 +20,6 @@
  ***************************************************************************/
 
 #include "filebrowser.h"
-#include "dirmodel.h"
 #include "kdeclarativeview.h"
 
 #include <QDeclarativeContext>
@@ -31,35 +30,118 @@
 #include <KConfigGroup>
 #include <KIcon>
 #include <KStandardAction>
+#include <KStandardDirs>
+#include <KServiceTypeTrader>
+#include <KMimeType>
 
+#include <kio/copyjob.h>
 #include <Plasma/Theme>
 
 
 FileBrowser::FileBrowser()
-    : KDeclarativeMainWindow()
+    : KDeclarativeMainWindow(),
+      m_emptyProcess(0)
 {
+    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
     declarativeView()->setPackageName("org.kde.active.filebrowser");
 
-    // Filter the supplied argument through KUriFilter and then
-    // make the resulting url known to the webbrowser component
-    // as startupArguments property
-    m_dirModel = new DirModel(this);
-    if (startupArguments().count()) {
-        KUrl uri(startupArguments()[0]);
-        QVariant a = QVariant(QStringList(uri.prettyUrl()));
-        if (!uri.prettyUrl().isEmpty()) {
-            if (!uri.isLocalFile() || !QFileInfo(uri.toLocalFile()).isDir()) {
-                uri = uri.upUrl();
-            }
-            m_dirModel->setUrl(uri.prettyUrl());
-        }
+    declarativeView()->rootContext()->setContextProperty("exclusiveResourceType", args->getOption("resourceType"));
+
+    QString mimeString = args->getOption("mimeTypes");
+    if (mimeString.isEmpty()) {
+        declarativeView()->rootContext()->setContextProperty("exclusiveMimeTypes", QStringList());
+    } else {
+        QStringList mimeTypes = mimeString.split(',');
+        declarativeView()->rootContext()->setContextProperty("exclusiveMimeTypes", mimeTypes);
     }
-    declarativeView()->rootContext()->setContextProperty("dirModel", m_dirModel);
+
+    //FIXME: need more elegant and pluggable way
+    if (args->getOption("resourceType") == "nfo:Image") {
+        setWindowIcon(KIcon("active-image-viewer"));
+        setPlainCaption(i18n("Images"));
+    }
+
+    if (!startupArguments().isEmpty()) {
+        KMimeType::Ptr t = KMimeType::findByUrl(startupArguments().first());
+        declarativeView()->rootContext()->setContextProperty("startupMimeType", t->name());
+    }
 }
 
 FileBrowser::~FileBrowser()
 {
 }
 
+QString FileBrowser::packageForMimeType(const QString &mimeType)
+{
+    if (mimeType.isEmpty()) {
+        return QString();
+    }
+
+    KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("'%1' in MimeTypes").arg(mimeType));
+
+    foreach (const KService::Ptr &service, services) {
+        if (service->noDisplay()) {
+            continue;
+        }
+        QString description;
+        if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
+            description = service->genericName();
+        } else if (!service->comment().isEmpty()) {
+            description = service->comment();
+        }
+        //kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
+        kDebug() << service->property("X-KDE-PluginInfo-Name") << "\t\t" << description.toLocal8Bit().data();
+        return service->property("X-KDE-PluginInfo-Name").toString();
+    }
+    return QString();
+}
+
+void FileBrowser::emptyTrash()
+{
+    // We can't use KonqOperations here. To avoid duplicating its code (small, though),
+    // we can simply call ktrash.
+
+    if (m_emptyProcess) {
+        return;
+    }
+
+    m_emptyProcess = new KProcess(this);
+    connect(m_emptyProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
+            this, SLOT(emptyFinished(int,QProcess::ExitStatus)));
+    (*m_emptyProcess) << KStandardDirs::findExe("ktrash") << "--empty";
+    m_emptyProcess->start();
+}
+
+void FileBrowser::emptyFinished(int exitCode, QProcess::ExitStatus exitStatus)
+{
+    Q_UNUSED(exitCode)
+    Q_UNUSED(exitStatus)
+
+    //TODO: check the exit status and let the user know if it fails
+    delete m_emptyProcess;
+    m_emptyProcess = 0;
+}
+
+void FileBrowser::copy(const QVariantList &src, const QString &dest)
+{
+    KUrl::List urls;
+    foreach (const QVariant &var, src) {
+        KUrl url(var.toString());
+        urls << url;
+    }
+
+    KUrl destination(dest);
+    KIO::copy(urls, destination);
+}
+
+void FileBrowser::trash(const QVariantList &files)
+{
+    KUrl::List urls;
+    foreach (const QVariant &var, files) {
+        urls << var.toUrl();
+    }
+    KIO::trash(urls);
+}
 
 #include "filebrowser.moc"

@@ -26,21 +26,21 @@
 
 #include <soprano/vocabulary.h>
 
-#include <Nepomuk/File>
-#include <Nepomuk/Query/AndTerm>
-#include <Nepomuk/Query/ResourceTerm>
-#include <Nepomuk/Tag>
-#include <Nepomuk/Variant>
-#include <nepomuk/comparisonterm.h>
-#include <nepomuk/literalterm.h>
-#include <nepomuk/queryparser.h>
-#include <nepomuk/resourcetypeterm.h>
-#include <nepomuk/standardqueries.h>
+#include <Nepomuk2/File>
+#include <Nepomuk2/Query/AndTerm>
+#include <Nepomuk2/Query/ResourceTerm>
+#include <Nepomuk2/Tag>
+#include <Nepomuk2/Variant>
+#include <nepomuk2/comparisonterm.h>
+#include <nepomuk2/literalterm.h>
+#include <nepomuk2/queryparser.h>
+#include <nepomuk2/resourcetypeterm.h>
+#include <nepomuk2/standardqueries.h>
 
-#include <nepomuk/nfo.h>
-#include <nepomuk/nie.h>
+#include <nepomuk2/nfo.h>
+#include <nepomuk2/nie.h>
 
-#include "kext.h"
+#include "kao.h"
 
 
 MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
@@ -105,19 +105,19 @@ void MetadataTimelineModel::doQuery()
 
     m_totalCount = 0;
 
-    setStatus(Waiting);
+    setRunning(true);
     QString monthQuery;
     QString dayQuery;
 
     if (m_level >= Month) {
         monthQuery = "bif:month(?label)";
     } else {
-        monthQuery = "0";
+        monthQuery = '0';
     }
     if (m_level >= Day) {
         dayQuery = "bif:dayofmonth(?label)";
     } else {
-        dayQuery = "0";
+        dayQuery = '0';
     }
 
     QString query = QString("select distinct bif:year(?label) as ?year %1 as ?month %2 as ?day count(*) as ?count where { ?r nie:lastModified ?label  ").arg(monthQuery).arg(dayQuery);
@@ -126,7 +126,7 @@ void MetadataTimelineModel::doQuery()
     if (!resourceType().isEmpty()) {
         QString type = resourceType();
         bool negation = false;
-        if (type.startsWith("!")) {
+        if (type.startsWith('!')) {
             type = type.remove(0, 1);
             negation = true;
         }
@@ -142,25 +142,33 @@ void MetadataTimelineModel::doQuery()
         }
     }
 
-    if (!mimeType().isEmpty()) {
-        QString type = mimeType();
-        bool negation = false;
-        if (type.startsWith("!")) {
-            type = type.remove(0, 1);
-            negation = true;
+    if (!mimeTypeStrings().isEmpty()) {
+        query += " { ";
+        bool first = true;
+        foreach (QString type, mimeTypeStrings()) {
+            bool negation = false;
+            if (!first) {
+                query += " UNION ";
+            }
+            first = false;
+            if (type.startsWith('!')) {
+                type = type.remove(0, 1);
+                negation = true;
+            }
+            if (negation) {
+                query += " { . FILTER(!bif:exists((select (1) where { ?r nie:mimeType \"" + type + "\"^^<http://www.w3.org/2001/XMLSchema#string> . }))) } ";
+            } else {
+                query += " { ?r nie:mimeType \"" + type + "\"^^<http://www.w3.org/2001/XMLSchema#string> . } ";
+            }
         }
-        if (negation) {
-            query += " . FILTER(!bif:exists((select (1) where { ?r nie:mimeType ?mimeType . FILTER(bif:contains(?mimeType, \"'" + type + "'\")) . }))) ";
-        } else {
-            query += " . ?r nie:mimeType ?mimeType . FILTER(bif:contains(?mimeType, \"'" + type + "'\")) ";
-        }
+        query += " } ";
     }
 
     if (parameters && parameters->size() > 0) {
         foreach (const QString &key, parameters->keys()) {
             QString parameter = parameters->value(key).toString();
             bool negation = false;
-            if (parameter.startsWith("!")) {
+            if (parameter.startsWith('!')) {
                 parameter = parameter.remove(0, 1);
                 negation = true;
             }
@@ -176,16 +184,16 @@ void MetadataTimelineModel::doQuery()
     if (!activityId().isEmpty()) {
         QString activity = activityId();
         bool negation = false;
-        if (activity.startsWith("!")) {
+        if (activity.startsWith('!')) {
             activity = activity.remove(0, 1);
             negation = true;
         }
-        Nepomuk::Resource acRes(activity, Nepomuk::Vocabulary::KEXT::Activity());
+        Nepomuk2::Resource acRes(activity, Nepomuk2::Vocabulary::KAO::Activity());
 
         if (negation) {
-            query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.resourceUri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
+            query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.uri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
         } else {
-            query +=  " . <" + acRes.resourceUri().toString() + "> nao:isRelated ?r ";
+            query +=  " . <" + acRes.uri().toString() + "> nao:isRelated ?r ";
         }
     }
 
@@ -194,7 +202,7 @@ void MetadataTimelineModel::doQuery()
         QString individualTag = tag;
         bool negation = false;
 
-        if (individualTag.startsWith("!")) {
+        if (individualTag.startsWith('!')) {
             individualTag = individualTag.remove(0, 1);
             negation = true;
         }
@@ -229,7 +237,9 @@ void MetadataTimelineModel::doQuery()
         query += " . ?r nao:numericRating ?rating filter (?rating <=" + QString::number(maximumRating()) + ") ";
     }
 
-    query +=  " . ?r <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> ?v1 . FILTER(?v1>0) .  } ";
+    //user visibility is too slow
+    //query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) }";
+    query += "}";
 
     //Group by construction
     query += " group by bif:year(?label) ";
@@ -254,37 +264,36 @@ void MetadataTimelineModel::doQuery()
         m_queryClient->close();
     }
     delete m_queryClient;
-    m_queryClient = new Nepomuk::Query::QueryServiceClient(this);
+    m_queryClient = new Nepomuk2::Query::QueryServiceClient(this);
 
-    connect(m_queryClient, SIGNAL(newEntries(const QList<Nepomuk::Query::Result> &)),
-            this, SLOT(newEntries(const QList<Nepomuk::Query::Result> &)));
-    connect(m_queryClient, SIGNAL(entriesRemoved(const QList<QUrl> &)),
-            this, SLOT(entriesRemoved(const QList<QUrl> &)));
+    connect(m_queryClient, SIGNAL(newEntries(QList<Nepomuk2::Query::Result>)),
+            this, SLOT(newEntries(QList<Nepomuk2::Query::Result>)));
+    connect(m_queryClient, SIGNAL(entriesRemoved(QList<QUrl>)),
+            this, SLOT(entriesRemoved(QList<QUrl>)));
     connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
 
     m_queryClient->sparqlQuery(query);
 }
 
-void MetadataTimelineModel::newEntries(const QList< Nepomuk::Query::Result > &entries)
+void MetadataTimelineModel::newEntries(const QList< Nepomuk2::Query::Result > &entries)
 {
-    setStatus(Running);
     QVector<QHash<Roles, int> > results;
     QVariantList categories;
-    foreach (Nepomuk::Query::Result res, entries) {
+    foreach (const Nepomuk2::Query::Result &res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
         int year = res.additionalBinding(QLatin1String("year")).variant().toInt();
         int month = res.additionalBinding(QLatin1String("month")).variant().toInt();
         int day = res.additionalBinding(QLatin1String("day")).variant().toInt();
 
-        QHash<Roles, int> res;
-        res[YearRole] = year;
-        res[MonthRole] = month;
-        res[DayRole] = day;
-        res[CountRole] = count;
+        QHash<Roles, int> resHash;
+        resHash[YearRole] = year;
+        resHash[MonthRole] = month;
+        resHash[DayRole] = day;
+        resHash[CountRole] = count;
 
         m_totalCount += count;
-        results << res;
+        results << resHash;
     }
 
     if (results.count() > 0) {
@@ -309,7 +318,7 @@ void MetadataTimelineModel::entriesRemoved(const QList<QUrl> &urls)
 
 void MetadataTimelineModel::finishedListing()
 {
-    setStatus(Idle);
+    setRunning(false);
 }
 
 

@@ -1,2 +1,0 @@
-add_subdirectory(inputmethod)
-add_subdirectory(keyboardshell)

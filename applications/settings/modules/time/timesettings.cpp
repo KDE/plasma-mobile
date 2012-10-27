@@ -127,7 +127,7 @@ void TimeSettingsPrivate::initTimeZones()
             TimeZone *_zone = new TimeZone(zone);
             _zones.append(_zone);
             QStandardItem *item = new QStandardItem(_zone->name());
-            item->setData(_zone->name().split("/").first(), Qt::UserRole+1);
+            item->setData(_zone->name().split('/').first(), Qt::UserRole+1);
             _zonesModel->appendRow(item);
         }
     }
@@ -160,7 +160,7 @@ void TimeSettingsPrivate::initSettings()
     }
     //FIXME: why?
     if (ntpServer.length() < 3) {
-        ntpServer = QString();
+        ntpServer.clear();
     }
 }
 

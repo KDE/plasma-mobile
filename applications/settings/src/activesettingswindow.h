@@ -37,7 +37,7 @@ class ActiveSettingsWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    ActiveSettingsWindow(const QString &url, QWidget *parent = 0);
+    explicit ActiveSettingsWindow(const QString &url, QWidget *parent = 0);
     virtual ~ActiveSettingsWindow();
     QString name();
     QIcon icon();

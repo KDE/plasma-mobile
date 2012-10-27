@@ -28,6 +28,9 @@ Item {
     signal shrinkRequested
     state: height>48?"active":"passive"
 
+    property int itemWidth: main.height*1.4
+    property int itemHeight: height
+
     Component.onCompleted: {
         plasmoid.drawWallpaper = false
         plasmoid.containmentType = "CustomContainment"
@@ -87,7 +90,7 @@ Item {
             plasmoidContainer.applet = applet
             return
 
-        } else if (applet.pluginName == "digital-clock") {
+        } else if (applet.pluginName == "org.kde.digital-clock" || applet.pluginName == "digital-clock") {
             var plasmoidContainer = component.createObject(rightPanel);
             plasmoidContainer.parent = centerPanel
             plasmoidContainer.anchors.top = centerPanel.top
@@ -126,13 +129,6 @@ Item {
         id: theme
     }
 
-    PlasmaCore.DataSource {
-        id: timeEngine
-        engine: "time"
-        interval: 30000
-        connectedSources: ["Local"]
-    }
-
     Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -143,6 +139,7 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: parent.left
+            anchors.leftMargin: (height * 1.4 - height) / 1.5
             interactive:true
             contentWidth: tasksRow.width
             contentHeight: tasksRow.height
@@ -151,9 +148,20 @@ Item {
 
             Row {
                 id: tasksRow
-                spacing: 8
+                spacing: 4
                 height: tasksFlickable.height
                 property string skipItems
+
+                //depends on this to be precise to not make a resize loop
+                onWidthChanged: {
+                    var visibleCount = 0
+                    for (var i = 0; i < tasksRow.children.length; ++i) {
+                        if (tasksRow.children[i].opacity > 0 && tasksRow.children[i].visible) {
+                            ++visibleCount
+                        }
+                    }
+                    main.itemWidth = Math.min(main.height*1.4, centerPanel.x/visibleCount)
+                }
 
                 function insertAt(item, index)
                 {

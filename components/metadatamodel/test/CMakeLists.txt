@@ -1,3 +1,4 @@
+
 set(metadatamodeltest_SRCS
     main.cpp
     dynamictreemodel.cpp
@@ -6,13 +7,16 @@ set(metadatamodeltest_SRCS
     ../abstractmetadatamodel.cpp
     )
 
+
+add_kao_ontology(metadatamodeltest_SRCS)
+
 soprano_add_ontology(
     metadatamodeltest_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/../ontologies/kext.trig
-    "KEXT" "Nepomuk::Vocabulary" "trig"
+    ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/nso.trig
+    "NSO" "Nepomuk2::Vocabulary" "trig"
 )
 
-nepomuk_add_ontology_classes (metadatamodeltest_SRCS
+nepomuk2_add_ontology_classes (metadatamodeltest_SRCS
                               ONTOLOGIES
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nie.trig
                               ${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nie/nfo.trig
@@ -24,7 +28,7 @@ nepomuk_add_ontology_classes (metadatamodeltest_SRCS
 qt4_automoc(${metadatamodeltest_SRCS})
 #kde4_add_library(datamodelsplugin SHARED ${datamodels_SRCS})
 kde4_add_executable(metadatamodeltest ${metadatamodeltest_SRCS})
-target_link_libraries(metadatamodeltest ${QT_QTTEST_LIBRARY} ${KDE4_PLASMA_LIBS} nepomukdatamanagement ${SOPRANO_LIBRARIES}
-        ${NEPOMUK_LIBRARIES}
+target_link_libraries(metadatamodeltest ${QT_QTTEST_LIBRARY} ${KDE4_PLASMA_LIBS} ${SOPRANO_LIBRARIES}
+        ${NEPOMUK_CORE_LIBRARY}
         ${NEPOMUK_QUERY_LIBRARIES})
 

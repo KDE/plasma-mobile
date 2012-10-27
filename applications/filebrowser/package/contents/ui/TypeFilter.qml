@@ -20,12 +20,19 @@
 import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import org.kde.draganddrop 1.0
 
 Column {
 
     property string currentType
+
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
 
     PlasmaCore.SortFilterModel {
         id: sortFilterModel
@@ -40,17 +47,26 @@ Column {
         sortOrder: Qt.DescendingOrder
     }
 
-    //FIXME: seems the only way to make the proper item be autoselected at start
+    PlasmaExtraComponents.Heading {
+        text: i18n("File types")
+        anchors {
+            top: parent.top
+            right: parent.right
+            rightMargin: theme.defaultFont.mSize.width
+        }
+    }
     Timer {
+        id: categoryCheckedTimer
         running: true
-        onTriggered: categoryRepeater.model = sortFilterModel
+        onTriggered: {
+            buttonColumn.exclusive = true
+        }
     }
 
-    PlasmaComponents.Label {
-        text: "<b>"+i18n("File types")+"</b>"
-    }
     PlasmaComponents.ButtonColumn {
+        id: buttonColumn
         spacing: 4
+        exclusive: false
         anchors {
             left: parent.left
             leftMargin: theme.defaultFont.mSize.width
@@ -58,25 +74,63 @@ Column {
 
         Repeater {
             id: categoryRepeater
+            model: sortFilterModel
             delegate: PlasmaComponents.RadioButton {
-                text: i18n("%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
+                id: delegateItem
+                text: i18nc("Resource type, how many entries of this resource", "%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
                 //FIXME: more elegant way to remove applications?
                 visible: model["label"] != undefined && model["label"] != "nfo:Application"
+                checked: metadataModel.resourceType == model["label"]
                 onCheckedChanged: {
                     if (checked) {
-                        categoryCheckedTimer.restart()
+                        metadataModel.resourceType = model["label"]
                     }
                 }
-                onClicked: currentType = model["label"]
-                //FIXME: is there a better way that a timer?
-                Timer {
-                    id: categoryCheckedTimer
-                    running: true
-                    onTriggered: {
-                        if (currentType == model["label"] || !currentType) {
-                            checked = true
-                            metadataModel.resourceType = model["label"]
-                        }
+            }
+        }
+        PlasmaExtraComponents.Heading {
+            text: i18n("Activity")
+            anchors {
+                right: parent.right
+                rightMargin: -(parent.parent.width - parent.width) + theme.defaultFont.mSize.width*2
+            }
+        }
+        PlasmaComponents.RadioButton {
+            text: i18n("Current activity")
+            checked: metadataModel.activityId == activitySource.data.Status.Current
+            onCheckedChanged: {
+                if (checked) {
+                    metadataModel.resourceType = "nfo:FileDataObject"
+                    metadataModel.activityId = activitySource.data.Status.Current
+                } else {
+                    metadataModel.activityId = ""
+                }
+            }
+            Rectangle {
+                anchors {
+                    fill: parent
+                    margins: -5
+                }
+                visible: activityDrop.underDrag
+                radius: 4
+                color: theme.textColor
+                opacity: 0.4
+            }
+            DropArea {
+                id: activityDrop
+                anchors.fill: parent
+                property bool underDrag: false
+                onDragEnter: underDrag = true
+                onDragLeave: underDrag = false
+                onDrop: {
+                    underDrag = false
+                    var service = metadataSource.serviceForSource("")
+                    var operation = service.operationDescription("connectToActivity")
+                    operation["ActivityUrl"] = activitySource.data["Status"]["Current"]
+
+                    for (var i = 0; i < event.mimeData.urls.length; ++i) {
+                        operation["ResourceUrl"] = event.mimeData.urls[i]
+                        service.startOperationCall(operation)
                     }
                 }
             }

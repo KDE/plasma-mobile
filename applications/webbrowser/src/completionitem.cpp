@@ -22,7 +22,7 @@
 #include "bookmark.h"
 
 #include <kdebug.h>
-#include <Nepomuk/Variant>
+#include <Nepomuk2/Variant>
 
 class CompletionItemPrivate {
 public:
@@ -30,6 +30,7 @@ public:
     QString url;
     QString iconName;
     QImage preview;
+    QUrl resourceUri;
 };
 
 
@@ -46,27 +47,31 @@ CompletionItem::CompletionItem(QObject *parent)
     : QObject(parent)
 {
     d = new CompletionItemPrivate;
-    d->name = QString();
-    d->url = QString();
+    d->name.clear();
+    d->url.clear();
     d->preview = QImage();
 }
 
-void CompletionItem::setResource(Nepomuk::Resource resource)
+void CompletionItem::setResource(Nepomuk2::Resource resource)
 {
     //d->url = resource.
     //kDebug() << "!!!!! res props: " << resource.properties().keys();
-    //kDebug() << "SET RESOURCE" << resource.resourceUri();
+    //kDebug() << "SET RESOURCE" << resource.uri();
     d->name = resource.genericDescription();
     //d->url = resource.property(QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")).toString();
-    //d->url = resource.property(Nepomuk::Bookmark::bookmarksUri()).toString();
+    //d->url = resource.property(Nepomuk2::Bookmark::bookmarksUri()).toString();
     d->url = resource.description();
     d->name.remove("http://");
     //kDebug() << "Bookmark: " << d->name << d->url;
     d->iconName = "bookmarks";
     //d->url = resource.property(resour).toString();
-    
+    d->resourceUri = resource.uri();
 }
 
+QUrl CompletionItem::resourceUri()
+{
+    return d->resourceUri;
+}
 
 CompletionItem::~CompletionItem()
 {

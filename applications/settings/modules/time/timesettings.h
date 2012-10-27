@@ -61,7 +61,7 @@ class TimeSettings : public QObject
          * @arg parent The parent object
          * @arg list Arguments, currently unused
          */
-//         TimeSettings(QObject *parent, const QVariantList &list = QVariantList());
+//         explicit TimeSettings(QObject *parent, const QVariantList &list = QVariantList());
         /**
          * @name Settings Module Constructor
          *

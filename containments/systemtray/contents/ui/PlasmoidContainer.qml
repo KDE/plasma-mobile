@@ -22,9 +22,8 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 MobileComponents.AppletContainer {
     id: plasmoidContainer
-    width: 24
-    anchors.top: tasksRow.top
-    anchors.bottom: tasksRow.bottom
+    width: main.itemWidth
+    height: main.itemHeight
     opacity: status != MobileComponents.AppletContainer.PassiveStatus?1:0
 
     Behavior on opacity {
@@ -35,6 +34,6 @@ MobileComponents.AppletContainer {
     }
 
     onMinimumWidthChanged: {
-        plasmoidContainer.width = Math.max(height, plasmoidContainer.minimumWidth)
+        plasmoidContainer.width = Math.max(main.itemWidth, plasmoidContainer.minimumWidth)
     }
 }

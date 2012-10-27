@@ -21,11 +21,13 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
+import org.kde.plasma.extras 0.1
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
 import org.kde.qtextracomponents 0.1
 
-Item {
+FocusScope {
     id: mainItem
     objectName: "completionPopup"
 
@@ -39,6 +41,17 @@ Item {
         id: theme
     }
 
+    MouseArea {
+        x: -1000
+        y: -1000
+        width: 3000
+        height: 3000
+        onClicked: {
+            mainItem.state = "collapsed";
+            clipBoardHelper.forceActiveFocus();
+        }
+    }
+
     PlasmaCore.FrameSvgItem {
         id: frame
         objectName: "frame"
@@ -48,7 +61,6 @@ Item {
 
         MouseArea {
             anchors.fill: parent
-            hoverEnabled: true
         }
 
         Component {
@@ -107,6 +119,7 @@ Item {
                         //print("URL from completer chosen: " + name + " " + url);
                         urlEntered(url);
                         mainItem.state = "collapsed";
+                        clipBoardHelper.closeSoftwareInputPanel();
                     }
                 }
 
@@ -116,6 +129,9 @@ Item {
         ActiveSettings.SettingsItem {
             id: settingsItem
             initialPage: dashboard
+            z: 99
+
+            clip: false
             anchors {
                 fill: parent
                 leftMargin: frame.margins.left * 2
@@ -136,6 +152,7 @@ Item {
             anchors.right: settingsItem.right
             elementId: "configure"
             onClicked: {
+                settingsItem.clip = true;
                 var webModule = "org.kde.active.settings.web";
                 if (settingsItem.module != webModule) {
                     settingsItem.module = webModule;
@@ -163,7 +180,7 @@ Item {
                 icon: "application-rss+xml"
                 MouseArea {
                     anchors.fill: parent
-                    onPressed: MobileComponents.ActivateAnimation { targetItem: rssButton }
+                    onPressed: PlasmaExtras.ActivateAnimation { targetItem: rssButton }
                     onClicked: SequentialAnimation {
                         ScriptAction { script: {
                                 // We use a hidden TextInput to borrow its clipboard handling
@@ -174,7 +191,7 @@ Item {
                                 clipBoardHelper.text = ""
                             }
                         }
-                        MobileComponents.AppearAnimation { targetItem: rssActionLabel }
+                        PlasmaExtras.AppearAnimation { targetItem: rssActionLabel }
                     }
                 }
                 TextInput { id: clipBoardHelper; visible: false }
@@ -183,7 +200,7 @@ Item {
                     repeat: false
                     interval: 8000
                     running: false
-                    onTriggered:MobileComponents.DisappearAnimation { targetItem: rssActionLabel }
+                    onTriggered:PlasmaExtras.DisappearAnimation { targetItem: rssActionLabel }
                 }
             }
             PlasmaComponents.Label {
@@ -222,43 +239,49 @@ Item {
                 }
 
             }
-            ListView {
-                id: historyList
-                clip: true
-            anchors.left: parent.left
-            anchors.right: parent.horizontalCenter
-            anchors.top: topLabel.bottom
-            anchors.bottom: parent.bottom
-            anchors.rightMargin: 12
-                model: historyModel
-                delegate: myDelegate
-                highlight: PlasmaComponents.Highlight {}
-                currentIndex: -1
-                header: PlasmaComponents.Label {
-                    id: historyLabel
-                    text: i18n("Recently visited")
-                    font.pointSize: theme.defaultFont.pointSize+8
-                    anchors {
-                        top: parent.top
-                        left: parent.left
+            PlasmaExtras.ScrollArea {
+                anchors {
+                    left: parent.left
+                    right: parent.horizontalCenter
+                    top: topLabel.bottom
+                    bottom: parent.bottom
+                    rightMargin: 12
+                }
+                ListView {
+                    id: historyList
+                    clip: true
+                    model: historyModel
+                    delegate: myDelegate
+                    highlight: PlasmaComponents.Highlight {}
+                    currentIndex: -1
+                    header: Title {
+                        id: historyLabel
+                        text: i18n("Recently visited")
+                        anchors {
+                            top: parent.top
+                            left: parent.left
+                        }
                     }
                 }
             }
-            ListView {
-                clip: true
-                anchors.top: topLabel.bottom
-                anchors.left: parent.horizontalCenter
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.leftMargin: 12
-                currentIndex: -1
-                model: bookmarksModel
-                delegate: myDelegate
-                highlight: PlasmaComponents.Highlight {}
-                header: PlasmaComponents.Label {
-                    id: bookmarksLabel
-                    font.pointSize: theme.defaultFont.pointSize+8
-                    text: i18n("Bookmarks")
+            PlasmaExtras.ScrollArea {
+                anchors {
+                    top: topLabel.bottom
+                    left: parent.horizontalCenter
+                    right: parent.right
+                    bottom: parent.bottom
+                    leftMargin: 12
+                }
+                ListView {
+                    
+                    currentIndex: -1
+                    model: bookmarksModel
+                    delegate: myDelegate
+                    highlight: PlasmaComponents.Highlight {}
+                    header: Title {
+                        id: bookmarksLabel
+                        text: i18n("Bookmarks")
+                    }
                 }
             }
         }
@@ -288,11 +311,11 @@ Item {
     transitions: [
         Transition {
             from: "collapsed"; to: "expanded"
-            MobileComponents.AppearAnimation { targetItem: mainItem }
+            PlasmaExtras.AppearAnimation { targetItem: mainItem }
         },
         Transition {
             from: "expanded"; to: "collapsed"
-            MobileComponents.DisappearAnimation { targetItem: mainItem }
+            PlasmaExtras.DisappearAnimation { targetItem: mainItem }
         }
     ]
 }
