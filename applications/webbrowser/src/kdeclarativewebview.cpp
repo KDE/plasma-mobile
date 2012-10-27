@@ -385,6 +385,7 @@ void KDeclarativeWebView::init()
     connect(wp, SIGNAL(linkClicked(QUrl)), d->view, SLOT(handleLinkClicked(QUrl)));
 
 
+    connect(this, SIGNAL(scrollRequested(int, int, QRect)), this, SIGNAL(contentsPositionChanged()));
     d->dirWatch = new KDirWatch(this);
     QString configPath = KStandardDirs::locateLocal("config", "active-webbrowserrc");
     d->dirWatch->addFile(configPath);
@@ -400,6 +401,7 @@ QPointF KDeclarativeWebView::contentsPosition()
 void KDeclarativeWebView::setContentsPosition(QPointF contentsPosition)
 {
     d->view->page()->mainFrame()->setScrollPosition(contentsPosition.toPoint());
+    emit contentsPositionChanged();
 }
 
 void KDeclarativeWebView::initSettings()
