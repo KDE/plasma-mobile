@@ -79,6 +79,15 @@ Image {
         }
     }
 
+    Image {
+        anchors {
+            centerIn: parent
+            verticalCenterOffset: Math.round(toolBar.height/2)
+            horizontalCenterOffset: - Math.round(parent.width / 8)
+        }
+        x: y
+        source: "background-logo.png"
+    }
     PlasmaComponents.BusyIndicator {
         anchors.centerIn: mainStack
         visible: metadataModel.running
