@@ -85,8 +85,12 @@ MouseEventListener {
         if (!interactive) {
             return
         }
-        contentY += (lastY - mouse.y)
-        contentX += (lastX - mouse.x)
+        if (webView.contentsSize.height > webView.height) {
+            contentY += (lastY - mouse.y)
+        }
+        if (webView.contentsSize.width > webView.width) {
+            contentX += (lastX - mouse.x)
+        }
         lastY = mouse.y
         lastX = mouse.x
     }
@@ -95,8 +99,17 @@ MouseEventListener {
             return
         }
         speedSampleTimer.running = false
-        scrollAnimX.to = Math.min(Math.max(0, contentX + speedX*4), webView.contentsSize.width - flickable.width)
-        scrollAnimY.to = Math.min(Math.max(0, contentY + speedY*4), webView.contentsSize.height - flickable.height)
+
+        if (webView.contentsSize.width > webView.width) {
+            scrollAnimX.to = Math.min(Math.max(0, contentX + speedX*4), webView.contentsSize.width - flickable.width)
+        } else {
+            scrollAnimX.to = contentX
+        }
+        if (webView.contentsSize.height > webView.height) {
+            scrollAnimY.to = Math.min(Math.max(0, contentY + speedY*4), webView.contentsSize.height - flickable.height)
+        } else {
+            scrollAnimY.to = contentY
+        }
 
         scrollAnim.running = true
     }
@@ -219,7 +232,7 @@ MouseEventListener {
             pressGrabTime: flickable.interactive ? 400 : 0
             x: Math.max(0, -flickable.contentX)
             y: Math.max(-headerSpace.height, -flickable.contentY)
-            width: flickable.width
+            width: flickable.width + Math.min(0, flickable.contentWidth - flickable.contentX - flickable.width)
             height: flickable.height + headerSpace.height + Math.min(0, flickable.contentHeight - flickable.contentY - flickable.height)
             contentsPosition: Qt.point(flickable.contentX, Math.max(0, flickable.contentY - headerSpace.height))
 
