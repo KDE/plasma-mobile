@@ -157,10 +157,12 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 void GraphicsWebView::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
-    QGraphicsWebView::mouseReleaseEvent(event);
-    pressTimer.stop();
-    parent->setKeepMouseGrab(false);
-    ungrabMouse();
+    if (pressTime == 0 || pressTimer.isActive()) {
+        QGraphicsWebView::mouseReleaseEvent(event);
+        pressTimer.stop();
+        parent->setKeepMouseGrab(false);
+        ungrabMouse();
+    }
 }
 
 void GraphicsWebView::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
@@ -173,7 +175,7 @@ void GraphicsWebView::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
 void GraphicsWebView::handleLinkClicked(const QUrl &link)
 {
     QUrl u(link);
-    if (pressTimer.isActive()) {
+    if (pressTime == 0 || pressTimer.isActive()) {
         kDebug() << "timer is running, loading URL" << link;
         page()->mainFrame()->load(u);
     } else {
