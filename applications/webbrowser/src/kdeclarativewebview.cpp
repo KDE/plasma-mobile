@@ -158,11 +158,12 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
 void GraphicsWebView::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
     if (pressTime == 0 || pressTimer.isActive()) {
-        QGraphicsWebView::mouseReleaseEvent(event);
-        pressTimer.stop();
-        parent->setKeepMouseGrab(false);
-        ungrabMouse();
+        QGraphicsWebView::mouseReleaseEvent(event);.
     }
+
+    pressTimer.stop();
+    parent->setKeepMouseGrab(false);
+    ungrabMouse();
 }
 
 void GraphicsWebView::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
