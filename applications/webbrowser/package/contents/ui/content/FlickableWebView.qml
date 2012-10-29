@@ -125,6 +125,10 @@ MouseEventListener {
     property int lastContentX: 0
     property int contentWidth: webView.contentsSize.width
     property int contentHeight: webView.contentsSize.height
+    property bool atXBeginning: contentX <= 0
+    property bool atXEnd: contentX >= contentWidth - width
+    property bool atYBeginning: contentY <= 0
+    property bool atYEnd: contentY >= contentHeight - height
     property QtObject visibleArea: QtObject {
         property real yPosition: flickable.contentY / contentHeight
         property real xPosition: flickable.contentX / contentWidth
@@ -244,11 +248,12 @@ MouseEventListener {
             }
 
 
-            
             pressGrabTime: flickable.interactive ? 400 : 0
-            x: Math.max(0, -flickable.contentX)
+
+            x: (flickable.atXBeginning || flickable.atXEnd ? -flickable.contentX : 0) + (flickable.atXEnd ? (flickable.contentWidth - width) : 0)
+
             y: Math.max(-headerSpace.height, -flickable.contentY)
-            width: flickable.width + Math.min(0, flickable.contentWidth - flickable.contentX - flickable.width)
+            width: flickable.width
             height: flickable.height + headerSpace.height + Math.min(0, flickable.contentHeight - flickable.contentY - flickable.height)
             contentsPosition: Qt.point(flickable.contentX, Math.max(0, flickable.contentY - headerSpace.height))
 
