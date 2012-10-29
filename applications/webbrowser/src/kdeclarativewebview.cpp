@@ -145,7 +145,8 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
     // disable flicking as long as the combo box is open
     setFlickingEnabled(hit.element().tagName() != "SELECT");
 
-    kDebug() << " - - >  Hit element: " << hit.element().tagName() << hit.linkElement().geometry();
+    kDebug() << " - - >  Hit element: " << hit.element().tagName() << hit.element().geometry() << hit.linkElement().geometry();
+
     if (!hit.linkElement().geometry().isNull()) {
         kDebug() << "XXXXXXXXXX link pressed. .. ";
         emit linkPressed(hit.linkUrl(), hit.linkElement().geometry());
@@ -158,7 +159,7 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
 void GraphicsWebView::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
     if (pressTime == 0 || pressTimer.isActive()) {
-        QGraphicsWebView::mouseReleaseEvent(event);.
+        QGraphicsWebView::mouseReleaseEvent(event);
     }
 
     pressTimer.stop();
@@ -642,6 +643,49 @@ void KDeclarativeWebView::setPreferredWidth(int width)
 int KDeclarativeWebView::preferredHeight() const
 {
     return d->preferredheight;
+}
+
+bool KDeclarativeWebView::scrollBy(int dx, int dy, const QPointF& pos)
+{
+    QPoint oldContentsPos = contentsPosition().toPoint();
+
+    QWebFrame *frame = page()->frameAt(pos.toPoint());
+    if (!frame) {
+        frame = page()->mainFrame();
+    }
+    
+    if (qtwebkit_webframe_scrollOverflow(frame, dx, dy, pos.toPoint())) {
+        return true;
+    }
+
+    if (!frame) {
+        return false;
+    }
+
+    bool scrollHorizontal = false;
+    bool scrollVertical = false;
+
+    do {
+        if (dx > 0)  // scroll right
+            scrollHorizontal = frame->scrollPosition().x() < frame->contentsSize().width() - width();
+        else if (dx < 0)  // scroll left
+            scrollHorizontal = frame->scrollPosition().x() > 0;
+
+        if (dy > 0)  // scroll down
+            scrollVertical = frame->scrollPosition().y() < frame->contentsSize().height() - height();
+        else if (dy < 0) //scroll up
+            scrollVertical = frame->scrollPosition().y() > 0;
+
+        if (scrollHorizontal || scrollVertical) {
+            frame->scroll(dx, dy);
+            emit contentsPositionChanged();
+            return true;
+        }
+
+        frame = frame->parentFrame();
+    } while (frame);
+
+    return false;
 }
 
 void KDeclarativeWebView::setPreferredHeight(int height)

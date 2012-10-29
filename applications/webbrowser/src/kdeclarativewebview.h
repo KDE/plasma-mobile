@@ -49,6 +49,9 @@ class QNetworkRequest;
 class KDeclarativeWebView;
 class KDeclarativeWebViewPrivate;
 
+//HACK: this is a private, but exported function from QWebframe
+bool qtwebkit_webframe_scrollOverflow(QWebFrame* qFrame, int dx, int dy, const QPoint& pos);
+
 class QDeclarativeWebPage : public KWebPage {
     Q_OBJECT
 public:
@@ -187,6 +190,13 @@ public:
     void setPreferredWidth(int);
     int preferredHeight() const;
     void setPreferredHeight(int);
+
+    /**
+     * Scrollsby dx and dy whatever scrollable element is in the page at pos.
+     * if no scrollable elements are found, the main frame is scrolled
+     * @returns true if any scrolling has been performed
+     */
+    Q_INVOKABLE bool scrollBy(int dx, int dy, const QPointF& pos);
 
     enum Status { Null, Ready, Loading, Error };
     Status status() const;

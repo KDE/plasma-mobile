@@ -85,12 +85,13 @@ MouseEventListener {
         if (!interactive) {
             return
         }
+        webView.scrollBy((lastX - mouse.x), (lastY - mouse.y), Qt.point(mouse.x, mouse.y));
         if (webView.contentsSize.height > webView.height) {
-            contentY += (lastY - mouse.y)
+            //contentY += (lastY - mouse.y)
             movingVertically = true
         }
         if (webView.contentsSize.width > webView.width) {
-            contentX += (lastX - mouse.x)
+            //contentX += (lastX - mouse.x)
             movingHorizontally = true
         }
         lastY = mouse.y
