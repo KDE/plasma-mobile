@@ -96,7 +96,7 @@ Image {
 
     PlasmaComponents.ToolBar {
         id: toolBar
-        height: tools && tools.item ? theme.hugeIconSize : 0
+        height: tools && tools.item !== null ? theme.hugeIconSize : 0
     }
 
     function openFile(url, mimeType)
