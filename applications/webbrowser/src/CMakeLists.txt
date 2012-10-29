@@ -20,6 +20,7 @@ set(active-webbrowser_SRCS
     history.cpp
     view.cpp
     networkaccessmanager.cpp
+    websslinfo.cpp
 
     networkaccessmanager.cpp
     adblock/adblockhostmatcher.cpp

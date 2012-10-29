@@ -36,6 +36,8 @@
 #include <QtGui/QPen>
 #include <QtNetwork/QNetworkReply>
 #include <QtCore/QDir>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 #include <qwebelement.h>
 #include <qwebframe.h>
@@ -57,6 +59,7 @@
 #include <KWindowSystem>
 #include <KDebug>
 #include <klocalizedstring.h>
+#include <KMessageBox>
 
 #include <soprano/vocabulary.h>
 #include <Nepomuk2/Resource>
@@ -365,8 +368,21 @@ void KDeclarativeWebView::init()
     initSettings();
 #ifndef NO_KIO
     NetworkAccessManager *access = new NetworkAccessManager(page());
+    // set network reply object to emit readyRead when it receives meta data
+    access->setEmitReadyReadOnMetaDataChange(true);
+
+    // disable QtWebKit cache to just use KIO one..
+    access->setCache(0);
+
+    // set cookieJar window..
+    /*if (parent && parent->window())
+        manager->setWindow(parent->window());*/
+
+    //FIXME: reliable
+    access->setWindow(QApplication::topLevelWidgets().first());
     wp->setNetworkAccessManager(access);
 #endif
+
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(flickingEnabledChanged()), this, SLOT(updateFlickingEnabled()));
     connect(d->view, SIGNAL(click(int,int)), this, SIGNAL(click(int,int)));
@@ -1236,10 +1252,171 @@ QDeclarativeWebPage::QDeclarativeWebPage(KDeclarativeWebView* parent) :
     connect(this, SIGNAL(unsupportedContent(QNetworkReply*)), this, SLOT(handleUnsupportedContent(QNetworkReply*)));
 //     //TODO: move this in the webbrowser implementation
     m_nepomukHelper = new NepomukHelper(this);
+    // activate ssl warnings
+    setSessionMetaData(QL1S("ssl_activate_warnings"), QL1S("TRUE"));
 }
 
 QDeclarativeWebPage::~QDeclarativeWebPage()
 {
+}
+
+// Returns true if the scheme and domain of the two urls match...
+static bool domainSchemeMatch(const QUrl& u1, const QUrl& u2)
+{
+    if (u1.scheme() != u2.scheme())
+        return false;
+
+    QStringList u1List = u1.host().split(QL1C('.'), QString::SkipEmptyParts);
+    QStringList u2List = u2.host().split(QL1C('.'), QString::SkipEmptyParts);
+
+    if (qMin(u1List.count(), u2List.count()) < 2)
+        return false;  // better safe than sorry...
+
+    while (u1List.count() > 2)
+        u1List.removeFirst();
+
+    while (u2List.count() > 2)
+        u2List.removeFirst();
+
+    return (u1List == u2List);
+}
+
+bool QDeclarativeWebPage::acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type)
+{
+    const bool isMainFrameRequest = (frame == mainFrame());
+
+    if (frame)
+    {
+        /*if (_protHandler.preHandling(request, frame))
+        {
+            return false;
+        }*/
+
+        switch (type)
+        {
+        case QWebPage::NavigationTypeLinkClicked:
+            if (m_sslInfo.isValid())
+            {
+                setRequestMetaData("ssl_was_in_use", "TRUE");
+            }
+            break;
+
+        case QWebPage::NavigationTypeFormSubmitted:
+            break;
+
+        case QWebPage::NavigationTypeFormResubmitted:
+            if (KMessageBox::warningContinueCancel(view(),
+                                                   i18n("Are you sure you want to send your data again?"),
+                                                   i18n("Resend form data")
+                                                  )
+                    == KMessageBox::Cancel)
+            {
+                return false;
+            }
+            break;
+
+        case QWebPage::NavigationTypeReload:
+            setRequestMetaData(QL1S("cache"), QL1S("reload"));
+            break;
+
+        case QWebPage::NavigationTypeBackOrForward:
+        case QWebPage::NavigationTypeOther:
+            break;
+
+        default:
+            //Q_ASSERT(0)
+            break;
+        }
+    }
+
+    // Get the SSL information sent, if any...
+    KIO::AccessManager *manager = qobject_cast<KIO::AccessManager*>(networkAccessManager());
+    KIO::MetaData metaData = manager->requestMetaData();
+    if (metaData.contains(QL1S("ssl_in_use")))
+    {
+        WebSslInfo info;
+        info.restoreFrom(metaData.toVariant(), request.url());
+        info.setUrl(request.url());
+        m_sslInfo = info;
+    }
+
+    if (isMainFrameRequest)
+    {
+        setRequestMetaData(QL1S("main_frame_request"), QL1S("TRUE"));
+        if (m_sslInfo.isValid() && !domainSchemeMatch(request.url(), m_sslInfo.url()))
+        {
+            m_sslInfo = WebSslInfo();
+        }
+    }
+    else
+    {
+        setRequestMetaData(QL1S("main_frame_request"), QL1S("FALSE"));
+    }
+
+    return KWebPage::acceptNavigationRequest(frame, request, type);
+}
+
+void QDeclarativeWebPage::manageNetworkErrors(QNetworkReply *reply)
+{
+    Q_ASSERT(reply);
+
+    QWebFrame* frame = qobject_cast<QWebFrame *>(reply->request().originatingObject());
+    if (!frame)
+        return;
+
+    const bool isMainFrameRequest = (frame == mainFrame());
+
+    // Only deal with non-redirect responses...
+    const QVariant redirectVar = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+    if (redirectVar.isValid())
+    {
+        m_sslInfo.restoreFrom(reply->attribute(static_cast<QNetworkRequest::Attribute>(KIO::AccessManager::MetaData)), reply->url());
+        return;
+    }
+
+    // We are just managing loading URLs errors
+   // if (reply->request().url() != _loadingUrl)
+    //    return;
+
+    // NOTE: These are not all networkreply errors,
+    // but just that supported directly by KIO
+    switch (reply->error())
+    {
+
+    case QNetworkReply::NoError:                             // no error. Simple :)
+        if (isMainFrameRequest)
+        {
+            // Obtain and set the SSL information if any...
+            m_sslInfo.restoreFrom(reply->attribute(static_cast<QNetworkRequest::Attribute>(KIO::AccessManager::MetaData)), reply->url());
+            m_sslInfo.setUrl(reply->url());
+        }
+        break;
+
+    case QNetworkReply::OperationCanceledError:              // operation canceled via abort() or close() calls
+        // ignore this..
+        return;
+
+        // WARNING: This is also typical adblocked element error: IGNORE THIS!
+    case QNetworkReply::ContentAccessDenied:                 // access to remote content denied
+        break;
+
+    case QNetworkReply::UnknownNetworkError:                 // unknown network-related error detected
+        // last chance for the strange things (eg: FTP, custom schemes, etc...)
+       // if (_protHandler.postHandling(reply->request(), mainFrame()))
+       //     return;
+
+    case QNetworkReply::ConnectionRefusedError:              // remote server refused connection
+    case QNetworkReply::HostNotFoundError:                   // invalid hostname
+    case QNetworkReply::TimeoutError:                        // connection time out
+    case QNetworkReply::ProxyNotFoundError:                  // invalid proxy hostname
+    case QNetworkReply::ContentOperationNotPermittedError:   // operation requested on remote content not permitted
+    case QNetworkReply::ContentNotFoundError:                // remote content not found on server (similar to HTTP error 404)
+    case QNetworkReply::ProtocolUnknownError:                // Unknown protocol
+    case QNetworkReply::ProtocolInvalidOperationError:       // requested operation is invalid for this protocol
+    default:
+        break;
+
+    }
 }
 
 QString QDeclarativeWebPage::chooseFile(QWebFrame* originatingFrame, const QString& oldFile)

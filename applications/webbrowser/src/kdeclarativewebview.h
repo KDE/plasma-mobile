@@ -33,6 +33,7 @@
 
 #include "kwebpage.h"
 #include "nepomukhelper.h"
+#include "websslinfo.h"
 
 QT_BEGIN_HEADER
 
@@ -59,6 +60,12 @@ protected:
     void javaScriptAlert(QWebFrame *originatingFrame, const QString& msg);
     bool javaScriptConfirm(QWebFrame *originatingFrame, const QString& msg);
     bool javaScriptPrompt(QWebFrame *originatingFrame, const QString& msg, const QString& defaultValue, QString* result);
+    /*QString     userAgentForUrl ( const QUrl & url ) const
+    {
+        return "Mozilla/5.0 (Linux; U; Android 2.2.1; en-ca; LG-P505R Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+    }*/
+    bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type);
+    void manageNetworkErrors(QNetworkReply *reply);
 
 protected Q_SLOTS:
     void handleUnsupportedContent(QNetworkReply *);
@@ -73,6 +80,7 @@ private:
     QString errorPage(QNetworkReply *reply);
     KDeclarativeWebView *viewItem();
     NepomukHelper *m_nepomukHelper;
+    WebSslInfo m_sslInfo;
 };
 
 class GraphicsWebView : public QGraphicsWebView {
