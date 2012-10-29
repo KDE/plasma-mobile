@@ -70,8 +70,8 @@ MouseEventListener {
 
     property real lastX
     property real lastY
-    property real speedX
-    property real speedY
+    property real horizontalVelocity
+    property real verticalVelocity
     onPressed: {
         if (!interactive) {
             return
@@ -105,12 +105,12 @@ MouseEventListener {
         speedSampleTimer.running = false
 
         if (webView.contentsSize.width > webView.width) {
-            scrollAnimX.to = Math.min(Math.max(0, contentX + speedX*4), webView.contentsSize.width - flickable.width)
+            scrollAnimX.to = Math.min(Math.max(0, contentX + horizontalVelocity*4), webView.contentsSize.width - flickable.width)
         } else {
             scrollAnimX.to = contentX
         }
         if (webView.contentsSize.height > webView.height) {
-            scrollAnimY.to = Math.min(Math.max(0, contentY + speedY*4), webView.contentsSize.height - flickable.height)
+            scrollAnimY.to = Math.min(Math.max(0, contentY + verticalVelocity*4), webView.contentsSize.height - flickable.height)
         } else {
             scrollAnimY.to = contentY
         }
@@ -160,18 +160,18 @@ MouseEventListener {
         onRunningChanged: {
             if (running) {
                 flickable.lastContentY = flickable.contentY
-                speedX = speedY = 0
+                horizontalVelocity = verticalVelocity = 0
             } else {
-                speedX = flickable.contentX - flickable.lastContentX
+                horizontalVelocity = flickable.contentX - flickable.lastContentX
                 flickable.lastContentX = flickable.contentX
-                speedY = flickable.contentY - flickable.lastContentY
+                verticalVelocity = flickable.contentY - flickable.lastContentY
                 flickable.lastContentY = flickable.contentY
             }
         }
         onTriggered: {
-            speedX = flickable.contentX - flickable.lastContentX
+            horizontalVelocity = flickable.contentX - flickable.lastContentX
             flickable.lastContentX = flickable.contentX
-            speedY = flickable.contentY - flickable.lastContentY
+            verticalVelocity = flickable.contentY - flickable.lastContentY
             flickable.lastContentY = flickable.contentY
         }
     }

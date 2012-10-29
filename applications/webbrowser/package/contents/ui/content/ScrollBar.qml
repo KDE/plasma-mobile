@@ -123,7 +123,7 @@ Item {
     states: [
         State {
             name: "ScrollingUp"
-            when: ((container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally) &&             scrollArea.verticalVelocity < -10 && scrollArea.contentY > header.height+2000)
+            when: ((container.orientation == Qt.Vertical ? scrollArea.movingVertically : scrollArea.movingHorizontally) &&             scrollArea.verticalVelocity < -0 && scrollArea.contentY > header.height+200)
             PropertyChanges { target: scrollPainter; opacity: 1.0 }
             PropertyChanges { target: topButton; opacity: 1.0 }
         },
@@ -140,21 +140,21 @@ Item {
             to: "ScrollingUp"
             SequentialAnimation {
                 PauseAnimation { duration: 400; }
-                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 150 }
             }
         },
         Transition {
             to: "ScrollingUp"
             SequentialAnimation {
                 PauseAnimation { duration: 400; }
-                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 150 }
             }
         },
         Transition {
             from: "ScrollingUp"
             SequentialAnimation {
                 PauseAnimation { duration: 1000; }
-                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300 }
+                PropertyAnimation { target: topButton; properties: "opacity"; easing.type: Easing.InOutQuad; duration: 150 }
             }
         },
         Transition {
