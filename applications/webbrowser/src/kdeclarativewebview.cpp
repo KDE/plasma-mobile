@@ -1478,7 +1478,8 @@ QString QDeclarativeWebPage::userAgentForUrl(const QUrl &url) const
     // with just Mobile Safari very few sites are serving a mobile version
     //with android user agent gmail doesn't seem to work correctly
     if (viewItem()->preferMobile()) {
-        return agent.replace(" Safari/", " Mobile Safari/");
+        //this is extremely lame, but apparently websites are so lame that are explicitly checking for "android" or some toher strings
+        return agent.replace(" Safari/", " Mobile Safari/").replace("X11", "X11, like Android");
     } else {
         return agent;
     }
