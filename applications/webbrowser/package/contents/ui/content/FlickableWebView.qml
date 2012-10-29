@@ -87,15 +87,19 @@ MouseEventListener {
         }
         if (webView.contentsSize.height > webView.height) {
             contentY += (lastY - mouse.y)
+            movingVertically = true
         }
         if (webView.contentsSize.width > webView.width) {
             contentX += (lastX - mouse.x)
+            movingHorizontally = true
         }
         lastY = mouse.y
         lastX = mouse.x
     }
     onReleased: {
         if (!interactive) {
+            movingHorizontally = false
+            movingVertically = false
             return
         }
         speedSampleTimer.running = false
@@ -113,6 +117,8 @@ MouseEventListener {
 
         scrollAnim.running = true
     }
+    property bool movingHorizontally: false
+    property bool movingVertically: false
     property int contentX: 0
     property int contentY: 0
     property int lastContentY: 0
@@ -125,8 +131,7 @@ MouseEventListener {
         property real heightRatio: webView.height / contentHeight
         property real widthRatio: webView.width / contentWidth
     }
-    property bool movingVertically: false
-    property bool movingHorizontally: false
+
     onContentXChanged: {
         movingHorizontally = true
         movingTimer.restart()
@@ -185,6 +190,12 @@ MouseEventListener {
                 duration: 500
             }
         }
+        ScriptAction {
+            script: {
+                movingHorizontally = false
+                movingVertically = false
+            }
+        }
     }
     //pressDelay: 200
 
@@ -226,6 +237,11 @@ MouseEventListener {
             objectName: "webViewImplementation"
             transformOrigin: Item.TopLeft
             //settings.pluginsEnabled: true
+            settings {
+                localStorageDatabaseEnabled: true
+                offlineStorageDatabaseEnabled: true
+                offlineWebApplicationCacheEnabled: true
+            }
 
 
             

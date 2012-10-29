@@ -60,10 +60,7 @@ protected:
     void javaScriptAlert(QWebFrame *originatingFrame, const QString& msg);
     bool javaScriptConfirm(QWebFrame *originatingFrame, const QString& msg);
     bool javaScriptPrompt(QWebFrame *originatingFrame, const QString& msg, const QString& defaultValue, QString* result);
-    /*QString     userAgentForUrl ( const QUrl & url ) const
-    {
-        return "Mozilla/5.0 (Linux; U; Android 2.2.1; en-ca; LG-P505R Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
-    }*/
+    QString userAgentForUrl(const QUrl &url) const;
     bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type);
     void manageNetworkErrors(QNetworkReply *reply);
 
@@ -78,7 +75,7 @@ private:
     bool downloadResource(const KUrl& srcUrl, const QString& suggestedName = QString(),
                           QWidget* parent = 0, const KIO::MetaData& metaData = KIO::MetaData());
     QString errorPage(QNetworkReply *reply);
-    KDeclarativeWebView *viewItem();
+    KDeclarativeWebView *viewItem() const;
     NepomukHelper *m_nepomukHelper;
     WebSslInfo m_sslInfo;
 };
@@ -241,6 +238,8 @@ public:
     QPointF contentsPosition();
     void setContentsPosition(QPointF contentsPosition);
 
+    bool preferMobile() const;
+
 Q_SIGNALS:
     void preferredWidthChanged();
     void preferredHeightChanged();
@@ -304,6 +303,7 @@ private:
     QMouseEvent* sceneMouseEventToMouseEvent(QGraphicsSceneMouseEvent*);
     QMouseEvent* sceneHoverMoveEventToMouseEvent(QGraphicsSceneHoverEvent*);
     friend class QDeclarativeWebPage;
+    bool m_preferMobile;
 };
 
 class KDeclarativeWebViewAttached : public QObject {

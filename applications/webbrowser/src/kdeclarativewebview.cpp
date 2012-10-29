@@ -323,7 +323,9 @@ void GraphicsWebView::setFlickingEnabled(bool enabled)
     A KDeclarativeWebView object can be instantiated in Qml using the tag \l WebView.
 */
 
-KDeclarativeWebView::KDeclarativeWebView(QDeclarativeItem *parent) : QDeclarativeItem(parent)
+KDeclarativeWebView::KDeclarativeWebView(QDeclarativeItem *parent)
+    : QDeclarativeItem(parent),
+      m_preferMobile(true)
 {
     init();
 }
@@ -420,6 +422,11 @@ void KDeclarativeWebView::setContentsPosition(QPointF contentsPosition)
     emit contentsPositionChanged();
 }
 
+bool KDeclarativeWebView::preferMobile() const
+{
+    return m_preferMobile;
+}
+
 void KDeclarativeWebView::initSettings()
 {
     // From configuration
@@ -451,6 +458,8 @@ void KDeclarativeWebView::initSettings()
 
     settings()->setAttribute(QWebSettings::PluginsEnabled, pluginsEnabled);
     settingsObject()->setPluginsEnabled(pluginsEnabled);
+
+    m_preferMobile = cg.readEntry("preferMobile", true);
 }
 
 void KDeclarativeWebView::componentComplete()
@@ -1459,8 +1468,21 @@ bool QDeclarativeWebPage::javaScriptPrompt(QWebFrame* originatingFrame, const QS
     return false;
 }
 
+QString QDeclarativeWebPage::userAgentForUrl(const QUrl &url) const
+{
+    QString agent = KWebPage::userAgentForUrl(url);
 
-KDeclarativeWebView* QDeclarativeWebPage::viewItem()
+    //TODO: pretend to be android/iphone other mobile platforms?
+    // with just Mobile Safari very few sites are serving a mobile version
+    //with android user agent gmail doesn't seem to work correctly
+    if (viewItem()->preferMobile()) {
+        return agent.replace(" Safari/", " Mobile Safari/");
+    } else {
+        return agent;
+    }
+}
+
+KDeclarativeWebView* QDeclarativeWebPage::viewItem() const
 {
     return static_cast<KDeclarativeWebView*>(parent());
 }
