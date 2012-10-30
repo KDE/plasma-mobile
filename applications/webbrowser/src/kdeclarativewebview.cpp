@@ -422,9 +422,45 @@ QPointF KDeclarativeWebView::contentsPosition()
 
 void KDeclarativeWebView::setContentsPosition(QPointF contentsPosition)
 {
+    const QPoint oldPos = d->view->page()->mainFrame()->scrollPosition();
+
     d->view->page()->mainFrame()->setScrollPosition(contentsPosition.toPoint());
+
+    if (oldPos.x() != d->view->page()->mainFrame()->scrollPosition().x()) {
+        emit contentXChanged(d->view->page()->mainFrame()->scrollPosition().x());
+    }
+    if (oldPos.y() != d->view->page()->mainFrame()->scrollPosition().y()) {
+        emit contentYChanged(d->view->page()->mainFrame()->scrollPosition().y());
+    }
+
     emit contentsPositionChanged();
 }
+
+int KDeclarativeWebView::contentX() const
+{
+    return d->view->page()->mainFrame()->scrollPosition().x();
+}
+
+void KDeclarativeWebView::setContentX(int contentX)
+{
+    d->view->page()->mainFrame()->setScrollPosition(QPoint(contentX, d->view->page()->mainFrame()->scrollPosition().x()));
+    emit contentXChanged(d->view->page()->mainFrame()->scrollPosition().x());
+    emit contentsPositionChanged();
+}
+
+
+int KDeclarativeWebView::contentY() const
+{
+    return d->view->page()->mainFrame()->scrollPosition().y();
+}
+
+void KDeclarativeWebView::setContentY(int contentY)
+{
+    d->view->page()->mainFrame()->setScrollPosition(QPoint(d->view->page()->mainFrame()->scrollPosition().y(), contentY));
+    emit contentYChanged(d->view->page()->mainFrame()->scrollPosition().y());
+    emit contentsPositionChanged();
+}
+
 
 bool KDeclarativeWebView::preferMobile() const
 {

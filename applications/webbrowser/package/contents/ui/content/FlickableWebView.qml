@@ -85,13 +85,18 @@ MouseEventListener {
         if (!interactive) {
             return
         }
-        webView.scrollBy((lastX - mouse.x), (lastY - mouse.y), Qt.point(mouse.x, mouse.y));
+
+        var moved = webView.scrollBy((lastX - mouse.x), (lastY - mouse.y), Qt.point(mouse.x, mouse.y));
         if (webView.contentsSize.height > webView.height) {
-            //contentY += (lastY - mouse.y)
+            if (!moved || overshootY !== 0) {
+                overshootY += (lastY - mouse.y)
+            }
             movingVertically = true
         }
         if (webView.contentsSize.width > webView.width) {
-            //contentX += (lastX - mouse.x)
+            if (!moved || overshootX !== 0) {
+                overshootX += (lastX - mouse.x)
+            }
             movingHorizontally = true
         }
         lastY = mouse.y
@@ -120,10 +125,12 @@ MouseEventListener {
     }
     property bool movingHorizontally: false
     property bool movingVertically: false
-    property int contentX: 0
-    property int contentY: 0
+    property alias contentX: webView.contentsPosition.x
+    property alias contentY: webView.contentsPosition.y
     property int lastContentY: 0
     property int lastContentX: 0
+    property int overshootX: 0
+    property int overshootY: 0
     property int contentWidth: webView.contentsSize.width
     property int contentHeight: webView.contentsSize.height
     property bool atXBeginning: contentX <= 0
@@ -194,6 +201,20 @@ MouseEventListener {
                 easing.type: Easing.OutQuad
                 duration: 500
             }
+            NumberAnimation {
+                target: flickable
+                property: "overshootX"
+                to: 0
+                easing.type: Easing.OutQuad
+                duration: 500
+            }
+            NumberAnimation {
+                target: flickable
+                property: "overshootY"
+                to: 0
+                easing.type: Easing.OutQuad
+                duration: 500
+            }
         }
         ScriptAction {
             script: {
@@ -251,12 +272,13 @@ MouseEventListener {
 
             pressGrabTime: flickable.interactive ? 400 : 0
 
-            x: (flickable.atXBeginning || flickable.atXEnd ? -flickable.contentX : 0) + (flickable.atXEnd ? (flickable.contentWidth - width) : 0)
+            x: - overshootX
 
-            y: Math.max(-headerSpace.height, -flickable.contentY)
+            y: Math.max(-headerSpace.height, -flickable.contentY) - overshootY
             width: flickable.width
             height: flickable.height + headerSpace.height + Math.min(0, flickable.contentHeight - flickable.contentY - flickable.height)
-            contentsPosition: Qt.point(flickable.contentX, Math.max(0, flickable.contentY - headerSpace.height))
+
+
 
             //FIXME: glorious hack just to obtain a signal of the url of the new requested page
             // Should be replaced with signal from KDeclarativeWebView

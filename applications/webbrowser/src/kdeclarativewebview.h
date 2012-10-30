@@ -164,6 +164,9 @@ class KDeclarativeWebView : public QDeclarativeItem {
 
     Q_PROPERTY(QPointF contentsPosition READ contentsPosition WRITE setContentsPosition NOTIFY contentsPositionChanged)
 
+    Q_PROPERTY(int contentX READ contentX WRITE setContentX NOTIFY contentXChanged)
+    Q_PROPERTY(int contentY READ contentY WRITE setContentY NOTIFY contentYChanged)
+
 public:
     KDeclarativeWebView(QDeclarativeItem *parent = 0);
     ~KDeclarativeWebView();
@@ -248,6 +251,12 @@ public:
     QPointF contentsPosition();
     void setContentsPosition(QPointF contentsPosition);
 
+    int contentX() const;
+    void setContentX(int contentX);
+
+    int contentY() const;
+    void setContentY(int contentY);
+
     bool preferMobile() const;
 
 Q_SIGNALS:
@@ -269,6 +278,8 @@ Q_SIGNALS:
     void contentsSizeChanged(const QSize&);
     void contentsScaleChanged();
     void contentsPositionChanged();
+    void contentXChanged(int contentX);
+    void contentYChanged(int contentY);
 
     void loadStarted();
     void loadFinished();
