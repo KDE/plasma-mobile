@@ -248,7 +248,7 @@ Item {
             anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
             onClicked: browserConfig.writeEntry(configKey, checked);
             Component.onCompleted: {
-                checked = browserConfig.readEntry(configKey, true);
+                checked = browserConfig.readEntry(configKey);
                 print("prefer mobile websites: " + configKey + " :: " + checked);
             }
         }

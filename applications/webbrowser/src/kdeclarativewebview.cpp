@@ -329,7 +329,7 @@ void GraphicsWebView::setFlickingEnabled(bool enabled)
 
 KDeclarativeWebView::KDeclarativeWebView(QDeclarativeItem *parent)
     : QDeclarativeItem(parent),
-      m_preferMobile(true)
+      m_preferMobile(false)
 {
     init();
 }
@@ -524,7 +524,7 @@ void KDeclarativeWebView::initSettings()
     settings()->setAttribute(QWebSettings::PluginsEnabled, pluginsEnabled);
     settingsObject()->setPluginsEnabled(pluginsEnabled);
 
-    m_preferMobile = cg.readEntry("preferMobile", true);
+    m_preferMobile = cg.readEntry("preferMobile", false);
 }
 
 void KDeclarativeWebView::componentComplete()
