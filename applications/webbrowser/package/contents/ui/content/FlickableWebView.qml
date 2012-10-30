@@ -107,7 +107,7 @@ MouseEventListener {
         } else {
             var moved = webView.scrollBy((lastX - mouse.x), 0, Qt.point(mouse.x, mouse.y));
             if (webView.contentsSize.width > webView.width) {
-                if (!moved || overshootX !== 0) {
+                if (!moved) {
                     overshootX += (lastX - mouse.x)
                 }
                 movingHorizontally = true
@@ -140,8 +140,8 @@ MouseEventListener {
     }
     property bool movingHorizontally: false
     property bool movingVertically: false
-    property alias contentX: webView.contentsPosition.x
-    property alias contentY: webView.contentsPosition.y
+    property alias contentX: webView.contentX
+    property alias contentY: webView.contentY
     property int lastContentY: 0
     property int lastContentX: 0
     property int overshootX: 0

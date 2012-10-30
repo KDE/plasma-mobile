@@ -384,8 +384,10 @@ void KDeclarativeWebView::init()
     /*if (parent && parent->window())
         manager->setWindow(parent->window());*/
 
-    //FIXME: reliable
-    access->setWindow(QApplication::topLevelWidgets().first());
+    //FIXME: make this thing reliable
+    if (QApplication::topLevelWidgets().length() > 0) {
+        access->setWindow(QApplication::topLevelWidgets().first());
+    }
     wp->setNetworkAccessManager(access);
 #endif
 
@@ -433,7 +435,10 @@ void KDeclarativeWebView::setContentsPosition(QPointF contentsPosition)
         emit contentYChanged(d->view->page()->mainFrame()->scrollPosition().y());
     }
 
-    emit contentsPositionChanged();
+    if (oldPos.x() != d->view->page()->mainFrame()->scrollPosition().x() ||
+        oldPos.y() != d->view->page()->mainFrame()->scrollPosition().y()) {
+        emit contentsPositionChanged();
+    }
 }
 
 int KDeclarativeWebView::contentX() const
@@ -443,7 +448,17 @@ int KDeclarativeWebView::contentX() const
 
 void KDeclarativeWebView::setContentX(int contentX)
 {
-    d->view->page()->mainFrame()->setScrollPosition(QPoint(contentX, d->view->page()->mainFrame()->scrollPosition().x()));
+    const QPoint oldPos = d->view->page()->mainFrame()->scrollPosition();
+    if (oldPos.x() == contentX) {
+        return;
+    }
+
+    d->view->page()->mainFrame()->setScrollPosition(QPoint(contentX, d->view->page()->mainFrame()->scrollPosition().y()));
+
+    if (oldPos.x() == d->view->page()->mainFrame()->scrollPosition().x()) {
+        return;
+    }
+
     emit contentXChanged(d->view->page()->mainFrame()->scrollPosition().x());
     emit contentsPositionChanged();
 }
@@ -456,7 +471,17 @@ int KDeclarativeWebView::contentY() const
 
 void KDeclarativeWebView::setContentY(int contentY)
 {
-    d->view->page()->mainFrame()->setScrollPosition(QPoint(d->view->page()->mainFrame()->scrollPosition().y(), contentY));
+    const QPoint oldPos = d->view->page()->mainFrame()->scrollPosition();
+    if (oldPos.y() == contentY) {
+        return;
+    }
+
+    d->view->page()->mainFrame()->setScrollPosition(QPoint(d->view->page()->mainFrame()->scrollPosition().x(), contentY));
+
+    if (oldPos.y() == d->view->page()->mainFrame()->scrollPosition().y()) {
+        return;
+    }
+
     emit contentYChanged(d->view->page()->mainFrame()->scrollPosition().y());
     emit contentsPositionChanged();
 }
@@ -714,6 +739,13 @@ bool KDeclarativeWebView::scrollBy(int dx, int dy, const QPointF& pos)
 
         if (scrollHorizontal || scrollVertical) {
             frame->scroll(dx, dy);
+            if (scrollHorizontal) {
+                emit contentXChanged(frame->scrollPosition().x());
+            }
+            if (scrollVertical) {
+                emit contentYChanged(frame->scrollPosition().y());
+            }
+            
             emit contentsPositionChanged();
             return true;
         }
