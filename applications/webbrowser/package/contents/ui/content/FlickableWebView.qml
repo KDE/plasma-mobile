@@ -86,19 +86,34 @@ MouseEventListener {
             return
         }
 
-        var moved = webView.scrollBy((lastX - mouse.x), (lastY - mouse.y), Qt.point(mouse.x, mouse.y));
-        if (webView.contentsSize.height > webView.height) {
-            if (!moved || overshootY !== 0) {
-                overshootY += (lastY - mouse.y)
+        if (overshootY > 0) {
+            overshootY = Math.max(0, overshootY + (lastY - mouse.y))
+        } else if (overshootY < 0) {
+            overshootY = Math.min(0, overshootY + (lastY - mouse.y))
+        } else {
+            var moved = webView.scrollBy(0, (lastY - mouse.y), Qt.point(mouse.x, mouse.y));
+            if (webView.contentsSize.height > webView.height) {
+                if (!moved) {
+                    overshootY += (lastY - mouse.y)
+                }
+                movingVertically = true
             }
-            movingVertically = true
         }
-        if (webView.contentsSize.width > webView.width) {
-            if (!moved || overshootX !== 0) {
-                overshootX += (lastX - mouse.x)
+
+        if (overshootX > 0) {
+            overshootX = Math.max(0, overshootX + (lastX - mouse.x))
+        } else if (overshootX < 0) {
+            overshootX = Math.min(0, overshootX + (lastX - mouse.x))
+        } else {
+            var moved = webView.scrollBy((lastX - mouse.x), 0, Qt.point(mouse.x, mouse.y));
+            if (webView.contentsSize.width > webView.width) {
+                if (!moved || overshootX !== 0) {
+                    overshootX += (lastX - mouse.x)
+                }
+                movingHorizontally = true
             }
-            movingHorizontally = true
         }
+
         lastY = mouse.y
         lastX = mouse.x
     }
