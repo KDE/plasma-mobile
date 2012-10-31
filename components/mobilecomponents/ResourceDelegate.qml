@@ -84,16 +84,12 @@ Item {
         }
     }
 
-    //FIXME: this mess is due to mousearea not having screen coordinates
-    MouseEventListener {
+    MouseArea {
         anchors.fill: parent
-        MouseArea {
-            anchors.fill: parent
-            onClicked: delegateItem.clicked(mouse)
+        onClicked: delegateItem.clicked(mouse)
 
-            onPressed: delegateItem.pressed(mouse)
-            onReleased: delegateItem.released(mouse)
-            onPressAndHold: delegateItem.pressAndHold(mouse)
-        }
+        onPressed: delegateItem.pressed(mouse)
+        onReleased: delegateItem.released(mouse)
+        onPressAndHold: delegateItem.pressAndHold(mouse)
     }
 }
