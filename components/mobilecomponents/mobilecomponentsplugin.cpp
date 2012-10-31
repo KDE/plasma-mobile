@@ -38,7 +38,6 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<FallbackComponent>(uri, 0, 1, "FallbackComponent");
     qmlRegisterType<Package>(uri, 0, 1, "Package");
     qmlRegisterType<TextEffects>(uri, 0, 1, "TextEffects");
-    qmlRegisterType<AppletContainer>(uri, 0, 1, "AppletContainer");
 }
 
 
