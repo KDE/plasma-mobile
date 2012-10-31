@@ -23,7 +23,6 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.plasma.slccomponents 0.1 as SlcComponents
 import org.kde.runnermodel 0.1 as RunnerModels
 
 MouseArea {
@@ -59,10 +58,6 @@ MouseArea {
 
     PlasmaExtras.ResourceInstance {
         id: resourceInstance
-    }
-
-    SlcComponents.SlcMenu {
-        id: contextMenu
     }
 
     PlasmaCore.Theme {

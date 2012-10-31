@@ -93,24 +93,7 @@ Item {
 
             onPressed: delegateItem.pressed(mouse)
             onReleased: delegateItem.released(mouse)
-            onPressAndHold: {
-                delegateItem.pressAndHold(mouse)
-                if (resourceInstance && contextMenu) {
-                    contextMenu.open(delegateItem)
-                }
-            }
-        }
-
-        onPositionChanged: {
-            if (contextMenu) {
-                contextMenu.mainItem.highlightItem(mouse.screenX, mouse.screenY)
-            }
-        }
-
-        onReleased: {
-            if (contextMenu) {
-                contextMenu.mainItem.runItem(mouse.screenX, mouse.screenY)
-            }
+            onPressAndHold: delegateItem.pressAndHold(mouse)
         }
     }
 }
