@@ -90,7 +90,6 @@ PlasmaApp::PlasmaApp()
     KGlobal::locale()->insertCatalog("libplasma");
     KGlobal::locale()->insertCatalog("plasma-device");
 
-    setenv("PLASMA_CUSTOM_PREFIX_PATHS", "platformcontents/widget/tablet/:platformcontents/widget/touch/:platformcontents/widget/generic/:contents/", 1);
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
     Nepomuk2::ResourceManager::instance()->init();
