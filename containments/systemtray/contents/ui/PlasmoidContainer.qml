@@ -18,13 +18,14 @@
  */
 
 import QtQuick 1.0
+import org.kde.plasma.containments 0.1 as PlasmaContainments
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-MobileComponents.AppletContainer {
+PlasmaContainments..AppletContainer {
     id: plasmoidContainer
     width: main.itemWidth
     height: main.itemHeight
-    opacity: status != MobileComponents.AppletContainer.PassiveStatus?1:0
+    opacity: status != PlasmaContainments.AppletContainer.PassiveStatus?1:0
 
     Behavior on opacity {
         NumberAnimation {
