@@ -68,19 +68,16 @@ MouseEventListener {
 
     signal newWindowRequested(string url)
 
-    property real lastX
-    property real lastY
     property real horizontalVelocity
     property real verticalVelocity
     onPressed: {
         if (!interactive) {
             return
         }
-        lastY = mouse.y
-        lastX = mouse.x
         scrollAnim.running = false
         speedSampleTimer.running = true
     }
+
     onReleased: {
         if (!interactive) {
             movingHorizontally = false
@@ -88,6 +85,10 @@ MouseEventListener {
             return
         }
         speedSampleTimer.running = false
+
+        if (!movingHorizontally && !movingVertically) {
+            return
+        }
 
         if (webView.contentsSize.width > webView.width) {
             scrollAnimX.to = Math.min(Math.max(0, contentX + horizontalVelocity*4), webView.contentsSize.width - flickable.width)
@@ -360,8 +361,6 @@ MouseEventListener {
 
             onUrlChanged: {
                 // got to topleft
-                flickable.contentX = 0
-                flickable.contentY = 0
                 if (url != null) {
                     header.editUrl = url.toString();
                 }
