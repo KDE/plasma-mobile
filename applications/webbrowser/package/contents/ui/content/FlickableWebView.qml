@@ -81,7 +81,7 @@ MouseEventListener {
         scrollAnim.running = false
         speedSampleTimer.running = true
     }
-    onPositionChanged: {
+    onPositionChanged: {return
         if (!interactive) {
             return
         }

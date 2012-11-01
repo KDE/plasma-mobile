@@ -208,6 +208,9 @@ void GraphicsWebView::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
     }
     if (parent->keepMouseGrab())
         QGraphicsWebView::mouseMoveEvent(event);
+
+    //TODO: should be possible to disable scrolling here?
+    parent->scrollBy(event->lastPos().x() - event->pos().x(), event->lastPos().y() - event->pos().y(), event->pos());
 }
 
 bool GraphicsWebView::sceneEvent(QEvent *event)
