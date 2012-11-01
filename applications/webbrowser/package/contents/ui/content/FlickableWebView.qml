@@ -81,42 +81,6 @@ MouseEventListener {
         scrollAnim.running = false
         speedSampleTimer.running = true
     }
-    onPositionChanged: {return
-        if (!interactive) {
-            return
-        }
-
-        if (overshootY > 0) {
-            overshootY = Math.max(0, overshootY + (lastY - mouse.y))
-        } else if (overshootY < 0) {
-            overshootY = Math.min(0, overshootY + (lastY - mouse.y))
-        } else {
-            var moved = webView.scrollBy(0, (lastY - mouse.y), Qt.point(mouse.x, mouse.y));
-            if (webView.contentsSize.height > webView.height) {
-                if (!moved) {
-                    overshootY += (lastY - mouse.y)
-                }
-                movingVertically = true
-            }
-        }
-
-        if (overshootX > 0) {
-            overshootX = Math.max(0, overshootX + (lastX - mouse.x))
-        } else if (overshootX < 0) {
-            overshootX = Math.min(0, overshootX + (lastX - mouse.x))
-        } else {
-            var moved = webView.scrollBy((lastX - mouse.x), 0, Qt.point(mouse.x, mouse.y));
-            if (webView.contentsSize.width > webView.width) {
-                if (!moved) {
-                    overshootX += (lastX - mouse.x)
-                }
-                movingHorizontally = true
-            }
-        }
-
-        lastY = mouse.y
-        lastX = mouse.x
-    }
     onReleased: {
         if (!interactive) {
             movingHorizontally = false
@@ -149,9 +113,9 @@ MouseEventListener {
     property int contentWidth: webView.contentsSize.width
     property int contentHeight: webView.contentsSize.height
     property bool atXBeginning: contentX <= 0
-    property bool atXEnd: contentX >= contentWidth - width
+    property bool atXEnd: contentX >= contentWidth - webView.width
     property bool atYBeginning: contentY <= 0
-    property bool atYEnd: contentY >= contentHeight - height
+    property bool atYEnd: contentY >= contentHeight - webView.height
     property QtObject visibleArea: QtObject {
         property real yPosition: flickable.contentY / contentHeight
         property real xPosition: flickable.contentX / contentWidth
@@ -164,6 +128,7 @@ MouseEventListener {
         movingTimer.restart()
     }
     onContentYChanged: {
+        print(contentY +" "+ contentHeight +" "+ height+" "+(contentHeight - webView.height))
         movingVertically = true
         movingTimer.restart()
     }
@@ -294,6 +259,7 @@ MouseEventListener {
             height: flickable.height + headerSpace.height + Math.min(0, flickable.contentHeight - flickable.contentY - flickable.height)
 
 
+            flickingEnabled: !flickable.interactive || overshootY == 0
 
             //FIXME: glorious hack just to obtain a signal of the url of the new requested page
             // Should be replaced with signal from KDeclarativeWebView

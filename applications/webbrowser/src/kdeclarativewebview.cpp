@@ -38,6 +38,7 @@
 #include <QtCore/QDir>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QPropertyAnimation>
 
 #include <qwebelement.h>
 #include <qwebframe.h>
@@ -123,6 +124,12 @@ GraphicsWebView::GraphicsWebView(KDeclarativeWebView* parent)
     , pressTime(400)
     , flicking(true)
 {
+    m_posAnim = new QPropertyAnimation(this);
+    m_posAnim->setDuration(250);
+    m_posAnim->setEasingCurve(QEasingCurve::InOutQuad);
+    m_posAnim->setTargetObject(this);
+    m_posAnim->setPropertyName("pos");
+    m_posAnim->setEndValue(QPoint(0, 0));
 }
 
 void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
@@ -165,6 +172,10 @@ void GraphicsWebView::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
     pressTimer.stop();
     parent->setKeepMouseGrab(false);
     ungrabMouse();
+
+    if (pos() != QPoint(0, 0)) {
+        m_posAnim->start();
+    }
 }
 
 void GraphicsWebView::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
@@ -210,7 +221,37 @@ void GraphicsWebView::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
         QGraphicsWebView::mouseMoveEvent(event);
 
     //TODO: should be possible to disable scrolling here?
-    parent->scrollBy(event->lastPos().x() - event->pos().x(), event->lastPos().y() - event->pos().y(), event->pos());
+    if (flicking) {
+        QPoint deltaMousePos = QPointF(event->lastScenePos() - event->scenePos()).toPoint();
+        QPoint finalPos = pos().toPoint();
+
+        if (pos().x() > 0) {
+            finalPos.rx() = qMax(0, (int)(pos().x() - deltaMousePos.x()));
+            deltaMousePos.rx() = 0;
+        } else if  (pos().x() < 0) {
+            finalPos.rx() = qMin(0, (int)(pos().x() - deltaMousePos.x()));
+            deltaMousePos.rx() = 0;
+        }
+
+        if (pos().y() > 0) {
+            finalPos.ry() = qMax(0, (int)(pos().y() - deltaMousePos.y()));
+            deltaMousePos.ry() = 0;
+        } else if  (pos().y() < 0) {
+            finalPos.ry() = qMin(0, (int)(pos().y() - deltaMousePos.y()));
+            deltaMousePos.ry() = 0;
+        }
+
+        if (deltaMousePos != QPoint(0, 0) && !parent->scrollBy(deltaMousePos.x(), deltaMousePos.y(), event->pos())) {
+            if (page()->mainFrame()->contentsSize().width() <= size().width()) {
+                deltaMousePos.rx() = 0;
+            }
+            if (page()->mainFrame()->contentsSize().height() <= size().height()) {
+                deltaMousePos.ry() = 0;
+            }
+            finalPos = pos().toPoint() - deltaMousePos;
+        }
+        setPos(finalPos);
+    }
 }
 
 bool GraphicsWebView::sceneEvent(QEvent *event)

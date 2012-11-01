@@ -39,6 +39,7 @@ QT_BEGIN_HEADER
 
 class QWebHistory;
 class QWebSettings;
+class QPropertyAnimation;
 
 QT_BEGIN_NAMESPACE
 
@@ -111,6 +112,7 @@ Q_SIGNALS:
 
 private:
     KDeclarativeWebView *parent;
+    QPropertyAnimation *m_posAnim;
     QPointF pressPoint;
     QBasicTimer pressTimer;
     int pressTime; // milliseconds before the touch event becomes a "tap and hold"
