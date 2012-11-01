@@ -398,6 +398,9 @@ void KDeclarativeWebView::init()
     setClip(true);
 
     d->view = new GraphicsWebView(this);
+    connect(d->view, SIGNAL(xChanged()), this, SIGNAL(overShootXChanged()));
+    connect(d->view, SIGNAL(yChanged()), this, SIGNAL(overShootYChanged()));
+
     //d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
     KWebPage* kwp = qobject_cast<KWebPage*>(wp);
@@ -528,6 +531,17 @@ void KDeclarativeWebView::setContentY(int contentY)
 
     emit contentYChanged(d->view->page()->mainFrame()->scrollPosition().y());
     emit contentsPositionChanged();
+}
+
+
+int KDeclarativeWebView::overShootX() const
+{
+    return d->view->pos().x();
+}
+
+int KDeclarativeWebView::overShootY() const
+{
+    return d->view->pos().y();
 }
 
 

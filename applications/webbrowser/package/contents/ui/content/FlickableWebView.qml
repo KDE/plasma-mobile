@@ -108,8 +108,8 @@ MouseEventListener {
     property alias contentY: webView.contentY
     property int lastContentY: 0
     property int lastContentX: 0
-    property int overshootX: 0
-    property int overshootY: 0
+    property alias overShootX: webView.overShootX
+    property alias overShootY: webView.overShootY
     property int contentWidth: webView.contentsSize.width
     property int contentHeight: webView.contentsSize.height
     property bool atXBeginning: contentX <= 0
@@ -128,7 +128,6 @@ MouseEventListener {
         movingTimer.restart()
     }
     onContentYChanged: {
-        print(contentY +" "+ contentHeight +" "+ height+" "+(contentHeight - webView.height))
         movingVertically = true
         movingTimer.restart()
     }
@@ -178,20 +177,6 @@ MouseEventListener {
                 id: scrollAnimY
                 target: flickable
                 property: "contentY"
-                easing.type: Easing.OutQuad
-                duration: 500
-            }
-            NumberAnimation {
-                target: flickable
-                property: "overshootX"
-                to: 0
-                easing.type: Easing.OutQuad
-                duration: 500
-            }
-            NumberAnimation {
-                target: flickable
-                property: "overshootY"
-                to: 0
                 easing.type: Easing.OutQuad
                 duration: 500
             }
@@ -252,14 +237,14 @@ MouseEventListener {
 
             pressGrabTime: flickable.interactive ? 400 : 0
 
-            x: - overshootX
+            x: 0
 
-            y: Math.max(-headerSpace.height, -flickable.contentY) - overshootY
+            y: Math.max(-headerSpace.height, -flickable.contentY)
             width: flickable.width
             height: flickable.height + headerSpace.height + Math.min(0, flickable.contentHeight - flickable.contentY - flickable.height)
 
 
-            flickingEnabled: !flickable.interactive || overshootY == 0
+            flickingEnabled: !flickable.interactive
 
             //FIXME: glorious hack just to obtain a signal of the url of the new requested page
             // Should be replaced with signal from KDeclarativeWebView
@@ -397,88 +382,95 @@ MouseEventListener {
                 }
             }
 
-            Image {
-                source: "image://appbackgrounds/shadow-left"
-                fillMode: Image.TileVertically
-                anchors {
-                    top: parent.top
-                    right: parent.left
-                    rightMargin: -1
-                    bottom: parent.bottom
-                    topMargin: 1
-                    bottomMargin: 1
+            Item {
+                x: 1 + webView.overShootX
+                y: 1 + webView.overShootY
+                width: parent.width - 2
+                height: parent.height - 2
+
+                Image {
+                    source: "image://appbackgrounds/shadow-left"
+                    fillMode: Image.TileVertically
+                    anchors {
+                        top: parent.top
+                        right: parent.left
+                        rightMargin: -1
+                        bottom: parent.bottom
+                        topMargin: 1
+                        bottomMargin: 1
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-top"
-                fillMode: Image.TileHorizontally
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    bottomMargin: -1
-                    bottom: parent.top
-                    leftMargin: 1
-                    rightMargin: 1
+                Image {
+                    source: "image://appbackgrounds/shadow-top"
+                    fillMode: Image.TileHorizontally
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        bottomMargin: -1
+                        bottom: parent.top
+                        leftMargin: 1
+                        rightMargin: 1
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-right"
-                fillMode: Image.TileVertically
-                anchors {
-                    top: parent.top
-                    left: parent.right
-                    leftMargin: -1
-                    bottom: parent.bottom
-                    topMargin: 1
-                    bottomMargin: 1
+                Image {
+                    source: "image://appbackgrounds/shadow-right"
+                    fillMode: Image.TileVertically
+                    anchors {
+                        top: parent.top
+                        left: parent.right
+                        leftMargin: -1
+                        bottom: parent.bottom
+                        topMargin: 1
+                        bottomMargin: 1
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-bottom"
-                fillMode: Image.TileHorizontally
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    topMargin: -1
-                    top: parent.bottom
-                    leftMargin: 1
-                    rightMargin: 1
+                Image {
+                    source: "image://appbackgrounds/shadow-bottom"
+                    fillMode: Image.TileHorizontally
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        topMargin: -1
+                        top: parent.bottom
+                        leftMargin: 1
+                        rightMargin: 1
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-topleft"
-                anchors {
-                    right: parent.left
-                    bottomMargin: -1
-                    rightMargin: -1
-                    bottom: parent.top
+                Image {
+                    source: "image://appbackgrounds/shadow-topleft"
+                    anchors {
+                        right: parent.left
+                        bottomMargin: -1
+                        rightMargin: -1
+                        bottom: parent.top
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-topright"
-                anchors {
-                    left: parent.right
-                    bottomMargin: -1
-                    leftMargin: -1
-                    bottom: parent.top
+                Image {
+                    source: "image://appbackgrounds/shadow-topright"
+                    anchors {
+                        left: parent.right
+                        bottomMargin: -1
+                        leftMargin: -1
+                        bottom: parent.top
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-bottomleft"
-                anchors {
-                    right: parent.left
-                    topMargin: -1
-                    rightMargin: -1
-                    top: parent.bottom
+                Image {
+                    source: "image://appbackgrounds/shadow-bottomleft"
+                    anchors {
+                        right: parent.left
+                        topMargin: -1
+                        rightMargin: -1
+                        top: parent.bottom
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-bottomright"
-                anchors {
-                    left: parent.right
-                    topMargin: -1
-                    leftMargin: -1
-                    top: parent.bottom
+                Image {
+                    source: "image://appbackgrounds/shadow-bottomright"
+                    anchors {
+                        left: parent.right
+                        topMargin: -1
+                        leftMargin: -1
+                        top: parent.bottom
+                    }
                 }
             }
 
