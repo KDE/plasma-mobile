@@ -99,7 +99,7 @@ Item {
     }
     QIconItem {
         id: topButton
-        anchors { top: parent.top; right: parent.left }
+        anchors { bottom: parent.bottom; right: parent.left }
         icon: QIcon("go-top")
         width: 48
         height: width
