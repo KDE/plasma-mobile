@@ -24,7 +24,6 @@
 #include <QtDeclarative/qdeclarative.h>
 #include <QDeclarativeEngine>
 
-#include "appletcontainer.h"
 #include "pagedproxymodel.h"
 #include "fallbackcomponent.h"
 #include "package.h"
