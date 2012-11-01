@@ -57,12 +57,15 @@ PlasmaComponents.ToolBar {
         imagePath: activeWebBrowserPackage.filePath("images", "toolbar-icons.svgz")
     }
 
-    x: -webView.overshootX
-    y: {
-        if (webView.progress < 1.0)
-            return 0;
-        else {
-            webView.overshootY < 0 ? -webView.overshootY : (webView.contentY > height ? -height : -webView.contentY)
+    x: 0
+
+    property int oldContentY: 0
+    Connections {
+        target: webView
+        
+        onContentYChanged: {
+            header.y = Math.min(0, Math.max(header.y - (webView.contentY - oldContentY), - header.height))
+            oldContentY = webView.contentY
         }
     }
     tools: Column {

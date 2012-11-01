@@ -99,9 +99,13 @@ Item {
     }
     QIconItem {
         id: topButton
-        anchors { bottom: parent.bottom; right: parent.left }
+        anchors {
+            bottom: parent.bottom
+            right: parent.left
+            bottomMargin: 8
+        }
         icon: QIcon("go-top")
-        width: 48
+        width: theme.hugeIconSize
         height: width
         opacity: 0
         MouseArea {
