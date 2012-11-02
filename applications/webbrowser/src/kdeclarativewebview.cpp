@@ -217,11 +217,10 @@ void GraphicsWebView::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
         if ((event->pos() - pressPoint).manhattanLength() > QApplication::startDragDistance())
             pressTimer.stop();
     }
-    if (parent->keepMouseGrab())
-        QGraphicsWebView::mouseMoveEvent(event);
 
-    //TODO: should be possible to disable scrolling here?
-    if (flicking) {
+    if (parent->keepMouseGrab()) {
+        QGraphicsWebView::mouseMoveEvent(event);
+    } else if (flicking) {
         QPoint deltaMousePos = QPointF(event->lastScenePos() - event->scenePos()).toPoint();
         QPoint finalPos = pos().toPoint();
 
