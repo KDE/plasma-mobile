@@ -26,6 +26,7 @@
 #include <QtDeclarative/QDeclarativeItem>
 #include <QtGui/QAction>
 #include <QtNetwork/QNetworkAccessManager>
+#include <QTime>
 #include <kgraphicswebview.h>
 #include <qwebpage.h>
 
@@ -119,6 +120,11 @@ private:
     int pressTime; // milliseconds before the touch event becomes a "tap and hold"
     bool flicking;
     friend class KDeclarativeWebView;
+
+    //speed sampling and scroll animation
+    QTime m_sampleTime;
+    QPoint m_draggedDistance;
+    QPropertyAnimation *m_contentsPosAnimation;
 };
 
 class KDeclarativeWebViewAttached;

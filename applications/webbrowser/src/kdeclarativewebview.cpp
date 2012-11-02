@@ -123,6 +123,7 @@ GraphicsWebView::GraphicsWebView(KDeclarativeWebView* parent)
     , parent(parent)
     , pressTime(400)
     , flicking(true)
+    , m_contentsPosAnimation(0)
 {
     m_posAnim = new QPropertyAnimation(this);
     m_posAnim->setDuration(250);
@@ -157,6 +158,19 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
     kDebug() << " - - >  Hit element: " << hit.element().tagName() << hit.element().geometry() << hit.linkElement().geometry();
 
+    m_sampleTime.restart();
+    m_draggedDistance = QPoint(0, 0);
+    if (!m_contentsPosAnimation) {
+        m_contentsPosAnimation = new QPropertyAnimation(this);
+        m_contentsPosAnimation->setDuration(500);
+        m_contentsPosAnimation->setEasingCurve(QEasingCurve::OutQuad);
+        m_contentsPosAnimation->setTargetObject(parent);
+        m_contentsPosAnimation->setPropertyName("contentsPosition");
+    }
+    if (m_contentsPosAnimation->state() == QAbstractAnimation::Running) {
+        m_contentsPosAnimation->stop();
+    }
+
     if (!hit.linkElement().geometry().isNull()) {
         kDebug() << "XXXXXXXXXX link pressed. .. ";
         emit linkPressed(hit.linkUrl(), hit.linkElement().geometry());
@@ -179,6 +193,12 @@ void GraphicsWebView::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
     if (pos() != QPoint(0, 0)) {
         m_posAnim->start();
     }
+
+    //final pos = speed * anim time
+    //where speed is traveled distance / elapsed total time
+    m_contentsPosAnimation->setStartValue(page()->mainFrame()->scrollPosition());
+    m_contentsPosAnimation->setEndValue(page()->mainFrame()->scrollPosition() + (m_draggedDistance/m_sampleTime.elapsed()) * m_contentsPosAnimation->duration());
+    m_contentsPosAnimation->start();
 }
 
 void GraphicsWebView::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
@@ -232,6 +252,7 @@ void GraphicsWebView::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
     } else if (flicking) {
         QPoint deltaMousePos = QPointF(event->lastScenePos() - event->scenePos()).toPoint();
         QPoint finalPos = pos().toPoint();
+        m_draggedDistance += deltaMousePos;
 
         if (pos().x() > 0) {
             finalPos.rx() = qMax(0, (int)(pos().x() - deltaMousePos.x()));
@@ -477,6 +498,9 @@ void KDeclarativeWebView::init()
 
 QPointF KDeclarativeWebView::contentsPosition()
 {
+    if (!d->view || !d->view->page() || !d->view->page()->mainFrame()) {
+        QPointF(0, 0);
+    }
     return d->view->page()->mainFrame()->scrollPosition();
 }
 

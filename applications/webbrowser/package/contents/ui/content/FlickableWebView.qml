@@ -74,8 +74,6 @@ MouseEventListener {
         if (!interactive) {
             return
         }
-        scrollAnim.running = false
-        speedSampleTimer.running = true
     }
 
     onReleased: {
@@ -84,24 +82,6 @@ MouseEventListener {
             movingVertically = false
             return
         }
-        speedSampleTimer.running = false
-
-        if (!movingHorizontally && !movingVertically) {
-            return
-        }
-
-        if (webView.contentsSize.width > webView.width) {
-            scrollAnimX.to = Math.min(Math.max(0, contentX + horizontalVelocity*4), webView.contentsSize.width - flickable.width)
-        } else {
-            scrollAnimX.to = contentX
-        }
-        if (webView.contentsSize.height > webView.height) {
-            scrollAnimY.to = Math.min(Math.max(0, contentY + verticalVelocity*4), webView.contentsSize.height - flickable.height)
-        } else {
-            scrollAnimY.to = contentY
-        }
-
-        scrollAnim.running = true
     }
     property bool movingHorizontally: false
     property bool movingVertically: false
@@ -141,54 +121,6 @@ MouseEventListener {
         }
     }
 
-    Timer {
-        id: speedSampleTimer
-        repeat: true
-        interval: 250
-        onRunningChanged: {
-            if (running) {
-                flickable.lastContentY = flickable.contentY
-                horizontalVelocity = verticalVelocity = 0
-            } else {
-                horizontalVelocity = flickable.contentX - flickable.lastContentX
-                flickable.lastContentX = flickable.contentX
-                verticalVelocity = flickable.contentY - flickable.lastContentY
-                flickable.lastContentY = flickable.contentY
-            }
-        }
-        onTriggered: {
-            horizontalVelocity = flickable.contentX - flickable.lastContentX
-            flickable.lastContentX = flickable.contentX
-            verticalVelocity = flickable.contentY - flickable.lastContentY
-            flickable.lastContentY = flickable.contentY
-        }
-    }
-
-    SequentialAnimation {
-        id: scrollAnim
-        ParallelAnimation {
-            NumberAnimation {
-                id: scrollAnimX
-                target: flickable
-                property: "contentX"
-                easing.type: Easing.OutQuad
-                duration: 500
-            }
-            NumberAnimation {
-                id: scrollAnimY
-                target: flickable
-                property: "contentY"
-                easing.type: Easing.OutQuad
-                duration: 500
-            }
-        }
-        ScriptAction {
-            script: {
-                movingHorizontally = false
-                movingVertically = false
-            }
-        }
-    }
     //pressDelay: 200
 
     onWidthChanged : {
