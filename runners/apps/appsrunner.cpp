@@ -57,7 +57,6 @@ ActiveAppsRunner::~ActiveAppsRunner()
 
 void ActiveAppsRunner::match(Plasma::RunnerContext &context)
 {
-    m_currentMatchIds.clear();
     m_lastContext = context;
 
     if (context.query() == "__activeappslist") {
@@ -275,8 +274,6 @@ void ActiveAppsRunner::setupMatch(const KService::Ptr &service, Plasma::QueryMat
     if (!service->icon().isEmpty()) {
         match.setIcon(KIcon(service->icon()));
     }
-
-    m_currentMatchIds << match.id();
 }
 
 QMimeData * ActiveAppsRunner::mimeDataForMatch(const Plasma::QueryMatch *match)
@@ -300,10 +297,7 @@ void ActiveAppsRunner::databaseChanged(const QStringList &changes)
         return;
     }
 
-    if (!m_currentMatchIds.isEmpty()) {
-        m_lastContext.removeMatches(m_currentMatchIds);
-    }
-
+    m_lastContext.removeMatches(this);
     match(m_lastContext);
 }
 

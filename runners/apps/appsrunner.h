@@ -49,7 +49,6 @@ private:
 private:
     QSet<QString> m_blackList;
     Plasma::RunnerContext m_lastContext;
-    QStringList m_currentMatchIds;
 };
 
 K_EXPORT_PLASMA_RUNNER(activeapps, ActiveAppsRunner)
