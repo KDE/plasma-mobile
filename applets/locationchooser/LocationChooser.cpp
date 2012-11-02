@@ -88,6 +88,7 @@ void LocationChooser::currentLocationChanged(const QString & id, const QString &
 void LocationChooser::popupEvent(bool show)
 {
     d->engine->requestUiReset();
+
     Plasma::PopupApplet::popupEvent(show);
 }
 

@@ -26,6 +26,7 @@
 #include <QtDeclarative/QDeclarativeItem>
 #include <QtGui/QAction>
 #include <QtNetwork/QNetworkAccessManager>
+#include <QTime>
 #include <kgraphicswebview.h>
 #include <qwebpage.h>
 
@@ -33,11 +34,13 @@
 
 #include "kwebpage.h"
 #include "nepomukhelper.h"
+#include "websslinfo.h"
 
 QT_BEGIN_HEADER
 
 class QWebHistory;
 class QWebSettings;
+class QPropertyAnimation;
 
 QT_BEGIN_NAMESPACE
 
@@ -47,6 +50,9 @@ class KDeclarativeWebViewPrivate;
 class QNetworkRequest;
 class KDeclarativeWebView;
 class KDeclarativeWebViewPrivate;
+
+//HACK: this is a private, but exported function from QWebframe
+bool qtwebkit_webframe_scrollOverflow(QWebFrame* qFrame, int dx, int dy, const QPoint& pos);
 
 class QDeclarativeWebPage : public KWebPage {
     Q_OBJECT
@@ -59,6 +65,9 @@ protected:
     void javaScriptAlert(QWebFrame *originatingFrame, const QString& msg);
     bool javaScriptConfirm(QWebFrame *originatingFrame, const QString& msg);
     bool javaScriptPrompt(QWebFrame *originatingFrame, const QString& msg, const QString& defaultValue, QString* result);
+    QString userAgentForUrl(const QUrl &url) const;
+    bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type);
+    void manageNetworkErrors(QNetworkReply *reply);
 
 protected Q_SLOTS:
     void handleUnsupportedContent(QNetworkReply *);
@@ -71,8 +80,9 @@ private:
     bool downloadResource(const KUrl& srcUrl, const QString& suggestedName = QString(),
                           QWidget* parent = 0, const KIO::MetaData& metaData = KIO::MetaData());
     QString errorPage(QNetworkReply *reply);
-    KDeclarativeWebView *viewItem();
+    KDeclarativeWebView *viewItem() const;
     NepomukHelper *m_nepomukHelper;
+    WebSslInfo m_sslInfo;
 };
 
 class GraphicsWebView : public QGraphicsWebView {
@@ -100,14 +110,21 @@ Q_SIGNALS:
     void linkPressed(const QUrl&, const QRect &linkRect);
     void linkPressAndHold(const QUrl&, const QRect &linkRect);
     void linkClicked(const QUrl&, const QRect &linkRect);
+    void selectionPressAndHold(const QString &selection, const QPoint &pos);
 
 private:
     KDeclarativeWebView *parent;
+    QPropertyAnimation *m_posAnim;
     QPointF pressPoint;
     QBasicTimer pressTimer;
     int pressTime; // milliseconds before the touch event becomes a "tap and hold"
     bool flicking;
     friend class KDeclarativeWebView;
+
+    //speed sampling and scroll animation
+    QTime m_sampleTime;
+    QPoint m_draggedDistance;
+    QPropertyAnimation *m_contentsPosAnimation;
 };
 
 class KDeclarativeWebViewAttached;
@@ -151,8 +168,18 @@ class KDeclarativeWebView : public QDeclarativeItem {
 
     Q_PROPERTY(bool renderingEnabled READ renderingEnabled WRITE setRenderingEnabled NOTIFY renderingEnabledChanged)
 
+    Q_PROPERTY(QString selectedText READ selectedText NOTIFY selectedTextChanged)
+
     Q_PROPERTY(QSize contentsSize READ contentsSize NOTIFY contentsSizeChanged)
     Q_PROPERTY(qreal contentsScale READ contentsScale WRITE setContentsScale NOTIFY contentsScaleChanged)
+
+    Q_PROPERTY(QPointF contentsPosition READ contentsPosition WRITE setContentsPosition NOTIFY contentsPositionChanged)
+
+    Q_PROPERTY(int contentX READ contentX WRITE setContentX NOTIFY contentXChanged)
+    Q_PROPERTY(int contentY READ contentY WRITE setContentY NOTIFY contentYChanged)
+
+    Q_PROPERTY(int overShootX READ overShootX NOTIFY overShootXChanged)
+    Q_PROPERTY(int overShootY READ overShootY NOTIFY overShootYChanged)
 
 public:
     KDeclarativeWebView(QDeclarativeItem *parent = 0);
@@ -180,6 +207,13 @@ public:
     void setPreferredWidth(int);
     int preferredHeight() const;
     void setPreferredHeight(int);
+
+    /**
+     * Scrollsby dx and dy whatever scrollable element is in the page at pos.
+     * if no scrollable elements are found, the main frame is scrolled
+     * @returns true if any scrolling has been performed
+     */
+    Q_INVOKABLE bool scrollBy(int dx, int dy, const QPointF& pos);
 
     enum Status { Null, Ready, Loading, Error };
     Status status() const;
@@ -212,6 +246,8 @@ public:
     bool renderingEnabled() const;
     void setRenderingEnabled(bool);
 
+    QString selectedText() const;
+
     QDeclarativeListProperty<QObject> javaScriptWindowObjects();
 
     static KDeclarativeWebViewAttached* qmlAttachedProperties(QObject*);
@@ -227,6 +263,20 @@ public:
 
     void setContentsScale(qreal scale);
     qreal contentsScale() const;
+
+    QPointF contentsPosition();
+    void setContentsPosition(QPointF contentsPosition);
+
+    int contentX() const;
+    void setContentX(int contentX);
+
+    int contentY() const;
+    void setContentY(int contentY);
+
+    int overShootX() const;
+    int overShootY() const;
+
+    bool preferMobile() const;
 
 Q_SIGNALS:
     void preferredWidthChanged();
@@ -246,6 +296,12 @@ Q_SIGNALS:
     void renderingEnabledChanged();
     void contentsSizeChanged(const QSize&);
     void contentsScaleChanged();
+    void contentsPositionChanged();
+    void contentXChanged(int contentX);
+    void contentYChanged(int contentY);
+    void overShootXChanged();
+    void overShootYChanged();
+    void selectedTextChanged();
 
     void loadStarted();
     void loadFinished();
@@ -256,6 +312,7 @@ Q_SIGNALS:
     void linkPressed(const QUrl &linkUrl, const QRect &linkRect);
     void linkPressAndHold(const QUrl &linkUrl, const QRect &linkRect);
     void linkClicked(const QUrl &linkUrl, const QRect &linkRect);
+    void selectionPressAndHold(const QString &selection, const QPoint &pos);
 
     void zoomTo(qreal zoom, int centerX, int centerY);
 
@@ -290,6 +347,7 @@ private:
     QMouseEvent* sceneMouseEventToMouseEvent(QGraphicsSceneMouseEvent*);
     QMouseEvent* sceneHoverMoveEventToMouseEvent(QGraphicsSceneHoverEvent*);
     friend class QDeclarativeWebPage;
+    bool m_preferMobile;
 };
 
 class KDeclarativeWebViewAttached : public QObject {

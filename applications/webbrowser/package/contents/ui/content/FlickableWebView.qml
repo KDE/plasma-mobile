@@ -43,9 +43,17 @@ import QtQuick 1.1
 import org.kde.kdewebkit 0.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import "LinkPopup.js" as LinkPopupHelper
+import org.kde.qtextracomponents 0.1
 
+MouseEventListener {
+    id: flickable
+    width: parent.width
 
-Flickable {
+    anchors.top: headerSpace.bottom
+    anchors.bottom: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+
     property alias title: webView.title
     property alias icon: webView.icon
     property alias progress: webView.progress
@@ -56,30 +64,69 @@ Flickable {
     property alias reload: webView.reload
     property alias forward: webView.forward
     property bool interactiveSuspended: false
+    property bool interactive: (webView.contentsSize.height > webView.height || webView.contentsSize.width > webView.width) && !interactiveSuspended
 
     signal newWindowRequested(string url)
 
-    
-    id: flickable
-    width: parent.width
-    contentWidth: Math.max(parent.width,webView.width)
-    contentHeight: Math.max(parent.height,webView.height)
-    interactive: {
-        (webView.flickingEnabled &&
-         !interactiveSuspended &&
-         ((webView.height > height) ||
-         (webView.width > width)))
+    property real horizontalVelocity
+    property real verticalVelocity
+    onPressed: {
+        if (!interactive) {
+            return
+        }
     }
-    anchors.top: headerSpace.bottom
-    anchors.bottom: parent.top
-    anchors.left: parent.left
-    anchors.right: parent.right
-    pressDelay: 200
+
+    onReleased: {
+        if (!interactive) {
+            movingHorizontally = false
+            movingVertically = false
+            return
+        }
+    }
+    property bool movingHorizontally: false
+    property bool movingVertically: false
+    property alias contentX: webView.contentX
+    property alias contentY: webView.contentY
+    property int lastContentY: 0
+    property int lastContentX: 0
+    property alias overShootX: webView.overShootX
+    property alias overShootY: webView.overShootY
+    property int contentWidth: webView.contentsSize.width
+    property int contentHeight: webView.contentsSize.height
+    property bool atXBeginning: contentX <= 0
+    property bool atXEnd: contentX >= contentWidth - webView.width
+    property bool atYBeginning: contentY <= 0
+    property bool atYEnd: contentY >= contentHeight - webView.height
+    property QtObject visibleArea: QtObject {
+        property real yPosition: flickable.contentY / contentHeight
+        property real xPosition: flickable.contentX / contentWidth
+        property real heightRatio: webView.height / contentHeight
+        property real widthRatio: webView.width / contentWidth
+    }
+
+    onContentXChanged: {
+        movingHorizontally = true
+        movingTimer.restart()
+    }
+    onContentYChanged: {
+        movingVertically = true
+        movingTimer.restart()
+    }
+    Timer {
+        id: movingTimer
+        interval: 500
+        onTriggered: {
+            flickable.movingHorizontally = false
+            flickable.movingVertically = false
+        }
+    }
+
+    //pressDelay: 200
 
     onWidthChanged : {
         // Expand (but not above 1:1) if otherwise would be smaller that available width.
         if (width > webView.width*webView.contentsScale && webView.contentsScale < 1.0)
-            webView.contentsScale = width / webView.width * webView.contentsScale;
+            webView.contentsScale = width / webView.width;
     }
 
 
@@ -108,11 +155,29 @@ Flickable {
             webView.renderingEnabled = true
             flickable.smooth = true
         }
+
         WebView {
             id: webView
             objectName: "webViewImplementation"
             transformOrigin: Item.TopLeft
             //settings.pluginsEnabled: true
+            settings {
+                localStorageDatabaseEnabled: true
+                offlineStorageDatabaseEnabled: true
+                offlineWebApplicationCacheEnabled: true
+            }
+
+
+            pressGrabTime: flickable.interactive ? 400 : 0
+
+            x: 0
+
+            y: Math.max(-headerSpace.height, -flickable.contentY)
+            width: flickable.width
+            height: flickable.height + headerSpace.height + Math.min(0, flickable.contentHeight - flickable.contentY - flickable.height)
+
+
+            flickingEnabled: !flickable.interactive
 
             //FIXME: glorious hack just to obtain a signal of the url of the new requested page
             // Should be replaced with signal from KDeclarativeWebView
@@ -191,15 +256,15 @@ Flickable {
             function handleLinkPressAndHold(linkUrl, linkRect)
             {
     //            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
-                linkPopupLoader.source = "LinkPopup.qml";
-                if (linkPopupLoader.status == Loader.Ready) {
+                popupLoader.source = "LinkPopup.qml";
+                if (popupLoader.status == Loader.Ready) {
                     flickable.interactiveSuspended = true;
                     highlightRect.x = linkRect.x;
                     highlightRect.y = linkRect.y;
                     highlightRect.width = linkRect.width;
                     highlightRect.height = linkRect.height;
 
-                    var linkPopup = linkPopupLoader.item;
+                    var linkPopup = popupLoader.item;
                     linkPopup.url = linkUrl
                     linkPopup.linkRect.x = linkRect.x
                     linkPopup.linkRect.y = linkRect.y
@@ -210,14 +275,27 @@ Flickable {
                 }
             }
 
+            function handleSelectionPressAndHold(selection, pos)
+            {
+    //            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
+                popupLoader.source = "CopyPopup.qml";
+                if (popupLoader.status == Loader.Ready) {
+                    flickable.interactiveSuspended = true;
+
+                    var copyPopup = popupLoader.item;
+                    copyPopup.text = selection
+                    copyPopup.showPopup(pos);
+                }
+            }
+
             Rectangle {
                 id: highlightRect
                 color: theme.highlightColor
                 opacity: 0.2
-                visible: (linkPopupLoader.source != "" && linkPopupLoader.item.state == "expanded")
+                visible: (popupLoader.source != "" && popupLoader.item.state == "expanded")
             }
 
-            Loader { id: linkPopupLoader }
+            Loader { id: popupLoader }
 
             Keys.onLeftPressed: webView.contentsScale -= 0.1
             Keys.onRightPressed: webView.contentsScale += 0.1
@@ -225,14 +303,9 @@ Flickable {
             preferredWidth: flickable.width
             preferredHeight: flickable.height
             contentsScale: 1
-            onContentsSizeChanged: {
-                // zoom out
-                contentsScale = Math.min(1,flickable.width / contentsSize.width)
-            }
+
             onUrlChanged: {
                 // got to topleft
-                flickable.contentX = 0
-                flickable.contentY = 0
                 if (url != null) {
                     header.editUrl = url.toString();
                 }
@@ -253,88 +326,95 @@ Flickable {
                 }
             }
 
-            Image {
-                source: "image://appbackgrounds/shadow-left"
-                fillMode: Image.TileVertically
-                anchors {
-                    top: parent.top
-                    right: parent.left
-                    rightMargin: -1
-                    bottom: parent.bottom
-                    topMargin: 1
-                    bottomMargin: 1
+            Item {
+                x: 1 + webView.overShootX
+                y: 1 + webView.overShootY
+                width: parent.width - 2
+                height: parent.height - 2
+
+                Image {
+                    source: "image://appbackgrounds/shadow-left"
+                    fillMode: Image.TileVertically
+                    anchors {
+                        top: parent.top
+                        right: parent.left
+                        rightMargin: -1
+                        bottom: parent.bottom
+                        topMargin: 1
+                        bottomMargin: 1
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-top"
-                fillMode: Image.TileHorizontally
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    bottomMargin: -1
-                    bottom: parent.top
-                    leftMargin: 1
-                    rightMargin: 1
+                Image {
+                    source: "image://appbackgrounds/shadow-top"
+                    fillMode: Image.TileHorizontally
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        bottomMargin: -1
+                        bottom: parent.top
+                        leftMargin: 1
+                        rightMargin: 1
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-right"
-                fillMode: Image.TileVertically
-                anchors {
-                    top: parent.top
-                    left: parent.right
-                    leftMargin: -1
-                    bottom: parent.bottom
-                    topMargin: 1
-                    bottomMargin: 1
+                Image {
+                    source: "image://appbackgrounds/shadow-right"
+                    fillMode: Image.TileVertically
+                    anchors {
+                        top: parent.top
+                        left: parent.right
+                        leftMargin: -1
+                        bottom: parent.bottom
+                        topMargin: 1
+                        bottomMargin: 1
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-bottom"
-                fillMode: Image.TileHorizontally
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    topMargin: -1
-                    top: parent.bottom
-                    leftMargin: 1
-                    rightMargin: 1
+                Image {
+                    source: "image://appbackgrounds/shadow-bottom"
+                    fillMode: Image.TileHorizontally
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        topMargin: -1
+                        top: parent.bottom
+                        leftMargin: 1
+                        rightMargin: 1
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-topleft"
-                anchors {
-                    right: parent.left
-                    bottomMargin: -1
-                    rightMargin: -1
-                    bottom: parent.top
+                Image {
+                    source: "image://appbackgrounds/shadow-topleft"
+                    anchors {
+                        right: parent.left
+                        bottomMargin: -1
+                        rightMargin: -1
+                        bottom: parent.top
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-topright"
-                anchors {
-                    left: parent.right
-                    bottomMargin: -1
-                    leftMargin: -1
-                    bottom: parent.top
+                Image {
+                    source: "image://appbackgrounds/shadow-topright"
+                    anchors {
+                        left: parent.right
+                        bottomMargin: -1
+                        leftMargin: -1
+                        bottom: parent.top
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-bottomleft"
-                anchors {
-                    right: parent.left
-                    topMargin: -1
-                    rightMargin: -1
-                    top: parent.bottom
+                Image {
+                    source: "image://appbackgrounds/shadow-bottomleft"
+                    anchors {
+                        right: parent.left
+                        topMargin: -1
+                        rightMargin: -1
+                        top: parent.bottom
+                    }
                 }
-            }
-            Image {
-                source: "image://appbackgrounds/shadow-bottomright"
-                anchors {
-                    left: parent.right
-                    topMargin: -1
-                    leftMargin: -1
-                    top: parent.bottom
+                Image {
+                    source: "image://appbackgrounds/shadow-bottomright"
+                    anchors {
+                        left: parent.right
+                        topMargin: -1
+                        leftMargin: -1
+                        top: parent.bottom
+                    }
                 }
             }
 
@@ -379,6 +459,7 @@ Flickable {
                         to: 0 // set before calling
                     }
                 }
+
                 // Have to set the contentXY, since the above 2
                 // size changes may have started a correction if
                 // contentsScale < 1.0.
@@ -408,10 +489,11 @@ Flickable {
             onZoomTo: doZoom(zoom,centerX,centerY)
             onClick: {
                 //print("fickable click");
-                //if (linkPopupLoader.status == Loader.Ready) linkPopupLoader.item.state = "collapsed";
+                //if (popupLoader.status == Loader.Ready) popupLoader.item.state = "collapsed";
             }
             onLinkPressed: handleLinkPressed(linkUrl, linkRect)
             onLinkPressAndHold: handleLinkPressAndHold(linkUrl, linkRect)
+            onSelectionPressAndHold: handleSelectionPressAndHold(selection, pos)
         }
     }
 
