@@ -109,6 +109,7 @@ Q_SIGNALS:
     void linkPressed(const QUrl&, const QRect &linkRect);
     void linkPressAndHold(const QUrl&, const QRect &linkRect);
     void linkClicked(const QUrl&, const QRect &linkRect);
+    void selectionPressAndHold(const QString &selection, const QPoint &pos);
 
 private:
     KDeclarativeWebView *parent;
@@ -160,6 +161,8 @@ class KDeclarativeWebView : public QDeclarativeItem {
     Q_PROPERTY(QDeclarativeItem* newWindowParent READ newWindowParent WRITE setNewWindowParent NOTIFY newWindowParentChanged)
 
     Q_PROPERTY(bool renderingEnabled READ renderingEnabled WRITE setRenderingEnabled NOTIFY renderingEnabledChanged)
+
+    Q_PROPERTY(QString selectedText READ selectedText NOTIFY selectedTextChanged)
 
     Q_PROPERTY(QSize contentsSize READ contentsSize NOTIFY contentsSizeChanged)
     Q_PROPERTY(qreal contentsScale READ contentsScale WRITE setContentsScale NOTIFY contentsScaleChanged)
@@ -237,6 +240,8 @@ public:
     bool renderingEnabled() const;
     void setRenderingEnabled(bool);
 
+    QString selectedText() const;
+
     QDeclarativeListProperty<QObject> javaScriptWindowObjects();
 
     static KDeclarativeWebViewAttached* qmlAttachedProperties(QObject*);
@@ -290,6 +295,7 @@ Q_SIGNALS:
     void contentYChanged(int contentY);
     void overShootXChanged();
     void overShootYChanged();
+    void selectedTextChanged();
 
     void loadStarted();
     void loadFinished();
@@ -300,6 +306,7 @@ Q_SIGNALS:
     void linkPressed(const QUrl &linkUrl, const QRect &linkRect);
     void linkPressAndHold(const QUrl &linkUrl, const QRect &linkRect);
     void linkClicked(const QUrl &linkUrl, const QRect &linkRect);
+    void selectionPressAndHold(const QString &selection, const QPoint &pos);
 
     void zoomTo(qreal zoom, int centerX, int centerY);
 

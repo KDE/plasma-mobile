@@ -324,15 +324,15 @@ MouseEventListener {
             function handleLinkPressAndHold(linkUrl, linkRect)
             {
     //            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
-                linkPopupLoader.source = "LinkPopup.qml";
-                if (linkPopupLoader.status == Loader.Ready) {
+                popupLoader.source = "LinkPopup.qml";
+                if (popupLoader.status == Loader.Ready) {
                     flickable.interactiveSuspended = true;
                     highlightRect.x = linkRect.x;
                     highlightRect.y = linkRect.y;
                     highlightRect.width = linkRect.width;
                     highlightRect.height = linkRect.height;
 
-                    var linkPopup = linkPopupLoader.item;
+                    var linkPopup = popupLoader.item;
                     linkPopup.url = linkUrl
                     linkPopup.linkRect.x = linkRect.x
                     linkPopup.linkRect.y = linkRect.y
@@ -343,14 +343,27 @@ MouseEventListener {
                 }
             }
 
+            function handleSelectionPressAndHold(selection, pos)
+            {
+    //            print("... and hold: " + linkUrl + " | " + linkRect.x + " " + linkRect.y + " " + linkRect.width + " " + linkRect.height);
+                popupLoader.source = "CopyPopup.qml";
+                if (popupLoader.status == Loader.Ready) {
+                    flickable.interactiveSuspended = true;
+
+                    var copyPopup = popupLoader.item;
+                    copyPopup.text = selection
+                    copyPopup.showPopup(pos);
+                }
+            }
+
             Rectangle {
                 id: highlightRect
                 color: theme.highlightColor
                 opacity: 0.2
-                visible: (linkPopupLoader.source != "" && linkPopupLoader.item.state == "expanded")
+                visible: (popupLoader.source != "" && popupLoader.item.state == "expanded")
             }
 
-            Loader { id: linkPopupLoader }
+            Loader { id: popupLoader }
 
             Keys.onLeftPressed: webView.contentsScale -= 0.1
             Keys.onRightPressed: webView.contentsScale += 0.1
@@ -544,10 +557,11 @@ MouseEventListener {
             onZoomTo: doZoom(zoom,centerX,centerY)
             onClick: {
                 //print("fickable click");
-                //if (linkPopupLoader.status == Loader.Ready) linkPopupLoader.item.state = "collapsed";
+                //if (popupLoader.status == Loader.Ready) popupLoader.item.state = "collapsed";
             }
             onLinkPressed: handleLinkPressed(linkUrl, linkRect)
             onLinkPressAndHold: handleLinkPressAndHold(linkUrl, linkRect)
+            onSelectionPressAndHold: handleSelectionPressAndHold(selection, pos)
         }
     }
 

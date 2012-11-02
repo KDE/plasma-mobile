@@ -139,9 +139,12 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
         pressTimer.start(pressTime, this);
         parent->setKeepMouseGrab(false);
     } else {
+        //emit pressandhold events anyways, but not setKeepMouseGrab
+        pressTimer.start(400, this);
         grabMouse();
         parent->setKeepMouseGrab(true);
     }
+    pressTimer.start(pressTime, this);
     QGraphicsWebView::mousePressEvent(event);
 
     QWebHitTestResult hit = page()->mainFrame()->hitTestContent(pressPoint.toPoint());
@@ -200,13 +203,19 @@ void GraphicsWebView::timerEvent(QTimerEvent* event)
 {
     if (event->timerId() == pressTimer.timerId()) {
         pressTimer.stop();
-        grabMouse();
-        parent->setKeepMouseGrab(true);
+        if (pressTime) {
+            grabMouse();
+            parent->setKeepMouseGrab(true);
+        }
         kDebug() << "handle pressAndHold";
         QWebHitTestResult hit = page()->mainFrame()->hitTestContent(pressPoint.toPoint());
         if (!hit.linkElement().geometry().isNull()) {
-            kDebug() << "XXXXXXXXXX link pressed AND HOLD. .. ";
+            kDebug() << "Link pressed and hold";
             emit linkPressAndHold(hit.linkUrl(), hit.linkElement().geometry());
+
+        } else if (!page()->selectedText().isEmpty()) {
+            kDebug() << "Selection press and hold";
+            emit selectionPressAndHold(page()->selectedText(), pressPoint.toPoint());
         }
     }
 }
@@ -399,6 +408,7 @@ void KDeclarativeWebView::init()
     d->view = new GraphicsWebView(this);
     connect(d->view, SIGNAL(xChanged()), this, SIGNAL(overShootXChanged()));
     connect(d->view, SIGNAL(yChanged()), this, SIGNAL(overShootYChanged()));
+    connect(d->view->page(), SIGNAL(selectionChanged()), this, SIGNAL(selectedTextChanged()));
 
     //d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
@@ -447,6 +457,8 @@ void KDeclarativeWebView::init()
             this, SIGNAL(linkPressed(QUrl,QRect)));
     connect(d->view, SIGNAL(linkPressAndHold(QUrl,QRect)),
             this, SIGNAL(linkPressAndHold(QUrl,QRect)));
+    connect(d->view, SIGNAL(selectionPressAndHold(QString, QPoint)),
+            this, SIGNAL(selectionPressAndHold(QString, QPoint)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
 
     connect(access, SIGNAL(finished(QNetworkReply*)), page(), SLOT(handleNetworkErrors(QNetworkReply*)));
@@ -953,6 +965,11 @@ void KDeclarativeWebView::setRenderingEnabled(bool enabled)
         d->view->setScale(d->view->page()->mainFrame()->zoomFactor());
         d->view->page()->mainFrame()->setZoomFactor(1);
     }
+}
+
+QString KDeclarativeWebView::selectedText() const
+{
+    return page()->selectedText();
 }
 
 /*!
