@@ -62,9 +62,18 @@ PlasmaComponents.ToolBar {
     property int oldContentY: 0
     Connections {
         target: webView
-        
+
+        onProgressChanged: {
+            if (webView.progress < 1.0) {
+                header.y = 0;
+            }
+        }
         onContentYChanged: {
-            header.y = Math.min(0, Math.max(header.y - (webView.contentY - oldContentY), - header.height))
+            if (webView.progress < 1.0) {
+                header.y = 0;
+            } else {
+                header.y = Math.min(0, Math.max(header.y - (webView.contentY - oldContentY), - header.height))
+            }
             oldContentY = webView.contentY
         }
     }
