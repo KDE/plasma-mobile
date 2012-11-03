@@ -16,6 +16,7 @@ Name[sk]=Digitálne hodiny
 Name[sl]=Digitalna ura
 Name[sv]=Digitalklocka
 Name[uk]=Цифровий годинник
+Name[wa]=Ôrlodje limerike
 Name[x-test]=xxDigital clockxx
 Name[zh_TW]=數位時鐘
 Comment=Time displayed in a digital format
@@ -35,6 +36,7 @@ Comment[sk]=Čas zobrazený v digitálnom formáte
 Comment[sl]=Čas prikazan v digitalni obliki
 Comment[sv]=Tid visat med ett digitalt format
 Comment[uk]=Час, показаний у цифровому форматі
+Comment[wa]=L' eure håynêye dins ene cogne limerike
 Comment[x-test]=xxTime displayed in a digital formatxx
 Comment[zh_TW]=以數位格式顯示時間
 
