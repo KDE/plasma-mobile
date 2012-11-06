@@ -1,10 +1,9 @@
 /* ============================================================
 *
-* This file has been kindly borrowed and adapted from the rekonq project
+* This file is a part of the rekonq project
 *
 * Copyright (C) 2007-2008 Trolltech ASA. All rights reserved
-* Copyright (C) 2008-2011 by Andrea Diamantini <adjam7 at gmail dot com>
-* Copyright 2011 Sebastian Kügler <sebas@kde.org>
+* Copyright (C) 2008-2012 by Andrea Diamantini <adjam7 at gmail dot com>
 *
 *
 * This program is free software; you can redistribute it and/or
@@ -30,14 +29,13 @@
 #define NETWORKACCESSMANAGER_H
 
 
-// Rekonq Includes
-//#include "rekonq_defines.h"
 
 // KDE Includes
 #include <KIO/AccessManager>
 
-#include "adblockmanager.h"
-//class AdblockManager;
+// Qt Includes
+#include <QByteArray>
+
 
 class NetworkAccessManager : public KIO::Integration::AccessManager
 {
@@ -45,18 +43,15 @@ class NetworkAccessManager : public KIO::Integration::AccessManager
 
 public:
     NetworkAccessManager(QObject *parent);
-    virtual ~NetworkAccessManager();
-    void setAdBlockManager(AdBlockManager *adblocker);
 
 protected:
     virtual QNetworkReply *createRequest(QNetworkAccessManager::Operation op, const QNetworkRequest &request, QIODevice *outgoingData = 0);
 
-signals:
+Q_SIGNALS:
     void networkData(QNetworkAccessManager::Operation op, const QNetworkRequest &request, QNetworkReply *reply);
 
 private:
     QByteArray _acceptLanguage;
-    AdBlockManager* m_adBlockManager;
 };
 
 #endif // NETWORKACCESSMANAGER_H

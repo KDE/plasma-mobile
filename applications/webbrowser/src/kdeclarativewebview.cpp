@@ -36,6 +36,9 @@
 #include <QtGui/QPen>
 #include <QtNetwork/QNetworkReply>
 #include <QtCore/QDir>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QPropertyAnimation>
 
 #include <qwebelement.h>
 #include <qwebframe.h>
@@ -57,6 +60,7 @@
 #include <KWindowSystem>
 #include <KDebug>
 #include <klocalizedstring.h>
+#include <KMessageBox>
 
 #include <soprano/vocabulary.h>
 #include <Nepomuk2/Resource>
@@ -119,7 +123,14 @@ GraphicsWebView::GraphicsWebView(KDeclarativeWebView* parent)
     , parent(parent)
     , pressTime(400)
     , flicking(true)
+    , m_contentsPosAnimation(0)
 {
+    m_posAnim = new QPropertyAnimation(this);
+    m_posAnim->setDuration(250);
+    m_posAnim->setEasingCurve(QEasingCurve::InOutQuad);
+    m_posAnim->setTargetObject(this);
+    m_posAnim->setPropertyName("pos");
+    m_posAnim->setEndValue(QPoint(0, 0));
 }
 
 void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
@@ -129,9 +140,12 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
         pressTimer.start(pressTime, this);
         parent->setKeepMouseGrab(false);
     } else {
+        //emit pressandhold events anyways, but not setKeepMouseGrab
+        pressTimer.start(400, this);
         grabMouse();
         parent->setKeepMouseGrab(true);
     }
+    pressTimer.start(pressTime, this);
     QGraphicsWebView::mousePressEvent(event);
 
     QWebHitTestResult hit = page()->mainFrame()->hitTestContent(pressPoint.toPoint());
@@ -142,7 +156,21 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
     // disable flicking as long as the combo box is open
     setFlickingEnabled(hit.element().tagName() != "SELECT");
 
-    kDebug() << " - - >  Hit element: " << hit.element().tagName() << hit.linkElement().geometry();
+    kDebug() << " - - >  Hit element: " << hit.element().tagName() << hit.element().geometry() << hit.linkElement().geometry();
+
+    m_sampleTime.restart();
+    m_draggedDistance = QPoint(0, 0);
+    if (!m_contentsPosAnimation) {
+        m_contentsPosAnimation = new QPropertyAnimation(this);
+        m_contentsPosAnimation->setDuration(500);
+        m_contentsPosAnimation->setEasingCurve(QEasingCurve::OutQuad);
+        m_contentsPosAnimation->setTargetObject(parent);
+        m_contentsPosAnimation->setPropertyName("contentsPosition");
+    }
+    if (m_contentsPosAnimation->state() == QAbstractAnimation::Running) {
+        m_contentsPosAnimation->stop();
+    }
+
     if (!hit.linkElement().geometry().isNull()) {
         kDebug() << "XXXXXXXXXX link pressed. .. ";
         emit linkPressed(hit.linkUrl(), hit.linkElement().geometry());
@@ -154,10 +182,23 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
 void GraphicsWebView::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
-    QGraphicsWebView::mouseReleaseEvent(event);
+    if (pressTime == 0 || pressTimer.isActive()) {
+        QGraphicsWebView::mouseReleaseEvent(event);
+    }
+
     pressTimer.stop();
     parent->setKeepMouseGrab(false);
     ungrabMouse();
+
+    if (pos() != QPoint(0, 0)) {
+        m_posAnim->start();
+    }
+
+    //final pos = speed * anim time
+    //where speed is traveled distance / elapsed total time
+    m_contentsPosAnimation->setStartValue(page()->mainFrame()->scrollPosition());
+    m_contentsPosAnimation->setEndValue(page()->mainFrame()->scrollPosition() + (m_draggedDistance/m_sampleTime.elapsed()) * m_contentsPosAnimation->duration());
+    m_contentsPosAnimation->start();
 }
 
 void GraphicsWebView::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
@@ -170,7 +211,7 @@ void GraphicsWebView::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
 void GraphicsWebView::handleLinkClicked(const QUrl &link)
 {
     QUrl u(link);
-    if (pressTimer.isActive()) {
+    if (pressTime == 0 || pressTimer.isActive()) {
         kDebug() << "timer is running, loading URL" << link;
         page()->mainFrame()->load(u);
     } else {
@@ -182,13 +223,19 @@ void GraphicsWebView::timerEvent(QTimerEvent* event)
 {
     if (event->timerId() == pressTimer.timerId()) {
         pressTimer.stop();
-        grabMouse();
-        parent->setKeepMouseGrab(true);
+        if (pressTime) {
+            grabMouse();
+            parent->setKeepMouseGrab(true);
+        }
         kDebug() << "handle pressAndHold";
         QWebHitTestResult hit = page()->mainFrame()->hitTestContent(pressPoint.toPoint());
         if (!hit.linkElement().geometry().isNull()) {
-            kDebug() << "XXXXXXXXXX link pressed AND HOLD. .. ";
+            kDebug() << "Link pressed and hold";
             emit linkPressAndHold(hit.linkUrl(), hit.linkElement().geometry());
+
+        } else if (!page()->selectedText().isEmpty()) {
+            kDebug() << "Selection press and hold";
+            emit selectionPressAndHold(page()->selectedText(), pressPoint.toPoint());
         }
     }
 }
@@ -199,8 +246,41 @@ void GraphicsWebView::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
         if ((event->pos() - pressPoint).manhattanLength() > QApplication::startDragDistance())
             pressTimer.stop();
     }
-    if (parent->keepMouseGrab())
+
+    if (parent->keepMouseGrab()) {
         QGraphicsWebView::mouseMoveEvent(event);
+    } else if (flicking) {
+        QPoint deltaMousePos = QPointF(event->lastScenePos() - event->scenePos()).toPoint();
+        QPoint finalPos = pos().toPoint();
+        m_draggedDistance += deltaMousePos;
+
+        if (pos().x() > 0) {
+            finalPos.rx() = qMax(0, (int)(pos().x() - deltaMousePos.x()));
+            deltaMousePos.rx() = 0;
+        } else if  (pos().x() < 0) {
+            finalPos.rx() = qMin(0, (int)(pos().x() - deltaMousePos.x()));
+            deltaMousePos.rx() = 0;
+        }
+
+        if (pos().y() > 0) {
+            finalPos.ry() = qMax(0, (int)(pos().y() - deltaMousePos.y()));
+            deltaMousePos.ry() = 0;
+        } else if  (pos().y() < 0) {
+            finalPos.ry() = qMin(0, (int)(pos().y() - deltaMousePos.y()));
+            deltaMousePos.ry() = 0;
+        }
+
+        if (deltaMousePos != QPoint(0, 0) && !parent->scrollBy(deltaMousePos.x(), deltaMousePos.y(), event->pos())) {
+            if (page()->mainFrame()->contentsSize().width() <= size().width()) {
+                deltaMousePos.rx() = 0;
+            }
+            if (page()->mainFrame()->contentsSize().height() <= size().height()) {
+                deltaMousePos.ry() = 0;
+            }
+            finalPos = pos().toPoint() - deltaMousePos;
+        }
+        setPos(finalPos);
+    }
 }
 
 bool GraphicsWebView::sceneEvent(QEvent *event)
@@ -320,7 +400,9 @@ void GraphicsWebView::setFlickingEnabled(bool enabled)
     A KDeclarativeWebView object can be instantiated in Qml using the tag \l WebView.
 */
 
-KDeclarativeWebView::KDeclarativeWebView(QDeclarativeItem *parent) : QDeclarativeItem(parent)
+KDeclarativeWebView::KDeclarativeWebView(QDeclarativeItem *parent)
+    : QDeclarativeItem(parent),
+      m_preferMobile(false)
 {
     init();
 }
@@ -345,7 +427,11 @@ void KDeclarativeWebView::init()
     setClip(true);
 
     d->view = new GraphicsWebView(this);
-    d->view->setResizesToContents(true);
+    connect(d->view, SIGNAL(xChanged()), this, SIGNAL(overShootXChanged()));
+    connect(d->view, SIGNAL(yChanged()), this, SIGNAL(overShootYChanged()));
+    connect(d->view->page(), SIGNAL(selectionChanged()), this, SIGNAL(selectedTextChanged()));
+
+    //d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
     KWebPage* kwp = qobject_cast<KWebPage*>(wp);
 
@@ -364,9 +450,24 @@ void KDeclarativeWebView::init()
     setPage(wp);
     initSettings();
 #ifndef NO_KIO
-    KIO::AccessManager *access = new NetworkAccessManager(page());
+    NetworkAccessManager *access = new NetworkAccessManager(page());
+    // set network reply object to emit readyRead when it receives meta data
+    access->setEmitReadyReadOnMetaDataChange(true);
+
+    // disable QtWebKit cache to just use KIO one..
+    access->setCache(0);
+
+    // set cookieJar window..
+    /*if (parent && parent->window())
+        manager->setWindow(parent->window());*/
+
+    //FIXME: make this thing reliable
+    if (QApplication::topLevelWidgets().length() > 0) {
+        access->setWindow(QApplication::topLevelWidgets().first());
+    }
     wp->setNetworkAccessManager(access);
 #endif
+
     connect(d->view, SIGNAL(geometryChanged()), this, SLOT(updateDeclarativeWebViewSize()));
     connect(d->view, SIGNAL(flickingEnabledChanged()), this, SLOT(updateFlickingEnabled()));
     connect(d->view, SIGNAL(click(int,int)), this, SIGNAL(click(int,int)));
@@ -377,6 +478,8 @@ void KDeclarativeWebView::init()
             this, SIGNAL(linkPressed(QUrl,QRect)));
     connect(d->view, SIGNAL(linkPressAndHold(QUrl,QRect)),
             this, SIGNAL(linkPressAndHold(QUrl,QRect)));
+    connect(d->view, SIGNAL(selectionPressAndHold(QString, QPoint)),
+            this, SIGNAL(selectionPressAndHold(QString, QPoint)));
     connect(d->view, SIGNAL(scaleChanged()), this, SIGNAL(contentsScaleChanged()));
 
     connect(access, SIGNAL(finished(QNetworkReply*)), page(), SLOT(handleNetworkErrors(QNetworkReply*)));
@@ -385,11 +488,101 @@ void KDeclarativeWebView::init()
     connect(wp, SIGNAL(linkClicked(QUrl)), d->view, SLOT(handleLinkClicked(QUrl)));
 
 
+    connect(this, SIGNAL(scrollRequested(int, int, QRect)), this, SIGNAL(contentsPositionChanged()));
     d->dirWatch = new KDirWatch(this);
     QString configPath = KStandardDirs::locateLocal("config", "active-webbrowserrc");
     d->dirWatch->addFile(configPath);
     connect(d->dirWatch, SIGNAL(dirty(QString)), SLOT(initSettings()));
     connect(d->dirWatch, SIGNAL(created(QString)), SLOT(initSettings()));
+}
+
+QPointF KDeclarativeWebView::contentsPosition()
+{
+    if (!d->view || !d->view->page() || !d->view->page()->mainFrame()) {
+        QPointF(0, 0);
+    }
+    return d->view->page()->mainFrame()->scrollPosition();
+}
+
+void KDeclarativeWebView::setContentsPosition(QPointF contentsPosition)
+{
+    const QPoint oldPos = d->view->page()->mainFrame()->scrollPosition();
+
+    d->view->page()->mainFrame()->setScrollPosition(contentsPosition.toPoint());
+
+    if (oldPos.x() != d->view->page()->mainFrame()->scrollPosition().x()) {
+        emit contentXChanged(d->view->page()->mainFrame()->scrollPosition().x());
+    }
+    if (oldPos.y() != d->view->page()->mainFrame()->scrollPosition().y()) {
+        emit contentYChanged(d->view->page()->mainFrame()->scrollPosition().y());
+    }
+
+    if (oldPos.x() != d->view->page()->mainFrame()->scrollPosition().x() ||
+        oldPos.y() != d->view->page()->mainFrame()->scrollPosition().y()) {
+        emit contentsPositionChanged();
+    }
+}
+
+int KDeclarativeWebView::contentX() const
+{
+    return d->view->page()->mainFrame()->scrollPosition().x();
+}
+
+void KDeclarativeWebView::setContentX(int contentX)
+{
+    const QPoint oldPos = d->view->page()->mainFrame()->scrollPosition();
+    if (oldPos.x() == contentX) {
+        return;
+    }
+
+    d->view->page()->mainFrame()->setScrollPosition(QPoint(contentX, d->view->page()->mainFrame()->scrollPosition().y()));
+
+    if (oldPos.x() == d->view->page()->mainFrame()->scrollPosition().x()) {
+        return;
+    }
+
+    emit contentXChanged(d->view->page()->mainFrame()->scrollPosition().x());
+    emit contentsPositionChanged();
+}
+
+
+int KDeclarativeWebView::contentY() const
+{
+    return d->view->page()->mainFrame()->scrollPosition().y();
+}
+
+void KDeclarativeWebView::setContentY(int contentY)
+{
+    const QPoint oldPos = d->view->page()->mainFrame()->scrollPosition();
+    if (oldPos.y() == contentY) {
+        return;
+    }
+
+    d->view->page()->mainFrame()->setScrollPosition(QPoint(d->view->page()->mainFrame()->scrollPosition().x(), contentY));
+
+    if (oldPos.y() == d->view->page()->mainFrame()->scrollPosition().y()) {
+        return;
+    }
+
+    emit contentYChanged(d->view->page()->mainFrame()->scrollPosition().y());
+    emit contentsPositionChanged();
+}
+
+
+int KDeclarativeWebView::overShootX() const
+{
+    return d->view->pos().x();
+}
+
+int KDeclarativeWebView::overShootY() const
+{
+    return d->view->pos().y();
+}
+
+
+bool KDeclarativeWebView::preferMobile() const
+{
+    return m_preferMobile;
 }
 
 void KDeclarativeWebView::initSettings()
@@ -423,6 +616,8 @@ void KDeclarativeWebView::initSettings()
 
     settings()->setAttribute(QWebSettings::PluginsEnabled, pluginsEnabled);
     settingsObject()->setPluginsEnabled(pluginsEnabled);
+
+    m_preferMobile = cg.readEntry("preferMobile", false);
 }
 
 void KDeclarativeWebView::componentComplete()
@@ -604,6 +799,56 @@ int KDeclarativeWebView::preferredHeight() const
     return d->preferredheight;
 }
 
+bool KDeclarativeWebView::scrollBy(int dx, int dy, const QPointF& pos)
+{
+    QPoint oldContentsPos = contentsPosition().toPoint();
+
+    QWebFrame *frame = page()->frameAt(pos.toPoint());
+    if (!frame) {
+        frame = page()->mainFrame();
+    }
+    
+    if (qtwebkit_webframe_scrollOverflow(frame, dx, dy, pos.toPoint())) {
+        return true;
+    }
+
+    if (!frame) {
+        return false;
+    }
+
+    bool scrollHorizontal = false;
+    bool scrollVertical = false;
+
+    do {
+        if (dx > 0)  // scroll right
+            scrollHorizontal = frame->scrollPosition().x() < frame->contentsSize().width() - width();
+        else if (dx < 0)  // scroll left
+            scrollHorizontal = frame->scrollPosition().x() > 0;
+
+        if (dy > 0)  // scroll down
+            scrollVertical = frame->scrollPosition().y() < frame->contentsSize().height() - height();
+        else if (dy < 0) //scroll up
+            scrollVertical = frame->scrollPosition().y() > 0;
+
+        if (scrollHorizontal || scrollVertical) {
+            frame->scroll(dx, dy);
+            if (scrollHorizontal) {
+                emit contentXChanged(frame->scrollPosition().x());
+            }
+            if (scrollVertical) {
+                emit contentYChanged(frame->scrollPosition().y());
+            }
+            
+            emit contentsPositionChanged();
+            return true;
+        }
+
+        frame = frame->parentFrame();
+    } while (frame);
+
+    return false;
+}
+
 void KDeclarativeWebView::setPreferredHeight(int height)
 {
     if (d->preferredheight == height)
@@ -657,6 +902,7 @@ void KDeclarativeWebView::geometryChanged(const QRectF& newGeometry, const QRect
             contentSize.setWidth(width());
         if (heightValid())
             contentSize.setHeight(height());
+        d->view->resize(contentSize);
         if (contentSize != webPage->preferredContentsSize())
             webPage->setPreferredContentsSize(contentSize);
     }
@@ -735,6 +981,19 @@ void KDeclarativeWebView::setRenderingEnabled(bool enabled)
     d->rendering = enabled;
     emit renderingEnabledChanged();
     d->view->setTiledBackingStoreFrozen(!enabled);
+
+    if (enabled) {
+        d->view->page()->mainFrame()->setZoomFactor(d->view->scale());
+        d->view->setScale(1);
+    } else {
+        d->view->setScale(d->view->page()->mainFrame()->zoomFactor());
+        d->view->page()->mainFrame()->setZoomFactor(1);
+    }
+}
+
+QString KDeclarativeWebView::selectedText() const
+{
+    return page()->selectedText();
 }
 
 /*!
@@ -971,7 +1230,7 @@ void KDeclarativeWebView::setPage(QWebPage* page)
 
     connect(page->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(windowObjectCleared()));
 
-    page->settings()->setAttribute(QWebSettings::TiledBackingStoreEnabled, true);
+    page->settings()->setAttribute(QWebSettings::TiledBackingStoreEnabled, false);
 
 }
 
@@ -1153,19 +1412,29 @@ void KDeclarativeWebView::setNewWindowParent(QDeclarativeItem* parent)
 
 QSize KDeclarativeWebView::contentsSize() const
 {
-    return page()->mainFrame()->contentsSize() * contentsScale();
+    return page()->mainFrame()->contentsSize();
 }
 
 qreal KDeclarativeWebView::contentsScale() const
 {
-    return d->view->scale();
+    if (renderingEnabled()) {
+        return d->view->page()->mainFrame()->zoomFactor();
+    } else {
+        return d->view->scale();
+    }
 }
 
 void KDeclarativeWebView::setContentsScale(qreal scale)
 {
-    if (scale == d->view->scale())
+    if (scale == contentsScale())
         return;
-    d->view->setScale(scale);
+
+    if (renderingEnabled()) {
+        d->view->page()->mainFrame()->setZoomFactor(scale);
+    } else {
+        d->view->setScale(scale);
+    }
+
     updateDeclarativeWebViewSize();
     emit contentsScaleChanged();
 }
@@ -1205,10 +1474,171 @@ QDeclarativeWebPage::QDeclarativeWebPage(KDeclarativeWebView* parent) :
     connect(this, SIGNAL(unsupportedContent(QNetworkReply*)), this, SLOT(handleUnsupportedContent(QNetworkReply*)));
 //     //TODO: move this in the webbrowser implementation
     m_nepomukHelper = new NepomukHelper(this);
+    // activate ssl warnings
+    setSessionMetaData(QL1S("ssl_activate_warnings"), QL1S("TRUE"));
 }
 
 QDeclarativeWebPage::~QDeclarativeWebPage()
 {
+}
+
+// Returns true if the scheme and domain of the two urls match...
+static bool domainSchemeMatch(const QUrl& u1, const QUrl& u2)
+{
+    if (u1.scheme() != u2.scheme())
+        return false;
+
+    QStringList u1List = u1.host().split(QL1C('.'), QString::SkipEmptyParts);
+    QStringList u2List = u2.host().split(QL1C('.'), QString::SkipEmptyParts);
+
+    if (qMin(u1List.count(), u2List.count()) < 2)
+        return false;  // better safe than sorry...
+
+    while (u1List.count() > 2)
+        u1List.removeFirst();
+
+    while (u2List.count() > 2)
+        u2List.removeFirst();
+
+    return (u1List == u2List);
+}
+
+bool QDeclarativeWebPage::acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type)
+{
+    const bool isMainFrameRequest = (frame == mainFrame());
+
+    if (frame)
+    {
+        /*if (_protHandler.preHandling(request, frame))
+        {
+            return false;
+        }*/
+
+        switch (type)
+        {
+        case QWebPage::NavigationTypeLinkClicked:
+            if (m_sslInfo.isValid())
+            {
+                setRequestMetaData("ssl_was_in_use", "TRUE");
+            }
+            break;
+
+        case QWebPage::NavigationTypeFormSubmitted:
+            break;
+
+        case QWebPage::NavigationTypeFormResubmitted:
+            if (KMessageBox::warningContinueCancel(view(),
+                                                   i18n("Are you sure you want to send your data again?"),
+                                                   i18n("Resend form data")
+                                                  )
+                    == KMessageBox::Cancel)
+            {
+                return false;
+            }
+            break;
+
+        case QWebPage::NavigationTypeReload:
+            setRequestMetaData(QL1S("cache"), QL1S("reload"));
+            break;
+
+        case QWebPage::NavigationTypeBackOrForward:
+        case QWebPage::NavigationTypeOther:
+            break;
+
+        default:
+            //Q_ASSERT(0)
+            break;
+        }
+    }
+
+    // Get the SSL information sent, if any...
+    KIO::AccessManager *manager = qobject_cast<KIO::AccessManager*>(networkAccessManager());
+    KIO::MetaData metaData = manager->requestMetaData();
+    if (metaData.contains(QL1S("ssl_in_use")))
+    {
+        WebSslInfo info;
+        info.restoreFrom(metaData.toVariant(), request.url());
+        info.setUrl(request.url());
+        m_sslInfo = info;
+    }
+
+    if (isMainFrameRequest)
+    {
+        setRequestMetaData(QL1S("main_frame_request"), QL1S("TRUE"));
+        if (m_sslInfo.isValid() && !domainSchemeMatch(request.url(), m_sslInfo.url()))
+        {
+            m_sslInfo = WebSslInfo();
+        }
+    }
+    else
+    {
+        setRequestMetaData(QL1S("main_frame_request"), QL1S("FALSE"));
+    }
+
+    return KWebPage::acceptNavigationRequest(frame, request, type);
+}
+
+void QDeclarativeWebPage::manageNetworkErrors(QNetworkReply *reply)
+{
+    Q_ASSERT(reply);
+
+    QWebFrame* frame = qobject_cast<QWebFrame *>(reply->request().originatingObject());
+    if (!frame)
+        return;
+
+    const bool isMainFrameRequest = (frame == mainFrame());
+
+    // Only deal with non-redirect responses...
+    const QVariant redirectVar = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+    if (redirectVar.isValid())
+    {
+        m_sslInfo.restoreFrom(reply->attribute(static_cast<QNetworkRequest::Attribute>(KIO::AccessManager::MetaData)), reply->url());
+        return;
+    }
+
+    // We are just managing loading URLs errors
+   // if (reply->request().url() != _loadingUrl)
+    //    return;
+
+    // NOTE: These are not all networkreply errors,
+    // but just that supported directly by KIO
+    switch (reply->error())
+    {
+
+    case QNetworkReply::NoError:                             // no error. Simple :)
+        if (isMainFrameRequest)
+        {
+            // Obtain and set the SSL information if any...
+            m_sslInfo.restoreFrom(reply->attribute(static_cast<QNetworkRequest::Attribute>(KIO::AccessManager::MetaData)), reply->url());
+            m_sslInfo.setUrl(reply->url());
+        }
+        break;
+
+    case QNetworkReply::OperationCanceledError:              // operation canceled via abort() or close() calls
+        // ignore this..
+        return;
+
+        // WARNING: This is also typical adblocked element error: IGNORE THIS!
+    case QNetworkReply::ContentAccessDenied:                 // access to remote content denied
+        break;
+
+    case QNetworkReply::UnknownNetworkError:                 // unknown network-related error detected
+        // last chance for the strange things (eg: FTP, custom schemes, etc...)
+       // if (_protHandler.postHandling(reply->request(), mainFrame()))
+       //     return;
+
+    case QNetworkReply::ConnectionRefusedError:              // remote server refused connection
+    case QNetworkReply::HostNotFoundError:                   // invalid hostname
+    case QNetworkReply::TimeoutError:                        // connection time out
+    case QNetworkReply::ProxyNotFoundError:                  // invalid proxy hostname
+    case QNetworkReply::ContentOperationNotPermittedError:   // operation requested on remote content not permitted
+    case QNetworkReply::ContentNotFoundError:                // remote content not found on server (similar to HTTP error 404)
+    case QNetworkReply::ProtocolUnknownError:                // Unknown protocol
+    case QNetworkReply::ProtocolInvalidOperationError:       // requested operation is invalid for this protocol
+    default:
+        break;
+
+    }
 }
 
 QString QDeclarativeWebPage::chooseFile(QWebFrame* originatingFrame, const QString& oldFile)
@@ -1251,8 +1681,22 @@ bool QDeclarativeWebPage::javaScriptPrompt(QWebFrame* originatingFrame, const QS
     return false;
 }
 
+QString QDeclarativeWebPage::userAgentForUrl(const QUrl &url) const
+{
+    QString agent = KWebPage::userAgentForUrl(url);
 
-KDeclarativeWebView* QDeclarativeWebPage::viewItem()
+    //TODO: pretend to be android/iphone other mobile platforms?
+    // with just Mobile Safari very few sites are serving a mobile version
+    //with android user agent gmail doesn't seem to work correctly
+    if (viewItem()->preferMobile()) {
+        //this is extremely lame, but apparently websites are so lame that are explicitly checking for "android" or some toher strings
+        return agent.replace(" Safari/", " Mobile Safari/").replace("X11", "X11, like Android");
+    } else {
+        return agent;
+    }
+}
+
+KDeclarativeWebView* QDeclarativeWebPage::viewItem() const
 {
     return static_cast<KDeclarativeWebView*>(parent());
 }
@@ -1336,6 +1780,7 @@ void QDeclarativeWebPage::downloadUrl(const KUrl &url)
 {
     downloadResource(url, QString(), view());
 }
+
 
 #include "errorhandling.cpp"
 

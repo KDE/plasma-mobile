@@ -27,6 +27,7 @@
 #include <KRun>
 #include <KService>
 #include <KServiceTypeTrader>
+#include <KSycoca>
 #include <KUrl>
 
 ActiveAppsRunner::ActiveAppsRunner(QObject *parent, const QVariantList &args)
@@ -45,6 +46,9 @@ ActiveAppsRunner::ActiveAppsRunner(QObject *parent, const QVariantList &args)
     KSharedConfigPtr ptr = KSharedConfig::openConfig("active-blacklistrc");
     KConfigGroup config = KConfigGroup(ptr, "blacklist");
     m_blackList = config.readEntry("apps", QStringList()).toSet();
+
+    connect(KSycoca::self(), SIGNAL(databaseChanged(QStringList)),
+            this, SLOT(databaseChanged(QStringList)));
 }
 
 ActiveAppsRunner::~ActiveAppsRunner()
@@ -53,6 +57,8 @@ ActiveAppsRunner::~ActiveAppsRunner()
 
 void ActiveAppsRunner::match(Plasma::RunnerContext &context)
 {
+    m_lastContext = context;
+
     if (context.query() == "__activeappslist") {
         allApps(context);
     } else {
@@ -101,6 +107,7 @@ void ActiveAppsRunner::serviceMatches(Plasma::RunnerContext &context)
     // Search for applications which are executable and case-insensitively match the search term
     // See http://techbase.kde.org/Development/Tutorials/Services/Traders#The_KTrader_Query_Language
     // if the following is unclear to you.
+
     QString query = QString("exist Exec and ('%1' =~ Name)").arg(term);
     KService::List services = KServiceTypeTrader::self()->query("Application", query);
 
@@ -226,7 +233,7 @@ void ActiveAppsRunner::serviceMatches(Plasma::RunnerContext &context)
 
             qreal relevance = 0.6;
             if (service->categories().contains("X-KDE-More") ||
-                    !service->showInKDE()) {
+                !service->showInKDE()) {
                 relevance = 0.5;
             }
 
@@ -282,6 +289,16 @@ QMimeData * ActiveAppsRunner::mimeDataForMatch(const Plasma::QueryMatch *match)
     }
 
     return 0;
+}
+
+void ActiveAppsRunner::databaseChanged(const QStringList &changes)
+{
+    if (!m_lastContext.isValid() || !changes.contains("apps")) {
+        return;
+    }
+
+    m_lastContext.removeMatches(this);
+    match(m_lastContext);
 }
 
 #include "appsrunner.moc"

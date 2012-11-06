@@ -233,9 +233,31 @@ Item {
 
     }
 
+    Item {
+        id: mobileItem
+        anchors { top: pluginsItem.bottom; left: parent.left; right: parent.right; topMargin: 48; }
+
+        PlasmaComponents.Label {
+            anchors { right: parent.horizontalCenter; verticalCenter: parent.verticalCenter; rightMargin: 12; }
+            text: i18n("Prefer mobile websites:")
+        }
+
+        PlasmaComponents.Switch {
+            checked: true
+            property string configKey: "preferMobile"
+            anchors { left: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
+            onClicked: browserConfig.writeEntry(configKey, checked);
+            Component.onCompleted: {
+                checked = browserConfig.readEntry(configKey);
+                print("prefer mobile websites: " + configKey + " :: " + checked);
+            }
+        }
+
+    }
+
     PlasmaComponents.Button {
         text: i18n("Clear history")
-        anchors { left: parent.horizontalCenter; top: pluginsItem.bottom; topMargin: 32; }
+        anchors { left: parent.horizontalCenter; top: mobileItem.bottom; topMargin: 32; }
         onClicked: historyConfig.writeEntry("history", []);
     }
 

@@ -23,7 +23,6 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
 import Qt.labs.gestures 1.0
-import org.kde.plasma.slccomponents 0.1 as SlcComponents
 
 Image {
     id: imageViewer

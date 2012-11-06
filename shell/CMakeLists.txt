@@ -1,11 +1,12 @@
 find_package(KDE4Workspace REQUIRED)
+find_package(NepomukCore REQUIRED)
 
 include_directories(${KDE4WORKSPACE_INCLUDE_DIR}
-                    ${KDE4WORKSPACE_INCLUDE_DIR}/kworkspace)
+                    ${KDE4WORKSPACE_INCLUDE_DIR}/kworkspace
+                    ${NEPOMUK_CORE_INCLUDE_DIR})
 
 include(KDE4Defaults)
 
-find_package(NepomukCore REQUIRED)
 
 set(plasma-device_SRCS
     activity.cpp

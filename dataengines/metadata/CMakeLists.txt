@@ -1,11 +1,12 @@
 project(metadataengine)
 
+find_package(NepomukCore REQUIRED)
+
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}/ontologies
+    ${NEPOMUK_CORE_INCLUDE_DIR}
 )
-
-find_package(NepomukCore REQUIRED)
 
 set(metadataengine_SRCS
     metadataengine.cpp

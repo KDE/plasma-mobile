@@ -39,6 +39,7 @@ public:
 
 protected slots:
     QMimeData *mimeDataForMatch(const Plasma::QueryMatch *match);
+    void databaseChanged(const QStringList &changes);
 
 private:
     void setupMatch(const KService::Ptr &service, Plasma::QueryMatch &action);
@@ -47,6 +48,7 @@ private:
 
 private:
     QSet<QString> m_blackList;
+    Plasma::RunnerContext m_lastContext;
 };
 
 K_EXPORT_PLASMA_RUNNER(activeapps, ActiveAppsRunner)

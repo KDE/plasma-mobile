@@ -1,10 +1,10 @@
 /* ============================================================
 *
-* This file has been kindly borrowed and adapted from the rekonq project
+* This file is a part of the rekonq project
 *
 * Copyright (C) 2007-2008 Trolltech ASA. All rights reserved
-* Copyright (C) 2008-2011 by Andrea Diamantini <adjam7 at gmail dot com>
-* Copyright 2011 Sebastian Kügler <sebas@kde.org>
+* Copyright (C) 2008-2012 by Andrea Diamantini <adjam7 at gmail dot com>
+*
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License as
@@ -24,90 +24,95 @@
 *
 * ============================================================ */
 
-#define QL1S(x)  QLatin1String(x)
-#define QL1C(x)  QLatin1Char(x)
+
 
 // Self Includes
 #include "networkaccessmanager.h"
 #include "networkaccessmanager.moc"
 
-#include "adblockmanager.h"
-
-// Local Includes
-#include "adblockmanager.h"
-//#include "application.h"
-//#include "webpage.h"
 
 // KDE Includes
 #include <KLocale>
 #include <KProtocolManager>
 
 // Qt Includes
-#include <QWebPage>
+#include <QNetworkReply>
+#include <QTimer>
+
+#define QL1S(x)  QLatin1String(x)
+#define QL1C(x)  QLatin1Char(x)
+
+class NullNetworkReply : public QNetworkReply
+{
+public:
+    NullNetworkReply(const QNetworkRequest &req, QObject* parent = 0)
+        : QNetworkReply(parent)
+    {
+        setRequest(req);
+        setUrl(req.url());
+        setHeader(QNetworkRequest::ContentLengthHeader, 0);
+        setHeader(QNetworkRequest::ContentTypeHeader, "text/plain");
+        setError(QNetworkReply::ContentAccessDenied, i18n("Null reply"));
+        setAttribute(QNetworkRequest::User, QNetworkReply::ContentAccessDenied);
+        QTimer::singleShot(0, this, SIGNAL(finished()));
+    }
+
+    virtual void abort() {}
+    virtual qint64 bytesAvailable() const
+    {
+        return 0;
+    }
+
+protected:
+    virtual qint64 readData(char*, qint64)
+    {
+        return -1;
+    }
+};
+
+
+// ----------------------------------------------------------------------------------------------
+
 
 NetworkAccessManager::NetworkAccessManager(QObject *parent)
-    : AccessManager(parent),
-    m_adBlockManager(0)
+    : AccessManager(parent)
 {
-    QString c = KGlobal::locale()->country();
+    QString c = KGlobal::locale()->language();
+
     if (c == QL1S("C"))
-        c = QL1S("en_US");
-    if (c != QL1S("en_US"))
-        c.append(QL1S(", en_US"));
+        c = QL1S("en-US");
+    else
+        c = c.replace(QL1C('_') , QL1C('-'));
+
+    c.append(QL1S(", en-US; q=0.8, en; q=0.6"));
 
     _acceptLanguage = c.toLatin1();
-    m_adBlockManager = new AdBlockManager(this);
 }
 
-NetworkAccessManager::~NetworkAccessManager()
-{
-}
-
-void NetworkAccessManager::setAdBlockManager(AdBlockManager* adblocker)
-{
-    m_adBlockManager = adblocker;
-}
 
 QNetworkReply *NetworkAccessManager::createRequest(QNetworkAccessManager::Operation op, const QNetworkRequest &request, QIODevice *outgoingData)
 {
-    QWebPage *parentPage = qobject_cast<QWebPage *>(parent());
-    Q_ASSERT(parentPage);
+   /* WebPage *parentPage = qobject_cast<WebPage *>(parent());
+
+    // NOTE: This to get sure we are NOT serving unused requests
+    if (!parentPage)
+        return new NullNetworkReply(request, this);*/
+
     QNetworkReply *reply = 0;
 
+    // set our "nice" accept-language header...
     QNetworkRequest req = request;
-    req.setAttribute(QNetworkRequest::HttpPipeliningAllowedAttribute, true);
     req.setRawHeader("Accept-Language", _acceptLanguage);
 
-    KIO::CacheControl cc = KProtocolManager::cacheControl();
-    switch (cc)
-    {
-    case KIO::CC_CacheOnly:      // Fail request if not in cache.
-        req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysCache);
-        break;
-
-    case KIO::CC_Refresh:        // Always validate cached entry with remote site.
-        req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferNetwork);
-        break;
-
-    case KIO::CC_Reload:         // Always fetch from remote site
-        req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
-        break;
-
-    case KIO::CC_Cache:          // Use cached entry if available.
-    case KIO::CC_Verify:         // Validate cached entry with remote site if expired.
-    default:
-        req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
-        break;
-    }
-
     // Handle GET operations with AdBlock
-    if (op == QNetworkAccessManager::GetOperation) {
-        Q_ASSERT( m_adBlockManager );
-        reply = m_adBlockManager->block(req, parentPage);
-    }
+    /*if (op == QNetworkAccessManager::GetOperation)
+        reply = rApp->adblockManager()->block(req, parentPage);*/
 
-    if (!reply) {
+    if (!reply)
         reply = AccessManager::createRequest(op, req, outgoingData);
-    }
+
+   /* if (parentPage->hasNetworkAnalyzerEnabled())
+        emit networkData(op, req, reply);*/
+
     return reply;
 }

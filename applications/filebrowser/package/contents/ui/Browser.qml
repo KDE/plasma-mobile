@@ -47,6 +47,7 @@ MobileComponents.SplitDrawer {
     property bool hasItems: metadataModel.count > 0 || dirModel.count > 0
     onHasItemsChanged: mainLoader.visible = true
 
+
     PlasmaExtras.ConditionalLoader {
         id: mainLoader
         when: hasItems
