@@ -59,7 +59,7 @@ PlasmaComponents.Page {
     Component.onCompleted: {
         mainPage.width = browserFrame.width - handleGraphics.width
     }
-    onWidthChanged: handleGraphics.x = browserFrame.handlePosition()
+
 
     Image {
         id: browserFrame
@@ -68,10 +68,10 @@ PlasmaComponents.Page {
         source: "image://appbackgrounds/standard"
         fillMode: Image.Tile
         anchors {
-            left: parent.left
             top: parent.top
             bottom: parent.bottom
         }
+        x: mainPage.children.length > 0 && mainPage.children[0].visible ? 0 : - width
         width: handleGraphics.x + handleGraphics.width
         clip: true
 
@@ -80,15 +80,13 @@ PlasmaComponents.Page {
             return sidebar.open ? root.width - sidebar.width - handleGraphics.width : root.width - handleGraphics.width
         }
 
-        transform: Translate {
-            x: mainPage.children.length > 0 && mainPage.children[0].visible ? 0 : -browserFrame.width
-            Behavior on x {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
+        Behavior on x {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
             }
         }
+
         Item {
             id: mainPage
             anchors {
@@ -199,8 +197,8 @@ PlasmaComponents.Page {
 
         width: parent.width/4
         onWidthChanged: {
-            browserFrame.x = sidebar.open ? -sidebar.width : 0
-            mainPage.anchors.leftMargin = -browserFrame.x
+            handleGraphics.x = browserFrame.handlePosition()
+            mainPage.width = browserFrame.width - handleGraphics.width
         }
         x: parent.width - width
 
