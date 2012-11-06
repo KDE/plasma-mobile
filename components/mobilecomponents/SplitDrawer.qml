@@ -42,6 +42,8 @@ Properties:
 
         Item drawer:
         It's the part that can be pulled in and out, will act as a sidebar.
+        
+        int visibleDrawerWidth: the width of the visible portion of the drawer: it updates while dragging or animating
 **/
 PlasmaComponents.Page {
     id: root
@@ -52,6 +54,7 @@ PlasmaComponents.Page {
     default property alias page: mainPage.data
     property alias drawer: panelPage.data
     property alias open: sidebar.open
+    property int visibleDrawerWidth: -browserFrame.x
 
     Image {
         id: browserFrame
