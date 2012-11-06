@@ -68,7 +68,7 @@ void MetadataCloudModel::setCloudCategory(QString category)
     }
 
     m_cloudCategory = category;
-    askRefresh();
+    requestRefresh();
     emit cloudCategoryChanged();
 }
 
@@ -91,7 +91,7 @@ void MetadataCloudModel::setAllowedCategories(const QVariantList &whitelist)
     }
 
     m_allowedCategories = set;
-    askRefresh();
+    requestRefresh();
     emit allowedCategoriesChanged();
 }
 
@@ -107,7 +107,7 @@ void MetadataCloudModel::setShowEmptyCategories(bool show)
     }
 
     m_showEmptyCategories = show;
-    askRefresh();
+    requestRefresh();
     emit showEmptyCategoriesChanged();
 }
 

@@ -119,7 +119,7 @@ void MetadataModel::setQuery(const Nepomuk2::Query::Query &query)
     m_query = query;
 
     if (Nepomuk2::Query::QueryServiceClient::serviceAvailable()) {
-        askRefresh();
+        requestRefresh();
     }
 }
 
@@ -135,7 +135,7 @@ void MetadataModel::setQueryString(const QString &query)
     }
 
     m_queryString = query;
-    askRefresh();
+    requestRefresh();
     emit queryStringChanged();
 }
 
@@ -151,7 +151,7 @@ void MetadataModel::setLimit(int limit)
     }
 
     m_limit = limit;
-    askRefresh();
+    requestRefresh();
     emit limitChanged();
 }
 
@@ -167,7 +167,7 @@ void MetadataModel::setScoreResources(bool score)
     }
 
     m_scoreResources = score;
-    askRefresh();
+    requestRefresh();
     emit scoreResourcesChanged();
 }
 
@@ -185,7 +185,7 @@ void MetadataModel::setLazyLoading(bool lazy)
 
     //TODO: a way to control this? maybe from the available memory?
     m_pageSize = lazy ? 30 : -1;
-    askRefresh();
+    requestRefresh();
     emit lazyLoadingChanged();
 }
 
@@ -205,7 +205,7 @@ void MetadataModel::setSortBy(const QVariantList &sortBy)
     }
 
     m_sortBy = stringList;
-    askRefresh();
+    requestRefresh();
     emit sortByChanged();
 }
 
@@ -221,7 +221,7 @@ void MetadataModel::setSortOrder(Qt::SortOrder sortOrder)
     }
 
     m_sortOrder = sortOrder;
-    askRefresh();
+    requestRefresh();
     emit sortOrderChanged();
 }
 
@@ -271,15 +271,11 @@ void MetadataModel::doQuery()
     }
 
     if (!resourceType().isEmpty()) {
-        //FIXME: more elegant
         QString type = resourceType();
-        bool negation = false;
-        if (type.startsWith('!')) {
-            type = type.remove(0, 1);
-            negation = true;
-        }
 
-        if (negation) {
+        if (type.startsWith('!')) {
+            // negation
+            type = type.remove(0, 1);
             rootTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(Nepomuk2::Query::ResourceTypeTerm(propertyUrl(type))));
         } else {
             rootTerm.addSubTerm(Nepomuk2::Query::ResourceTypeTerm(propertyUrl(type)));
@@ -288,9 +284,9 @@ void MetadataModel::doQuery()
                 rootTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(Nepomuk2::Query::ResourceTypeTerm(propertyUrl("nfo:Bookmark"))));
             }*/
         }
-        if (resourceType() == "nfo:Archive") {
-            Nepomuk2::Query::ComparisonTerm term(Nepomuk2::Vocabulary::NIE::mimeType(), Nepomuk2::Query::LiteralTerm("application/epub+zip"));
 
+        if (type == "nfo:Archive") {
+            Nepomuk2::Query::ComparisonTerm term(Nepomuk2::Vocabulary::NIE::mimeType(), Nepomuk2::Query::LiteralTerm("application/epub+zip"));
             rootTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(term));
         }
     }

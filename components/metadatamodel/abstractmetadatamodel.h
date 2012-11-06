@@ -267,7 +267,7 @@ protected:
     QStringList tagStrings() const;
     QStringList mimeTypeStrings() const;
     void setRunning(bool running);
-    void askRefresh();
+    void requestRefresh();
 
 private:
     QDBusServiceWatcher *m_queryServiceWatcher;

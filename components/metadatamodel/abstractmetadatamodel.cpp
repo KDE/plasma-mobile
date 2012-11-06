@@ -76,6 +76,7 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
 
 
     m_queryTimer = new QTimer(this);
+    m_queryTimer->setInterval(0);
     m_queryTimer->setSingleShot(true);
 
     m_extraParameters = new QDeclarativePropertyMap;
@@ -91,8 +92,7 @@ AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
     QDBusConnectionInterface* interface = m_queryServiceWatcher->connection().interface();
 
     if (interface->isServiceRegistered("org.kde.nepomuk.services.nepomukqueryservice")) {
-        connect(m_queryTimer, SIGNAL(timeout()),
-                this, SLOT(doQuery()));
+        connect(m_queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
     }
 }
 
@@ -105,10 +105,8 @@ AbstractMetadataModel::~AbstractMetadataModel()
 void AbstractMetadataModel::serviceRegistered(const QString &service)
 {
     if (service == QLatin1String("org.kde.nepomuk.services.nepomukqueryservice")) {
-        disconnect(m_queryTimer, SIGNAL(timeout()),
-                this, SLOT(doQuery()));
-        connect(m_queryTimer, SIGNAL(timeout()),
-                this, SLOT(doQuery()));
+        disconnect(m_queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
+        connect(m_queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
         doQuery();
     }
 }
@@ -120,7 +118,7 @@ void AbstractMetadataModel::setResourceType(const QString &type)
     }
 
     m_resourceType = type;
-    m_queryTimer->start(0);
+    m_queryTimer->start();
     emit resourceTypeChanged();
 }
 
@@ -139,7 +137,7 @@ void AbstractMetadataModel::setMimeTypesList(const QVariantList &types)
     }
 
     m_mimeTypes = stringList;
-    m_queryTimer->start(0);
+    m_queryTimer->start();
     emit mimeTypesChanged();
 }
 
@@ -155,7 +153,7 @@ void AbstractMetadataModel::setActivityId(const QString &activityId)
     }
 
     m_activityId = activityId;
-    m_queryTimer->start(0);
+    m_queryTimer->start();
     emit activityIdChanged();
 }
 
@@ -174,7 +172,7 @@ void AbstractMetadataModel::setTags(const QVariantList &tags)
     }
 
     m_tags = stringList;
-    m_queryTimer->start(0);
+    m_queryTimer->start();
     emit tagsChanged();
 }
 
@@ -208,9 +206,9 @@ void AbstractMetadataModel::setRunning(bool running)
     emit runningChanged(running);
 }
 
-void AbstractMetadataModel::askRefresh()
+void AbstractMetadataModel::requestRefresh()
 {
-    m_queryTimer->start(0);
+    m_queryTimer->start();
 }
 
 void AbstractMetadataModel::setStartDateString(const QString &date)
@@ -222,7 +220,7 @@ void AbstractMetadataModel::setStartDateString(const QString &date)
     }
 
     m_startDate = newDate;
-    m_queryTimer->start(0);
+    m_queryTimer->start();
     emit startDateChanged();
 }
 
@@ -240,7 +238,7 @@ void AbstractMetadataModel::setEndDateString(const QString &date)
     }
 
     m_endDate = newDate;
-    m_queryTimer->start(0);
+    m_queryTimer->start();
     emit endDateChanged();
 }
 
@@ -256,7 +254,7 @@ void AbstractMetadataModel::setStartDate(const QDate &date)
     }
 
     m_startDate = date;
-    m_queryTimer->start(0);
+    m_queryTimer->start();
     emit startDateChanged();
 }
 
@@ -272,7 +270,7 @@ void AbstractMetadataModel::setEndDate(const QDate &date)
     }
 
     m_endDate = date;
-    m_queryTimer->start(0);
+    m_queryTimer->start();
     emit endDateChanged();
 }
 
@@ -288,7 +286,7 @@ void AbstractMetadataModel::setMinimumRating(int rating)
     }
 
     m_minimumRating = rating;
-    m_queryTimer->start(0);
+    m_queryTimer->start();
     emit minimumRatingChanged();
 }
 
@@ -304,7 +302,7 @@ void AbstractMetadataModel::setMaximumRating(int rating)
     }
 
     m_maximumRating = rating;
-    m_queryTimer->start(0);
+    m_queryTimer->start();
     emit maximumRatingChanged();
 }
 

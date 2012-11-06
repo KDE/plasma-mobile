@@ -55,7 +55,7 @@ MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
     roleNames[DayRole] = "day";
     roleNames[CountRole] = "count";
     setRoleNames(roleNames);
-    askRefresh();
+    requestRefresh();
 }
 
 MetadataTimelineModel::~MetadataTimelineModel()
@@ -70,7 +70,7 @@ void MetadataTimelineModel::setLevel(MetadataTimelineModel::Level level)
     }
 
     m_level = level;
-    askRefresh();
+    requestRefresh();
     emit levelChanged();
 }
 
