@@ -48,7 +48,7 @@ Column {
     }
 
     PlasmaExtraComponents.Heading {
-        text: i18n("File types")
+        text: i18n("File type")
         anchors {
             top: parent.top
             right: parent.right
