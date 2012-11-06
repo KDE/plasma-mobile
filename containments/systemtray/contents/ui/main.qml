@@ -106,6 +106,7 @@ Item {
             //FIXME: this assumes items are square
             index = pos.x/main.height
         }
+
         tasksRow.insertAt(plasmoidContainer, index)
         plasmoidContainer.anchors.top = tasksRow.top
         plasmoidContainer.anchors.bottom = tasksRow.bottom

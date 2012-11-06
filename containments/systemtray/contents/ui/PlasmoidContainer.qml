@@ -21,7 +21,7 @@ import QtQuick 1.0
 import org.kde.plasma.containments 0.1 as PlasmaContainments
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
-PlasmaContainments..AppletContainer {
+PlasmaContainments.AppletContainer {
     id: plasmoidContainer
     width: main.itemWidth
     height: main.itemHeight
