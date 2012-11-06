@@ -219,11 +219,11 @@ MobileComponents.SplitDrawer {
                 bottom: parent.bottom
                 bottomMargin: - 5
             }
+            height: Math.min(theme.defaultFont.mSize.height * 3, parent.height * 2 / 3)
             x: parent.width - resourceBrowser.visibleDrawerWidth + 4
             z: 900
             y: resourceBrowser.open ? 0 : height
 
-            height: theme.defaultFont.mSize.height * 3
             exclusive: true
             Behavior on y {
                 NumberAnimation {
