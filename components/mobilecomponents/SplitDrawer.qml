@@ -54,7 +54,12 @@ PlasmaComponents.Page {
     default property alias page: mainPage.data
     property alias drawer: panelPage.data
     property alias open: sidebar.open
-    property int visibleDrawerWidth: -browserFrame.x
+    property int visibleDrawerWidth: width - browserFrame.width
+
+    Component.onCompleted: {
+        mainPage.width = browserFrame.width - handleGraphics.width
+    }
+    onWidthChanged: handleGraphics.x = browserFrame.handlePosition()
 
     Image {
         id: browserFrame
@@ -63,10 +68,17 @@ PlasmaComponents.Page {
         source: "image://appbackgrounds/standard"
         fillMode: Image.Tile
         anchors {
+            left: parent.left
             top: parent.top
             bottom: parent.bottom
         }
-        width: parent.width
+        width: handleGraphics.x + handleGraphics.width
+        clip: true
+
+        function handlePosition()
+        {
+            return sidebar.open ? root.width - sidebar.width - handleGraphics.width : root.width - handleGraphics.width
+        }
 
         transform: Translate {
             x: mainPage.children.length > 0 && mainPage.children[0].visible ? 0 : -browserFrame.width
@@ -80,30 +92,22 @@ PlasmaComponents.Page {
         Item {
             id: mainPage
             anchors {
-                fill: parent
-                //rightMargin: handleGraphics.width
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
             }
         }
 
-        Image {
-            source: "image://appbackgrounds/shadow-right"
-            fillMode: Image.TileVertically
-            anchors {
-                left: parent.right
-                top: parent.top
-                bottom: parent.bottom
-                leftMargin: -1
-            }
-        }
         PlasmaCore.FrameSvgItem {
             id: handleGraphics
             imagePath: "dialogs/background"
             enabledBorders: "LeftBorder|TopBorder|BottomBorder"
             width: handleIcon.width + margins.left + margins.right + 4
             height: handleIcon.width * 1.6 + margins.top + margins.bottom + 4
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
+            anchors.verticalCenter: parent.verticalCenter
+
+            Component.onCompleted: {
+                handleGraphics.x = browserFrame.handlePosition()
             }
 
             //TODO: an icon
@@ -126,20 +130,20 @@ PlasmaComponents.Page {
                 right: handleGraphics.right
             }
             drag {
-                target: browserFrame
+                target: handleGraphics
                 axis: Drag.XAxis
                 //-50, an overshoot to make it look smooter
-                minimumX: -sidebar.width - 50
-                maximumX: 0
+                minimumX: root.width - sidebar.width - handleGraphics.width - 50
+                maximumX: root.width - handleGraphics.width
             }
             property int startX
             property bool toggle: true
             onPressed: {
-                startX = browserFrame.x
+                startX = handleGraphics.x
                 toggle = true
             }
             onPositionChanged: {
-                if (Math.abs(browserFrame.x - startX) > 20) {
+                if (Math.abs(handleGraphics.x - startX) > 20) {
                     toggle = false
                 }
             }
@@ -147,9 +151,9 @@ PlasmaComponents.Page {
                 if (toggle) {
                     sidebar.open = !sidebar.open
                 } else {
-                    sidebar.open = (browserFrame.x < -sidebar.width/2)
+                    sidebar.open = (browserFrame.width < root.width -sidebar.width/2)
                 }
-                sidebarSlideAnimation.to = sidebar.open ? -sidebar.width : 0
+                sidebarSlideAnimation.to = browserFrame.handlePosition()
                 sidebarSlideAnimation.running = true
             }
         }
@@ -160,14 +164,24 @@ PlasmaComponents.Page {
 
             NumberAnimation {
                 id: actualSlideAnimation
-                target: browserFrame
+                target: handleGraphics
                 properties: "x"
                 duration: 250
                 easing.type: Easing.InOutQuad
             }
             ScriptAction {
-                script: mainPage.anchors.leftMargin = -browserFrame.x
+                script: mainPage.width = browserFrame.width - handleGraphics.width
             }
+        }
+    }
+    Image {
+        source: "image://appbackgrounds/shadow-right"
+        fillMode: Image.TileVertically
+        anchors {
+            left: browserFrame.right
+            top: browserFrame.top
+            bottom: browserFrame.bottom
+            leftMargin: -1
         }
     }
 
@@ -179,7 +193,7 @@ PlasmaComponents.Page {
             if (width == 0) {
                 return
             }
-            sidebarSlideAnimation.to = open ? -sidebar.width : 0
+            sidebarSlideAnimation.to = browserFrame.handlePosition()
             sidebarSlideAnimation.running = true
         }
 

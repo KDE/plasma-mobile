@@ -28,26 +28,20 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 Image {
     id: fileBrowserRoot
+
+    //BEGIN properties
+    width: 360
+    height: 360
+    
+    property QtObject model: metadataModel
+    
     objectName: "fileBrowserRoot"
     source: "image://appbackgrounds/contextarea"
     fillMode: Image.Tile
     state: "browsing"
-    property QtObject model: metadataModel
+    //END properties
 
-    width: 360
-    height: 360
-
-    MobileComponents.Package {
-        id: partPackage
-    }
-
-    PlasmaExtras.ResourceInstance {
-        id: resourceInstance
-    }
-
-    MetadataModels.MetadataUserTypes {
-        id: userTypes
-    }
+    //BEGIN model
     MetadataModels.MetadataModel {
         id: metadataModel
         sortBy: [userTypes.sortFields[metadataModel.resourceType]]
@@ -56,25 +50,31 @@ Image {
         resourceType: exclusiveResourceType
         mimeTypes: exclusiveMimeTypes
     }
+
     PlasmaCore.DataSource {
         id: activitySource
         engine: "org.kde.activities"
         connectedSources: ["Status"]
     }
+
     DirModel {
         id: dirModel
     }
-    function goBack()
-    {
-        toolBar.y = 0
+    //END model
+
+    //BEGIN functions    
+    function goBack() {
+        toolBar.y = 0;
+
         //don't go more back than the browser
         if (mainStack.currentPage.objectName == "resourceBrowser") {
-            return
+            return;
         }
+
         if (mainStack.depth == 1) {
             mainStack.replace(Qt.createComponent("Browser.qml"))
         } else {
-            mainStack.pop()
+            mainStack.pop();
         }
     }
 
@@ -120,17 +120,19 @@ Image {
             }
         }
     }
+    //END functions
 
-    PlasmaComponents.PageStack {
-        id: mainStack
-        clip: false
-        toolBar: toolBar
-        //initialPage: Qt.createComponent("Browser.qml")
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            left: parent.left
-        }
+    //BEGIN non-UI components
+    PlasmaExtras.ResourceInstance {
+        id: resourceInstance
+    }
+
+    MobileComponents.Package {
+        id: partPackage
+    }
+
+    MetadataModels.MetadataUserTypes {
+        id: userTypes
     }
 
     Timer {
@@ -143,6 +145,7 @@ Image {
             mainStack.push(Qt.createComponent("Browser.qml"))
         }
     }
+    
     //FIXME: this is due to global vars being binded after the parse is done, do the 2 steps parsing
     Timer {
         interval: 100
@@ -160,4 +163,25 @@ Image {
             }
         }
     }
+    //END non-UI components
+    
+    //BEGIN: UI components
+    PlasmaComponents.BusyIndicator {
+        anchors.centerIn: mainStack
+        visible: metadataModel.running
+        running: visible
+    }
+
+    PlasmaComponents.PageStack {
+        id: mainStack
+        clip: false
+        toolBar: toolBar
+        //initialPage: Qt.createComponent("Browser.qml")
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: parent.left
+        }
+    }
+    //END UI components
 }
