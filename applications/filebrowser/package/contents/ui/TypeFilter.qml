@@ -55,13 +55,6 @@ Column {
             rightMargin: theme.defaultFont.mSize.width
         }
     }
-    Timer {
-        id: categoryCheckedTimer
-        running: true
-        onTriggered: {
-            //buttonColumn.exclusive = true
-        }
-    }
 
     PlasmaComponents.ButtonColumn {
         id: buttonColumn
