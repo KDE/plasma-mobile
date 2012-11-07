@@ -62,10 +62,6 @@ Item {
             }
         }
 
-        Item {
-            width: 1
-            height: theme.defaultFont.mSize.height
-        }
         Loader {
             id: typeFilterLoader
             anchors {
