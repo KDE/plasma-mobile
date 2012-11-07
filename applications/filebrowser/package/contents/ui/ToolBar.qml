@@ -221,9 +221,7 @@ Item {
                 height: parent.height - 1
                 onCheckedChanged: {
                     if (checked) {
-                        while (sidebarStack.depth > 1) {
-                            sidebarStack.pop()
-                        }
+                        sidebarTabGroup.currentTab = categorySidebar
                     }
                 }
             }
@@ -236,10 +234,8 @@ Item {
                 height: parent.height - 1
                 onCheckedChanged: {
                     if (checked) {
-                        if (sidebarStack.depth > 1) {
-                            sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
-                        } else {
-                            sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
+                        if (checked) {
+                            sidebarTabGroup.currentTab = timelineSidebar
                         }
                     }
                 }
@@ -253,11 +249,7 @@ Item {
                 height: parent.height - 1
                 onCheckedChanged: {
                     if (checked) {
-                        if (sidebarStack.depth > 1) {
-                            sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
-                        } else {
-                            sidebarStack.push(Qt.createComponent("TagsBar.qml"))
-                        }
+                        sidebarTabGroup.currentTab = tagsSidebar
                     }
                 }
             }

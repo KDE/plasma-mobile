@@ -75,18 +75,32 @@ MobileComponents.SplitDrawer {
         Item {
             anchors.fill: parent
             clip: true
-            PlasmaComponents.PageStack {
-                id: sidebarStack
+            PlasmaComponents.TabGroup {
+                id: sidebarTabGroup
                 width: fileBrowserRoot.width/4 - theme.defaultFont.mSize.width * 2
-                initialPage: Qt.createComponent("CategorySidebar.qml")
                 anchors {
                     left: parent.left
                     top: parent.top
                     bottom: parent.bottom
                     bottomMargin: 0
-                    topMargin: toolBar.height
+                    //topMargin: toolBar.height
                     leftMargin: theme.defaultFont.mSize.width * 2
                     rightMargin: theme.defaultFont.mSize.width
+                }
+                CategorySidebar {
+                    id: categorySidebar
+                }
+                PlasmaExtras.ConditionalLoader {
+                    id: timelineSidebar
+
+                    when: sidebarTabGroup.currentTab == timelineSidebar
+                    source: Qt.resolvedUrl("TimelineSidebar.qml")
+                }
+                PlasmaExtras.ConditionalLoader {
+                    id: tagsSidebar
+
+                    when: sidebarTabGroup.currentTab == tagsSidebar
+                    source: Qt.resolvedUrl("TagsBar.qml")
                 }
             }
         }
