@@ -56,19 +56,18 @@ Item {
             onScoreChanged: metadataModel.minimumRating = score
         }
 
-        Component.onCompleted: {
-            if (!exclusiveResourceType && exclusiveMimeTypes.length == 0) {
-                typeFilterLoader.source = "TypeFilter.qml"
-            }
-        }
-
         Loader {
             id: typeFilterLoader
             anchors {
                 left: parent.left
                 right: parent.right
             }
-            //sourceComponent: TypeFilter { }
+        }
+
+        Component.onCompleted: {
+            if (!exclusiveResourceType && exclusiveMimeTypes.length == 0) {
+                typeFilterLoader.source = "TypeFilter.qml"
+            }
         }
     }
 
@@ -77,6 +76,4 @@ Item {
         id: devicesModel
         dataSource: hotplugSource
     }
-
-    
 }
