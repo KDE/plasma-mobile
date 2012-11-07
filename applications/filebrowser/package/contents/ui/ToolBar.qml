@@ -210,7 +210,7 @@ Item {
             }
             z: 900
 
-            height: theme.defaultFont.mSize.height * 3
+            height: theme.defaultFont.mSize.height * 2
             exclusive: true
 
             PlasmaComponents.ToolButton {
@@ -218,7 +218,7 @@ Item {
                 text: i18n("Filters")
                 flat: false
                 width: sidebar.width / 3
-                height: parent.height-1
+                height: parent.height - 1
                 onCheckedChanged: {
                     if (checked) {
                         while (sidebarStack.depth > 1) {
@@ -227,12 +227,13 @@ Item {
                     }
                 }
             }
+
             PlasmaComponents.ToolButton {
                 text: i18n("Time")
                 enabled: fileBrowserRoot.model == metadataModel
                 flat: false
                 width: sidebar.width / 3
-                height: parent.height-1
+                height: parent.height - 1
                 onCheckedChanged: {
                     if (checked) {
                         if (sidebarStack.depth > 1) {
@@ -243,14 +244,14 @@ Item {
                     }
                 }
             }
+
             PlasmaComponents.ToolButton {
                 text: i18n("Tags")
                 enabled: fileBrowserRoot.model == metadataModel
                 flat: false
                 width: sidebar.width / 3
-                height: parent.height-1
+                height: parent.height - 1
                 onCheckedChanged: {
-                    print(checked)
                     if (checked) {
                         if (sidebarStack.depth > 1) {
                             sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
