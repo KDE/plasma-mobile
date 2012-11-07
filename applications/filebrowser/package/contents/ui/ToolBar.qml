@@ -210,7 +210,7 @@ Item {
             }
             z: 900
 
-            height: theme.defaultFont.mSize.height * 2
+            height: theme.defaultFont.mSize.height * 1.6
             exclusive: true
 
             PlasmaComponents.ToolButton {
