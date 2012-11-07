@@ -196,78 +196,79 @@ Item {
         busy: metadataModel.running
     }
 
-    PlasmaComponents.ButtonRow {
-        id: tabsRow
+    Item {
         anchors {
             bottom: parent.bottom
-            bottomMargin: - 5
+            
         }
-        x: parent.width - resourceBrowser.visibleDrawerWidth + 4
+        x: parent.width - resourceBrowser.visibleDrawerWidth + 8
         z: 900
-        y: resourceBrowser.open ? 0 : height
+        PlasmaComponents.ButtonRow {
+            id: tabsRow
+            anchors {
+                bottom: parent.bottom
+                bottomMargin: - toolBar.margins.bottom
+            }
+            z: 900
 
-        height: theme.defaultFont.mSize.height * 3
-        exclusive: true
-        Behavior on y {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
-        PlasmaComponents.ToolButton {
-            id: mainTab
-            text: i18n("Filters")
-            flat: false
-            width: sidebar.width / 3
-            height: parent.height-1
-            onCheckedChanged: {
-                if (checked) {
-                    while (sidebarStack.depth > 1) {
-                        sidebarStack.pop()
+            height: theme.defaultFont.mSize.height * 3
+            exclusive: true
+
+            PlasmaComponents.ToolButton {
+                id: mainTab
+                text: i18n("Filters")
+                flat: false
+                width: sidebar.width / 3
+                height: parent.height-1
+                onCheckedChanged: {
+                    if (checked) {
+                        while (sidebarStack.depth > 1) {
+                            sidebarStack.pop()
+                        }
                     }
                 }
             }
-        }
-        PlasmaComponents.ToolButton {
-            text: i18n("Time")
-            enabled: fileBrowserRoot.model == metadataModel
-            flat: false
-            width: sidebar.width / 3
-            height: parent.height-1
-            onCheckedChanged: {
-                if (checked) {
-                    if (sidebarStack.depth > 1) {
-                        sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
-                    } else {
-                        sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
+            PlasmaComponents.ToolButton {
+                text: i18n("Time")
+                enabled: fileBrowserRoot.model == metadataModel
+                flat: false
+                width: sidebar.width / 3
+                height: parent.height-1
+                onCheckedChanged: {
+                    if (checked) {
+                        if (sidebarStack.depth > 1) {
+                            sidebarStack.replace(Qt.createComponent("TimelineSidebar.qml"))
+                        } else {
+                            sidebarStack.push(Qt.createComponent("TimelineSidebar.qml"))
+                        }
                     }
                 }
             }
-        }
-        PlasmaComponents.ToolButton {
-            text: i18n("Tags")
-            enabled: fileBrowserRoot.model == metadataModel
-            flat: false
-            width: sidebar.width / 3
-            height: parent.height-1
-            onCheckedChanged: {
-                print(checked)
-                if (checked) {
-                    if (sidebarStack.depth > 1) {
-                        sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
-                    } else {
-                        sidebarStack.push(Qt.createComponent("TagsBar.qml"))
+            PlasmaComponents.ToolButton {
+                text: i18n("Tags")
+                enabled: fileBrowserRoot.model == metadataModel
+                flat: false
+                width: sidebar.width / 3
+                height: parent.height-1
+                onCheckedChanged: {
+                    print(checked)
+                    if (checked) {
+                        if (sidebarStack.depth > 1) {
+                            sidebarStack.replace(Qt.createComponent("TagsBar.qml"))
+                        } else {
+                            sidebarStack.push(Qt.createComponent("TagsBar.qml"))
+                        }
                     }
                 }
             }
-        }
-        //fake: just to show something then overshooting
-        PlasmaComponents.ToolButton {
-            flat: false
-            width: sidebar.width / 3
-            height: parent.height-1
-            enabled: false
-            opacity: 1
+            //fake: just to show something then overshooting
+            PlasmaComponents.ToolButton {
+                flat: false
+                width: sidebar.width / 3
+                height: parent.height-1
+                enabled: false
+                opacity: 1
+            }
         }
     }
 
