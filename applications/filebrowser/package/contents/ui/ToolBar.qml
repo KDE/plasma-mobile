@@ -199,9 +199,8 @@ Item {
     Item {
         anchors {
             bottom: parent.bottom
-            
         }
-        x: parent.width - resourceBrowser.visibleDrawerWidth + 8
+        x: parent.width - resourceBrowser.visibleDrawerWidth + toolBar.margins.left
         z: 900
         PlasmaComponents.ButtonRow {
             id: tabsRow
