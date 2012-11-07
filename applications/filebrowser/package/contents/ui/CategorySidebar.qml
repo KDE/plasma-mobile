@@ -50,7 +50,7 @@ Item {
 
         MobileComponents.Rating {
             anchors {
-                left: parent.left
+                horizontalCenter: parent.horizontalCenter
                 leftMargin: theme.defaultFont.mSize.width
             }
             onScoreChanged: metadataModel.minimumRating = score
