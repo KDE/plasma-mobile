@@ -68,54 +68,6 @@ class AbstractMetadataModel : public QAbstractItemModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
     /**
-     * @property string restrict results to just this resource type such as nfo:Document
-     */
-    Q_PROPERTY(QString resourceType READ resourceType WRITE setResourceType NOTIFY resourceTypeChanged)
-
-    /**
-     * @property string restrict results to just this mime types in OR, such as image/jpeg
-     */
-    Q_PROPERTY(QVariantList mimeTypes READ mimeTypesList WRITE setMimeTypesList NOTIFY mimeTypesChanged)
-
-    /**
-     * @property string only resources that are related to this activity id. It's the numerical id of the activity that is unique, not the activity name.
-     */
-    Q_PROPERTY(QString activityId READ activityId WRITE setActivityId NOTIFY activityIdChanged)
-
-    /**
-     * @property Array Only resources that have all of those tags.
-     */
-    Q_PROPERTY(QVariantList tags READ tags WRITE setTags NOTIFY tagsChanged)
-
-    //HACK: should be a qdate, but the qml management of qdates is horrible++
-    /**
-     * @property string Only resources that have a creation date equal or more recent than this date, in the format YYYY-MM-DD
-     */
-    Q_PROPERTY(QString startDate READ startDateString WRITE setStartDateString NOTIFY startDateChanged)
-
-    /**
-     * @property string Only resources that have a creation date more recent or equal to this date, in the format YYYY-MM-DD
-     */
-    Q_PROPERTY(QString endDate READ endDateString WRITE setEndDateString NOTIFY endDateChanged)
-
-
-    /**
-     * @property int Only resources that have a rating equal or more than this
-     */
-    Q_PROPERTY(int minimumRating READ minimumRating WRITE setMinimumRating NOTIFY minimumRatingChanged)
-
-    /**
-     * @property int Only resources that have a rating less or equal than this
-     */
-    Q_PROPERTY(int maximumRating READ maximumRating WRITE setMaximumRating NOTIFY maximumRatingChanged)
-
-    /**
-     * @property Object An associative array of extra properties to match: the array key is the property name, such as nie:mimeType and the property value is the value we want to match, such as image/jpeg.
-     * a ! as prefix negates the property, so matches only resources that don't have said property
-     */
-    Q_PROPERTY(QObject *extraParameters READ extraParameters CONSTANT)
-
-    /**
      * @property bool running: true when queries are in execution
      */
     Q_PROPERTY(bool running READ isRunning NOTIFY runningChanged)
@@ -125,43 +77,6 @@ public:
     ~AbstractMetadataModel();
 
     virtual int count() const = 0;
-
-    void setResourceType(const QString &type);
-    QString resourceType() const;
-
-    void setMimeTypesList(const QVariantList &type);
-    QVariantList mimeTypesList() const;
-
-    void setActivityId(const QString &activityId);
-    QString activityId() const;
-
-    void setTags(const QVariantList &tags);
-    QVariantList tags() const;
-
-
-
-    //HACK: normal getters and setters still presents, the one with strings are mapped to QML
-    void setStartDate(const QDate &date);
-    QDate startDate() const;
-
-    void setEndDate(const QDate &date);
-    QDate endDate() const;
-
-    void setStartDateString(const QString &date);
-    QString startDateString() const;
-
-    void setEndDateString(const QString &date);
-    QString endDateString() const;
-
-
- 
-    void setMinimumRating(int rating);
-    int minimumRating() const;
-
-    void setMaximumRating(int rating);
-    int maximumRating() const;
-
-    QObject *extraParameters() const;
 
     bool isRunning() const;
 
