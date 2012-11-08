@@ -18,6 +18,8 @@ set(datamodels_SRCS
     metadatatimelinemodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
+    basicqueryprovider.cpp
+    resourcequeryprovider.cpp
    )
 
 add_kao_ontology(datamodels_SRCS)

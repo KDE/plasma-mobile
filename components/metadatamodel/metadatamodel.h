@@ -42,6 +42,8 @@ class QTimer;
 
 class KImageCache;
 
+class BasicQueryProvider;
+
 /**
  * This is the main class of the Nepomuk model bindings: given a query built by assigning its properties such as queryString, resourceType, startDate etc, it constructs a model with a resource per row, with direct access of its main properties as roles.
  *
@@ -87,6 +89,8 @@ class MetadataModel : public AbstractMetadataModel
      */
     Q_PROPERTY(QSize thumbnailSize READ thumbnailSize WRITE setThumbnailSize NOTIFY thumbnailSizeChanged)
 
+    Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
+
 public:
     enum Roles {
         Label = Qt::UserRole+1,
@@ -114,6 +118,9 @@ public:
 
     void setQuery(const Nepomuk2::Query::Query &query);
     Nepomuk2::Query::Query query() const;
+
+    void setQueryProvider(BasicQueryProvider *provider);
+    BasicQueryProvider *queryProvider() const;
 
     virtual int count() const {return m_resources.count();}
 
@@ -169,6 +176,7 @@ public:
     Q_INVOKABLE QVariantHash get(int row) const;
 
 Q_SIGNALS:
+    void queryProviderChanged();
     void queryStringChanged();
 
     void sortByChanged();
@@ -233,6 +241,8 @@ private:
     QStringList* m_thumbnailerPlugins;
 
     QHash<Nepomuk2::Resource, QHash<int, QVariant> > m_cachedResources;
+
+    QWeakPointer<BasicQueryProvider> m_queryProvider;
 };
 
 #endif
