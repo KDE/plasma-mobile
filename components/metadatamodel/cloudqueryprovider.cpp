@@ -47,55 +47,6 @@ ResourceQueryProvider::~ResourceQueryProvider()
 
 }
 
-void ResourceQueryProvider::setQueryString(const QString &query)
-{
-    if (query == m_queryString || query == "nepomuk") {
-        return;
-    }
-
-    m_queryString = query;
-    requestRefresh();
-    emit queryStringChanged();
-}
-
-QString ResourceQueryProvider::queryString() const
-{
-    return m_queryString;
-}
-
-void ResourceQueryProvider::setSortBy(const QVariantList &sortBy)
-{
-    QStringList stringList = variantToStringList(sortBy);
-
-    if (m_sortBy == stringList) {
-        return;
-    }
-
-    m_sortBy = stringList;
-    requestRefresh();
-    emit sortByChanged();
-}
-
-QVariantList ResourceQueryProvider::sortBy() const
-{
-    return stringToVariantList(m_sortBy);
-}
-
-void ResourceQueryProvider::setSortOrder(Qt::SortOrder sortOrder)
-{
-    if (m_sortOrder == sortOrder) {
-        return;
-    }
-
-    m_sortOrder = sortOrder;
-    requestRefresh();
-    emit sortOrderChanged();
-}
-
-Qt::SortOrder ResourceQueryProvider::sortOrder() const
-{
-    return m_sortOrder;
-}
 
 void ResourceQueryProvider::doQuery()
 {

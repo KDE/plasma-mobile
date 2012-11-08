@@ -17,8 +17,8 @@
 */
 
 
-#ifndef RESOURCEQUERYPROVIDER_H
-#define RESOURCEQUERYPROVIDER_H
+#ifndef CLOUDQUERYPROVIDER_H
+#define CLOUDQUERYPROVIDER_H
 
 #include "basicqueryprovider.h"
 
@@ -26,38 +26,10 @@
 class ResourceQueryProvider : public BasicQueryProvider
 {
     Q_OBJECT
-    /**
-     * @property string a free form query in the Nepomuk desktop query language
-     */
-    Q_PROPERTY(QString queryString READ queryString WRITE setQueryString NOTIFY queryStringChanged)
-
-    /**
-     * @property Array list of fields the results will be sorted: their order is the priority in sorting
-     */
-    Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
-
-    /**
-     * @property SortOrder Qt.Ascending or Qt.Descending
-     */
-    Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
 
 public:
     ResourceQueryProvider(QObject* parent = 0);
     ~ResourceQueryProvider();
-
-    void setQueryString(const QString &query);
-    QString queryString() const;
-
-    void setSortBy(const QVariantList &sortBy);
-    QVariantList sortBy() const;
-
-    void setSortOrder(Qt::SortOrder sortOrder);
-    Qt::SortOrder sortOrder() const;
-
-Q_SIGNALS:
-    void queryStringChanged();
-    void sortByChanged();
-    void sortOrderChanged();
 
 protected:
     virtual void doQuery();
@@ -68,4 +40,4 @@ private:
     Qt::SortOrder m_sortOrder;
 };
 
-#endif // RESOURCEQUERYPROVIDER_H
+#endif // CLOUDQUERYPROVIDER_H
