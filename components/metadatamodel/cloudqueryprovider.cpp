@@ -17,7 +17,7 @@
 */
 
 
-#include "resourcequeryprovider.h"
+#include "cloudqueryprovider.h"
 
 #include <KDebug>
 
@@ -37,27 +37,77 @@
 #include <Nepomuk2/Query/ResourceTypeTerm>
 #include <Nepomuk2/Query/StandardQuery>
 
-ResourceQueryProvider::ResourceQueryProvider(QObject* parent): BasicQueryProvider(parent)
+CloudQueryProvider::CloudQueryProvider(QObject* parent)
+    : BasicQueryProvider(parent),
+      m_showEmptyCategories(false)
 {
 
 }
 
-ResourceQueryProvider::~ResourceQueryProvider()
+CloudQueryProvider::~CloudQueryProvider()
 {
 
 }
 
-
-void ResourceQueryProvider::doQuery()
+void CloudQueryProvider::setCloudCategory(QString category)
 {
-    QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(queryProvider()->extraParameters());
+    if (m_cloudCategory == category) {
+        return;
+    }
+
+    m_cloudCategory = category;
+    requestRefresh();
+    emit cloudCategoryChanged();
+}
+
+QString CloudQueryProvider::cloudCategory() const
+{
+    return m_cloudCategory;
+}
+
+void CloudQueryProvider::setAllowedCategories(const QVariantList &whitelist)
+{
+    QSet<QString> set = variantToStringList(whitelist).toSet();
+
+    if (set == m_allowedCategories) {
+        return;
+    }
+
+    m_allowedCategories = set;
+    requestRefresh();
+    emit allowedCategoriesChanged();
+}
+
+QVariantList CloudQueryProvider::allowedCategories() const
+{
+    return stringToVariantList(m_allowedCategories.values());
+}
+
+void CloudQueryProvider::setShowEmptyCategories(bool show)
+{
+    if (show == m_showEmptyCategories) {
+        return;
+    }
+
+    m_showEmptyCategories = show;
+    requestRefresh();
+    emit showEmptyCategoriesChanged();
+}
+
+bool CloudQueryProvider::showEmptyCategories() const
+{
+    return m_showEmptyCategories;
+}
+
+void CloudQueryProvider::doQuery()
+{
+    QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
 
     //check if really all properties to build the query are null
     if (m_cloudCategory.isEmpty()) {
         return;
     }
 
-    setRunning(true);
     QString query;
 
     if (!m_showEmptyCategories) {
@@ -230,4 +280,4 @@ void ResourceQueryProvider::doQuery()
     setSparqlQuery(query);
 }
 
-#include "resourcequeryprovider.moc"
+#include "cloudqueryprovider.moc"

@@ -44,28 +44,11 @@ class BasicQueryProvider;
 class MetadataCloudModel : public AbstractMetadataModel
 {
     Q_OBJECT
-
-    /**
-     * @property string Resource property that will be used to aggregate the results in a cloud
-     */
-    Q_PROPERTY(QString cloudCategory READ cloudCategory WRITE setCloudCategory NOTIFY cloudCategoryChanged)
-
     /**
      * @property Array A list of all categories that have been collected in the results, depending from cloudCategory.
      * They may be a list of all the present tags, of dates, of types and so on.
      */
     Q_PROPERTY(QVariantList categories READ categories NOTIFY categoriesChanged)
-
-    /**
-     * @property Array A white list of category we want in the results. useful if a category such as the resource type has only a small subset that is actually supposed to be user facing
-     */
-    Q_PROPERTY(QVariantList allowedCategories READ allowedCategories WRITE setAllowedCategories NOTIFY allowedCategoriesChanged)
-
-    /**
-     * @property bool if true empty categories will be shown.
-     * Default: false
-     */
-    Q_PROPERTY(bool showEmptyCategories READ showEmptyCategories WRITE setShowEmptyCategories NOTIFY showEmptyCategoriesChanged)
 
 public:
     enum Roles {
@@ -84,28 +67,12 @@ public:
 
     QVariantList categories() const;
 
-    void setAllowedCategories(const QVariantList &whitelist);
-    QVariantList allowedCategories() const;
-
-    void setShowEmptyCategories(bool show);
-    bool showEmptyCategories() const;
-
-    /**
-     * rdf:type
-     * nao:numericRating
-     */
-    void setCloudCategory(QString category);
-    QString cloudCategory() const;
-
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
 
 Q_SIGNALS:
    void queryProviderChanged();
-   void cloudCategoryChanged();
    void categoriesChanged();
-   void allowedCategoriesChanged();
-   void showEmptyCategoriesChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk2::Query::Result > &entries);
@@ -116,12 +83,8 @@ protected Q_SLOTS:
 private:
     Nepomuk2::Query::QueryServiceClient *m_queryClient;
     QVector<QHash<int, QVariant> > m_results;
-    QVariantList m_categories;
-    QSet<QString> m_allowedCategories;
 
-    //pieces to build m_query
-    QString m_cloudCategory;
-    bool m_showEmptyCategories;
+    QVariantList m_categories;
 
     QWeakPointer<BasicQueryProvider> m_queryProvider;
 };

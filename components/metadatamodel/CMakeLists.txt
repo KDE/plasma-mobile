@@ -13,6 +13,7 @@ INCLUDE_DIRECTORIES(
 
 set(datamodels_SRCS
     abstractmetadatamodel.cpp
+    cloudqueryprovider.cpp
     datamodelsplugin.cpp
     metadatacloudmodel.cpp
     #metadatatimelinemodel.cpp

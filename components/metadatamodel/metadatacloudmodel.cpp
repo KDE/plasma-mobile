@@ -47,8 +47,7 @@
 
 MetadataCloudModel::MetadataCloudModel(QObject *parent)
     : AbstractMetadataModel(parent),
-      m_queryClient(0),
-      m_showEmptyCategories(false)
+      m_queryClient(0)
 {
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
@@ -83,66 +82,16 @@ BasicQueryProvider *MetadataCloudModel::queryProvider() const
     return m_queryProvider.data();
 }
 
-void MetadataCloudModel::setCloudCategory(QString category)
-{
-    if (m_cloudCategory == category) {
-        return;
-    }
-
-    m_cloudCategory = category;
-    requestRefresh();
-    emit cloudCategoryChanged();
-}
-
-QString MetadataCloudModel::cloudCategory() const
-{
-    return m_cloudCategory;
-}
-
 QVariantList MetadataCloudModel::categories() const
 {
     return m_categories;
 }
 
-void MetadataCloudModel::setAllowedCategories(const QVariantList &whitelist)
-{
-    QSet<QString> set = variantToStringList(whitelist).toSet();
-
-    if (set == m_allowedCategories) {
-        return;
-    }
-
-    m_allowedCategories = set;
-    requestRefresh();
-    emit allowedCategoriesChanged();
-}
-
-QVariantList MetadataCloudModel::allowedCategories() const
-{
-    return stringToVariantList(m_allowedCategories.values());
-}
-
-void MetadataCloudModel::setShowEmptyCategories(bool show)
-{
-    if (show == m_showEmptyCategories) {
-        return;
-    }
-
-    m_showEmptyCategories = show;
-    requestRefresh();
-    emit showEmptyCategoriesChanged();
-}
-
-bool MetadataCloudModel::showEmptyCategories() const
-{
-    return m_showEmptyCategories;
-}
-
-
 void MetadataCloudModel::doQuery()
 {
     QString query = queryProvider()->sparqlQuery();
 
+    setRunning(true);
     kDebug() << "Performing the Sparql query" << query;
 
     beginResetModel();
@@ -191,10 +140,11 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
             continue;
         }
 
+        /*TODO: make allowedcategories work again somehow
         if (label.isEmpty() ||
             !(m_allowedCategories.isEmpty() || m_allowedCategories.contains(label))) {
             continue;
-        }
+        }*/
         QHash<int, QVariant> result;
         result[Label] = label;
         result[Count] = count;
