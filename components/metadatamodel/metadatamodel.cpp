@@ -151,21 +151,6 @@ BasicQueryProvider *MetadataModel::queryProvider() const
     return m_queryProvider.data();
 }
 
-void MetadataModel::setQueryString(const QString &query)
-{
-    if (query == m_queryString || query == "nepomuk") {
-        return;
-    }
-
-    m_queryString = query;
-    requestRefresh();
-    emit queryStringChanged();
-}
-
-QString MetadataModel::queryString() const
-{
-    return m_queryString;
-}
 
 void MetadataModel::setLimit(int limit)
 {
@@ -181,22 +166,6 @@ void MetadataModel::setLimit(int limit)
 int MetadataModel::limit() const
 {
     return m_limit;
-}
-
-void MetadataModel::setScoreResources(bool score)
-{
-    if (m_scoreResources == score) {
-        return;
-    }
-
-    m_scoreResources = score;
-    requestRefresh();
-    emit scoreResourcesChanged();
-}
-
-bool MetadataModel::scoreResources() const
-{
-    return m_scoreResources;
 }
 
 void MetadataModel::setLazyLoading(bool lazy)
@@ -216,61 +185,6 @@ bool MetadataModel::lazyLoading() const
 {
     return (m_pageSize > 0);
 }
-
-
-
-void MetadataModel::setSortBy(const QVariantList &sortBy)
-{
-    QStringList stringList = variantToStringList(sortBy);
-
-    if (m_sortBy == stringList) {
-        return;
-    }
-
-    m_sortBy = stringList;
-    requestRefresh();
-    emit sortByChanged();
-}
-
-QVariantList MetadataModel::sortBy() const
-{
-    return stringToVariantList(m_sortBy);
-}
-
-void MetadataModel::setSortOrder(Qt::SortOrder sortOrder)
-{
-    if (m_sortOrder == sortOrder) {
-        return;
-    }
-
-    m_sortOrder = sortOrder;
-    requestRefresh();
-    emit sortOrderChanged();
-}
-
-Qt::SortOrder MetadataModel::sortOrder() const
-{
-    return m_sortOrder;
-}
-
-
-int MetadataModel::find(const QString &resourceUri)
-{
-    int index = -1;
-    int i = 0;
-    Nepomuk2::Resource resToFind = Nepomuk2::Resource::fromResourceUri(resourceUri);
-
-    foreach (const Nepomuk2::Resource &res, m_resources) {
-        if (res == resToFind) {
-            index = i;
-            break;
-        }
-        ++i;
-    }
-
-    return index;
-}
-
 
 
 void MetadataModel::doQuery()
