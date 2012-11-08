@@ -180,13 +180,8 @@ private:
     QTime m_elapsedTime;
 
     //pieces to build m_query
-    QString m_queryString;
     int m_limit;
     int m_pageSize;
-    bool m_scoreResources;
-
-    QStringList m_sortBy;
-    Qt::SortOrder m_sortOrder;
 
     //previews
     QTimer *m_previewTimer;

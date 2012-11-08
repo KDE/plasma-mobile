@@ -61,7 +61,6 @@ MetadataModel::MetadataModel(QObject *parent)
       m_countQueryClient(0),
       m_limit(0),
       m_pageSize(30),
-      m_scoreResources(false),
       m_thumbnailSize(180, 120),
       m_thumbnailerPlugins(new QStringList(KIO::PreviewJob::availablePlugins()))
 {
