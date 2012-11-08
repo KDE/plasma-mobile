@@ -18,6 +18,7 @@
 */
 
 #include "metadatacloudmodel.h"
+#include "basicqueryprovider.h"
 
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>
@@ -60,6 +61,27 @@ MetadataCloudModel::~MetadataCloudModel()
 {
 }
 
+void MetadataCloudModel::setQueryProvider(BasicQueryProvider *provider)
+{
+    if (m_queryProvider.data() == provider) {
+        return;
+    }
+
+    if (m_queryProvider) {
+        disconnect(m_queryProvider.data(), 0, this, 0);
+    }
+
+    connect(provider, SIGNAL(queryChanged()), this, SLOT(doQuery()));
+
+    m_queryProvider = provider;
+    doQuery();
+    emit queryProviderChanged();
+}
+
+BasicQueryProvider *MetadataCloudModel::queryProvider() const
+{
+    return m_queryProvider.data();
+}
 
 void MetadataCloudModel::setCloudCategory(QString category)
 {
@@ -119,182 +141,7 @@ bool MetadataCloudModel::showEmptyCategories() const
 
 void MetadataCloudModel::doQuery()
 {
-    QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
-
-    //check if really all properties to build the query are null
-    if (m_cloudCategory.isEmpty()) {
-        return;
-    }
-
-    setRunning(true);
-    QString query;
-
-    if (!m_showEmptyCategories) {
-        query += "select * where { filter(?count != 0) { ";
-    }
-    query += "select distinct ?label "
-          "sum(?localWeight) as ?count "
-          "sum(?globalWeight) as ?totalCount "
-        "where {  ?r nie:url ?h . "
-        "{ select distinct ?r ?label "
-           "1 as ?localWeight "
-           "0 as ?globalWeight "
-          "where {";
-
-    if (m_cloudCategory == "kao:Activity") {
-        query += " ?activity nao:isRelated ?r . ?activity rdf:type kao:Activity . ?activity kao:activityIdentifier ?label ";
-    } else {
-        query += " ?r " + m_cloudCategory + " ?label";
-    }
-
-
-    if (!resourceType().isEmpty()) {
-        QString type = resourceType();
-        bool negation = false;
-        if (type.startsWith('!')) {
-            type = type.remove(0, 1);
-            negation = true;
-        }
-        if (negation) {
-            query += " . FILTER(!bif:exists((select (1) where { ?r rdf:type " + type + " . }))) ";
-        } else {
-            query += " . ?r rdf:type " + type;
-        }
-
-        if (type != "nfo:Bookmark") {
-            //FIXME: remove bookmarks if not explicitly asked for
-            query += " . FILTER(!bif:exists((select (1) where { ?r a <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark> . }))) ";
-        }
-    }
-
-    if (!mimeTypeStrings().isEmpty()) {
-        query += " { ";
-        bool first = true;
-        foreach (QString type, mimeTypeStrings()) {
-            bool negation = false;
-            if (!first) {
-                query += " UNION ";
-            }
-            first = false;
-            if (type.startsWith('!')) {
-                type = type.remove(0, 1);
-                negation = true;
-            }
-            if (negation) {
-                query += " { . FILTER(!bif:exists((select (1) where { ?r nie:mimeType \"" + type + "\"^^<http://www.w3.org/2001/XMLSchema#string> . }))) } ";
-            } else {
-                query += " { ?r nie:mimeType \"" + type + "\"^^<http://www.w3.org/2001/XMLSchema#string> . } ";
-            }
-        }
-        query += " } ";
-    }
-
-    if (parameters && parameters->size() > 0) {
-        foreach (const QString &key, parameters->keys()) {
-            QString parameter = parameters->value(key).toString();
-            bool negation = false;
-            if (parameter.startsWith('!')) {
-                parameter = parameter.remove(0, 1);
-                negation = true;
-            }
-
-            if (negation) {
-                query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " ?mimeType . FILTER(bif:contains(?mimeType, \"'" + parameter + "'\")) . }))) ";
-            } else {
-                query += " . ?r " + key + " ?mimeType . FILTER(bif:contains(?mimeType, \"'" + parameter + "'\")) ";
-            }
-        }
-    }
-
-    if (!activityId().isEmpty()) {
-        QString activity = activityId();
-        bool negation = false;
-        if (activity.startsWith('!')) {
-            activity = activity.remove(0, 1);
-            negation = true;
-        }
-        Nepomuk2::Resource acRes(activity, Nepomuk2::Vocabulary::KAO::Activity());
-
-        if (negation) {
-            query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.uri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
-        } else {
-            query +=  " . <" + acRes.uri().toString() + "> nao:isRelated ?r ";
-        }
-    }
-
-    //this is an AND set of tags.. should be allowed OR as well?
-    foreach (const QString &tag, tagStrings()) {
-        QString individualTag = tag;
-        bool negation = false;
-
-        if (individualTag.startsWith('!')) {
-            individualTag = individualTag.remove(0, 1);
-            negation = true;
-        }
-
-        if (negation) {
-            query += ". FILTER(!bif:exists((select (1) where { ?r nao:hasTag ?tagSet \
-                    . ?tagSet ?tagLabel ?tag \
-                    . ?tagLabel <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> \
-                    . FILTER(bif:contains(?tag, \"'"+individualTag+"'\"))}))) ";
-        } else {
-            query += ". ?r nao:hasTag ?tagSet \
-                    . ?tagSet ?tagLabel ?tag \
-                    . ?tagLabel <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> \
-                    . FILTER(bif:contains(?tag, \"'"+individualTag+"'\")) ";
-        }
-    }
-
-    if (startDate().isValid() || endDate().isValid()) {
-        if (startDate().isValid()) {
-            query += " . { \
-            ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#lastModified> ?v2 . FILTER(?v2>\"" + startDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            } UNION {\
-            ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#contentCreated> ?v3 . FILTER(?v3>\"" + startDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            } UNION {\
-            ?v4 <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#involves> ?r .\
-            ?v4 <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#start> ?v5 .\ FILTER(?v5>\"" + startDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            }";
-        }
-        if (endDate().isValid()) {
-            query += " . { \
-            ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#lastModified> ?v2 . FILTER(?v2<\"" + endDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            } UNION {\
-            ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#contentCreated> ?v3 . FILTER(?v3<\"" + endDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            } UNION {\
-            ?v4 <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#involves> ?r .\
-            ?v4 <http://www.semanticdesktop.org/ontologies/2010/01/25/nuao#start> ?v5 .\ FILTER(?v5<\"" + endDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) . \
-            }";
-        }
-    }
-
-    if (minimumRating() > 0) {
-        query += " . ?r nao:numericRating ?rating filter (?rating >=" + QString::number(minimumRating()) + ") ";
-    }
-
-    if (maximumRating() > 0) {
-        query += " . ?r nao:numericRating ?rating filter (?rating <=" + QString::number(maximumRating()) + ") ";
-    }
-
-    //Exclude who doesn't have url
-    query += " . ?r nie:url ?h . ";
-
-    //User visibility filter doesn't seem to have an acceptable speed
-    //query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) } group by ?label order by ?label";
-
-    query += "}} UNION { "
-              "select distinct ?r ?label "
-                "0 as ?localWeight "
-                "1 as ?globalWeight "
-              "where { "
-                "?r " + m_cloudCategory + " ?label . "
-                "?r nie:url ?h . }}";
-
-    query +=  " } group by ?label order by ?label";
-
-    if (!m_showEmptyCategories) {
-        query +=  " }} ";
-    }
+    QString query = queryProvider()->sparqlQuery();
 
     kDebug() << "Performing the Sparql query" << query;
 

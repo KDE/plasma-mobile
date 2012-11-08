@@ -121,6 +121,9 @@ public:
     void setQuery(const Nepomuk2::Query::Query &query);
     Nepomuk2::Query::Query query() const;
 
+    void setSparqlQuery(const QString &query);
+    QString sparqlQuery() const;
+
     void setResourceType(const QString &type);
     QString resourceType() const;
 
@@ -160,6 +163,7 @@ public:
 
 Q_SIGNALS:
     void queryChanged();
+    void sparqlQueryChanged();
     void resourceTypeChanged();
     void mimeTypesChanged();
     void activityIdChanged();
@@ -264,6 +268,7 @@ private:
     QDeclarativePropertyMap *m_extraParameters;
 
     Nepomuk2::Query::Query m_query;
+    QString m_sparqlQuery;
 };
 
 #endif

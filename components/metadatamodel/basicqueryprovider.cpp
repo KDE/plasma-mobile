@@ -61,6 +61,21 @@ Nepomuk2::Query::Query BasicQueryProvider::query() const
     return m_query;
 }
 
+void BasicQueryProvider::setSparqlQuery(const QString &query)
+{
+    if (m_sparqlQuery == query) {
+        return;
+    }
+
+    m_sparqlQuery = query;
+    emit sparqlQueryChanged();
+}
+
+QString BasicQueryProvider::sparqlQuery() const
+{
+    return m_sparqlQuery;
+}
+
 void BasicQueryProvider::setResourceType(const QString &type)
 {
     if (m_resourceType == type) {

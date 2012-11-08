@@ -34,6 +34,8 @@ namespace Nepomuk2 {
     class ResourceWatcher;
 }
 
+class BasicQueryProvider;
+
 /**
  * This model shows aggregates of results and their count, to build things such as a tag cloud: pairs of tag name/count of items in the cloud.
  * Besides seriving as a tag cloud it can group by any other Nepomuk2 Resource property, such as date, name, file type etc.
@@ -75,6 +77,9 @@ public:
     MetadataCloudModel(QObject *parent = 0);
     ~MetadataCloudModel();
 
+    void setQueryProvider(BasicQueryProvider *provider);
+    BasicQueryProvider *queryProvider() const;
+
     virtual int count() const {return m_results.count();}
 
     QVariantList categories() const;
@@ -96,6 +101,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const;
 
 Q_SIGNALS:
+   void queryProviderChanged();
    void cloudCategoryChanged();
    void categoriesChanged();
    void allowedCategoriesChanged();
@@ -116,6 +122,8 @@ private:
     //pieces to build m_query
     QString m_cloudCategory;
     bool m_showEmptyCategories;
+
+    QWeakPointer<BasicQueryProvider> m_queryProvider;
 };
 
 #endif
