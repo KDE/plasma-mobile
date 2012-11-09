@@ -50,6 +50,8 @@ class MetadataCloudModel : public AbstractMetadataModel
      */
     Q_PROPERTY(QVariantList categories READ categories NOTIFY categoriesChanged)
 
+    Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
+
 public:
     enum Roles {
         Label = Qt::UserRole+1,

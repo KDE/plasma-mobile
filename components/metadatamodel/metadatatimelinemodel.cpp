@@ -18,6 +18,8 @@
 */
 
 #include "metadatatimelinemodel.h"
+#include "basicqueryprovider.h"
+#include "timelinequeryprovider.h"
 
 
 #include <KDebug>
@@ -62,197 +64,37 @@ MetadataTimelineModel::~MetadataTimelineModel()
 {
 }
 
-
-void MetadataTimelineModel::setLevel(MetadataTimelineModel::Level level)
+void MetadataTimelineModel::setQueryProvider(BasicQueryProvider *provider)
 {
-    if (m_level == level) {
+    if (m_queryProvider.data() == provider) {
         return;
     }
 
-    m_level = level;
-    requestRefresh();
-    emit levelChanged();
-}
-
-MetadataTimelineModel::Level MetadataTimelineModel::level() const
-{
-    return m_level;
-}
-
-
-QString MetadataTimelineModel::description() const
-{
-    if (m_results.isEmpty()) {
-        return QString();
+    if (m_queryProvider) {
+        disconnect(m_queryProvider.data(), 0, this, 0);
     }
 
-    //TODO: manage cases where start and enddate cover more than one year/month
-    switch (m_level) {
-    case Year:
-        return i18n("All years");
-    case Month:
-        return KGlobal::locale()->calendar()->yearString(startDate(), KCalendarSystem::LongFormat);
-    case Day:
-    default:
-        return i18nc("Month and year, such as March 2007", "%1 %2", KGlobal::locale()->calendar()->monthName(startDate(), KCalendarSystem::LongName), KGlobal::locale()->calendar()->yearString(startDate(), KCalendarSystem::LongFormat));
-    }
+    connect(provider, SIGNAL(queryChanged()), this, SLOT(doQuery()));
+
+    m_queryProvider = provider;
+    doQuery();
+    emit queryProviderChanged();
+}
+
+BasicQueryProvider *MetadataTimelineModel::queryProvider() const
+{
+    return m_queryProvider.data();
 }
 
 
 void MetadataTimelineModel::doQuery()
 {
-    QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
+    QString query = queryProvider()->sparqlQuery();
 
     m_totalCount = 0;
-
-    setRunning(true);
-    QString monthQuery;
-    QString dayQuery;
-
-    if (m_level >= Month) {
-        monthQuery = "bif:month(?label)";
-    } else {
-        monthQuery = '0';
-    }
-    if (m_level >= Day) {
-        dayQuery = "bif:dayofmonth(?label)";
-    } else {
-        dayQuery = '0';
-    }
-
-    QString query = QString("select distinct bif:year(?label) as ?year %1 as ?month %2 as ?day count(*) as ?count where { ?r nie:lastModified ?label  ").arg(monthQuery).arg(dayQuery);
-
-
-    if (!resourceType().isEmpty()) {
-        QString type = resourceType();
-        bool negation = false;
-        if (type.startsWith('!')) {
-            type = type.remove(0, 1);
-            negation = true;
-        }
-        if (negation) {
-            query += " . FILTER(!bif:exists((select (1) where { ?r rdf:type " + type + " . }))) ";
-        } else {
-            query += " . ?r rdf:type " + type;
-        }
-
-        if (type != "nfo:Bookmark") {
-            //FIXME: remove bookmarks if not explicitly asked for
-            query += " . FILTER(!bif:exists((select (1) where { ?r a <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark> . }))) ";
-        }
-    }
-
-    if (!mimeTypeStrings().isEmpty()) {
-        query += " { ";
-        bool first = true;
-        foreach (QString type, mimeTypeStrings()) {
-            bool negation = false;
-            if (!first) {
-                query += " UNION ";
-            }
-            first = false;
-            if (type.startsWith('!')) {
-                type = type.remove(0, 1);
-                negation = true;
-            }
-            if (negation) {
-                query += " { . FILTER(!bif:exists((select (1) where { ?r nie:mimeType \"" + type + "\"^^<http://www.w3.org/2001/XMLSchema#string> . }))) } ";
-            } else {
-                query += " { ?r nie:mimeType \"" + type + "\"^^<http://www.w3.org/2001/XMLSchema#string> . } ";
-            }
-        }
-        query += " } ";
-    }
-
-    if (parameters && parameters->size() > 0) {
-        foreach (const QString &key, parameters->keys()) {
-            QString parameter = parameters->value(key).toString();
-            bool negation = false;
-            if (parameter.startsWith('!')) {
-                parameter = parameter.remove(0, 1);
-                negation = true;
-            }
-
-            if (negation) {
-                query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " ?mimeType . FILTER(bif:contains(?mimeType, \"'" + parameter + "'\")) . }))) ";
-            } else {
-                query += " . ?r " + key + " ?mimeType . FILTER(bif:contains(?mimeType, \"'" + parameter + "'\")) ";
-            }
-        }
-    }
-
-    if (!activityId().isEmpty()) {
-        QString activity = activityId();
-        bool negation = false;
-        if (activity.startsWith('!')) {
-            activity = activity.remove(0, 1);
-            negation = true;
-        }
-        Nepomuk2::Resource acRes(activity, Nepomuk2::Vocabulary::KAO::Activity());
-
-        if (negation) {
-            query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.uri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
-        } else {
-            query +=  " . <" + acRes.uri().toString() + "> nao:isRelated ?r ";
-        }
-    }
-
-    //this is an AND set of tags.. should be allowed OR as well?
-    foreach (const QString &tag, tagStrings()) {
-        QString individualTag = tag;
-        bool negation = false;
-
-        if (individualTag.startsWith('!')) {
-            individualTag = individualTag.remove(0, 1);
-            negation = true;
-        }
-
-        if (negation) {
-            query += ". FILTER(!bif:exists((select (1) where { ?r nao:hasTag ?tagSet \
-                    . ?tagSet ?tagLabel ?tag \
-                    . ?tagLabel <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> \
-                    . FILTER(bif:contains(?tag, \"'"+individualTag+"'\"))}))) ";
-        } else {
-            query += ". ?r nao:hasTag ?tagSet \
-                    . ?tagSet ?tagLabel ?tag \
-                    . ?tagLabel <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2000/01/rdf-schema#label> \
-                    . FILTER(bif:contains(?tag, \"'"+individualTag+"'\")) ";
-        }
-    }
-
-    if (startDate().isValid() || endDate().isValid()) {
-        if (startDate().isValid()) {
-            query += ". ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#lastModified> ?v2 . FILTER(?v2>\"" + startDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) ";
-        }
-        if (endDate().isValid()) {
-            query += ". ?r <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#lastModified> ?v2 . FILTER(?v2<\"" + endDate().toString(Qt::ISODate) + "\"^^<http://www.w3.org/2001/XMLSchema#dateTime>) ";
-        }
-    }
-
-    if (minimumRating() > 0) {
-        query += " . ?r nao:numericRating ?rating filter (?rating >=" + QString::number(minimumRating()) + ") ";
-    }
-
-    if (maximumRating() > 0) {
-        query += " . ?r nao:numericRating ?rating filter (?rating <=" + QString::number(maximumRating()) + ") ";
-    }
-
-    //user visibility is too slow
-    //query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) }";
-    query += "}";
-
-    //Group by construction
-    query += " group by bif:year(?label) ";
-    if (m_level >= Month) {
-        query += " bif:month(?label) ";
-    }
-    if (m_level >= Day) {
-        query += " bif:dayofmonth(?label) ";
-    }
-    query += " order by ?year ?month ?day ";
-
     kDebug() << "Performing the Sparql query" << query;
 
+    setRunning(true);
     beginResetModel();
     m_results.clear();
     endResetModel();
@@ -278,7 +120,6 @@ void MetadataTimelineModel::doQuery()
 void MetadataTimelineModel::newEntries(const QList< Nepomuk2::Query::Result > &entries)
 {
     QVector<QHash<Roles, int> > results;
-    QVariantList categories;
     foreach (const Nepomuk2::Query::Result &res, entries) {
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
@@ -299,7 +140,6 @@ void MetadataTimelineModel::newEntries(const QList< Nepomuk2::Query::Result > &e
     if (results.count() > 0) {
         beginInsertRows(QModelIndex(), m_results.count(), m_results.count()+results.count());
         m_results << results;
-        m_categories << categories;
         endInsertRows();
         emit countChanged();
         emit totalCountChanged();
@@ -332,13 +172,19 @@ QVariant MetadataTimelineModel::data(const QModelIndex &index, int role) const
 
     const QHash<Roles, int> row = m_results[index.row()];
 
+    //HACK HACK
+    TimelineQueryProvider *tp = qobject_cast<TimelineQueryProvider *>(queryProvider());
+    if (!tp) {
+        return QVariant();
+    }
+
     if (role == LabelRole) {
-        switch(m_level) {
-        case Year:
+        switch(tp->level()) {
+        case TimelineQueryProvider::Year:
             return row.value(YearRole);
-        case Month:
+        case TimelineQueryProvider::Month:
             return KGlobal::locale()->calendar()->monthName(row.value(MonthRole),  row.value(YearRole), KCalendarSystem::LongName);
-        case Day:
+        case TimelineQueryProvider::Day:
         default:
             return row.value(DayRole);
         }

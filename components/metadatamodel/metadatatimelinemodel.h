@@ -34,6 +34,8 @@ namespace Nepomuk2 {
     class ResourceWatcher;
 }
 
+class BasicQueryProvider;
+
 /**
  * This model given a query built by assigning its properties such as queryString, resourceType, startDate etc, constructs a timeline that groups pairs of period of time/number of items.
  * It can group by Year, Month, or Day.
@@ -43,21 +45,12 @@ namespace Nepomuk2 {
 class MetadataTimelineModel : public AbstractMetadataModel
 {
     Q_OBJECT
-
-    /**
-     * @property Level The level of the categorization, may be Year, Month or Day
-     */
-    Q_PROPERTY(Level level READ level WRITE setLevel NOTIFY levelChanged)
-
     /**
      * @property int Total count of resource items: this is not the number of rows of the result, but the aggregate of how many items there are for each separate item.
      */
     Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
 
-    /**
-     * @property string An user-readable description of the results shown, such as "All years", "Year 2011" or "March 2007"
-     */
-    Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
+    Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
 
 public:
     enum Roles {
@@ -68,35 +61,24 @@ public:
         CountRole = Qt::UserRole + 5
     };
 
-    /**
-     * @enum Level the detail of the categorization: show years, months or days
-     */
-    enum Level {
-        Year = 0,
-        Month,
-        Day
-    };
-    Q_ENUMS(Level)
-
     MetadataTimelineModel(QObject *parent = 0);
     ~MetadataTimelineModel();
 
+    void setQueryProvider(BasicQueryProvider *provider);
+    BasicQueryProvider *queryProvider() const;
+
+
     virtual int count() const {return m_results.count();}
 
-    void setLevel(Level level);
-    Level level() const;
-
     int totalCount() const {return m_totalCount;}
-
-    QString description() const;
 
     //Reimplemented
     QVariant data(const QModelIndex &index, int role) const;
 
 Q_SIGNALS:
-   void levelChanged();
    void totalCountChanged();
    void descriptionChanged();
+   void queryProviderChanged();
 
 protected Q_SLOTS:
     void newEntries(const QList< Nepomuk2::Query::Result > &entries);
@@ -107,9 +89,9 @@ protected Q_SLOTS:
 private:
     Nepomuk2::Query::QueryServiceClient *m_queryClient;
     QVector<QHash<Roles, int> > m_results;
-    QVariantList m_categories;
-    Level m_level;
+
     int m_totalCount;
+    QWeakPointer<BasicQueryProvider> m_queryProvider;
 };
 
 #endif
