@@ -29,6 +29,8 @@
 #include "metadatausertypes.h"
 #include "basicqueryprovider.h"
 #include "resourcequeryprovider.h"
+#include "cloudqueryprovider.h"
+#include "timelinequeryprovider.h"
 
 void DataModelsPlugin::registerTypes(const char *uri)
 {
@@ -36,6 +38,9 @@ void DataModelsPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<BasicQueryProvider>(uri, 0, 1, "BasicQueryProvider");
     qmlRegisterType<ResourceQueryProvider>(uri, 0, 1, "ResourceQueryProvider");
+    qmlRegisterType<CloudQueryProvider>(uri, 0, 1, "CloudQueryProvider");
+    qmlRegisterType<TimelineQueryProvider>(uri, 0, 1, "TimelineQueryProvider");
+    
 
     qmlRegisterType<MetadataModel>(uri, 0, 1, "MetadataModel");
     qmlRegisterType<MetadataCloudModel>(uri, 0, 1, "MetadataCloudModel");
