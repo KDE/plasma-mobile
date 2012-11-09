@@ -19,6 +19,7 @@
 
 #include "metadatacloudmodel.h"
 #include "basicqueryprovider.h"
+#include "cloudqueryprovider.h"
 
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>
@@ -141,11 +142,15 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
             continue;
         }
 
-        /*TODO: make allowedcategories work again somehow
-        if (label.isEmpty() ||
-            !(m_allowedCategories.isEmpty() || m_allowedCategories.contains(label))) {
-            continue;
-        }*/
+        //TODO: make allowedcategories work again somehow
+        CloudQueryProvider *cp = qobject_cast<CloudQueryProvider *>(queryProvider());
+        if (cp) {
+            if (label.isEmpty() ||
+                !(cp->allowedCategories().isEmpty() ||
+                cp->allowedCategories().contains(label))) {
+                continue;
+            }
+        }
         QHash<int, QVariant> result;
         result[Label] = label;
         result[Count] = count;
