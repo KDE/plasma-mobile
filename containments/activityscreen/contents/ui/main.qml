@@ -96,9 +96,11 @@ Item {
 
     MetadataModels.MetadataCloudModel {
         id: categoryListModel
-        cloudCategory: "rdf:type"
-        activityId: plasmoid.activityId
-        allowedCategories: userTypes.userTypes
+        queryProvider: MetadataModels.CloudQueryProvider {
+            cloudCategory: "rdf:type"
+            activityId: plasmoid.activityId
+            allowedCategories: userTypes.userTypes
+        }
         onCategoriesChanged: {
             categoriesTimer.restart()
         }

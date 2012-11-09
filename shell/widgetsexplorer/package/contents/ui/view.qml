@@ -88,8 +88,10 @@ PlasmaComponents.Sheet {
 
     MetadataModels.MetadataCloudModel {
         id: cloudModel
-        cloudCategory: "rdf:type"
-        allowedCategories: userTypes.userTypes
+        queryProvider: MetadataModels.CloudQueryProvider {
+            cloudCategory: "rdf:type"
+            allowedCategories: userTypes.userTypes
+        }
     }
 
     PlasmaCore.DataSource {
@@ -159,10 +161,12 @@ PlasmaComponents.Sheet {
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
                 id: runnerModel
-                queryString: searchField.searchQuery.length > 3 ? "*" + searchField.searchQuery + "*" : ""
-                onQueryStringChanged: {
-                    if (searchField.searchQuery.length <= 3) {
-                        stack.pop()
+                queryProvider: MetadataModels.ResourceQueryProvider {
+                    queryString: searchField.searchQuery.length > 3 ? "*" + searchField.searchQuery + "*" : ""
+                    onQueryStringChanged: {
+                        if (searchField.searchQuery.length <= 3) {
+                            stack.pop()
+                        }
                     }
                 }
                 Component.onCompleted: {
