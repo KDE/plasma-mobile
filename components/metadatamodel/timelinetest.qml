@@ -41,16 +41,18 @@ Item {
 
         model: MetadataTimelineModel {
             id: metadataTimelineModel
-            level: MetadataTimelineModel.Month
-            //queryString: "pdf"
-            //resourceType: "nfo:Document"
-            //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
-            //sortBy: ["nie#url", "nao#lastModified"]
-            startDate: "2011-01-01"
-            endDate: "2011-12-31"
-            //tags: ["kde"]
-            //minimumRating: 5
-            //allowedCategories: userTypes.userTypes
+            queryProvider: TimelineQueryProvider {
+                level: MetadataTimelineModel.Month
+                //queryString: "pdf"
+                //resourceType: "nfo:Document"
+                //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
+                //sortBy: ["nie#url", "nao#lastModified"]
+                startDate: "2011-01-01"
+                endDate: "2012-12-31"
+                //tags: ["kde"]
+                //minimumRating: 5
+                //allowedCategories: userTypes.userTypes
+            }
         }
 
         delegate: Row {
@@ -64,14 +66,14 @@ Item {
         }
     }
     Button {
-        text: (metadataTimelineModel.startDate == "2009-10-10") ? "2011-12-31" : "2009-10-10"
+        text: (metadataTimelineModel.queryProvider.startDate == "2009-10-10") ? "2011-12-31" : "2009-10-10"
         onClicked: {
-            if (metadataTimelineModel.startDate == "2009-10-10") {
-                metadataTimelineModel.startDate = "2011-01-01"
-                metadataTimelineModel.endDate =  "2011-12-31"
+            if (metadataTimelineModel.queryProvider.startDate == "2009-10-10") {
+                metadataTimelineModel.queryProvider.startDate = "2011-01-01"
+                metadataTimelineModel.queryProvider.endDate =  "2011-12-31"
             } else {
-                metadataTimelineModel.startDate = "2009-10-10"
-                metadataTimelineModel.endDate =  "2011-12-31"
+                metadataTimelineModel.queryProvider.startDate = "2009-10-10"
+                metadataTimelineModel.queryProvider.endDate =  "2011-12-31"
             }
         }
     }

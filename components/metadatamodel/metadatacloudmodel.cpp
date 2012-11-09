@@ -71,6 +71,7 @@ void MetadataCloudModel::setQueryProvider(BasicQueryProvider *provider)
     }
 
     connect(provider, SIGNAL(queryChanged()), this, SLOT(doQuery()));
+    connect(provider, SIGNAL(sparqlQueryChanged()), this, SLOT(doQuery()));
 
     m_queryProvider = provider;
     doQuery();
@@ -92,7 +93,7 @@ void MetadataCloudModel::doQuery()
     QString query = queryProvider()->sparqlQuery();
 
     setRunning(true);
-    kDebug() << "Performing the Sparql query" << query;
+    kWarning() << "Performing the Sparql query" << query;
 
     beginResetModel();
     m_results.clear();

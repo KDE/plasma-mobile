@@ -75,6 +75,7 @@ void MetadataTimelineModel::setQueryProvider(BasicQueryProvider *provider)
     }
 
     connect(provider, SIGNAL(queryChanged()), this, SLOT(doQuery()));
+    connect(provider, SIGNAL(sparqlQueryChanged()), this, SLOT(doQuery()));
 
     m_queryProvider = provider;
     doQuery();
