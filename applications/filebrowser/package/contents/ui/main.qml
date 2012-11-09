@@ -44,11 +44,13 @@ Image {
     //BEGIN model
     MetadataModels.MetadataModel {
         id: metadataModel
-        sortBy: [userTypes.sortFields[metadataModel.resourceType]]
-        //sortOrder: Qt.DescendingOrder
-        //queryString: "pdf"
-        resourceType: exclusiveResourceType
-        mimeTypes: exclusiveMimeTypes
+        queryProvider: MetadataModels.ResourceQueryProvider {
+            sortBy: [userTypes.sortFields[metadataModel.queryProvider.resourceType]]
+            //sortOrder: Qt.DescendingOrder
+            //queryString: "pdf"
+            resourceType: exclusiveResourceType
+            mimeTypes: exclusiveMimeTypes
+        }
     }
 
     PlasmaCore.DataSource {

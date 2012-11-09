@@ -61,10 +61,12 @@ PlasmaComponents.Page {
                     id: sortFilterModel
                     sourceModel: MetadataModels.MetadataCloudModel {
                         id: tagCloud
-                        cloudCategory: "nao:hasTag"
-                        showEmptyCategories: true
-                        resourceType: metadataModel.resourceType
-                        minimumRating: metadataModel.minimumRating
+                        queryProvider: MetadataModels.CloudQueryProvider {
+                            cloudCategory: "nao:hasTag"
+                            showEmptyCategories: true
+                            resourceType: metadataModel.queryProvider.resourceType
+                            minimumRating: metadataModel.queryProvider.minimumRating
+                        }
                     }
                     sortRole: "label"
                 }
@@ -132,15 +134,15 @@ PlasmaComponents.Page {
                         }
                         onClicked: checked = !checked
                         onCheckedChanged: {
-                            var tags = metadataModel.tags
+                            var tags = metadataModel.queryProvider.tags
                             if (checked) {
                                 tags[tags.length] = model["label"];
-                                metadataModel.tags = tags
+                                metadataModel.queryProvider.tags = tags
                             } else {
                                 for (var i = 0; i < tags.length; ++i) {
                                     if (tags[i] == model["label"]) {
                                         tags.splice(i, 1);
-                                        metadataModel.tags = tags
+                                        metadataModel.queryProvider.tags = tags
                                         break;
                                     }
                                 }
