@@ -49,6 +49,26 @@ BasicQueryProvider::~BasicQueryProvider()
 }
 
 
+void BasicQueryProvider::setRoleNames(const QHash<int, QByteArray> &names)
+{
+    m_roleNames = names;
+    m_roleIds.clear();
+    QHash<int, QByteArray>::const_iterator i;
+    for (i = names.constBegin(); i != names.constEnd(); ++i) {
+        m_roleIds[i.value()] = i.key();
+    }
+}
+
+QHash<int, QByteArray> BasicQueryProvider::roleNames() const
+{
+    return m_roleNames;
+}
+
+QHash<QString, int> BasicQueryProvider::roleIds() const
+{
+    return m_roleIds;
+}
+
 void BasicQueryProvider::setQuery(const Nepomuk2::Query::Query &query)
 {
     m_query = query;

@@ -115,9 +115,13 @@ public:
     BasicQueryProvider(QObject *parent = 0);
     ~BasicQueryProvider();
 
+
     /**
      * C++ API
      */
+    QHash<int, QByteArray> roleNames() const;
+    QHash<QString, int> roleIds() const;
+
     void setQuery(const Nepomuk2::Query::Query &query);
     Nepomuk2::Query::Query query() const;
 
@@ -178,6 +182,7 @@ protected Q_SLOTS:
     virtual void doQuery();
 
 protected:
+    void setRoleNames(const QHash<int, QByteArray> &names);
     QString retrieveIconName(const QStringList &types) const;
     /* from nie:url
      * to QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")
@@ -255,6 +260,8 @@ protected:
     void requestRefresh();
 
 private:
+    QHash<int, QByteArray> m_roleNames;
+    QHash<QString, int> m_roleIds;
     QTimer *m_queryTimer;
 
     QString m_resourceType;

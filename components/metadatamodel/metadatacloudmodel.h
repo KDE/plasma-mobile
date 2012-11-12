@@ -53,12 +53,6 @@ class MetadataCloudModel : public AbstractMetadataModel
     Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
 
 public:
-    enum Roles {
-        Label = Qt::UserRole+1,
-        Count,
-        TotalCount
-    };
-
     MetadataCloudModel(QObject *parent = 0);
     ~MetadataCloudModel();
 

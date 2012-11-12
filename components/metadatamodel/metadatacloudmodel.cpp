@@ -50,11 +50,6 @@ MetadataCloudModel::MetadataCloudModel(QObject *parent)
     : AbstractMetadataModel(parent),
       m_queryClient(0)
 {
-    QHash<int, QByteArray> roleNames;
-    roleNames[Label] = "label";
-    roleNames[Count] = "count";
-    roleNames[TotalCount] = "totalCount";
-    setRoleNames(roleNames);
 }
 
 MetadataCloudModel::~MetadataCloudModel()
@@ -67,6 +62,7 @@ void MetadataCloudModel::setQueryProvider(BasicQueryProvider *provider)
         return;
     }
 
+    setRoleNames(provider->roleNames());
     if (m_queryProvider) {
         disconnect(m_queryProvider.data(), 0, this, 0);
     }
@@ -119,6 +115,29 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
     QVariantList categories;
 
     foreach (const Nepomuk2::Query::Result &res, entries) {
+        QHash<int, QVariant> result;
+        foreach(const QString &name, res.additionalBindings().bindingNames()) {
+            if (!m_queryProvider.data()->roleIds().contains(name)) {
+                continue;
+            }
+
+            const QVariant val = res.additionalBinding(name.toLatin1()).variant();
+            if (val.canConvert<QUrl>()) {
+                const QUrl url = val.value<QUrl>();
+                if (url.scheme() == "nepomuk") {
+                    result[m_queryProvider.data()->roleIds().value(name)] = Nepomuk2::Resource(url).genericLabel();
+                //TODO: it should convert from ontology url to short form nfo:Document
+                } else {
+                    result[m_queryProvider.data()->roleIds().value(name)] = propertyShortName(url);
+                }
+            } else {
+                result[m_queryProvider.data()->roleIds().value(name)] = val;
+            }
+        }
+
+        results << result;
+        continue;
+
         QString label;
         int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
         int totalCount = res.additionalBinding(QLatin1String("totalCount")).variant().toInt();
@@ -151,12 +170,12 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
                 continue;
             }
         }*/
-        QHash<int, QVariant> result;
+/*        QHash<int, QVariant> result;
         result[Label] = label;
         result[Count] = count;
         result[TotalCount] = totalCount;
         results << result;
-        categories << label;
+        categories << label;*/
     }
     if (results.count() > 0) {
         beginInsertRows(QModelIndex(), m_results.count(), m_results.count()+results.count()-1);

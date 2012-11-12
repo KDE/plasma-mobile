@@ -44,6 +44,11 @@ class CloudQueryProvider : public BasicQueryProvider
 
 
 public:
+    enum Roles {
+        Label = Qt::UserRole+1,
+        Count,
+        TotalCount
+    };
     CloudQueryProvider(QObject* parent = 0);
     ~CloudQueryProvider();
 

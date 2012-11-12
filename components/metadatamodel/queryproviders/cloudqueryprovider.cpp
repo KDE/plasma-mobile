@@ -41,7 +41,12 @@ CloudQueryProvider::CloudQueryProvider(QObject* parent)
     : BasicQueryProvider(parent),
       m_showEmptyCategories(false)
 {
+    QHash<int, QByteArray> roleNames;
+    roleNames[Label] = "label";
+    roleNames[Count] = "count";
+    roleNames[TotalCount] = "totalCount";
 
+    setRoleNames(roleNames);
 }
 
 CloudQueryProvider::~CloudQueryProvider()
