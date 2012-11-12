@@ -47,8 +47,18 @@ public:
     };
     Q_ENUMS(Level)
 
+    enum Roles {
+        LabelRole = Qt::UserRole + 1,
+        YearRole = Qt::UserRole + 2,
+        MonthRole = Qt::UserRole + 3,
+        DayRole = Qt::UserRole + 4,
+        CountRole = Qt::UserRole + 5
+    };
+
     TimelineQueryProvider(QObject* parent = 0);
     ~TimelineQueryProvider();
+
+    virtual QVariant formatData(const QHash<int, QVariant> &row, int role);
 
     void setLevel(Level level);
     Level level() const;

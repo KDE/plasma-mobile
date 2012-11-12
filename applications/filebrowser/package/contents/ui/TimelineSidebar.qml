@@ -142,7 +142,7 @@ PlasmaComponents.Page {
                 spacing: 40
                 Repeater {
                     id: timelineRepeater
-                    model: MetadataModels.MetadataTimelineModel {
+                    model: MetadataModels.MetadataCloudModel {
                         id: metadataTimelineModel
                         queryProvider: MetadataModels.TimelineQueryProvider {
                             level: MetadataModels.TimelineQueryProvider.Year

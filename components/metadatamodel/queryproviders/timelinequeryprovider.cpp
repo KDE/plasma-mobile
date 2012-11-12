@@ -40,7 +40,13 @@
 
 TimelineQueryProvider::TimelineQueryProvider(QObject* parent): BasicQueryProvider(parent)
 {
-
+    QHash<int, QByteArray> roleNames;
+    roleNames[LabelRole] = "label";
+    roleNames[YearRole] = "year";
+    roleNames[MonthRole] = "month";
+    roleNames[DayRole] = "day";
+    roleNames[CountRole] = "count";
+    setRoleNames(roleNames);
 }
 
 TimelineQueryProvider::~TimelineQueryProvider()
@@ -230,6 +236,22 @@ void TimelineQueryProvider::doQuery()
     query += " order by ?year ?month ?day ";
 
     setSparqlQuery(query);
+}
+
+QVariant TimelineQueryProvider::formatData(const QHash<int, QVariant> &row, int role)
+{
+    if (role == LabelRole) {
+        switch(level()) {
+        case TimelineQueryProvider::Year:
+            return row.value(YearRole);
+        case TimelineQueryProvider::Month:
+            return KGlobal::locale()->calendar()->monthName(row.value(MonthRole).toInt(),  row.value(YearRole).toInt(), KCalendarSystem::LongName);
+        case TimelineQueryProvider::Day:
+        default:
+            return row.value(DayRole);
+        }
+    }
+    return BasicQueryProvider::formatData(row, role);
 }
 
 #include "timelinequeryprovider.moc"

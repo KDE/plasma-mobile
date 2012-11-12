@@ -89,6 +89,7 @@ void MetadataCloudModel::doQuery()
 {
     QString query = queryProvider()->sparqlQuery();
 
+    m_totalCount = 0;
     setRunning(true);
     kWarning() << "Performing the Sparql query" << query;
 
@@ -96,6 +97,7 @@ void MetadataCloudModel::doQuery()
     m_results.clear();
     endResetModel();
     emit countChanged();
+    emit totalCountChanged();
 
     delete m_queryClient;
     m_queryClient = new Nepomuk2::Query::QueryServiceClient(this);
@@ -116,67 +118,36 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
 
     foreach (const Nepomuk2::Query::Result &res, entries) {
         QHash<int, QVariant> result;
+        int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
         foreach(const QString &name, res.additionalBindings().bindingNames()) {
             if (!m_queryProvider.data()->roleIds().contains(name)) {
                 continue;
             }
 
             const QVariant val = res.additionalBinding(name.toLatin1()).variant();
+            QString label;
             if (val.canConvert<QUrl>()) {
                 const QUrl url = val.value<QUrl>();
                 if (url.scheme() == "nepomuk") {
-                    result[m_queryProvider.data()->roleIds().value(name)] = Nepomuk2::Resource(url).genericLabel();
+                    label = Nepomuk2::Resource(url).genericLabel();
                 //TODO: it should convert from ontology url to short form nfo:Document
                 } else {
-                    result[m_queryProvider.data()->roleIds().value(name)] = propertyShortName(url);
+                    label = propertyShortName(url);
                 }
             } else {
                 result[m_queryProvider.data()->roleIds().value(name)] = val;
+                label = val.value<QString>();
+            }
+            result[m_queryProvider.data()->roleIds().value(name)] = label;
+            if (label == "label") {
+                m_categories << label;
             }
         }
 
+        m_totalCount += count;
         results << result;
-        continue;
-
-        QString label;
-        int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
-        int totalCount = res.additionalBinding(QLatin1String("totalCount")).variant().toInt();
-        QVariant rawLabel = res.additionalBinding(QLatin1String("label")).variant();
-
-        if (rawLabel.canConvert<Nepomuk2::Resource>()) {
-            label = rawLabel.value<Nepomuk2::Resource>().type().toString().section( QRegExp( "[#:]" ), -1 );
-        } else if (!rawLabel.value<QUrl>().scheme().isEmpty()) {
-            const QUrl url = rawLabel.value<QUrl>();
-            if (url.scheme() == "nepomuk") {
-                label = Nepomuk2::Resource(url).genericLabel();
-            //TODO: it should convert from ontology url to short form nfo:Document
-            } else {
-                label = propertyShortName(url);
-            }
-        } else if (rawLabel.canConvert<QString>()) {
-            label = rawLabel.toString();
-        } else if (rawLabel.canConvert<int>()) {
-            label = QString::number(rawLabel.toInt());
-        } else {
-            continue;
-        }
-
-        /*//TODO: make allowedcategories work again somehow
-        CloudQueryProvider *cp = qobject_cast<CloudQueryProvider *>(queryProvider());
-        if (cp) {
-            if (label.isEmpty() ||
-                !(cp->allowedCategories().isEmpty() ||
-                cp->allowedCategories().contains(label))) {
-                continue;
-            }
-        }*/
-/*        QHash<int, QVariant> result;
-        result[Label] = label;
-        result[Count] = count;
-        result[TotalCount] = totalCount;
-        results << result;
-        categories << label;*/
     }
+
     if (results.count() > 0) {
         beginInsertRows(QModelIndex(), m_results.count(), m_results.count()+results.count()-1);
         m_results << results;
@@ -184,6 +155,9 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
         endInsertRows();
         emit countChanged();
         emit categoriesChanged();
+        if (m_totalCount > 0) {
+            emit totalCountChanged();
+        }
     }
 }
 
@@ -226,8 +200,7 @@ QVariant MetadataCloudModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    return m_results[index.row()].value(role);
-
+    return m_queryProvider.data()->formatData(m_results[index.row()], role);
 }
 
 #include "metadatacloudmodel.moc"

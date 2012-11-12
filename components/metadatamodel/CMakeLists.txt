@@ -15,7 +15,6 @@ set(datamodels_SRCS
     abstractmetadatamodel.cpp
     datamodelsplugin.cpp
     metadatacloudmodel.cpp
-    metadatatimelinemodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
 

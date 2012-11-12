@@ -121,6 +121,7 @@ public:
      */
     QHash<int, QByteArray> roleNames() const;
     QHash<QString, int> roleIds() const;
+    virtual QVariant formatData(const QHash<int, QVariant> &row, int role);
 
     void setQuery(const Nepomuk2::Query::Query &query);
     Nepomuk2::Query::Query query() const;
@@ -183,6 +184,7 @@ protected Q_SLOTS:
 
 protected:
     void setRoleNames(const QHash<int, QByteArray> &names);
+
     QString retrieveIconName(const QStringList &types) const;
     /* from nie:url
      * to QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")

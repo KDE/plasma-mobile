@@ -50,6 +50,11 @@ class MetadataCloudModel : public AbstractMetadataModel
      */
     Q_PROPERTY(QVariantList categories READ categories NOTIFY categoriesChanged)
 
+    /**
+     * @property int Total count of resource items: this is not the number of rows of the result, but the aggregate of how many items there are for each separate item. Available when a query has a column count (integer)
+     */
+    Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
+
     Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
 
 public:
@@ -60,6 +65,7 @@ public:
     BasicQueryProvider *queryProvider() const;
 
     virtual int count() const {return m_results.count();}
+    int totalCount() const {return m_totalCount;}
 
     QVariantList categories() const;
 
@@ -67,6 +73,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const;
 
 Q_SIGNALS:
+   void totalCountChanged();
    void queryProviderChanged();
    void categoriesChanged();
 
@@ -79,6 +86,7 @@ protected Q_SLOTS:
 private:
     Nepomuk2::Query::QueryServiceClient *m_queryClient;
     QVector<QHash<int, QVariant> > m_results;
+    int m_totalCount;
 
     QVariantList m_categories;
 
