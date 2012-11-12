@@ -142,7 +142,7 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
             continue;
         }
 
-        //TODO: make allowedcategories work again somehow
+        /*//TODO: make allowedcategories work again somehow
         CloudQueryProvider *cp = qobject_cast<CloudQueryProvider *>(queryProvider());
         if (cp) {
             if (label.isEmpty() ||
@@ -150,7 +150,7 @@ void MetadataCloudModel::newEntries(const QList< Nepomuk2::Query::Result > &entr
                 cp->allowedCategories().contains(label))) {
                 continue;
             }
-        }
+        }*/
         QHash<int, QVariant> result;
         result[Label] = label;
         result[Count] = count;

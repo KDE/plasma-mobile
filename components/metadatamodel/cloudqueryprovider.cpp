@@ -260,6 +260,20 @@ void CloudQueryProvider::doQuery()
     //Exclude who doesn't have url
     query += " . ?r nie:url ?h . ";
 
+    if (!m_allowedCategories.isEmpty()) {
+        query += "filter(";
+        bool first = true;
+        foreach (const QString &cat, m_allowedCategories) {
+            if (!first) {
+                query += " || ";
+            } else {
+                first = false;
+            }
+            query += " ?label = " + cat;
+        }
+        query += ")";
+    }
+
     //User visibility filter doesn't seem to have an acceptable speed
     //query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) } group by ?label order by ?label";
 
