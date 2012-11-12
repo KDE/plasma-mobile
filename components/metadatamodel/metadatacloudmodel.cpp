@@ -18,8 +18,8 @@
 */
 
 #include "metadatacloudmodel.h"
-#include "basicqueryprovider.h"
-#include "cloudqueryprovider.h"
+#include "queryproviders/basicqueryprovider.h"
+#include "queryproviders/cloudqueryprovider.h"
 
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>

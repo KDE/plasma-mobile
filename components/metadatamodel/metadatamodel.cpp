@@ -18,7 +18,7 @@
 */
 
 #include "metadatamodel.h"
-#include "basicqueryprovider.h"
+#include "queryproviders/basicqueryprovider.h"
 
 #include <cmath>
 

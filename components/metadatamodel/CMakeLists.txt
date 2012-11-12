@@ -13,15 +13,16 @@ INCLUDE_DIRECTORIES(
 
 set(datamodels_SRCS
     abstractmetadatamodel.cpp
-    cloudqueryprovider.cpp
     datamodelsplugin.cpp
     metadatacloudmodel.cpp
     metadatatimelinemodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
-    timelinequeryprovider.cpp
-    basicqueryprovider.cpp
-    resourcequeryprovider.cpp
+
+    queryproviders/cloudqueryprovider.cpp
+    queryproviders/timelinequeryprovider.cpp
+    queryproviders/basicqueryprovider.cpp
+    queryproviders/resourcequeryprovider.cpp
    )
 
 add_kao_ontology(datamodels_SRCS)

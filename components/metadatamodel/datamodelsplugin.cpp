@@ -27,10 +27,10 @@
 #include "metadatacloudmodel.h"
 #include "metadatatimelinemodel.h"
 #include "metadatausertypes.h"
-#include "basicqueryprovider.h"
-#include "resourcequeryprovider.h"
-#include "cloudqueryprovider.h"
-#include "timelinequeryprovider.h"
+#include "queryproviders/basicqueryprovider.h"
+#include "queryproviders/resourcequeryprovider.h"
+#include "queryproviders/cloudqueryprovider.h"
+#include "queryproviders/timelinequeryprovider.h"
 
 void DataModelsPlugin::registerTypes(const char *uri)
 {

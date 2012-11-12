@@ -18,8 +18,8 @@
 */
 
 #include "metadatatimelinemodel.h"
-#include "basicqueryprovider.h"
-#include "timelinequeryprovider.h"
+#include "queryproviders/basicqueryprovider.h"
+#include "queryproviders/timelinequeryprovider.h"
 
 
 #include <KDebug>
