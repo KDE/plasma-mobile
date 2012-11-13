@@ -85,7 +85,7 @@ MetadataModel::MetadataModel(QObject *parent)
             this, SLOT(delayedPreview()));
 
     //using the same cache of the engine, they index both by url
-    m_imageCache = new KImageCache("plasma_engine_preview", 10485760);
+    m_imageCache = new KImageCache("plasma_engine_preview", 41943040);
 
     m_watcher = new Nepomuk2::ResourceWatcher(this);
 
@@ -460,7 +460,7 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
 
             if (m_imageCache->findImage(url.prettyUrl(), &preview)) {
                 return preview;
-            } else if (!m_previewJobs.contains(url)) {
+            } else if (!m_filesToPreview.contains(url)) {
                 m_previewTimer->start(500);
                 //HACK
                 const_cast<MetadataModel *>(this)->m_filesToPreview[url] = QPersistentModelIndex(index);
