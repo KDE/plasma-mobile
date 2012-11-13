@@ -158,13 +158,20 @@ protected:
     void fetchResultsPage(int page);
 
 private:
+    //FIXME: remove this
+    QHash<Nepomuk2::Resource, QHash<int, QVariant> > m_cachedResources;
+
     //query construction is completely delegated to this
     QWeakPointer<BasicQueryProvider> m_queryProvider;
 
     //perform all the queries in this thread
     QueryThread *m_queryThread;
 
+    //actual query performed
     Nepomuk2::Query::Query m_query;
+    //pieces to limit how much stuff we fetch
+    int m_limit;
+    int m_pageSize;
 
     //where is the last valid (already populated) index for a given page
     QHash<int, int> m_validIndexForPage;
@@ -184,9 +191,6 @@ private:
     //used purely for benchmark
     QTime m_elapsedTime;
 
-    //pieces to build m_query
-    int m_limit;
-    int m_pageSize;
 
     //previews
     QTimer *m_previewTimer;
@@ -195,8 +199,6 @@ private:
     QHash<KUrl, QPersistentModelIndex> m_previewJobs;
     KImageCache* m_imageCache;
     QStringList* m_thumbnailerPlugins;
-
-    QHash<Nepomuk2::Resource, QHash<int, QVariant> > m_cachedResources;
 };
 
 #endif
