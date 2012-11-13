@@ -178,13 +178,13 @@ private:
 
 
     //actual main data
-    QVector<Nepomuk2::Resource> m_data;
+    QVector<Nepomuk2::Query::Result> m_data;
     //some properties may change dynamically
     Nepomuk2::ResourceWatcher* m_watcher;
     //used to event compress new results arriving
     QTimer *m_newEntriesTimer;
     //a queue by page of the data that will be inserted in the model with event compression
-    QHash<int, QList<Nepomuk2::Resource> > m_dataToInsert;
+    QHash<int, QList<Nepomuk2::Query::Result> > m_dataToInsert;
     //maps uris ro row numbers, so when entriesRemoved arrived, we know what rows to remove
     QHash<QUrl, int> m_uriToRow;
 

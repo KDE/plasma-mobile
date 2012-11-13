@@ -207,7 +207,7 @@ void MetadataModel::doQuery()
     kWarning()<<"Sparql query:"<<m_query.toSparqlQuery();
 
     beginResetModel();
-    m_data = QVector<Nepomuk2::Resource>(0);
+    m_data = QVector<Nepomuk2::Query::Result>(0);
     m_uriToRow.clear();
     m_dataToInsert.clear();
     m_validIndexForPage.clear();
@@ -252,7 +252,7 @@ void MetadataModel::countRetrieved(int count)
 
 void MetadataModel::newEntries(const QList< Nepomuk2::Query::Result > &entries, int page)
 {
-    foreach (const Nepomuk2::Query::Result &res, entries) {
+    /*foreach (const Nepomuk2::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
 
@@ -260,37 +260,10 @@ void MetadataModel::newEntries(const QList< Nepomuk2::Query::Result > &entries, 
         if (resource.property(propertyUrl("nie:url")).toString().isEmpty()) {
             continue;
         }
-        m_dataToInsert[page] << resource;
+        m_dataToInsert[page] << res;
+    }*/
 
-        /*
-
-
-
-        //FIXME: symbols seems broken on Mer
-        //indagate after PA3
-        if (0&&!resource.symbols().isEmpty()) {
-            m_cachedResources[resource][Icon] = resource.symbols().first();
-        } else {
-            //if it's an application, fetch the icon from the desktop file
-            Nepomuk2::Types::Class resClass(resource.type());
-            if (resClass.label() == "Application") {
-                KService::Ptr serv = KService::serviceByDesktopPath(m_cachedResources[resource][Url].toUrl().path());
-                if (serv) {
-                    m_cachedResources[resource][Icon] = serv->icon();
-                } else {
-                    m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
-                }
-            } else {
-                m_cachedResources[resource][Icon] = KMimeType::iconNameForUrl(m_cachedResources[resource][Url].toString());
-            }
-        }
-
-        //those seems to not be possible avoiding to access the resource
-       // m_cachedResources[resource][MimeType] = resource.mimeType();
-        m_cachedResources[resource][MimeType] = resource.property(propertyUrl("nie:mimeType")).toString();
-
-        */
-    }
+    m_dataToInsert[page] << entries;
 
     if (!m_newEntriesTimer->isActive() && !m_dataToInsert[page].isEmpty()) {
         m_newEntriesTimer->start(200);
@@ -304,9 +277,9 @@ void MetadataModel::newEntriesDelayed()
     }
 
     m_elapsedTime.start();
-    QHash<int, QList<Nepomuk2::Resource> >::const_iterator i;
+    QHash<int, QList<Nepomuk2::Query::Result> >::const_iterator i;
     for (i = m_dataToInsert.constBegin(); i != m_dataToInsert.constEnd(); ++i) {
-        const QList<Nepomuk2::Resource> resourcesToInsert = i.value();
+        const QList<Nepomuk2::Query::Result> dataToInsert = i.value();
 
         m_watcher->stop();
 
@@ -324,28 +297,35 @@ void MetadataModel::newEntriesDelayed()
             endInsertRows();
         }
         //this happens only when m_validIndexForPage has been invalidate by row removal
-        if (!m_validIndexForPage.contains(i.key()) && m_data[pageStart + startOffset].isValid()) {
-            while (startOffset < m_data.size() && m_data[pageStart + startOffset].isValid()) {
+        if (!m_validIndexForPage.contains(i.key()) && (m_data[pageStart + startOffset].resource().isValid() || m_data[pageStart + startOffset].additionalBindings().count() > 0)) {
+            while (startOffset < m_data.size() && (m_data[pageStart + startOffset].resource().isValid() || m_data[pageStart + startOffset].additionalBindings().count() > 0)) {
                 ++startOffset;
                 ++offset;
             }
         }
 
-        foreach (const Nepomuk2::Resource &res, resourcesToInsert) {
+        foreach (const Nepomuk2::Query::Result &res, dataToInsert) {
             //kDebug() << "Result!!!" << res.genericLabel() << res.type();
             //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
 
-            m_uriToRow[res.uri()] = pageStart + offset;
+            if (res.resource().isValid()) {
+                m_uriToRow[res.resource().uri()] = pageStart + offset;
+            }
+
             //there can be new results before the count query gets updated
             if (pageStart + offset < m_data.size()) {
                 m_data[pageStart + offset] = res;
-                m_watcher->addResource(res);
+                if (res.resource().isValid()) {
+                    m_watcher->addResource(res.resource());
+                }
                 ++offset;
             } else {
                 beginInsertRows(QModelIndex(), m_data.size(), pageStart + offset);
                 m_data.resize(pageStart + offset + 1);
                 m_data[pageStart + offset] = res;
-                m_watcher->addResource(res);
+                if (res.resource().isValid()) {
+                    m_watcher->addResource(res.resource());
+                }
                 ++offset;
                 endInsertRows();
             }
@@ -355,7 +335,7 @@ void MetadataModel::newEntriesDelayed()
 
         m_watcher->start();
         emit dataChanged(createIndex(pageStart + startOffset, 0),
-                         createIndex(pageStart + startOffset + resourcesToInsert.count()-1, 0));
+                         createIndex(pageStart + startOffset + dataToInsert.count()-1, 0));
     }
     kDebug() << "Elapsed time populating the model" << m_elapsedTime.elapsed();
     m_dataToInsert.clear();
@@ -408,7 +388,7 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
 
     //FIXME: this loop makes all the optimizations useless, get rid either of it or the optimizations
     for (int i = 0; i < m_data.count(); ++i) {
-        m_uriToRow[m_data[i].uri()] = i;
+        m_uriToRow[m_data[i].resource().uri()] = i;
     }
 
     emit countChanged();
@@ -443,7 +423,7 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const Nepomuk2::Resource &resource = m_data[index.row()];
+    const Nepomuk2::Resource &resource = m_data[index.row()].resource();
 
 
     if (!resource.isValid() && m_pageSize > 0 && !m_queryThread->hasQueryOnPage(floor(index.row()/m_pageSize))) {
