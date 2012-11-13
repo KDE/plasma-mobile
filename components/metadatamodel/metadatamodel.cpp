@@ -207,7 +207,7 @@ void MetadataModel::doQuery()
     kWarning()<<"Sparql query:"<<m_query.toSparqlQuery();
 
     beginResetModel();
-    m_resources = QVector<Nepomuk2::Resource>(0);
+    m_data = QVector<Nepomuk2::Resource>(0);
     m_uriToRow.clear();
     m_dataToInsert.clear();
     m_validIndexForPage.clear();
@@ -239,13 +239,13 @@ void MetadataModel::fetchResultsPage(int page)
 
 void MetadataModel::countRetrieved(int count)
 {
-    if (count < m_resources.size()) {
-        beginRemoveRows(QModelIndex(), count-1, m_resources.size()-1);
-        m_resources.resize(count);
+    if (count < m_data.size()) {
+        beginRemoveRows(QModelIndex(), count-1, m_data.size()-1);
+        m_data.resize(count);
         endRemoveRows();
-    } else if (count > m_resources.size()) {
-        beginInsertRows(QModelIndex(), m_resources.size(), count-1);
-        m_resources.resize(count);
+    } else if (count > m_data.size()) {
+        beginInsertRows(QModelIndex(), m_data.size(), count-1);
+        m_data.resize(count);
         endInsertRows();
     }
 }
@@ -318,14 +318,14 @@ void MetadataModel::newEntriesDelayed()
         int offset = startOffset;
 
         //if new result arrive on an already running query, they may arrive before countQueryResult
-        if (m_resources.size() < pageStart + startOffset + 1) {
-            beginInsertRows(QModelIndex(), m_resources.size(), pageStart + startOffset);
-            m_resources.resize(pageStart + startOffset + 1);
+        if (m_data.size() < pageStart + startOffset + 1) {
+            beginInsertRows(QModelIndex(), m_data.size(), pageStart + startOffset);
+            m_data.resize(pageStart + startOffset + 1);
             endInsertRows();
         }
         //this happens only when m_validIndexForPage has been invalidate by row removal
-        if (!m_validIndexForPage.contains(i.key()) && m_resources[pageStart + startOffset].isValid()) {
-            while (startOffset < m_resources.size() && m_resources[pageStart + startOffset].isValid()) {
+        if (!m_validIndexForPage.contains(i.key()) && m_data[pageStart + startOffset].isValid()) {
+            while (startOffset < m_data.size() && m_data[pageStart + startOffset].isValid()) {
                 ++startOffset;
                 ++offset;
             }
@@ -337,14 +337,14 @@ void MetadataModel::newEntriesDelayed()
 
             m_uriToRow[res.uri()] = pageStart + offset;
             //there can be new results before the count query gets updated
-            if (pageStart + offset < m_resources.size()) {
-                m_resources[pageStart + offset] = res;
+            if (pageStart + offset < m_data.size()) {
+                m_data[pageStart + offset] = res;
                 m_watcher->addResource(res);
                 ++offset;
             } else {
-                beginInsertRows(QModelIndex(), m_resources.size(), pageStart + offset);
-                m_resources.resize(pageStart + offset + 1);
-                m_resources[pageStart + offset] = res;
+                beginInsertRows(QModelIndex(), m_data.size(), pageStart + offset);
+                m_data.resize(pageStart + offset + 1);
+                m_data[pageStart + offset] = res;
                 m_watcher->addResource(res);
                 ++offset;
                 endInsertRows();
@@ -397,7 +397,7 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
     while (i != toRemove.constBegin()) {
         --i;
         beginRemoveRows(QModelIndex(), i.key(), i.key()+i.value()-1);
-        m_resources.remove(i.key(), i.value());
+        m_data.remove(i.key(), i.value());
         endRemoveRows();
     }
 
@@ -407,8 +407,8 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
     }
 
     //FIXME: this loop makes all the optimizations useless, get rid either of it or the optimizations
-    for (int i = 0; i < m_resources.count(); ++i) {
-        m_uriToRow[m_resources[i].uri()] = i;
+    for (int i = 0; i < m_data.count(); ++i) {
+        m_uriToRow[m_data[i].uri()] = i;
     }
 
     emit countChanged();
@@ -439,11 +439,11 @@ QString MetadataModel::resourceIcon(const Nepomuk2::Resource &resource) const
 QVariant MetadataModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || index.column() != 0 ||
-        index.row() < 0 || index.row() >= m_resources.count()){
+        index.row() < 0 || index.row() >= m_data.count()){
         return QVariant();
     }
 
-    const Nepomuk2::Resource &resource = m_resources[index.row()];
+    const Nepomuk2::Resource &resource = m_data[index.row()];
 
 
     if (!resource.isValid() && m_pageSize > 0 && !m_queryThread->hasQueryOnPage(floor(index.row()/m_pageSize))) {

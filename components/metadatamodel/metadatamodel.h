@@ -104,7 +104,7 @@ public:
     void setQueryProvider(BasicQueryProvider *provider);
     BasicQueryProvider *queryProvider() const;
 
-    virtual int count() const {return m_resources.count();}
+    virtual int count() const {return m_data.count();}
 
     void setLazyLoading(bool size);
     bool lazyLoading() const;
@@ -178,7 +178,7 @@ private:
 
 
     //actual main data
-    QVector<Nepomuk2::Resource> m_resources;
+    QVector<Nepomuk2::Resource> m_data;
     //some properties may change dynamically
     Nepomuk2::ResourceWatcher* m_watcher;
     //used to event compress new results arriving
