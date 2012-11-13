@@ -74,6 +74,7 @@ void QueryThread::setQuery(const Nepomuk2::Query::Query &query, int limit, int p
 
     connect(m_countQueryClient, SIGNAL(newEntries(QList<Nepomuk2::Query::Result>)),
             this, SLOT(countQueryResult(QList<Nepomuk2::Query::Result>)));
+    connect(m_countQueryClient, SIGNAL(error(QString)), SIGNAL(error(QString)));
 
     if (limit > 0) {
         m_query.setLimit(limit);
@@ -148,6 +149,7 @@ void QueryThread::fetchResultsPage(int page)
             this, SIGNAL(resultsRemoved(QList<QUrl>)));
     connect(client, SIGNAL(finishedListing()),
             this, SLOT(finishedListing()));
+    connect(client, SIGNAL(error(QString)), SIGNAL(error(QString)));
 
     m_queryClientsHistory << client;
     ++m_runningClients;
