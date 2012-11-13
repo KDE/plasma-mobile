@@ -144,12 +144,11 @@ Q_SIGNALS:
     void thumbnailSizeChanged();
 
 protected Q_SLOTS:
-    void countQueryResult(const QList< Nepomuk2::Query::Result > &entries);
-    void newEntries(const QList< Nepomuk2::Query::Result > &entries);
+    void countRetrieved(int count);
+    void newEntries(const QList< Nepomuk2::Query::Result > &entries, int page);
     void entriesRemoved(const QList<QUrl> &urls);
     virtual void doQuery();
     void newEntriesDelayed();
-    void finishedListing();
     void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val);
     void showPreview(const KFileItem &item, const QPixmap &preview);
     void previewFailed(const KFileItem &item);
@@ -162,19 +161,10 @@ private:
     QueryThread *m_queryThread;
 
     Nepomuk2::Query::Query m_query;
-    //mapping page->query client
-    QHash<int, Nepomuk2::Query::QueryServiceClient *> m_queryClients;
-    //mapping query client->page
-    QHash<Nepomuk2::Query::QueryServiceClient *, int> m_pagesForClient;
+
     //where is the last valid (already populated) index for a given page
     QHash<int, int> m_validIndexForPage;
-    //keep always running at most 10 clients, get rid of the old ones
-    //won't be possible to monitor forresources going away, but is too heavy
-    QList<Nepomuk2::Query::QueryServiceClient *> m_queryClientsHistory;
-    //how many service clients are running now?
-    int m_runningClients;
-    //client that only knows how much results there are
-    Nepomuk2::Query::QueryServiceClient *m_countQueryClient;
+
 
     Nepomuk2::ResourceWatcher* m_watcher;
     QVector<Nepomuk2::Resource> m_resources;

@@ -46,17 +46,20 @@ public:
     void fetchResultsPage(int page);
     bool hasQueryOnPage(int page) const;
 
+    bool running() const;
+
 Q_SIGNALS:
-    void newResults(const QList<Nepomuk2::Query::Result> &results);
+    void newResults(const QList<Nepomuk2::Query::Result> &results, int page);
     void resultsRemoved(const QList<QUrl>&urls);
 
-    void finishedListing();
     void error(const QString &message);
     void countRetrieved(int);
+    void runningChanged();
 
 private Q_SLOTS:
     void countQueryResult(const QList< Nepomuk2::Query::Result > &entries);
     void newEntries(const QList< Nepomuk2::Query::Result > &entries);
+    void finishedListing();
     //void entriesRemoved(const QList<QUrl> &urls);
 
 private:
@@ -80,6 +83,8 @@ private:
     //they're locked by m_queryMutex
     int m_limit;
     int m_pageSize;
+
+    bool m_running;
 
     //semaphores
     QMutex m_queryMutex;

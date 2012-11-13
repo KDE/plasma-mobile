@@ -37,7 +37,8 @@ QueryThread::QueryThread( QObject* parent)
       m_runningClients(0),
       m_countQueryClient(0),
       m_limit(0),
-      m_pageSize(30)
+      m_pageSize(30),
+      m_running(false)
 {
     moveToThread(this);
 }
@@ -74,12 +75,20 @@ void QueryThread::setQuery(const Nepomuk2::Query::Query &query, int limit, int p
         m_query.setLimit(limit);
     }
 
+    m_running = true;
+    emit runningChanged();
+
     m_countQueryClient->sparqlQuery(m_query.toSparqlQuery(Nepomuk2::Query::Query::CreateCountQuery));
 
     //if page size is invalid, fetch all
     if (pageSize < 1) {
         fetchResultsPage(0);
     }
+}
+
+bool QueryThread::running() const
+{
+    return m_running;
 }
 
 void QueryThread::setSparqlQuery(const QString &query)
@@ -153,6 +162,8 @@ void QueryThread::countQueryResult(const QList< Nepomuk2::Query::Result > &entri
 
 void QueryThread::newEntries(const QList< Nepomuk2::Query::Result > &entries)
 {
+    const int page = m_pagesForClient.value(qobject_cast<Nepomuk2::Query::QueryServiceClient *>(sender()));
+
     foreach (const Nepomuk2::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
@@ -164,7 +175,7 @@ void QueryThread::newEntries(const QList< Nepomuk2::Query::Result > &entries)
         }
     }
 
-    emit newResults(entries);
+    emit newResults(entries, page);
 }
 /*
 //FIXME: probably this is useless
@@ -176,5 +187,27 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
     emit countChanged(m_count);
     emit resultsRemoved(urls);
 }*/
+
+void QueryThread::finishedListing()
+{
+    m_runningClients = qMax(m_runningClients - 1, 0);
+
+    if (m_runningClients <= 0) {
+        m_running = false;
+        emit runningChanged();
+
+        if (m_queryClientsHistory.count() > 10) {
+            for (int i = 0; i < m_queryClientsHistory.count() - 10; ++i) {
+                Nepomuk2::Query::QueryServiceClient *client = m_queryClientsHistory.first();
+                m_queryClientsHistory.pop_front();
+
+                int page = m_pagesForClient.value(client);
+                m_queryClients.remove(page);
+                m_pagesForClient.remove(client);
+                delete client;
+            }
+        }
+    }
+}
 
 #include "querythread.moc"
