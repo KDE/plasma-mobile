@@ -208,7 +208,7 @@ void MetadataModel::doQuery()
 
     beginResetModel();
     m_resources = QVector<Nepomuk2::Resource>(0);
-    m_uriToResourceIndex.clear();
+    m_uriToRow.clear();
     m_resourcesToInsert.clear();
     m_validIndexForPage.clear();
     endResetModel();
@@ -381,7 +381,7 @@ void MetadataModel::newEntriesDelayed()
             kDebug() << "Result!!!" << res.genericLabel() << res.type();
             kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
 
-            m_uriToResourceIndex[res.uri()] = pageStart + offset;
+            m_uriToRow[res.uri()] = pageStart + offset;
             //there can be new results before the count query gets updated
             if (pageStart + offset < m_resources.size()) {
                 m_resources[pageStart + offset] = res;
@@ -412,7 +412,7 @@ void MetadataModel::propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Pro
     Q_UNUSED(prop)
     Q_UNUSED(val)
 
-    const int index = m_uriToResourceIndex.value(res.uri());
+    const int index = m_uriToRow.value(res.uri());
     if (index >= 0) {
         emit dataChanged(createIndex(index, 0, 0), createIndex(index, 0, 0));
     }
@@ -426,7 +426,7 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
     //it's a map because we want to remove values from the vector in inverted order to keep indexes valid trough the remove loop
     QMap<int, int> toRemove;
     foreach (const QUrl &url, urls) {
-        const int index = m_uriToResourceIndex.value(url);
+        const int index = m_uriToRow.value(url);
         if (index == prevIndex + 1) {
             toRemove[prevIndex]++;
         } else {
@@ -447,14 +447,14 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
         endRemoveRows();
     }
 
-    //another loop, we don't depend to m_uriToResourceIndex in data(), but we take this doublesafety
+    //another loop, we don't depend to m_uriToRow in data(), but we take this doublesafety
     foreach (const QUrl &url, urls) {
-        m_uriToResourceIndex.remove(url);
+        m_uriToRow.remove(url);
     }
 
     //FIXME: this loop makes all the optimizations useless, get rid either of it or the optimizations
     for (int i = 0; i < m_resources.count(); ++i) {
-        m_uriToResourceIndex[m_resources[i].uri()] = i;
+        m_uriToRow[m_resources[i].uri()] = i;
     }
 
     emit countChanged();

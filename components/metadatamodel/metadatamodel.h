@@ -158,6 +158,10 @@ protected:
     void fetchResultsPage(int page);
 
 private:
+    //query construction is completely delegated to this
+    QWeakPointer<BasicQueryProvider> m_queryProvider;
+
+    //perform all the queries in this thread
     QueryThread *m_queryThread;
 
     Nepomuk2::Query::Query m_query;
@@ -166,11 +170,18 @@ private:
     QHash<int, int> m_validIndexForPage;
 
 
-    Nepomuk2::ResourceWatcher* m_watcher;
+    //actual main data
     QVector<Nepomuk2::Resource> m_resources;
-    QHash<int, QList<Nepomuk2::Resource> > m_resourcesToInsert;
-    QHash<QUrl, int> m_uriToResourceIndex;
+    //some properties may change dynamically
+    Nepomuk2::ResourceWatcher* m_watcher;
+    //used to event compress new results arriving
     QTimer *m_newEntriesTimer;
+    //a queue by page of the data that will be inserted in the model with event compression
+    QHash<int, QList<Nepomuk2::Resource> > m_resourcesToInsert;
+    //maps uris ro row numbers, so when entriesRemoved arrived, we know what rows to remove
+    QHash<QUrl, int> m_uriToRow;
+
+    //used purely for benchmark
     QTime m_elapsedTime;
 
     //pieces to build m_query
@@ -186,8 +197,6 @@ private:
     QStringList* m_thumbnailerPlugins;
 
     QHash<Nepomuk2::Resource, QHash<int, QVariant> > m_cachedResources;
-
-    QWeakPointer<BasicQueryProvider> m_queryProvider;
 };
 
 #endif
