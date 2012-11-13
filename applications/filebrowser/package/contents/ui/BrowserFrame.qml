@@ -239,6 +239,7 @@ Item {
                 MobileComponents.IconGrid {
                     id: resultsGrid
                     anchors.fill: parent
+                    clip: false
 
                     model: fileBrowserRoot.model
                     onCurrentPageChanged: pinchArea.resetSelection()

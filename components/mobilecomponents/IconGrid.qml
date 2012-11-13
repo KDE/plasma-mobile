@@ -33,6 +33,7 @@ Item {
     property alias currentPage: iconView.currentIndex
     property int pagesCount: Math.ceil(model.count/pageSize)
     property int count: model.count
+    clip: true
 
     function pageForIndex(index)
     {
@@ -82,7 +83,6 @@ Item {
         snapMode: ListView.SnapOneItem
         boundsBehavior: Flickable.DragOverBounds
 
-        clip: true
         signal clicked(string url)
 
         delegate: Component {
