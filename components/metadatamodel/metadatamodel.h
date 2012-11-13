@@ -157,10 +157,10 @@ protected Q_SLOTS:
 protected:
     void fetchResultsPage(int page);
 
-private:
-    //FIXME: remove this
-    QHash<Nepomuk2::Resource, QHash<int, QVariant> > m_cachedResources;
+    //FIXME: move to the provider
+    QString resourceIcon(const Nepomuk2::Resource &resource) const;
 
+private:
     //query construction is completely delegated to this
     QWeakPointer<BasicQueryProvider> m_queryProvider;
 
@@ -184,7 +184,7 @@ private:
     //used to event compress new results arriving
     QTimer *m_newEntriesTimer;
     //a queue by page of the data that will be inserted in the model with event compression
-    QHash<int, QList<Nepomuk2::Resource> > m_resourcesToInsert;
+    QHash<int, QList<Nepomuk2::Resource> > m_dataToInsert;
     //maps uris ro row numbers, so when entriesRemoved arrived, we know what rows to remove
     QHash<QUrl, int> m_uriToRow;
 

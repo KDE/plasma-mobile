@@ -209,7 +209,7 @@ void MetadataModel::doQuery()
     beginResetModel();
     m_resources = QVector<Nepomuk2::Resource>(0);
     m_uriToRow.clear();
-    m_resourcesToInsert.clear();
+    m_dataToInsert.clear();
     m_validIndexForPage.clear();
     endResetModel();
     emit countChanged();
@@ -260,26 +260,11 @@ void MetadataModel::newEntries(const QList< Nepomuk2::Query::Result > &entries, 
         if (resource.property(propertyUrl("nie:url")).toString().isEmpty()) {
             continue;
         }
-        m_resourcesToInsert[page] << resource;
+        m_dataToInsert[page] << resource;
 
-        //pre-popuplating of the cache to avoid accessing properties directly
-        //label is a bit too complex to take from query
-        if (resource.hasType(Nepomuk2::Vocabulary::NFO::PaginatedTextDocument())) { // pdf files
-            m_cachedResources[resource][Label] = resource.property(Nepomuk2::Vocabulary::NFO::fileName()).toString();
-            //kDebug() << "Using label" << m_cachedResources[resource][Label] << "instead of" << resource.genericLabel();
-        } else {
-            m_cachedResources[resource][Label] = resource.genericLabel();
-        }
+        /*
 
-        m_cachedResources[resource][Description] = resource.description();
 
-        m_cachedResources[resource][Url] = resource.property(propertyUrl("nie:url")).toString();
-
-        QStringList types;
-        foreach (const QUrl &u, resource.types()) {
-            types << u.toString();
-        }
-        m_cachedResources[resource][Types] = types;
 
         //FIXME: symbols seems broken on Mer
         //indagate after PA3
@@ -301,57 +286,26 @@ void MetadataModel::newEntries(const QList< Nepomuk2::Query::Result > &entries, 
         }
 
         //those seems to not be possible avoiding to access the resource
-        m_cachedResources[resource][ClassName] = resource.type().toString().section( QRegExp( "[#:]" ), -1 );
-        m_cachedResources[resource][ResourceType] = resource.type();
-        m_cachedResources[resource][IsFile] = resource.isFile();
        // m_cachedResources[resource][MimeType] = resource.mimeType();
         m_cachedResources[resource][MimeType] = resource.property(propertyUrl("nie:mimeType")).toString();
 
-        //FIXME: The most complicated of all, this should really be simplified
-        {
-            //FIXME: a more elegant way is needed
-            QString genericClassName = m_cachedResources.value(resource).value(ClassName).toString();
-            //FIXME: most bookmarks are Document too, so Bookmark wins
-            if (m_cachedResources.value(resource).value(Label).value<QList<QUrl> >().contains(NFO::Bookmark())) {
-                m_cachedResources[resource][GenericClassName] = "Bookmark";
-
-            } else {
-                Nepomuk2::Types::Class resClass(resource.type());
-                foreach (const Nepomuk2::Types::Class &parentClass, resClass.parentClasses()) {
-                    const QString label = parentClass.label();
-                    if (label == "Document" ||
-                        label == "Audio" ||
-                        label == "Video" ||
-                        label == "Image" ||
-                        label == "Contact") {
-                        genericClassName = label;
-                        break;
-                    //two cases where the class is 2 levels behind the level of generalization we want
-                    } else if (parentClass.label() == "RasterImage") {
-                        genericClassName = "Image";
-                    } else if (parentClass.label() == "TextDocument") {
-                        genericClassName = "Document";
-                    }
-                }
-                m_cachedResources[resource][GenericClassName] = genericClassName;
-            }
-        }
+        */
     }
 
-    if (!m_newEntriesTimer->isActive() && !m_resourcesToInsert[page].isEmpty()) {
+    if (!m_newEntriesTimer->isActive() && !m_dataToInsert[page].isEmpty()) {
         m_newEntriesTimer->start(200);
     }
 }
 
 void MetadataModel::newEntriesDelayed()
 {
-    if (m_resourcesToInsert.isEmpty()) {
+    if (m_dataToInsert.isEmpty()) {
         return;
     }
 
     m_elapsedTime.start();
     QHash<int, QList<Nepomuk2::Resource> >::const_iterator i;
-    for (i = m_resourcesToInsert.constBegin(); i != m_resourcesToInsert.constEnd(); ++i) {
+    for (i = m_dataToInsert.constBegin(); i != m_dataToInsert.constEnd(); ++i) {
         const QList<Nepomuk2::Resource> resourcesToInsert = i.value();
 
         m_watcher->stop();
@@ -404,7 +358,7 @@ void MetadataModel::newEntriesDelayed()
                          createIndex(pageStart + startOffset + resourcesToInsert.count()-1, 0));
     }
     kDebug() << "Elapsed time populating the model" << m_elapsedTime.elapsed();
-    m_resourcesToInsert.clear();
+    m_dataToInsert.clear();
 }
 
 void MetadataModel::propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val)
@@ -460,7 +414,27 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
     emit countChanged();
 }
 
-
+QString MetadataModel::resourceIcon(const Nepomuk2::Resource &resource) const
+{
+    //FIXME: symbols seems broken on Mer
+    //indagate after PA3
+    if (0&&!resource.symbols().isEmpty()) {
+        return resource.symbols().first();
+    } else {
+        //if it's an application, fetch the icon from the desktop file
+        Nepomuk2::Types::Class resClass(resource.type());
+        if (resClass.label() == "Application") {
+            KService::Ptr serv = KService::serviceByDesktopPath(resource.property(propertyUrl("nie:url")).toUrl().path());
+            if (serv) {
+                return serv->icon();
+            } else {
+                return KMimeType::iconNameForUrl(resource.property(propertyUrl("nie:url")).toString());
+            }
+        } else {
+            return KMimeType::iconNameForUrl(resource.property(propertyUrl("nie:url")).toString());
+        }
+    }
+}
 
 QVariant MetadataModel::data(const QModelIndex &index, int role) const
 {
@@ -487,23 +461,21 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    //We're lucky: was cached
-    if (m_cachedResources.value(resource).contains(role)) {
-        return m_cachedResources.value(resource).value(role);
-    }
 
     switch (role) {
     case Qt::DisplayRole:
     case Label:
-        return m_cachedResources.value(resource).value(Label);
+        return resource.genericLabel();
+    case Description:
+        return resource.description();
     case Qt::DecorationRole: 
-        return KIcon(m_cachedResources.value(resource).value(Icon).toString());
+        return KIcon(resourceIcon(resource));
     case HasSymbol:
     case Icon:
-        return m_cachedResources.value(resource).value(Icon).toString();
+        return resourceIcon(resource);
     case Thumbnail: {
-        KUrl url(m_cachedResources.value(resource).value(Url).toString());
-        if (m_cachedResources.value(resource).value(IsFile).toBool() && url.isLocalFile()) {
+        KUrl url(resource.property(propertyUrl("nie:url")).toString());
+        if (resource.isFile() && url.isLocalFile()) {
             QImage preview = QImage(m_thumbnailSize, QImage::Format_ARGB32_Premultiplied);
 
             if (m_imageCache->findImage(url.prettyUrl(), &preview)) {
@@ -515,6 +487,45 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         }
         return QVariant();
     }
+    case Url:
+        return resource.property(propertyUrl("nie:url")).toString();
+    case ClassName:
+        return resource.type().toString().section( QRegExp( "[#:]" ), -1 );
+    //FIXME: The most complicated of all, this should really be simplified
+    case GenericClassName: {
+        //FIXME: a more elegant way is needed
+        //if a Bookmark is a Document too, Bookmark wins
+        if (resource.types().contains(NFO::Bookmark())) {
+            return "Bookmark";
+
+        } else {
+            Nepomuk2::Types::Class resClass(resource.type());
+            foreach (const Nepomuk2::Types::Class &parentClass, resClass.parentClasses()) {
+                const QString label = parentClass.label();
+                if (label == "Document" ||
+                    label == "Audio" ||
+                    label == "Video" ||
+                    label == "Image" ||
+                    label == "Contact") {
+                    return label;
+                    break;
+                //two cases where the class is 2 levels behind the level of generalization we want
+                } else if (parentClass.label() == "RasterImage") {
+                    return "Image";
+                } else if (parentClass.label() == "TextDocument") {
+                    return "Document";
+                }
+            }
+        }
+        //this should never happen
+        return QVariant();
+    }
+    case ResourceType:
+        return resource.type();
+    case MimeType:
+        return resource.property(propertyUrl("nie:mimeType")).toString();
+    case IsFile:
+        return resource.isFile();
     case Exists:
         return resource.exists();
     case Rating:
@@ -523,6 +534,13 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         return resource.property(NAO::numericRating()).toString();
     case ResourceUri:
         return resource.uri();
+    case Types: {
+        QStringList types;
+        foreach (const QUrl &u, resource.types()) {
+            types << u.toString();
+        }
+        return types;
+    }
     case Tags: {
         QStringList tags;
         foreach (const Nepomuk2::Tag &tag, resource.tags()) {
