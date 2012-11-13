@@ -43,6 +43,7 @@ class QTimer;
 class KImageCache;
 
 class BasicQueryProvider;
+class QueryThread;
 
 /**
  * This is the main class of the Nepomuk model bindings: given a query built by assigning its properties such as queryString, resourceType, startDate etc, it constructs a model with a resource per row, with direct access of its main properties as roles.
@@ -158,6 +159,8 @@ protected:
     void fetchResultsPage(int page);
 
 private:
+    QueryThread *m_queryThread;
+
     Nepomuk2::Query::Query m_query;
     //mapping page->query client
     QHash<int, Nepomuk2::Query::QueryServiceClient *> m_queryClients;
@@ -170,8 +173,9 @@ private:
     QList<Nepomuk2::Query::QueryServiceClient *> m_queryClientsHistory;
     //how many service clients are running now?
     int m_runningClients;
-
+    //client that only knows how much results there are
     Nepomuk2::Query::QueryServiceClient *m_countQueryClient;
+
     Nepomuk2::ResourceWatcher* m_watcher;
     QVector<Nepomuk2::Resource> m_resources;
     QHash<int, QList<Nepomuk2::Resource> > m_resourcesToInsert;

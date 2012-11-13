@@ -19,6 +19,7 @@
 
 #include "metadatamodel.h"
 #include "queryproviders/basicqueryprovider.h"
+#include "querythread.h"
 
 #include <cmath>
 
@@ -64,6 +65,8 @@ MetadataModel::MetadataModel(QObject *parent)
       m_thumbnailSize(180, 120),
       m_thumbnailerPlugins(new QStringList(KIO::PreviewJob::availablePlugins()))
 {
+    m_queryThread = new QueryThread(this);
+
     m_newEntriesTimer = new QTimer(this);
     m_newEntriesTimer->setSingleShot(true);
     connect(m_newEntriesTimer, SIGNAL(timeout()),
@@ -196,6 +199,7 @@ void MetadataModel::doQuery()
     m_query = queryProvider()->query();
     kWarning()<<"Sparql query:"<<m_query.toSparqlQuery();
 
+    m_queryThread->setQuery(m_query, m_limit, m_pageSize);
 
     beginResetModel();
     m_resources.clear();

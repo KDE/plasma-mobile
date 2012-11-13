@@ -17,6 +17,7 @@ set(datamodels_SRCS
     metadatacloudmodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
+    querythread.cpp
 
     queryproviders/cloudqueryprovider.cpp
     queryproviders/timelinequeryprovider.cpp
