@@ -332,8 +332,8 @@ void MetadataModel::newEntriesDelayed()
         }
 
         foreach (const Nepomuk2::Resource &res, resourcesToInsert) {
-            kDebug() << "Result!!!" << res.genericLabel() << res.type();
-            kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
+            //kDebug() << "Result!!!" << res.genericLabel() << res.type();
+            //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
 
             m_uriToRow[res.uri()] = pageStart + offset;
             //there can be new results before the count query gets updated
@@ -480,10 +480,11 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
 
             if (m_imageCache->findImage(url.prettyUrl(), &preview)) {
                 return preview;
+            } else if (!m_previewJobs.contains(url)) {
+                m_previewTimer->start(500);
+                //HACK
+                const_cast<MetadataModel *>(this)->m_filesToPreview[url] = QPersistentModelIndex(index);
             }
-
-            m_previewTimer->start(100);
-            const_cast<MetadataModel *>(this)->m_filesToPreview[url] = QPersistentModelIndex(index);
         }
         return QVariant();
     }
@@ -592,19 +593,17 @@ void MetadataModel::delayedPreview()
         ++i;
     }
 
+    m_filesToPreview.clear();
+
     if (list.size() > 0) {
-
-
         KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, m_thumbnailerPlugins);
         //job->setIgnoreMaximumSize(true);
-        kDebug() << "Created job" << job;
+        kDebug() << "Created job" << job << "for" << list.size() << "files";
         connect(job, SIGNAL(gotPreview(KFileItem,QPixmap)),
                 this, SLOT(showPreview(KFileItem,QPixmap)));
         connect(job, SIGNAL(failed(KFileItem)),
                 this, SLOT(previewFailed(KFileItem)));
     }
-
-    m_filesToPreview.clear();
 }
 
 void MetadataModel::showPreview(const KFileItem &item, const QPixmap &preview)
