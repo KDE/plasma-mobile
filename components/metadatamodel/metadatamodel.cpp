@@ -210,6 +210,7 @@ void MetadataModel::doQuery()
     m_resources = QVector<Nepomuk2::Resource>(0);
     m_uriToResourceIndex.clear();
     m_resourcesToInsert.clear();
+    m_validIndexForPage.clear();
     endResetModel();
     emit countChanged();
 
@@ -377,8 +378,8 @@ void MetadataModel::newEntriesDelayed()
         }
 
         foreach (const Nepomuk2::Resource &res, resourcesToInsert) {
-            //kDebug() << "Result!!!" << res.genericLabel() << res.type();
-            //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
+            kDebug() << "Result!!!" << res.genericLabel() << res.type();
+            kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
 
             m_uriToResourceIndex[res.uri()] = pageStart + offset;
             //there can be new results before the count query gets updated
