@@ -21,16 +21,20 @@
 
 #include "querythread.h"
 
-#include <Nepomuk2/Resource>
-#include <Nepomuk2/Variant>
-#include <Nepomuk2/Vocabulary/NIE>
-#include <Nepomuk2/Vocabulary/NFO>
-#include <Nepomuk2/Query/ResourceTypeTerm>
-
 #include <KDebug>
 
-#include <QtCore/QTimer>
+#include <Nepomuk2/Resource>
+#include <Nepomuk2/Variant>
+#include <Nepomuk2/Query/ResourceTypeTerm>
 
+#include <Soprano/Vocabulary/NAO>
+#include <Nepomuk2/Vocabulary/NIE>
+#include <Nepomuk2/Vocabulary/NFO>
+
+
+
+using namespace Nepomuk2::Vocabulary;
+using namespace Soprano::Vocabulary;
 
 QueryThread::QueryThread( QObject* parent)
     : QThread(parent),
@@ -164,29 +168,32 @@ void QueryThread::newEntries(const QList< Nepomuk2::Query::Result > &entries)
 {
     const int page = m_pagesForClient.value(qobject_cast<Nepomuk2::Query::QueryServiceClient *>(sender()));
 
+    QVariant dummyValue;
     foreach (const Nepomuk2::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
 
         Nepomuk2::Resource resource = res.resource();
-        //prefetch some properties
+        // this trick is used to prefetch some properties
+        // after being accessed the datamanager will cache them
         if (resource.isValid()) {
-            //TODO
+            dummyValue = resource.genericLabel();
+            dummyValue = resource.description();
+            dummyValue = resource.property(NIE::url()).variant();
+            dummyValue = resource.type();
+            dummyValue = resource.property(NIE::mimeType()).variant();
+            dummyValue = resource.isFile();
+            dummyValue = resource.exists();
+            dummyValue = resource.rating();
+            dummyValue = resource.property(NAO::numericRating()).variant();
+            dummyValue = resource.uri();
+            //resource.tags();
+            resource.types();
         }
     }
 
     emit newResults(entries, page);
 }
-/*
-//FIXME: probably this is useless
-void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
-{
-    QMutexLocker locker(&m_countMutex);
-    m_count -= urls.count();
-
-    emit countChanged(m_count);
-    emit resultsRemoved(urls);
-}*/
 
 void QueryThread::finishedListing()
 {
