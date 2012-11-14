@@ -69,9 +69,12 @@ QHash<QString, int> BasicQueryProvider::roleIds() const
     return m_roleIds;
 }
 
-QVariant BasicQueryProvider::formatData(const QHash<int, QVariant> &row, int role)
+QVariant BasicQueryProvider::formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const
 {
-    return row.value(role);
+    Q_UNUSED(row)
+    Q_UNUSED(index)
+    Q_UNUSED(role)
+    return QVariant();
 }
 
 void BasicQueryProvider::setQuery(const Nepomuk2::Query::Query &query)

@@ -238,20 +238,33 @@ void TimelineQueryProvider::doQuery()
     setSparqlQuery(query);
 }
 
-QVariant TimelineQueryProvider::formatData(const QHash<int, QVariant> &row, int role)
+QVariant TimelineQueryProvider::formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const
 {
-    if (role == LabelRole) {
+    Q_UNUSED(index)
+
+    switch(role) {
+    case LabelRole: {
         switch(level()) {
         case TimelineQueryProvider::Year:
-            return row.value(YearRole);
+            return row.additionalBinding("year").variant();
         case TimelineQueryProvider::Month:
-            return KGlobal::locale()->calendar()->monthName(row.value(MonthRole).toInt(),  row.value(YearRole).toInt(), KCalendarSystem::LongName);
+            return KGlobal::locale()->calendar()->monthName(row.additionalBinding("month").toInt(),  row.additionalBinding("day").toInt(), KCalendarSystem::LongName);
         case TimelineQueryProvider::Day:
         default:
-            return row.value(DayRole);
+            return row.additionalBinding("day").variant();
         }
     }
-    return BasicQueryProvider::formatData(row, role);
+    case YearRole:
+        return row.additionalBinding("year").variant();
+    case MonthRole:
+        return row.additionalBinding("month").variant();
+    case DayRole:
+        return row.additionalBinding("day").variant();
+    case CountRole:
+        return row.additionalBinding("count").variant();
+    default:
+        return QVariant();
+    }
 }
 
 #include "timelinequeryprovider.moc"

@@ -19,7 +19,14 @@
 
 #include "resourcequeryprovider.h"
 
+#include <QTimer>
+
 #include <KDebug>
+#include <KIO/PreviewJob>
+#include <KIcon>
+#include <KImageCache>
+#include <KService>
+
 
 #include <soprano/vocabulary.h>
 
@@ -37,14 +44,49 @@
 #include <Nepomuk2/Query/ResourceTypeTerm>
 #include <Nepomuk2/Query/StandardQuery>
 
-ResourceQueryProvider::ResourceQueryProvider(QObject* parent): BasicQueryProvider(parent)
-{
+using namespace Nepomuk2::Vocabulary;
+using namespace Soprano::Vocabulary;
 
+ResourceQueryProvider::ResourceQueryProvider(QObject* parent)
+    : BasicQueryProvider(parent),
+      m_thumbnailSize(180, 120),
+      m_thumbnailerPlugins(new QStringList(KIO::PreviewJob::availablePlugins()))
+{
+    QHash<int, QByteArray> roleNames;
+    roleNames[Qt::DisplayRole] = "display";
+    roleNames[Qt::DecorationRole] = "decoration";
+    roleNames[Label] = "label";
+    roleNames[Description] = "description";
+    roleNames[Types] = "types";
+    roleNames[ClassName] = "className";
+    roleNames[GenericClassName] = "genericClassName";
+    roleNames[HasSymbol] = "hasSymbol";
+    roleNames[Icon] = "icon";
+    roleNames[Thumbnail] = "thumbnail";
+    roleNames[IsFile] = "isFile";
+    roleNames[Exists] = "exists";
+    roleNames[Rating] = "rating";
+    roleNames[NumericRating] = "numericRating";
+    roleNames[ResourceUri] = "resourceUri";
+    roleNames[ResourceType] = "resourceType";
+    roleNames[MimeType] = "mimeType";
+    roleNames[Url] = "url";
+    roleNames[Tags] = "tags";
+    roleNames[TagsNames] = "tagsNames";
+    setRoleNames(roleNames);
+
+    m_previewTimer = new QTimer(this);
+    m_previewTimer->setSingleShot(true);
+    connect(m_previewTimer, SIGNAL(timeout()),
+            this, SLOT(delayedPreview()));
+
+    //using the same cache of the engine, they index both by url
+    m_imageCache = new KImageCache("plasma_engine_preview", 41943040);
 }
 
 ResourceQueryProvider::~ResourceQueryProvider()
 {
-
+    delete m_imageCache;
 }
 
 void ResourceQueryProvider::setQueryString(const QString &query)
@@ -95,6 +137,17 @@ void ResourceQueryProvider::setSortOrder(Qt::SortOrder sortOrder)
 Qt::SortOrder ResourceQueryProvider::sortOrder() const
 {
     return m_sortOrder;
+}
+
+void ResourceQueryProvider::setThumbnailSize(const QSize& size)
+{
+    m_thumbnailSize = size;
+    emit thumbnailSizeChanged();
+}
+
+QSize ResourceQueryProvider::thumbnailSize() const
+{
+    return m_thumbnailSize;
 }
 
 void ResourceQueryProvider::doQuery()
@@ -260,6 +313,186 @@ void ResourceQueryProvider::doQuery()
 
     query.setTerm(rootTerm);
     setQuery(query);
+}
+
+QString ResourceQueryProvider::resourceIcon(const Nepomuk2::Resource &resource) const
+{
+    //FIXME: symbols seems broken on Mer
+    //indagate after PA3
+    if (0&&!resource.symbols().isEmpty()) {
+        return resource.symbols().first();
+    } else {
+        //if it's an application, fetch the icon from the desktop file
+        Nepomuk2::Types::Class resClass(resource.type());
+        if (resClass.label() == "Application") {
+            KService::Ptr serv = KService::serviceByDesktopPath(resource.property(propertyUrl("nie:url")).toUrl().path());
+            if (serv) {
+                return serv->icon();
+            } else {
+                return KMimeType::iconNameForUrl(resource.property(propertyUrl("nie:url")).toString());
+            }
+        } else {
+            return KMimeType::iconNameForUrl(resource.property(propertyUrl("nie:url")).toString());
+        }
+    }
+}
+
+QVariant ResourceQueryProvider::formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const
+{
+    const Nepomuk2::Resource &resource = row.resource();
+
+    if (!resource.isValid()) {
+        return QVariant();
+    }
+
+    switch (role) {
+    case Qt::DisplayRole:
+    case Label:
+        return resource.genericLabel();
+    case Description:
+        return resource.description();
+    case Qt::DecorationRole: 
+        return KIcon(resourceIcon(resource));
+    case HasSymbol:
+    case Icon:
+        return resourceIcon(resource);
+    case Thumbnail: {
+        KUrl url(resource.property(propertyUrl("nie:url")).toString());
+        if (resource.isFile() && url.isLocalFile()) {
+            QImage preview = QImage(m_thumbnailSize, QImage::Format_ARGB32_Premultiplied);
+
+            if (m_imageCache->findImage(url.prettyUrl(), &preview)) {
+                return preview;
+            } else if (!m_filesToPreview.contains(url)) {
+                m_previewTimer->start(500);
+                //HACK
+                const_cast<ResourceQueryProvider *>(this)->m_filesToPreview[url] = QPersistentModelIndex(index);
+            }
+        }
+        return QVariant();
+    }
+    case Url:
+        return resource.property(propertyUrl("nie:url")).toString();
+    case ClassName:
+        return resource.type().toString().section( QRegExp( "[#:]" ), -1 );
+    //FIXME: The most complicated of all, this should really be simplified
+    case GenericClassName: {
+        //FIXME: a more elegant way is needed
+        //if a Bookmark is a Document too, Bookmark wins
+        if (resource.types().contains(NFO::Bookmark())) {
+            return "Bookmark";
+
+        } else {
+            Nepomuk2::Types::Class resClass(resource.type());
+            foreach (const Nepomuk2::Types::Class &parentClass, resClass.parentClasses()) {
+                const QString label = parentClass.label();
+                if (label == "Document" ||
+                    label == "Audio" ||
+                    label == "Video" ||
+                    label == "Image" ||
+                    label == "Contact") {
+                    return label;
+                    break;
+                //two cases where the class is 2 levels behind the level of generalization we want
+                } else if (parentClass.label() == "RasterImage") {
+                    return "Image";
+                } else if (parentClass.label() == "TextDocument") {
+                    return "Document";
+                }
+            }
+        }
+        //this should never happen
+        return QVariant();
+    }
+    case ResourceType:
+        return resource.type();
+    case MimeType:
+        return resource.property(propertyUrl("nie:mimeType")).toString();
+    case IsFile:
+        return resource.isFile();
+    case Exists:
+        return resource.exists();
+    case Rating:
+        return resource.rating();
+    case NumericRating:
+        return resource.property(NAO::numericRating()).toString();
+    case ResourceUri:
+        return resource.uri();
+    case Types: {
+        QStringList types;
+        foreach (const QUrl &u, resource.types()) {
+            types << u.toString();
+        }
+        return types;
+    }
+    case Tags: {
+        QStringList tags;
+        foreach (const Nepomuk2::Tag &tag, resource.tags()) {
+            tags << tag.uri().toString();
+        }
+        return tags;
+    }
+    case TagsNames: {
+        QStringList tagNames;
+        foreach (const Nepomuk2::Tag &tag, resource.tags()) {
+            tagNames << tag.genericLabel();
+        }
+        return tagNames;
+    }
+    default:
+        return QVariant();
+    }
+}
+
+void ResourceQueryProvider::delayedPreview()
+{
+    QHash<KUrl, QPersistentModelIndex>::const_iterator i = m_filesToPreview.constBegin();
+
+    KFileItemList list;
+
+    while (i != m_filesToPreview.constEnd()) {
+        KUrl file = i.key();
+        QPersistentModelIndex index = i.value();
+
+
+        if (!m_previewJobs.contains(file) && file.isValid()) {
+            list.append(KFileItem(file, QString(), 0));
+            m_previewJobs.insert(file, QPersistentModelIndex(index));
+        }
+
+        ++i;
+    }
+
+    m_filesToPreview.clear();
+
+    if (list.size() > 0) {
+        KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, m_thumbnailerPlugins);
+        //job->setIgnoreMaximumSize(true);
+        kDebug() << "Created job" << job << "for" << list.size() << "files";
+        connect(job, SIGNAL(gotPreview(KFileItem,QPixmap)),
+                this, SLOT(showPreview(KFileItem,QPixmap)));
+        connect(job, SIGNAL(failed(KFileItem)),
+                this, SLOT(previewFailed(KFileItem)));
+    }
+}
+
+void ResourceQueryProvider::showPreview(const KFileItem &item, const QPixmap &preview)
+{
+    QPersistentModelIndex index = m_previewJobs.value(item.url());
+    m_previewJobs.remove(item.url());
+
+    if (!index.isValid()) {
+        return;
+    }
+
+    m_imageCache->insertImage(item.url().prettyUrl(), preview.toImage());
+    //kDebug() << "preview size:" << preview.size();
+    emit dataFormatChanged(index);
+}
+
+void ResourceQueryProvider::previewFailed(const KFileItem &item)
+{
+    m_previewJobs.remove(item.url());
 }
 
 #include "resourcequeryprovider.moc"

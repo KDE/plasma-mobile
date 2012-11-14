@@ -51,6 +51,7 @@ public:
     };
     CloudQueryProvider(QObject* parent = 0);
     ~CloudQueryProvider();
+    QVariant formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const;
 
     QVariantList categories() const;
 

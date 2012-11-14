@@ -14,7 +14,6 @@ INCLUDE_DIRECTORIES(
 set(datamodels_SRCS
     abstractmetadatamodel.cpp
     datamodelsplugin.cpp
-    metadatacloudmodel.cpp
     metadatamodel.cpp
     metadatausertypes.cpp
     querythread.cpp

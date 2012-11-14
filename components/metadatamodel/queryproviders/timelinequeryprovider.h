@@ -58,7 +58,7 @@ public:
     TimelineQueryProvider(QObject* parent = 0);
     ~TimelineQueryProvider();
 
-    virtual QVariant formatData(const QHash<int, QVariant> &row, int role);
+    virtual QVariant formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const;
 
     void setLevel(Level level);
     Level level() const;

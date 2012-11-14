@@ -24,8 +24,6 @@
 
 #include <QDate>
 
-#include <KFileItem>
-
 #include <Nepomuk2/Query/Query>
 #include <Nepomuk2/Query/Result>
 #include <Nepomuk2/Query/QueryServiceClient>
@@ -39,8 +37,6 @@ namespace Nepomuk2 {
 
 
 class QTimer;
-
-class KImageCache;
 
 class BasicQueryProvider;
 class QueryThread;
@@ -66,35 +62,9 @@ class MetadataModel : public AbstractMetadataModel
      */
     Q_PROPERTY(bool lazyLoading READ lazyLoading WRITE setLazyLoading NOTIFY lazyLoadingChanged)
 
-    /**
-     * Use this property to specify the size of thumbnail which the model should attempt to generate for the thumbnail role.
-     */
-    Q_PROPERTY(QSize thumbnailSize READ thumbnailSize WRITE setThumbnailSize NOTIFY thumbnailSizeChanged)
-
     Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
 
 public:
-    enum Roles {
-        Label = Qt::UserRole+1,
-        Description,
-        Types,
-        ClassName,
-        GenericClassName,
-        HasSymbol,
-        Icon,
-        Thumbnail,
-        IsFile,
-        Exists,
-        Rating,
-        NumericRating,
-        ResourceUri,
-        ResourceType,
-        MimeType,
-        Url,
-        Tags,
-        TagsNames
-    };
-
     MetadataModel(QObject *parent = 0);
     ~MetadataModel();
 
@@ -111,9 +81,6 @@ public:
 
     void setLimit(int limit);
     int limit() const;
-
-    void setThumbnailSize(const QSize &size);
-    QSize thumbnailSize() const;
 
     //Reimplemented
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -141,7 +108,6 @@ Q_SIGNALS:
     void queryProviderChanged();
     void limitChanged();
     void lazyLoadingChanged();
-    void thumbnailSizeChanged();
 
 protected Q_SLOTS:
     void countRetrieved(int count);
@@ -150,15 +116,10 @@ protected Q_SLOTS:
     virtual void doQuery();
     void newEntriesDelayed();
     void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val);
-    void showPreview(const KFileItem &item, const QPixmap &preview);
-    void previewFailed(const KFileItem &item);
-    void delayedPreview();
+    void dataFormatChanged(const QPersistentModelIndex &index);
 
 protected:
     void fetchResultsPage(int page);
-
-    //FIXME: move to the provider
-    QString resourceIcon(const Nepomuk2::Resource &resource) const;
 
 private:
     //query construction is completely delegated to this
@@ -190,15 +151,6 @@ private:
 
     //used purely for benchmark
     QTime m_elapsedTime;
-
-
-    //previews
-    QTimer *m_previewTimer;
-    QHash<KUrl, QPersistentModelIndex> m_filesToPreview;
-    QSize m_thumbnailSize;
-    QHash<KUrl, QPersistentModelIndex> m_previewJobs;
-    KImageCache* m_imageCache;
-    QStringList* m_thumbnailerPlugins;
 };
 
 #endif

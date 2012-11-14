@@ -28,11 +28,7 @@
 #include <QTimer>
 
 #include <KDebug>
-#include <KIcon>
-#include <KImageCache>
 #include <KMimeType>
-#include <KService>
-#include <KIO/PreviewJob>
 
 #include <soprano/vocabulary.h>
 
@@ -59,9 +55,7 @@ using namespace Soprano::Vocabulary;
 MetadataModel::MetadataModel(QObject *parent)
     : AbstractMetadataModel(parent),
       m_limit(0),
-      m_pageSize(30),
-      m_thumbnailSize(180, 120),
-      m_thumbnailerPlugins(new QStringList(KIO::PreviewJob::availablePlugins()))
+      m_pageSize(30)
 {
     m_queryThread = new QueryThread(this);
     connect(m_queryThread, SIGNAL(newResults(QList<Nepomuk2::Query::Result>, int)),
@@ -79,48 +73,15 @@ MetadataModel::MetadataModel(QObject *parent)
     connect(m_newEntriesTimer, SIGNAL(timeout()),
             this, SLOT(newEntriesDelayed()));
 
-    m_previewTimer = new QTimer(this);
-    m_previewTimer->setSingleShot(true);
-    connect(m_previewTimer, SIGNAL(timeout()),
-            this, SLOT(delayedPreview()));
-
-    //using the same cache of the engine, they index both by url
-    m_imageCache = new KImageCache("plasma_engine_preview", 41943040);
-
     m_watcher = new Nepomuk2::ResourceWatcher(this);
 
     m_watcher->addProperty(NAO::numericRating());
-    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk2::Resource,Nepomuk2::Types::Property,QVariant)),
-            this, SLOT(propertyChanged(Nepomuk2::Resource,Nepomuk2::Types::Property,QVariant)));
-
-
-    QHash<int, QByteArray> roleNames;
-    roleNames[Qt::DisplayRole] = "display";
-    roleNames[Qt::DecorationRole] = "decoration";
-    roleNames[Label] = "label";
-    roleNames[Description] = "description";
-    roleNames[Types] = "types";
-    roleNames[ClassName] = "className";
-    roleNames[GenericClassName] = "genericClassName";
-    roleNames[HasSymbol] = "hasSymbol";
-    roleNames[Icon] = "icon";
-    roleNames[Thumbnail] = "thumbnail";
-    roleNames[IsFile] = "isFile";
-    roleNames[Exists] = "exists";
-    roleNames[Rating] = "rating";
-    roleNames[NumericRating] = "numericRating";
-    roleNames[ResourceUri] = "resourceUri";
-    roleNames[ResourceType] = "resourceType";
-    roleNames[MimeType] = "mimeType";
-    roleNames[Url] = "url";
-    roleNames[Tags] = "tags";
-    roleNames[TagsNames] = "tagsNames";
-    setRoleNames(roleNames);
+    connect(m_watcher, SIGNAL(propertyAdded(Nepomuk2::Resource,Nepomuk2::Types::Property, QVariant)),
+            this, SLOT(propertyChanged(Nepomuk2::Resource,Nepomuk2::Types::Property, QVariant)));
 }
 
 MetadataModel::~MetadataModel()
 {
-    delete m_imageCache;
 }
 
 
@@ -144,12 +105,18 @@ void MetadataModel::setQueryProvider(BasicQueryProvider *provider)
         return;
     }
 
+    setRoleNames(provider->roleNames());
+
     if (m_queryProvider) {
         disconnect(m_queryProvider.data(), 0, this, 0);
     }
 
-    connect(provider, SIGNAL(queryChanged()), this, SLOT(doQuery()));
-    connect(provider, SIGNAL(sparqlQueryChanged()), this, SLOT(doQuery()));
+    connect(provider, SIGNAL(queryChanged()),
+            this, SLOT(doQuery()));
+    connect(provider, SIGNAL(sparqlQueryChanged()),
+            this, SLOT(doQuery()));
+    connect(provider, SIGNAL(dataFormatChanged(QPersistentModelIndex)),
+            this, SLOT(dataFormatChanged(QPersistentModelIndex)));
 
     m_queryProvider = provider;
     doQuery();
@@ -352,6 +319,11 @@ void MetadataModel::propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Pro
     }
 }
 
+void MetadataModel::dataFormatChanged(const QPersistentModelIndex &index)
+{
+    emit dataChanged(index, index);
+}
+
 void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
 {
     int prevIndex = -100;
@@ -394,31 +366,9 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
     emit countChanged();
 }
 
-QString MetadataModel::resourceIcon(const Nepomuk2::Resource &resource) const
-{
-    //FIXME: symbols seems broken on Mer
-    //indagate after PA3
-    if (0&&!resource.symbols().isEmpty()) {
-        return resource.symbols().first();
-    } else {
-        //if it's an application, fetch the icon from the desktop file
-        Nepomuk2::Types::Class resClass(resource.type());
-        if (resClass.label() == "Application") {
-            KService::Ptr serv = KService::serviceByDesktopPath(resource.property(propertyUrl("nie:url")).toUrl().path());
-            if (serv) {
-                return serv->icon();
-            } else {
-                return KMimeType::iconNameForUrl(resource.property(propertyUrl("nie:url")).toString());
-            }
-        } else {
-            return KMimeType::iconNameForUrl(resource.property(propertyUrl("nie:url")).toString());
-        }
-    }
-}
-
 QVariant MetadataModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.column() != 0 ||
+    if (m_queryProvider || !index.isValid() || index.column() != 0 ||
         index.row() < 0 || index.row() >= m_data.count()){
         return QVariant();
     }
@@ -426,119 +376,23 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     const Nepomuk2::Resource &resource = m_data[index.row()].resource();
 
 
-    if (!resource.isValid() && m_pageSize > 0 && !m_queryThread->hasQueryOnPage(floor(index.row()/m_pageSize))) {
-        //HACK
-        //const_cast<MetadataModel *>(this)->fetchResultsPage(floor(index.row()/m_pageSize));
-        m_queryThread->fetchResultsPage(floor(index.row()/m_pageSize));
-        return QVariant();
-    //m_pageSize <= 0, means fetch all
-    } else if (!resource.isValid() && !m_queryThread->hasQueryOnPage(0)) {
-        //HACK
-        //const_cast<MetadataModel *>(this)->fetchResultsPage(0);
-        m_queryThread->fetchResultsPage(0);
-        return QVariant();
-    } else if (!resource.isValid()) {
-        return QVariant();
-    }
-
-
-    switch (role) {
-    case Qt::DisplayRole:
-    case Label:
-        return resource.genericLabel();
-    case Description:
-        return resource.description();
-    case Qt::DecorationRole: 
-        return KIcon(resourceIcon(resource));
-    case HasSymbol:
-    case Icon:
-        return resourceIcon(resource);
-    case Thumbnail: {
-        KUrl url(resource.property(propertyUrl("nie:url")).toString());
-        if (resource.isFile() && url.isLocalFile()) {
-            QImage preview = QImage(m_thumbnailSize, QImage::Format_ARGB32_Premultiplied);
-
-            if (m_imageCache->findImage(url.prettyUrl(), &preview)) {
-                return preview;
-            } else if (!m_filesToPreview.contains(url)) {
-                m_previewTimer->start(500);
-                //HACK
-                const_cast<MetadataModel *>(this)->m_filesToPreview[url] = QPersistentModelIndex(index);
-            }
-        }
-        return QVariant();
-    }
-    case Url:
-        return resource.property(propertyUrl("nie:url")).toString();
-    case ClassName:
-        return resource.type().toString().section( QRegExp( "[#:]" ), -1 );
-    //FIXME: The most complicated of all, this should really be simplified
-    case GenericClassName: {
-        //FIXME: a more elegant way is needed
-        //if a Bookmark is a Document too, Bookmark wins
-        if (resource.types().contains(NFO::Bookmark())) {
-            return "Bookmark";
-
+    //if the resource is not valid *and* there are no additional bindings means no data in these rows was fetched in nepomuk yet
+    if (!m_data[index.row()].resource().isValid() &&
+        m_data[index.row()].additionalBindings().count() == 0) {
+        if (m_pageSize > 0 && !m_queryThread->hasQueryOnPage(floor(index.row()/m_pageSize))) {
+            m_queryThread->fetchResultsPage(floor(index.row()/m_pageSize));
+            return QVariant();
+        //m_pageSize <= 0, means fetch all
+        } else if (!m_queryThread->hasQueryOnPage(0)) {
+            m_queryThread->fetchResultsPage(0);
+            return QVariant();
         } else {
-            Nepomuk2::Types::Class resClass(resource.type());
-            foreach (const Nepomuk2::Types::Class &parentClass, resClass.parentClasses()) {
-                const QString label = parentClass.label();
-                if (label == "Document" ||
-                    label == "Audio" ||
-                    label == "Video" ||
-                    label == "Image" ||
-                    label == "Contact") {
-                    return label;
-                    break;
-                //two cases where the class is 2 levels behind the level of generalization we want
-                } else if (parentClass.label() == "RasterImage") {
-                    return "Image";
-                } else if (parentClass.label() == "TextDocument") {
-                    return "Document";
-                }
-            }
+            return QVariant();
         }
-        //this should never happen
-        return QVariant();
     }
-    case ResourceType:
-        return resource.type();
-    case MimeType:
-        return resource.property(propertyUrl("nie:mimeType")).toString();
-    case IsFile:
-        return resource.isFile();
-    case Exists:
-        return resource.exists();
-    case Rating:
-        return resource.rating();
-    case NumericRating:
-        return resource.property(NAO::numericRating()).toString();
-    case ResourceUri:
-        return resource.uri();
-    case Types: {
-        QStringList types;
-        foreach (const QUrl &u, resource.types()) {
-            types << u.toString();
-        }
-        return types;
-    }
-    case Tags: {
-        QStringList tags;
-        foreach (const Nepomuk2::Tag &tag, resource.tags()) {
-            tags << tag.uri().toString();
-        }
-        return tags;
-    }
-    case TagsNames: {
-        QStringList tagNames;
-        foreach (const Nepomuk2::Tag &tag, resource.tags()) {
-            tagNames << tag.genericLabel();
-        }
-        return tagNames;
-    }
-    default:
-        return QVariant();
-    }
+
+
+    return m_queryProvider.data()->formatData(m_data[index.row()], QPersistentModelIndex(index), role);
 }
 
 QVariantHash MetadataModel::get(int row) const
@@ -554,57 +408,6 @@ QVariantHash MetadataModel::get(int row) const
     return hash;
 }
 
-void MetadataModel::delayedPreview()
-{
-    QHash<KUrl, QPersistentModelIndex>::const_iterator i = m_filesToPreview.constBegin();
-
-    KFileItemList list;
-
-    while (i != m_filesToPreview.constEnd()) {
-        KUrl file = i.key();
-        QPersistentModelIndex index = i.value();
-
-
-        if (!m_previewJobs.contains(file) && file.isValid()) {
-            list.append(KFileItem(file, QString(), 0));
-            m_previewJobs.insert(file, QPersistentModelIndex(index));
-        }
-
-        ++i;
-    }
-
-    m_filesToPreview.clear();
-
-    if (list.size() > 0) {
-        KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, m_thumbnailerPlugins);
-        //job->setIgnoreMaximumSize(true);
-        kDebug() << "Created job" << job << "for" << list.size() << "files";
-        connect(job, SIGNAL(gotPreview(KFileItem,QPixmap)),
-                this, SLOT(showPreview(KFileItem,QPixmap)));
-        connect(job, SIGNAL(failed(KFileItem)),
-                this, SLOT(previewFailed(KFileItem)));
-    }
-}
-
-void MetadataModel::showPreview(const KFileItem &item, const QPixmap &preview)
-{
-    QPersistentModelIndex index = m_previewJobs.value(item.url());
-    m_previewJobs.remove(item.url());
-
-    if (!index.isValid()) {
-        return;
-    }
-
-    m_imageCache->insertImage(item.url().prettyUrl(), preview.toImage());
-    //kDebug() << "preview size:" << preview.size();
-    emit dataChanged(index, index);
-}
-
-void MetadataModel::previewFailed(const KFileItem &item)
-{
-    m_previewJobs.remove(item.url());
-}
-
 // Just signal QSortFilterProxyModel to do the real sorting.
 void MetadataModel::sort(int column, Qt::SortOrder order)
 {
@@ -613,17 +416,6 @@ void MetadataModel::sort(int column, Qt::SortOrder order)
 
     beginResetModel();
     endResetModel();
-}
-
-void MetadataModel::setThumbnailSize(const QSize& size)
-{
-    m_thumbnailSize = size;
-    emit thumbnailSizeChanged();
-}
-
-QSize MetadataModel::thumbnailSize() const
-{
-    return m_thumbnailSize;
 }
 
 #include "metadatamodel.moc"

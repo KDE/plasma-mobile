@@ -299,4 +299,20 @@ void CloudQueryProvider::doQuery()
     setSparqlQuery(query);
 }
 
+QVariant CloudQueryProvider::formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const
+{
+    Q_UNUSED(index)
+
+    switch(role) {
+    case Label:
+        return row.additionalBinding("label").variant();
+    case Count:
+        return row.additionalBinding("count").variant();
+    case TotalCount:
+        return row.additionalBinding("totalCount").variant();
+    default:
+        return QVariant();
+    }
+}
+
 #include "cloudqueryprovider.moc"

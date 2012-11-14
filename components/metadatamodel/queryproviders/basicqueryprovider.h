@@ -25,10 +25,12 @@
 #include <QStringList>
 #include <QUrl>
 #include <QDeclarativePropertyMap>
+#include <QPersistentModelIndex>
 
 #include "nso.h"
 #include "kao.h"
 #include <Nepomuk2/Query/Query>
+#include <Nepomuk2/Query/Result>
 #include <Nepomuk2/Vocabulary/NIE>
 #include <Nepomuk2/Vocabulary/NFO>
 #include <Nepomuk2/Vocabulary/NCO>
@@ -121,7 +123,10 @@ public:
      */
     QHash<int, QByteArray> roleNames() const;
     QHash<QString, int> roleIds() const;
-    virtual QVariant formatData(const QHash<int, QVariant> &row, int role);
+    /**
+     * Default implementation does nothing
+     */
+    virtual QVariant formatData(const Nepomuk2::Query::Result &rowData, const QPersistentModelIndex &index, int role) const;
 
     void setQuery(const Nepomuk2::Query::Query &query);
     Nepomuk2::Query::Query query() const;
@@ -167,6 +172,7 @@ public:
     QObject *extraParameters() const;
 
 Q_SIGNALS:
+    void dataFormatChanged(const QPersistentModelIndex &index);
     void queryChanged();
     void sparqlQueryChanged();
     void resourceTypeChanged();
