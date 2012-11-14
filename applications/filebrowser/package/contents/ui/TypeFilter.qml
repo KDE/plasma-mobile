@@ -36,7 +36,7 @@ Column {
 
     PlasmaCore.SortFilterModel {
         id: sortFilterModel
-        sourceModel: MetadataModels.MetadataCloudModel {
+        sourceModel: MetadataModels.MetadataModel {
             id: typesCloudModel
             queryProvider: MetadataModels.CloudQueryProvider {
                 cloudCategory: "rdf:type"

@@ -62,6 +62,12 @@ class MetadataModel : public AbstractMetadataModel
      */
     Q_PROPERTY(bool lazyLoading READ lazyLoading WRITE setLazyLoading NOTIFY lazyLoadingChanged)
 
+    /**
+     * @property int Total count of resource items: this is not the number of rows of the result, but the aggregate of how many items there are for each separate item. Available when a query has a column count (integer)
+     */
+    Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
+
+
     Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
 
 public:
@@ -75,6 +81,7 @@ public:
     BasicQueryProvider *queryProvider() const;
 
     virtual int count() const {return m_data.count();}
+    int totalCount() const {return m_totalCount;}
 
     void setLazyLoading(bool size);
     bool lazyLoading() const;
@@ -105,6 +112,7 @@ public:
     Q_INVOKABLE QVariantHash get(int row) const;
 
 Q_SIGNALS:
+    void totalCountChanged();
     void queryProviderChanged();
     void limitChanged();
     void lazyLoadingChanged();
@@ -130,6 +138,9 @@ private:
 
     //actual query performed
     Nepomuk2::Query::Query m_query;
+    //sparql version: they are mutually exclusive
+    QString m_sparqlQuery;
+
     //pieces to limit how much stuff we fetch
     int m_limit;
     int m_pageSize;
@@ -137,6 +148,8 @@ private:
     //where is the last valid (already populated) index for a given page
     QHash<int, int> m_validIndexForPage;
 
+
+    int m_totalCount;
 
     //actual main data
     QVector<Nepomuk2::Query::Result> m_data;

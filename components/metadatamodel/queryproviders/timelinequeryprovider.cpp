@@ -248,7 +248,7 @@ QVariant TimelineQueryProvider::formatData(const Nepomuk2::Query::Result &row, c
         case TimelineQueryProvider::Year:
             return row.additionalBinding("year").variant();
         case TimelineQueryProvider::Month:
-            return KGlobal::locale()->calendar()->monthName(row.additionalBinding("month").toInt(),  row.additionalBinding("day").toInt(), KCalendarSystem::LongName);
+            return KGlobal::locale()->calendar()->monthName(row.additionalBinding("month").toInt(),  1, KCalendarSystem::LongName);
         case TimelineQueryProvider::Day:
         default:
             return row.additionalBinding("day").variant();

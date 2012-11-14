@@ -170,8 +170,19 @@ void MetadataModel::doQuery()
         return;
     }
 
+    m_totalCount = 0;
+
     m_query = queryProvider()->query();
-    kWarning()<<"Sparql query:"<<m_query.toSparqlQuery();
+    if (m_query.isValid()) {
+        m_sparqlQuery = QString();
+        if (m_limit > 0) {
+            m_query.setLimit(m_limit);
+        }
+        kWarning() << "Sparql query:" << m_query.toSparqlQuery();
+    } else {
+        m_sparqlQuery = queryProvider()->sparqlQuery();
+        kWarning() << "Sparql query:" << m_sparqlQuery;
+    }
 
     beginResetModel();
     m_data = QVector<Nepomuk2::Query::Result>(0);
@@ -180,12 +191,14 @@ void MetadataModel::doQuery()
     m_validIndexForPage.clear();
     endResetModel();
     emit countChanged();
+    emit totalCountChanged();
 
-    if (m_limit > 0) {
-        m_query.setLimit(m_limit);
+
+    if (m_query.isValid()) {
+        m_queryThread->setQuery(m_query, m_limit, m_pageSize);
+    } else {
+        m_queryThread->setSparqlQuery(m_sparqlQuery);
     }
-
-    m_queryThread->setQuery(m_query, m_limit, m_pageSize);
 
     //if page size is invalid, fetch all
     if (m_pageSize < 1) {
@@ -219,21 +232,20 @@ void MetadataModel::countRetrieved(int count)
 
 void MetadataModel::newEntries(const QList< Nepomuk2::Query::Result > &entries, int page)
 {
-    /*foreach (const Nepomuk2::Query::Result &res, entries) {
+    foreach (const Nepomuk2::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
         //kDebug() << "Result label:" << res.genericLabel();
 
-        Nepomuk2::Resource resource = res.resource();
-        if (resource.property(propertyUrl("nie:url")).toString().isEmpty()) {
-            continue;
-        }
-        m_dataToInsert[page] << res;
-    }*/
+        m_totalCount += res.additionalBinding(QLatin1String("count")).variant().toInt();
+    }
 
     m_dataToInsert[page] << entries;
 
     if (!m_newEntriesTimer->isActive() && !m_dataToInsert[page].isEmpty()) {
         m_newEntriesTimer->start(200);
+    }
+    if (m_totalCount > 0) {
+        emit totalCountChanged();
     }
 }
 
@@ -272,7 +284,7 @@ void MetadataModel::newEntriesDelayed()
         }
 
         foreach (const Nepomuk2::Query::Result &res, dataToInsert) {
-            //kDebug() << "Result!!!" << res.genericLabel() << res.type();
+            //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
             //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
 
             if (res.resource().isValid()) {
@@ -330,15 +342,24 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
     //pack all the stuff to remove in groups, to emit the least possible signals
     //this assumes urls are in the same order they arrived ion the results
     //it's a map because we want to remove values from the vector in inverted order to keep indexes valid trough the remove loop
+    int oldTotalCount = m_totalCount;
     QMap<int, int> toRemove;
     foreach (const QUrl &url, urls) {
         const int index = m_uriToRow.value(url);
+        const int count = m_data[index].additionalBinding("count").variant().toInt();
+        if (count) {
+            m_totalCount -= count;
+        }
         if (index == prevIndex + 1) {
             toRemove[prevIndex]++;
         } else {
             toRemove[index] = 1;
         }
         prevIndex = index;
+    }
+
+    if (oldTotalCount != m_totalCount) {
+        emit totalCountChanged();
     }
 
     //all the page indexes may be invalid now
@@ -368,7 +389,7 @@ void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
 
 QVariant MetadataModel::data(const QModelIndex &index, int role) const
 {
-    if (m_queryProvider || !index.isValid() || index.column() != 0 ||
+    if (!m_queryProvider || !index.isValid() || index.column() != 0 ||
         index.row() < 0 || index.row() >= m_data.count()){
         return QVariant();
     }

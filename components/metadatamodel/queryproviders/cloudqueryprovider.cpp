@@ -304,8 +304,22 @@ QVariant CloudQueryProvider::formatData(const Nepomuk2::Query::Result &row, cons
     Q_UNUSED(index)
 
     switch(role) {
-    case Label:
-        return row.additionalBinding("label").variant();
+    case Label: {
+        const QVariant rawLabel = row.additionalBinding("label").variant();
+
+        if (rawLabel.canConvert<Nepomuk2::Resource>()) {
+            return rawLabel.value<Nepomuk2::Resource>().type().toString().section( QRegExp( "[#:]" ), -1 );
+        } else if (!rawLabel.value<QUrl>().scheme().isEmpty()) {
+            const QUrl url = rawLabel.value<QUrl>();
+            if (url.scheme() == "nepomuk") {
+                return Nepomuk2::Resource(url).genericLabel();
+            } else {
+                return url.path().split("/").last() + ":" + url.fragment();
+            }
+        } else {
+            return rawLabel;
+        }
+    }
     case Count:
         return row.additionalBinding("count").variant();
     case TotalCount:

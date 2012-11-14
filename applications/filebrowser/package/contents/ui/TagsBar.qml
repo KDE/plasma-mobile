@@ -59,7 +59,7 @@ PlasmaComponents.Page {
                 id: tagRepeater
                 model: PlasmaCore.SortFilterModel {
                     id: sortFilterModel
-                    sourceModel: MetadataModels.MetadataCloudModel {
+                    sourceModel: MetadataModels.MetadataModel {
                         id: tagCloud
                         queryProvider: MetadataModels.CloudQueryProvider {
                             cloudCategory: "nao:hasTag"
