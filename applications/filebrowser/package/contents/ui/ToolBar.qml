@@ -234,9 +234,7 @@ Item {
                 height: parent.height - 1
                 onCheckedChanged: {
                     if (checked) {
-                        if (checked) {
-                            sidebarTabGroup.currentTab = timelineSidebar
-                        }
+                        sidebarTabGroup.currentTab = timelineSidebar
                     }
                 }
             }
