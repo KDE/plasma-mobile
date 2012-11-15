@@ -165,7 +165,6 @@ Q_SIGNALS:
     void endDateChanged();
     void minimumRatingChanged();
     void maximumRatingChanged();
-    void runningChanged(bool running);
 
 protected Q_SLOTS:
     virtual void doQuery();
@@ -245,7 +244,6 @@ protected:
 
     QStringList tagStrings() const;
     QStringList mimeTypeStrings() const;
-    void setRunning(bool running);
 
     /**
      * Schedule a refresh for the query.
