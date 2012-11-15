@@ -70,24 +70,6 @@ QString CloudQueryProvider::cloudCategory() const
     return m_cloudCategory;
 }
 
-void CloudQueryProvider::setAllowedCategories(const QVariantList &whitelist)
-{
-    QSet<QString> set = variantToStringList(whitelist).toSet();
-
-    if (set == m_allowedCategories) {
-        return;
-    }
-
-    m_allowedCategories = set;
-    requestRefresh();
-    emit allowedCategoriesChanged();
-}
-
-QVariantList CloudQueryProvider::allowedCategories() const
-{
-    return stringToVariantList(m_allowedCategories.values());
-}
-
 void CloudQueryProvider::setShowEmptyCategories(bool show)
 {
     if (show == m_showEmptyCategories) {
@@ -119,13 +101,8 @@ void CloudQueryProvider::doQuery()
         query += "select * where { filter(?count != 0) { ";
     }
     query += "select distinct ?label "
-          "sum(?localWeight) as ?count "
-          "sum(?globalWeight) as ?totalCount "
-        "where {  ?r nie:url ?h . "
-        "{ select distinct ?r ?label "
-           "1 as ?localWeight "
-           "0 as ?globalWeight "
-          "where {";
+          "count(*) as ?count "
+        "where {";
 
     if (m_cloudCategory == "kao:Activity") {
         query += " ?activity nao:isRelated ?r . ?activity rdf:type kao:Activity . ?activity kao:activityIdentifier ?label ";
@@ -265,36 +242,14 @@ void CloudQueryProvider::doQuery()
     //Exclude who doesn't have url
     query += " . ?r nie:url ?h . ";
 
-    if (!m_allowedCategories.isEmpty()) {
-        query += "filter(";
-        bool first = true;
-        foreach (const QString &cat, m_allowedCategories) {
-            if (!first) {
-                query += " || ";
-            } else {
-                first = false;
-            }
-            query += " ?label = " + cat;
-        }
-        query += ")";
-    }
-
     //User visibility filter doesn't seem to have an acceptable speed
     //query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) } group by ?label order by ?label";
-
-    query += "}} UNION { "
-              "select distinct ?r ?label "
-                "0 as ?localWeight "
-                "1 as ?globalWeight "
-              "where { "
-                "?r " + m_cloudCategory + " ?label . "
-                "?r nie:url ?h . }}";
-
-    query +=  " } group by ?label order by ?label";
 
     if (!m_showEmptyCategories) {
         query +=  " }} ";
     }
+
+    query +=  " } group by ?label order by ?label";
 
     setSparqlQuery(query);
 }

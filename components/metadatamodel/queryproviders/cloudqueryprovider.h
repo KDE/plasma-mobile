@@ -32,11 +32,6 @@ class CloudQueryProvider : public BasicQueryProvider
     Q_PROPERTY(QString cloudCategory READ cloudCategory WRITE setCloudCategory NOTIFY cloudCategoryChanged)
 
     /**
-     * @property Array A white list of category we want in the results. useful if a category such as the resource type has only a small subset that is actually supposed to be user facing
-     */
-    Q_PROPERTY(QVariantList allowedCategories READ allowedCategories WRITE setAllowedCategories NOTIFY allowedCategoriesChanged)
-
-    /**
      * @property bool if true empty categories will be shown.
      * Default: false
      */
@@ -55,9 +50,6 @@ public:
 
     QVariantList categories() const;
 
-    void setAllowedCategories(const QVariantList &whitelist);
-    QVariantList allowedCategories() const;
-
     void setShowEmptyCategories(bool show);
     bool showEmptyCategories() const;
 
@@ -70,7 +62,6 @@ public:
 
 Q_SIGNALS:
     void cloudCategoryChanged();
-    void allowedCategoriesChanged();
     void showEmptyCategoriesChanged();
 
 protected:
@@ -79,7 +70,6 @@ protected:
 private:
     QString m_cloudCategory;
     bool m_showEmptyCategories;
-    QSet<QString> m_allowedCategories;
 };
 
 #endif // CLOUDQUERYPROVIDER_H

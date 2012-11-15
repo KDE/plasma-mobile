@@ -51,7 +51,6 @@ Item {
                 endDate: "2012-12-31"
                 //tags: ["kde"]
                 //minimumRating: 5
-                //allowedCategories: userTypes.userTypes
             }
         }
 

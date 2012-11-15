@@ -42,11 +42,12 @@ Column {
                 cloudCategory: "rdf:type"
                 resourceType: "nfo:FileDataObject"
                 minimumRating: metadataModel.queryProvider.minimumRating
-                allowedCategories: userTypes.userTypes
             }
         }
         sortRole: "count"
         sortOrder: Qt.DescendingOrder
+        filterRole: "label"
+        filterRegExp: "nfo:Document|nfo:Image|nfo:Audio|nfo:Video|nfo:Archive"
     }
 
     PlasmaExtraComponents.Heading {

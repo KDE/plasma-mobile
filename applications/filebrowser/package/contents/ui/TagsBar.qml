@@ -118,17 +118,9 @@ PlasmaComponents.Page {
                             }
                             Rectangle {
                                 color: parent.parent.checked ? theme.highlightColor : theme.textColor
-                                opacity: 0.1
                                 radius: width/2
                                 anchors.centerIn: parent
-                                width: Math.min(parent.width, 10 * model.totalCount)
-                                height: width
-                            }
-                            Rectangle {
-                                color: parent.parent.checked ? theme.highlightColor : theme.textColor
-                                radius: width/2
-                                anchors.centerIn: parent
-                                width: Math.min(parent.width, 10 * model.count)
+                                width: Math.min(parent.width, 14 + 100 * (model.count / tagCloud.totalCount))
                                 height: width
                             }
                         }

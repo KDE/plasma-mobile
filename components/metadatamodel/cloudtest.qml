@@ -50,7 +50,6 @@ Item {
                 //startDate: "2011-10-10"
                 //tags: ["kde"]
                 //minimumRating: 5
-                //allowedCategories: userTypes.userTypes
             }
         }
 
