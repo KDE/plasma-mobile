@@ -89,11 +89,6 @@ Image {
         x: y
         source: "background-logo.png"
     }
-    PlasmaComponents.BusyIndicator {
-        anchors.centerIn: mainStack
-        visible: metadataModel.running
-        running: visible
-    }
 
     PlasmaComponents.ToolBar {
         id: toolBar
@@ -166,13 +161,9 @@ Image {
         }
     }
     //END non-UI components
-    
+
+
     //BEGIN: UI components
-    PlasmaComponents.BusyIndicator {
-        anchors.centerIn: mainStack
-        visible: metadataModel.running
-        running: visible
-    }
 
     PlasmaComponents.PageStack {
         id: mainStack
@@ -185,5 +176,12 @@ Image {
             left: parent.left
         }
     }
+
+    PlasmaComponents.BusyIndicator {
+        anchors.centerIn: mainStack
+        visible: metadataModel.running
+        running: visible
+    }
+
     //END UI components
 }

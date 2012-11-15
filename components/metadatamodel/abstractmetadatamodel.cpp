@@ -31,7 +31,6 @@
 
 AbstractMetadataModel::AbstractMetadataModel(QObject *parent)
     : QAbstractItemModel(parent),
-      m_running(false),
       m_minimumRating(0),
       m_maximumRating(0)
 {
@@ -109,21 +108,6 @@ void AbstractMetadataModel::serviceRegistered(const QString &service)
         connect(m_queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
         doQuery();
     }
-}
-
-bool AbstractMetadataModel::isRunning() const
-{
-    return m_running;
-}
-
-void AbstractMetadataModel::setRunning(bool running)
-{
-    if (running == m_running) {
-        return;
-    }
-
-    m_running = running;
-    emit runningChanged(running);
 }
 
 void AbstractMetadataModel::requestRefresh()

@@ -64,9 +64,10 @@ MetadataModel::MetadataModel(QObject *parent)
             this, SLOT(entriesRemoved(QList<QUrl>)));
     connect(m_queryThread, SIGNAL(countRetrieved(int)),
             this, SLOT(countRetrieved(int)));
+    connect(m_queryThread, SIGNAL(runningChanged(bool)),
+            this, SIGNAL(runningChanged(bool)));
 
     //TODO: error(QString);
-    //TODO: runningChanged();
 
     m_newEntriesTimer = new QTimer(this);
     m_newEntriesTimer->setSingleShot(true);
@@ -84,6 +85,10 @@ MetadataModel::~MetadataModel()
 {
 }
 
+bool MetadataModel::isRunning() const
+{
+    return m_queryThread->isQueryRunning();
+}
 
 void MetadataModel::setQuery(const Nepomuk2::Query::Query &query)
 {
@@ -393,9 +398,6 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
         index.row() < 0 || index.row() >= m_data.count()){
         return QVariant();
     }
-
-    const Nepomuk2::Resource &resource = m_data[index.row()].resource();
-
 
     //if the resource is not valid *and* there are no additional bindings means no data in these rows was fetched in nepomuk yet
     if (!m_data[index.row()].resource().isValid() &&

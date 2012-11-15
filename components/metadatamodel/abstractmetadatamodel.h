@@ -67,18 +67,12 @@ class AbstractMetadataModel : public QAbstractItemModel
      */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
-    /**
-     * @property bool running: true when queries are in execution
-     */
-    Q_PROPERTY(bool running READ isRunning NOTIFY runningChanged)
-
 public:
     AbstractMetadataModel(QObject *parent = 0);
     ~AbstractMetadataModel();
 
     virtual int count() const = 0;
 
-    bool isRunning() const;
 
     //Reimplemented
     QVariant headerData(int section, Qt::Orientation orientation,
@@ -99,7 +93,6 @@ Q_SIGNALS:
     void endDateChanged();
     void minimumRatingChanged();
     void maximumRatingChanged();
-    void runningChanged(bool running);
 
 protected Q_SLOTS:
     virtual void doQuery();
@@ -181,14 +174,12 @@ protected:
 
     QStringList tagStrings() const;
     QStringList mimeTypeStrings() const;
-    void setRunning(bool running);
     void requestRefresh();
 
 private:
     QDBusServiceWatcher *m_queryServiceWatcher;
     QHash<QString, QString> m_icons;
     QTimer *m_queryTimer;
-    bool m_running;
 
     QString m_resourceType;
     QStringList m_mimeTypes;

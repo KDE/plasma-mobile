@@ -46,7 +46,7 @@ public:
     void fetchResultsPage(int page);
     bool hasQueryOnPage(int page) const;
 
-    bool running() const;
+    bool isQueryRunning() const;
 
 Q_SIGNALS:
     void newResults(const QList<Nepomuk2::Query::Result> &results, int page);
@@ -54,7 +54,7 @@ Q_SIGNALS:
 
     void error(const QString &message);
     void countRetrieved(int);
-    void runningChanged();
+    void runningChanged(bool);
 
 private Q_SLOTS:
     void countQueryResult(const QList< Nepomuk2::Query::Result > &entries);

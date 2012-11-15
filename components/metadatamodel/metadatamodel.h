@@ -67,12 +67,18 @@ class MetadataModel : public AbstractMetadataModel
      */
     Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
 
+    /**
+     * @property bool running: true when queries are in execution
+     */
+    Q_PROPERTY(bool running READ isRunning NOTIFY runningChanged)
 
     Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
 
 public:
     MetadataModel(QObject *parent = 0);
     ~MetadataModel();
+
+    bool isRunning() const;
 
     void setQuery(const Nepomuk2::Query::Query &query);
     Nepomuk2::Query::Query query() const;
@@ -112,6 +118,7 @@ public:
     Q_INVOKABLE QVariantHash get(int row) const;
 
 Q_SIGNALS:
+    void runningChanged(bool running);
     void totalCountChanged();
     void queryProviderChanged();
     void limitChanged();

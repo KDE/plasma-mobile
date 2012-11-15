@@ -81,7 +81,7 @@ void QueryThread::setQuery(const Nepomuk2::Query::Query &query, int limit, int p
     }
 
     m_running = true;
-    emit runningChanged();
+    emit runningChanged(true);
 
     m_countQueryClient->sparqlQuery(m_query.toSparqlQuery(Nepomuk2::Query::Query::CreateCountQuery));
 
@@ -91,7 +91,7 @@ void QueryThread::setQuery(const Nepomuk2::Query::Query &query, int limit, int p
     }
 }
 
-bool QueryThread::running() const
+bool QueryThread::isQueryRunning() const
 {
     return m_running;
 }
@@ -111,6 +111,9 @@ void QueryThread::setSparqlQuery(const QString &query)
     m_queryClientsHistory.clear();
     m_runningClients = 0;
     m_countQueryClient = 0;
+
+    m_running = true;
+    emit runningChanged(true);
 
     fetchResultsPage(0);
 }
@@ -195,6 +198,12 @@ void QueryThread::newEntries(const QList< Nepomuk2::Query::Result > &entries)
     }
 
     emit newResults(entries, page);
+
+    //even tough not 100% correct, running here means it's still busy and nothing whatsoever has been shown to the user yet.
+    //We don't have any way to know exactly when a query is really over, since the connection stays open.
+
+    m_running = false;
+    emit runningChanged(false);
 }
 
 void QueryThread::finishedListing()
@@ -203,7 +212,7 @@ void QueryThread::finishedListing()
 
     if (m_runningClients <= 0) {
         m_running = false;
-        emit runningChanged();
+        emit runningChanged(false);
 
         if (m_queryClientsHistory.count() > 10) {
             for (int i = 0; i < m_queryClientsHistory.count() - 10; ++i) {
