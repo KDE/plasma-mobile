@@ -20,6 +20,7 @@
 #ifndef BASICQUERYPROVIDER_H
 #define BASICQUERYPROVIDER_H
 
+#include "abstractqueryprovider.h"
 #include <QObject>
 #include <QDate>
 #include <QStringList>
@@ -61,7 +62,7 @@ class QTimer;
  *
  * @author Marco Martin <mart@kde.org>
  */
-class BasicQueryProvider : public QObject
+class BasicQueryProvider : public AbstractQueryProvider
 {
     Q_OBJECT
 
@@ -118,22 +119,6 @@ public:
     ~BasicQueryProvider();
 
 
-    /**
-     * C++ API
-     */
-    QHash<int, QByteArray> roleNames() const;
-    QHash<QString, int> roleIds() const;
-    /**
-     * Default implementation does nothing
-     */
-    virtual QVariant formatData(const Nepomuk2::Query::Result &rowData, const QPersistentModelIndex &index, int role) const;
-
-    void setQuery(const Nepomuk2::Query::Query &query);
-    Nepomuk2::Query::Query query() const;
-
-    void setSparqlQuery(const QString &query);
-    QString sparqlQuery() const;
-
     void setResourceType(const QString &type);
     QString resourceType() const;
 
@@ -172,9 +157,6 @@ public:
     QObject *extraParameters() const;
 
 Q_SIGNALS:
-    void dataFormatChanged(const QPersistentModelIndex &index);
-    void queryChanged();
-    void sparqlQueryChanged();
     void resourceTypeChanged();
     void mimeTypesChanged();
     void activityIdChanged();
@@ -189,7 +171,6 @@ protected Q_SLOTS:
     virtual void doQuery();
 
 protected:
-    void setRoleNames(const QHash<int, QByteArray> &names);
 
     QString retrieveIconName(const QStringList &types) const;
     /* from nie:url
@@ -265,11 +246,14 @@ protected:
     QStringList tagStrings() const;
     QStringList mimeTypeStrings() const;
     void setRunning(bool running);
+
+    /**
+     * Schedule a refresh for the query.
+     * If you are using Nepomuk2::Query::Query this should be normally not needed.
+     */
     void requestRefresh();
 
 private:
-    QHash<int, QByteArray> m_roleNames;
-    QHash<QString, int> m_roleIds;
     QTimer *m_queryTimer;
 
     QString m_resourceType;
@@ -281,9 +265,6 @@ private:
     int m_minimumRating;
     int m_maximumRating;
     QDeclarativePropertyMap *m_extraParameters;
-
-    Nepomuk2::Query::Query m_query;
-    QString m_sparqlQuery;
 };
 
 #endif

@@ -30,7 +30,7 @@
 #include <Nepomuk2/ResourceManager>
 
 BasicQueryProvider::BasicQueryProvider(QObject *parent)
-    : QObject(parent),
+    : AbstractQueryProvider(parent),
       m_minimumRating(0),
       m_maximumRating(0)
 {
@@ -46,62 +46,6 @@ BasicQueryProvider::BasicQueryProvider(QObject *parent)
 BasicQueryProvider::~BasicQueryProvider()
 {
     delete m_extraParameters;
-}
-
-
-void BasicQueryProvider::setRoleNames(const QHash<int, QByteArray> &names)
-{
-    m_roleNames = names;
-    m_roleIds.clear();
-    QHash<int, QByteArray>::const_iterator i;
-    for (i = names.constBegin(); i != names.constEnd(); ++i) {
-        m_roleIds[i.value()] = i.key();
-    }
-}
-
-QHash<int, QByteArray> BasicQueryProvider::roleNames() const
-{
-    return m_roleNames;
-}
-
-QHash<QString, int> BasicQueryProvider::roleIds() const
-{
-    return m_roleIds;
-}
-
-QVariant BasicQueryProvider::formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const
-{
-    Q_UNUSED(row)
-    Q_UNUSED(index)
-    Q_UNUSED(role)
-    return QVariant();
-}
-
-void BasicQueryProvider::setQuery(const Nepomuk2::Query::Query &query)
-{
-    m_query = query;
-
-    emit queryChanged();
-}
-
-Nepomuk2::Query::Query BasicQueryProvider::query() const
-{
-    return m_query;
-}
-
-void BasicQueryProvider::setSparqlQuery(const QString &query)
-{
-    if (m_sparqlQuery == query) {
-        return;
-    }
-
-    m_sparqlQuery = query;
-    emit sparqlQueryChanged();
-}
-
-QString BasicQueryProvider::sparqlQuery() const
-{
-    return m_sparqlQuery;
 }
 
 void BasicQueryProvider::setResourceType(const QString &type)
