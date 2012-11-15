@@ -112,6 +112,10 @@ void QueryThread::setSparqlQuery(const QString &query)
     m_runningClients = 0;
     m_countQueryClient = 0;
 
+    if (query.isEmpty()) {
+        return;
+    }
+
     m_running = true;
     emit runningChanged(true);
 
