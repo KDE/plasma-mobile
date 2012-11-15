@@ -308,7 +308,7 @@ Item {
                                     selectedModel.append(model)
                                 }
                             }
-                            onClicked: openFile(model["url"], mimeType)
+                            onClicked: openResource(model)
                         }
                         Component.onCompleted: {
                             for (var i = 0; i < selectedModel.count; ++i) {

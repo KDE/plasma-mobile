@@ -95,14 +95,14 @@ Image {
         height: tools && tools.item !== null ? theme.hugeIconSize : 0
     }
 
-    function openFile(url, mimeType)
+    function openResource(data)
     {
-        if (mimeType == "inode/directory") {
-            dirModel.url = url
+        if (data.mimeType == "inode/directory") {
+            dirModel.url = data.url
             fileBrowserRoot.model = dirModel
         } else if (!mainStack.busy) {
-            var packageName = application.packageForMimeType(mimeType)
-            print("Package for mimetype " + mimeType + " " + packageName)
+            var packageName = application.packageForMimeType(data.mimeType)
+            print("Package for mimetype " + data.mimeType + " " + packageName)
             if (packageName) {
                 partPackage.name = packageName
                 if (partPackage.visibleName && partPackage.visibleName != '') {
@@ -111,9 +111,9 @@ Image {
                     application.caption = i18n('Files')
                 }
                 var part = mainStack.push(partPackage.filePath("mainscript"))
-                part.loadFile(url)
+                part.loadResource(data)
             } else {
-                Qt.openUrlExternally(url)
+                Qt.openUrlExternally(data.url)
             }
         }
     }
@@ -156,7 +156,7 @@ Image {
                         mainStack.push(Qt.createComponent("Browser.qml"))
                     }
                 }
-                openFile(path, startupMimeType)
+                openResource({"url": path, "mimeType": startupMimeType})
             }
         }
     }

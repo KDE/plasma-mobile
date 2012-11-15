@@ -50,6 +50,7 @@ AbstractQueryProvider::~AbstractQueryProvider()
 void AbstractQueryProvider::setRoleNames(const QHash<int, QByteArray> &names)
 {
     d->roleNames = names;
+    d->roleNames[ResultRow] = "resultRow";
     d->roleIds.clear();
     QHash<int, QByteArray>::const_iterator i;
     for (i = names.constBegin(); i != names.constEnd(); ++i) {

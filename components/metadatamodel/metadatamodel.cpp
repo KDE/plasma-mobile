@@ -415,7 +415,12 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     }
 
 
-    return m_queryProvider.data()->formatData(m_data[index.row()], QPersistentModelIndex(index), role);
+    switch (role) {
+    case AbstractQueryProvider::ResultRow:
+        return index.row();
+    default:
+        return m_queryProvider.data()->formatData(m_data[index.row()], QPersistentModelIndex(index), role);
+    }
 }
 
 QVariantHash MetadataModel::get(int row) const

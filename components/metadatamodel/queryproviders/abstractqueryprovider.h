@@ -51,6 +51,9 @@ class AbstractQueryProvider : public QObject
     Q_OBJECT
 
 public:
+    enum Roles {
+        ResultRow = Qt::UserRole + 1000,
+    };
     AbstractQueryProvider(QObject *parent = 0);
     ~AbstractQueryProvider();
 
