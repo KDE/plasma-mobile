@@ -20,8 +20,7 @@
 #ifndef METADATAMODEL_H
 #define METADATAMODEL_H
 
-#include "abstractmetadatamodel.h"
-
+#include <QAbstractListModel>
 #include <QDate>
 
 #include <Nepomuk2/Query/Query>
@@ -35,7 +34,7 @@ namespace Nepomuk2 {
 }
 
 
-
+class QDBusServiceWatcher;
 class QTimer;
 
 class BasicQueryProvider;
@@ -46,9 +45,14 @@ class QueryThread;
  *
  * @author Marco Martin <mart@kde.org>
  */
-class MetadataModel : public AbstractMetadataModel
+class MetadataModel : public QAbstractListModel
 {
     Q_OBJECT
+
+    /**
+     * @property int the total number of rows in this model
+     */
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
     /**
      * @property int optional limit to cut off the results
@@ -117,7 +121,11 @@ public:
      */
     Q_INVOKABLE QVariantHash get(int row) const;
 
+    //Reimplemented
+    int rowCount(const QModelIndex &parent) const;
+
 Q_SIGNALS:
+    void countChanged();
     void runningChanged(bool running);
     void totalCountChanged();
     void queryProviderChanged();
@@ -128,17 +136,22 @@ protected Q_SLOTS:
     void countRetrieved(int count);
     void newEntries(const QList< Nepomuk2::Query::Result > &entries, int page);
     void entriesRemoved(const QList<QUrl> &urls);
-    virtual void doQuery();
+    void doQuery();
     void newEntriesDelayed();
     void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val);
     void dataFormatChanged(const QPersistentModelIndex &index);
+    void serviceRegistered(const QString &service);
 
 protected:
     void fetchResultsPage(int page);
+    void requestRefresh();
 
 private:
     //query construction is completely delegated to this
     QWeakPointer<BasicQueryProvider> m_queryProvider;
+
+    //To be sure that nepomuk is up, and watch when it goes up/down
+    QDBusServiceWatcher *m_queryServiceWatcher;
 
     //perform all the queries in this thread
     QueryThread *m_queryThread;
@@ -168,6 +181,9 @@ private:
     QHash<int, QList<Nepomuk2::Query::Result> > m_dataToInsert;
     //maps uris ro row numbers, so when entriesRemoved arrived, we know what rows to remove
     QHash<QUrl, int> m_uriToRow;
+
+    //used to event compressreset of the query for instance when limit or cacheresults change
+    QTimer *m_queryTimer;
 
     //used purely for benchmark
     QTime m_elapsedTime;

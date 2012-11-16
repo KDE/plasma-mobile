@@ -12,7 +12,6 @@ INCLUDE_DIRECTORIES(
 )
 
 set(datamodels_SRCS
-    abstractmetadatamodel.cpp
     datamodelsplugin.cpp
     metadatamodel.cpp
     metadatausertypes.cpp

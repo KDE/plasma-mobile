@@ -25,6 +25,7 @@
 
 #include <QDBusConnection>
 #include <QDBusServiceWatcher>
+#include <QDBusConnectionInterface>
 #include <QTimer>
 
 #include <KDebug>
@@ -53,7 +54,7 @@ using namespace Nepomuk2::Vocabulary;
 using namespace Soprano::Vocabulary;
 
 MetadataModel::MetadataModel(QObject *parent)
-    : AbstractMetadataModel(parent),
+    : QAbstractListModel(parent),
       m_limit(0),
       m_pageSize(30)
 {
@@ -69,6 +70,19 @@ MetadataModel::MetadataModel(QObject *parent)
 
     //TODO: error(QString);
 
+    connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)),
+            this, SIGNAL(countChanged()));
+    connect(this, SIGNAL(rowsRemoved(QModelIndex,int,int)),
+            this, SIGNAL(countChanged()));
+    connect(this, SIGNAL(modelReset()),
+            this, SIGNAL(countChanged()));
+
+
+    m_queryTimer = new QTimer(this);
+    m_queryTimer->setInterval(0);
+    m_queryTimer->setSingleShot(true);
+
+
     m_newEntriesTimer = new QTimer(this);
     m_newEntriesTimer->setSingleShot(true);
     connect(m_newEntriesTimer, SIGNAL(timeout()),
@@ -79,6 +93,19 @@ MetadataModel::MetadataModel(QObject *parent)
     m_watcher->addProperty(NAO::numericRating());
     connect(m_watcher, SIGNAL(propertyAdded(Nepomuk2::Resource,Nepomuk2::Types::Property, QVariant)),
             this, SLOT(propertyChanged(Nepomuk2::Resource,Nepomuk2::Types::Property, QVariant)));
+
+
+    m_queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
+                        QDBusConnection::sessionBus(),
+                        QDBusServiceWatcher::WatchForRegistration,
+                        this);
+    connect(m_queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
+
+    QDBusConnectionInterface* interface = m_queryServiceWatcher->connection().interface();
+
+    if (interface->isServiceRegistered("org.kde.nepomuk.services.nepomukqueryservice")) {
+        connect(m_queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
+    }
 }
 
 MetadataModel::~MetadataModel()
@@ -168,6 +195,10 @@ bool MetadataModel::lazyLoading() const
     return (m_pageSize > 0);
 }
 
+void MetadataModel::requestRefresh()
+{
+    m_queryTimer->start();
+}
 
 void MetadataModel::doQuery()
 {
@@ -444,6 +475,24 @@ void MetadataModel::sort(int column, Qt::SortOrder order)
 
     beginResetModel();
     endResetModel();
+}
+
+int MetadataModel::rowCount(const QModelIndex &parent) const
+{
+    if (parent.isValid()) {
+        return 0;
+    }
+
+    return count();
+}
+
+void MetadataModel::serviceRegistered(const QString &service)
+{
+    if (service == QLatin1String("org.kde.nepomuk.services.nepomukqueryservice")) {
+        disconnect(m_queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
+        connect(m_queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
+        doQuery();
+    }
 }
 
 #include "metadatamodel.moc"

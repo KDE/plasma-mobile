@@ -38,7 +38,6 @@ void DataModelsPlugin::registerTypes(const char *uri)
     qmlRegisterType<ResourceQueryProvider>(uri, 0, 1, "ResourceQueryProvider");
     qmlRegisterType<CloudQueryProvider>(uri, 0, 1, "CloudQueryProvider");
     qmlRegisterType<TimelineQueryProvider>(uri, 0, 1, "TimelineQueryProvider");
-    
 
     qmlRegisterType<MetadataModel>(uri, 0, 1, "MetadataModel");
     qmlRegisterType<MetadataUserTypes>(uri, 0, 1, "MetadataUserTypes");
