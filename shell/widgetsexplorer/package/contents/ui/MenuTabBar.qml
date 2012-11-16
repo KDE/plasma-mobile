@@ -117,7 +117,7 @@ PlasmaComponents.TabBar {
                     activityId: "!"+activitySource.data["Status"]["Current"]
                     sortBy: ["nco:fullname"]
                     resourceType: "nco:Contact"
-                    queryString: "*" + searchField.searchQuery + "*"
+                    queryString: searchField.searchQuery ? "*" + searchField.searchQuery + "*" : ""
                 }
             }
         }
@@ -132,7 +132,7 @@ PlasmaComponents.TabBar {
                     activityId: "!"+activitySource.data["Status"]["Current"]
                     sortOrder: Qt.AscendingOrder
                     resourceType: "nfo:Document"
-                    queryString: "*" + searchField.searchQuery + "*"
+                    queryString: searchField.searchQuery ? "*" + searchField.searchQuery + "*" : ""
                 }
             }
         }
@@ -147,7 +147,7 @@ PlasmaComponents.TabBar {
                     activityId: "!"+activitySource.data["Status"]["Current"]
                     sortOrder: Qt.AscendingOrder
                     resourceType: "nfo:Image"
-                    queryString: "*" + searchField.searchQuery + "*"
+                    queryString: searchField.searchQuery ? "*" + searchField.searchQuery + "*" : ""
                 }
             }
         }
@@ -158,11 +158,11 @@ PlasmaComponents.TabBar {
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
                 queryProvider: MetadataModels.ResourceQueryProvider {
-                    sortBy: ["nie:title"]
+                    sortBy: ["nfo:fileName"]
                     activityId: "!"+activitySource.data["Status"]["Current"]
                     sortOrder: Qt.AscendingOrder
                     resourceType: "nfo:Audio"
-                    queryString: "*" + searchField.searchQuery + "*"
+                    queryString: searchField.searchQuery ? "*" + searchField.searchQuery + "*" : ""
                 }
             }
         }
@@ -177,7 +177,7 @@ PlasmaComponents.TabBar {
                     activityId: "!"+activitySource.data["Status"]["Current"]
                     sortOrder: Qt.AscendingOrder
                     resourceType: "nfo:Video"
-                    queryString: "*" + searchField.searchQuery + "*"
+                    queryString: searchField.searchQuery ? "*" + searchField.searchQuery + "*" : ""
                 }
             }
         }
