@@ -36,15 +36,18 @@ Column {
 
     PlasmaCore.SortFilterModel {
         id: sortFilterModel
-        sourceModel: MetadataModels.MetadataCloudModel {
+        sourceModel: MetadataModels.MetadataModel {
             id: typesCloudModel
-            cloudCategory: "rdf:type"
-            resourceType: "nfo:FileDataObject"
-            minimumRating: metadataModel.minimumRating
-            allowedCategories: userTypes.userTypes
+            queryProvider: MetadataModels.CloudQueryProvider {
+                cloudCategory: "rdf:type"
+                resourceType: "nfo:FileDataObject"
+                minimumRating: metadataModel.queryProvider.minimumRating
+            }
         }
         sortRole: "count"
         sortOrder: Qt.DescendingOrder
+        filterRole: "label"
+        filterRegExp: "nfo:Document|nfo:Image|nfo:Audio|nfo:Video|nfo:Archive"
     }
 
     PlasmaExtraComponents.Heading {
@@ -76,11 +79,11 @@ Column {
                 text: i18nc("Resource type, how many entries of this resource", "%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
                 //FIXME: more elegant way to remove applications?
                 visible: model["label"] != undefined && model["label"] != "nfo:Application"
-                //checked: metadataModel.resourceType == model["label"]
+                //checked: metadataModel.queryProvider.resourceType == model["label"]
                 onCheckedChanged: {
                     if (checked) {
                         buttonColumn.exclusive = true
-                        metadataModel.resourceType = model["label"]
+                        metadataModel.queryProvider.resourceType = model["label"]
                     }
                 }
             }
@@ -94,14 +97,14 @@ Column {
         }
         PlasmaComponents.RadioButton {
             text: i18n("Current activity")
-            //checked: metadataModel.activityId == activitySource.data.Status.Current
+            //checked: metadataModel.queryProvider.activityId == activitySource.data.Status.Current
             onCheckedChanged: {
                 if (checked) {
                     buttonColumn.exclusive = true
-                    metadataModel.resourceType = "nfo:FileDataObject"
-                    metadataModel.activityId = activitySource.data.Status.Current
+                    metadataModel.queryProvider.resourceType = "nfo:FileDataObject"
+                    metadataModel.queryProvider.activityId = activitySource.data.Status.Current
                 } else {
-                    metadataModel.activityId = ""
+                    metadataModel.queryProvider.activityId = ""
                 }
             }
             Rectangle {

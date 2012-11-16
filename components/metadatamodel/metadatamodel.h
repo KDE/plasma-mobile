@@ -20,11 +20,8 @@
 #ifndef METADATAMODEL_H
 #define METADATAMODEL_H
 
-#include "abstractmetadatamodel.h"
-
+#include <QAbstractListModel>
 #include <QDate>
-
-#include <KFileItem>
 
 #include <Nepomuk2/Query/Query>
 #include <Nepomuk2/Query/Result>
@@ -37,43 +34,30 @@ namespace Nepomuk2 {
 }
 
 
-
+class QDBusServiceWatcher;
 class QTimer;
 
-class KImageCache;
+class BasicQueryProvider;
+class QueryThread;
 
 /**
  * This is the main class of the Nepomuk model bindings: given a query built by assigning its properties such as queryString, resourceType, startDate etc, it constructs a model with a resource per row, with direct access of its main properties as roles.
  *
  * @author Marco Martin <mart@kde.org>
  */
-class MetadataModel : public AbstractMetadataModel
+class MetadataModel : public QAbstractListModel
 {
     Q_OBJECT
-    /**
-     * @property string a free form query in the Nepomuk desktop query language
-     */
-    Q_PROPERTY(QString queryString READ queryString WRITE setQueryString NOTIFY queryStringChanged)
 
     /**
-     * @property Array list of fields the results will be sorted: their order is the priority in sorting
+     * @property int the total number of rows in this model
      */
-    Q_PROPERTY(QVariantList sortBy READ sortBy WRITE setSortBy NOTIFY sortByChanged)
-
-    /**
-     * @property SortOrder Qt.Ascending or Qt.Descending
-     */
-    Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
     /**
      * @property int optional limit to cut off the results
      */
     Q_PROPERTY(int limit READ limit WRITE setLimit NOTIFY limitChanged)
-
-    /**
-     * If true the resources will be filtered and sorted by the most relevant as a whole or in relation to the activity indicated in the activityId property
-     */
-    Q_PROPERTY(bool scoreResources READ scoreResources WRITE setScoreResources NOTIFY scoreResourcesChanged)
 
     /**
      * load as less resources as possible from Nepomuk (only load when asked from the view)
@@ -83,68 +67,37 @@ class MetadataModel : public AbstractMetadataModel
     Q_PROPERTY(bool lazyLoading READ lazyLoading WRITE setLazyLoading NOTIFY lazyLoadingChanged)
 
     /**
-     * Use this property to specify the size of thumbnail which the model should attempt to generate for the thumbnail role.
+     * @property int Total count of resource items: this is not the number of rows of the result, but the aggregate of how many items there are for each separate item. Available when a query has a column count (integer)
      */
-    Q_PROPERTY(QSize thumbnailSize READ thumbnailSize WRITE setThumbnailSize NOTIFY thumbnailSizeChanged)
+    Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
+
+    /**
+     * @property bool running: true when queries are in execution
+     */
+    Q_PROPERTY(bool running READ isRunning NOTIFY runningChanged)
+
+    Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
 
 public:
-    enum Roles {
-        Label = Qt::UserRole+1,
-        Description,
-        Types,
-        ClassName,
-        GenericClassName,
-        HasSymbol,
-        Icon,
-        Thumbnail,
-        IsFile,
-        Exists,
-        Rating,
-        NumericRating,
-        ResourceUri,
-        ResourceType,
-        MimeType,
-        Url,
-        Tags,
-        TagsNames
-    };
-
     MetadataModel(QObject *parent = 0);
     ~MetadataModel();
+
+    bool isRunning() const;
 
     void setQuery(const Nepomuk2::Query::Query &query);
     Nepomuk2::Query::Query query() const;
 
-    virtual int count() const {return m_resources.count();}
+    void setQueryProvider(BasicQueryProvider *provider);
+    BasicQueryProvider *queryProvider() const;
 
-    void setQueryString(const QString &query);
-    QString queryString() const;
-
-
-
-    void setSortBy(const QVariantList &sortBy);
-    QVariantList sortBy() const;
-
-    void setSortOrder(Qt::SortOrder sortOrder);
-    Qt::SortOrder sortOrder() const;
+    virtual int count() const {return m_data.count();}
+    int totalCount() const {return m_totalCount;}
 
     void setLazyLoading(bool size);
     bool lazyLoading() const;
 
     void setLimit(int limit);
     int limit() const;
-
-    void setScoreResources(bool score);
-    bool scoreResources() const;
-
-    void setThumbnailSize(const QSize &size);
-    QSize thumbnailSize() const;
-
-    /**
-     * searches for a resource in the whole model
-     * @arg resToFind the uri or url of the resource
-     */
-    Q_INVOKABLE int find(const QString &resToFind);
 
     //Reimplemented
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -168,71 +121,72 @@ public:
      */
     Q_INVOKABLE QVariantHash get(int row) const;
 
-Q_SIGNALS:
-    void queryStringChanged();
+    //Reimplemented
+    int rowCount(const QModelIndex &parent) const;
 
-    void sortByChanged();
-    void sortOrderChanged();
+Q_SIGNALS:
+    void countChanged();
+    void runningChanged(bool running);
+    void totalCountChanged();
+    void queryProviderChanged();
     void limitChanged();
     void lazyLoadingChanged();
-    void scoreResourcesChanged();
-    void thumbnailSizeChanged();
 
 protected Q_SLOTS:
-    void countQueryResult(const QList< Nepomuk2::Query::Result > &entries);
-    void newEntries(const QList< Nepomuk2::Query::Result > &entries);
+    void countRetrieved(int count);
+    void newEntries(const QList< Nepomuk2::Query::Result > &entries, int page);
     void entriesRemoved(const QList<QUrl> &urls);
-    virtual void doQuery();
+    void doQuery();
     void newEntriesDelayed();
-    void finishedListing();
     void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val);
-    void showPreview(const KFileItem &item, const QPixmap &preview);
-    void previewFailed(const KFileItem &item);
-    void delayedPreview();
+    void dataFormatChanged(const QPersistentModelIndex &index);
+    void serviceRegistered(const QString &service);
 
 protected:
     void fetchResultsPage(int page);
+    void requestRefresh();
 
 private:
+    //query construction is completely delegated to this
+    QWeakPointer<BasicQueryProvider> m_queryProvider;
+
+    //To be sure that nepomuk is up, and watch when it goes up/down
+    QDBusServiceWatcher *m_queryServiceWatcher;
+
+    //perform all the queries in this thread
+    QueryThread *m_queryThread;
+
+    //actual query performed
     Nepomuk2::Query::Query m_query;
-    //mapping page->query client
-    QHash<int, Nepomuk2::Query::QueryServiceClient *> m_queryClients;
-    //mapping query client->page
-    QHash<Nepomuk2::Query::QueryServiceClient *, int> m_pagesForClient;
-    //where is the last valid (already populated) index for a given page
-    QHash<int, int> m_validIndexForPage;
-    //keep always running at most 10 clients, get rid of the old ones
-    //won't be possible to monitor forresources going away, but is too heavy
-    QList<Nepomuk2::Query::QueryServiceClient *> m_queryClientsHistory;
-    //how many service clients are running now?
-    int m_runningClients;
+    //sparql version: they are mutually exclusive
+    QString m_sparqlQuery;
 
-    Nepomuk2::Query::QueryServiceClient *m_countQueryClient;
-    Nepomuk2::ResourceWatcher* m_watcher;
-    QVector<Nepomuk2::Resource> m_resources;
-    QHash<int, QList<Nepomuk2::Resource> > m_resourcesToInsert;
-    QHash<QUrl, int> m_uriToResourceIndex;
-    QTimer *m_newEntriesTimer;
-    QTime m_elapsedTime;
-
-    //pieces to build m_query
-    QString m_queryString;
+    //pieces to limit how much stuff we fetch
     int m_limit;
     int m_pageSize;
-    bool m_scoreResources;
 
-    QStringList m_sortBy;
-    Qt::SortOrder m_sortOrder;
+    //where is the last valid (already populated) index for a given page
+    QHash<int, int> m_validIndexForPage;
 
-    //previews
-    QTimer *m_previewTimer;
-    QHash<KUrl, QPersistentModelIndex> m_filesToPreview;
-    QSize m_thumbnailSize;
-    QHash<KUrl, QPersistentModelIndex> m_previewJobs;
-    KImageCache* m_imageCache;
-    QStringList* m_thumbnailerPlugins;
 
-    QHash<Nepomuk2::Resource, QHash<int, QVariant> > m_cachedResources;
+    int m_totalCount;
+
+    //actual main data
+    QVector<Nepomuk2::Query::Result> m_data;
+    //some properties may change dynamically
+    Nepomuk2::ResourceWatcher* m_watcher;
+    //used to event compress new results arriving
+    QTimer *m_newEntriesTimer;
+    //a queue by page of the data that will be inserted in the model with event compression
+    QHash<int, QList<Nepomuk2::Query::Result> > m_dataToInsert;
+    //maps uris ro row numbers, so when entriesRemoved arrived, we know what rows to remove
+    QHash<QUrl, int> m_uriToRow;
+
+    //used to event compressreset of the query for instance when limit or cacheresults change
+    QTimer *m_queryTimer;
+
+    //used purely for benchmark
+    QTime m_elapsedTime;
 };
 
 #endif

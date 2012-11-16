@@ -21,7 +21,6 @@ import QtQuick 1.0
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.runnermodel 0.1 as RunnerModels
 
 PlasmaComponents.Sheet {

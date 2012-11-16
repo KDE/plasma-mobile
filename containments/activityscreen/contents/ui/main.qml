@@ -94,14 +94,19 @@ Item {
         imagePath: "widgets/extender-dragger"
     }
 
-    MetadataModels.MetadataCloudModel {
+    PlasmaCore.SortFilterModel {
         id: categoryListModel
-        cloudCategory: "rdf:type"
-        activityId: plasmoid.activityId
-        allowedCategories: userTypes.userTypes
-        onCategoriesChanged: {
+        sourceModel: MetadataModels.MetadataModel {
+            queryProvider: MetadataModels.CloudQueryProvider {
+                cloudCategory: "rdf:type"
+                activityId: plasmoid.activityId
+            }
+        }
+        onCountChanged: {
             categoriesTimer.restart()
         }
+        filterRole: "label"
+        filterRegExp: "nfo:Application|nfo:Document|nfo:Image|nfo:Audio|nfo:Video|nfo:Archive"
     }
 
     MetadataModels.MetadataUserTypes {
@@ -239,11 +244,17 @@ Item {
                     var component = Qt.createComponent("ItemsListGroup.qml")
                     var existingCategories = Array()
 
+                    var categories = new Array()
+                    //build category list
+                    for (var i = 0; i < categoryListModel.count; ++i) {
+                        categories[i] = categoryListModel.get(i).label
+                    }
+
                     //FIXME: find a more efficient way
                     //destroy removed categories
                     for (var category in LayoutManager.itemGroups) {
                         if (category.indexOf("Applet-") != 0 &&
-                            categoryListModel.categories.indexOf(category) == -1) {
+                            categories.indexOf(category) == -1) {
                             var item = LayoutManager.itemGroups[category]
                             LayoutManager.setSpaceAvailable(item.x, item.y, item.width, item.height, true)
                             item.destroy()
@@ -253,8 +264,8 @@ Item {
                     }
 
                     //add newly created categories
-                    for (var i = 0; i < categoryListModel.categories.length; ++i) {
-                        var category = categoryListModel.categories[i]
+                    for (var i = 0; i < categories.length; ++i) {
+                        var category = categories[i]
                         if (!LayoutManager.itemGroups[category]) {
                             var itemGroup = component.createObject(resultsFlow)
                             itemGroup.category = category

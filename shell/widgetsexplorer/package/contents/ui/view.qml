@@ -86,10 +86,30 @@ PlasmaComponents.Sheet {
         id: userTypes
     }
 
-    MetadataModels.MetadataCloudModel {
+    MetadataModels.MetadataModel {
         id: cloudModel
-        cloudCategory: "rdf:type"
-        allowedCategories: userTypes.userTypes
+        queryProvider: MetadataModels.CloudQueryProvider {
+            cloudCategory: "rdf:type"
+        }
+    }
+
+    PlasmaCore.SortFilterModel {
+        id: categoryListModel
+        sourceModel: MetadataModels.MetadataModel {
+            queryProvider: MetadataModels.CloudQueryProvider {
+                cloudCategory: "rdf:type"
+            }
+        }
+        onCountChanged: {
+            var cat = new Array()
+            for (var i = 0; i < count; ++i) {
+                cat[i] = categoryListModel.get(i).label
+            }
+            categories = cat
+        }
+        property variant categories
+        filterRole: "label"
+        filterRegExp: "nfo:Document|nfo:Image|nfo:Audio|nfo:Video|nfo:Archive"
     }
 
     PlasmaCore.DataSource {
@@ -159,10 +179,12 @@ PlasmaComponents.Sheet {
         ResourceBrowser {
             model: MetadataModels.MetadataModel {
                 id: runnerModel
-                queryString: searchField.searchQuery.length > 3 ? "*" + searchField.searchQuery + "*" : ""
-                onQueryStringChanged: {
-                    if (searchField.searchQuery.length <= 3) {
-                        stack.pop()
+                queryProvider: MetadataModels.ResourceQueryProvider {
+                    queryString: searchField.searchQuery.length > 3 ? "*" + searchField.searchQuery + "*" : ""
+                    onQueryStringChanged: {
+                        if (searchField.searchQuery.length <= 3) {
+                            stack.pop()
+                        }
                     }
                 }
                 Component.onCompleted: {

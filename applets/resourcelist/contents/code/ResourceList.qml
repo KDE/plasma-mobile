@@ -70,6 +70,7 @@ Item {
 
         model: MetadataModels.MetadataModel {
             id: metadataModel
+            queryProvider: MetadataModels.ResourceQueryProvider {}
             onRunningChanged: {
                 if (!running) {
                     statusLabel.text = "";
@@ -101,7 +102,7 @@ Item {
        interval: 2000
        onTriggered: {
             plasmoid.busy = true
-            metadataModel.queryString = searchBox.text
+            metadataModel.queryProvider.queryString = searchBox.text
             statusLabel.text = i18n("Searching for %1...", searchBox.text);
        }
     }

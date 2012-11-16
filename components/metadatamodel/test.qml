@@ -44,7 +44,7 @@ Item {
                     text: "Documents"
                     onCheckedChanged: {
                         if (checked) {
-                            metadataModel.resourceType = "nfo:Document"
+                            metadataModel.queryProvider.resourceType = "nfo:Document"
                         }
                     }
                 }
@@ -52,7 +52,7 @@ Item {
                     text: "Images"
                     onCheckedChanged: {
                         if (checked) {
-                            metadataModel.resourceType = "nfo:Image"
+                            metadataModel.queryProvider.resourceType = "nfo:Image"
                         }
                     }
                 }
@@ -60,7 +60,7 @@ Item {
                     text: "Any"
                     onCheckedChanged: {
                         if (checked) {
-                            metadataModel.resourceType = ""
+                            metadataModel.queryProvider.resourceType = ""
                         }
                     }
                 }
@@ -80,7 +80,7 @@ Item {
                     text: "Ascending"
                     onCheckedChanged: {
                         if (checked) {
-                            metadataModel.sortOrder = Qt.AscendingOrder
+                            metadataModel.queryProvider.sortOrder = Qt.AscendingOrder
                         }
                     }
                 }
@@ -88,7 +88,7 @@ Item {
                     text: "Descending"
                     onCheckedChanged: {
                         if (checked) {
-                            metadataModel.sortOrder = Qt.DescendingOrder
+                            metadataModel.queryProvider.sortOrder = Qt.DescendingOrder
                         }
                     }
                 }
@@ -125,13 +125,13 @@ Item {
             TextField {
                 anchors.verticalCenter: parent.verticalCenter
                 onTextChanged: {
-                    metadataModel.startDate = text
+                    metadataModel.queryProvider.startDate = text
                 }
             }
             TextField {
                 anchors.verticalCenter: parent.verticalCenter
                 onTextChanged: {
-                    metadataModel.endDate = text
+                    metadataModel.queryProvider.endDate = text
                 }
             }
             Item {
@@ -145,7 +145,7 @@ Item {
             TextField {
                 anchors.verticalCenter: parent.verticalCenter
                 onTextChanged: {
-                    metadataModel.rating = text
+                    metadataModel.queryProvider.rating = text
                 }
             }
         }
@@ -167,22 +167,24 @@ Item {
             //resourceType: "nfo:Document"
             //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
             //mimeType: "vnd.oasis.opendocument.text"
-            sortBy: ["nie:url", "nao:lastModified"]
-            tags: {
-                if (kdeTagCheckbox.checked && nepomukTagCheckbox.checked) {
-                    return ["nepomuk", "kde"]
-                } else if (kdeTagCheckbox.checked) {
-                    return ["kde"]
-                } else if (nepomukTagCheckbox.checked) {
-                    return ["nepomuk"]
-                } else {
-                    return []
+            queryProvider: ResourceQueryProvider {
+                //sortBy: ["nie:url", "nao:lastModified"]
+                tags: {
+                    if (kdeTagCheckbox.checked && nepomukTagCheckbox.checked) {
+                        return ["nepomuk", "kde"]
+                    } else if (kdeTagCheckbox.checked) {
+                        return ["kde"]
+                    } else if (nepomukTagCheckbox.checked) {
+                        return ["nepomuk"]
+                    } else {
+                        return []
+                    }
                 }
+                sortOrder: Qt.AscendingOrder
             }
-            sortOrder: Qt.AscendingOrder
 
             /*Component.onCompleted: {
-                metadataModel.extraParameters["nie:mimeType"] = "vnd.oasis.opendocument.text"
+                metadataModel.queryProvider.extraParameters["nie:mimeType"] = "vnd.oasis.opendocument.text"
             }*/
         }
 

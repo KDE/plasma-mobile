@@ -188,9 +188,9 @@ Item {
         onSearchQueryChanged: {
             if (searchQuery.length > 3) {
                 // the "*" are needed for substring match.
-                metadataModel.extraParameters["nfo:fileName"] = "*" + searchBox.searchQuery + "*"
+                metadataModel.queryProvider.extraParameters["nfo:fileName"] = "*" + searchBox.searchQuery + "*"
             } else {
-                metadataModel.extraParameters["nfo:fileName"] = ""
+                metadataModel.queryProvider.extraParameters["nfo:fileName"] = ""
             }
         }
         busy: metadataModel.running

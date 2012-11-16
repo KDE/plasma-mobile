@@ -1,52 +1,44 @@
 /*
-    Copyright 2011 Marco Martin <notmart@gmail.com>
+    Copyright (C) 2012  Marco Martin <mart@kde.org>
 
     This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Library General Public
+    modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
+    version 2.1 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Library General Public License for more details.
+    Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Library General Public License
-    along with this library; see the file COPYING.LIB.  If not, write to
-    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA 02110-1301, USA.
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "metadatatimelinemodel.h"
 
+#include "timelinequeryprovider.h"
 
 #include <KDebug>
-#include <KMimeType>
 #include <KCalendarSystem>
 
 #include <soprano/vocabulary.h>
 
 #include <Nepomuk2/File>
-#include <Nepomuk2/Query/AndTerm>
-#include <Nepomuk2/Query/ResourceTerm>
 #include <Nepomuk2/Tag>
 #include <Nepomuk2/Variant>
-#include <nepomuk2/comparisonterm.h>
-#include <nepomuk2/literalterm.h>
-#include <nepomuk2/queryparser.h>
-#include <nepomuk2/resourcetypeterm.h>
-#include <nepomuk2/standardqueries.h>
 
-#include <nepomuk2/nfo.h>
-#include <nepomuk2/nie.h>
+#include <Nepomuk2/Query/AndTerm>
+#include <Nepomuk2/Query/OrTerm>
+#include <Nepomuk2/Query/NegationTerm>
+#include <Nepomuk2/Query/ResourceTerm>
+#include <Nepomuk2/Query/ComparisonTerm>
+#include <Nepomuk2/Query/LiteralTerm>
+#include <Nepomuk2/Query/QueryParser>
+#include <Nepomuk2/Query/ResourceTypeTerm>
+#include <Nepomuk2/Query/StandardQuery>
 
-#include "kao.h"
-
-
-MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
-    : AbstractMetadataModel(parent),
-      m_queryClient(0),
-      m_totalCount(0)
+TimelineQueryProvider::TimelineQueryProvider(QObject* parent): BasicQueryProvider(parent)
 {
     QHash<int, QByteArray> roleNames;
     roleNames[LabelRole] = "label";
@@ -55,15 +47,14 @@ MetadataTimelineModel::MetadataTimelineModel(QObject *parent)
     roleNames[DayRole] = "day";
     roleNames[CountRole] = "count";
     setRoleNames(roleNames);
-    requestRefresh();
 }
 
-MetadataTimelineModel::~MetadataTimelineModel()
+TimelineQueryProvider::~TimelineQueryProvider()
 {
+
 }
 
-
-void MetadataTimelineModel::setLevel(MetadataTimelineModel::Level level)
+void TimelineQueryProvider::setLevel(TimelineQueryProvider::Level level)
 {
     if (m_level == level) {
         return;
@@ -74,17 +65,13 @@ void MetadataTimelineModel::setLevel(MetadataTimelineModel::Level level)
     emit levelChanged();
 }
 
-MetadataTimelineModel::Level MetadataTimelineModel::level() const
+TimelineQueryProvider::Level TimelineQueryProvider::level() const
 {
     return m_level;
 }
 
-
-QString MetadataTimelineModel::description() const
+QString TimelineQueryProvider::description() const
 {
-    if (m_results.isEmpty()) {
-        return QString();
-    }
 
     //TODO: manage cases where start and enddate cover more than one year/month
     switch (m_level) {
@@ -99,13 +86,10 @@ QString MetadataTimelineModel::description() const
 }
 
 
-void MetadataTimelineModel::doQuery()
+void TimelineQueryProvider::doQuery()
 {
     QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
 
-    m_totalCount = 0;
-
-    setRunning(true);
     QString monthQuery;
     QString dayQuery;
 
@@ -249,101 +233,38 @@ void MetadataTimelineModel::doQuery()
     if (m_level >= Day) {
         query += " bif:dayofmonth(?label) ";
     }
-    query += " order by ?year ?month ?day ";
+    query += " order by desc(?year) desc(?month) desc(?day) ";
 
-    kDebug() << "Performing the Sparql query" << query;
-
-    beginResetModel();
-    m_results.clear();
-    endResetModel();
-    emit countChanged();
-    emit totalCountChanged();
-    emit descriptionChanged();
-
-    if (m_queryClient) {
-        m_queryClient->close();
-    }
-    delete m_queryClient;
-    m_queryClient = new Nepomuk2::Query::QueryServiceClient(this);
-
-    connect(m_queryClient, SIGNAL(newEntries(QList<Nepomuk2::Query::Result>)),
-            this, SLOT(newEntries(QList<Nepomuk2::Query::Result>)));
-    connect(m_queryClient, SIGNAL(entriesRemoved(QList<QUrl>)),
-            this, SLOT(entriesRemoved(QList<QUrl>)));
-    connect(m_queryClient, SIGNAL(finishedListing()), this, SLOT(finishedListing()));
-
-    m_queryClient->sparqlQuery(query);
+    setSparqlQuery(query);
 }
 
-void MetadataTimelineModel::newEntries(const QList< Nepomuk2::Query::Result > &entries)
+QVariant TimelineQueryProvider::formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const
 {
-    QVector<QHash<Roles, int> > results;
-    QVariantList categories;
-    foreach (const Nepomuk2::Query::Result &res, entries) {
-        QString label;
-        int count = res.additionalBinding(QLatin1String("count")).variant().toInt();
-        int year = res.additionalBinding(QLatin1String("year")).variant().toInt();
-        int month = res.additionalBinding(QLatin1String("month")).variant().toInt();
-        int day = res.additionalBinding(QLatin1String("day")).variant().toInt();
+    Q_UNUSED(index)
 
-        QHash<Roles, int> resHash;
-        resHash[YearRole] = year;
-        resHash[MonthRole] = month;
-        resHash[DayRole] = day;
-        resHash[CountRole] = count;
-
-        m_totalCount += count;
-        results << resHash;
-    }
-
-    if (results.count() > 0) {
-        beginInsertRows(QModelIndex(), m_results.count(), m_results.count()+results.count());
-        m_results << results;
-        m_categories << categories;
-        endInsertRows();
-        emit countChanged();
-        emit totalCountChanged();
-        emit descriptionChanged();
-    }
-}
-
-void MetadataTimelineModel::entriesRemoved(const QList<QUrl> &urls)
-{
-    //FIXME: we don't have urls here
-    return;
-
-    emit countChanged();
-    emit totalCountChanged();
-}
-
-void MetadataTimelineModel::finishedListing()
-{
-    setRunning(false);
-}
-
-
-
-QVariant MetadataTimelineModel::data(const QModelIndex &index, int role) const
-{
-    if (!index.isValid() || index.column() != 0 ||
-        index.row() < 0 || index.row() >= m_results.count()){
-        return QVariant();
-    }
-
-    const QHash<Roles, int> row = m_results[index.row()];
-
-    if (role == LabelRole) {
-        switch(m_level) {
-        case Year:
-            return row.value(YearRole);
-        case Month:
-            return KGlobal::locale()->calendar()->monthName(row.value(MonthRole),  row.value(YearRole), KCalendarSystem::LongName);
-        case Day:
+    switch(role) {
+    case LabelRole: {
+        switch(level()) {
+        case TimelineQueryProvider::Year:
+            return row.additionalBinding("year").variant();
+        case TimelineQueryProvider::Month:
+            return KGlobal::locale()->calendar()->monthName(row.additionalBinding("month").toInt(),  1, KCalendarSystem::LongName);
+        case TimelineQueryProvider::Day:
         default:
-            return row.value(DayRole);
+            return row.additionalBinding("day").variant();
         }
     }
-    return row.value((Roles)role);
+    case YearRole:
+        return row.additionalBinding("year").variant();
+    case MonthRole:
+        return row.additionalBinding("month").variant();
+    case DayRole:
+        return row.additionalBinding("day").variant();
+    case CountRole:
+        return row.additionalBinding("count").variant();
+    default:
+        return QVariant();
+    }
 }
 
-#include "metadatatimelinemodel.moc"
+#include "timelinequeryprovider.moc"
