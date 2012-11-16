@@ -20,7 +20,7 @@
 import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.draganddrop 1.0
@@ -32,7 +32,7 @@ PlasmaComponents.Page {
 
     property Item currentItem
 
-    PlasmaExtraComponents.Heading {
+    PlasmaExtras.Heading {
         anchors {
             top: parent.top
             right: parent.right
@@ -41,41 +41,118 @@ PlasmaComponents.Page {
         text: i18n("Tags")
     }
 
-    Flickable {
-        id: mainFlickable
-        contentWidth: width
-        contentHeight: mainColumn.height
+    PlasmaExtras.ScrollArea {
+        anchors.fill: parent
 
-        anchors {
-            fill: parent
-            margins: 8
-        }
+        Flickable {
+            id: mainFlickable
+            contentWidth: width
+            contentHeight: mainColumn.height
 
-        Column {
-            id: mainColumn
-            spacing: 8
-            width: parent.width
-            Repeater {
-                id: tagRepeater
-                model: PlasmaCore.SortFilterModel {
-                    id: sortFilterModel
-                    sourceModel: MetadataModels.MetadataModel {
-                        id: tagCloud
-                        queryProvider: MetadataModels.CloudQueryProvider {
-                            cloudCategory: "nao:hasTag"
-                            resourceType: metadataModel.queryProvider.resourceType
-                            minimumRating: metadataModel.queryProvider.minimumRating
+            anchors.fill: parent
+
+            Column {
+                id: mainColumn
+                spacing: 8
+                width: parent.width
+                Repeater {
+                    id: tagRepeater
+                    model: PlasmaCore.SortFilterModel {
+                        id: sortFilterModel
+                        sourceModel: MetadataModels.MetadataModel {
+                            id: tagCloud
+                            queryProvider: MetadataModels.CloudQueryProvider {
+                                cloudCategory: "nao:hasTag"
+                                resourceType: metadataModel.queryProvider.resourceType
+                                minimumRating: metadataModel.queryProvider.minimumRating
+                            }
+                        }
+                        sortRole: "label"
+                    }
+
+                    delegate: Row {
+                        spacing: 8
+                        MouseArea {
+                            width: theme.defaultFont.mSize.width * 10
+                            height: width
+                            property bool checked: false
+
+                            DropArea {
+                                anchors.fill: parent
+                                property bool underDrag: false
+                                onDragEnter: underDrag = true
+                                onDragLeave: underDrag = false
+                                onDrop: {
+                                    underDrag = false
+                                    var service = metadataSource.serviceForSource("")
+                                    print(service);
+                                    var operation = service.operationDescription("tagResources")
+                                    operation["ResourceUrls"] = event.mimeData.urls
+                                    operation["Tag"] = model["label"]
+                                    service.startOperationCall(operation)
+                                }
+
+                                Rectangle {
+                                    id: background
+                                    color: theme.textColor
+                                    anchors.fill: parent
+                                    radius: width/2
+                                    opacity: parent.underDrag ? 0.6 : 0.2
+                                    Behavior on opacity {
+                                        NumberAnimation {
+                                            duration: 250
+                                            easing.type: Easing.InOutQuad
+                                        }
+                                    }
+                                }
+                                Rectangle {
+                                    anchors {
+                                        fill: background
+                                        topMargin: 2
+                                        bottomMargin: -2
+                                    }
+                                    radius: width/2
+                                    color: "white"
+                                    opacity: 0.6
+                                }
+                                Rectangle {
+                                    color: parent.parent.checked ? theme.highlightColor : theme.textColor
+                                    radius: width/2
+                                    anchors.centerIn: parent
+                                    width: Math.min(parent.width, 14 + 100 * (model.count / tagCloud.totalCount))
+                                    height: width
+                                }
+                            }
+                            onClicked: checked = !checked
+                            onCheckedChanged: {
+                                var tags = metadataModel.queryProvider.tags
+                                if (checked) {
+                                    tags[tags.length] = model["label"];
+                                    metadataModel.queryProvider.tags = tags
+                                } else {
+                                    for (var i = 0; i < tags.length; ++i) {
+                                        if (tags[i] == model["label"]) {
+                                            tags.splice(i, 1);
+                                            metadataModel.queryProvider.tags = tags
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        PlasmaComponents.Label {
+                            id: tagLabel
+                            text: model.label
+                            anchors.verticalCenter: parent.verticalCenter
                         }
                     }
-                    sortRole: "label"
                 }
 
-                delegate: Row {
+                Row {
                     spacing: 8
                     MouseArea {
                         width: theme.defaultFont.mSize.width * 10
                         height: width
-                        property bool checked: false
 
                         DropArea {
                             anchors.fill: parent
@@ -84,149 +161,70 @@ PlasmaComponents.Page {
                             onDragLeave: underDrag = false
                             onDrop: {
                                 underDrag = false
-                                var service = metadataSource.serviceForSource("")
-                                print(service);
-                                var operation = service.operationDescription("tagResources")
-                                operation["ResourceUrls"] = event.mimeData.urls
-                                operation["Tag"] = model["label"]
-                                service.startOperationCall(operation)
+                                newTagDialog.resourceUrls = event.mimeData.urls
+                                newTagDialog.open()
                             }
 
-                            Rectangle {
-                                id: background
-                                color: theme.textColor
+                            Item {
                                 anchors.fill: parent
-                                radius: width/2
-                                opacity: parent.underDrag ? 0.6 : 0.2
-                                Behavior on opacity {
-                                    NumberAnimation {
-                                        duration: 250
-                                        easing.type: Easing.InOutQuad
+                                Rectangle {
+                                    id: newDragBackground
+                                    color: theme.textColor
+                                    anchors.fill: parent
+
+                                    radius: width/2
+                                    opacity: parent.parent.underDrag ? 0.6 : 0.2
+                                    Behavior on opacity {
+                                        NumberAnimation {
+                                            duration: 250
+                                            easing.type: Easing.InOutQuad
+                                        }
                                     }
                                 }
-                            }
-                            Rectangle {
-                                anchors {
-                                    fill: background
-                                    topMargin: 2
-                                    bottomMargin: -2
-                                }
-                                radius: width/2
-                                color: "white"
-                                opacity: 0.6
-                            }
-                            Rectangle {
-                                color: parent.parent.checked ? theme.highlightColor : theme.textColor
-                                radius: width/2
-                                anchors.centerIn: parent
-                                width: Math.min(parent.width, 14 + 100 * (model.count / tagCloud.totalCount))
-                                height: width
-                            }
-                        }
-                        onClicked: checked = !checked
-                        onCheckedChanged: {
-                            var tags = metadataModel.queryProvider.tags
-                            if (checked) {
-                                tags[tags.length] = model["label"];
-                                metadataModel.queryProvider.tags = tags
-                            } else {
-                                for (var i = 0; i < tags.length; ++i) {
-                                    if (tags[i] == model["label"]) {
-                                        tags.splice(i, 1);
-                                        metadataModel.queryProvider.tags = tags
-                                        break;
+                                Rectangle {
+                                    anchors {
+                                        fill: newDragBackground
+                                        topMargin: 2
+                                        bottomMargin: -2
                                     }
+                                    radius: width/2
+                                    color: "white"
+                                    opacity: 0.6
+                                }
+                                Rectangle {
+                                    color: theme.textColor
+                                    anchors {
+                                        fill: parent
+                                        margins: 20
+                                    }
+                                    radius: width/2
+                                    opacity: 0.6
+                                }
+                                Rectangle {
+                                    color: theme.backgroundColor
+                                    anchors.centerIn:parent
+                                    width: 4
+                                    height: parent.height/3
+                                }
+                                Rectangle {
+                                    color: theme.backgroundColor
+                                    anchors.centerIn:parent
+                                    height: 4
+                                    width: parent.height/3
                                 }
                             }
                         }
                     }
                     PlasmaComponents.Label {
                         id: tagLabel
-                        text: model.label
+                        text: i18n("New Tag")
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }
             }
-
-            Row {
-                spacing: 8
-                MouseArea {
-                    width: theme.defaultFont.mSize.width * 10
-                    height: width
-
-                    DropArea {
-                        anchors.fill: parent
-                        property bool underDrag: false
-                        onDragEnter: underDrag = true
-                        onDragLeave: underDrag = false
-                        onDrop: {
-                            underDrag = false
-                            newTagDialog.resourceUrls = event.mimeData.urls
-                            newTagDialog.open()
-                        }
-
-                        Item {
-                            anchors.fill: parent
-                            Rectangle {
-                                id: newDragBackground
-                                color: theme.textColor
-                                anchors.fill: parent
-
-                                radius: width/2
-                                opacity: parent.parent.underDrag ? 0.6 : 0.2
-                                Behavior on opacity {
-                                    NumberAnimation {
-                                        duration: 250
-                                        easing.type: Easing.InOutQuad
-                                    }
-                                }
-                            }
-                            Rectangle {
-                                anchors {
-                                    fill: newDragBackground
-                                    topMargin: 2
-                                    bottomMargin: -2
-                                }
-                                radius: width/2
-                                color: "white"
-                                opacity: 0.6
-                            }
-                            Rectangle {
-                                color: theme.textColor
-                                anchors {
-                                    fill: parent
-                                    margins: 20
-                                }
-                                radius: width/2
-                                opacity: 0.6
-                            }
-                            Rectangle {
-                                color: theme.backgroundColor
-                                anchors.centerIn:parent
-                                width: 4
-                                height: parent.height/3
-                            }
-                            Rectangle {
-                                color: theme.backgroundColor
-                                anchors.centerIn:parent
-                                height: 4
-                                width: parent.height/3
-                            }
-                        }
-                    }
-                }
-                PlasmaComponents.Label {
-                    id: tagLabel
-                    text: i18n("New Tag")
-                    anchors.verticalCenter: parent.verticalCenter
-                }
-            }
         }
     }
-    PlasmaComponents.ScrollBar {
-        flickableItem: mainFlickable
-        orientation: Qt.Vertical
-    }
+
     DropArea {
         anchors {
             left: parent.left

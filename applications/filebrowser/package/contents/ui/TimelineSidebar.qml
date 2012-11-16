@@ -20,7 +20,7 @@
 import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
@@ -60,7 +60,7 @@ PlasmaComponents.Page {
         x: timelineColumn.width/2 - 4
     }
 
-    PlasmaExtraComponents.Heading {
+    PlasmaExtras.Heading {
         id: titleLabel
         anchors {
             right: parent.right
@@ -69,184 +69,184 @@ PlasmaComponents.Page {
         text: metadataTimelineModel.queryProvider.description
     }
 
-    Flickable {
-        id: timelineFlickable
-        anchors {
-            fill: parent
-            top: titleLabel.bottom
-            topMargin: 40
-        }
-        interactive: true
+     PlasmaExtras.ScrollArea {
+        anchors.fill: parent
 
-        contentWidth: width
-        contentHeight: timelineColumn.height + 40
+        Flickable {
+            id: timelineFlickable
+        /* anchors {
+                fill: parent
+                top: titleLabel.bottom
+                topMargin: 40
+            }*/
+            interactive: true
+
+            contentWidth: width
+            contentHeight: timelineColumn.height + 40
 
 
-        Item {
-            width: parent.width
-            height: timelineColumn.height
+            Item {
+                width: parent.width
+                height: timelineColumn.height
 
-            PlasmaComponents.Highlight {
-                id: highlight
-                opacity: currentItem != null ? 1 : 0
-                width: root.width
-                height: Math.max(currentItem.height, theme.largeIconSize + 8)
-                x: 0
-                y: currentItem.y - (height/2 - currentItem.height/2)
-                Behavior on y {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: "InOutCubic"
-                    }
-                }
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 250
-                        easing.type: "OutCubic"
-                    }
-                }
-            }
-
-            PlasmaComponents.ToolButton {
-                iconSource: "zoom-in"
-                z: 900
-                anchors {
-                    right: highlight.right
-                    verticalCenter: highlight.verticalCenter
-                    rightMargin: 8
-                }
-                width: theme.largeIconSize
-                opacity: highlight.opacity
-                visible: metadataTimelineModel.queryProvider.level != MetadataModels.TimelineQueryProvider.Day
-                height: width
-                flat: false
-                enabled: metadataTimelineModel.queryProvider.level != MetadataModels.TimelineQueryProvider.Day
-                onClicked: {
-                    switch (metadataTimelineModel.queryProvider.level) {
-                    case MetadataModels.TimelineQueryProvider.Year:
-                        metadataTimelineModel.queryProvider.startDate = buildDate(currentYear, 1, 1)
-                        metadataTimelineModel.queryProvider.endDate = buildDate(currentYear, 12, 31)
-                        metadataTimelineModel.queryProvider.level = MetadataModels.TimelineQueryProvider.Month
-                        break
-                    case MetadataModels.TimelineQueryProvider.Month:
-                        metadataTimelineModel.queryProvider.startDate = buildDate(currentYear, currentMonth, 1)
-                        metadataTimelineModel.queryProvider.endDate = buildDate(currentYear, currentMonth+1, 1)
-                        metadataTimelineModel.queryProvider.level = MetadataModels.TimelineQueryProvider.Day
-                        break
-                    }
-                    currentItem = null
-                }
-            }
-            Column {
-                id: timelineColumn
-                spacing: 40
-                Repeater {
-                    id: timelineRepeater
-                    model: MetadataModels.MetadataModel {
-                        id: metadataTimelineModel
-                        queryProvider: MetadataModels.TimelineQueryProvider {
-                            level: MetadataModels.TimelineQueryProvider.Year
-                            //queryString: "pdf"
-                            resourceType: metadataModel.queryProvider.resourceType
-                            tags: metadataModel.queryProvider.tags
-                            minimumRating: metadataModel.queryProvider.minimumRating
-                            //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
-                            //startDate: "2011-01-01"
-                            //endDate: "2011-12-31"
+                PlasmaComponents.Highlight {
+                    id: highlight
+                    opacity: currentItem != null ? 1 : 0
+                    width: root.width
+                    height: Math.max(currentItem.height, theme.largeIconSize + 8)
+                    x: 0
+                    y: currentItem.y - (height/2 - currentItem.height/2)
+                    Behavior on y {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: "InOutCubic"
                         }
                     }
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: "OutCubic"
+                        }
+                    }
+                }
 
-                    delegate: Rectangle {
-                        id: dateDelegate
-                        color: currentItem == dateDelegate ? theme.highlightColor : theme.textColor
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: 250
+                PlasmaComponents.ToolButton {
+                    iconSource: "zoom-in"
+                    z: 900
+                    anchors {
+                        right: highlight.right
+                        verticalCenter: highlight.verticalCenter
+                        rightMargin: 8
+                    }
+                    width: theme.largeIconSize
+                    opacity: highlight.opacity
+                    visible: metadataTimelineModel.queryProvider.level != MetadataModels.TimelineQueryProvider.Day
+                    height: width
+                    flat: false
+                    enabled: metadataTimelineModel.queryProvider.level != MetadataModels.TimelineQueryProvider.Day
+                    onClicked: {
+                        switch (metadataTimelineModel.queryProvider.level) {
+                        case MetadataModels.TimelineQueryProvider.Year:
+                            metadataTimelineModel.queryProvider.startDate = buildDate(currentYear, 1, 1)
+                            metadataTimelineModel.queryProvider.endDate = buildDate(currentYear, 12, 31)
+                            metadataTimelineModel.queryProvider.level = MetadataModels.TimelineQueryProvider.Month
+                            break
+                        case MetadataModels.TimelineQueryProvider.Month:
+                            metadataTimelineModel.queryProvider.startDate = buildDate(currentYear, currentMonth, 1)
+                            metadataTimelineModel.queryProvider.endDate = buildDate(currentYear, currentMonth+1, 1)
+                            metadataTimelineModel.queryProvider.level = MetadataModels.TimelineQueryProvider.Day
+                            break
+                        }
+                        currentItem = null
+                    }
+                }
+                Column {
+                    id: timelineColumn
+                    spacing: 40
+                    Repeater {
+                        id: timelineRepeater
+                        model: MetadataModels.MetadataModel {
+                            id: metadataTimelineModel
+                            queryProvider: MetadataModels.TimelineQueryProvider {
+                                level: MetadataModels.TimelineQueryProvider.Year
+                                //queryString: "pdf"
+                                resourceType: metadataModel.queryProvider.resourceType
+                                tags: metadataModel.queryProvider.tags
+                                minimumRating: metadataModel.queryProvider.minimumRating
+                                //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
+                                //startDate: "2011-01-01"
+                                //endDate: "2011-12-31"
                             }
                         }
-                        width: Math.round(14 + 100 * (model.count / metadataTimelineModel.totalCount))
-                        height: width
-                        radius: width/2
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        PlasmaComponents.Label {
-                            text: model.label
-                            anchors {
-                                left: parent.horizontalCenter
-                                leftMargin: timelineColumn.width/2 + theme.defaultFont.mSize.width
-                                verticalCenter: parent.verticalCenter
+
+                        delegate: Rectangle {
+                            id: dateDelegate
+                            color: currentItem == dateDelegate ? theme.highlightColor : theme.textColor
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: 250
+                                }
                             }
-                        }
-                        MouseArea {
-                            anchors {
-                                fill: parent
-                                rightMargin: - timelineFlickable.width + parent.width
+                            width: Math.round(14 + 100 * (model.count / metadataTimelineModel.totalCount))
+                            height: width
+                            radius: width/2
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            PlasmaComponents.Label {
+                                text: model.label
+                                anchors {
+                                    left: parent.horizontalCenter
+                                    leftMargin: timelineColumn.width/2 + theme.defaultFont.mSize.width
+                                    verticalCenter: parent.verticalCenter
+                                }
                             }
-                            onClicked: {
-                                if (currentItem == dateDelegate) {
+                            MouseArea {
+                                anchors {
+                                    fill: parent
+                                    rightMargin: - timelineFlickable.width + parent.width
+                                }
+                                onClicked: {
+                                    if (currentItem == dateDelegate) {
+                                        switch (metadataTimelineModel.queryProvider.level) {
+                                        case MetadataModels.TimelineQueryProvider.Year:
+                                            metadataModel.queryProvider.startDate = ""
+                                            metadataModel.queryProvider.endDate = ""
+
+                                            currentMonth = 0
+                                            currentYear = 0
+                                            break
+                                        case MetadataModels.TimelineQueryProvider.Month:
+                                            metadataModel.queryProvider.startDate = buildDate(model.year, 1, 1)
+                                            metadataModel.queryProvider.endDate = buildDate(model.year, 12, 31)
+
+                                            currentMonth = 0
+                                            currentYear = model.year
+                                            break
+                                        case MetadataModels.TimelineQueryProvider.Day:
+                                        default:
+                                            metadataModel.queryProvider.startDate = buildDate(model.year, model.month, 1)
+                                            metadataModel.queryProvider.endDate = buildDate(model.year, model.month+1, 1)
+
+                                            currentMonth = model.month
+                                            currentYear = model.year
+                                            break
+                                        }
+                                        currentItem = null
+                                        return
+                                    }
+
                                     switch (metadataTimelineModel.queryProvider.level) {
                                     case MetadataModels.TimelineQueryProvider.Year:
-                                        metadataModel.queryProvider.startDate = ""
-                                        metadataModel.queryProvider.endDate = ""
-
-                                        currentMonth = 0
-                                        currentYear = 0
-                                        break
-                                    case MetadataModels.TimelineQueryProvider.Month:
                                         metadataModel.queryProvider.startDate = buildDate(model.year, 1, 1)
                                         metadataModel.queryProvider.endDate = buildDate(model.year, 12, 31)
 
                                         currentMonth = 0
                                         currentYear = model.year
                                         break
-                                    case MetadataModels.TimelineQueryProvider.Day:
-                                    default:
+                                    case MetadataModels.TimelineQueryProvider.Month:
                                         metadataModel.queryProvider.startDate = buildDate(model.year, model.month, 1)
                                         metadataModel.queryProvider.endDate = buildDate(model.year, model.month+1, 1)
 
                                         currentMonth = model.month
                                         currentYear = model.year
                                         break
+                                    case MetadataModels.TimelineQueryProvider.Day:
+                                    default:
+                                        metadataModel.queryProvider.startDate = buildDate(model.year, model.month, model.day)
+                                        metadataModel.queryProvider.endDate = buildDate(model.year, model.month, model.day)
+
+                                        currentMonth = model.month
+                                        currentYear = model.year
+                                        break
                                     }
-                                    currentItem = null
-                                    return
+
+                                    currentItem = dateDelegate
                                 }
-
-                                switch (metadataTimelineModel.queryProvider.level) {
-                                case MetadataModels.TimelineQueryProvider.Year:
-                                    metadataModel.queryProvider.startDate = buildDate(model.year, 1, 1)
-                                    metadataModel.queryProvider.endDate = buildDate(model.year, 12, 31)
-
-                                    currentMonth = 0
-                                    currentYear = model.year
-                                    break
-                                case MetadataModels.TimelineQueryProvider.Month:
-                                    metadataModel.queryProvider.startDate = buildDate(model.year, model.month, 1)
-                                    metadataModel.queryProvider.endDate = buildDate(model.year, model.month+1, 1)
-
-                                    currentMonth = model.month
-                                    currentYear = model.year
-                                    break
-                                case MetadataModels.TimelineQueryProvider.Day:
-                                default:
-                                    metadataModel.queryProvider.startDate = buildDate(model.year, model.month, model.day)
-                                    metadataModel.queryProvider.endDate = buildDate(model.year, model.month, model.day)
-
-                                    currentMonth = model.month
-                                    currentYear = model.year
-                                    break
-                                }
-
-                                currentItem = dateDelegate
                             }
                         }
                     }
                 }
             }
         }
-    }
-    PlasmaComponents.ScrollBar {
-        flickableItem: timelineFlickable
-        orientation: Qt.Vertical
     }
 
 
