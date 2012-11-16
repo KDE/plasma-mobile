@@ -142,9 +142,9 @@ void CloudQueryProvider::doQuery()
             }
 
             if (negation) {
-                query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " ?mimeType . FILTER(bif:contains(?mimeType, \"'" + parameter + "'\")) . }))) ";
+                query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " ?" + key + "Param . FILTER(bif:contains(?" + key + "Param, \"'" + parameter + "'\")) . }))) ";
             } else {
-                query += " . ?r " + key + " ?mimeType . FILTER(bif:contains(?mimeType, \"'" + parameter + "'\")) ";
+                query += " . ?r " + key + " ?" + key + "Param . FILTER(bif:contains(?" + key + "Param, \"'" + parameter + "'\")) ";
             }
         }
     }
