@@ -39,7 +39,7 @@ Item {
             bottom: parent.bottom
         }
 
-        model: MetadataCloudModel {
+        model: MetadataModel {
             id: metadataCloudModel
             queryProvider: CloudQueryProvider {
                 cloudCategory: "rdf:type"//"nao:hasTag"
