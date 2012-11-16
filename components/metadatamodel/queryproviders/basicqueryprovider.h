@@ -171,7 +171,6 @@ protected Q_SLOTS:
 
 protected:
 
-    QString retrieveIconName(const QStringList &types) const;
     /* from nie:url
      * to QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")
      */
