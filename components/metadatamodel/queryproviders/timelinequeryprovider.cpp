@@ -233,7 +233,7 @@ void TimelineQueryProvider::doQuery()
     if (m_level >= Day) {
         query += " bif:dayofmonth(?label) ";
     }
-    query += " order by ?year ?month ?day ";
+    query += " order by desc(?year) desc(?month) desc(?day) ";
 
     setSparqlQuery(query);
 }
