@@ -31,13 +31,6 @@ class CloudQueryProvider : public BasicQueryProvider
      */
     Q_PROPERTY(QString cloudCategory READ cloudCategory WRITE setCloudCategory NOTIFY cloudCategoryChanged)
 
-    /**
-     * @property bool if true empty categories will be shown.
-     * Default: false
-     */
-    Q_PROPERTY(bool showEmptyCategories READ showEmptyCategories WRITE setShowEmptyCategories NOTIFY showEmptyCategoriesChanged)
-
-
 public:
     enum Roles {
         Label = Qt::UserRole+1,
@@ -50,9 +43,6 @@ public:
 
     QVariantList categories() const;
 
-    void setShowEmptyCategories(bool show);
-    bool showEmptyCategories() const;
-
     /**
      * rdf:type
      * nao:numericRating
@@ -62,14 +52,12 @@ public:
 
 Q_SIGNALS:
     void cloudCategoryChanged();
-    void showEmptyCategoriesChanged();
 
 protected:
     virtual void doQuery();
 
 private:
     QString m_cloudCategory;
-    bool m_showEmptyCategories;
 };
 
 #endif // CLOUDQUERYPROVIDER_H

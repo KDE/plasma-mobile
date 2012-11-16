@@ -63,7 +63,6 @@ PlasmaComponents.Page {
                         id: tagCloud
                         queryProvider: MetadataModels.CloudQueryProvider {
                             cloudCategory: "nao:hasTag"
-                            showEmptyCategories: true
                             resourceType: metadataModel.queryProvider.resourceType
                             minimumRating: metadataModel.queryProvider.minimumRating
                         }

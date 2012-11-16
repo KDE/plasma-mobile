@@ -38,8 +38,7 @@
 #include <Nepomuk2/Query/StandardQuery>
 
 CloudQueryProvider::CloudQueryProvider(QObject* parent)
-    : BasicQueryProvider(parent),
-      m_showEmptyCategories(false)
+    : BasicQueryProvider(parent)
 {
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
@@ -70,22 +69,6 @@ QString CloudQueryProvider::cloudCategory() const
     return m_cloudCategory;
 }
 
-void CloudQueryProvider::setShowEmptyCategories(bool show)
-{
-    if (show == m_showEmptyCategories) {
-        return;
-    }
-
-    m_showEmptyCategories = show;
-    requestRefresh();
-    emit showEmptyCategoriesChanged();
-}
-
-bool CloudQueryProvider::showEmptyCategories() const
-{
-    return m_showEmptyCategories;
-}
-
 void CloudQueryProvider::doQuery()
 {
     QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
@@ -97,9 +80,6 @@ void CloudQueryProvider::doQuery()
 
     QString query;
 
-    if (!m_showEmptyCategories) {
-        query += "select * where { filter(?count != 0) { ";
-    }
     query += "select distinct ?label "
           "count(*) as ?count "
         "where {";
@@ -244,10 +224,6 @@ void CloudQueryProvider::doQuery()
 
     //User visibility filter doesn't seem to have an acceptable speed
     //query +=  " . FILTER(bif:exists((select (1) where { ?r a [ <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#userVisible> \"true\"^^<http://www.w3.org/2001/XMLSchema#boolean> ] . }))) } group by ?label order by ?label";
-
-    if (!m_showEmptyCategories) {
-        query +=  " }} ";
-    }
 
     query +=  " } group by ?label order by ?label";
 
