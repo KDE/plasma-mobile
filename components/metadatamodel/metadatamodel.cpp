@@ -313,7 +313,7 @@ void MetadataModel::newEntriesDelayed()
         }
         //this happens only when m_validIndexForPage has been invalidate by row removal
         if (!m_validIndexForPage.contains(i.key()) && (m_data[pageStart + startOffset].resource().isValid() || m_data[pageStart + startOffset].additionalBindings().count() > 0)) {
-            while (startOffset < m_data.size() && (m_data[pageStart + startOffset].resource().isValid() || m_data[pageStart + startOffset].additionalBindings().count() > 0)) {
+            while (pageStart + startOffset < m_data.size() && (m_data[pageStart + startOffset].resource().isValid() || m_data[pageStart + startOffset].additionalBindings().count() > 0)) {
                 ++startOffset;
                 ++offset;
             }
