@@ -145,21 +145,18 @@ Q_SIGNALS:
     void limitChanged();
     void lazyLoadingChanged();
 
-protected Q_SLOTS:
-    void countRetrieved(int count);
-    void newEntries(const QList< Nepomuk2::Query::Result > &entries, int page);
-    void entriesRemoved(const QList<QUrl> &urls);
-    void doQuery();
-    void newEntriesDelayed();
-    void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val);
-    void dataFormatChanged(const QPersistentModelIndex &index);
-    void serviceRegistered(const QString &service);
-
-protected:
-    void fetchResultsPage(int page);
-
 private:
     MetadataModelPrivate *const d;
+    friend class MetadataModelPrivate;
+
+    Q_PRIVATE_SLOT(d, void countRetrieved(int count))
+    Q_PRIVATE_SLOT(d, void newEntries(const QList< Nepomuk2::Query::Result > &entries, int page))
+    Q_PRIVATE_SLOT(d, void entriesRemoved(const QList<QUrl> &urls))
+    Q_PRIVATE_SLOT(d, void doQuery())
+    Q_PRIVATE_SLOT(d, void newEntriesDelayed())
+    Q_PRIVATE_SLOT(d, void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val))
+    Q_PRIVATE_SLOT(d, void dataFormatChanged(const QPersistentModelIndex &index))
+    Q_PRIVATE_SLOT(d, void serviceRegistered(const QString &service))
 };
 
 #endif

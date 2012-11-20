@@ -65,6 +65,19 @@ public:
     {
     }
 
+    void fetchResultsPage(int page);
+
+    //Slots
+    void countRetrieved(int count);
+    void newEntries(const QList< Nepomuk2::Query::Result > &entries, int page);
+    void entriesRemoved(const QList<QUrl> &urls);
+    void doQuery();
+    void newEntriesDelayed();
+    void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val);
+    void dataFormatChanged(const QPersistentModelIndex &index);
+    void serviceRegistered(const QString &service);
+
+
 
     MetadataModel *q;
 
@@ -194,7 +207,7 @@ void MetadataModel::setQueryProvider(AbstractQueryProvider *provider)
             this, SLOT(dataFormatChanged(QPersistentModelIndex)));
 
     d->queryProvider = provider;
-    doQuery();
+    d->doQuery();
     emit queryProviderChanged();
 }
 
@@ -251,229 +264,6 @@ bool MetadataModel::lazyLoading() const
 void MetadataModel::requestRefresh()
 {
     d->queryTimer->start();
-}
-
-void MetadataModel::doQuery()
-{
-    if (!queryProvider()) {
-        return;
-    }
-
-    d->totalCount = 0;
-
-    d->query = queryProvider()->query();
-    if (d->query.isValid()) {
-        d->sparqlQuery = QString();
-        if (d->limit > 0) {
-            d->query.setLimit(d->limit);
-        }
-        kWarning() << "Sparql query:" << d->query.toSparqlQuery();
-    } else {
-        d->sparqlQuery = queryProvider()->sparqlQuery();
-        kWarning() << "Sparql query:" << d->sparqlQuery;
-    }
-
-    beginResetModel();
-    d->data = QVector<Nepomuk2::Query::Result>(0);
-    d->uriToRow.clear();
-    d->dataToInsert.clear();
-    d->validIndexForPage.clear();
-    endResetModel();
-    emit countChanged();
-    emit totalCountChanged();
-
-
-    if (d->query.isValid()) {
-        d->queryThread->setQuery(d->query, d->limit, d->pageSize);
-    } else {
-        d->queryThread->setSparqlQuery(d->sparqlQuery);
-    }
-
-    //if page size is invalid, fetch all
-    if (d->pageSize < 1) {
-        fetchResultsPage(0);
-    }
-
-    //FIXME
-    // Nepomuk2::Query::QueryServiceClient does not emit finishedListing signal when there is no new entries (no matches).
-    QTimer::singleShot(5000, this, SLOT(finishedListing()));
-}
-
-void MetadataModel::fetchResultsPage(int page)
-{
-    d->validIndexForPage[page] = 0;
-
-    d->queryThread->fetchResultsPage(page);
-}
-
-void MetadataModel::countRetrieved(int count)
-{
-    if (count < d->data.size()) {
-        beginRemoveRows(QModelIndex(), count-1, d->data.size()-1);
-        d->data.resize(count);
-        endRemoveRows();
-    } else if (count > d->data.size()) {
-        beginInsertRows(QModelIndex(), d->data.size(), count-1);
-        d->data.resize(count);
-        endInsertRows();
-    }
-}
-
-void MetadataModel::newEntries(const QList< Nepomuk2::Query::Result > &entries, int page)
-{
-    foreach (const Nepomuk2::Query::Result &res, entries) {
-        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-        //kDebug() << "Result label:" << res.genericLabel();
-
-        d->totalCount += res.additionalBinding(QLatin1String("count")).variant().toInt();
-    }
-
-    d->dataToInsert[page] << entries;
-
-    if (!d->newEntriesTimer->isActive() && !d->dataToInsert[page].isEmpty()) {
-        d->newEntriesTimer->start(200);
-    }
-    if (d->totalCount > 0) {
-        emit totalCountChanged();
-    }
-}
-
-void MetadataModel::newEntriesDelayed()
-{
-    if (d->dataToInsert.isEmpty()) {
-        return;
-    }
-
-    d->elapsedTime.start();
-    QHash<int, QList<Nepomuk2::Query::Result> >::const_iterator i;
-    for (i = d->dataToInsert.constBegin(); i != d->dataToInsert.constEnd(); ++i) {
-        const QList<Nepomuk2::Query::Result> dataToInsert = i.value();
-
-        d->watcher->stop();
-
-        int pageStart = 0;
-        if (d->pageSize > 0) {
-            pageStart = i.key() * d->pageSize;
-        }
-        int startOffset = d->validIndexForPage.value(i.key());
-        int offset = startOffset;
-
-        //if new result arrive on an already running query, they may arrive before countQueryResult
-        if (d->data.size() < pageStart + startOffset + 1) {
-            beginInsertRows(QModelIndex(), d->data.size(), pageStart + startOffset);
-            d->data.resize(pageStart + startOffset + 1);
-            endInsertRows();
-        }
-        //this happens only when d->validIndexForPage has been invalidate by row removal
-        if (!d->validIndexForPage.contains(i.key()) && (d->data[pageStart + startOffset].resource().isValid() || d->data[pageStart + startOffset].additionalBindings().count() > 0)) {
-            while (pageStart + startOffset < d->data.size() && (d->data[pageStart + startOffset].resource().isValid() || d->data[pageStart + startOffset].additionalBindings().count() > 0)) {
-                ++startOffset;
-                ++offset;
-            }
-        }
-
-        foreach (const Nepomuk2::Query::Result &res, dataToInsert) {
-            //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-            //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
-
-            if (res.resource().isValid()) {
-                d->uriToRow[res.resource().uri()] = pageStart + offset;
-            }
-
-            //there can be new results before the count query gets updated
-            if (pageStart + offset < d->data.size()) {
-                d->data[pageStart + offset] = res;
-                if (res.resource().isValid()) {
-                    d->watcher->addResource(res.resource());
-                }
-                ++offset;
-            } else {
-                beginInsertRows(QModelIndex(), d->data.size(), pageStart + offset);
-                d->data.resize(pageStart + offset + 1);
-                d->data[pageStart + offset] = res;
-                if (res.resource().isValid()) {
-                    d->watcher->addResource(res.resource());
-                }
-                ++offset;
-                endInsertRows();
-            }
-        }
-
-        d->validIndexForPage[i.key()] = offset;
-
-        d->watcher->start();
-        emit dataChanged(createIndex(pageStart + startOffset, 0),
-                         createIndex(pageStart + startOffset + dataToInsert.count()-1, 0));
-    }
-    kDebug() << "Elapsed time populating the model" << d->elapsedTime.elapsed();
-    d->dataToInsert.clear();
-}
-
-void MetadataModel::propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val)
-{
-    Q_UNUSED(prop)
-    Q_UNUSED(val)
-
-    const int index = d->uriToRow.value(res.uri());
-    if (index >= 0) {
-        emit dataChanged(createIndex(index, 0, 0), createIndex(index, 0, 0));
-    }
-}
-
-void MetadataModel::dataFormatChanged(const QPersistentModelIndex &index)
-{
-    emit dataChanged(index, index);
-}
-
-void MetadataModel::entriesRemoved(const QList<QUrl> &urls)
-{
-    int prevIndex = -100;
-    //pack all the stuff to remove in groups, to emit the least possible signals
-    //this assumes urls are in the same order they arrived ion the results
-    //it's a map because we want to remove values from the vector in inverted order to keep indexes valid trough the remove loop
-    int oldTotalCount = d->totalCount;
-    QMap<int, int> toRemove;
-    foreach (const QUrl &url, urls) {
-        const int index = d->uriToRow.value(url);
-        const int count = d->data[index].additionalBinding("count").variant().toInt();
-        if (count) {
-            d->totalCount -= count;
-        }
-        if (index == prevIndex + 1) {
-            toRemove[prevIndex]++;
-        } else {
-            toRemove[index] = 1;
-        }
-        prevIndex = index;
-    }
-
-    if (oldTotalCount != d->totalCount) {
-        emit totalCountChanged();
-    }
-
-    //all the page indexes may be invalid now
-    d->validIndexForPage.clear();
-
-    QMap<int, int>::const_iterator i = toRemove.constEnd();
-
-    while (i != toRemove.constBegin()) {
-        --i;
-        beginRemoveRows(QModelIndex(), i.key(), i.key()+i.value()-1);
-        d->data.remove(i.key(), i.value());
-        endRemoveRows();
-    }
-
-    //another loop, we don't depend to d->uriToRow in data(), but we take this doublesafety
-    foreach (const QUrl &url, urls) {
-        d->uriToRow.remove(url);
-    }
-
-    //FIXME: this loop makes all the optimizations useless, get rid either of it or the optimizations
-    for (int i = 0; i < d->data.count(); ++i) {
-        d->uriToRow[d->data[i].resource().uri()] = i;
-    }
-
-    emit countChanged();
 }
 
 QVariant MetadataModel::data(const QModelIndex &index, int role) const
@@ -539,11 +329,235 @@ int MetadataModel::rowCount(const QModelIndex &parent) const
     return count();
 }
 
-void MetadataModel::serviceRegistered(const QString &service)
+////Private
+void MetadataModelPrivate::doQuery()
+{
+    if (!queryProvider) {
+        return;
+    }
+
+    totalCount = 0;
+
+    query = queryProvider.data()->query();
+    if (query.isValid()) {
+        sparqlQuery = QString();
+        if (limit > 0) {
+            query.setLimit(limit);
+        }
+        kWarning() << "Sparql query:" << query.toSparqlQuery();
+    } else {
+        sparqlQuery = queryProvider.data()->sparqlQuery();
+        kWarning() << "Sparql query:" << sparqlQuery;
+    }
+
+    q->beginResetModel();
+    data = QVector<Nepomuk2::Query::Result>(0);
+    uriToRow.clear();
+    dataToInsert.clear();
+    validIndexForPage.clear();
+    q->endResetModel();
+    emit q->countChanged();
+    emit q->totalCountChanged();
+
+
+    if (query.isValid()) {
+        queryThread->setQuery(query, limit, pageSize);
+    } else {
+        queryThread->setSparqlQuery(sparqlQuery);
+    }
+
+    //if page size is invalid, fetch all
+    if (pageSize < 1) {
+        fetchResultsPage(0);
+    }
+
+    //FIXME
+    // Nepomuk2::Query::QueryServiceClient does not emit finishedListing signal when there is no new entries (no matches).
+    QTimer::singleShot(5000, q, SLOT(finishedListing()));
+}
+
+void MetadataModelPrivate::fetchResultsPage(int page)
+{
+    validIndexForPage[page] = 0;
+
+    queryThread->fetchResultsPage(page);
+}
+
+void MetadataModelPrivate::countRetrieved(int count)
+{
+    if (count < data.size()) {
+        q->beginRemoveRows(QModelIndex(), count-1, data.size()-1);
+        data.resize(count);
+        q->endRemoveRows();
+    } else if (count > data.size()) {
+        q->beginInsertRows(QModelIndex(), data.size(), count-1);
+        data.resize(count);
+        q->endInsertRows();
+    }
+}
+
+void MetadataModelPrivate::newEntries(const QList< Nepomuk2::Query::Result > &entries, int page)
+{
+    foreach (const Nepomuk2::Query::Result &res, entries) {
+        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+        //kDebug() << "Result label:" << res.genericLabel();
+
+        totalCount += res.additionalBinding(QLatin1String("count")).variant().toInt();
+    }
+
+    dataToInsert[page] << entries;
+
+    if (!newEntriesTimer->isActive() && !dataToInsert[page].isEmpty()) {
+        newEntriesTimer->start(200);
+    }
+    if (totalCount > 0) {
+        emit q->totalCountChanged();
+    }
+}
+
+void MetadataModelPrivate::newEntriesDelayed()
+{
+    if (dataToInsert.isEmpty()) {
+        return;
+    }
+
+    elapsedTime.start();
+    QHash<int, QList<Nepomuk2::Query::Result> >::const_iterator i;
+    for (i = dataToInsert.constBegin(); i != dataToInsert.constEnd(); ++i) {
+        const QList<Nepomuk2::Query::Result> dataToInsert = i.value();
+
+        watcher->stop();
+
+        int pageStart = 0;
+        if (pageSize > 0) {
+            pageStart = i.key() * pageSize;
+        }
+        int startOffset = validIndexForPage.value(i.key());
+        int offset = startOffset;
+
+        //if new result arrive on an already running query, they may arrive before countQueryResult
+        if (data.size() < pageStart + startOffset + 1) {
+            q->beginInsertRows(QModelIndex(), data.size(), pageStart + startOffset);
+            data.resize(pageStart + startOffset + 1);
+            q->endInsertRows();
+        }
+        //this happens only when validIndexForPage has been invalidate by row removal
+        if (!validIndexForPage.contains(i.key()) && (data[pageStart + startOffset].resource().isValid() || data[pageStart + startOffset].additionalBindings().count() > 0)) {
+            while (pageStart + startOffset < data.size() && (data[pageStart + startOffset].resource().isValid() || data[pageStart + startOffset].additionalBindings().count() > 0)) {
+                ++startOffset;
+                ++offset;
+            }
+        }
+
+        foreach (const Nepomuk2::Query::Result &res, dataToInsert) {
+            //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
+            //kDebug() << "Page:" << i.key() << "Index:"<< pageStart + offset;
+
+            if (res.resource().isValid()) {
+                uriToRow[res.resource().uri()] = pageStart + offset;
+            }
+
+            //there can be new results before the count query gets updated
+            if (pageStart + offset < data.size()) {
+                data[pageStart + offset] = res;
+                if (res.resource().isValid()) {
+                    watcher->addResource(res.resource());
+                }
+                ++offset;
+            } else {
+                q->beginInsertRows(QModelIndex(), data.size(), pageStart + offset);
+                data.resize(pageStart + offset + 1);
+                data[pageStart + offset] = res;
+                if (res.resource().isValid()) {
+                    watcher->addResource(res.resource());
+                }
+                ++offset;
+                q->endInsertRows();
+            }
+        }
+
+        validIndexForPage[i.key()] = offset;
+
+        watcher->start();
+        emit q->dataChanged(q->createIndex(pageStart + startOffset, 0),
+                            q->createIndex(pageStart + startOffset + dataToInsert.count()-1, 0));
+    }
+    kDebug() << "Elapsed time populating the model" << elapsedTime.elapsed();
+    dataToInsert.clear();
+}
+
+void MetadataModelPrivate::propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val)
+{
+    Q_UNUSED(prop)
+    Q_UNUSED(val)
+
+    const int index = uriToRow.value(res.uri());
+    if (index >= 0) {
+        emit q->dataChanged(q->createIndex(index, 0, 0), q->createIndex(index, 0, 0));
+    }
+}
+
+void MetadataModelPrivate::dataFormatChanged(const QPersistentModelIndex &index)
+{
+    emit q->dataChanged(index, index);
+}
+
+void MetadataModelPrivate::entriesRemoved(const QList<QUrl> &urls)
+{
+    int prevIndex = -100;
+    //pack all the stuff to remove in groups, to emit the least possible signals
+    //this assumes urls are in the same order they arrived ion the results
+    //it's a map because we want to remove values from the vector in inverted order to keep indexes valid trough the remove loop
+    int oldTotalCount = totalCount;
+    QMap<int, int> toRemove;
+    foreach (const QUrl &url, urls) {
+        const int index = uriToRow.value(url);
+        const int count = data[index].additionalBinding("count").variant().toInt();
+        if (count) {
+            totalCount -= count;
+        }
+        if (index == prevIndex + 1) {
+            toRemove[prevIndex]++;
+        } else {
+            toRemove[index] = 1;
+        }
+        prevIndex = index;
+    }
+
+    if (oldTotalCount != totalCount) {
+        emit q->totalCountChanged();
+    }
+
+    //all the page indexes may be invalid now
+    validIndexForPage.clear();
+
+    QMap<int, int>::const_iterator i = toRemove.constEnd();
+
+    while (i != toRemove.constBegin()) {
+        --i;
+        q->beginRemoveRows(QModelIndex(), i.key(), i.key()+i.value()-1);
+        data.remove(i.key(), i.value());
+        q->endRemoveRows();
+    }
+
+    //another loop, we don't depend to uriToRow in data(), but we take this doublesafety
+    foreach (const QUrl &url, urls) {
+        uriToRow.remove(url);
+    }
+
+    //FIXME: this loop makes all the optimizations useless, get rid either of it or the optimizations
+    for (int i = 0; i < data.count(); ++i) {
+        uriToRow[data[i].resource().uri()] = i;
+    }
+
+    emit q->countChanged();
+}
+
+void MetadataModelPrivate::serviceRegistered(const QString &service)
 {
     if (service == QLatin1String("org.kde.nepomuk.services.nepomukqueryservice")) {
-        disconnect(d->queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
-        connect(d->queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
+        QObject::disconnect(queryTimer, SIGNAL(timeout()), q, SLOT(doQuery()));
+        QObject::connect(queryTimer, SIGNAL(timeout()), q, SLOT(doQuery()));
         doQuery();
     }
 }
