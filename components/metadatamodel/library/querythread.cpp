@@ -19,7 +19,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include "querythread.h"
+#include "querythread_p.h"
 
 #include <KDebug>
 
@@ -232,4 +232,4 @@ void QueryThread::finishedListing()
     }
 }
 
-#include "querythread.moc"
+#include "querythread_p.moc"

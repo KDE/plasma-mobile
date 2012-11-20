@@ -19,7 +19,7 @@
 
 #include "metadatamodel.h"
 #include "queryproviders/basicqueryprovider.h"
-#include "querythread.h"
+#include "querythread_p.h"
 
 #include <cmath>
 
