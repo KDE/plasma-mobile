@@ -44,13 +44,56 @@
 #include <Nepomuk2/Query/ResourceTypeTerm>
 #include <Nepomuk2/Query/StandardQuery>
 
+#include <Nepomuk2/Vocabulary/NIE>
+
 using namespace Nepomuk2::Vocabulary;
 using namespace Soprano::Vocabulary;
 
+
+
+class ResourceQueryProviderPrivate
+{
+public:
+    ResourceQueryProviderPrivate(ResourceQueryProvider *provider)
+        : q(provider),
+          thumbnailSize(180, 120),
+          thumbnailerPlugins(new QStringList(KIO::PreviewJob::availablePlugins()))
+    {
+        previewTimer = new QTimer(q);
+        previewTimer->setSingleShot(true);
+        QObject::connect(previewTimer, SIGNAL(timeout()),
+                q, SLOT(delayedPreview()));
+
+        //using the same cache of the engine, they index both by url
+        imageCache = new KImageCache("plasma_engine_preview", 41943040);
+    }
+
+    QString resourceIcon(const Nepomuk2::Resource &resource) const;
+
+    //slots
+    void showPreview(const KFileItem &item, const QPixmap &preview);
+    void previewFailed(const KFileItem &item);
+    void delayedPreview();
+
+
+    ResourceQueryProvider *q;
+    QString queryString;
+    QStringList sortBy;
+    Qt::SortOrder sortOrder;
+
+    //previews
+    QTimer *previewTimer;
+    QHash<KUrl, QPersistentModelIndex> filesToPreview;
+    QSize thumbnailSize;
+    QHash<KUrl, QPersistentModelIndex> previewJobs;
+    KImageCache* imageCache;
+    QStringList* thumbnailerPlugins;
+};
+
+
 ResourceQueryProvider::ResourceQueryProvider(QObject* parent)
     : BasicQueryProvider(parent),
-      m_thumbnailSize(180, 120),
-      m_thumbnailerPlugins(new QStringList(KIO::PreviewJob::availablePlugins()))
+      d(new ResourceQueryProviderPrivate(this))
 {
     QHash<int, QByteArray> roleNames;
     roleNames[Qt::DisplayRole] = "display";
@@ -74,80 +117,72 @@ ResourceQueryProvider::ResourceQueryProvider(QObject* parent)
     roleNames[Tags] = "tags";
     roleNames[TagsNames] = "tagsNames";
     setRoleNames(roleNames);
-
-    m_previewTimer = new QTimer(this);
-    m_previewTimer->setSingleShot(true);
-    connect(m_previewTimer, SIGNAL(timeout()),
-            this, SLOT(delayedPreview()));
-
-    //using the same cache of the engine, they index both by url
-    m_imageCache = new KImageCache("plasma_engine_preview", 41943040);
 }
 
 ResourceQueryProvider::~ResourceQueryProvider()
 {
-    delete m_imageCache;
+    delete d->imageCache;
 }
 
 void ResourceQueryProvider::setQueryString(const QString &query)
 {
-    if (query == m_queryString || query == "nepomuk") {
+    if (query == d->queryString || query == "nepomuk") {
         return;
     }
 
-    m_queryString = query;
+    d->queryString = query;
     requestRefresh();
     emit queryStringChanged();
 }
 
 QString ResourceQueryProvider::queryString() const
 {
-    return m_queryString;
+    return d->queryString;
 }
 
 void ResourceQueryProvider::setSortBy(const QVariantList &sortBy)
 {
     QStringList stringList = variantToStringList(sortBy);
 
-    if (m_sortBy == stringList) {
+    if (d->sortBy == stringList) {
         return;
     }
 
-    m_sortBy = stringList;
+    d->sortBy = stringList;
     requestRefresh();
     emit sortByChanged();
 }
 
 QVariantList ResourceQueryProvider::sortBy() const
 {
-    return stringToVariantList(m_sortBy);
+    return stringToVariantList(d->sortBy);
 }
 
 void ResourceQueryProvider::setSortOrder(Qt::SortOrder sortOrder)
 {
-    if (m_sortOrder == sortOrder) {
+    if (d->sortOrder == sortOrder) {
         return;
     }
 
-    m_sortOrder = sortOrder;
+    d->sortOrder = sortOrder;
     requestRefresh();
     emit sortOrderChanged();
 }
 
 Qt::SortOrder ResourceQueryProvider::sortOrder() const
 {
-    return m_sortOrder;
+    return d->sortOrder;
 }
 
 void ResourceQueryProvider::setThumbnailSize(const QSize& size)
 {
-    m_thumbnailSize = size;
+    d->thumbnailSize = size;
     emit thumbnailSizeChanged();
 }
 
 QSize ResourceQueryProvider::thumbnailSize() const
 {
-    return m_thumbnailSize;
+    return d->thumbnailSize;
 }
 
 void ResourceQueryProvider::doQuery()
@@ -155,7 +190,7 @@ void ResourceQueryProvider::doQuery()
     QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
 
     //check if really all properties to build the query are null
-    if (m_queryString.isEmpty() && resourceType().isEmpty() &&
+    if (d->queryString.isEmpty() && resourceType().isEmpty() &&
         mimeTypeStrings().isEmpty() && activityId().isEmpty() &&
         tagStrings().size() == 0 && !startDate().isValid() &&
         !endDate().isValid() && minimumRating() <= 0 &&
@@ -166,8 +201,8 @@ void ResourceQueryProvider::doQuery()
     query.setQueryFlags(Nepomuk2::Query::Query::NoResultRestrictions);
     Nepomuk2::Query::AndTerm rootTerm;
 
-    if (!m_queryString.isEmpty()) {
-        rootTerm.addSubTerm(Nepomuk2::Query::QueryParser::parseQuery(m_queryString).term());
+    if (!d->queryString.isEmpty()) {
+        rootTerm.addSubTerm(Nepomuk2::Query::QueryParser::parseQuery(d->queryString).term());
     }
 
     if (!resourceType().isEmpty()) {
@@ -300,41 +335,19 @@ void ResourceQueryProvider::doQuery()
         query.addRequestProperty(Nepomuk2::Query::Query::RequestProperty(RDFS::comment()));
     }*/
 
-    int weight = m_sortBy.length() + 1;
-    foreach (const QString &sortProperty, m_sortBy) {
+    int weight = d->sortBy.length() + 1;
+    foreach (const QString &sortProperty, d->sortBy) {
         if (sortProperty.isEmpty()) {
             continue;
         }
         Nepomuk2::Query::ComparisonTerm sortTerm(propertyUrl(sortProperty), Nepomuk2::Query::Term());
-        sortTerm.setSortWeight(weight, m_sortOrder);
+        sortTerm.setSortWeight(weight, d->sortOrder);
         rootTerm.addSubTerm(sortTerm);
         --weight;
     }
 
     query.setTerm(rootTerm);
     setQuery(query);
-}
-
-QString ResourceQueryProvider::resourceIcon(const Nepomuk2::Resource &resource) const
-{
-    //FIXME: symbols seems broken on Mer
-    //indagate after PA3
-    if (0&&!resource.symbols().isEmpty()) {
-        return resource.symbols().first();
-    } else {
-        //if it's an application, fetch the icon from the desktop file
-        Nepomuk2::Types::Class resClass(resource.type());
-        if (resClass.label() == "Application") {
-            KService::Ptr serv = KService::serviceByDesktopPath(resource.property(propertyUrl("nie:url")).toUrl().path());
-            if (serv) {
-                return serv->icon();
-            } else {
-                return KMimeType::iconNameForUrl(resource.property(propertyUrl("nie:url")).toString());
-            }
-        } else {
-            return KMimeType::iconNameForUrl(resource.property(propertyUrl("nie:url")).toString());
-        }
-    }
 }
 
 QVariant ResourceQueryProvider::formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const
@@ -352,21 +365,21 @@ QVariant ResourceQueryProvider::formatData(const Nepomuk2::Query::Result &row, c
     case Description:
         return resource.description();
     case Qt::DecorationRole: 
-        return KIcon(resourceIcon(resource));
+        return KIcon(d->resourceIcon(resource));
     case HasSymbol:
     case Icon:
-        return resourceIcon(resource);
+        return d->resourceIcon(resource);
     case Thumbnail: {
         KUrl url(resource.property(propertyUrl("nie:url")).toString());
         if (resource.isFile() && url.isLocalFile()) {
-            QImage preview = QImage(m_thumbnailSize, QImage::Format_ARGB32_Premultiplied);
+            QImage preview = QImage(d->thumbnailSize, QImage::Format_ARGB32_Premultiplied);
 
-            if (m_imageCache->findImage(url.prettyUrl(), &preview)) {
+            if (d->imageCache->findImage(url.prettyUrl(), &preview)) {
                 return preview;
-            } else if (!m_filesToPreview.contains(url)) {
-                m_previewTimer->start(500);
+            } else if (!d->filesToPreview.contains(url)) {
+                d->previewTimer->start(500);
                 //HACK
-                const_cast<ResourceQueryProvider *>(this)->m_filesToPreview[url] = QPersistentModelIndex(index);
+                const_cast<ResourceQueryProvider *>(this)->d->filesToPreview[url] = QPersistentModelIndex(index);
             }
         }
         return QVariant();
@@ -444,55 +457,85 @@ QVariant ResourceQueryProvider::formatData(const Nepomuk2::Query::Result &row, c
     }
 }
 
-void ResourceQueryProvider::delayedPreview()
+
+
+
+
+
+////////// ResourceQueryProviderPrivate
+
+
+QString ResourceQueryProviderPrivate::resourceIcon(const Nepomuk2::Resource &resource) const
 {
-    QHash<KUrl, QPersistentModelIndex>::const_iterator i = m_filesToPreview.constBegin();
+    //FIXME: symbols seems broken on Mer
+    //indagate after PA3
+    if (0&&!resource.symbols().isEmpty()) {
+        return resource.symbols().first();
+    } else {
+        //if it's an application, fetch the icon from the desktop file
+        Nepomuk2::Types::Class resClass(resource.type());
+        if (resClass.label() == "Application") {
+            KService::Ptr serv = KService::serviceByDesktopPath(resource.property(NIE::url()).toUrl().path());
+            if (serv) {
+                return serv->icon();
+            } else {
+                return KMimeType::iconNameForUrl(resource.property(NIE::url()).toString());
+            }
+        } else {
+            return KMimeType::iconNameForUrl(resource.property(NIE::url()).toString());
+        }
+    }
+}
+
+void ResourceQueryProviderPrivate::delayedPreview()
+{
+    QHash<KUrl, QPersistentModelIndex>::const_iterator i = filesToPreview.constBegin();
 
     KFileItemList list;
 
-    while (i != m_filesToPreview.constEnd()) {
+    while (i != filesToPreview.constEnd()) {
         KUrl file = i.key();
         QPersistentModelIndex index = i.value();
 
 
-        if (!m_previewJobs.contains(file) && file.isValid()) {
+        if (!previewJobs.contains(file) && file.isValid()) {
             list.append(KFileItem(file, QString(), 0));
-            m_previewJobs.insert(file, QPersistentModelIndex(index));
+            previewJobs.insert(file, QPersistentModelIndex(index));
         }
 
         ++i;
     }
 
-    m_filesToPreview.clear();
+    filesToPreview.clear();
 
     if (list.size() > 0) {
-        KIO::PreviewJob* job = KIO::filePreview(list, m_thumbnailSize, m_thumbnailerPlugins);
+        KIO::PreviewJob* job = KIO::filePreview(list, thumbnailSize, thumbnailerPlugins);
         //job->setIgnoreMaximumSize(true);
         kDebug() << "Created job" << job << "for" << list.size() << "files";
-        connect(job, SIGNAL(gotPreview(KFileItem,QPixmap)),
-                this, SLOT(showPreview(KFileItem,QPixmap)));
-        connect(job, SIGNAL(failed(KFileItem)),
-                this, SLOT(previewFailed(KFileItem)));
+        QObject::connect(job, SIGNAL(gotPreview(KFileItem,QPixmap)),
+                q, SLOT(showPreview(KFileItem,QPixmap)));
+        QObject::connect(job, SIGNAL(failed(KFileItem)),
+                q, SLOT(previewFailed(KFileItem)));
     }
 }
 
-void ResourceQueryProvider::showPreview(const KFileItem &item, const QPixmap &preview)
+void ResourceQueryProviderPrivate::showPreview(const KFileItem &item, const QPixmap &preview)
 {
-    QPersistentModelIndex index = m_previewJobs.value(item.url());
-    m_previewJobs.remove(item.url());
+    QPersistentModelIndex index = previewJobs.value(item.url());
+    previewJobs.remove(item.url());
 
     if (!index.isValid()) {
         return;
     }
 
-    m_imageCache->insertImage(item.url().prettyUrl(), preview.toImage());
+    imageCache->insertImage(item.url().prettyUrl(), preview.toImage());
     //kDebug() << "preview size:" << preview.size();
-    emit dataFormatChanged(index);
+    emit q->dataFormatChanged(index);
 }
 
-void ResourceQueryProvider::previewFailed(const KFileItem &item)
+void ResourceQueryProviderPrivate::previewFailed(const KFileItem &item)
 {
-    m_previewJobs.remove(item.url());
+    previewJobs.remove(item.url());
 }
 
 #include "resourcequeryprovider.moc"

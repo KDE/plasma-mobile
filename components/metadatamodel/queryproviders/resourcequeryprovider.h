@@ -31,6 +31,8 @@
 
 class KImageCache;
 
+class ResourceQueryProviderPrivate;
+
 class ResourceQueryProvider : public BasicQueryProvider
 {
     Q_OBJECT
@@ -78,8 +80,9 @@ public:
 
     ResourceQueryProvider(QObject* parent = 0);
     ~ResourceQueryProvider();
-    QVariant formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const;
 
+
+    //properties
     void setQueryString(const QString &query);
     QString queryString() const;
 
@@ -92,6 +95,11 @@ public:
     void setThumbnailSize(const QSize &size);
     QSize thumbnailSize() const;
 
+    /**
+     * Reimplemented from AbstractQueryProvider
+     */
+    QVariant formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const;
+
 Q_SIGNALS:
     void queryStringChanged();
     void sortByChanged();
@@ -100,25 +108,14 @@ Q_SIGNALS:
 
 protected:
     virtual void doQuery();
-    QString resourceIcon(const Nepomuk2::Resource &resource) const;
-
-protected Q_SLOTS:
-    void showPreview(const KFileItem &item, const QPixmap &preview);
-    void previewFailed(const KFileItem &item);
-    void delayedPreview();
 
 private:
-    QString m_queryString;
-    QStringList m_sortBy;
-    Qt::SortOrder m_sortOrder;
+    ResourceQueryProviderPrivate *const d;
+    friend class ResourceQueryProviderPrivate;
 
-    //previews
-    QTimer *m_previewTimer;
-    QHash<KUrl, QPersistentModelIndex> m_filesToPreview;
-    QSize m_thumbnailSize;
-    QHash<KUrl, QPersistentModelIndex> m_previewJobs;
-    KImageCache* m_imageCache;
-    QStringList* m_thumbnailerPlugins;
+    Q_PRIVATE_SLOT(d, void showPreview(const KFileItem &item, const QPixmap &preview))
+    Q_PRIVATE_SLOT(d, void previewFailed(const KFileItem &item))
+    Q_PRIVATE_SLOT(d, void delayedPreview())
 };
 
 #endif // RESOURCEQUERYPROVIDER_H
