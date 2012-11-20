@@ -37,8 +37,20 @@
 #include <Nepomuk2/Query/ResourceTypeTerm>
 #include <Nepomuk2/Query/StandardQuery>
 
+
+class CloudQueryProviderPrivate
+{
+public:
+    CloudQueryProviderPrivate()
+    {
+    }
+
+    QString cloudCategory;
+};
+
 CloudQueryProvider::CloudQueryProvider(QObject* parent)
-    : BasicQueryProvider(parent)
+    : BasicQueryProvider(parent),
+      d(new CloudQueryProviderPrivate())
 {
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
@@ -55,18 +67,18 @@ CloudQueryProvider::~CloudQueryProvider()
 
 void CloudQueryProvider::setCloudCategory(QString category)
 {
-    if (m_cloudCategory == category) {
+    if (d->cloudCategory == category) {
         return;
     }
 
-    m_cloudCategory = category;
+    d->cloudCategory = category;
     requestRefresh();
     emit cloudCategoryChanged();
 }
 
 QString CloudQueryProvider::cloudCategory() const
 {
-    return m_cloudCategory;
+    return d->cloudCategory;
 }
 
 void CloudQueryProvider::doQuery()
@@ -74,7 +86,7 @@ void CloudQueryProvider::doQuery()
     QDeclarativePropertyMap *parameters = qobject_cast<QDeclarativePropertyMap *>(extraParameters());
 
     //check if really all properties to build the query are null
-    if (m_cloudCategory.isEmpty()) {
+    if (d->cloudCategory.isEmpty()) {
         return;
     }
 
@@ -84,10 +96,10 @@ void CloudQueryProvider::doQuery()
           "count(*) as ?count "
         "where {";
 
-    if (m_cloudCategory == "kao:Activity") {
+    if (d->cloudCategory == "kao:Activity") {
         query += " ?activity nao:isRelated ?r . ?activity rdf:type kao:Activity . ?activity kao:activityIdentifier ?label ";
     } else {
-        query += " ?r " + m_cloudCategory + " ?label";
+        query += " ?r " + d->cloudCategory + " ?label";
     }
 
 

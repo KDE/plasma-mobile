@@ -22,6 +22,7 @@
 
 #include "basicqueryprovider.h"
 
+class TimelineQueryProviderPrivate;
 
 class TimelineQueryProvider : public BasicQueryProvider
 {
@@ -73,7 +74,7 @@ protected:
     virtual void doQuery();
 
 private:
-    Level m_level;
+    TimelineQueryProviderPrivate *const d;
 };
 
 #endif // TIMELINEQUERYPROVIDER_H

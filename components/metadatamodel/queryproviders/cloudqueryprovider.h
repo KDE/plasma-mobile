@@ -22,6 +22,7 @@
 
 #include "basicqueryprovider.h"
 
+class CloudQueryProviderPrivate;
 
 class CloudQueryProvider : public BasicQueryProvider
 {
@@ -37,27 +38,31 @@ public:
         Count,
         TotalCount
     };
+
     CloudQueryProvider(QObject* parent = 0);
     ~CloudQueryProvider();
-    QVariant formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const;
-
-    QVariantList categories() const;
 
     /**
+     * examples:
      * rdf:type
      * nao:numericRating
      */
     void setCloudCategory(QString category);
     QString cloudCategory() const;
 
+    /**
+     * Reimplemented fron AbstractQueryProvider
+     */
+    virtual QVariant formatData(const Nepomuk2::Query::Result &row, const QPersistentModelIndex &index, int role) const;
+
 Q_SIGNALS:
     void cloudCategoryChanged();
 
-protected:
+protected Q_SLOTS:
     virtual void doQuery();
 
 private:
-    QString m_cloudCategory;
+    CloudQueryProviderPrivate *const d;
 };
 
 #endif // CLOUDQUERYPROVIDER_H

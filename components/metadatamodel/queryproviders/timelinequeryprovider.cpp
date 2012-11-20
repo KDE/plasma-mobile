@@ -38,7 +38,20 @@
 #include <Nepomuk2/Query/ResourceTypeTerm>
 #include <Nepomuk2/Query/StandardQuery>
 
-TimelineQueryProvider::TimelineQueryProvider(QObject* parent): BasicQueryProvider(parent)
+
+class TimelineQueryProviderPrivate
+{
+public:
+    TimelineQueryProviderPrivate()
+    {
+    }
+
+    TimelineQueryProvider::Level level;
+};
+
+TimelineQueryProvider::TimelineQueryProvider(QObject* parent)
+    : BasicQueryProvider(parent),
+      d(new TimelineQueryProviderPrivate())
 {
     QHash<int, QByteArray> roleNames;
     roleNames[LabelRole] = "label";
@@ -56,25 +69,25 @@ TimelineQueryProvider::~TimelineQueryProvider()
 
 void TimelineQueryProvider::setLevel(TimelineQueryProvider::Level level)
 {
-    if (m_level == level) {
+    if (d->level == level) {
         return;
     }
 
-    m_level = level;
+    d->level = level;
     requestRefresh();
     emit levelChanged();
 }
 
 TimelineQueryProvider::Level TimelineQueryProvider::level() const
 {
-    return m_level;
+    return d->level;
 }
 
 QString TimelineQueryProvider::description() const
 {
 
     //TODO: manage cases where start and enddate cover more than one year/month
-    switch (m_level) {
+    switch (d->level) {
     case Year:
         return i18n("All years");
     case Month:
@@ -93,12 +106,12 @@ void TimelineQueryProvider::doQuery()
     QString monthQuery;
     QString dayQuery;
 
-    if (m_level >= Month) {
+    if (d->level >= Month) {
         monthQuery = "bif:month(?label)";
     } else {
         monthQuery = '0';
     }
-    if (m_level >= Day) {
+    if (d->level >= Day) {
         dayQuery = "bif:dayofmonth(?label)";
     } else {
         dayQuery = '0';
@@ -227,10 +240,10 @@ void TimelineQueryProvider::doQuery()
 
     //Group by construction
     query += " group by bif:year(?label) ";
-    if (m_level >= Month) {
+    if (d->level >= Month) {
         query += " bif:month(?label) ";
     }
-    if (m_level >= Day) {
+    if (d->level >= Day) {
         query += " bif:dayofmonth(?label) ";
     }
     query += " order by desc(?year) desc(?month) desc(?day) ";
