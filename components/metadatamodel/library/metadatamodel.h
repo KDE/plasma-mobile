@@ -42,6 +42,8 @@ class QTimer;
 class AbstractQueryProvider;
 class QueryThread;
 
+class MetadataModelPrivate;
+
 /**
  * This is the main class of the Nepomuk model bindings: given a query built by assigning its properties such as queryString, resourceType, startDate etc, it constructs a model with a resource per row, with direct access of its main properties as roles.
  *
@@ -95,8 +97,8 @@ public:
     void setQueryProvider(AbstractQueryProvider *provider);
     AbstractQueryProvider *queryProvider() const;
 
-    virtual int count() const {return m_data.count();}
-    int totalCount() const {return m_totalCount;}
+    virtual int count() const;
+    int totalCount() const;
 
     void setLazyLoading(bool size);
     bool lazyLoading() const;
@@ -160,46 +162,7 @@ protected:
     void fetchResultsPage(int page);
 
 private:
-    //query construction is completely delegated to this
-    QWeakPointer<AbstractQueryProvider> m_queryProvider;
-
-    //To be sure that nepomuk is up, and watch when it goes up/down
-    QDBusServiceWatcher *m_queryServiceWatcher;
-
-    //perform all the queries in this thread
-    QueryThread *m_queryThread;
-
-    //actual query performed
-    Nepomuk2::Query::Query m_query;
-    //sparql version: they are mutually exclusive
-    QString m_sparqlQuery;
-
-    //pieces to limit how much stuff we fetch
-    int m_limit;
-    int m_pageSize;
-
-    //where is the last valid (already populated) index for a given page
-    QHash<int, int> m_validIndexForPage;
-
-
-    int m_totalCount;
-
-    //actual main data
-    QVector<Nepomuk2::Query::Result> m_data;
-    //some properties may change dynamically
-    Nepomuk2::ResourceWatcher* m_watcher;
-    //used to event compress new results arriving
-    QTimer *m_newEntriesTimer;
-    //a queue by page of the data that will be inserted in the model with event compression
-    QHash<int, QList<Nepomuk2::Query::Result> > m_dataToInsert;
-    //maps uris ro row numbers, so when entriesRemoved arrived, we know what rows to remove
-    QHash<QUrl, int> m_uriToRow;
-
-    //used to event compressreset of the query for instance when limit or cacheresults change
-    QTimer *m_queryTimer;
-
-    //used purely for benchmark
-    QTime m_elapsedTime;
+    MetadataModelPrivate *const d;
 };
 
 #endif
