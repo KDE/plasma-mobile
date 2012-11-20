@@ -78,6 +78,9 @@ class NEPOMUKDATAMODEL_EXPORT MetadataModel : public QAbstractListModel
      */
     Q_PROPERTY(bool running READ isRunning NOTIFY runningChanged)
 
+    /**
+     * @property QueryProvider queryProvider: this is the class that will provide the Nepomuk query to the model and format the data of the results to obtain the final model data to be disaplayed to the user.
+     */
     Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
 
 public:
@@ -115,6 +118,7 @@ public:
     Q_INVOKABLE QVariantHash get(int row) const;
 
 
+    //Reimplementations of QAbstractListModel
     //Reimplemented
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
