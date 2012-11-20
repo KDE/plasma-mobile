@@ -174,20 +174,6 @@ bool MetadataModel::isRunning() const
     return d->queryThread->isQueryRunning();
 }
 
-void MetadataModel::setQuery(const Nepomuk2::Query::Query &query)
-{
-    d->query = query;
-
-    if (Nepomuk2::Query::QueryServiceClient::serviceAvailable()) {
-        requestRefresh();
-    }
-}
-
-Nepomuk2::Query::Query MetadataModel::query() const
-{
-    return d->query;
-}
-
 void MetadataModel::setQueryProvider(AbstractQueryProvider *provider)
 {
     if (d->queryProvider.data() == provider) {

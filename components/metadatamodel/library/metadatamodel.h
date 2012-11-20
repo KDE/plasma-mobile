@@ -91,9 +91,6 @@ public:
 
     bool isRunning() const;
 
-    void setQuery(const Nepomuk2::Query::Query &query);
-    Nepomuk2::Query::Query query() const;
-
     void setQueryProvider(AbstractQueryProvider *provider);
     AbstractQueryProvider *queryProvider() const;
 
