@@ -20,7 +20,6 @@
 #include "basicqueryprovider.h"
 
 #include <QDBusConnection>
-#include <QDBusServiceWatcher>
 #include <QDBusConnectionInterface>
 #include <QTimer>
 
@@ -29,39 +28,64 @@
 
 #include <Nepomuk2/ResourceManager>
 
+
+class BasicQueryProviderPrivate
+{
+public:
+    BasicQueryProviderPrivate(BasicQueryProvider *provider)
+        : q(provider),
+          minimumRating(0),
+          maximumRating(0)
+    {
+        queryTimer = new QTimer(q);
+        queryTimer->setInterval(0);
+        queryTimer->setSingleShot(true);
+        QObject::connect(queryTimer, SIGNAL(timeout()), q, SLOT(doQuery()));
+
+        extraParameters = new QDeclarativePropertyMap;
+        QObject::connect (extraParameters, SIGNAL(valueChanged(QString,QVariant)), queryTimer, SLOT(start()));
+    }
+
+    BasicQueryProvider *q;
+    QTimer *queryTimer;
+
+    QString resourceType;
+    QStringList mimeTypes;
+    QString activityId;
+    QStringList tags;
+    QDate startDate;
+    QDate endDate;
+    int minimumRating;
+    int maximumRating;
+    QDeclarativePropertyMap *extraParameters;
+};
+
 BasicQueryProvider::BasicQueryProvider(QObject *parent)
     : AbstractQueryProvider(parent),
-      m_minimumRating(0),
-      m_maximumRating(0)
+      d(new BasicQueryProviderPrivate(this))
 {
-    m_queryTimer = new QTimer(this);
-    m_queryTimer->setInterval(0);
-    m_queryTimer->setSingleShot(true);
-    connect(m_queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
-
-    m_extraParameters = new QDeclarativePropertyMap;
-    connect (m_extraParameters, SIGNAL(valueChanged(QString,QVariant)), m_queryTimer, SLOT(start()));
+    
 }
 
 BasicQueryProvider::~BasicQueryProvider()
 {
-    delete m_extraParameters;
+    delete d->extraParameters;
 }
 
 void BasicQueryProvider::setResourceType(const QString &type)
 {
-    if (m_resourceType == type) {
+    if (d->resourceType == type) {
         return;
     }
 
-    m_resourceType = type;
-    m_queryTimer->start();
+    d->resourceType = type;
+    d->queryTimer->start();
     emit resourceTypeChanged();
 }
 
 QString BasicQueryProvider::resourceType() const
 {
-    return m_resourceType;
+    return d->resourceType;
 }
 
 void BasicQueryProvider::setMimeTypesList(const QVariantList &types)
@@ -69,34 +93,34 @@ void BasicQueryProvider::setMimeTypesList(const QVariantList &types)
     //FIXME: not exactly efficient
     QStringList stringList = variantToStringList(types);
 
-    if (m_mimeTypes == stringList) {
+    if (d->mimeTypes == stringList) {
         return;
     }
 
-    m_mimeTypes = stringList;
-    m_queryTimer->start();
+    d->mimeTypes = stringList;
+    d->queryTimer->start();
     emit mimeTypesChanged();
 }
 
 QVariantList BasicQueryProvider::mimeTypesList() const
 {
-    return stringToVariantList(m_mimeTypes);
+    return stringToVariantList(d->mimeTypes);
 }
 
 void BasicQueryProvider::setActivityId(const QString &activityId)
 {
-    if (m_activityId == activityId) {
+    if (d->activityId == activityId) {
         return;
     }
 
-    m_activityId = activityId;
-    m_queryTimer->start();
+    d->activityId = activityId;
+    d->queryTimer->start();
     emit activityIdChanged();
 }
 
 QString BasicQueryProvider::activityId() const
 {
-    return m_activityId;
+    return d->activityId;
 }
 
 void BasicQueryProvider::setTags(const QVariantList &tags)
@@ -104,138 +128,138 @@ void BasicQueryProvider::setTags(const QVariantList &tags)
     //FIXME: not exactly efficient
     QStringList stringList = variantToStringList(tags);
 
-    if (m_tags == stringList) {
+    if (d->tags == stringList) {
         return;
     }
 
-    m_tags = stringList;
-    m_queryTimer->start();
+    d->tags = stringList;
+    d->queryTimer->start();
     emit tagsChanged();
 }
 
 QVariantList BasicQueryProvider::tags() const
 {
-    return stringToVariantList(m_tags);
+    return stringToVariantList(d->tags);
 }
 
 QStringList BasicQueryProvider::tagStrings() const
 {
-    return m_tags;
+    return d->tags;
 }
 
 QStringList BasicQueryProvider::mimeTypeStrings() const
 {
-    return m_mimeTypes;
+    return d->mimeTypes;
 }
 
 void BasicQueryProvider::requestRefresh()
 {
-    m_queryTimer->start();
+    d->queryTimer->start();
 }
 
 void BasicQueryProvider::setStartDateString(const QString &date)
 {
     QDate newDate = QDate::fromString(date, "yyyy-MM-dd");
 
-    if (m_startDate == newDate) {
+    if (d->startDate == newDate) {
         return;
     }
 
-    m_startDate = newDate;
-    m_queryTimer->start();
+    d->startDate = newDate;
+    d->queryTimer->start();
     emit startDateChanged();
 }
 
 QString BasicQueryProvider::startDateString() const
 {
-    return m_startDate.toString("yyyy-MM-dd");
+    return d->startDate.toString("yyyy-MM-dd");
 }
 
 void BasicQueryProvider::setEndDateString(const QString &date)
 {
     QDate newDate = QDate::fromString(date, "yyyy-MM-dd");
 
-    if (m_endDate == newDate) {
+    if (d->endDate == newDate) {
         return;
     }
 
-    m_endDate = newDate;
-    m_queryTimer->start();
+    d->endDate = newDate;
+    d->queryTimer->start();
     emit endDateChanged();
 }
 
 QString BasicQueryProvider::endDateString() const
 {
-    return m_endDate.toString("yyyy-MM-dd");
+    return d->endDate.toString("yyyy-MM-dd");
 }
 
 void BasicQueryProvider::setStartDate(const QDate &date)
 {
-    if (m_startDate == date) {
+    if (d->startDate == date) {
         return;
     }
 
-    m_startDate = date;
-    m_queryTimer->start();
+    d->startDate = date;
+    d->queryTimer->start();
     emit startDateChanged();
 }
 
 QDate BasicQueryProvider::startDate() const
 {
-    return m_startDate;
+    return d->startDate;
 }
 
 void BasicQueryProvider::setEndDate(const QDate &date)
 {
-    if (m_endDate == date) {
+    if (d->endDate == date) {
         return;
     }
 
-    m_endDate = date;
-    m_queryTimer->start();
+    d->endDate = date;
+    d->queryTimer->start();
     emit endDateChanged();
 }
 
 QDate BasicQueryProvider::endDate() const
 {
-    return m_endDate;
+    return d->endDate;
 }
 
 void BasicQueryProvider::setMinimumRating(int rating)
 {
-    if (m_minimumRating == rating) {
+    if (d->minimumRating == rating) {
         return;
     }
 
-    m_minimumRating = rating;
-    m_queryTimer->start();
+    d->minimumRating = rating;
+    d->queryTimer->start();
     emit minimumRatingChanged();
 }
 
 int BasicQueryProvider::minimumRating() const
 {
-    return m_minimumRating;
+    return d->minimumRating;
 }
 
 void BasicQueryProvider::setMaximumRating(int rating)
 {
-    if (m_maximumRating == rating) {
+    if (d->maximumRating == rating) {
         return;
     }
 
-    m_maximumRating = rating;
-    m_queryTimer->start();
+    d->maximumRating = rating;
+    d->queryTimer->start();
     emit maximumRatingChanged();
 }
 
 int BasicQueryProvider::maximumRating() const
 {
-    return m_maximumRating;
+    return d->maximumRating;
 }
 
 QObject *BasicQueryProvider::extraParameters() const
 {
-    return m_extraParameters;
+    return d->extraParameters;
 }
 
 void BasicQueryProvider::doQuery()

@@ -51,11 +51,12 @@ namespace Nepomuk2 {
     class ResourceWatcher;
 }
 
-class QDBusServiceWatcher;
 class QTimer;
 
+class BasicQueryProviderPrivate;
+
 /**
- * This is the base class for the Nepomuk metadata models: all its properties, signals and slots are available in MetadataModel, MetadataCloudModel and MetadataTimelineModel
+ * This is the base class for the standard Nepomuk query providers.
  *
  * The properties of this class will be used to build a query.
  * The string properties can have a ! as prefix to negate the match.
@@ -251,17 +252,7 @@ protected:
     void requestRefresh();
 
 private:
-    QTimer *m_queryTimer;
-
-    QString m_resourceType;
-    QStringList m_mimeTypes;
-    QString m_activityId;
-    QStringList m_tags;
-    QDate m_startDate;
-    QDate m_endDate;
-    int m_minimumRating;
-    int m_maximumRating;
-    QDeclarativePropertyMap *m_extraParameters;
+    BasicQueryProviderPrivate *const d;
 };
 
 #endif
