@@ -214,13 +214,6 @@ protected:
         return it.value().toString() + property.mid(colonPosition+1);
     }
 
-    static inline QString propertyShortName(const QUrl &url)
-    {
-        //vHanda: not always, again store all the ontologies and use a hash map
-        //http://www.semanticdesktop.org/ontologies/2007/03/22/nfo will become nfo
-        return url.path().split("/").last() + ":" + url.fragment();
-    }
-
     static inline QStringList variantToStringList(const QVariantList &list)
     {
         QStringList stringList;
