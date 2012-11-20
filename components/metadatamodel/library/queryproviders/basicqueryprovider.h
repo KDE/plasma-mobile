@@ -21,6 +21,7 @@
 #define BASICQUERYPROVIDER_H
 
 #include "abstractqueryprovider.h"
+#include "nepomukdatamodel_export.h"
 #include <QObject>
 #include <QDate>
 #include <QStringList>
@@ -63,7 +64,7 @@ class BasicQueryProviderPrivate;
  *
  * @author Marco Martin <mart@kde.org>
  */
-class BasicQueryProvider : public AbstractQueryProvider
+class NEPOMUKDATAMODEL_EXPORT BasicQueryProvider : public AbstractQueryProvider
 {
     Q_OBJECT
 

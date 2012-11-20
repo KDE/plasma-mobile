@@ -20,6 +20,8 @@
 #ifndef METADATAMODEL_H
 #define METADATAMODEL_H
 
+#include "nepomukdatamodel_export.h"
+
 #include <QAbstractListModel>
 #include <QDate>
 
@@ -45,7 +47,7 @@ class QueryThread;
  *
  * @author Marco Martin <mart@kde.org>
  */
-class MetadataModel : public QAbstractListModel
+class NEPOMUKDATAMODEL_EXPORT MetadataModel : public QAbstractListModel
 {
     Q_OBJECT
 

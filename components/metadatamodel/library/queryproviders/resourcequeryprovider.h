@@ -21,6 +21,7 @@
 #define RESOURCEQUERYPROVIDER_H
 
 #include "basicqueryprovider.h"
+#include "nepomukdatamodel_export.h"
 
 #include <QSize>
 
@@ -33,7 +34,7 @@ class KImageCache;
 
 class ResourceQueryProviderPrivate;
 
-class ResourceQueryProvider : public BasicQueryProvider
+class NEPOMUKDATAMODEL_EXPORT ResourceQueryProvider : public BasicQueryProvider
 {
     Q_OBJECT
     /**

@@ -21,10 +21,11 @@
 #define TIMELINEQUERYPROVIDER_H
 
 #include "basicqueryprovider.h"
+#include "nepomukdatamodel_export.h"
 
 class TimelineQueryProviderPrivate;
 
-class TimelineQueryProvider : public BasicQueryProvider
+class NEPOMUKDATAMODEL_EXPORT TimelineQueryProvider : public BasicQueryProvider
 {
     Q_OBJECT
     /**

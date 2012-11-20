@@ -20,6 +20,8 @@
 #ifndef ABSTRACTQUERYPROVIDER_H
 #define ABSTRACTQUERYPROVIDER_H
 
+#include "nepomukdatamodel_export.h"
+
 #include <QObject>
 #include <QPersistentModelIndex>
 
@@ -46,7 +48,7 @@ class AbstractQueryProviderPrivate;
  *
  * @author Marco Martin <mart@kde.org>
  */
-class AbstractQueryProvider : public QObject
+class NEPOMUKDATAMODEL_EXPORT AbstractQueryProvider : public QObject
 {
     Q_OBJECT
 

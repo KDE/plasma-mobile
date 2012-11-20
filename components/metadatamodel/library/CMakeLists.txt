@@ -12,9 +12,7 @@ INCLUDE_DIRECTORIES(
 )
 
 set(datamodels_SRCS
-    datamodelsplugin.cpp
     metadatamodel.cpp
-    metadatausertypes.cpp
     querythread.cpp
 
     queryproviders/abstractqueryprovider.cpp
@@ -46,8 +44,13 @@ nepomuk2_add_ontology_classes (datamodels_SRCS
 qt4_automoc(${datamodels_SRCS})
 
 
-kde4_add_library(datamodelsplugin SHARED ${datamodels_SRCS})
-target_link_libraries(datamodelsplugin
+kde4_add_library(nepomukdatamodel SHARED ${datamodels_SRCS})
+
+set_target_properties(nepomukdatamodel PROPERTIES
+                      VERSION 1.0
+                      SOVERSION 0)
+
+target_link_libraries(nepomukdatamodel
         ${QT_QTCORE_LIBRARY}
         ${QT_QTDBUS_LIBRARY}
         ${QT_QTDECLARATIVE_LIBRARY}
@@ -60,10 +63,35 @@ target_link_libraries(datamodelsplugin
         ${KACTIVITIES_LIBRARY}
         )
 
-install(TARGETS datamodelsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/metadatamodels)
+install(TARGETS nepomukdatamodel EXPORT kdelibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 
-install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/metadatamodels)
+install(
+   EXPORT kdelibsLibraryTargets
+   DESTINATION ${LIB_INSTALL_DIR}/cmake/NepomukDataModel
+   FILE NepomukDataModelLibraryTargets.cmake
+   )
+
+set(metadataqueryproviders_LIB_HEADERS
+    nepomukdatamodel_export.h
+    metadatamodel.h
+
+    queryproviders/abstractqueryprovider.h
+    queryproviders/basicqueryprovider.h
+    queryproviders/timelinequeryprovider.h
+    queryproviders/cloudqueryprovider.h
+    queryproviders/resourcequeryprovider.h
+)
+
+install(FILES ${metadataqueryproviders_LIB_HEADERS} DESTINATION ${INCLUDE_INSTALL_DIR}/ COMPONENT Devel)
+
+configure_file(NepomukDataModelConfig.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/NepomukDataModelConfig.cmake" @ONLY)
+configure_file(NepomukDataModelConfigVersion.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/NepomukDataModelConfigVersion.cmake" @ONLY)
+
+install(
+   FILES ${CMAKE_CURRENT_BINARY_DIR}/NepomukDataModelConfig.cmake
+         ${CMAKE_CURRENT_BINARY_DIR}/NepomukDataModelConfigVersion.cmake
+         DESTINATION ${LIB_INSTALL_DIR}/cmake/NepomukDataModel
+)
 
 
-#add_subdirectory(test)

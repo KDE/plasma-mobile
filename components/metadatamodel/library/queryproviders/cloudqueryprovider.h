@@ -21,10 +21,11 @@
 #define CLOUDQUERYPROVIDER_H
 
 #include "basicqueryprovider.h"
+#include "nepomukdatamodel_export.h"
 
 class CloudQueryProviderPrivate;
 
-class CloudQueryProvider : public BasicQueryProvider
+class NEPOMUKDATAMODEL_EXPORT CloudQueryProvider : public BasicQueryProvider
 {
     Q_OBJECT
     /**
