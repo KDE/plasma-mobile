@@ -25,7 +25,7 @@
 
 #include "metadatamodel.h"
 #include "metadatausertypes.h"
-#include "queryproviders/basicqueryprovider.h"
+#include "queryproviders/abstractqueryprovider.h"
 #include "queryproviders/resourcequeryprovider.h"
 #include "queryproviders/cloudqueryprovider.h"
 #include "queryproviders/timelinequeryprovider.h"
@@ -34,7 +34,7 @@ void DataModelsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.metadatamodels"));
 
-    qmlRegisterType<BasicQueryProvider>(uri, 0, 1, "BasicQueryProvider");
+    qmlRegisterType<AbstractQueryProvider>(uri, 0, 1, "AbstractQueryProvider");
     qmlRegisterType<ResourceQueryProvider>(uri, 0, 1, "ResourceQueryProvider");
     qmlRegisterType<CloudQueryProvider>(uri, 0, 1, "CloudQueryProvider");
     qmlRegisterType<TimelineQueryProvider>(uri, 0, 1, "TimelineQueryProvider");

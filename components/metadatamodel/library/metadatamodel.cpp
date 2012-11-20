@@ -18,7 +18,7 @@
 */
 
 #include "metadatamodel.h"
-#include "queryproviders/basicqueryprovider.h"
+#include "queryproviders/abstractqueryprovider.h"
 #include "querythread_p.h"
 
 #include <cmath>
@@ -131,7 +131,7 @@ Nepomuk2::Query::Query MetadataModel::query() const
     return m_query;
 }
 
-void MetadataModel::setQueryProvider(BasicQueryProvider *provider)
+void MetadataModel::setQueryProvider(AbstractQueryProvider *provider)
 {
     if (m_queryProvider.data() == provider) {
         return;
@@ -155,7 +155,7 @@ void MetadataModel::setQueryProvider(BasicQueryProvider *provider)
     emit queryProviderChanged();
 }
 
-BasicQueryProvider *MetadataModel::queryProvider() const
+AbstractQueryProvider *MetadataModel::queryProvider() const
 {
     return m_queryProvider.data();
 }

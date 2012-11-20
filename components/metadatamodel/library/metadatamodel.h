@@ -39,7 +39,7 @@ namespace Nepomuk2 {
 class QDBusServiceWatcher;
 class QTimer;
 
-class BasicQueryProvider;
+class AbstractQueryProvider;
 class QueryThread;
 
 /**
@@ -81,7 +81,7 @@ class NEPOMUKDATAMODEL_EXPORT MetadataModel : public QAbstractListModel
     /**
      * @property QueryProvider queryProvider: this is the class that will provide the Nepomuk query to the model and format the data of the results to obtain the final model data to be disaplayed to the user.
      */
-    Q_PROPERTY(BasicQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
+    Q_PROPERTY(AbstractQueryProvider *queryProvider READ queryProvider WRITE setQueryProvider NOTIFY queryProviderChanged)
 
 public:
     MetadataModel(QObject *parent = 0);
@@ -92,8 +92,8 @@ public:
     void setQuery(const Nepomuk2::Query::Query &query);
     Nepomuk2::Query::Query query() const;
 
-    void setQueryProvider(BasicQueryProvider *provider);
-    BasicQueryProvider *queryProvider() const;
+    void setQueryProvider(AbstractQueryProvider *provider);
+    AbstractQueryProvider *queryProvider() const;
 
     virtual int count() const {return m_data.count();}
     int totalCount() const {return m_totalCount;}
@@ -161,7 +161,7 @@ protected:
 
 private:
     //query construction is completely delegated to this
-    QWeakPointer<BasicQueryProvider> m_queryProvider;
+    QWeakPointer<AbstractQueryProvider> m_queryProvider;
 
     //To be sure that nepomuk is up, and watch when it goes up/down
     QDBusServiceWatcher *m_queryServiceWatcher;
