@@ -101,6 +101,20 @@ public:
     void setLimit(int limit);
     int limit() const;
 
+    /**
+     * Request the query to be executed again refreshing the results.
+     * This should be needed only when Sparql queries are used, avoid to call it when possible.
+     * This methos is Asynchronous and uses event compression, so the query won't be executed immediately.
+     */
+    Q_INVOKABLE void requestRefresh();
+
+    /**
+     * Compatibility with the api of the primitive QML ListModel component
+     * @returns an Object that represents the item with all roles as properties
+     */
+    Q_INVOKABLE QVariantHash get(int row) const;
+
+
     //Reimplemented
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
@@ -115,13 +129,7 @@ public:
      * rely on its internal sorting feature instead.
      * @see sortBy
      */
-    Q_INVOKABLE void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
-
-    /**
-     * Compatibility with ListModel
-     * @returns an Object that represents the item with all roles as properties
-     */
-    Q_INVOKABLE QVariantHash get(int row) const;
+    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 
     //Reimplemented
     int rowCount(const QModelIndex &parent) const;
@@ -146,7 +154,6 @@ protected Q_SLOTS:
 
 protected:
     void fetchResultsPage(int page);
-    void requestRefresh();
 
 private:
     //query construction is completely delegated to this
