@@ -411,9 +411,8 @@ void MetadataModelPrivate::countRetrieved(int count)
 void MetadataModelPrivate::newEntries(const QList< Nepomuk2::Query::Result > &entries, int page)
 {
     foreach (const Nepomuk2::Query::Result &res, entries) {
-        //kDebug() << "Result!!!" << res.resource().genericLabel() << res.resource().type();
-        //kDebug() << "Result label:" << res.genericLabel();
-
+        //kDebug() << "Result!!!" << res.resource().label() << res.resource().type();
+        //kDebug() << "Result label:" << res.resource().label();
         totalCount += res.additionalBinding(QLatin1String("count")).variant().toInt();
     }
 
