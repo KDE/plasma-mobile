@@ -79,8 +79,11 @@ QVariant AbstractQueryProvider::formatData(const Nepomuk2::Query::Result &row, c
 
 void AbstractQueryProvider::setQuery(const Nepomuk2::Query::Query &query)
 {
-    d->query = query;
+    if (d->query == query) {
+        return;
+    }
 
+    d->query = query;
     emit queryChanged();
 }
 
