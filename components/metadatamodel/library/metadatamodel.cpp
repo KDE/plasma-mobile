@@ -225,7 +225,7 @@ AbstractQueryProvider *MetadataModel::queryProvider() const
 
 int MetadataModel::count() const
 {
-    return d->data.count();
+    return d->data.size();
 }
 
 int MetadataModel::totalCount() const
@@ -398,11 +398,11 @@ void MetadataModelPrivate::fetchResultsPage(int page)
 void MetadataModelPrivate::countRetrieved(int count)
 {
     if (count < data.size()) {
-        q->beginRemoveRows(QModelIndex(), count-1, data.size()-1);
+        q->beginRemoveRows(QModelIndex(), count - 1, data.size() - 1);
         data.resize(count);
         q->endRemoveRows();
     } else if (count > data.size()) {
-        q->beginInsertRows(QModelIndex(), data.size(), count-1);
+        q->beginInsertRows(QModelIndex(), data.size(), count - 1);
         data.resize(count);
         q->endInsertRows();
     }
