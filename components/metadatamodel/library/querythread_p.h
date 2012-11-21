@@ -23,6 +23,7 @@
 #define QUERYTHREAD_H
 
 #include <QtCore/QThread>
+#include <QtCore/QTimer>
 
 #include <Nepomuk2/Query/Result>
 #include <Nepomuk2/Query/QueryServiceClient>
@@ -40,13 +41,14 @@ public:
     QueryThread(QObject* parent = 0);
     ~QueryThread();
 
-    void setQuery(const Nepomuk2::Query::Query &query, int limit = 0, int pageSize = 30);
-    void setSparqlQuery(const QString &Query);
-
-    void fetchResultsPage(int page);
     bool hasQueryOnPage(int page) const;
 
     bool isQueryRunning() const;
+
+public Q_SLOTS:
+    void setQuery(const Nepomuk2::Query::Query &query, int limit = 0, int pageSize = 30);
+    void setSparqlQuery(const QString &Query);
+    void fetchResultsPage(int page);
 
 Q_SIGNALS:
     void newResults(const QList<Nepomuk2::Query::Result> &results, int page);
@@ -55,6 +57,9 @@ Q_SIGNALS:
     void error(const QString &message);
     void countRetrieved(int);
     void runningChanged(bool);
+
+protected:
+    void run();
 
 private Q_SLOTS:
     void countQueryResult(const QList< Nepomuk2::Query::Result > &entries);
@@ -84,10 +89,12 @@ private:
     int m_limit;
     int m_pageSize;
 
+    QTimer *m_timeoutTimer;
     bool m_running;
 
     //semaphores
     QMutex m_queryMutex;
+    QMutex m_fetchPageMutex;
 };
 
 #endif // QUERYTHREAD_H

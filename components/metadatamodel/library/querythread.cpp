@@ -42,19 +42,30 @@ QueryThread::QueryThread( QObject* parent)
       m_countQueryClient(0),
       m_limit(0),
       m_pageSize(30),
+      m_timeoutTimer(new QTimer(this)),
       m_running(false)
 {
-    moveToThread(this);
+    m_timeoutTimer->setInterval(5000);
+    m_timeoutTimer->setSingleShot(true);
+    connect(m_timeoutTimer, SIGNAL(timeout()), this, SLOT(finishedListing()));
 }
 
 QueryThread::~QueryThread()
 {
-    deleteLater();
+}
+
+void QueryThread::run()
+{
+    exec();
+    // need to wait until we're out of the event loop otherwise
+    // the thread "waits on itself"
+    QTimer::singleShot(0, this, SLOT(deleteLater()));
 }
 
 void QueryThread::setQuery(const Nepomuk2::Query::Query &query, int limit, int pageSize)
 {
     QMutexLocker locker(&m_queryMutex);
+    //QMutexLocker locker2(&m_queryMutex);
 
     m_query = query;
     m_sparqlQuery = QString();
@@ -89,6 +100,8 @@ void QueryThread::setQuery(const Nepomuk2::Query::Query &query, int limit, int p
     if (pageSize < 1) {
         fetchResultsPage(0);
     }
+
+    m_timeoutTimer->start();
 }
 
 bool QueryThread::isQueryRunning() const
@@ -98,6 +111,7 @@ bool QueryThread::isQueryRunning() const
 
 void QueryThread::setSparqlQuery(const QString &query)
 {
+    QMutexLocker locker(&m_queryMutex);
     m_query = Nepomuk2::Query::Query();
     m_sparqlQuery = query;
 
@@ -120,16 +134,19 @@ void QueryThread::setSparqlQuery(const QString &query)
     emit runningChanged(true);
 
     fetchResultsPage(0);
+    m_timeoutTimer->start();
 }
 
 
 bool QueryThread::hasQueryOnPage(int page) const
 {
+    QMutexLocker locker(const_cast<QMutex *>(&m_fetchPageMutex));
     return m_queryClients.contains(page);
 }
 
 void QueryThread::fetchResultsPage(int page)
 {
+    QMutexLocker locker(&m_fetchPageMutex);
     if (m_queryClients.contains(page)) {
         return;
     }
