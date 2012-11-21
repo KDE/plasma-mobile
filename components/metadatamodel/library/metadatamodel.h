@@ -153,6 +153,7 @@ private:
     Q_PRIVATE_SLOT(d, void newEntries(const QList< Nepomuk2::Query::Result > &entries, int page))
     Q_PRIVATE_SLOT(d, void entriesRemoved(const QList<QUrl> &urls))
     Q_PRIVATE_SLOT(d, void doQuery())
+    Q_PRIVATE_SLOT(d, void queryError(const QString &error))
     Q_PRIVATE_SLOT(d, void newEntriesDelayed())
     Q_PRIVATE_SLOT(d, void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val))
     Q_PRIVATE_SLOT(d, void dataFormatChanged(const QPersistentModelIndex &index))
