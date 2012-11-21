@@ -339,7 +339,7 @@ void MetadataModelPrivate::doQuery()
 
     query = queryProvider.data()->query();
     if (query.isValid()) {
-        sparqlQuery = QString();
+        sparqlQuery.clear();
         if (limit > 0) {
             query.setLimit(limit);
         }
