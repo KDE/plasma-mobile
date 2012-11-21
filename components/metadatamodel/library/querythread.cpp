@@ -228,9 +228,10 @@ void QueryThread::newEntries(const QList< Nepomuk2::Query::Result > &entries)
 
 void QueryThread::finishedListing()
 {
+    m_timeoutTimer->stop();
     m_runningClients = qMax(m_runningClients - 1, 0);
 
-    if (m_runningClients <= 0) {
+    if (m_runningClients <= 0 && m_running) {
         m_running = false;
         emit runningChanged(false);
 
