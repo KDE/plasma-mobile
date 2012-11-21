@@ -136,8 +136,8 @@ MetadataModel::MetadataModel(QObject *parent)
             this, SLOT(countRetrieved(int)));
     connect(d->queryThread, SIGNAL(runningChanged(bool)),
             this, SIGNAL(runningChanged(bool)));
-
-    //TODO: error(QString);
+    connect(d->queryThread, SIGNAL(error(QString)),
+            this, SLOT(queryError(QString)));
 
     connect(this, SIGNAL(rowsInserted(QModelIndex,int,int)),
             this, SIGNAL(countChanged()));
