@@ -35,25 +35,14 @@ Item {
     property int count: model.count
     clip: true
 
-    function pageForIndex(index)
-    {
-        return Math.floor(index / pageSize)
-    }
-
     function positionViewAtIndex(index)
     {
         iconView.positionViewAtIndex(index / pageSize, ListView.Beginning)
     }
 
-    function positionViewAtPage(page)
-    {
-        iconView.positionViewAtIndex(page, ListView.Beginning)
-    }
-
     PlasmaCore.Theme {
         id:theme
     }
-
 
     Timer {
         id: resizeTimer
