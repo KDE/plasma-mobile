@@ -185,6 +185,8 @@ MetadataModel::MetadataModel(QObject *parent)
 
 MetadataModel::~MetadataModel()
 {
+    d->queryThread->exit();
+    delete d;
 }
 
 bool MetadataModel::isRunning() const
