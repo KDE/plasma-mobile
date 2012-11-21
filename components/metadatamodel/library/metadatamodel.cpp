@@ -72,12 +72,11 @@ public:
     void newEntries(const QList< Nepomuk2::Query::Result > &entries, int page);
     void entriesRemoved(const QList<QUrl> &urls);
     void doQuery();
+    void queryError(const QString &error);
     void newEntriesDelayed();
     void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val);
     void dataFormatChanged(const QPersistentModelIndex &index);
     void serviceRegistered(const QString &service);
-
-
 
     MetadataModel *q;
 
@@ -370,10 +369,11 @@ void MetadataModelPrivate::doQuery()
     if (pageSize < 1) {
         fetchResultsPage(0);
     }
+}
 
-    //FIXME
-    // Nepomuk2::Query::QueryServiceClient does not emit finishedListing signal when there is no new entries (no matches).
-    QTimer::singleShot(5000, q, SLOT(finishedListing()));
+void MetadataModelPrivate::queryError(const QString &error)
+{
+    kDebug() << error;
 }
 
 void MetadataModelPrivate::fetchResultsPage(int page)
