@@ -79,10 +79,10 @@ void QueryThread::setQuery(const Nepomuk2::Query::Query &query, int limit, int p
     m_pagesForClient.clear();
     m_queryClientsHistory.clear();
     m_runningClients = 0;
-    m_countQueryClient = new Nepomuk2::Query::QueryServiceClient(this);
     m_limit = limit;
     m_pageSize = pageSize;
 
+    m_countQueryClient = new Nepomuk2::Query::QueryServiceClient(this);
     connect(m_countQueryClient, SIGNAL(newEntries(QList<Nepomuk2::Query::Result>)),
             this, SLOT(countQueryResult(QList<Nepomuk2::Query::Result>)));
     connect(m_countQueryClient, SIGNAL(error(QString)), SIGNAL(error(QString)));
@@ -186,7 +186,6 @@ void QueryThread::countQueryResult(const QList< Nepomuk2::Query::Result > &entri
     }
 
     const int count = entries.first().additionalBinding(QLatin1String("cnt")).variant().toInt();
-
     emit countRetrieved(count);
 }
 
