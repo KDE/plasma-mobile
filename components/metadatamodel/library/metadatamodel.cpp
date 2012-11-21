@@ -410,6 +410,7 @@ void MetadataModelPrivate::countRetrieved(int count)
 
 void MetadataModelPrivate::newEntries(const QList< Nepomuk2::Query::Result > &entries, int page)
 {
+    const int oldTotalCount = totalCount;
     foreach (const Nepomuk2::Query::Result &res, entries) {
         //kDebug() << "Result!!!" << res.resource().label() << res.resource().type();
         //kDebug() << "Result label:" << res.resource().label();
@@ -419,9 +420,10 @@ void MetadataModelPrivate::newEntries(const QList< Nepomuk2::Query::Result > &en
     dataToInsert[page] << entries;
 
     if (!newEntriesTimer->isActive() && !dataToInsert[page].isEmpty()) {
-        newEntriesTimer->start(200);
+        newEntriesTimer->start(100);
     }
-    if (totalCount > 0) {
+
+    if (oldTotalCount != totalCount) {
         emit q->totalCountChanged();
     }
 }
@@ -519,7 +521,7 @@ void MetadataModelPrivate::entriesRemoved(const QList<QUrl> &urls)
     //pack all the stuff to remove in groups, to emit the least possible signals
     //this assumes urls are in the same order they arrived ion the results
     //it's a map because we want to remove values from the vector in inverted order to keep indexes valid trough the remove loop
-    int oldTotalCount = totalCount;
+    const int oldTotalCount = totalCount;
     QMap<int, int> toRemove;
     foreach (const QUrl &url, urls) {
         const int index = uriToRow.value(url);
