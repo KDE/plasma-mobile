@@ -89,6 +89,7 @@ PlasmaComponents.Page {
 
         Item {
             id: mainPage
+            onChildrenChanged: mainPage.children[0].anchors.fill = mainPage
             anchors {
                 left: parent.left
                 top: parent.top
