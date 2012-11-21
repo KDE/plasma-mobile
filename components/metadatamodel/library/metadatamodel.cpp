@@ -127,7 +127,13 @@ MetadataModel::MetadataModel(QObject *parent)
     : QAbstractListModel(parent),
       d(new MetadataModelPrivate(this))
 {
-    d->queryThread = new QueryThread(this);
+    qRegisterMetaType<Nepomuk2::Query::Query>("Nepomuk2::Query::Query");
+    // the thread must be instantiated without a parent so that it can be
+    // moved into its own thread for execution
+    d->queryThread = new QueryThread();
+    d->queryThread->start();
+    d->queryThread->moveToThread(d->queryThread);
+
     connect(d->queryThread, SIGNAL(newResults(QList<Nepomuk2::Query::Result>, int)),
             this, SLOT(newEntries(QList<Nepomuk2::Query::Result>, int)));
     connect(d->queryThread, SIGNAL(resultsRemoved(QList<QUrl>)),
@@ -275,12 +281,12 @@ QVariant MetadataModel::data(const QModelIndex &index, int role) const
     //if the resource is not valid *and* there are no additional bindings means no data in these rows was fetched in nepomuk yet
     if (!d->data[index.row()].resource().isValid() &&
         d->data[index.row()].additionalBindings().count() == 0) {
-        if (d->pageSize > 0 && !d->queryThread->hasQueryOnPage(floor(index.row()/d->pageSize))) {
-            d->queryThread->fetchResultsPage(floor(index.row()/d->pageSize));
-            return QVariant();
         //d->pageSize <= 0, means fetch all
+        if (d->pageSize > 0 && !d->queryThread->hasQueryOnPage(floor(index.row()/d->pageSize))) {
+            d->fetchResultsPage(floor(index.row() / d->pageSize));
+            return QVariant();
         } else if (!d->queryThread->hasQueryOnPage(0)) {
-            d->queryThread->fetchResultsPage(0);
+            d->fetchResultsPage(0);
             return QVariant();
         } else {
             return QVariant();
@@ -360,9 +366,13 @@ void MetadataModelPrivate::doQuery()
 
 
     if (query.isValid()) {
-        queryThread->setQuery(query, limit, pageSize);
+        QMetaObject::invokeMethod(queryThread, "setQuery", Qt::AutoConnection,
+                                  Q_ARG(Nepomuk2::Query::Query, query),
+                                  Q_ARG(int, limit),
+                                  Q_ARG(int, pageSize));
     } else {
-        queryThread->setSparqlQuery(sparqlQuery);
+        QMetaObject::invokeMethod(queryThread, "setSparqlQuery", Qt::AutoConnection,
+                                  Q_ARG(QString, sparqlQuery));
     }
 
     //if page size is invalid, fetch all
@@ -379,8 +389,8 @@ void MetadataModelPrivate::queryError(const QString &error)
 void MetadataModelPrivate::fetchResultsPage(int page)
 {
     validIndexForPage[page] = 0;
-
-    queryThread->fetchResultsPage(page);
+    QMetaObject::invokeMethod(queryThread, "fetchResultsPage", Qt::QueuedConnection,
+                              Q_ARG(int, page));
 }
 
 void MetadataModelPrivate::countRetrieved(int count)
