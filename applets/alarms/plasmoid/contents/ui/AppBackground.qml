@@ -33,7 +33,7 @@ Image {
         }
         width: parent.width/2
         Image {
-            source: "background-logo.png"
+            source: plasmoid.file("data", "background-logo.png")
             anchors.centerIn: parent
         }
     }

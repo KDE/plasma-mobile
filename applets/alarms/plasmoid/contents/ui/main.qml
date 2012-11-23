@@ -31,12 +31,7 @@ Item {
     property int minimumWidth: 200
     property int minimumHeight: 350
 
-    Component.onCompleted: {
-        var component = Qt.createComponent(plasmoid.file("ui", "AppBackground.qml"))
-        if (component) {
-            component.createObject(root)
-        }
-    }
+    property Item appBackground
 
     function removeAlarm(id)
     {
@@ -64,6 +59,24 @@ Item {
         }
     }
 
+    Component {
+        id: appBackgroundComponent
+        AppBackground {}
+    }
+    Component {
+        id: panelBackgroundComponent
+        PanelBackground {}
+    }
+    Connections {
+        target: plasmoid
+        onFormFactorChanged: {
+            if (plasmoid.formFactor == plasmoid.Application) {
+                root.appBackground = appBackgroundComponent.createObject(root)
+            } else {
+                appBackground.destroy()
+            }
+        }
+    }
     PlasmaCore.DataSource {
         id: alarmsSource
         engine: "org.kde.alarms"

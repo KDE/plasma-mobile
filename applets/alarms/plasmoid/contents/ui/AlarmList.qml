@@ -29,10 +29,16 @@ PlasmaComponents.Page {
     id: root
     clip: true
 
-    Component.onCompleted: {
-        var component = Qt.createComponent(plasmoid.file("ui", "PanelBackground.qml"))
-        if (component) {
-            component.createObject(root)
+
+    property Item panelBackground
+    Connections {
+        target: plasmoid
+        onFormFactorChanged: {
+            if (plasmoid.formFactor == plasmoid.Application) {
+                root.panelBackground = panelBackgroundComponent.createObject(root)
+            } else {
+                appBackground.destroy()
+            }
         }
     }
 

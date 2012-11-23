@@ -29,6 +29,19 @@ PlasmaComponents.Page {
     id: alarmEditRoot
 
     property int alarmId: 0
+
+    property Item panelBackground
+    Connections {
+        target: plasmoid
+        onFormFactorChanged: {
+            if (plasmoid.formFactor == plasmoid.Application) {
+                root.panelBackground = panelBackgroundComponent.createObject(root)
+            } else {
+                appBackground.destroy()
+            }
+        }
+    }
+
     onAlarmIdChanged: {
         if (alarmId > 0) {
             var dt = new Date(alarmsSource.data["Alarm-"+alarmId].dateTime)
