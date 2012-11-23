@@ -165,7 +165,6 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
         kDebug() << "Job Error:" << job->errorString();
     } else {
         Akonadi::CollectionFetchJob* cjob = static_cast<Akonadi::CollectionFetchJob*>( job );
-        int i = 0;
 
         //normally this loop should be a single one
         foreach( const Akonadi::Collection &collection, cjob->collections() ) {
@@ -188,7 +187,6 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
                 creator->createAgent(QLatin1String("akonadi_kalarm_resource"), this);
             }
         }
-        kDebug() << i << "Alarm collections are in now";
         scheduleSourcesUpdated();
     }
 }
