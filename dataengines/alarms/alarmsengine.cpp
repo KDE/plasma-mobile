@@ -230,10 +230,7 @@ Plasma::Service *AlarmsEngine::serviceForSource(const QString &source)
         return 0;
     }
 
-    if (!m_service) {
-        m_service = new AlarmsService(m_collection, this);
-    }
-    return m_service.data();
+    return new AlarmsService(m_collection, this);
 }
 
 #include "alarmsengine.moc"
