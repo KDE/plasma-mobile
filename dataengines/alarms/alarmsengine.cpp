@@ -52,7 +52,7 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
 {
     Q_UNUSED(args);
 
-    if ( !Akonadi::Control::start() ) {
+    if (!Akonadi::Control::start()) {
         kWarning() << "ERROR: unable to start Akonadi server, this engine won't work";
         return;
     }
@@ -81,11 +81,10 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
     //TODO: be really sure what alarm collections are missing
     bool agentFound = false;
     Akonadi::AgentInstance::List agents = Akonadi::AgentManager::self()->instances();
-    foreach (const Akonadi::AgentInstance& agent, agents)
-    {
-        QString type = agent.type().identifier();
-        if (type == QLatin1String("akonadi_kalarm_resource")
-        ||  type == QLatin1String("akonadi_kalarm_dir_resource")) {
+    foreach (const Akonadi::AgentInstance& agent, agents) {
+        const QString type = agent.type().identifier();
+        if (type == QLatin1String("akonadi_kalarm_resource") ||
+            type == QLatin1String("akonadi_kalarm_dir_resource")) {
             // Fetch the resource's collection to determine its alarm types
             Akonadi::CollectionFetchJob* job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::FirstLevel);
             ++m_collectionJobs;
@@ -179,6 +178,7 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
                         SLOT(fetchAlarmsCollectionDone(KJob*)));
             }
         }
+
         --m_collectionJobs;
         if (m_collectionJobs <= 0) {
             m_collectionJobs = 0;
