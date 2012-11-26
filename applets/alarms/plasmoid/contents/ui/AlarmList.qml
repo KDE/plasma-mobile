@@ -58,7 +58,7 @@ PlasmaComponents.Page {
                 Row {
                     visible: alarmsSource.sources.length > 0
                     spacing: 8
-                    width: headerItem.width - theme.mediumIconSize - spacing*3
+                    width: headerItem.width - spacing*3
 
                     PlasmaComponents.Label {
                         width: parent.width/4

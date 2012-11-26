@@ -84,7 +84,7 @@ PlasmaComponents.ListItem {
         }
         Row {
             spacing: 8
-            width: alarmItem.width - closeButton.width - spacing*3
+            width: alarmItem.width - spacing*3
 
             Column {
                 width: parent.width/4
@@ -110,25 +110,6 @@ PlasmaComponents.ListItem {
                 width: parent.width/4
                 text: audioFile ? i18n("Audio") : ""
                 elide: Text.ElideRight
-            }
-        }
-        PlasmaCore.SvgItem {
-            id: closeButton
-            svg: configIconsSvg
-            elementId: "close"
-            width: theme.mediumIconSize
-            height: theme.mediumIconSize
-            anchors {
-                verticalCenter: parent.verticalCenter
-                right: parent.right
-                rightMargin: 12
-            }
-            MouseArea {
-                anchors.fill: parent
-                anchors.margins: -6
-                onClicked: {
-                    removeAnimation.running = true
-                }
             }
         }
     }
