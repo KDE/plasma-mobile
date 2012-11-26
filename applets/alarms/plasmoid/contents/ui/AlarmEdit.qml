@@ -177,6 +177,16 @@ PlasmaComponents.Page {
                             }
                         }
                     }
+                    PlasmaComponents.Button {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        visible: alarmId > 0
+                        text: i18n("Delete")
+
+                        onClicked: {
+                            removeAlarm(alarmId)
+                            pageRow.pop(alarmList)
+                        }
+                    }
                 }
             }
         }
