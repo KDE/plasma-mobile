@@ -69,12 +69,6 @@ PlasmaComponents.Page {
                     PlasmaComponents.Label {
                         horizontalAlignment: Text.AlignHCenter
                         width: parent.width/4
-                        text: i18n("Message")
-                        elide: Text.ElideRight
-                    }
-                    PlasmaComponents.Label {
-                        horizontalAlignment: Text.AlignHCenter
-                        width: parent.width/4
                         text: i18n("Repeat")
                         elide: Text.ElideRight
                     }

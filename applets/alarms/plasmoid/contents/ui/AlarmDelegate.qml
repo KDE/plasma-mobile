@@ -101,15 +101,6 @@ PlasmaComponents.ListItem {
                 anchors.verticalCenter: parent.verticalCenter
                 horizontalAlignment: Text.AlignHCenter
                 width: parent.width/4
-                text: message
-                wrapMode: Text.Wrap
-                elide: Text.ElideRight
-                maximumLineCount: 3
-            }
-            PlasmaComponents.Label {
-                anchors.verticalCenter: parent.verticalCenter
-                horizontalAlignment: Text.AlignHCenter
-                width: parent.width/4
                 text: recurs ? i18n("Every day") : i18n("Once")
                 elide: Text.ElideRight
             }
