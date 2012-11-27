@@ -123,7 +123,7 @@ void MetadataJob::start()
 
         QUrl u(url);
         if (u.isValid()) {
-            b.setBookmarkses( QList<Nepomuk2::Resource>() << url );
+            b.setBookmarks(url);
             setResult(true);
         } else {
             setResult(false);
