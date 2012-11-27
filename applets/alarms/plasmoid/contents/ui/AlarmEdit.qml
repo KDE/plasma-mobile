@@ -182,10 +182,16 @@ PlasmaComponents.Page {
                         visible: alarmId > 0
                         text: i18n("Delete")
 
-                        onClicked: {
-                            removeAlarm(alarmId)
-                            pageRow.pop(alarmList)
-                        }
+                        onClicked: dialog.open()
+                    }
+                }
+                PlasmaComponents.QueryDialog {
+                    id: dialog
+                    titleText: i18n("Confirm deletion")
+                    message: i18n("Do you really want to delete this alarm?")
+                    onAccepted: {
+                        removeAlarm(alarmId)
+                        pageRow.pop(alarmList)
                     }
                 }
             }
