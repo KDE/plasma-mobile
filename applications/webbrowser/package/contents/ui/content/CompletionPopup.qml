@@ -154,10 +154,9 @@ FocusScope {
                 settingsItem.clip = true;
                 var webModule = "org.kde.active.settings.web";
                 if (settingsItem.module != webModule) {
-                    settingsItem.module = webModule;
+                    settingsItem.pushModule(webModule);
                 } else {
                     settingsItem.module = "";
-                    settingsItem.replace(dashboard);
                 }
             }
         }
