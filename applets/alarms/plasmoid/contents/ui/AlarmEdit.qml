@@ -178,6 +178,7 @@ PlasmaComponents.Page {
                         }
                     }
                     PlasmaComponents.Button {
+                        id: deleteButton
                         anchors.horizontalCenter: parent.horizontalCenter
                         visible: alarmId > 0
                         text: i18n("Delete")
@@ -187,6 +188,7 @@ PlasmaComponents.Page {
                 }
                 PlasmaComponents.QueryDialog {
                     id: dialog
+                    visualParent: deleteButton
                     titleText: i18n("Confirm deletion")
                     message: i18n("Do you really want to delete this alarm?")
                     onAccepted: {
