@@ -153,8 +153,6 @@ private:
     QDeclarativeItem *m_homeScreen;
 
     Plasma::Containment *m_currentContainment;
-    QWeakPointer<Plasma::Containment> m_oldContainment;
-
     QMap<int, Plasma::Containment*> m_containments;
     QHash<int, Plasma::Containment *> m_panelContainments;
 

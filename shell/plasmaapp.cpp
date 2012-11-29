@@ -316,8 +316,6 @@ void PlasmaApp::changeContainment(Plasma::Containment *containment)
     QDeclarativeProperty containmentProperty(m_homeScreen, "activeContainment");
     containmentProperty.write(QVariant::fromValue(static_cast<QGraphicsWidget*>(containment)));
 
-    m_oldContainment = m_currentContainment;
-
     m_currentContainment = containment;
 }
 
