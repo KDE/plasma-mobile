@@ -243,7 +243,6 @@ FocusScope {
                 }
                 ListView {
                     id: historyList
-                    clip: true
                     model: historyModel
                     delegate: myDelegate
                     highlight: PlasmaComponents.Highlight {}
