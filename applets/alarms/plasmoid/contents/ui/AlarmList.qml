@@ -76,16 +76,17 @@ PlasmaComponents.Page {
                     height: theme.defaultFont.mSize.height * 3
 
                     Row {
+                        spacing: theme.defaultFont.mSize.height * .5
                         anchors.centerIn: parent
                         QIconItem {
                             anchors.verticalCenter: parent.verticalCenter
                             icon: "list-add"
-                            width: theme.mediumIconSize
+                            width: theme.iconSizes.dialog
                             height: width
                         }
                         PlasmaComponents.Label {
                             anchors.verticalCenter: parent.verticalCenter
-                            text: i18n("New Alarm")
+                            text: i18n("Create a new alarm")
                         }
                     }
                 }
