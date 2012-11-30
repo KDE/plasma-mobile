@@ -96,16 +96,6 @@ Item {
         interval: 0
         connectedSources: sources
     }
-
-    PlasmaCore.Svg {
-        id: configIconsSvg
-        imagePath: "widgets/configuration-icons"
-    }
-
-    PlasmaCore.Svg {
-        id: separatorSvg
-        imagePath: "widgets/line"
-    }
     //END non-UI items
 
     //BEGIN UI
