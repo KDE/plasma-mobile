@@ -84,7 +84,7 @@ PlasmaComponents.ListItem {
             }
         }
         Column {
-            width: alarmItem.width - spacing*3
+            width: alarmItem.width
 
             PlasmaExtras.Heading {
                 level: 3
@@ -99,16 +99,17 @@ PlasmaComponents.ListItem {
                     visible: audioFile
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.right
-                    anchors.leftMargin: 8
+                    anchors.leftMargin: theme.defaultFont.mSize.height * .5
                     width: theme.iconSizes.small
                     height: width
                     source: "audio-volume-high"
                 }
 
                 PlasmaCore.IconItem {
+                    id: messageIcon
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: audioIcon.visible ? audioIcon.right : parent.right
-                    anchors.leftMargin: 8
+                    anchors.leftMargin: theme.defaultFont.mSize.height * .5
                     width: theme.iconSizes.small
                     height: width
                     visible: message
