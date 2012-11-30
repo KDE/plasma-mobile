@@ -189,8 +189,8 @@ PlasmaComponents.Page {
                 PlasmaComponents.QueryDialog {
                     id: dialog
                     visualParent: deleteButton
-                    titleText: i18n("Confirm deletion")
                     message: i18n("Do you really want to delete this alarm?")
+                    acceptButtonText: i18n("Delete")
                     onAccepted: {
                         removeAlarm(alarmId)
                         pageRow.pop(alarmList)
