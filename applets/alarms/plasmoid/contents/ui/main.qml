@@ -45,9 +45,11 @@ Item {
 
     function editAlarm(id)
     {
-        pageRow.pop(alarmList)
-        pageRow.push(Qt.createComponent("AlarmEdit.qml"))
-        pageRow.currentPage.alarmId = id
+        if (pageRow.currentPage.alarmId != id) {
+            pageRow.pop(alarmList);
+            pageRow.push(Qt.createComponent("AlarmEdit.qml"));
+            pageRow.currentPage.alarmId = id;
+        }
     }
 
     property bool alarmsPresent: alarmsSource.sources.length > 0
