@@ -28,23 +28,26 @@ import org.kde.qtextracomponents 0.1
 
 Item {
     id: root
+
+    //BEGIN properties
     property int minimumWidth: 200
     property int minimumHeight: 350
+    property bool alarmsPresent: alarmsSource.sources.length > 0
 
     property Item appBackground
+    //END properties
 
-    function removeAlarm(id)
-    {
-        var service = alarmsSource.serviceForSource("")
-        var operation = service.operationDescription("delete")
+    //BEGIN functions
+    function removeAlarm(id) {
+        var service = alarmsSource.serviceForSource("");
+        var operation = service.operationDescription("delete");
 
-        operation["Id"] = id
+        operation["Id"] = id;
 
-        service.startOperationCall(operation)
+        service.startOperationCall(operation);
     }
 
-    function editAlarm(id)
-    {
+    function editAlarm(id) {
         if (pageRow.currentPage.alarmId != id) {
             pageRow.pop(alarmList);
             pageRow.push(Qt.createComponent("AlarmEdit.qml"));
@@ -52,23 +55,30 @@ Item {
         }
     }
 
-    property bool alarmsPresent: alarmsSource.sources.length > 0
     onAlarmsPresentChanged: {
         if (alarmsPresent) {
-            plasmoid.status = "ActiveStatus"
+            plasmoid.status = "ActiveStatus";
         } else {
-            plasmoid.status = "PassiveStatus"
+            plasmoid.status = "PassiveStatus";
         }
     }
+    //END functions
 
+    //BEGIN non-UI items
     Component {
         id: appBackgroundComponent
         AppBackground {}
     }
+
     Component {
         id: panelBackgroundComponent
         PanelBackground {}
     }
+
+    KLocale.Locale {
+        id: locale
+    }
+
     Connections {
         target: plasmoid
         onFormFactorChanged: {
@@ -79,6 +89,7 @@ Item {
             }
         }
     }
+
     PlasmaCore.DataSource {
         id: alarmsSource
         engine: "org.kde.alarms"
@@ -90,15 +101,14 @@ Item {
         id: configIconsSvg
         imagePath: "widgets/configuration-icons"
     }
+
     PlasmaCore.Svg {
         id: separatorSvg
         imagePath: "widgets/line"
     }
+    //END non-UI items
 
-    KLocale.Locale {
-        id: locale
-    }
-
+    //BEGIN UI
     PlasmaExtras.PageRow {
         id: pageRow
         anchors.fill: parent
@@ -109,4 +119,5 @@ Item {
             id: alarmList
         }
     }
+    //END UI
 }
