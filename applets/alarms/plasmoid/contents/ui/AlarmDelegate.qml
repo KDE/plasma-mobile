@@ -93,33 +93,35 @@ PlasmaComponents.ListItem {
                             "%1 at %2",
                             locale.formatDate(dateTime, KLocale.Locale.FancyShortDate),
                             locale.formatLocaleTime(dateTime))
+            }
 
+            Row {
+            spacing: theme.defaultFont.mSize.height * .5
+                width: alarmItem.width
                 PlasmaCore.IconItem {
                     id: audioIcon
-                    visible: audioFile
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: parent.right
-                    anchors.leftMargin: theme.defaultFont.mSize.height * .5
                     width: theme.iconSizes.small
                     height: width
+                    visible: audioFile
                     source: "audio-volume-high"
                 }
 
                 PlasmaCore.IconItem {
                     id: messageIcon
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: audioIcon.visible ? audioIcon.right : parent.right
-                    anchors.leftMargin: theme.defaultFont.mSize.height * .5
                     width: theme.iconSizes.small
                     height: width
                     visible: message
                     source: "mail-message"
                 }
-            }
 
-            PlasmaComponents.Label {
-                text: recurs ? i18n("Repeats every day") : ""
-                elide: Text.ElideRight
+                PlasmaComponents.Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: recurs
+                    text: i18n("Repeats every day")
+                    elide: Text.ElideRight
+                }
             }
         }
     }
