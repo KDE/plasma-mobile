@@ -85,27 +85,41 @@ PlasmaComponents.Page {
                     spacing: 8
                     anchors.centerIn: parent
 
-                    MobileComponents.DatePicker {
-                        id: datePicker
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        day: currentDate.getDate()
-                        month: currentDate.getMonth() + 1
-                        year: currentDate.getFullYear()
-                    }
-
-                    MobileComponents.TimePicker {
-                        id: timePicker
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        hours: currentDate.getHours()
-                        minutes: currentDate.getMinutes()
-                        seconds: currentDate.getSeconds()
-                    }
-
                     Grid {
                         spacing: 8
                         anchors.horizontalCenter: parent.horizontalCenter
-                        rows: 3
+                        rows: 5
                         columns: 2
+
+                        PlasmaComponents.Label {
+                            anchors {
+                                right: datePicker.left
+                                rightMargin: 4
+                                verticalCenter: datePicker.verticalCenter
+                            }
+                            text: i18n("Date:")
+                        }
+                        MobileComponents.DatePicker {
+                            id: datePicker
+                            day: currentDate.getDate()
+                            month: currentDate.getMonth() + 1
+                            year: currentDate.getFullYear()
+                        }
+
+                        PlasmaComponents.Label {
+                            anchors {
+                                right: timePicker.left
+                                rightMargin: 4
+                                verticalCenter: timePicker.verticalCenter
+                            }
+                            text: i18n("Time:")
+                        }
+                        MobileComponents.TimePicker {
+                            id: timePicker
+                            hours: currentDate.getHours()
+                            minutes: currentDate.getMinutes()
+                            seconds: currentDate.getSeconds()
+                        }
 
                         PlasmaComponents.Label {
                             anchors {
