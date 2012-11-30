@@ -96,7 +96,7 @@ PlasmaComponents.ListItem {
             }
 
             Row {
-            spacing: theme.defaultFont.mSize.height * .5
+                spacing: theme.defaultFont.mSize.height * .5
                 width: alarmItem.width
                 PlasmaCore.IconItem {
                     id: audioIcon
