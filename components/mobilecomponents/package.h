@@ -35,6 +35,8 @@ class Package : public QObject
     Q_OBJECT
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString visibleName READ visibleName NOTIFY visibleNameChanged)
+    Q_PROPERTY(QString type READ type WRITE setType NOTIFY typeChanged)
+    Q_PROPERTY(QString rootPath READ rootPath WRITE setRootPath NOTIFY rootPathChanged)
 
 public:
     Package(QObject *parent = 0);
@@ -42,6 +44,12 @@ public:
 
     QString name() const;
     void setName(const QString &name);
+
+    QString type() const;
+    void setType(const QString &type);
+
+    QString rootPath() const;
+    void setRootPath(const QString &type);
 
     Q_INVOKABLE QString filePath(const QString &fileType, const QString &filename) const;
     Q_INVOKABLE QString filePath(const QString &fileType) const;
@@ -51,9 +59,15 @@ public:
 Q_SIGNALS:
     void nameChanged(const QString &);
     void visibleNameChanged();
+    void typeChanged();
+    void rootPathChanged();
 
 private:
+    void loadPackage();
+
     QString m_name;
+    QString m_type;
+    QString m_rootPath;
     Plasma::Package *m_package;
 };
 
