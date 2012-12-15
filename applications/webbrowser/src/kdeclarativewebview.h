@@ -113,7 +113,7 @@ Q_SIGNALS:
     void selectionPressAndHold(const QString &selection, const QPoint &pos);
 
 private:
-    KDeclarativeWebView *parent;
+    KDeclarativeWebView *m_parent;
     QPropertyAnimation *m_posAnim;
     QPointF pressPoint;
     QBasicTimer pressTimer;

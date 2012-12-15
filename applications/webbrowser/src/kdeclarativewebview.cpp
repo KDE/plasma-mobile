@@ -120,11 +120,12 @@ public:
 
 GraphicsWebView::GraphicsWebView(KDeclarativeWebView* parent)
     : QGraphicsWebView(parent)
-    , parent(parent)
+    , m_parent(parent)
     , pressTime(400)
     , flicking(true)
     , m_contentsPosAnimation(0)
 {
+    Q_ASSERT(m_parent)
     m_posAnim = new QPropertyAnimation(this);
     m_posAnim->setDuration(250);
     m_posAnim->setEasingCurve(QEasingCurve::InOutQuad);
@@ -138,19 +139,19 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
     pressPoint = event->pos();
     if (pressTime) {
         pressTimer.start(pressTime, this);
-        parent->setKeepMouseGrab(false);
+        m_parent->setKeepMouseGrab(false);
     } else {
         //emit pressandhold events anyways, but not setKeepMouseGrab
         pressTimer.start(400, this);
         grabMouse();
-        parent->setKeepMouseGrab(true);
+        m_parent->setKeepMouseGrab(true);
     }
     pressTimer.start(pressTime, this);
     QGraphicsWebView::mousePressEvent(event);
 
     QWebHitTestResult hit = page()->mainFrame()->hitTestContent(pressPoint.toPoint());
     if (hit.isContentEditable()) {
-        parent->forceActiveFocus();
+        m_parent->forceActiveFocus();
     }
     // Comboboxes and flicking don't go together well,
     // disable flicking as long as the combo box is open
@@ -164,7 +165,7 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
         m_contentsPosAnimation = new QPropertyAnimation(this);
         m_contentsPosAnimation->setDuration(500);
         m_contentsPosAnimation->setEasingCurve(QEasingCurve::OutQuad);
-        m_contentsPosAnimation->setTargetObject(parent);
+        m_contentsPosAnimation->setTargetObject(m_parent);
         m_contentsPosAnimation->setPropertyName("contentsPosition");
     }
     if (m_contentsPosAnimation->state() == QAbstractAnimation::Running) {
@@ -175,7 +176,7 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
         kDebug() << "XXXXXXXXXX link pressed. .. ";
         emit linkPressed(hit.linkUrl(), hit.linkElement().geometry());
     }
-    //QMouseEvent* me = new QMouseEvent(QEvent::MouseButtonDblClick, (event->pos() / parent->contentsScale()).toPoint(), event->button(), event->buttons(), 0);
+    //QMouseEvent* me = new QMouseEvent(QEvent::MouseButtonDblClick, (event->pos() / m_parent->contentsScale()).toPoint(), event->button(), event->buttons(), 0);
     emit click(event->pos().x(), event->pos().y());
     setFocus();
 }
@@ -187,7 +188,7 @@ void GraphicsWebView::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
     }
 
     pressTimer.stop();
-    parent->setKeepMouseGrab(false);
+    m_parent->setKeepMouseGrab(false);
     ungrabMouse();
 
     if (pos() != QPoint(0, 0)) {
@@ -203,7 +204,7 @@ void GraphicsWebView::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 
 void GraphicsWebView::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
 {
-    QMouseEvent* me = new QMouseEvent(QEvent::MouseButtonDblClick, (event->pos() / parent->contentsScale()).toPoint(), event->button(), event->buttons(), 0);
+    QMouseEvent* me = new QMouseEvent(QEvent::MouseButtonDblClick, (event->pos() / m_parent->contentsScale()).toPoint(), event->button(), event->buttons(), 0);
     emit doubleClick(event->pos().x(), event->pos().y());
     delete me;
 }
@@ -225,7 +226,7 @@ void GraphicsWebView::timerEvent(QTimerEvent* event)
         pressTimer.stop();
         if (pressTime) {
             grabMouse();
-            parent->setKeepMouseGrab(true);
+            m_parent->setKeepMouseGrab(true);
         }
         kDebug() << "handle pressAndHold";
         QWebHitTestResult hit = page()->mainFrame()->hitTestContent(pressPoint.toPoint());
@@ -247,7 +248,7 @@ void GraphicsWebView::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
             pressTimer.stop();
     }
 
-    if (parent->keepMouseGrab()) {
+    if (m_parent->keepMouseGrab()) {
         QGraphicsWebView::mouseMoveEvent(event);
     } else if (flicking) {
         QPoint deltaMousePos = QPointF(event->lastScenePos() - event->scenePos()).toPoint();
@@ -270,7 +271,7 @@ void GraphicsWebView::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
             deltaMousePos.ry() = 0;
         }
 
-        if (deltaMousePos != QPoint(0, 0) && !parent->scrollBy(deltaMousePos.x(), deltaMousePos.y(), event->pos())) {
+        if (deltaMousePos != QPoint(0, 0) && !m_parent->scrollBy(deltaMousePos.x(), deltaMousePos.y(), event->pos())) {
             if (page()->mainFrame()->contentsSize().width() <= size().width()) {
                 deltaMousePos.rx() = 0;
             }
@@ -288,7 +289,7 @@ bool GraphicsWebView::sceneEvent(QEvent *event)
     bool rv = QGraphicsWebView::sceneEvent(event);
     if (event->type() == QEvent::UngrabMouse) {
         pressTimer.stop();
-        parent->setKeepMouseGrab(false);
+        m_parent->setKeepMouseGrab(false);
     }
     return rv;
 }
@@ -458,8 +459,8 @@ void KDeclarativeWebView::init()
     access->setCache(0);
 
     // set cookieJar window..
-    /*if (parent && parent->window())
-        manager->setWindow(parent->window());*/
+    /*if (parent && m_parent->window())
+        manager->setWindow(m_parent->window());*/
 
     //FIXME: make this thing reliable
     if (QApplication::topLevelWidgets().length() > 0) {
