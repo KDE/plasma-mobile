@@ -125,7 +125,7 @@ GraphicsWebView::GraphicsWebView(KDeclarativeWebView* parent)
     , flicking(true)
     , m_contentsPosAnimation(0)
 {
-    Q_ASSERT(m_parent)
+    Q_ASSERT(m_parent);
     m_posAnim = new QPropertyAnimation(this);
     m_posAnim->setDuration(250);
     m_posAnim->setEasingCurve(QEasingCurve::InOutQuad);
