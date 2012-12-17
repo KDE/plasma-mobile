@@ -1,0 +1,13 @@
+[Domain]
+Name=Integration repository
+Icon=application-x-rpm
+
+[org.kde.active.integrationcontrol.enable]
+Name=Activate integration repository
+Description=Adds the integration repository on device
+Policy=yes
+
+[org.kde.active.integrationcontrol.disable]
+Name=Deactivate integration repository
+Description=Removes the integration repository on device
+Policy=yes

@@ -55,7 +55,7 @@ Item {
     Grid {
         id: formLayout
         columns: 2
-        rows: 3
+        rows: 4
         spacing: theme.defaultFont.mSize.height
         anchors {
             top: titleCol.bottom
@@ -110,6 +110,40 @@ Item {
             id: terminal
             checked: settings.showTerminal
             onClicked: settings.showTerminal = checked
+        }
+
+        PlasmaComponents.Label {
+            text: i18n("Enable Integration repository:")
+            anchors {
+                right: integration.left
+                rightMargin: theme.defaultFont.mSize.width
+            }
+        }
+
+        PlasmaComponents.Switch {
+            id: integration
+            checked: settings.integrationEnabled
+            onClicked: {
+                dialog.open()
+            }
+        }
+    }
+    PlasmaComponents.QueryDialog {
+        id: dialog
+        visualParent: integration
+        message: i18n("This will add the integration repository. You will have to do \"zypper refresh\" and \"zypper up\" to use the new packages from Integration.")
+        acceptButtonText: integration.checked ? i18n("Enable") : i18n("Disable")
+        onAccepted: {
+            settings.integrationEnabled = integration.checked;
+            // we have to check to se if it failed
+            integration.checked = settings.integrationEnabled;
+        }
+        onRejected: {
+            //reset
+            integration.checked = settings.integrationEnabled;
+        }
+        onClickedOutside: {
+            integration.checked = settings.integrationEnabled;
         }
     }
 }

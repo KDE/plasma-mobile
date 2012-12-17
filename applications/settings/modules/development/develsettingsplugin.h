@@ -26,6 +26,7 @@ class DevelSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool sshEnabled READ sshEnabled WRITE enableSsh NOTIFY enableSshChanged)
+    Q_PROPERTY(bool integrationEnabled READ isIntegrationEnabled WRITE setIntegrationEnabled NOTIFY enableIntegrationChanged)
     Q_PROPERTY(bool showTerminal READ terminalShown WRITE setShowTerminal NOTIFY showTerminalChanged)
     Q_PROPERTY(bool visibleCursor READ isCursorVisible WRITE setCursorVisible NOTIFY cursorVisibleChanged)
 
@@ -41,10 +42,14 @@ public:
     bool isCursorVisible() const;
     void setCursorVisible(bool visible);
 
+    void setIntegrationEnabled(bool enable);
+    bool isIntegrationEnabled();
+
 Q_SIGNALS:
     void enableSshChanged(bool enabled);
     void showTerminalChanged(bool shown);
     void cursorVisibleChanged(bool visible);
+    void enableIntegrationChanged(bool enable);
 
 private:
     // platform specific
@@ -53,6 +58,7 @@ private:
 
     bool m_sshEnabled;
     bool m_terminalShown;
+    bool m_integrationEnabled;
     bool m_cursorVisible;
     QString m_terminalApp;
 };

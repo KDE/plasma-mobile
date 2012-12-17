@@ -53,6 +53,8 @@ DevelSettings::DevelSettings(QObject *parent)
     KService::Ptr service = KService::serviceByStorageId(m_terminalApp);
     kDebug() << "showing?" << service->noDisplay();
     m_terminalShown = service && !service->noDisplay();
+
+    m_integrationEnabled = confGroup.readEntry("IntegrationEnabled", false);
 }
 
 bool DevelSettings::sshEnabled() const
@@ -128,6 +130,36 @@ void DevelSettings::setCursorVisible(bool visible)
         applyCursorTheme(m_cursorVisible ? visibleCursorTheme : noCursorTheme);
         emit cursorVisibleChanged(m_cursorVisible);
     }
+}
+
+void DevelSettings::setIntegrationEnabled(bool enable)
+{
+    if (m_integrationEnabled != enable) {
+        const bool was = m_integrationEnabled;
+        m_integrationEnabled = enable;
+
+        //TODO: this really should be non-blocking ...
+        KAuth::Action action(m_integrationEnabled ? "org.kde.active.integrationcontrol.enable"
+                                          : "org.kde.active.integrationcontrol.disable");
+        action.setHelperID("org.kde.active.integrationcontrol");
+
+        KAuth::ActionReply reply = action.execute();
+        if (reply.failed()) {
+            m_integrationEnabled = !m_integrationEnabled;
+            kWarning()<< "KAuth returned an error code:" << reply.errorCode()  << reply.errorDescription() << "enabled" << m_integrationEnabled;
+        }
+
+        if (was != m_integrationEnabled) {
+            KConfigGroup confGroup(KGlobal::config(), "General");
+            confGroup.writeEntry("IntegrationEnabled", m_integrationEnabled);
+            emit enableIntegrationChanged(m_integrationEnabled);
+        }
+    }
+}
+
+bool DevelSettings::isIntegrationEnabled()
+{
+    return m_integrationEnabled;
 }
 
 DevelSettingsPlugin::DevelSettingsPlugin(QObject *parent, const QVariantList &list)
