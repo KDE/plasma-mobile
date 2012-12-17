@@ -143,6 +143,7 @@ void DevelSettings::setIntegrationEnabled(bool enable)
                                           : "org.kde.active.integrationcontrol.disable");
         action.setHelperID("org.kde.active.integrationcontrol");
 
+        kDebug() << "Action" << action.name() << action.details() << "valid:" << action.isValid();
         KAuth::ActionReply reply = action.execute();
         if (reply.failed()) {
             m_integrationEnabled = !m_integrationEnabled;
