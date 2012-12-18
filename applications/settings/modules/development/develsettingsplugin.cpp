@@ -73,6 +73,8 @@ void DevelSettings::enableSsh(bool enable)
                                           : "org.kde.active.sshdcontrol.stop");
         action.setHelperID("org.kde.active.sshdcontrol");
 
+        kDebug() << "Action" << action.name() << action.details() << "valid:" << action.isValid();
+
         KAuth::ActionReply reply = action.execute();
         if (reply.failed()) {
             m_sshEnabled = !m_sshEnabled;
