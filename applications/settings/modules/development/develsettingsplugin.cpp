@@ -141,9 +141,9 @@ void DevelSettings::setIntegrationEnabled(bool enable)
         m_integrationEnabled = enable;
 
         //TODO: this really should be non-blocking ...
-        KAuth::Action action(m_integrationEnabled ? "org.kde.active.integrationcontrol.enable"
-                                          : "org.kde.active.integrationcontrol.disable");
-        action.setHelperID("org.kde.active.integrationcontrol");
+        KAuth::Action action(m_integrationEnabled ? "org.kde.active.integration.enable"
+                                          : "org.kde.active.integration.disable");
+        action.setHelperID("org.kde.active.integration");
 
         kDebug() << "Action" << action.name() << action.details() << "valid:" << action.isValid();
         KAuth::ActionReply reply = action.execute();
