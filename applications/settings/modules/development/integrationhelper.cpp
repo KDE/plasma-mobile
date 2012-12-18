@@ -23,8 +23,8 @@
 #include <QFile>
 #include <QDebug>
 
-static const QLatin1String enableCommand("zypper ar -r 'http://repo.pub.meego.com//Project:/KDE:/Integration/Project_KDE_Devel_CE_UX_PlasmaActive_i586/' -n plasma-integration");
-static const QLatin1String disableCommand("zypper rr plasma-integration");
+static const QLatin1String enableCommand("zypper ar -r 'http://repo.pub.meego.com//Project:/KDE:/Integration/Project_KDE_Devel_CE_UX_PlasmaActive_i586/Project:KDE:Integration.repo'");
+static const QLatin1String disableCommand("zypper rr Project_KDE_Integration");
 
 IntegrationHelper::IntegrationHelper(QObject *parent)
     : QObject(parent)
@@ -38,7 +38,7 @@ ActionReply IntegrationHelper::enable(const QVariantMap &args)
 
     if (rv == 0) {
         return ActionReply::SuccessReply;
-    } else {return ActionReply::SuccessReply;
+    } else {
         ActionReply reply(ActionReply::HelperError);
         reply.setErrorCode(rv);
         return reply;
