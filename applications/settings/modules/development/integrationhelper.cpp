@@ -38,7 +38,7 @@ ActionReply IntegrationHelper::enable(const QVariantMap &args)
 
     if (rv == 0) {
         return ActionReply::SuccessReply;
-    } else {
+    } else {return ActionReply::SuccessReply;
         ActionReply reply(ActionReply::HelperError);
         reply.setErrorCode(rv);
         return reply;

@@ -65,8 +65,6 @@ MobCorona::MobCorona(QObject *parent)
 
 MobCorona::~MobCorona()
 {
-    KConfigGroup cg(config(), "SavedContainments");
-
     //stop everything, in order to restore them just on demand at next boot
     const QString currentActivity = m_activityController->currentActivity();
 
