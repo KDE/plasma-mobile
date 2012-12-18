@@ -35,7 +35,7 @@ ActionReply IntegrationHelper::enable(const QVariantMap &args)
 {
     Q_UNUSED(args)
     int rv = QProcess::execute(enableCommand);
-return ActionReply::SuccessReply;
+
     if (rv == 0) {
         return ActionReply::SuccessReply;
     } else {
