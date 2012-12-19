@@ -1,13 +1,23 @@
 [Domain]
 Name=Integration repository
+Name[uk]=Сховище пакунків для інтеграції
+Name[x-test]=xxIntegration repositoryxx
 Icon=application-x-rpm
 
 [org.kde.active.integration.enable]
 Name=Activate integration repository
+Name[uk]=Задіяти сховище пакунків для інтеграції
+Name[x-test]=xxActivate integration repositoryxx
 Description=Adds the integration repository on device
+Description[uk]=Додає запис сховища пакунків інтеграції у систему на пристрої
+Description[x-test]=xxAdds the integration repository on devicexx
 Policy=yes
 
 [org.kde.active.integration.disable]
 Name=Deactivate integration repository
+Name[uk]=Вимкнути сховище пакунків для інтеграції
+Name[x-test]=xxDeactivate integration repositoryxx
 Description=Removes the integration repository on device
+Description[uk]=Вилучає запис сховища пакунків інтеграції у систему на пристрої
+Description[x-test]=xxRemoves the integration repository on devicexx
 Policy=yes
