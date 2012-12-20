@@ -23,8 +23,6 @@
 #include <QFile>
 #include <QDebug>
 
-static const QLatin1String enableCommand("zypper ar -r 'http://repo.pub.meego.com//Project:/KDE:/Integration/Project_KDE_Devel_CE_UX_PlasmaActive_i586/Project:KDE:Integration.repo'");
-static const QLatin1String disableCommand("zypper rr Project_KDE_Integration");
 
 IntegrationHelper::IntegrationHelper(QObject *parent)
     : QObject(parent)
@@ -34,7 +32,10 @@ IntegrationHelper::IntegrationHelper(QObject *parent)
 ActionReply IntegrationHelper::enable(const QVariantMap &args)
 {
     Q_UNUSED(args)
-    int rv = QProcess::execute(enableCommand);
+    QStringList enableArgs;
+    enableArgs << "ar" << "-r" << "'http://repo.pub.meego.com//Project:/KDE:/Integration/Project_KDE_Devel_CE_UX_PlasmaActive_i586/Project:KDE:Integration.repo'";
+
+    int rv = QProcess::execute("zypper", enableArgs);
 
     if (rv == 0) {
         return ActionReply::SuccessReply;
@@ -48,7 +49,10 @@ ActionReply IntegrationHelper::enable(const QVariantMap &args)
 ActionReply IntegrationHelper::disable(const QVariantMap &args)
 {
     Q_UNUSED(args)
-    int rv = QProcess::execute(disableCommand);
+    QStringList disableArgs;
+    disableArgs << "rr" << "Project_KDE_Integration";
+
+    int rv = QProcess::execute("zypper", disableArgs);
 
     if (rv == 0) {
         return ActionReply::SuccessReply;
