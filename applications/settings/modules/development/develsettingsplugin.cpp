@@ -48,7 +48,8 @@ DevelSettings::DevelSettings(QObject *parent)
     m_sshEnabled = rv == 0;
 
     m_terminalShown = false;
-    KConfigGroup confGroup(KSharedConfig::openConfig("active-develsettingsrc"), "General");
+    KConfigGroup confGroup(KGlobal::config(), "General");
+
     m_terminalApp = confGroup.readPathEntry("TerminalApplication", QString::fromLatin1("konsole"));
     KService::Ptr service = KService::serviceByStorageId(m_terminalApp);
     kDebug() << "showing?" << service->noDisplay();
@@ -153,7 +154,7 @@ void DevelSettings::setIntegrationEnabled(bool enable)
         }
 
         if (was != m_integrationEnabled) {
-            KConfigGroup confGroup(KSharedConfig::openConfig("active-develsettingsrc"), "General");
+            KConfigGroup confGroup(KGlobal::config(), "General");
             confGroup.writeEntry("IntegrationEnabled", m_integrationEnabled);
             emit enableIntegrationChanged(m_integrationEnabled);
         }
