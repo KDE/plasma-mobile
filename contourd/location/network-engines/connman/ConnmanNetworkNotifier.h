@@ -22,6 +22,8 @@
 
 #include "../NetworkNotifier.h"
 
+class QDBusVariant;
+
 /**
  * ConnmanNetworkNotifier
  */
