@@ -86,7 +86,14 @@ PlasmaComponents.Page {
             bottom: parent.bottom
         }
 
-        width: parent.width - handleGraphics.width
+        width: {
+            if (drawerPage.children.length > 0 && drawerPage.children[0].implicitWidth > 0) {
+                return Math.min( parent.width - handleGraphics.width, drawerPage.children[1].implicitWidth)
+            } else {
+                return parent.width - handleGraphics.width
+            }
+        }
+
         state: "Hidden"
         onStateChanged: open = (state == "Open" || mouseEventListener.startState == "Open")
         property bool open: false
@@ -180,7 +187,7 @@ PlasmaComponents.Page {
             }
             onReleased: {
                 //If one condition for toggle is satisfied toggle, otherwise do an animation that resets the original position
-                if (toggle || Math.abs(browserFrame.x - startBrowserFrameX) > root.width / 3) {
+                if (toggle || Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
                     browserFrame.state = startState == "Open" ? "Closed" : "Open"
                 } else {
                     browserFrame.state = startState
@@ -202,7 +209,7 @@ PlasmaComponents.Page {
                 name: "Open"
                 PropertyChanges {
                     target: browserFrame
-                    x: handleGraphics.width
+                    x: root.width - browserFrame.width
                 }
 
             },
