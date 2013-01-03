@@ -35,33 +35,11 @@ Item {
         }
     }
 
-    //FIXME: sometimes doesn't get mapped in roles
-    property string iconName: statusNotifierSource.data[DataEngineSource]["IconName"]
-    onIconNameChanged: iconSvg.updateVisibility()
-    PlasmaCore.Svg {
-        id: iconSvg
-        imagePath: iconName ? "icons/" + String(iconName).split('-')[0] : ''
-        onRepaintNeeded: updateVisibility()
-        Component.onCompleted: updateVisibility()
-
-        function updateVisibility() {
-            var hasSvg = iconName ? iconSvg.hasElement(iconName) : false
-            normalIcon.visible = !hasSvg
-            svgItemIcon.visible = hasSvg
-        }
-    }
-    QtExtra.QIconItem {
-        id: normalIcon
-        anchors.fill: parent
-        icon: Icon
-    }
-    PlasmaCore.SvgItem {
-        id: svgItemIcon
-        anchors.centerIn: parent
-        width: Math.max(16, Math.min(parent.width, parent.height))
+    PlasmaCore.IconItem {
+        source: IconName ? IconName : Icon
+        width: Math.min(parent.width, parent.height)
         height: width
-        svg: iconSvg
-        elementId: IconName ? IconName : ''
+        anchors.centerIn: parent
     }
 
     MouseArea {
