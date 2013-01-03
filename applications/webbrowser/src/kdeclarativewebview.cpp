@@ -126,12 +126,47 @@ GraphicsWebView::GraphicsWebView(KDeclarativeWebView* parent)
     , m_contentsPosAnimation(0)
 {
     Q_ASSERT(m_parent);
+
+    m_contentsPosAnimation = new QPropertyAnimation(this);
+    m_contentsPosAnimation->setDuration(500);
+    m_contentsPosAnimation->setEasingCurve(QEasingCurve::OutQuad);
+    m_contentsPosAnimation->setTargetObject(this);
+    m_contentsPosAnimation->setPropertyName("contentsPosition");
+
     m_posAnim = new QPropertyAnimation(this);
     m_posAnim->setDuration(250);
     m_posAnim->setEasingCurve(QEasingCurve::InOutQuad);
     m_posAnim->setTargetObject(this);
     m_posAnim->setPropertyName("pos");
     m_posAnim->setEndValue(QPoint(0, 0));
+}
+
+QPointF GraphicsWebView::contentsPosition()
+{
+    if (!page() || !page()->mainFrame()) {
+        return QPointF(0, 0);
+    }
+
+    return page()->mainFrame()->scrollPosition();
+}
+
+void GraphicsWebView::setContentsPosition(QPointF contentsPosition)
+{
+    const QPoint oldPos = page()->mainFrame()->scrollPosition();
+
+    page()->mainFrame()->setScrollPosition(contentsPosition.toPoint());
+
+    if (oldPos.x() != page()->mainFrame()->scrollPosition().x()) {
+        emit contentXChanged(page()->mainFrame()->scrollPosition().x());
+    }
+    if (oldPos.y() != page()->mainFrame()->scrollPosition().y()) {
+        emit contentYChanged(page()->mainFrame()->scrollPosition().y());
+    }
+
+    if (oldPos.x() != page()->mainFrame()->scrollPosition().x() ||
+        oldPos.y() != page()->mainFrame()->scrollPosition().y()) {
+        emit contentsPositionChanged();
+    }
 }
 
 void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
@@ -161,13 +196,7 @@ void GraphicsWebView::mousePressEvent(QGraphicsSceneMouseEvent* event)
 
     m_sampleTime.restart();
     m_draggedDistance = QPoint(0, 0);
-    if (!m_contentsPosAnimation) {
-        m_contentsPosAnimation = new QPropertyAnimation(this);
-        m_contentsPosAnimation->setDuration(500);
-        m_contentsPosAnimation->setEasingCurve(QEasingCurve::OutQuad);
-        m_contentsPosAnimation->setTargetObject(m_parent);
-        m_contentsPosAnimation->setPropertyName("contentsPosition");
-    }
+
     if (m_contentsPosAnimation->state() == QAbstractAnimation::Running) {
         m_contentsPosAnimation->stop();
     }
@@ -432,6 +461,10 @@ void KDeclarativeWebView::init()
     connect(d->view, SIGNAL(yChanged()), this, SIGNAL(overShootYChanged()));
     connect(d->view->page(), SIGNAL(selectionChanged()), this, SIGNAL(selectedTextChanged()));
 
+    connect(d->view, SIGNAL(contentsPositionChanged()), this, SIGNAL(contentsPositionChanged()));
+    connect(d->view, SIGNAL(contentXChanged(int)), this, SIGNAL(contentXChanged(int)));
+    connect(d->view, SIGNAL(contentYChanged(int)), this, SIGNAL(contentYChanged(int)));
+
     //d->view->setResizesToContents(true);
     QWebPage* wp = new QDeclarativeWebPage(this);
     KWebPage* kwp = qobject_cast<KWebPage*>(wp);
@@ -499,29 +532,12 @@ void KDeclarativeWebView::init()
 
 QPointF KDeclarativeWebView::contentsPosition()
 {
-    if (!d->view || !d->view->page() || !d->view->page()->mainFrame()) {
-        QPointF(0, 0);
-    }
-    return d->view->page()->mainFrame()->scrollPosition();
+    return d->view->contentsPosition();
 }
 
 void KDeclarativeWebView::setContentsPosition(QPointF contentsPosition)
 {
-    const QPoint oldPos = d->view->page()->mainFrame()->scrollPosition();
-
-    d->view->page()->mainFrame()->setScrollPosition(contentsPosition.toPoint());
-
-    if (oldPos.x() != d->view->page()->mainFrame()->scrollPosition().x()) {
-        emit contentXChanged(d->view->page()->mainFrame()->scrollPosition().x());
-    }
-    if (oldPos.y() != d->view->page()->mainFrame()->scrollPosition().y()) {
-        emit contentYChanged(d->view->page()->mainFrame()->scrollPosition().y());
-    }
-
-    if (oldPos.x() != d->view->page()->mainFrame()->scrollPosition().x() ||
-        oldPos.y() != d->view->page()->mainFrame()->scrollPosition().y()) {
-        emit contentsPositionChanged();
-    }
+    d->view->setContentsPosition(contentsPosition);
 }
 
 int KDeclarativeWebView::contentX() const

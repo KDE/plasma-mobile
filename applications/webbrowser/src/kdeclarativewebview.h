@@ -87,11 +87,17 @@ private:
 
 class GraphicsWebView : public QGraphicsWebView {
     Q_OBJECT
+
+    Q_PROPERTY(QPointF contentsPosition READ contentsPosition WRITE setContentsPosition NOTIFY contentsPositionChanged)
+
 public:
     GraphicsWebView(KDeclarativeWebView* parent = 0);
 
 public Q_SLOTS:
     void handleLinkClicked(const QUrl &link);
+
+    QPointF contentsPosition();
+    void setContentsPosition(QPointF contentsPosition);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
@@ -111,6 +117,9 @@ Q_SIGNALS:
     void linkPressAndHold(const QUrl&, const QRect &linkRect);
     void linkClicked(const QUrl&, const QRect &linkRect);
     void selectionPressAndHold(const QString &selection, const QPoint &pos);
+    void contentsPositionChanged();
+    void contentXChanged(int contentX);
+    void contentYChanged(int contentY);
 
 private:
     KDeclarativeWebView *m_parent;
