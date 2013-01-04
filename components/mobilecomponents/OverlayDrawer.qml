@@ -88,7 +88,7 @@ PlasmaComponents.Page {
 
         width: {
             if (drawerPage.children.length > 0 && drawerPage.children[0].implicitWidth > 0) {
-                return Math.min( parent.width - handleGraphics.width, drawerPage.children[1].implicitWidth)
+                return Math.min( parent.width - handleGraphics.width, drawerPage.children[0].implicitWidth)
             } else {
                 return parent.width - handleGraphics.width
             }
