@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Browser
+Name[bs]=Pregledač
 Name[cs]=Prohlížeč
 Name[da]=Browser
 Name[de]=Browser
@@ -30,6 +31,7 @@ Name[x-test]=xxBrowserxx
 Name[zh_CN]=浏览器
 Name[zh_TW]=瀏覽器
 GenericName=Web Browser
+GenericName[bs]=Čitač veba
 GenericName[cs]=Webový prohlížeč
 GenericName[da]=Webbrowser
 GenericName[de]=Webbrowser

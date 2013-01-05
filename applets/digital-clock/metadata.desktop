@@ -23,6 +23,7 @@ Name[wa]=Ôrlodje limerike
 Name[x-test]=xxDigital clockxx
 Name[zh_TW]=數位時鐘
 Comment=Time displayed in a digital format
+Comment[bs]=Vrijeme prikazano u digitalnom obliku
 Comment[cs]=Čas zobrazený v digitálním formátu
 Comment[da]=Tiden vist i et digitalt format
 Comment[de]=Zeigt die Uhrzeit in digitaler Form an.
