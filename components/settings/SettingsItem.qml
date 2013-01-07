@@ -24,18 +24,26 @@ import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.active.settings 0.1 as ActiveSettings
 
 PlasmaComponents.PageStack {
+    id: moduleContainer
+    objectName: "moduleContainer"
 
     property alias module: settingsComponent.module
 
-    id: moduleContainer
-    objectName: "moduleContainer"
+    function pushModule(module) {
+        switcherPackage.name = module
+        moduleContainer.push(switcherPackage.filePath("mainscript"));
+        moduleContainer.module = module
+    }
+
     clip: true
 
     ActiveSettings.SettingsComponent {
         id: settingsComponent
 
         onModuleChanged: {
-            if (module != "") {
+            if (module == "") {
+                moduleContainer.pop();
+            } else if (switcherPackage.name != module) {
                 switcherPackage.name = module
                 print(" Loading package: " + switcherPackage.filePath("mainscript"));
                 moduleContainer.replace(switcherPackage.filePath("mainscript"));

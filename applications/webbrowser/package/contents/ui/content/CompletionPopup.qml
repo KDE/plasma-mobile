@@ -141,28 +141,22 @@ FocusScope {
             }
         }
 
-        PlasmaCore.Svg { id: configSvg; imagePath: "widgets/configuration-icons"; }
-        PlasmaCore.Svg { id: arrowSvg; imagePath: "widgets/arrows"; }
-
-        MobileComponents.ActionButton {
-            svg: configSvg
-            width: 48
+        PlasmaComponents.ToolButton {
+            width: theme.largeIconSize
             height: width
-            anchors.top: settingsItem.top
-            anchors.right: settingsItem.right
-            elementId: "configure"
+            flat: false
+            iconSource: settingsItem.module == "org.kde.active.settings.web" ? "go-previous" : "configure"
+            anchors {
+                top: settingsItem.top
+                right: settingsItem.right
+            }
             onClicked: {
                 settingsItem.clip = true;
                 var webModule = "org.kde.active.settings.web";
                 if (settingsItem.module != webModule) {
-                    settingsItem.module = webModule;
-                    svg = arrowSvg;
-                    elementId = "left-arrow";
+                    settingsItem.pushModule(webModule);
                 } else {
                     settingsItem.module = "";
-                    settingsItem.replace(dashboard);
-                    svg = configSvg;
-                    elementId = "configure";
                 }
             }
         }
@@ -249,7 +243,6 @@ FocusScope {
                 }
                 ListView {
                     id: historyList
-                    clip: true
                     model: historyModel
                     delegate: myDelegate
                     highlight: PlasmaComponents.Highlight {}
