@@ -78,7 +78,9 @@ Item {
             sortOrder: "DescendingOrder"
             sourceModel: MetadataModel {
                 id: metadataModel
-                resourceType: "nfo:Bookmark"
+                queryProvider: MetadataModels.ResourceQueryProvider {
+                    resourceType: "nfo:Bookmark"
+                }
             }
         }
 

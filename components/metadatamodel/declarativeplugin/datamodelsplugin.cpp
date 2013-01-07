@@ -24,17 +24,22 @@
 #include <Plasma/Service>
 
 #include "metadatamodel.h"
-#include "metadatacloudmodel.h"
-#include "metadatatimelinemodel.h"
 #include "metadatausertypes.h"
+#include "queryproviders/abstractqueryprovider.h"
+#include "queryproviders/resourcequeryprovider.h"
+#include "queryproviders/cloudqueryprovider.h"
+#include "queryproviders/timelinequeryprovider.h"
 
 void DataModelsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.metadatamodels"));
 
+    qmlRegisterType<AbstractQueryProvider>(uri, 0, 1, "AbstractQueryProvider");
+    qmlRegisterType<ResourceQueryProvider>(uri, 0, 1, "ResourceQueryProvider");
+    qmlRegisterType<CloudQueryProvider>(uri, 0, 1, "CloudQueryProvider");
+    qmlRegisterType<TimelineQueryProvider>(uri, 0, 1, "TimelineQueryProvider");
+
     qmlRegisterType<MetadataModel>(uri, 0, 1, "MetadataModel");
-    qmlRegisterType<MetadataCloudModel>(uri, 0, 1, "MetadataCloudModel");
-    qmlRegisterType<MetadataTimelineModel>(uri, 0, 1, "MetadataTimelineModel");
     qmlRegisterType<MetadataUserTypes>(uri, 0, 1, "MetadataUserTypes");
 
     qmlRegisterInterface<Plasma::Service>("Service");

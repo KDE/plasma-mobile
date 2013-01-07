@@ -66,20 +66,19 @@ PlasmaComponents.Page {
             right: parent.right
             rightMargin: theme.defaultFont.mSize.width
         }
-        text: metadataTimelineModel.description
+        text: metadataTimelineModel.queryProvider.description
     }
 
-    PlasmaExtras.ScrollArea {
-        anchors {
-            fill: parent
-            top: parent.bottom
-        }
+     PlasmaExtras.ScrollArea {
+        anchors.fill: parent
+
         Flickable {
             id: timelineFlickable
-            anchors {
+        /* anchors {
                 fill: parent
-                topMargin: titleLabel.height
-            }
+                top: titleLabel.bottom
+                topMargin: 40
+            }*/
             interactive: true
 
             contentWidth: width
@@ -121,21 +120,21 @@ PlasmaComponents.Page {
                     }
                     width: theme.largeIconSize
                     opacity: highlight.opacity
-                    visible: metadataTimelineModel.level != MetadataModels.MetadataTimelineModel.Day
+                    visible: metadataTimelineModel.queryProvider.level != MetadataModels.TimelineQueryProvider.Day
                     height: width
                     flat: false
-                    enabled: metadataTimelineModel.level != MetadataModels.MetadataTimelineModel.Day
+                    enabled: metadataTimelineModel.queryProvider.level != MetadataModels.TimelineQueryProvider.Day
                     onClicked: {
-                        switch (metadataTimelineModel.level) {
-                        case MetadataModels.MetadataTimelineModel.Year:
-                            metadataTimelineModel.startDate = buildDate(currentYear, 1, 1)
-                            metadataTimelineModel.endDate = buildDate(currentYear, 12, 31)
-                            metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Month
+                        switch (metadataTimelineModel.queryProvider.level) {
+                        case MetadataModels.TimelineQueryProvider.Year:
+                            metadataTimelineModel.queryProvider.startDate = buildDate(currentYear, 1, 1)
+                            metadataTimelineModel.queryProvider.endDate = buildDate(currentYear, 12, 31)
+                            metadataTimelineModel.queryProvider.level = MetadataModels.TimelineQueryProvider.Month
                             break
-                        case MetadataModels.MetadataTimelineModel.Month:
-                            metadataTimelineModel.startDate = buildDate(currentYear, currentMonth, 1)
-                            metadataTimelineModel.endDate = buildDate(currentYear, currentMonth+1, 1)
-                            metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Day
+                        case MetadataModels.TimelineQueryProvider.Month:
+                            metadataTimelineModel.queryProvider.startDate = buildDate(currentYear, currentMonth, 1)
+                            metadataTimelineModel.queryProvider.endDate = buildDate(currentYear, currentMonth+1, 1)
+                            metadataTimelineModel.queryProvider.level = MetadataModels.TimelineQueryProvider.Day
                             break
                         }
                         currentItem = null
@@ -146,16 +145,18 @@ PlasmaComponents.Page {
                     spacing: 40
                     Repeater {
                         id: timelineRepeater
-                        model: MetadataModels.MetadataTimelineModel {
+                        model: MetadataModels.MetadataModel {
                             id: metadataTimelineModel
-                            level: MetadataModels.MetadataTimelineModel.Year
-                            //queryString: "pdf"
-                            resourceType: metadataModel.resourceType
-                            tags: metadataModel.tags
-                            minimumRating: metadataModel.minimumRating
-                            //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
-                            //startDate: "2011-01-01"
-                            //endDate: "2011-12-31"
+                            queryProvider: MetadataModels.TimelineQueryProvider {
+                                level: MetadataModels.TimelineQueryProvider.Year
+                                //queryString: "pdf"
+                                resourceType: metadataModel.queryProvider.resourceType
+                                tags: metadataModel.queryProvider.tags
+                                minimumRating: metadataModel.queryProvider.minimumRating
+                                //activityId: "12c8a6ea-c99b-4a54-bf42-a4e8fbcb9be7"
+                                //startDate: "2011-01-01"
+                                //endDate: "2011-12-31"
+                            }
                         }
 
                         delegate: Rectangle {
@@ -185,25 +186,25 @@ PlasmaComponents.Page {
                                 }
                                 onClicked: {
                                     if (currentItem == dateDelegate) {
-                                        switch (metadataTimelineModel.level) {
-                                        case MetadataModels.MetadataTimelineModel.Year:
-                                            metadataModel.startDate = ""
-                                            metadataModel.endDate = ""
+                                        switch (metadataTimelineModel.queryProvider.level) {
+                                        case MetadataModels.TimelineQueryProvider.Year:
+                                            metadataModel.queryProvider.startDate = ""
+                                            metadataModel.queryProvider.endDate = ""
 
                                             currentMonth = 0
                                             currentYear = 0
                                             break
-                                        case MetadataModels.MetadataTimelineModel.Month:
-                                            metadataModel.startDate = buildDate(model.year, 1, 1)
-                                            metadataModel.endDate = buildDate(model.year, 12, 31)
+                                        case MetadataModels.TimelineQueryProvider.Month:
+                                            metadataModel.queryProvider.startDate = buildDate(model.year, 1, 1)
+                                            metadataModel.queryProvider.endDate = buildDate(model.year, 12, 31)
 
                                             currentMonth = 0
                                             currentYear = model.year
                                             break
-                                        case MetadataModels.MetadataTimelineModel.Day:
+                                        case MetadataModels.TimelineQueryProvider.Day:
                                         default:
-                                            metadataModel.startDate = buildDate(model.year, model.month, 1)
-                                            metadataModel.endDate = buildDate(model.year, model.month+1, 1)
+                                            metadataModel.queryProvider.startDate = buildDate(model.year, model.month, 1)
+                                            metadataModel.queryProvider.endDate = buildDate(model.year, model.month+1, 1)
 
                                             currentMonth = model.month
                                             currentYear = model.year
@@ -213,25 +214,25 @@ PlasmaComponents.Page {
                                         return
                                     }
 
-                                    switch (metadataTimelineModel.level) {
-                                    case MetadataModels.MetadataTimelineModel.Year:
-                                        metadataModel.startDate = buildDate(model.year, 1, 1)
-                                        metadataModel.endDate = buildDate(model.year, 12, 31)
+                                    switch (metadataTimelineModel.queryProvider.level) {
+                                    case MetadataModels.TimelineQueryProvider.Year:
+                                        metadataModel.queryProvider.startDate = buildDate(model.year, 1, 1)
+                                        metadataModel.queryProvider.endDate = buildDate(model.year, 12, 31)
 
                                         currentMonth = 0
                                         currentYear = model.year
                                         break
-                                    case MetadataModels.MetadataTimelineModel.Month:
-                                        metadataModel.startDate = buildDate(model.year, model.month, 1)
-                                        metadataModel.endDate = buildDate(model.year, model.month+1, 1)
+                                    case MetadataModels.TimelineQueryProvider.Month:
+                                        metadataModel.queryProvider.startDate = buildDate(model.year, model.month, 1)
+                                        metadataModel.queryProvider.endDate = buildDate(model.year, model.month+1, 1)
 
                                         currentMonth = model.month
                                         currentYear = model.year
                                         break
-                                    case MetadataModels.MetadataTimelineModel.Day:
+                                    case MetadataModels.TimelineQueryProvider.Day:
                                     default:
-                                        metadataModel.startDate = buildDate(model.year, model.month, model.day)
-                                        metadataModel.endDate = buildDate(model.year, model.month, model.day)
+                                        metadataModel.queryProvider.startDate = buildDate(model.year, model.month, model.day)
+                                        metadataModel.queryProvider.endDate = buildDate(model.year, model.month, model.day)
 
                                         currentMonth = model.month
                                         currentYear = model.year
@@ -259,19 +260,19 @@ PlasmaComponents.Page {
             margins: 8
         }
         flat: false
-        enabled: metadataTimelineModel.level != MetadataModels.MetadataTimelineModel.Year
+        enabled: metadataTimelineModel.queryProvider.level != MetadataModels.TimelineQueryProvider.Year
         onClicked: {
-            switch (metadataTimelineModel.level) {
-            case MetadataModels.MetadataTimelineModel.Day:
-                metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Month
-                metadataTimelineModel.startDate = buildDate(currentYear, 1, 1)
-                metadataTimelineModel.endDate = buildDate(currentYear, 12, 31)
+            switch (metadataTimelineModel.queryProvider.level) {
+            case MetadataModels.TimelineQueryProvider.Day:
+                metadataTimelineModel.queryProvider.level = MetadataModels.TimelineQueryProvider.Month
+                metadataTimelineModel.queryProvider.startDate = buildDate(currentYear, 1, 1)
+                metadataTimelineModel.queryProvider.endDate = buildDate(currentYear, 12, 31)
                 break
-            case MetadataModels.MetadataTimelineModel.Month:
-                metadataTimelineModel.level = MetadataModels.MetadataTimelineModel.Year
+            case MetadataModels.TimelineQueryProvider.Month:
+                metadataTimelineModel.queryProvider.level = MetadataModels.TimelineQueryProvider.Year
                 var dat = new Date()
-                metadataTimelineModel.startDate = ""
-                metadataTimelineModel.endDate = ""
+                metadataTimelineModel.queryProvider.startDate = ""
+                metadataTimelineModel.queryProvider.endDate = ""
                 break
             }
             currentItem = null

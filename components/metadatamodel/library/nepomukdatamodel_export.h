@@ -1,5 +1,5 @@
 /*  This file is part of the KDE project
-    Copyright (C) 2007 David Faure <faure@kde.org>
+    Copyright 2007 Aaron Seigo <aseigo@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -17,24 +17,27 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef NEPOMUKDATAMANAGEMENT_EXPORT_H
-#define NEPOMUKDATAMANAGEMENT_EXPORT_H
+#ifndef NEPOMUKDATAMODEL_EXPORT_H
+#define NEPOMUKDATAMODEL_EXPORT_H
 
 /* needed for KDE_EXPORT and KDE_IMPORT macros */
 #include <kdemacros.h>
 
-#ifndef NEPOMUK_DATA_MANAGEMENT_EXPORT
-# if defined(MAKE_NEPOMUKDATAMANAGEMENT_LIB)
-   /* We are building this library */ 
-#  define NEPOMUK_DATA_MANAGEMENT_EXPORT KDE_EXPORT
+#ifndef NEPOMUKDATAMODEL_EXPORT
+# if defined(KDELIBS_STATIC_LIBS)
+   /* No export/import for static libraries */
+#  define NEPOMUKDATAMODEL_EXPORT
+# elif defined(MAKE_NEPOMUKDATAMODEL_LIB)
+   /* We are building this library */
+#  define NEPOMUKDATAMODEL_EXPORT KDE_EXPORT
 # else
-   /* We are using this library */ 
-#  define NEPOMUK_DATA_MANAGEMENT_EXPORT KDE_IMPORT
+   /* We are using this library */
+#  define NEPOMUKDATAMODEL_EXPORT KDE_IMPORT
 # endif
 #endif
 
-# ifndef NEPOMUK_DATA_MANAGEMENT_EXPORT_DEPRECATED
-#  define NEPOMUK_DATA_MANAGEMENT_EXPORT_DEPRECATED KDE_DEPRECATED NEPOMUK_DATA_MANAGEMENT_EXPORT
+# ifndef NEPOMUKDATAMODEL_EXPORT_DEPRECATED
+#  define NEPOMUKDATAMODEL_EXPORT_DEPRECATED KDE_DEPRECATED NEPOMUKDATAMODEL_EXPORT
 # endif
 
 #endif

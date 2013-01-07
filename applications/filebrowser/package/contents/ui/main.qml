@@ -44,11 +44,13 @@ Image {
     //BEGIN model
     MetadataModels.MetadataModel {
         id: metadataModel
-        sortBy: [userTypes.sortFields[metadataModel.resourceType]]
-        //sortOrder: Qt.DescendingOrder
-        //queryString: "pdf"
-        resourceType: exclusiveResourceType
-        mimeTypes: exclusiveMimeTypes
+        queryProvider: MetadataModels.ResourceQueryProvider {
+            sortBy: [userTypes.sortFields[metadataModel.queryProvider.resourceType]]
+            //sortOrder: Qt.DescendingOrder
+            //queryString: "pdf"
+            resourceType: exclusiveResourceType
+            mimeTypes: exclusiveMimeTypes
+        }
     }
 
     PlasmaCore.DataSource {
@@ -87,25 +89,20 @@ Image {
         x: y
         source: "background-logo.png"
     }
-    PlasmaComponents.BusyIndicator {
-        anchors.centerIn: mainStack
-        visible: metadataModel.running
-        running: visible
-    }
 
     PlasmaComponents.ToolBar {
         id: toolBar
         height: tools && tools.item !== null ? theme.hugeIconSize : 0
     }
 
-    function openFile(url, mimeType)
+    function openResource(data)
     {
-        if (mimeType == "inode/directory") {
-            dirModel.url = url
+        if (data.mimeType == "inode/directory") {
+            dirModel.url = data.url
             fileBrowserRoot.model = dirModel
         } else if (!mainStack.busy) {
-            var packageName = application.packageForMimeType(mimeType)
-            print("Package for mimetype " + mimeType + " " + packageName)
+            var packageName = application.packageForMimeType(data.mimeType)
+            print("Package for mimetype " + data.mimeType + " " + packageName)
             if (packageName) {
                 partPackage.name = packageName
                 if (partPackage.visibleName && partPackage.visibleName != '') {
@@ -114,9 +111,9 @@ Image {
                     application.caption = i18n('Files')
                 }
                 var part = mainStack.push(partPackage.filePath("mainscript"))
-                part.loadFile(url)
+                part.loadResource(data)
             } else {
-                Qt.openUrlExternally(url)
+                Qt.openUrlExternally(data.url)
             }
         }
     }
@@ -159,18 +156,14 @@ Image {
                         mainStack.push(Qt.createComponent("Browser.qml"))
                     }
                 }
-                openFile(path, startupMimeType)
+                openResource({"url": path, "mimeType": startupMimeType})
             }
         }
     }
     //END non-UI components
-    
+
+
     //BEGIN: UI components
-    PlasmaComponents.BusyIndicator {
-        anchors.centerIn: mainStack
-        visible: metadataModel.running
-        running: visible
-    }
 
     PlasmaComponents.PageStack {
         id: mainStack
@@ -183,5 +176,12 @@ Image {
             left: parent.left
         }
     }
+
+    PlasmaComponents.BusyIndicator {
+        anchors.centerIn: mainStack
+        visible: metadataModel.running
+        running: visible
+    }
+
     //END UI components
 }

@@ -33,7 +33,6 @@ PlasmaComponents.Page {
     property Item currentItem
 
     PlasmaExtras.Heading {
-        id: tagsHeading
         anchors {
             top: parent.top
             right: parent.right
@@ -43,17 +42,14 @@ PlasmaComponents.Page {
     }
 
     PlasmaExtras.ScrollArea {
-        anchors {
-            fill: parent
-        }
+        anchors.fill: parent
+
         Flickable {
             id: mainFlickable
             contentWidth: width
             contentHeight: mainColumn.height
-            anchors {
-                fill: parent
-                topMargin: tagsHeading.height
-            }
+
+            anchors.fill: parent
 
             Column {
                 id: mainColumn
@@ -63,12 +59,13 @@ PlasmaComponents.Page {
                     id: tagRepeater
                     model: PlasmaCore.SortFilterModel {
                         id: sortFilterModel
-                        sourceModel: MetadataModels.MetadataCloudModel {
+                        sourceModel: MetadataModels.MetadataModel {
                             id: tagCloud
-                            cloudCategory: "nao:hasTag"
-                            showEmptyCategories: true
-                            resourceType: metadataModel.resourceType
-                            minimumRating: metadataModel.minimumRating
+                            queryProvider: MetadataModels.CloudQueryProvider {
+                                cloudCategory: "nao:hasTag"
+                                resourceType: metadataModel.queryProvider.resourceType
+                                minimumRating: metadataModel.queryProvider.minimumRating
+                            }
                         }
                         sortRole: "label"
                     }
@@ -120,31 +117,23 @@ PlasmaComponents.Page {
                                 }
                                 Rectangle {
                                     color: parent.parent.checked ? theme.highlightColor : theme.textColor
-                                    opacity: 0.1
                                     radius: width/2
                                     anchors.centerIn: parent
-                                    width: Math.min(parent.width, 10 * model.totalCount)
-                                    height: width
-                                }
-                                Rectangle {
-                                    color: parent.parent.checked ? theme.highlightColor : theme.textColor
-                                    radius: width/2
-                                    anchors.centerIn: parent
-                                    width: Math.min(parent.width, 10 * model.count)
+                                    width: Math.min(parent.width, 14 + 100 * (model.count / tagCloud.totalCount))
                                     height: width
                                 }
                             }
                             onClicked: checked = !checked
                             onCheckedChanged: {
-                                var tags = metadataModel.tags
+                                var tags = metadataModel.queryProvider.tags
                                 if (checked) {
                                     tags[tags.length] = model["label"];
-                                    metadataModel.tags = tags
+                                    metadataModel.queryProvider.tags = tags
                                 } else {
                                     for (var i = 0; i < tags.length; ++i) {
                                         if (tags[i] == model["label"]) {
                                             tags.splice(i, 1);
-                                            metadataModel.tags = tags
+                                            metadataModel.queryProvider.tags = tags
                                             break;
                                         }
                                     }

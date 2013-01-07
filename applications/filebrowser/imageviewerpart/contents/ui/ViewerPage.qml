@@ -79,32 +79,35 @@ PlasmaComponents.Page {
         }
     }
 
-    function loadFile(path)
+    function loadResource(resourceData)
     {
-        if (path.length == 0) {
+
+        if (!resourceData.url || resourceData.url.length == 0) {
             return
         }
 
-        if (String(path).indexOf("/") === 0) {
+        if (String(resourceData.url).indexOf("/") === 0) {
             path = "file://"+path
         }
 
-        viewerPage.path = path
+        viewerPage.path = resourceData.url
         //is in Nepomuk
-        var index = metadataModel.find(path);
+        var index = resourceData.resultRow === undefined ? -1 : resourceData.resultRow
         if (index > -1) {
             fileBrowserRoot.model = metadataModel
             quickBrowserBar.currentIndex = index
+            quickBrowserBar.positionViewAtIndex(index, ListView.Center)
             return
         } else {
-            index = dirModel.indexForUrl(path)
+            index = dirModel.indexForUrl(resourceData.url)
             if (index > -1) {
                 //is in dirModel
                 fileBrowserRoot.model = dirModel
                 quickBrowserBar.currentIndex = index
+                quickBrowserBar.positionViewAtIndex(index, ListView.Center)
             //don't know where it is, just load
             } else {
-                imageArea.delegate.source = path
+                imageArea.delegate.source = resourceData.url
             }
         }
     }

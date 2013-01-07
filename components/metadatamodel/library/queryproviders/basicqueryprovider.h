@@ -17,17 +17,22 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef ABSTRACTMETADATAMODEL_H
-#define ABSTRACTMETADATAMODEL_H
+#ifndef BASICQUERYPROVIDER_H
+#define BASICQUERYPROVIDER_H
 
-#include <QAbstractItemModel>
+#include "abstractqueryprovider.h"
+#include "nepomukdatamodel_export.h"
+#include <QObject>
 #include <QDate>
 #include <QStringList>
 #include <QUrl>
 #include <QDeclarativePropertyMap>
+#include <QPersistentModelIndex>
 
 #include "nso.h"
 #include "kao.h"
+#include <Nepomuk2/Query/Query>
+#include <Nepomuk2/Query/Result>
 #include <Nepomuk2/Vocabulary/NIE>
 #include <Nepomuk2/Vocabulary/NFO>
 #include <Nepomuk2/Vocabulary/NCO>
@@ -47,25 +52,21 @@ namespace Nepomuk2 {
     class ResourceWatcher;
 }
 
-class QDBusServiceWatcher;
 class QTimer;
 
+class BasicQueryProviderPrivate;
+
 /**
- * This is the base class for the Nepomuk metadata models: all its properties, signals and slots are available in MetadataModel, MetadataCloudModel and MetadataTimelineModel
+ * This is the base class for the standard Nepomuk query providers.
  *
  * The properties of this class will be used to build a query.
  * The string properties can have a ! as prefix to negate the match.
  *
  * @author Marco Martin <mart@kde.org>
  */
-class AbstractMetadataModel : public QAbstractItemModel
+class NEPOMUKDATAMODEL_EXPORT BasicQueryProvider : public AbstractQueryProvider
 {
     Q_OBJECT
-
-    /**
-     * @property int the total number of rows in this model
-     */
-    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
     /**
      * @property string restrict results to just this resource type such as nfo:Document
@@ -115,16 +116,10 @@ class AbstractMetadataModel : public QAbstractItemModel
      */
     Q_PROPERTY(QObject *extraParameters READ extraParameters CONSTANT)
 
-    /**
-     * @property bool running: true when queries are in execution
-     */
-    Q_PROPERTY(bool running READ isRunning NOTIFY runningChanged)
-
 public:
-    AbstractMetadataModel(QObject *parent = 0);
-    ~AbstractMetadataModel();
+    BasicQueryProvider(QObject *parent = 0);
+    ~BasicQueryProvider();
 
-    virtual int count() const = 0;
 
     void setResourceType(const QString &type);
     QString resourceType() const;
@@ -163,19 +158,7 @@ public:
 
     QObject *extraParameters() const;
 
-    bool isRunning() const;
-
-    //Reimplemented
-    QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const;
-    QModelIndex index(int row, int column,
-                      const QModelIndex &parent = QModelIndex()) const;
-    QModelIndex parent(const QModelIndex &child) const;
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    int columnCount(const QModelIndex &parent = QModelIndex()) const;
-
 Q_SIGNALS:
-    void countChanged();
     void resourceTypeChanged();
     void mimeTypesChanged();
     void activityIdChanged();
@@ -184,16 +167,12 @@ Q_SIGNALS:
     void endDateChanged();
     void minimumRatingChanged();
     void maximumRatingChanged();
-    void runningChanged(bool running);
 
 protected Q_SLOTS:
     virtual void doQuery();
 
-private Q_SLOTS:
-    void serviceRegistered(const QString &service);
-
 protected:
-    QString retrieveIconName(const QStringList &types) const;
+
     /* from nie:url
      * to QUrl("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#url")
      */
@@ -235,13 +214,6 @@ protected:
         return it.value().toString() + property.mid(colonPosition+1);
     }
 
-    static inline QString propertyShortName(const QUrl &url)
-    {
-        //vHanda: not always, again store all the ontologies and use a hash map
-        //http://www.semanticdesktop.org/ontologies/2007/03/22/nfo will become nfo
-        return url.path().split("/").last() + ":" + url.fragment();
-    }
-
     static inline QStringList variantToStringList(const QVariantList &list)
     {
         QStringList stringList;
@@ -266,24 +238,15 @@ protected:
 
     QStringList tagStrings() const;
     QStringList mimeTypeStrings() const;
-    void setRunning(bool running);
+
+    /**
+     * Schedule a refresh for the query.
+     * If you are using Nepomuk2::Query::Query this should be normally not needed.
+     */
     void requestRefresh();
 
 private:
-    QDBusServiceWatcher *m_queryServiceWatcher;
-    QHash<QString, QString> m_icons;
-    QTimer *m_queryTimer;
-    bool m_running;
-
-    QString m_resourceType;
-    QStringList m_mimeTypes;
-    QString m_activityId;
-    QStringList m_tags;
-    QDate m_startDate;
-    QDate m_endDate;
-    int m_minimumRating;
-    int m_maximumRating;
-    QDeclarativePropertyMap *m_extraParameters;
+    BasicQueryProviderPrivate *const d;
 };
 
 #endif
