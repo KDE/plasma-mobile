@@ -90,6 +90,8 @@ void MobileImage::calculateGeometry()
 
 void MobileImage::paint(QPainter *painter, const QRectF& exposedRect)
 {
+    Q_UNUSED(painter)
+    Q_UNUSED(exposedRect)
     //this wallpaper doesn't actually paint
 }
 
@@ -248,6 +250,7 @@ void MobileImage::pictureChanged(const QModelIndex &index)
 
 void MobileImage::positioningChanged(int index)
 {
+    Q_UNUSED(index)
     setSingleImage();
 
     setResizeMethodHint(m_resizeMethod);

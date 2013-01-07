@@ -52,8 +52,6 @@ int main(int argc, char **argv)
 
     //use plasmarc to share this with plasma-windowed
     KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
-    bool useGL = cg.readEntry("UseOpenGl", true);
- 
 
     AboutApp *mainWindow = new AboutApp();
     mainWindow->show();

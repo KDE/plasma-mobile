@@ -818,13 +818,11 @@ int KDeclarativeWebView::preferredHeight() const
 
 bool KDeclarativeWebView::scrollBy(int dx, int dy, const QPointF& pos)
 {
-    QPoint oldContentsPos = contentsPosition().toPoint();
-
     QWebFrame *frame = page()->frameAt(pos.toPoint());
     if (!frame) {
         frame = page()->mainFrame();
     }
-    
+
     if (qtwebkit_webframe_scrollOverflow(frame, dx, dy, pos.toPoint())) {
         return true;
     }
