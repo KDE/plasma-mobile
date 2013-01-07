@@ -113,7 +113,7 @@ Item {
         }
 
         PlasmaComponents.Label {
-            text: i18n("Enable Integration repository:")
+            text: i18n("Enable integration repository:")
             anchors {
                 right: integration.left
                 rightMargin: theme.defaultFont.mSize.width
