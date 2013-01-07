@@ -29,6 +29,19 @@ PlasmaComponents.Page {
     id: alarmEditRoot
 
     property int alarmId: 0
+
+    property Item panelBackground
+    Connections {
+        target: plasmoid
+        onFormFactorChanged: {
+            if (plasmoid.formFactor == plasmoid.Application) {
+                root.panelBackground = panelBackgroundComponent.createObject(root)
+            } else {
+                appBackground.destroy()
+            }
+        }
+    }
+
     onAlarmIdChanged: {
         if (alarmId > 0) {
             var dt = new Date(alarmsSource.data["Alarm-"+alarmId].dateTime)
@@ -72,27 +85,41 @@ PlasmaComponents.Page {
                     spacing: 8
                     anchors.centerIn: parent
 
-                    MobileComponents.DatePicker {
-                        id: datePicker
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        day: currentDate.getDate()
-                        month: currentDate.getMonth() + 1
-                        year: currentDate.getFullYear()
-                    }
-
-                    MobileComponents.TimePicker {
-                        id: timePicker
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        hours: currentDate.getHours()
-                        minutes: currentDate.getMinutes()
-                        seconds: currentDate.getSeconds()
-                    }
-
                     Grid {
                         spacing: 8
                         anchors.horizontalCenter: parent.horizontalCenter
-                        rows: 3
+                        rows: 5
                         columns: 2
+
+                        PlasmaComponents.Label {
+                            anchors {
+                                right: datePicker.left
+                                rightMargin: 4
+                                verticalCenter: datePicker.verticalCenter
+                            }
+                            text: i18n("Date:")
+                        }
+                        MobileComponents.DatePicker {
+                            id: datePicker
+                            day: currentDate.getDate()
+                            month: currentDate.getMonth() + 1
+                            year: currentDate.getFullYear()
+                        }
+
+                        PlasmaComponents.Label {
+                            anchors {
+                                right: timePicker.left
+                                rightMargin: 4
+                                verticalCenter: timePicker.verticalCenter
+                            }
+                            text: i18n("Time:")
+                        }
+                        MobileComponents.TimePicker {
+                            id: timePicker
+                            hours: currentDate.getHours()
+                            minutes: currentDate.getMinutes()
+                            seconds: currentDate.getSeconds()
+                        }
 
                         PlasmaComponents.Label {
                             anchors {
@@ -163,6 +190,24 @@ PlasmaComponents.Page {
                                 pageRow.pop(alarmList)
                             }
                         }
+                    }
+                    PlasmaComponents.Button {
+                        id: deleteButton
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        visible: alarmId > 0
+                        text: i18n("Delete")
+
+                        onClicked: dialog.open()
+                    }
+                }
+                PlasmaComponents.QueryDialog {
+                    id: dialog
+                    visualParent: deleteButton
+                    message: i18n("Do you really want to delete this alarm?")
+                    acceptButtonText: i18n("Delete")
+                    onAccepted: {
+                        removeAlarm(alarmId)
+                        pageRow.pop(alarmList)
                     }
                 }
             }

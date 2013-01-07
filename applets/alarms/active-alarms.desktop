@@ -47,7 +47,7 @@ Comment[wa]=Ene usteye po mete a pont des veyåvès ey oyåvès xhîletes sol t�
 Comment[x-test]=xxA tool to setup visual and audio alarms for tabletsxx
 Comment[zh_TW]=在平板裝置上設定視覺與音效鬧鐘的工具
 
-Exec=export PLASMA_CUSTOM_PREFIX_PATHS=platformcontents/application/generic/:platformcontents/application/tablet/:contents/ && plasma-windowed -graphicssystem raster org.kde.active.alarms
+Exec=plasma-windowed -graphicssystem raster org.kde.active.alarms
 Terminal=false
 Icon=kalarm-active
 Type=Application

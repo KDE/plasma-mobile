@@ -52,7 +52,7 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
 {
     Q_UNUSED(args);
 
-    if ( !Akonadi::Control::start() ) {
+    if (!Akonadi::Control::start()) {
         kWarning() << "ERROR: unable to start Akonadi server, this engine won't work";
         return;
     }
@@ -81,11 +81,10 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
     //TODO: be really sure what alarm collections are missing
     bool agentFound = false;
     Akonadi::AgentInstance::List agents = Akonadi::AgentManager::self()->instances();
-    foreach (const Akonadi::AgentInstance& agent, agents)
-    {
-        QString type = agent.type().identifier();
-        if (type == QLatin1String("akonadi_kalarm_resource")
-        ||  type == QLatin1String("akonadi_kalarm_dir_resource")) {
+    foreach (const Akonadi::AgentInstance& agent, agents) {
+        const QString type = agent.type().identifier();
+        if (type == QLatin1String("akonadi_kalarm_resource") ||
+            type == QLatin1String("akonadi_kalarm_dir_resource")) {
             // Fetch the resource's collection to determine its alarm types
             Akonadi::CollectionFetchJob* job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::FirstLevel);
             ++m_collectionJobs;
@@ -166,7 +165,6 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
         kDebug() << "Job Error:" << job->errorString();
     } else {
         Akonadi::CollectionFetchJob* cjob = static_cast<Akonadi::CollectionFetchJob*>( job );
-        int i = 0;
 
         //normally this loop should be a single one
         foreach( const Akonadi::Collection &collection, cjob->collections() ) {
@@ -179,6 +177,7 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
                         SLOT(fetchAlarmsCollectionDone(KJob*)));
             }
         }
+
         --m_collectionJobs;
         if (m_collectionJobs <= 0) {
             m_collectionJobs = 0;
@@ -188,7 +187,6 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
                 creator->createAgent(QLatin1String("akonadi_kalarm_resource"), this);
             }
         }
-        kDebug() << i << "Alarm collections are in now";
         scheduleSourcesUpdated();
     }
 }
@@ -232,10 +230,7 @@ Plasma::Service *AlarmsEngine::serviceForSource(const QString &source)
         return 0;
     }
 
-    if (!m_service) {
-        m_service = new AlarmsService(m_collection, this);
-    }
-    return m_service.data();
+    return new AlarmsService(m_collection, this);
 }
 
 #include "alarmsengine.moc"

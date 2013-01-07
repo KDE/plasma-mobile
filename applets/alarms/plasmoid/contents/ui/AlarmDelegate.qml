@@ -20,6 +20,7 @@
 import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.locale 0.1 as KLocale
 import org.kde.qtextracomponents 0.1
 
@@ -82,61 +83,44 @@ PlasmaComponents.ListItem {
                 easing.type: Easing.InOutQuad
             }
         }
-        Row {
-            spacing: 8
-            width: alarmItem.width - closeButton.width - spacing*3
+        Column {
+            width: alarmItem.width
 
-            Column {
-                width: parent.width/4
-                PlasmaComponents.Label {
-                    text: locale.formatDate(dateTime, KLocale.Locale.FancyShortDate)
-                    elide: Text.ElideRight
+            PlasmaExtras.Heading {
+                level: 3
+                elide: Text.ElideRight
+                text: i18nc("Alarm setting,<date> at <time>",
+                            "%1 at %2",
+                            locale.formatDate(dateTime, KLocale.Locale.FancyShortDate),
+                            locale.formatLocaleTime(dateTime))
+            }
+
+            Row {
+                spacing: theme.defaultFont.mSize.height * .5
+                width: alarmItem.width
+                PlasmaCore.IconItem {
+                    id: audioIcon
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: theme.iconSizes.small
+                    height: width
+                    visible: audioFile
+                    source: "audio-volume-high"
                 }
-                PlasmaComponents.Label {
-                    text: locale.formatLocaleTime(dateTime)
-                    elide: Text.ElideRight
+
+                PlasmaCore.IconItem {
+                    id: messageIcon
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: theme.iconSizes.small
+                    height: width
+                    visible: message
+                    source: "mail-message"
                 }
-            }
-            PlasmaComponents.Label {
-                anchors.verticalCenter: parent.verticalCenter
-                horizontalAlignment: Text.AlignHCenter
-                width: parent.width/4
-                text: message
-                wrapMode: Text.Wrap
-                elide: Text.ElideRight
-                maximumLineCount: 3
-            }
-            PlasmaComponents.Label {
-                anchors.verticalCenter: parent.verticalCenter
-                horizontalAlignment: Text.AlignHCenter
-                width: parent.width/4
-                text: recurs ? i18n("Every day") : i18n("Once")
-                elide: Text.ElideRight
-            }
-            PlasmaComponents.Label {
-                anchors.verticalCenter: parent.verticalCenter
-                horizontalAlignment: Text.AlignHCenter
-                width: parent.width/4
-                text: audioFile ? i18n("Audio") : ""
-                elide: Text.ElideRight
-            }
-        }
-        PlasmaCore.SvgItem {
-            id: closeButton
-            svg: configIconsSvg
-            elementId: "close"
-            width: theme.mediumIconSize
-            height: theme.mediumIconSize
-            anchors {
-                verticalCenter: parent.verticalCenter
-                right: parent.right
-                rightMargin: 12
-            }
-            MouseArea {
-                anchors.fill: parent
-                anchors.margins: -6
-                onClicked: {
-                    removeAnimation.running = true
+
+                PlasmaComponents.Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: recurs
+                    text: i18n("Repeats every day")
+                    elide: Text.ElideRight
                 }
             }
         }

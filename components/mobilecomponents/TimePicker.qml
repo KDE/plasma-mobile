@@ -61,7 +61,7 @@ PlasmaCore.FrameSvgItem {
         id: locale
     }
 
-    imagePath: "widgets/throbber"
+    imagePath: "widgets/picker"
     width: clockRow.width + margins.left + margins.right
     height: clockRow.height + margins.top + margins.bottom
 

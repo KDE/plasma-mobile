@@ -20,7 +20,6 @@
 import QtQuick 1.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.locale 0.1 as KLocale
 import org.kde.qtextracomponents 0.1
@@ -29,10 +28,16 @@ PlasmaComponents.Page {
     id: root
     clip: true
 
-    Component.onCompleted: {
-        var component = Qt.createComponent(plasmoid.file("ui", "PanelBackground.qml"))
-        if (component) {
-            component.createObject(root)
+
+    property Item panelBackground
+    Connections {
+        target: plasmoid
+        onFormFactorChanged: {
+            if (plasmoid.formFactor == plasmoid.Application) {
+                root.panelBackground = panelBackgroundComponent.createObject(root)
+            } else {
+                appBackground.destroy()
+            }
         }
     }
 
@@ -42,53 +47,27 @@ PlasmaComponents.Page {
 
         ListView {
             id: alarmList
-            model: PlasmaCore.DataModel {
-                dataSource: alarmsSource
+            model: PlasmaCore.SortFilterModel {
+                sortRole: "dateTime"
+                sourceModel: PlasmaCore.DataModel {
+                    dataSource: alarmsSource
+                }
             }
+
             header: PlasmaComponents.ListItem {
                 id: headerItem
                 sectionDelegate: true
 
-                Row {
-                    visible: alarmsSource.sources.length > 0
-                    spacing: 8
-                    width: headerItem.width - theme.mediumIconSize - spacing*3
-
-                    PlasmaComponents.Label {
-                        width: parent.width/4
-                        text: i18n("Time")
-                        elide: Text.ElideRight
-                    }
-
-                    PlasmaComponents.Label {
-                        horizontalAlignment: Text.AlignHCenter
-                        width: parent.width/4
-                        text: i18n("Message")
-                        elide: Text.ElideRight
-                    }
-                    PlasmaComponents.Label {
-                        horizontalAlignment: Text.AlignHCenter
-                        width: parent.width/4
-                        text: i18n("Repeat")
-                        elide: Text.ElideRight
-                    }
-                    PlasmaComponents.Label {
-                        horizontalAlignment: Text.AlignHCenter
-                        width: parent.width/4
-                        text: i18n("Audio")
-                        elide: Text.ElideRight
-                    }
-                }
-
-                PlasmaComponents.Label {
-                    visible: alarmsSource.sources.length == 0
-                    anchors.centerIn: parent
-                    text: i18n("No alarms yet")
+                PlasmaExtras.Heading {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    level: 1
+                    text: (alarmsSource.sources.length == 0) ? i18n("No alarms yet") : i18n("Alarms")
                 }
             }
+
             delegate: AlarmDelegate {
-                
             }
+
             footer: PlasmaComponents.ListItem {
                 enabled: true
                 checked: pageRow.currentPage.alarmId <= 0
@@ -97,16 +76,17 @@ PlasmaComponents.Page {
                     height: theme.defaultFont.mSize.height * 3
 
                     Row {
+                        spacing: theme.defaultFont.mSize.height * .5
                         anchors.centerIn: parent
                         QIconItem {
                             anchors.verticalCenter: parent.verticalCenter
                             icon: "list-add"
-                            width: theme.mediumIconSize
+                            width: theme.iconSizes.dialog
                             height: width
                         }
                         PlasmaComponents.Label {
                             anchors.verticalCenter: parent.verticalCenter
-                            text: i18n("New Alarm")
+                            text: i18n("Create a new alarm")
                         }
                     }
                 }
