@@ -1009,11 +1009,12 @@ void KDeclarativeWebView::setRenderingEnabled(bool enabled)
     d->view->setTiledBackingStoreFrozen(!enabled);
 
     if (enabled) {
+        d->view->page()->mainFrame()->setZoomFactor(d->view->scale());
+        d->view->setScale(1);
+
         d->view->page()->mainFrame()->setScrollPosition(QPoint(-d->view->x(), d->view->page()->mainFrame()->scrollPosition().y()));
         d->view->setX(0);
 
-        d->view->page()->mainFrame()->setZoomFactor(d->view->scale());
-        d->view->setScale(1);
     } else {
         d->view->setX(-d->view->page()->mainFrame()->scrollPosition().x());
 
