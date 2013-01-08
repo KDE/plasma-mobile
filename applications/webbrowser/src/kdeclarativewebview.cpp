@@ -542,20 +542,31 @@ void KDeclarativeWebView::setContentsPosition(QPointF contentsPosition)
 
 int KDeclarativeWebView::contentX() const
 {
-    return d->view->page()->mainFrame()->scrollPosition().x();
+    if (renderingEnabled()) {
+        return d->view->page()->mainFrame()->scrollPosition().x();
+    } else {
+        return -d->view->x();
+    }
 }
 
 void KDeclarativeWebView::setContentX(int contentX)
 {
-    const QPoint oldPos = d->view->page()->mainFrame()->scrollPosition();
-    if (oldPos.x() == contentX) {
-        return;
-    }
+    if (renderingEnabled()) {
+        const QPoint oldPos = d->view->page()->mainFrame()->scrollPosition();
+        if (oldPos.x() == contentX) {
+            return;
+        }
 
-    d->view->page()->mainFrame()->setScrollPosition(QPoint(contentX, d->view->page()->mainFrame()->scrollPosition().y()));
+        d->view->page()->mainFrame()->setScrollPosition(QPoint(contentX, d->view->page()->mainFrame()->scrollPosition().y()));
 
-    if (oldPos.x() == d->view->page()->mainFrame()->scrollPosition().x()) {
-        return;
+        if (oldPos.x() == d->view->page()->mainFrame()->scrollPosition().x()) {
+            return;
+        }
+    } else {
+        if (d->view->x() == contentX) {
+            return;
+        }
+        d->view->setX(-contentX);
     }
 
     emit contentXChanged(d->view->page()->mainFrame()->scrollPosition().x());
@@ -998,9 +1009,14 @@ void KDeclarativeWebView::setRenderingEnabled(bool enabled)
     d->view->setTiledBackingStoreFrozen(!enabled);
 
     if (enabled) {
+        d->view->page()->mainFrame()->setScrollPosition(QPoint(-d->view->x(), d->view->page()->mainFrame()->scrollPosition().y()));
+        d->view->setX(0);
+
         d->view->page()->mainFrame()->setZoomFactor(d->view->scale());
         d->view->setScale(1);
     } else {
+        d->view->setX(-d->view->page()->mainFrame()->scrollPosition().x());
+
         d->view->setScale(d->view->page()->mainFrame()->zoomFactor());
         d->view->page()->mainFrame()->setZoomFactor(1);
     }
