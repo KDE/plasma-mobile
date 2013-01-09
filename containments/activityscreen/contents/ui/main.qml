@@ -106,7 +106,7 @@ Item {
             categoriesTimer.restart()
         }
         filterRole: "label"
-        filterRegExp: "nfo:Application|nfo:Document|nfo:Image|nfo:Audio|nfo:Video|nfo:Archive"
+        filterRegExp: "nfo:Application|nfo:Bookmark|nfo:Document|nfo:Image|nfo:Audio|nfo:Video|nfo:Archive"
     }
 
     MetadataModels.MetadataUserTypes {
