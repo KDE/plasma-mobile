@@ -34,8 +34,20 @@ PlasmaComponents.Sheet {
     signal addAppletRequested(string plugin)
     signal closeRequested
 
+    function accept()
+    {
+        if (selectedModel.count == 0 && status == DialogStatus.Open) {
+            close()
+        }
+        accepted()
+    }
+
     function addItems()
     {
+        if (selectedModel.count == 0) {
+            close()
+            return
+        }
         var service = metadataSource.serviceForSource("")
         var operation = service.operationDescription("connectToActivity")
         operation["ActivityUrl"] = activitySource.data["Status"]["Current"]
@@ -44,9 +56,11 @@ PlasmaComponents.Sheet {
             var item = selectedModel.get(i)
             if (item.resourceUri) {
                 operation["ResourceUrl"] = item.resourceUri
-                service.startOperationCall(operation)
+                var job = service.startOperationCall(operation)
+                job.finished.connect(widgetsExplorer.close)
             } else if (item.pluginName) {
                 widgetsExplorer.addAppletRequested(item.pluginName)
+                close()
             }
         }
 
