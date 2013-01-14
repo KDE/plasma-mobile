@@ -201,7 +201,7 @@ PlasmaComponents.Page {
                             height: childrenRect.height
                             anchors.verticalCenter: parent
                             x: tagDelegate.x > -mainFlickable.width ? 0 : mainFlickable.width * 2
-                            when: true//tagDelegate.x != -mainFlickable.width
+                            when: tagDelegate.x != -mainFlickable.width
 
                             source: Component {
                                 Column {
@@ -214,9 +214,19 @@ PlasmaComponents.Page {
                                         spacing: 8
                                         PlasmaComponents.Button {
                                             text: i18n("Delete")
+                                            onClicked: {
+                                                var service = metadataSource.serviceForSource("")
+                                                var operation = service.operationDescription("deleteTag")
+                                                operation["Tag"] = model["label"]
+                                                service.startOperationCall(operation)
+                                            }
                                         }
                                         PlasmaComponents.Button {
                                             text: i18n("Cancel")
+                                            onClicked: {
+                                                slideAnim.to = -mainFlickable.width
+                                                slideAnim.running = true
+                                            }
                                         }
                                     }
                                 }

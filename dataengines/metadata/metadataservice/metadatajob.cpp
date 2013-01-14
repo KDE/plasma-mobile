@@ -153,6 +153,11 @@ void MetadataJob::start()
                 r.addTag(tag);
             }
         }
+    } else if (operation == "deleteTag") {
+
+        Nepomuk2::Tag tag( parameters()["Tag"].toString() );
+        tag.remove();
+        setResult(true);
     }
 
     setResult(false);

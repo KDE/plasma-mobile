@@ -44,4 +44,9 @@
             <label>The name of the tag</label>
         </entry>
     </group>
+    <group name="deleteTag">
+        <entry name="Tag" type="String">
+            <label>The name of the tag</label>
+        </entry>
+    </group>
 </kcfg>
