@@ -55,6 +55,81 @@ PlasmaComponents.Page {
                 id: mainColumn
                 spacing: 8
                 width: parent.width
+
+                Row {
+                    spacing: 8
+                    MouseArea {
+                        width: theme.defaultFont.mSize.width * 10
+                        height: width
+
+                        DropArea {
+                            anchors.fill: parent
+                            property bool underDrag: false
+                            onDragEnter: underDrag = true
+                            onDragLeave: underDrag = false
+                            onDrop: {
+                                underDrag = false
+                                newTagDialog.resourceUrls = event.mimeData.urls
+                                newTagDialog.open()
+                            }
+
+                            Item {
+                                anchors.fill: parent
+                                Rectangle {
+                                    id: newDragBackground
+                                    color: theme.textColor
+                                    anchors.fill: parent
+
+                                    radius: width/2
+                                    opacity: parent.parent.underDrag ? 0.6 : 0.2
+                                    Behavior on opacity {
+                                        NumberAnimation {
+                                            duration: 250
+                                            easing.type: Easing.InOutQuad
+                                        }
+                                    }
+                                }
+                                Rectangle {
+                                    anchors {
+                                        fill: newDragBackground
+                                        topMargin: 2
+                                        bottomMargin: -2
+                                    }
+                                    radius: width/2
+                                    color: "white"
+                                    opacity: 0.6
+                                }
+                                Rectangle {
+                                    color: theme.textColor
+                                    anchors {
+                                        fill: parent
+                                        margins: 20
+                                    }
+                                    radius: width/2
+                                    opacity: 0.6
+                                }
+                                Rectangle {
+                                    color: theme.backgroundColor
+                                    anchors.centerIn:parent
+                                    width: 4
+                                    height: parent.height/3
+                                }
+                                Rectangle {
+                                    color: theme.backgroundColor
+                                    anchors.centerIn:parent
+                                    height: 4
+                                    width: parent.height/3
+                                }
+                            }
+                        }
+                    }
+                    PlasmaComponents.Label {
+                        id: tagLabel
+                        text: i18n("New Tag")
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+
                 Repeater {
                     id: tagRepeater
                     model: PlasmaCore.SortFilterModel {
@@ -145,80 +220,6 @@ PlasmaComponents.Page {
                             text: model.label
                             anchors.verticalCenter: parent.verticalCenter
                         }
-                    }
-                }
-
-                Row {
-                    spacing: 8
-                    MouseArea {
-                        width: theme.defaultFont.mSize.width * 10
-                        height: width
-
-                        DropArea {
-                            anchors.fill: parent
-                            property bool underDrag: false
-                            onDragEnter: underDrag = true
-                            onDragLeave: underDrag = false
-                            onDrop: {
-                                underDrag = false
-                                newTagDialog.resourceUrls = event.mimeData.urls
-                                newTagDialog.open()
-                            }
-
-                            Item {
-                                anchors.fill: parent
-                                Rectangle {
-                                    id: newDragBackground
-                                    color: theme.textColor
-                                    anchors.fill: parent
-
-                                    radius: width/2
-                                    opacity: parent.parent.underDrag ? 0.6 : 0.2
-                                    Behavior on opacity {
-                                        NumberAnimation {
-                                            duration: 250
-                                            easing.type: Easing.InOutQuad
-                                        }
-                                    }
-                                }
-                                Rectangle {
-                                    anchors {
-                                        fill: newDragBackground
-                                        topMargin: 2
-                                        bottomMargin: -2
-                                    }
-                                    radius: width/2
-                                    color: "white"
-                                    opacity: 0.6
-                                }
-                                Rectangle {
-                                    color: theme.textColor
-                                    anchors {
-                                        fill: parent
-                                        margins: 20
-                                    }
-                                    radius: width/2
-                                    opacity: 0.6
-                                }
-                                Rectangle {
-                                    color: theme.backgroundColor
-                                    anchors.centerIn:parent
-                                    width: 4
-                                    height: parent.height/3
-                                }
-                                Rectangle {
-                                    color: theme.backgroundColor
-                                    anchors.centerIn:parent
-                                    height: 4
-                                    width: parent.height/3
-                                }
-                            }
-                        }
-                    }
-                    PlasmaComponents.Label {
-                        id: tagLabel
-                        text: i18n("New Tag")
-                        anchors.verticalCenter: parent.verticalCenter
                     }
                 }
             }
