@@ -174,6 +174,7 @@ PlasmaComponents.Page {
         }
     }
     Image {
+        z: 999
         source: "image://appbackgrounds/shadow-right"
         fillMode: Image.TileVertically
         anchors {
@@ -211,7 +212,7 @@ PlasmaComponents.Page {
         Item {
             id: panelPage
             anchors.fill: parent
-            clip: true
+            clip: false
         }
     }
 

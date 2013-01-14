@@ -29,6 +29,7 @@ import org.kde.draganddrop 1.0
 PlasmaComponents.Page {
     id: root
     anchors.fill: parent
+    clip: false
 
     property Item currentItem
 
@@ -43,12 +44,14 @@ PlasmaComponents.Page {
 
     PlasmaExtras.ScrollArea {
         anchors.fill: parent
-
+        clip: false
+        Component.onCompleted: mainFlickable.clip = false
 
         Flickable {
             id: mainFlickable
             contentWidth: width
             contentHeight: mainColumn.height
+            clip: false
 
             anchors.fill: parent
 
@@ -152,10 +155,23 @@ PlasmaComponents.Page {
 
                     delegate: MouseArea {
                         id: tagDelegate
-                        width: parent.height
+
+                        x: -mainFlickable.width
+
+                        width: mainFlickable.width * 3
                         height: theme.defaultFont.mSize.width * 10
                         property bool checked: false
 
+                        onReleased: {
+                            if (tagDelegate.x > -mainFlickable.width/2) {
+                                slideAnim.to = 0
+                            } else if (tagDelegate.x < -mainFlickable.width - mainFlickable.width/2) {
+                                slideAnim.to = -mainFlickable.width * 2
+                            } else {
+                                slideAnim.to = -mainFlickable.width
+                            }
+                            slideAnim.running = true
+                        }
                         onClicked: checked = !checked
                         onCheckedChanged: {
                             var tags = metadataModel.queryProvider.tags
@@ -173,8 +189,54 @@ PlasmaComponents.Page {
                             }
                         }
 
+                        drag {
+                            target: tagDelegate
+                            axis: Drag.XAxis
+                            minimumX: -mainFlickable.width * 2
+                            maximumX: 0
+                        }
+
+                        PlasmaExtras.ConditionalLoader {
+                            width: mainFlickable.width
+                            height: childrenRect.height
+                            anchors.verticalCenter: parent
+                            x: tagDelegate.x > -mainFlickable.width ? 0 : mainFlickable.width * 2
+                            when: true//tagDelegate.x != -mainFlickable.width
+
+                            source: Component {
+                                Column {
+                                    PlasmaComponents.Label {
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        text: i18n("Delete tag \"%1\"?", model.label)
+                                    }
+                                    Row {
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        spacing: 8
+                                        PlasmaComponents.Button {
+                                            text: i18n("Delete")
+                                        }
+                                        PlasmaComponents.Button {
+                                            text: i18n("Cancel")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        NumberAnimation {
+                            id: slideAnim
+                            target: tagDelegate
+                            property: "x"
+                            to: -mainFlickable.width
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+
                         DropArea {
-                            anchors.fill: parent
+                            anchors {
+                                fill: parent
+                                leftMargin: mainFlickable.width
+                                rightMargin: mainFlickable.width
+                            }
                             property bool underDrag: false
                             onDragEnter: underDrag = true
                             onDragLeave: underDrag = false
