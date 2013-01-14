@@ -44,6 +44,7 @@ PlasmaComponents.Page {
     PlasmaExtras.ScrollArea {
         anchors.fill: parent
 
+
         Flickable {
             id: mainFlickable
             contentWidth: width
@@ -55,6 +56,10 @@ PlasmaComponents.Page {
                 id: mainColumn
                 spacing: 8
                 width: parent.width
+                Item {
+                    height: theme.defaultFont.mSize.height
+                    width: height
+                }
 
                 Row {
                     spacing: 8
@@ -145,80 +150,88 @@ PlasmaComponents.Page {
                         sortRole: "label"
                     }
 
-                    delegate: Row {
-                        spacing: 8
-                        MouseArea {
-                            width: theme.defaultFont.mSize.width * 10
-                            height: width
-                            property bool checked: false
+                    delegate: MouseArea {
+                        id: tagDelegate
+                        width: parent.height
+                        height: theme.defaultFont.mSize.width * 10
+                        property bool checked: false
 
-                            DropArea {
-                                anchors.fill: parent
-                                property bool underDrag: false
-                                onDragEnter: underDrag = true
-                                onDragLeave: underDrag = false
-                                onDrop: {
-                                    underDrag = false
-                                    var service = metadataSource.serviceForSource("")
-                                    print(service);
-                                    var operation = service.operationDescription("tagResources")
-                                    operation["ResourceUrls"] = event.mimeData.urls
-                                    operation["Tag"] = model["label"]
-                                    service.startOperationCall(operation)
-                                }
-
-                                Rectangle {
-                                    id: background
-                                    color: theme.textColor
-                                    anchors.fill: parent
-                                    radius: width/2
-                                    opacity: parent.underDrag ? 0.6 : 0.2
-                                    Behavior on opacity {
-                                        NumberAnimation {
-                                            duration: 250
-                                            easing.type: Easing.InOutQuad
-                                        }
-                                    }
-                                }
-                                Rectangle {
-                                    anchors {
-                                        fill: background
-                                        topMargin: 2
-                                        bottomMargin: -2
-                                    }
-                                    radius: width/2
-                                    color: "white"
-                                    opacity: 0.6
-                                }
-                                Rectangle {
-                                    color: parent.parent.checked ? theme.highlightColor : theme.textColor
-                                    radius: width/2
-                                    anchors.centerIn: parent
-                                    width: Math.min(parent.width, 14 + 100 * (model.count / tagCloud.totalCount))
-                                    height: width
-                                }
-                            }
-                            onClicked: checked = !checked
-                            onCheckedChanged: {
-                                var tags = metadataModel.queryProvider.tags
-                                if (checked) {
-                                    tags[tags.length] = model["label"];
-                                    metadataModel.queryProvider.tags = tags
-                                } else {
-                                    for (var i = 0; i < tags.length; ++i) {
-                                        if (tags[i] == model["label"]) {
-                                            tags.splice(i, 1);
-                                            metadataModel.queryProvider.tags = tags
-                                            break;
-                                        }
+                        onClicked: checked = !checked
+                        onCheckedChanged: {
+                            var tags = metadataModel.queryProvider.tags
+                            if (checked) {
+                                tags[tags.length] = model["label"];
+                                metadataModel.queryProvider.tags = tags
+                            } else {
+                                for (var i = 0; i < tags.length; ++i) {
+                                    if (tags[i] == model["label"]) {
+                                        tags.splice(i, 1);
+                                        metadataModel.queryProvider.tags = tags
+                                        break;
                                     }
                                 }
                             }
                         }
-                        PlasmaComponents.Label {
-                            id: tagLabel
-                            text: model.label
-                            anchors.verticalCenter: parent.verticalCenter
+
+                        DropArea {
+                            anchors.fill: parent
+                            property bool underDrag: false
+                            onDragEnter: underDrag = true
+                            onDragLeave: underDrag = false
+                            onDrop: {
+                                underDrag = false
+                                var service = metadataSource.serviceForSource("")
+                                print(service);
+                                var operation = service.operationDescription("tagResources")
+                                operation["ResourceUrls"] = event.mimeData.urls
+                                operation["Tag"] = model["label"]
+                                service.startOperationCall(operation)
+                            }
+                            Row {
+                                spacing: 8
+
+                                Item {
+                                    width: height
+                                    height: tagDelegate.height
+                                    Rectangle {
+                                        id: background
+                                        color: theme.textColor
+                                        anchors.fill: parent
+                                        radius: width/2
+                                        opacity: parent.underDrag ? 0.6 : 0.2
+                                        Behavior on opacity {
+                                            NumberAnimation {
+                                                duration: 250
+                                                easing.type: Easing.InOutQuad
+                                            }
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        anchors {
+                                            fill: background
+                                            topMargin: 2
+                                            bottomMargin: -2
+                                        }
+                                        radius: width/2
+                                        color: "white"
+                                        opacity: 0.6
+                                    }
+                                    Rectangle {
+                                        color: tagDelegate.checked ? theme.highlightColor : theme.textColor
+                                        radius: width/2
+                                        anchors.centerIn: parent
+                                        width: Math.min(parent.width, 14 + 100 * (model.count / tagCloud.totalCount))
+                                        height: width
+                                    }
+                                }
+
+                                PlasmaComponents.Label {
+                                    id: tagLabel
+                                    text: model.label
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
                         }
                     }
                 }
