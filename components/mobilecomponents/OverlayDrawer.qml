@@ -54,25 +54,8 @@ PlasmaComponents.Page {
     property alias open: browserFrame.open
 
 
-    MouseEventListener {
+    Item {
         id: mainPage
-        property int startMouseScreenX: 0
-        property int startMouseScreenY: 0
-        onPressed: {
-            startMouseScreenX = mouse.screenX
-            startMouseScreenY = mouse.screenY
-        }
-        onReleased: {
-            if (Math.abs(mouse.screenX - startMouseScreenX) > 20 ||
-                Math.abs(mouse.screenY - startMouseScreenY) > 20) {
-                return
-            }
-            if (browserFrame.state != "Hidden") {
-                browserFrame.state = "Hidden"
-            } else {
-                browserFrame.state = "Closed"
-            }
-        }
         anchors.fill: parent
     }
 
@@ -94,7 +77,7 @@ PlasmaComponents.Page {
             }
         }
 
-        state: "Hidden"
+        state: "Closed"
         onStateChanged: open = (state == "Open" || mouseEventListener.startState == "Open")
         property bool open: false
         onOpenChanged: openChangedTimer.restart()
@@ -227,13 +210,6 @@ PlasmaComponents.Page {
                 PropertyChanges {
                     target: browserFrame
                     x: root.width
-                }
-            },
-            State {
-                name: "Hidden"
-                PropertyChanges {
-                    target: browserFrame
-                    x: root.width + handleGraphics.width
                 }
             }
         ]
