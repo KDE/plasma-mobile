@@ -126,6 +126,7 @@ PlasmaApp::PlasmaApp()
         QRect rect = QApplication::desktop()->screenGeometry(m_mainView->screen());
         width = rect.width();
         height = rect.height();
+        connect(QApplication::desktop(), SIGNAL(resized(int)), this, SLOT(screenResized(int)));
     } else {
         QAction *action = KStandardAction::quit(qApp, SLOT(quit()), m_mainView);
         m_mainView->addAction(action);
@@ -453,6 +454,13 @@ void PlasmaApp::focusMainView()
 void PlasmaApp::activeWindowChanged(WId id)
 {
     m_homeScreen->setProperty("windowActive", (id == m_mainView->winId()));
+}
+
+void PlasmaApp::screenResized(int screen)
+{
+    Q_UNUSED(screen)
+
+    m_mainView->setFixedSize(QApplication::desktop()->screenGeometry(m_mainView->screen()).size());
 }
 
 void PlasmaApp::mainViewGeometryChanged()

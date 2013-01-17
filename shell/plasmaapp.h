@@ -128,6 +128,7 @@ protected:
 
 private Q_SLOTS:
     void cleanup();
+    void screenResized(int screen);
     void mainContainmentActivated();
     void manageNewContainment(Plasma::Containment *containment);
     void containmentDestroyed(QObject *);

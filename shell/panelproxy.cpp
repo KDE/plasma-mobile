@@ -95,6 +95,7 @@ void PanelProxy::setMainItem(QGraphicsObject *mainItem)
 
         mainItem->installEventFilter(this);
 
+        connect(mainItem, SIGNAL(widthChanged()), this, SLOT(syncMainItem()));
         //if this is called in Compenent.onCompleted we have to wait a loop the item is added to a scene
         QTimer::singleShot(0, this, SLOT(syncMainItem()));
         emit mainItemChanged();
