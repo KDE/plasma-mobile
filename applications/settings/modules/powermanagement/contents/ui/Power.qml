@@ -69,6 +69,10 @@ Item {
             id: batterySuspendConfig
             group: "SuspendSession"
         }
+        ActiveSettings.ConfigGroup {
+            id: batteryBrightnessConfig
+            group: "BrightnessControl"
+        }
     }
 
     ActiveSettings.ConfigGroup {
@@ -83,6 +87,10 @@ Item {
             id: acSuspendConfig
             group: "SuspendSession"
         }
+        ActiveSettings.ConfigGroup {
+            id: acBrightnessConfig
+            group: "BrightnessControl"
+        }
     }
 
     ActiveSettings.ConfigGroup {
@@ -96,6 +104,10 @@ Item {
         ActiveSettings.ConfigGroup {
             id: lowBatterySuspendConfig
             group: "SuspendSession"
+        }
+        ActiveSettings.ConfigGroup {
+            id: lowBatteryBrightnessConfig
+            group: "BrightnessControl"
         }
     }
 
@@ -125,6 +137,10 @@ Item {
             PlasmaComponents.Slider {
                 id: brightnessSlider
                 onValueChanged: {
+                    acBrightnessConfig.writeEntry("value", Math.round(value*100))
+                    batteryBrightnessConfig.writeEntry("value", Math.round(value*100))
+                    lowBatteryBrightnessConfig.writeEntry("value", Math.round(value*100))
+
                     var service = pmSource.serviceForSource("PowerDevil");
                     var operation = service.operationDescription("setBrightness");
 
@@ -139,7 +155,7 @@ Item {
 
 
         PlasmaExtras.Heading {
-            text: i18n("Lock screen")
+            text: i18n("Lock screen and Sleep")
             level: 2
         }
         Row {
@@ -211,6 +227,9 @@ Item {
         }
 
 
+        /*
+         * This is disabled for now:
+         * the sleep action is done by the lockscreen
         PlasmaExtras.Heading {
             text: i18n("Sleep")
             level: 2
@@ -251,7 +270,7 @@ Item {
                 opacity: enabled ? 1 : 0.6
                 text: i18np("%1 minute", "%1 minutes", suspendTimeSlider.value)
             }
-        }
+        }*/
     }
 
 }
