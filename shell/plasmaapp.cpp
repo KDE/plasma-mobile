@@ -127,6 +127,7 @@ PlasmaApp::PlasmaApp()
         width = rect.width();
         height = rect.height();
         connect(QApplication::desktop(), SIGNAL(resized(int)), this, SLOT(screenResized(int)));
+        m_mainView->setFixedSize(width, height);
     } else {
         QAction *action = KStandardAction::quit(qApp, SLOT(quit()), m_mainView);
         m_mainView->addAction(action);
@@ -138,6 +139,7 @@ PlasmaApp::PlasmaApp()
             width = qMax(width, geom.left(x).toInt());
             height = qMax(height, geom.right(geom.length() - x - 1).toInt());
         }
+        m_mainView->resize(width, height);
     }
 
     bool isFullScreen = args->isSet("fullscreen");
@@ -146,7 +148,6 @@ PlasmaApp::PlasmaApp()
     }
 
     setIsDesktop(isDesktop);
-    m_mainView->setFixedSize(width, height);
     m_mainView->move(0,0);
 
     KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-device");
