@@ -110,6 +110,9 @@ Item {
                 visible: devicesSource.data[udi]["Removable"] == true
                 iconSource: model["icon"]
                 onClicked: checked = true
+                Component.onCompleted: {
+                    checked = dirModel.url.indexOf(devicesSource.data[udi]["File Path"]) > 0
+                }
                 onCheckedChanged: {
                     if (checked) {
                         for (var i = 0; i < devicesFlow.children.length; ++i) {
