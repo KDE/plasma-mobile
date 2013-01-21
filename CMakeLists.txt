@@ -14,6 +14,7 @@ add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 find_package(Nepomuk REQUIRED)
 find_package(Soprano)
 find_package(QtMobility)
+find_package(LibKScreen)
 
 macro_log_feature(
    Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net"

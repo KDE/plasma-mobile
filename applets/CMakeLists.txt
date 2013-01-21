@@ -1,6 +1,8 @@
 installPackage(active-welcome org.kde.active.welcome)
 installPackage(notifications org.kde.active.notifications)
+if (LibKScreen_FOUND AND QTMOBILITY_SENSORS_FOUND AND X11_Xinput_FOUND)
 installPackage(orientation org.kde.active.orientation)
+endif()
 installPackage(powerbutton org.kde.active.powerbutton)
 installPackage(resourcelist org.kde.resourcelist)
 installPackage(digital-clock org.kde.digital-clock)

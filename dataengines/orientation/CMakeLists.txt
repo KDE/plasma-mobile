@@ -1,6 +1,6 @@
 project(orientationengine)
 
-find_package(LibKScreen)
+if (LibKScreen_FOUND AND QTMOBILITY_SENSORS_FOUND AND X11_Xinput_FOUND)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}
                     ${QTMOBILITY_INCLUDE_DIR}
@@ -29,3 +29,4 @@ install(FILES plasma-engine-orientation.desktop DESTINATION ${SERVICES_INSTALL_D
 install(FILES orientation.operations
         DESTINATION ${DATA_INSTALL_DIR}/plasma/services)
 
+endif()
