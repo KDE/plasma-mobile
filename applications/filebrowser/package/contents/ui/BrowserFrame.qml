@@ -293,22 +293,8 @@ Item {
                                     dragArea.enabled = true
                                 }
                             }
-                            onPressAndHold: {
-                                resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
-                                resourceInstance.title = model["label"]
-                                if (highlightFrame.opacity == 1) {
-                                    for (var i = 0; i < selectedModel.count; ++i) {
-                                        if ((model.url && model.url == selectedModel.get(i).url)) {
-                                            highlightFrame.opacity = 0
-                                            selectedModel.remove(i)
-                                            return
-                                        }
-                                    }
-                                } else {
-                                    highlightFrame.opacity = 1
-                                    selectedModel.append(model)
-                                }
-                            }
+                            onPressAndHold: highlightFrame.contains = !highlightFrame.contains
+
                             onClicked: openResource(model)
                         }
                         Component.onCompleted: {
