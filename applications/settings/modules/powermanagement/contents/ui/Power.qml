@@ -132,7 +132,7 @@ Item {
                 text: i18n("0%")
             }
             property int brightness: pmSource.data["PowerDevil"]["Screen Brightness"]
-            onBrightnessChanged: brightnessSlider.value = brightness
+            onBrightnessChanged: brightnessSlider.value = brightness/100
 
             PlasmaComponents.Slider {
                 id: brightnessSlider
