@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1
 
@@ -28,6 +28,8 @@ Item {
     height: buttonColumn.height
     property int minimumWidth: buttonColumn.width
     property int minimumHeight: buttonColumn.height
+    property int maximumWidth: buttonColumn.width
+    property int maximumHeight: buttonColumn.height
 
     PlasmaCore.DataSource {
         id: orientationSource
@@ -43,8 +45,8 @@ Item {
         id: buttonColumn
         spacing: 5
         IconButton {
-            width: 32
-            height: 32
+            width: theme.mediumIconSize
+            height: theme.mediumIconSize
             icon: QIcon("object-rotate-left")
 
             onClicked: {
