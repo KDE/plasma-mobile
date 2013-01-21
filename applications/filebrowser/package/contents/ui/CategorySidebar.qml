@@ -72,8 +72,4 @@ Item {
     }
 
 
-    PlasmaCore.DataModel {
-        id: devicesModel
-        dataSource: hotplugSource
-    }
 }

@@ -54,10 +54,10 @@ Item {
                 anchors.fill: parent
                 flat: false
                 iconSource: "go-up"
-                visible: currentUdi != "" &&
-                    devicesSource.data[currentUdi] &&
-                    dirModel.url.indexOf(devicesSource.data[currentUdi]["File Path"]) !== -1 &&
-                    "file://" + devicesSource.data[currentUdi]["File Path"] !== dirModel.url
+                visible: devicesFlow.currentUdi != "" &&
+                    devicesSource.data[devicesFlow.currentUdi] &&
+                    dirModel.url.indexOf(devicesSource.data[devicesFlow.currentUdi]["File Path"]) !== -1 &&
+                    "file://" + devicesSource.data[devicesFlow.currentUdi]["File Path"] !== dirModel.url
                 onClicked: dirModel.url = dirModel.url+"/.."
             }
         }
@@ -120,7 +120,7 @@ Item {
                             }
                         }
                         resourceBrowser.currentUdi = udi
-
+print("AAAA"+devicesSource)
                         if (devicesSource.data[udi]["Accessible"]) {
                             dirModel.url = devicesSource.data[udi]["File Path"]
 

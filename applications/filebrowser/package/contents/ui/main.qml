@@ -62,6 +62,37 @@ Image {
     DirModel {
         id: dirModel
     }
+    PlasmaCore.DataSource {
+        id: hotplugSource
+        engine: "hotplug"
+        connectedSources: sources
+    }
+    PlasmaCore.DataSource {
+        id: devicesSource
+        engine: "soliddevice"
+        connectedSources: hotplugSource.sources
+        onDataChanged: {
+            //access it here due to the async nature of the dataengine
+            if (resultsGrid.model == dirModel) {
+                var udi
+                var path
+
+                for (var i in devicesSource.connectedSources) {
+                    udi = devicesSource.connectedSources[i]
+                    path = devicesSource.data[udi]["File Path"]
+                    print(udi+dirModel.url.indexOf(udi))
+                    if (dirModel.url.indexOf(path) > 2) {
+                        resourceBrowser.currentUdi = udi
+                        break
+                    }
+                }
+            } else if (resultsGrid.model != dirModel && devicesSource.data[resourceBrowser.currentUdi]["File Path"] != "") {
+                dirModel.url = devicesSource.data[resourceBrowser.currentUdi]["File Path"]
+
+                fileBrowserRoot.model = dirModel
+            }
+        }
+    }
     //END model
 
     //BEGIN functions    
