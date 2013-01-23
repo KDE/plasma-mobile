@@ -107,6 +107,10 @@ QString AbstractQueryProvider::sparqlQuery() const
     return d->sparqlQuery;
 }
 
-
+void AbstractQueryProvider::requestRefresh()
+{
+    //Abstract implementation does nothing.
+    //use subclasses
+}
 
 #include "abstractqueryprovider.moc"

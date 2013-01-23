@@ -158,6 +158,13 @@ public:
 
     QObject *extraParameters() const;
 
+public Q_SLOTS:
+    /**
+     * Schedule a refresh for the query.
+     * If you are using Nepomuk2::Query::Query this should be normally not needed.
+     */
+    virtual void requestRefresh();
+
 Q_SIGNALS:
     void resourceTypeChanged();
     void mimeTypesChanged();
@@ -238,12 +245,6 @@ protected:
 
     QStringList tagStrings() const;
     QStringList mimeTypeStrings() const;
-
-    /**
-     * Schedule a refresh for the query.
-     * If you are using Nepomuk2::Query::Query this should be normally not needed.
-     */
-    void requestRefresh();
 
 private:
     BasicQueryProviderPrivate *const d;

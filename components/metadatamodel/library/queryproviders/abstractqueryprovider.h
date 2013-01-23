@@ -88,6 +88,14 @@ public:
      */
     QString sparqlQuery() const;
 
+public Q_SLOTS:
+    /**
+     * Schedule a refresh for the query.
+     * If you are using Nepomuk2::Query::Query this should be normally not needed.
+     * The default implementation does nothing.
+     */
+    virtual void requestRefresh();
+
 protected:
     /**
      * Set a query that will be used for popuplating the model.
