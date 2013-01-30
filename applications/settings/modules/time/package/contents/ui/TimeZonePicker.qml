@@ -73,10 +73,9 @@ Item {
             //bottom: parent.bottom
         }
         onTextChanged: {
-            print("update filter" + text);
+            //print("update filter" + text);
             //timeSettings.timeZoneFilterChanged(text);
             filterModel.filterRegExp = ".*"+text+".*"
-
         }
     }
 
