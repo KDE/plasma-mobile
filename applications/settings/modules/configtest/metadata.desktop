@@ -25,6 +25,7 @@ Name[x-test]=xxConfiguration Testxx
 Name[zh_TW]=設定測試
 Comment=Config QML Bindings
 Comment[da]=Konfigurér QML-bindinger
+Comment[de]=Einrichtung von QML-Bindungen
 Comment[el]=Διαμόρφωση QML δεσμεύσεων
 Comment[es]=Configurar vínculos QML
 Comment[et]=QML-i seoste seadistamine

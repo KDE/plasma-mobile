@@ -31,6 +31,7 @@ Name[zh_CN]=电源按钮
 Name[zh_TW]=電源按鈕
 Comment=Suspends the device
 Comment[da]=Suspenderer enheden
+Comment[de]=Versetzt das Gerät in den Ruhezustand
 Comment[el]=Αναστέλλει τη συσκευή
 Comment[es]=Suspende el dispositivo
 Comment[et]=Seadme viimine uneseisundisse
