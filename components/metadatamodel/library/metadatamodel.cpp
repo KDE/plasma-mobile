@@ -23,9 +23,6 @@
 
 #include <cmath>
 
-#include <QDBusConnection>
-#include <QDBusServiceWatcher>
-#include <QDBusConnectionInterface>
 #include <QTimer>
 
 #include <KDebug>
@@ -36,6 +33,7 @@
 #include <Nepomuk2/File>
 #include <Nepomuk2/Tag>
 #include <Nepomuk2/Variant>
+#include <Nepomuk2/ResourceManager>
 
 #include <Nepomuk2/Query/AndTerm>
 #include <Nepomuk2/Query/OrTerm>
@@ -77,14 +75,12 @@ public:
     void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val);
     void dataFormatChanged(const QPersistentModelIndex &index);
     void serviceRegistered(const QString &service);
+    void nepomukSystemStarted();
 
     MetadataModel *q;
 
     //query construction is completely delegated to this
     QWeakPointer<AbstractQueryProvider> queryProvider;
-
-    //To be sure that nepomuk is up, and watch when it goes up/down
-    QDBusServiceWatcher *queryServiceWatcher;
 
     //perform all the queries in this thread
     QueryThread *queryThread;
@@ -170,15 +166,9 @@ MetadataModel::MetadataModel(QObject *parent)
             this, SLOT(propertyChanged(Nepomuk2::Resource,Nepomuk2::Types::Property, QVariant)));
 
 
-    d->queryServiceWatcher = new QDBusServiceWatcher(QLatin1String("org.kde.nepomuk.services.nepomukqueryservice"),
-                        QDBusConnection::sessionBus(),
-                        QDBusServiceWatcher::WatchForRegistration,
-                        this);
-    connect(d->queryServiceWatcher, SIGNAL(serviceRegistered(QString)), this, SLOT(serviceRegistered(QString)));
+    connect(Nepomuk2::ResourceManager::instance(), SIGNAL(nepomukSystemStarted()), this, SLOT(nepomukSystemStarted()));
 
-    QDBusConnectionInterface* interface = d->queryServiceWatcher->connection().interface();
-
-    if (interface->isServiceRegistered("org.kde.nepomuk.services.nepomukqueryservice")) {
+    if (Nepomuk2::ResourceManager::instance()->initialized()) {
         connect(d->queryTimer, SIGNAL(timeout()), this, SLOT(doQuery()));
     }
 }
@@ -566,13 +556,13 @@ void MetadataModelPrivate::entriesRemoved(const QList<QUrl> &urls)
     emit q->countChanged();
 }
 
-void MetadataModelPrivate::serviceRegistered(const QString &service)
+void MetadataModelPrivate::nepomukSystemStarted()
 {
-    if (service == QLatin1String("org.kde.nepomuk.services.nepomukqueryservice")) {
-        QObject::disconnect(queryTimer, SIGNAL(timeout()), q, SLOT(doQuery()));
-        QObject::connect(queryTimer, SIGNAL(timeout()), q, SLOT(doQuery()));
-        doQuery();
-    }
+    QObject::disconnect(queryTimer, SIGNAL(timeout()), q, SLOT(doQuery()));
+    QObject::connect(queryTimer, SIGNAL(timeout()), q, SLOT(doQuery()));
+    //FIXME: is doQuery() always enoug?
+    //doQuery();
+    queryProvider.data()->requestRefresh();
 }
 
 #include "metadatamodel.moc"

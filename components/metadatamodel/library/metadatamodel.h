@@ -157,7 +157,7 @@ private:
     Q_PRIVATE_SLOT(d, void newEntriesDelayed())
     Q_PRIVATE_SLOT(d, void propertyChanged(Nepomuk2::Resource res, Nepomuk2::Types::Property prop, QVariant val))
     Q_PRIVATE_SLOT(d, void dataFormatChanged(const QPersistentModelIndex &index))
-    Q_PRIVATE_SLOT(d, void serviceRegistered(const QString &service))
+    Q_PRIVATE_SLOT(d, void nepomukSystemStarted())
 };
 
 #endif

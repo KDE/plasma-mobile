@@ -169,6 +169,7 @@ void CloudQueryProvider::doQuery()
             negation = true;
         }
         Nepomuk2::Resource acRes(activity, Nepomuk2::Vocabulary::KAO::Activity());
+        //kDebug() << "Asking for resources of activity" << activityId() << acRes.uri();
 
         if (negation) {
             query +=  ". FILTER(!bif:exists((select (1) where { <" + acRes.uri().toString() + "> <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#isRelated> ?r . }))) ";
