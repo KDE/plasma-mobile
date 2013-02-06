@@ -214,6 +214,7 @@ PlasmaComponents.Page {
                                         spacing: 8
                                         PlasmaComponents.Button {
                                             text: i18n("Delete")
+                                            width: Math.min(implicitWidth, mainFlickable.width / 2 - 8)
                                             onClicked: {
                                                 var service = metadataSource.serviceForSource("")
                                                 var operation = service.operationDescription("deleteTag")
@@ -223,6 +224,7 @@ PlasmaComponents.Page {
                                         }
                                         PlasmaComponents.Button {
                                             text: i18n("Cancel")
+                                            width: Math.min(implicitWidth, mainFlickable.width / 2 - 8)
                                             onClicked: {
                                                 slideAnim.to = -mainFlickable.width
                                                 slideAnim.running = true
