@@ -78,7 +78,7 @@ QString FileBrowser::viewerPackageForType(const QString &mimeType)
         return QString();
     }
 
-    KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("('%1' in MimeTypes or '%1' in Types) and 'Viewer' in SupportedComponents").arg(mimeType));
+    KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("('%1' in MimeTypes or '%1' in ResourceTypes) and 'Viewer' in SupportedComponents").arg(mimeType));
 
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
@@ -103,7 +103,7 @@ QString FileBrowser::browserPackageForType(const QString &type)
         return QString();
     }
 
-    KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("('%1' in MimeTypes or '%1' in Types) and 'Browser' in SupportedComponents").arg(type));
+    KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("('%1' in MimeTypes or '%1' in ResourceTypes) and 'Browser' in SupportedComponents").arg(type));
 
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {

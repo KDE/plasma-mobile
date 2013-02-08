@@ -29,6 +29,17 @@ import org.kde.draganddrop 1.0
 Item {
     anchors.fill: parent
 
+    MobileComponents.Package {
+        id: typePackage
+    }
+    Connections {
+        target: metadataModel.queryProvider
+        onResourceTypeChanged: {
+            typePackage.name = application.browserPackageForType(metadataModel.queryProvider.resourceType)
+            browserAddonLoader.source = typePackage.filePath("ui", "BrowserAddon.qml")
+        }
+    }
+
     Column {
         id: toolsColumn
         spacing: 4
@@ -58,6 +69,14 @@ Item {
 
         Loader {
             id: typeFilterLoader
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+        }
+
+        Loader {
+            id: browserAddonLoader
             anchors {
                 left: parent.left
                 right: parent.right

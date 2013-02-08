@@ -35,5 +35,5 @@ Type=QStringList
 Type=QStringList
 
 #Nepomuk types, such as nfo:Image
-[PropertyDef::Types]
+[PropertyDef::ResourceTypes]
 Type=QStringList

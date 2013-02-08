@@ -67,4 +67,5 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-Plasma-MainScript=ui/ViewerPage.qml
 MimeTypes=image/gif,image/jpeg,image/png,image/bmp,image/x-eps,image/x-ico,image/x-portable-bitmap,image/x-portable-graymap,image/x-portable-pixmap,image/x-xbitmap,image/x-xpixmap,
-SupportedComponents=Viewer
+ResourceTypes=nfo:Image
+SupportedComponents=Browser,Viewer
