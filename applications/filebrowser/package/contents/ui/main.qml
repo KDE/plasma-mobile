@@ -132,7 +132,7 @@ Image {
             dirModel.url = data.url
             fileBrowserRoot.model = dirModel
         } else if (!mainStack.busy) {
-            var packageName = application.viewerPackageForMimeType(data.mimeType)
+            var packageName = application.viewerPackageForType(data.mimeType)
             print("Package for mimetype " + data.mimeType + " " + packageName)
             if (packageName) {
                 partPackage.name = packageName

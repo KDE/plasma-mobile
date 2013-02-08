@@ -37,7 +37,8 @@ public:
     FileBrowser();
     virtual ~FileBrowser();
 
-    Q_INVOKABLE QString viewerPackageForMimeType(const QString &mimeType);
+    Q_INVOKABLE QString viewerPackageForType(const QString &mimeType);
+    Q_INVOKABLE QString browserPackageForType(const QString &type);
     Q_INVOKABLE void emptyTrash();
     Q_INVOKABLE void copy(const QVariantList &src, const QString &dest);
     Q_INVOKABLE void trash(const QVariantList &files);
