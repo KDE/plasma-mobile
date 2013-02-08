@@ -20,13 +20,13 @@
 import QtQuick 1.1
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.draganddrop 1.0
 
 
-Item {
+PlasmaComponents.Page {
     anchors.fill: parent
 
     MobileComponents.Package {
@@ -40,55 +40,58 @@ Item {
         }
     }
 
-    Column {
-        id: toolsColumn
-        spacing: 4
-        enabled: fileBrowserRoot.model == metadataModel
-        opacity: enabled ? 1 : 0.6
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
+    PlasmaExtras.ScrollArea {
+        anchors.fill: parent
+        Flickable {
+            id: mainFlickable
+            contentWidth: width
+            contentHeight: toolsColumn.height
+            Column {
+                id: toolsColumn
+                spacing: 4
+                enabled: fileBrowserRoot.model == metadataModel
+                opacity: enabled ? 1 : 0.6
+                width: mainFlickable.width
 
-        PlasmaExtraComponents.Heading {
-            text: i18n("Rating")
-            anchors {
-                top: parent.top
-                right: parent.right
-                rightMargin: theme.defaultFont.mSize.width
-            }
-        }
+                PlasmaExtras.Heading {
+                    text: i18n("Rating")
+                    anchors {
+                        top: parent.top
+                        right: parent.right
+                        rightMargin: theme.defaultFont.mSize.width
+                    }
+                }
 
-        MobileComponents.Rating {
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                leftMargin: theme.defaultFont.mSize.width
-            }
-            onScoreChanged: metadataModel.minimumRating = score
-        }
+                MobileComponents.Rating {
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        leftMargin: theme.defaultFont.mSize.width
+                    }
+                    onScoreChanged: metadataModel.minimumRating = score
+                }
 
-        Loader {
-            id: typeFilterLoader
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-        }
+                Loader {
+                    id: typeFilterLoader
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                }
 
-        Loader {
-            id: browserAddonLoader
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-        }
+                Loader {
+                    id: browserAddonLoader
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                }
 
-        Component.onCompleted: {
-            if (!exclusiveResourceType && exclusiveMimeTypes.length == 0) {
-                typeFilterLoader.source = "TypeFilter.qml"
+                Component.onCompleted: {
+                    if (!exclusiveResourceType && exclusiveMimeTypes.length == 0) {
+                        typeFilterLoader.source = "TypeFilter.qml"
+                    }
+                }
             }
         }
     }
-
-
 }

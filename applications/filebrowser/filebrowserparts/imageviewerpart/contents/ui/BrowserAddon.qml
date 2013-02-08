@@ -18,9 +18,33 @@
  */
 
 import QtQuick 1.1
+import org.kde.plasma.extras 0.1 as PlasmaExtras
 
-Rectangle {
-    color: "red"
-    width: 100
-    height: 400
+Column {
+    id: root
+
+    PlasmaExtras.Heading {
+        text: i18n("Resolution")
+        anchors {
+            right: parent.right
+            rightMargin: theme.defaultFont.mSize.width
+        }
+    }
+    Rectangle {
+        color: "red"
+        width: 100
+        height: 100
+    }
+    PlasmaExtras.Heading {
+        text: i18n("Aperture")
+        anchors {
+            right: parent.right
+            rightMargin: theme.defaultFont.mSize.width
+        }
+    }
+    Rectangle {
+        color: "blue"
+        width: 100
+        height: 300
+    }
 }
