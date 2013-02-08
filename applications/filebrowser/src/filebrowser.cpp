@@ -72,7 +72,7 @@ FileBrowser::~FileBrowser()
 {
 }
 
-QString FileBrowser::packageForMimeType(const QString &mimeType)
+QString FileBrowser::viewerPackageForMimeType(const QString &mimeType)
 {
     if (mimeType.isEmpty()) {
         return QString();
