@@ -29,6 +29,7 @@ import org.kde.draganddrop 1.0
 PlasmaComponents.Page {
     id: root
     anchors.fill: parent
+    clip: false
 
     property Item currentItem
 
@@ -43,11 +44,14 @@ PlasmaComponents.Page {
 
     PlasmaExtras.ScrollArea {
         anchors.fill: parent
+        clip: false
+        Component.onCompleted: mainFlickable.clip = false
 
         Flickable {
             id: mainFlickable
             contentWidth: width
             contentHeight: mainColumn.height
+            clip: false
 
             anchors.fill: parent
 
@@ -55,97 +59,9 @@ PlasmaComponents.Page {
                 id: mainColumn
                 spacing: 8
                 width: parent.width
-                Repeater {
-                    id: tagRepeater
-                    model: PlasmaCore.SortFilterModel {
-                        id: sortFilterModel
-                        sourceModel: MetadataModels.MetadataModel {
-                            id: tagCloud
-                            queryProvider: MetadataModels.CloudQueryProvider {
-                                cloudCategory: "nao:hasTag"
-                                resourceType: metadataModel.queryProvider.resourceType
-                                minimumRating: metadataModel.queryProvider.minimumRating
-                            }
-                        }
-                        sortRole: "label"
-                    }
-
-                    delegate: Row {
-                        spacing: 8
-                        MouseArea {
-                            width: theme.defaultFont.mSize.width * 10
-                            height: width
-                            property bool checked: false
-
-                            DropArea {
-                                anchors.fill: parent
-                                property bool underDrag: false
-                                onDragEnter: underDrag = true
-                                onDragLeave: underDrag = false
-                                onDrop: {
-                                    underDrag = false
-                                    var service = metadataSource.serviceForSource("")
-                                    print(service);
-                                    var operation = service.operationDescription("tagResources")
-                                    operation["ResourceUrls"] = event.mimeData.urls
-                                    operation["Tag"] = model["label"]
-                                    service.startOperationCall(operation)
-                                }
-
-                                Rectangle {
-                                    id: background
-                                    color: theme.textColor
-                                    anchors.fill: parent
-                                    radius: width/2
-                                    opacity: parent.underDrag ? 0.6 : 0.2
-                                    Behavior on opacity {
-                                        NumberAnimation {
-                                            duration: 250
-                                            easing.type: Easing.InOutQuad
-                                        }
-                                    }
-                                }
-                                Rectangle {
-                                    anchors {
-                                        fill: background
-                                        topMargin: 2
-                                        bottomMargin: -2
-                                    }
-                                    radius: width/2
-                                    color: "white"
-                                    opacity: 0.6
-                                }
-                                Rectangle {
-                                    color: parent.parent.checked ? theme.highlightColor : theme.textColor
-                                    radius: width/2
-                                    anchors.centerIn: parent
-                                    width: Math.min(parent.width, 14 + 100 * (model.count / tagCloud.totalCount))
-                                    height: width
-                                }
-                            }
-                            onClicked: checked = !checked
-                            onCheckedChanged: {
-                                var tags = metadataModel.queryProvider.tags
-                                if (checked) {
-                                    tags[tags.length] = model["label"];
-                                    metadataModel.queryProvider.tags = tags
-                                } else {
-                                    for (var i = 0; i < tags.length; ++i) {
-                                        if (tags[i] == model["label"]) {
-                                            tags.splice(i, 1);
-                                            metadataModel.queryProvider.tags = tags
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        PlasmaComponents.Label {
-                            id: tagLabel
-                            text: model.label
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                    }
+                Item {
+                    height: theme.defaultFont.mSize.height
+                    width: height
                 }
 
                 Row {
@@ -219,6 +135,178 @@ PlasmaComponents.Page {
                         id: tagLabel
                         text: i18n("New Tag")
                         anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+
+                Repeater {
+                    id: tagRepeater
+                    model: PlasmaCore.SortFilterModel {
+                        id: sortFilterModel
+                        sourceModel: MetadataModels.MetadataModel {
+                            id: tagCloud
+                            queryProvider: MetadataModels.CloudQueryProvider {
+                                cloudCategory: "nao:hasTag"
+                                resourceType: metadataModel.queryProvider.resourceType
+                                minimumRating: metadataModel.queryProvider.minimumRating
+                            }
+                        }
+                        sortRole: "label"
+                    }
+
+                    delegate: MouseArea {
+                        id: tagDelegate
+
+                        x: -mainFlickable.width
+
+                        width: mainFlickable.width * 3
+                        height: theme.defaultFont.mSize.width * 10
+                        property bool checked: false
+
+                        onReleased: {
+                            if (tagDelegate.x > -mainFlickable.width/2) {
+                                slideAnim.to = 0
+                            } else if (tagDelegate.x < -mainFlickable.width - mainFlickable.width/2) {
+                                slideAnim.to = -mainFlickable.width * 2
+                            } else {
+                                slideAnim.to = -mainFlickable.width
+                            }
+                            slideAnim.running = true
+                        }
+                        onClicked: checked = !checked
+                        onCheckedChanged: {
+                            var tags = metadataModel.queryProvider.tags
+                            if (checked) {
+                                tags[tags.length] = model["label"];
+                                metadataModel.queryProvider.tags = tags
+                            } else {
+                                for (var i = 0; i < tags.length; ++i) {
+                                    if (tags[i] == model["label"]) {
+                                        tags.splice(i, 1);
+                                        metadataModel.queryProvider.tags = tags
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        drag {
+                            target: tagDelegate
+                            axis: Drag.XAxis
+                            minimumX: -mainFlickable.width * 2
+                            maximumX: 0
+                        }
+
+                        PlasmaExtras.ConditionalLoader {
+                            width: mainFlickable.width
+                            height: childrenRect.height
+                            anchors.verticalCenter: parent
+                            x: tagDelegate.x > -mainFlickable.width ? 0 : mainFlickable.width * 2
+                            when: tagDelegate.x != -mainFlickable.width
+
+                            source: Component {
+                                Column {
+                                    PlasmaComponents.Label {
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        text: i18n("Delete tag \"%1\"?", model.label)
+                                    }
+                                    Row {
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        spacing: 8
+                                        PlasmaComponents.Button {
+                                            text: i18n("Delete")
+                                            width: Math.min(implicitWidth, mainFlickable.width / 2 - 8)
+                                            onClicked: {
+                                                var service = metadataSource.serviceForSource("")
+                                                var operation = service.operationDescription("deleteTag")
+                                                operation["Tag"] = model["label"]
+                                                service.startOperationCall(operation)
+                                            }
+                                        }
+                                        PlasmaComponents.Button {
+                                            text: i18n("Cancel")
+                                            width: Math.min(implicitWidth, mainFlickable.width / 2 - 8)
+                                            onClicked: {
+                                                slideAnim.to = -mainFlickable.width
+                                                slideAnim.running = true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        NumberAnimation {
+                            id: slideAnim
+                            target: tagDelegate
+                            property: "x"
+                            to: -mainFlickable.width
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+
+                        DropArea {
+                            anchors {
+                                fill: parent
+                                leftMargin: mainFlickable.width
+                                rightMargin: mainFlickable.width
+                            }
+                            property bool underDrag: false
+                            onDragEnter: underDrag = true
+                            onDragLeave: underDrag = false
+                            onDrop: {
+                                underDrag = false
+                                var service = metadataSource.serviceForSource("")
+                                print(service);
+                                var operation = service.operationDescription("tagResources")
+                                operation["ResourceUrls"] = event.mimeData.urls
+                                operation["Tag"] = model["label"]
+                                service.startOperationCall(operation)
+                            }
+                            Row {
+                                spacing: 8
+
+                                Item {
+                                    width: height
+                                    height: tagDelegate.height
+                                    Rectangle {
+                                        id: background
+                                        color: theme.textColor
+                                        anchors.fill: parent
+                                        radius: width/2
+                                        opacity: parent.underDrag ? 0.6 : 0.2
+                                        Behavior on opacity {
+                                            NumberAnimation {
+                                                duration: 250
+                                                easing.type: Easing.InOutQuad
+                                            }
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        anchors {
+                                            fill: background
+                                            topMargin: 2
+                                            bottomMargin: -2
+                                        }
+                                        radius: width/2
+                                        color: "white"
+                                        opacity: 0.6
+                                    }
+                                    Rectangle {
+                                        color: tagDelegate.checked ? theme.highlightColor : theme.textColor
+                                        radius: width/2
+                                        anchors.centerIn: parent
+                                        width: Math.min(parent.width, 14 + 100 * (model.count / tagCloud.totalCount))
+                                        height: width
+                                    }
+                                }
+
+                                PlasmaComponents.Label {
+                                    id: tagLabel
+                                    text: model.label
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+                        }
                     }
                 }
             }

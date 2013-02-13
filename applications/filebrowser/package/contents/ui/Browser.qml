@@ -70,12 +70,13 @@ MobileComponents.SplitDrawer {
 
     drawer: Item {
         id: sidebar
+        clip: false
 
         anchors.fill: parent
 
         Item {
             anchors.fill: parent
-            clip: true
+            clip: false
             PlasmaComponents.TabGroup {
                 id: sidebarTabGroup
                 width: fileBrowserRoot.width/4 - theme.defaultFont.mSize.width * 2
