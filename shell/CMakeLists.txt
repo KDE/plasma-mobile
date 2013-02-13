@@ -7,6 +7,7 @@ include_directories(${KDE4WORKSPACE_INCLUDE_DIR}
 
 include(KDE4Defaults)
 
+add_subdirectory(configupdates)
 
 set(plasma-device_SRCS
     activity.cpp

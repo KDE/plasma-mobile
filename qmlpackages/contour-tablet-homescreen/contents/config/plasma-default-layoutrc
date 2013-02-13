@@ -33,7 +33,7 @@ plugin=org.kde.networkmanagement
 [Containments][9][Applets][13]
 geometry=60,0,64,48
 immutability=1
-plugin=org.kde.active.notifications
+plugin=org.kde.notifications
 
 [Containments][9][Applets][14]
 geometry=90,4,120,24
