@@ -115,7 +115,7 @@ QString FileBrowser::browserPackageForType(const QString &type)
         } else if (!service->comment().isEmpty()) {
             description = service->comment();
         }
-        //kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
+        kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
         kDebug() << service->property("X-KDE-PluginInfo-Name") << "\t\t" << description.toLocal8Bit().data();
         return service->property("X-KDE-PluginInfo-Name").toString();
     }

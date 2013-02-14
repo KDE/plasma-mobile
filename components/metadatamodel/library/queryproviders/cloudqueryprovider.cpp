@@ -54,6 +54,7 @@ CloudQueryProvider::CloudQueryProvider(QObject* parent)
 {
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
+    roleNames[Resource] = "resource";
     roleNames[Count] = "count";
     roleNames[TotalCount] = "totalCount";
 
@@ -262,6 +263,21 @@ QVariant CloudQueryProvider::formatData(const Nepomuk2::Query::Result &row, cons
             }
         } else {
             return rawLabel;
+        }
+    }
+    case Resource: {
+        const QVariant rawLabel = row.additionalBinding("label").variant();
+        if (rawLabel.canConvert<Nepomuk2::Resource>()) {
+            return rawLabel.value<Nepomuk2::Resource>().uri();
+        } else if (!rawLabel.value<QUrl>().scheme().isEmpty()) {
+            const QUrl url = rawLabel.value<QUrl>();
+            if (url.scheme() == "nepomuk") {
+                return rawLabel;
+            } else {
+                return QString();
+            }
+        } else {
+            return QString();
         }
     }
     case Count:
