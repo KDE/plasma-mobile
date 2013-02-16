@@ -225,7 +225,23 @@ PlasmaComponents.Page {
             imageArea.delegate.source = path
             viewerPage.path = path
             resourceInstance.uri = path
+            preloadDummy1.source = fileBrowserRoot.model.get(currentIndex - 1).url
+            preloadDummy2.source = fileBrowserRoot.model.get(currentIndex + 1).url
         }
+    }
+
+    FullScreenDelegate {
+        id: preloadDummy1
+        width: imageArea.width
+        height: imageArea.height
+        z: -1
+    }
+
+    FullScreenDelegate {
+        id: preloadDummy2
+        width: imageArea.width
+        height: imageArea.height
+        z: -1
     }
 
     states: [
