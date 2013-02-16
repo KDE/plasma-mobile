@@ -107,6 +107,7 @@ PlasmaComponents.Page {
                 quickBrowserBar.positionViewAtIndex(index, ListView.Center)
             //don't know where it is, just load
             } else {
+                console.log("loadResource loading from url: " + resourceData.url)
                 imageArea.delegate.source = resourceData.url
             }
         }
@@ -146,6 +147,7 @@ PlasmaComponents.Page {
         Connections {
             target: imageArea.delegate
             onDeltaChanged: {
+                console.log("MouseEventListener id:imageArea, deltaChanged: " + imageArea.delegate.delta)
                 imageArea.oldDelegate.delta = imageArea.delegate.delta
                 if (imageArea.delegate.delta > 0) {
                     imageArea.oldDelegate.source = fileBrowserRoot.model.get(quickBrowserBar.currentIndex + 1).url
@@ -170,6 +172,7 @@ PlasmaComponents.Page {
                     viewerPage.state = "toolsOpen"
                 }
             } else if (delegate.delta != 0 && delegate.doSwitch) {
+                console.log("Switching delegates...")
                 oldDelegate = delegate
                 delegate = (delegate == delegate1) ? delegate2 : delegate1
                 switchAnimation.running = true
@@ -217,6 +220,7 @@ PlasmaComponents.Page {
         id: quickBrowserBar
         model: fileBrowserRoot.model
         onCurrentIndexChanged: {
+            console.log("QuickBrowserBar currentIndex changed: " + currentIndex)
             var path = fileBrowserRoot.model.get(currentIndex).url
             imageArea.delegate.source = path
             viewerPage.path = path
