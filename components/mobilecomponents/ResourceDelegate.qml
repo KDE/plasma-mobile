@@ -26,8 +26,8 @@ Item {
     property string className: model["className"] ? model["className"] : "FileDataObject"
     property string genericClassName: model["genericClassName"] ? model["genericClassName"] : "FileDataObject"
 
-    implicitWidth: itemLoader.item.implicitWidth
-    implicitHeight: itemLoader.item.implicitHeight
+    implicitWidth: itemLoader.item ? itemLoader.item.implicitWidth : 0
+    implicitHeight: itemLoader.item ? itemLoader.item.implicitHeight : 0
 
     signal clicked(variant mouse)
     signal pressed(variant mouse)
