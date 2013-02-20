@@ -32,8 +32,6 @@ Item {
     }
     height: mainColumn.height
 
-    property Item currentItem
-
     MetadataModels.MetadataModel {
         id: artistsModel
         queryProvider: MetadataModels.CloudQueryProvider {
@@ -61,30 +59,12 @@ Item {
         }
     }
 
-    PlasmaComponents.Highlight {
-        id: highlight
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-        opacity: currentItem == undefined ? 0 : 1
-        y: root.mapFromItem(root.currentItem, 0, 0).y + currentItem.height/2 - height/2
-        height: theme.defaultFont.mSize.height * 2
-        Behavior on y {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
-    }
-
     Column {
         id: mainColumn
 
         anchors {
             left: parent.left
             right: parent.right
-            leftMargin: theme.defaultFont.mSize.width
         }
 
         MouseArea {
@@ -115,6 +95,8 @@ Item {
             }
         }
         PlasmaExtras.ConditionalLoader {
+            id: artistsLoader
+            property Item currentItem
             anchors {
                 left: parent.left
                 right: parent.right
@@ -126,6 +108,21 @@ Item {
                 NumberAnimation {
                     duration: 250
                     easing.type: Easing.InOutQuad
+                }
+            }
+            PlasmaComponents.Highlight {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                opacity: parent.currentItem == undefined ? 0 : 1
+                y: parent.mapFromItem(parent.currentItem, 0, 0).y + parent.currentItem.height/2 - height/2
+                height: theme.defaultFont.mSize.height * 2
+                Behavior on y {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
             source: Component {
@@ -140,17 +137,21 @@ Item {
                         delegate : PlasmaComponents.Label {
                             id: artistDelegate
                             text: i18nc("name and count", "%1 (%2)", label, count)
-                            width: artistList.width
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                                leftMargin: theme.defaultFont.mSize.width
+                            }
                             elide: Text.ElideRight
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
                                     if (metadataModel.queryProvider.extraParameters["nmm:performer"] != label) {
                                         metadataModel.queryProvider.extraParameters["nmm:performer"] = resource
-                                        root.currentItem = artistDelegate
+                                        artistsLoader.currentItem = artistDelegate
                                     } else {
                                         metadataModel.queryProvider.extraParameters["nmm:performer"] = ""
-                                        root.currentItem = null
+                                        artistsLoader.currentItem = null
                                     }
                                 }
                             }
@@ -189,6 +190,8 @@ Item {
         }
 
         PlasmaExtras.ConditionalLoader {
+            id: albumsLoader
+            property Item currentItem
             anchors {
                 left: parent.left
                 right: parent.right
@@ -200,6 +203,21 @@ Item {
                 NumberAnimation {
                     duration: 250
                     easing.type: Easing.InOutQuad
+                }
+            }
+            PlasmaComponents.Highlight {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                opacity: parent.currentItem == undefined ? 0 : 1
+                y: parent.mapFromItem(parent.currentItem, 0, 0).y + parent.currentItem.height/2 - height/2
+                height: theme.defaultFont.mSize.height * 2
+                Behavior on y {
+                    NumberAnimation {
+                        duration: 250
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
             source: Component {
@@ -215,17 +233,21 @@ Item {
                         delegate : PlasmaComponents.Label {
                             id: albumDelegate
                             text: i18nc("name and count", "%1 (%2)", label, count)
-                            width: albumList.width
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                                leftMargin: theme.defaultFont.mSize.width
+                            }
                             elide: Text.ElideRight
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
                                     if (metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] != label) {
                                         metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] = resource
-                                        root.currentItem = albumDelegate
+                                        albumsLoader.currentItem = albumDelegate
                                     } else {
                                         metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] = ""
-                                        root.currentItem = undefined
+                                        albumsLoader.currentItem = undefined
                                     }
                                 }
                             }
