@@ -18,80 +18,203 @@
  */
 
 import QtQuick 1.1
+import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.metadatamodels 0.1 as MetadataModels
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
-Column {
+Item {
     id: root
 
     anchors {
         left: parent.left
         right: parent.right
     }
+    height: mainColumn.height
 
-    PlasmaExtras.Heading {
-        text: i18n("Artist")
+    property Item currentItem
+
+
+    PlasmaComponents.Highlight {
+        id: highlight
         anchors {
+            left: parent.left
             right: parent.right
-            rightMargin: theme.defaultFont.mSize.width
         }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: artistList.visible = !artistList.visible
+        opacity: currentItem == undefined ? 0 : 1
+        y: root.mapFromItem(root.currentItem, 0, 0).y + currentItem.height/2 - height/2
+        height: theme.defaultFont.mSize.height * 2
+        Behavior on y {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
         }
     }
+
     Column {
-        id: artistList
-        visible: false
-        Repeater {
-            model: MetadataModels.MetadataModel {
-                    queryProvider: MetadataModels.CloudQueryProvider {
-                        cloudCategory: "nmm:performer"
-                        resourceType: "nfo:Audio"
-                        minimumRating: metadataModel.queryProvider.minimumRating
+        id: mainColumn
+
+        anchors {
+            left: parent.left
+            right: parent.right
+            leftMargin: theme.defaultFont.mSize.width
+        }
+
+        MouseArea {
+            id: artistHeading
+            property bool open: false
+            onClicked: artistHeading.open = !artistHeading.open
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: childrenRect.height
+            PlasmaExtras.Heading {
+                text: i18n("Artist")
+                PlasmaCore.IconItem {
+                    source: artistHeading.open ? "go-down" : "go-next"
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                        right: parent.left
                     }
+                    width: height
                 }
-            delegate : PlasmaComponents.Label {
-                text: label
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (metadataModel.queryProvider.extraParameters["nmm:performer"] != label) {
-                            metadataModel.queryProvider.extraParameters["nmm:performer"] = label
-                        } else {
-                            metadataModel.queryProvider.extraParameters["nmm:performer"] = ""
+                anchors {
+                    right: parent.right
+                    rightMargin: theme.defaultFont.mSize.width
+                }
+            }
+        }
+        PlasmaExtras.ConditionalLoader {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: item && artistHeading.open ? item.implicitHeight : 0
+            clip: true
+            when: artistHeading.open
+            Behavior on height {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            source: Component {
+                Column {
+                    id: artistList
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    Repeater {
+                        model: MetadataModels.MetadataModel {
+                                queryProvider: MetadataModels.CloudQueryProvider {
+                                    cloudCategory: "nmm:performer"
+                                    resourceType: "nfo:Audio"
+                                    minimumRating: metadataModel.queryProvider.minimumRating
+                                }
+                            }
+                        delegate : PlasmaComponents.Label {
+                            id: artistDelegate
+                            text: label
+                            width: artistList.width
+                            elide: Text.ElideRight
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: {
+                                    if (metadataModel.queryProvider.extraParameters["nmm:performer"] != label) {
+                                        metadataModel.queryProvider.extraParameters["nmm:performer"] = label
+                                        root.currentItem = artistDelegate
+                                    } else {
+                                        metadataModel.queryProvider.extraParameters["nmm:performer"] = ""
+                                        root.currentItem = null
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-    }
 
-    PlasmaExtras.Heading {
-        text: i18n("Album")
-        anchors {
-            right: parent.right
-            rightMargin: theme.defaultFont.mSize.width
-        }
         MouseArea {
-            anchors.fill: parent
-            onClicked: albumList.visible = !albumList.visible
+            id: albumHeading
+            property bool open: false
+            onClicked: albumHeading.open = !albumHeading.open
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: childrenRect.height
+            PlasmaExtras.Heading {
+                text: i18n("Album")
+                PlasmaCore.IconItem {
+                    source: albumHeading.open ? "go-down" : "go-next"
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                        right: parent.left
+                    }
+                    width: height
+                }
+                anchors {
+                    right: parent.right
+                    rightMargin: theme.defaultFont.mSize.width
+                }
+            }
         }
-    }
-    Column {
-        id: albumList
-        visible: false
-        Repeater {
-            model: MetadataModels.MetadataModel {
-                    queryProvider: MetadataModels.CloudQueryProvider {
-                        cloudCategory: "nmm:musicAlbum"
-                        resourceType: "nfo:Audio"
-                        minimumRating: metadataModel.queryProvider.minimumRating
+
+        PlasmaExtras.ConditionalLoader {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: item && albumHeading.open ? item.implicitHeight : 0
+            clip: true
+            when: albumHeading.open
+            Behavior on height {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            source: Component {
+                Column {
+                    id: albumList
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    Repeater {
+                        model: MetadataModels.MetadataModel {
+                                queryProvider: MetadataModels.CloudQueryProvider {
+                                    cloudCategory: "nmm:musicAlbum"
+                                    resourceType: "nfo:Audio"
+                                    minimumRating: metadataModel.queryProvider.minimumRating
+                                }
+                            }
+                        delegate : PlasmaComponents.Label {
+                            id: albumDelegate
+                            text: label
+                            width: albumList.width
+                            elide: Text.ElideRight
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: {
+                                    if (metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] != label) {
+                                        metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] = label
+                                        root.currentItem = albumDelegate
+                                    } else {
+                                        metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] = ""
+                                        root.currentItem = undefined
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-            delegate : PlasmaComponents.Label {
-                text: label
             }
         }
     }
