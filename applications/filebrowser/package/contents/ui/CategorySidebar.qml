@@ -41,6 +41,7 @@ PlasmaComponents.Page {
     }
 
     PlasmaExtras.ScrollArea {
+        id: scroll
         anchors.fill: parent
         Flickable {
             id: mainFlickable

@@ -25,6 +25,11 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 Column {
     id: root
 
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
+
     PlasmaExtras.Heading {
         text: i18n("Artist")
         anchors {
