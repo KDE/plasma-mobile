@@ -34,6 +34,32 @@ Item {
 
     property Item currentItem
 
+    MetadataModels.MetadataModel {
+        id: artistsModel
+        queryProvider: MetadataModels.CloudQueryProvider {
+            cloudCategory: "nmm:performer"
+            resourceType: "nfo:Audio"
+            minimumRating: metadataModel.queryProvider.minimumRating
+        }
+    }
+    MetadataModels.MetadataModel {
+        id: albumsModel
+        queryProvider: MetadataModels.CloudQueryProvider {
+            cloudCategory: "nmm:musicAlbum"
+            resourceType: "nfo:Audio"
+            minimumRating: metadataModel.queryProvider.minimumRating
+        }
+    }
+    Connections {
+        target: metadataModel.queryProvider.extraParameters
+        onValueChanged: {
+            if (key == "nmm:performer") {
+                albumsModel.queryProvider.extraParameters["nmm:performer"] = value
+            } else if (key == "nmm:musicAlbum") {
+                artistsModel.queryProvider.extraParameters["nmm:musicAlbum"] = value
+            }
+        }
+    }
 
     PlasmaComponents.Highlight {
         id: highlight
@@ -70,8 +96,9 @@ Item {
                 right: parent.right
             }
             height: childrenRect.height
+            visible: artistsModel.count > 0
             PlasmaExtras.Heading {
-                text: i18n("Artist")
+                text: i18n("Artists (%1)", artistsModel.count)
                 PlasmaCore.IconItem {
                     source: artistHeading.open ? "go-down" : "go-next"
                     anchors {
@@ -109,16 +136,10 @@ Item {
                         right: parent.right
                     }
                     Repeater {
-                        model: MetadataModels.MetadataModel {
-                                queryProvider: MetadataModels.CloudQueryProvider {
-                                    cloudCategory: "nmm:performer"
-                                    resourceType: "nfo:Audio"
-                                    minimumRating: metadataModel.queryProvider.minimumRating
-                                }
-                            }
+                        model: artistsModel
                         delegate : PlasmaComponents.Label {
                             id: artistDelegate
-                            text: label
+                            text: i18nc("name and count", "%1 (%2)", label, count)
                             width: artistList.width
                             elide: Text.ElideRight
                             MouseArea {
@@ -148,8 +169,9 @@ Item {
                 right: parent.right
             }
             height: childrenRect.height
+            visible: albumsModel.count > 0
             PlasmaExtras.Heading {
-                text: i18n("Album")
+                text: i18n("Albums (%1)", albumsModel.count)
                 PlasmaCore.IconItem {
                     source: albumHeading.open ? "go-down" : "go-next"
                     anchors {
@@ -187,26 +209,12 @@ Item {
                         left: parent.left
                         right: parent.right
                     }
-                    Connections {
-                        target: metadataModel.queryProvider.extraParameters
-                        onValueChanged: {
-                            if (key == "nmm:performer") {
-                                albumRepeater.model.queryProvider.extraParameters["nmm:performer"] = value
-                            }
-                        }
-                    }
                     Repeater {
                         id: albumRepeater
-                        model: MetadataModels.MetadataModel {
-                                queryProvider: MetadataModels.CloudQueryProvider {
-                                    cloudCategory: "nmm:musicAlbum"
-                                    resourceType: "nfo:Audio"
-                                    minimumRating: metadataModel.queryProvider.minimumRating
-                                }
-                            }
+                        model: albumsModel
                         delegate : PlasmaComponents.Label {
                             id: albumDelegate
-                            text: label
+                            text: i18nc("name and count", "%1 (%2)", label, count)
                             width: albumList.width
                             elide: Text.ElideRight
                             MouseArea {
