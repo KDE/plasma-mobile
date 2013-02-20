@@ -148,6 +148,9 @@ void CloudQueryProvider::doQuery()
     if (parameters && parameters->size() > 0) {
         foreach (const QString &key, parameters->keys()) {
             QString parameter = parameters->value(key).toString();
+            if (parameter.isEmpty()) {
+                continue;
+            }
             bool negation = false;
             if (parameter.startsWith('!')) {
                 parameter = parameter.remove(0, 1);
