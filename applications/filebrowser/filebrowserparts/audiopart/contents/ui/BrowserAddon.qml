@@ -125,7 +125,7 @@ Item {
                                 anchors.fill: parent
                                 onClicked: {
                                     if (metadataModel.queryProvider.extraParameters["nmm:performer"] != label) {
-                                        metadataModel.queryProvider.extraParameters["nmm:performer"] = label
+                                        metadataModel.queryProvider.extraParameters["nmm:performer"] = resource
                                         root.currentItem = artistDelegate
                                     } else {
                                         metadataModel.queryProvider.extraParameters["nmm:performer"] = ""
@@ -187,7 +187,16 @@ Item {
                         left: parent.left
                         right: parent.right
                     }
+                    Connections {
+                        target: metadataModel.queryProvider.extraParameters
+                        onValueChanged: {
+                            if (key == "nmm:performer") {
+                                albumRepeater.model.queryProvider.extraParameters["nmm:performer"] = value
+                            }
+                        }
+                    }
                     Repeater {
+                        id: albumRepeater
                         model: MetadataModels.MetadataModel {
                                 queryProvider: MetadataModels.CloudQueryProvider {
                                     cloudCategory: "nmm:musicAlbum"
@@ -204,7 +213,7 @@ Item {
                                 anchors.fill: parent
                                 onClicked: {
                                     if (metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] != label) {
-                                        metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] = label
+                                        metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] = resource
                                         root.currentItem = albumDelegate
                                     } else {
                                         metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] = ""

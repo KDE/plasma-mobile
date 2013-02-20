@@ -154,10 +154,21 @@ void CloudQueryProvider::doQuery()
                 negation = true;
             }
 
-            if (negation) {
-                query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " ?" + key + "Param . FILTER(bif:contains(?" + key + "Param, \"'" + parameter + "'\")) . }))) ";
+            QUrl parameterUrl(parameter);
+            if (parameterUrl.scheme() == "nepomuk") {
+                if (negation) {
+                    query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " <" + parameter + "> . }))) ";
+                } else {
+                    query += " . ?r " + key + " <" + parameter + "> ";
+                }
             } else {
-                query += " . ?r " + key + " ?" + key + "Param . FILTER(bif:contains(?" + key + "Param, \"'" + parameter + "'\")) ";
+                QString stringKey = key;
+                stringKey.replace(":", "_");
+                if (negation) {
+                    query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " ?" + stringKey + "Param . FILTER(bif:contains(?" + stringKey + "Param, \"'" + parameter + "'\")) . }))) ";
+                } else {
+                    query += " . ?r " + key + " ?" + stringKey + "Param . FILTER(bif:contains(?" + stringKey + "Param, \"'" + parameter + "'\")) ";
+                }
             }
         }
     }
