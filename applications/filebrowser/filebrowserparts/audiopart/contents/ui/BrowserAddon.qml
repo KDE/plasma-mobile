@@ -146,7 +146,7 @@ Item {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    if (metadataModel.queryProvider.extraParameters["nmm:performer"] != label) {
+                                    if (metadataModel.queryProvider.extraParameters["nmm:performer"] != resource) {
                                         metadataModel.queryProvider.extraParameters["nmm:performer"] = resource
                                         artistsLoader.currentItem = artistDelegate
                                     } else {
@@ -242,7 +242,7 @@ Item {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    if (metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] != label) {
+                                    if (metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] != resource) {
                                         metadataModel.queryProvider.extraParameters["nmm:musicAlbum"] = resource
                                         albumsLoader.currentItem = albumDelegate
                                     } else {
