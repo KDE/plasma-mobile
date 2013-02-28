@@ -149,7 +149,6 @@ PlasmaComponents.Page {
                             id: metadataTimelineModel
                             queryProvider: MetadataModels.TimelineQueryProvider {
                                 level: MetadataModels.TimelineQueryProvider.Year
-                                //queryString: "pdf"
                                 resourceType: metadataModel.queryProvider.resourceType
                                 tags: metadataModel.queryProvider.tags
                                 minimumRating: metadataModel.queryProvider.minimumRating

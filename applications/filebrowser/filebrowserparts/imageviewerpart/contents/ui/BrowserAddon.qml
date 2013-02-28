@@ -19,32 +19,68 @@
 
 import QtQuick 1.1
 import org.kde.plasma.extras 0.1 as PlasmaExtras
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
-Column {
+Item {
     id: root
 
-    PlasmaExtras.Heading {
-        text: i18n("Resolution")
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
+    height: mainColumn.height
+
+    Column {
+        id: mainColumn
+
         anchors {
+            left: parent.left
             right: parent.right
-            rightMargin: theme.defaultFont.mSize.width
         }
-    }
-    Rectangle {
-        color: "red"
-        width: 100
-        height: 100
-    }
-    PlasmaExtras.Heading {
-        text: i18n("Aperture")
-        anchors {
-            right: parent.right
-            rightMargin: theme.defaultFont.mSize.width
+
+        PlasmaExtras.Heading {
+            text: i18n("Size")
+            anchors {
+                right: parent.right
+                rightMargin: theme.defaultFont.mSize.width
+            }
         }
-    }
-    Rectangle {
-        color: "blue"
-        width: 100
-        height: 300
+        Component.onDestruction: metadataModel.queryProvider.extraQueryString = ""
+        PlasmaComponents.ButtonColumn {
+            exclusive: true
+            spacing: 4
+            PlasmaComponents.RadioButton {
+                text: i18n("Any size")
+                onCheckedChanged: {
+                    if (checked) {
+                        metadataModel.queryProvider.extraQueryString = ""
+                    }
+                }
+            }
+            PlasmaComponents.RadioButton {
+                text: i18n("Small")
+                onCheckedChanged: {
+                    if (checked) {
+                        metadataModel.queryProvider.extraQueryString = "width<600"
+                    }
+                }
+            }
+            PlasmaComponents.RadioButton {
+                text: i18n("Medium")
+                onCheckedChanged: {
+                    if (checked) {
+                        metadataModel.queryProvider.extraQueryString = "width>600 and width<2000"
+                    }
+                }
+            }
+            PlasmaComponents.RadioButton {
+                text: i18n("Large")
+                onCheckedChanged: {
+                    if (checked) {
+                        metadataModel.queryProvider.extraQueryString = "width>2000"
+                    }
+                }
+            }
+        }
     }
 }

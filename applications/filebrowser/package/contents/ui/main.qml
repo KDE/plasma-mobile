@@ -46,8 +46,11 @@ Image {
         id: metadataModel
         queryProvider: MetadataModels.ResourceQueryProvider {
             sortBy: [userTypes.sortFields[metadataModel.queryProvider.resourceType]]
-            //sortOrder: Qt.DescendingOrder
-            //queryString: "pdf"
+            //This query string part is set by the user in the search field
+            property string userQueryString
+            //this query string part may be set by Browser addons
+            property string extraQueryString
+            queryString: userQueryString + (extraQueryString ? (" " + extraQueryString) : "")
             resourceType: exclusiveResourceType
             mimeTypes: exclusiveMimeTypes
         }
