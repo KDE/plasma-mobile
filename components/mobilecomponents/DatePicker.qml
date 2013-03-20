@@ -98,6 +98,7 @@ PlasmaCore.FrameSvgItem {
                 property int ownIndex: index
                 text: index+1
                 font.pointSize: 20
+                opacity: PathView.itemOpacity
             }
         }
         PlasmaCore.SvgItem {
@@ -125,6 +126,7 @@ PlasmaCore.FrameSvgItem {
                 property int ownIndex: index
                 text: months[index]
                 font.pointSize: 20
+                opacity: PathView.itemOpacity
             }
             width: monthPlaceHolder.width
             Text {

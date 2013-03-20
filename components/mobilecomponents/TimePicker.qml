@@ -104,6 +104,7 @@ PlasmaCore.FrameSvgItem {
                 property int ownIndex: index
                 text: !root.twentyFour && index == 0 ? "12" : clockRow.twoDigitString(index)
                 font.pointSize: 20
+                opacity: PathView.itemOpacity
             }
             onSelectedIndexChanged: {
                 if (selectedIndex > -1) {
@@ -188,6 +189,7 @@ PlasmaCore.FrameSvgItem {
                 property int ownIndex: index
                 text: meridiae
                 font.pointSize: 20
+                opacity: PathView.itemOpacity
             }
             currentIndex: hours > 12 ? 1 : 0
             onSelectedIndexChanged: {
