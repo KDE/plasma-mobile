@@ -33,7 +33,7 @@ ActionReply IntegrationHelper::enable(const QVariantMap &args)
 {
     Q_UNUSED(args)
     QStringList enableArgs;
-    enableArgs << "ar" << "-r" << "http://repo.pub.meego.com//Project:/KDE:/Integration/Project_KDE_Devel_CE_UX_PlasmaActive_i586/Project:KDE:Integration.repo";
+    enableArgs << "ar" << "-r" << "http://repo.merproject.org/obs/kde:/devel:/ux:/integration/latest_i586/kde:devel:ux:integration.repo";
 
     int rv = QProcess::execute("zypper", enableArgs);
 
