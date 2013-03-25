@@ -188,7 +188,6 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
                 creator->createAgent(QLatin1String("akonadi_kalarm_resource"), this);
             }
         }
-        scheduleSourcesUpdated();
     }
 }
 
