@@ -41,6 +41,7 @@ public:
     AlarmsEngine(QObject* parent, const QVariantList& args);
     ~AlarmsEngine();
 
+    void init();
     Plasma::Service *serviceForSource(const QString &source);
 
 protected:
