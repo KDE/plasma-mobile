@@ -114,6 +114,7 @@ AlarmsEngine::~AlarmsEngine()
 
 void AlarmsEngine::calendarCreated(CalendarCreator *creator)
 {
+    Q_UNUSED(creator)
     Akonadi::Collection alarmCollection(Akonadi::Collection::root());
     alarmCollection.setContentMimeTypes(QStringList() << KAlarmCal::MIME_ACTIVE);
 
