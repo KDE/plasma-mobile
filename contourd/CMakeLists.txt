@@ -121,9 +121,9 @@ target_link_libraries(
   ${NEPOMUK_LIBRARIES}
   ${NEPOMUK_QUERY_LIBRARIES}
   ${ADDITIONAL_LINK_LIBRARIES}
-  kworkspace
-  solidcontrol
-  solidcontrolifaces
+  ${KDE4WORKSPACE_KWORKSPACE_LIBRARY}
+  ${KDE4WORKSPACE_SOLIDCONTROL_LIBRARY}
+  ${KDE4WORKSPACE_SOLIDCONTROLIFACES_LIBRARY}
   # QtLocation
   # QtContacts
   # QtSensors
