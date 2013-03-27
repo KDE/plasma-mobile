@@ -18,9 +18,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
+import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 Item {
     id: powerbutton
@@ -35,9 +35,9 @@ Item {
     }
 
 
-    IconButton {
+    PlasmaComponents.ToolButton {
         anchors.fill: parent
-        icon: QIcon("system-suspend")
+        iconSource: "system-suspend"
 
         onClicked: {
             print("suspendbutton pressAndHold");
