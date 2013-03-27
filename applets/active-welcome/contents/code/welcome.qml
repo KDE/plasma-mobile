@@ -19,9 +19,8 @@
  */
 
 import QtQuick 1.0
-import org.kde.qtextracomponents 0.1
-import org.kde.plasma.mobilecomponents 0.1
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
 Item {
     id: welcome
@@ -57,22 +56,34 @@ Item {
         }
     }
 
-    IconButton {
+    PlasmaComponents.ToolButton {
         id: previousIcon
-        icon: QIcon("go-previous")
-        onClicked: previousPage();
 
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+        }
+        width: theme.iconSizes.desktop
+        height: theme.iconSizes.desktop
+
+        iconSource: "go-previous"
+
+        onClicked: previousPage();
     }
 
-    IconButton {
+    PlasmaComponents.ToolButton {
         id: nextIcon
-        icon: QIcon("go-next")
-        onClicked: nextPage();
 
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+        }
+        width: theme.iconSizes.desktop
+        height: theme.iconSizes.desktop
+
+        iconSource: "go-next"
+
+        onClicked: nextPage();
     }
 
     StartPage {
