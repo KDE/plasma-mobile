@@ -13,7 +13,7 @@ add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 
 find_package(Nepomuk REQUIRED)
 find_package(Soprano)
-find_package(QtMobility)
+find_package(QtMobility COMPONENTS Sensors)
 find_package(LibKScreen)
 
 macro_log_feature(
@@ -28,9 +28,7 @@ macro_log_feature(
     TRUE "" ""
     )
 
-if(NOT X11_Xinput_FOUND)
-  macro_log_feature(X11_Xinput_FOUND "libXi" "X11 input management library" "http://xorg.freedesktop.org" FALSE "" "Needed for orientation dataengine.")
-endif(NOT X11_Xinput_FOUND)
+macro_log_feature(X11_Xinput_FOUND "libXi" "X11 input management library" "http://xorg.freedesktop.org" FALSE "" "Needed for orientation dataengine.")
 
 include(SopranoAddOntology)
 add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
