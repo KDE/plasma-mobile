@@ -1,0 +1,10 @@
+[Desktop Entry]
+Exec=contour
+X-DBUS-StartupType=wait
+Name=Contour data server
+
+Type=Service
+X-KDE-StartupNotify=false
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=0
+
