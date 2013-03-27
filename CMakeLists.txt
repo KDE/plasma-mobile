@@ -26,6 +26,9 @@ macro_log_feature(
     TRUE "" ""
     )
 
+find_package(KDE4Workspace)
+macro_log_feature(KDE4WORKSPACE_FOUND "kdebase workspace" "KDE base workspace libraries" "http://www.kde.org" FALSE "" "Needed for building several Plasma plugins")
+
 include(SopranoAddOntology)
 add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 
@@ -34,6 +37,7 @@ include_directories(
    ${CMAKE_BINARY_DIR}
    ${CMAKE_BINARY_DIR}/inputmethod
    ${KDE4_INCLUDES}
+   ${KDE4WORKSPACE_INCLUDE_DIR}
    ${KDECLARATIVE_INCLUDE_DIR}
    ${KACTIVITIES_INCLUDE_DIRS}
    ${SOPRANO_INCLUDE_DIR}
