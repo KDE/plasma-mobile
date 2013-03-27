@@ -1,6 +1,6 @@
 project(orientationengine)
 
-if (LibKScreen_FOUND AND QTMOBILITY_SENSORS_FOUND AND X11_Xinput_FOUND)
+if (LibKScreen_FOUND AND QTMOBILITY_FOUND AND X11_Xinput_FOUND)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}
                     ${QTMOBILITY_INCLUDE_DIR}
