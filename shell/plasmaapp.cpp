@@ -461,7 +461,8 @@ void PlasmaApp::screenResized(int screen)
 {
     Q_UNUSED(screen)
 
-    m_mainView->setFixedSize(QApplication::desktop()->screenGeometry(m_mainView->screen()).size());
+    m_corona->setScreenGeometry(QApplication::desktop()->screenGeometry(m_mainView->screen()));
+    m_mainView->setFixedSize(m_corona->screenGeometry(m_mainView->screen()).size());
 }
 
 void PlasmaApp::mainViewGeometryChanged()
