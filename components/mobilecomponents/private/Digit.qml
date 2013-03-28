@@ -33,19 +33,23 @@ Item {
     property alias moving: spinnerView.moving
     property int selectedIndex: -1
 
-    width: placeHolder.width*1.3
-    height: placeHolder.height*3
+    width: placeHolder.width*1.5
+    height: placeHolder.height*9
 
     Text {
         id: placeHolder
         visible: false
-        font.pointSize: 20
-        text: "00"
+        font.pointSize: 12
+        font.weight: Font.DemiBold
+        text: "0000"
     }
 
     PathView {
         id: spinnerView
-        anchors.fill: parent
+        anchors.centerIn: parent
+        height:placeHolder.height * 7
+        width: placeHolder.width
+
         model: 60
         clip: true
         pathItemCount: 5
@@ -57,7 +61,8 @@ Item {
             width: spinnerView.width
             property int ownIndex: index
             text: index < 10 ? "0"+index : index
-            font.pointSize: 20
+            font.pointSize: 12
+            font.weight: Font.DemiBold
             opacity: PathView.itemOpacity
         }
 
@@ -72,18 +77,68 @@ Item {
         path: Path {
             startX: spinnerView.width/2
             startY: spinnerView.height + 1.5*placeHolder.height
-            PathAttribute { name: "itemOpacity"; value: 0 }
-            PathLine { 
+            PathAttribute { name: "itemOpacity"; value: -0.8 }
+            PathLine {
                 x: spinnerView.width/2
                 y: spinnerView.height/2
             }
             PathAttribute { name: "itemOpacity"; value: 1 }
-            PathLine { 
+            PathLine {
                 x: spinnerView.width/2
                 y: -1.5*placeHolder.height
             }
-            PathAttribute { name: "itemOpacity"; value: 0 }
+            PathAttribute { name: "itemOpacity"; value: -0.8 }
         }
     }
+
+    PlasmaCore.SvgItem {
+        svg: PlasmaCore.Svg {imagePath: "widgets/line"}
+        elementId: "horizontal-line"
+        height: naturalSize.heigth
+        anchors {
+            left: parent.left
+            right:parent.right
+            top: parent.top
+            topMargin: parent.height * 0.35
+        }
+    }
+    PlasmaCore.SvgItem {
+        svg: PlasmaCore.Svg {imagePath: "widgets/line"}
+        elementId: "horizontal-line"
+        height: naturalSize.heigth
+        anchors {
+            left: parent.left
+            right:parent.right
+            bottom: parent.bottom
+            bottomMargin: parent.height * 0.35
+        }
+    }
+
+    //FIXME  propper functionality, larger hit area... custom button?
+    PlasmaComponents.ToolButton {
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: parent.top
+        }
+
+        iconSource: "go-up"
+
+        opacity: 0.8
+
+        onClicked: spinnerView.incrementCurrentIndex()
+    }
+    PlasmaComponents.ToolButton {
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
+        }
+
+        iconSource: "go-down"
+
+        opacity: 0.8
+
+        onClicked: spinnerView.decrementCurrentIndex()
+    }
+
 }
 

@@ -24,9 +24,7 @@ import org.kde.locale 0.1 as KLocale
 import org.kde.active.settings 0.1
 import "private"
 
-
-//FIXME: shouldn't be a FrameSvgItem
-PlasmaCore.FrameSvgItem {
+Item {
     id: root
     clip: true
 
@@ -61,9 +59,8 @@ PlasmaCore.FrameSvgItem {
         id: locale
     }
 
-    imagePath: "widgets/picker"
-    width: clockRow.width + margins.left + margins.right
-    height: clockRow.height + margins.top + margins.bottom
+    width: clockRow.width
+    height: clockRow.height
 
 
     Timer {
@@ -82,8 +79,6 @@ PlasmaCore.FrameSvgItem {
     Row {
         id: clockRow
         spacing: 3
-        x: parent.margins.left
-        y: parent.margins.top
 
         property int hours
         property int minutes
@@ -103,7 +98,8 @@ PlasmaCore.FrameSvgItem {
                 width: hoursDigit.width
                 property int ownIndex: index
                 text: !root.twentyFour && index == 0 ? "12" : clockRow.twoDigitString(index)
-                font.pointSize: 20
+                font.pointSize: 12
+                font.weight: Font.DemiBold
                 opacity: PathView.itemOpacity
             }
             onSelectedIndexChanged: {
@@ -117,15 +113,7 @@ PlasmaCore.FrameSvgItem {
                 }
             }
         }
-        PlasmaCore.SvgItem {
-            svg: PlasmaCore.Svg {imagePath: "widgets/line"}
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom:parent.bottom
-            }
-        }
+
         Digit {
             id: minutesDigit
             model: 60
@@ -136,15 +124,7 @@ PlasmaCore.FrameSvgItem {
                 }
             }
         }
-        PlasmaCore.SvgItem {
-            svg: PlasmaCore.Svg {imagePath: "widgets/line"}
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom:parent.bottom
-            }
-        }
+
         Digit {
             id: secondsDigit
             model: 60
@@ -155,22 +135,7 @@ PlasmaCore.FrameSvgItem {
                 }
             }
         }
-        PlasmaCore.SvgItem {
-            opacity: root.twentyFour ? 0 : 1
-            svg: PlasmaCore.Svg {imagePath: "widgets/line"}
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom:parent.bottom
-            }
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        }
+
         Digit {
             id: meridiaeDigit
             opacity: root.twentyFour ? 0 : 1
@@ -188,7 +153,8 @@ PlasmaCore.FrameSvgItem {
                 horizontalAlignment: Text.AlignHCenter
                 property int ownIndex: index
                 text: meridiae
-                font.pointSize: 20
+                font.pointSize: 12
+                font.weight: Font.DemiBold
                 opacity: PathView.itemOpacity
             }
             currentIndex: hours > 12 ? 1 : 0
@@ -202,13 +168,6 @@ PlasmaCore.FrameSvgItem {
                         hours += 12
                     }
                 }
-            }
-            width: meridiaePlaceHolder.width*1.3
-            Text {
-                id: meridiaePlaceHolder
-                visible: false
-                font.pointSize: 20
-                text: "00"
             }
             Behavior on opacity {
                 NumberAnimation {

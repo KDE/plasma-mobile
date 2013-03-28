@@ -23,8 +23,7 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.active.settings 0.1
 import "private"
 
-//FIXME: shouldn't be a FrameSvgItem
-PlasmaCore.FrameSvgItem {
+Item {
     id: root
     clip: true
 
@@ -46,10 +45,8 @@ PlasmaCore.FrameSvgItem {
         onYearChanged: clockRow.year = root.year
     }
 
-
-    imagePath: "widgets/picker"
-    width: clockRow.width + margins.left + margins.right
-    height: clockRow.height + margins.top + margins.bottom
+    width: clockRow.width
+    height: clockRow.height
 
 
     Timer {
@@ -68,8 +65,6 @@ PlasmaCore.FrameSvgItem {
     Row {
         id: clockRow
         spacing: 3
-        x: parent.margins.left
-        y: parent.margins.top
 
         property int day
         property int month
@@ -97,19 +92,12 @@ PlasmaCore.FrameSvgItem {
                 width: dayDigit.width
                 property int ownIndex: index
                 text: index+1
-                font.pointSize: 20
+                font.pointSize: 12
+                font.weight: Font.DemiBold
                 opacity: PathView.itemOpacity
             }
         }
-        PlasmaCore.SvgItem {
-            svg: PlasmaCore.Svg {imagePath: "widgets/line"}
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom:parent.bottom
-            }
-        }
+
         Digit {
             id: monthDigit
             model: 12
@@ -125,26 +113,12 @@ PlasmaCore.FrameSvgItem {
                 width: monthDigit.width
                 property int ownIndex: index
                 text: months[index]
-                font.pointSize: 20
+                font.pointSize: 12
+                font.weight: Font.DemiBold
                 opacity: PathView.itemOpacity
             }
-            width: monthPlaceHolder.width
-            Text {
-                id: monthPlaceHolder
-                visible: false
-                font.pointSize: 20
-                text: "0000"
-            }
         }
-        PlasmaCore.SvgItem {
-            svg: PlasmaCore.Svg {imagePath: "widgets/line"}
-            elementId: "vertical-line"
-            width: naturalSize.width
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-        }
+
         Digit {
             id: yearDigit
             //FIXME: yes, this is a tad lame ;)
@@ -154,13 +128,6 @@ PlasmaCore.FrameSvgItem {
                 if (selectedIndex > -1) {
                     year = selectedIndex
                 }
-            }
-            width: yearPlaceHolder.width*1.3
-            Text {
-                id: yearPlaceHolder
-                visible: false
-                font.pointSize: 20
-                text: "0000"
             }
         }
     }
