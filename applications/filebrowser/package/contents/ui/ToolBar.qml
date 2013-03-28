@@ -177,6 +177,7 @@ Item {
                 onDrop: {
                     parent.flat = true
                     application.trash(event.mimeData.urls)
+                    metadataModel.requestRefresh()
                 }
             }
         }
