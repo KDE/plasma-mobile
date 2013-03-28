@@ -33,7 +33,7 @@ Item {
     property alias moving: spinnerView.moving
     property int selectedIndex: -1
 
-    width: placeHolder.width*1.5
+    width: placeHolder.width*1.7
     height: placeHolder.height*9
 
     Text {
@@ -99,7 +99,7 @@ Item {
             left: parent.left
             right:parent.right
             top: parent.top
-            topMargin: parent.height * 0.35
+            topMargin: parent.height * 0.36
         }
     }
     PlasmaCore.SvgItem {
@@ -110,7 +110,7 @@ Item {
             left: parent.left
             right:parent.right
             bottom: parent.bottom
-            bottomMargin: parent.height * 0.35
+            bottomMargin: parent.height * 0.36
         }
     }
 
