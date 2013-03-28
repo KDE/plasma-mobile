@@ -139,7 +139,7 @@ void FileBrowser::trash(const QVariantList &files)
 {
     KUrl::List urls;
     foreach (const QVariant &var, files) {
-        urls << KUrl::fromPathOrUrl(var.toString());
+        urls << KUrl::fromPath(var.toString());
     }
     KIO::trash(urls);
 }
