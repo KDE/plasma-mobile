@@ -50,6 +50,7 @@ Item {
         id: selectedModel
         signal modelCleared
     }
+
     Connections {
         target: metadataModel
         onModelReset: {
@@ -223,8 +224,10 @@ Item {
                             imagePath: "widgets/viewitem"
                             prefix: "selected+hover"
                             anchors.fill: parent
+                            property real delegateX: resultsGrid.mapFromItem(resourceDelegate, 0, 0).x
+                            property real delegateY: resultsGrid.mapFromItem(resourceDelegate, 0, 0).y
 
-                            property bool contains: resourceDelegate.x+resourceDelegate.width > selectionRect.x && resourceDelegate.y+resourceDelegate.height > selectionRect.y && resourceDelegate.x < selectionRect.x+selectionRect.width && resourceDelegate.y < selectionRect.y+selectionRect.height
+                            property bool contains: delegateX+resourceDelegate.width > selectionRect.x && delegateY+resourceDelegate.height > selectionRect.y && delegateX < selectionRect.x+selectionRect.width && delegateY < selectionRect.y+selectionRect.height
                             opacity: 0
                             /*Behavior on opacity {
                                 NumberAnimation {duration: 250}
