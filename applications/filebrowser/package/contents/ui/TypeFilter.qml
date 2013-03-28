@@ -76,7 +76,7 @@ Column {
             model: sortFilterModel
             delegate: PlasmaComponents.RadioButton {
                 id: delegateItem
-                text: i18nc("Resource type, how many entries of this resource", "%1 (%2)", userTypes.typeNames[model["label"]], model["count"])
+                text: userTypes.typeNames[model["label"]]
                 //FIXME: more elegant way to remove applications?
                 visible: model["label"] != undefined && model["label"] != "nfo:Application"
                 //checked: metadataModel.queryProvider.resourceType == model["label"]
