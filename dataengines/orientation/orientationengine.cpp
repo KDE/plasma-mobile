@@ -21,6 +21,9 @@
 #include "orientationengine.h"
 #include "orientationservice.h"
 
+#include <fixx11h.h>
+#include <kscreen/config.h>
+
 #include <QtSensors/QOrientationSensor>
 
 #include <X11/Xlib.h>
@@ -28,6 +31,7 @@
 #include <X11/extensions/XInput2.h>
 
 #include <kdebug.h>
+
 
 K_EXPORT_PLASMA_DATAENGINE(orientationengine, OrientationEngine)
 
@@ -64,27 +68,27 @@ void OrientationEngine::init()
     m_sensor = new QOrientationSensor(this);
     connect(m_sensor, SIGNAL(readingChanged()), this, SLOT(onReadingChange()));
     m_sensor->start();
+    onReadingChange();
 
-    Display * display = XOpenDisplay(0);
-    int ndevices_return;
-    XDeviceInfo *devices = XListInputDevices( display, &ndevices_return);
 
-    kDebug() << "Got " << ndevices_return << " X input devices";
-    int foundScreen = 0;
-    for (int i = 0; i < ndevices_return; ++i)
+    KScreen::Config* config = KScreen::Config::current();
+    if (config == 0)
     {
-        if (devices[i].type == XInternAtom(display, XI_TOUCHSCREEN, False)
-           || devices[i].type == XInternAtom(display, XI_TOUCHPAD, FALSE))
-        {
-            QString name = QString("Screen%1").arg(foundScreen);
-            kDebug() << "Got a touchscreen device " << devices[i].name;
-            m_touchscreens.insert(name, devices[i].id);
-            setData(name, "Orientation", 0);
-            ++foundScreen;
-        }
+        setenv("KSCREEN_BACKEND", "XRandR", 0);
+        config = KScreen::Config::current();
+        Q_ASSERT(config != 0);
     }
-
-    XFreeDeviceList(devices);
+    QHash<int, KScreen::Output*> connected = config->connectedOutputs();
+    QHashIterator<int, KScreen::Output*> i(connected);
+    //FIXME: what does actually the ids of connectedOutput means?
+    int foundScreen = 0;
+    while (i.hasNext()) {
+        i.next();
+        QString name = QString("Screen%1").arg(foundScreen);
+        kDebug() << "Got a Screen device " << name;
+        m_touchscreens.insert(name, foundScreen);
+        setData(name, "Rotation", i.value()->rotation());
+    }
 }
 
 OrientationEngine::~OrientationEngine()
@@ -94,6 +98,9 @@ OrientationEngine::~OrientationEngine()
 void OrientationEngine::onReadingChange()
 {
     QOrientationReading* reading = m_sensor->reading();
+    if (reading) {
+        setData("orientation", reading->orientation());
+    }
     if (reading != 0)
     {
         kDebug() << "Orientation reading changed to " << reading->orientation();
