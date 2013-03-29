@@ -88,6 +88,7 @@ void OrientationEngine::init()
         kDebug() << "Got a Screen device " << name;
         m_touchscreens.insert(name, foundScreen);
         setData(name, "Rotation", i.value()->rotation());
+        ++foundScreen;
     }
 }
 
