@@ -340,6 +340,8 @@ Item {
                         }
                         if (LayoutManager.orientation != newOrientation) {
                             LayoutManager.orientation = newOrientation
+                            LayoutManager.resetPositions()
+                            LayoutManager.restore()
                         }
 
                         LayoutManager.resetPositions()
