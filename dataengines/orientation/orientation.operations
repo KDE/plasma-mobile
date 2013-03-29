@@ -2,9 +2,9 @@
 <!DOCTYPE kcfg SYSTEM
     "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
 <kcfg>
-    <group name="setOrientation">
-        <entry name="orientation" type="int">
-            <label>The orientation to use. Corresponds to QOrientationReading::Orientation enumeration.</label>
+    <group name="setRotation">
+        <entry name="rotation" type="int">
+            <label>The rotation to use. Corresponds to QOrientationReading::Orientation enumeration.</label>
         </entry>
     </group>
     <group name="rotateLeft">

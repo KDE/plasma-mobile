@@ -40,7 +40,8 @@ Plasma::ServiceJob *OrientationService::createJob(const QString &operation, QMap
 
 void OrientationService::onDataChanged(int value)
 {
-    m_source->setData("orientation", value);
+    m_source->setData("Rotation", value);
+    m_source->forceImmediateUpdate();
 }
 
 #include "orientationservice.moc"

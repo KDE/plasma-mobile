@@ -44,6 +44,7 @@ public:
 
 private slots:
     void onReadingChange();
+    void rotationChanged();
 
 private:
     QtMobility::QOrientationSensor* m_sensor;

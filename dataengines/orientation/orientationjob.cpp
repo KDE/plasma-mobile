@@ -17,6 +17,7 @@
  */
 
 #include "orientationjob.h"
+#include "orientationengine.h"
 
 #include <kscreen/config.h>
 
@@ -56,48 +57,48 @@ void OrientationJob::start()
 {
     const QString operation = operationName();
     kDebug() << "OrientationJob started with operation name " << operation
-             << " and previous orientation " << m_prevReading;
+             << " and previous rotation " << m_prevReading;
 
     // Default to top up for all operations.
-    QOrientationReading::Orientation direction = QOrientationReading::TopUp;
-    if (operation == "setOrientation") {
-        direction = (QOrientationReading::Orientation)
-            parameters()["orientation"].value<int>();
+    KScreen::Output::Rotation rotation = KScreen::Output::None;
+    if (operation == "setRotation") {
+        rotation = (KScreen::Output::Rotation)
+            parameters()["rotation"].value<int>();
     }
     else if (operation == "rotateLeft") {
-        // Set direction to whatever is left of the previous reading.
+        // Set rotation to whatever is left of the previous reading.
         switch (m_prevReading)
         {
-        case QOrientationReading::TopDown:
-            direction = QOrientationReading::RightUp;
+        case KScreen::Output::Inverted:
+            rotation = KScreen::Output::Right;
             break;
-        case QOrientationReading::LeftUp:
-            direction = QOrientationReading::TopDown;
+        case KScreen::Output::Left:
+            rotation = KScreen::Output::Inverted;
             break;
-        case QOrientationReading::RightUp:
-            direction = QOrientationReading::TopUp;
+        case KScreen::Output::Right:
+            rotation = KScreen::Output::None;
             break;
-        case QOrientationReading::TopUp:
+        case KScreen::Output::None:
         default:
-            direction = QOrientationReading::LeftUp;
+            rotation = KScreen::Output::Left;
         }
     }
     else if (operation == "rotateRight") {
-        // Set direction to whatever is right of the previous reading.
+        // Set rotation to whatever is right of the previous reading.
         switch (m_prevReading)
         {
-        case QOrientationReading::TopDown:
-            direction = QOrientationReading::LeftUp;
+        case KScreen::Output::Inverted:
+            rotation = KScreen::Output::Left;
             break;
-        case QOrientationReading::LeftUp:
-            direction = QOrientationReading::TopUp;
+        case KScreen::Output::Left:
+            rotation = KScreen::Output::None;
             break;
-        case QOrientationReading::RightUp:
-            direction = QOrientationReading::TopDown;
+        case KScreen::Output::Right:
+            rotation = KScreen::Output::Inverted;
             break;
-        case QOrientationReading::TopUp:
+        case KScreen::Output::None:
         default:
-            direction = QOrientationReading::RightUp;
+            rotation = KScreen::Output::Right;
         }
     }
     KScreen::Config* config = KScreen::Config::current();
@@ -116,33 +117,33 @@ void OrientationJob::start()
             return;
         output = (*connected.begin());
     }
-    kDebug() << "direction is " << direction;
-    switch (direction)
+    kDebug() << "rotation is " << rotation;
+    switch (rotation)
     {
-    case QOrientationReading::TopDown:
+    case KScreen::Output::Inverted:
         set_matrix(k_inverted_matrix);
         kDebug() << "rotating upside down";
         output->setRotation(KScreen::Output::Inverted);
         break;
-    case QOrientationReading::LeftUp:
+    case KScreen::Output::Left:
         set_matrix(k_left_matrix);
         kDebug() << "rotating left";
         output->setRotation(KScreen::Output::Left);
         break;
-    case QOrientationReading::RightUp:
+    case KScreen::Output::Right:
         set_matrix(k_right_matrix);
         kDebug() << "rotating right";
         output->setRotation(KScreen::Output::Right);
         break;
     default:
-    case QOrientationReading::TopUp:
+    case KScreen::Output::None:
         set_matrix(k_normal_matrix);
         kDebug() << "rotating normal";
         output->setRotation(KScreen::Output::None);
         break;
     }
     KScreen::Config::setConfig(config);
-    emit dataChanged(direction);
+    emit dataChanged(rotation);
     setResult(true);
 }
 

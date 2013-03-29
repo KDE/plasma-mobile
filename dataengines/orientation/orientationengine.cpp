@@ -120,4 +120,26 @@ void OrientationEngine::onReadingChange()
     }
 }
 
+void OrientationEngine::rotationChanged()
+{
+    KScreen::Config* config = KScreen::Config::current();
+    if (config == 0)
+    {
+        setenv("KSCREEN_BACKEND", "XRandR", 0);
+        config = KScreen::Config::current();
+        Q_ASSERT(config != 0);
+    }
+    QHash<int, KScreen::Output*> connected = config->connectedOutputs();
+    QHashIterator<int, KScreen::Output*> i(connected);
+    //FIXME: what does actually the ids of connectedOutput means?
+    int foundScreen = 0;
+    while (i.hasNext()) {
+        i.next();
+        QString name = QString("Screen%1").arg(foundScreen);
+        kDebug() << "Got a Screen device " << name;
+        setData(name, "Rotation", i.value()->rotation());
+        ++foundScreen;
+    }
+}
+
 #include "orientationengine.moc"

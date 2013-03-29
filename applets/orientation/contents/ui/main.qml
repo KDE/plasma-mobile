@@ -49,9 +49,11 @@ Item {
             var service = orientationSource.serviceForSource(sources[0])
             var operation
             if (orientationSource.data["Screen0"]["Rotation"] == 1) {
-                operation = service.operationDescription("rotateLeft")
+                operation = service.operationDescription("setRotation")
+                operation["rotation"] = 2
             } else {
-                operation = service.operationDescription("rotateRight")
+                operation = service.operationDescription("setRotation")
+                operation["rotation"] = 1
             }
             service.startOperationCall(operation)
         }
