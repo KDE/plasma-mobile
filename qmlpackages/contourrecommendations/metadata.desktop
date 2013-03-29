@@ -3,6 +3,12 @@ Comment=
 Encoding=UTF-8
 Keywords=
 Name=Recommendations
+Name[nl]=Aanbevelingen
+Name[pt]=Recomendações
+Name[sk]=Odporúčania
+Name[tr]=Önerilenler
+Name[uk]=Поради
+Name[x-test]=xxRecommendationsxx
 Type=Service
 Icon=
 

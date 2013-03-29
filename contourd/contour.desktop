@@ -2,6 +2,12 @@
 Exec=contour
 X-DBUS-StartupType=wait
 Name=Contour data server
+Name[nl]=Omranding van gegevensserver
+Name[pt]=Servidor de dados do Contour
+Name[sk]=Dátový server Contour
+Name[tr]=Contour veri sunucusu
+Name[uk]=Сервер даних Contour
+Name[x-test]=xxContour data serverxx
 
 Type=Service
 X-KDE-StartupNotify=false

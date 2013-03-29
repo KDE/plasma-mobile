@@ -3,5 +3,11 @@ Type=ServiceType
 X-KDE-ServiceType=Contour/RecommendationEngine
 
 Comment=Recommendation engine for Contour
+Comment[nl]=Aanbevelingen-engine voor omranding
+Comment[pt]=Motor de recomendações do Contour
+Comment[sk]=Odporúčací engine pre Contour
+Comment[tr]=Countour için önerilen motor
+Comment[uk]=Рушій даних порад для Contour
+Comment[x-test]=xxRecommendation engine for Contourxx
 
 

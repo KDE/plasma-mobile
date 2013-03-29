@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Pauses the media
+Name[nl]=Pauzeert het medium
+Name[pt]=Coloca os conteúdos multimédia em pausa
+Name[sk]=Pozastaví médium
+Name[tr]=Ortamı duraklatır
+Name[uk]=Призупиняє відтворення мультимедійних даних
+Name[x-test]=xxPauses the mediaxx
 Comment=Shows media player control
+Comment[nl]=Toont de besturing van de mediaspeler
+Comment[pt]=Mostra o controlo do leitor multimédia
+Comment[sk]=Zobrazí ovládanie prehrávača médií
+Comment[tr]=Ortam oynatıcı denetimini gösterir
+Comment[uk]=Показує панель керування програвачем
+Comment[x-test]=xxShows media player controlxx
 Type=Service
 Icon=
 

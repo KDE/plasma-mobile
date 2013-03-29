@@ -1,6 +1,18 @@
 [Desktop Entry]
 Name=Documents plugin
+Name[nl]=Plug-in voor documenten
+Name[pt]='Plugin' de documentos
+Name[sk]=Plugin dokumentov
+Name[tr]=Belgeler eklentisi
+Name[uk]=Додаток документів
+Name[x-test]=xxDocuments pluginxx
 Comment=Shows highest rated documents
+Comment[nl]=Toont hoogst beoordeelde documenten
+Comment[pt]=Mostra os documentos melhor classificados
+Comment[sk]=Zobrazí najvyššie hodnotené dokumenty
+Comment[tr]=En yüksek beğeni alan belgeleri gösterir
+Comment[uk]=Показує список документів з найвищими оцінками
+Comment[x-test]=xxShows highest rated documentsxx
 Type=Service
 Icon=
 
