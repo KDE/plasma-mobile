@@ -52,11 +52,10 @@ OrientationEngine::OrientationEngine(QObject* parent, const QVariantList& args)
 
 Plasma::Service *OrientationEngine::serviceForSource(const QString &source)
 {
-    if (m_touchscreens.contains(source))
+    if (sources().contains(source))
     {
         OrientationService *service =
-          new OrientationService(m_touchscreens.value(source),
-                                 containerForSource(source));
+          new OrientationService(containerForSource(source));
         service->setParent(this);
         return service;
     }
@@ -68,8 +67,6 @@ void OrientationEngine::init()
     m_sensor = new QOrientationSensor(this);
     connect(m_sensor, SIGNAL(readingChanged()), this, SLOT(onReadingChange()));
     m_sensor->start();
-    onReadingChange();
-
 
     KScreen::Config* config = KScreen::Config::current();
     if (config == 0)
@@ -86,7 +83,6 @@ void OrientationEngine::init()
         i.next();
         QString name = QString("Screen%1").arg(foundScreen);
         kDebug() << "Got a Screen device " << name;
-        m_touchscreens.insert(name, foundScreen);
         setData(name, "Rotation", i.value()->rotation());
         ++foundScreen;
     }

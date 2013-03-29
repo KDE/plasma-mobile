@@ -20,16 +20,15 @@
 #include "orientationservice.h"
 #include "orientationjob.h"
 
-OrientationService::OrientationService(XID id, Plasma::DataContainer *source)
-    : m_id(id),
-      m_source(source)
+OrientationService::OrientationService(Plasma::DataContainer *source)
+    : m_source(source)
 {
     setName("orientation");
 }
 
 Plasma::ServiceJob *OrientationService::createJob(const QString &operation, QMap<QString, QVariant> &parameters)
 {
-    Plasma::ServiceJob *sjob = new OrientationJob(m_id,
+    Plasma::ServiceJob *sjob = new OrientationJob(
                                           m_source->data().value("orientation").toInt(),
                                           operation,
                                           parameters,

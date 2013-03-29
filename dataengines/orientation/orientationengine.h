@@ -47,7 +47,6 @@ private slots:
 
 private:
     QtMobility::QOrientationSensor* m_sensor;
-    QMap<QString, XID> m_touchscreens;
 };
 
 #endif

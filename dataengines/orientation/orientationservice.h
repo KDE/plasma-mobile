@@ -32,7 +32,7 @@ class OrientationService : public Plasma::Service
     Q_OBJECT
 
 public:
-    OrientationService(XID id, Plasma::DataContainer *source);
+    OrientationService(Plasma::DataContainer *source);
     Plasma::ServiceJob *createJob(const QString &operation,
                           QMap<QString, QVariant> &parameters);
 
@@ -40,7 +40,6 @@ private Q_SLOTS:
     void onDataChanged(int value);
 
 private:
-    XID m_id;
     Plasma::DataContainer *m_source;
 };
 

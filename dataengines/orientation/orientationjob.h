@@ -31,7 +31,7 @@ class OrientationJob : public Plasma::ServiceJob
     Q_OBJECT
 
     public:
-        OrientationJob(XID id, int reading, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent = 0);
+        OrientationJob(int reading, const QString &operation, QMap<QString, QVariant> &parameters, QObject *parent = 0);
         ~OrientationJob();
 
     Q_SIGNALS:
@@ -42,7 +42,6 @@ class OrientationJob : public Plasma::ServiceJob
 
     private:
         void set_matrix(const float *value);
-        XID m_id;
         QtMobility::QOrientationReading::Orientation m_prevReading;
 };
 

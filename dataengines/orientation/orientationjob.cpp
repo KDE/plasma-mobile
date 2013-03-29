@@ -36,16 +36,14 @@ static const float k_right_matrix[9]    = {0, 1, 0, -1, 0, 1, 0, 0, 1};
 static const float k_inverted_matrix[9] = {-1, 0, 1, 0, -1, 1, 0, 0, 1};
 static const int k_matrix_length = 9;
 
-OrientationJob::OrientationJob(XID id,
-                               int reading,
+OrientationJob::OrientationJob(int reading,
                                const QString &operation,
                                QMap<QString, QVariant> &parameters,
                                QObject *parent) :
     ServiceJob(parent->objectName(), operation, parameters, parent),
-    m_id(id),
     m_prevReading((QOrientationReading::Orientation)reading)
 {
-    kDebug() << "Orientation job created with xid " << id << " and operation " << operation
+    kDebug() << "Orientation job created with operation " << operation
              << " previous reading is " << m_prevReading;
 
 }
@@ -161,31 +159,39 @@ void OrientationJob::set_matrix (const float * values)
         long *l;
     } data;
 
-    XDevice *device = XOpenDevice(display, m_id);
-    if (XGetDeviceProperty(display, device, property, 0, 0, False,
-                           AnyPropertyType, &old_type, &old_format, &nitems,
-                           &bytes_after, &data.c) == Success)
-    {
-        XFree(data.c);
-        data.c = (unsigned char*)calloc(k_matrix_length, sizeof(long));
+    int ndevices_return;
+    XDeviceInfo *devices = XListInputDevices( display, &ndevices_return);
+ 
+    kDebug() << "Got " << ndevices_return << " X input devices";
+    int foundTouchScreen = 0;
+    for (int i = 0; i < ndevices_return; ++i) {
+        if (devices[i].type == XInternAtom(display, XI_TOUCHSCREEN, False)
+            || devices[i].type == XInternAtom(display, XI_TOUCHPAD, FALSE)) {
 
-        for (int i = 0; i < k_matrix_length; ++i)
-        {
-            kDebug() << "value " << values[i] << " for " << i;
-            *(float*)(data.l + i) = values[i];
+            XDevice *device = XOpenDevice(display, devices[i].id);
+            if (XGetDeviceProperty(display, device, property, 0, 0, False,
+                                AnyPropertyType, &old_type, &old_format, &nitems,
+                                &bytes_after, &data.c) == Success) {
+                XFree(data.c);
+                data.c = (unsigned char*)calloc(k_matrix_length, sizeof(long));
+
+                for (int i = 0; i < k_matrix_length; ++i)
+                {
+                    kDebug() << "value " << values[i] << " for " << i;
+                    *(float*)(data.l + i) = values[i];
+                }
+
+                XChangeDeviceProperty (display, device, property, old_type,
+                                    old_format, PropModeReplace, data.c,
+                                    k_matrix_length);
+                XFlush(display);
+                free(data.c);
+            } else {
+                kDebug() << "Failed to get device property";
+            }
+            XCloseDevice(display, device);
         }
-
-        XChangeDeviceProperty (display, device, property, old_type,
-                               old_format, PropModeReplace, data.c,
-                               k_matrix_length);
-        XFlush(display);
-        free(data.c);
     }
-    else
-    {
-        kDebug() << "Failed to get device property";
-    }
-    XCloseDevice(display, device);
 }
 
 
