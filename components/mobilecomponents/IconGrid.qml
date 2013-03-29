@@ -33,6 +33,7 @@ Item {
     property alias currentPage: iconView.currentIndex
     property int pagesCount: Math.ceil(model.count/pageSize)
     property int count: model.count
+    property alias contentX: iconView.contentX
     clip: true
 
     function positionViewAtIndex(index)

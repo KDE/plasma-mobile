@@ -224,8 +224,8 @@ Item {
                             imagePath: "widgets/viewitem"
                             prefix: "selected+hover"
                             anchors.fill: parent
-                            property real delegateX: resultsGrid.mapFromItem(resourceDelegate, 0, 0).x
-                            property real delegateY: resultsGrid.mapFromItem(resourceDelegate, 0, 0).y
+                            property real delegateX:resourceDelegate.x + resourceDelegate.parent.parent.x - resultsGrid.contentX
+                            property real delegateY: resourceDelegate.y
 
                             property bool contains: delegateX+resourceDelegate.width > selectionRect.x && delegateY+resourceDelegate.height > selectionRect.y && delegateX < selectionRect.x+selectionRect.width && delegateY < selectionRect.y+selectionRect.height
                             opacity: 0
