@@ -212,6 +212,7 @@ Item {
                 bottomMargin: - toolBar.margins.bottom
             }
             z: 900
+            spacing: 0
 
             height: theme.defaultFont.mSize.height * 1.6
             exclusive: true
