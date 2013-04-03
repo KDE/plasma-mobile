@@ -58,7 +58,6 @@ Rectangle {
             id: delegate
             z: index == thumbnailsView.currentIndex ? 200 : 0
             scale: index == thumbnailsView.currentIndex ? 1.4 : 1
-            property string name: label
             Behavior on scale {
                 NumberAnimation {
                     duration: 250

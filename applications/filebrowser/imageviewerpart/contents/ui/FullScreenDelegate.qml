@@ -163,6 +163,14 @@ Item {
                 property real startY
                 property real startX
                 onPinchStarted: {
+                    if (mainImage.originalSourceSize != undefined && 
+                            mainImage.sourceSize.height != mainImage.originalSourceSize.height && 
+                            mainImage.sourceSize.width != mainImage.originalSourceSize.width) {
+                        console.log("Restoring original sourceSize.")
+                        console.log("Scaled width: " + mainImage.sourceSize.width + "; scaled height: " + mainImage.sourceSize.height)
+                        mainImage.sourceSize = mainImage.originalSourceSize
+                        console.log("Restored width: " + mainImage.sourceSize.width + "; restored height: " + mainImage.sourceSize.height)
+                    }
                     startWidth = mainImage.width
                     startHeight = mainImage.height
                     startY = pinch.center.y
@@ -170,8 +178,8 @@ Item {
                 }
                 onPinchUpdated: {
                     if (pinch.scale < 1 &&
-                        (mainImage.width < Math.min(mainImage.originalSourceSize.width, mainFlickable.width) - 100 &&
-                        mainImage.height < Math.min(mainImage.originalSourceSize.height, mainFlickable.height) - 100)) {
+                        (mainImage.width < Math.min(mainImage.sourceSize.width, mainFlickable.width) - 100 &&
+                         mainImage.height < Math.min(mainImage.sourceSize.height, mainFlickable.height) - 100)) {
                         return
                     } else if (pinch.scale > 1 &&
                         (mainImage.width > mainFlickable.width*4 + 100 &&
@@ -193,12 +201,12 @@ Item {
                     if (mainImage.width < mainFlickable.width &&
                         mainImage.height < mainFlickable.height) {
 
-                        if (mainImage.originalSourceSize.width < mainFlickable.width &&
-                            mainImage.originalSourceSize.height < mainFlickable.height) {
+                        if (mainImage.sourceSize.width < mainFlickable.width &&
+                            mainImage.sourceSize.height < mainFlickable.height) {
                             if (mainImage.width > mainImage.height) {
-                                zoomAnim.zoom(mainImage.originalSourceSize.width/mainImage.width)
+                                zoomAnim.zoom(mainImage.sourceSize.width/mainImage.width)
                             } else {
-                                zoomAnim.zoom(mainImage.originalSourceSize.height/mainImage.height)
+                                zoomAnim.zoom(mainImage.sourceSize.height/mainImage.height)
                             }
                         } else {
                             if (mainImage.width > mainImage.height) {
@@ -227,9 +235,13 @@ Item {
                     fillMode: Image.PreserveAspectFit
                     width: mainFlickable.contentWidth
                     height: mainFlickable.contentHeight
-                    onSourceChanged: sourceSize = undefined
+
+                    onSourceChanged: {
+                        originalSourceSize = undefined
+                    }
+
                     onStatusChanged: {
-                        if (status != Image.Ready) {
+                        if (status != Image.Ready || originalSourceSize != undefined) {
                             return
                         }
 
@@ -241,7 +253,27 @@ Item {
                             return
                         }
 
-                        originalSourceSize = sourceSize
+                        if (mainImage.sourceSize.width > mainFlickable.width || mainImage.sourceSize.height > mainFlickable.height) {
+                            console.log("Image will be shrinked. Storing original size such that it can be resized back.")
+                            console.log("Original width: " + sourceSize.width + "; original height: " + sourceSize.height)
+                            originalSourceSize = sourceSize
+                        }
+
+                        var ratio = sourceSize.width/sourceSize.height
+                        if (sourceSize.width > sourceSize.height) {
+                            mainImage.width = Math.min(mainFlickable.width, sourceSize.width)
+                            mainImage.height = mainImage.width / ratio
+                        } else {
+                            mainImage.height = Math.min(mainFlickable.height, sourceSize.height)
+                            mainImage.width = mainImage.height * ratio
+                        }
+                        if (mainImage.sourceSize.width > mainImage.sourceSize.height && mainImage.sourceSize.width > mainFlickable.width) {
+                            mainImage.sourceSize.width = mainFlickable.width
+                            mainImage.sourceSize.height = mainImage.sourceSize.width / ratio
+                        } else if (mainImage.sourceSize.height > mainImage.sourceSize.width && mainImage.sourceSize.height > mainFlickable.height) {
+                            mainImage.sourceSize.width = mainFlickable.height * ratio
+                            mainImage.sourceSize.height = mainFlickable.height
+                        }
                     }
                 }
 
