@@ -51,7 +51,15 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
       m_collectionJobs(0)
 {
     Q_UNUSED(args);
+}
 
+
+AlarmsEngine::~AlarmsEngine()
+{
+}
+
+void AlarmsEngine::init()
+{
     if (!Akonadi::Control::start()) {
         kWarning() << "ERROR: unable to start Akonadi server, this engine won't work";
         return;
@@ -107,13 +115,9 @@ AlarmsEngine::AlarmsEngine(QObject* parent, const QVariantList& args)
     }
 }
 
-
-AlarmsEngine::~AlarmsEngine()
-{
-}
-
 void AlarmsEngine::calendarCreated(CalendarCreator *creator)
 {
+    Q_UNUSED(creator)
     Akonadi::Collection alarmCollection(Akonadi::Collection::root());
     alarmCollection.setContentMimeTypes(QStringList() << KAlarmCal::MIME_ACTIVE);
 
@@ -187,7 +191,6 @@ void AlarmsEngine::fetchAlarmsCollectionsDone(KJob* job)
                 creator->createAgent(QLatin1String("akonadi_kalarm_resource"), this);
             }
         }
-        scheduleSourcesUpdated();
     }
 }
 
