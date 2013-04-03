@@ -58,13 +58,13 @@ Image {
             width: parent.width/4
 
             Image {
-                source: "image://appbackgrounds/shadow-right"
+                source: "image://appbackgrounds/shadow-left"
                 fillMode: Image.Tile
                 anchors {
-                    left: parent.right
+                    right: parent.right
                     top: parent.top
                     bottom: parent.bottom
-                    leftMargin: -1
+                    rightMargin: -1
                 }
             }
 
