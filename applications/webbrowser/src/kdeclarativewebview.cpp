@@ -834,9 +834,11 @@ bool KDeclarativeWebView::scrollBy(int dx, int dy, const QPointF& pos)
         frame = page()->mainFrame();
     }
 
+#if QTWEBKIT_VERSION < QTWEBKIT_VERSION_CHECK(2, 3, 0)
     if (qtwebkit_webframe_scrollOverflow(frame, dx, dy, pos.toPoint())) {
         return true;
     }
+#endif
 
     if (!frame) {
         return false;
