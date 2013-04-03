@@ -36,13 +36,6 @@ MobileComponents.SplitDrawer {
         topMargin: toolBar.height
     }
 
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        //connectedSources: []
-    }
-
-
 
     open: true
     property bool hasItems: metadataModel.count > 0 || dirModel.count > 0

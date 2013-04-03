@@ -114,7 +114,7 @@ Item {
                     checked = dirModel.url.indexOf(devicesSource.data[udi]["File Path"]) > 0
                 }
                 onCheckedChanged: {
-                    if (checked) {
+                    if (checked && visible) {
                         for (var i = 0; i < devicesFlow.children.length; ++i) {
                             var child = devicesFlow.children[i]
                             if (child != removableButton && child.checked !== undefined) {

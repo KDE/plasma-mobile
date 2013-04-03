@@ -238,7 +238,7 @@ PlasmaComponents.Sheet {
                 currentPage = Math.max(0, Math.floor(currentIndex/pageSize))
             }
 
-            property int delegateWidth: theme.defaultFont.mSize.width * 20
+            property int delegateWidth: theme.defaultFont.mSize.width * 16
             property int delegateHeight: delegateWidth/1.6 + theme.defaultFont.mSize.height*2
             anchors {
                 top: nameRow.bottom

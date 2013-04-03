@@ -42,6 +42,12 @@ Image {
     //END properties
 
     //BEGIN model
+    PlasmaCore.DataSource {
+        id: metadataSource
+        engine: "org.kde.active.metadata"
+        //connectedSources: []
+    }
+
     MetadataModels.MetadataModel {
         id: metadataModel
         queryProvider: MetadataModels.ResourceQueryProvider {
