@@ -54,6 +54,7 @@ CloudQueryProvider::CloudQueryProvider(QObject* parent)
 {
     QHash<int, QByteArray> roleNames;
     roleNames[Label] = "label";
+    roleNames[Resource] = "resource";
     roleNames[Count] = "count";
     roleNames[TotalCount] = "totalCount";
 
@@ -147,16 +148,30 @@ void CloudQueryProvider::doQuery()
     if (parameters && parameters->size() > 0) {
         foreach (const QString &key, parameters->keys()) {
             QString parameter = parameters->value(key).toString();
+            if (parameter.isEmpty()) {
+                continue;
+            }
             bool negation = false;
             if (parameter.startsWith('!')) {
                 parameter = parameter.remove(0, 1);
                 negation = true;
             }
 
-            if (negation) {
-                query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " ?" + key + "Param . FILTER(bif:contains(?" + key + "Param, \"'" + parameter + "'\")) . }))) ";
+            QUrl parameterUrl(parameter);
+            if (parameterUrl.scheme() == "nepomuk") {
+                if (negation) {
+                    query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " <" + parameter + "> . }))) ";
+                } else {
+                    query += " . ?r " + key + " <" + parameter + "> ";
+                }
             } else {
-                query += " . ?r " + key + " ?" + key + "Param . FILTER(bif:contains(?" + key + "Param, \"'" + parameter + "'\")) ";
+                QString stringKey = key;
+                stringKey.replace(":", "_");
+                if (negation) {
+                    query += " . FILTER(!bif:exists((select (1) where { ?r " + key + " ?" + stringKey + "Param . FILTER(bif:contains(?" + stringKey + "Param, \"'" + parameter + "'\")) . }))) ";
+                } else {
+                    query += " . ?r " + key + " ?" + stringKey + "Param . FILTER(bif:contains(?" + stringKey + "Param, \"'" + parameter + "'\")) ";
+                }
             }
         }
     }
@@ -262,6 +277,21 @@ QVariant CloudQueryProvider::formatData(const Nepomuk2::Query::Result &row, cons
             }
         } else {
             return rawLabel;
+        }
+    }
+    case Resource: {
+        const QVariant rawLabel = row.additionalBinding("label").variant();
+        if (rawLabel.canConvert<Nepomuk2::Resource>()) {
+            return rawLabel.value<Nepomuk2::Resource>().uri();
+        } else if (!rawLabel.value<QUrl>().scheme().isEmpty()) {
+            const QUrl url = rawLabel.value<QUrl>();
+            if (url.scheme() == "nepomuk") {
+                return rawLabel;
+            } else {
+                return QString();
+            }
+        } else {
+            return QString();
         }
     }
     case Count:

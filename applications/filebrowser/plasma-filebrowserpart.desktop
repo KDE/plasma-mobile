@@ -26,5 +26,14 @@ Comment[wa]=Pacaedje plasma po tcherdjî ene sôre mime dinêye direk do foyteu 
 Comment[x-test]=xxPlasma package to load a particular mimetype directly in the file browserxx
 Comment[zh_TW]=直接在檔案瀏覽器直接載入特別的 MIME 型態的 Plasma 套件
 
+#At the moment supported Browser and Viewer
+[PropertyDef::SupportedComponents]
+Type=QStringList
+
+#MimeTypes, such as image/jpeg
 [PropertyDef::MimeTypes]
+Type=QStringList
+
+#Nepomuk types, such as nfo:Image
+[PropertyDef::ResourceTypes]
 Type=QStringList

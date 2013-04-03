@@ -46,8 +46,11 @@ Image {
         id: metadataModel
         queryProvider: MetadataModels.ResourceQueryProvider {
             sortBy: [userTypes.sortFields[metadataModel.queryProvider.resourceType]]
-            //sortOrder: Qt.DescendingOrder
-            //queryString: "pdf"
+            //This query string part is set by the user in the search field
+            property string userQueryString
+            //this query string part may be set by Browser addons
+            property string extraQueryString
+            queryString: userQueryString + (extraQueryString ? (" " + extraQueryString) : "")
             resourceType: exclusiveResourceType
             mimeTypes: exclusiveMimeTypes
         }
@@ -132,7 +135,7 @@ Image {
             dirModel.url = data.url
             fileBrowserRoot.model = dirModel
         } else if (!mainStack.busy) {
-            var packageName = application.packageForMimeType(data.mimeType)
+            var packageName = application.viewerPackageForType(data.mimeType)
             print("Package for mimetype " + data.mimeType + " " + packageName)
             if (packageName) {
                 partPackage.name = packageName

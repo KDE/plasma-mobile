@@ -252,7 +252,7 @@ Item {
                             className: model["className"] ? model["className"] : ""
                             genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
 
-                            property string label: model.label ? model.label : model.display
+                            property string label: model.label ? model.label : (model.display ? model.display : "")
 
                             width: resultsGrid.delegateWidth
                             height: resultsGrid.delegateHeight

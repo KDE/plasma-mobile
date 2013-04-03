@@ -264,7 +264,13 @@ void ResourceQueryProvider::doQuery()
 
             //FIXME: Contains should work, but doesn't match for file names
             // we must prepend and append "*" to the file name for the default Nepomuk match type (Contains) really work.
-            Nepomuk2::Query::ComparisonTerm term(propertyUrl(key), Nepomuk2::Query::LiteralTerm(parameter));
+            QUrl parameterUrl(parameter);
+            Nepomuk2::Query::ComparisonTerm term;
+            if (parameterUrl.scheme() == "nepomuk") {
+                term = Nepomuk2::Query::ComparisonTerm(propertyUrl(key), Nepomuk2::Query::ResourceTerm(parameterUrl));
+            } else {
+                term = Nepomuk2::Query::ComparisonTerm(propertyUrl(key), Nepomuk2::Query::LiteralTerm(parameter));
+            }
 
             if (negation) {
                 rootTerm.addSubTerm(Nepomuk2::Query::NegationTerm::negateTerm(term));

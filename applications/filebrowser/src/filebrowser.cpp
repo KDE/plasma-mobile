@@ -72,13 +72,13 @@ FileBrowser::~FileBrowser()
 {
 }
 
-QString FileBrowser::packageForMimeType(const QString &mimeType)
+QString FileBrowser::viewerPackageForType(const QString &mimeType)
 {
     if (mimeType.isEmpty()) {
         return QString();
     }
 
-    KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("'%1' in MimeTypes").arg(mimeType));
+    KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("('%1' in MimeTypes or '%1' in ResourceTypes) and 'Viewer' in SupportedComponents").arg(mimeType));
 
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
@@ -91,6 +91,31 @@ QString FileBrowser::packageForMimeType(const QString &mimeType)
             description = service->comment();
         }
         //kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
+        kDebug() << service->property("X-KDE-PluginInfo-Name") << "\t\t" << description.toLocal8Bit().data();
+        return service->property("X-KDE-PluginInfo-Name").toString();
+    }
+    return QString();
+}
+
+QString FileBrowser::browserPackageForType(const QString &type)
+{
+    if (type.isEmpty()) {
+        return QString();
+    }
+
+    KService::List services = KServiceTypeTrader::self()->query("Active/FileBrowserPart", QString("('%1' in MimeTypes or '%1' in ResourceTypes) and 'Browser' in SupportedComponents").arg(type));
+
+    foreach (const KService::Ptr &service, services) {
+        if (service->noDisplay()) {
+            continue;
+        }
+        QString description;
+        if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
+            description = service->genericName();
+        } else if (!service->comment().isEmpty()) {
+            description = service->comment();
+        }
+        kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
         kDebug() << service->property("X-KDE-PluginInfo-Name") << "\t\t" << description.toLocal8Bit().data();
         return service->property("X-KDE-PluginInfo-Name").toString();
     }

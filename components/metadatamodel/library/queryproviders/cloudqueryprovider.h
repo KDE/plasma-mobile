@@ -36,6 +36,7 @@ class NEPOMUKDATAMODEL_EXPORT CloudQueryProvider : public BasicQueryProvider
 public:
     enum Roles {
         Label = Qt::UserRole+1,
+        Resource,
         Count,
         TotalCount
     };
