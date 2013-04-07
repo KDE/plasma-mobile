@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Links plugin
+Name[da]=Link-plugin
 Name[el]=Πρόσθετο συνδέσμων
 Name[es]=Complemento para enlaces
 Name[nl]=Plug-in voor koppelingen
@@ -12,6 +13,7 @@ Name[tr]=Bağlantılar eklentisi
 Name[uk]=Додаток посилань
 Name[x-test]=xxLinks pluginxx
 Comment=Shows some KDE-related links
+Comment[da]=Viser nogle KDE-relaterede links
 Comment[el]=Εμφανίζει κάποιους συνδέσμους σχετικούς με το KDE
 Comment[es]=Muestra algunos enlaces relacionados con KDE
 Comment[nl]=Toont enige aan KDE gerelateerde koppelingen

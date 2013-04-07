@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Documents plugin
+Name[da]=Dokument-plugin
 Name[el]=Πρόσθετο εγγράφων
 Name[es]=Complemento para documentos
 Name[nl]=Plug-in voor documenten
@@ -12,6 +13,7 @@ Name[tr]=Belgeler eklentisi
 Name[uk]=Додаток документів
 Name[x-test]=xxDocuments pluginxx
 Comment=Shows highest rated documents
+Comment[da]=Viser de højest vurderede dokumenter
 Comment[el]=Εμφανίζει τα έγγραφα με την υψηλότερη βαθμολογία
 Comment[es]=Muestra los documentos mejor valorados
 Comment[nl]=Toont hoogst beoordeelde documenten

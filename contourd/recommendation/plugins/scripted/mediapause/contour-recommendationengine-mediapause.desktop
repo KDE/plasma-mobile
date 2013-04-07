@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Pauses the media
+Name[da]=Sætter mediet på pause
 Name[el]=Εκτελεί παύση του μέσου
 Name[es]=Pausa el medio
 Name[nl]=Pauzeert het medium
@@ -12,6 +13,7 @@ Name[tr]=Ortamı duraklatır
 Name[uk]=Призупиняє відтворення мультимедійних даних
 Name[x-test]=xxPauses the mediaxx
 Comment=Shows media player control
+Comment[da]=Viser medieafspiller-kontroller
 Comment[el]=Εμφανίζει το χειριστήριο του αναπαραγωγέα πολυμέσων
 Comment[es]=Muestra el control del reproductor multimedia
 Comment[nl]=Toont de besturing van de mediaspeler

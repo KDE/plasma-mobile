@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Recommendations
+Name[da]=Anbefalinger
 Name[el]=Συστάσεις
 Name[es]=Recomendaciones
 Name[nl]=Aanbevelingen
@@ -12,6 +13,7 @@ Name[tr]=Önerilenler
 Name[uk]=Поради
 Name[x-test]=xxRecommendationsxx
 Comment=Contour Recommendations dataengine
+Comment[da]=Anbefalingsdatamotor til Contour
 Comment[el]=Μηχανή δεδομένων συστάσεων του Contour
 Comment[es]=Motor de datos de recomendaciones para Contour
 Comment[nl]=Gegevens-engine voor aanbevelingen voor omranding
