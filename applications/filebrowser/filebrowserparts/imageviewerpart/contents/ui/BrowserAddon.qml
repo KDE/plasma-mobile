@@ -27,6 +27,7 @@ Item {
     anchors {
         left: parent.left
         right: parent.right
+        leftMargin: theme.defaultFont.mSize.width
     }
     height: mainColumn.height
 
