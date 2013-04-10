@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Books
+Name[cs]=Knihy
 Name[da]=Bøger
 Name[de]=Bücher
 Name[el]=Βιβλία
@@ -27,6 +28,7 @@ Name[wa]=Lives
 Name[x-test]=xxBooksxx
 Name[zh_TW]=書籍
 GenericName=Book collection
+GenericName[cs]=Sbírka knih
 GenericName[da]=Bogsamling
 GenericName[de]=Bücher-Sammlung
 GenericName[el]=Συλλογή βιβλίων

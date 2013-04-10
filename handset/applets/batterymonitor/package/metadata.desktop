@@ -58,6 +58,7 @@ Keywords[x-test]=xxPower Management, Battery, System, Energyxx
 Keywords[zh_CN]=电源管理、电池、系统、能源
 Keywords[zh_TW]=Power Management, Battery, System, Energy
 Name=Simple Battery
+Name[cs]=Jednoduchá baterie
 Name[da]=Simpelt batteri
 Name[de]=Einfacher Akku
 Name[el]=Απλή μπαταρία

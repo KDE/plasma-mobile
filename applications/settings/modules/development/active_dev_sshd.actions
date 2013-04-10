@@ -1,5 +1,6 @@
 [Domain]
 Name=SSH Remote Access
+Name[cs]=Vzdálený přístup SSH
 Name[da]=Ekstern adgang via SSH
 Name[de]=SSH-Zugriff auf Fremdrechner
 Name[el]=Απομακρυσμένη ssh πρόσβαση
