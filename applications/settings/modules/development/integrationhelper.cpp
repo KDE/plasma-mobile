@@ -23,6 +23,9 @@
 #include <QFile>
 #include <QDebug>
 
+#include <KConfigGroup>
+#include <KGlobal>
+#include <KSharedConfig>
 
 IntegrationHelper::IntegrationHelper(QObject *parent)
     : QObject(parent)
@@ -33,7 +36,10 @@ ActionReply IntegrationHelper::enable(const QVariantMap &args)
 {
     Q_UNUSED(args)
     QStringList enableArgs;
-    enableArgs << "ar" << "-r" << "http://repo.merproject.org/obs/kde:/devel:/ux:/integration/latest_i586/kde:devel:ux:integration.repo";
+    KConfigGroup confGroup(KGlobal::config(), "General");
+    const QString devRepo = confGroup.readEntry("integrationBranch",
+                                                "http://repo.merproject.org/obs/kde:/devel:/ux:/integration/latest_i586/kde:devel:ux:integration.repo");
+    enableArgs << "ar" << "-r" << devRepo;
 
     int rv = QProcess::execute("zypper", enableArgs);
 
