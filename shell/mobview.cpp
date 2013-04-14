@@ -186,8 +186,6 @@ void MobView::updateGeometry()
     }
 
     if (c->size().toSize() != size()) {
-        c->setMaximumSize(size());
-        c->setMinimumSize(size());
         c->resize(size());
     }
 }

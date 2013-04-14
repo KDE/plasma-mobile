@@ -13,6 +13,8 @@ add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 
 find_package(Nepomuk REQUIRED)
 find_package(Soprano)
+find_package(QtMobility COMPONENTS Sensors)
+find_package(LibKScreen)
 
 macro_log_feature(
    Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net"
@@ -28,6 +30,7 @@ macro_log_feature(
 
 find_package(KDE4Workspace)
 macro_log_feature(KDE4WORKSPACE_FOUND "kdebase workspace" "KDE base workspace libraries" "http://www.kde.org" FALSE "" "Needed for building several Plasma plugins")
+macro_log_feature(X11_Xinput_FOUND "libXi" "X11 input management library" "http://xorg.freedesktop.org" FALSE "" "Needed for orientation dataengine.")
 
 include(SopranoAddOntology)
 add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)

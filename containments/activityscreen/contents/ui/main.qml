@@ -56,6 +56,12 @@ Item {
         //do it here since theme is not accessible in LayoutManager
         //TODO: icon size from the configuration
         //TODO: remove hardcoded sizes, use framesvg boders
+        if (width >= height) {
+            LayoutManager.orientation = "horizontal"
+        } else {
+            LayoutManager.orientation = "vertical"
+        }
+
         updateGridSize()
 
         plasmoid.containmentType = "CustomContainment"
@@ -77,6 +83,9 @@ Item {
         plasmoidGroup.category = "Applet-"+applet.id
         LayoutManager.itemGroups[plasmoidGroup.category] = plasmoidGroup
     }
+
+    onWidthChanged: layoutTimer.restart()
+    onHeightChanged: layoutTimer.restart()
 
     PlasmaCore.Svg {
         id: iconsSvg
@@ -319,12 +328,28 @@ Item {
                     running: false
                     interval: 100
                     onTriggered: {
+
+                        //check if the orientation is still the same
+                        var newOrientation
+                        //horizontal
+                        if (width >= height) {
+                            newOrientation = "horizontal"
+                        //vertical
+                        } else {
+                            newOrientation = "vertical"
+                        }
+                        if (LayoutManager.orientation != newOrientation) {
+                            LayoutManager.orientation = newOrientation
+                            LayoutManager.resetPositions()
+                            LayoutManager.restore()
+                        }
+
                         LayoutManager.resetPositions()
                         for (var i=0; i<resultsFlow.children.length; ++i) {
                             child = resultsFlow.children[i]
                             if (child.enabled) {
-                                if (LayoutManager.itemsConfig[child.category]) {
-                                    var rect = LayoutManager.itemsConfig[child.category]
+                                if (LayoutManager.itemsConfig(child.category)) {
+                                    var rect = LayoutManager.itemsConfig(child.category)
                                     child.x = rect.x
                                     child.y = rect.y
                                     child.width = rect.width

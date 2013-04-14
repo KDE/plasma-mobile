@@ -74,12 +74,12 @@ PanelProxy::~PanelProxy()
     delete m_panel;
 }
 
-QGraphicsObject *PanelProxy::mainItem() const
+QDeclarativeItem *PanelProxy::mainItem() const
 {
     return m_mainItem.data();
 }
 
-void PanelProxy::setMainItem(QGraphicsObject *mainItem)
+void PanelProxy::setMainItem(QDeclarativeItem *mainItem)
 {
     if (m_mainItem.data() != mainItem) {
         if (m_mainItem) {
@@ -95,6 +95,8 @@ void PanelProxy::setMainItem(QGraphicsObject *mainItem)
 
         mainItem->installEventFilter(this);
 
+        connect(mainItem, SIGNAL(widthChanged()), this, SLOT(syncMainItem()));
+        connect(mainItem, SIGNAL(heightChanged()), this, SLOT(syncMainItem()));
         //if this is called in Compenent.onCompleted we have to wait a loop the item is added to a scene
         QTimer::singleShot(0, this, SLOT(syncMainItem()));
         emit mainItemChanged();
@@ -133,8 +135,8 @@ void PanelProxy::syncMainItem()
 
     m_panel->setScene(scene);
 
-    m_panel->setMinimumSize(QSize(m_mainItem.data()->boundingRect().width(), m_mainItem.data()->boundingRect().height()));
-    m_panel->setMaximumSize(m_panel->minimumSize());
+    m_panel->resize(QSize(m_mainItem.data()->width(), m_mainItem.data()->height()));
+    //m_panel->setMaximumSize(m_panel->minimumSize());
 
     QRectF itemGeometry(QPointF(m_mainItem.data()->x(), m_mainItem.data()->y()),
                         QSizeF(m_mainItem.data()->boundingRect().size()));

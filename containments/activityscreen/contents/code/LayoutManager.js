@@ -19,6 +19,8 @@
 
 .pragma library
 
+var orientation
+
 var positions = new Array()
 
 var cellSize = new Object()
@@ -27,15 +29,32 @@ cellSize.height = 158
 
 var resultsFlow
 
-var itemsConfig
+var itemsConfigHorizontal
+var itemsConfigVertical
 
 //bookkeeping for the item groups
 var itemGroups = new Object()
 
+function itemsConfig(group)
+{
+    if (orientation == "vertical") {
+        if (itemsConfigVertical[group]) {
+            return itemsConfigVertical[group]
+        }
+    } else {
+        if (itemsConfigHorizontal[group]) {
+            return itemsConfigHorizontal[group]
+        }
+    }
+
+    return false
+}
+
 function restore()
 {
-    itemsConfig = new Object()
-    var configString = String(plasmoid.readConfig("ItemsGeometries"))
+    itemsConfigHorizontal = new Object()
+    itemsConfigVertical = new Object()
+    var configString = String(plasmoid.readConfig("ItemsGeometriesHorizontal"))
 
     //array, a cell for encoded item geometry
     var itemsStrings = configString.split(";")
@@ -57,22 +76,60 @@ function restore()
         geomObject.y = rect[1]
         geomObject.width = rect[2]
         geomObject.height = rect[3]
-        itemsConfig[idConfig[0]] = geomObject
+        itemsConfigHorizontal[idConfig[0]] = geomObject
     }
 
+
+
+    //now the same, for vertical layout
+    configString = String(plasmoid.readConfig("ItemsGeometriesVertical"))
+
+    //array, a cell for encoded item geometry
+    itemsStrings = configString.split(";")
+    for (var i=0; i<itemsStrings.length; i++) {
+        //[id, encoded geometry]
+        var idConfig = itemsStrings[i].split(":")
+        idConfig[0] = idConfig[0].replace("%3A", ":")
+        if (idConfig.length < 2) {
+            continue
+        }
+
+        //array [x, y, width, height]
+        var rect = idConfig[1].split(",")
+        if (rect.length < 4) {
+            continue
+        }
+        var geomObject = new Object()
+        geomObject.x = rect[0]
+        geomObject.y = rect[1]
+        geomObject.width = rect[2]
+        geomObject.height = rect[3]
+        itemsConfigVertical[idConfig[0]] = geomObject
+    }
 }
 
 function save()
 {
     var configString = String()
 
-    for (id in itemsConfig) {
-        var rect = itemsConfig[id]
+    for (id in itemsConfigHorizontal) {
+        var rect = itemsConfigHorizontal[id]
         configString += id.replace(":", "%3A") + ":" + rect.x + "," + rect.y + "," + rect.width + "," + rect.height + ";"
     }
 
-    //print("saving "+configString)
-    plasmoid.writeConfig("ItemsGeometries", configString)
+    //print("saving horizontal layout "+configString)
+    plasmoid.writeConfig("ItemsGeometriesHorizontal", configString)
+
+
+    configString = String()
+
+    for (id in itemsConfigVertical) {
+        var rect = itemsConfigVertical[id]
+        configString += id.replace(":", "%3A") + ":" + rect.x + "," + rect.y + "," + rect.width + "," + rect.height + ";"
+    }
+
+    //print("saving vertical layout"+configString)
+    plasmoid.writeConfig("ItemsGeometriesVertical", configString)
 }
 
 function resetPositions()
@@ -257,7 +314,11 @@ function positionItem(item)
     rect.height = item.height
     //save only things that actually have a category (exclude the placeholder)
     if (item.category) {
-        itemsConfig[item.category] = rect
+        if (orientation == "vertical") {
+            itemsConfigVertical[item.category] = rect
+        } else {
+            itemsConfigHorizontal[item.category] = rect
+        }
     }
 }
 
