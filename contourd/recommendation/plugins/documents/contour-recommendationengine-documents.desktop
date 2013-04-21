@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Documents plugin
 Name[da]=Dokument-plugin
+Name[de]=Dokumentenmodul
 Name[el]=Πρόσθετο εγγράφων
 Name[es]=Complemento para documentos
 Name[fr]=Module externe des documents
@@ -16,6 +17,7 @@ Name[uk]=Додаток документів
 Name[x-test]=xxDocuments pluginxx
 Comment=Shows highest rated documents
 Comment[da]=Viser de højest vurderede dokumenter
+Comment[de]=Zeigt die am höchsten bewerteten Dokumente
 Comment[el]=Εμφανίζει τα έγγραφα με την υψηλότερη βαθμολογία
 Comment[es]=Muestra los documentos mejor valorados
 Comment[fr]=Affiche les documents les mieux notés

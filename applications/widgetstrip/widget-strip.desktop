@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Widget Strip
 Name[da]=Widget-stribe
+Name[de]=Miniprogrammleiste
 Name[el]=Σειρά γραφικών συστατικών
 Name[es]=Tira de elementos gráficos
 Name[et]=Vidinariba
@@ -26,6 +27,7 @@ Name[x-test]=xxWidget Stripxx
 Name[zh_TW]=元件帶
 GenericName=Widget Strip
 GenericName[da]=Widget-stribe
+GenericName[de]=Miniprogrammleiste
 GenericName[el]=Σειρά γραφικών συστατικών
 GenericName[es]=Tira de elementos gráficos
 GenericName[et]=Vidinariba
@@ -51,6 +53,7 @@ GenericName[x-test]=xxWidget Stripxx
 GenericName[zh_TW]=元件帶
 Comment=A collection of widgets
 Comment[da]=En samling af widgets
+Comment[de]=Eine Sammlung von Miniprogrammen
 Comment[el]=Συλλογή γραφικών συστατικών
 Comment[es]=Una colección de elementos gráficos
 Comment[et]=Vidinakogu
