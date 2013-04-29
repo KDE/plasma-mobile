@@ -112,7 +112,7 @@ Item {
             onClicked: settings.showTerminal = checked
         }
 
-        PlasmaComponents.Label {
+        /*PlasmaComponents.Label {
             text: i18n("Enable integration repository:")
             anchors {
                 right: integration.left
@@ -126,7 +126,7 @@ Item {
             onClicked: {
                 dialog.open()
             }
-        }
+        }*/
     }
     PlasmaComponents.QueryDialog {
         id: dialog
