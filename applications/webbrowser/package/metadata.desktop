@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Touch Browser
 Name[da]=Touchbrowser
+Name[de]=Browser für Touch-Geräte
 Name[el]=Περιηγητής αφής
 Name[es]=Navegador táctil
 Name[et]=Puutebrauser
@@ -26,6 +27,7 @@ Name[zh_CN]=触摸浏览器
 Name[zh_TW]=觸控瀏覽器
 Comment=Touchscreen friendly simple web browser
 Comment[da]=Simpel touchskærm-venlig webbrowser
+Comment[de]=Ein einfacher Webbrowser für Touchscreen-Geräte
 Comment[el]=Φιλικός σε οθόνες αφής απλός περιηγητής ιστού
 Comment[es]=Navegador Web sencillo para pantallas táctiles
 Comment[et]=Puuteekraanisõbralik lihtne veebibrauser

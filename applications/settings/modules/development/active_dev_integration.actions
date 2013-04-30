@@ -1,6 +1,7 @@
 [Domain]
 Name=Integration repository
 Name[da]=Integrationssoftwarekilde
+Name[de]=Integrations-Archiv
 Name[el]=Αποθετήριο ενσωμάτωσης
 Name[es]=Repositorio de integración
 Name[et]=Integratsioonihoidla
@@ -24,6 +25,7 @@ Icon=application-x-rpm
 [org.kde.active.integration.enable]
 Name=Activate integration repository
 Name[da]=Softwarekilde til Active-integration
+Name[de]=Integrations-Archiv aktivieren
 Name[el]=Ενεργοποίηση αποθετηρίου ενσωμάτωσης
 Name[es]=Activar el repositorio de integración
 Name[et]=Integratsioonihoidla aktiveerimine
@@ -44,6 +46,7 @@ Name[x-test]=xxActivate integration repositoryxx
 Name[zh_TW]=啟動整合主目錄
 Description=Adds the integration repository on device
 Description[da]=Tilføjer integrationssoftwarekilden på enheden
+Description[de]=Fügt das Integrations-Archiv auf dem Gerät hinzu
 Description[el]=Προσθέτει το αποθετήριο ενσωμάτωσης στη συσκευή
 Description[es]=Añade el repositorio de integración al dispositivo
 Description[et]=Integratsioonihoidla lisamine seadmesse
@@ -67,6 +70,7 @@ Policy=yes
 [org.kde.active.integration.disable]
 Name=Deactivate integration repository
 Name[da]=Deaktivér integrationssoftwarekilde
+Name[de]=Deaktiviert das Integrations-Archiv
 Name[el]=Απνεργοποίηση αποθετηρίου ενσωμάτωσης
 Name[es]=Desactivar el repositorio de integración
 Name[et]=Integratsioonihoidla deaktiveerimine
@@ -87,6 +91,7 @@ Name[x-test]=xxDeactivate integration repositoryxx
 Name[zh_TW]=取消啟動整合主目錄
 Description=Removes the integration repository on device
 Description[da]=Fjerner integrationssoftwarekilden på enheden
+Description[de]=Entfernt das Integrations-Archiv auf dem Gerät
 Description[el]=Διαγράφει το αποθετήριο ενσωμάτωσης από τη συσκευή
 Description[es]=Elimina el repositorio de integración del dispositivo
 Description[et]=Integratsioonihoidla eemaldamine seadmest

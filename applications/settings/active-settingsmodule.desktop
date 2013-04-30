@@ -4,6 +4,7 @@ X-KDE-ServiceType=Active/SettingsModule
 
 Name=Active Settings Module
 Name[da]=Indstillingsmodul til Active
+Name[de]=Einstellungen für Plasma Active
 Name[el]=Άρθρωμα ενεργών ρυθμίσεων
 Name[es]=Módulo de preferencias para Active
 Name[et]=Active'i seadistusmoodul
@@ -29,6 +30,7 @@ Name[zh_CN]=Active 设置模块
 Name[zh_TW]=Active 設定模組
 Comment=Active Settings Module Plugin
 Comment[da]=Plugin til indstillingsmodul til Active
+Comment[de]=Einstellungsmodul für Plasma Active
 Comment[el]=Πρόσθετο αρθρώματος ενεργών ρυθμίσεων
 Comment[es]=Complemento del módulo de preferencias para Active
 Comment[et]=Active'i seadistusmooduli plugin
