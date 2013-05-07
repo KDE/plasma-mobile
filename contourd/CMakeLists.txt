@@ -102,7 +102,7 @@ set(recommendationmanager_SRC
 
 set(ADDITIONAL_LINK_LIBRARIES
     ${ADDITIONAL_LINK_LIBRARIES}
-    ${KDE4_SOLID_LIBS}
+    QtNetworkManager
     )
 
 ########################################################################

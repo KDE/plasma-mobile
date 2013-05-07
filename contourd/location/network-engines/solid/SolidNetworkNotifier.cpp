@@ -23,17 +23,20 @@
 #include <solid/control/wirelessnetworkinterface.h>
 #include <solid/control/wirelessaccesspoint.h>
 
+#include <QtNetworkManager/manager.h>
+#include <QtNetworkManager/wirelessdevice.h>
+
+
 #include <QHash>
 
 #include <KDebug>
 
-using namespace Solid::Control;
 
 REGISTER_NETWORK_NOTIFIER(SolidNetworkNotifier)
 
 class SolidNetworkNotifier::Private {
 public:
-    QHash < QString, WirelessNetworkInterface * > interfaces;
+    QHash < QString, NetworkManager::WirelessDevice * > interfaces;
 
 };
 
@@ -47,13 +50,13 @@ void SolidNetworkNotifier::init()
 {
     kDebug() << "Solid";
 
-    NetworkInterfaceList iflist = NetworkManager::networkInterfaces();
+    NetworkManager::DeviceList iflist = NetworkManager::networkInterfaces();
 
-    foreach (NetworkInterface * iface, iflist) {
+    foreach (NetworkManager::Device * iface, iflist) {
         // Checking whether it is a wifi
-        if (iface->type() != NetworkInterface::Ieee80211) continue;
+        if (iface->type() != NetworkManager::Device::Wifi) continue;
 
-        WirelessNetworkInterface * wlan = static_cast < WirelessNetworkInterface * > (iface);
+        NetworkManager::WirelessDevice * wlan = static_cast < NetworkManager::WirelessDevice * > (iface);
 
         d->interfaces[wlan->interfaceName()] = wlan;
 
