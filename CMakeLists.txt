@@ -5,7 +5,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 
 find_package(KDE4 REQUIRED)
 find_package(KActivities 6.0.0 REQUIRED)
-
+include(MacroOptionalAddSubdirectory)
 include(KDE4Defaults)
 
 add_definitions (${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
@@ -13,6 +13,9 @@ add_definitions(-DDISABLE_NEPOMUK_LEGACY=1)
 
 find_package(Nepomuk REQUIRED)
 find_package(Soprano)
+find_package(PkgConfig)
+
+pkg_check_modules(QTNETWORKMANAGER QtNetworkManager)
 
 macro_log_feature(
    Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net"
@@ -65,12 +68,17 @@ add_subdirectory(applications)
 add_subdirectory(artwork)
 add_subdirectory(components)
 add_subdirectory(containments)
-add_subdirectory(contourd)
 add_subdirectory(dataengines)
 add_subdirectory(qmlpackages)
 add_subdirectory(runners)
 add_subdirectory(shell)
 add_subdirectory(wallpapers)
+
+if (QTNETWORKMANAGER_FOUND)
+    add_subdirectory(contourd)
+else (QTNETWORKMANAGER_FOUND)
+    message(WARNING "QtNetworkManager not found. http://projects.kde.org/search?q=networkmanager&scope=all&all_words=1&projects=1&submit=Submit needed to build Contour")
+endif (QTNETWORKMANAGER_FOUND)
 
 if (BUILD_HANDSET)
    add_subdirectory(handset)
