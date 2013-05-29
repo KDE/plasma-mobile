@@ -15,7 +15,7 @@ find_package(Nepomuk REQUIRED)
 find_package(Soprano)
 find_package(PkgConfig)
 
-pkg_check_modules(QTNETWORKMANAGER QtNetworkManager)
+pkg_check_modules(QTNETWORKMANAGER NetworkManagerQt)
 
 macro_log_feature(
    Soprano_FOUND "Soprano" "Semantic Desktop Storing" "http://soprano.sourceforge.net"

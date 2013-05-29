@@ -12,6 +12,8 @@ include_directories(
   ${QT_INCLUDES}
   ${KDE4_INCLUDES}
   ${NEPOMUK_INCLUDE_DIR}
+  /usr/include/NetworkManager
+  /usr/include/NetworkManagerQt
   ${SOPRANO_INCLUDE_DIR}
 
   # QtMobility doesn't work for us anyway:
@@ -102,7 +104,7 @@ set(recommendationmanager_SRC
 
 set(ADDITIONAL_LINK_LIBRARIES
     ${ADDITIONAL_LINK_LIBRARIES}
-    QtNetworkManager
+    NetworkManagerQt
     )
 
 ########################################################################
