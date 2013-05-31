@@ -17,6 +17,7 @@ Name[sv]=Rekommendationer
 Name[tr]=Önerilenler
 Name[uk]=Поради
 Name[x-test]=xxRecommendationsxx
+Name[zh_TW]=推薦的項目
 Comment=Contour Recommendations dataengine
 Comment[da]=Anbefalingsdatamotor til Contour
 Comment[el]=Μηχανή δεδομένων συστάσεων του Contour
@@ -33,6 +34,7 @@ Comment[sv]=Contour datagränssnitt för rekommendationer
 Comment[tr]=Contour Öneriler veri motoru
 Comment[uk]=Рушій даних порад Contour
 Comment[x-test]=xxContour Recommendations dataenginexx
+Comment[zh_TW]=Contour 推薦資料引擎
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service

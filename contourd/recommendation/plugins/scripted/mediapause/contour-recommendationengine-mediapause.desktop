@@ -16,6 +16,7 @@ Name[sv]=Gör paus i media
 Name[tr]=Ortamı duraklatır
 Name[uk]=Призупиняє відтворення мультимедійних даних
 Name[x-test]=xxPauses the mediaxx
+Name[zh_TW]=暫停媒體
 Comment=Shows media player control
 Comment[da]=Viser medieafspiller-kontroller
 Comment[el]=Εμφανίζει το χειριστήριο του αναπαραγωγέα πολυμέσων
@@ -32,6 +33,7 @@ Comment[sv]=Visa styrning av mediaspelare
 Comment[tr]=Ortam oynatıcı denetimini gösterir
 Comment[uk]=Показує панель керування програвачем
 Comment[x-test]=xxShows media player controlxx
+Comment[zh_TW]=顯示媒體播放器控制
 Type=Service
 Icon=
 

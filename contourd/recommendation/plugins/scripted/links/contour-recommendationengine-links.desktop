@@ -16,6 +16,7 @@ Name[sv]=Länkinsticksprogram
 Name[tr]=Bağlantılar eklentisi
 Name[uk]=Додаток посилань
 Name[x-test]=xxLinks pluginxx
+Name[zh_TW]=連結外掛程式
 Comment=Shows some KDE-related links
 Comment[da]=Viser nogle KDE-relaterede links
 Comment[de]=Zeigt einige Verknüpfungen zu KDE
@@ -33,6 +34,7 @@ Comment[sv]=Visar vissa KDE-relaterade länkar
 Comment[tr]=Bazı KDE ile ilgili bağlantıları gösterir
 Comment[uk]=Показує деякі пов’язані з KDE посилання
 Comment[x-test]=xxShows some KDE-related linksxx
+Comment[zh_TW]=顯示一些 KDE 相關連結
 Type=Service
 Icon=
 

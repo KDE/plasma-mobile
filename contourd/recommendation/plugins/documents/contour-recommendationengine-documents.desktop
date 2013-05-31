@@ -16,6 +16,7 @@ Name[sv]=Dokumentinsticksprogram
 Name[tr]=Belgeler eklentisi
 Name[uk]=Додаток документів
 Name[x-test]=xxDocuments pluginxx
+Name[zh_TW]=文件外掛程式
 Comment=Shows highest rated documents
 Comment[da]=Viser de højest vurderede dokumenter
 Comment[de]=Zeigt die am höchsten bewerteten Dokumente
@@ -33,6 +34,7 @@ Comment[sv]=Visar dokument med högst betyg
 Comment[tr]=En yüksek beğeni alan belgeleri gösterir
 Comment[uk]=Показує список документів з найвищими оцінками
 Comment[x-test]=xxShows highest rated documentsxx
+Comment[zh_TW]=顯示最高評比文件
 Type=Service
 Icon=
 

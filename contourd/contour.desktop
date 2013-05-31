@@ -18,6 +18,7 @@ Name[sv]=Contour dataserver
 Name[tr]=Contour veri sunucusu
 Name[uk]=Сервер даних Contour
 Name[x-test]=xxContour data serverxx
+Name[zh_TW]=Contour 資料伺服器
 
 Type=Service
 X-KDE-StartupNotify=false
