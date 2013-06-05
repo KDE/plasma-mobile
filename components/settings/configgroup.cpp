@@ -1,5 +1,6 @@
 /*
  *   Copyright 2011-2012 by Sebastian Kügler <sebas@kde.org>
+ *   Copyright 2013 by Aaron Seigo <aseigo@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -18,6 +19,7 @@
  */
 
 #include "configgroup.h"
+
 #include <QtCore/QTimer>
 #include <KConfig>
 #include <KConfigGroup>
@@ -29,8 +31,17 @@ namespace Plasma
 class ConfigGroupPrivate {
 
 public:
-    ConfigGroupPrivate(ConfigGroup *q):
-                  q(q) {}
+    ConfigGroupPrivate(ConfigGroup *q)
+        : q(q),
+          config(0),
+          configGroup(0)
+    {}
+
+    ~ConfigGroupPrivate()
+    {
+        delete configGroup;
+    }
+
     ConfigGroup* q;
     KSharedConfigPtr config;
     KConfigGroup *configGroup;
@@ -40,15 +51,10 @@ public:
 };
 
 
-ConfigGroup::ConfigGroup(QDeclarativeItem* parent)
+ConfigGroup::ConfigGroup(QDeclarativeItem *parent)
     : QDeclarativeItem(parent),
-      d(0)
+      d(new ConfigGroupPrivate(this))
 {
-    setObjectName("ConfigModel");
-    d = new ConfigGroupPrivate(this);
-    d->config = 0;
-    d->configGroup = 0;
-
     // Delay and compress everything within 5 seconds into one sync
     d->synchTimer = new QTimer(this);
     d->synchTimer->setSingleShot(true);
@@ -59,10 +65,11 @@ ConfigGroup::ConfigGroup(QDeclarativeItem* parent)
 ConfigGroup::~ConfigGroup()
 {
     if (d->synchTimer->isActive()) {
-        kDebug() << "SYNC......";
+        //kDebug() << "SYNC......";
         d->synchTimer->stop();
         d->configGroup->sync();
     }
+
     delete d;
 }
 
@@ -121,12 +128,16 @@ bool ConfigGroup::readConfigFile()
     ConfigGroup* parentGroup = 0;
     QObject* current = parent();
     while (current) {
-        parentGroup = dynamic_cast<ConfigGroup*>(current);
+        parentGroup = qobject_cast<ConfigGroup*>(current);
         if (parentGroup) {
             break;
         }
         current = current->parent();
     }
+
+    delete d->configGroup;
+    d->configGroup = 0;
+
     if (parentGroup) {
         d->configGroup = new KConfigGroup(parentGroup->configGroup(), d->group);
         return true;
@@ -148,7 +159,7 @@ bool ConfigGroup::writeEntry(const QString& key, const QVariant& value)
     if (!d->configGroup) {
         return false;
     }
-    //kDebug() << " writing setting: " << key << value;
+
     d->configGroup->writeEntry(key, value);
     d->synchTimer->start();
     return true;
@@ -177,6 +188,5 @@ void ConfigGroup::sync()
     }
 }
 
-}
-
+} // namespace Plasma
 #include "configgroup.moc"
