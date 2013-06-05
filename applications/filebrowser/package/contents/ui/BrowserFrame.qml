@@ -236,11 +236,22 @@ Item {
                                 if (contains) {
                                     selectedModel.append(model)
                                     opacity = 1
+                                    if (selectedModel.count == 1) {
+                                        resourceInstance.uri = model.url;
+                                    } else {
+                                        resourceInstance.uri = "";
+                                    }
                                 } else {
+                                    if (resourceInstance.uri === model.url) {
+                                        resourceInstance.uri = "";
+                                    }
                                     for (var i = 0; i < selectedModel.count; ++i) {
                                         if ((model.url && model.url == selectedModel.get(i).url)) {
                                             opacity = 0
                                             selectedModel.remove(i)
+                                            if (selectedModel.count == 1) {
+                                                resourceInstance.uri = selectedModel.get(0).url;
+                                            }
                                             return
                                         }
                                     }
