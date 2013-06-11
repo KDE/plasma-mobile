@@ -67,6 +67,7 @@ DirModel::DirModel(QObject *parent)
 
 DirModel::~DirModel()
 {
+    delete m_imageCache;
 }
 
 QString DirModel::url() const
