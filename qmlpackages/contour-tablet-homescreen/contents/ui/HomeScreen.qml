@@ -197,9 +197,6 @@ Item {
             if (activityPanel && mouse.x < activityPanel.x) {
                 activityPanel.state = "hidden"
             }
-            if (mouse.x > recommendationsPanel.x+recommendationsPanel.width) {
-                recommendationsPanel.state = "hidden"
-            }
         }
     }
 
@@ -229,20 +226,8 @@ Item {
         }
     }
 
-    property Item recommendationsPanel
     property Item activityPanel
-    Component {
-        id: recommendationsPanelComponent
-        RecommendationsPanel {
-            id: recommendationsPanel
 
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            x: - width
-        }
-    }
 
 
     Component {
@@ -263,7 +248,6 @@ Item {
     }
 
     Component.onCompleted: {
-        homeScreen.recommendationsPanel = recommendationsPanelComponent.createObject(homeScreen)
         homeScreen.activityPanel = activityPanelComponent.createObject(homeScreen)
     }
 }
