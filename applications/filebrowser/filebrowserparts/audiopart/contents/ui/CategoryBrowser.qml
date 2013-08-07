@@ -141,5 +141,8 @@ Item {
                 }
             }
         }
+        Component.onDestruction: {
+            metadataModel.queryProvider.extraParameters[root.category] = ""
+        }
     }
 }
