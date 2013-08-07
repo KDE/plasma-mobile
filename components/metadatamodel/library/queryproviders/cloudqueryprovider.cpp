@@ -94,7 +94,7 @@ void CloudQueryProvider::doQuery()
     QString query;
 
     query += "select distinct ?label "
-          "count(*) as ?count "
+          "count(distinct ?r) as ?count "
         "where {";
 
     if (d->cloudCategory == "kao:Activity") {
