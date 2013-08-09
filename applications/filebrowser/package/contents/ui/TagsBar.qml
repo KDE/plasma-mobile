@@ -216,6 +216,7 @@ PlasmaComponents.Page {
                                             text: i18n("Delete")
                                             width: Math.min(implicitWidth, mainFlickable.width / 2 - 8)
                                             onClicked: {
+                                                tagDelegate.checked = false;
                                                 var service = metadataSource.serviceForSource("")
                                                 var operation = service.operationDescription("deleteTag")
                                                 operation["Tag"] = model["label"]
