@@ -64,6 +64,7 @@ Column {
         spacing: 4
         exclusive: false
         onCheckedButtonChanged: {
+            metadataModel.queryProvider.tags = []
             resourceBrowser.ensureBrowserVisible()
         }
         anchors {
