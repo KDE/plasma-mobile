@@ -255,6 +255,14 @@ void CloudQueryProvider::doQuery()
 
     query +=  " } group by ?label order by ?label";
 
+    if (d->cloudCategory == "nao:hasTag") {
+        query = "select distinct ?label max(?count) as ?count where {\
+                 {" + query + "}\
+                 union\
+                 {select distinct ?label 0 as ?count where { ?r nao:hasTag ?label}}\
+                 } order by ?count ";
+    }
+
     setSparqlQuery(query);
 }
 

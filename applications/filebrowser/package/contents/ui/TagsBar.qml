@@ -172,7 +172,11 @@ PlasmaComponents.Page {
                             }
                             slideAnim.running = true
                         }
-                        onClicked: checked = !checked
+                        onClicked: {
+                            if (model.count > 0) {
+                                checked = !checked
+                            }
+                        }
                         onCheckedChanged: {
                             var tags = metadataModel.queryProvider.tags
                             if (checked) {
@@ -261,6 +265,8 @@ PlasmaComponents.Page {
                                 operation["ResourceUrls"] = event.mimeData.urls
                                 operation["Tag"] = model["label"]
                                 service.startOperationCall(operation)
+                                tagSizeRectangle.visible = true
+                                metadataModel.queryProvider.requestRequest()
                             }
                             Row {
                                 spacing: 8
@@ -293,6 +299,8 @@ PlasmaComponents.Page {
                                         opacity: 0.6
                                     }
                                     Rectangle {
+                                        id: tagSizeRectangle
+                                        visible: model.count > 0
                                         color: tagDelegate.checked ? theme.highlightColor : theme.textColor
                                         radius: width/2
                                         anchors.centerIn: parent
