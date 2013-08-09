@@ -190,6 +190,12 @@ Item {
             Connections {
                 target: plasmoid
                 onActivityNameChanged: titleText.text = plasmoid.activityName
+                onScreenChanged: {
+                    if (plasmoid.screen < 0) {
+                        resourceInstance.uri = ""
+                        main.currentIndex = -1
+                    }
+                }
             }
 
             Row {
