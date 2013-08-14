@@ -1,4 +1,3 @@
-installPackage(active-welcome org.kde.active.welcome)
 installPackage(powerbutton org.kde.active.powerbutton)
 installPackage(resourcelist org.kde.resourcelist)
 installPackage(digital-clock org.kde.digital-clock)
