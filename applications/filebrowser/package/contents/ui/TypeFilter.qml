@@ -41,7 +41,6 @@ Column {
             queryProvider: MetadataModels.CloudQueryProvider {
                 cloudCategory: "rdf:type"
                 resourceType: "nfo:FileDataObject"
-                minimumRating: metadataModel.queryProvider.minimumRating
             }
         }
         sortRole: "count"
