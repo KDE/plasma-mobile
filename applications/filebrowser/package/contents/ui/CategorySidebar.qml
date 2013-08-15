@@ -68,7 +68,7 @@ PlasmaComponents.Page {
                         horizontalCenter: parent.horizontalCenter
                         leftMargin: theme.defaultFont.mSize.width
                     }
-                    onScoreChanged: metadataModel.minimumRating = score
+                    onScoreChanged: metadataModel.queryProvider.minimumRating = score
                 }
 
                 Loader {
