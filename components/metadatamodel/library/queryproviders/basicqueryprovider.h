@@ -44,6 +44,8 @@
 #include <Nepomuk2/Vocabulary/PIMO>
 #include <Nepomuk2/Vocabulary/NMM>
 #include <Nepomuk2/Vocabulary/TMO>
+
+#include <Soprano/Vocabulary/NAO>
 #include <Soprano/Vocabulary/RDF>
 #include <Soprano/Vocabulary/RDFS>
 #include <Soprano/Vocabulary/NRL>
@@ -198,6 +200,7 @@ protected:
             namespaceResolution.insert(QLatin1String("nco"), NCO::ncoNamespace());
             namespaceResolution.insert(QLatin1String("ncal"), NCAL::ncalNamespace());
             namespaceResolution.insert(QLatin1String("ndo"), NDO::ndoNamespace());
+            namespaceResolution.insert(QLatin1String("nao"), NAO::naoNamespace());
             namespaceResolution.insert(QLatin1String("nmm"), NMM::nmmNamespace());
             namespaceResolution.insert(QLatin1String("nmo"), NMO::nmoNamespace());
             namespaceResolution.insert(QLatin1String("nmo"), NMO::nmoNamespace());
