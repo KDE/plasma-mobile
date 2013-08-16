@@ -321,13 +321,13 @@ void ResourceQueryProvider::doQuery()
 
     if (minimumRating() > 0) {
         const Nepomuk2::Query::LiteralTerm ratingTerm(minimumRating());
-        Nepomuk2::Query::ComparisonTerm term = Nepomuk2::Types::Property(propertyUrl("nao:numericRating")) > ratingTerm;
+        Nepomuk2::Query::ComparisonTerm term = Nepomuk2::Types::Property(propertyUrl("nao:numericRating")) >= ratingTerm;
         rootTerm.addSubTerm(term);
     }
 
     if (maximumRating() > 0) {
         const Nepomuk2::Query::LiteralTerm ratingTerm(maximumRating());
-        Nepomuk2::Query::ComparisonTerm term = Nepomuk2::Types::Property(propertyUrl("nao:numericRating")) < ratingTerm;
+        Nepomuk2::Query::ComparisonTerm term = Nepomuk2::Types::Property(propertyUrl("nao:numericRating")) <= ratingTerm;
         rootTerm.addSubTerm(term);
     }
 
