@@ -48,6 +48,11 @@ plugin=digital-clock
 [Containments][9][Applets][15][Configuration]
 ShowCalendarPopup=false
 
+[Containments][9][Applets][16]
+geometry=70,4,24,24
+immutability=1
+plugin=org.kde.active.orientation
+
 [Containments][9][General]
 SkipItems=klipper
 

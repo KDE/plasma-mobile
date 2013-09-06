@@ -28,7 +28,7 @@ Image {
     fillMode: Image.Tile
     id: systrayPanel
     state: "Hidden"
-    width: Math.max(800, homeScreen.width)
+    width: Math.max(480, homeScreen.width)
     height: Math.max(480+systrayContainer.height+8, homeScreen.height - 50 + background.margins.bottom)
     property bool windowStripVisible: false
     property alias containment: systrayContainer.plasmoid

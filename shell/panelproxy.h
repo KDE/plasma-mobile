@@ -25,7 +25,7 @@
 #include <QTimer>
 #include <QWeakPointer>
 
-class QGraphicsObject;
+class QDeclarativeItem;
 class QGraphicsView;
 
 
@@ -33,7 +33,7 @@ class PanelProxy : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QGraphicsObject *mainItem READ mainItem WRITE setMainItem NOTIFY mainItemChanged)
+    Q_PROPERTY(QDeclarativeItem *mainItem READ mainItem WRITE setMainItem NOTIFY mainItemChanged)
     Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
     Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged)
     Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged)
@@ -50,8 +50,8 @@ public:
     PanelProxy(QObject *parent = 0);
     ~PanelProxy();
 
-    QGraphicsObject *mainItem() const;
-    void setMainItem(QGraphicsObject *mainItem);
+    QDeclarativeItem *mainItem() const;
+    void setMainItem(QDeclarativeItem *mainItem);
 
     bool isVisible() const;
     void setVisible(const bool visible);
@@ -94,7 +94,7 @@ protected:
 
 private:
     QGraphicsView *m_panel;
-    QWeakPointer<QGraphicsObject> m_mainItem;
+    QWeakPointer<QDeclarativeItem> m_mainItem;
     QRect m_windowListArea;
     bool m_acceptsFocus;
     bool m_activeWindow;

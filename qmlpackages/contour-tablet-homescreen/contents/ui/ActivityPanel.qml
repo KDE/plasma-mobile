@@ -19,7 +19,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import Qt 4.7
+import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 import org.kde.qtextracomponents 0.1
@@ -33,7 +33,12 @@ Item {
     }
 
     width: 400
-    state: "hidden"
+
+    //FIXME: this state change sequence at startup seems to fix a correct binding to parent size changes
+    state: "dragging"
+    x: parent.width
+    Component.onCompleted: activityPanel.state = "hidden"
+
     property Item switcher
     onStateChanged: {
         if (!switcher) {
