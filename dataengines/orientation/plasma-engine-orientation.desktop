@@ -1,6 +1,25 @@
 [Desktop Entry]
 Name=Orientation
+Name[da]=Orientering
+Name[nl]=Oriëntatie
+Name[pt]=Orientação
+Name[pt_BR]=Orientação
+Name[sk]=Orientácia
+Name[sl]=Usmerjenost
+Name[sv]=Orientering
+Name[ug]=يۆنىلىش
+Name[uk]=Орієнтація
+Name[x-test]=xxOrientationxx
 Comment=Adjusts screen orientation
+Comment[da]=Justerer skærmens orientering
+Comment[nl]=Scherm oriëntatie aanpassen
+Comment[pt]=Ajusta a orientação do ecrã
+Comment[pt_BR]=Ajuste da orientação da tela
+Comment[sk]=Prispôsobiť orientáciu obrazovky
+Comment[sl]=Prilagodi usmerjenost zaslona
+Comment[sv]=Justerar skärmens orientering
+Comment[uk]=Коригування орієнтації екрана
+Comment[x-test]=xxAdjusts screen orientationxx
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=transform-rotate
