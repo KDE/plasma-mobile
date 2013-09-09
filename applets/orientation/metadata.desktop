@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Orientation
 Name[da]=Orientering
+Name[de]=Ausrichtung
 Name[nl]=Oriëntatie
 Name[pt]=Orientação
 Name[pt_BR]=Orientação
@@ -23,6 +24,7 @@ Comment[x-test]=xxLock/Unlock and configure screen orientationxx
 Encoding=UTF-8
 Keywords=Screen, Orientation
 Keywords[da]=Skærm, orientering
+Keywords[de]=Bildschirm, Ausrichtung
 Keywords[nl]=Scherm, oriëntatie
 Keywords[pt]=Ecrã, Orientação
 Keywords[pt_BR]=Tela, Orientação
