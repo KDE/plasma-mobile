@@ -14,6 +14,7 @@ Name[x-test]=xxOrientationxx
 Name[zh_TW]=方向
 Comment=Lock/Unlock and configure screen orientation
 Comment[da]=Lås/Lås op og indstil skærmorientering
+Comment[de]=Bildschirm sperren/entsperren und Ausrichtung einstellen
 Comment[nl]=Ver-/ontgrendel en stel de oriëntatie van het scherm in
 Comment[pt]=Bloquear/desbloquear e a configurar a orientação do ecrã
 Comment[pt_BR]=Boqueia/desbloqueia e configura a orientação da tela
