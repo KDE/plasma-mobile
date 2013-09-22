@@ -21,6 +21,7 @@ Name[x-test]=xxPauses the mediaxx
 Name[zh_TW]=暫停媒體
 Comment=Shows media player control
 Comment[da]=Viser medieafspiller-kontroller
+Comment[de]=Steuerung für Medienwiedergabe anzeigen
 Comment[el]=Εμφανίζει το χειριστήριο του αναπαραγωγέα πολυμέσων
 Comment[es]=Muestra el control del reproductor multimedia
 Comment[fi]=Näyttää mediasoittimen kontrollit

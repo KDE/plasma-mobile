@@ -34,6 +34,7 @@ Name[x-test]=xxScreenxx
 Name[zh_TW]=螢幕
 Comment=Lock, Sleep, Timeout
 Comment[da]=Lås, slumre, tidsudløb
+Comment[de]=Sperren,Ruhezustand,Zeitüberschreitung
 Comment[el]=Κλείδωμα, ύπνωση, τέλος χρόνου
 Comment[es]=Bloquear, Dormir, Tiempo de espera
 Comment[et]=Lukustus, uni, ajaületus
