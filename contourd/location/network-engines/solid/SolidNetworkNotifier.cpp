@@ -19,13 +19,8 @@
 
 #include "SolidNetworkNotifier.h"
 
-#include <solid/control/networkmanager.h>
-#include <solid/control/wirelessnetworkinterface.h>
-#include <solid/control/wirelessaccesspoint.h>
-
 #include <NetworkManagerQt/manager.h>
 #include <NetworkManagerQt/wirelessdevice.h>
-
 
 #include <QHash>
 
