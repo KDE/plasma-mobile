@@ -2,6 +2,8 @@
 Name=Orientation
 Name[da]=Orientering
 Name[de]=Ausrichtung
+Name[el]=Προσανατολισμός
+Name[hu]=Tájolás
 Name[kk]=Бағдары
 Name[nl]=Oriëntatie
 Name[pt]=Orientação
@@ -16,6 +18,8 @@ Name[zh_TW]=方向
 Comment=Adjusts screen orientation
 Comment[da]=Justerer skærmens orientering
 Comment[de]=Bildschirmausrichtung anpassen
+Comment[el]=Προσαρμόζει τον προσανατολισμό της οθόνης
+Comment[hu]=Beállítja a kijelző tájolását
 Comment[kk]=Экран бағдарын туралау
 Comment[nl]=Scherm oriëntatie aanpassen
 Comment[pt]=Ajusta a orientação do ecrã
