@@ -29,6 +29,7 @@ Comment[zh_TW]=啟動應用程式
 Encoding=UTF-8
 Keywords=
 Name=Launcher
+Name[ca]=Llançador
 Name[cs]=Spouštěč
 Name[da]=Programgenvej
 Name[de]=Programmstarter

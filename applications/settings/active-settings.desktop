@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Settings
 Name[bs]=Postavke
+Name[ca]=Arranjament
 Name[cs]=Nastavení
 Name[da]=Indstillinger
 Name[de]=Einstellungen
@@ -35,6 +36,7 @@ Name[x-test]=xxSettingsxx
 Name[zh_CN]=设置
 Name[zh_TW]=設定
 GenericName=Settings
+GenericName[ca]=Arranjament
 GenericName[cs]=Nastavení
 GenericName[da]=Indstillinger
 GenericName[de]=Einstellungen

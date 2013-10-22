@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Books
+Name[ca]=Llibres
 Name[cs]=Knihy
 Name[da]=Bøger
 Name[de]=Bücher
@@ -31,6 +32,7 @@ Name[wa]=Lives
 Name[x-test]=xxBooksxx
 Name[zh_TW]=書籍
 GenericName=Book collection
+GenericName[ca]=Col·lecció de llibres
 GenericName[cs]=Sbírka knih
 GenericName[da]=Bogsamling
 GenericName[de]=Bücher-Sammlung
@@ -60,6 +62,7 @@ GenericName[wa]=Ramexhnêye di lives
 GenericName[x-test]=xxBook collectionxx
 GenericName[zh_TW]=書籍收藏
 Comment=All books installed on the device
+Comment[ca]=Tots els llibres instal·lats al dispositiu
 Comment[da]=Alle bøger installeret på enheden
 Comment[de]=Alle auf dem Gerät installierten Bücher
 Comment[el]=Όλα τα εγκατεστημένα βιβλία στη συσκευή

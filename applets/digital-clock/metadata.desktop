@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Digital clock
+Name[ca]=Rellotge digital
 Name[cs]=Digitální hodiny
 Name[da]=Digitalt ur
 Name[de]=Digitale Uhr
@@ -32,6 +33,7 @@ Name[x-test]=xxDigital clockxx
 Name[zh_TW]=數位時鐘
 Comment=Time displayed in a digital format
 Comment[bs]=Vrijeme prikazano u digitalnom obliku
+Comment[ca]=L'hora visualitzada en un format digital
 Comment[cs]=Čas zobrazený v digitálním formátu
 Comment[da]=Tiden vist i et digitalt format
 Comment[de]=Zeigt die Uhrzeit in digitaler Form an.

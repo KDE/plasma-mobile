@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Testing display of Nepomuk Resources
+Comment[ca]=Visor de proves dels recursos de Nepomuk
 Comment[da]=Test visning af Nepomuk-ressourcer
 Comment[de]=Testen der Anzeige von Nepomuk-Ressourcen
 Comment[el]=Δοκιμή οθόνης πόρων του Nepomuk
@@ -26,6 +27,7 @@ Comment[x-test]=xxTesting display of Nepomuk Resourcesxx
 Comment[zh_TW]=測試 Nepomuk 資源顯示
 Encoding=UTF-8
 Keywords=Online Services, Web
+Keywords[ca]=Serveis en línia, Web
 Keywords[da]=Online-tjenester, web
 Keywords[de]=Online-Dienste, Web
 Keywords[el]=Διαδικτυακές υπηρεσίες, ιστός
@@ -53,6 +55,7 @@ Keywords[wa]=Siervices so fyis, waibe
 Keywords[x-test]=xxOnline Services, Webxx
 Keywords[zh_TW]=線上服務，網頁
 Name=Resources List
+Name[ca]=Llista de recursos
 Name[da]=Ressourceliste
 Name[de]=Ressourcenliste
 Name[el]=Λίστα πόρων

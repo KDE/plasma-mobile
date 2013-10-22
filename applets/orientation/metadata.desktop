@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Orientation
+Name[ca]=Orientació
 Name[da]=Orientering
 Name[de]=Ausrichtung
 Name[el]=Προσανατολισμός
@@ -17,6 +18,7 @@ Name[uk]=Орієнтація
 Name[x-test]=xxOrientationxx
 Name[zh_TW]=方向
 Comment=Lock/Unlock and configure screen orientation
+Comment[ca]=Bloqueja/desbloqueja i configurar l'orientació de la pantalla
 Comment[da]=Lås/Lås op og indstil skærmorientering
 Comment[de]=Bildschirm sperren/entsperren und Ausrichtung einstellen
 Comment[el]=(Ξε)κλείδωμα και διαμόρφωση προσανατολιμού οθόνης
@@ -34,6 +36,7 @@ Comment[x-test]=xxLock/Unlock and configure screen orientationxx
 Comment[zh_TW]=鎖定/解除鎖定/設定螢幕方向
 Encoding=UTF-8
 Keywords=Screen, Orientation
+Keywords[ca]=Pantalla, Orientació
 Keywords[da]=Skærm, orientering
 Keywords[de]=Bildschirm, Ausrichtung
 Keywords[el]=Οθόνη, προσανατολισμός

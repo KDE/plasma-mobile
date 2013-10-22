@@ -2,6 +2,7 @@
 Icon=plasmaapplet-location
 
 Name=Location
+Name[ca]=Ubicació
 Name[cs]=Umístění
 Name[da]=Sted
 Name[de]=Ort
@@ -36,6 +37,7 @@ Name[x-test]=xxLocationxx
 Name[zh_CN]=位置
 Name[zh_TW]=位置
 Comment=Location chooser
+Comment[ca]=Selector de la ubicació
 Comment[da]=Stedvælger
 Comment[de]=Standardort-Auswahl
 Comment[el]=Επιλογέας θέσης

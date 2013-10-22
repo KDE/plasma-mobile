@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Language
+Name[ca]=Idioma
 Name[cs]=Jazyk
 Name[da]=Sprog
 Name[de]=Sprache
@@ -33,6 +34,7 @@ Name[wa]=Lingaedje
 Name[x-test]=xxLanguagexx
 Name[zh_TW]=語言
 Comment=Locale settings
+Comment[ca]=Arranjament de localització
 Comment[cs]=Jazyková nastavení
 Comment[da]=Lokalitetsindstillinger
 Comment[de]=Regionaleinstellungen

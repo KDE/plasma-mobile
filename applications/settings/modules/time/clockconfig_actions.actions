@@ -1,6 +1,7 @@
 [Domain]
 Name=Date and Time Control Module
 Name[bs]=Kontrolni modul datuma i vremena
+Name[ca]=Mòdul de control de data i hora
 Name[cs]=Ovládací modul data a času
 Name[da]=Kontrolmodul til dato og tid
 Name[de]=Kontrollmodul für Datum und Zeit
@@ -39,6 +40,7 @@ Icon=preferences-system-time
 [org.kde.active.clockconfig.save]
 Name=Save the date/time settings
 Name[bs]=Sačuvaj postavke datuma i vremena
+Name[ca]=Desa la configuració de data i hora
 Name[cs]=Uložit nastavení data a času
 Name[da]=Gem dato- og tidsindstillinger
 Name[de]=Einstellungen für Datum und Zeit speichern
@@ -73,6 +75,7 @@ Name[zh_CN]=保存日期和时间设置
 Name[zh_TW]=儲存日期和時間設定值
 Description=System policies prevent you from saving the date/time settings.
 Description[bs]=Sistemske smjernice sprečavaju upisivanje postavki datuma i vremena.
+Description[ca]=Les polítiques del sistema impedeixen que deseu la configuració de data i hora.
 Description[cs]=Nastavení systému vám znemožňuje uložit datum/čas.
 Description[da]=Systempolitikker forhindrer dig i at gemme dato- og tidsindstillinger.
 Description[de]=Die Einstellungen für Datum und Zeit können aufgrund einer Systemrichtlinie nicht gespeichert werden.

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=About
+Name[ca]=Quant a
 Name[cs]=O aplikaci
 Name[da]=Om
 Name[de]=Über
@@ -33,6 +34,7 @@ Name[x-test]=xxAboutxx
 Name[zh_CN]=关于
 Name[zh_TW]=關於
 GenericName=About Plasma Active
+GenericName[ca]=Quant a Plasma actiu
 GenericName[da]=Om Plasma Active
 GenericName[de]=Über Plasma Active
 GenericName[el]=Σχετικά με το Plasma Active
@@ -62,6 +64,7 @@ GenericName[x-test]=xxAbout Plasma Activexx
 GenericName[zh_CN]=关于 Plasma Active
 GenericName[zh_TW]=關於 Plasma Active
 Comment=Information about Plasma Active
+Comment[ca]=Informació quant a Plasma actiu
 Comment[da]=Information om Plasma Active
 Comment[de]=Informationen über Plasma Active
 Comment[el]=Πληροφορίες σχετικά με το Plasma Active
