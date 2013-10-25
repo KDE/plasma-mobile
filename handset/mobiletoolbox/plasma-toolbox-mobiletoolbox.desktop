@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Default toolbox for the mobile shell
+Comment[ca]=Quadre d'eines per omissió per a l'àrea de treball de Mòbil
 Comment[da]=Standard værktøjskasse til mobil-skallen
 Comment[el]=Προκαθορισμένη εργαλειοθήκη για κέλυφος κινητού
 Comment[es]=Caja de herramientas por omisión para el entorno móvil
@@ -25,6 +26,7 @@ Comment[x-test]=xxDefault toolbox for the mobile shellxx
 Comment[zh_TW]=Mobile shell 的預設工具盒
 Icon=plasma
 Name=Mobile toolbox
+Name[ca]=Quadre d'eines de Mòbil
 Name[da]=Værktøjskasse til Mobile
 Name[de]=Werkzeugkasten für Mobile
 Name[el]=Εργαλειοθήκη κινητού

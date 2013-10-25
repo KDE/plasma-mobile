@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=Active/FileBrowserPart
 
 Comment=Plasma package to load a particular mimetype directly in the file browser
+Comment[ca]=Paquet de plasma per a carregar un tipus MIME en particular directament al gestor de fitxers
 Comment[da]=Plasma-pakke til at indlæse en bestemt MIME-type direkte i filbrowseren
 Comment[de]=Plasma-Paket, um einen bestimmten MIME-Typ direkt in den Dateibrowser zu laden
 Comment[el]=Πακέτο plasma για φόρτωση ενός συγκεκριμένου τύπου mime απευθείας στον περιηγητή αρχείων

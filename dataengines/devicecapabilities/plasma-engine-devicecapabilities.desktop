@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Device Capabilities
+Name[ca]=Capacitats del dispositiu
 Name[da]=Enhedskapabiliteter
 Name[de]=Geräte-Fähigkeiten
 Name[el]=Δυνατότητες συσκευής
@@ -26,6 +27,7 @@ Name[wa]=Ahessaedjes di l' éndjin
 Name[x-test]=xxDevice Capabilitiesxx
 Name[zh_TW]=裝置相容性
 Comment=Provides information and services for device-specific aspects
+Comment[ca]=Proporciona informació i serveis per als aspectes específics del dispositiu
 Comment[da]=Giver information og tjenester til enhedsspecifikke aspekter
 Comment[el]=Παρέχει πληροφορίες και υπηρεσίες για θέματα σχετικά με τη συσκευή
 Comment[es]=Proporciona información y servicios para cuestiones específicas de dispositivos

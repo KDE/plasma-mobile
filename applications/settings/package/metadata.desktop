@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Active Settings
+Name[ca]=Arranjament de «actiu»
 Name[da]=Indstillinger for Active
 Name[de]=Einstellungen für Plasma Active
 Name[el]=Ενεργές ρυθμίσεις
@@ -27,6 +28,7 @@ Name[wa]=Apontiaedjes Active
 Name[x-test]=xxActive Settingsxx
 Name[zh_TW]=Active 設定
 Comment=Touchscreen friendly settings UI for Active
+Comment[ca]=Arranjament IU de «actiu», senzill per a pantalles tàctils
 Comment[da]=Touchskærm-venlig konfigurationsbrugerflade til Active
 Comment[el]=Φιλικές σε οθόνες αφής ρυθμίσεις περιβάλλοντος για το Active
 Comment[es]=Interfaz de preferencias de Active para pantallas táctiles

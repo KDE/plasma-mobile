@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Contour activity screen
+Name[ca]=Pantalla d'activitat Contour
 Name[da]=Contour aktivitetsbillede
 Name[el]=Οθόνη δραστηριότητας contour
 Name[es]=Pantalla de actividad para Contour
@@ -25,6 +26,7 @@ Name[wa]=Waitroûle d' activité Contour
 Name[x-test]=xxContour activity screenxx
 Name[zh_TW]=Contour 活動螢幕
 Comment=Categorized resources and widgets
+Comment[ca]=Recursos i estris catalogats
 Comment[da]=Kategoriserede ressourcer og widgets
 Comment[de]=Ressourcen und Miniprogramme sortiert in Kategorien
 Comment[el]=Ταξινομημένοι πόροι και γραφικά συστατικά

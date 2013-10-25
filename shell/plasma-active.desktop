@@ -2,6 +2,7 @@
 Exec=plasma-device
 X-DBUS-StartupType=wait
 Name=Plasma device shell
+Name[ca]=Àrea de treball del dispositiu Plasma
 Name[da]=Plasma enhedsskal
 Name[el]=Κέλυφος συσκευής plasma
 Name[es]=Consola de dispositivo para Plasma
@@ -27,6 +28,7 @@ Name[wa]=Shell d' éndjin Plasma
 Name[x-test]=xxPlasma device shellxx
 Name[zh_TW]=Plasma 裝置 shell
 Comment=Workspace shell for a wide spectrum of portable devices.
+Comment[ca]=Espai de treball per a una àmplia gamma de dispositius portàtils.
 Comment[da]=Arbejdsområde-skal for et bredt spektrum af transportable enheder.
 Comment[el]=Κέλυφος χώρου εργασίας για ένα ευρύ φάσμα συμβατών συσκευών.
 Comment[es]=Entorno de espacio de trabajo para un amplio espectro de dispositivos portátiles.

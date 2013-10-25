@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Documents plugin
+Name[ca]=Connector per a documents
 Name[da]=Dokument-plugin
 Name[de]=Dokumentenmodul
 Name[el]=Πρόσθετο εγγράφων
@@ -21,6 +22,7 @@ Name[uk]=Додаток документів
 Name[x-test]=xxDocuments pluginxx
 Name[zh_TW]=文件外掛程式
 Comment=Shows highest rated documents
+Comment[ca]=Mostra els documents millor valorats
 Comment[da]=Viser de højest vurderede dokumenter
 Comment[de]=Zeigt die am höchsten bewerteten Dokumente
 Comment[el]=Εμφανίζει τα έγγραφα με την υψηλότερη βαθμολογία

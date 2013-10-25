@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Mobile Network Engine
+Name[ca]=Motor de la xarxa de Mòbil
 Name[da]=Netværksmotor til Mobile
 Name[el]=Μηχανή δικτύου κινητού
 Name[es]=Motor de red móvil
@@ -25,6 +26,7 @@ Name[wa]=Moteur di rantoele axhlåve
 Name[x-test]=xxMobile Network Enginexx
 Name[zh_TW]=行動網路引擎
 Comment=Mobile network engine
+Comment[ca]=Motor de la xarxa de Mòbil
 Comment[da]=Netværksmotor til Mobile
 Comment[el]=Μηχανή δικτύου κινητού
 Comment[es]=Motor de red móvil

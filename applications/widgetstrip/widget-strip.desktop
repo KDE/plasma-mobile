@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Widget Strip
+Name[ca]=Banda d'estris
 Name[da]=Widget-stribe
 Name[de]=Miniprogrammleiste
 Name[el]=Σειρά γραφικών συστατικών
@@ -29,6 +30,7 @@ Name[wa]=Binde d' ahesses
 Name[x-test]=xxWidget Stripxx
 Name[zh_TW]=元件帶
 GenericName=Widget Strip
+GenericName[ca]=Banda d'estris
 GenericName[da]=Widget-stribe
 GenericName[de]=Miniprogrammleiste
 GenericName[el]=Σειρά γραφικών συστατικών
@@ -58,6 +60,7 @@ GenericName[wa]=Binde d' ahesses
 GenericName[x-test]=xxWidget Stripxx
 GenericName[zh_TW]=元件帶
 Comment=A collection of widgets
+Comment[ca]=Una col·lecció d'estris
 Comment[da]=En samling af widgets
 Comment[de]=Eine Sammlung von Miniprogrammen
 Comment[el]=Συλλογή γραφικών συστατικών

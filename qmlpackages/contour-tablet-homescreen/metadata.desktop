@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Contour tablet homescreen
+Comment[ca]=Pantalla d'inici Contour de la tauleta
 Comment[da]=startskærm for Contour tablet
 Comment[el]=Contour tablet homescreen
 Comment[es]=Pantalla de inicio Contour para tabletas
@@ -26,6 +27,7 @@ Comment[zh_TW]=Contour 平板首頁
 Encoding=UTF-8
 Keywords=
 Name=Tablet homescreen
+Name[ca]=Pantalla d'inici de la tauleta
 Name[da]=startskærm for tablet
 Name[el]=Αρχική οθόνη πινακίου
 Name[es]=Pantalla de inicio para tabletas

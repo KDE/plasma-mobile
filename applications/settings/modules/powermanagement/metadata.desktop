@@ -35,6 +35,7 @@ Name[wa]=Waitroûle
 Name[x-test]=xxScreenxx
 Name[zh_TW]=螢幕
 Comment=Lock, Sleep, Timeout
+Comment[ca]=Bloqueja, Suspèn, Temps d'expiració
 Comment[da]=Lås, slumre, tidsudløb
 Comment[de]=Sperren,Ruhezustand,Zeitüberschreitung
 Comment[el]=Κλείδωμα, ύπνωση, τέλος χρόνου

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Configuration Test
+Name[ca]=Prova la configuració
 Name[da]=Konfigurationstest
 Name[de]=Einrichtungstest
 Name[el]=Δοκιμή διαμόρφωσης
@@ -26,6 +27,7 @@ Name[wa]=Assaye di l' apontiaedje
 Name[x-test]=xxConfiguration Testxx
 Name[zh_TW]=設定測試
 Comment=Config QML Bindings
+Comment[ca]=Configuració dels lligams de QML
 Comment[da]=Konfigurér QML-bindinger
 Comment[de]=Einrichtung von QML-Bindungen
 Comment[el]=Διαμόρφωση QML δεσμεύσεων

@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=Contour/RecommendationEngine/QtScript
 
 Comment=Scripted recommendation engine for Contour
+Comment[ca]=Motor de recomanacions amb scripts per a Contour
 Comment[da]=Scriptet anbefalingsmotor til Contour
 Comment[el]=Μηχανή σεναρίων παραγωγής συστάσεων για το Contour
 Comment[es]=Motor de recomendaciones de scripts para Contour

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Active Metadata
+Name[ca]=Metadades de «actiu»
 Name[da]=Acitve-metadata
 Name[de]=Active-Metadaten
 Name[el]=Ενεργά μεταδεδομένα
@@ -26,6 +27,7 @@ Name[wa]=Meta-dnêyes d' Active
 Name[x-test]=xxActive Metadataxx
 Name[zh_TW]=Active 中繼資料
 Comment=Provides metadata for semantic resources
+Comment[ca]=Proporciona metadades per a recursos semàntics
 Comment[da]=Leverer metadata til semantiske ressourcer
 Comment[de]=Stellt Metadaten für semantische Ressourcen bereit
 Comment[el]=Παρέχει μεταδεδομένα για σημασιολογικούς πόρους
