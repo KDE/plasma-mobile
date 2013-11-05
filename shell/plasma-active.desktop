@@ -4,6 +4,7 @@ X-DBUS-StartupType=wait
 Name=Plasma device shell
 Name[ca]=Àrea de treball del dispositiu Plasma
 Name[da]=Plasma enhedsskal
+Name[de]=Plasma-Geräte-Shell
 Name[el]=Κέλυφος συσκευής plasma
 Name[es]=Consola de dispositivo para Plasma
 Name[et]=Plasma seadmekest
