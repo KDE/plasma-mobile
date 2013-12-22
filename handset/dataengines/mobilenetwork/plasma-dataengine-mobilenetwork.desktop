@@ -2,6 +2,7 @@
 Name=Mobile Network Engine
 Name[ca]=Motor de la xarxa de Mòbil
 Name[da]=Netværksmotor til Mobile
+Name[de]=Mobilfunknetzmodul
 Name[el]=Μηχανή δικτύου κινητού
 Name[es]=Motor de red móvil
 Name[et]=Mobiilivõrgu mootor
@@ -28,6 +29,7 @@ Name[zh_TW]=行動網路引擎
 Comment=Mobile network engine
 Comment[ca]=Motor de la xarxa de Mòbil
 Comment[da]=Netværksmotor til Mobile
+Comment[de]=Mobilfunknetzmodul
 Comment[el]=Μηχανή δικτύου κινητού
 Comment[es]=Motor de red móvil
 Comment[et]=Mobiilivõrgu mootor
