@@ -5,6 +5,7 @@ X-KDE-ServiceType=Contour/RecommendationEngine
 Comment=Recommendation engine for Contour
 Comment[ca]=Motor de recomanacions per a Contour
 Comment[da]=Anbefalingsmotor til Contour
+Comment[de]=Vorschlags-Datentreiber für Contour
 Comment[el]=Μηχανή συστάσεων για το Contour
 Comment[es]=Motor de recomendaciones para Contour
 Comment[fr]=Moteur de recommandation pour Contour

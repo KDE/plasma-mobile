@@ -2,7 +2,7 @@
 Name=Recommendations
 Name[ca]=Recomanacions
 Name[da]=Anbefalinger
-Name[de]=Empfehlungen
+Name[de]=Vorschläge
 Name[el]=Συστάσεις
 Name[es]=Recomendaciones
 Name[fi]=Suositukset
@@ -27,6 +27,7 @@ Name[zh_TW]=推薦的項目
 Comment=Contour Recommendations dataengine
 Comment[ca]=Motor de dades de recomanacions per a Contour
 Comment[da]=Anbefalingsdatamotor til Contour
+Comment[de]=Contour-Datentreiber für Vorschläge
 Comment[el]=Μηχανή δεδομένων συστάσεων του Contour
 Comment[es]=Motor de datos de recomendaciones para Contour
 Comment[fr]=Moteur de données de recommandations pour Contour
