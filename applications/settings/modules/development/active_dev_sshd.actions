@@ -1,5 +1,6 @@
 [Domain]
 Name=SSH Remote Access
+Name[bs]=SSH udaljeni pristup
 Name[ca]=Accés remot via SSH
 Name[cs]=Vzdálený přístup SSH
 Name[da]=Ekstern adgang via SSH
@@ -30,6 +31,7 @@ Icon=utilities-terminal
 
 [org.kde.active.sshdcontrol.start]
 Name=Activate sshd
+Name[bs]=Aktiviraj sshd
 Name[ca]=Activa sshd
 Name[cs]=Aktivovat sshd
 Name[da]=Aktivér sshd
@@ -57,6 +59,7 @@ Name[wa]=Mete e-n alaedje sshd
 Name[x-test]=xxActivate sshdxx
 Name[zh_TW]=啟動 sshd
 Description=Starts sshd on device
+Description[bs]=Započinje sshd na uređaju
 Description[ca]=Inicia sshd al dispositiu
 Description[da]=Starter sshd på enheden
 Description[de]=Startet SSHD auf dem Gerät
@@ -86,6 +89,7 @@ Policy=yes
 
 [org.kde.active.sshdcontrol.stop]
 Name=Deactivate sshd
+Name[bs]=Deaktiviraj sshd
 Name[ca]=Desactiva sshd
 Name[cs]=Deaktivovat sshd
 Name[da]=Deaktivér sshd
@@ -113,6 +117,7 @@ Name[wa]=Essocter sshd
 Name[x-test]=xxDeactivate sshdxx
 Name[zh_TW]=停止 sshd
 Description=Stops sshd on device
+Description[bs]=Zaustavlja sshd na uređaju
 Description[ca]=Atura sshd al dispositiu
 Description[da]=Stopper sshd på enheden
 Description[de]=Stoppt SSHD auf dem Gerät

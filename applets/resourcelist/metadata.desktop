@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Testing display of Nepomuk Resources
+Comment[bs]=Testiranje prikaza izvora Nepomuk-a
 Comment[ca]=Visor de proves dels recursos de Nepomuk
 Comment[da]=Test visning af Nepomuk-ressourcer
 Comment[de]=Testen der Anzeige von Nepomuk-Ressourcen
@@ -27,6 +28,7 @@ Comment[x-test]=xxTesting display of Nepomuk Resourcesxx
 Comment[zh_TW]=測試 Nepomuk 資源顯示
 Encoding=UTF-8
 Keywords=Online Services, Web
+Keywords[bs]=Online Servisi, Web
 Keywords[ca]=Serveis en línia, Web
 Keywords[da]=Online-tjenester, web
 Keywords[de]=Online-Dienste, Web
@@ -55,6 +57,7 @@ Keywords[wa]=Siervices so fyis, waibe
 Keywords[x-test]=xxOnline Services, Webxx
 Keywords[zh_TW]=線上服務，網頁
 Name=Resources List
+Name[bs]=Lista izvora
 Name[ca]=Llista de recursos
 Name[da]=Ressourceliste
 Name[de]=Ressourcenliste

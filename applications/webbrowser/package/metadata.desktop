@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Touch Browser
+Name[bs]=Preglednik na dodir
 Name[ca]=Navegador tàctil
 Name[da]=Touchbrowser
 Name[de]=Browser für Touch-Geräte
@@ -28,6 +29,7 @@ Name[x-test]=xxTouch Browserxx
 Name[zh_CN]=触摸浏览器
 Name[zh_TW]=觸控瀏覽器
 Comment=Touchscreen friendly simple web browser
+Comment[bs]=Jednostavni Touchscreen web preglednik
 Comment[ca]=Navegador web senzill per a pantalles tàctils
 Comment[da]=Simpel touchskærm-venlig webbrowser
 Comment[de]=Ein einfacher Webbrowser für Touchscreen-Geräte

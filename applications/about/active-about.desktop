@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=About
+Name[bs]=O programu
 Name[ca]=Quant a
 Name[cs]=O aplikaci
 Name[da]=Om
@@ -34,6 +35,7 @@ Name[x-test]=xxAboutxx
 Name[zh_CN]=关于
 Name[zh_TW]=關於
 GenericName=About Plasma Active
+GenericName[bs]=O Plasma Active
 GenericName[ca]=Quant a Plasma actiu
 GenericName[da]=Om Plasma Active
 GenericName[de]=Über Plasma Active
@@ -64,6 +66,7 @@ GenericName[x-test]=xxAbout Plasma Activexx
 GenericName[zh_CN]=关于 Plasma Active
 GenericName[zh_TW]=關於 Plasma Active
 Comment=Information about Plasma Active
+Comment[bs]=Informacija o Plasma Active
 Comment[ca]=Informació quant a Plasma actiu
 Comment[da]=Information om Plasma Active
 Comment[de]=Informationen über Plasma Active

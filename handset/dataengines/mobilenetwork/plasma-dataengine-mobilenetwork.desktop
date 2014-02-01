@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Mobile Network Engine
+Name[bs]=Pogon mobilna mreže
 Name[ca]=Motor de la xarxa de Mòbil
 Name[da]=Netværksmotor til Mobile
 Name[de]=Mobilfunknetz-Modul
@@ -27,6 +28,7 @@ Name[wa]=Moteur di rantoele axhlåve
 Name[x-test]=xxMobile Network Enginexx
 Name[zh_TW]=行動網路引擎
 Comment=Mobile network engine
+Comment[bs]=Pogon mobilna mreže
 Comment[ca]=Motor de la xarxa de Mòbil
 Comment[da]=Netværksmotor til Mobile
 Comment[de]=Mobilfunknetz-Modul

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Links plugin
+Name[bs]=Linkovi plugin-a
 Name[ca]=Connector per a enllaços
 Name[da]=Link-plugin
 Name[de]=Verknüpfungsmodul
@@ -22,6 +23,7 @@ Name[uk]=Додаток посилань
 Name[x-test]=xxLinks pluginxx
 Name[zh_TW]=連結外掛程式
 Comment=Shows some KDE-related links
+Comment[bs]=Prikazuje neke KDE-vezane linkove
 Comment[ca]=Mostra alguns enllaços relacionats amb el KDE
 Comment[da]=Viser nogle KDE-relaterede links
 Comment[de]=Zeigt einige Verknüpfungen zu KDE

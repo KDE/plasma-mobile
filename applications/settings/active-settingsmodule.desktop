@@ -3,6 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=Active/SettingsModule
 
 Name=Active Settings Module
+Name[bs]=Modul za aktivne postavke
 Name[ca]=El mòdul d'arranjament de «actiu»
 Name[da]=Indstillingsmodul til Active
 Name[de]=Einstellungen für Plasma Active
@@ -32,6 +33,7 @@ Name[x-test]=xxActive Settings Modulexx
 Name[zh_CN]=Active 设置模块
 Name[zh_TW]=Active 設定模組
 Comment=Active Settings Module Plugin
+Comment[bs]=Modul za Aktivne postavke Plugin-a
 Comment[ca]=Connector del mòdul d'arranjament de «actiu»
 Comment[da]=Plugin til indstillingsmodul til Active
 Comment[de]=Einstellungsmodul für Plasma Active

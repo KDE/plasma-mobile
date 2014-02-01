@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Start Applications
+Comment[bs]=Započni aplikacije
 Comment[ca]=Inici de les aplicacions
 Comment[da]=Start programmer
 Comment[de]=Startet Anwendungen
@@ -30,6 +31,7 @@ Comment[zh_TW]=啟動應用程式
 Encoding=UTF-8
 Keywords=
 Name=Launcher
+Name[bs]=Pokretač
 Name[ca]=Llançador
 Name[cs]=Spouštěč
 Name[da]=Programgenvej

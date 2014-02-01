@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Language
+Name[bs]=Jezik
 Name[ca]=Idioma
 Name[cs]=Jazyk
 Name[da]=Sprog
@@ -34,6 +35,7 @@ Name[wa]=Lingaedje
 Name[x-test]=xxLanguagexx
 Name[zh_TW]=語言
 Comment=Locale settings
+Comment[bs]=Lokalne postavke
 Comment[ca]=Arranjament de la localització
 Comment[cs]=Jazyková nastavení
 Comment[da]=Lokalitetsindstillinger

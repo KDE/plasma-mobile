@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Launcher panel
+Name[bs]=Pokretački panel
 Name[ca]=Plafó del llançador
 Name[da]=Panel til programstart
 Name[de]=Starter-Kontrollleiste
@@ -29,6 +30,7 @@ Name[x-test]=xxLauncher panelxx
 Name[zh_CN]=启动器面板
 Name[zh_TW]=啟動器面板
 Comment=Panel with some launcher icons
+Comment[bs]=Panel sa nekim pokretačkim ikonama
 Comment[ca]=Plafó amb algunes icones de llançament
 Comment[da]=Panel med programgenveje
 Comment[de]=Kontrollleiste mit einigen Starter-Symbolen

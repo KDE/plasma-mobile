@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Power Button
+Name[bs]=Dugme napajanja
 Name[ca]=Botó d'encesa/apagat
 Name[cs]=Vypínací tlačítko
 Name[da]=Tænd-/sluk-knap
@@ -33,6 +34,7 @@ Name[x-test]=xxPower Buttonxx
 Name[zh_CN]=电源按钮
 Name[zh_TW]=電源按鈕
 Comment=Suspends the device
+Comment[bs]=Suspenduje uređaj
 Comment[ca]=Suspèn el dispositiu
 Comment[da]=Suspenderer enheden
 Comment[de]=Versetzt das Gerät in den Ruhezustand

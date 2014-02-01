@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Preview
+Name[bs]=Pregled:
 Name[ca]=Vista prèvia
 Name[cs]=Náhled
 Name[da]=Forhåndsvisning
@@ -34,6 +35,7 @@ Name[x-test]=xxPreviewxx
 Name[zh_CN]=预览
 Name[zh_TW]=預覽
 Comment=Shows previews for webpages
+Comment[bs]=Prikazuje preglede za web stranice
 Comment[ca]=Mostra vistes prèvies de les pàgines web
 Comment[da]=Forhåndsviser websider
 Comment[de]=Zeigt Vorschauen von Webseiten an

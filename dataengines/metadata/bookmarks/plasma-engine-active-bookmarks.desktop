@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Active Bookmarks
+Name[bs]=Aktivne oznake
 Name[ca]=Adreces d'interès de «actiu»
 Name[da]=Active-bogmærker
 Name[de]=Lesezeichen für Active
@@ -27,6 +28,7 @@ Name[wa]=Rimarkes d' Active
 Name[x-test]=xxActive Bookmarksxx
 Name[zh_TW]=Active 書籤
 Comment=Bookmarks from Nepomuk
+Comment[bs]=Zabilješke Nepomuk-a
 Comment[ca]=Adreces d'interès des de Nepomuk
 Comment[da]=Bogmærker fra Nepomuk
 Comment[de]=Lesezeichen von Nepomuk

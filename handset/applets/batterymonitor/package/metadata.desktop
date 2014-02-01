@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Simple battery monitor
+Comment[bs]=Jednostavni monitor baterije
 Comment[ca]=Monitor de la bateria senzill
 Comment[da]=Simpel batteriovervågning
 Comment[de]=Einfache Akkuüberwachung
@@ -63,6 +64,7 @@ Keywords[x-test]=xxPower Management, Battery, System, Energyxx
 Keywords[zh_CN]=电源管理、电池、系统、能源
 Keywords[zh_TW]=Power Management, Battery, System, Energy
 Name=Simple Battery
+Name[bs]=Jednostavna baterija
 Name[ca]=Bateria senzilla
 Name[cs]=Jednoduchá baterie
 Name[da]=Simpelt batteri

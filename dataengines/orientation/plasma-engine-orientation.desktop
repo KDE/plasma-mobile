@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Orientation
+Name[bs]=Orijentacija
 Name[ca]=Orientació
 Name[da]=Orientering
 Name[de]=Ausrichtung
@@ -22,6 +23,7 @@ Name[uk]=Орієнтація
 Name[x-test]=xxOrientationxx
 Name[zh_TW]=方向
 Comment=Adjusts screen orientation
+Comment[bs]=Podešavanje orijentacije ekrana
 Comment[ca]=Ajusta l'orientació de la pantalla
 Comment[da]=Justerer skærmens orientering
 Comment[de]=Bildschirmausrichtung anpassen

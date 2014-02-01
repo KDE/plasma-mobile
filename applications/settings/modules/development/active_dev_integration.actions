@@ -1,5 +1,6 @@
 [Domain]
 Name=Integration repository
+Name[bs]=Integracijsko spremište
 Name[ca]=Repositori d'integració
 Name[da]=Integrationssoftwarekilde
 Name[de]=Integrations-Archiv
@@ -26,6 +27,7 @@ Icon=application-x-rpm
 
 [org.kde.active.integration.enable]
 Name=Activate integration repository
+Name[bs]=Aktivna integracija spremišta
 Name[ca]=Activa el repositori d'integració
 Name[da]=Softwarekilde til Active-integration
 Name[de]=Integrations-Archiv aktivieren
@@ -49,6 +51,7 @@ Name[uk]=Задіяти сховище пакунків для інтеграц�
 Name[x-test]=xxActivate integration repositoryxx
 Name[zh_TW]=啟動整合主目錄
 Description=Adds the integration repository on device
+Description[bs]=Dodaje integracijsko spremište na uređaj
 Description[ca]=Afegeix el repositori d'integració al dispositiu
 Description[da]=Tilføjer integrationssoftwarekilden på enheden
 Description[de]=Fügt das Integrations-Archiv auf dem Gerät hinzu
@@ -75,6 +78,7 @@ Policy=yes
 
 [org.kde.active.integration.disable]
 Name=Deactivate integration repository
+Name[bs]=Deaktiviraj integracijsko spremište
 Name[ca]=Desactiva el repositori d'integració
 Name[da]=Deaktivér integrationssoftwarekilde
 Name[de]=Deaktiviert das Integrations-Archiv
@@ -98,6 +102,7 @@ Name[uk]=Вимкнути сховище пакунків для інтегра�
 Name[x-test]=xxDeactivate integration repositoryxx
 Name[zh_TW]=取消啟動整合主目錄
 Description=Removes the integration repository on device
+Description[bs]=Uklanja integraciju spremišta na uređaju
 Description[ca]=Elimina el repositori d'integració del dispositiu
 Description[da]=Fjerner integrationssoftwarekilden på enheden
 Description[de]=Entfernt das Integrations-Archiv auf dem Gerät

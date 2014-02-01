@@ -1,6 +1,7 @@
 [Desktop Entry]
 # ctxt: plasma containment
 Name=MobileDesktop
+Name[bs]=MobileDesktop
 Name[ca]=Escriptori Mòbil
 Name[da]=MobileDesktop
 Name[de]=Mobile-Arbeitsfläche
@@ -28,6 +29,7 @@ Name[wa]=Axhlåve sicribanne
 Name[x-test]=xxMobileDesktopxx
 Name[zh_TW]=行動桌面
 Comment=Default desktop containment
+Comment[bs]=Podrazumijevani sadržalac desktopa
 Comment[ca]=Contenidor de l'escriptori per omissió
 Comment[da]=Standard skrivebordsbeholder
 Comment[de]=Standard-Arbeitsflächencontainer

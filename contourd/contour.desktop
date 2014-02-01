@@ -2,6 +2,7 @@
 Exec=contour
 X-DBUS-StartupType=wait
 Name=Contour data server
+Name[bs]=Contour data server
 Name[ca]=Servidor de dades de Contour
 Name[da]=Contour-dataserver
 Name[de]=Contour-Datenserver

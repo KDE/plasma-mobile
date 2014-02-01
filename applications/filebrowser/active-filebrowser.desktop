@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Files
+Name[bs]=Datoteke
 Name[ca]=Fitxers
 Name[cs]=Soubory
 Name[da]=Filer
@@ -35,6 +36,7 @@ Name[x-test]=xxFilesxx
 Name[zh_CN]=文件
 Name[zh_TW]=檔案
 GenericName=File browser
+GenericName[bs]=Preglednik datoteka
 GenericName[ca]=Navegador de fitxers
 GenericName[cs]=Prohlížeč souborů
 GenericName[da]=Filbrowser
@@ -69,6 +71,7 @@ GenericName[x-test]=xxFile browserxx
 GenericName[zh_CN]=文件浏览器
 GenericName[zh_TW]=檔案瀏覽器
 Comment=A simple file browser/manager
+Comment[bs]=Jednostavni pretraživač/upravitelj datoteka
 Comment[ca]=Un navegador/gestor de fitxers simple
 Comment[da]=Simpel filbrowser/-håndtering
 Comment[de]=Eine einfache Dateiverwaltung

@@ -36,6 +36,7 @@ Name[x-test]=xxTime and Datexx
 Name[zh_CN]=时间和日期
 Name[zh_TW]=時間與日期
 Comment=Timezone, Date Display
+Comment[bs]=Vremenska zona, Prikaži datum
 Comment[ca]=Zona horària, Mostra la data
 Comment[da]=Tidszone, datovisning
 Comment[de]=Zeitzone, Datumsanzeige

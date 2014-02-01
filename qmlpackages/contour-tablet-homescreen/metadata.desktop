@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Contour tablet homescreen
+Comment[bs]=Contour početni ekran tableta
 Comment[ca]=Pantalla d'inici Contour de la tauleta
 Comment[da]=startskærm for Contour tablet
 Comment[de]=Contour-Tablett-Startbildschirm
@@ -28,6 +29,7 @@ Comment[zh_TW]=Contour 平板首頁
 Encoding=UTF-8
 Keywords=
 Name=Tablet homescreen
+Name[bs]=Početni ekran tableta
 Name[ca]=Pantalla d'inici de la tauleta
 Name[da]=startskærm for tablet
 Name[de]=Tablett-Startbildschirm

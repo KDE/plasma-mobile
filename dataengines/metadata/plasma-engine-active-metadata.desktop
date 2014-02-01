@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Active Metadata
+Name[bs]=Aktivnost metadata
 Name[ca]=Metadades de «actiu»
 Name[da]=Acitve-metadata
 Name[de]=Active-Metadaten
@@ -27,6 +28,7 @@ Name[wa]=Meta-dnêyes d' Active
 Name[x-test]=xxActive Metadataxx
 Name[zh_TW]=Active 中繼資料
 Comment=Provides metadata for semantic resources
+Comment[bs]=Pruža metadata za semantičke izvore
 Comment[ca]=Proporciona metadades per a recursos semàntics
 Comment[da]=Leverer metadata til semantiske ressourcer
 Comment[de]=Stellt Metadaten für semantische Ressourcen bereit

@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Recommendations
+Name[bs]=Preporuke
 Name[ca]=Recomanacions
 Name[da]=Anbefalinger
 Name[de]=Vorschläge
@@ -25,6 +26,7 @@ Name[uk]=Поради
 Name[x-test]=xxRecommendationsxx
 Name[zh_TW]=推薦的項目
 Comment=Contour Recommendations dataengine
+Comment[bs]=Contour preporučeni podaci mašine
 Comment[ca]=Motor de dades de recomanacions per a Contour
 Comment[da]=Anbefalingsdatamotor til Contour
 Comment[de]=Contour-Datentreiber für Vorschläge
