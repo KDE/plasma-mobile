@@ -2,6 +2,7 @@
 Name=Recommendations
 Name[bs]=Preporuke
 Name[ca]=Recomanacions
+Name[ca@valencia]=Recomanacions
 Name[da]=Anbefalinger
 Name[de]=Vorschläge
 Name[el]=Συστάσεις
@@ -29,6 +30,7 @@ Name[zh_TW]=推薦的項目
 Comment=Contour Recommendations dataengine
 Comment[bs]=Contour preporučeni podaci mašine
 Comment[ca]=Motor de dades de recomanacions per a Contour
+Comment[ca@valencia]=Motor de dades de recomanacions per a Contour
 Comment[da]=Anbefalingsdatamotor til Contour
 Comment[de]=Contour-Datentreiber für Vorschläge
 Comment[el]=Μηχανή δεδομένων συστάσεων του Contour

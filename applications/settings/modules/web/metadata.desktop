@@ -2,6 +2,7 @@
 Name=Web and Browser
 Name[bs]=Web i Preglednik
 Name[ca]=Web i navegador
+Name[ca@valencia]=Web i navegador
 Name[cs]=Web a prohlížeč
 Name[da]=Web og browser
 Name[de]=Web und Browser
@@ -34,6 +35,7 @@ Name[zh_TW]=網頁與瀏覽器
 Comment=Text Size, History, Adblock, Homepage
 Comment[bs]=Veličina teksta, Historija, Adblock, Početna stranica
 Comment[ca]=Mida del text, Historial, Bloqueig publicitari, Pàgina inicial
+Comment[ca@valencia]=Mida del text, Historial, Bloqueig publicitari, Pàgina inicial
 Comment[da]=Tekststørrelse, historik, adblock, startside
 Comment[de]=Textgröße, Verlauf, Werbefilter, Homepage
 Comment[el]=Μέγεθος κειμένου, ιστορικό, adblock, αρχική

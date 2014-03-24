@@ -2,6 +2,7 @@
 Name=Development
 Name[bs]=Razvoj
 Name[ca]=Desenvolupament
+Name[ca@valencia]=Desenvolupament
 Name[cs]=Vývoj
 Name[da]=Udvikling
 Name[de]=Entwicklung
@@ -35,6 +36,7 @@ Name[zh_TW]=開發
 Comment=Settings for developers
 Comment[bs]=Postavke za programere
 Comment[ca]=Arranjament pels desenvolupadors
+Comment[ca@valencia]=Arranjament pels desenvolupadors
 Comment[da]=Indstillinger for udviklere
 Comment[de]=Einstellungen für Entwickler
 Comment[el]=Ρυθμίσεις για προγραμματιστές

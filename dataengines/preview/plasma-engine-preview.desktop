@@ -2,6 +2,7 @@
 Name=Preview
 Name[bs]=Pregled:
 Name[ca]=Vista prèvia
+Name[ca@valencia]=Vista prèvia
 Name[cs]=Náhled
 Name[da]=Forhåndsvisning
 Name[de]=Vorschau
@@ -38,6 +39,7 @@ Name[zh_TW]=預覽
 Comment=Shows previews for webpages
 Comment[bs]=Prikazuje preglede za web stranice
 Comment[ca]=Mostra vistes prèvies de les pàgines web
+Comment[ca@valencia]=Mostra vistes prèvies de les pàgines web
 Comment[da]=Forhåndsviser websider
 Comment[de]=Zeigt Vorschauen von Webseiten an
 Comment[el]=Εμφανίζει προεπισκοπήσεις για ιστοσελίδες

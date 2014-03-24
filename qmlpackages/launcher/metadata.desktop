@@ -2,6 +2,7 @@
 Comment=Start Applications
 Comment[bs]=Započni aplikacije
 Comment[ca]=Inici de les aplicacions
+Comment[ca@valencia]=Inici de les aplicacions
 Comment[da]=Start programmer
 Comment[de]=Startet Anwendungen
 Comment[el]=Έναρξη εφαρμογών
@@ -34,6 +35,7 @@ Keywords=
 Name=Launcher
 Name[bs]=Pokretač
 Name[ca]=Llançador
+Name[ca@valencia]=Llançador
 Name[cs]=Spouštěč
 Name[da]=Programgenvej
 Name[de]=Programmstarter

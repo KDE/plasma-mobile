@@ -10,6 +10,7 @@ Icon=system-file-manager
 Name=Browse files
 Name[bs]=Pregled datoteka
 Name[ca]=Navega pels fitxers
+Name[ca@valencia]=Navega pels fitxers
 Name[cs]=Procházet soubory
 Name[da]=Gennemse filer
 Name[de]=Dateien durchsuchen

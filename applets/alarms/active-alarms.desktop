@@ -2,6 +2,7 @@
 Name=Alarms
 Name[bs]=Alarmi
 Name[ca]=Alarmes
+Name[ca@valencia]=Alarmes
 Name[cs]=Alarmy
 Name[da]=Alarmer
 Name[de]=Erinnerungen
@@ -36,6 +37,7 @@ Name[zh_TW]=鬧鐘
 Comment=A tool to setup visual and audio alarms for tablets
 Comment[bs]=Alat za postavljanje vizualnih i audio alarma za tablete
 Comment[ca]=Una eina per a configurar alarmes visuals i d'àudio a les tauletes
+Comment[ca@valencia]=Una eina per a configurar alarmes visuals i d'àudio a les tauletes
 Comment[da]=Et værktøj til at sætte visuelle og lydalarmer op til tablet-pc'er
 Comment[de]=Ein Dienstprogramm zur Einrichtung von visuellen und akustischen Erinnerungen für Tabletts
 Comment[el]=Εργαλείο για τη ρύθμιση οπτικών και ηχητικών συναγερμών για πινάκια

@@ -2,6 +2,7 @@
 Name=Active Settings
 Name[bs]=Aktivne postavke
 Name[ca]=Arranjament de «actiu»
+Name[ca@valencia]=Arranjament de «actiu»
 Name[da]=Indstillinger for Active
 Name[de]=Einstellungen für Plasma Active
 Name[el]=Ενεργές ρυθμίσεις
@@ -32,6 +33,7 @@ Name[zh_TW]=Active 設定
 Comment=Touchscreen friendly settings UI for Active
 Comment[bs]=Touchscreen postavke UI za aktivno
 Comment[ca]=Arranjament IU de «actiu», senzill per a pantalles tàctils
+Comment[ca@valencia]=Arranjament IU de «actiu», senzill per a pantalles tàctils
 Comment[da]=Touchskærm-venlig konfigurationsbrugerflade til Active
 Comment[de]=Touchscreen-freundliche Benutzeroberflächeneinstellungen für Active
 Comment[el]=Φιλικές σε οθόνες αφής ρυθμίσεις περιβάλλοντος για το Active

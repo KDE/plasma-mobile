@@ -2,6 +2,7 @@
 Name=Alarms
 Name[bs]=Alarmi
 Name[ca]=Alarmes
+Name[ca@valencia]=Alarmes
 Name[cs]=Alarmy
 Name[da]=Alarmer
 Name[de]=Erinnerungen
@@ -36,6 +37,7 @@ Name[zh_TW]=鬧鐘
 Comment=List and set Akonadi Alarms
 Comment[bs]=Izlistava i postavlja Akonadi alarme
 Comment[ca]=Llista i defineix les alarmes d'Akonadi
+Comment[ca@valencia]=Llista i defineix les alarmes d'Akonadi
 Comment[da]=Oplist og sæt Akonadi-alarmer
 Comment[de]=Akonadi-Erinnerungen anzeigen und einstellen
 Comment[el]=Λίστα και ρύθμιση συναγερμών Akonadi

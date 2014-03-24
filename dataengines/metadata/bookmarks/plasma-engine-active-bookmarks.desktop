@@ -2,6 +2,7 @@
 Name=Active Bookmarks
 Name[bs]=Aktivne oznake
 Name[ca]=Adreces d'interès de «actiu»
+Name[ca@valencia]=Adreces d'interés de «actiu»
 Name[da]=Active-bogmærker
 Name[de]=Lesezeichen für Active
 Name[el]=Ενεργοί σελιδοδείκτες
@@ -31,6 +32,7 @@ Name[zh_TW]=Active 書籤
 Comment=Bookmarks from Nepomuk
 Comment[bs]=Zabilješke Nepomuk-a
 Comment[ca]=Adreces d'interès des de Nepomuk
+Comment[ca@valencia]=Adreces d'interés des de Nepomuk
 Comment[da]=Bogmærker fra Nepomuk
 Comment[de]=Lesezeichen von Nepomuk
 Comment[el]=Σελιδοδείκτες από το nepomuk

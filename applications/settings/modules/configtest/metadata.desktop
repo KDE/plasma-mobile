@@ -2,6 +2,7 @@
 Name=Configuration Test
 Name[bs]=Konfiguracijski test
 Name[ca]=Prova la configuració
+Name[ca@valencia]=Prova la configuració
 Name[da]=Konfigurationstest
 Name[de]=Einrichtungstest
 Name[el]=Δοκιμή διαμόρφωσης
@@ -31,6 +32,7 @@ Name[zh_TW]=設定測試
 Comment=Config QML Bindings
 Comment[bs]=Konfuguriši QML uvez
 Comment[ca]=Configuració dels lligams de QML
+Comment[ca@valencia]=Configuració dels lligams de QML
 Comment[da]=Konfigurér QML-bindinger
 Comment[de]=Einrichtung von QML-Bindungen
 Comment[el]=Διαμόρφωση QML δεσμεύσεων

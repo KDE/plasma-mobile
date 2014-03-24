@@ -2,6 +2,7 @@
 Name=Language
 Name[bs]=Jezik
 Name[ca]=Idioma
+Name[ca@valencia]=Idioma
 Name[cs]=Jazyk
 Name[da]=Sprog
 Name[de]=Sprache
@@ -38,6 +39,7 @@ Name[zh_TW]=語言
 Comment=Locale settings
 Comment[bs]=Lokalne postavke
 Comment[ca]=Arranjament de la localització
+Comment[ca@valencia]=Arranjament de la localització
 Comment[cs]=Jazyková nastavení
 Comment[da]=Lokalitetsindstillinger
 Comment[de]=Regionaleinstellungen

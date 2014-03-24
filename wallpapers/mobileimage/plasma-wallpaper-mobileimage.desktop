@@ -3,6 +3,7 @@ Type=Service
 Name=Image (mobile)
 Name[bs]=Slika (mobilna)
 Name[ca]=Imatge (mòbil)
+Name[ca@valencia]=Imatge (mòbil)
 Name[da]=Billede (mobile)
 Name[de]=Bilder (Mobile)
 Name[el]=Εικόνα (κινητό)

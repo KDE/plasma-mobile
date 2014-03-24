@@ -2,6 +2,7 @@
 Name=Image Viewer
 Name[bs]=Preglednik slika
 Name[ca]=Visor d'imatges
+Name[ca@valencia]=Visor d'imatges
 Name[cs]=Prohlížeč obrázků
 Name[da]=Billedfremviser
 Name[de]=Bildbetrachter
@@ -36,6 +37,7 @@ Name[zh_TW]=影像檢視器
 Comment=Touchscreen friendly simple image viewer
 Comment[bs]=Jednostavni preglednik slika na dodirni ekran
 Comment[ca]=Visor d'imatges senzill per a pantalles tàctils
+Comment[ca@valencia]=Visor d'imatges senzill per a pantalles tàctils
 Comment[da]=Simpel touchskærm-venlig billedfremviser
 Comment[de]=Ein einfacher Bildbetrachter für Touchscreen-Geräte
 Comment[el]=Φιλικός σε οθόνες αφής απλός προβολέας εικόνων

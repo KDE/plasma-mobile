@@ -2,6 +2,7 @@
 Name=Links plugin
 Name[bs]=Linkovi plugin-a
 Name[ca]=Connector per a enllaços
+Name[ca@valencia]=Connector per a enllaços
 Name[da]=Link-plugin
 Name[de]=Verknüpfungsmodul
 Name[el]=Πρόσθετο συνδέσμων
@@ -26,6 +27,7 @@ Name[zh_TW]=連結外掛程式
 Comment=Shows some KDE-related links
 Comment[bs]=Prikazuje neke KDE-vezane linkove
 Comment[ca]=Mostra alguns enllaços relacionats amb el KDE
+Comment[ca@valencia]=Mostra alguns enllaços relacionats amb el KDE
 Comment[da]=Viser nogle KDE-relaterede links
 Comment[de]=Zeigt einige Verknüpfungen zu KDE
 Comment[el]=Εμφανίζει κάποιους συνδέσμους σχετικούς με το KDE

@@ -2,6 +2,7 @@
 Name=Touch Browser
 Name[bs]=Preglednik na dodir
 Name[ca]=Navegador tàctil
+Name[ca@valencia]=Navegador tàctil
 Name[da]=Touchbrowser
 Name[de]=Browser für Touch-Geräte
 Name[el]=Περιηγητής αφής
@@ -32,6 +33,7 @@ Name[zh_TW]=觸控瀏覽器
 Comment=Touchscreen friendly simple web browser
 Comment[bs]=Jednostavni Touchscreen web preglednik
 Comment[ca]=Navegador web senzill per a pantalles tàctils
+Comment[ca@valencia]=Navegador web senzill per a pantalles tàctils
 Comment[da]=Simpel touchskærm-venlig webbrowser
 Comment[de]=Ein einfacher Webbrowser für Touchscreen-Geräte
 Comment[el]=Φιλικός σε οθόνες αφής απλός περιηγητής ιστού

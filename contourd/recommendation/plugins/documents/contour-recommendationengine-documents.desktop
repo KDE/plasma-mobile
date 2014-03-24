@@ -2,6 +2,7 @@
 Name=Documents plugin
 Name[bs]=Dokumenti plugin-a
 Name[ca]=Connector per a documents
+Name[ca@valencia]=Connector per a documents
 Name[da]=Dokument-plugin
 Name[de]=Dokumentenmodul
 Name[el]=Πρόσθετο εγγράφων
@@ -26,6 +27,7 @@ Name[zh_TW]=文件外掛程式
 Comment=Shows highest rated documents
 Comment[bs]=Prikazuje najbolje rangirane dokumente
 Comment[ca]=Mostra els documents millor valorats
+Comment[ca@valencia]=Mostra els documents millor valorats
 Comment[da]=Viser de højest vurderede dokumenter
 Comment[de]=Zeigt die am höchsten bewerteten Dokumente
 Comment[el]=Εμφανίζει τα έγγραφα με την υψηλότερη βαθμολογία

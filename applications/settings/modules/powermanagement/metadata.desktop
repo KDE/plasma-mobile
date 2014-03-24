@@ -2,6 +2,7 @@
 Name=Screen
 Name[bs]=Ekran
 Name[ca]=Pantalla
+Name[ca@valencia]=Pantalla
 Name[cs]=Obrazovka
 Name[da]=Skærm
 Name[de]=Bildschirm
@@ -38,6 +39,7 @@ Name[zh_TW]=螢幕
 Comment=Lock, Sleep, Timeout
 Comment[bs]=Zaključaj, Spavaj, Pauziraj
 Comment[ca]=Bloqueja, Suspèn, Temps d'expiració
+Comment[ca@valencia]=Bloqueja, Suspèn, Temps d'expiració
 Comment[da]=Lås, slumre, tidsudløb
 Comment[de]=Sperren, Ruhezustand, Zeitüberschreitung
 Comment[el]=Κλείδωμα, ύπνωση, τέλος χρόνου

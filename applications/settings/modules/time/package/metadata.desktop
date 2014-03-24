@@ -2,6 +2,7 @@
 Name=Time and Date
 Name[bs]=Vrijeme i datum
 Name[ca]=Hora i data
+Name[ca@valencia]=Hora i data
 Name[cs]=Datum a čas
 Name[da]=Tid og dato
 Name[de]=Uhrzeit und Datum
@@ -39,6 +40,7 @@ Name[zh_TW]=時間與日期
 Comment=Timezone, Date Display
 Comment[bs]=Vremenska zona, Prikaži datum
 Comment[ca]=Zona horària, Mostra la data
+Comment[ca@valencia]=Zona horària, Mostra la data
 Comment[da]=Tidszone, datovisning
 Comment[de]=Zeitzone, Datumsanzeige
 Comment[el]=Ζώνη ώρας, εμφάνιση ημερομηνίας

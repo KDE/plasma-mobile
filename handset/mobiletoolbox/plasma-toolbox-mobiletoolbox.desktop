@@ -2,6 +2,7 @@
 Comment=Default toolbox for the mobile shell
 Comment[bs]=Podrazumijevana alatna traka za pokretnu školjku
 Comment[ca]=Quadre d'eines per omissió per a l'àrea de treball de Mòbil
+Comment[ca@valencia]=Quadre d'eines per omissió per a l'àrea de treball de Mòbil
 Comment[da]=Standard værktøjskasse til mobil-skallen
 Comment[de]=Standard-Werkzeugkasten für die Mobile-Shell
 Comment[el]=Προκαθορισμένη εργαλειοθήκη για κέλυφος κινητού
@@ -31,6 +32,7 @@ Icon=plasma
 Name=Mobile toolbox
 Name[bs]=Pokretna alatna traka
 Name[ca]=Quadre d'eines de Mòbil
+Name[ca@valencia]=Quadre d'eines de Mòbil
 Name[da]=Værktøjskasse til Mobile
 Name[de]=Werkzeugkasten für Mobile
 Name[el]=Εργαλειοθήκη κινητού
