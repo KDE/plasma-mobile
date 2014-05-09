@@ -1,0 +1,16 @@
+[Desktop]
+Containment=org.kde.desktopcontainment
+ToolBox=
+RuntimePlatform=
+
+[Desktop][ContainmentActions]
+RightButton;NoModifier=
+MidButton;NoModifier=
+wheel:Vertical;NoModifier=
+
+[Panel]
+Containment=
+ToolBox=
+[Panel][ContainmentActions]
+RightButton;NoModifier=
+MidButton;NoModifier=

@@ -92,6 +92,7 @@ ENDMACRO(installPackage)
 #add_subdirectory(runners)
 #add_subdirectory(shell)
 #add_subdirectory(wallpapers)
+add_subdirectory(activeshellpackage)
 
 #if (QTNETWORKMANAGER_FOUND)
 #    add_subdirectory(contourd)
