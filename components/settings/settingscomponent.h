@@ -20,11 +20,11 @@
 #ifndef SETTINGSCOMPONENT_H
 #define SETTINGSCOMPONENT_H
 
-#include <QDeclarativeItem>
+#include <QQuickItem>
 
 class SettingsComponentPrivate;
 
-class SettingsComponent : public QDeclarativeItem
+class SettingsComponent : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
@@ -32,7 +32,7 @@ class SettingsComponent : public QDeclarativeItem
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
 
 public:
-    SettingsComponent(QDeclarativeItem *parent = 0);
+    SettingsComponent(QQuickItem *parent = 0);
     ~SettingsComponent();
 
     QString description() const;

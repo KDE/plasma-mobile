@@ -19,7 +19,7 @@
 
 #include "pagedproxymodel.h"
 
-#include <KDebug>
+#include <QDebug>
 
 PagedProxyModel::PagedProxyModel(QObject *parent)
     : QAbstractProxyModel(parent),

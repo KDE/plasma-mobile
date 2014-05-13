@@ -20,7 +20,7 @@
 #ifndef TEXTEFFECTS_H
 #define TEXTEFFECTS_H
 
-#include <QDeclarativeItem>
+#include <QQuickItem>
 
 #include <QFont>
 #include <QPixmap>
@@ -29,7 +29,7 @@ namespace Plasma {
     class Svg;
 }
 
-class TextEffects : public QDeclarativeItem
+class TextEffects : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
@@ -49,7 +49,7 @@ public:
     };
     Q_ENUMS(Effect)
 
-    TextEffects(QDeclarativeItem *parent = 0);
+    TextEffects(QQuickItem *parent = 0);
     ~TextEffects();
 
     QString text() const;
@@ -77,7 +77,7 @@ public:
     Effect effect() const;
     void setEffect(Effect effect);
 
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, QWidget *widget);
 
 private:
     void refreshPixmap();

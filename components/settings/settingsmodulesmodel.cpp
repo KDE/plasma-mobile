@@ -22,8 +22,8 @@
 
 #include "settingsmodulesmodel.h"
 
-#include <QDeclarativeContext>
-#include <QDeclarativeEngine>
+#include <QQmlContext>
+#include <QQmlEngine>
 #include <QTimer>
 
 #include <KIcon>
@@ -48,8 +48,8 @@ public:
 };
 
 
-SettingsModulesModel::SettingsModulesModel(QDeclarativeComponent *parent)
-    : QDeclarativeComponent(parent),
+SettingsModulesModel::SettingsModulesModel(QQmlComponent *parent)
+    : QQmlComponent(parent),
       d(new SettingsModulesModelPrivate(this))
 {
     kDebug() << "Creating SettingsModel";

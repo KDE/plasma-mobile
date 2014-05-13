@@ -8,13 +8,12 @@ set(settings_SRCS
     configgroup.cpp
     )
 
-qt4_automoc(${settings_SRCS})
-
-kde4_add_library(settingsplugin SHARED ${settings_SRCS})
+add_library(settingsplugin SHARED ${settings_SRCS})
 target_link_libraries(settingsplugin
-        ${QT_QTCORE_LIBRARY}
-        ${QT_QTDECLARATIVE_LIBRARY}
-        ${KDE4_PLASMA_LIBS}
+        Qt5::Core
+        Qt5::Qml
+        Qt5::Quick
+        KF5::Plasma
         )
 
 install(TARGETS settingsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/active/settings)

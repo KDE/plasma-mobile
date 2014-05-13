@@ -19,8 +19,9 @@
 #ifndef PACKAGE_H
 #define PACKAGE_H
 
-#include <QDeclarativeItem>
+#include <QQuickItem>
 #include <QUrl>
+#include <Plasma/Package>
 
 namespace Plasma {
     class Package;
@@ -54,7 +55,7 @@ Q_SIGNALS:
 
 private:
     QString m_name;
-    Plasma::Package *m_package;
+    Plasma::Package m_package;
 };
 
 #endif

@@ -18,11 +18,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
- 
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.qtextracomponents 2.0
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+
 Item {
     id: resourceItem
     anchors.fill: parent

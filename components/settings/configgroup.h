@@ -21,7 +21,7 @@
 #define CONFIGGROUP_H
 
 #include <QObject>
-#include <QDeclarativeItem>
+#include <QQuickItem>
 #include <QVariant>
 
 class KConfigGroup;
@@ -31,7 +31,7 @@ namespace Plasma
 
 class ConfigGroupPrivate;
 
-class ConfigGroup : public QDeclarativeItem
+class ConfigGroup : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(QString file READ file WRITE setFile NOTIFY fileChanged)
@@ -40,7 +40,7 @@ class ConfigGroup : public QDeclarativeItem
     Q_PROPERTY(QStringList groupList READ groupList NOTIFY groupListChanged)
 
 public:
-    ConfigGroup(QDeclarativeItem* parent=0);
+    ConfigGroup(QQuickItem* parent=0);
     ~ConfigGroup();
 
     KConfigGroup* configGroup();

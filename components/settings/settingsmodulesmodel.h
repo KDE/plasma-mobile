@@ -21,7 +21,7 @@
 #ifndef COMPLETIONMODEL_H
 #define COMPLETIONMODEL_H
 
-#include <QDeclarativeComponent>
+#include <QQmlComponent>
 #include <QObject>
 #include <QImage>
 #include <Nepomuk/Query/Result>
@@ -31,14 +31,14 @@
 class History;
 class SettingsModulesModelPrivate;
 
-class SettingsModulesModel : public QDeclarativeComponent
+class SettingsModulesModel : public QQmlComponent
 {
     Q_OBJECT
     Q_PROPERTY(QDeclarativeListProperty<SettingsModule> settingsModules READ settingsModules NOTIFY settingsModulesChanged)
     Q_PROPERTY(QString application READ application WRITE setApplication NOTIFY applicationChanged)
 
 public:
-    SettingsModulesModel(QDeclarativeComponent* parent = 0);
+    SettingsModulesModel(QQmlComponent* parent = 0);
     ~SettingsModulesModel();
 
     QDeclarativeListProperty<SettingsModule> settingsModules();

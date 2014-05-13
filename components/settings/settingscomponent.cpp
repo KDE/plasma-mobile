@@ -21,8 +21,8 @@
 #include "settingsmodule.h"
 
 
-#include <QDeclarativeEngine>
-#include <QDeclarativeComponent>
+#include <QQmlEngine>
+#include <QQmlComponent>
 
 #include <KService>
 #include <KServiceTypeTrader>
@@ -39,8 +39,8 @@ public:
 };
 
 
-SettingsComponent::SettingsComponent(QDeclarativeItem *parent)
-    : QDeclarativeItem(parent)
+SettingsComponent::SettingsComponent(QQuickItem *parent)
+    : QQuickItem(parent)
 {
     d = new SettingsComponentPrivate;
     d->package = 0;

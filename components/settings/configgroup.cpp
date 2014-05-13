@@ -51,8 +51,8 @@ public:
 };
 
 
-ConfigGroup::ConfigGroup(QDeclarativeItem *parent)
-    : QDeclarativeItem(parent),
+ConfigGroup::ConfigGroup(QQuickItem *parent)
+    : QQuickItem(parent),
       d(new ConfigGroupPrivate(this))
 {
     // Delay and compress everything within 5 seconds into one sync

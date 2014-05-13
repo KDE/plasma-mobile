@@ -17,11 +17,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-//import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.active.settings 0.1
+import QtQuick 2.1
+import org.kde.plasma.core 0.2 as PlasmaCore
+import org.kde.plasma.components 0.2 as PlasmaComponents
+//import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.active.settings 0.2
 
 
 Item {
@@ -73,12 +73,12 @@ Item {
             startX: spinnerView.width/2
             startY: spinnerView.height + 1.5*placeHolder.height
             PathAttribute { name: "itemOpacity"; value: 0 }
-            PathLine { 
+            PathLine {
                 x: spinnerView.width/2
                 y: spinnerView.height/2
             }
             PathAttribute { name: "itemOpacity"; value: 1 }
-            PathLine { 
+            PathLine {
                 x: spinnerView.width/2
                 y: -1.5*placeHolder.height
             }

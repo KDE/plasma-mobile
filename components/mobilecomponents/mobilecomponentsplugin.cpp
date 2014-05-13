@@ -21,22 +21,35 @@
 
 #include "mobilecomponentsplugin.h"
 
-#include <QtDeclarative/qdeclarative.h>
-#include <QDeclarativeEngine>
+#include <QQmlExtensionPlugin>
+#include <QQmlEngine>
+#include <QQmlContext>
+#include <kdeclarative/kdeclarative.h>
 
 #include "pagedproxymodel.h"
 #include "fallbackcomponent.h"
 #include "package.h"
 #include "texteffects.h"
 
+void MobileComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
+{
+    QQmlExtensionPlugin::initializeEngine(engine, uri);
+
+    if (!engine->rootContext()->contextObject()) {
+        KDeclarative::KDeclarative kdeclarative;
+        kdeclarative.setDeclarativeEngine(engine);
+        kdeclarative.setupBindings();
+    }
+}
+
 void MobileComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.mobilecomponents"));
 
-    qmlRegisterType<PagedProxyModel>(uri, 0, 1, "PagedProxyModel");
-    qmlRegisterType<FallbackComponent>(uri, 0, 1, "FallbackComponent");
-    qmlRegisterType<Package>(uri, 0, 1, "Package");
-    qmlRegisterType<TextEffects>(uri, 0, 1, "TextEffects");
+    qmlRegisterType<PagedProxyModel>(uri, 0, 2, "PagedProxyModel");
+    qmlRegisterType<FallbackComponent>(uri, 0, 2, "FallbackComponent");
+    qmlRegisterType<Package>(uri, 0, 2, "Package");
+    qmlRegisterType<TextEffects>(uri, 0, 2, "TextEffects");
 }
 
 

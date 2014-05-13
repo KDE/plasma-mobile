@@ -20,10 +20,10 @@
 #ifndef SETTINGSPLUGIN_H
 #define SETTINGSPLUGIN_H
 
-#include <QDeclarativeExtensionPlugin>
+#include <QQmlExtensionPlugin>
 
 
-class SettingsPlugin : public QDeclarativeExtensionPlugin
+class SettingsPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
 

@@ -19,15 +19,16 @@
 
 #include "package.h"
 
-#include <KDebug>
-#include <KGlobalSettings>
+#include <QStandardPaths>
+
+#include <QDebug>
 #include <Plasma/Package>
 #include <Plasma/PackageStructure>
-
+#include <Plasma/PluginLoader>
+#include <KLocalizedString>
 
 Package::Package(QObject *parent)
-    : QObject(parent),
-      m_package(0)
+    : QObject(parent)
 {
 }
 
@@ -49,11 +50,9 @@ void Package::setName(const QString &name)
 
     m_name = name;
 
-    delete m_package;
-    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    //structure->setPath(path);
-    m_package = new Plasma::Package(QString(), m_name, structure);
-    KGlobal::locale()->insertCatalog("plasma_package_" + name);
+    m_package = Plasma::PluginLoader::self()->loadPackage(QStringLiteral("Plasma/Generic"));
+    QString domain = QStringLiteral("plasma_package_") + name;
+    KLocalizedString::setApplicationDomain(domain.toLocal8Bit().data());
 
     emit nameChanged(name);
     emit visibleNameChanged();
@@ -61,33 +60,33 @@ void Package::setName(const QString &name)
 
 QString Package::visibleName() const
 {
-    if (!m_package) {
+    if (!m_package.isValid()) {
         return QString();
     }
 
-    return m_package->metadata().name();
+    return m_package.metadata().name();
 }
 
 QString Package::filePath(const QString &fileType, const QString &fileName) const
 {
-    if (!m_package) {
+    if (!m_package.isValid()) {
         return QString();
     }
 
     if (fileName.isEmpty()) {
-        return m_package->filePath(fileType.toLatin1());
+        return m_package.filePath(fileType.toLatin1());
     } else {
-        return m_package->filePath(fileType.toLatin1(), fileName);
+        return m_package.filePath(fileType.toLatin1(), fileName);
     }
 }
 
 QString Package::filePath(const QString &fileType) const
 {
-    if (!m_package) {
+    if (!m_package.isValid()) {
         return QString();
     }
 
-    return m_package->filePath(fileType.toLatin1());
+    return m_package.filePath(fileType.toLatin1());
 }
 
 #include "package.moc"
