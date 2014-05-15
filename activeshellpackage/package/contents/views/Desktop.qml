@@ -54,6 +54,10 @@ Rectangle {
         }
     }
 
+    ActivityPanel {
+        id: activityPanelSwitcher
+    }
+
     PlasmaCore.Dialog {
         id: sidePanel
         location: PlasmaCore.Types.LeftEdge
@@ -125,6 +129,7 @@ Rectangle {
                 containment.anchors.bottom = root.bottom;
                 internal.oldContainment = containment;
             }
+            activityPanelSwitcher.z = 500;
         }
     }
 

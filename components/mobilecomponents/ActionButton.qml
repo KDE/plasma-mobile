@@ -57,10 +57,6 @@ Item {
         }
     }
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     PlasmaCore.Svg {
         id: buttonSvg
         imagePath: "widgets/actionbutton"
