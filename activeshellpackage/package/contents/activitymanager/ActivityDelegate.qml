@@ -20,6 +20,7 @@
 import QtQuick 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
 Item {
@@ -46,8 +47,9 @@ Item {
 
     onCurrentChanged: {
         //avoid to restart the timer if the current index is already correct
-        if (current == "true" && highlightTimer.pendingIndex != index) {
+        if (current  && highlightTimer.pendingIndex != index) {
             highlightTimer.pendingIndex = index
+            console.log(highlightTimer.pendingIndex)
             highlightTimer.running = true
         }
     }
@@ -96,7 +98,7 @@ Item {
                 }
             }
 
-            MobileComponents.TextEffects {
+            PlasmaComponents.Label {
                 id: activityName
                 anchors {
                     top: parent.top
@@ -106,11 +108,9 @@ Item {
                 }
 
                 text: (String(model.name).length <= 18) ? model.name:String(model.name).substr(0,18) + "..."
-                color: "white"
-                horizontalOffset: 1
-                verticalOffset: 1
-                pixelSize: 25
-                bold: true
+                color: "black"
+                font.pointSize: theme.defaultFont.pointSize*1.5
+                font.bold: true
             }
 
             MobileComponents.Rating {

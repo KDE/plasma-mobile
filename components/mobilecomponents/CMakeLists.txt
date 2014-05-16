@@ -5,7 +5,7 @@ set(mobilecomponents_SRCS
     pagedproxymodel.cpp
     fallbackcomponent.cpp
     package.cpp
-    texteffects.cpp
+    #texteffects.cpp
     )
 
 add_library(mobilecomponentsplugin SHARED ${mobilecomponents_SRCS})

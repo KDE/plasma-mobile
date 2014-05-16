@@ -49,7 +49,7 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<PagedProxyModel>(uri, 0, 2, "PagedProxyModel");
     qmlRegisterType<FallbackComponent>(uri, 0, 2, "FallbackComponent");
     qmlRegisterType<Package>(uri, 0, 2, "Package");
-    qmlRegisterType<TextEffects>(uri, 0, 2, "TextEffects");
+    //qmlRegisterType<TextEffects>(uri, 0, 2, "TextEffects");
 }
 
 
