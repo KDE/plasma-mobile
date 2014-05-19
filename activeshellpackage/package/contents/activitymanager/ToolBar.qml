@@ -34,7 +34,8 @@ PlasmaCore.FrameSvgItem {
                 filterField.opacity = 0
                 filterField.text = ""
                 query = ""
-//                fakeTextInput.closeSoftwareInputPanel()
+                //show the virtual keyboard
+                Qt.inputMethod.hide()
                 filterButton.checked = false
             }
         }
@@ -103,21 +104,16 @@ PlasmaCore.FrameSvgItem {
                         activitySwitcher.state = "Normal"
                         filterField.text = ""
                         query = ""
-                        //fakeTextInput.closeSoftwareInputPanel()
+                        //hide the virtual keyboard
+                        Qt.inputMethod.hide()
                     } else {
                         filterField.opacity = 1
-//                        filterField.forceActiveFocus()
+                        filterField.forceActiveFocus()
                         activitySwitcher.state = "AcceptingInput"
-                        //fakeTextInput.openSoftwareInputPanel()
+                        //show the virtual keyboard
+                        Qt.inputMethod.show()
                     }
-                    //TODO: should get focus
                 }
-            }
-            //FIXME: this dummy text edit is used only to close the on screen keyboard, need QtComponents
-            TextInput{
-                id: fakeTextInput
-                width: 0
-                height: 0
             }
         }
     }
