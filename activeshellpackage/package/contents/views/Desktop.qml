@@ -46,11 +46,10 @@ Rectangle {
 
     function toggleActivityManager() {
         console.log("Activity manger toggled");
-        if (sidePanelStack.state == "activityManager") {
-            sidePanelStack.state = "closed";
+        if (activityPanelSwitcher.state == "show") {
+            activityPanelSwitcher.state = "hidden";
         } else {
-            sidePanelStack.setSource(Qt.resolvedUrl("../activitymanager/ActivityManager.qml"))
-            sidePanelStack.state = "activityManager";
+            activityPanelSwitcher.state = "show";
         }
     }
 

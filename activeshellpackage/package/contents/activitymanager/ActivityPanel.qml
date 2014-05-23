@@ -87,8 +87,8 @@ Item {
         }
 
         onReleased: {
-            if ((previousState == "hidden" && activityPanel.x < parent.width - activityPanel.width/3) ||
-                (previousState == "show" && activityPanel.x < parent.width - activityPanel.width/3*2)) {
+            if ((previousState == "hidden" && activityPanel.x < activityPanel.parent.width - activityPanel.width/3) ||
+                (previousState == "show" && activityPanel.x < activityPanel.parent.width - activityPanel.width/3*2)) {
                     activityPanel.state = "show"
                     if (activityPanel.switcher.state != "AcceptingInput") {
                         hideTimer.restart()
@@ -104,7 +104,7 @@ Item {
             width: 60
             height: 80
             anchors.verticalCenter: parent.verticalCenter
-            imagePath: "dialogs/background"
+            imagePath: "widgets/background"
             PlasmaCore.SvgItem {
                 width:22
                 height:22
@@ -124,7 +124,7 @@ Item {
                 onPressed: startX = activityPanel.x
                 onClicked: {
                     if (Math.abs(startX - activityPanel.x) < 8) {
-                        activityPanel.state = activityPanel.x < parent.width?"hidden":"show"
+                        activityPanel.state = activityPanel.x < activityPanel.parent.width?"hidden":"show"
                     }
                 }
             }
