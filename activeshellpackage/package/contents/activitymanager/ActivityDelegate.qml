@@ -154,7 +154,7 @@ Item {
                 ConfirmationDialog {
                     enabled: true
                     z: 700
-                    transformOrigin: Item.Bottom
+                    transformOrigin: Item.BottomLeft
                     question: i18n("Do you want to permanently delete activity '%1'?", activityName.text)
                     onAccepted: {
                         deleteTimer.activityId = model.id
@@ -190,10 +190,11 @@ Item {
 
                         deleteButtonParent.confirmationDialog.scale = 1
 
-                        deleteButtonParent.confirmationDialog.anchors.bottom = deleteButton.top
+                        deleteButtonParent.confirmationDialog.anchors.bottom = deleteButton.verticalCenter
+                        deleteButtonParent.confirmationDialog.x = Math.round(width/2);
                     } else {
                         delegate.PathView.itemOpacity = oldOpacity
-                        //deleteButtonParent.confirmationDialog.scale = 0
+                        deleteButtonParent.confirmationDialog.scale = 0
                     }
                 }
             }

@@ -40,10 +40,10 @@ Item {
     }
     PlasmaCore.FrameSvgItem {
         id: frame
-        imagePath: "dialogs/background"
+        imagePath: "widgets/background"
         scale: 1 / delegate.scale
-        transformOrigin: Item.Bottom
-        width: theme.mSize(theme.defaultFont).width*12
+        transformOrigin: Item.BottomLeft
+        width: theme.mSize(theme.defaultFont).width*24
         height: childrenRect.height+5+margins.top+margins.bottom
 
 
