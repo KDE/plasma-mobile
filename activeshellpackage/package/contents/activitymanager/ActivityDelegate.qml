@@ -85,7 +85,8 @@ Item {
                 bottomMargin: parent.margins.bottom
             }
 
-            source: model.background
+            //Check if the background is actually an image instead of a color
+            source: model.background[0] != "#" ? model.background  : ""
 
             Image {
                 anchors.fill: parent
