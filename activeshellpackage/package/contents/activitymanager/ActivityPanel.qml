@@ -109,7 +109,7 @@ Item {
                 width:22
                 height:22
                 svg: PlasmaCore.Svg {
-                    imagePath: "plasmapackage:/images/panel-icons.svgz"
+                    imagePath: Qt.resolvedUrl("plasmapackage:/images/panel-icons.svgz")
                 }
                 elementId: "activities"
                 anchors {
