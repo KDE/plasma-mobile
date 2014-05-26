@@ -87,23 +87,17 @@ void PagedProxyModel::setSourceModelObject(QObject *source)
         beginResetModel();
     }
 
-    connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
-            this, SLOT(sourceDataChanged(QModelIndex,QModelIndex)));
+    connect(model, &QAbstractItemModel::dataChanged, this, &PagedProxyModel::sourceDataChanged);
 
-    connect(model,  SIGNAL(rowsAboutToBeInserted(QModelIndex,int,int)),
-            this, SLOT(sourceRowsAboutToBeInserted(QModelIndex,int,int)) );
-    connect(model,  SIGNAL(rowsInserted(QModelIndex,int,int)),
-            this, SLOT(sourceRowsInserted(QModelIndex,int,int)) );
-    connect(model,  SIGNAL(rowsAboutToBeRemoved(QModelIndex,int,int)),
-            this, SLOT(sourceRowsAboutToBeRemoved(QModelIndex,int,int)) );
-    connect(model,  SIGNAL(rowsRemoved(QModelIndex,int,int)),
-            this, SLOT(sourceRowsRemoved(QModelIndex,int,int)) );
+    connect(model, &QAbstractItemModel::rowsAboutToBeInserted, this, &PagedProxyModel::sourceRowsAboutToBeInserted);
+    connect(model, &QAbstractItemModel::rowsInserted, this, &PagedProxyModel::sourceRowsInserted);
+    connect(model, &QAbstractItemModel::rowsAboutToBeRemoved, this, &PagedProxyModel::sourceRowsAboutToBeRemoved);
+    connect(model, &QAbstractItemModel::rowsRemoved, this, &PagedProxyModel::sourceRowsRemoved);
 
-    connect(model, SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)),
-            this, SLOT(sourceRowsMoved(QModelIndex,int,int,QModelIndex,int)));
+    connect(model, &QAbstractItemModel::rowsMoved, this, &PagedProxyModel::sourceRowsMoved);
 
-    connect(model, SIGNAL(modelAboutToBeReset()), this, SIGNAL(modelAboutToBeReset()));
-    connect(model, SIGNAL(modelReset()), this, SIGNAL(modelReset()));
+    connect(model, &QAbstractItemModel::modelAboutToBeReset, this, &PagedProxyModel::modelAboutToBeReset);
+    connect(model, &QAbstractItemModel::modelReset, this, &PagedProxyModel::modelReset);
     connect(model, SIGNAL(layoutChanged()), this, SIGNAL(modelReset()));
 
     setSourceModel(model);
