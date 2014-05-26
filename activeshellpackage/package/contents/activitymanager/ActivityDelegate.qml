@@ -145,8 +145,8 @@ Item {
         enabled: delegate.scale > 0.4
         Item {
             id: deleteButtonParent
-            width: 40//iconSize
-            height: 40//iconSize
+            width: iconSize
+            height: iconSize
             z: 900
             //TODO: load on demand of the qml file
             Component {
