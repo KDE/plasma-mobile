@@ -21,7 +21,9 @@ import QtQuick.Dialogs 1.1
 import QtQuick.Controls 1.0 as QtControls
 import QtQuick.Layouts 1.0
 import org.kde.plasma.configuration 2.0
-
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.activities 0.1 as Activities
+import org.kde.plasma.plasmoid 2.0
 
 //TODO: all of this will be done with desktop components
 Rectangle {
@@ -50,6 +52,15 @@ Rectangle {
                     plasmoid.configuration[key] = main.currentItem["cfg_"+key]
                 }
             }
+        }
+    }
+
+    function saveActivityConfiguration() {
+        console.log("kanw save?")
+        //change the name of the activity
+        if (plasmoid.activityName != activityNameEdit.text) {
+            console.log("allakse?")
+            activitiesConfiguration.setActivityName(plasmoid.activity, activityNameEdit.text, function() {})
         }
     }
 
@@ -86,13 +97,51 @@ Rectangle {
 //BEGIN UI components
     SystemPalette {id: syspal}
 
+    Activities.ActivityModel {
+        id: activitiesConfiguration
+
+        shownStates: "Running,Stopping"
+    }
+
+    Row {
+        id: activityConfigurationRow
+        spacing: 2
+        width: buttonsRow.width
+        height: buttonsRow.height
+        anchors {
+            horizontalCenter: buttonsRow.horizontalCenter
+            top: buttonsRow.bottom
+            topMargin: 8
+        }
+
+        PlasmaComponents.Label {
+            id: activityNameLabel
+            text: i18n("Name:")
+            horizontalAlignment: Text.AlignRight
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
+        PlasmaComponents.TextField {
+            id: activityNameEdit
+            height: parent.height * 1.2
+            width: parent.width / 1.6
+            clearButtonShown: true
+            anchors.verticalCenter: parent.verticalCenter
+            text: plasmoid.activityName
+            Keys.onReturnPressed: {
+                accept()
+            }
+        }
+    }
+
     QtControls.StackView {
         id: main
         property string title: ""
         anchors {
             left: parent.left
             right: parent.right
-            top: buttonsRow.bottom
+            top: activityConfigurationRow.bottom
+            topMargin: 8
         }
         clip: true
         property string sourceFile
@@ -101,7 +150,6 @@ Rectangle {
             replace(Qt.resolvedUrl(sourceFile))
         }
     }
-
 
     QtControls.Action {
         id: cancelAction
@@ -120,6 +168,7 @@ Rectangle {
     QtControls.Action {
         id: applyAction
         onTriggered: {
+            root.saveActivityConfiguration();
             if (main.currentItem.saveConfig !== undefined) {
                 main.currentItem.saveConfig();
             } else {
