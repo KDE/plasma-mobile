@@ -54,7 +54,8 @@ ColumnLayout {
             var data = configDialog.containmentPluginsConfigModel.get(i);
             for(var j in data) print(j)
             if (configDialog.containmentPlugin == data.pluginName) {
-                pluginComboBox.currentIndex = i
+                var model = configDialog.containmentPluginsConfigModel.get(i)
+                root.containmentPlugin = model.pluginName
                 break;
             }
         }
@@ -63,57 +64,12 @@ ColumnLayout {
             var data = configDialog.wallpaperConfigModel.get(i);
             for(var j in data) print(j)
             if (configDialog.currentWallpaper == data.pluginName) {
-                wallpaperComboBox.currentIndex = i
-                break;
-            }
-        }
-    }
-
-    Row {
-        spacing: units.largeSpacing / 2
-        anchors.right: wallpaperRow.right
-        Item {
-            width: units.largeSpacing
-            height: parent.height
-        }
-        QtControls.Label {
-            anchors.verticalCenter: pluginComboBox.verticalCenter
-            text: i18n("Layout:")
-        }
-        QtControls.ComboBox {
-            id: pluginComboBox
-            model: configDialog.containmentPluginsConfigModel
-            width: theme.mSize(theme.defaultFont).width * 24
-            textRole: "name"
-            onCurrentIndexChanged: {
-                var model = configDialog.containmentPluginsConfigModel.get(currentIndex)
-                root.containmentPlugin = model.pluginName
-            }
-        }
-    }
-
-    Row {
-        id: wallpaperRow
-        spacing: units.largeSpacing / 2
-        Item {
-            width: units.largeSpacing
-            height: parent.height
-        }
-        QtControls.Label {
-            anchors.verticalCenter: wallpaperComboBox.verticalCenter
-            text: i18n("Wallpaper Type:")
-        }
-        QtControls.ComboBox {
-            id: wallpaperComboBox
-            model: configDialog.wallpaperConfigModel
-            width: theme.mSize(theme.defaultFont).width * 24
-            textRole: "name"
-            onCurrentIndexChanged: {
-                var model = configDialog.wallpaperConfigModel.get(currentIndex)
+                var model = configDialog.wallpaperConfigModel.get(i)
                 root.currentWallpaper = model.pluginName
                 main.sourceFile = model.source
                 configDialog.currentWallpaper = model.pluginName
                 root.restoreConfig()
+                break;
             }
         }
     }
