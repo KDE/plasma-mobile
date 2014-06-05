@@ -24,7 +24,6 @@ import QtQuick.Layouts 1.0
 ColumnLayout {
     id: root
 
-    property int formAlignment: wallpaperComboBox.x + (units.largeSpacing/2)
     property string currentWallpaper: ""
     property string containmentPlugin: ""
 
