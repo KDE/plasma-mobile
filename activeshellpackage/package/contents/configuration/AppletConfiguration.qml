@@ -32,20 +32,12 @@ Rectangle {
     width: units.gridUnit * 40
     height: units.gridUnit * 30
 
+    onImplicitHeightChanged: main.height = implicitHeight - buttonsRow.height
     property bool isContainment: false
 //END properties
 
 //BEGIN model
     property ConfigModel globalConfigModel:  globalAppletConfigModel
-
-    ConfigModel {
-        id: globalAppletConfigModel
-        ConfigCategory {
-            name: "Keyboard shortcuts"
-            icon: "preferences-desktop-keyboard"
-            source: "ConfigurationShortcuts.qml"
-        }
-    }
 //END model
 
 //BEGIN functions
@@ -84,13 +76,7 @@ Rectangle {
 
 //BEGIN connections
     Component.onCompleted: {
-        if (!isContainment && configDialog.configModel && configDialog.configModel.count > 0) {
-            main.sourceFile = configDialog.configModel.get(0).source
-            main.title = configDialog.configModel.get(0).name
-        } else {
-            main.sourceFile = globalConfigModel.get(0).source
-            main.title = globalConfigModel.get(0).name
-        }
+        main.sourceFile = globalConfigModel.get(0).source
         root.restoreConfig()
 //         root.width = mainColumn.implicitWidth
 //         root.height = mainColumn.implicitHeight
@@ -100,210 +86,69 @@ Rectangle {
 //BEGIN UI components
     SystemPalette {id: syspal}
 
-    MessageDialog {
-        id: messageDialog
-        icon: StandardIcon.Warning
-        property Item delegate
-        title: i18n("Apply Settings")
-        text: i18n("The settings of the current module have changed. Do you want to apply the changes or discard them?")
-        standardButtons: StandardButton.Apply | StandardButton.Discard | StandardButton.Cancel
-        onApply: {
-            applyAction.trigger()
-            delegate.openCategory()
+    QtControls.StackView {
+        id: main
+        property string title: ""
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: buttonsRow.bottom
         }
-        onDiscard: {
-            delegate.openCategory()
+        clip: true
+        property string sourceFile
+        onSourceFileChanged: {
+            print("Source file changed in flickable" + sourceFile);
+            replace(Qt.resolvedUrl(sourceFile))
         }
     }
 
-    ColumnLayout {
-        id: mainColumn
+
+    QtControls.Action {
+        id: cancelAction
+        onTriggered: configDialog.close();
+        shortcut: "Escape"
+    }
+
+    QtControls.Action {
+        id: acceptAction
+        onTriggered: {
+            applyAction.trigger();
+            configDialog.close();
+        }
+    }
+
+    QtControls.Action {
+        id: applyAction
+        onTriggered: {
+            if (main.currentItem.saveConfig !== undefined) {
+                main.currentItem.saveConfig();
+            } else {
+                root.saveConfig();
+            }
+        }
+    }
+
+    RowLayout {
+        id: buttonsRow
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
         anchors {
-            fill: parent
-            margins: mainColumn.spacing //margins are hardcoded in QStyle we should match that here
+            top: parent.top
+            horizontalCenter: parent.horizontalCenter
         }
-        property int implicitWidth: Math.max(contentRow.implicitWidth, buttonsRow.implicitWidth) + 8
-        property int implicitHeight: contentRow.implicitHeight + buttonsRow.implicitHeight + 8
-
-        RowLayout {
-            id: contentRow
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-            spacing: units.largeSpacing
-            Layout.fillHeight: true
-            Layout.preferredHeight: parent.height - buttonsRow.height
-
-            QtControls.ScrollView {
-                id: categoriesScroll
-                frameVisible: true
-                anchors {
-                    top: parent.top
-                    bottom: parent.bottom
-                }
-                visible: (configDialog.configModel ? configDialog.configModel.count : 0) + globalConfigModel.count > 1
-                width: visible ? 100 : 0
-                implicitWidth: width
-                Flickable {
-                    id: categoriesView
-                    contentWidth: parent.width
-                    contentHeight: categories.height
-                    anchors.fill: parent
-
-                    property Item currentItem: categoriesColumn.children[1]
-
-                    Item {
-                        id: categories
-                        width: parent.width
-                        height: categoriesColumn.height
-
-                        Item {
-                            width: parent.width
-                            height: categoriesView.currentItem.height
-                            y: categoriesView.currentItem.y
-                            Rectangle {
-                                color: syspal.highlight
-                                radius: 3
-                                anchors {
-                                    fill: parent
-                                    margins: 2
-                                }
-                            }
-                            Behavior on y {
-                                NumberAnimation {
-                                    duration: units.longDuration
-                                    easing.type: "InOutQuad"
-                                }
-                            }
-                        }
-                        Column {
-                            id: categoriesColumn
-                            width: parent.width
-                            Repeater {
-                                model: root.isContainment ? globalConfigModel : undefined
-                                delegate: ConfigCategoryDelegate {}
-                            }
-                            Repeater {
-                                model: configDialog.configModel
-                                delegate: ConfigCategoryDelegate {
-                                    onClicked: {
-                                        categoriesView.currentIndex = index
-                                        pageTitle.text = name;
-                                    }
-
-                                }
-                            }
-                            Repeater {
-                                model: !root.isContainment ? globalConfigModel : undefined
-                                delegate: ConfigCategoryDelegate {}
-                            }
-                        }
-                    }
-                }
-            }
-            Item {
-                anchors {
-                    top: parent.top
-                    bottom: parent.bottom
-                }
-                Layout.fillWidth: true
-                height: Math.max(categoriesScroll.height, main.currentItem != null ? main.currentItem.implicitHeight : 0)
-
-                QtControls.Label {
-                    id: pageTitle
-                    anchors {
-                        top: parent.top
-                        left: parent.left
-                        right: parent.right
-                    }
-                    font.pointSize: theme.defaultFont.pointSize*2
-                    text: main.title
-                }
-
-                QtControls.StackView {
-                    id: main
-                    property string title: ""
-                    anchors {
-                        top: pageTitle.bottom
-                        topMargin: units.largeSpacing / 2
-                        left: parent.left
-                        right: parent.right
-                        bottom: parent.bottom
-                    }
-                    clip: true
-                    property string sourceFile
-                    Timer {
-                        id: pageSizeSync
-                        interval: 100
-                        onTriggered: {
-    //                                     root.width = mainColumn.implicitWidth
-    //                                     root.height = mainColumn.implicitHeight
-                        }
-                    }
-                    onImplicitWidthChanged: pageSizeSync.restart()
-                    onImplicitHeightChanged: pageSizeSync.restart()
-                    onSourceFileChanged: {
-                        print("Source file changed in flickable" + sourceFile);
-                        replace(Qt.resolvedUrl(sourceFile))
-                        /*
-                            * This is not needed on a desktop shell that has ok/apply/cancel buttons, i'll leave it here only for future reference until we have a prototype for the active shell.
-                            * root.pageChanged will start a timer, that in turn will call saveConfig() when triggered
-
-                        for (var prop in currentPage) {
-                            if (prop.indexOf("cfg_") === 0) {
-                                currentPage[prop+"Changed"].connect(root.pageChanged)
-                            }
-                        }*/
-                    }
-                }
-            }
+        QtControls.Button {
+            iconName: "dialog-ok"
+            text: i18n("Ok")
+            onClicked: acceptAction.trigger()
         }
-
-        QtControls.Action {
-            id: acceptAction
-            onTriggered: {
-                applyAction.trigger();
-                configDialog.close();
-            }
-            shortcut: "Return"
+        QtControls.Button {
+            iconName: "dialog-ok-apply"
+            text: i18n("Apply")
+            onClicked: applyAction.trigger()
         }
-
-        QtControls.Action {
-            id: applyAction
-            onTriggered: {
-                if (main.currentItem.saveConfig !== undefined) {
-                    main.currentItem.saveConfig();
-                } else {
-                    root.saveConfig();
-                }
-            }
-        }
-
-        QtControls.Action {
-            id: cancelAction
-            onTriggered: configDialog.close();
-            shortcut: "Escape"
-        }
-
-        RowLayout {
-            id: buttonsRow
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-            QtControls.Button {
-                iconName: "dialog-ok"
-                text: i18n("Ok")
-                onClicked: acceptAction.trigger()
-            }
-            QtControls.Button {
-                iconName: "dialog-ok-apply"
-                text: i18n("Apply")
-                onClicked: applyAction.trigger()
-            }
-            QtControls.Button {
-                iconName: "dialog-cancel"
-                text: i18n("Cancel")
-                onClicked: cancelAction.trigger()
-            }
+        QtControls.Button {
+            iconName: "dialog-cancel"
+            text: i18n("Cancel")
+            onClicked: cancelAction.trigger()
         }
     }
 //END UI components

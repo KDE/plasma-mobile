@@ -37,11 +37,6 @@ AppletConfiguration {
             icon: "preferences-desktop-wallpaper"
             source: "ConfigurationContainmentAppearance.qml"
         }
-        ConfigCategory {
-            name: "Mouse Actions"
-            icon: "preferences-desktop-mouse"
-            source: "ConfigurationContainmentActions.qml"
-        }
     }
 //END model
 
