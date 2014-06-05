@@ -99,6 +99,24 @@ Item {
                 }
             }
 
+            Rectangle {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+                height: activityName.height * 2
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0.0
+                        color: Qt.rgba(0, 0, 0, 0.6)
+                    }
+                    GradientStop {
+                        position: 1.0
+                        color: Qt.rgba(0, 0, 0, 0)
+                    }
+                }
+            }
             PlasmaComponents.Label {
                 id: activityName
                 anchors {
@@ -109,9 +127,11 @@ Item {
                 }
 
                 text: (String(model.name).length <= 18) ? model.name:String(model.name).substr(0,18) + "..."
-                color: "black"
-                font.pointSize: theme.defaultFont.pointSize*1.5
-                font.bold: true
+                color: "white"
+                style: Text.Raised
+                renderType: Text.QtRendering
+                font.pointSize: theme.defaultFont.pointSize * 2
+                font.weight: Font.Light
             }
 
             MobileComponents.Rating {
