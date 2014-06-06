@@ -24,7 +24,6 @@ import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
 PlasmaCore.FrameSvgItem {
     id: actionsToolBar
-
     property alias query: filterField.text
 
     Connections {
@@ -37,6 +36,7 @@ PlasmaCore.FrameSvgItem {
                 //show the virtual keyboard
                 Qt.inputMethod.hide()
                 filterButton.checked = false
+                activityCreationDialog.visible = false
             }
         }
     }
@@ -44,12 +44,21 @@ PlasmaCore.FrameSvgItem {
     imagePath: "dialogs/background"
     enabledBorders: "LeftBorder|TopBorder|BottomBorder"
     width: childrenRect.width+margins.left+margins.right+60
-    height: childrenRect.height+margins.top+margins.bottom
+    height: activityCreationDialog.visible ? childrenRect.height+margins.top+margins.bottom + 30 : childrenRect.height - activityCreationDialog.height /1.2
+
+    Behavior on height {
+        NumberAnimation {
+            duration: 250
+            easing.type: Easing.InOutQuad
+        }
+    }
+
     anchors {
         top: parent.top
         right: parent.right
     }
     Row {
+        id: rowToolBar
         x: actionsToolBar.margins.left+30
         y: actionsToolBar.margins.top
         spacing: 40
@@ -58,8 +67,16 @@ PlasmaCore.FrameSvgItem {
             elementId: "add"
 
             onClicked: {
-                activitySwitcher.state = "Passive"
-                activitySwitcher.newActivityRequested()
+                    if (activityCreationDialog.visisble) {
+                        activitySwitcher.state = "Normal"
+                        //hide the virtual keyboard
+                        Qt.inputMethod.hide()
+                    } else {
+                        activitySwitcher.state = "AcceptingInput"
+                        activityCreationDialog.visible = true
+                        //show the virtual keyboard
+                        Qt.inputMethod.show()
+                    }
             }
         }
         Item {
@@ -115,6 +132,19 @@ PlasmaCore.FrameSvgItem {
                     }
                 }
             }
+        }
+    }
+
+    ActivityCreationDialog {
+        id: activityCreationDialog
+        width: parent.width / 1.6
+        height: rowToolBar.height + 8
+        anchors {
+            top: rowToolBar.bottom
+            left: parent.left
+        }
+        onAccepted: {
+            activitiesSource.addActivity(newActivityName, function () {});
         }
     }
 }
