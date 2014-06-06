@@ -56,10 +56,8 @@ Rectangle {
     }
 
     function saveActivityConfiguration() {
-        console.log("kanw save?")
         //change the name of the activity
         if (plasmoid.activityName != activityNameEdit.text) {
-            console.log("allakse?")
             activitiesConfiguration.setActivityName(plasmoid.activity, activityNameEdit.text, function() {})
         }
     }
