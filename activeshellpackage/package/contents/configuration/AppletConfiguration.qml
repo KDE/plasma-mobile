@@ -22,19 +22,18 @@ import QtQuick.Controls 1.0 as QtControls
 import QtQuick.Layouts 1.0
 import org.kde.plasma.configuration 2.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.activities 0.1 as Activities
 import org.kde.plasma.plasmoid 2.0
 
 //TODO: all of this will be done with desktop components
 Rectangle {
     id: root
-
 //BEGIN properties
-    color: syspal.window
     width: units.gridUnit * 40
     height: units.gridUnit * 30
 
-    onImplicitHeightChanged: main.height = implicitHeight - buttonsRow.height
+    onImplicitHeightChanged: main.height = implicitHeight - titleBar.height
     property bool isContainment: false
 //END properties
 
@@ -93,7 +92,6 @@ Rectangle {
 //END connections
 
 //BEGIN UI components
-    SystemPalette {id: syspal}
 
     Activities.ActivityModel {
         id: activitiesConfiguration
@@ -101,102 +99,125 @@ Rectangle {
         shownStates: "Running,Stopping"
     }
 
-    Row {
-        id: activityConfigurationRow
-        spacing: 2
-        width: buttonsRow.width
-        height: buttonsRow.height
+    PlasmaCore.FrameSvgItem {
+        imagePath: "widgets/background"
         anchors {
-            horizontalCenter: buttonsRow.horizontalCenter
-            top: buttonsRow.bottom
-            topMargin: 8
+            fill: root
         }
 
-        PlasmaComponents.Label {
-            id: activityNameLabel
-            text: i18n("Name:")
-            horizontalAlignment: Text.AlignRight
-            anchors.verticalCenter: parent.verticalCenter
-        }
+        Row {
+            id: activityConfigurationRow
+            spacing: 2
+            width: titleBar.width / 4
+            height: titleBar.height / 2
+            anchors {
+                horizontalCenter: titleBar.horizontalCenter
+                top: titleBar.bottom
+                topMargin: 8
+            }
 
-        PlasmaComponents.TextField {
-            id: activityNameEdit
-            height: parent.height * 1.2
-            width: parent.width / 1.6
-            clearButtonShown: true
-            anchors.verticalCenter: parent.verticalCenter
-            text: plasmoid.activityName
-            Keys.onReturnPressed: {
-                accept()
+            PlasmaComponents.Label {
+                id: activityNameLabel
+                text: i18n("Name:")
+                horizontalAlignment: Text.AlignRight
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            PlasmaComponents.TextField {
+                id: activityNameEdit
+                height: parent.height * 1.2
+                width: parent.width / 1.6
+                clearButtonShown: true
+                anchors.verticalCenter: parent.verticalCenter
+                text: plasmoid.activityName
+                Keys.onReturnPressed: {
+                    accept()
+                }
             }
         }
-    }
 
-    QtControls.StackView {
-        id: main
-        property string title: ""
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: activityConfigurationRow.bottom
-            topMargin: 8
-        }
-        clip: true
-        property string sourceFile
-        onSourceFileChanged: {
-            print("Source file changed in flickable" + sourceFile);
-            replace(Qt.resolvedUrl(sourceFile))
-        }
-    }
-
-    QtControls.Action {
-        id: cancelAction
-        onTriggered: configDialog.close();
-        shortcut: "Escape"
-    }
-
-    QtControls.Action {
-        id: acceptAction
-        onTriggered: {
-            applyAction.trigger();
-            configDialog.close();
-        }
-    }
-
-    QtControls.Action {
-        id: applyAction
-        onTriggered: {
-            root.saveActivityConfiguration();
-            if (main.currentItem.saveConfig !== undefined) {
-                main.currentItem.saveConfig();
-            } else {
-                root.saveConfig();
+        QtControls.StackView {
+            id: main
+            property string title: ""
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: activityConfigurationRow.bottom
+                bottom: parent.bottom
+                topMargin: 8
+            }
+            clip: true
+            property string sourceFile
+            onSourceFileChanged: {
+                print("Source file changed in flickable" + sourceFile);
+                replace(Qt.resolvedUrl(sourceFile))
             }
         }
-    }
 
-    RowLayout {
-        id: buttonsRow
-        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-        anchors {
-            top: parent.top
-            horizontalCenter: parent.horizontalCenter
+        QtControls.Action {
+            id: cancelAction
+            onTriggered: configDialog.close();
+            shortcut: "Escape"
         }
-        QtControls.Button {
-            iconName: "dialog-ok"
-            text: i18n("Ok")
-            onClicked: acceptAction.trigger()
+
+        QtControls.Action {
+            id: acceptAction
+            onTriggered: {
+                if (main.currentItem.saveConfig !== undefined) {
+                    main.currentItem.saveConfig();
+                } else {
+                    root.saveConfig();
+                }
+                configDialog.close();
+                root.saveActivityConfiguration();
+            }
         }
-        QtControls.Button {
-            iconName: "dialog-ok-apply"
-            text: i18n("Apply")
-            onClicked: applyAction.trigger()
+
+        PlasmaCore.FrameSvgItem {
+            id: titleBar
+            imagePath: "widgets/background"
+            width: parent.width
+            height: units.gridUnit * 3.5
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+
+            Row {
+                id: buttonsRow
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                anchors {
+                        fill: parent
+                        leftMargin: parent.margins.left
+                        rightMargin: parent.margins.right
+                        topMargin: parent.margins.top
+                }
+
+                PlasmaComponents.Button {
+                    iconSource: "dialog-ok"
+                    text: i18n("Save Changes")
+                    anchors.right: parent.right
+                    onClicked: acceptAction.trigger()
+                }
+
+                PlasmaComponents.Label {
+                    text: i18n("Edit Activity:")
+                    horizontalAlignment: Text.AlignRight
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    renderType: Text.QtRendering
+                    font.pointSize: theme.defaultFont.pointSize * 1.2
+                    font.weight: Font.Bold
+                }
+
+                PlasmaComponents.Button {
+                    iconSource: "dialog-cancel"
+                    text: i18n("Cancel")
+                    anchors.left: parent.left
+                    onClicked: cancelAction.trigger()
+                }
+            }
         }
-        QtControls.Button {
-            iconName: "dialog-cancel"
-            text: i18n("Cancel")
-            onClicked: cancelAction.trigger()
-        }
-    }
+}
 //END UI components
 }
