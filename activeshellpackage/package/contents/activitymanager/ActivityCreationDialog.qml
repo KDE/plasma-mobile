@@ -26,6 +26,7 @@ Item {
     visible: false
 
     signal accepted(string newActivityName)
+    signal dismissed
 
     Behavior on visible {
         NumberAnimation {
@@ -84,6 +85,7 @@ Item {
                     width: theme.mSize(theme.defaultFont).width*8
                     onClicked: {
                         root.visible = false
+                        root.dismissed()
                     }
                 }
             }

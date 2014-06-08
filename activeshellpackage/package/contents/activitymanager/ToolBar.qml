@@ -63,8 +63,10 @@ PlasmaCore.FrameSvgItem {
         y: actionsToolBar.margins.top
         spacing: 40
         MobileComponents.ActionButton {
+            id: createActivityButton
             svg: iconsSvg
             elementId: "add"
+            toggle: true
 
             onClicked: {
                     if (activityCreationDialog.visisble) {
@@ -143,8 +145,12 @@ PlasmaCore.FrameSvgItem {
             top: rowToolBar.bottom
             left: parent.left
         }
+
         onAccepted: {
             activitiesSource.addActivity(newActivityName, function () {});
+            createActivityButton.checked = false
         }
+
+        onDismissed: createActivityButton.checked = false
     }
 }
