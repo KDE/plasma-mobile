@@ -77,6 +77,7 @@ Item {
         anchors.rightMargin: 100
 
         Image {
+            id: wallpaperThumbnail
             anchors {
                 fill: parent
                 leftMargin: parent.margins.left
@@ -92,6 +93,7 @@ Item {
                 anchors.fill: parent
 
                 source: "plasmapackage:/images/emptyactivity.png"
+                visible: String(wallpaperThumbnail.source).length == 0
                 onVisibleChanged: {
                     if (!visible) {
                         destroy()
