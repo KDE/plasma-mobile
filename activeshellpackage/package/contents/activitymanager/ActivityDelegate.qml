@@ -133,17 +133,6 @@ Item {
                 font.pointSize: theme.defaultFont.pointSize * 2
                 font.weight: Font.Light
             }
-
-            MobileComponents.Rating {
-                id: ratingWidget
-                interactive: false
-                score: 10 * (model.Score/activitySwitcher.maxScore)
-                anchors {
-                    bottom: parent.bottom
-                    right: parent.right
-                    margins: 2
-                }
-            }
         }
     }
 
