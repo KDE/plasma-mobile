@@ -20,7 +20,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kquickcontrolsaddons 2.0
 
 PlasmaCore.FrameSvgItem {
     id: root
@@ -29,7 +30,9 @@ PlasmaCore.FrameSvgItem {
     imagePath: "widgets/panel-background"
     enabledBorders: PlasmaCore.FrameSvg.BottomBorder
 
-    visible: true
+    state: "Hidden"
+
+    visible: false
 
     property Item containment
 
@@ -39,48 +42,138 @@ PlasmaCore.FrameSvgItem {
         containment.visible = true;
         containment.anchors.fill = containmentParent;
         containmentParent.anchors.bottomMargin = Math.min(root.margins.bottom, Math.max(1, root.height - units.iconSizes.smallMedium));
+        visible = true
     }
 
-    function minimumWidthChanged() {
-        if (containment.formFactor === PlasmaCore.Types.Horizontal) {
-            panel.width = Math.max(panel.width, containment.Layout.minimumWidth);
+    MouseEventListener {
+        anchors.fill: parent
+        property int startMouseY
+        onPressed: {
+            startMouseY = mouse.screenY;
+        }
+        onPositionChanged: {
+            if (!topSlidingPanel.visible && mouse.screenY - startMouseY > units.gridUnit * 2) {
+                topSlidingPanel.visible = true
+            }
+            topSlidingPanel.y = Math.min(0, -topSlidingPanel.height + mouse.screenY);
+        }
+        onReleased: {
+            root.state = "none"
+
+            // if more than half of pick & launch panel is visible then make it totally visible.
+            if ((topSlidingPanel.y > -(topSlidingPanel.height - windowListContainer.height)/2) ) {
+                //the biggest one, Launcher
+                root.state = "Launcher"
+            } else if (topSlidingPanel.height + topSlidingPanel.y > (windowListContainer.height / 5) * 6) {
+                //show only the taskbar: require a smaller quantity of the screen uncovered when the previous state is hidden
+                root.state = "Tasks"
+            } else {
+                //Only the small top panel
+                root.state = "Hidden"
+            }
+        }
+
+        Item {
+            id: containmentParent
+            anchors {
+                fill: parent
+                bottomMargin: root.margins.bottom
+            }
         }
     }
-    function maximumWidthChanged() {
-        if (containment.formFactor === PlasmaCore.Types.Horizontal) {
-            panel.width = Math.min(panel.width, containment.Layout.maximumWidth);
-        }
-    }
-    function preferredWidthChanged() {
-        if (containment.formFactor === PlasmaCore.Types.Horizontal) {
-            panel.width = Math.min(panel.maximumLength, Math.max(containment.Layout.preferredWidth, panel.minimumLength));
+    PlasmaCore.Dialog {
+        id: topSlidingPanel
+        visible: false
+        location: PlasmaCore.Types.TopEdge
+        type: PlasmaCore.Dialog.Dock
+        hideOnWindowDeactivate: true
+        mainItem: MouseEventListener {
+            width: root.width
+            height: 500
+
+            property int startMouseY
+            property int startY
+            onPressed: {
+                startMouseY = mouse.screenY;
+                startY = topSlidingPanel.y;
+            }
+            onPositionChanged: {
+                topSlidingPanel.y = Math.min(0, startY +  mouse.screenY - startMouseY);
+            }
+            onReleased: {
+                var oldState = root.state
+                root.state = "none"
+
+                // if more than half of pick & launch panel is visible then make it totally visible.
+                if ((topSlidingPanel.y > -(topSlidingPanel.height - windowListContainer.height)/2) ) {
+                    //the biggest one, Launcher
+                    root.state = "Launcher"
+                } else if ((oldState == "Hidden" && topSlidingPanel.height + topSlidingPanel.y > windowListContainer.height/2) ||
+                        (topSlidingPanel.height + topSlidingPanel.y > (windowListContainer.height / 5) * 6)) {
+                    //show only the taskbar: require a smaller quantity of the screen uncovered when the previous state is hidden
+                    root.state = "Tasks"
+                } else {
+                    //Only the small top panel
+                    root.state = "Hidden"
+                }
+            }
+            PlasmaComponents.ToolButton {
+                anchors.right: parent.right
+                y: Math.max(0, -topSlidingPanel.y)
+                z: 999
+                iconSource: "window-close"
+                onClicked: root.state = "Hidden"
+            }
+            Column {
+                anchors {
+                    fill: parent
+                }
+                Item {
+                    width: parent.width
+                    height: 300
+                }
+                Rectangle {
+                    id: windowListContainer
+                    width: parent.width
+                    height: 200
+                }
+            }
         }
     }
 
-    function minimumHeightChanged() {
-        if (containment.formFactor === PlasmaCore.Types.Vertical) {
-            panel.height = Math.max(panel.height, containment.Layout.minimumWidth);
+    states:  [
+        State {
+            name: "Launcher"
+            PropertyChanges {
+                target: topSlidingPanel
+                y: 0
+            }
+        },
+        State {
+            name: "Hidden"
+            PropertyChanges {
+                target: topSlidingPanel
+                y: -topSlidingPanel.height
+                visible: false
+            }
+        },
+        State {
+            name: "Tasks"
+            PropertyChanges {
+                target: topSlidingPanel
+                y: -topSlidingPanel.height + windowListContainer.height
+            }
         }
-    }
-    function maximumHeightChanged() {
-        if (containment.formFactor === PlasmaCore.Types.Vertical) {
-            panel.height = Math.min(panel.height, containment.Layout.maximumWidth);
+    ]
+    transitions: [
+        Transition {
+            SequentialAnimation {
+                PropertyAnimation {
+                    properties: "y"
+                    duration: units.longDuration
+                    easing.type: Easing.OutQuad
+                }
+            }
         }
-    }
-    function preferredHeightChanged() {
-        if (containment.formFactor === PlasmaCore.Types.Vertical) {
-            panel.height = Math.min(panel.maximumLength, Math.max(containment.Layout.preferredHeight, panel.minimumLength));
-        }
-    }
-
-    Item {
-        id: containmentParent
-        anchors {
-            fill: parent
-            leftMargin: root.margins.left
-            topMargin: root.margins.top
-            rightMargin: root.margins.right
-            bottomMargin: root.margins.bottom
-        }
-    }
+    ]
 }
