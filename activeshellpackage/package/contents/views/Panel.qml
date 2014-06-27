@@ -87,21 +87,34 @@ PlasmaCore.FrameSvgItem {
         location: PlasmaCore.Types.TopEdge
         type: PlasmaCore.Dialog.Dock
         hideOnWindowDeactivate: true
+
         mainItem: MouseEventListener {
             width: root.width
             height: 500
 
             property int startMouseY
             property int startY
+            property bool changeState: false
+            property string oldState
+
             onPressed: {
+                oldState = root.state
                 startMouseY = mouse.screenY;
                 startY = topSlidingPanel.y;
+                changeState = false;
             }
             onPositionChanged: {
+                if (Math.abs(mouse.screenY - startMouseY) > units.gridUnit * 2) {
+                    changeState = true
+                }
                 topSlidingPanel.y = Math.min(0, startY +  mouse.screenY - startMouseY);
             }
             onReleased: {
-                var oldState = root.state
+                if (!changeState) {
+                    root.state = oldState;
+                    return;
+                }
+                oldState = root.state
                 root.state = "none"
 
                 // if more than half of pick & launch panel is visible then make it totally visible.
@@ -119,9 +132,11 @@ PlasmaCore.FrameSvgItem {
             }
             PlasmaComponents.ToolButton {
                 anchors.right: parent.right
-                y: Math.max(0, -topSlidingPanel.y)
+                flat: false
                 z: 999
                 iconSource: "window-close"
+                width: units.iconSizes.medium
+                height: width
                 onClicked: root.state = "Hidden"
             }
             Column {

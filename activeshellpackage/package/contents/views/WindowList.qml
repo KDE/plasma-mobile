@@ -40,7 +40,10 @@ Item {
 
     ListView {
         id: tasksList
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            topMargin: units.largeSpacing
+        }
 
         orientation: ListView.Horizontal
         spacing: units.largeSpacing
