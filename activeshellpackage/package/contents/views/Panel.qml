@@ -61,7 +61,7 @@ PlasmaCore.FrameSvgItem {
             root.state = "none"
 
             // if more than half of pick & launch panel is visible then make it totally visible.
-            if ((topSlidingPanel.y > -(topSlidingPanel.height - windowListContainer.height)/2) ) {
+            if (topSlidingPanel.y > -(topSlidingPanel.height - windowListContainer.height)/2) {
                 //the biggest one, Launcher
                 root.state = "Launcher"
             } else if (topSlidingPanel.height + topSlidingPanel.y > (windowListContainer.height / 5) * 6) {
@@ -162,6 +162,7 @@ PlasmaCore.FrameSvgItem {
             PropertyChanges {
                 target: topSlidingPanel
                 y: 0
+                visible: true
             }
         },
         State {
@@ -177,6 +178,7 @@ PlasmaCore.FrameSvgItem {
             PropertyChanges {
                 target: topSlidingPanel
                 y: -topSlidingPanel.height + windowListContainer.height
+                visible: true
             }
         }
     ]
