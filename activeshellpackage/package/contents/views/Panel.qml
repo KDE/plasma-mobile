@@ -132,7 +132,7 @@ PlasmaCore.FrameSvgItem {
                     width: parent.width
                     height: 300
                 }
-                Rectangle {
+                WindowList {
                     id: windowListContainer
                     width: parent.width
                     height: 200
