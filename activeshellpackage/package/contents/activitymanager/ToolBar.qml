@@ -25,6 +25,7 @@ import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 PlasmaCore.FrameSvgItem {
     id: actionsToolBar
     property alias query: filterField.text
+    clip: true
 
     Connections {
         target: activitySwitcher
@@ -36,19 +37,25 @@ PlasmaCore.FrameSvgItem {
                 //show the virtual keyboard
                 Qt.inputMethod.hide()
                 filterButton.checked = false
-                activityCreationDialog.visible = false
+                createActivityButton.checked = false
             }
         }
     }
 
-    imagePath: "dialogs/background"
+    imagePath: "widgets/background"
     enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-    width: childrenRect.width+margins.left+margins.right+60
-    height: activityCreationDialog.visible ? childrenRect.height+margins.top+margins.bottom + 30 : childrenRect.height - activityCreationDialog.height /1.2
+    width: (createActivityButton.checked ? Math.max(activityCreationDialog.width, rowToolBar.width): rowToolBar.width) + margins.left + margins.right + 60
+    height: rowToolBar.height + margins.top + margins.bottom + (createActivityButton.checked ? activityCreationDialog.height : 0)
 
     Behavior on height {
         NumberAnimation {
-            duration: 250
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+    Behavior on width {
+        NumberAnimation {
+            duration: units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
@@ -68,21 +75,21 @@ PlasmaCore.FrameSvgItem {
             elementId: "add"
             toggle: true
 
-            onClicked: {
-                    if (activityCreationDialog.visisble) {
+            onCheckedChanged: {
+                    if (!checked) {
                         activitySwitcher.state = "Normal"
                         //hide the virtual keyboard
                         Qt.inputMethod.hide()
                     } else {
                         activitySwitcher.state = "AcceptingInput"
-                        activityCreationDialog.visible = true
                         //show the virtual keyboard
                         Qt.inputMethod.show()
+                        activityCreationDialog.focusTextEdit()
                     }
             }
         }
         Item {
-            width: filterField.opacity>0.5?filterField.width+iconSize/2:iconSize
+            width: filterButton.checked ? filterField.width+iconSize/2 : iconSize
             height: filterButton.height
 
             Item {
@@ -98,7 +105,7 @@ PlasmaCore.FrameSvgItem {
                     anchors.verticalCenter: parent.verticalCenter
                     Behavior on opacity {
                         NumberAnimation {
-                            duration: 250
+                            duration: units.longDuration
                             easing.type: Easing.InOutQuad
                         }
                     }
@@ -106,7 +113,7 @@ PlasmaCore.FrameSvgItem {
             }
             Behavior on width {
                 NumberAnimation {
-                    duration: 250
+                    duration: units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
@@ -139,11 +146,11 @@ PlasmaCore.FrameSvgItem {
 
     ActivityCreationDialog {
         id: activityCreationDialog
-        width: parent.width / 1.6
-        height: rowToolBar.height + 8
+        opacity: createActivityButton.checked ? 1 : 0
+
         anchors {
             top: rowToolBar.bottom
-            left: parent.left
+            horizontalCenter: parent.horizontalCenter
         }
 
         onAccepted: {
