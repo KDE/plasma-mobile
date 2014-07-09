@@ -143,7 +143,7 @@ PlasmaCore.FrameSvgItem {
                 anchors {
                     fill: parent
                 }
-                Item {
+                ApplicationList {
                     width: parent.width
                     height: 300
                 }

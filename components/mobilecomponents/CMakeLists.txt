@@ -5,6 +5,7 @@ set(mobilecomponents_SRCS
     pagedproxymodel.cpp
     fallbackcomponent.cpp
     package.cpp
+    applicationlistmodel.cpp
     #texteffects.cpp
     )
 

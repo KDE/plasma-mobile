@@ -30,6 +30,7 @@
 #include "fallbackcomponent.h"
 #include "package.h"
 #include "texteffects.h"
+#include "applicationlistmodel.h"
 
 void MobileComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
@@ -48,6 +49,7 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<PagedProxyModel>(uri, 0, 2, "PagedProxyModel");
     qmlRegisterType<FallbackComponent>(uri, 0, 2, "FallbackComponent");
+    qmlRegisterType<ApplicationListModel>(uri, 0, 2, "ApplicationListModel");
     qmlRegisterType<Package>(uri, 0, 2, "Package");
     //qmlRegisterType<TextEffects>(uri, 0, 2, "TextEffects");
 }
