@@ -257,7 +257,7 @@ QModelIndex PagedProxyModel::index(int row, int column, const QModelIndex &paren
         return QModelIndex();
     }
 
-    return sourceModel()->index(row, column, parent);
+    return sourceModel()->index(row+ (m_currentPage*m_pageSize), column, parent);
 }
 
 QModelIndex PagedProxyModel::parent(const QModelIndex &index) const
