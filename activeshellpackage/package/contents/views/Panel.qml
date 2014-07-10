@@ -98,12 +98,16 @@ PlasmaCore.FrameSvgItem {
             property string oldState
 
             onPressed: {
-                oldState = root.state
+                oldState = root.state;
+                root.state = "none";
                 startMouseY = mouse.screenY;
                 startY = topSlidingPanel.y;
                 changeState = false;
             }
             onPositionChanged: {
+                if (root.state != "none") {
+                    return;
+                }
                 if (Math.abs(mouse.screenY - startMouseY) > units.gridUnit * 2) {
                     changeState = true
                 }
@@ -114,8 +118,8 @@ PlasmaCore.FrameSvgItem {
                     root.state = oldState;
                     return;
                 }
-                oldState = root.state
-                root.state = "none"
+                //oldState = root.state
+                //root.state = "none"
 
                 // if more than half of pick & launch panel is visible then make it totally visible.
                 if ((topSlidingPanel.y > -(topSlidingPanel.height - windowListContainer.height)/2) ) {
@@ -178,6 +182,14 @@ PlasmaCore.FrameSvgItem {
             PropertyChanges {
                 target: topSlidingPanel
                 y: -topSlidingPanel.height + windowListContainer.height
+                visible: true
+            }
+        },
+        State {
+            name: "none"
+            PropertyChanges {
+                target: topSlidingPanel
+                y: y
                 visible: true
             }
         }
