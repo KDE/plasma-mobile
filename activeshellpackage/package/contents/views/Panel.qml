@@ -18,6 +18,7 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import QtQuick.Window 2.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -90,7 +91,7 @@ PlasmaCore.FrameSvgItem {
 
         mainItem: MouseEventListener {
             width: root.width
-            height: 500
+            height: Screen.desktopAvailableHeight * 0.9
 
             property int startMouseY
             property int startY
@@ -143,18 +144,19 @@ PlasmaCore.FrameSvgItem {
                 height: width
                 onClicked: root.state = "Hidden"
             }
-            Column {
+            ColumnLayout {
                 anchors {
                     fill: parent
                 }
                 ApplicationList {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     width: parent.width
-                    height: 300
                 }
                 WindowList {
                     id: windowListContainer
-                    width: parent.width
-                    height: 200
+                    Layout.fillWidth: true
+                    height: units.gridUnit * 15
                 }
             }
         }
