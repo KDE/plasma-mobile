@@ -22,9 +22,8 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
-Rectangle {
+Item {
     id: root
-    color: theme.backgroundColor
 
     MobileComponents.ApplicationListModel {
         id: applicationData
@@ -39,6 +38,7 @@ Rectangle {
 
     Column {
         id: col
+        spacing: units.largeSpacing
         anchors {
             fill: parent
             left: parent.left
@@ -49,7 +49,6 @@ Rectangle {
         PlasmaComponents.TextField{
             id: searchApplicationField
             width: parent.width / 12
-            height: parent.height / 10
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
