@@ -28,8 +28,9 @@
 #include <KPluginInfo>
 #include <KRun>
 #include <KService>
+#include <KServiceGroup>
 #include <KServiceTypeTrader>
-
+#include <KSycocaEntry>
 #include <QDebug>
 
 ApplicationListModel::ApplicationListModel(QObject *parent)
@@ -47,7 +48,7 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
     QHash<int, QByteArray> roleNames;
     roleNames[ApplicationNameRole] = "ApplicationNameRole";
     roleNames[ApplicationIconRole] = "ApplicationIconRole";
-    roleNames[ApplicationServiceFileRole] = "ApplicationServiceFileRole";
+    roleNames[ApplicationStorageIdRole] = "ApplicationStorageIdRole";
 
     return roleNames;
 }
@@ -55,20 +56,41 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
 
 void ApplicationListModel::loadApplications()
 {
-    KService::List offers = KServiceTypeTrader::self()->query("Application");
     beginResetModel();
-    for(KService::Ptr service : offers) {
-        ApplicationData data;
-        KPluginInfo plugin(service);
-        if (!plugin.property("NoDisplay").toBool() && !plugin.category().contains("System")) {
-            data.name = plugin.name();
-            data.icon = plugin.icon();
-            data.serviceFile = plugin.entryPath();
-            m_applicationList << data;
+
+    KServiceGroup::Ptr group = KServiceGroup::root();
+    if (!group || !group->isValid()) return;
+    KServiceGroup::List subGroupList = group->entries(true);
+
+    // Iterate over all entries in the group
+    for(KServiceGroup::List::ConstIterator it = subGroupList.begin();it != subGroupList.end(); it++) {
+        KSycocaEntry::Ptr groupEntry = (*it);
+
+        if (groupEntry->isType(KST_KServiceGroup) && groupEntry->name() != "System") {
+            KServiceGroup::Ptr serviceGroup = static_cast<KServiceGroup::Ptr >(groupEntry);
+
+            if (!serviceGroup->noDisplay()) {
+                KServiceGroup::List entryGroupList = serviceGroup->entries(true);
+
+                for(KServiceGroup::List::ConstIterator it = entryGroupList.begin();  it != entryGroupList.end(); it++) {
+                    KSycocaEntry::Ptr entry = (*it);
+                    ApplicationData data;
+                    if (entry->isType(KST_KService)) {
+                        KService::Ptr service = static_cast<KService::Ptr >(entry);
+                        if (service->isApplication()) {
+                            KPluginInfo plugin(service);
+                            data.name = plugin.name();
+                            data.icon = plugin.icon();
+                            data.storageId = service->storageId();
+                            m_applicationList << data;
+                        }
+                    }
+                }
+            }
         }
     }
-    endResetModel();
 
+    endResetModel();
     emit countChanged();
 }
 
@@ -84,8 +106,8 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         return m_applicationList.at(index.row()).name;
     case ApplicationIconRole:
         return m_applicationList.at(index.row()).icon;
-    case ApplicationServiceFileRole:
-        return m_applicationList.at(index.row()).serviceFile;
+    case ApplicationStorageIdRole:
+        return m_applicationList.at(index.row()).storageId;
     default:
         return QVariant();
     }
@@ -100,13 +122,13 @@ int ApplicationListModel::rowCount(const QModelIndex &parent) const
     return m_applicationList.count();
 }
 
-void ApplicationListModel::runApplication(int index) {
-    if (index <= 0) {
+void ApplicationListModel::runApplication(const QString &storageId) {
+    if (storageId.isEmpty()) {
         return;
     }
 
-    KPluginInfo plugin(m_applicationList.at(index).serviceFile);
-    KRun::runCommand(m_applicationList.at(index).name.toLower(), 0);
+    KService::Ptr service = KService::serviceByStorageId(storageId);
+    KRun::run(*service, QList<QUrl>(), 0);
 }
 
 #include "applicationlistmodel.moc"

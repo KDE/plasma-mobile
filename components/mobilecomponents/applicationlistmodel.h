@@ -30,7 +30,7 @@ class QString;
 struct ApplicationData {
     QString name;
     QString icon;
-    QString serviceFile;
+    QString storageId;
 };
 
 class ApplicationListModel : public QAbstractListModel {
@@ -53,10 +53,10 @@ public:
     enum Roles {
         ApplicationNameRole = Qt::UserRole + 1,
         ApplicationIconRole = Qt::UserRole + 2,
-        ApplicationServiceFileRole = Qt::UserRole + 3
+        ApplicationStorageIdRole = Qt::UserRole + 3
     };
 
-    Q_INVOKABLE void runApplication(int index);
+    Q_INVOKABLE void runApplication(const QString &storageId);
 
 Q_SIGNALS:
     void countChanged();

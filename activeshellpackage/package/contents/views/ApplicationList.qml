@@ -85,9 +85,8 @@ Item {
                     anchors.top: applicationIcon.bottom
                 }
                 onClicked: {
-                    //FIXME open our application
                     applicationsList.currentIndex = (applicationsList.currentPage * applicationsList.pageSize) + index
-                    applicationData.runApplication(applicationsList.currentIndex)
+                    applicationData.runApplication(model.ApplicationStorageIdRole)
                 }
             }
         }
