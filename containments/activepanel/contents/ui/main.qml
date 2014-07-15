@@ -17,9 +17,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1 as QtExtra
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasmoid 2.0
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
@@ -32,14 +32,12 @@ Item {
     property int itemHeight: height
 
     Component.onCompleted: {
-        plasmoid.drawWallpaper = false
-        plasmoid.containmentType = "CustomContainment"
-        plasmoid.movableApplets = false
+        LayoutManager.tasksRow = tasksRow
+        LayoutManager.appletsFlickableParent = tasksRow
+        LayoutManager.plasmoid = plasmoid
 
-        plasmoid.appletAdded.connect(addApplet)
 
-        appletsOrder = plasmoid.readConfig("AppletsOrder")
-
+        var appletsOrder = String(plasmoid.configuration.AppletsOrder)
         //array with all the applet ids, in order
         var appletIds = Array()
         if (appletsOrder.length > 0) {
@@ -73,7 +71,6 @@ Item {
             }
         }
 
-        plasmoid.appletAdded.connect(addApplet)
         LayoutManager.saveOrder()
     }
 
@@ -81,26 +78,32 @@ Item {
     function addApplet(applet, pos)
     {
         var component = Qt.createComponent("PlasmoidContainer.qml")
-
         if (applet.pluginName == "org.kde.sharelikeconnect") {
             var plasmoidContainer = component.createObject(rightPanel);
             plasmoidContainer.parent = rightPanel
             plasmoidContainer.anchors.top = rightPanel.top
             plasmoidContainer.anchors.bottom = rightPanel.bottom
             plasmoidContainer.applet = applet
+            applet.parent = plasmoidContainer
+            applet.anchors.fill = plasmoidContainer
+            applet.visible = true
+            plasmoidContainer.visible = true
             return
 
-        } else if (applet.pluginName == "org.kde.digital-clock" || applet.pluginName == "digital-clock") {
+        } else if (applet.pluginName == "org.kde.plasma.digitalclock" || applet.pluginName == "digital-clock") {
             var plasmoidContainer = component.createObject(rightPanel);
             plasmoidContainer.parent = centerPanel
             plasmoidContainer.anchors.top = centerPanel.top
             plasmoidContainer.anchors.bottom = centerPanel.bottom
             plasmoidContainer.applet = applet
+            applet.parent = plasmoidContainer
+            applet.anchors.fill = plasmoidContainer
+            applet.visible = true
+            plasmoidContainer.visible = true
             return
         }
 
         var plasmoidContainer = component.createObject(tasksRow, {"x": pos.x, "y": pos.y});
-
         var index = tasksRow.children.length
         if (pos.x >= 0) {
             //FIXME: this assumes items are square
@@ -111,6 +114,10 @@ Item {
         plasmoidContainer.anchors.top = tasksRow.top
         plasmoidContainer.anchors.bottom = tasksRow.bottom
         plasmoidContainer.applet = applet
+        applet.parent = plasmoidContainer
+        applet.anchors.fill = plasmoidContainer
+        applet.visible = true
+        plasmoidContainer.visible = true
 
     }
 
@@ -124,10 +131,6 @@ Item {
           Component.onCompleted: {
               connectedSources = sources
           }
-    }
-
-    PlasmaCore.Theme {
-        id: theme
     }
 
     Item {
@@ -196,7 +199,7 @@ Item {
 
 
                 Component.onCompleted: {
-                    items = plasmoid.readConfig("SkipItems")
+                    var items = String(plasmoid.configuration.SkipItems)
                     if (items != "") {
                         skipItems = "^(?!" + items + ")"
                     } else {

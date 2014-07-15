@@ -17,7 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+.pragma library
+
 var items = new Array()
+var tasksRow
+var appletsFlickableParent
+var plasmoid
 
 function insertAt(item, index)
 {
@@ -73,6 +78,6 @@ function saveOrder()
             order += ":" + items[i].applet.id
         }
     }
-    plasmoid.writeConfig("AppletsOrder", order)
+    plasmoid.configuration.AppletsOrder = order
 }
 

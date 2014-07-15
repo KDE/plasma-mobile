@@ -17,16 +17,16 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.containments 0.1 as PlasmaContainments
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import QtQuick 2.1
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
-PlasmaContainments.AppletContainer {
+Item {
     id: plasmoidContainer
     width: main.itemWidth
     height: main.itemHeight
-    opacity: status != PlasmaContainments.AppletContainer.PassiveStatus?1:0
-
+    visible: false
+    property Item applet
+    opacity: 1
     Behavior on opacity {
         NumberAnimation {
             duration: 300
@@ -34,7 +34,7 @@ PlasmaContainments.AppletContainer {
         }
     }
 
-    onMinimumWidthChanged: {
-        plasmoidContainer.width = Math.max(main.itemWidth, plasmoidContainer.minimumWidth)
-    }
+//    onWidthChanged: {
+  //      plasmoidContainer.width = Math.max(main.itemWidth, plasmoidContainer.minimumWidth)
+    //}
 }

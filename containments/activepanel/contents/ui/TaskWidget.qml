@@ -17,9 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import Qt 4.7
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1 as QtExtra
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     id: taskIcon

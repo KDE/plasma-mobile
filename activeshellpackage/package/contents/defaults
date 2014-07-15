@@ -9,7 +9,7 @@ MidButton;NoModifier=
 wheel:Vertical;NoModifier=
 
 [Panel]
-Containment=
+Containment=org.kde.plasma.activepanel
 ToolBox=
 [Panel][ContainmentActions]
 RightButton;NoModifier=

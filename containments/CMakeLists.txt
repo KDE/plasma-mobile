@@ -1,6 +1,5 @@
-installPackage(activityscreen org.kde.active.activityscreen)
-installPackage(appletstrip org.kde.appletstrip)
-installPackage(webdashboard org.kde.webdashboard)
-installPackage(systemtray org.kde.active.systemtray)
-
+#installPackage(activityscreen org.kde.active.activityscreen)
+#installPackage(appletstrip org.kde.appletstrip)
+#installPackage(webdashboard org.kde.webdashboard)
+plasma_install_package(activepanel org.kde.plasma.activepanel plasmoids containment)
 
