@@ -25,7 +25,6 @@ import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
 Item {
     id: main
-    signal shrinkRequested
     state: height>48?"active":"passive"
 
     property int itemWidth: main.height*1.4
