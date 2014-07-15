@@ -23,6 +23,7 @@ var items = new Array()
 var tasksRow
 var appletsFlickableParent
 var plasmoid
+var root
 
 function insertAt(item, index)
 {
@@ -81,3 +82,41 @@ function saveOrder()
     plasmoid.configuration.AppletsOrder = order
 }
 
+function restoreOrder()
+{
+        var appletsOrder = String(plasmoid.configuration.AppletsOrder)
+        //array with all the applet ids, in order
+        var appletIds = Array()
+        if (appletsOrder.length > 0) {
+            appletIds = appletsOrder.split(":")
+        }
+
+        //all applets loaded, indicized by id
+        var appletsForId = new Array()
+
+        //fill appletsForId
+        for (var i = 0; i < plasmoid.applets.length; ++i) {
+            var applet = plasmoid.applets[i]
+            appletsForId[applet.id] = applet
+        }
+
+        //add applets present in AppletsOrder
+        for (var i = 0; i < appletIds.length; ++i) {
+            var id = appletIds[i]
+            var applet = appletsForId[id]
+            if (applet) {
+                root.addApplet(applet, Qt.point(-1,-1));
+                //discard it, so will be easy to find out who wasn't in the series
+                appletsForId[id] = null
+            }
+        }
+
+        for (var id in appletsForId) {
+            var applet = appletsForId[id]
+            if (applet) {
+                root.addApplet(applet, Qt.point(-1,-1));
+            }
+        }
+
+        saveOrder()
+}
