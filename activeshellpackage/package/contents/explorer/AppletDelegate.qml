@@ -31,74 +31,42 @@ PlasmaCore.FrameSvgItem {
     width: list.delegateWidth
     height: list.delegateHeight
 
-    property variant icon: decoration
-    property string title: name
-    property string description: model.description
-    property string author: model.author
-    property string email: model.email
-    property string license: model.license
-    property string pluginName: model.pluginName
-    property bool local: model.local
-
     imagePath: "widgets/viewitem"
     prefix: mouseArea.containsMouse ? "hover" : "normal"
-
-    DragArea {
-        anchors.fill: parent
-        supportedActions: Qt.MoveAction | Qt.LinkAction
-        //onDragStarted: tooltipDialog.visible = false
-        delegateImage: decoration
-        mimeData {
-            source: parent
+    property var listView : list
+    ColumnLayout {
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            topMargin: background.margins.top
+            bottomMargin: background.margins.bottom
+            leftMargin: background.margins.left
+            rightMargin: background.margins.right
         }
-        Component.onCompleted: mimeData.setData("text/x-plasmoidservicename", pluginName)
-
-        onDragStarted: {
-            main.preventWindowHide = true;
-        }
-        onDrop: {
-            main.preventWindowHide = false;
-        }
-
+        spacing: 4
         QIconItem {
             id: iconWidget
             anchors.verticalCenter: parent.verticalCenter
-            x: y
-            width: units.iconSizes.huge
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width / 2
             height: width
-            icon: background.icon
+            icon: model.decoration
         }
-        ColumnLayout {
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: iconWidget.right
-                right: parent.right
 
-                topMargin: background.margins.top
-                bottomMargin: background.margins.bottom
-                leftMargin: background.margins.left
-                rightMargin: background.margins.right
-            }
-            spacing: 4
-            PlasmaExtras.Heading {
-                id: titleText
-                level: 4
-                text: name
-                elide: Text.ElideRight
-                wrapMode: Text.WordWrap
-                Layout.fillWidth: true
-            }
-            PlasmaComponents.Label {
-                text: description
-                font.pointSize: theme.smallestFont.pointSize
-                wrapMode: Text.WordWrap
-                elide: Text.ElideRight
-                maximumLineCount: 3
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+        PlasmaExtras.Heading {
+            id: titleText
+            level: 4
+            text: model.name
+            elide: Text.ElideRight
+            wrapMode: Text.WordWrap
+            anchors {
+                topMargin: units.smallSpacing
+                horizontalCenter: parent.horizontalCenter
             }
         }
+
         QIconItem {
             icon: running ? "dialog-ok-apply" : undefined
             visible: running
@@ -111,13 +79,16 @@ PlasmaCore.FrameSvgItem {
                 leftMargin: units.smallSpacing
             }
         }
-        MouseArea {
-            id: mouseArea
-            anchors.fill: parent
-            hoverEnabled: true
-            onDoubleClicked: widgetExplorer.addApplet(pluginName)
-            //onEntered: tooltipDialog.appletDelegate = background
-            //onExited: tooltipDialog.appletDelegate = null
+    }
+
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        hoverEnabled: true
+        onClicked: {
+            widgetExplorer.addApplet(model.pluginName)
+            listView.currentIndex = (listView.currentPage * listView.pageSize) + listView.index
+            listView.closeRequested()
         }
     }
 }

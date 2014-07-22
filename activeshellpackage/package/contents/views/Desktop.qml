@@ -44,23 +44,13 @@ Rectangle {
         }
     }
 
-    function toggleActivityManager() {
-        console.log("Activity manger toggled");
-        if (activityPanelSwitcher.state == "show") {
-            activityPanelSwitcher.state = "hidden";
-        } else {
-            activityPanelSwitcher.state = "show";
-        }
-    }
-
     ActivityPanel {
         id: activityPanelSwitcher
     }
 
     PlasmaCore.Dialog {
         id: sidePanel
-        location: PlasmaCore.Types.LeftEdge
-        type: PlasmaCore.Dialog.Dock
+        location: PlasmaCore.Types.BottomEdge
         flags: Qt.Window|Qt.WindowStaysOnTopHint|Qt.X11BypassWindowManagerHint
 
         hideOnWindowDeactivate: true
@@ -69,12 +59,16 @@ Rectangle {
             if (!visible) {
                 sidePanelStack.state = "closed";
             } else {
-                var rect = containment.availableScreenRect(containment.screen);
+                var rect = containment.availableScreenRect;
                 sidePanel.requestActivate();
                 // get the current available screen geometry and subtract the dialog's frame margins
-                sidePanelStack.height = containment ? rect.height - sidePanel.margins.top - sidePanel.margins.bottom : 1000;
-                sidePanel.x = rect.x;
-                sidePanel.y = rect.y;
+
+                sidePanelStack.height = containment ? rect.height - sidePanel.margins.top - sidePanel.margins.bottom  - units.gridUnit * 6: 1000;
+                sidePanelStack.width = containment ? rect.width - sidePanel.margins.left - sidePanel.margins.right - units.gridUnit * 6 : 1000;
+
+                //Align the dialog horizontaly.
+                sidePanel.x = (rect.width - sidePanelStack.width) / 3;
+                sidePanel.y = (rect.height - sidePanelStack.height) * 2;
             }
         }
 
@@ -82,15 +76,13 @@ Rectangle {
             id: sidePanelStack
             asynchronous: true
             height: 1000 //start with some arbitrary height, will be changed from onVisibleChanged
-            width: item ? item.width: 0
+            width: 1000 //start with some arbitrary width, will be changed from onVisibleChanged
             onLoaded: {
                 if (sidePanelStack.item) {
                     item.closed.connect(function(){sidePanelStack.state = "closed";});
 
-                    if (sidePanelStack.state == "activityManager") {
-                        sidePanel.hideOnWindowDeactivate = Qt.binding(function() { return !sidePanelStack.item.showingDialog; })
-                    } else if (sidePanelStack.state == "widgetExplorer"){
-                        sidePanel.hideOnWindowDeactivate = Qt.binding(function() { return !sidePanelStack.item.preventWindowHide; })
+                    if (sidePanelStack.state == "widgetExplorer"){
+                        sidePanel.hideOnWindowDeactivate = Qt.binding(function() { return sidePanelStack.item && !sidePanelStack.item.preventWindowHide; })
                     } else {
                         sidePanel.hideOnWindowDeactivate = true;
                     }
