@@ -1,6 +1,7 @@
 /*
  *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
  *   Copyright 2011 Marco Martin <mart@kde.org>
+ *   Copyright 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -18,12 +19,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import "plasmapackage:/code/LayoutManager.js" as LayoutManager
-import org.kde.metadatamodels 0.1 as MetadataModels
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
 Item {
     property alias count: itemsList.count
@@ -37,7 +36,7 @@ Item {
         snapMode: GridView.SnapToRow
         clip: true
         //spacing: 32;
-        flow: GridView.TopToBottom 
+        flow: GridView.TopToBottom
         cellWidth: Math.floor(itemsList.width/Math.max(1, Math.floor(itemsList.width/main.iconWidth)))
         cellHeight: Math.floor(itemsList.height/Math.max(1, Math.floor(itemsList.height/main.iconHeight)))
 
@@ -50,7 +49,7 @@ Item {
             duration: 250
         }
 
-        model: PlasmaCore.SortFilterModel {
+        /*model: PlasmaCore.SortFilterModel {
             sourceModel: MetadataModels.MetadataModel {
                 queryProvider: MetadataModels.ResourceQueryProvider {
                     activityId: plasmoid.activityId
@@ -100,7 +99,7 @@ Item {
                     }
                 }
             }
-        }
+        }*/
     }
 
     PlasmaComponents.ScrollBar {

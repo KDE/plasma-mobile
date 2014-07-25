@@ -1,5 +1,6 @@
 /*
  *   Copyright 2011 Marco Martin <mart@kde.org>
+ *   Copyright 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -17,17 +18,17 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.containments 0.1 as PlasmaContainments
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
 ItemGroup {
     id: plasmoidGroup
     scale: plasmoid.scale
     canResizeHeight: true
-    title: applet.name
+    title: applet.title
     minimumWidth: Math.max(LayoutManager.cellSize.width,
                            appletContainer.minimumWidth +
                            plasmoidGroup.contents.anchors.leftMargin +
@@ -39,19 +40,25 @@ ItemGroup {
                             plasmoidGroup.contents.anchors.bottomMargin)
 
     property alias applet: appletContainer.applet
+    property alias appletContainment: appletContainer
 
-
-    PlasmaContainments.AppletContainer {
+    Item {
         id: appletContainer
-        anchors.fill: plasmoidGroup.contents
-        onAppletChanged: {
-            applet.appletDestroyed.connect(appletDestroyed)
-            appletTimer.running = true
-        }
-        function appletDestroyed()
-        {
+        property QtObject applet
+        anchors.fill: parent.contents
+    }
+
+    Connections {
+        target: plasmoid
+        onAppletRemoved: {
             LayoutManager.setSpaceAvailable(plasmoidGroup.x, plasmoidGroup.y, plasmoidGroup.width, plasmoidGroup.height, true)
             plasmoidGroup.destroy()
+        }
+
+        onAppletAdded: {
+            applet.parent = appletContainer
+            applet.anchors.fill= appletContainer
+            applet.visible = true
         }
     }
 
@@ -60,15 +67,17 @@ ItemGroup {
         elementId: "close"
         iconSize: Math.max(16, plasmoidGroup.titleHeight - 2)
         backgroundVisible: false
-        visible: action.enabled
-        action: applet.action("remove")
+        visible: (action && typeof action !== "undefined") ? action.enabled : false
+        action: applet? applet.action("remove") : null
         anchors {
             right: plasmoidGroup.contents.right
             bottom: plasmoidGroup.contents.top
             bottomMargin: 4
         }
         Component.onCompleted: {
-            action.enabled = true
+            if (action && typeof action !== "undefined") {
+                action.enabled = true
+            }
         }
     }
 
@@ -77,15 +86,17 @@ ItemGroup {
         elementId: "configure"
         iconSize: Math.max(16, plasmoidGroup.titleHeight - 2)
         backgroundVisible: false
-        visible: action.enabled
-        action: applet.action("configure")
+        visible: (action && typeof action !== "undefined") ? action.enabled : false
+        action: applet? applet.action("configure") : null
         anchors {
             left: plasmoidGroup.contents.left
             bottom: plasmoidGroup.contents.top
             bottomMargin: 4
         }
         Component.onCompleted: {
-            action.enabled = true
+            if (action && typeof action !== "undefined") {
+                action.enabled = true
+            }
         }
     }
 

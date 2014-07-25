@@ -2,6 +2,7 @@
 /*
  *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
  *   Copyright 2011 Marco Martin <mart@kde.org>
+ *   Copyright 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -19,12 +20,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.extras 0.1 as PlasmaExtras
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.metadatamodels 0.1 as MetadataModels
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.plasma.plasmoid 2.0
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
@@ -38,17 +39,16 @@ Item {
     property int currentIndex: -1
 
     property Item addResource
+    property variant availScreenRect: plasmoid.availableScreenRect
 
-    property variant availScreenRect: plasmoid.availableScreenRegion(plasmoid.screen)[0]
-
-    property int iconWidth: theme.defaultFont.mSize.width * 14
-    property int iconHeight: theme.defaultIconSize + theme.defaultFont.mSize.height
+    property int iconWidth: theme.mSize(theme.defaultFont).width * 14
+    property int iconHeight: units.iconSizes.smallMedium + theme.mSize(theme.defaultFont).height
     onIconHeightChanged: updateGridSize()
 
     function updateGridSize()
     {
         LayoutManager.cellSize.width = main.iconWidth + borderSvg.elementSize("left").width + borderSvg.elementSize("right").width
-        LayoutManager.cellSize.height = main.iconHeight + theme.defaultFont.mSize.height + borderSvg.elementSize("top").height + borderSvg.elementSize("bottom").height + draggerSvg.elementSize("root-top").height + draggerSvg.elementSize("root-bottom").height
+        LayoutManager.cellSize.height = main.iconHeight + theme.mSize(theme.defaultFont).height + borderSvg.elementSize("top").height + borderSvg.elementSize("bottom").height + draggerSvg.elementSize("root-top").height + draggerSvg.elementSize("root-bottom").height
         layoutTimer.restart()
     }
 
@@ -63,8 +63,8 @@ Item {
         }
 
         updateGridSize()
-
-        plasmoid.containmentType = "CustomContainment"
+        LayoutManager.plasmoid = plasmoid
+        //plasmoid.containmentType = "CustomContainment"
         plasmoid.appletAdded.connect(addApplet)
         LayoutManager.restore()
         for (var i = 0; i < plasmoid.applets.length; ++i) {
@@ -77,9 +77,13 @@ Item {
     {
         var component = Qt.createComponent("PlasmoidGroup.qml")
         var plasmoidGroup = component.createObject(resultsFlow)
+        console.log(plasmoidGroup)
         plasmoidGroup.width = LayoutManager.cellSize.width*2
         plasmoidGroup.height = LayoutManager.cellSize.height*2
         plasmoidGroup.applet = applet
+        applet.parent = plasmoidGroup.appletContainment
+        applet.anchors.fill = plasmoidGroup.appletContainment
+        applet.visible = true
         plasmoidGroup.category = "Applet-"+applet.id
         LayoutManager.itemGroups[plasmoidGroup.category] = plasmoidGroup
     }
@@ -103,7 +107,7 @@ Item {
         imagePath: "widgets/extender-dragger"
     }
 
-    PlasmaCore.SortFilterModel {
+   /* PlasmaCore.SortFilterModel {
         id: categoryListModel
         sourceModel: MetadataModels.MetadataModel {
             queryProvider: MetadataModels.CloudQueryProvider {
@@ -116,19 +120,15 @@ Item {
         }
         filterRole: "label"
         filterRegExp: "nfo:Application|nfo:Bookmark|nfo:Document|nfo:Image|nfo:Audio|nfo:Video|nfo:Archive"
-    }
+    }*/
 
-    MetadataModels.MetadataUserTypes {
-        id: userTypes
-    }
+   // MetadataModels.MetadataUserTypes {
+   //     id: userTypes
+   // }
 
-    PlasmaExtras.ResourceInstance {
-        id: resourceInstance
-    }
-
-    PlasmaCore.Theme {
-        id: theme
-    }
+//    PlasmaExtras.ResourceInstance {
+  //      id: resourceInstance
+    //}
 
     PlasmaCore.Svg {
         id: configIconsSvg
@@ -191,7 +191,7 @@ Item {
             height: childrenRect.y+childrenRect.height
 
             onClicked: {
-                resourceInstance.uri = ""
+                //resourceInstance.uri = ""
                 main.currentIndex = -1
             }
 
@@ -204,49 +204,6 @@ Item {
                         resourceInstance.uri = ""
                         main.currentIndex = -1
                     }
-                }
-            }
-
-            Row {
-                id: toolBar
-                spacing: 16
-                anchors {
-                    top: parent.top
-                    left: resultsFlow.left
-                    topMargin: availScreenRect.y+20
-                    leftMargin: 4
-                }
-
-                MobileComponents.ActionButton {
-                    svg: iconsSvg
-                    elementId: "add"
-                    action: plasmoid.action("add widgets")
-                    //FIXME: WHY?
-                    Component.onCompleted: {
-                        action.enabled = true
-                    }
-                }
-
-                MobileComponents.ActionButton {
-                    id: configureButton
-                    svg: iconsSvg
-                    elementId: "configure"
-                    action: plasmoid.action("configure")
-                    //FIXME: WHY?
-                    Component.onCompleted: {
-                        action.enabled = true
-                    }
-                }
-
-                MobileComponents.TextEffects {
-                    id: titleText
-                    text: (String(plasmoid.activityName).length <= 28) ? plasmoid.activityName:String(plasmoid.activityName).substr(0,28) + "..."
-                    color: "white"
-                    horizontalOffset: 1
-                    verticalOffset: 1
-                    bold: true
-                    pointSize: theme.defaultFont.pointSize * 1.1
-                    anchors.verticalCenter: configureButton.verticalCenter
                 }
             }
 
@@ -319,13 +276,11 @@ Item {
                 width: Math.floor(parent.width/LayoutManager.cellSize.width)*LayoutManager.cellSize.width
                 height: childrenRect.y+childrenRect.height
                 z: 900
-
                 anchors {
-                    top: toolBar.bottom
-                    topMargin: 5
+                    top: parent.top
+                    topMargin: units.gridUnit * 10 // make sure that our plasmoids will not cover the toolbox
                     horizontalCenter: parent.horizontalCenter
                 }
-
 
                 //This is just for event compression when a lot of boxes are created one after the other
                 Timer {
@@ -352,7 +307,7 @@ Item {
 
                         LayoutManager.resetPositions()
                         for (var i=0; i<resultsFlow.children.length; ++i) {
-                            child = resultsFlow.children[i]
+                            var child = resultsFlow.children[i]
                             if (child.enabled) {
                                 if (LayoutManager.itemsConfig(child.category)) {
                                     var rect = LayoutManager.itemsConfig(child.category)

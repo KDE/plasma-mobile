@@ -1,6 +1,7 @@
 /*
  *   Copyright 2011 Sebastian Kügler <sebas@kde.org>
  *   Copyright 2011 Marco Martin <mart@kde.org>
+ *   Copyright 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -18,9 +19,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
 PlasmaCore.FrameSvgItem {
@@ -63,13 +65,13 @@ PlasmaCore.FrameSvgItem {
             globalLastPoint1 = mapToItem(main, pinch.point1.x, pinch.point1.y)
             globalLastPoint2 = mapToItem(main, pinch.point2.x, pinch.point2.y)
             globalStartPoint1 = globalLastPoint1
-            globalStartPoint2 = globalLastPoint2 
+            globalStartPoint2 = globalLastPoint2
             dragMouseArea.enabled = false
         }
         onPinchUpdated: {
             var globalPoint1 = mapToItem(main, pinch.point1.x, pinch.point1.y)
             var globalPoint2 = mapToItem(main, pinch.point2.x, pinch.point2.y)
-            
+
             if (globalPoint1.x == globalPoint2.x) {
                 return
             }

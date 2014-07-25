@@ -31,6 +31,7 @@ var resultsFlow
 
 var itemsConfigHorizontal
 var itemsConfigVertical
+var plasmoid
 
 //bookkeeping for the item groups
 var itemGroups = new Object()
@@ -54,7 +55,7 @@ function restore()
 {
     itemsConfigHorizontal = new Object()
     itemsConfigVertical = new Object()
-    var configString = String(plasmoid.readConfig("ItemsGeometriesHorizontal"))
+    var configString = String(plasmoid.configuration.ItemsGeometriesHorizontal)
 
     //array, a cell for encoded item geometry
     var itemsStrings = configString.split(";")
@@ -82,7 +83,7 @@ function restore()
 
 
     //now the same, for vertical layout
-    configString = String(plasmoid.readConfig("ItemsGeometriesVertical"))
+    configString = String(plasmoid.configuration.ItemsGeometriesVertical)
 
     //array, a cell for encoded item geometry
     itemsStrings = configString.split(";")
@@ -112,13 +113,13 @@ function save()
 {
     var configString = String()
 
-    for (id in itemsConfigHorizontal) {
+    for (var id in itemsConfigHorizontal) {
         var rect = itemsConfigHorizontal[id]
         configString += id.replace(":", "%3A") + ":" + rect.x + "," + rect.y + "," + rect.width + "," + rect.height + ";"
     }
 
     //print("saving horizontal layout "+configString)
-    plasmoid.writeConfig("ItemsGeometriesHorizontal", configString)
+    plasmoid.configuration.ItemsGeometriesHorizontal = configString
 
 
     configString = String()
@@ -129,7 +130,7 @@ function save()
     }
 
     //print("saving vertical layout"+configString)
-    plasmoid.writeConfig("ItemsGeometriesVertical", configString)
+    plasmoid.configuration.ItemsGeometriesVertical = configString
 }
 
 function resetPositions()

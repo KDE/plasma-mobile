@@ -2,4 +2,4 @@
 #installPackage(appletstrip org.kde.appletstrip)
 #installPackage(webdashboard org.kde.webdashboard)
 plasma_install_package(activepanel org.kde.plasma.activepanel plasmoids containment)
-
+plasma_install_package(activecontainment/ org.kde.plasma.activecontainment plasmoids containment)
