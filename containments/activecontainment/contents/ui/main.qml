@@ -77,7 +77,6 @@ Item {
     {
         var component = Qt.createComponent("PlasmoidGroup.qml")
         var plasmoidGroup = component.createObject(resultsFlow)
-        console.log(plasmoidGroup)
         plasmoidGroup.width = LayoutManager.cellSize.width*2
         plasmoidGroup.height = LayoutManager.cellSize.height*2
         plasmoidGroup.applet = applet
@@ -204,6 +203,11 @@ Item {
                         resourceInstance.uri = ""
                         main.currentIndex = -1
                     }
+                }
+
+                onAppletRemoved: {
+                    LayoutManager.removeApplet(applet)
+                    LayoutManager.save()
                 }
             }
 

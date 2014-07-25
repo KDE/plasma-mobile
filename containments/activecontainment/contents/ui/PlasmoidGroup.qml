@@ -46,19 +46,19 @@ ItemGroup {
         id: appletContainer
         property QtObject applet
         anchors.fill: parent.contents
+        onAppletChanged: {
+            appletTimer.running = true
+        }
     }
 
     Connections {
         target: plasmoid
+
         onAppletRemoved: {
             LayoutManager.setSpaceAvailable(plasmoidGroup.x, plasmoidGroup.y, plasmoidGroup.width, plasmoidGroup.height, true)
-            plasmoidGroup.destroy()
-        }
-
-        onAppletAdded: {
-            applet.parent = appletContainer
-            applet.anchors.fill= appletContainer
-            applet.visible = true
+            if (applet.id == plasmoidGroup.applet.id) {
+                plasmoidGroup.destroy()
+            }
         }
     }
 

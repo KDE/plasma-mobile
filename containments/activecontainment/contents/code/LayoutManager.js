@@ -323,3 +323,12 @@ function positionItem(item)
     }
 }
 
+function removeApplet(applet)
+{
+    //When we remove an applet, then we must remove its configs too
+    if (orientation = "vertical") {
+        delete itemsConfigVertical["Applet-" + applet.id]
+    } else {
+        delete itemsConfigHorizontal["Applet-" + applet.id]
+    }
+}
