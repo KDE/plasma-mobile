@@ -20,7 +20,7 @@
 
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.qtextracomponents 2.0
+import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
@@ -44,15 +44,14 @@ Item {
 
             height: previewImage.height + previewImage.anchors.topMargin + previewImage.anchors.bottomMargin
             width: previewImage.width + previewImage.anchors.leftMargin + previewImage.anchors.rightMargin
-            visible: thumbnail != undefined
             anchors.centerIn: previewImage
         }
 
-        QImageItem {
+        Image {
             id: previewImage
             visible: previewFrame.visible
-            image: thumbnail == undefined ? null : thumbnail
-            fillMode: QImageItem.PreserveAspectCrop
+            fillMode: Image.PreserveAspectCrop
+            source: url
 
             anchors {
                 fill: parent
@@ -78,12 +77,12 @@ Item {
             anchors {
                 horizontalCenter: parent.horizontalCenter
             }
-            icon: model["mimeType"]?QIcon(mimeType.replace("/", "-")):QIcon("image-x-generic")
+            icon: decoration
         }
 
         PlasmaComponents.Label {
             id: previewLabel
-            text: label
+            text: display
             height: paintedHeight
 
             //wrapMode: Text.Wrap

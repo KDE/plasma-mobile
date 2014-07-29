@@ -27,6 +27,6 @@ install(FILES TimePicker.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobil
 
 install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
-install(DIRECTORY resourcedelegates/ DESTINATION ${DATA_INSTALL_DIR}/plasma/resourcedelegates/)
+install(DIRECTORY resourcedelegates DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
 install(DIRECTORY private DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)

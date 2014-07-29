@@ -26,6 +26,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.plasma.plasmoid 2.0
+import org.kde.activities 0.1 as Activities
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
@@ -42,7 +43,7 @@ Item {
     property variant availScreenRect: plasmoid.availableScreenRect
 
     property int iconWidth: theme.mSize(theme.defaultFont).width * 14
-    property int iconHeight: units.iconSizes.smallMedium + theme.mSize(theme.defaultFont).height
+    property int iconHeight: iconWidth
     onIconHeightChanged: updateGridSize()
 
     function updateGridSize()
@@ -121,13 +122,21 @@ Item {
         filterRegExp: "nfo:Application|nfo:Bookmark|nfo:Document|nfo:Image|nfo:Audio|nfo:Video|nfo:Archive"
     }*/
 
-   // MetadataModels.MetadataUserTypes {
-   //     id: userTypes
-   // }
+    PlasmaCore.SortFilterModel {
+        id: categoryListModel
+        sourceModel: Activities.ResourceModel {
+            id: resourceModel
+            shownAgents: ":any"
+            shownActivities: ":global,:current"
+        }
 
-//    PlasmaExtras.ResourceInstance {
-  //      id: resourceInstance
-    //}
+        onCountChanged: {
+            categoriesTimer.restart()
+        }
+        Component.onCompleted: {
+            categoriesTimer.restart()
+        }
+    }
 
     PlasmaCore.Svg {
         id: configIconsSvg
@@ -190,7 +199,6 @@ Item {
             height: childrenRect.y+childrenRect.height
 
             onClicked: {
-                //resourceInstance.uri = ""
                 main.currentIndex = -1
             }
 
@@ -223,7 +231,7 @@ Item {
                     var categories = new Array()
                     //build category list
                     for (var i = 0; i < categoryListModel.count; ++i) {
-                        categories[i] = categoryListModel.get(i).label
+                        categories[i] = categoryListModel.get(i).agent
                     }
 
                     //FIXME: find a more efficient way

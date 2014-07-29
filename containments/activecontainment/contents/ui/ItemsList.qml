@@ -23,8 +23,12 @@ import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.activities 0.1 as Activities
+import QtQuick.Layouts 1.1
+import org.kde.kquickcontrolsaddons 2.0
 
 Item {
+    id: itemList
     property alias count: itemsList.count
     anchors.fill: itemGroup.contents
 
@@ -40,7 +44,6 @@ Item {
         cellWidth: Math.floor(itemsList.width/Math.max(1, Math.floor(itemsList.width/main.iconWidth)))
         cellHeight: Math.floor(itemsList.height/Math.max(1, Math.floor(itemsList.height/main.iconHeight)))
 
-
         PropertyAnimation {
             id: scrollAnimation
             running: false
@@ -49,19 +52,12 @@ Item {
             duration: 250
         }
 
-        /*model: PlasmaCore.SortFilterModel {
-            sourceModel: MetadataModels.MetadataModel {
-                queryProvider: MetadataModels.ResourceQueryProvider {
-                    activityId: plasmoid.activityId
-                    resourceType: itemGroup.category
-                    //here there will just few items so is more efficient to just load everything for now
-                    //sortBy is not used becauseitems that arrive after are put in the back
-                    //sortBy: [userTypes.sortFields[itemGroup.category]]
-                    //sortOrder: Qt.AscendingOrder
-                }
-                lazyLoading: false
+        model: PlasmaCore.SortFilterModel {
+            sourceModel: Activities.ResourceModel {
+                id: resourceModel
+                shownAgents: itemGroup.category
+                shownActivities: ":global,:current"
             }
-            sortRole: "label"
         }
 
         highlight: PlasmaCore.FrameSvgItem {
@@ -70,22 +66,12 @@ Item {
                 prefix: "selected+hover"
         }
 
-        delegate: Item {
-            width: itemsList.cellWidth
-            height: itemsList.cellHeight
-            MobileComponents.ResourceDelegate {
+        delegate: MobileComponents.ResourceDelegate {
                 id: resourceDelegate
-                width: main.iconWidth
-                height: main.iconHeight
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                }
-                className: model["className"] ? model["className"] : ""
-                genericClassName: model["genericClassName"] ? model["genericClassName"] : ""
+                width: theme.mSize(theme.defaultFont).width * 14
+                height: width
 
                 onPressAndHold: {
-                    resourceInstance.uri = model["url"] ? model["url"] : model["resourceUri"]
-                    resourceInstance.title = model["label"]
                     main.currentIndex = index
                     main.currentGroup = itemGroup
                 }
@@ -98,8 +84,7 @@ Item {
                         plasmoid.openUrl(String(model["url"]))
                     }
                 }
-            }
-        }*/
+        }
     }
 
     PlasmaComponents.ScrollBar {

@@ -19,40 +19,42 @@
 
 import QtQuick 2.1
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
-import org.kde.qtextracomponents 2.0
+import org.kde.kquickcontrolsaddons 2.0
 
 Item {
     id: delegateItem
-    property string className: model["className"] ? model["className"] : "FileDataObject"
-    property string genericClassName: model["genericClassName"] ? model["genericClassName"] : "FileDataObject"
-
+    property string className: findMimeType()
+    property string genericClassName: findMimeType()
     implicitWidth: itemLoader.item ? itemLoader.item.implicitWidth : 0
     implicitHeight: itemLoader.item ? itemLoader.item.implicitHeight : 0
-
     signal clicked(variant mouse)
     signal pressed(variant mouse)
     signal released(variant mouse)
     signal pressAndHold(variant mouse)
 
-    function roundToStandardSize(size)
-    {
-        if (size >= theme.enormousIconSize) {
-            return theme.enormousIconSize
-        } else if (size >= theme.hugeIconSize) {
-            return theme.hugeIconSize
-        } else if (size >= theme.largeIconSize) {
-            return theme.largeIconSize
-        } else if (size >= theme.mediumIconSize) {
-            return theme.mediumIconSize
-        } else if (size >= theme.smallMediumIconSize) {
-            return theme.smallMediumIconSize
+    function findMimeType() {
+        //TODO It should also find the bookmarks
+        if (String(decoration).indexOf("image") >= 0) {
+            return "Image"
         } else {
-            return theme.smallIconSize
+            return "FileDataObject"
         }
     }
-
-    MobileComponents.FallbackComponent {
-        id: fallback
+    function roundToStandardSize(size)
+    {
+        if (size >= units.iconSizes.enormous) {
+            return units.iconSizes.enormous
+        } else if (size >= units.iconSizes.huge) {
+            return units.iconSizes.huge
+        } else if (size >= units.iconSizes.large) {
+            return units.iconSizes.large
+        } else if (size >= units.iconSizes.medium) {
+            return units.iconSizes.medium
+        } else if (size >= units.iconSizes.smallMedium) {
+            return units.iconSizes.smallMedium
+        } else {
+            return units.iconSizes.small
+        }
     }
 
     Loader {
@@ -72,14 +74,11 @@ Item {
             if (view != undefined && view.orientation == undefined && view.flow == undefined) {
                 view = view.parent
             }
-            if (view != undefined && view.orientation == undefined && view.flow == undefined) {
-                view = view.parent
-            }
 
             if (!delegateItem.parent || !delegateItem.parent.parent || view == undefined || view.orientation == ListView.Horizontal || view.cellHeight != undefined) {
-                return fallback.resolvePath("resourcedelegates", [(className + "/ItemHorizontal.qml"), (genericClassName + "/ItemHorizontal.qml"), "FileDataObject/ItemHorizontal.qml"])
+                return Qt.resolvedUrl("resourcedelegates/" + className + "/ItemHorizontal.qml")
             } else {
-                return fallback.resolvePath("resourcedelegates", [(className + "/Item.qml"), (genericClassName + "/Item.qml"), "FileDataObject/Item.qml"])
+                return Qt.resolvedUrl("resourcedelegates/" + className + "/Item.qml")
             }
         }
     }
