@@ -33,6 +33,6 @@ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAG
 
 include(CheckIncludeFiles)
 
-plasma_install_package(look-and-feel org.kde.plasma.phone.satellite look-and-feel)
-#plasma_install_package(shell org.kde.plasma.phone packages shell)
+plasma_install_package(look-and-feel org.kde.satellite.phone look-and-feel)
+#plasma_install_package(shell org.kde.plasma.satellite.phone packages shell)
 
