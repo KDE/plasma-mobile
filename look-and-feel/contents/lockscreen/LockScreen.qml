@@ -11,6 +11,7 @@ Item {
     Rectangle {
         id: test
         color: "red"
+        opacity: .5
         height: 100
         width: parent.width
         y: parent.height / 2 - height / 2
