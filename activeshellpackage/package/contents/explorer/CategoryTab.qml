@@ -22,10 +22,11 @@ import QtQuick 2.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 PlasmaComponents.TabButton {
-    property string resourceType
     property Component component
 
     onClicked: {
+        //clear our model if we select a new category
+        selectedItemModel.clear()
         stack.replace(component)
     }
 }

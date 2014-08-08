@@ -22,15 +22,13 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.baloo 0.1 as Baloo
-import org.kde.activities 0.1 as Activities
 
 PlasmaComponents.TabBar {
     id: tabBar
 
     property Component startComponent: appsComponent
-
     anchors {
-        top: parent.top
+        top: saveButton.bottom
         topMargin: 8
         horizontalCenter: parent.horizontalCenter
     }
@@ -38,11 +36,6 @@ PlasmaComponents.TabBar {
 
     MobileComponents.ApplicationListModel {
         id: applicationsModel
-    }
-    Activities.ResourceModel {
-        id: activityResources
-        shownAgents: ":any"
-        shownActivities: ":global,:current"
     }
 
     CategoryTab {

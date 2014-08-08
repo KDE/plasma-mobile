@@ -25,6 +25,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.private.shell 2.0
 import QtQuick.Layouts 1.0
+import org.kde.activities 0.1 as Activities
 
 Item {
     id: main
@@ -44,6 +45,52 @@ Item {
 
     WidgetExplorer {
         id: widgetExplorer
+    }
+
+    ListModel {
+        id: selectedItemModel
+    }
+
+    Activities.ResourceModel {
+        id: activityResources
+        shownAgents: ":any"
+        shownActivities: ":global,:current"
+    }
+
+    PlasmaComponents.Button {
+        id: saveButton
+        width: text.contentWidth
+        text: i18n("Add Item")
+        enabled: selectedItemModel.count > 0
+        anchors {
+            top: parent.top
+            left: parent.left
+        }
+
+        onClicked: {
+            for (var i = 0; i < selectedItemModel.count; i++) {
+                var item = selectedItemModel.get(i)
+                if (item && item.resourceName) {
+                    activityResources.shownAgents = item.resourceType
+                    activityResources.linkResourceToActivity(item.resourceName, function () {});
+                } else if (item && item.pluginName) {
+                    widgetExplorer.addApplet(item.pluginName)
+                }
+            }
+
+            main.closed()
+        }
+    }
+
+    PlasmaComponents.Button {
+        id: cancelButton
+        text: i18n("Cancel")
+        anchors {
+            top: parent.top
+            right: parent.right
+        }
+
+        onClicked: main.closed()
     }
 
     MenuTabBar {

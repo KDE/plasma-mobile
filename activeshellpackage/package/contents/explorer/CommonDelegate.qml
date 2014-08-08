@@ -32,7 +32,7 @@ PlasmaCore.FrameSvgItem {
     height: commonList.delegateHeight
 
     imagePath: "widgets/viewitem"
-    prefix: mouseArea.containsMouse ? "hover" : "normal"
+    prefix: "normal"
     property var commonListView : commonList
     ColumnLayout {
         id: col
@@ -88,15 +88,33 @@ PlasmaCore.FrameSvgItem {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
-            if (isApplicationExplorer) {
-                activityResources.shownAgents = "Application";
-                activityResources.linkResourceToActivity(model.ApplicationEntryPathRole, function () {});
-                activityResources.shownAgents = ":any"
-            } else {
-                widgetExplorer.addApplet(model.pluginName)
+
+            //Remove the selectedItem from the model
+            for (var i = 0; i < selectedItemModel.count; i++) {
+                if (isApplicationExplorer && model.ApplicationEntryPathRole == selectedItemModel.get(i).resourceName) {
+                    selectedItemModel.remove(selectedItemModel.get(i))
+                    background.prefix= "normal"
+                    return
+                } else if (!isApplicationExplorer && model.pluginName == selectedItemModel.get(i).pluginName) {
+                    selectedItemModel.remove(selectedItemModel.get(i))
+                    background.prefix= "normal"
+                    return
+                }
             }
+
+            if (isApplicationExplorer) {
+                var item = new Object()
+                item["resourceName"] = model.ApplicationEntryPathRole
+                item["resourceType"] = "Application"
+                selectedItemModel.append(item)
+            } else {
+                var item = new Object()
+                item["pluginName"] = model.pluginName
+                selectedItemModel.append(item)
+            }
+
+            background.prefix= "selected+hover"
             commonListView.currentIndex = (commonListView.currentPage * commonListView.pageSize) + commonListView.index
-            commonListView.closeRequested()
         }
     }
 }

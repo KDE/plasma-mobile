@@ -26,8 +26,6 @@ MobileComponents.IconGrid {
     id: resultsGrid
     anchors.fill: parent
     property string resourceType: ""
-    signal closeRequested()
-    onCloseRequested: main.closed()
     delegateWidth: Math.floor(resultsGrid.width / Math.max(Math.floor(resultsGrid.width / (units.gridUnit*12)), 3))
     delegateHeight: delegateWidth / 1.6
 
@@ -37,8 +35,7 @@ MobileComponents.IconGrid {
         PlasmaCore.FrameSvgItem {
                 id: highlightFrame
                 imagePath: "widgets/viewitem"
-                prefix: "selected+hover"
-                opacity: 0
+                prefix: "normal"
                 width: resultsGrid.delegateWidth
                 height: resultsGrid.delegateHeight
                 Behavior on opacity {
@@ -52,10 +49,19 @@ MobileComponents.IconGrid {
             height: parent.height
 
             onClicked: {
-                activityResources.shownAgents = resultsGrid.resourceType;
-                activityResources.linkResourceToActivity(url, function () {});
-                activityResources.shownAgents = ":any"
-                resultsGrid.closeRequested()
+                for (var i = 0; i < selectedItemModel.count; i++) {
+                    if (model.url == selectedItemModel.get(i).resourceName) {
+                        selectedItemModel.remove(selectedItemModel.get(i))
+                        highlightFrame.prefix= "normal"
+                        return
+                    }
+                }
+
+                var item = new Object()
+                item["resourceName"] = String(model.url)
+                item["resourceType"] = resultsGrid.resourceType
+                selectedItemModel.append(item)
+                highlightFrame.prefix= "selected+hover"
             }
         }
     }
