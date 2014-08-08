@@ -24,7 +24,6 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-
 Column {
     id: resourceItem
     anchors.horizontalCenter: parent.horizontalCenter
@@ -43,11 +42,9 @@ Column {
         text: display
         height: paintedHeight
 
-        //wrapMode: Text.Wrap
         horizontalAlignment: Text.AlignHCenter
         elide: Text.ElideRight
         anchors {
-            //top: previewImage.bottom
             horizontalCenter: parent.horizontalCenter
         }
         width: resourceItem.width
@@ -55,4 +52,3 @@ Column {
         styleColor: Qt.rgba(1, 1, 1, 0.6)
     }
 }
-

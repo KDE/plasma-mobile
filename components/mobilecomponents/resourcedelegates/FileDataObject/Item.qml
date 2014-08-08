@@ -23,6 +23,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
+import org.kde.kquickcontrolsaddons 2.0
 Item {
     id: resourceItem
     anchors.fill: parent
@@ -35,7 +36,6 @@ Item {
                     right: parent.right;
                     margins: 24;
         }
-        //height: 128
         height: resourceItem.height
 
         QIconItem {
@@ -49,13 +49,11 @@ Item {
         Text {
             id: previewLabel
             text: display
-            //text: url
             font.pixelSize: 14
             font.bold: true
             wrapMode: Text.Wrap
             color: theme.textColor
             anchors.top: itemFrame.top
-            //anchors.bottom: infoLabel.top;
             anchors.left: previewImage.right
             anchors.right: itemFrame.right
             anchors.margins: 8
@@ -63,16 +61,12 @@ Item {
 
         Text {
             id: infoLabel
-            //image: metadataSource.data[DataEngineSource]["fileName"]
-            //text: "the long and winding road..."
             text: display
             color: theme.textColor
             opacity: 0.8
-            //font.pixelSize: font.pixelSize * 1.8
             font.pixelSize: 12
             height: 14
             width: parent.width - previewImage.width
-            //wrapMode: Text.Wrap
             anchors.right: itemFrame.right
             anchors.top: previewLabel.bottom
             anchors.bottom: itemFrame.bottom

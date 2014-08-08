@@ -49,6 +49,7 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
     roleNames[ApplicationNameRole] = "ApplicationNameRole";
     roleNames[ApplicationIconRole] = "ApplicationIconRole";
     roleNames[ApplicationStorageIdRole] = "ApplicationStorageIdRole";
+    roleNames[ApplicationEntryPathRole] = "ApplicationEntryPathRole";
 
     return roleNames;
 }
@@ -82,6 +83,7 @@ void ApplicationListModel::loadApplications()
                             data.name = plugin.name();
                             data.icon = plugin.icon();
                             data.storageId = service->storageId();
+                            data.entryPath = plugin.entryPath();
                             m_applicationList << data;
                         }
                     }
@@ -108,6 +110,9 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         return m_applicationList.at(index.row()).icon;
     case ApplicationStorageIdRole:
         return m_applicationList.at(index.row()).storageId;
+    case ApplicationEntryPathRole:
+        return m_applicationList.at(index.row()).entryPath;
+
     default:
         return QVariant();
     }

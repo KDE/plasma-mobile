@@ -24,13 +24,17 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.activities 0.1 as Activities
-import QtQuick.Layouts 1.1
 import org.kde.kquickcontrolsaddons 2.0
+import org.kde.kio 1.0 as Kio
 
 Item {
     id: itemList
     property alias count: itemsList.count
     anchors.fill: itemGroup.contents
+
+    Kio.KRun {
+        id: krun
+    }
 
     GridView {
         id: itemsList
@@ -39,7 +43,6 @@ Item {
         anchors.fill: parent
         snapMode: GridView.SnapToRow
         clip: true
-        //spacing: 32;
         flow: GridView.TopToBottom
         cellWidth: Math.floor(itemsList.width/Math.max(1, Math.floor(itemsList.width/main.iconWidth)))
         cellHeight: Math.floor(itemsList.height/Math.max(1, Math.floor(itemsList.height/main.iconHeight)))
@@ -52,12 +55,9 @@ Item {
             duration: 250
         }
 
-        model: PlasmaCore.SortFilterModel {
-            sourceModel: Activities.ResourceModel {
-                id: resourceModel
+        model: Activities.ResourceModel {
                 shownAgents: itemGroup.category
                 shownActivities: ":global,:current"
-            }
         }
 
         highlight: PlasmaCore.FrameSvgItem {
@@ -68,8 +68,9 @@ Item {
 
         delegate: MobileComponents.ResourceDelegate {
                 id: resourceDelegate
-                width: theme.mSize(theme.defaultFont).width * 14
-                height: width
+                width: main.iconWidth
+                height: main.iconHeight
+                resourceType: itemGroup.category
 
                 onPressAndHold: {
                     main.currentIndex = index
@@ -77,12 +78,7 @@ Item {
                 }
 
                 onClicked: {
-                    //Contact?
-                    if (model["hasEmailAddress"]) {
-                        plasmoid.openUrl(String(model["hasEmailAddress"]))
-                    } else {
-                        plasmoid.openUrl(String(model["url"]))
-                    }
+                    krun.openUrl(url)
                 }
         }
     }

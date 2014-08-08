@@ -28,12 +28,12 @@ import QtQuick.Layouts 1.0
 
 Item {
     id: main
-    //this is used to perfectly align the filter field and delegates
-    property int cellWidth: theme.mSize(theme.defaultFont).width * 10
 
     property int minimumWidth: theme.mSize(theme.defaultFont).width * 12
     property int minimumHeight: 800
     property alias containment: widgetExplorer.containment
+    property int iconWidth: theme.mSize(theme.defaultFont).width * 14
+    property int iconHeight: theme.mSize(theme.defaultFont).width * 14
 
     //external drop events can cause a raise event causing us to lose focus and
     //therefore get deleted whilst we are still in a drag exec()
@@ -46,37 +46,19 @@ Item {
         id: widgetExplorer
     }
 
-    ColumnLayout {
-        anchors.fill: parent
+    MenuTabBar {
+        id: tabBar
+    }
 
-        PlasmaExtras.Title {
-            id: heading
-            text: "Widgets"
-            elide: Text.ElideRight
-            anchors.horizontalCenter: parent.horizontalCenter
+    PlasmaComponents.PageStack {
+        id: stack
+        clip: true
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: tabBar.bottom
+            bottom: parent.bottom
         }
-
-        MobileComponents.IconGrid {
-            id: list
-            property int currentIndex: 0
-            signal closeRequested()
-
-            onCloseRequested: main.closed()
-
-            onCurrentIndexChanged: {
-                currentPage = Math.max(0, Math.floor(currentIndex/pageSize))
-            }
-            property int delegateWidth: Math.floor(list.width / Math.max(Math.floor(list.width / (units.gridUnit*12)), 3))
-            property int delegateHeight: delegateWidth / 1.6
-
-            anchors {
-                top: heading.bottom
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-            model: widgetExplorer.widgetsModel
-            delegate: AppletDelegate {}
-        }
+        initialPage: tabBar.startComponent
     }
 }

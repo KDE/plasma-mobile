@@ -31,6 +31,7 @@ struct ApplicationData {
     QString name;
     QString icon;
     QString storageId;
+    QString entryPath;
 };
 
 class ApplicationListModel : public QAbstractListModel {
@@ -53,7 +54,8 @@ public:
     enum Roles {
         ApplicationNameRole = Qt::UserRole + 1,
         ApplicationIconRole = Qt::UserRole + 2,
-        ApplicationStorageIdRole = Qt::UserRole + 3
+        ApplicationStorageIdRole = Qt::UserRole + 3,
+        ApplicationEntryPathRole = Qt::UserRole + 4
     };
 
     Q_INVOKABLE void runApplication(const QString &storageId);

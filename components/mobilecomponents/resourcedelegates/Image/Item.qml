@@ -35,7 +35,6 @@ Item {
                     right: parent.right;
                     margins: 24;
         }
-        //height: 128
         height: resourceItem.height
 
         QIconItem {
@@ -43,7 +42,7 @@ Item {
             height: 64
             width: 64
             anchors.margins: 8
-            icon: url
+            icon: decoration
         }
 
         Text {
@@ -62,16 +61,12 @@ Item {
 
         Text {
             id: infoLabel
-            //image: metadataSource.data[DataEngineSource]["fileName"]
-            //text: "the long and winding road..."
             text: display
             color: theme.textColor
             opacity: 0.8
-            //font.pixelSize: font.pixelSize * 1.8
             font.pixelSize: 12
             height: 14
             width: parent.width - previewImage.width
-            //wrapMode: Text.Wrap
             anchors.right: itemFrame.right
             anchors.top: previewLabel.bottom
             anchors.bottom: itemFrame.bottom

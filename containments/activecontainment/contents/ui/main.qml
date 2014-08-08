@@ -43,7 +43,7 @@ Item {
     property variant availScreenRect: plasmoid.availableScreenRect
 
     property int iconWidth: theme.mSize(theme.defaultFont).width * 14
-    property int iconHeight: iconWidth
+    property int iconHeight: theme.mSize(theme.defaultFont).width * 14
     onIconHeightChanged: updateGridSize()
 
     function updateGridSize()
@@ -107,20 +107,6 @@ Item {
         imagePath: "widgets/extender-dragger"
     }
 
-   /* PlasmaCore.SortFilterModel {
-        id: categoryListModel
-        sourceModel: MetadataModels.MetadataModel {
-            queryProvider: MetadataModels.CloudQueryProvider {
-                cloudCategory: "rdf:type"
-                activityId: plasmoid.activityId
-            }
-        }
-        onCountChanged: {
-            categoriesTimer.restart()
-        }
-        filterRole: "label"
-        filterRegExp: "nfo:Application|nfo:Bookmark|nfo:Document|nfo:Image|nfo:Audio|nfo:Video|nfo:Archive"
-    }*/
 
     PlasmaCore.SortFilterModel {
         id: categoryListModel
@@ -131,9 +117,6 @@ Item {
         }
 
         onCountChanged: {
-            categoriesTimer.restart()
-        }
-        Component.onCompleted: {
             categoriesTimer.restart()
         }
     }
@@ -252,6 +235,10 @@ Item {
                         var category = categories[i]
                         if (!LayoutManager.itemGroups[category]) {
                             var itemGroup = component.createObject(resultsFlow)
+                            var e = component.errorString();
+                            if (e != "") {
+                                print("Error loading ItemsList.qml: " + component.errorString());
+                            }
                             itemGroup.category = category
                             LayoutManager.itemGroups[category] = itemGroup
                         }

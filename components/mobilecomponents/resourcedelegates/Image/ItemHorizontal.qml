@@ -47,11 +47,10 @@ Item {
             anchors.centerIn: previewImage
         }
 
-        Image {
+        QIconItem {
             id: previewImage
             visible: previewFrame.visible
-            fillMode: Image.PreserveAspectCrop
-            source: url
+            icon: url
 
             anchors {
                 fill: parent
@@ -77,7 +76,11 @@ Item {
             anchors {
                 horizontalCenter: parent.horizontalCenter
             }
+<<<<<<< HEAD
             icon: decoration
+=======
+            icon: "image-x-generic"
+>>>>>>> Add Baloo support to Widget Explorer
         }
 
         PlasmaComponents.Label {
@@ -85,7 +88,6 @@ Item {
             text: display
             height: paintedHeight
 
-            //wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
             anchors {

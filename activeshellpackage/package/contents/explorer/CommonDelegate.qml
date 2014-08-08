@@ -28,13 +28,16 @@ import org.kde.kquickcontrolsaddons 2.0
 
 PlasmaCore.FrameSvgItem {
     id: background
-    width: list.delegateWidth
-    height: list.delegateHeight
+    width: commonList.delegateWidth
+    height: commonList.delegateHeight
 
     imagePath: "widgets/viewitem"
     prefix: mouseArea.containsMouse ? "hover" : "normal"
-    property var listView : list
+    property var commonListView : commonList
     ColumnLayout {
+        id: col
+        Layout.fillWidth: true
+        Layout.fillHeight: true
         anchors {
             top: parent.top
             left: parent.left
@@ -52,24 +55,23 @@ PlasmaCore.FrameSvgItem {
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width / 2
             height: width
-            icon: model.decoration
+            icon: isApplicationExplorer ? model.ApplicationIconRole :  model.decoration
         }
 
-        PlasmaExtras.Heading {
+        PlasmaComponents.Label {
             id: titleText
-            level: 4
-            text: model.name
+            text: isApplicationExplorer ? ApplicationNameRole : display
+            Layout.fillWidth: true
             elide: Text.ElideRight
             wrapMode: Text.WordWrap
-            anchors {
-                topMargin: units.smallSpacing
-                horizontalCenter: parent.horizontalCenter
-            }
+            maximumLineCount: 1
+            horizontalAlignment: Text.AlignHCenter
+            anchors.topMargin: units.smallSpacing
         }
 
         QIconItem {
-            icon: running ? "dialog-ok-apply" : undefined
-            visible: running
+            icon: (typeof running !== "undefined" && running) ? "dialog-ok-apply" : undefined
+            visible: (typeof running !== "undefined" && running) ? running : false
             width: units.iconSizes.small
             height: width
             anchors {
@@ -86,9 +88,15 @@ PlasmaCore.FrameSvgItem {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
-            widgetExplorer.addApplet(model.pluginName)
-            listView.currentIndex = (listView.currentPage * listView.pageSize) + listView.index
-            listView.closeRequested()
+            if (isApplicationExplorer) {
+                activityResources.shownAgents = "Application";
+                activityResources.linkResourceToActivity(model.ApplicationEntryPathRole, function () {});
+                activityResources.shownAgents = ":any"
+            } else {
+                widgetExplorer.addApplet(model.pluginName)
+            }
+            commonListView.currentIndex = (commonListView.currentPage * commonListView.pageSize) + commonListView.index
+            commonListView.closeRequested()
         }
     }
 }

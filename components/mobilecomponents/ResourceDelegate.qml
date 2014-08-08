@@ -23,8 +23,16 @@ import org.kde.kquickcontrolsaddons 2.0
 
 Item {
     id: delegateItem
-    property string className: findMimeType()
-    property string genericClassName: findMimeType()
+    property string className: {
+        if (resourceType == "Image") {
+            return "Image";
+        } else if (resourceType == "Bookmark") {
+            return "Bookmark";
+        } else {
+            return "FileDataObject";
+        }
+    }
+    property string resourceType: ""
     implicitWidth: itemLoader.item ? itemLoader.item.implicitWidth : 0
     implicitHeight: itemLoader.item ? itemLoader.item.implicitHeight : 0
     signal clicked(variant mouse)
