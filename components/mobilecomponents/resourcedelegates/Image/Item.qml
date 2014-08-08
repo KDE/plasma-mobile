@@ -49,7 +49,7 @@ Item {
             id: previewLabel
             text: display
             //text: url
-            font.pixelSize: 14
+            font.pixelSize: units.iconSizes.small
             font.bold: true
             wrapMode: Text.Wrap
             color: theme.textColor
@@ -64,7 +64,7 @@ Item {
             text: display
             color: theme.textColor
             opacity: 0.8
-            font.pixelSize: 12
+            font.pixelSize: units.iconSizes.small
             height: 14
             width: parent.width - previewImage.width
             anchors.right: itemFrame.right

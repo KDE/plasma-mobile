@@ -76,11 +76,7 @@ Item {
             anchors {
                 horizontalCenter: parent.horizontalCenter
             }
-<<<<<<< HEAD
-            icon: decoration
-=======
             icon: "image-x-generic"
->>>>>>> Add Baloo support to Widget Explorer
         }
 
         PlasmaComponents.Label {

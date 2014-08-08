@@ -1,4 +1,5 @@
 /*
+ *   Copyright 2011 Marco Martin <notmart@gmail.com>
  *   Copyright 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -18,23 +19,13 @@
  */
 
 import QtQuick 2.0
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
-MobileComponents.IconGrid {
-    id: commonList
-    property int currentIndex: 0
-    signal closeRequested()
-    property bool isApplicationExplorer: false
-    onCloseRequested: main.closed()
+PlasmaComponents.TabButton {
+    property string resourceType
+    property Component component
 
-    onCurrentIndexChanged: {
-        currentPage = Math.max(0, Math.floor(currentIndex/pageSize))
+    onClicked: {
+        stack.replace(component)
     }
-
-    delegateWidth: Math.floor(commonList.width / Math.max(Math.floor(commonList.width / (units.gridUnit*12)), 3))
-    delegateHeight: delegateWidth / 1.6
-
-    anchors.fill: parent
-    model: isApplicationExplorer ? applicationsModel : widgetExplorer.widgetsModel
-    delegate: CommonDelegate {}
 }
