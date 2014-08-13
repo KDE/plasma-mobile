@@ -17,15 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.metadatamodels 0.1 as MetadataModels
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.extras 0.1 as PlasmaExtras
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.draganddrop 1.0
-import org.kde.qtextracomponents 0.1
-
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.kquickcontrolsaddons 2.0
 
 MobileComponents.SplitDrawer {
     id: resourceBrowser
@@ -36,9 +33,8 @@ MobileComponents.SplitDrawer {
         topMargin: toolBar.height
     }
 
-
     open: true
-    property bool hasItems: metadataModel.count > 0 || dirModel.count > 0
+    property bool hasItems: balooDataModel.count > 0 || folderModel.count > 0
     onHasItemsChanged: mainLoader.visible = true
 
     PlasmaExtras.ConditionalLoader {
@@ -56,8 +52,7 @@ MobileComponents.SplitDrawer {
 
     tools: PlasmaExtras.ConditionalLoader {
         when: hasItems
-        width: item.width
-        height: item.height
+        height: theme.mSize(theme.defaultFont).height * 1.6
         source: Qt.resolvedUrl("ToolBar.qml")
     }
 
@@ -67,24 +62,40 @@ MobileComponents.SplitDrawer {
 
         anchors.fill: parent
 
+        Behavior on visible {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        Connections {
+            target: resourceBrowser
+            onOpenChanged: {
+                sidebar.visible = resourceBrowser.open
+            }
+        }
+
         Item {
             anchors.fill: parent
             clip: false
             PlasmaComponents.TabGroup {
                 id: sidebarTabGroup
-                width: fileBrowserRoot.width/4 - theme.defaultFont.mSize.width * 2
+                width: fileBrowserRoot.width/4 - theme.mSize(theme.defaultFont).width * 2
                 anchors {
                     left: parent.left
                     top: parent.top
                     bottom: parent.bottom
                     bottomMargin: 0
                     //topMargin: toolBar.height
-                    leftMargin: theme.defaultFont.mSize.width * 2
-                    rightMargin: theme.defaultFont.mSize.width
+                    leftMargin: theme.mSize(theme.defaultFont).width * 2
+                    rightMargin: theme.mSize(theme.defaultFont).width
                 }
+
                 CategorySidebar {
                     id: categorySidebar
                 }
+
                 PlasmaExtras.ConditionalLoader {
                     id: timelineSidebar
 

@@ -1,25 +1,21 @@
 
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../../common)
+#include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../../common)
 
 set(active-filebrowser_SRCS
     main.cpp
     filebrowser.cpp
 )
 
-kde4_add_executable(active-filebrowser ${active-filebrowser_SRCS})
+add_executable(active-filebrowser ${active-filebrowser_SRCS})
 
 #find_package(ActiveApp REQUIRED)
 
 target_link_libraries(active-filebrowser
-    ${QT_QTDECLARATIVE_LIBRARY}
-    ${QT_QTOPENGL_LIBRARY}
-    ${QT_QTSCRIPT_LIBRARY}
-    ${KDE4_KDEUI_LIBS}
-    ${KDE4_KIO_LIBS}
-    ${KDE4_PLASMA_LIBS}
-    ${KDECLARATIVE_LIBRARIES}
-    activeapp
+ Qt5::Quick
+ KF5::KIOCore
+ KF5::Declarative
+ KF5::I18n
+ KF5::IconThemes
 )
 
-install(TARGETS active-filebrowser ${INSTALL_TARGETS_DEFAULT_ARGS} )
-
+install(TARGETS active-filebrowser ${INSTALL_TARGETS_DEFAULT_ARGS})

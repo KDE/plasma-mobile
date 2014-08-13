@@ -19,44 +19,54 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-// KDE
-#include <KApplication>
-#include <KAboutData>
-#include <KCmdLineArgs>
-#include <KDebug>
-#include <KDE/KLocale>
-#include <KToolBar>
-#include <KConfigGroup>
+// Qt
+#include <QApplication>
+#include <qcommandlineparser.h>
 
+#include <klocalizedstring.h>
 // Own
 #include "filebrowser.h"
 
 static const char description[] = I18N_NOOP("File browser for Plasma Active");
 
-static const char version[] = "0.1";
+static const char version[] = "0.2";
+static QCommandLineParser parser;
 
 int main(int argc, char **argv)
 {
-    KAboutData about("active-filebrowser", 0, ki18n("Files"), version, ki18n(description),
-                     KAboutData::License_GPL, ki18n("Copyright 2012 Marco Martin"), KLocalizedString(), 0, "mart@kde.org");
-                     about.addAuthor( ki18n("Marco Martin"), KLocalizedString(), "mart@kde.org" );
-    about.setProgramIconName("system-file-manager");
 
-    KCmdLineArgs::init(argc, argv, &about);
+    KLocalizedString::setApplicationDomain("active-filebrowser");
 
-    KCmdLineOptions options;
-    options.add("+[url]", ki18n( "URL of the file to open" ));
-    options.add("t").add("resourceType <type>", ki18n( "resource type to restrict the browser, such as Image or Document" ));
-    options.add("m").add("mimeTypes <type,type>", ki18n( "comma separatedlist of mime types to restrict the browser" ));
-    KCmdLineArgs::addCmdLineOptions(options);
-    KApplication app;
+    QApplication app(argc, argv);
+    app.setApplicationName("active-filebrowser");
+    app.setApplicationDisplayName(i18n("Files"));
+    app.setOrganizationDomain("kde.org");
+    app.setApplicationVersion(version);
+    app.setQuitOnLastWindowClosed(false);
+    app.setWindowIcon(QIcon::fromTheme("system-file-manager"));
+    parser.setApplicationDescription(description);
 
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    QCommandLineOption res(QStringList() << QStringLiteral("t") <<
+                           QStringLiteral("resourceType <type>"),
+                           i18n("resource type to restrict the browser, such as Image or Document"));
 
-    //kDebug() << "ARGS:" << args << args->count();
+    QCommandLineOption mime(QStringList() << QStringLiteral("m") <<
+                           QStringLiteral("mimeTypes <type,type>"),
+                           i18n("comma separatedlist of mime types to restrict the browser"));
+
+    parser.addVersionOption();
+    parser.addHelpOption();
+    parser.addOption(res);
+    parser.addOption(mime);
+    parser.process(app);
+
+    if (parser.isSet(res) && parser.value(res) == "File/Image") {
+        app.setWindowIcon(QIcon::fromTheme("active-image-viewer"));
+    }
 
     FileBrowser *mainWindow = new FileBrowser();
+    mainWindow->setResourceType(parser.value(res));
+    mainWindow->setMimeTypes(parser.value(mime));
     mainWindow->show();
-    args->clear();
     return app.exec();
 }

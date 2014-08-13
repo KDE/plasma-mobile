@@ -17,28 +17,15 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.metadatamodels 0.1 as MetadataModels
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtras
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.draganddrop 1.0
-
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.kquickcontrolsaddons 2.0
 
 PlasmaComponents.Page {
     anchors.fill: parent
-
-    MobileComponents.Package {
-        id: typePackage
-    }
-    Connections {
-        target: metadataModel.queryProvider
-        onResourceTypeChanged: {
-            typePackage.name = application.browserPackageForType(metadataModel.queryProvider.resourceType)
-            browserAddonLoader.source = typePackage.filePath("ui", "BrowserAddon.qml")
-        }
-    }
 
     PlasmaExtras.ScrollArea {
         id: scroll
@@ -50,32 +37,17 @@ PlasmaComponents.Page {
             Column {
                 id: toolsColumn
                 spacing: 4
-                enabled: fileBrowserRoot.model == metadataModel
+                enabled: fileBrowserRoot.model == balooDataModel
                 opacity: enabled ? 1 : 0.6
                 width: mainFlickable.width
-
-                PlasmaExtras.Heading {
-                    text: i18n("Rating")
-                    anchors {
-                        top: parent.top
-                        right: parent.right
-                        rightMargin: theme.defaultFont.mSize.width
-                    }
-                }
-
-                MobileComponents.Rating {
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        leftMargin: theme.defaultFont.mSize.width
-                    }
-                    onScoreChanged: metadataModel.queryProvider.minimumRating = score
-                }
+                anchors.fill: parent
 
                 Loader {
                     id: typeFilterLoader
                     anchors {
                         left: parent.left
                         right: parent.right
+                        top: parent.top
                     }
                 }
 
@@ -84,6 +56,7 @@ PlasmaComponents.Page {
                     anchors {
                         left: parent.left
                         right: parent.right
+                        top: typeFilterLoader.bottom
                     }
                 }
 

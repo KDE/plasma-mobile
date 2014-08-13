@@ -17,18 +17,18 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.metadatamodels 0.1 as MetadataModels
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtraComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.draganddrop 1.0
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.kquickcontrolsaddons 2.0
+import org.kde.baloo 0.1 as Baloo
+import org.kde.draganddrop 2.0
+import QtQuick.Layouts 1.1
+import org.kde.activities 0.1 as Activities
 
-Column {
-
-    property string currentType
-
+ColumnLayout {
     anchors {
         left: parent.left
         right: parent.right
@@ -36,39 +36,65 @@ Column {
 
     PlasmaCore.SortFilterModel {
         id: sortFilterModel
-        sourceModel: MetadataModels.MetadataModel {
-            id: typesCloudModel
-            queryProvider: MetadataModels.CloudQueryProvider {
-                cloudCategory: "rdf:type"
-                resourceType: "nfo:FileDataObject"
+        sourceModel: ListModel {
+            ListElement {
+                resourceType: "File/Document"
+                label: "Documents"
+            }
+
+            ListElement {
+                resourceType: "File/Video"
+                label: "Videos"
+            }
+
+            ListElement {
+                resourceType: "File/Music"
+                label: "Music"
+            }
+            ListElement {
+                resourceType: "File/Image"
+                label: "Images"
             }
         }
+
         sortRole: "count"
         sortOrder: Qt.DescendingOrder
         filterRole: "label"
-        filterRegExp: "nfo:Document|nfo:Image|nfo:Audio|nfo:Video|nfo:Archive"
     }
 
-    PlasmaExtraComponents.Heading {
+    ListModel {
+        id: activityData
+    }
+
+    PlasmaCore.SortFilterModel{
+        id: currentActivityData
+        sourceModel:Activities.ResourceModel {
+            shownActivities: ":current"
+        }
+    }
+
+    PlasmaExtras.Heading {
         text: i18n("File type")
         anchors {
             top: parent.top
             right: parent.right
-            rightMargin: theme.defaultFont.mSize.width
+            rightMargin: theme.mSize(theme.defaultFont).width
         }
+    }
+
+    //recreate the BalooDataModel
+    Baloo.BalooDataModel {
+        id: balooRestoreModel
     }
 
     PlasmaComponents.ButtonColumn {
         id: buttonColumn
         spacing: 4
         exclusive: false
-        onCheckedButtonChanged: {
-            metadataModel.queryProvider.tags = []
-            resourceBrowser.ensureBrowserVisible()
-        }
+
         anchors {
             left: parent.left
-            leftMargin: theme.defaultFont.mSize.width
+            leftMargin: theme.mSize(theme.defaultFont).width
         }
 
         Repeater {
@@ -76,35 +102,45 @@ Column {
             model: sortFilterModel
             delegate: PlasmaComponents.RadioButton {
                 id: delegateItem
-                text: userTypes.typeNames[model["label"]]
-                //FIXME: more elegant way to remove applications?
-                visible: model["label"] != undefined && model["label"] != "nfo:Application"
-                //checked: metadataModel.queryProvider.resourceType == model["label"]
+                text: label
+
                 onCheckedChanged: {
                     if (checked) {
                         buttonColumn.exclusive = true
-                        metadataModel.queryProvider.resourceType = model["label"]
+                        if (fileBrowserRoot.model.sourceModel != balooDataModel) {
+                            fileBrowserRoot.model.sourceModel = balooRestoreModel
+                            balooDataModel.sourceModel.query.type = model.resourceType
+                        }
                     }
                 }
             }
         }
-        PlasmaExtraComponents.Heading {
+        PlasmaExtras.Heading {
             text: i18n("Activity")
             anchors {
                 right: parent.right
-                rightMargin: -(parent.parent.width - parent.width) + theme.defaultFont.mSize.width*2
+                rightMargin: -(parent.parent.width - parent.width) + theme.mSize(theme.defaultFont).width*2
             }
         }
         PlasmaComponents.RadioButton {
+            id: activityButton
             text: i18n("Current activity")
-            //checked: metadataModel.queryProvider.activityId == activitySource.data.Status.Current
             onCheckedChanged: {
                 if (checked) {
-                    buttonColumn.exclusive = true
-                    metadataModel.queryProvider.resourceType = "nfo:FileDataObject"
-                    metadataModel.queryProvider.activityId = activitySource.data.Status.Current
-                } else {
-                    metadataModel.queryProvider.activityId = ""
+                    activityData.clear()
+                    for (var i = 0; i < activitySource.sourceModel.count(); i++) {
+                        var agent = activitySource.get(i).agent
+                        if (agent !== "Application") {
+                            currentActivityData.sourceModel.shownAgents = agent;
+                            for (var j=0; j < currentActivityData.sourceModel.count(); j++) {
+                                var data = currentActivityData.get(j)
+                                data["resourceType"] = agent
+                                activityData.append(data)
+                            }
+                        }
+                    }
+                    //change our model
+                    fileBrowserRoot.model.sourceModel = activityData
                 }
             }
             Rectangle {

@@ -83,7 +83,7 @@ MACRO(installPackage dir component)
 ENDMACRO(installPackage)
 
 #add_subdirectory(applets)
-#add_subdirectory(applications)
+add_subdirectory(applications)
 #add_subdirectory(artwork)
 add_subdirectory(components)
 add_subdirectory(containments)

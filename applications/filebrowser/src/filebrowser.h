@@ -23,15 +23,14 @@
 #ifndef FILEBROWSER_H
 #define FILEBROWSER_H
 
-#include "kdeclarativemainwindow.h"
+#include <QQuickView>
 
-#include <KProcess>
+#include <QProcess>
 
 class DirModel;
 
 
-class FileBrowser : public KDeclarativeMainWindow
-{
+class FileBrowser : public QQuickView {
     Q_OBJECT
 public:
     FileBrowser();
@@ -43,11 +42,19 @@ public:
     Q_INVOKABLE void copy(const QVariantList &src, const QString &dest);
     Q_INVOKABLE void trash(const QVariantList &files);
 
+    void setResourceType(const QString &resourceType);
+    QString resourceType() const;
+
+    void setMimeTypes(const QString &mimeTypes);
+    QString mimeTypes() const;
+
 protected Q_SLOTS:
     void emptyFinished(int exitCode, QProcess::ExitStatus exitStatus);
 
 private:
-    KProcess *m_emptyProcess;
+    QProcess *m_emptyProcess;
+    QString m_resourceType;
+    QString m_mimeTypes;
 };
 
 #endif // FILEBROWSER_H
