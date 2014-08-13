@@ -57,7 +57,7 @@ Item {
 
         model: Activities.ResourceModel {
                 shownAgents: itemGroup.category
-                shownActivities: ":global,:current"
+                shownActivities: ":current"
         }
 
         highlight: PlasmaCore.FrameSvgItem {

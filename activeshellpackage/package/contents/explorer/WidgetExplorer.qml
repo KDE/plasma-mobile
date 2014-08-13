@@ -54,7 +54,7 @@ Item {
     Activities.ResourceModel {
         id: activityResources
         shownAgents: ":any"
-        shownActivities: ":global,:current"
+        shownActivities: ":current"
     }
 
     PlasmaComponents.Button {

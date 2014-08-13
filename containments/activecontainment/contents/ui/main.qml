@@ -113,7 +113,7 @@ Item {
         sourceModel: Activities.ResourceModel {
             id: resourceModel
             shownAgents: ":any"
-            shownActivities: ":global,:current"
+            shownActivities: ":current"
         }
 
         onCountChanged: {
