@@ -21,6 +21,10 @@ Leaves {
         id: stripe
         opacity: 0
 
+        function lockKeyPressed(id) {
+            hideTimer.restart();
+            console.log(id);
+        }
 
         Behavior on opacity {
             NumberAnimation {
@@ -51,7 +55,7 @@ Leaves {
             MouseArea {
                 anchors.fill: parent
                 onPressed: {
-                    console.log("square");
+                    stripe.lockKeyPressed("square");
                 }
             }
         }
@@ -70,7 +74,7 @@ Leaves {
             MouseArea {
                 anchors.fill: parent
                 onPressed: {
-                    console.log("circle");
+                    stripe.lockKeyPressed("circle");
                 }
             }
         }
@@ -89,7 +93,7 @@ Leaves {
             MouseArea {
                 anchors.fill: parent
                 onPressed: {
-                    console.log("ex");
+                    stripe.lockKeyPressed("ex");
                 }
             }
         }
@@ -108,7 +112,7 @@ Leaves {
             MouseArea {
                 anchors.fill: parent
                 onPressed: {
-                    console.log("triangle");
+                    stripe.lockKeyPressed("triangle");
                 }
             }
         }
