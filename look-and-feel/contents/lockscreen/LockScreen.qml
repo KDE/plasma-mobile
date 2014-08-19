@@ -26,6 +26,11 @@ Leaves {
             console.log(id);
         }
 
+        function lockKeyReleased(id) {
+            hideTimer.restart();
+            console.log(id);
+        }
+
         Behavior on opacity {
             NumberAnimation {
                 duration: 500
@@ -40,81 +45,38 @@ Leaves {
             onTriggered: parent.opacity = 0
         }
 
-        PlasmaCore.SvgItem {
+        LockKey {
             id: square
-            property int value: 1
-            opacity: 1
-            anchors.top: parent.top
-            anchors.left: parent.left
-            width: parent.width/4
-            height: parent.height
-
-            svg: symbolsSvg
+            value: 1
             elementId: "square"
-
-            MouseArea {
-                anchors.fill: parent
-                onPressed: {
-                    stripe.lockKeyPressed("square");
-                }
-            }
         }
 
-        PlasmaCore.SvgItem {
+        LockKey {
             id: circle
-            property int value: 2
+            value: 2
             anchors.top: parent.top
             anchors.left: square.right
-            width: square.width
-            height: square.height
 
-            svg: symbolsSvg
             elementId: "circle"
-
-            MouseArea {
-                anchors.fill: parent
-                onPressed: {
-                    stripe.lockKeyPressed("circle");
-                }
-            }
         }
 
-        PlasmaCore.SvgItem {
+        LockKey {
             id: ex
-            property int value: 3
+            value: 3
             anchors.top: parent.top
             anchors.left: circle.right
-            width: square.width
-            height: square.height
 
-            svg: symbolsSvg
             elementId: "ex"
 
-            MouseArea {
-                anchors.fill: parent
-                onPressed: {
-                    stripe.lockKeyPressed("ex");
-                }
-            }
         }
 
-        PlasmaCore.SvgItem {
+        LockKey {
             id: triangle
-            property int value: 4
+            value: 4
             anchors.top: parent.top
             anchors.left: ex.right
-            width: parent.width - (square.width * 3)
-            height: square.height
 
-            svg: symbolsSvg
             elementId: "triangle"
-
-            MouseArea {
-                anchors.fill: parent
-                onPressed: {
-                    stripe.lockKeyPressed("triangle");
-                }
-            }
         }
     }
 }
