@@ -9,14 +9,4 @@ PlasmaCore.SvgItem {
     height: parent.height
 
     svg: symbolsSvg
-
-    MouseArea {
-        anchors.fill: parent
-        onPressed: {
-            stripe.lockKeyPressed(value);
-        }
-        onReleased: {
-            stripe.lockKeyReleased(value);
-        }
-    }
 }

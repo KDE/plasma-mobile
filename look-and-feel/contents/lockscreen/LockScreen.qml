@@ -38,6 +38,16 @@ Leaves {
             }
         }
 
+        MouseArea {
+            anchors.fill: parent
+            onPressed: {
+                stripe.lockKeyPressed(stripe.childAt(mouseX, mouseY).value);
+            }
+            onReleased: {
+                stripe.lockKeyReleased(stripe.childAt(mouseX, mouseY).value);
+            }
+        }
+
         Timer {
             id: hideTimer
             interval: 1000
