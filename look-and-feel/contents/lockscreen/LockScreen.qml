@@ -43,9 +43,14 @@ Leaves {
             onPressed: {
                 stripe.lockKeyPressed(stripe.childAt(mouseX, mouseY).value);
             }
+
             onReleased: {
                 stripe.lockKeyReleased(stripe.childAt(mouseX, mouseY).value);
             }
+
+//             onPositionChanged: {
+//                 stripe.lockKeyReleased(stripe.childAt(mouseX, mouseY).value);
+//             }
         }
 
         Timer {
