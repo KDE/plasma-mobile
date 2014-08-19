@@ -2,7 +2,7 @@ import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import "../components"
 
-Item {
+Leaves {
     id: lockscreen
 
     PlasmaCore.Svg {
@@ -10,13 +10,28 @@ Item {
         imagePath:  Qt.resolvedUrl("images/symbols.svgz")
     }
 
-    Leaves {
-        id: background
+    MouseArea {
         anchors.fill: parent
+        onPressed: {
+            stripe.visible = true;
+        }
     }
 
     SatelliteStripe {
         id: stripe
+        visible: false
+        opacity: 0
+
+        onVisibleChanged: {
+            opacity = visible ? 1 : 0;
+        }
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 300
+                easing.type: Easing.InOutQuad
+            }
+        }
 
         PlasmaCore.SvgItem {
             id: square
