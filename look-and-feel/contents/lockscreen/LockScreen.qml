@@ -13,24 +13,27 @@ Leaves {
     MouseArea {
         anchors.fill: parent
         onPressed: {
-            stripe.visible = true;
+            stripe.opacity = 1;
         }
     }
 
     SatelliteStripe {
         id: stripe
-        visible: false
         opacity: 0
 
-        onVisibleChanged: {
-            opacity = visible ? 1 : 0;
-        }
 
         Behavior on opacity {
             NumberAnimation {
-                duration: 300
+                duration: 500
                 easing.type: Easing.InOutQuad
             }
+        }
+
+        Timer {
+            id: hideTimer
+            interval: 1000
+            running: parent.opacity == 1
+            onTriggered: parent.opacity = 0
         }
 
         PlasmaCore.SvgItem {
