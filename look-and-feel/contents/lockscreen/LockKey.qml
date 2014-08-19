@@ -4,6 +4,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 PlasmaCore.SvgItem {
     id: square
     property int value: 0
+    anchors.top: parent.top
     width: parent.width/4
     height: parent.height
 
@@ -12,10 +13,10 @@ PlasmaCore.SvgItem {
     MouseArea {
         anchors.fill: parent
         onPressed: {
-            stripe.lockKeyPressed(parent.elementId);
+            stripe.lockKeyPressed(value);
         }
         onReleased: {
-            stripe.lockKeyReleased(parent.elementId);
+            stripe.lockKeyReleased(value);
         }
     }
 }
