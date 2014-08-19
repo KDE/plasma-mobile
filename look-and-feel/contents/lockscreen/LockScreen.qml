@@ -48,13 +48,13 @@ Leaves {
         LockKey {
             id: square
             value: 1
+            anchors.left: parent.left
             elementId: "square"
         }
 
         LockKey {
             id: circle
             value: 2
-            anchors.top: parent.top
             anchors.left: square.right
 
             elementId: "circle"
@@ -63,7 +63,6 @@ Leaves {
         LockKey {
             id: ex
             value: 3
-            anchors.top: parent.top
             anchors.left: circle.right
 
             elementId: "ex"
@@ -73,7 +72,6 @@ Leaves {
         LockKey {
             id: triangle
             value: 4
-            anchors.top: parent.top
             anchors.left: ex.right
 
             elementId: "triangle"
