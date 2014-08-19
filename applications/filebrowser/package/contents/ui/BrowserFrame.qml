@@ -23,6 +23,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.kquickcontrolsaddons 2.0
+import org.kde.plasma.private.folder 0.1 as Folder
 import org.kde.draganddrop 2.0
 
 Item {
@@ -33,6 +34,21 @@ Item {
     ListModel {
         id: selectedModel
         signal modelCleared
+    }
+
+    Folder.Positioner {
+        id: positioner
+        folderModel: folderModel
+    }
+
+    Folder.ItemViewAdapter {
+        id: viewAdapter
+        adapterView: resultsGrid
+        adapterModel: positioner
+
+        Component.onCompleted: {
+            folderModel.sourceModel.viewAdapter = viewAdapter;
+        }
     }
 
     Connections {
@@ -197,7 +213,7 @@ Item {
                     anchors.fill: parent
                     clip: false
 
-                    model: fileBrowserRoot.model
+                    model: fileBrowserRoot.model == folderModel ? positioner : fileBrowserRoot.model
                     onCurrentPageChanged: pinchArea.resetSelection()
 
                     delegate: Item {
@@ -273,9 +289,6 @@ Item {
                             onPressAndHold: highlightFrame.contains = !highlightFrame.contains
 
                             onClicked: {
-                                if (model.isDir !== undefined && model.isDir) {
-                                    folderModel.sourceModel.rename(index, model.display + index)
-                                }
                                 openResource(model)
                             }
                         }
