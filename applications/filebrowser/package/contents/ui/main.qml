@@ -28,7 +28,7 @@ import org.kde.draganddrop 2.0
 import org.kde.plasma.private.folder 0.1 as Folder
 import org.kde.kio 1.0 as Kio
 
-Image {
+Rectangle {
     id: fileBrowserRoot
 
     //BEGIN properties
@@ -38,8 +38,12 @@ Image {
     property QtObject model: balooDataModel
 
     objectName: "fileBrowserRoot"
-    //source: "image://appbackgrounds/contextarea"
-    fillMode: Image.Tile
+    color: theme.backgroundColor
+    Rectangle {
+        anchors.fill: parent
+        color: theme.highlightColor
+        opacity: 0.05
+    }
     state: "browsing"
     //END properties
 

@@ -60,13 +60,6 @@ PlasmaComponents.Page {
         mainPage.width = browserFrame.width - handleGraphics.width
     }
 
-
-    Rectangle {
-        anchors.fill: parent
-        color: theme.textColor
-        opacity: 0.1
-    }
-
     Rectangle {
         id: browserFrame
         //visible: mainPage.children.length > 0
@@ -120,8 +113,8 @@ PlasmaComponents.Page {
             }
             Rectangle {
                 anchors.fill: parent
-                color: theme.textColor
-                opacity: 0.02
+                color: theme.highlightColor
+                opacity: 0.05
             }
             width: handleIcon.width + units.gridUnit
             height: handleIcon.width * 1.6 + units.gridUnit
@@ -195,7 +188,7 @@ PlasmaComponents.Page {
         }
     }
     Rectangle {
-        z: 999
+        z: 99
         width: 3
         color: theme.textColor
         opacity: 0.3
@@ -209,7 +202,7 @@ PlasmaComponents.Page {
         }
     }
     Rectangle {
-        z: 999
+        z: 99
         width: 3
         color: theme.textColor
         opacity: 0.3
@@ -258,6 +251,7 @@ PlasmaComponents.Page {
         height: 3
         color: theme.textColor
         opacity: 0.3
+        z: 999
         anchors {
             left: parent.left
             top: toolBar.bottom

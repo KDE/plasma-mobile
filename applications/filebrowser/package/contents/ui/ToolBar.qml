@@ -236,7 +236,7 @@ Item {
             id: tabsRow
             anchors {
                 bottom: parent.bottom
-                bottomMargin: - toolBar.margins.bottom
+                bottomMargin: - toolBar.margins.bottom - 1
             }
             z: 900
             spacing: 0
