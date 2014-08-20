@@ -22,12 +22,12 @@ Leaves {
         opacity: 0
 
         function lockKeyPressed(id) {
-            hideTimer.restart();
+            hideTimer.stop();
             console.log(id);
         }
 
         function lockKeyReleased(id) {
-            hideTimer.restart();
+            hideTimer.start();
             console.log(id);
         }
 
@@ -49,7 +49,7 @@ Leaves {
             }
 
 //             onPositionChanged: {
-//                 stripe.lockKeyReleased(stripe.childAt(mouseX, mouseY).value);
+//                 hideTimer.restart();
 //             }
         }
 
