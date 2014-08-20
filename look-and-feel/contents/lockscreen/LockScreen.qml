@@ -63,7 +63,6 @@ Leaves {
         function lockKeyPressed(id) {
             hideTimer.stop();
             console.log(id);
-            console.log((width - (units.largeSpacing * 3)) / 2);
         }
 
         function lockKeyReleased(id) {
