@@ -107,7 +107,7 @@ PlasmaComponents.Page {
         }
         PlasmaCore.FrameSvgItem {
             id: handleGraphics
-            imagePath: "dialogs/background"
+            imagePath: "widgets/background"
             enabledBorders: "LeftBorder|TopBorder|BottomBorder"
             width: handleIcon.width + margins.left + margins.right + 4
             height: handleIcon.width * 1.6 + margins.top + margins.bottom + 4
@@ -118,8 +118,8 @@ PlasmaComponents.Page {
 
             PlasmaCore.SvgItem {
                 id: handleIcon
-                svg: PlasmaCore.Svg {imagePath: "toolbar-icons/show"}
-                elementId: "show-menu"
+                svg: PlasmaCore.Svg {imagePath: "widgets/configuration-icons"}
+                elementId: "menu"
                 x: parent.margins.left
                 y: parent.margins.top
                 width: theme.smallMediumIconSize
