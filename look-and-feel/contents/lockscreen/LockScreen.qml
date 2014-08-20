@@ -17,6 +17,45 @@ Leaves {
         }
     }
 
+    PlasmaCore.DataSource {
+        id: dataSource
+        engine: "time"
+        connectedSources: "Local"
+        interval: 30000
+
+        onDataChanged: {
+            var date = new Date(data["Local"]["DateTime"]);
+            hour.text = date.getHours();
+            minute.text = date.getMinutes();
+        }
+
+        Component.onCompleted: {
+            onDataChanged();
+        }
+    }
+
+    Text {
+        id: hour
+
+        onTextChanged: {
+            if (text.length < 2) {
+                minute.text = "0" + text;
+            }
+        }
+
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: stripe.top
+        }
+        color: "white" // FIXME: base on wallpaper?
+        text: "00"
+        font.pixelSize: Math.floor((width - (units.largeSpacing)) / 2)
+        horizontalAlignment: Qt.AlignCenter
+        verticalAlignment: Qt.AlignVCenter
+    }
+
     SatelliteStripe {
         id: stripe
         opacity: 0
@@ -24,6 +63,7 @@ Leaves {
         function lockKeyPressed(id) {
             hideTimer.stop();
             console.log(id);
+            console.log((width - (units.largeSpacing * 3)) / 2);
         }
 
         function lockKeyReleased(id) {
@@ -92,4 +132,28 @@ Leaves {
             elementId: "triangle"
         }
     }
+
+
+    Text {
+        id: minute
+
+        onTextChanged: {
+            if (text.length < 2) {
+                minute.text = "0" + text;
+            }
+        }
+
+        anchors {
+            top: stripe.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        color: "white" // FIXME: base on wallpaper?
+        text: "00"
+        font.pixelSize: Math.floor((width - (units.largeSpacing)) / 2)
+        horizontalAlignment: Qt.AlignCenter
+        verticalAlignment: Qt.AlignVCenter
+    }
+
 }
