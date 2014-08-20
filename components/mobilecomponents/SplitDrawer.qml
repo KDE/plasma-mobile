@@ -61,12 +61,18 @@ PlasmaComponents.Page {
     }
 
 
-    Image {
+    Rectangle {
+        anchors.fill: parent
+        color: theme.textColor
+        opacity: 0.1
+    }
+
+    Rectangle {
         id: browserFrame
         //visible: mainPage.children.length > 0
         z: 100
-        source: "image://appbackgrounds/standard"
-        fillMode: Image.Tile
+        color: theme.backgroundColor
+
         anchors {
             top: parent.top
             bottom: parent.bottom
@@ -97,12 +103,28 @@ PlasmaComponents.Page {
             }
         }
 
-        PlasmaCore.FrameSvgItem {
+        Item {
             id: handleGraphics
-            imagePath: "widgets/background"
-            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-            width: handleIcon.width + margins.left + margins.right + 4
-            height: handleIcon.width * 1.6 + margins.top + margins.bottom + 4
+            clip: true
+            Rectangle {
+                anchors {
+                    fill: parent
+                    rightMargin: -3
+                }
+                border {
+                    width: 3
+                    color: theme.textColor
+                }
+                color: "transparent"
+                opacity: 0.3
+            }
+            Rectangle {
+                anchors.fill: parent
+                color: theme.textColor
+                opacity: 0.02
+            }
+            width: handleIcon.width + units.gridUnit
+            height: handleIcon.width * 1.6 + units.gridUnit
             anchors.verticalCenter: parent.verticalCenter
 
             Component.onCompleted: {
@@ -114,8 +136,7 @@ PlasmaComponents.Page {
                 id: handleIcon
                 svg: PlasmaCore.Svg {imagePath: "widgets/configuration-icons"}
                 elementId: "menu"
-                x: parent.margins.left
-                y: parent.margins.top
+                anchors.centerIn: parent
                 width: theme.smallMediumIconSize
                 height: width
                 anchors.verticalCenter: parent.verticalCenter
@@ -173,15 +194,32 @@ PlasmaComponents.Page {
             }
         }
     }
-    Image {
+    Rectangle {
         z: 999
-        source: "image://appbackgrounds/shadow-right"
-        fillMode: Image.TileVertically
+        width: 3
+        color: theme.textColor
+        opacity: 0.3
+        height: handleGraphics.y
         anchors {
             left: browserFrame.right
             top: browserFrame.top
+            //bottom: browserFrame.bottom
+            leftMargin: 0
+            topMargin: 3
+        }
+    }
+    Rectangle {
+        z: 999
+        width: 3
+        color: theme.textColor
+        opacity: 0.3
+        height: handleGraphics.y + 3
+        anchors {
+            left: browserFrame.right
+            //top: browserFrame.top
             bottom: browserFrame.bottom
-            leftMargin: -1
+            leftMargin: 0
+            topMargin: 3
         }
     }
 
@@ -216,10 +254,10 @@ PlasmaComponents.Page {
         }
     }
 
-    Image {
-        source: "image://appbackgrounds/shadow-bottom"
-        fillMode: Image.TileHorizontally
-        opacity: 0.8
+    Rectangle {
+        height: 3
+        color: theme.textColor
+        opacity: 0.3
         anchors {
             left: parent.left
             top: toolBar.bottom
