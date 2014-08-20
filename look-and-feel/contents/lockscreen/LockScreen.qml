@@ -81,10 +81,19 @@ Leaves {
         MouseArea {
             anchors.fill: parent
             onPressed: {
+                if (stripe.opacity < 1) {
+                    stripe.opacity = 1;
+                    return;
+                }
+
                 stripe.lockKeyPressed(stripe.childAt(mouseX, mouseY).value);
             }
 
             onReleased: {
+                if (stripe.opacity < 1) {
+                    return;
+                }
+
                 stripe.lockKeyReleased(stripe.childAt(mouseX, mouseY).value);
             }
 
