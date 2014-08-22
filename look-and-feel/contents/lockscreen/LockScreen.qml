@@ -4,6 +4,7 @@ import "../components"
 
 Leaves {
     id: lockscreen
+    signal tryUnlock(string code)
 
     PlasmaCore.Svg {
         id: symbolsSvg
@@ -60,14 +61,16 @@ Leaves {
         id: stripe
         opacity: 0
 
+        property string code
+
         function lockKeyPressed(id) {
             hideTimer.stop();
-            console.log(id);
+            code += id;
         }
 
         function lockKeyReleased(id) {
             hideTimer.start();
-            console.log(id);
+            code += id;
         }
 
         Behavior on opacity {
@@ -101,7 +104,12 @@ Leaves {
             id: hideTimer
             interval: 1000
             running: parent.opacity == 1
-            onTriggered: parent.opacity = 0
+            onTriggered: {
+                stripe.opacity = 0;
+//                 console.log("CODE SO FAR: " + stripe.code);
+                lockscreen.tryUnlock(stripe.code);
+                stripe.code = '';
+            }
         }
 
         LockKey {
