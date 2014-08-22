@@ -95,10 +95,6 @@ Leaves {
 
                 stripe.lockKeyReleased(stripe.childAt(mouseX, mouseY).value);
             }
-
-//             onPositionChanged: {
-//                 hideTimer.restart();
-//             }
         }
 
         Timer {
@@ -163,5 +159,4 @@ Leaves {
         horizontalAlignment: Qt.AlignCenter
         verticalAlignment: Qt.AlignVCenter
     }
-
 }
