@@ -161,10 +161,29 @@ Leaves {
             right: parent.right
             bottom: parent.bottom
         }
-        color: "white" // FIXME: base on wallpaper?
+        color: hour.color
         text: "00"
         font.pixelSize: Math.floor((width - (units.largeSpacing)) / 2)
         horizontalAlignment: Qt.AlignCenter
         verticalAlignment: Qt.AlignVCenter
+    }
+
+    Text {
+        id: emergencyCall
+
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        horizontalAlignment: Qt.AlignCenter
+        color: minute.color
+        text: i18n("Emergency Call")
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: { print("FIXME: Launch the dialer service!") }
+        }
     }
 }
