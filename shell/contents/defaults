@@ -1,0 +1,6 @@
+[Desktop]
+Containment=org.kde.desktopcontainment
+ToolBox=
+
+[Desktop][ContainmentActions]
+

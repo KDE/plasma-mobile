@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Phone
+Type=Service
+
+X-KDE-ServiceTypes=Plasma/Shell
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Aaron Seigo
+X-KDE-PluginInfo-Category=
+X-KDE-PluginInfo-Email=aseigo@kde.org
+X-KDE-PluginInfo-License=GPLv2+
+X-KDE-PluginInfo-Name=org.kde.plasma.satellite.phone
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=
+
