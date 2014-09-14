@@ -1,4 +1,4 @@
-project(plasma-device-sim)
+project(plasma-phone-components)
 
 # minimal requirements
 cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)

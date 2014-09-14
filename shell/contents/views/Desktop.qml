@@ -3,7 +3,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import "../components"
 
 Rectangle {
-    id: root
+    id: homescreen
     width: 1024
     height: 768
 
