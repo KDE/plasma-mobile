@@ -188,8 +188,7 @@ Rectangle {
 
     Component.onCompleted: {
         //configure the view behavior
-        desktop.stayBehind = true;
-        desktop.fillScreen = true;
+        desktop.windowType = Shell.Desktop.WindowedDesktop;
         print("View org.kde.desktop QML loaded")
     }
 }
