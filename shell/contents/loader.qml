@@ -25,7 +25,7 @@ Item {
 
     property string shell  : "org.kde.satellite.phone"
     property bool willing  : true
-    property int  priority : 0
+    property int  priority : 10
 
     // This is not needed, but allows the
     // handler to know whether its shell is loaded
