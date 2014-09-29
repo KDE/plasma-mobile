@@ -2,6 +2,7 @@ import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
+    id: root
     width: parent.width / parent.columns
     height: parent.buttonHeight
     property var callback
@@ -19,6 +20,9 @@ Item {
 
     MouseArea {
         anchors.fill: parent
+        propagateComposedEvents: true
+        drag.target: stripe
+        drag.axis: Drag.YAxis
         onClicked: {
             if (callback) {
                 callback();
@@ -27,11 +31,9 @@ Item {
             }
         }
 
-        onPressAndHold: {
-            if (parent.sub.length > 0) {
-                addNumber(parent.sub);
-            } else {
-                addNumber(parent.text);
+        onReleased: {
+            if (drag.active) {
+
             }
         }
     }

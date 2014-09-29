@@ -233,13 +233,56 @@ Item {
         id: stripe
         z: 1
 
-        MouseArea {
+        PlasmaCore.Svg {
+            id: stripeIcons
+            imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
+        }
+
+        Row {
             anchors.fill: parent
-            onPressed: {
+            property int columns: 4
+            property alias buttonHeight: stripe.height
+
+            HomeLauncherSvg {
+                id: phoneIcon
+                svg: stripeIcons
+                elementId: "phone"
+                callback: function() { console.log("Start phone") }
             }
 
-            onReleased: {
+            HomeLauncherSvg {
+                id: messagingIcon
+                svg: stripeIcons
+                elementId: "messaging"
+                callback: function() { console.log("Start messaging") }
             }
+
+
+            HomeLauncherSvg {
+                id: emailIcon
+                svg: stripeIcons
+                elementId: "email"
+                callback: function() { console.log("Start email") }
+            }
+
+
+            HomeLauncherSvg {
+                id: webIcon
+                svg: stripeIcons
+                elementId: "web"
+                callback: function() { console.log("Start web") }
+            }
+        }
+    }
+
+    Grid {
+        id: applications
+        z: 1
+        anchors {
+            top: stripe.bottom
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
         }
     }
 
