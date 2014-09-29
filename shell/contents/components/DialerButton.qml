@@ -6,8 +6,9 @@ Text {
     height: parent.buttonHeight
     horizontalAlignment: Qt.AlignHCenter
     verticalAlignment: Qt.AlignVCenter
+    color: dialer.textColor
     font.pixelSize: Math.floor((width - (units.largeSpacing)) / 2)
-    property alias sub: longHold.text;
+    property alias sub: longHold.text
 
     MouseArea {
         anchors.fill: parent
@@ -26,16 +27,17 @@ Text {
 
     Text {
         id: longHold
-        visible: text.length > 0
-        opacity: 0.7
-        height: parent.height
-        width: parent.width / 3
-        verticalAlignment: Qt.AlignVCenter
         anchors {
             top: parent.top
             right: parent.right
         }
+        height: parent.height
+        width: parent.width / 3
+        verticalAlignment: Qt.AlignVCenter
+        visible: text.length > 0
+        opacity: 0.7
 
         font.pixelSize: parent.pixelSize * .8
+        color: dialer.textColor
     }
 }

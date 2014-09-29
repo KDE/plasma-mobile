@@ -4,9 +4,10 @@ import "../components"
 
 Rectangle {
     id: dialer
-    color: "white"
-    opacity: 0.5
+    color: "black"
+    opacity: 0.8
 
+    property color textColor: "white"
     property bool calling: false // needs to be connected to a system service
     property bool enableButtons: calling
 
@@ -37,6 +38,7 @@ Rectangle {
         horizontalAlignment: Qt.AlignRight
         verticalAlignment: Qt.AlignVCenter
         font.pixelSize: one.font.pixelSize
+        color: textColor
     }
 
     Grid {
@@ -81,7 +83,14 @@ Rectangle {
         }
         DialerIconButton { 
             source: "edit-clear"
-            callback: function() { status.text = status.text.substr(0, status.text.length - 1); }
+            callback: function() {
+                if (status.text.length > 0) {
+                    status.text = status.text.substr(0, status.text.length - 1);
+                } else {
+                    dialer.calling = true;
+                    dialer.calling = false;
+                }
+            }
         }
     }
 }
