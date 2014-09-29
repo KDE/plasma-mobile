@@ -164,6 +164,23 @@ Item {
         z: 1
         height: units.iconSizes.small
         color: "black"
+
+        PlasmaCore.DataSource {
+            id: timeSource
+            engine: "time"
+            connectedSources: ["Local"]
+            interval: 500
+        }
+
+        Text {
+            id: clock
+            anchors.fill: parent
+            text: Qt.formatDateTime(timeSource.data.Local.DateTime)
+            color: "white"
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
+            font.pixelSize: height / 2
+        }
     }
 
     ListView {
