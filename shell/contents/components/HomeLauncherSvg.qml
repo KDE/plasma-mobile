@@ -30,11 +30,5 @@ Item {
                 addNumber(parent.text);
             }
         }
-
-        onReleased: {
-            if (drag.active) {
-
-            }
-        }
     }
 }

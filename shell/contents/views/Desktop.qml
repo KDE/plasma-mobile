@@ -172,6 +172,10 @@ Item {
             NumberAnimation { properties: "opacity"; duration: 100 }
         }
 
+        onOpacityChanged: {
+            visible = opacity > 0;
+        }
+
         onVisibleChanged: {
             opacity = visible ? 0.9 : 0;
         }
@@ -306,15 +310,39 @@ Item {
         }
     }
 
-    Grid {
+    PlasmaCore.DataSource {
+        id: applicationsSource
+
+        engine: "apps"
+        interval: 0
+        connectedSources: sources
+
+        onSourceAdded: {
+            connectSource(source);
+        }
+
+        onSourceRemoved: {
+            disconnectSource(source);
+        }
+    }
+
+    GridView {
         id: applications
-        z: 1
         anchors {
             top: stripe.bottom
             bottom: parent.bottom
-            left: parent.left
-            right: parent.right
+            horizontalCenter: parent.horizontalCenter
+            topMargin: units.smallSpacing
         }
+        z: 1
+        cellWidth: stripe.height * 2
+        cellHeight: cellWidth
+        width: cellWidth * 4
+        model: PlasmaCore.DataModel { dataSource: applicationsSource }
+        snapMode: GridView.SnapToRow
+        clip: true
+        delegate: HomeLauncher {}
+        Component.onCompleted : { console.log("WTF " + width) }
     }
 
     Component.onCompleted: {
