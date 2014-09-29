@@ -1,5 +1,5 @@
 [Desktop]
-Containment=org.kde.desktopcontainment
+Containment=null
 ToolBox=
 
 [Desktop][ContainmentActions]
