@@ -60,7 +60,7 @@ MouseArea {
             } else {
                 x = 0;
             }
-        } else {
+        } else if (body) {
             expanded = !expanded;
         }
     }
@@ -70,6 +70,7 @@ MouseArea {
         id: icon
         width: units.iconSizes.medium
         height: width
+        visible: !root.expanded
         anchors.verticalCenter: parent.verticalCenter
         x: units.largeSpacing
         y: 0
@@ -81,6 +82,7 @@ MouseArea {
         clip: true
         height: parent.height
         width: height / 2
+        visible: !root.expanded
         anchors {
             left: icon.right
             leftMargin: units.largeSpacing
@@ -111,7 +113,8 @@ MouseArea {
         width: parent.width - icon.width - rounded.width - (units.largeSpacing * 2)
         height: parent.height
         anchors {
-            left: rounded.right
+            left: root.expanded ? root.left : rounded.right
+            right: root.right
             top: parent.top
         }
 
@@ -125,7 +128,7 @@ MouseArea {
             id: summaryText
             anchors.fill: parent
             clip: true
-            horizontalAlignment: Qt.AlignLeft
+            horizontalAlignment: root.expanded ? Qt.AlignHCenter : Qt.AlignLeft
             verticalAlignment: Qt.AlignVCenter
             color: "white"
             text: summary + (root.expanded ? (body ? "\n" + body : '') :
@@ -141,6 +144,7 @@ MouseArea {
         anchors {
             left: summaryArea.right
             top: parent.top
+            bottom: parent.bottom
         }
 
         gradient: root.textGradient
