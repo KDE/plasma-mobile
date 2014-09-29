@@ -142,6 +142,7 @@ Item {
         ListElement {
             appIcon: "call-start"
             summary: "Missed call from Joe"
+            body: "Called at 8:42 from +41 56 373 37 31"
         }
         ListElement {
             appIcon: "im-google"

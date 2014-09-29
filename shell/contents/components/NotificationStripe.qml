@@ -28,6 +28,7 @@ Rectangle {
     width: parent.width
     anchors.bottomMargin: 10
 
+    property bool expanded: false
     property var textGradient: Gradient {
                 GradientStop { position: 1.0; color: "#FF00000C" }
                 GradientStop { position: 0.0; color: "#00000C00" }
@@ -38,6 +39,21 @@ Rectangle {
         SpringAnimation { spring: 2; damping: 0.2 }
     }
 
+    Behavior on height {
+        SpringAnimation { spring: 5; damping: 0.3 }
+    }
+
+    onExpandedChanged: {
+        if (expanded) {
+            height = units.gridUnit * 2;
+            summaryText.text = summary;
+        } else {
+            height = units.gridUnit * 4;
+            if (body) {
+                summaryText.text = summary + "\n" + body;
+            }
+        }
+    }
     MouseArea {
         anchors.fill: root
         drag.axis: Drag.XAxis
@@ -49,6 +65,8 @@ Rectangle {
                 } else {
                     parent.x = 0;
                 }
+            } else {
+                parent.expanded = !parent.expanded;
             }
         }
     }
@@ -56,6 +74,7 @@ Rectangle {
     PlasmaCore.IconItem {
         id: icon
         width: units.iconSizes.medium
+        anchors.verticalCenter: parent.verticalCenter
         height: width
         x: units.largeSpacing
         y: 0
@@ -73,9 +92,10 @@ Rectangle {
         }
 
         Rectangle {
+            id: roundedRect
             height: parent.height
             width: parent.width * 2
-            radius: height
+            radius: height //Math.max(height, units.gridUnit)
             anchors {
                 left: parent.left
                 top: parent.top
@@ -107,6 +127,7 @@ Rectangle {
         }
 
         Text {
+            id: summaryText
             anchors.fill: parent
             horizontalAlignment: Qt.AlignLeft
             verticalAlignment: Qt.AlignVCenter
