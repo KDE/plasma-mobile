@@ -44,16 +44,13 @@ Rectangle {
     }
 
     onExpandedChanged: {
-        if (expanded) {
-            height = units.gridUnit * 2;
-            summaryText.text = summary;
-        } else {
+        if (expanded && body) {
             height = units.gridUnit * 4;
-            if (body) {
-                summaryText.text = summary + "\n" + body;
-            }
+        } else {
+            height = units.gridUnit * 2;
         }
     }
+
     MouseArea {
         anchors.fill: root
         drag.axis: Drag.XAxis
@@ -129,10 +126,13 @@ Rectangle {
         Text {
             id: summaryText
             anchors.fill: parent
+            clip: true
             horizontalAlignment: Qt.AlignLeft
             verticalAlignment: Qt.AlignVCenter
             color: "white"
-            text: summary
+            text: summary + (root.expanded ? (body ? "\n" + body : '') :
+                                             (body ? '...' : ''))
         }
+
     }
 }
