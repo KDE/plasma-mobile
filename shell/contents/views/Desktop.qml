@@ -44,8 +44,8 @@ Item {
                         notificationsModel.remove(j);
                     }
                 }
-                pendingRemovals = [];
             }
+            pendingRemovals = [];
         }
     }
 
@@ -94,7 +94,7 @@ Item {
         notificationsModel.insert(0, data);
         if (!data["isPersistent"]) {
             pendingRemovals.push(notificationId);
-//             pendingTimer.start();
+            pendingTimer.start();
         }
     }
 
@@ -118,7 +118,6 @@ Item {
         }
 
         onNewData: {
-            var _data = data; // Temp copy to avoid lots of context switching
             var actions = new Array()
             if (data["actions"] && data["actions"].length % 2 == 0) {
                 for (var i = 0; i < data["actions"].length; i += 2) {
@@ -131,7 +130,7 @@ Item {
 
             homescreen.addNotification(
                     sourceName,
-                    _data,
+                    data,
                     actions);
         }
 
