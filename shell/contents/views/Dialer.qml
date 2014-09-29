@@ -84,6 +84,5 @@ Rectangle {
             source: "edit-clear"
             callback: function() { status.text = status.text.substr(0, status.text.length - 1); }
         }
-        //DialerSvgButton { svg: PlasmaCore.Svg { imagePath: "edit-clear.svg" } }
     }
 }
