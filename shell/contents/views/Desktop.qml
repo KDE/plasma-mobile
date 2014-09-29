@@ -1,11 +1,12 @@
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.shell 2.0 as Shell
 import "../components"
 
 Rectangle {
     id: homescreen
-    width: 1024
-    height: 768
+    width: 1080
+    height: 1920
 
     property Item containment;
     property Item wallpaper;
@@ -27,5 +28,12 @@ Rectangle {
             onReleased: {
             }
         }
+    }
+
+    Component.onCompleted: {
+        //configure the view behavior
+        desktop.windowType = Shell.Desktop.Window;
+        desktop.width = width;
+        desktop.height = height;
     }
 }
