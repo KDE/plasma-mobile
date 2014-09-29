@@ -154,11 +154,23 @@ Item {
         }
     }
 
+    Rectangle {
+        id: statusPanel
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+        z: 1
+        height: units.iconSizes.small
+        color: "black"
+    }
+
     ListView {
         id: notificationView
         spacing: units.smallSpacing
         anchors {
-            top: parent.top
+            top: statusPanel.bottom
             bottom: stripe.top
             left: parent.left
             right: parent.right
