@@ -138,6 +138,19 @@ Item {
 
     ListModel {
         id: notificationsModel
+
+        ListElement {
+            appIcon: "call-start"
+            summary: "Missed call from Joe"
+        }
+        ListElement {
+            appIcon: "im-google"
+            summary: "July: Hey! Are you around?"
+        }
+        ListElement {
+            appIcon: "im-google"
+            summary: "July: Hello?"
+        }
     }
 
     ListView {
