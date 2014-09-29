@@ -4,7 +4,6 @@ import "../components"
 
 Rectangle {
     id: dialer
-    anchors.fill: parent;
     color: "white"
     opacity: 0.5
 

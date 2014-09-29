@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
 import "../components"
@@ -32,22 +33,6 @@ Item {
     property Item wallpaper;
     property var pendingRemovals: [];
     property int notificationId: 0;
-    Timer {
-        id: pendingTimer
-        interval: 5000
-        repeat: false
-        onTriggered: {
-            for (var i = 0; i < pendingRemovals.length; ++i) {
-                var id = pendingRemovals[i];
-                for (var j = 0; j < notificationsModel.count; ++j) {
-                    if (notificationsModel.get(j).id == id) {
-                        notificationsModel.remove(j);
-                    }
-                }
-            }
-            pendingRemovals = [];
-        }
-    }
 
     /*
         Notificadtion data object has the following properties:
@@ -62,7 +47,6 @@ Item {
         appRealName
         configurable
     */
-
     function addNotification(source, data, actions) {
         // Do not show duplicated notifications
         // Remove notifications that are sent again (odd, but true)
@@ -95,6 +79,24 @@ Item {
         if (!data["isPersistent"]) {
             pendingRemovals.push(notificationId);
             pendingTimer.start();
+        }
+    }
+
+
+    Timer {
+        id: pendingTimer
+        interval: 5000
+        repeat: false
+        onTriggered: {
+            for (var i = 0; i < pendingRemovals.length; ++i) {
+                var id = pendingRemovals[i];
+                for (var j = 0; j < notificationsModel.count; ++j) {
+                    if (notificationsModel.get(j).id == id) {
+                        notificationsModel.remove(j);
+                    }
+                }
+            }
+            pendingRemovals = [];
         }
     }
 
@@ -151,6 +153,33 @@ Item {
         ListElement {
             appIcon: "im-google"
             summary: "July: Hello?"
+        }
+    }
+
+    Dialer {
+        id: dialer
+        anchors {
+            left: parent.left
+            top: statusPanel.bottom
+            right: parent.right
+            bottom: parent.bottom
+        }
+        z: 20
+        opacity: 0
+        visible: false
+
+        Behavior on opacity {
+            NumberAnimation { properties: "opacity"; duration: 100 }
+        }
+
+        onVisibleChanged: {
+            opacity = visible ? 0.9 : 0;
+        }
+
+        onCallingChanged: {
+            if (!calling) {
+                opacity = 0;
+            }
         }
     }
 
@@ -247,7 +276,9 @@ Item {
                 id: phoneIcon
                 svg: stripeIcons
                 elementId: "phone"
-                callback: function() { console.log("Start phone") }
+                callback: function() {
+                    dialer.visible = true;
+                }
             }
 
             HomeLauncherSvg {
