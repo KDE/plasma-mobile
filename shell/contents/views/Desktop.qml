@@ -176,7 +176,7 @@ Item {
                 }
             }
 
-        moveDisplaced: Transition {
+        removeDisplaced: Transition {
             SequentialAnimation {
                 PauseAnimation { duration: 600 }
                 NumberAnimation { properties: "x,y"; duration: 100 }
@@ -202,8 +202,10 @@ Item {
 
     Component.onCompleted: {
         //configure the view behavior
-        desktop.windowType = Shell.Desktop.Window;
-        desktop.width = width;
-        desktop.height = height;
+        if (desktop) {
+            desktop.windowType = Shell.Desktop.Window;
+            desktop.width = width;
+            desktop.height = height;
+        }
     }
 }
