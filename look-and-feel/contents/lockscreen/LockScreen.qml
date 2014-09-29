@@ -106,7 +106,6 @@ Leaves {
             running: parent.opacity == 1
             onTriggered: {
                 stripe.opacity = 0;
-//                 console.log("CODE SO FAR: " + stripe.code);
                 lockscreen.tryUnlock(stripe.code);
                 stripe.code = '';
             }
