@@ -27,8 +27,8 @@ Item {
         }
 
         onPressAndHold: {
-            if (longHold.visible) {
-                addNumber(longHold.text);
+            if (parent.sub.length > 0) {
+                addNumber(parent.sub);
             } else {
                 addNumber(parent.text);
             }

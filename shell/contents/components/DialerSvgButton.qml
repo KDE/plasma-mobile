@@ -8,6 +8,7 @@ Item {
     property string text
     property string sub
     property alias svg: icon.svg
+    property alias elementId: icon.elementId
 
     PlasmaCore.SvgItem{
         id: icon
@@ -27,8 +28,8 @@ Item {
         }
 
         onPressAndHold: {
-            if (longHold.visible) {
-                addNumber(longHold.text);
+            if (parent.sub.length > 0) {
+                addNumber(parent.sub);
             } else {
                 addNumber(parent.text);
             }

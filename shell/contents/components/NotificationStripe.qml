@@ -69,8 +69,8 @@ MouseArea {
     PlasmaCore.IconItem {
         id: icon
         width: units.iconSizes.medium
-        anchors.verticalCenter: parent.verticalCenter
         height: width
+        anchors.verticalCenter: parent.verticalCenter
         x: units.largeSpacing
         y: 0
         source: appIcon && appIcon.length > 0 ? appIcon : "im-user"
