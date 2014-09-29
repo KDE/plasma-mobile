@@ -20,13 +20,15 @@
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-Rectangle {
+MouseArea {
     id: root
 
-    color: "#00000000"
+
     height: units.gridUnit * 2
     width: parent.width
     anchors.bottomMargin: 10
+    drag.axis: Drag.XAxis
+    drag.target: root
 
     property bool expanded: false
     property var textGradient: Gradient {
@@ -51,22 +53,18 @@ Rectangle {
         }
     }
 
-    MouseArea {
-        anchors.fill: root
-        drag.axis: Drag.XAxis
-        drag.target: root
-        onReleased: {
-            if (drag.active) {
-                if (parent.x > width / 4 || parent.x < width / -4) {
-                    notificationsModel.remove(index);
-                } else {
-                    parent.x = 0;
-                }
+    onReleased: {
+        if (drag.active) {
+            if (x > width / 4 || x < width / -4) {
+                notificationsModel.remove(index);
             } else {
-                parent.expanded = !parent.expanded;
+                x = 0;
             }
+        } else {
+            expanded = !expanded;
         }
     }
+
 
     PlasmaCore.IconItem {
         id: icon
@@ -134,5 +132,21 @@ Rectangle {
                                              (body ? '...' : ''))
         }
 
+    }
+
+    Rectangle {
+        id: extraArea
+        width: parent.width
+        height: parent.width
+        anchors {
+            left: summaryArea.right
+            top: parent.top
+        }
+
+        gradient: root.textGradient
+        Rectangle {
+            anchors.fill: parent
+            color: textGradientOverlay
+        }
     }
 }
