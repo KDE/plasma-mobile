@@ -3,12 +3,11 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 Rectangle {
     id: root
+
     color: "#00000000"
     height: units.gridUnit * 2
-    anchors {
-        bottomMargin: units.smallSpacing
-        topMargin: units.smallSpacing
-    }
+    width: parent.width
+    anchors.bottomMargin: 10
 
     property var textGradient: Gradient {
                 GradientStop { position: 1.0; color: "#FF00000C" }
@@ -55,7 +54,7 @@ Rectangle {
     }
 
     Rectangle {
-        id: summary
+        id: summaryArea
         width: parent.width - icon.width - rounded.width - (units.largeSpacing * 2)
         height: parent.height
 
@@ -75,7 +74,13 @@ Rectangle {
             horizontalAlignment: Qt.AlignLeft
             verticalAlignment: Qt.AlignVCenter
             color: "white"
-            text: "Hoo ha!"
+            text: summary
         }
+/*
+        MouseArea {
+            anchors.fill: parent
+            drag.axis: Drag.YAxis
+            drag.target: parent
+        }*/
     }
 }
