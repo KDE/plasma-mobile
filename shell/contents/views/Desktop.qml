@@ -215,10 +215,18 @@ Item {
             font.pixelSize: height / 2
         }
         MouseArea {
+            property int oldMouseY: 0
+
             anchors.fill: parent
-            onPressed: slidingPanel.visible = true;
-            onPositionChanged: slidingPanel.offset = mouse.y;
-            onReleased: slidingPanel.updateState(mouse.y);
+            onPressed: {
+                oldMouseY = mouse.y;
+                slidingPanel.visible = true;
+            }
+            onPositionChanged: {
+                slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY);
+                oldMouseY = mouse.y;
+            }
+            onReleased: slidingPanel.updateState();
         }
     }
 

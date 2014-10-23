@@ -29,14 +29,12 @@ Window {
 
     color: "transparent"
 
-    function updateState(y) {
+    function updateState() {
         var delta = offset - mouseArea.startOffset;
         if (delta > units.gridUnit * 8) {
             mouseArea.state = "open";
-            mouseArea.startOffset = units.iconSizes.large;
         } else if (delta < -units.gridUnit * 8) {
             mouseArea.state = "closed";
-            mouseArea.startOffset = units.iconSizes.large;
         } else {
             mouseArea.state = mouseArea.startState;
         }
@@ -45,7 +43,8 @@ Window {
 
     onVisibleChanged: {
         if (visible) {
-            mouseArea.state = "dragging";
+            mouseArea.state = "draggingFromClosed";
+            mouseArea.startOffset = units.gridUnit * 4;
         }
     }
 
@@ -57,25 +56,27 @@ Window {
         clip: true
         state: "closed"
 
-        property int startY: 0
+        property int oldMouseY: 0
         property int startOffset: units.iconSizes.large;
         property string startState: "closed"
         onPressed: {
             startState = state;
-            startY = mouse.y;
             startOffset = window.offset;
-            state = "dragging";
+            oldMouseY = mouse.y;
+            state = "draggingFromOpen";
+            window.offset = startOffset;
         }
         onPositionChanged: {
-            window.offset = Math.min(slidingArea.height, startOffset + (mouse.y - startY));
+            window.offset = window.offset + (mouse.y - oldMouseY);
+            oldMouseY = mouse.y;
         }
-        onReleased: window.updateState(mouse.y)
+        onReleased: window.updateState()
 
         Rectangle {
             id: slidingArea
             width: parent.width
             height: parent.height
-            y: -height + window.offset
+            y: Math.min(0, -height + window.offset)
 
             color: Qt.rgba(0, 0, 0, 0.7)
             Rectangle {
@@ -106,16 +107,21 @@ Window {
                 }
             },
             State {
-                name: "dragging"
+                name: "draggingFromOpen"
+            },
+            State {
+                name: "draggingFromClosed"
                 PropertyChanges {
-                    id: dragChange
                     target: window
-                    offset: mouseArea.startOffset
+                    offset: units.gridUnit * 4
                 }
             }
         ]
 
         transitions: [
+            Transition {
+                to: "draggingFromOpen"
+            },
             Transition {
                 SequentialAnimation {
                     PropertyAnimation {
