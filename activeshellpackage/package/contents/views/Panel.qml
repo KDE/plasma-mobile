@@ -46,20 +46,28 @@ PlasmaCore.FrameSvgItem {
         visible = true
     }
 
+    Item {
+        id: containmentParent
+        anchors {
+            fill: parent
+            bottomMargin: root.margins.bottom
+        }
+    }
     MouseEventListener {
+        z: 999
         anchors.fill: parent
-        property int startMouseY
+        property int oldMouseY
         onPressed: {
-            startMouseY = mouse.screenY;
+            topSlidingPanel.visible = true;
+            root.state = "draggingFromClosed";
+            oldMouseY = mouse.screenY;
+            panel.raise();
         }
         onPositionChanged: {
-            if (!topSlidingPanel.visible && mouse.screenY - startMouseY > units.gridUnit * 2) {
-                topSlidingPanel.visible = true
-            }
-            topSlidingPanel.y = Math.min(0, -topSlidingPanel.height + mouse.screenY);
+            topSlidingPanel.y = Math.min(0, topSlidingPanel.y + mouse.screenY - oldMouseY);
+            oldMouseY = mouse.screenY;
         }
         onReleased: {
-            root.state = "none"
 
             // if more than half of pick & launch panel is visible then make it totally visible.
             if (topSlidingPanel.y > -(topSlidingPanel.height - windowListContainer.height)/2) {
@@ -71,63 +79,46 @@ PlasmaCore.FrameSvgItem {
             } else {
                 //Only the small top panel
                 root.state = "Hidden"
-            }
+            }root.state = "Tasks";
         }
 
-        Item {
-            id: containmentParent
-            anchors {
-                fill: parent
-                bottomMargin: root.margins.bottom
-            }
-        }
+        
     }
+
     PlasmaCore.Dialog {
         id: topSlidingPanel
         visible: false
         location: PlasmaCore.Types.TopEdge
         type: PlasmaCore.Dialog.Dock
         hideOnWindowDeactivate: true
+        onYChanged: panel.distance + y + height
 
         mainItem: MouseEventListener {
             width: root.width
             height: Screen.desktopAvailableHeight * 0.9
 
-            property int startMouseY
-            property int startY
-            property bool changeState: false
+            property int oldMouseY
             property string oldState
 
             onPressed: {
                 oldState = root.state;
-                root.state = "none";
-                startMouseY = mouse.screenY;
-                startY = topSlidingPanel.y;
-                changeState = false;
+                var startY = topSlidingPanel.y;
+                root.state = "draggingFromOpen";
+                topSlidingPanel.y = startY;
+                oldMouseY = mouse.screenY;
             }
             onPositionChanged: {
-                if (root.state != "none") {
-                    return;
-                }
-                if (Math.abs(mouse.screenY - startMouseY) > units.gridUnit * 2) {
-                    changeState = true
-                }
-                topSlidingPanel.y = Math.min(0, startY +  mouse.screenY - startMouseY);
+                topSlidingPanel.y = Math.min(0, topSlidingPanel.y + mouse.screenY - oldMouseY);
+                oldMouseY = mouse.screenY;
             }
             onReleased: {
-                if (!changeState) {
-                    root.state = oldState;
-                    return;
-                }
-                //oldState = root.state
-                //root.state = "none"
 
                 // if more than half of pick & launch panel is visible then make it totally visible.
                 if ((topSlidingPanel.y > -(topSlidingPanel.height - windowListContainer.height)/2) ) {
                     //the biggest one, Launcher
                     root.state = "Launcher"
                 } else if ((oldState == "Hidden" && topSlidingPanel.height + topSlidingPanel.y > windowListContainer.height/2) ||
-                        (topSlidingPanel.height + topSlidingPanel.y > (windowListContainer.height / 5) * 6)) {
+                        (topSlidingPanel.height + units.gridUnit * 2 + topSlidingPanel.y > (windowListContainer.height / 5) * 4)) {
                     //show only the taskbar: require a smaller quantity of the screen uncovered when the previous state is hidden
                     root.state = "Tasks"
                 } else {
@@ -158,6 +149,9 @@ PlasmaCore.FrameSvgItem {
                     Layout.fillWidth: true
                     height: units.gridUnit * 15
                 }
+                Item {
+                    Layout.minimumHeight: units.gridUnit * 2
+                }
             }
         }
     }
@@ -183,20 +177,30 @@ PlasmaCore.FrameSvgItem {
             name: "Tasks"
             PropertyChanges {
                 target: topSlidingPanel
-                y: -topSlidingPanel.height + windowListContainer.height
+                y: -topSlidingPanel.height + windowListContainer.height + units.gridUnit * 2
                 visible: true
             }
         },
         State {
-            name: "none"
+            name: "draggingFromOpen"
             PropertyChanges {
                 target: topSlidingPanel
-                y: y
+                visible: true
+            }
+        },
+        State {
+            name: "draggingFromClosed"
+            PropertyChanges {
+                target: topSlidingPanel
+                y: -topSlidingPanel.height + units.gridUnit * 5
                 visible: true
             }
         }
     ]
     transitions: [
+        Transition {
+            to: "draggingFromOpen"
+        },
         Transition {
             SequentialAnimation {
                 PropertyAnimation {
