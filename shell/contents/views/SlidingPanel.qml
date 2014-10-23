@@ -28,29 +28,89 @@ Window {
 
     color: "transparent"
 
+    function updateState() {
+        mouseArea.state = offset > slidingArea.height / 2 ? "open" : "closed";
+        mouseArea.startOffset = units.iconSizes.large;
+    }
+
+    onVisibleChanged: {
+        if (visible) {
+            mouseArea.state = "dragging";
+        }
+    }
+
     MouseArea {
+        id: mouseArea
+        y: units.iconSizes.small
         width: window.width
-        height: window.height
+        height: window.height - y
+        clip: true
         state: "closed"
 
         property int startY: 0
-        property int startOffset: 0;
+        property int startOffset: units.iconSizes.large;
         onPressed: {
             startY = mouse.y;
             startOffset = window.offset;
+            state = "dragging";
         }
         onPositionChanged: {
-            window.offset = Math.min(height, startOffset + (mouse.y - startY));
+            window.offset = Math.min(slidingArea.height, startOffset + (mouse.y - startY));
         }
+        onReleased: window.updateState()
 
         Rectangle {
+            id: slidingArea
             width: window.width
             height: window.height
             y: -height + window.offset
 
             color: Qt.rgba(0, 0, 0, 0.8)
         }
+
+        states: [
+            State {
+                name: "closed"
+                PropertyChanges {
+                    target: window
+                    offset: 0
+                }
+            },
+            State {
+                name: "open"
+                PropertyChanges {
+                    target: window
+                    offset: slidingArea.height
+                }
+            },
+            State {
+                name: "dragging"
+                PropertyChanges {
+                    id: dragChange
+                    target: window
+                    offset: mouseArea.startOffset
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                SequentialAnimation {
+                    PropertyAnimation {
+                        target: window
+                        duration: units.longDuration
+                        easing: Easing.InOutQuad
+                        properties: "offset"
+                    }
+                    ScriptAction {
+                        script: {
+                            if (mouseArea.state == "closed") {
+                                window.visible = false;
+                            }
+                        }
+                    }
+                }
+            }
+        ]
     }
-
-
 }

@@ -218,6 +218,7 @@ Item {
             anchors.fill: parent
             onPressed: slidingPanel.visible = true;
             onPositionChanged: slidingPanel.offset = mouse.y
+            onReleased: slidingPanel.updateState();
         }
     }
 
