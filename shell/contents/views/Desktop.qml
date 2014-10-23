@@ -214,6 +214,17 @@ Item {
             verticalAlignment: Qt.AlignVCenter
             font.pixelSize: height / 2
         }
+        MouseArea {
+            anchors.fill: parent
+            onPressed: slidingPanel.visible = true;
+            onPositionChanged: slidingPanel.offset = mouse.y
+        }
+    }
+
+    SlidingPanel {
+        id: slidingPanel
+        width: homescreen.width
+        height: homescreen.height
     }
 
     ListView {
@@ -331,13 +342,13 @@ Item {
         anchors {
             top: stripe.bottom
             bottom: parent.bottom
-            horizontalCenter: parent.horizontalCenter
+            left: parent.left
+            right: parent.right
             topMargin: units.smallSpacing
         }
         z: 1
         cellWidth: stripe.height * 2
         cellHeight: cellWidth
-        width: cellWidth * 4
         model: PlasmaCore.DataModel { dataSource: applicationsSource }
         snapMode: GridView.SnapToRow
         clip: true
