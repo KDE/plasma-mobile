@@ -11,10 +11,7 @@ MouseArea {
 
     PlasmaCore.IconItem {
         id: icon
-        anchors {
-            top: root.top
-            horizontalCenter: root.horizontalCenter
-        }
+        anchors.centerIn: parent
         width: units.iconSizes.large
         height: width
         source: iconName
@@ -25,14 +22,14 @@ MouseArea {
 
         anchors {
             top: icon.bottom
-            left: parent.left
-            right: parent.right
+            left: icon.left
+            right: icon.right
         }
 
+        wrapMode: Text.WordWrap
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter
 
-        font.pixelSize: theme.smallestFont.pointSize
         text: name
         color: "white"
     }
