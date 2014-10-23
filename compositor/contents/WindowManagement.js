@@ -107,35 +107,20 @@ function mapApplicationSurface(surface) {
         return;
     }
 
-    // Window position: y is hard coded to the top bar height
-    var pos = Qt.point(0, compositorRoot.topBarHeight);
-
     // Request a view for this output although with phones will
     // likely have just one output
     var child = compositor.viewForOutput(surface, _greenisland_output);
 
     // Create and setup window container
-    var window = component.createObject(compositorRoot, {"child": child});
+    var window = component.createObject(compositorRoot.layers.windows, {"child": child});
     window.child.parent = window;
     window.child.touchEventsEnabled = true;
+    //surface.requestSize(window.parent.width, window.parent.height);
+    window.anchors.top = window.parent.top;
+    window.anchors.left = window.parent.left;
     window.width = surface.size.width;
     window.height = surface.size.height;
-
-    // Move window
-    window.x = pos.x;
-    window.y = pos.y;
-
-    // Reparent and give focus
-    window.parent = compositorRoot.layers.windows;
     window.child.takeFocus();
-
-    // Set size to parent (windows layer)
-    window.child.resizeSurfaceToItem = true;
-    window.width = window.parent.width;
-    window.height = window.parent.height;
-
-    // Log coordinates for debugging purpose
-    console.debug("\tposition:", window.x + "," + window.y);
 
     // Run map animation
     if (typeof(window.runMapAnimation) != "undefined")
