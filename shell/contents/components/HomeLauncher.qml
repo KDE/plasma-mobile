@@ -1,14 +1,19 @@
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kio 1.0 as Kio
 
 MouseArea {
     id: root
     width: applications.cellWidth
     height: width
     onClicked: {
-        console.log("Clicked: " + width)
+        console.log("Clicked: " + model.entryPath)
+        krun.openUrl(model.entryPath)
     }
 
+    Kio.KRun {
+        id: krun
+    }
     PlasmaCore.IconItem {
         id: icon
         anchors.centerIn: parent
