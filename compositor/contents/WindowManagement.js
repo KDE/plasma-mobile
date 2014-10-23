@@ -38,10 +38,13 @@ function surfaceMapped(surface) {
 
     // Call a specialized method to deal with application or
     // shell windows
-    if (typeof(firstView.role) == "undefined")
-        mapApplicationSurface(surface);
-    else
+    var isShellWindow =
+        (typeof(firstView.role) != "undefined") ||
+        (surface.className == "plasmashell.desktop");
+    if (isShellWindow)
         mapShellSurface(surface, firstView);
+    else
+        mapApplicationSurface(surface);
 }
 
 function surfaceUnmapped(surface) {
