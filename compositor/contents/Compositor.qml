@@ -22,6 +22,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import "WindowManagement.js" as WindowManagement
 
 Rectangle {
+    property bool showHome: true
     readonly property alias layers: layers
     readonly property real topBarHeight: units.iconSizes.small
 
@@ -39,22 +40,23 @@ Rectangle {
         onSurfaceDestroyed: WindowManagement.surfaceDestroyed(surface)
     }
 
-    Item {
+    QtObject {
         readonly property alias desktop: desktopLayer
         readonly property alias windows: windowsLayer
 
         id: layers
+    }
+
+    Item {
+        id: desktopLayer
         anchors.fill: parent
+        z: showHome ? 2 : 1
+    }
 
-        Item {
-            id: desktopLayer
-            anchors.fill: parent
-        }
-
-        Item {
-            id: windowsLayer
-            anchors.fill: parent
-            anchors.topMargin: topBarHeight
-        }
+    Item {
+        id: windowsLayer
+        anchors.fill: parent
+        anchors.topMargin: topBarHeight
+        z: showHome ? 1 : 2
     }
 }
