@@ -368,7 +368,6 @@ Item {
     Component.onCompleted: {
         //configure the view behavior
         if (desktop) {
-            desktop.windowType = Shell.Desktop.Window;
             desktop.width = width;
             desktop.height = height;
         }
