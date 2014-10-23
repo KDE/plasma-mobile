@@ -1,0 +1,42 @@
+Name        : plasma-phone-components
+Version     : 0.1.0
+Release     : 1
+Group       : System/GUI/Other
+License     : GPLv2+
+Summary     : Plasma Phone Components
+Description : |
+    Plasma Phone Components.
+URL         : http://www.kde.org
+Sources     : 
+    - "%{name}-%{version}.tar.xz"
+SetupOptions: -q -n %{name}-%{version}
+BuildArch   : noarch
+
+Requires:
+    - greenisland
+    - plasma-workspace
+    - breeze-icon-theme
+
+PkgBR:
+    - extra-cmake-modules
+    - kf5-rpm-macros
+    - qt5-tools
+    - plasma-devel
+PkgConfigBR:
+    - Qt5Core
+    - Qt5DBus
+    - Qt5Xml
+    - Qt5Network
+    - Qt5Gui
+    - Qt5Widgets
+    - Qt5Test
+    - Qt5Qml
+    - Qt5Quick
+
+Configure: none
+Builder: none
+
+Files:
+    - "%{_kf5_sharedir}/plasma/*"
+    - "%{_kf5_sharedir}/wallpapers/*"
+    - "%{_kf5_servicesdir}/*.desktop"
