@@ -1,3 +1,6 @@
+[kdeglobals][KDE]
+LookAndFeelPackage=org.kde.plasma.satellite
+
 [Desktop]
 Containment=null
 ToolBox=
