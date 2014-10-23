@@ -196,7 +196,7 @@ Item {
         }
         z: 1
         height: units.iconSizes.small
-        color: "black"
+        color: Qt.rgba(0, 0, 0, 0.7)
 
         PlasmaCore.DataSource {
             id: timeSource
@@ -217,8 +217,8 @@ Item {
         MouseArea {
             anchors.fill: parent
             onPressed: slidingPanel.visible = true;
-            onPositionChanged: slidingPanel.offset = mouse.y
-            onReleased: slidingPanel.updateState();
+            onPositionChanged: slidingPanel.offset = mouse.y;
+            onReleased: slidingPanel.updateState(mouse.y);
         }
     }
 

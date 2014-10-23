@@ -19,6 +19,7 @@
 
 import QtQuick 2.0
 import QtQuick.Window 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Window {
     id: window
@@ -28,9 +29,18 @@ Window {
 
     color: "transparent"
 
-    function updateState() {
-        mouseArea.state = offset > slidingArea.height / 2 ? "open" : "closed";
-        mouseArea.startOffset = units.iconSizes.large;
+    function updateState(y) {
+        var delta = offset - mouseArea.startOffset;
+        if (delta > units.gridUnit * 8) {
+            mouseArea.state = "open";
+            mouseArea.startOffset = units.iconSizes.large;
+        } else if (delta < -units.gridUnit * 8) {
+            mouseArea.state = "closed";
+            mouseArea.startOffset = units.iconSizes.large;
+        } else {
+            mouseArea.state = mouseArea.startState;
+        }
+        mouseArea.startState = mouseArea.state;
     }
 
     onVisibleChanged: {
@@ -49,7 +59,9 @@ Window {
 
         property int startY: 0
         property int startOffset: units.iconSizes.large;
+        property string startState: "closed"
         onPressed: {
+            startState = state;
             startY = mouse.y;
             startOffset = window.offset;
             state = "dragging";
@@ -57,15 +69,25 @@ Window {
         onPositionChanged: {
             window.offset = Math.min(slidingArea.height, startOffset + (mouse.y - startY));
         }
-        onReleased: window.updateState()
+        onReleased: window.updateState(mouse.y)
 
         Rectangle {
             id: slidingArea
-            width: window.width
-            height: window.height
+            width: parent.width
+            height: parent.height
             y: -height + window.offset
 
-            color: Qt.rgba(0, 0, 0, 0.8)
+            color: Qt.rgba(0, 0, 0, 0.7)
+            Rectangle {
+                width: parent.width / 4
+                height: units.gridUnit/2
+                color: "yellow"
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.bottom
+                    bottomMargin: units.gridUnit/2
+                }
+            }
         }
 
         states: [
