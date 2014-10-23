@@ -120,6 +120,9 @@ function mapApplicationSurface(surface) {
     window.anchors.left = window.parent.left;
     window.width = surface.size.width;
     window.height = surface.size.height;
+
+    // Switch to the applications layer and take focus
+    compositorRoot.showHome = false;
     window.child.takeFocus();
 
     // Run map animation
@@ -153,6 +156,9 @@ function mapShellSurface(surface, child) {
     window.anchors.left = window.parent.left;
     window.width = surface.size.width;
     window.height = surface.size.height;
+
+    // Switch to the desktop layer and take focus
+    compositorRoot.showHome = true;
     window.child.takeFocus();
 
     // Add surface to the model
