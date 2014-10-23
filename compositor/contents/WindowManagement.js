@@ -145,22 +145,15 @@ function mapShellSurface(surface, child) {
     }
 
     // Create and setup window container
-    var window = component.createObject(compositorRoot, {"child": child});
+    // XXX: We only support desktop roles for now
+    var window = component.createObject(compositorRoot.layers.desktop, {"child": child});
     window.child.parent = window;
     window.child.touchEventsEnabled = true;
+    window.anchors.top = window.parent.top;
+    window.anchors.left = window.parent.left;
     window.width = surface.size.width;
     window.height = surface.size.height;
-
-    // Set initial position
-    // XXX: We only support desktop roles for now
-    window.x = window.y = 0;
-
-    // Set appropriate parent
-    // XXX: We only support desktop roles for now
-    window.parent = compositorRoot.layers.desktop;
-
-    // Log coordinates for debugging purpose
-    console.debug("\tposition:", window.x + "," + window.y);
+    window.child.takeFocus();
 
     // Add surface to the model
     surfaceModel.append({"surface": surface, "window": window});
