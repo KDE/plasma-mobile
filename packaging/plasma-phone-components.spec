@@ -20,6 +20,7 @@ Source100:  plasma-phone-components.yaml
 Requires:   greenisland
 Requires:   plasma-workspace
 Requires:   breeze-icon-theme
+Requires:   oxygen-fonts
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(Qt5Xml)

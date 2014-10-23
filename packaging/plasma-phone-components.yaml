@@ -16,6 +16,7 @@ Requires:
     - greenisland
     - plasma-workspace
     - breeze-icon-theme
+    - oxygen-fonts
 
 PkgBR:
     - extra-cmake-modules
