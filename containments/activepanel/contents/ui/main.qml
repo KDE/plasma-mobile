@@ -23,7 +23,7 @@ import org.kde.plasma.plasmoid 2.0
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
-Item {
+MouseArea {
     id: main
     state: height>48?"active":"passive"
 

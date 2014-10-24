@@ -46,13 +46,6 @@ PlasmaCore.FrameSvgItem {
         visible = true
     }
 
-    Item {
-        id: containmentParent
-        anchors {
-            fill: parent
-            bottomMargin: root.margins.bottom
-        }
-    }
     MouseEventListener {
         z: 999
         anchors.fill: parent
@@ -82,7 +75,13 @@ PlasmaCore.FrameSvgItem {
             }
         }
 
-        
+        Item {
+            id: containmentParent
+            anchors {
+                fill: parent
+                bottomMargin: root.margins.bottom
+            }
+        }
     }
 
     PlasmaCore.Dialog {
