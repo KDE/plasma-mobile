@@ -64,20 +64,20 @@ void ApplicationListModel::loadApplications()
     KServiceGroup::List subGroupList = group->entries(true);
 
     // Iterate over all entries in the group
-    for(KServiceGroup::List::ConstIterator it = subGroupList.begin();it != subGroupList.end(); it++) {
-        KSycocaEntry::Ptr groupEntry = (*it);
+    for(KServiceGroup::List::ConstIterator it = subGroupList.constBegin(); it != subGroupList.constEnd(); it++) {
+        const KSycocaEntry::Ptr groupEntry = (*it);
 
         if (groupEntry->isType(KST_KServiceGroup) && groupEntry->name() != "System") {
-            KServiceGroup::Ptr serviceGroup = static_cast<KServiceGroup::Ptr >(groupEntry);
+            KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup *>(groupEntry.data()));
 
             if (!serviceGroup->noDisplay()) {
                 KServiceGroup::List entryGroupList = serviceGroup->entries(true);
 
-                for(KServiceGroup::List::ConstIterator it = entryGroupList.begin();  it != entryGroupList.end(); it++) {
+                for(KServiceGroup::List::ConstIterator it = entryGroupList.constBegin();  it != entryGroupList.constEnd(); it++) {
                     KSycocaEntry::Ptr entry = (*it);
                     ApplicationData data;
                     if (entry->isType(KST_KService)) {
-                        KService::Ptr service = static_cast<KService::Ptr >(entry);
+                        KService::Ptr service(static_cast<KService *>(entry.data()));
                         if (service->isApplication()) {
                             KPluginInfo plugin(service);
                             data.name = plugin.name();
