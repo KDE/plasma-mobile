@@ -27,7 +27,7 @@ import org.kde.kquickcontrolsaddons 2.0
 PlasmaCore.FrameSvgItem {
     id: root
     width: 640
-    height: 32
+    height: 132
     imagePath: "widgets/panel-background"
     enabledBorders: PlasmaCore.FrameSvg.BottomBorder
 
@@ -61,7 +61,7 @@ PlasmaCore.FrameSvgItem {
             topSlidingPanel.visible = true;
             root.state = "draggingFromClosed";
             oldMouseY = mouse.screenY;
-            panel.raise();
+            topSlidingPanel.raise();
         }
         onPositionChanged: {
             topSlidingPanel.y = Math.min(0, topSlidingPanel.y + mouse.screenY - oldMouseY);
@@ -79,7 +79,7 @@ PlasmaCore.FrameSvgItem {
             } else {
                 //Only the small top panel
                 root.state = "Hidden"
-            }root.state = "Tasks";
+            }
         }
 
         
