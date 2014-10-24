@@ -21,6 +21,7 @@ import QtQuick 2.0
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.shell 2.0 as Shell
 import "../activitymanager"
 import "../explorer"
 
