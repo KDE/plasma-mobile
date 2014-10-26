@@ -15,6 +15,7 @@ BuildArch   : noarch
 Requires:
     - greenisland
     - plasma-workspace
+    - plasma-workspace-wallpaper-image
     - breeze-icon-theme
     - oxygen-fonts
     - frameworkintegration
