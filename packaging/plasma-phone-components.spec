@@ -21,6 +21,7 @@ Requires:   greenisland
 Requires:   plasma-workspace
 Requires:   breeze-icon-theme
 Requires:   oxygen-fonts
+Requires:   frameworkintegration
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(Qt5Xml)
@@ -62,6 +63,25 @@ rm -rf %{buildroot}
 # << install pre
 
 # >> install post
+
+# File with environment variables, used by systemd units
+mkdir -p %{buildroot}%{_sharedstatedir}/environment/plasma-phone/plasma-phone.conf <<EOF
+LIBEXEC_PATH="%{_libexecdir}:%{_libdir}/libexec:%{_kf5_libexecdir}"
+QT_QPA_PLATFORM=wayland
+QT_QPA_PLATFORMTHEME=KDE
+QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+XDG_CURRENT_DESKTOP=KDE
+KSCREEN_BACKEND=QScreen
+EOF
+
+# Install systemd units
+install -D -m 644 services/plasma-phone-compositor.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-compositor.service
+install -D -m 644 services/plasma-phone-shell.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-shell.service
+install -D -m 644 services/plasma-phone-kded5.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-kded5.service
+ln -s ../plasma-phone-compositor.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-compositor.service
+ln -s ../plasma-phone-shell.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-shell.service
+ln -s ../plasma-phone-kded5.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-kded5.service
+
 # << install post
 
 %files
@@ -69,5 +89,8 @@ rm -rf %{buildroot}
 %{_kf5_sharedir}/plasma/*
 %{_kf5_sharedir}/wallpapers/*
 %{_kf5_servicesdir}/*.desktop
+%{_sharedstatedir}/environment/plasma-phone/*
+%{_libdir}/systemd/user/*
+%{_libdir}/systemd/user/user-session.target.wants/*
 # >> files
 # << files

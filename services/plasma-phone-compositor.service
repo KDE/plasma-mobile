@@ -1,0 +1,19 @@
+#
+# Copyright (C) 2014 Pier Luigi Fiorini
+#
+# Starts Green Island with the phone compositor plugin.
+#
+
+[Unit]
+Description=Green Island
+Requires=dbus.socket pre-user-session.target
+After=pre-user-session.target
+
+[Service]
+Type=notify
+EnvironmentFile=-/var/lib/environment/compositor/*.conf
+ExecStart=/usr/bin/greenisland $LIPSTICK_OPTIONS -p org.kde.satellite.compositor.phone
+Restart=always
+
+[Install]
+WantedBy=user-session.target
