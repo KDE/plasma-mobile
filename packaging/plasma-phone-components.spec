@@ -75,6 +75,7 @@ KSCREEN_BACKEND=QScreen
 EOF
 
 # Install systemd units
+mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/
 install -D -m 644 services/plasma-phone-compositor.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-compositor.service
 install -D -m 644 services/plasma-phone-shell.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-shell.service
 install -D -m 644 services/plasma-phone-kded5.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-kded5.service
