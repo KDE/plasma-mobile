@@ -65,7 +65,8 @@ rm -rf %{buildroot}
 # >> install post
 
 # File with environment variables, used by systemd units
-mkdir -p %{buildroot}%{_sharedstatedir}/environment/plasma-phone/plasma-phone.conf <<EOF
+mkdir -p %{buildroot}%{_sharedstatedir}/environment/plasma-phone
+cat > %{buildroot}%{_sharedstatedir}/environment/plasma-phone/plasma-phone.conf <<EOF
 LIBEXEC_PATH="%{_libexecdir}:%{_libdir}/libexec:%{_kf5_libexecdir}"
 QT_QPA_PLATFORM=wayland
 QT_QPA_PLATFORMTHEME=KDE
