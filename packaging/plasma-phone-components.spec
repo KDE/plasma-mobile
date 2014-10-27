@@ -76,6 +76,28 @@ XDG_CURRENT_DESKTOP=KDE
 KSCREEN_BACKEND=QScreen
 EOF
 
+# Default configuration for plasmashell
+mkdir -p %{buildroot}%{_kf5_configdir}
+cat > %{buildroot}%{_kf5_configdir}/kdeglobals <<EOF
+[KDE]
+LookAndFeelPackage=org.kde.satellite.phone
+
+[General]
+desktopFont=Oxygen Sans,9,-1,5,50,0,0,0,0,0
+fixed=Oxygen Mono,8,-1,5,50,0,0,0,0,0
+font=Oxygen Sans,9,-1,5,50,0,0,0,0,0
+menuFont=Oxygen Sans,9,-1,5,50,0,0,0,0,0
+smallestReadableFont=Oxygen Sans,7,-1,5,50,0,0,0,0,0
+taskbarFont=Oxygen Sans,9,-1,5,50,0,0,0,0,0
+toolBarFont=Oxygen Sans,8,-1,5,50,0,0,0,0,0
+
+[Icons]
+Theme=breeze
+
+[Theme]
+name=default
+EOF
+
 # Install systemd units
 mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/
 install -D -m 644 services/plasma-phone-compositor.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-compositor.service
@@ -89,6 +111,7 @@ ln -s ../plasma-phone-kded5.service %{buildroot}%{_libdir}/systemd/user/user-ses
 
 %files
 %defattr(-,root,root,-)
+%config %{_kf5_configdir}/kdeglobals
 %{_kf5_sharedir}/plasma/*
 %{_kf5_sharedir}/wallpapers/*
 %{_kf5_servicesdir}/*.desktop

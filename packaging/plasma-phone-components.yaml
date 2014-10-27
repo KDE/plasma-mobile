@@ -40,6 +40,7 @@ Configure: none
 Builder: none
 
 Files:
+    - "%config %{_kf5_configdir}/kdeglobals"
     - "%{_kf5_sharedir}/plasma/*"
     - "%{_kf5_sharedir}/wallpapers/*"
     - "%{_kf5_servicesdir}/*.desktop"
