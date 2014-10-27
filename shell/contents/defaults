@@ -1,5 +1,5 @@
 [kdeglobals][KDE]
-LookAndFeelPackage=org.kde.plasma.satellite
+LookAndFeelPackage=org.kde.satellite.phone
 
 [Desktop]
 Containment=null
