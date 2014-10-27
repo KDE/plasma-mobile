@@ -25,6 +25,9 @@ Item {
     property var child
     property var role: child.surface.windowProperties.role
 
+    width: child.surface && child.surface.size.width >= 0 ? child.surface.size.width : 0
+    height: child.surface && child.surface.size.height >= 0 ? child.surface.size.height : 0
+
     onVisibleChanged: {
         if (child)
             child.surface.clientRenderingEnabled = visible;

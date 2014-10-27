@@ -22,25 +22,26 @@
  */
 
 function surfaceMapped(surface) {
-    // Get the first view and if it has a role property than this
-    // is definitely a shell window
+    // Determine if it's a shell window
     var firstView = compositor.firstViewOf(surface);
-    if (typeof(firstView.role) == "undefined") {
+    var isShellWindow =
+        (typeof(firstView.role) != "undefined") ||
+        (surface.className == "plasmashell.desktop");
+
+    // Print some information
+    if (isShellWindow) {
+        console.debug("Shell surface", surface, "mapped");
+        console.debug("\trole:", firstView.role);
+        console.debug("\tsize:", surface.size.width + "x" + surface.size.height);
+    } else {
         console.debug("Application surface", surface, "mapped");
         console.debug("\tappId:", surface.className);
         console.debug("\ttitle:", surface.title);
-        console.debug("\tsize:", surface.size.width + "x" + surface.size.height);
-    } else {
-        console.debug("Shell surface", surface, "mapped");
-        console.debug("\trole:", firstView.role);
         console.debug("\tsize:", surface.size.width + "x" + surface.size.height);
     }
 
     // Call a specialized method to deal with application or
     // shell windows
-    var isShellWindow =
-        (typeof(firstView.role) != "undefined") ||
-        (surface.className == "plasmashell.desktop");
     if (isShellWindow)
         mapShellSurface(surface, firstView);
     else
@@ -48,25 +49,29 @@ function surfaceMapped(surface) {
 }
 
 function surfaceUnmapped(surface) {
-    // Get the first view and if it has a role property than this
-    // is definitely a shell window
+    // Determine if it's a shell window
     var firstView = compositor.firstViewOf(surface);
+    var isShellWindow =
+        (typeof(firstView.role) != "undefined") ||
+        (surface.className == "plasmashell.desktop");
+
+    // Print some information
     if (typeof(firstView.role) == "undefined") {
-        console.debug("Application surface", surface, "unmapped");
-        console.debug("\tappId:", surface.className);
-        console.debug("\ttitle:", surface.title);
-    } else {
         console.debug("Shell surface", surface, "unmapped");
         console.debug("\trole:", firstView.role);
         console.debug("\tsize:", surface.size.width + "x" + surface.size.height);
+    } else {
+        console.debug("Application surface", surface, "unmapped");
+        console.debug("\tappId:", surface.className);
+        console.debug("\ttitle:", surface.title);
     }
 
     // Call a specialized method to deal with application or
     // shell windows
-    if (typeof(firstView.role) == "undefined")
-        unmapApplicationSurface(surface);
-    else
+    if (isShellWindow)
         unmapShellSurface(surface);
+    else
+        unmapApplicationSurface(surface);
 }
 
 function surfaceDestroyed(surface) {
@@ -143,6 +148,24 @@ function mapShellSurface(surface, child) {
     if (child.output !== _greenisland_output)
         return;
 
+    // Just set z-index and exit if we already created a
+    // window representation
+    var i;
+    for (i = 0; i < surfaceModel.count; i++) {
+        var entry = surfaceModel.get(i);
+
+        if (entry.surface === surface) {
+            // Set the appropriate z-index
+            entry.window.z = (surface.className == "plasmashell.desktop") ? 1 : 0;
+
+            // Switch to the desktop layer and take focus
+            compositorRoot.showHome = true;
+            entry.window.child.takeFocus();
+
+            return;
+        }
+    }
+
     // Create surface item
     var component = Qt.createComponent("ShellWindowWrapper.qml");
     if (component.status !== Component.Ready) {
@@ -155,10 +178,13 @@ function mapShellSurface(surface, child) {
     var window = component.createObject(compositorRoot.layers.desktop, {"child": child});
     window.child.parent = window;
     window.child.touchEventsEnabled = true;
-    window.anchors.top = window.parent.top;
-    window.anchors.left = window.parent.left;
+    window.x = window.y = 0;
     window.width = surface.size.width;
     window.height = surface.size.height;
+
+    // Set a higher z-index to windows created by the shell but
+    // not handled by the protocol (i.e. not home screen)
+    window.z = (surface.className == "plasmashell.desktop") ? 1 : 0;
 
     // Switch to the desktop layer and take focus
     compositorRoot.showHome = true;
@@ -178,4 +204,17 @@ function unmapApplicationSurface(surface) {
 }
 
 function unmapShellSurface(surface) {
+    // Lower unmapped shell surfaces not handled by the protocol
+    // (i.e. not home screen like sliding window)
+    if (surface.className == "plasmashell.desktop") {
+        var i;
+        for (i = 0; i < surfaceModel.count; i++) {
+            var entry = surfaceModel.get(i);
+
+            if (entry.surface === surface) {
+                entry.window.z = -1;
+                return;
+            }
+        }
+    }
 }
