@@ -101,8 +101,8 @@ EOF
 # Install systemd units
 mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/
 for service in compositor kbuildsycoca5 kdeinit ksyncdbusenv shell; do
-    install -D -m 644 services/plasma-phone-${service}.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-${service}.service
-    ln -s ../plasma-phone-${service}.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-${service}.service
+install -D -m 644 services/plasma-phone-${service}.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-${service}.service
+ln -s ../plasma-phone-${service}.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-${service}.service
 done
 
 # << install post
@@ -116,5 +116,6 @@ done
 %{_sharedstatedir}/environment/plasma-phone/*
 %{_libdir}/systemd/user/*
 %{_libdir}/systemd/user/user-session.target.wants/*
+%{_libdir}/qt5/qml/*
 # >> files
 # << files

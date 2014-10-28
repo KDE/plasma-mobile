@@ -47,3 +47,4 @@ Files:
     - "%{_sharedstatedir}/environment/plasma-phone/*"
     - "%{_libdir}/systemd/user/*"
     - "%{_libdir}/systemd/user/user-session.target.wants/*"
+    - "%{_libdir}/qt5/qml/*"
