@@ -13,7 +13,6 @@ Version:    0.1.0
 Release:    1
 Group:      System/GUI/Other
 License:    GPLv2+
-BuildArch:  noarch
 URL:        http://www.kde.org
 Source0:    %{name}-%{version}.tar.xz
 Source100:  plasma-phone-components.yaml

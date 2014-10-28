@@ -10,7 +10,6 @@ URL         : http://www.kde.org
 Sources     : 
     - "%{name}-%{version}.tar.xz"
 SetupOptions: -q -n %{name}-%{version}
-BuildArch   : noarch
 
 Requires:
     - greenisland
