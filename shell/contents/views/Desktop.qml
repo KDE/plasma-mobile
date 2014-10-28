@@ -22,6 +22,7 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
+import org.kde.satellite.components 0.1 as SatelliteComponents
 import "../components"
 
 Item {
@@ -330,20 +331,8 @@ Item {
         }
     }
 
-    PlasmaCore.DataSource {
-        id: applicationsSource
-
-        engine: "apps"
-        interval: 0
-        connectedSources: sources
-
-        onSourceAdded: {
-            connectSource(source);
-        }
-
-        onSourceRemoved: {
-            disconnectSource(source);
-        }
+    SatelliteComponents.ApplicationListModel {
+        id: appListModel
     }
 
     GridView {
@@ -358,7 +347,7 @@ Item {
         z: 1
         cellWidth: stripe.height * 2
         cellHeight: cellWidth
-        model: PlasmaCore.DataModel { dataSource: applicationsSource }
+        model: appListModel
         snapMode: GridView.SnapToRow
         clip: true
         delegate: HomeLauncher {}

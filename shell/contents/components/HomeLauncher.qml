@@ -7,19 +7,16 @@ MouseArea {
     width: applications.cellWidth
     height: width
     onClicked: {
-        console.log("Clicked: " + model.entryPath)
-        krun.openUrl(model.entryPath)
+        console.log("Clicked: " + model.ApplicationStorageIdRole)
+        appListModel.runApplication(model.ApplicationStorageIdRole)
     }
 
-    Kio.KRun {
-        id: krun
-    }
     PlasmaCore.IconItem {
         id: icon
         anchors.centerIn: parent
         width: units.iconSizes.large
         height: width
-        source: iconName
+        source: model.ApplicationIconRole
     }
 
     Text {
@@ -35,7 +32,8 @@ MouseArea {
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter
 
-        text: name
+        text: model.ApplicationNameRole
+        font.pixelSize: theme.smallestFont.pixelSize
         color: "white"
     }
 }

@@ -2,7 +2,7 @@
 LookAndFeelPackage=org.kde.satellite.phone
 
 [Desktop]
-Containment=null
+Containment=org.kde.desktopcontainment
 ToolBox=
 
 [Desktop][ContainmentActions]
