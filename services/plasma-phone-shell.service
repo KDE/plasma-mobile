@@ -1,18 +1,17 @@
 #
-# Copyright (C) 2014 Pier Luigi Fiorini
+# Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 #
-# Starts Green Island with the phone compositor plugin.
+# Starts Plasma shell for phones.
 #
 
 [Unit]
 Description=Plasma Phone UI
-Requires=dbus.socket plasma-phone-compositor.service
-After=plasma-phone-kded5.service
+Requires=dbus.socket
+After=plasma-phone-compositor.service plasma-phone-ksyncdbusenv.service plasma-phone-kbuildsycoca.service plasma-phone-kdeinit.service
 
 [Service]
-Type=notify
 EnvironmentFile=-/var/lib/environment/plasma-phone/*.conf
-ExecStart=/usr/bin/plasmashell -n -p org.kde.satellite.phone
+ExecStart=/usr/bin/plasmashell -p org.kde.satellite.phone -n
 Restart=always
 
 [Install]

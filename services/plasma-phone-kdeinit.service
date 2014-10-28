@@ -1,0 +1,19 @@
+#
+# Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+#
+# Starts kdeinit needed by the phone UI.
+#
+
+[Unit]
+Description=kdeinit
+Requires=dbus.socket
+
+[Service]
+Type=oneshot
+Environment=LD_BIND_NOW=true
+EnvironmentFile=-/var/lib/environment/plasma-phone/*.conf
+ExecStart=/usr/lib/libexec/kf5/start_kdeinit_wrapper --kded +kcminit_startup
+Restart=always
+
+[Install]
+WantedBy=user-session.target

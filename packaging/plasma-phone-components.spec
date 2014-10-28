@@ -100,12 +100,10 @@ EOF
 
 # Install systemd units
 mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/
-install -D -m 644 services/plasma-phone-compositor.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-compositor.service
-install -D -m 644 services/plasma-phone-shell.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-shell.service
-install -D -m 644 services/plasma-phone-kded5.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-kded5.service
-ln -s ../plasma-phone-compositor.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-compositor.service
-ln -s ../plasma-phone-shell.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-shell.service
-ln -s ../plasma-phone-kded5.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-kded5.service
+for service in compositor kbuildsycoca5 kdeinit ksyncdbusenv shell; do
+    install -D -m 644 services/plasma-phone-${service}.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-${service}.service
+    ln -s ../plasma-phone-${service}.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-${service}.service
+done
 
 # << install post
 
