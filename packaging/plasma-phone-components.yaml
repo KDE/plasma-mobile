@@ -18,7 +18,9 @@ Requires:
     - breeze-icon-theme
     - oxygen-fonts
     - frameworkintegration
+    - libqofono-qt5
     - libqofono-qt5-declarative
+    - voicecall-qt5
 
 PkgBR:
     - extra-cmake-modules
