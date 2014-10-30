@@ -25,6 +25,7 @@ import org.kde.plasma.shell 2.0 as Shell
 import org.kde.satellite.components 0.1 as SatelliteComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.nemomobile.voicecall 1.0
+import MeeGo.QOfono 0.2
 import "../components"
 
 Item {
@@ -83,6 +84,41 @@ Item {
             pendingRemovals.push(notificationId);
             pendingTimer.start();
         }
+    }
+
+    OfonoManager {
+        id: ofonoManager
+    }
+
+    property OfonoSimManager simManager: ofonoSimManager
+    OfonoSimManager {
+        id: ofonoSimManager
+    }
+
+    OfonoNetworkRegistration {
+        id: netreg
+        modemPath: ofonoManager.modems.count? ofonoManager.modems[0] : ""
+        function updateStrengthIcon() {
+            if (netreg.strength >= 100) {
+                strengthIcon.source = "network-mobile-100";
+            } else if (netreg.strength >= 80) {
+                strengthIcon.source = "network-mobile-80";
+            } else if (netreg.strength >= 60) {
+                strengthIcon.source = "network-mobile-60";
+            } else if (netreg.strength >= 40) {
+                strengthIcon.source = "network-mobile-40";
+            } else if (netreg.strength >= 20) {
+                strengthIcon.source = "network-mobile-20";
+            } else {
+                strengthIcon.source = "network-mobile-0";
+            }
+        }
+
+        onStrengthChanged: {
+            console.log("Strength changed to " + netreg.strength)
+            updateStrengthIcon()
+        }
+        Component.onCompleted: updateStrengthIcon()
     }
 
     property VoiceCallManager manager: VoiceCallManager {
@@ -180,6 +216,16 @@ Item {
         }
     }
 
+    Pin {
+        anchors {
+            left: parent.left
+            top: statusPanel.bottom
+            right: parent.right
+            bottom: parent.bottom
+        }
+        z: 20
+    }
+
     Dialer {
         id: dialer
         anchors {
@@ -229,6 +275,24 @@ Item {
             interval: 500
         }
 
+        PlasmaCore.IconItem {
+            id: strengthIcon
+            anchors {
+                left: parent.left
+                verticalCenter: parent.verticalCenter
+            }
+            width: units.iconSizes.small
+            height: width
+        }
+        Text {
+            anchors {
+                left: strengthIcon.right
+                verticalCenter: parent.verticalCenter
+            }
+            text: netreg.strength + "% " + (netreg.name ? netreg.name : "No Provider")
+            color: "white"
+            font.pixelSize: height / 2
+        }
         Text {
             id: clock
             anchors.fill: parent
@@ -309,14 +373,7 @@ Item {
     SatelliteStripe {
         id: stripe
         z: 1
-PlasmaComponents.Button {
-    z: 999
-    text: "bah"
-    onClicked: {
-        dialer.state = "incoming"
-        dialer.open()
-    }
-}
+
         PlasmaCore.Svg {
             id: stripeIcons
             imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
@@ -332,6 +389,8 @@ PlasmaComponents.Button {
                 svg: stripeIcons
                 elementId: "phone"
                 callback: function() {
+                    //TODO remove
+                    dialer.state = "disconnected"
                     dialer.open()
                 }
             }

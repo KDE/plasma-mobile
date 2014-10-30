@@ -9,11 +9,16 @@ Text {
     color: dialer.textColor
     font.pixelSize: Math.floor((width - (units.largeSpacing)) / 2)
     property alias sub: longHold.text
+    property var callback
 
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            addNumber(parent.text);
+            if (callback) {
+                callback();
+            } else {
+                addNumber(parent.text);
+            }
         }
 
         onPressAndHold: {
