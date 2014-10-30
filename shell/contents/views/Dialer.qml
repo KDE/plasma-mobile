@@ -28,6 +28,7 @@ Rectangle {
     id: dialer
     color: "black"
     opacity: 0.8
+    visible: false
 
     state: manager.activeVoiceCall ? manager.activeVoiceCall.statusText : "disconnected"
     property color textColor: "white"
@@ -41,6 +42,10 @@ Rectangle {
     function open() {
         visible = true;
         opacity = 0.8;
+    }
+
+    function close() {
+        opacity = 0;
     }
 
     function addNumber(number) {
@@ -79,7 +84,25 @@ Rectangle {
         return '' + h + ':' + m + ':' + s;
     }
 
-    onCallingChanged: if (calling) {open();}
+    Behavior on opacity {
+        NumberAnimation { properties: "opacity"; duration: 100 }
+    }
+
+    onOpacityChanged: {
+        visible = opacity > 0;
+    }
+
+    onVisibleChanged: {
+        opacity = visible ? 0.9 : 0;
+    }
+
+    onCallingChanged: {
+        if (calling) {
+            open();
+        } else {
+            opacity = 0;
+        }
+    }
 
     MouseArea {
         anchors.fill: parent

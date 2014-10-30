@@ -126,15 +126,15 @@ Item {
 
         onActiveVoiceCallChanged: {
             if (activeVoiceCall) {
-                dialer.calling = true;
+                dialerOverlay.open();
                 //main.activeVoiceCallPerson = people.personByPhoneNumber(activeVoiceCall.lineId);
-                dialer.numberEntryText = activeVoiceCall.lineId;
+                dialerOverlay.item.numberEntryText = activeVoiceCall.lineId;
 
             } else {
-                dialer.calling = false;
+                dialerOverlay.close();
                 dialer.numberEntryText = '';
 
-                main.activeVoiceCallPerson = null;
+                //main.activeVoiceCallPerson = null;
             }
         }
 
@@ -216,7 +216,15 @@ Item {
         }
     }
 
-    Pin {
+    Loader {
+        id: dialerOverlay
+        function open() {
+            source = Qt.resolvedUrl("Dialer.qml")
+            dialerOverlay.item.open();
+        }
+        function close() {
+            dialerOverlay.item.close();
+        }
         anchors {
             left: parent.left
             top: statusPanel.bottom
@@ -225,36 +233,16 @@ Item {
         }
         z: 20
     }
-
-    Dialer {
-        id: dialer
+    Loader {
+        id: pinOverlay
         anchors {
             left: parent.left
             top: statusPanel.bottom
             right: parent.right
             bottom: parent.bottom
         }
-        z: 20
-        opacity: calling ? 1 : 0
-        visible: false
-
-        Behavior on opacity {
-            NumberAnimation { properties: "opacity"; duration: 100 }
-        }
-
-        onOpacityChanged: {
-            visible = opacity > 0;
-        }
-
-        onVisibleChanged: {
-            opacity = visible ? 0.9 : 0;
-        }
-
-        onCallingChanged: {
-            if (!calling) {
-                opacity = 0;
-            }
-        }
+        z: 21
+        source: simManager.pinRequired != OfonoSimManager.NoPin ? Qt.resolvedUrl("Pin.qml") : ""
     }
 
     Rectangle {
@@ -389,9 +377,9 @@ Item {
                 svg: stripeIcons
                 elementId: "phone"
                 callback: function() {
+                    dialerOverlay.open()
                     //TODO remove
-                    dialer.state = "disconnected"
-                    dialer.open()
+                    dialerOverlay.item.state = "disconnected"
                 }
             }
 
