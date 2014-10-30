@@ -23,6 +23,8 @@ import QtGraphicalEffects 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
 import org.kde.satellite.components 0.1 as SatelliteComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.nemomobile.voicecall 1.0
 import "../components"
 
 Item {
@@ -83,6 +85,27 @@ Item {
         }
     }
 
+    property VoiceCallManager manager: VoiceCallManager {
+        id: manager
+
+        onActiveVoiceCallChanged: {
+            if (activeVoiceCall) {
+                dialer.calling = true;
+                //main.activeVoiceCallPerson = people.personByPhoneNumber(activeVoiceCall.lineId);
+                dialer.numberEntryText = activeVoiceCall.lineId;
+
+            } else {
+                dialer.calling = false;
+                dialer.numberEntryText = '';
+
+                main.activeVoiceCallPerson = null;
+            }
+        }
+
+        onError: {
+            console.log('*** QML *** VCM ERROR: ' + message);
+        }
+    }
 
     Timer {
         id: pendingTimer
@@ -166,7 +189,7 @@ Item {
             bottom: parent.bottom
         }
         z: 20
-        opacity: 0
+        opacity: calling ? 1 : 0
         visible: false
 
         Behavior on opacity {
@@ -286,7 +309,14 @@ Item {
     SatelliteStripe {
         id: stripe
         z: 1
-
+PlasmaComponents.Button {
+    z: 999
+    text: "bah"
+    onClicked: {
+        dialer.state = "incoming"
+        dialer.open()
+    }
+}
         PlasmaCore.Svg {
             id: stripeIcons
             imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
@@ -302,7 +332,7 @@ Item {
                 svg: stripeIcons
                 elementId: "phone"
                 callback: function() {
-                    dialer.visible = true;
+                    dialer.open()
                 }
             }
 
