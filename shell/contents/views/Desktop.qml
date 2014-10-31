@@ -88,6 +88,40 @@ Item {
 
     OfonoManager {
         id: ofonoManager
+        onAvailableChanged: {
+           console.log("Ofono is " + available)
+        }
+        onModemAdded: {
+            console.log("modem added " + modem)
+        }
+        onModemRemoved: console.log("modem removed")
+    }
+
+    OfonoConnMan {
+       id: ofono1
+       Component.onCompleted: {
+           console.log(ofonoManager.modems)
+       }
+       modemPath: ofonoManager.modems[0]
+    }
+
+    OfonoModem {
+       id: modem1
+       modemPath: ofonoManager.modems[0]
+
+    }
+
+    OfonoContextConnection {
+        id: context1
+        contextPath : ofono1.contexts[0]
+        Component.onCompleted: {
+            print("Context Active: " + context1.active)
+            textLine.text = context1.active ? "online" : "offline"
+        }
+        onActiveChanged: {
+            print("Context Active: " + context1.active)
+            textLine.text = context1.active ? "online" : "offline"
+        }
     }
 
     property OfonoSimManager simManager: ofonoSimManager
@@ -97,7 +131,15 @@ Item {
 
     OfonoNetworkRegistration {
         id: netreg
-        modemPath: ofonoManager.modems.count? ofonoManager.modems[0] : ""
+        Component.onCompleted: {
+            netreg.scan()
+            updateStrengthIcon()
+        }
+
+        onNetworkOperatorsChanged : {
+            console.log("operators :"+netreg.currentOperator["Name"].toString())
+        }
+        modemPath: ofonoManager.modems.count ? ofonoManager.modems[0] : ""
         function updateStrengthIcon() {
             if (netreg.strength >= 100) {
                 strengthIcon.source = "network-mobile-100";
@@ -118,7 +160,10 @@ Item {
             console.log("Strength changed to " + netreg.strength)
             updateStrengthIcon()
         }
-        Component.onCompleted: updateStrengthIcon()
+    }
+
+    OfonoNetworkOperator {
+        id: netop
     }
 
     property VoiceCallManager manager: VoiceCallManager {
@@ -132,7 +177,7 @@ Item {
 
             } else {
                 dialerOverlay.close();
-                dialer.numberEntryText = '';
+                dialerOverlay.item.numberEntryText = '';
 
                 //main.activeVoiceCallPerson = null;
             }
@@ -277,7 +322,7 @@ Item {
                 left: strengthIcon.right
                 verticalCenter: parent.verticalCenter
             }
-            text: netreg.strength + "% " + (netreg.name ? netreg.name : "No Provider")
+            text: netreg.strength + "% " + (ofonoManager.available ? netreg.currentOperator["Name"].toString() :"Ofono not available")
             color: "white"
             font.pixelSize: height / 2
         }
@@ -378,8 +423,6 @@ Item {
                 elementId: "phone"
                 callback: function() {
                     dialerOverlay.open()
-                    //TODO remove
-                    dialerOverlay.item.state = "disconnected"
                 }
             }
 

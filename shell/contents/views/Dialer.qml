@@ -37,7 +37,7 @@ Rectangle {
     property alias numberEntryText: status.text
     property VoiceCallManager manager: homescreen.manager
 
-    property string providerId: manager.providers.id(1)
+    property string providerId: manager.providers.id(0)
 
     function open() {
         visible = true;
