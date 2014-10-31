@@ -22,6 +22,7 @@ Requires:   plasma-workspace-wallpaper-image
 Requires:   breeze-icon-theme
 Requires:   oxygen-fonts
 Requires:   frameworkintegration
+Requires:   libqofono-qt5-declarative
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(Qt5Xml)
