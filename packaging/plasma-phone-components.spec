@@ -95,8 +95,13 @@ XDG_CURRENT_DESKTOP=KDE
 KSCREEN_BACKEND=QScreen
 EOF
 
-# Default configuration for plasmashell
+# Default configuration for the UI
 mkdir -p %{buildroot}%{_kf5_configdir}
+cat > %{buildroot}%{_kf5_configdir}/kded5rc << EOF
+[General]
+CheckSycoca=false
+EOF
+
 cat > %{buildroot}%{_kf5_configdir}/kdeglobals <<EOF
 [KDE]
 LookAndFeelPackage=org.kde.satellite.phone
@@ -129,6 +134,7 @@ done
 %files
 %defattr(-,root,root,-)
 %config %{_kf5_configdir}/kdeglobals
+%config %{_kf5_configdir}/kded5rc
 %{_kf5_sharedir}/plasma/*
 %{_kf5_sharedir}/wallpapers/*
 %{_kf5_servicesdir}/*.desktop
