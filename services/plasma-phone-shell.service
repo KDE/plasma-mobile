@@ -7,7 +7,7 @@
 [Unit]
 Description=Plasma Phone UI
 Requires=dbus.socket
-After=plasma-phone-compositor.service plasma-phone-ksyncdbusenv.service plasma-phone-kbuildsycoca.service plasma-phone-kdeinit.service
+After=voicecall-manager.service plasma-phone-compositor.service plasma-phone-ksyncdbusenv.service plasma-phone-kbuildsycoca.service plasma-phone-kdeinit.service
 
 [Service]
 EnvironmentFile=-/var/lib/environment/plasma-phone/*.conf
