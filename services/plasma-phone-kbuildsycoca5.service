@@ -9,9 +9,7 @@ Description=kbuildsycoca5
 Requires=dbus.socket
 
 [Service]
-Type=oneshot
 ExecStart=/usr/bin/kbuildsycoca5
-Restart=always
 
 [Install]
 WantedBy=user-session.target

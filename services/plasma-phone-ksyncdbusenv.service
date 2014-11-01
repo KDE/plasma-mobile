@@ -9,9 +9,7 @@ Description=ksyncdbusenv
 Requires=dbus.socket
 
 [Service]
-Type=oneshot
 ExecStart=/usr/lib/libexec/ksyncdbusenv
-Restart=always
 
 [Install]
 WantedBy=user-session.target
