@@ -67,6 +67,16 @@ rm -rf %{buildroot}
 
 # >> install post
 
+# Script that runs the UI
+mkdir -p %{buildroot}%{_bindir}
+cat > %{buildroot}%{_bindir}/plasma-phone << EOF
+#!/bin/sh
+/usr/bin/kded5 &
+sleep 2
+/usr/bin/plasmashell -p org.kde.satellite.phone -n
+EOF
+chmod 755 %{buildroot}%{_bindir}/plasma-phone
+
 # File with environment variables, used by compositor systemd unit
 mkdir -p %{buildroot}%{_sharedstatedir}/environment/greenisland
 cat > %{buildroot}%{_sharedstatedir}/environment/greenisland/greenisland.conf <<EOF
@@ -130,7 +140,9 @@ EOF
 
 # Install systemd units
 mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/
-for service in compositor kbuildsycoca5 kdeinit ksyncdbusenv shell; do
+#UNITS="compositor kbuildsycoca5 kdeinit ksyncdbusenv shell"
+UNITS="compositor ui"
+for service in $UNITS; do
 install -D -m 644 services/plasma-phone-${service}.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-${service}.service
 ln -s ../plasma-phone-${service}.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-${service}.service
 done
@@ -141,6 +153,7 @@ done
 %defattr(-,root,root,-)
 %config %{_kf5_configdir}/kdeglobals
 %config %{_kf5_configdir}/kded5rc
+%{_bindir}/plasma-phone
 %{_kf5_sharedir}/plasma/*
 %{_kf5_sharedir}/wallpapers/*
 %{_kf5_servicesdir}/*.desktop

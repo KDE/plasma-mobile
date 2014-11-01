@@ -44,6 +44,7 @@ Builder: none
 Files:
     - "%config %{_kf5_configdir}/kdeglobals"
     - "%config %{_kf5_configdir}/kded5rc"
+    - "%{_bindir}/plasma-phone"
     - "%{_kf5_sharedir}/plasma/*"
     - "%{_kf5_sharedir}/wallpapers/*"
     - "%{_kf5_servicesdir}/*.desktop"
