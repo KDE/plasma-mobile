@@ -93,6 +93,12 @@ QT_QPA_PLATFORMTHEME=KDE
 QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 XDG_CURRENT_DESKTOP=KDE
 KSCREEN_BACKEND=QScreen
+
+# Not sure about these, but startkde does it
+QT_PLUGIN_PATH=${QT_PLUGIN_PATH+$QT_PLUGIN_PATH:}`qtpaths --plugin-dir`
+# TODO: Do we really need this?
+QT_PLUGIN_PATH=$QT_PLUGIN_PATH:/usr/lib/kde5/plugins/
+export QT_PLUGIN_PATH
 EOF
 
 # Default configuration for the UI
