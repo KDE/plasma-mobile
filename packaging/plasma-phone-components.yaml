@@ -46,6 +46,7 @@ Files:
     - "%{_kf5_sharedir}/plasma/*"
     - "%{_kf5_sharedir}/wallpapers/*"
     - "%{_kf5_servicesdir}/*.desktop"
+    - "%{_sharedstatedir}/environment/greenisland/*"
     - "%{_sharedstatedir}/environment/plasma-phone/*"
     - "%{_libdir}/systemd/user/*"
     - "%{_libdir}/systemd/user/user-session.target.wants/*"

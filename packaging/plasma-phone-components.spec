@@ -67,7 +67,24 @@ rm -rf %{buildroot}
 
 # >> install post
 
-# File with environment variables, used by systemd units
+# File with environment variables, used by compositor systemd unit
+mkdir -p %{buildroot}%{_sharedstatedir}/environment/greenisland
+cat > %{buildroot}%{_sharedstatedir}/environment/greenisland/greenisland.conf <<EOF
+# From hammerhead configuration
+QT_QPA_PLATFORM=hwcomposer
+EGL_PLATFORM=hwcomposer
+QT_QPA_EGLFS_DEPTH=32
+QT_QPA_EGLFS_HIDECURSOR=1
+LIPSTICK_OPTIONS=-plugin evdevtouch:/dev/input/event1 -plugin evdevkeyboard:keymap=/usr/share/qt5/keymaps/droid.qmap
+
+# This one was set to 1 in hammerhead configuration,
+# but it's just wrong
+QT_COMPOSITOR_NEGATE_INVERTED_Y=0
+
+KSCREEN_BACKEND=QScreen
+EOF
+
+# File with environment variables, used by shell systemd unit
 mkdir -p %{buildroot}%{_sharedstatedir}/environment/plasma-phone
 cat > %{buildroot}%{_sharedstatedir}/environment/plasma-phone/plasma-phone.conf <<EOF
 LIBEXEC_PATH="%{_libexecdir}:%{_libdir}/libexec:%{_kf5_libexecdir}"
@@ -115,6 +132,7 @@ done
 %{_kf5_sharedir}/plasma/*
 %{_kf5_sharedir}/wallpapers/*
 %{_kf5_servicesdir}/*.desktop
+%{_sharedstatedir}/environment/greenisland/*
 %{_sharedstatedir}/environment/plasma-phone/*
 %{_libdir}/systemd/user/*
 %{_libdir}/systemd/user/user-session.target.wants/*

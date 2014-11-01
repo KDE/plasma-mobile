@@ -11,7 +11,7 @@ After=pre-user-session.target
 
 [Service]
 Type=notify
-EnvironmentFile=-/var/lib/environment/compositor/*.conf
+EnvironmentFile=-/var/lib/environment/greenisland/*.conf
 ExecStart=/usr/bin/greenisland $LIPSTICK_OPTIONS -p org.kde.satellite.compositor.phone
 Restart=always
 
