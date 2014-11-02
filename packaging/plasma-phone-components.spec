@@ -83,7 +83,7 @@ EOF
 mkdir -p %{buildroot}%{_sharedstatedir}/environment/plasma-phone
 cat > %{buildroot}%{_sharedstatedir}/environment/plasma-phone/plasma-phone.conf <<EOF
 LIBEXEC_PATH="%{_libexecdir}:%{_libdir}/libexec:%{_kf5_libexecdir}"
-QT_PLUGIN_PATH=${QT_PLUGIN_PATH+$QT_PLUGIN_PATH:}\`qtpaths --plugin-dir\`:%{_libdir}/kde5/plugins
+QT_PLUGIN_PATH=\${QT_PLUGIN_PATH+\$QT_PLUGIN_PATH:}\`qtpaths --plugin-dir\`:%{_libdir}/kde5/plugins
 
 DBUS_SESSION_BUS_ADDRESS=unix:path=%t/dbus/user_bus_socket
 
