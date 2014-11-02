@@ -8,6 +8,7 @@
 Description=Green Island
 Requires=dbus.socket pre-user-session.target
 After=pre-user-session.target
+Conflicts=maui-bootsplash.service
 
 [Service]
 Type=notify
