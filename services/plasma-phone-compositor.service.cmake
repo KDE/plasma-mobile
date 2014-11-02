@@ -14,8 +14,8 @@ Conflicts=maui-bootsplash.service
 Type=notify
 EnvironmentFile=-/var/lib/environment/compositor/*.conf
 EnvironmentFile=-/var/lib/environment/greenisland/*.conf
-ExecStart=/usr/bin/greenisland $LIPSTICK_OPTIONS -p org.kde.satellite.compositor.phone
-Restart=always
+ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/greenisland $LIPSTICK_OPTIONS -p org.kde.satellite.compositor.phone
+Restart=on-failure
 
 [Install]
 WantedBy=user-session.target

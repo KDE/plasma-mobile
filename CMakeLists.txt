@@ -38,10 +38,6 @@ plasma_install_package(look-and-feel org.kde.satellite.phone look-and-feel)
 plasma_install_package(shell org.kde.satellite.phone shells)
 install(DIRECTORY wallpaper/ DESTINATION "${WALLPAPER_INSTALL_DIR}/org.kde.satellite.lockers")
 
-configure_file(${CMAKE_SOURCE_DIR}/bin/plasma-phone.cmake ${CMAKE_BINARY_DIR}/plasma-phone)
-install(FILES ${CMAKE_BINARY_DIR}/plasma-phone
-        PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ WORLD_EXECUTE WORLD_READ GROUP_EXECUTE GROUP_READ
-        DESTINATION ${BIN_INSTALL_DIR})
-
+add_subdirectory(bin)
 add_subdirectory(qmlcomponents)
-
+add_subdirectory(services)

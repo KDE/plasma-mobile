@@ -34,6 +34,7 @@ BuildRequires:  pkgconfig(Qt5Widgets)
 BuildRequires:  pkgconfig(Qt5Test)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(systemd)
 BuildRequires:  extra-cmake-modules
 BuildRequires:  kf5-rpm-macros
 BuildRequires:  qt5-tools
@@ -124,15 +125,12 @@ Theme=breeze
 name=default
 EOF
 
-# Install systemd units
-mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/
-#UNITS="compositor kbuildsycoca5 kdeinit ksyncdbusenv shell"
-UNITS="compositor ui"
+# Install services links
+mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants
+UNITS="plasma-phone-compositor plasma-phone-ui"
 for service in $UNITS; do
-install -D -m 644 services/plasma-phone-${service}.service %{buildroot}%{_libdir}/systemd/user/plasma-phone-${service}.service
-ln -s ../plasma-phone-${service}.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/plasma-phone-${service}.service
+ln -sf ../${service}.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/${service}.service
 done
-
 # << install post
 
 %files

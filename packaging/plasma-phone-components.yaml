@@ -37,6 +37,7 @@ PkgConfigBR:
     - Qt5Test
     - Qt5Qml
     - Qt5Quick
+    - systemd
 
 Configure: none
 Builder: none

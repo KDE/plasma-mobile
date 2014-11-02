@@ -10,7 +10,4 @@
 # (at your option) any later version.
 #
 
-@CMAKE_INSTALL_FULL_LIBEXECDIR@/ksyncdbusenv
-@CMAKE_INSTALL_FULL_BINDIR@/kbuildsycoca5
-LD_BIND_NOW=true @CMAKE_INSTALL_FULL_LIBEXECDIR_KF5@/start_kdeinit_wrapper
-@CMAKE_INSTALL_FULL_BINDIR@/plasmashell -p org.kde.satellite.phone -n
+exec dbus-run-session -- /usr/bin/plasmashell -p org.kde.satellite.phone -n
