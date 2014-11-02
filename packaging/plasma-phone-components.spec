@@ -80,18 +80,12 @@ chmod 755 %{buildroot}%{_bindir}/plasma-phone
 # File with environment variables, used by compositor systemd unit
 mkdir -p %{buildroot}%{_sharedstatedir}/environment/greenisland
 cat > %{buildroot}%{_sharedstatedir}/environment/greenisland/greenisland.conf <<EOF
-# From hammerhead configuration
-QT_QPA_PLATFORM=hwcomposer
-EGL_PLATFORM=hwcomposer
-QT_QPA_EGLFS_DEPTH=32
-QT_QPA_EGLFS_HIDECURSOR=1
-LIPSTICK_OPTIONS=-plugin evdevtouch:/dev/input/event1 -plugin evdevkeyboard:keymap=/usr/share/qt5/keymaps/droid.qmap
-
-# This one was set to 1 in hammerhead configuration,
-# but it's just wrong
-QT_COMPOSITOR_NEGATE_INVERTED_Y=0
-
+# Use QScreen backend
 KSCREEN_BACKEND=QScreen
+
+# This one is often set to 1 but, at least for hammerhead, we need it set to 0
+# TODO: Check whether this is always the case when we'll support more devices
+QT_COMPOSITOR_NEGATE_INVERTED_Y=0
 EOF
 
 # File with environment variables, used by shell systemd unit
