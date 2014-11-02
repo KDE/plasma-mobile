@@ -29,6 +29,15 @@ Rectangle {
     id: compositorRoot
     color: "black"
 
+    Image {
+        id: klogo
+        anchors.fill: parent
+        source: "klogo.png"
+        sourceSize.width: width
+        sourceSize.height: height
+        fillMode: Image.PreserveAspectFit
+    }
+
     ListModel {
         id: surfaceModel
     }
