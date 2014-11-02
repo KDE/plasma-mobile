@@ -68,15 +68,6 @@ rm -rf %{buildroot}
 # >> install post
 
 # Script that runs the UI
-mkdir -p %{buildroot}%{_bindir}
-cat > %{buildroot}%{_bindir}/plasma-phone << EOF
-#!/bin/sh
-/usr/bin/kded5 &
-sleep 2
-/usr/bin/plasmashell -p org.kde.satellite.phone -n
-EOF
-chmod 755 %{buildroot}%{_bindir}/plasma-phone
-
 # File with environment variables, used by compositor systemd unit
 mkdir -p %{buildroot}%{_sharedstatedir}/environment/greenisland
 cat > %{buildroot}%{_sharedstatedir}/environment/greenisland/greenisland.conf <<EOF
