@@ -22,6 +22,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import "WindowManagement.js" as WindowManagement
 
 Rectangle {
+    property alias showSplash: splash.visible
     property bool showHome: true
     readonly property alias layers: layers
     readonly property real topBarHeight: units.iconSizes.small
@@ -30,12 +31,13 @@ Rectangle {
     color: "black"
 
     Image {
-        id: klogo
+        id: splash
         anchors.fill: parent
         source: "klogo.png"
         sourceSize.width: width
         sourceSize.height: height
         fillMode: Image.PreserveAspectFit
+        z: 4
     }
 
     ListModel {

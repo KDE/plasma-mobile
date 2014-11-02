@@ -187,6 +187,7 @@ function mapShellSurface(surface, child) {
     window.z = (surface.className == "plasmashell.desktop") ? 1 : 0;
 
     // Switch to the desktop layer and take focus
+    compositorRoot.showSplash = false;
     compositorRoot.showHome = true;
     window.child.takeFocus();
 
