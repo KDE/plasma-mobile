@@ -9,6 +9,7 @@ Description=Plasma Phone UI
 Requires=dbus.socket plasma-phone-compositor.service
 
 [Service]
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=%t/dbus/user_bus_socket
 EnvironmentFile=-/var/lib/environment/plasma-phone/*.conf
 ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/plasma-phone
 ExecStop=@CMAKE_INSTALL_FULL_BINDIR@/kquitapp5 plasmashell
