@@ -102,25 +102,25 @@ Item {
        Component.onCompleted: {
            console.log(ofonoManager.modems)
        }
-       //modemPath: ofonoManager.modems[0]
+       modemPath: ofonoManager.modems[0]
     }
 
     OfonoModem {
        id: modem1
-       //modemPath: ofonoManager.modems[0]
+       modemPath: ofonoManager.modems[0]
 
     }
 
     OfonoContextConnection {
         id: context1
-        //contextPath : ofono1.contexts[0]
+        contextPath : ofono1.contexts[0]
         Component.onCompleted: {
             print("Context Active: " + context1.active)
-            //textLine.text = context1.active ? "online" : "offline"
+            textLine.text = context1.active ? "online" : "offline"
         }
         onActiveChanged: {
             print("Context Active: " + context1.active)
-            //textLine.text = context1.active ? "online" : "offline"
+            textLine.text = context1.active ? "online" : "offline"
         }
     }
 
@@ -322,9 +322,9 @@ Item {
                 left: strengthIcon.right
                 verticalCenter: parent.verticalCenter
             }
-            //text: netreg.strength + "% " + (ofonoManager.available ? netreg.currentOperator["Name"].toString() :"Ofono not available")
+            text: netreg.strength + "% " + (ofonoManager.available ? netreg.currentOperator["Name"].toString() :"Ofono not available")
             color: "white"
-            //font.pixelSize: height / 2
+            font.pixelSize: height / 2
         }
         Text {
             id: clock
@@ -333,7 +333,7 @@ Item {
             color: "white"
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
-            //font.pixelSize: height / 2
+            font.pixelSize: height / 2
         }
         MouseArea {
             property int oldMouseY: 0
