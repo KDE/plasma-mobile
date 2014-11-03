@@ -6,8 +6,7 @@
 
 [Unit]
 Description=Plasma Phone UI
-Requires=plasma-phone-compositor.service voicecall-manager.service kded5.service
-After=plasma-phone-compositor.service voicecall-manager.service
+Requires=dbus.socket plasma-phone-compositor.service
 
 [Service]
 EnvironmentFile=-/var/lib/environment/plasma-phone/*.conf
