@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.kde.kglobalaccel
+SystemdService=kglobalaccel5.service

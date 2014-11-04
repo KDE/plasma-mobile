@@ -1,16 +1,14 @@
 #
 # Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 #
-# Starts kdeinit5.
+# Starts kactivitymanagerd.
 #
 
 [Unit]
-Description=kdeinit5
-Requires=dbus.socket
+Description=kactivitymanagerd
 
 [Service]
-Environment=DISPLAY:0
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=%t/dbus/user_bus_socket
 EnvironmentFile=-/var/lib/environment/plasma-phone/*.conf
-ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/kdeinit5 +kcminit_startup --no-fork
-BusName=org.kde.klauncher5
+ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/kactivitymanagerd start-daemon
+BusName=org.kde.ActivityManager
