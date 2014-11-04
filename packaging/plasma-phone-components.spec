@@ -84,9 +84,6 @@ EOF
 # File with environment variables, used by shell systemd unit
 mkdir -p %{buildroot}%{_sharedstatedir}/environment/plasma-phone
 cat > %{buildroot}%{_sharedstatedir}/environment/plasma-phone/plasma-phone.conf <<EOF
-LIBEXEC_PATH="%{_libexecdir}:%{_libdir}/libexec:%{_kf5_libexecdir}"
-QT_PLUGIN_PATH=\${QT_PLUGIN_PATH+\$QT_PLUGIN_PATH:}\`qtpaths --plugin-dir\`:%{_libdir}/kde5/plugins
-
 QT_QPA_PLATFORM=wayland
 QT_QPA_PLATFORMTHEME=KDE
 QT_WAYLAND_DISABLE_WINDOWDECORATION=1

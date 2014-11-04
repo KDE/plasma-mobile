@@ -31,9 +31,6 @@ unset QT_QPA_EGLFS_DEPTH
 unset QT_QPA_EGLFS_HIDECURSOR
 unset QT_COMPOSITOR_NEGATE_INVERTED_Y
 
-export LIBEXEC_PATH="/usr/libexec:/usr/lib/libexec:/usr/lib/libexec/kf5"
-export QT_PLUGIN_PATH=${QT_PLUGIN_PATH+$QT_PLUGIN_PATH:}`qtpaths --plugin-dir`:/usr/lib/kde5/plugins
-
 export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=KDE
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
