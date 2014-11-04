@@ -38,5 +38,6 @@ plasma_install_package(look-and-feel org.kde.satellite.phone look-and-feel)
 plasma_install_package(shell org.kde.satellite.phone shells)
 install(DIRECTORY wallpaper/ DESTINATION "${WALLPAPER_INSTALL_DIR}/org.kde.satellite.lockers")
 
+add_subdirectory(bin)
 add_subdirectory(qmlcomponents)
 add_subdirectory(services)

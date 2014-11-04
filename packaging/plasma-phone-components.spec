@@ -125,7 +125,8 @@ EOF
 
 # Install services links
 mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants
-UNITS="plasma-phone-compositor plasma-phone-ui"
+#UNITS="plasma-phone-compositor plasma-phone-ui"
+UNITS="plasma-phone"
 for service in $UNITS; do
 ln -sf ../${service}.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/${service}.service
 done
