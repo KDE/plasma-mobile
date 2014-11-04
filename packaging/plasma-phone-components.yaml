@@ -15,6 +15,7 @@ Requires:
     - greenisland
     - plasma-workspace
     - plasma-workspace-wallpaper-image
+    - plasma-desktop
     - breeze-icon-theme
     - oxygen-fonts
     - frameworkintegration

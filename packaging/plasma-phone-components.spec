@@ -19,6 +19,7 @@ Source100:  plasma-phone-components.yaml
 Requires:   greenisland
 Requires:   plasma-workspace
 Requires:   plasma-workspace-wallpaper-image
+Requires:   plasma-desktop
 Requires:   breeze-icon-theme
 Requires:   oxygen-fonts
 Requires:   frameworkintegration
