@@ -337,6 +337,7 @@ Item {
             property int oldMouseY: 0
 
             anchors.fill: parent
+            enabled: !dialerOverlay.item.visible
             onPressed: {
                 oldMouseY = mouse.y;
                 slidingPanel.visible = true;
