@@ -308,6 +308,7 @@ Item {
 
         PlasmaCore.IconItem {
             id: strengthIcon
+            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
             anchors {
                 left: parent.left
                 verticalCenter: parent.verticalCenter
