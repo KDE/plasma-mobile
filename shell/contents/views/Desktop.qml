@@ -320,7 +320,7 @@ Item {
                 left: strengthIcon.right
                 verticalCenter: parent.verticalCenter
             }
-            text: (ofonoManager.available && netreg.currentOperator ? netreg.strength + "% " + netreg.currentOperator["Name"].toString() : i18n("No SIM"))
+            text: netreg.strength + "% " + netreg.name
             color: "white"
             font.pixelSize: parent.height / 2
         }
