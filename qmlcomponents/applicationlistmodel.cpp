@@ -23,6 +23,7 @@
 // Qt
 #include <QByteArray>
 #include <QModelIndex>
+#include <QProcess>
 
 // KDE
 #include <KPluginInfo>
@@ -133,7 +134,10 @@ void ApplicationListModel::runApplication(const QString &storageId) {
     }
 
     KService::Ptr service = KService::serviceByStorageId(storageId);
-    KRun::run(*service, QList<QUrl>(), 0);
+
+    //FIXME: port KRun::run to wayland
+    QProcess::startDetached(service->exec());
+    //KRun::run(*service, QList<QUrl>(), 0);
 }
 
 #include "applicationlistmodel.moc"
