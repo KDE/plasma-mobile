@@ -320,14 +320,14 @@ Item {
                 left: strengthIcon.right
                 verticalCenter: parent.verticalCenter
             }
-            text: netreg.strength + "% " + (ofonoManager.available && netreg.currentOperator ? netreg.currentOperator["Name"].toString() :"Ofono not available")
+            text: (ofonoManager.available && netreg.currentOperator ? netreg.strength + "% " + netreg.currentOperator["Name"].toString() : i18n("No SIM"))
             color: "white"
             font.pixelSize: parent.height / 2
         }
         Text {
             id: clock
             anchors.fill: parent
-            text: Qt.formatDateTime(timeSource.data.Local.DateTime)
+            text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
             color: "white"
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
