@@ -22,6 +22,7 @@ Requires:
     - libqofono-qt5
     - libqofono-qt5-declarative
     - voicecall-qt5
+    - voicecall-qt5-plugin-ofono
 
 PkgBR:
     - extra-cmake-modules
