@@ -26,6 +26,7 @@ Rectangle {
     property bool showHome: true
     readonly property alias layers: layers
     readonly property real topBarHeight: units.iconSizes.small
+    readonly property real bottomBarHeight: units.iconSizes.medium
 
     id: compositorRoot
     color: "black"
@@ -37,7 +38,7 @@ Rectangle {
         sourceSize.width: width
         sourceSize.height: height
         fillMode: Image.PreserveAspectFit
-        z: 4
+        z: 1000
     }
 
     ListModel {
@@ -68,6 +69,37 @@ Rectangle {
         id: windowsLayer
         anchors.fill: parent
         anchors.topMargin: topBarHeight
+        anchors.bottomMargin: bottomBar.height
         z: showHome ? 1 : 2
+    }
+
+    Rectangle {
+        id: bottomBar
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: (showSplash || showHome) ? 0 : bottomBarHeight
+        color: "black"
+        z: showHome ? 0 : 2
+
+        Behavior on height {
+            NumberAnimation {
+                easing.type: Easing.InOutQuad
+                duration: units.shortDuration
+            }
+        }
+
+        PlasmaCore.IconItem {
+            anchors.centerIn: parent
+            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+            width: units.iconSizes.smallMedium
+            height: width
+            source: "go-home"
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: showHome = true
+            }
+        }
     }
 }
