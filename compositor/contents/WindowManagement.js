@@ -104,8 +104,12 @@ function mapApplicationSurface(surface) {
     for (i = 0; i < surfaceModel.count; i++) {
         var entry = surfaceModel.get(i);
 
-        if (entry.surface === surface)
+        if (entry.surface === surface) {
+            // Ask the client to resize
+            surface.requestSize(window.parent.width, window.parent.height);
+
             return;
+        }
     }
 
     // Create surface item
@@ -123,11 +127,13 @@ function mapApplicationSurface(surface) {
     var window = component.createObject(compositorRoot.layers.windows, {"child": child});
     window.child.parent = window;
     window.child.touchEventsEnabled = true;
-    //surface.requestSize(window.parent.width, window.parent.height);
     window.anchors.top = window.parent.top;
     window.anchors.left = window.parent.left;
     window.width = surface.size.width;
     window.height = surface.size.height;
+
+    // Ask the client to resize
+    surface.requestSize(window.parent.width, window.parent.height);
 
     // Switch to the applications layer and take focus
     compositorRoot.showHome = false;
