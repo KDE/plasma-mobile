@@ -99,7 +99,7 @@ Rectangle {
             }
         }
 
-        ColumnLayout {
+        RowLayout {
             anchors.fill: parent
 
             PlasmaCore.IconItem {
