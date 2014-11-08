@@ -37,4 +37,11 @@ Item {
         anchors.fill: parent
         source: child
     }
+
+    function close() {
+        if (!child || !child.surface)
+            return;
+
+        child.surface.client.close();
+    }
 }

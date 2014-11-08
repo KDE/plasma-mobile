@@ -131,6 +131,7 @@ function mapApplicationSurface(surface) {
 
     // Switch to the applications layer and take focus
     compositorRoot.showHome = false;
+    compositorRoot.currentWindow = window;
     window.child.takeFocus();
 
     // Run map animation
@@ -160,6 +161,7 @@ function mapShellSurface(surface, child) {
 
             // Switch to the desktop layer and take focus
             compositorRoot.showHome = true;
+            compositorRoot.currentWindow = null;
             entry.window.child.takeFocus();
 
             return;
@@ -202,6 +204,7 @@ function mapShellSurface(surface, child) {
 function unmapApplicationSurface(surface) {
     // Reactivate home layer as soon as an application window is unmapped
     compositorRoot.showHome = true;
+    compositorRoot.currentWindow = null;
 }
 
 function unmapShellSurface(surface) {

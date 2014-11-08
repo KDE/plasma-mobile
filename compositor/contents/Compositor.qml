@@ -18,6 +18,7 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import "WindowManagement.js" as WindowManagement
 
@@ -27,6 +28,7 @@ Rectangle {
     readonly property alias layers: layers
     readonly property real topBarHeight: units.iconSizes.small
     readonly property real bottomBarHeight: units.iconSizes.medium
+    property var currentWindow: null
 
     id: compositorRoot
     color: "black"
@@ -89,16 +91,40 @@ Rectangle {
             }
         }
 
-        PlasmaCore.IconItem {
-            anchors.centerIn: parent
-            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-            width: units.iconSizes.smallMedium
-            height: width
-            source: "go-home"
+        ColumnLayout {
+            anchors.fill: parent
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: showHome = true
+            PlasmaCore.IconItem {
+                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                width: units.iconSizes.smallMedium
+                height: width
+                source: "window-close"
+
+                Layout.alignment: Qt.AlignHCenter
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (currentWindow) {
+                            currentWindow.close();
+                            currentWindow = null;
+                        }
+                    }
+                }
+            }
+
+            PlasmaCore.IconItem {
+                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                width: units.iconSizes.smallMedium
+                height: width
+                source: "go-home"
+
+                Layout.alignment: Qt.AlignHCenter
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: showHome = true
+                }
             }
         }
     }
