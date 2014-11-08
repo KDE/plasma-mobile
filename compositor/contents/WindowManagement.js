@@ -156,12 +156,12 @@ function mapShellSurface(surface, child) {
         var entry = surfaceModel.get(i);
 
         if (entry.surface === surface) {
-            // Set the appropriate z-index
-            entry.window.z = (surface.className == "plasmashell.desktop") ? 1 : 0;
-
-            // Switch to the desktop layer and take focus
-            compositorRoot.showHome = true;
-            compositorRoot.currentWindow = null;
+            // Switch to layer and take focus
+            if (surface.className == "plasmashell.desktop") {
+                compositorRoot.showPanel = true;
+            } else {
+                compositorRoot.showHome = true;
+            }
             entry.window.child.takeFocus();
 
             return;
@@ -177,20 +177,21 @@ function mapShellSurface(surface, child) {
 
     // Create and setup window container
     // XXX: We only support desktop roles for now
-    var window = component.createObject(compositorRoot.layers.desktop, {"child": child});
+    var window = component.createObject(compositorRoot, {"child": child});
+    window.parent = (surface.className == "plasmashell.desktop") ? compositorRoot.layers.panel : compositorRoot.layers.desktop;
     window.child.parent = window;
     window.child.touchEventsEnabled = true;
     window.x = window.y = 0;
     window.width = surface.size.width;
     window.height = surface.size.height;
 
-    // Set a higher z-index to windows created by the shell but
-    // not handled by the protocol (i.e. not home screen)
-    window.z = (surface.className == "plasmashell.desktop") ? 1 : 0;
-
     // Switch to the desktop layer and take focus
     compositorRoot.showSplash = false;
-    compositorRoot.showHome = true;
+    if (surface.className == "plasmashell.desktop") {
+        compositorRoot.showPanel = true;
+    } else {
+        compositorRoot.showHome = true;
+    }
     window.child.takeFocus();
 
     // Add surface to the model
@@ -208,17 +209,8 @@ function unmapApplicationSurface(surface) {
 }
 
 function unmapShellSurface(surface) {
-    // Lower unmapped shell surfaces not handled by the protocol
-    // (i.e. not home screen like sliding window)
+    // Hide panel layer if this is the sliding panel
     if (surface.className == "plasmashell.desktop") {
-        var i;
-        for (i = 0; i < surfaceModel.count; i++) {
-            var entry = surfaceModel.get(i);
-
-            if (entry.surface === surface) {
-                entry.window.z = -1;
-                return;
-            }
-        }
+        compositorRoot.showPanel = false;
     }
 }

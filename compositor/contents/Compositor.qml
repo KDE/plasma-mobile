@@ -25,6 +25,7 @@ import "WindowManagement.js" as WindowManagement
 Rectangle {
     property alias showSplash: splash.visible
     property bool showHome: true
+    property bool showPanel: true
     readonly property alias layers: layers
     readonly property real topBarHeight: units.iconSizes.small
     readonly property real bottomBarHeight: units.iconSizes.medium
@@ -57,6 +58,7 @@ Rectangle {
     QtObject {
         readonly property alias desktop: desktopLayer
         readonly property alias windows: windowsLayer
+        readonly property alias panel: panelLayer
 
         id: layers
     }
@@ -73,6 +75,12 @@ Rectangle {
         anchors.topMargin: topBarHeight
         anchors.bottomMargin: bottomBar.height
         z: showHome ? 1 : 2
+    }
+
+    Item {
+        id: panelLayer
+        anchors.fill: parent
+        z: showPanel ? 3 : 0
     }
 
     Rectangle {
