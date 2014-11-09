@@ -24,6 +24,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
 import org.kde.satellite.components 0.1 as SatelliteComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.nemomobile.voicecall 1.0
 import MeeGo.QOfono 0.2
 import "../components"
@@ -348,6 +349,16 @@ Item {
                 oldMouseY = mouse.y;
             }
             onReleased: slidingPanel.updateState();
+        }
+
+        PlasmaWorkspace.BatteryIcon {
+            id: batteryIcon
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+            }
+            width: units.iconSizes.small
+            height: width
         }
     }
 
