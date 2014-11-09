@@ -27,6 +27,7 @@ Requires:   libqofono-qt5
 Requires:   libqofono-qt5-declarative
 Requires:   voicecall-qt5
 Requires:   voicecall-qt5-plugin-ofono
+Requires:   nemo-qml-plugin-contextkit-qt5
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(Qt5Xml)

@@ -23,6 +23,7 @@ Requires:
     - libqofono-qt5-declarative
     - voicecall-qt5
     - voicecall-qt5-plugin-ofono
+    - nemo-qml-plugin-contextkit-qt5
 
 PkgBR:
     - extra-cmake-modules

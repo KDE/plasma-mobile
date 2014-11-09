@@ -26,6 +26,7 @@ import org.kde.satellite.components 0.1 as SatelliteComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.nemomobile.voicecall 1.0
+import org.freedesktop.contextkit 1.0
 import MeeGo.QOfono 0.2
 import "../components"
 
@@ -359,6 +360,20 @@ Item {
             }
             width: units.iconSizes.small
             height: width
+            hasBattery: batteryOn.value
+            batteryType: "Phone"
+            percent: batteryChargePercentage.value
+
+            ContextProperty {
+                id: batteryOn
+                key: "Battery.OnBattery"
+            }
+
+            ContextProperty {
+                id: batteryChargePercentage
+                key: "Battery.ChargePercentage"
+                value: "100"
+            }
         }
     }
 
