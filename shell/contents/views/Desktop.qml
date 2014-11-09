@@ -137,7 +137,7 @@ Item {
         onNetworkOperatorsChanged : {
             console.log("operators :"+netreg.currentOperator["Name"].toString())
         }
-        modemPath: ofonoManager.modems.count ? ofonoManager.modems[0] : ""
+        modemPath: ofonoManager.modems.length ? ofonoManager.modems[0] : ""
         function updateStrengthIcon() {
             if (netreg.strength >= 100) {
                 strengthIcon.source = "network-mobile-100";
