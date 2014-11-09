@@ -28,7 +28,7 @@ Rectangle {
     property bool showPanel: true
     readonly property alias layers: layers
     readonly property real topBarHeight: units.iconSizes.small
-    readonly property real bottomBarHeight: units.iconSizes.medium
+    readonly property real bottomBarHeight: units.iconSizes.large
     property var currentWindow: null
 
     id: compositorRoot
@@ -109,6 +109,8 @@ Rectangle {
                 source: "window-close"
 
                 Layout.alignment: Qt.AlignHCenter
+                Layout.preferredWidth: units.iconSizes.medium
+                Layout.preferredHeight: units.iconSizes.medium
 
                 MouseArea {
                     anchors.fill: parent
@@ -128,6 +130,8 @@ Rectangle {
                 source: "go-home"
 
                 Layout.alignment: Qt.AlignHCenter
+                Layout.preferredWidth: units.iconSizes.medium
+                Layout.preferredHeight: units.iconSizes.medium
 
                 MouseArea {
                     anchors.fill: parent
