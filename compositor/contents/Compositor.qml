@@ -118,6 +118,7 @@ Rectangle {
                         if (currentWindow) {
                             currentWindow.close();
                             currentWindow = null;
+                            showHome = true;
                         }
                     }
                 }
