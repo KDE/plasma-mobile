@@ -24,6 +24,7 @@ Requires:
     - voicecall-qt5
     - voicecall-qt5-plugin-ofono
     - nemo-qml-plugin-contextkit-qt5
+    - tone-generator
 
 PkgBR:
     - extra-cmake-modules
