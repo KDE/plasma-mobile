@@ -127,6 +127,7 @@ Item {
     property OfonoSimManager simManager: ofonoSimManager
     OfonoSimManager {
         id: ofonoSimManager
+        modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
     }
 
     OfonoNetworkRegistration {

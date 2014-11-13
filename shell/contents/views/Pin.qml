@@ -78,7 +78,7 @@ Rectangle {
             verticalAlignment: Qt.AlignVCenter
             font.pixelSize: theme.defaultFont.pixelSize
             color: textColor
-            text: i18n("%1 attempts left", simManager.pinRetries);
+            text: i18n("%1 attempts left", (simManager.pinRetries ? simManager.pinRetries[simManager.pinRequired] : 0));
         }
 
         Text {
@@ -99,28 +99,26 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            DialerButton { id: one; text: "1" } 
-            DialerButton { text: "2" }
-            DialerButton { text: "3" }
+            DialerButton { id: one; text: "1"; color: "white"; } 
+            DialerButton { text: "2"; color: "white"; }
+            DialerButton { text: "3"; color: "white"; }
 
-            DialerButton { text: "4" } 
-            DialerButton { text: "5" }
-            DialerButton { text: "6" }
+            DialerButton { text: "4"; color: "white"; } 
+            DialerButton { text: "5"; color: "white"; }
+            DialerButton { text: "6"; color: "white"; }
 
-            DialerButton { text: "7" } 
-            DialerButton { text: "8" }
-            DialerButton { text: "9" }
+            DialerButton { text: "7"; color: "white"; } 
+            DialerButton { text: "8"; color: "white"; }
+            DialerButton { text: "9"; color: "white"; }
 
-            DialerButton { text: "*"; } 
-            DialerButton { text: "0"; sub: "+"; }
+            DialerButton { text: "*"; color: "white"; } 
+            DialerButton { text: "0"; sub: "+"; color: "white"; }
             DialerButton {
                 text: "#"
+                 color: "white"
                 callback: function () {
                     simManager.enterPin(simManager.pinRequired, pinLabel.text)
-
-                    for (var i in simManager.pinRetries) {
-                        print("Retries object status:" + i + " " + simManager.pinRetries[i]);
-                    }
+                    pinLabel.text = "";
                 }
             }
         }

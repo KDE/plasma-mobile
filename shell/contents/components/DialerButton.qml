@@ -43,6 +43,6 @@ Text {
         opacity: 0.7
 
         font.pixelSize: parent.pixelSize * .8
-        color: dialer.textColor
+        color: parent.color
     }
 }
