@@ -75,6 +75,7 @@ Rectangle {
     }
 
     function secondsToTimeString(seconds) {
+        seconds = Math.floor(seconds/1000)
         var h = Math.floor(seconds / 3600);
         var m = Math.floor((seconds - (h * 3600)) / 60);
         var s = seconds - h * 3600 - m * 60;
@@ -232,7 +233,7 @@ Rectangle {
             DialerIconButton {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                source: dialer.state == "incoming" ? "call-start" : (manager.isMicrophoneMuted ? "audio-volume-high" : "audio-volume-muted")
+                source: dialer.state == "incoming" ? "call-start" : (manager.isMicrophoneMuted ? "audio-volume-muted" : "audio-volume-high")
                 Rectangle {
                     z: -1
                     color: dialer.state == "incoming" ? "green" : "white"
