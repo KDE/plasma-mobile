@@ -232,7 +232,7 @@ Rectangle {
             DialerIconButton {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                source: dialer.state == "incoming" ? "call-start" : (manager.muteMicrophone ? "audio-volume-high" : "audio-volume-muted")
+                source: dialer.state == "incoming" ? "call-start" : (manager.isMicrophoneMuted ? "audio-volume-high" : "audio-volume-muted")
                 Rectangle {
                     z: -1
                     color: dialer.state == "incoming" ? "green" : "white"
@@ -249,7 +249,7 @@ Rectangle {
                             manager.activeVoiceCall.answer();
                         }
                     } else {
-                        manager.setMuteMicrophone(manager.muteMicrophone ? false : true);
+                        manager.isMicrophoneMuted = !manager.isMicrophoneMuted;
                     }
                 }
             }
