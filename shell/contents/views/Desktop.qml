@@ -26,11 +26,12 @@ import org.kde.satellite.components 0.1 as SatelliteComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.nemomobile.voicecall 1.0
+import org.kde.kquickcontrolsaddons 2.0
 import org.freedesktop.contextkit 1.0
 import MeeGo.QOfono 0.2
 import "../components"
 
-Item {
+MouseEventListener {
     id: homescreen
     width: 1080
     height: 1920
@@ -86,6 +87,10 @@ Item {
             pendingRemovals.push(notificationId);
             pendingTimer.start();
         }
+    }
+
+    onPressAndHold: {
+        containment.action("configure").trigger();
     }
 
     OfonoManager {
