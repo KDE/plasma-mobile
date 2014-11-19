@@ -69,7 +69,7 @@ void ApplicationListModel::loadApplications()
         KSycocaEntry::Ptr groupEntry = (*it);
 
         if (groupEntry->isType(KST_KServiceGroup) && groupEntry->name() != "System") {
-            KServiceGroup::Ptr serviceGroup = static_cast<KServiceGroup::Ptr >(groupEntry);
+            KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(groupEntry.data()));
 
             if (!serviceGroup->noDisplay()) {
                 KServiceGroup::List entryGroupList = serviceGroup->entries(true);
@@ -78,7 +78,7 @@ void ApplicationListModel::loadApplications()
                     KSycocaEntry::Ptr entry = (*it);
                     ApplicationData data;
                     if (entry->isType(KST_KService)) {
-                        KService::Ptr service = static_cast<KService::Ptr >(entry);
+                        KService::Ptr service(static_cast<KService* >(entry.data()));
                         if (service->isApplication()) {
                             KPluginInfo plugin(service);
                             data.name = plugin.name();
