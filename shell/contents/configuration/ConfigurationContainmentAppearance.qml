@@ -81,5 +81,6 @@ ColumnLayout {
                 break;
             }
         }
+        root.restoreConfig()
     }
 }

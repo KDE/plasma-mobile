@@ -91,7 +91,11 @@ Rectangle {
     }
 
     function settingValueChanged() {
-        applyButton.enabled = true;
+        if (main.currentItem.saveConfig !== undefined) {
+            main.currentItem.saveConfig();
+        } else {
+            root.saveConfig();
+        }
     }
 //END functions
 
@@ -221,7 +225,6 @@ Rectangle {
                             if (currentItem["configurationChanged"]) {
                                 currentItem["configurationChanged"].connect(root.settingValueChanged)
                             }
-                            applyButton.enabled = false;
                             /*
                                 * This is not needed on a desktop shell that has ok/apply/cancel buttons, i'll leave it here only for future reference until we have a prototype for the active shell.
                                 * root.pageChanged will start a timer, that in turn will call saveConfig() when triggered
@@ -308,21 +311,10 @@ Rectangle {
         RowLayout {
             id: buttonsRow
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
             QtControls.Button {
-                iconName: "dialog-ok"
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "OK")
-                onClicked: acceptAction.trigger()
-            }
-            QtControls.Button {
-                id: applyButton
-                enabled: false
-                iconName: "dialog-ok-apply"
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Apply")
-                onClicked: applyAction.trigger()
-            }
-            QtControls.Button {
-                iconName: "dialog-cancel"
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Cancel")
+                iconName: "window-close"
+                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Close")
                 onClicked: cancelAction.trigger()
             }
         }
