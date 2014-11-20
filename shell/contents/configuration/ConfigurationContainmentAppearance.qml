@@ -24,8 +24,7 @@ import QtQuick.Layouts 1.1
 ColumnLayout {
     id: root
 
-    property int formAlignment: wallpaperComboBox.x + (units.largeSpacing/2)
-    property string currentWallpaper: ""
+    property string currentWallpaper: "org.kde.image"
     property string containmentPlugin: ""
     signal configurationChanged
 
@@ -38,7 +37,6 @@ ColumnLayout {
         }
         configDialog.currentWallpaper = root.currentWallpaper;
         configDialog.applyWallpaper()
-        configDialog.containmentPlugin = root.containmentPlugin
     }
 
     function restoreConfig() {
@@ -53,78 +51,6 @@ ColumnLayout {
         }
     }
 //END functions
-
-    Component.onCompleted: {
-        for (var i = 0; i < configDialog.containmentPluginsConfigModel.count; ++i) {
-            var data = configDialog.containmentPluginsConfigModel.get(i);
-            for(var j in data) print(j)
-            if (configDialog.containmentPlugin == data.pluginName) {
-                pluginComboBox.currentIndex = i
-                break;
-            }
-        }
-
-        for (var i = 0; i < configDialog.wallpaperConfigModel.count; ++i) {
-            var data = configDialog.wallpaperConfigModel.get(i);
-            for(var j in data) print(j)
-            if (configDialog.currentWallpaper == data.pluginName) {
-                wallpaperComboBox.currentIndex = i
-                break;
-            }
-        }
-    }
-
-    Row {
-        spacing: units.largeSpacing / 2
-        anchors.right: wallpaperRow.right
-        Item {
-            width: units.largeSpacing
-            height: parent.height
-        }
-        QtControls.Label {
-            anchors.verticalCenter: pluginComboBox.verticalCenter
-            text: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout:")
-        }
-        QtControls.ComboBox {
-            id: pluginComboBox
-            enabled: !plasmoid.immutable
-            model: configDialog.containmentPluginsConfigModel
-            width: theme.mSize(theme.defaultFont).width * 24
-            textRole: "name"
-            onCurrentIndexChanged: {
-                var model = configDialog.containmentPluginsConfigModel.get(currentIndex)
-                root.containmentPlugin = model.pluginName
-                root.configurationChanged()
-            }
-        }
-    }
-
-    Row {
-        id: wallpaperRow
-        spacing: units.largeSpacing / 2
-        Item {
-            width: units.largeSpacing
-            height: parent.height
-        }
-        QtControls.Label {
-            anchors.verticalCenter: wallpaperComboBox.verticalCenter
-            text: i18nd("plasma_shell_org.kde.plasma.desktop", "Wallpaper Type:")
-        }
-        QtControls.ComboBox {
-            id: wallpaperComboBox
-            model: configDialog.wallpaperConfigModel
-            width: theme.mSize(theme.defaultFont).width * 24
-            textRole: "name"
-            onCurrentIndexChanged: {
-                var model = configDialog.wallpaperConfigModel.get(currentIndex)
-                root.currentWallpaper = model.pluginName
-                main.sourceFile = model.source
-                configDialog.currentWallpaper = model.pluginName
-                root.restoreConfig()
-                root.configurationChanged()
-            }
-        }
-    }
 
     Item {
         id: emptyConfig
@@ -143,6 +69,16 @@ ColumnLayout {
                 replace(Qt.resolvedUrl(sourceFile))
             } else {
                 replace(emptyConfig);
+            }
+        }
+    }
+    
+    Component.onCompleted: {
+        for (var i = 0; i < configDialog.wallpaperConfigModel.count; ++i) {
+            var data = configDialog.wallpaperConfigModel.get(i);
+            if (configDialog.currentWallpaper == data.pluginName) {
+                main.sourceFile = data.source;
+                break;
             }
         }
     }
