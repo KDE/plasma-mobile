@@ -27,7 +27,6 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.nemomobile.voicecall 1.0
 import org.kde.kquickcontrolsaddons 2.0
-import org.freedesktop.contextkit 1.0
 import MeeGo.QOfono 0.2
 import "../components"
 
@@ -358,6 +357,7 @@ MouseEventListener {
             onReleased: slidingPanel.updateState();
         }
 
+
         PlasmaWorkspace.BatteryIcon {
             id: batteryIcon
             anchors {
@@ -366,19 +366,21 @@ MouseEventListener {
             }
             width: units.iconSizes.small
             height: width
-            hasBattery: batteryOn.value
+            hasBattery: pmSource.data["Battery"]["Has Battery"]
             batteryType: "Phone"
-            percent: batteryChargePercentage.value
+            percent: pmSource.data["Battery0"] ? pmSource.data["Battery0"]["Percent"] : 0
 
-            ContextProperty {
-                id: batteryOn
-                key: "Battery.OnBattery"
-            }
-
-            ContextProperty {
-                id: batteryChargePercentage
-                key: "Battery.ChargePercentage"
-                value: "100"
+            PlasmaCore.DataSource {
+                id: pmSource
+                engine: "powermanagement"
+                connectedSources: sources
+                onSourceAdded: {
+                    disconnectSource(source);
+                    connectSource(source);
+                }
+                onSourceRemoved: {
+                    disconnectSource(source);
+                }
             }
         }
     }
