@@ -25,9 +25,7 @@ Item {
     property var child
     property var role: child.surface.windowProperties.role
 
-    width: child.surface && child.surface.size.width >= 0 ? child.surface.size.width : 0
-    height: child.surface && child.surface.size.height >= 0 ? child.surface.size.height : 0
-
+    id: window
     onVisibleChanged: {
         if (child)
             child.surface.clientRenderingEnabled = visible;
@@ -36,6 +34,14 @@ Item {
     SurfaceRenderer {
         anchors.fill: parent
         source: child
+    }
+
+    Connections {
+        target: child.surface
+        onSizeChanged: {
+            window.width = child.surface.size.width;
+            window.height = child.surface.size.height;
+        }
     }
 
     function close() {

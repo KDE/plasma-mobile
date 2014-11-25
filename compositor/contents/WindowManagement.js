@@ -132,9 +132,6 @@ function mapApplicationSurface(surface) {
     window.width = surface.size.width;
     window.height = surface.size.height;
 
-    // Ask the client to resize
-    surface.requestSize(window.parent.width, window.parent.height);
-
     // Switch to the applications layer and take focus
     compositorRoot.showHome = false;
     compositorRoot.currentWindow = window;
