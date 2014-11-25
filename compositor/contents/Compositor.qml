@@ -67,6 +67,7 @@ Rectangle {
         id: desktopLayer
         anchors.fill: parent
         z: showHome ? 2 : 1
+        visible: showHome || showPanel
     }
 
     Item {
@@ -75,12 +76,14 @@ Rectangle {
         anchors.topMargin: topBarHeight
         anchors.bottomMargin: bottomBar.height
         z: showHome ? 1 : 2
+        visible: !showHome
     }
 
     Item {
         id: panelLayer
         anchors.fill: parent
         z: showPanel ? 3 : 0
+        visible: showPanel
     }
 
     Rectangle {
