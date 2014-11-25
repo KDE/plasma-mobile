@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kio 1.0 as Kio
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 MouseArea {
     id: root
@@ -19,7 +20,7 @@ MouseArea {
         source: model.ApplicationIconRole
     }
 
-    Text {
+    PlasmaComponents.Label {
         visible: text.length > 0
 
         anchors {
@@ -34,6 +35,6 @@ MouseArea {
 
         text: model.ApplicationNameRole
         font.pixelSize: theme.smallestFont.pixelSize
-        color: "white"
+        color: PlasmaCore.ColorScope.textColor
     }
 }

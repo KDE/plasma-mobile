@@ -295,91 +295,96 @@ MouseEventListener {
         source: simManager.pinRequired != OfonoSimManager.NoPin ? Qt.resolvedUrl("Pin.qml") : ""
     }
 
-    Rectangle {
+    PlasmaCore.ColorScope {
         id: statusPanel
         anchors {
             top: parent.top
             left: parent.left
             right: parent.right
         }
-        z: 1
         height: units.iconSizes.small
-        color: Qt.rgba(0, 0, 0, 0.7)
+        z: 1
+        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
-        PlasmaCore.DataSource {
-            id: timeSource
-            engine: "time"
-            connectedSources: ["Local"]
-            interval: 500
-        }
-
-        PlasmaCore.IconItem {
-            id: strengthIcon
-            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-            anchors {
-                left: parent.left
-                verticalCenter: parent.verticalCenter
-            }
-            width: units.iconSizes.small
-            height: width
-        }
-        Text {
-            anchors {
-                left: strengthIcon.right
-                verticalCenter: parent.verticalCenter
-            }
-            text: netreg.strength + "% " + netreg.name
-            color: "white"
-            font.pixelSize: parent.height / 2
-        }
-        Text {
-            id: clock
+        Rectangle {
             anchors.fill: parent
-            text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
-            color: "white"
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: height / 2
-        }
-        MouseArea {
-            property int oldMouseY: 0
-
-            anchors.fill: parent
-            enabled: !dialerOverlay.item.visible
-            onPressed: {
-                oldMouseY = mouse.y;
-                slidingPanel.visible = true;
-            }
-            onPositionChanged: {
-                slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY);
-                oldMouseY = mouse.y;
-            }
-            onReleased: slidingPanel.updateState();
-        }
-
-
-        PlasmaWorkspace.BatteryIcon {
-            id: batteryIcon
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-            }
-            width: units.iconSizes.small
-            height: width
-            hasBattery: pmSource.data["Battery"]["Has Battery"]
-            batteryType: "Phone"
-            percent: pmSource.data["Battery0"] ? pmSource.data["Battery0"]["Percent"] : 0
+            color: Qt.rgba(0, 0, 0, 0.7)
 
             PlasmaCore.DataSource {
-                id: pmSource
-                engine: "powermanagement"
-                connectedSources: sources
-                onSourceAdded: {
-                    disconnectSource(source);
-                    connectSource(source);
+                id: timeSource
+                engine: "time"
+                connectedSources: ["Local"]
+                interval: 500
+            }
+
+            PlasmaCore.IconItem {
+                id: strengthIcon
+                colorGroup: PlasmaCore.ColorScope.colorGroup
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
                 }
-                onSourceRemoved: {
-                    disconnectSource(source);
+                width: units.iconSizes.small
+                height: width
+            }
+            PlasmaComponents.Label {
+                anchors {
+                    left: strengthIcon.right
+                    verticalCenter: parent.verticalCenter
+                }
+                text: netreg.strength + "% " + netreg.name
+                color: PlasmaCore.ColorScope.textColor
+                font.pixelSize: parent.height / 2
+            }
+            PlasmaComponents.Label {
+                id: clock
+                anchors.fill: parent
+                text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
+                color: PlasmaCore.ColorScope.textColor
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                font.pixelSize: height / 2
+            }
+            MouseArea {
+                property int oldMouseY: 0
+
+                anchors.fill: parent
+                enabled: !dialerOverlay.item.visible
+                onPressed: {
+                    oldMouseY = mouse.y;
+                    slidingPanel.visible = true;
+                }
+                onPositionChanged: {
+                    slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY);
+                    oldMouseY = mouse.y;
+                }
+                onReleased: slidingPanel.updateState();
+            }
+
+
+            PlasmaWorkspace.BatteryIcon {
+                id: batteryIcon
+                anchors {
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                }
+                width: units.iconSizes.small
+                height: width
+                hasBattery: pmSource.data["Battery"]["Has Battery"]
+                batteryType: "Phone"
+                percent: pmSource.data["Battery0"] ? pmSource.data["Battery0"]["Percent"] : 0
+
+                PlasmaCore.DataSource {
+                    id: pmSource
+                    engine: "powermanagement"
+                    connectedSources: sources
+                    onSourceAdded: {
+                        disconnectSource(source);
+                        connectSource(source);
+                    }
+                    onSourceRemoved: {
+                        disconnectSource(source);
+                    }
                 }
             }
         }
@@ -391,121 +396,133 @@ MouseEventListener {
         height: homescreen.height
     }
 
-    ListView {
-        id: notificationView
-        spacing: units.smallSpacing
+    PlasmaCore.ColorScope {
+        z: 1
         anchors {
             top: statusPanel.bottom
-            bottom: stripe.top
-            left: parent.left
-            right: parent.right
-            bottomMargin: units.smallSpacing
-        }
-
-        z: 1
-        clip: true
-        verticalLayoutDirection: ListView.BottomToTop
-        model: notificationsModel
-        add: Transition {
-                NumberAnimation {
-                    properties: "x"
-                    from: notificationView.width
-                    duration: 100
-                }
-            }
-
-        remove: Transition {
-                NumberAnimation {
-                    properties: "x"
-                    to: notificationView.width
-                    duration: 500
-                }
-                NumberAnimation {
-                    properties: "opacity"
-                    to: 0
-                    duration: 500
-                }
-            }
-
-        removeDisplaced: Transition {
-            SequentialAnimation {
-                PauseAnimation { duration: 600 }
-                NumberAnimation { properties: "x,y"; duration: 100 }
-            }
-        }
-
-        delegate: NotificationStripe {}
-    }
-
-    SatelliteStripe {
-        id: stripe
-        z: 1
-
-        PlasmaCore.Svg {
-            id: stripeIcons
-            imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
-        }
-
-        Row {
-            anchors.fill: parent
-            property int columns: 4
-            property alias buttonHeight: stripe.height
-
-            HomeLauncherSvg {
-                id: phoneIcon
-                svg: stripeIcons
-                elementId: "phone"
-                callback: function() {
-                    dialerOverlay.open()
-                }
-            }
-
-            HomeLauncherSvg {
-                id: messagingIcon
-                svg: stripeIcons
-                elementId: "messaging"
-                callback: function() { console.log("Start messaging") }
-            }
-
-
-            HomeLauncherSvg {
-                id: emailIcon
-                svg: stripeIcons
-                elementId: "email"
-                callback: function() { console.log("Start email") }
-            }
-
-
-            HomeLauncherSvg {
-                id: webIcon
-                svg: stripeIcons
-                elementId: "web"
-                callback: function() { console.log("Start web") }
-            }
-        }
-    }
-
-    SatelliteComponents.ApplicationListModel {
-        id: appListModel
-    }
-
-    GridView {
-        id: applications
-        anchors {
-            top: stripe.bottom
             bottom: parent.bottom
             left: parent.left
             right: parent.right
-            topMargin: units.smallSpacing
         }
-        z: 1
-        cellWidth: stripe.height * 2
-        cellHeight: cellWidth
-        model: appListModel
-        snapMode: GridView.SnapToRow
-        clip: true
-        delegate: HomeLauncher {}
-        Component.onCompleted : { console.log("WTF " + width) }
+
+        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+
+        ListView {
+            id: notificationView
+            spacing: units.smallSpacing
+            anchors {
+                top: parent.top
+                bottom: stripe.top
+                left: parent.left
+                right: parent.right
+                bottomMargin: units.smallSpacing
+            }
+
+            z: 1
+            clip: true
+            verticalLayoutDirection: ListView.BottomToTop
+            model: notificationsModel
+            add: Transition {
+                    NumberAnimation {
+                        properties: "x"
+                        from: notificationView.width
+                        duration: 100
+                    }
+                }
+
+            remove: Transition {
+                    NumberAnimation {
+                        properties: "x"
+                        to: notificationView.width
+                        duration: 500
+                    }
+                    NumberAnimation {
+                        properties: "opacity"
+                        to: 0
+                        duration: 500
+                    }
+                }
+
+            removeDisplaced: Transition {
+                SequentialAnimation {
+                    PauseAnimation { duration: 600 }
+                    NumberAnimation { properties: "x,y"; duration: 100 }
+                }
+            }
+
+            delegate: NotificationStripe {}
+        }
+
+        SatelliteStripe {
+            id: stripe
+            z: 1
+
+            PlasmaCore.Svg {
+                id: stripeIcons
+                imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
+            }
+
+            Row {
+                anchors.fill: parent
+                property int columns: 4
+                property alias buttonHeight: stripe.height
+
+                HomeLauncherSvg {
+                    id: phoneIcon
+                    svg: stripeIcons
+                    elementId: "phone"
+                    callback: function() {
+                        dialerOverlay.open()
+                    }
+                }
+
+                HomeLauncherSvg {
+                    id: messagingIcon
+                    svg: stripeIcons
+                    elementId: "messaging"
+                    callback: function() { console.log("Start messaging") }
+                }
+
+
+                HomeLauncherSvg {
+                    id: emailIcon
+                    svg: stripeIcons
+                    elementId: "email"
+                    callback: function() { console.log("Start email") }
+                }
+
+
+                HomeLauncherSvg {
+                    id: webIcon
+                    svg: stripeIcons
+                    elementId: "web"
+                    callback: function() { console.log("Start web") }
+                }
+            }
+        }
+
+        SatelliteComponents.ApplicationListModel {
+            id: appListModel
+        }
+
+        GridView {
+            id: applications
+            anchors {
+                top: stripe.bottom
+                bottom: parent.bottom
+                left: parent.left
+                right: parent.right
+                topMargin: units.smallSpacing
+            }
+            z: 1
+            cellWidth: stripe.height * 2
+            cellHeight: cellWidth
+            model: appListModel
+            snapMode: GridView.SnapToRow
+            clip: true
+            delegate: HomeLauncher {}
+            Component.onCompleted : { console.log("WTF " + width) }
+        }
     }
 
     Component.onCompleted: {

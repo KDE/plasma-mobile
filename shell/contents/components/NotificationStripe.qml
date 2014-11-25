@@ -19,6 +19,7 @@
 
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 MouseArea {
     id: root
@@ -124,13 +125,13 @@ MouseArea {
             color: textGradientOverlay
         }
 
-        Text {
+        PlasmaComponents.Label {
             id: summaryText
             anchors.fill: parent
             clip: true
             horizontalAlignment: root.expanded ? Qt.AlignHCenter : Qt.AlignLeft
             verticalAlignment: Qt.AlignVCenter
-            color: "white"
+            color: PlasmaCore.ColorScope.textColor
             text: summary + (root.expanded ? (body ? "\n" + body : '') :
                                              (body ? '...' : ''))
         }
