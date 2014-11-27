@@ -29,9 +29,9 @@
 #include <KStandardDirs>
 #include "Plasma/Package"
 
-#include <kdeclarative.h>
+#include <kdeclarative/kdeclarative.h>
 
-View::View(const QString &module, QWidget *parent)
+View::View(const QString &module, QWindow *parent)
     : QQuickView(parent),
     m_package(0),
     m_settingsRoot(0)
@@ -44,7 +44,7 @@ View::View(const QString &module, QWidget *parent)
 
     setResizeMode(QQuickView::SizeRootObjectToView);
 
-    KDeclarative kdeclarative;
+    KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
     kdeclarative.initialize();
     //binds things like kconfig and icons

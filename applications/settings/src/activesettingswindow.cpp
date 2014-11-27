@@ -32,8 +32,8 @@
 
 #include "view.h"
 
-ActiveSettingsWindow::ActiveSettingsWindow(const QString &url, QWidget *parent)
-    : QMainWindow(parent)
+ActiveSettingsWindow::ActiveSettingsWindow(const QString &url, QWindow *parent)
+    : QQuickWindow(parent)
 {
     setAcceptDrops(true);
     addAction(KStandardAction::close(this, SLOT(close()), this));

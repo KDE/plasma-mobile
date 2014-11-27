@@ -109,8 +109,10 @@ int main(int argc, char **argv)
     KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
 
     const QString themeName = cg.readEntry("name", "air-mobile");
-    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
-    Plasma::Theme::defaultTheme()->setThemeName(themeName);
+    auto theme = new Plasma::Theme(themeName, &app);
+    theme->setUseGlobalSettings(false);
+//     Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
+//     Plasma::Theme::defaultTheme()->setThemeName(themeName);
 
     app.newWindow(module);
     args->clear();

@@ -16,7 +16,7 @@ target_link_libraries(active-settings
     Qt5::Quick
     Qt5::Gui
     KF5::Plasma
-    KF5::KDeclarative
+    KF5::Declarative
     KF5::KDELibs4Support
 )
 

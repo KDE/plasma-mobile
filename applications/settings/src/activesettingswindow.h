@@ -22,7 +22,7 @@
 #ifndef ACTIVESETTINGSWINDOW_H
 #define ACTIVESETTINGSWINDOW_H
 
-#include <QMainWindow>
+#include <QQuickWindow>
 
 class View;
 
@@ -33,11 +33,11 @@ class View;
  * @author Sebastian Kügler <sebas@kde.org>
  * @version 0.1
  */
-class ActiveSettingsWindow : public QMainWindow
+class ActiveSettingsWindow : public QQuickWindow
 {
     Q_OBJECT
 public:
-    explicit ActiveSettingsWindow(const QString &url, QWidget *parent = 0);
+    explicit ActiveSettingsWindow(const QString &url, QWindow *parent = 0);
     virtual ~ActiveSettingsWindow();
     QString name();
     QIcon icon();
