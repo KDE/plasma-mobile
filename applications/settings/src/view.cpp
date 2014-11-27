@@ -20,10 +20,9 @@
 
 #include "view.h"
 
-#include <QDeclarativeContext>
-#include <QDeclarativeEngine>
-#include <QDeclarativeItem>
-#include <QScriptValue>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickItem>
 #include <QTimer>
 
 //#include <KConfigGroup>
@@ -33,7 +32,7 @@
 #include <kdeclarative.h>
 
 View::View(const QString &module, QWidget *parent)
-    : QDeclarativeView(parent),
+    : QQuickView(parent),
     m_package(0),
     m_settingsRoot(0)
 {
@@ -43,7 +42,7 @@ View::View(const QString &module, QWidget *parent)
     viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
     viewport()->setAttribute(Qt::WA_NoSystemBackground);
 
-    setResizeMode(QDeclarativeView::SizeRootObjectToView);
+    setResizeMode(QQuickView::SizeRootObjectToView);
 
     KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
@@ -65,8 +64,8 @@ View::View(const QString &module, QWidget *parent)
     onStatusChanged(status());
 
     //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
-    connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
-            this, SLOT(onStatusChanged(QDeclarativeView::Status)));
+    connect(this, SIGNAL(statusChanged(QQuickView::Status)),
+            this, SLOT(onStatusChanged(QQuickView::Status)));
 }
 
 View::~View()
@@ -79,21 +78,21 @@ void View::updateStatus()
     onStatusChanged(status());
 }
 
-void View::onStatusChanged(QDeclarativeView::Status status)
+void View::onStatusChanged(QQuickView::Status status)
 {
     //kDebug() << "onStatusChanged";
-    if (status == QDeclarativeView::Ready) {
+    if (status == QQuickView::Ready) {
         if (!m_settingsRoot) {
-            m_settingsRoot = rootObject()->findChild<QDeclarativeItem*>("settingsRoot");
+            m_settingsRoot = rootObject()->findChild<QQuickItem*>("settingsRoot");
             if (!m_settingsRoot) {
                 kError() << "settingsRoot component not found. :(";
             }
         }
-    } else if (status == QDeclarativeView::Error) {
-        foreach (const QDeclarativeError &e, errors()) {
+    } else if (status == QQuickView::Error) {
+        foreach (const QQmlError &e, errors()) {
             kWarning() << "error in QML: " << e.toString() << e.description();
         }
-    } else if (status == QDeclarativeView::Loading) {
+    } else if (status == QQuickView::Loading) {
         //kDebug() << "Loading.";
     }
 }

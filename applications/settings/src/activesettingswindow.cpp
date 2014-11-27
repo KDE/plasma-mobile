@@ -26,6 +26,7 @@
 #include <KAction>
 #include <KIcon>
 #include <KStandardAction>
+#include <KGlobal>
 
 #include <Plasma/Theme>
 

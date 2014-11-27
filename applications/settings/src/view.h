@@ -20,15 +20,15 @@
 
 #ifndef VIEW_H
 #define VIEW_H
-#include <QDeclarativeItem>
-#include <QDeclarativeView>
+#include <QQuickItem>
+#include <QQuickView>
 
 namespace Plasma
 {
     class Package;
 }
 
-class View : public QDeclarativeView
+class View : public QQuickView
 {
     Q_OBJECT
 
@@ -40,12 +40,12 @@ Q_SIGNALS:
     void titleChanged(const QString&);
 
 private Q_SLOTS:
-    void onStatusChanged(QDeclarativeView::Status status);
+    void onStatusChanged(QQuickView::Status status);
     void updateStatus();
 
 private:
     Plasma::Package *m_package;
-    QDeclarativeItem* m_settingsRoot;
+    QQuickItem* m_settingsRoot;
 };
 
 #endif // VIEW_H
