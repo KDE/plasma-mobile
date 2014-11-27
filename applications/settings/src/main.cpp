@@ -23,7 +23,7 @@
 #include <iomanip>
 
 // KDE
-#include <KAboutData>
+#include <K4AboutData>
 #include <KCmdLineArgs>
 #include <KConfigGroup>
 #include <KDebug>
@@ -42,8 +42,8 @@ static const char HOME_URL[] = "http://plasma-active.org";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("active-settings", 0, ki18n("Plasma Active Settings"), version, ki18n(description),
-                     KAboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");
+    K4AboutData about("active-settings", 0, ki18n("Plasma Active Settings"), version, ki18n(description),
+                     K4AboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");
                      about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
     KCmdLineArgs::init(argc, argv, &about);
 
