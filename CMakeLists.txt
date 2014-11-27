@@ -24,7 +24,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick X11Extras Svg Test PrintSupport WebKitWidgets)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick X11Extras Svg Test PrintSupport WebKitWidgets Gui)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
