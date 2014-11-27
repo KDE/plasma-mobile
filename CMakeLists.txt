@@ -41,3 +41,5 @@ install(DIRECTORY wallpaper/ DESTINATION "${WALLPAPER_INSTALL_DIR}/org.kde.satel
 add_subdirectory(bin)
 add_subdirectory(qmlcomponents)
 add_subdirectory(services)
+
+install(DIRECTORY settingsmodules DESTINATION ${DATA_INSTALL_DIR})
