@@ -57,7 +57,7 @@ find_package(KF5Declarative REQUIRED NO_MODULE)
 find_package(KF5KIO REQUIRED NO_MODULE)
 find_package(KF5KDELibs4Support REQUIRED NO_MODULE)
 find_package(KF5Activities REQUIRED NO_MODULE)
-find_package(Baloo REQUIRED NO_MODULE)
+find_package(KF5Baloo REQUIRED NO_MODULE)
 find_package(KF5Declarative REQUIRED NO_MODULE)
 find_package(PkgConfig)
 #########################################################################
