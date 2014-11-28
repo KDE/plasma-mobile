@@ -132,7 +132,7 @@ function mapApplicationSurface(surface) {
     window.height = surface.size.height;
 
     // Switch to the applications layer and take focus
-    compositorRoot.showHome = false;
+    compositorRoot.state = "application";
     compositorRoot.currentWindow = window;
     window.child.takeFocus();
 
@@ -162,7 +162,7 @@ function mapShellSurface(surface, child) {
             if (surface.className == "plasmashell.desktop") {
                 compositorRoot.showPanel = true;
             } else {
-                compositorRoot.showHome = true;
+                compositorRoot.state = "homeScreen";
             }
             entry.window.child.takeFocus();
 
@@ -192,7 +192,7 @@ function mapShellSurface(surface, child) {
     if (surface.className == "plasmashell.desktop") {
         compositorRoot.showPanel = true;
     } else {
-        compositorRoot.showHome = true;
+        compositorRoot.state = "homeScreen";
     }
     window.child.takeFocus();
 
@@ -206,7 +206,7 @@ function mapShellSurface(surface, child) {
 
 function unmapApplicationSurface(surface) {
     // Reactivate home layer as soon as an application window is unmapped
-    compositorRoot.showHome = true;
+    compositorRoot.state = "homeScreen";
     compositorRoot.currentWindow = null;
 }
 

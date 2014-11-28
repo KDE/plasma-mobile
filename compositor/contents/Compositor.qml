@@ -25,23 +25,22 @@ import "WindowManagement.js" as WindowManagement
 
 Rectangle {
     property alias showSplash: splash.visible
-    property bool showHome: true
     property bool showPanel: true
     readonly property alias layers: layers
     readonly property real topBarHeight: units.iconSizes.small
-    readonly property real bottomBarHeight: units.iconSizes.large
+    readonly property real bottomBarHeight: units.iconSizes.medium
     property var currentWindow: null
 
     onCurrentWindowChanged: {
         if (!currentWindow) {
             return;
         }
-        compositorRoot.showHome = false;
-        windowsLayout.scale = 1;
+        compositorRoot.state = "application";
     }
 
     id: compositorRoot
     color: "black"
+    state: "homeScreen"
 
     Image {
         id: splash
@@ -76,7 +75,6 @@ Rectangle {
         id: desktopLayer
         anchors.fill: parent
         visible: true
-        z: showHome ? 2 : 1
     }
 
     Rectangle {
@@ -84,14 +82,6 @@ Rectangle {
         anchors.fill: parent
         anchors.topMargin: topBarHeight
         color: Qt.rgba(0, 0, 0, 0.5)
-        opacity: windowsLayer.switchMode || !compositorRoot.showHome ? 1 : 0
-        z: showHome ? 1 : 2
-        Behavior on opacity {
-            NumberAnimation {
-                easing.type: "InOutQuad"
-                duration: units.longDuration
-            }
-        }
 
         Flickable {
             id: windowsLayer
@@ -113,28 +103,15 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    windowsLayout.scale = 1
-                    compositorRoot.showHome = true;
+                    compositorRoot.state = "homeScreen";
                 }
                 Row {
                     id: windowsLayout
                     height: windowsLayerBackground.height
                     transformOrigin: Item.Left
-
-                    Behavior on scale {
-                        enabled: !taskSwitchEdge.active
-                        ParallelAnimation {
-                            PropertyAnimation {
-                                duration: units.shortDuration
-                                easing: Easing.InOutQuad
-                            }
-                            PropertyAnimation {
-                                target: windowsLayer
-                                property: "contentX"
-                                to: compositorRoot.currentWindow ? compositorRoot.currentWindow.x : 0
-                                duration: units.shortDuration
-                                easing: Easing.InOutQuad
-                            }
+                    onChildrenChanged: {
+                        if (children.length == 0) {
+                            compositorRoot.state = "homeScreen";
                         }
                     }
                 }
@@ -156,7 +133,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: (!windowsLayer.switchMode) ? 0 : bottomBarHeight
-        color: "black"
+        color: Qt.rgba(0, 0, 0, 0.5)
 
         Behavior on height {
             NumberAnimation {
@@ -181,8 +158,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        showHome = true
-                        windowsLayout.scale = 1
+                        compositorRoot.state = "homeScreen";
                     }
                 }
             }
@@ -206,10 +182,10 @@ Rectangle {
             oldX = mouse.x;
         }
         onPositionChanged: {
+            compositorRoot.state = "switcher";
             var newScale = (1-Math.abs(mouse.y)/(compositorRoot.height/2))
             if (newScale > 0.3) {
                 windowsLayout.scale = newScale
-                compositorRoot.showHome = false;
             }
             windowsLayer.contentX -= (mouse.x - oldX);
             oldX = mouse.x;
@@ -217,9 +193,104 @@ Rectangle {
         onReleased: {
             active = false
             if (windowsLayout.scale > 0.7) {
-                windowsLayout.scale = 1
-                compositorRoot.showHome = true;
+                compositorRoot.state = compositorRoot.currentWindow ? "application" : "homeScreen";
             }
         }
     }
+
+    states: [
+        State {
+            name: "homeScreen"
+            PropertyChanges {
+                target: windowsLayerBackground
+                opacity: 0
+            }
+            PropertyChanges {
+                target: windowsLayout
+                scale: 1
+            }
+        },
+        State {
+            name: "application"
+            PropertyChanges {
+                target: windowsLayerBackground
+                opacity: 1
+            }
+            PropertyChanges {
+                target: windowsLayout
+                scale: 1
+            }
+            PropertyChanges {
+                target: windowsLayer
+                contentX: compositorRoot.currentWindow ? compositorRoot.currentWindow.x : 0
+            }
+        },
+        State {
+            name: "switcher"
+            PropertyChanges {
+                target: windowsLayerBackground
+                opacity: 1
+            }
+            PropertyChanges {
+                target: windowsLayer
+                contentX: compositorRoot.currentWindow ? compositorRoot.currentWindow.x : 0
+            }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            to: "switcher"
+            SequentialAnimation {
+                ScriptAction {
+                    script: {
+                        desktopLayer.z = 1
+                        windowsLayerBackground.z = 2
+                    }
+                }
+                PropertyAnimation {
+                    target: windowsLayerBackground
+                    duration: units.longDuration
+                    easing: Easing.InOutQuad
+                    properties: "opacity"
+                }
+            }
+        },
+        Transition {
+            SequentialAnimation {
+                ParallelAnimation {
+                    PropertyAnimation {
+                        target: windowsLayerBackground
+                        duration: units.longDuration
+                        easing: Easing.InOutQuad
+                        properties: "opacity"
+                    }
+                    PropertyAnimation {
+                        target: windowsLayout
+                        duration: units.shortDuration
+                        easing: Easing.InOutQuad
+                        properties: "scale"
+                    }
+                    PropertyAnimation {
+                        target: windowsLayer
+                        duration: units.shortDuration
+                        easing: Easing.InOutQuad
+                        properties: "contentX"
+                    }
+                }
+                ScriptAction {
+                    script: {
+                        if (compositorRoot.state == "homeScreen") {
+                            desktopLayer.z = 2;
+                            windowsLayerBackground.z = 1;
+                            compositorRoot.currentWindow = null;
+                        } else {
+                            desktopLayer.z = 1;
+                            windowsLayerBackground.z = 2;
+                        }
+                    }
+                }
+            }
+        }
+    ]
 }
