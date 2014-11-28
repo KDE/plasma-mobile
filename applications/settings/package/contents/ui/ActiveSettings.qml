@@ -37,7 +37,7 @@ Rectangle {
         source: "image://appbackgrounds/standard"
         fillMode: Image.Tile
         asynchronous: true
-        anchors.margins: 8
+        //anchors.margins: 8
         anchors.fill: parent
 
         Item {

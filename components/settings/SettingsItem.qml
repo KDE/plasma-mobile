@@ -34,7 +34,7 @@ PlasmaComponents.PageStack {
         var mainscript = switcherPackage.filePath("mainscript");
         print("Loading mainscript: " + mainscript);
         settingsLoader.source = mainscript;
-        //moduleContainer.push(settingsLoader);
+        moduleContainer.push(settingsLoader);
         moduleContainer.module = module
     }
 
