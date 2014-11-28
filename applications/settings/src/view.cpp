@@ -27,21 +27,16 @@
 
 //#include <KConfigGroup>
 #include <KStandardDirs>
-#include "Plasma/Package"
+#include <Plasma/Package>
+#include <Plasma/PluginLoader>
 
 #include <kdeclarative/kdeclarative.h>
 
 View::View(const QString &module, QWindow *parent)
     : QQuickView(parent),
-    m_package(0),
+    m_package(Plasma::PluginLoader::self()->loadPackage("org.kde.active.settings")),
     m_settingsRoot(0)
 {
-    // avoid flicker on show
-    setAttribute(Qt::WA_OpaquePaintEvent);
-    setAttribute(Qt::WA_NoSystemBackground);
-    viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
-    viewport()->setAttribute(Qt::WA_NoSystemBackground);
-
     setResizeMode(QQuickView::SizeRootObjectToView);
 
     KDeclarative::KDeclarative kdeclarative;
@@ -50,15 +45,17 @@ View::View(const QString &module, QWindow *parent)
     //binds things like kconfig and icons
     kdeclarative.setupBindings();
 
-    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    m_package = new Plasma::Package(QString(), "org.kde.active.settings", structure);
+    //Plasma::PackageStructure structure = Plasma::PackageStructure::load("Plasma/Generic");
+    //m_package = new Plasma::Package(QString(), "org.kde.active.settings", structure);
+
+    //m_package = Plasma::PluginLoader::self()->loadPackage("org.kde.active.settings");
 
     if (!module.isEmpty()) {
         rootContext()->setContextProperty("startModule", module);
     }
 
-    const QString qmlFile = m_package->filePath("mainscript");
-    setSource(QUrl::fromLocalFile(m_package->filePath("mainscript")));
+    const QString qmlFile = m_package.filePath("mainscript");
+    setSource(QUrl::fromLocalFile(m_package.filePath("mainscript")));
     show();
 
     onStatusChanged(status());
@@ -70,7 +67,6 @@ View::View(const QString &module, QWindow *parent)
 
 View::~View()
 {
-    delete m_package;
 }
 
 void View::updateStatus()
@@ -85,12 +81,12 @@ void View::onStatusChanged(QQuickView::Status status)
         if (!m_settingsRoot) {
             m_settingsRoot = rootObject()->findChild<QQuickItem*>("settingsRoot");
             if (!m_settingsRoot) {
-                kError() << "settingsRoot component not found. :(";
+                qWarning() << "settingsRoot component not found. :(";
             }
         }
     } else if (status == QQuickView::Error) {
         foreach (const QQmlError &e, errors()) {
-            kWarning() << "error in QML: " << e.toString() << e.description();
+            qWarning() << "error in QML: " << e.toString() << e.description();
         }
     } else if (status == QQuickView::Loading) {
         //kDebug() << "Loading.";

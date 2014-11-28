@@ -23,10 +23,7 @@
 #include <QQuickItem>
 #include <QQuickView>
 
-namespace Plasma
-{
-    class Package;
-}
+#include <Plasma/Package>
 
 class View : public QQuickView
 {
@@ -44,7 +41,7 @@ private Q_SLOTS:
     void updateStatus();
 
 private:
-    Plasma::Package *m_package;
+    Plasma::Package m_package;
     QQuickItem* m_settingsRoot;
 };
 

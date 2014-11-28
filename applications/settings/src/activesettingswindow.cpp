@@ -35,9 +35,11 @@
 ActiveSettingsWindow::ActiveSettingsWindow(const QString &url, QWindow *parent)
     : QQuickWindow(parent)
 {
-    setAcceptDrops(true);
-    addAction(KStandardAction::close(this, SLOT(close()), this));
-    addAction(KStandardAction::quit(this, SLOT(close()), this));
+    QQuickWindow::setDefaultAlphaBuffer(true);
+
+    //setAcceptDrops(true);
+//     addAction(KStandardAction::close(this, SLOT(close()), this));
+//     addAction(KStandardAction::quit(this, SLOT(close()), this));
     m_widget = new View(url, this);
 
     KConfigGroup config(KGlobal::config(), "Window");
@@ -45,9 +47,10 @@ ActiveSettingsWindow::ActiveSettingsWindow(const QString &url, QWindow *parent)
     if (geom.isEmpty()) {
         setGeometry(qApp->desktop()->screenGeometry());
     } else {
-        restoreGeometry(geom);
+#warning "Port restoreGeometry"
+        //restoreGeometry(geom);
     }
-    setCentralWidget(m_widget);
+    //setCentralWidget(m_widget);
 }
 
 ActiveSettingsWindow::~ActiveSettingsWindow()
@@ -62,7 +65,7 @@ View* ActiveSettingsWindow::view()
 void ActiveSettingsWindow::closeEvent(QCloseEvent *)
 {
     KConfigGroup config(KGlobal::config(), "Window");
-    config.writeEntry("Geometry", saveGeometry());
+    config.writeEntry("Geometry", geometry());
 }
 
 QString ActiveSettingsWindow::name()
