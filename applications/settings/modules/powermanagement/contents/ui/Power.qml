@@ -18,12 +18,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtras
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.active.settings 0.1 as ActiveSettings
+import QtQuick 2.2
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.active.settings 2.0 as ActiveSettings
 
 Item {
     id: webModule
@@ -119,14 +119,14 @@ Item {
 
     Column {
         anchors.centerIn: parent
-        spacing: theme.defaultFont.mSize.height
+        spacing: theme.mSize(theme.defaultFont).height
 
         PlasmaExtras.Heading {
             text: i18n("Brightness")
             level: 2
         }
         Row {
-            spacing: theme.defaultFont.mSize.width
+            spacing: theme.mSize(theme.defaultFont).width
             PlasmaComponents.Label {
                 width: screensaverEnabledSwitch.width
                 text: i18n("0%")
@@ -159,7 +159,7 @@ Item {
             level: 2
         }
         Row {
-            spacing: theme.defaultFont.mSize.width
+            spacing: theme.mSize(theme.defaultFont).width
             PlasmaComponents.Switch {
                 id: screensaverEnabledSwitch
                 onCheckedChanged: screensaverConfig.writeEntry("Enabled", checked ? "true" : "false")
@@ -189,7 +189,7 @@ Item {
             level: 2
         }
         Row {
-            spacing: theme.defaultFont.mSize.width
+            spacing: theme.mSize(theme.defaultFont).width
             PlasmaComponents.Switch {
                 id: dpmsSwitch
                 onCheckedChanged: {
@@ -235,7 +235,7 @@ Item {
             level: 2
         }
         Row {
-            spacing: theme.defaultFont.mSize.width
+            spacing: theme.mSize(theme.defaultFont).width
             PlasmaComponents.Switch {
                 id: suspendSwitch
                 onCheckedChanged: {

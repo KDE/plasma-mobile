@@ -9,6 +9,8 @@
 #install(FILES web/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME org.kde.active.settings.web.desktop)
 
 #Power
+
+plasma_install_package(powermanagement org.kde.active.settings.powermanagement packages package)
 #install(DIRECTORY powermanagement/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.settings.powermanagement)
 #install(FILES powermanagement/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME org.kde.active.settings.powermanagement.desktop)
 
