@@ -20,7 +20,6 @@
 #include "settingscomponent.h"
 #include "settingsmodule.h"
 
-
 #include <QQmlEngine>
 #include <QQmlComponent>
 
@@ -29,13 +28,16 @@
 #include <QDebug>
 
 #include <Plasma/Package>
+#include <Plasma/PluginLoader>
+
+#include <KGlobal>
 
 class SettingsComponentPrivate {
 
 public:
     QString module;
     SettingsModule *settingsModule;
-    Plasma::Package* package;
+    Plasma::Package package;
 };
 
 
@@ -43,7 +45,7 @@ SettingsComponent::SettingsComponent(QQuickItem *parent)
     : QQuickItem(parent)
 {
     d = new SettingsComponentPrivate;
-    d->package = 0;
+    d->package = Plasma::PluginLoader::self()->loadPackage(QStringLiteral("Plasma/Generic"));
     d->settingsModule = 0;
 }
 
@@ -53,13 +55,10 @@ SettingsComponent::~SettingsComponent()
 
 void SettingsComponent::loadModule(const QString &name)
 {
-
-    delete d->package;
     delete d->settingsModule;
     d->settingsModule = 0;
 
-    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    d->package = new Plasma::Package(QString(), name, structure);
+    d->package.setPath(name);
     KGlobal::locale()->insertCatalog("plasma_package_" + name);
     QString pluginName = name;
     QString query;
