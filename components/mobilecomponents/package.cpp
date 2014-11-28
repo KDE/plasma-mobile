@@ -51,6 +51,7 @@ void Package::setName(const QString &name)
     m_name = name;
 
     m_package = Plasma::PluginLoader::self()->loadPackage(QStringLiteral("Plasma/Generic"));
+    m_package.setPath(name);
     QString domain = QStringLiteral("plasma_package_") + name;
     KLocalizedString::setApplicationDomain(domain.toLocal8Bit().data());
 
