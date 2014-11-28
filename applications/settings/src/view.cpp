@@ -91,4 +91,3 @@ void View::onStatusChanged(QQuickView::Status status)
     }
 }
 
-#include "view.moc"
