@@ -20,7 +20,6 @@
 #ifndef SETTINGSMODULE_H
 #define SETTINGSMODULE_H
 
-#include <kdemacros.h>
 #include <QObject>
 #include <QVariant>
 
@@ -33,7 +32,7 @@ class SettingsModulePrivate;
  * This is done from one class in order to simplify the code. You can export
  * any QObject-based class through qmlRegisterType(), however.
  */
-class KDE_EXPORT SettingsModule : public QObject
+class SettingsModule : public QObject
 {
     Q_OBJECT
 

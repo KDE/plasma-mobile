@@ -24,7 +24,6 @@
 #include <QQmlComponent>
 #include <QObject>
 #include <QImage>
-#include <Nepomuk/Query/Result>
 
 #include "settingsmodule.h"
 

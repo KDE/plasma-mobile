@@ -23,20 +23,18 @@
 #include <QtDeclarative/qdeclarative.h>
 
 //#include "settingsmoduleloader.h"
-#include "settingsmodulesmodel.h"
-#include "settingscomponent.h"
-#include "configgroup.h"
+// #include "settingsmodulesmodel.h"
+// #include "settingscomponent.h"
+// #include "configgroup.h"
 
 void SettingsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.active.settings"));
-    const int major = 0;
-    const int minor = 1;
-    qmlRegisterType<SettingsModulesModel>(uri, major, minor, "SettingsModulesModel");
-    qmlRegisterType<SettingsModule>(uri, major, minor, "SettingsModule");
-    qmlRegisterType<SettingsComponent>(uri, major, minor, "SettingsComponent");
-    qmlRegisterType<Plasma::ConfigGroup>(uri, major, minor, "ConfigGroup");
+    const int major = 2;
+    const int minor = 0;
+//     qmlRegisterType<SettingsModulesModel>(uri, major, minor, "SettingsModulesModel");
+//     qmlRegisterType<SettingsModule>(uri, major, minor, "SettingsModule");
+//     qmlRegisterType<SettingsComponent>(uri, major, minor, "SettingsComponent");
+//     qmlRegisterType<Plasma::ConfigGroup>(uri, major, minor, "ConfigGroup");
 }
-
-#include "settingsplugin.moc"
 
