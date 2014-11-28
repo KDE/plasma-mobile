@@ -23,6 +23,7 @@
 #include <QtCore/QTimer>
 #include <KConfig>
 #include <KConfigGroup>
+#include <KSharedConfig>
 #include <QDebug>
 
 namespace Plasma

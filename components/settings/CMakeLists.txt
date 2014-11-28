@@ -5,7 +5,7 @@ set(settings_SRCS
     settingsmodule.cpp
     settingsmodulesmodel.cpp
     settingscomponent.cpp
-#     configgroup.cpp
+    configgroup.cpp
     )
 
 add_library(settingsplugin SHARED ${settings_SRCS})
@@ -14,7 +14,7 @@ target_link_libraries(settingsplugin
         Qt5::Qml
         Qt5::Quick
         KF5::Plasma
-        KF5::KDELibs4Support
+        KF5::KDELibs4Support # For KGlobal
         )
 
 install(TARGETS settingsplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/active/settings)
