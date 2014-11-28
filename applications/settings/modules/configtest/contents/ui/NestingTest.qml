@@ -18,10 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1
-import org.kde.active.settings 0.1 as ActiveSettings
+import QtQuick 2.2
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0
+import org.kde.active.settings 2.0 as ActiveSettings
 import "testhelper.js" as TestHelper
 
 
