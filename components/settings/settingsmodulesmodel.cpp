@@ -26,10 +26,10 @@
 #include <QQmlEngine>
 #include <QTimer>
 
-#include <KIcon>
 #include <KPluginInfo>
 #include <KService>
 #include <KServiceTypeTrader>
+#include <KGlobal>
 
 #include <QDebug>
 
@@ -64,9 +64,9 @@ SettingsModulesModel::~SettingsModulesModel()
     delete d;
 }
 
-QDeclarativeListProperty<SettingsModule> SettingsModulesModel::settingsModules()
+QQmlListProperty<SettingsModule> SettingsModulesModel::settingsModules()
 {
-    return QDeclarativeListProperty<SettingsModule>(this, d->settingsModules);
+    return QQmlListProperty<SettingsModule>(this, d->settingsModules);
 }
 
 QString SettingsModulesModel::application() const

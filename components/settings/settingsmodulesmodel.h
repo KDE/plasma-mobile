@@ -33,14 +33,14 @@ class SettingsModulesModelPrivate;
 class SettingsModulesModel : public QQmlComponent
 {
     Q_OBJECT
-    Q_PROPERTY(QDeclarativeListProperty<SettingsModule> settingsModules READ settingsModules NOTIFY settingsModulesChanged)
+    Q_PROPERTY(QQmlListProperty<SettingsModule> settingsModules READ settingsModules NOTIFY settingsModulesChanged)
     Q_PROPERTY(QString application READ application WRITE setApplication NOTIFY applicationChanged)
 
 public:
     SettingsModulesModel(QQmlComponent* parent = 0);
     ~SettingsModulesModel();
 
-    QDeclarativeListProperty<SettingsModule> settingsModules();
+    QQmlListProperty<SettingsModule> settingsModules();
 
     QString application() const;
     void setApplication(const QString &appname);

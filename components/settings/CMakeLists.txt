@@ -3,7 +3,7 @@ project(settings)
 set(settings_SRCS
     settingsplugin.cpp
 #     settingsmodule.cpp
-#     settingsmodulesmodel.cpp
+    settingsmodulesmodel.cpp
 #     settingscomponent.cpp
 #     configgroup.cpp
     )
@@ -14,6 +14,7 @@ target_link_libraries(settingsplugin
         Qt5::Qml
         Qt5::Quick
         KF5::Plasma
+        KF5::KDELibs4Support
         )
 
 install(TARGETS settingsplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/active/settings)
