@@ -168,7 +168,6 @@ Rectangle {
     MouseArea {
         id: taskSwitchEdge
         z: 1000
-        property bool active
         anchors {
             left: parent.left
             right: parent.right
@@ -178,7 +177,6 @@ Rectangle {
         enabled: windowsLayout.children.length > 0
         property int oldX: 0
         onPressed: {
-            active = true;
             oldX = mouse.x;
         }
         onPositionChanged: {
@@ -191,7 +189,6 @@ Rectangle {
             oldX = mouse.x;
         }
         onReleased: {
-            active = false
             if (windowsLayout.scale > 0.7) {
                 compositorRoot.state = compositorRoot.currentWindow ? "application" : "homeScreen";
             }
