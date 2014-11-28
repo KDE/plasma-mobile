@@ -74,11 +74,11 @@ Image {
                     enabled: true
                     checked: listView.currentIndex == index
 
-                    QIconItem {
+                    PlasmaCore.IconItem {
                         id: iconItem
                         width: 48
                         height: 32
-                        icon: QIcon(iconName)
+                        source: iconName
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.rightMargin: 8
@@ -160,8 +160,8 @@ Image {
             Item {
                 visible: startModule == ""
                 anchors { fill: parent; margins: 80; }
-                QIconItem {
-                    icon: QIcon("preferences-desktop")
+                PlasmaCore.IconItem {
+                    source: "preferences-desktop"
                     anchors { top: parent.top; right: parent.right; }
                     opacity: 0.1
                     width: 256
