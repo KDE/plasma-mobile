@@ -111,8 +111,6 @@ int main(int argc, char **argv)
     const QString themeName = cg.readEntry("name", "air-mobile");
     auto theme = new Plasma::Theme(themeName, &app);
     theme->setUseGlobalSettings(false);
-//     Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
-//     Plasma::Theme::defaultTheme()->setThemeName(themeName);
 
     app.newWindow(module);
     args->clear();

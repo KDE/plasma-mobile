@@ -34,7 +34,6 @@
 
 View::View(const QString &module, QWindow *parent)
     : QQuickView(parent),
-    m_package(Plasma::PluginLoader::self()->loadPackage("org.kde.active.settings")),
     m_settingsRoot(0)
 {
     setResizeMode(QQuickView::SizeRootObjectToView);
@@ -45,16 +44,15 @@ View::View(const QString &module, QWindow *parent)
     //binds things like kconfig and icons
     kdeclarative.setupBindings();
 
-    //Plasma::PackageStructure structure = Plasma::PackageStructure::load("Plasma/Generic");
-    //m_package = new Plasma::Package(QString(), "org.kde.active.settings", structure);
-
-    //m_package = Plasma::PluginLoader::self()->loadPackage("org.kde.active.settings");
+    m_package = Plasma::PluginLoader::self()->loadPackage("Plasma/Generic");
+    m_package.setPath("org.kde.active.settings");
 
     if (!module.isEmpty()) {
         rootContext()->setContextProperty("startModule", module);
     }
 
     const QString qmlFile = m_package.filePath("mainscript");
+    qDebug() << "mainscript: " << QUrl::fromLocalFile(m_package.filePath("mainscript"));
     setSource(QUrl::fromLocalFile(m_package.filePath("mainscript")));
     show();
 
