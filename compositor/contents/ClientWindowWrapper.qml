@@ -28,29 +28,47 @@ WindowWrapper {
             compositorRoot.layers.windows.contentX = x;
         }
     }
+    Behavior on y {
+        enabled: !mouse.active
+        SequentialAnimation {
+            NumberAnimation {
+                easing.type: "InOutQuad"
+                duration: units.longDuration
+            }
+            ScriptAction {
+                script: {
+                    if (window.opacity < 0.3) {
+                        window.close();
+                    }
+                }
+            }
+        }
+    }
+    opacity: 1 - (Math.abs(y) / height)
+
     MouseArea {
+        id: mouse
         z: 99
         anchors.fill: parent
         enabled: compositorRoot.layers.windows.switchMode
+        property bool active
+        onPressed: {
+            active = true;
+        }
         onClicked: {
             compositorRoot.currentWindow = window
         }
-
-        PlasmaCore.IconItem {
-            anchors {
-                right: parent.right
-                bottom: parent.bottom
+        onReleased: {
+            active = false;
+            if (window.opacity < 0.3) {
+                window.y = (window.y > 0 ? +1 : -1) * window.height;
+            } else {
+                window.y = 0;
             }
-            visible: compositorRoot.layers.windows.switchMode
-            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-            width: units.iconSizes.smallMedium
-            height: width
-            source: "window-close"
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: window.close()
-            }
+        }
+        drag {
+            axis: Drag.YAxis
+            target: window
         }
     }
 }
