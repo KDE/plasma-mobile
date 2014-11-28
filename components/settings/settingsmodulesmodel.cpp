@@ -29,7 +29,7 @@
 #include <KPluginInfo>
 #include <KService>
 #include <KServiceTypeTrader>
-#include <KGlobal>
+#include <KSharedConfig>
 
 #include <QDebug>
 
@@ -101,7 +101,7 @@ bool compareModules(const SettingsModule *l, const SettingsModule *r)
 
     // base it on the category weighting; if neither has a category weight the compare
     // strings
-    KConfigGroup orderConfig(KGlobal::config(), "SettingsCategoryWeights");
+    KConfigGroup orderConfig(KSharedConfig::openConfig(), "SettingsCategoryWeights");
     const int lG = orderConfig.readEntry(l->category(), -1);
     const int rG = orderConfig.readEntry(r->category(), -1);
     //qDebug() << l->name() << l->category() << lG << " vs " << r->name() << r->category() << rG;

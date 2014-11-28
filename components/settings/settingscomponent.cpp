@@ -30,8 +30,6 @@
 #include <Plasma/Package>
 #include <Plasma/PluginLoader>
 
-#include <KGlobal>
-
 class SettingsComponentPrivate {
 
 public:
@@ -59,7 +57,8 @@ void SettingsComponent::loadModule(const QString &name)
     d->settingsModule = 0;
 
     d->package.setPath(name);
-    KGlobal::locale()->insertCatalog("plasma_package_" + name);
+    //KGlobal::locale()->insertCatalog("plasma_package_" + name);
+#warning "Re-enable translation catalog, port insertCatalog"
     QString pluginName = name;
     QString query;
     if (pluginName.isEmpty()) {
