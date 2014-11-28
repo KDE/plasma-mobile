@@ -11,7 +11,7 @@ Dependencies:
 * oFono https://git.kernel.org/cgit/network/ofono/ofono.git
 * voicecall https://github.com/nemomobile/voicecall
 * libqofono https://github.com/nemomobile/libqofono
-* phonesim https://git.kernel.org/cgit/network/ofono/phonesim.git/
+* ofono-phonesim https://git.kernel.org/cgit/network/ofono/phonesim.git/
 * qml contextkit plugin https://github.com/nemomobile/nemo-qml-plugin-contextkit FIXME: ContextKit is deprecated, battery status should be ported to something else
 
 Phonesim will add a fake phone modem, that can be controlled via a Qt based user interface from
@@ -19,7 +19,7 @@ which it will be possible to test various aspects of the phone UI: making calls,
 send SMS and so on. It will not generate any real call, but only make the UI think a SIM is working and that
 a phone call is in progress.
 
-A tutorial how to start phonesym on a desktop system can be found here:
+A tutorial how to start phonesim on a desktop system can be found here:
 http://comments.gmane.org/gmane.comp.handhelds.ofono/12178
 
 * edit /etc/ofono/modem.conf, uncomment everything so that it looks like
