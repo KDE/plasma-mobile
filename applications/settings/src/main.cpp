@@ -109,8 +109,9 @@ int main(int argc, char **argv)
     KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
 
     const QString themeName = cg.readEntry("name", "air-mobile");
-    auto theme = new Plasma::Theme(themeName, &app);
-    theme->setUseGlobalSettings(false);
+    Plasma::Theme theme;
+    theme.setUseGlobalSettings(false);
+    theme.setThemeName(themeName); // nees to happen after setUseGlobalSettings, since that clears themeName
 
     app.newWindow(module);
     args->clear();
