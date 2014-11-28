@@ -3,7 +3,7 @@ project(active-settings)
 #include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
 add_subdirectory(src)
-#add_subdirectory(modules)
+add_subdirectory(modules)
 
 # Install plugin definition
 install(FILES active-settingsmodule.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
