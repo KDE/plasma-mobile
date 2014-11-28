@@ -24,9 +24,7 @@
 #include <QDesktopWidget>
 
 #include <KAction>
-#include <KIcon>
 #include <KStandardAction>
-#include <KGlobal>
 
 #include <Plasma/Theme>
 
@@ -42,7 +40,7 @@ ActiveSettingsWindow::ActiveSettingsWindow(const QString &url, QWindow *parent)
 //     addAction(KStandardAction::quit(this, SLOT(close()), this));
     m_widget = new View(url, this);
 
-    KConfigGroup config(KGlobal::config(), "Window");
+    KConfigGroup config(KSharedConfig::openConfig(), "Window");
     const QByteArray geom = config.readEntry("Geometry", QByteArray());
     if (geom.isEmpty()) {
         setGeometry(qApp->desktop()->screenGeometry());
@@ -64,7 +62,7 @@ View* ActiveSettingsWindow::view()
 
 void ActiveSettingsWindow::closeEvent(QCloseEvent *)
 {
-    KConfigGroup config(KGlobal::config(), "Window");
+    KConfigGroup config(KSharedConfig::openConfig(), "Window");
     config.writeEntry("Geometry", geometry());
 }
 
@@ -75,7 +73,7 @@ QString ActiveSettingsWindow::name()
 
 QIcon ActiveSettingsWindow::icon()
 {
-    return KIcon("preferences-desktop");
+    return QIcon::fromTheme("preferences-desktop");
 }
 
 #include "activesettingswindow.moc"
