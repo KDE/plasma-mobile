@@ -34,10 +34,6 @@ Image {
     height: 360
     anchors.margins: 8
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     Item {
         id: settingsRoot
         objectName: "settingsRoot"
