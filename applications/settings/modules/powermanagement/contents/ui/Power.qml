@@ -31,10 +31,6 @@ Item {
 
     width: 800; height: 500
 
-    PlasmaCore.Theme {
-        id: theme
-    }
-
     Column {
         id: titleCol
         anchors.top: parent.top
