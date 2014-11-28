@@ -2,7 +2,7 @@ project(settings)
 
 set(settings_SRCS
     settingsplugin.cpp
-#     settingsmodule.cpp
+    settingsmodule.cpp
     settingsmodulesmodel.cpp
 #     settingscomponent.cpp
 #     configgroup.cpp
