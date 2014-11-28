@@ -49,5 +49,6 @@ Item {
             return;
 
         child.surface.client.close();
+        window.destroy();
     }
 }

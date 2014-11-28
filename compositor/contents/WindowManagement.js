@@ -125,10 +125,9 @@ function mapApplicationSurface(surface) {
 
     // Create and setup window container
     var window = component.createObject(compositorRoot.layers.windows, {"child": child});
+    compositorRoot.layers.windows.addWindow(window);
     window.child.parent = window;
     window.child.touchEventsEnabled = true;
-    window.anchors.top = window.parent.top;
-    window.anchors.left = window.parent.left;
     window.width = surface.size.width;
     window.height = surface.size.height;
 

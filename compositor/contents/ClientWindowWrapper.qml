@@ -18,7 +18,39 @@
  */
 
 import QtQuick 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 WindowWrapper {
+    id: window
     objectName: "clientWindow"
+    onXChanged: {
+        if (compositorRoot.currentWindow == window) {
+            compositorRoot.layers.windows.contentX = x;
+        }
+    }
+    MouseArea {
+        z: 99
+        anchors.fill: parent
+        enabled: compositorRoot.layers.windows.switchMode
+        onClicked: {
+            compositorRoot.currentWindow = window
+        }
+
+        PlasmaCore.IconItem {
+            anchors {
+                right: parent.right
+                bottom: parent.bottom
+            }
+            visible: compositorRoot.layers.windows.switchMode
+            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+            width: units.iconSizes.smallMedium
+            height: width
+            source: "window-close"
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: window.close()
+            }
+        }
+    }
 }

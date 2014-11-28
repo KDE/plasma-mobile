@@ -19,6 +19,7 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.0
+import QtQml.Models 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import "WindowManagement.js" as WindowManagement
 
@@ -30,6 +31,14 @@ Rectangle {
     readonly property real topBarHeight: units.iconSizes.small
     readonly property real bottomBarHeight: units.iconSizes.large
     property var currentWindow: null
+
+    onCurrentWindowChanged: {
+        if (!currentWindow) {
+            return;
+        }
+        compositorRoot.showHome = false;
+        windowsLayout.scale = 1;
+    }
 
     id: compositorRoot
     color: "black"
@@ -66,66 +75,98 @@ Rectangle {
     Item {
         id: desktopLayer
         anchors.fill: parent
+        visible: true
         z: showHome ? 2 : 1
-        visible: showHome || showPanel
     }
 
-    Item {
-        id: windowsLayer
+    Rectangle {
+        id: windowsLayerBackground
         anchors.fill: parent
         anchors.topMargin: topBarHeight
-        anchors.bottomMargin: bottomBar.height
+        color: Qt.rgba(0, 0, 0, 0.5)
+        opacity: windowsLayer.switchMode || !compositorRoot.showHome ? 1 : 0
         z: showHome ? 1 : 2
-        visible: !showHome
+        Behavior on opacity {
+            NumberAnimation {
+                easing.type: "InOutQuad"
+                duration: units.longDuration
+            }
+        }
+
+        Flickable {
+            id: windowsLayer
+            anchors {
+                left: parent.left
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+            }
+            height: windowsLayout.height
+            interactive: windowsLayer.switchMode
+            contentWidth: windowsLayout.width * windowsLayout.scale
+            contentHeight: windowsLayout.height
+
+            property bool switchMode: windowsLayout.scale < 1
+            function addWindow (window) {
+                window.parent = windowsLayout
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    windowsLayout.scale = 1
+                    compositorRoot.showHome = true;
+                }
+                Row {
+                    id: windowsLayout
+                    height: windowsLayerBackground.height
+                    transformOrigin: Item.Left
+
+                    Behavior on scale {
+                        enabled: !taskSwitchEdge.active
+                        ParallelAnimation {
+                            PropertyAnimation {
+                                duration: units.shortDuration
+                                easing: Easing.InOutQuad
+                            }
+                            PropertyAnimation {
+                                target: windowsLayer
+                                property: "contentX"
+                                to: compositorRoot.currentWindow ? compositorRoot.currentWindow.x : 0
+                                duration: units.shortDuration
+                                easing: Easing.InOutQuad
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     Item {
         id: panelLayer
         anchors.fill: parent
-        z: showPanel ? 3 : 0
         visible: showPanel
+        z: 3
     }
 
     Rectangle {
         id: bottomBar
+        z: 4
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        height: (showSplash || showHome) ? 0 : bottomBarHeight
+        height: (!windowsLayer.switchMode) ? 0 : bottomBarHeight
         color: "black"
-        z: showHome ? 0 : 2
 
         Behavior on height {
             NumberAnimation {
-                easing.type: Easing.InOutQuad
+                easing.type: "InOutQuad"
                 duration: units.shortDuration
             }
         }
 
         RowLayout {
             anchors.fill: parent
-
-            PlasmaCore.IconItem {
-                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                width: units.iconSizes.smallMedium
-                height: width
-                source: "window-close"
-
-                Layout.alignment: Qt.AlignHCenter
-                Layout.preferredWidth: units.iconSizes.medium
-                Layout.preferredHeight: units.iconSizes.medium
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (currentWindow) {
-                            currentWindow.close();
-                            currentWindow = null;
-                            showHome = true;
-                        }
-                    }
-                }
-            }
 
             PlasmaCore.IconItem {
                 colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
@@ -139,8 +180,45 @@ Rectangle {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: showHome = true
+                    onClicked: {
+                        showHome = true
+                        windowsLayout.scale = 1
+                    }
                 }
+            }
+        }
+    }
+
+    MouseArea {
+        id: taskSwitchEdge
+        z: 1000
+        property bool active
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: 8
+        enabled: windowsLayout.children.length > 0
+        property int oldX: 0
+        onPressed: {
+            active = true;
+            oldX = mouse.x;
+        }
+        onPositionChanged: {
+            var newScale = (1-Math.abs(mouse.y)/(compositorRoot.height/2))
+            if (newScale > 0.3) {
+                windowsLayout.scale = newScale
+                compositorRoot.showHome = false;
+            }
+            windowsLayer.contentX -= (mouse.x - oldX);
+            oldX = mouse.x;
+        }
+        onReleased: {
+            active = false
+            if (windowsLayout.scale > 0.7) {
+                windowsLayout.scale = 1
+                compositorRoot.showHome = true;
             }
         }
     }
