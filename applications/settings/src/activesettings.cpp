@@ -26,7 +26,6 @@
 #include <KIcon>
 #include <KStandardAction>
 
-#include "activesettingswindow.h"
 #include "view.h"
 
 
@@ -43,8 +42,7 @@ ActiveSettings::~ActiveSettings()
 
 void ActiveSettings::newWindow(const QString& module)
 {
-    ActiveSettingsWindow *settingsWindow = new ActiveSettingsWindow(module);
-    settingsWindow->show();
+    View *settingsWindow = new View(module);
 }
 
 #include "activesettings.moc"

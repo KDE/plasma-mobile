@@ -37,6 +37,7 @@ View::View(const QString &module, QWindow *parent)
     m_settingsRoot(0)
 {
     setResizeMode(QQuickView::SizeRootObjectToView);
+    QQuickWindow::setDefaultAlphaBuffer(true);
 
     KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
@@ -74,7 +75,7 @@ void View::updateStatus()
 
 void View::onStatusChanged(QQuickView::Status status)
 {
-    //kDebug() << "onStatusChanged";
+    //qDebug() << "onStatusChanged";
     if (status == QQuickView::Ready) {
         if (!m_settingsRoot) {
             m_settingsRoot = rootObject()->findChild<QQuickItem*>("settingsRoot");
@@ -87,7 +88,7 @@ void View::onStatusChanged(QQuickView::Status status)
             qWarning() << "error in QML: " << e.toString() << e.description();
         }
     } else if (status == QQuickView::Loading) {
-        //kDebug() << "Loading.";
+        //qDebug() << "Loading.";
     }
 }
 

@@ -6,7 +6,7 @@ find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Gui)
 set(active-settings_SRCS
     main.cpp
     activesettings.cpp
-    activesettingswindow.cpp
+#    activesettingswindow.cpp
     view.cpp
 )
 
