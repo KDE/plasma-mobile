@@ -20,17 +20,17 @@
 
 #include "view.h"
 
+#include <QDebug>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickItem>
-#include <QTimer>
 
-//#include <KConfigGroup>
-#include <KStandardDirs>
 #include <Plasma/Package>
 #include <Plasma/PluginLoader>
 
-#include <kdeclarative/kdeclarative.h>
+#include <KDeclarative/KDeclarative>
+#include <KLocalizedString>
+
 
 View::View(const QString &module, QWindow *parent)
     : QQuickView(parent),
@@ -38,6 +38,9 @@ View::View(const QString &module, QWindow *parent)
 {
     setResizeMode(QQuickView::SizeRootObjectToView);
     QQuickWindow::setDefaultAlphaBuffer(true);
+
+    setIcon(QIcon::fromTheme("preferences-desktop"));
+    setTitle(i18n("Active Settings"));
 
     KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());

@@ -5,7 +5,7 @@ find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Gui)
 
 set(active-settings_SRCS
     main.cpp
-    activesettings.cpp
+#     activesettings.cpp
 #    activesettingswindow.cpp
     view.cpp
 )
@@ -17,7 +17,8 @@ target_link_libraries(active-settings
     Qt5::Gui
     KF5::Plasma
     KF5::Declarative
-    KF5::KDELibs4Support
+    KF5::I18n
+    #KF5::KDELibs4Support
 )
 
 install( TARGETS active-settings ${INSTALL_TARGETS_DEFAULT_ARGS} )

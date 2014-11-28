@@ -22,18 +22,21 @@
 #include <iostream>
 #include <iomanip>
 
-// KDE
-#include <K4AboutData>
-#include <KCmdLineArgs>
+#include <QGuiApplication>
+
+// Qt
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+
+// Frameworks
 #include <KConfigGroup>
-#include <KDebug>
+#include <KLocalizedString>
 #include <KService>
 #include <KServiceTypeTrader>
-
 #include <Plasma/Theme>
 
 // Own
-#include "activesettings.h"
+#include "view.h"
 
 static const char description[] = I18N_NOOP("Plasma Active Settings");
 
@@ -42,28 +45,32 @@ static const char HOME_URL[] = "http://plasma-active.org";
 
 int main(int argc, char **argv)
 {
-    K4AboutData about("active-settings", 0, ki18n("Plasma Active Settings"), version, ki18n(description),
-                     K4AboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");
-                     about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
-    KCmdLineArgs::init(argc, argv, &about);
 
-    KService::Ptr service = KService::serviceByDesktopName("active-settings");
-    about.setProgramIconName(service ? service->icon() : "preferences-desktop");
-    KCmdLineOptions options;
-    options.add("+[module]", ki18n( "Settings module to open" ), "startpage");
-    options.add("list", ki18n("Displays a list of known modules"));
+    QGuiApplication app(argc, argv);
 
-    KCmdLineArgs::addCmdLineOptions(options);
+    app.setApplicationVersion(version);
 
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    const static auto _l = QStringLiteral("list");
+    const static auto _m = QStringLiteral("module");
 
-    if (args->isSet("list")) {
-        //listPlugins(Plasma::Applet::listAppletInfo());
-        //kDebug() << "Available modules are:";
+    QCommandLineOption _list = QCommandLineOption(QStringList() << QStringLiteral("l") << _l,
+                               i18n("List available settings modules"));
+    QCommandLineOption _module = QCommandLineOption(QStringList() << QStringLiteral("m") << _m,
+                                i18n("Settings module to open"), QStringLiteral("modulename"));
+
+    QCommandLineParser parser;
+    parser.addVersionOption();
+    parser.setApplicationDescription(description);
+    parser.addHelpOption();
+    parser.addOption(_list);
+    parser.addOption(_module);
+
+    parser.process(app);
+
+    if (parser.isSet(_list)) {
         QString query;
         KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
 
-        //kDebug() << "Found " << services.count() << " modules";
         int nameWidth = 0;
         foreach (const KService::Ptr &service, services) {
             KPluginInfo info(service);
@@ -103,8 +110,7 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    ActiveSettings app(args);
-    const QString module = args->count() ? args->arg(0) : QString();
+    const QString module = parser.value(_m);
 
     KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
 
@@ -113,7 +119,7 @@ int main(int argc, char **argv)
     theme.setUseGlobalSettings(false);
     theme.setThemeName(themeName); // nees to happen after setUseGlobalSettings, since that clears themeName
 
-    app.newWindow(module);
-    args->clear();
+    new View(module);
+
     return app.exec();
 }

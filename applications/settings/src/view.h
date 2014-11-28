@@ -20,7 +20,7 @@
 
 #ifndef VIEW_H
 #define VIEW_H
-#include <QQuickItem>
+
 #include <QQuickView>
 
 #include <Plasma/Package>
