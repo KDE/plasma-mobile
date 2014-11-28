@@ -19,7 +19,7 @@
 
 #include "settingsmodule.h"
 
-#include <kdebug.h>
+#include <QDebug>
 #include <KIcon>
 #include <KLocale>
 #include <KService>

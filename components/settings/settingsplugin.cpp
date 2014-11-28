@@ -18,7 +18,7 @@
  */
 
 #include "settingsplugin.h"
-#include <kdebug.h>
+#include <QDebug>
 
 #include <QtDeclarative/qdeclarative.h>
 

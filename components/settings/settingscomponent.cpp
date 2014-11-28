@@ -26,7 +26,7 @@
 
 #include <KService>
 #include <KServiceTypeTrader>
-#include <KDebug>
+#include <QDebug>
 
 #include <Plasma/Package>
 
@@ -64,7 +64,7 @@ void SettingsComponent::loadModule(const QString &name)
     QString pluginName = name;
     QString query;
     if (pluginName.isEmpty()) {
-        //kDebug() << "Not loading plugin ..." << pluginName;
+        //qDebug() << "Not loading plugin ..." << pluginName;
         return;
     }
     query = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
@@ -86,10 +86,10 @@ void SettingsComponent::loadModule(const QString &name)
         if (factory) {
             // Load binary plugin
             const QString query = QString("exist Library and Library == '%1'").arg(service->library());
-            kDebug() << "loading binary plugin from query: " << service->name();
+            qDebug() << "loading binary plugin from query: " << service->name();
             KServiceTypeTrader::createInstanceFromQuery<QObject>("Active/SettingsModule", query, d->settingsModule);
         } else {
-            kDebug() << "QML only plugin";
+            qDebug() << "QML only plugin";
         }
 
 
@@ -101,10 +101,10 @@ void SettingsComponent::loadModule(const QString &name)
         d->settingsModule->setModule(pluginName);
 
        if (d->settingsModule) {
-           kDebug() << "Successfully loaded plugin:" << service->name();
+           qDebug() << "Successfully loaded plugin:" << service->name();
            //emit pluginLoaded(plugin);
        } else {
-           kDebug() << error;
+           qDebug() << error;
        }
     }
 
@@ -133,7 +133,7 @@ QString SettingsComponent::module() const
 
 void SettingsComponent::setModule(const QString &module)
 {
-    kDebug() << "setmo" << module;
+    qDebug() << "setmo" << module;
     if (d->module != module) {
         d->module = module;
         loadModule(module);
