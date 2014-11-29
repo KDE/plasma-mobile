@@ -20,7 +20,7 @@
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.active.settings 0.2
+import org.kde.active.settings.time 2.0
 import "private"
 
 //FIXME: shouldn't be a FrameSvgItem
@@ -119,11 +119,11 @@ PlasmaCore.FrameSvgItem {
                     month = selectedIndex + 1
                 }
             }
-            property variant months: Array(i18n("Jan"), i18n("Feb"), i18n("Mar"), i18n("Apr"), i18n("May"), i18n("Jun"), i18n("Jul"), i18n("Aug"), i18n("Sep"), i18n("Oct"), i18n("Nov"), i18n("Dec"))
             delegate: Text {
                 horizontalAlignment: Text.AlignHCenter
                 width: monthDigit.width
                 property int ownIndex: index
+                property variant months: Array(i18n("Jan"), i18n("Feb"), i18n("Mar"), i18n("Apr"), i18n("May"),     i18n("Jun"), i18n("Jul"), i18n("Aug"), i18n("Sep"), i18n("Oct"), i18n("Nov"), i18n("Dec"))
                 text: months[index]
                 font.pointSize: 20
                 opacity: PathView.itemOpacity
