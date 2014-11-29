@@ -11,14 +11,15 @@ set(timesettings_SRCS
     timezonesmodel.cpp
 )
 
-
 add_library(active_settings_time MODULE ${timesettings_SRCS})
 target_link_libraries(active_settings_time
     Qt5::Quick
+    Qt5::Qml
     KF5::Plasma
     KF5::Auth
     KF5::KDELibs4Support
     )
+kservice_desktop_to_json(active_settings_time "package/metadata.desktop" timeplugin.json)
 
 install(TARGETS active_settings_time DESTINATION ${PLUGIN_INSTALL_DIR}/active/settingsmodule)
 

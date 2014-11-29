@@ -49,8 +49,6 @@
 #include <KSystemTimeZone>
 #include <KTimeZone>
 
-#include <QtDeclarative/qdeclarative.h>
-#include <QtDeclarative/QDeclarativeItem>
 #include <QtCore/QDate>
 
 #define FORMAT24H "%H:%M:%S"

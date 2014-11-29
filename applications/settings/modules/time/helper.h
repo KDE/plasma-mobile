@@ -38,7 +38,7 @@ class ClockHelper : public QObject
             DateError       = 1 << 3
         };
 
-    public slots:
+    public Q_SLOTS:
         ActionReply save(const QVariantMap &map);
 
     private:

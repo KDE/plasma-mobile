@@ -30,7 +30,7 @@ class TimeSettingsPlugin : public QObject
     Q_OBJECT
 
     public:
-        explicit TimeSettingsPlugin(QObject *parent, const QVariantList &list = QVariantList());
+        TimeSettingsPlugin(QObject *parent, const QVariantList &list = QVariantList());
         virtual ~TimeSettingsPlugin();
 
 };
