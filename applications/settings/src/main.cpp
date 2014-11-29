@@ -39,13 +39,11 @@
 #include "view.h"
 
 static const char description[] = I18N_NOOP("Plasma Active Settings");
-
 static const char version[] = "2.0";
 static const char HOME_URL[] = "http://plasma-active.org";
 
 int main(int argc, char **argv)
 {
-
     QGuiApplication app(argc, argv);
 
     app.setApplicationVersion(version);
@@ -56,7 +54,7 @@ int main(int argc, char **argv)
     QCommandLineOption _list = QCommandLineOption(QStringList() << QStringLiteral("l") << _l,
                                i18n("List available settings modules"));
     QCommandLineOption _module = QCommandLineOption(QStringList() << QStringLiteral("m") << _m,
-                                i18n("Settings module to open"), QStringLiteral("modulename"));
+                                i18n("Settings module to open"), i18n("modulename"));
 
     QCommandLineParser parser;
     parser.addVersionOption();
@@ -100,7 +98,6 @@ int main(int argc, char **argv)
             } else if (!service->comment().isEmpty()) {
                 description = service->comment();
             }
-            //kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
             std::cout << info.pluginName().toLocal8Bit().data()
                       << ' '
                       << std::setw(nameWidth - info.pluginName().length() + 2)
