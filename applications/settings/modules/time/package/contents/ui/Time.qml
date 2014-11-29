@@ -18,12 +18,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtras
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.active.settings 0.1
+import QtQuick 2.2
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.active.settings 2.0
 
 Item {
     id: timeModule
@@ -60,18 +60,18 @@ Item {
         id: formLayout
         columns: 2
         rows: 4
-        spacing: theme.defaultFont.mSize.height
+        spacing: theme.mSize(theme.defaultFont).height
         anchors {
             top: titleCol.bottom
             horizontalCenter: parent.horizontalCenter
-            topMargin: theme.defaultFont.mSize.height
+            topMargin: theme.mSize(theme.defaultFont).height
         }
 
         PlasmaComponents.Label {
             text: i18n("Use 24-hour clock:")
             anchors {
                 right: twentyFourSwitch.left
-                rightMargin: theme.defaultFont.mSize.width
+                rightMargin: theme.mSize(theme.defaultFont).width
             }
         }
 
@@ -91,7 +91,7 @@ Item {
             text: i18n("Timezone:")
             anchors {
                 right: timeZoneButton.left
-                rightMargin: theme.defaultFont.mSize.width
+                rightMargin: theme.mSize(theme.defaultFont).width
             }
         }
 
@@ -106,12 +106,12 @@ Item {
             text: i18n("Set time automatically:")
             anchors {
                 right: timeZoneButton.left
-                rightMargin: theme.defaultFont.mSize.width
+                rightMargin: theme.mSize(theme.defaultFont).width
             }
         }
 
         Row {
-            spacing: theme.defaultFont.mSize.width
+            spacing: theme.mSize(theme.defaultFont).width
             PlasmaComponents.Switch {
                 id: ntpCheckBox
                 checked: timeSettings.ntpServer != ""
@@ -138,7 +138,7 @@ Item {
 
             anchors {
                 right: datePicker.left
-                rightMargin: theme.defaultFont.mSize.width
+                rightMargin: theme.mSize(theme.defaultFont).width
             }
             Component.onCompleted: {
                 var date = new Date("January 1, 1971 "+timeSettings.currentTime)
@@ -203,8 +203,8 @@ Item {
         onButtonClicked: close()
         content: Loader {
             id: timeZonePickerLoader
-            width: theme.defaultFont.mSize.width*22
-            height: theme.defaultFont.mSize.height*25
+            width: theme.mSize(theme.defaultFont).width*22
+            height: theme.mSize(theme.defaultFont).height*25
         }
         onStatusChanged: {
             if (status == PlasmaComponents.DialogStatus.Open) {
