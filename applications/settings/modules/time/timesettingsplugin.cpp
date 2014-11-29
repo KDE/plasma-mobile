@@ -50,17 +50,14 @@ TimeSettingsPlugin::TimeSettingsPlugin(QObject *parent, const QVariantList &list
 {
     Q_UNUSED(list)
 
-    qDebug() << "OOOOOOOOOOOOOOOOOO created!!!!!!";
-    qDebug() << "TimeSettingsPlugin created:)";
-
-    //qmlRegisterType<TimeSettings>();
-    qmlRegisterType<TimeZone>();
-    qmlRegisterType<TimeSettings>("org.kde.active.settings", 2, 0, "TimeSettings");
+  //    qmlRegisterType<TimeZone>("org.kde.active.settings.time", 2, 0, "TimeZone");
+    qmlRegisterType<TimeSettings>("org.kde.active.settings.time", 2, 0, "TimeSettings");
+    qDebug() << "TimeSettingsPlugin registered types :)";
 }
 
 TimeSettingsPlugin::~TimeSettingsPlugin()
 {
-    kDebug() << "ts plugin del'ed";
+    qDebug() << "ts plugin del'ed";
 }
 
 

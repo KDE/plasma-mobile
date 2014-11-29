@@ -19,7 +19,7 @@ target_link_libraries(active_settings_time
     KF5::Auth
     KF5::KDELibs4Support
     )
-kservice_desktop_to_json(active_settings_time "package/metadata.desktop" timeplugin.json)
+kcoreaddons_desktop_to_json(active_settings_time "package/metadata.desktop")
 
 install(TARGETS active_settings_time DESTINATION ${PLUGIN_INSTALL_DIR}/active/settingsmodule)
 

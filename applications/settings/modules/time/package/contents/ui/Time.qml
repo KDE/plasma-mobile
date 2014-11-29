@@ -24,6 +24,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.active.settings 2.0
+import org.kde.active.settings.time 2.0
 
 Item {
     id: timeModule
