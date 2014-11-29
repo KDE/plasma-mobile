@@ -22,6 +22,8 @@
 #define TIMESETTINGS_H
 
 #include <QObject>
+#include <QDate>
+#include <QTime>
 #include <QIcon>
 #include <QVariant>
 #include <QStringListModel>

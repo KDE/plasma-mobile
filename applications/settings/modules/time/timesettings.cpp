@@ -29,10 +29,15 @@
 #include <KLocale>
 
 #include <QStandardItemModel>
+#include <QDBusConnection>
+#include <QDBusMessage>
 #include <QTimer>
 #include <QVariant>
 
 #include <kauthaction.h>
+
+#include <kauthexecutejob.h>
+
 #include <kdemacros.h>
 #include <KPluginFactory>
 #include <KPluginLoader>
@@ -40,6 +45,7 @@
 #include <KStandardDirs>
 #include <KConfigGroup>
 #include <KGlobalSettings>
+#include <KGlobal>
 #include <KSystemTimeZone>
 #include <KTimeZone>
 
@@ -291,12 +297,12 @@ void TimeSettings::saveTime()
     }*/
 
     KAuth::Action writeAction("org.kde.active.clockconfig.save");
-    writeAction.setHelperID("org.kde.active.clockconfig");
+    //writeAction.setHelperID("org.kde.active.clockconfig");
     writeAction.setArguments(helperargs);
 
-    KAuth::ActionReply reply = writeAction.execute();
-    if (reply.failed()) {
-        kWarning()<< "KAuth returned an error code:" << reply.errorCode();
+    auto job = writeAction.execute();
+    if (!job->exec()) {
+        kWarning()<< "KAuth returned an error code:" << job->errorString();
     }
 }
 
@@ -387,12 +393,12 @@ void TimeSettings::saveTimeZone(const QString &newtimezone)
     helperargs["tzone"] = newtimezone;
 
     KAuth::Action writeAction("org.kde.active.clockconfig.save");
-    writeAction.setHelperID("org.kde.active.clockconfig");
+    //writeAction.setHelperID("org.kde.active.clockconfig");
     writeAction.setArguments(helperargs);
 
-    KAuth::ActionReply reply = writeAction.execute();
-    if (reply.failed()) {
-        kWarning()<< "KAuth returned an error code:" << reply.errorCode();
+    auto job = writeAction.execute();
+    if (!job->exec()) {
+        kWarning()<< "KAuth returned an error code:" << job->errorString();
     }
 
     setTimeZone(newtimezone);
@@ -420,4 +426,4 @@ void TimeSettings::setTwentyFour(bool t)
 }
 
 
-#include "timesettings.moc"
+//#include "timesettings.moc"
