@@ -56,7 +56,7 @@ View::View(const QString &module, QWindow *parent)
     }
 
     const QString qmlFile = m_package.filePath("mainscript");
-    qDebug() << "mainscript: " << QUrl::fromLocalFile(m_package.filePath("mainscript"));
+    //qDebug() << "mainscript: " << QUrl::fromLocalFile(m_package.filePath("mainscript"));
     setSource(QUrl::fromLocalFile(m_package.filePath("mainscript")));
     show();
 
