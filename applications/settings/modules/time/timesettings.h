@@ -21,8 +21,6 @@
 #ifndef TIMESETTINGS_H
 #define TIMESETTINGS_H
 
-#include <KIconLoader>
-
 #include <QObject>
 #include <QIcon>
 #include <QVariant>

@@ -313,8 +313,9 @@ void TimeSettings::setTimeFormat(const QString &timeFormat)
         d->localeSettings.writeEntry("TimeFormat", timeFormat);
         d->localeConfig->sync();
 
-        KGlobal::locale()->setTimeFormat(d->timeFormat);
-        KGlobalSettings::self()->emitChange(KGlobalSettings::SettingsChanged, KGlobalSettings::SETTINGS_LOCALE);
+        QDBusMessage msg = QDBusMessage::createSignal("/org/kde/kcmshell_clock", "org.kde.kcmshell_clock", "clockUpdated");
+        QDBusConnection::sessionBus().send(msg);
+
         kDebug() << "TIME" << KGlobal::locale()->formatTime(QTime::currentTime(), false);
         emit timeFormatChanged();
         timeout();

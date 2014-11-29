@@ -32,7 +32,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include <kcomponentdata.h>
+//#include <kcomponentdata.h>
 #include <kconfig.h>
 #include <kconfiggroup.h>
 #include <kstandarddirs.h>
@@ -143,7 +143,7 @@ ActionReply ClockHelper::save(const QVariantMap &args)
   bool _tz = args.value("tz").toBool();
   bool _tzreset = args.value("tzreset").toBool();
 
-  KComponentData data( "kcmdatetimehelper" );
+  //KComponentData data( "kcmdatetimehelper" );
 
   int ret = 0; // error code
 //  The order here is important
