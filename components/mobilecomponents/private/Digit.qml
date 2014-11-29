@@ -18,10 +18,10 @@
  */
 
 import QtQuick 2.1
-import org.kde.plasma.core 0.2 as PlasmaCore
-import org.kde.plasma.components 0.2 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 //import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
-import org.kde.active.settings 0.2
+import org.kde.active.settings.time 2.0
 
 
 Item {
