@@ -23,6 +23,7 @@
 #include <QQmlEngine>
 #include <QQmlComponent>
 
+#include <KPluginTrader>
 #include <KService>
 #include <KServiceTypeTrader>
 #include <QDebug>
@@ -69,10 +70,10 @@ void SettingsComponent::loadModule(const QString &name)
     KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
     KService::List::const_iterator iter;
     for(iter = offers.constBegin(); iter < offers.constEnd(); ++iter) {
-       QString error;
-       KService::Ptr service = *iter;
+        QString error;
+        KService::Ptr service = *iter;
 
-        KPluginFactory *factory = KPluginLoader(service->library()).factory();
+        //KPluginFactory *factory = KPluginLoader(service->library()).factory();
 
         QString description;
         if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
@@ -80,12 +81,24 @@ void SettingsComponent::loadModule(const QString &name)
         } else if (!service->comment().isEmpty()) {
             description = service->comment();
         }
+        qDebug() << "Found plugin" << description << service->library();
+
+
         d->settingsModule = new SettingsModule(this);
-        if (factory) {
+
+        if (!service->library().isEmpty()) {
             // Load binary plugin
-            const QString query = QString("exist Library and Library == '%1'").arg(service->library());
-            qDebug() << "loading binary plugin from query: " << service->name();
-            KServiceTypeTrader::createInstanceFromQuery<QObject>("Active/SettingsModule", query, d->settingsModule);
+            qDebug() << "\n\nloading binary plugin from query: " << service->name();
+            KPluginLoader loader(KPluginLoader::findPlugin("active/settingsmodule/"+service->library()));
+            KPluginFactory* factory = loader.factory();
+            if (!factory) {
+                qWarning() << "Error loading plugin:" << loader.errorString();
+            } else {
+                QObject* obj = factory->create<QObject>();
+                if (!obj) {
+                    qWarning() << "Error creating object from plugin" << loader.fileName();
+                }
+            }
         } else {
             qDebug() << "QML only plugin";
         }
@@ -99,7 +112,7 @@ void SettingsComponent::loadModule(const QString &name)
         d->settingsModule->setModule(pluginName);
 
        if (d->settingsModule) {
-           qDebug() << "Successfully loaded plugin:" << service->name();
+           //qDebug() << "Successfully loaded plugin:" << service->name();
            //emit pluginLoaded(plugin);
        } else {
            qDebug() << error;

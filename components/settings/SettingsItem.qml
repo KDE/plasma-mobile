@@ -32,7 +32,7 @@ PlasmaComponents.PageStack {
     function pushModule(module) {
         switcherPackage.name = module
         var mainscript = switcherPackage.filePath("mainscript");
-        print("Loading mainscript: " + mainscript);
+        //print("Loading mainscript: " + mainscript);
         settingsLoader.source = mainscript;
         moduleContainer.push(settingsLoader);
         moduleContainer.module = module
@@ -53,9 +53,9 @@ PlasmaComponents.PageStack {
                 moduleContainer.pop();
             } else if (switcherPackage.name != module) {
                 switcherPackage.name = module
-                print(" Loading package: " + switcherPackage.filePath("mainscript") + " " + module);
+                //print(" Loading package: " + switcherPackage.filePath("mainscript") + " " + module);
                 var mainscript = switcherPackage.filePath("mainscript");
-                print("Loading mainscript: " + mainscript);
+                //print("Loading mainscript: " + mainscript);
                 settingsLoader.source = switcherPackage.filePath("mainscript");
                 //moduleContainer.replace(switcherPackage.filePath("mainscript"));
             }
