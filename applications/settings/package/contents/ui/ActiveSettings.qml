@@ -37,7 +37,6 @@ Rectangle {
         source: "image://appbackgrounds/standard"
         fillMode: Image.Tile
         asynchronous: true
-        //anchors.margins: 8
         anchors.fill: parent
 
         Item {
@@ -85,6 +84,7 @@ Rectangle {
                             width: 48
                             height: 32
                             source: iconName
+
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
                             anchors.rightMargin: 8
