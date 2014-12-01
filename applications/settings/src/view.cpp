@@ -62,9 +62,8 @@ View::View(const QString &module, QWindow *parent)
 
     onStatusChanged(status());
 
-    //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
-    connect(this, SIGNAL(statusChanged(QQuickView::Status)),
-            this, SLOT(onStatusChanged(QQuickView::Status)));
+    connect(this, &QQuickView::statusChanged,
+            this, &View::onStatusChanged);
 }
 
 View::~View()
