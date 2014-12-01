@@ -103,9 +103,9 @@ void SettingsComponent::loadModule(const QString &name)
             qDebug() << "QML only plugin";
         }
 
-
-        connect(d->settingsModule, SIGNAL(nameChanged()), SIGNAL(nameChanged()));
-        connect(d->settingsModule, SIGNAL(descriptionChanged()), SIGNAL(descriptionChanged()));
+        connect(d->settingsModule, &SettingsModule::nameChanged, this, &SettingsComponent::nameChanged);
+        connect(d->settingsModule, &SettingsModule::descriptionChanged,
+                this, &SettingsComponent::descriptionChanged);
 
         d->settingsModule->setName(service->name());
         d->settingsModule->setDescription(description);

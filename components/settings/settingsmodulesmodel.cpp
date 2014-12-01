@@ -55,7 +55,7 @@ SettingsModulesModel::SettingsModulesModel(QQmlComponent *parent)
     qDebug() << "Creating SettingsModel";
     d->populateTimer->setInterval(0);
     d->populateTimer->setSingleShot(true);
-    connect(d->populateTimer, SIGNAL(timeout()), this, SLOT(populate()));
+    connect(d->populateTimer, &QTimer::timeout, this, &SettingsModulesModel::populate);
     d->populateTimer->start();
 }
 
