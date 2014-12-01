@@ -91,7 +91,7 @@ TimeSettings::TimeSettings()
     // Just for testing that data gets through
     d->timer = new QTimer(this);
     d->timer->setInterval(1000);
-    connect(d->timer, SIGNAL(timeout()), SLOT(timeout()));
+    connect(d->timer, &QTimer::timeout, this, &TimeSettings::timeout);
     d->timer->start();
 
     kDebug() << "TimeSettings module loaded.";

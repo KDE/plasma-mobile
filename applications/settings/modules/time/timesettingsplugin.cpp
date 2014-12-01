@@ -40,7 +40,6 @@
 #include <QtCore/QDate>
 
 K_PLUGIN_FACTORY_WITH_JSON(TimeSettingsFactory, "metadata.json", registerPlugin<TimeSettingsPlugin>();)
-//K_EXPORT_PLUGIN(TimeSettingsFactory("active_settings_time"))
 
 #define FORMAT24H "%H:%M:%S"
 #define FORMAT12H "%l:%M:%S %p"

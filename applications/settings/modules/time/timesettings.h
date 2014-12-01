@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2011-2014 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -33,7 +33,7 @@
 class TimeSettingsPrivate;
 
 /**
- * @class A class to manage time and date related settings. This class serves two functions:
+ * @class TimeSettings A class to manage time and date related settings. This class serves two functions:
  * - Provide a plugin implementation
  * - Provide a settings module
  * This is done from one class in order to simplify the code. You can export any QObject-based
