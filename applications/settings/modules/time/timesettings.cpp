@@ -190,7 +190,7 @@ void TimeSettings::setCurrentTime(const QTime &currentTime)
 {
     if (d->currentTime != currentTime) {
         d->currentTime = currentTime;
-        d->currentTimeText = KGlobal::locale()->formatTime(QTime::currentTime(), true);
+        d->currentTimeText = QLocale().toString(QTime::currentTime(), d->timeFormat);
         emit currentTimeChanged();
     }
 }
@@ -320,7 +320,7 @@ void TimeSettings::setTimeFormat(const QString &timeFormat)
         QDBusMessage msg = QDBusMessage::createSignal("/org/kde/kcmshell_clock", "org.kde.kcmshell_clock", "clockUpdated");
         QDBusConnection::sessionBus().send(msg);
 
-        qDebug() << "TIME" << KGlobal::locale()->formatTime(QTime::currentTime(), false);
+        qDebug() << "TIME" << QLocale().toString(QTime::currentTime(), d->timeFormat);
         emit timeFormatChanged();
         timeout();
     }
