@@ -47,7 +47,7 @@ public:
     KSharedConfigPtr config;
     KConfigGroup *configGroup;
     QString file;
-    QTimer *synchTimer;
+    QTimer *syncTimer;
     QString group;
 };
 
@@ -57,17 +57,17 @@ ConfigGroup::ConfigGroup(QQuickItem *parent)
       d(new ConfigGroupPrivate(this))
 {
     // Delay and compress everything within 5 seconds into one sync
-    d->synchTimer = new QTimer(this);
-    d->synchTimer->setSingleShot(true);
-    d->synchTimer->setInterval(1500);
-    connect(d->synchTimer, SIGNAL(timeout()), SLOT(sync()));
+    d->syncTimer = new QTimer(this);
+    d->syncTimer->setSingleShot(true);
+    d->syncTimer->setInterval(1500);
+    connect(d->syncTimer, &QTimer::timeout, this, &ConfigGroup::sync);
 }
 
 ConfigGroup::~ConfigGroup()
 {
-    if (d->synchTimer->isActive()) {
+    if (d->syncTimer->isActive()) {
         //qDebug() << "SYNC......";
-        d->synchTimer->stop();
+        d->syncTimer->stop();
         d->configGroup->sync();
     }
 
@@ -162,7 +162,7 @@ bool ConfigGroup::writeEntry(const QString& key, const QVariant& value)
     }
 
     d->configGroup->writeEntry(key, value);
-    d->synchTimer->start();
+    d->syncTimer->start();
     return true;
 }
 
