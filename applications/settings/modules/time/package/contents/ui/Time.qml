@@ -222,7 +222,7 @@ Item {
         model: timeSettings.availableNtpServers
         delegate: PlasmaComponents.ListItem {
             enabled: true
-            visible: modelData.search(RegExp(filterField.filterText, "i")) != -1
+            //visible: modelData.search(RegExp(filterField.filterText, "i")) != -1
             height: visible ? label.paintedHeight*2 : 0
             checked: timeSettings.ntpServer == modelData
             PlasmaComponents.Label {
