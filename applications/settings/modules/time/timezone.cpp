@@ -22,7 +22,7 @@
 
 #include "timezone.h"
 
-#include <kdebug.h>
+#include <QDebug>
 #include <KLocale>
 #include <KSystemTimeZone>
 #include <KTimeZone>
@@ -42,7 +42,7 @@ TimeZone::TimeZone(const KTimeZone &zone, QObject* parent)
     d->q = this;
     d->zone = zone;
     setName(zone.name());
-    //kDebug() << "new tz: " << d->name;
+    //qDebug() << "new tz: " << d->name;
 }
 
 TimeZone::~TimeZone()
