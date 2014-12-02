@@ -33,6 +33,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import MeeGo.Connman 0.2
 
@@ -135,7 +136,7 @@ Item {
                     }
                 }
 
-
+                stackView.pop();
             }
         }
         Button {
@@ -171,28 +172,40 @@ Item {
                 anchors.right: parent.right
                 spacing: 10
 
-                Rectangle {
+                Row {
                     anchors { left: parent.left; right: parent.right }
-                    height: 80
-                    color: "transparent"
 
-                    Image {
-                        anchors { left: parent.left; verticalCenter: parent.verticalCenter }
-                        source: "image://theme/icon-m-common-wlan-strength5"
-                        width: 60
-                        height: 60
+                    PlasmaCore.IconItem {
+                        height: units.iconSizes.large
+                        width: height
+                        source: {
+                            var strength = form.strength;
+                            var str_id = 0;
+
+                            if (strength >= 100) {
+                                str_id = 100;
+                            } else if (strength >= 80) {
+                                str_id = 80;
+                            } else if (strength >= 60) {
+                                str_id = 60;
+                            } else if (strength >= 40) {
+                                str_id = 40;
+                            } else if (strength >= 20) {
+                                str_id = 20;
+                            }
+                            return "network-wireless-" + str_id;
+                        }
                     }
 
-                    Text {
-                        anchors { left: parent.left; verticalCenter: parent.verticalCenter; leftMargin: 80 }
+                    PlasmaExtras.Heading {
                         text: form.networkName
                     }
                 }
 
-                Rectangle {
+                Item {
                     anchors { left: parent.left; right: parent.right }
                     height: 100
-                    color: "transparent"
+
                     Button {
                         id: disconnectButton
                         anchors {
@@ -203,21 +216,20 @@ Item {
                         onClicked: {
                             console.log("Disconnect clicked");
                             network.requestDisconnect();
-                            sheet.close();
+                            stackView.pop();
                         }
                     }
                 }
 
-                Item {
+                Column {
                     anchors { left: parent.left; right: parent.right }
-                    height: 100
                     Text {
                         anchors { left: parent.left; leftMargin: 20 }
                         text: "Method"
                     }
                     ButtonRow {
                         id: method
-                        anchors { left: parent.left; right: parent.right; top: parent.top; topMargin: 30; leftMargin: 10; rightMargin: 10 }
+                        anchors { left: parent.left; right: parent.right; leftMargin: 10; rightMargin: 10 }
                         state: form.ipv4.Method
 
                         states: [
@@ -250,81 +262,72 @@ Item {
                     }
                 }
 
-                Item {
+                Column {
                     id: networkInfo
                     anchors { left: parent.left; right: parent.right }
-                    height: 340
-
+                    spacing: 50
                     Column {
-                        spacing: 50
-                        Item {
-                            height: 40
-                            anchors { left: parent.left; right: parent.right }
+                        anchors { left: parent.left; right: parent.right }
 
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
-                                text: "IP address"
-                            }
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top:parent.top; topMargin: 30 }
-                                text: form.ipv4.Address
-                            }
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20; }
+                            text: "IP address"
                         }
-                        Item {
-                            height: 40
-                            anchors { left: parent.left; right: parent.right }
-
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
-                                text: "Subnet mask"
-                            }
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top; topMargin: 30 }
-                                text: form.ipv4.Netmask
-                            }
-                        }
-                        Item {
-                            height: 40
-                            anchors { left: parent.left; right: parent.right }
-
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
-                                text: "Router"
-                            }
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top; topMargin: 30 }
-                                text: form.ipv4.Gateway
-                            }
-                        }
-                        Item {
-                            height: 40
-                            anchors { left: parent.left; right: parent.right }
-
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
-                                text: "DNS"
-                            }
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top; topMargin: 30 }
-                                text: form.nameservers.join()
-                            }
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20; topMargin: 30 }
+                            text: form.ipv4.Address
                         }
                     }
+                    Column {
+                        anchors { left: parent.left; right: parent.right }
+
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20 }
+                            text: "Subnet mask"
+                        }
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20; topMargin: 30 }
+                            text: form.ipv4.Netmask
+                        }
+                    }
+                    Column {
+                        anchors { left: parent.left; right: parent.right }
+
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20 }
+                            text: "Router"
+                        }
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20; topMargin: 30 }
+                            text: form.ipv4.Gateway
+                        }
+                    }
+                    Column {
+                        anchors { left: parent.left; right: parent.right }
+
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20 }
+                            text: "DNS"
+                        }
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20; topMargin: 30 }
+                            text: form.nameservers.join()
+                        }
+                    }
+
                 }
 
                 Item {
                     id: networkFields
                     anchors { left: parent.left; right: parent.right }
-                    height: 360
 
                     Column {
                         spacing: 50
-                        Item {
-                            height: 40
+                        Column {
                             anchors { left: parent.left; right: parent.right }
 
                             Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
+                                anchors { left: parent.left; leftMargin: 20 }
                                 text: "IP address"
                             }
                             TextField {
@@ -334,47 +337,44 @@ Item {
                                 text: form.ipv4.Address
                             }
                         }
-                        Item {
-                            height: 40
+                        Column {
                             anchors { left: parent.left; right: parent.right }
 
                             Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
+                                anchors { left: parent.left; leftMargin: 20 }
                                 text: "Subnet mask"
                             }
                             TextField {
                                 id: netmask
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top; topMargin: 30 }
+                                anchors { left: parent.left; leftMargin: 20; topMargin: 30 }
                                 width: 440
                                 text: form.ipv4.Netmask
                             }
                         }
-                        Item {
-                            height: 40
+                        Column {
                             anchors { left: parent.left; right: parent.right }
 
                             Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
+                                anchors { left: parent.left; leftMargin: 20 }
                                 text: "Router"
                             }
                             TextField {
                                 id: gateway
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top; topMargin: 30 }
+                                anchors { left: parent.left; leftMargin: 20; topMargin: 30 }
                                 width: 440
                                 text: form.ipv4.Gateway
                             }
                         }
-                        Item {
-                            height: 40
+                        Column {
                             anchors { left: parent.left; right: parent.right }
 
                             Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
+                                anchors { left: parent.left; leftMargin: 20 }
                                 text: "DNS"
                             }
                             TextField {
                                 id: nameserversField
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top; topMargin: 30 }
+                                anchors { left: parent.left; leftMargin: 20; topMargin: 30 }
                                 width: 440
                                 text: {
                                     var nservs = "";
@@ -390,32 +390,30 @@ Item {
                     }
                 }
 
-                Item {
-                    height: 100
+                Column {
                     anchors { left: parent.left; right: parent.right }
 
                     Text {
-                        anchors { left: parent.left; leftMargin: 20; top: parent.top }
+                        anchors { left: parent.left; leftMargin: 20 }
                         text: "Search domains"
                     }
                     TextField {
                         id: domainsField
-                        anchors { left: parent.left; leftMargin: 20; top: parent.top; topMargin: 30 }
+                        anchors { left: parent.left; leftMargin: 20; topMargin: 30 }
                         width: 440
                         text: form.domains.join()
                     }
                 }
 
-                Item {
+                Column {
                     anchors { left: parent.left; right: parent.right }
-                    height: 100
                     Text {
                         anchors { left: parent.left; leftMargin: 20 }
                         text: "HTTP Proxy"
                     }
                     ButtonRow {
                         id: proxy
-                        anchors { left: parent.left; right: parent.right; top: parent.top; topMargin: 30; leftMargin: 10; rightMargin: 10 }
+                        anchors { left: parent.left; right: parent.right; topMargin: 30; leftMargin: 10; rightMargin: 10 }
                         state: form.proxy.Method
 
                         states: [
@@ -469,75 +467,66 @@ Item {
                     }
                 }
 
-                Item {
+                Column {
                     id: proxyManualFields
                     anchors { left: parent.left; right: parent.right }
-                    height: 440
 
+                    spacing: 50
                     Column {
-                        spacing: 50
-                        Item {
-                            height: 40
-                            anchors { left: parent.left; right: parent.right }
+                        anchors { left: parent.left; right: parent.right }
 
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
-                                text: "Server"
-                            }
-                            TextField {
-                                id: proxyserver
-                                anchors { left: parent.left; leftMargin: 20; top:parent.top; topMargin: 30 }
-                                width: 440
-                                text: form.proxyConfig.Servers ? form.proxyConfig.Servers[0].split(":")[0] : ""
-                            }
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20 }
+                            text: "Server"
                         }
-                        Item {
-                            height: 40
-                            anchors { left: parent.left; right: parent.right }
+                        TextField {
+                            id: proxyserver
+                            anchors { left: parent.left; leftMargin: 20; top:parent.top; topMargin: 30 }
+                            width: 440
+                            text: form.proxyConfig.Servers ? form.proxyConfig.Servers[0].split(":")[0] : ""
+                        }
+                    }
+                    Column {
+                        anchors { left: parent.left; right: parent.right }
 
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
-                                text: "Port"
-                            }
-                            TextField {
-                                id: proxyport
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top; topMargin: 30 }
-                                width: 440
-                                text: form.proxyConfig.Servers ? form.proxyConfig.Servers[0].split(":")[1] : ""
-                                // TODO: validator
-                            }
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20 }
+                            text: "Port"
+                        }
+                        TextField {
+                            id: proxyport
+                            anchors { left: parent.left; leftMargin: 20; topMargin: 30 }
+                            width: 440
+                            text: form.proxyConfig.Servers ? form.proxyConfig.Servers[0].split(":")[1] : ""
+                            // TODO: validator
                         }
                     }
                 }
 
-                Item {
+                Column {
                     id: proxyAutoFields
                     anchors { left: parent.left; right: parent.right }
-                    height: 440
 
+                    spacing: 50
+                    CheckBox {
+                        id: proxyAutoUrl
+                        text: "Use URL provided by DHCP server"
+                    }
                     Column {
-                        spacing: 50
-                        CheckBox {
-                            id: proxyAutoUrl
-                            text: "Use URL provided by DHCP server"
-                        }
-                        Item {
-                            height: 40
-                            visible: !proxyAutoUrl.checked
-                            anchors { left: parent.left; right: parent.right }
+                        visible: !proxyAutoUrl.checked
+                        anchors { left: parent.left; right: parent.right }
 
-                            Text {
-                                anchors { left: parent.left; leftMargin: 20; top: parent.top }
-                                text: "URL"
-                            }
-                            TextField {
-                                id: proxyurl
-                                anchors { left: parent.left; leftMargin: 20; top:parent.top; topMargin: 30 }
-                                width: 440
-                                readOnly: proxyAutoUrl.checked
-                                text: form.proxy.URL
-                                // TODO: validator
-                            }
+                        Text {
+                            anchors { left: parent.left; leftMargin: 20 }
+                            text: "URL"
+                        }
+                        TextField {
+                            id: proxyurl
+                            anchors { left: parent.left; leftMargin: 20; top:parent.top; topMargin: 30 }
+                            width: 440
+                            readOnly: proxyAutoUrl.checked
+                            text: form.proxy.URL
+                            // TODO: validator
                         }
                     }
                 }

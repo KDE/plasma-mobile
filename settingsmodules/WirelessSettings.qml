@@ -42,12 +42,14 @@ import QtQuick.Controls 1.2
 StackView {
     id: stackView
     initialItem: mainView
+    width: 1080
+    height: 1815
 
     Component {
         id: mainView
         Item {
             id: mainWindow
-            property Item tools: commonTools
+            property Item tools//: commonTools
 
             Timer {
                 id: scanTimer
@@ -96,15 +98,16 @@ StackView {
                     }
                     if (!networkingModel.sheetOpened) {
                         networkingModel.sheetOpened = true
-                        var sheet = pageStack.openSheet(Qt.resolvedUrl("NetworkSettingsSheet.qml"), {
+                        var sheet = stackView.push({item: Qt.resolvedUrl("NetworkSettingsSheet.qml"), properties:{
                             mustacheView: view,
                             networkName: networkingModel.networkName,
                             userAgent: userAgent,
                             scanTimer: scanTimer
-                        })
-                        sheet.accepted.connect(function() { networkingModel.sheetOpened = false })
-                        sheet.rejected.connect(function() { networkingModel.sheetOpened = false })
-                        // TODO: there was code that checked for pageStack.busy and
+                        }})
+
+                       // sheet.accepted.connect(function() { networkingModel.sheetOpened = false })
+                        //sheet.rejected.connect(function() { networkingModel.sheetOpened = false })
+                        // TODO: there was code that checked for stackView.busy and
                         // didn't open if it was true. What was that about?
                     }
                 }
@@ -130,17 +133,19 @@ StackView {
                 ListView {
                     id: networkList
                     //header: WirelessApplet { }
-                    anchors.margins: UiConstants.DefaultMargin
+                    anchors.margins: 4//UiConstants.DefaultMargin
                     anchors.fill: parent
                     model: networkingModel
                     delegate: PlasmaComponents.ListItem {
-
+                        enabled: true
                         PlasmaCore.IconItem {
+                            id: icon
                             anchors {
                                 left: parent.left
                                 top: parent.top
                                 bottom: parent.bototm
                             }
+                            height: units.iconSizes.large
                             width: height
                             source: {
                                 var strength = modelData.strength;
@@ -166,6 +171,7 @@ StackView {
                                 top: parent.top
                                 right: parent.right
                                 bottom: parent.bottom
+                                leftMargin: units.smallSpacing
                             }
                             PlasmaExtras.Heading {
                                 level: 2
