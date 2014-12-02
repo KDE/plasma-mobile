@@ -9,7 +9,7 @@ Name:       plasma-phone-components
 # << macros
 
 Summary:    Plasma Phone Components
-Version:    0.2.1
+Version:    0.2.2
 Release:    1
 Group:      System/GUI/Other
 License:    GPLv2+
