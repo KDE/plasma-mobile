@@ -81,7 +81,7 @@ Rectangle {
         id: windowsLayerBackground
         anchors.fill: parent
         anchors.topMargin: topBarHeight
-        color: Qt.rgba(0, 0, 0, 0.5)
+        color: Qt.rgba(0, 0, 0, 0.9)
 
         Flickable {
             id: windowsLayer
