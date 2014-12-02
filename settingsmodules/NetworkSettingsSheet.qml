@@ -106,7 +106,7 @@ Item {
             height: 200
             property string form_tpl: "
                 import QtQuick 2.0
-                import com.nokia.meego 2.0
+                import QtQuick.Controls 1.2
                 Item {
                     id: form
                     anchors { fill: parent; margins: 10 }
