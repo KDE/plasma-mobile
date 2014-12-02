@@ -266,10 +266,8 @@ void TimeSettings::saveTime()
     helperargs["ntp"] = true;
     helperargs["ntpServers"] = list;
     helperargs["ntpEnabled"] = !d->ntpServer.isEmpty();
-    QString ntpUtility = findNtpUtility();
-    helperargs["ntpUtility"] = ntpUtility;
 
-    if (!d->ntpServer.isEmpty() && !ntpUtility.isEmpty()) {
+    if (!d->ntpServer.isEmpty()) {
         // NTP Time setting - done in helper
         qDebug() << "Setting date from time server " << list;
     } else {
@@ -295,7 +293,7 @@ void TimeSettings::saveTime()
     }*/
 
     KAuth::Action writeAction("org.kde.active.clockconfig.save");
-    //writeAction.setHelperID("org.kde.active.clockconfig");
+    writeAction.setHelperId("org.kde.active.clockconfig");
     writeAction.setArguments(helperargs);
 
     auto job = writeAction.execute();
@@ -392,7 +390,7 @@ void TimeSettings::saveTimeZone(const QString &newtimezone)
     helperargs["tzone"] = newtimezone;
 
     KAuth::Action writeAction("org.kde.active.clockconfig.save");
-    //writeAction.setHelperID("org.kde.active.clockconfig");
+    writeAction.setHelperId("org.kde.active.clockconfig");
     writeAction.setArguments(helperargs);
 
     auto job = writeAction.execute();
