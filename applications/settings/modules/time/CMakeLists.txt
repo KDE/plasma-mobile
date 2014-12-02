@@ -30,16 +30,14 @@ plasma_install_package(package org.kde.active.settings.time packages package)
 
 ########### helper ###############
 
-# add_executable(activedatetimehelper helper.cpp ${helper_mocs})
-# target_link_libraries(activedatetimehelper
-#     KF5::KCoreAddons
-#     KF5::Auth
-#     KF5::ConfigCore
-#     KF5::KDELibs4Support
-# )
-#install(TARGETS activedatetimehelper DESTINATION ${LIBEXEC_INSTALL_DIR})
+add_executable(activedatetimehelper helper.cpp ${helper_mocs})
+target_link_libraries(activedatetimehelper
+    KF5::Auth
+    KF5::ConfigCore
+    KF5::KDELibs4Support
+)
+install(TARGETS activedatetimehelper DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
 
-# FIXME
-# kde4_install_auth_helper_files(activedatetimehelper org.kde.active.clockconfig root)
-#
-# kde4_install_auth_actions(org.kde.active.clockconfig clockconfig_actions.actions)
+kauth_install_helper_files(activedatetimehelper org.kde.active.clockconfig root)
+kauth_install_actions(org.kde.active.clockconfig clockconfig_actions.actions)
+
