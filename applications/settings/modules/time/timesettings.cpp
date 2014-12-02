@@ -51,8 +51,8 @@
 
 #include <QtCore/QDate>
 
-#define FORMAT24H "%H:%M:%S"
-#define FORMAT12H "%l:%M:%S %p"
+#define FORMAT24H "HH:mm:ss"
+#define FORMAT12H "h:mm:ss ap"
 
 class TimeSettingsPrivate {
 public:
@@ -311,6 +311,7 @@ QString TimeSettings::timeFormat()
 
 void TimeSettings::setTimeFormat(const QString &timeFormat)
 {
+    qDebug() << "setTimeFormat: " << timeFormat;
     if (d->timeFormat != timeFormat) {
         d->timeFormat = timeFormat;
 
