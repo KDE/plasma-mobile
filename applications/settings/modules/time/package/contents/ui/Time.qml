@@ -161,6 +161,7 @@ Item {
                 id: timePicker
                 enabled: !ntpCheckBox.checked
                 twentyFour: twentyFourSwitch.checked
+                //twentyFour:
                 //visible: false
                 Layout.columnSpan: 2
                 Layout.preferredHeight: timePicker.childrenRect.height + timePicker.margins.top + timePicker.margins.bottom
@@ -171,7 +172,13 @@ Item {
 //                     rightMargin: theme.mSize(theme.defaultFont).width
 //                 }
                 Component.onCompleted: {
-                    var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+                    //var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+                    var date = new Date(timeSettings.currentTime)
+                    print("CurrnetATime: "  + timeSettings.currentTime);
+                    print("Date: "  + date);
+                    print("hours:   "  + date.getHours());
+                    print("minutes: "  + date.getMinutes());
+                    print("seconds: "  + date.getSeconds());
                     timePicker.hours = date.getHours()
                     timePicker.minutes = date.getMinutes()
                     timePicker.seconds = date.getSeconds()
@@ -183,7 +190,8 @@ Item {
                             return
                         }
 
-                        var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+                        //var date = new Date("January 1, 1971 "+timeSettings.currentTime)
+                        var date = new Date(timeSettings.currentTime)
                         timePicker.hours = date.getHours()
                         timePicker.minutes = date.getMinutes()
                         timePicker.seconds = date.getSeconds()

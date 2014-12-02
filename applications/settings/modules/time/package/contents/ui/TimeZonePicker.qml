@@ -74,7 +74,7 @@ Item {
         }
         onTextChanged: {
             //print("update filter" + text);
-            //timeSettings.timeZoneFilterChanged(text);
+            timeSettings.timeZoneFilterChanged(text);
             filterModel.filterRegExp = ".*"+text+".*"
         }
     }
@@ -83,7 +83,7 @@ Item {
         id: filterModel
         sourceModel: timeSettings.timeZonesModel
         filterRole: "display"
-        //filterRegExp: ".*"+tzFilter.text+".*"
+        filterRegExp: ".*"+tzFilter.text+".*"
         sortRole: "display"
         sortOrder: "AscendingOrder"
 
