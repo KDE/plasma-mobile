@@ -140,7 +140,7 @@ done
 %{_bindir}/plasma-phone
 %{_kf5_sharedir}/plasma/*
 %{_kf5_sharedir}/wallpapers/*
-%{_kf5_sharedir}/settingsmodule/*
+%{_kf5_sharedir}/settingsmodules/*
 %{_kf5_servicesdir}/*.desktop
 %{_sharedstatedir}/environment/greenisland/*
 %{_sharedstatedir}/environment/plasma-phone/*
