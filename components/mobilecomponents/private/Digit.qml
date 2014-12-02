@@ -58,7 +58,7 @@ Item {
             property int ownIndex: index
             text: index < 10 ? "0"+index : index
             font.pointSize: 20
-            opacity: PathView.itemOpacity
+            //opacity: PathView.itemOpacity
         }
 
         onMovingChanged: {
