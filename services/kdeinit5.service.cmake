@@ -9,7 +9,6 @@ Description=kdeinit5
 Requires=dbus.socket
 
 [Service]
-Environment=DISPLAY:0
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=%t/dbus/user_bus_socket
 EnvironmentFile=-/var/lib/environment/plasma-phone/*.conf
 ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/kdeinit5 +kcminit_startup --no-fork
