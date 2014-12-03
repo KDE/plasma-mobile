@@ -10,7 +10,7 @@ set(mobilecomponents_SRCS
     )
 
 add_library(mobilecomponentsplugin SHARED ${mobilecomponents_SRCS})
-target_link_libraries(mobilecomponentsplugin Qt5::Core Qt5::Widgets Qt5::Qml Qt5::Quick KF5::Declarative KF5::Plasma KF5::I18n KF5::KIOCore KF5::KIOWidgets KF5::Parts KF5::Activities)
+target_link_libraries(mobilecomponentsplugin Qt5::Core Qt5::Widgets Qt5::Qml Qt5::Quick KF5::Declarative KF5::Plasma KF5::I18n KF5::KIOCore KF5::KIOWidgets KF5::Activities)
 
 install(TARGETS mobilecomponentsplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
