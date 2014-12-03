@@ -30,7 +30,7 @@ class View : public QQuickView
     Q_OBJECT
 
 public:
-    explicit View(const QString &url, QWindow *parent = 0 );
+    explicit View(const QString &url, const QString &package, QWindow *parent = 0 );
     ~View();
 
 Q_SIGNALS:

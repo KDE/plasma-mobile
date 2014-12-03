@@ -32,7 +32,7 @@
 #include <KLocalizedString>
 
 
-View::View(const QString &module, QWindow *parent)
+View::View(const QString &module, const QString &package, QWindow *parent)
     : QQuickView(parent),
     m_settingsRoot(0)
 {
@@ -49,7 +49,11 @@ View::View(const QString &module, QWindow *parent)
     kdeclarative.setupBindings();
 
     m_package = Plasma::PluginLoader::self()->loadPackage("Plasma/Generic");
-    m_package.setPath("org.kde.active.settings");
+    if (!package.isEmpty()) {
+        m_package.setPath(package);
+    } else {
+        m_package.setPath("org.kde.active.settings");
+    }
 
     if (!module.isEmpty()) {
         rootContext()->setContextProperty("startModule", module);
