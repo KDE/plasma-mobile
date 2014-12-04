@@ -31,7 +31,8 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 1.2
+import org.kde.plasma.components 2.0
+import QtQuick.Layouts 1.1
 import MeeGo.Connman 0.2
 import "mustache.js" as M
 
@@ -65,24 +66,32 @@ Item {
         }
     }
 
-    Button {
-        text: "Reject"
-        onClicked: {
-            userAgent.sendUserReply({});
-            scanTimer.running = true;
+    RowLayout {
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
         }
-    }
-
-    Button {
-        text: "Accept"
-        onClicked: {
-            console.log('clicked Done ' + 'x:' + x + ' y:' + y);
-            var fields = networkPage.netfields;
-            for (var key in fields) {
-                console.log(key + " --> " + fields[key]);
+        Button {
+            text: "Reject"
+            onClicked: {
+                userAgent.sendUserReply({});
+                scanTimer.running = true;
+                stackView.pop();
             }
-            scanTimer.running = true;
-            userAgent.sendUserReply(fields);
+        }
+
+        Button {
+            text: "Accept"
+            onClicked: {
+                console.log('clicked Done ' + 'x:' + x + ' y:' + y);
+                var fields = networkPage.netfields;
+                for (var key in fields) {
+                    console.log(key + " --> " + fields[key]);
+                }
+                scanTimer.running = true;
+                userAgent.sendUserReply(fields);
+                stackView.pop();
+            }
         }
     }
 
