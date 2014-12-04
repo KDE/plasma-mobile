@@ -117,13 +117,15 @@ int main(int argc, char **argv)
     }
 
     const QString module = parser.value(_m);
-    const QString ui = parser.value(_ui);
+    QString ui = parser.value(_ui);
 
     KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-active-settings");
 
     const QString themeName = cg.readEntry("name", "air-mobile");
+    ui = cg.readEntry("package", ui);
+
     Plasma::Theme theme;
-    qDebug() << "Setting theme " << themeName;
+    qDebug() << "Setting theme, package " << themeName << ui;
     theme.setUseGlobalSettings(false);
     theme.setThemeName(themeName); // nees to happen after setUseGlobalSettings, since that clears themeName
 
