@@ -42,26 +42,10 @@ Item {
         name: "org.kde.active.settings.time"
     }
 
-    Column {
-        id: titleCol
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        PlasmaExtras.Title {
-            text: settingsComponent.name
-            opacity: 1
-        }
-        PlasmaComponents.Label {
-            id: descriptionLabel
-            text: settingsComponent.description
-            opacity: .4
-        }
-    }
-
     ScrollView {
 
         anchors {
-            top: titleCol.bottom
+            top: parent.top
             left: parent.left
             right: parent.right
             //horizontalCenter: parent.horizontalCenter
