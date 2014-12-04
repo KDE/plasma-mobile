@@ -26,7 +26,7 @@ include(KDECompilerSettings)
 
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick Test Gui)
 
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
+#add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
 
 if(KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)
    set(KDE_NO_DEPRECATED TRUE)
@@ -43,21 +43,19 @@ endif()
 
 set (QT_MIN_VERSION "5.2.0")
 
-
-# Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 REQUIRED COMPONENTS
-    IdleTime ItemModels WidgetsAddons WindowSystem Codecs Archive CoreAddons Solid ThreadWeaver
+    WindowSystem Codecs Archive CoreAddons Solid
     Config Auth JS Wallet DBusAddons Sonnet
     I18n GuiAddons Service ConfigWidgets ItemViews Notifications IconThemes Completion JobWidgets TextWidgets
-    TextEditor GlobalAccel XmlGui Crash UnitConversion Bookmarks Parts Kross NewStuff Attica)
+    GlobalAccel XmlGui Crash Bookmarks )
 
 find_package(KF5Plasma REQUIRED NO_MODULE)
 find_package(KF5PlasmaQuick REQUIRED NO_MODULE)
 find_package(KF5Declarative REQUIRED NO_MODULE)
 find_package(KF5KIO REQUIRED NO_MODULE)
-find_package(KF5KDELibs4Support REQUIRED NO_MODULE)
+find_package(KF5KDELibs4Support NO_MODULE)
 find_package(KF5Activities REQUIRED NO_MODULE)
-find_package(KF5Baloo REQUIRED NO_MODULE)
+find_package(KF5Baloo NO_MODULE)
 find_package(KF5Declarative REQUIRED NO_MODULE)
 find_package(PkgConfig)
 #########################################################################
