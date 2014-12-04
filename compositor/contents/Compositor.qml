@@ -134,7 +134,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: compositorRoot.state == "homeScreen" ? 0 : bottomBarHeight
-        color: Qt.rgba(0, 0, 0, (compositorRoot.state == "application" ? 1.0 : 0.5))
+        color: Qt.rgba(0, 0, 0, windowsLayout.scale)
 
         Behavior on height {
             NumberAnimation {
