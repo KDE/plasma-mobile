@@ -30,6 +30,7 @@ class SettingsComponent : public QQuickItem
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
     Q_PROPERTY(QString module READ module WRITE setModule NOTIFY moduleChanged)
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString icon READ icon WRITE setIcon NOTIFY iconChanged)
 
 public:
     SettingsComponent(QQuickItem *parent = 0);
@@ -39,16 +40,19 @@ public:
 
     QString module() const;
     QString name() const;
+    QString icon() const;
 
 Q_SIGNALS:
     void descriptionChanged();
     void moduleChanged();
     void nameChanged();
+    void iconChanged();
 
 public Q_SLOTS:
     void setModule(const QString &module);
     void setDescription(const QString &description);
     void setName(const QString &name);
+    void setIcon(const QString &name);
 
     void loadModule(const QString &name);
 

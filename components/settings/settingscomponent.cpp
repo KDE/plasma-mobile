@@ -35,6 +35,7 @@ class SettingsComponentPrivate {
 
 public:
     QString module;
+    QString icon;
     SettingsModule *settingsModule;
     Plasma::Package package;
 };
@@ -108,6 +109,7 @@ void SettingsComponent::loadModule(const QString &name)
                 this, &SettingsComponent::descriptionChanged);
 
         d->settingsModule->setName(service->name());
+        d->icon = service->icon();
         d->settingsModule->setDescription(description);
         d->settingsModule->setModule(pluginName);
 
@@ -136,6 +138,20 @@ void SettingsComponent::setDescription(const QString &description)
         emit descriptionChanged();
     }
 }
+
+QString SettingsComponent::icon() const
+{
+    return d->icon;
+}
+
+void SettingsComponent::setIcon(const QString& name)
+{
+    if (name != d->icon) {
+        d->icon = name;
+        emit iconChanged();
+    }
+}
+
 
 QString SettingsComponent::module() const
 {
