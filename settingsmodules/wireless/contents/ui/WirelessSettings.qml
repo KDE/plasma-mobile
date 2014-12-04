@@ -42,8 +42,6 @@ import QtQuick.Controls 1.2
 StackView {
     id: stackView
     initialItem: mainView
-    width: 1080
-    height: 1815
 
     Component {
         id: mainView
