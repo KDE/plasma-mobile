@@ -33,6 +33,7 @@ Rectangle {
 
     onCurrentWindowChanged: {
         if (!currentWindow) {
+            compositorRoot.state = "homeScreen";
             return;
         }
         compositorRoot.state = "application";
@@ -132,8 +133,8 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        height: (!windowsLayer.switchMode) ? 0 : bottomBarHeight
-        color: Qt.rgba(0, 0, 0, 0.5)
+        height: compositorRoot.state == "homeScreen" ? 0 : bottomBarHeight
+        color: Qt.rgba(0, 0, 0, (compositorRoot.state == "application" ? 1.0 : 0.5))
 
         Behavior on height {
             NumberAnimation {
@@ -159,6 +160,26 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         compositorRoot.state = "homeScreen";
+                    }
+                }
+            }
+            PlasmaCore.IconItem {
+                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                width: units.iconSizes.smallMedium
+                height: width
+                source: "window-close"
+                enabled: compositorRoot.currentWindow
+                opacity: enabled ? 1 : 0.6
+
+                Layout.alignment: Qt.AlignHCenter
+                Layout.preferredWidth: units.iconSizes.medium
+                Layout.preferredHeight: units.iconSizes.medium
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        compositorRoot.state = "homeScreen";
+                        compositorRoot.currentWindow.close();
                     }
                 }
             }
