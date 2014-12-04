@@ -45,9 +45,9 @@ set (QT_MIN_VERSION "5.2.0")
 
 find_package(KF5 REQUIRED COMPONENTS
     WindowSystem Codecs Archive CoreAddons Solid
-    Config Auth JS Wallet DBusAddons Sonnet
-    I18n GuiAddons Service ConfigWidgets ItemViews Notifications IconThemes Completion JobWidgets TextWidgets
-    GlobalAccel XmlGui Crash Bookmarks )
+    Config Auth DBusAddons Sonnet
+    I18n Service Notifications IconThemes Completion
+    Bookmarks )
 
 find_package(KF5Plasma REQUIRED NO_MODULE)
 find_package(KF5PlasmaQuick REQUIRED NO_MODULE)
