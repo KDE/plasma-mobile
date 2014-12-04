@@ -29,6 +29,8 @@ PlasmaComponents.PageStack {
 
     property alias module: settingsComponent.module
 
+    signal moduleLoaded
+
     function pushModule(module) {
         switcherPackage.name = module
         var mainscript = switcherPackage.filePath("mainscript");
@@ -55,9 +57,10 @@ PlasmaComponents.PageStack {
                 switcherPackage.name = module
                 //print(" Loading package: " + switcherPackage.filePath("mainscript") + " " + module);
                 var mainscript = switcherPackage.filePath("mainscript");
-                //print("Loading mainscript: " + mainscript);
                 settingsLoader.source = switcherPackage.filePath("mainscript");
                 //moduleContainer.replace(switcherPackage.filePath("mainscript"));
+                print("Loaded mainscript: " + mainscript);
+                moduleLoaded();
             }
         }
     }
