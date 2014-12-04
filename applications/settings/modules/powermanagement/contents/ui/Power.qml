@@ -26,26 +26,10 @@ import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.active.settings 2.0 as ActiveSettings
 
 Item {
-    id: webModule
-    objectName: "webModule"
+    id: powermanagementModule
+    objectName: "powermanagementModule"
 
     width: 800; height: 500
-
-    Column {
-        id: titleCol
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        PlasmaExtras.Title {
-            text: settingsComponent.name
-            opacity: 1
-        }
-        PlasmaComponents.Label {
-            id: descriptionLabel
-            text: settingsComponent.description
-            opacity: .4
-        }
-    }
 
     ActiveSettings.ConfigGroup {
         id: screensaverConfig
@@ -114,15 +98,16 @@ Item {
     }
 
     Column {
-        anchors.centerIn: parent
-        spacing: theme.mSize(theme.defaultFont).height
+        id: mainItem
+        anchors.fill: parent
+        spacing: units.gridUnit / 2
 
         PlasmaExtras.Heading {
             text: i18n("Brightness")
-            level: 2
+            level: 3
         }
         Row {
-            spacing: theme.mSize(theme.defaultFont).width
+            spacing: units.gridUnit
             PlasmaComponents.Label {
                 width: screensaverEnabledSwitch.width
                 text: i18n("0%")
@@ -132,6 +117,7 @@ Item {
 
             PlasmaComponents.Slider {
                 id: brightnessSlider
+                width: mainItem.width * 0.6
                 onValueChanged: {
                     acBrightnessConfig.writeEntry("value", Math.round(value*100))
                     batteryBrightnessConfig.writeEntry("value", Math.round(value*100))
@@ -152,10 +138,10 @@ Item {
 
         PlasmaExtras.Heading {
             text: i18n("Lock screen and Sleep")
-            level: 2
+            level: 3
         }
         Row {
-            spacing: theme.mSize(theme.defaultFont).width
+            spacing: units.gridUnit
             PlasmaComponents.Switch {
                 id: screensaverEnabledSwitch
                 onCheckedChanged: screensaverConfig.writeEntry("Enabled", checked ? "true" : "false")
@@ -166,6 +152,7 @@ Item {
                 enabled: screensaverEnabledSwitch.checked
                 minimumValue: 1
                 maximumValue: 60
+                width: mainItem.width * 0.6
                 onValueChanged: {
                     if (screensaverEnabledSwitch.checked) {
                         screensaverConfig.writeEntry("Timeout", Math.round(value)*60)
@@ -182,10 +169,10 @@ Item {
 
         PlasmaExtras.Heading {
             text: i18n("Turn off the screen")
-            level: 2
+            level: 3
         }
         Row {
-            spacing: theme.mSize(theme.defaultFont).width
+            spacing: units.gridUnit
             PlasmaComponents.Switch {
                 id: dpmsSwitch
                 onCheckedChanged: {
@@ -204,6 +191,7 @@ Item {
             PlasmaComponents.Slider {
                 id: dpmsTimeSlider
                 enabled: dpmsSwitch.checked
+                width: mainItem.width * 0.6
                 minimumValue: 1
                 maximumValue: 60
                 onValueChanged: {
@@ -228,10 +216,10 @@ Item {
          * the sleep action is done by the lockscreen
         PlasmaExtras.Heading {
             text: i18n("Sleep")
-            level: 2
+            level: 3
         }
         Row {
-            spacing: theme.mSize(theme.defaultFont).width
+            spacing: units.gridUnit
             PlasmaComponents.Switch {
                 id: suspendSwitch
                 onCheckedChanged: {
