@@ -1,7 +1,9 @@
 # Install the packages, also make it known to the system
 
 #add_subdirectory(development)
-add_subdirectory(time)
+if (${KF5KDELibs4Support_FOUND})
+    add_subdirectory(time)
+endif()
 #add_subdirectory(locale)
 
 # Web
