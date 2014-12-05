@@ -269,7 +269,7 @@ Rectangle {
                 PropertyAnimation {
                     target: windowsLayerBackground
                     duration: units.longDuration
-                    easing: Easing.InOutQuad
+                    easing.type: Easing.InOutQuad
                     properties: "opacity"
                 }
             }
@@ -280,19 +280,19 @@ Rectangle {
                     PropertyAnimation {
                         target: windowsLayerBackground
                         duration: units.longDuration
-                        easing: Easing.InOutQuad
+                        easing.type: Easing.InOutQuad
                         properties: "opacity"
                     }
                     PropertyAnimation {
                         target: windowsLayout
                         duration: units.shortDuration
-                        easing: Easing.InOutQuad
+                        easing.type: Easing.InOutQuad
                         properties: "scale"
                     }
                     PropertyAnimation {
                         target: windowsLayer
                         duration: units.shortDuration
-                        easing: Easing.InOutQuad
+                        easing.type: Easing.InOutQuad
                         properties: "contentX"
                     }
                 }
