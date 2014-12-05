@@ -26,7 +26,8 @@ function surfaceMapped(surface) {
     var firstView = compositor.firstViewOf(surface);
     var isShellWindow =
         (typeof(firstView.role) != "undefined") ||
-        (surface.className == "plasmashell.desktop");
+        (surface.className == "plasmashell.desktop") ||
+        (surface.className == "maliit-server.desktop");
 
     // Print some information
     if (isShellWindow) {
@@ -53,7 +54,8 @@ function surfaceUnmapped(surface) {
     var firstView = compositor.firstViewOf(surface);
     var isShellWindow =
         (typeof(firstView.role) != "undefined") ||
-        (surface.className == "plasmashell.desktop");
+        (surface.className == "plasmashell.desktop") ||
+        (surface.className == "maliit-server.desktop");
 
     // Print some information
     if (typeof(firstView.role) == "undefined") {
@@ -159,7 +161,7 @@ function mapShellSurface(surface, child) {
 
         if (entry.surface === surface) {
             // Switch to layer and take focus
-            if (surface.className == "plasmashell.desktop") {
+            if (surface.className == "plasmashell.desktop" || surface.className == "maliit-server.desktop") {
                 compositorRoot.showPanel = true;
             } else {
                 compositorRoot.state = "homeScreen";
@@ -180,7 +182,7 @@ function mapShellSurface(surface, child) {
     // Create and setup window container
     // XXX: We only support desktop roles for now
     var window = component.createObject(compositorRoot, {"child": child});
-    window.parent = (surface.className == "plasmashell.desktop") ? compositorRoot.layers.panel : compositorRoot.layers.desktop;
+    window.parent = (surface.className == "plasmashell.desktop" || surface.className == "maliit-server.desktop") ? compositorRoot.layers.panel : compositorRoot.layers.desktop;
     window.child.parent = window;
     window.child.touchEventsEnabled = true;
     window.x = window.y = 0;
@@ -189,7 +191,7 @@ function mapShellSurface(surface, child) {
 
     // Switch to the desktop layer and take focus
     compositorRoot.showSplash = false;
-    if (surface.className == "plasmashell.desktop") {
+    if (surface.className == "plasmashell.desktop" || surface.className == "maliit-server.desktop") {
         compositorRoot.showPanel = true;
     } else {
         compositorRoot.state = "homeScreen";
@@ -212,7 +214,7 @@ function unmapApplicationSurface(surface) {
 
 function unmapShellSurface(surface) {
     // Hide panel layer if this is the sliding panel
-    if (surface.className == "plasmashell.desktop") {
+    if (surface.className == "plasmashell.desktop" || surface.className == "maliit-server.desktop") {
         compositorRoot.showPanel = false;
     }
 }
