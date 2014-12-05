@@ -33,11 +33,30 @@ Rectangle {
 
     color: theme.backgroundColor
 
+    property bool compactMode: width < units.gridUnit * 30
+    onCompactModeChanged: {
+        if (!compactMode) {
+            appBackground.x = 0;
+        }
+    }
+
     Image {
+        id: appBackground
         source: "image://appbackgrounds/standard"
         fillMode: Image.Tile
         asynchronous: true
-        anchors.fill: parent
+        anchors {
+            top: parent.top
+            bottom: toolBar.top
+        }
+        width: rootItem.compactMode ? rootItem.width * 2 : rootItem.width
+        Behavior on x {
+            enabled: rootItem.compactMode
+            PropertyAnimation {
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
 
         Item {
             id: settingsRoot
@@ -56,7 +75,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
-                width: parent.width/4
+                width: rootItem.compactMode ? rootItem.width : parent.width/4
 
                 Image {
                     source: "image://appbackgrounds/shadow-left"
@@ -114,11 +133,17 @@ Rectangle {
                         onClicked: {
                             listView.currentIndex = index
                             settingsItem.module = module
+                            if (rootItem.compactMode) {
+                                appBackground.x = - rootItem.width
+                            }
                         }
 
                         onPressAndHold: {
                             listView.currentIndex = index
                             settingsItem.module = module
+                            if (rootItem.compactMode) {
+                                appBackground.x = - rootItem.width
+                            }
                         }
                     }
                 }
@@ -186,6 +211,11 @@ Rectangle {
                     left: modulesList.right
                     right: parent.right
                 }
+                onModuleChanged: {
+                    if (rootItem.compactMode) {
+                        appBackground.x = - rootItem.width
+                    }
+                }
             }
         }
 
@@ -193,6 +223,25 @@ Rectangle {
             print("ActiveSettings Completed.");
             if (typeof(startModule) != "undefined") {
                 settingsItem.module = startModule;
+            }
+        }
+    }
+    PlasmaComponents.ToolBar {
+        id: toolBar
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        visible: rootItem.compactMode
+        enabled: appBackground.x < 0
+        tools: Row {
+            PlasmaComponents.ToolButton {
+                iconSource: "go-previous"
+                onClicked: {
+                    appBackground.x = 0;
+                    listView.currentIndex = -1
+                }
             }
         }
     }
