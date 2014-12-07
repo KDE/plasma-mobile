@@ -66,7 +66,7 @@ ConfigGroup::ConfigGroup(QQuickItem *parent)
 ConfigGroup::~ConfigGroup()
 {
     if (d->syncTimer->isActive()) {
-        //qDebug() << "SYNC......";
+        qDebug() << "SYNC......";
         d->syncTimer->stop();
         d->configGroup->sync();
     }
@@ -105,6 +105,7 @@ void ConfigGroup::setGroup(const QString& groupname)
         return;
     }
     d->group = groupname;
+    qDebug() << "Set group name: " << groupname;
     readConfigFile();
     emit groupChanged();
     emit keyListChanged();
@@ -144,11 +145,13 @@ bool ConfigGroup::readConfigFile()
         return true;
     } else {
         if (d->file.isEmpty()) {
-            qWarning() << "Could not find KConfig Parent: specify a file or parent to another ConfigGroup";
+            //qWarning() << "Could not find KConfig Parent: specify a file or parent to another ConfigGroup";
             return false;
         }
         d->config = KSharedConfig::openConfig(d->file);
         d->configGroup = new KConfigGroup(d->config, d->group);
+        qDebug() << "Opened config" << d->configGroup->entryMap();
+
         return true;
     }
 }
@@ -172,19 +175,20 @@ QVariant ConfigGroup::readEntry(const QString& key)
         return QVariant();
     }
     const QVariant value = d->configGroup->readEntry(key, QVariant(""));
-    //qDebug() << " reading setting: " << key << value;
+    qDebug() << " reading setting: " << key << value;
     return value;
 }
 
 void ConfigGroup::deleteEntry(const QString& key)
 {
     d->configGroup->deleteEntry(key);
+    d->syncTimer->start();
 }
 
 void ConfigGroup::sync()
 {
     if (d->configGroup) {
-        //qDebug() << "synching config...";
+        qDebug() << "synching config...";
         d->configGroup->sync();
     }
 }
