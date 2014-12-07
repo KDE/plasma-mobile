@@ -54,6 +54,8 @@ View::View(const QString &module, const QString &package, QWindow *parent)
     } else {
         m_package.setPath("org.kde.active.settings");
     }
+    setIcon(QIcon::fromTheme(m_package.metadata().icon()));
+    setTitle(m_package.metadata().name());
 
     if (!module.isEmpty()) {
         rootContext()->setContextProperty("startModule", module);
