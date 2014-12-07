@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 
     KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-active-settings");
 
-    const QString themeName = cg.readEntry("name", "air-mobile");
+    const QString themeName = cg.readEntry("name", "default");
     ui = cg.readEntry("package", ui);
 
     Plasma::Theme theme;
