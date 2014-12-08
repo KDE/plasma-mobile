@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011,2012 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2011-2014 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -30,15 +30,18 @@ Rectangle {
 
     width: 800
     height: 600
-
     color: theme.backgroundColor
+    state: "navigation"
 
+    property bool loading: false
     property bool compactMode: width < units.gridUnit * 30
+
     onCompactModeChanged: {
         if (!compactMode) {
             appBackground.x = 0;
         }
     }
+
 
     Image {
         id: appBackground
@@ -75,7 +78,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
-                width: rootItem.compactMode ? rootItem.width : parent.width/4
+                width: rootItem.compactMode ? rootItem.width : Math.min(units.gridUnit * 15, parent.width/3)
 
                 Image {
                     source: "image://appbackgrounds/shadow-left"
@@ -88,101 +91,8 @@ Rectangle {
                     }
                 }
 
-                Component {
-                    id: settingsModuleDelegate
-                    PlasmaComponents.ListItem {
-                        id: delegateItem
-                        height: 64
-                        width: parent ? parent.width : 100
-                        anchors.margins: 20
-                        enabled: true
-                        checked: listView.currentIndex == index
-
-                        PlasmaCore.IconItem {
-                            id: iconItem
-                            width: 48
-                            height: 32
-                            source: iconName
-
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.rightMargin: 8
-                        }
-
-                        PlasmaExtras.Heading {
-                            id: textItem
-                            text: name
-                            level: 4
-                            elide: Text.ElideRight
-                            anchors.bottom: parent.verticalCenter
-                            anchors.left: iconItem.right
-                            anchors.right: parent.right
-                        }
-
-                        PlasmaComponents.Label {
-                            id: descriptionItem
-                            text: description
-                            font.pointSize: theme.defaultFont.pointSize -1
-                            opacity: 0.6
-                            elide: Text.ElideRight
-                            anchors.top: parent.verticalCenter
-                            anchors.left: iconItem.right
-                            anchors.right: parent.right
-                        }
-
-                        onClicked: {
-                            listView.currentIndex = index
-                            settingsItem.module = module
-                            if (rootItem.compactMode) {
-                                appBackground.x = - rootItem.width
-                            }
-                        }
-
-                        onPressAndHold: {
-                            listView.currentIndex = index
-                            settingsItem.module = module
-                            if (rootItem.compactMode) {
-                                appBackground.x = - rootItem.width
-                            }
-                        }
-                    }
-                }
-
-                ActiveSettings.SettingsModulesModel {
-                    id: settingsModulesModel
-                    onSettingsModulesChanged: {
-                        // when the modules are loaded, we need to ensure that
-                        // the list has the correct item loaded
-                        var module;
-                        if (settingsItem.module) {
-                            module = settingsItem.module
-                        } else if (typeof(startModule) != "undefined") {
-                            module = startModule
-                        }
-
-                        if (module) {
-                            var index = 0;
-                            var numModules = settingsModules.length
-                            var i = 0
-                            while (i < numModules) {
-                                if (settingsModules[i].module == module) {
-                                    listView.currentIndex = i;
-                                    break
-                                }
-                                ++i
-                            }
-                        }
-                    }
-                }
-
-                ListView {
-                    id: listView
-                    currentIndex: -1
+                ModulesList {
                     anchors.fill: parent
-                    clip: true
-                    interactive: false
-                    model: settingsModulesModel.settingsModules
-                    delegate: settingsModuleDelegate
                 }
             }
 
@@ -201,9 +111,9 @@ Rectangle {
                 }
             }
 
-            ActiveSettings.SettingsItem {
+            ModuleItem {
                 id: settingsItem
-                initialPage: initial_page
+
                 anchors {
                     margins: 20
                     top: parent.top
