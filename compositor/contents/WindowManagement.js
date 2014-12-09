@@ -125,6 +125,10 @@ function mapApplicationSurface(surface) {
     // likely have just one output
     var child = compositor.viewForOutput(surface, _greenisland_output);
 
+    child.resizeSurfaceToItem = true;
+    child.width = compositorRoot.layers.windows.width;
+    child.height = compositorRoot.layers.windows.height;
+
     // Create and setup window container
     var window = component.createObject(compositorRoot.layers.windows, {"child": child});
     compositorRoot.layers.windows.addWindow(window);

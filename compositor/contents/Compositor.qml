@@ -80,8 +80,11 @@ Rectangle {
 
     Rectangle {
         id: windowsLayerBackground
-        anchors.fill: parent
-        anchors.topMargin: topBarHeight
+        anchors {
+            fill: parent
+            topMargin: topBarHeight
+            bottomMargin: bottomBarHeight
+        }
         color: Qt.rgba(0, 0, 0, 0.9)
 
         Flickable {
@@ -134,7 +137,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: compositorRoot.state == "homeScreen" ? 0 : bottomBarHeight
-        color: Qt.rgba(0, 0, 0, windowsLayout.scale)
+        color: Qt.rgba(0, 0, 0, 0.9 + 0.1*windowsLayout.scale)
 
         Behavior on height {
             NumberAnimation {
