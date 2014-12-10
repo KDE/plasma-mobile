@@ -170,7 +170,9 @@ function mapShellSurface(surface, child) {
             } else {
                 compositorRoot.state = "homeScreen";
             }
-            if (surface.className != "maliit-server.desktop") {
+            if (surface.className == "maliit-server.desktop") {
+                compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height - 500;
+            } else {
                 entry.window.child.takeFocus();
             }
 
@@ -224,6 +226,9 @@ function unmapApplicationSurface(surface) {
 }
 
 function unmapShellSurface(surface) {
+    if (surface.className == "maliit-server.desktop") {
+        compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height;
+    }
     // Hide panel layer if this is the sliding panel
     if (surface.className == "plasmashell.desktop" || surface.className == "maliit-server.desktop") {
         compositorRoot.showPanel = false;
