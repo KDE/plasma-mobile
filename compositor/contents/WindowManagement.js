@@ -170,7 +170,9 @@ function mapShellSurface(surface, child) {
             } else {
                 compositorRoot.state = "homeScreen";
             }
-            entry.window.child.takeFocus();
+            if (surface.className != "maliit-server.desktop") {
+                entry.window.child.takeFocus();
+            }
 
             return;
         }
@@ -200,7 +202,9 @@ function mapShellSurface(surface, child) {
     } else {
         compositorRoot.state = "homeScreen";
     }
-    window.child.takeFocus();
+    if (surface.className != "maliit-server.desktop") {
+        window.child.takeFocus();
+    }
 
     // Add surface to the model
     surfaceModel.append({"surface": surface, "window": window});
