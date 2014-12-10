@@ -194,6 +194,9 @@ function mapShellSurface(surface, child) {
     window.x = window.y = 0;
     window.width = surface.size.width;
     window.height = surface.size.height;
+    if (surface.className == "maliit-server.desktop") {
+        window.y = compositorRoot.layers.panel.height - window.height;
+    }
 
     // Switch to the desktop layer and take focus
     compositorRoot.showSplash = false;

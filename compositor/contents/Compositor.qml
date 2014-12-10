@@ -23,6 +23,7 @@ import QtQml.Models 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import "WindowManagement.js" as WindowManagement
 
+
 Rectangle {
     property alias showSplash: splash.visible
     property bool showPanel: true
@@ -127,12 +128,12 @@ Rectangle {
         id: panelLayer
         anchors.fill: parent
         visible: showPanel
-        z: 3
+        z: 4
     }
 
     Rectangle {
         id: bottomBar
-        z: 4
+        z: 3
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
