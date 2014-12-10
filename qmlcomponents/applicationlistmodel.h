@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QAbstractListModel>
 #include <QList>
+#include <QTimer>
 
 class QString;
 
@@ -66,6 +67,9 @@ Q_SIGNALS:
 private:
     QList<ApplicationData> m_applicationList;
     void loadApplications();
+    void dirChanged(const QString &file);
+    QTimer m_reloadTimer;
+    void timeout();
 };
 
 #endif // APPLICATIONLISTMODEL_H

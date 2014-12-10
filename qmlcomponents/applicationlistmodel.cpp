@@ -24,8 +24,10 @@
 #include <QByteArray>
 #include <QModelIndex>
 #include <QProcess>
+#include <QStandardPaths>
 
 // KDE
+#include <KDirWatch>
 #include <KPluginInfo>
 #include <KRun>
 #include <KService>
@@ -37,6 +39,17 @@
 ApplicationListModel::ApplicationListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+    auto appdirs = QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation);
+    qDebug() << "Appdirs: " << appdirs;
+
+    Q_FOREACH (auto dir, appdirs) {
+        KDirWatch::self()->addDir(dir, KDirWatch::WatchFiles);
+    }
+    connect(&m_reloadTimer, &QTimer::timeout, this, &ApplicationListModel::timeout);
+    connect(KDirWatch::self(), &KDirWatch::created, this, &ApplicationListModel::dirChanged);
+    connect(KDirWatch::self(), &KDirWatch::deleted, this, &ApplicationListModel::dirChanged);
+    m_reloadTimer.setSingleShot(true);
+    m_reloadTimer.setInterval(15000); // we need to wait until ksycoca has run :/
     loadApplications();
 }
 
@@ -55,6 +68,32 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
     return roleNames;
 }
 
+void ApplicationListModel::timeout()
+{
+    qDebug() << "timeout; ";
+    loadApplications();
+}
+
+void ApplicationListModel::dirChanged(const QString& file)
+{
+    auto appdirs = QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation);
+
+    Q_FOREACH (auto dir, appdirs) {
+        qDebug() << "file dir; " << file << dir << file.startsWith(dir);
+        if (file.startsWith(dir)) {
+            qDebug() << "yay; " << file;
+            m_reloadTimer.start();
+        }
+    }
+
+
+    qDebug() << QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation) << file << (QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation).contains(file));
+    if (QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation).contains(file)) {
+        qDebug() << "Changed; " << file;
+    }
+    m_reloadTimer.start();
+}
+
 
 void ApplicationListModel::loadApplications()
 {
@@ -64,6 +103,11 @@ void ApplicationListModel::loadApplications()
     if (!group || !group->isValid()) return;
     KServiceGroup::List subGroupList = group->entries(true);
 
+    QStringList blacklist;
+    blacklist << QStringLiteral("org.kde.klipper");
+    blacklist << QStringLiteral("knetattach");
+
+    m_applicationList.clear();
     // Iterate over all entries in the group
     for(KServiceGroup::List::ConstIterator it = subGroupList.begin();it != subGroupList.end(); it++) {
         KSycocaEntry::Ptr groupEntry = (*it);
@@ -80,6 +124,16 @@ void ApplicationListModel::loadApplications()
                     if (entry->isType(KST_KService)) {
                         KService::Ptr service(static_cast<KService* >(entry.data()));
                         if (service->isApplication()) {
+                            bool skip = false;
+                            Q_FOREACH (auto ble, blacklist) {
+                                if (service->storageId().contains(ble)) {
+                                    skip = true;
+                                }
+                            }
+                            if (skip) {
+                                continue;
+                            }
+
                             KPluginInfo plugin(service);
                             data.name = plugin.name();
                             data.icon = plugin.icon();
