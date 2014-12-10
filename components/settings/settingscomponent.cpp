@@ -109,7 +109,7 @@ void SettingsComponent::loadModule(const QString &name)
                 this, &SettingsComponent::descriptionChanged);
 
         d->settingsModule->setName(service->name());
-        d->icon = service->icon();
+        setIcon(service->icon());
         d->settingsModule->setDescription(description);
         d->settingsModule->setModule(pluginName);
 

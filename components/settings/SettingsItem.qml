@@ -28,6 +28,7 @@ PlasmaComponents.PageStack {
     objectName: "moduleContainer"
 
     property alias module: settingsComponent.module
+    property alias icon: settingsComponent.icon
 
     signal moduleLoaded
 
