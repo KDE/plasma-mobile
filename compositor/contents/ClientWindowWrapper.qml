@@ -56,7 +56,8 @@ WindowWrapper {
             active = true;
         }
         onClicked: {
-            compositorRoot.currentWindow = window
+            compositorRoot.currentWindow = window;
+            window.child.takeFocus();
         }
         onReleased: {
             active = false;

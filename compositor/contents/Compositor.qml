@@ -31,6 +31,7 @@ Rectangle {
     readonly property real topBarHeight: units.iconSizes.small
     readonly property real bottomBarHeight: units.iconSizes.medium
     property var currentWindow: null
+    property var shellWindow: null;
 
     onCurrentWindowChanged: {
         if (!currentWindow) {
@@ -136,6 +137,15 @@ Rectangle {
         id: keyboardLayer
         anchors.fill: parent
         z: 5
+        onVisibleChanged: {
+            if (!visible) {
+                compositorRoot.shellWindow.child.takeFocus();
+            }
+
+            if (compositorRoot.currentWindow) {
+                compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height - (visible ? 500 : 0);
+            }
+        }
     }
 
     Rectangle {
@@ -213,6 +223,8 @@ Rectangle {
         }
         onPositionChanged: {
             compositorRoot.state = "switcher";
+            compositorRoot.showKeyboard = false;
+
             var newScale = (1-Math.abs(mouse.y)/(compositorRoot.height/2))
             if (newScale > 0.3) {
                 windowsLayout.scale = newScale

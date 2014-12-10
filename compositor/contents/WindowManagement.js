@@ -214,6 +214,7 @@ function mapShellSurface(surface, child) {
         compositorRoot.showPanel = true;
     } else {
         compositorRoot.state = "homeScreen";
+        compositorRoot.shellWindow = window;
     }
     if (surface.className != "maliit-server.desktop") {
         window.child.takeFocus();
@@ -289,7 +290,7 @@ function unmapShellSurface(surface) {
     }
 }
 
-function unmapShellSurface(surface) {
+function unmapKeyboardSurface(surface) {
     if (compositorRoot.currentWindow) {
         compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height;
     }
