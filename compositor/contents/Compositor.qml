@@ -23,10 +23,10 @@ import QtQml.Models 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import "WindowManagement.js" as WindowManagement
 
-
 Rectangle {
     property alias showSplash: splash.visible
     property bool showPanel: true
+    property alias showKeyboard: keyboardLayer.visible
     readonly property alias layers: layers
     readonly property real topBarHeight: units.iconSizes.small
     readonly property real bottomBarHeight: units.iconSizes.medium
@@ -69,6 +69,7 @@ Rectangle {
         readonly property alias desktop: desktopLayer
         readonly property alias windows: windowsLayer
         readonly property alias panel: panelLayer
+        readonly property alias keyboard: keyboardLayer
 
         id: layers
     }
@@ -128,12 +129,18 @@ Rectangle {
         id: panelLayer
         anchors.fill: parent
         visible: showPanel
-        z: 4
+        z: 3
+    }
+
+    Item {
+        id: keyboardLayer
+        anchors.fill: parent
+        z: 5
     }
 
     Rectangle {
         id: bottomBar
-        z: 3
+        z: 4
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom

@@ -26,11 +26,15 @@ function surfaceMapped(surface) {
     var firstView = compositor.firstViewOf(surface);
     var isShellWindow =
         (typeof(firstView.role) != "undefined") ||
-        (surface.className == "plasmashell.desktop") ||
-        (surface.className == "maliit-server.desktop");
+        (surface.className == "plasmashell.desktop");
 
     // Print some information
-    if (isShellWindow) {
+    if (surface.className == "maliit-server.desktop") {
+        console.debug("Keyboard surface", surface, "mapped");
+        console.debug("\tappId:", surface.className);
+        console.debug("\ttitle:", surface.title);
+        console.debug("\tsize:", surface.size.width + "x" + surface.size.height);
+    } else if (isShellWindow) {
         console.debug("Shell surface", surface, "mapped");
         console.debug("\trole:", firstView.role);
         console.debug("\tsize:", surface.size.width + "x" + surface.size.height);
@@ -41,9 +45,11 @@ function surfaceMapped(surface) {
         console.debug("\tsize:", surface.size.width + "x" + surface.size.height);
     }
 
+    if (surface.className == "maliit-server.desktop") {
+        mapKeyboardSurface(surface);
     // Call a specialized method to deal with application or
     // shell windows
-    if (isShellWindow)
+    } else if (isShellWindow)
         mapShellSurface(surface, firstView);
     else
         mapApplicationSurface(surface);
@@ -54,8 +60,7 @@ function surfaceUnmapped(surface) {
     var firstView = compositor.firstViewOf(surface);
     var isShellWindow =
         (typeof(firstView.role) != "undefined") ||
-        (surface.className == "plasmashell.desktop") ||
-        (surface.className == "maliit-server.desktop");
+        (surface.className == "plasmashell.desktop");
 
     // Print some information
     if (typeof(firstView.role) == "undefined") {
@@ -68,9 +73,12 @@ function surfaceUnmapped(surface) {
         console.debug("\ttitle:", surface.title);
     }
 
+    //Is it maliit?
+    if (surface.className == "maliit-server.desktop") {
+        unmapKeyboardSurface(surface);
     // Call a specialized method to deal with application or
     // shell windows
-    if (isShellWindow)
+    } else if (isShellWindow)
         unmapShellSurface(surface);
     else
         unmapApplicationSurface(surface);
@@ -215,6 +223,52 @@ function mapShellSurface(surface, child) {
     surfaceModel.append({"surface": surface, "window": window});
 }
 
+function mapKeyboardSurface(surface) {
+    // Just exit if we already created a window representation
+    var i;
+    for (i = 0; i < surfaceModel.count; i++) {
+        var entry = surfaceModel.get(i);
+
+        if (entry.surface === surface) {
+            if (compositorRoot.currentWindow) {
+                compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height - 500;
+            }
+            compositorRoot.showKeyboard = true;
+
+            return;
+        }
+    }
+
+    // Create surface item
+    var component = Qt.createComponent("ShellWindowWrapper.qml");
+    if (component.status !== Component.Ready) {
+        console.error(component.errorString());
+        return;
+    }
+
+    // Request a view for this output although with phones will
+    // likely have just one output
+    var child = compositor.viewForOutput(surface, _greenisland_output);
+
+    // Create and setup window container
+    var window = component.createObject(compositorRoot.layers.keyboard, {"child": child});
+    window.parent = compositorRoot.layers.keyboard;
+    window.child.parent = window;
+    window.child.touchEventsEnabled = true;
+    window.width = surface.size.width;
+    window.height = surface.size.height;
+    window.y = compositorRoot.layers.keyboard.height - window.height;
+
+    if (compositorRoot.currentWindow) {
+        compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height - 500;
+    }
+
+    // Add surface to the model
+    surfaceModel.append({"surface": surface, "window": window});
+    compositorRoot.showKeyboard = true;
+}
+
+
 /*
  * Unmap surfaces
  */
@@ -233,4 +287,12 @@ function unmapShellSurface(surface) {
     if (surface.className == "plasmashell.desktop" || surface.className == "maliit-server.desktop") {
         compositorRoot.showPanel = false;
     }
+}
+
+function unmapShellSurface(surface) {
+    if (compositorRoot.currentWindow) {
+        compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height;
+    }
+
+    compositorRoot.showKeyboard = false;
 }
