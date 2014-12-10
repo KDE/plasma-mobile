@@ -19,22 +19,31 @@
  ***************************************************************************/
 
 import QtQuick 2.2
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
+
 import org.kde.active.settings 2.0 as ActiveSettings
 
 Rectangle {
     id: rootItem
 
-    width: 800
+    width: 400
     height: 600
     color: theme.backgroundColor
-    state: "navigation"
 
     property bool loading: false
     property bool compactMode: width < units.gridUnit * 30
+
+    property string currentModule: ""
+
+    onCurrentModuleChanged: {
+        if (rootItem.compactMode) {
+            appBackground.x = - rootItem.width
+        }
+    }
 
     onCompactModeChanged: {
         if (!compactMode) {
@@ -56,7 +65,7 @@ Rectangle {
         Behavior on x {
             enabled: rootItem.compactMode
             PropertyAnimation {
-                duration: units.longDuration
+                duration: units.shortDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -67,7 +76,88 @@ Rectangle {
             state: "expanded"
             anchors.fill: parent
 
+            property bool loading: false
+
             signal loadPlugin(string module);
+
+            AppHeader {
+                id: header
+                anchors {
+                    margins: units.gridUnit
+                    bottomMargin: 0
+                    top: parent.top
+                    left: modulesList.right
+                    right: settingsItem.right
+                }
+            }
+
+            Item {
+                id: navheader
+                visible: compactMode
+
+//                 Rectangle {
+//                     color: "orange";
+//                     opacity: 0.3
+//                     height: 60;
+//                     anchors { left: parent.left; right: parent.right }
+//                 }
+
+
+                height: childrenRect.height
+                anchors {
+                    margins: units.gridUnit
+                    bottomMargin: 0
+                    top: parent.top
+                    left: parent.left
+                    right: modulesList.right
+                }
+                PlasmaCore.IconItem {
+                    id: topIcon
+                    width: units.gridUnit * 2
+                    height: width
+                    opacity: loadingIndicator.running ? 0 : 1.0
+                    Behavior on opacity { NumberAnimation { duration: units.shortDuration } }
+                    source: "preferences-desktop"
+                    anchors {
+                        verticalCenter: title.verticalCenter
+                        right: parent.right
+                        margins: units.gridUnit
+                        rightMargin: 0
+                    }
+                }
+
+                PlasmaComponents.BusyIndicator {
+                    id: loadingIndicator
+                    anchors.fill: topIcon
+                    opacity: running ? 1.0 : 0
+                    Behavior on opacity { NumberAnimation { duration: units.shortDuration } }
+                    running: settingsRoot.loading
+                }
+
+                PlasmaExtras.Title {
+                    id: title
+                    anchors {
+                        left: parent.left
+                        right: topIcon.left
+                    }
+                    elide: Text.ElideRight
+                    text: i18n("Settings")
+                }
+
+                PlasmaCore.SvgItem {
+                    svg: PlasmaCore.Svg {imagePath: "widgets/line"}
+                    elementId: "horizontal-line"
+                    height: naturalSize.height
+                    anchors {
+                        top: title.bottom
+                        topMargin: units.gridUnit / 2
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: -units.gridUnit
+                        rightMargin: -units.gridUnit
+                    }
+                }
+            }
 
             Image {
                 id: modulesList
@@ -75,7 +165,9 @@ Rectangle {
                 fillMode: Image.Tile
                 z: 800
 
-                anchors.top: parent.top
+                property alias currentIndex: mlist.currentIndex
+
+                anchors.top: compactMode ? navheader.bottom : parent.top
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 width: rootItem.compactMode ? rootItem.width : Math.min(units.gridUnit * 15, parent.width/3)
@@ -92,6 +184,7 @@ Rectangle {
                 }
 
                 ModulesList {
+                    id: mlist
                     anchors.fill: parent
                 }
             }
@@ -116,16 +209,17 @@ Rectangle {
 
                 anchors {
                     margins: 20
-                    top: parent.top
+                    top: header.bottom
                     bottom: parent.bottom
                     left: modulesList.right
                     right: parent.right
                 }
-                onModuleChanged: {
-                    if (rootItem.compactMode) {
-                        appBackground.x = - rootItem.width
-                    }
-                }
+//                 onModuleChanged: {
+//                     print("settingsItem onModuleChanged:" + module);
+//                     if (rootItem.compactMode) {
+//                         appBackground.x = - rootItem.width
+//                     }
+//                 }
             }
         }
 
@@ -142,17 +236,42 @@ Rectangle {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
+            bottomMargin: units.gridUnit * 3 // FIXME: hack, remove when the app size is correct
         }
         visible: rootItem.compactMode
+        opacity: enabled ? 1 : 0
+        Behavior on opacity { NumberAnimation {} }
         enabled: appBackground.x < 0
         tools: Row {
             PlasmaComponents.ToolButton {
                 iconSource: "go-previous"
                 onClicked: {
                     appBackground.x = 0;
-                    listView.currentIndex = -1
+                    //modulesList.currentIndex = -1
+                    rootItem.currentModule = "";
+                    //rootItem.state = "navigation";
                 }
             }
         }
     }
+
+    onStateChanged: {
+        print("state: " + state);
+    }
+
+    states: [
+        State {
+            name: "navigation"
+            when: (compactMode && appBackground.x == 0) || (rootItem.currentModule == "")
+            PropertyChanges { target: rootItem; currentModule: "" }
+//             PropertyChanges { target: moduleItem; opacity: 0.0 }
+        },
+        State {
+            name: "module"
+            when: (compactMode && appBackground.x != 0) || (rootItem.currentModule != "")
+//             PropertyChanges { target: modulesList; opacity: 0.0}
+//             PropertyChanges { target: moduleItem; opacity: 1.0 }
+        }
+    ]
+
 }

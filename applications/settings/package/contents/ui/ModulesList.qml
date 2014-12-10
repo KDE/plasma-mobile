@@ -28,6 +28,8 @@ import org.kde.active.settings 2.0 as ActiveSettings
 Item {
     id: settingsRoot
 
+    property alias currentIndex: listView.currentIndex
+
     Component {
         id: settingsModuleDelegate
         PlasmaComponents.ListItem {
@@ -72,19 +74,24 @@ Item {
             }
 
             onClicked: {
+                print("Clicked index: " + index + " current: " + listView.currentIndex + " " + module + " curr: " + rootItem.currentModule);
                 loading = true;
-                listView.currentIndex = index
+                rootItem.currentModule = module;
+                /*
+                listView.currentIndex = index;
                 if (settingsItem.module == module) {
                     settingsRoot.state = "module"
                 } else {
+                    settingsItem.module = ""
                     settingsItem.module = module
                 }
+                */
             }
 
-            onPressAndHold: {
-                listView.currentIndex = index
-                settingsItem.module = module
-            }
+//             onPressAndHold: {
+//                 listView.currentIndex = index
+//                 settingsItem.module = module
+//             }
         }
     }
 
@@ -94,6 +101,7 @@ Item {
             // when the modules are loaded, we need to ensure that
             // the list has the correct item loaded
             if (startModule == "" && settingsItem.module == "") {
+                print("resetting index. doei")
                 listView.currentIndex = -1;
                 return;
             }
@@ -121,7 +129,7 @@ Item {
 
     ListView {
         id: listView
-        //currentIndex: -1
+        currentIndex: -1
         anchors.fill: parent
         //clip: true
         interactive: contentHeight > height
@@ -129,13 +137,13 @@ Item {
         model: settingsModulesModel.settingsModules
         delegate: settingsModuleDelegate
 
-        Connections {
-            target: settingsRoot
-            onStateChanged: {
-                if (settingsRoot.state == "navigation") {
-                    listView.currentIndex = -1;
-                }
-            }
-        }
+//         Connections {
+//             target: settingsRoot
+//             onStateChanged: {
+//                 if (settingsRoot.state == "navigation") {
+//                     listView.currentIndex = -1;
+//                 }
+//             }
+//         }
     }
 }

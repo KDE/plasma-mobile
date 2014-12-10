@@ -30,15 +30,16 @@ ActiveSettings.SettingsComponent {
 
     signal moduleLoaded
 
-    function pushModule(module) {
-        switcherPackage.name = module
-        var mainscript = switcherPackage.filePath("mainscript");
-        //print("Loading mainscript: " + mainscript);
-        settingsLoader.source = mainscript;
-        //moduleContainer.push(settingsLoader);
-        moduleContainer.module = module
-    }
-
+//     function pushModule(module) {
+//         return;
+//         switcherPackage.name = module
+//         var mainscript = switcherPackage.filePath("mainscript");
+//         //print("Loading mainscript: " + mainscript);
+//         settingsLoader.source = mainscript;
+//         //moduleContainer.push(settingsLoader);
+//         moduleContainer.module = module
+//     }
+//
     Loader {
         id: settingsLoader
         anchors.fill: parent
@@ -49,9 +50,27 @@ ActiveSettings.SettingsComponent {
         id: switcherPackage
     }
 
+    Connections {
+        target: rootItem
+        onCurrentModuleChanged: {
+            print("reacting to onCurrentModuleChanged " + rootItem.currentModule);
+            module = rootItem.currentModule;
+            if (module != "") {
+                switcherPackage.name = module
+                var mainscript = switcherPackage.filePath("mainscript");
+                print("Loading ... " + mainscript);
+                settingsLoader.source = mainscript;
+
+                moduleLoaded();
+            }
+        }
+    }
+
+    /*
     onModuleChanged: {
         if (module == "") {
-            moduleContainer.pop();
+            //moduleContainer.pop();
+            print("empty module");
         } else if (switcherPackage.name != module) {
             switcherPackage.name = module
             var mainscript = switcherPackage.filePath("mainscript");
@@ -62,5 +81,5 @@ ActiveSettings.SettingsComponent {
             moduleLoaded();
         }
     }
-
+    */
 }
