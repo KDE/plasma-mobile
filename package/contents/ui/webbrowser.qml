@@ -38,6 +38,8 @@ Item {
 
     property Item currentWebView: webEngineView
 
+    //property debug
+
 
     function load(url) {
         print("Loading url: " + url);
@@ -59,6 +61,32 @@ Item {
         }
     }
 
+    Item {
+        id: progressItem
+
+        height: units.gridUnit / 2
+        anchors {
+            top: webEngineView.top
+            left: webEngineView.left
+            right: webEngineView.right
+        }
+
+        //opacity: currentWebView.loading ? 1.0 : 0
+        Behavior on opacity { NumberAnimation { duration: units.shortDuration; easing.type: Easing.InOutQuad; } }
+
+        Rectangle {
+            color: theme.highlightColor
+
+            width: Math.round((currentWebView.loadProgress / 100) * parent.width)
+            anchors {
+                top: parent.top
+                left: parent.left
+                bottom: parent.bottom
+            }
+        }
+
+    }
+
     WebEngineView {
         id: webEngineView
 
@@ -66,6 +94,8 @@ Item {
 
 //         url: "http://lwn.net"
         url: "http://localhost"
+        property string errorCode: ""
+        property string errorString: ""
 
 
         anchors {
@@ -76,21 +106,50 @@ Item {
             bottom: parent.bottom
         }
 
-//         anchors.fill: parent
+        onLoadingChanged: { // Doesn't work!?!
+            print("Loading: " + loading);
+            print("    url: " + loadRequest.url)
+
+
+            /* Handle
+             *  - WebEngineView::LoadStartedStatus,
+             *  - WebEngineView::LoadStoppedStatus,
+             *  - WebEngineView::LoadSucceededStatus and
+             *  - WebEngineView::LoadFailedStatus
+             */
+            var ec = "";
+            var es = "";
+            if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
+
+            }
+            if (loadRequest.status == WebEngineView.LoadFailedStatus) {
+                print("Load failed: " + loadRequest.errorCode);
+                ec = loadRequest.errorCode;
+                es = loadRequest.errorString;
+            }
+            errorCode = ec;
+            errorString = es;
+        }
+
+        //onLoadProgressChanged: print("Progress: " + loadProgress);
+
+        /*
         onLinkHovered: {
             if (hoveredUrl != "") {
-                print("Hovered over: " + hoveredUrl);
-                errorHandler.errorCode = "999";
+                print("Hovered over: " + hoveredUrl + " " + (typeof(hoveredTitle) != "undefined" ? hoveredTitle : "(no title)"));
+                //errorHandler.errorCode = "999";
             } else {
-                errorHandler.errorCode = "";
+                //errorHandler.errorCode = "";
             }
         }
+        */
     }
 
     ErrorHandler {
         id: errorHandler
 
-        //errorCode: "999"
+        errorCode: currentWebView.errorCode
+        errorString: currentWebView.errorString
 
         //width: Math.min(webBrowser.width, units.gridUnit * 40)
         //height: Math.min(webBrowser.height, units.gridUnit * 6)

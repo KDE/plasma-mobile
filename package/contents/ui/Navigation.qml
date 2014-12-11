@@ -48,6 +48,8 @@ Item {
     RowLayout {
         id: layout
         anchors.fill: parent
+        visible: navigationShown
+
         spacing: units.smallSpacing / 2
 
         PlasmaComponents.ToolButton {
@@ -56,44 +58,50 @@ Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
+            visible: currentWebView.canGoBack
             iconSource: "go-previous"
         }
+
         PlasmaComponents.ToolButton {
             id: forwardButton
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
+            visible: currentWebView.canGoForward
             iconSource: "go-next"
         }
+
         PlasmaComponents.ToolButton {
             id: reloadButton
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
-            iconSource: "view-refresh"
+            iconSource: currentWebView.loading ? "process-stop" : "view-refresh"
         }
 
         PlasmaComponents.TextField {
-//             color: 'plum'
+            id: urlInput
+
             Layout.fillWidth: true
-//             Layout.minimumWidth: 100
-//             Layout.preferredWidth: 200
-            //Layout.preferredHeight: buttonSize
-            Text {
-                anchors.centerIn: parent
-                text: "URL Input goes here " + parent.width + 'x' + parent.height
-            }
+
+            text: currentWebView.url
+
+            Keys.onReturnPressed: load(text)
         }
+
         Item {
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
+
+            visible: currentWebView.loading
+
             PlasmaComponents.BusyIndicator {
                 width: buttonSize / 2
                 height: width
                 anchors.centerIn: parent
-                running: false
+                running: currentWebView.loading
             }
         }
     }

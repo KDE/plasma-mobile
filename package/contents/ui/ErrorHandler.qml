@@ -23,21 +23,46 @@ import QtQuick 2.3
 //import QtWebEngine 1.0
 //import QtQuick.Controls 1.0
 //import QtQuick.Controls.Styles 1.0
-//import QtQuick.Layouts 1.0
+import QtQuick.Layouts 1.0
 //import QtQuick.Window 2.1
 //import QtQuick.Controls.Private 1.0
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 Item {
     id: errorHandler
 
     property string errorCode: ""
+    property alias errorString: errorDescription.text
 
     property int expandedHeight: units.gridUnit * 8
 
     Behavior on height { NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad} }
 
-    Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
+    Rectangle { anchors.fill: parent; color: theme.backgroundColor; opacity: 0.8; }
+
+    ColumnLayout {
+
+        visible: parent.height > 0
+        spacing: units.gridUnit
+        anchors {
+            fill: parent
+            margins: units.gridUnit
+        }
+        PlasmaExtras.Heading {
+            level: 3
+            Layout.fillHeight: false
+            text: i18n("Error loading the page")
+        }
+        PlasmaComponents.Label {
+            id: errorDescription
+            Layout.fillHeight: false
+        }
+        Item {
+            Layout.fillHeight: true
+        }
+    }
 
     states: [
         State {
