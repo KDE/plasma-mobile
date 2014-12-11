@@ -173,16 +173,12 @@ function mapShellSurface(surface, child) {
 
         if (entry.surface === surface) {
             // Switch to layer and take focus
-            if (surface.className == "plasmashell.desktop" || surface.className == "maliit-server.desktop") {
+            if (surface.className == "plasmashell.desktop") {
                 compositorRoot.showPanel = true;
             } else {
                 compositorRoot.state = "homeScreen";
             }
-            if (surface.className == "maliit-server.desktop") {
-                compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height - 500;
-            } else {
-                entry.window.child.takeFocus();
-            }
+            entry.window.child.takeFocus();
 
             return;
         }
@@ -198,27 +194,22 @@ function mapShellSurface(surface, child) {
     // Create and setup window container
     // XXX: We only support desktop roles for now
     var window = component.createObject(compositorRoot, {"child": child});
-    window.parent = (surface.className == "plasmashell.desktop" || surface.className == "maliit-server.desktop") ? compositorRoot.layers.panel : compositorRoot.layers.desktop;
+    window.parent = (surface.className == "plasmashell.desktop") ? compositorRoot.layers.panel : compositorRoot.layers.desktop;
     window.child.parent = window;
     window.child.touchEventsEnabled = true;
     window.x = window.y = 0;
     window.width = surface.size.width;
     window.height = surface.size.height;
-    if (surface.className == "maliit-server.desktop") {
-        window.y = compositorRoot.layers.panel.height - window.height;
-    }
 
     // Switch to the desktop layer and take focus
     compositorRoot.showSplash = false;
-    if (surface.className == "plasmashell.desktop" || surface.className == "maliit-server.desktop") {
+    if (surface.className == "plasmashell.desktop") {
         compositorRoot.showPanel = true;
     } else {
         compositorRoot.state = "homeScreen";
         compositorRoot.shellWindow = window;
     }
-    if (surface.className != "maliit-server.desktop") {
-        window.child.takeFocus();
-    }
+    window.child.takeFocus();
 
     // Add surface to the model
     surfaceModel.append({"surface": surface, "window": window});
@@ -231,9 +222,6 @@ function mapKeyboardSurface(surface) {
         var entry = surfaceModel.get(i);
 
         if (entry.surface === surface) {
-            if (compositorRoot.currentWindow) {
-                compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height - 500;
-            }
             compositorRoot.showKeyboard = true;
 
             return;
@@ -260,10 +248,6 @@ function mapKeyboardSurface(surface) {
     window.height = surface.size.height;
     window.y = compositorRoot.layers.keyboard.height - window.height;
 
-    if (compositorRoot.currentWindow) {
-        compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height - 500;
-    }
-
     // Add surface to the model
     surfaceModel.append({"surface": surface, "window": window});
     compositorRoot.showKeyboard = true;
@@ -281,11 +265,8 @@ function unmapApplicationSurface(surface) {
 }
 
 function unmapShellSurface(surface) {
-    if (surface.className == "maliit-server.desktop") {
-        compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height;
-    }
     // Hide panel layer if this is the sliding panel
-    if (surface.className == "plasmashell.desktop" || surface.className == "maliit-server.desktop") {
+    if (surface.className == "plasmashell.desktop") {
         compositorRoot.showPanel = false;
     }
 }

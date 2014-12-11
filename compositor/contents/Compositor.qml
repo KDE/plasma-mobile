@@ -138,12 +138,8 @@ Rectangle {
         anchors.fill: parent
         z: 5
         onVisibleChanged: {
-            if (!visible) {
+            if (!visible && compositorRoot.shellWindow) {
                 compositorRoot.shellWindow.child.takeFocus();
-            }
-
-            if (compositorRoot.currentWindow) {
-                compositorRoot.currentWindow.child.height = compositorRoot.layers.windows.height - (visible ? 500 : 0);
             }
         }
     }
@@ -328,6 +324,9 @@ Rectangle {
                         } else {
                             desktopLayer.z = 1;
                             windowsLayerBackground.z = 2;
+                            if (compositorRoot.currentWindow) {
+                                compositorRoot.currentWindow.child.takeFocus();
+                            }
                         }
                     }
                 }
