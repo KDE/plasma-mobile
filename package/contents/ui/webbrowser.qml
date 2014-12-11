@@ -61,31 +61,6 @@ Item {
         }
     }
 
-    Item {
-        id: progressItem
-
-        height: units.gridUnit / 2
-        anchors {
-            top: webEngineView.top
-            left: webEngineView.left
-            right: webEngineView.right
-        }
-
-        //opacity: currentWebView.loading ? 1.0 : 0
-        Behavior on opacity { NumberAnimation { duration: units.shortDuration; easing.type: Easing.InOutQuad; } }
-
-        Rectangle {
-            color: theme.highlightColor
-
-            width: Math.round((currentWebView.loadProgress / 100) * parent.width)
-            anchors {
-                top: parent.top
-                left: parent.left
-                bottom: parent.bottom
-            }
-        }
-
-    }
 
     WebEngineView {
         id: webEngineView
@@ -119,11 +94,12 @@ Item {
              */
             var ec = "";
             var es = "";
+            print("Load: " + loadRequest.errorCode + " " + loadRequest.errorString);
             if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
 
             }
             if (loadRequest.status == WebEngineView.LoadFailedStatus) {
-                print("Load failed: " + loadRequest.errorCode);
+                print("Load failed: " + loadRequest.errorCode + " " + loadRequest.errorString);
                 ec = loadRequest.errorCode;
                 es = loadRequest.errorString;
             }
@@ -143,6 +119,42 @@ Item {
             }
         }
         */
+    }
+
+    Item {
+        id: progressItem
+
+        height: Math.round(units.gridUnit / 4)
+
+        anchors {
+            top: webEngineView.top
+            left: webEngineView.left
+            right: webEngineView.right
+        }
+
+        opacity: currentWebView.loading ? 1 : 0
+        Behavior on opacity { NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad; } }
+
+        Rectangle {
+            color: theme.highlightColor
+
+            width: Math.round((currentWebView.loadProgress / 100) * parent.width)
+            /*
+            Connections {
+                target: currentWebView
+                onLoadProgressChanged: {
+                    var w = Math.round((currentWebView.loadProgress / 100) * parent.width);
+                    print("Progress " + currentWebView.loadProgress + " width: " + w);
+                }
+            }
+            */
+            anchors {
+                top: parent.top
+                left: parent.left
+                bottom: parent.bottom
+            }
+        }
+
     }
 
     ErrorHandler {

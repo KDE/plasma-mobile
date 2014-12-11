@@ -40,7 +40,7 @@ Item {
 
     Behavior on height { NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad} }
 
-    Rectangle { anchors.fill: parent; color: theme.backgroundColor; opacity: 0.8; }
+    Rectangle { anchors.fill: parent; color: theme.backgroundColor; opacity: 0.9; }
 
     ColumnLayout {
 
@@ -62,6 +62,17 @@ Item {
         Item {
             Layout.fillHeight: true
         }
+    }
+
+    PlasmaComponents.Label {
+        font.pixelSize: Math.round(parent.height / 3)
+        opacity: 0.3
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            margins: units.gridUnit
+        }
+        text: errorCode
     }
 
     states: [

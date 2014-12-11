@@ -60,6 +60,8 @@ Item {
 
             visible: currentWebView.canGoBack
             iconSource: "go-previous"
+
+            onClicked: currentWebView.goBack()
         }
 
         PlasmaComponents.ToolButton {
@@ -70,6 +72,8 @@ Item {
 
             visible: currentWebView.canGoForward
             iconSource: "go-next"
+
+            onClicked: currentWebView.goForward()
         }
 
         PlasmaComponents.ToolButton {
@@ -79,6 +83,9 @@ Item {
             Layout.preferredHeight: buttonSize
 
             iconSource: currentWebView.loading ? "process-stop" : "view-refresh"
+
+            onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
+
         }
 
         PlasmaComponents.TextField {
