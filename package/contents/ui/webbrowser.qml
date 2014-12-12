@@ -49,19 +49,6 @@ Item {
     width: 1080 / 2
     height: (1920 / 2) - 96
 
-    Navigation {
-        id: navigation
-
-        height: units.gridUnit * 3
-
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-    }
-
-
     WebEngineView {
         id: webEngineView
 
@@ -168,6 +155,29 @@ Item {
 
         anchors {
             top: navigation.bottom
+            left: parent.left
+            right: parent.right
+        }
+    }
+
+    Options {
+        id: options
+        expandedHeight: Math.round(parent.height * 0.7)
+        anchors {
+            top: navigation.bottom
+            topMargin: -units.gridUnit / 2
+            left: parent.left
+            right: parent.right
+        }
+    }
+
+    Navigation {
+        id: navigation
+
+        height: units.gridUnit * 3
+
+        anchors {
+            top: parent.top
             left: parent.left
             right: parent.right
         }

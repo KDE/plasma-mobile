@@ -20,13 +20,10 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-//import QtWebEngine 1.0
-//import QtQuick.Controls 1.0
-//import QtQuick.Controls.Styles 1.0
 import QtQuick.Layouts 1.0
-//import QtQuick.Window 2.1
-//import QtQuick.Controls.Private 1.0
-//import org.kde.plasma.core 2.0 as PlasmaCore
+//import QtWebEngine 1.0
+
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 //import org.kde.plasma.extras 2.0 as PlasmaExtras
 
@@ -48,9 +45,11 @@ Item {
     RowLayout {
         id: layout
         anchors.fill: parent
+        anchors.leftMargin: units.gridUnit / 2
+        anchors.rightMargin: units.gridUnit / 2
         visible: navigationShown
 
-        spacing: units.smallSpacing / 2
+        spacing: units.smallSpacing
 
         PlasmaComponents.ToolButton {
             id: backButton
@@ -111,17 +110,39 @@ Item {
                 running: currentWebView.loading
             }
         }
+
+        PlasmaComponents.ToolButton {
+            id: optionsButton
+
+            Layout.preferredWidth: buttonSize
+            Layout.preferredHeight: buttonSize
+
+            PlasmaCore.SvgItem {
+                id: menuIcon
+                svg: PlasmaCore.Svg {
+                    id: iconSvg
+                    imagePath: "widgets/configuration-icons"
+                    onRepaintNeeded: toolBoxIcon.elementId = iconSvg.hasElement("menu") ? "menu" : "configure"
+                }
+                elementId: iconSvg.hasElement("menu") ? "menu" : "configure"
+                anchors.fill: parent
+                anchors.margins: (units.gridUnit / 2)
+            }
+            checked: options.state != "hidden"
+            onClicked: options.state = (options.state != "overview" ? "overview" : "hidden")
+        }
     }
+
     states: [
         State {
             name: "shown"
             when: navigationShown
-            PropertyChanges { target: errorHandler; height: expandedHeight}
+            PropertyChanges { target: errorHandler; x: -expandedHeight}
         },
         State {
             name: "hidden"
             when: !navigationShown
-            PropertyChanges { target: errorHandler; height: 0}
+            PropertyChanges { target: errorHandler; x: 0}
         }
     ]
 
