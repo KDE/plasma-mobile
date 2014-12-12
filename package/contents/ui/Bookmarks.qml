@@ -33,7 +33,19 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 Item {
 //    id: options
 
-    Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
+    //Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
+
+    ListView {
+
+        anchors.fill: parent
+
+        spacing: units.smallSpacing
+        interactive: height < contentHeight
+
+        model: bookmarksManager.bookmarks
+
+        delegate: UrlDelegate { }
+    }
 
 
 }

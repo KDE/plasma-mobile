@@ -34,7 +34,7 @@ Item {
     id: options
 
     //state: "hidden"
-    state: "overview"
+    state: "bookmarks"
 
     property string title: ""
 

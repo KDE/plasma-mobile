@@ -42,7 +42,7 @@ Item {
 
 
     function load(url) {
-        print("Loading url: " + url);
+        //print("Loading url: " + url);
         currentWebView.url = url;
     }
 
@@ -71,7 +71,8 @@ Item {
         onLoadingChanged: { // Doesn't work!?!
             print("Loading: " + loading);
             print("    url: " + loadRequest.url)
-
+            print("   icon: " + webEngineView.icon)
+            print("  title: " + webEngineView.title)
 
             /* Handle
              *  - WebEngineView::LoadStartedStatus,
@@ -81,7 +82,7 @@ Item {
              */
             var ec = "";
             var es = "";
-            print("Load: " + loadRequest.errorCode + " " + loadRequest.errorString);
+            //print("Load: " + loadRequest.errorCode + " " + loadRequest.errorString);
             if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
 
             }
@@ -182,5 +183,7 @@ Item {
             right: parent.right
         }
     }
+
+    Component.onCompleted: bookmarksManager.reload();
 
 }

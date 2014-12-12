@@ -114,6 +114,8 @@ Item {
         PlasmaComponents.ToolButton {
             id: optionsButton
 
+            property string targetState: "bookmarks"
+
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
@@ -122,14 +124,15 @@ Item {
                 svg: PlasmaCore.Svg {
                     id: iconSvg
                     imagePath: "widgets/configuration-icons"
-                    onRepaintNeeded: toolBoxIcon.elementId = iconSvg.hasElement("menu") ? "menu" : "configure"
+                    //onRepaintNeeded: toolBoxIcon.elementId = iconSvg.hasElement("menu") ? "menu" : "configure"
                 }
                 elementId: iconSvg.hasElement("menu") ? "menu" : "configure"
                 anchors.fill: parent
                 anchors.margins: (units.gridUnit / 2)
             }
             checked: options.state != "hidden"
-            onClicked: options.state = (options.state != "overview" ? "overview" : "hidden")
+            //onClicked: options.state = (options.state != "overview" ? "overview" : "hidden")
+            onClicked: options.state = (options.state != "hidden" ? "hidden" : targetState)
         }
     }
 
