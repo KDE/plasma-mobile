@@ -45,7 +45,7 @@ void BookmarksManager::reload()
 QAbstractListModel* BookmarksManager::bookmarks()
 {
     if (!m_bookmarks) {
-        m_bookmarks = new UrlModel(this);
+        m_bookmarks = new UrlModel("bookmarks.json", this);
     }
     return m_bookmarks;
 }

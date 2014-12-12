@@ -16,6 +16,7 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
  ***************************************************************************/
 
 #ifndef BOOKMARKSMANAGER_H
@@ -26,18 +27,17 @@
 
 #include "urlmodel.h"
 
-//class QQuickItem;
-
 namespace AngelFish {
 /**
  * @class BookmarksManager
- * @short Allows access to Bookmarks and History
+ * @short Access to Bookmarks and History. This is a singleton for
+ * administration and access to the various models and browser-internal
+ * data.
  */
 class BookmarksManager : public QObject
 {
     Q_OBJECT
 
-    //Q_PROPERTY(int gridUnit READ gridUnit NOTIFY gridUnitChanged)
     Q_PROPERTY(QAbstractListModel* bookmarks READ bookmarks NOTIFY bookmarksChanged)
 
 public:
@@ -55,8 +55,6 @@ public Q_SLOTS:
     void reload();
 
 private:
-
-    //int m_longDuration;
 
     QAbstractListModel* m_bookmarks;
 };

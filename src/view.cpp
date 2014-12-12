@@ -51,10 +51,11 @@ View::View(const QString &url, QWindow *parent)
     kdeclarative.initialize();
     kdeclarative.setupBindings();
 
-
     BookmarksManager *bookmarksManager = new BookmarksManager(rootContext());
     rootContext()->setContextProperty("bookmarksManager", bookmarksManager);
     qmlRegisterUncreatableType<BookmarksManager>("org.kde.plasma.satellite.angelfish", 1, 0, "BookmarksManager", "");
+
+    qmlRegisterType<QAbstractListModel>();
 
     m_package = Plasma::PluginLoader::self()->loadPackage("Plasma/Generic");
     m_package.setPath("org.kde.plasma.satellite.angelfish");
@@ -68,14 +69,8 @@ View::View(const QString &url, QWindow *parent)
     setTitle(m_package.metadata().name());
 
     const QString qmlFile = m_package.filePath("mainscript");
-    qDebug() << "mainscript: " << QUrl::fromLocalFile(m_package.filePath("mainscript"));
     setSource(QUrl::fromLocalFile(m_package.filePath("mainscript")));
     show();
-
-    onStatusChanged(status());
-
-    connect(this, &QQuickView::statusChanged,
-            this, &View::onStatusChanged);
 
     QMetaObject::invokeMethod(rootObject(), "load", Q_ARG(QVariant, url));
 
@@ -84,28 +79,3 @@ View::View(const QString &url, QWindow *parent)
 View::~View()
 {
 }
-
-void View::updateStatus()
-{
-    onStatusChanged(status());
-}
-
-void View::onStatusChanged(QQuickView::Status status)
-{
-    //qDebug() << "onStatusChanged";
-    if (status == QQuickView::Ready) {
-        if (!m_browserRootItem) {
-            m_browserRootItem = rootObject()->findChild<QQuickItem*>("webBrowser");
-            if (!m_browserRootItem) {
-                qWarning() << "webBrowser item not found. :(";
-            }
-        }
-    } else if (status == QQuickView::Error) {
-        foreach (const QQmlError &e, errors()) {
-            qWarning() << "error in QML: " << e.toString() << e.description();
-        }
-    } else if (status == QQuickView::Loading) {
-        //qDebug() << "Loading.";
-    }
-}
-

@@ -38,10 +38,6 @@ public:
 Q_SIGNALS:
     void titleChanged(const QString&);
 
-private Q_SLOTS:
-    void onStatusChanged(QQuickView::Status status);
-    void updateStatus();
-
 private:
     Plasma::Package m_package;
     QQuickItem* m_browserRootItem;
