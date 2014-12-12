@@ -55,6 +55,7 @@ find_package(PkgConfig)
 
 
 add_subdirectory(src)
+add_subdirectory(autotests)
 
 plasma_install_package(package org.kde.plasma.satellite.angelfish packages package)
 # install(FILES plasma-mobile-browser.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
