@@ -23,9 +23,6 @@
 #define URL_H
 
 #include <QJsonObject>
-
-#include <QImage>
-#include <QUrl>
 #include <QDateTime>
 
 namespace AngelFish {

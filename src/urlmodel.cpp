@@ -25,7 +25,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QIcon>
+//#include <QIcon>
 #include <QStandardPaths>
 
 #include <QJsonArray>

@@ -3,15 +3,8 @@ include(ECMAddTests)
 
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Test)
 
-macro(angelfish_unit_tests)
-  foreach(_testname ${ARGN})
-    ecm_add_test(${_testname}.cpp TEST_NAME ${_testname}
-    LINK_LIBRARIES Qt5::Test )
-  endforeach()
-endmacro(angelfish_unit_tests)
+include_directories(../src)
 
-angelfish_unit_tests(
- urlmodeltest
-)
-
-
+ecm_add_test(urlmodeltest.cpp ../src/urlmodel.cpp
+             TEST_NAME urlmodeltest
+             LINK_LIBRARIES Qt5::Test )
