@@ -69,7 +69,7 @@ int main(int argc, char **argv)
     const QString themeName = cg.readEntry("theme", "default");
     if (u.isEmpty()) {
         qDebug() << "u: " << u;
-        u = cg.readEntry("startPage", "http://lwn.net");
+        u = cg.readEntry("startPage", QString());
     }
 
     Plasma::Theme theme;
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
     theme.setUseGlobalSettings(false);
     theme.setThemeName(themeName); // nees to happen after setUseGlobalSettings, since that clears themeName
 
-    auto settingsapp = new View(u);
+    auto settingsapp = new AngelFish::View(u);
     if (parser.isSet(fullscreen)) {
         settingsapp->setVisibility(QWindow::FullScreen);
     }

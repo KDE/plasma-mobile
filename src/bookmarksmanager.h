@@ -18,35 +18,50 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef BROWSERVIEW_H
-#define BROWSERVIEW_H
+#ifndef BOOKMARKSMANAGER_H
+#define BOOKMARKSMANAGER_H
 
-#include <QQuickView>
+#include <QObject>
+#include <QQmlPropertyMap>
 
-#include <Plasma/Package>
+#include "urlmodel.h"
+
+//class QQuickItem;
 
 namespace AngelFish {
-
-class View : public QQuickView
+/**
+ * @class BookmarksManager
+ * @short Allows access to Bookmarks and History
+ */
+class BookmarksManager : public QObject
 {
     Q_OBJECT
 
+    //Q_PROPERTY(int gridUnit READ gridUnit NOTIFY gridUnitChanged)
+    Q_PROPERTY(QAbstractListModel* bookmarks READ bookmarks NOTIFY bookmarksChanged)
+
 public:
-    explicit View(const QString &url, QWindow *parent = 0 );
-    ~View();
+
+    BookmarksManager(QObject *parent = 0);
+    ~BookmarksManager();
+
+    QAbstractListModel* bookmarks();
 
 Q_SIGNALS:
-    void titleChanged(const QString&);
+    void updated();
+    void bookmarksChanged();
 
-private Q_SLOTS:
-    void onStatusChanged(QQuickView::Status status);
-    void updateStatus();
+public Q_SLOTS:
+    void reload();
 
 private:
-    Plasma::Package m_package;
-    QQuickItem* m_browserRootItem;
+
+    //int m_longDuration;
+
+    QAbstractListModel* m_bookmarks;
 };
 
-}
+} // namespace
 
-#endif // BROWSERVIEW_H
+#endif //BOOKMARKSMANAGER_H
+

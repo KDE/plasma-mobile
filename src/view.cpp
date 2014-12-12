@@ -19,8 +19,10 @@
  ***************************************************************************/
 
 #include "view.h"
+#include "bookmarksmanager.h"
 
 #include <QDebug>
+#include <QtQml>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickItem>
@@ -33,6 +35,7 @@
 #include <KDeclarative/KDeclarative>
 #include <KLocalizedString>
 
+using namespace AngelFish;
 
 View::View(const QString &url, QWindow *parent)
     : QQuickView(parent),
@@ -43,14 +46,15 @@ View::View(const QString &url, QWindow *parent)
 
     QtWebEngine::initialize();
 
-//     setIcon(QIcon::fromTheme("preferences-desktop"));
-//     setTitle(i18n("Angelfish"));
-//
     KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
     kdeclarative.initialize();
-    //binds things like kconfig and icons
     kdeclarative.setupBindings();
+
+
+    BookmarksManager *bookmarksManager = new BookmarksManager(rootContext());
+    rootContext()->setContextProperty("bookmarksManager", bookmarksManager);
+    qmlRegisterUncreatableType<BookmarksManager>("org.kde.plasma.satellite.angelfish", 1, 0, "BookmarksManager", "");
 
     m_package = Plasma::PluginLoader::self()->loadPackage("Plasma/Generic");
     m_package.setPath("org.kde.plasma.satellite.angelfish");

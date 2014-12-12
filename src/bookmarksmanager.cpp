@@ -1,6 +1,7 @@
 /***************************************************************************
- *                                                                         *
+ *   Copyright 2013 Marco Martin <mart@kde.org>                            *
  *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2014 David Edmundson <davidedmunsdon@kde.org>               *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,35 +19,33 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef BROWSERVIEW_H
-#define BROWSERVIEW_H
+#include "bookmarksmanager.h"
 
-#include <QQuickView>
+#include <QDebug>
 
-#include <Plasma/Package>
+#include <KDirWatch>
 
-namespace AngelFish {
+using namespace AngelFish;
 
-class View : public QQuickView
+BookmarksManager::BookmarksManager(QObject *parent)
+    : QObject(parent),
+      m_bookmarks(0)
 {
-    Q_OBJECT
-
-public:
-    explicit View(const QString &url, QWindow *parent = 0 );
-    ~View();
-
-Q_SIGNALS:
-    void titleChanged(const QString&);
-
-private Q_SLOTS:
-    void onStatusChanged(QQuickView::Status status);
-    void updateStatus();
-
-private:
-    Plasma::Package m_package;
-    QQuickItem* m_browserRootItem;
-};
-
 }
 
-#endif // BROWSERVIEW_H
+BookmarksManager::~BookmarksManager()
+{
+}
+
+void BookmarksManager::reload()
+{
+    qDebug() << "BookmarksManager::reload()";
+}
+
+QAbstractListModel* BookmarksManager::bookmarks()
+{
+    if (!m_bookmarks) {
+        m_bookmarks = new UrlModel(this);
+    }
+    return m_bookmarks;
+}
