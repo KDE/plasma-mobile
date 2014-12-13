@@ -123,7 +123,6 @@ bool UrlModel::load()
 {
 
     QFile jsonFile(filePath());
-    qDebug() << "UM: jsonfile: " << m_fileName << jsonFile.fileName() << jsonFile.exists();
     if (!jsonFile.exists()) {
         return false;
     }
@@ -137,7 +136,7 @@ bool UrlModel::load()
 
 
     QJsonArray plugins = jdoc.array();
-    qDebug() << "Loaded Count/File: " << jdoc.array().count() << filePath();
+    //qDebug() << "Loaded Count/File: " << jdoc.array().count() << filePath();
     setSourceData(plugins);
 
     return true;
@@ -145,7 +144,6 @@ bool UrlModel::load()
 
 bool UrlModel::save()
 {
-    qDebug() << "Saving bookmarks to " << m_fileName;
     QVariantMap vm;
     QVariantMap urlsVm;
     vm[QStringLiteral("Version")] = QStringLiteral("1.0");
@@ -173,9 +171,6 @@ bool UrlModel::save()
         }
     }
 
-//     qDebug() << "urls : " << jdoc.toJson();
-//     qDebug() << "Writing to: " << destfile;
-
     QFile file(destfile);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         qWarning() << "Failed to open " << destfile;
@@ -193,3 +188,26 @@ QString UrlModel::key(int role) const
 {
     return QString::fromLocal8Bit(m_roleNames[role]);
 }
+
+void UrlModel::add(const QString& url)
+{
+
+}
+
+void UrlModel::remove(const QString& url)
+{
+    qDebug() << "Remove: " << url;
+    for (int i = 0; i < m_data.count(); i++) {
+        //qDebug() << "U: " << m_data.at(i)[key(UrlModel::url)];
+        const QString u = m_data.at(i).toObject()[key(UrlModel::url)].toString();
+        if (u == url) {
+            int n = m_data.count();
+            m_data.removeAt(i);
+            qDebug() << "!!! Removed: " << url << " now" << m_data.count() << " was " << n;
+            update();
+            return;
+        }
+    }
+}
+
+

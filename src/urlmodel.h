@@ -51,6 +51,9 @@ public:
     bool load();
     bool save();
 
+    void add(const QString &url);
+    void remove(const QString &url);
+
     virtual QHash<int, QByteArray> roleNames() const;
     virtual int rowCount(const QModelIndex &parent) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
