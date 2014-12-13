@@ -56,7 +56,7 @@ public Q_SLOTS:
 
 private:
 
-    QAbstractListModel* m_bookmarks;
+    UrlModel* m_bookmarks;
 };
 
 } // namespace
