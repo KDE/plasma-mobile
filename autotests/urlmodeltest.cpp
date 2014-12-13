@@ -86,8 +86,6 @@ class UrlModelTest : public QObject
         //QJsonDocument jdoc = QJsonDocument::fromBinaryData(jsonFile.readAll());
         QJsonDocument jdoc = QJsonDocument::fromJson(jsonFile.readAll());
         jsonFile.close();
-
-        qDebug() << "Done";
         return jdoc.array();
     }
 
@@ -234,6 +232,28 @@ private Q_SLOTS:
 
     void testRemove() {
         m_bookmarksModel->setSourceData(m_data);
+
+        int c1 = m_bookmarksModel->rowCount(QModelIndex());
+
+        const QString r = "http://lwn.net";
+        m_bookmarksModel->remove(r);
+        int c2 = m_bookmarksModel->rowCount(QModelIndex());
+        QCOMPARE(c1, c2 + 1);
+
+        QStringList urls;
+        for (int i = 0; i < c2; i++) {
+            auto index = m_bookmarksModel->index(i);
+            const QString r = m_bookmarksModel->data(index, UrlModel::url).toString();
+            urls << r;
+        }
+        int c3 = m_bookmarksModel->rowCount(QModelIndex());
+        foreach (auto r, urls) {
+            c3--;
+            m_bookmarksModel->remove(r);
+            QCOMPARE(m_bookmarksModel->rowCount(QModelIndex()), c3);
+        }
+        QCOMPARE(m_bookmarksModel->rowCount(QModelIndex()), 0);
+
         // Remove a bookmark
     };
 
