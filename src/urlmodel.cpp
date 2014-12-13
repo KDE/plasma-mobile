@@ -88,7 +88,7 @@ QVariant UrlModel::data(const QModelIndex &index, int role) const
 
         switch (role) {
         case lastVisited:
-            return QDateTime::fromString(currentData.value(key(role)).toString());
+            return QDateTime::fromString(currentData.value(key(role)).toString(), Qt::ISODate);
         case bookmarked:
             return currentData.value(key(role)).toBool();
         }
