@@ -36,13 +36,23 @@ class UrlModelTest : public QObject
     static void compare(const QJsonArray &data, QAbstractListModel *model)
     {
         QCOMPARE(data.count(), model->rowCount(QModelIndex()));
+        QStringList roleNames;
+        foreach (auto rn, model->roleNames()) {
+            roleNames << rn;
+        }
         for (int i = 0; i < data.count(); i++) {
             auto index = model->index(i);
+
+            QVariantMap vm = data.at(i).toObject().toVariantMap();
+
+            foreach (auto k, vm.keys()) {
+                QVERIFY2(roleNames.contains(k), QString("Key \"" + k + "\" not found roleNames").toLocal8Bit());
+            }
+
 
             foreach (int k, model->roleNames().keys()) {
                 UrlModel *urlmodel = static_cast<UrlModel*>(model);
                 const QString ks = urlmodel->key(k);
-                QVariantMap vm = data.at(i).toObject().toVariantMap();
 
                 QVariant ori = vm[ks];
                 QVariant val = model->data(index, k);
@@ -72,8 +82,6 @@ class UrlModelTest : public QObject
     static QJsonArray readFile(const QString &fileName)
     {
         QFile jsonFile(fileName);
-        qDebug() << "TEST::readFile: jsonfile: " << fileName << jsonFile.fileName() << jsonFile.exists();
-
         jsonFile.open(QIODevice::ReadOnly);
         //QJsonDocument jdoc = QJsonDocument::fromBinaryData(jsonFile.readAll());
         QJsonDocument jdoc = QJsonDocument::fromJson(jsonFile.readAll());
@@ -210,7 +218,6 @@ private Q_SLOTS:
     void testLoad()
     {
         const QString file1 = QFINDTESTDATA("data/simplebookmarks.json");
-        qDebug() << "File1: " << file1;
 
         auto model = new UrlModel(file1, this);
         QVERIFY(model->load());
