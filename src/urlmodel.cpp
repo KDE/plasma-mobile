@@ -22,13 +22,13 @@
 #include "urlmodel.h"
 #include <QDebug>
 #include <QByteArray>
+#include <QDateTime>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
 //#include <QIcon>
 #include <QStandardPaths>
 
-#include <QJsonArray>
 #include <QJsonDocument>
 
 
@@ -45,19 +45,24 @@ UrlModel::UrlModel(const QString &fileName, QObject *parent) :
     m_roleNames.insert(lastVisited, "lastVisited");
     m_roleNames.insert(bookmarked, "bookmarked");
 
-    m_fakeData = fakeData();
+    //m_fakeData = fakeData();
 
-    setSourceData(&m_fakeData);
+    //setSourceData(&m_fakeData);
 
-    save();
+    //save();
 }
 
-void UrlModel::setSourceData(UrlData *data)
+void UrlModel::setSourceData(QJsonArray &data)
 {
     if (m_data != data) {
         m_data = data;
         //modelReset(); ??
     }
+}
+
+QJsonArray UrlModel::sourceData() const
+{
+    return m_data;
 }
 
 QHash<int, QByteArray> UrlModel::roleNames() const
@@ -68,10 +73,10 @@ QHash<int, QByteArray> UrlModel::roleNames() const
 int UrlModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    if (m_data->size() <= 0) {
+    if (m_data.size() <= 0) {
         return 0;
     } else {
-        return m_data->size();
+        return m_data.size();
     }
 }
 
@@ -79,27 +84,61 @@ QVariant UrlModel::data(const QModelIndex &index, int role) const
 {
     if (index.isValid()) {
 
-        Url currentData = m_data->at(index.row());
+        QJsonObject currentData = m_data.at(index.row()).toObject();
 
         switch (role) {
         case lastVisited:
             return QDateTime::fromString(currentData.value(key(role)).toString());
+        case bookmarked:
+            return currentData.value(key(role)).toBool();
         }
-        return currentData.value(key(role));
+        if (currentData.value(key(role)).isUndefined()) {
+            return QVariant();
+        }
+        return currentData.value(key(role)).toString();
     }
     return QVariant();
 }
 
 void UrlModel::update()
 {
-    if (m_data->size() <= 0) {
+    if (m_data.size() <= 0) {
         return;
     }
+}
+
+QString UrlModel::filePath() const
+{
+    QFileInfo fi(m_fileName);
+
+    if (fi.isAbsolute()) {
+        return m_fileName;
+    }
+    return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) \
+                    + QStringLiteral("/angelfish/") \
+                    + m_fileName;
 }
 
 bool UrlModel::load()
 {
 
+    QFile jsonFile(filePath());
+    qDebug() << "UM: jsonfile: " << m_fileName << jsonFile.fileName() << jsonFile.exists();
+    if (!jsonFile.exists()) {
+        return false;
+    }
+    if (!jsonFile.open(QIODevice::ReadOnly)) {
+        qDebug() << "Could not open" << m_fileName;
+        return false;
+    }
+    //QJsonDocument jdoc = QJsonDocument::fromBinaryData(jsonFile.readAll());
+    QJsonDocument jdoc = QJsonDocument::fromJson(jsonFile.readAll());
+    jsonFile.close();
+
+
+    QJsonArray plugins = jdoc.array();
+    qDebug() << "Loaded Count/File: " << jdoc.array().count() << filePath();
+    setSourceData(plugins);
 
     return true;
 }
@@ -114,7 +153,7 @@ bool UrlModel::save()
 
     QJsonArray urls;
 
-    Q_FOREACH (auto url, m_fakeData) {
+    Q_FOREACH (auto url, m_data) {
         urls << url;
     }
 
@@ -134,8 +173,8 @@ bool UrlModel::save()
         }
     }
 
-    qDebug() << "urls : " << jdoc.toJson();
-    qDebug() << "Writing to: " << destfile;
+//     qDebug() << "urls : " << jdoc.toJson();
+//     qDebug() << "Writing to: " << destfile;
 
     QFile file(destfile);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
@@ -154,68 +193,3 @@ QString UrlModel::key(int role) const
 {
     return QString::fromLocal8Bit(m_roleNames[role]);
 }
-
-
-UrlData UrlModel::fakeData()
-{
-    UrlData data;
-    {
-        Url u;
-        u.insert(key(url), QStringLiteral("http://m.nos.nl"));
-        u.insert(key(title), QStringLiteral("Nieuws"));
-        u.insert(key(icon), QStringLiteral("text-html"));
-        u.insert(key(bookmarked), true);
-        u.insert(key(lastVisited), QDateTime::currentDateTime().toString());
-        data << u;
-    }
-    {
-        Url u;
-        u.insert(key(url), QStringLiteral("http://vizZzion.org"));
-        u.insert(key(title), QStringLiteral("sebas' blog"));
-        u.insert(key(icon), QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
-        u.insert(key(preview), QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
-        u.insert(key(bookmarked), true);
-        u.insert(key(lastVisited), QDateTime::currentDateTime().toString());
-        data << u;
-    }
-    {
-        Url u;
-        u.insert(key(url), QStringLiteral("http://lwn.net"));
-        u.insert(key(title), QStringLiteral("Linux Weekly News"));
-        u.insert(key(icon), QStringLiteral("text-html"));
-        u.insert(key(bookmarked), true);
-        u.insert(key(lastVisited), QDateTime::currentDateTime().toString());
-        data << u;
-    }
-    {
-        Url u;
-        u.insert(key(url), QStringLiteral("http://tweakers.net"));
-        u.insert(key(title), QStringLiteral("Tweakers.net"));
-        u.insert(key(icon), QStringLiteral("text-html"));
-        u.insert(key(bookmarked), true);
-        u.insert(key(lastVisited), QDateTime::currentDateTime().toString());
-        data << u;
-    }
-    {
-        Url u;
-        u.insert(key(url), QStringLiteral("http://en.wikipedia.org"));
-        u.insert(key(title), QStringLiteral("Wikipedia"));
-        u.insert(key(icon), QStringLiteral("text-html"));
-        //u.insert(key(preview), QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
-        u.insert(key(bookmarked), false);
-        u.insert(key(lastVisited), QDateTime::currentDateTime().toString());
-        data << u;
-    }
-    {
-        Url u;
-        u.insert(key(url), QStringLiteral("http://plasma-mobile.org"));
-        u.insert(key(title), QStringLiteral("Plasma Mobile"));
-        u.insert(key(icon), QStringLiteral("plasma"));
-        u.insert(key(bookmarked), true);
-        u.insert(key(lastVisited), QDateTime::currentDateTime().toString());
-        data << u;
-    }
-
-    return data;
-}
-

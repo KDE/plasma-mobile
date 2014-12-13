@@ -23,8 +23,8 @@
 #define URLMODEL_H
 
 #include <QAbstractListModel>
-
-#include "url.h"
+#include <QJsonArray>
+#include <QJsonObject>
 
 namespace AngelFish {
 
@@ -44,7 +44,9 @@ public:
 
     explicit UrlModel(const QString &filename, QObject *parent = 0);
 
-    void setSourceData(UrlData *data);
+    void setSourceData(QJsonArray &data);
+    QJsonArray sourceData() const;
+    QString key(int role) const;
 
     bool load();
     bool save();
@@ -55,14 +57,15 @@ public:
 
     void update();
 
-    UrlData fakeData();
+    QJsonArray fakeData();
 
+    QString filePath() const;
+
+//    QJsonArray m_fakeData; // FIXME: remove
 private:
-    QString key(int role) const;
-    UrlData *m_data;
+    QJsonArray m_data;
     QHash<int, QByteArray> m_roleNames;
 
-    UrlData m_fakeData;
 
     QString m_fileName;
 };
