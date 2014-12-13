@@ -55,7 +55,8 @@ class UrlModelTest : public QObject
                     continue;
                 }
                 if (ks == "lastVisited") {
-                    //QCOMPARE(vm[ks].toDateTime(), model->data(index, k).toDateTime());
+                    auto dt = QDateTime::fromString(model->data(index, k).toString(), Qt::ISODate);
+                    QCOMPARE(vm[ks].toDateTime(), dt);
                 } else {
 
                     QCOMPARE(vm[ks], model->data(index, k));
@@ -104,7 +105,7 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Nieuws"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("text-html"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString());
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         {
@@ -114,7 +115,7 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
             u.insert(m_bookmarksModel->key(UrlModel::preview), QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString());
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         {
@@ -123,7 +124,7 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Linux Weekly News"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("text-html"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString());
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         {
@@ -132,7 +133,7 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Tweakers.net"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("text-html"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString());
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         {
@@ -142,7 +143,7 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("text-html"));
             //u.insert(m_bookmarksModel->key(UrlModel::preview), QStringLiteral("/home/sebas/Pictures/avatar-small.jpg"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), false);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString());
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         {
@@ -151,7 +152,7 @@ private Q_SLOTS:
             u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Plasma Mobile"));
             u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("plasma"));
             u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
-            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString());
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
             m_data << u;
         }
         cleanup();
