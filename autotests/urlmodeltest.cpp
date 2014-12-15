@@ -233,6 +233,7 @@ private Q_SLOTS:
     void testRemove() {
         m_bookmarksModel->setSourceData(m_data);
 
+        // Remove a bookmark
         int c1 = m_bookmarksModel->rowCount(QModelIndex());
 
         const QString r = "http://lwn.net";
@@ -253,8 +254,6 @@ private Q_SLOTS:
             QCOMPARE(m_bookmarksModel->rowCount(QModelIndex()), c3);
         }
         QCOMPARE(m_bookmarksModel->rowCount(QModelIndex()), 0);
-
-        // Remove a bookmark
     };
 
     void testNotify() {

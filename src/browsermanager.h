@@ -1,7 +1,6 @@
 /***************************************************************************
- *   Copyright 2013 Marco Martin <mart@kde.org>                            *
+ *                                                                         *
  *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
- *   Copyright 2014 David Edmundson <davidedmunsdon@kde.org>               *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,36 +16,50 @@
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
  ***************************************************************************/
 
-#include "bookmarksmanager.h"
+#ifndef BOOKMARKSMANAGER_H
+#define BOOKMARKSMANAGER_H
 
-#include <QDebug>
+#include <QObject>
+#include <QQmlPropertyMap>
 
-#include <KDirWatch>
+#include "urlmodel.h"
 
-using namespace AngelFish;
-
-BookmarksManager::BookmarksManager(QObject *parent)
-    : QObject(parent),
-      m_bookmarks(0)
+namespace AngelFish {
+/**
+ * @class BookmarksManager
+ * @short Access to Bookmarks and History. This is a singleton for
+ * administration and access to the various models and browser-internal
+ * data.
+ */
+class BrowserManager : public QObject
 {
-}
+    Q_OBJECT
 
-BookmarksManager::~BookmarksManager()
-{
-}
+    Q_PROPERTY(QAbstractListModel* bookmarks READ bookmarks NOTIFY bookmarksChanged)
 
-void BookmarksManager::reload()
-{
-    qDebug() << "BookmarksManager::reload()";
-}
+public:
 
-QAbstractListModel* BookmarksManager::bookmarks()
-{
-    if (!m_bookmarks) {
-        m_bookmarks = new UrlModel("bookmarks.json", this);
-        m_bookmarks->load();
-    }
-    return m_bookmarks;
-}
+    BrowserManager(QObject *parent = 0);
+    ~BrowserManager();
+
+    QAbstractListModel* bookmarks();
+
+Q_SIGNALS:
+    void updated();
+    void bookmarksChanged();
+
+public Q_SLOTS:
+    void reload();
+
+private:
+
+    UrlModel* m_bookmarks;
+};
+
+} // namespace
+
+#endif //BOOKMARKSMANAGER_H
+

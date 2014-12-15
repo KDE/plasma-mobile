@@ -51,9 +51,9 @@ View::View(const QString &url, QWindow *parent)
     kdeclarative.initialize();
     kdeclarative.setupBindings();
 
-    BookmarksManager *bookmarksManager = new BookmarksManager(rootContext());
+    BrowserManager *bookmarksManager = new BrowserManager(rootContext());
     rootContext()->setContextProperty("bookmarksManager", bookmarksManager);
-    qmlRegisterUncreatableType<BookmarksManager>("org.kde.plasma.satellite.angelfish", 1, 0, "BookmarksManager", "");
+    qmlRegisterUncreatableType<BrowserManager>("org.kde.plasma.satellite.angelfish", 1, 0, "BrowserManager", "");
 
     qmlRegisterType<QAbstractListModel>();
 
