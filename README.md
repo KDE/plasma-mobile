@@ -8,18 +8,21 @@ This is an experimental webbrowser designed to
 It is built on top of QtWebEngine, and thus requires Qt 5.4.
 
 
-
 Preliminary TODO:
-
+- browser navigation: back + forward + reload (done)
+- browser status (done)
+- Implement URL bar (done)
+- Error handler in UI (done)
 - in-window navigation: tabs vs. top bar
-- browser navigation: back + forward + reload
-- browser status
-- Implement URL bar
-- Error handler in UI
 - SSL error handler
 - Touch actions (pinch?)
 - user-agent to request mobile site
+- adblock
+- kwallet integration
 
-- bookmarks store (binary json)
-- bookmarks model (QAbstractListModel ?)
+In progress:
+- bookmarks store (done)
+- bookmarks model (done)
 - bookmarks UI
+  - show bookmarks (done)
+  - add /  remove
