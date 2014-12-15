@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 #include "view.h"
-#include "bookmarksmanager.h"
+#include "browsermanager.h"
 
 #include <QDebug>
 #include <QtQml>

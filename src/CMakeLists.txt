@@ -4,7 +4,7 @@ find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Gui WebEngine)
 
 set(angelfish_SRCS
     main.cpp
-    bookmarksmanager.cpp
+    browsermanager.cpp
     urlmodel.cpp
     view.cpp
 )
