@@ -102,9 +102,6 @@ QVariant UrlModel::data(const QModelIndex &index, int role) const
 
 void UrlModel::update()
 {
-    if (m_data.size() <= 0) {
-        return;
-    }
     beginResetModel();
     endResetModel();
     //emit QAbstractItemModel::modelReset();
