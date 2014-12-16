@@ -135,8 +135,8 @@ bool UrlModel::load()
     jsonFile.close();
 
 
+    qDebug() << "Loaded from file:" << jdoc.array().count() << filePath();
     QJsonArray plugins = jdoc.array();
-    //qDebug() << "Loaded Count/File: " << jdoc.array().count() << filePath();
     setSourceData(plugins);
 
     return true;
