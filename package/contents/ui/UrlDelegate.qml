@@ -40,7 +40,7 @@ MouseArea {
 
     onClicked: {
         load(url)
-        options.state = "hidden"
+        //contentView.state = "hidden"
     }
 
     onPressed: highlight.opacity = 1

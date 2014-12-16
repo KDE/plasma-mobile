@@ -44,6 +44,7 @@ void BrowserManager::reload()
 
 QAbstractListModel* BrowserManager::bookmarks()
 {
+    qDebug() << "BookmarksManager::bookmarks()";
     if (!m_bookmarks) {
         m_bookmarks = new UrlModel(QStringLiteral("bookmarks.json"), this);
         m_bookmarks->load();

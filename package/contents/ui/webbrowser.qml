@@ -87,6 +87,7 @@ Item {
             //print("Load: " + loadRequest.errorCode + " " + loadRequest.errorString);
             if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
                 // record history, set current page info
+                //contentView.state = "hidden"
 
             }
             if (loadRequest.status == WebEngineView.LoadFailedStatus) {
@@ -98,7 +99,13 @@ Item {
             errorString = es;
         }
 
-        //onLoadProgressChanged: print("Progress: " + loadProgress);
+        onLoadProgressChanged: {
+            if (loadProgress > 50) {
+                contentView.state = "hidden";
+            }
+        }
+
+        //print("Progress: " + loadProgress);
 
         /*
         onLinkHovered: {
