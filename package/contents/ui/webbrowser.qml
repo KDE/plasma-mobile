@@ -40,6 +40,8 @@ Item {
 
     //property debug
 
+    property int borderWidth: Math.round(units.gridUnit / 18);
+    property var borderColor: theme.highlightColor;
 
     function load(url) {
         //print("Loading url: " + url);
@@ -187,6 +189,15 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
+        }
+    }
+    Rectangle {
+        height: webBrowser.borderWidth
+        color: webBrowser.borderColor
+        anchors {
+            left: parent.left
+            bottom: navigation.bottom
+            right: options.left
         }
     }
 

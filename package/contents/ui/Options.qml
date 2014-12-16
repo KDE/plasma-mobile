@@ -31,40 +31,66 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
-PlasmaCore.FrameSvgItem {
+Rectangle {
     id: options
-
-    imagePath: "widgets/background"
 
     state: "hidden"
     //state: "bookmarks"
+    color: theme.backgroundColor
 
     property string title: ""
 
-    property int expandedHeight: units.gridUnit * 14
-    property int expandedWidth: units.gridUnit * 20
+    property int expandedHeight: units.gridUnit * 10
+    property int expandedWidth: units.gridUnit * 14
 
     Behavior on height { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
     Behavior on opacity { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
     Behavior on x { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
 
-    //height: expandedHeight
-    height: childrenRect.height + options.margins.top + options.margins.bottom + units.gridUnit
-    width: childrenRect.width + options.margins.left + options.margins.right + units.gridUnit/2
+    height: expandedHeight
+    width: expandedWidth
+    //height: childrenRect.height + units.gridUnit
+    //width: childrenRect.width +  units.gridUnit/2
 
     //width: expandedWidth
-    anchors.rightMargin: -options.margins.right
+    //anchors.rightMargin: -options.margins.right
     //Rectangle { anchors.fill: parent; color: theme.backgroundColor; }
+
+    Rectangle {
+        width: webBrowser.borderWidth
+        color: webBrowser.borderColor
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+        }
+    }
+
+    Rectangle {
+        height: webBrowser.borderWidth
+        color: webBrowser.borderColor
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+            right: parent.right
+        }
+    }
 
     ColumnLayout {
 
-        visible: parent.height > 0
-        spacing: units.gridUnit
-        x: units.gridUnit
-        y: units.gridUnit
+        //visible: parent.height > 0
+        //spacing: units.gridUnit
+        spacing: 0
+        //x: units.gridUnit / 2
+        //y: - (units.gridUnit + webBrowser.borderWidth)
+        //width: units.gridUnit * 14
         anchors {
             //fill: parent
-            margins: units.gridUnit / 2
+            top: parent.top
+            //topMargin: units.gridUnit
+            left: parent.left
+            right: parent.right
+            //margins: units.gridUnit / 2
         }
         MouseArea {
             anchors.fill: parent
@@ -96,7 +122,7 @@ PlasmaCore.FrameSvgItem {
             PropertyChanges { target: options; title: ""}
             //PropertyChanges { target: options; height: units.gridUnit * 3}
             PropertyChanges { target: options; opacity: 1.0}
-            PropertyChanges { target: options; x: webBrowser.width - expandedWidth + options.margins.right + units.gridUnit * 2}
+            PropertyChanges { target: options; x: webBrowser.width - options.width }
 
         },
         State {

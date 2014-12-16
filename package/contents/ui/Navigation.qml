@@ -111,11 +111,12 @@ Item {
             }
         }
 
-        PlasmaComponents.ToolButton {
+        OptionButton {
             id: optionsButton
 
             property string targetState: "overview"
 
+            Layout.fillWidth: false
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
 
@@ -131,8 +132,8 @@ Item {
                 anchors.margins: (units.gridUnit / 2)
             }
             checked: options.state != "hidden"
-            //onClicked: options.state = (options.state != "overview" ? "overview" : "hidden")
-            onClicked: options.state = (options.state != "hidden" ? "hidden" : targetState)
+            //onClicked: options.state = (options.state != "hidden" ? "hidden" : targetState)
+            onPressed: options.state = (options.state != "hidden" ? "hidden" : targetState)
         }
     }
 

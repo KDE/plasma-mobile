@@ -40,7 +40,7 @@ Item {
 
     Behavior on height { NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad} }
 
-    Rectangle { anchors.fill: parent; color: theme.backgroundColor; opacity: 0.9; }
+    Rectangle { anchors.fill: parent; color: theme.backgroundColor; }
 
     ColumnLayout {
 

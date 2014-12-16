@@ -33,63 +33,67 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 ColumnLayout {
     id: optionsOverview
 
-    property int buttonSize: units.gridUnit * 4
+    property int buttonSize: units.gridUnit * 2
 
     RowLayout {
         id: layout
         anchors.fill: parent
+        height: buttonSize
+        spacing: 0
 //         anchors.leftMargin: units.gridUnit / 2
 //         anchors.rightMargin: units.gridUnit / 2
         //visible: navigationShown
 
-        spacing: units.smallSpacing
+        //spacing: units.smallSpacing
 
-        PlasmaComponents.ToolButton {
+        OptionButton {
             id: backButton
 
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
 
             //enabled: currentWebView.canGoBack
-            iconSource: "go-previous"
+            icon: "go-previous"
 
             onClicked: currentWebView.goBack()
+            onTriggered: {
+                print("Booh")
+                currentWebView.goBack()
+            }
         }
 
-        PlasmaComponents.ToolButton {
+        OptionButton {
             id: forwardButton
 
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
+//             Layout.fillWidth: true
+//             Layout.preferredHeight: buttonSize
 
             enabled: currentWebView.canGoForward
-            iconSource: "go-next"
+            icon: "go-next"
 
             onClicked: currentWebView.goForward()
         }
 
-        PlasmaComponents.ToolButton {
+        OptionButton {
             id: reloadButton
 
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
+//             Layout.fillWidth: true
+//             Layout.preferredHeight: buttonSize
 
-            iconSource: currentWebView.loading ? "process-stop" : "view-refresh"
+            icon: currentWebView.loading ? "process-stop" : "view-refresh"
 
             onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
 
         }
 
-        PlasmaComponents.ToolButton {
+        OptionButton {
             id: bookmarkButton
 
-            Layout.preferredWidth: buttonSize
-            Layout.preferredHeight: buttonSize
+//             Layout.fillWidth: true
+//             Layout.preferredHeight: buttonSize
 
-            iconSource: currentWebView.loading ? "bookmark-add" : "bookmark-remove"
+            icon: "bookmarks"
 
             onClicked: {
-                var request;
+                var request;// FIXME
                 browserManager.addBookmark(request);
             }
 
@@ -102,28 +106,33 @@ ColumnLayout {
 //         Layout.fillHeight: false
 //         Layout.preferredWidth: parent.width
 
-    PlasmaComponents.ToolButton {
-        iconSource: "tab-duplicate"
+    Item {
+        Layout.preferredHeight: units.smallSpacing
         Layout.fillWidth: true
-        Layout.preferredHeight: buttonSize - units.gridUnit
+    }
+
+    OptionButton {
+        icon: "tab-duplicate"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize
         onClicked: options.state = "tabs"
         checked: options.state == "tabs"
         text: i18n("Tabs")
     }
 
-    PlasmaComponents.ToolButton {
-        iconSource: "bookmarks"
+    OptionButton {
+        icon: "bookmarks"
         Layout.fillWidth: true
-        Layout.preferredHeight: buttonSize - units.gridUnit
+        Layout.preferredHeight: buttonSize
         onClicked: options.state = "bookmarks"
         checked: options.state == "bookmarks"
         text: i18n("Bookmarks")
     }
 
-    PlasmaComponents.ToolButton {
-        iconSource: "configure"
+    OptionButton {
+        icon: "configure"
         Layout.fillWidth: true
-        Layout.preferredHeight: buttonSize - units.gridUnit
+        Layout.preferredHeight: buttonSize
         text: i18n("Settings")
         checked: options.state == "settings"
         onClicked: options.state = "settings"
