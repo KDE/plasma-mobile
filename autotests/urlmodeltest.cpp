@@ -23,6 +23,7 @@
 #include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QSignalSpy>
 
 #include "urlmodel.h"
 
@@ -272,6 +273,30 @@ private Q_SLOTS:
             //QVERIFY(!compare(copy, m_bookmarksModel));
         }
     };
+
+    void testDataChanged()
+    {
+        //QSignalSpy spy(m_bookmarksModel, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &, const QVector<int> &)));
+        QSignalSpy spy(m_bookmarksModel, SIGNAL(modelReset()));
+        {
+            QJsonObject u;
+            u.insert(m_bookmarksModel->key(UrlModel::url), QStringLiteral("http://kde.org"));
+            u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("KDE"));
+            u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("kde-start-here"));
+            u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
+            //m_data << u;
+            m_bookmarksModel->add(u);
+            m_bookmarksModel->add(u);
+        }
+        QCOMPARE(spy.count(), 1);
+
+        QSignalSpy spy2(m_bookmarksModel, SIGNAL(modelReset()));
+        m_bookmarksModel->remove("http://kde.org");
+
+        QCOMPARE(spy2.count(), 1);
+
+    }
 
     void testRemove() {
         m_bookmarksModel->setSourceData(m_data);
