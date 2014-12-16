@@ -43,7 +43,6 @@ Rectangle {
     property int expandedHeight: units.gridUnit * 10
     property int expandedWidth: units.gridUnit * 14
 
-    Behavior on height { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
     Behavior on opacity { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
     Behavior on x { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
 
@@ -124,7 +123,8 @@ Rectangle {
             PropertyChanges { target: options; opacity: 1.0}
             PropertyChanges { target: options; x: webBrowser.width - options.width }
 
-        },
+        }/*,
+
         State {
             name: "bookmarks"
             PropertyChanges { target: loader; source: "Bookmarks.qml"}
@@ -143,6 +143,7 @@ Rectangle {
             PropertyChanges { target: loader; source: "Settings.qml"}
             PropertyChanges { target: options; height: expandedHeight}
         }
+        */
     ]
 
 }

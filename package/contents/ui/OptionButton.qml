@@ -56,7 +56,7 @@ Button {
             button.pressed(mouse);
         }
         onReleased: {
-            print("Released ")
+            print("Released TRIGGER!")
             isActive = false;
             isPressed = false;
             //button.clicked(mouse);
@@ -69,7 +69,7 @@ Button {
             //}
         }
         onExited: {
-            print("Enter")
+            //print("Enter")
             //if (buttonMouse.pressed) {
                 isActive = false
             //}

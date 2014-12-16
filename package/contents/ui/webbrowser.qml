@@ -112,6 +112,13 @@ Item {
         */
     }
 
+    ContentView {
+        id: contentView
+        //opacity: state == "hidden"
+        anchors.fill: webEngineView
+        //z: webEngineView.z + 999
+    }
+
     Item {
         id: progressItem
 

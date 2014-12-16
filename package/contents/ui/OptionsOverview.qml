@@ -50,12 +50,13 @@ ColumnLayout {
             id: backButton
 
 
-            //enabled: currentWebView.canGoBack
+            enabled: currentWebView.canGoBack
             icon: "go-previous"
 
             onClicked: currentWebView.goBack()
             onTriggered: {
                 print("Booh")
+                options.state = "hidden";
                 currentWebView.goBack()
             }
         }
@@ -69,7 +70,11 @@ ColumnLayout {
             enabled: currentWebView.canGoForward
             icon: "go-next"
 
-            onClicked: currentWebView.goForward()
+            onTriggered: {
+                options.state = "hidden";
+                currentWebView.goForward()
+            }
+
         }
 
         OptionButton {
@@ -80,7 +85,10 @@ ColumnLayout {
 
             icon: currentWebView.loading ? "process-stop" : "view-refresh"
 
-            onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
+            onTriggered: {
+                options.state = "hidden";
+                currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
+            }
 
         }
 
@@ -92,9 +100,12 @@ ColumnLayout {
 
             icon: "bookmarks"
 
-            onClicked: {
+            onTriggered: {
+                print("Adding bookmark");
                 var request;// FIXME
-                browserManager.addBookmark(request);
+                //browserManager.addBookmark(request);
+                options.state = "hidden"
+
             }
 
         }
@@ -115,8 +126,11 @@ ColumnLayout {
         icon: "tab-duplicate"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
-        onClicked: options.state = "tabs"
-        checked: options.state == "tabs"
+        onTriggered: {
+            contentView.state = "tabs"
+            options.state = "hidden"
+        }
+        checked: contentView.state == "tabs"
         text: i18n("Tabs")
     }
 
@@ -124,8 +138,11 @@ ColumnLayout {
         icon: "bookmarks"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
-        onClicked: options.state = "bookmarks"
-        checked: options.state == "bookmarks"
+        onTriggered: {
+            contentView.state = "bookmarks"
+            options.state = "hidden"
+        }
+        //checked: contentView.state == "bookmarks"
         text: i18n("Bookmarks")
     }
 
@@ -134,16 +151,11 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
         text: i18n("Settings")
-        checked: options.state == "settings"
-        onClicked: options.state = "settings"
+        checked: contentView.state == "settings"
+        onTriggered: {
+            contentView.state = "settings"
+            options.state = "hidden"
+        }
+
     }
-//    }
-    /*
-    PlasmaComponents.ToolButton {
-        iconSource: "bookmark-new"
-        Layout.preferredWidth: buttonSize
-        Layout.preferredHeight: buttonSize
-        onClicked: print("Implement add-bookmark!")
-    }
-    */
 }

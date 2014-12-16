@@ -34,6 +34,7 @@ Item {
 //    id: options
 
     //Rectangle { anchors.fill: parent; color: "orange"; opacity: 0.5; }
+    anchors.fill: parent
 
     ListView {
 
@@ -46,6 +47,6 @@ Item {
 
         delegate: UrlDelegate { }
     }
-
+    Component.onCompleted: print("Bookmarks.qml complete.");
 
 }
