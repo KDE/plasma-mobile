@@ -29,7 +29,8 @@ using namespace AngelFish;
 
 BrowserManager::BrowserManager(QObject *parent)
     : QObject(parent),
-      m_bookmarks(0)
+      m_bookmarks(0),
+      m_history(0)
 {
 }
 
@@ -52,6 +53,16 @@ UrlModel* BrowserManager::bookmarks()
     return m_bookmarks;
 }
 
+UrlModel* BrowserManager::history()
+{
+    qDebug() << "BrowserManager::history()";
+    if (!m_history) {
+        m_history = new UrlModel(QStringLiteral("history.json"), this);
+        m_history->load();
+    }
+    return m_history;
+}
+
 void BrowserManager::addBookmark(const QVariantMap& bookmarkdata)
 {
     qDebug() << "Add bookmark";
@@ -65,3 +76,20 @@ void BrowserManager::removeBookmark(const QString& url)
     bookmarks()->remove(url);
     bookmarks()->save();
 }
+
+void BrowserManager::addToHistory(const QVariantMap& pagedata)
+{
+    qDebug() << "Add History";
+    qDebug() << "      data: " << pagedata;
+    history()->add(QJsonObject::fromVariantMap(pagedata));
+    emit historyChanged();
+    history()->save();
+}
+
+void BrowserManager::removeFromHistory(const QString& url)
+{
+    history()->remove(url);
+    emit historyChanged();
+    history()->save();
+}
+

@@ -39,6 +39,7 @@ class BrowserManager : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QAbstractListModel* bookmarks READ bookmarks NOTIFY bookmarksChanged)
+    Q_PROPERTY(QAbstractListModel* history READ history NOTIFY historyChanged)
 
 public:
 
@@ -46,20 +47,27 @@ public:
     ~BrowserManager();
 
     UrlModel* bookmarks();
+    UrlModel* history();
 
 
 Q_SIGNALS:
     void updated();
     void bookmarksChanged();
+    void historyChanged();
 
 public Q_SLOTS:
     void reload();
+
     void addBookmark(const QVariantMap &bookmarkdata);
     void removeBookmark(const QString &url);
+
+    void addToHistory(const QVariantMap &pagedata);
+    void removeFromHistory(const QString &url);
 
 private:
 
     UrlModel* m_bookmarks;
+    UrlModel* m_history;
 };
 
 } // namespace

@@ -196,6 +196,11 @@ QString UrlModel::key(int role) const
 
 void UrlModel::add(const QJsonObject &data)
 {
+    foreach (auto urldata, m_data) {
+        if (urldata == data) {
+            return;
+        }
+    }
     m_data.append(data);
     update();
 }
