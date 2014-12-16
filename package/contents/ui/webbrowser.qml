@@ -25,20 +25,15 @@ import QtWebEngine 1.0
 // import QtQuick.Controls.Styles 1.0
 // import QtQuick.Layouts 1.0
 import QtQuick.Window 2.1
-//import QtQuick.Controls.Private 1.0
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-//import org.kde.plasma.components 2.0 as PlasmaComponents
-//import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 Item {
     id: webBrowser
     objectName: "webBrowser"
 
-    property Item currentWebView: webEngineView
-
-    //property debug
+    property Item currentWebView: tabs.currentIndex < tabs.count ? tabs.getTab(tabs.currentIndex).item : null
 
     property int borderWidth: Math.round(units.gridUnit / 18);
     property var borderColor: theme.highlightColor;
@@ -54,100 +49,36 @@ Item {
     function addHistoryEntry() {
         print("Adding history");
         var request = new Object;// FIXME
-        request.url = webEngineView.url;
-        request.title = webEngineView.title;
-        request.icon = webEngineView.icon;
-        //request.bookmarked = true;
+        request.url = currentWebView.url;
+        request.title = currentWebView.title;
+        request.icon = currentWebView.icon;
         browserManager.addToHistory(request);
-        //options.state = "hidden"
 
     }
 
-
-//     BrowserManager {
-//         id: browserManager
-//     }
-//
-    WebEngineView {
-        id: webEngineView
-
-        focus: true
-
-//         url: "http://lwn.net"
-        url: "http://localhost"
-        property string errorCode: ""
-        property string errorString: ""
-
-        property QtObject pageInfo
-
-
+    Item {
+        id: tabContainer
         anchors {
             top: navigation.bottom
-//             top: parent.top
+            //top: parent.top
             left: parent.left
             right: parent.right
             bottom: parent.bottom
         }
-
-        onLoadingChanged: { // Doesn't work!?!
-            print("Loading: " + loading);
-            print("    url: " + loadRequest.url)
-            print("   icon: " + webEngineView.icon)
-            print("  title: " + webEngineView.title)
-
-            /* Handle
-             *  - WebEngineView::LoadStartedStatus,
-             *  - WebEngineView::LoadStoppedStatus,
-             *  - WebEngineView::LoadSucceededStatus and
-             *  - WebEngineView::LoadFailedStatus
-             */
-            var ec = "";
-            var es = "";
-            //print("Load: " + loadRequest.errorCode + " " + loadRequest.errorString);
-            if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
-                // record history, set current page info
-                //contentView.state = "hidden"
-                //pageInfo.url = webEngineView.url;
-                //pageInfo.title = webEngineView.title;
-                //pageInfo.icon = webEngineView.icon;
-                addHistoryEntry();
-
-            }
-            if (loadRequest.status == WebEngineView.LoadFailedStatus) {
-                print("Load failed: " + loadRequest.errorCode + " " + loadRequest.errorString);
-                ec = loadRequest.errorCode;
-                es = loadRequest.errorString;
-                contentView.state = "hidden"
-            }
-            errorCode = ec;
-            errorString = es;
+        TabWebView {
+            id: tabs
+            //y: units.gridUnit * 5
+            anchors.fill: parent
         }
-
-        onLoadProgressChanged: {
-            if (loadProgress > 50) {
-                contentView.state = "hidden";
-            }
-        }
-
-        //print("Progress: " + loadProgress);
-
-        /*
-        onLinkHovered: {
-            if (hoveredUrl != "") {
-                print("Hovered over: " + hoveredUrl + " " + (typeof(hoveredTitle) != "undefined" ? hoveredTitle : "(no title)"));
-                //errorHandler.errorCode = "999";
-            } else {
-                //errorHandler.errorCode = "";
-            }
-        }
-        */
     }
 
     ErrorHandler {
         id: errorHandler
 
-        errorCode: currentWebView.errorCode
+        //errorCode: currentWebView.errorCode ? currentWebView.errorCode : ""
+        //errorString: currentWebView.errorString ? currentWebView.errorString : ""
         errorString: currentWebView.errorString
+        errorCode: currentWebView.errorCode
 
         anchors {
             top: navigation.bottom
@@ -159,7 +90,7 @@ Item {
     ContentView {
         id: contentView
         //opacity: state == "hidden"
-        anchors.fill: webEngineView
+        anchors.fill: tabContainer
         //z: webEngineView.z + 999
     }
 
@@ -169,9 +100,9 @@ Item {
         height: Math.round(units.gridUnit / 4)
 
         anchors {
-            top: webEngineView.top
-            left: webEngineView.left
-            right: webEngineView.right
+            top: tabContainer.top
+            left: tabContainer.left
+            right: tabContainer.right
         }
 
         opacity: currentWebView.loading ? 1 : 0
@@ -209,12 +140,8 @@ Item {
     Options {
         id: options
 
-        //expandedHeight: Math.round(parent.height * 0.7)
-        //expandedWidth: Math.min(parent.width - units.gridUnit * 2, units.gridUnit * 20)
-
         anchors {
             top: navigation.bottom
-            //right: parent.right
         }
     }
 

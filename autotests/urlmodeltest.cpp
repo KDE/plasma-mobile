@@ -228,6 +228,49 @@ private Q_SLOTS:
     void testAdd() {
         m_bookmarksModel->setSourceData(m_data);
         // Adding bookmarks
+        compare(m_data, m_bookmarksModel);
+
+
+        {
+            int i0 = m_bookmarksModel->rowCount(QModelIndex());
+            QJsonObject u;
+            u.insert(m_bookmarksModel->key(UrlModel::url), QStringLiteral("http://kde.org"));
+            u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("KDE"));
+            u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("kde-start-here"));
+            u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
+            //m_data << u;
+            m_bookmarksModel->add(u);
+            int i1 = m_bookmarksModel->rowCount(QModelIndex());
+            QCOMPARE(i0 + 1, i1);
+
+            QJsonArray copy = m_data;
+            copy << u;
+            compare(copy, m_bookmarksModel);
+        }
+
+        { // dupe, should not insert
+
+            // reset
+            m_bookmarksModel->setSourceData(m_data);
+            int i0 = m_bookmarksModel->rowCount(QModelIndex());
+
+            QJsonObject u;
+            u.insert(m_bookmarksModel->key(UrlModel::url), QStringLiteral("http://plasma-mobile.org"));
+            u.insert(m_bookmarksModel->key(UrlModel::title), QStringLiteral("Plasma Mobile"));
+            u.insert(m_bookmarksModel->key(UrlModel::icon), QStringLiteral("plasma"));
+            u.insert(m_bookmarksModel->key(UrlModel::bookmarked), true);
+            u.insert(m_bookmarksModel->key(UrlModel::lastVisited), QDateTime::currentDateTime().toString(Qt::ISODate));
+
+            m_bookmarksModel->add(u);
+            int i2 = m_bookmarksModel->rowCount(QModelIndex());
+            QCOMPARE(i0, i2);
+
+            QJsonArray copy = m_data;
+            copy << u;
+            QCOMPARE(copy.count() - 1, m_bookmarksModel->rowCount(QModelIndex()));
+            //QVERIFY(!compare(copy, m_bookmarksModel));
+        }
     };
 
     void testRemove() {
