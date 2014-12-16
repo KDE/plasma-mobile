@@ -51,6 +51,10 @@ Item {
     width: 1080 / 2
     height: (1920 / 2) - 96
 
+//     BrowserManager {
+//         id: browserManager
+//     }
+//
     WebEngineView {
         id: webEngineView
 
@@ -60,6 +64,8 @@ Item {
         url: "http://localhost"
         property string errorCode: ""
         property string errorString: ""
+
+        property var pageInfo
 
 
         anchors {
@@ -88,6 +94,9 @@ Item {
             if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
                 // record history, set current page info
                 //contentView.state = "hidden"
+                pageInfo.url = webEngineView.url;
+                pageInfo.title = webEngineView.title;
+                pageInfo.icon = webEngineView.icon;
 
             }
             if (loadRequest.status == WebEngineView.LoadFailedStatus) {

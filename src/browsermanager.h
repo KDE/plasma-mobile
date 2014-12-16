@@ -45,7 +45,8 @@ public:
     BrowserManager(QObject *parent = 0);
     ~BrowserManager();
 
-    QAbstractListModel* bookmarks();
+    UrlModel* bookmarks();
+
 
 Q_SIGNALS:
     void updated();
@@ -53,6 +54,8 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     void reload();
+    void addBookmark(const QVariantMap &bookmarkdata);
+    void removeBookmark(const QString &url);
 
 private:
 

@@ -96,10 +96,33 @@ MouseArea {
         anchors {
             left: urlIcon.right
             leftMargin: units.largeSpacing / 2
-            right: parent.right
+            right: removeIcon.left
             top: urlIcon.verticalCenter
             bottom: parent.bottom
             //margins: units.smallSpacing
         }
     }
+
+    PlasmaCore.IconItem {
+        id: removeIcon
+
+        width: height
+        source: "list-remove"
+        visible: bookmarked
+
+        anchors {
+            right: parent.right
+            top: parent.top
+            topMargin: units.gridUnit / 2
+            bottomMargin: units.gridUnit / 2
+            bottom: parent.bottom
+            margins: units.smallSpacing
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: browserManager.removeBookmark(url);
+        }
+    }
+
+
 }

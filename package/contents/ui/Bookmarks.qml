@@ -43,7 +43,7 @@ Item {
         spacing: units.smallSpacing
         interactive: height < contentHeight
 
-        model: bookmarksManager.bookmarks
+        model: browserManager.bookmarks
 
         delegate: UrlDelegate { }
     }

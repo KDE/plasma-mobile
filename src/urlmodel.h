@@ -51,7 +51,7 @@ public:
     bool load();
     bool save();
 
-    void add(const QString &url);
+    void add(const QJsonObject &data);
     void remove(const QString &url);
 
     virtual QHash<int, QByteArray> roleNames() const;

@@ -102,8 +102,12 @@ ColumnLayout {
 
             onTriggered: {
                 print("Adding bookmark");
-                var request;// FIXME
-                //browserManager.addBookmark(request);
+                var request = new Object;// FIXME
+                request.url = webEngineView.url;
+                request.title = webEngineView.title;
+                request.icon = webEngineView.icon;
+                request.bookmarked = true;
+                browserManager.addBookmark(request);
                 options.state = "hidden"
 
             }

@@ -42,7 +42,7 @@ void BrowserManager::reload()
     qDebug() << "BookmarksManager::reload()";
 }
 
-QAbstractListModel* BrowserManager::bookmarks()
+UrlModel* BrowserManager::bookmarks()
 {
     qDebug() << "BookmarksManager::bookmarks()";
     if (!m_bookmarks) {
@@ -50,4 +50,18 @@ QAbstractListModel* BrowserManager::bookmarks()
         m_bookmarks->load();
     }
     return m_bookmarks;
+}
+
+void BrowserManager::addBookmark(const QVariantMap& bookmarkdata)
+{
+    qDebug() << "Add bookmark";
+    qDebug() << "      data: " << bookmarkdata;
+    bookmarks()->add(QJsonObject::fromVariantMap(bookmarkdata));
+    bookmarks()->save();
+}
+
+void BrowserManager::removeBookmark(const QString& url)
+{
+    bookmarks()->remove(url);
+    bookmarks()->save();
 }

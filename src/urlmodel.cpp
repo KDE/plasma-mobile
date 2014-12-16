@@ -105,6 +105,12 @@ void UrlModel::update()
     if (m_data.size() <= 0) {
         return;
     }
+    beginResetModel();
+    endResetModel();
+    //emit QAbstractItemModel::modelReset();
+//     auto topleft = index(0);
+//     auto bottomright = index(rowCount(topleft));
+//     emit dataChanged(topleft, bottomright);
 }
 
 QString UrlModel::filePath() const
@@ -164,11 +170,10 @@ bool UrlModel::save()
     const QFileInfo fi(m_fileName);
     if (!fi.isAbsolute()) {
         destfile = destdir + m_fileName;
-    } else {
-        if (!dir.mkpath(".")) {
-            qDebug() << "Destdir doesn't exist and I can't create it: " << destdir;
-            return false;
-        }
+    }
+    if (!dir.mkpath(".")) {
+        qDebug() << "Destdir doesn't exist and I can't create it: " << destdir;
+        return false;
     }
 
     QFile file(destfile);
@@ -179,7 +184,7 @@ bool UrlModel::save()
 
     file.write(jdoc.toJson());
 //     file.write(jdoc.toBinaryData());
-    qWarning() << "Wrote " << destfile << " (" << urls.count() << " urls)";
+    qWarning() << "Wrote " << destfile << " (" << urls.count() << " urls) " << jdoc.toJson();
 
     return true;
 }
@@ -189,9 +194,10 @@ QString UrlModel::key(int role) const
     return QString::fromLocal8Bit(m_roleNames[role]);
 }
 
-void UrlModel::add(const QString& url)
+void UrlModel::add(const QJsonObject &data)
 {
-
+    m_data.append(data);
+    update();
 }
 
 void UrlModel::remove(const QString& url)
