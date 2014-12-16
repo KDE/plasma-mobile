@@ -84,6 +84,7 @@ Item {
             var es = "";
             //print("Load: " + loadRequest.errorCode + " " + loadRequest.errorString);
             if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
+                // record history, set current page info
 
             }
             if (loadRequest.status == WebEngineView.LoadFailedStatus) {
@@ -151,9 +152,6 @@ Item {
         errorCode: currentWebView.errorCode
         errorString: currentWebView.errorString
 
-        //width: Math.min(webBrowser.width, units.gridUnit * 40)
-        //height: Math.min(webBrowser.height, units.gridUnit * 6)
-
         anchors {
             top: navigation.bottom
             left: parent.left
@@ -161,14 +159,22 @@ Item {
         }
     }
 
+    MouseArea {
+        id: optionsDismisser
+        visible: options.state != "hidden"
+        onClicked: options.state = "hidden"
+        anchors.fill: parent
+    }
+
     Options {
         id: options
-        expandedHeight: Math.round(parent.height * 0.7)
+
+        //expandedHeight: Math.round(parent.height * 0.7)
+        //expandedWidth: Math.min(parent.width - units.gridUnit * 2, units.gridUnit * 20)
+
         anchors {
             top: navigation.bottom
-            topMargin: -units.gridUnit / 2
-            left: parent.left
-            right: parent.right
+            //right: parent.right
         }
     }
 
@@ -184,6 +190,5 @@ Item {
         }
     }
 
-    Component.onCompleted: bookmarksManager.reload();
-
+    //Component.onCompleted: bookmarksManager.reload();
 }

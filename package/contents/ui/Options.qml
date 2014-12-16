@@ -26,41 +26,53 @@ import QtQuick 2.3
 import QtQuick.Layouts 1.0
 //import QtQuick.Window 2.1
 //import QtQuick.Controls.Private 1.0
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
-Item {
+PlasmaCore.FrameSvgItem {
     id: options
 
-    //state: "hidden"
-    state: "bookmarks"
+    imagePath: "widgets/background"
+
+    state: "hidden"
+    //state: "bookmarks"
 
     property string title: ""
 
     property int expandedHeight: units.gridUnit * 14
+    property int expandedWidth: units.gridUnit * 20
 
     Behavior on height { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
+    Behavior on opacity { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
+    Behavior on x { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }
 
-    Rectangle { anchors.fill: parent; color: theme.backgroundColor; }
+    //height: expandedHeight
+    height: childrenRect.height + options.margins.top + options.margins.bottom + units.gridUnit
+    width: childrenRect.width + options.margins.left + options.margins.right + units.gridUnit/2
+
+    //width: expandedWidth
+    anchors.rightMargin: -options.margins.right
+    //Rectangle { anchors.fill: parent; color: theme.backgroundColor; }
 
     ColumnLayout {
 
         visible: parent.height > 0
         spacing: units.gridUnit
+        x: units.gridUnit
+        y: units.gridUnit
         anchors {
-            fill: parent
+            //fill: parent
             margins: units.gridUnit / 2
         }
+        MouseArea {
+            anchors.fill: parent
+        }
+
         OptionsOverview {
             Layout.fillWidth: true;
         }
-//         PlasmaExtras.Heading {
-//             level: 3
-//             Layout.fillHeight: false
-//             text: options.title
-//             Layout.maximumHeight: options.state == "overview" ? 0 : implicitHeight
-//         }
         Loader {
             id: loader
             Layout.fillHeight: true
@@ -68,16 +80,23 @@ Item {
             //Rectangle { anchors.fill: parent; color: "black"; opacity: 0.1; }
         }
     }
-
+//     NumberAnimation on state {
+//         //loops: Animation.Infinite
+//         from: state == "hidden" ? 0 : 1.0
+//         to: state == "hidden" ? 1.0 : 0.0
+//     }
     states: [
         State {
             name: "hidden"
-            PropertyChanges { target: options; height: 0}
+            PropertyChanges { target: options; opacity: 0.0}
+            PropertyChanges { target: options; x: webBrowser.width}
         },
         State {
             name: "overview"
             PropertyChanges { target: options; title: ""}
-            PropertyChanges { target: options; height: units.gridUnit * 3}
+            //PropertyChanges { target: options; height: units.gridUnit * 3}
+            PropertyChanges { target: options; opacity: 1.0}
+            PropertyChanges { target: options; x: webBrowser.width - expandedWidth + options.margins.right + units.gridUnit * 2}
 
         },
         State {

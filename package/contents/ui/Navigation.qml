@@ -50,7 +50,7 @@ Item {
         visible: navigationShown
 
         spacing: units.smallSpacing
-
+        /*
         PlasmaComponents.ToolButton {
             id: backButton
 
@@ -86,7 +86,7 @@ Item {
             onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
 
         }
-
+        */
         PlasmaComponents.TextField {
             id: urlInput
 
@@ -114,7 +114,7 @@ Item {
         PlasmaComponents.ToolButton {
             id: optionsButton
 
-            property string targetState: "bookmarks"
+            property string targetState: "overview"
 
             Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize

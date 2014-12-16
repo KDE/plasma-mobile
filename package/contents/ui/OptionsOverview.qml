@@ -33,40 +33,102 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 ColumnLayout {
     id: optionsOverview
 
-    property int buttonSize: units.gridUnit * 2
+    property int buttonSize: units.gridUnit * 4
 
     RowLayout {
+        id: layout
+        anchors.fill: parent
+//         anchors.leftMargin: units.gridUnit / 2
+//         anchors.rightMargin: units.gridUnit / 2
+        //visible: navigationShown
 
-        Layout.fillHeight: false
-        Layout.preferredWidth: parent.width
+        spacing: units.smallSpacing
 
         PlasmaComponents.ToolButton {
-            iconSource: "tab-duplicate"
-            Layout.fillWidth: true
+            id: backButton
+
+            Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
-            onClicked: options.state = "tabs"
-            checked: options.state == "tabs"
-            text: i18n("Tabs")
+
+            //enabled: currentWebView.canGoBack
+            iconSource: "go-previous"
+
+            onClicked: currentWebView.goBack()
         }
 
         PlasmaComponents.ToolButton {
-            iconSource: "bookmarks"
-            Layout.fillWidth: true
+            id: forwardButton
+
+            Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
-            onClicked: options.state = "bookmarks"
-            checked: options.state == "bookmarks"
-            text: i18n("Bookmarks")
+
+            enabled: currentWebView.canGoForward
+            iconSource: "go-next"
+
+            onClicked: currentWebView.goForward()
         }
 
         PlasmaComponents.ToolButton {
-            iconSource: "configure"
-            Layout.fillWidth: true
+            id: reloadButton
+
+            Layout.preferredWidth: buttonSize
             Layout.preferredHeight: buttonSize
-            text: i18n("Settings")
-            checked: options.state == "settings"
-            onClicked: options.state = "settings"
+
+            iconSource: currentWebView.loading ? "process-stop" : "view-refresh"
+
+            onClicked: currentWebView.loading ? currentWebView.stop() : currentWebView.reload()
+
         }
+
+        PlasmaComponents.ToolButton {
+            id: bookmarkButton
+
+            Layout.preferredWidth: buttonSize
+            Layout.preferredHeight: buttonSize
+
+            iconSource: currentWebView.loading ? "bookmark-add" : "bookmark-remove"
+
+            onClicked: {
+                var request;
+                browserManager.addBookmark(request);
+            }
+
+        }
+
     }
+
+//     RowLayout {
+//
+//         Layout.fillHeight: false
+//         Layout.preferredWidth: parent.width
+
+    PlasmaComponents.ToolButton {
+        iconSource: "tab-duplicate"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize - units.gridUnit
+        onClicked: options.state = "tabs"
+        checked: options.state == "tabs"
+        text: i18n("Tabs")
+    }
+
+    PlasmaComponents.ToolButton {
+        iconSource: "bookmarks"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize - units.gridUnit
+        onClicked: options.state = "bookmarks"
+        checked: options.state == "bookmarks"
+        text: i18n("Bookmarks")
+    }
+
+    PlasmaComponents.ToolButton {
+        iconSource: "configure"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize - units.gridUnit
+        text: i18n("Settings")
+        checked: options.state == "settings"
+        onClicked: options.state = "settings"
+    }
+//    }
     /*
     PlasmaComponents.ToolButton {
         iconSource: "bookmark-new"
