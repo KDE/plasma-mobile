@@ -40,7 +40,7 @@ Rectangle {
 
     property string title: ""
 
-    property int expandedHeight: units.gridUnit * 10
+    property int expandedHeight: units.gridUnit * 12
     property int expandedWidth: units.gridUnit * 14
 
     Behavior on opacity { NumberAnimation { duration: units.longDuration/2; easing.type: Easing.InOutQuad} }

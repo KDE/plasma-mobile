@@ -45,7 +45,9 @@ Item {
 
         model: browserManager.bookmarks
 
-        delegate: UrlDelegate { }
+        delegate: UrlDelegate {
+            onRemoved: browserManager.removeBookmark(url);
+        }
     }
     Component.onCompleted: print("Bookmarks.qml complete.");
 

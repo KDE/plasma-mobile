@@ -32,6 +32,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 MouseArea {
+    id: urlDelegate
 
     height: units.gridUnit * 3
     width: parent.width
@@ -42,6 +43,8 @@ MouseArea {
         load(url)
         //contentView.state = "hidden"
     }
+
+    signal removed
 
     onPressed: highlight.opacity = 1
     onReleased: highlight.opacity = 0
@@ -108,19 +111,19 @@ MouseArea {
 
         width: height
         source: "list-remove"
-        visible: bookmarked
+        //visible: bookmarked
 
         anchors {
             right: parent.right
             top: parent.top
-            topMargin: units.gridUnit / 2
-            bottomMargin: units.gridUnit / 2
+            topMargin: units.gridUnit
+            bottomMargin: units.gridUnit
             bottom: parent.bottom
             margins: units.smallSpacing
         }
         MouseArea {
             anchors.fill: parent
-            onClicked: browserManager.removeBookmark(url);
+            onClicked: urlDelegate.removed();
         }
     }
 

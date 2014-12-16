@@ -51,6 +51,19 @@ Item {
     width: 1080 / 2
     height: (1920 / 2) - 96
 
+    function addHistoryEntry() {
+        print("Adding history");
+        var request = new Object;// FIXME
+        request.url = webEngineView.url;
+        request.title = webEngineView.title;
+        request.icon = webEngineView.icon;
+        //request.bookmarked = true;
+        browserManager.addToHistory(request);
+        //options.state = "hidden"
+
+    }
+
+
 //     BrowserManager {
 //         id: browserManager
 //     }
@@ -65,7 +78,7 @@ Item {
         property string errorCode: ""
         property string errorString: ""
 
-        property var pageInfo
+        property QtObject pageInfo
 
 
         anchors {
@@ -94,15 +107,17 @@ Item {
             if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
                 // record history, set current page info
                 //contentView.state = "hidden"
-                pageInfo.url = webEngineView.url;
-                pageInfo.title = webEngineView.title;
-                pageInfo.icon = webEngineView.icon;
+                //pageInfo.url = webEngineView.url;
+                //pageInfo.title = webEngineView.title;
+                //pageInfo.icon = webEngineView.icon;
+                addHistoryEntry();
 
             }
             if (loadRequest.status == WebEngineView.LoadFailedStatus) {
                 print("Load failed: " + loadRequest.errorCode + " " + loadRequest.errorString);
                 ec = loadRequest.errorCode;
                 es = loadRequest.errorString;
+                contentView.state = "hidden"
             }
             errorCode = ec;
             errorString = es;
@@ -126,6 +141,19 @@ Item {
             }
         }
         */
+    }
+
+    ErrorHandler {
+        id: errorHandler
+
+        errorCode: currentWebView.errorCode
+        errorString: currentWebView.errorString
+
+        anchors {
+            top: navigation.bottom
+            left: parent.left
+            right: parent.right
+        }
     }
 
     ContentView {
@@ -169,19 +197,6 @@ Item {
             }
         }
 
-    }
-
-    ErrorHandler {
-        id: errorHandler
-
-        errorCode: currentWebView.errorCode
-        errorString: currentWebView.errorString
-
-        anchors {
-            top: navigation.bottom
-            left: parent.left
-            right: parent.right
-        }
     }
 
     MouseArea {

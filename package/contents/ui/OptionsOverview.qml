@@ -151,6 +151,18 @@ ColumnLayout {
     }
 
     OptionButton {
+        icon: "view-history"
+        Layout.fillWidth: true
+        Layout.preferredHeight: buttonSize
+        onTriggered: {
+            contentView.state = "history"
+            options.state = "hidden"
+        }
+        //checked: contentView.state == "bookmarks"
+        text: i18n("History")
+    }
+
+    OptionButton {
         icon: "configure"
         Layout.fillWidth: true
         Layout.preferredHeight: buttonSize
