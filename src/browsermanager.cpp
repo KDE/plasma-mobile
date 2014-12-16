@@ -36,6 +36,8 @@ BrowserManager::BrowserManager(QObject *parent)
 
 BrowserManager::~BrowserManager()
 {
+    history()->save();
+    bookmarks()->save();
 }
 
 void BrowserManager::reload()
@@ -68,13 +70,11 @@ void BrowserManager::addBookmark(const QVariantMap& bookmarkdata)
     qDebug() << "Add bookmark";
     qDebug() << "      data: " << bookmarkdata;
     bookmarks()->add(QJsonObject::fromVariantMap(bookmarkdata));
-    bookmarks()->save();
 }
 
 void BrowserManager::removeBookmark(const QString& url)
 {
     bookmarks()->remove(url);
-    bookmarks()->save();
 }
 
 void BrowserManager::addToHistory(const QVariantMap& pagedata)
@@ -83,13 +83,11 @@ void BrowserManager::addToHistory(const QVariantMap& pagedata)
     qDebug() << "      data: " << pagedata;
     history()->add(QJsonObject::fromVariantMap(pagedata));
     emit historyChanged();
-    history()->save();
 }
 
 void BrowserManager::removeFromHistory(const QString& url)
 {
     history()->remove(url);
     emit historyChanged();
-    history()->save();
 }
 

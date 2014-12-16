@@ -181,7 +181,7 @@ bool UrlModel::save()
 
     file.write(jdoc.toJson());
 //     file.write(jdoc.toBinaryData());
-    qWarning() << "Wrote " << destfile << " (" << urls.count() << " urls) " << jdoc.toJson();
+    qWarning() << "Wrote " << destfile << " (" << urls.count() << " urls) ";// << jdoc.toJson();
 
     return true;
 }
@@ -204,14 +204,12 @@ void UrlModel::add(const QJsonObject &data)
 
 void UrlModel::remove(const QString& url)
 {
-    qDebug() << "Remove: " << url;
     for (int i = 0; i < m_data.count(); i++) {
-        //qDebug() << "U: " << m_data.at(i)[key(UrlModel::url)];
         const QString u = m_data.at(i).toObject()[key(UrlModel::url)].toString();
         if (u == url) {
             int n = m_data.count();
             m_data.removeAt(i);
-            qDebug() << "!!! Removed: " << url << " now" << m_data.count() << " was " << n;
+            //qDebug() << "!!! Removed: " << url << " now" << m_data.count() << " was " << n;
             update();
             return;
         }
