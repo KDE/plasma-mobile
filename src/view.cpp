@@ -72,7 +72,7 @@ View::View(const QString &url, QWindow *parent)
     setSource(QUrl::fromLocalFile(m_package.filePath("mainscript")));
     show();
 
-    QMetaObject::invokeMethod(rootObject(), "load", Q_ARG(QVariant, url));
+    QMetaObject::invokeMethod(rootObject(), "load", Q_ARG(QVariant, BrowserManager::urlFromUserInput(url)));
 
 }
 

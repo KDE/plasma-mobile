@@ -49,7 +49,7 @@ public:
     UrlModel* bookmarks();
     UrlModel* history();
 
-    Q_INVOKABLE QString urlFromUserInput(const QString &input);
+    Q_INVOKABLE static QString urlFromUserInput(const QString &input);
 
 
 Q_SIGNALS:
