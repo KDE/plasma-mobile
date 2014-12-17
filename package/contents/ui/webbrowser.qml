@@ -61,19 +61,26 @@ Item {
 
     }
 
-    Item {
-        id: tabContainer
+//     Item {
+//         id: tabContainer
+//         anchors {
+//             top: navigation.bottom
+//             left: parent.left
+//             right: parent.right
+//             bottom: parent.bottom
+//         }
+//         ListWebView {
+//             id: tabs
+//             anchors.fill: parent
+//         }
+//     }
+    ListWebView {
+        id: tabs
         anchors {
             top: navigation.bottom
-            //top: parent.top
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-        }
-        ListWebView {
-            id: tabs
-            //y: units.gridUnit * 5
-            anchors.fill: parent
         }
     }
 
@@ -95,7 +102,7 @@ Item {
     ContentView {
         id: contentView
         //opacity: state == "hidden"
-        anchors.fill: tabContainer
+        anchors.fill: tabs
         //z: webEngineView.z + 999
     }
 
@@ -105,9 +112,9 @@ Item {
         height: Math.round(units.gridUnit / 4)
 
         anchors {
-            top: tabContainer.top
-            left: tabContainer.left
-            right: tabContainer.right
+            top: tabs.top
+            left: tabs.left
+            right: tabs.right
         }
 
         opacity: currentWebView.loading ? 1 : 0

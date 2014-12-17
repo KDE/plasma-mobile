@@ -56,22 +56,14 @@ Item {
             ShaderEffectSource {
                 id: shaderItem
 
-                hideSource: contentView.state == "tabs"
-                live: false
-                //width: 100; height: 100
+                //live: true
                 anchors.fill: parent
                 anchors.margins: units.gridUnit / 2
-//                 width: itemWidth
-//                 height: itemHeight
+
+                sourceRect: Qt.rect(0, 0, width * 2, height * 2)
 
                 sourceItem: {
                     tabs.itemAt(tabs.pageWidth * index, 0);
-//                     var xpos = (tabs.pageWidth * index);
-//                     print("at xpos: " + xpos + " " + index)
-//                     var ypos = 100;
-//                     var index = tabs.itemAt(xpos, ypos);
-//                     return index;
-
                 }
                 //opacity: tabs.currentIndex == index ? 1 : 0.0
 
@@ -80,7 +72,7 @@ Item {
                     SequentialAnimation {
                         ScriptAction {
                             script: {
-                                print("ANimation start");
+                                print("Animation start");
                                 // switch to tabs
                             }
                         }
@@ -88,7 +80,7 @@ Item {
                         NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
                         ScriptAction {
                             script: {
-                                print("ANimation done");
+                                print("Animation done");
                                 contentView.state = "hidden"
                             }
                         }
@@ -139,6 +131,7 @@ Item {
             height: itemHeight
             PlasmaCore.IconItem {
                 anchors.fill: parent
+                anchors.margins: Math.round(itemHeight / 4)
                 source: "list-add"
             }
             MouseArea {
@@ -147,6 +140,8 @@ Item {
                     tabs.newTab("")
                     //addressBar.forceActiveFocus();
                     //addressBar.selectAll();
+                    tabs.currentIndex = tabs.count - 1;
+                    contentView.state = "bookmarks"
                 }
 
             }

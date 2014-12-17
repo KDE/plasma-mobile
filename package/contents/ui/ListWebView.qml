@@ -30,21 +30,25 @@ import QtWebEngine 1.0
 ListView {
     id: tabs
 
+    // Make sure we don't delete and re-create tabs "randomly"
     cacheBuffer: 10000
+    // Don't animate tab switching, this just feels slow
+    highlightMoveDuration: 0
+    // No horizontal swiping between tabs, disturbs page interaction
+    interactive: false
 
     property int pageHeight: parent.height
     property int pageWidth: parent.width
 
     property alias count: tabsModel.count
 
-    property int itemWidth: units.gridUnit * 8
-    property int itemHeight: units.gridUnit * 6
-
     orientation: Qt.Horizontal
 
     model: ListModel {
         id: tabsModel
         ListElement { pageurl: "http://duckduckgo.com" }
+        ListElement { pageurl: "http://tagesschau.de" }
+        ListElement { pageurl: "http://bbc.co.uk" }
     }
 
     delegate: WebView {

@@ -35,9 +35,9 @@ Rectangle {
     id: contentView
 
     state: "hidden"
-//     state: "tabs"
+
     property string title: ""
-//     state: "bookmarks"
+
     color: theme.backgroundColor
     Rectangle {
         color: "white"
@@ -77,7 +77,7 @@ Rectangle {
     PlasmaExtras.Heading {
         id: heading
 
-        level: 3
+        level: 2
 
         text: contentView.title
         anchors {
@@ -95,13 +95,14 @@ Rectangle {
     PlasmaCore.IconItem {
         id: closeButton
 
-        width: height
+        width: units.gridUnit
+        height: width
         source: "dialog-close"
 
         anchors {
             right: parent.right
             top: parent.top
-            margins: units.gridUnit / 2
+            margins: units.gridUnit
         }
         MouseArea {
             anchors.fill: parent
