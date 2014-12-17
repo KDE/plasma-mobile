@@ -40,9 +40,9 @@ MouseArea {
     //Rectangle { anchors.fill: parent; color: "white"; opacity: 0.5; }
 
     onClicked: {
-//         load(url)
-        tabs.newTab(url)
-        contentView.state = "hidden"
+        load(url)
+//         tabs.newTab(url)
+//         contentView.state = "hidden"
     }
 
     signal removed

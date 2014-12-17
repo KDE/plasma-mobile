@@ -94,7 +94,7 @@ Item {
 
             text: currentWebView.url
 
-            Keys.onReturnPressed: load(text)
+            Keys.onReturnPressed: load(browserManager.urlFromUserInput(text))
         }
 
         Item {

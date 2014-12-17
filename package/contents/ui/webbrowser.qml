@@ -33,14 +33,19 @@ Item {
     id: webBrowser
     objectName: "webBrowser"
 
-    property Item currentWebView: tabs.currentIndex < tabs.count ? tabs.getTab(tabs.currentIndex).item : null
+    //property Item currentWebView: tabs.currentIndex < tabs.count ? tabs.getTab(tabs.currentIndex).item : null
+    property Item currentWebView: tabs.currentIndex < tabs.count ? tabs.currentItem : null
 
+    onCurrentWebViewChanged: {
+        print("Current WebView is now : " + tabs.currentIndex);
+    }
     property int borderWidth: Math.round(units.gridUnit / 18);
     property var borderColor: theme.highlightColor;
 
     function load(url) {
-        //print("Loading url: " + url);
+        print("Loading url: " + url);
         currentWebView.url = url;
+        //tabs.newTab(url)
     }
 
     width: 1080 / 2
@@ -65,7 +70,7 @@ Item {
             right: parent.right
             bottom: parent.bottom
         }
-        TabWebView {
+        ListWebView {
             id: tabs
             //y: units.gridUnit * 5
             anchors.fill: parent

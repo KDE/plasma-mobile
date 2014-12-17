@@ -36,65 +36,97 @@ Item {
     id: tabsRoot
 
     property int itemHeight: Math.round(itemWidth/ 3 * 2)
-    property int itemWidth: width / 3
+    property int itemWidth: (width / 2) - units.gridUnit
 
     //Rectangle { anchors.fill: parent; color: "brown"; opacity: 0.5; }
 
     GridView {
         //columns: 2
         anchors.fill: parent
-        model: tabs.count
+        //model: tabs.count +
+        model: tabs.model
+        //model: 4
         cellWidth: itemWidth
         cellHeight: itemHeight
 
-        delegate: ShaderEffectSource {
-            id: shaderItem
-
-            hideSource: contentView.state == "tabs"
-            live: false
-            //width: 100; height: 100
-            anchors.centerIn: parent
+        delegate: Item {
+            id: tabItem
             width: itemWidth
             height: itemHeight
+            ShaderEffectSource {
+                id: shaderItem
 
-            sourceItem: tabs.getTab(index)
-            opacity: tabs.currentIndex == index ? 1 : 0.0
+                hideSource: contentView.state == "tabs"
+                live: false
+                //width: 100; height: 100
+                anchors.fill: parent
+                anchors.margins: units.gridUnit / 2
+//                 width: itemWidth
+//                 height: itemHeight
+
+                sourceItem: {
+                    tabs.itemAt(tabs.pageWidth * index, 0);
+//                     var xpos = (tabs.pageWidth * index);
+//                     print("at xpos: " + xpos + " " + index)
+//                     var ypos = 100;
+//                     var index = tabs.itemAt(xpos, ypos);
+//                     return index;
+
+                }
+                //opacity: tabs.currentIndex == index ? 1 : 0.0
 
 
-            Behavior on height {
-                SequentialAnimation {
-                    ScriptAction {
-                        script: {
-                            print("ANimation start");
-                            // switch to tabs
+                Behavior on height {
+                    SequentialAnimation {
+                        ScriptAction {
+                            script: {
+                                print("ANimation start");
+                                // switch to tabs
+                            }
                         }
-                    }
-                    NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad }
-                    NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
-                    ScriptAction {
-                        script: {
-                            print("ANimation done");
-                            contentView.state = "hidden"
+                        NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad }
+                        NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
+                        ScriptAction {
+                            script: {
+                                print("ANimation done");
+                                contentView.state = "hidden"
+                            }
                         }
                     }
                 }
+
+                Behavior on width {
+                    NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad}
+
+                }
+
             }
-
-            Behavior on width {
-                NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad}
+            Rectangle {
+                anchors.fill: parent;
+                anchors.margins: units.gridUnit / 4;
+                border.color: theme.textColor;
+                border.width: webBrowser.borderWidth
+                color: "transparent"
+                opacity: 0.3;
 
             }
-
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    print("Switch to tab");
-                    if (shaderItem.width < tabsRoot.width) {
-                        shaderItem.width = currentWebView.width
-                        shaderItem.height = currentWebView.height
+                    print("Switch from " + tabs.currentIndex + "  to tab " + index);
+
+                    tabs.currentIndex = index;
+                    tabs.positionViewAtIndex(index, ListView.Beginning);
+                    //tabs.positionViewAtEnd();
+                    contentView.state = "hidden"
+                    return;
+
+                    if (tabItem.width < tabsRoot.width) {
+//                         tabItem.width = currentWebView.width
+//                         tabItem.height = currentWebView.height
                     } else {
-                        shaderItem.width = itemWidth
-                        shaderItem.height = itemHeight
+                        tabItem.width = itemWidth
+                        tabItem.height = itemHeight
                     }
                 }
 
@@ -112,7 +144,7 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    tabs.createEmptyTab()
+                    tabs.newTab("")
                     //addressBar.forceActiveFocus();
                     //addressBar.selectAll();
                 }
