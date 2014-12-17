@@ -128,6 +128,7 @@ StackView {
 
             PlasmaExtras.ScrollArea {
                 anchors.fill: parent
+                anchors.bottomMargin: Qt.inputMethod.keyboardRectangle.height
                 ListView {
                     id: networkList
                     //header: WirelessApplet { }

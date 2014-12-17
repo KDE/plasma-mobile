@@ -57,6 +57,7 @@ Item {
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
+            bottomMargin: Qt.inputMethod.keyboardRectangle.height
         }
 
         Button {
@@ -149,6 +150,7 @@ Item {
 
     PlasmaExtras.ScrollArea {
         anchors.fill: parent
+        anchors.bottomMargin: Qt.inputMethod.keyboardRectangle.height
         Flickable {
             id: form
             anchors.fill: parent

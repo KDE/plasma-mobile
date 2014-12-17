@@ -70,6 +70,7 @@ Item {
         anchors {
             horizontalCenter: parent.horizontalCenter
             bottom: parent.bottom
+            bottomMargin: Qt.inputMethod.keyboardRectangle.height
         }
         Button {
             text: "Reject"
