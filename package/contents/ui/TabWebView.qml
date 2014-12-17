@@ -30,6 +30,8 @@ TabView {
     id: tabs
 
     //visible: contentView.opacity != 0
+    frameVisible: false
+    tabsVisible: false
 
     function createEmptyTab() {
         var tab = addTab("", tabComponent)
@@ -38,13 +40,20 @@ TabView {
         return tab
     }
 
+    function newTab(url) {
+        var ntab = addTab("", tabComponent);
+        tabs.currentIndex = tabs.count - 1
+        load(url);
+
+    }
+
     anchors.fill: parent
 
     Component.onCompleted: createEmptyTab()
 
-    style: TabViewStyle {
-        tab: Item {}
-    }
+//     style: TabViewStyle {
+//         tab: Item {}
+//     }
 
     Component {
         id: tabComponent
@@ -93,7 +102,7 @@ TabView {
 
             onLoadProgressChanged: {
                 if (loadProgress > 50) {
-                    contentView.state = "hidden";
+                    //contentView.state = "hidden";
                 }
             }
         }

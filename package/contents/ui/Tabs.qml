@@ -26,66 +26,101 @@ import QtQuick 2.3
 
 import QtQuick.Layouts 1.0
 
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.core 2.0 as PlasmaCore
+// import org.kde.plasma.components 2.0 as PlasmaComponents
+// import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 Item {
 
     id: tabsRoot
 
-    Rectangle { anchors.fill: parent; color: "brown"; opacity: 0.5; }
+    property int itemHeight: Math.round(itemWidth/ 3 * 2)
+    property int itemWidth: width / 3
 
-    ShaderEffectSource {
-        id: shaderItem
+    //Rectangle { anchors.fill: parent; color: "brown"; opacity: 0.5; }
 
-        //hideSource: contentView.state == "tabs"
-        live: false
-        //width: 100; height: 100
-        anchors.centerIn: parent
-        width: tabsRoot.width / 2
-        height: Math.round(width * 0.666)
+    GridView {
+        //columns: 2
+        anchors.fill: parent
+        model: tabs.count
+        cellWidth: itemWidth
+        cellHeight: itemHeight
 
-        sourceItem: currentWebView
+        delegate: ShaderEffectSource {
+            id: shaderItem
 
-        Behavior on height {
-            SequentialAnimation {
-                ScriptAction {
-                    script: {
-                        print("ANimation start");
-                        // switch to tabs
+            hideSource: contentView.state == "tabs"
+            live: false
+            //width: 100; height: 100
+            anchors.centerIn: parent
+            width: itemWidth
+            height: itemHeight
+
+            sourceItem: tabs.getTab(index)
+            opacity: tabs.currentIndex == index ? 1 : 0.0
+
+
+            Behavior on height {
+                SequentialAnimation {
+                    ScriptAction {
+                        script: {
+                            print("ANimation start");
+                            // switch to tabs
+                        }
                     }
-                }
-                NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad }
-                NumberAnimation { duration: units.shortDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
-                ScriptAction {
-                    script: {
-                        print("ANimation done");
-                        contentView.state = "hidden"
+                    NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad }
+                    NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
+                    ScriptAction {
+                        script: {
+                            print("ANimation done");
+                            contentView.state = "hidden"
+                        }
                     }
                 }
             }
-        }
 
-        Behavior on width {
-            NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad}
+            Behavior on width {
+                NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad}
 
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                print("Switch to tab");
-                if (shaderItem.width < tabsRoot.width) {
-                    shaderItem.width = tabsRoot.width
-                    shaderItem.height = tabsRoot.height
-                } else {
-                    shaderItem.width = tabsRoot.width / 3
-                    shaderItem.height = shaderItem.width * 0.666
-                }
             }
 
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    print("Switch to tab");
+                    if (shaderItem.width < tabsRoot.width) {
+                        shaderItem.width = currentWebView.width
+                        shaderItem.height = currentWebView.height
+                    } else {
+                        shaderItem.width = itemWidth
+                        shaderItem.height = itemHeight
+                    }
+                }
+
+            }
         }
+
+        footer: Rectangle {
+            color: "white"
+            width: itemWidth
+            height: itemHeight
+            PlasmaCore.IconItem {
+                anchors.fill: parent
+                source: "list-add"
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    tabs.createEmptyTab()
+                    //addressBar.forceActiveFocus();
+                    //addressBar.selectAll();
+                }
+
+            }
+        }
+
+
     }
 
 }

@@ -34,8 +34,8 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 Rectangle {
     id: contentView
 
-    state: "hidden"
-    //state: "tabs"
+//     state: "hidden"
+    state: "tabs"
     property string title: ""
 //     state: "bookmarks"
     color: theme.backgroundColor
@@ -62,7 +62,7 @@ Rectangle {
         id: contentViewLoader
 
         anchors.fill: parent
-        anchors.margins: units.gridUnit / 2
+        //anchors.margins: units.gridUnit / 2
     }
 
 
