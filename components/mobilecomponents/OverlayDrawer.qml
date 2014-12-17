@@ -20,7 +20,7 @@
 import QtQuick 2.1
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.qtextracomponents 2.0
+import org.kde.kquickcontrolsaddons  2.0
 
 
 /**Documented API
@@ -138,6 +138,7 @@ PlasmaComponents.Page {
             }
 
             property int startBrowserFrameX
+            property int startMouseScreenX
             property real oldMouseScreenX
             property bool toggle: false
             property bool startDragging: false
@@ -177,7 +178,7 @@ PlasmaComponents.Page {
                 }
             }
 
-            Item {
+            Rectangle {
                 id: drawerPage
                 anchors {
                     fill: parent
