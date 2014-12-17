@@ -29,6 +29,8 @@ import QtWebEngine 1.0
 TabView {
     id: tabs
 
+    //visible: contentView.opacity != 0
+
     function createEmptyTab() {
         var tab = addTab("", tabComponent)
         // Make sure we have an item immediately, so currentWebView never becomes null

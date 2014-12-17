@@ -35,6 +35,7 @@ Rectangle {
     id: contentView
 
     state: "hidden"
+    //state: "tabs"
     property string title: ""
 //     state: "bookmarks"
     color: theme.backgroundColor
@@ -51,6 +52,11 @@ Rectangle {
             easing.type: Easing.InOutQuad
         }
     }
+    MouseArea {
+        // block intput from arriving in the webview
+        anchors.fill: parent
+        onPressed: mouse.accepted = true;
+    }
 
     Loader {
         id: contentViewLoader
@@ -63,6 +69,7 @@ Rectangle {
     states: [
         State {
             name: "hidden"
+            //PropertyChanges { target: currentWebView; visible: true}
         },
         State {
             name: "history"
@@ -79,6 +86,7 @@ Rectangle {
             name: "tabs"
             PropertyChanges { target: options; title: i18n("Tabs")}
             PropertyChanges { target: contentViewLoader; source: "Tabs.qml"}
+            //PropertyChanges { target: currentWebView; visible: false}
         },
         State {
             name: "settings"

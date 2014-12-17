@@ -31,9 +31,61 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
 Item {
-//    id: options
 
-    Rectangle { anchors.fill: parent; color: "purple"; opacity: 0.5; }
+    id: tabsRoot
 
+    Rectangle { anchors.fill: parent; color: "brown"; opacity: 0.5; }
+
+    ShaderEffectSource {
+        id: shaderItem
+
+        //hideSource: contentView.state == "tabs"
+        live: false
+        //width: 100; height: 100
+        anchors.centerIn: parent
+        width: tabsRoot.width / 2
+        height: Math.round(width * 0.666)
+
+        sourceItem: currentWebView
+
+        Behavior on height {
+            SequentialAnimation {
+                ScriptAction {
+                    script: {
+                        print("ANimation start");
+                        // switch to tabs
+                    }
+                }
+                NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad }
+                NumberAnimation { duration: units.shortDuration; easing.type: Easing.InOutQuad; target: contentView; property: opacity }
+                ScriptAction {
+                    script: {
+                        print("ANimation done");
+                        contentView.state = "hidden"
+                    }
+                }
+            }
+        }
+
+        Behavior on width {
+            NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad}
+
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                print("Switch to tab");
+                if (shaderItem.width < tabsRoot.width) {
+                    shaderItem.width = tabsRoot.width
+                    shaderItem.height = tabsRoot.height
+                } else {
+                    shaderItem.width = tabsRoot.width / 3
+                    shaderItem.height = shaderItem.width * 0.666
+                }
+            }
+
+        }
+    }
 
 }
