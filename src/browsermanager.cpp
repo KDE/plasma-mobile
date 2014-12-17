@@ -22,6 +22,7 @@
 #include "browsermanager.h"
 
 #include <QDebug>
+#include <QUrl>
 
 #include <KDirWatch>
 
@@ -47,7 +48,7 @@ void BrowserManager::reload()
 
 UrlModel* BrowserManager::bookmarks()
 {
-    qDebug() << "BookmarksManager::bookmarks()";
+//     qDebug() << "BookmarksManager::bookmarks()";
     if (!m_bookmarks) {
         m_bookmarks = new UrlModel(QStringLiteral("bookmarks.json"), this);
         m_bookmarks->load();
@@ -57,7 +58,7 @@ UrlModel* BrowserManager::bookmarks()
 
 UrlModel* BrowserManager::history()
 {
-    qDebug() << "BrowserManager::history()";
+//     qDebug() << "BrowserManager::history()";
     if (!m_history) {
         m_history = new UrlModel(QStringLiteral("history.json"), this);
         m_history->load();
@@ -79,8 +80,8 @@ void BrowserManager::removeBookmark(const QString& url)
 
 void BrowserManager::addToHistory(const QVariantMap& pagedata)
 {
-    qDebug() << "Add History";
-    qDebug() << "      data: " << pagedata;
+//     qDebug() << "Add History";
+//     qDebug() << "      data: " << pagedata;
     history()->add(QJsonObject::fromVariantMap(pagedata));
     emit historyChanged();
 }
@@ -89,5 +90,11 @@ void BrowserManager::removeFromHistory(const QString& url)
 {
     history()->remove(url);
     emit historyChanged();
+}
+
+QString BrowserManager::urlFromUserInput(const QString& input)
+{
+    QUrl url = QUrl::fromUserInput(input);
+    return url.toString();
 }
 
