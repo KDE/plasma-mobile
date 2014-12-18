@@ -32,18 +32,57 @@ import QtWebEngine.experimental 1.0
 
 
 GridLayout {
-//    id: options
+    id: settingsPage
     columns: 2
 
-    Rectangle { anchors.fill: parent; color: "green"; opacity: 0.1; }
+    //property alias settings: currentWebView.experimental.settings
+
+    //Rectangle { anchors.fill: parent; color: "green"; opacity: 0.1; }
+
+    //Text { text: "WHere does this go?" }
+
 
     PlasmaComponents.Label {
-        text: "Enable Setting:"
+        text: "Enable javascript:"
         Layout.fillWidth: true
+        Layout.preferredHeight: units.gridUnit * 2
     }
 
-    PlasmaComponents.CheckBox {
+    CheckBox {
+        Layout.preferredHeight: units.gridUnit * 2
+        Layout.preferredWidth: units.gridUnit * 2
+        onCheckedChanged: {
+            var settings = currentWebView.experimental.settings;
+            settings.javascriptEnabled = checked;
+        }
+        Component.onCompleted: {
+            checked = currentWebView.experimental.settings.javascriptEnabled;
+        }
 
+    }
+
+    PlasmaComponents.Label {
+        text: "Load images:"
+        Layout.fillWidth: true
+        Layout.preferredHeight: units.gridUnit * 2
+    }
+
+    CheckBox {
+        Layout.preferredHeight: units.gridUnit * 2
+        Layout.preferredWidth: units.gridUnit * 2
+        onCheckedChanged: {
+            var settings = currentWebView.experimental.settings;
+            settings.autoLoadImages = checked;
+        }
+        Component.onCompleted: {
+            checked = currentWebView.experimental.settings.autoLoadImages;
+        }
+    }
+
+    Item {
+        Layout.fillHeight: true
+//         Layout.preferredHeight: units.gridUnit * 2
+//         Layout.preferredWidth: units.gridUnit * 2
     }
 
 }
