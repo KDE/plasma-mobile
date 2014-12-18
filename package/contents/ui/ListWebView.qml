@@ -48,8 +48,8 @@ ListView {
     model: ListModel {
         id: tabsModel
         ListElement { pageurl: "http://duckduckgo.com" }
-        ListElement { pageurl: "http://tagesschau.de" }
-        ListElement { pageurl: "http://bbc.co.uk" }
+//         ListElement { pageurl: "http://tagesschau.de" }
+//         ListElement { pageurl: "http://bbc.co.uk" }
     }
 
     delegate: WebView {

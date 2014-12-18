@@ -165,6 +165,6 @@ Item {
     }
 
     Component.onCompleted: {
-        contentView.state = "settings";
+        //contentView.state = "settings"; // For testing
     }
 }

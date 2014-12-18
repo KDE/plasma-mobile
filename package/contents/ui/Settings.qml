@@ -35,15 +35,8 @@ GridLayout {
     id: settingsPage
     columns: 2
 
-    //property alias settings: currentWebView.experimental.settings
-
-    //Rectangle { anchors.fill: parent; color: "green"; opacity: 0.1; }
-
-    //Text { text: "WHere does this go?" }
-
-
     PlasmaComponents.Label {
-        text: "Enable javascript:"
+        text: "Enable javascript"
         Layout.fillWidth: true
         Layout.preferredHeight: units.gridUnit * 2
     }
@@ -54,6 +47,7 @@ GridLayout {
         onCheckedChanged: {
             var settings = currentWebView.experimental.settings;
             settings.javascriptEnabled = checked;
+            // FIXME: save to config
         }
         Component.onCompleted: {
             checked = currentWebView.experimental.settings.javascriptEnabled;
@@ -62,7 +56,7 @@ GridLayout {
     }
 
     PlasmaComponents.Label {
-        text: "Load images:"
+        text: "Load images"
         Layout.fillWidth: true
         Layout.preferredHeight: units.gridUnit * 2
     }
@@ -73,6 +67,7 @@ GridLayout {
         onCheckedChanged: {
             var settings = currentWebView.experimental.settings;
             settings.autoLoadImages = checked;
+            // FIXME: save to config
         }
         Component.onCompleted: {
             checked = currentWebView.experimental.settings.autoLoadImages;
@@ -81,8 +76,6 @@ GridLayout {
 
     Item {
         Layout.fillHeight: true
-//         Layout.preferredHeight: units.gridUnit * 2
-//         Layout.preferredWidth: units.gridUnit * 2
     }
 
 }
