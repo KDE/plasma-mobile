@@ -208,8 +208,8 @@ void UrlModel::remove(const QString& url)
     for (int i = 0; i < m_data.count(); i++) {
         const QString u = m_data.at(i).toObject()[key(UrlModel::url)].toString();
         if (u == url) {
-            int n = m_data.count();
             m_data.removeAt(i);
+            //int n = m_data.count();
             //qDebug() << "!!! Removed: " << url << " now" << m_data.count() << " was " << n;
             update();
             return;
