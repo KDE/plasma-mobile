@@ -50,13 +50,13 @@ Button {
         hoverEnabled: true
         anchors.fill: parent
         onPressed: {
-            print("Pressed " + icon)
+            //print("Pressed " + icon)
             isActive = true;
             isPressed = true;
             button.pressed(mouse);
         }
         onReleased: {
-            print("Released TRIGGER!")
+            //print("Released TRIGGER!")
             isActive = false;
             isPressed = false;
             //button.clicked(mouse);
