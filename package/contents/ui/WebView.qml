@@ -40,10 +40,10 @@ WebEngineView {
     //Rectangle { color: "yellow"; opacity: 0.3; anchors.fill: parent }
     focus: true
     onLoadingChanged: { // Doesn't work!?!
-        print("Loading: " + loading);
+        //print("Loading: " + loading);
         print("    url: " + loadRequest.url)
-        print("   icon: " + webEngineView.icon)
-        print("  title: " + webEngineView.title)
+        //print("   icon: " + webEngineView.icon)
+        //print("  title: " + webEngineView.title)
 
         /* Handle
         *  - WebEngineView::LoadStartedStatus,
@@ -55,7 +55,10 @@ WebEngineView {
         var es = "";
         //print("Load: " + loadRequest.errorCode + " " + loadRequest.errorString);
         if (loadRequest.status == WebEngineView.LoadStartedStatus) {
-            contentView.state = "hidden";
+            if (contentView.state != "settings") { // Kludge!
+
+                contentView.state = "hidden";
+            }
         }
         if (loadRequest.status == WebEngineView.LoadSucceededStatus) {
             // record history, set current page info

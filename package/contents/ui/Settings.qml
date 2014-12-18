@@ -20,20 +20,30 @@
  ***************************************************************************/
 
 import QtQuick 2.3
-//import QtQuick.Controls 1.0
-
-//import QtWebEngine 1.0
-
+import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 
-Item {
+import QtWebEngine 1.0
+import QtWebEngine.experimental 1.0
+
+
+GridLayout {
 //    id: options
+    columns: 2
 
-    Rectangle { anchors.fill: parent; color: "green"; opacity: 0.5; }
+    Rectangle { anchors.fill: parent; color: "green"; opacity: 0.1; }
 
+    PlasmaComponents.Label {
+        text: "Enable Setting:"
+        Layout.fillWidth: true
+    }
+
+    PlasmaComponents.CheckBox {
+
+    }
 
 }

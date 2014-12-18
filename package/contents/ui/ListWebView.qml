@@ -25,6 +25,7 @@ import QtQuick.Controls.Styles 1.0
 import QtQml.Models 2.1
 
 import QtWebEngine 1.0
+import QtWebEngine.experimental 1.0
 
 
 ListView {

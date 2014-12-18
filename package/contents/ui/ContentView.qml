@@ -34,6 +34,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 Rectangle {
     id: contentView
 
+    //state: "hidden"
     state: "hidden"
 
     property string title: ""

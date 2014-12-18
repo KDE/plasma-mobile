@@ -33,7 +33,11 @@ Item {
     id: webBrowser
     objectName: "webBrowser"
 
-    //property Item currentWebView: tabs.currentIndex < tabs.count ? tabs.getTab(tabs.currentIndex).item : null
+    /** Pointer to the currently active view.
+     *
+     * Browser-level functionality should use this to refer to the current
+     * view, rather than looking up views in the mode, as far as possible.
+     */
     property Item currentWebView: tabs.currentIndex < tabs.count ? tabs.currentItem : null
 
     onCurrentWebViewChanged: {
@@ -42,6 +46,9 @@ Item {
     property int borderWidth: Math.round(units.gridUnit / 18);
     property var borderColor: theme.highlightColor;
 
+    /**
+     * Load a url in the current tab
+     */
     function load(url) {
         print("Loading url: " + url);
         currentWebView.url = url;
@@ -52,7 +59,7 @@ Item {
     height: (1920 / 2) - 96
 
     function addHistoryEntry() {
-        print("Adding history");
+        //print("Adding history");
         var request = new Object;// FIXME
         request.url = currentWebView.url;
         request.title = currentWebView.title;
@@ -61,19 +68,6 @@ Item {
 
     }
 
-//     Item {
-//         id: tabContainer
-//         anchors {
-//             top: navigation.bottom
-//             left: parent.left
-//             right: parent.right
-//             bottom: parent.bottom
-//         }
-//         ListWebView {
-//             id: tabs
-//             anchors.fill: parent
-//         }
-//     }
     ListWebView {
         id: tabs
         anchors {
@@ -87,8 +81,6 @@ Item {
     ErrorHandler {
         id: errorHandler
 
-        //errorCode: currentWebView.errorCode ? currentWebView.errorCode : ""
-        //errorString: currentWebView.errorString ? currentWebView.errorString : ""
         errorString: currentWebView.errorString
         errorCode: currentWebView.errorCode
 
@@ -101,18 +93,18 @@ Item {
 
     ContentView {
         id: contentView
-        //opacity: state == "hidden"
         anchors.fill: tabs
-        //z: webEngineView.z + 999
     }
 
+    // Container for the progress bar
     Item {
         id: progressItem
 
-        height: Math.round(units.gridUnit / 4)
-
+        height: Math.round(units.gridUnit / 6)
+        z: navigation.z + 1
         anchors {
             top: tabs.top
+            topMargin: -Math.round(height / 2)
             left: tabs.left
             right: tabs.right
         }
@@ -124,15 +116,6 @@ Item {
             color: theme.highlightColor
 
             width: Math.round((currentWebView.loadProgress / 100) * parent.width)
-            /*
-            Connections {
-                target: currentWebView
-                onLoadProgressChanged: {
-                    var w = Math.round((currentWebView.loadProgress / 100) * parent.width);
-                    print("Progress " + currentWebView.loadProgress + " width: " + w);
-                }
-            }
-            */
             anchors {
                 top: parent.top
                 left: parent.left
@@ -142,6 +125,7 @@ Item {
 
     }
 
+    // When clicked outside the menu, hide it
     MouseArea {
         id: optionsDismisser
         visible: options.state != "hidden"
@@ -149,6 +133,7 @@ Item {
         anchors.fill: parent
     }
 
+    // The menu at the top right
     Options {
         id: options
 
@@ -168,6 +153,7 @@ Item {
             right: parent.right
         }
     }
+    // Thin line underneath navigation
     Rectangle {
         height: webBrowser.borderWidth
         color: webBrowser.borderColor
@@ -178,5 +164,7 @@ Item {
         }
     }
 
-    //Component.onCompleted: bookmarksManager.reload();
+    Component.onCompleted: {
+        contentView.state = "settings";
+    }
 }
