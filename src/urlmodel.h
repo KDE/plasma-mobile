@@ -64,7 +64,6 @@ public:
 
     QString filePath() const;
 
-//    QJsonArray m_fakeData; // FIXME: remove
 private:
     QJsonArray m_data;
     QHash<int, QByteArray> m_roleNames;

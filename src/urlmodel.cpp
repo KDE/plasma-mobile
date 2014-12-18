@@ -102,6 +102,7 @@ QVariant UrlModel::data(const QModelIndex &index, int role) const
 
 void UrlModel::update()
 {
+    // FIXME: Can we be more fine-grained, please?
     beginResetModel();
     endResetModel();
     //emit QAbstractItemModel::modelReset();
@@ -215,5 +216,4 @@ void UrlModel::remove(const QString& url)
         }
     }
 }
-
 

@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011-2014 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -17,10 +17,6 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
-
-// std
-// #include <iostream>
-// #include <iomanip>
 
 // Qt
 #include <QGuiApplication>
@@ -75,7 +71,7 @@ int main(int argc, char **argv)
     Plasma::Theme theme;
     qDebug() << "Setting theme, package " << themeName << u;
     theme.setUseGlobalSettings(false);
-    theme.setThemeName(themeName); // nees to happen after setUseGlobalSettings, since that clears themeName
+    theme.setThemeName(themeName); // needs to happen after setUseGlobalSettings, since that clears themeName
 
     auto settingsapp = new AngelFish::View(u);
     if (parser.isSet(fullscreen)) {
