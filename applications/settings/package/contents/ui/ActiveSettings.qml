@@ -236,7 +236,6 @@ Rectangle {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            bottomMargin: units.gridUnit * 3 // FIXME: hack, remove when the app size is correct
         }
         visible: rootItem.compactMode
         opacity: enabled ? 1 : 0

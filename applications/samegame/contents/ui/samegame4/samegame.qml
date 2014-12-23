@@ -99,7 +99,6 @@ Rectangle {
         width: parent.width; height: 100
         color: activePalette.window
         anchors.bottom: screen.bottom
-        anchors.bottomMargin: 200
 
         Button {
             anchors { left: parent.left; verticalCenter: parent.verticalCenter }
