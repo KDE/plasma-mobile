@@ -55,8 +55,8 @@ Item {
         //tabs.newTab(url)
     }
 
-    width: 1080 / 2
-    height: (1920 / 2) - 96
+    width: units.gridUnit * 15
+    height: units.gridUnit * 26
 
     function addHistoryEntry() {
         //print("Adding history");
