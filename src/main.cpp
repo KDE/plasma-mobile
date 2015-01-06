@@ -25,6 +25,7 @@
 #include <QDebug>
 
 // Frameworks
+#include <KAboutData>
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <Plasma/Theme>
@@ -40,7 +41,15 @@ int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
 
-    app.setApplicationVersion(version);
+    KLocalizedString::setApplicationDomain("active-settings");
+
+    // About data
+    KAboutData aboutData("angelfish", i18n("Web Browser"), version, i18n("Touch-friendly web browser."), KAboutLicense::GPL, i18n("Copyright 2015, Sebastian Kügler"));
+    aboutData.addAuthor(i18n("Sebastian Kügler"), i18n("Maintainer"), "sebas@kde.org");
+    KAboutData::setApplicationData(aboutData);
+
+    app.setWindowIcon(QIcon::fromTheme("internet-web-browser"));
+
 
     const static auto _url = QStringLiteral("url");
     QCommandLineOption url = QCommandLineOption(QStringList() << QStringLiteral("u") << _url,
@@ -51,13 +60,13 @@ int main(int argc, char **argv)
                                i18n("Start full-screen"));
 
     QCommandLineParser parser;
-    parser.addVersionOption();
-    parser.setApplicationDescription(description);
-    parser.addHelpOption();
     parser.addOption(url);
     parser.addOption(fullscreen);
 
+    aboutData.setupCommandLine(&parser);
+
     parser.process(app);
+    aboutData.processCommandLine(&parser);
 
     QString u = parser.value(url);
 
