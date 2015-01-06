@@ -31,6 +31,7 @@
 
 #include <KDeclarative/KDeclarative>
 #include <KLocalizedString>
+#include <KWindowSystem>
 
 
 View::View(const QString &module, const QString &package, QWindow *parent)
@@ -109,9 +110,12 @@ void View::setupKDBus()
     QObject::connect(service, &KDBusService::activateRequested, this, [=](const QStringList &arguments, const QString &workingDirectory) {
         qDebug() << "activateRequested" << arguments;
         parser->parse(arguments);
-        const QString module = parser->value("module");
-        qDebug() << "Module" << parser->isSet("module") << module;
-        QMetaObject::invokeMethod(rootObject(), "loadModule", Q_ARG(QVariant, module));
+        if (parser->isSet("module")) {
+            const QString module = parser->value("module");
+            qDebug() << "Loading module:" << module;
+            QMetaObject::invokeMethod(rootObject(), "loadModule", Q_ARG(QVariant, module));
+            KWindowSystem::activateWindow(winId());
+        }
         raise();
     } );
 }

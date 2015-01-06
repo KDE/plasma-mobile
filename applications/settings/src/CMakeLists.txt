@@ -16,6 +16,7 @@ target_link_libraries(active-settings
     KF5::DBusAddons
     KF5::Declarative
     KF5::I18n
+    KF5::WindowSystem
 )
 
 install( TARGETS active-settings ${INSTALL_TARGETS_DEFAULT_ARGS} )
