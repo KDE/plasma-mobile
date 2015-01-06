@@ -160,7 +160,6 @@ QString SettingsComponent::module() const
 
 void SettingsComponent::setModule(const QString &module)
 {
-    qDebug() << "setmo" << module;
     if (d->module != module) {
         d->module = module;
         loadModule(module);
