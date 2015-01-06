@@ -51,6 +51,11 @@ Rectangle {
         }
     }
 
+    function loadModule(mod) {
+        print("Loading module." + mod);
+        rootItem.currentModule = mod;
+        settingsItem.module = mod;
+    }
 
     Image {
         id: appBackground
@@ -220,9 +225,7 @@ Rectangle {
         Component.onCompleted: {
             print("ActiveSettings Completed.");
             if (startModule != "") {
-                print("Loading module." + startModule);
-                rootItem.currentModule = startModule;
-                settingsItem.module = startModule;
+                loadModule(startModule);
             }
         }
     }

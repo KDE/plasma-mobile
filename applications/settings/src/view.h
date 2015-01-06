@@ -22,6 +22,7 @@
 #define VIEW_H
 
 #include <QQuickView>
+#include <QCommandLineParser>
 
 #include <Plasma/Package>
 
@@ -32,6 +33,7 @@ class View : public QQuickView
 public:
     explicit View(const QString &url, const QString &package, QWindow *parent = 0 );
     ~View();
+    QCommandLineParser *parser;
 
 Q_SIGNALS:
     void titleChanged(const QString&);

@@ -105,8 +105,13 @@ void View::setupKDBus()
     qDebug() << "setupKDBus";
     QCoreApplication::setOrganizationDomain("kde.org");
     KDBusService* service = new KDBusService(KDBusService::Unique, this);
-    QObject::connect(service, &KDBusService::activateRequested, this, [=]() {
-        qDebug() << "activateRequested";
+
+    QObject::connect(service, &KDBusService::activateRequested, this, [=](const QStringList &arguments, const QString &workingDirectory) {
+        qDebug() << "activateRequested" << arguments;
+        parser->parse(arguments);
+        const QString module = parser->value("module");
+        qDebug() << "Module" << parser->isSet("module") << module;
+        QMetaObject::invokeMethod(rootObject(), "loadModule", Q_ARG(QVariant, module));
         raise();
     } );
 }
