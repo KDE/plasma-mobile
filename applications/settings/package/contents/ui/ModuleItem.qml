@@ -30,21 +30,12 @@ ActiveSettings.SettingsComponent {
 
     signal moduleLoaded
 
-//     function pushModule(module) {
-//         return;
-//         switcherPackage.name = module
-//         var mainscript = switcherPackage.filePath("mainscript");
-//         //print("Loading mainscript: " + mainscript);
-//         settingsLoader.source = mainscript;
-//         //moduleContainer.push(settingsLoader);
-//         moduleContainer.module = module
-//     }
-//
+    property bool moduleValid: true
+
     Loader {
         id: settingsLoader
         anchors.fill: parent
     }
-
 
     MobileComponents.Package {
         id: switcherPackage
@@ -58,28 +49,20 @@ ActiveSettings.SettingsComponent {
             if (module != "") {
                 switcherPackage.name = module
                 var mainscript = switcherPackage.filePath("mainscript");
-                print("Loading ... " + mainscript);
+                moduleValid = (mainscript != "" || currentModule == "");
+                if (!moduleValid) {
+                    print("Failed to load module: " + module);
+                }
                 settingsLoader.source = mainscript;
-
                 moduleLoaded();
             }
         }
     }
 
-    /*
-    onModuleChanged: {
-        if (module == "") {
-            //moduleContainer.pop();
-            print("empty module");
-        } else if (switcherPackage.name != module) {
-            switcherPackage.name = module
-            var mainscript = switcherPackage.filePath("mainscript");
-            settingsLoader.source = switcherPackage.filePath("mainscript");
-            //moduleContainer.replace(switcherPackage.filePath("mainscript"));
-            print("Loaded mainscript: " + mainscript);
-            //settingsComponent.loading = false;
-            moduleLoaded();
-        }
+    PlasmaComponents.Label {
+        anchors.fill: parent
+        text: i18n("The module \"" + currentModule + "\" failed to load.")
+        wrapMode: Text.WordWrap
+        visible: !moduleValid
     }
-    */
 }

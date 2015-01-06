@@ -214,18 +214,14 @@ Rectangle {
                     left: modulesList.right
                     right: parent.right
                 }
-//                 onModuleChanged: {
-//                     print("settingsItem onModuleChanged:" + module);
-//                     if (rootItem.compactMode) {
-//                         appBackground.x = - rootItem.width
-//                     }
-//                 }
             }
         }
 
         Component.onCompleted: {
             print("ActiveSettings Completed.");
-            if (typeof(startModule) != "undefined") {
+            if (startModule != "") {
+                print("Loading module." + startModule);
+                rootItem.currentModule = startModule;
                 settingsItem.module = startModule;
             }
         }
@@ -245,10 +241,10 @@ Rectangle {
             PlasmaComponents.ToolButton {
                 iconSource: "go-previous"
                 onClicked: {
+                    rootItem.currentModule = "";
                     appBackground.x = 0;
                     //modulesList.currentIndex = -1
-                    rootItem.currentModule = "";
-                    //rootItem.state = "navigation";
+                    rootItem.state = "navigation";
                 }
             }
         }
@@ -262,7 +258,7 @@ Rectangle {
         State {
             name: "navigation"
             when: (compactMode && appBackground.x == 0) || (rootItem.currentModule == "")
-            PropertyChanges { target: rootItem; currentModule: "" }
+            //PropertyChanges { target: rootItem; currentModule: "" }
 //             PropertyChanges { target: moduleItem; opacity: 0.0 }
         },
         State {
