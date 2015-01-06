@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011-2014 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2011-2015 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -30,6 +30,7 @@
 #include <QDebug>
 
 // Frameworks
+#include <KAboutData>
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KService>
@@ -47,7 +48,14 @@ int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
 
-    app.setApplicationVersion(version);
+    KLocalizedString::setApplicationDomain("active-settings");
+
+    // About data
+    KAboutData aboutData("activesettings", i18n("Settings"), version, i18n("Touch-friendly settings application."), KAboutLicense::GPL, i18n("Copyright 2011-2015, Sebastian Kügler"));
+    aboutData.addAuthor(i18n("Sebastian Kügler"), i18n("Maintainer"), "sebas@kde.org");
+    KAboutData::setApplicationData(aboutData);
+
+    app.setWindowIcon(QIcon::fromTheme("preferences-system"));
 
     const static auto _l = QStringLiteral("list");
     const static auto _m = QStringLiteral("module");
@@ -64,15 +72,14 @@ int main(int argc, char **argv)
                                 i18n("Package to use for the UI (default org.kde.active.settings)"), i18n("packagename"));
 
     QCommandLineParser parser;
-    parser.addVersionOption();
-    parser.setApplicationDescription(description);
-    parser.addHelpOption();
     parser.addOption(_list);
     parser.addOption(_module);
     parser.addOption(_fullscreen);
     parser.addOption(_layout);
+    aboutData.setupCommandLine(&parser);
 
     parser.process(app);
+    aboutData.processCommandLine(&parser);
 
     if (parser.isSet(_list)) {
         QString query;
