@@ -41,6 +41,7 @@ private Q_SLOTS:
     void updateStatus();
 
 private:
+    void setupKDBus();
     Plasma::Package m_package;
     QQuickItem* m_settingsRoot;
 };

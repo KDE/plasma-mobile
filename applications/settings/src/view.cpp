@@ -25,6 +25,7 @@
 #include <QQmlEngine>
 #include <QQuickItem>
 
+#include <KDBusService>
 #include <Plasma/Package>
 #include <Plasma/PluginLoader>
 
@@ -57,9 +58,7 @@ View::View(const QString &module, const QString &package, QWindow *parent)
     setIcon(QIcon::fromTheme(m_package.metadata().icon()));
     setTitle(m_package.metadata().name());
 
-    if (!module.isEmpty()) {
-        rootContext()->setContextProperty("startModule", module);
-    }
+    rootContext()->setContextProperty("startModule", module);
 
     const QString qmlFile = m_package.filePath("mainscript");
     //qDebug() << "mainscript: " << QUrl::fromLocalFile(m_package.filePath("mainscript"));
@@ -90,6 +89,7 @@ void View::onStatusChanged(QQuickView::Status status)
             if (!m_settingsRoot) {
                 qWarning() << "settingsRoot component not found. :(";
             }
+            setupKDBus();
         }
     } else if (status == QQuickView::Error) {
         foreach (const QQmlError &e, errors()) {
@@ -98,5 +98,16 @@ void View::onStatusChanged(QQuickView::Status status)
     } else if (status == QQuickView::Loading) {
         //qDebug() << "Loading.";
     }
+}
+
+void View::setupKDBus()
+{
+    qDebug() << "setupKDBus";
+    QCoreApplication::setOrganizationDomain("kde.org");
+    KDBusService* service = new KDBusService(KDBusService::Unique, this);
+    QObject::connect(service, &KDBusService::activateRequested, this, [=]() {
+        qDebug() << "activateRequested";
+        raise();
+    } );
 }
 

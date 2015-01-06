@@ -13,6 +13,7 @@ target_link_libraries(active-settings
     Qt5::Quick
     Qt5::Gui
     KF5::Plasma
+    KF5::DBusAddons
     KF5::Declarative
     KF5::I18n
 )

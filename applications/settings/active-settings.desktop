@@ -116,3 +116,4 @@ Icon=preferences-desktop
 Type=Application
 Categories=Qt;KDE;Settings;X-SuSE-core;Qt;Core;ActiveCore;
 X-KDE-PluginInfo-Website=http://plasma-active.org
+X-DBUS-StartupType=Unique
