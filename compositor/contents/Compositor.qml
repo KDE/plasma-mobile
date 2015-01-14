@@ -68,7 +68,7 @@ Rectangle {
 
     QtObject {
         readonly property alias desktop: desktopLayer
-        readonly property alias windows: windowsLayer
+        readonly property alias windows: windowsLayerBackground
         readonly property alias panel: panelLayer
         readonly property alias keyboard: keyboardLayer
 
@@ -89,36 +89,40 @@ Rectangle {
             bottomMargin: bottomBarHeight
         }
         color: Qt.rgba(0, 0, 0, 0.9)
+        function addWindow (window) {
+            window.parent = windowsLayout
+        }
+        property bool switchMode: windowsZoom.scale < 1
 
-        Flickable {
-            id: windowsLayer
-            anchors {
-                left: parent.left
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-            }
-            height: windowsLayout.height
-            interactive: windowsLayer.switchMode
-            contentWidth: windowsLayout.width * windowsLayout.scale
-            contentHeight: windowsLayout.height
+        Item {
+            id: windowsZoom
+            anchors.fill: parent
+            Flickable {
+                id: windowsLayer
+                anchors.centerIn: parent
 
-            property bool switchMode: windowsLayout.scale < 1
-            function addWindow (window) {
-                window.parent = windowsLayout
-            }
+                flickableDirection: Flickable.HorizontalFlick
+                height: windowsZoom.height * 2
+                width: windowsZoom.width * 2
+                interactive: windowsLayerBackground.switchMode
+                contentWidth: windowsLayout.width
+                contentHeight: windowsLayout.height
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    compositorRoot.state = "homeScreen";
-                }
-                Row {
-                    id: windowsLayout
-                    height: windowsLayerBackground.height
-                    transformOrigin: Item.Left
-                    onChildrenChanged: {
-                        if (children.length == 0) {
-                            compositorRoot.state = "homeScreen";
+                MouseArea {
+                    height: windowsLayer.height
+                    width: windowsLayout.width
+                    onClicked: {
+                        compositorRoot.state = "homeScreen";
+                    }
+                    Row {
+                        id: windowsLayout
+                        anchors.centerIn: parent
+                        height: windowsLayerBackground.height
+                        transformOrigin: Item.Left
+                        onChildrenChanged: {
+                            if (children.length == 0) {
+                                compositorRoot.state = "homeScreen";
+                            }
                         }
                     }
                 }
@@ -151,7 +155,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: compositorRoot.state == "homeScreen" ? 0 : bottomBarHeight
-        color: Qt.rgba(0, 0, 0, 0.9 + 0.1*windowsLayout.scale)
+        color: Qt.rgba(0, 0, 0, 0.9 + 0.1*windowsZoom.scale)
 
         Behavior on height {
             NumberAnimation {
@@ -212,25 +216,27 @@ Rectangle {
             bottom: parent.bottom
         }
         height: 8
-        enabled: windowsLayout.children.length > 0
+        enabled: windowsLayout.children.length > 0 && compositorRoot.state != "switcher"
         property int oldX: 0
         onPressed: {
             oldX = mouse.x;
         }
         onPositionChanged: {
-            compositorRoot.state = "switcher";
+            compositorRoot.state = "changing";
             compositorRoot.showKeyboard = false;
 
             var newScale = (1-Math.abs(mouse.y)/(compositorRoot.height/2))
             if (newScale > 0.3) {
-                windowsLayout.scale = newScale
+                windowsZoom.scale = newScale
             }
             windowsLayer.contentX -= (mouse.x - oldX);
             oldX = mouse.x;
         }
         onReleased: {
-            if (windowsLayout.scale > 0.7) {
+            if (windowsZoom.scale > 0.7) {
                 compositorRoot.state = compositorRoot.currentWindow ? "application" : "homeScreen";
+            } else {
+                compositorRoot.state = "switcher";
             }
         }
     }
@@ -243,7 +249,7 @@ Rectangle {
                 opacity: 0
             }
             PropertyChanges {
-                target: windowsLayout
+                target: windowsZoom
                 scale: 1
             }
         },
@@ -254,12 +260,12 @@ Rectangle {
                 opacity: 1
             }
             PropertyChanges {
-                target: windowsLayout
+                target: windowsZoom
                 scale: 1
             }
             PropertyChanges {
                 target: windowsLayer
-                contentX: compositorRoot.currentWindow ? compositorRoot.currentWindow.x : 0
+                contentX: compositorRoot.currentWindow ? compositorRoot.currentWindow.x - windowsLayerBackground.width/2 : 0
             }
         },
         State {
@@ -269,15 +275,30 @@ Rectangle {
                 opacity: 1
             }
             PropertyChanges {
+                target: windowsZoom
+                scale: 0.5
+            }
+            PropertyChanges {
                 target: windowsLayer
-                contentX: compositorRoot.currentWindow ? compositorRoot.currentWindow.x : 0
+                contentX: compositorRoot.currentWindow ? compositorRoot.currentWindow.x - windowsLayerBackground.width/2 : 0
+            }
+        },
+        State {
+            name: "changing"
+            PropertyChanges {
+                target: windowsLayerBackground
+                opacity: 1
+            }
+            PropertyChanges {
+                target: windowsLayer
+                contentX: compositorRoot.currentWindow ? compositorRoot.currentWindow.x - windowsLayerBackground.width/2 : 0
             }
         }
     ]
 
     transitions: [
         Transition {
-            to: "switcher"
+            to: "changing"
             SequentialAnimation {
                 ScriptAction {
                     script: {
@@ -303,7 +324,7 @@ Rectangle {
                         properties: "opacity"
                     }
                     PropertyAnimation {
-                        target: windowsLayout
+                        target: windowsZoom
                         duration: units.shortDuration
                         easing.type: Easing.InOutQuad
                         properties: "scale"
