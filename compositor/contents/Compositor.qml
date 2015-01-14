@@ -140,7 +140,7 @@ Rectangle {
     Item {
         id: keyboardLayer
         anchors.fill: parent
-        z: 5
+        z: 800
         onVisibleChanged: {
             if (!visible && compositorRoot.shellWindow) {
                 compositorRoot.shellWindow.child.takeFocus();
@@ -303,7 +303,7 @@ Rectangle {
                 ScriptAction {
                     script: {
                         desktopLayer.z = 1
-                        windowsLayerBackground.z = 2
+                        windowsLayerBackground.z = 800
                     }
                 }
                 PropertyAnimation {
@@ -344,7 +344,7 @@ Rectangle {
                             compositorRoot.currentWindow = null;
                         } else {
                             desktopLayer.z = 1;
-                            windowsLayerBackground.z = 2;
+                            windowsLayerBackground.z = 800;
                             if (compositorRoot.currentWindow) {
                                 compositorRoot.currentWindow.child.takeFocus();
                             }
