@@ -11,7 +11,11 @@ Build-Depends: cmake (>= 2.6.3),
                plasma-framework-dev,
                libkf5service-dev, 
                qtdeclarative5-dev,
-               qt5-default
+               systemd,
+               libsystemd-dev,
+               qt5-default,
+               qtwayland,
+               greenisland
 Standards-Version: 3.9.1
 
 Package: plasma-phone-components
@@ -22,7 +26,10 @@ Depends: ${misc:Depends}, ${shlibs:Depends},
          plasma-workspace-wallpapers,
          breeze-icon-theme,
          ttf-oxygen-font-family,
-         libqofono-qt5-0
+         libqofono-qt5-0,
+         qtwayland,
+         systemd,
+         greenisland
 Description: Plasma Phone Components
  This package contains the Plasma Phone components
 

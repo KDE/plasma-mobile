@@ -1,3 +1,21 @@
+plasma-phone-components (0.1+kubuntu1-0ubuntu1~ppaubuntu3) vivid; urgency=medium
+
+  * add systemd to the build depds 
+
+ -- Boudewijn Rempt <boud@kde.org>  Wed, 11 Feb 2015 17:32:07 +0100
+
+plasma-phone-components (0.1+kubuntu1-0ubuntu1~ppaubuntu2) vivid; urgency=medium
+
+  * Try again 
+
+ -- Boudewijn Rempt <boud@kde.org>  Wed, 11 Feb 2015 17:25:39 +0100
+
+plasma-phone-components (0.1+kubuntu1-0ubuntu1~ppaubuntu1) vivid; urgency=medium
+
+  * Add system dependency
+
+ -- Boudewijn Rempt <boud@kde.org>  Wed, 11 Feb 2015 17:21:00 +0100
+
 plasma-phone-components (0.1+kubuntu1-0ubuntu1~ppa) vivid; urgency=medium
 
   * Initial release. 
