@@ -1,7 +1,7 @@
 Source: plasma-phone-components
 Section: kde
 Priority: optional
-Maintainer: Boudewijn Rempt <boud@kde.org>
+Maintainer: Boudewijn Rempt <boud@valdyas.org>
 Build-Depends: cmake (>= 2.6.3),
                debhelper (>= 8.0~),
                pkg-config,
@@ -12,7 +12,6 @@ Build-Depends: cmake (>= 2.6.3),
                libkf5service-dev, 
                qtdeclarative5-dev,
                qt5-default
-#               libqofono-dev
 Standards-Version: 3.9.1
 
 Package: plasma-phone-components
