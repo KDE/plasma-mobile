@@ -41,7 +41,7 @@ endif()
 
 ################# now find all used packages #################
 
-set (QT_MIN_VERSION "5.2.0")
+set (QT_MIN_VERSION "5.4.0")
 
 find_package(KF5 REQUIRED COMPONENTS
     WindowSystem Codecs Archive CoreAddons Solid
