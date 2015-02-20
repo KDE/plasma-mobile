@@ -1,0 +1,45 @@
+[
+    {
+        "bookmarked": true,
+        "icon": "text-html",
+        "lastVisited": "Sat Dec 13 02:29:58 2014",
+        "title": "Nieuws",
+        "url": "http://m.nos.nl"
+    },
+    {
+        "bookmarked": true,
+        "icon": "/home/sebas/Pictures/avatar-small.jpg",
+        "lastVisited": "Sat Dec 13 02:29:58 2014",
+        "preview": "/home/sebas/Pictures/avatar-small.jpg",
+        "title": "sebas' blog",
+        "url": "http://vizZzion.org"
+    },
+    {
+        "bookmarked": true,
+        "icon": "text-html",
+        "lastVisited": "Sat Dec 13 02:29:58 2014",
+        "title": "Linux Weekly News",
+        "url": "http://lwn.net"
+    },
+    {
+        "bookmarked": true,
+        "icon": "text-html",
+        "lastVisited": "Sat Dec 13 02:29:58 2014",
+        "title": "Tweakers.net",
+        "url": "http://tweakers.net"
+    },
+    {
+        "bookmarked": false,
+        "icon": "text-html",
+        "lastVisited": "Sat Dec 13 02:29:58 2014",
+        "title": "Wikipedia",
+        "url": "http://en.wikipedia.org"
+    },
+    {
+        "bookmarked": true,
+        "icon": "plasma",
+        "lastVisited": "Sat Dec 13 02:29:58 2014",
+        "title": "Plasma Mobile",
+        "url": "http://plasma-mobile.org"
+    }
+]
