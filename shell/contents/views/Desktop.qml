@@ -39,6 +39,7 @@ MouseEventListener {
     property Item wallpaper;
     property var pendingRemovals: [];
     property int notificationId: 0;
+    property int buttonHeight: width/4
 
     /*
         Notificadtion data object has the following properties:
@@ -89,7 +90,7 @@ MouseEventListener {
     }
 
     onPressAndHold: {
-        containment.action("configure").trigger();
+      //  containment.action("configure").trigger();
     }
 
     OfonoManager {
@@ -407,121 +408,142 @@ MouseEventListener {
 
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
-        ListView {
-            id: notificationView
-            spacing: units.smallSpacing
-            anchors {
-                top: parent.top
-                bottom: stripe.top
-                left: parent.left
-                right: parent.right
-                bottomMargin: units.smallSpacing
-            }
-
-            z: 1
-            clip: true
-            verticalLayoutDirection: ListView.BottomToTop
-            model: notificationsModel
-            add: Transition {
-                    NumberAnimation {
-                        properties: "x"
-                        from: notificationView.width
-                        duration: 100
-                    }
-                }
-
-            remove: Transition {
-                    NumberAnimation {
-                        properties: "x"
-                        to: notificationView.width
-                        duration: 500
-                    }
-                    NumberAnimation {
-                        properties: "opacity"
-                        to: 0
-                        duration: 500
-                    }
-                }
-
-            removeDisplaced: Transition {
-                SequentialAnimation {
-                    PauseAnimation { duration: 600 }
-                    NumberAnimation { properties: "x,y"; duration: 100 }
-                }
-            }
-
-            delegate: NotificationStripe {}
-        }
-
-        SatelliteStripe {
-            id: stripe
-            z: 1
-
-            PlasmaCore.Svg {
-                id: stripeIcons
-                imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
-            }
-
-            Row {
-                anchors.fill: parent
-                property int columns: 4
-                property alias buttonHeight: stripe.height
-
-                HomeLauncherSvg {
-                    id: phoneIcon
-                    svg: stripeIcons
-                    elementId: "phone"
-                    callback: function() {
-                        dialerOverlay.open()
-                    }
-                }
-
-                HomeLauncherSvg {
-                    id: messagingIcon
-                    svg: stripeIcons
-                    elementId: "messaging"
-                    callback: function() { console.log("Start messaging") }
-                }
-
-
-                HomeLauncherSvg {
-                    id: emailIcon
-                    svg: stripeIcons
-                    elementId: "email"
-                    callback: function() { console.log("Start email") }
-                }
-
-
-                HomeLauncherSvg {
-                    id: webIcon
-                    svg: stripeIcons
-                    elementId: "web"
-                    callback: function() { console.log("Start web") }
-                }
-            }
-        }
+        
 
         SatelliteComponents.ApplicationListModel {
             id: appListModel
         }
 
+        Rectangle {
+            color: Qt.rgba(0, 0, 0, 0.7 * height / homescreen.height)
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            height: Math.min(applications.contentY + homescreen.height, homescreen.height)
+        }
+        Text {
+            text: applications.contentY
+        }
         GridView {
             id: applications
             anchors {
-                top: stripe.bottom
+                top: parent.top
                 bottom: parent.bottom
                 left: parent.left
                 right: parent.right
-                topMargin: units.smallSpacing
             }
             z: 1
-            cellWidth: stripe.height * 2
+            cellWidth: homescreen.buttonHeight
             cellHeight: cellWidth
             model: appListModel
             snapMode: GridView.SnapToRow
             clip: true
+            header: Item {
+                z: 999
+                width: homescreen.width
+                height: homescreen.height
+                ListView {
+                    id: notificationView
+                    spacing: units.smallSpacing
+                    anchors {
+                        bottom: parent.bottom
+                        left: parent.left
+                        right: parent.right
+                        bottomMargin: stripe.height * 2
+                    }
+                    height: contentHeight
+                    interactive: false
+
+                    z: 1
+                    verticalLayoutDirection: ListView.BottomToTop
+                    model: notificationsModel
+
+                    add: Transition {
+                            NumberAnimation {
+                                properties: "x"
+                                from: notificationView.width
+                                duration: 100
+                            }
+                        }
+
+                    remove: Transition {
+                            NumberAnimation {
+                                properties: "x"
+                                to: notificationView.width
+                                duration: 500
+                            }
+                            NumberAnimation {
+                                properties: "opacity"
+                                to: 0
+                                duration: 500
+                            }
+                        }
+
+                    removeDisplaced: Transition {
+                        SequentialAnimation {
+                            PauseAnimation { duration: 600 }
+                            NumberAnimation { properties: "x,y"; duration: 100 }
+                        }
+                    }
+
+                    delegate: NotificationStripe {}
+
+                }
+                SatelliteStripe {
+                    id: stripe
+                    z: 99
+                    y: Math.max(applications.contentY + parent.height, parent.height - height - statusPanel.height)
+
+                    PlasmaCore.Svg {
+                        id: stripeIcons
+                        imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
+                    }
+
+                    Row {
+                        anchors.fill: parent
+                        property int columns: 4
+                        property alias buttonHeight: stripe.height
+
+                        HomeLauncherSvg {
+                            id: phoneIcon
+                            svg: stripeIcons
+                            elementId: "phone"
+                            callback: function() {
+                                dialerOverlay.open()
+                            }
+                        }
+
+                        HomeLauncherSvg {
+                            id: messagingIcon
+                            svg: stripeIcons
+                            elementId: "messaging"
+                            callback: function() { console.log("Start messaging") }
+                        }
+
+
+                        HomeLauncherSvg {
+                            id: emailIcon
+                            svg: stripeIcons
+                            elementId: "email"
+                            callback: function() { console.log("Start email") }
+                        }
+
+
+                        HomeLauncherSvg {
+                            id: webIcon
+                            svg: stripeIcons
+                            elementId: "web"
+                            callback: function() { console.log("Start web") }
+                        }
+                    }
+                }
+            }
             delegate: HomeLauncher {}
             Component.onCompleted : { console.log("WTF " + width) }
+
+            
         }
     }
 

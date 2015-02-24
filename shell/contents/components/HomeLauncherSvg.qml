@@ -21,8 +21,7 @@ Item {
     MouseArea {
         anchors.fill: parent
         propagateComposedEvents: true
-        drag.target: stripe
-        drag.axis: Drag.YAxis
+
         onClicked: {
             if (callback) {
                 callback();
