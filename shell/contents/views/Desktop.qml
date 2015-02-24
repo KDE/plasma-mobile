@@ -30,7 +30,7 @@ import org.kde.kquickcontrolsaddons 2.0
 import MeeGo.QOfono 0.2
 import "../components"
 
-MouseEventListener {
+Item {
     id: homescreen
     width: 1080
     height: 1920
@@ -87,10 +87,6 @@ MouseEventListener {
             pendingRemovals.push(notificationId);
             pendingTimer.start();
         }
-    }
-
-    onPressAndHold: {
-      //  containment.action("configure").trigger();
     }
 
     OfonoManager {
@@ -433,10 +429,14 @@ MouseEventListener {
             model: appListModel
             snapMode: GridView.SnapToRow
             clip: true
-            header: Item {
+            header: MouseArea {
                 z: 999
                 width: homescreen.width
                 height: homescreen.height
+
+                onPressAndHold: {
+                    containment.action("configure").trigger();
+                }
 
                 PlasmaComponents.Label {
                     id: bigClock
