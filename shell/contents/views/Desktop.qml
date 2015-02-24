@@ -312,7 +312,7 @@ Item {
             right: parent.right
         }
         height: units.iconSizes.small
-        z: 1
+        z: 2
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
         Rectangle {
@@ -401,15 +401,10 @@ Item {
     PlasmaCore.ColorScope {
         z: 1
         anchors {
-            top: statusPanel.bottom
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
+            fill: parent
         }
 
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-
-        
 
         SatelliteComponents.ApplicationListModel {
             id: appListModel
@@ -432,7 +427,7 @@ Item {
             header: MouseArea {
                 z: 999
                 width: homescreen.width
-                height: homescreen.height
+                height: homescreen.height - units.iconSizes.medium
 
                 onPressAndHold: {
                     containment.action("configure").trigger();
@@ -504,7 +499,7 @@ Item {
                 SatelliteStripe {
                     id: stripe
                     z: 99
-                    y: Math.max(applications.contentY + parent.height, parent.height - height - statusPanel.height)
+                    y: Math.max(applications.contentY + parent.height, parent.height - height)
 
                     PlasmaCore.Svg {
                         id: stripeIcons

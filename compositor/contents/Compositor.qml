@@ -154,8 +154,8 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        height: compositorRoot.state == "homeScreen" ? 0 : bottomBarHeight
-        color: Qt.rgba(0, 0, 0, 0.9 + 0.1*windowsZoom.scale)
+        height: bottomBarHeight
+        color: Qt.rgba(0, 0, 0, 0.7)
 
         Behavior on height {
             NumberAnimation {
@@ -171,7 +171,28 @@ Rectangle {
                 colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
                 width: units.iconSizes.smallMedium
                 height: width
+                source: "distribute-horizontal-x"
+                enabled: compositorRoot.state != "switcher";
+                opacity: enabled ? 1 : 0.6
+
+                Layout.alignment: Qt.AlignHCenter
+                Layout.preferredWidth: units.iconSizes.medium
+                Layout.preferredHeight: units.iconSizes.medium
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        compositorRoot.state = "switcher";
+                    }
+                }
+            }
+            PlasmaCore.IconItem {
+                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                width: units.iconSizes.smallMedium
+                height: width
                 source: "go-home"
+                enabled: compositorRoot.state != "homeScreen";
+                opacity: enabled ? 1 : 0.6
 
                 Layout.alignment: Qt.AlignHCenter
                 Layout.preferredWidth: units.iconSizes.medium
