@@ -209,7 +209,7 @@ Item {
 
     Rectangle {
         z: 1
-        color: Qt.rgba(0, 0, 0, 0.7 * (Math.min(applications.contentY + homescreen.height, homescreen.height) / homescreen.height))
+        color: Qt.rgba(0, 0, 0, 0.9 * (Math.min(applications.contentY + homescreen.height, homescreen.height) / homescreen.height))
         anchors.fill: parent
     }
 
@@ -317,7 +317,7 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.7)
+            color: Qt.rgba(0, 0, 0, 0.9)
 
             PlasmaCore.IconItem {
                 id: strengthIcon
@@ -398,6 +398,7 @@ Item {
         height: homescreen.height
     }
 
+
     PlasmaCore.ColorScope {
         z: 1
         anchors {
@@ -458,7 +459,7 @@ Item {
                         right: parent.right
                         bottomMargin: stripe.height * 2
                     }
-                    height: contentHeight
+                    height: parent.height / 3
                     interactive: false
 
                     z: 1
@@ -474,17 +475,17 @@ Item {
                         }
 
                     remove: Transition {
-                            NumberAnimation {
-                                properties: "x"
-                                to: notificationView.width
-                                duration: 500
-                            }
-                            NumberAnimation {
-                                properties: "opacity"
-                                to: 0
-                                duration: 500
-                            }
+                        NumberAnimation {
+                            properties: "x"
+                            to: notificationView.width
+                            duration: 500
                         }
+                        NumberAnimation {
+                            properties: "opacity"
+                            to: 0
+                            duration: 500
+                        }
+                    }
 
                     removeDisplaced: Transition {
                         SequentialAnimation {

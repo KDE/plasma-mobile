@@ -155,7 +155,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: bottomBarHeight
-        color: Qt.rgba(0, 0, 0, 0.7)
+        color: Qt.rgba(0, 0, 0, 0.9)
 
         Behavior on height {
             NumberAnimation {
@@ -172,8 +172,8 @@ Rectangle {
                 width: units.iconSizes.smallMedium
                 height: width
                 source: "distribute-horizontal-x"
-                enabled: compositorRoot.state != "switcher";
-                opacity: enabled ? 1 : 0.6
+                enabled: compositorRoot.state != "switcher" && windowsLayout.children.length > 0
+                opacity: enabled ? 1 : 0.2
 
                 Layout.alignment: Qt.AlignHCenter
                 Layout.preferredWidth: units.iconSizes.medium
@@ -192,7 +192,7 @@ Rectangle {
                 height: width
                 source: "go-home"
                 enabled: compositorRoot.state != "homeScreen";
-                opacity: enabled ? 1 : 0.6
+                opacity: enabled ? 1 : 0.2
 
                 Layout.alignment: Qt.AlignHCenter
                 Layout.preferredWidth: units.iconSizes.medium
@@ -211,7 +211,7 @@ Rectangle {
                 height: width
                 source: "window-close"
                 enabled: compositorRoot.currentWindow
-                opacity: enabled ? 1 : 0.6
+                opacity: enabled ? 1 : 0.2
 
                 Layout.alignment: Qt.AlignHCenter
                 Layout.preferredWidth: units.iconSizes.medium
