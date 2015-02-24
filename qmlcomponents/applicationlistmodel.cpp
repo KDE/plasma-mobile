@@ -81,6 +81,9 @@ void ApplicationListModel::loadApplications()
                         KService::Ptr service(static_cast<KService* >(entry.data()));
                         if (service->isApplication()) {
                             KPluginInfo plugin(service);
+                            if (!plugin.isValid()) {
+                                continue;
+                            }
                             data.name = plugin.name();
                             data.icon = plugin.icon();
                             data.storageId = service->storageId();
