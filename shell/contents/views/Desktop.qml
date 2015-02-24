@@ -211,6 +211,12 @@ MouseEventListener {
         }
     }
 
+    Rectangle {
+        z: 1
+        color: Qt.rgba(0, 0, 0, 0.7 * (Math.min(applications.contentY + homescreen.height, homescreen.height) / homescreen.height))
+        anchors.fill: parent
+    }
+
     PlasmaCore.DataSource {
         id: notificationsSource
 
@@ -414,18 +420,6 @@ MouseEventListener {
             id: appListModel
         }
 
-        Rectangle {
-            color: Qt.rgba(0, 0, 0, 0.7 * height / homescreen.height)
-            anchors {
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-            height: Math.min(applications.contentY + homescreen.height, homescreen.height)
-        }
-        Text {
-            text: applications.contentY
-        }
         GridView {
             id: applications
             anchors {

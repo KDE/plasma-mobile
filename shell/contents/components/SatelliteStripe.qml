@@ -1,10 +1,16 @@
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-Rectangle {
-    gradient: Gradient {
-        GradientStop { position: 0.0; color: "#FFEDDF00" }
-        GradientStop { position: 3.0; color: "#00EDDF00" }
+Item {
+    PlasmaCore.FrameSvgItem {
+        z: -1
+        imagePath: "widgets/background"
+        enabledBorders: PlasmaCore.FrameSvgItem.TopBorder | PlasmaCore.FrameSvgItem.BottomBorder
+        anchors {
+            fill: parent
+            topMargin: -margins.top
+            bottomMargin: -margins.bottom
+        }
     }
 
     opacity: 0.6
