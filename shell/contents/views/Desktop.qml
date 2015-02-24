@@ -218,6 +218,12 @@ MouseEventListener {
     }
 
     PlasmaCore.DataSource {
+        id: timeSource
+        engine: "time"
+        connectedSources: ["Local"]
+        interval: 60 * 1000
+    }
+    PlasmaCore.DataSource {
         id: notificationsSource
 
         engine: "notifications"
@@ -316,13 +322,6 @@ MouseEventListener {
         Rectangle {
             anchors.fill: parent
             color: Qt.rgba(0, 0, 0, 0.7)
-
-            PlasmaCore.DataSource {
-                id: timeSource
-                engine: "time"
-                connectedSources: ["Local"]
-                interval: 500
-            }
 
             PlasmaCore.IconItem {
                 id: strengthIcon
@@ -438,6 +437,23 @@ MouseEventListener {
                 z: 999
                 width: homescreen.width
                 height: homescreen.height
+
+                PlasmaComponents.Label {
+                    id: bigClock
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        top: parent.top
+                        bottom: notificationView.top
+                    }
+                    text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
+                    color: PlasmaCore.ColorScope.textColor
+                    horizontalAlignment: Qt.AlignHCenter
+                    verticalAlignment: Qt.AlignVCenter
+                    font.pointSize: 40
+                    style: Text.Raised
+                    styleColor: "black"
+                }
+
                 ListView {
                     id: notificationView
                     spacing: units.smallSpacing
