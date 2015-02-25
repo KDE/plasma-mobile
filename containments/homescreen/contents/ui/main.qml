@@ -17,6 +17,7 @@
  */
 
 import QtQuick 2.1
+import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -34,7 +35,7 @@ Item {
     property int buttonHeight: width/4
 
     Containment.onAppletAdded: {
-        var container = appletContainerComponent.createObject(appletsSpace)
+        var container = appletContainerComponent.createObject(appletsSpace.layout)
         container.visible = true
         print("Applet added: " + applet)
         applet.parent = container
@@ -49,6 +50,22 @@ Item {
         id: appletContainerComponent
         Item {
             property Item applet
+            Layout.fillWidth: true
+            Layout.fillHeight: applet && applet.Layout.fillHeight
+            Layout.onFillHeightChanged: {
+                if (plasmoid.formFactor == PlasmaCore.Types.Vertical) {
+                    checkLastSpacer();
+                }
+            }
+
+            Layout.minimumWidth: root.width
+            Layout.minimumHeight: applet && applet.Layout.minimumHeight > 0 ? applet.Layout.minimumHeight : root.width
+
+            Layout.preferredWidth: root.width
+            Layout.preferredHeight: applet && applet.Layout.preferredHeight > 0 ? applet.Layout.preferredHeight : root.width
+
+            Layout.maximumWidth: root.width
+            Layout.maximumHeight: applet && applet.Layout.maximumHeight > 0 ? applet.Layout.maximumHeight : (Layout.fillHeight ? root.height : root.width)
         }
     }
 
@@ -68,7 +85,7 @@ Item {
                 left: parent.left
                 right: parent.right
             }
-            z: 1
+
             cellWidth: root.buttonHeight
             cellHeight: cellWidth
             model: SatelliteComponents.ApplicationListModel {
@@ -79,6 +96,7 @@ Item {
             delegate: HomeLauncher {}
             header: MouseArea {
                 z: 999
+                property Item layout: mainLayout
                 width: root.width
                 height: root.height - units.iconSizes.medium
 
@@ -86,10 +104,14 @@ Item {
                     containment.action("configure").trigger();
                 }
 
-                /*SatelliteStripe {
+                ColumnLayout {
+                    id: mainLayout
+                    anchors.fill: parent
+                }
+                SatelliteStripe {
                     id: stripe
                     z: 99
-                    y: Math.max(applications.contentY + parent.height, parent.height - height)
+                    y: Math.max(applicationsView.contentY + parent.height, parent.height - height)
 
                     PlasmaCore.Svg {
                         id: stripeIcons
@@ -133,7 +155,7 @@ Item {
                             callback: function() { console.log("Start web") }
                         }
                     }
-                }*/
+                }
             }
         }
     }
