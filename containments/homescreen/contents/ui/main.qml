@@ -27,8 +27,8 @@ import org.kde.satellite.components 0.1 as SatelliteComponents
 
 Item {
     id: root
-    width: 640
-    height: 480
+    width: 480
+    height: 640
 
     property Item toolBox
     property alias appletsSpace: applicationsView.headerItem
@@ -59,13 +59,13 @@ Item {
             }
 
             Layout.minimumWidth: root.width
-            Layout.minimumHeight: applet && applet.Layout.minimumHeight > 0 ? applet.Layout.minimumHeight : root.width
+            Layout.minimumHeight: appletsSpace.layout.children.count > 1 ? Math.max(applet.Layout.minimumHeight, root.height / 2) : root.height
 
             Layout.preferredWidth: root.width
-            Layout.preferredHeight: applet && applet.Layout.preferredHeight > 0 ? applet.Layout.preferredHeight : root.width
+            Layout.preferredHeight: Layout.minimumHeight
 
             Layout.maximumWidth: root.width
-            Layout.maximumHeight: applet && applet.Layout.maximumHeight > 0 ? applet.Layout.maximumHeight : (Layout.fillHeight ? root.height : root.width)
+            Layout.maximumHeight: Layout.minimumHeight
         }
     }
 
@@ -98,7 +98,7 @@ Item {
                 z: 999
                 property Item layout: mainLayout
                 width: root.width
-                height: root.height - units.iconSizes.medium
+                height: Math.max(root.height, (root.height/2) * mainLayout.children.length)
 
                 onPressAndHold: {
                     plasmoid.action("configure").trigger();
