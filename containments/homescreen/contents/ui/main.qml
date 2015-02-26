@@ -101,7 +101,7 @@ Item {
                 height: root.height - units.iconSizes.medium
 
                 onPressAndHold: {
-                    containment.action("configure").trigger();
+                    plasmoid.action("configure").trigger();
                 }
 
                 ColumnLayout {
@@ -128,7 +128,7 @@ Item {
                             svg: stripeIcons
                             elementId: "phone"
                             callback: function() {
-                                dialerOverlay.open()
+                                console.log("Start phone")
                             }
                         }
 
