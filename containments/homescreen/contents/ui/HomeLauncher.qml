@@ -15,12 +15,13 @@ MouseArea {
     PlasmaCore.IconItem {
         id: icon
         anchors.centerIn: parent
-        width: units.iconSizes.large
+        width: parent.height / 2
         height: width
         source: model.ApplicationIconRole
     }
 
     PlasmaComponents.Label {
+        id: label
         visible: text.length > 0
 
         anchors {
@@ -32,6 +33,7 @@ MouseArea {
         wrapMode: Text.WordWrap
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter
+        maximumLineCount: 2
 
         text: model.ApplicationNameRole
         font.pixelSize: theme.smallestFont.pixelSize
