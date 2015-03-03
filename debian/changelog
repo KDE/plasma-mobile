@@ -1,3 +1,9 @@
+plasma-phone-components (0.1+kubuntu1-0ubuntu1~ppa) vivid; urgency=medium
+
+  * bump for Qt 5.4 
+
+ -- Boudewijn Rempt <boud@kde.org>  Tue, 24 Feb 2015 09:19:17 +0000
+
 plasma-phone-components (0.1+kubuntu1-0ubuntu1~ppaubuntu3) vivid; urgency=medium
 
   * add systemd to the build depds 

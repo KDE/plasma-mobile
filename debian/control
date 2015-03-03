@@ -21,7 +21,7 @@ Standards-Version: 3.9.1
 Package: plasma-phone-components
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends},
-         libkf5plasmaquick,
+         libkf5plasmaquick5,
          plasma-workspace,
          plasma-workspace-wallpapers,
          breeze-icon-theme,
