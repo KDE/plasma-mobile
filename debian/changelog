@@ -1,3 +1,9 @@
+plasma-phone-components (0.1+kubuntu1-0ubuntu1~ppaubuntu1) vivid; urgency=medium
+
+  * Follow green island
+
+ -- Boudewijn Rempt <boud@kde.org>  Tue, 03 Mar 2015 13:23:38 +0000
+
 plasma-phone-components (0.1+kubuntu1-0ubuntu1~ppa) vivid; urgency=medium
 
   * bump for Qt 5.4 
