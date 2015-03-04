@@ -30,7 +30,7 @@ import org.kde.kquickcontrolsaddons 2.0
 import MeeGo.QOfono 0.2
 import "../components"
 
-MouseEventListener {
+Item {
     id: homescreen
     width: 1080
     height: 1920
@@ -39,6 +39,7 @@ MouseEventListener {
     property Item wallpaper;
     property var pendingRemovals: [];
     property int notificationId: 0;
+    property int buttonHeight: width/4
 
     /*
         Notificadtion data object has the following properties:
@@ -86,10 +87,6 @@ MouseEventListener {
             pendingRemovals.push(notificationId);
             pendingTimer.start();
         }
-    }
-
-    onPressAndHold: {
-        containment.action("configure").trigger();
     }
 
     OfonoManager {
@@ -210,6 +207,18 @@ MouseEventListener {
         }
     }
 
+    Rectangle {
+        z: 1
+        color: Qt.rgba(0, 0, 0, 0.9 * (Math.min(applications.contentY + homescreen.height, homescreen.height) / homescreen.height))
+        anchors.fill: parent
+    }
+
+    PlasmaCore.DataSource {
+        id: timeSource
+        engine: "time"
+        connectedSources: ["Local"]
+        interval: 60 * 1000
+    }
     PlasmaCore.DataSource {
         id: notificationsSource
 
@@ -303,19 +312,12 @@ MouseEventListener {
             right: parent.right
         }
         height: units.iconSizes.small
-        z: 1
+        z: 2
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
         Rectangle {
             anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.7)
-
-            PlasmaCore.DataSource {
-                id: timeSource
-                engine: "time"
-                connectedSources: ["Local"]
-                interval: 500
-            }
+            color: Qt.rgba(0, 0, 0, 0.9)
 
             PlasmaCore.IconItem {
                 id: strengthIcon
@@ -396,110 +398,14 @@ MouseEventListener {
         height: homescreen.height
     }
 
+
     PlasmaCore.ColorScope {
         z: 1
         anchors {
-            top: statusPanel.bottom
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
+            fill: parent
         }
 
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-
-        ListView {
-            id: notificationView
-            spacing: units.smallSpacing
-            anchors {
-                top: parent.top
-                bottom: stripe.top
-                left: parent.left
-                right: parent.right
-                bottomMargin: units.smallSpacing
-            }
-
-            z: 1
-            clip: true
-            verticalLayoutDirection: ListView.BottomToTop
-            model: notificationsModel
-            add: Transition {
-                    NumberAnimation {
-                        properties: "x"
-                        from: notificationView.width
-                        duration: 100
-                    }
-                }
-
-            remove: Transition {
-                    NumberAnimation {
-                        properties: "x"
-                        to: notificationView.width
-                        duration: 500
-                    }
-                    NumberAnimation {
-                        properties: "opacity"
-                        to: 0
-                        duration: 500
-                    }
-                }
-
-            removeDisplaced: Transition {
-                SequentialAnimation {
-                    PauseAnimation { duration: 600 }
-                    NumberAnimation { properties: "x,y"; duration: 100 }
-                }
-            }
-
-            delegate: NotificationStripe {}
-        }
-
-        SatelliteStripe {
-            id: stripe
-            z: 1
-
-            PlasmaCore.Svg {
-                id: stripeIcons
-                imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
-            }
-
-            Row {
-                anchors.fill: parent
-                property int columns: 4
-                property alias buttonHeight: stripe.height
-
-                HomeLauncherSvg {
-                    id: phoneIcon
-                    svg: stripeIcons
-                    elementId: "phone"
-                    callback: function() {
-                        dialerOverlay.open()
-                    }
-                }
-
-                HomeLauncherSvg {
-                    id: messagingIcon
-                    svg: stripeIcons
-                    elementId: "messaging"
-                    callback: function() { console.log("Start messaging") }
-                }
-
-
-                HomeLauncherSvg {
-                    id: emailIcon
-                    svg: stripeIcons
-                    elementId: "email"
-                    callback: function() { console.log("Start email") }
-                }
-
-
-                HomeLauncherSvg {
-                    id: webIcon
-                    svg: stripeIcons
-                    elementId: "web"
-                    callback: function() { console.log("Start web") }
-                }
-            }
-        }
 
         SatelliteComponents.ApplicationListModel {
             id: appListModel
@@ -508,20 +414,142 @@ MouseEventListener {
         GridView {
             id: applications
             anchors {
-                top: stripe.bottom
+                top: parent.top
                 bottom: parent.bottom
                 left: parent.left
                 right: parent.right
-                topMargin: units.smallSpacing
             }
             z: 1
-            cellWidth: stripe.height * 2
+            cellWidth: homescreen.buttonHeight
             cellHeight: cellWidth
             model: appListModel
             snapMode: GridView.SnapToRow
             clip: true
+            header: MouseArea {
+                z: 999
+                width: homescreen.width
+                height: homescreen.height - units.iconSizes.medium
+
+                onPressAndHold: {
+                    containment.action("configure").trigger();
+                }
+
+                PlasmaComponents.Label {
+                    id: bigClock
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        top: parent.top
+                        bottom: notificationView.top
+                    }
+                    text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
+                    color: PlasmaCore.ColorScope.textColor
+                    horizontalAlignment: Qt.AlignHCenter
+                    verticalAlignment: Qt.AlignVCenter
+                    font.pointSize: 40
+                    style: Text.Raised
+                    styleColor: "black"
+                }
+
+                ListView {
+                    id: notificationView
+                    spacing: units.smallSpacing
+                    anchors {
+                        bottom: parent.bottom
+                        left: parent.left
+                        right: parent.right
+                        bottomMargin: stripe.height * 2
+                    }
+                    height: parent.height / 3
+                    interactive: false
+
+                    z: 1
+                    verticalLayoutDirection: ListView.BottomToTop
+                    model: notificationsModel
+
+                    add: Transition {
+                            NumberAnimation {
+                                properties: "x"
+                                from: notificationView.width
+                                duration: 100
+                            }
+                        }
+
+                    remove: Transition {
+                        NumberAnimation {
+                            properties: "x"
+                            to: notificationView.width
+                            duration: 500
+                        }
+                        NumberAnimation {
+                            properties: "opacity"
+                            to: 0
+                            duration: 500
+                        }
+                    }
+
+                    removeDisplaced: Transition {
+                        SequentialAnimation {
+                            PauseAnimation { duration: 600 }
+                            NumberAnimation { properties: "x,y"; duration: 100 }
+                        }
+                    }
+
+                    delegate: NotificationStripe {}
+
+                }
+                SatelliteStripe {
+                    id: stripe
+                    z: 99
+                    y: Math.max(applications.contentY + parent.height, parent.height - height)
+
+                    PlasmaCore.Svg {
+                        id: stripeIcons
+                        imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
+                    }
+
+                    Row {
+                        anchors.fill: parent
+                        property int columns: 4
+                        property alias buttonHeight: stripe.height
+
+                        HomeLauncherSvg {
+                            id: phoneIcon
+                            svg: stripeIcons
+                            elementId: "phone"
+                            callback: function() {
+                                dialerOverlay.open()
+                            }
+                        }
+
+                        HomeLauncherSvg {
+                            id: messagingIcon
+                            svg: stripeIcons
+                            elementId: "messaging"
+                            callback: function() { console.log("Start messaging") }
+                        }
+
+
+                        HomeLauncherSvg {
+                            id: emailIcon
+                            svg: stripeIcons
+                            elementId: "email"
+                            callback: function() { console.log("Start email") }
+                        }
+
+
+                        HomeLauncherSvg {
+                            id: webIcon
+                            svg: stripeIcons
+                            elementId: "web"
+                            callback: function() { console.log("Start web") }
+                        }
+                    }
+                }
+            }
             delegate: HomeLauncher {}
             Component.onCompleted : { console.log("WTF " + width) }
+
+            
         }
     }
 
