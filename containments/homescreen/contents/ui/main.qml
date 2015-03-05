@@ -59,7 +59,7 @@ Item {
             }
 
             Layout.minimumWidth: root.width
-            Layout.minimumHeight: appletsSpace.layout.children.count > 1 ? Math.max(applet.Layout.minimumHeight, root.height / 2) : root.height
+            Layout.minimumHeight: Math.max(applet.Layout.minimumHeight, root.height / 2)
 
             Layout.preferredWidth: root.width
             Layout.preferredHeight: Layout.minimumHeight
@@ -110,6 +110,10 @@ Item {
                 ColumnLayout {
                     id: mainLayout
                     anchors.fill: parent
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                    }
                 }
                 SatelliteStripe {
                     id: stripe
