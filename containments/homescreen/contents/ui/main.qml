@@ -102,7 +102,7 @@ Item {
                 z: 999
                 property Item layout: mainLayout
                 width: root.width
-                height: Math.max(root.height, (root.height/2) * mainLayout.children.length)
+                height: Math.max(root.height, ((root.height - units.gridUnit * 2)/2) * mainLayout.children.length)
 
                 onPressAndHold: {
                     plasmoid.action("configure").trigger();
@@ -112,7 +112,7 @@ Item {
                     id: mainLayout
                     anchors {
                         fill: parent
-                        bottomMargin: stripe.height
+                        bottomMargin: stripe.height + units.gridUnit * 2
                     }
                     Item {
                         Layout.fillWidth: true
