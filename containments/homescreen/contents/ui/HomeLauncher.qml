@@ -43,13 +43,6 @@ Item {
 
         width: applicationsView.cellWidth
         height: width
-        scale: root.reorderingApps && !drag.target ? 0.6 : 1
-        Behavior on scale {
-            NumberAnimation {
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
 
         states: [
             State {
@@ -116,6 +109,13 @@ Item {
             width: parent.height / 2
             height: width
             source: model.ApplicationIconRole
+            scale: root.reorderingApps && !delegateItem.drag.target ? 0.6 : 1
+            Behavior on scale {
+                NumberAnimation {
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
         }
 
         PlasmaComponents.Label {
