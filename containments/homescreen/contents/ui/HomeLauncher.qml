@@ -4,22 +4,31 @@ import org.kde.kio 1.0 as Kio
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 MouseArea {
-    id: root
+    id: delegateRoot
     width: applicationsView.cellWidth
     height: width
+    scale: root.reorderingApps && !drag.target ? 0.6 : 1
+    Behavior on scale {
+        NumberAnimation {
+            duration: units.shortDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
     onClicked: {
         console.log("Clicked: " + model.ApplicationStorageIdRole)
         appListModel.runApplication(model.ApplicationStorageIdRole)
     }
     onPressAndHold: {
-        root.drag.target = root;
+        delegateRoot.drag.target = delegateRoot;
+        root.reorderingApps = true;
     }
     onReleased: {
-        root.drag.target = null;
+        delegateRoot.drag.target = null;
+        root.reorderingApps = false;
     }
     onPositionChanged: {
-        if (root.drag.target) {
-            appListModel.setOrder(model.ApplicationOriginalRowRole, (Math.round(GridView.view.width / GridView.view.cellWidth) * Math.round(root.y / GridView.view.cellHeight) + Math.round(root.x / GridView.view.cellWidth)));
+        if (delegateRoot.drag.target) {
+            appListModel.setOrder(model.ApplicationOriginalRowRole, (Math.round(GridView.view.width / GridView.view.cellWidth) * Math.round(delegateRoot.y / GridView.view.cellHeight) + Math.round(delegateRoot.x / GridView.view.cellWidth)));
         }
     }
 

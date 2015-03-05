@@ -33,6 +33,7 @@ Item {
     property Item toolBox
     property alias appletsSpace: applicationsView.headerItem
     property int buttonHeight: width/4
+    property bool reorderingApps: false
 
     SatelliteComponents.ApplicationListModel {
         id: appListModel
