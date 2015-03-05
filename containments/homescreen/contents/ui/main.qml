@@ -34,6 +34,10 @@ Item {
     property alias appletsSpace: applicationsView.headerItem
     property int buttonHeight: width/4
 
+    SatelliteComponents.ApplicationListModel {
+        id: appListModel
+    }
+
     Containment.onAppletAdded: {
         var container = appletContainerComponent.createObject(appletsSpace.layout)
         container.visible = true
@@ -88,12 +92,11 @@ Item {
 
             cellWidth: root.buttonHeight
             cellHeight: cellWidth
-            model: PlasmaCore.SortFilterModel {
-                sourceModel: SatelliteComponents.ApplicationListModel {
-                    id: appListModel
-                }
-                sortRole: "ApplicationNameRole"
-            }
+            model: appListModel
+           /* PlasmaCore.SortFilterModel {
+                sourceModel: appListModel
+                sortRole: "ApplicationOrderRole"
+            }*/
             snapMode: GridView.SnapToRow
             //clip: true
             delegate: HomeLauncher {}

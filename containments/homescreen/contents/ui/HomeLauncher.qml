@@ -19,7 +19,7 @@ MouseArea {
     }
     onPositionChanged: {
         if (root.drag.target) {
-            print("New position: " +(Math.round(GridView.view.width / GridView.view.cellWidth) * Math.round(root.y / GridView.view.cellHeight) + Math.round(root.x / GridView.view.cellWidth)))
+            appListModel.setOrder(model.ApplicationOriginalRowRole, (Math.round(GridView.view.width / GridView.view.cellWidth) * Math.round(root.y / GridView.view.cellHeight) + Math.round(root.x / GridView.view.cellWidth)));
         }
     }
 

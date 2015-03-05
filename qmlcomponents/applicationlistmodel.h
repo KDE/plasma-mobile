@@ -32,6 +32,7 @@ struct ApplicationData {
     QString icon;
     QString storageId;
     QString entryPath;
+    int order;
 };
 
 class ApplicationListModel : public QAbstractListModel {
@@ -55,8 +56,12 @@ public:
         ApplicationNameRole = Qt::UserRole + 1,
         ApplicationIconRole = Qt::UserRole + 2,
         ApplicationStorageIdRole = Qt::UserRole + 3,
-        ApplicationEntryPathRole = Qt::UserRole + 4
+        ApplicationEntryPathRole = Qt::UserRole + 4,
+        ApplicationOrderRole = Qt::UserRole + 5,
+        ApplicationOriginalRowRole  = Qt::UserRole + 6
     };
+
+    Q_INVOKABLE void setOrder(int row, int order);
 
     Q_INVOKABLE void runApplication(const QString &storageId);
 
