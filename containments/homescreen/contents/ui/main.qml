@@ -39,6 +39,20 @@ Item {
         id: appListModel
     }
 
+    Timer {
+        id: autoScrollTimer
+        property bool scrollDown: true
+        repeat: true
+        interval: 10
+        onTriggered: {
+            applicationsView.contentY += scrollDown ? 8 : -8;
+            if (applicationsView.draggingItem) {
+                applicationsView.draggingItem.y += scrollDown ? 8 : -8;
+
+                applicationsView.draggingItem.updateRow();
+            }
+        }
+    }
     Containment.onAppletAdded: {
         var container = appletContainerComponent.createObject(appletsSpace.layout)
         container.visible = true
@@ -91,6 +105,8 @@ Item {
                 left: parent.left
                 right: parent.right
             }
+
+            property Item draggingItem
 
             cellWidth: root.buttonHeight
             cellHeight: cellWidth

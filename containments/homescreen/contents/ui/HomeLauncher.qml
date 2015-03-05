@@ -10,19 +10,25 @@ Item {
 
     property int idx: index
     property int oldIdx: -1
+
+    //animate index change
     onIdxChanged: {
+        if (delegateItem.drag.target != null) {
+            return;
+        }
+
         if (oldIdx < 0) {
             oldIdx = idx;
             return;
         }
+
         delegateItem.x = ((oldIdx % 4) * GridView.view.cellWidth) - ((idx % 4) * GridView.view.cellWidth);
         delegateItem.y = (Math.floor(oldIdx / 4) * GridView.view.cellHeight) - (Math.floor(idx / 4) * GridView.view.cellHeight);
-        if (!delegateItem.drag.target) {
-            translAnim.running = true;
-        }
+
+        translAnim.running = true;
+
         oldIdx = idx;
     }
-
 
     NumberAnimation {
         id: translAnim
@@ -34,22 +40,37 @@ Item {
     }
     MouseArea {
         id: delegateItem
-        property int oldX
-        property int oldY
+
         width: applicationsView.cellWidth
         height: width
         scale: root.reorderingApps && !drag.target ? 0.6 : 1
         Behavior on scale {
             NumberAnimation {
-                duration: units.shortDuration
+                duration: units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
 
-        onXChanged: {
-            oldX = x
-            oldY = y
+        states: [
+            State {
+                when: delegateItem.drag.target != null
+                ParentChange {
+                    target: delegateItem
+                    parent: delegateRoot.parent
+                }
+            }
+        ]
+        function updateRow() {
+            var pos = mapToItem(delegateRoot.parent, 0, 0);
+
+            var newRow = (Math.round(delegateRoot.GridView.view.width / delegateRoot.GridView.view.cellWidth) * Math.round(pos.y / delegateRoot.GridView.view.cellHeight) + Math.round(pos.x / delegateRoot.GridView.view.cellWidth));
+
+            if (model.ApplicationOriginalRowRole != newRow) {
+                appListModel.moveItem(model.ApplicationOriginalRowRole, newRow);
+            }
+
         }
+
         onClicked: {
             console.log("Clicked: " + model.ApplicationStorageIdRole)
             appListModel.runApplication(model.ApplicationStorageIdRole)
@@ -57,20 +78,35 @@ Item {
             oldY = y
         }
         onPressAndHold: {
+            delegateRoot.GridView.view.draggingItem = delegateItem;
             delegateItem.drag.target = delegateItem;
             root.reorderingApps = true;
         }
         onReleased: {
+            delegateRoot.GridView.view.draggingItem = delegateItem;
             delegateItem.drag.target = null;
             root.reorderingApps = false;
 
-            translAnim.running = true
+            translAnim.running = true;
+            autoScrollTimer.running = false;
         }
         onPositionChanged: {
-            if (delegateItem.drag.target) {
-                var pos = mapToItem(delegateRoot.parent, 0, 0);
+            if (!autoScrollTimer.running && delegateItem.drag.target) {
+                updateRow();
 
-                appListModel.moveItem(model.ApplicationOriginalRowRole, (Math.round(delegateRoot.GridView.view.width / delegateRoot.GridView.view.cellWidth) * Math.round(pos.y / delegateRoot.GridView.view.cellHeight) + Math.round(pos.x / delegateRoot.GridView.view.cellWidth)));
+                var screenPos = mapToItem(delegateRoot.GridView.view, 0, 0);
+
+                if (applicationsView.contentY > 0 && screenPos.y < root.height / 4) {
+                    autoScrollTimer.scrollDown = false;
+                    autoScrollTimer.running = true;
+                } else if (!applicationsView.atYEnd && screenPos.y > 3 * (root.height / 4)) {
+                    autoScrollTimer.scrollDown = true;
+                    autoScrollTimer.running = true;
+                } else {
+                    autoScrollTimer.running = false;
+                }
+            } else {
+                autoScrollTimer.running = false;
             }
         }
 
