@@ -70,7 +70,7 @@ Item {
             if (delegateItem.drag.target) {
                 var pos = mapToItem(delegateRoot.parent, 0, 0);
 
-                appListModel.setOrder(model.ApplicationOriginalRowRole, (Math.round(delegateRoot.GridView.view.width / delegateRoot.GridView.view.cellWidth) * Math.round(pos.y / delegateRoot.GridView.view.cellHeight) + Math.round(pos.x / delegateRoot.GridView.view.cellWidth)));
+                appListModel.moveItem(model.ApplicationOriginalRowRole, (Math.round(delegateRoot.GridView.view.width / delegateRoot.GridView.view.cellWidth) * Math.round(pos.y / delegateRoot.GridView.view.cellHeight) + Math.round(pos.x / delegateRoot.GridView.view.cellWidth)));
             }
         }
 

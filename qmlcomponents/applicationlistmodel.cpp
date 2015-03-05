@@ -50,7 +50,6 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
     roleNames[ApplicationIconRole] = "ApplicationIconRole";
     roleNames[ApplicationStorageIdRole] = "ApplicationStorageIdRole";
     roleNames[ApplicationEntryPathRole] = "ApplicationEntryPathRole";
-    roleNames[ApplicationOrderRole] = "ApplicationOrderRole";
     roleNames[ApplicationOriginalRowRole] = "ApplicationOriginalRowRole";
 
     return roleNames;
@@ -89,7 +88,6 @@ void ApplicationListModel::loadApplications()
                             data.icon = plugin.icon();
                             data.storageId = service->storageId();
                             data.entryPath = plugin.entryPath();
-                            data.order = 99;
                             m_applicationList << data;
                         }
                     }
@@ -118,8 +116,6 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         return m_applicationList.at(index.row()).storageId;
     case ApplicationEntryPathRole:
         return m_applicationList.at(index.row()).entryPath;
-    case ApplicationOrderRole:
-        return m_applicationList.at(index.row()).order;
     case ApplicationOriginalRowRole:
         return index.row();
 
@@ -137,7 +133,7 @@ int ApplicationListModel::rowCount(const QModelIndex &parent) const
     return m_applicationList.count();
 }
 
-Q_INVOKABLE void ApplicationListModel::setOrder(int row, int destination)
+Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
 {
     if (row < 0 || destination < 0 || row >= m_applicationList.length() ||
         destination >= m_applicationList.length() || row == destination) {
