@@ -11,6 +11,17 @@ MouseArea {
         console.log("Clicked: " + model.ApplicationStorageIdRole)
         appListModel.runApplication(model.ApplicationStorageIdRole)
     }
+    onPressAndHold: {
+        root.drag.target = root;
+    }
+    onReleased: {
+        root.drag.target = null;
+    }
+    onPositionChanged: {
+        if (root.drag.target) {
+            print("New position: " +(Math.round(GridView.view.width / GridView.view.cellWidth) * Math.round(root.y / GridView.view.cellHeight) + Math.round(root.x / GridView.view.cellWidth)))
+        }
+    }
 
     PlasmaCore.IconItem {
         id: icon
