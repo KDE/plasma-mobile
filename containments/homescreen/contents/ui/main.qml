@@ -88,8 +88,11 @@ Item {
 
             cellWidth: root.buttonHeight
             cellHeight: cellWidth
-            model: SatelliteComponents.ApplicationListModel {
-                id: appListModel
+            model: PlasmaCore.SortFilterModel {
+                sourceModel: SatelliteComponents.ApplicationListModel {
+                    id: appListModel
+                }
+                sortRole: "ApplicationNameRole"
             }
             snapMode: GridView.SnapToRow
             //clip: true
@@ -156,6 +159,10 @@ Item {
                         }
                     }
                 }
+            }
+            footer: Item {
+                width: units. gridUnit * 4
+                height: width
             }
         }
     }
