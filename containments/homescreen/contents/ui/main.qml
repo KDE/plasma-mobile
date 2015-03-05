@@ -82,6 +82,7 @@ Item {
     PlasmaCore.ColorScope {
         anchors.fill: parent
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+
         GridView {
             id: applicationsView
             anchors {
@@ -171,6 +172,16 @@ Item {
             footer: Item {
                 width: units. gridUnit * 4
                 height: width
+            }
+        }
+        PlasmaComponents.ScrollBar {
+            flickableItem: applicationsView
+            opacity: applicationsView.flicking ? 1 : 0
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: units.shortDuration
+                    easing.type: Easing.InOutQuad
+                }
             }
         }
     }
