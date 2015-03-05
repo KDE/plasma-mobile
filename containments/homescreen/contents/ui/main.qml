@@ -94,10 +94,7 @@ Item {
             cellWidth: root.buttonHeight
             cellHeight: cellWidth
             model: appListModel
-           /* PlasmaCore.SortFilterModel {
-                sourceModel: appListModel
-                sortRole: "ApplicationOrderRole"
-            }*/
+
             snapMode: GridView.SnapToRow
             //clip: true
             delegate: HomeLauncher {}
@@ -113,7 +110,10 @@ Item {
 
                 ColumnLayout {
                     id: mainLayout
-                    anchors.fill: parent
+                    anchors {
+                        fill: parent
+                        bottomMargin: stripe.height
+                    }
                     Item {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
