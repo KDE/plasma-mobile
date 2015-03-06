@@ -68,26 +68,23 @@ void ApplicationListModel::loadApplications()
     for(KServiceGroup::List::ConstIterator it = subGroupList.begin();it != subGroupList.end(); it++) {
         KSycocaEntry::Ptr groupEntry = (*it);
 
-        if (groupEntry->isType(KST_KServiceGroup) && groupEntry->name() != "System") {
+        if (groupEntry->isType(KST_KServiceGroup) && groupEntry->name() != "System/" && groupEntry->name() != "Settingsmenu/") {
             KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(groupEntry.data()));
 
             if (!serviceGroup->noDisplay()) {
                 KServiceGroup::List entryGroupList = serviceGroup->entries(true);
 
-                for(KServiceGroup::List::ConstIterator it = entryGroupList.begin();  it != entryGroupList.end(); it++) {
+                for(KServiceGroup::List::ConstIterator it = entryGroupList.begin();  it != entryGroupList.end(); it++) {qWarning()<<"BBBBB"<<(*it)->name();
                     KSycocaEntry::Ptr entry = (*it);
                     ApplicationData data;
-                    if (entry->isType(KST_KService)) {
+
+                    if (entry->property("Exec").isValid()) {
                         KService::Ptr service(static_cast<KService* >(entry.data()));
                         if (service->isApplication()) {
-                            KPluginInfo plugin(service);
-                            if (!plugin.isValid()) {
-                                continue;
-                            }
-                            data.name = plugin.name();
-                            data.icon = plugin.icon();
+                            data.name = service->name();
+                            data.icon = service->icon();
                             data.storageId = service->storageId();
-                            data.entryPath = plugin.entryPath();
+                            data.entryPath = service->exec();
                             m_applicationList << data;
                         }
                     }
