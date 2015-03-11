@@ -91,6 +91,7 @@ Item {
         LayoutManager.layout = appletsSpace.layout;
         LayoutManager.lastSpacer = appletsSpace.lastSpacer;
         LayoutManager.restore();
+        applicationsView.contentY = -root.height;
     }
 
     SatelliteComponents.ApplicationListModel {
@@ -166,10 +167,10 @@ Item {
             delegate: HomeLauncher {}
             header: MouseArea {
                 z: 999
-                property Item layout: mainLayout
+                property Item layout: appletsLayout
                 property Item lastSpacer: spacer
                 width: root.width
-                height: Math.max(root.height, ((root.height - units.gridUnit * 2)/2) * mainLayout.children.length)
+                height: mainLayout.Layout.minimumHeight + stripe.height + units.gridUnit * 2
 
                 onPressAndHold: {
                     plasmoid.action("configure").trigger();
@@ -182,9 +183,36 @@ Item {
                         bottomMargin: stripe.height + units.gridUnit * 2
                     }
                     Item {
-                        id: spacer
                         Layout.fillWidth: true
-                        Layout.fillHeight: true
+                        Layout.minimumHeight: root.height
+                        PlasmaCore.IconItem {
+                            source: "go-up"
+                            width: units.iconSizes.huge
+                            height: width
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                                bottom: parent.bottom
+                            }
+                        }
+                    }
+                    Rectangle {
+                        color: Qt.rgba(0, 0, 0, 0.6)
+                        Layout.fillWidth: true
+                        Layout.minimumHeight: root.height
+                        PlasmaComponents.Label {
+                            anchors.centerIn: parent
+                            text: "Settings Area"
+                            font.pointSize: 20
+                        }
+                    }
+                    ColumnLayout {
+                        id: appletsLayout
+                        Layout.minimumHeight: Math.max(root.height, Layout.preferredHeight)
+                        Item {
+                            id: spacer
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                        }
                     }
                 }
                 SatelliteStripe {
