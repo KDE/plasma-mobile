@@ -25,6 +25,8 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 import org.kde.satellite.components 0.1 as SatelliteComponents
 
+import "plasmapackage:/code/LayoutManager.js" as LayoutManager
+
 Item {
     id: root
     width: 480
@@ -34,6 +36,62 @@ Item {
     property alias appletsSpace: applicationsView.headerItem
     property int buttonHeight: width/4
     property bool reorderingApps: false
+
+    Containment.onAppletAdded: {
+        addApplet(applet, x, y);
+        LayoutManager.save();
+    }
+
+    function addApplet(applet, x, y) {
+        var container = appletContainerComponent.createObject(appletsSpace.layout)
+        container.visible = true
+        print("Applet added: " + applet)
+
+        var appletWidth = applet.width;
+        var appletHeight = applet.height;
+        applet.parent = container;
+        container.applet = applet;
+        applet.anchors.fill = container;
+        applet.visible = true;
+        container.visible = true;
+
+        // If the provided position is valid, use it.
+        if (x >= 0 && y >= 0) {
+            var index = LayoutManager.insertAtCoordinates(container, x , y);
+
+        // Fall through to determining an appropriate insert position.
+        } else {
+            var before = null;
+            container.animationsEnabled = false;
+
+            if (appletsSpace.lastSpacer.parent === appletsSpace.layout) {
+                before = appletsSpace.lastSpacer;
+            }
+
+            if (before) {
+                LayoutManager.insertBefore(before, container);
+
+            // Fall through to adding at the end.
+            } else {
+                container.parent = appletsSpace.layout;
+            }
+
+            //event compress the enable of animations
+            //startupTimer.restart();
+        }
+
+        if (applet.Layout.fillWidth) {
+            appletsSpace.lastSpacer.parent = root;
+        }
+    }
+
+    Component.onCompleted: {
+        LayoutManager.plasmoid = plasmoid;
+        LayoutManager.root = root;
+        LayoutManager.layout = appletsSpace.layout;
+        LayoutManager.lastSpacer = appletsSpace.lastSpacer;
+        LayoutManager.restore();
+    }
 
     SatelliteComponents.ApplicationListModel {
         id: appListModel
@@ -53,21 +111,12 @@ Item {
             }
         }
     }
-    Containment.onAppletAdded: {
-        var container = appletContainerComponent.createObject(appletsSpace.layout)
-        container.visible = true
-        print("Applet added: " + applet)
-        applet.parent = container
-        container.applet = applet
-        applet.anchors.fill = applet.parent
-        applet.visible = true
-        container.width = 500
-        container.height = 500
-    }
 
     Component {
         id: appletContainerComponent
         Item {
+            //not used yet
+            property bool animationsEnabled: false
             property Item applet
             Layout.fillWidth: true
             Layout.fillHeight: applet && applet.Layout.fillHeight
@@ -118,6 +167,7 @@ Item {
             header: MouseArea {
                 z: 999
                 property Item layout: mainLayout
+                property Item lastSpacer: spacer
                 width: root.width
                 height: Math.max(root.height, ((root.height - units.gridUnit * 2)/2) * mainLayout.children.length)
 
@@ -132,6 +182,7 @@ Item {
                         bottomMargin: stripe.height + units.gridUnit * 2
                     }
                     Item {
+                        id: spacer
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                     }
@@ -200,9 +251,5 @@ Item {
                 }
             }
         }
-    }
-
-    Component.onCompleted: {
-        print("root Containment loaded")
     }
 }
