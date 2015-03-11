@@ -74,7 +74,7 @@ void ApplicationListModel::loadApplications()
             if (!serviceGroup->noDisplay()) {
                 KServiceGroup::List entryGroupList = serviceGroup->entries(true);
 
-                for(KServiceGroup::List::ConstIterator it = entryGroupList.begin();  it != entryGroupList.end(); it++) {qWarning()<<"BBBBB"<<(*it)->name();
+                for(KServiceGroup::List::ConstIterator it = entryGroupList.begin();  it != entryGroupList.end(); it++) {
                     KSycocaEntry::Ptr entry = (*it);
                     ApplicationData data;
 
