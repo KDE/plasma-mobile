@@ -163,6 +163,27 @@ Item {
             model: appListModel
 
             snapMode: GridView.SnapToRow
+
+            onFlickingChanged: {
+                if (!draggingVertically && contentY < -root.height*2) {
+                    scrollAnim.to = Math.round(contentY/root.height) * root.height
+                    scrollAnim.running = true;
+                }
+            }
+            onDraggingVerticallyChanged: {
+                if (!draggingVertically && contentY < -root.height*2) {
+                    scrollAnim.to = Math.round(contentY/root.height) * root.height
+                    scrollAnim.running = true;
+                }
+            }
+            NumberAnimation {
+                id: scrollAnim
+                target: applicationsView
+                properties: "contentY"
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+
             //clip: true
             delegate: HomeLauncher {}
             header: MouseArea {
@@ -170,7 +191,7 @@ Item {
                 property Item layout: appletsLayout
                 property Item lastSpacer: spacer
                 width: root.width
-                height: mainLayout.Layout.minimumHeight + stripe.height + units.gridUnit * 2
+                height: mainLayout.Layout.minimumHeight 
 
                 onPressAndHold: {
                     plasmoid.action("configure").trigger();
@@ -185,7 +206,15 @@ Item {
                     Item {
                         Layout.fillWidth: true
                         Layout.minimumHeight: root.height
+                        Clock {
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                                bottom: goUp.top
+                                margins: units.largeSpacing
+                            }
+                        }
                         PlasmaCore.IconItem {
+                            id: goUp
                             source: "go-up"
                             width: units.iconSizes.huge
                             height: width
@@ -207,7 +236,7 @@ Item {
                     }
                     ColumnLayout {
                         id: appletsLayout
-                        Layout.minimumHeight: Math.max(root.height, Layout.preferredHeight)
+                        Layout.minimumHeight: Math.max(root.height, Math.round(Layout.preferredHeight / root.height) * root.height)
                         Item {
                             id: spacer
                             Layout.fillWidth: true
