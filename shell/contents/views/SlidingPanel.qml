@@ -52,7 +52,7 @@ Window {
 
     MouseArea {
         id: mouseArea
-        y: units.iconSizes.small
+        y: 0
         width: window.width
         height: window.height - y
         clip: true
@@ -105,15 +105,7 @@ Window {
                     }
                 }
                 color: PlasmaCore.ColorScope.backgroundColor
-                Rectangle {
-                    height: units.smallSpacing/2
-                    color: PlasmaCore.ColorScope.highlightColor
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        bottom: parent.bottom
-                    }
-                }
+
                 Rectangle {
                     height: units.gridUnit
                     anchors {

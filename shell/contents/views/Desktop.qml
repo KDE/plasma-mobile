@@ -204,7 +204,13 @@ Item {
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
         Rectangle {
-            anchors.fill: parent
+            parent: slidingPanel.visible ? panelContents : statusPanel
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            height: units.iconSizes.small
             color: PlasmaCore.ColorScope.backgroundColor
 
             PlasmaCore.IconItem {
@@ -263,6 +269,15 @@ Item {
                     }
                 }
             }
+            Rectangle {
+                height: units.smallSpacing/2
+                color: PlasmaCore.ColorScope.highlightColor
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+            }
         }
         MouseArea {
             property int oldMouseY: 0
@@ -288,6 +303,10 @@ Item {
         id: slidingPanel
         width: homescreen.width
         height: homescreen.height
+        contents: Item {
+            id: panelContents
+            anchors.fill: parent
+        }
     }
 
     Component.onCompleted: {
