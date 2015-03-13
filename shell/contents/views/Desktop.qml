@@ -55,13 +55,6 @@ Item {
         }
     }
 
-    PlasmaCore.DataSource {
-        id: timeSource
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 60 * 1000
-    }
-
     OfonoManager {
         id: ofonoManager
         onAvailableChanged: {
@@ -102,39 +95,6 @@ Item {
     OfonoSimManager {
         id: ofonoSimManager
         modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
-    }
-
-    OfonoNetworkRegistration {
-        id: netreg
-        Component.onCompleted: {
-            netreg.scan()
-            updateStrengthIcon()
-        }
-
-        onNetworkOperatorsChanged : {
-            console.log("operators :"+netreg.currentOperator["Name"].toString())
-        }
-        modemPath: ofonoManager.modems.length ? ofonoManager.modems[0] : ""
-        function updateStrengthIcon() {
-            if (netreg.strength >= 100) {
-                strengthIcon.source = "network-mobile-100";
-            } else if (netreg.strength >= 80) {
-                strengthIcon.source = "network-mobile-80";
-            } else if (netreg.strength >= 60) {
-                strengthIcon.source = "network-mobile-60";
-            } else if (netreg.strength >= 40) {
-                strengthIcon.source = "network-mobile-40";
-            } else if (netreg.strength >= 20) {
-                strengthIcon.source = "network-mobile-20";
-            } else {
-                strengthIcon.source = "network-mobile-0";
-            }
-        }
-
-        onStrengthChanged: {
-            console.log("Strength changed to " + netreg.strength)
-            updateStrengthIcon()
-        }
     }
 
     OfonoNetworkOperator {
@@ -190,123 +150,6 @@ Item {
         }
         z: 21
         source: simManager.pinRequired != OfonoSimManager.NoPin ? Qt.resolvedUrl("Pin.qml") : ""
-    }
-
-    PlasmaCore.ColorScope {
-        id: statusPanel
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-        height: units.iconSizes.small
-        z: 2
-        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-
-        Rectangle {
-            parent: slidingPanel.visible ? panelContents : statusPanel
-            anchors {
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-            height: units.iconSizes.small
-            color: PlasmaCore.ColorScope.backgroundColor
-
-            PlasmaCore.IconItem {
-                id: strengthIcon
-                colorGroup: PlasmaCore.ColorScope.colorGroup
-                anchors {
-                    left: parent.left
-                    verticalCenter: parent.verticalCenter
-                }
-                width: units.iconSizes.small
-                height: width
-            }
-            PlasmaComponents.Label {
-                anchors {
-                    left: strengthIcon.right
-                    verticalCenter: parent.verticalCenter
-                }
-                text: netreg.strength + "% " + netreg.name
-                color: PlasmaCore.ColorScope.textColor
-                font.pixelSize: parent.height / 2
-            }
-            PlasmaComponents.Label {
-                id: clock
-                anchors.fill: parent
-                text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
-                color: PlasmaCore.ColorScope.textColor
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
-                font.pixelSize: height / 2
-            }
-            
-
-
-            PlasmaWorkspace.BatteryIcon {
-                id: batteryIcon
-                anchors {
-                    right: parent.right
-                    verticalCenter: parent.verticalCenter
-                }
-                width: units.iconSizes.small
-                height: width
-                hasBattery: pmSource.data["Battery"]["Has Battery"]
-                batteryType: "Phone"
-                percent: pmSource.data["Battery0"] ? pmSource.data["Battery0"]["Percent"] : 0
-
-                PlasmaCore.DataSource {
-                    id: pmSource
-                    engine: "powermanagement"
-                    connectedSources: sources
-                    onSourceAdded: {
-                        disconnectSource(source);
-                        connectSource(source);
-                    }
-                    onSourceRemoved: {
-                        disconnectSource(source);
-                    }
-                }
-            }
-            Rectangle {
-                height: units.smallSpacing/2
-                color: PlasmaCore.ColorScope.highlightColor
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    bottom: parent.bottom
-                }
-            }
-        }
-        MouseArea {
-            property int oldMouseY: 0
-
-            anchors.fill: parent
-            enabled: !dialerOverlay.item.visible
-            onPressed: {
-                oldMouseY = mouse.y;
-                slidingPanel.visible = true;
-            }
-            onPositionChanged: {
-                //var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + slidingPanel.overShoot) / slidingPanel.overShoot)) : 1
-                var factor = 1;
-                print(slidingPanel.offset +" "+ slidingPanel.height)
-                slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY) * factor;
-                oldMouseY = mouse.y;
-            }
-            onReleased: slidingPanel.updateState();
-        }
-    }
-
-    SlidingPanel {
-        id: slidingPanel
-        width: homescreen.width
-        height: homescreen.height
-        contents: Item {
-            id: panelContents
-            anchors.fill: parent
-        }
     }
 
     Component.onCompleted: {

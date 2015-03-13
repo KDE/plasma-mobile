@@ -57,6 +57,7 @@ Window {
         height: window.height - y
         clip: true
         state: "closed"
+        drag.filterChildren: true
 
         property int oldMouseY: 0
         property int startOffset: units.iconSizes.large;
