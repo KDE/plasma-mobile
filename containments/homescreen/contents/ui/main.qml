@@ -165,13 +165,13 @@ Item {
             snapMode: GridView.SnapToRow
 
             onFlickingChanged: {
-                if (!draggingVertically && contentY < -root.height*2) {
+                if (!draggingVertically && contentY < -headerItem.height + root.height) {
                     scrollAnim.to = Math.round(contentY/root.height) * root.height
                     scrollAnim.running = true;
                 }
             }
             onDraggingVerticallyChanged: {
-                if (!draggingVertically && contentY < -root.height*2) {
+                if (!draggingVertically && contentY < -headerItem.height + root.height) {
                     scrollAnim.to = Math.round(contentY/root.height) * root.height
                     scrollAnim.running = true;
                 }
@@ -222,16 +222,6 @@ Item {
                                 horizontalCenter: parent.horizontalCenter
                                 bottom: parent.bottom
                             }
-                        }
-                    }
-                    Rectangle {
-                        color: Qt.rgba(0, 0, 0, 0.6)
-                        Layout.fillWidth: true
-                        Layout.minimumHeight: root.height
-                        PlasmaComponents.Label {
-                            anchors.centerIn: parent
-                            text: "Settings Area"
-                            font.pointSize: 20
                         }
                     }
                     ColumnLayout {
