@@ -205,7 +205,7 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.9)
+            color: PlasmaCore.ColorScope.backgroundColor
 
             PlasmaCore.IconItem {
                 id: strengthIcon
@@ -235,21 +235,7 @@ Item {
                 verticalAlignment: Qt.AlignVCenter
                 font.pixelSize: height / 2
             }
-            MouseArea {
-                property int oldMouseY: 0
-
-                anchors.fill: parent
-                enabled: !dialerOverlay.item.visible
-                onPressed: {
-                    oldMouseY = mouse.y;
-                    slidingPanel.visible = true;
-                }
-                onPositionChanged: {
-                    slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY);
-                    oldMouseY = mouse.y;
-                }
-                onReleased: slidingPanel.updateState();
-            }
+            
 
 
             PlasmaWorkspace.BatteryIcon {
@@ -277,6 +263,24 @@ Item {
                     }
                 }
             }
+        }
+        MouseArea {
+            property int oldMouseY: 0
+
+            anchors.fill: parent
+            enabled: !dialerOverlay.item.visible
+            onPressed: {
+                oldMouseY = mouse.y;
+                slidingPanel.visible = true;
+            }
+            onPositionChanged: {
+                //var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + slidingPanel.overShoot) / slidingPanel.overShoot)) : 1
+                var factor = 1;
+                print(slidingPanel.offset +" "+ slidingPanel.height)
+                slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY) * factor;
+                oldMouseY = mouse.y;
+            }
+            onReleased: slidingPanel.updateState();
         }
     }
 
