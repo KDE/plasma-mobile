@@ -206,6 +206,7 @@ Item {
                     Item {
                         Layout.fillWidth: true
                         Layout.minimumHeight: root.height
+                        Layout.maximumHeight: root.height
                         Clock {
                             anchors {
                                 horizontalCenter: parent.horizontalCenter

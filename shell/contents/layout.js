@@ -14,3 +14,4 @@ for (var j = 0; j < desktopsArray.length; j++) {
     desktopsArray[j].writeConfig("Image", "org.kde.satellite.lockers");
 }
 
+desktopsForActivity(id)[0].addWidget("org.kde.phone.notifications");
