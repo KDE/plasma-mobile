@@ -291,13 +291,44 @@ Item {
                 height: width
             }
         }
-        PlasmaComponents.ScrollBar {
-            flickableItem: applicationsView
-            opacity: applicationsView.flicking ? 1 : 0
+
+        Rectangle {
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                horizontalCenter: scrollHandle.horizontalCenter
+            }
+            width: units.smallSpacing
+            color: PlasmaCore.ColorScope.textColor
+            opacity: scrollHandle.opacity / 2
+        }
+        Rectangle {
+            id: scrollHandle
+            color: PlasmaCore.ColorScope.textColor
+            width: units.gridUnit
+            height: width
+            radius: width
+            anchors.right: parent.right
+            y: applicationsView.height * applicationsView.visibleArea.yPosition
+            opacity: scrollbarMouse.pressed || applicationsView.flicking ? 0.8 : 0
             Behavior on opacity {
                 NumberAnimation {
-                    duration: units.shortDuration
+                    duration: units.longDuration
                     easing.type: Easing.InOutQuad
+                }
+            }
+            MouseArea {
+                id: scrollbarMouse
+                anchors {
+                    fill: parent
+                    margins: -units.gridUnit
+                }
+                drag.target: parent
+                onPositionChanged: {
+                    applicationsView.contentY = applicationsView.contentHeight * (parent.y / applicationsView.height) - applicationsView.headerItem.height
+                }
+                onReleased: {
+                    applicationsView.returnToBounds()
                 }
             }
         }
