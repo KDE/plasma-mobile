@@ -11,6 +11,18 @@ Item {
     property int idx: index
     property int oldIdx: -1
 
+    Rectangle {
+        anchors.fill: parent
+        color: PlasmaCore.ColorScope.textColor
+        radius: units.gridUnit
+        opacity: (delegateItem.drag.target != null) ? 0.4 : 0
+        Behavior on opacity {
+        NumberAnimation {
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+    }
     //animate index change
     onIdxChanged: {
         if (delegateItem.drag.target != null) {
@@ -50,6 +62,10 @@ Item {
                 ParentChange {
                     target: delegateItem
                     parent: delegateRoot.parent
+                }
+                PropertyChanges {
+                    target: delegateItem
+                    z: 9999
                 }
             }
         ]
