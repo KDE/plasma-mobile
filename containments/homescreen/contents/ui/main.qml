@@ -237,7 +237,10 @@ Item {
                 SatelliteStripe {
                     id: stripe
                     z: 99
-                    y: Math.max(applicationsView.contentY + parent.height, parent.height - height)
+                    property int viewPos: applicationsView.contentItem.height * applicationsView.visibleArea.yPosition
+
+                    y: Math.max(viewPos, 
+                          Math.min(parent.height, viewPos + root.height) - height + Math.max(0, -(parent.height - height + applicationsView.contentY)))
 
                     PlasmaCore.Svg {
                         id: stripeIcons

@@ -18,10 +18,10 @@ Item {
         opacity: (delegateItem.drag.target != null) ? 0.4 : 0
         Behavior on opacity {
         NumberAnimation {
-            duration: units.longDuration
-            easing.type: Easing.InOutQuad
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
         }
-    }
     }
     //animate index change
     onIdxChanged: {
