@@ -65,7 +65,8 @@ Item {
             container.animationsEnabled = false;
 
             if (appletsSpace.lastSpacer.parent === appletsSpace.layout) {
-                before = appletsSpace.lastSpacer;
+              //Uncomment to make the spacer the last element again
+              //  before = appletsSpace.lastSpacer;
             }
 
             if (before) {
@@ -172,13 +173,13 @@ Item {
 
             onFlickingChanged: {
                 if (!draggingVertically && contentY < -headerItem.height + root.height) {
-                    scrollAnim.to = Math.round(contentY/root.height) * root.height
+                    scrollAnim.to = Math.round(contentY/root.height) * root.height -  headerItem.margin
                     scrollAnim.running = true;
                 }
             }
             onDraggingVerticallyChanged: {
                 if (!draggingVertically && contentY < -headerItem.height + root.height) {
-                    scrollAnim.to = Math.round(contentY/root.height) * root.height
+                    scrollAnim.to = Math.round(contentY/root.height) * root.height - headerItem.margin
                     scrollAnim.running = true;
                 }
             }
@@ -197,7 +198,8 @@ Item {
                 property Item layout: appletsLayout
                 property Item lastSpacer: spacer
                 width: root.width
-                height: mainLayout.Layout.minimumHeight 
+                height: mainLayout.Layout.minimumHeight + stripe.height + units.gridUnit
+                property int margin: stripe.height + units.gridUnit * 2
 
                 onPressAndHold: {
                     plasmoid.action("configure").trigger();
@@ -233,11 +235,13 @@ Item {
                     }
                     ColumnLayout {
                         id: appletsLayout
-                        Layout.minimumHeight: Math.max(root.height, Math.round(Layout.preferredHeight / root.height) * root.height)
+                        //Layout.minimumHeight: Math.max(root.height, Math.round(Layout.preferredHeight / root.height) * root.height)
                         Item {
                             id: spacer
                             Layout.fillWidth: true
                             Layout.fillHeight: true
+                            Layout.minimumHeight: plasmoid.applets.length % 2 == 0 ? 0 : root.height/2
+                            Layout.maximumHeight: Layout.minimumHeight
                         }
                     }
                 }
