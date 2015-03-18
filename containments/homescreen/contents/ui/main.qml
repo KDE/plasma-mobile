@@ -135,7 +135,7 @@ Item {
             }
 
             Layout.minimumWidth: root.width
-            Layout.minimumHeight: Math.max(applet.Layout.minimumHeight, root.height / 2)
+            Layout.minimumHeight: Math.max(applet.Layout.minimumHeight, (root.height-applicationsView.headerItem.margin) / 2)
 
             Layout.preferredWidth: root.width
             Layout.preferredHeight: Layout.minimumHeight
@@ -173,13 +173,13 @@ Item {
 
             onFlickingChanged: {
                 if (!draggingVertically && contentY < -headerItem.height + root.height) {
-                    scrollAnim.to = Math.round(contentY/root.height) * root.height -  headerItem.margin
+                    scrollAnim.to = Math.round(contentY/root.height) * root.height
                     scrollAnim.running = true;
                 }
             }
             onDraggingVerticallyChanged: {
                 if (!draggingVertically && contentY < -headerItem.height + root.height) {
-                    scrollAnim.to = Math.round(contentY/root.height) * root.height - headerItem.margin
+                    scrollAnim.to = Math.round(contentY/root.height) * root.height
                     scrollAnim.running = true;
                 }
             }
@@ -198,7 +198,7 @@ Item {
                 property Item layout: appletsLayout
                 property Item lastSpacer: spacer
                 width: root.width
-                height: mainLayout.Layout.minimumHeight + stripe.height + units.gridUnit
+                height: mainLayout.Layout.minimumHeight
                 property int margin: stripe.height + units.gridUnit * 2
 
                 onPressAndHold: {
@@ -209,7 +209,6 @@ Item {
                     id: mainLayout
                     anchors {
                         fill: parent
-                        bottomMargin: stripe.height + units.gridUnit * 2
                     }
                     Item {
                         Layout.fillWidth: true
@@ -235,14 +234,19 @@ Item {
                     }
                     ColumnLayout {
                         id: appletsLayout
-                        //Layout.minimumHeight: Math.max(root.height, Math.round(Layout.preferredHeight / root.height) * root.height)
                         Item {
                             id: spacer
                             Layout.fillWidth: true
                             Layout.fillHeight: true
-                            Layout.minimumHeight: plasmoid.applets.length % 2 == 0 ? 0 : root.height/2
+                            Layout.minimumHeight: plasmoid.applets.length % 2 == 0 ? 0 : (root.height - margin)/2
                             Layout.maximumHeight: Layout.minimumHeight
                         }
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.minimumHeight: margin
+                        Layout.maximumHeight: Layout.minimumHeight
                     }
                 }
                 SatelliteStripe {
