@@ -92,10 +92,16 @@ Item {
         LayoutManager.lastSpacer = appletsSpace.lastSpacer;
         LayoutManager.restore();
         applicationsView.contentY = -root.height;
+
+        appListModel.appOrder = plasmoid.configuration.AppOrder;
+        appListModel.loadApplications();
     }
 
     SatelliteComponents.ApplicationListModel {
         id: appListModel
+        onAppOrderChanged: {
+            plasmoid.configuration.AppOrder = appListModel.appOrder;
+        }
     }
 
     Timer {

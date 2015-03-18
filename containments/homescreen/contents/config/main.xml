@@ -9,6 +9,9 @@
     <entry name="AppletOrder" type="String">
       <label>encoded order of items</label>
     </entry>
+    <entry name="AppOrder" type="StringList">
+      <label>order of apps</label>
+    </entry>
   </group>
 
 </kcfg>

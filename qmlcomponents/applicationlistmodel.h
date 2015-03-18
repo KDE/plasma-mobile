@@ -38,6 +38,7 @@ class ApplicationListModel : public QAbstractListModel {
     Q_OBJECT
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(QStringList appOrder READ appOrder WRITE setAppOrder NOTIFY appOrderChanged)
 
 public:
     ApplicationListModel(QObject *parent = 0);
@@ -59,16 +60,24 @@ public:
         ApplicationOriginalRowRole  = Qt::UserRole + 6
     };
 
+    QStringList appOrder() const;
+    void setAppOrder(const QStringList &order);
+
     Q_INVOKABLE void moveItem(int row, int order);
 
     Q_INVOKABLE void runApplication(const QString &storageId);
 
+    Q_INVOKABLE void loadApplications();
+
 Q_SIGNALS:
     void countChanged();
+    void appOrderChanged();
 
 private:
     QList<ApplicationData> m_applicationList;
-    void loadApplications();
+
+    QStringList m_appOrder;
+    QHash<QString, int> m_appPositions;
 };
 
 #endif // APPLICATIONLISTMODEL_H
